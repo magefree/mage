@@ -293,6 +293,8 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         game.getPlayer(ownerId).getSideboard().remove(this);
                         break;
                     case COMMAND:
+                        game.getState().getCommand().remove((Commander)game.getObject(objectId));
+                        break;
                     case STACK:
                     case PICK:
                         break;
@@ -469,6 +471,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         removed = true;
                         break;
                     case COMMAND:
+                        game.getState().getCommand().remove((Commander)game.getObject(objectId));
                         removed = true;
                         break;
                     case PICK:

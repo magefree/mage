@@ -1072,11 +1072,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     @Override
     public void addCommander(Commander commander){
         state.addCommandObject(commander);
-        for(Ability ability : commander.getAbilities()){
-            if(ability instanceof CastCommanderAbility){
-                state.addOtherAbility(commander.getId(), (CastCommanderAbility)ability);
-            }
-        }
     }
 
     @Override

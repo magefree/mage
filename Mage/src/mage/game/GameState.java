@@ -583,10 +583,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * Other abilities are used to implement some special kind of continious effects.
+     * Other abilities are used to implement some special kind of continious effects given to non permanents.
      *
      * Crucible of Worlds - You may play land cards from your graveyard.
      * Past in Flames - Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+     * Varolz, the Scar-Striped - Each creature card in your graveyard has scavenge. The scavenge cost is equal to its mana cost.
      *
      * @param objectId
      * @param zone
@@ -601,15 +602,14 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addOtherAbility(UUID objectId, ActivatedAbility ability) {
         if (!otherAbilities.containsKey(objectId)) {
-            otherAbilities.put(objectId, new AbilitiesImpl());
+            otherAbilities.put(objectId, new AbilitiesImpl(ability));
+        } else {
+            otherAbilities.get(objectId).add(ability);
         }
-        otherAbilities.get(objectId).add(ability);
     }
 
     private void resetOtherAbilities() {
-        for (Abilities<ActivatedAbility> abilities: otherAbilities.values()) {
-            abilities.clear();
-        }
+        otherAbilities.clear();
     }
 
     /**
