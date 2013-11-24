@@ -11,8 +11,8 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
-    private OneShotEffect executingEffect;
-    private Cost cost;
+    private final OneShotEffect executingEffect;
+    private final Cost cost;
 
     public DoIfCostPaid(OneShotEffect effect, Cost cost) {
         super(Outcome.Benefit);

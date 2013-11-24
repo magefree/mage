@@ -124,7 +124,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl<MarchOfTheMachinesEf
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;
     }
 
 }

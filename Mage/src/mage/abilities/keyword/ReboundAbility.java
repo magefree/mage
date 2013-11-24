@@ -108,10 +108,11 @@ public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
             if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
                 Effect reboundEffect = new ReboundEffect();
                 boolean found = false;
-                for (Effect effect : spell.getSpellAbility().getEffects())
-                if (effect instanceof ReboundEffect) {
-                    found = true;
-                    break;
+                for (Effect effect : spell.getSpellAbility().getEffects()) {
+                    if (effect instanceof ReboundEffect) {
+                        found = true;
+                        break;
+                    }
                 }
                 if (!found) {
                     spell.getSpellAbility().addEffect(reboundEffect);
@@ -265,10 +266,11 @@ class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility<R
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.UPKEEP_STEP_PRE && MyTurnCondition.getInstance().apply(game, this)) {
-            return true;
-        }
-        return false;
+        return event.getType() == EventType.UPKEEP_STEP_PRE && MyTurnCondition.getInstance().apply(game, this);
+    }
+    @Override
+    public String getRule() {
+        return "Rebound - You may cast {this} from exile without paying its mana cost.";
     }
 }
 
@@ -281,7 +283,7 @@ class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility<R
 class ReboundCastSpellFromExileEffect extends OneShotEffect<ReboundCastSpellFromExileEffect> {
 
     private static String castFromExileText = "Rebound - You may cast {this} from exile without paying its mana cost";
-    private UUID cardId;
+    private final UUID cardId;
 
     ReboundCastSpellFromExileEffect(UUID cardId) {
         super(Outcome.Benefit);
@@ -297,7 +299,9 @@ class ReboundCastSpellFromExileEffect extends OneShotEffect<ReboundCastSpellFrom
     @Override
     public boolean apply(Game game, Ability source) {
         ExileZone zone = game.getExile().getExileZone(this.cardId);
-        if (zone == null || zone.isEmpty()) return false;
+        if (zone == null || zone.isEmpty()) {
+            return false;
+        }
         Card reboundCard = zone.get(this.cardId, game);
         Player player = game.getPlayer(source.getControllerId());
         SpellAbility ability = reboundCard.getSpellAbility();

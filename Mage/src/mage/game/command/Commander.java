@@ -34,7 +34,6 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -59,7 +58,7 @@ public class Commander implements CommandObject{
         this.card = card;
         abilites.add(new CastCommanderAbility(card));
         for (Ability ability : card.getAbilities()) {
-            if (ability instanceof ActivatedAbility && ability.getZone().equals(Zone.COMMAND)) {
+            if (ability.getZone().match(Zone.COMMAND)) {
                 Ability newAbility = ability.copy();
                 newAbility.setRuleVisible(false);
                 abilites.add(newAbility);

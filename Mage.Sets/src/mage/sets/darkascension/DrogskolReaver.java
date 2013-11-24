@@ -28,16 +28,15 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -92,10 +91,7 @@ class DrogskolReaverAbility extends TriggeredAbilityImpl<DrogskolReaverAbility> 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.GAINED_LIFE && event.getPlayerId().equals(controllerId)) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.GAINED_LIFE && event.getPlayerId().equals(controllerId);
     }
 
     @Override
