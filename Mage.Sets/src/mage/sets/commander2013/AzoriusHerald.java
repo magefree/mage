@@ -25,36 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.commander2013;
 
-package mage.abilities.condition.common;
-
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.ManaWasSpentCondition;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
+import mage.abilities.keyword.UnblockableAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.game.Game;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
+public class AzoriusHerald extends CardImpl<AzoriusHerald> {
 
+    public AzoriusHerald(UUID ownerId) {
+        super(ownerId, 6, "Azorius Herald", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "C13";
+        this.subtype.add("Spirit");
 
-public class ManaWasSpentCondition implements Condition {
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-    protected ColoredManaSymbol coloredManaSymbol;
+        // Azorius Herald can't be blocked.
+        this.addAbility(new UnblockableAbility());
+        // When Azorius Herald enters the battlefield, you gain 4 life.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
+        // When Azorius Herald enters the battlefield, sacrifice it unless {U} was spent to cast it.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false));
 
-    public ManaWasSpentCondition(ColoredManaSymbol coloredManaSymbol) {
-        this.coloredManaSymbol = coloredManaSymbol;
+    }
+
+    public AzoriusHerald(final AzoriusHerald card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return (source.getManaCostsToPay().getPayment().getColor(coloredManaSymbol) > 0);
+    public AzoriusHerald copy() {
+        return new AzoriusHerald(this);
     }
-
-    @Override
-    public String toString() {
-        return new StringBuilder("{").append(coloredManaSymbol.toString()).append("} was spent to cast it").toString();
-    }
-
 }

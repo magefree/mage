@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
@@ -61,10 +62,10 @@ public class BatwingBrume extends CardImpl<BatwingBrume> {
         // Prevent all combat damage that would be dealt this turn if {W} was spent to cast Batwing Brume. Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast Batwing Brume.
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
                 new PreventAllDamageEffect(Duration.EndOfTurn, true),
-                new ManaWasSpentCondition(ManaType.WHITE), "Prevent all combat damage that would be dealt this turn if {W} was spent to cast {this}", true));
+                new ManaWasSpentCondition(ColoredManaSymbol.W), "Prevent all combat damage that would be dealt this turn if {W} was spent to cast {this}", true));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new BatwingBrumeEffect(),
-                new ManaWasSpentCondition(ManaType.BLACK), "Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast {this}"));
+                new ManaWasSpentCondition(ColoredManaSymbol.W), "Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast {this}"));
         this.addInfo("Info1", "<i>(Do both if {W}{B} was spent.)<i>");
 
     }

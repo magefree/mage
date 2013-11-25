@@ -471,7 +471,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         removed = true;
                         break;
                     case COMMAND:
-                        game.getState().getCommand().remove((Commander)game.getObject(objectId));
+                        // command object (commander) is only on the stack, so no removing neccessary here
                         removed = true;
                         break;
                     case PICK:

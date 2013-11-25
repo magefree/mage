@@ -37,6 +37,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 
 /**
@@ -56,10 +57,10 @@ public class DawnglowInfusion extends CardImpl<DawnglowInfusion> {
         DynamicValue xValue = new ManacostVariableValue();
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(xValue),
-                new ManaWasSpentCondition(ManaType.GREEN), "You gain X life if {G} was spent to cast {this}"));
+                new ManaWasSpentCondition(ColoredManaSymbol.G), "You gain X life if {G} was spent to cast {this}"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(xValue),
-                new ManaWasSpentCondition(ManaType.WHITE), " And X life if {W} was spent to cast it"));
+                new ManaWasSpentCondition(ColoredManaSymbol.W), " And X life if {W} was spent to cast it"));
         this.addInfo("Info1", "<i>(Do both if {G}{W} was spent.)</i>");
 
 

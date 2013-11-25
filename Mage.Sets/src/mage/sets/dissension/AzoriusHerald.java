@@ -25,36 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.dissension;
 
-package mage.abilities.condition.common;
-
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.constants.ColoredManaSymbol;
-import mage.game.Game;
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
+public class AzoriusHerald extends mage.sets.commander2013.AzoriusHerald {
 
+    public AzoriusHerald(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 2;
+        this.expansionSetCode = "DIS";
+    }
 
-public class ManaWasSpentCondition implements Condition {
-
-    protected ColoredManaSymbol coloredManaSymbol;
-
-    public ManaWasSpentCondition(ColoredManaSymbol coloredManaSymbol) {
-        this.coloredManaSymbol = coloredManaSymbol;
+    public AzoriusHerald(final AzoriusHerald card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return (source.getManaCostsToPay().getPayment().getColor(coloredManaSymbol) > 0);
+    public AzoriusHerald copy() {
+        return new AzoriusHerald(this);
     }
-
-    @Override
-    public String toString() {
-        return new StringBuilder("{").append(coloredManaSymbol.toString()).append("} was spent to cast it").toString();
-    }
-
 }

@@ -33,6 +33,7 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.Rarity;
@@ -55,10 +56,10 @@ public class CankerousThirst extends CardImpl<CankerousThirst> {
         // If {B} was spent to cast Cankerous Thirst, you may have target creature get -3/-3 until end of turn. If {G} was spent to cast Cankerous Thirst, you may have target creature get +3/+3 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
                 new BoostTargetEffect(-3, -3, Duration.EndOfTurn),
-                new ManaWasSpentCondition(ManaType.BLACK), "If {B} was spent to cast {this}, you may have target creature get -3/-3 until end of turn", true));
+                new ManaWasSpentCondition(ColoredManaSymbol.B), "If {B} was spent to cast {this}, you may have target creature get -3/-3 until end of turn", true));
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn),
-                new ManaWasSpentCondition(ManaType.GREEN), "If {G} was spent to cast {this}, you may have target creature get +3/+3 until end of turn", true));
+                new ManaWasSpentCondition(ColoredManaSymbol.G), "If {G} was spent to cast {this}, you may have target creature get +3/+3 until end of turn", true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.addInfo("Info1", "<i>(Do both if {B}{G} was spent.)<i>");
     }

@@ -25,36 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.abilities.condition.common;
+package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
-import mage.constants.ColoredManaSymbol;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
+public class SacrificeSourceUnlessConditionEffect extends OneShotEffect<SacrificeSourceUnlessConditionEffect> {
 
+    protected Condition condition;
 
-public class ManaWasSpentCondition implements Condition {
+    public SacrificeSourceUnlessConditionEffect(Condition condition) {
+        super(Outcome.Sacrifice);
+        this.condition = condition;
+    }
 
-    protected ColoredManaSymbol coloredManaSymbol;
-
-    public ManaWasSpentCondition(ColoredManaSymbol coloredManaSymbol) {
-        this.coloredManaSymbol = coloredManaSymbol;
+    public SacrificeSourceUnlessConditionEffect(final SacrificeSourceUnlessConditionEffect effect) {
+        super(effect);
+        this.condition = effect.condition;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return (source.getManaCostsToPay().getPayment().getColor(coloredManaSymbol) > 0);
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null && permanent != null) {
+            if (condition.apply(game, source)) {
+                return true;
+            }
+            permanent.sacrifice(source.getSourceId(), game);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public String toString() {
-        return new StringBuilder("{").append(coloredManaSymbol.toString()).append("} was spent to cast it").toString();
+    public SacrificeSourceUnlessConditionEffect copy() {
+        return new SacrificeSourceUnlessConditionEffect(this);
     }
 
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder("sacrifice {this} unless ");
+        sb.append(condition.toString());
+        return sb.toString();
+    }
 }

@@ -25,36 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.commander2013;
 
-package mage.abilities.condition.common;
-
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.constants.ColoredManaSymbol;
-import mage.game.Game;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
+public class KongmingSleepingDragon extends CardImpl<KongmingSleepingDragon> {
 
+    public KongmingSleepingDragon(UUID ownerId) {
+        super(ownerId, 16, "Kongming, 'Sleeping Dragon'", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+        this.expansionSetCode = "C13";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Advisor");
 
-public class ManaWasSpentCondition implements Condition {
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-    protected ColoredManaSymbol coloredManaSymbol;
+        // Other creatures you control get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1,Duration.WhileOnBattlefield, true)));
+    }
 
-    public ManaWasSpentCondition(ColoredManaSymbol coloredManaSymbol) {
-        this.coloredManaSymbol = coloredManaSymbol;
+    public KongmingSleepingDragon(final KongmingSleepingDragon card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return (source.getManaCostsToPay().getPayment().getColor(coloredManaSymbol) > 0);
+    public KongmingSleepingDragon copy() {
+        return new KongmingSleepingDragon(this);
     }
-
-    @Override
-    public String toString() {
-        return new StringBuilder("{").append(coloredManaSymbol.toString()).append("} was spent to cast it").toString();
-    }
-
 }

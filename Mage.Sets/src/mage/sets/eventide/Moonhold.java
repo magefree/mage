@@ -36,6 +36,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
@@ -64,10 +65,10 @@ public class Moonhold extends CardImpl<Moonhold> {
         effect2.setText("and can't play creature cards this turn if {W} was spent to cast it.");
         this.getSpellAbility().addEffect(new ConditionalReplacementEffect(
                 effect,
-                new ManaWasSpentCondition(ManaType.RED), false));
+                new ManaWasSpentCondition(ColoredManaSymbol.R), false));
         this.getSpellAbility().addEffect(new ConditionalReplacementEffect(
                 effect2,
-                new ManaWasSpentCondition(ManaType.WHITE), false));
+                new ManaWasSpentCondition(ColoredManaSymbol.W), false));
         this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.addInfo("Info1", "<i>(Do both if {R}{W} was spent.)</i>");
     }

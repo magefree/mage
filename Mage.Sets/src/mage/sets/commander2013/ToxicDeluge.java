@@ -28,7 +28,6 @@
 package mage.sets.commander2013;
 
 import java.util.UUID;
-import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.PayVariableLifeCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;

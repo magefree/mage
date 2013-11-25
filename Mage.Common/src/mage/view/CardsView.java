@@ -73,8 +73,11 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                     sourceCard = game.getCard(ability.getSourceId());
                     break;
                 case COMMAND:
-                    ability.newId();
-                    this.put(ability.getId(), new AbilityView(ability, "Emblem", new CardView("Emblem")));
+                    sourceCard = game.getCard(ability.getSourceId());
+                    if (sourceCard == null) {
+                        ability.newId();
+                        this.put(ability.getId(), new AbilityView(ability, "Emblem", new CardView("Emblem")));
+                    }
                     break;
             }
             if (sourceCard != null) {

@@ -52,6 +52,7 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.game.command.Emblem;
 
 
 /**
@@ -608,10 +609,15 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
     @Override
     public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
-
-        // emblem are always actual (also true for a commander? LevelX)
         if (zone.equals(Zone.COMMAND)) {
-            return true;
+            if (this.getSourceId() == null) { // commander effects
+                return true;
+            }
+            MageObject object = game.getObject(this.getSourceId());
+            // emblem are always actual
+            if (object != null && object instanceof Emblem) {
+                return true;
+            }
         }
 
         // try LKI first

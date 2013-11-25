@@ -36,6 +36,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -63,10 +64,10 @@ public class Firespout extends CardImpl<Firespout> {
         // Firespout deals 3 damage to each creature without flying if {R} was spent to cast Firespout and 3 damage to each creature with flying if {G} was spent to cast it.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageAllEffect(3, filter1),
-                new ManaWasSpentCondition(ManaType.RED), "{this} deals 3 damage to each creature without flying if {R} was spent to cast {this}"));
+                new ManaWasSpentCondition(ColoredManaSymbol.R), "{this} deals 3 damage to each creature without flying if {R} was spent to cast {this}"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageAllEffect(3, filter2),
-                new ManaWasSpentCondition(ManaType.GREEN), " And 3 damage to each creature with flying if {G} was spent to cast it"));
+                new ManaWasSpentCondition(ColoredManaSymbol.G), " And 3 damage to each creature with flying if {G} was spent to cast it"));
         this.addInfo("Info1", "<i>(Do both if {R}{G} was spent.)</i>");
 
 

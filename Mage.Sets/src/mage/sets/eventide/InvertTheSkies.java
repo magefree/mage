@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.ManaType;
@@ -64,10 +65,10 @@ public class InvertTheSkies extends CardImpl<InvertTheSkies> {
         // Creatures your opponents control lose flying until end of turn if {G} was spent to cast Invert the Skies, and creatures you control gain flying until end of turn if {U} was spent to cast it.
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
                 new InvertTheSkiesEffect(),
-                new ManaWasSpentCondition(ManaType.GREEN), "Creatures your opponents control lose flying until end of turn if {G} was spent to cast {this},", true));
+                new ManaWasSpentCondition(ColoredManaSymbol.G), "Creatures your opponents control lose flying until end of turn if {G} was spent to cast {this},", true));
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
                 new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
-                new ManaWasSpentCondition(ManaType.BLUE), "and creatures you control gain flying until end of turn if {U} was spent to cast it", true));
+                new ManaWasSpentCondition(ColoredManaSymbol.U), "and creatures you control gain flying until end of turn if {U} was spent to cast it", true));
         this.addInfo("Info1", "<i>(Do both if {G}{U} was spent.)<i>");
     }
 

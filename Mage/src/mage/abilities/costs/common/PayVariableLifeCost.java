@@ -32,10 +32,8 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCost;
-import mage.counters.CounterType;
 import mage.filter.FilterMana;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -65,11 +63,14 @@ public class PayVariableLifeCost extends CostImpl<PayVariableLifeCost> implement
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Player controller = game.getPlayer(controllerId);
-        this.amountPaid = controller.getAmount(0, controller.getLife(), "Choose X", game);
-        if (this.amountPaid> 0) {
-            controller.loseLife(amountPaid, game);
+        if (controller != null) {
+            this.amountPaid = controller.getAmount(0, controller.getLife(), "Choose X (life to pay)", game);
+            if (this.amountPaid> 0) {
+                controller.loseLife(amountPaid, game);
+            }
+            game.informPlayers(new StringBuilder(controller.getName()).append(" pays ").append(amountPaid).append(" life.").toString());
+            this.paid = true;
         }
-        this.paid = true;
         return paid;
     }
 
