@@ -38,7 +38,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.ManaType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -61,7 +60,7 @@ public class UmbraStalker extends CardImpl<UmbraStalker> {
         this.toughness = new MageInt(0);
 
         // Chroma - Umbra Stalker's power and toughness are each equal to the number of black mana symbols in the mana costs of cards in your graveyard.
-        Effect effect = new SetPowerToughnessSourceEffect(new ChromaUmbraStalkerCount(ManaType.BLACK), Duration.WhileOnBattlefield);
+        Effect effect = new SetPowerToughnessSourceEffect(new ChromaUmbraStalkerCount(), Duration.WhileOnBattlefield);
         effect.setText("<i>Chroma</i> - Umbra Stalker's power and toughness are each equal to the number of black mana symbols in the mana costs of cards in your graveyard.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
@@ -79,16 +78,7 @@ public class UmbraStalker extends CardImpl<UmbraStalker> {
 
 class ChromaUmbraStalkerCount implements DynamicValue {
 
-    private ManaType chromaColor;
     private int chroma;
-
-    public ChromaUmbraStalkerCount(ManaType chromaColor) {
-        this.chromaColor = chromaColor;
-    }
-
-    public ChromaUmbraStalkerCount(final ChromaUmbraStalkerCount dynamicValue) {
-        this.chromaColor = dynamicValue.chromaColor;
-    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
@@ -105,7 +95,7 @@ class ChromaUmbraStalkerCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new ChromaUmbraStalkerCount(this);
+        return new ChromaUmbraStalkerCount();
     }
 
     @Override

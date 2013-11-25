@@ -37,7 +37,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
@@ -109,8 +108,8 @@ class LightFromWithinEffect extends ContinuousEffectImpl<LightFromWithinEffect> 
             if (creature != null) {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    creature.addPower(new ChromaLightFromWithinCount(ManaType.WHITE, creature).calculate(game, source));
-                    creature.addToughness(new ChromaLightFromWithinCount(ManaType.WHITE, creature).calculate(game, source));
+                    creature.addPower(new ChromaLightFromWithinCount(creature).calculate(game, source));
+                    creature.addToughness(new ChromaLightFromWithinCount(creature).calculate(game, source));
                     boosted = true;
                 }
             }
@@ -121,16 +120,13 @@ class LightFromWithinEffect extends ContinuousEffectImpl<LightFromWithinEffect> 
 
 class ChromaLightFromWithinCount implements DynamicValue {
 
-    private ManaType chromaColor;
     private Permanent permanent;
 
-    public ChromaLightFromWithinCount(ManaType chromaColor, Permanent permanent) {
-        this.chromaColor = chromaColor;
+    public ChromaLightFromWithinCount(Permanent permanent) {
         this.permanent = permanent;
     }
 
     public ChromaLightFromWithinCount(final ChromaLightFromWithinCount dynamicValue) {
-        this.chromaColor = dynamicValue.chromaColor;
         this.permanent = dynamicValue.permanent;
     }
 

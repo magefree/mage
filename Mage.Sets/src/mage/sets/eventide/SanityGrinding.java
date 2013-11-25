@@ -36,7 +36,6 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -99,7 +98,7 @@ class SanityGrindingEffect extends OneShotEffect<SanityGrindingEffect> {
         }
         you.revealCards("Sanity Grinding", revealed, game);
         if (targetOpponent != null) {
-            amount = (Math.min(targetOpponent.getLibrary().size(), new ChromaSanityGrindingCount(ManaType.BLUE, revealed).calculate(game, source)));
+            amount = (Math.min(targetOpponent.getLibrary().size(), new ChromaSanityGrindingCount(revealed).calculate(game, source)));
             for (int i = 0; i < amount; i++) {
                 targetOpponent.getLibrary().removeFromTop(game).moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
             }
@@ -115,16 +114,13 @@ class SanityGrindingEffect extends OneShotEffect<SanityGrindingEffect> {
 
 class ChromaSanityGrindingCount implements DynamicValue {
 
-    private ManaType chromaColor;
     private Cards revealed;
 
-    public ChromaSanityGrindingCount(ManaType chromaColor, Cards revealed) {
-        this.chromaColor = chromaColor;
+    public ChromaSanityGrindingCount(Cards revealed) {
         this.revealed = revealed;
     }
 
     public ChromaSanityGrindingCount(final ChromaSanityGrindingCount dynamicValue) {
-        this.chromaColor = dynamicValue.chromaColor;
         this.revealed = dynamicValue.revealed;
     }
 

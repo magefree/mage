@@ -29,68 +29,72 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 
 /**
  *
  * @author jeffwadsworth
  *
  */
-public class SpringjackShepherd extends CardImpl<SpringjackShepherd> {
+public class Primalcrux extends CardImpl<Primalcrux> {
 
-    public SpringjackShepherd(UUID ownerId) {
-        super(ownerId, 15, "Springjack Shepherd", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public Primalcrux(UUID ownerId) {
+        super(ownerId, 73, "Primalcrux", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}{G}{G}{G}{G}");
         this.expansionSetCode = "EVE";
-        this.subtype.add("Kithkin");
-        this.subtype.add("Wizard");
+        this.subtype.add("Elemental");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        this.color.setGreen(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        // Chroma - When Springjack Shepherd enters the battlefield, put a 0/1 white Goat creature token onto the battlefield for each white mana symbol in the mana costs of permanents you control.
-        Effect effect = new CreateTokenEffect(new GoatToken(), new ChromaSpringjackShepherdCount());
-        effect.setText("<i>Chroma</i> - When Springjack Shepherd enters the battlefield, put a 0/1 white Goat creature token onto the battlefield for each white mana symbol in the mana costs of permanents you control.");
-        this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false, true));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
 
+        // Chroma - Primalcrux's power and toughness are each equal to the number of green mana symbols in the mana costs of permanents you control.
+        Effect effect = new SetPowerToughnessSourceEffect(new ChromaPrimalcruxCount(), Duration.WhileOnBattlefield);
+        effect.setText("<i>Chroma</i> - Primalcrux's power and toughness are each equal to the number of green mana symbols in the mana costs of permanents you control.");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SpringjackShepherd(final SpringjackShepherd card) {
+    public Primalcrux(final Primalcrux card) {
         super(card);
     }
 
     @Override
-    public SpringjackShepherd copy() {
-        return new SpringjackShepherd(this);
+    public Primalcrux copy() {
+        return new Primalcrux(this);
     }
 }
 
-class ChromaSpringjackShepherdCount implements DynamicValue {
+class ChromaPrimalcruxCount implements DynamicValue {
+
+    private int chroma;
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        int chroma = 0;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterPermanent(), sourceAbility.getControllerId(), game)) {
-            chroma += permanent.getManaCost().getMana().getWhite();
+        chroma = 0;
+        for (Card card : game.getBattlefield().getAllActivePermanents(new FilterControlledPermanent(), sourceAbility.getControllerId(), game)) {
+            chroma += card.getManaCost().getMana().getGreen();
         }
         return chroma;
     }
 
     @Override
     public DynamicValue copy() {
-        return new ChromaSpringjackShepherdCount();
+        return new ChromaPrimalcruxCount();
     }
 
     @Override
@@ -101,17 +105,5 @@ class ChromaSpringjackShepherdCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "";
-    }
-}
-
-class GoatToken extends Token {
-
-    public GoatToken() {
-        super("Goat", "a 0/1 white Goat creature token");
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
-        subtype.add("Goat");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
     }
 }
