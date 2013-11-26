@@ -34,64 +34,65 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.condition.common.ControlsPermanentCondition.CountType;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.KithkinToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
  * @author jeffwadsworth
- */
-public class DuergarHedgeMage extends CardImpl<DuergarHedgeMage> {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("a Mountain");
-    private static final FilterLandPermanent filter2 = new FilterLandPermanent("a Plains");
-    private static final FilterPermanent filter3 = new FilterPermanent("enchantment");
+ */
+public class GwyllionHedgeMage extends CardImpl<GwyllionHedgeMage> {
+    
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
+    private static final FilterLandPermanent filter2 = new FilterLandPermanent("Swamps");
+    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate("Mountain"));
-        filter2.add(new SubtypePredicate("Plains"));
-        filter3.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(new SubtypePredicate("Plains"));
+        filter2.add(new SubtypePredicate("Swamps"));
     }
-    private String rule1 = "When {this} enters the battlefield, if you control two or more Mountains, you may destroy target artifact.";
-    private String rule2 = "When {this} enters the battlefield, if you control two or more Plains, you may destroy target enchantment.";
+    
+    private String rule1 = "When {this} enters the battlefield, if you control two or more Plains, you may put a 1/1 white Kithkin Soldier creature token onto the battlefield.";
+    private String rule2 = "When {this} enters the battlefield, if you control two or more Swamps, you may put a -1/-1 counter on target creature.";
 
-    public DuergarHedgeMage(UUID ownerId) {
-        super(ownerId, 195, "Duergar Hedge-Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}");
+    public GwyllionHedgeMage(UUID ownerId) {
+        super(ownerId, 202, "Gwyllion Hedge-Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W/B}");
         this.expansionSetCode = "CMD";
-        this.subtype.add("Dwarf");
-        this.subtype.add("Shaman");
+        this.subtype.add("Hag");
+        this.subtype.add("Wizard");
 
-        this.color.setRed(true);
+        this.color.setBlack(true);
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Duergar Hedge-Mage enters the battlefield, if you control two or more Mountains, you may destroy target artifact.
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new ControlsPermanentCondition(filter, CountType.MORE_THAN, 1), rule1);
-        ability.addTarget(new TargetArtifactPermanent());
+        // When Gwyllion Hedge-Mage enters the battlefield, if you control two or more Plains, you may put a 1/1 white Kithkin Soldier creature token onto the battlefield.
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KithkinToken()), true), new ControlsPermanentCondition(filter, CountType.MORE_THAN, 1), rule1);
         this.addAbility(ability);
-
-        // When Duergar Hedge-Mage enters the battlefield, if you control two or more Plains, you may destroy target enchantment.
-        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new ControlsPermanentCondition(filter2, CountType.MORE_THAN, 1), rule2);
+        
+        // When Gwyllion Hedge-Mage enters the battlefield, if you control two or more Swamps, you may put a -1/-1 counter on target creature.
+        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), true), new ControlsPermanentCondition(filter2, CountType.MORE_THAN, 1), rule2);
         ability2.addTarget(new TargetPermanent(filter3));
         this.addAbility(ability2);
-
+        
     }
 
-    public DuergarHedgeMage(final DuergarHedgeMage card) {
+    public GwyllionHedgeMage(final GwyllionHedgeMage card) {
         super(card);
     }
 
     @Override
-    public DuergarHedgeMage copy() {
-        return new DuergarHedgeMage(this);
+    public GwyllionHedgeMage copy() {
+        return new GwyllionHedgeMage(this);
     }
 }

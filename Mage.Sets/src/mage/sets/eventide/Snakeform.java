@@ -28,59 +28,49 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
-import mage.abilities.keyword.WitherAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
+import mage.abilities.effects.common.continious.LoseAllAbilitiesTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.game.permanent.token.SnakeToken;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author jeffwadsworth
 
  */
-public class WoodlurkerMimic extends CardImpl<WoodlurkerMimic> {
-    
-    private static final FilterSpell filter = new FilterSpell("a spell that's both black and green");
-    
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
+public class Snakeform extends CardImpl<Snakeform> {
 
-    private String rule = "Whenever you cast a spell that's both black and green, {this} becomes 4/5 and gains wither until end of turn.";
-    
-    public WoodlurkerMimic(UUID ownerId) {
-        super(ownerId, 130, "Woodlurker Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B/G}");
+    public Snakeform(UUID ownerId) {
+        super(ownerId, 161, "Snakeform", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G/U}");
         this.expansionSetCode = "EVE";
-        this.subtype.add("Shapeshifter");
 
+        this.color.setBlue(true);
         this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
 
-        // Whenever you cast a spell that's both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(4, 5, Duration.EndOfTurn), filter, false, rule);
-        ability.addEffect(new GainAbilitySourceEffect(WitherAbility.getInstance(), Duration.EndOfTurn, false, true));
-        this.addAbility(ability);
+        // Target creature loses all abilities and becomes a 1/1 green Snake until end of turn.
+        this.getSpellAbility().addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new SnakeToken(),null, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        
+        // Draw a card.
+        Effect effect = new DrawCardControllerEffect(1);
+        effect.setText("Draw a card.");
+        this.getSpellAbility().addEffect(effect);
         
     }
 
-    public WoodlurkerMimic(final WoodlurkerMimic card) {
+    public Snakeform(final Snakeform card) {
         super(card);
     }
 
     @Override
-    public WoodlurkerMimic copy() {
-        return new WoodlurkerMimic(this);
+    public Snakeform copy() {
+        return new Snakeform(this);
     }
 }

@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
-import mage.abilities.keyword.WitherAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -47,40 +47,39 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author jeffwadsworth
 
  */
-public class WoodlurkerMimic extends CardImpl<WoodlurkerMimic> {
+public class NightskyMimic extends CardImpl<NightskyMimic> {
     
     private static final FilterSpell filter = new FilterSpell("a spell that's both black and green");
     
     static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    private String rule = "Whenever you cast a spell that's both black and green, {this} becomes 4/5 and gains wither until end of turn.";
-    
-    public WoodlurkerMimic(UUID ownerId) {
-        super(ownerId, 130, "Woodlurker Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B/G}");
+    private String rule = "Whenever you cast a spell that's both white and black, {this} becomes 4/4 and gains flying until end of turn.";
+
+    public NightskyMimic(UUID ownerId) {
+        super(ownerId, 91, "Nightsky Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W/B}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Shapeshifter");
 
-        this.color.setGreen(true);
         this.color.setBlack(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever you cast a spell that's both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(4, 5, Duration.EndOfTurn), filter, false, rule);
-        ability.addEffect(new GainAbilitySourceEffect(WitherAbility.getInstance(), Duration.EndOfTurn, false, true));
+        // Whenever you cast a spell that's both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
+        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(4, 4, Duration.EndOfTurn), filter, false, rule);
+        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
-        
     }
 
-    public WoodlurkerMimic(final WoodlurkerMimic card) {
+    public NightskyMimic(final NightskyMimic card) {
         super(card);
     }
 
     @Override
-    public WoodlurkerMimic copy() {
-        return new WoodlurkerMimic(this);
+    public NightskyMimic copy() {
+        return new NightskyMimic(this);
     }
 }

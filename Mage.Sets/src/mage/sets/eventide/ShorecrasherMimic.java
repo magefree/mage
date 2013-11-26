@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
-import mage.abilities.keyword.WitherAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -47,40 +47,40 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author jeffwadsworth
 
  */
-public class WoodlurkerMimic extends CardImpl<WoodlurkerMimic> {
+public class ShorecrasherMimic extends CardImpl<ShorecrasherMimic> {
     
-    private static final FilterSpell filter = new FilterSpell("a spell that's both black and green");
+    private static final FilterSpell filter = new FilterSpell("a spell that's both green and blue");
     
     static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
         filter.add(new ColorPredicate(ObjectColor.GREEN));
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    private String rule = "Whenever you cast a spell that's both black and green, {this} becomes 4/5 and gains wither until end of turn.";
-    
-    public WoodlurkerMimic(UUID ownerId) {
-        super(ownerId, 130, "Woodlurker Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B/G}");
+    private String rule = "Whenever you cast a spell that's both green and blue, {this} becomes 5/3 and gains trample until end of turn.";
+
+    public ShorecrasherMimic(UUID ownerId) {
+        super(ownerId, 159, "Shorecrasher Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G/U}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Shapeshifter");
 
+        this.color.setBlue(true);
         this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever you cast a spell that's both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(4, 5, Duration.EndOfTurn), filter, false, rule);
-        ability.addEffect(new GainAbilitySourceEffect(WitherAbility.getInstance(), Duration.EndOfTurn, false, true));
+        // Whenever you cast a spell that's both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
+        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(5, 3, Duration.EndOfTurn), filter, false, rule);
+        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
         
     }
 
-    public WoodlurkerMimic(final WoodlurkerMimic card) {
+    public ShorecrasherMimic(final ShorecrasherMimic card) {
         super(card);
     }
 
     @Override
-    public WoodlurkerMimic copy() {
-        return new WoodlurkerMimic(this);
+    public ShorecrasherMimic copy() {
+        return new ShorecrasherMimic(this);
     }
 }
