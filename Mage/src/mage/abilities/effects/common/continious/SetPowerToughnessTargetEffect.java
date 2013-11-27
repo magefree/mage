@@ -28,15 +28,16 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -72,13 +73,16 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl<SetPower
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getFirstTarget());
-        if (target != null) {
-            target.getPower().setValue(power.calculate(game, source));
-            target.getToughness().setValue(toughness.calculate(game, source));
-            return true;
+        boolean result = false;
+        for (UUID targetId: this.getTargetPointer().getTargets(game, source)) {
+            Permanent target = game.getPermanent(targetId);
+            if (target != null) {
+                target.getPower().setValue(power.calculate(game, source));
+                target.getToughness().setValue(toughness.calculate(game, source));
+                result = true;
+            }
         }
-        return false;
+        return result;
     }
 
     @Override
