@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  */
 public class HasCounterCondition implements Condition {
 
-    private CounterType counterType;
+    private final CounterType counterType;
     private int amount = 1;
     private int from = -1;
     private int to;
@@ -61,6 +61,7 @@ public class HasCounterCondition implements Condition {
     }
 
     @Override
+    @SuppressWarnings("null")
     public boolean apply(Game game, Ability source) {
         Card card = null;
         Permanent permanent = game.getPermanent(source.getSourceId());
