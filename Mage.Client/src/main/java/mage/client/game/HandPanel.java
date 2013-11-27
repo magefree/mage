@@ -5,13 +5,13 @@ import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.Config;
 import mage.constants.Zone;
-import mage.view.SimpleCardsView;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.UUID;
+import mage.view.CardsView;
 
 public class HandPanel extends JPanel {
 
@@ -58,8 +58,8 @@ public class HandPanel extends JPanel {
         hand.setZone(Zone.HAND.toString());
     }
 
-    public void loadCards(SimpleCardsView cards, BigCard bigCard, UUID gameId) {
-        hand.loadCards(cards, bigCard, gameId);
+    public void loadCards(CardsView cards, BigCard bigCard, UUID gameId) {
+        hand.loadCards(cards, bigCard, gameId, null);
         hand.sizeCards(getHandCardDimension());
     }
 

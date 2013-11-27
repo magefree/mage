@@ -29,6 +29,7 @@
 package mage.client.util;
 
 import java.util.List;
+import java.util.Map;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -46,6 +47,26 @@ public class CardsViewUtil {
         for (SimpleCardView simple: view.values()) {
             CardInfo cardInfo = CardRepository.instance.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
             Card card = cardInfo != null ? cardInfo.getMockCard() : null;
+            if (card != null) {
+                cards.put(simple.getId(), new CardView(card, simple.getId()));
+            }
+        }
+
+        return cards;
+    }
+    
+    public static CardsView convertSimple(SimpleCardsView view, Map<String, Card> loadedCards) {
+        CardsView cards = new CardsView();
+
+        for (SimpleCardView simple: view.values()) {
+            String key = simple.getExpansionSetCode() + "_" + simple.getCardNumber();
+            Card card = loadedCards.get(key);
+            if(card == null)
+            {
+                CardInfo cardInfo = CardRepository.instance.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
+                card = cardInfo != null ? cardInfo.getMockCard() : null;
+                loadedCards.put(key, card);
+            }
             if (card != null) {
                 cards.put(simple.getId(), new CardView(card, simple.getId()));
             }
