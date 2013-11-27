@@ -61,6 +61,8 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import mage.cards.Card;
+import mage.client.util.CardsViewUtil;
 
 
 /**
@@ -86,6 +88,9 @@ public final class GamePanel extends javax.swing.JPanel {
     private String chosenHandKey = "You";
     private boolean smallMode = false;
     private boolean initialized = false;
+    
+    
+    private Map<String, Card> loadedCards = new HashMap<String, Card>();
 
     private int storedHeight;
     
@@ -412,12 +417,12 @@ public final class GamePanel extends javax.swing.JPanel {
             this.handContainer.setVisible(false);
         } else {
             handCards.clear();
-            handCards.put(YOUR_HAND, game.getHand());
+            handCards.put(YOUR_HAND, CardsViewUtil.convertSimple(game.getHand(), loadedCards));
 
             // Get opponents hand cards if available
             if (game.getOpponentHands() != null) {
                 for (Map.Entry<String, SimpleCardsView> hand: game.getOpponentHands().entrySet()) {
-                    handCards.put(hand.getKey(), hand.getValue());
+                    handCards.put(hand.getKey(), CardsViewUtil.convertSimple(game.getHand(), loadedCards));
                 }
             }
 
@@ -544,7 +549,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 ShowCardsDialog newReveal = new ShowCardsDialog();
                 revealed.put(reveal.getName(), newReveal);
             }
-            revealed.get(reveal.getName()).loadCards("Revealed " + reveal.getName(), reveal.getCards(), bigCard, Config.dimensions, gameId, false);
+            revealed.get(reveal.getName()).loadCards("Revealed " + reveal.getName(), CardsViewUtil.convertSimple(reveal.getCards(), loadedCards), bigCard, Config.dimensions, gameId, false);
         }
     }
 
@@ -557,7 +562,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 ShowCardsDialog newReveal = new ShowCardsDialog();
                 lookedAt.put(looked.getName(), newReveal);
             }
-            lookedAt.get(looked.getName()).loadCards("Looked at by " + looked.getName(), looked.getCards(), bigCard, Config.dimensions, gameId, false);
+            lookedAt.get(looked.getName()).loadCards("Looked at by " + looked.getName(), CardsViewUtil.convertSimple(looked.getCards(), loadedCards), bigCard, Config.dimensions, gameId, false);
         }
     }
 
@@ -723,7 +728,7 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane2 = new javax.swing.JSplitPane();
         handContainer = new HandPanel();
 
-        handCards = new HashMap<String, SimpleCardsView>();
+        handCards = new HashMap<String, CardsView>();
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(7);
@@ -1184,7 +1189,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         if (newChosenHandKey != null && newChosenHandKey.length() > 0) {
             this.chosenHandKey = newChosenHandKey;
-            SimpleCardsView cards = handCards.get(chosenHandKey);
+            CardsView cards = handCards.get(chosenHandKey);
             handContainer.loadCards(cards, bigCard, gameId);
         }
     }
@@ -1290,7 +1295,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private javax.swing.JLabel txtStep;
     private javax.swing.JLabel txtTurn;
 
-    private Map<String, SimpleCardsView> handCards;
+    private Map<String, CardsView> handCards;
     private mage.client.cards.Cards stack;
     private HandPanel handContainer;
 
