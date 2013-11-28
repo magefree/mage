@@ -32,7 +32,8 @@
  * Created on Nov 18, 2009, 3:01:31 PM
  */
 
-package mage.client.game;
+package mage.client.unusedFiles;
+//package mage.client.game;
 
 import java.awt.Color;
 import java.util.UUID;

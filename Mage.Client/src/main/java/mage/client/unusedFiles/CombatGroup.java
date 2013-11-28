@@ -32,7 +32,10 @@
  * Created on Feb 10, 2010, 3:36:55 PM
  */
 
-package mage.client.game;
+
+package mage.client.unusedFiles;
+
+//package mage.client.game;
 
 import mage.client.cards.BigCard;
 import mage.client.util.Config;

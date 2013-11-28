@@ -32,10 +32,11 @@
  * Created on Feb 10, 2010, 3:35:02 PM
  */
 
-package mage.client.dialog;
+//package mage.client.dialog;
+package mage.client.unusedFiles;
 
 import mage.client.cards.BigCard;
-import mage.client.game.CombatGroup;
+import mage.client.unusedFiles.CombatGroup;
 import mage.view.CombatGroupView;
 
 import javax.swing.*;
@@ -45,6 +46,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.client.dialog.MageDialog;
 
 /**
  *

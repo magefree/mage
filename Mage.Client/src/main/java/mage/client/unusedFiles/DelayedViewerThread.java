@@ -1,4 +1,6 @@
-package mage.client.thread;
+
+package mage.client.unusedFiles;
+//package mage.client.thread;
 
 import java.awt.Component;
 import java.util.HashMap;

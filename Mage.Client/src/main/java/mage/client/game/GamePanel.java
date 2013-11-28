@@ -82,7 +82,6 @@ public final class GamePanel extends javax.swing.JPanel {
     private UUID playerId;
     private Session session;
     private ReplayTask replayTask;
-    private CombatDialog combat;
     private PickNumberDialog pickNumber;
     private JLayeredPane jLayeredPane;
     private String chosenHandKey = "You";
@@ -99,10 +98,7 @@ public final class GamePanel extends javax.swing.JPanel {
     public GamePanel() {
         initComponents();
 
-        combat = new CombatDialog();
         pickNumber = new PickNumberDialog();
-        MageFrame.getDesktop().add(combat, JLayeredPane.MODAL_LAYER);
-        combat.hideDialog();
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
 
         this.feedbackPanel.setConnectedChatPanel(this.userChatPanel);
@@ -166,7 +162,6 @@ public final class GamePanel extends javax.swing.JPanel {
         this.players.clear();
         logger.debug("players clear.");
         this.pnlBattlefield.removeAll();
-        combat.hideDialog();
         pickNumber.hideDialog();
         for (ExileZoneDialog exile: exiles.values()) {
             exile.hideDialog();
@@ -332,8 +327,6 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public synchronized void init(GameView game) {
-        combat.init(gameId, bigCard);
-        combat.setLocation(500, 300);
         addPlayers(game);
         updateGame(game);
     }
