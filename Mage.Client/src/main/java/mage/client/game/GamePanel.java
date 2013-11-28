@@ -1252,6 +1252,14 @@ public final class GamePanel extends javax.swing.JPanel {
         return session;
     }
 
+    public Map<String, Card> getLoadedCards() {
+        return loadedCards;
+    }
+
+    public void setLoadedCards(Map<String, Card> loadedCards) {
+        this.loadedCards = loadedCards;
+    }
+
     public FeedbackPanel getFeedbackPanel() {
         return feedbackPanel;
     }

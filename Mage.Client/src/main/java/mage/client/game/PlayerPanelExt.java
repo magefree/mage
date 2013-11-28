@@ -361,6 +361,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         poison = new ImagePanel(resizedPoison, ImagePanel.ACTUAL);
         poison.setToolTipText("Poison");
         poison.setOpaque(false);
+        
+        // Library
         r = new Rectangle(19, 19);
         libraryLabel.setToolTipText("Library");
         Image imageLibrary = ImageHelper.getImageFromResources("/info/library.png");
@@ -404,6 +406,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         zonesPanel.setSize(100, 20);
         zonesPanel.setLayout(null);
 
+        //
         image = ImageHelper.getImageFromResources("/info/command_zone.png");
         r = new Rectangle(21, 21);
         resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
@@ -675,7 +678,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             graveyard = new ShowCardsDialog();
         }*/
         //graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId, false);
-        DialogManager.getManager(gameId).showGraveyardDialog(CardsViewUtil.convertSimple(player.getGraveyard()), bigCard, gameId);
+        DialogManager.getManager(gameId).showGraveyardDialog(CardsViewUtil.convertSimple(player.getGraveyard(), MageFrame.getGame(gameId).getLoadedCards()), bigCard, gameId);
     }
 
     private void btnCommandZoneActionPerformed(java.awt.event.ActionEvent evt) {
