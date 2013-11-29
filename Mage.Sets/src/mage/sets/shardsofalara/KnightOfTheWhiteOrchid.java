@@ -40,7 +40,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
@@ -80,7 +80,7 @@ class KnightOfTheWhiteOrchidAbility extends ZoneChangeTriggeredAbility<KnightOfT
     private static final FilterLandPermanent filter2 = new FilterLandPermanent();
 
     static {
-        filter1.add(new NamePredicate("Plains"));
+        filter1.add(new SubtypePredicate("Plains"));
     }
 
     public KnightOfTheWhiteOrchidAbility() {

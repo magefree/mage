@@ -28,13 +28,13 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterBasicLandCard;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FlagstonesOfTrokair extends CardImpl<FlagstonesOfTrokair> {
 
-    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
+    private static final FilterLandCard filter = new FilterLandCard();
 
     static {
         filter.add(new SubtypePredicate("Plains"));
