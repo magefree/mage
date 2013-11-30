@@ -139,6 +139,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected int landsPlayed;
     protected int landsPerTurn = 1;
     protected int maxHandSize = 7;
+    protected int maxAttackedBy = Integer.MAX_VALUE;
     protected ManaPool manaPool;
     protected boolean passed;
     protected boolean passedTurn;
@@ -219,6 +220,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.landsPlayed = player.landsPlayed;
         this.landsPerTurn = player.landsPerTurn;
         this.maxHandSize = player.maxHandSize;
+        this.maxAttackedBy = player.maxAttackedBy;
         this.manaPool = player.manaPool.copy();
         this.turns = player.turns;
 
@@ -269,6 +271,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.landsPlayed = player.getLandsPlayed();
         this.landsPerTurn = player.getLandsPerTurn();
         this.maxHandSize = player.getMaxHandSize();
+        this.maxAttackedBy = player.getMaxAttackedBy();
         this.manaPool = player.getManaPool().copy();
         this.turns = player.getTurns();
 
@@ -345,6 +348,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.abilities.clear();
         this.landsPerTurn = 1;
         this.maxHandSize = 7;
+        this.maxAttackedBy = Integer.MAX_VALUE;
         this.canGainLife = true;
         this.canLoseLife = true;
         this.canPayLifeCost = true;
@@ -1387,6 +1391,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
     @Override
+    public void setMaxAttackedBy(int maxAttackedBy) {
+        this.maxAttackedBy = maxAttackedBy;
+    }
+
+    @Override
+    public int getMaxAttackedBy() {
+        return maxAttackedBy;
+    }
+
+    @Override
     public void setResponseString(String responseString) {}
 
     @Override
@@ -1604,6 +1618,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
     
     /**
+     * @param game
+     * @param appliedEffects
      *
      * @return true if player won the toss
      */

@@ -50,9 +50,10 @@ public interface Target extends Serializable {
     void clearChosen();
     boolean isNotTarget();
 
-    // controlls if it will be checked, if the target can be targeted from source
-    // true = check for protection
-    // false = do not check for protection
+    /**
+     * controlls if it will be checked, if the target can be targeted from source
+     * @param notTarget true = check for protection, false = do not check for protection
+     */
     void setNotTarget(boolean notTarget);
 
     // methods for targets

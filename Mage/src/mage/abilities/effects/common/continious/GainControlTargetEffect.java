@@ -45,22 +45,41 @@ import mage.game.permanent.Permanent;
  */
 public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTargetEffect> {
 
-    private UUID fixedControllerId;
-    private boolean fixedController;
+    private UUID controllingPlayerId;
+    private boolean fixedControl;
 
     public GainControlTargetEffect(Duration duration) {
-        this(duration, false);
+        this(duration, false, null);
     }
 
-    public GainControlTargetEffect(Duration duration, boolean fixedController) {
+    /**
+     *
+     * @param duration
+     * @param fixedControl Controlling player is fixed even if the controller of the ability chnages
+     */
+    public GainControlTargetEffect(Duration duration, boolean fixedControl) {
+        this(duration, fixedControl, null);
+    }
+
+    /**
+     *
+     * @param duration
+     * @param controllingPlayerId Player that controlls the target creature
+     */
+    public GainControlTargetEffect(Duration duration, UUID controllingPlayerId) {
+        this(duration, true, controllingPlayerId);
+
+    }
+    public GainControlTargetEffect(Duration duration, boolean fixedControl, UUID controllingPlayerId) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.fixedController = fixedController;
+        this.controllingPlayerId = controllingPlayerId;
+        this.fixedControl = fixedControl;
     }
 
     public GainControlTargetEffect(final GainControlTargetEffect effect) {
         super(effect);
-        this.fixedControllerId = effect.fixedControllerId;
-        this.fixedController = effect.fixedController;
+        this.controllingPlayerId = effect.controllingPlayerId;
+        this.fixedControl = effect.fixedControl;
     }
 
     @Override
@@ -70,8 +89,8 @@ public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTar
 
     @Override
     public void init(Ability source, Game game) {
-        if (fixedController) {
-            this.fixedControllerId = source.getControllerId();
+        if (this.controllingPlayerId == null && fixedControl) {
+            this.controllingPlayerId = source.getControllerId();
         }
     }
 
@@ -79,18 +98,21 @@ public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTar
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
-            if (fixedController) {
-                return permanent.changeControllerId(fixedControllerId, game);
+            if (controllingPlayerId != null) {
+                return permanent.changeControllerId(controllingPlayerId, game);
             } else {
                 return permanent.changeControllerId(source.getControllerId(), game);
             }
-        
         }
+        this.discard();
         return false;
     }
 
     @Override
     public String getText(Mode mode) {
+        if (!staticText.isEmpty()) {
+            return staticText;
+        }
         return "Gain control of target " + mode.getTargets().get(0).getTargetName() + " " + duration.toString();
     }
 }

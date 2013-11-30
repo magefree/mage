@@ -102,6 +102,8 @@ public interface Player extends MageItem, Copyable<Player> {
     void setLandsPerTurn(int landsPerTurn);
     int getMaxHandSize();
     void setMaxHandSize(int maxHandSize);
+    int getMaxAttackedBy();
+    void setMaxAttackedBy(int maxAttackedBy);
     boolean isPassed();
     boolean isEmptyDraw();
     void pass(Game game);
