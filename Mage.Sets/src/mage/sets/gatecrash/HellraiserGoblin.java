@@ -29,18 +29,18 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,8 +65,10 @@ public class HellraiserGoblin extends CardImpl<HellraiserGoblin> {
         this.toughness = new MageInt(2);
 
         // Creatures you control have haste and attack each combat if able.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent()));
-        ability.addEffect(new AttacksIfAbleAllEffect(Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures")));
+        Effect effect = new AttacksIfAbleAllEffect(Duration.WhileOnBattlefield);
+        effect.setText("and attack each combat if able");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
@@ -106,10 +108,7 @@ class AttacksIfAbleAllEffect extends RequirementEffect<AttacksIfAbleAllEffect> {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-            return true;
-        }
-        return false;
+        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override
@@ -124,6 +123,9 @@ class AttacksIfAbleAllEffect extends RequirementEffect<AttacksIfAbleAllEffect> {
 
     @Override
     public String getText(Mode mode) {
+        if (!staticText.isEmpty()) {
+            return staticText;
+        }
         return filter.getMessage() + " attack each combat if able";
     }
 

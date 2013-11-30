@@ -68,7 +68,7 @@ public class SowerOfTemptation extends CardImpl<SowerOfTemptation> {
         ConditionalContinousEffect effect = new ConditionalContinousEffect(
                 new GainControlTargetEffect(Duration.Custom, true),
                 new PermanentOnBattelfieldCondition(),
-                "gain control of target creature for as long as Sower of Temptation remains on the battlefield");
+                "gain control of target creature for as long as {this} remains on the battlefield");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
