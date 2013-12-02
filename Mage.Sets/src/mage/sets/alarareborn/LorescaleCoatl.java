@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -53,7 +53,7 @@ public class LorescaleCoatl extends CardImpl<LorescaleCoatl> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new DrawCardTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
+        this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
     public LorescaleCoatl (final LorescaleCoatl card) {

@@ -29,7 +29,7 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -61,7 +61,7 @@ public class HorizonChimera extends CardImpl<HorizonChimera> {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Whenever you draw a card, you gain 1 life.
-        this.addAbility(new DrawCardTriggeredAbility(new GainLifeEffect(1), false));
+        this.addAbility(new DrawCardControllerTriggeredAbility(new GainLifeEffect(1), false));
     }
 
     public HorizonChimera(final HorizonChimera card) {

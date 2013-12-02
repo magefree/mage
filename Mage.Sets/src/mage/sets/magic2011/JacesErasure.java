@@ -31,7 +31,7 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;
@@ -47,7 +47,7 @@ public class JacesErasure extends CardImpl<JacesErasure> {
         this.expansionSetCode = "M11";
         this.color.setBlue(true);
 
-        DrawCardTriggeredAbility ability = new DrawCardTriggeredAbility(new PutLibraryIntoGraveTargetEffect(1), true);
+        DrawCardControllerTriggeredAbility ability = new DrawCardControllerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(1), true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

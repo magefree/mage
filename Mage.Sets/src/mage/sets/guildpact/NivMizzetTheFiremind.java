@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -60,7 +60,7 @@ public class NivMizzetTheFiremind extends CardImpl<NivMizzetTheFiremind> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new DrawCardTriggeredAbility(new DamageTargetEffect(1), false);
+        Ability ability = new DrawCardControllerTriggeredAbility(new DamageTargetEffect(1), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapSourceCost()));

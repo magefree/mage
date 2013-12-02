@@ -36,7 +36,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.OneShotEffect;
@@ -61,7 +61,7 @@ public class PsychosisCrawler extends CardImpl<PsychosisCrawler> {
         this.toughness = new MageInt(0);
 
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Duration.EndOfGame)));
-        this.addAbility(new DrawCardTriggeredAbility(new LoseLifeOpponentsEffect(), false));
+        this.addAbility(new DrawCardControllerTriggeredAbility(new LoseLifeOpponentsEffect(), false));
     }
 
     public PsychosisCrawler(final PsychosisCrawler card) {

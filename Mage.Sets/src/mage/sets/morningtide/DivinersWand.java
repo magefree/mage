@@ -35,7 +35,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -72,7 +72,7 @@ public class DivinersWand extends CardImpl<DivinersWand> {
         this.subtype.add("Equipment");
 
         // Equipped creature has "Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn" and "{4}: Draw a card."
-        Ability gainedAbility = new DrawCardTriggeredAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn), false);
+        Ability gainedAbility = new DrawCardControllerTriggeredAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn), false);
         gainedAbility.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
         effect.setText("Equipped creature has \"Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn\"");

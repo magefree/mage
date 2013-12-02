@@ -28,17 +28,13 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DrawCardOpponentTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -51,7 +47,7 @@ public class MindsEye extends CardImpl<MindsEye> {
         this.expansionSetCode = "MRD";
 
         // Whenever an opponent draws a card, you may pay {1}. If you do, draw a card.
-        this.addAbility(new MindsEyeTriggeredAbility());
+        this.addAbility(new DrawCardOpponentTriggeredAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new GenericManaCost(1)), false, false));
     }
 
     public MindsEye(final MindsEye card) {
@@ -61,34 +57,5 @@ public class MindsEye extends CardImpl<MindsEye> {
     @Override
     public MindsEye copy() {
         return new MindsEye(this);
-    }
-}
-
-class MindsEyeTriggeredAbility extends TriggeredAbilityImpl<MindsEyeTriggeredAbility> {
-
-    MindsEyeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardControllerEffect(1), new GenericManaCost(1)), false);
-    }
-
-    MindsEyeTriggeredAbility(final MindsEyeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MindsEyeTriggeredAbility copy() {
-        return new MindsEyeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return  "Whenever an opponent draws a card, you may pay {1}. If you do, draw a card.";
     }
 }

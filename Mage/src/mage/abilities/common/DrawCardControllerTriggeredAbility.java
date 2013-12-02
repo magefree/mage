@@ -37,13 +37,13 @@ import mage.game.events.GameEvent;
  *
  * @author North
  */
-public class DrawCardTriggeredAbility  extends TriggeredAbilityImpl<DrawCardTriggeredAbility> {
+public class DrawCardControllerTriggeredAbility  extends TriggeredAbilityImpl<DrawCardControllerTriggeredAbility> {
 
-    public DrawCardTriggeredAbility(Effect effect, boolean optional) {
+    public DrawCardControllerTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public DrawCardTriggeredAbility(final DrawCardTriggeredAbility ability) {
+    public DrawCardControllerTriggeredAbility(final DrawCardControllerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -61,7 +61,7 @@ public class DrawCardTriggeredAbility  extends TriggeredAbilityImpl<DrawCardTrig
     }
 
     @Override
-    public DrawCardTriggeredAbility copy() {
-        return new DrawCardTriggeredAbility(this);
+    public DrawCardControllerTriggeredAbility copy() {
+        return new DrawCardControllerTriggeredAbility(this);
     }
 }

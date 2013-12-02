@@ -28,12 +28,13 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DrawCardOpponentTriggeredAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
@@ -51,7 +52,7 @@ public class UnderworldDreams extends CardImpl<UnderworldDreams> {
         this.color.setBlack(true);
 
         // Whenever an opponent draws a card, Underworld Dreams deals 1 damage to him or her.
-        this.addAbility(new UnderworldDreamsTriggeredAbility());
+        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1, true, "him or her"), false, true));
     }
 
     public UnderworldDreams(final UnderworldDreams card) {
@@ -61,35 +62,5 @@ public class UnderworldDreams extends CardImpl<UnderworldDreams> {
     @Override
     public UnderworldDreams copy() {
         return new UnderworldDreams(this);
-    }
-}
-
-class UnderworldDreamsTriggeredAbility extends TriggeredAbilityImpl<UnderworldDreamsTriggeredAbility> {
-
-    UnderworldDreamsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1), false);
-    }
-
-    UnderworldDreamsTriggeredAbility(final UnderworldDreamsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public UnderworldDreamsTriggeredAbility copy() {
-        return new UnderworldDreamsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent draws a card, {this} deals 1 damage to him or her";
     }
 }
