@@ -54,8 +54,7 @@ public class SuddenDemise extends CardImpl<SuddenDemise> {
 
         this.color.setRed(true);
 
-        // Choose a color. Sudden Demise deals X damage to each creature of the chosen color.
-        this.getSpellAbility().addChoice(new ChoiceColor());
+        // Choose a color. Sudden Demise deals X damage to each creature of the chosen color.       
         this.getSpellAbility().addEffect(new SuddenDemiseDamageEffect());
 
     }
@@ -89,15 +88,18 @@ class SuddenDemiseDamageEffect extends OneShotEffect<SuddenDemiseDamageEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        if (controller != null && choice != null) {
-            final int damage = source.getManaCostsToPay().getX();
-            FilterPermanent filter = new FilterCreaturePermanent();
-            filter.add(new ColorPredicate(choice.getColor()));
-            for (Permanent permanent:game.getBattlefield().getActivePermanents(filter, source.getControllerId(), id, game)) {
-                permanent.damage(damage, source.getSourceId(), game, true, false);
+        if (controller != null) {
+            ChoiceColor choice = new ChoiceColor();
+            controller.choose(outcome, choice, game);
+            if (choice.getColor() != null) {
+                final int damage = source.getManaCostsToPay().getX();
+                FilterPermanent filter = new FilterCreaturePermanent();
+                filter.add(new ColorPredicate(choice.getColor()));
+                for (Permanent permanent:game.getBattlefield().getActivePermanents(filter, source.getControllerId(), id, game)) {
+                    permanent.damage(damage, source.getSourceId(), game, true, false);
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }
