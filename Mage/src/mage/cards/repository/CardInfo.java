@@ -55,9 +55,9 @@ public class CardInfo {
     private static final String SEPARATOR = "@@@";
     @DatabaseField
     protected String name;
-    @DatabaseField
+    @DatabaseField(indexName = "name_cardNumber_index")
     protected int cardNumber;
-    @DatabaseField
+    @DatabaseField(indexName = "name_cardNumber_index")
     protected String setCode;
     @DatabaseField(unique = true)
     protected String className;
@@ -97,7 +97,7 @@ public class CardInfo {
     protected boolean flipCard;
     @DatabaseField
     protected boolean doubleFaced;
-    @DatabaseField
+    @DatabaseField(indexName = "name_cardNumber_index")
     protected boolean nightCard;
     @DatabaseField
     protected String flipCardName;
