@@ -29,17 +29,19 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import static mage.constants.Zone.BATTLEFIELD;
+import static mage.constants.Zone.EXILED;
+import static mage.constants.Zone.GRAVEYARD;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.util.CardUtil;
-
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -67,7 +69,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
                 case BATTLEFIELD:
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        permanent.moveToZone(Zone.HAND, source.getId(), game, false);
+                        permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     } else {
                         result = false;
                     }
@@ -75,7 +77,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
                 case GRAVEYARD:
                     Card card = game.getCard(targetId);
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getId(), game, true);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                     }  else {
                         result = false;
                     }
@@ -83,7 +85,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
                 case EXILED:
                     card = game.getCard(targetId);
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getId(), game, true);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                     } else {
                         result = false;
                     }

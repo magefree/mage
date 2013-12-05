@@ -92,24 +92,27 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl<Maximu
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        switch(targetController) {
-            case ANY:
-                for (UUID playerId: controller.getInRange()) {
-                    setHandSize(game, playerId);
-                }
-                break;
-            case OPPONENT:
-                for (UUID playerId: game.getOpponents(source.getControllerId())) {
-                    setHandSize(game, playerId);
-                }
-                break;
-            case YOU:
-                setHandSize(game, source.getControllerId());
-                break;
-            default:
-                throw new UnsupportedOperationException("Not supported yet.");
+        if (controller != null) {
+            switch(targetController) {
+                case ANY:
+                    for (UUID playerId: controller.getInRange()) {
+                        setHandSize(game, playerId);
+                    }
+                    break;
+                case OPPONENT:
+                    for (UUID playerId: game.getOpponents(source.getControllerId())) {
+                        setHandSize(game, playerId);
+                    }
+                    break;
+                case YOU:
+                    setHandSize(game, source.getControllerId());
+                    break;
+                default:
+                    throw new UnsupportedOperationException("Not supported yet.");
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     private void setHandSize(Game game, UUID playerId) {

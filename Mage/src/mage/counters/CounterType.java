@@ -38,6 +38,7 @@ import mage.counters.common.ChargeCounter;
 import mage.counters.common.DespairCounter;
 import mage.counters.common.DevotionCounter;
 import mage.counters.common.DivinityCounter;
+import mage.counters.common.DoomCounter;
 import mage.counters.common.ElixirCounter;
 import mage.counters.common.EonCounter;
 import mage.counters.common.EyeballCounter;
@@ -88,6 +89,7 @@ public enum CounterType {
     DESPAIR(new DespairCounter().name),
     DEVOTION(new DevotionCounter().name),
     DIVINITY(new DivinityCounter().name),
+    DOOM(new DoomCounter().name),
     ELIXIR(new ElixirCounter().name),
     EON(new EonCounter().name),
     EYEBALL(new EyeballCounter().name),
@@ -164,6 +166,8 @@ public enum CounterType {
                 return new PoisonCounter(amount);
             case CHARGE:
                 return new ChargeCounter(amount);
+            case DOOM:
+                return new DoomCounter(amount);
             case LORE:
                 return new LoreCounter(amount);
             case LOYALTY:

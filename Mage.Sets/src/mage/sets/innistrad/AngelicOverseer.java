@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -48,8 +49,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class AngelicOverseer extends CardImpl<AngelicOverseer> {
 
-    private static final String rule1 = "As long as you control a Human, {this} has hexproof.";
-    private static final String rule2 = "As long as you control a Human, {this} is indestructible.";
+    private static final String rule1 = "As long as you control a Human, {this} has hexproof";
+    private static final String rule2 = "and is indestructible";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {
@@ -69,10 +70,10 @@ public class AngelicOverseer extends CardImpl<AngelicOverseer> {
 
         // As long as you control a Human, Angelic Overseer has hexproof and is indestructible.
         ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new GainAbilitySourceEffect(HexproofAbility.getInstance()), new ControlsPermanentCondition(filter), rule1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
         ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), new ControlsPermanentCondition(filter), rule2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
-
+        ability.addEffect(effect2);
+        this.addAbility(ability);
     }
 
     public AngelicOverseer(final AngelicOverseer card) {

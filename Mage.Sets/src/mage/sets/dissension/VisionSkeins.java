@@ -25,51 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.sets.dissension;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.combat.CantBlockTargetEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MarkovWarlord extends CardImpl<MarkovWarlord> {
+public class VisionSkeins extends mage.sets.commander2013.VisionSkeins {
 
-    public MarkovWarlord(UUID ownerId) {
-        super(ownerId, 97, "Markov Warlord", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "DKA";
-        this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
-
-        this.color.setRed(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(HasteAbility.getInstance());
-        // When Markov Warlord enters the battlefield, up to two target creatures can't block this turn.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
-        TargetCreaturePermanent target = new TargetCreaturePermanent(0, 2);
-        target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
-
+    public VisionSkeins(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 36;
+        this.expansionSetCode = "DIS";
     }
 
-    public MarkovWarlord(final MarkovWarlord card) {
+    public VisionSkeins(final VisionSkeins card) {
         super(card);
     }
 
     @Override
-    public MarkovWarlord copy() {
-        return new MarkovWarlord(this);
+    public VisionSkeins copy() {
+        return new VisionSkeins(this);
     }
 }

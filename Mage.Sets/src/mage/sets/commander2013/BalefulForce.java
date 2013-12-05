@@ -25,51 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.sets.commander2013;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.combat.CantBlockTargetEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MarkovWarlord extends CardImpl<MarkovWarlord> {
+public class BalefulForce extends CardImpl<BalefulForce> {
 
-    public MarkovWarlord(UUID ownerId) {
-        super(ownerId, 97, "Markov Warlord", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "DKA";
-        this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
+    public BalefulForce(UUID ownerId) {
+        super(ownerId, 70, "Baleful Force", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
+        this.expansionSetCode = "C13";
+        this.subtype.add("Elemental");
 
-        this.color.setRed(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.color.setBlack(true);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
 
-        this.addAbility(HasteAbility.getInstance());
-        // When Markov Warlord enters the battlefield, up to two target creatures can't block this turn.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
-        TargetCreaturePermanent target = new TargetCreaturePermanent(0, 2);
-        target.setRequired(true);
-        ability.addTarget(target);
+        // At the beginning of each upkeep, you draw a card and you lose 1 life.
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardControllerEffect(1), TargetController.ANY, false);
+        ability.addEffect(new LoseLifeSourceEffect(1));
         this.addAbility(ability);
-
     }
 
-    public MarkovWarlord(final MarkovWarlord card) {
+    public BalefulForce(final BalefulForce card) {
         super(card);
     }
 
     @Override
-    public MarkovWarlord copy() {
-        return new MarkovWarlord(this);
+    public BalefulForce copy() {
+        return new BalefulForce(this);
     }
 }
