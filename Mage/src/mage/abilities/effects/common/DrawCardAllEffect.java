@@ -29,9 +29,11 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -42,12 +44,17 @@ import mage.util.CardUtil;
  */
 public class DrawCardAllEffect extends OneShotEffect<DrawCardAllEffect> {
 
-    protected int amount;
+    protected DynamicValue amount;
 
     public DrawCardAllEffect(int amount) {
+        this(new StaticValue(amount));
+
+    }
+
+    public DrawCardAllEffect(DynamicValue amount) {
         super(Outcome.DrawCard);
         this.amount = amount;
-        staticText = "Each player draws " + CardUtil.numberToText(amount) + " card" + (amount == 1?"":"s");
+        staticText = "Each player draws " + CardUtil.numberToText(amount.toString()) + " card" + (amount.toString().equals("1")?"":"s");
     }
 
     public DrawCardAllEffect(final DrawCardAllEffect effect) {
@@ -66,8 +73,9 @@ public class DrawCardAllEffect extends OneShotEffect<DrawCardAllEffect> {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
         for (UUID playerId: sourcePlayer.getInRange()) {
             Player player = game.getPlayer(playerId);
-            if (player != null)
-                player.drawCards(amount, game);
+            if (player != null) {
+                player.drawCards(amount.calculate(game, source), game);
+            }
         }
         return true;
     }

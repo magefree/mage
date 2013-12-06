@@ -37,6 +37,7 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
@@ -82,6 +83,7 @@ public class EchoMage extends CardImpl<EchoMage> {
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{U}{U}"));
         ability.addTarget(new TargetSpell(filter));
+        ability.addCost(new TapSourceCost());
         abilities1.add(ability);
         // LEVEL 4+
         // 2/5
@@ -89,6 +91,7 @@ public class EchoMage extends CardImpl<EchoMage> {
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EchoMageEffect(), new ManaCostsImpl("{U}{U}"));
         ability.addTarget(new TargetSpell(filter));
+        ability.addCost(new TapSourceCost());
         abilities2.add(ability);
 
         LevelerCardBuilder.construct(this,

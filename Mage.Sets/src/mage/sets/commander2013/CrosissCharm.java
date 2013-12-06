@@ -25,51 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.sets.commander2013;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.combat.CantBlockTargetEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.ObjectColor;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.Target;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MarkovWarlord extends CardImpl<MarkovWarlord> {
+public class CrosissCharm extends CardImpl<CrosissCharm> {
 
-    public MarkovWarlord(UUID ownerId) {
-        super(ownerId, 97, "Markov Warlord", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "DKA";
-        this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+    }
+
+    public CrosissCharm(UUID ownerId) {
+        super(ownerId, 181, "Crosis's Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}{R}");
+        this.expansionSetCode = "C13";
 
         this.color.setRed(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.color.setBlue(true);
+        this.color.setBlack(true);
 
-        this.addAbility(HasteAbility.getInstance());
-        // When Markov Warlord enters the battlefield, up to two target creatures can't block this turn.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
-        TargetCreaturePermanent target = new TargetCreaturePermanent(0, 2);
+        // Choose one - Return target permanent to its owner's hand;
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        // or destroy target nonblack creature, and it can't be regenerated;
+        Mode mode = new Mode();
+        mode.getEffects().add(new DestroyTargetEffect(true));
+        mode.getTargets().add(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addMode(mode);
+        // or destroy target artifact.
+        mode = new Mode();
+        mode.getEffects().add(new DestroyTargetEffect(true));
+        Target target = new TargetArtifactPermanent();
         target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
+        mode.getTargets().add(target);
+        this.getSpellAbility().addMode(mode);
 
     }
 
-    public MarkovWarlord(final MarkovWarlord card) {
+    public CrosissCharm(final CrosissCharm card) {
         super(card);
     }
 
     @Override
-    public MarkovWarlord copy() {
-        return new MarkovWarlord(this);
+    public CrosissCharm copy() {
+        return new CrosissCharm(this);
     }
 }

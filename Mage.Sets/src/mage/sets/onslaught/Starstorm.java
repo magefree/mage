@@ -25,51 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.combat.CantBlockTargetEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MarkovWarlord extends CardImpl<MarkovWarlord> {
+public class Starstorm extends CardImpl<Starstorm> {
 
-    public MarkovWarlord(UUID ownerId) {
-        super(ownerId, 97, "Markov Warlord", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "DKA";
-        this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
+    public Starstorm(UUID ownerId) {
+        super(ownerId, 238, "Starstorm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
+        this.expansionSetCode = "ONS";
 
         this.color.setRed(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
 
-        this.addAbility(HasteAbility.getInstance());
-        // When Markov Warlord enters the battlefield, up to two target creatures can't block this turn.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
-        TargetCreaturePermanent target = new TargetCreaturePermanent(0, 2);
-        target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
-
+        // Starstorm deals X damage to each creature.
+        this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), new FilterCreaturePermanent()));
+        // Cycling {3}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
     }
 
-    public MarkovWarlord(final MarkovWarlord card) {
+    public Starstorm(final Starstorm card) {
         super(card);
     }
 
     @Override
-    public MarkovWarlord copy() {
-        return new MarkovWarlord(this);
+    public Starstorm copy() {
+        return new Starstorm(this);
     }
 }
