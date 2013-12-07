@@ -82,7 +82,7 @@ class KismetEffect extends ReplacementEffectImpl<KismetEffect> {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = game.getPermanent(event.getTargetId());
         if (target != null) {
-            target.tap(game);
+            target.setTapped(true);
         }
         return false;
     }
