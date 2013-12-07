@@ -1,10 +1,13 @@
 package mage.target.targetpointer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
-
 
 public class SecondTargetPointer implements TargetPointer {
 

@@ -30,7 +30,6 @@ package mage.sets.commander2013;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -112,10 +111,7 @@ class WarCadenceReplacementEffect extends ReplacementEffectImpl<WarCadenceReplac
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER)) {
-            return true;
-        }
-        return false;
+        return event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER);
     }
 
     @Override

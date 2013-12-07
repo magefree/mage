@@ -113,6 +113,9 @@ class MoldgrafMonstrosityEffect extends OneShotEffect<MoldgrafMonstrosityEffect>
     }
 
     private Card getRandomCard(Set<Card> cards) {
+        if (cards == null || cards.size() < 1) {
+            return null;
+        }
         int i = 0;
         int pick = new Random().nextInt(cards.size());
         for (Card card : cards) {

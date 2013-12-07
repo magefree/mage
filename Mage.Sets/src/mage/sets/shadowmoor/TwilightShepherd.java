@@ -110,7 +110,9 @@ class TwilightShepherdEffect extends OneShotEffect<TwilightShepherdEffect> {
             Set<UUID> cardsInGraveyardId = watcher.getCardsPutToGraveyardFromBattlefield();
             for (UUID cardId : cardsInGraveyardId) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.getOwnerId().equals(source.getControllerId())) {
+                if (card != null 
+                        && card.getOwnerId().equals(source.getControllerId())
+                        && game.getState().getZone(card.getId()).match(Zone.GRAVEYARD)) {
                     applied = card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 }
             }
