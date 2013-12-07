@@ -1,10 +1,14 @@
 package mage.target.targetpointer;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
-
-import java.util.*;
+import mage.target.Target;
 
 public class FirstTargetPointer implements TargetPointer {
 
@@ -40,10 +44,14 @@ public class FirstTargetPointer implements TargetPointer {
     public List<UUID> getTargets(Game game, Ability source) {
         ArrayList<UUID> target = new ArrayList<UUID>();
         if (source.getTargets().size() > 0) {
+            Target currentTarget = source.getTargets().get(0);
             for (UUID targetId : source.getTargets().get(0).getTargets()) {
                 Card card = game.getCard(targetId);
                 if (card != null && zoneChangeCounter.containsKey(targetId)
                         && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+                    continue;
+                }
+                if (!currentTarget.canTarget(targetId, source, game)) {
                     continue;
                 }
                 target.add(targetId);
