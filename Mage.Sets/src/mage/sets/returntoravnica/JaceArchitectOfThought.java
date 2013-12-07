@@ -66,6 +66,7 @@ import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 
 /**
@@ -359,16 +360,19 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect<JaceArchitectOfThought
                 UUID targetId = target.getFirstTarget();
                 Card card = player.getLibrary().remove(targetId, game);
                 if (card != null) {
-                    card.moveToExile(source.getSourceId(), "Jace, Architect of Thought", source.getSourceId(), game);
+                    card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Jace, Architect of Thought", source.getSourceId(), game);
                 }
             }
             player.shuffleLibrary(game);
         }
 
-        ExileZone JaceExileZone = game.getExile().getExileZone(source.getSourceId());
+        ExileZone jaceExileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        if (jaceExileZone == null) {
+            return true;
+        }
         FilterCard filter = new FilterCard("card to cast without mana costs");
         TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
-        while (JaceExileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, JaceExileZone, target, game)) {
+        while (jaceExileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, jaceExileZone, target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
 
