@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -227,11 +228,17 @@ public class ImageCache {
         BufferedImage image = getResizedImage(original, Constants.THUMBNAIL_SIZE_FULL);
         TFile imageFile = new TFile(path);
         try {
-            //log.debug("thumbnail path:"+path);
-            TFileOutputStream outputStream = new TFileOutputStream(imageFile);
-            ImageIO.write(image, "jpg", outputStream);
-            outputStream.close();
-        } catch (Exception e) {
+            TFileOutputStream outputStream = null;
+            try {
+                //log.debug("thumbnail path:"+path);
+                outputStream = new TFileOutputStream(imageFile);
+                ImageIO.write(image, "jpg", outputStream);
+            } finally {
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            }
+        } catch (IOException e) {
             log.error(e,e);
         }
         return image;
@@ -239,6 +246,7 @@ public class ImageCache {
 
     /**
      * Returns an image scaled to the size given
+     * @return
      */
     public static BufferedImage getNormalSizeImage(BufferedImage original) {
         if (original == null) {
