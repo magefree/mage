@@ -29,25 +29,14 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
-import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.RetraceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.util.CardUtil;
 
 /**
  *
@@ -61,7 +50,7 @@ public class Chill extends CardImpl<Chill> {
     }
 
     public Chill(UUID ownerId) {
-        super(ownerId, 60, "Chill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        super(ownerId, 56, "Chill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "TMP";
 
         this.color.setBlue(true);
