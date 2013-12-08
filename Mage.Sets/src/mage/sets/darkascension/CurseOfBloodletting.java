@@ -97,14 +97,11 @@ class CurseOfBloodlettingEffect extends ReplacementEffectImpl<CurseOfBloodlettin
     public boolean applies(GameEvent event, Ability source, Game game) {
         switch (event.getType()) {
             case DAMAGE_PLAYER:
-                StackObject spell = game.getStack().getStackObject(event.getSourceId());
-                if (spell != null) {
-                    Permanent enchantment = game.getPermanent(source.getSourceId());
-                    if (enchantment != null && enchantment.getAttachedTo() != null) {
-                        Player player = game.getPlayer(enchantment.getAttachedTo());
-                        if (player != null && event.getTargetId().equals(player.getId())) {
-                            event.setAmount(event.getAmount() * 2);
-                        }
+                Permanent enchantment = game.getPermanent(source.getSourceId());
+                if (enchantment != null && enchantment.getAttachedTo() != null) {
+                    Player player = game.getPlayer(enchantment.getAttachedTo());
+                    if (player != null && event.getTargetId().equals(player.getId())) {
+                        event.setAmount(event.getAmount() * 2);
                     }
                 }
         }
