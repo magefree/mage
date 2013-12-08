@@ -28,10 +28,12 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
@@ -42,6 +44,8 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -51,6 +55,11 @@ import mage.util.CardUtil;
  */
 public class Chill extends CardImpl<Chill> {
 
+    private static final FilterCard filter = new FilterCard("Red spells");
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
+    }
+
     public Chill(UUID ownerId) {
         super(ownerId, 60, "Chill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "TMP";
@@ -58,7 +67,7 @@ public class Chill extends CardImpl<Chill> {
         this.color.setBlue(true);
 
         // Red spells cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChillCostIncreaseEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasementAllEffect(filter, 2)));
     }
 
     public Chill(final Chill card) {
@@ -68,39 +77,5 @@ public class Chill extends CardImpl<Chill> {
     @Override
     public Chill copy() {
         return new Chill(this);
-    }
-}
-
-class ChillCostIncreaseEffect extends CostModificationEffectImpl<ChillCostIncreaseEffect> {
-
-    ChillCostIncreaseEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Red spells cost {2} more to cast.";
-    }
-
-    ChillCostIncreaseEffect(ChillCostIncreaseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.increaseCost(abilityToModify, 2);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
-            Card card = game.getCard(abilityToModify.getSourceId());
-            if (card != null && card.getColor().isRed()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ChillCostIncreaseEffect copy() {
-        return new ChillCostIncreaseEffect(this);
     }
 }

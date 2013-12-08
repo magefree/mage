@@ -31,9 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -54,9 +53,10 @@ public class UnyaroGriffin extends CardImpl<UnyaroGriffin> {
     private static final FilterSpell filter = new FilterSpell("red instant or sorcery spell");
 
     static {
-        filter.add(Predicates.and(new ColorPredicate(ObjectColor.RED), 
-                   Predicates.or(new CardTypePredicate(CardType.INSTANT),
-                                 new CardTypePredicate(CardType.SORCERY))));
+        filter.add(new ColorPredicate(ObjectColor.RED));
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public UnyaroGriffin(UUID ownerId) {
@@ -70,11 +70,10 @@ public class UnyaroGriffin extends CardImpl<UnyaroGriffin> {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // 
+
         // Sacrifice Unyaro Griffin: Counter target red instant or sorcery spell.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new mage.abilities.effects.common.CounterTargetEffect(),
-                new SacrificeSourceCost());
+                new CounterTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
     }

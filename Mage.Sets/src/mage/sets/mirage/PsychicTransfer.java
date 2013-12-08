@@ -52,7 +52,7 @@ public class PsychicTransfer extends CardImpl<PsychicTransfer> {
 
         // If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player.
         this.getSpellAbility().addEffect(new PsychicTransferEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public PsychicTransfer(final PsychicTransfer card) {
@@ -70,7 +70,7 @@ class PsychicTransferEffect extends OneShotEffect<PsychicTransferEffect>
 
     public PsychicTransferEffect() {
         super(Outcome.Neutral);
-        this.staticText = "If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player.";
+        this.staticText = "If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player";
     }
 
     public PsychicTransferEffect(final PsychicTransferEffect effect) {
@@ -98,16 +98,12 @@ class PsychicTransferEffect extends OneShotEffect<PsychicTransferEffect>
                 return false;
             }
 
-            if (!sourcePlayer.isLifeTotalCanChange() || !targetPlayer.isLifeTotalCanChange()) {
-                return false;
-            }
-
             // 20110930 - 118.7, 118.8
-            if (lifePlayer1 < lifePlayer2 && (!targetPlayer.isCanGainLife() || !targetPlayer.isCanLoseLife())) {
+            if (lifePlayer1 < lifePlayer2 && (!sourcePlayer.isCanGainLife() || !targetPlayer.isCanLoseLife())) {
                 return false;
             }
 
-            if (lifePlayer1 > lifePlayer2 && (!targetPlayer.isCanLoseLife() || !targetPlayer.isCanGainLife())) {
+            if (lifePlayer1 > lifePlayer2 && (!sourcePlayer.isCanLoseLife() || !targetPlayer.isCanGainLife())) {
                 return false;
             }
 

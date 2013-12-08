@@ -96,10 +96,7 @@ class SunwebEffect extends RestrictionEffect<SunwebEffect> {
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (attacker != null) {
-            return attacker.getPower().getValue() > 2;
-        }
-        return true;
+        return attacker != null && attacker.getPower().getValue() > 2;
     }
 
     @Override

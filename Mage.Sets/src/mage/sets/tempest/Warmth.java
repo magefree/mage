@@ -28,22 +28,25 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.ObjectColor;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Quercitron
  */
 public class Warmth extends CardImpl<Warmth> {
+
+    private static final FilterSpell filter = new FilterSpell("red spell");
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
+    }
 
     public Warmth(UUID ownerId) {
         super(ownerId, 263, "Warmth", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
@@ -52,7 +55,7 @@ public class Warmth extends CardImpl<Warmth> {
         this.color.setWhite(true);
 
         // Whenever an opponent casts a red spell, you gain 2 life.
-        this.addAbility(new WarmthTriggeredAbility());
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new GainLifeEffect(2), filter, false));
     }
 
     public Warmth(final Warmth card) {
@@ -62,39 +65,5 @@ public class Warmth extends CardImpl<Warmth> {
     @Override
     public Warmth copy() {
         return new Warmth(this);
-    }
-}
-
-class WarmthTriggeredAbility extends TriggeredAbilityImpl<WarmthTriggeredAbility> {
-
-    public WarmthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(2), false);
-    }
-
-    public WarmthTriggeredAbility(final WarmthTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public WarmthTriggeredAbility copy() {
-        return new WarmthTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null && card.getColor().isRed()) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent casts a red spell, you gain 2 life.";
     }
 }
