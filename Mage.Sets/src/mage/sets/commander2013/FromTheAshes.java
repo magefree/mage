@@ -47,7 +47,6 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -123,7 +122,7 @@ class FromTheAshesEffect extends OneShotEffect<FromTheAshesEffect> {
                             for (UUID cardId: (List<UUID>)target.getTargets()) {
                                 Card card = player.getLibrary().getCard(cardId, game);
                                 if (card != null) {
-                                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId(), false);
+                                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId(), false);
                                 }
                             }
                         }
