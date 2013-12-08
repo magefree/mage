@@ -25,75 +25,74 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.RetraceAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
  * @author Quercitron
  */
-public class Kismet extends CardImpl<Kismet> {
+public class Chill extends CardImpl<Chill> {
 
-    public Kismet(UUID ownerId) {
-        super(ownerId, 319, "Kismet", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "5ED";
+    public Chill(UUID ownerId) {
+        super(ownerId, 60, "Chill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        this.expansionSetCode = "TMP";
 
-        this.color.setWhite(true);
+        this.color.setBlue(true);
 
-        // Artifacts, creatures, and lands played by your opponents enter the battlefield tapped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KismetEffect()));
+        // Red spells cost {2} more to cast.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChillCostIncreaseEffect()));
     }
 
-    public Kismet(final Kismet card) {
+    public Chill(final Chill card) {
         super(card);
     }
 
     @Override
-    public Kismet copy() {
-        return new Kismet(this);
+    public Chill copy() {
+        return new Chill(this);
     }
 }
 
-class KismetEffect extends ReplacementEffectImpl<KismetEffect> {
+class ChillCostIncreaseEffect extends CostModificationEffectImpl<ChillCostIncreaseEffect> {
 
-    KismetEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Tap);
-        staticText = "Artifacts, creatures, and lands played by your opponents enter the battlefield tapped";
+    ChillCostIncreaseEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
+        staticText = "Red spells cost {2} more to cast.";
     }
 
-    KismetEffect(final KismetEffect effect) {
+    ChillCostIncreaseEffect(ChillCostIncreaseEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanent(event.getTargetId());
-        if (target != null) {
-            target.setTapped(true);
-        }
-        return false;
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        CardUtil.increaseCost(abilityToModify, 2);
+        return true;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && (permanent.getCardType().contains(CardType.ARTIFACT) || 
-                                      permanent.getCardType().contains(CardType.CREATURE) || 
-                                      permanent.getCardType().contains(CardType.LAND))) {
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+            Card card = game.getCard(abilityToModify.getSourceId());
+            if (card != null && card.getColor().isRed()) {
                 return true;
             }
         }
@@ -101,12 +100,7 @@ class KismetEffect extends ReplacementEffectImpl<KismetEffect> {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public KismetEffect copy() {
-        return new KismetEffect(this);
+    public ChillCostIncreaseEffect copy() {
+        return new ChillCostIncreaseEffect(this);
     }
 }

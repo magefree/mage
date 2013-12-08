@@ -25,88 +25,85 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
  *
  * @author Quercitron
  */
-public class Kismet extends CardImpl<Kismet> {
+public class Sunweb extends CardImpl<Sunweb> {
 
-    public Kismet(UUID ownerId) {
-        super(ownerId, 319, "Kismet", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "5ED";
+    public Sunweb(UUID ownerId) {
+        super(ownerId, 51, "Sunweb", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "7ED";
+        this.subtype.add("Wall");
 
         this.color.setWhite(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(6);
 
-        // Artifacts, creatures, and lands played by your opponents enter the battlefield tapped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KismetEffect()));
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Sunweb can't block creatures with power 2 or less.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SunwebEffect()));
     }
 
-    public Kismet(final Kismet card) {
+    public Sunweb(final Sunweb card) {
         super(card);
     }
 
     @Override
-    public Kismet copy() {
-        return new Kismet(this);
+    public Sunweb copy() {
+        return new Sunweb(this);
     }
 }
 
-class KismetEffect extends ReplacementEffectImpl<KismetEffect> {
+class SunwebEffect extends RestrictionEffect<SunwebEffect> {
 
-    KismetEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Tap);
-        staticText = "Artifacts, creatures, and lands played by your opponents enter the battlefield tapped";
+    public SunwebEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "{this} can't block creatures with power 2 or less";
     }
 
-    KismetEffect(final KismetEffect effect) {
+    public SunwebEffect(final SunwebEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanent(event.getTargetId());
-        if (target != null) {
-            target.setTapped(true);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            return true;
         }
         return false;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && (permanent.getCardType().contains(CardType.ARTIFACT) || 
-                                      permanent.getCardType().contains(CardType.CREATURE) || 
-                                      permanent.getCardType().contains(CardType.LAND))) {
-                return true;
-            }
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        if (attacker != null) {
+            return attacker.getPower().getValue() > 2;
         }
-        return false;
+        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public KismetEffect copy() {
-        return new KismetEffect(this);
+    public SunwebEffect copy() {
+        return new SunwebEffect(this);
     }
 }

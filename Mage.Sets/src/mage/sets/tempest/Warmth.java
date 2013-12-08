@@ -25,75 +25,68 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author Quercitron
  */
-public class Kismet extends CardImpl<Kismet> {
+public class Warmth extends CardImpl<Warmth> {
 
-    public Kismet(UUID ownerId) {
-        super(ownerId, 319, "Kismet", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "5ED";
+    public Warmth(UUID ownerId) {
+        super(ownerId, 263, "Warmth", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "TMP";
 
         this.color.setWhite(true);
 
-        // Artifacts, creatures, and lands played by your opponents enter the battlefield tapped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KismetEffect()));
+        // Whenever an opponent casts a red spell, you gain 2 life.
+        this.addAbility(new WarmthTriggeredAbility());
     }
 
-    public Kismet(final Kismet card) {
+    public Warmth(final Warmth card) {
         super(card);
     }
 
     @Override
-    public Kismet copy() {
-        return new Kismet(this);
+    public Warmth copy() {
+        return new Warmth(this);
     }
 }
 
-class KismetEffect extends ReplacementEffectImpl<KismetEffect> {
+class WarmthTriggeredAbility extends TriggeredAbilityImpl<WarmthTriggeredAbility> {
 
-    KismetEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Tap);
-        staticText = "Artifacts, creatures, and lands played by your opponents enter the battlefield tapped";
+    public WarmthTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(2), false);
     }
 
-    KismetEffect(final KismetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanent(event.getTargetId());
-        if (target != null) {
-            target.setTapped(true);
-        }
-        return false;
+    public WarmthTriggeredAbility(final WarmthTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && (permanent.getCardType().contains(CardType.ARTIFACT) || 
-                                      permanent.getCardType().contains(CardType.CREATURE) || 
-                                      permanent.getCardType().contains(CardType.LAND))) {
+    public WarmthTriggeredAbility copy() {
+        return new WarmthTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST
+                && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+            Card card = game.getCard(event.getSourceId());
+            if (card != null && card.getColor().isRed()) {
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                 return true;
             }
         }
@@ -101,12 +94,7 @@ class KismetEffect extends ReplacementEffectImpl<KismetEffect> {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public KismetEffect copy() {
-        return new KismetEffect(this);
+    public String getRule() {
+        return "Whenever an opponent casts a red spell, you gain 2 life.";
     }
 }
