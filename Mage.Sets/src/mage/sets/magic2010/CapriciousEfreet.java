@@ -70,7 +70,7 @@ public class CapriciousEfreet extends CardImpl<CapriciousEfreet> {
 
         // At the beginning of your upkeep, choose target nonland permanent you control and up to two target nonland permanents you don't control. Destroy one of them at random.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new CapriciousEfreetEffect(), TargetController.YOU, false);
-        ability.addTarget(new TargetPermanent(filterControlled));
+        ability.addTarget(new TargetPermanent(filterControlled, true));
         ability.addTarget(new TargetPermanent(0, 2, filterNotControlled, false));
         this.addAbility(ability);
     }
@@ -118,7 +118,7 @@ class CapriciousEfreetEffect extends OneShotEffect<CapriciousEfreetEffect> {
         if (!targetPermanents.isEmpty()) {
             Random random = new Random();
             permanent = targetPermanents.get(random.nextInt(targetPermanents.size()));
-            permanent.destroy(source.getId(), game, false);
+            permanent.destroy(source.getSourceId(), game, false);
             return true;
         }
         return false;
