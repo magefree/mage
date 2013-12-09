@@ -801,6 +801,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         
         if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen ? 1 : 0))) {
             if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
+                if (this.getCardType().contains(CardType.CREATURE)) {
+                    game.informPlayers(new StringBuilder(this.getName()).append(" died").toString());
+                } else {
+                    game.informPlayers(new StringBuilder(this.getName()).append(" was destroyed").toString());
+                }
                 game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
                 return true;
             }
