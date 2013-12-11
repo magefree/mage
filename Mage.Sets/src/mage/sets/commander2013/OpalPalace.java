@@ -236,8 +236,8 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl<OpalPalace
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
             Integer castCount = (Integer)game.getState().getValue(permanent.getId() + "_castCount");
-            if (castCount != null && castCount.intValue() > 1) {
-                permanent.addCounters(CounterType.P1P1.createInstance(castCount-1), game);
+            if (castCount != null && castCount.intValue() > 0) {
+                permanent.addCounters(CounterType.P1P1.createInstance(castCount), game);
             }
         }
         return false;
