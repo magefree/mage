@@ -93,6 +93,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
+import mage.game.command.Commander;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -1800,6 +1801,20 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 if (!playableActivated.containsKey(ability.toString())) {
                     if (canPlay(ability, available, game)) {
                         playableActivated.put(ability.toString(), ability);
+                    }
+                }
+            }
+        }
+        // get cast commander if available
+        if (!(this.getCommanderId() == null)) {
+            Zone zone = game.getState().getZone(this.getCommanderId());
+            if (zone != null && zone.equals(Zone.COMMAND)) {
+                MageObject object = game.getObject(this.getCommanderId());
+                if (object != null) {
+                    for (ActivatedAbility ability : ((Commander) object).getAbilities().getActivatedAbilities(Zone.COMMAND)) {
+                        if (canPlay(ability, available, game)) {
+                            playableActivated.put(ability.toString(), ability);
+                        }
                     }
                 }
             }
