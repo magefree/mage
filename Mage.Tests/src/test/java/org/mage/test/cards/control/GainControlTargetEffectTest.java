@@ -17,7 +17,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class GainControlTargetEffectTest extends CardTestPlayerBase {
 
     /**
-     * Checks if control has changed and the controlled creature has Hase
+     * Checks if control has changed and the controlled creature has Haste
      * 
      */
     @Test
@@ -33,7 +33,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        // under opponent's control
+        // under control
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertAbility(playerA, "Silvercoat Lion", HasteAbility.getInstance(), true);
     }
