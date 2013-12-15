@@ -817,7 +817,8 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     public boolean sacrifice(UUID sourceId, Game game) {
         //20091005 - 701.13
         if (!game.replaceEvent(GameEvent.getEvent(EventType.SACRIFICE_PERMANENT, objectId, sourceId, controllerId))) {
-            if (moveToZone(Zone.GRAVEYARD, sourceId, game, true)) {
+            // Commander replacement effect does not prevent successful sacrifice
+            if (moveToZone(Zone.GRAVEYARD, sourceId, game, true) || game.getState().getZone(this.getId()).equals(Zone.COMMAND)) {
                 Player player = game.getPlayer(getControllerId());
                 if (player != null) {
                     game.informPlayers(new StringBuilder(player.getName()).append(" sacrificed ").append(this.getName()).toString());
@@ -976,7 +977,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
     @Override
     public boolean removeFromCombat(Game game) {
-        game.getCombat().removeFromCombat(objectId, game);
+        if (this.isAttacking() || this.blocking > 0) {
+            if (game.getCombat().removeFromCombat(objectId, game)) {
+                game.informPlayers(new StringBuilder(this.getName()).append(" removed from combat").toString());
+            }
+        }
         return true;
     }
 
