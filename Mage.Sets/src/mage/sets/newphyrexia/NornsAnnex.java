@@ -29,15 +29,19 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -65,7 +69,7 @@ public class NornsAnnex extends CardImpl<NornsAnnex> {
 
 class NornsAnnexReplacementEffect extends ReplacementEffectImpl<NornsAnnexReplacementEffect> {
 
-    private static final String effectText = "Creatures can't attack you unless their controller pays {WP} for each creature he or she controls that's attacking you";
+    private static final String effectText = "Creatures can't attack you or a planeswalker you control unless their controller pays {WP} for each creature he or she controls that's attacking you";
 
     NornsAnnexReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -101,8 +105,16 @@ class NornsAnnexReplacementEffect extends ReplacementEffectImpl<NornsAnnexReplac
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId())) {
-            return true;
+        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
+            if (event.getTargetId().equals(source.getControllerId()) ) {
+                return true;
+            }
+            // planeswalker
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
+                                  && permanent.getCardType().contains(CardType.PLANESWALKER)) {
+                return true;
+            }
         }
         return false;
     }
