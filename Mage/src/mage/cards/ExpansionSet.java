@@ -130,11 +130,7 @@ public abstract class ExpansionSet implements Serializable {
         criteria = new CardCriteria();
         criteria.setCodes(this.code).rarities(Rarity.MYTHIC).doubleFaced(false);
         List<CardInfo> mythic = CardRepository.instance.findCards(criteria);
-
-        criteria = new CardCriteria();
-        criteria.setCodes(this.code).doubleFaced(true);
-        List<CardInfo> doubleFaced = CardRepository.instance.findCards(criteria);
-
+     
         for (int i = 0; i < numBoosterLands; i++) {
             addToBooster(booster, basicLand);
         }
@@ -151,13 +147,13 @@ public abstract class ExpansionSet implements Serializable {
                 addToBooster(booster, rare);
             }
         }
-        for (int i = 0; i < numBoosterDoubleFaced; i++) {
-            addToBooster(booster, doubleFaced);
+
+        if (numBoosterDoubleFaced > 0) {
+            this.addDoubleFace(booster);
         }
 
         if (numBoosterSpecial > 0) {
             int specialCards = 0;
-            Random randomno = new Random();
             List<CardInfo> specialMythic = getSpecialMythic();
             if (specialMythic != null) {
                 specialCards += specialMythic.size();
@@ -176,7 +172,7 @@ public abstract class ExpansionSet implements Serializable {
             }
             if (specialCards > 0) {
                 for (int i = 0; i < numBoosterSpecial; i++) {
-                    if (randomno.nextInt(15) < 10) {
+                    if (rnd.nextInt(15) < 10) {
                         if (specialCommon != null) {
                             addToBooster(booster, specialCommon);
                         } else {
@@ -184,7 +180,7 @@ public abstract class ExpansionSet implements Serializable {
                         }
                         continue;
                     }
-                    if (randomno.nextInt(5) < 4) {
+                    if (rnd.nextInt(5) < 4) {
                         if (specialUncommon != null) {
                             addToBooster(booster, specialUncommon);
                         } else {
@@ -192,7 +188,7 @@ public abstract class ExpansionSet implements Serializable {
                         }
                         continue;
                     }
-                    if (randomno.nextInt(8) < 7) {
+                    if (rnd.nextInt(8) < 7) {
                         if (specialRare != null) {
                             addToBooster(booster, specialRare);
                         } else {
@@ -210,6 +206,27 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         return booster;
+    }
+
+    /* add double faced card for Innistrad booster  
+     * rarity near as the normal distribution
+     */
+    private void addDoubleFace(List<Card> booster) {
+        for (int i = 0; i < numBoosterDoubleFaced; i++) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes(this.code).doubleFaced(true);
+            if (rnd.nextInt(15) < 10) {
+                criteria.rarities(Rarity.COMMON);
+            } else if (rnd.nextInt(5) < 4) {
+                criteria.rarities(Rarity.UNCOMMON);
+            } else if (rnd.nextInt(8) < 7) {
+                criteria.rarities(Rarity.RARE);
+            } else {
+                criteria.rarities(Rarity.MYTHIC);
+            }
+            List<CardInfo> doubleFacedCards = CardRepository.instance.findCards(criteria);
+            addToBooster(booster, doubleFacedCards);
+        }
     }
 
     private void addToBooster(List<Card> booster, List<CardInfo> cards) {
