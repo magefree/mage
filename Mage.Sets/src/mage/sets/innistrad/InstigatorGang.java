@@ -41,6 +41,8 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
 
 import java.util.UUID;
+import mage.abilities.condition.common.TransformedCondition;
+import mage.abilities.decorator.ConditionalContinousEffect;
 
 /**
  * @author nantuko
@@ -61,7 +63,10 @@ public class InstigatorGang extends CardImpl<InstigatorGang> {
         this.toughness = new MageInt(3);
 
         // Attacking creatures you control get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature(), false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                new ConditionalContinousEffect(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature()), 
+                new TransformedCondition(true), "Attacking creatures you control get +1/+0")));
+
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Instigator Gang.
         this.addAbility(new TransformAbility());
