@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
@@ -47,11 +48,12 @@ import mage.target.TargetPermanent;
  */
 public class KingSuleiman extends CardImpl<KingSuleiman> {
 
-    private static final FilterPermanent filter = new FilterPermanent("target Djinn or Efreet");
+    private static final FilterPermanent filter = new FilterPermanent("Djinn or Efreet");
 
     static {
-        filter.add(new SubtypePredicate("Djinn"));
-        filter.add(new SubtypePredicate("Efreet"));
+        filter.add( Predicates.or(
+                new SubtypePredicate("Djinn"),
+                new SubtypePredicate("Efreet")));
     }
 
     public KingSuleiman(UUID ownerId) {

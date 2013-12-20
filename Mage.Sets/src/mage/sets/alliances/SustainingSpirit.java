@@ -78,7 +78,7 @@ class SustainingSpiritReplacementEffect extends ReplacementEffectImpl<Sustaining
 
     public SustainingSpiritReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead";
+        staticText = "Damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }
 
     public SustainingSpiritReplacementEffect(final SustainingSpiritReplacementEffect effect) {
@@ -94,16 +94,17 @@ class SustainingSpiritReplacementEffect extends ReplacementEffectImpl<Sustaining
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType().equals(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS)) {
             Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            }
             if (permanent != null) {
-                Player controller = game.getPlayer(permanent.getControllerId());
+                Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null
-                        && (controller.getLife() - event.getAmount()) < 1
+                        && (controller.getLife() > 0) &&(controller.getLife() - event.getAmount()) < 1
                         && event.getPlayerId().equals(controller.getId())
                         ) {
                     event.setAmount(controller.getLife() - 1);
+                    //unsure how to make this comply with
+                    // 10/1/2008: The ability doesn't change how much damage is dealt;
+                    // it just changes how much life that damage makes you lose.
+                    // An effect such as Spirit Link will see the full amount of damage being dealt.
                 }
             }
         }

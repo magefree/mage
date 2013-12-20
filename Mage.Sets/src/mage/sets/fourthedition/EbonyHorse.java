@@ -33,16 +33,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.PreventDamageFromTargetEffect;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.*;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetAttackingCreature;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -64,9 +61,11 @@ public class EbonyHorse extends CardImpl<EbonyHorse> {
         // {2}, {tap}: Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new PreventDamageFromTargetEffect(Duration.EndOfTurn, true));
-        ability.addEffect(new PreventDamageTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addEffect(new PreventCombatDamageSourceEffect(Duration.EndOfTurn));
+        ability.addEffect(new PreventCombatDamageFromSourceEffect(Duration.EndOfTurn));
+        Target target = new TargetCreaturePermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 

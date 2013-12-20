@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -51,6 +52,7 @@ public class Accelerate extends CardImpl<Accelerate> {
 
         // Target creature gains haste until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
