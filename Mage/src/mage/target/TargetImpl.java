@@ -298,24 +298,35 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
     @Override
     public boolean isLegal(Ability source, Game game) {
         //20101001 - 608.2b
+        Set <UUID> illegalTargets = new HashSet<UUID>();
+        int replacedTargets = 0;
         for (UUID targetId: targets.keySet()) {
             Card card = game.getCard(targetId);
             if (card != null) {
                 if (zoneChangeCounters.containsKey(targetId) && zoneChangeCounters.get(targetId) != card.getZoneChangeCounter()) {
-                    continue; // it's not legal so continue to have a look at other targeted cards
+                    illegalTargets.add(targetId);
+                    continue; // it's not legal so continue to have a look at other targeted objects
                 }
             }
             if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId()))) {
+                replacedTargets++;
                 continue;
             }
-            if (canTarget(targetId, source, game)) {
-                return true;
+            if (!canTarget(targetId, source, game)) {
+                illegalTargets.add(targetId);
             }
+        }
+        // remove illegal targets, needed to handle if only a subset of targets was illegal
+        for (UUID targetId: illegalTargets) {
+            targets.remove(targetId);
+        }
+        if (replacedTargets > 0 && replacedTargets == targets.size()) {
+            return false;
         }
         if (minNumberOfTargets == 0 && targets.isEmpty()) {
             return true;
         }
-        return false;
+        return targets.size() > 0;
     }
 
     @Override

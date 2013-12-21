@@ -44,14 +44,10 @@ public class FirstTargetPointer implements TargetPointer {
     public List<UUID> getTargets(Game game, Ability source) {
         ArrayList<UUID> target = new ArrayList<UUID>();
         if (source.getTargets().size() > 0) {
-            Target currentTarget = source.getTargets().get(0);
             for (UUID targetId : source.getTargets().get(0).getTargets()) {
                 Card card = game.getCard(targetId);
                 if (card != null && zoneChangeCounter.containsKey(targetId)
                         && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
-                    continue;
-                }
-                if (!currentTarget.canTarget(targetId, source, game)) {
                     continue;
                 }
                 target.add(targetId);
