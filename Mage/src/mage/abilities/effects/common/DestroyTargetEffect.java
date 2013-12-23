@@ -37,6 +37,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.targetpointer.FirstTargetPointer;
+import mage.util.CardUtil;
 
 /**
  *
@@ -107,7 +108,7 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
         } else if (mode.getTargets().get(0).getNumberOfTargets() == 1) {
             sb.append("Destroy target ").append(mode.getTargets().get(0).getTargetName());
         } else {
-            sb.append("Destroy ").append(mode.getTargets().get(0).getNumberOfTargets()).append(" target ").append(mode.getTargets().get(0).getTargetName());
+            sb.append("Destroy ").append(CardUtil.numberToText(mode.getTargets().get(0).getNumberOfTargets())).append(" target ").append(mode.getTargets().get(0).getTargetName());
         }
         if (noRegen) {
             sb.append(". It can't be regenerated");

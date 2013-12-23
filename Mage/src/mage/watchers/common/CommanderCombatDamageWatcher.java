@@ -31,11 +31,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import mage.MageObject;
+import mage.cards.Card;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.WatcherImpl;
 
@@ -43,9 +45,6 @@ import mage.watchers.WatcherImpl;
  *903.14a A player that’s been dealt 21 or more combat damage by the same commander
  * over the course of the game loses the game. (This is a state-based action. See rule 704.) 
  *
- */
-
-/**
  *
  * @author Plopman
  */
@@ -74,19 +73,56 @@ public class CommanderCombatDamageWatcher extends WatcherImpl<CommanderCombatDam
         if (event.getType() == EventType.DAMAGED_PLAYER && event instanceof DamagedPlayerEvent) {
             if (sourceId.equals(event.getSourceId())) {
                 DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-                UUID playerUUID = event.getTargetId();
-                Integer damage = damageToPlayer.get(playerUUID);
-                if(damage == null){
-                    damage = 0;
-                }
-                damage += damageEvent.getAmount();
-                damageToPlayer.put(playerUUID, damage);
-                Player player = game.getPlayer(playerUUID);
-                MageObject commander = game.getObject(sourceId);
-                if (player != null && commander != null){
-                    game.informPlayers(commander.getName() + " did " + damage + " damages to " + player.getName() + " during the game.");
+                if (damageEvent.isCombatDamage()) {
+                    UUID playerUUID = event.getTargetId();
+                    Integer damage = damageToPlayer.get(playerUUID);
+                    if(damage == null){
+                        damage = 0;
+                    }
+                    damage += damageEvent.getAmount();
+                    damageToPlayer.put(playerUUID, damage);
+                    Player player = game.getPlayer(playerUUID);
+                    MageObject commander = game.getObject(sourceId);
+                    if (player != null && commander != null){
+                        game.informPlayers(commander.getName() + " did " + damage + " combat damage to " + player.getName() + " during the game.");
+                        this.addCardInfoToCommander(game);
+                    }
                 }
             }
+        }
+        // Add card info to the commander
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(sourceId)) {
+            this.addCardInfoToCommander(game);
+        }
+    }
+
+    public void addCardInfoToCommander(Game game) {
+        MageObject object = game.getPermanent(sourceId);
+        if (object == null) {
+            object = game.getCard(sourceId);
+        }
+        if (object != null) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("<b>Commander</b>");
+            Integer castCount = (Integer)game.getState().getValue(sourceId + "_castCount");
+            if (castCount != null) {
+                sb.append(" was ").append(castCount).append(castCount.intValue() == 1 ? " time":" times").append(" casted from the command zone.");
+            }
+            this.addInfo(object, "Commander",sb.toString());
+            for (Map.Entry<UUID, Integer> entry : damageToPlayer.entrySet()) {
+                Player damagedPlayer = game.getPlayer(entry.getKey());
+                sb.setLength(0);
+                sb.append("<b>Commander</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getName()).append(".");
+                this.addInfo(object, new StringBuilder("Commander").append(entry.getKey()).toString(),sb.toString());
+            }
+        }
+    }
+
+    private void addInfo(MageObject object, String key, String value) {
+        if (object instanceof Card) {
+            ((Card) object).addInfo(key, value);
+        } else if (object instanceof Permanent) {
+            ((Permanent) object).addInfo(key, value);
         }
     }
 

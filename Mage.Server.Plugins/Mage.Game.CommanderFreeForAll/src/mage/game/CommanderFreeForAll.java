@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,58 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
 
+package mage.game;
 
-import mage.abilities.SpellAbility;
-import mage.cards.Card;
-import mage.constants.SpellAbilityType;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.watchers.common.CommanderCombatDamageWatcher;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.RangeOfInfluence;
+import mage.game.match.MatchType;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class CastCommanderAbility extends SpellAbility {
+public class CommanderFreeForAll extends GameCommanderImpl {
 
-    public CastCommanderAbility(Card card) {
-        super(card.getManaCost(), card.getName(), Zone.COMMAND, SpellAbilityType.BASE);
-        this.timing = TimingRule.SORCERY;
-        this.usesStack = true;
-        this.controllerId = card.getOwnerId();
-        this.sourceId = card.getId();
+    private int numPlayers;
+
+    public CommanderFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
+        super(attackOption, range, freeMulligans);
     }
 
-    public CastCommanderAbility(final CastCommanderAbility ability) {
-        super(ability);
+    public CommanderFreeForAll(final CommanderFreeForAll game) {
+        super(game);
+        this.numPlayers = game.numPlayers;
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (super.activate(game, noMana)) {
-            // save amount of times commander was cast
-            Integer castCount = (Integer)game.getState().getValue(sourceId + "_castCount");
-            if(castCount != null){
-                castCount++;
-                game.getState().setValue(sourceId + "_castCount", castCount);
-            }
-            else {
-                castCount = 1;
-                game.getState().setValue(sourceId + "_castCount", castCount);
-            }
-            return true;
-        }
-        return false;
+    public MatchType getGameType() {
+        return new CommanderFreeForAllType();
     }
 
+    @Override
+    public int getNumPlayers() {
+        return numPlayers;
+    }
 
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
 
     @Override
-    public CastCommanderAbility copy() {
-        return new CastCommanderAbility(this);
+    public CommanderFreeForAll copy() {
+        return new CommanderFreeForAll(this);
     }
 
 }

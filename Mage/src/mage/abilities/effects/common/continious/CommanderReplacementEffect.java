@@ -28,6 +28,7 @@
 package mage.abilities.effects.common.continious;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -39,6 +40,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.watchers.common.CommanderCombatDamageWatcher;
 
 /**
  *
@@ -83,15 +85,18 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl<CommanderR
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getOwnerId());
                 if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
-                    return permanent.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
+                    boolean result = permanent.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
+                    return result;
                 }
             }
         } else {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
+
                 Player player = game.getPlayer(card.getOwnerId());
                 if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
-                    return card.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
+                    boolean result  = card.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
+                    return result;
                 }
             }
         }
