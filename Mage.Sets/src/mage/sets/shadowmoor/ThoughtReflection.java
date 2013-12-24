@@ -94,7 +94,7 @@ class ThoughtReflectionReplacementEffect extends ReplacementEffectImpl<ThoughtRe
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player you = game.getPlayer(event.getPlayerId());
         if (you != null) {
-            you.drawCards(2, game);
+            you.drawCards(2, game, event.getAppliedEffects());
         }
         return true;
     }
