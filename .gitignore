@@ -73,3 +73,4 @@ Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 *.classpath
 *.iml
 /submitted
+/Mage.Server.Plugins/Mage.Game.CommanderFreeForAll/target/
