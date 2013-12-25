@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOfPreCombatMainPhaseTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfPreCombatMainDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
@@ -96,8 +96,8 @@ class PlasmCaptureCounterEffect extends OneShotEffect<PlasmCaptureCounterEffect>
         if (spell != null) {
             result = game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
             int mana = spell.getManaCost().convertedManaCost();
-            AtTheBeginOfPreCombatMainPhaseTriggeredAbility delayedAbility =
-                    new AtTheBeginOfPreCombatMainPhaseTriggeredAbility(new PlasmCaptureManaEffect(mana), TargetController.YOU);
+            AtTheBeginOfPreCombatMainDelayedTriggeredAbility delayedAbility =
+                    new AtTheBeginOfPreCombatMainDelayedTriggeredAbility(new PlasmCaptureManaEffect(mana), TargetController.YOU);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             game.addDelayedTriggeredAbility(delayedAbility);

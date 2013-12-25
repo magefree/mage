@@ -111,7 +111,9 @@ public class SacrificeOpponentsEffect extends OneShotEffect<SacrificeOpponentsEf
             sb.append(amount.toString());
         } else {
             if (amount.toString().equals("1")) {
-                sb.append("a");
+                if (!filter.getMessage().startsWith("a ") && !filter.getMessage().startsWith("an ")) {
+                    sb.append("a");
+                }
             } else {
                 sb.append(CardUtil.numberToText(amount.toString()));
             }

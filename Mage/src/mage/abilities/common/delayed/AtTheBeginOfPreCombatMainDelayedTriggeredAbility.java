@@ -40,23 +40,23 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class AtTheBeginOfPreCombatMainPhaseTriggeredAbility extends DelayedTriggeredAbility<AtTheBeginOfPreCombatMainPhaseTriggeredAbility> {
+public class AtTheBeginOfPreCombatMainDelayedTriggeredAbility extends DelayedTriggeredAbility<AtTheBeginOfPreCombatMainDelayedTriggeredAbility> {
 
     private TargetController targetController;
 
-    public AtTheBeginOfPreCombatMainPhaseTriggeredAbility(Effect effect, TargetController targetController) {
+    public AtTheBeginOfPreCombatMainDelayedTriggeredAbility(Effect effect, TargetController targetController) {
         super(effect);
         this.targetController = targetController;
     }
 
-    public AtTheBeginOfPreCombatMainPhaseTriggeredAbility(AtTheBeginOfPreCombatMainPhaseTriggeredAbility ability) {
+    public AtTheBeginOfPreCombatMainDelayedTriggeredAbility(AtTheBeginOfPreCombatMainDelayedTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
     }
 
     @Override
-    public AtTheBeginOfPreCombatMainPhaseTriggeredAbility copy() {
-        return new AtTheBeginOfPreCombatMainPhaseTriggeredAbility(this);
+    public AtTheBeginOfPreCombatMainDelayedTriggeredAbility copy() {
+        return new AtTheBeginOfPreCombatMainDelayedTriggeredAbility(this);
     }
 
     @Override

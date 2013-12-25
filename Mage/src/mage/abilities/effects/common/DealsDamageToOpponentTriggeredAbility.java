@@ -31,6 +31,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagePlayerEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -39,16 +41,24 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl<DealsDamageToOpponentTriggeredAbility> {
 
+    boolean onlyCombat;
+
     public DealsDamageToOpponentTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-    }
+        this(effect, false, false);
+   }
     
     public DealsDamageToOpponentTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, false);
+    }
+
+    public DealsDamageToOpponentTriggeredAbility(Effect effect, boolean optional, boolean onlyCombat) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.onlyCombat = onlyCombat;
     }
 
     public DealsDamageToOpponentTriggeredAbility(final DealsDamageToOpponentTriggeredAbility ability) {
         super(ability);
+        this.onlyCombat = ability.onlyCombat;
     }
 
     @Override
@@ -60,8 +70,15 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl<
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
                 && game.getOpponents(this.getControllerId()).contains(event.getTargetId())) {
+            if (onlyCombat && event instanceof DamagedPlayerEvent) {
+                DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+                if (!damageEvent.isCombatDamage()) {
+                    return false;
+                }
+            }
             for (Effect effect : getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                effect.setValue("damage", event.getAmount());
             }
             return true;
         }
@@ -70,6 +87,11 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl<
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals damage to an opponent, " + super.getRule();
+        StringBuilder sb = new StringBuilder("Whenever {this} deals ");
+        if (onlyCombat) {
+            sb.append("combat ");
+        }
+        sb.append("damage to an opponent, ").append(super.getRule());
+        return sb.toString();
     }
 }
