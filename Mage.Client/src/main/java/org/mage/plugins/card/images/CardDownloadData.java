@@ -9,6 +9,7 @@ public class CardDownloadData {
     private String name;
     private String downloadName;
     private String set;
+    private String tokenSetCode;
     private Integer collectorId;
     private Integer type;
     private boolean token;
@@ -20,15 +21,15 @@ public class CardDownloadData {
     private boolean usesVariousArt;
     private boolean isType2;
 
-    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type) {
-        this(name, set, collectorId, usesVariousArt, type, false);
+    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, String tokenSetCode) {
+        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, false);
     }
 
-    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, boolean token) {
-        this(name, set, collectorId, usesVariousArt, type, token, false, false);
+    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, boolean token) {
+        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, token, false, false);
     }
 
-    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, boolean token, boolean twoFacedCard, boolean secondSide) {
+    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, boolean token, boolean twoFacedCard, boolean secondSide) {
         this.name = name;
         this.set = set;
         this.collectorId = collectorId;
@@ -37,6 +38,7 @@ public class CardDownloadData {
         this.token = token;
         this.twoFacedCard = twoFacedCard;
         this.secondSide = secondSide;
+        this.tokenSetCode = tokenSetCode;
     }
 
     public CardDownloadData(final CardDownloadData card) {
@@ -48,6 +50,7 @@ public class CardDownloadData {
         this.secondSide = card.secondSide;
         this.type = card.type;
         this.usesVariousArt = card.usesVariousArt;
+        this.tokenSetCode = card.tokenSetCode;
     }
 
     @Override
@@ -115,6 +118,14 @@ public class CardDownloadData {
 
     public void setSet(String set) {
         this.set = set;
+    }
+
+    public String getTokenSetCode() {
+        return tokenSetCode;
+    }
+
+    public void setTokenSetCode(String tokenSetCode) {
+        this.tokenSetCode = tokenSetCode;
     }
 
     public boolean isToken() {

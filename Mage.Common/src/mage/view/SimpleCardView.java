@@ -38,16 +38,18 @@ import java.util.UUID;
 public class SimpleCardView implements Serializable {
     protected UUID id;
     protected String expansionSetCode;
+    protected String tokenSetCode;
     protected int cardNumber;
     protected boolean faceDown;
     protected boolean usesVariousArt;
 
-    public SimpleCardView(UUID id, String expansionSetCode, int cardNumber, boolean faceDown, boolean usesVariousArt) {
+    public SimpleCardView(UUID id, String expansionSetCode, int cardNumber, boolean faceDown, boolean usesVariousArt, String tokenSetCode) {
         this.id = id;
         this.expansionSetCode = expansionSetCode;
         this.cardNumber = cardNumber;
         this.faceDown = faceDown;
         this.usesVariousArt = usesVariousArt;
+        this.tokenSetCode = tokenSetCode;
     }
 
     public UUID getId() {
@@ -69,4 +71,9 @@ public class SimpleCardView implements Serializable {
     public boolean getUsesVariousArt() {
         return usesVariousArt;
     }
+
+    public String getTokenSetCode() {
+        return tokenSetCode;
+    }
+   
 }

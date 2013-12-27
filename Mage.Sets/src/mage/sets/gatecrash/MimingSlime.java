@@ -114,5 +114,6 @@ class OozeToken extends Token {
         color.setGreen(true);
         power = new MageInt(0);
         toughness = new MageInt(0);
+        setOriginalExpansionSetCode("RTR");
     }
 }

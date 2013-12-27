@@ -49,7 +49,7 @@ public class ImageCache {
      * Common pattern for keys.
      * Format: "<cardname>#<setname>#<collectorID>"
      */
-    private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)");
+    private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)");
 
     static {
         imageCache = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
@@ -73,15 +73,16 @@ public class ImageCache {
                         String set = m.group(2);
                         Integer type = Integer.parseInt(m.group(3));
                         Integer collectorId = Integer.parseInt(m.group(4));
+                        String tokenSetCode = m.group(5);
 
-                        CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type);
+                        CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode);
 
                         String path;
                         if (collectorId == 0) {
                             info.setToken(true);
                             path = CardImageUtils.generateTokenImagePath(info);
                             if (path == null) {
-                                path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename;
+                                path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.tokenFrameFilename;
                             }
                         } else {
                             path = CardImageUtils.generateImagePath(info);
@@ -194,11 +195,12 @@ public class ImageCache {
      * Returns the map key for a card, without any suffixes for the image size.
      */
     private static String getKey(CardView card) {
-        String set = card.getExpansionSetCode();
-        int type = card.getType();
-        String key = card.getName() + "#" + set + "#" + type + "#" + String.valueOf(card.getCardNumber());
-
-        return key;
+        StringBuilder sb = new StringBuilder(card.getName()).append("#");
+        sb.append(card.getExpansionSetCode()).append("#");
+        sb.append(card.getType()).append("#");
+        sb.append(card.getCardNumber()).append("#");
+        sb.append(card.getTokenSetCode() == null ? "":card.getTokenSetCode());
+        return sb.toString();
     }
 
     /**

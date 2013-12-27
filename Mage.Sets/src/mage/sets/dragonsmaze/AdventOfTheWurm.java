@@ -77,6 +77,8 @@ public class AdventOfTheWurm extends CardImpl<AdventOfTheWurm> {
             toughness = new MageInt(5);
 
             addAbility(TrampleAbility.getInstance());
+            // for image
+            setOriginalExpansionSetCode("RTR");
         }
 
     }

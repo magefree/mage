@@ -67,6 +67,7 @@ public class PermanentView extends CardView {
         if (isToken()) {
             original = new CardView(((PermanentToken)permanent).getToken());
             original.expansionSetCode = permanent.getExpansionSetCode();
+            tokenSetCode = original.getTokenSetCode();
         }
         else {
             if (card != null) {

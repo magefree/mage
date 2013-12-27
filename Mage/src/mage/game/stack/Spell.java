@@ -453,6 +453,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     @Override
+    public String getTokenSetCode() {
+        return card.getTokenSetCode();
+    }
+
+    @Override
     public void setExpansionSetCode(String expansionSetCode) {}
 
     @Override

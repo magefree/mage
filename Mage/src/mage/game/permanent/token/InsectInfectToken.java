@@ -47,5 +47,6 @@ public class InsectInfectToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(InfectAbility.getInstance());
+        setOriginalExpansionSetCode("SOM");
     }
 }

@@ -44,5 +44,6 @@ public class SpiritWhiteToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
+        this.setOriginalExpansionSetCode("SHM");
     }
 }

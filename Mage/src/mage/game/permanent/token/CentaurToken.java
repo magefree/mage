@@ -45,6 +45,7 @@ public class CentaurToken extends Token {
         subtype.add("Centaur");
         power = new MageInt(3);
         toughness = new MageInt(3);
+        setOriginalExpansionSetCode("RTR");
     }
 
 }

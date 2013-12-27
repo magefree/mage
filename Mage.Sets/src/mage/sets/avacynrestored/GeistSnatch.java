@@ -110,6 +110,8 @@ class SpiritBlueToken extends Token {
         color.setBlue(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+        setTokenType(2);
         addAbility(FlyingAbility.getInstance());
     }
+
 }

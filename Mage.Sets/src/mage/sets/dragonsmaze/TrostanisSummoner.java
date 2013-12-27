@@ -85,5 +85,6 @@ class RhinoToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
         addAbility(TrampleAbility.getInstance());
+        setOriginalExpansionSetCode("RTR");
     }
 }

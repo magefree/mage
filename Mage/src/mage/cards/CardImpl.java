@@ -63,6 +63,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     protected int cardNumber;
     protected List<Watcher> watchers = new ArrayList<Watcher>();
     protected String expansionSetCode;
+    protected String tokenSetCode;
     protected Rarity rarity;
     protected boolean faceDown;
     protected boolean canTransform;
@@ -249,6 +250,11 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     @Override
     public String getExpansionSetCode() {
         return expansionSetCode;
+    }
+
+    @Override
+    public String getTokenSetCode() {
+        return tokenSetCode;
     }
 
     @Override

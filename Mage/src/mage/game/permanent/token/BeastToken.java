@@ -28,9 +28,9 @@
 
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.CardType;
 
 /**
  *
@@ -45,6 +45,7 @@ public class BeastToken extends Token {
         subtype.add("Beast");
         power = new MageInt(3);
         toughness = new MageInt(3);
+        setOriginalExpansionSetCode("LRW");
     }
 
 }

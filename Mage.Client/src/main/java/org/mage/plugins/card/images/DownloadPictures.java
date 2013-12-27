@@ -196,7 +196,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         TFile file;
         for (CardInfo card : allCards) {
             if (card.getCardNumber() > 0 && !card.getSetCode().isEmpty()) {
-                CardDownloadData url = new CardDownloadData(card.getName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
+                CardDownloadData url = new CardDownloadData(card.getName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", false, card.isDoubleFaced(), card.isNightCard());
                 file = new TFile(CardImageUtils.generateImagePath(url));
                 if (!file.exists()) {
                     return true;
@@ -234,7 +234,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (card.getCardNumber() > 0 && !card.getSetCode().isEmpty()
                         && !ignoreUrls.contains(card.getSetCode())) {
                     String cardName = card.getName();
-                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
+                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", false, card.isDoubleFaced(), card.isNightCard());
                     if (url.getUsesVariousArt()) {
                         url.setDownloadName(createDownloadName(card));
                     }
@@ -251,14 +251,14 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("Second side card can't have empty name.");
                         }
-                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), true);
+                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", false, card.isDoubleFaced(), true);
                         allCardsUrls.add(url);
                     }
                     if (card.isFlipCard()) {
                         if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
                             throw new IllegalStateException("Flipped card can't have empty name.");
                         }
-                        url = new CardDownloadData(card.getFlipCardName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
+                        url = new CardDownloadData(card.getFlipCardName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", false, card.isDoubleFaced(), card.isNightCard());
                         url.setFlipCard(true);
                         url.setFlippedSide(true);
                         allCardsUrls.add(url);
@@ -330,15 +330,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     if (params.length >= 4) {
                         if (params[1].toLowerCase().equals("generate") && params[2].startsWith("TOK:")) {
                             String set = params[2].substring(4);
-                            CardDownloadData card = new CardDownloadData(params[3], set, 0, false, 0, true);
+                            CardDownloadData card = new CardDownloadData(params[3], set, 0, false, 0, "", true);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM:")) {
                             String set = params[2].substring(7);
-                            CardDownloadData card = new CardDownloadData("Emblem " + params[3], set, 0, false,0, true);
+                            CardDownloadData card = new CardDownloadData("Emblem " + params[3], set, 0, false,0, "", true);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM-:")) {
                             String set = params[2].substring(8);
-                            CardDownloadData card = new CardDownloadData(params[3] + " Emblem", set, 0, false, 0, true);
+                            CardDownloadData card = new CardDownloadData(params[3] + " Emblem", set, 0, false, 0, "", true);
                             list.add(card);
                         }
                     } else {

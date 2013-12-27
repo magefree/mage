@@ -58,6 +58,7 @@ public interface Card extends MageObject {
     List<String> getRules();
     List<Watcher> getWatchers();
     String getExpansionSetCode();
+    String getTokenSetCode();
     void setExpansionSetCode(String expansionSetCode);
     void setFaceDown(boolean value);
     boolean isFaceDown();

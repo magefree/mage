@@ -6,14 +6,9 @@
 
 package org.mage.plugins.card.dl.sources;
 
-
-import com.google.common.collect.AbstractIterator;
-import org.mage.plugins.card.dl.DownloadJob;
-
 import java.io.File;
 import java.util.*;
-
-import static java.lang.String.format;
+import org.mage.plugins.card.dl.DownloadJob;
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 
@@ -30,6 +25,7 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
     private static final Map<String, String> directLinks = new LinkedHashMap<String, String>();
 
     public static final String cardbackFilename = "cardback.jpg";
+    public static final String tokenFrameFilename = "tokenFrame.png";
 
     static {
         directLinks.put(cardbackFilename, backsideUrl);

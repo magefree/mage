@@ -90,5 +90,6 @@ class BirdToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
+        setOriginalExpansionSetCode("RTR");
     }
 }

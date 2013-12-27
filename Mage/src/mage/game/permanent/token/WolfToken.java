@@ -46,6 +46,7 @@ public class WolfToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
         setTokenType(Type.SECOND.code);
+        this.setOriginalExpansionSetCode("ISD");
     }
 
     public WolfToken(Token.Type type) {

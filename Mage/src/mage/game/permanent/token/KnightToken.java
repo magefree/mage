@@ -19,5 +19,6 @@ public class KnightToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(VigilanceAbility.getInstance());
+        setOriginalExpansionSetCode("RTR");
     }
 }

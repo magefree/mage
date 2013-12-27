@@ -109,7 +109,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(Card card) {
-        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), card.getUsesVariousArt());
+        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), card.getUsesVariousArt(), card.getTokenSetCode());
 
         // no information available for face down cards
         if (this.faceDown) {
@@ -223,7 +223,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(MageObject object) {
-        super(object.getId(), "", 0, false, false);
+        super(object.getId(), "", 0, false, false, "");
         this.name = object.getName();
         this.displayName = object.getName();
         if (object instanceof Permanent) {
@@ -267,7 +267,7 @@ public class CardView extends SimpleCardView {
     }
 
     protected CardView() {
-        super(null, "", 0, false, false);
+        super(null, "", 0, false, false, "");
     }
     
     public CardView(EmblemView emblem) {
@@ -282,7 +282,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(boolean empty) {
-        super(null, "", 0, false, false);
+        super(null, "", 0, false, false, "");
         if (!empty) {
             throw new IllegalArgumentException("Not supported.");
         }
@@ -314,7 +314,7 @@ public class CardView extends SimpleCardView {
     }
 
     CardView(Token token) {
-        super(token.getId(), "", 0, false, false);
+        super(token.getId(), "", 0, false, false, "");
         this.isToken  = true;
         this.id = token.getId();
         this.name = token.getName();
@@ -330,6 +330,7 @@ public class CardView extends SimpleCardView {
         this.manaCost = token.getManaCost().getSymbols();
         this.rarity = Rarity.NA;
         this.type = token.getTokenType();
+        this.tokenSetCode = token.getOriginalExpansionSetCode();
     }
 
     protected final void setTargets(Targets targets) {

@@ -1,12 +1,9 @@
 package org.mage.plugins.card.utils;
 
 import de.schlichtherle.truezip.file.TFile;
-
-import java.io.File;
 import java.util.HashMap;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
-import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.properties.SettingsManager;
 
@@ -27,11 +24,10 @@ public class CardImageUtils {
             String filePath = getTokenImagePath(card);
             TFile file = new TFile(filePath);
 
-            // Issue #329
-            /*if (!file.exists()) {
+            if (!file.exists() && card.getTokenSetCode() != null) {
                 filePath = searchForCardImage(card);
                 file = new TFile(filePath);
-            }*/
+            }
 
             if (file.exists()) {
                 pathCache.put(card, filePath);
@@ -65,16 +61,23 @@ public class CardImageUtils {
         TFile file;
         String path;
         CardDownloadData c = new CardDownloadData(card);
-
-        for (String set : SettingsManager.getIntance().getTokenLookupOrder()) {
-            c.setSet(set);
-            path = getTokenImagePath(c);
-            file = new TFile(path);
-            if (file.exists()) {
-                pathCache.put(card, path);
-                return path;
-            }
+        c.setSet(card.getTokenSetCode());
+        path = getTokenImagePath(c);
+        file = new TFile(path);
+        if (file.exists()) {
+            pathCache.put(card, path);
+            return path;
         }
+
+//        for (String set : SettingsManager.getIntance().getTokenLookupOrder()) {
+//            c.setSet(set);
+//            path = getTokenImagePath(c);
+//            file = new TFile(path);
+//            if (file.exists()) {
+//                pathCache.put(card, path);
+//                return path;
+//            }
+//        }
         return "";
     }
 
@@ -91,8 +94,8 @@ public class CardImageUtils {
 
     private static String getImageDir(CardDownloadData card, String imagesPath) {
         if (card.getSet() == null) {
-            return "";
-        }
+                return "";
+            }
         String set = updateSet(card.getSet(), false).toUpperCase();
         String imagesDir = (imagesPath != null ? imagesPath :  Constants.IO.imageBaseDir);
         if (card.isToken()) {

@@ -113,5 +113,6 @@ class MysticGenesisOozeToken extends Token {
         subtype.add("Ooze");
         power = new MageInt(0);
         toughness = new MageInt(0);
+        setOriginalExpansionSetCode("RTR");
     }
 }
