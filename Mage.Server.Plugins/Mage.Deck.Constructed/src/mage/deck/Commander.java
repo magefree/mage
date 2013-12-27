@@ -138,7 +138,7 @@ public class Commander extends DeckValidator {
                 FilterMana color = getColorIdentity(commander);
                 for(Card card : deck.getCards()){
                     if(!cardHasValideColor(color, card)){
-                        invalid.put(card.getName(), "Invalide color");
+                        invalid.put(card.getName(), "Invalid color");
                         valid = false;
                     }
                 }
