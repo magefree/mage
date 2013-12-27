@@ -47,6 +47,7 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 /**
  * @author nantuko
@@ -66,8 +67,10 @@ public class FullMoonsRise extends CardImpl<FullMoonsRise> {
         this.color.setGreen(true);
 
         // Werewolf creatures you control get +1/+0 and have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter));
+        Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter);
+        effect.setText("and have trample");
+        this.addAbility(ability);
 
         // Sacrifice Full Moon's Rise: Regenerate all Werewolf creatures you control.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FullMoonsRiseEffect(filter), new SacrificeSourceCost()));
