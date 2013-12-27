@@ -47,10 +47,11 @@ public class ManaPoolItem implements Serializable {
     private int colorless = 0;
     private ConditionalMana conditionalMana;
     private UUID sourceId;
+    private boolean flag = false;
 
     public ManaPoolItem() {}
 
-    public ManaPoolItem(int red, int green, int blue, int white, int black, int colorless, UUID sourceId) {
+    public ManaPoolItem(int red, int green, int blue, int white, int black, int colorless, UUID sourceId, boolean flag) {
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -58,6 +59,7 @@ public class ManaPoolItem implements Serializable {
         this.black = black;
         this.colorless = colorless;
         this.sourceId = sourceId;
+        this.flag = flag;
     }
 
     public ManaPoolItem(ConditionalMana conditionalMana, UUID sourceId) {
@@ -77,6 +79,7 @@ public class ManaPoolItem implements Serializable {
             this.conditionalMana = item.conditionalMana.copy();
         }
         this.sourceId = item.sourceId;
+        this.flag = item.flag;
     }
 
     public ManaPoolItem copy() {
@@ -85,6 +88,10 @@ public class ManaPoolItem implements Serializable {
 
     public UUID getSourceId() {
         return sourceId;
+    }
+
+    public boolean getFlag() {
+        return flag;
     }
 
     public int getRed() {

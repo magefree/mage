@@ -28,12 +28,11 @@
 
 package mage;
 
+import java.io.Serializable;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import mage.util.Copyable;
-
-import java.io.Serializable;
 
 /**
  *
@@ -48,6 +47,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     protected int black;
     protected int colorless;
     protected int any;
+    protected boolean flag = false;
 
     public static final Mana RedMana = RedMana(1);
     public static final Mana GreenMana = GreenMana(1);
@@ -59,13 +59,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public Mana() {}
 
     public Mana(final Mana mana) {
-        red = mana.red;
-        green = mana.green;
-        blue = mana.blue;
-        white = mana.white;
-        black = mana.black;
-        colorless = mana.colorless;
-        any = mana.any;
+        this.red = mana.red;
+        this.green = mana.green;
+        this.blue = mana.blue;
+        this.white = mana.white;
+        this.black = mana.black;
+        this.colorless = mana.colorless;
+        this.any = mana.any;
+        this.flag = mana.flag;
     }
 
     public Mana(ColoredManaSymbol color) {
@@ -175,12 +176,24 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return count();
         }
         int count = 0;
-        if (filter.isBlack()) count += black;
-        if (filter.isBlue()) count += blue;
-        if (filter.isWhite()) count += white;
-        if (filter.isGreen()) count += green;
-        if (filter.isRed()) count += red;
-        if (filter.isColorless()) count += colorless;
+        if (filter.isBlack()) {
+            count += black;
+        }
+        if (filter.isBlue()) {
+            count += blue;
+        }
+        if (filter.isWhite()) {
+            count += white;
+        }
+        if (filter.isGreen()) {
+            count += green;
+        }
+        if (filter.isRed()) {
+            count += red;
+        }
+        if (filter.isColorless()) {
+            count += colorless;
+        }
         return count;
     }
 
@@ -198,18 +211,24 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public String toString() {
         StringBuilder sbMana = new StringBuilder();
 
-        for (int i = 0; i < red; i++)
+        for (int i = 0; i < red; i++) {
             sbMana.append("{R}");
-        for (int i = 0; i < green; i++)
+        }
+        for (int i = 0; i < green; i++) {
             sbMana.append("{G}");
-        for (int i = 0; i < blue; i++)
+        }
+        for (int i = 0; i < blue; i++) {
             sbMana.append("{U}");
-        for (int i = 0; i < black; i++)
+        }
+        for (int i = 0; i < black; i++) {
             sbMana.append("{B}");
-        for (int i = 0; i < white; i++)
+        }
+        for (int i = 0; i < white; i++) {
             sbMana.append("{W}");
-        for (int i = 0; i < any; i++)
+        }
+        for (int i = 0; i < any; i++) {
             sbMana.append("{Any}");
+        }
         if (colorless > 0) {
             sbMana.append("{").append(Integer.toString(colorless)).append("}");
         }
@@ -226,38 +245,44 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         compare.subtract(this);
         if (compare.getRed() < 0) {
             compare.setAny(compare.getAny() + compare.getRed());
-            if (compare.getAny() < 0)
+            if (compare.getAny() < 0) {
                 return false;
+            }
             compare.setRed(0);
         }
         if (compare.getGreen() < 0) {
             compare.setAny(compare.getAny() + compare.getGreen());
-            if (compare.getAny() < 0)
+            if (compare.getAny() < 0) {
                 return false;
+            }
             compare.setGreen(0);
         }
         if (compare.getBlue() < 0) {
             compare.setAny(compare.getAny() + compare.getBlue());
-            if (compare.getAny() < 0)
+            if (compare.getAny() < 0) {
                 return false;
+            }
             compare.setBlue(0);
         }
         if (compare.getBlack() < 0) {
             compare.setAny(compare.getAny() + compare.getBlack());
-            if (compare.getAny() < 0)
+            if (compare.getAny() < 0) {
                 return false;
+            }
             compare.setBlack(0);
         }
         if (compare.getWhite() < 0) {
             compare.setAny(compare.getAny() + compare.getWhite());
-            if (compare.getAny() < 0)
+            if (compare.getAny() < 0) {
                 return false;
+            }
             compare.setWhite(0);
         }
         if (compare.getColorless() < 0) {
             int remaining = compare.getRed() + compare.getGreen() + compare.getBlack() + compare.getBlue() + compare.getWhite() + compare.getAny();
-            if (compare.getColorless() + remaining < 0)
+            if (compare.getColorless() + remaining < 0) {
                 return false;
+            }
         }
         return true;
     }
@@ -304,18 +329,24 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             }
         }
         Mana needed = new Mana();
-        if (compare.getRed() < 0)
+        if (compare.getRed() < 0) {
             needed.setRed(Math.abs(compare.getRed()));
-        if (compare.getWhite() < 0)
+        }
+        if (compare.getWhite() < 0) {
             needed.setWhite(Math.abs(compare.getWhite()));
-        if (compare.getGreen() < 0)
+        }
+        if (compare.getGreen() < 0) {
             needed.setGreen(Math.abs(compare.getGreen()));
-        if (compare.getBlack() < 0)
+        }
+        if (compare.getBlack() < 0) {
             needed.setBlack(Math.abs(compare.getBlack()));
-        if (compare.getBlue() < 0)
+        }
+        if (compare.getBlue() < 0) {
             needed.setBlue(Math.abs(compare.getBlue()));
-        if (compare.getColorless() < 0)
+        }
+        if (compare.getColorless() < 0) {
             needed.setColorless(Math.abs(compare.getColorless()));
+        }
         return needed;
     }
 
@@ -386,18 +417,24 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return true if this contains any values that mana has
      */
     public boolean contains(Mana mana) {
-        if (mana.black > 0 && this.black > 0)
+        if (mana.black > 0 && this.black > 0) {
             return true;
-        if (mana.blue > 0 && this.blue > 0)
+        }
+        if (mana.blue > 0 && this.blue > 0) {
             return true;
-        if (mana.red > 0 && this.red > 0)
+        }
+        if (mana.red > 0 && this.red > 0) {
             return true;
-        if (mana.white > 0 && this.white > 0)
+        }
+        if (mana.white > 0 && this.white > 0) {
             return true;
-        if (mana.green > 0 && this.green > 0)
+        }
+        if (mana.green > 0 && this.green > 0) {
             return true;
-        if (mana.colorless > 0 && this.count() > 0)
+        }
+        if (mana.colorless > 0 && this.count() > 0) {
             return true;
+        }
 
         return false;
     }
@@ -460,6 +497,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 colorless = amount;
                 break;
         }
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    public boolean getFlag() {
+        return flag;
     }
 
 }

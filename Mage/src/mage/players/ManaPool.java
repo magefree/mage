@@ -87,7 +87,7 @@ public class ManaPool implements Serializable {
             if (filter == null || filter.match(game.getObject(mana.getSourceId()), game)) {
                 boolean spendAnyMana = spendAnyMana(ability, game);
                 if (mana.get(manaType) > 0 || (spendAnyMana && mana.count() > 0)) {
-                    game.fireEvent(new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId()));
+                    game.fireEvent(new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag()));
                     if (spendAnyMana) {
                         mana.removeAny();
                     } else {
@@ -290,7 +290,7 @@ public class ManaPool implements Serializable {
         if (mana instanceof ConditionalMana) {
             this.manaItems.add(new ManaPoolItem((ConditionalMana)mana, source.getSourceId()));
         } else {
-            this.manaItems.add(new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getColorless(), source.getSourceId()));
+            this.manaItems.add(new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getColorless(), source.getSourceId(), mana.getFlag()));
         }
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.MANA_ADDED, source.getSourceId(), source.getId(), source.getControllerId());
         event.setData(mana.toString());

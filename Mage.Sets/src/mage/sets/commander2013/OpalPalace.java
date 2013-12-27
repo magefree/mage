@@ -133,22 +133,27 @@ class OpalPalaceManaEffect extends ManaEffect<OpalPalaceManaEffect> {
                     choice.getChoices().add("White");
                 }
                 if (choice.getChoices().size() > 0) {
+                    Mana mana = new Mana();
                     if (choice.getChoices().size() == 1) {
                         choice.setChoice(choice.getChoices().iterator().next());
                     } else {
                         controller.choose(outcome, choice, game);
                     }
                     if (choice.getChoice().equals("Black")) {
-                        controller.getManaPool().addMana(Mana.BlackMana, game, source);
+                        mana.addBlack();
                     } else if (choice.getChoice().equals("Blue")) {
-                        controller.getManaPool().addMana(Mana.BlueMana, game, source);
+                        mana.addBlue();
                     } else if (choice.getChoice().equals("Red")) {
-                        controller.getManaPool().addMana(Mana.RedMana, game, source);
+                        mana.addRed();
                     } else if (choice.getChoice().equals("Green")) {
-                        controller.getManaPool().addMana(Mana.GreenMana, game, source);
+                        mana.addGreen();
                     } else if (choice.getChoice().equals("White")) {
-                        controller.getManaPool().addMana(Mana.WhiteMana, game, source);
+                        mana.addWhite();
                     }
+                    // set to indicate, that the mana can boost the commander
+                    mana.setFlag(true);
+                    controller.getManaPool().addMana(mana, game, source);
+                    
                 }
                 return true;
             }
@@ -177,7 +182,7 @@ class OpalPalaceWatcher extends WatcherImpl<OpalPalaceWatcher> {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAYED) {
-            if (event.getSourceId().equals(this.getSourceId())) {
+            if (event.getSourceId().equals(this.getSourceId()) && event.getFlag()) { // flag indicates that mana was produced with second ability
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null) {
                     Card card = spell.getCard();
