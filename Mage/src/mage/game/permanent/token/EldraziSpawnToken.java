@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 
+import java.util.Random;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -49,6 +50,9 @@ public class EldraziSpawnToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana, new SacrificeSourceCost()));
+        this.setOriginalExpansionSetCode("ROE");
+        // Get one of the three possible token images
+        this.setTokenType(new Random().nextInt(3) + 1);
     }
 
 }
