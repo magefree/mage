@@ -77,7 +77,7 @@ public class FromTheAshes extends CardImpl<FromTheAshes> {
 
 class FromTheAshesEffect extends OneShotEffect<FromTheAshesEffect> {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("creature an opponent controls");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic lands");
     static {
         filter.add(new CardTypePredicate(CardType.LAND));
         filter.add(Predicates.not(new SupertypePredicate("Basic")));
