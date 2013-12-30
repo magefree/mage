@@ -36,6 +36,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.CommanderManaReplacementEffect;
 import mage.abilities.effects.common.continious.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
@@ -88,6 +89,7 @@ public abstract class GameCommanderImpl extends GameImpl<GameCommanderImpl> {
                         commander.moveToZone(Zone.COMMAND, null, this, true);
                         ability.addEffect(new CommanderReplacementEffect(commander.getId()));
                         ability.addEffect(new CommanderCostModification(commander.getId()));
+                        ability.addEffect(new CommanderManaReplacementEffect(player.getId(), commander.getSpellAbility().getManaCosts().getMana()));
                         getState().setValue(commander.getId() + "_castCount", new Integer(0));
                         CommanderCombatDamageWatcher watcher = new CommanderCombatDamageWatcher(commander.getId());
                         getState().getWatchers().add(watcher);

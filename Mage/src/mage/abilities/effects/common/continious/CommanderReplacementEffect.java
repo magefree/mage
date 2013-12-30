@@ -28,7 +28,6 @@
 package mage.abilities.effects.common.continious;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -40,7 +39,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.watchers.common.CommanderCombatDamageWatcher;
 
 /**
  *
