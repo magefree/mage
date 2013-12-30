@@ -41,6 +41,8 @@ import mage.filter.Filter;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.game.events.ManaEvent;
 
 /**
  *
@@ -287,14 +289,16 @@ public class ManaPool implements Serializable {
     }
 
     public void addMana(Mana mana, Game game, Ability source) {
-        if (mana instanceof ConditionalMana) {
-            this.manaItems.add(new ManaPoolItem((ConditionalMana)mana, source.getSourceId()));
-        } else {
-            this.manaItems.add(new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getColorless(), source.getSourceId(), mana.getFlag()));
+        if (!game.replaceEvent(new ManaEvent(EventType.ADD_MANA, source.getId(), source.getSourceId(), source.getControllerId(), mana))) {
+            if (mana instanceof ConditionalMana) {
+                this.manaItems.add(new ManaPoolItem((ConditionalMana)mana, source.getSourceId()));
+            } else {
+                this.manaItems.add(new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getColorless(), source.getSourceId(), mana.getFlag()));
+            }
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.MANA_ADDED, source.getSourceId(), source.getId(), source.getControllerId());
+            event.setData(mana.toString());
+            game.fireEvent(event);
         }
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.MANA_ADDED, source.getSourceId(), source.getId(), source.getControllerId());
-        event.setData(mana.toString());
-        game.fireEvent(event);
     }
 
     public List<ConditionalMana> getConditionalMana() {
