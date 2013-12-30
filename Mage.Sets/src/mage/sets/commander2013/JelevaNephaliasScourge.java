@@ -27,12 +27,13 @@
  */
 package mage.sets.commander2013;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManaSpentToCastCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -40,12 +41,17 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.WatcherScope;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.util.CardUtil;
+import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -72,6 +78,7 @@ public class JelevaNephaliasScourge extends CardImpl<JelevaNephaliasScourge> {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new JelevaNephaliasScourgeEffect(), false));
         // Whenever Jeleva attacks, you may cast an instant or sorcery card exiled with it without paying its mana cost.
         this.addAbility(new AttacksTriggeredAbility(new JelevaNephaliasCastEffect(), false));
+        this.addWatcher(new JelevaNephaliasWatcher());
 
     }
 
@@ -104,25 +111,28 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect<JelevaNephaliasScourgeE
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
-            int xValue = sourcePermanent.getSpellAbility().getManaCostsToPay().convertedManaCost();
-            for (UUID playerId : controller.getInRange()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    int cardsToExile = Math.min(player.getLibrary().size(), xValue);
-                    for(int i = 0; i < cardsToExile; i++) {
-                        Card card = player.getLibrary().removeFromTop(game);
-                        if (card != null) {
-                            card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Jeleva, Nephalia's Scourge", source.getSourceId(), game);
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (controller != null && sourceCard != null) {
+            JelevaNephaliasWatcher watcher = (JelevaNephaliasWatcher) game.getState().getWatchers().get("ManaPaidToCastJelevaNephalias", source.getSourceId());
+            if (watcher != null) {
+                int xValue = watcher.getManaSpentToCastLastTime(sourceCard.getZoneChangeCounter() - 1);
+                if (xValue > 0) {
+                    for (UUID playerId : controller.getInRange()) {
+                        Player player = game.getPlayer(playerId);
+                        if (player != null) {
+                            int cardsToExile = Math.min(player.getLibrary().size(), xValue);
+                            for(int i = 0; i < cardsToExile; i++) {
+                                Card card = player.getLibrary().removeFromTop(game);
+                                if (card != null) {
+                                    card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceCard.getName(), source.getSourceId(), game);
+                                }
+                            }
                         }
                     }
                 }
+                return true;
             }
-            return true;
         }
-
-
         return false;
     }
 }
@@ -160,5 +170,52 @@ class JelevaNephaliasCastEffect extends OneShotEffect<JelevaNephaliasCastEffect>
             return true;
         }
         return false;
+    }
+}
+
+class JelevaNephaliasWatcher extends WatcherImpl<JelevaNephaliasWatcher> {
+
+    private Map<Integer, Integer> manaSpendToCast = new HashMap<Integer, Integer>(); // cast
+
+    public JelevaNephaliasWatcher() {
+        super("ManaPaidToCastJelevaNephalias", WatcherScope.CARD);
+    }
+
+    public JelevaNephaliasWatcher(final JelevaNephaliasWatcher watcher) {
+        super(watcher);
+    }
+
+    @Override
+    public JelevaNephaliasWatcher copy() {
+        return new JelevaNephaliasWatcher(this);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getSourceId().equals(sourceId)) {
+            if (!game.getStack().isEmpty()) {
+                for (StackObject stackObject : game.getStack()) {
+                    if (stackObject instanceof Spell && ((Spell)stackObject).getSourceId().equals(sourceId)) {
+                        Card card = game.getCard(sourceId);
+                        if (!manaSpendToCast.containsValue(card.getZoneChangeCounter())) {
+                            manaSpendToCast.put(new Integer(card.getZoneChangeCounter()), new Integer(((Spell)stackObject).getSpellAbility().getManaCostsToPay().convertedManaCost()));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public int getManaSpentToCastLastTime(int zoneChangeCounter) {
+        if (manaSpendToCast.containsKey(zoneChangeCounter)) {
+            return manaSpendToCast.get(zoneChangeCounter);
+        }
+        return 0;
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        manaSpendToCast.clear();
     }
 }
