@@ -28,9 +28,9 @@
 package mage.abilities.effects.common.cost;
 
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.CastCommanderAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.CostModificationEffectImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
@@ -62,18 +62,12 @@ public class CommanderCostModification extends CostModificationEffectImpl<Comman
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-                    
-        Mana mana = abilityToModify.getManaCostsToPay().getMana();
-        
         Integer castCount = (Integer)game.getState().getValue(commanderId + "_castCount");
         if(castCount == null){
             castCount = 0;
             game.getState().setValue(commanderId + "_castCount", castCount);
-        }
-                
-        int newCount = mana.getColorless() + 2*castCount;
-        mana.setColorless(newCount);
-        abilityToModify.getManaCostsToPay().load(mana.toString());
+        }    
+        abilityToModify.getManaCostsToPay().add(new GenericManaCost(2*castCount));
         return true;
         
     }
