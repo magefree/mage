@@ -61,18 +61,22 @@ public class TablePlayerPanel extends javax.swing.JPanel {
         this.newPlayerPanel.setVisible(false);
     }
 
-    public void init(int playerNum) {
+    public void init(int playerNum, String playerType) {
         session = MageFrame.getSession();
         cbPlayerType.setModel(new DefaultComboBoxModel(session.getPlayerTypes()));
         this.lblPlayerNum.setText("Player " + playerNum);
         if (Config.defaultOtherPlayerIndex != null) {
-            if (Integer.valueOf(Config.defaultOtherPlayerIndex) >= cbPlayerType.getItemCount())
+            if (Integer.valueOf(Config.defaultOtherPlayerIndex) >= cbPlayerType.getItemCount()) {
                 cbPlayerType.setSelectedIndex(cbPlayerType.getItemCount() - 1);
+            }
             else {
                 Integer index = Integer.parseInt(Config.defaultOtherPlayerIndex); 
                 cbPlayerType.setSelectedIndex(index);
             }
         }
+        if (playerType != null) {
+            this.cbPlayerType.setSelectedItem(playerType);
+        } 
     }
 
     public boolean joinTable(UUID roomId, UUID tableId) throws FileNotFoundException, IOException, ClassNotFoundException {

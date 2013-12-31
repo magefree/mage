@@ -30,7 +30,9 @@ package mage.client.dialog;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -63,6 +65,7 @@ public class NewTableDialog extends MageDialog {
     private UUID roomId;
     private Session session;
     private List<TablePlayerPanel> players = new ArrayList<TablePlayerPanel>();
+    private List<String> prefPlayerTypes = new ArrayList<String>();
 
     private static final String LIMITED = "Limited";
 
@@ -376,18 +379,26 @@ public class NewTableDialog extends MageDialog {
 
     private void setGameOptions() {
         GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
+        int oldValue = (Integer) this.spnNumPlayers.getValue();
         this.spnNumPlayers.setModel(new SpinnerNumberModel(gameType.getMinPlayers(), gameType.getMinPlayers(), gameType.getMaxPlayers(), 1));
         this.spnNumPlayers.setEnabled(gameType.getMinPlayers() != gameType.getMaxPlayers());
+        if (oldValue >= gameType.getMinPlayers() && oldValue <= gameType.getMaxPlayers()){
+            this.spnNumPlayers.setValue(oldValue);
+        }
         this.cbAttackOption.setEnabled(gameType.isUseAttackOption());
         this.cbRange.setEnabled(gameType.isUseRange());
-        createPlayers(gameType.getMinPlayers() - 1);
+        createPlayers((Integer) spnNumPlayers.getValue() - 1);
     }
 
     private void createPlayers(int numPlayers) {
         if (numPlayers > players.size()) {
             while (players.size() != numPlayers) {
                 TablePlayerPanel playerPanel = new TablePlayerPanel();
-                playerPanel.init(players.size() + 2);
+                String playerType = "Human";
+                if (prefPlayerTypes.size() >= players.size() && players.size() > 0) {
+                    playerType = prefPlayerTypes.get(players.size() - 1);
+                }
+                playerPanel.init(players.size() + 2, playerType);
                 players.add(playerPanel);
                 playerPanel.addPlayerTypeEventListener(
                     new Listener<Event> () {
@@ -466,6 +477,13 @@ public class NewTableDialog extends MageDialog {
      */
     private void setGameSettingsFromPrefs () {
         txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NAME, "Game"));
+
+        String playerTypes = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES, "Human");
+        prefPlayerTypes.clear();
+        prefPlayerTypes.addAll(Arrays.asList(playerTypes.split(",")));
+        this.spnNumPlayers.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, "2")));
+
+
         String gameTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, "Two Player Duel");
         for (GameTypeView gtv : session.getGameTypes()) {
             if (gtv.getName().equals(gameTypeName)) {
@@ -486,7 +504,6 @@ public class NewTableDialog extends MageDialog {
             this.player1Panel.setDeckFile(deckFile);
         }
         this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS, "2")));
-        this.spnNumPlayers.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, "2")));
         int range = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, "1"));
         for (RangeOfInfluence roi :RangeOfInfluence.values()) {
             if (roi.getRange() == range) {
@@ -519,6 +536,16 @@ public class NewTableDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, spnNumPlayers.getValue().toString());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, Integer.toString(options.getRange().getRange()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION, options.getAttackOption().toString());
+        StringBuilder playerTypesString = new StringBuilder();
+        ListIterator iterator = players.listIterator();
+        while (iterator.hasNext()) {
+            if (playerTypesString.length()>0) {
+                playerTypesString.append(",");
+            }
+            TablePlayerPanel tpp = (TablePlayerPanel) iterator.next();
+            playerTypesString.append(tpp.getPlayerType());
+        }
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES, playerTypesString.toString());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
