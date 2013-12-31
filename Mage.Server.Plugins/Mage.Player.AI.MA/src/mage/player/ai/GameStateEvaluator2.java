@@ -24,11 +24,11 @@ import java.util.logging.Logger;
  */
 public class GameStateEvaluator2 {
 
-    private static final transient Logger logger = Logging.getLogger(GameStateEvaluator2.class.getName());
-
-    static {
-        logger.setLevel(Level.ALL);
-    }
+    private static final transient org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(GameStateEvaluator2.class);
+//    private static final transient Logger logger = Logging.getLogger(GameStateEvaluator2.class.getName());
+//    static {
+//        logger.setLevel(Level.ALL);
+//    }
 
     public static final int WIN_GAME_SCORE = 100000000;
     public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
@@ -42,10 +42,12 @@ public class GameStateEvaluator2 {
         Player player = game.getPlayer(playerId);
         Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
         if (game.isGameOver()) {
-            if (player.hasLost() || opponent.hasWon())
+            if (player.hasLost() || opponent.hasWon()) {
                 return LOSE_GAME_SCORE;
-            if (opponent.hasLost() || player.hasWon())
+            }
+            if (opponent.hasLost() || player.hasWon()) {
                 return WIN_GAME_SCORE;
+            }
         }
         //int lifeScore = (player.getLife() - opponent.getLife()) * LIFE_FACTOR;
 
@@ -68,7 +70,6 @@ public class GameStateEvaluator2 {
                 permanentScore -= evaluatePermanent(permanent, game);
             }
         } catch (Throwable t) {
-            t.printStackTrace();
         }
         //permanentScore *= PERMANENT_FACTOR;
 
@@ -77,8 +78,7 @@ public class GameStateEvaluator2 {
         handScore *= 5;
 
         int score = lifeScore + permanentScore + handScore;
-        //if (logger.isLoggable(Level.FINE))
-            logger.fine("game state evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore /*+ " handScore:" + handScore*/ + "total:" + score);
+        logger.debug("game state evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore + " handScore:" + handScore + "  total:" + score);
 
         return score;
     }
