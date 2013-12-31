@@ -1,6 +1,6 @@
 # MAGE - Magic, Another Game Engine
 
-MAGE allows you to play magic against one or more online players or computer opponents. It includes full rules enforcement for **5659** unique cards (9132 in all). Starting with Zendikar, all regular sets have all the cards implemented ([status in detail](http://ct-magefree.rhcloud.com/stats)).
+MAGE allows you to play magic against one or more online players or computer opponents. It includes full rules enforcement for **7210** unique cards (12178 in all). Starting with Eventide, all regular sets have all the cards implemented ([status in detail](http://ct-magefree.rhcloud.com/stats)).
 
 There is at least one public server where you can play MAGE against other players. Apart from this, you can also host your own server to play against the AI and/or your friends.
 
@@ -8,7 +8,8 @@ You can visit the official MAGE forum [here](http://www.slightlymagic.net/forum/
 
 ## Features
 * There is a basic computer AI opponent available.
-* You can play either a two player duel or a multiplayer free-for-all game with up to 8 players.
+* You can play either a two player duel or a multiplayer free-for-all game with up to 10 players.
+* Commander format.
 * There are two tournament types supported witch can be played with up to 16 players:
  * Booster Draft (4-16)
  * Sealed (2-16)

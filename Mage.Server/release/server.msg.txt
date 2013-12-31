@@ -1,3 +1,3 @@
-Welcome! You are playing Mage version 1.0.3.
+Welcome! You are playing Mage version 1.2.0
 Find what was changed since previous versions on project Wiki https://github.com/magefree/mage/wiki.
 Contact us on www.slightlymagic.net.
