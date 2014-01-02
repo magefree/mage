@@ -40,6 +40,7 @@ import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.counters.CounterType;
 import mage.util.CardUtil;
 
 /**
@@ -52,7 +53,7 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
     private DynamicValue amount;
 
     public AddCountersTargetEffect(Counter counter) {
-        this(counter, Outcome.Benefit);
+        this(counter, counter.getName().equals(CounterType.M1M1.getName()) ? Outcome.UnboostCreature: Outcome.Benefit);
     }
 
     public AddCountersTargetEffect(Counter counter, DynamicValue amount) {
