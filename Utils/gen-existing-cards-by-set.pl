@@ -27,6 +27,7 @@ if(!$setName) {
 }
 
 my $template = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardExtendedClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
+my $templateBasicLand = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardExtendedLandClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
 
 sub toCamelCase {
     my $string = $_[0];
@@ -44,18 +45,24 @@ if (-e $authorFile) {
     $author = 'anonymous';
 }
 
+my $cardsFound = 0;
 open (DATA, $dataFile) || die "can't open $dataFile";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
     $cards{$data[0]}{$data[1]} = \@data;
 
     if ($data[1] eq $setName) {
-        push(@setCards, $data[0]);
+        my $cardInfo = {$data[0] ,$data[2]};
+        my $ref_cardInfo = \$cardInfo;
+        push(@setCards, $ref_cardInfo);
+        $cardsFound = $cardsFound + 1;
     }
 }
 close(DATA);
+print "Number of cards found for set " . $setName . ": " . $cardsFound . "\n";
 
 open (DATA, $setsFile) || die "can't open $setsFile";
+
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
     $sets{$data[0]}= $data[1];
@@ -82,46 +89,101 @@ $vars{'author'} = $author;
 $vars{'set'} = $knownSets{$setName};
 $vars{'expansionSetCode'} = $sets{$setName};
 
+my $landForest = 0;
+my $landMountain = 0;
+my $landSwamp = 0;
+my $landPlains = 0;
+my $landIsland = 0;
+
 print "Extended cards generated:\n";
-foreach my $cardName (@setCards) {
-    my $className = toCamelCase($cardName);
-    my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
 
-    if(! -e $currentFileName) {
-        $vars{'className'} = $className;
-        $vars{'cardNumber'} = $cards{$cardName}{$setName}[2];
+while ( my ($key, $value) = each(@setCards) ) {
+    while ( my ($cardName, $cardNr) = each($$value) ) {
+        if($cardName eq "Forest" || $cardName eq "Island" || $cardName eq "Plains" || $cardName eq "Swamp" || $cardName eq "Mountain") {
+            my $found = 0;
+            my $landNr = "";
+            if ($cardName eq "Forest") {
+                $landForest++;
+                $landNr = $landForest;
+            }
+            if ($cardName eq "Mountain") {
+                $landMountain++;
+                $landNr = $landMountain;
+            }
+            if ($cardName eq "Swamp") {
+                $landSwamp++;
+                $landNr = $landSwamp;
+            }
+            if ($cardName eq "Plains") {
+                $landPlains++;
+                $landNr = $landPlains;
+            }
+            if ($cardName eq "Island") {
+                $landIsland++;
+                $landNr = $landIsland;
+            }
+            if($landNr != "") {
+                $vars{'landNr'} = $landNr;
+                my $className = toCamelCase($cardName) . $landNr;
+                my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
 
-        my $found = 0;
-        foreach my $keySet (keys %{$cards{$cardName}}) {
-            if (exists $knownSets{$keySet} && $found eq 0) {
-                my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$keySet} . "/" . $className . ".java";
-                if(-e $fileName) {
-                    open (DATA, $fileName);
-                    while(my $line = <DATA>) {
-                        if ($line =~ /extends CardImpl<(\w+?)>/) {
-                            $vars{'baseClassName'} = $1;
-                            $vars{'baseSet'} = $knownSets{$keySet};
-                            
-                            $vars{'rarityExtended'} = '';
-                            if ($cards{$cardName}{$setName}[3] ne $cards{$cardName}{$keySet}[3]) {
-                                $vars{'rarityExtended'} = "\n        this.rarity = Rarity.$raritiesConversion{$cards{$cardName}{$setName}[3]};";
+                if(! -e $currentFileName) {
+
+                    $vars{'className'} = toCamelCase($cardName);
+                    $vars{'cardNumber'} = $cardNr;
+
+                    my $result = $templateBasicLand->fill_in(HASH => \%vars);
+                    if (defined($result)) {
+                        print $vars{'set'} . "." . $vars{'className'} . " cardNr = " . $cardNr . "\n";
+                        open CARD, "> $currentFileName";
+                        print CARD $result;
+                        close CARD;
+                    } else {
+                        print "Error while creating " . $vars{'className'} ."\n";
+                    }
+                }
+            }
+        } else {
+            my $className = toCamelCase($cardName);
+            my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
+            if(! -e $currentFileName) {
+                $vars{'className'} = $className;
+                $vars{'cardNumber'} = $cards{$cardName}{$setName}[2];
+
+                my $found = 0;
+                foreach my $keySet (keys %{$cards{$cardName}}) {
+                    if (exists $knownSets{$keySet} && $found eq 0) {
+                        my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$keySet} . "/" . $className . ".java";
+                        if(-e $fileName) {
+                            open (DATA, $fileName);
+                            while(my $line = <DATA>) {
+                                if ($line =~ /extends CardImpl<(\w+?)>/ || $line =~ /extends LevelerCard<(\w+?)>/) {
+                                    $vars{'baseClassName'} = $1;
+                                    $vars{'baseSet'} = $knownSets{$keySet};
+
+                                    $vars{'rarityExtended'} = '';
+                                    if ($cards{$cardName}{$setName}[3] ne $cards{$cardName}{$keySet}[3]) {
+                                        $vars{'rarityExtended'} = "\n        this.rarity = Rarity.$raritiesConversion{$cards{$cardName}{$setName}[3]};";
+                                    }
+                                    $found = 1;
+                                }
                             }
-                            $found = 1;
+                            close(DATA);
                         }
                     }
-                    close(DATA);
+                }
+
+                if($found eq 1) {
+                    my $result = $template->fill_in(HASH => \%vars);
+                    if (defined($result)) {
+                        print $vars{'set'} . "." . $vars{'className'} . "\n";
+                        open CARD, "> $currentFileName";
+                        print CARD $result;
+                        close CARD;
+                    }
                 }
             }
         }
 
-        if($found eq 1) {
-            my $result = $template->fill_in(HASH => \%vars);
-            if (defined($result)) {
-                print $vars{'set'} . "." . $vars{'className'} . "\n";
-                open CARD, "> $currentFileName";
-                print CARD $result; 
-                close CARD;
-            }
-        }
     }
 }
