@@ -57,6 +57,7 @@ import mage.watchers.common.CommanderCombatDamageWatcher;
 public abstract class GameCommanderImpl extends GameImpl<GameCommanderImpl> {
 
     private final Map<UUID, Cards> mulliganedCards = new HashMap<UUID, Cards>();
+    private Set<CommanderCombatDamageWatcher> commanderCombatWatcher = new HashSet<CommanderCombatDamageWatcher>();
 
     public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
         super(attackOption, range, freeMulligans);
@@ -93,6 +94,7 @@ public abstract class GameCommanderImpl extends GameImpl<GameCommanderImpl> {
                         getState().setValue(commander.getId() + "_castCount", new Integer(0));
                         CommanderCombatDamageWatcher watcher = new CommanderCombatDamageWatcher(commander.getId());
                         getState().getWatchers().add(watcher);
+                        this.commanderCombatWatcher.add(watcher);
                         watcher.addCardInfoToCommander(this);
                     }
                 }
@@ -181,12 +183,11 @@ public abstract class GameCommanderImpl extends GameImpl<GameCommanderImpl> {
      */
     @Override
     protected boolean checkStateBasedActions() {
-        for(Watcher watcher : getState().getWatchers().values()){
-            if(watcher instanceof CommanderCombatDamageWatcher){
-                CommanderCombatDamageWatcher damageWatcher = (CommanderCombatDamageWatcher)watcher;
-                for(UUID playerUUID : damageWatcher.getDamageToPlayer().keySet()){
-                    Player player = getPlayer(playerUUID);
-                    if(player != null && damageWatcher.getDamageToPlayer().get(playerUUID) >= 21){
+        for (CommanderCombatDamageWatcher damageWatcher: commanderCombatWatcher) {
+            for(Map.Entry<UUID, Integer> entrySet : damageWatcher.getDamageToPlayer().entrySet()){
+                if (entrySet.getValue() > 20) {
+                    Player player = getPlayer(entrySet.getKey());
+                    if (player != null && player.isInGame()){
                         player.lost(this);
                     }
                 }

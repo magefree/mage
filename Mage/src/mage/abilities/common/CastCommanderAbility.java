@@ -34,7 +34,6 @@ import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.watchers.common.CommanderCombatDamageWatcher;
 
 /**
  *
