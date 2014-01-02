@@ -25,88 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.costs.common.UntapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.target.TargetPlayer;
 
 /**
  *
- * @author cbt33
+ * @author jeffwadsworth
+
  */
-public class PardicMiner extends CardImpl<PardicMiner> {
+public class MerrowWavebreakers extends CardImpl<MerrowWavebreakers> {
 
-    public PardicMiner(UUID ownerId) {
-        super(ownerId, 212, "Pardic Miner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Dwarf");
+    public MerrowWavebreakers(UUID ownerId) {
+        super(ownerId, 44, "Merrow Wavebreakers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "SHM";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Soldier");
 
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Sacrifice Pardic Miner: Target player can't play lands this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PardicMinerEffect(), new SacrificeSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        // {1}{U}, {untap}: Merrow Wavebreakers gains flying until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{U}"));
+        ability.addCost(new UntapSourceCost());
         this.addAbility(ability);
+        
     }
 
-    public PardicMiner(final PardicMiner card) {
+    public MerrowWavebreakers(final MerrowWavebreakers card) {
         super(card);
     }
 
     @Override
-    public PardicMiner copy() {
-        return new PardicMiner(this);
+    public MerrowWavebreakers copy() {
+        return new MerrowWavebreakers(this);
     }
-}
-
-class PardicMinerEffect extends ReplacementEffectImpl<PardicMinerEffect> {
-   
-    public PardicMinerEffect() {
-        super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "Target player can't play lands this turn.";
-    }
-
-    public PardicMinerEffect(final PardicMinerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PardicMinerEffect copy() {
-        return new PardicMinerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.PLAY_LAND && event.getPlayerId().equals(source.getFirstTarget())) {
-            return true;
-        }
-        return false;
-    }
-
 }
