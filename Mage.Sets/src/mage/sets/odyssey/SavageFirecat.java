@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -64,7 +65,8 @@ public class SavageFirecat extends CardImpl<SavageFirecat> {
         // Savage Firecat enters the battlefield with seven +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new PlusOneCounter(7))));
         // Whenever you tap a land for mana, remove a +1/+1 counter from Savage Firecat.
-        this.addAbility(new SavageFirecatTriggeredAbility());
+        this.addAbility(new SavageFirecatTriggeredAbility(new RemoveCounterSourceEffect(new PlusOneCounter(1))));
+
     }
 
     public SavageFirecat(final SavageFirecat card) {
@@ -79,8 +81,8 @@ public class SavageFirecat extends CardImpl<SavageFirecat> {
 
 class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl<SavageFirecatTriggeredAbility> {
 
-    public SavageFirecatTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(new PlusOneCounter(1)), false);
+    public SavageFirecatTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect, false);
     }
 
     public SavageFirecatTriggeredAbility(final SavageFirecatTriggeredAbility ability) {
@@ -102,4 +104,9 @@ class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl<SavageFirecatTr
     return false;
 }
     
+    @Override
+    public String getRule() {
+        return "Whenever you tap a land for mana, remove a +1/+1 counter from {this}";
+}
+
 }
