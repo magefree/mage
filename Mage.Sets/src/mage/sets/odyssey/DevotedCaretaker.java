@@ -40,8 +40,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
@@ -51,11 +52,11 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class DevotedCaretaker extends CardImpl<DevotedCaretaker> {
     
-    private static final Filter filter = new FilterInstantOrSorceryCard();
-    /*static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
-        filter.add(new CardTypePredicate(CardType.SORCERY));
-    }*/
+    private static final FilterSpell filter = new FilterSpell("instant spells and sorcery spells");
+    
+    static{
+        filter.add(Predicates.or(new CardTypePredicate(CardType.SORCERY), new CardTypePredicate(CardType.INSTANT)));
+    }
 
     public DevotedCaretaker(UUID ownerId) {
         super(ownerId, 18, "Devoted Caretaker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
