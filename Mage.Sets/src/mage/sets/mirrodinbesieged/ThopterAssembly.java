@@ -27,23 +27,22 @@
  */
 package mage.sets.mirrodinbesieged;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -59,7 +58,12 @@ public class ThopterAssembly extends CardImpl<ThopterAssembly> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // At the beginning of your upkeep, if you control no Thopters other than Thopter Assembly,
+        // return Thopter Assembly to its owner's hand and put five 1/1 colorless Thopter artifact
+        // creature tokens with flying onto the battlefield.
         this.addAbility(new ThopterAssemblyTriggeredAbility());
     }
 
@@ -74,6 +78,13 @@ public class ThopterAssembly extends CardImpl<ThopterAssembly> {
 }
 
 class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl<ThopterAssemblyTriggeredAbility> {
+
+    private static final FilterPermanent filter = new FilterPermanent();
+    static {
+        filter.add(new SubtypePredicate("Thopter"));
+        filter.add(new AnotherPredicate());
+    }
+
     ThopterAssemblyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect());
         this.addEffect(new CreateTokenEffect(new ThopterToken(), 5));
@@ -91,10 +102,7 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl<ThopterAssemb
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-            FilterPermanent filter = new FilterPermanent();
-            filter.add(new SubtypePredicate("Thopter"));
-            filter.add(new AnotherPredicate());
-            if (!game.getBattlefield().contains(filter, controllerId, 1, game)) {
+            if (game.getBattlefield().count(filter, this.getSourceId(), this.getControllerId(), game) == 0) {
                 return true;
             }
         }
