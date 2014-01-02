@@ -1,0 +1,146 @@
+
+
+WARN  [2014-01-02 11:14 [17:006]] TraceUtil[pool-3-thread-1]: Found non-flying non-reach creature blocking creature with flying
+ERROR [2014-01-02 11:14 [17:006]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb] Tracing game state...
+ERROR [2014-01-02 11:14 [17:006]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb] Necropede could block Pilgrim's Eye
+ERROR [2014-01-02 11:14 [17:006]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]
+ERROR [2014-01-02 11:14 [17:006]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb] Attacker abilities:
+ERROR [2014-01-02 11:14 [17:006]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]      Cast Pilgrim's Eye, id=cf823669-712a-4d7d-95e2-7ec5133f5442
+ERROR [2014-01-02 11:14 [17:007]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]      Flying, id=97d53877-08d4-49d8-a69c-a7361e16423d
+ERROR [2014-01-02 11:14 [17:007]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]      When {this} enters the battlefield, you may search your library for a basic land card, reveal it,  and put that card into your hand. Then shuffle your library., id=a1a7d8ec-5164-4738-b575-93c1678df8ef
+ERROR [2014-01-02 11:14 [17:007]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb] Blocker abilities:
+ERROR [2014-01-02 11:14 [17:007]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]      Cast Necropede, id=4a9acfc0-7030-414e-bb66-d0934fca1687
+ERROR [2014-01-02 11:14 [17:007]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]      Infect <i>(This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)</i>, id=f89e826d-7a17-4163-a098-f660f9f81f05
+ERROR [2014-01-02 11:14 [17:007]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]      When {this} dies, you may have put a -1/-1 counter on target creature., id=bf103271-1689-41b3-a7ec-afa9d753eb35
+ERROR [2014-01-02 11:14 [17:007]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]      Vigilance, id=f47266e1-60e0-4d60-a066-92cde9c71e0e
+ERROR [2014-01-02 11:14 [17:008]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]
+ERROR [2014-01-02 11:14 [17:008]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb] Flying ability id: 97d53877-08d4-49d8-a69c-a7361e16423d
+ERROR [2014-01-02 11:14 [17:008]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb] Reach ability id: fe79806b-9bdc-40de-ad2d-905b57cde45d
+ERROR [2014-01-02 11:14 [17:008]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]
+ERROR [2014-01-02 11:14 [17:008]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb] Restriction effects:
+ERROR [2014-01-02 11:14 [17:008]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]     mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect@6fe28841
+ERROR [2014-01-02 11:14 [17:008]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         id=d9ebaf89-66b5-472d-a1b6-84db443e4299
+ERROR [2014-01-02 11:14 [17:009]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         applies to attacker=true
+ERROR [2014-01-02 11:14 [17:009]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         applies to blocker=false
+
+ERROR [2014-01-02 11:14 [17:009]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         instanceof: true, ability={this} can't be blocked by Walls.
+ERROR [2014-01-02 11:14 [17:009]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         usable: false, ability={this} can't be blocked by Walls.
+ERROR [2014-01-02 11:14 [17:009]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         zone: BATTLEFIELD
+ERROR [2014-01-02 11:14 [17:009]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         object: mage.sets.elspethvstezzeret.Juggernaut@575294b3
+ERROR [2014-01-02 11:14 [17:009]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         contains:true
+ERROR [2014-01-02 11:14 [17:009]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         test_zone: LIBRARY
+
+ERROR [2014-01-02 11:14 [17:010]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         instanceof: true, ability={this} can't be blocked by Walls.
+ERROR [2014-01-02 11:14 [17:010]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         usable: false, ability={this} can't be blocked by Walls.
+ERROR [2014-01-02 11:14 [17:010]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         zone: BATTLEFIELD
+ERROR [2014-01-02 11:14 [17:010]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         object: mage.sets.elspethvstezzeret.Juggernaut@575294b3
+ERROR [2014-01-02 11:14 [17:010]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         contains:true
+ERROR [2014-01-02 11:14 [17:010]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]         test_zone: LIBRARY
+ERROR [2014-01-02 11:14 [17:010]] TraceUtil[pool-3-thread-1]: [0baec503-851f-44e4-9fa8-57b79002a0fb]
+
+WARN  [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: Found non-flying non-reach creature blocking creature with flying
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a] Tracing game state...
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a] Myr Retriever could block Flickerwisp
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a] 
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a] Attacker abilities: 
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]      Cast Flickerwisp, id=c4f82646-6bba-4104-bca2-118c169bb723
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]      Flying, id=249003da-5734-49a0-8f90-f873f34485eb
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]      When {this} enters the battlefield, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step. , id=04911008-01d6-4e4f-82eb-71fb0dcf2986
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a] Blocker abilities: 
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]      Cast Myr Retriever, id=b935f7a8-f9fd-4a55-b7e4-4a77783272b9
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]      When {this} dies, return another target artifact card from your graveyard to your hand. , id=2088ac6c-9205-4d58-a1bb-c2089aa95159
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a] 
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a] Flying ability id: 249003da-5734-49a0-8f90-f873f34485eb
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a] Reach ability id: 46a6d225-b2c2-4ab0-9d65-dfb1b1d3ccf5
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a] 
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a] Restriction effects:
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]     mage.abilities.effects.common.CantAttackBlockAttachedEffect@1a8c4fd
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         id=ac6edfbd-a87d-44fe-a55c-ad143ae40d5e
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         applies to attacker=false
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         applies to blocker=false
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]     mage.sets.timespiral.AmrouSeekersRestrictionEffect@11ce4d9
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         id=ad167c8b-9cd9-4d64-b482-29e22e2c261a
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         applies to attacker=true
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         applies to blocker=true
+
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         instanceof: true, ability=Enchanted creature can't attack or block. 
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         usable: false, ability=Enchanted creature can't attack or block. 
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         zone: BATTLEFIELD
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         object: mage.sets.modernmasters.BoundInSilence@67c2bb
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         contains:true
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         test_zone: LIBRARY
+
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         instanceof: true, ability=Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         usable: false, ability=Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         zone: BATTLEFIELD
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         object: mage.sets.modernmasters.AmrouSeekers@3325f
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         contains:true
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         test_zone: LIBRARY
+
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         instanceof: true, ability=Enchanted creature can't attack or block. 
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         usable: false, ability=Enchanted creature can't attack or block. 
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         zone: BATTLEFIELD
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         object: mage.sets.modernmasters.BoundInSilence@67c2bb
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         contains:true
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         test_zone: LIBRARY
+
+ERROR [2013-07-01 15:46 [58:851]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         instanceof: true, ability=Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.
+ERROR [2013-07-01 15:46 [58:867]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         usable: false, ability=Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.
+ERROR [2013-07-01 15:46 [58:867]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         zone: BATTLEFIELD
+ERROR [2013-07-01 15:46 [58:867]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         object: mage.sets.modernmasters.AmrouSeekers@3325f
+ERROR [2013-07-01 15:46 [58:867]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         contains:true
+ERROR [2013-07-01 15:46 [58:867]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a]         test_zone: LIBRARY
+ERROR [2013-07-01 15:46 [58:867]] TraceUtil[pool-3-thread-7]: [7cbefebb-1531-4a69-a469-b81ce72a118a] 
+
+
+WARN  [2013-07-01 15:46 [59:929]] TraceUtil[pool-3-thread-7]: Found non-flying non-reach creature blocking creature with flying
+ERROR [2013-07-01 15:46 [59:929]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] Tracing game state...
+ERROR [2013-07-01 15:46 [59:929]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] Frogmite could block Stinkweed Imp
+ERROR [2013-07-01 15:46 [59:929]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] 
+ERROR [2013-07-01 15:46 [59:929]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] Attacker abilities: 
+ERROR [2013-07-01 15:46 [59:929]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]      Cast Stinkweed Imp, id=d92af422-51e0-42bf-8363-8b9eb7ab5830
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]      Flying, id=249003da-5734-49a0-8f90-f873f34485eb
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]      Whenever {this} deals combat damage to a creature, destroy that creature. , id=35a2f18f-fd3f-4ef8-a17b-efe3a620401f
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]      Dredge 5 <i>(If you would draw a card, instead you may put exactly three cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>. , id=74a58313-4b9d-4b4f-b0a5-93a7a8ddadb7
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] Blocker abilities: 
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]      Cast Frogmite, id=4d062d2e-3176-490c-a1a2-e7d0c20360b7
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]      Affinity for artifacts, id=86f423f5-8408-479a-8374-a52fd32ce234
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] 
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] Flying ability id: 249003da-5734-49a0-8f90-f873f34485eb
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] Reach ability id: 46a6d225-b2c2-4ab0-9d65-dfb1b1d3ccf5
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] 
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] Restriction effects:
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]     mage.abilities.effects.common.CantAttackBlockAttachedEffect@1a8c4fd
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         id=ac6edfbd-a87d-44fe-a55c-ad143ae40d5e
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         applies to attacker=false
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         applies to blocker=false
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]     mage.sets.timespiral.AmrouSeekersRestrictionEffect@11ce4d9
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         id=ad167c8b-9cd9-4d64-b482-29e22e2c261a
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         applies to attacker=true
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         applies to blocker=true
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         instanceof: true, ability=Enchanted creature can't attack or block. 
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         usable: false, ability=Enchanted creature can't attack or block. 
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         zone: BATTLEFIELD
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         object: mage.sets.modernmasters.BoundInSilence@67c2bb
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         contains:true
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         test_zone: LIBRARY
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         instanceof: true, ability=Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         usable: false, ability=Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         zone: BATTLEFIELD
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         object: mage.sets.modernmasters.AmrouSeekers@3325f
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         contains:true
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         test_zone: LIBRARY
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         instanceof: true, ability=Enchanted creature can't attack or block. 
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         usable: false, ability=Enchanted creature can't attack or block. 
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         zone: BATTLEFIELD
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         object: mage.sets.modernmasters.BoundInSilence@67c2bb
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         contains:true
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         test_zone: LIBRARY
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         instanceof: true, ability=Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         usable: false, ability=Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         zone: BATTLEFIELD
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         object: mage.sets.modernmasters.AmrouSeekers@3325f
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         contains:true
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         test_zone: LIBRARY
+ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] 
+
