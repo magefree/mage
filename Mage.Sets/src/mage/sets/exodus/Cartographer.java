@@ -54,7 +54,7 @@ public class Cartographer extends CardImpl<Cartographer> {
         this.toughness = new MageInt(2);
 
         // When Cartographer enters the battlefield, you may return target land card from your graveyard to your hand.
-      Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
+      Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), true);
       ability.addTarget(new TargetCardInYourGraveyard(new FilterLandCard()));
       this.addAbility(ability);
       
