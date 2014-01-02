@@ -29,8 +29,7 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -50,10 +49,9 @@ public class TouchOfInvisibility extends CardImpl<TouchOfInvisibility> {
         this.color.setBlue(true);
 
         // Target creature is unblockable this turn.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new UnblockableAbility(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
-        
-        // 
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
