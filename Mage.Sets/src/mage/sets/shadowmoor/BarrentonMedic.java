@@ -30,53 +30,51 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.PutCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author jeffwadsworth
- *
+
  */
-public class CinderhazeWretch extends CardImpl<CinderhazeWretch> {
+public class BarrentonMedic extends CardImpl<BarrentonMedic> {
 
-    public CinderhazeWretch(UUID ownerId) {
-        super(ownerId, 60, "Cinderhaze Wretch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+    public BarrentonMedic(UUID ownerId) {
+        super(ownerId, 4, "Barrenton Medic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "SHM";
-        this.subtype.add("Elemental");
-        this.subtype.add("Shaman");
+        this.subtype.add("Kithkin");
+        this.subtype.add("Cleric");
 
-        this.color.setBlack(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        this.color.setWhite(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(4);
 
-        // {tap}: Target player discards a card. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new TapSourceCost(), MyTurnCondition.getInstance());
-        ability.addTarget(new TargetPlayer(true));
+        // {tap}: Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer(true));
         this.addAbility(ability);
-
-        // Put a -1/-1 counter on Cinderhaze Wretch: Untap Cinderhaze Wretch.
+        
+        // Put a -1/-1 counter on Barrenton Medic: Untap Barrenton Medic.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new PutCountersSourceCost(CounterType.M1M1.createInstance(1))));
-
     }
 
-    public CinderhazeWretch(final CinderhazeWretch card) {
+    public BarrentonMedic(final BarrentonMedic card) {
         super(card);
     }
 
     @Override
-    public CinderhazeWretch copy() {
-        return new CinderhazeWretch(this);
+    public BarrentonMedic copy() {
+        return new BarrentonMedic(this);
     }
 }

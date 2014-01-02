@@ -30,53 +30,51 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.costs.common.PutCountersSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DiscardTargetEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.LoseAbilityTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author jeffwadsworth
- *
+
  */
-public class CinderhazeWretch extends CardImpl<CinderhazeWretch> {
+public class KinscaerHarpoonist extends CardImpl<KinscaerHarpoonist> {
 
-    public CinderhazeWretch(UUID ownerId) {
-        super(ownerId, 60, "Cinderhaze Wretch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+    public KinscaerHarpoonist(UUID ownerId) {
+        super(ownerId, 41, "Kinscaer Harpoonist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "SHM";
-        this.subtype.add("Elemental");
-        this.subtype.add("Shaman");
+        this.subtype.add("Kithkin");
+        this.subtype.add("Soldier");
 
-        this.color.setBlack(true);
-        this.power = new MageInt(3);
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {tap}: Target player discards a card. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new TapSourceCost(), MyTurnCondition.getInstance());
-        ability.addTarget(new TargetPlayer(true));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        
+        // Whenever Kinscaer Harpoonist attacks, you may have target creature lose flying until end of turn.
+        Effect effect = new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("you may have target creature lose flying until end of turn");
+        Ability ability = new AttacksTriggeredAbility(effect, true);
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
-
-        // Put a -1/-1 counter on Cinderhaze Wretch: Untap Cinderhaze Wretch.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new PutCountersSourceCost(CounterType.M1M1.createInstance(1))));
-
+        
     }
 
-    public CinderhazeWretch(final CinderhazeWretch card) {
+    public KinscaerHarpoonist(final KinscaerHarpoonist card) {
         super(card);
     }
 
     @Override
-    public CinderhazeWretch copy() {
-        return new CinderhazeWretch(this);
+    public KinscaerHarpoonist copy() {
+        return new KinscaerHarpoonist(this);
     }
 }
