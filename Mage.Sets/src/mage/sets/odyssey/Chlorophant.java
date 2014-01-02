@@ -59,7 +59,7 @@ public class Chlorophant extends CardImpl<Chlorophant> {
         // Threshold - As long as seven or more cards are in your graveyard, Chlorophant has "At the beginning of your upkeep, you may put another +1/+1 counter on Chlorophant."
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, true),
                                                         new CardsInControllerGraveCondition(7),
-                                                        "{this} deals 2 damage to each of up to three target creatures and/or players.<br/><br/><i>Threshold<i/> - {this} deals 4 damage to each of those creatures and/or players instead if seven or more cards are in your graveyard."));
+                                                        "<i>Threshold</i> As long as seven or more cards are in your graveyard, {this} has \"At the beginning of your upkeep, you may put another +1/+1 counter on {this}\""));
     }
 
     public Chlorophant(final Chlorophant card) {
