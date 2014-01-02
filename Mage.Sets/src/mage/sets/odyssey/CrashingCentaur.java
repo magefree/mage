@@ -73,11 +73,12 @@ public class CrashingCentaur extends CardImpl<CrashingCentaur> {
                 new ConditionalContinousEffect(
                     new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
-                    "<i>Threshold</i> - If seven or more cards are in your graveyard, Crashing Centaur gets +2/+2"));
+                    "<i>Threshold</i> - If seven or more cards are in your graveyard, {this} gets +2/+2"));
                 Effect effect = new ConditionalContinousEffect(
                                         new GainAbilitySourceEffect(ShroudAbility.getInstance()),
                                         new CardsInControllerGraveCondition(7), "and has shroud");
         thresholdAbility.addEffect(effect);
+        this.addAbility(thresholdAbility);
         
     }
 
