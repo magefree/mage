@@ -49,6 +49,7 @@ import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
+import mage.MageObject;
 import mage.constants.SpellAbilityType;
 import static mage.constants.Zone.EXILED;
 import mage.game.command.Commander;
@@ -427,7 +428,8 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         // nothing to do
                         break;
                     default:
-                        logger.warn("moveToExile, not fully implemented: from="+fromZone);
+                        MageObject object = game.getObject(sourceId);
+                        logger.warn(new StringBuilder("moveToExile, not fully implemented: from = ").append(fromZone).append(" - ").append(object != null ? object.getName():"null"));
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
             }
