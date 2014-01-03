@@ -70,6 +70,9 @@ import mage.target.common.TargetCreaturePermanent;
  * it an Aura spell ends. It continues resolving as a creature spell and will be put onto the battlefield
  * under the control of the spell’s controller. This is an exception to rule 608.3a.
  *
+ * 702.102e If an Aura with bestow is attached to an illegal object or player, it becomes unattached.
+ * This is an exception to rule 704.5n.
+ * 
  * You don’t choose whether the spell is going to be an Aura spell or not until the spell is already on
  * the stack. Abilities that affect when you can cast a spell, such as flash, will apply to the creature
  * card in whatever zone you’re casting it from. For example, an effect that said you can cast creature

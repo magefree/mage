@@ -255,8 +255,9 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
 
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, controllerId, game);
-        if (permanents.size() > 0)
+        if (permanents.size() > 0) {
             return permanents.get(0);
+        }
         return null;
     }
 

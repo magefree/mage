@@ -411,7 +411,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         r = new Rectangle(21, 21);
         resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
         commandZone = new HoverButton(null, resized, resized, resized, r);
-        commandZone.setToolTipText("Command Zone (Emblems)");
+        commandZone.setToolTipText("Command Zone (Commander and Emblems)");
         commandZone.setOpaque(false);
         commandZone.setObserver(new Command() {
             @Override
