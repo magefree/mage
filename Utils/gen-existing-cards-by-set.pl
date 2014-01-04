@@ -122,7 +122,7 @@ while ( my ($key, $value) = each(@setCards) ) {
                 $landIsland++;
                 $landNr = $landIsland;
             }
-            if($landNr != "") {
+            if(!($landNr eq "")) {
                 $vars{'landNr'} = $landNr;
                 my $className = toCamelCase($cardName) . $landNr;
                 my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
