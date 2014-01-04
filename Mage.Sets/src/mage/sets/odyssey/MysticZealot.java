@@ -62,7 +62,7 @@ public class MysticZealot extends CardImpl<MysticZealot> {
         // Threshold - As long as seven or more cards are in your graveyard, Mystic Zealot gets +1/+1 and has flying.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                                                                     new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7), "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
-        ability.addEffect(new ConditionalContinousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), new CardsInControllerGraveCondition(7), " and has flying"));
+        ability.addEffect(new ConditionalContinousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), new CardsInControllerGraveCondition(7), "and has flying"));
         this.addAbility(ability);
     }
 

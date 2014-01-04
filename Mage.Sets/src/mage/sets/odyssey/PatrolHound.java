@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 
@@ -54,7 +55,7 @@ public class PatrolHound extends CardImpl<PatrolHound> {
         this.toughness = new MageInt(2);
 
         // Discard a card: Patrol Hound gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
     }
 
     public PatrolHound(final PatrolHound card) {

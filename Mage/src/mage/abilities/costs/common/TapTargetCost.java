@@ -48,7 +48,11 @@ public class TapTargetCost extends CostImpl<TapTargetCost> {
 
     public TapTargetCost(TargetControlledPermanent target) {
         this.target = target;
-        this.text = "Tap " + target.getMaxNumberOfTargets() + " " + target.getTargetName();
+        this.text = 
+            new StringBuilder("Tap ")
+                .append(target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") ? "":target.getMaxNumberOfTargets())
+                .append(" ")
+                .append(target.getTargetName()).toString();
     }
 
     public TapTargetCost(final TapTargetCost cost) {
@@ -61,8 +65,9 @@ public class TapTargetCost extends CostImpl<TapTargetCost> {
         if (target.choose(Outcome.Tap, controllerId, sourceId, game)) {
             for (UUID targetId: (List<UUID>)target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
-                if (permanent == null)
+                if (permanent == null) {
                     return false;
+                }
                 paid |= permanent.tap(game);
             }
         }

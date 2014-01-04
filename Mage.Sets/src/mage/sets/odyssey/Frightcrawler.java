@@ -65,7 +65,7 @@ public class Frightcrawler extends CardImpl<Frightcrawler> {
                 new ConditionalContinousEffect(
                     new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
-                    "<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, {this} gets +2/+2 "
+                    "<i>Threshold</i> - If seven or more cards are in your graveyard, {this} gets +2/+2 "
                 ));
             thresholdAbility.addEffect(
                 new ConditionalContinousEffect(

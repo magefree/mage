@@ -39,7 +39,9 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -49,10 +51,11 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class MasterApothecary extends CardImpl<MasterApothecary> {
     
-    public static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Cleric");
+    public static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped Cleric you control");
     
     static {
         filter.add(new SubtypePredicate("Cleric"));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public MasterApothecary(UUID ownerId) {
