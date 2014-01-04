@@ -79,7 +79,7 @@ class PardicMinerEffect extends ReplacementEffectImpl<PardicMinerEffect> {
    
     public PardicMinerEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "Target player can't play lands.";
+        staticText = "Target player can't play lands this turn.";
     }
 
     public PardicMinerEffect(final PardicMinerEffect effect) {
@@ -103,15 +103,10 @@ class PardicMinerEffect extends ReplacementEffectImpl<PardicMinerEffect> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.LAND_PLAYED && event.getPlayerId().equals(source.getFirstTarget())) {
-          //  MageObject object = game.getObject(event.getSourceId());
-           // if (object.getCardType().contains(CardType.LAND)) {
-            //    return true;
-           // }
+        if (event.getType() == GameEvent.EventType.PLAY_LAND && event.getPlayerId().equals(source.getFirstTarget())) {
             return true;
         }
         return false;
-    
     }
 
 }
