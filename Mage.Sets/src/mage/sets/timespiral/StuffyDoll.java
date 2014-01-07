@@ -39,6 +39,7 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageSelfEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -68,7 +69,7 @@ public class StuffyDoll extends CardImpl<StuffyDoll> {
         // Whenever Stuffy Doll is dealt damage, it deals that much damage to the chosen player.
         this.addAbility(new StuffyDollTriggeredAbility());
         // {tap}: Stuffy Doll deals 1 damage to itself.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageSelfEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageSelfEffect(1), new TapSourceCost()));
     }
 
     public StuffyDoll(final StuffyDoll card) {
@@ -174,29 +175,3 @@ class StuffyDollGainLifeEffect extends OneShotEffect<StuffyDollGainLifeEffect> {
     }
 }
 
-class DamageSelfEffect extends OneShotEffect<DamageSelfEffect> {
-
-    public DamageSelfEffect() {
-        super(Outcome.Damage);
-        this.staticText = "Stuffy Doll deals 1 damage to itself";
-    }
-
-    public DamageSelfEffect(final DamageSelfEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DamageSelfEffect copy() {
-        return new DamageSelfEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            permanent.damage(1, source.getId(), game, true, false);
-            return true;
-        }
-        return false;
-    }
-}
