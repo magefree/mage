@@ -70,6 +70,7 @@ public class FullMoonsRise extends CardImpl<FullMoonsRise> {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter));
         Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.setText("and have trample");
+        ability.addEffect(effect);
         this.addAbility(ability);
 
         // Sacrifice Full Moon's Rise: Regenerate all Werewolf creatures you control.
