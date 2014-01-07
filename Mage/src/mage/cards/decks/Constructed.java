@@ -70,7 +70,8 @@ public class Constructed extends DeckValidator {
             valid = false;
         }
 
-        List<String> basicLandNames = new ArrayList<String>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains"));
+        List<String> basicLandNames = new ArrayList<String>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains",
+                                      "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
         Map<String, Integer> counts = new HashMap<String, Integer>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
