@@ -78,6 +78,7 @@ import mage.view.TableView;
 import mage.view.TournamentView;
 import mage.view.UserDataView;
 import mage.view.UserView;
+import mage.view.UsersView;
 import org.apache.log4j.Logger;
 
 /**
@@ -291,7 +292,7 @@ public class MageServerImpl implements MageServer {
 
     @Override
     //FIXME: why no sessionId here???
-    public List<String> getConnectedPlayers(UUID roomId) throws MageException {
+    public List<UsersView> getConnectedPlayers(UUID roomId) throws MageException {
         try {
             GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
             if (room != null) {

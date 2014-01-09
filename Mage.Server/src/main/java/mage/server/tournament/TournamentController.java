@@ -54,6 +54,7 @@ import mage.server.draft.DraftManager;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
@@ -91,7 +92,7 @@ public class TournamentController {
                 public void event(TableEvent event) {
                     switch (event.getEventType()) {
                         case INFO:
-                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK);
+                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, MessageType.STATUS);
                             logger.debug(tournament.getId() + " " + event.getMessage());
                             break;
                         case START_DRAFT:
@@ -137,7 +138,7 @@ public class TournamentController {
             if (!player.getPlayer().isHuman()) {
                 player.setJoined();
                 logger.debug("player " + player.getPlayer().getId() + " has joined tournament " + tournament.getId());
-                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK);
+                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK, true, MessageType.STATUS);
             }
         }
         checkStart();
@@ -151,7 +152,7 @@ public class TournamentController {
         TournamentPlayer player = tournament.getPlayer(playerId);
         player.setJoined();
         logger.debug("player " + playerId + " has joined tournament " + tournament.getId());
-        ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK);
+        ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK, true, MessageType.STATUS);
         checkStart();
     }
 
@@ -247,7 +248,7 @@ public class TournamentController {
             TournamentPlayer player = tournament.getPlayer(playerId);
             if (player != null && !player.hasQuit()) {
                 tournamentSessions.get(playerId).submitDeck(deck);
-                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has submitted his tournament deck", MessageColor.BLACK, true, SoundToPlay.PlayerSubmittedDeck);
+                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has submitted his tournament deck", MessageColor.BLACK, true, MessageType.STATUS,  SoundToPlay.PlayerSubmittedDeck);
             }            
         }
     }
@@ -275,7 +276,7 @@ public class TournamentController {
             TournamentPlayer tPlayer = tournament.getPlayer(playerId);
             if (tPlayer != null) {
                 if (started) {
-                    ChatManager.getInstance().broadcast(chatId, "", tPlayer.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK, true, SoundToPlay.PlayerLeft);
+                    ChatManager.getInstance().broadcast(chatId, "", tPlayer.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK, true, MessageType.STATUS, SoundToPlay.PlayerLeft);
                     String info;
                     if (tournament.isDoneConstructing()) {
                         info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();

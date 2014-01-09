@@ -38,9 +38,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import mage.constants.TableState;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
+import mage.constants.TableState;
 import mage.game.GameException;
 import mage.game.Table;
 import mage.game.match.MatchOptions;
@@ -51,8 +51,8 @@ import mage.server.User;
 import mage.server.UserManager;
 import mage.view.MatchView;
 import mage.view.TableView;
+import mage.view.UsersView;
 import org.apache.log4j.Logger;
-
 
 /**
  *
@@ -65,7 +65,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     private static ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
     private static List<TableView> tableView = new ArrayList<TableView>();
     private static List<MatchView> matchView = new ArrayList<MatchView>();
-    private static List<String> playersView = new ArrayList<String>();
+    private static List<UsersView> usersView = new ArrayList<UsersView>();
 
     private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
 
@@ -109,16 +109,16 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         }
         tableView = tableList;
         matchView = matchList;
-        List<String> players = new ArrayList<String>();
+        List<UsersView> users = new ArrayList<UsersView>();
         for (User user : UserManager.getInstance().getUsers()) {
-            StringBuilder sb = new StringBuilder(user.getName());
-            sb.append(user.getUserInfo());
+            StringBuilder sb = new StringBuilder(user.getGameInfo());
             if (!user.isConnected()) {
                 sb.append(" (discon.)");
             } 
-            players.add(sb.toString());            
+            users.add(new UsersView(user.getName(), user.getInfo(), sb.toString()));
         }
-        playersView = players;
+        Collections.sort(users, new UserNameSorter());
+        usersView = users;
     }
 
     @Override
@@ -190,8 +190,8 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public List<String> getPlayers() {
-        return playersView;
+    public List<UsersView> getPlayers() {
+        return usersView;
     }
 
 }
@@ -200,5 +200,12 @@ class TimestampSorter implements Comparator<Table> {
     @Override
     public int compare(Table one, Table two) {
         return one.getCreateTime().compareTo(two.getCreateTime());
+    }
+}
+
+class UserNameSorter implements Comparator<UsersView> {
+    @Override
+    public int compare(UsersView one, UsersView two) {
+        return one.getUserName().compareTo(two.getUserName());
     }
 }

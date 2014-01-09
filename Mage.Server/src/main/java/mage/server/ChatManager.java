@@ -28,10 +28,11 @@
 
 package mage.server;
 
-import mage.view.ChatMessage.MessageColor;
-
+import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.view.ChatMessage.MessageColor;
+import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 
 /**
@@ -69,16 +70,68 @@ public class ChatManager {
     }
 
     public void broadcast(UUID chatId, String userName, String message, MessageColor color) {
-        chatSessions.get(chatId).broadcast(userName, message, color);
+        this.broadcast(chatId, userName, message, color, true);
     }
 
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime) {
-        chatSessions.get(chatId).broadcast(userName, message, color, withTime);
+        this.broadcast(chatId, userName, message, color, withTime, MessageType.TALK);
     }
 
-    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, SoundToPlay soundToPlay) {
-        chatSessions.get(chatId).broadcast(userName, message, color, withTime, soundToPlay);
+    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType) {
+        this.broadcast(chatId, userName, message, color, withTime, messageType, null);
     }
+
+    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
+        if (message.startsWith("\\")) {
+            User user = UserManager.getInstance().findUser(userName);
+            if (user != null && performUserCommand(user, message, chatId)) {
+                return;
+            }
+        }
+        chatSessions.get(chatId).broadcast(userName, message, color, withTime, messageType, soundToPlay);
+    }
+
+
+    private boolean performUserCommand(User user, String message, UUID chatId) {
+        String command = message.trim().toUpperCase(Locale.ENGLISH);
+        if (command.equals("\\I") || command.equals("\\INFO")) {            
+            user.setInfo("");
+            chatSessions.get(chatId).broadcastInfoToUser(user,message);
+            return true;
+        }
+        if (command.startsWith("\\I ") || command.startsWith("\\INFO ")) {
+            user.setInfo(message.substring(command.startsWith("\\I ") ? 3 : 6));
+            chatSessions.get(chatId).broadcastInfoToUser(user,message);
+            return true;
+        }
+        if (command.startsWith("\\W ") || command.startsWith("\\WHISPER ")) {
+            String rest = message.substring(command.startsWith("\\W ") ? 3 : 9);
+            int first = rest.indexOf(" ");
+            if (first > 1) {
+                String userToName = rest.substring(0,first);
+                rest = rest.substring(first + 1).trim();
+                User userTo = UserManager.getInstance().findUser(userToName);
+                if (userTo != null) {
+                    chatSessions.get(chatId).broadcastWhisperToUser(user, userTo, rest);
+                } else {
+                    message += new StringBuilder("\nUser ").append(userToName).append(" not found").toString();
+                    chatSessions.get(chatId).broadcastInfoToUser(user,message);
+                }
+                return true;
+            }
+        }
+        if (command.equals("\\L") || command.equals("\\LIST")) {
+            message += new StringBuilder("\nList of commands:")
+                    .append("\n\\info <text> - set a info text to your player")
+                    .append("\n\\list - Show a list of commands")
+                    .append("\n\\whisper <player name> <text> - Whiper to a player").toString();
+            chatSessions.get(chatId).broadcastInfoToUser(user,message);
+            return true;
+        }
+        return false;
+    }
+
+
 
     /**
      * 

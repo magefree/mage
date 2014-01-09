@@ -66,6 +66,7 @@ public class User {
     private String userName;
     private String sessionId = "";
     private String host;
+    private String info;
     private Date connectionTime = new Date();
     private Date lastActivity = new Date();
     private UserState userState;
@@ -305,7 +306,7 @@ public class User {
         return this.userData;
     }
 
-    public String getUserInfo() {
+    public String getGameInfo() {
         StringBuilder sb =  new StringBuilder();
         if (gameSessions.size() > 0) {
             sb.append("G: ").append(gameSessions.size());
@@ -316,10 +317,14 @@ public class User {
             }
             sb.append("T: ").append(tournamentSessions.size());
         }
-        if (sb.length() > 0) {
-            sb.insert(0, " - [");
-            sb.append("]");
-        }
         return sb.toString();
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String Info) {
+        this.info = Info;
     }
 }

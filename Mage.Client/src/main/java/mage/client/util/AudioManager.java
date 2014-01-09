@@ -48,6 +48,7 @@ public class AudioManager {
 
             audioManager.playerJoinedTable = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerJoinedTable.wav");
             audioManager.playerSubmittedDeck = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerSubmittedDeck.wav");
+            audioManager.playerWhispered = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerWhispered.wav");
             audioManager.playerLeft = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerLeft.wav");
             audioManager.playerWon = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerWon.wav");
             audioManager.playerLost = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerLost.wav");
@@ -125,6 +126,10 @@ public class AudioManager {
 
     public static void playPlayerJoinedTable() {
         checkAndPlayClip(getManager().playerJoinedTable);
+    }
+
+    public static void playPlayerWhispered() {
+        checkAndPlayClip(getManager().playerWhispered);
     }
 
     public static void playPlayerSubmittedDeck() {
@@ -207,6 +212,7 @@ public class AudioManager {
 
     private Clip playerJoinedTable = null;
     private Clip playerSubmittedDeck = null;
+    private Clip playerWhispered = null;
     private Clip playerLeft = null;
     private Clip playerWon = null;
     private Clip playerLost = null;

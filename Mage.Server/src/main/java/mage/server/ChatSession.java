@@ -37,6 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import mage.interfaces.callback.ClientCallback;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
 
@@ -47,6 +48,8 @@ import org.apache.log4j.Logger;
 public class ChatSession {
 
     private static final Logger logger = Logger.getLogger(ChatSession.class);
+    private static final Calendar cal = new GregorianCalendar();
+
     private ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<UUID, String>();
     private UUID chatId;
     private DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
@@ -60,7 +63,7 @@ public class ChatSession {
         if (user != null && !clients.containsKey(userId)) {
             String userName = user.getName();
             clients.put(userId, userName);
-            broadcast(userName, " has joined", MessageColor.BLUE);
+            broadcast(null, new StringBuilder(userName).append(" has joined").toString(), MessageColor.BLUE, true, MessageType.STATUS);
             logger.debug(userName + " joined chat " + chatId);
         }
     }
@@ -80,22 +83,46 @@ public class ChatSession {
                  default:
                      message = " has left chat";
             }
-            broadcast(userName, message, MessageColor.BLUE);
+            broadcast(null, new StringBuilder(userName).append(message).toString(), MessageColor.BLUE, true, MessageType.STATUS);
             logger.debug(userName + message + " " + chatId);
         }
     }
 
+    public boolean broadcastInfoToUser(User toUser, String message) {
+        if (clients.containsKey(toUser.getId())) {
+            toUser.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(null, message, timeFormatter.format(cal.getTime()), MessageColor.ORANGE, MessageType.USER_INFO, null)));
+            return true;
+        }
+        return false;
+    }
+
+    public boolean broadcastWhisperToUser(User fromUser, User toUser, String message) {
+        if (clients.containsKey(toUser.getId())) {
+            toUser.fireCallback(new ClientCallback("chatMessage", chatId, 
+                    new ChatMessage(new StringBuilder("Whisper from ").append(fromUser.getName()).toString(), message, timeFormatter.format(cal.getTime()), MessageColor.YELLOW, MessageType.WHISPER, SoundToPlay.PlayerWhispered)));
+            if (clients.containsKey(fromUser.getId())) {
+                fromUser.fireCallback(new ClientCallback("chatMessage", chatId,
+                        new ChatMessage(new StringBuilder("Whisper to ").append(toUser.getName()).toString(), message, timeFormatter.format(cal.getTime()), MessageColor.YELLOW, MessageType.WHISPER, null)));
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void broadcast(String userName, String message, MessageColor color) {
-        broadcast(userName, message, color, true);        
+        this.broadcast(userName, message, color, true);
     }
 
     public void broadcast(String userName, String message, MessageColor color, boolean withTime) {
-        broadcast(userName, message, color, withTime, null);
+        this.broadcast(userName, message, color, withTime, MessageType.TALK);
     }
 
-    public void broadcast(String userName, String message, MessageColor color, boolean withTime, SoundToPlay soundToPlay) {
-        if (!message.isEmpty()) {
-            Calendar cal = new GregorianCalendar();
+    public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType) {
+        this.broadcast(userName, message, color, withTime, messageType, null);
+    }
+
+    public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
+        if (!message.isEmpty()) {            
             final String msg = message;
             final String time = (withTime ? timeFormatter.format(cal.getTime()):"");
             final String username = userName;
@@ -103,7 +130,7 @@ public class ChatSession {
             for (UUID userId: clients.keySet()) {
                 User user = UserManager.getInstance().getUser(userId);
                 if (user != null) {
-                    user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, soundToPlay)));
+                    user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
                 }
                 else {
                     kill(userId, User.DisconnectReason.CleaningUp);

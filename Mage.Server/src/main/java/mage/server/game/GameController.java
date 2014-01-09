@@ -76,7 +76,9 @@ import mage.server.util.ThreadExecutor;
 import mage.utils.timer.PriorityTimer;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
+import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.ChatMessage.MessageType;
 import mage.view.GameView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
@@ -133,11 +135,11 @@ public class GameController implements GameCallback {
                                 updateGame();
                                 break;
                             case INFO:
-                                ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK);
+                                ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, ChatMessage.MessageType.GAME);
                                 logger.debug(game.getId() + " " + event.getMessage());
                                 break;
                             case STATUS:
-                                ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime());
+                                ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime(), ChatMessage.MessageType.GAME);
                                 logger.debug(game.getId() + " " + event.getMessage());
                                 break;
                             case ERROR:
@@ -272,7 +274,7 @@ public class GameController implements GameCallback {
         gameSession.setUserData(user.getUserData());
         user.addGame(playerId, gameSession);
         logger.debug(new StringBuilder("Player ").append(playerId).append(" has joined game ").append(game.getId()).toString());
-        ChatManager.getInstance().broadcast(chatId, "", new StringBuilder(game.getPlayer(playerId).getName()).append(" has joined the game").toString(), MessageColor.BLACK);
+        ChatManager.getInstance().broadcast(chatId, "", new StringBuilder(game.getPlayer(playerId).getName()).append(" has joined the game").toString(), MessageColor.ORANGE, true, MessageType.GAME);
         checkStart();
     }
 
@@ -321,7 +323,7 @@ public class GameController implements GameCallback {
             GameWatcher gameWatcher = new GameWatcher(userId, game, false);
             watchers.put(userId, gameWatcher);
             gameWatcher.init();
-            ChatManager.getInstance().broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE);
+            ChatManager.getInstance().broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
         }
     }
 
@@ -329,7 +331,7 @@ public class GameController implements GameCallback {
         watchers.remove(userId);
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
-            ChatManager.getInstance().broadcast(chatId, user.getName(), " has stopped watching", MessageColor.BLUE);
+            ChatManager.getInstance().broadcast(chatId, user.getName(), " has stopped watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
         }
     }
 
@@ -405,12 +407,11 @@ public class GameController implements GameCallback {
 
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
-            ;
             StringBuilder sb = new StringBuilder(game.getPlayer(userPlayerMap.get(userId)).getName())
                     .append(" has timed out (player had priority and was not active for ")
                     .append(ConfigSettings.getInstance().getMaxSecondsIdle())
                     .append(" seconds ) - Auto concede.");
-            ChatManager.getInstance().broadcast(chatId, "", sb.toString() , MessageColor.BLACK);
+            ChatManager.getInstance().broadcast(chatId, "", sb.toString() , MessageColor.BLACK, true, MessageType.STATUS);
             concede(userId);
         }
     }

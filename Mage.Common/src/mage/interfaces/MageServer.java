@@ -62,7 +62,7 @@ public interface MageServer {
 
     // server state methods
     ServerState getServerState() throws MageException;
-    List<String> getConnectedPlayers(UUID roomId) throws MageException;
+    List<UsersView> getConnectedPlayers(UUID roomId) throws MageException;
     List<MatchView> getFinishedMatches(UUID roomId) throws MageException;
     Object getServerMessagesCompressed(String sessionId) throws MageException;     // messages of the day
 

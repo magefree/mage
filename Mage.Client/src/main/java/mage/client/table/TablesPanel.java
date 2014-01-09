@@ -79,6 +79,7 @@ import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.view.MatchView;
 import mage.view.TableView;
+import mage.view.UsersView;
 import org.apache.log4j.Logger;
 
 /**
@@ -827,7 +828,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
 }
 
-class UpdatePlayersTask extends SwingWorker<Void, Collection<String>> {
+class UpdatePlayersTask extends SwingWorker<Void, Collection<UsersView>> {
 
     private Session session;
     private UUID roomId;
@@ -851,8 +852,8 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<String>> {
     }
 
     @Override
-    protected void process(List<Collection<String>> players) {
-        chat.setPlayers(players.get(0));
+    protected void process(List<Collection<UsersView>> players) {
+        chat.setPlayers(players);
     }
 
     @Override

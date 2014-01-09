@@ -42,13 +42,18 @@ public class ChatMessage implements Serializable {
     private String message;
     private MessageColor color;
     private SoundToPlay soundToPlay;
+    private MessageType messageType;
 
     public enum MessageColor {
-        BLACK, RED, GREEN, BLUE, ORANGE;
+        BLACK, RED, GREEN, BLUE, ORANGE, YELLOW;
+    }
+
+    public enum MessageType {
+        USER_INFO, STATUS, GAME, TALK, WHISPER;
     }
 
     public enum SoundToPlay {
-        PlayerLeft, PlayerSubmittedDeck;
+        PlayerLeft, PlayerSubmittedDeck, PlayerWhispered;
     }
 
     public ChatMessage(String username, String message, String time, MessageColor color) {
@@ -56,10 +61,15 @@ public class ChatMessage implements Serializable {
     }
 
     public ChatMessage(String username, String message, String time, MessageColor color, SoundToPlay soundToPlay) {
+        this(username, message, time, color, MessageType.TALK, soundToPlay);
+    }
+    
+    public ChatMessage(String username, String message, String time, MessageColor color, MessageType messageType, SoundToPlay soundToPlay) {
         this.username = username;
         this.message = message;
         this.time = time;
         this.color = color;
+        this.messageType = messageType;
         this.soundToPlay = soundToPlay;
     }
 
@@ -72,7 +82,7 @@ public class ChatMessage implements Serializable {
     }
 
     public boolean isUserMessage() {
-        return color != null && color.equals(MessageColor.BLUE);
+        return color != null && (color.equals(MessageColor.BLUE) || color.equals(MessageColor.YELLOW));
     }
 
     public boolean isStatusMessage() {
@@ -89,6 +99,10 @@ public class ChatMessage implements Serializable {
 
     public SoundToPlay getSoundToPlay() {
         return soundToPlay;
+    }
+
+    public MessageType getMessageType() {
+        return messageType;
     }
 
 }
