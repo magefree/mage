@@ -30,10 +30,6 @@ package mage.sets.newphyrexia;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
@@ -46,6 +42,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
@@ -73,12 +73,12 @@ public class KarnLiberated extends CardImpl<KarnLiberated> {
 
         // +4: Target player exiles a card from his or her hand.
         LoyaltyAbility ability1 = new LoyaltyAbility(new ExileFromZoneTargetEffect(Zone.HAND, exileId, "Karn Liberated", new FilterCard()), 4);
-        ability1.addTarget(new TargetPlayer());
+        ability1.addTarget(new TargetPlayer(true));
         this.addAbility(ability1);
 
         // -3: Exile target permanent.
         LoyaltyAbility ability2 = new LoyaltyAbility(new ExileTargetEffect(exileId, "Karn Liberated"), -3);
-        ability2.addTarget(new TargetPermanent());
+        ability2.addTarget(new TargetPermanent(true));
         this.addAbility(ability2);
 
         // -14: Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn Liberated. Then put those cards onto the battlefield under your control.
