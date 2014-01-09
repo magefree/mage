@@ -63,14 +63,20 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
     public void testTurnToFrog() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Master of the Pearl Trident");
+        // Creature — Merfolk 2/2, UU
+        // Other Merfolk creatures you control get +1/+1 and have islandwalk. (They can't be blocked as long as defending player controls an Island.)
+
         addCard(Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident");
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        // Creature — Elf Druid 1/1, G
+        // {T}: Add {G} to your mana pool.
         addCard(Zone.HAND, playerB, "Turn to Frog");
+        // Target creature loses all abilities and becomes a 1/1 blue Frog until end of turn.
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of the Pearl Trident");
-        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerB, "Turn to Frog", "Master of the Pearl Trident");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Frog", "Master of the Pearl Trident");
 
         attack(3, playerA, "Merfolk of the Pearl Trident");
         block(3, playerB, "Llanowar Elves", "Merfolk of the Pearl Trident");

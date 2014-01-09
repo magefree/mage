@@ -727,33 +727,30 @@ public class ContinuousEffects implements Serializable {
                 effect.apply(Layer.ColorChangingEffects_5, SubLayer.NA, ability, game);
             }
         }
-                
+
         Map<ContinuousEffect, List<Ability>> appliedEffects = new HashMap<ContinuousEffect, List<Ability>>();
-        boolean allApplied = false;        
-        while (!allApplied) { // loop needed if a added effect adds again an effect (e.g. Level 5- of Joraga Treespeaker)
-            boolean effectApplied = false;
+        boolean done = false;
+        while (!done) { // loop needed if a added effect adds again an effect (e.g. Level 5- of Joraga Treespeaker)
+            done = true;
             layer = filterLayeredEffects(layerEffects, Layer.AbilityAddingRemovingEffects_6);
             for (ContinuousEffect effect: layer) {
                 if (layerEffects.contains(effect)) {
                     List<Ability> appliedAbilities = appliedEffects.get(effect);
                     HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
-                    for (Ability ability : abilities) {                        
+                    for (Ability ability : abilities) {
                         if (appliedAbilities == null || !appliedAbilities.contains(ability)) {
                             if (appliedAbilities == null) {
                                 appliedAbilities = new ArrayList<Ability>();
                                 appliedEffects.put(effect, appliedAbilities);
                             }
-                            appliedAbilities.add(ability);                            
+                            appliedAbilities.add(ability);
                             effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability, game);
-                            effectApplied = true;
+                            done = false;
+                            // list must be updated after each applied effect (eg. if "Turn to Frog" removes abilities)
+                            layerEffects = getLayeredEffects(game);
                         }
                     }
                 }
-            }
-            // if effect were applied, new effects of this layer could be added, so all yet not applied effects of this layer must still be applied
-            allApplied = !effectApplied;
-            if (effectApplied) {                
-                layerEffects = getLayeredEffects(game);                
             }
         }
         
@@ -770,7 +767,9 @@ public class ContinuousEffects implements Serializable {
                 effect.apply(Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, ability, game);
             }
         }
+        
         applyCounters.apply(Layer.PTChangingEffects_7, SubLayer.Counters_7d, null, game);
+
         for (ContinuousEffect effect: layer) {
             HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
