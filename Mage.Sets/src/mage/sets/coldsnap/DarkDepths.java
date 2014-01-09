@@ -129,5 +129,6 @@ class MaritLageToken extends Token {
         
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(IndestructibleAbility.getInstance());
+        this.setOriginalExpansionSetCode("CSP");
     }
 }
