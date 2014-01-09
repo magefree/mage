@@ -28,6 +28,18 @@
 
 package mage.remote;
 
+import java.net.Authenticator;
+import java.net.ConnectException;
+import java.net.MalformedURLException;
+import java.net.PasswordAuthentication;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -44,19 +56,28 @@ import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
-import mage.view.*;
+import mage.view.DraftPickView;
+import mage.view.GameTypeView;
+import mage.view.MatchView;
+import mage.view.TableView;
+import mage.view.TournamentTypeView;
+import mage.view.TournamentView;
+import mage.view.UserDataView;
+import mage.view.UserView;
+import mage.view.UsersView;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.*;
+import org.jboss.remoting.CannotConnectException;
+import org.jboss.remoting.Client;
+import org.jboss.remoting.ConnectionListener;
+import org.jboss.remoting.ConnectionValidator;
+import org.jboss.remoting.InvokerLocator;
+import org.jboss.remoting.Remoting;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
-
-import java.net.*;
-import java.util.*;
-
 
 /**
  *
@@ -70,6 +91,7 @@ public class SessionImpl implements Session {
     private MageServer server;
     private MageClient client;
     private Client callbackClient;
+    private CallbackHandler callbackHandler;
     private ServerState serverState;
     private SessionState sessionState = SessionState.DISCONNECTED;
     private Connection connection;
@@ -152,9 +174,17 @@ public class SessionImpl implements Session {
 
             Map<String, String> callbackMetadata = new HashMap<String, String>();
             callbackMetadata.put(Bisocket.IS_CALLBACK_SERVER, "true");
-            CallbackHandler callbackHandler = new CallbackHandler();
+            if (callbackHandler == null) {
+                callbackHandler = new CallbackHandler();
+            }
             callbackClient.addListener(callbackHandler, callbackMetadata);
-            callbackClient.invoke("");
+
+            Set callbackConnectors = callbackClient.getCallbackConnectors(callbackHandler);
+            if (callbackConnectors.size() != 1) {
+                logger.warn("There should be one callback Connector (number existing = " + callbackConnectors.size() + ")");
+            }
+
+            callbackClient.invoke(null);
 
             this.sessionId = callbackClient.getSessionId();
             boolean registerResult;
@@ -241,6 +271,7 @@ public class SessionImpl implements Session {
             return;
         }
         try {
+            callbackClient.removeListener(callbackHandler);
             callbackClient.disconnect();
             TransporterClient.destroyTransporterClient(server);
         } catch (Throwable ex) {
@@ -486,7 +517,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException {
+    public Collection<UsersView> getConnectedPlayers(UUID roomId) throws MageRemoteException {
         try {
             if (isConnected()) {
                 return server.getConnectedPlayers(roomId);
