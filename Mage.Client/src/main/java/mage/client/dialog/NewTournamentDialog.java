@@ -81,6 +81,7 @@ public class NewTournamentDialog extends MageDialog {
         this.spnNumWins.setModel(new SpinnerNumberModel(2, 1, 5, 1));
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
         this.spnConstructTime.setModel(new SpinnerNumberModel(10, 10, 30, 5));
+        this.spnNumRounds.setModel(new SpinnerNumberModel(2, 2, 10, 1));
     }
 
     public void showDialog(UUID roomId) {
@@ -89,6 +90,7 @@ public class NewTournamentDialog extends MageDialog {
         this.txtPlayer1Name.setText(session.getUserName());
         cbTournamentType.setModel(new DefaultComboBoxModel(session.getTournamentTypes().toArray()));
         cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
+        cbDraftCube.setModel(new DefaultComboBoxModel(session.getDraftCubes()));
         cbDraftTiming.setModel(new DefaultComboBoxModel(DraftOptions.TimingOption.values()));
         cbAllowSpectators.setSelected(true);
 
@@ -107,6 +109,7 @@ public class NewTournamentDialog extends MageDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
@@ -114,12 +117,17 @@ public class NewTournamentDialog extends MageDialog {
         cbTimeLimit = new javax.swing.JComboBox();
         lblConstructionTime = new javax.swing.JLabel();
         spnConstructTime = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
+        lblTournamentType = new javax.swing.JLabel();
         cbTournamentType = new javax.swing.JComboBox();
         lblFreeMulligans = new javax.swing.JLabel();
         spnFreeMulligans = new javax.swing.JSpinner();
         lblNumWins = new javax.swing.JLabel();
         spnNumWins = new javax.swing.JSpinner();
+        lblDraftCube = new javax.swing.JLabel();
+        cbDraftCube = new javax.swing.JComboBox();
+        lblNumRounds = new javax.swing.JLabel();
+        spnNumRounds = new javax.swing.JSpinner();
+        lblPacks = new javax.swing.JLabel();
         pnlPacks = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         spnNumPlayers = new javax.swing.JSpinner();
@@ -127,14 +135,13 @@ public class NewTournamentDialog extends MageDialog {
         jLabel6 = new javax.swing.JLabel();
         cbDraftTiming = new javax.swing.JComboBox();
         cbAllowSpectators = new javax.swing.JCheckBox();
-        btnOk = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtPlayer1Name = new javax.swing.JTextField();
         pnlOtherPlayers = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        btnOk = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setTitle("New Tournament");
 
@@ -142,9 +149,12 @@ public class NewTournamentDialog extends MageDialog {
 
         lbTimeLimit.setText("Time Limit:");
 
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, cbTimeLimit, org.jdesktop.beansbinding.ObjectProperty.create(), lbTimeLimit, org.jdesktop.beansbinding.BeanProperty.create("labelFor"));
+        bindingGroup.addBinding(binding);
+
         lblConstructionTime.setText("Construction Time (Minutes):");
 
-        jLabel1.setText("Tournament Type:");
+        lblTournamentType.setText("Tournament Type:");
 
         cbTournamentType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbTournamentType.addActionListener(new java.awt.event.ActionListener() {
@@ -163,6 +173,26 @@ public class NewTournamentDialog extends MageDialog {
             }
         });
 
+        lblDraftCube.setText("Draft Cube");
+
+        cbDraftCube.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbDraftCube.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDraftCubeActionPerformed(evt);
+            }
+        });
+
+        lblNumRounds.setText("Number of Swiss Rounds:");
+
+        spnNumRounds.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnNumRoundsnumPlayersChanged(evt);
+            }
+        });
+
+        lblPacks.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblPacks.setText("Packs");
+
         pnlPacks.setLayout(new java.awt.GridLayout(0, 1, 2, 0));
 
         jLabel2.setText("Players:");
@@ -176,41 +206,33 @@ public class NewTournamentDialog extends MageDialog {
         jLabel6.setText("Timing:");
 
         cbDraftTiming.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbDraftTiming.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDraftTimingActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlDraftOptionsLayout = new javax.swing.GroupLayout(pnlDraftOptions);
         pnlDraftOptions.setLayout(pnlDraftOptionsLayout);
         pnlDraftOptionsLayout.setHorizontalGroup(
             pnlDraftOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDraftOptionsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbDraftTiming, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         pnlDraftOptionsLayout.setVerticalGroup(
             pnlDraftOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDraftOptionsLayout.createSequentialGroup()
-                .addComponent(jLabel6)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(cbDraftTiming)
+                .addGap(3, 3, 3)
+                .addGroup(pnlDraftOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbDraftTiming, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         cbAllowSpectators.setText("Allow spectators");
-
-        btnOk.setText("OK");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
-
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Player 1 (You)");
@@ -246,25 +268,35 @@ public class NewTournamentDialog extends MageDialog {
                 .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
         );
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel5.setText("Packs");
+        btnOk.setText("OK");
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
                         .addComponent(pnlDraftOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbAllowSpectators)
-                        .addGap(9, 9, 9))
+                        .addComponent(cbAllowSpectators))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlPacks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -273,37 +305,43 @@ public class NewTournamentDialog extends MageDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(lblName)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lbTimeLimit)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbTimeLimit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbTournamentType, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbTimeLimit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbTimeLimit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblTournamentType)
+                                    .addComponent(lblDraftCube))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblConstructionTime, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(spnConstructTime, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblFreeMulligans)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblNumWins)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel5))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(cbDraftCube, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbTournamentType, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblConstructionTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnConstructTime, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblFreeMulligans)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblNumWins)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblNumRounds)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnNumRounds, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lblPacks))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -319,37 +357,38 @@ public class NewTournamentDialog extends MageDialog {
                     .addComponent(spnConstructTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(lblTournamentType)
                     .addComponent(cbTournamentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFreeMulligans)
                     .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNumWins)
                     .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbDraftCube, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDraftCube)
+                    .addComponent(spnNumRounds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNumRounds))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlPacks, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(spnNumPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                                    .addComponent(pnlDraftOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(14, 14, 14)))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnOk)
-                            .addComponent(btnCancel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cbAllowSpectators)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addComponent(lblPacks)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlPacks, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(cbAllowSpectators, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spnNumPlayers)
+                    .addComponent(pnlDraftOptions, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOk)
+                    .addComponent(btnCancel))
+                .addContainerGap())
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -367,6 +406,9 @@ public class NewTournamentDialog extends MageDialog {
         for (TournamentPlayerPanel player: players) {
             tOptions.getPlayerTypes().add((String) player.getPlayerType().getSelectedItem());
         }
+        if (!tournamentType.isElimination()) {
+            tOptions.setNumberRounds((Integer)spnNumRounds.getValue());
+        }
         if (tournamentType.isDraft()) {
             DraftOptions options = new DraftOptions();
             options.setDraftType("");
@@ -378,8 +420,12 @@ public class NewTournamentDialog extends MageDialog {
                 tOptions.setLimitedOptions(new LimitedOptions());
             }
             tOptions.getLimitedOptions().setConstructionTime((Integer)this.spnConstructTime.getValue() * 60);
-            for (JComboBox pack: packs) {
-                tOptions.getLimitedOptions().getSetCodes().add(((ExpansionInfo) pack.getSelectedItem()).getCode());
+            if (tournamentType.isCubeBooster()) {
+                tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
+            } else {
+                for (JComboBox pack: packs) {
+                    tOptions.getLimitedOptions().getSetCodes().add(((ExpansionInfo) pack.getSelectedItem()).getCode());
+                }
             }
         }        
         tOptions.getMatchOptions().setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());
@@ -431,23 +477,62 @@ public class NewTournamentDialog extends MageDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_spnNumWinsnumPlayersChanged
 
+    private void cbDraftCubeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDraftCubeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbDraftCubeActionPerformed
+
+    private void cbDraftTimingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDraftTimingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbDraftTimingActionPerformed
+
+    private void spnNumRoundsnumPlayersChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumRoundsnumPlayersChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnNumRoundsnumPlayersChanged
+
     private void setTournamentOptions(int numbPlayers) {
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
+        activatePanelElements(tournamentType);
+
         if (numbPlayers < tournamentType.getMinPlayers() || numbPlayers > tournamentType.getMaxPlayers()) {
             numbPlayers = tournamentType.getMinPlayers();
             createPlayers(numbPlayers - 1);
         }
         this.spnNumPlayers.setModel(new SpinnerNumberModel(numbPlayers, tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
         this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
+
         if (tournamentType.isLimited()) {
-            this.pnlPacks.setVisible(true);
             createPacks(tournamentType.getNumBoosters());
         }
-        else {
-            this.pnlPacks.setVisible(false);
-        }
-        this.pnlDraftOptions.setVisible(tournamentType.isDraft());
 
+    }
+
+    /**
+     * Sets elements of the panel to visible or not visible
+     * 
+     * @param tournamentType 
+     */
+    private void activatePanelElements(TournamentTypeView tournamentType) {
+        this.pnlDraftOptions.setVisible(tournamentType.isDraft());
+        this.lblNumRounds.setVisible(!tournamentType.isElimination());
+        this.spnNumRounds.setVisible(!tournamentType.isElimination());
+        if (tournamentType.isLimited()) {
+            if (tournamentType.isCubeBooster()) {
+                this.lblDraftCube.setVisible(true);
+                this.cbDraftCube.setVisible(true);
+                this.lblPacks.setVisible(false);
+                this.pnlPacks.setVisible(false);
+            } else {
+                this.lblDraftCube.setVisible(false);
+                this.cbDraftCube.setVisible(false);
+                this.lblPacks.setVisible(true);
+                this.pnlPacks.setVisible(true);
+            }
+        } else {
+            // construced
+            this.lblDraftCube.setVisible(false);
+            this.cbDraftCube.setVisible(false);
+            this.pnlPacks.setVisible(true);
+        }
     }
 
     private void createPacks(int numPacks) {
@@ -561,22 +646,28 @@ public class NewTournamentDialog extends MageDialog {
         this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS, "0")));
         this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS, "2")));
 
-        if (cbTournamentType.getSelectedItem().toString().equals("Sealed Elimination")) {
-            numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED, "2"));
-            setTournamentOptions(numPlayers);
-            loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED, ""));
-        }
-        
-        if (cbTournamentType.getSelectedItem().toString().equals("Elimination Booster Draft")) {
-            numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT, "4"));
-            setTournamentOptions(numPlayers);
-            loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT, ""));
 
-            String draftTiming = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING, "REGULAR");
-            for (TimingOption timingOption : DraftOptions.TimingOption.values()) {
-                if (timingOption.toString().equals(draftTiming)) {
-                    cbDraftTiming.setSelectedItem(draftTiming);
-                    break;
+        TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
+        activatePanelElements(tournamentType);
+
+        if (tournamentType.isLimited()) {
+            if (!tournamentType.isDraft()) {
+                numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED, "2"));
+                setTournamentOptions(numPlayers);
+                loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED, ""));
+            }
+
+            if (tournamentType.isDraft()) {
+                numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT, "4"));
+                setTournamentOptions(numPlayers);
+                loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT, ""));
+
+                String draftTiming = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING, "REGULAR");
+                for (TimingOption timingOption : DraftOptions.TimingOption.values()) {
+                    if (timingOption.toString().equals(draftTiming)) {
+                        cbDraftTiming.setSelectedItem(draftTiming);
+                        break;
+                    }
                 }
             }
         }
@@ -644,30 +735,35 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOk;
     private javax.swing.JCheckBox cbAllowSpectators;
+    private javax.swing.JComboBox cbDraftCube;
     private javax.swing.JComboBox cbDraftTiming;
     private javax.swing.JComboBox cbTimeLimit;
     private javax.swing.JComboBox cbTournamentType;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbTimeLimit;
     private javax.swing.JLabel lblConstructionTime;
+    private javax.swing.JLabel lblDraftCube;
     private javax.swing.JLabel lblFreeMulligans;
     private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblNumRounds;
     private javax.swing.JLabel lblNumWins;
+    private javax.swing.JLabel lblPacks;
+    private javax.swing.JLabel lblTournamentType;
     private javax.swing.JPanel pnlDraftOptions;
     private javax.swing.JPanel pnlOtherPlayers;
     private javax.swing.JPanel pnlPacks;
     private javax.swing.JSpinner spnConstructTime;
     private javax.swing.JSpinner spnFreeMulligans;
     private javax.swing.JSpinner spnNumPlayers;
+    private javax.swing.JSpinner spnNumRounds;
     private javax.swing.JSpinner spnNumWins;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPlayer1Name;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
 }

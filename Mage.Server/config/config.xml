@@ -9,7 +9,7 @@
             minUserNameLength="3"
             maxUserNameLength="14" 
             userNamePattern="[^a-z0-9_]"
-            maxAiOpponents="2"
+            maxAiOpponents="3"
     />
     <playerTypes>
         <playerType name="Human" jar="mage-player-human.jar" className="mage.player.human.HumanPlayer"/>
@@ -25,9 +25,20 @@
         <gameType name="Commander Free For All" jar="mage-game-commanderfreeforall.jar" className="mage.game.CommanderFreeForAllMatch" typeName="mage.game.CommanderFreeForAllType"/>
     </gameTypes>
     <tournamentTypes>
-        <tournamentType name="Elimination Booster Draft" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
+        <tournamentType name="Booster Draft Elimination" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
+        <tournamentType name="Booster Draft Elimination (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationCubeTournamentType"/>
+        <tournamentType name="Booster Draft Swiss" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissTournamentType"/>
+        <tournamentType name="Booster Draft Swiss (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissCubeTournamentType"/>
         <tournamentType name="Sealed Elimination" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationTournamentType"/>
+        <tournamentType name="Sealed Elimination (Cube)" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationCubeTournamentType"/>
+        <tournamentType name="Sealed Swiss" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissTournamentType"/>
+        <tournamentType name="Sealed Swiss (Cube)" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissCubeTournamentType"/>
     </tournamentTypes>
+    <draftCubes>
+        <draftCube name="Cube Tutor 360 Pauper" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.CubeTutor360Pauper"/>
+        <draftCube name="Cube Tutor 720" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.CubeTutor720"/>
+        <draftCube name="MTGO Holiday Cube 2013" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2013"/>
+    </draftCubes>
     <deckTypes>
         <deckType name="Constructed - Standard" jar="mage-deck-constructed.jar" className="mage.deck.Standard"/>
         <deckType name="Constructed - Extended" jar="mage-deck-constructed.jar" className="mage.deck.Extended"/>

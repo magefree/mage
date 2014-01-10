@@ -39,7 +39,7 @@ public class DraftOptions extends LimitedOptions implements Serializable {
 
     protected String draftType;
     protected TimingOption timing;
-
+   
     public enum TimingOption {
         REGULAR (1),
         BEGINNER (2),

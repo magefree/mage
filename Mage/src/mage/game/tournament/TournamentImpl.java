@@ -33,6 +33,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
+import mage.constants.TournamentPlayerState;
+import mage.game.draft.DraftCube;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.match.Match;
@@ -105,6 +107,11 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     @Override
+    public int getNumberRounds() {
+        return options.getNumberRounds();
+    }
+
+    @Override
     public Collection<Round> getRounds() {
         return rounds;
     }
@@ -115,12 +122,12 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     @Override
-    public void setSetsFormatedShort(String setsInfoShort) {
+    public void setBoosterInfo(String setsInfoShort) {
         this.setsInfoShort = setsInfoShort;
     }
 
     @Override
-    public String getSetsFormatedShort() {
+    public String getBoosterInfo() {
         return setsInfoShort;
     }
 
@@ -169,6 +176,13 @@ public abstract class TournamentImpl implements Tournament {
             roundPlayers.remove(i);
             round.addPairing(new TournamentPairing(player1, player2));
         }
+        if (roundPlayers.size() > 0) {
+            // player free round - add to bye players of this round
+            TournamentPlayer player1 = roundPlayers.get(0);
+            round.getPlayerByes().add(player1);
+            player1.setState(TournamentPlayerState.WAITING);
+            player1.setStateInfo("Round Bye");
+        }
         return round;
     }
 
@@ -203,6 +217,7 @@ public abstract class TournamentImpl implements Tournament {
         for (TournamentPlayer player: players.values()) {
             player.setResults("");
             player.setPoints(0);
+            player.setStateInfo("");
         }
         for (Round round: rounds) {
             for (TournamentPairing pair: round.getPairs()) {
@@ -231,6 +246,14 @@ public abstract class TournamentImpl implements Tournament {
                     points = players.get(player2Id).getPoints();
                     players.get(player2Id).setPoints(points + 1);
                 }
+            }
+            for (TournamentPlayer tournamentPlayer : round.getPlayerByes()) {
+                UUID player1Id = tournamentPlayer.getPlayer().getId();
+                StringBuilder sb1 = new StringBuilder(players.get(player1Id).getResults());
+                sb1.append("(Round Bye) ");
+                players.get(player1Id).setResults(sb1.toString());
+                int points = players.get(player1Id).getPoints();
+                players.get(player1Id).setPoints(points + 3);
             }
         }
 
@@ -296,10 +319,20 @@ public abstract class TournamentImpl implements Tournament {
     protected void openBoosters() {
         for (TournamentPlayer player: this.players.values()) {
             player.setDeck(new Deck());
-            for (ExpansionSet set: sets) {
-                List<Card> booster = set.createBooster();
-                for (Card card: booster) {
-                    player.getDeck().getSideboard().add(card);
+            if (options.getLimitedOptions().getDraftCube() != null) {
+                DraftCube cube = options.getLimitedOptions().getDraftCube();
+                for (int i = 0; i < options.getLimitedOptions().getNumberBoosters(); i++) {
+                    List<Card> booster = cube.createBooster();
+                    for (Card card: booster) {
+                        player.getDeck().getSideboard().add(card);
+                    }
+                }
+            } else {
+                for (ExpansionSet set: sets) {
+                    List<Card> booster = set.createBooster();
+                    for (Card card: booster) {
+                        player.getDeck().getSideboard().add(card);
+                    }
                 }
             }
         }
@@ -341,6 +374,16 @@ public abstract class TournamentImpl implements Tournament {
     @Override
     public void setTournamentType(TournamentType tournamentType) {
         this.tournamentType = tournamentType;
+    }
+
+    protected void winners() {
+        // TODO: Generate StateInfo for Swiss pairing (1st, 2nd, ...)
+        for(TournamentPlayer winner: this.getActivePlayers()) {
+            winner.setState(TournamentPlayerState.FINISHED);
+            if (options.getNumberRounds() == 0) { // if no swiss, last active is the winner
+                winner.setStateInfo("Winner");
+            }
+        }
     }
 
 }

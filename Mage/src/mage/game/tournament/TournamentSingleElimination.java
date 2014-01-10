@@ -30,7 +30,6 @@ package mage.game.tournament;
 
 import java.util.Map;
 import java.util.UUID;
-import mage.constants.TournamentPlayerState;
 
 /**
  *
@@ -66,11 +65,6 @@ public abstract class TournamentSingleElimination extends TournamentImpl {
         }
     }
 
-    protected void winners() {
-        for(TournamentPlayer winner: this.getActivePlayers()) {
-            winner.setState(TournamentPlayerState.FINISHED);
-            winner.setStateInfo("Winner");
-        }
-    }
+
 
 }

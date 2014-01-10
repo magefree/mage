@@ -43,7 +43,7 @@ public class BoosterDraft extends DraftImpl<BoosterDraft> {
 
     @Override
     public void start() {
-        while (boosterNum < sets.size()) {
+        while (boosterNum < numberBoosters) {
             openBooster();
             while (!isAbort() && pickCards()) {
                 if (boosterNum % 2 == 1) {

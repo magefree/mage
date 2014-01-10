@@ -73,8 +73,9 @@ public class DeckValidatorFactory {
     }
 
     public void addDeckType(String name, Class deckType) {
-        if (deckType != null)
+        if (deckType != null) {
             this.deckTypes.put(name, deckType);
+        }
     }
 
 }

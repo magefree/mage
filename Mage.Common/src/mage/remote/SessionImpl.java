@@ -340,6 +340,12 @@ public class SessionImpl implements Session {
     }
 
     @Override
+    public String[] getDraftCubes() {
+        return serverState.getDraftCubes();
+    }
+
+
+    @Override
     public List<TournamentTypeView> getTournamentTypes() {
         return serverState.getTournamentTypes();
     }

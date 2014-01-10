@@ -111,6 +111,10 @@ public class ConfigSettings {
         return config.getTournamentTypes().getTournamentType();
     }
 
+    public List<Plugin> getDraftCubes() {
+        return config.getDraftCubes().getDraftCube();
+    }
+
     public List<Plugin> getDeckTypes() {
         return config.getDeckTypes().getDeckType();
     }

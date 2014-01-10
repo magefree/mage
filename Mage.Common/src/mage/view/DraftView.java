@@ -46,8 +46,14 @@ public class DraftView implements Serializable {
     private int cardNum;
 
     public DraftView(Draft draft) {
-        for (ExpansionSet set: draft.getSets()) {
-            sets.add(set.getName());
+        if (draft.getDraftCube() != null) {
+            for (int i = 0; i < draft.getNumberBoosters(); i++) {
+                sets.add(draft.getDraftCube().getName());
+            }
+        } else {
+            for (ExpansionSet set: draft.getSets()) {
+                sets.add(set.getName());
+            }
         }
         this.boosterNum = draft.getBoosterNum();
         this.cardNum = draft.getCardNum();

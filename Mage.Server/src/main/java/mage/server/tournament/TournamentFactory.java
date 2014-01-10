@@ -38,6 +38,7 @@ import mage.cards.Sets;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentType;
+import mage.server.draft.CubeFactory;
 import mage.view.TournamentTypeView;
 import org.apache.log4j.Logger;
 
@@ -74,11 +75,21 @@ public class TournamentFactory {
                 int count = setInfo.containsKey(setCode) ? setInfo.get(setCode) : 0;
                 setInfo.put(setCode, count + 1);
             }
-            StringBuilder sb = new StringBuilder();
-            for (Map.Entry<String,Integer> entry:setInfo.entrySet()) {
-                sb.append(entry.getValue().toString()).append("x").append(entry.getKey()).append(" ");
+            if (tournament.getTournamentType().isLimited()) {
+                tournament.getOptions().getLimitedOptions().setNumberBoosters(tournament.getTournamentType().getNumBoosters());
+                if (tournament.getTournamentType().isCubeBooster()) {
+                    tournament.getOptions().getLimitedOptions().setDraftCube(CubeFactory.getInstance().createDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName()));
+                    tournament.setBoosterInfo(tournament.getOptions().getLimitedOptions().getDraftCubeName());
+                } else {
+                    StringBuilder sb = new StringBuilder();
+                    for (Map.Entry<String,Integer> entry:setInfo.entrySet()) {
+                        sb.append(entry.getValue().toString()).append("x").append(entry.getKey()).append(" ");
+                    }
+                    tournament.setBoosterInfo(sb.toString());
+                }
+
             }
-            tournament.setSetsFormatedShort(sb.toString());
+
         } catch (Exception ex) {
             logger.fatal("TournamentFactory error ", ex);
             return null;

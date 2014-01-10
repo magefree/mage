@@ -43,5 +43,7 @@ public interface GameTypes {
 
     String[] getDeckTypes();
 
+    String[] getDraftCubes();
+
     List<TournamentTypeView> getTournamentTypes();
 }

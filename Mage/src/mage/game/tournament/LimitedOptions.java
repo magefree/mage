@@ -31,6 +31,7 @@ package mage.game.tournament;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import mage.game.draft.DraftCube;
 
 /**
  *
@@ -40,6 +41,9 @@ public class LimitedOptions implements Serializable {
 
     protected List<String> sets = new ArrayList<String>();
     protected int constructionTime;
+    protected String draftCubeName;
+    protected DraftCube draftCube;
+    protected int numberBoosters;
 
     public List<String> getSetCodes() {
         return sets;
@@ -51,6 +55,30 @@ public class LimitedOptions implements Serializable {
 
     public void setConstructionTime(int constructionTime) {
         this.constructionTime = constructionTime;
+    }
+
+    public String getDraftCubeName() {
+        return draftCubeName;
+    }
+
+    public void setDraftCubeName(String draftCubeName) {
+        this.draftCubeName = draftCubeName;
+    }
+
+    public DraftCube getDraftCube() {
+        return draftCube;
+    }
+
+    public void setDraftCube(DraftCube draftCube) {
+        this.draftCube = draftCube;
+    }
+
+    public int getNumberBoosters() {
+        return numberBoosters;
+    }
+
+    public void setNumberBoosters(int numberBoosters) {
+        this.numberBoosters = numberBoosters;
     }
     
 }

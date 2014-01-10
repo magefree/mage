@@ -40,6 +40,7 @@ public class Round {
 
     private int roundNum;
     private List<TournamentPairing> pairs = new ArrayList<TournamentPairing>();
+    private List<TournamentPlayer> playerByes = new ArrayList<TournamentPlayer>();
 
     public Round(int roundNum) {
         this.roundNum = roundNum;
@@ -74,4 +75,9 @@ public class Round {
         }
         return true;
     }
+
+    public List<TournamentPlayer> getPlayerByes() {
+        return playerByes;
+    }
+    
 }

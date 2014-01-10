@@ -109,6 +109,9 @@ public class TableView implements Serializable {
 
         } else {
             this.wins = table.getTournament().getOptions().getMatchOptions().getWinsNeeded();
+            if (table.getTournament().getOptions().getNumberRounds() > 0) {
+                this.gameType = new StringBuilder(this.gameType).append(" ").append(table.getTournament().getOptions().getNumberRounds()).append(" Rounds").toString();
+            }
             this.freeMulligans = table.getTournament().getOptions().getMatchOptions().getFreeMulligans();
             StringBuilder sb1 = new StringBuilder();
             for (TournamentPlayer tp: table.getTournament().getPlayers()) {
@@ -129,7 +132,7 @@ public class TableView implements Serializable {
                 default:
             }
             this.additionalInfo = sb.toString();
-            this.deckType =  new StringBuilder(table.getDeckType()).append(" ").append(table.getTournament().getSetsFormatedShort()).toString();
+            this.deckType =  new StringBuilder(table.getDeckType()).append(" ").append(table.getTournament().getBoosterInfo()).toString();
         }
     }
 

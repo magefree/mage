@@ -53,12 +53,12 @@ public interface Tournament {
     Collection<Round> getRounds();
     List<ExpansionSet> getSets();
 
-    void setSetsFormatedShort(String setInfo);
+    void setBoosterInfo(String setInfo);
     /**
-     * Gives back a String that shows the included sets (e.g. "3xRTR" or "1xDGM 1xGTC 1xRTR")
+     * Gives back a String that shows the included sets (e.g. "3xRTR" or "1xDGM 1xGTC 1xRTR") or cube name
      * @return String
      */
-    String getSetsFormatedShort();
+    String getBoosterInfo();
     void submitDeck(UUID playerId, Deck deck);
     void updateDeck(UUID playerId, Deck deck);
     void autoSubmit(UUID playerId, Deck deck);
@@ -80,4 +80,6 @@ public interface Tournament {
     // tournament type
     TournamentType getTournamentType(); 
     void setTournamentType(TournamentType tournamentType);
+
+    int getNumberRounds();
 }

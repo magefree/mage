@@ -40,8 +40,10 @@ public class TournamentType <T extends TournamentType<T>> implements Serializabl
     protected int minPlayers;
     protected int maxPlayers;
     protected int numBoosters;
-    protected boolean draft;
-    protected boolean limited;
+    protected boolean cubeBooster;  // boosters are generated from a defined cube
+    protected boolean draft;        // or sealed
+    protected boolean limited;      // or construced
+    protected boolean elimination;  // or Swiss
 
     protected TournamentType() {}
 
@@ -73,4 +75,13 @@ public class TournamentType <T extends TournamentType<T>> implements Serializabl
     public boolean isLimited() {
         return limited;
     }
+
+    public boolean isElimination() {
+        return elimination;
+    }
+
+    public boolean isCubeBooster() {
+        return cubeBooster;
+    }
+
 }

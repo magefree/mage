@@ -54,6 +54,8 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
     protected final UUID id;
     protected Map<UUID, DraftPlayer> players = new HashMap<UUID, DraftPlayer>();
     protected PlayerList table = new PlayerList();
+    protected int numberBoosters;
+    protected DraftCube draftCube;
     protected List<ExpansionSet> sets;
     protected List<String> setCodes;
     protected int boosterNum = 0;
@@ -69,8 +71,10 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
     public DraftImpl(DraftOptions options, List<ExpansionSet> sets) {
         id = UUID.randomUUID();
         this.setCodes = options.getSetCodes();
+        this.draftCube = options.getDraftCube();
         this.timing = options.getTiming();
         this.sets = sets;
+        this.numberBoosters = options.getNumberBoosters();
     }
 
     @Override
@@ -133,6 +137,22 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
     public DraftPlayer getPlayer(UUID playerId) {
         return players.get(playerId);
     }
+
+    @Override
+    public DraftCube getDraftCube() {
+        return draftCube;
+    }
+
+    /**
+     * Number of boosters that each player gets in this draft
+     * 
+     * @return
+     */
+    @Override
+    public int getNumberBoosters() {
+        return numberBoosters;
+    }
+
 
     @Override
     public List<ExpansionSet> getSets() {
@@ -207,9 +227,13 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 
 
     protected void openBooster() {
-        if (boosterNum < sets.size()) {
+        if (boosterNum < numberBoosters) {
             for (DraftPlayer player: players.values()) {
-                player.setBooster(sets.get(boosterNum).createBooster());
+                if (draftCube != null) {
+                    player.setBooster(draftCube.createBooster());
+                } else {
+                    player.setBooster(sets.get(boosterNum).createBooster());
+                }
             }
         }
         boosterNum++;

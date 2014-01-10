@@ -43,6 +43,8 @@ public class SealedEliminationTournamentType extends TournamentType<SealedElimin
         this.numBoosters = 6;
         this.draft = false;
         this.limited = true;
+        this.cubeBooster = false;
+        this.elimination = true;
     }
 
 }

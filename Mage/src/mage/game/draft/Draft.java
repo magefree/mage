@@ -49,6 +49,8 @@ public interface Draft extends MageItem, Serializable {
     Collection<DraftPlayer> getPlayers();
     boolean replacePlayer(Player oldPlayer, Player newPlayer);
     DraftPlayer getPlayer(UUID playerId);
+    int getNumberBoosters();
+    DraftCube getDraftCube();
     List<ExpansionSet> getSets();
     int getBoosterNum();
     int getCardNum();

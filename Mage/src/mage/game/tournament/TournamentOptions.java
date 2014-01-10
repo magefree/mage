@@ -45,6 +45,7 @@ public class TournamentOptions implements Serializable {
     protected MatchOptions matchOptions = new MatchOptions("", "Two Player Duel");
     protected LimitedOptions limitedOptions;
     protected boolean watchingAllowed = true;
+    protected int numberRounds;
 
     public TournamentOptions(String name) {
         this.name = name;
@@ -84,6 +85,14 @@ public class TournamentOptions implements Serializable {
 
     public void setWatchingAllowed(boolean watchingAllowed) {
         this.watchingAllowed = watchingAllowed;
+    }
+
+    public int getNumberRounds() {
+        return numberRounds;
+    }
+
+    public void setNumberRounds(int numberRounds) {
+        this.numberRounds = numberRounds;
     }
 
 }

@@ -40,6 +40,7 @@ import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
 import mage.remote.Connection;
+import mage.server.draft.CubeFactory;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
@@ -103,6 +104,9 @@ public class Main {
         }
         for (Plugin plugin: config.getPlayerTypes()) {
             PlayerFactory.getInstance().addPlayerType(plugin.getName(), loadPlugin(plugin));
+        }
+        for (Plugin plugin: config.getDraftCubes()) {
+            CubeFactory.getInstance().addDraftCube(plugin.getName(), loadPlugin(plugin));
         }
         for (Plugin plugin: config.getDeckTypes()) {
             DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
@@ -260,7 +264,7 @@ public class Main {
             logger.debug("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
-            logger.warn("Plugin not Found:" + plugin.getJar() + " - check plugin folder");
+            logger.warn(new StringBuilder("Plugin not Found: ").append(plugin.getClassName()).append(" - ").append(plugin.getJar()).append(" - check plugin folder"));
         } catch (Exception ex) {
             logger.fatal("Error loading plugin " + plugin.getJar(), ex);
         }
@@ -286,7 +290,7 @@ public class Main {
             logger.debug("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
-            logger.warn("Tournament type not found:" + plugin.getJar() + " - check plugin folder");
+            logger.warn("Tournament type not found:" + plugin.getName() + " / "+ plugin.getJar() + " - check plugin folder");
         } catch (Exception ex) {
             logger.fatal("Error loading game type " + plugin.getJar(), ex);
         }

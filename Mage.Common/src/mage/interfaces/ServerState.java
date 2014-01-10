@@ -44,14 +44,16 @@ public class ServerState implements Serializable {
     private List<TournamentTypeView> tournamentTypes;
     private String[] playerTypes;
     private String[] deckTypes;
+    private String[] draftCubes;
     private boolean testMode;
     private MageVersion version;
 
-    public ServerState(List<GameTypeView> gameTypes, List<TournamentTypeView> tournamentTypes, String[] playerTypes, String[] deckTypes, boolean testMode, MageVersion version) {
+    public ServerState(List<GameTypeView> gameTypes, List<TournamentTypeView> tournamentTypes, String[] playerTypes, String[] deckTypes, String[] draftCubes, boolean testMode, MageVersion version) {
         this.gameTypes = gameTypes;
         this.tournamentTypes = tournamentTypes;
         this.playerTypes = playerTypes;
         this.deckTypes = deckTypes;
+        this.draftCubes = draftCubes;
         this.testMode = testMode;
         this.version = version;
     }
@@ -70,6 +72,10 @@ public class ServerState implements Serializable {
 
     public String[] getDeckTypes() {
         return deckTypes;
+    }
+
+    public String[] getDraftCubes() {
+        return draftCubes;
     }
 
     public boolean isTestMode() {

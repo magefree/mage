@@ -48,6 +48,7 @@ import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.MageVersionException;
+import mage.server.draft.CubeFactory;
 import mage.server.draft.DraftManager;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
@@ -820,6 +821,7 @@ public class MageServerImpl implements MageServer {
                     TournamentFactory.getInstance().getTournamentTypes(),
                     PlayerFactory.getInstance().getPlayerTypes().toArray(new String[PlayerFactory.getInstance().getPlayerTypes().size()]),
                     DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[DeckValidatorFactory.getInstance().getDeckTypes().size()]),
+                    CubeFactory.getInstance().getDraftCubes().toArray(new String[CubeFactory.getInstance().getDraftCubes().size()]),
                     testMode,
                     Main.getVersion());
         }

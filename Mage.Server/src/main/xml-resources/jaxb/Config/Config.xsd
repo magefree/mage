@@ -9,6 +9,7 @@
 				<xs:element ref="playerTypes"/>
 				<xs:element ref="gameTypes"/>
 				<xs:element ref="tournamentTypes"/>
+                <xs:element ref="draftCubes"/>
 				<xs:element ref="deckTypes"/>
 			</xs:sequence>
 		</xs:complexType>
@@ -62,6 +63,14 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="tournamentType" type="gamePlugin" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+    <xs:element name="draftCubes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="draftCube" type="plugin" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
