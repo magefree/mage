@@ -45,8 +45,8 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -69,7 +69,7 @@ public class CrypticCommand extends CardImpl<CrypticCommand> {
         // or return target permanent to its owner's hand;
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.getTargets().add(new TargetPermanent());
         this.getSpellAbility().getModes().addMode(mode);
         // or tap all creatures your opponents control;
         mode = new Mode();
