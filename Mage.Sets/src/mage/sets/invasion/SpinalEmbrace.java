@@ -68,7 +68,7 @@ public class SpinalEmbrace extends CardImpl<SpinalEmbrace> {
     }
 
     public SpinalEmbrace(UUID ownerId) {
-        super(ownerId, 276, "Spinal Embrace", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
+        super(ownerId, 276, "Spinal Embrace", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}{B}");
         this.expansionSetCode = "INV";
 
         this.color.setBlue(true);
