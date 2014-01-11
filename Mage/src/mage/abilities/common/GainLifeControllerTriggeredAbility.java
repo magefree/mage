@@ -70,8 +70,8 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl<Gai
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         effect.setValue("gainedLife", event.getAmount());
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }
