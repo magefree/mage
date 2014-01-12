@@ -34,11 +34,10 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.CantCounterControlledEffect;
-import mage.abilities.effects.common.CantTargetControlledEffect;
+import mage.abilities.effects.common.CantTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
-import mage.filter.FilterStackObject;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -49,8 +48,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 public class AutumnsVeil extends CardImpl<AutumnsVeil> {
 
     private static final FilterSpell filterTarget1 = new FilterSpell("spells you control");
-    private static final FilterCreaturePermanent filterTarget2 = new FilterCreaturePermanent();
-    private static final FilterStackObject filterSource = new FilterStackObject("blue or black spells");
+    private static final FilterControlledCreaturePermanent filterTarget2 = new FilterControlledCreaturePermanent();
+    private static final FilterSpell filterSource = new FilterSpell("blue or black spells");
 
     static {
         filterSource.add(Predicates.or(
@@ -62,8 +61,10 @@ public class AutumnsVeil extends CardImpl<AutumnsVeil> {
         super(ownerId, 162, "Autumn's Veil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "M11";
         this.color.setGreen(true);
+        // Spells you control can't be countered by blue or black spells this turn
         this.getSpellAbility().addEffect(new CantCounterControlledEffect(filterTarget1, filterSource, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new CantTargetControlledEffect(filterTarget2, filterSource, Duration.EndOfTurn));
+        // and creatures you control can't be the targets of blue or black spells this turn.
+        this.getSpellAbility().addEffect(new CantTargetEffect(filterTarget2, filterSource, Duration.EndOfTurn));
     }
 
     public AutumnsVeil(final AutumnsVeil card) {
