@@ -28,10 +28,6 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -39,6 +35,9 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -69,7 +68,7 @@ public class CrypticCommand extends CardImpl<CrypticCommand> {
         // or return target permanent to its owner's hand;
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetPermanent());
+        mode.getTargets().add(new TargetPermanent(true));
         this.getSpellAbility().getModes().addMode(mode);
         // or tap all creatures your opponents control;
         mode = new Mode();
@@ -95,7 +94,7 @@ class CrypticCommandEffect extends OneShotEffect<CrypticCommandEffect> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
     static {
-      filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+      filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public CrypticCommandEffect() {
@@ -122,27 +121,5 @@ class CrypticCommandEffect extends OneShotEffect<CrypticCommandEffect> {
     @Override
     public CrypticCommandEffect copy() {
         return new CrypticCommandEffect(this);
-    }
-}
-
-class CounterSecondTargetEffect extends OneShotEffect<CounterSecondTargetEffect> {
-
-    public CounterSecondTargetEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "counter target spell";
-    }
-
-    public CounterSecondTargetEffect(final CounterSecondTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CounterSecondTargetEffect copy() {
-        return new CounterSecondTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getStack().counter(source.getTargets().get(1).getFirstTarget(), source.getSourceId(), game);
     }
 }
