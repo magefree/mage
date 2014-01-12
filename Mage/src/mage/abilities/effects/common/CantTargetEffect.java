@@ -46,23 +46,23 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTargetControlledEffect> {
+public class CantTargetEffect extends ReplacementEffectImpl<CantTargetEffect> {
 
     private FilterPermanent filterTarget;
     private FilterStackObject filterSource;
 
-    public CantTargetControlledEffect(FilterPermanent filterTarget, FilterStackObject filterSource, Duration duration) {
+    public CantTargetEffect(FilterPermanent filterTarget, FilterStackObject filterSource, Duration duration) {
         super(duration, Outcome.Benefit);
         this.filterTarget = filterTarget;
         this.filterSource = filterSource;
         setText();
     }
 
-    public CantTargetControlledEffect(FilterPermanent filterTarget, Duration duration) {
+    public CantTargetEffect(FilterPermanent filterTarget, Duration duration) {
         this(filterTarget, null, duration);
     }
 
-    public CantTargetControlledEffect(final CantTargetControlledEffect effect) {
+    public CantTargetEffect(final CantTargetEffect effect) {
         super(effect);
         if (effect.filterTarget != null)
             this.filterTarget = effect.filterTarget.copy();
@@ -71,8 +71,8 @@ public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTarget
     }
 
     @Override
-    public CantTargetControlledEffect copy() {
-        return new CantTargetControlledEffect(this);
+    public CantTargetEffect copy() {
+        return new CantTargetEffect(this);
     }
 
     @Override
@@ -88,14 +88,13 @@ public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTarget
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.TARGET) {
-            filterTarget.add(new ControllerPredicate(TargetController.YOU));
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
                 if (filterSource == null)
                     return true;
                 else {
                     StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-                    if (sourceObject != null && filterSource.match(sourceObject, game)) {
+                    if (sourceObject != null && filterSource.match(sourceObject, sourceObject.getSourceId(), game)) {
                         return true;
                     }
                 }

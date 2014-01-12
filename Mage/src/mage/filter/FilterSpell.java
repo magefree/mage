@@ -28,13 +28,16 @@
 
 package mage.filter;
 
+import java.util.UUID;
+import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 
 /**
  *
- * @author North
+ * @author North, Quercitron
  */
-public class FilterSpell extends FilterStackObject<Spell> {
+public class FilterSpell extends FilterStackObject {
 
     public FilterSpell() {
         super("spell");
@@ -46,6 +49,14 @@ public class FilterSpell extends FilterStackObject<Spell> {
 
     public FilterSpell(final FilterSpell filter) {
         super(filter);
+    }
+    
+    @Override
+    public boolean match(StackObject stackObject, UUID playerId, Game game) {
+        if (!(stackObject instanceof Spell)) {
+            return false;
+        }
+        return super.match(stackObject, playerId, game);
     }
 
     @Override
