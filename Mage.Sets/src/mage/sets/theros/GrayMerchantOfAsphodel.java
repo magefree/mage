@@ -35,7 +35,7 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.ManaType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
@@ -91,7 +91,7 @@ class GrayMerchantOfAsphodelEffect extends OneShotEffect<GrayMerchantOfAsphodelE
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int lifeLost = 0;
-            int damage = new DevotionCount(ManaType.BLACK).calculate(game, source);
+            int damage = new DevotionCount(ColoredManaSymbol.B).calculate(game, source);
             if (damage > 0) {
                 for (UUID playerId : game.getOpponents(source.getControllerId())) {
                     Player opponent = game.getPlayer(playerId);

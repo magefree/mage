@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.ManaType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -104,7 +104,7 @@ class NykthosShrineToNyxManaAbility extends ManaAbility<NykthosShrineToNyxManaAb
 
 class NykthosDynamicManaEffect extends ManaEffect {
 
-    private Mana computedMana;
+    private final Mana computedMana;
 
     public NykthosDynamicManaEffect() {
         super();
@@ -132,19 +132,19 @@ class NykthosDynamicManaEffect extends ManaEffect {
     public Mana computeMana(Game game, Ability source){
         this.computedMana.clear();
         if (!source.getChoices().isEmpty()) {
-            Choice choice = source.getChoices().get(0);
+            ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
             if (choice != null && choice instanceof ChoiceColor && choice.getChoice() != null) {
                 String color = choice.getChoice();
                 if (color.equals("Red")) {
-                    computedMana.setRed(new DevotionCount(ManaType.RED).calculate(game, source));
+                    computedMana.setRed(new DevotionCount(ColoredManaSymbol.R).calculate(game, source));
                 } else if (color.equals("Blue")) {
-                    computedMana.setBlue(new DevotionCount(ManaType.BLUE).calculate(game, source));
+                    computedMana.setBlue(new DevotionCount(ColoredManaSymbol.U).calculate(game, source));
                 } else if (color.equals("White")) {
-                    computedMana.setWhite(new DevotionCount(ManaType.WHITE).calculate(game, source));
+                    computedMana.setWhite(new DevotionCount(ColoredManaSymbol.W).calculate(game, source));
                 } else if (color.equals("Black")) {
-                    computedMana.setBlack(new DevotionCount(ManaType.BLACK).calculate(game, source));
+                    computedMana.setBlack(new DevotionCount(ColoredManaSymbol.B).calculate(game, source));
                 } else if (color.equals("Green")) {
-                    computedMana.setGreen(new DevotionCount(ManaType.GREEN).calculate(game, source));
+                    computedMana.setGreen(new DevotionCount(ColoredManaSymbol.G).calculate(game, source));
                 }
             }
         }

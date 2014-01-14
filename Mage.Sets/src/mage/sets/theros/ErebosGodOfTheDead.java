@@ -42,9 +42,9 @@ import mage.abilities.effects.common.continious.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
@@ -71,7 +71,7 @@ public class ErebosGodOfTheDead extends CardImpl<ErebosGodOfTheDead> {
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
         // As long as your devotion to black is less than five, Erebos isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ManaType.BLACK), 5);
+        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.B), 5);
         effect.setText("As long as your devotion to black is less than five, Erebos isn't a creature.<i>(Each {B} in the mana costs of permanents you control counts towards your devotion to black.)</i>");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

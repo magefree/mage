@@ -5,19 +5,27 @@ package mage.constants;
  * @author North
  */
 public enum ColoredManaSymbol {
-    W("W"), U("U"), B("B"), R("R"), G("G");
+    W("W","white"), U("U","blue"), B("B","black"), R("R","red"), G("G","green");
 
     private final String text;
+    private final String colorName;
 
-    ColoredManaSymbol(String text) {
+    ColoredManaSymbol(String text, String colorName) {
         this.text = text;
+        this.colorName = colorName;
     }
+
 
     @Override
     public String toString() {
         return text;
     }
 
+    public String getColorName() {
+        return colorName;
+    }
+
+    
     public static ColoredManaSymbol lookup(char c) {
         switch (c) {
             case 'W':

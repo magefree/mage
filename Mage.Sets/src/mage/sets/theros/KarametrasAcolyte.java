@@ -34,7 +34,7 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.ManaType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
 
 /**
@@ -54,7 +54,7 @@ public class KarametrasAcolyte extends CardImpl<KarametrasAcolyte> {
         this.toughness = new MageInt(4);
 
         // {T}: Add an amount of {G} to your mana pool equal to your devotion to green.
-        this.addAbility(new DynamicManaAbility(Mana.GreenMana, new DevotionCount(ManaType.GREEN),
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana, new DevotionCount(ColoredManaSymbol.G),
                 "Add an amount of {G} to your mana pool equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts towards your devotion to green.)"));
     }
 

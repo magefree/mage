@@ -34,7 +34,7 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.ManaType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
 
 /**
@@ -54,7 +54,7 @@ public class NyleasDisciple extends CardImpl<NyleasDisciple> {
         this.toughness = new MageInt(3);
 
         // When Nylea's Disciple enters the battlefield, you gain life equal to your devotion to green.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(new DevotionCount(ManaType.GREEN))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(new DevotionCount(ColoredManaSymbol.G))));
     }
 
     public NyleasDisciple(final NyleasDisciple card) {

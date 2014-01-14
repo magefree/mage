@@ -42,8 +42,8 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.ManaType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -68,7 +68,7 @@ public class NyleaGodOfTheHunt extends CardImpl<NyleaGodOfTheHunt> {
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
         // As long as your devotion to white is less than five, Nylea isn't a creature.<i>(Each {G} in the mana costs of permanents you control counts towards your devotion to green.)</i>
-        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ManaType.GREEN), 5);
+        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.G), 5);
         effect.setText("As long as your devotion to green is less than five, Nylea isn't a creature.<i>(Each {G} in the mana costs of permanents you control counts towards your devotion to green.)</i>");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Other creatures you control have trample.
