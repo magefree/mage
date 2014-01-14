@@ -54,7 +54,7 @@ public class Opposition extends CardImpl<Opposition> {
     private static final FilterPermanent artifactcreatureorland = new FilterPermanent("artifact, creature, or land");
 
     static {
-        filter.add(Predicates.or(
+        artifactcreatureorland.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.LAND)));
@@ -63,7 +63,7 @@ public class Opposition extends CardImpl<Opposition> {
     private static final FilterControlledCreaturePermanent untappedcreatureyoucontrol = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        untappedcreatureyoucontrol.add(Predicates.not(new TappedPredicate()));
     }
 
     public Opposition(UUID ownerId) {
