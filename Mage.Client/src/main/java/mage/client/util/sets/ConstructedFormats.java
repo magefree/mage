@@ -24,7 +24,7 @@ public class ConstructedFormats {
     private static final String[] constructedFormats = {
             ALL, STANDARD, EXTENDED, MODERN,
             "Commander 2013 Edition",
-            "* Theros Block", "Theros",
+            "* Theros Block", "Born of the Gods", "Theros",
             "Magic 2014",
             "Modern Masters",
             "* Return to Ravnica Block", "Dragon's Maze", "Gatecrash", "Return to Ravnica",
@@ -70,7 +70,10 @@ public class ConstructedFormats {
     public static List<String> getSetsByFormat(String format) {
         
         if (format.equals("* Theros Block")) {
-            return Arrays.asList("THS");
+            return Arrays.asList("THS", "BNG");
+        }
+        if (format.equals("Born of the Gods")) {
+            return Arrays.asList("BNG");
         }
         if (format.equals("Theros")) {
             return Arrays.asList("THS");

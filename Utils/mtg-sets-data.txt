@@ -18,6 +18,7 @@ Avacyn Restored|AVR|
 Betrayers of Kamigawa|BOK|
 Battle Royale Box Set|BRB|
 Beatdown Box Set|BTD|
+Born of the Gods|BNG|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Commander 2013 Edition|C13|
