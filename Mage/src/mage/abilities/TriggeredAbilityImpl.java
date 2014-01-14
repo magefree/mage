@@ -132,8 +132,7 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
                 }
 
             }
-            sb.append(superRule.substring(0, 1).toLowerCase());
-            sb.append(superRule.substring(1));
+            sb.append(superRule);
         }
 
         return sb.toString();
