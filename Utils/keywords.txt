@@ -56,3 +56,4 @@ Soulbond|instance|
 Trample|instance|
 Vigilance|instance|
 Wither|instance|
+Tribute|number|
