@@ -45,6 +45,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.WatcherImpl;
 
@@ -111,6 +112,14 @@ class ShipbreakerKrakenReplacementEffect extends ReplacementEffectImpl<Shipbreak
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        // Source must be on the battlefield (it's neccessary to check here because if as response to the enter
+        // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
+        // event will happen before this effect is applied ever)
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent == null || !sourcePermanent.getControllerId().equals(source.getControllerId())) {
+            this.used = true;
+            return false;
+        }
         if (event.getType() == GameEvent.EventType.LOST_CONTROL) {
             if (event.getTargetId().equals(source.getSourceId())) {
                 this.used = true;
