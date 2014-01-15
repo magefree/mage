@@ -43,8 +43,8 @@ import mage.abilities.effects.common.continious.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.ManaType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -71,7 +71,7 @@ public class ThassaGodOfTheSea extends CardImpl<ThassaGodOfTheSea> {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to white is less than five, Thassa isn't a creature.<i>(Each {U} in the mana costs of permanents you control counts towards your devotion to white.)</i>
-        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ManaType.BLUE), 5);
+        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.U), 5);
         effect.setText("As long as your devotion to blue is less than five, Thassa isn't a creature.<i>(Each {U} in the mana costs of permanents you control counts towards your devotion to blue.)</i>");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

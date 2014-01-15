@@ -80,7 +80,10 @@ public class UntapTargetEffect extends OneShotEffect<UntapTargetEffect> {
         if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
             sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append("s");
         } else {
-            sb.append("target ").append(target.getTargetName());
+            if (!target.getTargetName().startsWith("another")) {
+                sb.append("target ");
+            }
+            sb.append(target.getTargetName());
         }
 
         return sb.toString();

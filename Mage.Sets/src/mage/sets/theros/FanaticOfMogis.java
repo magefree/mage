@@ -35,7 +35,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.ManaType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
@@ -57,7 +57,7 @@ public class FanaticOfMogis extends CardImpl<FanaticOfMogis> {
         this.toughness = new MageInt(2);
 
         // When Fanatic of Mogis enters the battlefield, it deals damage to each opponent equal to your devotion to red.
-        Effect effect = new DamagePlayersEffect(Outcome.Damage, new DevotionCount(ManaType.RED), TargetController.OPPONENT);
+        Effect effect = new DamagePlayersEffect(Outcome.Damage, new DevotionCount(ColoredManaSymbol.R), TargetController.OPPONENT);
         effect.setText("it deals damage to each opponent equal to your devotion to red. (Each {R} in the mana costs of permanents you control counts towards your devotion to red.)");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }

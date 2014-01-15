@@ -49,6 +49,12 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl<LoseCreat
     private final DynamicValue dynamicValue;
     private final int lessThan;
 
+    /**
+     * Permanent loses the creature type as long as the dynamic value is less than the value of lessThan.
+     * 
+     * @param dynamicValue
+     * @param lessThan 
+     */
     public LoseCreatureTypeSourceEffect(DynamicValue dynamicValue, int lessThan) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.dynamicValue = dynamicValue;

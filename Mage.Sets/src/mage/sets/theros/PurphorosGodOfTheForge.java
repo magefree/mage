@@ -41,8 +41,8 @@ import mage.abilities.effects.common.continious.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.ManaType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -73,7 +73,7 @@ public class PurphorosGodOfTheForge extends CardImpl<PurphorosGodOfTheForge> {
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
         // As long as your devotion to red is less than five, Purphoros isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ManaType.RED), 5);
+        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.R), 5);
         effect.setText("As long as your devotion to red is less than five, Purphoros isn't a creature.<i>(Each {R} in the mana costs of permanents you control counts towards your devotion to red.)</i>");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

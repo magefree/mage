@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.ManaType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -102,7 +102,7 @@ class DiscipleOfPhenaxEffect extends OneShotEffect<DiscipleOfPhenaxEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int devotion = new DevotionCount(ManaType.BLACK).calculate(game, source);
+        int devotion = new DevotionCount(ColoredManaSymbol.B).calculate(game, source);
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (devotion > 0 && targetPlayer != null) {
             Cards revealedCards = new CardsImpl(Zone.PICK);

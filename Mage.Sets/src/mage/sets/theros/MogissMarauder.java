@@ -37,8 +37,8 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.ManaType;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -73,7 +73,7 @@ public class MogissMarauder extends CardImpl<MogissMarauder> {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
             ability.getTargets().clear();
-            int numbTargets = new DevotionCount(ManaType.BLACK).calculate(game, ability);
+            int numbTargets = new DevotionCount(ColoredManaSymbol.B).calculate(game, ability);
             if (numbTargets > 0) {
                 ability.addTarget(new TargetCreaturePermanent(0,numbTargets));
             }

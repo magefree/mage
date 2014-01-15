@@ -39,8 +39,8 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.ManaType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -78,7 +78,7 @@ public class MasterOfWaves extends CardImpl<MasterOfWaves> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBoost, false)));
         // When Master of Waves enters the battlefield, put a number of 1/0 blue Elemental creature tokens onto the battlefield equal to your devotion to blue.
         // <i>(Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)</i>
-        Effect effect = new CreateTokenEffect(new MasterOfWavesElementalToken(), new DevotionCount(ManaType.BLUE));
+        Effect effect = new CreateTokenEffect(new MasterOfWavesElementalToken(), new DevotionCount(ColoredManaSymbol.U));
         effect.setText("put a number of 1/0 blue Elemental creature tokens onto the battlefield equal to your devotion to blue. <i>(Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)</i>");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
 
