@@ -21,8 +21,6 @@ public abstract class MageCard extends JPanel {
     public abstract void update(CardView card);
     public abstract void updateImage();
     public abstract Image getImage();
-    public abstract void setFoil(boolean foil);
-    public abstract boolean isFoil();
     public abstract void setZone(String zone);
     public abstract String getZone();
     public abstract void updateCallback(ActionCallback callback, UUID gameId);

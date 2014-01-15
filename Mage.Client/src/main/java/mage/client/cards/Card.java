@@ -471,15 +471,6 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     }
 
     @Override
-    public void setFoil(boolean foil) {
-    }
-
-    @Override
-    public boolean isFoil() {
-        return false;
-    }
-
-    @Override
     public void setZone(String zone) {
         //To change body of implemented methods use File | Settings | File Templates.
     }

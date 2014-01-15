@@ -85,7 +85,7 @@ public class Config {
 //        cardScalingFactor = Double.valueOf(0.4);
 //        cardScalingFactorEnlarged = Double.valueOf(0.5);
 //        handScalingFactor = Double.valueOf(1.3);
-//        defaultGameType = p.getProperty("default-game-type", "Human");;
+//        defaultGameType = p.getProperty("default-game-type", "Human");
 //        defaultDeckPath = "";
 //        defaultOtherPlayerIndex = "1";
 //        defaultComputerName = "Computer";

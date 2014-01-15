@@ -1,7 +1,6 @@
 package mage.cards;
 
 import java.util.List;
-
 import mage.view.PermanentView;
 
 public abstract class MagePermanent extends MageCard {

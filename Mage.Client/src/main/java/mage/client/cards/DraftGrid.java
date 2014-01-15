@@ -41,21 +41,24 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardViewRarityComparator;
-import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.constants.Constants;
 import mage.view.CardView;
 import mage.view.CardsView;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftGrid extends javax.swing.JPanel implements MouseListener {
+
+    private static final Logger logger = Logger.getLogger(DraftGrid.class);
 
     protected CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
@@ -68,30 +71,57 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
     public void loadBooster(CardsView booster, BigCard bigCard) {
         this.bigCard = bigCard;
         this.removeAll();
+
+        int maxRows = 4;
+
         int numColumns = 5;
         int curColumn = 0;
         int curRow = 0;
         int offsetX = 5;
         int offsetY = 3;
-        Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-        Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-        List<CardView> sortedCards = new ArrayList<CardView>(booster.values());
-        Collections.sort(sortedCards, new CardViewRarityComparator());
-        for (CardView card: sortedCards) {
-            MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, null, true);
-            cardImg.addMouseListener(this);
-            add(cardImg);
-            cardImg.update(card);
-            rectangle.setLocation(curColumn * (Config.dimensions.frameWidth + offsetX) + offsetX, curRow * (Config.dimensions.frameHeight + offsetY) + offsetY);
-            cardImg.setBounds(rectangle);
-            cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-            curColumn++;
-            if (curColumn == numColumns) {
-                curColumn = 0;
-                curRow++;
+
+        CardDimensions cardDimension = null;
+        int maxCards;
+        double scale ;
+
+        for (int i = 1; i < maxRows; i++) {
+            scale = (double) (this.getHeight()/i) / Constants.FRAME_MAX_HEIGHT;
+            cardDimension = new CardDimensions(scale);
+            maxCards = this.getWidth() / (cardDimension.frameWidth + offsetX);
+            if ((maxCards * i) >= booster.size()) {
+                numColumns = booster.size() / i;
+                if (booster.size() % i > 0) {
+                    numColumns++;
+                }
+                break;
             }
         }
-        repaint();
+
+        if (cardDimension != null) {
+            Rectangle rectangle = new Rectangle(cardDimension.frameWidth, cardDimension.frameHeight);
+            Dimension dimension = new Dimension(cardDimension.frameWidth, cardDimension.frameHeight);
+
+            List<CardView> sortedCards = new ArrayList<CardView>(booster.values());
+            Collections.sort(sortedCards, new CardViewRarityComparator());
+            for (CardView card: sortedCards) {
+                MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, null, true);
+                cardImg.addMouseListener(this);
+                add(cardImg);
+                cardImg.update(card);
+                rectangle.setLocation(curColumn * (cardDimension.frameWidth + offsetX) + offsetX, curRow * (rectangle.height + offsetY) + offsetY);
+
+                cardImg.setBounds(rectangle);
+                cardImg.setCardBounds(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+                curColumn++;
+                if (curColumn == numColumns) {
+                    curColumn = 0;
+                    curRow++;
+                }
+            }
+            repaint();
+        } else {
+            logger.warn("Draft Grid - no possible fit of cards");
+        }
     }
 
     public void addCardEventListener(Listener<Event> listener) {

@@ -25,6 +25,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.constants.Constants;
 
 /**
  * Main class for drawing Mage card object.
@@ -71,7 +72,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private GlowText ptText;
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
-    private int cardXOffset, cardYOffset, cardWidth, cardHeight;
+    public  int cardXOffset, cardYOffset, cardWidth, cardHeight;
 
     private boolean isSelected;
     private boolean showCastingCost;
@@ -99,10 +100,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private boolean displayTitleAnyway;
 
-    public CardPanel(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil) {
+    public CardPanel(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension) {
         this.gameCard = newGameCard;
         this.callback = callback;
         this.gameId = gameId;
+        this.setCardBounds(0, 0, dimension.width, dimension.height);
         this.isPermanent = this.gameCard instanceof PermanentView;
 
         if (isPermanent) {
@@ -112,54 +114,58 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         //for container debug (don't remove)
         //setBorder(BorderFactory.createLineBorder(Color.green));
 
-        buttonPanel = new JPanel();
-        buttonPanel.setLayout(null);
-        buttonPanel.setOpaque(false);
-        add(buttonPanel);
+        if (this.gameCard.canTransform()) {
+            buttonPanel = new JPanel();
+            buttonPanel.setLayout(null);
+            buttonPanel.setOpaque(false);
+            add(buttonPanel);
 
-        dayNightButton = new JButton("");
-        dayNightButton.setLocation(2, 2);
-        dayNightButton.setSize(25, 25);
+            dayNightButton = new JButton("");
+            dayNightButton.setLocation(2, 2);
+            dayNightButton.setSize(25, 25);
 
-        buttonPanel.setVisible(this.gameCard.canTransform());
+            buttonPanel.setVisible(this.gameCard.canTransform());
 
-        BufferedImage day = ImageManagerImpl.getInstance().getDayImage();
-        dayNightButton.setIcon(new ImageIcon(day));
+            BufferedImage day = ImageManagerImpl.getInstance().getDayImage();
+            dayNightButton.setIcon(new ImageIcon(day));
 
-        buttonPanel.add(dayNightButton);
+            buttonPanel.add(dayNightButton);
 
-        dayNightButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // if card is being rotated, ignore action performed
-                // if card is tapped, no visual transforming is possible (implementation limitation)
-                // if card is permanent, it will be rotated by Mage, so manual rotate should be possible
-                if (animationInProgress || isTapped() || isPermanent) {
-                    if (isPermanent) {
-                        JOptionPane.showMessageDialog(null, "You can't transform cards on battlefield.");
+            dayNightButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // if card is being rotated, ignore action performed
+                    // if card is tapped, no visual transforming is possible (implementation limitation)
+                    // if card is permanent, it will be rotated by Mage, so manual rotate should be possible
+                    if (animationInProgress || isTapped() || isPermanent) {
+                        if (isPermanent) {
+                            JOptionPane.showMessageDialog(null, "You can't transform cards on battlefield.");
+                        }
+                        return;
                     }
-                    return;
+                    Animation.transformCard(CardPanel.this, CardPanel.this, true);
                 }
-                Animation.transformCard(CardPanel.this, CardPanel.this, true);
-            }
-        });
+            });
+        }
 
+        if (this.gameCard.isToken()) {
         // token icon
-        iconPanel = new JPanel();
-        iconPanel.setLayout(null);
-        iconPanel.setOpaque(false);
-        add(iconPanel);
+            iconPanel = new JPanel();
+            iconPanel.setLayout(null);
+            iconPanel.setOpaque(false);
+            add(iconPanel);
 
-        tokenButton = new JButton("");
-        tokenButton.setLocation(2, 2);
-        tokenButton.setSize(25, 25);
+            tokenButton = new JButton("");
+            tokenButton.setLocation(2, 2);
+            tokenButton.setSize(25, 25);
 
-        iconPanel.setVisible(this.gameCard.isToken());
+            iconPanel.setVisible(this.gameCard.isToken());
 
-        BufferedImage tokenIconImage = ImageManagerImpl.getInstance().getTokenIconImage();
-        tokenButton.setIcon(new ImageIcon(tokenIconImage));
+            BufferedImage tokenIconImage = ImageManagerImpl.getInstance().getTokenIconImage();
+            tokenButton.setIcon(new ImageIcon(tokenIconImage));
 
-        iconPanel.add(tokenButton);
+            iconPanel.add(tokenButton);
+        }
 
         setBackground(Color.black);
         setOpaque(false);
@@ -211,12 +217,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     if (!loadImage || gameCard.isFaceDown()) {
                         return;
                     }
-                    BufferedImage srcImage = ImageCache.getThumbnail(gameCard);
+                    BufferedImage srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
                     if (srcImage != null) {
                         hasImage = true;
                         setText(gameCard);
                         setImage(srcImage);
-                        setFoil(foil);
                     }
                     if (gameCard.isTransformed()) {
                         toggleTransformed();
@@ -260,10 +265,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         }
     }
 
-    @Override
-    public boolean isFoil() {
-        return this.isFoil;
-    }
 
     @Override
     public void setZone(String zone) {
@@ -273,11 +274,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     @Override
     public String getZone() {
         return zone;
-    }
-
-    @Override
-    public void setFoil(boolean foil) {
-        this.isFoil = foil;
     }
 
     public void setScalingType(ScalingType scalingType) {
@@ -300,12 +296,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
         this.titleText.setGlowColor(Color.green);
-        repaint();
-    }
-
-    public void setAttacking(boolean isAttacking) {
-        //TODO:uncomment
-        //this.gameCard.setAttacking(isAttacking);
         repaint();
     }
 
@@ -427,12 +417,15 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             overlayPanel.setVisible(false);
         }
 
-        buttonPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
-        buttonPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
-
-        iconPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
-        iconPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
-
+        if (buttonPanel != null) {
+            buttonPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
+            buttonPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
+            dayNightButton.setLocation(0, cardHeight - 30);
+        }
+        if (iconPanel != null) {
+            iconPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
+            iconPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
+        }
         int fontHeight = Math.round(cardHeight * (27f / 680));
         boolean showText = (!isAnimationPanel && fontHeight < 12);
         titleText.setVisible(showText);
@@ -450,8 +443,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         int offsetX = Math.round((CARD_SIZE_FULL.width - cardWidth) / 10.0f);
 
         ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
-        dayNightButton.setLocation(0, cardHeight - 30);
-
+       
         if (isAnimationPanel || cardWidth < 200) {
             imagePanel.setScalingType(ScalingType.nearestNeighbor);
         } else {
@@ -465,7 +457,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     }
 
     @Override
-    public void setCardBounds(int x, int y, int width, int height) {
+    public final void setCardBounds(int x, int y, int width, int height) {
         cardWidth = width;
         cardHeight = height;
         int rotCenterX = Math.round(width / 2f);

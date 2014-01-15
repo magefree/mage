@@ -56,12 +56,13 @@ public class ImageCache {
             @Override
             public BufferedImage apply(String key) {
                 try {
-                    boolean thumbnail = false;
+                    
                     boolean usesVariousArt = false;
                     if (key.endsWith("#usesVariousArt")) {
                         usesVariousArt = true;
                         key = key.replace("#usesVariousArt", "");
                     }
+                    boolean thumbnail = false;
                     if (key.endsWith("#thumb")) {
                         thumbnail = true;
                         key = key.replace("#thumb", "");
@@ -93,6 +94,7 @@ public class ImageCache {
                         }
                         TFile file = new TFile(path);
                         if (!file.exists()) {
+                            log.warn("File does not exist: " + file.toString());
                             return null;
                         }
 
@@ -100,7 +102,7 @@ public class ImageCache {
                             String thumbnailPath = buildThumbnailPath(path);
                             TFile thumbnailFile = new TFile(thumbnailPath);
                             if (thumbnailFile.exists()) {
-                                //log.debug("loading thumbnail for " + key + ", path="+thumbnailPath);
+                                log.debug("loading thumbnail for " + key + ", path="+thumbnailPath);
                                 return loadImage(thumbnailFile);
                             } else {
                                 BufferedImage image = loadImage(file);
@@ -108,7 +110,7 @@ public class ImageCache {
                                 if (image == null) {
                                     return null;
                                 }
-                                //log.debug("creating thumbnail for " + key);
+                                log.debug("creating thumbnail for " + key);
                                 return makeThumbnail(image, thumbnailPath);
                             }
                         } else {
@@ -156,7 +158,7 @@ public class ImageCache {
         if (card.getUsesVariousArt()) {
             key += "#usesVariousArt";
         }
-        //log.debug("#key: " + key);
+        // log.debug("#key: " + key);
         return getImage(key);
     }
 
@@ -165,7 +167,7 @@ public class ImageCache {
         if (card.getUsesVariousArt()) {
             key += "#usesVariousArt";
         }
-        //log.debug("#key: " + key);
+        // log.debug("#key: " + key);
         return getImage(key);
     }
 
@@ -213,6 +215,7 @@ public class ImageCache {
     public static BufferedImage loadImage(TFile file) {
         BufferedImage image = null;
         if (!file.exists()) {
+            log.debug("File does not exist: " + file.toString());
             return null;
         }
         try {
@@ -297,9 +300,16 @@ public class ImageCache {
      * Returns the image appropriate to display the card in the picture panel
      */
     public static BufferedImage getImage(CardView card, int width, int height) {
+        if (Constants.THUMBNAIL_SIZE_FULL.width + 10 > width) {
+            return getThumbnail(card);
+        }
         String key = getKey(card);
+        if (card.getUsesVariousArt()) {
+            key += "#usesVariousArt";
+        }
         BufferedImage original = getImage(key);
         if (original == null) {
+            log.warn(key + " not found");
             return null;
         }
 

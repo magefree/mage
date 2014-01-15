@@ -16,7 +16,6 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.components.CardInfoPane;
-import mage.constants.Rarity;
 import mage.remote.Session;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
@@ -412,7 +411,7 @@ public class MageActionCallback implements ActionCallback {
         if (image != null && image instanceof BufferedImage) {
             // XXX: scaled to fit width
             image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
-            bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules(), card.isFoil());
+            bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules(), false);
             if (card.getOriginal().isAbility()) {
                 bigCard.showTextComponent();
             } else {
