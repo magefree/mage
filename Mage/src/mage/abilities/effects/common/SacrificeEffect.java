@@ -87,7 +87,7 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
         amount = Math.min(amount, realCount);
 
-        Target target = new TargetControlledPermanent(amount, amount, filter, false);
+        Target target = new TargetControlledPermanent(amount, amount, filter, true);
         target.setRequired(true);
 
         //A spell or ability could have removed the only legal target this player
