@@ -141,7 +141,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
         MageObject targetSource = game.getObject(sourceId);
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
             if (!targets.containsKey(permanent.getId())) {
-                if (!notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     count++;
                     if (count >= remainingTargets) {
                         return true;
