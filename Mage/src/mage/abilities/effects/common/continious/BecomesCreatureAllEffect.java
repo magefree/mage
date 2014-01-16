@@ -134,7 +134,9 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl<BecomesCreatu
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append(duration.toString()).append(", ");
+        if (duration.toString() != "") {
+            sb.append(duration.toString()).append(", ");
+        }
         sb.append(filter.getMessage());
         sb.append(" become a ").append(token.getDescription());
         if (type != null && type.length() > 0) {

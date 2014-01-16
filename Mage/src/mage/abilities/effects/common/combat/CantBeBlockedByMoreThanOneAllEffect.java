@@ -61,7 +61,8 @@ public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl<Ca
         super(duration, Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
-        staticText = new StringBuilder("Each ").append(filter.getMessage()).append(" can't be blocked by more than ").append(CardUtil.numberToText(amount)).append(" creature").toString();
+        staticText = new StringBuilder("Each ").append(filter.getMessage()).append(" can't be blocked by more than ")
+                .append(CardUtil.numberToText(amount)).append(" creature").append(amount > 1 ? "s" : "").toString();
     }
 
     public CantBeBlockedByMoreThanOneAllEffect(final CantBeBlockedByMoreThanOneAllEffect effect) {
