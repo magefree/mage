@@ -39,6 +39,7 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterMana;
+import mage.filter.FilterPermanent;
 
 /**
  *
@@ -60,7 +61,7 @@ public class CryptRats extends CardImpl<CryptRats> {
         this.toughness = new MageInt(1);
 
         // {X}: Crypt Rats deals X damage to each creature and each player. Spend only black mana this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(new ManacostVariableValue()), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(new ManacostVariableValue(), new FilterPermanent()), new ManaCostsImpl("{X}"));
         ability.getManaCostsToPay().getVariableCosts().get(0).setFilter(filterBlack);
         this.addAbility(ability);
         this.addInfo("01", "Spend only black mana this way.");
