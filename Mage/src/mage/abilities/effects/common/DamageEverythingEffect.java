@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,20 +48,27 @@ import mage.players.Player;
 public class DamageEverythingEffect extends OneShotEffect<DamageEverythingEffect> {
 
     private DynamicValue amount;
+    private FilterPermanent filter;
 
     public DamageEverythingEffect(int amount) {
-        this(new StaticValue(amount));
+        this(new StaticValue(amount), new FilterCreaturePermanent());
+    }
+
+    public DamageEverythingEffect(int amount, FilterPermanent filter) {
+        this(new StaticValue(amount), filter);
     }
     
-    public DamageEverythingEffect(DynamicValue amount) {
+    public DamageEverythingEffect(DynamicValue amount, FilterPermanent filter) {
         super(Outcome.Damage);
         this.amount = amount;
-        staticText = "{source} deals " + amount.toString() + " damage to each creature and each player";   
+        this.filter = filter;
+        staticText = "{source} deals " + amount.toString() + " damage to each " + filter.getMessage() + " and each player";   
     }
 
     public DamageEverythingEffect(final DamageEverythingEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.filter = effect.filter;
     }
 
     @Override
@@ -70,7 +78,7 @@ public class DamageEverythingEffect extends OneShotEffect<DamageEverythingEffect
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent permanent: permanents) {
             permanent.damage(amount.calculate(game, source), source.getId(), game, true, false);
         }
