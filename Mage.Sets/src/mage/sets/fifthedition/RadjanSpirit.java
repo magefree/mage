@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continious.LoseAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,8 +57,8 @@ public class RadjanSpirit extends CardImpl<RadjanSpirit> {
         this.toughness = new MageInt(2);
 
         // {tap}: Target creature loses flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilityTargetEffect(FlyingAbility.getInstance()), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

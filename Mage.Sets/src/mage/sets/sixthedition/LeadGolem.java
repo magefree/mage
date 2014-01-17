@@ -37,7 +37,7 @@ public class LeadGolem extends mage.sets.mirage.LeadGolem {
 
     public LeadGolem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 295;
+        this.cardNumber = 296;
         this.expansionSetCode = "6ED";
     }
 

@@ -51,7 +51,7 @@ public class DenseFoliage extends CardImpl<DenseFoliage> {
         this.color.setGreen(true);
 
         // Creatures can't be the targets of spells.
-        CantTargetEffect cantTargetEffect = new CantTargetEffect(new FilterCreaturePermanent("Creatures"), new FilterSpell(), Duration.WhileOnBattlefield);
+        CantTargetEffect cantTargetEffect = new CantTargetEffect(new FilterCreaturePermanent("Creatures"), new FilterSpell("spells"), Duration.WhileOnBattlefield);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, cantTargetEffect));
     }
 

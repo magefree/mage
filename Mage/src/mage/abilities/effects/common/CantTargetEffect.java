@@ -30,12 +30,10 @@ package mage.abilities.effects.common;
 
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -51,6 +49,10 @@ public class CantTargetEffect extends ReplacementEffectImpl<CantTargetEffect> {
     private FilterPermanent filterTarget;
     private FilterStackObject filterSource;
 
+    public CantTargetEffect(FilterPermanent filterTarget, Duration duration) {
+        this(filterTarget, null, duration);
+    }
+
     public CantTargetEffect(FilterPermanent filterTarget, FilterStackObject filterSource, Duration duration) {
         super(duration, Outcome.Benefit);
         this.filterTarget = filterTarget;
@@ -58,16 +60,15 @@ public class CantTargetEffect extends ReplacementEffectImpl<CantTargetEffect> {
         setText();
     }
 
-    public CantTargetEffect(FilterPermanent filterTarget, Duration duration) {
-        this(filterTarget, null, duration);
-    }
 
     public CantTargetEffect(final CantTargetEffect effect) {
         super(effect);
-        if (effect.filterTarget != null)
+        if (effect.filterTarget != null) {
             this.filterTarget = effect.filterTarget.copy();
-        if (effect.filterSource != null)
+        }
+        if (effect.filterSource != null) {
             this.filterSource = effect.filterSource.copy();
+        }
     }
 
     @Override
@@ -90,8 +91,9 @@ public class CantTargetEffect extends ReplacementEffectImpl<CantTargetEffect> {
         if (event.getType() == EventType.TARGET) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-                if (filterSource == null)
+                if (filterSource == null) {
                     return true;
+                }
                 else {
                     StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
                     if (sourceObject != null && filterSource.match(sourceObject, sourceObject.getSourceId(), game)) {
@@ -112,7 +114,9 @@ public class CantTargetEffect extends ReplacementEffectImpl<CantTargetEffect> {
         else {
             sb.append("spells");
         }
-        sb.append(" ").append(duration.toString());
+        if (!duration.toString().isEmpty()) {
+            sb.append(" ").append(duration.toString());
+        }
         staticText = sb.toString();
     }
 

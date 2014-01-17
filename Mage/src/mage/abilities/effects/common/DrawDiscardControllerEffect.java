@@ -57,7 +57,7 @@ public class DrawDiscardControllerEffect extends OneShotEffect<DrawDiscardContro
                 .append(" card").append(cardsToDraw == 1?" ": "s")
                 .append(", then discard ")
                 .append(cardsToDiscard == 1?"a": CardUtil.numberToText(cardsToDiscard))
-                .append(" card").append(cardsToDiscard == 1?" ": "s").toString();
+                .append(" card").append(cardsToDiscard == 1?"": "s").toString();
     }
 
     public DrawDiscardControllerEffect(final DrawDiscardControllerEffect effect) {

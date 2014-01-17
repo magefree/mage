@@ -29,22 +29,22 @@ package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.target.targetpointer.FixedTarget;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.abilities.effects.Effect;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetLandPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -61,14 +61,12 @@ public class PsychicVenom extends CardImpl<PsychicVenom> {
         this.color.setBlue(true);
 
         // Enchant land
-        // Whenever enchanted land becomes tapped, Psychic Venom deals 2 damage to that land's controller.
-                // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Whenever enchanted land becomes tapped, its controller loses 2 life.
+        // Whenever enchanted land becomes tapped, Psychic Venom deals 2 damage to that land's controller..
         this.addAbility(new PsychicVenomAbility());
     }
 
@@ -84,7 +82,7 @@ public class PsychicVenom extends CardImpl<PsychicVenom> {
 
 class PsychicVenomAbility extends TriggeredAbilityImpl<PsychicVenomAbility> {
     PsychicVenomAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
 
     PsychicVenomAbility(final PsychicVenomAbility ability) {
@@ -116,6 +114,6 @@ class PsychicVenomAbility extends TriggeredAbilityImpl<PsychicVenomAbility> {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land becomes tapped, its controller loses 2 life.";
+        return "Whenever enchanted land becomes tapped, " + super.getRule();
     }
 }

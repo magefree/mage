@@ -37,7 +37,7 @@ public class ManaPrism extends mage.sets.mirage.ManaPrism {
 
     public ManaPrism(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 296;
+        this.cardNumber = 297;
         this.expansionSetCode = "6ED";
     }
 

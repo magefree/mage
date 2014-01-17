@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -48,7 +49,7 @@ public class AshnodsAltar extends CardImpl<AshnodsAltar> {
         this.expansionSetCode = "5ED";
 
         // Sacrifice a creature: Add {2} to your mana pool.
-        SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
+        SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), true));
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), cost));
     }
 
