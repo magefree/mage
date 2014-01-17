@@ -418,10 +418,23 @@ public class GameState implements Serializable, Copyable<GameState> {
 //        this.messages.add(message);
 //    }
 
+    /**
+     * Returns a list of all players of the game ignoring range or
+     * if a player has lost or left the game.
+     * 
+     * @return playerList
+     */
     public PlayerList getPlayerList() {
         return playerList;
     }
 
+    /**
+     * Returns a list of all active players of the game, setting the
+     * playerId to the current player of the list.
+     * 
+     * @param playerId
+     * @return playerList
+     */
     public PlayerList getPlayerList(UUID playerId) {
         PlayerList newPlayerList = new PlayerList();
         for (Player player: players.values()) {

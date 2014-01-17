@@ -98,29 +98,33 @@ class DivineReckoningEffect extends OneShotEffect<DivineReckoningEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Card> chosen = new ArrayList<Card>();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : controller.getInRange()) {
+                Player player = game.getPlayer(playerId);
 
-        for (UUID playerId : game.getPlayerList()) {
-            Player player = game.getPlayer(playerId);
-
-            Target target = new TargetControlledPermanent(1, 1, filter, false);
-            target.setRequired(true);
-            if (target.canChoose(player.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-                    player.choose(Outcome.Benefit, target, source.getSourceId(), game);
-                }
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if (permanent != null) {
-                    chosen.add(permanent);
+                Target target = new TargetControlledPermanent(1, 1, filter, false);
+                target.setRequired(true);
+                if (target.canChoose(player.getId(), game)) {
+                    while (!target.isChosen() && target.canChoose(player.getId(), game)) {
+                        player.choose(Outcome.Benefit, target, source.getSourceId(), game);
+                    }
+                    Permanent permanent = game.getPermanent(target.getFirstTarget());
+                    if (permanent != null) {
+                        chosen.add(permanent);
+                    }
                 }
             }
-        }
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            if (!chosen.contains(permanent)) {
-                permanent.destroy(source.getId(), game, false);
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+                if (!chosen.contains(permanent)) {
+                    permanent.destroy(source.getId(), game, false);
+                }
             }
+            return true;
         }
-        return true;
+        return false;
+
     }
 
     @Override
