@@ -50,7 +50,7 @@ public class DreamTwist extends CardImpl<DreamTwist> {
         this.color.setBlue(true);
 
         // Target player puts the top three cards of his or her library into his or her graveyard.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(3));
 
         // Flashback {1}{U}
