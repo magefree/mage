@@ -107,20 +107,24 @@ class DiscipleOfPhenaxEffect extends OneShotEffect<DiscipleOfPhenaxEffect> {
         if (devotion > 0 && targetPlayer != null) {
             Cards revealedCards = new CardsImpl(Zone.PICK);
             int amount = Math.min(targetPlayer.getHand().size(), devotion);
-            FilterCard filter = new FilterCard("card in target player's hand");
-            TargetCardInHand chosenCards = new TargetCardInHand(amount, amount, filter);
-            chosenCards.setRequired(true);
-            chosenCards.setNotTarget(true);
-            if (chosenCards.canChoose(targetPlayer.getId(), game) && targetPlayer.choose(Outcome.Discard, targetPlayer.getHand(), chosenCards, game)) {
-                if (!chosenCards.getTargets().isEmpty()) {
-                    List<UUID> targets = chosenCards.getTargets();
-                    for (UUID targetid : targets) {
-                        Card card = game.getCard(targetid);
-                        if (card != null) {
-                            revealedCards.add(card);
+            if (targetPlayer.getHand().size() > amount) {
+                FilterCard filter = new FilterCard("card in target player's hand");
+                TargetCardInHand chosenCards = new TargetCardInHand(amount, amount, filter);
+                chosenCards.setRequired(true);
+                chosenCards.setNotTarget(true);
+                if (chosenCards.canChoose(targetPlayer.getId(), game) && targetPlayer.choose(Outcome.Discard, targetPlayer.getHand(), chosenCards, game)) {
+                    if (!chosenCards.getTargets().isEmpty()) {
+                        List<UUID> targets = chosenCards.getTargets();
+                        for (UUID targetid : targets) {
+                            Card card = game.getCard(targetid);
+                            if (card != null) {
+                                revealedCards.add(card);
+                            }
                         }
                     }
                 }
+            } else {
+                revealedCards.addAll(targetPlayer.getHand());
             }
             if (!revealedCards.isEmpty()) {
                 targetPlayer.revealCards("Disciple of Phenax", revealedCards, game);
