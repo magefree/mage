@@ -27,6 +27,7 @@
  */
 package mage.sets.magic2012;
 
+import java.util.Set;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -85,36 +86,36 @@ class SmallpoxEffect extends OneShotEffect<SmallpoxEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getPlayerList()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.loseLife(1, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Set <UUID> players = controller.getInRange();
+            for (UUID playerId : players) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.loseLife(1, game);
+                }
             }
-        }
-
-        for (UUID playerId : game.getPlayerList()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.discard(1, source, game);
+            for (UUID playerId : players) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.discard(1, source, game);
+                }
             }
-        }
-
-
-        for (UUID playerId : game.getPlayerList()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                sacrifice(game, source, player, filterCreature);
+            for (UUID playerId : players) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    sacrifice(game, source, player, filterCreature);
+                }
             }
-        }
-
-        for (UUID playerId : game.getPlayerList()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                sacrifice(game, source, player, filterLand);
+            for (UUID playerId : players) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    sacrifice(game, source, player, filterLand);
+                }
             }
+            return true;
         }
-
-        return true;
+        return false;
     }
 
     @Override
@@ -125,7 +126,7 @@ class SmallpoxEffect extends OneShotEffect<SmallpoxEffect> {
     private void sacrifice(Game game, Ability source, Player player, FilterPermanent filter) {
         Target target = new TargetControlledPermanent(1, 1, filter, false);
         if (target.canChoose(player.getId(), game)) {
-            while (!target.isChosen() && target.canChoose(player.getId(), game)) {
+            while (!target.isChosen() && target.canChoose(player.getId(), game) && player.isInGame()) {
                 player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             }
 

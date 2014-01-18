@@ -350,8 +350,16 @@ public class CardUtil {
     }
 
     public static String numberToText(String number) {
+        return numberToText(number, "one");
+    }
+
+    public static String numberToText(String number, String forOne) {
         if (checkNumeric(number)) {
-            return numberToText(Integer.parseInt(number));
+            int intNumber = Integer.parseInt(number);
+            if (forOne != null && intNumber == 1) {
+                return forOne;
+            }
+            return numberToText(intNumber);
         }
         return number;
     }

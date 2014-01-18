@@ -32,6 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DiscardEachPlayerEffect;
 import mage.abilities.effects.common.LoseLifePlayersEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
@@ -54,9 +55,15 @@ public class DeathCloud extends CardImpl<DeathCloud> {
         // Each player loses X life, discards X cards, sacrifices X creatures, then sacrifices X lands.
         DynamicValue xValue = new ManacostVariableValue();
         this.getSpellAbility().addEffect(new LoseLifePlayersEffect(xValue));
-        this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(xValue, false));
-        this.getSpellAbility().addEffect(new SacrificeAllEffect(xValue, new FilterControlledCreaturePermanent("creatures")));
-        this.getSpellAbility().addEffect(new SacrificeAllEffect(xValue, new FilterControlledLandPermanent("lands")));
+        Effect effect = new DiscardEachPlayerEffect(xValue, false);
+        effect.setText(", discards X cards");
+        this.getSpellAbility().addEffect(effect);
+        effect = new SacrificeAllEffect(xValue, new FilterControlledCreaturePermanent("creatures"));
+        effect.setText(", sacrifices X creatures");
+        this.getSpellAbility().addEffect(effect);
+        effect = new SacrificeAllEffect(xValue, new FilterControlledLandPermanent("lands"));
+        effect.setText("then sacrifices X lands");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public DeathCloud(final DeathCloud card) {

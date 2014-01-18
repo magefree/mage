@@ -28,6 +28,7 @@
 package mage.sets.planeshift;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DiscardEachPlayerEffect;
@@ -50,9 +51,12 @@ public class UrzasGuilt extends CardImpl<UrzasGuilt> {
 
         // Each player draws two cards, then discards three cards, then loses 4 life.
         this.getSpellAbility().addEffect(new DrawCardAllEffect(2));
-        this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(3, false));
-        this.getSpellAbility().addEffect(new LoseLifeAllEffect(4));
-
+        Effect effect = new DiscardEachPlayerEffect(3, false);
+        effect.setText("then discards three cards");
+        this.getSpellAbility().addEffect(effect);
+        effect = new LoseLifeAllEffect(4);
+        effect.setText("then loses 4 life");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public UrzasGuilt(final UrzasGuilt card) {

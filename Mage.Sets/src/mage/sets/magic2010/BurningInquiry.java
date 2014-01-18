@@ -28,16 +28,12 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DiscardEachPlayerEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -53,7 +49,9 @@ public class BurningInquiry extends CardImpl<BurningInquiry> {
 
         // Each player draws three cards, then discards three cards at random.
         this.getSpellAbility().addEffect(new DrawCardAllEffect(3));
-        this.getSpellAbility().addEffect(new BurningInquiryEffect());
+        Effect effect = new DiscardEachPlayerEffect(3, true);
+        effect.setText("then discards three cards at random");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public BurningInquiry(final BurningInquiry card) {
@@ -63,43 +61,5 @@ public class BurningInquiry extends CardImpl<BurningInquiry> {
     @Override
     public BurningInquiry copy() {
         return new BurningInquiry(this);
-    }
-}
-
-class BurningInquiryEffect extends OneShotEffect<BurningInquiryEffect> {
-
-    public BurningInquiryEffect() {
-        super(Outcome.Discard);
-        this.staticText = "Each player discards three cards at random";
-    }
-
-    public BurningInquiryEffect(final BurningInquiryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BurningInquiryEffect copy() {
-        return new BurningInquiryEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
-        for (UUID playerId : controller.getInRange()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (int i = 0; i < 3; i++) {
-                    Card card = player.getHand().getRandom(game);
-                    if (card != null) {
-                        player.discard(card, source, game);
-                    }
-                }
-            }
-        }
-        return true;
     }
 }

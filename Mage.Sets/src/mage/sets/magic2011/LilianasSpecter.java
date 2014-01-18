@@ -29,15 +29,17 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DiscardEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -56,7 +58,7 @@ public class LilianasSpecter extends CardImpl<LilianasSpecter> {
         this.toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LilianasSpecterEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
     }
 
     public LilianasSpecter(final LilianasSpecter card) {
@@ -66,33 +68,6 @@ public class LilianasSpecter extends CardImpl<LilianasSpecter> {
     @Override
     public LilianasSpecter copy() {
         return new LilianasSpecter(this);
-    }
-
-}
-
-class LilianasSpecterEffect extends OneShotEffect<LilianasSpecterEffect> {
-
-    public LilianasSpecterEffect() {
-        super(Outcome.Discard);
-        staticText = "each opponent discards a card";
-    }
-
-    public LilianasSpecterEffect(final LilianasSpecterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId: game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            player.discard(1, source, game);
-        }
-        return true;
-    }
-
-    @Override
-    public LilianasSpecterEffect copy() {
-        return new LilianasSpecterEffect(this);
     }
 
 }

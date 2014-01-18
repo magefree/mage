@@ -11,6 +11,9 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
+import static mage.constants.TargetController.NOT_YOU;
+import static mage.constants.TargetController.OPPONENT;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -22,9 +25,14 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
 
     protected DynamicValue amount;
     protected boolean randomDiscard;
+    private TargetController targetController;
 
     public DiscardEachPlayerEffect() {
         this(new StaticValue(1), false);
+    }
+
+    public DiscardEachPlayerEffect(TargetController targetController) {
+        this(new StaticValue(1), false, targetController);
     }
 
     public DiscardEachPlayerEffect(int amount, boolean randomDiscard) {
@@ -32,15 +40,21 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
     }
 
     public DiscardEachPlayerEffect(DynamicValue amount, boolean randomDiscard) {
+        this(amount, randomDiscard, TargetController.ANY);
+    }
+
+    public DiscardEachPlayerEffect(DynamicValue amount, boolean randomDiscard, TargetController targetController) {
         super(Outcome.Discard);
         this.randomDiscard = randomDiscard;
         this.amount = amount;
+        this.targetController = targetController;
     }
 
     public DiscardEachPlayerEffect(final DiscardEachPlayerEffect effect) {
         super(effect);
         this.randomDiscard = effect.randomDiscard;
         this.amount = effect.amount;
+        this.targetController = effect.targetController;
     }
 
     @Override
@@ -53,22 +67,34 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                     int numberOfCardsToDiscard = Math.min(amount.calculate(game, source), player.getHand().size());
-                     Cards cards = new CardsImpl();
-                     if (randomDiscard) {
-                         while (cards.size() < numberOfCardsToDiscard) {
-                             Card card = player.getHand().getRandom(game);
-                             if (!cards.contains(card.getId())) {
-                                 cards.add(card);
-                             }
-                         }
-                     } else {
-                         Target target = new TargetDiscard(numberOfCardsToDiscard, numberOfCardsToDiscard, new FilterCard(), playerId);
-                         target.setRequired(true);
-                         player.chooseTarget(outcome, target, source, game);
-                         cards.addAll(target.getTargets());
-                     }
-                     cardsToDiscard.put(playerId, cards);
+                    switch(targetController) {
+                        case NOT_YOU:
+                            if (playerId.equals(source.getControllerId())) {
+                                continue;
+                            }
+                            break;
+                        case OPPONENT:
+                            if (!game.getOpponents(source.getControllerId()).contains(playerId)) {
+                                continue;
+                            }
+                            break;
+                    }
+                    int numberOfCardsToDiscard = Math.min(amount.calculate(game, source), player.getHand().size());
+                    Cards cards = new CardsImpl();
+                    if (randomDiscard) {
+                        while (cards.size() < numberOfCardsToDiscard) {
+                            Card card = player.getHand().getRandom(game);
+                            if (!cards.contains(card.getId())) {
+                                cards.add(card);
+                            }
+                        }
+                    } else {
+                        Target target = new TargetDiscard(numberOfCardsToDiscard, numberOfCardsToDiscard, new FilterCard(), playerId);
+                        target.setRequired(true);
+                        player.chooseTarget(outcome, target, source, game);
+                        cards.addAll(target.getTargets());
+                    }
+                    cardsToDiscard.put(playerId, cards);
                 }
             }
             // discard all choosen cards
@@ -83,7 +109,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
                                 player.discard(card, source, game);
                             }
                         }
-                        game.informPlayers(new StringBuilder(player.getName()).append(" discards ").append(Integer.toString(cardsPlayer.size())).append(" card").append(cardsPlayer.size() > 1?"s":"").toString());
+                        game.informPlayers(new StringBuilder(player.getName()).append(" discards ").append(Integer.toString(cardsPlayer.size())).append(" card").append(cardsPlayer.size() > 1 ? "s" : "").toString());
                     }
                 }
             }
@@ -98,8 +124,23 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
-        sb.append("Each player discards ");
+        sb.append("each ");
+        switch(targetController) {
+            case NOT_YOU:
+                sb.append("other player");
+                break;
+            case OPPONENT:
+                sb.append("opponent");
+                break;
+            case ANY:
+                sb.append("player");
+                break;
+        }
+        sb.append(" discards ");
         sb.append(CardUtil.numberToText(amount.toString())).append(" card");
         try {
             if (Integer.parseInt(amount.toString()) > 1) {
@@ -113,5 +154,4 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
         }
         return sb.toString();
     }
-
 }

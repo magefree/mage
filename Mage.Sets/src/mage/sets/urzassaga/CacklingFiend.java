@@ -36,8 +36,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DiscardEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -56,7 +58,7 @@ public class CacklingFiend extends CardImpl<CacklingFiend> {
         this.toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CacklingFiendEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
     }
 
     public CacklingFiend(final CacklingFiend card) {
@@ -66,33 +68,6 @@ public class CacklingFiend extends CardImpl<CacklingFiend> {
     @Override
     public CacklingFiend copy() {
         return new CacklingFiend(this);
-    }
-
-}
-
-class CacklingFiendEffect extends OneShotEffect<CacklingFiendEffect> {
-
-    public CacklingFiendEffect() {
-        super(Outcome.Discard);
-        staticText = "each opponent discards a card";
-    }
-
-    public CacklingFiendEffect(final CacklingFiendEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId: game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            player.discard(1, source, game);
-        }
-        return true;
-    }
-
-    @Override
-    public CacklingFiendEffect copy() {
-        return new CacklingFiendEffect(this);
     }
 
 }
