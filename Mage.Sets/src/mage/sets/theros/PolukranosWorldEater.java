@@ -145,7 +145,7 @@ class PolukranosWorldEaterEffect extends OneShotEffect<PolukranosWorldEaterEffec
             Permanent sourceCreature = game.getPermanent(source.getSourceId());
             if (sourceCreature != null) {
                 for (Permanent permanent :permanents) {
-                    sourceCreature.damage(permanent.getPower().getValue(), source.getSourceId(), game, true, false);
+                    sourceCreature.damage(permanent.getPower().getValue(), permanent.getId(), game, true, false);
                 }
             }
             return true;
