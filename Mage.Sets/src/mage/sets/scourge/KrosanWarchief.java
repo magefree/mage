@@ -38,7 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KrosanWarchief extends CardImpl<KrosanWarchief> {
 
-    private static final FilterCard filter = new FilterCard("Beast spells");
+    private static final FilterSpell filter = new FilterSpell("Beast spells");
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("Beast");
 
     static {

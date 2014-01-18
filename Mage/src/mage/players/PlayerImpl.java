@@ -840,6 +840,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         else if (ability instanceof ManaAbility) {
             result = playManaAbility((ManaAbility)ability.copy(), game);
         }
+        else if (ability instanceof FlashbackAbility){
+            result = playAbility((ActivatedAbility)ability.copy(), game);
+        }
         else if (ability instanceof SpellAbility) {
             result = cast((SpellAbility)ability, game, false);
         }

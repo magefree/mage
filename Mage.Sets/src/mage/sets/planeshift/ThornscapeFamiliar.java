@@ -36,7 +36,7 @@ import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class ThornscapeFamiliar extends CardImpl<ThornscapeFamiliar> {
 
-    private static final FilterCard filter = new FilterCard("Red spells and white spells");
+    private static final FilterSpell filter = new FilterSpell("Red spells and white spells");
 
     static {
         filter.add(Predicates.or(

@@ -28,15 +28,16 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -45,6 +46,11 @@ import mage.game.permanent.Permanent;
  * @author North
  */
 public class CentaurOmenreader extends CardImpl<CentaurOmenreader> {
+
+    private static final FilterSpell filter = new FilterSpell("creature spells");
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
 
     public CentaurOmenreader(UUID ownerId) {
         super(ownerId, 143, "Centaur Omenreader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
@@ -58,7 +64,7 @@ public class CentaurOmenreader extends CardImpl<CentaurOmenreader> {
         this.toughness = new MageInt(3);
 
         // As long as Centaur Omenreader is tapped, creature spells you cast cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CentaurOmenreaderSpellsCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CentaurOmenreaderSpellsCostReductionEffect(filter)));
     }
 
     public CentaurOmenreader(final CentaurOmenreader card) {
@@ -73,8 +79,9 @@ public class CentaurOmenreader extends CardImpl<CentaurOmenreader> {
 
 class CentaurOmenreaderSpellsCostReductionEffect extends SpellsCostReductionEffect {
 
-    public CentaurOmenreaderSpellsCostReductionEffect() {
-        super(new FilterCreatureCard("creature spells"), 2);
+    public CentaurOmenreaderSpellsCostReductionEffect(FilterSpell filter) {
+        super(filter, 2);
+        staticText = "As long as {this} is tapped, creature spells you cast cost {2} less to cast";
     }
 
     protected CentaurOmenreaderSpellsCostReductionEffect(SpellsCostReductionEffect effect) {

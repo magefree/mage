@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class HeroOfIroas extends CardImpl<HeroOfIroas> {
 
-    private static final FilterCard filter = new FilterCard("Aura spells");
+    private static final FilterSpell filter = new FilterSpell("Aura spells");
     static {
         filter.add(new SubtypePredicate("Aura"));
     }

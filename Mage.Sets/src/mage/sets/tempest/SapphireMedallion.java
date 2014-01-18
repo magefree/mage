@@ -35,7 +35,7 @@ import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class SapphireMedallion extends CardImpl<SapphireMedallion> {
 
-    private static final FilterCard filter = new FilterCard("Blue spells");
+    private static final FilterSpell filter = new FilterSpell("Blue spells");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));

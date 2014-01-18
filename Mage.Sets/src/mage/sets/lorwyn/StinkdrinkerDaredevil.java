@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class StinkdrinkerDaredevil extends CardImpl<StinkdrinkerDaredevil> {
 
-    private static final FilterCard filter = new FilterCard("Giant spells");
+    private static final FilterSpell filter = new FilterSpell("Giant spells");
 
     static {
         filter.add(new SubtypePredicate("Giant"));

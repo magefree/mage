@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class BoskBanneret extends CardImpl<BoskBanneret> {
 
-    private static final FilterCard filter = new FilterCard("Treefolk spells and Shaman spells");
+    private static final FilterSpell filter = new FilterSpell("Treefolk spells and Shaman spells");
 
     static {
         filter.add(Predicates.or(

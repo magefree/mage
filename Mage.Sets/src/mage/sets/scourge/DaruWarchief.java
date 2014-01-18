@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class DaruWarchief extends CardImpl<DaruWarchief> {
 
-    private static final FilterCard filter = new FilterCard("Soldier spells");
+    private static final FilterSpell filter = new FilterSpell("Soldier spells");
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("Soldier creatures");
 
     static {

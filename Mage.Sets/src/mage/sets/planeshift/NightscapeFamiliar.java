@@ -39,7 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class NightscapeFamiliar extends CardImpl<NightscapeFamiliar> {
 
-    private static final FilterCard filter = new FilterCard("Blue spells and red spells");
+    private static final FilterSpell filter = new FilterSpell("Blue spells and red spells");
 
     static {
         filter.add(Predicates.or(

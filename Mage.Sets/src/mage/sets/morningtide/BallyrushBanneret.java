@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class BallyrushBanneret extends CardImpl<BallyrushBanneret> {
 
-    private static final FilterCard filter = new FilterCard("Kithkin spells and Soldier spells");
+    private static final FilterSpell filter = new FilterSpell("Kithkin spells and Soldier spells");
 
     static {
         filter.add(Predicates.or(

@@ -39,7 +39,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 
 public class LongForgottenGohei extends CardImpl<LongForgottenGohei> {
 
-    private static final FilterCard arcaneFilter = new FilterCard("Arcane spells");
+    private static final FilterSpell arcaneFilter = new FilterSpell("Arcane spells");
     private static final FilterCreaturePermanent spiritFilter = new FilterCreaturePermanent("Spirit creatures");
 
     static {

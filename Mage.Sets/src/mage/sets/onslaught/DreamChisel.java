@@ -34,7 +34,7 @@ import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreatureSpell;
 import mage.filter.predicate.other.FaceDownPredicate;
 
 /**
@@ -43,7 +43,7 @@ import mage.filter.predicate.other.FaceDownPredicate;
  */
 public class DreamChisel extends CardImpl<DreamChisel> {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Face-down creature spells");
+    private static final FilterCreatureSpell filter = new FilterCreatureSpell("Face-down creature spells");
 
     static {
         filter.add(new FaceDownPredicate());

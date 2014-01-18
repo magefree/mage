@@ -38,7 +38,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class GoblinWarchief extends CardImpl<GoblinWarchief> {
 
-    private static final FilterCard filterSpells = new FilterCard("Goblin spells");
+    private static final FilterSpell filterSpells = new FilterSpell("Goblin spells");
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblins");
 
     static {

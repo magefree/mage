@@ -37,7 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.abilities.keyword.ReinforceAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class BrighthearthBanneret extends CardImpl<BrighthearthBanneret> {
 
-    private static final FilterCard filter = new FilterCard("Elemental spells and Warrior spells");
+    private static final FilterSpell filter = new FilterSpell("Elemental spells and Warrior spells");
 
     static {
         filter.add(Predicates.or(

@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class UndeadWarchief extends CardImpl<UndeadWarchief> {
 
-    private static final FilterCard filter = new FilterCard("Zombie spells");
+    private static final FilterSpell filter = new FilterSpell("Zombie spells");
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("Zombie creatures");
 
     static {

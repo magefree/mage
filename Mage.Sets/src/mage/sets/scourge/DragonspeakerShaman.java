@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class DragonspeakerShaman extends CardImpl<DragonspeakerShaman> {
 
-    private static final FilterCard filter = new FilterCard("Dragon spells");
+    private static final FilterSpell filter = new FilterSpell("Dragon spells");
 
     static {
         filter.add(new SubtypePredicate("Dragon"));

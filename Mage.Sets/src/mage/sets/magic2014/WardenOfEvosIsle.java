@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class WardenOfEvosIsle extends CardImpl<WardenOfEvosIsle> {
 
-    private static final FilterCard filter = new FilterCard("Creature spells with flying");
+    private static final FilterSpell filter = new FilterSpell("Creature spells with flying");
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new AbilityPredicate(FlyingAbility.class));

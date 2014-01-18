@@ -27,10 +27,7 @@
  */
 package mage.abilities.keyword;
 
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
@@ -39,6 +36,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.Card;
 import mage.cards.SplitCard;
+import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,14 +50,16 @@ import mage.target.Target;
  *
  * @author nantuko
  */
-public class FlashbackAbility extends /*SpellAbility*/ ActivatedAbilityImpl<FlashbackAbility> {
+public class FlashbackAbility extends SpellAbility {
 
     private SpellAbilityType spellAbilityType;
     private String abilityName;
 
     public FlashbackAbility(Cost cost, TimingRule timingRule) {
-        //super(cost, "", new FlashbackEffect(), Constants.Zone.GRAVEYARD);
-        super(Zone.GRAVEYARD, new FlashbackEffect(), cost);
+        super(null, "", Zone.GRAVEYARD);
+        this.name = new StringBuilder("Flashback ").append(cost.getText()).toString();
+        this.addEffect(new FlashbackEffect());
+        this.addCost(cost);
         this.timing = timingRule;
         this.usesStack = false;
         this.spellAbilityType = SpellAbilityType.BASE;
@@ -104,10 +105,12 @@ public class FlashbackAbility extends /*SpellAbility*/ ActivatedAbilityImpl<Flas
         return sbRule.toString();
     }
 
+    @Override
     public void setSpellAbilityType(SpellAbilityType spellAbilityType) {
         this.spellAbilityType = spellAbilityType;
     }
 
+    @Override
     public SpellAbilityType getSpellAbilityType() {
         return this.spellAbilityType;
     }

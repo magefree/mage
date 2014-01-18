@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class StormscapeFamiliar extends CardImpl<StormscapeFamiliar> {
 
-    private static final FilterCard filter = new FilterCard("White spells and black spells");
+    private static final FilterSpell filter = new FilterSpell("White spells and black spells");
 
     static {
         filter.add(Predicates.or(

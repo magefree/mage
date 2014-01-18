@@ -36,7 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class FrogtosserBanneret extends CardImpl<FrogtosserBanneret> {
 
-    private static final FilterCard filter = new FilterCard("Goblin spells and Rogue spells");
+    private static final FilterSpell filter = new FilterSpell("Goblin spells and Rogue spells");
 
     static {
         filter.add(Predicates.or(

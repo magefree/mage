@@ -36,7 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class StonybrookBanneret extends CardImpl<StonybrookBanneret> {
 
-    private static final FilterCard filter = new FilterCard("Merfolk spells and Wizard spells");
+    private static final FilterSpell filter = new FilterSpell("Merfolk spells and Wizard spells");
 
     static {
         filter.add(Predicates.or(

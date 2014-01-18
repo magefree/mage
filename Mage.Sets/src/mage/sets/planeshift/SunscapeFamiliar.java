@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class SunscapeFamiliar extends CardImpl<SunscapeFamiliar> {
 
-    private static final FilterCard filter = new FilterCard("Green spells and blue spells");
+    private static final FilterSpell filter = new FilterSpell("Green spells and blue spells");
 
     static {
         filter.add(Predicates.or(

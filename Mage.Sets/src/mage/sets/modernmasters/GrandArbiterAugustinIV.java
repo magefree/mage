@@ -43,7 +43,7 @@ import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
@@ -54,8 +54,8 @@ import mage.util.CardUtil;
  */
 public class GrandArbiterAugustinIV extends CardImpl<GrandArbiterAugustinIV> {
 
-    private static final FilterCard filterWhite = new FilterCard("White spells");
-    private static final FilterCard filterBlue = new FilterCard("Blue spells");
+    private static final FilterSpell filterWhite = new FilterSpell("White spells");
+    private static final FilterSpell filterBlue = new FilterSpell("Blue spells");
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));

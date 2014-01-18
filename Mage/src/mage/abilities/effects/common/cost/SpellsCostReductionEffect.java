@@ -35,8 +35,9 @@ import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.constants.CostModificationType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 /**
@@ -45,10 +46,10 @@ import mage.util.CardUtil;
  */
 public class SpellsCostReductionEffect extends CostModificationEffectImpl<SpellsCostReductionEffect> {
 
-    private FilterCard filter;
+    private FilterSpell filter;
     private int amount;
 
-    public SpellsCostReductionEffect(FilterCard filter, int amount) {
+    public SpellsCostReductionEffect(FilterSpell filter, int amount) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = amount;
@@ -72,10 +73,10 @@ public class SpellsCostReductionEffect extends CostModificationEffectImpl<Spells
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)
+        if ((abilityToModify instanceof SpellAbility)
                 && abilityToModify.getControllerId().equals(source.getControllerId())) {
-            Card sourceCard = game.getCard(abilityToModify.getSourceId());
-            return sourceCard != null && this.filter.match(sourceCard, game);
+            Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
+            return spell != null && this.filter.match(spell, game);
         }
         return false;
     }
