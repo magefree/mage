@@ -109,6 +109,10 @@ public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffe
         } else {
             sb.append("{X}");
         }
+        if (genericMana != null && !genericMana.getMessage().isEmpty()) {
+            sb.append(", where X is your ");
+            sb.append(genericMana.getMessage());
+        }
         return sb.toString();
     }
 

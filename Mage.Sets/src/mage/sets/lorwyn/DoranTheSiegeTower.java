@@ -37,18 +37,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.game.Game;
-import mage.game.events.DamageCreatureEvent;
-import mage.game.events.DamagePlaneswalkerEvent;
-import mage.game.events.DamagePlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *

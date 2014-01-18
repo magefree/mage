@@ -57,7 +57,7 @@ public class CacklingCounterpart extends CardImpl<CacklingCounterpart> {
 
         // Put a token onto the battlefield that's a copy of target creature you control.
         this.getSpellAbility().addEffect(new CacklingCounterpartEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
 
         // Flashback {5}{U}{U}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{U}{U}"), TimingRule.INSTANT));
