@@ -3,7 +3,7 @@
 #author: North
 
 use strict;
-
+use Scalar::Util qw(looks_like_number);
 
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
@@ -48,6 +48,8 @@ close(DATA);
 
 
 sub cardSort {
+  if (!looks_like_number(@{$a}[2])) { return -1; }
+  if (!looks_like_number(@{$b}[2])) { return 1; }
   if (@{$a}[2] < @{$b}[2]) { return -1; }
   elsif (@{$a}[2] == @{$b}[2]) { return 0;}
   elsif (@{$a}[2] > @{$b}[2]) { return 1; }
@@ -64,7 +66,7 @@ my $toPrint = '';
 foreach my $card (sort cardSort @setCards) {
 	my $className = toCamelCase(@{$card}[0]);
     my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
-	if(-e $currentFileName) {
+	if (-e $currentFileName) {
 		if ($toPrint) {
 			$toPrint .= "\n";
 		}   
