@@ -53,8 +53,9 @@ public class MorbidWatcher extends WatcherImpl<MorbidWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) //no need to check - condition has already occured
+        if (condition == true) {
             return;
+        }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (p != null && p.getCardType().contains(CardType.CREATURE)) {

@@ -28,55 +28,40 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ScryEffect;
+import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
  * @author LevelX2
  */
-public class SilentSentinel extends CardImpl<SilentSentinel> {
+public class TempleOfEnlightenment extends CardImpl<TempleOfEnlightenment> {
 
-    private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filter.add(new OwnerPredicate(TargetController.YOU));
-    }
-
-    public SilentSentinel(UUID ownerId) {
-        super(ownerId, 26, "Silent Sentinel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
+    public TempleOfEnlightenment(UUID ownerId) {
+        super(ownerId, 163, "Temple of Enlightenment", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Archon");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(6);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever Silent Sentinel attacks, you may return target enchantment card from your graveyard to the battlefield.
-        Ability ability = new AttacksTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(true), true);
-        ability.addTarget(new TargetCardInGraveyard(filter));
-        this.addAbility(ability);
+        // Temple of Enlightenment enters the battlefield tapped.
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        // When Temple of Enlightenment enters the battlefield, scry 1.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        // {T}: Add {W} or {U} to your mana pool.
+        this.addAbility(new WhiteManaAbility());
+        this.addAbility(new BlueManaAbility());        
     }
 
-    public SilentSentinel(final SilentSentinel card) {
+    public TempleOfEnlightenment(final TempleOfEnlightenment card) {
         super(card);
     }
 
     @Override
-    public SilentSentinel copy() {
-        return new SilentSentinel(this);
+    public TempleOfEnlightenment copy() {
+        return new TempleOfEnlightenment(this);
     }
 }

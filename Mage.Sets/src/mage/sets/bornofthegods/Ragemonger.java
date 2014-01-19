@@ -29,54 +29,48 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.target.common.TargetCardInGraveyard;
+import mage.constants.Zone;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class SilentSentinel extends CardImpl<SilentSentinel> {
+public class Ragemonger extends CardImpl<Ragemonger> {
 
-    private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
+    private static final FilterSpell filter = new FilterSpell("Minotaur spells");
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(new SubtypePredicate("Minotaur"));
     }
 
-    public SilentSentinel(UUID ownerId) {
-        super(ownerId, 26, "Silent Sentinel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
+    public Ragemonger(UUID ownerId) {
+        super(ownerId, 153, "Ragemonger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Archon");
+        this.subtype.add("Minotaur");
+        this.subtype.add("Shaman");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(6);
+        this.color.setRed(true);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever Silent Sentinel attacks, you may return target enchantment card from your graveyard to the battlefield.
-        Ability ability = new AttacksTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(true), true);
-        ability.addTarget(new TargetCardInGraveyard(filter));
-        this.addAbility(ability);
+        // Minotaur spells you cast cost {B}{R} less to cast. This effect reduces only the amount of colored mana you pay.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, new ManaCostsImpl("{B}{R}"))));
     }
 
-    public SilentSentinel(final SilentSentinel card) {
+    public Ragemonger(final Ragemonger card) {
         super(card);
     }
 
     @Override
-    public SilentSentinel copy() {
-        return new SilentSentinel(this);
+    public Ragemonger copy() {
+        return new Ragemonger(this);
     }
 }

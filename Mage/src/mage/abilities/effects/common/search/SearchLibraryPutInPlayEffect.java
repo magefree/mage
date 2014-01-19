@@ -108,7 +108,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Search your library for ");
+        sb.append("search your library for ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             if ( target.getMaxNumberOfTargets() == Integer.MAX_VALUE ) {
                 sb.append("any number of ").append(" ");

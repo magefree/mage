@@ -27,14 +27,14 @@
  */
 package mage.abilities.effects.common.cost;
 
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.Card;
 import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -48,6 +48,24 @@ public class SpellsCostReductionEffect extends CostModificationEffectImpl<Spells
 
     private FilterSpell filter;
     private int amount;
+    private ManaCosts<ManaCost> manaCostsToReduce = null;
+
+
+    public SpellsCostReductionEffect(FilterSpell filter, ManaCosts<ManaCost> manaCostsToReduce) {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        this.filter = filter;
+        this.amount = 0;
+        this.manaCostsToReduce = manaCostsToReduce;
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(filter.getMessage()).append(" you cast cost ");
+        for (String manaSymbol :manaCostsToReduce.getSymbols()) {
+            sb.append(manaSymbol);
+        }
+        sb.append(" less to cast. This effect reduces only the amount of colored mana you pay.");
+        this.staticText = sb.toString();
+    }
+
 
     public SpellsCostReductionEffect(FilterSpell filter, int amount) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
@@ -67,7 +85,11 @@ public class SpellsCostReductionEffect extends CostModificationEffectImpl<Spells
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, this.amount);
+        if (manaCostsToReduce != null){
+            CardUtil.adjustCost((SpellAbility) abilityToModify, manaCostsToReduce, false);
+        } else {
+            CardUtil.reduceCost(abilityToModify, this.amount);
+        }
         return true;
     }
 

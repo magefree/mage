@@ -49,7 +49,7 @@ public class ReturnToHandSourceEffect extends OneShotEffect<ReturnToHandSourceEf
     public ReturnToHandSourceEffect(boolean fromBattlefieldOnly) {
         super(Outcome.ReturnToHand);
         this.fromBattlefieldOnly = fromBattlefieldOnly;
-        staticText = "Return {this} to it's owner's hand";
+        staticText = "return {this} to it's owner's hand";
     }
 
     public ReturnToHandSourceEffect(final ReturnToHandSourceEffect effect) {

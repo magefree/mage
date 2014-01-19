@@ -30,15 +30,13 @@ package mage.sets.bornofthegods;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TributeNotPaidCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -49,36 +47,36 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class FlameWreathedPhoenix extends CardImpl<FlameWreathedPhoenix> {
+public class FanaticOfXenagos extends CardImpl<FanaticOfXenagos> {
 
-    public FlameWreathedPhoenix(UUID ownerId) {
-        super(ownerId, 97, "Flame-Wreathed Phoenix", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+    public FanaticOfXenagos(UUID ownerId) {
+        super(ownerId, 147, "Fanatic of Xenagos", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Phoenix");
+        this.subtype.add("Centaur");
+        this.subtype.add("Warrior");
 
         this.color.setRed(true);
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Tribute 2 (As this creature enters the battlefield, an opponent of your choice may put 2 +1/+1 counter on it.)
-        this.addAbility(new TributeAbility(2));
-        // When Flame-Wreathed Phoenix enters the battlefield, if its tribute wasn't paid, it gains haste and "When this creature dies, return it to its owner's hand."
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilitySourceEffect(new DiesTriggeredAbility(new ReturnToHandSourceEffect()));
-        ability.addEffect(effect);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(), 
-                "When {this} enters the battlefield, if its tribute wasn't paid, it gains haste and \"When this creature dies, return it to its owner's hand.\""));
-
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Tribute 1
+        this.addAbility(new TributeAbility(1));
+        // When Fanatic of Xenagos enters the battlefield, if its tribute wasn't paid, it gets +1/+1 and gains haste until end of turn.
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn));
+        ability.addEffect( new GainAbilitySourceEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn)));
+        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
+                "When {this} enters the battlefield, if its tribute wasn't paid, it gets +1/+1 and gains haste until end of turn."));
     }
 
-    public FlameWreathedPhoenix(final FlameWreathedPhoenix card) {
+    public FanaticOfXenagos(final FanaticOfXenagos card) {
         super(card);
     }
 
     @Override
-    public FlameWreathedPhoenix copy() {
-        return new FlameWreathedPhoenix(this);
+    public FanaticOfXenagos copy() {
+        return new FanaticOfXenagos(this);
     }
 }

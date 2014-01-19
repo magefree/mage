@@ -123,7 +123,18 @@ public class CardUtil {
         adjustCost(ability, reduceCount);
         adjustAlternativeCosts(ability, reduceCount);
     }
-    
+
+    /**
+     * Adjusts spell or ability cost to be paid.
+     *
+     * @param spellAbility
+     * @param reduceCount
+     */
+    public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
+        CardUtil.adjustCost((Ability) spellAbility, reduceCount);
+        adjustAlternativeCosts(spellAbility, reduceCount);
+    }
+
     private static void adjustAlternativeCosts(Ability ability, int reduceCount) {
         for (AlternativeCost alternativeCost : ability.getAlternativeCosts()) {
             if (alternativeCost instanceof AlternativeCostImpl) {
@@ -158,16 +169,7 @@ public class CardUtil {
         }
     }
 
-    /**
-     * Adjusts spell or ability cost to be paid.
-     *
-     * @param spellAbility
-     * @param reduceCount
-     */
-    public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
-        CardUtil.adjustCost((Ability) spellAbility, reduceCount);
-        adjustAlternativeCosts(spellAbility, reduceCount);
-    }
+
 
     /**
      * Adjusts ability cost to be paid.
@@ -202,13 +204,18 @@ public class CardUtil {
         ability.getManaCostsToPay().addAll(adjustedCost);
     }
 
+    public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
+        adjustCost(spellAbility, manaCostsToReduce, true);
+    }
+
     /**
      * Adjusts spell or ability cost to be paid by colored and generic mana.
      *
      * @param spellAbility
      * @param manaCostsToReduce costs to reduce
+     * @param convertToGeneric colored mana does reduce generic mana if no appropriate colored mana is in the costs included
      */
-    public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
+    public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
         ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
         ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
         // save X value (e.g. convoke ability)
@@ -279,7 +286,12 @@ public class CardUtil {
             }
         }
         // subtract colorless mana, use all mana that is left
-        int reduceAmount = reduceMana.count();
+        int reduceAmount;
+        if (convertToGeneric) {
+            reduceAmount = reduceMana.count();
+        } else {
+            reduceAmount = reduceMana.getColorless();
+        }
         for (ManaCost newManaCost : previousCost) {
             Mana mana = newManaCost.getMana();
             if (mana.getColorless() == 0) {
@@ -302,6 +314,7 @@ public class CardUtil {
         spellAbility.getManaCostsToPay().clear();
         spellAbility.getManaCostsToPay().addAll(adjustedCost);
     }
+    
     /**
      * Returns function that copies params\abilities from one card to another.
      *
