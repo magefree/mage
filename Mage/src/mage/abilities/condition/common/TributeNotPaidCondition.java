@@ -53,6 +53,10 @@ public class TributeNotPaidCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return !(Boolean) game.getState().getValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString());
+        Object tribute = game.getState().getValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString());
+        if (tribute != null) {
+            return ((String)tribute).equals("no");
+        }
+        return false;
     }
 }

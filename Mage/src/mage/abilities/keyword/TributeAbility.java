@@ -117,9 +117,9 @@ class TributeEffect extends OneShotEffect<TributeEffect> {
                     sb.append(" (add ").append(tributeValue).append(" +1/+1 counters to it)?");
                     if (opponent.chooseUse(outcome, sb.toString(), game)) {
                         sourcePermanent.addCounters(CounterType.P1P1.createInstance(tributeValue), game);
-                        game.getState().setValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString(), Boolean.TRUE);
+                        game.getState().setValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString(), "yes");
                     } else {
-                        game.getState().setValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString(), Boolean.FALSE);
+                        game.getState().setValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString(), "no");
                     }
                     return true;
                 }
