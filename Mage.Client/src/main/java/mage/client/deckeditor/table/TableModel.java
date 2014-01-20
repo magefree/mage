@@ -28,11 +28,30 @@
 
 package mage.client.deckeditor.table;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumnModel;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
 import mage.client.cards.ICardGrid;
-import mage.client.constants.Constants.SortBy;
+import mage.client.deckeditor.SortSetting;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.Event;
@@ -44,16 +63,6 @@ import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
-
-import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableColumnModel;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
 
 /**
  * Table Model for card list.
@@ -79,16 +88,23 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     private String column[] = { "", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set" };
 
+    private SortSetting sortSetting;
     private int recentSortedColumn;
     private boolean recentAscending;
 
+
+
+
     @Override
-    public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
-        this.loadCards(showCards, sortBy, piles, bigCard, gameId, true);
+    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId) {
+        this.loadCards(showCards, sortSetting, piles, bigCard, gameId, true);
     }
 
     @Override
-    public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
+    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
+        if (this.sortSetting == null) {
+            this.sortSetting = sortSetting;
+        }
         this.bigCard = bigCard;
         this.gameId = gameId;
         int landCount = 0;
@@ -164,8 +180,8 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
             }
         }
 
-        sort(1, true);
-        drawCards(sortBy, piles);
+        sort(this.sortSetting.getSortIndex(), this.sortSetting.isAscending());
+        drawCards(sortSetting, piles);
     }
 
     @Override
@@ -258,7 +274,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     }
 
     @Override
-    public void drawCards(SortBy sortBy, boolean piles) {
+    public void drawCards(SortSetting sortSetting, boolean piles) {
         fireTableDataChanged();
     }
 
@@ -342,6 +358,8 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                     if (recentSortedColumn == column) {
                         asc = !recentAscending;
                     }
+                    sortSetting.setSortIndex(column);
+                    sortSetting.setAscending(asc);
                     sort(column, asc);
                     fireTableDataChanged();
                 }
@@ -390,6 +408,14 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         fireTableDataChanged();
 
         return true;
+    }
+
+    public int getRecentSortedColumn() {
+        return recentSortedColumn;
+    }
+
+    public boolean isRecentAscending() {
+        return recentAscending;
     }
 
     public void setDisplayNoCopies(boolean value) {

@@ -49,6 +49,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.UUID;
+import mage.client.deckeditor.SortSettingDraft;
 import mage.view.SimpleCardView;
 
 /**
@@ -70,6 +71,7 @@ public class DraftPanel extends javax.swing.JPanel {
         initComponents();
 
         draftBooster.setOpaque(false);
+        draftPicks.setSortSetting(SortSettingDraft.getInstance());
         draftPicks.setOpaque(false);
         jPanel1.setOpaque(false);
 

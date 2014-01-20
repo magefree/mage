@@ -147,7 +147,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // used to save and restore the settings for the cardArea (draft, sideboarding, deck builder)
     public static final String KEY_DRAFT_VIEW = "draftView";
     public static final String KEY_DRAFT_PILES_TOGGLE = "draftPilesToggle";
+
     public static final String KEY_DRAFT_SORT_BY = "draftSortBy";
+    public static final String KEY_DRAFT_SORT_INDEX = "draftSortIndex";
+    public static final String KEY_DRAFT_SORT_ASCENDING = "draftSortAscending";
+
+    public static final String KEY_BASE_SORT_BY = "baseSortBy";
+    public static final String KEY_BASE_SORT_INDEX = "baseSortIndex";
+    public static final String KEY_BASE_SORT_ASCENDING = "baseSortAscending";
+
+    public static final String KEY_SIDEBOARD_SORT_BY = "sideboardSortBy";
+    public static final String KEY_SIDEBOARD_SORT_INDEX = "sideboardSortIndex";
+    public static final String KEY_SIDEBOARD_SORT_ASCENDING = "sideboardSortAscending";
+
+    public static final String KEY_DECK_SORT_BY = "deckSortBy";
+    public static final String KEY_DECK_SORT_INDEX = "deckSortIndex";
+    public static final String KEY_DECK_SORT_ASCENDING = "deckSortAscending";
 
     public static final String KEY_PROXY_ADDRESS = "proxyAddress";
     public static final String KEY_PROXY_PORT = "proxyPort";

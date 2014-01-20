@@ -51,6 +51,7 @@ import java.util.Map.Entry;
 
 import mage.cards.MageCard;
 import mage.client.constants.Constants.SortBy;
+import mage.client.deckeditor.SortSetting;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.Event;
@@ -81,12 +82,12 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         setOpaque(false);
     }
     @Override
-    public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
-        this.loadCards(showCards, sortBy, piles, bigCard, gameId, true);
+    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId) {
+        this.loadCards(showCards, sortSetting, piles, bigCard, gameId, true);
     }
 
     @Override
-    public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
+    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
         boolean drawImage = showCards.size() < MAX_IMAGES;
         this.bigCard = bigCard;
         this.gameId = gameId;
@@ -110,7 +111,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
             }
         }
         System.gc();
-        drawCards(sortBy, piles);
+        drawCards(sortSetting, piles);
         this.setVisible(true);
     }
 
@@ -127,7 +128,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     @Override
-    public void drawCards(SortBy sortBy, boolean piles) {
+    public void drawCards(SortSetting sortSetting, boolean piles) {
         int maxWidth = this.getParent().getWidth();
         int numColumns = maxWidth / Config.dimensions.frameWidth;
         int curColumn = 0;
@@ -135,7 +136,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         if (cards.size() > 0) {
             Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
             List<MageCard> sortedCards = new ArrayList<MageCard>(cards.values());
-            switch (sortBy) {
+            switch (sortSetting.getSortBy()) {
                 case NAME:
                     Collections.sort(sortedCards, new CardNameComparator());
                     break;
@@ -158,7 +159,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                     if (lastCard == null) {
                         lastCard = cardImg;
                     }
-                    switch (sortBy) {
+                    switch (sortSetting.getSortBy()) {
                         case NAME:
                             if (!cardImg.getOriginal().getName().equals(lastCard.getOriginal().getName())) {
                                 curColumn++;

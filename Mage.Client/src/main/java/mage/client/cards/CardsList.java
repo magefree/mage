@@ -49,7 +49,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import mage.constants.CardType;
 import mage.cards.MageCard;
+import mage.client.constants.Constants;
 import mage.client.constants.Constants.SortBy;
+import mage.client.deckeditor.SortSetting;
 import mage.client.deckeditor.table.TableModel;
 import mage.client.deckeditor.table.UpdateCountsCallback;
 import mage.client.dialog.PreferencesDialog;
@@ -70,6 +72,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     private CardsView cards;
     protected BigCard bigCard;
     protected UUID gameId;
+    private SortSetting sortSetting;
 
     private TableModel mainModel;
     private JTable mainTable;
@@ -171,22 +174,18 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
         boolean piles = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_PILES_TOGGLE, "True").equals("True");
         chkPiles.setSelected(piles);
-
-        SortBy sortBy = SortBy.getByString(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_SORT_BY, "Color"));
-        cbSortBy.setSelectedIndex(sortBy.ordinal());
-
-        currentView.loadCards(showCards, sortBy, piles, bigCard, gameId);
+        currentView.loadCards(showCards, sortSetting, piles, bigCard, gameId);
     }
 
     private void redrawCards() {
         if (cards == null) {
             cards = new CardsView();
         }
-           currentView.loadCards(cards, null, false, bigCard, gameId);
+           currentView.loadCards(cards, sortSetting, false, bigCard, gameId);
     }
 
     @Override
-    public void drawCards(SortBy sortBy, boolean piles) {
+    public void drawCards(SortSetting sortSetting, boolean piles) {
         int maxWidth = this.getParent().getWidth();
         int numColumns = maxWidth / Config.dimensions.frameWidth;
         int curColumn = 0;
@@ -199,7 +198,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         if (cards != null && cards.size() > 0) {
             Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
             List<CardView> sortedCards = new ArrayList<CardView>(cards.values());
-            switch (sortBy) {
+            switch (sortSetting.getSortBy()) {
                 case NAME:
                     Collections.sort(sortedCards, new CardViewNameComparator());
                     break;
@@ -222,7 +221,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                     if (lastCard == null) {
                         lastCard = card;
                     }
-                    switch (sortBy) {
+                    switch (sortSetting.getSortBy()) {
                         case NAME:
                             if (!card.getName().equals(lastCard.getName())) {
                                 curColumn++;
@@ -312,21 +311,21 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         mainModel.addCardEventListener(listener);
     }
 
-    public void drawCards(SortBy sortBy) {
-        drawCards(sortBy, false);
+    public void drawCards(SortSetting sortSetting) {
+        drawCards(sortSetting, false);
     }
 
     @Override
-    public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
-        this.loadCards(showCards, sortBy, piles, bigCard, gameId, true);
+    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId) {
+        this.loadCards(showCards, sortSetting, piles, bigCard, gameId, true);
     }
 
     @Override
-    public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
+    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
         cards = showCards;
         this.bigCard = bigCard;
         this.gameId = gameId;
-        drawCards((SortBy) cbSortBy.getSelectedItem());
+        drawCards(sortSetting);
     }
 
     @Override
@@ -456,12 +455,12 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
-        drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_SORT_BY, cbSortBy.getSelectedItem().toString());
+        sortSetting.setSortBy((SortBy) cbSortBy.getSelectedItem());
+        drawCards(sortSetting, chkPiles.isSelected());
     }//GEN-LAST:event_cbSortByActionPerformed
 
     private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
-        drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+        drawCards(sortSetting, chkPiles.isSelected());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_PILES_TOGGLE, (chkPiles.isSelected()?"True":"False"));
     }//GEN-LAST:event_chkPilesActionPerformed
 
@@ -545,4 +544,15 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     public int cardsSize() {
         return cards.size();
     }
+
+    public void setSortBy(SortBy sortBy) {
+        if (sortBy != null) {
+            cbSortBy.setSelectedIndex(sortBy.ordinal());
+        }
+    }
+
+    public void setSortSetting(SortSetting sortSetting) {
+        this.sortSetting = sortSetting;
+    }
+
 }

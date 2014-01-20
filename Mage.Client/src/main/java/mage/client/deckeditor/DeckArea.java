@@ -52,6 +52,8 @@ public class DeckArea extends javax.swing.JPanel {
     public DeckArea() {
         initComponents();
         jSplitPane1.setOpaque(false);
+        deckList.setSortSetting(SortSettingDeck.getInstance());
+        sideboardList.setSortSetting(SortSettingSideboard.getInstance());
         deckList.setOpaque(false);
         sideboardList.setOpaque(false);
         deckList.setDisplayNoCopies(true);

@@ -27,30 +27,6 @@
 */
 package mage.client.deckeditor;
 
-import mage.cards.Card;
-import mage.cards.decks.Deck;
-import mage.cards.decks.importer.DeckImporter;
-import mage.cards.decks.importer.DeckImporterUtil;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.client.MageFrame;
-import mage.client.cards.BigCard;
-import mage.client.cards.ICardGrid;
-import mage.client.constants.Constants.DeckEditorMode;
-import mage.client.dialog.AddLandDialog;
-import mage.client.plugins.impl.Plugins;
-import mage.client.util.Event;
-import mage.client.util.Listener;
-import mage.components.CardInfoPane;
-import mage.game.GameException;
-import mage.remote.Session;
-import mage.cards.Sets;
-import mage.view.CardView;
-import mage.view.SimpleCardView;
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -63,6 +39,37 @@ import java.util.Iterator;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.Timer;
+import javax.swing.filechooser.FileFilter;
+import mage.cards.Card;
+import mage.cards.Sets;
+import mage.cards.decks.Deck;
+import mage.cards.decks.importer.DeckImporter;
+import mage.cards.decks.importer.DeckImporterUtil;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.client.MageFrame;
+import mage.client.cards.BigCard;
+import mage.client.cards.ICardGrid;
+import mage.client.constants.Constants.DeckEditorMode;
+import mage.client.constants.Constants.SortBy;
+import mage.client.dialog.AddLandDialog;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.plugins.impl.Plugins;
+import mage.client.util.Event;
+import mage.client.util.Listener;
+import mage.components.CardInfoPane;
+import mage.game.GameException;
+import mage.remote.Session;
+import mage.view.CardView;
+import mage.view.SimpleCardView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -130,6 +137,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             case Sideboard:
                 this.btnSubmit.setVisible(true);
                 this.cardSelector.loadSideboard(new ArrayList<Card>(deck.getSideboard()), this.bigCard);
+                // TODO: take from preferences
+                    this.cardSelector.switchToGrid();
+
                 this.btnExit.setVisible(false);
                 this.btnImport.setVisible(false);
                 if (!MageFrame.getSession().isTestMode()) {
@@ -276,7 +286,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 }
             }
         );
+        // Set Sort from Preferences
+        SortBy sortBy = SortBy.getByString(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_SORT_BY, "Color"));
+        deckArea.getDeckList().setSortBy(sortBy);
         refreshDeck();
+
         this.setVisible(true);
         this.repaint();
     }
