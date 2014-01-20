@@ -109,7 +109,7 @@ class WorldlyCounselEffect extends OneShotEffect<WorldlyCounselEffect> {
             if (cards.size() == 1) {
                 Card card = cards.getRandom(game);
                 cards.remove(card);
-                card.moveToZone(Zone.HAND, source.getId(), game, false);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 return true;
             } else {
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put into your hand"));
@@ -117,7 +117,7 @@ class WorldlyCounselEffect extends OneShotEffect<WorldlyCounselEffect> {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(Zone.HAND, source.getId(), game, false);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     }
                 }
             }
@@ -137,7 +137,7 @@ class WorldlyCounselEffect extends OneShotEffect<WorldlyCounselEffect> {
         }
         if (cards.size() == 1) {
             Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
         }
         return true;
     }
