@@ -28,11 +28,6 @@
 package mage.client.deckeditor;
 
 import mage.client.constants.Constants.SortBy;
-import static mage.client.constants.Constants.SortBy.CASTING_COST;
-import static mage.client.constants.Constants.SortBy.COLOR;
-import static mage.client.constants.Constants.SortBy.COLOR_DETAILED;
-import static mage.client.constants.Constants.SortBy.NAME;
-import static mage.client.constants.Constants.SortBy.RARITY;
 import mage.client.dialog.PreferencesDialog;
 
 /**
@@ -44,20 +39,33 @@ public abstract class SortSetting {
     SortBy sortBy;
     int sortIndex;
     boolean ascending;
+    
+    String prefSortBy;
+    String prefSortIndex;
+    String prefSortAscending;
 
+    public SortSetting(String prefSortBy, String prefSortIndex, String prefSortAscending) {
+        this.prefSortBy = prefSortBy;
+        this.prefSortIndex = prefSortIndex;
+        this.prefSortAscending = prefSortAscending;
+        this.sortBy = SortBy.getByString(PreferencesDialog.getCachedValue(this.prefSortBy, "Color"));
+        this.sortIndex = Integer.parseInt(PreferencesDialog.getCachedValue(this.prefSortIndex, "1"));
+        this.ascending = PreferencesDialog.getCachedValue(this.prefSortAscending, "1").equals("1");        
+    }
+    
     public void setSortBy(SortBy sortBy) {
         this.sortBy = sortBy;
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_SORT_BY, sortBy.toString());
+        PreferencesDialog.saveValue(prefSortBy, sortBy.toString());
     }
 
     public void setSortIndex(int sortIndex) {
         this.sortIndex = sortIndex;
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_SORT_INDEX, Integer.toString(sortIndex));
+        PreferencesDialog.saveValue(this.prefSortIndex, Integer.toString(sortIndex));
     }
 
     public void setAscending(boolean ascending) {
         this.ascending = ascending;
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_SORT_ASCENDING, this.ascending ? "1":"0");
+        PreferencesDialog.saveValue(this.prefSortAscending, this.ascending ? "1":"0");
     }
 
     public SortBy getSortBy() {
@@ -70,36 +78,5 @@ public abstract class SortSetting {
 
     public boolean isAscending() {
         return ascending;
-    }
-
-    public int convertSortByToIndex(SortBy sortBy) {
-        switch(sortBy) {
-            case NAME:
-                return 1;
-            case CASTING_COST:
-                return 2;
-            case COLOR:
-            case COLOR_DETAILED:
-                return 3;
-            case RARITY:
-                return 5;
-            default:
-                return 0;
-        }
-    }
-
-    public SortBy convertIndexToSortBy(int index) {
-        switch (index) {
-            case 1:
-                return SortBy.NAME;
-            case 2:
-                return SortBy.CASTING_COST;
-            case 3:
-                return SortBy.COLOR;
-            case 5:
-                return SortBy.RARITY;
-            default:
-                return SortBy.UNSORTED;
-        }
     }
 }

@@ -27,7 +27,6 @@
  */
 package mage.client.deckeditor;
 
-import mage.client.constants.Constants.SortBy;
 import mage.client.dialog.PreferencesDialog;
 
 /**
@@ -37,15 +36,13 @@ import mage.client.dialog.PreferencesDialog;
 
 public class SortSettingBase extends SortSetting {
 
-    private static SortSettingBase fInstance = new SortSettingBase();
+    private final static SortSettingBase fInstance = new SortSettingBase();
 
     public static SortSettingBase getInstance() {
         return fInstance;
     }
 
     private SortSettingBase() {
-        this.sortBy = SortBy.getByString(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BASE_SORT_BY, "Color"));
-        this.sortIndex = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BASE_SORT_INDEX, "1"));
-        this.ascending = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BASE_SORT_INDEX, "1").equals("1");
+        super(PreferencesDialog.KEY_BASE_SORT_BY, PreferencesDialog.KEY_BASE_SORT_INDEX, PreferencesDialog.KEY_BASE_SORT_ASCENDING);
     }
 }
