@@ -29,11 +29,9 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.condition.common.SourceHasSubtypeCondition;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
@@ -45,8 +43,6 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -68,9 +64,9 @@ public class ErebossEmissary extends CardImpl<ErebossEmissary> {
         this.addAbility(new BestowAbility(this, "{5}{B}"));
         // Discard a creature card: Erebos's Emissary gets +2/+2 until end of turn. If Erebos's Emissary is an Aura, enchanted creature gets +2/+2 until end of turn instead.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
-                new BoostSourceEffect(2,2, Duration.EndOfTurn),
                 new BoostEnchantedEffect(2,2, Duration.EndOfTurn),
-                new NoAuraCondition(),
+                new BoostSourceEffect(2,2, Duration.EndOfTurn),
+                new SourceHasSubtypeCondition("Aura"),
                 "{this} gets +2/+2 until end of turn. If Erebos's Emissary is an Aura, enchanted creature gets +2/+2 until end of turn instead"),
                 new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard()))));
         // Enchanted creature gets +3/+3
@@ -84,17 +80,5 @@ public class ErebossEmissary extends CardImpl<ErebossEmissary> {
     @Override
     public ErebossEmissary copy() {
         return new ErebossEmissary(this);
-    }
-}
-
-class NoAuraCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            return !permanent.hasSubtype("Aura");
-        }
-        return false;
     }
 }
