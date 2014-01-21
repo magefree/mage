@@ -109,7 +109,6 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
                                 player.discard(card, source, game);
                             }
                         }
-                        game.informPlayers(new StringBuilder(player.getName()).append(" discards ").append(Integer.toString(cardsPlayer.size())).append(" card").append(cardsPlayer.size() > 1 ? "s" : "").toString());
                     }
                 }
             }
