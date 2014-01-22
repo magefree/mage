@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySourceEffect> {
+public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySourceEffect> implements SourceEffect {
 
     protected Ability ability;
     // shall a card gain the ability (otherwise permanent)
@@ -85,6 +85,12 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
     @Override
     public GainAbilitySourceEffect copy() {
         return new GainAbilitySourceEffect(this);
+    }
+    
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        getAffectedObjects().add(source.getSourceId());
     }
 
     @Override
