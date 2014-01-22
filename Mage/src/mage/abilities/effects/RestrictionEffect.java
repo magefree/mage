@@ -62,6 +62,7 @@ public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends 
     public RestrictionEffect(final RestrictionEffect effect) {
         super(effect);
         this.notMoreThanRestriction = effect.notMoreThanRestriction;
+        this.notMoreThanNumber = effect.notMoreThanNumber;
         if (this.notMoreThanNumberFilter != null) {
             this.notMoreThanNumberFilter = effect.notMoreThanNumberFilter.copy();
         }

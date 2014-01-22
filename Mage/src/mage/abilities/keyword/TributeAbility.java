@@ -39,6 +39,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -114,7 +115,8 @@ class TributeEffect extends OneShotEffect<TributeEffect> {
                 if (opponent != null) {
                     StringBuilder sb = new StringBuilder("Pay tribute to ");
                     sb.append(sourcePermanent.getName());
-                    sb.append(" (add ").append(tributeValue).append(" +1/+1 counters to it)?");
+                    sb.append(" (add ").append(CardUtil.numberToText(tributeValue)).append(" +1/+1 counter");
+                    sb.append(tributeValue > 1 ? "s":"").append("to it)?");
                     if (opponent.chooseUse(outcome, sb.toString(), game)) {
                         sourcePermanent.addCounters(CounterType.P1P1.createInstance(tributeValue), game);
                         game.getState().setValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString(), "yes");
