@@ -1,4 +1,4 @@
-/*
+    /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -58,20 +58,17 @@ public class GrimDiscovery extends CardImpl<GrimDiscovery> {
 
         this.color.setBlack(true);
 
-        // Choose one or both - Return target creature card from your graveyard to your hand; and/or return target land card from your graveyard to your hand.
+        // Choose one or both -
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(2);
+        // Return target creature card from your graveyard to your hand;
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCreatureCard));
-
+        // and/or return target land card from your graveyard to your hand.
         Mode mode1 = new Mode();
         mode1.getEffects().add(new ReturnToHandTargetEffect());
         mode1.getTargets().add(new TargetCardInYourGraveyard(filterLandCard));
         this.getSpellAbility().addMode(mode1);
-
-        Mode mode2 = new Mode();
-        mode2.getEffects().add(new GrimDiscoveryEffect());
-        mode2.getTargets().add(new TargetCardInYourGraveyard(filterCreatureCard));
-        mode2.getTargets().add(new TargetCardInYourGraveyard(filterLandCard));
-        this.getSpellAbility().addMode(mode2);
     }
 
     public GrimDiscovery(final GrimDiscovery card) {
@@ -81,36 +78,5 @@ public class GrimDiscovery extends CardImpl<GrimDiscovery> {
     @Override
     public GrimDiscovery copy() {
         return new GrimDiscovery(this);
-    }
-}
-
-class GrimDiscoveryEffect extends OneShotEffect<GrimDiscoveryEffect> {
-
-    public GrimDiscoveryEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "Return target creature card from your graveyard and target land card from your graveyard to your hand";
-    }
-
-    public GrimDiscoveryEffect(final GrimDiscoveryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GrimDiscoveryEffect copy() {
-        return new GrimDiscoveryEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        boolean result = false;
-        Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
-            result |= card.moveToZone(Zone.HAND, source.getId(), game, true);
-        }
-        card = game.getCard(source.getTargets().get(1).getFirstTarget());
-        if (card != null) {
-            result |= card.moveToZone(Zone.HAND, source.getId(), game, true);
-        }
-        return result;
     }
 }
