@@ -28,11 +28,7 @@
 package mage.sets.alliances;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.VariableManaCost;
@@ -40,9 +36,12 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
@@ -57,9 +56,11 @@ public class HelmOfObedience extends CardImpl<HelmOfObedience> {
         this.expansionSetCode = "ALL";
 
         // {X}, {tap}: Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
-        SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HelmOfObedienceEffect(), new TapSourceCost());
-        abilitiy.addCost(new VariableManaCost());
-        abilitiy.addTarget(new TargetOpponent());
+        VariableManaCost xCosts = new VariableManaCost();
+        xCosts.setMinX(1);
+        SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HelmOfObedienceEffect(), xCosts);
+        abilitiy.addCost(new TapSourceCost());
+        abilitiy.addTarget(new TargetOpponent(true));
         this.addAbility(abilitiy);
     }
 
@@ -81,6 +82,7 @@ class HelmOfObedienceEffect extends OneShotEffect<HelmOfObedienceEffect> {
     
     public HelmOfObedienceEffect() {
         super(Outcome.Detriment);
+        staticText = "Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0";
     }
 
     public HelmOfObedienceEffect(final HelmOfObedienceEffect effect) {
@@ -96,7 +98,7 @@ class HelmOfObedienceEffect extends OneShotEffect<HelmOfObedienceEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) { 
+        if (player != null) {
             int max = amount.calculate(game, source);
             if(max != 0){
                 int numberOfCard = 0;
@@ -104,8 +106,17 @@ class HelmOfObedienceEffect extends OneShotEffect<HelmOfObedienceEffect> {
                 while(player.getLibrary().size() > 0) {
                     Card card = player.getLibrary().removeFromTop(game);
                     if (card != null){
-                        if(card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false)){
+                        if(card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false)){
                             if(card.getCardType().contains(CardType.CREATURE)){
+                                // If a creature card is put into that graveyard this way, sacrifice Helm of Obedience
+                                // and put that card onto the battlefield under your control.
+                                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                                if (sourcePermanent != null) {
+                                    sourcePermanent.sacrifice(source.getSourceId(), game);
+                                }
+                                if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+                                }
                                 break;
                             }
                             else{
@@ -121,13 +132,9 @@ class HelmOfObedienceEffect extends OneShotEffect<HelmOfObedienceEffect> {
                     }
                 }
             }
+            return true;
         }
-        return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0";
+        return false;
     }
 
 }
