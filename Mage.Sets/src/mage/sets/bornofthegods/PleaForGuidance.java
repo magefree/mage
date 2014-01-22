@@ -25,48 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.bornofthegods;
 
-package mage.abilities.effects.common;
-
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
+public class PleaForGuidance extends CardImpl<PleaForGuidance> {
 
-
-public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect<ReturnToHandFromBattlefieldAllEffect> {
-
-    private final FilterPermanent filter;
+    private static final FilterCard filter = new FilterCard("enchantment cards");
+    static {
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+    }
     
-    public ReturnToHandFromBattlefieldAllEffect(FilterPermanent filter) {
-        super(Outcome.ReturnToHand);
-        this.filter = filter;
-        staticText = "Return all " + filter.getMessage() + " to their owners' hands";
+    public PleaForGuidance(UUID ownerId) {
+        super(ownerId, 24, "Plea for Guidance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}");
+        this.expansionSetCode = "BNG";
+
+        this.color.setWhite(true);
+
+        // Search your library for up to two enchantment cards, reveal them, and put them into your hand. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0,2, filter), true, true));
     }
 
-    public ReturnToHandFromBattlefieldAllEffect(final ReturnToHandFromBattlefieldAllEffect effect) {
-        super(effect);
-        this.filter = effect.filter;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-        }
-        return true;
+    public PleaForGuidance(final PleaForGuidance card) {
+        super(card);
     }
 
     @Override
-    public ReturnToHandFromBattlefieldAllEffect copy() {
-        return new ReturnToHandFromBattlefieldAllEffect(this);
+    public PleaForGuidance copy() {
+        return new PleaForGuidance(this);
     }
 }

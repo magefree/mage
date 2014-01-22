@@ -25,48 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.bornofthegods;
 
-package mage.abilities.effects.common;
-
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.keyword.BestowAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
+public class NyxbornTriton extends CardImpl<NyxbornTriton> {
 
+    public NyxbornTriton(UUID ownerId) {
+        super(ownerId, 46, "Mindreaver", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "BNG";
+        this.subtype.add("Merfolk");
 
-public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect<ReturnToHandFromBattlefieldAllEffect> {
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-    private final FilterPermanent filter;
-    
-    public ReturnToHandFromBattlefieldAllEffect(FilterPermanent filter) {
-        super(Outcome.ReturnToHand);
-        this.filter = filter;
-        staticText = "Return all " + filter.getMessage() + " to their owners' hands";
+        // Bestow {4}{U}
+        this.addAbility(new BestowAbility(this, "{4}{U}"));
+        // Enchanted creature gets +2/+3.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,3, Duration.WhileOnBattlefield)));        
     }
 
-    public ReturnToHandFromBattlefieldAllEffect(final ReturnToHandFromBattlefieldAllEffect effect) {
-        super(effect);
-        this.filter = effect.filter;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-        }
-        return true;
+    public NyxbornTriton(final NyxbornTriton card) {
+        super(card);
     }
 
     @Override
-    public ReturnToHandFromBattlefieldAllEffect copy() {
-        return new ReturnToHandFromBattlefieldAllEffect(this);
+    public NyxbornTriton copy() {
+        return new NyxbornTriton(this);
     }
 }

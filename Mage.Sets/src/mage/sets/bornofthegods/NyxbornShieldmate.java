@@ -29,14 +29,10 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;

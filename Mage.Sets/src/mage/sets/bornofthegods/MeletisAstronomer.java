@@ -25,48 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.bornofthegods;
 
-package mage.abilities.effects.common;
-
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.keyword.HeroicAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
+public class MeletisAstronomer extends CardImpl<MeletisAstronomer> {
 
-
-public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect<ReturnToHandFromBattlefieldAllEffect> {
-
-    private final FilterPermanent filter;
+    private static final FilterCard filter = new FilterCard("an enchantment card");
+    static {
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+    }
     
-    public ReturnToHandFromBattlefieldAllEffect(FilterPermanent filter) {
-        super(Outcome.ReturnToHand);
-        this.filter = filter;
-        staticText = "Return all " + filter.getMessage() + " to their owners' hands";
+    public MeletisAstronomer(UUID ownerId) {
+        super(ownerId, 43, "Meletis Astronomer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "BNG";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+
+        // <i>Heroic</i> - Whenever you cast a spell that targets Meletis Astronomer, look at the top three cards of your library. You may reveal an enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        this.addAbility(new HeroicAbility(new LookLibraryAndPickControllerEffect(3, 1, filter, true, false, Zone.HAND, true), false));
     }
 
-    public ReturnToHandFromBattlefieldAllEffect(final ReturnToHandFromBattlefieldAllEffect effect) {
-        super(effect);
-        this.filter = effect.filter;
+    public MeletisAstronomer(final MeletisAstronomer card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-        }
-        return true;
-    }
-
-    @Override
-    public ReturnToHandFromBattlefieldAllEffect copy() {
-        return new ReturnToHandFromBattlefieldAllEffect(this);
+    public MeletisAstronomer copy() {
+        return new MeletisAstronomer(this);
     }
 }

@@ -40,6 +40,7 @@ import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 /**
  *
@@ -123,7 +124,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
         StringBuilder sb = new StringBuilder();
         sb.append(rulePrefix);
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-            sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
+            sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
             sb.append(target.getTargetName()).append(revealCards ? ", reveal them, " : "").append(" and put them into your hand");
         }
         else {

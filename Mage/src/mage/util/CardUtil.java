@@ -400,7 +400,11 @@ public class CardUtil {
      * @return the specific UUID
      */
     public static UUID getCardExileZoneId(Game game, Ability source) {
-        String key = getCardZoneString("SourceExileZone", source.getSourceId(), game);
+        return getCardExileZoneId(game, source.getSourceId());
+    }
+    
+    public static UUID getCardExileZoneId(Game game, UUID sourceId) {
+        String key = getCardZoneString("SourceExileZone", sourceId, game);
         UUID exileId = (UUID) game.getState().getValue(key);
         if (exileId == null) {
             exileId = UUID.randomUUID();
