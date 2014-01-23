@@ -91,7 +91,7 @@ class SerraAvatarEffect extends OneShotEffect<SerraAvatarEffect> {
             if (c != null) {
                 player.getGraveyard().remove(c);
                 player.getLibrary().putOnTop(c, game);
-                player.getLibrary().shuffle();
+                player.shuffleLibrary(game);
                 return true;
             }
 

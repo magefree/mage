@@ -106,7 +106,7 @@ class RiftsweeperEffect extends OneShotEffect<RiftsweeperEffect> {
             card.getCounters().clear();
             // move to exile
             card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            game.getPlayer(card.getOwnerId()).getLibrary().shuffle();
+            game.getPlayer(card.getOwnerId()).shuffleLibrary(game);
             game.informPlayers(new StringBuilder("Riftsweeper: Choosen card was ").append(card.getName()).toString());
             return true;
         }

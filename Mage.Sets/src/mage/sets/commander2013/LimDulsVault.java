@@ -111,7 +111,7 @@ class LimDulsVaultEffect extends OneShotEffect<LimDulsVaultEffect> {
             if (doAgain) {
                 player.loseLife(1, game);
             } else {
-                player.getLibrary().shuffle();
+                player.shuffleLibrary(game);
             }
             
             TargetCard target = new TargetCard(Zone.PICK, new FilterCard(doAgain ? textBottom : textTop));

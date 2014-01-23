@@ -103,7 +103,7 @@ class LoamingShamanEffect extends OneShotEffect<LoamingShamanEffect> {
                     card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
             }
-            targetPlayer.getLibrary().shuffle();
+            targetPlayer.shuffleLibrary(game);
             return true;
         }
         return false;

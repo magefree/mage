@@ -105,7 +105,7 @@ class StreamOfConsciousnessEffect extends OneShotEffect<StreamOfConsciousnessEff
                 }
             }
             if (shuffle) {
-                player.getLibrary().shuffle();
+                player.shuffleLibrary(game);
             }
             return true;
         }

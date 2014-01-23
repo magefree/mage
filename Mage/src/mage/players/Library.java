@@ -60,6 +60,10 @@ public class Library implements Serializable {
         }
     }
 
+    /**
+     * Don't use this directly.
+     * Use <player.shuffleLibrary(game)> instead.
+     */
     public void shuffle() {
         UUID[] shuffled = library.toArray(new UUID[0]);
         for (int n = shuffled.length - 1; n > 0; n--) {

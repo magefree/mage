@@ -135,7 +135,7 @@ class QuestForAncientSecretsEffect extends OneShotEffect<QuestForAncientSecretsE
         if (player != null) {
             player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
             player.getGraveyard().clear();
-            player.getLibrary().shuffle();
+            player.shuffleLibrary(game);
             return true;
         }
         return false;

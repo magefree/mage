@@ -119,7 +119,7 @@ class WarpWorldEffect extends OneShotEffect<WarpWorldEffect> {
             }
 
             if (count > 0) {
-                player.getLibrary().shuffle();
+                player.shuffleLibrary(game);
             }
 
             permanentsCount.put(player.getId(), count);

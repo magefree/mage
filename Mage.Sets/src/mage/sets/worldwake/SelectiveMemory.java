@@ -96,7 +96,7 @@ class SelectiveMemoryEffect extends OneShotEffect<SelectiveMemoryEffect> {
                 }
             }
 
-            player.getLibrary().shuffle();
+            player.shuffleLibrary(game);
             return true;
         }
         return false;

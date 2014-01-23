@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -118,9 +119,11 @@ class TributeEffect extends OneShotEffect<TributeEffect> {
                     sb.append(" (add ").append(CardUtil.numberToText(tributeValue)).append(" +1/+1 counter");
                     sb.append(tributeValue > 1 ? "s":"").append("to it)?");
                     if (opponent.chooseUse(outcome, sb.toString(), game)) {
-                        sourcePermanent.addCounters(CounterType.P1P1.createInstance(tributeValue), game);
+                        game.informPlayers(new StringBuilder(opponent.getName()).append(" pays tribute to ").append(sourcePermanent.getName()).toString());
                         game.getState().setValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString(), "yes");
+                        return new AddCountersSourceEffect(CounterType.P1P1.createInstance(tributeValue), true).apply(game, source);
                     } else {
+                        game.informPlayers(new StringBuilder(opponent.getName()).append(" does not pay tribute to ").append(sourcePermanent.getName()).toString());
                         game.getState().setValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString(), "no");
                     }
                     return true;
