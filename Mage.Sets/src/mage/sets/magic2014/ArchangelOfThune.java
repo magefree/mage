@@ -101,7 +101,7 @@ class ArchangelOfThuneAbility extends TriggeredAbilityImpl<ArchangelOfThuneAbili
 
     @Override
     public String getRule() {
-        return " Whenever you gain life, put a +1/+1 counter on each creature you control.";
+        return "Whenever you gain life, put a +1/+1 counter on each creature you control.";
     }
 
 }
