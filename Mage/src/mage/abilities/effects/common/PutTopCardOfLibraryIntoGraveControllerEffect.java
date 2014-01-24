@@ -30,48 +30,43 @@ package mage.abilities.effects.common;
 
 import mage.constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
  */
 
-public class PutTopCardOfTargetPlayerLibraryIntoGraveEffect extends OneShotEffect<PutTopCardOfTargetPlayerLibraryIntoGraveEffect> {
+public class PutTopCardOfLibraryIntoGraveControllerEffect extends OneShotEffect<PutTopCardOfLibraryIntoGraveControllerEffect> {
 
-    private DynamicValue numberCards;
+    private final int numberCards;
 
-    public PutTopCardOfTargetPlayerLibraryIntoGraveEffect(int numberCards) {
-        this(new StaticValue(numberCards));
-    }
-    public PutTopCardOfTargetPlayerLibraryIntoGraveEffect(DynamicValue numberCards) {
+    public PutTopCardOfLibraryIntoGraveControllerEffect(int numberCards) {
         super(Outcome.Discard);
         this.numberCards = numberCards;
         this.staticText = setText();
     }
 
-    public PutTopCardOfTargetPlayerLibraryIntoGraveEffect(final PutTopCardOfTargetPlayerLibraryIntoGraveEffect effect) {
+    public PutTopCardOfLibraryIntoGraveControllerEffect(final PutTopCardOfLibraryIntoGraveControllerEffect effect) {
         super(effect);
         this.numberCards = effect.numberCards;
     }
 
     @Override
-    public PutTopCardOfTargetPlayerLibraryIntoGraveEffect copy() {
-        return new PutTopCardOfTargetPlayerLibraryIntoGraveEffect(this);
+    public PutTopCardOfLibraryIntoGraveControllerEffect copy() {
+        return new PutTopCardOfLibraryIntoGraveControllerEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int cardsCount = Math.min(numberCards.calculate(game, source), player.getLibrary().size());
+            int cardsCount = Math.min(numberCards, player.getLibrary().size());
             for (int i = 0; i < cardsCount; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
@@ -84,14 +79,14 @@ public class PutTopCardOfTargetPlayerLibraryIntoGraveEffect extends OneShotEffec
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Target player puts the top ");
-        if (numberCards.toString().equals("1")) {
+        StringBuilder sb = new StringBuilder("put the top ");
+        if (numberCards == 1) {
             sb.append(" card");
         } else {
-            sb.append(CardUtil.numberToText(numberCards.toString()));
+            sb.append(CardUtil.numberToText(numberCards));
             sb.append(" cards");
         }
-        sb.append(" of his or her library into his or her graveyard");
+        sb.append(" of your library into your graveyard");
         return sb.toString();
     }
 }

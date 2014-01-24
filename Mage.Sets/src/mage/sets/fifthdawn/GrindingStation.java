@@ -37,7 +37,7 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.PutTopCardOfTargetPlayerLibraryIntoGraveEffect;
+import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
@@ -62,7 +62,7 @@ public class GrindingStation extends CardImpl<GrindingStation> {
         this.expansionSetCode = "5DN";
 
         // {tap}, Sacrifice an artifact: Target player puts the top three cards of his or her library into his or her graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTopCardOfTargetPlayerLibraryIntoGraveEffect(3), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveTargetEffect(3), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);

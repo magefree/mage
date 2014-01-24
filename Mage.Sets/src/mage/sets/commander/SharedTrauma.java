@@ -33,7 +33,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfTargetPlayerLibraryIntoGraveEffect;
+import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -101,7 +101,7 @@ class SharedTraumaEffect extends OneShotEffect<SharedTraumaEffect> {
             }
             if (xSum > 0) {
                 for(UUID playerId : controller.getInRange()) {
-                    Effect effect = new PutTopCardOfTargetPlayerLibraryIntoGraveEffect(xSum);
+                    Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(xSum);
                     effect.setTargetPointer(new FixedTarget(playerId));
                     effect.apply(game, source);
                 }

@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DiscardEachPlayerEffect;
-import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
@@ -61,7 +61,7 @@ public class SirenOfTheSilentSong extends CardImpl<SirenOfTheSilentSong> {
         this.addAbility(FlyingAbility.getInstance());
         // <i>Inspired</i> - Whenever Siren of the Silent Song becomes untapped, each opponent discards a card, then puts the top card of his or her library into his or her graveyard.
         Ability ability = new InspiredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT));
-        Effect effect = new PutTopCardOfYourLibraryIntoGraveEachPlayerEffect(1, TargetController.OPPONENT);
+        Effect effect = new PutTopCardOfLibraryIntoGraveEachPlayerEffect(1, TargetController.OPPONENT);
         effect.setText(", then puts the top card of his or her library into his or her graveyard");
         ability.addEffect(effect);
         this.addAbility(ability);

@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -52,7 +52,7 @@ public class ScreechingSkaab extends CardImpl<ScreechingSkaab> {
         this.toughness = new MageInt(1);
 
         // When Screeching Skaab enters the battlefield, put the top two cards of your library into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfYourLibraryIntoGraveControllerEffect(2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(2)));
     }
 
     public ScreechingSkaab(final ScreechingSkaab card) {
