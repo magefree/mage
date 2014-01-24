@@ -41,6 +41,7 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 
 import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  *
@@ -113,8 +114,11 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
         }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
-        if(target.getNumberOfTargets() > 1){
-            sb.append(target.getNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" get ");
+        if(target.getMaxNumberOfTargets() > 1){
+            if (target.getNumberOfTargets() < target.getNumberOfTargets()) {
+                sb.append("up to ");
+            }
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");
         } else {
             sb.append("Target ").append(target.getTargetName()).append(" gets ");
         }

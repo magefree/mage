@@ -25,23 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.sets.bornofthegods;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -50,47 +49,47 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class GrislySalvage extends CardImpl<GrislySalvage> {
+public class SatyrWayfinder extends CardImpl<SatyrWayfinder> {
 
-    public GrislySalvage(UUID ownerId) {
-        super(ownerId, 165, "Grisly Salvage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{G}");
-        this.expansionSetCode = "RTR";
+    public SatyrWayfinder(UUID ownerId) {
+        super(ownerId, 136, "Satyr Wayfinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "BNG";
+        this.subtype.add("Satyr");
 
-        this.color.setBlack(true);
         this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard.
-        this.getSpellAbility().addEffect(new GrislySalvageEffect());
+        // When Satyr Wayfinder enters the battlefield, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SatyrWayfinderEffect()));
     }
 
-    public GrislySalvage(final GrislySalvage card) {
+    public SatyrWayfinder(final SatyrWayfinder card) {
         super(card);
     }
 
     @Override
-    public GrislySalvage copy() {
-        return new GrislySalvage(this);
+    public SatyrWayfinder copy() {
+        return new SatyrWayfinder(this);
     }
 }
-class GrislySalvageEffect extends OneShotEffect<GrislySalvageEffect> {
 
-    private static final FilterCard filterPutInHand = new FilterCard("creature or land card to put in hand");
-    static {
-        filterPutInHand.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
-    }
+class SatyrWayfinderEffect extends OneShotEffect<SatyrWayfinderEffect> {
 
-    public GrislySalvageEffect() {
+    private static final FilterLandCard filterPutInHand = new FilterLandCard("land card to put in hand");
+
+    public SatyrWayfinderEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard";
+        this.staticText = "reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard";
     }
 
-    public GrislySalvageEffect(final GrislySalvageEffect effect) {
+    public SatyrWayfinderEffect(final SatyrWayfinderEffect effect) {
         super(effect);
     }
 
     @Override
-    public GrislySalvageEffect copy() {
-        return new GrislySalvageEffect(this);
+    public SatyrWayfinderEffect copy() {
+        return new SatyrWayfinderEffect(this);
     }
 
     @Override
@@ -100,7 +99,7 @@ class GrislySalvageEffect extends OneShotEffect<GrislySalvageEffect> {
             Cards cards = new CardsImpl(Zone.PICK);
 
             boolean properCardFound = false;
-            int count = Math.min(player.getLibrary().size(), 5);
+            int count = Math.min(player.getLibrary().size(), 4);
             for (int i = 0; i < count; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
@@ -112,7 +111,7 @@ class GrislySalvageEffect extends OneShotEffect<GrislySalvageEffect> {
             }
 
             if (!cards.isEmpty()) {
-                player.revealCards("Grisly Salvage", cards, game);
+                player.revealCards("Satyr Wayfinder", cards, game);
                 TargetCard target = new TargetCard(Zone.PICK, filterPutInHand);
                 if (properCardFound && player.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
