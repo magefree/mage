@@ -29,59 +29,42 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.InspiredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.keyword.BestowAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class AerieWorshippers extends CardImpl<AerieWorshippers> {
+public class NyxbornWolf extends CardImpl<NyxbornWolf> {
 
-    public AerieWorshippers(UUID ownerId) {
-        super(ownerId, 30, "Aerie Worshippers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+    public NyxbornWolf(UUID ownerId) {
+        super(ownerId, 131, "Nyxborn Wolf", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add("Wolf");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-        // <i>Inspired</i> - Whenever Aerie Worshipers becomes untapped, you may pay {2}{U}. If you do, put a 2/2 blue Bird enchantment creature token with flying onto the battlefield.
-        this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new AerieWorshippersBirdToken()), new ManaCostsImpl("{2}{U}"))));
+        // Bestow {4}{G}
+        this.addAbility(new BestowAbility(this, "{4}{G}"));
+        // Enchanted creature gets +3/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,1, Duration.WhileOnBattlefield)));
     }
 
-    public AerieWorshippers(final AerieWorshippers card) {
+    public NyxbornWolf(final NyxbornWolf card) {
         super(card);
     }
 
     @Override
-    public AerieWorshippers copy() {
-        return new AerieWorshippers(this);
-    }
-}
-
-class AerieWorshippersBirdToken extends Token {
-
-    public AerieWorshippersBirdToken() {
-        super("Bird", "2/2 blue Bird enchantment creature token with flying");
-        cardType.add(CardType.ENCHANTMENT);
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLUE;
-        subtype.add("Bird");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(FlyingAbility.getInstance());
-        this.setOriginalExpansionSetCode("BNG");
-        this.setTokenType(2);
+    public NyxbornWolf copy() {
+        return new NyxbornWolf(this);
     }
 }

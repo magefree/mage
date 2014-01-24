@@ -29,59 +29,56 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.InspiredAbility;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.TributeNotPaidCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class AerieWorshippers extends CardImpl<AerieWorshippers> {
+public class NessianDemolok extends CardImpl<NessianDemolok> {
 
-    public AerieWorshippers(UUID ownerId) {
-        super(ownerId, 30, "Aerie Worshippers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "BNG";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+    private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
-
-        // <i>Inspired</i> - Whenever Aerie Worshipers becomes untapped, you may pay {2}{U}. If you do, put a 2/2 blue Bird enchantment creature token with flying onto the battlefield.
-        this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new AerieWorshippersBirdToken()), new ManaCostsImpl("{2}{U}"))));
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public AerieWorshippers(final AerieWorshippers card) {
+    public NessianDemolok(UUID ownerId) {
+        super(ownerId, 128, "Nessian Demolok", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "BNG";
+        this.subtype.add("Beast");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Tribute 3</i>
+        this.addAbility(new TributeAbility(3));
+        // When Nessian Demolok enters the battlefield, if tribute wasn't paid, destroy target noncreature permanent.
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
+                "When {this} enters the battlefield, if its tribute wasn't paid, destroy target noncreature permanent."));
+    }
+
+    public NessianDemolok(final NessianDemolok card) {
         super(card);
     }
 
     @Override
-    public AerieWorshippers copy() {
-        return new AerieWorshippers(this);
-    }
-}
-
-class AerieWorshippersBirdToken extends Token {
-
-    public AerieWorshippersBirdToken() {
-        super("Bird", "2/2 blue Bird enchantment creature token with flying");
-        cardType.add(CardType.ENCHANTMENT);
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLUE;
-        subtype.add("Bird");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(FlyingAbility.getInstance());
-        this.setOriginalExpansionSetCode("BNG");
-        this.setTokenType(2);
+    public NessianDemolok copy() {
+        return new NessianDemolok(this);
     }
 }

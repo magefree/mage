@@ -28,60 +28,47 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.dynamicvalue.common.DevotionCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class AerieWorshippers extends CardImpl<AerieWorshippers> {
+public class Skyreaping extends CardImpl<Skyreaping> {
 
-    public AerieWorshippers(UUID ownerId) {
-        super(ownerId, 30, "Aerie Worshippers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "BNG";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
-
-        // <i>Inspired</i> - Whenever Aerie Worshipers becomes untapped, you may pay {2}{U}. If you do, put a 2/2 blue Bird enchantment creature token with flying onto the battlefield.
-        this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new AerieWorshippersBirdToken()), new ManaCostsImpl("{2}{U}"))));
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public AerieWorshippers(final AerieWorshippers card) {
+    public Skyreaping(UUID ownerId) {
+        super(ownerId, 140, "Skyreaping", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+        this.expansionSetCode = "BNG";
+
+        this.color.setGreen(true);
+
+        // Skyreaping deals damage to each creature with flying equal to your devotion to green.
+        Effect effect = new DamageAllEffect(new DevotionCount(ColoredManaSymbol.G), filter);
+        effect.setText("{this} deals damage to each creature with flying equal to your devotion to green <i>(Each {G} in the mana costs of permanents you control counts toward your devotion to green.)</i>");
+        this.getSpellAbility().addEffect(effect);
+    }
+
+    public Skyreaping(final Skyreaping card) {
         super(card);
     }
 
     @Override
-    public AerieWorshippers copy() {
-        return new AerieWorshippers(this);
-    }
-}
-
-class AerieWorshippersBirdToken extends Token {
-
-    public AerieWorshippersBirdToken() {
-        super("Bird", "2/2 blue Bird enchantment creature token with flying");
-        cardType.add(CardType.ENCHANTMENT);
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLUE;
-        subtype.add("Bird");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(FlyingAbility.getInstance());
-        this.setOriginalExpansionSetCode("BNG");
-        this.setTokenType(2);
+    public Skyreaping copy() {
+        return new Skyreaping(this);
     }
 }
