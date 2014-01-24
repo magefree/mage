@@ -37,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveEffect;
+import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
@@ -60,7 +60,7 @@ public class DeadbridgeChant extends CardImpl<DeadbridgeChant> {
         this.color.setGreen(true);
 
         // When Deadbridge Chant enters the battlefield, put the top ten cards of your library into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfYourLibraryIntoGraveEffect(10)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfYourLibraryIntoGraveControllerEffect(10)));
 
         // At the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DeadbridgeChantEffect(), TargetController.YOU, false));

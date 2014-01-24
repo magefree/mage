@@ -140,7 +140,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
                 break;
         }
         sb.append(" discards ");
-        sb.append(CardUtil.numberToText(amount.toString())).append(" card");
+        sb.append(CardUtil.numberToText(amount.toString(), "a")).append(" card");
         try {
             if (Integer.parseInt(amount.toString()) > 1) {
                 sb.append("s");

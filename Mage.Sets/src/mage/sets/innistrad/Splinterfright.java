@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveEffect;
+import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveControllerEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -63,7 +63,7 @@ public class Splinterfright extends CardImpl<Splinterfright> {
         CardsInControllerGraveyardCount count = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(count, Duration.EndOfGame)));
         // At the beginning of your upkeep, put the top two cards of your library into your graveyard.
-        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new PutTopCardOfYourLibraryIntoGraveEffect(2), false));
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new PutTopCardOfYourLibraryIntoGraveControllerEffect(2), false));
     }
 
     public Splinterfright(final Splinterfright card) {

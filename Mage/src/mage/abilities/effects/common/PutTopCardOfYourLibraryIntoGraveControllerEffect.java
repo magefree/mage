@@ -42,24 +42,24 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 
-public class PutTopCardOfYourLibraryIntoGraveEffect extends OneShotEffect<PutTopCardOfYourLibraryIntoGraveEffect> {
+public class PutTopCardOfYourLibraryIntoGraveControllerEffect extends OneShotEffect<PutTopCardOfYourLibraryIntoGraveControllerEffect> {
 
-    private int numberCards;
+    private final int numberCards;
 
-    public PutTopCardOfYourLibraryIntoGraveEffect(int numberCards) {
+    public PutTopCardOfYourLibraryIntoGraveControllerEffect(int numberCards) {
         super(Outcome.Discard);
         this.numberCards = numberCards;
         this.staticText = setText();
     }
 
-    public PutTopCardOfYourLibraryIntoGraveEffect(final PutTopCardOfYourLibraryIntoGraveEffect effect) {
+    public PutTopCardOfYourLibraryIntoGraveControllerEffect(final PutTopCardOfYourLibraryIntoGraveControllerEffect effect) {
         super(effect);
         this.numberCards = effect.numberCards;
     }
 
     @Override
-    public PutTopCardOfYourLibraryIntoGraveEffect copy() {
-        return new PutTopCardOfYourLibraryIntoGraveEffect(this);
+    public PutTopCardOfYourLibraryIntoGraveControllerEffect copy() {
+        return new PutTopCardOfYourLibraryIntoGraveControllerEffect(this);
     }
 
     @Override

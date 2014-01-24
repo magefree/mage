@@ -39,7 +39,7 @@ import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.ExileCardFromOwnGraveyardControllerEffect;
-import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveEffect;
+import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveControllerEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -71,7 +71,7 @@ public class Bloodcurdler extends CardImpl<Bloodcurdler> {
         this.addAbility(FlyingAbility.getInstance());
         
         // At the beginning of your upkeep, put the top card of your library into your graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PutTopCardOfYourLibraryIntoGraveEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PutTopCardOfYourLibraryIntoGraveControllerEffect(1), TargetController.YOU, false));
 
         Condition thresholdCondition = new CardsInControllerGraveCondition(7);
         // Threshold - As long as seven or more cards are in your graveyard, Bloodcurdler gets +1/+1 and has "At the beginning of your end step, exile two cards from your graveyard."
