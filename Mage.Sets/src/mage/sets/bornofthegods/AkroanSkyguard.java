@@ -28,46 +28,43 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.ScryEffect;
+import mage.MageInt;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.counters.CounterType;
 
 /**
  *
  * @author LevelX2
  */
-public class FatedRetribution extends CardImpl<FatedRetribution> {
+public class AkroanSkyguard extends CardImpl<AkroanSkyguard> {
 
-    private static final FilterPermanent filter = new FilterPermanent("creatures and planeswalkers");
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)));
-    }
-    public FatedRetribution(UUID ownerId) {
-        super(ownerId, 11, "Fated Retribution", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{W}{W}{W}");
+    public AkroanSkyguard(UUID ownerId) {
+        super(ownerId, 3, "Akroan Skyguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "BNG";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
 
         this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Destroy all creatures and planeswalkers. If it's your turn, scry 2.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.getInstance(), "If it's your turn, scry 2"));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // <i>Heroic</i> - Whenever you cast a spell that targets Akroan Skyguard, put a +1/+1 counter on Akroan Skyguard.
+        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true)));
     }
 
-    public FatedRetribution(final FatedRetribution card) {
+    public AkroanSkyguard(final AkroanSkyguard card) {
         super(card);
     }
 
     @Override
-    public FatedRetribution copy() {
-        return new FatedRetribution(this);
+    public AkroanSkyguard copy() {
+        return new AkroanSkyguard(this);
     }
 }

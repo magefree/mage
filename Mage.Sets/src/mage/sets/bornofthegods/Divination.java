@@ -28,46 +28,25 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.ScryEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class FatedRetribution extends CardImpl<FatedRetribution> {
+public class Divination extends mage.sets.magic2012.Divination {
 
-    private static final FilterPermanent filter = new FilterPermanent("creatures and planeswalkers");
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)));
-    }
-    public FatedRetribution(UUID ownerId) {
-        super(ownerId, 11, "Fated Retribution", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{W}{W}{W}");
+    public Divination(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 36;
         this.expansionSetCode = "BNG";
-
-        this.color.setWhite(true);
-
-        // Destroy all creatures and planeswalkers. If it's your turn, scry 2.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.getInstance(), "If it's your turn, scry 2"));
     }
 
-    public FatedRetribution(final FatedRetribution card) {
+    public Divination(final Divination card) {
         super(card);
     }
 
     @Override
-    public FatedRetribution copy() {
-        return new FatedRetribution(this);
+    public Divination copy() {
+        return new Divination(this);
     }
 }

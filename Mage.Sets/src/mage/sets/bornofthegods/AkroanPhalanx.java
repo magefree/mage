@@ -28,46 +28,45 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.ScryEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class FatedRetribution extends CardImpl<FatedRetribution> {
+public class AkroanPhalanx extends CardImpl<AkroanPhalanx> {
 
-    private static final FilterPermanent filter = new FilterPermanent("creatures and planeswalkers");
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)));
-    }
-    public FatedRetribution(UUID ownerId) {
-        super(ownerId, 11, "Fated Retribution", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{W}{W}{W}");
+    public AkroanPhalanx(UUID ownerId) {
+        super(ownerId, 2, "Akroan Phalanx", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "BNG";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
 
         this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Destroy all creatures and planeswalkers. If it's your turn, scry 2.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.getInstance(), "If it's your turn, scry 2"));
+        // Vigilance
+        this.addAbility(VigilanceAbility.getInstance());
+        // {2}{R}: Creatures you control get +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")));
     }
 
-    public FatedRetribution(final FatedRetribution card) {
+    public AkroanPhalanx(final AkroanPhalanx card) {
         super(card);
     }
 
     @Override
-    public FatedRetribution copy() {
-        return new FatedRetribution(this);
+    public AkroanPhalanx copy() {
+        return new AkroanPhalanx(this);
     }
 }

@@ -28,46 +28,34 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.ScryEffect;
+import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class FatedRetribution extends CardImpl<FatedRetribution> {
+public class SwordwiseCentaur extends CardImpl<SwordwiseCentaur> {
 
-    private static final FilterPermanent filter = new FilterPermanent("creatures and planeswalkers");
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)));
-    }
-    public FatedRetribution(UUID ownerId) {
-        super(ownerId, 11, "Fated Retribution", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{W}{W}{W}");
+    public SwordwiseCentaur(UUID ownerId) {
+        super(ownerId, 142, "Swordwise Centaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
         this.expansionSetCode = "BNG";
+        this.subtype.add("Centaur");
+        this.subtype.add("Warrior");
 
-        this.color.setWhite(true);
-
-        // Destroy all creatures and planeswalkers. If it's your turn, scry 2.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.getInstance(), "If it's your turn, scry 2"));
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
     }
 
-    public FatedRetribution(final FatedRetribution card) {
+    public SwordwiseCentaur(final SwordwiseCentaur card) {
         super(card);
     }
 
     @Override
-    public FatedRetribution copy() {
-        return new FatedRetribution(this);
+    public SwordwiseCentaur copy() {
+        return new SwordwiseCentaur(this);
     }
 }
