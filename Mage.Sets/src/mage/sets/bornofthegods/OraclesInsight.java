@@ -28,55 +28,59 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.FightTargetsEffect;
-import mage.abilities.keyword.TributeAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.ScryEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.constants.Zone;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class NessianWildsRavager extends CardImpl<NessianWildsRavager> {
+public class OraclesInsight extends CardImpl<OraclesInsight> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public NessianWildsRavager(UUID ownerId) {
-        super(ownerId, 129, "Nessian Wilds Ravager", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+    public OraclesInsight(UUID ownerId) {
+        super(ownerId, 47, "Oracle's Insight", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Hydra");
+        this.subtype.add("Aura");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        this.color.setBlue(true);
 
-        // Tribute 6
-        this.addAbility(new TributeAbility(6));
-        // When Nessian Wilds Ravager enters the battlefield, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new FightTargetsEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, you may have {this} fight another target creature."));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // Enchanted creature has "{T}: Scry 1, then draw a card."
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new TapSourceCost());
+        Effect effect = new DrawCardControllerEffect(1);
+        effect.setText("then draw a card");
+        ability.addEffect(effect);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public NessianWildsRavager(final NessianWildsRavager card) {
+    public OraclesInsight(final OraclesInsight card) {
         super(card);
     }
 
     @Override
-    public NessianWildsRavager copy() {
-        return new NessianWildsRavager(this);
+    public OraclesInsight copy() {
+        return new OraclesInsight(this);
     }
 }

@@ -29,54 +29,40 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.FightTargetsEffect;
-import mage.abilities.keyword.TributeAbility;
+import mage.abilities.effects.common.ScryEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class NessianWildsRavager extends CardImpl<NessianWildsRavager> {
+public class ChorusOfTheTides extends CardImpl<ChorusOfTheTides> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public NessianWildsRavager(UUID ownerId) {
-        super(ownerId, 129, "Nessian Wilds Ravager", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+    public ChorusOfTheTides(UUID ownerId) {
+        super(ownerId, 33, "Chorus of the Tides", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Hydra");
+        this.subtype.add("Siren");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // Tribute 6
-        this.addAbility(new TributeAbility(6));
-        // When Nessian Wilds Ravager enters the battlefield, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new FightTargetsEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, you may have {this} fight another target creature."));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // <i>Heroic</i> - Whenever you cast a spell that targets Chorus of the Tides, scry 1.
+        this.addAbility(new HeroicAbility(new ScryEffect(1)));
     }
 
-    public NessianWildsRavager(final NessianWildsRavager card) {
+    public ChorusOfTheTides(final ChorusOfTheTides card) {
         super(card);
     }
 
     @Override
-    public NessianWildsRavager copy() {
-        return new NessianWildsRavager(this);
+    public ChorusOfTheTides copy() {
+        return new ChorusOfTheTides(this);
     }
 }

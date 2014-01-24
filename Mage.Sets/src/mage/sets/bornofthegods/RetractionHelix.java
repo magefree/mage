@@ -28,55 +28,47 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.FightTargetsEffect;
-import mage.abilities.keyword.TributeAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.constants.Zone;
+import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetNonlandPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class NessianWildsRavager extends CardImpl<NessianWildsRavager> {
+public class RetractionHelix extends CardImpl<RetractionHelix> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public NessianWildsRavager(UUID ownerId) {
-        super(ownerId, 129, "Nessian Wilds Ravager", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+    public RetractionHelix(UUID ownerId) {
+        super(ownerId, 49, "Retraction Helix", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Hydra");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        this.color.setBlue(true);
 
-        // Tribute 6
-        this.addAbility(new TributeAbility(6));
-        // When Nessian Wilds Ravager enters the battlefield, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new FightTargetsEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, you may have {this} fight another target creature."));
+        // Until end of turn, target creature gains "{T}: Return target nonland permanent to its owner's hand."
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
+        Target target = new TargetNonlandPermanent();
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ability, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
-    public NessianWildsRavager(final NessianWildsRavager card) {
+    public RetractionHelix(final RetractionHelix card) {
         super(card);
     }
 
     @Override
-    public NessianWildsRavager copy() {
-        return new NessianWildsRavager(this);
+    public RetractionHelix copy() {
+        return new RetractionHelix(this);
     }
 }

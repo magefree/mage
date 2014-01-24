@@ -55,7 +55,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTar
     /**
      *
      * @param duration
-     * @param fixedControl Controlling player is fixed even if the controller of the ability chnages
+     * @param fixedControl Controlling player is fixed even if the controller of the ability changes later
      */
     public GainControlTargetEffect(Duration duration, boolean fixedControl) {
         this(duration, fixedControl, null);

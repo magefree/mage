@@ -12,7 +12,7 @@ import mage.game.Game;
 public class PermanentsOnBattlefieldCount implements DynamicValue {
 
     private FilterPermanent filter;
-    private Integer amount;
+    private Integer multiplier;
 
     public PermanentsOnBattlefieldCount() {
         this(new FilterPermanent(), 1);
@@ -22,21 +22,21 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
         this(filter, 1);
     }
 
-    public PermanentsOnBattlefieldCount(FilterPermanent filter, Integer amount) {
+    public PermanentsOnBattlefieldCount(FilterPermanent filter, Integer multiplier) {
         this.filter = filter;
-        this.amount = amount;
+        this.multiplier = multiplier;
     }
 
     public PermanentsOnBattlefieldCount(final PermanentsOnBattlefieldCount dynamicValue) {
         this.filter = dynamicValue.filter;
-        this.amount = dynamicValue.amount;
+        this.multiplier = dynamicValue.multiplier;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
         int value = game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-        if (amount != null) {
-            value *= amount;
+        if (multiplier != null) {
+            value *= multiplier;
         }
         return value;
     }
@@ -48,8 +48,8 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
 
     @Override
     public String toString() {
-        if (amount != null) {
-            return amount.toString();
+        if (multiplier != null) {
+            return multiplier.toString();
         }
         return "X";
     }

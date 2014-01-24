@@ -34,49 +34,47 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TributeNotPaidCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class NessianWildsRavager extends CardImpl<NessianWildsRavager> {
+public class SirenOfTheFangedCoast extends CardImpl<SirenOfTheFangedCoast> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public NessianWildsRavager(UUID ownerId) {
-        super(ownerId, 129, "Nessian Wilds Ravager", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+    public SirenOfTheFangedCoast(UUID ownerId) {
+        super(ownerId, 50, "Siren of the Fanged Coast", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Hydra");
+        this.subtype.add("Siren");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Tribute 6
-        this.addAbility(new TributeAbility(6));
-        // When Nessian Wilds Ravager enters the battlefield, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new FightTargetsEffect(), true);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Tribute 3
+        this.addAbility(new TributeAbility(3));
+        // When Siren of the Fanged Coast enters the battlefield, if tribute wasn't paid, gain control of target creature.
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfGame, true), false);
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, you may have {this} fight another target creature."));
+                "When {this} enters the battlefield, if its tribute wasn't paid, gain control of target creature."));        
     }
 
-    public NessianWildsRavager(final NessianWildsRavager card) {
+    public SirenOfTheFangedCoast(final SirenOfTheFangedCoast card) {
         super(card);
     }
 
     @Override
-    public NessianWildsRavager copy() {
-        return new NessianWildsRavager(this);
+    public SirenOfTheFangedCoast copy() {
+        return new SirenOfTheFangedCoast(this);
     }
 }

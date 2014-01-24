@@ -29,54 +29,50 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.FightTargetsEffect;
-import mage.abilities.keyword.TributeAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.UnblockableAttachedEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.keyword.BestowAbility;
+import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class NessianWildsRavager extends CardImpl<NessianWildsRavager> {
+public class FlitterstepEidolon extends CardImpl<FlitterstepEidolon> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public NessianWildsRavager(UUID ownerId) {
-        super(ownerId, 129, "Nessian Wilds Ravager", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+    public FlitterstepEidolon(UUID ownerId) {
+        super(ownerId, 40, "Flitterstep Eidolon", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Hydra");
+        this.subtype.add("Spirit");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Tribute 6
-        this.addAbility(new TributeAbility(6));
-        // When Nessian Wilds Ravager enters the battlefield, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new FightTargetsEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, you may have {this} fight another target creature."));
+        // Bestow {5}{U}
+        this.addAbility(new BestowAbility(this, "{5}{U}"));
+        // Flitterstep Eidolon can't be blocked.
+        this.addAbility(new UnblockableAbility());
+        // Enchanted creature gets +1/+1 and can't be blocked.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield));
+        ability.addEffect(new UnblockableAttachedEffect(AttachmentType.AURA));        
+        this.addAbility(ability);
     }
 
-    public NessianWildsRavager(final NessianWildsRavager card) {
+    public FlitterstepEidolon(final FlitterstepEidolon card) {
         super(card);
     }
 
     @Override
-    public NessianWildsRavager copy() {
-        return new NessianWildsRavager(this);
+    public FlitterstepEidolon copy() {
+        return new FlitterstepEidolon(this);
     }
 }

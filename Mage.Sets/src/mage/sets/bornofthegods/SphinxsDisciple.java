@@ -29,54 +29,41 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.FightTargetsEffect;
-import mage.abilities.keyword.TributeAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class NessianWildsRavager extends CardImpl<NessianWildsRavager> {
+public class SphinxsDisciple extends CardImpl<SphinxsDisciple> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public NessianWildsRavager(UUID ownerId) {
-        super(ownerId, 129, "Nessian Wilds Ravager", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+    public SphinxsDisciple(UUID ownerId) {
+        super(ownerId, 51, "Sphinx's Disciple", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Hydra");
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Tribute 6
-        this.addAbility(new TributeAbility(6));
-        // When Nessian Wilds Ravager enters the battlefield, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new FightTargetsEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, you may have {this} fight another target creature."));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // <i>Inspired</i> - Whenever Sphinx's Disciple becomes untapped, draw a card.
+        this.addAbility(new InspiredAbility(new DrawCardControllerEffect(1)));
     }
 
-    public NessianWildsRavager(final NessianWildsRavager card) {
+    public SphinxsDisciple(final SphinxsDisciple card) {
         super(card);
     }
 
     @Override
-    public NessianWildsRavager copy() {
-        return new NessianWildsRavager(this);
+    public SphinxsDisciple copy() {
+        return new SphinxsDisciple(this);
     }
 }

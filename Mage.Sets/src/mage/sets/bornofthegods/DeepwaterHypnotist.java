@@ -29,54 +29,53 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.FightTargetsEffect;
-import mage.abilities.keyword.TributeAbility;
+import mage.abilities.Ability;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class NessianWildsRavager extends CardImpl<NessianWildsRavager> {
+public class DeepwaterHypnotist extends CardImpl<DeepwaterHypnotist> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
-
-    public NessianWildsRavager(UUID ownerId) {
-        super(ownerId, 129, "Nessian Wilds Ravager", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+    
+            
+    public DeepwaterHypnotist(UUID ownerId) {
+        super(ownerId, 35, "Deepwater Hypnotist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Hydra");
+        this.subtype.add("Merfolk");
+        this.subtype.add("Wizard");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Tribute 6
-        this.addAbility(new TributeAbility(6));
-        // When Nessian Wilds Ravager enters the battlefield, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new FightTargetsEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, you may have {this} fight another target creature."));
+        // <i>Inspired</i> - Whenever Deepwater Hypnotist becomes untapped, target creature an opponent controls gets -3/-0 until end of turn.
+        Ability ability = new InspiredAbility(new BoostTargetEffect(-3,0,Duration.EndOfTurn));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));        
+        this.addAbility(ability);        
     }
 
-    public NessianWildsRavager(final NessianWildsRavager card) {
+    public DeepwaterHypnotist(final DeepwaterHypnotist card) {
         super(card);
     }
 
     @Override
-    public NessianWildsRavager copy() {
-        return new NessianWildsRavager(this);
+    public DeepwaterHypnotist copy() {
+        return new DeepwaterHypnotist(this);
     }
 }
