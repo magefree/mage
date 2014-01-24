@@ -25,22 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.MonstrousCondition;
+import mage.abilities.condition.common.EnchantedCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
-import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.MonstrosityAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -51,41 +46,33 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ColossusOfAkros extends CardImpl<ColossusOfAkros> {
+public class PillarOfWar extends CardImpl<PillarOfWar> {
 
-    public ColossusOfAkros(UUID ownerId) {
-        super(ownerId, 214, "Colossus of Akros", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{8}");
-        this.expansionSetCode = "THS";
+    public PillarOfWar(UUID ownerId) {
+        super(ownerId, 160, "Pillar of War", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "BNG";
         this.subtype.add("Golem");
 
-        this.power = new MageInt(10);
-        this.toughness = new MageInt(10);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
-        // indestructible.
-        this.addAbility(IndestructibleAbility.getInstance());
-        // {10}: Monstrosity 10.
-        this.addAbility(new MonstrosityAbility("{10}", 10));
-        // As long as Colossus of Akros is monstrous, it has trample and can attack as though it didn't have defender.
-        Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
-                MonstrousCondition.getInstance(),
-                "As long as {this} is monstrous, it has trample"));
-        Effect effect = new ConditionalAsThoughEffect(new CanAttackAsThoughtItDidntHaveDefenderEffect(Duration.WhileOnBattlefield),
-                MonstrousCondition.getInstance(), false);
-        effect.setText("and can attack as though it didn't have defender");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // As long as Pillar of War is enchanted, it can attack as though it didn't have defender.
+        Effect effect = new ConditionalAsThoughEffect(
+                new CanAttackAsThoughtItDidntHaveDefenderEffect(Duration.WhileOnBattlefield),
+                new EnchantedCondition(), false);
+        effect.setText("As long as {this} is enchanted, it can attack as though it didn't have defender");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));        
+        
     }
 
-    public ColossusOfAkros(final ColossusOfAkros card) {
+    public PillarOfWar(final PillarOfWar card) {
         super(card);
     }
 
     @Override
-    public ColossusOfAkros copy() {
-        return new ColossusOfAkros(this);
+    public PillarOfWar copy() {
+        return new PillarOfWar(this);
     }
 }
