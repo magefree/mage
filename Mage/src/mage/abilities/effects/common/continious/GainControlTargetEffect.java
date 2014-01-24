@@ -113,6 +113,14 @@ public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTar
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return "Gain control of target " + mode.getTargets().get(0).getTargetName() + " " + duration.toString();
+        StringBuilder sb = new StringBuilder("Gain control of ");
+        if (!mode.getTargets().get(0).getTargetName().startsWith("another")) {
+            sb.append("target ");
+        }
+        sb.append(mode.getTargets().get(0).getTargetName());
+        if (!duration.toString().isEmpty()) {
+            sb.append(" ").append(duration.toString());
+        }
+        return sb.toString();
     }
 }

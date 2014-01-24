@@ -69,6 +69,9 @@ public class UntapTargetEffect extends OneShotEffect<UntapTargetEffect> {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         Target target = mode.getTargets().get(0);
 
         StringBuilder sb = new StringBuilder();
