@@ -28,55 +28,60 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.CreaturesCantGetOrHaveAbilityEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.TargetPermanent;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class ArchetypeOfEndurance extends CardImpl<ArchetypeOfEndurance> {
+public class ClaimOfErebos extends CardImpl<ClaimOfErebos> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
-    
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
-
-    public ArchetypeOfEndurance(UUID ownerId) {
-        super(ownerId, 116, "Archetype of Endurance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{6}{G}{G}");
+    public ClaimOfErebos(UUID ownerId) {
+        super(ownerId, 64, "Claim of Erebos", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Boar");
+        this.subtype.add("Aura");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
+        this.color.setBlack(true);
 
-        // Creatures you control have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
-
-        // Creatures your opponents control lose hexproof and can't have or gain hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreaturesCantGetOrHaveAbilityEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
-
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // Enchanted creature has "{1}{B}, {T}: Target player loses 2 life."
+        Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{1}{B}"));
+        grantedAbility.addCost(new TapSourceCost());
+        grantedAbility.addTarget(new TargetPlayer(true));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        
+        
     }
 
-    public ArchetypeOfEndurance(final ArchetypeOfEndurance card) {
+    public ClaimOfErebos(final ClaimOfErebos card) {
         super(card);
     }
 
     @Override
-    public ArchetypeOfEndurance copy() {
-        return new ArchetypeOfEndurance(this);
+    public ClaimOfErebos copy() {
+        return new ClaimOfErebos(this);
     }
 }

@@ -29,54 +29,57 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.CreaturesCantGetOrHaveAbilityEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author LevelX2
  */
-public class ArchetypeOfEndurance extends CardImpl<ArchetypeOfEndurance> {
+public class OdunosRiverTrawler extends CardImpl<OdunosRiverTrawler> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
+    private static final FilterCard filter = new FilterCard("enchantment creature cards");
     
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
-
-    public ArchetypeOfEndurance(UUID ownerId) {
-        super(ownerId, 116, "Archetype of Endurance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{6}{G}{G}");
+    
+    public OdunosRiverTrawler(UUID ownerId) {
+        super(ownerId, 79, "Odunos River Trawler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Boar");
+        this.subtype.add("Zombie");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Creatures you control have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
-
-        // Creatures your opponents control lose hexproof and can't have or gain hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreaturesCantGetOrHaveAbilityEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
-
+        // When Odunos River Trawler enters the battlefield, return target enchantment creature card from your graveyard to your hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(true));
+        ability.addTarget(new TargetCardInYourGraveyard(filter, true));        
+        this.addAbility(ability);
+        // {W}, Sacrifice Odunos River Trawler: Return target enchantment creature card from your graveyard to your hand.
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(true), new ManaCostsImpl("{W}"));
+        ability.addTarget(new TargetCardInYourGraveyard(filter, true));        
+        this.addAbility(ability);
     }
 
-    public ArchetypeOfEndurance(final ArchetypeOfEndurance card) {
+    public OdunosRiverTrawler(final OdunosRiverTrawler card) {
         super(card);
     }
 
     @Override
-    public ArchetypeOfEndurance copy() {
-        return new ArchetypeOfEndurance(this);
+    public OdunosRiverTrawler copy() {
+        return new OdunosRiverTrawler(this);
     }
 }

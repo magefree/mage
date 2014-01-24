@@ -28,55 +28,44 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.CreaturesCantGetOrHaveAbilityEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class ArchetypeOfEndurance extends CardImpl<ArchetypeOfEndurance> {
+public class Asphyxiate extends CardImpl<Asphyxiate> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
     
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
-
-    public ArchetypeOfEndurance(UUID ownerId) {
-        super(ownerId, 116, "Archetype of Endurance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{6}{G}{G}");
+    
+    public Asphyxiate(UUID ownerId) {
+        super(ownerId, 60, "Asphyxiate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Boar");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
+        this.color.setBlack(true);
 
-        // Creatures you control have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
-
-        // Creatures your opponents control lose hexproof and can't have or gain hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreaturesCantGetOrHaveAbilityEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
-
+        // Destroy target untapped creature.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter,true));
     }
 
-    public ArchetypeOfEndurance(final ArchetypeOfEndurance card) {
+    public Asphyxiate(final Asphyxiate card) {
         super(card);
     }
 
     @Override
-    public ArchetypeOfEndurance copy() {
-        return new ArchetypeOfEndurance(this);
+    public Asphyxiate copy() {
+        return new Asphyxiate(this);
     }
 }

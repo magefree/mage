@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.CreaturesCantGetOrHaveAbilityEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -46,37 +46,36 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class ArchetypeOfEndurance extends CardImpl<ArchetypeOfEndurance> {
+public class ArchetypeOfFinality extends CardImpl<ArchetypeOfFinality> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
     
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
-
-    public ArchetypeOfEndurance(UUID ownerId) {
-        super(ownerId, 116, "Archetype of Endurance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{6}{G}{G}");
+    
+    public ArchetypeOfFinality(UUID ownerId) {
+        super(ownerId, 58, "Archetype of Finality", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "BNG";
-        this.subtype.add("Boar");
+        this.subtype.add("Gorgon");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // Creatures you control have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
-
-        // Creatures your opponents control lose hexproof and can't have or gain hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreaturesCantGetOrHaveAbilityEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
-
+        // Creatures you control have deathtouch.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
+        // Creatures your opponents control lose deathtouch and can't have or gain deathtouch.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreaturesCantGetOrHaveAbilityEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+               
     }
 
-    public ArchetypeOfEndurance(final ArchetypeOfEndurance card) {
+    public ArchetypeOfFinality(final ArchetypeOfFinality card) {
         super(card);
     }
 
     @Override
-    public ArchetypeOfEndurance copy() {
-        return new ArchetypeOfEndurance(this);
+    public ArchetypeOfFinality copy() {
+        return new ArchetypeOfFinality(this);
     }
 }
