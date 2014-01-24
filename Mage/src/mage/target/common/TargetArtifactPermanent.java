@@ -33,13 +33,19 @@ import mage.target.TargetPermanent;
 
 /**
  * @author ayratn
+ * @param <T>
  */
 public class TargetArtifactPermanent<T extends TargetArtifactPermanent<T>> extends TargetPermanent<TargetArtifactPermanent<T>> {
 
+    public TargetArtifactPermanent(boolean required) {
+        this();
+        this.setRequired(required);
+    }
     public TargetArtifactPermanent() {
         this(1, 1, new FilterArtifactPermanent(), false);
     }
 
+    
     public TargetArtifactPermanent(FilterArtifactPermanent filter) {
         this(1, 1, filter, false);
     }
