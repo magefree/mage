@@ -152,7 +152,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
-    private static final MageVersion version = new MageVersion(1, 2, 0, "");
+    private static final MageVersion version = new MageVersion(1, 3, 0, "");
     private UUID clientId;
     private static MagePane activeFrame;
     private static boolean liteMode = false;
@@ -617,8 +617,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showDraft(UUID draftId) {
         try {
-            DraftPane draftPane = new DraftPane();
-            desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
+            DraftPane draftPane = null;
+            for(Component component :desktopPane.getComponents()) {
+                if (component instanceof DraftPane) {
+                    draftPane = (DraftPane) component;
+                }
+            }
+            if (draftPane == null) {
+                draftPane = new DraftPane();
+                desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
+            }
             draftPane.setMaximum(true);
             draftPane.setVisible(true);
             draftPane.showDraft(draftId);
