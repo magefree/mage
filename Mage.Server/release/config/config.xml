@@ -24,9 +24,9 @@
         <tournamentType name="Sealed Swiss (Cube)" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissCubeTournamentType"/>
     </tournamentTypes>
     <draftCubes>
+        <draftCube name="MTGO Holiday Cube 2013" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.HolidayCube2013"/>
         <draftCube name="Cube Tutor 360 Pauper" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor360Pauper"/>
         <draftCube name="Cube Tutor 720" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor720"/>
-        <draftCube name="MTGO Holiday Cube 2013" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.HolydayCube2013"/>
     </draftCubes>
     <deckTypes>
         <deckType name="Constructed - Standard" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Standard"/>
