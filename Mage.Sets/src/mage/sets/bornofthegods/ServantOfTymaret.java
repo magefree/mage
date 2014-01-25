@@ -30,12 +30,16 @@ package mage.sets.bornofthegods;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -57,6 +61,7 @@ public class ServantOfTymaret extends CardImpl<ServantOfTymaret> {
         this.addAbility(new InspiredAbility(new ServantOfTymaretEffect()));
 
         // {2}{B}: Regenerate Servant of Tymaret.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
     }
 
     public ServantOfTymaret(final ServantOfTymaret card) {
@@ -82,11 +87,11 @@ class ServantOfTymaretEffect extends OneShotEffect<ServantOfTymaretEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int damage = 0;
+        int lostAmount = 0;
         for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            damage += game.getPlayer(opponentId).damage(1, source.getSourceId(), game, false, true);
+            lostAmount += game.getPlayer(opponentId).loseLife(1, game);
         }
-        game.getPlayer(source.getControllerId()).gainLife(damage, game);
+        game.getPlayer(source.getControllerId()).gainLife(lostAmount, game);
         return true;
     }
 
