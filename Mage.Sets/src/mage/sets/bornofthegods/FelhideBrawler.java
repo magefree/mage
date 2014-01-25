@@ -103,7 +103,7 @@ class FelhideBrawlerRestrictionEffect extends RestrictionEffect<FelhideBrawlerRe
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (game.getBattlefield().countAll(filter, source.getControllerId(), game) == 0) {
+        if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == 0) {
             return true;
         }
         return false;

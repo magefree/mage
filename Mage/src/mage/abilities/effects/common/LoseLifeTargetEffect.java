@@ -28,12 +28,12 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -76,6 +76,9 @@ public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
 
     @Override
     public String getText(Mode mode) {
+        if (!staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
 

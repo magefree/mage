@@ -61,8 +61,9 @@ public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
         if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
             for (UUID targetId: targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
-                if (permanent == null)
+                if (permanent == null) {
                     return false;
+                }
                 paid |= permanent.moveToZone(Zone.HAND, sourceId, game, false);
             }
         }

@@ -104,7 +104,7 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect<
     }
     
     private void putCardsToGravecard(UUID playerId, Ability source, Game game) {
-        Player player = game.getPlayer(id);
+        Player player = game.getPlayer(playerId);
         if (player != null) {
             int cardsCount = Math.min(numberCards, player.getLibrary().size());
             for (int i = 0; i < cardsCount; i++) {
