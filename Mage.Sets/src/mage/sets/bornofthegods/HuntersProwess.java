@@ -41,6 +41,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -61,6 +62,7 @@ public class HuntersProwess extends CardImpl<HuntersProwess> {
         Ability grantedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new HuntersProwessDrawEffect(), false);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(grantedAbility, Duration.EndOfTurn,
                 "and gains trample and \"Whenever this creature deals combat damage to a player, draw that many cards.\""));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public HuntersProwess(final HuntersProwess card) {
