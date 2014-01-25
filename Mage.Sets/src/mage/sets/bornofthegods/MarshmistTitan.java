@@ -61,7 +61,7 @@ public class MarshmistTitan extends CardImpl<MarshmistTitan> {
         this.toughness = new MageInt(5);
 
         // Marshmist Titan costs {X} less to cast, where X is your devotion to black.
-        this.addAbility(new SimpleStaticAbility(Zone.OUTSIDE, new MarshmistTitanCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new MarshmistTitanCostReductionEffect()));
     }
 
     public MarshmistTitan(final MarshmistTitan card) {
@@ -104,7 +104,7 @@ class MarshmistTitanCostReductionEffect extends CostModificationEffectImpl<Marsh
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility && abilityToModify.getSourceId().equals(source.getSourceId())) {
+        if (abilityToModify.getSourceId().equals(source.getSourceId()) && (abilityToModify instanceof SpellAbility)) {
             return true;
         }
         return false;
