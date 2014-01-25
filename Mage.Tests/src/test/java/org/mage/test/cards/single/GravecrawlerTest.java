@@ -11,6 +11,16 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class GravecrawlerTest extends CardTestPlayerBase {
 
+  /*  Cryptoplasm
+   *  Creature — Shapeshifter 2/2, 1UU
+   *  At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
+   *
+   *
+   *  Creature — Zombie 2/1, B
+   *  Gravecrawler can't block.
+   *  You may cast Gravecrawler from your graveyard as long as you control a Zombie.
+   */
+
     @Test
     public void testCard() {
         addCard(Zone.GRAVEYARD, playerA, "Gravecrawler");
@@ -42,6 +52,14 @@ public class GravecrawlerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 1);
     }
 
+    /*
+     *  Elite Vanguard
+     *  Creature — Human Soldier 2/1, W
+     *
+     *  Fervor English
+     *  Enchantment, 2R (3)
+     *  Creatures you control have haste. (They can attack and {T} as soon as they come under your control.)
+     */
     @Test
     public void testCopiedCantBlockAbilityWorks() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
