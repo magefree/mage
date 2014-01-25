@@ -56,8 +56,9 @@ public class ColoredManaCost extends ManaCostImpl<ColoredManaCost> {
 
     @Override
     public boolean isPaid() {
-        if (paid)
+        if (paid) {
             return true;
+        }
         return this.isColoredPaid(mana);
     }
 
@@ -101,4 +102,9 @@ public class ColoredManaCost extends ManaCostImpl<ColoredManaCost> {
         return new ColoredManaCost(this);
     }
 
+    @Override
+    public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
+        return mana.equals(coloredManaSymbol);
+    }
+            
 }

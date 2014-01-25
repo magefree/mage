@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.*;
 import mage.Mana;
 import mage.abilities.mana.ManaOptions;
+import mage.constants.ColoredManaSymbol;
 import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.ManaPool;
@@ -48,6 +49,7 @@ public interface ManaCost extends Cost {
     boolean testPay(Mana testMana);
     Filter getSourceFilter();
     void setSourceFilter(Filter filter);
+    boolean containsColor(ColoredManaSymbol coloredManaSymbol);
 
     @Override
     String getText();

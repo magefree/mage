@@ -31,6 +31,7 @@ package mage.abilities.costs.mana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
+import mage.constants.ColoredManaSymbol;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.ManaPool;
@@ -146,5 +147,9 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
     public void setMaxX(int maxX) {
         this.maxX = maxX;
     }
-    
+
+    @Override
+    public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
+        return false;
+    }
 }

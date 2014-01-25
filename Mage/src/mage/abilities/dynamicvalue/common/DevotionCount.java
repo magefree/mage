@@ -7,6 +7,7 @@ package mage.abilities.dynamicvalue.common;
 import java.util.ArrayList;
 import java.util.Arrays;
 import mage.abilities.Ability;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
@@ -33,8 +34,13 @@ public class DevotionCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility) {
         int devotion = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
-            for(ColoredManaSymbol coloredManaSymbol: devotionColors) {
-                devotion += permanent.getManaCost().getMana().getColor(coloredManaSymbol);
+            for(ManaCost manaCost :permanent.getManaCost()) {
+                for(ColoredManaSymbol coloredManaSymbol: devotionColors) {
+                    if (manaCost.containsColor(coloredManaSymbol)) {
+                        devotion++;
+                        break; // count each manaCost maximum of one time (Hybrid don't count for multiple colors of devotion)
+                    }
+                }
             }
         }
         return devotion;

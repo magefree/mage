@@ -410,4 +410,13 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
     }
 
+    @Override
+    public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
+        for(ManaCost manaCost: this) {
+            if (manaCost.containsColor(coloredManaSymbol)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

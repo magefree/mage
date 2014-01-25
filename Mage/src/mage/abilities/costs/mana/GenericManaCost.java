@@ -30,6 +30,7 @@ package mage.abilities.costs.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.ManaPool;
 
@@ -87,6 +88,10 @@ public class GenericManaCost extends ManaCostImpl<GenericManaCost> {
     @Override
     public GenericManaCost copy() {
         return new GenericManaCost(this);
+    }
+    @Override
+    public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
+        return false;
     }
 
 }
