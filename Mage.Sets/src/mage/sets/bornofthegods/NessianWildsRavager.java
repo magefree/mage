@@ -33,7 +33,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TributeNotPaidCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -65,7 +65,7 @@ public class NessianWildsRavager extends CardImpl<NessianWildsRavager> {
         // Tribute 6
         this.addAbility(new TributeAbility(6));
         // When Nessian Wilds Ravager enters the battlefield, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new FightTargetsEffect(), true);
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
                 "When {this} enters the battlefield, if its tribute wasn't paid, you may have {this} fight another target creature."));

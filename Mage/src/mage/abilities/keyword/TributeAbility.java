@@ -117,7 +117,7 @@ class TributeEffect extends OneShotEffect<TributeEffect> {
                     StringBuilder sb = new StringBuilder("Pay tribute to ");
                     sb.append(sourcePermanent.getName());
                     sb.append(" (add ").append(CardUtil.numberToText(tributeValue)).append(" +1/+1 counter");
-                    sb.append(tributeValue > 1 ? "s":"").append("to it)?");
+                    sb.append(tributeValue > 1 ? "s":"").append(" to it)?");
                     if (opponent.chooseUse(outcome, sb.toString(), game)) {
                         game.informPlayers(new StringBuilder(opponent.getName()).append(" pays tribute to ").append(sourcePermanent.getName()).toString());
                         game.getState().setValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString(), "yes");

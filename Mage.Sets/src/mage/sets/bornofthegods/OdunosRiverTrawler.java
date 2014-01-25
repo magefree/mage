@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class OdunosRiverTrawler extends CardImpl<OdunosRiverTrawler> {
 
-    private static final FilterCard filter = new FilterCard("enchantment creature cards");
+    private static final FilterCard filter = new FilterCard("enchantment creature card from your graveyard");
     
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

@@ -45,15 +45,23 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author LevelX2
  */
 public class ScourgeOfSkolaVale extends CardImpl<ScourgeOfSkolaVale> {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public ScourgeOfSkolaVale(UUID ownerId) {
         super(ownerId, 137, "Scourge of Skola Vale", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -72,7 +80,7 @@ public class ScourgeOfSkolaVale extends CardImpl<ScourgeOfSkolaVale> {
         this.addAbility(new EntersBattlefieldAbility(effect));
         // {T}, Sacrifice another creature: Put a number of +1/+1 counters on Scourge of Skola Vale equal to the sacrificed creature's toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScourgeOfSkolaValeEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
 
@@ -104,10 +112,9 @@ class ScourgeOfSkolaValeEffect extends OneShotEffect<ScourgeOfSkolaValeEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = 0;
         for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost) {
-                amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
+                int amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
                 Player player = game.getPlayer(source.getControllerId());
                 if (amount > 0 && player != null) {
                     return new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount), true).apply(game, source);

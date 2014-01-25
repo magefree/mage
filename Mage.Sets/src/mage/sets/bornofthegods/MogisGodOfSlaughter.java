@@ -80,7 +80,7 @@ public class MogisGodOfSlaughter extends CardImpl<MogisGodOfSlaughter> {
         
         // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless he or she sacrifices a creature.        
         effect = new DoUnlessTargetPaysCost(new DamageTargetEffect(2, false, "that player"), new SacrificeTargetCost(new TargetControlledCreaturePermanent()),
-                "Sacrifice a creature? (Otherwise you get 2 damge.)");
+                "Sacrifice a creature? (otherwise you get 2 damage)");
         effect.setText("Mogis deals 2 damage to that player unless he or she sacrifices a creature");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.OPPONENT, false, true);
         this.addAbility(ability);
