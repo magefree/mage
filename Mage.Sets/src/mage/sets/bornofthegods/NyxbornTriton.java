@@ -45,7 +45,7 @@ import mage.constants.Zone;
 public class NyxbornTriton extends CardImpl<NyxbornTriton> {
 
     public NyxbornTriton(UUID ownerId) {
-        super(ownerId, 46, "Mindreaver", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{U}");
+        super(ownerId, 46, "Nyxborn Triton", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "BNG";
         this.subtype.add("Merfolk");
 
