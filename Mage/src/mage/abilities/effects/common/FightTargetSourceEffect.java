@@ -54,8 +54,8 @@ public class FightTargetSourceEffect extends OneShotEffect<FightTargetSourceEffe
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            // only if both targets are legal the effect will be applied
-            if (source.getTargets().get(0).isLegal(source, game) && source.getTargets().get(1).isLegal(source, game)) {
+            // only if target is legal the effect will be applied
+            if (source.getTargets().get(0).isLegal(source, game)) {
                 Permanent creature1 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
                 Permanent creature2 = game.getPermanent(source.getSourceId());
                 // 20110930 - 701.10
