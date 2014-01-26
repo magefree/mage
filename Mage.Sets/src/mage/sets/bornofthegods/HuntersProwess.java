@@ -59,7 +59,7 @@ public class HuntersProwess extends CardImpl<HuntersProwess> {
         Effect effect = new BoostTargetEffect(3,3, Duration.EndOfTurn);
         effect.setText("Until end of turn, target creature gets +3/+3");
         this.getSpellAbility().addEffect(effect);
-        Ability grantedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new HuntersProwessDrawEffect(), false);
+        Ability grantedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new HuntersProwessDrawEffect(), false, true);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(grantedAbility, Duration.EndOfTurn,
                 "and gains trample and \"Whenever this creature deals combat damage to a player, draw that many cards.\""));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
