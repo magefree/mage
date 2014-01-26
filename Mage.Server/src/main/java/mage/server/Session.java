@@ -151,6 +151,8 @@ public class Session {
             userData.setAvatarId(1016);
         } else if (userName.equals("Ayrat")) {
             userData.setAvatarId(1018);
+        } else if (userName.equals("Bandit")) {
+            userData.setAvatarId(1020);
         }
     }
 

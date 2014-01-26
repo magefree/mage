@@ -206,6 +206,6 @@ class TimestampSorter implements Comparator<Table> {
 class UserNameSorter implements Comparator<UsersView> {
     @Override
     public int compare(UsersView one, UsersView two) {
-        return one.getUserName().compareTo(two.getUserName());
+        return one.getUserName().compareToIgnoreCase(two.getUserName());
     }
 }
