@@ -1012,6 +1012,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public void revealCards(String name, Cards cards, Game game) {
         game.getState().getRevealed().add(name, cards);
+        StringBuilder sb = new StringBuilder(this.getName()).append(" reveals ");
+        int current = 0, last = cards.size();        
+        for (Card card :cards.getCards(game)) {
+            current++;
+            sb.append(card.getName());
+            if (current < last) {
+                sb.append(", ");
+            }
+        }
+        game.informPlayers(sb.toString());
     }
 
     @Override
