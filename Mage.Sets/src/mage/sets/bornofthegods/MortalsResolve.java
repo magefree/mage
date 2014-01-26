@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -56,6 +57,7 @@ public class MortalsResolve extends CardImpl<MortalsResolve> {
         effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains indestructible until end of turn");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public MortalsResolve(final MortalsResolve card) {
