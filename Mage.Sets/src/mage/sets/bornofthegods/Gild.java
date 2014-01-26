@@ -28,6 +28,7 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
@@ -35,6 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -80,6 +82,8 @@ class GoldToken extends Token {
         cardType.add(CardType.ARTIFACT);
         subtype.add("Gold");
 
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost()));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost());
+        ability.addChoice(new ChoiceColor());
+        this.addAbility(ability);
     }
 }
