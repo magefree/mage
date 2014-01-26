@@ -50,6 +50,7 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -353,4 +354,29 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param card
      */
     UUID getCommanderId();
+
+    /**
+     * Uses card.moveToZone and posts a inform message about moving the card
+     * into the game log
+     * 
+     * @param card
+     * @param sourceId
+     * @param game
+     * @param fromZone if null, this info isn't postet
+     * @return
+     */
+    boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone);
+
+    /**
+     * Uses putOntoBattlefield and posts also a info message about in the game log
+     *
+     * @param card
+     * @param game
+     * @param fromZone
+     * @param sourceId
+     * @param game
+     * @return
+     */
+    boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId);
+
 }

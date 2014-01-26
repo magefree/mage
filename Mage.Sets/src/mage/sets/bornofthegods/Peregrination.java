@@ -113,18 +113,20 @@ class PeregrinationEffect extends OneShotEffect<PeregrinationEffect> {
                     target2.setRequired(true);
                     player.choose(Outcome.Benefit, revealed, target2, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+
+                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+
                     revealed.remove(card);
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
                         permanent.setTapped(true);
                     }
                     card = revealed.getCards(game).iterator().next();
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }
                 else if (target.getTargets().size() == 1) {
                     Card card = revealed.getCards(game).iterator().next();
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
                         permanent.setTapped(true);

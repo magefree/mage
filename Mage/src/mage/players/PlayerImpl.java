@@ -35,6 +35,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -2091,4 +2092,36 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public UUID getCommanderId() {
         return this.commanderId;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override 
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
+        boolean result = false;
+        if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
+            game.informPlayers(new StringBuilder(this.getName())
+                    .append(" puts ").append(card.getName()).append(" ")
+                    .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
+                    .append("onto his or her hand").toString());
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId) {
+        boolean result = false;
+        if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId())) {
+            game.informPlayers(new StringBuilder(this.getName())
+                    .append(" puts ").append(card.getName())
+                    .append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
+                    .append("onto the Battlefield").toString());
+        }
+        return result;
+    }
+
+    
 }
