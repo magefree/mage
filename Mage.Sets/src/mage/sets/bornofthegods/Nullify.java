@@ -48,7 +48,7 @@ public class Nullify extends CardImpl<Nullify> {
     
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ENCHANTMENT),
+                new CardTypePredicate(CardType.CREATURE),
                 new SubtypePredicate("Aura")));
     }
     
