@@ -44,6 +44,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -59,6 +60,7 @@ public class SearingBlood extends CardImpl<SearingBlood> {
 
         // Searing Blood deals 2 damage to target creature. When that creature dies this turn, Searing Blood deals 3 damage to that creature's controller.
         this.getSpellAbility().addEffect(new SearingBloodEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public SearingBlood(final SearingBlood card) {
