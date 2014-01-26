@@ -189,7 +189,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                 }
                 return false;
             }
-            if (this.getCardType().contains(CardType.CREATURE)) { // e.g. Creature with Bestow (rule confirmation yet missing)
+            if (this.getSpellAbility() instanceof BestowAbility) { 
                 updateOptionalCosts(0);
                 result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
                 return result;
