@@ -39,6 +39,7 @@ import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -116,10 +117,24 @@ class AcolytesRewardEffect extends PreventionEffectImpl<AcolytesRewardEffect> {
                     event.setAmount(0);
                     this.amount -= damage;
                 }
+                if (damage > 0) {
+                    game.informPlayers(new StringBuilder("Acolyte's Reward ").append("prevented ").append(damage).append(" to ").append(targetCreature.getName()).toString());
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
+                            source.getControllerId(), source.getSourceId(), source.getControllerId(), damage));
 
-                targetCreature.damage(damage, source.getSourceId(), game, true, false, event.getAppliedEffects());
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
-                        source.getControllerId(), source.getSourceId(), source.getControllerId(), damage));
+                    Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
+                    if (targetPlayer != null) {
+                        targetPlayer.damage(damage, source.getSourceId(), game, false, true);
+                        game.informPlayers(new StringBuilder("Acolyte's Reward ").append("deals ").append(damage).append(" damge to ").append(targetPlayer.getName()).toString());
+                    } else {
+                        Permanent targetDamageCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+                        if (targetDamageCreature != null) {
+                            targetDamageCreature.damage(damage, source.getSourceId(), game, true, false);
+                            game.informPlayers(new StringBuilder("Acolyte's Reward ").append("deals ").append(damage).append(" damge to ").append(targetDamageCreature.getName()).toString());
+                        }
+                    }
+                }
+                return true;
             }
         }
         return false;
