@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class GriffinDreamfinder extends CardImpl<GriffinDreamfinder> {
     
-    private static final FilterCard filter = new FilterCard("enchantment card");
+    private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
     
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
