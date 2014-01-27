@@ -78,7 +78,7 @@ public class KarametraGodOfHarvests extends CardImpl<KarametraGodOfHarvests> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Whenever you cast a creature spell, you may search your library for a Forest or Plains card, put it onto the battlefield tapped, then shuffle your library.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new FilterCreatureSpell("a creature spell"), true));
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), new FilterCreatureSpell("a creature spell"), true));
     }
 
     public KarametraGodOfHarvests(final KarametraGodOfHarvests card) {
