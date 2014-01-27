@@ -30,8 +30,7 @@ package mage.server;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.interfaces.callback.ClientCallback;
@@ -48,8 +47,6 @@ import org.apache.log4j.Logger;
 public class ChatSession {
 
     private static final Logger logger = Logger.getLogger(ChatSession.class);
-    private static final Calendar cal = new GregorianCalendar();
-
     private ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<UUID, String>();
     private UUID chatId;
     private DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
@@ -90,7 +87,7 @@ public class ChatSession {
 
     public boolean broadcastInfoToUser(User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
-            toUser.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(null, message, timeFormatter.format(cal.getTime()), MessageColor.ORANGE, MessageType.USER_INFO, null)));
+            toUser.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(null, message, timeFormatter.format(new Date()), MessageColor.ORANGE, MessageType.USER_INFO, null)));
             return true;
         }
         return false;
@@ -99,10 +96,10 @@ public class ChatSession {
     public boolean broadcastWhisperToUser(User fromUser, User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
             toUser.fireCallback(new ClientCallback("chatMessage", chatId, 
-                    new ChatMessage(new StringBuilder("Whisper from ").append(fromUser.getName()).toString(), message, timeFormatter.format(cal.getTime()), MessageColor.YELLOW, MessageType.WHISPER, SoundToPlay.PlayerWhispered)));
+                    new ChatMessage(new StringBuilder("Whisper from ").append(fromUser.getName()).toString(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER, SoundToPlay.PlayerWhispered)));
             if (clients.containsKey(fromUser.getId())) {
                 fromUser.fireCallback(new ClientCallback("chatMessage", chatId,
-                        new ChatMessage(new StringBuilder("Whisper to ").append(toUser.getName()).toString(), message, timeFormatter.format(cal.getTime()), MessageColor.YELLOW, MessageType.WHISPER, null)));
+                        new ChatMessage(new StringBuilder("Whisper to ").append(toUser.getName()).toString(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER, null)));
                 return true;
             }
         }
@@ -124,7 +121,7 @@ public class ChatSession {
     public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         if (!message.isEmpty()) {            
             final String msg = message;
-            final String time = (withTime ? timeFormatter.format(cal.getTime()):"");
+            final String time = (withTime ? timeFormatter.format(new Date()):"");
             final String username = userName;
             logger.debug("Broadcasting '" + msg + "' for " + chatId);
             for (UUID userId: clients.keySet()) {

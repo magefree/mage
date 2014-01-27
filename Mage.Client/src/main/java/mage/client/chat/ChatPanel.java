@@ -41,7 +41,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import javax.print.attribute.standard.MediaSize;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.JTableHeader;
@@ -202,6 +201,7 @@ public class ChatPanel extends javax.swing.JPanel {
      * @param username message sender
      * @param message message itself
      * @param time timestamp
+     * @param messageType
      * @param color Preferred color. Not used.
      */
     public void receiveMessage(String username, String message, String time, MessageType messageType, MessageColor color) {
@@ -449,38 +449,10 @@ public class ChatPanel extends javax.swing.JPanel {
     // public void setPlayers(Collection<String> players) {
     public void setPlayers(List<Collection<UsersView>> view) {
         try {
-            // TODO: sort by user name
             tableModel.loadData(view.get(0));
         } catch (Exception ex) {
             this.players.clear();
         }
-
-//        if (players != null) {
-//            boolean update;
-//            int size = players.size();
-//            List<String> list = new ArrayList<String>(players);
-//            Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-//            if (size != this.players.size()) {
-//                update = true;
-//            } else {
-//                update = false;
-//                for (int i = 0; i < size; i++) {
-//                    if (!list.get(i).equals(this.players.get(i))) {
-//                        update = true;
-//                        break;
-//                    }
-//                }
-//            }
-//            if (update) {
-//                synchronized (tableModel) {
-//                    this.players = list;
-//                    tableModel.loadData(this.players);
-//                }
-//            }
-//
-//        } else {
-//            this.players.clear();
-//        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPanePlayers;
