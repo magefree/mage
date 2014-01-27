@@ -1708,7 +1708,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
      */
 
     @Override
-    public synchronized void leave(UUID playerId) {
+    public void leave(UUID playerId) {
         Player player = getPlayer(playerId);
         if (player.hasLeft()) {
             return;
@@ -1744,10 +1744,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             }
         }
         // Then, if there are any objects still controlled by that player, those objects are exiled.
-        for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
-            Permanent perm = it.next();
-            if (perm.getControllerId().equals(playerId)) {
-                perm.moveToExile(null, "", null, this);
+        synchronized(getBattlefield()){
+            for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
+                Permanent perm = it.next();
+                if (perm.getControllerId().equals(playerId)) {
+                    perm.moveToExile(null, "", null, this);
+                }
             }
         }
 

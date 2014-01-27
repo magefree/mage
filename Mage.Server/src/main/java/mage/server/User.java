@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.Deck;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
@@ -62,27 +63,40 @@ public class User {
         LostConnection, Disconnected, CleaningUp, ConnectingOtherInstance;
     }
 
-    private UUID userId = UUID.randomUUID();
-    private String userName;
-    private String sessionId = "";
-    private String host;
+    private final UUID userId;
+    private final String userName;    
+    private final String host;    
+    private final Date connectionTime;
+    private final Map<UUID, Table> tables;
+    private final Map<UUID, GameSession> gameSessions;
+    private final Map<UUID, DraftSession> draftSessions;
+    private final Map<UUID, TournamentSession> tournamentSessions;
+    private final Map<UUID, TournamentSession> constructing;
+    private final Map<UUID, Deck> sideboarding;
+    
+    private String sessionId;
     private String info;
-    private Date connectionTime = new Date();
-    private Date lastActivity = new Date();
+    private Date lastActivity;
     private UserState userState;
-    private Map<UUID, Table> tables = new HashMap<UUID, Table>();
-    private Map<UUID, GameSession> gameSessions = new HashMap<UUID, GameSession>();
-    private Map<UUID, DraftSession> draftSessions = new HashMap<UUID, DraftSession>();
-    private Map<UUID, TournamentSession> tournamentSessions = new HashMap<UUID, TournamentSession>();
-    private Map<UUID, TournamentSession> constructing = new HashMap<UUID, TournamentSession>();
-    private Map<UUID, Deck> sideboarding = new HashMap<UUID, Deck>();
-
     private UserData userData;
 
     public User(String userName, String host) {
+        this.userId = UUID.randomUUID();
         this.userName = userName;
         this.host = host;
         this.userState = UserState.Created;
+        
+        this.connectionTime = new Date();
+        this.lastActivity = new Date();
+        
+        this.tables = new ConcurrentHashMap<UUID, Table>();
+        this.gameSessions = new ConcurrentHashMap<UUID, GameSession>();
+        this.draftSessions = new ConcurrentHashMap<UUID, DraftSession>();
+        this.tournamentSessions = new ConcurrentHashMap<UUID, TournamentSession>();
+        this.constructing = new ConcurrentHashMap<UUID, TournamentSession>();
+        this.sideboarding = new ConcurrentHashMap<UUID, Deck>();
+        
+        this.sessionId = "";
     }
 
     public String getName() {
@@ -219,16 +233,19 @@ public class User {
             entry.getValue().init();
             entry.getValue().update();
         }
+
         for (Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
             gameStarted(entry.getValue().getGameId(), entry.getKey());
             entry.getValue().init();
             GameManager.getInstance().sendPlayerString(entry.getValue().getGameId(), userId, "");
         }
+
         for (Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
             draftStarted(entry.getValue().getDraftId(), entry.getKey());
             entry.getValue().init();
             entry.getValue().update();
         }
+        
         for (Entry<UUID, TournamentSession> entry: constructing.entrySet()) {
             entry.getValue().construct(0);
         }
