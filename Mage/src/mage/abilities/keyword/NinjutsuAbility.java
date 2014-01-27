@@ -66,7 +66,6 @@ import mage.target.common.TargetControlledPermanent;
  * put onto the battlefield unblocked. It will be attacking the same player or
  * planeswalker as the creature that was returned to its owner's hand.
  *
- * @param cost ninjutsu mana cost
  *
  * @author LevelX2
  */
@@ -78,6 +77,10 @@ public class NinjutsuAbility extends ActivatedAbilityImpl<NinjutsuAbility> {
         filter.add(new UnblockedPredicate());
     }
 
+    /**
+     * 
+     * @param manaCost ninjutsu mana cost
+     */
     public NinjutsuAbility(ManaCost manaCost) {
         super(Zone.HAND,new NinjutsuEffect(), manaCost);
         this.addCost(new RevealNinjutsuCardCost());
@@ -95,7 +98,9 @@ public class NinjutsuAbility extends ActivatedAbilityImpl<NinjutsuAbility> {
 
     @Override
     public String getRule() {
-        return "Ninjutsu " + getManaCostsToPay().getText()+ " <i>(" + getManaCostsToPay().getText() +" Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>";
+        return new StringBuilder("Ninjutsu ").append(getManaCostsToPay().getText()).append(" <i>(")
+                .append(getManaCostsToPay().getText())
+                .append(" Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>").toString();
     }
 }
 
