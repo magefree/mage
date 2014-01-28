@@ -142,28 +142,12 @@ class OdricMasterTacticianEffect extends ReplacementEffectImpl<OdricMasterTactic
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(source.getControllerId());
-        //20101001 - 509.1c
-        game.getCombat().checkBlockRequirementsBefore(player, game);
-        for (UUID defenderId : game.getCombat().getPlayerDefenders(game)) {
-            boolean choose = true;
-            while (choose) {
-                game.getPlayer(source.getControllerId()).selectBlockers(game, defenderId);
-                if (game.isPaused() || game.isGameOver()) {
-                    return true;
-                }
-                if (!game.getCombat().checkBlockRestrictions(game.getPlayer(defenderId), game)) {
-                        // only human player can decide to do the block in another way
-                        if (player.isHuman()) {
-                            continue;
-                        }
-                }
-                choose = !game.getCombat().checkBlockRequirementsAfter(game.getPlayer(defenderId), player, game);
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
+        Player blockController = game.getPlayer(source.getControllerId());
+        if (blockController != null) {
+            game.getCombat().selectBlockers(blockController, game);
+            return true;
         }
-
-        return true;
+        return false;
     }
 
     @Override

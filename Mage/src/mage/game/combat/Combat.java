@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.game.combat;
 
 import java.io.Serializable;
@@ -57,7 +56,6 @@ import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.trace.TraceUtil;
 
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -80,7 +78,6 @@ public class Combat implements Serializable, Copyable<Combat> {
     // which creature is forced to attack which defender(s). If set is empty, the creature can attack every possible defender
     private final Map<UUID, Set<UUID>> creaturesForcedToAttack = new HashMap<UUID, Set<UUID>>();
     private int maxAttackers = Integer.MIN_VALUE;
-
 
     public Combat() {
         this.useToughnessForDamage = false;
@@ -163,8 +160,8 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     /**
-     * Add an additional attacker to the combat (e.g. token of Geist of Saint Traft)
-     * This method doesn't trigger ATTACKER_DECLARED event (as intended).
+     * Add an additional attacker to the combat (e.g. token of Geist of Saint
+     * Traft) This method doesn't trigger ATTACKER_DECLARED event (as intended).
      *
      * @param creatureId - creature that shall be added to the combat
      * @param game
@@ -175,8 +172,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (defenders.size() == 1) {
             declareAttacker(creatureId, defenders.iterator().next(), game);
             return true;
-        }
-        else {
+        } else {
             TargetDefender target = new TargetDefender(defenders, creatureId);
             target.setRequired(true);
             player.chooseTarget(Outcome.Damage, target, null, game);
@@ -204,8 +200,8 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public void resumeSelectAttackers(Game game) {
         Player player = game.getPlayer(attackerId);
-        for (CombatGroup group: groups) {
-            for (UUID attacker: group.getAttackers()) {
+        for (CombatGroup group : groups) {
+            for (UUID attacker : group.getAttackers()) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackerId));
             }
         }
@@ -217,14 +213,14 @@ public class Combat implements Serializable, Copyable<Combat> {
         //20101001 - 508.1d
         for (Permanent creature : player.getAvailableAttackers(game)) {
             boolean mustAttack = false;
-            Set <UUID> defendersForcedToAttack = new HashSet<UUID>();
+            Set<UUID> defendersForcedToAttack = new HashSet<UUID>();
             for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
-                RequirementEffect effect = (RequirementEffect)entry.getKey();
+                RequirementEffect effect = (RequirementEffect) entry.getKey();
                 if (effect.mustAttack(game)) {
                     mustAttack = true;
-                    for (Ability ability: (HashSet<Ability>)entry.getValue()) {
+                    for (Ability ability : (HashSet<Ability>) entry.getValue()) {
                         UUID defenderId = effect.mustAttackDefender(ability, game);
-                        if(defenderId != null) {
+                        if (defenderId != null) {
                             defendersForcedToAttack.add(defenderId);
                         }
                         break;
@@ -232,7 +228,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
             if (mustAttack) {
-                creaturesForcedToAttack.put(creature.getId(),defendersForcedToAttack);
+                creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
                 if (defendersForcedToAttack.isEmpty()) {
                     if (defenders.size() == 1) {
                         player.declareAttacker(creature.getId(), defenders.iterator().next(), game);
@@ -245,7 +241,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                 } else {
                     player.declareAttacker(creature.getId(), defendersForcedToAttack.iterator().next(), game);
-                }                
+                }
             }
 
         }
@@ -253,16 +249,16 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     protected void checkAttackRestrictions(Player player, Game game) {
         int count = 0;
-        for (CombatGroup group: groups) {
+        for (CombatGroup group : groups) {
             count += group.getAttackers().size();
         }
 
         if (count > 1) {
             List<UUID> tobeRemoved = new ArrayList<UUID>();
-            for (CombatGroup group: groups) {
-                for (UUID attackingCreatureId: group.getAttackers()) {
+            for (CombatGroup group : groups) {
+                for (UUID attackingCreatureId : group.getAttackers()) {
                     Permanent attacker = game.getPermanent(attackingCreatureId);
-                    if (count >1 && attacker != null && attacker.getAbilities().containsKey(CanAttackOnlyAloneAbility.getInstance().getId())) {
+                    if (count > 1 && attacker != null && attacker.getAbilities().containsKey(CanAttackOnlyAloneAbility.getInstance().getId())) {
                         game.informPlayers(attacker.getName() + " can only attack alone. Removing it from combat.");
                         tobeRemoved.add(attackingCreatureId);
                         count--;
@@ -276,8 +272,8 @@ public class Combat implements Serializable, Copyable<Combat> {
 
         if (count == 1) {
             List<UUID> tobeRemoved = new ArrayList<UUID>();
-            for (CombatGroup group: groups) {
-                for (UUID attackingCreatureId: group.getAttackers()) {
+            for (CombatGroup group : groups) {
+                for (UUID attackingCreatureId : group.getAttackers()) {
                     Permanent attacker = game.getPermanent(attackingCreatureId);
                     if (attacker != null && attacker.getAbilities().containsKey(CantAttackAloneAbility.getInstance().getId())) {
                         game.informPlayers(attacker.getName() + " can't attack alone. Removing it from combat.");
@@ -295,84 +291,104 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public void selectBlockers(Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, attackerId, attackerId))) {
+            game.getCombat().selectBlockers(null, game);
+        }
+    }
 
-            // !! Attention: Changes to this block must be also done in card "OdricMaster Tactician".
-            Player player = game.getPlayer(attackerId);
-            //20101001 - 509.1c
-            checkBlockRequirementsBefore(player, game);
-            for (UUID defenderId : getPlayerDefenders(game)) {
+    /**
+     * Handle the blocker selection process
+     * 
+     * @param blockController player that controlls how to block, if null the defender is the controller
+     * @param game
+     */
+    public void selectBlockers(Player blockController, Game game) {
+        Player attacker = game.getPlayer(attackerId);
+        //20101001 - 509.1c
+        this.checkBlockRequirementsBefore(attacker, game);
+        for (UUID defenderId : getPlayerDefenders(game)) {
+            Player defender = game.getPlayer(defenderId);
+            if (defender != null) {
                 boolean choose = true;
-                Player defender = game.getPlayer(defenderId);
+                if (blockController == null) {
+                    blockController = defender;
+                }
                 while (choose) {
-                    game.getPlayer(defenderId).selectBlockers(game, defenderId);
+                    blockController.selectBlockers(game, defenderId);
                     if (game.isPaused() || game.isGameOver()) {
                         return;
                     }
-                    if (!checkBlockRestrictions(game.getPlayer(defenderId), game)) {
-                        // only human player can decide to do the block in another way
-                        if (defender.isHuman()) {
+                    if (!this.checkBlockRestrictions(defender, game)) {
+                        if (blockController.isHuman()) { // only human player can decide to do the block in another way
                             continue;
                         }
                     }
-                    
-                    choose = !checkBlockRequirementsAfter(defender, defender, game);
+                    choose = !this.checkBlockRequirementsAfter(defender, blockController, game);
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
 
                 // add info about attacker blocked by blocker to the game log
-                boolean shownDefendingPlayer = false;
-                for (CombatGroup group :this.getGroups()) {
-                    if (group.defendingPlayerId.equals(defenderId)) {
-                        if (!shownDefendingPlayer && defender != null) {
-                            game.informPlayers(new StringBuilder("Attacked player: ").append(defender.getName()).toString());
-                            shownDefendingPlayer = true;
-                        }
-                        StringBuilder sb = new StringBuilder();
-                        for(UUID attackingCreatureId : group.getAttackers()) {
-                            Permanent attackingCreature = game.getPermanent(attackingCreatureId);
-                            if (attackingCreature != null) {
-                                sb.append(attackingCreature.getName()).append(" (");
-                                sb.append(attackingCreature.getPower().getValue()).append("/").append(attackingCreature.getToughness().getValue()).append(") ");
-                            } else {
-                                // creature left battlefield
-                                attackingCreature = (Permanent) game.getLastKnownInformation(attackingCreatureId, Zone.BATTLEFIELD);
-                                if (attackingCreature != null) {
-                                    sb.append(attackingCreature.getName()).append(" [left battlefield)] ");
-                                }
-                            }
-                        }
-                        if (group.getBlockers().size() > 0) {
-                            sb.append("blocked by ");
-                            for(UUID blockingCreatureId : group.getBlockers()) {
-                                Permanent blockingCreature = game.getPermanent(blockingCreatureId);
-                                if (blockingCreature != null) {
-                                    sb.append(blockingCreature.getName()).append(" (");
-                                    sb.append(blockingCreature.getPower().getValue()).append("/").append(blockingCreature.getToughness().getValue()).append(") ");
-                                }
-                            }
+                this.logBlockerInfo(defender, game);
+            }
+        }
+        // tool to catch the bug about flyers blocked by non flyers or intimidate blocked by creatures with other colors
+        TraceUtil.traceCombatIfNeeded(game, this);
+    }
 
-                        } else{
-                            sb.append("unblocked");
+    /**
+     * Add info about attacker blocked by blocker to the game log
+     *
+     */
+    private void logBlockerInfo(Player defender, Game game) {
+        boolean shownDefendingPlayer = false;
+        for (CombatGroup group : this.getGroups()) {
+            if (group.defendingPlayerId.equals(defender.getId())) {
+                if (!shownDefendingPlayer) {
+                    game.informPlayers(new StringBuilder("Attacked player: ").append(defender.getName()).toString());
+                    shownDefendingPlayer = true;
+                }
+                StringBuilder sb = new StringBuilder();
+                for (UUID attackingCreatureId : group.getAttackers()) {
+                    Permanent attackingCreature = game.getPermanent(attackingCreatureId);
+                    if (attackingCreature != null) {
+                        sb.append(attackingCreature.getName()).append(" (");
+                        sb.append(attackingCreature.getPower().getValue()).append("/").append(attackingCreature.getToughness().getValue()).append(") ");
+                    } else {
+                        // creature left battlefield
+                        attackingCreature = (Permanent) game.getLastKnownInformation(attackingCreatureId, Zone.BATTLEFIELD);
+                        if (attackingCreature != null) {
+                            sb.append(attackingCreature.getName()).append(" [left battlefield)] ");
                         }
-                        game.informPlayers(sb.toString());
                     }
                 }
+                if (group.getBlockers().size() > 0) {
+                    sb.append("blocked by ");
+                    for (UUID blockingCreatureId : group.getBlockers()) {
+                        Permanent blockingCreature = game.getPermanent(blockingCreatureId);
+                        if (blockingCreature != null) {
+                            sb.append(blockingCreature.getName()).append(" (");
+                            sb.append(blockingCreature.getPower().getValue()).append("/").append(blockingCreature.getToughness().getValue()).append(") ");
+                        }
+                    }
 
+                } else {
+                    sb.append("unblocked");
+                }
+                game.informPlayers(sb.toString());
             }
-            TraceUtil.traceCombatIfNeeded(game, this);
         }
     }
 
-/**
- * Check the block restrictions
- * @param player
- * @param game
- * @return false - if block restrictions were not complied
- */
+    /**
+     * Check the block restrictions
+     *
+     * @param player
+     * @param game
+     * @return false - if block restrictions were not complied
+     */
     public boolean checkBlockRestrictions(Player player, Game game) {
         int count = 0;
         boolean blockWasLegal = true;
-        for (CombatGroup group: groups) {
+        for (CombatGroup group : groups) {
             count += group.getBlockers().size();
         }
         for (CombatGroup group : groups) {
@@ -410,11 +426,11 @@ public class Combat implements Serializable, Copyable<Combat> {
          * and the requirement, so that's the only option.
          */
         for (Permanent creature : game.getBattlefield().getActivePermanents(filterBlockers, player.getId(), game)) {
-                if (game.getOpponents(attackerId).contains(creature.getControllerId())) {
+            if (game.getOpponents(attackerId).contains(creature.getControllerId())) {
                 for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
-                    RequirementEffect effect = (RequirementEffect)entry.getKey();
+                    RequirementEffect effect = (RequirementEffect) entry.getKey();
                     if (effect.mustBlock(game)) {
-                        for (Ability ability: (HashSet<Ability>)entry.getValue()) {
+                        for (Ability ability : (HashSet<Ability>) entry.getValue()) {
                             UUID attackId = effect.mustBlockAttacker(ability, game);
                             Player defender = game.getPlayer(creature.getControllerId());
                             if (attackId != null && defender != null) {
@@ -451,9 +467,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                 if (creature.getBlocking() > 0) {
                     // get all requirement effects that apply to the creature (ce.g. is able to block attacker)
                     for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
-                        RequirementEffect effect = (RequirementEffect)entry.getKey();
+                        RequirementEffect effect = (RequirementEffect) entry.getKey();
                         // get possible mustBeBlockedByAtLeastOne blocker
-                        for (Ability ability: (HashSet<Ability>)entry.getValue()) {
+                        for (Ability ability : (HashSet<Ability>) entry.getValue()) {
                             UUID toBeBlockedCreature = effect.mustBlockAttackerIfElseUnblocked(ability, game);
                             if (toBeBlockedCreature != null) {
                                 Set<UUID> potentialBlockers;
@@ -468,14 +484,14 @@ public class Combat implements Serializable, Copyable<Combat> {
                         }
                     }
                 }
-                
+
                 // Creature is not blocking yet
                 if (creature.getBlocking() == 0) {
                     // get all requirement effects that apply to the creature
                     for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
-                        RequirementEffect effect = (RequirementEffect)entry.getKey();
+                        RequirementEffect effect = (RequirementEffect) entry.getKey();
                         // get possible mustBeBlockedByAtLeastOne blocker
-                        for (Ability ability: (HashSet<Ability>)entry.getValue()) {
+                        for (Ability ability : (HashSet<Ability>) entry.getValue()) {
                             UUID toBeBlockedCreature = effect.mustBlockAttackerIfElseUnblocked(ability, game);
                             if (toBeBlockedCreature != null) {
                                 Set<UUID> potentialBlockers;
@@ -499,7 +515,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     break;
                                 }
                             }
-                            // is so inform human player or set block for AI player
+                            // if so inform human player or set block for AI player
                             if (mayBlock) {
                                 if (controller.isHuman()) {
                                     game.informPlayer(controller, "Creature should block this turn: " + creature.getName());
@@ -526,7 +542,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
 
         // check attacking creature mustBeBlockedByAtLeastOne
-        for (UUID toBeBlockedCreatureId: mustBeBlockedByAtLeastOne.keySet()) {
+        for (UUID toBeBlockedCreatureId : mustBeBlockedByAtLeastOne.keySet()) {
             for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                 if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(toBeBlockedCreatureId)) {
                     // creature is not blocked but has possible blockers
@@ -592,7 +608,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         // check if creatures are forced to block but do not block at all or block creatures they are not forced to block
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<UUID, Set<UUID>> entry :creaturesForcedToBlockAttackers.entrySet()) {
+        for (Map.Entry<UUID, Set<UUID>> entry : creaturesForcedToBlockAttackers.entrySet()) {
             boolean blockIsValid;
             Permanent creatureForcedToBlock = game.getPermanent(entry.getKey());
             if (creatureForcedToBlock == null) {
@@ -607,7 +623,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 CombatGroups:
                 for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                     if (combatGroup.getBlockers().contains(creatureForcedToBlock.getId())) {
-                        for (UUID forcingAttackerId :combatGroup.getAttackers()) {
+                        for (UUID forcingAttackerId : combatGroup.getAttackers()) {
                             if (entry.getValue().contains(forcingAttackerId)) {
                                 // the creature is blocking a forcing attacker, so the block is ok
                                 blockIsValid = true;
@@ -706,7 +722,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             return false;
         }
 
-        CombatGroup newGroup = new CombatGroup(defenderId, defender != null, defender != null ? defender.getControllerId(): defenderId);
+        CombatGroup newGroup = new CombatGroup(defenderId, defender != null, defender != null ? defender.getControllerId() : defenderId);
         newGroup.attackers.add(attackerId);
         Permanent attacker = game.getPermanent(attackerId);
         if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId())) {
@@ -968,7 +984,6 @@ public class Combat implements Serializable, Copyable<Combat> {
     public int getMaxAttackers() {
         return maxAttackers;
     }
-
 
     @Override
     public Combat copy() {
