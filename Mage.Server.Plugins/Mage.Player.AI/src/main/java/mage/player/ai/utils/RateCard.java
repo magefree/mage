@@ -100,7 +100,7 @@ public class RateCard {
                     if (effect.getOutcome().equals(Outcome.DestroyPermanent)) {
                         for (Target target : ability.getTargets()) {
                             if (target instanceof TargetCreaturePermanent) {
-                                log.info("Found destroyer: " + card.getName());
+                                log.debug("Found destroyer: " + card.getName());
                                 return 1;
                             }
                         }

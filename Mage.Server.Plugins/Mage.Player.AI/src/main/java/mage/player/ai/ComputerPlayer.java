@@ -1617,7 +1617,6 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
      * 3. get card colors as chosen starting from most rated card
      */
     protected List<ColoredManaSymbol> chooseDeckColorsIfPossible() {
-        log.warn(this.getName() + " choose Deck Colors.");
         if (pickedCards.size() > 2) {
             // sort by score and color mana symbol count in descending order
             Collections.sort(pickedCards, new Comparator<PickedCard>() {

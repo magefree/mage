@@ -70,9 +70,9 @@ public abstract class DraftCube {
 
     private static final Logger logger = Logger.getLogger(DraftCube.class);
     
-    private static Random rnd = new Random();
-    private String name;
-    private int boosterSize = 15;
+    private static final Random rnd = new Random();
+    private final String name;
+    private final int boosterSize = 15;
 
     protected List<CardIdentity> cubeCards = new ArrayList<CardIdentity>();
     protected List<CardIdentity> leftCubeCards = new ArrayList<CardIdentity>();
@@ -118,7 +118,7 @@ public abstract class DraftCube {
                         booster.add(cardInfo.getCard());
                         done = true;
                     } else {
-                        logger.error(new StringBuilder(this.getName()).append(" - Card not found: ").append(cardId.getName()).append(":").append(cardId.extension));
+                        logger.warn(new StringBuilder(this.getName()).append(" - Card not found: ").append(cardId.getName()).append(":").append(cardId.extension));
                         notValid++;
                     }
                 } else {

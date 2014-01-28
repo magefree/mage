@@ -55,10 +55,7 @@ class IntimidateEffect extends RestrictionEffect<IntimidateEffect> implements Ma
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(IntimidateAbility.getInstance().getId())) {
-            return true;
-        }
-        return false;
+        return permanent.getAbilities().containsKey(IntimidateAbility.getInstance().getId());
     }
 
     @Override

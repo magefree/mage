@@ -25,13 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.commander;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -69,13 +67,13 @@ public class KaaliaOfTheVast extends CardImpl<KaaliaOfTheVast> {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-		
-		// Flying
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-		
-		// Whenever Kaalia of the Vast attacks an opponent, you may put an Angel, Demon, or Dragon creature card
-		// from your hand onto the battlefield tapped and attacking that opponent.
-		this.addAbility(new KaaliaOfTheVastAttacksAbility());
+
+        // Whenever Kaalia of the Vast attacks an opponent, you may put an Angel, Demon, or Dragon creature card
+        // from your hand onto the battlefield tapped and attacking that opponent.
+        this.addAbility(new KaaliaOfTheVastAttacksAbility());
     }
 
     public KaaliaOfTheVast(final KaaliaOfTheVast card) {
@@ -90,29 +88,29 @@ public class KaaliaOfTheVast extends CardImpl<KaaliaOfTheVast> {
 }
 
 class KaaliaOfTheVastAttacksAbility extends TriggeredAbilityImpl<KaaliaOfTheVastAttacksAbility> {
-    
+
     public KaaliaOfTheVastAttacksAbility() {
         super(Zone.BATTLEFIELD, new KaaliaOfTheVastEffect(), false);
     }
-    
+
     public KaaliaOfTheVastAttacksAbility(final KaaliaOfTheVastAttacksAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
-			Player opponent = game.getPlayer(event.getTargetId());
-			if( opponent != null ) {
-				return true;
-			}
+        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+            Player opponent = game.getPlayer(event.getTargetId());
+            if (opponent != null) {
+                return true;
+            }
         }
         return false;
     }
 
     @Override
     public String getRule() {
-		return "Whenever {this} attacks an opponent, you may put an Angel, Demon, or Dragon creature card from your hand onto the battlefield tapped and attacking that opponent.";
+        return "Whenever {this} attacks an opponent, you may put an Angel, Demon, or Dragon creature card from your hand onto the battlefield tapped and attacking that opponent.";
     }
 
     @Override
@@ -150,8 +148,8 @@ class KaaliaOfTheVastEffect extends OneShotEffect<KaaliaOfTheVastEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, "Put an Angel, Demon, or Dragon creature card from your hand onto the battlefield tapped and attacking?", game)) {
-			return false;
-		}
+            return false;
+        }
         TargetCardInHand target = new TargetCardInHand(filter);
         if (target.canChoose(player.getId(), game) && target.choose(getOutcome(), player.getId(), source.getSourceId(), game)) {
             if (target.getTargets().size() > 0) {
@@ -159,11 +157,15 @@ class KaaliaOfTheVastEffect extends OneShotEffect<KaaliaOfTheVastEffect> {
                 Card card = game.getCard(cardId);
                 if (card != null && game.getCombat() != null) {
                     UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
-                    if(defenderId != null) {
+                    if (defenderId != null) {
                         player.getHand().remove(card);
-                        card.moveToZone(Zone.BATTLEFIELD, source.getId(), game, true);
-                        game.getCombat().declareAttacker(card.getId(), defenderId, game);
-                        return true;
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                        Permanent creature = game.getPermanent(cardId);
+                        if (creature != null) {
+                            game.getCombat().declareAttacker(card.getId(), defenderId, game);
+                            return true;
+                        }
+
                     }
                 }
             }
