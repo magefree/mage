@@ -38,6 +38,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.CanAttackOnlyAloneAbility;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -297,8 +298,9 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     /**
      * Handle the blocker selection process
-     * 
-     * @param blockController player that controlls how to block, if null the defender is the controller
+     *
+     * @param blockController player that controlls how to block, if null the
+     * defender is the controller
      * @param game
      */
     public void selectBlockers(Player blockController, Game game) {
@@ -323,6 +325,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                         }
                     }
                     choose = !this.checkBlockRequirementsAfter(defender, blockController, game);
+                    if (!choose) {
+                        choose = !this.checkBlockRestrictionsAfter(defender, blockController, game);
+                    }
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
 
@@ -465,7 +470,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
                 // Creature is already blocking but not forced to do so
                 if (creature.getBlocking() > 0) {
-                    // get all requirement effects that apply to the creature (ce.g. is able to block attacker)
+                    // get all requirement effects that apply to the creature (e.g. is able to block attacker)
                     for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
                         RequirementEffect effect = (RequirementEffect) entry.getKey();
                         // get possible mustBeBlockedByAtLeastOne blocker
@@ -656,6 +661,46 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         return true;
     }
+
+    /**
+     * Checks the canBeBlockedCheckAfter RestrictionEffect
+     * Is the block still valid after all block decisions are done
+     * 
+     * @param player
+     * @param controller
+     * @param game
+     * @return 
+     */
+    public boolean checkBlockRestrictionsAfter(Player player, Player controller, Game game) {
+        for (UUID attackingCreatureId : this.getAttackers()) {
+            Permanent attackingCreature = game.getPermanent(attackingCreatureId);
+            if (attackingCreature != null) {
+                for (Map.Entry entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
+                    RestrictionEffect effect = (RestrictionEffect) entry.getKey();
+                    for (Ability ability : (HashSet<Ability>) entry.getValue()) {
+                        if (!effect.canBeBlockedCheckAfter(attackingCreature, ability, game)) {
+                            if (controller.isHuman()) {
+                                game.informPlayer(controller, new StringBuilder(attackingCreature.getName()).append(" can't be blocked this way." ).toString());
+                                return false;
+                            } else {
+                                // remove blocking creatures for AI
+                                for (CombatGroup combatGroup: this.getGroups()) {
+                                    if (combatGroup.getAttackers().contains(attackingCreatureId)) {
+                                        for(UUID blockerId :combatGroup.getBlockers()) {
+                                            removeBlocker(blockerId, game);
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }            
+        }
+        return true;
+    }
+    
 
     public void setDefenders(Game game) {
         Set<UUID> opponents = game.getOpponents(attackerId);

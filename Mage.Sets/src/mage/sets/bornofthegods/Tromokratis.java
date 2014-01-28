@@ -44,7 +44,9 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 
 /**
@@ -99,20 +101,29 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect<CantBeBlockedUnless
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return permanent.getId().equals(source.getSourceId());
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getPower().getValue() < attacker.getPower().getValue()) {
-            return false;
+    public boolean canBeBlockedCheckAfter(Permanent attacker, Ability source, Game game) {
+        for (CombatGroup combatGroup: game.getCombat().getGroups()) {
+            if (combatGroup.getAttackers().contains(source.getSourceId())) {                
+                for(UUID blockerId :combatGroup.getBlockers()) {
+                    Permanent blockingCreature = game.getPermanent(blockerId);
+                    if (blockingCreature != null) {
+                        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), blockingCreature.getControllerId(), game)) {
+                            if (!combatGroup.getBlockers().contains(permanent.getId())) {
+                                // not all creatures block Tromokratis
+                                return false;
+                            }
+                        }
+                    }                    
+                }
+            }
         }
         return true;
     }
-
+   
     @Override
     public CantBeBlockedUnlessAllEffect copy() {
         return new CantBeBlockedUnlessAllEffect(this);

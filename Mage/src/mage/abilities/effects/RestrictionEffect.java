@@ -32,40 +32,23 @@ import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends ContinuousEffectImpl<T> {
 
-    private boolean notMoreThanRestriction;
-    private int notMoreThanNumber;
-    private FilterPermanent notMoreThanNumberFilter;
-
     public RestrictionEffect(Duration duration) {
-        this(duration, false, 0, null);
-    }
-
-    public RestrictionEffect(Duration duration, boolean notMoreThanRestriction, int notMoreThanNumber, FilterPermanent notMoreThanNumberFilter) {
         super(duration, Outcome.Detriment);
-        this.effectType = EffectType.RESTRICTION;
-        this.notMoreThanRestriction = notMoreThanRestriction;
-        this.notMoreThanNumber = notMoreThanNumber;
-        this.notMoreThanNumberFilter = notMoreThanNumberFilter;
+        this.effectType = EffectType.RESTRICTION;        
     }
 
     public RestrictionEffect(final RestrictionEffect effect) {
         super(effect);
-        this.notMoreThanRestriction = effect.notMoreThanRestriction;
-        this.notMoreThanNumber = effect.notMoreThanNumber;
-        if (this.notMoreThanNumberFilter != null) {
-            this.notMoreThanNumberFilter = effect.notMoreThanNumberFilter.copy();
-        }
     }
 
     @Override
@@ -74,15 +57,6 @@ public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends 
     }
 
     public abstract boolean applies(Permanent permanent, Ability source, Game game);
-
-
-    /*
-     * only used for the notMoreThanRestrictions, called to check if the effect shall be applied for a player
-     *
-     */ 
-    public boolean appliesNotMoreThan(Player player, Ability source, Game game) {
-        return false;
-    }
 
     public boolean canAttack(Game game) {
         return true;
@@ -96,24 +70,24 @@ public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends 
         return true;
     }
 
+    /**
+     * Called for all attackers after all blocking decisions are made
+     * 
+     * @param attacker
+     * @param source
+     * @param game
+     * @return true = block is ok   fals = block is not valid (human: back to defining blockers, AI: remove blocker)
+     */
+    public boolean canBeBlockedCheckAfter(Permanent attacker, Ability source, Game game) {
+        return true;
+    }
+    
     public boolean canBeUntapped(Permanent permanent, Game game) {
         return true;
     }
 
     public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
         return true;
-    }
-
-    public boolean isNotMoreThanRestriction() {
-        return notMoreThanRestriction;
-    }
-
-    public int getNotMoreThanNumber() {
-        return notMoreThanNumber;
-    }
-
-    public FilterPermanent getNotMoreThanNumberFilter() {
-        return notMoreThanNumberFilter;
     }
     
 }
