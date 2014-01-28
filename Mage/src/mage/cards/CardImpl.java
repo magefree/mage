@@ -306,7 +306,11 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     case PICK:
                         break;
                     default:
-                        logger.fatal(new StringBuilder("Invalid from zone [").append(fromZone).append("] for card [").append(this.getName()).toString());
+                        Card sourceCard = game.getCard(sourceId);
+                        logger.fatal(new StringBuilder("Invalid from zone [").append(fromZone)
+                                .append("] for card [").append(this.getName())
+                                .append("] to zone [").append(toZone)
+                                .append("] source [").append(sourceCard != null ? sourceCard.getName():"null").append("]").toString());
                         break;
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
