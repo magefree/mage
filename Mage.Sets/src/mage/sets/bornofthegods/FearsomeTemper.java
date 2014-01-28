@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByTargetSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
@@ -72,7 +73,7 @@ public class FearsomeTemper extends CardImpl<FearsomeTemper> {
         Effect effect = new BoostEnchantedEffect(2,2, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+2");
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{R}"));
+        Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{R}"));
         grantedAbility.addTarget(new TargetCreaturePermanent());
         effect = new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("and has \"{2}{R}: Target creature can't block this creature this turn");
