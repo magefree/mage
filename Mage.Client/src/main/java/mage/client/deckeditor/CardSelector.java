@@ -40,6 +40,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -86,6 +87,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private final List<Card> cards = new ArrayList<Card>();
     private BigCard bigCard;
     private boolean limited = false;
+    private SortSetting sortSetting;
 
     private final ActionListener searchAction = new ActionListener() {
         @Override
@@ -96,6 +98,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     /** Creates new form CardSelector */
     public CardSelector() {
+        sortSetting = SortSettingBase.getInstance();
         initComponents();
         cardGrid = new CardGrid();
         makeTransparent();
@@ -106,10 +109,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void makeTransparent() {
         this.addComponentListener(this);
         setOpaque(false);
+        
         cardGrid.setOpaque(false);
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
         cbSortBy.setModel(new DefaultComboBoxModel(SortBy.values()));
+        cbSortBy.setSelectedItem(sortSetting.getSortBy());
         jTextFieldSearch.addActionListener(searchAction);
         // make the components more readable
         tbColor.setBackground(new Color(250, 250, 250, 150));
@@ -167,7 +172,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jButtonAddToSideboard.setEnabled(false);
         filterCards();
         chkPiles.setSelected(true);
-        this.currentView.drawCards(SortSettingBase.getInstance(), chkPiles.isSelected());
+        this.currentView.drawCards(sortSetting, chkPiles.isSelected());
     }
 
     public void loadSideboard(List<Card> sideboard, BigCard bigCard) {
@@ -328,7 +333,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             if (currentView instanceof CardGrid && filteredCards.size() > CardGrid.MAX_IMAGES) {
                 this.toggleViewMode();
             }
-            this.currentView.loadCards(new CardsView(filteredCards), SortSettingBase.getInstance(), chkPiles.isSelected(), bigCard, null, false);
+            this.currentView.loadCards(new CardsView(filteredCards), sortSetting, chkPiles.isSelected(), bigCard, null, false);
             this.cardCount.setText(String.valueOf(filteredCards.size()));
         }
         finally {
@@ -844,14 +849,18 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            SortSettingBase.getInstance().setSortBy((SortBy) cbSortBy.getSelectedItem());
-            this.currentView.drawCards(SortSettingBase.getInstance(), chkPiles.isSelected());
+            if (this.currentView != null) {
+                sortSetting.setSortBy((SortBy) cbSortBy.getSelectedItem());
+                this.currentView.drawCards(sortSetting, chkPiles.isSelected());
+            }
         }
     }//GEN-LAST:event_cbSortByActionPerformed
 
     private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(SortSettingBase.getInstance(), chkPiles.isSelected());
+            if (this.currentView != null) {
+                this.currentView.drawCards(sortSetting, chkPiles.isSelected());
+            }
         }
     }//GEN-LAST:event_chkPilesActionPerformed
 
@@ -1012,28 +1021,28 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     @Override
     public void componentResized(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(SortSettingBase.getInstance(), chkPiles.isSelected());
+            this.currentView.drawCards(sortSetting, chkPiles.isSelected());
         }
     }
 
     @Override
     public void componentMoved(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(SortSettingBase.getInstance(), chkPiles.isSelected());
+            this.currentView.drawCards(sortSetting, chkPiles.isSelected());
         }
     }
 
     @Override
     public void componentShown(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(SortSettingBase.getInstance(), chkPiles.isSelected());
+            this.currentView.drawCards(sortSetting, chkPiles.isSelected());
         }
     }
 
     @Override
     public void componentHidden(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(SortSettingBase.getInstance(), chkPiles.isSelected());
+            this.currentView.drawCards(sortSetting, chkPiles.isSelected());
         }
     }
 
