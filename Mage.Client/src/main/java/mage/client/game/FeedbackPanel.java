@@ -222,7 +222,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         logger.debug("feedback - clear");
     }
 
-    public void customInitComponents() {
+    private void customInitComponents() {
         btnRight = new javax.swing.JButton();
         btnLeft = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();

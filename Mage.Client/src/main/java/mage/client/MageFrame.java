@@ -147,9 +147,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static Session session;
     private ConnectDialog connectDialog;
-    private ErrorDialog errorDialog;
+    private final ErrorDialog errorDialog;
     private static CallbackClient callbackClient;
-    private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
+    private static final Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
     private static final MageVersion version = new MageVersion(1, 3, 0, "");
@@ -159,13 +159,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     //TODO: make gray theme, implement theme selector in preferences dialog
     private static boolean grayMode = false;
 
-    private static Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
-    private static Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
-    private static Map<UUID, DraftPanel> drafts = new HashMap<UUID, DraftPanel>();
-    private static Map<UUID, TournamentPanel> tournaments = new HashMap<UUID, TournamentPanel>();
-    private static MageUI ui = new MageUI();
+    private static final Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
+    private static final Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
+    private static final Map<UUID, DraftPanel> drafts = new HashMap<UUID, DraftPanel>();
+    private static final Map<UUID, TournamentPanel> tournaments = new HashMap<UUID, TournamentPanel>();
+    private static final MageUI ui = new MageUI();
 
-    private static ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
 
     private static long startTime;
 
@@ -579,6 +579,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         return topmost;
     }
 
+    /** 
+     * Shows a game for a player of the game
+     * 
+     * @param gameId
+     * @param playerId 
+     */
     public void showGame(UUID gameId, UUID playerId) {
         try {
             GamePane gamePane = new GamePane();
@@ -1133,13 +1139,18 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         chats.remove(chatId);
     }
 
+    public static void addGame(UUID gameId, GamePanel gamePanel) {
+        games.put(gameId, gamePanel);
+    }
+
     public static GamePanel getGame(UUID gameId) {
         return games.get(gameId);
     }
 
-    public static void addGame(UUID gameId, GamePanel gamePanel) {
-        games.put(gameId, gamePanel);
+    public static void removeGame(UUID gameId) {
+        games.remove(gameId);
     }
+    
 
     public static DraftPanel getDraft(UUID draftId) {
         return drafts.get(draftId);
@@ -1230,7 +1241,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 }
 
 class MagePaneMenuItem extends JCheckBoxMenuItem {
-    private MagePane frame;
+    private final MagePane frame;
 
     public MagePaneMenuItem(MagePane frame) {
         super(frame.getTitle());

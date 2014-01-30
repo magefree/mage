@@ -34,10 +34,13 @@
 
 package mage.client.game;
 
+import java.beans.PropertyVetoException;
 import mage.client.*;
 
 import javax.swing.*;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -65,7 +68,13 @@ public class GamePane extends MagePane {
     }
 
     public void hideGame() {
-        gamePanel.hideGame();
+        try {
+            gamePanel.hideGame();
+            this.setClosed(true);            
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(GamePane.class.getName()).log(Level.SEVERE, "GamePane could not be closed", ex);
+            this.dispose();
+        }
     }
 
     public void watchGame(UUID gameId) {

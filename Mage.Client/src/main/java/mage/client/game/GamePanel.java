@@ -73,16 +73,16 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class);
     private static final String YOUR_HAND = "Your hand";
-	private static final int X_PHASE_WIDTH = 55;
-    private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
-    private Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
-    private Map<String, ShowCardsDialog> revealed = new HashMap<String, ShowCardsDialog>();
-    private Map<String, ShowCardsDialog> lookedAt = new HashMap<String, ShowCardsDialog>();
+    private static final int X_PHASE_WIDTH = 55;
+    private final Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
+    private final Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
+    private final Map<String, ShowCardsDialog> revealed = new HashMap<String, ShowCardsDialog>();
+    private final Map<String, ShowCardsDialog> lookedAt = new HashMap<String, ShowCardsDialog>();
     private UUID gameId;
     private UUID playerId;
     private Session session;
     private ReplayTask replayTask;
-    private PickNumberDialog pickNumber;
+    private final PickNumberDialog pickNumber;
     private JLayeredPane jLayeredPane;
     private String chosenHandKey = "You";
     private boolean smallMode = false;
@@ -157,12 +157,17 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void cleanUp() {
+        MageFrame.removeGame(gameId);
         saveDividerLocations();
         this.gameChatPanel.disconnect();
         this.players.clear();
-        logger.debug("players clear.");
         this.pnlBattlefield.removeAll();
-        pickNumber.hideDialog();
+        
+        this.getUI().uninstallUI(this);
+        
+        if (pickNumber != null) {
+            pickNumber.removeDialog();
+        }
         for (ExileZoneDialog exile: exiles.values()) {
             exile.hideDialog();
         }
@@ -174,7 +179,7 @@ public final class GamePanel extends javax.swing.JPanel {
             popupContainer.setVisible(false);
         } catch (InterruptedException ex) {
             logger.fatal("popupContainer error:", ex);
-        }
+        }        
     }
 
     private void saveDividerLocations() {
@@ -315,6 +320,9 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Closes the game and it's resources
+     */
     public void hideGame() {
         cleanUp();
         Component c = this.getParent();
