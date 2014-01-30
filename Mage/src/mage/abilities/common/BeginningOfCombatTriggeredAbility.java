@@ -49,7 +49,7 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl<Begi
                     }
                     return yours;
                 case OPPONENT:
-                    if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+                    if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
                         if (setTargetPointer) {
                             for (Effect effect : this.getEffects()) {
                                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));

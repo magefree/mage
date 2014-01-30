@@ -55,7 +55,7 @@ public class BloodthirstWatcher extends WatcherImpl<BloodthirstWatcher> {
             return;
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-            if (game.getOpponents(this.controllerId).contains(damageEvent.getPlayerId())) {
+            if (game.getPlayer(this.getControllerId()).hasOpponent(damageEvent.getPlayerId(), game)) {
                 condition = true;
             }
         }

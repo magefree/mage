@@ -61,7 +61,8 @@ public class OwnerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>>
                 }
                 break;
             case OPPONENT:
-                if (game.getOpponents(playerId).contains(card.getOwnerId())) {
+                if (!card.getOwnerId().equals(playerId) &&
+                        game.getPlayer(playerId).hasOpponent(card.getOwnerId(), game)) {
                     return true;
                 }
                 break;

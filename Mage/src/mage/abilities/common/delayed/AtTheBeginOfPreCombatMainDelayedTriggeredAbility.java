@@ -69,7 +69,7 @@ public class AtTheBeginOfPreCombatMainDelayedTriggeredAbility extends DelayedTri
                     boolean yours = event.getPlayerId().equals(this.controllerId);
                     return yours;
                 case OPPONENT:
-                    if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+                    if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
                         return true;
                     }
                     break;

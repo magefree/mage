@@ -61,7 +61,8 @@ public class PlayerPredicate implements ObjectSourcePlayerPredicate<ObjectSource
                 }
                 break;
             case OPPONENT:
-                if (game.getOpponents(playerId).contains(player.getId())) {
+                if (!player.getId().equals(playerId) &&
+                        game.getPlayer(playerId).hasOpponent(player.getId(), game)) {
                     return true;
                 }
                 break;

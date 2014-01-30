@@ -492,7 +492,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 } else if (source instanceof StackObject) {
                     controllerId = ((StackObject) source).getControllerId();
                 }
-                if (controllerId != null && game.getOpponents(this.playerId).contains(controllerId) &&
+                if (controllerId != null && this.hasOpponent(controllerId, game) &&
                         !game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, game)) {
                     return false;
                 }
@@ -1446,12 +1446,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void resetPassed() {
-        if (!this.loses && !this.hasLeft()) {
-            this.passed = false;
-        }
-        else {
-            this.passed = true;
-        }
+        this.passed = this.loses || this.hasLeft();
     }
 
     @Override
@@ -2093,9 +2088,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         return this.commanderId;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override 
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
@@ -2108,9 +2100,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId) {
         boolean result = false;
@@ -2121,6 +2110,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     .append("onto the Battlefield").toString());
         }
         return result;
+    }
+
+    @Override
+    public boolean hasOpponent(UUID playerToCheckId, Game game) {
+        return game.isOpponent(this, playerToCheckId);
     }
 
     

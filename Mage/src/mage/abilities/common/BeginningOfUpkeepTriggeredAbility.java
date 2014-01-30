@@ -86,7 +86,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                     }
                     return yours;
                 case OPPONENT:
-                    if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+                    if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
                         if (setTargetPointer && getTargets().size() == 0) {
                             for (Effect effect : this.getEffects()) {
                                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));

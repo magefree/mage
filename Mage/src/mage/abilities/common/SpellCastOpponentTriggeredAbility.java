@@ -72,7 +72,7 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl<Spel
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && filter.match(spell, game)) {
                 if (setTargetPointerPlayer) {

@@ -172,7 +172,7 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
                 break;
                 
             case OPPONENT:
-                if(!game.getOpponents(controllerId).contains(playerId)){
+                if (! game.getPlayer(controllerId).hasOpponent(playerId, game)){
                     return false;
                 }
                 break;

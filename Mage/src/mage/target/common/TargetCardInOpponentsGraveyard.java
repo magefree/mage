@@ -37,7 +37,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard<TargetCardInOppon
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getCard(id);
         if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
-            if (game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) {
+            if (game.getPlayer(source.getControllerId()).hasOpponent(card.getOwnerId(), game)) {
                 if (allFromOneOpponent && !targets.isEmpty()) {
                     Card firstCard = game.getCard((UUID)targets.keySet().iterator().next());
                     if (firstCard != null && !card.getOwnerId().equals(firstCard.getOwnerId())) {

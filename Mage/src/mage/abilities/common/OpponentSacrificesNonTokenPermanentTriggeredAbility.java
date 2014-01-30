@@ -49,7 +49,7 @@ public class OpponentSacrificesNonTokenPermanentTriggeredAbility extends Trigger
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-    if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+    if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT && game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             MageObject object = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (object instanceof Permanent && !(object instanceof PermanentToken) ) {
                 for (Effect effect : getEffects()) {

@@ -43,7 +43,7 @@ import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
 public class DamagedPlayerThisTurnPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
 
-    private TargetController controller;
+    private final TargetController controller;
 
     public DamagedPlayerThisTurnPredicate(TargetController controller) {
         this.controller = controller;

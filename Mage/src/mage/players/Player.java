@@ -144,6 +144,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Defines player whose turn this player controls at the moment.
+     * @param game
      * @param playerId
      */
     void controlPlayersTurn(Game game, UUID playerId);
@@ -316,13 +317,15 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * asThough effect to reveal faceDown cards
      *
+     * @param card
+     * @param game
      */
     void revealFaceDownCard(Card card, Game game);
 
     /**
      * Set seconds left to play the game.
      *
-     * @return
+     * @param timeLeft
      */
     void setPriorityTimeLeft(int timeLeft);
 
@@ -344,14 +347,14 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean canJoinTable(Table table);
 
     /**
-     * Get the commanderId of the player
-     * @param card
+     * Set the commanderId of the player
+     * @param commanderId
      */
     void setCommanderId(UUID commanderId);
 
     /**
-     * Set the commanderId of the player
-     * @param card
+     * Get the commanderId of the player
+     * @return 
      */
     UUID getCommanderId();
 
@@ -374,9 +377,16 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @param fromZone
      * @param sourceId
-     * @param game
      * @return
      */
     boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId);
 
+    /**
+     * Checks if the playerToCheckId is from an opponent in range
+     * 
+     * @param playerToCheckId
+     * @param game
+     * @return true if playerToCheckId belongs to an opponent
+     */
+    boolean hasOpponent(UUID playerToCheckId, Game game);
 }
