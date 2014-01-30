@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
+import mage.players.Player;
 
 /**
  *
@@ -82,6 +83,11 @@ public class FreeForAll extends GameImpl<FreeForAll> {
         return opponents;
     }
 
+    @Override
+    public boolean isOpponent(Player player, UUID playerToCheck) {
+       return player.getInRange().contains(playerToCheck);
+    }
+    
     @Override
     public FreeForAll copy() {
         return new FreeForAll(this);

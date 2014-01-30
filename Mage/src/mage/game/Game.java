@@ -93,7 +93,24 @@ public interface Game extends MageItem, Serializable {
     Player getPlayer(UUID playerId);
     Players getPlayers();
     PlayerList getPlayerList();
+    
+    /**
+     * Returns a Set of opponents in range for the given playerId
+     * 
+     * @param playerId
+     * @return 
+     */
     Set<UUID> getOpponents(UUID playerId);
+    
+    /**
+     * Checks if the given playerToCheckId is an opponent of player
+     * 
+     * @param player 
+     * @param playerToCheckId
+     * @return 
+     */
+    boolean isOpponent(Player player, UUID playerToCheckId);
+    
     Turn getTurn();
     Phase getPhase();
     Step getStep();

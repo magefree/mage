@@ -51,13 +51,12 @@ import mage.filter.FilterCard;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.watchers.Watcher;
 import mage.watchers.common.CommanderCombatDamageWatcher;
 
 public abstract class GameCommanderImpl extends GameImpl<GameCommanderImpl> {
 
     private final Map<UUID, Cards> mulliganedCards = new HashMap<UUID, Cards>();
-    private Set<CommanderCombatDamageWatcher> commanderCombatWatcher = new HashSet<CommanderCombatDamageWatcher>();
+    private final Set<CommanderCombatDamageWatcher> commanderCombatWatcher = new HashSet<CommanderCombatDamageWatcher>();
 
     public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
         super(attackOption, range, freeMulligans);
@@ -214,6 +213,11 @@ public abstract class GameCommanderImpl extends GameImpl<GameCommanderImpl> {
         return opponents;
     }
 
+    @Override
+    public boolean isOpponent(Player player, UUID playerToCheck) {
+       return !player.getId().equals(playerToCheck);
+    }
+    
     @Override
     public void leave(UUID playerId) {
         super.leave(playerId);

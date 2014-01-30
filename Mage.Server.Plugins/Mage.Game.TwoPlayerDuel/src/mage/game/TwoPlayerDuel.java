@@ -36,6 +36,7 @@ import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
 import mage.game.turn.TurnMod;
+import mage.players.Player;
 
 public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
 
@@ -84,6 +85,11 @@ public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
         return opponents;
     }
 
+    @Override
+    public boolean isOpponent(Player player, UUID playerToCheck) {
+       return !player.getId().equals(playerToCheck);
+    }
+    
     @Override
     public TwoPlayerDuel copy() {
         return new TwoPlayerDuel(this);
