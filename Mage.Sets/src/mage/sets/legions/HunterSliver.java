@@ -76,8 +76,8 @@ public class HunterSliver extends CardImpl<HunterSliver> {
 }
 
 class ProvokeEffect extends RequirementEffect<ProvokeEffect> {
-    
-     public ProvokeEffect() {
+
+    public ProvokeEffect() {
         this(Duration.EndOfTurn);
     }
 
@@ -94,16 +94,15 @@ class ProvokeEffect extends RequirementEffect<ProvokeEffect> {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(targetPointer.getFirst(game, source))) {
             Permanent blocker = game.getPermanent(source.getFirstTarget());
-            if (blocker != null && blocker.isTapped()){
+            if (blocker != null && blocker.isTapped()) {
                 blocker.untap(game);
-            if (blocker.canBlock(source.getSourceId(), game)) {
-                return true;
+                if (blocker.canBlock(source.getSourceId(), game)) {
+                    return true;
+                }
             }
-        }
         }
         return false;
     }
-        
 
     @Override
     public boolean mustAttack(Game game) {

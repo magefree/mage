@@ -760,7 +760,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
                 return false;
             }
             if (abilities.containsKey(HexproofAbility.getInstance().getId())) {
-                if (game.getOpponents(controllerId).contains(sourceControllerId) &&
+                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game) &&
                         !game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, game)) {
                     return false;
                 }
@@ -885,29 +885,31 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             return false;
         }
         Permanent attacker = game.getPermanent(attackerId);
-        // controller of attacking permanent must be an opponent
-        if (game.getOpponents(this.getControllerId()) != null && !game.getOpponents(this.getControllerId()).contains(attacker.getControllerId())) {
+        if (attacker == null) {
+            return false;
+        }
+        // controller of attacking permanent must be an opponent  
+        if (!game.getPlayer(this.getControllerId()).hasOpponent(attacker.getControllerId(), game)) {
             return false;
         }
         //20101001 - 509.1b
-        for (Map.Entry entry: game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
-            RestrictionEffect effect = (RestrictionEffect)entry.getKey();
-            for (Ability ability : (HashSet<Ability>) entry.getValue()) {
-                if (!effect.canBlock(attacker, this, ability, game)) {
+        // check blocker restrictions
+        for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry: game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+            for (Ability ability : entry.getValue()) {
+                if (!entry.getKey().canBlock(attacker, this, ability, game)) {
                     return false;
                 }
             }
         }
         // check also attacker's restriction effects
-        for (Map.Entry entry: game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
-            RestrictionEffect effect = (RestrictionEffect)entry.getKey();
-            for (Ability ability : (HashSet<Ability>) entry.getValue()) {
-                if (!effect.canBeBlocked(attacker, this, ability, game)) {
+        for (Map.Entry<RestrictionEffect, HashSet<Ability>> restrictionEntry: game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
+            for (Ability ability : restrictionEntry.getValue()) {
+                if (!restrictionEntry.getKey().canBeBlocked(attacker, this, ability, game)) {
                     return false;
                 }
             }
         }
-        return attacker == null || !attacker.hasProtectionFrom(this, game);
+        return !attacker.hasProtectionFrom(this, game);
     }
 
     @Override

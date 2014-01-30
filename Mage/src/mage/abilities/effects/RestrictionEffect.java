@@ -76,7 +76,7 @@ public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends 
      * @param attacker
      * @param source
      * @param game
-     * @return true = block is ok   fals = block is not valid (human: back to defining blockers, AI: remove blocker)
+     * @return true = block is ok   false = block is not valid (human: back to defining blockers, AI: remove blocker)
      */
     public boolean canBeBlockedCheckAfter(Permanent attacker, Ability source, Game game) {
         return true;

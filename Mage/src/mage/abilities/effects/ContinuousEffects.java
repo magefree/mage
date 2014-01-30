@@ -919,6 +919,9 @@ public class ContinuousEffects implements Serializable {
         return texts;
     }
 
+    public boolean existRequirementEffects() {
+        return !requirementEffects.isEmpty();
+    }
 }
 class TimestampSorter implements Comparator<ContinuousEffect> {
     @Override

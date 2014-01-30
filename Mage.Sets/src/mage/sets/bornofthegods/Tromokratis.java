@@ -27,6 +27,8 @@
  */
 package mage.sets.bornofthegods;
 
+import java.util.HashSet;
+import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,6 +41,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -90,6 +93,8 @@ public class Tromokratis extends CardImpl<Tromokratis> {
 
 class CantBeBlockedUnlessAllEffect extends RestrictionEffect<CantBeBlockedUnlessAllEffect> {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();   
+            
     public CantBeBlockedUnlessAllEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't be blocked unless all creatures defending player controls block it";
@@ -103,6 +108,39 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect<CantBeBlockedUnless
     public boolean applies(Permanent permanent, Ability source, Game game) {
         return permanent.getId().equals(source.getSourceId());
     }
+
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        // check if all creatures of defender are able to block this permanent
+        // permanent.canBlock() can't be uses because of recursive call
+        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, blocker.getControllerId(), game)) {
+            if (permanent.isTapped() && !game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, game)) {
+                return false;
+            }
+            // check blocker restrictions
+            for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry: game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).entrySet()) {
+                for (Ability ability : entry.getValue()) {
+                    if (!entry.getKey().canBlock(attacker, permanent, ability, game)) {
+                        return false;
+                    }
+                }
+            }
+            // check also attacker's restriction effects
+            for (Map.Entry<RestrictionEffect, HashSet<Ability>> restrictionEntry: game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
+                for (Ability ability : restrictionEntry.getValue()) {                    
+                    if (!(restrictionEntry.getKey() instanceof CantBeBlockedUnlessAllEffect) 
+                            && !restrictionEntry.getKey().canBeBlocked(attacker, permanent, ability, game)) {
+                        return false;
+                    }
+                }
+            }
+            if (attacker.hasProtectionFrom(permanent, game)) {
+                return false;
+            }
+        }                
+        return true;
+    }
+
 
     @Override
     public boolean canBeBlockedCheckAfter(Permanent attacker, Ability source, Game game) {
