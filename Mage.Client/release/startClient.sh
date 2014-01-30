@@ -1,3 +1,3 @@
 #!/bin/sh
 
-java -jar ./lib/mage-client-${project.version}.jar -Xms256M -Xmx1024M -XX:MaxPermSize=256M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled &
+java -Xms1024m -Xmx1024m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -jar ./lib/mage-client-${project.version}.jar &
