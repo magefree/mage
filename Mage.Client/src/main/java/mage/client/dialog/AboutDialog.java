@@ -26,15 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
+package mage.client.dialog;
+
+import mage.utils.MageVersion;
+
 /*
  * AboutDialog.java
  *
  * Created on Mar 10, 2010, 8:19:41 AM
  */
 
-package mage.client.dialog;
 
-import mage.utils.MageVersion;
 
 /**
  *
@@ -44,8 +46,9 @@ public class AboutDialog extends MageDialog {
 
     /** Creates new form AboutDialog */
     public AboutDialog() {
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
-        this.modal = false;
+        // this.modal = false;
     }
 
     public void showDialog(MageVersion version) {
@@ -87,7 +90,7 @@ public class AboutDialog extends MageDialog {
 
         jLabel3.setText("Devs: BetaSteward, Noxx, Eugen.Rivniy, North, LevelX2, Jeff, Plopman. ");
 
-        jLabel4.setText("Thanks: maurer.it, Rafbill, Alvin, cbt33.");
+        jLabel4.setText("Thanks: maurer.it, Rafbill, Alvin, cbt33, Quercitron.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,7 +122,7 @@ public class AboutDialog extends MageDialog {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(btnOk)
                 .addContainerGap())
         );
@@ -128,7 +131,9 @@ public class AboutDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        this.hideDialog();
+
+
+        this.removeDialog();
     }//GEN-LAST:event_btnOkActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

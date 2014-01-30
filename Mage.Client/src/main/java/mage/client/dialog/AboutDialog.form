@@ -53,7 +53,7 @@
               <Component id="jLabel3" min="-2" pref="21" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
               <Component id="btnOk" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -91,7 +91,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Thanks: maurer.it, Rafbill, Alvin, cbt33."/>
+        <Property name="text" type="java.lang.String" value="Thanks: maurer.it, Rafbill, Alvin, cbt33, Quercitron."/>
       </Properties>
     </Component>
   </SubComponents>

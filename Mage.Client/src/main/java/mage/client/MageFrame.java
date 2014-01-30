@@ -1122,6 +1122,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         chats.put(chatId, chatPanel);
     }
 
+    public static void removeChat(UUID chatId) {
+        chats.remove(chatId);
+    }
+
     public static GamePanel getGame(UUID gameId) {
         return games.get(gameId);
     }

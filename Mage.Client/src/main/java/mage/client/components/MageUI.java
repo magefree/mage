@@ -1,15 +1,14 @@
 package mage.client.components;
 
 import java.awt.Component;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
-
 import javax.swing.JButton;
 
 public class MageUI {
 
-    private Map<MageComponents, Component> ui = new HashMap<MageComponents, Component>();
-    private Map<MageComponents, Object> sync = new HashMap<MageComponents, Object>();
+    private final Map<MageComponents, Component> ui = new EnumMap<MageComponents, Component>(MageComponents.class);
+    private final Map<MageComponents, Object> sync = new EnumMap<MageComponents, Object>(MageComponents.class);
 
     public JButton getButton(MageComponents name) throws InterruptedException {
         //System.out.println("request for " + name);
@@ -67,6 +66,12 @@ public class MageUI {
                     sync.get(name).notifyAll();    
                 }
             }
+        }
+    }
+
+    public void removeButton(MageComponents name) {
+        synchronized (ui) {
+            ui.remove(name);
         }
     }
 

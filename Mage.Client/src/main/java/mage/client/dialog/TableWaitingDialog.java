@@ -139,9 +139,12 @@ public class TableWaitingDialog extends MageDialog {
     }
 
     public void closeDialog() {
-        if (updateTask != null)    updateTask.cancel(true);
+        if (updateTask != null) {
+            updateTask.cancel(true);
+        }
         this.chatPanel.disconnect();
-        this.hideDialog();
+        MageFrame.getUI().removeButton(MageComponents.TABLE_WAITING_START_BUTTON);
+        this.removeDialog();
     }
 
 
@@ -243,11 +246,13 @@ public class TableWaitingDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        closeDialog();
-        if (!isTournament)
+        if (!isTournament) {
             session.startGame(roomId, tableId);
-        else
+        }
+        else {
             session.startTournament(roomId, tableId);
+        }
+        closeDialog();
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

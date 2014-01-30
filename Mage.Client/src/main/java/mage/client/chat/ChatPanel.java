@@ -191,6 +191,7 @@ public class ChatPanel extends javax.swing.JPanel {
     public void disconnect() {
         if (session != null) {
             session.leaveChat(chatId);
+            MageFrame.removeChat(chatId);
         }
     }
 

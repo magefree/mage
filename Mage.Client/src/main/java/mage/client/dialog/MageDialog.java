@@ -39,14 +39,16 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyVetoException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
 import mage.client.MageFrame;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MageDialog extends javax.swing.JInternalFrame {
+    public class MageDialog extends javax.swing.JInternalFrame {
 
     private static final Logger logger = Logger.getLogger(MageDialog.class);
 
@@ -61,8 +63,9 @@ public class MageDialog extends javax.swing.JInternalFrame {
     public void show() {
         super.show();
         this.toFront();
-        if (modal)
+        if (modal) {
             this.setClosable(false);
+        }
         if (this.modal) {
             startModal();
         }
@@ -71,8 +74,9 @@ public class MageDialog extends javax.swing.JInternalFrame {
     @Override
     public void setVisible(boolean value) {
         super.setVisible(value);
-        if (value)
+        if (value) {
             this.toFront();
+        }
         if (modal) {
             this.setClosable(false);
             if (value) {
@@ -159,22 +163,20 @@ public class MageDialog extends javax.swing.JInternalFrame {
     }
 
     public void removeDialog() {
-        this.setVisible(false);
+        setVisible(false);
         MageFrame.getDesktop().remove(this);
+        this.ui.uninstallUI(this);
+        this.dispose();
+        try {
+            this.setSelected(false);
+        } catch (PropertyVetoException ex) {
+            java.util.logging.Logger.getLogger(MageDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void setTitelBarToolTip(final String text) {
         desktopIcon.setToolTipText(text); //tooltip on icon
-        Component[] children = desktopIcon.getComponents();
-//        if (children != null) {
-//            for(int i = 0; i < children.length; i++) {
-//                if (children[i] instanceof JButton){
-//                    ((JButton)children[i]).setToolTipText(text);//tooltip on icon button
-//                    break;
-//                }
-//            }
-//        }
-        children = getComponents();
+        Component[] children = getComponents();
         if (children != null) {
             for(int i = 0; i < children.length; i++) {
                 if (children[i].getClass().getName().equalsIgnoreCase(

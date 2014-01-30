@@ -112,7 +112,10 @@ public class ChatManager {
                 rest = rest.substring(first + 1).trim();
                 User userTo = UserManager.getInstance().findUser(userToName);
                 if (userTo != null) {
-                    chatSessions.get(chatId).broadcastWhisperToUser(user, userTo, rest);
+                    if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo, rest)) {
+                        message += new StringBuilder("\nUser ").append(userToName).append(" not found").toString();
+                        chatSessions.get(chatId).broadcastInfoToUser(user,message);
+                    }
                 } else {
                     message += new StringBuilder("\nUser ").append(userToName).append(" not found").toString();
                     chatSessions.get(chatId).broadcastInfoToUser(user,message);
