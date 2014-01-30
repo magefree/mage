@@ -896,6 +896,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnConnectActionPerformed
 
     public void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
+        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.POPUP_LAYER);
+        for (JInternalFrame window : windows) {
+            if (window instanceof AboutDialog) {
+                // don't open the window twice.
+                return;
+            }
+        }
         AboutDialog aboutDialog = new AboutDialog();
         desktopPane.add(aboutDialog, JLayeredPane.POPUP_LAYER);
         aboutDialog.showDialog(version);

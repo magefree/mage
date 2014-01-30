@@ -48,7 +48,7 @@ public class AboutDialog extends MageDialog {
     public AboutDialog() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
-        // this.modal = false;
+        this.modal = true;
     }
 
     public void showDialog(MageVersion version) {
