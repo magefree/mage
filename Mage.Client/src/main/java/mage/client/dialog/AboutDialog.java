@@ -28,6 +28,7 @@
 
 package mage.client.dialog;
 
+import java.awt.KeyboardFocusManager;
 import mage.utils.MageVersion;
 
 /*
@@ -48,7 +49,7 @@ public class AboutDialog extends MageDialog {
     public AboutDialog() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
-        this.modal = true;
+        this.modal = false;
     }
 
     public void showDialog(MageVersion version) {
@@ -131,8 +132,6 @@ public class AboutDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-
-
         this.removeDialog();
     }//GEN-LAST:event_btnOkActionPerformed
 

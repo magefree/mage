@@ -1,37 +1,36 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 
 /*
  * MageDialog.java
  *
  * Created on 15-Dec-2009, 10:28:27 PM
  */
-
 package mage.client.dialog;
 
 import org.apache.log4j.Logger;
@@ -48,13 +47,15 @@ import mage.client.MageFrame;
  *
  * @author BetaSteward_at_googlemail.com
  */
-    public class MageDialog extends javax.swing.JInternalFrame {
-
+public class MageDialog extends javax.swing.JInternalFrame {
+    
     private static final Logger logger = Logger.getLogger(MageDialog.class);
 
     protected boolean modal = false;
 
-    /** Creates new form MageDialog */
+    /**
+     * Creates new form MageDialog
+     */
     public MageDialog() {
         initComponents();
     }
@@ -163,35 +164,47 @@ import mage.client.MageFrame;
     }
 
     public void removeDialog() {
-        setVisible(false);
-        MageFrame.getDesktop().remove(this);
-        this.ui.uninstallUI(this);
-        this.dispose();
+        // avoid memory leak of javax.swing.plaf.nimbus.NimbusStyle$CacheKey
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+        //this.setVisible(false);
+        // important to set close before removing the JInternalFrame to avoid memory leaks (http://bugs.java.com/view_bug.do?bug_id=7163808)
         try {
-            this.setSelected(false);
+            this.setClosed(true);
         } catch (PropertyVetoException ex) {
-            java.util.logging.Logger.getLogger(MageDialog.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MageDialog.class.getName()).log(Level.SEVERE, "setClosed(false) failed", ex);
+        }
+        MageFrame.getDesktop().remove(this);
+        // this.ui.uninstallUI(this);
+        logger.warn("Remove Dialog " + this.getClass().getName() + " Components left: " + this.getComponentCount());
+        for (Component comp : this.getComponents()) {
+            logger.warn("Existing Component: " + comp.getClass().getName());
         }
     }
 
+    /**
+     * Used to set a tooltip text on icon and titel bar
+     *
+     * used in {@link ExileZoneDialog} and {@link ShowCardsDialog}
+     *
+     * @param text
+     */
     public void setTitelBarToolTip(final String text) {
         desktopIcon.setToolTipText(text); //tooltip on icon
         Component[] children = getComponents();
         if (children != null) {
-            for(int i = 0; i < children.length; i++) {
-                if (children[i].getClass().getName().equalsIgnoreCase(
-                        "javax.swing.plaf.synth.SynthInternalFrameTitlePane")){
-                    ((JComponent)children[i]).setToolTipText(text);//tooltip on title bar
+            for (Component children1 : children) {
+                if (children1.getClass().getName().equalsIgnoreCase("javax.swing.plaf.synth.SynthInternalFrameTitlePane")) {
+                    ((JComponent) children1).setToolTipText(text); //tooltip on title bar
                     break;
                 }
             }
         }
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -214,5 +227,4 @@ import mage.client.MageFrame;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
 }

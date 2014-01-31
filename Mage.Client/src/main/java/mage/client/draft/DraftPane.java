@@ -39,9 +39,11 @@ import mage.client.plugins.impl.Plugins;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyVetoException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.client.MageFrame;
 
 /**
  *
@@ -73,9 +75,16 @@ public class DraftPane extends MagePane {
         this.setTitle("Draft - " + draftId);
         this.draftPanel1.showDraft(draftId);
     }
-
-    public void hideDraft() {
-        draftPanel1.hideDraft();
+   
+    public void hideDraft() {        
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner(); 
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            
+        }
+        this.hideFrame();        
+        MageFrame.getDesktop().remove(this);        
     }
 
     /** This method is called from within the constructor to

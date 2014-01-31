@@ -249,7 +249,7 @@ public final class GamePanel extends javax.swing.JPanel {
         } catch (InterruptedException ex) {
             logger.fatal("popupContainer error:", ex);
         }
-        this.removeAll();
+//        this.removeAll();
     }
 
     private void saveDividerLocations() {

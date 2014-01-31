@@ -77,14 +77,14 @@ public class CallbackClientImpl implements CallbackClient {
 
     @Override
     public synchronized void processCallback(final ClientCallback callback) {
-        logger.info(callback.getMessageId() + " - " + callback.getMethod());
+        logger.debug(callback.getMessageId() + " - " + callback.getMethod());
         SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
         callback.setData(CompressUtil.decompress(callback.getData()));
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    logger.info(callback.getMessageId() + " -- " + callback.getMethod());
+                    logger.debug(callback.getMessageId() + " -- " + callback.getMethod());
                     if (callback.getMethod().equals("startGame")) {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
@@ -269,10 +269,7 @@ public class CallbackClientImpl implements CallbackClient {
                         Deck deck = DeckUtil.construct(deckView);
                         construct(deck, message.getTableId(), message.getTime());
                     } else if (callback.getMethod().equals("draftOver")) {
-                        DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
-                        if (panel != null) {
-                            panel.hideDraft();
-                        }
+                        MageFrame.removeDraft(callback.getObjectId());
                     } else if (callback.getMethod().equals("draftPick")) {
                         DraftClientMessage message = (DraftClientMessage) callback.getData();
                         DraftPanel panel = MageFrame.getDraft(callback.getObjectId());

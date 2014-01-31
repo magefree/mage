@@ -64,7 +64,7 @@ public class DraftPanel extends javax.swing.JPanel {
     private int timeout;
     private boolean picked;
 
-    private static CardsView emptyView = new CardsView();
+    private static final CardsView emptyView = new CardsView();
 
     /** Creates new form DraftPanel */
     public DraftPanel() {
@@ -162,7 +162,7 @@ public class DraftPanel extends javax.swing.JPanel {
             c = c.getParent();
         }
         if (c != null) {
-            ((DraftPane)c).hideFrame();
+            ((DraftPane)c).hideDraft();
         }
     }
 

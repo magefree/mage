@@ -553,7 +553,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public static void deactivate(MagePane frame) {
-        //MusicPlayer.stopBGM();
         frame.setVisible(false);
         MagePane topmost = getTopMost(frame);
         if (activeFrame != frame) {
@@ -623,16 +622,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showDraft(UUID draftId) {
         try {
-            DraftPane draftPane = null;
-            for(Component component :desktopPane.getComponents()) {
-                if (component instanceof DraftPane) {
-                    draftPane = (DraftPane) component;
-                }
-            }
-            if (draftPane == null) {
-                draftPane = new DraftPane();
-                desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
-            }
+            DraftPane draftPane = new DraftPane();
+            desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
             draftPane.setMaximum(true);
             draftPane.setVisible(true);
             draftPane.showDraft(draftId);
@@ -640,7 +631,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         } catch (PropertyVetoException ex) {
         }
     }
-
+    
+    public void endDraft(UUID draftId) {
+        // inform all open draft panes about
+        for (JInternalFrame window : desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER)) {
+            if (window instanceof DraftPane) {
+                DraftPane draftPane = (DraftPane) window;
+                draftPane.hideDraft();
+            }
+        }
+    }
+    
     public void showTournament(UUID tournamentId) {
         try {
             for(Component component :desktopPane.getComponents()) {
@@ -992,6 +993,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             } else {
                 name = "Deck Editor";
             }
+            // use already open editor
             JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
             for (JInternalFrame window : windows) {
                 if (window instanceof DeckEditorPane && window.getTitle().equals(name)) {
@@ -1000,6 +1002,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
             }
         }
+        
         try {
             DeckEditorPane deckEditorPane = new DeckEditorPane();
             desktopPane.add(deckEditorPane, JLayeredPane.DEFAULT_LAYER);
@@ -1154,6 +1157,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public static DraftPanel getDraft(UUID draftId) {
         return drafts.get(draftId);
+    }
+
+    public static void removeDraft(UUID draftId) {
+        DraftPanel draftPanel = drafts.get(draftId);
+        if (draftPanel != null) {
+            drafts.remove(draftId);
+            draftPanel.hideDraft();
+        }        
     }
 
     public static void addDraft(UUID draftId, DraftPanel draftPanel) {

@@ -86,7 +86,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId) {
-        logger.info("text: " + message);
+        logger.debug("text: " + message);
 
         synchronized (this) {
             if (messageId < this.lastMessageId) {
