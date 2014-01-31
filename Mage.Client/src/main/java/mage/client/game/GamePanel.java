@@ -27,6 +27,46 @@
 */
 package mage.client.game;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import javax.swing.AbstractAction;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+import javax.swing.SwingWorker;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
+import mage.cards.Card;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
@@ -36,34 +76,33 @@ import mage.client.components.HoverButton;
 import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.layout.RelativeLayout;
-import mage.client.dialog.*;
+import mage.client.dialog.ExileZoneDialog;
+import mage.client.dialog.PickChoiceDialog;
+import mage.client.dialog.PickNumberDialog;
+import mage.client.dialog.PickPileDialog;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.CardsViewUtil;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.PhaseStep;
 import mage.remote.Session;
-import mage.view.*;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
+import mage.view.ExileView;
+import mage.view.GameView;
+import mage.view.LookedAtView;
+import mage.view.MatchView;
+import mage.view.PlayerView;
+import mage.view.RevealedView;
+import mage.view.SimpleCardsView;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
-
-import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicSplitPaneDivider;
-import javax.swing.plaf.basic.BasicSplitPaneUI;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.Serializable;
-import java.util.*;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import mage.cards.Card;
-import mage.client.util.CardsViewUtil;
-
 
 /**
  *
@@ -105,12 +144,12 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // Override layout (I can't edit generated code)
         this.setLayout(new BorderLayout());
-        final JLayeredPane j = new JLayeredPane();
-        j.setSize(1024, 768);
-        this.add(j);
-        j.add(jSplitPane0, JLayeredPane.DEFAULT_LAYER);
+        final JLayeredPane jLayeredBackgroundPane = new JLayeredPane();
+        jLayeredBackgroundPane.setSize(1024, 768);
+        this.add(jLayeredBackgroundPane);
+        jLayeredBackgroundPane.add(jSplitPane0, JLayeredPane.DEFAULT_LAYER);
 
-        Map<String, JComponent> myUi = getUIComponents(j);
+        Map<String, JComponent> myUi = getUIComponents(jLayeredBackgroundPane);
         Plugins.getInstance().updateGamePanel(myUi);
 
         // Enlarge jlayeredpane on resize
@@ -119,7 +158,7 @@ public final class GamePanel extends javax.swing.JPanel {
             public void componentResized(ComponentEvent e) {
                 int width = ((JComponent) e.getSource()).getWidth();
                 int height = ((JComponent) e.getSource()).getHeight();
-                j.setSize(width, height);
+                jLayeredBackgroundPane.setSize(width, height);
                 jSplitPane0.setSize(width, height);
 
                 if (height < storedHeight) {
@@ -160,12 +199,39 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.removeGame(gameId);
         saveDividerLocations();
         this.gameChatPanel.disconnect();
+
+        for (MouseListener ml :this.getMouseListeners()) {
+            this.removeMouseListener(ml);
+        }
+        for (MouseListener ml :this.btnConcede.getMouseListeners()) {
+            this.btnConcede.removeMouseListener(ml);
+        }
+        for (MouseListener ml :this.btnEndTurn.getMouseListeners()) {
+            this.btnEndTurn.removeMouseListener(ml);
+        }
+        for (MouseListener ml :this.btnSwitchHands.getMouseListeners()) {
+            this.btnSwitchHands.removeMouseListener(ml);
+        }
+
+        for (ActionListener al :this.btnStopWatching.getActionListeners()) {
+            this.btnStopWatching.removeActionListener(al);
+        }
+        for (ActionListener al :this.btnNextPlay.getActionListeners()) {
+            this.btnNextPlay.removeActionListener(al);
+        }
+        for(Map.Entry<UUID, PlayAreaPanel>  playAreaPanelEntry: players.entrySet()) {            
+            playAreaPanelEntry.getValue().CleanUp();
+            // playAreaPanelEntry.getValue().getUI().uninstallUI(playAreaPanelEntry.getValue());
+            // playAreaPanelEntry.getValue().removeAll();
+        }
         this.players.clear();
+        
         this.pnlBattlefield.removeAll();
-        
+
         this.getUI().uninstallUI(this);
-        
+
         if (pickNumber != null) {
+            MageFrame.getDesktop().remove(pickNumber);
             pickNumber.removeDialog();
         }
         for (ExileZoneDialog exile: exiles.values()) {
@@ -174,12 +240,16 @@ public final class GamePanel extends javax.swing.JPanel {
         for (ShowCardsDialog reveal: revealed.values()) {
             reveal.hideDialog();
         }
+        this.jSplitPane0.getUI().uninstallUI(jSplitPane0);
+        this.jSplitPane0.removeAll();
+        
         try {
             Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
             popupContainer.setVisible(false);
         } catch (InterruptedException ex) {
             logger.fatal("popupContainer error:", ex);
-        }        
+        }
+        this.removeAll();
     }
 
     private void saveDividerLocations() {
@@ -324,13 +394,12 @@ public final class GamePanel extends javax.swing.JPanel {
      * Closes the game and it's resources
      */
     public void hideGame() {
-        cleanUp();
         Component c = this.getParent();
         while (c != null && !(c instanceof GamePane)) {
             c = c.getParent();
         }
         if (c != null) {
-            ((GamePane)c).hideFrame();
+            ((GamePane)c).hideGame();
         }
     }
 

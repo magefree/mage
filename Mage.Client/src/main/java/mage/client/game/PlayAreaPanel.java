@@ -40,6 +40,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.UUID;
 
 /**
@@ -76,14 +77,22 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         update(player);
     }
 
+    public void CleanUp() {
+        for (MouseListener ml :battlefieldPanel.getMainPanel().getMouseListeners()) {
+            battlefieldPanel.getMainPanel().removeMouseListener(ml);
+        }        
+        this.removeAll();
+        this.getUI().uninstallUI(this);
+    }
+
     private void addPopupMenu() {
-        final JPopupMenu Pmenu;
+        final JPopupMenu popupMenu;
         JMenuItem menuItem;
 
-        Pmenu = new JPopupMenu();
+        popupMenu = new JPopupMenu();
 
         menuItem = new JMenuItem("F2 - Confirm");
-        Pmenu.add(menuItem);
+        popupMenu.add(menuItem);
 
         // Confirm (F2)
         menuItem.addActionListener(new ActionListener() {
@@ -97,7 +106,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
 
         menuItem = new JMenuItem("F3 - Cancel previous F4/F9 skip action");
-        Pmenu.add(menuItem);
+        popupMenu.add(menuItem);
 
         // Cancel (F3)
         menuItem.addActionListener(new ActionListener() {
@@ -107,10 +116,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        Pmenu.addSeparator();
+        popupMenu.addSeparator();
 
         menuItem = new JMenuItem("F4 - Skip phases until next turn (stop on stack/attack/block)");
-        Pmenu.add(menuItem);
+        popupMenu.add(menuItem);
 
         // Skip to next turn (F4)
         menuItem.addActionListener(new ActionListener() {
@@ -121,7 +130,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         });
 
         menuItem = new JMenuItem("F9 - Skip everything until own next turn (stop on attack/block)");
-        Pmenu.add(menuItem);
+        popupMenu.add(menuItem);
 
         // Skip to next own turn (F9)
         menuItem.addActionListener(new ActionListener() {
@@ -131,10 +140,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        Pmenu.addSeparator();
+        popupMenu.addSeparator();
 
         menuItem = new JMenuItem("Concede game");
-        Pmenu.add(menuItem);
+        popupMenu.add(menuItem);
 
         // Concede
         menuItem.addActionListener(new ActionListener() {
@@ -146,10 +155,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        Pmenu.addSeparator();
+        popupMenu.addSeparator();
 
         menuItem = new JMenuItem("Concede complete match");
-        Pmenu.add(menuItem);
+        popupMenu.add(menuItem);
 
         // Quit match
         menuItem.addActionListener(new ActionListener() {
@@ -170,20 +179,20 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             @Override
             public void mouseReleased(MouseEvent Me) {
                 if (Me.isPopupTrigger() && playingMode) {
-                    Pmenu.show(Me.getComponent(), Me.getX(), Me.getY());
+                    popupMenu.show(Me.getComponent(), Me.getX(), Me.getY());
                 }
             }
         });
     }
 
     private void addPopupMenuWatcher() {
-        final JPopupMenu Pmenu;
+        final JPopupMenu popupMenu;
         JMenuItem menuItem;
 
-        Pmenu = new JPopupMenu();
+        popupMenu = new JPopupMenu();
 
         menuItem = new JMenuItem("Stop watching");
-        Pmenu.add(menuItem);
+        popupMenu.add(menuItem);
 
         // Stop watching
         menuItem.addActionListener(new ActionListener() {
@@ -200,7 +209,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             @Override
             public void mouseReleased(MouseEvent Me) {
                 if (Me.isPopupTrigger() && playingMode) {
-                    Pmenu.show(Me.getComponent(), Me.getX(), Me.getY());
+                    popupMenu.show(Me.getComponent(), Me.getX(), Me.getY());
                 }
             }
         });
