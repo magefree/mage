@@ -1,11 +1,7 @@
 package mage.client.components.ext.dlg;
 
-import mage.client.cards.BigCard;
-import mage.client.game.FeedbackPanel;
-import mage.view.CardsView;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -13,6 +9,10 @@ import java.awt.event.MouseWheelEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import javax.swing.JComponent;
+import mage.client.cards.BigCard;
+import mage.client.game.FeedbackPanel;
+import mage.view.CardsView;
 
 /**
  * @author mw, noxx
@@ -20,8 +20,7 @@ import java.util.UUID;
 public class DialogManager extends JComponent implements MouseListener,
         MouseMotionListener {
 
-    private static Map<UUID, DialogManager> dialogManagers = new HashMap<UUID, DialogManager>();
-    //private static final Logger log = Logger.getLogger(DialogManager.class);
+    private final static Map<UUID, DialogManager> dialogManagers = new HashMap<UUID, DialogManager>();
 
     public static DialogManager getManager(UUID gameId) {
         if (!dialogManagers.containsKey(gameId)) {
@@ -44,6 +43,21 @@ public class DialogManager extends JComponent implements MouseListener,
         ChooseDeckDialog, ChooseCommonDialog, RevealDialog
     }
 
+    /**
+     * Remove the DialogManager of the gameId
+     * 
+     * @param gameId 
+     */
+    public static void removeGame(UUID gameId) {
+        if (!dialogManagers.containsKey(gameId)) {
+            synchronized (dialogManagers) {
+                DialogManager dialogManager = dialogManagers.get(gameId);
+                dialogManager.cleanUp();
+                dialogManagers.remove(gameId);
+            }
+        }
+    }
+
     private MTGDialogs currentDialog = MTGDialogs.none;
 
     private DialogContainer dialogContainer = null;
@@ -62,7 +76,14 @@ public class DialogManager extends JComponent implements MouseListener,
     public DialogManager() {
         addMouseListener(this);
         addMouseMotionListener(this);
-        //addMouseWheelListener(this);
+    }
+
+    public void cleanUp() {
+        this.currentDialog = null;
+        this.dialogContainer = null;
+        this.removeMouseListener(this);
+        this.removeMouseMotionListener(this);
+
     }
 
     public void setScreenWidth(int screen_width) {
@@ -224,6 +245,7 @@ public class DialogManager extends JComponent implements MouseListener,
         validate();
     }
 
+    @Override
     public void mouseDragged(MouseEvent e) {
         if (bDragged == true) {
             dx = e.getX() - mx;
@@ -244,18 +266,23 @@ public class DialogManager extends JComponent implements MouseListener,
         }
     }
 
+    @Override
     public void mouseMoved(MouseEvent e) {
     }
 
+    @Override
     public void mouseClicked(MouseEvent e) {
     }
 
+    @Override
     public void mouseEntered(MouseEvent e) {
     }
 
+    @Override
     public void mouseExited(MouseEvent e) {
     }
 
+    @Override
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
             j = (JComponent) getComponentAt(e.getX(), e.getY());
@@ -269,6 +296,7 @@ public class DialogManager extends JComponent implements MouseListener,
         }
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {
         bDragged = false;
         if (j instanceof DialogManager) {
@@ -279,17 +307,20 @@ public class DialogManager extends JComponent implements MouseListener,
             j.setBounds(rec);
         }
         oldRec = null;
-        if (rec == null)
+        if (rec == null) {
             return;
+        }
         if (rec.x < 0) {
             rec.x = 0;
-            if (j != null)
+            if (j != null) {
                 j.setBounds(rec);
+            }
         }
         if (rec.y < 0) {
             rec.y = 0;
-            if (j != null)
+            if (j != null) {
                 j.setBounds(rec);
+            }
         }
         j = null;
     }

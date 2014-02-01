@@ -42,6 +42,8 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 /**
+ * ************************  U N U S E D   *********************************
+ *
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -50,7 +52,7 @@ public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
     private Session session;
     private UUID gameId;
 
-    public AbilityPicker() {
+    public AbilityPicker(String ThisIsnotUsedAnymore) {
         this.addPopupMenuListener(this);
     }
 
@@ -59,8 +61,14 @@ public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
         this.gameId = gameId;
     }
 
+    public void cleanUp() {
+        this.removePopupMenuListener(this);
+    }
+
     public void show(AbilityPickerView choices, Point p) {
-        if (p == null) return;
+        if (p == null) {
+            return;
+        }
         this.removeAll();
         for (Entry<UUID, String> choice: choices.getChoices().entrySet()) {
             this.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));

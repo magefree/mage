@@ -34,12 +34,9 @@
 
 package mage.client.game;
 
-import java.awt.Component;
 import java.awt.KeyboardFocusManager;
-import java.beans.PropertyVetoException;
 import java.util.UUID;
 import javax.swing.SwingUtilities;
-import mage.client.MageFrame;
 import mage.client.MagePane;
 import mage.client.dialog.MageDialog;
 import org.apache.log4j.Logger;
@@ -72,32 +69,16 @@ public class GamePane extends MagePane {
         gamePanel.showGame(gameId, playerId);
     }
 
-    public void hideGame() {
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner(); 
+    public void cleanUp() {
         gamePanel.cleanUp();
+        this.getInputMap().clear();
+        this.getActionMap().clear();
+    }
 
-        try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-            logger.fatal("Closing Game: setClosed - ", ex);
-        }
-        MageFrame.deactivate(this);
-        MageFrame.getDesktop().remove(this);
-        
-        logger.warn("Remove Dialog " + this.getClass().getName() + " Components left: "+ this.getComponentCount());
-        
-        for (Component comp: this.getComponents()) {
-            logger.warn("Existing Component: " + comp.getClass().getName()); 
-        }
-
-//        this.getUI().uninstallUI(this);
-//        this.removeAll();
-//        this.dispose();
-//            this.setClosed(true);
-//        } catch (PropertyVetoException ex) {
-//            Logger.getLogger(GamePane.class.getName()).log(Level.SEVERE, "GamePane could not be closed", ex);
-//            this.dispose();
-//        }
+    public void hideGame() {
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();       
+        this.cleanUp();
+        this.removeFrame();
     }
 
     public void watchGame(UUID gameId) {

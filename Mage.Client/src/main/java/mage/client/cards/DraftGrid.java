@@ -142,6 +142,9 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
         cardEventSource.clearListeners();
     }
 
+    private void hidePopup() {
+        Plugins.getInstance().getActionCallback().mouseExited(null, null);
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -173,6 +176,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
         Object obj = e.getSource();
         if (obj instanceof MageCard) {
             this.cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "pick-a-card");
+            this.hidePopup();
         }
     }
 

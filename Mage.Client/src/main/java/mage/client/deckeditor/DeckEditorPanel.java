@@ -116,7 +116,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     }
                     setTimeout(0);
                     countdown.stop();
-                    hideDeckEditor();
+                    removeDeckEditor();
                 }
             }
         });
@@ -130,6 +130,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             updateDeckTask.cancel(true);
         }
         if (countdown != null) {
+            if (countdown.isRunning()) {
+                countdown.stop();
+            }
             for (ActionListener al : countdown.getActionListeners()) {
                 countdown.removeActionListener(al);
             }
@@ -153,7 +156,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.txtTimeRemaining.setVisible(true);
             case Sideboard:
                 this.btnSubmit.setVisible(true);
-                this.cardSelector.loadSideboard(new ArrayList<Card>(deck.getSideboard()), this.bigCard);
+                if (deck != null) {
+                    this.cardSelector.loadSideboard(new ArrayList<Card>(deck.getSideboard()), this.bigCard);
+                }
                 // TODO: take from preferences
                 this.cardSelector.switchToGrid();
 
@@ -312,7 +317,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         Plugins.getInstance().getActionCallback().mouseExited(null, null);
     }
 
-    public void hideDeckEditor() {
+    public void removeDeckEditor() {
+        hidePopup();
         this.clear();
 
         Component c = this.getParent();
@@ -320,7 +326,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             c = c.getParent();
         }
         if (c != null) {
-            ((DeckEditorPane) c).hideFrame();
+            ((DeckEditorPane) c).removeFrame();
         }
     }
 
@@ -610,7 +616,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        hideDeckEditor();
+        removeDeckEditor();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
@@ -655,7 +661,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
 
         if (MageFrame.getSession().submitDeck(tableId, deck.getDeckCardLists())) {
-            hideDeckEditor();
+            removeDeckEditor();
         }
     }
 

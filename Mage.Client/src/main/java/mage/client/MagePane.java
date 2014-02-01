@@ -68,6 +68,10 @@ public abstract class MagePane extends javax.swing.JInternalFrame {
     }
 
     public void hideFrame() {
+        MageFrame.deactivate(this);
+    }
+
+    public void removeFrame() {
         KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
         try {
             this.setClosed(true);

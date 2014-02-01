@@ -95,7 +95,9 @@ public class PriorityTimer extends TimerTask {
                 }
             }
         }
-        if (logger.isDebugEnabled()) logger.debug("Count is: " + count);
+        if (logger.isDebugEnabled()) {
+            logger.debug("Count is: " + count);
+        }
         //System.out.println("Count is: " + count);
         if (count <= 0) {
             cancel();

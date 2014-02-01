@@ -39,6 +39,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -199,39 +200,28 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.removeGame(gameId);
         saveDividerLocations();
         this.gameChatPanel.disconnect();
+        this.userChatPanel.disconnect();
 
-        for (MouseListener ml :this.getMouseListeners()) {
-            this.removeMouseListener(ml);
-        }
-        for (MouseListener ml :this.btnConcede.getMouseListeners()) {
-            this.btnConcede.removeMouseListener(ml);
-        }
-        for (MouseListener ml :this.btnEndTurn.getMouseListeners()) {
-            this.btnEndTurn.removeMouseListener(ml);
-        }
-        for (MouseListener ml :this.btnSwitchHands.getMouseListeners()) {
-            this.btnSwitchHands.removeMouseListener(ml);
-        }
+        this.removeListener();
 
-        for (ActionListener al :this.btnStopWatching.getActionListeners()) {
-            this.btnStopWatching.removeActionListener(al);
-        }
-        for (ActionListener al :this.btnNextPlay.getActionListeners()) {
-            this.btnNextPlay.removeActionListener(al);
-        }
         for(Map.Entry<UUID, PlayAreaPanel>  playAreaPanelEntry: players.entrySet()) {            
             playAreaPanelEntry.getValue().CleanUp();
-            // playAreaPanelEntry.getValue().getUI().uninstallUI(playAreaPanelEntry.getValue());
-            // playAreaPanelEntry.getValue().removeAll();
         }
         this.players.clear();
         
-        this.pnlBattlefield.removeAll();
+        jLayeredPane.remove(abilityPicker);
+        this.abilityPicker.cleanUp();
 
-        this.getUI().uninstallUI(this);
+        jLayeredPane.remove(DialogManager.getManager(gameId));
+        DialogManager.removeGame(gameId);
+        
+        this.getInputMap().clear();
+        this.getActionMap().clear();
+
+        // this.pnlBattlefield.removeAll();
+        // this.getUI().uninstallUI(this);
 
         if (pickNumber != null) {
-            MageFrame.getDesktop().remove(pickNumber);
             pickNumber.removeDialog();
         }
         for (ExileZoneDialog exile: exiles.values()) {
@@ -240,16 +230,13 @@ public final class GamePanel extends javax.swing.JPanel {
         for (ShowCardsDialog reveal: revealed.values()) {
             reveal.hideDialog();
         }
-        this.jSplitPane0.getUI().uninstallUI(jSplitPane0);
-        this.jSplitPane0.removeAll();
-        
+
         try {
             Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
             popupContainer.setVisible(false);
         } catch (InterruptedException ex) {
             logger.fatal("popupContainer error:", ex);
         }
-//        this.removeAll();
     }
 
     private void saveDividerLocations() {
@@ -877,8 +864,8 @@ public final class GamePanel extends javax.swing.JPanel {
         });
 
         int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
-        KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0);
 
+        KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0);
         this.getInputMap(c).put(ks, "F4_PRESS");
         this.getActionMap().put("F4_PRESS", new AbstractAction() {
             @Override
@@ -1028,6 +1015,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        // Replay panel to control replay of games
         javax.swing.GroupLayout gl_pnlReplay = new javax.swing.GroupLayout(pnlReplay);
         pnlReplay.setLayout(gl_pnlReplay);
         gl_pnlReplay.setHorizontalGroup(
@@ -1052,6 +1040,7 @@ public final class GamePanel extends javax.swing.JPanel {
             .addComponent(btnPreviousPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
         );
 
+        // Game info panel (buttons on the right panel)
         javax.swing.GroupLayout gl_pnlGameInfo = new javax.swing.GroupLayout(pnlGameInfo);
         pnlGameInfo.setLayout(gl_pnlGameInfo);
         gl_pnlGameInfo.setHorizontalGroup(
@@ -1220,6 +1209,57 @@ public final class GamePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jSplitPane0, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
         );
+    }
+
+    private void removeListener() {
+        for (MouseListener ml :this.getMouseListeners()) {
+            this.removeMouseListener(ml);
+        }
+        for (MouseListener ml :this.btnConcede.getMouseListeners()) {
+            this.btnConcede.removeMouseListener(ml);
+        }
+        for (MouseListener ml :this.btnEndTurn.getMouseListeners()) {
+            this.btnEndTurn.removeMouseListener(ml);
+        }
+        for (MouseListener ml :this.btnSwitchHands.getMouseListeners()) {
+            this.btnSwitchHands.removeMouseListener(ml);
+        }
+        for (ActionListener al :this.btnPlay.getActionListeners()) {
+            this.btnPlay.removeActionListener(al);
+        }
+        for (ActionListener al :this.btnStopWatching.getActionListeners()) {
+            this.btnStopWatching.removeActionListener(al);
+        }
+        for (ActionListener al :this.btnStopReplay.getActionListeners()) {
+            this.btnStopReplay.removeActionListener(al);
+        }
+        for (ActionListener al :this.btnNextPlay.getActionListeners()) {
+            this.btnNextPlay.removeActionListener(al);
+        }
+        for (ActionListener al :this.btnNextPlay.getActionListeners()) {
+            this.btnNextPlay.removeActionListener(al);
+        }
+        for (ActionListener al :this.btnPreviousPlay.getActionListeners()) {
+            this.btnPreviousPlay.removeActionListener(al);
+        }
+        for (ActionListener al :this.btnSkipForward.getActionListeners()) {
+            this.btnSkipForward.removeActionListener(al);
+        }
+
+        final BasicSplitPaneUI myUi = (BasicSplitPaneUI) jSplitPane0.getUI();
+        final BasicSplitPaneDivider divider = myUi.getDivider();
+        final JButton upArrowButton = (JButton) divider.getComponent(0);
+        for (ActionListener al: upArrowButton.getActionListeners()) {
+            upArrowButton.removeActionListener(al);
+        }
+        final JButton downArrowButton = (JButton) divider.getComponent(1);
+        for (ActionListener al: downArrowButton.getActionListeners()) {
+            downArrowButton.removeActionListener(al);
+        }
+
+        for (ComponentListener cl : this.getComponentListeners()) {
+            this.removeComponentListener(cl);
+        }
     }
 
     private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {

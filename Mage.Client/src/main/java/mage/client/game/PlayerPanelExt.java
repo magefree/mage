@@ -152,6 +152,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
     }
 
+    public void cleanUp() {
+        this.timer.cancel();
+    }
+
     public void update(PlayerView player) {
         this.player = player;
         int playerLife = player.getLife();

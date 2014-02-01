@@ -38,10 +38,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.UUID;
+import javax.swing.event.MenuKeyListener;
+import javax.swing.plaf.basic.BasicPopupMenuUI;
 
 /**
  *
@@ -49,6 +52,7 @@ import java.util.UUID;
  */
 public class PlayAreaPanel extends javax.swing.JPanel {
 
+    private final JPopupMenu popupMenu;
     private UUID playerId;
     private UUID gameId;
     private boolean smallMode = false;
@@ -63,8 +67,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         battlefieldPanel.setOpaque(false);
+        popupMenu = new JPopupMenu();
         if (isPlayer) {
-            addPopupMenu();
+            addPopupMenuPlayer();
         } else {
             addPopupMenuWatcher();
         }
@@ -80,16 +85,32 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     public void CleanUp() {
         for (MouseListener ml :battlefieldPanel.getMainPanel().getMouseListeners()) {
             battlefieldPanel.getMainPanel().removeMouseListener(ml);
-        }        
-        this.removeAll();
-        this.getUI().uninstallUI(this);
+        }
+        playerPanel.cleanUp();
+        for (KeyListener kl: popupMenu.getKeyListeners()) {
+            popupMenu.removeKeyListener(kl);
+        }
+        for (MenuKeyListener mkl: popupMenu.getMenuKeyListeners()) {
+            popupMenu.removeMenuKeyListener(mkl);
+        }
+
+        for (Component child : popupMenu.getComponents()) {
+            if (child instanceof JMenuItem) {
+                JMenuItem menuItem = (JMenuItem) child;
+                for (ActionListener al: menuItem.getActionListeners()) {
+                    menuItem.removeActionListener(al);
+                }
+            }
+        }
+        for (MouseListener ml :battlefieldPanel.getMainPanel().getMouseListeners()) {
+            battlefieldPanel.getMainPanel().removeMouseListener(ml);
+        }
+
     }
 
-    private void addPopupMenu() {
-        final JPopupMenu popupMenu;
-        JMenuItem menuItem;
+    private void addPopupMenuPlayer() {
 
-        popupMenu = new JPopupMenu();
+        JMenuItem menuItem;
 
         menuItem = new JMenuItem("F2 - Confirm");
         popupMenu.add(menuItem);
@@ -170,11 +191,6 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-//        Pmenu.addSeparator();
-//
-//        menuItem = new JMenuItem("Cancel");
-//        Pmenu.add(menuItem);
-
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent Me) {
@@ -186,10 +202,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     }
 
     private void addPopupMenuWatcher() {
-        final JPopupMenu popupMenu;
         JMenuItem menuItem;
-
-        popupMenu = new JPopupMenu();
 
         menuItem = new JMenuItem("Stop watching");
         popupMenu.add(menuItem);

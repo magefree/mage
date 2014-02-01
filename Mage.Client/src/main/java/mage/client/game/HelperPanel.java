@@ -49,7 +49,6 @@ public class HelperPanel extends JPanel {
     //private javax.swing.JButton btnStopTimer;
 
     private MageTextArea textArea;
-    private javax.swing.JScrollPane jScrollPane1;
 
     private javax.swing.JButton linkLeft;
     private javax.swing.JButton linkRight;

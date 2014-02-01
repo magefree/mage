@@ -83,6 +83,12 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         this.gameId = gameId;
     }
 
+    public void cleanUp() {
+        for(MouseListener ml: this.getMouseListeners()) {
+            this.removeMouseListener(ml);
+        }
+    }
+
     public void show(AbilityPickerView choices, Point p) {
         this.choices = new ArrayList<Object>();
         this.selected = true; // to stop previous modal
@@ -111,7 +117,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         //startModal();
     }
 
-    public void initComponents() {
+    private void initComponents() {
         JLabel jLabel1;
         JLabel jLabel3;
 
@@ -156,7 +162,9 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         rows.setMaximumSize(new Dimension(32767, 32767));
         rows.setMinimumSize(new Dimension(67, 16));
         rows.setOpaque(false);
+
         rows.addMouseListener(new MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent evt) {
                 if (evt.getButton() == MouseEvent.BUTTON1) {
                     objectMouseClicked(evt);
@@ -230,6 +238,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         public final Map<String, String> cache = new HashMap<String, String>();
         
+        @Override
         public Component getListCellRendererComponent(
                 javax.swing.JList list,
                 Object value,
@@ -302,6 +311,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
     class ImageRenderer extends DefaultListCellRenderer {
 
+        @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
@@ -310,7 +320,9 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             label.setOpaque(false);
             label.setForeground(Color.white);
 
-            if (choices.size() <= index) return label;
+            if (choices.size() <= index) {
+                return label;
+            }
 
             Object object = choices.get(index);
             String name = object.toString();
