@@ -1,12 +1,38 @@
 package org.mage.card.arcane;
 
-import mage.constants.CardType;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
 import mage.client.util.AudioManager;
 import mage.components.ImagePanel;
+import mage.constants.CardType;
 import mage.utils.CardUtil;
 import mage.view.AbilityView;
 import mage.view.CardView;
@@ -17,15 +43,6 @@ import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.constants.Constants;
 
 /**
  * Main class for drawing Mage card object.
@@ -88,7 +105,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private boolean isPermanent;
     private boolean hasSickness;
-    private boolean isFoil;
     private String zone;
 
     public double transformAngle = 1;
@@ -234,6 +250,23 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 }
             }
         });
+    }
+
+    public void clear() {
+        if (dayNightButton != null) {
+            for(ActionListener al: dayNightButton.getActionListeners()) {
+                dayNightButton.removeActionListener(al);
+            }
+        }
+        for(MouseListener ml: this.getMouseListeners() ){
+            this.removeMouseListener(ml);
+        }
+        for(MouseMotionListener ml: this.getMouseMotionListeners() ){
+            this.removeMouseMotionListener(ml);
+        }
+        for(MouseWheelListener ml: this.getMouseWheelListeners() ){
+            this.removeMouseWheelListener(ml);
+        }
     }
 
     private void setText(CardView card) {

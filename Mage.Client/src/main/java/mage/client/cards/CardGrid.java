@@ -46,11 +46,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
-
+import java.util.UUID;
 import mage.cards.MageCard;
-import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.SortSetting;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
@@ -58,6 +56,7 @@ import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
+import org.mage.card.arcane.CardPanel;
 
 /**
  *
@@ -81,6 +80,16 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         initComponents();
         setOpaque(false);
     }
+
+    public void clear() {
+        for(MouseListener ml: this.getMouseListeners()) {
+            this.removeMouseListener(ml);
+        }
+        this.clearCardEventListeners();
+        this.clearCards();
+        this.bigCard = null;
+    }
+
     @Override
     public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId) {
         this.loadCards(showCards, sortSetting, piles, bigCard, gameId, true);
@@ -105,7 +114,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                 }
             }
         } else {
-            this.clear();
+            this.clearCards();
             for (CardView card: showCards.values()) {
                 addCard(card, bigCard, gameId, drawImage);
             }
@@ -216,7 +225,13 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
            repaint();
     }
 
-    private void clear() {
+    private void clearCards() {
+        // remove possible mouse listeners, preventing gc
+        for (MageCard mageCard: cards.values()) {
+            if (mageCard instanceof CardPanel) {
+                ((CardPanel)mageCard).clear();
+            }
+        }
         this.cards.clear();
         removeAllCardImg();
     }

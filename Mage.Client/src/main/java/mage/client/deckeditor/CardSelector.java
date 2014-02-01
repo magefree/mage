@@ -40,7 +40,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -111,8 +110,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         setOpaque(false);
         
         cardGrid.setOpaque(false);
-        jScrollPane1.setOpaque(false);
-        jScrollPane1.getViewport().setOpaque(false);
+        cardSelectorScrollPane.setOpaque(false);
+        cardSelectorScrollPane.getViewport().setOpaque(false);
         cbSortBy.setModel(new DefaultComboBoxModel(SortBy.values()));
         cbSortBy.setSelectedItem(sortSetting.getSortBy());
         jTextFieldSearch.addActionListener(searchAction);
@@ -143,7 +142,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         mainTable.getColumnModel().getColumn(6).setPreferredWidth(15);
         mainTable.getColumnModel().getColumn(7).setPreferredWidth(15);
 
-        jScrollPane1.setViewportView(mainTable);
+        cardSelectorScrollPane.setViewportView(mainTable);
 
         mainTable.setOpaque(false);
 
@@ -161,11 +160,20 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
     }
     
+    /**
+     * Free all references
+     * 
+     */
+    public void clear() {
+        this.cardGrid.clear();
+        this.mainModel.clear();
+    }
+
     public void switchToGrid(){
         jToggleListView.setSelected(false);
         jToggleCardView.setSelected(true);
         currentView = cardGrid;
-        jScrollPane1.setViewportView(cardGrid);
+        cardSelectorScrollPane.setViewportView(cardGrid);
         cbSortBy.setEnabled(true);
         chkPiles.setEnabled(true);
         jButtonAddToMain.setEnabled(false);
@@ -382,7 +390,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         cbExpansionSet = new javax.swing.JComboBox();
         btnBooster = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
         tbTypes = new javax.swing.JToolBar();
         rdoLand = new javax.swing.JRadioButton();
         rdoCreatures = new javax.swing.JRadioButton();
@@ -395,7 +402,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         cbSortBy = new javax.swing.JComboBox();
         jToggleListView = new javax.swing.JToggleButton();
         jToggleCardView = new javax.swing.JToggleButton();
-        jPanel1 = new javax.swing.JPanel();
+        cardSelectorScrollPane = new javax.swing.JScrollPane();
+        cardSelectorBottomPanel = new javax.swing.JPanel();
         jButtonAddToMain = new javax.swing.JButton();
         jButtonAddToSideboard = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -641,8 +649,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(jToggleCardView);
 
-        jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(897, 35));
+        cardSelectorBottomPanel.setOpaque(false);
+        cardSelectorBottomPanel.setPreferredSize(new java.awt.Dimension(897, 35));
 
         jButtonAddToMain.setText("+");
         jButtonAddToMain.setToolTipText("Add to Main");
@@ -676,10 +684,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        cardCountLabel.setForeground(java.awt.SystemColor.textHighlightText);
         cardCountLabel.setText("Card count:");
 
-        cardCount.setForeground(java.awt.SystemColor.text);
         cardCount.setText("0");
 
         jButtonRemoveFromMain.setText("-");
@@ -698,11 +704,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout cardSelectorBottomPanelLayout = new javax.swing.GroupLayout(cardSelectorBottomPanel);
+        cardSelectorBottomPanel.setLayout(cardSelectorBottomPanelLayout);
+        cardSelectorBottomPanelLayout.setHorizontalGroup(
+            cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardSelectorBottomPanelLayout.createSequentialGroup()
                 .addComponent(jButtonAddToMain)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRemoveFromMain)
@@ -724,9 +730,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addComponent(cardCount, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(121, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        cardSelectorBottomPanelLayout.setVerticalGroup(
+            cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jButtonAddToMain)
                 .addComponent(jLabel1)
                 .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -750,9 +756,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
+            .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -761,9 +767,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addGap(0, 0, 0)
                 .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -941,7 +947,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             jToggleListView.setSelected(true);
             jToggleCardView.setSelected(false);
             currentView = mainModel;
-            jScrollPane1.setViewportView(mainTable);
+            cardSelectorScrollPane.setViewportView(mainTable);
             cbSortBy.setEnabled(false);
             chkPiles.setEnabled(false);
             jButtonAddToMain.setEnabled(true);
@@ -950,7 +956,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             jToggleCardView.setSelected(true);
             jToggleListView.setSelected(false);
             currentView = cardGrid;
-            jScrollPane1.setViewportView(cardGrid);
+            cardSelectorScrollPane.setViewportView(cardGrid);
             cbSortBy.setEnabled(true);
             chkPiles.setEnabled(true);
             jButtonAddToMain.setEnabled(false);
@@ -984,6 +990,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JButton btnClear;
     private javax.swing.JLabel cardCount;
     private javax.swing.JLabel cardCountLabel;
+    private javax.swing.JPanel cardSelectorBottomPanel;
+    private javax.swing.JScrollPane cardSelectorScrollPane;
     private javax.swing.JComboBox cbExpansionSet;
     private javax.swing.JComboBox cbSortBy;
     private javax.swing.JCheckBox chkPiles;
@@ -994,8 +1002,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JButton jButtonRemoveFromSideboard;
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldSearch;
     private javax.swing.JToggleButton jToggleCardView;
     private javax.swing.JToggleButton jToggleListView;

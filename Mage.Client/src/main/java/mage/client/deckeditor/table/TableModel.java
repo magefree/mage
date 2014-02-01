@@ -93,7 +93,11 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     private boolean recentAscending;
 
 
-
+    public void clear() {
+        this.clearCardEventListeners();
+        this.clearCards();
+        this.view.clear();
+    }
 
     @Override
     public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId) {
@@ -110,7 +114,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         int landCount = 0;
         int creatureCount = 0;
         if (!merge) {
-            this.clear();
+            this.clearCards();
             for (CardView card : showCards.values()) {
                 addCard(card, bigCard, gameId);
             }
@@ -189,7 +193,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         fireTableDataChanged();
     }
 
-    public void clear() {
+    public void clearCards() {
         view.clear();
         cards.clear();
     }

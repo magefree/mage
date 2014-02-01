@@ -3,7 +3,6 @@ package mage.cards.action;
 import java.awt.Component;
 import java.awt.Point;
 import java.util.UUID;
-
 import mage.cards.TextPopup;
 import mage.view.CardView;
 

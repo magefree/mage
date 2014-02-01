@@ -148,7 +148,7 @@ public class TournamentPanel extends javax.swing.JPanel {
     public synchronized void showTournament(UUID tournamentId) {
         this.tournamentId = tournamentId;
         session = MageFrame.getSession();
-        MageFrame.addTournament(tournamentId, this);
+        // MageFrame.addTournament(tournamentId, this);
         UUID chatRoomId = session.getTournamentChatId(tournamentId);
         if (session.joinTournament(tournamentId) && chatRoomId != null) {
             this.chatPanel1.connect(chatRoomId);

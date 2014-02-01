@@ -34,6 +34,7 @@
 
 package mage.client.cards;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
@@ -66,6 +67,15 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
     /** Creates new form DraftGrid */
     public DraftGrid() {
         initComponents();
+    }
+
+    public void clear() {
+        this.clearCardEventListeners();
+        for (Component comp: getComponents()) {
+            if (comp instanceof Card || comp instanceof MageCard) {
+                this.remove(comp);
+            }
+        }
     }
 
     public void loadBooster(CardsView booster, BigCard bigCard) {

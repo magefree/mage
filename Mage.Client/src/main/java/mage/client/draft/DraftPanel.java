@@ -34,7 +34,13 @@
 
 package mage.client.draft;
 
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.UUID;
+import javax.swing.Timer;
 import mage.client.MageFrame;
+import mage.client.deckeditor.SortSettingDraft;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Event;
@@ -43,13 +49,6 @@ import mage.remote.Session;
 import mage.view.CardsView;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.UUID;
-import mage.client.deckeditor.SortSettingDraft;
 import mage.view.SimpleCardView;
 
 /**
@@ -73,7 +72,7 @@ public class DraftPanel extends javax.swing.JPanel {
         draftBooster.setOpaque(false);
         draftPicks.setSortSetting(SortSettingDraft.getInstance());
         draftPicks.setOpaque(false);
-        jPanel1.setOpaque(false);
+        draftLeftPane.setOpaque(false);
 
         countdown = new Timer(1000,
             new ActionListener() {
@@ -91,12 +90,18 @@ public class DraftPanel extends javax.swing.JPanel {
         );
     }
 
+    public void clear() {
+        draftPicks.clear();
+        draftBooster.clear();
+    }
+
     public synchronized void showDraft(UUID draftId) {
         this.draftId = draftId;
         session = MageFrame.getSession();
         MageFrame.addDraft(draftId, this);
-        if (!session.joinDraft(draftId))
+        if (!session.joinDraft(draftId)) {
             hideDraft();
+        }
     }
 
     public void updateDraft(DraftView draftView) {        
@@ -157,6 +162,7 @@ public class DraftPanel extends javax.swing.JPanel {
     }
 
     public void hideDraft() {
+        this.clear();
         Component c = this.getParent();
         while (c != null && !(c instanceof DraftPane)) {
             c = c.getParent();
@@ -180,7 +186,7 @@ public class DraftPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jSeparator1 = new javax.swing.JSeparator();
-        jPanel1 = new javax.swing.JPanel();
+        draftLeftPane = new javax.swing.JPanel();
         bigCard = new mage.client.cards.BigCard();
         lblCardNo = new javax.swing.JLabel();
         lblPack1 = new javax.swing.JLabel();
@@ -195,10 +201,10 @@ public class DraftPanel extends javax.swing.JPanel {
         chkPack3 = new javax.swing.JCheckBox();
         txtTimeRemaining = new javax.swing.JTextField();
         lblMessage = new javax.swing.JLabel();
-        draftBooster = new mage.client.cards.DraftGrid();
         draftPicks = new mage.client.cards.CardsList();
+        draftBooster = new mage.client.cards.DraftGrid();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        draftLeftPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblCardNo.setText("Card #:");
 
@@ -227,62 +233,61 @@ public class DraftPanel extends javax.swing.JPanel {
 
         lblMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout draftLeftPaneLayout = new javax.swing.GroupLayout(draftLeftPane);
+        draftLeftPane.setLayout(draftLeftPaneLayout);
+        draftLeftPaneLayout.setHorizontalGroup(
+            draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(draftLeftPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblCardNo))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblPack2)
+                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCardNo)
+                    .addGroup(draftLeftPaneLayout.createSequentialGroup()
+                        .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, draftLeftPaneLayout.createSequentialGroup()
+                                .addComponent(lblPack2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPack2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, draftLeftPaneLayout.createSequentialGroup()
+                                .addComponent(lblPack1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPack1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, draftLeftPaneLayout.createSequentialGroup()
+                                .addComponent(lblPack3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCardNo)
+                                    .addComponent(txtPack3)
+                                    .addComponent(txtTimeRemaining))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPack2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblPack1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPack1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblPack3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCardNo, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                            .addComponent(txtPack3)
-                            .addComponent(txtTimeRemaining, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chkPack3)
-                    .addComponent(chkPack2)
-                    .addComponent(chkPack1)))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
-                .addContainerGap())
+                        .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkPack3)
+                            .addComponent(chkPack2)
+                            .addComponent(chkPack1)))
+                    .addGroup(draftLeftPaneLayout.createSequentialGroup()
+                        .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        draftLeftPaneLayout.setVerticalGroup(
+            draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, draftLeftPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPack1)
                     .addComponent(txtPack1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chkPack1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPack2)
                     .addComponent(txtPack2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chkPack2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPack3)
                     .addComponent(txtPack3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chkPack3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCardNo)
                     .addComponent(txtCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -311,7 +316,7 @@ public class DraftPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(draftLeftPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
@@ -319,7 +324,7 @@ public class DraftPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(draftLeftPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
@@ -334,8 +339,8 @@ public class DraftPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox chkPack2;
     private javax.swing.JCheckBox chkPack3;
     private mage.client.cards.DraftGrid draftBooster;
+    private javax.swing.JPanel draftLeftPane;
     private mage.client.cards.CardsList draftPicks;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblCardNo;
     private javax.swing.JLabel lblMessage;

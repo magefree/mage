@@ -112,7 +112,6 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
-import mage.client.tournament.TournamentPanel;
 import mage.client.util.EDTExceptionHandler;
 import mage.client.util.MusicPlayer;
 import mage.client.util.SettingsManager;
@@ -162,7 +161,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
     private static final Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
     private static final Map<UUID, DraftPanel> drafts = new HashMap<UUID, DraftPanel>();
-    private static final Map<UUID, TournamentPanel> tournaments = new HashMap<UUID, TournamentPanel>();
     private static final MageUI ui = new MageUI();
 
     private static final ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
@@ -1169,10 +1167,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public static void addDraft(UUID draftId, DraftPanel draftPanel) {
         drafts.put(draftId, draftPanel);
-    }
-
-    public static void addTournament(UUID tournamentId, TournamentPanel tournament) {
-        tournaments.put(tournamentId, tournament);
     }
 
     @Override

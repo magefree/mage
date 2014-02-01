@@ -169,6 +169,7 @@ public class BigCard extends JComponent {
 
         setFocusable(false);
         setMinimumSize(new Dimension(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT));
+        setName("bigCardPanel"); // NOI18N
         setOpaque(false);
         setPreferredSize(getMinimumSize());
         setLayout(null);

@@ -34,6 +34,9 @@
 
 package mage.client;
 
+import java.awt.KeyboardFocusManager;
+import java.beans.PropertyVetoException;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import org.apache.log4j.Logger;
 
@@ -47,6 +50,7 @@ public abstract class MagePane extends javax.swing.JInternalFrame {
 
     /** Creates new form MagePane */
     public MagePane() {
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
         hideTitle();
     }
@@ -64,7 +68,14 @@ public abstract class MagePane extends javax.swing.JInternalFrame {
     }
 
     public void hideFrame() {
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+
+        }
         MageFrame.deactivate(this);
+        MageFrame.getDesktop().remove(this);
     }
 
     public void activated() {

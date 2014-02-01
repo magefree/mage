@@ -53,7 +53,7 @@ public class DeckEditorPane extends MagePane {
 
     /** Creates new form TablesPane */
     public DeckEditorPane() {
-
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         boolean initialized = false;
         if (Plugins.getInstance().isThemePluginLoaded()) {
             Map<String, JComponent> uiMap = new HashMap<String, JComponent>();

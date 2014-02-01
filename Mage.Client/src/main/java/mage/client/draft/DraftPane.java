@@ -34,16 +34,16 @@
 
 package mage.client.draft;
 
-import mage.client.MagePane;
-import mage.client.plugins.impl.Plugins;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.KeyboardFocusManager;
 import java.beans.PropertyVetoException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import javax.swing.JComponent;
 import mage.client.MageFrame;
+import mage.client.MagePane;
+import mage.client.plugins.impl.Plugins;
 
 /**
  *
@@ -55,8 +55,8 @@ public class DraftPane extends MagePane {
     public DraftPane() {
         boolean initialized = false;
         if (Plugins.getInstance().isThemePluginLoaded()) {
-            Map<String, JComponent> ui = new HashMap<String, JComponent>();
-            JComponent container = Plugins.getInstance().updateTablePanel(ui);
+            Map<String, JComponent> uiComponents = new HashMap<String, JComponent>();
+            JComponent container = Plugins.getInstance().updateTablePanel(uiComponents);
             if (container != null) {
                 draftPanel1 = new mage.client.draft.DraftPanel();
                 initComponents(container);
@@ -77,14 +77,7 @@ public class DraftPane extends MagePane {
     }
    
     public void hideDraft() {        
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner(); 
-        try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-            
-        }
-        this.hideFrame();        
-        MageFrame.getDesktop().remove(this);        
+        this.hideFrame();              
     }
 
     /** This method is called from within the constructor to

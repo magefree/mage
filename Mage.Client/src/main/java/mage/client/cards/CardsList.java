@@ -84,6 +84,17 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         initListViewComponents();
     }
 
+    public void clear() {
+        this.clearCardEventListeners();
+        if (cards != null) {
+            cards.clear();
+        }
+        if (mainModel != null) {
+            mainModel.clear();
+        }
+
+    }
+
     private void makeTransparent() {
         jScrollPane1.setOpaque(false);
         cardArea.setOpaque(false);
