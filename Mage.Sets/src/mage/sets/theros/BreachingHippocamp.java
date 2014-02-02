@@ -36,6 +36,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -43,6 +45,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author LevelX2
  */
 public class BreachingHippocamp extends CardImpl<BreachingHippocamp> {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public BreachingHippocamp(UUID ownerId) {
         super(ownerId, 43, "Breaching Hippocamp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -58,7 +65,7 @@ public class BreachingHippocamp extends CardImpl<BreachingHippocamp> {
         this.addAbility(FlashAbility.getInstance());
         // When Breaching Hippocamp enters the battlefield, untap another target creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new UntapTargetEffect(), false);
-        ability.addTarget(new TargetControlledCreaturePermanent(true));
+        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false, true));
         this.addAbility(ability);
     }
 
