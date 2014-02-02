@@ -35,13 +35,10 @@
 package mage.client.draft;
 
 import java.awt.Component;
-import java.awt.KeyboardFocusManager;
-import java.beans.PropertyVetoException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import javax.swing.JComponent;
-import mage.client.MageFrame;
 import mage.client.MagePane;
 import mage.client.plugins.impl.Plugins;
 
@@ -76,8 +73,9 @@ public class DraftPane extends MagePane {
         this.draftPanel1.showDraft(draftId);
     }
    
-    public void hideDraft() {        
-        this.hideFrame();              
+    public void hideDraft() {
+        draftPanel1.cleanUp();
+        this.removeFrame();
     }
 
     /** This method is called from within the constructor to

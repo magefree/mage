@@ -38,6 +38,7 @@ import java.beans.PropertyVetoException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import mage.client.cards.BigCard;
 import mage.client.util.Config;
 import mage.view.ExileView;
@@ -50,8 +51,13 @@ public class ExileZoneDialog extends MageDialog {
 
     /** Creates new form ExileZoneDialog */
     public ExileZoneDialog() {
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
         this.setModal(false);
+    }
+
+    public void cleanUp() {
+        cards.cleanUp();
     }
 
     public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {

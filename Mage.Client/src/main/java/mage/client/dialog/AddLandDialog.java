@@ -260,7 +260,7 @@ public class AddLandDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        this.hideDialog();
+        this.removeDialog();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -275,7 +275,7 @@ public class AddLandDialog extends MageDialog {
         addLands("Mountain", nMountain);
         addLands("Plains", nPlains);
         addLands("Swamp", nSwamp);
-        this.hideDialog();
+        this.removeDialog();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnAutoAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoAddActionPerformed

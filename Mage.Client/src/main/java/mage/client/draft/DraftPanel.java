@@ -90,9 +90,16 @@ public class DraftPanel extends javax.swing.JPanel {
         );
     }
 
-    public void clear() {
+    public void cleanUp() {
         draftPicks.clear();
         draftBooster.clear();
+
+        if (countdown != null) {
+            countdown.stop();
+            for (ActionListener al : countdown.getActionListeners()) {
+                countdown.removeActionListener(al);
+            }
+        }
     }
 
     public synchronized void showDraft(UUID draftId) {
@@ -162,7 +169,6 @@ public class DraftPanel extends javax.swing.JPanel {
     }
 
     public void hideDraft() {
-        this.clear();
         Component c = this.getParent();
         while (c != null && !(c instanceof DraftPane)) {
             c = c.getParent();

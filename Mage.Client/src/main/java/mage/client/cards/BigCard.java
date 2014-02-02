@@ -83,6 +83,10 @@ public class BigCard extends JComponent {
                              this.getWidth()*1000/1142,this.getWidth()*1000/2539);
     }
 
+    public void clearUp() {
+
+    }
+
     public void setCard(UUID cardId, Image image, List<String> strings, boolean foil) {
         if (this.cardId == null || !this.cardId.equals(cardId)) {
             if (this.panel != null) {

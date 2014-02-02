@@ -34,22 +34,21 @@
 
 package mage.client.dialog;
 
-import mage.client.MageFrame;
-import mage.client.chat.ChatPanel;
-import mage.client.components.MageComponents;
-import mage.client.components.tray.MageTray;
-import mage.remote.Session;
-import mage.view.SeatView;
-import mage.view.TableView;
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import javax.swing.SwingWorker;
+import javax.swing.table.AbstractTableModel;
+import mage.client.MageFrame;
+import mage.client.chat.ChatPanel;
+import mage.client.components.MageComponents;
+import mage.client.components.tray.MageTray;
 import mage.client.util.AudioManager;
+import mage.remote.Session;
+import mage.view.SeatView;
+import mage.view.TableView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -343,8 +342,9 @@ class TableWaitModel extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         String colName = "";
 
-        if (columnIndex <= getColumnCount())
+        if (columnIndex <= getColumnCount()) {
             colName = columnNames[columnIndex];
+        }
 
         return colName;
     }
@@ -411,15 +411,15 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
     }
 
     private int getPlayersCount(TableView tableView) {
-        int count = 0;
+        int playerCount = 0;
         if (tableView != null) {
             for (SeatView seatView: tableView.getSeats()) {
                 if (seatView.getPlayerId() != null && seatView.getPlayerType().equals("Human")) {
-                    count++;
+                    playerCount++;
                 }
             }
         }
-        return count;
+        return playerCount;
     }
 
 

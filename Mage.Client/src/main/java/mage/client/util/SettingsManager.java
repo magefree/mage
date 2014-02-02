@@ -1,9 +1,8 @@
 package mage.client.util;
 
-
+import java.awt.Point;
+import java.awt.Rectangle;
 import org.mage.card.arcane.CardPanel;
-
-import java.awt.*;
 
 /**
  * Contains dynamic settings for client.

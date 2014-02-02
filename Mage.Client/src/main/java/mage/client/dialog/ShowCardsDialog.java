@@ -34,6 +34,14 @@
 
 package mage.client.dialog;
 
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.Serializable;
+import java.util.Map;
+import java.util.UUID;
+import javax.swing.JLayeredPane;
+import javax.swing.SwingUtilities;
 import mage.cards.CardDimensions;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
@@ -43,14 +51,7 @@ import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.CardsView;
 import mage.view.SimpleCardsView;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.Serializable;
-import java.util.Map;
-import java.util.UUID;
+import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -63,8 +64,13 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
      * Creates new form ShowCardsDialog
      */
     public ShowCardsDialog() {
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
         this.setModal(false);
+    }
+
+    public void cleanUp() {
+         
     }
 
     public void loadCards(String name, SimpleCardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {

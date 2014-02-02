@@ -46,9 +46,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -127,6 +129,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private String chosenHandKey = "You";
     private boolean smallMode = false;
     private boolean initialized = false;
+    private int lastUpdatedTurn;
     
     
     private Map<String, Card> loadedCards = new HashMap<String, Card>();
@@ -204,7 +207,9 @@ public final class GamePanel extends javax.swing.JPanel {
 
         this.removeListener();
 
-        for(Map.Entry<UUID, PlayAreaPanel>  playAreaPanelEntry: players.entrySet()) {            
+        this.handContainer.cleanUp();
+        this.stack.cleanUp();
+        for(Map.Entry<UUID, PlayAreaPanel>  playAreaPanelEntry: players.entrySet()) {
             playAreaPanelEntry.getValue().CleanUp();
         }
         this.players.clear();
@@ -215,20 +220,20 @@ public final class GamePanel extends javax.swing.JPanel {
         jLayeredPane.remove(DialogManager.getManager(gameId));
         DialogManager.removeGame(gameId);
         
-        this.getInputMap().clear();
-        this.getActionMap().clear();
-
-        // this.pnlBattlefield.removeAll();
-        // this.getUI().uninstallUI(this);
-
         if (pickNumber != null) {
             pickNumber.removeDialog();
         }
-        for (ExileZoneDialog exile: exiles.values()) {
-            exile.hideDialog();
+        for (ExileZoneDialog exileDialog: exiles.values()) {
+            exileDialog.cleanUp();
+            exileDialog.removeDialog();
         }
-        for (ShowCardsDialog reveal: revealed.values()) {
-            reveal.hideDialog();
+        for (ShowCardsDialog revealDialog: revealed.values()) {
+            revealDialog.cleanUp();
+            revealDialog.removeDialog();
+        }
+        for (ShowCardsDialog lookedAtDialog: lookedAt.values()) {
+            lookedAtDialog.cleanUp();
+            lookedAtDialog.removeDialog();
         }
 
         try {
@@ -393,6 +398,7 @@ public final class GamePanel extends javax.swing.JPanel {
     public synchronized void init(GameView game) {
         addPlayers(game);
         updateGame(game);
+        lastUpdatedTurn = game.getTurn();
     }
 
     private void addPlayers(GameView game) {
@@ -598,16 +604,27 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void showRevealed(GameView game) {
-        for (ShowCardsDialog reveal: revealed.values()) {
-            reveal.clearReloaded();
-        }
+//        List<String> toRemove = new ArrayList<String>();
+//        toRemove.addAll(revealed.keySet());
+//        for (ShowCardsDialog reveal: revealed.values()) {
+//            reveal.clearReloaded(); // seems not to be used
+//        }
         for (RevealedView reveal: game.getRevealed()) {
             if (!revealed.containsKey(reveal.getName())) {
                 ShowCardsDialog newReveal = new ShowCardsDialog();
                 revealed.put(reveal.getName(), newReveal);
             }
             revealed.get(reveal.getName()).loadCards("Revealed " + reveal.getName(), CardsViewUtil.convertSimple(reveal.getCards(), loadedCards), bigCard, Config.dimensions, gameId, false);
+//            toRemove.add(reveal.getName());
         }
+//        for (String revealName: toRemove) {
+//            ShowCardsDialog revealDialog = revealed.get(revealName);
+//            if (revealDialog != null) {
+//                revealed.remove(revealName);
+//                revealDialog.cleanUp();
+//                revealDialog.removeDialog();
+//            }
+//        }
     }
 
     private void showLookedAt(GameView game) {
@@ -616,8 +633,8 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         for (LookedAtView looked: game.getLookedAt()) {
             if (!lookedAt.containsKey(looked.getName())) {
-                ShowCardsDialog newReveal = new ShowCardsDialog();
-                lookedAt.put(looked.getName(), newReveal);
+                ShowCardsDialog newLookedAt = new ShowCardsDialog();
+                lookedAt.put(looked.getName(), newLookedAt);
             }
             lookedAt.get(looked.getName()).loadCards("Looked at by " + looked.getName(), CardsViewUtil.convertSimple(looked.getCards(), loadedCards), bigCard, Config.dimensions, gameId, false);
         }
@@ -675,7 +692,11 @@ public final class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), options, messageId);
         if (PhaseManager.getInstance().isSkip(gameView, message)) {
             this.feedbackPanel.doClick();
+            logger.debug(new StringBuilder("Phase skipped: ").append(message).append(" id: ").append(messageId));
+        } else {
+            logger.debug(new StringBuilder("Phase not skipped: ").append(message).append(" id: ").append(messageId));
         }
+
     }
 
     public void playMana(String message, GameView gameView, int messageId) {

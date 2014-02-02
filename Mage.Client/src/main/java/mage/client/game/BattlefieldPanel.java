@@ -102,6 +102,11 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         this.bigCard = bigCard;
     }
 
+    public void cleanUp() {
+        permanents.clear();
+        Plugins.getInstance().sortPermanents(ui, permanents.values());
+    }
+
     public void update(Map<UUID, PermanentView> battlefield) {
         boolean changed = false;
 
@@ -281,28 +286,28 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         }
     }
 
-    private Rectangle findEmptySpace(Dimension size) {
-        int battlefieldWidth = this.getWidth();
-        Rectangle r = new Rectangle(size);
-        boolean intersects;
-        while (true) {
-            intersects = false;
-            for (MagePermanent perm: permanents.values()) {
-                Rectangle pr = perm.getBounds();
-                if (r.intersects(pr)) {
-                    intersects = true;
-                    if (pr.x + pr.width + r.width > battlefieldWidth)
-                        r.setLocation(0, pr.y + pr.height + 1);
-                    else
-                        r.translate(pr.x + pr.width - r.x, 0);
-                    break;
-                }
-            }
-            if (!intersects)
-                break;
-        }
-        return r;
-    }
+//    private Rectangle findEmptySpace(Dimension size) {
+//        int battlefieldWidth = this.getWidth();
+//        Rectangle r = new Rectangle(size);
+//        boolean intersects;
+//        while (true) {
+//            intersects = false;
+//            for (MagePermanent perm: permanents.values()) {
+//                Rectangle pr = perm.getBounds();
+//                if (r.intersects(pr)) {
+//                    intersects = true;
+//                    if (pr.x + pr.width + r.width > battlefieldWidth)
+//                        r.setLocation(0, pr.y + pr.height + 1);
+//                    else
+//                        r.translate(pr.x + pr.width - r.x, 0);
+//                    break;
+//                }
+//            }
+//            if (!intersects)
+//                break;
+//        }
+//        return r;
+//    }
 
     @Override
     public boolean isOptimizedDrawingEnabled () {

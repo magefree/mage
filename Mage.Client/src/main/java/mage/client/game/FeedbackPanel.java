@@ -277,7 +277,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
         this.selected = true;
         if (connectedDialog != null) {
-            connectedDialog.hideDialog();
+            connectedDialog.removeDialog();
+            connectedDialog = null;
         }
         if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
             session.sendPlayerInteger(gameId, 0);

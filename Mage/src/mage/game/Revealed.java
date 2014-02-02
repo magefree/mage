@@ -56,8 +56,9 @@ public class Revealed extends HashMap<String, Cards> implements Serializable, Co
     }
 
     public void add(String name, Cards cards) {
-        if (!this.containsKey(name))
+        if (!this.containsKey(name)) {
             createRevealed(name);
+        }
         this.put(name, cards.copy());
     }
 
@@ -78,8 +79,9 @@ public class Revealed extends HashMap<String, Cards> implements Serializable, Co
 
     public Card getCard(UUID cardId, Game game) {
         for (Cards cards: this.values()) {
-            if (cards.contains(cardId))
+            if (cards.contains(cardId)) {
                 return game.getCard(cardId);
+            }
         }
         return null;
     }

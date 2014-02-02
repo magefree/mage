@@ -45,6 +45,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.ImageIcon;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import mage.client.MageFrame;
 import mage.client.game.GamePanel;
@@ -120,8 +121,6 @@ public class GameEndDialog extends MageDialog {
             int winsNeeded = gameEndView.getWinsNeeded() - gameEndView.getWins();
             lblMatchInfo.setText(new StringBuilder("You need ").append(winsNeeded == 1 ? "one win ":winsNeeded + " wins ").append("to win the match.").toString());
         }
-
-
     }
 
     private void saveGameLog(GameEndView gameEndView) {

@@ -38,16 +38,12 @@ import java.awt.KeyboardFocusManager;
 import java.util.UUID;
 import javax.swing.SwingUtilities;
 import mage.client.MagePane;
-import mage.client.dialog.MageDialog;
-import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class GamePane extends MagePane {
-    
-     private static final Logger logger = Logger.getLogger(MageDialog.class);
     
     /** Creates new form GamePane */
     public GamePane() {
@@ -70,9 +66,7 @@ public class GamePane extends MagePane {
     }
 
     public void cleanUp() {
-        gamePanel.cleanUp();
-        this.getInputMap().clear();
-        this.getActionMap().clear();
+        gamePanel.cleanUp();       
     }
 
     public void hideGame() {

@@ -661,7 +661,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showGameEndDialog(GameEndView gameEndView) {
         GameEndDialog gameEndDialog = new GameEndDialog(gameEndView);
-        desktopPane.add(gameEndDialog, JLayeredPane.POPUP_LAYER);
+        desktopPane.add(gameEndDialog, JLayeredPane.MODAL_LAYER);
         gameEndDialog.showDialog();
     }
 

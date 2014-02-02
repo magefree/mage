@@ -153,7 +153,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     public void cleanUp() {
-        this.timer.cancel();
+        if (timer != null) {
+            this.timer.cancel();
+        }
+        topCardPanel.updateCallback(null, gameId);
     }
 
     public void update(PlayerView player) {

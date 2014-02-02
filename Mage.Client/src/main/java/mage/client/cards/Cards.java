@@ -44,6 +44,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.*;
 import java.util.Map.Entry;
+import mage.cards.action.ActionCallback;
+import mage.client.plugins.adapters.MageActionCallback;
 import org.apache.log4j.Logger;
 
 /**
@@ -86,6 +88,13 @@ public class Cards extends javax.swing.JPanel {
         }
     }
 
+    public void cleanUp() {
+        ActionCallback actionCallback = Plugins.getInstance().getActionCallback();
+        if (actionCallback instanceof MageActionCallback) {
+            ((MageActionCallback) actionCallback).setCardPreviewComponent(null);
+        }
+    }
+
     /**
      * Sets components background color
      * @param color
@@ -109,7 +118,7 @@ public class Cards extends javax.swing.JPanel {
         }
     }
 
-    public boolean loadCards(SimpleCardsView cardsView, BigCard bigCard, UUID gameId) {        
+    public boolean loadCards(SimpleCardsView cardsView, BigCard bigCard, UUID gameId) {
         return loadCards(CardsViewUtil.convertSimple(cardsView), bigCard, gameId, null);
     }
 

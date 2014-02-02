@@ -27,24 +27,28 @@
 */
 package mage.client.game;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.lang.reflect.Field;
+import java.util.UUID;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.MenuSelectionManager;
+import javax.swing.event.ChangeListener;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.view.PlayerView;
-
-import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.UUID;
-import javax.swing.event.MenuKeyListener;
-import javax.swing.plaf.basic.BasicPopupMenuUI;
 
 /**
  *
@@ -67,12 +71,14 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         battlefieldPanel.setOpaque(false);
+        
         popupMenu = new JPopupMenu();
         if (isPlayer) {
             addPopupMenuPlayer();
         } else {
             addPopupMenuWatcher();
         }
+        this.add(popupMenu);
     }
 
     public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean me, int priorityTime, boolean isPlayer, GamePanel gamePanel) {
@@ -83,28 +89,33 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     }
 
     public void CleanUp() {
-        for (MouseListener ml :battlefieldPanel.getMainPanel().getMouseListeners()) {
-            battlefieldPanel.getMainPanel().removeMouseListener(ml);
-        }
+        battlefieldPanel.cleanUp();
         playerPanel.cleanUp();
-        for (KeyListener kl: popupMenu.getKeyListeners()) {
-            popupMenu.removeKeyListener(kl);
-        }
-        for (MenuKeyListener mkl: popupMenu.getMenuKeyListeners()) {
-            popupMenu.removeMenuKeyListener(mkl);
-        }
+        
 
-        for (Component child : popupMenu.getComponents()) {
-            if (child instanceof JMenuItem) {
-                JMenuItem menuItem = (JMenuItem) child;
-                for (ActionListener al: menuItem.getActionListeners()) {
-                    menuItem.removeActionListener(al);
+        for (ActionListener al : btnCheat.getActionListeners() ) {
+            btnCheat.removeActionListener(al);
+        }
+        
+        // Taken form : https://community.oracle.com/thread/2183145
+        // removed the internal focus of a popupMenu data to allow GC before another popup menu is selected
+        for(ChangeListener listener : MenuSelectionManager.defaultManager().getChangeListeners()) {
+            if (listener.getClass().getName().contains("MenuKeyboardHelper")) {
+                try {
+                    Field field = listener.getClass().getDeclaredField("menuInputMap");
+                    field.setAccessible(true);
+                    field.set(listener, null);
+                } catch (Exception e) {
+                    // ignored
                 }
+                break;
             }
         }
+
         for (MouseListener ml :battlefieldPanel.getMainPanel().getMouseListeners()) {
             battlefieldPanel.getMainPanel().removeMouseListener(ml);
         }
+        popupMenu.getUI().uninstallUI(this);
 
     }
 
@@ -199,6 +210,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 }
             }
         });
+
     }
 
     private void addPopupMenuWatcher() {
@@ -217,7 +229,6 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 }
             }
         });
-
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent Me) {
@@ -226,6 +237,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 }
             }
         });
+
     }
 
     public final void init(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime) {

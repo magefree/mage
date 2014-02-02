@@ -28,6 +28,16 @@
 
 package mage.client.cards;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.MouseListener;
+import java.util.List;
+import java.util.UUID;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
@@ -37,12 +47,6 @@ import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.SimpleCardsView;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseListener;
-import java.util.*;
-import java.util.List;
 
 public class CardArea extends JPanel {
 
@@ -71,10 +75,12 @@ public class CardArea extends JPanel {
     public void loadCards(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, MouseListener listener) {
         this.reloaded = true;
         cardArea.removeAll();
-        if (showCards != null && showCards.size() < 10)
+        if (showCards != null && showCards.size() < 10) {
             loadCardsFew(showCards, bigCard, gameId, listener);
-        else
+        }
+        else {
             loadCardsMany(showCards, bigCard, gameId, listener, dimension);
+        }
         cardArea.revalidate();
 
         this.revalidate();
@@ -113,8 +119,9 @@ public class CardArea extends JPanel {
         MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, gameId, true);
 
         cardImg.setBounds(rectangle);
-        if (listener != null)
+        if (listener != null) {
             cardImg.addMouseListener(listener);
+        }
         cardArea.add(cardImg);
         cardArea.moveToFront(cardImg);
         cardImg.update(card);

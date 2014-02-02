@@ -104,8 +104,6 @@ public class PhaseManager {
         if (prefKey != null) {
             String prop = prefs.get(prefKey, PHASE_ON);
             return !prop.equals(PHASE_ON);
-        } else {
-            logger.warn(new StringBuilder("Message not found: ").append(message));
         }
         return false;
     }

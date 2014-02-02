@@ -58,6 +58,10 @@ public class HandPanel extends JPanel {
         hand.setZone(Zone.HAND.toString());
     }
 
+    public void cleanUp() {
+        hand.cleanUp();
+    }
+
     public void loadCards(CardsView cards, BigCard bigCard, UUID gameId) {
         hand.loadCards(cards, bigCard, gameId, null);
         hand.sizeCards(getHandCardDimension());

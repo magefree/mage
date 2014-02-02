@@ -33,15 +33,21 @@
  */
 package mage.client.dialog;
 
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.AWTEvent;
+import java.awt.ActiveEvent;
+import java.awt.Component;
+import java.awt.EventQueue;
+import java.awt.KeyboardFocusManager;
+import java.awt.MenuComponent;
+import java.awt.TrayIcon;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
+import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 import mage.client.MageFrame;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -174,11 +180,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
             java.util.logging.Logger.getLogger(MageDialog.class.getName()).log(Level.SEVERE, "setClosed(false) failed", ex);
         }
         MageFrame.getDesktop().remove(this);
-        // this.ui.uninstallUI(this);
-        logger.warn("Remove Dialog " + this.getClass().getName() + " Components left: " + this.getComponentCount());
-        for (Component comp : this.getComponents()) {
-            logger.warn("Existing Component: " + comp.getClass().getName());
-        }
+
     }
 
     /**
