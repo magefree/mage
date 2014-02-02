@@ -112,7 +112,7 @@ class PackRatEffect extends OneShotEffect<PackRatEffect> {
     public PackRatEffect(Card card) {
         super(Outcome.PutCreatureInPlay);
         this.card = card;
-        staticText = "Put a token onto the battlefield that's a copy of Pack Rat";
+        staticText = "Put a token onto the battlefield that's a copy of {this}";
     }
 
     public PackRatEffect(final PackRatEffect effect) {
@@ -124,7 +124,7 @@ class PackRatEffect extends OneShotEffect<PackRatEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+            permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
         if (permanent != null) {
             EmptyToken newToken = new EmptyToken();
