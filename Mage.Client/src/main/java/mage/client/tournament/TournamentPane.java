@@ -55,7 +55,8 @@ public class TournamentPane extends MagePane {
     }
 
     public void hideTournament() {
-        tournamentPanel.hideTournament();
+        tournamentPanel.cleanUp();
+        removeFrame();
     }
 
     public UUID getTournamentId() {

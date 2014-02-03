@@ -117,6 +117,13 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     }
 
+    public void cleanUp() {
+        this.stopTasks();
+        if (this.chatPanel1 != null) {
+            this.chatPanel1.disconnect();
+        }
+    }
+
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
