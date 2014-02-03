@@ -81,6 +81,7 @@ public class SpellsCostReductionEffect extends CostModificationEffectImpl<Spells
         super(effect);
         this.filter = effect.filter;
         this.amount = effect.amount;
+        this.manaCostsToReduce = effect.manaCostsToReduce;
     }
 
     @Override
