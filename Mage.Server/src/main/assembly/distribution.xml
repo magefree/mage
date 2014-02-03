@@ -53,6 +53,18 @@
             <filtered>true</filtered>
             <directory>release/</directory>
             <outputDirectory>/</outputDirectory>
+            <excludes>
+                <exclude>*.sh</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <filtered>true</filtered>
+            <directory>release/</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+            <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
             <filtered>false</filtered>

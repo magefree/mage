@@ -13,6 +13,7 @@
             <includes>
                 <include>org.mage:mage-client</include>
             </includes>
+            <fileMode>0644</fileMode>
         </dependencySet>
         <dependencySet>
             <outputDirectory>/lib/</outputDirectory>
@@ -20,12 +21,14 @@
                 <exclude>org.mage:mage-client</exclude>
                 <exclude>org.mage:mage-counter-plugin</exclude>
             </excludes>
+            <fileMode>0644</fileMode>
         </dependencySet>
         <dependencySet>
             <outputDirectory>/plugins</outputDirectory>
             <includes>
                 <include>org.mage:mage-counter-plugin</include>
             </includes>
+            <fileMode>0644</fileMode>
         </dependencySet>
     </dependencySets>
     <fileSets>
@@ -45,9 +48,17 @@
             <includes>
                 <include>*.bat</include>
                 <include>*.command</include>
+            </includes>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <filtered>true</filtered>
+            <directory>release/</directory>
+            <includes>
                 <include>*.sh</include>
             </includes>
             <outputDirectory>/</outputDirectory>
+            <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
             <filtered>false</filtered>
@@ -64,6 +75,7 @@
                 <include>*.wav</include>
             </includes>
             <outputDirectory>sounds/</outputDirectory>
+            <fileMode>0644</fileMode>
         </fileSet>
 
     </fileSets>
