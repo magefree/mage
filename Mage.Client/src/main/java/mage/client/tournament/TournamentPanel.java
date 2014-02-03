@@ -182,7 +182,7 @@ public class TournamentPanel extends javax.swing.JPanel {
             c = c.getParent();
         }
         if (c != null) {
-            ((TournamentPane)c).hideFrame();
+            ((TournamentPane)c).hideTournament();
         }
     }
 
