@@ -351,8 +351,25 @@ public class CardUtil {
      * Converts an integer number to string
      * Numbers > 20 will be returned as digits
      *
+     * @param number
+     * @return 
      */
     public static String numberToText(int number) {
+        return numberToText(number, "one");
+    }
+    
+    /**
+     * Converts an integer number to string like "one", "two", "three", ...
+     * Numbers > 20 will be returned as digits
+     * 
+     * @param number number to convert to text
+     * @param forOne if the number is 1, this string will be returnedinstead of "one".
+     * @return 
+     */
+    public static String numberToText(int number, String forOne) {
+        if (number == 1 && forOne != null) {
+            return forOne;
+        }
         if (number >= 0 && number < 21) {
             return numberStrings[number];
         }
@@ -368,11 +385,7 @@ public class CardUtil {
 
     public static String numberToText(String number, String forOne) {
         if (checkNumeric(number)) {
-            int intNumber = Integer.parseInt(number);
-            if (forOne != null && intNumber == 1) {
-                return forOne;
-            }
-            return numberToText(intNumber);
+            return numberToText(Integer.parseInt(number));
         }
         return number;
     }

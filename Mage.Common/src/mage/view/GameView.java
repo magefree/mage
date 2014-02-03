@@ -59,23 +59,23 @@ import mage.players.Player;
 public class GameView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private int priorityTime;
-    private List<PlayerView> players = new ArrayList<PlayerView>();
+    private final int priorityTime;
+    private final List<PlayerView> players = new ArrayList<PlayerView>();
     private SimpleCardsView hand;
     private Map<String, SimpleCardsView> opponentHands;
-    private CardsView stack = new CardsView();
-    private List<ExileView> exiles = new ArrayList<ExileView>();
-    private List<RevealedView> revealed = new ArrayList<RevealedView>();
+    private final CardsView stack = new CardsView();
+    private final List<ExileView> exiles = new ArrayList<ExileView>();
+    private final List<RevealedView> revealed = new ArrayList<RevealedView>();
     private List<LookedAtView> lookedAt = new ArrayList<LookedAtView>();
-    private List<CombatGroupView> combat = new ArrayList<CombatGroupView>();
-    private TurnPhase phase;
-    private PhaseStep step;
-    private UUID activePlayerId;
+    private final List<CombatGroupView> combat = new ArrayList<CombatGroupView>();
+    private final TurnPhase phase;
+    private final PhaseStep step;
+    private final UUID activePlayerId;
     private String activePlayerName = "";
     private String priorityPlayerName = "";
-    private int turn;
+    private final int turn;
     private boolean special = false;
-    private boolean isPlayer;
+    private final boolean isPlayer;
 
 
     public GameView(GameState state, Game game, boolean isPlayer) {
