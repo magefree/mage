@@ -28,10 +28,10 @@
 package mage.deck;
 
 import java.util.Date;
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
+import mage.constants.SetType;
 import mage.sets.EighthEdition;
 
 /**
@@ -53,12 +53,13 @@ public class Modern extends Constructed {
 
         banned.add("Ancestral Vision");
         banned.add("Ancient Den");
-        banned.add("Bitterblossom");
+        // banned.add("Bitterblossom"); // (unbanned effective February 7, 2014)
         banned.add("Blazing Shoal");
         banned.add("Bloodbraid Elf"); //  (banned effective February 1, 2013)
         banned.add("Chrome Mox");
         banned.add("Cloudpost");
         banned.add("Dark Depths");
+        banned.add("Deathrite Shaman"); // (banned effective February 7, 2014
         banned.add("Dread Return");
         banned.add("Glimpse of Nature");
         banned.add("Golgari Grave-Troll");
@@ -81,7 +82,7 @@ public class Modern extends Constructed {
         banned.add("Tree of Tales");
         banned.add("Umezawa's Jitte");
         banned.add("Vault of Whispers");
-        banned.add("Wild Nacatl");
+        // banned.add("Wild Nacatl"); // (unbanned effective February 7, 2014)
 
     }
 }
