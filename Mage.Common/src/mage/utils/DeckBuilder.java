@@ -1,5 +1,6 @@
 package mage.utils;
 
+import gnu.trove.set.hash.THashSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,7 +14,6 @@ import mage.cards.decks.Deck;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.interfaces.rate.RateCallback;
-import org.apache.log4j.Logger;
 
 /**
  * Builds deck from provided card pool.
@@ -263,7 +263,7 @@ public class DeckBuilder {
             final Map<String, Integer> singleCount = new HashMap<String, Integer>();
             int maxSingleCount = 0;
             int multicolor = 0;
-            Set<String> colors = new HashSet<String>();
+            Set<String> colors = new THashSet<String>();
             for (String symbol : card.getManaCost().getSymbols()) {
                 int count = 0;
                 symbol = symbol.replace("{", "").replace("}", "");

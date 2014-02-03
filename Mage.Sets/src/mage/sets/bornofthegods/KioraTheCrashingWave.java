@@ -152,8 +152,9 @@ class KioraPreventionEffect extends PreventionEffectImpl<KioraPreventionEffect> 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && event instanceof DamageEvent) {
-            Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (event.getSourceId().equals(targetPermanent.getId()) || event.getTargetId().equals(targetPermanent.getId())) {
+            Permanent targetPermanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+            if (targetPermanent != null 
+                    && (event.getSourceId().equals(targetPermanent.getId()) || event.getTargetId().equals(targetPermanent.getId()))) {
                 return true;
             }
         }

@@ -59,10 +59,10 @@ import java.util.Map.Entry;
  */
 public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
-    private Map<UUID, MagePermanent> permanents = new LinkedHashMap<UUID, MagePermanent>();
+    private final Map<UUID, MagePermanent> permanents = new LinkedHashMap<UUID, MagePermanent>();
     private UUID gameId;
     private BigCard bigCard;
-    private Map<String, JComponent> ui = new HashMap<String, JComponent>();
+    private final Map<String, JComponent> uiComponentsList = new HashMap<String, JComponent>();
 
     protected Map<UUID, PermanentView> battlefield;
     private Dimension cardDimension;
@@ -71,7 +71,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     private JScrollPane jScrollPane;
     private int width;
 
-    private static int i = 0;
+    //private static int iCounter = 0;
 
     private boolean addedPermanent;
     private boolean addedArtifact;
@@ -81,9 +81,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
     /** Creates new form BattlefieldPanel */
     public BattlefieldPanel() {
-        ui.put("battlefieldPanel", this);
+        uiComponentsList.put("battlefieldPanel", this);
         initComponents();
-        ui.put("jPanel", jPanel);
+        uiComponentsList.put("jPanel", jPanel);
 
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -104,7 +104,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
     public void cleanUp() {
         permanents.clear();
-        Plugins.getInstance().sortPermanents(ui, permanents.values());
+        Plugins.getInstance().sortPermanents(uiComponentsList, permanents.values());
     }
 
     public void update(Map<UUID, PermanentView> battlefield) {
@@ -145,11 +145,11 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
         removedCreature = false;
 
-        for (Iterator<Entry<UUID, MagePermanent>> i = permanents.entrySet().iterator(); i.hasNext();) {
-            Entry<UUID, MagePermanent> entry = i.next();
+        for (Iterator<Entry<UUID, MagePermanent>> iterator = permanents.entrySet().iterator(); iterator.hasNext();) {
+            Entry<UUID, MagePermanent> entry = iterator.next();
             if (!battlefield.containsKey(entry.getKey())) {
                 removePermanent(entry.getKey(), 1);
-                i.remove();
+                iterator.remove();
                 changed = true;
             }
         }
@@ -166,7 +166,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
     //TODO: review sorting stuff
     public void sortLayout() {
-        int height = Plugins.getInstance().sortPermanents(ui, permanents.values());
+        int height = Plugins.getInstance().sortPermanents(uiComponentsList, permanents.values());
         BattlefieldPanel.this.jPanel.setPreferredSize(new Dimension(width - 30, height));
         this.jScrollPane.repaint();
         this.jScrollPane.revalidate();

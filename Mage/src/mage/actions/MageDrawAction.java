@@ -12,6 +12,7 @@ import mage.players.Player;
 
 import java.util.List;
 import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  * Action for drawing cards.
@@ -22,7 +23,7 @@ public class MageDrawAction extends MageAction {
 
     private final Player player;
     private final int amount;
-    private ArrayList<UUID> appliedEffects;
+    private final ArrayList<UUID> appliedEffects;
     private List<Card> drawnCards;
 
     private static final int NEGATIVE_VALUE = -1000000;
@@ -37,6 +38,7 @@ public class MageDrawAction extends MageAction {
      * Draw and set action score.
      *
      * @param game Game context.
+     * @return 
      */
     @Override
     public int doAction(Game game) {
@@ -51,7 +53,7 @@ public class MageDrawAction extends MageAction {
             score += value;
         }
         if (numDrawn > 0) {
-            game.fireInformEvent(player.getName() + " draws " + Integer.toString(numDrawn) + " card" + (numDrawn > 1 ? "s" : ""));
+            game.fireInformEvent(player.getName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
         }
         if (player.isEmptyDraw()) {
             game.doAction(new MageLoseGameAction(player, MageLoseGameAction.DRAW_REASON));

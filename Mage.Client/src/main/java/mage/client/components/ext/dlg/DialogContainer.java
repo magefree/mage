@@ -14,21 +14,21 @@ import java.awt.image.BufferedImage;
  */
 public class DialogContainer extends JPanel {
 
-    private static int X_OFFSET = 30;
-    private static int Y_OFFSET = 30;
-    private BufferedImage shadow = null;
+    private static final int X_OFFSET = 30;
+    private static final int Y_OFFSET = 30;
+    private final BufferedImage shadow = null;
     //private DialogManager.MTGDialogs dialogType;
     //private DlgParams params;
     private Color backgroundColor = new Color(0, 255, 255, 60);
     private int alpha = 50;
 
-    private boolean isGradient = false;
-    private TexturePaint tp = null;
-    private Image gradient = null;
+    private final boolean isGradient = false;
+    private final TexturePaint tp = null;
+    private final Image gradient = null;
     private BufferedImage b;
 
     private boolean drawContainer = true;
-    private DialogManager.MTGDialogs dialogType;
+    private final DialogManager.MTGDialogs dialogType;
 
     public DialogContainer(DialogManager.MTGDialogs dialogType, DlgParams params) {
         setOpaque(false);

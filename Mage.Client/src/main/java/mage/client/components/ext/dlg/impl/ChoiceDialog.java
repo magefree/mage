@@ -36,8 +36,8 @@ public class ChoiceDialog extends IDialogPanel {
 
     private JButton jButtonSort = null;
 
-    private CardsView cards;
-    private UUID gameId;
+    private final CardsView cards;
+    private final UUID gameId;
 
     private int page = 1;
     private int maxPages;
@@ -48,12 +48,14 @@ public class ChoiceDialog extends IDialogPanel {
     private boolean isChooseAbility = false;
     private boolean isCancelStopsPlaying = true;
 
-    private DlgParams params;
+    private final DlgParams params;
     
-    private String title;
+    private final String title;
 
     /**
      * This is the default constructor
+     * @param params
+     * @param title
      */
     public ChoiceDialog(DlgParams params, String title) {
         super(params);

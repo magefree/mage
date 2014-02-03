@@ -125,7 +125,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     /**
      * Free resources so GC can work
      */
-    public void clear() {
+    public void cleanUp() {
         if (updateDeckTask != null) {
             updateDeckTask.cancel(true);
         }
@@ -319,7 +319,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     public void removeDeckEditor() {
         hidePopup();
-        this.clear();
+        this.cleanUp();
 
         Component c = this.getParent();
         while (c != null && !(c instanceof DeckEditorPane)) {

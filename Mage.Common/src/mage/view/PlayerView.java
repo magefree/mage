@@ -48,24 +48,24 @@ import mage.game.command.Commander;
 public class PlayerView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private UUID playerId;
-    private String name;
-    private int life;
-    private int poison;
-    private int libraryCount;
-    private int handCount;
-    private boolean isActive;
-    private boolean hasPriority;
-    private boolean hasLeft;
-    private ManaPoolView manaPool;
-    private SimpleCardsView graveyard = new SimpleCardsView();
-    private Map<UUID, PermanentView> battlefield = new LinkedHashMap<UUID, PermanentView>();
-    private CardView topCard;
-    private UserDataView userDataView;
-    private List<CommandObjectView> commandList = new ArrayList<CommandObjectView>();
-    private List<UUID> attachments = new ArrayList<UUID>();
-    private int statesSavedSize;
-    private int priorityTimeLeft;
+    private final UUID playerId;
+    private final String name;
+    private final int life;
+    private final int poison;
+    private final int libraryCount;
+    private final int handCount;
+    private final boolean isActive;
+    private final boolean hasPriority;
+    private final boolean hasLeft;
+    private final ManaPoolView manaPool;
+    private final SimpleCardsView graveyard = new SimpleCardsView();
+    private final Map<UUID, PermanentView> battlefield = new LinkedHashMap<UUID, PermanentView>();
+    private final CardView topCard;
+    private final UserDataView userDataView;
+    private final List<CommandObjectView> commandList = new ArrayList<CommandObjectView>();
+    private final List<UUID> attachments = new ArrayList<UUID>();
+    private final int statesSavedSize;
+    private final int priorityTimeLeft;
 
     public PlayerView(Player player, GameState state, Game game) {
         this.playerId = player.getId();

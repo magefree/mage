@@ -44,6 +44,7 @@ import mage.target.Targets;
 
 /**
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements ManaCosts<T> {
 
