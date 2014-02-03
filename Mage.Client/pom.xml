@@ -36,6 +36,11 @@
             <version>1.2.14</version>
         </dependency>
         <dependency>
+            <groupId>net.sf.trove4j</groupId>
+            <artifactId>trove4j</artifactId>
+            <version>3.0.3</version>
+        </dependency>          
+        <dependency>
             <groupId>com.mortennobel</groupId>
             <artifactId>java-image-scaling</artifactId>
             <version>0.8.5</version>
@@ -96,12 +101,12 @@
         <dependency>
             <groupId>de.schlichtherle.truezip</groupId>
             <artifactId>truezip-file</artifactId>
-            <version>7.6.3</version>
+            <version>7.7.5</version>
         </dependency>
         <dependency>
             <groupId>de.schlichtherle.truezip</groupId>
             <artifactId>truezip-driver-zip</artifactId>
-            <version>7.6.3</version>
+            <version>7.7.5</version>
             <!--<scope>runtime</scope>-->
         </dependency>
         <dependency>
