@@ -123,7 +123,7 @@ class XenagosGodOfRevelsEffect extends OneShotEffect<XenagosGodOfRevelsEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
-            ContinuousEffect effect = new BoostTargetEffect(targetCreature.getPower().getValue(), targetCreature.getToughness().getValue(), Duration.EndOfTurn);
+            ContinuousEffect effect = new BoostTargetEffect(targetCreature.getPower().getValue(), targetCreature.getPower().getValue(), Duration.EndOfTurn);
             effect.setTargetPointer(this.getTargetPointer());
             game.addEffect(effect, source);
         }
