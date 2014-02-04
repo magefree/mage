@@ -68,6 +68,8 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
+            boolean revealed = player.isTopCardRevealed(); // by looking at the cards with scry you have not to reveal the next card
+            player.setTopCardRevealed(false);
             Cards cards = new CardsImpl(Zone.PICK);
             int count = Math.min(scryNumber, player.getLibrary().size());
             if (count == 0) {
@@ -112,6 +114,7 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
                     .append(" on the bottom of his or her library (scry ")
                     .append(scryNumber).append(")").toString());
             game.fireEvent(new GameEvent(GameEvent.EventType.SCRY, source.getControllerId(), source.getSourceId(), source.getControllerId()));
+            player.setTopCardRevealed(revealed);
             return true;
         }
         return false;
