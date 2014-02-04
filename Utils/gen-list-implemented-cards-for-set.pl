@@ -28,7 +28,6 @@ while(my $line = <DATA>) {
     my @data = split('\\|', $line);
     if ($data[1] eq $setName) {
         push(@setCards, \@data);
-    }
 }
 close(DATA);
 
@@ -61,7 +60,8 @@ sub toCamelCase {
     $string =~ s/[-,\s\']//g;
     $string;
 }
-
+my $cardsFound = 0;
+my $cardsImplemented = 0;
 my $toPrint = '';
 foreach my $card (sort cardSort @setCards) {
 	my $className = toCamelCase(@{$card}[0]);
@@ -71,8 +71,13 @@ foreach my $card (sort cardSort @setCards) {
 			$toPrint .= "\n";
 		}   
 		$toPrint .= "@{$card}[2]|@{$card}[0]"; 
+                $cardsImplemented++;
 	}
+        $cardsFound = $cardsFound + 1;
 }
+print "Number of cards found for set " . $setName . ": " . $cardsFound . "\n";
+print "Number of implemented cards:  " . $cardsImplemented . "\n";
+
 open CARD, "> " . lc($sets{$setName}) . "_implemented.txt";
 print CARD $toPrint;
 close CARD;
