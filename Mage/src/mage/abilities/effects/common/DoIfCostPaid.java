@@ -13,17 +13,24 @@ import mage.util.CardUtil;
 public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
     private final OneShotEffect executingEffect;
     private final Cost cost;
+    private String chooseUseText;
 
     public DoIfCostPaid(OneShotEffect effect, Cost cost) {
+        this(effect, cost, null);
+    }
+
+    public DoIfCostPaid(OneShotEffect effect, Cost cost, String chooseUseText) {
         super(Outcome.Benefit);
         this.executingEffect = effect;
         this.cost = cost;
+        this.chooseUseText = chooseUseText;
     }
 
     public DoIfCostPaid(final DoIfCostPaid effect) {
         super(effect);
         this.executingEffect = (OneShotEffect) effect.executingEffect.copy();
         this.cost = effect.cost.copy();
+        this.chooseUseText = effect.chooseUseText;
     }
 
     @Override
@@ -31,7 +38,12 @@ public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
         Player player = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
         if (player != null && mageObject != null) {
-            String message = new StringBuilder(getCostText()).append(" and ").append(executingEffect.getText(source.getModes().getMode())).append("?").toString();
+            String message;
+            if (chooseUseText == null) {
+                message = new StringBuilder(getCostText()).append(" and ").append(executingEffect.getText(source.getModes().getMode())).append("?").toString();
+            } else {
+                message = chooseUseText;
+            }
             message = CardUtil.replaceSourceName(message, mageObject.getName());
             if (player.chooseUse(executingEffect.getOutcome(), message, game)) {
                 cost.clearPaid();

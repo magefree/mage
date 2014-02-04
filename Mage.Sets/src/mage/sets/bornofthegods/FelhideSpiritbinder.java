@@ -38,14 +38,15 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.InspiredAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.sets.tokens.EmptyToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -74,7 +75,7 @@ public class FelhideSpiritbinder extends CardImpl<FelhideSpiritbinder> {
         this.toughness = new MageInt(4);
 
         // <i>Inspired</i> - Whenever Felhide Spiritbinder becomes untapped, you may pay {1}{R}. If you do, put a token onto the battlefield that's a copy of another target creature except it's an enchantment in addition to its other types. It gains haste. Exile it at the beginning of the next end step.
-        Ability ability = new InspiredAbility(new DoIfCostPaid(new FelhideSpiritbinderEffect(), new ManaCostsImpl("{1}{R}")));
+        Ability ability = new InspiredAbility(new DoIfCostPaid(new FelhideSpiritbinderEffect(), new ManaCostsImpl("{1}{R}"),"Use effect of {source}?"));
         ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
     }
@@ -107,10 +108,13 @@ class FelhideSpiritbinderEffect extends OneShotEffect<FelhideSpiritbinderEffect>
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent == null) {
+            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+        }
+        if (permanent != null) {
             EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card);
+            CardUtil.copyTo(token).from(permanent);
 
             if (!token.getCardType().contains(CardType.ENCHANTMENT)) {
                 token.getCardType().add(CardType.ENCHANTMENT);

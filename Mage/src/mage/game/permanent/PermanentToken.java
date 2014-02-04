@@ -75,11 +75,12 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
         for (ManaCost cost: token.getManaCost()) {
             this.getManaCost().add(cost.copy());
         }
-        this.cardType = token.getCardType();
-        this.color = token.getColor();
-        this.power = token.getPower();
-        this.toughness = token.getToughness();
-        this.subtype = token.getSubtype();
+        this.cardType.addAll(token.getCardType());
+        this.color = token.getColor().copy();
+        this.power.initValue(token.getPower().getValue());
+        this.toughness.initValue(token.getToughness().getValue());
+        this.supertype.addAll(token.getSupertype());
+        this.subtype.addAll(token.getSubtype());
     }
 
     @Override

@@ -117,7 +117,12 @@ public class Token extends MageObjectImpl<Token> {
 
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking) {
         Card source = game.getCard(sourceId);
-        String setCode = source != null ? source.getExpansionSetCode() : null;
+        String setCode;
+        if (this.getOriginalExpansionSetCode() != null && !this.getOriginalExpansionSetCode().isEmpty()) {
+            setCode = this.getOriginalExpansionSetCode();
+        } else {
+            setCode = source != null ? source.getExpansionSetCode() : null;
+        }
         GameEvent event = GameEvent.getEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount);
         if (!game.replaceEvent(event)) {
             amount = event.getAmount();
