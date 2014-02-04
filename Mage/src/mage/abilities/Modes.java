@@ -44,7 +44,7 @@ import mage.players.Player;
 public class Modes extends LinkedHashMap<UUID, Mode> {
 
     private UUID modeId;
-    private Set<UUID> selectedModes = new LinkedHashSet<UUID>();
+    private final Set<UUID> selectedModes = new LinkedHashSet<UUID>();
     private int minModes;
     private int maxModes;
 

@@ -28,6 +28,7 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageMultiEffect;
@@ -49,7 +50,9 @@ public class Electrolyze extends CardImpl<Electrolyze> {
         this.color.setBlue(true);
 
         // Electrolyze deals 2 damage divided as you choose among one or two target creatures and/or players.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(2));
+        Effect effect = new DamageMultiEffect(2);
+        effect.setText("{source} deals 2 damage divided as you choose among one or two target creatures and/or players");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(2));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));

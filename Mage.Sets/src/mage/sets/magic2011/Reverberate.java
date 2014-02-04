@@ -56,6 +56,8 @@ public class Reverberate extends CardImpl<Reverberate> {
         super(ownerId, 155, "Reverberate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
         this.expansionSetCode = "M11";
         this.color.setRed(true);
+        
+        // Copy target instant or sorcery spell. You may choose new targets for the copy.
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CopyTargetSpellEffect());
     }

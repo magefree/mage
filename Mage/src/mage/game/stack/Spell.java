@@ -37,6 +37,7 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
@@ -56,6 +57,7 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetAmount;
 import mage.watchers.Watcher;
 
 /**
@@ -230,7 +232,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         }
     }
 
-
     /**
      * Choose new targets for the spell
      *
@@ -243,65 +244,150 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     /**
+     * 114.6. Some effects allow a player to change the target(s) of a spell or
+     * ability, and other effects allow a player to choose new targets for a
+     * spell or ability. 
+     * 
+     * 114.6a If an effect allows a player to "change the
+     * target(s)" of a spell or ability, each target can be changed only to
+     * another legal target. If a target can't be changed to another legal
+     * target, the original target is unchanged, even if the original target is
+     * itself illegal by then. If all the targets aren't changed to other legal
+     * targets, none of them are changed. 
+     * 
+     * 114.6b If an effect allows a player to "change a target" of a 
+     * spell or ability, the process described in rule 114.6a
+     * is followed, except that only one of those targets may be changed
+     * (rather than all of them or none of them). 
+     * 
+     * 114.6c If an effect allows a
+     * player to "change any targets" of a spell or ability, the process
+     * described in rule 114.6a is followed, except that any number of those
+     * targets may be changed (rather than all of them or none of them). 
+     * 
+     * 114.6d If an effect allows a player to "choose new targets" for a spell or
+     * ability, the player may leave any number of the targets unchanged, even
+     * if those targets would be illegal. If the player chooses to change some
+     * or all of the targets, the new targets must be legal and must not cause
+     * any unchanged targets to become illegal. 
+     * 
+     * 114.6e When changing targets or
+     * choosing new targets for a spell or ability, only the final set of
+     * targets is evaluated to determine whether the change is legal.
      *
+     * Example: Arc Trail is a sorcery that reads "Arc Trail deals 2 damage to
+     * target creature or player and 1 damage to another target creature or
+     * player." The current targets of Arc Trail are Runeclaw Bear and Llanowar
+     * Elves, in that order. You cast Redirect, an instant that reads "You may
+     * choose new targets for target spell," targeting Arc Trail. You can change
+     * the first target to Llanowar Elves and change the second target to
+     * Runeclaw Bear.
+     *
+     * 114.7. Modal spells and abilities may have different targeting
+     * requirements for each mode. An effect that allows a player to change the
+     * target(s) of a modal spell or ability, or to choose new targets for a
+     * modal spell or ability, doesn't allow that player to change its mode.
+     * (See rule 700.2.)
+     *
+     * 706.10c Some effects copy a spell or ability and state that its
+     * controller may choose new targets for the copy. The player may leave any
+     * number of the targets unchanged, even if those targets would be illegal.
+     * If the player chooses to change some or all of the targets, the new
+     * targets must be legal. Once the player has decided what the copy's
+     * targets will be, the copy is put onto the stack with those targets.
      *
      * @param game
      * @param playerId
-     * @param forceChange - does only work for targets with maximal one targetId
-     * @param onlyOneTarget - 114.6b one target must be changed to another target
+     * @param forceChange - does only work for targets with maximum of one
+     * targetId
+     * @param onlyOneTarget - 114.6b one target must be changed to another
+     * target
      * @return
      */
     public boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
-            for(SpellAbility spellAbility: spellAbilities) {
-                for (Target target: spellAbility.getTargets()) {
-                    Target newTarget = target.copy();
-                    newTarget.clearChosen();
-                    for (UUID targetId: target.getTargets()) {
-                        MageObject object = game.getObject(targetId);
-                        String name = null;
-                        if (object == null) {
-                            Player targetPlayer = game.getPlayer(targetId);
-                            if (targetPlayer != null) {
-                                name = targetPlayer.getName();
-                            }
-                        } else {
-                            name = object.getName();
+            for (SpellAbility spellAbility : spellAbilities) {
+                // Some spells can have more than one mode
+                for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                    Mode mode = spellAbility.getModes().get(modeId);
+                    for (Target target : mode.getTargets()) {
+                        Target newTarget = chooseNewTarget(player, spellAbility, mode, target, forceChange, game);
+                        // clear the old target and copy all targets from new target
+                        target.clearChosen();
+                        for (UUID targetId : newTarget.getTargets()) {
+                            target.addTarget(targetId, newTarget.getTargetAmount(targetId), spellAbility, game, false);                            
                         }
-                        if (name != null && (forceChange || player.chooseUse(spellAbility.getEffects().get(0).getOutcome(), "Change current target (" + name + ")?", game))) {
-                            if (forceChange &&  target.possibleTargets(this.getSourceId(), playerId, game).size() > 1 ) {
-                                int iteration = 0;
-                                do {
-                                    if (iteration > 0) {
-                                        game.informPlayer(player, "You may only select exactly one target that must be different from the origin target!");
-                                    }
-                                    iteration++;
-                                    newTarget.clearChosen();
-                                    player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game);
-                                } while (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1);
 
-                            } else {
-                                if (!player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game)) {
-                                    newTarget.addTarget(targetId, spellAbility, game, false);
-                                }
-                            }
-                        }
-                        else {
-                            newTarget.addTarget(targetId, spellAbility, game, false);
-                        }
-                    }
-                    target.clearChosen();
-                    for (UUID newTargetId: newTarget.getTargets()) {
-                        target.addTarget(newTargetId, spellAbility, game, false);
                     }
                 }
+
             }
             return true;
         }
         return false;
     }
 
+    /**
+     * Handles the change of one target instance of a mode
+     * 
+     * @param player
+     * @param spellAbility
+     * @param mode
+     * @param target
+     * @param forceChange
+     * @param game
+     * @return 
+     */
+    private Target chooseNewTarget(Player player, SpellAbility spellAbility, Mode mode, Target target, boolean forceChange, Game game) {
+        Target newTarget = target.copy();
+        newTarget.clearChosen();
+        for (UUID targetId : target.getTargets()) {
+            String targetNames = getNamesOftargets(targetId, game);
+            // change the target?
+            if (targetNames != null
+                    && (forceChange || player.chooseUse(mode.getEffects().get(0).getOutcome(), "Change current target (" + targetNames + ")?", game))) {               
+                // choose exactly one other target
+                if (forceChange && target.possibleTargets(this.getSourceId(), player.getId(), game).size() > 1) {
+                    int iteration = 0;
+                    do {
+                        if (iteration > 0) {
+                            game.informPlayer(player, "You may only select exactly one target that must be different from the origin target!");
+                        }
+                        iteration++;
+                        newTarget.clearChosen();
+                        player.chooseTarget(mode.getEffects().get(0).getOutcome(), newTarget, spellAbility, game);
+                    } while (player.isInGame() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
+                // choose a new target
+                } else {
+                    if (!player.chooseTarget(mode.getEffects().get(0).getOutcome(), newTarget, spellAbility, game)) {
+                        newTarget.addTarget(targetId, target.getTargetAmount(targetId), spellAbility, game, false);
+                    }
+                }            
+            }
+            // keep the target
+            else { 
+                newTarget.addTarget(targetId, target.getTargetAmount(targetId), spellAbility, game, false);
+            }
+        }    
+        return newTarget;
+    }
+    
+    
+    private String getNamesOftargets(UUID targetId, Game game) {
+        MageObject object = game.getObject(targetId);
+        String name = null;
+        if (object == null) {
+            Player targetPlayer = game.getPlayer(targetId);
+            if (targetPlayer != null) {
+                name = targetPlayer.getName();
+            }
+        } else {
+            name = object.getName();
+        }
+        return name;
+    }
+    
     @Override
     public void counter(UUID sourceId, Game game) {
         card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
