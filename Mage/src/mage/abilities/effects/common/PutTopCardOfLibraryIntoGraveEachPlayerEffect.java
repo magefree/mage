@@ -88,16 +88,10 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect<
                             putCardsToGravecard(playerId, source, game);
                         }
                     }
+                    break;
                 default:
                     throw new UnsupportedOperationException("TargetController type not supported.");        
             }            
-            int cardsCount = Math.min(numberCards, player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
-                }
-            }
             return true;
         }
         return false;
