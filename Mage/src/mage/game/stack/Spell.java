@@ -269,7 +269,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                         } else {
                             name = object.getName();
                         }
-                        if (name != null && (forceChange || player.chooseUse(spellAbility.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game))) {
+                        if (name != null && (forceChange || player.chooseUse(spellAbility.getEffects().get(0).getOutcome(), "Change current target (" + name + ")?", game))) {
                             if (forceChange &&  target.possibleTargets(this.getSourceId(), playerId, game).size() > 1 ) {
                                 int iteration = 0;
                                 do {
