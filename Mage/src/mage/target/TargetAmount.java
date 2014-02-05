@@ -89,6 +89,10 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
         // remainingAmount = amount;
     }
 
+    public void setAmountDefinition(DynamicValue amount) {
+        this.amount = amount;
+    } 
+    
     public void setAmount(Ability source, Game game) {
         remainingAmount = amount.calculate(game, source);
         amountWasSet = true;

@@ -50,7 +50,8 @@ public class ChooseNewTargetsTargetEffect extends OneShotEffect<ChooseNewTargets
 
     /**
      *
-     * @param forceChange - forces the user to choose another target (only targets with maxtargets = 1 supported)
+     * @param forceChange forces the user to choose another target (only targets with maxtargets = 1 supported)
+     * @param onlyOneTarget only one target can be selected for the change
      */
 
     public ChooseNewTargetsTargetEffect(boolean forceChange, boolean onlyOneTarget) {

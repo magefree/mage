@@ -42,12 +42,14 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
@@ -307,6 +309,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     public boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
+            // Fused split spells or spells where "Splice on Arcane" was used can have more than one ability
             for (SpellAbility spellAbility : spellAbilities) {
                 // Some spells can have more than one mode
                 for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
@@ -346,7 +349,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             String targetNames = getNamesOftargets(targetId, game);
             // change the target?
             if (targetNames != null
-                    && (forceChange || player.chooseUse(mode.getEffects().get(0).getOutcome(), "Change current target (" + targetNames + ")?", game))) {               
+                    && (forceChange || player.chooseUse(mode.getEffects().get(0).getOutcome(), "Change this target: " + targetNames + "?", game))) {               
                 // choose exactly one other target
                 if (forceChange && target.possibleTargets(this.getSourceId(), player.getId(), game).size() > 1) {
                     int iteration = 0;
@@ -356,17 +359,39 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                         }
                         iteration++;
                         newTarget.clearChosen();
-                        player.chooseTarget(mode.getEffects().get(0).getOutcome(), newTarget, spellAbility, game);
+                        newTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), player.getId(), spellAbility, game);
                     } while (player.isInGame() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
                 // choose a new target
                 } else {
-                    if (!newTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), player.getId(), spellAbility, game)) {
-                        newTarget.addTarget(targetId, target.getTargetAmount(targetId), spellAbility, game, false);
-                    } else {
-                        // TODO: It#s not possible yet to change only one target of a target definition that target smultiple targetIds
-                        // Target must have therefore a mode to remove only one targetId and replace it with another valid Id
-                        break;
+                    // build a target definition with exactly one possible target to select that replaces old target
+                    Target tempTarget = target.copy();
+                    if (target instanceof TargetAmount) {
+                        ((TargetAmount)tempTarget).setAmountDefinition(new StaticValue(target.getTargetAmount(targetId)));
                     }
+                    tempTarget.setMinNumberOfTargets(1);
+                    tempTarget.setMaxNumberOftargets(1);
+                    boolean again;
+                    do {
+                        again = false;
+                        tempTarget.clearChosen();
+                        if (!tempTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), player.getId(), spellAbility, game)) {
+                            if (player.chooseUse(Outcome.Detriment, "No target object selected. Reset to original target?", game)) {
+                                // use previous target no target was selected
+                                newTarget.addTarget(targetId, target.getTargetAmount(targetId), spellAbility, game, false);
+                            } else {
+                                again = true;
+                            }
+                        } else {
+                            // if possible add the alternate Target - it may not be included in the old definition nor in the already selected targets of the new definition
+                            if (newTarget.getTargets().contains(tempTarget.getFirstTarget()) || target.getTargets().contains(tempTarget.getFirstTarget())) {
+                                game.informPlayer(player, "This target was already selected from origin spell. You can only keep this target!");
+                                again = true;
+                            } else {
+                                // valid target was selected, add it to the new target definition
+                                newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), spellAbility, game, false);
+                            }
+                        }
+                    } while (again && player.isInGame());
                 }            
             }
             // keep the target

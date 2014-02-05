@@ -87,6 +87,9 @@ public interface Target extends Serializable {
     int getTargetAmount(UUID targetId);
     int getNumberOfTargets();
     int getMaxNumberOfTargets();
+    void setMinNumberOfTargets(int minNumberofTargets);
+    void setMaxNumberOftargets(int maxNumberofTargets);
+    
     List<UUID> getTargets();
     Filter getFilter();
 

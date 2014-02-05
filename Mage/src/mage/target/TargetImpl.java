@@ -93,6 +93,16 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
     }
 
     @Override
+    public void setMinNumberOfTargets(int minNumberOftargets) {
+        this.minNumberOfTargets = minNumberOftargets;
+    }
+    
+    @Override
+    public void setMaxNumberOftargets(int maxNumberOftargets) {
+        this.maxNumberOfTargets = maxNumberOftargets;
+    }
+
+    @Override
     public String getMessage() {
         if (maxNumberOfTargets != 1) {
             StringBuilder sb = new StringBuilder();
