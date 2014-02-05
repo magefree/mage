@@ -27,13 +27,12 @@
 */
 package mage.client.deckeditor.collection.viewer;
 
-import mage.client.MagePane;
-import mage.client.plugins.impl.Plugins;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JComponent;
+import mage.client.MagePane;
+import mage.client.plugins.impl.Plugins;
 
 /**
  * Collection viewer pane.
@@ -47,8 +46,8 @@ public class CollectionViewerPane extends MagePane {
         boolean initialized = false;
         this.setTitle("Collection Viewier");
         if (Plugins.getInstance().isThemePluginLoaded()) {
-            Map<String, JComponent> ui = new HashMap<String, JComponent>();
-            JComponent container = Plugins.getInstance().updateTablePanel(ui);
+            Map<String, JComponent> uiComponents = new HashMap<String, JComponent>();
+            JComponent container = Plugins.getInstance().updateTablePanel(uiComponents);
             if (container != null) {
                 collectionViewerPanel = new CollectionViewerPanel();
                 initComponents(container);

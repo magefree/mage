@@ -408,7 +408,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             backgroundPane.setSize(1024, 768);
             desktopPane.add(backgroundPane, JLayeredPane.DEFAULT_LAYER);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.fatal("Error while setting background.", e);
         }
     }
 
@@ -431,7 +431,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 backgroundPane.add(title);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.fatal("Error while adding mage label.", e);
         }
     }
 
@@ -1036,10 +1036,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         }
         try {
-            collectionViewerPane = new CollectionViewerPane();
+            CollectionViewerPane collectionViewerPane = new CollectionViewerPane();
             desktopPane.add(collectionViewerPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
             collectionViewerPane.setMaximum(true);
-            this.collectionViewerPane.setVisible(true);
+            collectionViewerPane.setVisible(true);
             setActive(collectionViewerPane);
         } catch (PropertyVetoException ex) {
             logger.fatal(null, ex);
@@ -1118,7 +1118,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final long serialVersionUID = -9104885239063142218L;
     private ImagePanel backgroundPane;
     private TablesPane tablesPane;
-    private CollectionViewerPane collectionViewerPane;
+//    private CollectionViewerPane collectionViewerPane;
 
     public void setStatusText(String status) {
         this.lblStatus.setText(status);

@@ -27,15 +27,27 @@
 */
 package mage.client.deckeditor.collection.viewer;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.plugins.impl.Plugins;
 import mage.client.util.sets.ConstructedFormats;
+import org.apache.log4j.Logger;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Pane with big card and mage book.
@@ -43,6 +55,8 @@ import java.awt.event.ActionListener;
  * @author nantuko
  */
 public final class CollectionViewerPanel extends JPanel {
+
+    private static final Logger logger = Logger.getLogger(CollectionViewerPanel.class);
 
     protected static String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
     protected static String FORMAT_CONFIG_KEY = "collectionViewerFormat";
@@ -53,7 +67,7 @@ public final class CollectionViewerPanel extends JPanel {
             String format = PreferencesDialog.getCachedValue(CollectionViewerPanel.FORMAT_CONFIG_KEY, ConstructedFormats.getDefault());
             formats.setSelectedItem(format);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.fatal("Error setting selected format", e);
         }
     }
 
@@ -188,14 +202,25 @@ public final class CollectionViewerPanel extends JPanel {
     }
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {
+        this.removeCollectionViewer();
+    }
+
+    private void hidePopup() {
+        Plugins.getInstance().getActionCallback().mouseExited(null, null);
+    }
+
+    public void removeCollectionViewer() {
+        hidePopup();
+
         Component c = this.getParent();
         while (c != null && !(c instanceof CollectionViewerPane)) {
             c = c.getParent();
         }
-        if (c != null)
-            c.setVisible(false);
-    }
+        if (c != null) {
+            ((CollectionViewerPane)c).removeFrame();
+        }
 
+    }
     private final class MageBookContainer extends JPanel {
         public MageBookContainer() {
             super();
