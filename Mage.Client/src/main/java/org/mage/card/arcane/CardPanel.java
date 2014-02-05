@@ -252,7 +252,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         });
     }
 
-    public void clear() {
+    public void cleanUp() {
         if (dayNightButton != null) {
             for(ActionListener al: dayNightButton.getActionListeners()) {
                 dayNightButton.removeActionListener(al);
@@ -267,6 +267,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         for(MouseWheelListener ml: this.getMouseWheelListeners() ){
             this.removeMouseWheelListener(ml);
         }
+        this.callback = null;
     }
 
     private void setText(CardView card) {

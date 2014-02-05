@@ -229,7 +229,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         // remove possible mouse listeners, preventing gc
         for (MageCard mageCard: cards.values()) {
             if (mageCard instanceof CardPanel) {
-                ((CardPanel)mageCard).clear();
+                ((CardPanel)mageCard).cleanUp();
             }
         }
         this.cards.clear();
