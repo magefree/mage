@@ -189,6 +189,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
                 if (card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId)) {
+                    game.getState().handleSimultaneousEvent(game);
                     return ability.resolve(game);
                 }
                 return false;
@@ -196,6 +197,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             if (this.getSpellAbility() instanceof BestowAbility) { 
                 updateOptionalCosts(0);
                 result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
+                game.getState().handleSimultaneousEvent(game);
                 return result;
             } else {
                 //20091005 - 608.2b
@@ -206,6 +208,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         } else {
             updateOptionalCosts(0);
             result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
+            game.getState().handleSimultaneousEvent(game);
             return result;
         }
     }
@@ -375,7 +378,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                         again = false;
                         tempTarget.clearChosen();
                         if (!tempTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), player.getId(), spellAbility, game)) {
-                            if (player.chooseUse(Outcome.Detriment, "No target object selected. Reset to original target?", game)) {
+                            if (player.chooseUse(Outcome.Benefit, "No target object selected. Reset to original target?", game)) {
                                 // use previous target no target was selected
                                 newTarget.addTarget(targetId, target.getTargetAmount(targetId), spellAbility, game, false);
                             } else {
@@ -384,8 +387,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                         } else {
                             // if possible add the alternate Target - it may not be included in the old definition nor in the already selected targets of the new definition
                             if (newTarget.getTargets().contains(tempTarget.getFirstTarget()) || target.getTargets().contains(tempTarget.getFirstTarget())) {
-                                game.informPlayer(player, "This target was already selected from origin spell. You can only keep this target!");
-                                again = true;
+                                if(player.isHuman()) {
+                                    game.informPlayer(player, "This target was already selected from origin spell. You can only keep this target!");
+                                    again = true;
+                                } else {
+                                    newTarget.addTarget(targetId, target.getTargetAmount(targetId), spellAbility, game, false);
+                                }
                             } else {
                                 // valid target was selected, add it to the new target definition
                                 newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), spellAbility, game, false);
