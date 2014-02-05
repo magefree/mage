@@ -49,7 +49,7 @@ public class LoseLifeSourceEffect extends OneShotEffect<LoseLifeSourceEffect> {
     }
 
     public LoseLifeSourceEffect(DynamicValue amount) {
-        super(Outcome.Damage);
+        super(Outcome.LoseLife);
         this.amount = amount;
         setText();
     }
