@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -43,13 +42,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.BeastToken;
 import mage.game.permanent.token.MyrToken;
-import mage.game.permanent.token.Token;
-import mage.game.stack.Spell;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -135,7 +129,7 @@ class GenesisChamberEffect extends OneShotEffect<GenesisChamberEffect> {
         }
         if (permanent != null) {
             MyrToken token = new MyrToken();
-            token.putOntoBattlefield(1, game, source.getId(), permanent.getControllerId());
+            token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
         }
         return true;
     }
