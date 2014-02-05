@@ -360,8 +360,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                     } while (player.isInGame() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
                 // choose a new target
                 } else {
-                    if (!player.chooseTarget(mode.getEffects().get(0).getOutcome(), newTarget, spellAbility, game)) {
+                    if (!newTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), player.getId(), spellAbility, game)) {
                         newTarget.addTarget(targetId, target.getTargetAmount(targetId), spellAbility, game, false);
+                    } else {
+                        // TODO: It#s not possible yet to change only one target of a target definition that target smultiple targetIds
+                        // Target must have therefore a mode to remove only one targetId and replace it with another valid Id
+                        break;
                     }
                 }            
             }
