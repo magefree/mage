@@ -96,6 +96,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private final Map<UUID, Abilities<ActivatedAbility>> otherAbilities = new HashMap<UUID, Abilities<ActivatedAbility>>();
     private final TurnMods turnMods;
     private final Watchers watchers;
+    
 
     private UUID activePlayerId;
     private UUID priorityPlayerId;
@@ -114,6 +115,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Combat combat;
     private Map<String, Object> values = new HashMap<String, Object>();
     private Map<UUID, Zone> zones = new HashMap<UUID, Zone>();
+    private List<GameEvent> simultaneousEvents = new ArrayList<GameEvent>();
 
     public GameState() {
         players = new Players();
@@ -172,6 +174,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             otherAbilities.put(entry.getKey(), entry.getValue().copy());
         }
         this.paused = state.paused;
+        this.simultaneousEvents.addAll(state.simultaneousEvents);
     }
 
     @Override
@@ -482,6 +485,20 @@ public class GameState implements Serializable, Copyable<GameState> {
             Player origPlayer = players.get(copyPlayer.getId());
             origPlayer.restore(copyPlayer);
         }
+        this.simultaneousEvents = state.simultaneousEvents;
+    }
+
+    public void addSimultaneousEvent(GameEvent event, Game game) {
+        simultaneousEvents.add(event);
+    }
+
+    public void handleSimultaneousEvent(Game game) {
+        if (!simultaneousEvents.isEmpty()) {
+            for (GameEvent event:simultaneousEvents) {
+                this.handleEvent(event, game);
+            }
+            simultaneousEvents.clear();
+        }
     }
 
     public void handleEvent(GameEvent event, Game game) {
@@ -665,6 +682,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         watchers.clear();
         values.clear();
         zones.clear();
+        simultaneousEvents.clear();
     }
 
     public void pause() {

@@ -1791,6 +1791,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
+    public void addSimultaneousEvent(GameEvent event) {
+        state.addSimultaneousEvent(event, this);
+    }
+
+    @Override
     public void fireEvent(GameEvent event) {
         state.handleEvent(event, this);
     }

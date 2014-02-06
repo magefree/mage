@@ -159,6 +159,8 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 if (effect.applyEffectsAfter()) {
                     game.applyEffects();
                 }
+                // effects like entersBattlefield have to trigger simultanously so objects see each other
+                game.getState().handleSimultaneousEvent(game);
             }
         }
         return result;

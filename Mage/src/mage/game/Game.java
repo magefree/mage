@@ -172,6 +172,12 @@ public interface Game extends MageItem, Serializable {
 
     //game event methods
     void fireEvent(GameEvent event);
+    /**
+     * The events are stored until the resolution of the current effect ends
+     * and fired then all together (e.g. X lands enter the battlefield from Scapeshift)
+     * @param event
+     */
+    void addSimultaneousEvent(GameEvent event);
     boolean replaceEvent(GameEvent event);
 
     //game play methods

@@ -748,7 +748,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone);
         if (!game.replaceEvent(event)) {
             if (fireEvent) {
-                game.fireEvent(event);
+                if (sourceId == null) { // play lands
+                    game.fireEvent(event);
+                } else { // from effects
+                    game.addSimultaneousEvent(event);
+                }
             }
         }
     }

@@ -118,11 +118,9 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 
     @Override
     public void setValue(String key, Object value) {
-        if (values == null) {
-            synchronized (this) {
-                if (values == null) {
-                    values = new HashMap<String, Object>();
-                }
+        synchronized (this) {
+            if (values == null) {
+                values = new HashMap<String, Object>();
             }
         }
         values.put(key, value);
