@@ -526,6 +526,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public static void setActive(MagePane frame) {
         if (frame == null) {
+            activeFrame = null;
             return;
         }
         logger.debug("Setting " + frame.getTitle() + " active");
@@ -552,11 +553,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public static void deactivate(MagePane frame) {
         frame.setVisible(false);
-        MagePane topmost = getTopMost(frame);
+        setActive(getTopMost(frame));
         if (activeFrame != frame) {
             frame.deactivated();
         }
-        setActive(topmost);
+        
     }
 
     private static MagePane getTopMost(MagePane exclude) {
@@ -568,7 +569,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 if (z < best) {
                     if (frame instanceof MagePane) {
                         best = z;
-                        topmost = (MagePane) frame;
+                        if (!frame.equals(exclude)) {
+                            topmost = (MagePane) frame;
+                        }
                     }
                 }
             }
