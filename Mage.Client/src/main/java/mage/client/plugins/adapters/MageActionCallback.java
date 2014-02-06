@@ -34,6 +34,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import org.jboss.logging.Logger;
 
 public class MageActionCallback implements ActionCallback {
 
@@ -388,17 +389,20 @@ public class MageActionCallback implements ActionCallback {
 
                     final Component popupContainer = MageFrame.getUI().getComponent(MageComponents.CARD_PREVIEW_CONTAINER);
                     Component cardPreview = MageFrame.getUI().getComponent(MageComponents.CARD_PREVIEW_PANE);
-                    //((CardInfoPaneImplExt) cardPreview).setCard(data.card);
-                    Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
-                    location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, cardPreview, parentComponent);
-                    location.translate(-parentPoint.x, -parentPoint.y);
-                    popupContainer.setLocation(location);
-                    popupContainer.setVisible(true);
+                    if (cardPreview != null) {
+                        Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
+                        location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, cardPreview, parentComponent);
+                        location.translate(-parentPoint.x, -parentPoint.y);
+                        popupContainer.setLocation(location);
+                        popupContainer.setVisible(true);
 
-                    MageCard card = (MageCard) data.component;
-                    Image image = card.getImage();
-                    BigCard bigCard = (BigCard)cardPreview;
-                    displayCardInfo(card, image, bigCard);
+                        MageCard card = (MageCard) data.component;
+                        Image image = card.getImage();
+                        BigCard bigCard = (BigCard)cardPreview;
+                        displayCardInfo(card, image, bigCard);
+                    } else {
+                        Logger.getLogger(MageActionCallback.class).warn("No Card preview Pane in Mage Frame defined. Card: " + card.getName());
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();

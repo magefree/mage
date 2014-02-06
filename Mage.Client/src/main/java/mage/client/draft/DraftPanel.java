@@ -91,7 +91,7 @@ public class DraftPanel extends javax.swing.JPanel {
     }
 
     public void cleanUp() {
-        draftPicks.clear();
+        draftPicks.cleanUp();
         draftBooster.clear();
 
         if (countdown != null) {

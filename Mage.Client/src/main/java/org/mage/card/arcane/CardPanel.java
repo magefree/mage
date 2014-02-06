@@ -267,7 +267,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         for(MouseWheelListener ml: this.getMouseWheelListeners() ){
             this.removeMouseWheelListener(ml);
         }
+        // this holds reference to ActionCallback forever so set it to null to prevent
         this.callback = null;
+        this.data = null;
     }
 
     private void setText(CardView card) {

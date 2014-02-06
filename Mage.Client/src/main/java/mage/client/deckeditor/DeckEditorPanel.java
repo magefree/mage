@@ -61,6 +61,7 @@ import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.constants.Constants.SortBy;
 import mage.client.dialog.AddLandDialog;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.plugins.MagePlugins;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
@@ -123,7 +124,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     /**
-     * Free resources so GC can work
+     * Free resources so GC can remove unused objects from memory
      */
     public void cleanUp() {
         if (updateDeckTask != null) {
@@ -137,9 +138,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 countdown.removeActionListener(al);
             }
         }
-        this.cardSelector.clear();
-        this.deckArea.clear();
-        this.getUI().uninstallUI(this);
+        this.cardSelector.cleanUp();
+        this.deckArea.cleanUp();
+        this.remove(bigCard);
+        this.bigCard = null;
         ((MageActionCallback) Plugins.getInstance().getActionCallback()).setCardPreviewComponent(null);
     }
 

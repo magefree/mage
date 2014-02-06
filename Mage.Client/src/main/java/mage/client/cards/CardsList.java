@@ -59,6 +59,7 @@ import mage.client.util.*;
 import mage.client.util.Event;
 import mage.view.CardView;
 import mage.view.CardsView;
+import org.mage.card.arcane.CardPanel;
 
 /**
  *
@@ -84,14 +85,30 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         initListViewComponents();
     }
 
-    public void clear() {
+    public void cleanUp() {
         this.clearCardEventListeners();
         if (cards != null) {
             cards.clear();
         }
         if (mainModel != null) {
+            mainModel.removeTableModelListener(mainTable);
             mainModel.clear();
         }
+        if(mainTable != null) {
+            for(MouseListener ml: mainTable.getMouseListeners()) {
+                mainTable.removeMouseListener(ml);
+            }
+        }
+        if (currentView != null) {
+            currentView.clearCardEventListeners();
+        }
+        for (Component comp :cardArea.getComponents()) {
+            if (comp instanceof CardPanel) {                
+                ((CardPanel)comp).cleanUp();
+            }
+        }
+        cardArea.removeAll();
+        this.bigCard = null;
 
     }
 

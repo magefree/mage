@@ -164,7 +164,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
      * Free all references
      * 
      */
-    public void clear() {
+    public void cleanUp() {
         this.cardGrid.clear();
         this.mainModel.clear();
     }

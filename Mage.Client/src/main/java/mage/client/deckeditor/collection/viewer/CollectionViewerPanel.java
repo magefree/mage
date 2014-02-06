@@ -71,6 +71,11 @@ public final class CollectionViewerPanel extends JPanel {
         }
     }
 
+    public void cleanUp() {
+        this.hidePopup();
+        this.bigCard = null;
+    }
+    
     public void initComponents() {
         jPanel1 = new javax.swing.JPanel();
         jPanel1.setOpaque(false);
@@ -210,8 +215,7 @@ public final class CollectionViewerPanel extends JPanel {
     }
 
     public void removeCollectionViewer() {
-        hidePopup();
-
+        this.cleanUp();
         Component c = this.getParent();
         while (c != null && !(c instanceof CollectionViewerPane)) {
             c = c.getParent();

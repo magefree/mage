@@ -60,9 +60,9 @@ public class DeckArea extends javax.swing.JPanel {
         sideboardList.setDisplayNoCopies(true);
     }
 
-    public void clear() {
-        deckList.clear();
-        sideboardList.clear();
+    public void cleanUp() {
+        deckList.cleanUp();
+        sideboardList.cleanUp();
     }
 
     public void showSideboard(boolean show) {
