@@ -96,27 +96,24 @@ class ScapeshiftEffect extends OneShotEffect<ScapeshiftEffect> {
             return false;
         }
         int amount = 0;
-        TargetControlledPermanent sacrificeLand = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledLandPermanent(), true);
+        TargetControlledPermanent sacrificeLand = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledLandPermanent("lands you control"), true);
         if(player.chooseTarget(Outcome.Sacrifice, sacrificeLand, source, game)){
             for(Object uuid : sacrificeLand.getTargets()){
                 Permanent land = game.getPermanent((UUID)uuid);
                 if(land != null){
-                    land.sacrifice(source.getId(), game);
+                    land.sacrifice(source.getSourceId(), game);
                     amount++;
                 }
             }
         }
-        TargetCardInLibrary target = new TargetCardInLibrary(amount, new FilterLandCard());
+        TargetCardInLibrary target = new TargetCardInLibrary(amount, new FilterLandCard("lands"));
+        target.setRequired(true);
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
                     Card card = player.getLibrary().getCard(cardId, game);
                     if (card != null) {
-                        if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId())) {
-                            Permanent permanent = game.getPermanent(card.getId());
-                            if (permanent != null)
-                                permanent.setTapped(true);
-                        }
+                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId(), true);
                     }
                 }
             }

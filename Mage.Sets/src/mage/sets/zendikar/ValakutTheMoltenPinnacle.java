@@ -29,15 +29,15 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -86,8 +86,8 @@ public class ValakutTheMoltenPinnacle extends CardImpl<ValakutTheMoltenPinnacle>
 class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl<ValakutTheMoltenPinnacleTriggeredAbility> {
 
     ValakutTheMoltenPinnacleTriggeredAbility () {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(3));
-        this.addTarget(new TargetCreatureOrPlayer());
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(3), true);
+        this.addTarget(new TargetCreatureOrPlayer(true));
     }
 
     ValakutTheMoltenPinnacleTriggeredAbility(ValakutTheMoltenPinnacleTriggeredAbility ability) {
@@ -95,16 +95,17 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl<Vala
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public boolean checkInterveningIfClause(Game game) {
+        return game.getBattlefield().count(ValakutTheMoltenPinnacle.filter, getSourceId(), getControllerId(), game) > 5;
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.getControllerId())) {
                 if(permanent.hasSubtype("Mountain")){
-                    int count = game.getBattlefield().count(ValakutTheMoltenPinnacle.filter, getSourceId(), getControllerId(), game);
-                    if(count > 5){
-                        return true;
-                    }
+                    return true;
                 }
             }
         }
