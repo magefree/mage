@@ -41,6 +41,7 @@ import mage.game.permanent.Permanent;
  * Is applied when the {@link Permanent} with this ability instance changes zones.
  * 
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class ZoneChangeTriggeredAbility<T extends ZoneChangeTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
 
