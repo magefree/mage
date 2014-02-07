@@ -166,7 +166,6 @@ public class TableWaitingDialog extends MageDialog {
         tableSeats = new javax.swing.JTable();
         chatPanel = new mage.client.chat.ChatPanel(false);
 
-        setClosable(false);
         setResizable(true);
         setTitle("Waiting for players");
 
@@ -201,7 +200,7 @@ public class TableWaitingDialog extends MageDialog {
             }
         });
 
-        jSplitPane1.setDividerLocation(450);
+        jSplitPane1.setDividerLocation(320);
         jSplitPane1.setDividerSize(3);
         jSplitPane1.setResizeWeight(1.0);
 
@@ -221,17 +220,17 @@ public class TableWaitingDialog extends MageDialog {
                 .addComponent(btnMoveDown)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMoveUp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
                 .addComponent(btnStart)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancel)
                 .addContainerGap())
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMoveDown)
