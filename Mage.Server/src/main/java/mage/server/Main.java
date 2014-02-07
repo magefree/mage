@@ -78,7 +78,7 @@ import org.w3c.dom.Element;
 public class Main {
 
     private static final Logger logger = Logger.getLogger(Main.class);
-    private static final MageVersion version = new MageVersion(1, 3, 0, "dev2014-02-03");
+    private static final MageVersion version = new MageVersion(1, 3, 0, "");
 
     private static final String testModeArg = "-testMode=";
     private static final String adminPasswordArg = "-adminPassword=";
