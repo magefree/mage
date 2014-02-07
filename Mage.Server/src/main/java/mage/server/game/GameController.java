@@ -111,6 +111,7 @@ public class GameController implements GameCallback {
         this.userPlayerMap = userPlayerMap;
         chatId = ChatManager.getInstance().createChatSession();
         this.game = game;
+        this.game.setSaveGame(ConfigSettings.getInstance().isSaveGameActivated());
         this.tableId = tableId;
         this.choosingPlayerId = choosingPlayerId;
         for (Player player: game.getPlayers().values()) {

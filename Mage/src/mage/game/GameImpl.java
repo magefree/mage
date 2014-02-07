@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -177,15 +176,15 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public static volatile int copyCount = 0;
     public static volatile long copyTime = 0;
 
-    private transient LinkedList<MageAction> actions;
+    // private final transient LinkedList<MageAction> actions;
     private Player scorePlayer;
-    private int score = 0;
+    // private int score = 0;
     private Player losingPlayer;
     private boolean stateCheckRequired = false;
 
     // used to indicate that currently applied replacement effects have to check for scope relevance (614.12 13/01/18)
     private boolean scopeRelevant = false;
-
+    private boolean saveGame = false;
     private int priorityTime;
 
     @Override
@@ -197,7 +196,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         this.freeMulligans = freeMulligans;
         this.attackOption = attackOption;
         this.state = new GameState();
-        this.actions = new LinkedList<MageAction>();
+        // this.actions = new LinkedList<MageAction>();
     }
 
     public GameImpl(final GameImpl<T> game) {
@@ -213,9 +212,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         this.freeMulligans = game.freeMulligans;
         this.attackOption = game.attackOption;
         this.state = game.state.copy();
-        // Issue 350
-//        this.gameCards = game.gameCards;
-        // issue #187 (else zoneChangeCounter modified by AI -> illegal target)
+        // Ai simulation modifies e.g. zoneChangeCounter so copy is needed if AI active
         for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
             this.gameCards.put(entry.getKey(), entry.getValue().copy());
         }
@@ -227,11 +224,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             copyCount++;
             copyTime += (System.currentTimeMillis() - t1);
         }
-        this.actions = new LinkedList<MageAction>();
+//        this.actions = new LinkedList<MageAction>();
         this.stateCheckRequired = game.stateCheckRequired;
         this.scorePlayer = game.scorePlayer;
         this.scopeRelevant = game.scopeRelevant;
         this.priorityTime = game.priorityTime;
+        this.saveGame = game.saveGame;
     }
 
     @Override
@@ -428,9 +426,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
-    public void saveState() {
+    public void saveState(boolean bookmark) {
         if (!simulation && gameStates != null) {
-            gameStates.save(state);
+            if (bookmark || saveGame) {
+                gameStates.save(state);
+            }
         }
     }
 
@@ -479,7 +479,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     @Override
     public int bookmarkState() {
         if (!simulation) {
-            saveState();
+            saveState(true);
             if (logger.isDebugEnabled()) {
                 logger.debug("Bookmarking state: " + gameStates.getSize());
             }
@@ -641,7 +641,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (gameOptions.stopOnTurn != null && gameOptions.stopAtStep == PhaseStep.UNTAP) {
             if (gameOptions.stopOnTurn.equals(state.getTurnNum())) {
                 winnerId = null; //DRAW
-                //saveState();
+                saveState(false);
                 return true;
             }
         }
@@ -662,7 +662,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         }
         fireStatusEvent(startMessage, false);
 
-        //saveState();
+        saveState(false);
 
         //20091005 - 103.1
         if (!gameOptions.skipInitShuffling) { //don't shuffle in test mode for card injection on top of player's libraries
@@ -719,7 +719,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 mulligan(player.getId());
             }
             fireInformEvent(player.getName() + " keeps hand");
-            //saveState();
+            saveState(false);
         }
 
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
@@ -806,6 +806,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             for (Player player: state.getPlayers().values()) {
                 player.abort();
             }
+            // allow gc
+            gameCards.clear();
         }
     }
 
@@ -947,6 +949,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                                 }
                                 //resetLKI();
                                 applyEffects();
+                                saveState(false);
                                 if (isPaused() || isGameOver()) {
                                     return;
                                 }
@@ -2057,7 +2060,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public int doAction(MageAction action) {
         //actions.add(action);
         int value = action.doAction(this);
-        score += action.getScore(scorePlayer);
+//        score += action.getScore(scorePlayer);
         return value;
     }
 
@@ -2128,6 +2131,17 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         return this.scopeRelevant;
     }
 
+    @Override
+    public boolean isSaveGame() {
+        return saveGame;
+    }
+    
+    @Override
+    public void setSaveGame(boolean saveGame) {
+        this.saveGame = saveGame;
+    }
+
+    
     public void setStartMessage(String startMessage) {
         this.startMessage = startMessage;
     }

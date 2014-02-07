@@ -43,7 +43,7 @@ public class GameStates implements Serializable {
     private static final transient Logger logger = Logger.getLogger(GameStates.class);
 
 //    private List<byte[]> states = new LinkedList<byte[]>();
-    private List<GameState> states = new LinkedList<GameState>();
+    private final List<GameState> states = new LinkedList<GameState>();
 
     public void save(GameState gameState) {
 //        states.add(new Copier<GameState>().copyCompressed(gameState));

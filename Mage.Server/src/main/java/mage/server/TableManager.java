@@ -249,12 +249,12 @@ public class TableManager {
         return false;
     }
 
-    public boolean replayTable(UUID userId, UUID tableId) {
-        if (controllers.containsKey(tableId)) {
-            return controllers.get(tableId).replayTable(userId);
-        }
-        return false;
-    }
+//    public boolean replayTable(UUID userId, UUID tableId) {
+//        if (controllers.containsKey(tableId)) {
+//            return controllers.get(tableId).replayTable(userId);
+//        }
+//        return false;
+//    }
 
     public void endGame(UUID tableId) {
         if (controllers.containsKey(tableId)) {

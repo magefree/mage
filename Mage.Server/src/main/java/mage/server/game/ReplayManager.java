@@ -73,5 +73,8 @@ public class ReplayManager {
         replaySessions.get(gameId.toString() + userId.toString()).next(moves);
     }
 
+    public void endReplay(UUID gameId, UUID userId) {
+        replaySessions.remove(gameId.toString() + userId.toString());
+    }
 
 }

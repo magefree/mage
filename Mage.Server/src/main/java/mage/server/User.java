@@ -35,7 +35,6 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.Deck;
-import mage.constants.TableState;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;

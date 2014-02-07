@@ -345,13 +345,13 @@ public class TableController {
         }
     }
 
-    public boolean replayTable(UUID userId) {
-        if (table.getState() != TableState.FINISHED) {
-            return false;
-        }
-        ReplayManager.getInstance().replayGame(table.getId(), userId);
-        return true;
-    }
+//    public boolean replayTable(UUID userId) {
+//        if (table.getState() != TableState.FINISHED) {
+//            return false;
+//        }
+//        ReplayManager.getInstance().replayGame(table.getId(), userId);
+//        return true;
+//    }
 
     private Player createPlayer(String name, String playerType, int skill) {
         Player player;

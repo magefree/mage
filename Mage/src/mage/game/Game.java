@@ -232,12 +232,14 @@ public interface Game extends MageItem, Serializable {
     int doAction(MageAction action);
 
     //game transaction methods
-    void saveState();
+    void saveState(boolean bookmark);
     int bookmarkState();
     void restoreState(int bookmark);
     void removeBookmark(int bookmark);
     int getSavedStateSize();
-
+    boolean isSaveGame();
+    void setSaveGame(boolean saveGame);
+            
     // game options
     void setGameOptions(GameOptions options);
 

@@ -173,7 +173,7 @@ public abstract class MatchImpl implements Match {
     }
 
     protected void initGame(Game game) throws GameException {
-        shufflePlayers();
+        shufflePlayers();        
         for (MatchPlayer matchPlayer: this.players) {
             if (!matchPlayer.hasQuit()) {
                 matchPlayer.getPlayer().init(game);

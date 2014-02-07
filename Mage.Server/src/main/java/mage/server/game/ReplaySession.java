@@ -35,7 +35,6 @@ import mage.interfaces.callback.ClientCallback;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.view.GameView;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -43,8 +42,7 @@ import org.apache.log4j.Logger;
  */
 public class ReplaySession implements GameCallback {
 
-    private static final Logger logger = Logger.getLogger(ReplaySession.class);
-    private GameReplay replay;
+    private final GameReplay replay;
     protected UUID userId;
 
     ReplaySession(UUID gameId, UUID userId) {
@@ -85,6 +83,7 @@ public class ReplaySession implements GameCallback {
         if (user != null) {
             user.fireCallback(new ClientCallback("replayDone", replay.getGame().getId(), result));
         }
+        ReplayManager.getInstance().endReplay(replay.getGame().getId(), userId);
     }
 
     private void updateGame(final GameState state, Game game) {
