@@ -89,10 +89,10 @@ import org.apache.log4j.Logger;
 public class MageServerImpl implements MageServer {
 
     private static final Logger logger = Logger.getLogger(MageServerImpl.class);
-    private static ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
+    private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
 
-    private String password;
-    private boolean testMode;
+    private final String password;
+    private final boolean testMode;
 
     public MageServerImpl(String password, boolean testMode) {
         this.password = password;
@@ -187,7 +187,9 @@ public class MageServerImpl implements MageServer {
                     logger.debug("Tournament table " + table.getTableId() + " created");
                     LogServiceImpl.instance.log(LogKeys.KEY_TOURNAMENT_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
                     return table;
-                } catch (Exception ex) {
+                } catch (NumberFormatException ex) {
+                    handleException(ex);
+                } catch (MageException ex) {
                     handleException(ex);
                 }
                 return null;

@@ -76,4 +76,11 @@ public interface Match {
     // match times
     Date getStartTime();
     Date getEndTime();
+    /**
+     * Can the games of the match be replayed
+     * 
+     * @return
+     */
+    boolean isReplayAvailable();
+    void setReplayAvailable(boolean replayAvailable);
 }

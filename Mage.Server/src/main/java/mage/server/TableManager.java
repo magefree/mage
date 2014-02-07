@@ -62,8 +62,8 @@ public class TableManager {
     private static final TableManager INSTANCE = new TableManager();
     private static final Logger logger = Logger.getLogger(TableManager.class);
 
-    private ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<UUID, TableController>();
-    private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
+    private final ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<UUID, TableController>();
+    private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
 
     /**
      * Defines how often checking process should be run on server.
@@ -184,6 +184,7 @@ public class TableManager {
 
     public boolean removeTable(UUID userId, UUID tableId) {
         if (isTableOwner(tableId, userId) || UserManager.getInstance().isAdmin(userId)) {
+            leaveTable(userId, tableId);
             removeTable(tableId);
             return true;
         }
@@ -192,13 +193,14 @@ public class TableManager {
 
     public void leaveTable(UUID userId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
-            controllers.get(tableId).leaveTable(userId);
             // table not started yet and user is the owner, remove the table
-            if (isTableOwner(tableId, userId)) {
-                if (getTable(tableId).getState().equals(TableState.WAITING)
-                        || getTable(tableId).getState().equals(TableState.STARTING)) {
-                    removeTable(tableId);
-                }
+            if (isTableOwner(tableId, userId)
+                    && (getTable(tableId).getState().equals(TableState.WAITING)
+                    || getTable(tableId).getState().equals(TableState.STARTING))) {
+                removeTable(tableId);
+
+            } else {
+                controllers.get(tableId).leaveTable(userId);
             }
         }
     }

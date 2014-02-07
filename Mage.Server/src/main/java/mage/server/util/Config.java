@@ -51,11 +51,19 @@ public class Config {
         remoteServer = p.getProperty("remote-server");
         maxGameThreads = Integer.parseInt(p.getProperty("max-game-threads"));
         maxSecondsIdle = Integer.parseInt(p.getProperty("max-seconds-idle"));
+        minUserNameLength = Integer.parseInt(p.getProperty("minUserNameLength"));
+        maxUserNameLength = Integer.parseInt(p.getProperty("maxUserNameLength"));
+        userNamePattern = p.getProperty("userNamePattern");
+        saveGameActivated = Boolean.parseBoolean(p.getProperty("saveGameActivated"));
     }
 
     public static final String remoteServer;
     public static final int port;
     public static final int maxGameThreads;
     public static final int maxSecondsIdle;
+    public static final int minUserNameLength;
+    public static final int maxUserNameLength;
+    public static final String userNamePattern;
+    public static final boolean saveGameActivated;
 
 }

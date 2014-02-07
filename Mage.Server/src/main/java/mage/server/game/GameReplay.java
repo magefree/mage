@@ -35,10 +35,14 @@ import java.io.InputStream;
 import java.io.ObjectInput;
 import java.util.UUID;
 import java.util.zip.GZIPInputStream;
-import mage.game.*;
+import mage.game.Game;
+import mage.game.GameState;
+import mage.game.GameStates;
 import mage.server.Main;
 import mage.util.CopierObjectInputStream;
 import org.apache.log4j.Logger;
+
+
 
 /**
  *
@@ -48,8 +52,8 @@ public class GameReplay {
 
     private static final Logger logger = Logger.getLogger(GameReplay.class);
 
-    private GameStates savedGame;
-    private Game game;
+    private final GameStates savedGame;
+    private final Game game;
     private int stateIndex;
 
     public GameReplay(UUID gameId) {

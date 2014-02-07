@@ -45,14 +45,12 @@ public class ReplayManager {
 
     private ReplayManager() {}
 
-    private ConcurrentHashMap<String, ReplaySession> replaySessions = new ConcurrentHashMap<String, ReplaySession>();
+    private final ConcurrentHashMap<String, ReplaySession> replaySessions = new ConcurrentHashMap<String, ReplaySession>();
 
     public void replayGame(UUID gameId, UUID userId) {
-        if (1 == 2) { // deactivated because replay causes memor leaks
-            ReplaySession replaySession = new ReplaySession(gameId, userId);
-            replaySessions.put(gameId.toString() + userId.toString(), replaySession);
-            UserManager.getInstance().getUser(userId).replayGame(gameId);
-        }
+        ReplaySession replaySession = new ReplaySession(gameId, userId);
+        replaySessions.put(gameId.toString() + userId.toString(), replaySession);
+        UserManager.getInstance().getUser(userId).replayGame(gameId);        
     }
 
     public void startReplay(UUID gameId, UUID userId) {

@@ -60,9 +60,12 @@ public abstract class MatchImpl implements Match {
     protected Date startTime;
     protected Date endTime;
 
+    protected boolean replayAvailable;
+
     public MatchImpl(MatchOptions options) {
         this.options = options;
         startTime = new Date();
+        replayAvailable = false;
     }
 
     @Override
@@ -316,4 +319,12 @@ public abstract class MatchImpl implements Match {
         return null;
     }
 
+    @Override
+    public boolean isReplayAvailable() {
+        return replayAvailable;
+    }
+
+    public void setReplayAvailable(boolean replayAvailable) {
+        this.replayAvailable = replayAvailable;
+    }
 }

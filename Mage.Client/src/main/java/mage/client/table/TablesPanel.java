@@ -189,8 +189,7 @@ public class TablesPanel extends javax.swing.JPanel {
                      }
                  } else if (action.equals("Replay")) {
                      logger.info("Replaying game " + gameId);
-                     // no replay because of memory leaks
-                     // session.replayGame(gameId);
+                     session.replayGame(gameId);
                  }
              }
          };
@@ -201,8 +200,8 @@ public class TablesPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e)
             {
                 int modelRow = Integer.valueOf( e.getActionCommand() );
-                if (matchesModel.getValueAt(modelRow, MatchesTableModel.ACTION_COLUMN) instanceof List) {
-                    List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, MatchesTableModel.ACTION_COLUMN);
+                if (matchesModel.getValueAt(modelRow, MatchesTableModel.GAMES_LIST_COLUMN) instanceof List) {
+                    List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, MatchesTableModel.GAMES_LIST_COLUMN);
                     if (games.size() == 1) {
                         session.replayGame(games.get(0));
                     }
@@ -769,19 +768,16 @@ class TableTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex != ACTION_COLUMN) {
-            return false;
-        }
-        return true;
+        return columnIndex == ACTION_COLUMN;
     }
 
 }
 
 class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
-    private Session session;
-    private UUID roomId;
-    private TablesPanel panel;
+    private final Session session;
+    private final UUID roomId;
+    private final TablesPanel panel;
 
     private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
@@ -830,9 +826,9 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
 class UpdatePlayersTask extends SwingWorker<Void, Collection<UsersView>> {
 
-    private Session session;
-    private UUID roomId;
-    private ChatPanel chat;
+    private final Session session;
+    private final UUID roomId;
+    private final ChatPanel chat;
 
     private static final Logger logger = Logger.getLogger(UpdatePlayersTask.class);
 
@@ -872,8 +868,8 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<UsersView>> {
 class MatchesTableModel extends AbstractTableModel {
 
     public static final int ACTION_COLUMN = 7; // column the action is located (starting with 0)
-
-    private String[] columnNames = new String[]{"Match Name", "Game Type", "Deck Type", "Players", "Result", "Start Time", "End Time","Action"};
+    public static final int GAMES_LIST_COLUMN = 8;
+    private final String[] columnNames = new String[]{"Match Name", "Game Type", "Deck Type", "Players", "Result", "Start Time", "End Time","Action"};
     private MatchView[] matches = new MatchView[0];
     private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
@@ -914,7 +910,12 @@ class MatchesTableModel extends AbstractTableModel {
                     return "";
                 }
             case 7:
-                return "None";
+                if (matches[arg0].isReplayAvailable()) {
+                    return "Replay";
+                } else {
+                    return "None";
+                }
+                
             case 8:
                 return matches[arg0].getGames();
         }
@@ -939,19 +940,16 @@ class MatchesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex != ACTION_COLUMN) {
-            return false;
-        }
-        return true;
+        return columnIndex == ACTION_COLUMN;
     }
 
 }
 
 class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
 
-    private Session session;
-    private UUID roomId;
-    private TablesPanel panel;
+    private final Session session;
+    private final UUID roomId;
+    private final TablesPanel panel;
 
     private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
@@ -1013,7 +1011,7 @@ class GameChooser extends JPopupMenu {
 
     private class GameChooserAction extends AbstractAction {
 
-        private UUID id;
+        private final UUID id;
 
         public GameChooserAction(UUID id, String choice) {
             this.id = id;

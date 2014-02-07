@@ -28,7 +28,6 @@
 package mage.server;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +35,7 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.Deck;
+import mage.constants.TableState;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
@@ -324,15 +324,47 @@ public class User {
     }
 
     public String getGameInfo() {
-        StringBuilder sb =  new StringBuilder();
-        if (gameSessions.size() > 0) {
-            sb.append("G: ").append(gameSessions.size());
-        }
-        if (tournamentSessions.size() > 0) {
-            if (sb.length() > 0) {
-                sb.append(" ");
+
+        StringBuilder sb = new StringBuilder();
+        int draft = 0, match = 0, sideboard = 0, tournament = 0, construct = 0;
+        for (Table table : tables.values()) {
+            if (table.isTournament()) {
+                switch (table.getState()) {
+                    case CONSTRUCTING:
+                        construct++;
+                        break;
+                    case DRAFTING:
+                        draft++;
+                        break;
+                    case DUELING:
+                        tournament++;
+                        break;
+                }
+            } else {
+                switch (table.getState()) {
+                    case SIDEBOARDING:
+                        sideboard++;
+                        break;
+                    case DUELING:
+                        match++;
+                        break;
+                }
             }
-            sb.append("T: ").append(tournamentSessions.size());
+        }
+        if (match > 0) {
+            sb.append("MP: ").append(match).append(" ");
+        }
+        if (sideboard > 0) {
+            sb.append("MS: ").append(sideboard).append(" ");
+        }
+        if (draft > 0) {
+            sb.append("TD: ").append(draft).append(" ");
+        }
+        if (construct > 0) {
+            sb.append("TC: ").append(construct).append(" ");
+        }
+        if (tournament > 0) {
+            sb.append("TP: ").append(tournament).append(" ");
         }
         return sb.toString();
     }

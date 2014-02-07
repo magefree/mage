@@ -10,6 +10,7 @@
             maxUserNameLength="14" 
             userNamePattern="[^a-z0-9_]"
             maxAiOpponents="3"
+            saveGameActivated="false"
     />
     <playerTypes>
         <playerType name="Human" jar="mage-player-human.jar" className="mage.player.human.HumanPlayer"/>

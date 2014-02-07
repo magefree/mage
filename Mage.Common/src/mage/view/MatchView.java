@@ -44,17 +44,18 @@ import mage.game.tournament.TournamentPlayer;
  */
 public class MatchView implements Serializable {
 
-    private UUID matchId;
-    private String matchName;
+    private final UUID matchId;
+    private final String matchName;
     private String gameType;
-    private String deckType;
+    private final String deckType;
 
-    private List<UUID> games = new ArrayList<UUID>();
-    private String result;
-    private String players;
+    private final List<UUID> games = new ArrayList<UUID>();
+    private final String result;
+    private final String players;
     
-    private Date startTime;
-    private Date endTime;
+    private final Date startTime;
+    private final Date endTime;
+    private final Boolean replayAvailable;
 
     public MatchView(Match match) {
         this.matchId = match.getId();
@@ -79,6 +80,7 @@ public class MatchView implements Serializable {
         result = sb2.substring(0, sb2.length() - 2);
         this.startTime = match.getStartTime();
         this.endTime = match.getEndTime();
+        this.replayAvailable = match.isReplayAvailable();
     }
 
     // used for tournaments
@@ -107,6 +109,7 @@ public class MatchView implements Serializable {
         this.result = sb2.toString();
         this.startTime = table.getTournament().getStartTime();
         this.endTime = table.getTournament().getEndTime();
+        this.replayAvailable = false;
     }
 
     public UUID getMatchId() {
@@ -144,4 +147,13 @@ public class MatchView implements Serializable {
     public Date getEndTime() {
         return endTime;
     }
+
+    public String getMatchName() {
+        return matchName;
+    }
+
+    public Boolean isReplayAvailable() {
+        return replayAvailable;
+    }
+
 }

@@ -99,6 +99,10 @@ public class ConfigSettings {
         return config.getServer().getMaxAiOpponents();
     }
 
+    public Boolean isSaveGameActivated() {
+            return config.getServer().isSaveGameActivated();
+}
+
     public List<Plugin> getPlayerTypes() {
         return config.getPlayerTypes().getPlayerType();
     }

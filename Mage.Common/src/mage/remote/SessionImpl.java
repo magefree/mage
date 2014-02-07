@@ -87,9 +87,10 @@ public class SessionImpl implements Session {
 
     private static final Logger logger = Logger.getLogger(SessionImpl.class);
 
+    private final MageClient client;
+
     private String sessionId;
     private MageServer server;
-    private MageClient client;
     private Client callbackClient;
     private CallbackHandler callbackHandler;
     private ServerState serverState;
@@ -828,6 +829,7 @@ public class SessionImpl implements Session {
         try {
             if (isConnected()) {
                 server.removeTable(sessionId, roomId, tableId);
+
                 return true;
             }
         } catch (MageException ex) {
@@ -1275,8 +1277,8 @@ public class SessionImpl implements Session {
 }
 class MageAuthenticator extends Authenticator {
 
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
     public MageAuthenticator(String username, String password) {
         this.username = username;

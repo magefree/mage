@@ -694,7 +694,7 @@ public class GameController implements GameCallback {
         }
     }
 
-    public void saveGame() {
+    public boolean saveGame() {
         try {
             OutputStream file = new FileOutputStream("saved/" + game.getId().toString() + ".game");
             OutputStream buffer = new BufferedOutputStream(file);
@@ -707,10 +707,12 @@ public class GameController implements GameCallback {
                 output.close();
             }
             logger.debug("Saved game:" + game.getId());
+            return true;
         }
         catch(IOException ex) {
             logger.fatal("Cannot save game.", ex);
         }
+        return false;
     }
 
     /**

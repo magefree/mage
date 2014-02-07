@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.management.MBeanServer;
@@ -76,12 +77,13 @@ import org.w3c.dom.Element;
  */
 public class Main {
 
-    private static Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = Logger.getLogger(Main.class);
+    private static final MageVersion version = new MageVersion(1, 3, 0, "dev2014-02-03");
 
     private static final String testModeArg = "-testMode=";
     private static final String adminPasswordArg = "-adminPassword=";
     private static final String pluginFolder = "plugins";
-    private static MageVersion version = new MageVersion(1, 3, 0, "");
+
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
     public static TransporterServer server;
@@ -250,10 +252,9 @@ public class Main {
 
         @Override
         public void removeListener(InvokerCallbackHandler callbackHandler) {
-            logger.fatal("removeListener called");
-//            ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
-//            String sessionId = handler.getCallbackClient().getSessionId();
-//            SessionManager.getInstance().disconnect(sessionId);
+            ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
+            String sessionId = handler.getClientSessionId();
+            SessionManager.getInstance().disconnect(sessionId, true);
         }
 
     }
@@ -264,8 +265,8 @@ public class Main {
             logger.debug("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
-            logger.warn(new StringBuilder("Plugin not Found: ").append(plugin.getClassName()).append(" - ").append(plugin.getJar()).append(" - check plugin folder"));
-        } catch (Exception ex) {
+            logger.warn(new StringBuilder("Plugin not Found: ").append(plugin.getClassName()).append(" - ").append(plugin.getJar()).append(" - check plugin folder"), ex);
+        } catch (MalformedURLException ex) {
             logger.fatal("Error loading plugin " + plugin.getJar(), ex);
         }
         return null;
@@ -277,8 +278,12 @@ public class Main {
             logger.debug("Loading game type: " + plugin.getClassName());
             return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
-            logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder");
-        } catch (Exception ex) {
+            logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder", ex);
+        } catch (IllegalAccessException ex) {
+            logger.fatal("Error loading game type " + plugin.getJar(), ex);
+        } catch (InstantiationException ex) {
+            logger.fatal("Error loading game type " + plugin.getJar(), ex);
+        } catch (MalformedURLException ex) {
             logger.fatal("Error loading game type " + plugin.getJar(), ex);
         }
         return null;
@@ -290,8 +295,12 @@ public class Main {
             logger.debug("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
-            logger.warn("Tournament type not found:" + plugin.getName() + " / "+ plugin.getJar() + " - check plugin folder");
-        } catch (Exception ex) {
+            logger.warn("Tournament type not found:" + plugin.getName() + " / "+ plugin.getJar() + " - check plugin folder", ex);
+        } catch (IllegalAccessException ex) {
+            logger.fatal("Error loading game type " + plugin.getJar(), ex);
+        } catch (InstantiationException ex) {
+            logger.fatal("Error loading game type " + plugin.getJar(), ex);
+        } catch (MalformedURLException ex) {
             logger.fatal("Error loading game type " + plugin.getJar(), ex);
         }
         return null;

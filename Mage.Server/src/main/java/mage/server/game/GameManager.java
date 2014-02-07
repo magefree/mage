@@ -180,10 +180,11 @@ public class GameManager {
         gameControllers.remove(gameId);
     }
 
-    public void saveGame(UUID gameId) {
+    public boolean saveGame(UUID gameId) {
         if (gameControllers.containsKey(gameId)) {
-            gameControllers.get(gameId).saveGame();
+            return gameControllers.get(gameId).saveGame();
         }
+        return false;
     }
 
     public GameView getGameView(UUID gameId, UUID userId, UUID playerId) {

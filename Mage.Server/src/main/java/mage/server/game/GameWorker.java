@@ -33,6 +33,7 @@ import org.apache.log4j.Logger;
 
 import java.util.UUID;
 import java.util.concurrent.Callable;
+import mage.MageException;
 
 /**
  *
@@ -42,9 +43,9 @@ public class GameWorker implements Callable {
 
     private static final Logger logger = Logger.getLogger(GameWorker.class);
 
-    private GameCallback result;
-    private Game game;
-    private UUID choosingPlayerId;
+    private final GameCallback result;
+    private final Game game;
+    private final UUID choosingPlayerId;
 
     public GameWorker(Game game, UUID choosingPlayerId, GameCallback result) {
         this.game = game;
@@ -58,7 +59,7 @@ public class GameWorker implements Callable {
             game.start(choosingPlayerId);
             game.fireUpdatePlayersEvent();
             result.gameResult(game.getWinner());
-        } catch (Exception ex) {
+        } catch (MageException ex) {
             logger.fatal("GameWorker error ", ex);
         }
         return null;

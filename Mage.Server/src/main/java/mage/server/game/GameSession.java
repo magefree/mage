@@ -57,8 +57,8 @@ import mage.view.SimpleCardsView;
  */
 public class GameSession extends GameWatcher {
 
-    private UUID playerId;
-    private boolean useTimeout;
+    private final UUID playerId;
+    private final boolean useTimeout;
 
     private ScheduledFuture<?> futureTimeout;
     protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();

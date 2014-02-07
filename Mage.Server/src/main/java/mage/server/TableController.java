@@ -67,6 +67,7 @@ import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
+import mage.server.util.ConfigSettings;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
@@ -80,15 +81,16 @@ public class TableController {
 
     private static final Logger logger = Logger.getLogger(TableController.class);
 
-    private UUID userId;
-    private UUID chatId;
-    private String controllerName;
-    private Table table;
+    private final UUID userId;
+    private final UUID chatId;
+    private final String controllerName;
+    private final Table table;
+    private final ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<UUID, UUID>();
+
     private Match match;
     private MatchOptions options;
     private Tournament tournament;
-    private ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<UUID, UUID>();
-
+    
     private ScheduledFuture<?> futureTimeout;
     protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
@@ -237,10 +239,10 @@ public class TableController {
         }
         match.addPlayer(player, deck);
         table.joinTable(player, seat);
-        user.addTable(player.getId(), table);
-        logger.debug("player joined " + player.getId());
+        logger.debug("player joined " + player.getId() + " " + player.getName());
         //only inform human players and add them to sessionPlayerMap
         if (seat.getPlayer().isHuman()) {
+            user.addTable(player.getId(), table);
             user.joinedTable(table.getRoomId(), table.getId(), false);
             userPlayerMap.put(userId, player.getId());
         }
@@ -383,6 +385,14 @@ public class TableController {
                     TableManager.getInstance().userQuitTournamentSubTables(userId);
                     TournamentManager.getInstance().quit(tournament.getId(), userId);
                 } else {
+                    MatchPlayer matchPlayer = match.getPlayer(playerId);
+                    if (matchPlayer != null) {
+                        if (table.getState().equals(TableState.SIDEBOARDING)) {
+                            // submit deck to finish sideboarding and trigger match start / end
+                            matchPlayer.submitDeck(matchPlayer.getDeck());
+                        }
+                        matchPlayer.setQuit(true);
+                    }
                     match.leave(playerId);
                 }
             }
@@ -547,30 +557,6 @@ public class TableController {
         }
     }
 
-    private void sendMatchEndInfo(UUID playerId) {
-        for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-            if (entry.getValue().equals(playerId)) {
-                User user = UserManager.getInstance().getUser(entry.getKey());
-                if (user != null) {
-                    StringBuilder sb = new StringBuilder();
-                    if (table.isTournamentSubTable()) {
-                        sb.append("Your tournament match of round ");
-                        sb.append(table.getTournament().getRounds().size());
-                        sb.append(" is over. ");
-                    } else {
-                        sb.append("Match [").append(match.getName()).append("] is over. ");
-                    }
-                    if(match.getPlayers().size() > 2) {
-                        sb.append("All your opponents have lost or quit the match.");
-                    } else {
-                        sb.append("Your opponent has quit the match.");
-                    }
-                    user.showUserMessage("Match info", sb.toString());
-                }
-                break;
-            }
-        }
-    }
     public int getRemainingTime() {
         return (int) futureTimeout.getDelay(TimeUnit.SECONDS);
     }    
@@ -596,10 +582,11 @@ public class TableController {
         UUID choosingPlayerId = match.getChooser();
         match.endGame();
         table.endGame();
-// Saving of games caused memory leaks - so save is deactivated
-//        if (!match.getGame().isSimulation()) {
-//            GameManager.getInstance().saveGame(match.getGame().getId());
-//        }
+        if (ConfigSettings.getInstance().isSaveGameActivated() && !match.getGame().isSimulation()) {
+            if (GameManager.getInstance().saveGame(match.getGame().getId())) {
+                match.setReplayAvailable(true);
+            }
+        }
         GameManager.getInstance().removeGame(match.getGame().getId());
         try {
             if (!match.isMatchOver()) {
@@ -610,20 +597,53 @@ public class TableController {
                 if (!match.isMatchOver()) {
                     startGame(choosingPlayerId);
                 } else {
+                    this.matchEnd();
+                    if (!ConfigSettings.getInstance().isSaveGameActivated() || match.getGame().isSimulation()) {
+                        match.getGames().clear();
+                    }
                     table.endGame();
-                    // opponent(s) left during sideboarding
-                    for (MatchPlayer mPlayer :match.getPlayers()) {
-                        if(!mPlayer.hasQuit()) {
-                            this.sendMatchEndInfo(mPlayer.getPlayer().getId());
-                        }
-                    }                     
                 }
             }
             else {
-                match.getGames().clear();
+                // if match has only one game
+                this.matchEnd();
+                if (!ConfigSettings.getInstance().isSaveGameActivated() || match.getGame().isSimulation()) {
+                    match.getGames().clear();
+                }
+                table.endGame();
             }
         } catch (GameException ex) {
             logger.fatal(null, ex);
+        }
+    }
+
+    private void matchEnd() {
+        for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+            MatchPlayer matchPlayer = match.getPlayer(entry.getValue());
+            // opponent(s) left during sideboarding
+            if(!matchPlayer.hasQuit()) {
+                User user = UserManager.getInstance().getUser(entry.getKey());
+                if (user != null) {
+                    if (table.getState().equals(TableState.SIDEBOARDING)) {
+                        StringBuilder sb = new StringBuilder();
+                        if (table.isTournamentSubTable()) {
+                            sb.append("Your tournament match of round ");
+                            sb.append(table.getTournament().getRounds().size());
+                            sb.append(" is over. ");
+                        } else {
+                            sb.append("Match [").append(match.getName()).append("] is over. ");
+                        }
+                        if (match.getPlayers().size() > 2) {
+                            sb.append("All your opponents have lost or quit the match.");
+                        } else {
+                            sb.append("Your opponent has quit the match.");
+                        }
+                        user.showUserMessage("Match info", sb.toString());
+                    }
+                    // remove table from user - table manager holds table for display of finished matches
+                    user.removeTable(entry.getValue());
+                }
+            }
         }
     }
 

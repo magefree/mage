@@ -64,7 +64,7 @@ public class UserManager {
         }, 60, 60, TimeUnit.SECONDS);
     }
 
-    private ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<UUID, User>();
+    private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<UUID, User>();
 
     public User createUser(String userName, String host) {
         if (findUser(userName) != null) {
@@ -95,8 +95,8 @@ public class UserManager {
     public boolean connectToSession(String sessionId, UUID userId) {
         if (users.containsKey(userId)) {
             users.get(userId).setSessionId(sessionId);
-            return true;
-        }
+                return true;
+            }
         return false;
     }
 
