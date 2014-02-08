@@ -2101,12 +2101,24 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
     @Override
+    public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone) {
+        boolean result = false;
+        if (card.moveToExile(exileId, exileName, sourceId, game)) {
+            game.informPlayers(new StringBuilder(this.getName())
+                    .append(" moves ").append(card.getName()).append(" ")
+                    .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
+                    .append("to exile").toString());
+        }
+        return result;
+    }
+
+    @Override
     public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId) {
         boolean result = false;
         if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId())) {
             game.informPlayers(new StringBuilder(this.getName())
                     .append(" puts ").append(card.getName())
-                    .append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
+                    .append(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
                     .append("onto the Battlefield").toString());
         }
         return result;

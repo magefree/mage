@@ -389,6 +389,15 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
+    public Permanent getPermanentOrLKIBattlefield(UUID permanentId) {
+        Permanent permanent = state.getPermanent(permanentId);
+        if (permanent == null) {
+            permanent = (Permanent) this.getLastKnownInformation(permanentId, Zone.BATTLEFIELD);
+        }
+        return permanent;
+    }
+
+    @Override
     public Card getCard(UUID cardId) {
         if (cardId == null) {
             return null;

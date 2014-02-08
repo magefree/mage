@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
 public class EnduringIdeal extends CardImpl<EnduringIdeal> {
 
     public EnduringIdeal(UUID ownerId) {
-        super(ownerId, 9, "Enduring Ideal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}");
+        super(ownerId, 9, "Enduring Ideal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
         this.expansionSetCode = "SOK";
 
         this.color.setWhite(true);

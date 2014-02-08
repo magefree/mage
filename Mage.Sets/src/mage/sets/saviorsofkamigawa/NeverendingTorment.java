@@ -1,4 +1,4 @@
-/*
+    /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,7 +53,7 @@ import mage.util.CardUtil;
 public class NeverendingTorment extends CardImpl<NeverendingTorment> {
 
     public NeverendingTorment(UUID ownerId) {
-        super(ownerId, 83, "Neverending Torment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}");
+        super(ownerId, 83, "Neverending Torment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "SOK";
 
         this.color.setBlack(true);
@@ -88,18 +89,17 @@ class NeverendingTormentEffect extends OneShotEffect<NeverendingTormentEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID exileId = CardUtil.getCardExileZoneId(game, source);
         boolean applied = false;
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player you = game.getPlayer(source.getControllerId());
         if (targetPlayer != null
                 && you != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(new CardsInControllerHandCount().calculate(game, source), new FilterCard());
+            TargetCardInLibrary target = new TargetCardInLibrary(you.getHand().size(), new FilterCard());
             you.searchLibrary(target, game, targetPlayer.getId());
             for (UUID cardId : target.getTargets()) {
                 final Card targetCard = game.getCard(cardId);
                 if (targetCard != null) {
-                    applied = targetCard.moveToExile(exileId, "Neverending Torment", source.getSourceId(), game);
+                    applied |= you.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
             targetPlayer.shuffleLibrary(game);

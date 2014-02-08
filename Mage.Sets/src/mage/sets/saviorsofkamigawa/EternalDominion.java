@@ -58,7 +58,8 @@ public class EternalDominion extends CardImpl<EternalDominion> {
 
         this.color.setBlue(true);
 
-        // Search target opponent's library for an artifact, creature, enchantment, or land card. Put that card onto the battlefield under your control. Then that player shuffles his or her library.
+        // Search target opponent's library for an artifact, creature, enchantment, or land card.
+        // Put that card onto the battlefield under your control. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new EternalDominionEffect());
         this.getSpellAbility().addTarget(new TargetOpponent(true));
         
@@ -108,7 +109,7 @@ class EternalDominionEffect extends OneShotEffect<EternalDominionEffect> {
             you.searchLibrary(target, game, opponent.getId());
             Card targetCard = game.getCard(target.getFirstTarget());
             if (targetCard != null) {
-                applied = targetCard.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), you.getId());
+                applied = you.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
             }
             opponent.shuffleLibrary(game);
         }

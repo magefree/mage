@@ -36,12 +36,12 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.util.CardUtil;
 
 /**
  *
@@ -51,13 +51,14 @@ import mage.util.CardUtil;
 public class UndyingFlames extends CardImpl<UndyingFlames> {
 
     public UndyingFlames(UUID ownerId) {
-        super(ownerId, 119, "Undying Flames", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
+        super(ownerId, 119, "Undying Flames", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "SOK";
 
         this.color.setRed(true);
 
         // Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to target creature or player equal to that card's converted mana cost.
         this.getSpellAbility().addEffect(new UndyingFlamesEffect());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
 
         // Epic
         this.getSpellAbility().addEffect(new EpicEffect());
@@ -78,7 +79,7 @@ class UndyingFlamesEffect extends OneShotEffect<UndyingFlamesEffect> {
 
     public UndyingFlamesEffect() {
         super(Outcome.Benefit);
-        staticText = "Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to target creature or player equal to that card's converted mana cost";
+        staticText = "Exile cards from the top of your library until you exile a nonland card. {this} deals damage to target creature or player equal to that card's converted mana cost";
     }
 
     public UndyingFlamesEffect(final UndyingFlamesEffect effect) {
@@ -87,27 +88,28 @@ class UndyingFlamesEffect extends OneShotEffect<UndyingFlamesEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID exileId = CardUtil.getCardExileZoneId(game, source);
         boolean applied = false;
         Player you = game.getPlayer(source.getControllerId());
-        while (you != null
-                && you.getLibrary().size() > 0) {
+        Card sourceCard = game.getCard(source.getSourceId());
+        while (you != null && sourceCard != null
+                && you.getLibrary().size() > 0 && you.isInGame()) {
             Card card = you.getLibrary().removeFromTop(game);
             if (card != null) {
-                if (card.getCardType().contains(CardType.LAND)) {
-                    card.moveToExile(exileId, "Undying Flames", source.getSourceId(), game);
-                } else {
-                    Target target = new TargetCreatureOrPlayer();
-                    if (you.chooseTarget(Outcome.Damage, target, source, game)) {
-                        Permanent creature = game.getPermanent(target.getFirstTarget());
+                you.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
+                if (!card.getCardType().contains(CardType.LAND)) {
+                    int damage = card.getManaCost().convertedManaCost();
+                    if (damage > 0) {
+                        Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                         if (creature != null) {
-                            creature.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, true, false);
+                            creature.damage(damage, source.getSourceId(), game, true, false);
+                            game.informPlayers(new StringBuilder(sourceCard.getName()).append(" deals ").append(damage).append(" damage to ").append(creature.getName()).toString());
                             applied = true;
                             break;
                         }
-                        Player player = game.getPlayer(target.getFirstTarget());
+                        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                         if (player != null) {
-                            player.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, true, false);
+                            player.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
+                            game.informPlayers(new StringBuilder(sourceCard.getName()).append(" deals ").append(damage).append(" damage to ").append(player.getName()).toString());
                             applied = true;
                             break;
                         }

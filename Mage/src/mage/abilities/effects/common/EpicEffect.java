@@ -59,6 +59,7 @@ public class EpicEffect extends OneShotEffect<EpicEffect> {
             for (Effect effect : spell.getSpellAbility().getEffects()) {
                 if (effect instanceof EpicEffect) {
                     epicEffect = effect;
+                    break;
                 }
             }
             spell.getSpellAbility().getEffects().remove(epicEffect);
@@ -135,8 +136,11 @@ class EpicPushEffect extends OneShotEffect<EpicPushEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         if (spell != null) {
-            game.getStack().push(spell);
-            spell.chooseNewTargets(game, spell.getControllerId());
+            // don't change the targets of the in the origin copied spell
+            Spell copySpell = spell.copy();
+            game.getStack().push(copySpell);
+            copySpell.chooseNewTargets(game, source.getControllerId());
+            return true;
         }
 
         return false;
