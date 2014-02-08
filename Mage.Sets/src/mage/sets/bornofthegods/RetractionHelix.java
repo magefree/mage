@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
@@ -55,11 +56,13 @@ public class RetractionHelix extends CardImpl<RetractionHelix> {
         this.color.setBlue(true);
 
         // Until end of turn, target creature gains "{T}: Return target nonland permanent to its owner's hand."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
         Target target = new TargetNonlandPermanent();
         target.setRequired(true);
-        ability.addTarget(target);
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ability, Duration.EndOfTurn));
+        gainedAbility.addTarget(target);
+        Effect effect = new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn);
+        effect.setText("Until end of turn, target creature gains \"{T}: Return target nonland permanent to its owner's hand.\"");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 

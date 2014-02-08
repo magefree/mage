@@ -31,8 +31,6 @@ package mage.target.common;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -115,6 +113,7 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
         return new TargetCardInLibrary(this);
     }
 
+    @Override
     public void setMinNumberOfTargets(int minNumberOfTargets) {
         this.minNumberOfTargets = minNumberOfTargets;
     }

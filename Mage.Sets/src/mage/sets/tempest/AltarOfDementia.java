@@ -104,10 +104,10 @@ class AltarOfDementiaEffect extends OneShotEffect<AltarOfDementiaEffect> {
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null) {
                 for (int i = 0; i<amount ; i++) {
-                    if (!player.getLibrary().getCardList().isEmpty()) {
+                    if (player.getLibrary().size() > 0) {
                         Card card = player.getLibrary().removeFromTop(game);
                         if (card != null) {
-                            card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                         }  
                     }
                 }

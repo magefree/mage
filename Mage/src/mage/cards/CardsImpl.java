@@ -30,6 +30,8 @@ package mage.cards;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -133,8 +135,9 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     public int count(FilterCard filter, UUID playerId, Game game) {
         int result = 0;
         for (UUID card: this) {
-            if (filter.match(game.getCard(card), playerId, game))
+            if (filter.match(game.getCard(card), playerId, game)) {
                 result++;
+            }
         }
         return result;
     }
@@ -158,8 +161,9 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         Set<Card> cards = new LinkedHashSet<Card>();
         for (UUID card: this) {
             boolean match = filter.match(game.getCard(card), game);
-            if (match)
+            if (match) {
                 cards.add(game.getCard(card));
+            }
         }
         return cards;
     }

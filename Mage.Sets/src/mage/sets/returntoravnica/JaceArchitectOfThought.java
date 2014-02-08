@@ -299,7 +299,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThought
             for (UUID cardUuid : cardsToHand) {
                 Card card = cardsToHand.get(cardUuid, game);
                 if (card != null) {
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 }
             }
 
@@ -310,13 +310,13 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThought
                 Card card = cardsToLibrary.get(targetCard.getFirstTarget(), game);
                 if (card != null) {
                     cardsToLibrary.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                 }
                 target.clearChosen();
             }
             if (cardsToLibrary.size() == 1) {
                 Card card = cardsToLibrary.get(cardsToLibrary.iterator().next(), game);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
             }
             return true;
         }
@@ -343,24 +343,22 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect<JaceArchitectOfThought
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (controller == null || sourcePermanent == null) {
             return false;
         }
-
         for (UUID playerId : controller.getInRange()) {
-            Cards playerLibrary = new CardsImpl();
             Player player = game.getPlayer(playerId);
-            playerLibrary.addAll(player.getLibrary().getCardList());
             String playerName = new StringBuilder(player.getName()).append("'s").toString();
             if (source.getControllerId().equals(player.getId())) {
                 playerName = "your";
             }
             TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard(new StringBuilder("nonland card from ").append(playerName).append(" library").toString()));
-            if (controller.choose(Outcome.Benefit, playerLibrary, target, game)) {
+            if (controller.searchLibrary(target, game, playerId)) {
                 UUID targetId = target.getFirstTarget();
                 Card card = player.getLibrary().remove(targetId, game);
                 if (card != null) {
-                    card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Jace, Architect of Thought", source.getSourceId(), game);
+                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName(), source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
             player.shuffleLibrary(game);

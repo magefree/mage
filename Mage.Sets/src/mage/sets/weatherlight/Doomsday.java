@@ -100,7 +100,7 @@ class DoomsdayEffect extends OneShotEffect<DoomsdayEffect> {
             int number = Math.min(5, allCards.size());
             TargetCard target = new TargetCard(number, number, Zone.PICK, new FilterCard());
             
-            if(player.choose(Outcome.Benefit, allCards, target, game)){
+            if (player.choose(Outcome.Benefit, allCards, target, game)){
                 // exile the rest
                 for(UUID uuid : allCards){
                     if(!target.getTargets().contains(uuid)){
@@ -117,7 +117,7 @@ class DoomsdayEffect extends OneShotEffect<DoomsdayEffect> {
                 //Put the chosen cards on top of your library in any order
                 target = new TargetCard(Zone.PICK, new FilterCard("Card to put on top"));
                 target.setRequired(true);
-                while (cards.size() > 1) {
+                while (cards.size() > 1 && player.isInGame()) {
                     player.choose(Outcome.Neutral, cards, target, game);
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {

@@ -122,6 +122,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean isInGame();
     /**
      * Called if other player left the game
+     * @param game
      */
     void otherPlayerLeftGame(Game game);
     

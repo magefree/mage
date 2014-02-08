@@ -35,12 +35,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -80,7 +79,14 @@ public class NightmareIncursion extends CardImpl<NightmareIncursion> {
 }
 
 class NightmareIncursionEffect extends OneShotEffect<NightmareIncursionEffect> {
-    
+
+    private static final  FilterLandPermanent filter = new FilterLandPermanent();
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new SubtypePredicate("Swamp"));
+    }
+
     boolean exiled = false;
 
     public NightmareIncursionEffect() {
@@ -99,23 +105,19 @@ class NightmareIncursionEffect extends OneShotEffect<NightmareIncursionEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
+        boolean result = false;
+        Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        FilterLandPermanent filter = new FilterLandPermanent();
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Swamp"));
-        int amount = new PermanentsOnBattlefieldCount(filter).calculate(game, source);
-        if (you != null && targetPlayer != null) {
-            Cards targetLibrary = new CardsImpl();
-            targetLibrary.addAll(targetPlayer.getLibrary().getCardList());
+        if (controller != null && targetPlayer != null) {
+            int amount = new PermanentsOnBattlefieldCount(filter).calculate(game, source);
             TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterCard());
-            if (you.choose(Outcome.Benefit, targetLibrary, target, game)) {
+            if (controller.searchLibrary(target, game, targetPlayer.getId())) {
                 List<UUID> targetId = target.getTargets();
                 for (UUID targetCard : targetId) {
                     Card card = targetPlayer.getLibrary().remove(targetCard, game);
                     if (card != null) {
-                        card.moveToExile(source.getSourceId(), "Nightmare Incursion", source.getSourceId(), game);
-                        exiled = true;
+                        controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
+                        result = true;
                     }
                 }
             }
@@ -123,6 +125,6 @@ class NightmareIncursionEffect extends OneShotEffect<NightmareIncursionEffect> {
         if (targetPlayer != null) {
             targetPlayer.shuffleLibrary(game);
         }
-        return exiled;
+        return result;
     }
 }

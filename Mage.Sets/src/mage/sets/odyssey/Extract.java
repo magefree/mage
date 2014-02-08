@@ -27,17 +27,15 @@
  */
 package mage.sets.odyssey;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -95,17 +93,16 @@ class ExtractEffect extends OneShotEffect<ExtractEffect> {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && targetPlayer != null) {
-            Cards targetLibrary = new CardsImpl();
-            targetLibrary.addAll(targetPlayer.getLibrary().getCardList());
             TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
-            if (player.choose(Outcome.Benefit, targetLibrary, target, game)) {
+            if (player.searchLibrary(target, game, targetPlayer.getId())) {
                 Card card = targetPlayer.getLibrary().remove(target.getFirstTarget(), game);
                 if (card != null) {
-                    card.moveToExile(getId(), "Extract", source.getSourceId(), game);
+                    player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
+            targetPlayer.shuffleLibrary(game);
+            return true;
         }
-        targetPlayer.shuffleLibrary(game);
-        return true;
+        return false;
     }
 }

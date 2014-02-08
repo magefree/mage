@@ -28,13 +28,23 @@
 
 package mage.players;
 
-import mage.constants.Zone;
+import java.io.Serializable;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  *
@@ -45,8 +55,8 @@ public class Library implements Serializable {
     private static Random rnd = new Random();
 
     private boolean emptyDraw;
-    private Deque<UUID> library = new ArrayDeque<UUID>();
-    private UUID playerId;
+    private final Deque<UUID> library = new ArrayDeque<UUID>();
+    private final UUID playerId;
 
     public Library(UUID playerId) {
         this.playerId = playerId;
@@ -202,8 +212,9 @@ public class Library implements Serializable {
     public int count(FilterCard filter, Game game) {
         int result = 0;
         for (UUID card: library) {
-            if (filter.match(game.getCard(card), game))
+            if (filter.match(game.getCard(card), game)) {
                 result++;
+            }
         }
         return result;
     }
@@ -222,8 +233,9 @@ public class Library implements Serializable {
 
     public Card getCard(UUID cardId, Game game) {
         for (UUID card: library) {
-            if (card.equals(cardId))
+            if (card.equals(cardId)) {
                 return game.getCard(card);
+            }
         }
         return null;
     }

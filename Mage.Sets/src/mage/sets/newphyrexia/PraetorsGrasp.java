@@ -41,6 +41,7 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -90,18 +91,16 @@ class PraetorsGraspEffect extends OneShotEffect<PraetorsGraspEffect> {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && opponent != null) {
-            Cards opponentLibrary = new CardsImpl();
-            opponentLibrary.addAll(opponent.getLibrary().getCardList());
-
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (player != null && opponent != null && sourcePermanent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary();
-            if (player.choose(Outcome.Benefit, opponentLibrary, target, game)) {
+            if (player.searchLibrary(target, game, opponent.getId())) {
                 UUID targetId = target.getFirstTarget();
                 Card card = opponent.getLibrary().remove(targetId, game);
                 if (card != null) {
                     card.setFaceDown(true);
                     card.setControllerId(player.getId());
-                    card.moveToExile(getId(), "Praetor's Grasp", source.getSourceId(), game);
+                    card.moveToExile(getId(), sourcePermanent.getName(), source.getSourceId(), game);
                     game.addEffect(new PraetorsGraspPlayEffect(card.getId()), source);
                     game.addEffect(new PraetorsGraspRevealEffect(card.getId()), source);
                 }

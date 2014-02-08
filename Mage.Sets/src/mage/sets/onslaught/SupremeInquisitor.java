@@ -116,21 +116,19 @@ class SupremeInquisitorEffect extends OneShotEffect<SupremeInquisitorEffect> {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && targetPlayer != null) {
-            Cards targetLibrary = new CardsImpl();
-            targetLibrary.addAll(targetPlayer.getLibrary().getCardList());
             TargetCardInLibrary target = new TargetCardInLibrary(0, 5, filter);
-            if (player.choose(Outcome.Benefit, targetLibrary, target, game)) {
+            if (player.searchLibrary(target, game, targetPlayer.getId())) {
                 List<UUID> targetId = target.getTargets();
                 for (UUID targetCard : targetId) {
                     Card card = targetPlayer.getLibrary().remove(targetCard, game);
                     if (card != null) {
-                        card.moveToExile(getId(), "Supreme Inquisitor", source.getSourceId(), game);
+                        player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
             }
+            targetPlayer.shuffleLibrary(game);
+            return true;
         }
-
-        targetPlayer.shuffleLibrary(game);
-        return true;
+        return false;
     }
 }

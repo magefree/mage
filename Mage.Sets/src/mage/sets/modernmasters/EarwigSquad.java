@@ -35,15 +35,13 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ProwlCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.ProwlAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -107,16 +105,13 @@ class EarwigSquadEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && opponent != null) {
-            Cards opponentLibrary = new CardsImpl();
-            opponentLibrary.addAll(opponent.getLibrary().getCardList());
-
-            TargetCardInLibrary target = new TargetCardInLibrary(0, 3, new FilterCard("cards from opponents library to exile"));
-            if (player.choose(Outcome.Benefit, opponentLibrary, target, game)) {
+            TargetCardInLibrary target = new TargetCardInLibrary(0, 3, new FilterCard("cards from opponents library to exile"));            
+            if (player.searchLibrary(target, game, opponent.getId())) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = opponent.getLibrary().remove(targetId, game);
                     if (card != null) {
-                        card.moveToExile(null, null, source.getId(), game);
+                        player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
             }

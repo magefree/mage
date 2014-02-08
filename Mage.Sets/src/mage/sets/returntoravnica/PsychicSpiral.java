@@ -28,19 +28,17 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-
 
 /**
  *
@@ -93,10 +91,10 @@ class PsychicSpiralEffect extends OneShotEffect<PsychicSpiralEffect> {
                 Player targetPlayer = game.getPlayer(source.getFirstTarget());
                 if (targetPlayer != null) {
                     for (int i = 0; i<cardsInGraveyard ; i++) {
-                        if (!targetPlayer.getLibrary().getCardList().isEmpty()) {
+                        if (targetPlayer.getLibrary().size() > 0) {
                             Card card = targetPlayer.getLibrary().removeFromTop(game);
                             if (card != null) {
-                                card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                                card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                             }
                         }
                     }

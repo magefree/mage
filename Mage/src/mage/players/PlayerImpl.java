@@ -1595,6 +1595,18 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
         //20091005 - 701.14c
+        Library searchedLibrary = null;
+        if (targetPlayerId.equals(playerId)) {
+            searchedLibrary = library;
+        } else {
+            Player targetPlayer = game.getPlayer(targetPlayerId);
+            if (targetPlayer != null) {
+                searchedLibrary = targetPlayer.getLibrary();
+            }
+        }
+        if (searchedLibrary == null) {
+            return false;
+        }
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, playerId))) {
             TargetCardInLibrary newTarget = target.copy();
             int count;
@@ -1602,9 +1614,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             if (cardLimit != null) {
                 newTarget.setCardLimit(cardLimit);
                 game.getState().setValue("LibrarySearchLimit", null);
-                count = Math.min(library.count(target.getFilter(), game),cardLimit.intValue());
+                count = Math.min(searchedLibrary.count(target.getFilter(), game),cardLimit.intValue());
             } else {
-                count = library.count(target.getFilter(), game);
+                count = searchedLibrary.count(target.getFilter(), game);
             }
 
             if (count < target.getNumberOfTargets()) {
