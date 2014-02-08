@@ -63,7 +63,7 @@ public class CanAttackAsThoughtItDidntHaveDefenderEffect extends AsThoughEffectI
 
     @Override
     public boolean applies(UUID sourceId, Ability source, Game game) {
-        return true;
+        return sourceId.equals(source.getSourceId());
     }
 
 }
