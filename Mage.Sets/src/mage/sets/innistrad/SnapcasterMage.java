@@ -107,12 +107,13 @@ class SnapcasterMageEffect extends ContinuousEffectImpl<SnapcasterMageEffect> {
     public SnapcasterMageEffect copy() {
         return new SnapcasterMageEffect(this);
     }
+
     @Override
     public void init(Ability source, Game game) {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (card != null && sourceObject != null) {
-            game.informPlayers(new StringBuilder(sourceObject.getName()).append(" gained Flashback to ").append(card.getName()).toString());
+            game.informPlayers(new StringBuilder(sourceObject.getName()).append(" gives Flashback to ").append(card.getName()).toString());
         }
     }
 
