@@ -28,18 +28,21 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -77,7 +80,7 @@ public class MarshalsAnthem extends CardImpl<MarshalsAnthem> {
         // When Marshal's Anthem enters the battlefield, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times Marshal's Anthem was kicked.
 
         Ability ability = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false),
+                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false),
                 KickedCondition.getInstance(),
                 "When {this} enters the battlefield, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times {this} was kicked.");
         this.addAbility(ability);
