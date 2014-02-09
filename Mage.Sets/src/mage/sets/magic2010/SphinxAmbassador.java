@@ -30,10 +30,6 @@ package mage.sets.magic2010;
 import java.util.Collection;
 import java.util.TreeSet;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -43,7 +39,12 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
@@ -97,8 +98,8 @@ class SphinxAmbassadorEffect extends OneShotEffect<SphinxAmbassadorEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-
-        if (player != null && targetPlayer != null) {
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (player != null && targetPlayer != null && sourcePermanent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary();
             player.searchLibrary(target, game, targetPlayer.getId());
 
@@ -122,9 +123,11 @@ class SphinxAmbassadorEffect extends OneShotEffect<SphinxAmbassadorEffect> {
                 }
                 String cardName = cardChoice.getChoice();
 
-                game.informPlayers("Sphinx Ambassador, named card: [" + cardName + "]");
+                game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(", named card: [").append(cardName).append("]").toString());
                 if (!card.getName().equals(cardName) && card.getCardType().contains(CardType.CREATURE)) {
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), player.getId());
+                    if (player.chooseUse(outcome, new StringBuilder("Put ").append(card.getName()).append(" onto the battlefield?").toString(), game)) {
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    }
                 }
             }
 

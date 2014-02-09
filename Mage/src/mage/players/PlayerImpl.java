@@ -173,7 +173,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected List<UUID> attachments = new ArrayList<UUID>();
 
     protected boolean topCardRevealed = false;
-    
+   
     // 800.4i When a player leaves the game, any continuous effects with durations that last until that player's next turn
     // or until a specific point in that turn will last until that turn would have begun. 
     // They neither expire immediately nor last indefinitely.
@@ -342,7 +342,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.setLife(game.getLife(), game);
         this.setReachedNextTurnAfterLeaving(false);
         game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
-
     }
 
     @Override
@@ -1607,16 +1606,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         if (searchedLibrary == null) {
             return false;
         }
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, playerId))) {
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, playerId, playerId, Integer.MAX_VALUE);
+        if (!game.replaceEvent(event)) {
             TargetCardInLibrary newTarget = target.copy();
             int count;
-            Integer cardLimit = (Integer) game.getState().getValue("LibrarySearchLimit");
-            if (cardLimit != null) {
-                newTarget.setCardLimit(cardLimit);
-                game.getState().setValue("LibrarySearchLimit", null);
-                count = Math.min(searchedLibrary.count(target.getFilter(), game),cardLimit.intValue());
-            } else {
+            int librarySearchLimit = event.getAmount();
+            if (librarySearchLimit == Integer.MAX_VALUE) {
                 count = searchedLibrary.count(target.getFilter(), game);
+            } else {
+                newTarget.setCardLimit(librarySearchLimit);
+                count = Math.min(searchedLibrary.count(target.getFilter(), game), librarySearchLimit);
             }
 
             if (count < target.getNumberOfTargets()) {

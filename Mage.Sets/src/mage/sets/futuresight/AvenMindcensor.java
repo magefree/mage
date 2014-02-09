@@ -28,11 +28,6 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,8 +35,14 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 
 /**
  *
@@ -90,14 +91,17 @@ class AvenMindcensorEffect extends ReplacementEffectImpl<AvenMindcensorEffect> {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        game.getState().setValue("LibrarySearchLimit", new Integer(4));
+        event.setAmount(4);
         return false;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.SEARCH_LIBRARY && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (event.getType() == GameEvent.EventType.SEARCH_LIBRARY) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null && game.isOpponent(controller, event.getPlayerId())) {
                 return true;
+            }
         }
         return false;
     }

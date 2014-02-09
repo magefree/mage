@@ -31,17 +31,17 @@ package mage.target.common;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
-import java.util.UUID;
 
 /**
  *
@@ -49,7 +49,7 @@ import java.util.UUID;
  */
 public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
 
-    private Integer cardLimit;
+    private int librarySearchLimit;
 
     public TargetCardInLibrary() {
         this(1, 1, new FilterCard());
@@ -65,11 +65,12 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
 
     public TargetCardInLibrary(int minNumTargets, int maxNumTargets, FilterCard filter) {
         super(minNumTargets, maxNumTargets, Zone.LIBRARY, filter);
+        this.librarySearchLimit = Integer.MAX_VALUE;
     }
 
     public TargetCardInLibrary(final TargetCardInLibrary target) {
         super(target);
-        this.cardLimit = target.cardLimit;
+        this.librarySearchLimit = target.librarySearchLimit;
     }
 
     @Override
@@ -81,10 +82,10 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
         }
 
         List<Card> cards;
-        if (cardLimit == null) {
+        if (librarySearchLimit == Integer.MAX_VALUE) {
             cards = targetPlayer.getLibrary().getCards(game);
         } else {
-            int maxCards = Math.min(cardLimit.intValue(), targetPlayer.getLibrary().size());
+            int maxCards = Math.min(librarySearchLimit, targetPlayer.getLibrary().size());
             cards = targetPlayer.getLibrary().getTopCards(game, maxCards);
         }
         Collections.sort(cards, new CardNameComparator());
@@ -118,8 +119,8 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
         this.minNumberOfTargets = minNumberOfTargets;
     }
 
-    public void setCardLimit(Integer cardLimit) {
-        this.cardLimit = new Integer(cardLimit.intValue());
+    public void setCardLimit(int librarySearchLimit) {
+        this.librarySearchLimit = librarySearchLimit;
     }
 
 
