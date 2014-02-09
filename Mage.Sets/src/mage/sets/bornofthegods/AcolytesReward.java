@@ -103,49 +103,53 @@ class AcolytesRewardEffect extends PreventionEffectImpl<AcolytesRewardEffect> {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), event.getAmount(), false);
+        boolean result = false;
+        int toPrevent = amount;
+        if (event.getAmount() < this.amount) {
+            toPrevent = event.getAmount();
+            amount -= event.getAmount();
+        } else {
+            amount = 0;
+        }
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), toPrevent, false);
         if (!game.replaceEvent(preventEvent)) {
             Permanent targetCreature = game.getPermanent(source.getFirstTarget());
             if (targetCreature != null) {
-                int damage = event.getAmount();
-                if (event.getAmount() >= this.amount) {
-                    event.setAmount(damage - this.amount);
-                    damage = this.amount;
+                if (amount == 0) {
                     this.used = true;
                     this.discard();
+                }
+                if (event.getAmount() >= toPrevent) {
+                    event.setAmount(event.getAmount() - toPrevent);
                 } else {
                     event.setAmount(0);
-                    this.amount -= damage;
+                    result = true;
                 }
-                if (damage > 0) {
-                    game.informPlayers(new StringBuilder("Acolyte's Reward ").append("prevented ").append(damage).append(" to ").append(targetCreature.getName()).toString());
+                if (toPrevent > 0) {
+                    game.informPlayers(new StringBuilder("Acolyte's Reward ").append("prevented ").append(toPrevent).append(" to ").append(targetCreature.getName()).toString());
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
-                            source.getControllerId(), source.getSourceId(), source.getControllerId(), damage));
+                            source.getControllerId(), source.getSourceId(), source.getControllerId(), toPrevent));
 
                     Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
                     if (targetPlayer != null) {
-                        targetPlayer.damage(damage, source.getSourceId(), game, false, true);
-                        game.informPlayers(new StringBuilder("Acolyte's Reward ").append("deals ").append(damage).append(" damge to ").append(targetPlayer.getName()).toString());
+                        targetPlayer.damage(toPrevent, source.getSourceId(), game, false, true);
+                        game.informPlayers(new StringBuilder("Acolyte's Reward ").append("deals ").append(toPrevent).append(" damage to ").append(targetPlayer.getName()).toString());
                     } else {
                         Permanent targetDamageCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                         if (targetDamageCreature != null) {
-                            targetDamageCreature.damage(damage, source.getSourceId(), game, true, false);
-                            game.informPlayers(new StringBuilder("Acolyte's Reward ").append("deals ").append(damage).append(" damge to ").append(targetDamageCreature.getName()).toString());
+                            targetDamageCreature.damage(toPrevent, source.getSourceId(), game, true, false);
+                            game.informPlayers(new StringBuilder("Acolyte's Reward ").append("deals ").append(toPrevent).append(" damage to ").append(targetDamageCreature.getName()).toString());
                         }
                     }
                 }
-                return true;
             }
         }
-        return false;
+        return result;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getFirstTarget())) {
-            return true;
-        }
-        return false;
+        return !this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getFirstTarget());
     }
 
 }
