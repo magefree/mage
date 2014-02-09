@@ -878,8 +878,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public synchronized void quit(UUID playerId) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
-            player.quit(this);
             fireInformEvent(player.getName() + " quits the match.");
+            player.quit(this);            
         }
     }
 
@@ -888,8 +888,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         Player player = state.getPlayer(playerId);
         if (player != null) {
             logger.debug(new StringBuilder("Player ").append(player.getName()).append(" concedes game ").append(this.getId()));
-            player.concede(this);
             fireInformEvent(player.getName() + " has conceded.");
+            player.concede(this);
         }
     }
 
