@@ -772,6 +772,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             if (hasProtectionFrom(source, game)) {
                 return false;
             }
+            // needed to get the correct possible targets if target replacement effects are active
+            // e.g. Fiendslayer Paladin tried to target with Ultimate Price
+            if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, this.getId(), source.getId(), sourceControllerId))) {
+                return false;
+            }
         }
 
         return true;
