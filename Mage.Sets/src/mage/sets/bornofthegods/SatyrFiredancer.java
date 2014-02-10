@@ -49,7 +49,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -75,7 +74,19 @@ public class SatyrFiredancer extends CardImpl<SatyrFiredancer> {
     public SatyrFiredancer(final SatyrFiredancer card) {
         super(card);
     }
-
+    
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SatyrFiredancerTriggeredAbility) {
+            Player opponent = game.getPlayer(ability.getEffects().get(0).getTargetPointer().getFirst(game, ability));
+            if (opponent != null) {
+                FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("creature controlled by ").append(opponent.getName()).toString());
+                filter.add(new ControllerIdPredicate(opponent.getId()));
+                ability.getTargets().add(new TargetCreaturePermanent(filter, true));
+            }
+        }
+    }
+    
     @Override
     public SatyrFiredancer copy() {
         return new SatyrFiredancer(this);
@@ -151,23 +162,14 @@ class SatyrFiredancerDamageEffect extends OneShotEffect<SatyrFiredancerDamageEff
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        if (targetPlayer != null && controller != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature that player controls");
-            filter.add(new ControllerIdPredicate(targetPlayer.getId()));
-            Target target = new TargetCreaturePermanent(filter, true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                if (controller.chooseTarget(outcome, target, source, game)) {
-                    Permanent targetCreature = game.getPermanent(target.getFirstTarget());
-                    int damage = (Integer) this.getValue("damage");
-                    if (targetCreature != null && damage > 0) {
-                        targetCreature.damage(damage, source.getSourceId(), game, true, false);
-                        return true;
-                    }
-                }
+        if (targetCreature != null && controller != null) {
+            int damage = (Integer) this.getValue("damage");
+            if (damage > 0) {
+                targetCreature.damage(damage, source.getSourceId(), game, true, false);                
             }
-
+            return true;
         }
         return false;
     }
