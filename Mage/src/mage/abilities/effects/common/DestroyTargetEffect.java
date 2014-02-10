@@ -79,7 +79,7 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);
                     if (permanent != null) {
-                        permanent.destroy(source.getId(), game, noRegen);
+                        permanent.destroy(source.getSourceId(), game, noRegen);
                         affectedTargets++;
                     }
                 }
@@ -89,7 +89,7 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
-                    permanent.destroy(source.getId(), game, noRegen);
+                    permanent.destroy(source.getSourceId(), game, noRegen);
                     affectedTargets++;
                 }
             }
