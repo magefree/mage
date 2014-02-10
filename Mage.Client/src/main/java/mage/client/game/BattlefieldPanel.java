@@ -34,6 +34,24 @@
 
 package mage.client.game;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+import javax.swing.JComponent;
+import javax.swing.JLayeredPane;
+import javax.swing.JScrollPane;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
@@ -42,16 +60,6 @@ import mage.client.util.AudioManager;
 import mage.client.util.Config;
 import mage.constants.CardType;
 import mage.view.PermanentView;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
 
 /**
  *
@@ -103,6 +111,11 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     }
 
     public void cleanUp() {
+        for (Component c: this.jPanel.getComponents()) {
+            if (c instanceof Permanent || c instanceof MagePermanent) {
+                this.jPanel.remove(c);
+            }
+        }
         permanents.clear();
         Plugins.getInstance().sortPermanents(uiComponentsList, permanents.values());
     }
@@ -225,7 +238,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
     private void groupAttachments(PermanentView permanent) {
         MagePermanent perm = permanents.get(permanent.getId());
-        if (perm == null) return;
+        if (perm == null) {
+            return;
+        }
         int position = getPosition(perm);
         perm.getLinks().clear();
         Rectangle r = perm.getBounds();

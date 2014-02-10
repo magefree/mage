@@ -689,6 +689,7 @@ public class GameController implements GameCallback {
     @Override
     public void gameResult(String result) {
         try {
+            logger.warn("Game Result: " + result);
             endGame(result);
         } catch (MageException ex) {
             logger.fatal("Game Result error", ex);

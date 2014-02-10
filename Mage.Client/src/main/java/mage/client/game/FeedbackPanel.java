@@ -136,8 +136,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
             case END:
                 this.btnLeft.setVisible(false);
                 this.btnRight.setVisible(true);
-                this.btnRight.setText("OK");
-                this.helper.setState("", false, "OK", true);
+                this.btnRight.setText("Close game");
+                this.helper.setState("", false, "Close game", true);
                 ArrowBuilder.getBuilder().removeAllArrows(gameId);
                 endWithTimeout();
                 break;
@@ -283,7 +283,10 @@ public class FeedbackPanel extends javax.swing.JPanel {
         if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
             session.sendPlayerInteger(gameId, 0);
         } else if (mode == FeedbackMode.END) {
-            MageFrame.getGame(gameId).hideGame();
+            GamePanel gamePanel = MageFrame.getGame(gameId);
+            if (gamePanel != null) {
+                gamePanel.removeGame();
+            }
         } else {
             session.sendPlayerBoolean(gameId, false);
         }

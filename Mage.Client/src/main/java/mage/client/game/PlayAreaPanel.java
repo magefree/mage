@@ -66,7 +66,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     public static final int PANEL_HEIGHT = 242;
     public static final int PANEL_HEIGHT_SMALL = 190;
 
-    /** Creates new form PlayAreaPanel */
+    /** Creates new form PlayAreaPanel
+     * @param isPlayer */
     public PlayAreaPanel(boolean isPlayer) {
         initComponents();
         setOpaque(false);
@@ -225,7 +226,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to stop watching the game?", "Confirm stop watching game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     gamePanel.getSession().stopWatching(gameId);
-                    gamePanel.hideGame();
+                    gamePanel.removeGame();
                 }
             }
         });

@@ -38,11 +38,12 @@ import mage.game.events.GameEvent.EventType;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class Step<T extends Step<T>> implements Serializable {
 
-    private PhaseStep type;
-    private boolean hasPriority;
+    private final PhaseStep type;
+    private final boolean hasPriority;
     protected EventType stepEvent;
     protected EventType preStepEvent;
     protected EventType postStepEvent;
@@ -81,7 +82,7 @@ public abstract class Step<T extends Step<T>> implements Serializable {
         stepPart = StepPart.PRE;
     }
 
-    public void priority(Game game, UUID activePlayerId, boolean resuming) {
+        public void priority(Game game, UUID activePlayerId, boolean resuming) {
         if (hasPriority) {
             stepPart = StepPart.PRIORITY;
             game.playPriority(activePlayerId, resuming);

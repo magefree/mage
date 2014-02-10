@@ -64,10 +64,11 @@ import org.apache.log4j.Logger;
 public class CallbackClientImpl implements CallbackClient {
 
     private static final Logger logger = Logger.getLogger(CallbackClientImpl.class);
-    private UUID clientId;
-    private MageFrame frame;
+    private final UUID clientId;
+    private final MageFrame frame;
     private int messageId = 0;
-    private boolean firstRun;
+    private int gameInformMessageId = 0;
+    private final boolean firstRun;
 
     public CallbackClientImpl(MageFrame frame) {
         this.clientId = UUID.randomUUID();
@@ -165,7 +166,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                     } else if (callback.getMethod().equals("gameOver")) {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                        if (panel != null) {
+                        if (panel != null) {                            
                             panel.endMessage((String) callback.getData(), callback.getMessageId());
                         }
                     } else if (callback.getMethod().equals("gameError")) {
@@ -238,15 +239,18 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                     } else if (callback.getMethod().equals("gameInform")) {
 
-                        if (callback.getMessageId() > messageId) {
+                        if (callback.getMessageId() > gameInformMessageId) {
                             GameClientMessage message = (GameClientMessage) callback.getData();
                             GamePanel panel = MageFrame.getGame(callback.getObjectId());
                             if (panel != null) {
                                 panel.inform(message.getMessage(), message.getGameView(), callback.getMessageId());
                             }
                         } else {
-                            logger.warn("message out of sequence - ignoring");
+                            logger.warn(new StringBuilder("message out of sequence - ignoring").append("MessageId = ").append(callback.getMessageId()).append(" method = ").append(callback.getMethod()));
+                            //logger.warn("message out of sequence - ignoring");
                         }
+
+                        gameInformMessageId = messageId;
                     } else if (callback.getMethod().equals("gameInformPersonal")) {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());

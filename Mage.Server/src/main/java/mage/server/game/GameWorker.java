@@ -59,6 +59,7 @@ public class GameWorker implements Callable {
             game.start(choosingPlayerId);
             game.fireUpdatePlayersEvent();
             result.gameResult(game.getWinner());
+            game.cleanUp();
         } catch (MageException ex) {
             logger.fatal("GameWorker error ", ex);
         }

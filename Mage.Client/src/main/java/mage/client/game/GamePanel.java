@@ -335,7 +335,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gameChatPanel.clear();
         this.gameChatPanel.connect(session.getGameChatId(gameId));
         if (!session.joinGame(gameId)) {
-            hideGame();
+            removeGame();
         }
     }
 
@@ -354,7 +354,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gameChatPanel.clear();
         this.gameChatPanel.connect(session.getGameChatId(gameId));
         if (!session.watchGame(gameId)) {
-            hideGame();
+            removeGame();
         }
         for (PlayAreaPanel panel : getPlayers().values()) {
             panel.setPlayingMode(false);
@@ -375,7 +375,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.pnlReplay.setVisible(true);
         this.gameChatPanel.clear();
         if (!session.startReplay(gameId)) {
-            hideGame();
+            removeGame();
         }
         for (PlayAreaPanel panel : getPlayers().values()) {
             panel.setPlayingMode(false);
@@ -385,13 +385,13 @@ public final class GamePanel extends javax.swing.JPanel {
     /**
      * Closes the game and it's resources
      */
-    public void hideGame() {
+    public void removeGame() {
         Component c = this.getParent();
         while (c != null && !(c instanceof GamePane)) {
             c = c.getParent();
         }
         if (c != null) {
-            ((GamePane)c).hideGame();
+            ((GamePane)c).removeGame();
         }
     }
 
@@ -1328,7 +1328,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private void btnStopWatchingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopWatchingActionPerformed
         if (modalQuestion("Are you sure you want to stop watching?", "Stop watching") == JOptionPane.YES_OPTION) {
             session.stopWatching(gameId);
-            this.hideGame();
+            this.removeGame();
         }
     }//GEN-LAST:event_btnStopWatchingActionPerformed
 
@@ -1451,8 +1451,8 @@ public final class GamePanel extends javax.swing.JPanel {
 }
 class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
 
-    private Session session;
-    private UUID gameId;
+    private final Session session;
+    private final UUID gameId;
 
     private static final Logger logger = Logger.getLogger(ReplayTask.class);
 

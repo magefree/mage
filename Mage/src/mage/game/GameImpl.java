@@ -550,6 +550,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
+    public void cleanUp() {
+        gameCards.clear();
+    }
+
+    @Override
     public void start(UUID choosingPlayerId, GameOptions options) {
         startTime = new Date();
         this.gameOptions = options;
@@ -815,8 +820,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             for (Player player: state.getPlayers().values()) {
                 player.abort();
             }
-            // allow gc
-            gameCards.clear();
         }
     }
 

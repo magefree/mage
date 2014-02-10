@@ -69,8 +69,7 @@ public class GamePane extends MagePane {
         gamePanel.cleanUp();       
     }
 
-    public void hideGame() {
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();       
+    public void removeGame() {
         this.cleanUp();
         this.removeFrame();
     }

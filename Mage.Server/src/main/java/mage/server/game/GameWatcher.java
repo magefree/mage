@@ -38,6 +38,7 @@ import org.apache.log4j.Logger;
 
 import java.rmi.RemoteException;
 import java.util.UUID;
+import mage.game.GameState;
 import mage.game.match.Match;
 import mage.view.GameEndView;
 
@@ -75,7 +76,16 @@ public class GameWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
+                logger.warn("before gameUpdate");
+                GameView gameView = getGameView();
+                logger.warn("after View");
+                UUID id = game.getId();
+                logger.warn("after ID");
+                ClientCallback  clientCallback = new ClientCallback("gameUpdate", id, gameView);
+                logger.warn("callback obj");
+                user.fireCallback(clientCallback);
+                // user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
+                logger.warn("after gameUpdate");
             }
         }
     }
@@ -126,7 +136,13 @@ public class GameWatcher {
     }
 
     public GameView getGameView() {
-        return new GameView(game.getState(), game, this.isPlayer);
+        logger.warn("start getGameView");
+        GameState gameState = game.getState();
+        logger.warn("start afterState");
+        GameView gameView = new GameView(gameState, game, this.isPlayer);
+        // return new GameView(game.getState(), game, this.isPlayer);
+        logger.warn("after getGameView");
+        return gameView;
     }
     
     public GameEndView getGameEndView(UUID playerId, Match match) {

@@ -88,6 +88,8 @@ public class DraftSession {
         }
     }
 
+    // not used
+    //
     public void inform(final String message) {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);

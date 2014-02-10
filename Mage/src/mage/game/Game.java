@@ -188,6 +188,7 @@ public interface Game extends MageItem, Serializable {
     void pause();
     boolean isPaused();
     void end();
+    void cleanUp();
     /*
      * Gives back the number of cards the player has after the next mulligan
      */
