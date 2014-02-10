@@ -57,12 +57,13 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
+import static mage.constants.SpellAbilityType.SPLIT;
+import static mage.constants.SpellAbilityType.SPLIT_FUSED;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
-import mage.filter.common.FilterPlaneswalkerOrPlayer;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.draft.Draft;
@@ -80,7 +81,6 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetDefender;
 import mage.util.ManaUtil;
 import org.apache.log4j.Logger;
-
 
 /**
  *
@@ -515,6 +515,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
      * @param max
      * @param message
      * @param game
+     * @param ability
      * @return
      */
     @Override
