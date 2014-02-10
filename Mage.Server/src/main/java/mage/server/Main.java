@@ -123,6 +123,12 @@ public class Main {
                 adminPassword = SystemUtil.sanitize(adminPassword);
             }
         }
+        
+        logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
+        logger.info("Config - max game threads: " + config.getMaxGameThreads());
+        logger.info("Config - max AI opponents: " + config.getMaxAiOpponents());
+        logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "True":"false"));
+        
         Connection connection = new Connection();
         connection.setHost(config.getServerAddress());
         connection.setPort(config.getPort());
