@@ -169,6 +169,14 @@ public class DialogContainer extends JPanel {
         */
     }
 
+    public void cleanUp() {
+        for (Component component:this.getComponents()) {
+            if (component instanceof ChoiceDialog) {
+                ((ChoiceDialog) component).cleanUp();
+            }
+        }
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
 

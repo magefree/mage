@@ -20,6 +20,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.UUID;
+import org.mage.card.arcane.CardPanel;
 
 /**
  * @author mw, noxx
@@ -113,6 +114,15 @@ public class ChoiceDialog extends IDialogPanel {
          */
         ///GameManager.getManager().resetChosenCards();
         displayCards(params.getCards(), params.gameId, params.bigCard);
+    }
+
+    public void cleanUp() {
+        for (Component comp : this.getComponents()) {
+            if (comp instanceof CardPanel) {
+                ((CardPanel) comp).cleanUp();
+                this.remove(comp);
+            }
+        }
     }
 
     private void displayCards(CardsView cards, UUID gameId, BigCard bigCard) {

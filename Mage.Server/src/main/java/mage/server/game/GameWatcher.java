@@ -76,16 +76,7 @@ public class GameWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                logger.warn("before gameUpdate");
-                GameView gameView = getGameView();
-                logger.warn("after View");
-                UUID id = game.getId();
-                logger.warn("after ID");
-                ClientCallback  clientCallback = new ClientCallback("gameUpdate", id, gameView);
-                logger.warn("callback obj");
-                user.fireCallback(clientCallback);
-                // user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
-                logger.warn("after gameUpdate");
+                user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
             }
         }
     }

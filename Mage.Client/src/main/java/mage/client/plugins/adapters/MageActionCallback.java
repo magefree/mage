@@ -114,7 +114,7 @@ public class MageActionCallback implements ActionCallback {
     }
 
     private void drawArrowsForEnchantPlayers(TransferData data, Point parentPoint) {
-        if (data.gameId != null) {
+        if (data.gameId != null && MageFrame.getGame(data.gameId) != null) {
             for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
                 PlayerPanelExt playAreaPanel = pa.getPlayerPanel();
                 if (playAreaPanel != null && playAreaPanel.getPlayer() != null && playAreaPanel.getPlayer().hasAttachments()) {

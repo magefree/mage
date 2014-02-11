@@ -49,7 +49,7 @@ public class DialogManager extends JComponent implements MouseListener,
      * @param gameId 
      */
     public static void removeGame(UUID gameId) {
-        if (!dialogManagers.containsKey(gameId)) {
+        if (dialogManagers.containsKey(gameId)) {
             synchronized (dialogManagers) {
                 DialogManager dialogManager = dialogManagers.get(gameId);
                 dialogManager.cleanUp();
@@ -80,7 +80,10 @@ public class DialogManager extends JComponent implements MouseListener,
 
     public void cleanUp() {
         this.currentDialog = null;
-        this.dialogContainer = null;
+        if (dialogContainer != null) {
+            this.dialogContainer.cleanUp();
+            this.dialogContainer = null;
+        }
         this.removeMouseListener(this);
         this.removeMouseMotionListener(this);
 

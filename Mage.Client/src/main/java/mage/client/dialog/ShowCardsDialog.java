@@ -34,6 +34,7 @@
 
 package mage.client.dialog;
 
+import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -51,7 +52,7 @@ import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.CardsView;
 import mage.view.SimpleCardsView;
-import org.apache.log4j.Logger;
+import org.mage.card.arcane.CardPanel;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -70,7 +71,12 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
     }
 
     public void cleanUp() {
-         
+         for(Component comp: cardArea.getComponents()) {
+             if (comp instanceof CardPanel) {
+                 ((CardPanel) comp).cleanUp();
+                 cardArea.remove(comp);
+             }
+         }
     }
 
     public void loadCards(String name, SimpleCardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {

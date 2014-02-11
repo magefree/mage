@@ -120,6 +120,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private final Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
     private final Map<String, ShowCardsDialog> revealed = new HashMap<String, ShowCardsDialog>();
     private final Map<String, ShowCardsDialog> lookedAt = new HashMap<String, ShowCardsDialog>();
+    private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<ShowCardsDialog>();
     private UUID gameId;
     private UUID playerId;
     private Session session;
@@ -234,6 +235,10 @@ public final class GamePanel extends javax.swing.JPanel {
         for (ShowCardsDialog lookedAtDialog: lookedAt.values()) {
             lookedAtDialog.cleanUp();
             lookedAtDialog.removeDialog();
+        }
+        for (ShowCardsDialog pickTargetDialog: pickTarget) {
+            pickTargetDialog.cleanUp();
+            pickTargetDialog.removeDialog();
         }
 
         try {
@@ -646,14 +651,17 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
+        ShowCardsDialog dialog = null;
         updateGame(gameView);
         Map<String, Serializable> options0 = options == null ? new HashMap<String, Serializable>() : options;
         if (cardView != null && cardView.size() > 0) {
-            ShowCardsDialog dialog = showCards(message, cardView, required, options0);
+            dialog = showCards(message, cardView, required, options0);
             options0.put("dialog", dialog);
         }
-        this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId);
-
+        this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId);        
+        if (dialog != null) {
+            this.pickTarget.add(dialog);
+        }
     }
 
     public void inform(String information, GameView gameView, int messageId) {
@@ -748,6 +756,7 @@ public final class GamePanel extends javax.swing.JPanel {
         PickChoiceDialog pickChoice = new PickChoiceDialog();
         pickChoice.showDialog(message, choices);
         session.sendPlayerString(gameId, pickChoice.getChoice());
+        pickChoice.removeDialog();
     }
 
     public void pickPile(String message, CardsView pile1, CardsView pile2) {
