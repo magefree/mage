@@ -55,6 +55,7 @@ import mage.target.Target;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> extends AbilityImpl<T> implements ActivatedAbility {
 
@@ -338,4 +339,13 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
     public UUID getActivatorId() {
         return this.activatorId;
     }
+
+    public TimingRule getTiming() {
+        return timing;
+    }
+
+    public void setTiming(TimingRule timing) {
+        this.timing = timing;
+    }
+        
 }
