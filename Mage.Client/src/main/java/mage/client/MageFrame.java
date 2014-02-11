@@ -971,7 +971,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         for (JInternalFrame window : windows) {
             if (window instanceof GamePane) {
                 GamePane gamePane = (GamePane) window;
-                gamePane.hideGame();
+                gamePane.removeGame();
             }
             if (window instanceof DraftPane) {
                 DraftPane draftPane = (DraftPane) window;
