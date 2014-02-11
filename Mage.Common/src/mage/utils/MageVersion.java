@@ -36,9 +36,11 @@ import java.io.Serializable;
  */
 public class MageVersion implements Serializable, Comparable<MageVersion> {
 
-    private int major;
-    private int minor;
-    private int patch;
+    public final static String MAGE_VERSION_INFO = "";
+    
+    private final int major;
+    private final int minor;
+    private final int patch;
 
     private String info = "";
 
@@ -68,12 +70,15 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
 
     @Override
     public int compareTo(MageVersion o) {
-        if (major != o.major)
+        if (major != o.major) {
             return major - o.major;
-        if (minor != o.minor)
+        }
+        if (minor != o.minor) {
             return minor - o.minor;
-        if (patch != o.patch)
+        }
+        if (patch != o.patch) {
             return patch - o.patch;
+        }
         return info.compareTo(o.info);
     }
 

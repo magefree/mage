@@ -30,17 +30,17 @@ public class MultiConnectTest {
 
     private static final CountDownLatch latch = new CountDownLatch(USER_CONNECT_COUNT);
 
-    private static final MageVersion version = new MageVersion(1, 3, 0, "");
+    private static final MageVersion version = new MageVersion(1, 3, 0, MageVersion.MAGE_VERSION_INFO);
 
     private static volatile int connected;
 
-    private Object sync = new Object();
+    private final Object sync = new Object();
     private MageUI ui;
 
     private class ClientMock implements MageClient {
 
         private Session session;
-        private String username;
+        private final String username;
 
         public ClientMock(String username) {
             this.username = username;

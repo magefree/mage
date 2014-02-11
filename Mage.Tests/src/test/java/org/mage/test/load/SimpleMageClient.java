@@ -15,12 +15,12 @@ import org.apache.log4j.Logger;
  */
 public class SimpleMageClient implements MageClient {
 
-    private UUID clientId;
-    private static final MageVersion version = new MageVersion(1, 3, 0, "");
+    private final UUID clientId;
+    private static final MageVersion version = new MageVersion(1, 3, 0, MageVersion.MAGE_VERSION_INFO);
 
     private static final transient Logger log = Logger.getLogger(SimpleMageClient.class);
 
-    private CallbackClient callbackClient;
+    private final CallbackClient callbackClient;
 
     public SimpleMageClient() {
         clientId = UUID.randomUUID();
