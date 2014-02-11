@@ -35,6 +35,7 @@ import mage.constants.Outcome;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class ReplacementEffectImpl<T extends ReplacementEffectImpl<T>> extends ContinuousEffectImpl<T> implements ReplacementEffect<T> {
 

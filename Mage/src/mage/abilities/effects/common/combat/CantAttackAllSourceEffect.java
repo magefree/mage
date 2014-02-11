@@ -35,16 +35,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
+ * The source of this effect can't attack any opponent
+ * 
  * @author BetaSteward_at_googlemail.com
  */
-public class CantAttackSourceEffect extends RestrictionEffect<CantAttackSourceEffect> {
+public class CantAttackAllSourceEffect extends RestrictionEffect<CantAttackAllSourceEffect> {
 
-    public CantAttackSourceEffect(Duration duration) {
+    public CantAttackAllSourceEffect(Duration duration) {
         super(duration);
     }
 
-    public CantAttackSourceEffect(final CantAttackSourceEffect effect) {
+    public CantAttackAllSourceEffect(final CantAttackAllSourceEffect effect) {
         super(effect);
     }
 
@@ -62,8 +63,8 @@ public class CantAttackSourceEffect extends RestrictionEffect<CantAttackSourceEf
     }
 
     @Override
-    public CantAttackSourceEffect copy() {
-        return new CantAttackSourceEffect(this);
+    public CantAttackAllSourceEffect copy() {
+        return new CantAttackAllSourceEffect(this);
     }
 
 }

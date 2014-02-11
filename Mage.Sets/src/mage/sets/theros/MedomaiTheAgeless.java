@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CantAttackSourceEffect;
+import mage.abilities.effects.common.combat.CantAttackAllSourceEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class MedomaiTheAgeless extends CardImpl<MedomaiTheAgeless> {
         // Whenever Medomai the Ageless deals combat damage to a player, take an extra turn after this one.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddExtraTurnControllerEffect(), false));
         // Medomai the Ageless can't attack during extra turns.
-        Effect effect = new ConditionalRestrictionEffect(new CantAttackSourceEffect(Duration.WhileOnBattlefield), ExtraTurnCondition.getInstance());
+        Effect effect = new ConditionalRestrictionEffect(new CantAttackAllSourceEffect(Duration.WhileOnBattlefield), ExtraTurnCondition.getInstance());
         effect.setText("{this} can't attack during extra turns");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
