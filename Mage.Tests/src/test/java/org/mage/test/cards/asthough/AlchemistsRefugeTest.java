@@ -19,6 +19,7 @@ public class AlchemistsRefugeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.BATTLEFIELD, playerA, "Island");
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        // Elite Vanguard 2/1
         addCard(Zone.HAND, playerA, "Elite Vanguard");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}, {T}:");

@@ -35,8 +35,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.SplitCard;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
+import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -77,12 +77,9 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 
     public boolean spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
-        if ((object.getCardType().contains(CardType.INSTANT) ||
+        return timing == TimingRule.INSTANT ||
                 object.getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
-                game.canPlaySorcery(playerId))) {
-            return true;
-        }
-        return false;
+                game.canPlaySorcery(playerId);
     }
 
     @Override

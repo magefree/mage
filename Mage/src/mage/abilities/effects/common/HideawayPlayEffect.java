@@ -74,9 +74,7 @@ public class HideawayPlayEffect extends OneShotEffect<HideawayPlayEffect> {
                 }
             }
         } else {
-            if (card.getCardType().contains(CardType.INSTANT)
-                    || card.getAbilities().containsKey(FlashAbility.getInstance().getId())
-                    || (game.getActivePlayerId().equals(controller.getId()) && game.isMainPhase())) {
+            if (card.getSpellAbility().spellCanBeActivatedRegularlyNow(controller.getId(), game)) {
                 if (controller.chooseUse(Outcome.Benefit, "Cast the card without paying mana cost?", game)) {
                     controller.cast(card.getSpellAbility(), game, true);
                 }

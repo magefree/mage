@@ -51,6 +51,7 @@ import java.lang.reflect.Constructor;
 import java.util.*;
 import mage.MageObject;
 import mage.constants.SpellAbilityType;
+import mage.constants.TimingRule;
 import static mage.constants.Zone.EXILED;
 import mage.game.command.Commander;
 
@@ -90,10 +91,17 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         this.cardType.addAll(Arrays.asList(cardTypes));
         this.manaCost.load(costs);
         if (cardType.contains(CardType.LAND)) {
-            addAbility(new PlayLandAbility(name));
+            Ability ability = new PlayLandAbility(name);
+            ability.setSourceId(this.getId());
+            abilities.add(ability);
         }
-        else {
-            addAbility(new SpellAbility(manaCost, name, Zone.HAND, spellAbilityType));
+        else {            
+            SpellAbility ability = new SpellAbility(manaCost, name, Zone.HAND, spellAbilityType);
+            if (!cardType.contains(CardType.INSTANT)) {
+                ability.setTiming(TimingRule.SORCERY);
+            }
+            ability.setSourceId(this.getId());
+            abilities.add(ability);            
         }
         this.usesVariousArt = Character.isDigit(this.getClass().getName().charAt(this.getClass().getName().length()-1));
         this.counters = new Counters();
