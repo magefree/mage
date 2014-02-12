@@ -199,7 +199,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         this.bigCard = bigCard;
         this.gameId = gameId;
 
-        boolean piles = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_PILES_TOGGLE, "True").equals("True");        
+        boolean piles = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_PILES_TOGGLE, "true").equals("true");
         cbSortBy.setSelectedItem(sortSetting.getSortBy());
         chkPiles.setSelected(piles);
         currentView.loadCards(showCards, sortSetting, piles, bigCard, gameId);

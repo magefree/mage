@@ -120,9 +120,14 @@ public class Session {
     public boolean setUserData(String userName, UserDataView userDataView) {
         User user = UserManager.getInstance().findUser(userName);
         if (user != null) {
-            UserData userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(), userDataView.isShowAbilityPickerForced());
-            updateAvatar(userName, userData);
-            user.setUserData(userData);
+            UserData userData = user.getUserData();
+            if (userData == null) {
+                userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(), userDataView.isShowAbilityPickerForced());
+                user.setUserData(userData);
+            } else {
+                userData.setAvatarId(userDataView.getAvatarId());
+                userData.setShowAbilityPickerForced(userDataView.isShowAbilityPickerForced());
+            }
             return true;
         }
         return false;

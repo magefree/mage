@@ -194,8 +194,8 @@
                 <Component class="javax.swing.JCheckBox" name="showAbilityPickerForced">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Show ability picker for abilities without costs"/>
-                    <Property name="toolTipText" type="java.lang.String" value="This prevents that you accidently activate abilities without costs that e.g. tap the permanent."/>
+                    <Property name="text" type="java.lang.String" value="Show ability picker for abilities or spells without costs"/>
+                    <Property name="toolTipText" type="java.lang.String" value="This prevents you from accidently activating abilities without other costs than tapping or casting spells with 0 mana costs."/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>

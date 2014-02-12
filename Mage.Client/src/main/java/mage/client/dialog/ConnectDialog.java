@@ -302,10 +302,11 @@ public class ConnectDialog extends MageDialog {
                 }
             }
 
-            // Avatar
+            // pref settings
             int avatarId = PreferencesDialog.getSelectedAvatar();
             connection.setAvatarId(avatarId);
-
+            boolean showAbilityPickerForced = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true");
+            connection.setShowAbilityPickerForced(showAbilityPickerForced);
             logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
             task = new ConnectTask();
             task.execute();

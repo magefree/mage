@@ -30,7 +30,6 @@ package mage.player.human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -829,9 +828,14 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             if (ability instanceof PlayLandAbility) {
                 return true;
             }      
+            if (ability.getManaCostsToPay().convertedManaCost() > 0) {
+                return true;
+            }
+            if (ability instanceof ManaAbility) {
+                return true;
+            }
             for(Cost cost : ability.getCosts() ) {
-                if (!(cost instanceof TapSourceCost) 
-                        || !((cost instanceof ManaCosts) && ((ManaCosts)cost).convertedManaCost() >0)) {
+                if (!(cost instanceof TapSourceCost)) {
                     // if cost exists that have to be paid, pick ability dialog can be suppressed
                     return true;
                 }

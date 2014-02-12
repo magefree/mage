@@ -412,8 +412,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         main_game.add(showPlayerNamesPermanently, java.awt.BorderLayout.LINE_START);
 
         showAbilityPickerForced.setSelected(true);
-        showAbilityPickerForced.setText("Show ability picker for abilities without costs");
-        showAbilityPickerForced.setToolTipText("This prevents that you accidently activate abilities without costs that e.g. tap the permanent.");
+        showAbilityPickerForced.setText("Show ability picker for abilities or spells without costs");
+        showAbilityPickerForced.setToolTipText("This prevents you from accidently activating abilities without other costs than tapping or casting spells with 0 mana costs.");
         showAbilityPickerForced.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         showAbilityPickerForced.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1667,6 +1667,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.checkBoxEndOfCOthers, PhaseManager.END_OF_COMBAT_OTHERS);
         load(prefs, dialog.checkBoxMain2Others, PhaseManager.MAIN_2_OTHERS);
         load(prefs, dialog.checkBoxEndTurnOthers, PhaseManager.END_OF_TURN_OTHERS);
+
         load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
         load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
