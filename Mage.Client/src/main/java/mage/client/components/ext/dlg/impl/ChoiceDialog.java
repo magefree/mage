@@ -9,7 +9,7 @@ import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.ext.dlg.DlgParams;
 import mage.client.components.ext.dlg.IDialogPanel;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.AudioManager;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.Command;
 import mage.client.util.SettingsManager;
 import mage.view.CardView;

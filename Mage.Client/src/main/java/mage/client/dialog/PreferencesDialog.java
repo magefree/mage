@@ -74,10 +74,13 @@ import org.apache.log4j.Logger;
  */
 public class PreferencesDialog extends javax.swing.JDialog {
 
+    private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
+    
     public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
     public static final String KEY_SHOW_PLAYER_NAMES_PERMANENTLY = "showPlayerNamesPermanently";
+    public static final String KEY_SHOW_ABILITY_PICKER = "showAbilityPicker";
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
 
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
@@ -91,7 +94,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_BATTLEFIELD_IMAGE_RANDOM = "battlefieldImagerandom";
     public static final String KEY_BATTLEFIELD_IMAGE_DEFAULT = "battlefieldImageDefault"; 
 
-    public static final String KEY_SOUNDS_ON = "soundsOn";
+    public static final String KEY_SOUNDS_GAME_ON = "soundsOn";
+    public static final String KEY_SOUNDS_OTHER_ON = "soundsOtherOn";
     public static final String KEY_SOUNDS_MATCH_MUSIC_ON = "soundsMatchMusicOn";
     public static final String KEY_SOUNDS_MATCH_MUSIC_PATH = "soundsMatchMusicPath";
 
@@ -173,17 +177,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_AVATAR = "selectedId";
 
-    private static Map<String, String> cache = new HashMap<String, String>();
+    private static final Map<String, String> cache = new HashMap<String, String>();
+
     private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
 
     public static final String OPEN_CONNECTION_TAB = "Open-Connection-Tab";
 
-    private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
+    
 
     public static final int DEFAULT_AVATAR_ID = 51;
     private static int selectedAvatarId = DEFAULT_AVATAR_ID;
     private static final Set<Integer> available_avatars = new HashSet<Integer>();
-    private static Map<Integer, JPanel> panels = new HashMap<Integer, JPanel>();
+    private static final Map<Integer, JPanel> panels = new HashMap<Integer, JPanel>();
 
     private static final Border GREEN_BORDER = BorderFactory.createLineBorder(Color.GREEN, 3);
     private static final Border BLACK_BORDER = BorderFactory.createLineBorder(Color.BLACK, 3);
@@ -267,6 +272,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         main_game = new javax.swing.JPanel();
         nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
         showPlayerNamesPermanently = new javax.swing.JCheckBox();
+        showAbilityPickerForSimpleAbilities = new javax.swing.JCheckBox();
         main_gamelog = new javax.swing.JPanel();
         cbGameLogAutoSave = new javax.swing.JCheckBox();
         tabPhases = new javax.swing.JPanel();
@@ -313,7 +319,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jLabel15 = new javax.swing.JLabel();
         tabSounds = new javax.swing.JPanel();
         sounds_clips = new javax.swing.JPanel();
-        cbEnableSounds = new javax.swing.JCheckBox();
+        cbEnableGameSounds = new javax.swing.JCheckBox();
+        cbEnableOtherSounds = new javax.swing.JCheckBox();
         sounds_backgroundMusic = new javax.swing.JPanel();
         cbEnableBattlefieldBGM = new javax.swing.JCheckBox();
         jLabel16 = new javax.swing.JLabel();
@@ -390,7 +397,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 nonLandPermanentsInOnePileActionPerformed(evt);
             }
         });
-        main_game.add(nonLandPermanentsInOnePile, java.awt.BorderLayout.CENTER);
+        main_game.add(nonLandPermanentsInOnePile, java.awt.BorderLayout.PAGE_START);
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
 
         showPlayerNamesPermanently.setSelected(true);
@@ -401,7 +408,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 showPlayerNamesPermanentlyActionPerformed(evt);
             }
         });
-        main_game.add(showPlayerNamesPermanently, java.awt.BorderLayout.PAGE_END);
+        main_game.add(showPlayerNamesPermanently, java.awt.BorderLayout.LINE_START);
+
+        showAbilityPickerForSimpleAbilities.setSelected(true);
+        showAbilityPickerForSimpleAbilities.setText("Show ability picker for abilities without costs");
+        showAbilityPickerForSimpleAbilities.setToolTipText("This prevents that you accidently activate abilities without costs that e.g. tap the permanent.");
+        showAbilityPickerForSimpleAbilities.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        showAbilityPickerForSimpleAbilities.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showAbilityPickerForSimpleAbilitiesActionPerformed(evt);
+            }
+        });
+        main_game.add(showAbilityPickerForSimpleAbilities, java.awt.BorderLayout.PAGE_END);
 
         main_gamelog.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game log"));
         main_gamelog.setLayout(new java.awt.BorderLayout());
@@ -423,8 +441,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(main_card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(main_game, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(main_gamelog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+                    .addComponent(main_game, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                    .addComponent(main_gamelog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabMainLayout.setVerticalGroup(
@@ -433,10 +451,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(main_card, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -766,14 +784,23 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sounds_clips.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Clips"));
         sounds_clips.setLayout(new java.awt.BorderLayout());
 
-        cbEnableSounds.setToolTipText("Sounds that will be played for certain actions (e.g. play land, attack, etc.)");
-        cbEnableSounds.setLabel("Enable");
-        cbEnableSounds.addActionListener(new java.awt.event.ActionListener() {
+        cbEnableGameSounds.setText("Enable game sounds");
+        cbEnableGameSounds.setToolTipText("Sounds that will be played for certain actions (e.g. play land, attack, etc.) during the game.");
+        cbEnableGameSounds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbEnableSoundsActionPerformed(evt);
+                cbEnableGameSoundsActionPerformed(evt);
             }
         });
-        sounds_clips.add(cbEnableSounds, java.awt.BorderLayout.CENTER);
+        sounds_clips.add(cbEnableGameSounds, java.awt.BorderLayout.CENTER);
+
+        cbEnableOtherSounds.setText("Enable other sounds");
+        cbEnableOtherSounds.setToolTipText("Sounds that will be played for actions outside of games (e.g. whisper, player joins your game, player submits a deck ...).");
+        cbEnableOtherSounds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEnableOtherSoundsActionPerformed(evt);
+            }
+        });
+        sounds_clips.add(cbEnableOtherSounds, java.awt.BorderLayout.PAGE_END);
 
         sounds_backgroundMusic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Music"));
 
@@ -835,8 +862,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(tabSoundsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(tabSoundsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sounds_clips, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sounds_clips, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                    .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabSoundsLayout.setVerticalGroup(
@@ -846,7 +873,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(sounds_clips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
 
         sounds_clips.getAccessibleContext().setAccessibleDescription("");
@@ -1288,6 +1315,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.showAbilityPickerForSimpleAbilities, KEY_SHOW_ABILITY_PICKER, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
         // Phases
@@ -1318,7 +1346,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbUseRandomBattleImage, KEY_BATTLEFIELD_IMAGE_RANDOM, "true", "false", UPDATE_CACHE_POLICY);
 
         // sounds
-        save(prefs, dialog.cbEnableSounds, KEY_SOUNDS_ON, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbEnableGameSounds, KEY_SOUNDS_GAME_ON, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbEnableOtherSounds, KEY_SOUNDS_OTHER_ON, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbEnableBattlefieldBGM, KEY_SOUNDS_MATCH_MUSIC_ON, "true", "false", UPDATE_CACHE_POLICY);
         saveSoundPath(prefs);
         
@@ -1404,9 +1433,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCheckForNewImagesActionPerformed
 
-    private void cbEnableSoundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnableSoundsActionPerformed
+    private void cbEnableGameSoundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnableGameSoundsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbEnableSoundsActionPerformed
+    }//GEN-LAST:event_cbEnableGameSoundsActionPerformed
 
     private void cbEnableBattlefieldBGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnableBattlefieldBGMActionPerformed
         if(cbEnableBattlefieldBGM.isSelected()){
@@ -1545,6 +1574,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_showToolTipsInAnyZoneActionPerformed
 
+    private void showAbilityPickerForSimpleAbilitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAbilityPickerForSimpleAbilitiesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showAbilityPickerForSimpleAbilitiesActionPerformed
+
+    private void cbEnableOtherSoundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnableOtherSoundsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEnableOtherSoundsActionPerformed
+
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
             this.pnlProxy.setVisible(true);
@@ -1575,6 +1612,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
         final int openedTab = param;
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 if (!dialog.isVisible()) {
                     Preferences prefs = MageFrame.getPreferences();
@@ -1628,6 +1666,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
         load(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
+        load(prefs, dialog.showAbilityPickerForSimpleAbilities, KEY_SHOW_ABILITY_PICKER, "true");
         load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
     }
 
@@ -1682,11 +1721,17 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadSoundSettings(Preferences prefs) {
-        String prop = prefs.get(KEY_SOUNDS_ON, "true");
+        String prop = prefs.get(KEY_SOUNDS_GAME_ON, "true");
         if (prop.equals("true")) {
-            dialog.cbEnableSounds.setSelected(true);
+            dialog.cbEnableGameSounds.setSelected(true);
         } else {
-            dialog.cbEnableSounds.setSelected(false);
+            dialog.cbEnableGameSounds.setSelected(false);
+        }
+        prop = prefs.get(KEY_SOUNDS_OTHER_ON, "true");
+        if (prop.equals("true")) {
+            dialog.cbEnableOtherSounds.setSelected(true);
+        } else {
+            dialog.cbEnableOtherSounds.setSelected(false);
         }
 
         // Match music
@@ -1830,7 +1875,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         } else {
             Preferences prefs = MageFrame.getPreferences();
             String value = prefs.get(key, def);
-            if (value == null) return null;
+            if (value == null) {
+                return null;
+            }
             cache.put(key, value);
             return value;
         }
@@ -1877,8 +1924,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             for (JPanel panel : panels.values()) {
                 panel.setBorder(BLACK_BORDER);
             }
-            this.selectedAvatarId = id;
-            panels.get(this.selectedAvatarId).setBorder(GREEN_BORDER);
+            PreferencesDialog.selectedAvatarId = id;
+            panels.get(PreferencesDialog.selectedAvatarId).setBorder(GREEN_BORDER);
         }
     }
 
@@ -1923,7 +1970,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnBrowseImageLocation;
     private javax.swing.JCheckBox cbCheckForNewImages;
     private javax.swing.JCheckBox cbEnableBattlefieldBGM;
-    private javax.swing.JCheckBox cbEnableSounds;
+    private javax.swing.JCheckBox cbEnableGameSounds;
+    private javax.swing.JCheckBox cbEnableOtherSounds;
     private javax.swing.JCheckBox cbGameLogAutoSave;
     private javax.swing.JComboBox cbProxyType;
     private javax.swing.JCheckBox cbSaveToZipFiles;
@@ -1992,6 +2040,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel pnlProxySettings;
     private javax.swing.JCheckBox rememberPswd;
     private javax.swing.JButton saveButton;
+    private javax.swing.JCheckBox showAbilityPickerForSimpleAbilities;
     private javax.swing.JCheckBox showPlayerNamesPermanently;
     private javax.swing.JCheckBox showToolTipsInAnyZone;
     private javax.swing.JPanel sounds_backgroundMusic;

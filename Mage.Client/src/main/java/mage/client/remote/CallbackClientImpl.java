@@ -38,7 +38,7 @@ import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.AudioManager;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.DeckUtil;
 import mage.client.util.GameManager;
 import mage.client.util.object.SaveObjectUtil;

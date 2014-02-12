@@ -44,7 +44,7 @@ import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
 import mage.client.components.tray.MageTray;
-import mage.client.util.AudioManager;
+import mage.client.util.audio.AudioManager;
 import mage.remote.Session;
 import mage.view.SeatView;
 import mage.view.TableView;

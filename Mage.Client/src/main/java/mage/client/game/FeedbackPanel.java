@@ -46,7 +46,7 @@ import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageTextArea;
 import mage.client.dialog.MageDialog;
-import mage.client.util.AudioManager;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.remote.Session;
 import org.apache.log4j.Logger;

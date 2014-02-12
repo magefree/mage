@@ -49,7 +49,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import mage.client.MageFrame;
 import mage.client.game.GamePanel;
-import mage.client.util.AudioManager;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.Format;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;

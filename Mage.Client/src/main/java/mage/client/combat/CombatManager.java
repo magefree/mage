@@ -3,7 +3,7 @@ package mage.client.combat;
 import mage.cards.MagePermanent;
 import mage.client.MageFrame;
 import mage.client.game.PlayAreaPanel;
-import mage.client.util.AudioManager;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.view.CardView;

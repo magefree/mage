@@ -30,7 +30,7 @@ import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
-import mage.client.util.AudioManager;
+import mage.client.util.audio.AudioManager;
 import mage.components.ImagePanel;
 import mage.constants.CardType;
 import mage.utils.CardUtil;
