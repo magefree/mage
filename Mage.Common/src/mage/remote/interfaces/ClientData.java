@@ -34,5 +34,5 @@ public interface ClientData {
 
     String getUserName();
 
-    boolean updateAvatar(int avatarId);
+    boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced);
 }

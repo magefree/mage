@@ -30,6 +30,7 @@ package mage.player.human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -41,11 +42,15 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
+import mage.abilities.PlayLandAbility;
 import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.RequirementEffect;
@@ -803,7 +808,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
     protected void activateAbility(LinkedHashMap<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
         updateGameStatePriority("activateAbility", game);
-        if (abilities.size() == 1) {
+        if (abilities.size() == 1 && suppressAbilityPicker(abilities.values().iterator().next())) {
             ActivatedAbility ability = abilities.values().iterator().next();
             if (ability.getTargets().size() != 0 || !(ability.getCosts().size() == 1 && ability.getCosts().get(0) instanceof SacrificeSourceCost)) {
                 activateAbility(ability, game);
@@ -819,6 +824,24 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         }
     }
 
+    private boolean suppressAbilityPicker(ActivatedAbility ability) {
+        if (this.getUserData().isShowAbilityPickerForced()) {
+            if (ability instanceof PlayLandAbility) {
+                return true;
+            }      
+            for(Cost cost : ability.getCosts() ) {
+                if (!(cost instanceof TapSourceCost) 
+                        || !((cost instanceof ManaCosts) && ((ManaCosts)cost).convertedManaCost() >0)) {
+                    // if cost exists that have to be paid, pick ability dialog can be suppressed
+                    return true;
+                }
+            }
+            return false;
+                
+        }
+        return true;
+    }
+    
     @Override
     public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
         switch(ability.getSpellAbilityType()) {

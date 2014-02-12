@@ -48,6 +48,7 @@ public class Connection {
     private String proxyPassword;
 
     private int avatarId;
+    private boolean showAbilityPickerForced;
 
     private static final String serialization = "?serializationtype=jboss";
     private static final String transport = "bisocket";
@@ -202,6 +203,14 @@ public class Connection {
 
     public void setAvatarId(int avatarId) {
         this.avatarId = avatarId;
+    }
+
+    public boolean isShowAbilityPickerForced() {
+        return showAbilityPickerForced;
+    }
+
+    public void setShowAbilityPickerForced(boolean showAbilityPickerForced) {
+        this.showAbilityPickerForced = showAbilityPickerForced;
     }
 
 }

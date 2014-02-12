@@ -190,7 +190,7 @@ public class SessionImpl implements Session {
             this.sessionId = callbackClient.getSessionId();
             boolean registerResult;
             if (connection.getPassword() == null) {
-                UserDataView userDataView = new UserDataView(connection.getAvatarId());
+                UserDataView userDataView = new UserDataView(connection.getAvatarId(), connection.isShowAbilityPickerForced());
                 // for backward compatibility. don't remove twice call - first one does nothing but for version checking
                 registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
                 server.setUserData(connection.getUsername(), sessionId, userDataView);
@@ -367,8 +367,6 @@ public class SessionImpl implements Session {
             }
         } catch (MageException ex) {
             handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);        
         }
         return null;
     }
@@ -381,8 +379,6 @@ public class SessionImpl implements Session {
             }
         } catch (MageException ex) {
             handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);        
         }
         return null;
     }
@@ -395,8 +391,6 @@ public class SessionImpl implements Session {
             }
         } catch (MageException ex) {
             handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);        
         }
         return null;
     }
@@ -423,8 +417,6 @@ public class SessionImpl implements Session {
             }
         } catch (MageException ex) {
             handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);        
         }
         return null;
     }
@@ -1243,10 +1235,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean updateAvatar(int avatarId) {
+    public boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced) {
         try {
             if (isConnected()) {
-                UserDataView userDataView = new UserDataView(avatarId);
+                UserDataView userDataView = new UserDataView(avatarId, showAbilityPickerForced);
                 server.setUserData(connection.getUsername(), sessionId, userDataView);
             }
             return true;

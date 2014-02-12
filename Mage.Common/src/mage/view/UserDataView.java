@@ -13,9 +13,11 @@ public class UserDataView implements Serializable {
 
     protected int avatarId;
     protected int userGroup;
+    protected boolean showAbilityPickerForced;
 
-    public UserDataView(int avatarId) {
+    public UserDataView(int avatarId, boolean showAbilityPickerForced) {
         this.avatarId = avatarId;
+        this.showAbilityPickerForced = showAbilityPickerForced;
     }
 
     public UserDataView(UserData userData) {
@@ -26,4 +28,9 @@ public class UserDataView implements Serializable {
     public int getAvatarId() {
         return avatarId;
     }
+
+    public boolean isShowAbilityPickerForced() {
+        return showAbilityPickerForced;
+    }
+    
 }

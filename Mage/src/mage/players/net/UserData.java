@@ -11,11 +11,13 @@ public class UserData implements Serializable {
 
     protected int groupId;
     protected int avatarId;
+    protected boolean showAbilityPickerForced;
     protected String privateKey;
 
-    public UserData(UserGroup userGroup, int avatarId) {
+    public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced) {
         this.groupId = userGroup.getGroupId();
         this.avatarId = avatarId;
+        this.showAbilityPickerForced = showAbilityPickerForced;
     }
 
     public void setGroupId(int groupId) {
@@ -33,4 +35,13 @@ public class UserData implements Serializable {
     public void setAvatarId(int avatarId) {
         this.avatarId = avatarId;
     }
+
+    public boolean isShowAbilityPickerForced() {
+        return showAbilityPickerForced;
+    }
+
+    public void setShowAbilityPickerForced(boolean showAbilityPickerForced) {
+        this.showAbilityPickerForced = showAbilityPickerForced;
+    }
+    
 }

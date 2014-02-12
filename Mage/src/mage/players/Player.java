@@ -130,6 +130,10 @@ public interface Player extends MageItem, Copyable<Player> {
     Set<UUID> getInRange();
     boolean isTopCardRevealed();
     void setTopCardRevealed(boolean topCardRevealed);
+    /**
+     * Get data from the client Preferences (e.g. avatarId or showAbilityPickerForce)
+     * @return 
+     */
     UserData getUserData();
     void setUserData(UserData userData);
     boolean canLose(Game game);

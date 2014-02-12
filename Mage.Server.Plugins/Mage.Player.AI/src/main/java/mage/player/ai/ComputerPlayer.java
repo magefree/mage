@@ -104,7 +104,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
         human = false;
-        userData = new UserData(UserGroup.COMPUTER, 64);
+        userData = new UserData(UserGroup.COMPUTER, 64, false);
     }
 
     protected ComputerPlayer(UUID id) {
