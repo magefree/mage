@@ -36,7 +36,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
 import mage.interfaces.rate.RateCallback;
 import mage.utils.DeckBuilder;
-import mage.view.TournamentTypeView;
 
 
 /**
@@ -156,16 +155,28 @@ public class DeckGenerator {
                 tmp.createNewFile();
                 deck.setName("Generated-Deck-" + UUID.randomUUID());
                 Sets.saveDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());
+                deck = null;
                 //JOptionPane.showMessageDialog(null, "Deck has been generated.");
+                DeckGenerator.cleanUp(btnGenerate, btnCancel);
                 return tmp.getAbsolutePath();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Couldn't generate deck. Try once again.");
+                JOptionPane.showMessageDialog(null, "Couldn't generate deck. Try again.");
             }
         }
-
+        DeckGenerator.cleanUp(btnGenerate, btnCancel);
         return selectedColors;
     }
 
+    private static void cleanUp(JButton btnGenerate, JButton btnCancel) {
+        for (ActionListener al: btnGenerate.getActionListeners()) {
+            btnGenerate.removeActionListener(al);
+        }
+        for (ActionListener al: btnCancel.getActionListeners()) {
+            btnCancel.removeActionListener(al);
+        }        
+        deck = null;
+    }
+    
     /**
      * Generates card pool
      */

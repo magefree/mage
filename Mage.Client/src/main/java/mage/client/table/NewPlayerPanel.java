@@ -48,7 +48,7 @@ import mage.client.util.Config;
  */
 public class NewPlayerPanel extends javax.swing.JPanel {
 
-    private JFileChooser fcSelectDeck;
+    private final JFileChooser fcSelectDeck;
 
     /** Creates new form NewPlayerPanel */
     public NewPlayerPanel() {
