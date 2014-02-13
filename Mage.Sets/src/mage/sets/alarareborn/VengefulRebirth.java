@@ -55,9 +55,11 @@ public class VengefulRebirth extends CardImpl<VengefulRebirth> {
         this.expansionSetCode = "ARB";
         this.color.setRed(true);
         this.color.setGreen(true);
+        // Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to target creature or player
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new VengefulRebirthEffect());
+        
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
@@ -92,24 +94,22 @@ class VengefulRebirthEffect extends OneShotEffect<VengefulRebirthEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Card card = (Card)game.getObject(source.getFirstTarget());
-        if (player.removeFromGraveyard(card, game)) {
-            card.moveToZone(Zone.HAND, source.getId(), game, false);
-            int damage = card.getManaCost().convertedManaCost();
+        if (player != null && card != null && player.removeFromGraveyard(card, game)) {
+            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);            
             if (!card.getCardType().contains(CardType.LAND)) {
+                int damage = card.getManaCost().convertedManaCost();
                 Permanent permanent = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
                 if (permanent != null) {
                     permanent.damage(damage, source.getSourceId(), game, true, false);
-                    return true;
                 }
                 Player targetPlayer = game.getPlayer(source.getTargets().get(1).getTargets().get(0));
                 if (targetPlayer != null) {
                     targetPlayer.damage(damage, source.getSourceId(), game, false, true);
-                    return true;
                 }
-                return false;
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
 }
