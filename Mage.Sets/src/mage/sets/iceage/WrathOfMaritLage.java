@@ -29,20 +29,22 @@ package mage.sets.iceage;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.SkipUntapAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -51,7 +53,12 @@ import mage.game.permanent.Permanent;
  */
 public class WrathOfMaritLage extends CardImpl<WrathOfMaritLage> {
 
-
+    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
+    
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
+    }
+    
     
     public WrathOfMaritLage(UUID ownerId) {
         super(ownerId, 109, "Wrath of Marit Lage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
@@ -62,7 +69,7 @@ public class WrathOfMaritLage extends CardImpl<WrathOfMaritLage> {
         // When Wrath of Marit Lage enters the battlefield, tap all red creatures.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect()));
         // Red creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
     public WrathOfMaritLage(final WrathOfMaritLage card) {
@@ -76,12 +83,7 @@ public class WrathOfMaritLage extends CardImpl<WrathOfMaritLage> {
 }
 
 class TapAllEffect extends OneShotEffect<TapAllEffect> {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Red creature");
-    static{
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-    
+   
     public TapAllEffect() {
         super(Outcome.Tap);
         staticText = "tap all red creatures";
@@ -94,7 +96,7 @@ class TapAllEffect extends OneShotEffect<TapAllEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getSourceId(), game);
+        List<Permanent> creatures = game.getBattlefield().getActivePermanents(WrathOfMaritLage.filter, source.getSourceId(), game);
         for (Permanent creature : creatures) {
             creature.tap(game);
         }
@@ -105,49 +107,4 @@ class TapAllEffect extends OneShotEffect<TapAllEffect> {
     public TapAllEffect copy() {
         return new TapAllEffect(this);
     }
-}
-
-
-class DontUntapEffect extends ReplacementEffectImpl<DontUntapEffect> {
-
-
-    public DontUntapEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-    }
-
-    public DontUntapEffect(final DontUntapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DontUntapEffect copy() {
-        return new DontUntapEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        used = false;
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP &&  event.getType() == GameEvent.EventType.UNTAP
-                && creature != null && creature.getCardType().contains(CardType.CREATURE) && creature.getColor().isRed() && creature.getControllerId() == event.getPlayerId()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Red creatures don't untap during their controllers' untap steps";
-    }
-    
 }

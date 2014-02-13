@@ -31,16 +31,13 @@ import java.util.UUID;
 
 import mage.constants.*;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.SkipUntapAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -57,7 +54,7 @@ public class IntruderAlarm extends CardImpl<IntruderAlarm> {
         this.color.setBlue(true);
 
         // Creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IntruderAlarmEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, new FilterCreaturePermanent("Creatures"))));
         // Whenever a creature enters the battlefield, untap all creatures.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new UntapAllCreatureEffect(), new FilterCreaturePermanent()));
     }
@@ -70,51 +67,6 @@ public class IntruderAlarm extends CardImpl<IntruderAlarm> {
     public IntruderAlarm copy() {
         return new IntruderAlarm(this);
     }
-}
-
-
-class IntruderAlarmEffect extends ReplacementEffectImpl<IntruderAlarmEffect> {
-
-
-    public IntruderAlarmEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-    }
-
-    public IntruderAlarmEffect(final IntruderAlarmEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public IntruderAlarmEffect copy() {
-        return new IntruderAlarmEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        used = false;
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP &&  event.getType() == EventType.UNTAP
-                && creature != null && creature.getCardType().contains(CardType.CREATURE) && creature.getControllerId() == event.getPlayerId()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Creatures don't untap during their controllers' untap steps";
-    }
-
 }
 
 class UntapAllCreatureEffect extends OneShotEffect<UntapAllCreatureEffect> {

@@ -38,15 +38,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.SkipUntapAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
-import mage.constants.PhaseStep;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
@@ -67,7 +65,7 @@ public class HokoriDustDrinker extends CardImpl<HokoriDustDrinker> {
         this.toughness = new MageInt(1);
 
         // Lands don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HokoriDustDrinkerReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, new FilterLandPermanent("Lands"))));
 
         // At the beginning of each player's upkeep, that player untaps a land he or she controls.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HokoriDustDrinkerUntapEffect(), TargetController.ANY, false));
@@ -84,47 +82,6 @@ public class HokoriDustDrinker extends CardImpl<HokoriDustDrinker> {
         return new HokoriDustDrinker(this);
     }
 }
-
-class HokoriDustDrinkerReplacementEffect extends ReplacementEffectImpl<HokoriDustDrinkerReplacementEffect> {
-
-    public HokoriDustDrinkerReplacementEffect() {
-        super(Duration.OneUse, Outcome.Detriment);
-    }
-
-    public HokoriDustDrinkerReplacementEffect(final HokoriDustDrinkerReplacementEffect effect) {
-        super(effect);
-        staticText = "Lands don't untap during their controllers' untap steps";
-    }
-
-    @Override
-    public HokoriDustDrinkerReplacementEffect copy() {
-        return new HokoriDustDrinkerReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP &&
-                event.getType() == GameEvent.EventType.UNTAP) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getCardType().contains(CardType.LAND)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-}
-
 
 class HokoriDustDrinkerUntapEffect extends OneShotEffect<HokoriDustDrinkerUntapEffect> {
 
