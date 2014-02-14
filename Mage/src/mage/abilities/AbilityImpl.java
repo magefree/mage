@@ -300,6 +300,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             logger.debug("activate failed - non mana costs");
             return false;
         }
+        // inform about x costs now, so canceled announcements are not shown in the log
+        if (variableManaCost != null) {
+            int xValue = getManaCostsToPay().getX();
+            game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
+        }
         return true;
     }
 
@@ -356,8 +361,6 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 }
                 variableManaCost.setPaid();
             }
-            xValue = getManaCostsToPay().getX();
-            game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
         }
 
         return variableManaCost;
