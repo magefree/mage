@@ -54,8 +54,8 @@ public class Afterlife extends CardImpl<Afterlife> {
 
         this.color.setWhite(true);
 
-		// Destroy target creature. It can't be regenerated. Its controller puts a
-		// 1/1 white Spirit creature token with flying onto the battlefield.
+        // Destroy target creature. It can't be regenerated. Its controller puts a
+        // 1/1 white Spirit creature token with flying onto the battlefield.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new AfterlifeEffect());
@@ -89,10 +89,10 @@ class AfterlifeEffect extends OneShotEffect<AfterlifeEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        Permanent permanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             SpiritWhiteToken token = new SpiritWhiteToken();
-            token.putOntoBattlefield(1, game, source.getId(), permanent.getControllerId());
+            token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
         }
         return true;
     }
