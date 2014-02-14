@@ -41,6 +41,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.UUID;
+import org.mage.card.arcane.CardPanel;
 
 /**
 *
@@ -48,8 +49,8 @@ import java.util.UUID;
 */
 public class PickPileDialog extends MageDialog {
 
-    private CardArea pile1;
-    private CardArea pile2;
+    private final CardArea pile1;
+    private final CardArea pile2;
 
     private boolean pickedPile1 = false;
 
@@ -68,6 +69,7 @@ public class PickPileDialog extends MageDialog {
 
         JButton btnChoosePile1 = new JButton("Pile 1");
         btnChoosePile1.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 btnPile1ActionPerformed(e);
             }
@@ -83,6 +85,7 @@ public class PickPileDialog extends MageDialog {
 
         JButton btnChoosePile2 = new JButton("Pile 2");
         btnChoosePile2.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 btnPile2ActionPerformed(e);
             }
@@ -90,6 +93,21 @@ public class PickPileDialog extends MageDialog {
         panel_1.add(btnChoosePile2, BorderLayout.NORTH);
     }
 
+    public void cleanUp() {
+         for(Component comp: pile1.getComponents()) {
+             if (comp instanceof CardPanel) {
+                 ((CardPanel) comp).cleanUp();
+                 pile1.remove(comp);
+             }
+         } 
+         for(Component comp: pile2.getComponents()) {
+             if (comp instanceof CardPanel) {
+                 ((CardPanel) comp).cleanUp();
+                 pile2.remove(comp);
+             }
+         }          
+    }
+    
     public void loadCards(String name, CardsView pile1, CardsView pile2, BigCard bigCard, CardDimensions dimension, UUID gameId) {
         this.title = name;
         this.pile1.loadCardsNarrow(pile1, bigCard, dimension, gameId, null);

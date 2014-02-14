@@ -47,12 +47,13 @@ import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.SimpleCardsView;
+import org.mage.card.arcane.CardPanel;
 
 public class CardArea extends JPanel {
 
     private boolean reloaded = false;
-    private javax.swing.JLayeredPane cardArea;
-    private javax.swing.JScrollPane scrollPane;
+    private final javax.swing.JLayeredPane cardArea;
+    private final javax.swing.JScrollPane scrollPane;
 
     /**
      * Create the panel.
@@ -68,6 +69,15 @@ public class CardArea extends JPanel {
 
     }
 
+    public void cleanUp() {
+         for(Component comp: cardArea.getComponents()) {
+             if (comp instanceof CardPanel) {
+                 ((CardPanel) comp).cleanUp();
+                 cardArea.remove(comp);
+             }
+         }            
+    }
+    
     public void loadCards(SimpleCardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, MouseListener listener) {
         loadCards(CardsViewUtil.convertSimple(showCards), bigCard, dimension, gameId, listener);
     }

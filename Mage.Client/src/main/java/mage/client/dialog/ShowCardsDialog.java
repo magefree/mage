@@ -71,12 +71,13 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
     }
 
     public void cleanUp() {
-         for(Component comp: cardArea.getComponents()) {
-             if (comp instanceof CardPanel) {
-                 ((CardPanel) comp).cleanUp();
-                 cardArea.remove(comp);
-             }
-         }
+        cardArea.cleanUp();
+        for (Component comp : cardArea.getComponents()) {
+            if (comp instanceof CardPanel) {
+                ((CardPanel) comp).cleanUp();
+                cardArea.remove(comp);
+            }
+        }
     }
 
     public void loadCards(String name, SimpleCardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {

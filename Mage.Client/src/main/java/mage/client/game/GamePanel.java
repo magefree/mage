@@ -764,6 +764,8 @@ public final class GamePanel extends javax.swing.JPanel {
         PickPileDialog pickPileDialog = new PickPileDialog();
         pickPileDialog.loadCards(message, pile1, pile2, bigCard, Config.dimensions, gameId);
         session.sendPlayerBoolean(gameId, pickPileDialog.isPickedPile1());
+        pickPileDialog.cleanUp();
+        pickPileDialog.removeDialog();
     }
 
     public Map<UUID, PlayAreaPanel> getPlayers() {
