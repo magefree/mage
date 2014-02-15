@@ -46,6 +46,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 
@@ -72,7 +73,7 @@ public class DetentionSphere extends CardImpl<DetentionSphere> {
         // target nonland permanent not named Detention Sphere and all
         // other permanents with the same name as that permanent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DetentionSphereEntersEffect(), true);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
 
 
@@ -107,11 +108,12 @@ class DetentionSphereEntersEffect extends OneShotEffect<DetentionSphereEntersEff
     public boolean apply(Game game, Ability source) {
         UUID exileId = source.getSourceId();
         Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (exileId != null && targetPermanent != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (exileId != null && targetPermanent != null && controller != null) {
             String name = targetPermanent.getName();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
                 if (permanent != null && permanent.getName().equals(name)) {
-                    permanent.moveToExile(exileId, "Detention Sphere", source.getId(), game);
+                    controller.moveCardToExileWithInfo(permanent, exileId, "Detention Sphere", source.getSourceId(), game, Zone.BATTLEFIELD);
                 }
             }
             return true;
@@ -144,7 +146,7 @@ class DetentionSphereLeavesEffect extends OneShotEffect<DetentionSphereLeavesEff
             exile = exile.copy();
             for (UUID cardId : exile) {
                 Card card = game.getCard(cardId);
-                card.putOntoBattlefield(game, Zone.EXILED, source.getId(), card.getOwnerId());
+                card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), card.getOwnerId());
             }
             game.getExile().getExileZone(exileId).clear();
             return true;
