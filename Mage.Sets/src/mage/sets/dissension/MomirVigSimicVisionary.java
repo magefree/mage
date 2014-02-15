@@ -30,7 +30,7 @@ package mage.sets.dissension;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.SpellCastAllTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
@@ -73,14 +73,14 @@ public class MomirVigSimicVisionary extends CardImpl<MomirVigSimicVisionary> {
         this.toughness = new MageInt(2);
 
         // Whenever you cast a green creature spell, you may search your library for a creature card and reveal it. If you do, shuffle your library and put that card on top of it.
-        Effect effect = new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(), true, true);
+        Effect effect = new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(new FilterCreatureCard()), true, true);
         effect.setText("you may search your library for a creature card and reveal it. If you do, shuffle your library and put that card on top of it");
-        this.addAbility(new SpellCastAllTriggeredAbility(effect, filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(effect, filter, true));
 
         // Whenever you cast a blue creature spell, reveal the top card of your library. If it's a creature card, put that card into your hand.
         Effect effect2 = new RevealLibraryPutIntoHandEffect(1, new FilterCreatureCard(), false);
         effect2.setText("reveal the top card of your library. If it's a creature card, put that card into your hand");
-        this.addAbility(new SpellCastAllTriggeredAbility(effect2, filter2, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(effect2, filter2, false));
 
     }
 
