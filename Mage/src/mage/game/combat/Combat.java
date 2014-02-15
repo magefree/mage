@@ -481,7 +481,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         // map with attackers (UUID) that must be blocked by at least one blocker and a set of all creatures that can block it and don't block yet
         Map<UUID, Set<UUID>> mustBeBlockedByAtLeastOne = new HashMap<UUID, Set<UUID>>();
 
-        // check mustBlockAny
+        // check mustBlock requirements of creatures from opponents of attacking player
         for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), game)) {
             // creature is controlled by an opponent of the attacker
             if (opponents.contains(creature.getControllerId())) {
@@ -531,11 +531,19 @@ public class Combat implements Serializable, Copyable<Combat> {
                         // check the mustBlockAny requirement ----------------------------------------
                         if (effect.mustBlockAny(game)) {
                             // check that it can block at least one of the attackers
+                            // and no restictions prevent this
                             boolean mayBlock = false;
                             for (UUID attackingCreatureId : getAttackers()) {
                                 if (creature.canBlock(attackingCreatureId, game)) {
-                                    mayBlock = true;
-                                    break;
+                                    // check restrictions of the creature to block that prevent it can be blocked
+                                    Permanent attackingCreature = game.getPermanent(attackingCreatureId);
+                                    if (attackingCreature != null && attackingCreature.getMinBlockedBy() > 1) {
+                                        // TODO: check if enough possible blockers are available, if true, mayBlock can be set to true
+
+                                    } else {
+                                        mayBlock = true;
+                                        break;
+                                    }
                                 }
                             }
                             // if so inform human player or set block for AI player
