@@ -42,7 +42,7 @@ import mage.game.events.GameEvent;
 public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl<SacrificeSourceTriggeredAbility> {
 
     public SacrificeSourceTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        super(Zone.ALL, effect, optional);
     }
 
     public SacrificeSourceTriggeredAbility(final SacrificeSourceTriggeredAbility ability) {
