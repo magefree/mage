@@ -26,28 +26,28 @@
 |Generate|TOK:DDL|Griffin|
 |Generate|TOK:DDL|Beast|
 
-|Generate|TOK:MMA|Giant-Warrior|
-|Generate|TOK:MMA|Kithkin-Soldier|
+|Generate|TOK:MMA|Giant Warrior|
+|Generate|TOK:MMA|Kithkin Soldier|
 |Generate|TOK:MMA|Soldier|
 |Generate|TOK:MMA|Illusion|
 |Generate|TOK:MMA|Bat|
-|Generate|TOK:MMA|Goblin-Rogue|
+|Generate|TOK:MMA|Goblin Rogue|
 |Generate|TOK:MMA|Spider|
 |Generate|TOK:MMA|Zombie|
 |Generate|TOK:MMA|Dragon|
 |Generate|TOK:MMA|Goblin|
 |Generate|TOK:MMA|Elemental|
 |Generate|TOK:MMA|Saproling|
-|Generate|TOK:MMA|Treefolk-Shaman|
+|Generate|TOK:MMA|Treefolk Shaman|
 |Generate|TOK:MMA|Faerie Rogue|
 |Generate|TOK:MMA|Worm|
-|Generate|EMBLEM:MMA|Elspeth, Knight-Errant|
+|Generate|EMBLEM:MMA|Elspeth, Knight Errant|
 
 |Generate|TOK:DGM|Elemental|
 
 |Generate|TOK:GTC|Angel|
 |Generate|TOK:GTC|Rat|
-|Generate|TOK:GTC|Frog-Lizard|
+|Generate|TOK:GTC|Frog Lizard|
 |Generate|TOK:GTC|Cleric|
 |Generate|TOK:GTC|Horror|
 |Generate|TOK:GTC|Soldier|
