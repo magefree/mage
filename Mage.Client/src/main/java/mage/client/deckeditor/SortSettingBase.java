@@ -43,6 +43,6 @@ public class SortSettingBase extends SortSetting {
     }
 
     private SortSettingBase() {
-        super(PreferencesDialog.KEY_BASE_SORT_BY, PreferencesDialog.KEY_BASE_SORT_INDEX, PreferencesDialog.KEY_BASE_SORT_ASCENDING);
+        super(PreferencesDialog.KEY_BASE_SORT_BY, PreferencesDialog.KEY_BASE_SORT_INDEX, PreferencesDialog.KEY_BASE_SORT_ASCENDING, PreferencesDialog.KEY_BASE_PILES_TOGGLE);
     }
 }

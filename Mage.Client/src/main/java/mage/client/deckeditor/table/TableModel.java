@@ -78,15 +78,15 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     protected CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
     protected UUID gameId;
-    private Map<UUID, CardView> cards = new LinkedHashMap<UUID, CardView>();
-    private Map<String, Integer> cardsNoCopies = new LinkedHashMap<String, Integer>();
-    private List<CardView> view = new ArrayList<CardView>();
+    private final Map<UUID, CardView> cards = new LinkedHashMap<UUID, CardView>();
+    private final Map<String, Integer> cardsNoCopies = new LinkedHashMap<String, Integer>();
+    private final List<CardView> view = new ArrayList<CardView>();
     private Dimension cardDimension;
 
     private boolean displayNoCopies = false;
     private UpdateCountsCallback updateCountsCallback;
 
-    private String column[] = { "", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set" };
+    private final String column[] = { "", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set" };
 
     private SortSetting sortSetting;
     private int recentSortedColumn;
@@ -100,12 +100,12 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     }
 
     @Override
-    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId) {
-        this.loadCards(showCards, sortSetting, piles, bigCard, gameId, true);
+    public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId) {
+        this.loadCards(showCards, sortSetting, bigCard, gameId, true);
     }
 
     @Override
-    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
+    public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId, boolean merge) {
         if (this.sortSetting == null) {
             this.sortSetting = sortSetting;
         }
@@ -185,7 +185,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         }
 
         sort(this.sortSetting.getSortIndex(), this.sortSetting.isAscending());
-        drawCards(sortSetting, piles);
+        drawCards(sortSetting);
     }
 
     @Override
@@ -278,7 +278,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     }
 
     @Override
-    public void drawCards(SortSetting sortSetting, boolean piles) {
+    public void drawCards(SortSetting sortSetting) {
         fireTableDataChanged();
     }
 

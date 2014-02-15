@@ -180,7 +180,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jButtonAddToSideboard.setEnabled(false);
         filterCards();
         chkPiles.setSelected(true);
-        this.currentView.drawCards(sortSetting, chkPiles.isSelected());
+        this.currentView.drawCards(sortSetting);
     }
 
     public void loadSideboard(List<Card> sideboard, BigCard bigCard) {
@@ -341,7 +341,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             if (currentView instanceof CardGrid && filteredCards.size() > CardGrid.MAX_IMAGES) {
                 this.toggleViewMode();
             }
-            this.currentView.loadCards(new CardsView(filteredCards), sortSetting, chkPiles.isSelected(), bigCard, null, false);
+            this.currentView.loadCards(new CardsView(filteredCards), sortSetting, bigCard, null, false);
             this.cardCount.setText(String.valueOf(filteredCards.size()));
         }
         finally {
@@ -857,7 +857,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
             if (this.currentView != null) {
                 sortSetting.setSortBy((SortBy) cbSortBy.getSelectedItem());
-                this.currentView.drawCards(sortSetting, chkPiles.isSelected());
+                this.currentView.drawCards(sortSetting);
             }
         }
     }//GEN-LAST:event_cbSortByActionPerformed
@@ -865,7 +865,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
             if (this.currentView != null) {
-                this.currentView.drawCards(sortSetting, chkPiles.isSelected());
+                sortSetting.setPilesToggle(chkPiles.isSelected());
+                this.currentView.drawCards(sortSetting);
             }
         }
     }//GEN-LAST:event_chkPilesActionPerformed
@@ -1022,33 +1023,33 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JToolBar tbTypes;
     // End of variables declaration//GEN-END:variables
 
-    private mage.client.cards.CardGrid cardGrid;
+    private final mage.client.cards.CardGrid cardGrid;
 
     @Override
     public void componentResized(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(sortSetting, chkPiles.isSelected());
+            this.currentView.drawCards(sortSetting);
         }
     }
 
     @Override
     public void componentMoved(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(sortSetting, chkPiles.isSelected());
+            this.currentView.drawCards(sortSetting);
         }
     }
 
     @Override
     public void componentShown(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(sortSetting, chkPiles.isSelected());
+            this.currentView.drawCards(sortSetting);
         }
     }
 
     @Override
     public void componentHidden(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(sortSetting, chkPiles.isSelected());
+            this.currentView.drawCards(sortSetting);
         }
     }
 

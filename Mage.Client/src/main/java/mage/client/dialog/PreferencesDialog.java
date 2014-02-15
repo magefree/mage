@@ -150,23 +150,26 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     // used to save and restore the settings for the cardArea (draft, sideboarding, deck builder)
     public static final String KEY_DRAFT_VIEW = "draftView";
-    public static final String KEY_DRAFT_PILES_TOGGLE = "draftPilesToggle";
-
+    
     public static final String KEY_DRAFT_SORT_BY = "draftSortBy";
     public static final String KEY_DRAFT_SORT_INDEX = "draftSortIndex";
     public static final String KEY_DRAFT_SORT_ASCENDING = "draftSortAscending";
+    public static final String KEY_DRAFT_PILES_TOGGLE = "draftPilesToggle";
 
     public static final String KEY_BASE_SORT_BY = "baseSortBy";
     public static final String KEY_BASE_SORT_INDEX = "baseSortIndex";
     public static final String KEY_BASE_SORT_ASCENDING = "baseSortAscending";
+    public static final String KEY_BASE_PILES_TOGGLE = "basePilesToggle";
 
     public static final String KEY_SIDEBOARD_SORT_BY = "sideboardSortBy";
     public static final String KEY_SIDEBOARD_SORT_INDEX = "sideboardSortIndex";
     public static final String KEY_SIDEBOARD_SORT_ASCENDING = "sideboardSortAscending";
+    public static final String KEY_SIDEBOARD_PILES_TOGGLE = "sideboardPilesToggle";
 
     public static final String KEY_DECK_SORT_BY = "deckSortBy";
     public static final String KEY_DECK_SORT_INDEX = "deckSortIndex";
     public static final String KEY_DECK_SORT_ASCENDING = "deckSortAscending";
+    public static final String KEY_DECK_PILES_TOGGLE = "deckPilesToggle";
 
     public static final String KEY_PROXY_ADDRESS = "proxyAddress";
     public static final String KEY_PROXY_PORT = "proxyPort";
@@ -246,7 +249,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     
     
     
-    /** Creates new form PreferencesDialog */
+    /**
+     * Creates new form PreferencesDialog
+     *
+     * @param parent
+     * @param modal
+     */
     public PreferencesDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -1854,10 +1862,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, checkBox, propName, PhaseManager.PHASE_ON, PhaseManager.PHASE_OFF, false);
     }
 
-    private static void save(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String onValue, boolean updateCache) {
-        prefs.put(propName, checkBox.isSelected() ? yesValue : onValue);
+    private static void save(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String noValue, boolean updateCache) {
+        prefs.put(propName, checkBox.isSelected() ? yesValue : noValue);
         if (updateCache) {
-            updateCache(propName, checkBox.isSelected() ? yesValue : onValue);
+            updateCache(propName, checkBox.isSelected() ? yesValue : noValue);
         }
     }
 

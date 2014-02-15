@@ -199,21 +199,20 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         this.bigCard = bigCard;
         this.gameId = gameId;
 
-        boolean piles = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_PILES_TOGGLE, "true").equals("true");
         cbSortBy.setSelectedItem(sortSetting.getSortBy());
-        chkPiles.setSelected(piles);
-        currentView.loadCards(showCards, sortSetting, piles, bigCard, gameId);
+        chkPiles.setSelected(sortSetting.isPilesToggle());
+        currentView.loadCards(showCards, sortSetting, bigCard, gameId);
     }
 
     private void redrawCards() {
         if (cards == null) {
             cards = new CardsView();
         }
-           currentView.loadCards(cards, sortSetting, false, bigCard, gameId);
+           currentView.loadCards(cards, sortSetting, bigCard, gameId);
     }
 
     @Override
-    public void drawCards(SortSetting sortSetting, boolean piles) {
+    public void drawCards(SortSetting sortSetting) {
         int maxWidth = this.getParent().getWidth();
         int numColumns = maxWidth / Config.dimensions.frameWidth;
         int curColumn = 0;
@@ -245,7 +244,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             }
             CardView lastCard = null;
             for (CardView card: sortedCards) {
-                if (chkPiles.isSelected()) {
+                if (sortSetting.isPilesToggle()) {
                     if (lastCard == null) {
                         lastCard = card;
                     }
@@ -339,17 +338,13 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         mainModel.addCardEventListener(listener);
     }
 
-    public void drawCards(SortSetting sortSetting) {
-        drawCards(sortSetting, false);
+    @Override
+    public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId) {
+        this.loadCards(showCards, sortSetting, bigCard, gameId, true);
     }
 
     @Override
-    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId) {
-        this.loadCards(showCards, sortSetting, piles, bigCard, gameId, true);
-    }
-
-    @Override
-    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
+    public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId, boolean merge) {
         cards = showCards;
         this.bigCard = bigCard;
         this.gameId = gameId;
@@ -484,12 +479,12 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
         sortSetting.setSortBy((SortBy) cbSortBy.getSelectedItem());
-        drawCards(sortSetting, chkPiles.isSelected());
+        drawCards(sortSetting);
     }//GEN-LAST:event_cbSortByActionPerformed
 
     private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
-        drawCards(sortSetting, chkPiles.isSelected());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_PILES_TOGGLE, (chkPiles.isSelected()?"True":"False"));
+        sortSetting.setPilesToggle(chkPiles.isSelected());
+        drawCards(sortSetting);
     }//GEN-LAST:event_chkPilesActionPerformed
 
     private void jToggleListViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleListViewActionPerformed

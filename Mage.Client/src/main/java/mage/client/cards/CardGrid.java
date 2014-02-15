@@ -91,12 +91,12 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     @Override
-    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId) {
-        this.loadCards(showCards, sortSetting, piles, bigCard, gameId, true);
+    public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId) {
+        this.loadCards(showCards, sortSetting, bigCard, gameId, true);
     }
 
     @Override
-    public void loadCards(CardsView showCards, SortSetting sortSetting, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
+    public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId, boolean merge) {
         boolean drawImage = showCards.size() < MAX_IMAGES;
         this.bigCard = bigCard;
         this.gameId = gameId;
@@ -119,8 +119,8 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                 addCard(card, bigCard, gameId, drawImage);
             }
         }
-        System.gc();
-        drawCards(sortSetting, piles);
+        // System.gc();
+        drawCards(sortSetting);
         this.setVisible(true);
     }
 
@@ -137,7 +137,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     @Override
-    public void drawCards(SortSetting sortSetting, boolean piles) {
+    public void drawCards(SortSetting sortSetting) {
         int maxWidth = this.getParent().getWidth();
         int numColumns = maxWidth / Config.dimensions.frameWidth;
         int curColumn = 0;
@@ -164,7 +164,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
             }
             MageCard lastCard = null;
             for (MageCard cardImg: sortedCards) {
-                if (piles) {
+                if (sortSetting.isPilesToggle()) {
                     if (lastCard == null) {
                         lastCard = cardImg;
                     }

@@ -58,10 +58,12 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
+import static mage.client.constants.Constants.DeckEditorMode.Constructed;
+import static mage.client.constants.Constants.DeckEditorMode.Limited;
+import static mage.client.constants.Constants.DeckEditorMode.Sideboard;
 import mage.client.constants.Constants.SortBy;
 import mage.client.dialog.AddLandDialog;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.plugins.MagePlugins;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
@@ -80,8 +82,8 @@ import org.apache.log4j.Logger;
 public class DeckEditorPanel extends javax.swing.JPanel {
 
     private static final Logger logger = Logger.getLogger(DeckEditorPanel.class);
-    private JFileChooser fcSelectDeck;
-    private JFileChooser fcImportDeck;
+    private final JFileChooser fcSelectDeck;
+    private final JFileChooser fcImportDeck;
     private Deck deck = new Deck();
     private boolean isShowCardInfo = false;
     private UUID tableId;

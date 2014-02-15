@@ -43,6 +43,6 @@ public class SortSettingDeck extends SortSetting {
     }
 
     private SortSettingDeck() {
-        super(PreferencesDialog.KEY_DECK_SORT_BY, PreferencesDialog.KEY_DECK_SORT_INDEX, PreferencesDialog.KEY_DECK_SORT_ASCENDING);
+        super(PreferencesDialog.KEY_DECK_SORT_BY, PreferencesDialog.KEY_DECK_SORT_INDEX, PreferencesDialog.KEY_DECK_SORT_ASCENDING, PreferencesDialog.KEY_DECK_PILES_TOGGLE);
     }
 }

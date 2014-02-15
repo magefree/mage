@@ -36,13 +36,13 @@ import mage.client.dialog.PreferencesDialog;
 
 public class SortSettingSideboard extends SortSetting {
 
-    private static SortSettingSideboard fInstance = new SortSettingSideboard();
+    private static final SortSettingSideboard fInstance = new SortSettingSideboard();
 
     public static SortSettingSideboard getInstance() {
         return fInstance;
     }
 
     private SortSettingSideboard() {
-        super(PreferencesDialog.KEY_SIDEBOARD_SORT_BY, PreferencesDialog.KEY_SIDEBOARD_SORT_INDEX, PreferencesDialog.KEY_SIDEBOARD_SORT_INDEX);
+        super(PreferencesDialog.KEY_SIDEBOARD_SORT_BY, PreferencesDialog.KEY_SIDEBOARD_SORT_INDEX, PreferencesDialog.KEY_SIDEBOARD_SORT_INDEX, PreferencesDialog.KEY_SIDEBOARD_PILES_TOGGLE);
     }
 }
