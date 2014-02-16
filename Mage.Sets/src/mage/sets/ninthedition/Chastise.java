@@ -28,14 +28,14 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -55,6 +55,7 @@ public class Chastise extends CardImpl<Chastise> {
 
         // Destroy target attacking creature. You gain life equal to its power.
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new ChastiseEffect());
     }
 
@@ -70,12 +71,9 @@ public class Chastise extends CardImpl<Chastise> {
 
 class ChastiseEffect extends OneShotEffect<ChastiseEffect> {
 
-
     public ChastiseEffect() {
-        super(Outcome.DestroyPermanent);
+        super(Outcome.GainLife);
     }
-
-
 
     public ChastiseEffect(final ChastiseEffect effect) {
         super(effect);
@@ -88,10 +86,9 @@ class ChastiseEffect extends OneShotEffect<ChastiseEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             int power = permanent.getPower().getValue();
-            permanent.destroy(source.getId(), game, true);
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 player.gainLife(power, game);
@@ -103,7 +100,6 @@ class ChastiseEffect extends OneShotEffect<ChastiseEffect> {
 
     @Override
     public String getText(Mode mode) {
-        return "Destroy target attacking creature. You gain life equal to its power";
+        return "You gain life equal to its power";
     }
-
 }

@@ -64,6 +64,7 @@ public class Vendetta extends CardImpl<Vendetta> {
 
         this.color.setBlack(true);
 
+        // Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new VendettaEffect());
@@ -98,7 +99,7 @@ class VendettaEffect extends OneShotEffect<VendettaEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent target = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+        Permanent target = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
         if (player != null && target != null) {
             player.loseLife(target.getToughness().getValue(), game);
             return true;

@@ -29,19 +29,17 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.Rarity;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -88,9 +86,9 @@ class EngulfingSlagwurmEffect extends OneShotEffect<EngulfingSlagwurmEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject c = game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
-        if (c != null && controller != null) {
-            controller.gainLife(c.getPower().getValue(), game);
+        Permanent creature = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+        if (creature != null && controller != null) {
+            controller.gainLife(creature.getPower().getValue(), game);
         }
         return false;
     }

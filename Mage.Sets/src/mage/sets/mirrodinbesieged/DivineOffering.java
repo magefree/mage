@@ -25,23 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -51,22 +49,24 @@ import mage.target.TargetPermanent;
  */
 public class DivineOffering extends CardImpl<DivineOffering> {
 
-        private static FilterPermanent filter = new FilterPermanent("artifact");
+    private final static FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public DivineOffering (UUID ownerId) {
+    public DivineOffering(UUID ownerId) {
         super(ownerId, 5, "Divine Offering", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "MBS";
         this.color.setWhite(true);
-                this.getSpellAbility().addTarget(new TargetPermanent(filter));
-                this.getSpellAbility().addEffect(new DestroyTargetEffect());
-                this.getSpellAbility().addEffect(new DivineOfferingEffect());
+
+        // Destroy target artifact. You gain life equal to its converted mana cost.
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addEffect(new DivineOfferingEffect());
     }
 
-    public DivineOffering (final DivineOffering card) {
+    public DivineOffering(final DivineOffering card) {
         super(card);
     }
 
@@ -75,34 +75,34 @@ public class DivineOffering extends CardImpl<DivineOffering> {
         return new DivineOffering(this);
     }
 
-        private class DivineOfferingEffect extends OneShotEffect<DivineOfferingEffect> {
+    private class DivineOfferingEffect extends OneShotEffect<DivineOfferingEffect> {
 
-                public DivineOfferingEffect() {
-                        super(Outcome.DestroyPermanent);
-                        staticText = "You gain life equal to its converted mana cost";
-                }
-
-                public DivineOfferingEffect(DivineOfferingEffect effect) {
-                        super(effect);
-                }
-
-                @Override
-                public boolean apply(Game game, Ability source) {
-                        MageObject card = game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-                        if (card != null) {
-                            int cost = card.getManaCost().get(0).convertedManaCost();
-                                Player player = game.getPlayer(source.getControllerId());
-                                if (player != null) {
-                                        player.gainLife(cost, game);
-                                }
-                        }
-                        return true;
-                }
-
-                @Override
-                public DivineOfferingEffect copy() {
-                        return new DivineOfferingEffect(this);
-                }
-
+        public DivineOfferingEffect() {
+            super(Outcome.DestroyPermanent);
+            staticText = "You gain life equal to its converted mana cost";
         }
+
+        public DivineOfferingEffect(DivineOfferingEffect effect) {
+            super(effect);
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            Permanent artefact = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+            if (artefact != null) {
+                int cost = artefact.getManaCost().convertedManaCost();
+                Player player = game.getPlayer(source.getControllerId());
+                if (player != null) {
+                    player.gainLife(cost, game);
+                }
+            }
+            return true;
+        }
+
+        @Override
+        public DivineOfferingEffect copy() {
+            return new DivineOfferingEffect(this);
+        }
+
+    }
 }

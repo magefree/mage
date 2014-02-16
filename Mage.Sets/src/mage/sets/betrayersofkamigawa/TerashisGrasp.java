@@ -25,24 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -60,12 +58,12 @@ public class TerashisGrasp extends CardImpl<TerashisGrasp> {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public TerashisGrasp (UUID ownerId) {
+    public TerashisGrasp(UUID ownerId) {
         super(ownerId, 26, "Terashi's Grasp", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
         this.color.setWhite(true);
-        
+
         // Destroy target artifact or enchantment. 
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -73,7 +71,7 @@ public class TerashisGrasp extends CardImpl<TerashisGrasp> {
         this.getSpellAbility().addEffect(new TerashisGraspEffect());
     }
 
-    public TerashisGrasp (final TerashisGrasp card) {
+    public TerashisGrasp(final TerashisGrasp card) {
         super(card);
     }
 
@@ -84,31 +82,31 @@ public class TerashisGrasp extends CardImpl<TerashisGrasp> {
 
     private class TerashisGraspEffect extends OneShotEffect<TerashisGraspEffect> {
 
-                public TerashisGraspEffect() {
-                        super(Outcome.DestroyPermanent);
-                        staticText = "You gain life equal to its converted mana cost";
-                }
-
-                public TerashisGraspEffect(TerashisGraspEffect effect) {
-                        super(effect);
-                }
-
-                @Override
-                public boolean apply(Game game, Ability source) {
-                        MageObject card = game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-                        if (card != null) {
-                            int cost = card.getManaCost().get(0).convertedManaCost();
-                                Player player = game.getPlayer(source.getControllerId());
-                                if (player != null) {
-                                        player.gainLife(cost, game);
-                                }
-                        }
-                        return true;
-                }
-
-                @Override
-                public TerashisGraspEffect copy() {
-                        return new TerashisGraspEffect(this);
-                }
+        public TerashisGraspEffect() {
+            super(Outcome.DestroyPermanent);
+            staticText = "You gain life equal to its converted mana cost";
         }
+
+        public TerashisGraspEffect(TerashisGraspEffect effect) {
+            super(effect);
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            Permanent targetPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+            if (targetPermanent != null) {
+                int cost = targetPermanent.getManaCost().convertedManaCost();
+                Player player = game.getPlayer(source.getControllerId());
+                if (player != null) {
+                    player.gainLife(cost, game);
+                }
+            }
+            return true;
+        }
+
+        @Override
+        public TerashisGraspEffect copy() {
+            return new TerashisGraspEffect(this);
+        }
+    }
 }

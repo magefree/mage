@@ -28,14 +28,15 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -63,6 +64,7 @@ public class GrislySpectacle extends CardImpl<GrislySpectacle> {
         this.color.setBlack(true);
 
         // Destroy target nonartifact creature. Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new GrislySpectacleEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
@@ -81,7 +83,7 @@ class GrislySpectacleEffect extends OneShotEffect<GrislySpectacleEffect> {
 
     public GrislySpectacleEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target nonartifact creature. Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard";
+        this.staticText = "Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard";
     }
 
     public GrislySpectacleEffect(final GrislySpectacleEffect effect) {
@@ -95,13 +97,12 @@ class GrislySpectacleEffect extends OneShotEffect<GrislySpectacleEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+         // the mill effect works also if creature is indestructible or regenerated
+        Permanent creature = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
         if (creature != null) {
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {
                 int power = creature.getPower().getValue();
-                creature.destroy(source.getSourceId(), game, false);
-                // the mill effect works also if creature is indestructible or regenerated
                 Effect effect = new PutLibraryIntoGraveTargetEffect(power);
                 effect.setTargetPointer(new FixedTarget(controller.getId()));
                 return effect.apply(game, source);
