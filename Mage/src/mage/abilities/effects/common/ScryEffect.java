@@ -100,14 +100,14 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
                     Card card = cards.get(target2.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                     }
                     target2.clearChosen();
                 }
             }
             if (cards.size() == 1) {
                 Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             }
             game.informPlayers(new StringBuilder(player.getName()).append(" puts ")
                     .append(onBottom).append(onBottom == 1 ?" card":" cards")

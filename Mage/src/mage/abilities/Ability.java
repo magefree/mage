@@ -62,6 +62,7 @@ public interface Ability extends Controllable, Serializable {
      * @return A {@link java.util.UUID} which the game will use to store and retrieve
      * the exact instance of this ability.
      */
+    @Override
     UUID getId();
 
     /**

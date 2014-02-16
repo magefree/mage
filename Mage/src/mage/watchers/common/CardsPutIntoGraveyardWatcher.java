@@ -34,15 +34,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.watchers.WatcherImpl;
-
-
 
 /**
  * Counts amount of cards put into graveyards of players during the current turn.
@@ -52,8 +49,8 @@ import mage.watchers.WatcherImpl;
  */
 public class CardsPutIntoGraveyardWatcher extends WatcherImpl<CardsPutIntoGraveyardWatcher> {
 
-    private Map<UUID, Integer> amountOfCardsThisTurn = new HashMap<UUID, Integer>();
-    private Set<UUID> cardsPutToGraveyardFromBattlefield = new HashSet<UUID>();
+    private final Map<UUID, Integer> amountOfCardsThisTurn = new HashMap<UUID, Integer>();
+    private final Set<UUID> cardsPutToGraveyardFromBattlefield = new HashSet<UUID>();
 
 
     public CardsPutIntoGraveyardWatcher() {
@@ -65,6 +62,7 @@ public class CardsPutIntoGraveyardWatcher extends WatcherImpl<CardsPutIntoGravey
         for (Entry<UUID, Integer> entry : watcher.amountOfCardsThisTurn.entrySet()) {
             amountOfCardsThisTurn.put(entry.getKey(), entry.getValue());
         }
+        this.cardsPutToGraveyardFromBattlefield.addAll(watcher.cardsPutToGraveyardFromBattlefield);
     }
 
     @Override
