@@ -652,6 +652,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
     @Override
     public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
+        // 706.10a If a copy of a spell is in a zone other than the stack, it ceases to exist.
+        // If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
+        // These are state-based actions. See rule 704.
+        if (this.isCopiedSpell() && !zone.equals(Zone.STACK)) {
+           return true;
+        }
         throw new UnsupportedOperationException("Unsupported operation");
     }
 

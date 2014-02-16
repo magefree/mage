@@ -83,15 +83,19 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect<CounterTar
 
         StackObject stackObject = game.getStack().getStackObject(objectId);
         if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
+            boolean spell =false;
             if (stackObject instanceof Spell) {
                 game.rememberLKI(objectId, Zone.STACK, (Spell) stackObject);
+                spell = true;
             }
             game.getStack().remove(stackObject);
-            MageObject card = game.getObject(stackObject.getSourceId());
-            if (card instanceof Card) {
-                ((Card) card).moveToZone(targetZone, sourceId, game, flag);
-            } else {
-                game.informPlayers("Server: Couldn't move card to zone = " + targetZone + " as it has other than Card type.");
+            if (spell && !((Spell) stackObject).isCopiedSpell()) {
+                MageObject card = game.getObject(stackObject.getSourceId());
+                if (card instanceof Card) {
+                    ((Card) card).moveToZone(targetZone, sourceId, game, flag);
+                } else {
+                    game.informPlayers("Server: Couldn't move card to zone = " + targetZone + " as it has other than Card type.");
+                }
             }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
             return true;
