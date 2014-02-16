@@ -38,14 +38,14 @@ import mage.game.tournament.TournamentType;
 public class TournamentTypeView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String name;
-    private int minPlayers;
-    private int maxPlayers;
-    private int numBoosters;
-    private boolean draft;
-    private boolean limited;
-    private boolean cubeBooster;
-    private boolean elimination;
+    private final String name;
+    private final int minPlayers;
+    private final int maxPlayers;
+    private final int numBoosters;
+    private final boolean draft;
+    private final boolean limited;
+    private final boolean cubeBooster;
+    private final boolean elimination;
 
 
     public TournamentTypeView(TournamentType tournamentType) {

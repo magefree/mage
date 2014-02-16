@@ -39,11 +39,11 @@ import mage.game.tournament.TournamentPlayer;
 public class TournamentPlayerView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String name;
-    private String state;
-    private String results;
-    private int points;
-    private boolean quit;
+    private final String name;
+    private final String state;
+    private final String results;
+    private final int points;
+    private final boolean quit;
 
     TournamentPlayerView(TournamentPlayer player) {
         this.name = player.getPlayer().getName();

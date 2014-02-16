@@ -53,6 +53,7 @@ public interface Tournament {
     Collection<Round> getRounds();
     List<ExpansionSet> getSets();
 
+    void updateResults();
     void setBoosterInfo(String setInfo);
     /**
      * Gives back a String that shows the included sets (e.g. "3xRTR" or "1xDGM 1xGTC 1xRTR") or cube name

@@ -43,16 +43,16 @@ import mage.game.tournament.TournamentPlayer;
 public class TournamentView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String tournamentName;
-    private String tournamentType;
+    private final String tournamentName;
+    private final String tournamentType;
 
-    private Date startTime;
-    private Date endTime;
+    private final Date startTime;
+    private final Date endTime;
 
-    private boolean watchingAllowed;
+    private final boolean watchingAllowed;
 
-    private List<RoundView> rounds = new ArrayList<RoundView>();
-    private List<TournamentPlayerView> players = new ArrayList<TournamentPlayerView>();
+    private final List<RoundView> rounds = new ArrayList<RoundView>();
+    private final List<TournamentPlayerView> players = new ArrayList<TournamentPlayerView>();
 
     public TournamentView(Tournament tournament) {
 

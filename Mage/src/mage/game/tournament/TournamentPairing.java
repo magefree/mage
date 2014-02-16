@@ -38,15 +38,17 @@ import mage.game.match.MatchPlayer;
  */
 public class TournamentPairing {
 
-    private UUID id = UUID.randomUUID();
+    private final UUID id = UUID.randomUUID();
     private UUID tableId;
     private Match match;
-    private TournamentPlayer player1;
-    private TournamentPlayer player2;
+    private final TournamentPlayer player1;
+    private final TournamentPlayer player2;
+    private boolean alreadyPublished;
 
     public TournamentPairing(TournamentPlayer player1, TournamentPlayer player2) {
         this.player1 = player1;
         this.player2 = player2;
+        this.alreadyPublished = false;
     }
 
     public UUID getId() {
@@ -96,6 +98,14 @@ public class TournamentPairing {
 
     public void setTableId(UUID tableId) {
         this.tableId = tableId;
+    }
+
+    public boolean isAlreadyPublished() {
+        return alreadyPublished;
+    }
+
+    public void setAlreadyPublished(boolean alreadyPublished) {
+        this.alreadyPublished = alreadyPublished;
     }
 
 }

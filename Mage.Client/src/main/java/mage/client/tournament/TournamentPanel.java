@@ -34,7 +34,8 @@
 
 package mage.client.tournament;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -42,7 +43,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -66,10 +70,10 @@ public class TournamentPanel extends javax.swing.JPanel {
     private UUID tournamentId;
     private boolean firstInitDone = false;
     private Session session;
-    private TournamentPlayersTableModel playersModel;
+    private final TournamentPlayersTableModel playersModel;
     private TournamentMatchesTableModel matchesModel;
     private UpdateTournamentTask updateTask;
-    private DateFormat df;
+    private final DateFormat df;
 
     /** Creates new form TournamentPanel */
     public TournamentPanel() {
@@ -448,7 +452,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 }
 
 class TournamentPlayersTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Player Name", "State",  "Points", "Results"};
+    private final String[] columnNames = new String[]{"Player Name", "State",  "Points", "Results"};
     private TournamentPlayerView[] players = new TournamentPlayerView[0];
 
     public void loadData(TournamentView tournament) {
@@ -508,7 +512,7 @@ class TournamentMatchesTableModel extends AbstractTableModel {
 
     public static final int ACTION_COLUMN = 4; // column the action is located
 
-    private String[] columnNames = new String[]{"Round Number", "Players", "State", "Result", "Action"};
+    private final String[] columnNames = new String[]{"Round Number", "Players", "State", "Result", "Action"};
     private TournamentGameView[] games = new TournamentGameView[0];
     private boolean watchingAllowed;
 
@@ -582,19 +586,16 @@ class TournamentMatchesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex != ACTION_COLUMN) {
-            return false;
-        }
-        return true;
+        return columnIndex == ACTION_COLUMN;
     }
 
 }
 
 class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
 
-    private Session session;
-    private UUID tournamentId;
-    private TournamentPanel panel;
+    private final Session session;
+    private final UUID tournamentId;
+    private final TournamentPanel panel;
 
     private static final Logger logger = Logger.getLogger(UpdateTournamentTask.class);
 

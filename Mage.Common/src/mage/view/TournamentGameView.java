@@ -41,13 +41,13 @@ import mage.game.tournament.TournamentPairing;
 public class TournamentGameView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private int roundNum;
-    private UUID matchId;
-    private UUID gameId;
-    private String state;
-    private String result;
-    private String players;
-    private UUID tableId;
+    private final int roundNum;
+    private final UUID matchId;
+    private final UUID gameId;
+    private final String state;
+    private final String result;
+    private final String players;
+    private final UUID tableId;
 
     TournamentGameView(int roundNum, TournamentPairing pair, Game game) {
         this.roundNum = roundNum;

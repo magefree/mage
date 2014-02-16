@@ -38,12 +38,14 @@ import java.util.UUID;
  */
 public class Round {
 
-    private int roundNum;
-    private List<TournamentPairing> pairs = new ArrayList<TournamentPairing>();
-    private List<TournamentPlayer> playerByes = new ArrayList<TournamentPlayer>();
+    private final int roundNum;
+    private final Tournament tournament;
+    private final List<TournamentPairing> pairs = new ArrayList<TournamentPairing>();
+    private final List<TournamentPlayer> playerByes = new ArrayList<TournamentPlayer>();
 
-    public Round(int roundNum) {
+    public Round(int roundNum, Tournament tournament) {
         this.roundNum = roundNum;
+        this.tournament = tournament;
     }
 
     public void addPairing(TournamentPairing match) {
@@ -68,12 +70,18 @@ public class Round {
     }
 
     public boolean isRoundOver() {
+        boolean roundIsOver = true;
         for (TournamentPairing pair: pairs) {
             if (!pair.getMatch().isMatchOver()) {
-                return false;
+                roundIsOver = false;
+            } else {
+                if (!pair.isAlreadyPublished()) {
+                    tournament.updateResults();
+                    pair.setAlreadyPublished(true);
+                }
             }
         }
-        return true;
+        return roundIsOver;
     }
 
     public List<TournamentPlayer> getPlayerByes() {

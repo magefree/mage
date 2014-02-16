@@ -62,7 +62,7 @@ public abstract class TournamentSwiss extends TournamentImpl {
     }
 
     protected Round createRoundSwiss() {
-        Round round = new Round(rounds.size() + 1);
+        Round round = new Round(rounds.size() + 1, this);
         rounds.add(round);
         List<TournamentPlayer> roundPlayers = getActivePlayers();
         // sort players by tournament points
