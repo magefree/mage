@@ -50,6 +50,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -97,7 +98,6 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl<CurseOfEcho
 
     public CurseOfEchoesCopyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfEchoesEffect(), false);
-        this.addTarget(new TargetSpell(filter));
     }
 
     public CurseOfEchoesCopyTriggeredAbility(final CurseOfEchoesCopyTriggeredAbility ability) {
@@ -113,12 +113,12 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl<CurseOfEcho
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY)) {
+            if (spell != null && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
                 Permanent enchantment = game.getPermanent(sourceId);
                 if (enchantment != null && enchantment.getAttachedTo() != null) {
                     Player player = game.getPlayer(enchantment.getAttachedTo());
                     if (player != null && spell.getControllerId().equals(player.getId())) {
-                        this.getTargets().get(0).add(spell.getId(), game);
+                        this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
                         return true;
                     }
                 }
