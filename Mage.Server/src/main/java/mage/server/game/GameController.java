@@ -90,7 +90,7 @@ import org.apache.log4j.Logger;
  */
 public class GameController implements GameCallback {
 
-    private static ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
+    private static final ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
     private static final Logger logger = Logger.getLogger(GameController.class);
 
     private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<UUID, GameSession>();
@@ -689,7 +689,6 @@ public class GameController implements GameCallback {
     @Override
     public void gameResult(String result) {
         try {
-            logger.warn("Game Result: " + result);
             endGame(result);
         } catch (MageException ex) {
             logger.fatal("Game Result error", ex);

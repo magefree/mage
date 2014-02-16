@@ -127,13 +127,7 @@ public class GameWatcher {
     }
 
     public GameView getGameView() {
-        logger.warn("start getGameView");
-        GameState gameState = game.getState();
-        logger.warn("start afterState");
-        GameView gameView = new GameView(gameState, game, this.isPlayer);
-        // return new GameView(game.getState(), game, this.isPlayer);
-        logger.warn("after getGameView");
-        return gameView;
+        return new GameView(game.getState(), game, this.isPlayer);        
     }
     
     public GameEndView getGameEndView(UUID playerId, Match match) {
