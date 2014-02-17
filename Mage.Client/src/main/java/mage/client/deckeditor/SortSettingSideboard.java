@@ -43,6 +43,6 @@ public class SortSettingSideboard extends SortSetting {
     }
 
     private SortSettingSideboard() {
-        super(PreferencesDialog.KEY_SIDEBOARD_SORT_BY, PreferencesDialog.KEY_SIDEBOARD_SORT_INDEX, PreferencesDialog.KEY_SIDEBOARD_SORT_INDEX, PreferencesDialog.KEY_SIDEBOARD_PILES_TOGGLE);
+        super(PreferencesDialog.KEY_SIDEBOARD_SORT_BY, PreferencesDialog.KEY_SIDEBOARD_SORT_INDEX, PreferencesDialog.KEY_SIDEBOARD_SORT_ASCENDING, PreferencesDialog.KEY_SIDEBOARD_PILES_TOGGLE);
     }
 }
