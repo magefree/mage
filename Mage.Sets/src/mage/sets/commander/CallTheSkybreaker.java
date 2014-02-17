@@ -29,7 +29,6 @@ package mage.sets.commander;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -79,8 +78,8 @@ class ElementalToken extends Token {
     public ElementalToken() {
         super("Elemental", "a 5/5 blue and red Elemental creature token with flying");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLUE;
-        color = ObjectColor.RED;
+        color.setBlue(true);
+        color.setRed(true);
         subtype.add("Elemental");
         power = new MageInt(5);
         toughness = new MageInt(5);
