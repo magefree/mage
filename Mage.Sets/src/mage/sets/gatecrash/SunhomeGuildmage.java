@@ -29,18 +29,16 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -87,8 +85,8 @@ class SoldierToken extends Token {
     public SoldierToken() {
         super("Soldier", "1/1 red and white Soldier creature token with haste");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
-        color = ObjectColor.RED;
+        color.setWhite(true);
+        color.setRed(true);
         subtype.add("Soldier");
         power = new MageInt(1);
         toughness = new MageInt(1);
