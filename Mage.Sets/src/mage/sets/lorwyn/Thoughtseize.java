@@ -99,7 +99,7 @@ class ThoughtseizeEffect extends OneShotEffect<ThoughtseizeEffect> {
             if (you != null) {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
                 target.setRequired(true);
-                if (target.canChoose(source.getControllerId(), game) && you.chooseTarget(outcome, player.getHand(), target, source, game)) {
+                if (target.canChoose(source.getControllerId(), player.getId(), game) && you.chooseTarget(outcome, player.getHand(), target, source, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         return player.discard(card, source, game);
