@@ -32,7 +32,6 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -153,8 +152,8 @@ class XenagosSatyrToken extends Token {
     public XenagosSatyrToken() {
         super("Satyr", "2/2 red and green Satyr creature token with haste");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.RED;
-        color = ObjectColor.GREEN;
+        color.setRed(true);
+        color.setGreen(true);
         subtype.add("Satyr");
         power = new MageInt(2);
         toughness = new MageInt(2);
