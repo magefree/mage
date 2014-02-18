@@ -66,7 +66,6 @@ public interface AlternativeCost2 extends Cost {
     /**
      * If the player intends to pay the alternate cost, the cost will be activated
      *
-     * @param activated
      */
     void activate();
 

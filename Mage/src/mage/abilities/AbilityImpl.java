@@ -58,6 +58,7 @@ import mage.game.command.Emblem;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
@@ -204,9 +205,12 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         if (card != null) {
             for (Ability ability : card.getAbilities()) {
                 if (ability instanceof AlternativeSourceCosts) {
-                    if (((AlternativeSourceCosts)ability).askToActivateAlternativeCosts(this, game)) {
-                        // only one alternative costs may be activated
-                        break;
+                    AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
+                    if (alternativeSpellCosts.isAvailable(this, game)) {
+                        if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
+                            // only one alternative costs may be activated
+                            break;
+                        }
                     }
                 }
                 if (ability instanceof OptionalAdditionalSourceCosts) {

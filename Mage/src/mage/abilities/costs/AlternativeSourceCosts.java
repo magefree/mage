@@ -44,9 +44,19 @@ public interface AlternativeSourceCosts {
      * 
      * @param ability ability the alternative cost is activated for
      * @param game
+     * @return 
      */
     boolean askToActivateAlternativeCosts(Ability ability, Game game);
-
+    
+    /**
+     * Is the alternative spell cost currently available
+     * 
+     * @param source spell ability the alternative costs can be paid for
+     * @param game
+     * @return 
+     */
+    boolean isAvailable(Ability source, Game game);
+    
     /**
      * Was the alternative cost activated
      * @return

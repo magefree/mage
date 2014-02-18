@@ -103,7 +103,12 @@ public class EvokeAbility extends StaticAbility<EvokeAbility> implements Alterna
         }
         return false;
     }
-
+    
+    @Override
+    public boolean isAvailable(Ability source, Game game) {
+        return true;
+    }
+    
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {

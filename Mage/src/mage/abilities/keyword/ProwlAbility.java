@@ -62,7 +62,7 @@ import mage.watchers.common.ProwlWatcher;
 public class ProwlAbility extends StaticAbility<ProwlAbility> implements AlternativeSourceCosts {
 
     private static final String PROWL_KEYWORD = "Prowl";
-    private List<AlternativeCost2> prowlCosts = new LinkedList<AlternativeCost2>();
+    private final List<AlternativeCost2> prowlCosts = new LinkedList<AlternativeCost2>();
     private String reminderText;
 
     public ProwlAbility(Card card, String manaString) {
@@ -106,7 +106,12 @@ public class ProwlAbility extends StaticAbility<ProwlAbility> implements Alterna
         }
         return false;
     }
-
+    
+    @Override
+    public boolean isAvailable(Ability source, Game game) {
+        return true;
+    }
+    
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {

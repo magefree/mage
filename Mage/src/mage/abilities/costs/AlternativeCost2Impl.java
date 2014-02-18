@@ -29,8 +29,11 @@
 package mage.abilities.costs;
 
 /**
- *
- * @author Ludwig
+ * Alternative costs
+ * 
+ * @author LevelX2
+ * 
+ * @param <T>
  */
 
 public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends CostsImpl<Cost> implements AlternativeCost2 {
@@ -49,7 +52,9 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
         this.activated = false;
         this.name = name;
         this.delimiter = delimiter;
-        this.reminderText = new StringBuilder("<i>").append(reminderText).append("</i>").toString();
+        if (reminderText != null) {
+            this.reminderText = new StringBuilder("<i>").append(reminderText).append("</i>").toString();
+        }
         this.add((Cost) cost);
     }
 
@@ -67,7 +72,7 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
     }
     /**
      * Returns the complete text for the addional cost or if onlyCost is true
-     * only the pure text fore the included native cost
+     * only the pure text for the included native cost
      *
      * @param onlyCost
      * @return
@@ -77,7 +82,7 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
         if (onlyCost) {
             return getText();
         } else {
-            return new StringBuffer(name).append(delimiter).append(getText()).toString();
+            return new StringBuffer(name != null ? name: "").append(delimiter != null ? delimiter: "").append(getText()).toString();
         }
     }
 
@@ -113,7 +118,6 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
     /**
      * If the player intends to pay the cost, the cost will be activated
      *
-     * @param activated
      */
     @Override
     public void activate() {
