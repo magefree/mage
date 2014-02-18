@@ -144,3 +144,103 @@ ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f
 ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         test_zone: LIBRARY
 ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] 
 
+WARN  [2014-02-18 20:36 [55:460]] TraceUtil[pool-2-thread-66]: Found creature with intimidate blocked by non artifact not sharing color creature
+ERROR [2014-02-18 20:36 [55:461]] Tracing game state...
+ERROR [2014-02-18 20:36 [55:462]] Asphodel Wanderer could block Warchanter of Mogis
+ERROR [2014-02-18 20:36 [55:462]]
+ERROR [2014-02-18 20:36 [55:463]] Attacker abilities:
+ERROR [2014-02-18 20:36 [55:464]]      Cast Warchanter of Mogis, id=96c1f6b5-8e44-41e3-87db-c8075c1a06eb
+ERROR [2014-02-18 20:36 [55:465]]      <i>Inspired</i> - Whenever {this} becomes untapped, Target creature you control gains Intimidate until end of turn., id=06cac06c-89d3-4779-806c-397f8f369d6c
+ERROR [2014-02-18 20:36 [55:465]]      Intimidate, id=16012faf-5584-42f2-bc49-fa30f1f54b7b
+ERROR [2014-02-18 20:36 [55:466]] Blocker abilities:
+ERROR [2014-02-18 20:36 [55:466]]      Cast Asphodel Wanderer, id=25f47911-e597-4745-add6-22796e32705c
+ERROR [2014-02-18 20:36 [55:467]]      {2}{B}: Regenerate {this}., id=6e76d7c4-38d0-49d0-804d-7c401ff784ec
+ERROR [2014-02-18 20:36 [55:473]]
+ERROR [2014-02-18 20:36 [55:474]] Flying ability id: 87c77737-7d0e-45d4-aab6-9d164b30e555
+ERROR [2014-02-18 20:36 [55:475]] Reach ability id: 4b9f81ca-6448-4c44-8894-d1f8db7bdd17
+ERROR [2014-02-18 20:36 [55:475]]
+ERROR [2014-02-18 20:36 [55:476]] Restriction effects:
+ERROR [2014-02-18 20:36 [55:477]]     mage.abilities.keyword.FlyingEffect@1a1f2f4e
+ERROR [2014-02-18 20:36 [55:477]]         id=dc298313-227c-4aca-a530-649686ecf004
+ERROR [2014-02-18 20:36 [55:478]]         applies to attacker=false
+ERROR [2014-02-18 20:36 [55:479]]         applies to blocker=false
+ERROR [2014-02-18 20:36 [55:500]]     mage.abilities.effects.common.combat.UnblockableSourceEffect@83b38cb
+ERROR [2014-02-18 20:36 [55:500]]         id=e1e6fb76-2acd-4f3c-84e8-bff03a088263
+ERROR [2014-02-18 20:36 [55:501]]         applies to attacker=true
+ERROR [2014-02-18 20:36 [55:502]]         applies to blocker=false
+ERROR [2014-02-18 20:36 [55:503]]     mage.abilities.effects.common.combat.UnblockableAttachedEffect@7993f5ef
+ERROR [2014-02-18 20:36 [55:503]]         id=97fb7fae-c2ee-4edb-8694-e432065433e2
+ERROR [2014-02-18 20:36 [55:504]]         applies to attacker=false
+ERROR [2014-02-18 20:36 [55:505]]         applies to blocker=false
+ERROR [2014-02-18 20:36 [55:505]]     mage.abilities.effects.common.combat.UnblockableAttachedEffect@51758ff6
+ERROR [2014-02-18 20:36 [55:506]]         id=a88699ee-44dd-4506-87fd-ea45160f0149
+ERROR [2014-02-18 20:36 [55:507]]         applies to attacker=false
+ERROR [2014-02-18 20:36 [55:507]]         applies to blocker=false
+ERROR [2014-02-18 20:36 [55:514]]     mage.abilities.keyword.IntimidateEffect@a120547
+ERROR [2014-02-18 20:36 [55:515]]         id=f884b7e8-2cfb-473f-942e-c34089276cd1
+ERROR [2014-02-18 20:36 [55:515]]         applies to attacker=true
+ERROR [2014-02-18 20:36 [55:516]]         applies to blocker=false
+
+
+ERROR [2014-02-18 20:36 [55:517]]         instanceof StaticAbility: true, ability=Flying
+ERROR [2014-02-18 20:36 [55:517]]         usable zone: false, ability=Flying
+ERROR [2014-02-18 20:36 [55:518]]         zone: BATTLEFIELD
+ERROR [2014-02-18 20:36 [55:519]]         object: null
+ERROR [2014-02-18 20:36 [55:538]]         test_zone: null
+
+ERROR [2014-02-18 20:36 [55:539]]         instanceof StaticAbility: true, ability={this} is unblockable.
+ERROR [2014-02-18 20:36 [55:540]]         usable zone: false, ability={this} is unblockable.
+ERROR [2014-02-18 20:36 [55:540]]         zone: BATTLEFIELD
+ERROR [2014-02-18 20:36 [55:541]]         object: mage.sets.bornofthegods.FlitterstepEidolon@3386337c
+ERROR [2014-02-18 20:36 [55:542]]         contains ability: true
+ERROR [2014-02-18 20:36 [55:542]]         test_zone: LIBRARY
+
+ERROR [2014-02-18 20:36 [55:543]]         instanceof StaticAbility: true, ability=Enchanted creature gets +1/+1. Enchanted creature is unblockable.
+ERROR [2014-02-18 20:36 [55:549]]         usable zone: false, ability=Enchanted creature gets +1/+1. Enchanted creature is unblockable.
+ERROR [2014-02-18 20:36 [55:550]]         zone: BATTLEFIELD
+ERROR [2014-02-18 20:36 [55:551]]         object: mage.sets.bornofthegods.FlitterstepEidolon@3386337c
+ERROR [2014-02-18 20:36 [55:552]]         contains ability: true
+ERROR [2014-02-18 20:36 [55:553]]         test_zone: LIBRARY
+
+ERROR [2014-02-18 20:36 [55:553]]         instanceof StaticAbility: true, ability=Enchanted creature is unblockable.
+ERROR [2014-02-18 20:36 [55:554]]         usable zone: false, ability=Enchanted creature is unblockable.
+ERROR [2014-02-18 20:36 [55:555]]         zone: BATTLEFIELD
+ERROR [2014-02-18 20:36 [55:556]]         object: mage.sets.theros.AqueousForm@3580a9bb
+ERROR [2014-02-18 20:36 [55:556]]         contains ability: true
+ERROR [2014-02-18 20:36 [55:582]]         test_zone: OUTSIDE
+
+ERROR [2014-02-18 20:36 [55:583]]         ability=Intimidate, applies_to_attacker=true
+ERROR [2014-02-18 20:36 [55:583]]         instanceof StaticAbility: true, ability=Flying
+ERROR [2014-02-18 20:36 [55:584]]         usable zone: false, ability=Flying
+ERROR [2014-02-18 20:36 [55:585]]         zone: BATTLEFIELD
+ERROR [2014-02-18 20:36 [55:585]]         object: null
+ERROR [2014-02-18 20:36 [55:586]]         test_zone: null
+
+ERROR [2014-02-18 20:36 [55:587]]         instanceof StaticAbility: true, ability={this} is unblockable.
+ERROR [2014-02-18 20:36 [55:587]]         usable zone: false, ability={this} is unblockable.
+ERROR [2014-02-18 20:36 [55:588]]         zone: BATTLEFIELD
+ERROR [2014-02-18 20:36 [55:589]]         object: mage.sets.bornofthegods.FlitterstepEidolon@3386337c
+ERROR [2014-02-18 20:36 [55:589]]         contains ability: true
+ERROR [2014-02-18 20:36 [55:590]]         test_zone: LIBRARY
+
+ERROR [2014-02-18 20:36 [55:591]]         instanceof StaticAbility: true, ability=Enchanted creature gets +1/+1. Enchanted creature is unblockable.
+ERROR [2014-02-18 20:36 [55:591]]         usable zone: false, ability=Enchanted creature gets +1/+1. Enchanted creature is unblockable.
+ERROR [2014-02-18 20:36 [55:592]]         zone: BATTLEFIELD
+ERROR [2014-02-18 20:36 [55:593]]         object: mage.sets.bornofthegods.FlitterstepEidolon@3386337c
+ERROR [2014-02-18 20:36 [55:593]]         contains ability: true
+ERROR [2014-02-18 20:36 [55:603]]         test_zone: LIBRARY
+
+ERROR [2014-02-18 20:36 [55:604]]         instanceof StaticAbility: true, ability=Enchanted creature is unblockable.
+ERROR [2014-02-18 20:36 [55:605]]         usable zone: false, ability=Enchanted creature is unblockable.
+ERROR [2014-02-18 20:36 [55:605]]         zone: BATTLEFIELD
+ERROR [2014-02-18 20:36 [55:606]]         object: mage.sets.theros.AqueousForm@3580a9bb
+ERROR [2014-02-18 20:36 [55:606]]         contains ability: true
+ERROR [2014-02-18 20:36 [55:607]]         test_zone: OUTSIDE
+
+ERROR [2014-02-18 20:36 [55:608]]         instanceof StaticAbility: true, ability=Intimidate
+ERROR [2014-02-18 20:36 [55:608]]         usable zone: false, ability=Intimidate
+ERROR [2014-02-18 20:36 [55:609]]         zone: BATTLEFIELD
+ERROR [2014-02-18 20:36 [55:609]]         object: Warchanter of Mogis-BNG
+ERROR [2014-02-18 20:36 [55:610]]         contains ability: true
+ERROR [2014-02-18 20:36 [55:610]]         test_zone: BATTLEFIELD
+ERROR [2014-02-18 20:36 [55:611]] 
