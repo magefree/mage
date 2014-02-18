@@ -41,7 +41,7 @@ import java.util.UUID;
  */
 public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
 
-    private TargetController controller;
+    private final TargetController controller;
 
     public ControllerPredicate(TargetController controller) {
         this.controller = controller;
