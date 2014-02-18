@@ -25,53 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.mercadianmasques;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
+import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
+import mage.target.common.TargetCardInHand;
 
 /**
- * @author nantuko
+ *
+ * @author LevelX2
  */
-public class Distress extends CardImpl<Distress> {
+public class Unmask extends CardImpl<Unmask> {
 
-    public Distress(UUID ownerId) {
-        super(ownerId, 136, "Distress", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
-        this.expansionSetCode = "10E";
+    private static final FilterCard filter = new FilterCard("a black card from your hand");
+    
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
+    
+    public Unmask(UUID ownerId) {
+        super(ownerId, 168, "Unmask", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
+        this.expansionSetCode = "MMQ";
 
         this.color.setBlack(true);
 
+        // You may exile a black card from your hand rather than pay Unmask's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));     
+        
         // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer(true));
-        this.getSpellAbility().addEffect(new DistressEffect());
+        this.getSpellAbility().addEffect(new UnmaskEffect());        
     }
 
-    public Distress(final Distress card) {
+    public Unmask(final Unmask card) {
         super(card);
     }
 
     @Override
-    public Distress copy() {
-        return new Distress(this);
+    public Unmask copy() {
+        return new Unmask(this);
     }
 }
 
-class DistressEffect extends OneShotEffect<DistressEffect> {
+class UnmaskEffect extends OneShotEffect<UnmaskEffect> {
 
     private static final FilterCard filter = new FilterCard("nonland card");
 
@@ -79,12 +93,12 @@ class DistressEffect extends OneShotEffect<DistressEffect> {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public DistressEffect() {
+    public UnmaskEffect() {
         super(Outcome.Discard);
         staticText = "Target player reveals his or her hand. You choose a nonland card from it. That player discards that card";
     }
 
-    public DistressEffect(final DistressEffect effect) {
+    public UnmaskEffect(final UnmaskEffect effect) {
         super(effect);
     }
 
@@ -92,7 +106,7 @@ class DistressEffect extends OneShotEffect<DistressEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            player.revealCards("Distress", player.getHand(), game);
+            player.revealCards("Unmask", player.getHand(), game);
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
                 TargetCard target = new TargetCard(Zone.PICK, filter);
@@ -110,9 +124,8 @@ class DistressEffect extends OneShotEffect<DistressEffect> {
     }
 
     @Override
-    public DistressEffect copy() {
-        return new DistressEffect(this);
+    public UnmaskEffect copy() {
+        return new UnmaskEffect(this);
     }
 
 }
-
