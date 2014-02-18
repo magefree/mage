@@ -25,69 +25,71 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
- 
-package mage.abilities.costs.common;
- 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
+package mage.abilities.costs.common;
+
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
-import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
- 
+
 /**
  *
  * @author LevelX2
  */
-public class ExileFromHandCost extends CostImpl<ExileFromHandCost> {
- 
-    List<Card> cards = new ArrayList<Card>();
- 
-    public ExileFromHandCost(TargetCardInHand target) {
-        this.addTarget(target);
-        this.text = "Exile " + target.getTargetName();
+public class GainLivePlayersCost extends CostImpl<GainLivePlayersCost> {
+
+    private final int amount;
+
+    public GainLivePlayersCost(int amount) {
+        this.amount = amount;
+        this.text = new StringBuilder("you may have each other player gain ").append(amount).append(" life").toString();
     }
- 
-    public ExileFromHandCost(ExileFromHandCost cost) {
+
+    public GainLivePlayersCost(GainLivePlayersCost cost) {
         super(cost);
-        for (Card card: cost.cards) {
-            this.cards.add(card.copy());
-        }
+        this.amount = cost.amount;
     }
- 
+
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            for (UUID playerId: controller.getInRange()) {
+                if (!playerId.equals(controllerId)) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null && !player.isCanGainLife()) {
+                        // if only one other player can't gain life, the cost can't be paid
+                        return false;
+                    }
+                }
+
+            }
+        }        
+        return true;
+    }
+
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
-            Player player = game.getPlayer(controllerId);
-            for (UUID targetId: targets.get(0).getTargets()) {
-                Card card = player.getHand().get(targetId, game);
-                if (card == null) {
-                    return false;
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            for (UUID playerId: controller.getInRange()) {
+                if (!playerId.equals(controllerId)) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.gainLife(amount, game);
+                    }
                 }
-                this.cards.add(card.copy());
-                paid |= player.moveCardToExileWithInfo(card, null, null, ability.getSourceId(), game, Zone.HAND);
             }
+            paid = true;
         }
         return paid;
     }
- 
+
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(sourceId, controllerId, game);
+    public GainLivePlayersCost copy() {
+        return new GainLivePlayersCost(this);
     }
- 
-    @Override
-    public ExileFromHandCost copy() {
-        return new ExileFromHandCost(this);
-    }
- 
-     public List<Card> getCards() {
-        return cards;
-    }
+
 }

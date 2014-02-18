@@ -68,6 +68,8 @@ public class ControlsPermanentCondition implements Condition {
      * {@link #apply(mage.game.Game, mage.abilities.Ability) apply} method invocation.
      *
      * @param filter
+     * @param type
+     * @param count
      */
     public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count ) {
         this.filter = filter;
@@ -82,6 +84,8 @@ public class ControlsPermanentCondition implements Condition {
      * as well.  This will force both conditions to apply for this to be true.
      *
      * @param filter
+     * @param type
+     * @param count
      * @param conditionToDecorate
      */
     public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count, Condition conditionToDecorate ) {
