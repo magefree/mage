@@ -30,7 +30,7 @@ package mage.sets.nemesis;
 import java.util.UUID;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.common.GainLivePlayersCost;
+import mage.abilities.costs.common.GainLifePlayersCost;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -58,7 +58,7 @@ public class ReverentSilence extends CardImpl<ReverentSilence> {
         this.color.setGreen(true);
 
         // If you control a Forest, rather than pay Reverent Silence's mana cost, you may have each other player gain 6 life.
-        this.addAbility(new AlternativeCostSourceAbility(new GainLivePlayersCost(6), new ControlsPermanentCondition(filter)));
+        this.addAbility(new AlternativeCostSourceAbility(new GainLifePlayersCost(6), new ControlsPermanentCondition(filter)));
         
         // Destroy all enchantments.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));

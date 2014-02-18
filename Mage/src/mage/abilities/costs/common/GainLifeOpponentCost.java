@@ -22,7 +22,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class GainLiveOpponentCost extends CostImpl<GainLiveOpponentCost> {
+public class GainLifeOpponentCost extends CostImpl<GainLifeOpponentCost> {
 
     private static final FilterPlayer filter = new FilterPlayer("opponent that can gain life");
     
@@ -33,12 +33,12 @@ public class GainLiveOpponentCost extends CostImpl<GainLiveOpponentCost> {
     
     private final int amount;
 
-    public GainLiveOpponentCost(int amount) {
+    public GainLifeOpponentCost(int amount) {
         this.amount = amount;
         this.text = new StringBuilder("you may have an opponent gain ").append(amount).append(" life").toString();
     }
 
-    public GainLiveOpponentCost(GainLiveOpponentCost cost) {
+    public GainLifeOpponentCost(GainLifeOpponentCost cost) {
         super(cost);
         this.amount = cost.amount;
     }
@@ -77,8 +77,8 @@ public class GainLiveOpponentCost extends CostImpl<GainLiveOpponentCost> {
     }
 
     @Override
-    public GainLiveOpponentCost copy() {
-        return new GainLiveOpponentCost(this);
+    public GainLifeOpponentCost copy() {
+        return new GainLifeOpponentCost(this);
     }
 
 }

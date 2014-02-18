@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.common.GainLivePlayersCost;
+import mage.abilities.costs.common.GainLifePlayersCost;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -60,7 +60,7 @@ public class SkyshroudCutter extends CardImpl<SkyshroudCutter> {
         this.toughness = new MageInt(2);
 
         // If you control a Forest, rather than pay Skyshroud Cutter's mana cost, you may have each other player gain 5 life.
-        this.addAbility(new AlternativeCostSourceAbility(new GainLivePlayersCost(6), new ControlsPermanentCondition(filter)));        
+        this.addAbility(new AlternativeCostSourceAbility(new GainLifePlayersCost(6), new ControlsPermanentCondition(filter)));        
     }
 
     public SkyshroudCutter(final SkyshroudCutter card) {

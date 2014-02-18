@@ -38,16 +38,16 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class GainLivePlayersCost extends CostImpl<GainLivePlayersCost> {
+public class GainLifePlayersCost extends CostImpl<GainLifePlayersCost> {
 
     private final int amount;
 
-    public GainLivePlayersCost(int amount) {
+    public GainLifePlayersCost(int amount) {
         this.amount = amount;
         this.text = new StringBuilder("you may have each other player gain ").append(amount).append(" life").toString();
     }
 
-    public GainLivePlayersCost(GainLivePlayersCost cost) {
+    public GainLifePlayersCost(GainLifePlayersCost cost) {
         super(cost);
         this.amount = cost.amount;
     }
@@ -88,8 +88,8 @@ public class GainLivePlayersCost extends CostImpl<GainLivePlayersCost> {
     }
 
     @Override
-    public GainLivePlayersCost copy() {
-        return new GainLivePlayersCost(this);
+    public GainLifePlayersCost copy() {
+        return new GainLifePlayersCost(this);
     }
 
 }
