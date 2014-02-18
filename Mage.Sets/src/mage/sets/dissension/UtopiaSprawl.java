@@ -180,16 +180,23 @@ class UtopiaSprawlEffect extends ManaEffect<UtopiaSprawlEffect> {
                 Player player = game.getPlayer(land.getControllerId());
                 if (player != null) {
                     ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-                    if (color.isBlack())
-                        player.getManaPool().addMana(Mana.BlackMana, game, source);
-                    else if (color.isBlue())
-                        player.getManaPool().addMana(Mana.BlueMana, game, source);
-                    else if (color.isRed())
-                        player.getManaPool().addMana(Mana.RedMana, game, source);
-                    else if (color.isGreen())
-                        player.getManaPool().addMana(Mana.GreenMana, game, source);
-                    else if (color.isWhite())
-                        player.getManaPool().addMana(Mana.WhiteMana, game, source);
+                    switch(color.toString()) {
+                        case "W":
+                            player.getManaPool().addMana(Mana.WhiteMana, game, source);
+                            break;
+                        case "B":
+                            player.getManaPool().addMana(Mana.BlackMana, game, source);
+                            break;
+                        case "U":
+                            player.getManaPool().addMana(Mana.BlueMana, game, source);
+                            break;
+                        case "G":
+                            player.getManaPool().addMana(Mana.GreenMana, game, source);
+                            break;
+                        case "R":
+                            player.getManaPool().addMana(Mana.RedMana, game, source);
+                            break;
+                    }
                     return true;
                 }
             }

@@ -28,11 +28,12 @@
 package mage.deck;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.constants.SetType;
-import mage.sets.EighthEdition;
+
 
 /**
  *
@@ -44,7 +45,7 @@ public class Modern extends Constructed {
     public Modern() {
         super("Constructed - Modern");
 
-        Date cutoff = EighthEdition.getInstance().getReleaseDate(); // 2003 / 07 / 28
+        Date cutoff = new GregorianCalendar(2003, 7, 28).getTime(); // Eight edition release date
         for (ExpansionSet set: Sets.getInstance().values()) {
             if ((set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff)) && set.getSetType() != SetType.REPRINT) {
                 setCodes.add(set.getCode());

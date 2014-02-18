@@ -79,11 +79,21 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
 
     public int getColorCount() {
         int count = 0;
-        if (white) count++;
-        if (blue) count++;
-        if (black) count++;
-        if (green) count++;
-        if (red) count++;
+        if (white) {
+            count++;
+        }
+        if (blue) {
+            count++;
+        }
+        if (black) {
+            count++;
+        }
+        if (green) {
+            count++;
+        }
+        if (red) {
+            count++;
+        }
         return count;
     }
 
@@ -104,17 +114,19 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     }
 
     public boolean isMulticolored() {
-        if (isColorless())
+        if (isColorless()) {
             return false;
-        if (white && (blue | black | red | green))
+        }
+        if (white && (blue | black | red | green)) {
             return true;
-        if (blue && (black | red | green))
+        }
+        if (blue && (black | red | green)) {
             return true;
-        if (black && (red | green))
+        }
+        if (black && (red | green)) {
             return true;
-        if (red && green)
-            return true;
-        return false;
+        }
+        return red && green;
     }
 
     public boolean isWhite() {
@@ -151,16 +163,21 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (white) 
+        if (white) {
             sb.append("W");
-        if (blue) 
+        }
+        if (blue) {
             sb.append("U");
-        if (black) 
+        }
+        if (black) {
             sb.append("B");
-        if (red) 
+        }
+        if (red) {
             sb.append("R");
-        if (green) 
+        }
+        if (green) {
             sb.append("G");
+        }
         return sb.toString();
     }
 
@@ -169,38 +186,47 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         if (getColorCount() > 1) {
             return "multicolored";
         } else {
-        if (white)
-            return "white";
-        if (blue)
-            return "blue";
-        if (black)
-            return "black";
-        if (red)
-            return "red";
-        if (green)
-            return "green";
+            if (white) {
+                return "white";
+            }
+            if (blue) {
+                return "blue";
+            }
+            if (black) {
+                return "black";
+            }
+            if (red) {
+                return "red";
+            }
+            if (green) {
+                return "green";
+            }
         }
         return "colorless";
     }
 
     @Override
     public boolean equals(Object color) {
-        if (this == color) 
+        if (this == color) {
             return true;
-        if (!(color instanceof ObjectColor)) 
+        }
+        if (!(color instanceof ObjectColor)) {
             return false;
+        }
         ObjectColor test = (ObjectColor) color;
-        if (test.white != this.white)
+        if (test.white != this.white) {
             return false;
-        if (test.blue != this.blue)
+        }
+        if (test.blue != this.blue) {
             return false;
-        if (test.black != this.black)
+        }
+        if (test.black != this.black) {
             return false;
-        if (test.red != this.red)
+        }
+        if (test.red != this.red) {
             return false;
-        if (test.green != this.green)
-            return false;
-        return true;
+        }
+        return test.green == this.green;
     }
 
     @Override
@@ -231,10 +257,12 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     }
 
     public boolean shares(ObjectColor color) {
-        if (this == color)
+        if (this == color) {
             return true;
-        if (!hasColor() && !color.hasColor())
+        }
+        if (!hasColor() && !color.hasColor()) {
             return true;
+        }
         return color.white && white || color.blue && blue || color.black && black ||
                 color.red && red || color.green && green;
     }
@@ -269,34 +297,36 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         int o1 = 0;
         int o2 = 0;
 
-        if (this.isMulticolored())
+        if (this.isMulticolored()) {
             o1 = 6;
-        else if(this.isColorless())
+        } else if(this.isColorless()) {
             o1 = 0;
-        else if(this.isBlack())
+        } else if(this.isBlack()) {
             o1 = 1;
-        else if(this.isBlue())
+        } else if(this.isBlue()) {
             o1 = 2;
-        else if(this.isGreen())
+        } else if(this.isGreen()) {
             o1 = 3;
-        else if(this.isRed())
+        } else if(this.isRed()) {
             o1 = 4;
-        else if(this.isWhite())
+        } else if(this.isWhite()) {
             o1 = 5;
-        if (o.isMulticolored())
+        }
+        if (o.isMulticolored()) {
             o2 = 6;
-        else if(o.isColorless())
+        } else if(o.isColorless()) {
             o2 = 0;
-        else if(o.isBlack())
+        } else if(o.isBlack()) {
             o2 = 1;
-        else if(o.isBlue())
+        } else if(o.isBlue()) {
             o2 = 2;
-        else if(o.isGreen())
+        } else if(o.isGreen()) {
             o2 = 3;
-        else if(o.isRed())
+        } else if(o.isRed()) {
             o2 = 4;
-        else if(o.isWhite())
+        } else if(o.isWhite()) {
             o2 = 5;
+        }
         return o1 - o2;
     }
 
