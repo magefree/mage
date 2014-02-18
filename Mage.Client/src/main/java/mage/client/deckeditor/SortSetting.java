@@ -52,7 +52,11 @@ public abstract class SortSetting {
         this.prefSortAscending = prefSortAscending;
         this.prefPilesToggle = prefPilesToggle;
         this.sortBy = SortBy.getByString(PreferencesDialog.getCachedValue(this.prefSortBy, "Color"));
-        this.sortIndex = Integer.parseInt(PreferencesDialog.getCachedValue(this.prefSortIndex, "1"));
+        try {
+            this.sortIndex = Integer.parseInt(PreferencesDialog.getCachedValue(this.prefSortIndex, "1"));
+        } catch (NumberFormatException e) {
+            this.sortIndex = 2;
+        }
         this.ascending = PreferencesDialog.getCachedValue(this.prefSortAscending, "1").equals("1");
         this.pilesToggle = PreferencesDialog.getCachedValue(this.prefPilesToggle, "true").equals("true");
     }
