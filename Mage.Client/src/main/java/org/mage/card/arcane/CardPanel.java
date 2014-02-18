@@ -725,8 +725,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         if (!popupShowing) {
             synchronized (this) {
                 if (!popupShowing) {
-                    popupShowing = true;
-                    callback.mouseEntered(e, getTransferDataForMouseEntered());
+                    TransferData transferData = getTransferDataForMouseEntered();
+                    if (this.isShowing()) {
+                        popupShowing = true;
+                        callback.mouseEntered(e, transferData);
+                    }
                 }
             }
         }
@@ -790,7 +793,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         data.gameId = this.gameId;
         data.popupOffsetX = isTapped() ? cardHeight + cardXOffset + POPUP_X_GAP : cardWidth + cardXOffset + POPUP_X_GAP;
         data.popupOffsetY = 40;
-        data.locationOnScreen = this.getLocationOnScreen();
+        if (this.isShowing()) {
+            data.locationOnScreen = this.getLocationOnScreen();
+        } else {
+
+        }
         return data;
     }
 
