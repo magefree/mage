@@ -28,6 +28,7 @@ while(my $line = <DATA>) {
     my @data = split('\\|', $line);
     if ($data[1] eq $setName) {
         push(@setCards, \@data);
+    }
 }
 close(DATA);
 
@@ -63,6 +64,7 @@ sub toCamelCase {
 my $cardsFound = 0;
 my $cardsImplemented = 0;
 my $toPrint = '';
+
 foreach my $card (sort cardSort @setCards) {
 	my $className = toCamelCase(@{$card}[0]);
     my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
@@ -73,8 +75,9 @@ foreach my $card (sort cardSort @setCards) {
 		$toPrint .= "@{$card}[2]|@{$card}[0]"; 
                 $cardsImplemented++;
 	}
-        $cardsFound = $cardsFound + 1;
+    $cardsFound++;
 }
+
 print "Number of cards found for set " . $setName . ": " . $cardsFound . "\n";
 print "Number of implemented cards:  " . $cardsImplemented . "\n";
 
