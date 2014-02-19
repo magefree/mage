@@ -374,6 +374,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone);
+
     /**
      * Uses card.moveToExile and posts a inform message about moving the card to exile
      * into the game log
@@ -389,6 +390,18 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone);
 
     /**
+     * Uses card.moveToZone and posts a inform message about moving the card to graveyard
+     * into the game log
+     *
+     * @param card
+     * @param sourceId
+     * @param game
+     * @param fromZone if null, this info isn't postet
+     * @return
+     */
+    boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone);
+
+    /**
      * Uses putOntoBattlefield and posts also a info message about in the game log
      *
      * @param card
@@ -398,7 +411,19 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId);
-
+    
+    /**
+     * Uses putOntoBattlefield and posts also a info message about in the game log
+     *
+     * @param card
+     * @param game
+     * @param fromZone
+     * @param sourceId
+     * @param tapped the card enters the battlefield tapped
+     * @return
+     */
+    boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped);
+    
     /**
      * Checks if the playerToCheckId is from an opponent in range
      * 

@@ -2112,6 +2112,18 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         return result;
     }
 
+    @Override 
+    public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
+        boolean result = false;
+        if (card.moveToZone(Zone.GRAVEYARD, sourceId, game, fromZone != null ? fromZone.equals(Zone.BATTLEFIELD) : false)) {
+            game.informPlayers(new StringBuilder(this.getName())
+                    .append(" puts ").append(card.getName()).append(" ")
+                    .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
+                    .append("into his or her graveyard").toString());
+        }
+        return result;
+    }
+
     @Override
     public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
@@ -2126,8 +2138,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId) {
+        return this.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, false);
+    }
+        
+    @Override
+    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped) {
         boolean result = false;
-        if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId())) {
+        if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId(), tapped)) {
             game.informPlayers(new StringBuilder(this.getName())
                     .append(" puts ").append(card.getName())
                     .append(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
