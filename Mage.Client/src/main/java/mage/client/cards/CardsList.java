@@ -186,7 +186,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     }
 
     public List<Integer> asList(final int[] is) {
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         for (int i : is) {
             list.add(i);
         }
@@ -224,7 +224,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         cardArea.removeAll();
         if (cards != null && cards.size() > 0) {
             Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-            List<CardView> sortedCards = new ArrayList<CardView>(cards.values());
+            List<CardView> sortedCards = new ArrayList<>(cards.values());
             switch (sortSetting.getSortBy()) {
                 case NAME:
                     Collections.sort(sortedCards, new CardViewNameComparator());

@@ -308,9 +308,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 }
             }
         });
-        // Set Sort from Preferences
-        SortBy sortBy = SortBy.getByString(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_SORT_BY, "Color"));
-        deckArea.getDeckList().setSortBy(sortBy);
         refreshDeck();
 
         this.setVisible(true);
