@@ -33,6 +33,7 @@ import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -54,6 +55,9 @@ public class CopyTargetSpellEffect extends OneShotEffect<CopyTargetSpellEffect> 
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        if (spell == null) {
+            spell = (Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
+        }
         if (spell != null) {
             Spell copy = spell.copySpell();
             copy.setControllerId(source.getControllerId());

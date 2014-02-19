@@ -29,14 +29,14 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -46,6 +46,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * 
@@ -125,17 +126,8 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl<Pyro
 
 class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl<PyromancerAscensionCopyTriggeredAbility> {
 
-    private static final FilterSpell filter = new FilterSpell();
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
-
     PyromancerAscensionCopyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), true);
-        this.addTarget(new TargetSpell(filter));
     }
 
     PyromancerAscensionCopyTriggeredAbility(final PyromancerAscensionCopyTriggeredAbility ability) {
@@ -154,8 +146,7 @@ class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl<Pyrom
             if (isControlledInstantOrSorcery(spell)) {
                 Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
                 if (permanent != null && permanent.getCounters().getCount(CounterType.QUEST) >= 2) {
-                    this.getTargets().get(0).clearChosen();
-                    this.getTargets().get(0).add(spell.getId(), game);
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
                     return true;
                 }
             }
