@@ -60,8 +60,8 @@ public class TraceUtil {
                     if (hasIntimidate(attacker)) {
                         for (UUID blockerId : group.getBlockers()) {
                             Permanent blocker = game.getPermanent(blockerId);
-                            if (blocker != null && !blocker.getCardType().contains(CardType.ARTIFACT) 
-                                    && attacker.getColor().shares(blocker.getColor())) {
+                            if (blocker != null && !blocker.getCardType().contains(CardType.ARTIFACT)
+                                    && !attacker.getColor().shares(blocker.getColor())) {
                                 log.warn("Found creature with intimidate blocked by non artifact not sharing color creature");
                                 traceCombat(game, attacker, blocker);                                
                             }
@@ -169,6 +169,7 @@ public class TraceUtil {
 
     private static void traceForPermanent(Game game, Permanent permanent, String uuid, ContinuousEffectsList<RestrictionEffect> restrictionEffects) {
         for (RestrictionEffect effect: restrictionEffects) {
+            log.error(uuid+"     effect=" + effect.toString() + " id=" + effect.getId());
             for (Ability ability : restrictionEffects.getAbility(effect.getId())) {
                 if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, permanent, false)) {
                     log.error(uuid+"        ability=" + ability + ", applies_to_attacker=" + effect.applies(permanent, ability, game));
