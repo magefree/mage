@@ -102,7 +102,7 @@ class ExhumeEffect extends OneShotEffect<ExhumeEffect> {
                         player.chooseTarget(outcome, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), player.getId());
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
                     }
                 }
             }

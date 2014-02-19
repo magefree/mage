@@ -97,10 +97,10 @@ class GrindstoneEffect extends OneShotEffect<GrindstoneEffect> {
                 colorShared = false;
                 Card card1 = targetPlayer.getLibrary().removeFromTop(game);
                 if (card1 != null) {
-                    card1.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);    
+                    targetPlayer.moveCardToGraveyardWithInfo(card1, source.getSourceId(), game, Zone.LIBRARY);
                     Card card2 = targetPlayer.getLibrary().removeFromTop(game);
                     if (card2 != null) {
-                        card2.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
+                        targetPlayer.moveCardToGraveyardWithInfo(card2, source.getSourceId(), game, Zone.LIBRARY);  
                         if (card1.getColor().hasColor() && card2.getColor().hasColor()) {
                             colorShared = card1.getColor().shares(card2.getColor());
                         }
