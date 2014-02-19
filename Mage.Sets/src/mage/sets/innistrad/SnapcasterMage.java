@@ -28,13 +28,6 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.TimingRule;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -44,6 +37,13 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.TimingRule;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -74,10 +74,11 @@ public class SnapcasterMage extends CardImpl<SnapcasterMage> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        // Flash
         this.addAbility(FlashAbility.getInstance());
         // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SnapcasterMageEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(filter, true));
         this.addAbility(ability);
 
     }
@@ -113,15 +114,14 @@ class SnapcasterMageEffect extends ContinuousEffectImpl<SnapcasterMageEffect> {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (card != null && sourceObject != null) {
-            game.informPlayers(new StringBuilder(sourceObject.getName()).append(" gives Flashback to ").append(card.getName()).toString());
+            game.informPlayers(new StringBuilder(sourceObject.getName()).append(" gives flashback to ").append(card.getName()).toString());
         }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(targetPointer.getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (card != null && sourceObject != null) {
+        if (card != null) {
             FlashbackAbility ability;
             if (card.getCardType().contains(CardType.INSTANT)) {
                 ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
