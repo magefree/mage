@@ -17,7 +17,7 @@ public class WizardCardsImageSource implements CardImageSource {
 
     private static CardImageSource instance;
     private static Map<String, String> setsAliases;
-    private Map<String, Map<String, String>> sets;
+    private final Map<String, Map<String, String>> sets;
 
     public static CardImageSource getInstance() {
         if (instance == null) {
@@ -27,8 +27,8 @@ public class WizardCardsImageSource implements CardImageSource {
     }
 
     public WizardCardsImageSource() {
-        sets = new HashMap<String, Map<String, String>>();
-        setsAliases = new HashMap<String, String>();
+        sets = new HashMap<>();
+        setsAliases = new HashMap<>();
         setsAliases.put("BNG", "bornofthegods/cig");
         setsAliases.put("C13", "commander2013/cig");
         setsAliases.put("THS", "theros/cig");
@@ -55,10 +55,11 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("CON", "conflux/spoiler");
         setsAliases.put("ALA", "shardsofalara/spoiler");
         setsAliases.put("PC2", "planechase2012edition/cig");
+        setsAliases.put("PTK", "portalthreekingdoms/cig");
     }
 
     private Map<String, String> getSetLinks(String cardSet) {
-        Map<String, String> setLinks = new HashMap<String, String>();
+        Map<String, String> setLinks = new HashMap<>();
         try {
             Document doc = Jsoup.connect("http://www.wizards.com/magic/tcg/article.aspx?x=mtg/tcg/" + setsAliases.get(cardSet)).get();
             Elements cardsImages = doc.select("img[height$=370]");

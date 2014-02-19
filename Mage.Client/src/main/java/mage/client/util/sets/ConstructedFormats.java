@@ -51,6 +51,7 @@ public class ConstructedFormats {
             "* Ice Age Block", "Coldsnap", "Alliances", "Ice Age", "Fourth Edition",
             "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",
             "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
+            "Portal Three Kingdoms",
             "Guru",
             "Duel Decks: Heroes vs. Monsters",
             "Duel Decks: Elspeth vs. Tezzeret"
@@ -387,6 +388,9 @@ public class ConstructedFormats {
         if (format.equals("Guru")) {
             return Arrays.asList("GUR");
         }
+        if (format.equals("Portal Three Kingdoms")) {
+            return Arrays.asList("PTK");
+        }
         if (format.equals("Duel Decks: Elspeth vs. Tezzeret")) {
             return Arrays.asList("DDF");
         }
@@ -422,17 +426,17 @@ public class ConstructedFormats {
         }
     }
 
-    private static final List<String> standard = new ArrayList<String>();
+    private static final List<String> standard = new ArrayList<>();
     private static final Date standardDate = new GregorianCalendar(2012, 9, 28).getTime();
 
-    private static final List<String> extended = new ArrayList<String>();
+    private static final List<String> extended = new ArrayList<>();
     private static final Date extendedDate = new GregorianCalendar(2009, 8, 20).getTime();
 
-    private static final List<String> modern = new ArrayList<String>();
+    private static final List<String> modern = new ArrayList<>();
     private static final Date modernDate = new GregorianCalendar(2003, 7, 20).getTime();
 
     // for all sets just return empty list
-    private static final List<String> all = new ArrayList<String>();
+    private static final List<String> all = new ArrayList<>();
 
     static {
         buildLists();

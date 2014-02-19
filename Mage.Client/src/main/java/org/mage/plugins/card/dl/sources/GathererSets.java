@@ -30,7 +30,8 @@ public class GathererSets implements Iterable<DownloadJob> {
                                                  "RAV", "GPT", "DIS", 
                                                  "TSP", "TSB", "PLC", "FUT", 
                                                  "LRW", "MOR", 
-                                                 "SHM", "EVE"};
+                                                 "SHM", "EVE",
+                                                 "PTK"};
     
     private static final String[] withMythics = {"M10", "M11", "M12", "M13", "M14",
                                                  "DDF", "DDL",
@@ -42,7 +43,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                                                  "RTR", "GTC", "DGM",
                                                  "MMA",
                                                  "THS", "BNG"};
-    private static final HashMap<String, String> symbolsReplacements = new HashMap<String, String>();
+    private static final HashMap<String, String> symbolsReplacements = new HashMap<>();
 
     static {
         symbolsReplacements.put("ARN", "AN");
@@ -89,7 +90,7 @@ public class GathererSets implements Iterable<DownloadJob> {
 
     @Override
     public Iterator<DownloadJob> iterator() {
-        ArrayList<DownloadJob> jobs = new ArrayList<DownloadJob>();
+        ArrayList<DownloadJob> jobs = new ArrayList<>();
         for (String symbol : symbols) {
             jobs.add(generateDownloadJob(symbol, "C"));
             jobs.add(generateDownloadJob(symbol, "U"));

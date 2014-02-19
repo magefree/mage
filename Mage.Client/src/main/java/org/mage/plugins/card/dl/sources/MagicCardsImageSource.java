@@ -58,6 +58,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("10E", "tenth-edition");
             put("CSP", "coldsnap");
             put("CHK", "player-rewards-2004");
+            put("PTK", "portal-three-kingdoms");
         }
         private static final long serialVersionUID = 1L;
     };
