@@ -30,6 +30,7 @@ package mage.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import mage.game.tournament.Round;
@@ -51,9 +52,10 @@ public class TournamentView implements Serializable {
 
     private final boolean watchingAllowed;
 
-    private final List<RoundView> rounds = new ArrayList<RoundView>();
-    private final List<TournamentPlayerView> players = new ArrayList<TournamentPlayerView>();
+    private final List<RoundView> rounds = new ArrayList<>();
+    private final List<TournamentPlayerView> players = new ArrayList<>();
 
+    @SuppressWarnings("unchecked")
     public TournamentView(Tournament tournament) {
 
         tournamentName = tournament.getOptions().getName();
@@ -65,6 +67,7 @@ public class TournamentView implements Serializable {
         for (TournamentPlayer player: tournament.getPlayers()) {
             players.add(new TournamentPlayerView(player));
         }
+        Collections.sort(players);
         for (Round round: tournament.getRounds()) {
             rounds.add(new RoundView(round));
         }

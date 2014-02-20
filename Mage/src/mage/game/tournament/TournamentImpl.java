@@ -59,13 +59,13 @@ import org.apache.log4j.Logger;
 public abstract class TournamentImpl implements Tournament {
 
     protected UUID id = UUID.randomUUID();
-    protected List<Round> rounds = new CopyOnWriteArrayList<Round>();
-    protected Map<UUID, TournamentPlayer> players = new HashMap<UUID, TournamentPlayer>();
+    protected List<Round> rounds = new CopyOnWriteArrayList<>();
+    protected Map<UUID, TournamentPlayer> players = new HashMap<>();
     protected static Random rnd = new Random();
     protected String matchName;
     protected TournamentOptions options;
     protected TournamentType tournamentType;
-    protected List<ExpansionSet> sets = new ArrayList<ExpansionSet>();
+    protected List<ExpansionSet> sets = new ArrayList<>();
     protected String setsInfoShort;
 
     protected TableEventSource tableEventSource = new TableEventSource();

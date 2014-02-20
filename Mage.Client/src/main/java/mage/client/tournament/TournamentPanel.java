@@ -517,7 +517,7 @@ class TournamentMatchesTableModel extends AbstractTableModel {
     private boolean watchingAllowed;
 
     public void loadData(TournamentView tournament) {
-        List<TournamentGameView> views = new ArrayList<TournamentGameView>();
+        List<TournamentGameView> views = new ArrayList<>();
         watchingAllowed = tournament.isWatchingAllowed();
         for (RoundView round: tournament.getRounds()) {
             for (TournamentGameView game: round.getGames()) {

@@ -36,7 +36,7 @@ import mage.game.tournament.TournamentPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentPlayerView implements Serializable {
+public class TournamentPlayerView implements Serializable, Comparable{
     private static final long serialVersionUID = 1L;
 
     private final String name;
@@ -75,6 +75,11 @@ public class TournamentPlayerView implements Serializable {
 
     public boolean hasQuit() {
         return quit;
+    }
+
+    @Override
+    public int compareTo(Object t) {
+        return ((TournamentPlayerView) t).getPoints() - this.getPoints();
     }
 
 }
