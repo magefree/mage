@@ -36,6 +36,7 @@ package mage.client.table;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.HeadlessException;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -129,8 +130,8 @@ public class TablesPanel extends javax.swing.JPanel {
         jScrollPane1.getViewport().setBackground(new Color(255,255,255,50));
         jScrollPane2.getViewport().setBackground(new Color(255,255,255,50));
 
-        Action joinTable;
-        joinTable = new AbstractAction()
+        Action openTableAction;
+        openTableAction = new AbstractAction()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -141,83 +142,98 @@ public class TablesPanel extends javax.swing.JPanel {
                 String action = (String)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
                 boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 1);
                 String owner = (String)tableModel.getValueAt(modelRow, 1);
+                switch (action) {
+                    case "Join":
+                        if (owner.equals(session.getUserName())) {
+                            try {
+                                JDesktopPane desktopPane = (JDesktopPane) MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
+                                JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
+                                for (JInternalFrame frame : windows) {
+                                    if (frame.getTitle().equals("Waiting for players")) {
+                                        frame.toFront();
+                                        frame.setVisible(true);
+                                        try {
+                                            frame.setSelected(true);
+                                        } catch (PropertyVetoException ve) {
+                                            logger.error(ve);
+                                        }
+                                    }
 
-                if (action.equals("Join")) {
-                     if (owner.equals(session.getUserName())) {
-                         try {
-                             JDesktopPane desktopPane = (JDesktopPane)MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
-                             JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
-                             for (JInternalFrame frame : windows) {
-                                 if (frame.getTitle().equals("Waiting for players")) {
-                                     frame.toFront();
-                                     frame.setVisible(true);
-                                     try {
-                                         frame.setSelected(true);
-                                     } catch (PropertyVetoException ve) {
-                                         ve.printStackTrace();
-                                         logger.error(ve);
-                                     }
-                                 }
-
-                             }
-                         } catch (Exception ex) {
-                             logger.error(ex);
-                         }
-                         return;
-                     }
-                     if (isTournament) {
-                         logger.info("Joining tournament " + tableId);
-                         session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1);
-                     }
-                     else {
-                         logger.info("Joining table " + tableId);
-                         joinTableDialog.showDialog(roomId, tableId);
-                     }
-                 } else if (action.equals("Remove")) {
-                     if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                         session.removeTable(roomId, tableId);
-                     }
-                 } else if (action.equals("Show")) {
-                     if (isTournament) {
-                         logger.info("Showing tournament table " + tableId);
-                         session.watchTable(roomId, tableId);
-                     }
-                 } else if (action.equals("Watch")) {
-                     if (!isTournament) {
-                         logger.info("Watching table " + tableId);
-                         session.watchTable(roomId, tableId);
-                     }
-                 } else if (action.equals("Replay")) {
-                     logger.info("Replaying game " + gameId);
-                     session.replayGame(gameId);
-                 }
+                                }
+                            } catch (InterruptedException ex) {
+                                logger.error(ex);
+                            }
+                            return;
+                        }
+                        if (isTournament) {
+                            logger.info("Joining tournament " + tableId);
+                            session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1);
+                        } else {
+                            logger.info("Joining table " + tableId);
+                            joinTableDialog.showDialog(roomId, tableId);
+                        }  
+                        break;
+                    case "Remove":
+                        if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            session.removeTable(roomId, tableId);
+                        }  
+                        break;
+                    case "Show":
+                        if (isTournament) {
+                            logger.info("Showing tournament table " + tableId);
+                            session.watchTable(roomId, tableId);
+                        }  
+                        break;
+                    case "Watch":
+                        if (!isTournament) {
+                            logger.info("Watching table " + tableId);
+                            session.watchTable(roomId, tableId);
+                        }  
+                        break;
+                    case "Replay":
+                        logger.info("Replaying game " + gameId);
+                        session.replayGame(gameId);
+                        break;
+                }
              }
          };
 
-        Action replayMatch = new AbstractAction()
+        Action closedTableAction;
+        
+        closedTableAction = new AbstractAction()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 int modelRow = Integer.valueOf( e.getActionCommand() );
-                if (matchesModel.getValueAt(modelRow, MatchesTableModel.GAMES_LIST_COLUMN) instanceof List) {
-                    List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, MatchesTableModel.GAMES_LIST_COLUMN);
-                    if (games.size() == 1) {
-                        session.replayGame(games.get(0));
-                    }
-                    else {
-                        gameChooser.show(games, MageFrame.getDesktop().getMousePosition());
-                    }
+                String action = (String)matchesModel.getValueAt(modelRow, MatchesTableModel.ACTION_COLUMN);
+                switch (action) {
+                    case "Replay":                
+                        List<UUID> gameList  = matchesModel.getListofGames(modelRow);
+                        if (gameList != null && gameList.size() > 0) {
+                            if (gameList.size() == 1) {
+                                session.replayGame(gameList.get(0));
+                            }
+                            else {
+                                gameChooser.show(gameList, MageFrame.getDesktop().getMousePosition());
+                            }
+                        }
+                        // MageFrame.getDesktop().showTournament(tournamentId);
+                        break;
+                    case "Show":;
+                        if (matchesModel.isTournament(modelRow)) {
+                            logger.info("Showing tournament table " + matchesModel.getTableId(modelRow));
+                            session.watchTable(roomId, matchesModel.getTableId(modelRow));
+                        }                         
+                        break;
                 }
-                // MageFrame.getDesktop().showTournament(tournamentId);
-
             }
         };
 
 
-        // adds buttons to the table panel (don't delete this)
-        new ButtonColumn(tableTables, joinTable, TableTableModel.ACTION_COLUMN);
-        new ButtonColumn(tableCompleted, replayMatch, MatchesTableModel.ACTION_COLUMN);
+        // adds action buttons to the table panel (don't delete this)
+        new ButtonColumn(tableTables, openTableAction, TableTableModel.ACTION_COLUMN);
+        new ButtonColumn(tableCompleted, closedTableAction, MatchesTableModel.ACTION_COLUMN);
     }
 
 
@@ -254,7 +270,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
     }
     public Map<String, JComponent> getUIComponents() {
-        Map<String, JComponent> components = new HashMap<String, JComponent>();
+        Map<String, JComponent> components = new HashMap<>();
 
         components.put("jScrollPane1", jScrollPane1);
         components.put("jScrollPane1ViewPort", jScrollPane1.getViewport());
@@ -268,7 +284,7 @@ public class TablesPanel extends javax.swing.JPanel {
         try {
             tableModel.loadData(tables);
             this.tableTables.repaint();
-        } catch (Exception ex) {
+        } catch (MageRemoteException ex) {
             hideTables();
         }
     }
@@ -277,7 +293,7 @@ public class TablesPanel extends javax.swing.JPanel {
         try {
             matchesModel.loadData(matches);
             this.tableCompleted.repaint();
-        } catch (Exception ex) {
+        } catch (MageRemoteException ex) {
             hideTables();
         }
     }
@@ -602,7 +618,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"));
                 session.joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"));
                 session.startGame(roomId, table.getTableId());
-            } catch (Exception ex) {
+            } catch (HeadlessException ex) {
                 handleError(ex);
             }
 }//GEN-LAST:event_btnQuickStartActionPerformed
@@ -665,7 +681,7 @@ class TableTableModel extends AbstractTableModel {
 
     public static final int ACTION_COLUMN = 9; // column the action is located (starting with 0)
 
-    private String[] columnNames = new String[]{"Match Name", "Owner / Players", "Game Type", "Wins", "Free Mulligans", "Deck Type", "Info", "Status", "Created", "Action"};
+    private final String[] columnNames = new String[]{"Match Name", "Owner / Players", "Game Type", "Wins", "Free Mulligans", "Deck Type", "Info", "Status", "Created", "Action"};
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
@@ -815,9 +831,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     protected void done() {
         try {
             get();
-        } catch (InterruptedException ex) {
-            logger.fatal("Update Tables Task error", ex);
-        } catch (ExecutionException ex) {
+        } catch (InterruptedException | ExecutionException ex) {
             logger.fatal("Update Tables Task error", ex);
         } catch (CancellationException ex) {}
     }
@@ -856,9 +870,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<UsersView>> {
     protected void done() {
         try {
             get();
-        } catch (InterruptedException ex) {
-            logger.fatal("Update Players Task error", ex);
-        } catch (ExecutionException ex) {
+        } catch (InterruptedException | ExecutionException ex) {
             logger.fatal("Update Players Task error", ex);
         } catch (CancellationException ex) {}
     }
@@ -910,18 +922,38 @@ class MatchesTableModel extends AbstractTableModel {
                     return "";
                 }
             case 7:
-                if (matches[arg0].isReplayAvailable()) {
-                    return "Replay";
+                if (matches[arg0].isTournament()) {
+                    return "Show";
                 } else {
-                    return "None";
-                }
-                
+                    if (matches[arg0].isReplayAvailable()) {
+                        return "Replay";
+                    } else {
+                        return "None";
+                    }
+                }               
             case 8:
                 return matches[arg0].getGames();
         }
         return "";
     }
+    
+    public List<UUID> getListofGames (int row) {
+         return matches[row].getGames();
+    }
+    
+    public boolean isTournament(int row) {
+         return matches[row].isTournament();
+    }
 
+    public UUID getMatchId(int row) {
+         return matches[row].getMatchId();
+    }
+    
+    public UUID getTableId(int row) {
+         return matches[row].getTableId();
+    }
+    
+    
     @Override
     public String getColumnName(int columnIndex) {
         String colName = "";
@@ -980,9 +1012,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     protected void done() {
         try {
             get();
-        } catch (InterruptedException ex) {
-            logger.fatal("Update Matches Task error", ex);
-        } catch (ExecutionException ex) {
+        } catch (InterruptedException | ExecutionException ex) {
             logger.fatal("Update Matches Task error", ex);
         } catch (CancellationException ex) {}
     }
