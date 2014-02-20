@@ -88,12 +88,12 @@ public class User {
         this.connectionTime = new Date();
         this.lastActivity = new Date();
         
-        this.tables = new ConcurrentHashMap<UUID, Table>();
-        this.gameSessions = new ConcurrentHashMap<UUID, GameSession>();
-        this.draftSessions = new ConcurrentHashMap<UUID, DraftSession>();
-        this.tournamentSessions = new ConcurrentHashMap<UUID, TournamentSession>();
-        this.constructing = new ConcurrentHashMap<UUID, TournamentSession>();
-        this.sideboarding = new ConcurrentHashMap<UUID, Deck>();
+        this.tables = new ConcurrentHashMap<>();
+        this.gameSessions = new ConcurrentHashMap<>();
+        this.draftSessions = new ConcurrentHashMap<>();
+        this.tournamentSessions = new ConcurrentHashMap<>();
+        this.constructing = new ConcurrentHashMap<>();
+        this.sideboarding = new ConcurrentHashMap<>();
         
         this.sessionId = "";
     }
@@ -180,7 +180,7 @@ public class User {
     }
 
     public void showUserMessage(final String titel,  String message) {
-        List<String> messageData = new LinkedList<String>();
+        List<String> messageData = new LinkedList<>();
         messageData.add(titel);
         messageData.add(message);
         fireCallback(new ClientCallback("showUserMessage", null, messageData ));

@@ -64,7 +64,7 @@ public class UserManager {
         }, 60, 60, TimeUnit.SECONDS);
     }
 
-    private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<UUID, User>();
+    private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
 
     public User createUser(String userName, String host) {
         if (findUser(userName) != null) {
