@@ -94,7 +94,7 @@ public class GameEndView implements Serializable {
 
             }
             if (mPlayer.getWins() == winsNeeded) {
-                nameMatchWinner = mPlayer.getPlayer().getName();
+                nameMatchWinner = mPlayer.getName();
             }
         }
 

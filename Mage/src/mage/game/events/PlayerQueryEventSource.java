@@ -50,6 +50,11 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
         dispatcher.addListener(listener);
     }
 
+    @Override
+    public void removeAllListener() {
+        dispatcher.removeAllListener();
+    }
+
     public void ask(UUID playerId, String message) {
         dispatcher.fireEvent(PlayerQueryEvent.askEvent(playerId, message));
     }

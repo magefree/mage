@@ -52,6 +52,12 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
         dispatcher.addListener(listener);
     }
 
+    @Override
+    public void removeAllListener() {
+        dispatcher.removeAllListener();
+    }
+        
+
     public void fireTableEvent(EventType eventType) {
         dispatcher.fireEvent(new TableEvent(eventType));
     }

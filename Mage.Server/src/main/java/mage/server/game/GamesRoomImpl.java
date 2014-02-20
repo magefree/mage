@@ -62,12 +62,12 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     private static final Logger logger = Logger.getLogger(GamesRoomImpl.class);
 
-    private static ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
-    private static List<TableView> tableView = new ArrayList<TableView>();
-    private static List<MatchView> matchView = new ArrayList<MatchView>();
-    private static List<UsersView> usersView = new ArrayList<UsersView>();
+    private static final ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
+    private static List<TableView> tableView = new ArrayList<>();
+    private static List<MatchView> matchView = new ArrayList<>();
+    private static List<UsersView> usersView = new ArrayList<>();
 
-    private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
+    private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
 
     public GamesRoomImpl() {
         updateExecutor.scheduleAtFixedRate(new Runnable() {
@@ -84,9 +84,9 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     private void update() {
-        ArrayList<TableView> tableList = new ArrayList<TableView>();
-        ArrayList<MatchView> matchList = new ArrayList<MatchView>();
-        List<Table> t = new ArrayList<Table>(tables.values());
+        ArrayList<TableView> tableList = new ArrayList<>();
+        ArrayList<MatchView> matchList = new ArrayList<>();
+        List<Table> t = new ArrayList<>(tables.values());
         Collections.sort(t, new TimestampSorter());
         Collections.reverse(t);
         for (Table table: t) {
@@ -109,7 +109,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         }
         tableView = tableList;
         matchView = matchList;
-        List<UsersView> users = new ArrayList<UsersView>();
+        List<UsersView> users = new ArrayList<>();
         for (User user : UserManager.getInstance().getUsers()) {
             StringBuilder sb = new StringBuilder(user.getGameInfo());
             if (!user.isConnected()) {

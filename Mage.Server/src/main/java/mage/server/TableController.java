@@ -62,7 +62,6 @@ import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
 import mage.server.game.PlayerFactory;
-import mage.server.game.ReplayManager;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
@@ -85,7 +84,7 @@ public class TableController {
     private final UUID chatId;
     private final String controllerName;
     private final Table table;
-    private final ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<UUID, UUID>();
+    private final ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<>();
 
     private Match match;
     private MatchOptions options;
@@ -494,7 +493,7 @@ public class TableController {
                     if (opponent.length() > 0) {
                         opponent.append(" - ");
                     }
-                    opponent.append(mPlayer.getPlayer().getName());
+                    opponent.append(mPlayer.getName());
                 }
             }
             ServerMessagesUtil.getInstance().incGamesStarted();
@@ -597,19 +596,13 @@ public class TableController {
                 if (!match.isMatchOver()) {
                     startGame(choosingPlayerId);
                 } else {
-                    this.matchEnd();
-                    if (!ConfigSettings.getInstance().isSaveGameActivated() || match.getGame().isSimulation()) {
-                        match.getGames().clear();
-                    }
+                    this.matchEnd();                   
                     table.endGame();
                 }
             }
             else {
                 // if match has only one game
-                this.matchEnd();
-                if (!ConfigSettings.getInstance().isSaveGameActivated() || match.getGame().isSimulation()) {
-                    match.getGames().clear();
-                }
+                this.matchEnd();                
                 table.endGame();
             }
         } catch (GameException ex) {
@@ -621,29 +614,33 @@ public class TableController {
         for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
             MatchPlayer matchPlayer = match.getPlayer(entry.getValue());
             // opponent(s) left during sideboarding
-            if(!matchPlayer.hasQuit()) {
-                User user = UserManager.getInstance().getUser(entry.getKey());
-                if (user != null) {
-                    if (table.getState().equals(TableState.SIDEBOARDING)) {
-                        StringBuilder sb = new StringBuilder();
-                        if (table.isTournamentSubTable()) {
-                            sb.append("Your tournament match of round ");
-                            sb.append(table.getTournament().getRounds().size());
-                            sb.append(" is over. ");
-                        } else {
-                            sb.append("Match [").append(match.getName()).append("] is over. ");
+            if (matchPlayer != null) {
+                if(!matchPlayer.hasQuit()) {
+                    User user = UserManager.getInstance().getUser(entry.getKey());
+                    if (user != null) {
+                        if (table.getState().equals(TableState.SIDEBOARDING)) {
+                            StringBuilder sb = new StringBuilder();
+                            if (table.isTournamentSubTable()) {
+                                sb.append("Your tournament match of round ");
+                                sb.append(table.getTournament().getRounds().size());
+                                sb.append(" is over. ");
+                            } else {
+                                sb.append("Match [").append(match.getName()).append("] is over. ");
+                            }
+                            if (match.getPlayers().size() > 2) {
+                                sb.append("All your opponents have lost or quit the match.");
+                            } else {
+                                sb.append("Your opponent has quit the match.");
+                            }
+                            user.showUserMessage("Match info", sb.toString());
                         }
-                        if (match.getPlayers().size() > 2) {
-                            sb.append("All your opponents have lost or quit the match.");
-                        } else {
-                            sb.append("Your opponent has quit the match.");
-                        }
-                        user.showUserMessage("Match info", sb.toString());
+                        // remove table from user - table manager holds table for display of finished matches
+                        user.removeTable(entry.getValue());
                     }
-                    // remove table from user - table manager holds table for display of finished matches
-                    user.removeTable(entry.getValue());
-                }
-            }
+                }                
+            }           
+            // free resources no longer needed
+            match.cleanUpOnMatchEnd(ConfigSettings.getInstance().isSaveGameActivated());
         }
     }
 

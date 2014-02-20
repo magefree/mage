@@ -51,8 +51,8 @@ import mage.players.Player;
 public abstract class MatchImpl implements Match {
 
     protected UUID id = UUID.randomUUID();
-    protected List<MatchPlayer> players = new ArrayList<MatchPlayer>();
-    protected List<Game> games = new ArrayList<Game>();
+    protected List<MatchPlayer> players = new ArrayList<>();
+    protected List<Game> games = new ArrayList<>();
     protected MatchOptions options;
 
     protected TableEventSource tableEventSource = new TableEventSource();
@@ -293,7 +293,7 @@ public abstract class MatchImpl implements Match {
         StringBuilder sb = new StringBuilder();
         sb.append("\nMatch score:\n");
         for (MatchPlayer mp :this.getPlayers()) {
-            sb.append("- ").append(mp.getPlayer().getName());
+            sb.append("- ").append(mp.getName());
             sb.append(" (").append(mp.getWins()).append(mp.getWins()==1?" win / ":" wins / ");
             sb.append(mp.getLoses()).append(mp.getLoses()==1?" loss)":" losses)");
             if (mp.hasQuit()) {
@@ -324,7 +324,21 @@ public abstract class MatchImpl implements Match {
         return replayAvailable;
     }
 
+    @Override
     public void setReplayAvailable(boolean replayAvailable) {
         this.replayAvailable = replayAvailable;
     }
+
+    @Override
+    public void cleanUpOnMatchEnd(boolean isSaveGameActivated) {
+        // this.tableEventSource.removeAllListener();
+        // this.tableEventSource = null;
+        for (MatchPlayer matchPlayer: players) {
+            matchPlayer.cleanUpOnMatchEnd();
+        }
+        if (!isSaveGameActivated || this.getGame().isSimulation()) {
+            this.getGames().clear();
+        }         
+    }    
+    
 }

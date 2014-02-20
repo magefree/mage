@@ -35,10 +35,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <E>
  */
 public abstract class EventDispatcher<E extends ExternalEvent> implements Serializable {
 
-    private List<Listener<E>> listeners = new CopyOnWriteArrayList<Listener<E>>();
+    private final List<Listener<E>> listeners = new CopyOnWriteArrayList<>();
 
     public void addListener(Listener<E> listener) {
         if (!listeners.contains(listener)) {
@@ -54,5 +55,9 @@ public abstract class EventDispatcher<E extends ExternalEvent> implements Serial
         for (Listener<E> listener : listeners) {
             listener.event(event);
         }
+    }
+    
+    public void removeAllListener() {
+        listeners.clear();
     }
 }

@@ -39,6 +39,7 @@ import mage.game.Seat;
 import mage.game.Table;
 import mage.game.match.MatchPlayer;
 import mage.game.tournament.TournamentPlayer;
+import org.jboss.logging.Logger;
 
 /**
  *
@@ -58,10 +59,10 @@ public class TableView implements Serializable {
     private Date createTime;
     private TableState tableState;
     private boolean isTournament;
-    private List<SeatView> seats = new ArrayList<SeatView>();
-    private List<UUID> games = new ArrayList<UUID>();
+    private List<SeatView> seats = new ArrayList<>();
+    private List<UUID> games = new ArrayList<>();
 
-    public TableView(Table table) {
+    public TableView(Table table) {    
         this.tableId = table.getId();
         this.gameType = table.getGameType();
         this.tableName = table.getName();
@@ -92,8 +93,8 @@ public class TableView implements Serializable {
                 if (matchPlayer.getPlayer() == null) {
                     sb.append(", ").append("[unknown]");
                     sbScore.append("-").append(matchPlayer.getWins());
-                } else if (!matchPlayer.getPlayer().getName().equals(table.getControllerName())) {
-                    sb.append(", ").append(matchPlayer.getPlayer().getName());
+                } else if (!matchPlayer.getName().equals(table.getControllerName())) {
+                    sb.append(", ").append(matchPlayer.getName());
                     sbScore.append("-").append(matchPlayer.getWins());
                 } else {
                     sbScore.insert(0,matchPlayer.getWins()).insert(0,"Score: ");
@@ -106,7 +107,6 @@ public class TableView implements Serializable {
             } else {
                 this.additionalInfo = sbScore.toString();
             }
-
         } else {
             this.wins = table.getTournament().getOptions().getMatchOptions().getWinsNeeded();
             if (table.getTournament().getOptions().getNumberRounds() > 0) {

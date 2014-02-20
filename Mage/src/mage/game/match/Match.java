@@ -83,4 +83,13 @@ public interface Match {
      */
     boolean isReplayAvailable();
     void setReplayAvailable(boolean replayAvailable);
+    
+    /**
+     * Free resources no longer needed if match ended and only exists for
+     * information purpose.
+     * 
+     * @param isSaveGameActivated
+     */
+    void cleanUpOnMatchEnd(boolean isSaveGameActivated);
+    
 }
