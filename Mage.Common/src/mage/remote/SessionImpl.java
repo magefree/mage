@@ -150,19 +150,37 @@ public class SessionImpl implements Session {
                     break;
             }
             InvokerLocator clientLocator = new InvokerLocator(connection.getURI());
-            Map<String, String> metadata = new HashMap<String, String>();
+            
+            Map<String, String> metadata = new HashMap<>();
             metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
             metadata.put("generalizeSocketException", "true");
             server = (MageServer) TransporterClient.createTransporterClient(clientLocator.getLocatorURI(), MageServer.class, metadata);
 
-            Map<String, String> clientMetadata = new HashMap<String, String>();
+            // http://docs.jboss.org/jbossremoting/docs/guide/2.5/html_single/#d0e1057
+            Map<String, String> clientMetadata = new HashMap<>();
+            
             clientMetadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+                /*  generalizeSocketException
+                 *  If set to false, a failed invocation will be retried in the case of
+                 *  SocketExceptions. If set to true, a failed invocation will be retried in the case of
+                 *  <classname>SocketException</classname>s and also any <classname>IOException</classname>
+                 *  whose message matches the regular expression
+                 *  <code>^.*(?:connection.*reset|connection.*closed|broken.*pipe).*$</code>.
+                 *  See also the "numberOfCallRetries" parameter, above. The default value is false.*/
             clientMetadata.put("generalizeSocketException", "true");
+            
+                /* A remoting server also has the capability to detect when a client is no longer available. 
+                 * This is done by estabilishing a lease with the remoting clients that connect to a server. 
+                 * On the client side, an org.jboss.remoting.LeasePinger periodically sends PING messages to 
+                 * the server, and on the server side an org.jboss.remoting.Lease informs registered listeners 
+                 * if the PING doesn't arrive withing the specified timeout period. */
             clientMetadata.put(Client.ENABLE_LEASE, "true");
+            // Indicated the max number of threads used within oneway thread pool.
+            clientMetadata.put(Client.MAX_NUM_ONEWAY_THREADS, "10");
             clientMetadata.put(Remoting.USE_CLIENT_CONNECTION_IDENTITY, "true");
             callbackClient = new Client(clientLocator, "callback", clientMetadata);
 
-            Map<String, String> listenerMetadata = new HashMap<String, String>();
+            Map<String, String> listenerMetadata = new HashMap<>();
             if (debugMode) {
                 // prevent client from disconnecting while debugging
                 listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "1000000");
@@ -173,7 +191,7 @@ public class SessionImpl implements Session {
             }
             callbackClient.connect(new ClientConnectionListener(), listenerMetadata);
 
-            Map<String, String> callbackMetadata = new HashMap<String, String>();
+            Map<String, String> callbackMetadata = new HashMap<>();
             callbackMetadata.put(Bisocket.IS_CALLBACK_SERVER, "true");
             if (callbackHandler == null) {
                 callbackHandler = new CallbackHandler();

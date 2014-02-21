@@ -10,12 +10,16 @@ import java.util.concurrent.TimeUnit;
  *
  * @author ayrat
  */
+@SuppressWarnings("unchecked")
 public class ThreadUtils {
 
     public static final ThreadPoolExecutor threadPool;
     public static final ThreadPoolExecutor threadPool2;
     private static int threadCount;
     static {
+        /** used in CardInfoPaneImpl
+         * 
+         */
         threadPool = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
             @Override
             public Thread newThread (Runnable runnable) {
@@ -26,6 +30,10 @@ public class ThreadUtils {
             }
         });
         threadPool.prestartAllCoreThreads();
+        
+        /**
+         * Used for MageActionCallback 
+         */
         threadPool2 = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
             @Override
             public Thread newThread (Runnable runnable) {
