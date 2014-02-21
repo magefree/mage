@@ -617,7 +617,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
                 session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"));
                 session.joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"));
-                session.startGame(roomId, table.getTableId());
+                session.startMatch(roomId, table.getTableId());
             } catch (HeadlessException ex) {
                 handleError(ex);
             }

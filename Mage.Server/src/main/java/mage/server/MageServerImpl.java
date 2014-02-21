@@ -354,16 +354,16 @@ public class MageServerImpl implements MageServer {
         });
     }
 
-    @Override
-    public void startChallenge(final String sessionId, final UUID roomId, final UUID tableId, final UUID challengeId) throws MageException {
-        execute("startChallenge", sessionId, new Action() {
-            @Override
-            public void execute() {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                TableManager.getInstance().startChallenge(userId, roomId, tableId, challengeId);
-            }
-        });
-    }
+//    @Override
+//    public void startChallenge(final String sessionId, final UUID roomId, final UUID tableId, final UUID challengeId) throws MageException {
+//        execute("startChallenge", sessionId, new Action() {
+//            @Override
+//            public void execute() {
+//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+//                TableManager.getInstance().startChallenge(userId, roomId, tableId, challengeId);
+//            }
+//        });
+//    }
 
     @Override
     public void startTournament(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {

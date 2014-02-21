@@ -86,15 +86,15 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     private void update() {
         ArrayList<TableView> tableList = new ArrayList<>();
         ArrayList<MatchView> matchList = new ArrayList<>();
-        List<Table> t = new ArrayList<>(tables.values());
-        Collections.sort(t, new TimestampSorter());
-        Collections.reverse(t);
-        for (Table table: t) {
+        List<Table> allTables = new ArrayList<>(tables.values());
+        Collections.sort(allTables, new TimestampSorter());
+        Collections.reverse(allTables);
+        for (Table table: allTables) {
             if (table.getState() != TableState.FINISHED) {
                 tableList.add(new TableView(table));
             }
-            else if (matchList.size() < 50) {
-                if (table.isTournament()) {
+            else if (matchList.size() < 50) { 
+                 if (table.isTournament()) {
                     matchList.add(new MatchView(table));
                 } else {
                     matchList.add(new MatchView(table.getMatch()));
@@ -173,9 +173,13 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     @Override
     public void removeTable(UUID tableId) {
-        tables.remove(tableId);
-        if (logger.isDebugEnabled()) {
-            logger.debug("Table removed: " + tableId);
+        Table table = tables.get(tableId);
+        if (table != null) {
+            table.cleanUp();
+            tables.remove(tableId);
+            if (logger.isDebugEnabled()) {
+                logger.debug("Table removed: " + tableId);
+            }
         }
     }
 

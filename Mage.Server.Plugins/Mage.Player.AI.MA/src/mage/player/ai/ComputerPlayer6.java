@@ -1370,4 +1370,12 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         }
         return sb.toString();
     }
+
+    @Override
+    public void cleanUpOnMatchEnd() {
+        root = null;
+        super.cleanUpOnMatchEnd();
+    }
+
+
 }

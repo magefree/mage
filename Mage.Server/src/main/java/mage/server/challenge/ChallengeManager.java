@@ -7,6 +7,8 @@ import mage.constants.Zone;
 import mage.game.match.Match;
 
 /**
+ * C U R R E N T L Y    U N U S E D 
+ *
  * Loads challenges from scenarios.
  * Configure games by initializing starting game board.
  */

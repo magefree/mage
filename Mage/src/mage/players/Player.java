@@ -432,4 +432,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return true if playerToCheckId belongs to an opponent
      */
     boolean hasOpponent(UUID playerToCheckId, Game game);
+
+    /**
+     *  Free resources on match end
+     */
+    void cleanUpOnMatchEnd();
 }

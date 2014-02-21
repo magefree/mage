@@ -49,7 +49,7 @@ public class ChatManager {
 
     private ChatManager() {}
 
-    private ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<UUID, ChatSession>();
+    private final ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<>();
 
     public UUID createChatSession() {
         ChatSession chatSession = new ChatSession();

@@ -93,9 +93,9 @@ public class GameController implements GameCallback {
     private static final ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
     private static final Logger logger = Logger.getLogger(GameController.class);
 
-    private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<UUID, GameSession>();
-    private ConcurrentHashMap<UUID, GameWatcher> watchers = new ConcurrentHashMap<UUID, GameWatcher>();
-    private ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<UUID, PriorityTimer>();
+    private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<UUID, GameWatcher> watchers = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<>();
     
     private ConcurrentHashMap<UUID, UUID> userPlayerMap;
     private UUID gameSessionId;
@@ -121,6 +121,10 @@ public class GameController implements GameCallback {
             }
         }
         init();
+    }
+
+    public void cleanUp() {
+        ChatManager.getInstance().destroyChatSession(chatId);
     }
 
     private void init() {
@@ -383,7 +387,7 @@ public class GameController implements GameCallback {
         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
         Card card = cardInfo != null ? cardInfo.getCard() : null;
         if (card != null) {
-            Set<Card> cards = new HashSet<Card>();
+            Set<Card> cards = new HashSet<>();
             cards.add(card);
             game.loadCards(cards, playerId);
             card.moveToZone(Zone.HAND, null, game, false);

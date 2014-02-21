@@ -129,7 +129,13 @@ public class MatchPlayer {
     public void cleanUpOnMatchEnd() {
         // Free resources that are not needed after match end
         this.deck = null;
+        this.player.cleanUpOnMatchEnd();
         // this.player = null;
+    }
+
+    public void cleanUp() {
+        // Free resources that are not needed after match end
+        this.player = null;
     }
 
     public String getName() {

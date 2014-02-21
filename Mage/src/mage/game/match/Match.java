@@ -91,5 +91,10 @@ public interface Match {
      * @param isSaveGameActivated
      */
     void cleanUpOnMatchEnd(boolean isSaveGameActivated);
+
+    /**
+     * Free all possible resources
+     */
+    void cleanUp();
     
 }

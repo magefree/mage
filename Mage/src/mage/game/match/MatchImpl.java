@@ -340,5 +340,14 @@ public abstract class MatchImpl implements Match {
             this.getGames().clear();
         }         
     }    
-    
+
+    @Override
+    public void cleanUp() {
+        for (MatchPlayer matchPlayer: players) {
+            matchPlayer.cleanUpOnMatchEnd();
+        }
+        this.getGames().clear();
+    }
+
+
 }

@@ -878,7 +878,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean startGame(UUID roomId, UUID tableId) {
+    public boolean startMatch(UUID roomId, UUID tableId) {
         try {
             if (isConnected()) {
                 server.startMatch(sessionId, roomId, tableId);
@@ -886,8 +886,6 @@ public class SessionImpl implements Session {
             }
         } catch (MageException ex) {
             handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);        
         }
         return false;
     }
@@ -907,20 +905,20 @@ public class SessionImpl implements Session {
         return false;
     }
 
-    @Override
-    public boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId) {
-        try {
-            if (isConnected()) {
-                server.startChallenge(sessionId, roomId, tableId, challengeId);
-                return true;
-            }
-        } catch (MageException ex) {
-            handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);        
-        }
-        return false;
-    }
+//    @Override
+//    public boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId) {
+//        try {
+//            if (isConnected()) {
+//                server.startChallenge(sessionId, roomId, tableId, challengeId);
+//                return true;
+//            }
+//        } catch (MageException ex) {
+//            handleMageException(ex);
+//        } catch (Throwable t) {
+//            handleThrowable(t);
+//        }
+//        return false;
+//    }
 
     @Override
     public boolean submitDeck(UUID tableId, DeckCardLists deck) {

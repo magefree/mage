@@ -214,7 +214,7 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     protected List<TournamentPlayer> getActivePlayers() {
-        List<TournamentPlayer> activePlayers = new ArrayList<TournamentPlayer>();
+        List<TournamentPlayer> activePlayers = new ArrayList<>();
         for (TournamentPlayer player: players.values()) {
             if (!player.getEliminated()) {
                 activePlayers.add(player);
@@ -324,6 +324,7 @@ public abstract class TournamentImpl implements Tournament {
             player.setConstructing();
             new Thread(
                 new Runnable() {
+                    @Override
                     public void run() {
                         player.getPlayer().construct(TournamentImpl.this, player.getDeck());
                     }
@@ -407,6 +408,13 @@ public abstract class TournamentImpl implements Tournament {
             if (options.getNumberRounds() == 0) { // if no swiss, last active is the winner
                 winner.setStateInfo("Winner");
             }
+        }
+    }
+
+    @Override
+    public void cleanUpOnTournamentEnd() {
+        for(TournamentPlayer tournamentPlayer: players.values()) {
+            tournamentPlayer.CleanUpOnTournamentEnd();
         }
     }
 

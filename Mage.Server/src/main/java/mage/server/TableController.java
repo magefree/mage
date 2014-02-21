@@ -399,42 +399,48 @@ public class TableController {
 
     }
 
+
+//    public synchronized void startChallenge(UUID userId, UUID challengeId) {
+//        if (userId.equals(this.userId)) {
+//            try {
+//                match.startMatch();
+//                match.startGame();
+//                table.initGame();
+//                GameOptions gameOptions = new GameOptions();
+//                gameOptions.testMode = true;
+////                match.getGame().setGameOptions(gameOptions);
+//                GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), null);
+//                ChallengeManager.getInstance().prepareChallenge(getPlayerId(), match);
+//                for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+//                    UserManager.getInstance().getUser(entry.getKey()).gameStarted(match.getGame().getId(), entry.getValue());
+//                }
+//            } catch (GameException ex) {
+//                logger.fatal(null, ex);
+//            }
+//        }
+//    }
+
+//    private UUID getPlayerId() throws GameException {
+//        UUID playerId = null;
+//        for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
+//            playerId = entry.getValue();
+//            break;
+//        }
+//        if (playerId == null) {
+//            throw new GameException("Couldn't find a player in challenge mode.");
+//        }
+//        return playerId;
+//    }
+
+    /**
+     * Used from non tournament match to start
+     * 
+     * @param userId owner of the tabel
+     */
     public synchronized void startMatch(UUID userId) {
-        if (userId.equals(this.userId)) {
+        if (isOwner(userId)) {
             startMatch();
         }
-    }
-
-    public synchronized void startChallenge(UUID userId, UUID challengeId) {
-        if (userId.equals(this.userId)) {
-            try {
-                match.startMatch();
-                match.startGame();
-                table.initGame();
-                GameOptions gameOptions = new GameOptions();
-                gameOptions.testMode = true;
-//                match.getGame().setGameOptions(gameOptions);
-                GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), null);
-                ChallengeManager.getInstance().prepareChallenge(getPlayerId(), match);
-                for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-                    UserManager.getInstance().getUser(entry.getKey()).gameStarted(match.getGame().getId(), entry.getValue());
-                }
-            } catch (GameException ex) {
-                logger.fatal(null, ex);
-            }
-        }
-    }
-
-    private UUID getPlayerId() throws GameException {
-        UUID playerId = null;
-        for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
-            playerId = entry.getValue();
-            break;
-        }
-        if (playerId == null) {
-            throw new GameException("Couldn't find a player in challenge mode.");
-        }
-        return playerId;
     }
 
     public synchronized void startMatch() {
@@ -576,11 +582,16 @@ public class TableController {
         return options;
     }
 
-    public void endGame() {
+    /**
+     * Ends the current game and starts if neccessary the next game
+     *
+     * @return true if table can be closed
+     */
+    public boolean endGameAndStartNextGame() {
+        boolean matchIsOver = false;
         // get player that chooses who goes first
         UUID choosingPlayerId = match.getChooser();
         match.endGame();
-        table.endGame();
         if (ConfigSettings.getInstance().isSaveGameActivated() && !match.getGame().isSimulation()) {
             if (GameManager.getInstance().saveGame(match.getGame().getId())) {
                 match.setReplayAvailable(true);
@@ -596,18 +607,30 @@ public class TableController {
                 if (!match.isMatchOver()) {
                     startGame(choosingPlayerId);
                 } else {
-                    this.matchEnd();                   
-                    table.endGame();
+                    matchIsOver = true;
+                    closeTable();
                 }
             }
             else {
                 // if match has only one game
-                this.matchEnd();                
-                table.endGame();
+                matchIsOver = true;
+                closeTable();
             }
         } catch (GameException ex) {
             logger.fatal(null, ex);
         }
+        return matchIsOver;
+    }
+
+    /**
+     * Tables of normal matches or tournament sub tables are no longer
+     * needed, if the match ends.
+     * 
+     */
+    private void closeTable() {
+        this.matchEnd();
+        table.closeTable();
+        ChatManager.getInstance().destroyChatSession(chatId);
     }
 
     private void matchEnd() {
@@ -639,9 +662,9 @@ public class TableController {
                     }
                 }                
             }           
-            // free resources no longer needed
-            match.cleanUpOnMatchEnd(ConfigSettings.getInstance().isSaveGameActivated());
         }
+        // free resources no longer needed
+        match.cleanUpOnMatchEnd(ConfigSettings.getInstance().isSaveGameActivated());
     }
 
     private synchronized void setupTimeout(int seconds) {

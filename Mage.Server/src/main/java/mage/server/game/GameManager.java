@@ -48,7 +48,7 @@ public class GameManager {
 
     private GameManager() {}
 
-    private ConcurrentHashMap<UUID, GameController> gameControllers = new ConcurrentHashMap<UUID, GameController>();
+    private final ConcurrentHashMap<UUID, GameController> gameControllers = new ConcurrentHashMap<>();
 
     public UUID createGameSession(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId) {
         GameController gameController = new GameController(game, userPlayerMap, tableId, choosingPlayerId);
@@ -62,9 +62,9 @@ public class GameManager {
         }
     }
 
-    public void destroyChatSession(UUID gameId) {
-        gameControllers.remove(gameId);
-    }
+//    public void destroyChatSession(UUID gameId) {
+//        gameControllers.remove(gameId);
+//    }
 
     public UUID getChatId(UUID gameId) {
         if (gameControllers.containsKey(gameId)) {
@@ -145,11 +145,11 @@ public class GameManager {
         }
     }
 
-    public void removeSession(UUID userId) {
-        for (GameController controller: gameControllers.values()) {
-            controller.kill(userId);
-        }
-    }
+//    public void removeSession(UUID userId) {
+//        for (GameController controller: gameControllers.values()) {
+//            controller.kill(userId);
+//        }
+//    }
 
     public void kill(UUID gameId, UUID userId) {
         if (gameControllers.containsKey(gameId)) {
@@ -177,7 +177,11 @@ public class GameManager {
     }
 
     public void removeGame(UUID gameId) {
-        gameControllers.remove(gameId);
+        GameController gameController = gameControllers.get(gameId);
+        if (gameController != null) {
+            gameController.cleanUp();
+            gameControllers.remove(gameId);
+        }
     }
 
     public boolean saveGame(UUID gameId) {

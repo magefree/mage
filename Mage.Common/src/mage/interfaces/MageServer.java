@@ -127,7 +127,7 @@ public interface MageServer {
     DraftPickView sendCardPick(UUID draftId, String sessionId, UUID cardId) throws MageException;
 
     //challenge methods
-    void startChallenge(String sessionId, UUID roomId, UUID tableId, UUID challengeId) throws MageException;
+    // void startChallenge(String sessionId, UUID roomId, UUID tableId, UUID challengeId) throws MageException;
 
     //replay methods
     void replayGame(UUID gameId, String sessionId) throws MageException;

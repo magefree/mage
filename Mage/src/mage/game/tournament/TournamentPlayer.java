@@ -163,5 +163,12 @@ public class TournamentPlayer {
         this.doneConstructing = true;
     }
 
+    /**
+     * Free resources no longer needed if tournament has ended
+     * 
+     */
+    public void CleanUpOnTournamentEnd() {
+        this.deck = null;
+    }
 }
 

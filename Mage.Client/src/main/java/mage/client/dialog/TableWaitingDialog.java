@@ -245,7 +245,7 @@ public class TableWaitingDialog extends MageDialog {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         if (!isTournament) {
-            session.startGame(roomId, tableId);
+            session.startMatch(roomId, tableId);
         }
         else {
             session.startTournament(roomId, tableId);

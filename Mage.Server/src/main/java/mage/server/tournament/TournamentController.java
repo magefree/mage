@@ -68,12 +68,12 @@ public class TournamentController {
 
     private static final Logger logger = Logger.getLogger(TournamentController.class);
 
-    private UUID chatId;
-    private UUID tableId;
+    private final UUID chatId;
+    private final UUID tableId;
     private boolean started = false;
-    private Tournament tournament;
-    private ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<UUID, UUID>();
-    private ConcurrentHashMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<UUID, TournamentSession>();
+    private final Tournament tournament;
+    private ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<>();
 
     private boolean abort = false;
 
@@ -197,7 +197,9 @@ public class TournamentController {
             tournamentSession.tournamentOver();
             tournamentSession.removeTournament();
         }
+        this.tournamentSessions.clear();
         TableManager.getInstance().endTournament(tableId, tournament);
+        tournament.cleanUpOnTournamentEnd();
 
     }
 
@@ -211,7 +213,7 @@ public class TournamentController {
             TournamentPlayer player2 = pair.getPlayer2();
             tableManager.addPlayer(getPlayerSessionId(player1.getPlayer().getId()), table.getId(), player1.getPlayer(), player1.getPlayerType(), player1.getDeck());
             tableManager.addPlayer(getPlayerSessionId(player2.getPlayer().getId()), table.getId(), player2.getPlayer(), player2.getPlayerType(), player2.getDeck());
-            tableManager.startMatch(null, table.getId());
+            tableManager.startTournamentSubMatch(null, table.getId());
             pair.setMatch(tableManager.getMatch(table.getId()));
             pair.setTableId(table.getId());
             player1.setState(TournamentPlayerState.DUELING);

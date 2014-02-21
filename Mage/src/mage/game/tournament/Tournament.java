@@ -83,4 +83,6 @@ public interface Tournament {
     void setTournamentType(TournamentType tournamentType);
 
     int getNumberRounds();
+    void cleanUpOnTournamentEnd();
+
 }

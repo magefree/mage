@@ -61,7 +61,7 @@ public interface PlayerActions {
 
     boolean startTournament(UUID roomId, UUID tableId);
 
-    boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId);
+    // boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId);
 
     boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill);
 

@@ -62,8 +62,8 @@ public class TableManager {
     private static final TableManager INSTANCE = new TableManager();
     private static final Logger logger = Logger.getLogger(TableManager.class);
 
-    private final ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<UUID, TableController>();
-    private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
+    private final ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
 
     /**
      * Defines how often checking process should be run on server.
@@ -212,23 +212,36 @@ public class TableManager {
         return null;
     }
 
+    /**
+     * Starts the Match from a non tournament table
+     *
+     * @param userId table owner
+     * @param roomId
+     * @param tableId
+     */
     public void startMatch(UUID userId, UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startMatch(userId);
         }
     }
 
-    public void startMatch(UUID roomId, UUID tableId) {
+    /**
+     * Used from tournament to start the sub matches from tournament
+     *
+     * @param roomId
+     * @param tableId
+     */
+    public void startTournamentSubMatch(UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startMatch();
         }
     }
 
-    public void startChallenge(UUID userId, UUID roomId, UUID tableId, UUID challengeId) {
-        if (controllers.containsKey(tableId)) {
-            controllers.get(tableId).startChallenge(userId, challengeId);
-        }
-    }
+//    public void startChallenge(UUID userId, UUID roomId, UUID tableId, UUID challengeId) {
+//        if (controllers.containsKey(tableId)) {
+//            controllers.get(tableId).startChallenge(userId, challengeId);
+//        }
+//    }
 
     public void startTournament(UUID userId, UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
@@ -258,7 +271,9 @@ public class TableManager {
 
     public void endGame(UUID tableId) {
         if (controllers.containsKey(tableId)) {
-            controllers.get(tableId).endGame();
+            if (controllers.get(tableId).endGameAndStartNextGame()) {
+                removeTable(tableId);
+            }
         }
     }
 
@@ -303,7 +318,10 @@ public class TableManager {
             Table table = tables.get(tableId);
             controllers.remove(tableId);
             tables.remove(tableId);
-            GamesRoomManager.getInstance().removeTable(tableId);
+            // If table is not finished, the table has to removed completly (if finished it will be removed in GamesRoomImpl.Update())
+            if (!table.getState().equals(TableState.FINISHED)) {
+                GamesRoomManager.getInstance().removeTable(tableId);
+            }
             if (table.getMatch() != null && table.getMatch().getGame() != null) {
                 table.getMatch().getGame().end();
             }
@@ -314,7 +332,7 @@ public class TableManager {
         logger.debug("Table expire checking...");
 
         Date now = new Date();
-        List<UUID> toRemove = new ArrayList<UUID>();
+        List<UUID> toRemove = new ArrayList<>();
         for (Table table : tables.values()) {
             if (!table.getState().equals(TableState.FINISHED)) {
                 // remove all not finished tables created more than expire_time ago

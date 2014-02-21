@@ -37,7 +37,7 @@ import java.util.UUID;
  */
 public interface GamePlay {
 
-    boolean startGame(UUID roomId, UUID tableId);
+    boolean startMatch(UUID roomId, UUID tableId);
 
     boolean watchGame(UUID gameId);
 

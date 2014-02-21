@@ -133,16 +133,18 @@ public class GameEndDialog extends MageDialog {
         // get game log
         try {            
             GamePanel gamePanel = MageFrame.getGame(gameEndView.getMatchView().getGames().get(gameEndView.getMatchView().getGames().size()-1));
-            SimpleDateFormat sdf = new SimpleDateFormat();
-            sdf.applyPattern( "yyyyMMdd_HHmmss" );
-            String fileName = new StringBuilder(dir).append(File.separator)
-                    .append(sdf.format(gameEndView.getStartTime()))
-                    .append("_").append(gameEndView.getMatchView().getGameType())
-                    .append("_").append(gameEndView.getMatchView().getGames().size())
-                    .append(".txt").toString();
-            PrintWriter out = new PrintWriter(fileName);
-            out.print(gamePanel.getGameLog());
-            out.close();
+            if (gamePanel != null) {
+                SimpleDateFormat sdf = new SimpleDateFormat();
+                sdf.applyPattern( "yyyyMMdd_HHmmss" );
+                String fileName = new StringBuilder(dir).append(File.separator)
+                        .append(sdf.format(gameEndView.getStartTime()))
+                        .append("_").append(gameEndView.getMatchView().getGameType())
+                        .append("_").append(gameEndView.getMatchView().getGames().size())
+                        .append(".txt").toString();
+                PrintWriter out = new PrintWriter(fileName);
+                out.print(gamePanel.getGameLog());
+                out.close();
+            }
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "Error while writing game log to file\n\n" + ex, "Error writing gamelog", JOptionPane.ERROR_MESSAGE);
         }

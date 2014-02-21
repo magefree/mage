@@ -2158,5 +2158,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         return game.isOpponent(this, playerToCheckId);
     }
 
+    @Override
+    public void cleanUpOnMatchEnd() {
+        
+    }
+
    
 }

@@ -126,7 +126,7 @@ public class LoadTest {
             }
 
             /*** Start game ***/
-            session.startGame(roomId, table.getTableId());
+            session.startMatch(roomId, table.getTableId());
 
             Thread.sleep(100);
         }
@@ -203,7 +203,7 @@ public class LoadTest {
         }
 
         /*** Start game ***/
-        session.startGame(roomId, table.getTableId());
+        session.startMatch(roomId, table.getTableId());
 
         while (!mageClient.isGameOver()) {
             Thread.sleep(1000);

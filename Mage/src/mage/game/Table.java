@@ -125,8 +125,22 @@ public class Table implements Serializable {
         state = TableState.CONSTRUCTING;
     }
 
-    public void endGame() {
+    /**
+     * All activities of the table end
+     * (only replay of games (if active) and display tournament results)
+     *
+     */
+    public void closeTable() {
         state = TableState.FINISHED;
+        this.validator = null;
+    }
+
+    /**
+     * Complete remove of the table, release all objects
+     * 
+     */
+    public void cleanUp() {
+        match.cleanUpOnMatchEnd(isTournament);
     }
 
     public String getGameType() {
