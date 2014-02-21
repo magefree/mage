@@ -32,6 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.ExileFromHandCost;
@@ -61,11 +62,11 @@ public class ForceOfWill extends CardImpl<ForceOfWill> {
         FilterOwnedCard filter = new FilterOwnedCard("blue card from your hand");
         filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
-        CostsImpl<Cost> costs = new CostsImpl<Cost>();
-        costs.add(new PayLifeCost(1));
-        costs.add(new ExileFromHandCost(new TargetCardInHand(filter)));
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl("Pay 1 life and exile a blue card from your hand rather than pay Force of Will's mana cost", costs));
-        
+
+        AlternativeCostSourceAbility ability = new AlternativeCostSourceAbility(new PayLifeCost(1));
+        ability.addCost(new ExileFromHandCost(new TargetCardInHand(filter)));
+        this.addAbility(ability);          
+               
         // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());

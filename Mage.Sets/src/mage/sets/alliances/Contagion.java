@@ -32,9 +32,11 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.ExileFromHandCost;
+import mage.abilities.costs.common.GainLifeOpponentCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -57,21 +59,21 @@ import mage.target.common.TargetCreaturePermanentAmount;
  * @author Plopman
  */
 public class Contagion extends CardImpl<Contagion> {
-
+   
     public Contagion(UUID ownerId) {
         super(ownerId, 4, "Contagion", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
         this.expansionSetCode = "ALL";
 
         this.color.setBlack(true);
 
-        // You may pay 1 life and exile a black card from your hand rather than pay Contagion's mana cost.
         FilterOwnedCard filter = new FilterOwnedCard("black card from your hand");
         filter.add(new ColorPredicate(ObjectColor.BLACK));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
-        CostsImpl<Cost> costs = new CostsImpl<Cost>();
-        costs.add(new PayLifeCost(1));
-        costs.add(new ExileFromHandCost(new TargetCardInHand(filter)));
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl("Pay 1 life and exile a black card from your hand rather than pay {source}'s mana cost", costs));
+        
+        // You may pay 1 life and exile a black card from your hand rather than pay Contagion's mana cost.
+        AlternativeCostSourceAbility ability = new AlternativeCostSourceAbility(new PayLifeCost(1));
+        ability.addCost(new ExileFromHandCost(new TargetCardInHand(filter)));
+        this.addAbility(ability);  
         
         // Distribute two -2/-1 counters among one or two target creatures.
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(2));

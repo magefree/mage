@@ -47,7 +47,7 @@ import mage.players.Player;
  */
 public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostSourceAbility> implements AlternativeSourceCosts {
    
-    protected List<AlternativeCost2> alternateCosts = new LinkedList<AlternativeCost2>();
+    protected List<AlternativeCost2> alternateCosts = new LinkedList<>();
     protected Condition condition;
     protected String rule;
     
@@ -65,6 +65,11 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
         this.setRuleAtTheTop(true);
         this.condition = condition;
         this.rule = rule;
+    }
+
+    @Override
+    public void addCost(Cost cost) {
+        this.convertToAlternativeCostAndAdd(cost);
     }
     
     private void convertToAlternativeCostAndAdd(Cost cost) {        
@@ -97,12 +102,11 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
         if (ability instanceof SpellAbility) {
             Player player = game.getPlayer(controllerId);
             if (player != null) {
-                for (AlternativeCost2 alternateCost: alternateCosts) {
-                    if (alternateCost.canPay(sourceId, controllerId, game) &&
-                        player.chooseUse(Outcome.Benefit, new StringBuilder("Pay alternative costs: ").append(alternateCost.getText()).append(" ?").toString(), game)) {
+                if (player.chooseUse(Outcome.Detriment, "Pay alternative costs?", game)) {
+                    ability.getManaCostsToPay().clear();
+                    ability.getCosts().clear();
+                    for (AlternativeCost2 alternateCost: alternateCosts) {
                         alternateCost.activate();
-                        ability.getManaCostsToPay().clear();
-                        ability.getCosts().clear();
                         for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
                             if (cost instanceof ManaCostsImpl) {
@@ -112,7 +116,7 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
                             }
                         }
                     }
-                }
+                }                
             }
         }
         return isActivated();
@@ -137,9 +141,7 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
     public String getRule() {
         if (rule != null) {
             return rule;
-        }
-// You may exile a black card from your hand rather than pay Unmask's mana cost.
-        
+        }        
        StringBuilder sb = new StringBuilder();
        if (condition != null) {
            sb.append(condition.toString());
