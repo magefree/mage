@@ -70,7 +70,7 @@ public class ExileFromHandCost extends CostImpl<ExileFromHandCost> {
                 if (card == null) {
                     return false;
                 }
-                this.cards.add(card.copy());
+                this.cards.add(card);
                 paid |= player.moveCardToExileWithInfo(card, null, null, ability.getSourceId(), game, Zone.HAND);
             }
         }

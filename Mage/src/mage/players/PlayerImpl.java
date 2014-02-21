@@ -2132,6 +2132,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     .append(" moves ").append(card.getName()).append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
                     .append("to exile").toString());
+            result = true;
         }
         return result;
     }

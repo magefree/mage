@@ -28,17 +28,14 @@
 package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
-import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
