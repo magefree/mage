@@ -30,12 +30,15 @@ package mage.sets.magic2014;
 import java.util.LinkedList;
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -45,6 +48,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.WatcherImpl;
 
@@ -53,8 +57,6 @@ import mage.watchers.WatcherImpl;
  * @author LevelX2
  */
 public class ColossalWhale extends CardImpl<ColossalWhale> {
-
-    private UUID exileId = UUID.randomUUID();
 
     public ColossalWhale(UUID ownerId) {
         super(ownerId, 48, "Colossal Whale", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
@@ -68,8 +70,8 @@ public class ColossalWhale extends CardImpl<ColossalWhale> {
         // Islandwalk
         this.addAbility(new IslandwalkAbility());
         // Whenever Colossal Whale attacks, you may exile target creature defending player controls until Colossal Whale leaves the battlefield.
-        this.addAbility(new ColossalWhaleAbility(exileId));
-        this.addWatcher(new ColossalWhaleWatcher(exileId));
+        this.addAbility(new ColossalWhaleAbility());
+        this.addWatcher(new ColossalWhaleWatcher());
 
 
     }
@@ -86,9 +88,9 @@ public class ColossalWhale extends CardImpl<ColossalWhale> {
 
 class ColossalWhaleAbility extends TriggeredAbilityImpl<ColossalWhaleAbility> {
 
-    public ColossalWhaleAbility(UUID exileId) {
+    public ColossalWhaleAbility() {
         super(Zone.BATTLEFIELD, null);
-        this.addEffect(new ExileTargetEffect(exileId,"Colossal Whale"));
+        this.addEffect(new ColossalWhaleExileEffect());
     }
 
     public ColossalWhaleAbility(final ColossalWhaleAbility ability) {
@@ -113,7 +115,7 @@ class ColossalWhaleAbility extends TriggeredAbilityImpl<ColossalWhaleAbility> {
 
     @Override
     public String getRule() {
-        return "Whenever {this} attacks, you may exile target creature defending player controls until {this} leaves the battlefield.";
+        return new StringBuilder("Whenever {this} attacks, ").append(super.getRule()).toString();
     }
 
     @Override
@@ -122,31 +124,57 @@ class ColossalWhaleAbility extends TriggeredAbilityImpl<ColossalWhaleAbility> {
     }
 }
 
+class ColossalWhaleExileEffect extends OneShotEffect<ColossalWhaleExileEffect> {
+
+    public ColossalWhaleExileEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "you may exile target creature defending player controls until {this} leaves the battlefield";
+    }
+
+    public ColossalWhaleExileEffect(final ColossalWhaleExileEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ColossalWhaleExileEffect copy() {
+        return new ColossalWhaleExileEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        // If Chained to the Rocks leaves the battlefield before its triggered ability resolves,
+        // the target creature won't be exiled.
+        if (permanent != null) {
+            new ExileTargetEffect(source.getSourceId(), permanent.getName()).apply(game, source);
+        }
+        return false;
+    }
+}
+
 class ColossalWhaleWatcher extends WatcherImpl<ColossalWhaleWatcher> {
 
-    private UUID exileId;
-
-    ColossalWhaleWatcher (UUID exileId) {
+    ColossalWhaleWatcher () {
         super("BattlefieldLeft", WatcherScope.CARD);
-        this.exileId = exileId;
     }
 
     ColossalWhaleWatcher(final ColossalWhaleWatcher watcher) {
         super(watcher);
-        this.exileId = watcher.exileId;
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(sourceId)) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                ExileZone exile = game.getExile().getExileZone(exileId);
-                if (exile != null) {
-                    LinkedList<UUID> cards = new LinkedList<UUID>(exile);
+                ExileZone exile = game.getExile().getExileZone(this.getSourceId());
+                Card sourceCard = game.getCard(this.getSourceId());
+                if (exile != null && sourceCard != null) {
+                    LinkedList<UUID> cards = new LinkedList<>(exile);
                     for (UUID cardId: cards) {
                         Card card = game.getCard(cardId);
                         card.moveToZone(Zone.BATTLEFIELD, this.getSourceId(), game, false);
+                        game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(card.getName()).append(" was returned to battlefield from exile").toString());
                     }
                     exile.clear();
                 }
