@@ -27,20 +27,19 @@
  */
 package mage.abilities.effects.common.continious;
 
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-
-import java.util.UUID;
 import mage.util.CardUtil;
 
 /**
@@ -62,6 +61,9 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
     }
 
     /**
+     * @param power
+     * @param toughness
+     * @param duration
      * @param lockedIn if true, power and toughness will be calculated only once, when the ability resolves
      */
     public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn) {

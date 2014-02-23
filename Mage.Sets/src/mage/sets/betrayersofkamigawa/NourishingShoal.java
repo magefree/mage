@@ -28,14 +28,14 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
-import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.dynamicvalue.common.ExileFromHandCostCardConvertedMana;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -48,8 +48,6 @@ import mage.target.common.TargetCardInHand;
  */
 public class NourishingShoal extends CardImpl<NourishingShoal> {
 
-    private static final String ALTERNATIVE_COST_DESCRIPTION = "You may exile a green card with converted mana cost X from your hand rather than pay Nourishing Shoal's mana cost";
-
     public NourishingShoal(UUID ownerId) {
         super(ownerId, 137, "Nourishing Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}");
         this.expansionSetCode = "BOK";
@@ -57,10 +55,10 @@ public class NourishingShoal extends CardImpl<NourishingShoal> {
         this.color.setGreen(true);
 
         // You may exile a green card with converted mana cost X from your hand rather than pay Nourishing Shoal's mana cost.
-        FilterOwnedCard filter = new FilterOwnedCard("green card from your hand");
+        FilterOwnedCard filter = new FilterOwnedCard("a green card with converted mana cost X from your hand");
         filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, new ExileFromHandCost(new TargetCardInHand(filter))));
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
 
         // You gain X life.
         this.getSpellAbility().addEffect(new GainLifeEffect(new ExileFromHandCostCardConvertedMana()));

@@ -28,19 +28,18 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ExileFromHandCostCardConvertedMana;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -59,8 +58,6 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ShiningShoal extends CardImpl<ShiningShoal> {
 
-    private static final String ALTERNATIVE_COST_DESCRIPTION = "You may exile a white card with converted mana cost X from your hand rather than pay Shining Shoal's mana cost";
-
     public ShiningShoal(UUID ownerId) {
         super(ownerId, 21, "Shining Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
         this.expansionSetCode = "BOK";
@@ -68,10 +65,10 @@ public class ShiningShoal extends CardImpl<ShiningShoal> {
         this.color.setWhite(true);
 
         // You may exile a white card with converted mana cost X from your hand rather than pay Shining Shoal's mana cost
-        FilterOwnedCard filter = new FilterOwnedCard("white card from your hand");
+        FilterOwnedCard filter = new FilterOwnedCard("a white card with converted mana cost X from your hand");
         filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, new ExileFromHandCost(new TargetCardInHand(filter))));
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
 
         // The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to target creature or player instead.
         this.getSpellAbility().addEffect(new ShiningShoalPreventDamageTargetEffect(Duration.EndOfTurn, new ExileFromHandCostCardConvertedMana()));
@@ -92,7 +89,7 @@ public class ShiningShoal extends CardImpl<ShiningShoal> {
 
 class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl<ShiningShoalPreventDamageTargetEffect> {
 
-    private DynamicValue dynamicAmount;
+    private final DynamicValue dynamicAmount;
     private int amount;
 
     public ShiningShoalPreventDamageTargetEffect(Duration duration, DynamicValue dynamicAmount) {
@@ -126,7 +123,7 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl<Shining
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
-            int prevented = 0;
+            int prevented;
             if (event.getAmount() >= this.amount) {
                 int damage = amount;
                 event.setAmount(event.getAmount() - amount);

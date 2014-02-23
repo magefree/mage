@@ -27,11 +27,8 @@
  */
 package mage.abilities.dynamicvalue.common;
 
-import java.util.List;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.cards.Card;
@@ -51,18 +48,13 @@ public class ExileFromHandCostCardConvertedMana implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        for (AlternativeCost aCost: (List<AlternativeCost>) sourceAbility.getAlternativeCosts()) {
-            if (aCost.isPaid()) {
-                for (int x=0; x < ((Costs) aCost).size(); x++) {
-                    Cost cost = (Cost) ((Costs) aCost).get(x);
-                    if (cost instanceof ExileFromHandCost) {
-                        int xValue = 0;
-                        for (Card card : ((ExileFromHandCost) cost).getCards()) {
-                            xValue += card.getManaCost().convertedManaCost();
-                        }
-                        return xValue;
-                    }
+        for (Cost cost: sourceAbility.getCosts()) {
+            if (cost.isPaid() && cost instanceof ExileFromHandCost) {
+                int xValue = 0;
+                for (Card card : ((ExileFromHandCost) cost).getCards()) {
+                    xValue += card.getManaCost().convertedManaCost();
                 }
+                return xValue;
             }
         }
         return sourceAbility.getManaCostsToPay().getX();

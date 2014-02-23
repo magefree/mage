@@ -146,7 +146,9 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
        if (condition != null) {
            sb.append(condition.toString());
            sb.append(", rather than pay {source}'s mana cost, ");
-       }       
+       } else {
+           sb.append("You may ");
+       }
        int numberCosts = 0;
        String remarkText = "";
        for (AlternativeCost2 alternativeCost: alternateCosts) {
