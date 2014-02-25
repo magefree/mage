@@ -28,19 +28,24 @@
 
 package mage.sets.championsofkamigawa;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -57,6 +62,7 @@ public class TakenoSamuraiGeneral extends CardImpl<TakenoSamuraiGeneral> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new BushidoAbility(2));
+        // Each other Samurai creature you control gets +1/+1 for each point of bushido it has.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TakenoSamuraiGeneralEffect()));
     }
 
@@ -115,8 +121,9 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl<TakenoSamuraiGener
                 if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities()) {
                         if (ability instanceof BushidoAbility) {
-                            perm.addPower(((BushidoAbility) ability).getValue());
-                            perm.addToughness(((BushidoAbility) ability).getValue());
+                            int value = ((BushidoAbility) ability).getValue(source, game);
+                            perm.addPower(value);
+                            perm.addToughness(value);
                         }
                     }
                 }

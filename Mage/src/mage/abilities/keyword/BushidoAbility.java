@@ -27,21 +27,37 @@
  */
 package mage.abilities.keyword;
 
-import mage.constants.Duration;
+import mage.abilities.Ability;
 import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.constants.Duration;
+import mage.game.Game;
 
 public class BushidoAbility extends BlocksOrBecomesBlockedTriggeredAbility {
-    private int value;
+
+    private DynamicValue value;
+    private String rule = null;
 
     public BushidoAbility(int value) {
+        this(new StaticValue(value));
+        rule = new StringBuilder("Bushido ").append(value).toString();
+    }
+
+    public BushidoAbility(DynamicValue value) {
         super(new BoostSourceEffect(value, value, Duration.EndOfTurn), false);
+        if (rule == null) {
+            rule = new StringBuilder("{this} has bushido X, where X is ").append(value.getMessage()).toString();
+        }
+        rule = new StringBuilder(rule).append("  <i>(When this blocks or becomes blocked, it gets +").append(value.toString()).append("/+").append(value.toString()).append(" until end of turn.)</i>").toString();
         this.value = value;
     }
 
     public BushidoAbility(final BushidoAbility ability) {
         super(ability);
         this.value = ability.value;
+        this.rule = ability.rule;
     }
 
     @Override
@@ -49,12 +65,12 @@ public class BushidoAbility extends BlocksOrBecomesBlockedTriggeredAbility {
         return new BushidoAbility(this);
     }
 
-    public int getValue() {
-        return value;
+    public int getValue(Ability source, Game game) {
+        return value.calculate(game, source);
     }
 
     @Override
     public String getRule() {
-        return "Bushido " + value + " <i>(When this blocks or becomes blocked, it gets +" + value + "/+" + value + " until end of turn.)</i>";
+        return rule;
     }
 }
