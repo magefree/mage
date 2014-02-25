@@ -156,7 +156,7 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
                sb.append(alternativeCost.getText(false));
                remarkText = alternativeCost.getReminderText();
            } else {
-               sb.append(" and/or ").append(alternativeCost.getText(true));
+               sb.append(" and ").append(alternativeCost.getText(true));
            }
            ++numberCosts;
        }

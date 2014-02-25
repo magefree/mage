@@ -144,103 +144,72 @@ ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f
 ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161]         test_zone: LIBRARY
 ERROR [2013-07-01 15:46 [59:945]] TraceUtil[pool-3-thread-7]: [935461d9-1835-46f1-aa75-45e37a018161] 
 
-WARN  [2014-02-18 20:36 [55:460]] TraceUtil[pool-2-thread-66]: Found creature with intimidate blocked by non artifact not sharing color creature
-ERROR [2014-02-18 20:36 [55:461]] Tracing game state...
-ERROR [2014-02-18 20:36 [55:462]] Asphodel Wanderer could block Warchanter of Mogis
-ERROR [2014-02-18 20:36 [55:462]]
-ERROR [2014-02-18 20:36 [55:463]] Attacker abilities:
-ERROR [2014-02-18 20:36 [55:464]]      Cast Warchanter of Mogis, id=96c1f6b5-8e44-41e3-87db-c8075c1a06eb
-ERROR [2014-02-18 20:36 [55:465]]      <i>Inspired</i> - Whenever {this} becomes untapped, Target creature you control gains Intimidate until end of turn., id=06cac06c-89d3-4779-806c-397f8f369d6c
-ERROR [2014-02-18 20:36 [55:465]]      Intimidate, id=16012faf-5584-42f2-bc49-fa30f1f54b7b
-ERROR [2014-02-18 20:36 [55:466]] Blocker abilities:
-ERROR [2014-02-18 20:36 [55:466]]      Cast Asphodel Wanderer, id=25f47911-e597-4745-add6-22796e32705c
-ERROR [2014-02-18 20:36 [55:467]]      {2}{B}: Regenerate {this}., id=6e76d7c4-38d0-49d0-804d-7c401ff784ec
-ERROR [2014-02-18 20:36 [55:473]]
-ERROR [2014-02-18 20:36 [55:474]] Flying ability id: 87c77737-7d0e-45d4-aab6-9d164b30e555
-ERROR [2014-02-18 20:36 [55:475]] Reach ability id: 4b9f81ca-6448-4c44-8894-d1f8db7bdd17
-ERROR [2014-02-18 20:36 [55:475]]
-ERROR [2014-02-18 20:36 [55:476]] Restriction effects:
-ERROR [2014-02-18 20:36 [55:477]]     mage.abilities.keyword.FlyingEffect@1a1f2f4e
-ERROR [2014-02-18 20:36 [55:477]]         id=dc298313-227c-4aca-a530-649686ecf004
-ERROR [2014-02-18 20:36 [55:478]]         applies to attacker=false
-ERROR [2014-02-18 20:36 [55:479]]         applies to blocker=false
-ERROR [2014-02-18 20:36 [55:500]]     mage.abilities.effects.common.combat.UnblockableSourceEffect@83b38cb
-ERROR [2014-02-18 20:36 [55:500]]         id=e1e6fb76-2acd-4f3c-84e8-bff03a088263
-ERROR [2014-02-18 20:36 [55:501]]         applies to attacker=true
-ERROR [2014-02-18 20:36 [55:502]]         applies to blocker=false
-ERROR [2014-02-18 20:36 [55:503]]     mage.abilities.effects.common.combat.UnblockableAttachedEffect@7993f5ef
-ERROR [2014-02-18 20:36 [55:503]]         id=97fb7fae-c2ee-4edb-8694-e432065433e2
-ERROR [2014-02-18 20:36 [55:504]]         applies to attacker=false
-ERROR [2014-02-18 20:36 [55:505]]         applies to blocker=false
-ERROR [2014-02-18 20:36 [55:505]]     mage.abilities.effects.common.combat.UnblockableAttachedEffect@51758ff6
-ERROR [2014-02-18 20:36 [55:506]]         id=a88699ee-44dd-4506-87fd-ea45160f0149
-ERROR [2014-02-18 20:36 [55:507]]         applies to attacker=false
-ERROR [2014-02-18 20:36 [55:507]]         applies to blocker=false
-ERROR [2014-02-18 20:36 [55:514]]     mage.abilities.keyword.IntimidateEffect@a120547
-ERROR [2014-02-18 20:36 [55:515]]         id=f884b7e8-2cfb-473f-942e-c34089276cd1
-ERROR [2014-02-18 20:36 [55:515]]         applies to attacker=true
-ERROR [2014-02-18 20:36 [55:516]]         applies to blocker=false
-
-
-ERROR [2014-02-18 20:36 [55:517]]         instanceof StaticAbility: true, ability=Flying
-ERROR [2014-02-18 20:36 [55:517]]         usable zone: false, ability=Flying
-ERROR [2014-02-18 20:36 [55:518]]         zone: BATTLEFIELD
-ERROR [2014-02-18 20:36 [55:519]]         object: null
-ERROR [2014-02-18 20:36 [55:538]]         test_zone: null
-
-ERROR [2014-02-18 20:36 [55:539]]         instanceof StaticAbility: true, ability={this} is unblockable.
-ERROR [2014-02-18 20:36 [55:540]]         usable zone: false, ability={this} is unblockable.
-ERROR [2014-02-18 20:36 [55:540]]         zone: BATTLEFIELD
-ERROR [2014-02-18 20:36 [55:541]]         object: mage.sets.bornofthegods.FlitterstepEidolon@3386337c
-ERROR [2014-02-18 20:36 [55:542]]         contains ability: true
-ERROR [2014-02-18 20:36 [55:542]]         test_zone: LIBRARY
-
-ERROR [2014-02-18 20:36 [55:543]]         instanceof StaticAbility: true, ability=Enchanted creature gets +1/+1. Enchanted creature is unblockable.
-ERROR [2014-02-18 20:36 [55:549]]         usable zone: false, ability=Enchanted creature gets +1/+1. Enchanted creature is unblockable.
-ERROR [2014-02-18 20:36 [55:550]]         zone: BATTLEFIELD
-ERROR [2014-02-18 20:36 [55:551]]         object: mage.sets.bornofthegods.FlitterstepEidolon@3386337c
-ERROR [2014-02-18 20:36 [55:552]]         contains ability: true
-ERROR [2014-02-18 20:36 [55:553]]         test_zone: LIBRARY
-
-ERROR [2014-02-18 20:36 [55:553]]         instanceof StaticAbility: true, ability=Enchanted creature is unblockable.
-ERROR [2014-02-18 20:36 [55:554]]         usable zone: false, ability=Enchanted creature is unblockable.
-ERROR [2014-02-18 20:36 [55:555]]         zone: BATTLEFIELD
-ERROR [2014-02-18 20:36 [55:556]]         object: mage.sets.theros.AqueousForm@3580a9bb
-ERROR [2014-02-18 20:36 [55:556]]         contains ability: true
-ERROR [2014-02-18 20:36 [55:582]]         test_zone: OUTSIDE
-
-ERROR [2014-02-18 20:36 [55:583]]         ability=Intimidate, applies_to_attacker=true
-ERROR [2014-02-18 20:36 [55:583]]         instanceof StaticAbility: true, ability=Flying
-ERROR [2014-02-18 20:36 [55:584]]         usable zone: false, ability=Flying
-ERROR [2014-02-18 20:36 [55:585]]         zone: BATTLEFIELD
-ERROR [2014-02-18 20:36 [55:585]]         object: null
-ERROR [2014-02-18 20:36 [55:586]]         test_zone: null
-
-ERROR [2014-02-18 20:36 [55:587]]         instanceof StaticAbility: true, ability={this} is unblockable.
-ERROR [2014-02-18 20:36 [55:587]]         usable zone: false, ability={this} is unblockable.
-ERROR [2014-02-18 20:36 [55:588]]         zone: BATTLEFIELD
-ERROR [2014-02-18 20:36 [55:589]]         object: mage.sets.bornofthegods.FlitterstepEidolon@3386337c
-ERROR [2014-02-18 20:36 [55:589]]         contains ability: true
-ERROR [2014-02-18 20:36 [55:590]]         test_zone: LIBRARY
-
-ERROR [2014-02-18 20:36 [55:591]]         instanceof StaticAbility: true, ability=Enchanted creature gets +1/+1. Enchanted creature is unblockable.
-ERROR [2014-02-18 20:36 [55:591]]         usable zone: false, ability=Enchanted creature gets +1/+1. Enchanted creature is unblockable.
-ERROR [2014-02-18 20:36 [55:592]]         zone: BATTLEFIELD
-ERROR [2014-02-18 20:36 [55:593]]         object: mage.sets.bornofthegods.FlitterstepEidolon@3386337c
-ERROR [2014-02-18 20:36 [55:593]]         contains ability: true
-ERROR [2014-02-18 20:36 [55:603]]         test_zone: LIBRARY
-
-ERROR [2014-02-18 20:36 [55:604]]         instanceof StaticAbility: true, ability=Enchanted creature is unblockable.
-ERROR [2014-02-18 20:36 [55:605]]         usable zone: false, ability=Enchanted creature is unblockable.
-ERROR [2014-02-18 20:36 [55:605]]         zone: BATTLEFIELD
-ERROR [2014-02-18 20:36 [55:606]]         object: mage.sets.theros.AqueousForm@3580a9bb
-ERROR [2014-02-18 20:36 [55:606]]         contains ability: true
-ERROR [2014-02-18 20:36 [55:607]]         test_zone: OUTSIDE
-
-ERROR [2014-02-18 20:36 [55:608]]         instanceof StaticAbility: true, ability=Intimidate
-ERROR [2014-02-18 20:36 [55:608]]         usable zone: false, ability=Intimidate
-ERROR [2014-02-18 20:36 [55:609]]         zone: BATTLEFIELD
-ERROR [2014-02-18 20:36 [55:609]]         object: Warchanter of Mogis-BNG
-ERROR [2014-02-18 20:36 [55:610]]         contains ability: true
-ERROR [2014-02-18 20:36 [55:610]]         test_zone: BATTLEFIELD
-ERROR [2014-02-18 20:36 [55:611]] 
+ERROR [2014-02-22 11:59 [46:811]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177] Tracing game state...
+ERROR [2014-02-22 11:59 [46:812]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177] Hopeful Eidolon could block Lifebane Zombie
+ERROR [2014-02-22 11:59 [46:813]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]
+ERROR [2014-02-22 11:59 [46:813]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177] Attacker abilities:
+ERROR [2014-02-22 11:59 [46:814]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      Cast Lifebane Zombie, id=c795314b-69b9-41c2-9f4b-4082eedf31da
+ERROR [2014-02-22 11:59 [46:814]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      Intimidate, id=e26a7967-9a37-4523-b389-3a4173847831
+ERROR [2014-02-22 11:59 [46:815]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      When {this} enters the battlefield, Target opponent reveals his or her hand. You choose a green or white creature card from it and exile that card., id=8963ba91-b592-4005-bcf3-384994f6ffb4
+ERROR [2014-02-22 11:59 [46:815]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177] Blocker abilities:
+ERROR [2014-02-22 11:59 [46:816]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      Cast Hopeful Eidolon, id=be90bc65-328a-49e6-9e92-2a79597a7476
+ERROR [2014-02-22 11:59 [46:816]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      , id=49e05f50-a805-40ed-ace9-2b3ee8fa9840
+ERROR [2014-02-22 11:59 [46:817]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      Cast Hopeful Eidolon using bestow, id=19fb1ec2-615c-4d51-96c1-d47d5bafc814
+ERROR [2014-02-22 11:59 [46:817]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>, id=a1615f43-e2f2-46f7-9d71-ed694be1e244
+ERROR [2014-02-22 11:59 [46:818]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      Enchanted creature gets +1/+1 and has lifelink., id=74667379-ea0e-4296-affe-aa3cc739bb20
+ERROR [2014-02-22 11:59 [46:818]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      Protection from Black, id=96702e91-2ad9-4bac-aa61-5f8285634b54
+ERROR [2014-02-22 11:59 [46:819]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]
+ERROR [2014-02-22 11:59 [46:819]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177] Flying ability id: af646a89-23b6-48c9-98dc-fc73dabe39a9
+ERROR [2014-02-22 11:59 [46:820]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177] Reach ability id: b9161eb7-32c3-4969-9752-e3fcae2f1b85
+ERROR [2014-02-22 11:59 [46:823]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177] Intimidate ability id: e26a7967-9a37-4523-b389-3a4173847831
+ERROR [2014-02-22 11:59 [46:824]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]
+ERROR [2014-02-22 11:59 [46:824]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177] Restriction effects:
+ERROR [2014-02-22 11:59 [46:825]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]     mage.abilities.keyword.FlyingEffect@59f32851
+ERROR [2014-02-22 11:59 [46:826]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         id=772a740e-e0de-4f2e-ac9f-60b9f5a1c88c
+ERROR [2014-02-22 11:59 [46:826]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         applies to attacker=false
+ERROR [2014-02-22 11:59 [46:827]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         applies to blocker=false
+ERROR [2014-02-22 11:59 [46:827]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]     mage.abilities.keyword.UnleashRestrictionEffect@6acf55a8
+ERROR [2014-02-22 11:59 [46:828]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         id=305f2174-0ebb-409b-b6a0-4fb63e722222
+ERROR [2014-02-22 11:59 [46:828]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         applies to attacker=false
+ERROR [2014-02-22 11:59 [46:829]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         applies to blocker=false
+ERROR [2014-02-22 11:59 [46:829]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]     mage.abilities.keyword.UnleashRestrictionEffect@31943951
+ERROR [2014-02-22 11:59 [46:830]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         id=31a81585-aee6-40ae-8a76-e676cec52bda
+ERROR [2014-02-22 11:59 [46:830]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         applies to attacker=false
+ERROR [2014-02-22 11:59 [46:831]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         applies to blocker=false
+ERROR [2014-02-22 11:59 [46:831]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]     mage.abilities.keyword.UnleashRestrictionEffect@39290267
+ERROR [2014-02-22 11:59 [46:832]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         id=275a48cb-fba0-4fb8-b2fb-c98cbadd78e6
+ERROR [2014-02-22 11:59 [46:832]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         applies to attacker=false
+ERROR [2014-02-22 11:59 [46:833]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         applies to blocker=false
+ERROR [2014-02-22 11:59 [46:834]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]     mage.abilities.keyword.UnleashRestrictionEffect@47b5d63a
+ERROR [2014-02-22 11:59 [46:834]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         id=8f00cf34-7635-4592-8d23-0f427e00cee9
+ERROR [2014-02-22 11:59 [46:835]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         applies to attacker=false
+ERROR [2014-02-22 11:59 [46:835]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         applies to blocker=false
+ERROR [2014-02-22 11:59 [46:836]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      effect=mage.abilities.keyword.FlyingEffect@59f32851 id=772a740e-e0de-4f2e-ac9f-60b9f5a1c88c
+ERROR [2014-02-22 11:59 [46:836]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         instanceof StaticAbility: true, ability=Flying
+ERROR [2014-02-22 11:59 [46:837]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         usable zone: false, ability=Flying
+ERROR [2014-02-22 11:59 [46:837]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         zone: BATTLEFIELD
+ERROR [2014-02-22 11:59 [46:838]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         object: null
+ERROR [2014-02-22 11:59 [46:838]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         test_zone: null
+ERROR [2014-02-22 11:59 [46:839]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      effect=mage.abilities.keyword.UnleashRestrictionEffect@6acf55a8 id=305f2174-0ebb-409b-b6a0-4fb63e722222
+ERROR [2014-02-22 11:59 [46:839]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         ability=Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>, applies_to_attacker=false
+ERROR [2014-02-22 11:59 [46:840]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      effect=mage.abilities.keyword.UnleashRestrictionEffect@31943951 id=31a81585-aee6-40ae-8a76-e676cec52bda
+ERROR [2014-02-22 11:59 [46:840]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         ability=Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>, applies_to_attacker=false
+ERROR [2014-02-22 11:59 [46:841]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      effect=mage.abilities.keyword.UnleashRestrictionEffect@39290267 id=275a48cb-fba0-4fb8-b2fb-c98cbadd78e6
+ERROR [2014-02-22 11:59 [46:842]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         ability=Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>, applies_to_attacker=false
+ERROR [2014-02-22 11:59 [46:842]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      effect=mage.abilities.keyword.UnleashRestrictionEffect@47b5d63a id=8f00cf34-7635-4592-8d23-0f427e00cee9
+ERROR [2014-02-22 11:59 [46:843]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         ability=Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>, applies_to_attacker=false
+ERROR [2014-02-22 11:59 [46:843]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      effect=mage.abilities.keyword.FlyingEffect@59f32851 id=772a740e-e0de-4f2e-ac9f-60b9f5a1c88c
+ERROR [2014-02-22 11:59 [46:850]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         instanceof StaticAbility: true, ability=Flying
+ERROR [2014-02-22 11:59 [46:850]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         usable zone: false, ability=Flying
+ERROR [2014-02-22 11:59 [46:851]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         zone: BATTLEFIELD
+ERROR [2014-02-22 11:59 [46:852]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         object: null
+ERROR [2014-02-22 11:59 [46:852]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         test_zone: null
+ERROR [2014-02-22 11:59 [46:853]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      effect=mage.abilities.keyword.UnleashRestrictionEffect@6acf55a8 id=305f2174-0ebb-409b-b6a0-4fb63e722222
+ERROR [2014-02-22 11:59 [46:853]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         ability=Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>, applies_to_attacker=false
+ERROR [2014-02-22 11:59 [46:854]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      effect=mage.abilities.keyword.UnleashRestrictionEffect@31943951 id=31a81585-aee6-40ae-8a76-e676cec52bda
+ERROR [2014-02-22 11:59 [46:854]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         ability=Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>, applies_to_attacker=false
+ERROR [2014-02-22 11:59 [46:855]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      effect=mage.abilities.keyword.UnleashRestrictionEffect@39290267 id=275a48cb-fba0-4fb8-b2fb-c98cbadd78e6
+ERROR [2014-02-22 11:59 [46:855]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         ability=Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>, applies_to_attacker=false
+ERROR [2014-02-22 11:59 [46:855]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      effect=mage.abilities.keyword.UnleashRestrictionEffect@47b5d63a id=8f00cf34-7635-4592-8d23-0f427e00cee9
+ERROR [2014-02-22 11:59 [46:856]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         ability=Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>, applies_to_attacker=false
+ERROR [2014-02-22 11:59 [46:856]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]

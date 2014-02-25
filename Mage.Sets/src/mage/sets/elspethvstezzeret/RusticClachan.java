@@ -25,17 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.RedManaAbility;
+import mage.abilities.keyword.ReinforceAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
@@ -44,30 +45,33 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class AuntiesHovel extends CardImpl<AuntiesHovel> {
+public class RusticClachan extends CardImpl<RusticClachan> {
 
-    private static final FilterCard filter = new FilterCard("a Goblin card from your hand");
+    private static final FilterCard filter = new FilterCard("a Kithkin card from your hand");
+
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate("Kithkin"));
     }
 
-    public AuntiesHovel(UUID ownerId) {
-        super(ownerId, 267, "Auntie's Hovel", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
+    public RusticClachan(UUID ownerId) {
+        super(ownerId, 34, "Rustic Clachan", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "DDF";
 
-        // As Auntie's Hovel enters the battlefield, you may reveal a Goblin card from your hand. If you don't, Auntie's Hovel enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Goblin card from your hand. If you don't, {this} enters the battlefield tapped"));
-        // {tap}: Add {B} or {R} to your mana pool.
-        this.addAbility(new BlackManaAbility());
-        this.addAbility(new RedManaAbility());
+        // As Rustic Clachan enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, Rustic Clachan enters the battlefield tapped.
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Kithkin card from your hand. If you don't, {this} enters the battlefield tapped"));
+
+        // {tap}: Add {W} to your mana pool.
+        this.addAbility(new WhiteManaAbility());
+        // Reinforce 1-{1}{W}
+        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{W}")));
     }
 
-    public AuntiesHovel(final AuntiesHovel card) {
+    public RusticClachan(final RusticClachan card) {
         super(card);
     }
 
     @Override
-    public AuntiesHovel copy() {
-        return new AuntiesHovel(this);
+    public RusticClachan copy() {
+        return new RusticClachan(this);
     }
 }

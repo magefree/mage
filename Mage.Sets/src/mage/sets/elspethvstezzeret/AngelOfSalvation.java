@@ -25,49 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.costs.common.RevealTargetFromHandCost;
-import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.RedManaAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.PreventDamageTargetAmountEffect;
+import mage.abilities.keyword.ConvokeAbility;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInHand;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
  *
  * @author LevelX2
  */
-public class AuntiesHovel extends CardImpl<AuntiesHovel> {
+public class AngelOfSalvation extends CardImpl<AngelOfSalvation> {
 
-    private static final FilterCard filter = new FilterCard("a Goblin card from your hand");
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
+    public AngelOfSalvation(UUID ownerId) {
+        super(ownerId, 20, "Angel of Salvation", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}{W}");
+        this.expansionSetCode = "DDF";
+        this.subtype.add("Angel");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // Flash; convoke
+        this.addAbility(FlashAbility.getInstance());
+        this.addAbility(new ConvokeAbility());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Angel of Salvation enters the battlefield, prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new PreventDamageTargetAmountEffect(Duration.EndOfTurn, 5));
+        ability.addTarget(new TargetCreatureOrPlayerAmount(5));
+        this.addAbility(ability);
     }
 
-    public AuntiesHovel(UUID ownerId) {
-        super(ownerId, 267, "Auntie's Hovel", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
-
-        // As Auntie's Hovel enters the battlefield, you may reveal a Goblin card from your hand. If you don't, Auntie's Hovel enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Goblin card from your hand. If you don't, {this} enters the battlefield tapped"));
-        // {tap}: Add {B} or {R} to your mana pool.
-        this.addAbility(new BlackManaAbility());
-        this.addAbility(new RedManaAbility());
-    }
-
-    public AuntiesHovel(final AuntiesHovel card) {
+    public AngelOfSalvation(final AngelOfSalvation card) {
         super(card);
     }
 
     @Override
-    public AuntiesHovel copy() {
-        return new AuntiesHovel(this);
+    public AngelOfSalvation copy() {
+        return new AngelOfSalvation(this);
     }
 }

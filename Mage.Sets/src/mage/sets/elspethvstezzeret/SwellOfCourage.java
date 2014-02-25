@@ -25,49 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.costs.common.RevealTargetFromHandCost;
-import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.RedManaAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.keyword.ReinforceAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInHand;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public class AuntiesHovel extends CardImpl<AuntiesHovel> {
+public class SwellOfCourage extends CardImpl<SwellOfCourage> {
 
-    private static final FilterCard filter = new FilterCard("a Goblin card from your hand");
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
+    public SwellOfCourage(UUID ownerId) {
+        super(ownerId, 31, "Swell of Courage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
+        this.expansionSetCode = "DDF";
+
+        this.color.setWhite(true);
+
+        // Creatures you control get +2/+2 until end of turn.
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2,2, Duration.EndOfTurn));
+        // Reinforce X-{X}{W}{W}
+        this.addAbility(new ReinforceAbility(new ManacostVariableValue(), new ManaCostsImpl("{X}{W}{W}")));
     }
 
-    public AuntiesHovel(UUID ownerId) {
-        super(ownerId, 267, "Auntie's Hovel", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
-
-        // As Auntie's Hovel enters the battlefield, you may reveal a Goblin card from your hand. If you don't, Auntie's Hovel enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Goblin card from your hand. If you don't, {this} enters the battlefield tapped"));
-        // {tap}: Add {B} or {R} to your mana pool.
-        this.addAbility(new BlackManaAbility());
-        this.addAbility(new RedManaAbility());
-    }
-
-    public AuntiesHovel(final AuntiesHovel card) {
+    public SwellOfCourage(final SwellOfCourage card) {
         super(card);
     }
 
     @Override
-    public AuntiesHovel copy() {
-        return new AuntiesHovel(this);
+    public SwellOfCourage copy() {
+        return new SwellOfCourage(this);
     }
 }

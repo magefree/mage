@@ -164,7 +164,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
@@ -182,7 +182,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null && filter.match(player, game)) {

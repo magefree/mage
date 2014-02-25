@@ -128,7 +128,7 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
 
     @Override
     public List<T> getTargetOptions(Ability source, Game game) {
-        List<T> options = new ArrayList<T>();
+        List<T> options = new ArrayList<>();
         Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
 
         addTargets(this, possibleTargets, options, source, game);
@@ -146,7 +146,7 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
                 t.addTarget(targetId, n, source, game, true);
                 if (t.remainingAmount > 0) {
                     if (targets.size() > 1) {
-                        Set<UUID> newTargets = new HashSet<UUID>();
+                        Set<UUID> newTargets = new HashSet<>();
                         for (UUID newTarget: targets) {
                             if (!newTarget.equals(targetId)) {
                                 newTargets.add(newTarget);

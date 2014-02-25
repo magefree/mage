@@ -25,49 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.prophecy;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.costs.common.RevealTargetFromHandCost;
-import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 
 /**
  *
  * @author LevelX2
  */
-public class AuntiesHovel extends CardImpl<AuntiesHovel> {
+public class Foil extends CardImpl<Foil> {
 
-    private static final FilterCard filter = new FilterCard("a Goblin card from your hand");
+    private static final FilterCard filter = new FilterCard("an Island card");
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate("Island"));
     }
 
-    public AuntiesHovel(UUID ownerId) {
-        super(ownerId, 267, "Auntie's Hovel", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
+    public Foil(UUID ownerId) {
+        super(ownerId, 34, "Foil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
+        this.expansionSetCode = "PCY";
 
-        // As Auntie's Hovel enters the battlefield, you may reveal a Goblin card from your hand. If you don't, Auntie's Hovel enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Goblin card from your hand. If you don't, {this} enters the battlefield tapped"));
-        // {tap}: Add {B} or {R} to your mana pool.
-        this.addAbility(new BlackManaAbility());
-        this.addAbility(new RedManaAbility());
+        this.color.setBlue(true);
+
+        // You may discard an Island card and another card rather than pay Foil's mana cost.
+        Ability ability = new AlternativeCostSourceAbility(new DiscardTargetCost(new TargetCardInHand(filter)));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterCard("another card"))));
+        this.addAbility(ability);
+
+        // Counter target spell.
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public AuntiesHovel(final AuntiesHovel card) {
+    public Foil(final Foil card) {
         super(card);
     }
 
     @Override
-    public AuntiesHovel copy() {
-        return new AuntiesHovel(this);
+    public Foil copy() {
+        return new Foil(this);
     }
 }

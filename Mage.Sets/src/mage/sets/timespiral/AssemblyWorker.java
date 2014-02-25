@@ -25,49 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.timespiral;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.costs.common.RevealTargetFromHandCost;
-import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInHand;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class AuntiesHovel extends CardImpl<AuntiesHovel> {
+public class AssemblyWorker extends CardImpl<AssemblyWorker> {
 
-    private static final FilterCard filter = new FilterCard("a Goblin card from your hand");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Assembly-Worker creature");
+
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate("Assembly-Worker"));
     }
 
-    public AuntiesHovel(UUID ownerId) {
-        super(ownerId, 267, "Auntie's Hovel", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
+    public AssemblyWorker(UUID ownerId) {
+        super(ownerId, 248, "Assembly-Worker", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Assembly-Worker");
 
-        // As Auntie's Hovel enters the battlefield, you may reveal a Goblin card from your hand. If you don't, Auntie's Hovel enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Goblin card from your hand. If you don't, {this} enters the battlefield tapped"));
-        // {tap}: Add {B} or {R} to your mana pool.
-        this.addAbility(new BlackManaAbility());
-        this.addAbility(new RedManaAbility());
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // {tap}: Target Assembly-Worker creature gets +1/+1 until end of turn.
+       Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost());
+       ability.addTarget(new TargetPermanent(filter, true));
+       this.addAbility(ability);
     }
 
-    public AuntiesHovel(final AuntiesHovel card) {
+    public AssemblyWorker(final AssemblyWorker card) {
         super(card);
     }
 
     @Override
-    public AuntiesHovel copy() {
-        return new AuntiesHovel(this);
+    public AssemblyWorker copy() {
+        return new AssemblyWorker(this);
     }
 }

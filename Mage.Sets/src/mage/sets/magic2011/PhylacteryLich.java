@@ -96,8 +96,9 @@ public class PhylacteryLich extends CardImpl<PhylacteryLich> {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             for (Permanent perm: game.getBattlefield().getAllActivePermanents(controllerId)) {
-                if (perm.getCounters().getCount("phylactery") > 0)
+                if (perm.getCounters().getCount("phylactery") > 0) {
                     return false;
+                }
             }
             return true;
         }

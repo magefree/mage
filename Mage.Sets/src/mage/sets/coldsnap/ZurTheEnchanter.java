@@ -25,49 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.coldsnap;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.costs.common.RevealTargetFromHandCost;
-import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInHand;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author LevelX2
  */
-public class AuntiesHovel extends CardImpl<AuntiesHovel> {
+public class ZurTheEnchanter extends CardImpl<ZurTheEnchanter> {
 
-    private static final FilterCard filter = new FilterCard("a Goblin card from your hand");
+    private static final FilterCard filter = new FilterCard("enchantment card with converted mana cost 3 or less");
+
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public AuntiesHovel(UUID ownerId) {
-        super(ownerId, 267, "Auntie's Hovel", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
+    public ZurTheEnchanter(UUID ownerId) {
+        super(ownerId, 135, "Zur the Enchanter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
+        this.expansionSetCode = "CSP";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
 
-        // As Auntie's Hovel enters the battlefield, you may reveal a Goblin card from your hand. If you don't, Auntie's Hovel enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Goblin card from your hand. If you don't, {this} enters the battlefield tapped"));
-        // {tap}: Add {B} or {R} to your mana pool.
-        this.addAbility(new BlackManaAbility());
-        this.addAbility(new RedManaAbility());
+        this.color.setBlue(true);
+        this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever Zur the Enchanter attacks, you may search your library for an enchantment card with converted mana cost 3 or less and put it onto the battlefield. If you do, shuffle your library.
+        this.addAbility(new AttacksTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false), true));
     }
 
-    public AuntiesHovel(final AuntiesHovel card) {
+    public ZurTheEnchanter(final ZurTheEnchanter card) {
         super(card);
     }
 
     @Override
-    public AuntiesHovel copy() {
-        return new AuntiesHovel(this);
+    public ZurTheEnchanter copy() {
+        return new ZurTheEnchanter(this);
     }
 }

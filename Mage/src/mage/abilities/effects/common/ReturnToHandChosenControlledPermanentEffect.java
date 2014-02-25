@@ -27,6 +27,8 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -36,6 +38,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -43,17 +46,23 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect<ReturnToHandChosenControlledPermanentEffect> {
     
-    private FilterControlledPermanent filter;
+    private final FilterControlledPermanent filter;
+    private int number;
     
     public ReturnToHandChosenControlledPermanentEffect(FilterControlledPermanent filter) {
+        this(filter, 1);
+    }
+    public ReturnToHandChosenControlledPermanentEffect(FilterControlledPermanent filter, int number) {
         super(Outcome.ReturnToHand);
         this.filter = filter;
-        this.staticText = "return a " + filter.getMessage() + " to its owner's hand";
+        this.number = number;
+        this.staticText = getText();
     }
 
     public ReturnToHandChosenControlledPermanentEffect(final ReturnToHandChosenControlledPermanentEffect effect) {
         super(effect);
         this.filter = effect.filter;
+        this.number = effect.number;
     }
 
     @Override
@@ -65,19 +74,30 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect<R
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            TargetControlledPermanent target = new TargetControlledPermanent(filter);
-            target.setNotTarget(true);
+            TargetControlledPermanent target = new TargetControlledPermanent(number, number, filter, true);
             target.setRequired(true);
             if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if (permanent != null) {
-                    game.informPlayers(player.getName() + " returns " + permanent.getName() + " to his or her hand.");
-                    return permanent.moveToZone(Zone.HAND, source.getId(), game, false);
+                for (UUID targetCreatureId : (List<UUID>)target.getTargets()) {
+                    Permanent permanent = game.getPermanent(targetCreatureId);
+                    if (permanent != null) {
+                        player.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                    }
                 }
             }
             return true;
         }
         return false;
     }
-    
+
+    private String getText() {
+        StringBuilder sb = new StringBuilder("return ");
+        sb.append(CardUtil.numberToText(number, "a"));
+        sb.append(" ").append(filter.getMessage());
+        if (number > 1) {
+            sb.append(" to its owner's hand");
+        } else {
+            sb.append(" to their owner's hand");
+        }
+        return sb.toString();
+    }
 }
