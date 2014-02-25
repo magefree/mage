@@ -27,6 +27,9 @@
 */
 package mage.game.command;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -37,10 +40,6 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.CardType;
 import mage.game.Game;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -55,7 +54,8 @@ public class Emblem implements CommandObject {
     private UUID id;
     private UUID controllerId;
     private UUID sourceId;
-    private Abilities<Ability> abilites = new AbilitiesImpl<Ability>();
+    private Abilities<Ability> abilites = new AbilitiesImpl<>();
+    private String expansionSetCodeForImage = null;
 
     public Emblem() {
         this.id = UUID.randomUUID();
@@ -179,4 +179,13 @@ public class Emblem implements CommandObject {
     public Emblem copy() {
         return new Emblem(this);
     }
+
+    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
+        this.expansionSetCodeForImage = expansionSetCodeForImage;
+    }
+
+    public String getExpansionSetCodeForImage() {
+        return expansionSetCodeForImage;
+    }
+    
 }

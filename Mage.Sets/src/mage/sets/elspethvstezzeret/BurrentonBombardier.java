@@ -51,7 +51,9 @@ public class BurrentonBombardier extends CardImpl<BurrentonBombardier> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+        // Reinforce 2—{2}{W} ({2}{W}, Discard this card: Put two +1/+1 counters on target creature.)
         this.addAbility(new ReinforceAbility(2, new ManaCostsImpl("{2}{W}")));
     }
 

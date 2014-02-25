@@ -18,6 +18,10 @@ Planechase|planechase|
 Planechase 2012 Edition|planechase2012|
 Duel Decks: Heroes vs. Monsters|heroesvsmonsters|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
+Duel Decks: Elves vs. Goblins|elvesvsgoblins|
+Duel Decks: Jace vs. Chandra|jacevschandra|
+Duel Decks: Divine vs. Demonic|divinevsdemonic|
+Duel Decks: Garruk vs. Liliana|garrukvsliliana|
 Arabian Nights|arabiannights|
 Antiquities|antiquities|
 Legends|legends|

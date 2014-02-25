@@ -134,6 +134,8 @@
 |Generate|TOK:MBS|Zombie|
 |Generate|TOK:MBS|Zombie|
 
+|Generate|TOK:DDF|Soldier|
+
 |Generate|TOK:SOM|Cat|
 |Generate|TOK:SOM|Soldier|
 |Generate|TOK:SOM|Goblin|

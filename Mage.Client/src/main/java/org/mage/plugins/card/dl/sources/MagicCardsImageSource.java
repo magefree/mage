@@ -1,10 +1,9 @@
 package org.mage.plugins.card.dl.sources;
 
-import org.mage.plugins.card.images.CardDownloadData;
-import org.mage.plugins.card.utils.CardImageUtils;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.mage.plugins.card.images.CardDownloadData;
+import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  *
@@ -19,46 +18,51 @@ public class MagicCardsImageSource implements CardImageSource {
             put("BGN", "born-of-the-gods");
             put("C13", "commander-2013-edition");
             put("THS", "theros");
-            put("M14", "magic-2014");
-            put("DDL", "duel-decks-heroes-vs-monsters");
             put("MMA", "modern-masters");
             put("DGM", "dragons-maze");
             put("GTC", "gatecrash");
             put("RTR", "return-to-ravnica");
-            put("M13", "magic-2013");
             put("AVR", "avacyn-restored");
-            put("DDI", "duel-decks-venser-vs-koth");
             put("DKA", "dark-ascension");
             put("ISD", "innistrad");
-            put("DDH", "duel-decks-ajani-vs-nicol-bolas");
-            put("M12", "magic-2012");
             put("NPH", "new-phyrexia");
             put("MBS", "mirrodin-besieged");
             put("SOM", "scars-of-mirrodin");
-            put("M11", "magic-2011");
             put("ROE", "rise-of-the-eldrazi");
-            put("PVC", "duel-decks-phyrexia-vs-the-coalition");
             put("WWK", "worldwake");
             put("ZEN", "zendikar");
             put("HOP", "planechase");
             put("CMD", "commander");
             put("PC2", "planechase-2012-edition");
-            put("M10", "magic-2010");
-            put("GVL", "duel-decks-garruk-vs-liliana");
             put("ARB", "alara-reborn");
-            put("DVD", "duel-decks-divine-vs-demonic");
             put("CON", "conflux");
-            put("JVC", "duel-decks-jace-vs-chandra");
             put("ALA", "shards-of-alara");
             put("EVE", "eventide");
             put("SHM", "shadowmoor");
-            put("EVG", "duel-decks-elves-vs-goblins");
             put("MOR", "morningtide");
             put("LRW", "lorwyn");
             put("10E", "tenth-edition");
             put("CSP", "coldsnap");
             put("CHK", "player-rewards-2004");
             put("PTK", "portal-three-kingdoms");
+            put("M14", "magic-2014");
+            put("M13", "magic-2013");
+            put("M12", "magic-2012");
+            put("M11", "magic-2011");
+            put("M10", "magic-2010");
+            put("EVG", "duel-decks-elves-vs-goblins");
+            put("DD2", "duel-decks-jace-vs-chandra");
+            put("DDC", "duel-decks-divine-vs-demonic");
+            put("DDD", "duel-decks-garruk-vs-liliana");
+            put("DDE", "duel-decks-phyrexia-vs-the-coalition");
+            put("DDF", "duel-decks-elspeth-vs-tezzeret");
+            put("DDG", "duel-decks-knight-vs-dragon");
+            put("DDH", "duel-decks-ajani-vs-nicol-bolas");
+            put("DDI", "duel-decks-venser-vs-koth");
+            put("DDJ", "duel-decks-izzet-vs-golgari");
+            put("DDK", "duel-decks-sorin-vs-tibalt");
+            put("DDL", "duel-decks-heroes-vs-monsters");
+
         }
         private static final long serialVersionUID = 1L;
     };

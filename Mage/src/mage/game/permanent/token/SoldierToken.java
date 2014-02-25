@@ -28,9 +28,9 @@
 
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.CardType;
 
 /**
  *
@@ -45,6 +45,7 @@ public class SoldierToken extends Token {
         subtype.add("Soldier");
         power = new MageInt(1);
         toughness = new MageInt(1);
+        this.setOriginalExpansionSetCode("10E");
     }
 
 }

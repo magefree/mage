@@ -56,6 +56,10 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("ALA", "shardsofalara/spoiler");
         setsAliases.put("PC2", "planechase2012edition/cig");
         setsAliases.put("PTK", "portalthreekingdoms/cig");
+        setsAliases.put("EVG", "elvesvsgoblins/cig");
+        setsAliases.put("DD2", "jacevschandra/cig");
+        setsAliases.put("DDC", "divinevsdemonic/cig");
+        setsAliases.put("DDD", "garrukvsliliana/cig");
     }
 
     private Map<String, String> getSetLinks(String cardSet) {

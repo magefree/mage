@@ -1,11 +1,10 @@
 package mage.view;
 
-import mage.cards.Card;
-import mage.game.command.Emblem;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+import mage.cards.Card;
+import mage.game.command.Emblem;
 
 /**
  * @author noxx
@@ -20,7 +19,12 @@ public class EmblemView implements CommandObjectView, Serializable {
     public EmblemView(Emblem emblem, Card sourceCard) {
         id = emblem.getId();
         name = "Emblem " + sourceCard.getName();
-        expansionSetCode = sourceCard.getExpansionSetCode();
+        if (emblem.getExpansionSetCodeForImage() == null) {
+            expansionSetCode = sourceCard.getExpansionSetCode();
+        } else {
+            expansionSetCode = emblem.getExpansionSetCodeForImage();
+        }
+        
         rules = emblem.getAbilities().getRules(sourceCard.getName());
     }
 

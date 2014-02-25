@@ -53,6 +53,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.command.Emblem;
 import mage.game.permanent.token.SoldierToken;
+import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -70,12 +71,18 @@ public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Put a 1/1 white Soldier creature token onto the battlefield.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SoldierToken()), 1));
+        Token token = new SoldierToken();
+        token.setOriginalExpansionSetCode("ALA"); // to get the right image
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(token), 1));
 
         // +1: Target creature gets +3/+3 and gains flying until end of turn.
         Effects effects1 = new Effects();
-        effects1.add(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
-        effects1.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
+        effect.setText("Target creature gets +3/+3");
+        effects1.add(effect);
+        effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains flying until end of turn");
+        effects1.add(effect);
         LoyaltyAbility ability1 = new LoyaltyAbility(effects1, 1);
         ability1.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability1);
@@ -107,5 +114,6 @@ class ElspethKnightErrantEmblem extends Emblem {
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
         effect.setText("Artifacts, creatures, enchantments, and lands you control are indestructible");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, effect));
+        this.setExpansionSetCodeForImage("MMA");
     }
 }

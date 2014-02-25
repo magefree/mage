@@ -53,8 +53,12 @@ public class ConstructedFormats {
             "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
             "Portal Three Kingdoms",
             "Guru",
-            "Duel Decks: Heroes vs. Monsters",
-            "Duel Decks: Elspeth vs. Tezzeret"
+            "Duel Decks: Elves vs. Goblins",
+            "Duel Decks: Jace vs. Chandra",
+            "Duel Decks: Divine vs. Demonic",
+            "Duel Decks: Garruk vs. Liliana",
+            "Duel Decks: Elspeth vs. Tezzeret",
+            "Duel Decks: Heroes vs. Monsters"
     };
     
     private ConstructedFormats() {
@@ -384,12 +388,23 @@ public class ConstructedFormats {
         if (format.equals("Modern Masters")) {
             return Arrays.asList("MMA");
         }
-
         if (format.equals("Guru")) {
             return Arrays.asList("GUR");
         }
         if (format.equals("Portal Three Kingdoms")) {
             return Arrays.asList("PTK");
+        }
+        if (format.equals("Duel Decks: Elves vs. Goblins")) {
+            return Arrays.asList("EVG");
+        }
+        if (format.equals("Duel Decks: Jace vs. Chandra")) {
+            return Arrays.asList("DD2");
+        }
+        if (format.equals("Duel Decks: Divine vs. Demonic")) {
+            return Arrays.asList("DDC");
+        }
+        if (format.equals("Duel Decks: Garruk vs. Liliana")) {
+            return Arrays.asList("DDD");
         }
         if (format.equals("Duel Decks: Elspeth vs. Tezzeret")) {
             return Arrays.asList("DDF");
