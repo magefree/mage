@@ -28,17 +28,15 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.BecomesTappedCreatureControlledTriggeredAbility;
-import mage.abilities.common.BeginningOfUntapTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HasCounterCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.UntapAllControllerEffect;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.continious.UntapAllDuringEachOtherPlayersUntapStepEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.TargetController;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -61,9 +59,10 @@ public class QuestForRenewal extends CardImpl<QuestForRenewal> {
         this.addAbility(new BecomesTappedCreatureControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
         
         // As long as there are four or more quest counters on Quest for Renewal, untap all creatures you control during each other player's untap step.
-        ConditionalOneShotEffect effect = new ConditionalOneShotEffect(new UntapAllControllerEffect(filter, ""), new HasCounterCondition(CounterType.QUEST, 4), "as long as there are four or more quest counters on <this>, untap all creatures you control");
-        this.addAbility(new BeginningOfUntapTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.NOT_YOU, false));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+                new UntapAllDuringEachOtherPlayersUntapStepEffect(filter),
+                new HasCounterCondition(CounterType.QUEST, 4),
+                "As long as there are four or more quest counters on {this}, untap all creatures you control during each other player's untap step.", false)));        
     }
 
     public QuestForRenewal(final QuestForRenewal card) {

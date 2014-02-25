@@ -30,16 +30,13 @@ package mage.sets.commander2013;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.BeginningOfUntapTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.UntapAllDuringEachOtherPlayersUntapStepEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -53,7 +50,7 @@ public class MurkfiendLiege extends CardImpl<MurkfiendLiege> {
 
     private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("green creatures");
     private static final FilterCreaturePermanent filterBlue = new FilterCreaturePermanent("blue creatures");
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green and/or blue creatures you control");
     static {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
@@ -77,8 +74,7 @@ public class MurkfiendLiege extends CardImpl<MurkfiendLiege> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1, Duration.WhileOnBattlefield, filterBlue, true)));
 
         // Untap all green and/or blue creatures you control during each other player's untap step.
-        Effect effect = new UntapAllControllerEffect(filter, "Untap all green and/or blue creatures you control");
-        this.addAbility(new BeginningOfUntapTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.NOT_YOU, false));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapAllDuringEachOtherPlayersUntapStepEffect(filter)));
 
     }
 

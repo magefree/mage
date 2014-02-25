@@ -29,16 +29,13 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUntapTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
+import mage.abilities.effects.common.continious.UntapAllDuringEachOtherPlayersUntapStepEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -51,7 +48,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class ProphetOfKruphix extends CardImpl<ProphetOfKruphix> {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent("creatures and lands you control");
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.CREATURE),
@@ -70,8 +67,7 @@ public class ProphetOfKruphix extends CardImpl<ProphetOfKruphix> {
         this.toughness = new MageInt(3);
 
         // Untap all creatures and lands you control during each other player's untap step.
-        Effect effect = new UntapAllControllerEffect(filter, "Untap all creatures and lands you control");
-        this.addAbility(new BeginningOfUntapTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.NOT_YOU, false));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapAllDuringEachOtherPlayersUntapStepEffect(filter)));
         // You may cast creature cards as though they had flash.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, new FilterCreatureCard("creature cards"))));
 
