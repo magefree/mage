@@ -34,7 +34,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class PutridLeech extends CardImpl<PutridLeech> {
         this.subtype.add("Leech");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new PayLifeCost(2)));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new PayLifeCost(2)));
     }
 
     public PutridLeech(final PutridLeech card) {

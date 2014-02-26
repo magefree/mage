@@ -29,7 +29,7 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -58,7 +58,7 @@ public class PulsatingIllusion extends CardImpl<PulsatingIllusion> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Discard a card: Pulsating Illusion gets +4/+4 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new DiscardTargetCost(new TargetCardInHand())));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new DiscardTargetCost(new TargetCardInHand())));
     }
 
     public PulsatingIllusion(final PulsatingIllusion card) {

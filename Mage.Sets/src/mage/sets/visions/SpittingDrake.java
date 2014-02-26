@@ -29,7 +29,7 @@ package mage.sets.visions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -57,7 +57,7 @@ public class SpittingDrake extends CardImpl<SpittingDrake> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {R}: Spitting Drake gets +1/+0 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
     public SpittingDrake(final SpittingDrake card) {

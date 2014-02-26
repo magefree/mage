@@ -28,7 +28,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealSourceFromYourHandCost;
 import mage.abilities.effects.Effect;
@@ -51,7 +51,7 @@ import mage.game.Game;
  * @author LevelX2
  *
  */
-public class ForecastAbility extends ActivateOncePerTurnActivatedAbility {
+public class ForecastAbility extends LimitedTimesPerTurnActivatedAbility {
 
     public ForecastAbility(Effect effect, Cost cost) {
         super(Zone.HAND, effect, cost);

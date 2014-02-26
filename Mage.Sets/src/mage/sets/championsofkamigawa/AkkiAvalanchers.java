@@ -34,7 +34,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class AkkiAvalanchers extends CardImpl<AkkiAvalanchers> {
         this.toughness = new MageInt(1);
 
         // Sacrifice a land: Akki Avalanchers gets +2/+0 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public AkkiAvalanchers(final AkkiAvalanchers card) {

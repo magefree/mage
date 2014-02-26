@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -62,7 +62,7 @@ public class WolfbittenCaptive extends CardImpl<WolfbittenCaptive> {
         this.secondSideCard = new KrallenhordeKiller(ownerId);
 
         // {1}{G}: Wolfbitten Captive gets +2/+2 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Wolfbitten Captive.
         this.addAbility(new TransformAbility());

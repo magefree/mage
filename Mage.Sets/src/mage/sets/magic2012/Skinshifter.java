@@ -35,7 +35,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -59,7 +59,7 @@ public class Skinshifter extends CardImpl<Skinshifter> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        Ability ability = new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
                 new BecomesCreatureSourceEffect(new RhinoToken(), "", Duration.EndOfTurn),
                 new ManaCostsImpl("{G}"));
 

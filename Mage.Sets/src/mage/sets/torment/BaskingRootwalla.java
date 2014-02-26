@@ -30,7 +30,7 @@ package mage.sets.torment;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.MadnessAbility;
@@ -56,7 +56,7 @@ public class BaskingRootwalla extends CardImpl<BaskingRootwalla> {
         this.toughness = new MageInt(1);
 
         // {1}{G}: Basking Rootwalla gets +2/+2 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
 
         // Madness {0}

@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -70,7 +70,7 @@ public class CruelDeceiver extends CardImpl<CruelDeceiver> {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));
 
         // {2}: Reveal the top card of your library. If it's a land card, Cruel Deceiver gains "Whenever Cruel Deceiver deals damage to a creature, destroy that creature" until end of turn. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new CruelDeceiverEffect(), new ManaCostsImpl("{2}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new CruelDeceiverEffect(), new ManaCostsImpl("{2}")));
     }
 
     public CruelDeceiver(final CruelDeceiver card) {

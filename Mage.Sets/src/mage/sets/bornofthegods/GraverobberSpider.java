@@ -30,7 +30,7 @@ package mage.sets.bornofthegods;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
@@ -62,7 +62,7 @@ public class GraverobberSpider extends CardImpl<GraverobberSpider> {
         this.addAbility(ReachAbility.getInstance());
         // {3}{B}: Graverobber Spider gets +X/+X until end of turn, where X is the number of creature cards in your graveyard. Activate this ability only once each turn.
         DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
-        Ability ability = new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true), new ManaCostsImpl("{3}{B}"));
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true), new ManaCostsImpl("{3}{B}"));
         this.addAbility(ability);
     }
 

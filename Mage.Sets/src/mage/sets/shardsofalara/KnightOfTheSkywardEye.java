@@ -34,7 +34,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class KnightOfTheSkywardEye extends CardImpl<KnightOfTheSkywardEye> {
         this.toughness = new MageInt(2);
 
         // {3}{G}: Knight of the Skyward Eye gets +3/+3 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")));
 
     }
 

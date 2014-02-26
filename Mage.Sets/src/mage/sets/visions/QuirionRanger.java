@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
@@ -64,7 +64,7 @@ public class QuirionRanger extends CardImpl<QuirionRanger> {
         this.toughness = new MageInt(1);
 
         // Return a Forest you control to its owner's hand: Untap target creature. Activate this ability only once each turn.
-        Ability ability = new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

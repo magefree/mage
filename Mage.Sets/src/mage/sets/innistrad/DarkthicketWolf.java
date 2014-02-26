@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class DarkthicketWolf extends CardImpl<DarkthicketWolf> {
         this.toughness = new MageInt(2);
 
         // {2}{G}: Darkthicket Wolf gets +2/+2 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{2}{G}")));
     }
 
     public DarkthicketWolf(final DarkthicketWolf card) {

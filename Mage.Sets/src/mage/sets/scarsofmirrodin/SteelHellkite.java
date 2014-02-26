@@ -30,7 +30,7 @@ package mage.sets.scarsofmirrodin;
 import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -66,7 +66,7 @@ public class SteelHellkite extends CardImpl<SteelHellkite> {
         // {2}: Steel Hellkite gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2)));
         // {X}: Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by Steel Hellkite this turn. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new SteelHellkiteDestroyEffect(), new ManaCostsImpl("{X}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new SteelHellkiteDestroyEffect(), new ManaCostsImpl("{X}")));
 
         this.addWatcher(new SteelHellkiteWatcher());
     }

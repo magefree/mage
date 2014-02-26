@@ -40,26 +40,29 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl<ActivateOncePerTurnActivatedAbility> {
+public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl<LimitedTimesPerTurnActivatedAbility> {
 
-    public ActivateOncePerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
-        super(zone, effect, cost);
+    private int maxActivationsPerTurn;
+
+    public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
+        this(zone, effect, cost, 1);
     }
 
-    public ActivateOncePerTurnActivatedAbility(ActivateOncePerTurnActivatedAbility ability) {
+    public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost, int maxActivationsPerTurn) {
+        super(zone, effect, cost);
+        this.maxActivationsPerTurn = maxActivationsPerTurn;
+    }
+
+    public LimitedTimesPerTurnActivatedAbility(LimitedTimesPerTurnActivatedAbility ability) {
         super(ability);
+        this.maxActivationsPerTurn = ability.maxActivationsPerTurn;
     }
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         if (super.canActivate(playerId, game)) {
-            Boolean activated = (Boolean)game.getState().getValue(CardUtil.getCardZoneString("activated", sourceId, game));
-            if (activated == null) {
-                return true;
-            }
-            else {
-                return !activated;
-            }
+            Integer activations = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activations", sourceId, game));
+            return activations == null || activations < maxActivationsPerTurn;
         }
         return false;
     }
@@ -68,7 +71,13 @@ public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl<Ac
     public boolean activate(Game game, boolean noMana) {
         if (canActivate(this.controllerId, game)) {
             if (super.activate(game, noMana)) {
-                game.getState().setValue(CardUtil.getCardZoneString("activated", sourceId, game), Boolean.TRUE);
+                Integer activations = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activations", sourceId, game));
+                if (activations == null) {
+                    activations = new Integer(1);
+                } else {
+                    activations++;
+                }
+                game.getState().setValue(CardUtil.getCardZoneString("activations", sourceId, game), activations);
                 return true;
             }
         }
@@ -77,25 +86,34 @@ public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl<Ac
 
     @Override
     public void reset(Game game) {
-        game.getState().setValue(CardUtil.getCardZoneString("activated", sourceId, game), Boolean.FALSE);
+        game.getState().setValue(CardUtil.getCardZoneString("activations", sourceId, game), new Integer(0));
     }
 
     @Override
     public boolean resolve(Game game) {
-        if (super.resolve(game)) {
-            return true;
-        }
-        return false;
+        return super.resolve(game);
     }
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate this ability only once each turn.";
+        StringBuilder sb = new StringBuilder(super.getRule()).append("Activate this ability ");
+        switch(maxActivationsPerTurn) {
+            case 1:
+                sb.append("only once");
+                break;
+            case 2:
+                sb.append("no more than twice");
+                break;
+            default:
+                sb.append("no more than ").append(CardUtil.numberToText(maxActivationsPerTurn)).append(" times");
+        }
+        sb.append(" each turn");
+        return sb.toString();
     }
 
     @Override
-    public ActivateOncePerTurnActivatedAbility copy() {
-        return new ActivateOncePerTurnActivatedAbility(this);
+    public LimitedTimesPerTurnActivatedAbility copy() {
+        return new LimitedTimesPerTurnActivatedAbility(this);
     }
 
 }

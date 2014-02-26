@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -77,7 +77,7 @@ public class ScrybRanger extends CardImpl<ScrybRanger> {
         // protection from blue
         this.addAbility(new ProtectionAbility(filter));
         // Return a Forest you control to its owner's hand: Untap target creature. Activate this ability only once each turn.
-        Ability ability = new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ReturnToHandTargetCost(new TargetControlledPermanent(filterForest)));
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ReturnToHandTargetCost(new TargetControlledPermanent(filterForest)));
         ability.addTarget(new TargetCreaturePermanent(1));
         this.addAbility(ability);
     }

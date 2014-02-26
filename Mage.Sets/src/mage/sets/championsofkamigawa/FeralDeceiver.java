@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -85,7 +85,7 @@ public class FeralDeceiver extends CardImpl<FeralDeceiver> {
     }
 }
 
-class FeralDeceiverAbility extends ActivateOncePerTurnActivatedAbility {
+class FeralDeceiverAbility extends LimitedTimesPerTurnActivatedAbility {
 
     public FeralDeceiverAbility(Zone zone, Effect effect, Cost cost) {
         super(zone, effect, cost);

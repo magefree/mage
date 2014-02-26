@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.ObjectColor;
 import mage.abilities.costs.common.TapSourceCost;
@@ -69,7 +69,7 @@ public class PatronOfTheOrochi extends CardImpl<PatronOfTheOrochi> {
         this.addAbility(new OfferingAbility("Snake"));
 
         // {T}: Untap all Forests and all green creatures. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new PatronOfTheOrochiEffect(), new TapSourceCost()));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new PatronOfTheOrochiEffect(), new TapSourceCost()));
         
     }
 
