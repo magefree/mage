@@ -30,7 +30,7 @@ package mage.sets.eventide;
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.HasCounterCondition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -69,7 +69,7 @@ public class HelixPinnacle extends CardImpl<HelixPinnacle> {
         // At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WinGameEffect(), TargetController.YOU, false),
-                new HasCounterCondition(CounterType.TOWER, 100),
+                new SourceHasCounterCondition(CounterType.TOWER, 100),
                 rule, false ));
 
     }

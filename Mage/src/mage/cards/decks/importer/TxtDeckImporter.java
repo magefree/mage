@@ -65,6 +65,9 @@ public class TxtDeckImporter extends DeckImporter {
         }
 
         int delim = line.indexOf(' ');
+        if (delim < 0) {
+            return;
+        }
         String lineNum = line.substring(0, delim).trim();
         String lineName = line.substring(delim).replace("’","\'").trim();
         if (IGNORE_NAMES.contains(lineName)) {

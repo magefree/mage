@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.HasCounterCondition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -66,7 +66,7 @@ public class ChaosImps extends CardImpl<ChaosImps> {
         // Chaos Imps has trample as long as it has a +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), 
-                new HasCounterCondition(CounterType.P1P1),"Chaos Imps has trample as long as it has a +1/+1 counter on it")));
+                new SourceHasCounterCondition(CounterType.P1P1),"Chaos Imps has trample as long as it has a +1/+1 counter on it")));
         
     }
  

@@ -30,7 +30,7 @@ package mage.sets.eventide;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.HasCounterCondition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -64,7 +64,7 @@ public class Thunderblust extends CardImpl<Thunderblust> {
         this.addAbility(HasteAbility.getInstance());
         
         // Thunderblust has trample as long as it has a -1/-1 counter on it.
-        Effect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new HasCounterCondition(CounterType.M1M1), rule);
+        Effect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new SourceHasCounterCondition(CounterType.M1M1), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         
         // Persist

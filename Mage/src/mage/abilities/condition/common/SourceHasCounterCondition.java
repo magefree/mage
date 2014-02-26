@@ -38,23 +38,23 @@ import mage.game.permanent.Permanent;
  * 
  * @author nantuko
  */
-public class HasCounterCondition implements Condition {
+public class SourceHasCounterCondition implements Condition {
 
     private final CounterType counterType;
     private int amount = 1;
     private int from = -1;
     private int to;
 
-    public HasCounterCondition(CounterType type) {
+    public SourceHasCounterCondition(CounterType type) {
         this.counterType = type;
     }
 
-    public HasCounterCondition(CounterType type, int amount) {
+    public SourceHasCounterCondition(CounterType type, int amount) {
         this.counterType = type;
         this.amount = amount;
     }
 
-    public HasCounterCondition(CounterType type, int from, int to) {
+    public SourceHasCounterCondition(CounterType type, int from, int to) {
         this.counterType = type;
         this.from = from;
         this.to = to;

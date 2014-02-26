@@ -34,7 +34,7 @@ import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.HasCounterCondition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -73,7 +73,7 @@ public class LevelerCardBuilder {
     public List<Ability> build() {
         List<Ability> constructed = new ArrayList<Ability>();
 
-        Condition condition = new HasCounterCondition(CounterType.LEVEL, level1, level2);
+        Condition condition = new SourceHasCounterCondition(CounterType.LEVEL, level1, level2);
         for (Ability ability : abilities) {
             ContinuousEffect effect = new GainAbilitySourceEffect(ability);
             ConditionalContinousEffect abEffect = new ConditionalContinousEffect(effect, condition, "");

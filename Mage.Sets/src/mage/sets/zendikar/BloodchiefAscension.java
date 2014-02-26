@@ -35,7 +35,7 @@ import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.HasCounterCondition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.condition.common.OpponentLostLifeCondition;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -89,7 +89,7 @@ class BloodchiefAscensionTriggeredAbility extends TriggeredAbilityImpl<Bloodchie
     public BloodchiefAscensionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), true);
         this.addEffect(new GainLifeEffect(2));
-        condition = new HasCounterCondition(CounterType.QUEST, 3);
+        condition = new SourceHasCounterCondition(CounterType.QUEST, 3);
     }
 
     public BloodchiefAscensionTriggeredAbility(final BloodchiefAscensionTriggeredAbility ability) {
