@@ -41,6 +41,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -59,7 +60,7 @@ public class UrborgSyphonMage extends CardImpl<UrborgSyphonMage> {
         this.toughness = new MageInt(2);
 
         // {2}{B}, {tap}, Discard a card: Each other player loses 2 life. You gain life equal to the life lost this way.
-        Ability ability = new SimpleActivatedAbility(Zone.HAND, new UrborgSyphonMageEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrborgSyphonMageEffect(), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
@@ -89,13 +90,21 @@ class UrborgSyphonMageEffect extends OneShotEffect<UrborgSyphonMageEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         int damage = 0;
-        for (UUID playerId: game.getPlayerList() ){
-            if(playerId != source.getControllerId()){
-                damage += game.getPlayer(playerId).damage(2, source.getSourceId(), game, false, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : controller.getInRange()) {
+                if (playerId != source.getControllerId()) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        damage += player.damage(2, source.getSourceId(), game, false, true);
+                    }
+                }
             }
+            game.getPlayer(source.getControllerId()).gainLife(damage, game);
+            return true;
         }
-        game.getPlayer(source.getControllerId()).gainLife(damage, game);
-        return true;
+        return false;
+
     }
 
     @Override
