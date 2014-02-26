@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs;
 
 import java.util.Iterator;
@@ -46,11 +45,11 @@ import mage.players.Player;
  * @author LevelX2
  */
 public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostSourceAbility> implements AlternativeSourceCosts {
-   
+
     protected List<AlternativeCost2> alternateCosts = new LinkedList<>();
     protected Condition condition;
     protected String rule;
-    
+
     public AlternativeCostSourceAbility(Cost cost) {
         this(cost, null);
     }
@@ -58,7 +57,7 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
     public AlternativeCostSourceAbility(Cost cost, Condition conditon) {
         this(cost, conditon, null);
     }
-    
+
     public AlternativeCostSourceAbility(Cost cost, Condition condition, String rule) {
         super(Zone.ALL, null);
         this.convertToAlternativeCostAndAdd(cost);
@@ -71,24 +70,24 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
     public void addCost(Cost cost) {
         this.convertToAlternativeCostAndAdd(cost);
     }
-    
-    private void convertToAlternativeCostAndAdd(Cost cost) {        
-        AlternativeCost2 alternativeCost = new AlternativeCost2Impl(null, null, cost);        
-        this.alternateCosts.add(alternativeCost);    
+
+    private void convertToAlternativeCostAndAdd(Cost cost) {
+        AlternativeCost2 alternativeCost = new AlternativeCost2Impl(null, null, cost);
+        this.alternateCosts.add(alternativeCost);
     }
-    
+
     public AlternativeCostSourceAbility(final AlternativeCostSourceAbility ability) {
-       super(ability);
-       this.alternateCosts = ability.alternateCosts;
-       this.condition = ability.condition;
-       this.rule = ability.rule;
+        super(ability);
+        this.alternateCosts = ability.alternateCosts;
+        this.condition = ability.condition;
+        this.rule = ability.rule;
     }
 
     @Override
     public AlternativeCostSourceAbility copy() {
-       return new AlternativeCostSourceAbility(this);
+        return new AlternativeCostSourceAbility(this);
     }
-    
+
     @Override
     public boolean isAvailable(Ability source, Game game) {
         if (condition != null) {
@@ -96,7 +95,7 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
         }
         return true;
     }
-    
+
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
@@ -105,7 +104,7 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
                 if (player.chooseUse(Outcome.Detriment, "Pay alternative costs?", game)) {
                     ability.getManaCostsToPay().clear();
                     ability.getCosts().clear();
-                    for (AlternativeCost2 alternateCost: alternateCosts) {
+                    for (AlternativeCost2 alternateCost : alternateCosts) {
                         alternateCost.activate();
                         for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
@@ -116,57 +115,62 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
                             }
                         }
                     }
-                }                
+                }
             }
         }
         return isActivated();
     }
-       
+
     @Override
     public boolean isActivated() {
-        for (AlternativeCost2 cost: alternateCosts) {
-            if(cost.isActivated()) {
+        for (AlternativeCost2 cost : alternateCosts) {
+            if (cost.isActivated()) {
                 return true;
             }
         }
         return false;
     }
-    
+
     @Override
     public String getCastMessageSuffix() {
         return " using alternative casting costs";
     }
-    
+
     @Override
     public String getRule() {
         if (rule != null) {
             return rule;
-        }        
-       StringBuilder sb = new StringBuilder();
-       if (condition != null) {
-           sb.append(condition.toString());
-           sb.append(", rather than pay {source}'s mana cost, ");
-       } else {
-           sb.append("You may ");
-       }
-       int numberCosts = 0;
-       String remarkText = "";
-       for (AlternativeCost2 alternativeCost: alternateCosts) {
-           if (numberCosts == 0) {
-               sb.append(alternativeCost.getText(false));
-               remarkText = alternativeCost.getReminderText();
-           } else {
-               sb.append(" and ").append(alternativeCost.getText(true));
-           }
-           ++numberCosts;
-       }
-       if (condition == null) {
-           sb.append(" rather than pay {source}'s mana cost");
-       }
-       sb.append(".");
-       if (numberCosts == 1 && remarkText != null) {
+        }
+        // If you control a Swamp, you may pay 4 life rather than pay Snuff Out's mana cost.
+        StringBuilder sb = new StringBuilder();
+        if (condition != null) {
+            sb.append(condition.toString());
+            if (alternateCosts.size() > 1) {
+                sb.append(", rather than pay {source}'s mana cost, ");
+            } else {
+                sb.append(", you may ");
+            }
+        } else {
+            sb.append("You may ");
+        }
+        int numberCosts = 0;
+        String remarkText = "";
+        for (AlternativeCost2 alternativeCost : alternateCosts) {
+            if (numberCosts == 0) {
+                sb.append(alternativeCost.getText(false));
+                remarkText = alternativeCost.getReminderText();
+            } else {
+                sb.append(" and ").append(alternativeCost.getText(true));
+            }
+            ++numberCosts;
+        }
+        if (condition == null || alternateCosts.size() == 1) {
+            sb.append(" rather than pay {source}'s mana cost");
+        }
+        sb.append(".");
+        if (numberCosts == 1 && remarkText != null) {
             sb.append(" ").append(remarkText);
-       }
-       return sb.toString();
-    }    
+        }
+        return sb.toString();
+    }
 }

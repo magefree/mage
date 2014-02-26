@@ -29,12 +29,13 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -46,9 +47,9 @@ public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
     public ReturnToHandTargetCost(TargetControlledPermanent target) {
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
-            this.text = "return " + target.getMaxNumberOfTargets() + " " + target.getTargetName() + " you control to it's owner's hand";
+            this.text = new StringBuilder("return ").append(target.getMaxNumberOfTargets()).append(" ").append(target.getTargetName()).append(" you control to it's owner's hand").toString();
         } else {
-            this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
+            this.text = new StringBuilder("return ").append(target.getTargetName()).append(" you control to it's owner's hand").toString();
         }
     }
 
@@ -58,13 +59,16 @@ public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
-            for (UUID targetId: targets.get(0).getTargets()) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent == null) {
-                    return false;
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
+                for (UUID targetId: targets.get(0).getTargets()) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent == null) {
+                        return false;
+                    }
+                    paid |= controller.moveCardToHandWithInfo(permanent, sourceId, game, Zone.HAND);
                 }
-                paid |= permanent.moveToZone(Zone.HAND, sourceId, game, false);
             }
         }
         return paid;

@@ -28,9 +28,9 @@
 
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.CardType;
 
 /**
  *
@@ -45,6 +45,8 @@ public class ElephantToken extends Token {
         subtype.add("Elephant");
         power = new MageInt(3);
         toughness = new MageInt(3);
+
+        this.setOriginalExpansionSetCode("DDD");
     }
 
 }

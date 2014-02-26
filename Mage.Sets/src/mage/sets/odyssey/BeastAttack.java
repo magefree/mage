@@ -77,6 +77,8 @@ class BeastToken_44 extends Token {
         subtype.add("Beast");
         power = new MageInt(4);
         toughness = new MageInt(4);
+        // to get an image for the token
+        this.setOriginalExpansionSetCode("ZEN");
     }
         
 }

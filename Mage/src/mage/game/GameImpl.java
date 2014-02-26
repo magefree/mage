@@ -146,7 +146,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     private static Random rnd = new Random();
 
-    private transient Stack<Integer> savedStates = new Stack<Integer>();
+    
     private transient Object customData;
     protected boolean simulation = false;
 
@@ -155,20 +155,22 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
-    protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();    
-    protected Map<Zone,HashMap<UUID, MageObject>> lki = new EnumMap<Zone, HashMap<UUID, MageObject>>(Zone.class);
-    protected Map<Zone,HashMap<UUID, MageObject>> shortLivingLKI = new EnumMap<Zone, HashMap<UUID, MageObject>>(Zone.class);
+    protected Map<UUID, Card> gameCards = new HashMap<>();    
+    protected Map<Zone,HashMap<UUID, MageObject>> lki = new EnumMap<>(Zone.class);
+    protected Map<Zone,HashMap<UUID, MageObject>> shortLivingLKI = new EnumMap<>(Zone.class);
+
     protected GameState state;
+    private transient Stack<Integer> savedStates = new Stack<>();
+    protected transient GameStates gameStates = new GameStates();
 
     protected Date startTime;
     protected Date endTime;
     protected UUID startingPlayerId;
     protected UUID winnerId;
 
-    protected transient GameStates gameStates = new GameStates();
     protected RangeOfInfluence range;
     protected int freeMulligans;
-    protected Map<UUID, Integer> usedFreeMulligans = new LinkedHashMap<UUID, Integer>();
+    protected Map<UUID, Integer> usedFreeMulligans = new LinkedHashMap<>();
     protected MultiplayerAttackOption attackOption;
     protected GameOptions gameOptions;
     protected String startMessage;

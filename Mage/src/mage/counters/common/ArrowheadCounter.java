@@ -38,12 +38,12 @@ import mage.counters.Counter;
 public class ArrowheadCounter extends Counter<ArrowheadCounter> {
 
     public ArrowheadCounter() {
-        super("Arrowhead");
+        super("arrowhead");
         this.count = 1;
     }
 
     public ArrowheadCounter(int amount) {
-        super("Arrowhead");
+        super("arrowhead");
         this.count = amount;
     }
 }

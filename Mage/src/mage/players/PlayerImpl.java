@@ -1485,9 +1485,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public void leave() {
         this.passed = true;
-        this.abort();
         this.loses = true;
         this.left = true;
+        this.abort();
         //20100423 - 800.4a
         this.hand.clear();
         this.graveyard.clear();

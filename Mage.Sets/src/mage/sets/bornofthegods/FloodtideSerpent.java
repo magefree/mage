@@ -31,9 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -120,10 +118,7 @@ class FloodtideSerpentReplacementEffect extends ReplacementEffectImpl<FloodtideS
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getSourceId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getSourceId().equals(source.getSourceId());
     }
 
     @Override

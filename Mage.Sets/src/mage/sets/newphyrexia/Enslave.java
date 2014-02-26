@@ -62,7 +62,7 @@ public class Enslave extends CardImpl<Enslave> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EnslaveEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new EnslaveEffect(), TargetController.YOU, false, false));
     }
 
     public Enslave (final Enslave card) {

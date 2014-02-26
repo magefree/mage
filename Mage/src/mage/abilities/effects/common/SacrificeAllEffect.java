@@ -114,7 +114,7 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
         if (amount.toString().equals("X")) {
             sb.append(amount.toString());
         } else {
-            sb.append(CardUtil.numberToText(amount.toString()));
+            sb.append(CardUtil.numberToText(amount.toString(), "a"));
         }
         sb.append(" ");
         sb.append(filter.getMessage());

@@ -192,6 +192,10 @@
 |Generate|TOK:M10|Wolf|
 |Generate|TOK:M10|Zombie|
 
+|Generate|TOK:DDD|Beast 1|
+|Generate|TOK:DDD|Beast 2|
+|Generate|TOK:DDD|Elephant|
+
 |Generate|TOK:ARB|Bird Soldier|
 |Generate|TOK:ARB|Lizard|
 |Generate|TOK:ARB|Dragon|

@@ -68,11 +68,16 @@ public class SkeletalVampire extends CardImpl<SkeletalVampire> {
         this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+        // When Skeletal Vampire enters the battlefield, put two 1/1 black Bat creature tokens with flying onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BatToken(), 2)));
+        // {3}{B}{B}, Sacrifice a Bat: Put two 1/1 black Bat creature tokens with flying onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BatToken(), 2), new ManaCostsImpl("{3}{B}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         this.addAbility(ability);
+        // Sacrifice a Bat: Regenerate Skeletal Vampire.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
     }
 
@@ -87,6 +92,7 @@ public class SkeletalVampire extends CardImpl<SkeletalVampire> {
 }
 
 class BatToken extends Token {
+
     BatToken() {
         super("Bat", "1/1 black Bat creature token with flying");
         cardType.add(CardType.CREATURE);
@@ -95,5 +101,7 @@ class BatToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
+
+        this.setOriginalExpansionSetCode("MMA");
     }
 }
