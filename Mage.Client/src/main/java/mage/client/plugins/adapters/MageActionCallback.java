@@ -1,5 +1,23 @@
 package mage.client.plugins.adapters;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+import javax.swing.JComponent;
+import javax.swing.JPopupMenu;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
+import javax.swing.SwingUtilities;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
@@ -21,22 +39,12 @@ import mage.utils.ThreadUtils;
 import mage.view.CardView;
 import mage.view.PlayerView;
 import mage.view.SimpleCardsView;
+import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import org.jboss.logging.Logger;
-
 public class MageActionCallback implements ActionCallback {
+
+    private static final Logger logger = Logger.getLogger(ActionCallback.class);
 
     private Popup popup;
     private JPopupMenu jPopupMenu;
@@ -185,7 +193,6 @@ public class MageActionCallback implements ActionCallback {
                             target.translate(-parentPoint.x, -parentPoint.y);
                             int yOffset = p.isSmallMode() ? (PlayAreaPanel.PANEL_HEIGHT - PlayAreaPanel.PANEL_HEIGHT_SMALL) : 0;
                             ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 15, (int) target.getY() + 145 - yOffset, Color.red, ArrowBuilder.Type.TARGET);
-                            continue;
                         }
                     }
                 }

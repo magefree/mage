@@ -67,10 +67,10 @@ import mage.view.PermanentView;
  */
 public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
-    private final Map<UUID, MagePermanent> permanents = new LinkedHashMap<UUID, MagePermanent>();
+    private final Map<UUID, MagePermanent> permanents = new LinkedHashMap<>();
     private UUID gameId;
     private BigCard bigCard;
-    private final Map<String, JComponent> uiComponentsList = new HashMap<String, JComponent>();
+    private final Map<String, JComponent> uiComponentsList = new HashMap<>();
 
     protected Map<UUID, PermanentView> battlefield;
     private Dimension cardDimension;
@@ -118,12 +118,13 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         }
         permanents.clear();
         Plugins.getInstance().sortPermanents(uiComponentsList, permanents.values());
+        this.bigCard = null;
     }
 
     public void update(Map<UUID, PermanentView> battlefield) {
         boolean changed = false;
 
-        List<PermanentView> permanentsToAdd = new ArrayList<PermanentView>();
+        List<PermanentView> permanentsToAdd = new ArrayList<>();
         for (PermanentView permanent: battlefield.values()) {
             if (!permanents.containsKey(permanent.getId())) {
                 permanentsToAdd.add(permanent);

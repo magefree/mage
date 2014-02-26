@@ -50,7 +50,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -94,6 +93,16 @@ import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.PhaseStep;
+import static mage.constants.PhaseStep.BEGIN_COMBAT;
+import static mage.constants.PhaseStep.COMBAT_DAMAGE;
+import static mage.constants.PhaseStep.DECLARE_ATTACKERS;
+import static mage.constants.PhaseStep.DECLARE_BLOCKERS;
+import static mage.constants.PhaseStep.DRAW;
+import static mage.constants.PhaseStep.END_COMBAT;
+import static mage.constants.PhaseStep.END_TURN;
+import static mage.constants.PhaseStep.FIRST_COMBAT_DAMAGE;
+import static mage.constants.PhaseStep.UNTAP;
+import static mage.constants.PhaseStep.UPKEEP;
 import mage.remote.Session;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
@@ -116,11 +125,11 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final Logger logger = Logger.getLogger(GamePanel.class);
     private static final String YOUR_HAND = "Your hand";
     private static final int X_PHASE_WIDTH = 55;
-    private final Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
-    private final Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
-    private final Map<String, ShowCardsDialog> revealed = new HashMap<String, ShowCardsDialog>();
-    private final Map<String, ShowCardsDialog> lookedAt = new HashMap<String, ShowCardsDialog>();
-    private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<ShowCardsDialog>();
+    private final Map<UUID, PlayAreaPanel> players = new HashMap<>();
+    private final Map<UUID, ExileZoneDialog> exiles = new HashMap<>();
+    private final Map<String, ShowCardsDialog> revealed = new HashMap<>();
+    private final Map<String, ShowCardsDialog> lookedAt = new HashMap<>();
+    private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<>();
     private UUID gameId;
     private UUID playerId;
     private Session session;
@@ -133,7 +142,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private int lastUpdatedTurn;
     
     
-    private Map<String, Card> loadedCards = new HashMap<String, Card>();
+    private Map<String, Card> loadedCards = new HashMap<>();
 
     private int storedHeight;
     
@@ -186,7 +195,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {
-        Map<String, JComponent> components = new HashMap<String, JComponent>();
+        Map<String, JComponent> components = new HashMap<>();
 
         components.put("jSplitPane1", jSplitPane1);
         components.put("pnlBattlefield", pnlBattlefield);
@@ -247,6 +256,8 @@ public final class GamePanel extends javax.swing.JPanel {
         } catch (InterruptedException ex) {
             logger.fatal("popupContainer error:", ex);
         }
+        jPanel2.remove(bigCard);
+        this.bigCard = null;
     }
 
     private void saveDividerLocations() {
@@ -685,7 +696,7 @@ public final class GamePanel extends javax.swing.JPanel {
         for (PlayerView playerView : gameView.getPlayers()) {
             if (playerView.getPlayerId().equals(playerId)) {
                 if (playerView.isActive()) {
-                    options = new HashMap<String, Serializable>();
+                    options = new HashMap<>();
                     options.put("your_turn", true);
                     messageToDisplay = message + " <div style='font-size:11pt'>Your turn</div>";
                 }
@@ -817,7 +828,7 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane2 = new javax.swing.JSplitPane();
         handContainer = new HandPanel();
 
-        handCards = new HashMap<String, CardsView>();
+        handCards = new HashMap<>();
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(7);
@@ -1384,7 +1395,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void createPhaseButton(String name) {
         if (hoverButtons == null) {
-            hoverButtons = new LinkedHashMap<String, HoverButton>();
+            hoverButtons = new LinkedHashMap<>();
         }
         Rectangle rect = new Rectangle(36, 36);
         HoverButton button = new HoverButton("", ImageManagerImpl.getInstance().getPhaseImage(name), rect);

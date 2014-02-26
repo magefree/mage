@@ -56,7 +56,7 @@ public class Cards extends javax.swing.JPanel {
 
     private static final Logger logger = Logger.getLogger(Cards.class);
 
-    private Map<UUID, MageCard> cards = new LinkedHashMap<UUID, MageCard>();
+    private final Map<UUID, MageCard> cards = new LinkedHashMap<>();
     private boolean dontDisplayTapped = false;
     private static final int GAP_X = 5;
     private String zone;
@@ -89,10 +89,10 @@ public class Cards extends javax.swing.JPanel {
     }
 
     public void cleanUp() {
-        ActionCallback actionCallback = Plugins.getInstance().getActionCallback();
-        if (actionCallback instanceof MageActionCallback) {
-            ((MageActionCallback) actionCallback).setCardPreviewComponent(null);
-        }
+//        ActionCallback actionCallback = Plugins.getInstance().getActionCallback();
+//        if (actionCallback instanceof MageActionCallback) {
+//            ((MageActionCallback) actionCallback).setCardPreviewComponent(null);
+//        }
     }
 
     /**

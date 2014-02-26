@@ -61,9 +61,7 @@ import mage.client.constants.Constants.DeckEditorMode;
 import static mage.client.constants.Constants.DeckEditorMode.Constructed;
 import static mage.client.constants.Constants.DeckEditorMode.Limited;
 import static mage.client.constants.Constants.DeckEditorMode.Sideboard;
-import mage.client.constants.Constants.SortBy;
 import mage.client.dialog.AddLandDialog;
-import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
@@ -142,9 +140,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
         this.cardSelector.cleanUp();
         this.deckArea.cleanUp();
+
         this.remove(bigCard);
         this.bigCard = null;
-        ((MageActionCallback) Plugins.getInstance().getActionCallback()).setCardPreviewComponent(null);
     }
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
