@@ -73,7 +73,7 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect<
         for (UUID targetId: getTargetPointer().getTargets(game, source)) {
             Card card = game.getCard(targetId);
             if (card != null) {
-                Player player = game.getPlayer(card.getOwnerId());
+                Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
                     if(player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), tapped)){
                         result = true;
