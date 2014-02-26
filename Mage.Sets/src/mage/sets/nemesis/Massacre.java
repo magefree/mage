@@ -28,24 +28,32 @@
 package mage.sets.nemesis;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.constants.Rarity;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
 
 /**
  *
  * @author Plopman
  */
 public class Massacre extends CardImpl<Massacre> {
+
+    private static final FilterPermanent filterPlains = new FilterPermanent();
+    private static final FilterPermanent filterSwamp = new FilterPermanent();
+
+    static {
+        filterPlains.add(new SubtypePredicate(("Plains")));
+        filterSwamp.add(new SubtypePredicate(("Swamp")));
+    }
 
     public Massacre(UUID ownerId) {
         super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
@@ -54,7 +62,10 @@ public class Massacre extends CardImpl<Massacre> {
         this.color.setBlack(true);
 
         // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl("If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost", new MassacreCost()));
+        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
+                new OpponentControlsPermanentCondition(filterPlains),
+                new ControlsPermanentCondition(filterSwamp));
+        this.addAbility(new AlternativeCostSourceAbility(null, condition));
         // All creatures get -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
     }
@@ -67,45 +78,4 @@ public class Massacre extends CardImpl<Massacre> {
     public Massacre copy() {
         return new Massacre(this);
     }
-}
-
-class MassacreCost extends CostImpl<MassacreCost> {
-
-    
-    
-    public MassacreCost() {
-        this.text = "If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.";
-    }
-
-    public MassacreCost(MassacreCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        paid = canPay(sourceId, controllerId, game);
-        return paid;
-    }
-
-    @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        FilterControlledLandPermanent filterSwamp = new FilterControlledLandPermanent("Swamp");
-        filterSwamp.add(new SubtypePredicate("Swamp"));
-        FilterControlledLandPermanent filterPlains = new FilterControlledLandPermanent("Plains");
-        filterPlains.add(new SubtypePredicate("Plains"));
-        if (game.getBattlefield().contains(filterSwamp, controllerId, 1, game)) {
-            for(UUID uuid : game.getOpponents(controllerId)){
-                if(game.getBattlefield().contains(filterPlains, uuid, 1, game)){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public MassacreCost copy() {
-        return new MassacreCost(this);
-    }
-
 }

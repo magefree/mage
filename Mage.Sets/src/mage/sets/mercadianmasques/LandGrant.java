@@ -28,16 +28,14 @@
 package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.CompositeCost;
-import mage.abilities.costs.Cost;
+import mage.abilities.condition.common.CardsInHandCondition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -57,8 +55,9 @@ public class LandGrant extends CardImpl<LandGrant> {
         this.color.setGreen(true);
 
         // If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost.
-        Cost cost = new CompositeCost(new GenericManaCost(0), new LandGrantCost(), "If you have no land cards in hand, you may reveal your hand");
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl("If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost", cost));
+        this.addAbility(new AlternativeCostSourceAbility(new LandGrantReavealCost(), new CardsInHandCondition(CardsInHandCondition.CountType.EQUAL_TO, 0),
+            "If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost."));
+
         // Search your library for a Forest card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
     }
@@ -73,13 +72,13 @@ public class LandGrant extends CardImpl<LandGrant> {
     }
 }
 
-class LandGrantCost extends CostImpl<LandGrantCost> {
+class LandGrantReavealCost extends CostImpl<LandGrantReavealCost> {
 
-    public LandGrantCost() {
-        this.text = "If you have no land cards in hand, you may reveal your hand";
+    public LandGrantReavealCost() {
+        this.text = "reveal your hand";
     }
 
-    public LandGrantCost(LandGrantCost cost) {
+    public LandGrantReavealCost(LandGrantReavealCost cost) {
         super(cost);
     }
 
@@ -95,16 +94,12 @@ class LandGrantCost extends CostImpl<LandGrantCost> {
 
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        Player player = game.getPlayer(controllerId);
-        if (player != null && player.getHand().count(new FilterLandCard(), game) == 0) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     @Override
-    public LandGrantCost copy() {
-        return new LandGrantCost(this);
+    public LandGrantReavealCost copy() {
+        return new LandGrantReavealCost(this);
     }
 
 }

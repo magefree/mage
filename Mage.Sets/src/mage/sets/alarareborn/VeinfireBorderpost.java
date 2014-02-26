@@ -29,10 +29,12 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
@@ -51,9 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class VeinfireBorderpost extends CardImpl<VeinfireBorderpost> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("basic land");
-    private static final String COST_DESCRIPTION = "pay {1} and return a basic land you control to its owner's hand";
-    private static final String ALTERNATIVE_COST_DESCRIPTION = "You may pay {1} and return a basic land you control to its owner's hand rather than pay Veinfire Borderpost's mana cost";
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a basic land");
 
     static {
         filter.add(new SupertypePredicate("Basic"));
@@ -66,8 +66,9 @@ public class VeinfireBorderpost extends CardImpl<VeinfireBorderpost> {
         this.color.setRed(true);
 
         // You may pay {1} and return a basic land you control to its owner's hand rather than pay Veinfire Borderpost's mana cost.
-        Cost cost = new CompositeCost(new GenericManaCost(1), new ReturnToHandTargetCost(new TargetControlledPermanent(filter)), COST_DESCRIPTION);
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, cost));
+        Ability ability = new AlternativeCostSourceAbility(new GenericManaCost(1));
+        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
+        this.addAbility(ability);
 
         // Veinfire Borderpost enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

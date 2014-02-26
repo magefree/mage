@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -62,9 +63,7 @@ public class Abolish extends CardImpl<Abolish> {
         this.color.setWhite(true);
 
         // You may discard a Plains card rather than pay Abolish's mana cost.
-        this.getSpellAbility().addAlternativeCost(
-                new AlternativeCostImpl("You may discard a Plains card rather than pay Abolish's mana cost",
-                new DiscardTargetCost(new TargetCardInHand(filterCost))));
+        this.addAbility(new AlternativeCostSourceAbility(new DiscardTargetCost(new TargetCardInHand(filterCost))));
 
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -25,25 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 
 /**
- * Battlefield checking condition.  This condition can decorate other conditions
- * as well as be used standalone.
  *
- * @see #Controls(mage.filter.Filter)
- * @see #Controls(mage.filter.Filter, mage.abilities.condition.Condition)
- *
- * @author nantuko
- * @author maurer.it_at_gmail.com
+ * @author LevelX2
  */
-public class ControlsPermanentCondition implements Condition {
+
+public class OpponentControlsPermanentCondition implements Condition {
 
     public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO };
     private FilterPermanent filter;
@@ -55,10 +52,10 @@ public class ControlsPermanentCondition implements Condition {
      * Applies a filter and delegates creation to
      * {@link #ControlsPermanent(mage.filter.FilterPermanent, mage.abilities.condition.common.ControlsPermanent.CountType, int)}
      * with {@link CountType#MORE_THAN}, and 0.
-     * 
+     *
      * @param filter
      */
-    public ControlsPermanentCondition(FilterPermanent filter) {
+    public OpponentControlsPermanentCondition(FilterPermanent filter) {
         this(filter, CountType.MORE_THAN, 0);
     }
 
@@ -71,7 +68,7 @@ public class ControlsPermanentCondition implements Condition {
      * @param type
      * @param count
      */
-    public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count ) {
+    public OpponentControlsPermanentCondition ( FilterPermanent filter, CountType type, int count ) {
         this.filter = filter;
         this.type = type;
         this.count = count;
@@ -88,7 +85,7 @@ public class ControlsPermanentCondition implements Condition {
      * @param count
      * @param conditionToDecorate
      */
-    public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count, Condition conditionToDecorate ) {
+    public OpponentControlsPermanentCondition ( FilterPermanent filter, CountType type, int count, Condition conditionToDecorate ) {
         this(filter, type, count);
         this.condition = conditionToDecorate;
     }
@@ -98,7 +95,7 @@ public class ControlsPermanentCondition implements Condition {
         boolean conditionApplies = false;
 
         FilterPermanent localFilter = filter.copy();
-        localFilter.add(new ControllerIdPredicate(source.getControllerId()));
+        localFilter.add(new ControllerPredicate(TargetController.OPPONENT));
 
         switch ( this.type ) {
             case FEWER_THAN:

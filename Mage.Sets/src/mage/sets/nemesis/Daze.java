@@ -28,15 +28,13 @@
 package mage.sets.nemesis;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.CompositeCost;
-import mage.abilities.costs.Cost;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,9 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Daze extends CardImpl<Daze> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Island");
-    private static final String COST_DESCRIPTION = "Return an island you control to its owner's hand";
-    private static final String ALTERNATIVE_COST_DESCRIPTION = "You may return an island you control to its owner's hand rather than pay {this}'s mana cost";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Island");
 
     static {
         filter.add(new SubtypePredicate("Island"));
@@ -65,8 +61,8 @@ public class Daze extends CardImpl<Daze> {
         this.color.setBlue(true);
 
         // You may return an Island you control to its owner's hand rather than pay Daze's mana cost.
-        Cost cost = new CompositeCost(new GenericManaCost(0), new ReturnToHandTargetCost(new TargetControlledPermanent(filter)), COST_DESCRIPTION);
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, cost));
+        this.addAbility(new AlternativeCostSourceAbility(new ReturnToHandTargetCost(new TargetControlledPermanent(filter))));
+
         // Counter target spell unless its controller pays {1}.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));

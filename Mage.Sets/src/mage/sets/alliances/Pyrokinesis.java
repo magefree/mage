@@ -32,6 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.ExileFromHandCost;
@@ -57,12 +58,10 @@ public class Pyrokinesis extends CardImpl<Pyrokinesis> {
         this.color.setRed(true);
 
         // You may exile a red card from your hand rather than pay Pyrokinesis's mana cost.
-        FilterOwnedCard filter = new FilterOwnedCard("red card from your hand");
+        FilterOwnedCard filter = new FilterOwnedCard("a red card from your hand");
         filter.add(new ColorPredicate(ObjectColor.RED));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
-        CostsImpl<Cost> costs = new CostsImpl<Cost>();
-        costs.add(new ExileFromHandCost(new TargetCardInHand(filter)));
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl("You may exile a red card from your hand rather than pay Pyrokinesis's mana cost", costs));
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
         
         // Pyrokinesis deals 4 damage divided as you choose among any number of target creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(4));

@@ -72,8 +72,10 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
     }
 
     private void convertToAlternativeCostAndAdd(Cost cost) {
-        AlternativeCost2 alternativeCost = new AlternativeCost2Impl(null, null, cost);
-        this.alternateCosts.add(alternativeCost);
+        if (cost != null) {
+            AlternativeCost2 alternativeCost = new AlternativeCost2Impl(null, null, cost);
+            this.alternateCosts.add(alternativeCost);
+        }
     }
 
     public AlternativeCostSourceAbility(final AlternativeCostSourceAbility ability) {
@@ -141,7 +143,7 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
         if (rule != null) {
             return rule;
         }
-        // If you control a Swamp, you may pay 4 life rather than pay Snuff Out's mana cost.
+        // you may cast Massacre without paying its mana cost.
         StringBuilder sb = new StringBuilder();
         if (condition != null) {
             sb.append(condition.toString());
@@ -157,15 +159,24 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
         String remarkText = "";
         for (AlternativeCost2 alternativeCost : alternateCosts) {
             if (numberCosts == 0) {
+                if (alternativeCost instanceof ManaCostsImpl) {
+                    sb.append("pay ");
+                }
                 sb.append(alternativeCost.getText(false));
                 remarkText = alternativeCost.getReminderText();
             } else {
-                sb.append(" and ").append(alternativeCost.getText(true));
+                sb.append(" and ");
+                if (alternativeCost instanceof ManaCostsImpl) {
+                    sb.append("pay ");
+                }
+                sb.append(alternativeCost.getText(true));
             }
             ++numberCosts;
         }
         if (condition == null || alternateCosts.size() == 1) {
             sb.append(" rather than pay {source}'s mana cost");
+        } else if (alternateCosts.isEmpty()) {
+            sb.append("cast {this} without paying its mana cost");
         }
         sb.append(".");
         if (numberCosts == 1 && remarkText != null) {

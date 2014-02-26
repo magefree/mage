@@ -28,13 +28,13 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -45,8 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class HandOfEmrakul extends CardImpl<HandOfEmrakul> {
 
-    private static final String ALTERNATIVE_COST_DESCRIPTION = "You may sacrifice four Eldrazi Spawn rather than pay Hand of Emrakul's mana cost";
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Eldrazi Spawn");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("four Eldrazi Spawn");
 
     static {
         filter.add(new NamePredicate("Eldrazi Spawn"));
@@ -61,8 +60,8 @@ public class HandOfEmrakul extends CardImpl<HandOfEmrakul> {
         this.toughness = new MageInt(7);
 
         // You may sacrifice four Eldrazi Spawn rather than pay Hand of Emrakul's mana cost.
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION,
-                new SacrificeTargetCost(new TargetControlledPermanent(4, 4, filter, true))));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(4, 4, filter, true))));
+        // Annihilator 1
         this.addAbility(new AnnihilatorAbility(1));
     }
 

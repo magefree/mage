@@ -28,17 +28,15 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.Cost;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -53,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SalvageTitan extends CardImpl<SalvageTitan> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three artifacts");
     static{
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
@@ -68,8 +66,8 @@ public class SalvageTitan extends CardImpl<SalvageTitan> {
         this.toughness = new MageInt(4);
 
         // You may sacrifice three artifacts rather than pay Salvage Titan's mana cost.
-        Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledArtifactPermanent(), true));
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl("You may sacrifice three artifacts rather than pay {this}'s mana cost", cost));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledArtifactPermanent(), true))));
+
         // Exile three artifact cards from your graveyard: Return Salvage Titan from your graveyard to your hand.
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard(3, new FilterArtifactCard()))));
     }
