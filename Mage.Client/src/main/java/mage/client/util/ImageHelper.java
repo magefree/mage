@@ -162,6 +162,10 @@ public class ImageHelper {
     /**
      * Returns an image scaled to the size appropriate for the card picture
      * panel
+     * @param original
+     * @param width
+     * @param height
+     * @return
      */
     public static BufferedImage getResizedImage(BufferedImage original, int width, int height) {
         ResampleOp resampleOp = new ResampleOp(width, height);
