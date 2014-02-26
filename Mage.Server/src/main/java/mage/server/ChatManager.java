@@ -62,7 +62,9 @@ public class ChatManager {
     }
 
     public void leaveChat(UUID chatId, UUID userId) {
-        chatSessions.get(chatId).kill(userId, User.DisconnectReason.CleaningUp);
+        if (chatSessions.containsKey(chatId)) {
+            chatSessions.get(chatId).kill(userId, User.DisconnectReason.CleaningUp);
+        }
     }
 
     public void destroyChatSession(UUID chatId) {
