@@ -30,6 +30,7 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
@@ -52,7 +53,9 @@ public class WarriorsLesson extends CardImpl<WarriorsLesson> {
 
         // Until end of turn, up to two target creatures you control each gain "Whenever this creature deals combat damage to a player, draw a card."
         Ability ability = new DealsDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1),false);
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ability, Duration.EndOfTurn));
+        Effect effect = new GainAbilityTargetEffect(ability, Duration.EndOfTurn);
+        effect.setText("Until end of turn, up to two target creatures you control each gain \"Whenever this creature deals combat damage to a player, draw a card.\"");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,2));
     }
 
