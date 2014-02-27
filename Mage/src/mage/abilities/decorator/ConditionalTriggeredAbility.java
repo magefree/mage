@@ -3,6 +3,7 @@ package mage.abilities.decorator;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
+import mage.abilities.effects.Effects;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -51,10 +52,7 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
     public boolean checkTrigger(GameEvent event, Game game) {
         ability.setSourceId(this.getSourceId());
         ability.setControllerId(this.getControllerId());
-        if (ability.checkTrigger(event, game)) {
-            return true;
-        }
-        return false;
+        return ability.checkTrigger(event, game);
     }
 
     @Override
@@ -64,4 +62,10 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
         }
         return text;
     }
+
+    @Override
+    public Effects getEffects() {
+        return ability.getEffects();
+    }
+
 }

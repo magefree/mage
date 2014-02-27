@@ -121,7 +121,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTar
         }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
-        if(target.getNumberOfTargets() > 1){
+        if(target.getMaxNumberOfTargets() > 1){
             if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
                 sb.append("Up to");
             }

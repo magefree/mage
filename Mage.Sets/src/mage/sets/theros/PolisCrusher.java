@@ -33,28 +33,36 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.MonstrousCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.FirstTargetPointer;
 
 /**
  *
  * @author LevelX2
  */
 public class PolisCrusher extends CardImpl<PolisCrusher> {
+
+    private static final FilterCard filter = new FilterCard("enchantments");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+    }
 
     public PolisCrusher(UUID ownerId) {
         super(ownerId, 198, "Polis Crusher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
@@ -69,12 +77,12 @@ public class PolisCrusher extends CardImpl<PolisCrusher> {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // protection from enchantments
-        this.addAbility(new ProtectionAbility(new FilterEnchantmentPermanent()));
+        this.addAbility(new ProtectionAbility(filter));
         // {4}{R}{G}: Monstrosity 3.
         this.addAbility(new MonstrosityAbility("{4}{R}{G}", 3));
         // Whenever Polis Crusher deals combat damage to a player, if Polis Crusher is monstrous, destroy target enchantment that player controls.
         Ability ability = new ConditionalTriggeredAbility(
-                new DealsCombatDamageToAPlayerTriggeredAbility(new PolisCrusherDestroyEffect(), false, true), 
+                new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true),
                 MonstrousCondition.getInstance(),
                 "Whenever {this} deals combat damage to a player, if {this} is monstrous, destroy target enchantment that player controls.");
         this.addAbility(ability);
@@ -85,44 +93,28 @@ public class PolisCrusher extends CardImpl<PolisCrusher> {
     }
 
     @Override
-    public PolisCrusher copy() {
-        return new PolisCrusher(this);
-    }
-}
-
-class PolisCrusherDestroyEffect extends OneShotEffect<PolisCrusherDestroyEffect> {
-
-    public PolisCrusherDestroyEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "destroy target enchantment that player controls";
-    }
-
-    public PolisCrusherDestroyEffect(final PolisCrusherDestroyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PolisCrusherDestroyEffect copy() {
-        return new PolisCrusherDestroyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player attackedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && attackedPlayer != null) {
-            FilterPermanent filter = new FilterEnchantmentPermanent("enchantment attacked player controls");
-            filter.add(new ControllerIdPredicate(attackedPlayer.getId()));
-            Target target = new TargetPermanent(filter);
-            target.setRequired(true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && controller.chooseTarget(outcome, target, source, game)) {
-                Permanent enchantment = game.getPermanent(target.getFirstTarget());
-                if (enchantment != null) {
-                    return enchantment.destroy(source.getSourceId(), game, false);
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof ConditionalTriggeredAbility) {
+            for (Effect effect : ability.getEffects()) {
+                if (effect instanceof DestroyTargetEffect) {
+                    Player attackedPlayer = game.getPlayer(effect.getTargetPointer().getFirst(game, ability));
+                    if (attackedPlayer != null) {
+                        ability.getTargets().clear();
+                        FilterPermanent filterEnchantment = new FilterEnchantmentPermanent("enchantment attacked player controls");
+                        filter.add(new ControllerIdPredicate(attackedPlayer.getId()));
+                        Target target = new TargetPermanent(filterEnchantment);
+                        target.setRequired(true);
+                        ability.addTarget(target);
+                        effect.setTargetPointer(new FirstTargetPointer());
+                        break;
+                    }
                 }
             }
         }
-        return false;
+    }
+
+    @Override
+    public PolisCrusher copy() {
+        return new PolisCrusher(this);
     }
 }

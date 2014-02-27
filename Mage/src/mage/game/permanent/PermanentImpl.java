@@ -97,8 +97,8 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     protected int maxBlockedBy = 0;
     protected boolean loyaltyUsed;
     protected boolean deathtouched;
-    protected List<UUID> attachments = new ArrayList<UUID>();
-    protected Map<String, List<UUID>> connectedCards = new HashMap<String, List<UUID>>();
+    protected List<UUID> attachments = new ArrayList<>();
+    protected Map<String, List<UUID>> connectedCards = new HashMap<>();
     protected List<UUID> dealtDamageByThisTurn;
     protected UUID attachedTo;
     protected UUID pairedCard;
@@ -139,9 +139,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             this.connectedCards.put(entry.getKey(), entry.getValue());
         }
         if (permanent.dealtDamageByThisTurn != null) {
-            dealtDamageByThisTurn = new ArrayList<UUID>(permanent.dealtDamageByThisTurn);
+            dealtDamageByThisTurn = new ArrayList<>(permanent.dealtDamageByThisTurn);
             if (permanent.markedDamage != null) {
-                markedDamage = new ArrayList<Counter>();
+                markedDamage = new ArrayList<>();
                 for (Counter counter : permanent.markedDamage) {
                     markedDamage.add(counter.copy());
                 }
@@ -552,7 +552,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         if (this.connectedCards.containsKey(key)) {
             this.connectedCards.get(key).add(connectedCard);
         } else {
-            List<UUID> list = new ArrayList<UUID>();
+            List<UUID> list = new ArrayList<>();
             list.add(connectedCard);
             this.connectedCards.put(key, list);
         }
@@ -643,7 +643,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
                     deathtouched = true;
                 }
                 if (dealtDamageByThisTurn == null) {
-                    dealtDamageByThisTurn = new ArrayList<UUID>();
+                    dealtDamageByThisTurn = new ArrayList<>();
                 }
                 dealtDamageByThisTurn.add(sourceId);
             }
@@ -736,7 +736,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
     private void markDamage(Counter counter) {
         if (markedDamage == null) {
-            markedDamage = new ArrayList<Counter>();
+            markedDamage = new ArrayList<>();
         }
         markedDamage.add(counter);
     }
@@ -1001,7 +1001,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         if (connectedCards.containsKey("imprint")) {
             this.connectedCards.get("imprint").add(imprintedCard);
         } else {
-            List<UUID> imprinted = new ArrayList<UUID>();
+            List<UUID> imprinted = new ArrayList<>();
             imprinted.add(imprintedCard);
             this.connectedCards.put("imprint", imprinted);
         }

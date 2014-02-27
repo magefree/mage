@@ -39,12 +39,12 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
+import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
