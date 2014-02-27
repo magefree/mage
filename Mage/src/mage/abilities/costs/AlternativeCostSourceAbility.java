@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.ManaCost;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -110,8 +110,8 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
                         alternateCost.activate();
                         for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
-                            if (cost instanceof ManaCostsImpl) {
-                                ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                            if (cost instanceof ManaCost) {
+                                ability.getManaCostsToPay().add((ManaCost) cost.copy());
                             } else {
                                 ability.getCosts().add(cost.copy());
                             }
@@ -157,16 +157,16 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
         }
         int numberCosts = 0;
         String remarkText = "";
-        for (AlternativeCost2 alternativeCost : alternateCosts) {
+        for (AlternativeCost2 alternativeCost : alternateCosts) {            
             if (numberCosts == 0) {
-                if (alternativeCost instanceof ManaCostsImpl) {
+                if (alternativeCost.getCost() instanceof ManaCost) {
                     sb.append("pay ");
                 }
                 sb.append(alternativeCost.getText(false));
                 remarkText = alternativeCost.getReminderText();
             } else {
                 sb.append(" and ");
-                if (alternativeCost instanceof ManaCostsImpl) {
+                if (alternativeCost.getCost() instanceof ManaCost) {
                     sb.append("pay ");
                 }
                 sb.append(alternativeCost.getText(true));

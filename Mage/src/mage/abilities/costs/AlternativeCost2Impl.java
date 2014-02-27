@@ -147,4 +147,13 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
     public AlternativeCost2Impl copy() {
         return new AlternativeCost2Impl(this);
     }
+
+    @Override
+    public Cost getCost() {
+        if (this.iterator().hasNext()) {
+            return this.iterator().next();
+        }
+        return null;
+    }
+
 }

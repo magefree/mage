@@ -82,4 +82,6 @@ public interface AlternativeCost2 extends Cost {
      */
     boolean isActivated();
 
+    Cost getCost();
+
 }
