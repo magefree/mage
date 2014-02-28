@@ -36,8 +36,11 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.Token;
 
 /**
@@ -52,7 +55,7 @@ public class KormusBell extends CardImpl<KormusBell> {
         this.expansionSetCode = "LEA";
 
         // All Swamps are 1/1 black creatures that are still lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new KormusBellToken(), "lands", new FilterLandPermanent("Swamps"), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new KormusBellToken(), "lands", new FilterPermanent("Swamp", "Swamps"), Duration.WhileOnBattlefield)));
     }
 
     public KormusBell(final KormusBell card) {
