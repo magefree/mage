@@ -40,6 +40,7 @@ import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.game.GameException;
+import mage.game.Table;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Action;
@@ -655,6 +656,22 @@ public class MageServerImpl implements MageServer {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TournamentManager.getInstance().quit(tournamentId, userId);
+            }
+        });
+    }
+
+    @Override
+    public void quitDraft(final UUID draftId, final String sessionId) throws MageException {
+        execute("quitDraft", sessionId, new Action() {
+            @Override
+            public void execute() {
+                UUID tableId = DraftManager.getInstance().getControllerByDraftId(draftId).getTableId();
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                Table table = TableManager.getInstance().getTable(tableId);
+                if (table.isTournament()) {
+                    UUID tournamentId = table.getTournament().getId();
+                    TournamentManager.getInstance().quit(tournamentId, userId);
+                }
             }
         });
     }

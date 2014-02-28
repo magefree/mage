@@ -105,10 +105,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         super(name, range);
         human = false;
         userData = new UserData(UserGroup.COMPUTER, 64, false);
+        pickedCards = new ArrayList<PickedCard>();
     }
 
     protected ComputerPlayer(UUID id) {
         super(id);
+        pickedCards = new ArrayList<PickedCard>();
     }
 
     public ComputerPlayer(final ComputerPlayer player) {
@@ -1450,7 +1452,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
     @Override
     public void construct(Tournament tournament, Deck deck) {
-        if (deck.getCards().size() < 40) {
+        if (deck != null && deck.getCards().size() < 40 && deck.getSideboard().size() > 0 ) {
             //pick the top 23 cards
             if (chosenColors == null) {
                 for (Card card: deck.getSideboard()) {
@@ -1604,9 +1606,6 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
      * @param score
      */
     protected void rememberPick(Card card, int score) {
-        if (pickedCards == null) {
-            pickedCards = new ArrayList<PickedCard>();
-        }
         pickedCards.add(new PickedCard(card, score));
     }
 
@@ -1891,11 +1890,18 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        unplayable = new TreeMap<Mana, Card>();
-        playableNonInstant = new ArrayList<Card>();
-        playableInstant = new ArrayList<Card>();
-        playableAbilities = new ArrayList<ActivatedAbility>();
+        unplayable = new TreeMap<>();
+        playableNonInstant = new ArrayList<>();
+        playableInstant = new ArrayList<>();
+        playableAbilities = new ArrayList<>();
     }
+
+    @Override
+    public void cleanUpOnMatchEnd() {
+        super.cleanUpOnMatchEnd(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
 
     @Override
     public T copy() {

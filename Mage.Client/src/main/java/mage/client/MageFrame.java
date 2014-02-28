@@ -158,9 +158,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     //TODO: make gray theme, implement theme selector in preferences dialog
     private static boolean grayMode = false;
 
-    private static final Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
-    private static final Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
-    private static final Map<UUID, DraftPanel> drafts = new HashMap<UUID, DraftPanel>();
+    private static final Map<UUID, ChatPanel> chats = new HashMap<>();
+    private static final Map<UUID, GamePanel> games = new HashMap<>();
+    private static final Map<UUID, DraftPanel> drafts = new HashMap<>();
     private static final MageUI ui = new MageUI();
 
     private static final ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();

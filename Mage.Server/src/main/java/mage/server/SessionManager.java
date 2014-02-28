@@ -49,7 +49,7 @@ public class SessionManager {
     public static SessionManager getInstance() {
         return INSTANCE;
     }
-    private ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<String, Session>();
+    private final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
     public Session getSession(String sessionId) {
         if (sessions == null || sessionId == null) {
@@ -116,7 +116,7 @@ public class SessionManager {
     }
 
     public Map<String, Session> getSessions() {
-        Map<String, Session> map = new HashMap<String, Session>();
+        Map<String, Session> map = new HashMap<>();
         for (Map.Entry<String, Session> entry : sessions.entrySet()) {
             map.put(entry.getKey(), entry.getValue());
         }
@@ -139,10 +139,7 @@ public class SessionManager {
     }
 
     public boolean isValidSession(String sessionId) {
-        if (sessions.containsKey(sessionId)) {
-            return true;
-        }
-        return false;
+        return sessions.containsKey(sessionId);
     }
 
     public User getUser(String sessionId) {

@@ -28,27 +28,51 @@
 
 package mage.player.ai;
 
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.PhaseStep;
+import static mage.constants.PhaseStep.BEGIN_COMBAT;
+import static mage.constants.PhaseStep.CLEANUP;
+import static mage.constants.PhaseStep.COMBAT_DAMAGE;
+import static mage.constants.PhaseStep.DECLARE_ATTACKERS;
+import static mage.constants.PhaseStep.DECLARE_BLOCKERS;
+import static mage.constants.PhaseStep.DRAW;
+import static mage.constants.PhaseStep.END_COMBAT;
+import static mage.constants.PhaseStep.END_TURN;
+import static mage.constants.PhaseStep.FIRST_COMBAT_DAMAGE;
+import static mage.constants.PhaseStep.POSTCOMBAT_MAIN;
+import static mage.constants.PhaseStep.PRECOMBAT_MAIN;
+import static mage.constants.PhaseStep.UPKEEP;
+import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
-import mage.game.turn.*;
-import mage.players.Player;
+import mage.game.turn.BeginCombatStep;
+import mage.game.turn.CleanupStep;
+import mage.game.turn.CombatDamageStep;
+import mage.game.turn.CombatPhase;
+import mage.game.turn.DeclareAttackersStep;
+import mage.game.turn.DeclareBlockersStep;
+import mage.game.turn.EndOfCombatStep;
+import mage.game.turn.EndPhase;
+import mage.game.turn.EndStep;
+import mage.game.turn.FirstCombatDamageStep;
+import mage.game.turn.PostCombatMainPhase;
+import mage.game.turn.PostCombatMainStep;
+import mage.game.turn.Step;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+
 
 
 /**
  *
  * @author ayratn
  */
-public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
+public class ComputerPlayer7 extends ComputerPlayer6 {
 
     private static final transient Logger logger = Logger.getLogger(ComputerPlayer7.class);
 

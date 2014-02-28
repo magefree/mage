@@ -43,13 +43,12 @@ public class BoosterDraft extends DraftImpl<BoosterDraft> {
 
     @Override
     public void start() {
-        while (boosterNum < numberBoosters) {
+        while (!isAbort() && boosterNum < numberBoosters) {
             openBooster();
             while (!isAbort() && pickCards()) {
                 if (boosterNum % 2 == 1) {
                     passLeft();
-                }
-                else {
+                } else {
                     passRight();
                 }
                 fireUpdatePlayersEvent();

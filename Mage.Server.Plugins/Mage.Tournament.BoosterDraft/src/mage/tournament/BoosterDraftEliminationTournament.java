@@ -67,6 +67,9 @@ public class BoosterDraftEliminationTournament extends TournamentSingleEliminati
 
     @Override
     public void nextStep() {
+        if (isAbort()) {
+            currentStep = TournamentStep.COMPETE;
+        }
         switch (currentStep) {
             case START:
                 currentStep = TournamentStep.DRAFT;

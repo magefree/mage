@@ -124,6 +124,7 @@ public interface MageServer {
 
     //draft methods
     void joinDraft(UUID draftId, String sessionId) throws MageException;
+    void quitDraft(UUID draftId, String sessionId) throws MageException;
     DraftPickView sendCardPick(UUID draftId, String sessionId, UUID cardId) throws MageException;
 
     //challenge methods

@@ -1000,6 +1000,7 @@ public class SessionImpl implements Session {
         }
         return false;
     }
+
     @Override
     public boolean quitTournament(UUID tournamentId) {
         try {
@@ -1011,6 +1012,19 @@ public class SessionImpl implements Session {
             handleMageException(ex);
         } catch (Throwable t) {
             handleThrowable(t);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean quitDraft(UUID draftId) {
+        try {
+            if (isConnected()) {
+                server.quitDraft(draftId, sessionId);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
         }
         return false;
     }

@@ -737,6 +737,7 @@ class TableTableModel extends AbstractTableModel {
                         }
                         return "Join";
                     case CONSTRUCTING:
+                    case DRAFTING:
                         if (tables[arg0].isTournament()) {
                             return "Show";
                         }

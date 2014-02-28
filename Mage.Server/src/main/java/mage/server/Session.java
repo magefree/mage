@@ -28,22 +28,21 @@
 
 package mage.server;
 
+import java.util.Date;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.MageException;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
+import mage.server.util.ConfigSettings;
 import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
-
-import java.util.Date;
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import mage.server.util.ConfigSettings;
 
 /**
  *
@@ -53,13 +52,13 @@ public class Session {
 
     private static final Logger logger = Logger.getLogger(Session.class);
 
-    private String sessionId;
+    private final String sessionId;
     private UUID userId;
     private String host;
     private int messageId = 0;
-    private Date timeConnected;
+    private final Date timeConnected;
     private boolean isAdmin = false;
-    private AsynchInvokerCallbackHandler callbackHandler;
+    private final AsynchInvokerCallbackHandler callbackHandler;
 
     public Session(String sessionId, InvokerCallbackHandler callbackHandler) {
         this.sessionId = sessionId;
@@ -134,30 +133,42 @@ public class Session {
     }
 
     private void updateAvatar(String userName, UserData userData) {
-           //TODO: move to separate class
+        //TODO: move to separate class
         //TODO: add for checking for private key
-        if (userName.equals("nantuko")) {
-            userData.setAvatarId(1000);
-        } else if (userName.equals("i_no_k")) {
-            userData.setAvatarId(1002);
-        } else if (userName.equals("Askael")) {
-            userData.setAvatarId(1004);
-        } else if (userName.equals("North")) {
-            userData.setAvatarId(1006);
-        } else if (userName.equals("BetaSteward")) {
-            userData.setAvatarId(1008);
-        } else if (userName.equals("Arching")) {
-            userData.setAvatarId(1010);
-        } else if (userName.equals("loki")) {
-            userData.setAvatarId(1012);
-        } else if (userName.equals("Alive")) {
-            userData.setAvatarId(1014);
-        } else if (userName.equals("Rahan")) {
-            userData.setAvatarId(1016);
-        } else if (userName.equals("Ayrat")) {
-            userData.setAvatarId(1018);
-        } else if (userName.equals("Bandit")) {
-            userData.setAvatarId(1020);
+        switch (userName) {
+            case "nantuko":
+                userData.setAvatarId(1000);
+                break;
+            case "i_no_k":
+                userData.setAvatarId(1002);
+                break;
+            case "Askael":
+                userData.setAvatarId(1004);
+                break;
+            case "North":
+                userData.setAvatarId(1006);
+                break;
+            case "BetaSteward":
+                userData.setAvatarId(1008);
+                break;
+            case "Arching":
+                userData.setAvatarId(1010);
+                break;
+            case "loki":
+                userData.setAvatarId(1012);
+                break;
+            case "Alive":
+                userData.setAvatarId(1014);
+                break;
+            case "Rahan":
+                userData.setAvatarId(1016);
+                break;
+            case "Ayrat":
+                userData.setAvatarId(1018);
+                break;
+            case "Bandit":
+                userData.setAvatarId(1020);
+                break;
         }
     }
 

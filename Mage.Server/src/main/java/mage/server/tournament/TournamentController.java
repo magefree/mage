@@ -50,7 +50,9 @@ import mage.server.TableController;
 import mage.server.TableManager;
 import mage.server.User;
 import mage.server.UserManager;
+import mage.server.draft.DraftController;
 import mage.server.draft.DraftManager;
+import mage.server.draft.DraftSession;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;
@@ -75,8 +77,6 @@ public class TournamentController {
     private ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<>();
 
-    private boolean abort = false;
-
     public TournamentController(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         this.userPlayerMap = userPlayerMap;
         chatId = ChatManager.getInstance().createChatSession();
@@ -99,14 +99,14 @@ public class TournamentController {
                             startDraft(event.getDraft());
                             break;
                         case CONSTRUCT:
-                            if (!abort) {
+                            if (!isAbort()) {
                                 construct();
                             } else {
                                 endTournament();
                             }
                             break;
                         case START_MATCH:
-                            if (!abort) {
+                            if (!isAbort()) {
                                 initTournament(); // set state
                                 startMatch(event.getPair(), event.getMatchOptions());
                             }
@@ -193,9 +193,12 @@ public class TournamentController {
     }
 
     private void endTournament() {
+        for (TournamentPlayer player: tournament.getPlayers()) {
+            player.setStateAtTournamentEnd();
+        }
         for (final TournamentSession tournamentSession: tournamentSessions.values()) {
             tournamentSession.tournamentOver();
-            tournamentSession.removeTournament();
+            tournamentSession.removeTournamentForUser();
         }
         this.tournamentSessions.clear();
         TableManager.getInstance().endTournament(tableId, tournament);
@@ -286,7 +289,15 @@ public class TournamentController {
                         if (tPlayer.getState().equals(TournamentPlayerState.DRAFTING)) {
                             info = "during Draft phase";
                             if (!checkToReplaceDraftPlayerByAi(userId, tPlayer)) {
-                                this.abortTournament();
+                                this.abortDraftTournament();
+                            } else {
+                                DraftController draftController = DraftManager.getInstance().getController(tableId);
+                                if (draftController != null) {
+                                    DraftSession draftSession = draftController.getDraftSession(playerId);
+                                    if (draftSession != null) {
+                                        DraftManager.getInstance().kill(draftSession.getDraftId(), userId);
+                                    }
+                                }
                             }
                         } else if (tPlayer.getState().equals(TournamentPlayerState.CONSTRUCTING)) {
                             info = "during Construction phase";
@@ -315,13 +326,18 @@ public class TournamentController {
         if (humans > 1) {
             String replacePlayerName = "Draftbot";
             User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                replacePlayerName = "Draftbot (" + user.getName() + ")";
-            }
             TableController tableController = TableManager.getInstance().getController(tableId);
             if (tableController != null) {
+                if (user != null) {
+                    replacePlayerName = "Draftbot (" + user.getName() + ")";
+                }
                 tableController.replaceDraftPlayer(leavingPlayer.getPlayer(), replacePlayerName, "Computer - draftbot", 5);
-                ChatManager.getInstance().broadcast(chatId, "", leavingPlayer.getPlayer().getName() + " was replaced by draftbot", MessageColor.BLACK, true, null);
+                if (user != null) {
+                    user.removeDraft(leavingPlayer.getPlayer().getId());
+                    user.removeTable(leavingPlayer.getPlayer().getId());
+                    user.removeTournament(leavingPlayer.getPlayer().getId());
+                }
+                ChatManager.getInstance().broadcast(chatId, "", leavingPlayer.getPlayer().getName() + " was replaced by draftbot", MessageColor.BLACK, true, MessageType.STATUS);
             }
             return true;
         }
@@ -341,8 +357,12 @@ public class TournamentController {
         return new TournamentView(tournament);
     }
 
-    private void abortTournament() {
-        this.abort = true;
+    private void abortDraftTournament() {
+        tournament.setAbort(true);
         DraftManager.getInstance().getController(tableId).abortDraft();
+    }
+
+    public boolean isAbort() {
+        return tournament.isAbort();
     }
 }

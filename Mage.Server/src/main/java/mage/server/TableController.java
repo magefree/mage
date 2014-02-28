@@ -168,11 +168,11 @@ public class TableController {
                 return false;
             }
             tournament.addPlayer(player, seat.getPlayerType());
-            table.joinTable(player, seat);
-            user.addTable(player.getId(), table);
+            table.joinTable(player, seat);            
             logger.debug("player joined " + player.getId());
             //only inform human players and add them to sessionPlayerMap
             if (seat.getPlayer().isHuman()) {
+                user.addTable(player.getId(), table);
                 user.joinedTable(table.getRoomId(), table.getId(), true);
                 userPlayerMap.put(userId, player.getId());
             }

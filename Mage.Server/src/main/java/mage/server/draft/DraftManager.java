@@ -46,7 +46,7 @@ public class DraftManager {
 
     private DraftManager() {}
 
-    private ConcurrentHashMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<UUID, DraftController>();
+    private final ConcurrentHashMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<>();
 
     public UUID createDraftSession(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         DraftController draftController = new DraftController(draft, userPlayerMap, tableId);
@@ -82,6 +82,10 @@ public class DraftManager {
 
     public void removeDraft(UUID draftId) {
         draftControllers.remove(draftId);
+    }
+
+    public DraftController getControllerByDraftId(UUID draftId) {
+        return draftControllers.get(draftId);
     }
 
     public DraftController getController(UUID tableId) {

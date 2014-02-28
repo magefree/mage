@@ -48,12 +48,13 @@ import mage.players.PlayerList;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 
     protected final UUID id;
-    protected Map<UUID, DraftPlayer> players = new HashMap<UUID, DraftPlayer>();
-    protected PlayerList table = new PlayerList();
+    protected final Map<UUID, DraftPlayer> players = new HashMap<>();
+    protected final PlayerList table = new PlayerList();
     protected int numberBoosters;
     protected DraftCube draftCube;
     protected List<ExpansionSet> sets;
@@ -95,7 +96,7 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
             DraftPlayer newDraftPlayer = new DraftPlayer(newPlayer);
             DraftPlayer oldDraftPlayer = players.get(oldPlayer.getId());
             newDraftPlayer.setBooster(oldDraftPlayer.getBooster());
-            Map<UUID, DraftPlayer> newPlayers = new HashMap<UUID, DraftPlayer>();
+            Map<UUID, DraftPlayer> newPlayers = new HashMap<>();
             PlayerList newTable = new PlayerList();
             synchronized (players) {
                 for(Map.Entry<UUID, DraftPlayer> entry :players.entrySet()) {
@@ -105,7 +106,10 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
                         newPlayers.put(entry.getKey(), entry.getValue());
                     }
                 }
-                players = newPlayers;
+                players.clear();
+                for (Map.Entry<UUID, DraftPlayer> entry: newPlayers.entrySet()) {
+                    players.put(entry.getKey(), entry.getValue());
+                }
             }
             synchronized (table) {
                 for(UUID playerId :table) {
@@ -115,7 +119,8 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
                         newTable.add(playerId);
                     }
                 }
-                table = newTable;
+                table.clear();
+                table.addAll(newTable);
             }
             if (oldDraftPlayer.isPicking()) {
                 newDraftPlayer.setPicking();
@@ -179,13 +184,13 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
         this.addPick(playerId, players.get(playerId).getBooster().get(0).getId());
     }
 
-        protected void passLeft() {
+    protected void passLeft() {
         synchronized (players) {
             UUID startId = table.get(0);
             UUID currentId = startId;
             UUID nextId = table.getNext();
-                DraftPlayer current = players.get(currentId);
-                DraftPlayer next = players.get(nextId);
+            DraftPlayer current = players.get(currentId);
+            DraftPlayer next = players.get(nextId);
             List<Card> currentBooster = current.booster;
             while (true) {
                 List<Card> nextBooster = next.booster;
@@ -194,8 +199,6 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
                     break;
                 }
                 currentBooster = nextBooster;
-                current = next;
-                currentId = nextId;
                 nextId = table.getNext();
                 next = players.get(nextId);
             }
@@ -217,8 +220,6 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
                     break;
                 }
                 currentBooster = prevBooster;
-                current = prev;
-                currentId = prevId;
                 prevId = table.getPrevious();
                 prev = players.get(prevId);
             }
@@ -261,6 +262,9 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
     }
 
     protected boolean donePicking() {
+        if(isAbort()) {
+            return true;
+        }
         for (DraftPlayer player: players.values()) {
             if (player.isPicking()) {
                 return false;

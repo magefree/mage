@@ -54,7 +54,6 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="bigCard" min="-2" max="-2" attributes="0"/>
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -94,11 +93,22 @@
                       </Group>
                   </Group>
               </Group>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="bigCard" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnQuitTournament" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
+                  <Component id="btnQuitTournament" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblPack1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -122,10 +132,10 @@
                       <Component id="lblCardNo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCardNo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtTimeRemaining" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblMessage" pref="32" max="32767" attributes="0"/>
+                  <Component id="lblMessage" pref="24" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="bigCard" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -133,26 +143,17 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="mage.client.cards.BigCard" name="bigCard">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblCardNo">
+        <Component class="javax.swing.JButton" name="btnQuitTournament">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Card #:"/>
+            <Property name="text" type="java.lang.String" value="Quit Tournament"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuitTournamentActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPack1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pack 1:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblPack2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Pack 2:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblPack3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Pack 3:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPack1">
@@ -161,10 +162,24 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JCheckBox" name="chkPack1">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPack2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pack 2:"/>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JTextField" name="txtPack2">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chkPack2">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPack3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pack 3:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPack3">
@@ -173,17 +188,18 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JCheckBox" name="chkPack3">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblCardNo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Card #:"/>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JTextField" name="txtCardNo">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="chkPack1">
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="chkPack2">
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="chkPack3">
         </Component>
         <Component class="javax.swing.JTextField" name="txtTimeRemaining">
           <Properties>
@@ -203,6 +219,8 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
+        </Component>
+        <Component class="mage.client.cards.BigCard" name="bigCard">
         </Component>
       </SubComponents>
     </Container>

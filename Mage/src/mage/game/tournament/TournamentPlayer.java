@@ -170,5 +170,15 @@ public class TournamentPlayer {
     public void CleanUpOnTournamentEnd() {
         this.deck = null;
     }
+
+    public void setStateAtTournamentEnd() {
+        if (this.getState().equals(TournamentPlayerState.DRAFTING)
+                || this.getState().equals(TournamentPlayerState.CONSTRUCTING)
+                || this.getState().equals(TournamentPlayerState.DUELING)
+                || this.getState().equals(TournamentPlayerState.SIDEBOARDING)
+                || this.getState().equals(TournamentPlayerState.WAITING)) {
+            this.setState(TournamentPlayerState.FINISHED);
+        }
+    }
 }
 

@@ -57,6 +57,8 @@ public interface GamePlay {
 
     boolean quitTournament(UUID tournamentId);
 
+    boolean quitDraft(UUID draftId);
+
     boolean submitDeck(UUID tableId, DeckCardLists deck);
 
     boolean updateDeck(UUID tableId, DeckCardLists deck);

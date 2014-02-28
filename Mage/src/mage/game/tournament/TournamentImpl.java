@@ -73,10 +73,12 @@ public abstract class TournamentImpl implements Tournament {
 
     protected Date startTime;
     protected Date endTime;
+    protected boolean abort;
 
     public TournamentImpl(TournamentOptions options) {
         this.options = options;
         startTime = new Date();
+        abort = false;
     }
 
     @Override
@@ -320,22 +322,25 @@ public abstract class TournamentImpl implements Tournament {
 
     public void construct() {
         tableEventSource.fireTableEvent(EventType.CONSTRUCT);
-        for (final TournamentPlayer player: players.values()) {
-            player.setConstructing();
-            new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        player.getPlayer().construct(TournamentImpl.this, player.getDeck());
+        if (!isAbort()) {
+            for (final TournamentPlayer player: players.values()) {
+
+                player.setConstructing();
+                new Thread(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            player.getPlayer().construct(TournamentImpl.this, player.getDeck());
+                        }
                     }
+                ).start();
+            }
+            synchronized(this) {
+                while (!isDoneConstructing()) {
+                    try {
+                        this.wait();
+                    } catch (InterruptedException ex) { }
                 }
-            ).start();
-        }
-        synchronized(this) {
-            while (!isDoneConstructing()) {
-                try {
-                    this.wait();
-                } catch (InterruptedException ex) { }
             }
         }
         nextStep();
@@ -406,7 +411,11 @@ public abstract class TournamentImpl implements Tournament {
         for(TournamentPlayer winner: this.getActivePlayers()) {
             winner.setState(TournamentPlayerState.FINISHED);
             if (options.getNumberRounds() == 0) { // if no swiss, last active is the winner
-                winner.setStateInfo("Winner");
+                if (isAbort()) {
+                    winner.setStateInfo("Tournament canceled");
+                } else {
+                    winner.setStateInfo("Winner");
+                }
             }
         }
     }
@@ -416,6 +425,16 @@ public abstract class TournamentImpl implements Tournament {
         for(TournamentPlayer tournamentPlayer: players.values()) {
             tournamentPlayer.CleanUpOnTournamentEnd();
         }
+    }
+
+    @Override
+    public boolean isAbort() {
+        return abort;
+    }
+
+    @Override
+    public void setAbort(boolean abort) {
+        this.abort = abort;
     }
 
 }

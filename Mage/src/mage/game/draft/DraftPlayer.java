@@ -87,7 +87,7 @@ public class DraftPlayer {
 
     public List<Card> getBooster() {
         synchronized(booster) {
-            return new ArrayList<Card>(booster);
+            return new ArrayList<>(booster);
         }
     }
 

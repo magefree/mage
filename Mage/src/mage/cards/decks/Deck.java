@@ -39,8 +39,8 @@ import mage.game.GameException;
 public class Deck implements Serializable {
 
     private String name;
-    private Set<Card> cards = new LinkedHashSet<Card>();
-    private Set<Card> sideboard = new LinkedHashSet<Card>();
+    private final Set<Card> cards = new LinkedHashSet<>();
+    private final Set<Card> sideboard = new LinkedHashSet<>();
 
     public static Deck load(DeckCardLists deckCardLists) throws GameException {
         return Deck.load(deckCardLists, false);
@@ -102,7 +102,7 @@ public class Deck implements Serializable {
     }
 
     public Set<String> getExpansionSetCodes() {
-        Set<String> sets = new LinkedHashSet<String>();
+        Set<String> sets = new LinkedHashSet<>();
         for (Card card : getCards()) {
             if (!sets.contains(card.getExpansionSetCode())) {
                 sets.add(card.getExpansionSetCode());

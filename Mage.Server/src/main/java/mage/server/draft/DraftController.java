@@ -55,11 +55,11 @@ public class DraftController {
     private static final Logger logger = Logger.getLogger(GameController.class);
     public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
-    private ConcurrentHashMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<UUID, DraftSession>();
-    private ConcurrentHashMap<UUID, UUID> userPlayerMap;
-    private UUID draftSessionId;
-    private Draft draft;
-    private UUID tableId;
+    private final ConcurrentHashMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<UUID, UUID> userPlayerMap;
+    private final UUID draftSessionId;
+    private final Draft draft;
+    private final UUID tableId;
 
     public DraftController(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         draftSessionId = UUID.randomUUID();
@@ -130,10 +130,20 @@ public class DraftController {
         checkStart();
     }
 
+    public DraftSession getDraftSession(UUID playerId) {
+        if (draftSessions.containsKey(playerId)) {
+            return draftSessions.get(playerId);
+        }
+        return null;
+    }
+
     public boolean replacePlayer(Player oldPlayer, Player newPlayer) {
-        if (draft.replacePlayer(oldPlayer, newPlayer)) {
-            draftSessions.get(oldPlayer.getId()).setKilled();
-            draftSessions.remove(oldPlayer.getId());
+        if (draft.replacePlayer(oldPlayer, newPlayer)) {            
+            DraftSession draftSession = draftSessions.get(oldPlayer.getId());
+            if (draftSession != null) {
+                draftSession.draftOver(); // closes the draft panel of the replaced player
+                draftSessions.remove(oldPlayer.getId());
+            }
             return true;
         }
         return false;

@@ -84,5 +84,6 @@ public interface Tournament {
 
     int getNumberRounds();
     void cleanUpOnTournamentEnd();
-
+    boolean isAbort();
+    void setAbort(boolean abort);
 }

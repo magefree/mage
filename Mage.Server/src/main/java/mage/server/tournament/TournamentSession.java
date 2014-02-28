@@ -147,7 +147,7 @@ public class TournamentSession {
         }
     }
 
-    public void removeTournament() {
+    public void removeTournamentForUser() {
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
             user.removeTournament(playerId);
@@ -163,7 +163,7 @@ public class TournamentSession {
     }
 
     void tournamentOver() {
-        //TODO: implement this
+
     }
 
 }
