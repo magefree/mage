@@ -29,7 +29,6 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlashAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -61,24 +60,30 @@ public class HideawayPlayEffect extends OneShotEffect<HideawayPlayEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-        if (zone.isEmpty()) {
+        if (zone ==null || zone.isEmpty()) {
             return false;
         }
         Card card = zone.getCards(game).iterator().next();
         Player controller = game.getPlayer(source.getControllerId());
-        if (card.getCardType().contains(CardType.LAND)) {
-            // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
-            if (game.getActivePlayerId().equals(source.getControllerId()) && controller.canPlayLand()) {
-                if (controller.chooseUse(Outcome.Benefit, "Play the land?", game)) {
-                    controller.playLand(card, game);
+        if (card != null && controller != null) {
+            if (card.getCardType().contains(CardType.LAND)) {
+                // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
+                if (game.getActivePlayerId().equals(source.getControllerId()) && controller.canPlayLand()) {
+                    if (controller.chooseUse(Outcome.Benefit, new StringBuilder("Play ").append(card.getName()).append(" from Exile?").toString(), game)) {
+                        return controller.playLand(card, game);
+                    }
+                } else {
+                    game.informPlayer(controller, "You're not able to play the land now due to regular restrictions.");
+                }
+            } else {
+                // The land's last ability allows you to play the removed card as part of the resolution of that ability.
+                // Timing restrictions based on the card's type are ignored (for instance, if it's a creature or sorcery).
+                // Other play restrictions are not (such as "Play [this card] only during combat").
+                if (controller.chooseUse(Outcome.Benefit, new StringBuilder("Cast ").append(card.getName()).append(" without paying it's mana cost?").toString(), game)) {
+                    return controller.cast(card.getSpellAbility(), game, true);
                 }
             }
-        } else {
-            if (card.getSpellAbility().spellCanBeActivatedRegularlyNow(controller.getId(), game)) {
-                if (controller.chooseUse(Outcome.Benefit, "Cast the card without paying mana cost?", game)) {
-                    controller.cast(card.getSpellAbility(), game, true);
-                }
-            }
+            return true;
         }
         return false;
     }
