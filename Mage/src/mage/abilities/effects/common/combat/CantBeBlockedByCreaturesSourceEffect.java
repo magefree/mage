@@ -41,12 +41,13 @@ import mage.game.permanent.Permanent;
 
 public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect<CantBeBlockedByCreaturesSourceEffect> {
 
-    private FilterCreaturePermanent filter;
+    private final FilterCreaturePermanent filter;
 
     public CantBeBlockedByCreaturesSourceEffect(FilterCreaturePermanent filter, Duration duration) {
         super(Duration.WhileOnBattlefield);
         this.filter = filter;
-        staticText = new StringBuilder("{this} can't be blocked by ").append(filter.getMessage()).toString();
+        staticText = new StringBuilder("{this} can't be blocked ")
+                .append(filter.getMessage().startsWith("except by") ? "":"by ").append(filter.getMessage()).toString();
     }
 
     public CantBeBlockedByCreaturesSourceEffect(final CantBeBlockedByCreaturesSourceEffect effect) {

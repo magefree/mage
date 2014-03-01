@@ -28,19 +28,18 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,84 +49,91 @@ import mage.target.TargetCard;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class GoblinRingleader extends CardImpl<GoblinRingleader> {
+public class SylvanMessenger extends CardImpl<SylvanMessenger> {
 
-    public GoblinRingleader(UUID ownerId) {
-        super(ownerId, 62, "Goblin Ringleader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+    public SylvanMessenger(UUID ownerId) {
+        super(ownerId, 87, "Sylvan Messenger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "APC";
-        this.subtype.add("Goblin");
+        this.subtype.add("Elf");
 
-        this.color.setRed(true);
+        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
-        // When Goblin Ringleader enters the battlefield, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GoblinRingleaderEffect()));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // When Sylvan Messenger enters the battlefield, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library in any order.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SylvanMessengerEffect()));
+
     }
 
-    public GoblinRingleader(final GoblinRingleader card) {
+    public SylvanMessenger(final SylvanMessenger card) {
         super(card);
     }
 
     @Override
-    public GoblinRingleader copy() {
-        return new GoblinRingleader(this);
+    public SylvanMessenger copy() {
+        return new SylvanMessenger(this);
     }
 }
 
-class GoblinRingleaderEffect extends OneShotEffect<GoblinRingleaderEffect> {
+class SylvanMessengerEffect extends OneShotEffect<SylvanMessengerEffect> {
 
-    private static final FilterCard filter = new FilterCard("Goblin");
+    private static final FilterCard filter = new FilterCard("Elf");
     static {
-        filter.add(new SubtypePredicate("Goblin"));
-    }
-    
-    public GoblinRingleaderEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library in any order";
+        filter.add(new SubtypePredicate("Elf"));
     }
 
-    public GoblinRingleaderEffect(final GoblinRingleaderEffect effect) {
+    public SylvanMessengerEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library in any order";
+    }
+
+    public SylvanMessengerEffect(final SylvanMessengerEffect effect) {
         super(effect);
     }
 
     @Override
-    public GoblinRingleaderEffect copy() {
-        return new GoblinRingleaderEffect(this);
+    public SylvanMessengerEffect copy() {
+        return new SylvanMessengerEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cardsToReveal = new CardsImpl(Zone.PICK);
+            Cards cardsElf = new CardsImpl(Zone.PICK);
             Cards cards2 = new CardsImpl(Zone.PICK);
             int count = Math.min(player.getLibrary().size(), 4);
             for (int i = 0; i < count; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    cards.add(card);
+                    cardsToReveal.add(card);
                     game.setZone(card.getId(), Zone.PICK);
                     if (filter.match(card, game)) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                        cardsElf.add(card);
                     } else {
                         cards2.add(card);
                     }
                 }
             }
-            
+
             Card sourceCard = game.getCard(source.getSourceId());
-            if (!cards.isEmpty() && sourceCard != null) {
-                player.revealCards(sourceCard.getName(), cards, game);
+            if (!cardsToReveal.isEmpty() && sourceCard != null) {
+                player.revealCards(sourceCard.getName(), cardsToReveal, game);
             }
+
+            for (Card card: cardsElf.getCards(game)) {
+                player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+            }
+
             TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
             target.setRequired(true);
             while (cards2.size() > 0 && player.choose(Outcome.Detriment, cards2, target, game)) {
-                Card card = cards.get(target.getFirstTarget(), game);
+                Card card = cards2.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards2.remove(card);
                     card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);

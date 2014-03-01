@@ -45,7 +45,7 @@ import java.util.UUID;
  */
 public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
 
-    List<Permanent> permanents = new ArrayList<Permanent>();
+    List<Permanent> permanents = new ArrayList<>();
 
     public SacrificeTargetCost(TargetControlledPermanent target) {
         this.addTarget(target);

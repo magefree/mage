@@ -25,57 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class NoggleBandit extends CardImpl<NoggleBandit> {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by creatures with defender");
-    
+public class Wellwisher extends CardImpl<Wellwisher> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf on the battlefield");
+
     static {
-        filter.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
+        filter.add(new SubtypePredicate("Elf"));
     }
 
-    public NoggleBandit(UUID ownerId) {
-        super(ownerId, 106, "Noggle Bandit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/R}{U/R}");
-        this.expansionSetCode = "EVE";
-        this.subtype.add("Noggle");
-        this.subtype.add("Rogue");
+    public Wellwisher(UUID ownerId) {
+        super(ownerId, 300, "Wellwisher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Elf");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Noggle Bandit can't be blocked except by creatures with defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
-        
+        // {tap}: You gain 1 life for each Elf on the battlefield.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)), new TapSourceCost()));
+
     }
 
-    public NoggleBandit(final NoggleBandit card) {
+    public Wellwisher(final Wellwisher card) {
         super(card);
     }
 
     @Override
-    public NoggleBandit copy() {
-        return new NoggleBandit(this);
+    public Wellwisher copy() {
+        return new Wellwisher(this);
     }
 }

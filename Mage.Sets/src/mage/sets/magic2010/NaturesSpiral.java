@@ -29,13 +29,11 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterPermanentCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -44,22 +42,11 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class NaturesSpiral extends CardImpl<NaturesSpiral> {
 
-    private static final FilterCard filter = new FilterCard("permanent card from your graveyard");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT),
-                new CardTypePredicate(CardType.LAND),
-                new CardTypePredicate(CardType.PLANESWALKER)));
-    }
-
     public NaturesSpiral(UUID ownerId) {
         super(ownerId, 196, "Nature's Spiral", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "M10";
         this.color.setGreen(true);
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterPermanentCard("permanent card from your graveyard")));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 

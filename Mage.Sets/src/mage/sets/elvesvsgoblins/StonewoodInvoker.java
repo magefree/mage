@@ -25,57 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.sets.elvesvsgoblins;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class NoggleBandit extends CardImpl<NoggleBandit> {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by creatures with defender");
-    
-    static {
-        filter.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
-    }
+public class StonewoodInvoker extends CardImpl<StonewoodInvoker> {
 
-    public NoggleBandit(UUID ownerId) {
-        super(ownerId, 106, "Noggle Bandit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/R}{U/R}");
-        this.expansionSetCode = "EVE";
-        this.subtype.add("Noggle");
-        this.subtype.add("Rogue");
+    public StonewoodInvoker(UUID ownerId) {
+        super(ownerId, 11, "Stonewood Invoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "EVG";
+        this.subtype.add("Elf");
+        this.subtype.add("Mutant");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
+        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Noggle Bandit can't be blocked except by creatures with defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
-        
+        // {7}{G}: Stonewood Invoker gets +5/+5 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(5,5,Duration.EndOfTurn), new ManaCostsImpl("{7}{G}")));
     }
 
-    public NoggleBandit(final NoggleBandit card) {
+    public StonewoodInvoker(final StonewoodInvoker card) {
         super(card);
     }
 
     @Override
-    public NoggleBandit copy() {
-        return new NoggleBandit(this);
+    public StonewoodInvoker copy() {
+        return new StonewoodInvoker(this);
     }
 }

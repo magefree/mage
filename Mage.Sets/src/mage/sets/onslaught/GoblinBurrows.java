@@ -25,57 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class NoggleBandit extends CardImpl<NoggleBandit> {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by creatures with defender");
-    
+public class GoblinBurrows extends CardImpl<GoblinBurrows> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin");
+
     static {
-        filter.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
+        filter.add(new SubtypePredicate(("Goblin")));
     }
 
-    public NoggleBandit(UUID ownerId) {
-        super(ownerId, 106, "Noggle Bandit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/R}{U/R}");
-        this.expansionSetCode = "EVE";
-        this.subtype.add("Noggle");
-        this.subtype.add("Rogue");
+    public GoblinBurrows(UUID ownerId) {
+        super(ownerId, 318, "Goblin Burrows", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "ONS";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Noggle Bandit can't be blocked except by creatures with defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
-        
+        // {tap}: Add {1} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
+        // {1}{R}, {tap}: Target Goblin creature gets +2/+0 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2,0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        this.addAbility(ability);
     }
 
-    public NoggleBandit(final NoggleBandit card) {
+    public GoblinBurrows(final GoblinBurrows card) {
         super(card);
     }
 
     @Override
-    public NoggleBandit copy() {
-        return new NoggleBandit(this);
+    public GoblinBurrows copy() {
+        return new GoblinBurrows(this);
     }
 }

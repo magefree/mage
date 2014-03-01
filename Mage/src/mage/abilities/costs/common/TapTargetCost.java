@@ -28,15 +28,15 @@
 
 package mage.abilities.costs.common;
 
-import mage.constants.Outcome;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.List;
-import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  *
@@ -50,7 +50,7 @@ public class TapTargetCost extends CostImpl<TapTargetCost> {
         this.target = target;
         this.text = 
             new StringBuilder("Tap ")
-                .append(target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") ? "":target.getMaxNumberOfTargets())
+                .append(target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") ? "":CardUtil.numberToText(target.getMaxNumberOfTargets()))
                 .append(" ")
                 .append(target.getTargetName()).toString();
     }

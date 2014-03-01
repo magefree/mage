@@ -25,105 +25,77 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class SkirsdagHighPriest extends CardImpl<SkirsdagHighPriest> {
+public class VoiceOfTheWoods extends CardImpl<VoiceOfTheWoods> {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(new SubtypePredicate("Elf"));
     }
 
-    public SkirsdagHighPriest(UUID ownerId) {
-        super(ownerId, 117, "Skirsdag High Priest", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "ISD";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+    public VoiceOfTheWoods(UUID ownerId) {
+        super(ownerId, 297, "Voice of the Woods", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Elf");
 
-        this.color.setBlack(true);
-        this.power = new MageInt(1);
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Morbid - {tap}, Tap two untapped creatures you control: Put a 5/5 black Demon creature token with flying onto the battlefield. Activate this ability only if a creature died this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DemonToken()), new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2,2,filter, false)));
-        ability.addCost(new SkirsdagHighPriestCost());
+        // Tap five untapped Elves you control: Put a 7/7 green Elemental creature token with trample onto the battlefield.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new CreateTokenEffect(new VoiceOfTheWoodsElementalToken()),
+                new TapTargetCost(new TargetControlledCreaturePermanent(5,5, filter, false)));
         this.addAbility(ability);
     }
 
-    public SkirsdagHighPriest(final SkirsdagHighPriest card) {
+    public VoiceOfTheWoods(final VoiceOfTheWoods card) {
         super(card);
     }
 
     @Override
-    public SkirsdagHighPriest copy() {
-        return new SkirsdagHighPriest(this);
+    public VoiceOfTheWoods copy() {
+        return new VoiceOfTheWoods(this);
     }
 }
 
-class SkirsdagHighPriestCost extends CostImpl<SkirsdagHighPriestCost> {
+class VoiceOfTheWoodsElementalToken extends Token {
 
-    public SkirsdagHighPriestCost() {
-        this.text = "Activate this ability only if a creature died this turn";
-    }
-
-    public SkirsdagHighPriestCost(final SkirsdagHighPriestCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public SkirsdagHighPriestCost copy() {
-        return new SkirsdagHighPriestCost(this);
-    }
-
-    @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return game.getState().getWatchers().get("Morbid").conditionMet();
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        this.paid = true;
-        return paid;
-    }
-}
-
-class DemonToken extends Token {
-
-    DemonToken() {
-        super("Demon", "5/5 black Demon creature token with flying");
+    VoiceOfTheWoodsElementalToken() {
+        super("Elemental", "7/7 green Elemental creature token with trample");
+        this.setOriginalExpansionSetCode("EVG");
         cardType.add(CardType.CREATURE);
-        subtype.add("Demon");
+        subtype.add("Elemental");
 
-        color.setBlack(true);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
+        color.setGreen(true);
+        power = new MageInt(7);
+        toughness = new MageInt(7);
 
-        addAbility(FlyingAbility.getInstance());
+        addAbility(TrampleAbility.getInstance());
     }
 }

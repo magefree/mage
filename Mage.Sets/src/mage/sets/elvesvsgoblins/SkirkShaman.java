@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.sets.elvesvsgoblins;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -39,43 +39,46 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class NoggleBandit extends CardImpl<NoggleBandit> {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by creatures with defender");
-    
+public class SkirkShaman extends CardImpl<SkirkShaman> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by artifact creatures and/or red creatures");
+
     static {
-        filter.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
+        filter.add(Predicates.not(
+                Predicates.or(
+                        Predicates.and(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)),
+                        Predicates.and(new CardTypePredicate(CardType.CREATURE), new ColorPredicate(ObjectColor.RED)
+        ))));
     }
 
-    public NoggleBandit(UUID ownerId) {
-        super(ownerId, 106, "Noggle Bandit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/R}{U/R}");
-        this.expansionSetCode = "EVE";
-        this.subtype.add("Noggle");
-        this.subtype.add("Rogue");
+    public SkirkShaman(UUID ownerId) {
+        super(ownerId, 52, "Skirk Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        this.expansionSetCode = "EVG";
+        this.subtype.add("Goblin");
+        this.subtype.add("Shaman");
 
         this.color.setRed(true);
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Noggle Bandit can't be blocked except by creatures with defender.
+        // Skirk Shaman can't be blocked except by artifact creatures and/or red creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
-        
+
     }
 
-    public NoggleBandit(final NoggleBandit card) {
+    public SkirkShaman(final SkirkShaman card) {
         super(card);
     }
 
     @Override
-    public NoggleBandit copy() {
-        return new NoggleBandit(this);
+    public SkirkShaman copy() {
+        return new SkirkShaman(this);
     }
 }

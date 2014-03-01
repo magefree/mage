@@ -25,57 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class NoggleBandit extends CardImpl<NoggleBandit> {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by creatures with defender");
-    
+public class WirewoodHerald extends CardImpl<WirewoodHerald> {
+
+    private static final FilterCreatureCard filter = new FilterCreatureCard("Elf card");
+
     static {
-        filter.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
+        filter.add(new SubtypePredicate("Elf"));
     }
 
-    public NoggleBandit(UUID ownerId) {
-        super(ownerId, 106, "Noggle Bandit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/R}{U/R}");
-        this.expansionSetCode = "EVE";
-        this.subtype.add("Noggle");
-        this.subtype.add("Rogue");
+    public WirewoodHerald(UUID ownerId) {
+        super(ownerId, 302, "Wirewood Herald", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Elf");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Noggle Bandit can't be blocked except by creatures with defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
-        
+        // When Wirewood Herald dies, you may search your library for an Elf card, reveal that card, put it into your hand, then shuffle your library.
+        this.addAbility(new DiesTriggeredAbility(
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true),
+                true));
     }
 
-    public NoggleBandit(final NoggleBandit card) {
+    public WirewoodHerald(final WirewoodHerald card) {
         super(card);
     }
 
     @Override
-    public NoggleBandit copy() {
-        return new NoggleBandit(this);
+    public WirewoodHerald copy() {
+        return new WirewoodHerald(this);
     }
 }

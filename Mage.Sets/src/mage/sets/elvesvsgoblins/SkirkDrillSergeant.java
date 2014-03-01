@@ -25,72 +25,86 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.sets.elvesvsgoblins;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class CallOfTheWild extends CardImpl<CallOfTheWild> {
+public class SkirkDrillSergeant extends CardImpl<SkirkDrillSergeant> {
 
-    public CallOfTheWild(UUID ownerId) {
-        super(ownerId, 64, "Call of the Wild", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "WTH";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Goblin");
 
-        this.color.setGreen(true);
-
-        // {2}{G}{G}: Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CallOfTheWildEffect(), new ManaCostsImpl("{2}{G}{G}")));
+    static {
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public CallOfTheWild(final CallOfTheWild card) {
+    public SkirkDrillSergeant(UUID ownerId) {
+        super(ownerId, 49, "Skirk Drill Sergeant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "EVG";
+        this.subtype.add("Goblin");
+
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Whenever Skirk Drill Sergeant or another Goblin dies, you may pay {2}{R}. If you do, reveal the top card of your library. If it's a Goblin permanent card, put it onto the battlefield. Otherwise, put it into your graveyard.
+        this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new SkirkDrillSergeantEffect(), new ManaCostsImpl("{2}{R}")), false, filter));
+
+    }
+
+    public SkirkDrillSergeant(final SkirkDrillSergeant card) {
         super(card);
     }
 
     @Override
-    public CallOfTheWild copy() {
-        return new CallOfTheWild(this);
+    public SkirkDrillSergeant copy() {
+        return new SkirkDrillSergeant(this);
     }
 }
 
+class SkirkDrillSergeantEffect extends OneShotEffect<SkirkDrillSergeantEffect> {
 
-class CallOfTheWildEffect extends OneShotEffect<CallOfTheWildEffect> {
-
-    public CallOfTheWildEffect() {
+    public SkirkDrillSergeantEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard";
+        this.staticText = "reveal the top card of your library. If it's a Goblin permanent card, put it onto the battlefield. Otherwise, put it into your graveyard";
     }
 
-    public CallOfTheWildEffect(final CallOfTheWildEffect effect) {
+    public SkirkDrillSergeantEffect(final SkirkDrillSergeantEffect effect) {
         super(effect);
     }
 
     @Override
-    public CallOfTheWildEffect copy() {
-        return new CallOfTheWildEffect(this);
+    public SkirkDrillSergeantEffect copy() {
+        return new SkirkDrillSergeantEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (player == null || sourceCard == null) {
             return false;
         }
 
@@ -98,10 +112,10 @@ class CallOfTheWildEffect extends OneShotEffect<CallOfTheWildEffect> {
             Card card = player.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl();
             cards.add(card);
-            player.revealCards("Call of the Wild", cards, game);
+            player.revealCards(sourceCard.getName(), cards, game);
 
             if (card != null) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (new FilterPermanentCard().match(card, game)) {
                     player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                 } else {
                     player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);

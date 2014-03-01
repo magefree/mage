@@ -395,7 +395,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         cardInfoPane = Plugins.getInstance().getCardInfoPane();
         if (cardInfoPane != null && System.getProperty("testCardInfo") != null) {
             cardInfoPane.setPreferredSize(new Dimension(170, 150));
-            cardInfoPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+            cardInfoPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 0, 0)));
             isShowCardInfo = true;
         } else {
             cardInfoPane = new JLabel();
@@ -474,36 +474,39 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 /*.addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                  .addContainerGap()
                  .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))*/
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(lblDeckName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
-                .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnSave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLoad)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNew)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnExit))
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnImport)
-                .addContainerGap()
-                .addComponent(btnAddLand)
-                .addContainerGap()
-                .addComponent(btnSubmit))
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtTimeRemaining)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                            .addComponent(lblDeckName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+
+                        .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLoad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnNew)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExit))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnImport)
+                        .addContainerGap()
+                        .addComponent(btnAddLand)
+                        .addContainerGap()
+                        .addComponent(btnSubmit))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtTimeRemaining))
+                    )
                 .addContainerGap()));
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -607,7 +610,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 deck.getSideboard().add(card);
             }
             deck.getCards().clear();
-            cardSelector.loadSideboard(new ArrayList<Card>(deck.getSideboard()), this.bigCard);
+            cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), this.bigCard);
         } else {
             deck = new Deck();
         }
@@ -654,7 +657,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         fcImportDeck.setSelectedFile(null);
     }//GEN-LAST:event_btnImportActionPerformed
 
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         if (updateDeckTask != null) {
             updateDeckTask.cancel(true);
         }
@@ -662,13 +665,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         if (MageFrame.getSession().submitDeck(tableId, deck.getDeckCardLists())) {
             removeDeckEditor();
         }
-    }
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
-    private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLandActionPerformed
         AddLandDialog addLand = new AddLandDialog();
         addLand.showDialog(deck);
         refreshDeck();
-    }
+    }//GEN-LAST:event_btnAddLandActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnExit;
@@ -682,11 +686,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblDeckName;
     private javax.swing.JTextField txtDeckName;
-    // End of variables declaration//GEN-END:variables
-    private JComponent cardInfoPane;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnAddLand;
+    private JComponent cardInfoPane;
     private javax.swing.JTextField txtTimeRemaining;
+    // End of variables declaration//GEN-END:variables
 }
 
 class DeckFilter extends FileFilter {
@@ -745,9 +749,9 @@ class ImportFilter extends FileFilter {
 class UpdateDeckTask extends SwingWorker<Void, Void> {
 
     private static final Logger logger = Logger.getLogger(UpdateDeckTask.class);
-    private Session session;
-    private UUID tableId;
-    private Deck deck;
+    private final Session session;
+    private final UUID tableId;
+    private final Deck deck;
 
     UpdateDeckTask(Session session, UUID tableId, Deck deck) {
         this.session = session;
@@ -768,9 +772,7 @@ class UpdateDeckTask extends SwingWorker<Void, Void> {
     protected void done() {
         try {
             get();
-        } catch (InterruptedException ex) {
-            logger.fatal("Update Matches Task error", ex);
-        } catch (ExecutionException ex) {
+        } catch (InterruptedException | ExecutionException ex) {
             logger.fatal("Update Matches Task error", ex);
         } catch (CancellationException ex) {
         }

@@ -25,57 +25,70 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DamageEverythingEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class NoggleBandit extends CardImpl<NoggleBandit> {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by creatures with defender");
-    
+public class SkirkFireMarshal extends CardImpl<SkirkFireMarshal> {
+
+    private static final FilterCard filterProtection = new FilterCard("red");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
+
     static {
-        filter.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
+        filterProtection.add(new ColorPredicate(ObjectColor.RED));
+        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public NoggleBandit(UUID ownerId) {
-        super(ownerId, 106, "Noggle Bandit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/R}{U/R}");
-        this.expansionSetCode = "EVE";
-        this.subtype.add("Noggle");
-        this.subtype.add("Rogue");
+    public SkirkFireMarshal(UUID ownerId) {
+        super(ownerId, 229, "Skirk Fire Marshal", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Goblin");
 
         this.color.setRed(true);
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Noggle Bandit can't be blocked except by creatures with defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
-        
+        // Protection from red
+        this.addAbility(new ProtectionAbility(filterProtection));
+
+        // Tap five untapped Goblins you control: Skirk Fire Marshal deals 10 damage to each creature and each player.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DamageEverythingEffect(10),
+                new TapTargetCost(new TargetControlledCreaturePermanent(5,5, filter, false)));
+        this.addAbility(ability);
     }
 
-    public NoggleBandit(final NoggleBandit card) {
+    public SkirkFireMarshal(final SkirkFireMarshal card) {
         super(card);
     }
 
     @Override
-    public NoggleBandit copy() {
-        return new NoggleBandit(this);
+    public SkirkFireMarshal copy() {
+        return new SkirkFireMarshal(this);
     }
 }

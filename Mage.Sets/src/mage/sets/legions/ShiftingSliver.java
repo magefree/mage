@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -48,10 +48,12 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class ShiftingSliver extends CardImpl<ShiftingSliver> {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Slivers");
+    private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("Slivers");
+    private static final FilterCreaturePermanent filterBlockedBy = new FilterCreaturePermanent("except by Slivers");
     
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Sliver")));
+        filterCreatures.add(Predicates.not(new SubtypePredicate("Sliver")));
+        filterBlockedBy.add(Predicates.not(new SubtypePredicate("Sliver")));
     }
 
     public ShiftingSliver(UUID ownerId) {
@@ -64,8 +66,7 @@ public class ShiftingSliver extends CardImpl<ShiftingSliver> {
         this.toughness = new MageInt(2);
 
         // Slivers can't be blocked except by Slivers.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesAllEffect(filterCreatures, filterBlockedBy, Duration.WhileOnBattlefield)));
     }
 
     public ShiftingSliver(final ShiftingSliver card) {

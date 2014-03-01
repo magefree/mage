@@ -25,57 +25,65 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.sets.elvesvsgoblins;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.common.ExileFromHandCost;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class NoggleBandit extends CardImpl<NoggleBandit> {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by creatures with defender");
-    
+public class AllosaurusRider extends CardImpl<AllosaurusRider> {
+
+    private static final FilterCard filter = new FilterCard("two green cards");
+
     static {
-        filter.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public NoggleBandit(UUID ownerId) {
-        super(ownerId, 106, "Noggle Bandit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/R}{U/R}");
-        this.expansionSetCode = "EVE";
-        this.subtype.add("Noggle");
-        this.subtype.add("Rogue");
+    public AllosaurusRider(UUID ownerId) {
+        super(ownerId, 2, "Allosaurus Rider", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+        this.expansionSetCode = "EVG";
+        this.subtype.add("Elf");
+        this.subtype.add("Warrior");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.color.setGreen(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        // Noggle Bandit can't be blocked except by creatures with defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
-        
+        // You may exile two green cards from your hand rather than pay Allosaurus Rider's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(2, filter))));
+
+        // Allosaurus Rider's power and toughness are each equal to 1 plus the number of lands you control.
+        DynamicValue onePlusControlledLands = new IntPlusDynamicValue(1, new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent("lands you control")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(onePlusControlledLands, Duration.EndOfGame)));
+
     }
 
-    public NoggleBandit(final NoggleBandit card) {
+    public AllosaurusRider(final AllosaurusRider card) {
         super(card);
     }
 
     @Override
-    public NoggleBandit copy() {
-        return new NoggleBandit(this);
+    public AllosaurusRider copy() {
+        return new AllosaurusRider(this);
     }
 }

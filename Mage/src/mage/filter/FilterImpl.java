@@ -38,10 +38,11 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  * @author North
+ * @param <E>
  */
 public abstract class FilterImpl<E> implements Filter<E> {
 
-    protected List<Predicate<Object>> predicates = new ArrayList<Predicate<Object>>();
+    protected List<Predicate<Object>> predicates = new ArrayList<>();
     protected String message;
 
     @Override
@@ -53,7 +54,7 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     public FilterImpl(FilterImpl filter) {
         this.message = filter.message;
-        this.predicates = new ArrayList<Predicate<Object>>(filter.predicates);
+        this.predicates = new ArrayList<>(filter.predicates);
     }
 
     @Override

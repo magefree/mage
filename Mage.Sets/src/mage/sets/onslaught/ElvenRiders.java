@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class ElvenRiders extends CardImpl<ElvenRiders> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls and/or creatures with flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls and/or creatures with flying");
 
     static {
         filter.add(Predicates.not(Predicates.or(new SubtypePredicate("Wall"), new AbilityPredicate(FlyingAbility.class))));

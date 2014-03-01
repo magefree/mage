@@ -27,9 +27,9 @@
  */
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.CardType;
 
 /**
  *
@@ -38,7 +38,11 @@ import mage.ObjectColor;
 public class GoblinToken extends Token {
 
     public GoblinToken() {
+        this("M10");
+    }
+    public GoblinToken(String originalExpansionSetCode) {
         super("Goblin", "1/1 red Goblin creature token");
+        this.setOriginalExpansionSetCode(originalExpansionSetCode);
         cardType.add(CardType.CREATURE);
         subtype.add("Goblin");
 

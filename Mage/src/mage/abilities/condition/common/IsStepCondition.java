@@ -25,57 +25,35 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+package mage.abilities.condition.common;
+
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
+import mage.game.Game;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class NoggleBandit extends CardImpl<NoggleBandit> {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by creatures with defender");
-    
-    static {
-        filter.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
-    }
+public class IsStepCondition implements Condition {
 
-    public NoggleBandit(UUID ownerId) {
-        super(ownerId, 106, "Noggle Bandit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/R}{U/R}");
-        this.expansionSetCode = "EVE";
-        this.subtype.add("Noggle");
-        this.subtype.add("Rogue");
+    protected PhaseStep phaseStep;
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Noggle Bandit can't be blocked except by creatures with defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
-        
-    }
-
-    public NoggleBandit(final NoggleBandit card) {
-        super(card);
+    public  IsStepCondition(PhaseStep phaseStep) {
+        this.phaseStep = phaseStep;
     }
 
     @Override
-    public NoggleBandit copy() {
-        return new NoggleBandit(this);
+    public boolean apply(Game game, Ability source) {
+        return game.getActivePlayerId().equals(source.getSourceId()) && game.getStep().getType().equals(phaseStep);
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder("during your ").append(phaseStep.toString()).toString();
+    }
+
 }
