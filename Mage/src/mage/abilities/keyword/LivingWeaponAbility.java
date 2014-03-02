@@ -60,6 +60,7 @@ class LivingWeaponEffect extends OneShotEffect<LivingWeaponEffect> {
 class GermToken extends Token {
     public GermToken() {
         super("Germ", "a 0/0 black Germ creature token");
+        this.setOriginalExpansionSetCode("MBS");
         cardType.add(CardType.CREATURE);
         color = ObjectColor.BLACK;
         subtype.add("Germ");
