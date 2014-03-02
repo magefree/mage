@@ -65,7 +65,7 @@ public class Updater {
      * @throws Exception
      */
     public HashMap<String, String> readLocalData() throws Exception {
-        HashMap<String, String> result = new HashMap<String, String>();
+        HashMap<String, String> result = new HashMap<>();
         for (File f : findFiles()) {
             result.put(f.getPath().replaceAll("\\\\", "/"), ChechsumHelper.getSHA1Checksum(f.getPath()));
         }
@@ -79,7 +79,7 @@ public class Updater {
      * @throws Exception
      */
     public List<File> findFiles() throws Exception {
-        ArrayList<File> result = new ArrayList<File>();
+        ArrayList<File> result = new ArrayList<>();
         result.addAll(FileHelper.findAllFilesInDir("mage-client/lib"));
         result.addAll(FileHelper.findAllFilesInDir("mage-client/plugins"));
         result.addAll(FileHelper.findAllFilesInDir("mage-server/lib"));
@@ -95,7 +95,7 @@ public class Updater {
      * @throws Exception
      */
     public HashMap<String, String> downloadAndParseUpdateData() throws Exception {
-        HashMap<String, String> result = new HashMap<String, String>();
+        HashMap<String, String> result = new HashMap<>();
         URL url = new URL(URL_PREFIX + "update-data.txt");
         URLConnection urlConnection = url.openConnection();
         urlConnection.connect();
@@ -104,7 +104,7 @@ public class Updater {
             String[] lines = scanner.nextLine().split("  ");
             if (lines.length == 2) {
                 result.put(lines[1], lines[0]);
-                //System.out.println("jar " + lines[1] + ", checksum " + lines[0]);
+                System.out.println("jar " + lines[1] + ", checksum " + lines[0]);
             }
         }
         return result;
@@ -120,7 +120,7 @@ public class Updater {
      * @return List of files to be replaced with newer versions.
      */
     public List<String> findUpdated(HashMap<String, String> local, HashMap<String, String> remote) {
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         for (String remoteFile : remote.keySet()) {
             if (local.containsKey(remoteFile)) {
                 if (!local.get(remoteFile).equals(remote.get(remoteFile))) {
@@ -133,7 +133,7 @@ public class Updater {
     }
 
     public List<String> findNew(HashMap<String, String> local, HashMap<String, String> remote) {
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         for (String remoteFile : remote.keySet()) {
             if (!local.containsKey(remoteFile)) {
                 //System.out.println("new jar found - " + remoteFile);
@@ -152,7 +152,7 @@ public class Updater {
      * @return List of files to be removed.
      */
     public List<String> findRemoved(HashMap<String, String> local, HashMap<String, String> remote) {
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         for (String localFile : local.keySet()) {
             if (!remote.containsKey(localFile)) {
                 //System.out.println("deleted jar found - " + localFile);

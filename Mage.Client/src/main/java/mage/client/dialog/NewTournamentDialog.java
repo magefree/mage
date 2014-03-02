@@ -71,8 +71,8 @@ public class NewTournamentDialog extends MageDialog {
     private UUID playerId;
     private UUID roomId;
     private Session session;
-    private List<TournamentPlayerPanel> players = new ArrayList<TournamentPlayerPanel>();
-    private List<JComboBox> packs = new ArrayList<JComboBox>();
+    private final List<TournamentPlayerPanel> players = new ArrayList<>();
+    private final List<JComboBox> packs = new ArrayList<>();
 
     /** Creates new form NewTournamentDialog */
     public NewTournamentDialog() {
@@ -710,16 +710,19 @@ public class NewTournamentDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TYPE, tOptions.getTournamentType());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS, Integer.toString(tOptions.getMatchOptions().getFreeMulligans()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS, Integer.toString(tOptions.getMatchOptions().getWinsNeeded()));
-        if (tOptions.getTournamentType().equals("Sealed Elimination")) {
-            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED, tOptions.getLimitedOptions().getSetCodes().toString());
-            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED, Integer.toString(tOptions.getPlayerTypes().size()));
-        } else if (tOptions.getTournamentType().equals("Elimination Booster Draft")) {
-            DraftOptions draftOptions = (DraftOptions) tOptions.getLimitedOptions();
-            if (draftOptions != null) {
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT, draftOptions.getSetCodes().toString());
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT, Integer.toString(tOptions.getPlayerTypes().size()));
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING, draftOptions.getTiming().name());
-            }
+        switch (tOptions.getTournamentType()) {
+            case "Sealed Elimination":
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED, tOptions.getLimitedOptions().getSetCodes().toString());
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED, Integer.toString(tOptions.getPlayerTypes().size()));
+                break;
+            case "Elimination Booster Draft":
+                DraftOptions draftOptions = (DraftOptions) tOptions.getLimitedOptions();
+                if (draftOptions != null) {
+                    PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT, draftOptions.getSetCodes().toString());
+                    PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT, Integer.toString(tOptions.getPlayerTypes().size()));
+                    PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING, draftOptions.getTiming().name());
+                }
+                break;
         }
 
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS, (tOptions.isWatchingAllowed()?"Yes":"No"));

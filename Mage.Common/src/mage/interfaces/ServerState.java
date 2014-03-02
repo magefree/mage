@@ -40,13 +40,13 @@ import mage.view.TournamentTypeView;
  */
 public class ServerState implements Serializable {
 
-    private List<GameTypeView> gameTypes;
-    private List<TournamentTypeView> tournamentTypes;
-    private String[] playerTypes;
-    private String[] deckTypes;
-    private String[] draftCubes;
-    private boolean testMode;
-    private MageVersion version;
+    private final List<GameTypeView> gameTypes;
+    private final List<TournamentTypeView> tournamentTypes;
+    private final String[] playerTypes;
+    private final String[] deckTypes;
+    private final String[] draftCubes;
+    private final boolean testMode;
+    private final MageVersion version;
 
     public ServerState(List<GameTypeView> gameTypes, List<TournamentTypeView> tournamentTypes, String[] playerTypes, String[] deckTypes, String[] draftCubes, boolean testMode, MageVersion version) {
         this.gameTypes = gameTypes;

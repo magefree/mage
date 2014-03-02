@@ -50,9 +50,9 @@ public class TournamentFactory {
     private static final TournamentFactory INSTANCE = new TournamentFactory();
     private static final Logger logger = Logger.getLogger(TournamentFactory.class);
 
-    private Map<String, Class<Tournament>> tournaments = new HashMap<String, Class<Tournament>>();
-    private Map<String, TournamentType> tournamentTypes = new HashMap<String, TournamentType>();
-    private List<TournamentTypeView> tournamentTypeViews = new ArrayList<TournamentTypeView>();
+    private final Map<String, Class<Tournament>> tournaments = new HashMap<>();
+    private final Map<String, TournamentType> tournamentTypes = new HashMap<>();
+    private final List<TournamentTypeView> tournamentTypeViews = new ArrayList<>();
 
     public static TournamentFactory getInstance() {
         return INSTANCE;
@@ -69,7 +69,7 @@ public class TournamentFactory {
             tournament = con.newInstance(new Object[] {options});
             // transfer set information, create short info string for included sets
             tournament.setTournamentType(tournamentTypes.get(tournamentType));
-            Map<String,Integer> setInfo = new LinkedHashMap<String,Integer>();
+            Map<String,Integer> setInfo = new LinkedHashMap<>();
             for (String setCode: options.getLimitedOptions().getSetCodes()) {
                 tournament.getSets().add(Sets.findSet(setCode));
                 int count = setInfo.containsKey(setCode) ? setInfo.get(setCode) : 0;

@@ -56,8 +56,8 @@ import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.audio.AudioManager;
 import mage.client.util.Config;
+import mage.client.util.audio.AudioManager;
 import mage.constants.CardType;
 import mage.view.PermanentView;
 
