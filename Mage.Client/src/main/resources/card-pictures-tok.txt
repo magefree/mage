@@ -3,6 +3,7 @@
 |Generate|TOK:M14|Cat|
 |Generate|TOK:M14|Goat|
 |Generate|TOK:M14|Zombie|
+|Generate|TOK:M14|Dragon|
 |Generate|TOK:M14|Elemental 1|
 |Generate|TOK:M14|Elemental 2|
 |Generate|TOK:M14|Beast|
