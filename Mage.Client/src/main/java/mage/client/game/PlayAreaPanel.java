@@ -203,9 +203,20 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
+
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent Me) {
+                this.checkMenu(Me);
+            }
+            
+            // neccessary for linux and mac systems
+            @Override
+            public void mousePressed(MouseEvent Me) {
+                this.checkMenu(Me);
+            }
+
+            private void checkMenu(MouseEvent Me){
                 if (Me.isPopupTrigger() && playingMode) {
                     popupMenu.show(Me.getComponent(), Me.getX(), Me.getY());
                 }
@@ -233,6 +244,15 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent Me) {
+                this.checkMenu(Me);
+            }
+            // neccessary for linux and mac systems
+            @Override
+            public void mousePressed(MouseEvent Me) {
+                this.checkMenu(Me);
+            }
+
+            private void checkMenu(MouseEvent Me){
                 if (Me.isPopupTrigger() && playingMode) {
                     popupMenu.show(Me.getComponent(), Me.getX(), Me.getY());
                 }
