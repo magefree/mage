@@ -64,7 +64,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
             if (zEvent.getFromZone() == Zone.BATTLEFIELD
                     && zEvent.getToZone() == Zone.GRAVEYARD) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if (filter.match(permanent, game)) {
+                if (filter.match(permanent, this.getSourceId(), this.getControllerId(), game)) {
                     if (setTargetPointer) {
                         for (Effect effect :this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getSourceId()));

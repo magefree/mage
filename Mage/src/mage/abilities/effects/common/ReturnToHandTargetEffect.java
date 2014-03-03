@@ -40,6 +40,7 @@ import static mage.constants.Zone.EXILED;
 import static mage.constants.Zone.GRAVEYARD;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
 
@@ -64,12 +65,16 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = true; // in case no target is selected
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         for (UUID targetId : targetPointer.getTargets(game, source)) {
             switch (game.getState().getZone(targetId)) {
                 case BATTLEFIELD:
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        controller.moveCardToHandWithInfo((Card) permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
                     } else {
                         result = false;
                     }
@@ -77,7 +82,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
                 case GRAVEYARD:
                     Card card = game.getCard(targetId);
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
                     }  else {
                         result = false;
                     }
@@ -85,7 +90,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
                 case EXILED:
                     card = game.getCard(targetId);
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);
                     } else {
                         result = false;
                     }
