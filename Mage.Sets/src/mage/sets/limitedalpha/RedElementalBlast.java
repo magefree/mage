@@ -50,8 +50,8 @@ public class RedElementalBlast extends CardImpl<RedElementalBlast> {
     private static final FilterPermanent filterPermanent = new FilterPermanent("blue permanent");
     private static final FilterSpell filterSpell = new FilterSpell("blue spell");
     static{
-        filterPermanent.add(new ColorPredicate(ObjectColor.RED));
-        filterSpell.add(new ColorPredicate(ObjectColor.RED));
+        filterPermanent.add(new ColorPredicate(ObjectColor.BLUE));
+        filterSpell.add(new ColorPredicate(ObjectColor.BLUE));
     }
     
     public RedElementalBlast(UUID ownerId) {
