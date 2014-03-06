@@ -34,10 +34,7 @@ import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.CopyTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -73,11 +70,7 @@ public class HomuraHumanAscendant extends CardImpl<HomuraHumanAscendant> {
         // Homura, Human Ascendant can't block.
         this.addAbility(new CantBlockAbility());
         // When Homura dies, return it to the battlefield flipped.
-        this.addAbility(new DiesTriggeredAbility(new FlipSourceEffect()));
-
-        Ability flipAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new HomurasEssence2()), FlippedCondition.getInstance(), "{this} becomes Homura's Essence"));
-        flipAbility.setRuleVisible(false);
-        this.addAbility(flipAbility);
+        this.addAbility(new DiesTriggeredAbility(new FlipSourceEffect(new HomurasEssence2())));
     }
 
     public HomuraHumanAscendant(final HomuraHumanAscendant card) {

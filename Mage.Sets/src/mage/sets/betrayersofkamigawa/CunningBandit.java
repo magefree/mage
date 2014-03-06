@@ -32,14 +32,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.CopyTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -79,13 +75,9 @@ public class CunningBandit extends CardImpl<CunningBandit> {
 
         // At the beginning of the end step, if there are two or more ki counters on Cunning Bandit, you may flip it.
         this.addAbility(new ConditionalTriggeredAbility(
-                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect()),
+                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new AzamukiTreacheryIncarnate())),
                 new SourceHasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
                 "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it.", true));
-
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new AzamukiTreacheryIncarnate()), FlippedCondition.getInstance(), ""));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
     }
 
     public CunningBandit(final CunningBandit card) {

@@ -37,15 +37,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyTokenEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
@@ -77,12 +73,9 @@ public class NezumiShortfang extends CardImpl<NezumiShortfang> {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new ConditionalOneShotEffect(
-                    new FlipSourceEffect(),
+                    new FlipSourceEffect(new StabwhiskerTheOdious()),
                     new CardsInTargetOpponentHandCondition(CardsInTargetOpponentHandCondition.CountType.FEWER_THAN, 1),
                     "Then if that player has no cards in hand, flip {this}"));
-        this.addAbility(ability);
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new StabwhiskerTheOdious()), FlippedCondition.getInstance(), ""));
-        ability.setRuleVisible(false);
         this.addAbility(ability);
     }
 

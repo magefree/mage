@@ -5,10 +5,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.FlippedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.CopyTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
@@ -39,11 +36,11 @@ public class AkkiLavarunner extends CardImpl<AkkiLavarunner> {
         this.toughness = new MageInt(1);
         this.flipCard = true;
         this.flipCardName = "Tok-Tok, Volcano Born";
+
+        // Haste
         this.addAbility(HasteAbility.getInstance());
+        // Whenever Akki Lavarunner deals damage to an opponent, flip it.
         this.addAbility(new AkkiLavarunnerAbility());
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TokTokVolcanoBorn()), FlippedCondition.getInstance(), ""));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
     }
 
     public AkkiLavarunner(final AkkiLavarunner card) {
@@ -59,7 +56,7 @@ public class AkkiLavarunner extends CardImpl<AkkiLavarunner> {
 class AkkiLavarunnerAbility extends TriggeredAbilityImpl<AkkiLavarunnerAbility> {
 
     public AkkiLavarunnerAbility() {
-        super(Zone.BATTLEFIELD, new FlipSourceEffect());
+        super(Zone.BATTLEFIELD, new FlipSourceEffect(new TokTokVolcanoBorn()));
     }
 
     public AkkiLavarunnerAbility(final AkkiLavarunnerAbility ability) {

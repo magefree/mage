@@ -34,11 +34,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.CopyTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
@@ -79,10 +75,7 @@ public class InitiateOfBlood extends CardImpl<InitiateOfBlood> {
         this.addAbility(ability);
 
         // When that creature is put into a graveyard this turn, flip Initiate of Blood.
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new FlipSourceEffect()));
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new GokaTheUnjust()), FlippedCondition.getInstance(), ""));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new FlipSourceEffect(new GokaTheUnjust())));
 
     }
 

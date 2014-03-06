@@ -29,12 +29,8 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.FlippedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.CopyTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -69,11 +65,6 @@ public class StudentOfElements extends CardImpl<StudentOfElements> {
 
         // When Student of Elements has flying, flip it.
         this.addAbility(new StudentOfElementsHasFlyingAbility());
-
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TobitaMasterOfWinds()), FlippedCondition.getInstance(), ""));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-
     }
 
     public StudentOfElements(final StudentOfElements card) {
@@ -89,7 +80,7 @@ public class StudentOfElements extends CardImpl<StudentOfElements> {
 class StudentOfElementsHasFlyingAbility extends StateTriggeredAbility<StudentOfElementsHasFlyingAbility> {
 
     public StudentOfElementsHasFlyingAbility() {
-        super(Zone.BATTLEFIELD, new FlipSourceEffect());
+        super(Zone.BATTLEFIELD, new FlipSourceEffect(new TobitaMasterOfWinds()));
     }
 
     public StudentOfElementsHasFlyingAbility(final StudentOfElementsHasFlyingAbility ability) {

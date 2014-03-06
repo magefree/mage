@@ -34,16 +34,12 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.condition.common.CardsInHandCondition.CountType;
-import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.CopyTokenEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
@@ -72,11 +68,8 @@ public class JushiApprentice extends CardImpl<JushiApprentice> {
         // {2}{U}, {tap}: Draw a card. If you have nine or more cards in hand, flip Jushi Apprentice.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(), new CardsInHandCondition(CountType.MORE_THAN, 8),
+        ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(new TomoyaTheRevealer()), new CardsInHandCondition(CountType.MORE_THAN, 8),
                     "If you have nine or more cards in hand, flip {this}"));
-        this.addAbility(ability);
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TomoyaTheRevealer()), FlippedCondition.getInstance(), ""));
-        ability.setRuleVisible(false);
         this.addAbility(ability);
     }
 
