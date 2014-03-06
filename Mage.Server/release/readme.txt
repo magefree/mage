@@ -4,7 +4,7 @@ MAGE is a client/server implementation of a popular CCG without the collecting p
 The server hosts games and enforces the rules.  The client creates or joins games, 
 displays the current state of a game in progress and sends user events to the server.
 
-You will need to have the Java Runtime Environment Version 6 Update 33 or greater.
+You will need to have the Java Runtime Environment Version 7.x .
 You can download this from:  http://java.com/
 
 -----------------------------------------------------------------------------------
@@ -13,8 +13,6 @@ Installing and running MAGE
 You will need to download both the client and the server applications.  These can be
 obtained from 
 http://download.magefree.com
-or
-http://176.31.186.181/
 Extact the client and the server to separate folders.
 
 To play a game you can either connect to a server or start your own server.  To
@@ -44,19 +42,17 @@ graveyard by clicking on the graveyard count.
 -----------------------------------------------------------------------------------
 Deck editor
 
-A simple deck editor is available by clicking on the Deck Editor button on the 
+A deck editor is available by clicking on the Deck Editor button on the 
 toolbar.  All the available cards are displayed in the top section.  Your deck
 and sideboard are displayed at the bottom.  To add a card to your deck double
 click on the card in the top section.  To remove it from your deck double click
-on the card in the deck area.  The sideboard section is not ready yet (don't 
-worry it's coming soon).
+on the card in the deck area.
 
 You can save or load a deck  using the Save or Load buttons.
 
 -----------------------------------------------------------------------------------
 Notes
 
-MAGE is still very much in the testing phase so there can be lots of bugs and/or
-missing functionality.  Please be patient.  If you notice anything or want to
-make suggestions goto https://github.com/magefree/mage/issues
+If you notice anything or want to make suggestions
+goto https://github.com/magefree/mage/issues
 
