@@ -107,6 +107,15 @@ public class ImageManagerImpl implements ImageManager {
     }
 
     @Override
+    public BufferedImage getCopyInformIconImage() {
+        if (imageCopyIcon == null) {
+            Image image = getImageFromResourceTransparent("/card/copy.png", Color.WHITE, new Rectangle(20, 20));
+            imageCopyIcon = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageCopyIcon;
+    }
+
+    @Override
     public Image getDlgCancelButtonImage() {
         if (imageDlgCancelButton == null) {
             imageDlgCancelButton = getBufferedImageFromResource("/dlg/dlg.cancel.png");
@@ -226,6 +235,7 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage imageNight;
 
     private static BufferedImage imageTokenIcon;
+    private static BufferedImage imageCopyIcon;
 
     private static BufferedImage imageDlgAcceptButton;
     private static BufferedImage imageDlgActiveAcceptButton;

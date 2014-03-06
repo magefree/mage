@@ -47,6 +47,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static mage.constants.Constants.*;
+import mage.constants.EnlargeMode;
 
 /**
  * Class for displaying big image of the card
@@ -65,6 +66,7 @@ public class BigCard extends JComponent {
     protected Thread foilThread;
     protected float hue = 0.005f;
     protected float dh = 0.005f;
+    protected EnlargeMode enlargeMode;
 
     public BigCard() {
         initComponents();
@@ -87,19 +89,20 @@ public class BigCard extends JComponent {
 
     }
 
-    public void setCard(UUID cardId, Image image, List<String> strings, boolean foil) {
-        if (this.cardId == null || !this.cardId.equals(cardId)) {
+    public void setCard(UUID cardId, EnlargeMode enlargeMode, Image image, List<String> strings) {
+        if (this.cardId == null || !enlargeMode.equals(this.enlargeMode) || !this.cardId.equals(cardId)) {
             if (this.panel != null) {
                 remove(this.panel);
             }
             this.cardId = cardId;
+            this.enlargeMode = enlargeMode;
             bigImage = image;
             synchronized (this) {
                 source = null;
                 hue = 0.000f;
             }
             drawText(strings);
-            setFoil(foil);
+            repaint();
         }
     }
 
@@ -141,10 +144,6 @@ public class BigCard extends JComponent {
             initBounds();
         }
         this.scrollPane.setVisible(true);
-    }
-
-    public void setFoil(boolean foil) {
-        repaint();
     }
 
     public void addJXPanel(UUID cardId, JXPanel jxPanel) {

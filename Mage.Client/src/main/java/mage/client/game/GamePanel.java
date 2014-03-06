@@ -92,6 +92,7 @@ import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
 import mage.client.util.gui.ArrowBuilder;
+import mage.constants.EnlargeMode;
 import mage.constants.PhaseStep;
 import static mage.constants.PhaseStep.BEGIN_COMBAT;
 import static mage.constants.PhaseStep.COMBAT_DAMAGE;
@@ -952,7 +953,17 @@ public final class GamePanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 ActionCallback callback = Plugins.getInstance().getActionCallback();
-                ((MageActionCallback)callback).enlargeCard();
+                ((MageActionCallback)callback).enlargeCard(EnlargeMode.NORMAL);
+            }
+        });
+
+        KeyStroke ksAltS = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.ALT_MASK);
+        this.getInputMap(c).put(ksAltS, "ENLARGE_SOURCE");
+        this.getActionMap().put("ENLARGE_SOURCE", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                ActionCallback callback = Plugins.getInstance().getActionCallback();
+                ((MageActionCallback)callback).enlargeCard(EnlargeMode.ALTERNATE);
             }
         });
 
@@ -989,15 +1000,18 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        KeyStroke ksAltShiftReleased = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK, true);
-        this.getInputMap(c).put(ksAltShiftReleased, "ENLARGE_RELEASE");
+        KeyStroke ksAltEReleased = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK, true);
+        this.getInputMap(c).put(ksAltEReleased, "ENLARGE_RELEASE");
+        KeyStroke ksAltSReleased = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.ALT_MASK, true);
+        this.getInputMap(c).put(ksAltSReleased, "ENLARGE_RELEASE");
         this.getActionMap().put("ENLARGE_RELEASE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 ActionCallback callback = Plugins.getInstance().getActionCallback();
-                ((MageActionCallback)callback).hideCard();
+                ((MageActionCallback)callback).hideEnlargedCard();
             }
         });
+
 
         btnSwitchHands.setText("Switch Hands");
         btnSwitchHands.addMouseListener(new MouseAdapter() {

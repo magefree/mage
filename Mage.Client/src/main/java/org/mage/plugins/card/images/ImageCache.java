@@ -7,21 +7,21 @@ import com.mortennobel.imagescaling.ResampleOp;
 import de.schlichtherle.truezip.file.TFile;
 import de.schlichtherle.truezip.file.TFileInputStream;
 import de.schlichtherle.truezip.file.TFileOutputStream;
-import mage.client.dialog.PreferencesDialog;
-import mage.view.CardView;
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.constants.Constants;
-import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
-import org.mage.plugins.card.utils.CardImageUtils;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
+import mage.client.dialog.PreferencesDialog;
+import mage.view.CardView;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.constants.Constants;
+import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
+import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -167,9 +167,19 @@ public class ImageCache {
         if (card.getUsesVariousArt()) {
             key += "#usesVariousArt";
         }
-        // log.debug("#key: " + key);
+        // log.warn("#key: " + key);
         return getImage(key);
     }
+
+    public static BufferedImage getImageOriginalAlternateName(CardView card) {
+        String key = getKeyAlternateName(card, card.getAlternateName());
+        if (card.getUsesVariousArt()) {
+            key += "#usesVariousArt";
+        }
+        // log.warn("#key: " + key);
+        return getImage(key);
+    }
+
 
     /**
      * Returns the Image corresponding to the key
@@ -198,6 +208,18 @@ public class ImageCache {
      */
     private static String getKey(CardView card) {
         StringBuilder sb = new StringBuilder(card.getName()).append("#");
+        sb.append(card.getExpansionSetCode()).append("#");
+        sb.append(card.getType()).append("#");
+        sb.append(card.getCardNumber()).append("#");
+        sb.append(card.getTokenSetCode() == null ? "":card.getTokenSetCode());
+        return sb.toString();
+    }
+
+    /**
+     * Returns the map key for the flip image of a card, without any suffixes for the image size.
+     */
+    private static String getKeyAlternateName(CardView card, String alternateName) {
+        StringBuilder sb = new StringBuilder(alternateName).append("#");
         sb.append(card.getExpansionSetCode()).append("#");
         sb.append(card.getType()).append("#");
         sb.append(card.getCardNumber()).append("#");
@@ -251,6 +273,7 @@ public class ImageCache {
 
     /**
      * Returns an image scaled to the size given
+     * @param original
      * @return
      */
     public static BufferedImage getNormalSizeImage(BufferedImage original) {
@@ -289,6 +312,9 @@ public class ImageCache {
     /**
      * Returns an image scaled to the size appropriate for the card picture
      * panel
+     * @param original
+     * @param sizeNeed
+     * @return
      */
     public static BufferedImage getResizedImage(BufferedImage original, Rectangle sizeNeed) {
         ResampleOp resampleOp = new ResampleOp(sizeNeed.width, sizeNeed.height);
@@ -298,6 +324,10 @@ public class ImageCache {
 
     /**
      * Returns the image appropriate to display the card in the picture panel
+     * @param card
+     * @param width
+     * @param height
+     * @return
      */
     public static BufferedImage getImage(CardView card, int width, int height) {
         if (Constants.THUMBNAIL_SIZE_FULL.width + 10 > width) {

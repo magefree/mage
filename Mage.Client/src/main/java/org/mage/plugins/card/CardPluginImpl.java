@@ -62,7 +62,7 @@ public class CardPluginImpl implements CardPlugin {
     private int cardWidth, cardHeight;
     private int extraCardSpacingX, cardSpacingX, cardSpacingY;
     private int stackSpacingX, stackSpacingY;
-    private List<Row> rows = new ArrayList<Row>();
+    private List<Row> rows = new ArrayList<>();
 
     @Init
     public void init() {
@@ -183,7 +183,7 @@ public class CardPluginImpl implements CardPlugin {
             int afterCreaturesIndex = rows.size();
             wrap(lands, rows, afterCreaturesIndex);
             // Store the current rows and others.
-            List<Row> storedRows = new ArrayList<Row>(rows.size());
+            List<Row> storedRows = new ArrayList<>(rows.size());
             for (Row row : rows) {
                 storedRows.add((Row) row.clone());
             }

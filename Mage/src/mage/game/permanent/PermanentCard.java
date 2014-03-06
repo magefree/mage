@@ -78,11 +78,9 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 
     @Override
     public void reset(Game game) {
-        // when the permanent is reset copy all original values from the card
+        // when the permanent is reset, copy all original values from the card
         // must copy card each reset so that the original values don't get modified
-        // game.getState().getContinuousEffects().removeGainedEffectsForSource(objectId);
-        // game.getState().resetTriggersForSourceId(this.getId());
-        copyFromCard(card, game);
+        copyFromCard(card);
         super.reset(game);
     }
 
@@ -98,16 +96,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         this.manaCost = card.getManaCost().copy();
         this.power = card.getPower().copy();
         this.toughness = card.getToughness().copy();
-        /*if (card instanceof LevelerCard) {
-            LevelAbility level = ((LevelerCard) card).getLevel(this.getCounters().getCount(CounterType.LEVEL));
-            if (level != null) {
-                this.power.setValue(level.getPower());
-                this.toughness.setValue(level.getToughness());
-                for (Ability ability : level.getAbilities()) {
-                    this.addAbility(ability);
-                }
-            }
-        }*/
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
         }
@@ -125,46 +113,8 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
             secondSideCard = card.getSecondCardFace();
             nightCard = card.isNightCard();
         }
-    }
-
-    protected void copyFromCard(Card card, Game game) {
-        this.name = card.getName();
-        // this.removeAllAbilities(objectId, game);
-        this.abilities.clear();
-        this.abilities.addAll(card.getAbilities());
-        this.abilities.setControllerId(this.controllerId);
-        this.cardType.clear();
-        this.cardType.addAll(card.getCardType());
-        this.color = card.getColor().copy();
-        this.manaCost = card.getManaCost().copy();
-        this.power = card.getPower().copy();
-        this.toughness = card.getToughness().copy();
-        /*if (card instanceof LevelerCard) {
-            LevelAbility level = ((LevelerCard) card).getLevel(this.getCounters().getCount(CounterType.LEVEL));
-            if (level != null) {
-                this.power.setValue(level.getPower());
-                this.toughness.setValue(level.getToughness());
-                for (Ability ability : level.getAbilities()) {
-                    this.addAbility(ability, game);
-                }
-            }
-        }*/
-        if (card instanceof PermanentCard) {
-            this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
-        }
-        this.subtype.clear();
-        this.subtype.addAll(card.getSubtype());
-        this.supertype.clear();
-        this.supertype.addAll(card.getSupertype());
-        this.expansionSetCode = card.getExpansionSetCode();
-        this.rarity = card.getRarity();
-        this.cardNumber = card.getCardNumber();
-
-        canTransform = card.canTransform();
-        if (canTransform) {
-            secondSideCard = card.getSecondCardFace();
-            nightCard = card.isNightCard();
-        }
+        this.flipCard = card.isFlipCard();
+        this.flipCardName = card.getFlipCardName();
     }
 
     public Card getCard() {

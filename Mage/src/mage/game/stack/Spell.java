@@ -627,6 +627,17 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     @Override
+    public void setFlipCard(boolean flipCard) {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setFlipCardName(String flipCardName) {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    @Override
     public Spell copy() {
         return new Spell(this);
     }

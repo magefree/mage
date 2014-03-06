@@ -64,6 +64,8 @@ public interface Card extends MageObject {
     boolean isFaceDown();
     boolean isFlipCard();
     String getFlipCardName();
+    void setFlipCard(boolean flipCard);
+    void setFlipCardName(String flipCardName);
     boolean isSplitCard();
 
     boolean canTransform();

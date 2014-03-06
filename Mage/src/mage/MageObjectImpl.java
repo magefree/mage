@@ -28,7 +28,9 @@
 
 package mage;
 
-import mage.constants.CardType;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -36,11 +38,8 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ChangelingAbility;
+import mage.constants.CardType;
 import mage.game.Game;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements MageObject {
 
@@ -49,9 +48,9 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
     protected String name;
     protected ManaCosts<ManaCost> manaCost;
     protected ObjectColor color;
-    protected List<CardType> cardType = new ArrayList<CardType>();
-    protected List<String> subtype = new ArrayList<String>();
-    protected List<String> supertype = new ArrayList<String>();
+    protected List<CardType> cardType = new ArrayList<>();
+    protected List<String> subtype = new ArrayList<>();
+    protected List<String> supertype = new ArrayList<>();
     protected Abilities<Ability> abilities;
     protected String text;
     protected MageInt power;
@@ -70,8 +69,8 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
         power = new MageInt(0);
         toughness = new MageInt(0);
         color = new ObjectColor();
-        manaCost = new ManaCostsImpl<ManaCost>("");
-        abilities = new AbilitiesImpl<Ability>();
+        manaCost = new ManaCostsImpl<>("");
+        abilities = new AbilitiesImpl<>();
     }
 
     public MageObjectImpl(final MageObjectImpl<T> object) {

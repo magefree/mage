@@ -24,15 +24,17 @@ import java.util.UUID;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
+import mage.client.plugins.adapters.MageActionCallback;
+import mage.client.plugins.impl.Plugins;
 import mage.client.util.audio.AudioManager;
 import mage.components.ImagePanel;
 import mage.constants.CardType;
+import mage.constants.EnlargeMode;
 import mage.utils.CardUtil;
 import mage.view.AbilityView;
 import mage.view.CardView;
@@ -76,7 +78,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     // for two faced cards
     public CardView temporary;
 
-    private List<MagePermanent> links = new ArrayList<MagePermanent>();
+    private List<MagePermanent> links = new ArrayList<>();
 
     public double tappedAngle = 0;
     public double flippedAngle = 0;
@@ -84,6 +86,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public ImagePanel overlayPanel;
     public JPanel buttonPanel;
     public JPanel iconPanel;
+    public JPanel copyIconPanel;
 
     private GlowText titleText;
     private GlowText ptText;
@@ -111,8 +114,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private boolean transformed;
     private boolean animationInProgress = false;
+
     private JButton dayNightButton;
     private JButton tokenButton;
+    private JButton showCopySourceButton;
 
     private boolean displayTitleAnyway;
 
@@ -140,7 +145,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             dayNightButton.setLocation(2, 2);
             dayNightButton.setSize(25, 25);
 
-            buttonPanel.setVisible(this.gameCard.canTransform());
+            buttonPanel.setVisible(true);
 
             BufferedImage day = ImageManagerImpl.getInstance().getDayImage();
             dayNightButton.setIcon(new ImageIcon(day));
@@ -154,9 +159,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     // if card is tapped, no visual transforming is possible (implementation limitation)
                     // if card is permanent, it will be rotated by Mage, so manual rotate should be possible
                     if (animationInProgress || isTapped() || isPermanent) {
-                        if (isPermanent) {
-                            JOptionPane.showMessageDialog(null, "You can't transform cards on battlefield.");
-                        }
                         return;
                     }
                     Animation.transformCard(CardPanel.this, CardPanel.this, true);
@@ -181,6 +183,32 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             tokenButton.setIcon(new ImageIcon(tokenIconImage));
 
             iconPanel.add(tokenButton);
+        }
+
+        // icon to inform about permanent is copying something
+        if (this.gameCard instanceof PermanentView) {
+            copyIconPanel = new JPanel();
+            copyIconPanel.setLayout(null);
+            copyIconPanel.setOpaque(false);
+            add(copyIconPanel);
+
+            showCopySourceButton = new JButton("");
+            showCopySourceButton.setLocation(2, 2);
+            showCopySourceButton.setSize(25, 25);
+            showCopySourceButton.setToolTipText("This permanent is copying a target. To see original image, push this button or turn mouse wheel down while hoovering with the mouse pointer over the permanent.");
+            copyIconPanel.setVisible(((PermanentView) this.gameCard).isCopy());
+
+            showCopySourceButton.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getCopyInformIconImage()));
+
+            copyIconPanel.add(showCopySourceButton);
+
+            showCopySourceButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ActionCallback callback = Plugins.getInstance().getActionCallback();
+                    ((MageActionCallback) callback).enlargeCard(EnlargeMode.COPY);
+                }
+            });
         }
 
         setBackground(Color.black);
@@ -462,6 +490,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             iconPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
             iconPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
         }
+        if (copyIconPanel != null) {
+            copyIconPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
+            copyIconPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
+        }
         int fontHeight = Math.round(cardHeight * (27f / 680));
         boolean showText = (!isAnimationPanel && fontHeight < 12);
         titleText.setVisible(showText);
@@ -634,7 +666,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void update(CardView card) {
-        if (isPermanent) {
+        if (isPermanent && (card instanceof PermanentView)) {
             boolean needsTapping = isTapped() != ((PermanentView) card).isTapped();
             boolean needsFlipping = isFlipped() != ((PermanentView) card).isFlipped();
             if (needsTapping || needsFlipping) {
@@ -648,6 +680,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 Animation.transformCard(this, this, card.isTransformed());
             }
         }
+        if (card.canTransform()) {
+            dayNightButton.setVisible(!isPermanent);
+        }
+
         if (CardUtil.isCreature(card) && CardUtil.isPlaneswalker(card)) {
             ptText.setText(card.getPower() + "/" + card.getToughness() + " (" + card.getLoyalty() + ")");
         } else if (CardUtil.isCreature(card)) {
@@ -658,6 +694,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             ptText.setText("");
         }
         setText(card);
+
+        boolean updateImage = !gameCard.getName().equals(card.getName()); // update after e.g. turning a night/day card
         this.gameCard = card;
 
         String cardType = getType(card);
@@ -668,7 +706,18 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         } else {
             overlayPanel.setVisible(false);
         }
-
+        if (updateImage) {
+            updateImage();
+            if (card.canTransform()) {
+                BufferedImage transformIcon;
+                if (card.isTransformed()) {
+                    transformIcon = ImageManagerImpl.getInstance().getNightImage();
+                } else {
+                    transformIcon = ImageManagerImpl.getInstance().getDayImage();
+                }
+                dayNightButton.setIcon(new ImageIcon(transformIcon));
+            }
+        }
         repaint();
     }
 
@@ -859,8 +908,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void update(PermanentView card) {
-        update((CardView) card);
         this.hasSickness = card.hasSummoningSickness();
+        this.copyIconPanel.setVisible(card.isCopy());
+        update((CardView) card);
     }
 
     @Override
@@ -883,7 +933,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         this.transformed = !this.transformed;
         if (transformed) {
             BufferedImage night = ImageManagerImpl.getInstance().getNightImage();
-            dayNightButton.setIcon(new ImageIcon(night));
+            if (dayNightButton != null) { // if transformbable card is copied, button can be null
+                dayNightButton.setIcon(new ImageIcon(night));
+            }
             if (this.gameCard.getSecondCardFace() == null) {
                 log.error("no second side for card to transform!");
                 return;
@@ -892,17 +944,21 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 this.temporary = this.gameCard;
                 update(this.gameCard.getSecondCardFace());
             }
-            updateImage();
         } else {
             BufferedImage day = ImageManagerImpl.getInstance().getDayImage();
-            dayNightButton.setIcon(new ImageIcon(day));
+            if (dayNightButton != null) { // if transformbable card is copied, button can be null
+                dayNightButton.setIcon(new ImageIcon(day));
+            }
             if (!isPermanent) { // use only for custom transformation (when pressing day-night button)
                 this.gameCard = this.temporary;
                 this.temporary = null;
                 update(this.gameCard);
-            }
-            updateImage();
+            }           
         }
+        String temp = this.gameCard.getAlternateName();
+        this.gameCard.setAlternateName(this.gameCard.getOriginalName());
+        this.gameCard.setOriginalName(temp);
+        updateImage();
     }
 
     @Override

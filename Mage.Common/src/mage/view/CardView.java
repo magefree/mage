@@ -87,6 +87,11 @@ public class CardView extends SimpleCardView {
     protected CardView secondCardFace;
     protected boolean transformed;
 
+    protected boolean flipCard;
+
+    protected String alternateName;
+    protected String originalName;
+
     protected boolean isSplitCard;
     protected String leftSplitName;
     protected ManaCosts leftSplitCosts;
@@ -167,7 +172,7 @@ public class CardView extends SimpleCardView {
         this.superTypes = card.getSupertype();
         this.color = card.getColor();
         this.canTransform = card.canTransform();
-
+        this.flipCard = card.isFlipCard();
 
         if (card instanceof PermanentToken) {
             this.isToken = true;
@@ -190,13 +195,20 @@ public class CardView extends SimpleCardView {
             this.isToken = false;
         }
         if (card.getCounters() != null && !card.getCounters().isEmpty()) {
-            counters = new ArrayList<CounterView>();
+            counters = new ArrayList<>();
             for (Counter counter: card.getCounters().values()) {
                 counters.add(new CounterView(counter));
             }
         }
         if (card.getSecondCardFace() != null) {
             this.secondCardFace = new CardView(card.getSecondCardFace());
+            this.alternateName = secondCardFace.getName();
+            this.originalName = card.getName();
+        }
+        this.flipCard = card.isFlipCard();
+        if (card.isFlipCard() &&  card.getFlipCardName() != null) {
+            this.alternateName = card.getFlipCardName();
+            this.originalName = card.getName();
         }
 
         if (card instanceof Spell) {
@@ -258,7 +270,7 @@ public class CardView extends SimpleCardView {
         if (this.rarity == null && object instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility)object;
             this.rarity = Rarity.NA;
-            this.rules = new ArrayList<String>();
+            this.rules = new ArrayList<>();
             this.rules.add(stackAbility.getRule());
             if (stackAbility.getZone().equals(Zone.COMMAND)) {
                 this.expansionSetCode = stackAbility.getExpansionSetCode();
@@ -298,15 +310,15 @@ public class CardView extends SimpleCardView {
 
     private void fillEmpty() {
         this.name = "Face Down";
-        this.rules = new ArrayList<String>();
+        this.rules = new ArrayList<>();
         this.power = "";
         this.toughness = "";
         this.loyalty = "";
-        this.cardTypes = new ArrayList<CardType>();
-        this.subTypes = new ArrayList<String>();
-        this.superTypes = new ArrayList<String>();
+        this.cardTypes = new ArrayList<>();
+        this.subTypes = new ArrayList<>();
+        this.superTypes = new ArrayList<>();
         this.color = new ObjectColor();
-        this.manaCost = new ArrayList<String>();
+        this.manaCost = new ArrayList<>();
         this.convertedManaCost = 0;
         this.rarity = Rarity.COMMON;
         this.expansionSetCode = "";
@@ -338,7 +350,7 @@ public class CardView extends SimpleCardView {
             if (target.isChosen()) {
                 for (UUID targetUUID : target.getTargets()) {
                     if (this.targets == null) {
-                        this.targets = new ArrayList<UUID>();
+                        this.targets = new ArrayList<>();
                     }
                     this.targets.add(targetUUID);
                 }
@@ -483,6 +495,32 @@ public class CardView extends SimpleCardView {
         return this.isSplitCard;
     }
 
+    /**
+     * Name of the other side (transform), flipped, or copying card name.
+     *
+     * @return name
+     */
+    public String getAlternateName() {
+        return alternateName;
+    }
+
+    /**
+     * Stores the name of the original name, to provide it for a flipped or transformed or copying card
+     *
+     * @return
+     */
+    public String getOriginalName() {
+        return originalName;
+    }
+
+    public void setAlternateName(String alternateName) {
+        this.alternateName = alternateName;
+    }
+
+    public void setOriginalName(String originalName) {
+        this.originalName = originalName;
+    }
+
     public String getLeftSplitName() {
         return leftSplitName;
     }
@@ -553,6 +591,10 @@ public class CardView extends SimpleCardView {
 
     public boolean isControlledByOwner() {
         return controlledByOwner;
+    }
+
+    public boolean isFlipCard() {
+        return flipCard;
     }
     
 }

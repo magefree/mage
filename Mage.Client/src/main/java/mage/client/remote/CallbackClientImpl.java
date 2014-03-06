@@ -379,7 +379,8 @@ public class CallbackClientImpl implements CallbackClient {
         switch (usedPanel.getChatType()) {
             case GAME:
                 usedPanel.receiveMessage("", new StringBuilder("You may use hot keys to play faster:")
-                        .append("\nTurn Mousewheel - Show big image of card your mousepointer hovers over")
+                        .append("\nTurn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
+                        .append("\nTurn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
                         .append("\nF2 - Confirm \"Ok\", \"Yes\" or \"Done\" button")
                         .append("\nF4 - Skip current turn but stop on declare attackers/blockers and something on the stack")
                         .append("\nF9 - Skip everything until your next turn")

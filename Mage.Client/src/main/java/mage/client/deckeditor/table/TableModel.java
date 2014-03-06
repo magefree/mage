@@ -59,6 +59,7 @@ import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.CardType;
+import mage.constants.EnlargeMode;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
@@ -380,7 +381,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 if (image != null && image instanceof BufferedImage) {
                     // XXX: scaled to fit width
                     image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
-                    bigCard.setCard(card.getId(), image, new ArrayList<String>(), false);
+                    bigCard.setCard(card.getId(), EnlargeMode.NORMAL, image, new ArrayList<String>());
                 } else {
                     drawCardText(card);
                 }

@@ -55,7 +55,10 @@ import mage.constants.TimingRule;
 import static mage.constants.Zone.EXILED;
 import mage.game.command.Commander;
 
-
+/**
+ *
+ * @param <T>
+ */
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
     private static final long serialVersionUID = 1L;
 
@@ -63,7 +66,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     protected UUID ownerId;
     protected int cardNumber;
-    protected List<Watcher> watchers = new ArrayList<Watcher>();
+    protected List<Watcher> watchers = new ArrayList<>();
     protected String expansionSetCode;
     protected String tokenSetCode;
     protected Rarity rarity;
@@ -127,7 +130,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         expansionSetCode = card.expansionSetCode;
         rarity = card.rarity;
         for (Watcher watcher: (List<Watcher>)card.watchers) {
-            this.watchers.add(watcher.copy());
+            watchers.add(watcher.copy());
         }
         faceDown = card.faceDown;
 
@@ -138,14 +141,14 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         }
         zoneChangeCounter = card.zoneChangeCounter;
         if (card.info != null) {
-            info = new HashMap<String, String>();
+            info = new HashMap<>();
             info.putAll(card.info);
         }
-        this.flipCard = card.flipCard;
-        this.flipCardName = card.flipCardName;
-        this.splitCard = card.splitCard;
-        this.usesVariousArt = card.usesVariousArt;
-        this.counters = card.counters.copy();
+        flipCard = card.flipCard;
+        flipCardName = card.flipCardName;
+        splitCard = card.splitCard;
+        usesVariousArt = card.usesVariousArt;
+        counters = card.counters.copy();
     }
 
     @Override
@@ -210,7 +213,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             System.out.println("Exception in rules generation for card: " + this.getName());
             e.printStackTrace();
         }
-        ArrayList<String> rules = new ArrayList<String>();
+        ArrayList<String> rules = new ArrayList<>();
         rules.add("Exception occured in rules generation");
         return rules;
     }
@@ -563,14 +566,26 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     }
 
     @Override
+    public String getFlipCardName() {
+        return flipCardName;
+    }
+
+    @Override
+    public void setFlipCard(boolean flipCard) {
+        this.flipCard = flipCard;
+    }
+
+    @Override
+    public void setFlipCardName(String flipCardName) {
+        this.flipCardName = flipCardName;
+    }
+
+
+    @Override
     public boolean isSplitCard() {
         return splitCard;
     }
 
-    @Override
-    public String getFlipCardName() {
-        return flipCardName;
-    }
 
     @Override
     public int getZoneChangeCounter() {

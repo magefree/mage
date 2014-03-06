@@ -34,35 +34,63 @@
 
 package mage.client.cards;
 
-import mage.constants.CardType;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import javax.swing.JScrollPane;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
+import mage.cards.Sets;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
+import static mage.client.constants.Constants.CONTENT_MAX_XOFFSET;
+import static mage.client.constants.Constants.FRAME_MAX_HEIGHT;
+import static mage.client.constants.Constants.FRAME_MAX_WIDTH;
+import static mage.client.constants.Constants.NAME_FONT_MAX_SIZE;
+import static mage.client.constants.Constants.NAME_MAX_YOFFSET;
+import static mage.client.constants.Constants.POWBOX_TEXT_MAX_LEFT;
+import static mage.client.constants.Constants.POWBOX_TEXT_MAX_TOP;
+import static mage.client.constants.Constants.SYMBOL_MAX_XOFFSET;
+import static mage.client.constants.Constants.SYMBOL_MAX_YOFFSET;
+import static mage.client.constants.Constants.TYPE_MAX_YOFFSET;
 import mage.client.game.PlayAreaPanel;
 import mage.client.util.Config;
 import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
+import mage.constants.CardType;
+import mage.constants.EnlargeMode;
 import mage.remote.Session;
-import mage.cards.Sets;
 import mage.view.AbilityView;
 import mage.view.CardView;
+import mage.view.CounterView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
-
-import javax.swing.*;
-import javax.swing.text.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import static mage.constants.Constants.*;
-import mage.view.CounterView;
 
 /**
  *
@@ -89,7 +117,14 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     protected BufferedImage small;
     protected String backgroundName;
 
-    /** Creates new form Card */
+    /**
+     * Creates new form Card
+     *
+     * @param card
+     * @param bigCard
+     * @param dimension
+     * @param gameId
+     */
     public Card(CardView card, BigCard bigCard, CardDimensions dimension, UUID gameId) {
         this.dimension = dimension;
         initComponents();
@@ -120,10 +155,12 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         return card.getId();
     }
 
+    @Override
     public void update(PermanentView permanent) {
         this.update((CardView)permanent);
     }
 
+    @Override
     public void update(CardView card) {
         this.card = card;
         Graphics2D gImage = image.createGraphics();
@@ -141,8 +178,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         gImage.setColor(Color.BLACK);
         gImage.drawImage(background, 0, 0, this);
 
-        if (card.getManaCost().size() > 0)
+        if (card.getManaCost().size() > 0) {
             ImageHelper.drawCosts(card.getManaCost(), gImage, FRAME_MAX_WIDTH - SYMBOL_MAX_XOFFSET, SYMBOL_MAX_YOFFSET, this);
+        }
 
         gSmall.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         gSmall.setColor(Color.BLACK);
@@ -157,8 +195,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             gImage.drawString(card.getLoyalty(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
         }
 
-        if (card.getCardTypes().size() > 0)
+        if (card.getCardTypes().size() > 0) {
             gImage.drawString(cardType, CONTENT_MAX_XOFFSET, TYPE_MAX_YOFFSET);
+        }
 
         gImage.dispose();
 
@@ -171,8 +210,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             gSmall.drawString(card.getLoyalty(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
         }
 
-        if (card.getCardTypes().size() > 0)
+        if (card.getCardTypes().size() > 0) {
             gSmall.drawString(cardType, Config.dimensions.contentXOffset, Config.dimensions.typeYOffset);
+        }
         drawText();
 
         gSmall.dispose();
@@ -217,7 +257,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         return sb.toString();
     }
 
-    protected String getBackgroundName() {
+    private String getBackgroundName() {
         if (card instanceof StackAbilityView || card instanceof AbilityView) {
             return "effect";
         }
@@ -237,8 +277,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         StyledDocument doc = text.getStyledDocument();
 
         try {
-            for (String rule: getRules())
+            for (String rule: getRules()) {
                 doc.insertString(doc.getLength(), rule + "\n", doc.getStyle("small"));
+            }
         } catch (BadLocationException e) {}
 
         text.setCaretPosition(0);
@@ -246,7 +287,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
     protected List<String> getRules() {
         if (card.getCounters() != null) {
-            List<String> rules = new ArrayList<String>(card.getRules());
+            List<String> rules = new ArrayList<>(card.getRules());
             for (CounterView counter: card.getCounters()) {
                 rules.add(counter.getCount() + " x " + counter.getName());
             }
@@ -333,7 +374,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     @Override
     public void mouseMoved(MouseEvent arg0) {
         this.bigCard.showTextComponent();
-        this.bigCard.setCard(card.getId(), image, getRules(), false);
+        this.bigCard.setCard(card.getId(), EnlargeMode.NORMAL,  image, getRules());
     }
 
     @Override
@@ -353,8 +394,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     @Override
     public void mouseEntered(MouseEvent arg0) {
         if (!popupShowing) {
-            if (popup != null)
+            if (popup != null) {
                 popup.hide();
+            }
             PopupFactory factory = PopupFactory.getSharedInstance();
             popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + Config.dimensions.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
             popup.show();
@@ -368,9 +410,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             List<UUID> targets = card.getTargets();
             if (targets != null) {
                 for (UUID uuid : targets) {
-                    PlayAreaPanel p = MageFrame.getGame(gameId).getPlayers().get(uuid);
-                    if (p != null) {
-                        Point target = p.getLocationOnScreen();
+                    PlayAreaPanel playAreaPanel = MageFrame.getGame(gameId).getPlayers().get(uuid);
+                    if (playAreaPanel != null) {
+                        Point target = playAreaPanel.getLocationOnScreen();
                         Point me = this.getLocationOnScreen();
                         ArrowBuilder.getBuilder().addArrow(gameId, (int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red, ArrowBuilder.Type.TARGET);
                     } else {
@@ -390,7 +432,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
     @Override
     public void mouseExited(MouseEvent arg0) {
-        if(getMousePosition(true) != null) return;
+        if(getMousePosition(true) != null) {
+            return;
+        }
         if (popup != null) {
             popup.hide();
             popupShowing = false;
@@ -408,8 +452,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
     @Override
     public void focusLost(FocusEvent arg0) {
-        if (popup != null)
+        if (popup != null) {
             popup.hide();
+        }
         this.repaint();
     }
 
@@ -433,8 +478,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
     @Override
     public void componentHidden(ComponentEvent e) {
-        if (popup != null)
+        if (popup != null) {
             popup.hide();
+        }
     }
 
     @Override
@@ -491,7 +537,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     }
 
     @Override
-    public float getAlpha() {return 0;}
+    public float getAlpha() {
+        return 0;
+    }
 
     @Override
     public void toggleTransformed() {

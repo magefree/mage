@@ -43,13 +43,14 @@ public class PermanentView extends CardView {
     private static final long serialVersionUID = 1L;
 
     private boolean tapped;
-    private boolean flipped;
-    private boolean phasedIn;
-    private boolean faceUp;
-    private boolean summoningSickness;
-    private int damage;
+    private final boolean flipped;
+    private final boolean phasedIn;
+    private final boolean faceUp;
+    private final boolean summoningSickness;
+    private final int damage;
     private List<UUID> attachments;
-    private CardView original;
+    private final CardView original;
+    private final boolean copy;
 
     public PermanentView(Permanent permanent, Card card) {
         super(permanent);
@@ -61,7 +62,7 @@ public class PermanentView extends CardView {
         this.summoningSickness = permanent.hasSummoningSickness();
         this.damage = permanent.getDamage();
         if (permanent.getAttachments().size() > 0) {
-            attachments = new ArrayList<UUID>();
+            attachments = new ArrayList<>();
             attachments.addAll(permanent.getAttachments());
         }
         if (isToken()) {
@@ -77,6 +78,19 @@ public class PermanentView extends CardView {
             }
         }
         this.transformed = permanent.isTransformed();
+        this.copy = permanent.isCopy();
+
+        // for fipped, transformed or copied cards, switch the names
+        if (!original.getName().equals(this.getName())) {
+            if (permanent.isCopy() && permanent.isFlipCard()) {
+                this.alternateName = permanent.getFlipCardName();
+                this.originalName = this.getName();
+            } else {
+                this.alternateName = original.getName();
+                this.originalName = this.getName();
+            }
+        }
+        
     }
 
     public boolean isTapped() {
@@ -89,6 +103,10 @@ public class PermanentView extends CardView {
 
     public boolean isFlipped() {
         return flipped;
+    }
+
+    public boolean isCopy() {
+        return copy;
     }
 
     public boolean isPhasedIn() {
