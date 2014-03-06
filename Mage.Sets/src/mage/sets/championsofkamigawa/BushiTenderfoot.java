@@ -31,25 +31,18 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.FlippedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.CopyTokenEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.game.permanent.token.Token;
-
-
 
 /**
  * @author LevelX
@@ -74,10 +67,9 @@ public class BushiTenderfoot extends CardImpl<BushiTenderfoot> {
         this.flipCardName = "Kenzo the Hardhearted";
 
         // When that creature is put into a graveyard this turn, flip Initiate of Blood.
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new FlipSourceEffect()));
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new KenzoTheHardhearted()), FlippedCondition.getInstance(), ""));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
+        Effect effect = new FlipSourceEffect(new KenzoTheHardhearted());
+        effect.setText("flip {this}");
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(effect));
     }
 
     public BushiTenderfoot(final BushiTenderfoot card) {
