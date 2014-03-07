@@ -45,6 +45,12 @@ import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.plugins.card.images.ImageCache;
 
+/**
+ * Class that handles the callbacks from the card panels to mage to display big card
+ * images from the cards the mouse hovers on. Also handles tooltip text window.
+ *
+ * @author Nantuko
+ */
 public class MageActionCallback implements ActionCallback {
 
     private static final Logger logger = Logger.getLogger(ActionCallback.class);
@@ -349,16 +355,23 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e, TransferData transferData) {
-        if (enlargedImageWindowOpen) {
-            hideEnlargedCard();
-            return;
-        }
         int notches = e.getWheelRotation();
+        if (enlargedImageWindowOpen) {
+            // same move direction will be ignored, opposite direction closes the enlarged window
+            if (enlargeMode.equals(EnlargeMode.NORMAL)) {
+                if (notches > 0) {
+                    hideEnlargedCard();
+                }
+            } else {
+                if (notches < 0) {
+                    hideEnlargedCard();
+                }
+            }
+            return;
+        }        
         if (notches < 0) {
             // move up - show normal image
-
             enlargeCard(EnlargeMode.NORMAL);
-
         } else {
             // move down - show alternate image
             enlargeCard(EnlargeMode.ALTERNATE);
