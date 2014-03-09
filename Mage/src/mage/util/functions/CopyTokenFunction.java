@@ -66,6 +66,9 @@ public class CopyTokenFunction implements Function<Token, Card> {
             sourceObj = ((PermanentCard) source).getCard();
             target.setOriginalExpansionSetCode(source.getExpansionSetCode());
             target.setOriginalCardNumber(source.getCardNumber());
+        } else {
+            target.setOriginalExpansionSetCode(source.getExpansionSetCode());
+            target.setOriginalCardNumber(source.getCardNumber());
         }
 
         target.setName(sourceObj.getName());

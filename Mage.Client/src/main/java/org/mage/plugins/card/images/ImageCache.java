@@ -337,6 +337,7 @@ public class ImageCache {
         if (card.getUsesVariousArt()) {
             key += "#usesVariousArt";
         }
+        log.warn("getImage: " + key);
         BufferedImage original = getImage(key);
         if (original == null) {
             log.warn(key + " not found");

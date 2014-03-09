@@ -48,6 +48,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.sets.tokens.EmptyToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -106,10 +107,10 @@ class SplinterTwinEffect extends OneShotEffect<SplinterTwinEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (permanent != null) {
             EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card);
+            CardUtil.copyTo(token).from(permanent);
 
             token.addAbility(HasteAbility.getInstance());
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());

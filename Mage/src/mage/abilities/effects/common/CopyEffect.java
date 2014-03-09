@@ -37,6 +37,7 @@ import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
 
 /**
  *
@@ -106,6 +107,9 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
         if (target instanceof PermanentCard) {
             permanent.setCardNumber(((PermanentCard) target).getCard().getCardNumber());
             permanent.setExpansionSetCode(((PermanentCard) target).getCard().getExpansionSetCode());
+        } else if (target instanceof PermanentToken) {
+            permanent.setCardNumber(((PermanentToken) target).getCardNumber());
+            permanent.setExpansionSetCode(((PermanentToken) target).getExpansionSetCode());
         }
 
         permanent.setCopy(true);
