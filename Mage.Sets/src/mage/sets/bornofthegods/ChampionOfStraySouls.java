@@ -27,39 +27,38 @@
  */
 package mage.sets.bornofthegods;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterMana;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
 public class ChampionOfStraySouls extends CardImpl<ChampionOfStraySouls> {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creatures");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public ChampionOfStraySouls(UUID ownerId) {
         super(ownerId, 63, "Champion of Stray Souls", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
@@ -80,8 +79,8 @@ public class ChampionOfStraySouls extends CardImpl<ChampionOfStraySouls> {
         effect.setText("Return X target creatures from your graveyard to the battlefield");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{B}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ChampionOfStraySoulsSacrificeCost());
-        ability.addTarget(new TargetCardInYourGraveyard(0,Integer.MAX_VALUE, new FilterCreatureCard()));
+        ability.addCost(new SacrificeXTargetCost(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(0,Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
         this.addAbility(ability);
 
         // {5}{B}{B}: Put Champion of Stray Souls on top of your library from your graveyard.
@@ -89,6 +88,19 @@ public class ChampionOfStraySouls extends CardImpl<ChampionOfStraySouls> {
                 new PutOnLibrarySourceEffect(true, "Put {this} on top of your library from your graveyard"),
                 new ManaCostsImpl("{5}{B}{B}")));
 
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SimpleActivatedAbility) {
+            for (Effect effect : ability.getEffects()) {
+                if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
+                    int xValue = new GetXValue().calculate(game, ability);
+                    ability.getTargets().clear();
+                    ability.addTarget(new TargetCardInYourGraveyard(xValue,xValue, new FilterCreatureCard("creature cards from your graveyard")));
+                }
+            }
+        }
     }
 
     public ChampionOfStraySouls(final ChampionOfStraySouls card) {
@@ -100,74 +112,3 @@ public class ChampionOfStraySouls extends CardImpl<ChampionOfStraySouls> {
         return new ChampionOfStraySouls(this);
     }
 }
-
-class ChampionOfStraySoulsSacrificeCost extends CostImpl<ChampionOfStraySoulsSacrificeCost> implements VariableCost {
-
-    protected int amountPaid = 0;
-
-    public ChampionOfStraySoulsSacrificeCost() {
-        this.text = "Sacrifice X other creatures";
-    }
-
-    public ChampionOfStraySoulsSacrificeCost(final ChampionOfStraySoulsSacrificeCost cost) {
-        super(cost);
-        this.amountPaid = cost.amountPaid;
-    }
-
-    @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        amountPaid = 0;        
-        int creaturesToSacrifice = ability.getTargets().get(0).getTargets().size();
-        this.text = new StringBuilder(creaturesToSacrifice).append(" other creatures you control").toString();
-        
-        FilterCreaturePermanent filter = new FilterCreaturePermanent(this.text);
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
-        TargetCreaturePermanent target = new TargetCreaturePermanent(creaturesToSacrifice, creaturesToSacrifice, filter, true);
-        
-        if (target.canChoose(controllerId, game) && target.choose(Outcome.Sacrifice, controllerId, sourceId, game)) {
-            for (UUID creatureId: (List<UUID>) target.getTargets()) {
-                Permanent creature = game.getPermanent(creatureId);
-                if (creature != null) {
-                    creature.sacrifice(sourceId, game);
-                    amountPaid++;
-                }
-
-            }
-        } else {
-            return false;
-        }
-        paid = true;
-        return true;
-    }
-
-    @Override
-    public int getAmount() {
-        return amountPaid;
-    }
-
-    @Override
-    public void setFilter(FilterMana filter) {
-    }
-
-    @Override
-    public FilterMana getFilter() {
-        return new FilterMana();
-    }
-
-    @Override
-    public ChampionOfStraySoulsSacrificeCost copy() {
-        return new ChampionOfStraySoulsSacrificeCost(this);
-    }
-
-    @Override
-    public void setAmount(int amount) {
-        amountPaid = amount;
-    }
-}
-

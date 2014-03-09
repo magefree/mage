@@ -31,8 +31,10 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -69,7 +71,10 @@ public class CrimsonHellkite extends CardImpl<CrimsonHellkite> {
         // {X}, {tap}: Crimson Hellkite deals X damage to target creature. Spend only red mana this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue()), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
-        ability.getManaCostsToPay().getVariableCosts().get(0).setFilter(filterRedMana);
+        VariableCost variableCost = ability.getManaCostsToPay().getVariableCosts().get(0);
+        if (variableCost instanceof VariableManaCost) {
+            ((VariableManaCost) variableCost).setFilter(filterRedMana);
+        }
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

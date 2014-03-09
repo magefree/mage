@@ -28,95 +28,50 @@
 
 package mage.abilities.costs.common;
 
-import java.util.Iterator;
-import java.util.UUID;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.VariableCost;
-import mage.filter.FilterMana;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCostImpl;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TapVariableTargetCost extends CostImpl<TapVariableTargetCost> implements VariableCost {
+public class TapVariableTargetCost extends VariableCostImpl<TapVariableTargetCost>  {
 
-    protected int amountPaid = 0;
-    protected TargetControlledPermanent target;
+    protected FilterControlledPermanent filter;
 
-    public TapVariableTargetCost(TargetControlledPermanent target) {
-        this.target = target;
-        this.text = "tap X " + target.getTargetName() + " you control";
+    public TapVariableTargetCost(FilterControlledPermanent filter) {
+        this(filter, false, "X");
+    }
+
+    public TapVariableTargetCost(FilterControlledPermanent filter, boolean additionalCostText, String xText) {
+        super(xText, new StringBuilder(filter.getMessage()).append(" to tap").toString());
+        this.filter = filter;
+        this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, tap ":"Tap ")
+                .append(this.xText).append(" ").append(filter.getMessage()).toString();
     }
 
     public TapVariableTargetCost(final TapVariableTargetCost cost) {
         super(cost);
-        this.target = cost.target.copy();
-        this.amountPaid = cost.amountPaid;
-    }
-
-    @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return target.canChoose(controllerId, game);
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        amountPaid = 0;
-        target.clearChosen();
-        if (target.canChoose(sourceId, controllerId, game) && target.choose(Outcome.Tap, controllerId, sourceId, game)) {
-            for (Iterator it = target.getTargets().iterator(); it.hasNext();) {
-                UUID uuid = (UUID) it.next();
-                Permanent permanent = game.getPermanent(uuid);
-                if (permanent != null && permanent.tap(game)) {
-                    amountPaid++;
-                }
-            }
-        }
-        paid = true;
-        return true;
-    }
-
-    @Override
-    public void clearPaid() {
-        paid = false;
-        amountPaid = 0;
-    }
-
-    @Override
-    public int getAmount() {
-        return amountPaid;
-    }
-
-    @Override
-    public void setAmount(int amount) {
-        amountPaid = amount;
-    }
-
-    /**
-     * Not Supported
-     * @param filter
-     */
-    @Override
-    public void setFilter(FilterMana filter) {
-    }
-
-    /**
-     * Not supported
-     * @return
-     */
-    @Override
-    public FilterMana getFilter() {
-        return new FilterMana();
+        this.filter = cost.filter.copy();
     }
 
     @Override
     public TapVariableTargetCost copy() {
         return new TapVariableTargetCost(this);
+    }
+
+    @Override
+    public int getMaxValue(Ability source, Game game) {
+        return game.getBattlefield().countAll(filter, source.getControllerId(), game);
+    }
+
+    @Override
+    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
+        return new TapTargetCost(new TargetControlledPermanent(xValue, xValue, filter, true));
     }
 
 }

@@ -28,23 +28,22 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterMana;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -60,10 +59,11 @@ public class SkeletalScrying extends CardImpl<SkeletalScrying> {
         this.color.setBlack(true);
 
         // As an additional cost to cast Skeletal Scrying, exile X cards from your graveyard.
-        this.getSpellAbility().addCost(new ExileXFromGraveyardCost());
-        
+        Ability ability = new SimpleStaticAbility(Zone.ALL,new SkeletalScryingRuleEffect());
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
         // You draw X cards and you lose X life.
-        this.getSpellAbility().addEffect(new SkeletalScryingEffect(new GetXValue()));
+        this.getSpellAbility().addEffect(new SkeletalScryingEffect(new ManacostVariableValue()));
         
     }
 
@@ -72,85 +72,40 @@ public class SkeletalScrying extends CardImpl<SkeletalScrying> {
     }
 
     @Override
+    public void adjustCosts(Ability ability, Game game) {
+        int xValue = ability.getManaCostsToPay().getX();
+        if (xValue > 0) {
+            ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(xValue, xValue, new FilterCard("cards from your graveyard"))));
+        }
+    }
+
+    @Override
     public SkeletalScrying copy() {
         return new SkeletalScrying(this);
     }
 }
 
-class ExileXFromGraveyardCost extends CostImpl<ExileXFromGraveyardCost> implements VariableCost  {
+class SkeletalScryingRuleEffect extends OneShotEffect<SkeletalScryingRuleEffect> {
 
-    protected int amountPaid = 0;
-
-    public ExileXFromGraveyardCost() {
-        this.text = "As an additional cost to cast Skeletal Scrying, exile X cards from your graveyard";
+    public SkeletalScryingRuleEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "As an additional cost to cast Skeletal Scrying, exile X cards from your graveyard";
     }
 
-    public ExileXFromGraveyardCost(final ExileXFromGraveyardCost cost) {
-        super(cost);
-        this.amountPaid = cost.amountPaid;
+    public SkeletalScryingRuleEffect(final SkeletalScryingRuleEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    public SkeletalScryingRuleEffect copy() {
+        return new SkeletalScryingRuleEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
         return true;
     }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        amountPaid = 0;
-        Target target = new TargetCardInYourGraveyard();
-        Player player = game.getPlayer(controllerId);
-        while (true) {
-            target.clearChosen();
-            if (target.canChoose(controllerId, game) && target.choose(Outcome.Exile, controllerId, sourceId, game)) {
-                Card card = player.getGraveyard().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    player.getGraveyard().remove(card);
-                    card.moveToExile(null, "", sourceId, game);
-                    amountPaid++;
-                }
-            }
-            else 
-                break;
-        }
-        paid = true;
-        return true;
-    }
-
-    @Override
-    public int getAmount() {
-        return amountPaid;
-    }
-
-    /**
-     * Not Supported
-     * @param filter
-     */
-    @Override
-    public void setFilter(FilterMana filter) {
-    }
-
-    /**
-     * Not supported
-     * @return
-     */
-    @Override
-    public FilterMana getFilter() {
-        return new FilterMana();
-    }
-
-    @Override
-    public ExileXFromGraveyardCost copy() {
-        return new ExileXFromGraveyardCost(this);
-    }
-
-    @Override
-    public void setAmount(int amount) {
-        amountPaid = amount;
-    }
-
 }
-
 class SkeletalScryingEffect extends OneShotEffect<SkeletalScryingEffect> {
 
     protected DynamicValue amount;

@@ -28,22 +28,18 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterMana;
-import mage.filter.common.FilterLandPermanent;
+import mage.constants.Rarity;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetLandPermanent;
 
 /**
  *
@@ -58,7 +54,7 @@ public class DevastatingSummons extends CardImpl<DevastatingSummons> {
         this.color.setRed(true);
 
         // As an additional cost to cast Devastating Summons, sacrifice X lands.
-        this.getSpellAbility().addCost(new DevastatingSummonsCost());
+        this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledLandPermanent("lands"), true));
         
         // Put two X/X red Elemental creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new DevastatingSummonsEffect());
@@ -71,78 +67,6 @@ public class DevastatingSummons extends CardImpl<DevastatingSummons> {
     @Override
     public DevastatingSummons copy() {
         return new DevastatingSummons(this);
-    }
-}
-
-class DevastatingSummonsCost extends CostImpl<DevastatingSummonsCost> implements VariableCost  {
-
-    protected int amountPaid = 0;
-
-    public DevastatingSummonsCost() {
-        this.text = "sacrifice X lands";
-    }
-
-    public DevastatingSummonsCost(final DevastatingSummonsCost cost) {
-        super(cost);
-        this.amountPaid = cost.amountPaid;
-    }
-
-    @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        amountPaid = 0;
-        FilterLandPermanent filter = new FilterLandPermanent("X number of lands you control.");
-        TargetLandPermanent target = new TargetLandPermanent(filter);
-        while (true) {
-            target.clearChosen();
-            if (target.canChoose(controllerId, game) && target.choose(Outcome.Sacrifice, controllerId, sourceId, game)) {
-                UUID land = target.getFirstTarget();
-                if (land != null) {
-                    game.getPermanent(land).sacrifice(sourceId, game);
-                    amountPaid++;
-                }
-            }
-            else 
-                break;
-        }
-        paid = true;
-        return true;
-    }
-
-    @Override
-    public int getAmount() {
-        return amountPaid;
-    }
-
-    /**
-     * Not Supported
-     * @param filter
-     */
-    @Override
-    public void setFilter(FilterMana filter) {
-    }
-
-    /**
-     * Not supported
-     * @return
-     */
-    @Override
-    public FilterMana getFilter() {
-        return new FilterMana();
-    }
-
-    @Override
-    public DevastatingSummonsCost copy() {
-        return new DevastatingSummonsCost(this);
-    }
-
-    @Override
-    public void setAmount(int amount) {
-        amountPaid = amount;
     }
 }
 

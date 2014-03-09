@@ -69,7 +69,7 @@ public class ShrineOfLoyalLegions extends CardImpl<ShrineOfLoyalLegions> {
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, false));
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new MyrToken(), new CountersCount(CounterType.CHARGE)),
+                new CreateTokenEffect(new MyrToken("NPH"), new CountersCount(CounterType.CHARGE)),
                 new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

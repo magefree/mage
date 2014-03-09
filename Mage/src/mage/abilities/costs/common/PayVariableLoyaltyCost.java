@@ -28,91 +28,46 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCostImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PayVariableLoyaltyCost extends CostImpl<PayVariableLoyaltyCost> implements VariableCost {
-
-    protected int amountPaid = 0;
+public class PayVariableLoyaltyCost extends VariableCostImpl<PayVariableLoyaltyCost>  {
 
     public PayVariableLoyaltyCost() {
+        super("loyality counters to remove");
         this.text = "-X";
     }
 
     public PayVariableLoyaltyCost(final PayVariableLoyaltyCost cost) {
         super(cost);
-        this.amountPaid = cost.amountPaid;
-    }
-
-    @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        Permanent planeswalker = game.getPermanent(sourceId);
-        return !planeswalker.isLoyaltyUsed();
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        Permanent planeswalker = game.getPermanent(sourceId);
-        Player player = game.getPlayer(planeswalker.getControllerId());
-        this.amountPaid = player.getAmount(0, planeswalker.getCounters().getCount(CounterType.LOYALTY), "Choose X", game);
-        if (this.amountPaid> 0) {
-            planeswalker.getCounters().removeCounter(CounterType.LOYALTY, this.amountPaid); 
-        } else if (this.amountPaid < 0) {
-            planeswalker.getCounters().addCounter(CounterType.LOYALTY.createInstance(Math.abs(this.amountPaid)));
-        }
-        planeswalker.setLoyaltyUsed(true);
-        this.paid = true;
-        return paid;
-    }
-
-    @Override
-    public void clearPaid() {
-        paid = false;
-        amountPaid = 0;
-    }
-
-    @Override
-    public int getAmount() {
-        return amountPaid;
-    }
-
-    @Override
-    public void setAmount(int amount) {
-        amountPaid = amount;
-    }
-
-    /**
-     * Not Supported
-     * @param filter
-     */
-    @Override
-    public void setFilter(FilterMana filter) {
-    }
-
-    /**
-     * Not supported
-     * @return
-     */
-    @Override
-    public FilterMana getFilter() {
-        return new FilterMana();
     }
 
     @Override
     public PayVariableLoyaltyCost copy() {
         return new PayVariableLoyaltyCost(this);
+    }
+    
+    @Override
+    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
+        return new PayLoyaltyCost(xValue);
+    }
+
+    @Override
+    public int getMaxValue(Ability source, Game game) {
+        int maxValue = 0;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            maxValue = permanent.getCounters().getCount(CounterType.LOYALTY.getName());
+        }
+        return maxValue;
     }
 
 }

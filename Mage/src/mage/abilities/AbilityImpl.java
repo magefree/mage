@@ -28,32 +28,42 @@
 
 package mage.abilities;
 
-import mage.constants.AbilityType;
-import mage.constants.EffectType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
-import mage.abilities.costs.*;
+import mage.abilities.costs.AdjustingSourceCosts;
+import mage.abilities.costs.AlternativeCost;
+import mage.abilities.costs.AlternativeSourceCosts;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.effects.*;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.Choices;
+import mage.constants.AbilityType;
+import mage.constants.EffectType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.command.Emblem;
 import mage.game.permanent.PermanentCard;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.game.command.Emblem;
-
 
 /**
  *
@@ -72,7 +82,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     protected ManaCosts<ManaCost> manaCosts;
     protected ManaCosts<ManaCost> manaCostsToPay;
     protected Costs<Cost> costs;
-    protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<AlternativeCost>();
+    protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<>();
     protected Costs<Cost> optionalCosts;
     protected Modes modes;
     protected Zone zone;
@@ -89,10 +99,10 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         this.originalId = id;
         this.abilityType = abilityType;
         this.zone = zone;
-        this.manaCosts = new ManaCostsImpl<ManaCost>();
-        this.manaCostsToPay = new ManaCostsImpl<ManaCost>();
-        this.costs = new CostsImpl<Cost>();
-        this.optionalCosts = new CostsImpl<Cost>();
+        this.manaCosts = new ManaCostsImpl<>();
+        this.manaCostsToPay = new ManaCostsImpl<>();
+        this.costs = new CostsImpl<>();
+        this.optionalCosts = new CostsImpl<>();
         this.modes = new Modes();
     }
 
@@ -222,7 +232,8 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         // 20121001 - 601.2b
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.
-        VariableManaCost variableManaCost = handleXCosts(game, noMana);
+        VariableManaCost variableManaCost = handleManaXCosts(game, noMana);
+        String announceString = handleOtherXCosts(game);
 
         for (UUID modeId :this.getModes().getSelectedModes()) {
             this.getModes().setMode(this.getModes().get(modeId));
@@ -247,8 +258,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 card.adjustTargets(this, game);
             }
             if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
-                if (variableManaCost != null) {
-                    game.informPlayers(new StringBuilder(card != null ? card.getName(): "").append(": no valid targets with this value of X").toString());
+                if (variableManaCost != null || announceString != null) {
+                    Player controller = game.getPlayer(this.getControllerId());
+                    if (controller != null) {
+                        game.informPlayer(controller, new StringBuilder(card != null ? card.getName(): "").append(": no valid targets with this value of X").toString());
+                    }
                 } else {
                     logger.debug("activate failed - target");
                 }
@@ -305,21 +319,52 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             return false;
         }
         // inform about x costs now, so canceled announcements are not shown in the log
+        if (announceString != null) {
+            game.informPlayers(announceString);
+        }
         if (variableManaCost != null) {
             int xValue = getManaCostsToPay().getX();
-            game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
+            game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
         }
         return true;
     }
 
     /**
-     * Handles the announcement of X mana costs and sets manaCostsToPay.
+     * Handles the setting of non mana X costs
+     *
+     * @param game
+     * @return announce message
+     *
+     */
+    protected String handleOtherXCosts(Game game) {
+        String announceString = null;
+        for (VariableCost variableCost : this.costs.getVariableCosts()) {
+            if (!(variableCost instanceof VariableManaCost)) {
+                int xValue = variableCost.announceXValue(this, game);
+                costs.add(variableCost.getFixedCostsFromAnnouncedValue(xValue));
+                // set the xcosts to paid
+                variableCost.setAmount(xValue);
+                ((Cost) variableCost).setPaid();
+                String message = new StringBuilder(game.getPlayer(this.controllerId).getName())
+                        .append(" announces a value of ").append(xValue).append(" (").append(variableCost.getActionText()).append(")").toString();
+                if (announceString == null) {
+                    announceString = message;
+                } else {
+                    announceString = new StringBuilder(announceString).append(" ").append(message).toString();
+                }
+            }
+        }
+        return announceString;
+    }
+
+    /**
+     * Handles X mana costs and sets manaCostsToPay.
      * 
      * @param game
      * @param noMana
-     * @return variableManaCost for late check
+     * @return variableManaCost for posting to log later
      */
-    protected VariableManaCost handleXCosts(Game game, boolean noMana) {
+    protected VariableManaCost handleManaXCosts(Game game, boolean noMana) {
         // 20121001 - 601.2b
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.

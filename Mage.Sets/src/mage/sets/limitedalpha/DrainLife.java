@@ -30,6 +30,8 @@ package mage.sets.limitedalpha;
 import java.util.UUID;
 
 import mage.abilities.Ability;
+import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -65,7 +67,10 @@ public class DrainLife extends CardImpl<DrainLife> {
         // Drain Life deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before Drain Life dealt damage or the creature's toughness.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DrainLifeEffect());
-        this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0).setFilter(filterBlack);
+        VariableCost variableCost = this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0);
+        if (variableCost instanceof VariableManaCost) {
+            ((VariableManaCost) variableCost).setFilter(filterBlack);
+        }
     }
 
     public DrainLife(final DrainLife card) {

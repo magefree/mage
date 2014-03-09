@@ -31,48 +31,48 @@ package mage.abilities.costs.common;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.players.Player;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author LevelX2
  */
+public class SacrificeXTargetCost extends VariableCostImpl<SacrificeXTargetCost>  {
 
-public class PayVariableLifeCost extends VariableCostImpl<PayVariableLifeCost> {
-
-    public PayVariableLifeCost() {
-        this(false);
+    protected FilterControlledPermanent filter;
+    
+    public SacrificeXTargetCost(FilterControlledPermanent filter) {
+        this(filter, false);
     }
 
-    public PayVariableLifeCost(boolean additionalCostText) {
-        super("life to pay");
-        this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, pay ":"Pay ")
-                .append(xText).append(" ").append("life").toString();
+    public SacrificeXTargetCost(FilterControlledPermanent filter, boolean additionalCostText) {
+        super(new StringBuilder(filter.getMessage()).append(" to sacrifice").toString());
+        this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, sacrifice ":"Sacrifice ").append(xText).append(" ").append(filter.getMessage()).toString();
+        this.filter = filter;
     }
 
-    public PayVariableLifeCost(final PayVariableLifeCost cost) {
+    public SacrificeXTargetCost(final SacrificeXTargetCost cost) {
         super(cost);
+        this.filter = cost.filter;
     }
 
     @Override
-    public PayVariableLifeCost copy() {
-        return new PayVariableLifeCost(this);
-    }
-
-    @Override
-    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
-        return new PayLifeCost(xValue);
+    public SacrificeXTargetCost copy() {
+        return new SacrificeXTargetCost(this);
     }
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        int maxValue = 0;
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            maxValue = controller.getLife();
-        }
-        return maxValue;
+        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+    }
+
+    @Override
+    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
+        TargetControlledPermanent target = new TargetControlledPermanent(xValue, xValue, filter, true);
+        target.setRequired(true);
+        return new SacrificeTargetCost(target);
     }
 
 }

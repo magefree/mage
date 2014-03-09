@@ -28,30 +28,27 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCostImpl;
 import mage.counters.Counter;
-import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-public class RemoveVariableCountersSourceCost extends CostImpl<RemoveVariableCountersSourceCost> implements VariableCost {
+public class RemoveVariableCountersSourceCost extends VariableCostImpl<RemoveVariableCountersSourceCost>  {
 
-    protected int amountPaid = 0;
     protected int minimalCountersToPay = 0;
-    private String name;
+    private String counterName;
 
     public RemoveVariableCountersSourceCost(Counter counter, int minimalCountersToPay) {
+        super(new StringBuilder(counter.getName()).append(" counters to remove").toString());
         this.minimalCountersToPay = minimalCountersToPay;
-        this.name = counter.getName();
-        this.text = "Remove X " + name + " counters from {this}";
+        this.counterName = counter.getName();
+        this.text = new StringBuilder("Remove ").append(xText).append(" ").append(counterName).append(" counters from {this}").toString();
     }
 
     public RemoveVariableCountersSourceCost(Counter counter) {
@@ -60,70 +57,33 @@ public class RemoveVariableCountersSourceCost extends CostImpl<RemoveVariableCou
 
     public RemoveVariableCountersSourceCost(final RemoveVariableCountersSourceCost cost) {
         super(cost);
-        this.amountPaid = cost.amountPaid;
         this.minimalCountersToPay = cost.minimalCountersToPay;
-        this.name = cost.name;
-    }
-
-    @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
-        return permanent != null && permanent.getCounters().getCount(name) >= minimalCountersToPay;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            Player player = game.getPlayer(permanent.getControllerId());
-            if (player != null) {
-                this.amountPaid = player.getAmount(minimalCountersToPay, permanent.getCounters().getCount(name), "Choose X counters to remove", game);
-                if (this.amountPaid >= minimalCountersToPay) {
-                    permanent.removeCounters(name, amountPaid, game);
-                    this.paid = true;
-                }
-                game.informPlayers(new StringBuilder(player.getName()).append(" removes ").append(this.amountPaid).append(" ").append(name).append(" counter from ").append(permanent.getName()).toString());
-            }
-        }
-        return paid;
-    }
-
-    @Override
-    public void clearPaid() {
-        paid = false;
-        amountPaid = 0;
-    }
-
-    @Override
-    public int getAmount() {
-        return amountPaid;
-    }
-
-    @Override
-    public void setAmount(int amount) {
-        amountPaid = amount;
-    }
-
-    /**
-     * Not Supported
-     * @param filter
-     */
-    @Override
-    public void setFilter(FilterMana filter) {
-    }
-
-    /**
-     * Not supported
-     * @return
-     */
-    @Override
-    public FilterMana getFilter() {
-        return new FilterMana();
+        this.counterName = cost.counterName;
     }
 
     @Override
     public RemoveVariableCountersSourceCost copy() {
         return new RemoveVariableCountersSourceCost(this);
+    }
+
+    @Override
+    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
+        return new RemoveCountersSourceCost(new Counter(counterName, xValue));
+    }
+
+    @Override
+    public int getMinValue(Ability source, Game game) {
+        return minimalCountersToPay;
+    }
+
+    @Override
+    public int getMaxValue(Ability source, Game game) {
+        int maxValue = 0;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            maxValue = permanent.getCounters().getCount(counterName);
+        }
+        return maxValue;
     }
 
 }

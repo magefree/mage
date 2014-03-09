@@ -76,14 +76,18 @@ public class ExileFromGraveCost extends CostImpl<ExileFromGraveCost> {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
-            for (UUID targetId: targets.get(0).getTargets()) {
-                Card card = game.getCard(targetId);
-                if (card == null || !game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
-                    return false;
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
+                for (UUID targetId: targets.get(0).getTargets()) {
+                    Card card = game.getCard(targetId);
+                    if (card == null || !game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
+                        return false;
+                    }
+                    paid |= controller.moveCardToExileWithInfo(card, null, null, sourceId, game, Zone.GRAVEYARD);
                 }
-                paid |= card.moveToZone(Zone.EXILED, sourceId, game, false);
             }
+
         }
         return paid;
     }

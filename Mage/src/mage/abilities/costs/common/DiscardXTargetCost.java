@@ -31,48 +31,54 @@ package mage.abilities.costs.common;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
  * @author LevelX2
  */
 
-public class PayVariableLifeCost extends VariableCostImpl<PayVariableLifeCost> {
+public class DiscardXTargetCost extends VariableCostImpl<DiscardXTargetCost> {
 
-    public PayVariableLifeCost() {
-        this(false);
+    protected FilterCard filter;
+
+    public DiscardXTargetCost(FilterCard filter) {
+        this(filter, false);
     }
 
-    public PayVariableLifeCost(boolean additionalCostText) {
-        super("life to pay");
-        this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, pay ":"Pay ")
-                .append(xText).append(" ").append("life").toString();
+    public DiscardXTargetCost(FilterCard filter, boolean additionalCostText) {
+        super(new StringBuilder(filter.getMessage()).append(" to discard").toString());
+        this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, discard ":"Discard ")
+                 .append(xText).append(" ").append(filter.getMessage()).toString();
+        this.filter = filter;
     }
 
-    public PayVariableLifeCost(final PayVariableLifeCost cost) {
+    public DiscardXTargetCost(final DiscardXTargetCost cost) {
         super(cost);
+        this.filter = cost.filter;
     }
 
     @Override
-    public PayVariableLifeCost copy() {
-        return new PayVariableLifeCost(this);
-    }
-
-    @Override
-    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
-        return new PayLifeCost(xValue);
+    public DiscardXTargetCost copy() {
+        return new DiscardXTargetCost(this);
     }
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        int maxValue = 0;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            maxValue = controller.getLife();
+            return controller.getHand().count(filter, game);
         }
-        return maxValue;
+        return 0;
     }
 
+    @Override
+    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
+        TargetCardInHand target = new TargetCardInHand(xValue, filter);
+        target.setRequired(true);
+        return new DiscardTargetCost(target);
+    }
 }

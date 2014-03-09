@@ -28,16 +28,19 @@
 package mage.sets.visions;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 
@@ -48,6 +51,7 @@ import mage.filter.FilterPermanent;
 public class CryptRats extends CardImpl<CryptRats> {
 
     public static final FilterMana filterBlack = new FilterMana();
+
     static {
         filterBlack.setBlack(true);
     }
@@ -61,10 +65,14 @@ public class CryptRats extends CardImpl<CryptRats> {
         this.toughness = new MageInt(1);
 
         // {X}: Crypt Rats deals X damage to each creature and each player. Spend only black mana this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(new ManacostVariableValue(), new FilterPermanent()), new ManaCostsImpl("{X}"));
-        ability.getManaCostsToPay().getVariableCosts().get(0).setFilter(filterBlack);
+        Effect effect = new DamageEverythingEffect(new ManacostVariableValue(), new FilterPermanent());
+        effect.setText("{this} deals X damage to each creature and each player. Spend only black mana this way");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect,new ManaCostsImpl("{X}"));
+        VariableCost variableCost = ability.getManaCostsToPay().getVariableCosts().get(0);
+        if (variableCost instanceof VariableManaCost) {
+            ((VariableManaCost) variableCost).setFilter(filterBlack);
+        }
         this.addAbility(ability);
-        this.addInfo("01", "Spend only black mana this way.");
     }
 
     public CryptRats(final CryptRats card) {

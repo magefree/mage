@@ -27,6 +27,9 @@
  */
 package mage.sets.magic2014;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -39,6 +42,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.AngelToken;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -87,23 +91,35 @@ class DevoutInvocationEffect extends OneShotEffect<DevoutInvocationEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int tappedAmount = 0;
-        TargetPermanent target = new TargetPermanent(filter);
-        while (true) {
-            target.clearChosen();
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getId(), game)) {
-                UUID creature = target.getFirstTarget();
-                if (creature != null) {
-                    game.getPermanent(creature).tap(game);
-                    tappedAmount++;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int tappedAmount = 0;
+            TargetPermanent target = new TargetPermanent(0,1,filter, false);
+            while (true && controller.isInGame()) {
+                target.clearChosen();
+                if (target.canChoose(source.getControllerId(), game)) {
+                    Map<String, Serializable> options = new HashMap<>();
+                    options.put("UI.right.btn.text", "Tapping complete");
+                    controller.choose(outcome, target, source.getControllerId(), game, options);
+                    if (target.getTargets().size() > 0) {
+                        UUID creature = target.getFirstTarget();
+                        if (creature != null) {
+                            game.getPermanent(creature).tap(game);
+                            tappedAmount++;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                else {
+                    break;
                 }
             }
-            else 
-                break;
-        }
-        if (tappedAmount > 0) {
-            AngelToken angelToken = new AngelToken();
-            angelToken.putOntoBattlefield(tappedAmount, game, source.getId(), source.getControllerId());
+            if (tappedAmount > 0) {
+                AngelToken angelToken = new AngelToken();
+                angelToken.putOntoBattlefield(tappedAmount, game, source.getSourceId(), source.getControllerId());
+                game.informPlayers(new StringBuilder(controller.getName()).append(" puts ").append(tappedAmount).append(" token").append(tappedAmount != 1 ?"s":"").append(" onto the battlefield").toString());
+            }
             return true;
         }
         return false;

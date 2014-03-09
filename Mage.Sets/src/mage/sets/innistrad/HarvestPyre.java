@@ -28,21 +28,13 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.common.ExileXFromYourGraveCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterMana;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.FilterCard;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -58,7 +50,7 @@ public class HarvestPyre extends CardImpl<HarvestPyre> {
         this.color.setRed(true);
 
         // As an additional cost to cast Harvest Pyre, exile X cards from your graveyard.
-        this.getSpellAbility().addCost(new HarvestPyreCost());
+        this.getSpellAbility().addCost(new ExileXFromYourGraveCost(new FilterCard("cards from your graveyard")));
 
         // Harvest Pyre deals X damage to target creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -73,78 +65,4 @@ public class HarvestPyre extends CardImpl<HarvestPyre> {
     public HarvestPyre copy() {
         return new HarvestPyre(this);
     }
-}
-
-class HarvestPyreCost extends CostImpl<HarvestPyreCost> implements VariableCost  {
-
-    protected int amountPaid = 0;
-
-    public HarvestPyreCost() {
-        this.text = "As an additional cost to cast Harvest Pyre, exile X cards from your graveyard";
-    }
-
-    public HarvestPyreCost(final HarvestPyreCost cost) {
-        super(cost);
-        this.amountPaid = cost.amountPaid;
-    }
-
-    @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        amountPaid = 0;
-        Target target = new TargetCardInYourGraveyard();
-        Player player = game.getPlayer(controllerId);
-        while (true) {
-            target.clearChosen();
-            if (target.canChoose(controllerId, game) && target.choose(Outcome.Exile, controllerId, sourceId, game)) {
-                Card card = player.getGraveyard().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    player.getGraveyard().remove(card);
-                    card.moveToExile(null, "", sourceId, game);
-                    amountPaid++;
-                }
-            }
-            else 
-                break;
-        }
-        paid = true;
-        return true;
-    }
-
-    @Override
-    public int getAmount() {
-        return amountPaid;
-    }
-
-    /**
-     * Not Supported
-     * @param filter
-     */
-    @Override
-    public void setFilter(FilterMana filter) {
-    }
-
-    /**
-     * Not supported
-     * @return
-     */
-    @Override
-    public FilterMana getFilter() {
-        return new FilterMana();
-    }
-
-    @Override
-    public HarvestPyreCost copy() {
-        return new HarvestPyreCost(this);
-    }
-
-    @Override
-    public void setAmount(int amount) {
-        amountPaid = amount;
-    }
-
 }

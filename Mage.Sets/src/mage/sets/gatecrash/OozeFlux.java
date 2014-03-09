@@ -59,8 +59,7 @@ public class OozeFlux extends CardImpl<OozeFlux> {
 
         // {1}{G}, Remove one or more +1/+1 counters from among creatures you control: Put an X/X green Ooze creature token onto the battlefield, where X is the number of +1/+1 counters removed this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OozeFluxCreateTokenEffect(new OozeToken()),new ManaCostsImpl("{1}{G}"));
-        ability.addCost(new RemoveVariableCountersTargetCost(
-                new TargetControlledCreaturePermanent(1,Integer.MAX_VALUE,new FilterControlledCreaturePermanent(), true), CounterType.P1P1));
+        ability.addCost(new RemoveVariableCountersTargetCost(new FilterControlledCreaturePermanent("creatures you control"), CounterType.P1P1, "one or more", 1));
         this.addAbility(ability);
     }
 

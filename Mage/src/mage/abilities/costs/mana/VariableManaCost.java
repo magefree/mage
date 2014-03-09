@@ -30,6 +30,7 @@ package mage.abilities.costs.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
 import mage.constants.ColoredManaSymbol;
 import mage.filter.FilterMana;
@@ -114,16 +115,6 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
     }
 
     @Override
-    public void setFilter(FilterMana filter) {
-        this.filter = filter;
-    }
-
-    @Override
-    public FilterMana getFilter() {
-        return filter;
-    }
-
-    @Override
     public VariableManaCost copy() {
         return new VariableManaCost(this);
     }
@@ -151,5 +142,38 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
     @Override
     public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
         return false;
+    }
+
+    @Override
+    public int announceXValue(Ability source, Game game) {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getActionText() {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getMinValue(Ability source, Game game) {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getMaxValue(Ability source, Game game) {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public FilterMana getFilter() {
+        return filter;
+    }
+
+    public void setFilter(FilterMana filter) {
+        this.filter = filter;
     }
 }

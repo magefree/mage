@@ -213,8 +213,8 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
             return "";
         }
         MageObject object = game.getObject(this.sourceId);
-        return new StringBuilder(" activates ")
-                .append(object != null ? this.getRule(object.getName()) :this.getRule())
+        return new StringBuilder(" activates: ")
+                .append(object != null ? this.formatRule(modes.getText(), object.getName()) :modes.getText())
                 .append(" from ")
                 .append(getMessageText(game)).toString();
     }

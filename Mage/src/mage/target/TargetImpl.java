@@ -46,8 +46,8 @@ import java.util.*;
  */
 public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
-    protected Map<UUID, Integer> targets = new LinkedHashMap<UUID, Integer>();
-    protected Map<UUID, Integer> zoneChangeCounters = new HashMap<UUID, Integer>();
+    protected Map<UUID, Integer> targets = new LinkedHashMap<>();
+    protected Map<UUID, Integer> zoneChangeCounters = new HashMap<>();
 
     protected String targetName;
     protected Zone zone;

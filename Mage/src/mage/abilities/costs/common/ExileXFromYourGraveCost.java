@@ -31,48 +31,56 @@ package mage.abilities.costs.common;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author LevelX2
  */
 
-public class PayVariableLifeCost extends VariableCostImpl<PayVariableLifeCost> {
+public class ExileXFromYourGraveCost extends VariableCostImpl<ExileXFromYourGraveCost>  {
 
-    public PayVariableLifeCost() {
-        this(false);
+    protected FilterCard filter;
+
+    public ExileXFromYourGraveCost(FilterCard filter) {
+        this(filter, false);
     }
 
-    public PayVariableLifeCost(boolean additionalCostText) {
-        super("life to pay");
-        this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, pay ":"Pay ")
-                .append(xText).append(" ").append("life").toString();
+    public ExileXFromYourGraveCost(FilterCard filter, boolean additionalCostText) {
+        super(new StringBuilder(filter.getMessage()).append(" to exile").toString());
+        this.filter = filter;
+        this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, exile ":"Exile ")
+                .append(xText).append(" ").append(filter.getMessage()).toString();
     }
 
-    public PayVariableLifeCost(final PayVariableLifeCost cost) {
+    public ExileXFromYourGraveCost(final ExileXFromYourGraveCost cost) {
         super(cost);
+        this.amountPaid = cost.amountPaid;
+        this.filter = cost.filter;
     }
 
     @Override
-    public PayVariableLifeCost copy() {
-        return new PayVariableLifeCost(this);
-    }
-
-    @Override
-    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
-        return new PayLifeCost(xValue);
+    public ExileXFromYourGraveCost copy() {
+        return new ExileXFromYourGraveCost(this);
     }
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        int maxValue = 0;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            maxValue = controller.getLife();
+            return controller.getGraveyard().count(filter, game);
         }
-        return maxValue;
+        return 0;
+    }
+
+    @Override
+    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(xValue, filter);
+        target.setRequired(true);
+        return new ExileFromGraveCost(target);
     }
 
 }

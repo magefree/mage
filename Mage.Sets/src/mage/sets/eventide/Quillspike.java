@@ -62,7 +62,7 @@ public class Quillspike extends CardImpl<Quillspike> {
 
         // {BG}, Remove a -1/-1 counter from a creature you control: Quillspike gets +3/+3 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{B/G}"));
-        TargetPermanent target = new TargetPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+        TargetPermanent target = new TargetPermanent(1, 1, new FilterControlledCreaturePermanent("creature you control"), true);
         ability.addCost(new RemoveCounterCost(target, CounterType.M1M1));
         this.addAbility(ability);
         

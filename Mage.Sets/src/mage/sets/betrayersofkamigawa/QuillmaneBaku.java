@@ -29,10 +29,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,8 +39,12 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -77,8 +77,25 @@ public class QuillmaneBaku extends CardImpl<QuillmaneBaku> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new QuillmaneBakuReturnEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance(1)));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SimpleActivatedAbility) {
+            int maxConvManaCost = 0;
+            for (Cost cost : ability.getCosts()) {
+                if (cost instanceof RemoveVariableCountersSourceCost) {
+                    maxConvManaCost = ((RemoveVariableCountersSourceCost)cost).getAmount();
+                }
+            }
+            ability.getTargets().clear();
+            FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with converted mana cost " + maxConvManaCost  + " or less");
+            newFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, maxConvManaCost + 1));
+            TargetCreaturePermanent target = new TargetCreaturePermanent(newFilter, true);
+            ability.getTargets().add(target);
+        }
     }
 
     public QuillmaneBaku(final QuillmaneBaku card) {
@@ -112,21 +129,10 @@ public class QuillmaneBaku extends CardImpl<QuillmaneBaku> {
             if (player == null) {
                 return false;
             }
-
-            int maxConvManaCost = 0;
-            for (Cost cost : source.getCosts()) {
-                if (cost instanceof RemoveVariableCountersSourceCost) {
-                    maxConvManaCost = ((RemoveVariableCountersSourceCost)cost).getAmount();
-                }
-            }
-
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost " + maxConvManaCost  + " or less");
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, maxConvManaCost + 1));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            
-            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                return permanent.moveToZone(Zone.HAND, source.getId(), game, false);
+                player.moveCardToHandWithInfo((Card) permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                return true;
             }
             return false;
         }

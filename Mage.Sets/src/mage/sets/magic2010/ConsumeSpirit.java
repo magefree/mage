@@ -32,6 +32,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterMana;
@@ -63,7 +65,10 @@ public class ConsumeSpirit extends CardImpl<ConsumeSpirit> {
         // Consume Spirit deals X damage to target creature or player and you gain X life.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new ConsumeSpiritEffect());
-        this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0).setFilter(filterBlack);
+        VariableCost variableCost = this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0);
+        if (variableCost instanceof VariableManaCost) {
+            ((VariableManaCost) variableCost).setFilter(filterBlack);
+        }
     }
 
     public ConsumeSpirit(final ConsumeSpirit card) {

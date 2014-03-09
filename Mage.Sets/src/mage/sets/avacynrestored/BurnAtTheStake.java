@@ -28,24 +28,20 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.common.TapVariableTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterMana;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -54,6 +50,12 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class BurnAtTheStake extends CardImpl<BurnAtTheStake> {
 
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
+
+    static {
+        filter.add(Predicates.not(new TappedPredicate()));
+    }
+
     public BurnAtTheStake(UUID ownerId) {
         super(ownerId, 130, "Burn at the Stake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}{R}");
         this.expansionSetCode = "AVR";
@@ -61,10 +63,10 @@ public class BurnAtTheStake extends CardImpl<BurnAtTheStake> {
         this.color.setRed(true);
 
         // As an additional cost to cast Burn at the Stake, tap any number of untapped creatures you control.
-        this.getSpellAbility().addCost(new BurnAtTheStakeCost());
+        this.getSpellAbility().addCost(new TapVariableTargetCost(filter, true, "any number of"));
         // Burn at the Stake deals damage to target creature or player equal to three times the number of creatures tapped this way.
         this.getSpellAbility().addEffect(new BurnAtTheStakeEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
     }
 
     public BurnAtTheStake(final BurnAtTheStake card) {
@@ -74,81 +76,6 @@ public class BurnAtTheStake extends CardImpl<BurnAtTheStake> {
     @Override
     public BurnAtTheStake copy() {
         return new BurnAtTheStake(this);
-    }
-}
-
-class BurnAtTheStakeCost extends CostImpl<BurnAtTheStakeCost> implements VariableCost {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
-
-    static {
-        filter.add(Predicates.not(new TappedPredicate()));
-    }
-    private int amountPaid = 0;
-
-    public BurnAtTheStakeCost() {
-        this.text = "As an additional cost to cast {this}, tap any number of untapped creatures you control";
-    }
-
-    public BurnAtTheStakeCost(final BurnAtTheStakeCost cost) {
-        super(cost);
-        this.amountPaid = cost.amountPaid;
-    }
-
-    @Override
-    public BurnAtTheStakeCost copy() {
-        return new BurnAtTheStakeCost(this);
-    }
-
-    @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        this.amountPaid = 0;
-
-        Target target = new TargetControlledCreaturePermanent(1, 1, filter, false);
-        while (target.canChoose(controllerId, game) && target.choose(Outcome.Tap, controllerId, sourceId, game)) {
-            Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null) {
-                permanent.tap(game);
-                amountPaid++;
-            }
-
-            target.clearChosen();
-        }
-
-        paid = true;
-        return true;
-    }
-
-    @Override
-    public int getAmount() {
-        return this.amountPaid;
-    }
-
-    /**
-     * Not Supported
-     * @param filter
-     */
-    @Override
-    public void setFilter(FilterMana filter) {
-    }
-
-    /**
-     * Not supported
-     * @return 
-     */
-    @Override
-    public FilterMana getFilter() {
-        return new FilterMana();
-    }
-
-    @Override
-    public void setAmount(int amount) {
-        this.amountPaid = amount;
     }
 }
 

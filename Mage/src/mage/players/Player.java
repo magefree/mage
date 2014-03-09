@@ -43,6 +43,7 @@ import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -278,8 +279,11 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
 
-    // set the value for X spells and abilities
+    // set the value for X mana spells and abilities
     int announceXMana(int min, int max, String message, Game game, Ability ability);
+
+    // set the value for non mana X costs
+    int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost);
 
     int chooseEffect(List<String> rEffects, Game game);
     TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game);

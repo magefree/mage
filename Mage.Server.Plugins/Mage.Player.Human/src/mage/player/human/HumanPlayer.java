@@ -46,10 +46,10 @@ import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.RequirementEffect;
@@ -526,6 +526,18 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         int xValue = 0;
         updateGameStatePriority("announceXMana", game);
+        game.fireGetAmountEvent(playerId, message, min, max);
+        waitForIntegerResponse(game);
+        if (response != null && response.getInteger() != null) {
+            xValue =  response.getInteger().intValue();
+        }
+        return xValue;
+    }
+
+    @Override
+    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
+        int xValue = 0;
+        updateGameStatePriority("announceXCost", game);
         game.fireGetAmountEvent(playerId, message, min, max);
         waitForIntegerResponse(game);
         if (response != null && response.getInteger() != null) {

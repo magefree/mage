@@ -1,4 +1,4 @@
-/*
+    /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -33,29 +33,25 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterMana;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -63,6 +59,12 @@ import mage.target.common.TargetCreaturePermanent;
  *
  */
 public class SpringjackPasture extends CardImpl<SpringjackPasture> {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goats");
+
+    static {
+        filter.add(new SubtypePredicate("Goat"));
+    }
 
     public SpringjackPasture(UUID ownerId) {
         super(ownerId, 326, "Springjack Pasture", Rarity.RARE, new CardType[]{CardType.LAND}, "");
@@ -77,10 +79,11 @@ public class SpringjackPasture extends CardImpl<SpringjackPasture> {
         this.addAbility(ability);
 
         // {tap}, Sacrifice X Goats: Add X mana of any one color to your mana pool. You gain X life.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpringjackPastureEffect(), new TapSourceCost());
-        ability2.addChoice(new ChoiceColor());
-        ability2.addCost(new SpringjackPastureCost());
-        this.addAbility(ability2);
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpringjackPastureEffect(), new TapSourceCost());
+        ability.addChoice(new ChoiceColor());
+        ability.addCost(new SacrificeXTargetCost(filter));
+        ability.addEffect(new GainLifeEffect(new GetXValue()));
+        this.addAbility(ability);
 
     }
 
@@ -98,7 +101,7 @@ class SpringjackPastureEffect extends OneShotEffect<SpringjackPastureEffect> {
 
     public SpringjackPastureEffect() {
         super(Outcome.Benefit);
-        staticText = "Add X mana of any one color to your mana pool. You gain X life";
+        staticText = "Add X mana of any one color to your mana pool";
     }
 
     public SpringjackPastureEffect(final SpringjackPastureEffect effect) {
@@ -110,22 +113,17 @@ class SpringjackPastureEffect extends OneShotEffect<SpringjackPastureEffect> {
         Player you = game.getPlayer(source.getControllerId());
         ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
         if (you != null && choice != null) {
-            int count = source.getManaCostsToPay().getX();
+            int count = new GetXValue().calculate(game, source);
             if (choice.getColor().isBlack()) {
                 you.getManaPool().addMana(new Mana(0, 0, 0, 0, count, 0, 0), game, source);
-                you.gainLife(count, game);
             } else if (choice.getColor().isBlue()) {
                 you.getManaPool().addMana(new Mana(0, 0, count, 0, 0, 0, 0), game, source);
-                you.gainLife(count, game);
             } else if (choice.getColor().isRed()) {
                 you.getManaPool().addMana(new Mana(count, 0, 0, 0, 0, 0, 0), game, source);
-                you.gainLife(count, game);
             } else if (choice.getColor().isGreen()) {
                 you.getManaPool().addMana(new Mana(0, count, 0, 0, 0, 0, 0), game, source);
-                you.gainLife(count, game);
             } else if (choice.getColor().isWhite()) {
                 you.getManaPool().addMana(new Mana(0, 0, 0, count, 0, 0, 0), game, source);
-                you.gainLife(count, game);
             }
             return true;
 
@@ -139,76 +137,11 @@ class SpringjackPastureEffect extends OneShotEffect<SpringjackPastureEffect> {
     }
 }
 
-class SpringjackPastureCost extends CostImpl<SpringjackPastureCost> implements VariableCost {
-
-    protected int amountPaid = 0;
-
-    public SpringjackPastureCost() {
-        this.text = "sacrifice X Goats";
-    }
-
-    public SpringjackPastureCost(final SpringjackPastureCost cost) {
-        super(cost);
-        this.amountPaid = cost.amountPaid;
-    }
-
-    @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        amountPaid = 0;
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("X number of goats you control.");
-        filter.add(new SubtypePredicate("Goat"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-        while (true) {
-            target.clearChosen();
-            if (target.canChoose(controllerId, game) && target.choose(Outcome.Sacrifice, controllerId, sourceId, game)) {
-                UUID goat = target.getFirstTarget();
-                if (goat != null) {
-                    game.getPermanent(goat).sacrifice(sourceId, game);
-                    amountPaid++;
-                }
-            } else {
-                break;
-            }
-        }
-        paid = true;
-        return true;
-    }
-
-    @Override
-    public int getAmount() {
-        return amountPaid;
-    }
-
-    @Override
-    public void setFilter(FilterMana filter) {
-    }
-
-    @Override
-    public FilterMana getFilter() {
-        return new FilterMana();
-    }
-
-    @Override
-    public SpringjackPastureCost copy() {
-        return new SpringjackPastureCost(this);
-    }
-
-    @Override
-    public void setAmount(int amount) {
-        amountPaid = amount;
-    }
-}
-
 class GoatToken extends Token {
 
     public GoatToken() {
         super("Goat", "0/1 white Goat creature token");
+        setOriginalExpansionSetCode("EVE");
         cardType.add(CardType.CREATURE);
         color = ObjectColor.WHITE;
         subtype.add("Goat");

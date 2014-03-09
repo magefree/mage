@@ -86,6 +86,9 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect<
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
         sb.append("Return ");

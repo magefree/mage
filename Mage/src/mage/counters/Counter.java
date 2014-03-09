@@ -33,6 +33,7 @@ import java.io.Serializable;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class Counter<T extends Counter<T>> implements Serializable {
 

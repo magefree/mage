@@ -81,6 +81,7 @@ import java.lang.String;
 import java.util.*;
 import java.util.HashSet;
 import java.util.Map.Entry;
+import mage.abilities.costs.VariableCost;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 
@@ -1034,6 +1035,18 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         }
         return numAvailable;
     }
+
+    @Override
+    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
+        log.debug("announceXMana");
+        //TODO: improve this
+        int value = new Random().nextInt(max+1);
+        if (value < max) {
+            max++;
+        }
+        return value;
+    }
+
 
     @Override
     public void abort() {

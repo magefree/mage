@@ -50,7 +50,7 @@ public class TransformSourceEffect extends OneShotEffect<TransformSourceEffect> 
         this(fromDayToNight, false);
     }
 
-    private TransformSourceEffect(boolean fromDayToNight, boolean withoutTrigger) {
+    public TransformSourceEffect(boolean fromDayToNight, boolean withoutTrigger) {
         super(Outcome.Transform);
         this.withoutTrigger = withoutTrigger;
         this.fromDayToNight = fromDayToNight;

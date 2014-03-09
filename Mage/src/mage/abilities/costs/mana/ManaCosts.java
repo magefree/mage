@@ -35,6 +35,7 @@ import mage.abilities.costs.VariableCost;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
 

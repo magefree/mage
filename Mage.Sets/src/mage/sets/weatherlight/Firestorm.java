@@ -29,24 +29,19 @@ package mage.sets.weatherlight;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterMana;
+import mage.constants.Rarity;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -62,14 +57,23 @@ public class Firestorm extends CardImpl<Firestorm> {
         this.color.setRed(true);
 
         // As an additional cost to cast Firestorm, discard X cards.
+        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
         // Firestorm deals X damage to each of X target creatures and/or players.
         this.getSpellAbility().addEffect(new FirestormEffect());
-        this.getSpellAbility().addCost(new FirestormCost());
-
     }
 
     public Firestorm(final Firestorm card) {
         super(card);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = new GetXValue().calculate(game, ability);
+        if (xValue > 0) {
+            Target target = new TargetCreatureOrPlayer(xValue);
+            target.setRequired(true);
+            ability.addTarget(target);
+        }
     }
 
     @Override
@@ -93,105 +97,30 @@ class FirestormEffect extends OneShotEffect<FirestormEffect> {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         int amount = (new GetXValue()).calculate(game, source);
-        TargetCreatureOrPlayer target = new TargetCreatureOrPlayer(amount);
         if (you != null) {
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getId(), game)) {
-                if (!target.getTargets().isEmpty()) {
-                    List<UUID> targets = target.getTargets();
-                    for (UUID targetId : targets) {
-                        Permanent creature = game.getPermanent(targetId);
-                        if (creature != null) {
-                            creature.damage(amount, source.getSourceId(), game, true, false);
-                        } else {
-                            Player player = game.getPlayer(targetId);
-                            if (player != null) {
-                                player.damage(amount, source.getSourceId(), game, true, false);
-                            }
+            if (source.getTargets().size() > 0) {
+                for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
+                    Permanent creature = game.getPermanent(targetId);
+                    if (creature != null) {
+                        creature.damage(amount, source.getSourceId(), game, true, false);
+                    } else {
+                        Player player = game.getPlayer(targetId);
+                        if (player != null) {
+                            player.damage(amount, source.getSourceId(), game, false, true);
                         }
                     }
                 }
-                return true;
             }
+            return true;
         }
         return false;
-
     }
+        
+
+    
 
     @Override
     public FirestormEffect copy() {
         return new FirestormEffect(this);
-    }
-}
-
-class FirestormCost extends CostImpl<FirestormCost> implements VariableCost {
-
-    protected int amountPaid = 0;
-
-    public FirestormCost() {
-        this.text = "discard X cards";
-    }
-
-    public FirestormCost(final FirestormCost cost) {
-        super(cost);
-        this.amountPaid = cost.amountPaid;
-    }
-
-    @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        amountPaid = 0;
-        Target target = new TargetCardInHand();
-        Player you = game.getPlayer(controllerId);
-        while (true) {
-            target.clearChosen();
-            if (target.canChoose(controllerId, game) && target.choose(Outcome.Discard, controllerId, sourceId, game)) {
-                Card card = you.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    you.getHand().remove(card);
-                    card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
-                    amountPaid++;
-                }
-            } else {
-                break;
-            }
-        }
-        paid = true;
-        return true;
-    }
-
-    @Override
-    public int getAmount() {
-        return amountPaid;
-    }
-
-    /**
-     * Not Supported
-     * @param filter
-     */
-    @Override
-    public void setFilter(FilterMana filter) {
-    }
-
-    /**
-     * Not supported
-     * @return
-     */
-    @Override
-    public FilterMana getFilter() {
-        return new FilterMana();
-    }
-
-    @Override
-    public FirestormCost copy() {
-        return new FirestormCost(this);
-    }
-
-    @Override
-    public void setAmount(int amount) {
-        amountPaid = amount;
     }
 }
