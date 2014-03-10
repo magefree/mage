@@ -68,7 +68,7 @@ public class TapSourceCost extends CostImpl<TapSourceCost> {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
             return !permanent.isTapped() && 
-                    (permanent.canTap() || game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_HASTE, game));
+                    (permanent.canTap() || game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_HASTE, controllerId, game));
         }
         return false;
     }

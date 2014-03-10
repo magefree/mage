@@ -492,7 +492,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     controllerId = ((StackObject) source).getControllerId();
                 }
                 if (controllerId != null && this.hasOpponent(controllerId, game) &&
-                        !game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, game)) {
+                        !game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, this.getId(), game)) {
                     return false;
                 }
             }
@@ -919,7 +919,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 
     protected LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
-        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<UUID, ActivatedAbility>();
+        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         if (!(object instanceof Permanent) || ((Permanent)object).canUseActivatedAbilities(game)) {
             for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(zone)) {
                 if (ability.canActivate(playerId, game)) {
@@ -927,7 +927,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 }
             }
             if (zone != Zone.HAND) {
-                if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, game)) {
+                if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, this.getId(), game)) {
                     for (Ability ability: object.getAbilities()) {
                         ability.setControllerId(this.getId());
                         if (ability instanceof ActivatedAbility && ability.getZone().match(Zone.HAND)) {
@@ -1765,7 +1765,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public List<Ability> getPlayable(Game game, boolean hidden) {
-        List<Ability> playable = new ArrayList<Ability>();
+        List<Ability> playable = new ArrayList<>();
 
         ManaOptions available = getManaAvailable(game);
         available.addMana(manaPool.getMana());
@@ -1785,7 +1785,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     playable.add(ability);
                 }
             }
-            if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
+            if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, this.getId(), game)) {
                 for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
                     if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
                         playable.add(ability);
@@ -1795,7 +1795,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         }
         for (ExileZone exile: game.getExile().getExileZones()) {
             for (Card card: exile.getCards(game)) {
-                if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
+                if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, this.getId(), game)) {
                     for (Ability ability: card.getAbilities()) {
                         ability.setControllerId(this.getId()); // controller must be set for case owner != caster
                         if (ability.getZone().match(Zone.HAND) && (ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
@@ -1807,7 +1807,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         }
         for (Cards cards: game.getState().getRevealed().values()) {
             for (Card card: cards.getCards(game)) {
-                if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
+                if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, this.getId(), game)) {
                     for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
                         if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
                             playable.add(ability);
@@ -2054,7 +2054,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void revealFaceDownCard(Card card, Game game) {
-        if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.REVEAL_FACE_DOWN, game)) {
+        if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.REVEAL_FACE_DOWN, this.getId(), game)) {
             Cards cards = new CardsImpl(card);
             this.revealCards(name, cards, game);
         }

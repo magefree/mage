@@ -85,7 +85,7 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         if (this.spellCanBeActivatedRegularlyNow(playerId, game) ||
-                game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, game)) {
+                game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, playerId, game)) {
             if (spellAbilityType.equals(SpellAbilityType.SPLIT)) {
                 return false;
             }

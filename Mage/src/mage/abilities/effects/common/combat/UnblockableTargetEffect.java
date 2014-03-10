@@ -34,6 +34,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  *
@@ -76,7 +77,7 @@ public class UnblockableTargetEffect extends RestrictionEffect<UnblockableTarget
             if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
                 sb.append("up to ");
             }
-            sb.append(target.getMaxNumberOfTargets()).append(" ");
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
         }
         sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         if (target.getMaxNumberOfTargets() > 1) {

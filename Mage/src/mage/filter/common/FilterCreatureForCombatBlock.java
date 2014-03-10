@@ -29,7 +29,10 @@
 package mage.filter.common;
 
 import mage.constants.AsThoughEffectType;
+import mage.filter.predicate.ObjectPlayer;
+import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.Predicate;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -61,8 +64,8 @@ public class FilterCreatureForCombatBlock extends FilterCreatureForCombatBase {
 class BlockTappedPredicate implements Predicate<Permanent> {
 
     @Override
-    public boolean apply(Permanent input, Game game) {
-        return !input.isTapped() || game.getState().getContinuousEffects().asThough(input.getId(), AsThoughEffectType.BLOCK_TAPPED, game);
+     public boolean apply(Permanent input, Game game) {
+        return !input.isTapped() || game.getState().getContinuousEffects().asThough(input.getId(), AsThoughEffectType.BLOCK_TAPPED, input.getControllerId(), game);
     }
 
     @Override

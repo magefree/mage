@@ -179,7 +179,7 @@ class DaxosOfMeletisCastFromExileEffect extends AsThoughEffectImpl<DaxosOfMeleti
 
 class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl<DaxosOfMeletisSpendAnyManaEffect> {
 
-    private UUID cardId;
+    private final UUID cardId;
 
     public DaxosOfMeletisSpendAnyManaEffect(UUID cardId) {
         super(AsThoughEffectType.SPEND_ANY_MANA, Duration.EndOfTurn, Outcome.Benefit);
@@ -204,9 +204,6 @@ class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl<DaxosOfMeletis
 
     @Override
     public boolean applies(UUID sourceId, Ability source, Game game) {
-        if (sourceId.equals(this.cardId)) {
-            return true;
-        }
-        return false;
+        return sourceId.equals(this.cardId);
     }
 }

@@ -136,7 +136,7 @@ class HavengulLichPlayedEffect extends OneShotEffect<HavengulLichPlayedEffect> {
 
     public HavengulLichPlayedEffect(final HavengulLichPlayedEffect effect) {
         super(effect);
-        staticText = "When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn";
+        staticText = "When you cast that card this turn, {this} gains all activated abilities of that card until end of turn";
     }
 
     @Override
@@ -172,10 +172,7 @@ class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility<Haveng
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getSourceId().equals(cardId)) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.SPELL_CAST && event.getSourceId().equals(cardId);
     }
 
     @Override
@@ -185,14 +182,14 @@ class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility<Haveng
 
     @Override
     public String getRule() {
-        return "When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.";
+        return "When you cast that card this turn, {this} gains all activated abilities of that card until end of turn.";
     }
 }
 
 // copy activated abilities of card
 class HavengulLichEffect extends ContinuousEffectImpl<HavengulLichEffect> {
 
-    private UUID cardId;
+    private final UUID cardId;
 
     public HavengulLichEffect(UUID cardId) {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
@@ -215,7 +212,7 @@ class HavengulLichEffect extends ContinuousEffectImpl<HavengulLichEffect> {
         Card card = game.getCard(cardId);
         if (permanent != null && card != null) {
             for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
-                permanent.addAbility(ability, game);
+                permanent.addAbility(ability, source.getSourceId(), game);
             }
         }
         return false;

@@ -194,7 +194,7 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
         MageObject object = game.getObject(sourceId);
         if ((object.getCardType().contains(CardType.INSTANT) ||
                 object.getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
-                game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, game) ||
+                game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, playerId,  game) ||
                 game.canPlaySorcery(playerId))) {
             return true;
         }
