@@ -1042,7 +1042,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         //TODO: improve this
         int value = new Random().nextInt(max+1);
         if (value < max) {
-            max++;
+            value++;
         }
         return value;
     }
