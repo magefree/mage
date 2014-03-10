@@ -67,6 +67,9 @@ public class UnblockableTargetEffect extends RestrictionEffect<UnblockableTarget
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         if (mode.getTargets().isEmpty()) {
             return "";
         }

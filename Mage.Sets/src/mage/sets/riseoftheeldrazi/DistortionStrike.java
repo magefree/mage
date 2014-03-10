@@ -28,6 +28,7 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -52,7 +53,9 @@ public class DistortionStrike extends CardImpl<DistortionStrike> {
         // Target creature gets +1/+0 until end of turn and is unblockable this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UnblockableTargetEffect());
+        Effect effect = new UnblockableTargetEffect();
+        effect.setText("and is unblockable this turn");
+        this.getSpellAbility().addEffect(effect);
         // Rebound
         this.addAbility(new ReboundAbility());
     }

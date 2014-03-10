@@ -103,7 +103,7 @@ class GroundSealEffect extends ReplacementEffectImpl<GroundSealEffect> {
             StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
             if (targetCard != null && stackObject != null) {
                 Zone zone = game.getState().getZone(targetCard.getId());
-                if (zone != null && (zone == Zone.GRAVEYARD)) {
+                if (zone != null && zone.equals(Zone.GRAVEYARD)) {
                     return true;
                 }
             }

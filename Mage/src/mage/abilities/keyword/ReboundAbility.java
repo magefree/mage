@@ -218,12 +218,13 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<Rebound
         } else {
             Card sourceCard = (Card) game.getObject(source.getSourceId());
             Player player = game.getPlayer(sourceCard.getOwnerId());
-
-            sourceCard.moveToExile(this.cardId, player.getName() + " Rebound Exile", source.getId(), game);
-            this.used = true;
-
-            return true;
+            if (player != null) {
+                player.moveCardToExileWithInfo(sourceCard, this.cardId, new StringBuilder(player.getName()).append(" Rebound").toString(), source.getSourceId(), game, Zone.HAND);
+                this.used = true;
+                return true;
+            }
         }
+        return false;
     }
 
     @Override
