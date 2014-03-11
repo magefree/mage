@@ -40,10 +40,11 @@ import mage.game.Game;
  * construction to setup the object for use by the mage framework.
 
  * @author maurer.it_at_gmail.com
+ * @param <T>
  */
 public abstract class CostModificationEffectImpl<T extends CostModificationEffectImpl<T>> extends ContinuousEffectImpl<T> implements CostModificationEffect<T> {
 
-    private CostModificationType modificationType;
+    private final CostModificationType modificationType;
     
     public CostModificationEffectImpl ( Duration duration, Outcome outcome, CostModificationType type) {
         super(duration, outcome);

@@ -25,63 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.abilities.effects.common.cost;
 
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.CostModificationEffectImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterSpell;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.util.CardUtil;
+
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class SpellsCostReductionEffect extends CostModificationEffectImpl<SpellsCostReductionEffect> {
 
-    private final FilterSpell filter;
+public class SpellCostReductionSourceEffect extends CostModificationEffectImpl<SpellCostReductionSourceEffect> {
+
     private final int amount;
     private ManaCosts<ManaCost> manaCostsToReduce = null;
+    private final Condition condition;
 
-
-    public SpellsCostReductionEffect(FilterSpell filter, ManaCosts<ManaCost> manaCostsToReduce) {
+    public SpellCostReductionSourceEffect(ManaCosts<ManaCost> manaCostsToReduce,  Condition condition) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.filter = filter;
         this.amount = 0;
         this.manaCostsToReduce = manaCostsToReduce;
+        this.condition = condition;
 
         StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage()).append(" you cast cost ");
+        sb.append("{this} costs ");
         for (String manaSymbol :manaCostsToReduce.getSymbols()) {
             sb.append(manaSymbol);
         }
-        sb.append(" less to cast. This effect reduces only the amount of colored mana you pay.");
+        sb.append(" less to if ").append(this.condition.toString());
         this.staticText = sb.toString();
     }
 
 
-    public SpellsCostReductionEffect(FilterSpell filter, int amount) {
+    public SpellCostReductionSourceEffect(int amount, Condition condition) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.filter = filter;
         this.amount = amount;
-
+        this.condition = condition;
         StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage()).append(" you cast cost {").append(amount).append("} less to cast");
+        sb.append("{this} costs {").append(amount).append("} less to cast if ").append(this.condition.toString());
         this.staticText = sb.toString();
     }
 
-    protected SpellsCostReductionEffect(SpellsCostReductionEffect effect) {
+    protected SpellCostReductionSourceEffect(SpellCostReductionSourceEffect effect) {
         super(effect);
-        this.filter = effect.filter;
         this.amount = effect.amount;
         this.manaCostsToReduce = effect.manaCostsToReduce;
+        this.condition = effect.condition;
     }
 
     @Override
@@ -96,16 +96,14 @@ public class SpellsCostReductionEffect extends CostModificationEffectImpl<Spells
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility)
-                && abilityToModify.getControllerId().equals(source.getControllerId())) {
-            Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-            return spell != null && this.filter.match(spell, game);
+        if (abilityToModify.getSourceId().equals(source.getSourceId()) && (abilityToModify instanceof SpellAbility)) {            
+            return condition.apply(game, source);
         }
         return false;
     }
 
     @Override
-    public SpellsCostReductionEffect copy() {
-        return new SpellsCostReductionEffect(this);
+    public SpellCostReductionSourceEffect copy() {
+        return new SpellCostReductionSourceEffect(this);
     }
 }
