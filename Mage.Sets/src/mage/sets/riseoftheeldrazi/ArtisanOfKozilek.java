@@ -34,6 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
@@ -52,9 +53,11 @@ public class ArtisanOfKozilek extends CardImpl<ArtisanOfKozilek> {
         this.subtype.add("Eldrazi");
         this.power = new MageInt(10);
         this.toughness = new MageInt(9);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        // When you cast Artisan of Kozilek, you may return target creature card from your graveyard to the battlefield.
+        Ability ability = new CastSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.addAbility(ability);
+        // Annihilator 2
         this.addAbility(new AnnihilatorAbility(2));
     }
 
