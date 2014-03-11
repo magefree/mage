@@ -28,7 +28,6 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -55,6 +54,7 @@ public class GrandColiseum extends CardImpl<GrandColiseum> {
         // {tap}: Add one mana of any color to your mana pool. Grand Coliseum deals 1 damage to you.
         Ability ability = new AnyColorManaAbility();
         ability.addEffect(new DamageControllerEffect(1));
+        this.addAbility(ability);
     }
 
     public GrandColiseum(final GrandColiseum card) {
