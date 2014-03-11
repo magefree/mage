@@ -1,3 +1,15 @@
+|Generate|TOK:BNG|Bird 1|
+|Generate|TOK:BNG|Cat Soldier|
+|Generate|TOK:BNG|Soldier|
+|Generate|TOK:BNG|Bird 2|
+|Generate|TOK:BNG|Kraken|
+|Generate|TOK:BNG|Zombie|
+|Generate|TOK:BNG|Elemental|
+|Generate|TOK:BNG|Centaur|
+|Generate|TOK:BNG|Wolf|
+|Generate|TOK:BNG|Gold|
+|Generate|EMBLEM:BNG|Kiora, the Crashing Wave|
+
 |Generate|TOK:M14|Sliver|
 |Generate|TOK:M14|Angel|
 |Generate|TOK:M14|Cat|
