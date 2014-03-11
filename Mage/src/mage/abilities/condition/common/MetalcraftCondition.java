@@ -20,7 +20,7 @@ public class MetalcraftCondition implements Condition {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    private static MetalcraftCondition fInstance = new MetalcraftCondition();
+    private static final MetalcraftCondition fInstance = new MetalcraftCondition();
 
     public static Condition getInstance() {
         return fInstance;
@@ -30,4 +30,10 @@ public class MetalcraftCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return game.getBattlefield().contains(filter, source.getControllerId(), 3, game);
     }
+
+    @Override
+    public String toString() {
+        return "you control three or more artifacts";
+    }
+    
 }

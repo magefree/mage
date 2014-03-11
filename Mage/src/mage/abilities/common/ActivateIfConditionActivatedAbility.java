@@ -43,7 +43,7 @@ import mage.game.Game;
  */
 public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl<ActivateIfConditionActivatedAbility> {
 
-    private Condition condition;
+    private final Condition condition;
 
     public ActivateIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
