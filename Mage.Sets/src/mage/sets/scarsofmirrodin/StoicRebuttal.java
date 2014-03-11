@@ -30,14 +30,17 @@ package mage.sets.scarsofmirrodin;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.constants.AbilityWord;
+import mage.constants.Zone;
 
 /**
  * @author ayrat
@@ -48,20 +51,19 @@ public class StoicRebuttal extends CardImpl<StoicRebuttal> {
         super(ownerId, 46, "Stoic Rebuttal", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "SOM";
         this.color.setBlue(true);
+        // Metalcraft - Stoic Rebuttal costs {1} less to cast if you control three or more artifacts.
+        Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(1, MetalcraftCondition.getInstance()));
+        ability.setRuleAtTheTop(true);
+        ability.setAbilityWord(AbilityWord.METALCRAFT);
+        this.addAbility(ability);
+        
+        // Counter target spell.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
     public StoicRebuttal(final StoicRebuttal card) {
         super(card);
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (MetalcraftCondition.getInstance().apply(game, ability)) {
-            ability.getManaCostsToPay().clear();
-            ability.getManaCostsToPay().load("{U}{U}");
-        }
     }
 
     @Override
