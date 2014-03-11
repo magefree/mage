@@ -49,6 +49,7 @@ import mage.target.Targets;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+import mage.constants.AbilityWord;
 
 /**
  * Practically everything in the game is started from an Ability.  This
@@ -395,7 +396,7 @@ public interface Ability extends Controllable, Serializable {
      * true = rule will be shown for the card / permanent
      * false = rule won't be shown
      *
-     * @param ruleAtTheTop
+     * @param ruleVisible
      */
     void setRuleVisible(boolean ruleVisible);
 
@@ -406,5 +407,16 @@ public interface Ability extends Controllable, Serializable {
      * @return originalId
      */
     UUID getOriginalId();
+    
+    /**
+     * Sets the ability word for the given ability.
+     * An ability word is a word that, in essence, groups, and reminds players of, cards 
+     * that have a common functionality and does not imply any particular rules.
+     * 
+     * --- Not usable yet for rule text generation of triggered abilities ---
+     * 
+     * @param abilityWord 
+     */
+    void setAbilityWord(AbilityWord abilityWord);
     
 }

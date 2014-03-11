@@ -54,6 +54,7 @@ import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.constants.AbilityType;
+import mage.constants.AbilityWord;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -87,6 +88,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     protected Modes modes;
     protected Zone zone;
     protected String name;
+    protected AbilityWord abilityWord;
     protected boolean usesStack = true;
     protected boolean ruleAtTheTop = false;
     protected boolean ruleVisible = true;
@@ -524,8 +526,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
     @Override
     public String getRule(boolean all) {
-        StringBuilder sbRule = new StringBuilder();
-
+        StringBuilder sbRule = new StringBuilder();       
         if (all || this.abilityType != AbilityType.SPELL) {
             if (manaCosts.size() > 0) {
                 sbRule.append(manaCosts.getText());
@@ -540,6 +541,9 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 sbRule.append(": ");
             }
         }
+        if (abilityWord != null) {
+            sbRule.insert(0, new StringBuilder("<i>").append(abilityWord.toString()).append("</i> - "));
+        }         
         String text = modes.getText();
         if (!text.isEmpty()) {
             if (sbRule.length() > 1) {
@@ -741,5 +745,12 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     public UUID getOriginalId() {
         return this.originalId;
     }
+
+    @Override
+    public void setAbilityWord(AbilityWord abilityWord) {
+       this.abilityWord = abilityWord;
+    }
+    
+    
 }
 

@@ -54,6 +54,7 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.constants.AbilityWord;
 
 /**
  *
@@ -65,9 +66,9 @@ public class StackAbility implements StackObject, Ability {
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts emptyCost = new ManaCostsImpl();
     private static Costs emptyCosts = new CostsImpl();
-    private static Abilities<Ability> emptyAbilites = new AbilitiesImpl<Ability>();
+    private static Abilities<Ability> emptyAbilites = new AbilitiesImpl<>();
 
-    private Ability ability;
+    private final Ability ability;
     private UUID controllerId;
     private String name = "";
     private String expansionSetCode;
@@ -75,6 +76,7 @@ public class StackAbility implements StackObject, Ability {
     public StackAbility(Ability ability, UUID controllerId) {
         this.ability = ability;
         this.controllerId = controllerId;
+        this.name = new StringBuilder("stack ability (").append(ability.getRule()).append(")").toString();
     }
 
     public StackAbility(final StackAbility spell) {
@@ -392,4 +394,11 @@ public class StackAbility implements StackObject, Ability {
     public UUID getOriginalId() {
         return this.ability.getOriginalId();
     }
+
+    @Override
+    public void setAbilityWord(AbilityWord abilityWord) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+    
+    
 }
