@@ -33,10 +33,8 @@ import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.target.TargetSource;
 
@@ -54,6 +52,7 @@ public class PayNoHeed extends CardImpl<PayNoHeed> {
 
         // Prevent all damage a source of your choice would deal this turn.
         this.getSpellAbility().addEffect(new PayNoHeedEffect());
+        this.getSpellAbility().addTarget(new TargetSource());
         
     }
 
@@ -68,16 +67,14 @@ public class PayNoHeed extends CardImpl<PayNoHeed> {
 }
 
 class PayNoHeedEffect extends PreventionEffectImpl<PayNoHeedEffect> {
-    private TargetSource target = new TargetSource();
 
     public PayNoHeedEffect() {
         super(Duration.EndOfTurn);
-        staticText = "Prevent all damage a source of your choice would deal to you this turn";
+        staticText = "Prevent all damage a source of your choice would deal this turn";
     }
 
     public PayNoHeedEffect(final PayNoHeedEffect effect) {
         super(effect);
-        this.target = effect.target.copy();
     }
 
     @Override
@@ -91,32 +88,24 @@ class PayNoHeedEffect extends PreventionEffectImpl<PayNoHeedEffect> {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(target.getFirstTarget())) {
-            preventDamage(event, source, target.getFirstTarget(), game);
-            return true;
-        }
-        return false;
+        preventDamage(event, source, event.getSourceId(), game);
+        return true;
     }
 
     private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getId(), source.getControllerId(), event.getAmount(), false);
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getSourceId(), source.getControllerId(), event.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
             int damage = event.getAmount();
             event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getSourceId(), source.getControllerId(), damage));
         }
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event instanceof DamageEvent && super.applies(event, source, game)) {
-            if (event.getSourceId().equals(target.getFirstTarget())) {
+        if (super.applies(event, source, game)) {
+            if (event.getSourceId().equals(this.getTargetPointer().getFirst(game, source))) {
                 return true;
             }
         }
