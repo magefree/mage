@@ -29,6 +29,7 @@
 package mage.filter;
 
 import java.io.Serializable;
+import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
@@ -36,6 +37,8 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  * @author North
+ * 
+ * @param <E>
  */
 public interface Filter<E> extends Serializable {
 
@@ -45,7 +48,7 @@ public interface Filter<E> extends Serializable {
         Equal("=="),
         LessThan("<");
 
-        private String text;
+        private final String text;
 
         ComparisonType(String text) {
             this.text = text;

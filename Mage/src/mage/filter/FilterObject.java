@@ -33,19 +33,20 @@ import mage.MageObject;
 /**
  *
  * @author North
+ * @param <E>
  */
 public class FilterObject<E extends MageObject> extends FilterImpl<E> {
 
     @Override
     public FilterObject<E> copy() {
-        return new FilterObject<E>(this);
+        return new FilterObject<>(this);
     }
 
     public FilterObject(String name) {
         super(name);
     }
 
-    public FilterObject(FilterObject filter) {
+    public FilterObject(FilterObject<E> filter) {
         super(filter);
     }
 }

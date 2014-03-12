@@ -34,6 +34,7 @@ import mage.game.Game;
  * Determines a true or false value for a given input.
  *
  * @author North
+ * @param <T>
  */
 public interface Predicate <T> extends Serializable {
     /**
@@ -47,6 +48,9 @@ public interface Predicate <T> extends Serializable {
      *     predicate.apply(b)}.</li>
      * </ul>
      *
+     * @param input
+     * @param game
+     * @return 
      * @throws NullPointerException if {@code input} is null and this predicate does not accept null
      *     arguments
      */

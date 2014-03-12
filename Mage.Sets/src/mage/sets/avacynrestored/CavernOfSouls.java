@@ -189,6 +189,7 @@ class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAYED) {
             MageObject object = game.getObject(event.getSourceId());
+            // TODO: Replace identification by name by better method that also works if ability is copied from other land with other name
             if (object != null && object.getName().equals("Cavern of Souls") && event.getFlag()) {
                 spells.add(event.getTargetId());
             }

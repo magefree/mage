@@ -32,6 +32,7 @@ import java.util.UUID;
 /**
  *
  * @author North
+ * @param <T>
  */
 public class ObjectSourcePlayer<T> extends ObjectPlayer<T> {
 

@@ -27,9 +27,9 @@
  */
 package mage.filter.predicate.other;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.cards.Card;
+import mage.filter.predicate.ObjectPlayer;
+import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 

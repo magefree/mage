@@ -28,10 +28,12 @@
 package mage.filter.predicate;
 
 import java.util.UUID;
+import mage.MageObject;
 
 /**
  *
  * @author North
+ * @param <T>
  */
 public class ObjectPlayer<T> {
 

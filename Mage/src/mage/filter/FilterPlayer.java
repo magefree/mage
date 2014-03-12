@@ -45,7 +45,7 @@ import mage.players.Player;
  */
 public class FilterPlayer extends FilterImpl<Player> {
 
-    protected List<ObjectPlayerPredicate<ObjectPlayer<Player>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Player>>>();
+    protected List<ObjectPlayerPredicate<ObjectPlayer<Player>>> extraPredicates = new ArrayList<>();
 
     public FilterPlayer() {
         this("player");
@@ -57,10 +57,10 @@ public class FilterPlayer extends FilterImpl<Player> {
 
     public FilterPlayer(final FilterPlayer filter) {
         super(filter);
-        this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Player>>>(filter.extraPredicates);
+        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
     }
 
-    public void add(ObjectPlayerPredicate predicate) {
+    public void add(ObjectPlayerPredicate<ObjectPlayer<Player>> predicate) {
         extraPredicates.add(predicate);
     }
 

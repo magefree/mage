@@ -30,6 +30,7 @@ package mage.filter.predicate;
 /**
  *
  * @author North
+ * @param <T>
  */
 public interface ObjectPlayerPredicate<T extends ObjectPlayer> extends Predicate<T> {
 }

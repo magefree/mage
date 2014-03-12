@@ -48,7 +48,7 @@ import mage.game.Game;
 public class FilterCard extends FilterObject<Card> {
 
     private static final long serialVersionUID = 1L;
-    protected List<ObjectPlayerPredicate<ObjectPlayer<Card>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Card>>>();
+    protected List<ObjectPlayerPredicate<ObjectPlayer<Card>>> extraPredicates = new ArrayList<>();
 
     public FilterCard() {
         super("card");
@@ -60,7 +60,7 @@ public class FilterCard extends FilterObject<Card> {
 
     public FilterCard(FilterCard filter) {
         super(filter);
-        this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Card>>>(filter.extraPredicates);
+        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
     }
 
     //20130711 708.6c
@@ -87,8 +87,8 @@ public class FilterCard extends FilterObject<Card> {
         if (!this.match(card, game)) {
             return false;
         }
-
-        return Predicates.and(extraPredicates).apply(new ObjectPlayer(card, playerId), game);
+        
+        return Predicates.and(extraPredicates).apply(new ObjectPlayer<>(card, playerId), game);
     }
 
     public boolean match(Card card, UUID sourceId, UUID playerId, Game game) {
@@ -96,7 +96,7 @@ public class FilterCard extends FilterObject<Card> {
             return false;
         }
 
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(card, sourceId, playerId), game);
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<>(card, sourceId, playerId), game);
     }
 
     public void add(ObjectPlayerPredicate predicate) {
@@ -104,7 +104,7 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public Set<Card> filter(Set<Card> cards, Game game) {
-        Set<Card> filtered = new HashSet<Card>();
+        Set<Card> filtered = new HashSet<>();
         for (Card card : cards) {
             if (match(card, game)) {
                 filtered.add(card);

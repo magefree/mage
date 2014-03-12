@@ -44,10 +44,11 @@ public class SpecialActions extends AbilitiesImpl<SpecialAction> {
     }
 
     public LinkedHashMap<UUID, SpecialAction> getControlledBy(UUID controllerId) {
-        LinkedHashMap<UUID, SpecialAction> controlledBy = new LinkedHashMap<UUID, SpecialAction>();
+        LinkedHashMap<UUID, SpecialAction> controlledBy = new LinkedHashMap<>();
         for (SpecialAction action: this) {
-            if (action.getControllerId().equals(controllerId))
+            if (action.getControllerId().equals(controllerId)) {
                 controlledBy.put(action.id, action);
+            }
         }
         return controlledBy;
     }
