@@ -43,7 +43,6 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 
@@ -118,7 +117,7 @@ class WindbriskHeightsWatcher extends WatcherImpl<WindbriskHeightsWatcher> {
 
 class WindbriskHeightsAttackersCondition implements Condition {
 
-    private static WindbriskHeightsAttackersCondition fInstance = new WindbriskHeightsAttackersCondition();
+    private static final WindbriskHeightsAttackersCondition fInstance = new WindbriskHeightsAttackersCondition();
 
     public static Condition getInstance() {
         return fInstance;
@@ -127,10 +126,7 @@ class WindbriskHeightsAttackersCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Watcher watcher = game.getState().getWatchers().get("WindbriskHeightsAttackersWatcher", source.getControllerId());
-        if (watcher != null && watcher.conditionMet()) {
-            return true;
-        }
-        return false;
+        return watcher != null && watcher.conditionMet();
     }
 
     @Override

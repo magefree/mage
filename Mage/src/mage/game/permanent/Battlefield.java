@@ -44,7 +44,7 @@ import mage.game.Game;
  */
 public class Battlefield implements Serializable {
 
-    private Map<UUID, Permanent> field = new LinkedHashMap<UUID, Permanent>();
+    private final Map<UUID, Permanent> field = new LinkedHashMap<>();
 
     public Battlefield () {}
 
@@ -73,6 +73,7 @@ public class Battlefield implements Serializable {
      * 
      * @param filter
      * @param controllerId
+     * @param game
      * @return count
      */
     public int countAll(FilterPermanent filter, UUID controllerId, Game game) {
@@ -122,6 +123,8 @@ public class Battlefield implements Serializable {
      * This method ignores the range of influence.
      *
      * @param filter
+     * @param num
+     * @param game
      * @return boolean
      */
     public boolean contains(FilterPermanent filter, int num, Game game) {
@@ -144,6 +147,8 @@ public class Battlefield implements Serializable {
      *
      * @param filter
      * @param controllerId
+     * @param num
+     * @param game
      * @return boolean
      */
     public boolean contains(FilterPermanent filter, UUID controllerId, int num, Game game) {
@@ -167,6 +172,7 @@ public class Battlefield implements Serializable {
      * @param filter
      * @param sourcePlayerId
      * @param game
+     * @param num
      * @return boolean
      */
     public boolean contains(FilterPermanent filter, UUID sourcePlayerId, Game game, int num) {
@@ -232,7 +238,7 @@ public class Battlefield implements Serializable {
     }
 
     public List<Permanent> getAllActivePermanents() {
-        List<Permanent> active = new ArrayList<Permanent>();
+        List<Permanent> active = new ArrayList<>();
         for (Permanent perm: field.values()) {
             if (perm.isPhasedIn()) {
                 active.add(perm);
@@ -250,7 +256,7 @@ public class Battlefield implements Serializable {
      * @see Permanent
      */
     public List<Permanent> getAllActivePermanents(UUID controllerId) {
-        List<Permanent> active = new ArrayList<Permanent>();
+        List<Permanent> active = new ArrayList<>();
         for (Permanent perm: field.values()) {
             if (perm.isPhasedIn() && perm.getControllerId().equals(controllerId)) {
                 active.add(perm);
@@ -268,7 +274,7 @@ public class Battlefield implements Serializable {
      * @see Permanent
      */
     public List<Permanent> getAllActivePermanents(CardType type) {
-        List<Permanent> active = new ArrayList<Permanent>();
+        List<Permanent> active = new ArrayList<>();
         for (Permanent perm: field.values()) {
             if (perm.isPhasedIn() && perm.getCardType().contains(type)) {
                 active.add(perm);
@@ -283,11 +289,12 @@ public class Battlefield implements Serializable {
      * 
      *
      * @param filter
+     * @param game
      * @return a list of {@link Permanent}
      * @see Permanent
      */
     public List<Permanent> getAllActivePermanents(FilterPermanent filter, Game game) {
-        List<Permanent> active = new ArrayList<Permanent>();
+        List<Permanent> active = new ArrayList<>();
         for (Permanent perm: field.values()) {
             if (perm.isPhasedIn() && filter.match(perm, game)) {
                 active.add(perm);
@@ -302,11 +309,12 @@ public class Battlefield implements Serializable {
      *
      * @param filter
      * @param controllerId
+     * @param game
      * @return a list of {@link Permanent}
      * @see Permanent
      */
     public List<Permanent> getAllActivePermanents(FilterPermanent filter, UUID controllerId, Game game) {
-        List<Permanent> active = new ArrayList<Permanent>();
+        List<Permanent> active = new ArrayList<>();
         for (Permanent perm: field.values()) {
             if (perm.isPhasedIn() && perm.getControllerId().equals(controllerId) && filter.match(perm, game)) {
                 active.add(perm);
@@ -335,12 +343,13 @@ public class Battlefield implements Serializable {
      * 
      * @param filter
      * @param sourcePlayerId
+     * @param sourceId
      * @param game
      * @return a list of {@link Permanent}
      * @see Permanent
      */
     public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, UUID sourceId, Game game) {
-        List<Permanent> active = new ArrayList<Permanent>();
+        List<Permanent> active = new ArrayList<>();
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
             for (Permanent perm: field.values()) {
                 if (perm.isPhasedIn() && filter.match(perm, sourceId, sourcePlayerId, game)) {
@@ -372,7 +381,7 @@ public class Battlefield implements Serializable {
             return getAllActivePermanents();
         }
         else {
-            List<Permanent> active = new ArrayList<Permanent>();
+            List<Permanent> active = new ArrayList<>();
             Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
             for (Permanent perm: field.values()) {
                 if (perm.isPhasedIn() && range.contains(perm.getControllerId())) {
@@ -384,7 +393,7 @@ public class Battlefield implements Serializable {
     }
 
     public List<Permanent> getPhasedIn(UUID controllerId) {
-        List<Permanent> phasedIn = new ArrayList<Permanent>();
+        List<Permanent> phasedIn = new ArrayList<>();
         for (Permanent perm: field.values()) {
             if (perm.getAbilities().containsKey(PhasingAbility.getInstance().getId()) && perm.isPhasedIn() && perm.getControllerId().equals(controllerId)) {
                 phasedIn.add(perm);
@@ -394,7 +403,7 @@ public class Battlefield implements Serializable {
     }
 
     public List<Permanent> getPhasedOut(UUID controllerId) {
-        List<Permanent> phasedOut = new ArrayList<Permanent>();
+        List<Permanent> phasedOut = new ArrayList<>();
         for (Permanent perm: field.values()) {
             if (!perm.isPhasedIn() && perm.getControllerId().equals(controllerId)) {
                 phasedOut.add(perm);

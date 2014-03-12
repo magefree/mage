@@ -367,7 +367,11 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     event.setTarget(permanent);
                     break;
                 default:
-                    logger.fatal(new StringBuilder("Invalid from zone [").append(toZone).append("] for card [").append(this.getName()).toString());
+                    Card sourceCard = game.getCard(sourceId);
+                    logger.fatal(new StringBuilder("Invalid to zone [").append(toZone)
+                                .append("] for card [").append(this.getName())
+                                .append("] to zone [").append(toZone)
+                                .append("] source [").append(sourceCard != null ? sourceCard.getName():"null").append("]").toString());
                     return false;
             }
             setControllerId(ownerId);
@@ -440,6 +444,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         game.getExile().removeCard(this, game);
                         break;
                     case STACK:
+                    case PICK:
                         // nothing to do
                         break;
                     default:
