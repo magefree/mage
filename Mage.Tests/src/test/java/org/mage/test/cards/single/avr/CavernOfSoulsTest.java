@@ -82,7 +82,7 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests card can be countered for cast with Cavern of Souls
+     * Tests spell can't be countered for cast with Cavern of Souls
      */
     @Test
     public void testDrakeCantBeCountered() {
@@ -90,6 +90,7 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Cavern of Souls");
         addCard(Zone.HAND, playerA, "Azure Drake");
 
+        // {1}{U} Remove Soul - Counter target creature spell.
         addCard(Zone.HAND, playerB, "Remove Soul");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
@@ -107,5 +108,32 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Azure Drake", 0);
         assertPermanentCount(playerA, "Azure Drake", 1);
     }
+    /**
+     * Tests spell can be countered if cast with colorless mana from Cavern
+     */
+    @Test
+    public void testDrakeCanBeCountered() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.HAND, playerA, "Cavern of Souls");
+        addCard(Zone.HAND, playerA, "Azure Drake");
 
+        // {1}{U} Remove Soul - Counter target creature spell.
+        addCard(Zone.HAND, playerB, "Remove Soul");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        setChoice(playerA, "Drake");
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Azure Drake");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Remove Soul");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // check it was countered
+        assertGraveyardCount(playerB, "Remove Soul", 1);
+        assertGraveyardCount(playerA, "Azure Drake", 1);
+        assertPermanentCount(playerA, "Azure Drake", 0);
+    }
 }

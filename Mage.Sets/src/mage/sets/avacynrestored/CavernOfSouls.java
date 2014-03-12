@@ -130,6 +130,7 @@ class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public ConditionalMana build(Object... options) {
+        this.mana.setFlag(true); // indicates that the mana is from second ability
         return new CavernOfSoulsConditionalMana(this.mana);
     }
 
@@ -169,7 +170,7 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
 
 class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
 
-    public List<UUID> spells = new ArrayList<UUID>();
+    public List<UUID> spells = new ArrayList<>();
 
     public CavernOfSoulsWatcher() {
         super("ManaPaidFromCavernOfSoulsWatcher", WatcherScope.GAME);
@@ -188,7 +189,7 @@ class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAYED) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object.getName().equals("Cavern of Souls")) {
+            if (object != null && object.getName().equals("Cavern of Souls") && event.getFlag()) {
                 spells.add(event.getTargetId());
             }
         }

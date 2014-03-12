@@ -66,6 +66,7 @@ public class ManaPoolItem implements Serializable {
         this.conditionalMana = conditionalMana;
         this.sourceId = sourceId;
         this.conditionalMana.setManaProducerId(sourceId);
+        this.flag = conditionalMana.getFlag();
     }
 
     public ManaPoolItem(final ManaPoolItem item) {
