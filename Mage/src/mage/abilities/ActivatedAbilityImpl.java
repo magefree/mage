@@ -50,6 +50,7 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
+import mage.target.Targets;
 
 
 /**
@@ -281,12 +282,7 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
                             sb.append(spellAbility.name);
                         }
                     }
-                    if (spellAbility.getTargets().size() > 0) {
-                        for (Target target: spellAbility.getTargets()) {
-                            sb.append(" targeting ");
-                            sb.append(target.getTargetedName(game));
-                        }
-                    }
+                    appendTargetDescriptionForLog(sb, spellAbility.getTargets(), game);
                 }
             }
         } else if (object instanceof Spell && ((Spell) object).getSpellAbility().getModes().size() > 1) {
@@ -297,21 +293,11 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
                 if (spellModes.getSelectedModes().contains(mode.getId())) {
                     spellModes.setMode(mode);
                     sb.append(" (mode ").append(item).append(")");
-                    if (getTargets().size() > 0) {
-                        sb.append(" targeting ");
-                        for (Target target: getTargets()) {
-                            sb.append(target.getTargetedName(game));
-                        }
-                    }
+                    appendTargetDescriptionForLog(sb, getTargets(), game);
                 }
             }
         } else {
-            if (getTargets().size() > 0) {
-                sb.append(" targeting ");
-                for (Target target: getTargets()) {
-                    sb.append(target.getTargetedName(game));
-                }
-            }
+            appendTargetDescriptionForLog(sb, getTargets(), game);
         }
         for (Choice choice :this.getChoices()) {
             sb.append(" - ").append(choice.getMessage()).append(": ").append(choice.getChoice());
@@ -319,7 +305,25 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         return sb.toString();
     }
 
-    String getOptionalTextSuffix(Game game, Spell spell) {
+    private void appendTargetDescriptionForLog(StringBuilder sb, Targets targets, Game game) {
+        if (targets.size() > 0) {
+            String usedVerb = null;
+            for (Target target: targets) {
+                if (!target.isNotTarget()) {
+                    if (usedVerb == null || usedVerb.equals(" choosing ")) {
+                        usedVerb = " targeting ";
+                        sb.append(usedVerb);                            
+                    }
+                } else if (target.isNotTarget() && (usedVerb == null || usedVerb.equals(" targeting "))) {
+                    usedVerb = " choosing ";
+                    sb.append(usedVerb);
+                }
+                sb.append(target.getTargetedName(game));
+            }
+        }        
+    }
+    
+    private String getOptionalTextSuffix(Game game, Spell spell) {
         StringBuilder sb = new StringBuilder();
         for (Ability ability : (Abilities<Ability>) spell.getAbilities()) {
             if (ability instanceof OptionalAdditionalSourceCosts) {
