@@ -34,20 +34,26 @@
 
 package mage.client.cards;
 
-import mage.client.plugins.impl.Plugins;
-import mage.client.util.ImageHelper;
-import org.jdesktop.swingx.JXPanel;
-
-import javax.swing.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.StyledDocument;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.UUID;
-
-import static mage.constants.Constants.*;
+import javax.swing.JComponent;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
+import static mage.client.constants.Constants.CONTENT_MAX_XOFFSET;
+import static mage.client.constants.Constants.FRAME_MAX_HEIGHT;
+import static mage.client.constants.Constants.FRAME_MAX_WIDTH;
+import static mage.client.constants.Constants.TEXT_MAX_HEIGHT;
+import static mage.client.constants.Constants.TEXT_MAX_WIDTH;
+import static mage.client.constants.Constants.TEXT_MAX_YOFFSET;
+import mage.client.plugins.impl.Plugins;
+import mage.client.util.ImageHelper;
 import mage.constants.EnlargeMode;
+import org.jdesktop.swingx.JXPanel;
 
 /**
  * Class for displaying big image of the card
@@ -69,9 +75,13 @@ public class BigCard extends JComponent {
     protected EnlargeMode enlargeMode;
 
     public BigCard() {
+        this(false);
+    }
+
+    public BigCard(boolean rotated) {
         initComponents();
         if (!Plugins.getInstance().isCardPluginLoaded()) {
-            initBounds();
+            initBounds(rotated);
         }
         setDoubleBuffered(true);
         setOpaque(true);
@@ -79,16 +89,20 @@ public class BigCard extends JComponent {
         this.scrollPane.setVisible(false);
     }
 
-    private void initBounds() {
+    private void initBounds(boolean rotated) {
         oldWidth = this.getWidth();
-        scrollPane.setBounds(this.getWidth()*1000/17777,this.getWidth()*1000/1100,
-                             this.getWidth()*1000/1142,this.getWidth()*1000/2539);
+        if (rotated) {
+            scrollPane.setBounds(50, 50, 100, 100);
+        } else {
+            scrollPane.setBounds(this.getWidth()*1000/17777,this.getWidth()*1000/1100,
+                                 this.getWidth()*1000/1142,this.getWidth()*1000/2539);
+        }
     }
 
     public void clearUp() {
 
     }
-
+    
     public void setCard(UUID cardId, EnlargeMode enlargeMode, Image image, List<String> strings) {
         if (this.cardId == null || !enlargeMode.equals(this.enlargeMode) || !this.cardId.equals(cardId)) {
             if (this.panel != null) {
@@ -141,7 +155,7 @@ public class BigCard extends JComponent {
 
     public void showTextComponent() {
         if (oldWidth != this.getWidth()) {
-            initBounds();
+            initBounds(false);
         }
         this.scrollPane.setVisible(true);
     }

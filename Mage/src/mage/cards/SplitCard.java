@@ -46,6 +46,7 @@ import mage.watchers.Watcher;
 /**
  *
  * @author LevelX2
+ * @param <T>
  */
 
 public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {

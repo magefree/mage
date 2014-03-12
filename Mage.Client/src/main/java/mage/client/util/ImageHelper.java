@@ -28,11 +28,15 @@
 
 package mage.client.util;
 
-import static mage.constants.Constants.*;
-
+import com.mortennobel.imagescaling.ResampleOp;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.MemoryImageSource;
@@ -41,28 +45,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.imageio.ImageIO;
-
 import mage.cards.CardDimensions;
+import static mage.client.constants.Constants.FRAME_MAX_HEIGHT;
+import static mage.client.constants.Constants.FRAME_MAX_WIDTH;
+import static mage.client.constants.Constants.SYMBOL_MAX_SPACE;
 import mage.view.CardView;
 import org.mage.card.arcane.UI;
-
-import com.mortennobel.imagescaling.ResampleOp;
-import java.awt.Rectangle;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class ImageHelper {
-    protected static HashMap<String, BufferedImage> images = new HashMap<String, BufferedImage>();
-    protected static HashMap<String, BufferedImage> backgrounds = new HashMap<String, BufferedImage>();
+    protected static HashMap<String, BufferedImage> images = new HashMap<>();
+    protected static HashMap<String, BufferedImage> backgrounds = new HashMap<>();
 
     public static BufferedImage loadImage(String ref, int width, int height) {
         BufferedImage image = loadImage(ref);
-        if (image != null)
+        if (image != null) {
             return scaleImage(image, width, height);
+        }
         return null;
     }
 
@@ -74,8 +77,9 @@ public class ImageHelper {
      */
     public static BufferedImage loadImage(String ref, int height) {
         BufferedImage image = loadImage(ref);
-        if (image != null)
+        if (image != null) {
             return scaleImage(image, height);
+        }
         return null;
     }
 
@@ -148,6 +152,24 @@ public class ImageHelper {
 
     }
 
+    public static BufferedImage rotate(BufferedImage image, double angle) {
+        double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
+        int w = image.getWidth(), h = image.getHeight();
+        int neww = (int)Math.floor(w*cos+h*sin), newh = (int)Math.floor(h*cos+w*sin);
+
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gs = ge.getDefaultScreenDevice();
+        GraphicsConfiguration gc = gs.getDefaultConfiguration();
+
+        BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
+        Graphics2D g = result.createGraphics();
+        g.translate((neww-w)/2, (newh-h)/2);
+        g.rotate(angle, w/2, h/2);
+        g.drawRenderedImage(image, null);
+        g.dispose();
+        return result;
+    }
+
     public static void drawCosts(List<String> costs, Graphics2D g, int xOffset, int yOffset, ImageObserver o) {
         if (costs.size() > 0) {
             int costLeft = xOffset;
@@ -176,6 +198,9 @@ public class ImageHelper {
     /**
      * Returns an image scaled to fit width
      * panel
+     * @param original
+     * @param width
+     * @return
      */
     public static BufferedImage getResizedImage(BufferedImage original, int width) {
         if (width != original.getWidth()) {
@@ -189,6 +214,9 @@ public class ImageHelper {
 
     /**
      * Returns an image scaled to the needed size
+     * @param original
+     * @param sizeNeed
+     * @return
      */
     public static BufferedImage getResizedImage(BufferedImage original, Rectangle sizeNeed) {
         ResampleOp resampleOp = new ResampleOp(sizeNeed.width, sizeNeed.height);

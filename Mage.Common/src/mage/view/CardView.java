@@ -108,6 +108,8 @@ public class CardView extends SimpleCardView {
 
     protected boolean controlledByOwner = true;
 
+    protected boolean rotate;
+
     public CardView(Card card, UUID cardId) {
         this(card);
         this.id = cardId;
@@ -125,9 +127,19 @@ public class CardView extends SimpleCardView {
         SplitCard splitCard = null;
         if (card.isSplitCard()) {
             splitCard = (SplitCard) card;
+            rotate = true;
         } else {
-            if (card instanceof Spell && ((Spell) card).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
-                splitCard = (SplitCard) ((Spell) card).getCard();
+            if (card instanceof Spell) {
+                switch(((Spell) card).getSpellAbility().getSpellAbilityType()) {
+                    case SPLIT_FUSED:
+                        splitCard = (SplitCard) ((Spell) card).getCard();
+                        rotate = true;
+                        break;
+                    case SPLIT_LEFT:
+                    case SPLIT_RIGHT:
+                        rotate = true;
+                        break;
+                }
             }
         }
         if (splitCard != null) {
@@ -595,6 +607,10 @@ public class CardView extends SimpleCardView {
 
     public boolean isFlipCard() {
         return flipCard;
+    }
+
+    public boolean isToRotate() {
+        return rotate;
     }
     
 }

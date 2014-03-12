@@ -374,6 +374,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         ui.addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
         ui.addComponent(MageComponents.POPUP_CONTAINER, popupContainer);
 
+        // preview panel normal
         JPanel cardPreviewContainer = new JPanel();
         cardPreviewContainer.setOpaque(false);
         cardPreviewContainer.setLayout(null);
@@ -390,6 +391,24 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         ui.addComponent(MageComponents.CARD_PREVIEW_CONTAINER, cardPreviewContainer);
 
         desktopPane.add(cardPreviewContainer, JLayeredPane.POPUP_LAYER);
+
+        // preview panel rotated
+        JPanel cardPreviewContainerRotated = new JPanel();
+        cardPreviewContainerRotated.setOpaque(false);
+        cardPreviewContainerRotated.setLayout(null);
+        bigCard = new BigCard(true);
+        bigCard.setSize(500, 350);
+        bigCard.setLocation(40, 40);
+        bigCard.setBackground(new Color(0, 0, 0, 0));
+        cardPreviewContainerRotated.add(bigCard);
+        cardPreviewContainerRotated.setVisible(false);
+        cardPreviewContainerRotated.setBounds(0, 0, 500 + 80, 420 + 30);
+
+        ui.addComponent(MageComponents.CARD_PREVIEW_PANE_ROTATED, bigCard);
+        ui.addComponent(MageComponents.CARD_PREVIEW_CONTAINER_ROTATED, cardPreviewContainerRotated);
+
+        desktopPane.add(cardPreviewContainerRotated, JLayeredPane.POPUP_LAYER);
+
     }
 
     private void setBackground() {

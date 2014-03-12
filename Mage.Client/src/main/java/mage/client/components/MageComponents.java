@@ -9,13 +9,16 @@ public enum MageComponents {
     CARD_INFO_PANE("cardInfoPane"),
     POPUP_CONTAINER("popupContainer"),
     CARD_PREVIEW_PANE("cardPreviewPane"),
-    CARD_PREVIEW_CONTAINER("cardPreviewContainer");
+    CARD_PREVIEW_CONTAINER("cardPreviewContainer"),
+    CARD_PREVIEW_PANE_ROTATED("cardPreviewPaneRotated"),
+    CARD_PREVIEW_CONTAINER_ROTATED("cardPreviewContainer");
 
-    private String name;
+    private final String name;
     MageComponents(String name) {
         this.name = name;
     }
 
+    @Override
     public String toString() {
         return this.name;
     }
