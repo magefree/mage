@@ -273,8 +273,8 @@ public class MageActionCallback implements ActionCallback {
                     }
                     );
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    logger.warn(e.getMessage());
                 }
             }
         });
