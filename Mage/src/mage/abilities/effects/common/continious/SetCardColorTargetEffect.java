@@ -35,6 +35,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -48,17 +49,25 @@ import mage.game.stack.StackObject;
  */
 public class SetCardColorTargetEffect extends ContinuousEffectImpl<SetCardColorTargetEffect> {
 
-    private ObjectColor setColor;
+    private final ObjectColor setColor;
+
+    /**
+     * Add a color choice to your ability to use this constructor
+     * Effect uses the color choice to set the color to apply
+     * 
+     * @param duration 
+     */
+    public SetCardColorTargetEffect(Duration duration) {
+        this(null, duration, null);
+    }
+    public SetCardColorTargetEffect(ObjectColor setColor, Duration duration) {
+        this(setColor, duration, null);
+    }
 
     public SetCardColorTargetEffect(ObjectColor setColor, Duration duration, String text) {
         super(duration, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         this.setColor = setColor;
         staticText = text;
-    }
-
-    public SetCardColorTargetEffect(ObjectColor setColor, Duration duration) {
-        super(duration, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
-        this.setColor = setColor;
     }
 
     public SetCardColorTargetEffect(final SetCardColorTargetEffect effect) {
@@ -69,12 +78,23 @@ public class SetCardColorTargetEffect extends ContinuousEffectImpl<SetCardColorT
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        for (UUID targetId :targetPointer.getTargets(game, source)) {
-            MageObject o = game.getObject(targetId);
-            if (o != null) {
-                if (o instanceof Permanent || o instanceof StackObject) {
-                    o.getColor().setColor(setColor);
-                    result = true;
+        ObjectColor objectColor = null;
+        if (setColor == null) {
+            ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
+            if (choice != null && choice.getColor() != null) {
+                objectColor = choice.getColor();
+            }            
+        } else {
+            objectColor = this.setColor;
+        }
+        if (objectColor != null) {
+            for (UUID targetId :targetPointer.getTargets(game, source)) {
+                MageObject o = game.getObject(targetId);
+                if (o != null) {
+                    if (o instanceof Permanent || o instanceof StackObject) {
+                        o.getColor().setColor(objectColor);
+                        result = true;
+                    }
                 }
             }
         }
@@ -98,7 +118,12 @@ public class SetCardColorTargetEffect extends ContinuousEffectImpl<SetCardColorT
         }
         StringBuilder sb = new StringBuilder();
         sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
-        sb.append(" becomes ").append(setColor.getDescription());
+        sb.append(" becomes ");
+        if (setColor == null) {
+            sb.append("the color of your choice");
+        } else {
+            sb.append(setColor.getDescription());
+        }
         sb.append(" ").append(duration.toString());
         return sb.toString();
     }

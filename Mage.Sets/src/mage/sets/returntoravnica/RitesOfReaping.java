@@ -56,7 +56,7 @@ public class RitesOfReaping extends CardImpl<RitesOfReaping> {
 
         // Target creature gets +3/+3 until end of turn. Another target creature gets -3/-3 until end of turn.
         this.getSpellAbility().addEffect(new RitesOfReapingEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, true));
     }
 
     public RitesOfReaping(final RitesOfReaping card) {

@@ -89,6 +89,9 @@ public class DamageMultiEffect extends OneShotEffect<DamageMultiEffect> {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("{source} deals ").append(amount.toString());
         sb.append(" damage divided as you choose among any number of target ").append(mode.getTargets().get(0).getTargetName());

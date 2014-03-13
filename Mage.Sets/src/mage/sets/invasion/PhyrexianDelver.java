@@ -41,6 +41,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -60,7 +61,9 @@ public class PhyrexianDelver extends CardImpl<PhyrexianDelver> {
 
         // When Phyrexian Delver enters the battlefield, return target creature card from your graveyard to the battlefield. You lose life equal to that card's converted mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PhyrexianDelverEffect(), false);
-        ability.addTarget(new TargetCardInYourGraveyard(1, new FilterCreatureCard()));
+        Target target = new TargetCardInYourGraveyard(1, new FilterCreatureCard("creature card from your graveyard"));
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 
@@ -95,7 +98,10 @@ class PhyrexianDelverEffect extends OneShotEffect<PhyrexianDelverEffect> {
         Card creatureCard = game.getCard(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (creatureCard != null && controller != null) {
-            boolean result = creatureCard.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+            boolean result = false;
+            if (game.getState().getZone(creatureCard.getId()).equals(Zone.GRAVEYARD)) {
+                result = controller.putOntoBattlefieldWithInfo(creatureCard, game, Zone.GRAVEYARD, source.getSourceId());
+            }
             controller.loseLife(creatureCard.getManaCost().convertedManaCost(), game);
             return result;
         }
