@@ -502,7 +502,7 @@ public final class GamePanel extends javax.swing.JPanel {
             // Get opponents hand cards if available
             if (game.getOpponentHands() != null) {
                 for (Map.Entry<String, SimpleCardsView> hand: game.getOpponentHands().entrySet()) {
-                    handCards.put(hand.getKey(), CardsViewUtil.convertSimple(game.getHand(), loadedCards));
+                    handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
                 }
             }
 
