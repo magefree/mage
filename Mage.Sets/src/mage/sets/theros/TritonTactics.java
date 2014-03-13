@@ -110,7 +110,7 @@ class TritonTacticsUntapTargetEffect extends OneShotEffect<TritonTacticsUntapTar
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Set<String> targets = new HashSet<String>();
+        Set<String> targets = new HashSet<>();
         for (UUID target: targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
@@ -119,13 +119,13 @@ class TritonTacticsUntapTargetEffect extends OneShotEffect<TritonTacticsUntapTar
             }
         }
         if (!targets.isEmpty()) {
-            // save the targets for the watcher
+            // save the targets for the watcher in a map with zone change counter (as the card is recast during combat it's neccessary to save with zone change counter)
             Map<Integer, Set<String>> targetMap;
             Object object = game.getState().getValue("targets" + source.getSourceId());
             if (object != null && object instanceof Map) {
                 targetMap = (Map<Integer, Set<String>>) object;
             } else {
-                targetMap = new HashMap<Integer, Set<String>>();
+                targetMap = new HashMap<>();
             }
             targetMap.put(new Integer(game.getCard(source.getSourceId()).getZoneChangeCounter()), targets);
             if (object == null) {
@@ -149,10 +149,7 @@ class TritonTacticsTriggeredAbility extends DelayedTriggeredAbility<TritonTactic
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.END_COMBAT_STEP_PRE) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.END_COMBAT_STEP_PRE;
     }
 
     @Override
@@ -230,7 +227,7 @@ class BlockedCreaturesWatcher extends WatcherImpl<BlockedCreaturesWatcher> {
                     targetMap = (Map<Integer, Set<String>>) object;
                     for (Map.Entry<Integer, Set<String>> entry : targetMap.entrySet()) {
                         if (entry.getValue().contains(CardUtil.getCardZoneString("", blocker.getId(), game))) {
-                            // save the attacking craeture that was blocked
+                            // save the attacking creature that was blocked by a creature effected by Triton Tactics
                             saveAttackingCreature(event.getTargetId(), entry.getKey(), game);
                         }
                     }
@@ -247,17 +244,15 @@ class BlockedCreaturesWatcher extends WatcherImpl<BlockedCreaturesWatcher> {
         if (object != null && object instanceof Map) {
             attackerMap = (Map<Integer, Set<String>>) object;
         } else {
-            attackerMap = new HashMap<Integer, Set<String>>();
+            attackerMap = new HashMap<>();
         }
         attackers = attackerMap.get(zoneChangeCounter);
         if (attackers == null) {
-            attackers = new HashSet<String>();
+            attackers = new HashSet<>();
             attackerMap.put(zoneChangeCounter, attackers);
         }
         attackers.add(CardUtil.getCardZoneString(null, attackerId, game));
-        if (object == null || !(object instanceof Map)) {
-            game.getState().setValue("blockedAttackers" + getSourceId().toString(), attackerMap);
-        }
+        game.getState().setValue("blockedAttackers" + getSourceId().toString(), attackerMap);
     }
 
     @Override
