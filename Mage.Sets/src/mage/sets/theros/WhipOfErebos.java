@@ -35,10 +35,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
@@ -53,6 +55,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
@@ -77,12 +80,9 @@ public class WhipOfErebos extends CardImpl<WhipOfErebos> {
         // Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new WhipOfErebosEffect(), new ManaCostsImpl("{2}{B}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"), true));
         ability.addEffect(new WhipOfErebosReplacementEffect());
         this.addAbility(ability);
-
-
-
     }
 
     public WhipOfErebos(final WhipOfErebos card) {
@@ -113,21 +113,25 @@ class WhipOfErebosEffect extends OneShotEffect<WhipOfErebosEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
+        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && card != null) {
             card.addAbility(HasteAbility.getInstance());
-            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-
-            ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(new FixedTarget(card.getId()));
-            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(delayedAbility);
-
+            if (controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
+                // gains haste
+                ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+                effect.setTargetPointer(new FixedTarget(card.getId()));
+                game.addEffect(effect, source);
+                // Exile at begin of next end step
+                ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
+                exileEffect.setTargetPointer(new FixedTarget(card.getId()));
+                DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(delayedAbility);                
+            }
             return true;
         }
-
         return false;
     }
 }
@@ -151,7 +155,7 @@ class WhipOfErebosReplacementEffect extends ReplacementEffectImpl<WhipOfErebosRe
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
+        if (card != null) {            
             card.moveToExile(null, "", source.getId(), game);
         }
         return true;

@@ -34,8 +34,10 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -43,13 +45,19 @@ import mage.game.permanent.Permanent;
  */
 public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
 
+    private Zone onlyFromZone;
     private String exileZone = null;
     private UUID exileId = null;
 
-    public ExileTargetEffect(UUID exileId, String exileZone) {
-        this();
+    public ExileTargetEffect(UUID exileId, String exileZone, Zone onlyFromZone) {
+        super(Outcome.Exile);
         this.exileZone = exileZone;
         this.exileId = exileId;
+        this.onlyFromZone = onlyFromZone;
+    }
+    
+    public ExileTargetEffect(UUID exileId, String exileZone) {
+        this(exileId, exileZone, null);
     }
 
     public ExileTargetEffect(String effectText) {
@@ -58,13 +66,14 @@ public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
     }
 
     public ExileTargetEffect() {
-        super(Outcome.Exile);
+        this(null, null);
     }
 
     public ExileTargetEffect(final ExileTargetEffect effect) {
         super(effect);
         this.exileZone = effect.exileZone;
         this.exileId = effect.exileId;
+        this.onlyFromZone = effect.onlyFromZone;
     }
 
     @Override
@@ -75,12 +84,21 @@ public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null) {
-            return permanent.moveToExile(exileId, exileZone, source.getSourceId(), game);
-        } else {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (card != null) {
-                return card.moveToExile(exileId, exileZone, source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (permanent != null) {
+                Zone currentZone = game.getState().getZone(permanent.getId());
+                if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(Zone.BATTLEFIELD))) {
+                    return controller.moveCardToExileWithInfo(permanent, exileId, exileZone, source.getSourceId(), game, onlyFromZone);
+                }
+            } else {
+                Card card = game.getCard(targetPointer.getFirst(game, source));                
+                if (card != null) {
+                    Zone currentZone = game.getState().getZone(card.getId());
+                    if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(currentZone))) {
+                        return controller.moveCardToExileWithInfo(card, exileId, exileZone, source.getSourceId(), game, onlyFromZone);
+                    }
+                }
             }
         }
         return false;

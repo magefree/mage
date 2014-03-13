@@ -2108,6 +2108,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     .append(" puts ").append(card.getName()).append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
                     .append("into his or her hand").toString());
+            result = true;
         }
         return result;
     }
@@ -2120,6 +2121,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     .append(" puts ").append(card.getName()).append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
                     .append("into his or her graveyard").toString());
+            result = true;
         }
         return result;
     }
@@ -2143,13 +2145,14 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
         
     @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped) {
+    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped) {        
         boolean result = false;
         if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId(), tapped)) {
             game.informPlayers(new StringBuilder(this.getName())
                     .append(" puts ").append(card.getName())
                     .append(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
                     .append("onto the Battlefield").toString());
+            result = true;
         }
         return result;
     }

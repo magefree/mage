@@ -54,6 +54,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -128,7 +129,7 @@ class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility
 
     public BeginningOfYourUpkeepdelayTriggeredAbility() {
         this(new ObzedatGhostCouncilReturnEffect(), TargetController.YOU);
-        this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom));
     }
 
     public BeginningOfYourUpkeepdelayTriggeredAbility(Effect effect, TargetController targetController) {
@@ -141,10 +142,7 @@ class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId);
     }
 
     @Override
@@ -180,7 +178,8 @@ class ObzedatGhostCouncilReturnEffect extends OneShotEffect<ObzedatGhostCouncilR
             ExileZone currentZone = game.getState().getExile().getExileZone(source.getSourceId());
             // return it only from the own exile zone
             if (currentZone.size() > 0) {
-                if (card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), card.getOwnerId(), false)) {
+                Player owner = game.getPlayer(card.getOwnerId());
+                if (owner != null && owner.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId())) {
                     return true;
                 }
             }
