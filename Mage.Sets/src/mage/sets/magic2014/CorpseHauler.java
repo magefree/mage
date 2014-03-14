@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class CorpseHauler extends CardImpl<CorpseHauler> {
 
-    private static final FilterCard filter = new FilterCard("target another creature card from your graveyard");
+    private static final FilterCard filter = new FilterCard("another target creature card from your graveyard");
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new AnotherCardPredicate());

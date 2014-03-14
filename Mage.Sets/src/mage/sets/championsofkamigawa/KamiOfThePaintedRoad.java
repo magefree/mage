@@ -109,7 +109,7 @@ class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect {
             protectionFilter.add(new ColorPredicate(choice.getColor()));
             protectionFilter.setMessage(choice.getChoice());
             ((ProtectionAbility)ability).setFilter(protectionFilter);
-            creature.addAbility(ability, game);
+            creature.addAbility(ability, source.getSourceId(), game);
             return true;
         }
         return false;
