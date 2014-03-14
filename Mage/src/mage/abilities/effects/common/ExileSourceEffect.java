@@ -34,6 +34,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -58,13 +59,14 @@ public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
         if (permanent != null) {
-            return permanent.moveToExile(null, "", source.getId(), game);
+            return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, null);
         } else {
-            // try to exile card
+            // try to exile card -> is this correct in all cases? (LevelX2)
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
-                return card.moveToExile(null, "", source.getSourceId(), game);
+                return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, null);
             }
         }
         return false;

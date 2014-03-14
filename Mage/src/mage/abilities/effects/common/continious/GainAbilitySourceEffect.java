@@ -109,6 +109,9 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
                 permanent.addAbility(ability, source.getSourceId(), game);
                 return true;
             }
+            if (duration.equals(Duration.Custom)) {
+                this.discard();
+            }            
         }
         return false;
     }
