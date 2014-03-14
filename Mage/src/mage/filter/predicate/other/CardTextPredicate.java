@@ -28,8 +28,6 @@
 package mage.filter.predicate.other;
 
 import mage.cards.Card;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 

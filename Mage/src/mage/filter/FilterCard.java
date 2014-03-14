@@ -88,7 +88,7 @@ public class FilterCard extends FilterObject<Card> {
             return false;
         }
         
-        return Predicates.and(extraPredicates).apply(new ObjectPlayer<>(card, playerId), game);
+        return Predicates.and(extraPredicates).apply(new ObjectPlayer(card, playerId), game);
     }
 
     public boolean match(Card card, UUID sourceId, UUID playerId, Game game) {
@@ -96,7 +96,7 @@ public class FilterCard extends FilterObject<Card> {
             return false;
         }
 
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<>(card, sourceId, playerId), game);
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(card, sourceId, playerId), game);
     }
 
     public void add(ObjectPlayerPredicate predicate) {

@@ -30,7 +30,6 @@ package mage.filter;
 
 import java.util.ArrayList;
 import java.util.List;
-import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -53,7 +52,7 @@ public abstract class FilterImpl<E> implements Filter<E> {
         this.message = name;
     }
 
-    public FilterImpl(FilterImpl<E> filter) {
+    public FilterImpl(FilterImpl filter) {
         this.message = filter.message;
         this.predicates = new ArrayList<>(filter.predicates);
     }

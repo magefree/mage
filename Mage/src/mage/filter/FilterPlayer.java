@@ -60,7 +60,7 @@ public class FilterPlayer extends FilterImpl<Player> {
         this.extraPredicates = new ArrayList<>(filter.extraPredicates);
     }
 
-    public void add(ObjectPlayerPredicate<ObjectPlayer<Player>> predicate) {
+    public void add(ObjectPlayerPredicate predicate) {
         extraPredicates.add(predicate);
     }
 

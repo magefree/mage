@@ -29,7 +29,6 @@
 package mage.filter;
 
 import java.io.Serializable;
-import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 

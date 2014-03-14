@@ -28,7 +28,6 @@
 package mage.filter.predicate;
 
 import java.util.UUID;
-import mage.MageObject;
 
 /**
  *
