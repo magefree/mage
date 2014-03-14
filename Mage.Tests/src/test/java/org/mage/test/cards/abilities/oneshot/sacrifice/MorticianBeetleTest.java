@@ -16,11 +16,19 @@ public class MorticianBeetleTest extends CardTestPlayerBase {
     @Test
     public void testSacrifice() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        // Target opponent sacrifices a creature.
         addCard(Zone.HAND, playerA, "Cruel Edict");
+
+        // Target player sacrifices a creature and loses 1 life.
         addCard(Zone.HAND, playerA, "Geth's Verdict");
+        
+        // Whenever a player sacrifices a creature, you may put a +1/+1 counter on Mortician Beetle.
         addCard(Zone.BATTLEFIELD, playerA, "Mortician Beetle");
 
         addCard(Zone.BATTLEFIELD, playerB, "Savannah Lions");
+        
+        // First strike
+        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
         addCard(Zone.BATTLEFIELD, playerB, "Sigiled Paladin");
 
 

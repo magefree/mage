@@ -39,6 +39,7 @@ import mage.players.Player;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> extends AbilityImpl<T> implements TriggeredAbility {
 

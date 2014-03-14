@@ -458,7 +458,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     }
 
     @Override
-    public Costs getCosts() {
+    public Costs<Cost> getCosts() {
         return costs;
     }
 
@@ -484,7 +484,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     }
 
     @Override
-    public Costs getOptionalCosts() {
+    public Costs<Cost> getOptionalCosts() {
         return optionalCosts;
     }
 
