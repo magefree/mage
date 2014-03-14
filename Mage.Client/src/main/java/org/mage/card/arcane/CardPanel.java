@@ -77,7 +77,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     // for two faced cards
     public CardView temporary;
-
     private List<MagePermanent> links = new ArrayList<>();
 
     public double tappedAngle = 0;
@@ -915,6 +914,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public PermanentView getOriginalPermanent() {
+        if (isPermanent) {
+            return (PermanentView) this.gameCard;
+        }
         throw new IllegalStateException("Is not permanent.");
     }
 

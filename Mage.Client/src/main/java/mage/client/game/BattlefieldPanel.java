@@ -59,6 +59,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.audio.AudioManager;
 import mage.constants.CardType;
+import mage.utils.CardUtil;
 import mage.view.PermanentView;
 
 /**
@@ -117,7 +118,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
             }
         }
         permanents.clear();
-        Plugins.getInstance().sortPermanents(uiComponentsList, permanents.values());
+        // Plugins.getInstance().sortPermanents(uiComponentsList, permanents.values());
         this.bigCard = null;
     }
 
@@ -126,19 +127,23 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
         List<PermanentView> permanentsToAdd = new ArrayList<>();
         for (PermanentView permanent: battlefield.values()) {
-            if (!permanents.containsKey(permanent.getId())) {
+            MagePermanent oldMagePermanent = permanents.get(permanent.getId());
+            if (oldMagePermanent == null) {
                 permanentsToAdd.add(permanent);
                 changed = true;
-            } else {
-                MagePermanent p = permanents.get(permanent.getId());
+            } else {                
                 if (!changed) {
-                    int s1 = permanent.getAttachments() == null ? 0 : permanent.getAttachments().size();
-                    int s2 = p.getLinks().size();
-                    if (s1 != s2) {
-                        changed = true;
+                    changed = CardUtil.isCreature(oldMagePermanent.getOriginalPermanent()) != CardUtil.isCreature(permanent);
+                    if (!changed) {
+                        int s1 = permanent.getAttachments() == null ? 0 : permanent.getAttachments().size();
+                        int s2 = oldMagePermanent.getLinks().size();
+                        if (s1 != s2) {
+                            changed = true;
+                        }
                     }
+
                 }
-                permanents.get(permanent.getId()).update(permanent);
+                oldMagePermanent.update(permanent);
             }
         }
 

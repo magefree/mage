@@ -180,7 +180,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_AVATAR = "selectedId";
 
-    private static final Map<String, String> cache = new HashMap<String, String>();
+    private static final Map<String, String> cache = new HashMap<>();
 
     private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
 
@@ -190,8 +190,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final int DEFAULT_AVATAR_ID = 51;
     private static int selectedAvatarId = DEFAULT_AVATAR_ID;
-    private static final Set<Integer> available_avatars = new HashSet<Integer>();
-    private static final Map<Integer, JPanel> panels = new HashMap<Integer, JPanel>();
+    private static final Set<Integer> available_avatars = new HashSet<>();
+    private static final Map<Integer, JPanel> panels = new HashMap<>();
 
     private static final Border GREEN_BORDER = BorderFactory.createLineBorder(Color.GREEN, 3);
     private static final Border BLACK_BORDER = BorderFactory.createLineBorder(Color.BLACK, 3);

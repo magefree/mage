@@ -34,9 +34,6 @@
 
 package mage.client.cards;
 
-import static mage.constants.Constants.DAMAGE_MAX_LEFT;
-import static mage.constants.Constants.POWBOX_TEXT_MAX_TOP;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -48,15 +45,15 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import javax.swing.PopupFactory;
-
-import mage.constants.CardType;
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
+import mage.cards.Sets;
+import static mage.client.constants.Constants.DAMAGE_MAX_LEFT;
+import static mage.client.constants.Constants.POWBOX_TEXT_MAX_TOP;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
-import mage.cards.Sets;
+import mage.constants.CardType;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 
@@ -68,12 +65,16 @@ public class Permanent extends Card {
 
     protected PermanentView permanent;
 
-    protected List<MagePermanent> links = new ArrayList<MagePermanent>();
+    protected List<MagePermanent> links = new ArrayList<>();
     protected boolean linked;
     protected BufferedImage tappedImage;
     protected BufferedImage flippedImage;
 
-    /** Creates new form Permanent */
+    /** Creates new form Permanent
+     * @param permanent
+     * @param bigCard
+     * @param dimensions
+     * @param gameId */
     public Permanent(PermanentView permanent, BigCard bigCard, CardDimensions dimensions, UUID gameId) {
         super(permanent, bigCard, dimensions, gameId);
         this.setSize(this.getPreferredSize());
@@ -85,6 +86,7 @@ public class Permanent extends Card {
         return permanent.getId();
     }
 
+    @Override
     public List<MagePermanent> getLinks() {
         return links;
     }
@@ -134,9 +136,10 @@ public class Permanent extends Card {
     @Override
     protected List<String> getRules() {
         if (permanent.getCounters() != null) {
-            List<String> rules = new ArrayList<String>(permanent.getRules());
-            for (CounterView counter: permanent.getCounters())
+            List<String> rules = new ArrayList<>(permanent.getRules());
+            for (CounterView counter: permanent.getCounters()) {
                 rules.add(counter.getCount() + " x " + counter.getName());
+            }
             return rules;
         }
         else {
@@ -158,8 +161,12 @@ public class Permanent extends Card {
             Rectangle r = this.getBounds();
             r.x += dx;
             r.y += dy;
-            if (r.x < 0) r.x = 0;
-            if (r.y < 0) r.y = 0;
+            if (r.x < 0) {
+                r.x = 0;
+            }
+            if (r.y < 0) {
+                r.y = 0;
+            }
             this.setBounds(r);
             this.repaint();
             for (MagePermanent perm: links) {
@@ -213,6 +220,7 @@ public class Permanent extends Card {
         g.dispose();
     }
 
+    @Override
     public void update(PermanentView permanent) {
         this.permanent = permanent;
         super.update(permanent);
@@ -247,8 +255,9 @@ public class Permanent extends Card {
     @Override
     public void mouseEntered(MouseEvent arg0) {
         if (!popupShowing) {
-            if (popup != null)
+            if (popup != null) {
                 popup.hide();
+            }
             PopupFactory factory = PopupFactory.getSharedInstance();
             int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()?Config.dimensions.frameHeight:Config.dimensions.frameWidth);
             int y = (int) this.getLocationOnScreen().getY() + 40;
@@ -260,6 +269,11 @@ public class Permanent extends Card {
             popup.show();
             popupShowing = true;
         }
+    }
+
+    @Override
+    public PermanentView getOriginalPermanent() {
+        return permanent;
     }
 
     /** This method is called from within the constructor to
