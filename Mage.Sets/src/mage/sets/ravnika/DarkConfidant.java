@@ -43,6 +43,7 @@ import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -88,14 +89,18 @@ class DarkConfidantEffect extends OneShotEffect<DarkConfidantEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                card.moveToZone(Zone.HAND, source.getId(), game, false);
-                player.loseLife(card.getManaCost().convertedManaCost(), game);
-                Cards cards = new CardsImpl();
-                cards.add(card);
-                player.revealCards("top card from library by Dark Confidant", cards, game);
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (player != null && sourcePermanent != null) {
+            if (player.getLibrary().size() > 0) {
+                Card card = player.getLibrary().removeFromTop(game);
+                if (card != null) {
+                    Cards cards = new CardsImpl();
+                    cards.add(card);
+                    player.revealCards(sourcePermanent.getName(), cards, game);
+                    player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                    player.loseLife(card.getManaCost().convertedManaCost(), game);
+
+                }
                 return true;
             }
         }

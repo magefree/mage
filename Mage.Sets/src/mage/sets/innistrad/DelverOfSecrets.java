@@ -32,16 +32,23 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -65,7 +72,7 @@ public class DelverOfSecrets extends CardImpl<DelverOfSecrets> {
 
         // At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform Delver of Secrets.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DelverOfSecretsAbility());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelverOfSecretsEffect(), TargetController.YOU, false));
     }
 
     public DelverOfSecrets(final DelverOfSecrets card) {
@@ -78,44 +85,44 @@ public class DelverOfSecrets extends CardImpl<DelverOfSecrets> {
     }
 }
 
-class DelverOfSecretsAbility extends TriggeredAbilityImpl<DelverOfSecretsAbility> {
-
-    public DelverOfSecretsAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true, false), false);
+class DelverOfSecretsEffect extends OneShotEffect<DelverOfSecretsEffect> {
+    
+    private static final FilterCard filter = new FilterInstantOrSorceryCard();
+    
+    public DelverOfSecretsEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform {this}";
     }
-
-    public DelverOfSecretsAbility(DelverOfSecretsAbility ability) {
-        super(ability);
+    
+    public DelverOfSecretsEffect(final DelverOfSecretsEffect effect) {
+        super(effect);
     }
-
+    
     @Override
-    public DelverOfSecretsAbility copy() {
-        return new DelverOfSecretsAbility(this);
+    public DelverOfSecretsEffect copy() {
+        return new DelverOfSecretsEffect(this);
     }
-
+    
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-            Player player = game.getPlayer(this.controllerId);
-            if (player != null && player.getLibrary().size() > 0) {
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (player != null && sourcePermanent != null) {            
+            if (player.getLibrary().size() > 0) {
                 Card card = player.getLibrary().getFromTop(game);
                 Cards cards = new CardsImpl();
                 cards.add(card);
-                player.lookAtCards("This card", cards, game);
-                if (player.chooseUse(Outcome.DrawCard, "Do you wish to reveal the card at the top of the liberary?", game))
-                {
-                    player.revealCards("Delver of Secrets", cards, game);
-                    if ((card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY))) {
-                        return true;
+                player.lookAtCards(sourcePermanent.getName(), cards, game);
+                if (player.chooseUse(Outcome.DrawCard, "Do you wish to reveal the card at the top of the library?", game)) {
+                    player.revealCards(sourcePermanent.getName(), cards, game);
+                    if (filter.match(card, game)) {
+                        return new TransformSourceEffect(true, true).apply(game, source);
                     }
                 }
+                
             }
-        }
+            return true;
+        }        
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform Delver of Secrets";
     }
 }

@@ -75,10 +75,15 @@ public class TransformSourceEffect extends OneShotEffect<TransformSourceEffect> 
             if (permanent.canTransform()) {
                 // check not to transform twice the same side
                 if (permanent.isTransformed() != fromDayToNight) {
-                    if (withoutTrigger) {
+                    if (withoutTrigger) {                        
                         permanent.setTransformed(fromDayToNight);
                     } else {
                         permanent.transform(game);
+                    }
+                    if (fromDayToNight) {
+                        game.informPlayers(new StringBuilder(permanent.getName()).append(" transforms into ").append(permanent.getSecondCardFace().getName()).toString());                    
+                    } else {
+                        game.informPlayers(new StringBuilder(permanent.getSecondCardFace().getName()).append(" transforms into ").append(permanent.getName()).toString());                    
                     }
                 }
             }

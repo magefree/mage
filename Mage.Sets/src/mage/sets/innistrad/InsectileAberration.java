@@ -47,12 +47,13 @@ public class InsectileAberration extends CardImpl<InsectileAberration> {
         this.subtype.add("Human");
         this.subtype.add("Insect");
 
-        // this card is the second face of double-faced card
+        // this card is the second face of double-faced card Delver of Secrets
         this.nightCard = true;
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
     }
 
