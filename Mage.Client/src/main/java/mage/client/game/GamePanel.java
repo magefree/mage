@@ -743,7 +743,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void hideAll() {
         ActionCallback callback = Plugins.getInstance().getActionCallback();
-        ((MageActionCallback)callback).hideAll(gameId);
+        ((MageActionCallback)callback).hideGameUpdate(gameId);
     }
 
     private ShowCardsDialog showCards(String title, CardsView cards, boolean required, Map<String, Serializable> options) {

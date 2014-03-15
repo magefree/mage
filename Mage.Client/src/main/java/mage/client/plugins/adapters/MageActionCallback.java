@@ -345,6 +345,13 @@ public class MageActionCallback implements ActionCallback {
         }
     }
 
+    public void hideGameUpdate(UUID gameId) {
+        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.TARGET);
+        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.PAIRED);
+        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.SOURCE);
+        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.ENCHANT_PLAYERS);
+    }
+
     public void hideAll(UUID gameId) {
         hidePopup();
         startHideTimeout();
