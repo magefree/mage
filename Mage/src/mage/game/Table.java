@@ -140,7 +140,9 @@ public class Table implements Serializable {
      * 
      */
     public void cleanUp() {
-        match.cleanUpOnMatchEnd(isTournament);
+        if (match != null) {
+            match.cleanUpOnMatchEnd(isTournament);
+        }
     }
 
     public String getGameType() {
