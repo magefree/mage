@@ -36,6 +36,7 @@ import mage.game.Game;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class StateTriggeredAbility<T extends StateTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
 

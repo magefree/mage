@@ -1,8 +1,8 @@
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -56,16 +56,13 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl<DiesCreat
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+        if (event.getType().equals(GameEvent.EventType.ZONE_CHANGE)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-
-            if (game.getPermanent(sourceId) == null) {
-                if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
-                    return false;
-                }
-            }
-
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+            // why is this check neccessary?
+//            if (game.getPermanentOrLKIBattlefield(sourceId) == null) {
+//                return false;
+//            }
+            if (zEvent.getFromZone().equals(Zone.BATTLEFIELD) && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
                 Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
                 if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
                     if (setTargetPointer) {

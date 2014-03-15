@@ -35,6 +35,7 @@ import mage.game.events.GameEvent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public interface ReplacementEffect<T extends ReplacementEffect<T>> extends ContinuousEffect<T> {
 
