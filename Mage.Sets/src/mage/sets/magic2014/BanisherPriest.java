@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -40,7 +41,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -50,7 +50,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -77,7 +76,9 @@ public class BanisherPriest extends CardImpl<BanisherPriest> {
         Ability ability = new EntersBattlefieldTriggeredAbility(new BanisherPriestExileEffect());
         ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
-        this.addWatcher(new BanisherPriestWatcher());
+        // Implemented as triggered effect that doesn't uses the stack (implementation with watcher does not work correctly because if the returned creature
+        // has a DiesTriggeredAll ability it triggers for the dying Banish Priest, what shouldn't happen)
+        this.addAbility(new BanisherPriestReturnExiledAbility());
 
     }
 
@@ -113,49 +114,77 @@ class BanisherPriestExileEffect extends OneShotEffect<BanisherPriestExileEffect>
         // If Banisher Priest leaves the battlefield before its triggered ability resolves,
         // the target creature won't be exiled.
         if (permanent != null) {
-            new ExileTargetEffect(source.getSourceId(), permanent.getName()).apply(game, source);
+            return new ExileTargetEffect(source.getSourceId(), permanent.getName()).apply(game, source);
         }
         return false;
     }
 }
 
-class BanisherPriestWatcher extends WatcherImpl<BanisherPriestWatcher> {
+/**
+ * Returns the exiled card as Banisher Priest leaves battlefield
+ * Uses no stack
+ * @author LevelX2
+ */
 
-    BanisherPriestWatcher() {
-        super("BattlefieldLeft", WatcherScope.CARD);
+class BanisherPriestReturnExiledAbility extends TriggeredAbilityImpl<BanisherPriestReturnExiledAbility> {
+
+    public BanisherPriestReturnExiledAbility() {
+        super(Zone.BATTLEFIELD, new ReturnExiledCreatureEffect());
+        this.usesStack = false;
+        this.setRuleVisible(false);
     }
 
-    BanisherPriestWatcher(final BanisherPriestWatcher watcher) {
-        super(watcher);
+    public BanisherPriestReturnExiledAbility(final BanisherPriestReturnExiledAbility ability) {
+        super(ability);
     }
 
     @Override
-    public void watch(GameEvent event, Game game) {
+    public BanisherPriestReturnExiledAbility copy() {
+        return new BanisherPriestReturnExiledAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                ExileZone exile = game.getExile().getExileZone(this.getSourceId());
-                Card sourceCard = game.getCard(this.getSourceId());
-                if (exile != null && sourceCard != null) {
-                    LinkedList<UUID> cards = new LinkedList<>(exile);
-                    for (UUID cardId : cards) {
-                        Card card = game.getCard(cardId);
-                        card.moveToZone(Zone.BATTLEFIELD, this.getSourceId(), game, false);
-                        game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(card.getName()).append(" was returned to battlefield from exile").toString());
-                    }
-                    exile.clear();
-                }
+                return true;
             }
         }
+        return false;
+    }
+}
+
+class ReturnExiledCreatureEffect extends OneShotEffect<ReturnExiledCreatureEffect> {
+
+    public ReturnExiledCreatureEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Return exiled creature";
+    }
+
+    public ReturnExiledCreatureEffect(final ReturnExiledCreatureEffect effect) {
+        super(effect);
     }
 
     @Override
-    public void reset() {
-        //don't reset condition each turn - only when this leaves the battlefield
+    public ReturnExiledCreatureEffect copy() {
+        return new ReturnExiledCreatureEffect(this);
     }
 
     @Override
-    public BanisherPriestWatcher copy() {
-        return new BanisherPriestWatcher(this);
+    public boolean apply(Game game, Ability source) {
+        ExileZone exile = game.getExile().getExileZone(source.getSourceId());
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (exile != null && sourceCard != null) {
+            LinkedList<UUID> cards = new LinkedList<>(exile);
+            for (UUID cardId : cards) {
+                Card card = game.getCard(cardId);
+                card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(card.getName()).append(" returns to battlefield from exile").toString());
+            }
+            exile.clear();
+            return true;
+        }
+        return false;
     }
 }
