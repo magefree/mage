@@ -30,6 +30,7 @@ package mage.sets.theros;
 import java.util.LinkedList;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -115,7 +116,9 @@ public class ChainedToTheRocks extends CardImpl<ChainedToTheRocks> {
         ability = new EntersBattlefieldTriggeredAbility(new ChainedToTheRocksEffect());
         ability.addTarget(new TargetCreaturePermanent(filterTarget));
         this.addAbility(ability);
-        this.addWatcher(new ChainedToTheRocksWatcher(this.getId()));
+        // Implemented as triggered effect that doesn't uses the stack (implementation with watcher does not work correctly because if the returned creature
+        // has a DiesTriggeredAll ability it triggers for the battlefield leaving Chained to the Rocks, what shouldn't happen)
+        this.addAbility(new ChainedToTheRocksReturnExiledAbility());
 
     }
 
@@ -151,49 +154,78 @@ class ChainedToTheRocksEffect extends OneShotEffect<ChainedToTheRocksEffect> {
         // If Chained to the Rocks leaves the battlefield before its triggered ability resolves,
         // the target creature won't be exiled.
         if (permanent != null) {
-            new ExileTargetEffect(source.getSourceId(), permanent.getName()).apply(game, source);
+            return new ExileTargetEffect(source.getSourceId(), permanent.getName()).apply(game, source);
         }
         return false;
     }
 }
 
-class ChainedToTheRocksWatcher extends WatcherImpl<ChainedToTheRocksWatcher> {
 
-    ChainedToTheRocksWatcher (UUID exileId) {
-        super("BattlefieldLeft", WatcherScope.CARD);
+/**
+ * Returns the exiled card as Chained to the Rocks leaves battlefield
+ * Uses no stack
+ * @author LevelX2
+ */
+
+class ChainedToTheRocksReturnExiledAbility extends TriggeredAbilityImpl<ChainedToTheRocksReturnExiledAbility> {
+
+    public ChainedToTheRocksReturnExiledAbility() {
+        super(Zone.BATTLEFIELD, new ReturnExiledCreatureChainedToTheRocksEffect());
+        this.usesStack = false;
+        this.setRuleVisible(false);
     }
 
-    ChainedToTheRocksWatcher(final ChainedToTheRocksWatcher watcher) {
-        super(watcher);
+    public ChainedToTheRocksReturnExiledAbility(final ChainedToTheRocksReturnExiledAbility ability) {
+        super(ability);
     }
 
     @Override
-    public void watch(GameEvent event, Game game) {
+    public ChainedToTheRocksReturnExiledAbility copy() {
+        return new ChainedToTheRocksReturnExiledAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                ExileZone exile = game.getExile().getExileZone(this.getSourceId());
-                Card sourceCard = game.getCard(this.getSourceId());
-                if (exile != null && sourceCard != null) {
-                    LinkedList<UUID> cards = new LinkedList<>(exile);
-                    for (UUID cardId: cards) {
-                        Card card = game.getCard(cardId);
-                        card.moveToZone(Zone.BATTLEFIELD, this.getSourceId(), game, false);
-                        game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(card.getName()).append(" was returned to battlefield from exile").toString());
-                    }
-                    exile.clear();
-                }
+                return true;
             }
         }
+        return false;
+    }
+}
+
+class ReturnExiledCreatureChainedToTheRocksEffect extends OneShotEffect<ReturnExiledCreatureChainedToTheRocksEffect> {
+
+    public ReturnExiledCreatureChainedToTheRocksEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Return exiled creatures";
+    }
+
+    public ReturnExiledCreatureChainedToTheRocksEffect(final ReturnExiledCreatureChainedToTheRocksEffect effect) {
+        super(effect);
     }
 
     @Override
-    public void reset() {
-        //don't reset condition each turn - only when this leaves the battlefield
+    public ReturnExiledCreatureChainedToTheRocksEffect copy() {
+        return new ReturnExiledCreatureChainedToTheRocksEffect(this);
     }
 
     @Override
-    public ChainedToTheRocksWatcher copy() {
-        return new ChainedToTheRocksWatcher(this);
+    public boolean apply(Game game, Ability source) {
+        ExileZone exile = game.getExile().getExileZone(source.getSourceId());
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (exile != null && sourceCard != null) {
+            LinkedList<UUID> cards = new LinkedList<>(exile);
+            for (UUID cardId : cards) {
+                Card card = game.getCard(cardId);
+                card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(card.getName()).append(" returns to battlefield from exile").toString());
+            }
+            exile.clear();
+            return true;
+        }
+        return false;
     }
 }
