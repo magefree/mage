@@ -29,35 +29,32 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -65,19 +62,52 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class NecroticPlague extends CardImpl<NecroticPlague> {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
+
     public NecroticPlague(UUID ownerId) {
         super(ownerId, 107, "Necrotic Plague", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "M11";
         this.color.setBlack(true);
         this.subtype.add("Aura");
 
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NecroticPlagueEffect(this.objectId)));
+        // Enchanted creature has "At the beginning of your upkeep, sacrifice this creature."
+        // When enchanted creature dies, its controller chooses target creature one of his or her opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.
+        Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU, false);
+        Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
+        effect.setText("Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature.\"");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new DiesAttachedTriggeredAbility(new NecroticPlagueEffect(),"enchanted creature", false));
 
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof DiesAttachedTriggeredAbility) {
+            Permanent attachedTo = null;
+            for (Effect effect :ability.getEffects()) {
+                attachedTo = (Permanent) effect.getValue("attachedTo");
+            }
+            if (attachedTo != null) {
+                Player creatureController = game.getPlayer(attachedTo.getControllerId());
+                if (creatureController != null) {
+                    ability.setControllerId(creatureController.getId());
+                    ability.getTargets().clear();
+                    TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+                    target.setRequired(true);
+                    ability.getTargets().add(target);
+                }
+            }
+        }
     }
 
     public NecroticPlague(final NecroticPlague card) {
@@ -85,136 +115,46 @@ public class NecroticPlague extends CardImpl<NecroticPlague> {
     }
 
     @Override
-    public void assignNewId() {
-        super.assignNewId();
-        updateSource();
-    }
-
-    @Override
     public NecroticPlague copy() {
         return new NecroticPlague(this);
     }
 
-    private void updateSource() {
-        for (Ability ability: abilities) {
-            for (Effect effect: ability.getEffects()) {
-                if (effect instanceof NecroticPlagueEffect) {
-                    ((NecroticPlagueEffect)effect).updateSource(objectId);
-                }
-            }
-        }
-    }
 }
 
-class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
+class NecroticPlagueEffect extends OneShotEffect<NecroticPlagueEffect> {
 
-    private Ability ability1;
-    private Ability ability2;
 
-    public NecroticPlagueEffect(UUID cardId) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        ability1 = new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new SacrificeSourceEffect());
-        ability2 = new DiesTriggeredAbility(new NecroticPlagueEffect2(cardId), false);
-        staticText = "Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature.\"  When enchanted creature is put into a graveyard, its controller chooses target creature one of his or her opponents controls. Return {this} from its owner's graveyard to the battlefield attached to that creature.";
+
+    public NecroticPlagueEffect() {
+        super(Outcome.PutCardInPlay);
+        staticText = "its controller chooses target creature one of his or her opponents controls. Return {this} from its owner's graveyard to the battlefield attached to that creature";
     }
 
     public NecroticPlagueEffect(final NecroticPlagueEffect effect) {
         super(effect);
-        this.ability1 = effect.ability1.copy();
-        this.ability2 = effect.ability2.copy();
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent attachedTo = (Permanent) this.getValue("attachedTo");
+        if (attachedTo != null) {
+            Player creatureController = game.getPlayer(attachedTo.getControllerId());
+            if (creatureController != null) {
+                Card sourceEnchantmentCard = game.getCard(source.getSourceId());
+                Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+                if (sourceEnchantmentCard != null && creature != null) {
+                    game.getState().setValue("attachTo:" + sourceEnchantmentCard.getId(), creature);
+                    creatureController.putOntoBattlefieldWithInfo(sourceEnchantmentCard, game, Zone.GRAVEYARD, source.getSourceId());
+                    return creature.addAttachment(sourceEnchantmentCard.getId(), game);
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public NecroticPlagueEffect copy() {
         return new NecroticPlagueEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
-                        if (sublayer == SubLayer.NA) {
-                            creature.addAbility(ability1, game);
-                            creature.addAbility(ability2, game);
-                        }
-                        break;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void updateSource(UUID id) {
-        for (Effect effect: ability2.getEffects()) {
-            if (effect instanceof NecroticPlagueEffect2) {
-                ((NecroticPlagueEffect2)effect).updateSource(id);
-            }
-        }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6;
-    }
-
-}
-
-class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
-
-    private UUID cardId;
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
-
-    public NecroticPlagueEffect2(UUID cardId) {
-        super(Outcome.PutCardInPlay);
-        this.cardId = cardId;
-        staticText = "its controller chooses target creature one of his or her opponents controls. Return {this} from its owner's graveyard to the battlefield attached to that creature.";
-    }
-
-    public NecroticPlagueEffect2(final NecroticPlagueEffect2 effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                if (controller.chooseTarget(Outcome.Detriment, target, source, game)) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        this.setTargetPointer(new FixedTarget(target.getFirstTarget()));
-                        return card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    public void updateSource(UUID id) {
-        this.cardId = id;
-    }
-
-    @Override
-    public NecroticPlagueEffect2 copy() {
-        return new NecroticPlagueEffect2(this);
     }
 
 }
