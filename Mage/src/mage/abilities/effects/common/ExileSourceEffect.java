@@ -66,7 +66,7 @@ public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
             // try to exile card -> is this correct in all cases? (LevelX2)
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
-                return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, null);
+                return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, null);
             }
         }
         return false;
