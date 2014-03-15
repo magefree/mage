@@ -14,6 +14,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class IncreasingCardsTest extends CardTestPlayerBase {
 
+    /**
+     *  Increasing Ambition
+     *  Sorcery, 4B
+     *  Search your library for a card and put that card into your hand. If Increasing
+     *  Ambition was cast from a graveyard, instead search your library for two cards
+     *  and put those cards into your hand. Then shuffle your library.
+     *  Flashback {7}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+     */
     @Test
     public void testIncreasingAmbition() {
         removeAllCardsFromHand(playerA);

@@ -15,6 +15,7 @@ public class TestActivatedContinuousEffect extends CardTestPlayerBase {
     @Test
     public void testCard() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        // {R}: Target creature gets +1/+0 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Captive Flame");
         addCard(Zone.BATTLEFIELD, playerA, "White Knight");
 
@@ -33,6 +34,7 @@ public class TestActivatedContinuousEffect extends CardTestPlayerBase {
     @Test
     public void testCard2() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        // {R}: Target creature gets +1/+0 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Captive Flame");
         addCard(Zone.BATTLEFIELD, playerA, "White Knight");
 

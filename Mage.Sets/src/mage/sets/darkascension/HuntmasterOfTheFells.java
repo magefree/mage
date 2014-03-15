@@ -132,7 +132,7 @@ class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl<HuntmasterOfTheFe
 
     @Override
     public String getRule() {
-        return "Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, put a 2/2 green Wolf creature token onto the battlefield and you gain 2 life.";
+        return "Whenever this creature enters the battlefield or transforms into {this}, put a 2/2 green Wolf creature token onto the battlefield and you gain 2 life.";
     }
 
 }
@@ -229,7 +229,7 @@ class RavagerOfTheFellsTarget extends TargetPermanent<RavagerOfTheFellsTarget> {
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         MageObject object = game.getObject(sourceId);
 
         for (StackObject item: game.getState().getStack()) {

@@ -30,7 +30,7 @@ public class FaithsShieldTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 20);
-        assertLife(playerB, 17);
+        assertLife(playerB, 20);
         assertPermanentCount(playerA, "White Knight", 1);
     }
 

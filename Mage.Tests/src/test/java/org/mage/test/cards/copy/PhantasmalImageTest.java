@@ -129,14 +129,16 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
         addCard(Zone.HAND, playerB, "Phantasmal Image");
         addCard(Zone.HAND, playerB, "Titanic Growth");
+
         addCard(Zone.BATTLEFIELD, playerA, "Huntmaster of the Fells");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Titanic Growth", "Ravager of the Fells-M12");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Titanic Growth", "Ravager of the Fells");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
+        assertLife(playerB, 18);
         // check opponent's creature wasn't chosen as a target for Titanic Growth
         assertPowerToughness(playerA, "Ravager of the Fells", 4, 4);
         // check playerA's creature was sacrificed

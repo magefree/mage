@@ -63,9 +63,9 @@ import mage.filter.common.FilterCreatureForCombatBlock;
 @Ignore
 public class TestPlayer extends ComputerPlayer<TestPlayer> {
 
-    private List<PlayerAction> actions = new ArrayList<PlayerAction>();
-    private List<String> choices = new ArrayList<String>();
-    private List<String> targets = new ArrayList<String>();
+    private final List<PlayerAction> actions = new ArrayList<>();
+    private final List<String> choices = new ArrayList<>();
+    private final List<String> targets = new ArrayList<>();
 
     public TestPlayer(String name, RangeOfInfluence range) {
         super(name, range);
@@ -103,10 +103,14 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                     String[] groups = command.split(";");
                     for (Ability ability: this.getPlayable(game, true)) {
                         if (ability.toString().startsWith(groups[0])) {
+                            Ability newAbility = ability.copy();
                             if (groups.length > 1) {
-                                addTargets(ability, groups, game);
+                                if (!addTargets(newAbility, groups, game)) {
+                                    // targets could not be set -> try next priority
+                                    break;
+                                }
                             }
-                            this.activateAbility((ActivatedAbility)ability, game);
+                            this.activateAbility((ActivatedAbility)newAbility, game);
                             actions.remove(action);
                             return true;
                         }
@@ -261,30 +265,38 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
         return null;
     }
 
-    private void addTargets(Ability ability, String[] groups, Game game) {
+    private boolean addTargets(Ability ability, String[] groups, Game game) {
+        boolean result = true;
         for (int i = 1; i < groups.length; i++) {
             String group = groups[i];
             String target;
             if (group.startsWith("targetPlayer=")) {
+                int targetsSet = 0;
                 target = group.substring(group.indexOf("targetPlayer=") + 13);
                 for (Player player: game.getPlayers().values()) {
                     if (player.getName().equals(target)) {
                         ability.getTargets().get(0).addTarget(player.getId(), ability, game);
+                        targetsSet++;
                         break;
                     }
+                }
+                if (targetsSet < 1) {
+                    result = false;
                 }
             }
             else if (group.startsWith("target=")) {
                 target = group.substring(group.indexOf("target=") + 7);
-                String[] targets = target.split("\\^");
+                String[] targetList = target.split("\\^");
                 int index = 0;
-                for (String t: targets) {
-                    if (t.startsWith("targetPlayer=")) {
-                        target = t.substring(t.indexOf("targetPlayer=") + 13);
+                int targetsSet = 0;
+                for (String targetName: targetList) {
+                    if (targetName.startsWith("targetPlayer=")) {
+                        target = targetName.substring(targetName.indexOf("targetPlayer=") + 13);
                         for (Player player: game.getPlayers().values()) {
                             if (player.getName().equals(target)) {
                                 ability.getTargets().get(index).addTarget(player.getId(), ability, game);
                                 index++;
+                                targetsSet++;
                                 break;
                             }
                         }
@@ -294,7 +306,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                         }
                         for (UUID id: ability.getTargets().get(0).possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
                             MageObject object = game.getObject(id);
-                            if (object != null && object.getName().equals(t)) {
+                            if (object != null && object.getName().equals(targetName)) {
                                 if (index >= ability.getTargets().size()) {
                                     index--;
                                 }
@@ -307,8 +319,10 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                                     targetAmount.setAmount(ability, game);
                                     int amount = targetAmount.getAmountRemaining();
                                     targetAmount.addTarget(id, amount,ability, game);
+                                    targetsSet++;
                                 } else {
                                     ability.getTargets().get(index).addTarget(id, ability, game);
+                                    targetsSet++;
                                 }
                                 index++;
                                 break;
@@ -316,8 +330,12 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                         }
                     }
                 }
+                if (targetsSet != targetList.length) {
+                    result = false;
+                }
             }
         }
+        return result;
     }
 
 }

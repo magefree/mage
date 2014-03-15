@@ -11,6 +11,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class SecondGuessTest extends CardTestPlayerBase {
 
+    /**
+     * Counter target spell that's the second spell cast this turn.
+     */
     @Test
     public void testCounterFirstSpell() {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
@@ -36,11 +39,12 @@ public class SecondGuessTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Shock", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        
         addCard(Zone.HAND, playerA, "Second Guess");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Lightning Bolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Shock");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -56,14 +60,14 @@ public class SecondGuessTest extends CardTestPlayerBase {
     public void testCounterThirdSpell() {
         addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
         addCard(Zone.HAND, playerA, "Shock", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+            addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Second Guess");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Shock");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Shock"); // can't be cast (no valid target), so Secon Guess spell stays on hand
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -71,8 +75,8 @@ public class SecondGuessTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 12);
 
-        assertHandCount(playerA, 0);
-        assertGraveyardCount(playerA, 4);
+        assertHandCount(playerA, 1);
+        assertGraveyardCount(playerA, 3);
     }
 
     /**
