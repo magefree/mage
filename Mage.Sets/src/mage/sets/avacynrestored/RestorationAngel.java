@@ -28,10 +28,6 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,12 +36,16 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -75,7 +75,7 @@ public class RestorationAngel extends CardImpl<RestorationAngel> {
         
         // When Restoration Angel enters the battlefield, you may exile target non-Angel creature you control, then return that card to the battlefield under your control
         Ability ability = new EntersBattlefieldTriggeredAbility(new RestorationAngelEffect(), true);
-        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
+        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false, true));
         this.addAbility(ability);
     }
 
@@ -107,20 +107,19 @@ class RestorationAngelEffect extends OneShotEffect<RestorationAngelEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean exiled = false;
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null) {
-            permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source.getSourceId(), game);
-            Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (card != null) {
-                Zone currentZone = game.getState().getZone(card.getId());
-                return card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            if (permanent != null && sourcePermanent != null) {
+                controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getName(), source.getSourceId(), game, Zone.BATTLEFIELD);
+                Card card = game.getCard(targetPointer.getFirst(game, source));
+                if (card != null) {
+                    Zone currentZone = game.getState().getZone(card.getId());
+                    return controller.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId());
+                }
             }
         }
-        return exiled; 
+        return false;
     }
 }
