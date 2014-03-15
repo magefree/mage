@@ -27,21 +27,14 @@
  */
 package mage.sets.worldwake;
 
-import java.util.ArrayList;
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
 /**
@@ -58,7 +51,7 @@ public class BojukaBog extends CardImpl<BojukaBog> {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Bojuka Bog enters the battlefield, exile all cards from target player's graveyard.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ExileGraveyardAllTargetPlayerEffect());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
         // {T}: Add {B} to your mana pool.
         this.addAbility(new BlackManaAbility());
