@@ -1585,6 +1585,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         if (blocker != null && group != null && group.canBlock(blocker, game)) {
             group.addBlocker(blockerId, playerId, game);
             game.getCombat().addBlockingGroup(blockerId, attackerId, playerId, game);
+        } else {
+            if (this.isHuman()) {
+                game.informPlayer(this, "You can't block this creature.");
+            }
         }
     }
 

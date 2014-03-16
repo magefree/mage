@@ -27,10 +27,10 @@
  */
 package mage.abilities.effects.common.combat;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  */
 public class CantBlockAllEffect extends RestrictionEffect<CantBlockAllEffect> {
 
-    private FilterCreaturePermanent filter;
+    private final FilterCreaturePermanent filter;
 
     public CantBlockAllEffect(FilterCreaturePermanent filter, Duration duration) {
         super(duration);

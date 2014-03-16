@@ -29,14 +29,12 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CanBlockOnlyFlyingEffect;
+import mage.abilities.common.CanBlockOnlyFlyingAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -54,7 +52,8 @@ public class WelkinTern extends CardImpl<WelkinTern> {
         this.toughness = new MageInt( 1);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockOnlyFlyingEffect()));
+        // Welkin Tern can block only creatures with flying.
+         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
     public WelkinTern (final WelkinTern card) {

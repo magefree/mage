@@ -28,14 +28,12 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CanBlockOnlyFlyingEffect;
+import mage.abilities.common.CanBlockOnlyFlyingAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -53,7 +51,8 @@ public class CloudElemental extends CardImpl<CloudElemental> {
         this.toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockOnlyFlyingEffect()));
+        // Cloud Elemental can block only creatures with flying.
+        this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
     public CloudElemental(final CloudElemental card) {

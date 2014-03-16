@@ -1,4 +1,4 @@
-/*
+                        /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -28,14 +28,12 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CanBlockOnlyFlyingEffect;
+import mage.abilities.common.CanBlockOnlyFlyingAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -53,7 +51,8 @@ public class SkywinderDrake extends CardImpl<SkywinderDrake> {
         this.toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockOnlyFlyingEffect()));
+        // Skywinder Drake can block only creatures with flying.
+        this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
     public SkywinderDrake(final SkywinderDrake card) {

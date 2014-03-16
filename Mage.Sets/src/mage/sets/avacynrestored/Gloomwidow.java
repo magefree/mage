@@ -28,14 +28,12 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CanBlockOnlyFlyingEffect;
+import mage.abilities.common.CanBlockOnlyFlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -54,7 +52,7 @@ public class Gloomwidow extends CardImpl<Gloomwidow> {
 
         this.addAbility(ReachAbility.getInstance());
         // Gloomwidow can block only creatures with flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockOnlyFlyingEffect()));
+        this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
     public Gloomwidow(final Gloomwidow card) {
