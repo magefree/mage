@@ -250,7 +250,7 @@ public final class GamePanel extends javax.swing.JPanel {
             pickTargetDialog.cleanUp();
             pickTargetDialog.removeDialog();
         }
-
+        Plugins.getInstance().getActionCallback().hidePopup();
         try {
             Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
             popupContainer.setVisible(false);
