@@ -419,5 +419,14 @@ public interface Ability extends Controllable, Serializable {
      * @param abilityWord 
      */
     void setAbilityWord(AbilityWord abilityWord);
+
+    /**
+     * Creates the message about the ability casting/triggering/activating to post in the game log
+     * before the ability resolves.
+     *
+     * @param game
+     * @return
+     */
+    String getGameLogMessage(Game game);
     
 }

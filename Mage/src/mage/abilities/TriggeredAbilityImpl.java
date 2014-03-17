@@ -29,10 +29,10 @@
 package mage.abilities;
 
 import java.util.UUID;
-import mage.constants.AbilityType;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
+import mage.constants.AbilityType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -95,17 +95,21 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
         }
         //20091005 - 603.4
         if (checkInterveningIfClause(game)) {
-            // log resolve of triggered ability 
-            if (object != null && object.getName() != null) {
-                if (this.getRuleVisible()) {
-                    game.informPlayers(new StringBuilder(object.getName()).append(" triggered ability resolves: ").append(this.getRule(object.getName())).toString());
-                }
-            } else {
-                game.informPlayers(new StringBuilder("Ability triggered: ").append(this.getRule()).toString());
-            }
             return super.resolve(game);
         }
         return false;
+    }
+
+    @Override
+    public String getGameLogMessage(Game game) {
+        MageObject object = game.getObject(sourceId);
+        StringBuilder sb = new StringBuilder();
+        if (object != null) {
+            sb.append(object.getName()).append(" - ability triggered: ").append(this.getRule(object.getName()));
+        } else {
+            sb.append("Ability triggered: ").append(this.getRule());
+        }
+        return sb.toString();
     }
 
     @Override

@@ -114,8 +114,8 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
     }
 
     @Override
-    public String getActivatedMessage(Game game) {
-        return " casts " + getMessageText(game);
+    public String getGameLogMessage(Game game) {
+        return new StringBuilder(" casts ").append(getMessageText(game)).toString();
     }
 
     @Override

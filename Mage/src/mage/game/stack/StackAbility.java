@@ -399,6 +399,11 @@ public class StackAbility implements StackObject, Ability {
     public void setAbilityWord(AbilityWord abilityWord) {
         throw new UnsupportedOperationException("Not supported.");
     }
+
+    @Override
+    public String getGameLogMessage(Game game) {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

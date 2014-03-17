@@ -29,7 +29,6 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -48,6 +47,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -112,9 +112,9 @@ class SnapcasterMageEffect extends ContinuousEffectImpl<SnapcasterMageEffect> {
     @Override
     public void init(Ability source, Game game) {
         Card card = game.getCard(targetPointer.getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (card != null && sourceObject != null) {
-            game.informPlayers(new StringBuilder(sourceObject.getName()).append(" gives flashback to ").append(card.getName()).toString());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (card != null && sourcePermanent != null) {
+            game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(" gives flashback to ").append(card.getName()).toString());
         }
     }
 

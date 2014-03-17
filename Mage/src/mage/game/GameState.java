@@ -588,7 +588,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public List<TriggeredAbility> getTriggered(UUID controllerId) {
-        List<TriggeredAbility> triggereds = new ArrayList<TriggeredAbility>();
+        List<TriggeredAbility> triggereds = new ArrayList<>();
         for (TriggeredAbility ability: triggered) {
             if (ability.getControllerId().equals(controllerId)) {
                 triggereds.add(ability);

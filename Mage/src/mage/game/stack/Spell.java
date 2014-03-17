@@ -69,8 +69,8 @@ import mage.watchers.Watcher;
  */
 public class Spell<T extends Spell<T>> implements StackObject, Card {
 
-    private final List<Card> spellCards = new ArrayList<Card>();
-    private final List<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
+    private final List<Card> spellCards = new ArrayList<>();
+    private final List<SpellAbility> spellAbilities = new ArrayList<>();
 
     private final Card card;
     private final SpellAbility ability;
@@ -144,7 +144,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     public String getActivatedMessage(Game game) {
-        return ability.getActivatedMessage(game);
+        return ability.getGameLogMessage(game);
     }
 
     @Override
@@ -463,7 +463,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     @Override
     public List<CardType> getCardType() {
         if (this.getSpellAbility() instanceof BestowAbility) {
-            List<CardType> cardTypes = new ArrayList<CardType>();
+            List<CardType> cardTypes = new ArrayList<>();
             cardTypes.addAll(card.getCardType());
             cardTypes.remove(CardType.CREATURE);
             return cardTypes;
@@ -474,7 +474,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     @Override
     public List<String> getSubtype() {
         if (this.getSpellAbility() instanceof BestowAbility) {
-            List<String> subtypes = new ArrayList<String>();
+            List<String> subtypes = new ArrayList<>();
             subtypes.addAll(card.getSubtype());
             subtypes.add("Aura");
             return subtypes;

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
@@ -49,6 +50,7 @@ public class SpellPierce extends CardImpl<SpellPierce> {
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(new AnotherCardPredicate());
     }
 
     public SpellPierce(UUID ownerId) {

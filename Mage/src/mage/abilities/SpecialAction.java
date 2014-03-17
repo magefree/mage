@@ -34,6 +34,7 @@ import mage.constants.Zone;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class SpecialAction<T extends SpecialAction<T>> extends ActivatedAbilityImpl<T> {
 

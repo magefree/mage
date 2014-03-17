@@ -161,7 +161,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected boolean quit;
 
     protected RangeOfInfluence range;
-    protected Set<UUID> inRange = new HashSet<UUID>();
+    protected Set<UUID> inRange = new HashSet<>();
     protected boolean isTestMode = false;
     protected boolean canGainLife = true;
     protected boolean canLoseLife = true;
@@ -169,8 +169,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected boolean canPaySacrificeCost = true;
     protected boolean isGameUnderControl = true;
     protected UUID turnController;
-    protected Set<UUID> playersUnderYourControl = new HashSet<UUID>();
-    protected List<UUID> attachments = new ArrayList<UUID>();
+    protected Set<UUID> playersUnderYourControl = new HashSet<>();
+    protected List<UUID> attachments = new ArrayList<>();
 
     protected boolean topCardRevealed = false;
    
@@ -715,7 +715,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId);
                     event.setZone(fromZone);
                     game.fireEvent(event);
-                    game.fireInformEvent(new StringBuilder(name).append(spell.getActivatedMessage(game)).toString());
+                    game.informPlayers(new StringBuilder(name).append(spell.getActivatedMessage(game)).toString());
                     game.removeBookmark(bookmark);
                     resetStoredBookmark(game);
                     return true;
@@ -778,7 +778,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 game.getStack().push(new StackAbility(ability, playerId));
                 if (ability.activate(game, false)) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
-                    game.fireInformEvent(name + ability.getActivatedMessage(game));
+                    game.informPlayers(new StringBuilder(name).append(ability.getGameLogMessage(game)).toString());
                     game.removeBookmark(bookmark);
                     resetStoredBookmark(game);
                     return true;
@@ -804,7 +804,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             int bookmark = game.bookmarkState();
             if (action.activate(game, false)) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, action.getSourceId(), action.getId(), playerId));
-                game.fireInformEvent(name + action.getActivatedMessage(game));
+                game.informPlayers(new StringBuilder(name).append(action.getGameLogMessage(game)).toString());
                 if (action.resolve(game)) {
                     game.removeBookmark(bookmark);
                     resetStoredBookmark(game);
@@ -866,23 +866,29 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         //20091005 - 603.3c, 603.3d
         int bookmark = game.bookmarkState();
         //FIXME: remove try\catch once we find out the reason for NPE on server
-        TriggeredAbility ability = null;
-        try {
-            ability = source.copy();
-        } catch (NullPointerException npe) {
-            log.fatal("NPE for source=" + source);
-            log.fatal("NPE for source=" + source.getRule());
-            throw npe;
-        }
+        TriggeredAbility ability = source.copy();
+//        try {
+//            ability = source.copy();
+//        } catch (NullPointerException npe) {
+//            log.fatal("NPE for source=" + source);
+//            log.fatal("NPE for source=" + source.getRule());
+//            throw npe;
+//        }
         if (ability != null && ability.canChooseTarget(game)) {
             if (ability.isUsesStack()) {
                 game.getStack().push(new StackAbility(ability, playerId));
                 if (ability.activate(game, false)) {
+                    if (ability.getRuleVisible()) {
+                        game.informPlayers(ability.getGameLogMessage(game));
+                    }
                     game.removeBookmark(bookmark);
                     return true;
                 }
             } else {
                 if (ability.activate(game, false)) {
+                    if (ability.getRuleVisible()) {
+                        game.informPlayers(ability.getGameLogMessage(game));
+                    }
                     ability.resolve(game);
                     game.removeBookmark(bookmark);
                     return true;
@@ -894,7 +900,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
     protected LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(MageObject object, Zone zone, Game game) {
-        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<UUID, ActivatedAbility>();
+        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         for (Ability ability: object.getAbilities()) {
             if (ability instanceof SpellAbility) {
                 if (((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
@@ -976,7 +982,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     } 
 
     protected LinkedHashMap<UUID, ManaAbility> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
-        LinkedHashMap<UUID, ManaAbility> useable = new LinkedHashMap<UUID, ManaAbility>();
+        LinkedHashMap<UUID, ManaAbility> useable = new LinkedHashMap<>();
         for (ManaAbility ability: object.getAbilities().getManaAbilities(zone)) {
             if (ability.canActivate(playerId, game)) {
                 useable.put(ability.getId(), ability);
@@ -1044,14 +1050,14 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public void untap(Game game) {
         // create list of all "notMoreThan" effects to track which one are consumed
-        HashMap<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> notMoreThanEffectsUsage = new HashMap<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer>();
+        HashMap<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> notMoreThanEffectsUsage = new HashMap<>();
         for (Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>> restrictionEffect: game.getContinuousEffects().getApplicableRestrictionUntapNotMoreThanEffects(this, game).entrySet()) {
             notMoreThanEffectsUsage.put(restrictionEffect, new Integer(restrictionEffect.getKey().getNumber()));
         }
 
         if (!notMoreThanEffectsUsage.isEmpty()) {
             // create list of all permanents that can be untapped generally
-            List<Permanent> canBeUntapped = new ArrayList<Permanent>();
+            List<Permanent> canBeUntapped = new ArrayList<>();
             for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
                 boolean untap = true;
                 for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
@@ -1062,7 +1068,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 }
             }
             // selected permanents to untap
-            List<Permanent> selectedToUntap = new ArrayList<Permanent>();
+            List<Permanent> selectedToUntap = new ArrayList<>();
 
             // player can cancel the seletion of an effect to use a prefered order of restriction effects
             boolean playerCanceledSelection;
@@ -1173,7 +1179,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
     private List<Permanent> getPermanentsThatCanBeUntapped(Game game, List<Permanent> canBeUntapped, RestrictionUntapNotMoreThanEffect handledEffect, HashMap<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> notMoreThanEffectsUsage) {
-        List<Permanent> leftForUntap = new ArrayList<Permanent>();
+        List<Permanent> leftForUntap = new ArrayList<>();
         // select permanents that can still be untapped
         for (Permanent permanent: canBeUntapped) {
             if (handledEffect.getFilter().match(permanent, game)) { // matches the restricted permanents of handled entry
@@ -1698,7 +1704,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     // returns only mana producers that don't require mana payment
     protected List<Permanent> getAvailableManaProducers(Game game) {
-        List<Permanent> result = new ArrayList<Permanent>();
+        List<Permanent> result = new ArrayList<>();
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
             boolean canAdd = false;
             for (ManaAbility ability: permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
@@ -1719,7 +1725,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     // returns only mana producers that require mana payment
     protected List<Permanent> getAvailableManaProducersWithCost(Game game) {
-        List<Permanent> result = new ArrayList<Permanent>();
+        List<Permanent> result = new ArrayList<>();
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
             for (ManaAbility ability: permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
                 if (ability.canActivate(playerId, game) && !ability.getManaCosts().isEmpty()) {
@@ -1822,7 +1828,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             }
         }
         // eliminate duplicate activated abilities
-        Map<String, Ability> playableActivated = new HashMap<String, Ability>();
+        Map<String, Ability> playableActivated = new HashMap<>();
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
             for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
                 if (!playableActivated.containsKey(ability.toString())) {
@@ -1859,7 +1865,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
      */
     @Override
     public List<Ability> getPlayableOptions(Ability ability, Game game) {
-        List<Ability> options = new ArrayList<Ability>();
+        List<Ability> options = new ArrayList<>();
 
         if (ability.isModal()) {
             addModeOptions(options, ability, game);

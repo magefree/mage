@@ -38,6 +38,4 @@ import mage.game.Game;
 public interface ActivatedAbility extends Ability {
 
     boolean canActivate(UUID playerId, Game game);
-    String getActivatedMessage(Game game);
-
 }

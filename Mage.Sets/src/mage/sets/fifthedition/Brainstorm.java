@@ -28,14 +28,14 @@
 package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -101,7 +101,7 @@ class BrainstormEffect extends OneShotEffect<BrainstormEffect> {
         Card card = player.getHand().get(target.getFirstTarget(), game);
         if (card != null) {
             player.getHand().remove(card);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
         }
         return true;
     }

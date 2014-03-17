@@ -62,8 +62,8 @@ public class PlayLandAbility extends ActivatedAbilityImpl<PlayLandAbility> {
     }
 
     @Override
-    public String getActivatedMessage(Game game) {
-        return " plays " + getMessageText(game);
+    public String getGameLogMessage(Game game) {
+        return new StringBuilder(" plays ").append(getMessageText(game)).toString();
     }
 
     @Override
