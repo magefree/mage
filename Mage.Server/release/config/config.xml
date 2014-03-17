@@ -35,6 +35,7 @@
         <draftCube name="MTGO Holiday Cube 2013" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.HolidayCube2013"/>
         <draftCube name="Cube Tutor 360 Pauper" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor360Pauper"/>
         <draftCube name="Cube Tutor 720" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor720"/>
+        <draftCube name="Mono Blue Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MonoBlueCube"/>
     </draftCubes>
     <deckTypes>
         <deckType name="Constructed - Standard" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Standard"/>
