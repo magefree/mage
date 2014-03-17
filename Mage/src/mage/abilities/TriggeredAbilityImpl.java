@@ -57,7 +57,7 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
         this.optional = optional;
     }
 
-    public TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {
+    public TriggeredAbilityImpl(final TriggeredAbilityImpl<T> ability) {
         super(ability);
         this.optional = ability.optional;
     }
@@ -105,10 +105,14 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
         MageObject object = game.getObject(sourceId);
         StringBuilder sb = new StringBuilder();
         if (object != null) {
-            sb.append(object.getName()).append(" - ability triggered: ").append(this.getRule(object.getName()));
+            sb.append("Ability triggers: ").append(object.getName()).append(" - ").append(this.getRule(object.getName()));
         } else {
-            sb.append("Ability triggered: ").append(this.getRule());
-        }
+            sb.append("Ability triggers: ").append(this.getRule());
+        }        
+        String targetText = getTargetDescriptionForLog(getTargets(), game);
+        if (!targetText.isEmpty()) {
+            sb.append(" - ").append(targetText);
+        }        
         return sb.toString();
     }
 

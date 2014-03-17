@@ -828,7 +828,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                             sb.append(spellAbility.name);
                         }
                     }
-                    appendTargetDescriptionForLog(sb, spellAbility.getTargets(), game);
+                    sb.append(getTargetDescriptionForLog(spellAbility.getTargets(), game));
                 }
             }
         } else if (object instanceof Spell && ((Spell) object).getSpellAbility().getModes().size() > 1) {
@@ -839,19 +839,17 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 if (spellModes.getSelectedModes().contains(mode.getId())) {
                     spellModes.setMode(mode);
                     sb.append(" (mode ").append(item).append(")");
-                    appendTargetDescriptionForLog(sb, getTargets(), game);
+                    sb.append(getTargetDescriptionForLog(getTargets(), game));
                 }
             }
         } else {
-            appendTargetDescriptionForLog(sb, getTargets(), game);
-        }
-        for (Choice choice :this.getChoices()) {
-            sb.append(" - ").append(choice.getMessage()).append(": ").append(choice.getChoice());
+            sb.append(getTargetDescriptionForLog(getTargets(), game));
         }
         return sb.toString();
     }
 
-    protected void appendTargetDescriptionForLog(StringBuilder sb, Targets targets, Game game) {
+    protected String getTargetDescriptionForLog(Targets targets, Game game) {
+        StringBuilder sb = new StringBuilder();
         if (targets.size() > 0) {
             String usedVerb = null;
             for (Target target : targets) {
@@ -867,6 +865,10 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 sb.append(target.getTargetedName(game));
             }
         }
+        for (Choice choice :this.getChoices()) {
+            sb.append(" - ").append(choice.getMessage()).append(": ").append(choice.getChoice());
+        }        
+        return sb.toString();
     }
 
     private String getOptionalTextSuffix(Game game, Spell spell) {
