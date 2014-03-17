@@ -126,17 +126,13 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
         }
         sb.append(" creature ");
         if (duration == Duration.WhileOnBattlefield) {
-            sb.append("has \"");
+            sb.append("has ");
         } else {
             sb.append("gains ");
         }
         sb.append(ability.getRule());
         if (!duration.toString().isEmpty()) {
             sb.append(" ").append(duration.toString());
-        } else {
-            if (duration == Duration.WhileOnBattlefield) {
-                sb.append("\"");
-            }
         }
         staticText = sb.toString();
     }

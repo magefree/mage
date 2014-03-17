@@ -55,9 +55,12 @@ public class SelesnyaGuildmage extends CardImpl<SelesnyaGuildmage> {
         this.subtype.add("Wizard");
         this.color.setGreen(true);
         this.color.setWhite(true);
-        this.power = new MageInt(2);
+        this.power = new MageInt(2);    
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl("{3}{G}")));
+        
+        // {3}{G}: Put a 1/1 green Saproling creature token onto the battlefield.        
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl("{3}{G}")));        
+        // {3}{W}: Creatures you control get +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{3}{W}")));
     }
 

@@ -79,7 +79,9 @@ public class EquipAbility extends ActivatedAbilityImpl<EquipAbility> {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Equip ").append(costs.getText()).append(manaCosts.getText()).append(" (").append(manaCosts.getText()).append(": <i>Attach to target creature you control. Equip only as a sorcery.)</i>").toString();
+        StringBuilder sb = new StringBuilder("Equip ").append(costs.getText()).append(manaCosts.getText());
+        sb.append(" (").append(manaCosts.getText()).append(": <i>Attach to target creature you control. Equip only as a sorcery.)</i>").toString();
+        return sb.toString();
     }
 
 }

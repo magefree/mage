@@ -28,12 +28,15 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -52,10 +55,12 @@ public class LightningGreaves extends CardImpl<LightningGreaves> {
         this.subtype.add("Equipment");
 
         // Equipped creature has haste and shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT));
+        Effect effect = new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT);
+        effect.setText("and shroud");
+        this.addAbility(ability);
         // Equip {0}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, null));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)));
     }
 
     public LightningGreaves(final LightningGreaves card) {

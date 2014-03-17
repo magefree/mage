@@ -54,6 +54,7 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
 import java.util.UUID;
+import mage.abilities.effects.common.FlipSourceEffect;
 
 /**
  * @author Loki
@@ -75,9 +76,6 @@ public class NezumiGraverobber extends CardImpl<NezumiGraverobber> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{B}"));
         ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
         ability.addEffect(new NezumiGraverobberFlipEffect());
-        this.addAbility(ability);
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new NighteyesTheDesecratorToken()), FlippedCondition.getInstance(), ""));
-        ability.setRuleVisible(false);
         this.addAbility(ability);
     }
 
@@ -109,14 +107,11 @@ class NezumiGraverobberFlipEffect extends OneShotEffect<NezumiGraverobberFlipEff
             Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {
                 if (player.getGraveyard().size() == 0) {
-                    Permanent p = game.getPermanent(source.getSourceId());
-                    if (p != null) {
-                        p.flip(game);
-                    }
+                    return new FlipSourceEffect(new NighteyesTheDesecratorToken()).apply(game, source);
                 }
             }
         }
-        return true;
+        return false;
     }
 
     @Override

@@ -58,7 +58,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl<FetchLandAct
         addCost(new SacrificeSourceCost());
         FilterCard filter = new FilterCard(subTypeNames(subtypes));
         filter.add(new CardTypePredicate(CardType.LAND));
-        ArrayList<Predicate<MageObject>> subtypePredicates = new ArrayList<Predicate<MageObject>>();
+        ArrayList<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
         for(int i = 0; i < subtypes.length; i++){
             subtypePredicates.add(new SubtypePredicate(subtypes[i]));
         }

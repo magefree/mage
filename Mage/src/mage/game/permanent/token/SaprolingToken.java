@@ -40,6 +40,7 @@ public class SaprolingToken extends Token {
 
     public SaprolingToken() {
         super("Saproling", "1/1 green Saproling creature token");
+        this.setOriginalExpansionSetCode("MMA");
         cardType.add(CardType.CREATURE);
         color = ObjectColor.GREEN;
         subtype.add("Saproling");

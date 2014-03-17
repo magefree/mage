@@ -110,15 +110,6 @@ class SnapcasterMageEffect extends ContinuousEffectImpl<SnapcasterMageEffect> {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (card != null && sourcePermanent != null) {
-            game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(" gives flashback to ").append(card.getName()).toString());
-        }
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
