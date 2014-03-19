@@ -154,20 +154,31 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             int index = 0;
             result = false;
             boolean legalParts = false;
+            // check for legal parts
             for(SpellAbility spellAbility: this.spellAbilities) {
-                for (UUID modeId :spellAbility.getModes().getSelectedModes()) {
-                    spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
-                    if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
-                        legalParts = true;
-                        if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
-                            updateOptionalCosts(index);
+                // if muliple modes are selected, and there are modes with targets, then at least one mode has to have a legal target or 
+                // When resolving a fused split spell with multiple targets, treat it as you would any spell with multiple targets. 
+                // If all targets are illegal when the spell tries to resolve, the spell is countered and none of its effects happen. 
+                // If at least one target is still legal at that time, the spell resolves, but an illegal target can’t perform any actions
+                // or have any actions performed on it. 
+                legalParts |= spellAbilityHasLegalParts(spellAbility, game);
+            }
+            // resolve if legal parts
+            if (legalParts) {
+                for(SpellAbility spellAbility: this.spellAbilities) {
+                    if (spellAbilityHasLegalParts(spellAbility, game)) {
+                        for (UUID modeId :spellAbility.getModes().getSelectedModes()) {
+                            spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
+                            if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
+                                if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
+                                    updateOptionalCosts(index);
+                                }
+                                result |= spellAbility.resolve(game);
+                            }
                         }
-                        result |= spellAbility.resolve(game);
+                        index++;
                     }
                 }
-                index++;
-            }
-            if (legalParts) {
                 if (!copiedSpell) {
                     for (Effect effect : ability.getEffects()) {
                         if (effect instanceof PostResolveEffect) {
@@ -213,6 +224,28 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         }
     }
 
+    private boolean spellAbilityHasLegalParts(SpellAbility spellAbility, Game game) {
+        if (spellAbility.getModes().getSelectedModes().size() > 1) {                    
+            boolean targetedMode = false;
+            boolean legalTargetedMode = false;
+            for (UUID modeId :spellAbility.getModes().getSelectedModes()) {
+                spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
+                if (spellAbility.getTargets().size() > 0) {
+                    targetedMode = true;
+                    if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
+                        legalTargetedMode = true;
+                    }                            
+                }                        
+            }
+            if (targetedMode) {
+                return legalTargetedMode;
+            }
+            return true;
+        } else {
+            return spellAbility.getTargets().stillLegal(spellAbility, game);
+        }
+    }
+    
     /**
      * As we have ability in the stack, we need to update optional costs in original card.
      * This information will be used later by effects, e.g. to determine whether card was kicked or not.

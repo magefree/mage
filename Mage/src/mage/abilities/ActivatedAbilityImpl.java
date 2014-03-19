@@ -31,25 +31,17 @@ package mage.abilities;
 import java.util.UUID;
 
 import mage.constants.AbilityType;
-import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.MageObject;
-import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
-import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.cards.Card;
-import mage.choices.Choice;
 import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
-import mage.target.Target;
 
 
 /**
@@ -206,135 +198,6 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         }
         return false;
     }
-
-//    @Override
-//    public String getGameLogMessage(Game game) {
-//        if (game.isSimulation()) {
-//            return "";
-//        }
-//        MageObject object = game.getObject(this.sourceId);
-//        return new StringBuilder(" activates: ")
-//                .append(object != null ? this.formatRule(modes.getText(), object.getName()) :modes.getText())
-//                .append(" from ")
-//                .append(getMessageText(game)).toString();
-//    }
-//
-//    @Override
-//    protected String getMessageText(Game game) {
-//        StringBuilder sb = new StringBuilder();
-//        MageObject object = game.getObject(this.sourceId);
-//        if (object == null) {
-//            object = game.getLastKnownInformation(this.sourceId, Zone.BATTLEFIELD);
-//        }
-//        if (object != null) {
-//            if (object instanceof StackAbility) {
-//                Card card = game.getCard(((StackAbility) object).getSourceId());
-//                if (card != null) {
-//                    sb.append(card.getName());
-//                } else {
-//                    sb.append(object.getName());
-//                }
-//            } else {
-//                if (object instanceof Spell) {
-//                    Spell<?> spell = (Spell<?>) object;
-//                    String castText = spell.getSpellAbility().toString();
-//                    sb.append((castText.startsWith("Cast ") ? castText.substring(5):castText));
-//                    if (spell.getFromZone() == Zone.GRAVEYARD) {
-//                        sb.append(" from graveyard");
-//                    }
-//                    sb.append(getOptionalTextSuffix(game, spell));
-//                } else {
-//                    sb.append(object.getName());
-//                }
-//            }
-//        } else {
-//            sb.append("unknown");
-//        }
-//        if (object instanceof Spell && ((Spell) object).getSpellAbilities().size() > 1) {
-//            if (((Spell) object).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
-//                Spell<?> spell = (Spell<?>) object;
-//                int i = 0;
-//                for (SpellAbility spellAbility : spell.getSpellAbilities()) {
-//                    i++;
-//                    String half;
-//                    if (i == 1) {
-//                        half = " left";
-//                    } else {
-//                        half = " right";
-//                    }
-//                    if (spellAbility.getTargets().size() > 0) {
-//                        sb.append(half).append(" half targeting ");
-//                        for (Target target: spellAbility.getTargets()) {
-//                            sb.append(target.getTargetedName(game));
-//                        }
-//                    }
-//                }
-//            } else {
-//                Spell<?> spell = (Spell<?>) object;
-//                int i = 0;
-//                for (SpellAbility spellAbility : spell.getSpellAbilities()) {
-//                    i++;
-//                    if ( i > 1) {
-//                        sb.append(" splicing ");
-//                        if (spellAbility.name.length() > 5 && spellAbility.name.startsWith("Cast ")) {
-//                            sb.append(spellAbility.name.substring(5));
-//                        } else {
-//                            sb.append(spellAbility.name);
-//                        }
-//                    }
-//                    appendTargetDescriptionForLog(sb, spellAbility.getTargets(), game);
-//                }
-//            }
-//        } else if (object instanceof Spell && ((Spell) object).getSpellAbility().getModes().size() > 1) {
-//            Modes spellModes = ((Spell) object).getSpellAbility().getModes();
-//            int item = 0;
-//            for (Mode mode : spellModes.values()) {
-//                item++;
-//                if (spellModes.getSelectedModes().contains(mode.getId())) {
-//                    spellModes.setMode(mode);
-//                    sb.append(" (mode ").append(item).append(")");
-//                    appendTargetDescriptionForLog(sb, getTargets(), game);
-//                }
-//            }
-//        } else {
-//            appendTargetDescriptionForLog(sb, getTargets(), game);
-//        }
-//        for (Choice choice :this.getChoices()) {
-//            sb.append(" - ").append(choice.getMessage()).append(": ").append(choice.getChoice());
-//        }
-//        return sb.toString();
-//    }
-
-//    private void appendTargetDescriptionForLog(StringBuilder sb, Targets targets, Game game) {
-//        if (targets.size() > 0) {
-//            String usedVerb = null;
-//            for (Target target: targets) {
-//                if (!target.isNotTarget()) {
-//                    if (usedVerb == null || usedVerb.equals(" choosing ")) {
-//                        usedVerb = " targeting ";
-//                        sb.append(usedVerb);
-//                    }
-//                } else if (target.isNotTarget() && (usedVerb == null || usedVerb.equals(" targeting "))) {
-//                    usedVerb = " choosing ";
-//                    sb.append(usedVerb);
-//                }
-//                sb.append(target.getTargetedName(game));
-//            }
-//        }
-//    }
-    
-//    private String getOptionalTextSuffix(Game game, Spell spell) {
-//        StringBuilder sb = new StringBuilder();
-//        for (Ability ability : (Abilities<Ability>) spell.getAbilities()) {
-//            if (ability instanceof OptionalAdditionalSourceCosts) {
-//                sb.append(((OptionalAdditionalSourceCosts) ability).getCastMessageSuffix());
-//            }
-//            if (ability instanceof AlternativeSourceCosts) {
-//                sb.append(((AlternativeSourceCosts) ability).getCastMessageSuffix());
-//            }
-//        }
-//        return sb.toString();
-//    }
 
     public void setMayActivate(TargetController mayActivate) {
         this.mayActivate = mayActivate;
