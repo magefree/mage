@@ -634,6 +634,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:Cast " + cardName + ";target=" + targetName);
     }
 
+    /**
+     * Spell will only be cast, if a spell with the given name is already on the stack
+     * 
+     * @param turnNum
+     * @param step
+     * @param player
+     * @param cardName
+     * @param targetName
+     * @param spellOnStack 
+     */
+    public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack) {
+        player.addAction(turnNum, step, "activate:Cast " + cardName + ";target=" + targetName + ";spellOnStack=" + spellOnStack);
+    }
+
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability) {
         player.addAction(turnNum, step, "activate:" + ability);
     }
@@ -660,6 +674,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void setChoice(TestPlayer player, String choice) {
         player.addChoice(choice);
+    }
+
+    public void setModeChoice(TestPlayer player, String choice) {
+        player.addModeChoice(choice);
     }
 
     public void addTarget(TestPlayer player, String target) {

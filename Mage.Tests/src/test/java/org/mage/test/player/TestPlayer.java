@@ -54,7 +54,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
 import mage.filter.common.FilterCreatureForCombatBlock;
+import mage.game.stack.StackObject;
 
 /**
  *
@@ -66,6 +69,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     private final List<PlayerAction> actions = new ArrayList<>();
     private final List<String> choices = new ArrayList<>();
     private final List<String> targets = new ArrayList<>();
+    private final List<String> modesSet = new ArrayList<>();
 
     public TestPlayer(String name, RangeOfInfluence range) {
         super(name, range);
@@ -82,6 +86,10 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
 
     public void addChoice(String choice) {
         choices.add(choice);
+    }
+
+    public void addModeChoice(String mode) {
+        modesSet.add(mode);
     }
 
     public void addTarget(String target) {
@@ -101,6 +109,9 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("activate:") + 9);
                     String[] groups = command.split(";");
+                    if (!checkSpellOnStackCondition(groups, game)) {
+                        break;
+                    }
                     for (Ability ability: this.getPlayable(game, true)) {
                         if (ability.toString().startsWith(groups[0])) {
                             Ability newAbility = ability.copy();
@@ -172,6 +183,22 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                 }
             }
         }
+    }
+
+    @Override
+    public Mode chooseMode(Modes modes, Ability source, Game game) {
+        if (!modesSet.isEmpty() && modes.getMaxModes() > modes.getSelectedModes().size()) {
+            int selectedMode = Integer.parseInt(modesSet.get(0));            
+            int i = 0;
+            for (Mode mode: modes.values()) {
+                if (i == selectedMode) {
+                    modesSet.remove(0);
+                    return mode;
+                }
+                i++;
+            }
+        }
+        return super.chooseMode(modes, source, game); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -265,6 +292,18 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
         return null;
     }
 
+    private boolean checkSpellOnStackCondition(String[] groups, Game game) {
+        if (groups.length > 2 && groups[2].startsWith("spellOnStack=")) {
+            String spellOnStack = groups[2].substring(13);
+            for (StackObject stackObject: game.getStack()) {
+                if (stackObject.getName().equals(spellOnStack)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
+    }
     private boolean addTargets(Ability ability, String[] groups, Game game) {
         boolean result = true;
         for (int i = 1; i < groups.length; i++) {

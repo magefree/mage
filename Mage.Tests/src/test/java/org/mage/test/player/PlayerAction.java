@@ -36,9 +36,9 @@ import mage.constants.PhaseStep;
  */
 public class PlayerAction {
 
-    private int turnNum;
-    private PhaseStep step;
-    private String action;
+    private final int turnNum;
+    private final PhaseStep step;
+    private final String action;
 
     public PlayerAction(int turnNum, PhaseStep step, String action) {
         this.turnNum = turnNum;
