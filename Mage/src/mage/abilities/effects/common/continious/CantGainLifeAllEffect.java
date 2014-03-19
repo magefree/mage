@@ -41,13 +41,13 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PlayersCantGainLifeEffect extends ContinuousEffectImpl<PlayersCantGainLifeEffect> {
+public class CantGainLifeAllEffect extends ContinuousEffectImpl<CantGainLifeAllEffect> {
 
-    public PlayersCantGainLifeEffect() {
+    public CantGainLifeAllEffect() {
         this(Duration.WhileOnBattlefield);
     }
     
-    public PlayersCantGainLifeEffect(Duration duration) {
+    public CantGainLifeAllEffect(Duration duration) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
         StringBuilder sb = new StringBuilder("Players can't gain life");
         if (!this.duration.toString().isEmpty()) {
@@ -56,13 +56,13 @@ public class PlayersCantGainLifeEffect extends ContinuousEffectImpl<PlayersCantG
         staticText = sb.toString();
     }
 
-    public PlayersCantGainLifeEffect(final PlayersCantGainLifeEffect effect) {
+    public CantGainLifeAllEffect(final CantGainLifeAllEffect effect) {
         super(effect);
     }
 
     @Override
-    public PlayersCantGainLifeEffect copy() {
-        return new PlayersCantGainLifeEffect(this);
+    public CantGainLifeAllEffect copy() {
+        return new CantGainLifeAllEffect(this);
     }
 
     @Override

@@ -28,11 +28,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,6 +42,11 @@ import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
@@ -55,7 +55,6 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
-
 
 /**
  * @author Loki
@@ -103,8 +102,9 @@ class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetCardInHand(1, 1, new FilterLandCard());
+            Target target = new TargetCardInHand(new FilterLandCard());
             target.setRequired(true);
+            target.setNotTarget(true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && controller.chooseUse(outcome, "Put land onto the battlefield?", game)
                     && controller.chooseTarget(outcome, target, source, game)) {

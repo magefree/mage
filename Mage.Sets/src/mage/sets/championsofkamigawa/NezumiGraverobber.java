@@ -27,34 +27,28 @@
  */
 package mage.sets.championsofkamigawa;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
-
-import java.util.UUID;
-import mage.abilities.effects.common.FlipSourceEffect;
 
 /**
  * @author Loki

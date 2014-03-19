@@ -34,7 +34,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.continious.PlayersCantGainLifeEffect;
+import mage.abilities.effects.common.continious.CantGainLifeAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -62,7 +62,7 @@ public class WitchHunt extends CardImpl<WitchHunt> {
         this.color.setRed(true);
 
         // Players can't gain life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayersCantGainLifeEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));
         // At the beginning of your upkeep, Witch Hunt deals 4 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageControllerEffect(4), TargetController.YOU, false));
         // At the beginning of your end step, target opponent chosen at random gains control of Witch Hunt.

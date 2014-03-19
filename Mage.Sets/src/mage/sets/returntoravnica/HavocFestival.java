@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.PlayersCantGainLifeEffect;
+import mage.abilities.effects.common.continious.CantGainLifeAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -59,7 +59,7 @@ public class HavocFestival extends CardImpl<HavocFestival> {
         this.color.setRed(true);
 
         // Players can't gain life.
-       this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayersCantGainLifeEffect()));
+       this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));
 
         // At the beginning of each player's upkeep, that player loses half his or her life, rounded up.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HavocFestivalLoseLifeEffect(), TargetController.ANY, false);

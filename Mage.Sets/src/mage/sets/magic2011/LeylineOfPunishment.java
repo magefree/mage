@@ -40,7 +40,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continious.PlayersCantGainLifeEffect;
+import mage.abilities.effects.common.continious.CantGainLifeAllEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -62,7 +62,7 @@ public class LeylineOfPunishment extends CardImpl<LeylineOfPunishment> {
         // If Leyline of Punishment is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
         // Players can't gain life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayersCantGainLifeEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));
         // Damage can't be prevented.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfPunishmentEffect2()));
     }

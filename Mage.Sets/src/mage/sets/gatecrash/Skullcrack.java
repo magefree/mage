@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continious.PlayersCantGainLifeEffect;
+import mage.abilities.effects.common.continious.CantGainLifeAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.game.Game;
@@ -55,7 +55,7 @@ public class Skullcrack extends CardImpl<Skullcrack> {
         this.color.setRed(true);
 
         // Players can't gain life this turn. Damage can't be prevented this turn. Skullcrack deals 3 damage to target player.
-        this.getSpellAbility().addEffect(new PlayersCantGainLifeEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new CantGainLifeAllEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DamageCantBePreventedEffect());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer(true));
