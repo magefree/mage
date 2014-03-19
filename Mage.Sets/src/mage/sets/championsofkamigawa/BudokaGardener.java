@@ -37,15 +37,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyTokenEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -53,8 +51,9 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 
 
@@ -75,13 +74,7 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
         this.flipCardName = "Dokai, Weaver of Life";
 
         // {T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BudokaGardenerEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCardInHand(0, 1, new FilterLandCard()));
-        this.addAbility(ability);
-
-        Ability flipAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new DokaiWeaverofLife()), FlippedCondition.getInstance(), "{this} becomes Dokai, Weaver of Life"));
-        flipAbility.setRuleVisible(false);
-        this.addAbility(flipAbility);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BudokaGardenerEffect(), new TapSourceCost()));
     }
 
     public BudokaGardener(final BudokaGardener card) {
@@ -108,17 +101,24 @@ class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card c = game.getCard(targetPointer.getFirst(game, source));
-        if (c != null) {
-            c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
-        }
-        if (game.getBattlefield().count(DokaiWeaverofLifeToken.filterLands, source.getSourceId(), source.getControllerId(), game) >= 10) {
-            Permanent p = game.getPermanent(source.getSourceId());
-            if (p != null) {
-                p.flip(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Target target = new TargetCardInHand(1, 1, new FilterLandCard());
+            target.setRequired(true);
+            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+                    && controller.chooseUse(outcome, "Put land onto the battlefield?", game)
+                    && controller.chooseTarget(outcome, target, source, game)) {
+                Card card = game.getCard(target.getFirstTarget());
+                if (card != null) {
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                }
             }
+            if (game.getBattlefield().count(DokaiWeaverofLifeToken.filterLands, source.getSourceId(), source.getControllerId(), game) >= 10) {
+                new FlipSourceEffect(new DokaiWeaverofLife()).apply(game, source);
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
