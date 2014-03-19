@@ -103,7 +103,7 @@ class KumanosPupilsEffect extends ReplacementEffectImpl<KumanosPupilsEffect> {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent)event).getTarget();
         if (permanent != null) {
-            return permanent.moveToExile(null, "", source.getId(), game);
+            return permanent.moveToExile(null, "", source.getSourceId(), game);
         }
         return false;
     }

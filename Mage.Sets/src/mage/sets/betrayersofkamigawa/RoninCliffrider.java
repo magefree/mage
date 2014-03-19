@@ -25,23 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.sets.betrayersofkamigawa;
 
 import java.util.List;
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
+import mage.abilities.keyword.BushidoAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.LevelUpAbility;
-import mage.abilities.keyword.LevelerCardBuilder;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -49,60 +46,49 @@ import mage.game.permanent.Permanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class LordOfShatterskullPass extends CardImpl<LordOfShatterskullPass> {
+public class RoninCliffrider extends CardImpl<RoninCliffrider> {
 
-    public LordOfShatterskullPass(UUID ownerId) {
-        super(ownerId, 156, "Lord of Shatterskull Pass", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "ROE";
-        this.subtype.add("Minotaur");
-        this.subtype.add("Shaman");
+    public RoninCliffrider(UUID ownerId) {
+        super(ownerId, 116, "Ronin Cliffrider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        this.expansionSetCode = "BOK";
+        this.subtype.add("Human");
+        this.subtype.add("Samurai");
 
         this.color.setRed(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Level up {1}{R}
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{R}")));
-        // LEVEL 1-5
-        // 6/6
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
-        // LEVEL 6+
-        // 6/6
-        // Whenever Lord of Shatterskull Pass attacks, it deals 6 damage to each creature defending player controls.
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
-        abilities2.add(new AttacksTriggeredAbility(new LordOfShatterskullPassEffect(), false));
-
-        LevelerCardBuilder.construct(this,
-                new LevelerCardBuilder.LevelAbility(1, 5, abilities1, 6, 6),
-                new LevelerCardBuilder.LevelAbility(6, -1, abilities2, 6, 6));
+        // Bushido 1
+        this.addAbility(new BushidoAbility(1));
+        // Whenever Ronin Cliffrider attacks, you may have it deal 1 damage to each creature defending player controls.
+        this.addAbility(new AttacksTriggeredAbility(new RoninCliffriderEffect(), true));
     }
 
-    public LordOfShatterskullPass(final LordOfShatterskullPass card) {
+    public RoninCliffrider(final RoninCliffrider card) {
         super(card);
     }
 
     @Override
-    public LordOfShatterskullPass copy() {
-        return new LordOfShatterskullPass(this);
+    public RoninCliffrider copy() {
+        return new RoninCliffrider(this);
     }
 }
+class RoninCliffriderEffect extends OneShotEffect<RoninCliffriderEffect> {
 
-class LordOfShatterskullPassEffect extends OneShotEffect<LordOfShatterskullPassEffect> {
-
-    public LordOfShatterskullPassEffect() {
+    public RoninCliffriderEffect() {
         super(Outcome.Damage);
-        this.staticText = "it deals 6 damage to each creature defending player controls";
+        this.staticText = "you may have it deal 1 damage to each creature defending player controls";
     }
 
-    public LordOfShatterskullPassEffect(final LordOfShatterskullPassEffect effect) {
+    public RoninCliffriderEffect(final RoninCliffriderEffect effect) {
         super(effect);
     }
 
     @Override
-    public LordOfShatterskullPassEffect copy() {
-        return new LordOfShatterskullPassEffect(this);
+    public RoninCliffriderEffect copy() {
+        return new RoninCliffriderEffect(this);
     }
 
     @Override
@@ -113,7 +99,7 @@ class LordOfShatterskullPassEffect extends OneShotEffect<LordOfShatterskullPassE
             filter.add(new ControllerIdPredicate(defenderId));
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
             for (Permanent permanent : permanents) {
-                permanent.damage(6, source.getSourceId(), game, true, false);
+                permanent.damage(1, source.getSourceId(), game, true, false);
             }
             return true;
         }

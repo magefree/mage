@@ -27,34 +27,34 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
-import mage.target.TargetObject;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import static mage.filter.predicate.permanent.ControllerControlsIslandPredicate.filter;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.target.Target;
+import mage.target.TargetObject;
 import mage.target.Targets;
+
+
 
 /**
  *
@@ -123,9 +123,9 @@ class TargetSpellTargetingControlledPermanent extends TargetObject<TargetSpellTa
     public boolean canChoose(UUID sourceControllerId, Game game) {
         for (StackObject stackObject : game.getStack()) {
             if ((stackObject instanceof Spell) || (stackObject instanceof StackAbility)) {
-                Targets targets = stackObject.getStackAbility().getTargets();
-                if(!targets.isEmpty()) {
-                    for (Target target : targets) {
+                Targets objectTargets = stackObject.getStackAbility().getTargets();
+                if(!objectTargets.isEmpty()) {
+                    for (Target target : objectTargets) {
                         for (UUID targetId : target.getTargets()) {
                             Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
                             if (targetedPermanent.getControllerId().equals(sourceControllerId)) {
@@ -150,9 +150,9 @@ class TargetSpellTargetingControlledPermanent extends TargetObject<TargetSpellTa
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
             if ((stackObject instanceof Spell) || (stackObject instanceof StackAbility)) {
-                Targets targets = stackObject.getStackAbility().getTargets();
-                if(!targets.isEmpty()) {
-                    for (Target target : targets) {
+                Targets objectTargets = stackObject.getStackAbility().getTargets();
+                if(!objectTargets.isEmpty()) {
+                    for (Target target : objectTargets) {
                         for (UUID targetId : target.getTargets()) {
                             Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
                             if (targetedPermanent.getControllerId().equals(sourceControllerId)) {

@@ -43,7 +43,7 @@ import java.util.UUID;
  */
 public class DamagedByWatcher extends WatcherImpl<DamagedByWatcher> {
 
-    public List<UUID> damagedCreatures = new ArrayList<UUID>();
+    public List<UUID> damagedCreatures = new ArrayList<>();
 
     public DamagedByWatcher() {
         super("DamagedByWatcher", WatcherScope.CARD);
