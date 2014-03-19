@@ -190,7 +190,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.range = range;
         hand = new CardsImpl(Zone.HAND);
         graveyard = new CardsImpl(Zone.GRAVEYARD);
-        abilities = new AbilitiesImpl<Ability>();
+        abilities = new AbilitiesImpl<>();
         counters = new Counters();
         manaPool = new ManaPool();
         library = new Library(playerId);
@@ -1383,7 +1383,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
     @Override
-    public Abilities getAbilities() {
+    public Abilities<Ability> getAbilities() {
         return this.abilities;
     }
 

@@ -120,11 +120,14 @@ class DesecratorHagEffect extends OneShotEffect<DesecratorHagEffect> {
             if (cards.size() > 1
                     && you.choose(Outcome.DrawCard, cards, target, game)) {
                 if (target != null) {
-                    return game.getCard(target.getFirstTarget()).moveToZone(Zone.HAND, source.getId(), game, false);
+                    Card card = game.getCard(target.getFirstTarget());
+                    if (card != null) {
+                        return you.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
+                    }
                 }
             } else {
                 for (Card card : cards.getCards(game)) {
-                    return card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    return you.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
                 }
             }
         }

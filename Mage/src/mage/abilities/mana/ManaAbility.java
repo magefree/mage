@@ -41,6 +41,7 @@ import java.util.UUID;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class ManaAbility<T extends ManaAbility<T>> extends ActivatedAbilityImpl<T> {
 

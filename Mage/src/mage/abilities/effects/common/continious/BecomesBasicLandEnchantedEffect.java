@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
 
 public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl<BecomesBasicLandEnchantedEffect> {
 
-    protected ArrayList<String> landTypes = new ArrayList();
+    protected ArrayList<String> landTypes = new ArrayList<>();
 
     public BecomesBasicLandEnchantedEffect(String... landNames) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -87,7 +87,7 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl<Become
                         land.removeAllAbilities(source.getSourceId(), game);
                         for (String landType : landTypes)  {
                             if (landType.equals("Swamp")) {
-                                land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                                land.addAbility(new BlackManaAbility(), source.getSourceId(), game);                                
                             } else if (landType.equals("Mountain")) {
                                 land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                             } else if (landType.equals("Forest")) {
