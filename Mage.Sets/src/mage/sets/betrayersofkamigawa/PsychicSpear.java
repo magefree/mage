@@ -33,9 +33,11 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -51,6 +53,12 @@ import mage.target.TargetPlayer;
  */
 public class PsychicSpear extends CardImpl<PsychicSpear> {
 
+    private static final FilterCard filter = new FilterCard("a Spirit or Arcane card to discard");
+
+    static {
+        filter.add(Predicates.or(new SubtypePredicate("Spirit"),new SubtypePredicate("Arcane")));
+    }
+
     public PsychicSpear(UUID ownerId) {
         super(ownerId, 78, "Psychic Spear", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "BOK";
@@ -58,8 +66,8 @@ public class PsychicSpear extends CardImpl<PsychicSpear> {
         this.color.setBlack(true);
 
         // Target player reveals his or her hand. You choose a Spirit or Arcane card from it. That player discards that card.
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new PsychicSpearEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }
 
     public PsychicSpear(final PsychicSpear card) {
@@ -71,49 +79,3 @@ public class PsychicSpear extends CardImpl<PsychicSpear> {
         return new PsychicSpear(this);
     }
 }
-
-class PsychicSpearEffect extends OneShotEffect<PsychicSpearEffect> {
-
-    private static final FilterCard filter = new FilterCard("a Spirit or Arcane card to discard");
-
-    static {
-        filter.add(Predicates.or(new SubtypePredicate("Spirit"),new SubtypePredicate("Arcane")));
-    }
-
-    public PsychicSpearEffect() {
-        super(Outcome.Discard);
-        staticText = "Target player reveals his or her hand. You choose a Spirit or Arcane card from it. That player discards that card";
-    }
-
-    public PsychicSpearEffect(final PsychicSpearEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Psychic Spear", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.PICK, filter);
-                target.setRequired(true);
-                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public PsychicSpearEffect copy() {
-        return new PsychicSpearEffect(this);
-    }
-
-}
-

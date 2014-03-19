@@ -27,28 +27,27 @@
  */
 package mage.sets.tenth;
 
+import java.util.UUID;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
  */
 public class Distress extends CardImpl<Distress> {
+
+    private static final FilterCard filter = new FilterCard("nonland card");
+
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+    }
 
     public Distress(UUID ownerId) {
         super(ownerId, 136, "Distress", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
@@ -58,7 +57,7 @@ public class Distress extends CardImpl<Distress> {
 
         // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer(true));
-        this.getSpellAbility().addEffect(new DistressEffect());
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }
 
     public Distress(final Distress card) {
@@ -70,49 +69,3 @@ public class Distress extends CardImpl<Distress> {
         return new Distress(this);
     }
 }
-
-class DistressEffect extends OneShotEffect<DistressEffect> {
-
-    private static final FilterCard filter = new FilterCard("nonland card");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-    }
-
-    public DistressEffect() {
-        super(Outcome.Discard);
-        staticText = "Target player reveals his or her hand. You choose a nonland card from it. That player discards that card";
-    }
-
-    public DistressEffect(final DistressEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Distress", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.PICK, filter);
-                target.setRequired(true);
-                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public DistressEffect copy() {
-        return new DistressEffect(this);
-    }
-
-}
-

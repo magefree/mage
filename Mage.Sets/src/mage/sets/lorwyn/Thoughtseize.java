@@ -28,21 +28,15 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
 /**
@@ -50,6 +44,12 @@ import mage.target.TargetPlayer;
  * @author jonubuu
  */
 public class Thoughtseize extends CardImpl<Thoughtseize> {
+
+    private static final FilterCard filter = new FilterCard("nonland card");
+
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+    }
 
     public Thoughtseize(UUID ownerId) {
         super(ownerId, 145, "Thoughtseize", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}");
@@ -59,7 +59,7 @@ public class Thoughtseize extends CardImpl<Thoughtseize> {
 
         // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.
         this.getSpellAbility().addTarget(new TargetPlayer(true));
-        this.getSpellAbility().addEffect(new ThoughtseizeEffect());
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
         this.getSpellAbility().addEffect(new LoseLifeSourceEffect(2));
     }
 
@@ -73,45 +73,3 @@ public class Thoughtseize extends CardImpl<Thoughtseize> {
     }
 }
 
-class ThoughtseizeEffect extends OneShotEffect<ThoughtseizeEffect> {
-
-    private static final FilterCard filter = new FilterCard("nonland card");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-    }
-
-    public ThoughtseizeEffect() {
-        super(Outcome.Discard);
-        staticText = "Target player reveals his or her hand. You choose a nonland card from it. That player discards that card";
-    }
-
-    public ThoughtseizeEffect(final ThoughtseizeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Thoughtseize", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.HAND, filter);
-                target.setRequired(true);
-                if (target.canChoose(source.getControllerId(), player.getId(), game) && you.chooseTarget(outcome, player.getHand(), target, source, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ThoughtseizeEffect copy() {
-        return new ThoughtseizeEffect(this);
-    }
-}

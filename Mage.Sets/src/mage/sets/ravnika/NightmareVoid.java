@@ -29,18 +29,11 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.keyword.DredgeAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
 /**
@@ -56,8 +49,8 @@ public class NightmareVoid extends CardImpl<NightmareVoid> {
         this.color.setBlack(true);
 
         // Target player reveals his or her hand. You choose a card from it. That player discards that card.
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new NightmareVoidEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY));
         // Dredge 2
         this.addAbility(new DredgeAbility(2));
     }
@@ -69,41 +62,5 @@ public class NightmareVoid extends CardImpl<NightmareVoid> {
     @Override
     public NightmareVoid copy() {
         return new NightmareVoid(this);
-    }
-}
-
-class NightmareVoidEffect extends OneShotEffect<NightmareVoidEffect> {
-
-    public NightmareVoidEffect() {
-        super(Outcome.Discard);
-        staticText = "Target player reveals his or her hand. You choose a card from it. That player discards that card";
-    }
-
-    public NightmareVoidEffect(final NightmareVoidEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Nightmare Void", player.getHand(), game);
-
-            Player you = game.getPlayer(source.getControllerId());
-            TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
-            target.setRequired(true);
-            if (you != null && you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                Card card = player.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    return player.discard(card, source, game);
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public NightmareVoidEffect copy() {
-        return new NightmareVoidEffect(this);
     }
 }

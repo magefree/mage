@@ -29,7 +29,7 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -57,7 +57,7 @@ public class Duress extends CardImpl<Duress> {
 
         // Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetOpponentEffect(filter));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
     }
 
     public Duress(final Duress card) {

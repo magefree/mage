@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -41,33 +42,44 @@ import mage.target.TargetCard;
  *
  * @author noxx
  */
-public class DiscardCardYouChooseTargetOpponentEffect extends OneShotEffect<DiscardCardYouChooseTargetOpponentEffect> {
+public class DiscardCardYouChooseTargetEffect extends OneShotEffect<DiscardCardYouChooseTargetEffect> {
 
     private FilterCard filter;
+    private TargetController targetController;
 
-    public DiscardCardYouChooseTargetOpponentEffect() {
+    public DiscardCardYouChooseTargetEffect() {
         this(new FilterCard("a card"));
     }
 
-    public DiscardCardYouChooseTargetOpponentEffect(FilterCard filter) {
-        super(Outcome.Discard);
-        staticText = new StringBuilder("Target opponent reveals his or her hand. You choose ")
-                .append(filter.getMessage()).append(" from it. That player discards that card").toString();
-        this.filter = filter;
+    public DiscardCardYouChooseTargetEffect(TargetController targetController) {
+        this(new FilterCard("a card"), targetController);
     }
 
-    public DiscardCardYouChooseTargetOpponentEffect(final DiscardCardYouChooseTargetOpponentEffect effect) {
+    public DiscardCardYouChooseTargetEffect(FilterCard filter) {
+        this(filter, TargetController.OPPONENT);
+    }
+
+    public DiscardCardYouChooseTargetEffect(FilterCard filter, TargetController targetController) {
+        super(Outcome.Discard);
+        this.targetController = targetController;
+        this.filter = filter;
+        staticText = this.setText();
+    }
+
+    public DiscardCardYouChooseTargetEffect(final DiscardCardYouChooseTargetEffect effect) {
         super(effect);
         this.filter = effect.filter;
+        this.targetController = effect.targetController;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Discard", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
+        Player you = game.getPlayer(source.getControllerId());
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (player != null && you != null) {
+            player.revealCards(sourceCard != null ? sourceCard.getName() :"Discard", player.getHand(), game);
+            if (player.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
                 TargetCard target = new TargetCard(Zone.PICK, filter);
                                 target.setRequired(true);
                 if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
@@ -77,13 +89,30 @@ public class DiscardCardYouChooseTargetOpponentEffect extends OneShotEffect<Disc
                     }
                 }
             }
+            return true;
         }
         return false;
     }
 
     @Override
-    public DiscardCardYouChooseTargetOpponentEffect copy() {
-        return new DiscardCardYouChooseTargetOpponentEffect(this);
+    public DiscardCardYouChooseTargetEffect copy() {
+        return new DiscardCardYouChooseTargetEffect(this);
     }
 
+    private String setText() {
+        StringBuilder sb = new StringBuilder("Target ");
+        switch(targetController) {
+            case OPPONENT:
+                sb.append("Opponent");
+                break;
+            case ANY:
+                sb.append("Player");
+                break;
+            default:
+                throw new UnsupportedOperationException("target controller not supported");
+        }
+        sb.append(" reveals his or her hand. You choose ")
+                .append(filter.getMessage()).append(" from it. That player discards that card").toString();
+        return sb.toString();
+    }
 }

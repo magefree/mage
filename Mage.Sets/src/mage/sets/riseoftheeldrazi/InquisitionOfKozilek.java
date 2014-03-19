@@ -35,8 +35,10 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -53,12 +55,19 @@ import mage.target.TargetPlayer;
  */
 public class InquisitionOfKozilek extends CardImpl<InquisitionOfKozilek> {
 
+    private static final FilterCard filter = new FilterCard("nonland card with converted mana cost 3 or less");
+
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
+    }
+
     public InquisitionOfKozilek(UUID ownerId){
         super(ownerId, 115, "Inquisition of Kozilek", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY},"{B}");
         this.expansionSetCode = "ROE";
         this.color.setBlack(true);
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new InquisitionOfKozilekEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }
 
     public InquisitionOfKozilek(final InquisitionOfKozilek card) {
@@ -69,48 +78,4 @@ public class InquisitionOfKozilek extends CardImpl<InquisitionOfKozilek> {
     public InquisitionOfKozilek copy() {
         return new InquisitionOfKozilek(this);
     }
-}
-
-class InquisitionOfKozilekEffect extends OneShotEffect<InquisitionOfKozilekEffect> {
-
-    private static final FilterCard filter = new FilterCard("nonland card with converted mana cost 3 or less");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
-    }
-
-    public InquisitionOfKozilekEffect() {
-        super(Outcome.Discard);
-        staticText = "Target player reveals his or her hand. You choose a nonland card from it with converted mana cost 3 or less. That player discards that card";
-    }
-
-    public InquisitionOfKozilekEffect(final InquisitionOfKozilekEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Inquisition of Kozilek", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.PICK, filter);
-                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public InquisitionOfKozilekEffect copy() {
-        return new InquisitionOfKozilekEffect(this);
-    }
-
 }

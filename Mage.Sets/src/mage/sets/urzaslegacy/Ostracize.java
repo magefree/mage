@@ -28,7 +28,7 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -49,7 +49,7 @@ public class Ostracize extends CardImpl<Ostracize> {
 
         // Target opponent reveals his or her hand. You choose a creature card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetOpponentEffect(new FilterCreatureCard("a creature card")));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(new FilterCreatureCard("a creature card")));
     }
 
     public Ostracize(final Ostracize card) {

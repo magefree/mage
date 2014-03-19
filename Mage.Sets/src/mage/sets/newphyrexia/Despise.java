@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
@@ -67,7 +67,7 @@ public class Despise extends CardImpl<Despise> {
 
         // Target opponent reveals his or her hand. You choose a creature or planeswalker card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetOpponentEffect(filter));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
     }
 
     public Despise(final Despise card) {

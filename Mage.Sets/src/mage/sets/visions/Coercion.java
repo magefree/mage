@@ -28,7 +28,7 @@
 package mage.sets.visions;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -48,7 +48,7 @@ public class Coercion extends CardImpl<Coercion> {
 
         // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetOpponentEffect());
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
     }
 
     public Coercion(final Coercion card) {

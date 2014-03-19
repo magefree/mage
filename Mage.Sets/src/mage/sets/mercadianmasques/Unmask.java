@@ -33,11 +33,13 @@ import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -56,8 +58,10 @@ import mage.target.common.TargetCardInHand;
 public class Unmask extends CardImpl<Unmask> {
 
     private static final FilterCard filter = new FilterCard("a black card from your hand");
-    
+    private static final FilterCard filterNonLand = new FilterCard("nonland card");
+
     static {
+        filterNonLand.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
     
@@ -72,7 +76,7 @@ public class Unmask extends CardImpl<Unmask> {
         
         // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer(true));
-        this.getSpellAbility().addEffect(new UnmaskEffect());        
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filterNonLand, TargetController.ANY));
     }
 
     public Unmask(final Unmask card) {
@@ -83,49 +87,4 @@ public class Unmask extends CardImpl<Unmask> {
     public Unmask copy() {
         return new Unmask(this);
     }
-}
-
-class UnmaskEffect extends OneShotEffect<UnmaskEffect> {
-
-    private static final FilterCard filter = new FilterCard("nonland card");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-    }
-
-    public UnmaskEffect() {
-        super(Outcome.Discard);
-        staticText = "Target player reveals his or her hand. You choose a nonland card from it. That player discards that card";
-    }
-
-    public UnmaskEffect(final UnmaskEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Unmask", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.PICK, filter);
-                target.setRequired(true);
-                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public UnmaskEffect copy() {
-        return new UnmaskEffect(this);
-    }
-
 }

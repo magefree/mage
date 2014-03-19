@@ -29,7 +29,7 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -49,7 +49,7 @@ public class Brainbite extends CardImpl<Brainbite> {
         this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetOpponentEffect());
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetOpponent());
