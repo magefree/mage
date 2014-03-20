@@ -47,6 +47,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
@@ -68,7 +69,9 @@ public class NezumiGraverobber extends CardImpl<NezumiGraverobber> {
 
         // {1}{B}: Exile target card from an opponent's graveyard. If no cards are in that graveyard, flip Nezumi Graverobber.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{B}"));
-        ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
+        Target target = new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard"));
+        target.setRequired(true);
+        ability.addTarget(target);
         ability.addEffect(new NezumiGraverobberFlipEffect());
         this.addAbility(ability);
     }
