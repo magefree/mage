@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -90,7 +89,7 @@ class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl<DealtDama
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
             if (event.getTargetId().equals(this.sourceId)) {
                 this.getEffects().clear();
-                this.addEffect(new LoseLifeControllerEffect(event.getAmount()));
+                this.addEffect(new LoseLifeSourceEffect(event.getAmount()));
                 return true;
             }
         }
