@@ -103,6 +103,7 @@ class RapidHybridizationToken extends Token {
 
     public RapidHybridizationToken() {
         super("Frog Lizard", "3/3 green Frog Lizard creature token onto the battlefield");
+        this.setOriginalExpansionSetCode("GTC");
         cardType.add(CardType.CREATURE);
         
         color = ObjectColor.GREEN;
