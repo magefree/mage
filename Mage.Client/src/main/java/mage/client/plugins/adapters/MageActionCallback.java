@@ -100,6 +100,8 @@ public class MageActionCallback implements ActionCallback {
     public void mousePressed(MouseEvent e, TransferData data) {
         data.component.requestFocusInWindow();
         defaultCallback.mouseClicked(e, data.gameId, session, data.card);
+        // Closes popup & enlarged view if a card/Permanent is selected
+        hidePopup();
     }
 
     @Override
