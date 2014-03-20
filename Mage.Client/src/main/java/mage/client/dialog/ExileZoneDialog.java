@@ -91,6 +91,7 @@ public class ExileZoneDialog extends MageDialog {
         cards = new mage.client.cards.Cards();
 
         setIconifiable(true);
+        setResizable(true);
 
         cards.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
 
