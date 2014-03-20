@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -58,9 +58,10 @@ public class VictoriousDestruction extends CardImpl<VictoriousDestruction> {
 
         this.color.setRed(true);
 
+        // Destroy target artifact or land. Its controller loses 1 life.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(1));
+        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(1));
     }
 
     public VictoriousDestruction(final VictoriousDestruction card) {

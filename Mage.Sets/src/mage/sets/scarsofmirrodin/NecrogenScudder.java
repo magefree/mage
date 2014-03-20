@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
@@ -50,7 +50,7 @@ public class NecrogenScudder extends CardImpl<NecrogenScudder> {
         this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceEffect(3)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(3)));
         this.addAbility(FlyingAbility.getInstance());
     }
 

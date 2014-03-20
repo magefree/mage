@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -46,10 +46,10 @@ public class GlissasScorn extends CardImpl<GlissasScorn> {
         this.expansionSetCode = "NPH";
 
         this.color.setGreen(true);
-
+        // Destroy target artifact. Its controller loses 1 life.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(1));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
+        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(1));
     }
 
     public GlissasScorn(final GlissasScorn card) {

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -55,7 +55,7 @@ public class FilthyCur extends CardImpl<FilthyCur> {
         this.toughness = new MageInt(2);
 
         // Whenever Filthy Cur is dealt damage, you lose that much life.
-        this.addAbility(new DealtDamageLoseLifeTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceEffect(0), false));
+        this.addAbility(new DealtDamageLoseLifeTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(0), false));
 
     }
 
@@ -89,7 +89,7 @@ class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl<DealtDama
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
             if (event.getTargetId().equals(this.sourceId)) {
                 this.getEffects().clear();
-                this.addEffect(new LoseLifeSourceEffect(event.getAmount()));
+                this.addEffect(new LoseLifeSourceControllerEffect(event.getAmount()));
                 return true;
             }
         }

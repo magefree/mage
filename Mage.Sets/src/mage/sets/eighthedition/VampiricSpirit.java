@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
@@ -54,7 +54,7 @@ public class VampiricSpirit extends CardImpl<VampiricSpirit> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Vampiric Spirit enters the battlefield, you lose 4 life.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceEffect(4)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(4)));
     }
 
     public VampiricSpirit(final VampiricSpirit card) {

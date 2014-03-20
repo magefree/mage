@@ -41,48 +41,52 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LoseLifePlayersEffect extends OneShotEffect<LoseLifePlayersEffect> {
+public class LoseLifeAllPlayersEffect extends OneShotEffect<LoseLifeAllPlayersEffect> {
 
-    private DynamicValue amount;
-    String text;
+    private final DynamicValue amount;
 
-    public LoseLifePlayersEffect(int amount) {
-        super(Outcome.Damage);
-        this.amount = new StaticValue(amount);
-        staticText = "each player loses " + amount + " life";
+    public LoseLifeAllPlayersEffect(int amount) {
+        this(new StaticValue(amount));
     }
     
-    public LoseLifePlayersEffect(DynamicValue amount) {
+    public LoseLifeAllPlayersEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
-        staticText = "each player loses " + amount + " life";
+        staticText = setText();
     }
     
-    public LoseLifePlayersEffect(DynamicValue amount, String text) {
+    public LoseLifeAllPlayersEffect(DynamicValue amount, String text) {
         super(Outcome.Damage);
         this.amount = amount;
         staticText = text;
     }
 
-    public LoseLifePlayersEffect(final LoseLifePlayersEffect effect) {
+    public LoseLifeAllPlayersEffect(final LoseLifeAllPlayersEffect effect) {
         super(effect);
         this.amount = effect.amount;
-        this.text = effect.text;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
             Player player = game.getPlayer(playerId);
-            if (player != null)
+            if (player != null) {
                 player.loseLife(amount.calculate(game, source), game);
+            }
         }
         return true;
     }
 
     @Override
-    public LoseLifePlayersEffect copy() {
-        return new LoseLifePlayersEffect(this);
+    public LoseLifeAllPlayersEffect copy() {
+        return new LoseLifeAllPlayersEffect(this);
+    }
+    
+    private String setText() {
+        StringBuilder sb = new StringBuilder("each player loses ");
+        sb.append(amount);
+        sb.append(" life");
+        return sb.toString();
     }
 
 }

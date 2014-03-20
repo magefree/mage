@@ -107,10 +107,7 @@ class PlayerLosesTheGameTriggeredAbility extends TriggeredAbilityImpl<PlayerLose
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.LOSES) {
-            return true;
-        }
-        return false;
+        return event.getType() == EventType.LOSES;
     }
 
     @Override
@@ -138,16 +135,22 @@ class BloodTyrantEffect extends OneShotEffect<BloodTyrantEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         int counters = 0;
-        for (Player player : game.getPlayers().values()) {
-            if (player != null) {
-                player.loseLife(1, game);
-                counters++;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : controller.getInRange()) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    if (player.loseLife(1, game) > 0) {
+                        counters++;
+                    }
+                }
             }
+            Permanent bloodTyrant = game.getPermanent(source.getSourceId());
+            if (bloodTyrant != null && counters > 0) {
+                bloodTyrant.addCounters(CounterType.P1P1.createInstance(counters), game);
+            }
+            return true;
         }
-        Permanent bloodTyrant = game.getPermanent(source.getSourceId());
-        if (bloodTyrant != null && counters != 0) {
-            bloodTyrant.addCounters(CounterType.P1P1.createInstance(counters), game);
-        }
-        return true;
+        return false;
     }
 }

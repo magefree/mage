@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.BestowAbility;
@@ -67,7 +67,7 @@ public class HeraldOfTorment extends CardImpl<HeraldOfTorment> {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, you lose 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false));
 
         // Enchanted creature gets +3/+3 and has flying.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3));

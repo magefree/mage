@@ -42,24 +42,24 @@ import mage.players.Player;
  *
  * @author North
  */
-public class LoseLifeControllerEffect extends OneShotEffect<LoseLifeControllerEffect> {
+public class LoseLifeTargetControllerEffect extends OneShotEffect<LoseLifeTargetControllerEffect> {
 
     protected int amount;
 
-    public LoseLifeControllerEffect(int amount) {
+    public LoseLifeTargetControllerEffect(int amount) {
         super(Outcome.Damage);
         this.amount = amount;
         staticText = "Its controller loses " + amount + " life";
     }
 
-    public LoseLifeControllerEffect(final LoseLifeControllerEffect effect) {
+    public LoseLifeTargetControllerEffect(final LoseLifeTargetControllerEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
 
     @Override
-    public LoseLifeControllerEffect copy() {
-        return new LoseLifeControllerEffect(this);
+    public LoseLifeTargetControllerEffect copy() {
+        return new LoseLifeTargetControllerEffect(this);
     }
 
     @Override

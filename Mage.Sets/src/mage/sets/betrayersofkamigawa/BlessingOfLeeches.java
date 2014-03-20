@@ -36,7 +36,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.RegenerateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlashAbility;
@@ -65,7 +65,7 @@ public class BlessingOfLeeches extends CardImpl<BlessingOfLeeches> {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you lose 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false));
 
         // {0}: Regenerate enchanted creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA),new GenericManaCost(0)));

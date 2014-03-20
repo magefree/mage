@@ -33,7 +33,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -71,7 +71,7 @@ public class PilloryOfTheSleepless extends CardImpl<PilloryOfTheSleepless> {
 	
         // Enchanted creature has "At the beginning of your upkeep, you lose 1 life."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(
-                new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceEffect(1), TargetController.YOU, false), AttachmentType.AURA)));
+                new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false), AttachmentType.AURA)));
     }
 
     public PilloryOfTheSleepless(final PilloryOfTheSleepless card) {

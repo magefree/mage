@@ -31,16 +31,10 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -57,7 +51,7 @@ public class ClutchOfTheUndercity extends CardImpl<ClutchOfTheUndercity> {
 
         // Return target permanent to its owner's hand. Its controller loses 3 life.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addEffect(new ClutchOfTheUndercityEffect());
+        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(3));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Transmute {1}{U}{B}
         this.addAbility(new TransmuteAbility("{1}{U}{B}"));
@@ -70,34 +64,5 @@ public class ClutchOfTheUndercity extends CardImpl<ClutchOfTheUndercity> {
     @Override
     public ClutchOfTheUndercity copy() {
         return new ClutchOfTheUndercity(this);
-    }
-}
-
-class ClutchOfTheUndercityEffect extends OneShotEffect<ClutchOfTheUndercityEffect> {
-    ClutchOfTheUndercityEffect() {
-        super(Outcome.Damage);
-        staticText = "Its controller loses 3 life";
-    }
-
-    ClutchOfTheUndercityEffect(final ClutchOfTheUndercityEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent p = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
-        if (p != null) {
-            Player player = game.getPlayer(p.getControllerId());
-            if (player != null) {
-                player.loseLife(3, game);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ClutchOfTheUndercityEffect copy() {
-        return new ClutchOfTheUndercityEffect(this);
     }
 }

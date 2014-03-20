@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.LoseLifePlayersEffect;
+import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -50,7 +50,7 @@ public class CausticHound extends CardImpl<CausticHound> {
         this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addAbility(new DiesTriggeredAbility(new LoseLifePlayersEffect(4)));
+        this.addAbility(new DiesTriggeredAbility(new LoseLifeAllPlayersEffect(4)));
     }
 
     public CausticHound (final CausticHound card) {

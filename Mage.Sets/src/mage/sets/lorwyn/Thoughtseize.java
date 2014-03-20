@@ -28,7 +28,7 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -60,7 +60,7 @@ public class Thoughtseize extends CardImpl<Thoughtseize> {
         // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.
         this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
-        this.getSpellAbility().addEffect(new LoseLifeSourceEffect(2));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
     public Thoughtseize(final Thoughtseize card) {

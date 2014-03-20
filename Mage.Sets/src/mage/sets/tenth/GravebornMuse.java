@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
@@ -65,7 +65,7 @@ public class GravebornMuse extends CardImpl<GravebornMuse> {
 
         // At the beginning of your upkeep, you draw X cards and you lose X life, where X is the number of Zombies you control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardControllerEffect(new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false);
-        ability.addEffect(new LoseLifeSourceEffect(new PermanentsOnBattlefieldCount(filter)));
+        ability.addEffect(new LoseLifeSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));
         this.addAbility(ability);
     }
 

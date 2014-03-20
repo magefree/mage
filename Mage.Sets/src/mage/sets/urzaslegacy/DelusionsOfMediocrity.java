@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -49,7 +49,7 @@ public class DelusionsOfMediocrity extends CardImpl<DelusionsOfMediocrity> {
         //When Delusions of Mediocrity enters the battlefield, you gain 10 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(10), false));
         //When Delusions of Mediocrity leaves the battlefield, you lose 10 life.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new LoseLifeSourceEffect(10), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(10), false));
     }
 
     public DelusionsOfMediocrity(final DelusionsOfMediocrity card) {

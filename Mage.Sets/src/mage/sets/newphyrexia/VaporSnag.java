@@ -32,7 +32,7 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,9 +47,11 @@ public class VaporSnag extends CardImpl<VaporSnag> {
         super(ownerId, 48, "Vapor Snag", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "NPH";
         this.color.setBlue(true);
+        
+        // Return target creature to its owner's hand. Its controller loses 1 life.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public VaporSnag (final VaporSnag card) {

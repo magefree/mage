@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -52,7 +52,7 @@ public class PhyrexianRager extends CardImpl<PhyrexianRager> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false);
-        ability.addEffect(new LoseLifeSourceEffect(1));
+        ability.addEffect(new LoseLifeSourceControllerEffect(1));
         this.addAbility(ability);
     }
 

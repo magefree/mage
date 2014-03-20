@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.LoseLifePlayersEffect;
+import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
@@ -52,7 +52,7 @@ public class HowlingBanshee extends CardImpl<HowlingBanshee> {
         this.toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifePlayersEffect(3), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeAllPlayersEffect(3), false));
     }
 
     public HowlingBanshee(final HowlingBanshee card) {

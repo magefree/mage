@@ -27,29 +27,27 @@
  */
 package mage.sets.magic2012;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DiscardEachPlayerEffect;
+import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
+import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
  * @author nantuko
  */
 public class Smallpox extends CardImpl<Smallpox> {
-
+    
+    private static final FilterControlledPermanent filterCreature = new FilterControlledCreaturePermanent();
+    private static final FilterControlledPermanent filterLand = new FilterControlledLandPermanent();
+    
     public Smallpox(UUID ownerId) {
         super(ownerId, 108, "Smallpox", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
         this.expansionSetCode = "M12";
@@ -57,7 +55,16 @@ public class Smallpox extends CardImpl<Smallpox> {
         this.color.setBlack(true);
 
         // Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land.
-        this.getSpellAbility().addEffect(new SmallpoxEffect());
+        this.getSpellAbility().addEffect(new LoseLifeAllPlayersEffect(1));
+        Effect effect = new DiscardEachPlayerEffect();
+        effect.setText(", discards a card");
+        this.getSpellAbility().addEffect(effect);
+        effect = new SacrificeAllEffect(1, filterCreature);
+        effect.setText(", sacrifices a creature");
+        this.getSpellAbility().addEffect(effect);
+        effect = new SacrificeAllEffect(1, filterLand);
+        effect.setText(", then sacrifices a land");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public Smallpox(final Smallpox card) {
@@ -68,76 +75,4 @@ public class Smallpox extends CardImpl<Smallpox> {
     public Smallpox copy() {
         return new Smallpox(this);
     }
-}
-
-class SmallpoxEffect extends OneShotEffect<SmallpoxEffect> {
-
-    private static final FilterPermanent filterCreature = new FilterControlledCreaturePermanent();
-    private static final FilterPermanent filterLand = new FilterControlledLandPermanent();
-
-    SmallpoxEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land";
-    }
-
-    SmallpoxEffect(final SmallpoxEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Set <UUID> players = controller.getInRange();
-            for (UUID playerId : players) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    player.loseLife(1, game);
-                }
-            }
-            for (UUID playerId : players) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    player.discard(1, source, game);
-                }
-            }
-            for (UUID playerId : players) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    sacrifice(game, source, player, filterCreature);
-                }
-            }
-            for (UUID playerId : players) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    sacrifice(game, source, player, filterLand);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public SmallpoxEffect copy() {
-        return new SmallpoxEffect(this);
-    }
-
-    private void sacrifice(Game game, Ability source, Player player, FilterPermanent filter) {
-        Target target = new TargetControlledPermanent(1, 1, filter, false);
-        if (target.canChoose(player.getId(), game)) {
-            while (!target.isChosen() && target.canChoose(player.getId(), game) && player.isInGame()) {
-                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-            }
-
-            for ( int idx = 0; idx < target.getTargets().size(); idx++) {
-                Permanent permanent = game.getPermanent((UUID)target.getTargets().get(idx));
-
-                if ( permanent != null ) {
-                    permanent.sacrifice(source.getSourceId(), game);
-                }
-            }
-        }
-    }
-
 }

@@ -53,6 +53,7 @@ import mage.game.Game;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> extends EffectImpl<T> implements ContinuousEffect<T> {
 
@@ -63,8 +64,8 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
     protected boolean used = false;
     protected boolean discarded = false; // for manual effect discard
     protected boolean affectedObjectsSet = false;
-    protected List<UUID> objects = new ArrayList<UUID>();
-    protected Map<UUID, Integer> metadata = new HashMap<UUID, Integer>();
+    protected List<UUID> objects = new ArrayList<>();
+    protected Map<UUID, Integer> metadata = new HashMap<>();
 
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);

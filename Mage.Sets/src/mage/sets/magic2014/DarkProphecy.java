@@ -31,8 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -59,7 +58,7 @@ public class DarkProphecy extends CardImpl<DarkProphecy> {
 
         // Whenever a creature you control dies, you draw a card and lose 1 life.
         Ability ability = new DiesCreatureTriggeredAbility(new DrawCardControllerEffect(1), false, filter);
-        ability.addEffect(new LoseLifeSourceEffect(1));
+        ability.addEffect(new LoseLifeSourceControllerEffect(1));
         this.addAbility(ability);
     }
 

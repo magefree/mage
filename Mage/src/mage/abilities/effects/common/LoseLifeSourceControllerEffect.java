@@ -40,28 +40,28 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LoseLifeSourceEffect extends OneShotEffect<LoseLifeSourceEffect> {
+public class LoseLifeSourceControllerEffect extends OneShotEffect<LoseLifeSourceControllerEffect> {
 
     protected DynamicValue amount;
 
-    public LoseLifeSourceEffect(int amount) {
+    public LoseLifeSourceControllerEffect(int amount) {
         this(new StaticValue(amount));
     }
 
-    public LoseLifeSourceEffect(DynamicValue amount) {
+    public LoseLifeSourceControllerEffect(DynamicValue amount) {
         super(Outcome.LoseLife);
         this.amount = amount;
         setText();
     }
 
-    public LoseLifeSourceEffect(final LoseLifeSourceEffect effect) {
+    public LoseLifeSourceControllerEffect(final LoseLifeSourceControllerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }
 
     @Override
-    public LoseLifeSourceEffect copy() {
-        return new LoseLifeSourceEffect(this);
+    public LoseLifeSourceControllerEffect copy() {
+        return new LoseLifeSourceControllerEffect(this);
     }
 
     @Override

@@ -28,7 +28,7 @@
 package mage.sets.visions;
 
 import java.util.UUID;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -49,7 +49,7 @@ public class VampiricTutor extends CardImpl<VampiricTutor> {
 
         // Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
         this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary()));
-        this.getSpellAbility().addEffect(new LoseLifeSourceEffect(2));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
     public VampiricTutor(final VampiricTutor card) {

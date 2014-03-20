@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.LoseLifePlayersEffect;
+import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -51,7 +51,7 @@ public class DeathcurseOgre extends CardImpl<DeathcurseOgre> {
         this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new DiesTriggeredAbility(new LoseLifePlayersEffect(3)));
+        this.addAbility(new DiesTriggeredAbility(new LoseLifeAllPlayersEffect(3)));
     }
 
     public DeathcurseOgre (final DeathcurseOgre card) {

@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -57,7 +57,7 @@ public class RecklessSpite extends CardImpl<RecklessSpite> {
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, filter, false));
-        this.getSpellAbility().addEffect(new LoseLifeSourceEffect(5));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(5));
     }
 
     public RecklessSpite(final RecklessSpite card) {

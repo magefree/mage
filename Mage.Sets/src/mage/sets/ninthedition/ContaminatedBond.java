@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
@@ -62,7 +62,7 @@ public class ContaminatedBond extends CardImpl<ContaminatedBond> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Whenever enchanted creature attacks or blocks, its controller loses 3 life.
-        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceEffect(3)));
+        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(3)));
     }
 
     public ContaminatedBond(final ContaminatedBond card) {

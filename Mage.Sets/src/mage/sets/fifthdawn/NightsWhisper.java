@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -48,7 +48,7 @@ public class NightsWhisper extends CardImpl<NightsWhisper> {
 
         // You draw two cards and you lose 2 life.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
-        this.getSpellAbility().addEffect(new LoseLifeSourceEffect(2));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
     public NightsWhisper(final NightsWhisper card) {

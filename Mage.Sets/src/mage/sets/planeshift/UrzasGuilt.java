@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DiscardEachPlayerEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
-import mage.abilities.effects.common.LoseLifeAllEffect;
+import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -54,7 +54,7 @@ public class UrzasGuilt extends CardImpl<UrzasGuilt> {
         Effect effect = new DiscardEachPlayerEffect(3, false);
         effect.setText("then discards three cards");
         this.getSpellAbility().addEffect(effect);
-        effect = new LoseLifeAllEffect(4);
+        effect = new LoseLifeAllPlayersEffect(4);
         effect.setText("then loses 4 life");
         this.getSpellAbility().addEffect(effect);
     }

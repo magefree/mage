@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
@@ -53,7 +53,7 @@ public class Bitterblossom extends CardImpl<Bitterblossom> {
         this.supertype.add("Tribal");
         this.subtype.add("Faerie");
         this.color.setBlack(true);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceEffect(1), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false);
         ability.addEffect(new CreateTokenEffect(new FaerieToken(), 1));
         this.addAbility(ability);
     }

@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,7 +54,7 @@ public class LaunchParty extends CardImpl<LaunchParty> {
         // Destroy target creature. Its controller loses 2 life.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(2));
+        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));
     }
 
     public LaunchParty(final LaunchParty card) {

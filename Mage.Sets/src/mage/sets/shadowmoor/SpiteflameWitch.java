@@ -34,7 +34,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.LoseLifePlayersEffect;
+import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -54,7 +54,7 @@ public class SpiteflameWitch extends CardImpl<SpiteflameWitch> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifePlayersEffect(1), new ManaCostsImpl("{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(1), new ManaCostsImpl("{B}{R}")));
     }
 
     public SpiteflameWitch(final SpiteflameWitch card) {

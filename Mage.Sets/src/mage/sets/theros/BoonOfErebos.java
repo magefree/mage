@@ -28,7 +28,7 @@
 package mage.sets.theros;
 
 import java.util.UUID;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -53,7 +53,7 @@ public class BoonOfErebos extends CardImpl<BoonOfErebos> {
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,0, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
-        this.getSpellAbility().addEffect(new LoseLifeSourceEffect(2));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
     public BoonOfErebos(final BoonOfErebos card) {

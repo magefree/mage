@@ -31,7 +31,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.LoseLifePlayersEffect;
+import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
@@ -51,7 +51,7 @@ public class SoulcageFiend extends CardImpl<SoulcageFiend> {
         this.toughness = new MageInt(2);
 
         // When Soulcage Fiend dies, each player loses 3 life.
-        this.addAbility(new DiesTriggeredAbility(new LoseLifePlayersEffect(3)));
+        this.addAbility(new DiesTriggeredAbility(new LoseLifeAllPlayersEffect(3)));
     }
 
     public SoulcageFiend(final SoulcageFiend card) {

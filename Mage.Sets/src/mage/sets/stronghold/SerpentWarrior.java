@@ -30,7 +30,7 @@ package mage.sets.stronghold;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -52,7 +52,7 @@ public class SerpentWarrior extends CardImpl<SerpentWarrior> {
         this.toughness = new MageInt(3);
 
         // When Serpent Warrior enters the battlefield, you lose 3 life.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceEffect(3)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(3)));
     }
 
     public SerpentWarrior(final SerpentWarrior card) {

@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -57,9 +57,10 @@ public class HideousEnd extends CardImpl<HideousEnd> {
 
         this.color.setBlack(true);
 
+        // Destroy target nonblack creature. Its controller loses 2 life.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(2));
+        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));
     }
 
     public HideousEnd(final HideousEnd card) {

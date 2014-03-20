@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -53,7 +53,7 @@ public class UnholyFiend extends CardImpl<UnholyFiend> {
 
         this.nightCard = true;
 
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new LoseLifeSourceEffect(1), false));
+        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new LoseLifeSourceControllerEffect(1), false));
     }
 
     public UnholyFiend(final UnholyFiend card) {

@@ -30,7 +30,7 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -53,7 +53,7 @@ public class Reanimate extends CardImpl<Reanimate> {
         // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());  
-        Effect effect = new LoseLifeSourceEffect(new TargetConvertedManaCost());
+        Effect effect = new LoseLifeSourceControllerEffect(new TargetConvertedManaCost());
         effect.setText("You lose life equal to its converted mana cost");
         this.getSpellAbility().addEffect(effect);  
     }

@@ -728,5 +728,5 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private HoverButton commandZone;
     private HoverButton enchantPlayerViewZone;
 
-    private Map<String, JLabel> manaLabels = new HashMap<String, JLabel>();
+    private final Map<String, JLabel> manaLabels = new HashMap<>();
 }

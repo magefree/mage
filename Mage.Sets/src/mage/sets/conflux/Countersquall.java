@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -57,9 +57,10 @@ public class Countersquall extends CardImpl<Countersquall> {
         this.color.setBlue(true);
         this.color.setBlack(true);
 
+        // Counter target noncreature spell. Its controller loses 2 life.
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(2));
+        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));
     }
 
     public Countersquall(final Countersquall card) {

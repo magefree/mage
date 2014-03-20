@@ -28,11 +28,12 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.target.TargetSpell;
@@ -51,10 +52,13 @@ public class PunishIgnorance extends CardImpl<PunishIgnorance> {
         this.color.setBlue(true);
         this.color.setBlack(true);
 
+        // Counter target spell. Its controller loses 3 life and you gain 3 life.
         this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell()));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(3));
-        this.getSpellAbility().addEffect(new GainLifeEffect(3));
+        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(3));
+        Effect effect = new GainLifeEffect(3);
+        effect.setText("and you gain 3 life");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public PunishIgnorance(final PunishIgnorance card) {

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
-import mage.abilities.effects.common.LoseLifePlayersEffect;
+import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -55,7 +55,7 @@ public class BloodTollHarpy extends CardImpl<BloodTollHarpy> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Blood-Toll Harpy enters the battlefield, each player loses 1 life.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifePlayersEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeAllPlayersEffect(1)));
     }
 
     public BloodTollHarpy(final BloodTollHarpy card) {

@@ -38,7 +38,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.LoseLifePlayersEffect;
+import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
@@ -70,7 +70,7 @@ public class RathiFiend extends CardImpl<RathiFiend> {
 		this.toughness = new MageInt(2);
 	
 		// When Rathi Fiend enters the battlefield, each player loses 3 life.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifePlayersEffect(3), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeAllPlayersEffect(3), false));
 		// {3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
 		ability.addManaCost(new GenericManaCost(3));

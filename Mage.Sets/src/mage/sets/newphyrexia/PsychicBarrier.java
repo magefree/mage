@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,10 +54,10 @@ public class PsychicBarrier extends CardImpl<PsychicBarrier> {
         this.expansionSetCode = "NPH";
 
         this.color.setBlue(true);
-
+        // Counter target creature spell. Its controller loses 1 life.
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(1));
+        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(1));
     }
 
     public PsychicBarrier(final PsychicBarrier card) {
