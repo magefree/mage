@@ -58,7 +58,11 @@ public class ConstructedFormats {
             "Duel Decks: Divine vs. Demonic",
             "Duel Decks: Garruk vs. Liliana",
             "Duel Decks: Elspeth vs. Tezzeret",
-            "Duel Decks: Heroes vs. Monsters"
+            "Duel Decks: Knights vs. Dragons",
+            "Duel Decks: Ajani vs. Nicol Bolas",
+            "Duel Decks: Venser vs. Koth",
+            "Duel Decks: Heroes vs. Monsters",
+            "Duel Decks: Jace vs. Vraska"
     };
     
     private ConstructedFormats() {
@@ -409,10 +413,24 @@ public class ConstructedFormats {
         if (format.equals("Duel Decks: Elspeth vs. Tezzeret")) {
             return Arrays.asList("DDF");
         }
+        if (format.equals("Duel Decks: Knights vs. Dragons")) {
+            return Arrays.asList("DDG");
+        }
+        if (format.equals("Duel Decks: Ajani vs. Nicol Bolas")) {
+            return Arrays.asList("DDH");
+        }
+        if (format.equals("Duel Decks: Venser vs. Koth")) {
+            return Arrays.asList("DDI");
+        }
         if (format.equals("Duel Decks: Heroes vs. Monsters")) {
             return Arrays.asList("DDL");
         }
-        
+        if (format.equals("Duel Decks: Jace vs. Vraska")) {
+            return Arrays.asList("DDM");
+        }
+
+
+
         if (format.equals(STANDARD)) {
             return standard;
         }

@@ -30,13 +30,17 @@ Dissension|DIS|
 Deckmasters|DKM|
 Dragon's Maze|DGM|
 The Dark|DRK|
+Duel Decks: Ajani vs. Nicol Bolas|DDH|
+Duel Decks: Elves vs. Goblins|EVG|
 Duel Decks: Divine vs. Demonic|DDC|
 Duel Decks: Elspeth vs. Tezzeret|DDF|
-Duel Decks: Elves vs. Goblins|EVG|
 Duel Decks: Garruk vs. Liliana|DDD|
-Duel Decks: Jace vs. Chandra|DD2|
-Duel Decks: Phyrexia vs. the Coalition|DDE|
 Duel Decks: Heroes vs. Monsters|DDL|
+Duel Decks: Jace vs. Chandra|DD2|
+Duel Decks: Jace vs. Vraska|DDM|
+Duel Decks: Knights vs. Dragons|DDG|
+Duel Decks: Phyrexia vs. the Coalition|DDE|
+Duel Decks: Venser vs. Koth|DDI|
 Eventide|EVE|
 Exodus|EXO|
 Fallen Empires|FEM|

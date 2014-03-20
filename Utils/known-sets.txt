@@ -16,6 +16,10 @@ Magic 2013|magic2013|
 Magic 2014|magic2014|
 Planechase|planechase|
 Planechase 2012 Edition|planechase2012|
+Duel Decks: Knights vs. Dragons|knightsvsdragons|
+Duel Decks: Ajani vs. Nicol Bolas|ajanivsnicolbolas|
+Duel Decks: Venser vs. Koth|venservskoth|
+Duel Decks: Jace vs. Vraska|jacevsvraska|
 Duel Decks: Heroes vs. Monsters|heroesvsmonsters|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
 Duel Decks: Elves vs. Goblins|elvesvsgoblins|
