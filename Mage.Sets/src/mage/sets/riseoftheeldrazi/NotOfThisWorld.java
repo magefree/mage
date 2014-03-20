@@ -89,11 +89,12 @@ public class NotOfThisWorld extends CardImpl<NotOfThisWorld> {
 
 class TargetSpellTargetingControlledPermanent extends TargetObject<TargetSpellTargetingControlledPermanent> {
 
+    
     public TargetSpellTargetingControlledPermanent() {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
         this.zone = Zone.STACK;
-        this.targetName = filter.getMessage();
+        this.targetName = "spell or ability that targets a permanent you control";
     }
 
     public TargetSpellTargetingControlledPermanent(final TargetSpellTargetingControlledPermanent target) {
