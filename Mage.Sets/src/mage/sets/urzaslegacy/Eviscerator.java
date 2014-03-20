@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
@@ -63,7 +63,7 @@ public class Eviscerator extends CardImpl<Eviscerator> {
         // Protection from white
         this.addAbility(new ProtectionAbility(filter));
         // When Eviscerator enters the battlefield, you lose 5 life.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeControllerEffect(5)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceEffect(5)));
     }
 
     public Eviscerator(final Eviscerator card) {
