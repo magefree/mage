@@ -109,23 +109,22 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl<MasterOfCru
             Permanent sourcePermanent = game.getPermanent(getSourceId());
             if (sourcePermanent.isAttacking()) {
                 for (CombatGroup combatGroup: game.getCombat().getGroups()) {
-                    if (combatGroup.getBlockers().isEmpty()) {
+                    if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
+                        // check if a player is attacked (instead of a planeswalker)
                         Player defendingPlayer = game.getPlayer(combatGroup.getDefenderId());
                         if (defendingPlayer != null) {
                             return true;
                         }
                     }
-
                 }
             }
-
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever Master of Cruelties attacks a player and isn't blocked, " + super.getRule();
+        return "Whenever {this} attacks a player and isn't blocked, " + super.getRule();
     }
 }
 
@@ -189,11 +188,7 @@ class MasterOfCrueltiesNoDamageEffect extends ReplacementEffectImpl<MasterOfCrue
             case DAMAGE_PLAYER:
             case DAMAGE_PLANESWALKER:
                 DamageEvent damageEvent = (DamageEvent) event;
-                if (event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage()) {
-                    return true;
-                }
-
-                return event.getFlag();
+                return event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage();                
             default:
                 return false;
         }
