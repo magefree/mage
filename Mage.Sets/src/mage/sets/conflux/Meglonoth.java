@@ -30,7 +30,7 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -65,7 +65,7 @@ public class Meglonoth extends CardImpl<Meglonoth> {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Meglonoth blocks a creature, Meglonoth deals damage to that creature's controller equal to Meglonoth's power.
-        this.addAbility(new BlocksTriggeredAbility(new MeglonothEffect(), false, true));
+        this.addAbility(new BlocksCreatureTriggeredAbility(new MeglonothEffect(), false, true));
 
     }
 

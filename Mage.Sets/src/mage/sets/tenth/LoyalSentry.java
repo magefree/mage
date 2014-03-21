@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
@@ -57,7 +57,8 @@ public class LoyalSentry extends CardImpl<LoyalSentry> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new BlocksTriggeredAbility(new LoyalSentryEffect(), false, true));
+        // When Loyal Sentry blocks a creature, destroy that creature and Loyal Sentry.
+        this.addAbility(new BlocksCreatureTriggeredAbility(new LoyalSentryEffect(), false, true));
     }
 
     public LoyalSentry (final LoyalSentry card) {
@@ -82,11 +83,11 @@ class LoyalSentryEffect extends OneShotEffect<LoyalSentryEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getFirstTarget());
-        Permanent s = game.getPermanent(source.getSourceId());
+        Permanent p = game.getPermanent(source.getFirstTarget());        
         if (p != null) {
             p.destroy(source.getSourceId(), game, false);
         }
+        Permanent s = game.getPermanent(source.getSourceId());
         if (s != null) {
             s.destroy(source.getSourceId(), game, false);
         }

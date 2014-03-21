@@ -25,6 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -33,34 +34,61 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author garnold
+ * @author LevelX2
  */
-public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl<BlocksAttachedTriggeredAbility>{
-    private String attachedDescription;
 
-    public BlocksAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.attachedDescription = attachedDescription;
+public class BlocksCreatureAttachedTriggeredAbility extends TriggeredAbilityImpl<BlocksCreatureAttachedTriggeredAbility>{
+    private boolean setFixedTargetPointer;
+    private String attachedDescription;
+    private boolean setFixedTargetPointerToBlocked;
+
+    public BlocksCreatureAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {
+        this(effect, attachedDescription, optional, false);
     }
 
-    public BlocksAttachedTriggeredAbility(final BlocksAttachedTriggeredAbility ability) {
+    public BlocksCreatureAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean setFixedTargetPointer) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.setFixedTargetPointer = setFixedTargetPointer;
+        this.attachedDescription = attachedDescription;
+    }
+    
+    public BlocksCreatureAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean setFixedTargetPointer, boolean setFixedTargetPointerToBlocked) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.setFixedTargetPointer = setFixedTargetPointer;
+        this.attachedDescription = attachedDescription;
+        this.setFixedTargetPointerToBlocked = setFixedTargetPointerToBlocked;
+    }
+
+    public BlocksCreatureAttachedTriggeredAbility(final BlocksCreatureAttachedTriggeredAbility ability) {
         super(ability);
+        this.setFixedTargetPointer = ability.setFixedTargetPointer;
         this.attachedDescription = ability.attachedDescription;
     }
 
     @Override
-    public BlocksAttachedTriggeredAbility copy() {
-        return new BlocksAttachedTriggeredAbility(this);
+    public BlocksCreatureAttachedTriggeredAbility copy() {
+        return new BlocksCreatureAttachedTriggeredAbility(this);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARED_BLOCKERS) {
-            Permanent attachment = game.getPermanent(this.getSourceId());
-            if (attachment != null && attachment.getAttachedTo() != null && game.getCombat().getBlockers().contains(attachment.getAttachedTo())) {
+        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
+            Permanent p = game.getPermanent(event.getSourceId());
+            if (p != null && p.getAttachments().contains(this.getSourceId())) {
+                if (setFixedTargetPointer) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    }
+                }
+                if (setFixedTargetPointerToBlocked) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    }
+                }
                 return true;
             }
         }
@@ -69,6 +97,6 @@ public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl<BlocksA
 
     @Override
     public String getRule() {
-        return "Whenever " + attachedDescription + " creature blocks, " + super.getRule();
+        return "Whenever " + attachedDescription + " creature blocks a creature, " + super.getRule();
     }
 }

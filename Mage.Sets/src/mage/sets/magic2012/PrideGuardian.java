@@ -51,7 +51,9 @@ public class PrideGuardian extends CardImpl<PrideGuardian> {
         this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
+        
         this.addAbility(DefenderAbility.getInstance());
+        // Whenever Pride Guardian blocks, you gain 3 life.
         this.addAbility(new BlocksTriggeredAbility(new GainLifeEffect(3), false));
     }
 

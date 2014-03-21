@@ -50,6 +50,8 @@ public class PsychicMembrane extends CardImpl<PsychicMembrane> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
         this.addAbility(DefenderAbility.getInstance());
+        
+        // Whenever Psychic Membrane blocks, you may draw a card.
         this.addAbility(new BlocksTriggeredAbility(new DrawCardControllerEffect(1), true));
     }
 

@@ -61,7 +61,7 @@ public class FavorOfTheWoods extends CardImpl<FavorOfTheWoods> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Whenever enchanted creature blocks, you gain 3 life.
-        this.addAbility(new BlocksAttachedTriggeredAbility(new GainLifeEffect(3), "equipped", false));
+        this.addAbility(new BlocksAttachedTriggeredAbility(new GainLifeEffect(3), "enchanted", false));
     }
 
     public FavorOfTheWoods(final FavorOfTheWoods card) {

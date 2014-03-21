@@ -33,7 +33,6 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -41,7 +40,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BlocksTriggeredAbility extends TriggeredAbilityImpl<BlocksTriggeredAbility> {
 
-    private boolean fixedTargetPointer;
+//    private boolean fixedTargetPointer;
 
     public BlocksTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
@@ -49,22 +48,17 @@ public class BlocksTriggeredAbility extends TriggeredAbilityImpl<BlocksTriggered
 
     public BlocksTriggeredAbility(Effect effect, boolean optional, boolean fixedTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.fixedTargetPointer = fixedTargetPointer;
+//        this.fixedTargetPointer = fixedTargetPointer;
     }
 
     public BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
         super(ability);
-        this.fixedTargetPointer = ability.fixedTargetPointer;
+//        this.fixedTargetPointer = ability.fixedTargetPointer;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            if (fixedTargetPointer) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-            }
+        if (event.getType() == EventType.DECLARED_BLOCKERS && game.getCombat().getBlockers().contains(this.getSourceId())) {
             return true;
         }
         return false;
@@ -72,7 +66,7 @@ public class BlocksTriggeredAbility extends TriggeredAbilityImpl<BlocksTriggered
 
     @Override
     public String getRule() {
-        return "Whenever {this} blocks" + (fixedTargetPointer ? " a creature" : "") + ", " + super.getRule();
+        return "Whenever {this} blocks, " + super.getRule();
     }
 
     @Override

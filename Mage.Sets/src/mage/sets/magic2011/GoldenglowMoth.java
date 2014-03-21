@@ -51,8 +51,10 @@ public class GoldenglowMoth extends CardImpl<GoldenglowMoth> {
         this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
-
+        
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+        // Whenever Goldenglow Moth blocks, you may gain 4 life.
         this.addAbility(new BlocksTriggeredAbility(new GainLifeEffect(4), true));
 
     }

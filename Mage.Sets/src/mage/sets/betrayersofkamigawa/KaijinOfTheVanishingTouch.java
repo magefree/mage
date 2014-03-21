@@ -33,7 +33,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -61,7 +61,7 @@ public class KaijinOfTheVanishingTouch extends CardImpl<KaijinOfTheVanishingTouc
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever Kaijin of the Vanishing Touch blocks a creature, return that creature to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
-        Ability ability = new BlocksTriggeredAbility(new KaijinOfTheVanishingTouchEffect(), false, true);
+        Ability ability = new BlocksCreatureTriggeredAbility(new KaijinOfTheVanishingTouchEffect(), false, true);
         this.addAbility(ability);
 
     }
