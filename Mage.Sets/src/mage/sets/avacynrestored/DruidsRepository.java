@@ -27,17 +27,19 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.choices.ChoiceColor;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,8 +58,8 @@ public class DruidsRepository extends CardImpl<DruidsRepository> {
         this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance())));
 
         // Remove a charge counter from Druids' Repository: Add one mana of any color to your mana pool.
-        Ability ability = new AnyColorManaAbility();
-        ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
     }
 
