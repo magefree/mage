@@ -28,16 +28,15 @@
 
 package mage.target;
 
-import mage.constants.Zone;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -80,7 +79,7 @@ public class TargetSpell extends TargetObject<TargetSpell> {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         // rule 114.4. A spell or ability on the stack is an illegal target for itself.
-        if (source != null && source.getId().equals(id)) {
+        if (source == null || source.getId().equals(id)) {
             return false;
         }
         Spell spell = game.getStack().getSpell(id);
@@ -101,8 +100,9 @@ public class TargetSpell extends TargetObject<TargetSpell> {
         for (StackObject stackObject: game.getStack()) {
             if (canBeChosen(stackObject, sourceControllerId, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         return false;
@@ -115,7 +115,7 @@ public class TargetSpell extends TargetObject<TargetSpell> {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject: game.getStack()) {
             if (canBeChosen(stackObject, sourceControllerId, game)) {
                 possibleTargets.add(stackObject.getId());

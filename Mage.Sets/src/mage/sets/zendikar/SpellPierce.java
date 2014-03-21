@@ -29,14 +29,13 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
@@ -46,17 +45,19 @@ import mage.target.TargetSpell;
  */
 public class SpellPierce extends CardImpl<SpellPierce> {
 
+
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(new AnotherCardPredicate());
     }
 
     public SpellPierce(UUID ownerId) {
         super(ownerId, 67, "Spell Pierce", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "ZEN";
         this.color.setBlue(true);
+
+        // Counter target noncreature spell unless its controller pays .
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));
     }
