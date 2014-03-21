@@ -58,7 +58,7 @@ public class Electropotence extends CardImpl<Electropotence> {
 
         // Whenever a creature enters the battlefield under your control, you may pay {2}{R}. If you do, that creature deals damage equal to its power to target creature or player.
         Ability ability = new ElectropotenceTriggeredAbility();
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetCreatureOrPlayer(true));
         this.addAbility(ability);
     }
 

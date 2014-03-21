@@ -50,6 +50,7 @@ public class VirulentSwipe extends CardImpl<VirulentSwipe> {
 
         this.color.setBlack(true);
 
+        // Target creature gets +2/+0 and gains deathtouch until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
