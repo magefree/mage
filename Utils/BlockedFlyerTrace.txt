@@ -213,3 +213,45 @@ ERROR [2014-02-22 11:59 [46:855]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43
 ERROR [2014-02-22 11:59 [46:855]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]      effect=mage.abilities.keyword.UnleashRestrictionEffect@47b5d63a id=8f00cf34-7635-4592-8d23-0f427e00cee9
 ERROR [2014-02-22 11:59 [46:856]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]         ability=Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>, applies_to_attacker=false
 ERROR [2014-02-22 11:59 [46:856]] TraceUtil[pool-2-thread-55]: [f5702a4c-cc77-43ec-98bc-d8ace2b2c177]
+
+WARN  [2014-03-20 11:19 [35:739]] TraceUtil[pool-2-thread-26]: Found non-flying non-reach creature blocking creature with flying
+ERROR [2014-03-20 11:19 [35:741]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f] Tracing game state...
+ERROR [2014-03-20 11:19 [35:742]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f] Brimaz, King of Oreskos could block Sangromancer
+ERROR [2014-03-20 11:19 [35:743]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]
+ERROR [2014-03-20 11:19 [35:744]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f] Attacker abilities:
+ERROR [2014-03-20 11:19 [35:745]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      Cast Sangromancer, id=9a3998aa-4c1b-44dc-b3cb-3da2f7eaa3f5
+ERROR [2014-03-20 11:19 [35:746]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      Flying, id=4783c40f-2785-4c89-ad8c-6f276163778f
+ERROR [2014-03-20 11:19 [35:747]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      Whenever a creature an opponent controls is put into a graveyard from the battlefield, You may gain 3 life., id=698ac24d-5adb-457e-ba71-b6bde1116fb9
+ERROR [2014-03-20 11:19 [35:749]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      Whenever an opponent discards a card, You may gain 3 life., id=f1624c2b-e436-4c91-a406-d350eab9a064
+ERROR [2014-03-20 11:19 [35:750]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f] Blocker abilities:
+ERROR [2014-03-20 11:19 [35:751]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      Cast Brimaz, King of Oreskos, id=8b13e6dd-4dee-450f-afec-803078564a00
+ERROR [2014-03-20 11:19 [35:752]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      Vigilance, id=c9ca2150-0dce-470d-bbdc-c06f7aad7e49
+ERROR [2014-03-20 11:19 [35:753]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      When {this} attacks, put a 1/1 white Cat Soldier creature token with vigilance onto the battlefield attacking., id=da0d985a-5d1e-4e89-8594-a997cd3a8d6c
+ERROR [2014-03-20 11:19 [35:755]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      Whenever {this} blocks a creature, put a 1/1 white Cat Soldier creature token with vigilance onto the battlefield blocking that creature., id=5aceb1e0-916b-4434-9d07-f6659a1298e6
+ERROR [2014-03-20 11:19 [35:756]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      Trample, id=cb0868ea-6134-498c-aeb7-39cede4c3bd8
+ERROR [2014-03-20 11:19 [35:757]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>, id=8f90c801-e7f4-46ce-ade4-0d0a102ea68b
+ERROR [2014-03-20 11:19 [35:762]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]
+ERROR [2014-03-20 11:19 [35:763]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f] Flying ability id: 4783c40f-2785-4c89-ad8c-6f276163778f
+ERROR [2014-03-20 11:19 [35:765]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f] Reach ability id: e2fedd2f-c4b9-4fb7-ae64-0a321d09c795
+ERROR [2014-03-20 11:19 [35:766]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f] Intimidate ability id: e220b807-812b-4dda-9d6f-2cb68cf25082
+ERROR [2014-03-20 11:19 [35:767]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]
+ERROR [2014-03-20 11:19 [35:768]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f] Restriction effects:
+ERROR [2014-03-20 11:19 [35:769]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]     mage.abilities.effects.common.combat.CantBlockSourceEffect@c4229d9
+ERROR [2014-03-20 11:19 [35:769]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         id=762e04a2-d2f5-46ae-876d-f8fe65722b73
+ERROR [2014-03-20 11:19 [35:771]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         applies to attacker=true
+ERROR [2014-03-20 11:19 [35:772]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         applies to blocker=false
+ERROR [2014-03-20 11:19 [35:772]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      effect=mage.abilities.effects.common.combat.CantBlockSourceEffect@c4229d9 id=762e04a2-d2f5-46ae-876d-f8fe65722b73
+ERROR [2014-03-20 11:19 [35:773]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         instanceof StaticAbility: true, ability={this} can't block
+ERROR [2014-03-20 11:19 [35:774]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         usable zone: false, ability={this} can't block
+ERROR [2014-03-20 11:19 [35:775]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         zone: BATTLEFIELD
+ERROR [2014-03-20 11:19 [35:776]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         object: mage.sets.zendikar.Bloodghast@13374db0
+ERROR [2014-03-20 11:19 [35:777]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         contains ability: true
+ERROR [2014-03-20 11:19 [35:778]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         test_zone: LIBRARY
+ERROR [2014-03-20 11:19 [35:779]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]      effect=mage.abilities.effects.common.combat.CantBlockSourceEffect@c4229d9 id=762e04a2-d2f5-46ae-876d-f8fe65722b73
+ERROR [2014-03-20 11:19 [35:780]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         instanceof StaticAbility: true, ability={this} can't block
+ERROR [2014-03-20 11:19 [35:780]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         usable zone: false, ability={this} can't block
+ERROR [2014-03-20 11:19 [35:783]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         zone: BATTLEFIELD
+ERROR [2014-03-20 11:19 [35:784]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         object: mage.sets.zendikar.Bloodghast@13374db0
+ERROR [2014-03-20 11:19 [35:785]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         contains ability: true
+ERROR [2014-03-20 11:19 [35:786]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         test_zone: LIBRARY
+ERROR [2014-03-20 11:19 [35:787]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]
