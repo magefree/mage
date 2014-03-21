@@ -53,7 +53,7 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl<CanBl
     /**
      * Changes the number of creatures source creature can block
      *
-     * @param amount - 0 = any number, 1-x = n additional blocks
+     * @param amount 0 = any number, 1-x = n additional blocks
      */
     public CanBlockAdditionalCreatureEffect(int amount) {
         this(Duration.WhileOnBattlefield, amount);
@@ -77,17 +77,13 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl<CanBl
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null) {
-            switch (layer) {
-                case RulesEffects:
-                    // maxBlocks = 0 equals to "can block any number of creatures"
-                    if (perm.getMaxBlocks() > 0) {
-                        perm.setMaxBlocks(perm.getMaxBlocks() + amount);
-                    } else {
-                        perm.setMaxBlocks(0);
-                    }
-                    break;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            // maxBlocks = 0 equals to "can block any number of creatures"
+            if (amount > 0) {
+                permanent.setMaxBlocks(permanent.getMaxBlocks() + amount);
+            } else {
+                permanent.setMaxBlocks(0);
             }
             return true;
         }
@@ -105,11 +101,8 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl<CanBl
             case 0:
                 sb.append("any number of creatures");
                 break;
-            case 1:
-                sb.append("an additional creature");
-                break;
             default:
-                sb.append(CardUtil.numberToText(amount)).append(" additional creatures");
+                sb.append(CardUtil.numberToText(amount, "an")).append(" additional creatures");
         }
         return sb.toString();
     }

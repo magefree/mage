@@ -70,6 +70,7 @@ import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
@@ -99,7 +100,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     protected static FilterAttackingCreature filterAttack = new FilterAttackingCreature();
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
     protected static final Choice replacementEffectChoice = new ChoiceImpl(true);
-    private static final Map<String, Serializable> staticOptions = new HashMap<String, Serializable>();
+    private static final Map<String, Serializable> staticOptions = new HashMap<>();
 
     private static final Logger log = Logger.getLogger(HumanPlayer.class);
 
@@ -692,10 +693,17 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             } else if (response.getUUID() != null) {
                 Permanent blocker = game.getPermanent(response.getUUID());
                 if (blocker != null) {
-                    if (filter.match(blocker, null, playerId, game)) {
+                    boolean removeBlocker = false;
+                    // does not block yet and can block or can block more attackers
+                    if (filter.match(blocker, null, playerId, game)) {                        
                         selectCombatGroup(defendingPlayerId, blocker.getId(), game);
+                    } else {
+                        if (filterBlock.match(blocker, null, playerId, game) && game.getStack().isEmpty()) {
+                            removeBlocker = true;
+                        }                            
                     }
-                    else if (filterBlock.match(blocker, null, playerId, game) && game.getStack().isEmpty()) {
+                    
+                    if (removeBlocker) {
                         game.getCombat().removeBlocker(blocker.getId(), game);
                     }
                 }
@@ -746,7 +754,15 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         if (response.getBoolean() != null) {
             // do nothing
         } else if (response.getUUID() != null) {
-            declareBlocker(defenderId, blockerId, response.getUUID(), game);
+            CombatGroup group = game.getCombat().findGroup(response.getUUID());
+            if (group != null) {
+                // check if already blocked, if not add
+                if (!group.getBlockers().contains(blockerId)) {                    
+                    declareBlocker(defenderId, blockerId, response.getUUID(), game);
+                } else { // else remove from block
+                    game.getCombat().removeBlockerGromGroup(blockerId, group, game);
+                }
+            }
         }
     }
 

@@ -28,6 +28,7 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -51,9 +52,13 @@ public class VirulentSwipe extends CardImpl<VirulentSwipe> {
         this.color.setBlack(true);
 
         // Target creature gets +2/+0 and gains deathtouch until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));        
+        Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
+        effect.setText("Target creature gets +2/+0");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains deathtouch until end of turn");
+        this.getSpellAbility().addEffect(effect);
 
         this.addAbility(new ReboundAbility());
     }
