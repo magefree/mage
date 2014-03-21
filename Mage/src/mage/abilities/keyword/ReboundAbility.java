@@ -305,12 +305,13 @@ class ReboundCastSpellFromExileEffect extends OneShotEffect<ReboundCastSpellFrom
         }
         Card reboundCard = zone.get(this.cardId, game);
         Player player = game.getPlayer(source.getControllerId());
-        SpellAbility ability = reboundCard.getSpellAbility();
-
-        player.cast(ability, game, true);
-        zone.remove(reboundCard.getId());
-
-        return true;
+        if (player != null && reboundCard != null) {
+            SpellAbility ability = reboundCard.getSpellAbility();
+            player.cast(ability, game, true);
+            zone.remove(reboundCard.getId());
+            return true;
+        }
+        return false;
     }
 
     @Override

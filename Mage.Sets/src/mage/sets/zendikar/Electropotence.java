@@ -34,9 +34,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -76,7 +76,6 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl<Electropotence
 
     public ElectropotenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ElectropotenceEffect());
-        this.costs.add(new ManaCostsImpl("{2}{R}"));
     }
 
     public ElectropotenceTriggeredAbility(ElectropotenceTriggeredAbility ability) {
@@ -87,14 +86,10 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl<Electropotence
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getCardType().contains(CardType.CREATURE)
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)
                     && permanent.getControllerId().equals(this.controllerId)) {
-                Player player = game.getPlayer(this.getControllerId());
-                Card card = game.getCard(event.getTargetId());
-                if (player != null && card != null && player.chooseUse(Outcome.Damage, "Pay {2}{R}? If you do, " + card.getName() + " deals damage equal to its power to target creature or player.", game)) {
-                    this.getEffects().get(0).setValue("damageSource", event.getTargetId());
-                    return true;
-                }
+                this.getEffects().get(0).setValue("damageSource", event.getTargetId());                
+                return true;
             }
         }
         return false;
@@ -129,23 +124,28 @@ class ElectropotenceEffect extends OneShotEffect<ElectropotenceEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID creatureId = (UUID) getValue("damageSource");
-        Permanent creature = game.getPermanent(creatureId);
-        if (creature == null) {
-            creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
-        }
-        if (creature != null) {
-            int amount = creature.getPower().getValue();
-            UUID target = source.getTargets().getFirstTarget();
-            Permanent targetCreature = game.getPermanent(target);
-            if (targetCreature != null) {
-                targetCreature.damage(amount, creature.getId(), game, true, false);
-                return true;
-            }
-            Player player = game.getPlayer(target);
-            if (player != null) {
-                player.damage(amount, creature.getId(), game, false, true);
-                return true;
-            }
+        Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (creature != null && controller != null) {
+            if (controller.chooseUse(Outcome.Damage, "Pay {2}{R} to do the damage?", game)) {
+         // if (controller.chooseUse(Outcome.Damage, "Pay {2}{R}? If you do, " + creature.getName() + " deals damage equal to its power to target creature or player.", game)) {
+                ManaCosts manaCosts = new ManaCostsImpl("{2}{R}");
+                if (manaCosts.pay(source, game, source.getSourceId(), controller.getId(), false)) {
+                    int amount = creature.getPower().getValue();
+                    UUID target = source.getTargets().getFirstTarget();
+                    Permanent targetCreature = game.getPermanent(target);
+                    if (targetCreature != null) {
+                        targetCreature.damage(amount, creature.getId(), game, true, false);
+                    } else {
+                        Player player = game.getPlayer(target);
+                        if (player != null) {
+                            player.damage(amount, creature.getId(), game, false, true);
+                        }
+                    }
+                    
+                }
+            }  
+            return true;
         }
         return false;
     }
