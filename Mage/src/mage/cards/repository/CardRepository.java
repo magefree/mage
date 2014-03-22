@@ -55,9 +55,9 @@ public enum CardRepository {
 
     private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
     private static final String VERSION_ENTITY_NAME = "card";
-    private static final long CARD_DB_VERSION = 17;
+    private static final long CARD_DB_VERSION = 18;
 
-    private Random random = new Random();
+    private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
 
@@ -107,7 +107,7 @@ public enum CardRepository {
                 QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
                 qb.distinct().selectColumns("className").where().isNotNull("className");
                 List<CardInfo> results = cardDao.query(qb.prepare());
-                classNames = new TreeSet<String>();
+                classNames = new TreeSet<>();
                 for (CardInfo card : results) {
                     classNames.add(card.getClassName());
                 }
@@ -119,7 +119,7 @@ public enum CardRepository {
     }
 
     public Set<String> getNames() {
-        Set<String> names = new TreeSet<String>();
+        Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
@@ -139,7 +139,7 @@ public enum CardRepository {
     }
 
     public Set<String> getNonLandNames() {
-        Set<String> names = new TreeSet<String>();
+        Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
@@ -160,7 +160,7 @@ public enum CardRepository {
     }
 
     public Set<String> getNonLandAndNonCreatureNames() {
-        Set<String> names = new TreeSet<String>();
+        Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
@@ -186,7 +186,7 @@ public enum CardRepository {
     }
 
     public Set<String> getCreatureTypes() {
-        TreeSet<String> subtypes = new TreeSet<String>();
+        TreeSet<String> subtypes = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("subtypes");
@@ -215,7 +215,7 @@ public enum CardRepository {
 
 
     public List<String> getClassNames() {
-        List<String> names = new ArrayList<String>();
+        List<String> names = new ArrayList<>();
         try {
             List<CardInfo> results = cardDao.queryForAll();
             for (CardInfo card : results) {
@@ -234,7 +234,7 @@ public enum CardRepository {
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }
-        return new ArrayList<CardInfo>();
+        return new ArrayList<>();
     }
 
     /**
@@ -258,7 +258,7 @@ public enum CardRepository {
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }
-        return new ArrayList<CardInfo>();
+        return new ArrayList<>();
     }
 
     public List<CardInfo> findCards(CardCriteria criteria) {
@@ -269,6 +269,6 @@ public enum CardRepository {
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }
-        return new ArrayList<CardInfo>();
+        return new ArrayList<>();
     }
 }
