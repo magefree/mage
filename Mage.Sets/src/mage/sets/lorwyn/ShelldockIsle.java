@@ -25,19 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInAnyLibraryCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.HideawayPlayEffect;
+import mage.abilities.keyword.HideawayAbility;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 
@@ -45,32 +46,29 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class IslebackSpawn extends CardImpl<IslebackSpawn> {
+public class ShelldockIsle extends CardImpl<ShelldockIsle> {
 
-    public IslebackSpawn(UUID ownerId) {
-        super(ownerId, 40, "Isleback Spawn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "SHM";
-        this.subtype.add("Kraken");
+    public ShelldockIsle(UUID ownerId) {
+        super(ownerId, 272, "Shelldock Isle", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "LRW";
 
-        this.color.setBlue(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(8);
-
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Isleback Spawn gets +4/+8 as long as a library has twenty or fewer cards in it.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinousEffect(
-                new BoostSourceEffect(4,8, Duration.EndOfGame),
-                new CardsInAnyLibraryCondition(Condition.ComparisonType.LessThan, 21),
-                "{this} gets +4/+8 as long as a library has twenty or fewer cards in it")));
+        // Hideaway
+        this.addAbility(new HideawayAbility(this));
+        // {tap}: Add {U} to your mana pool.
+        this.addAbility(new BlueManaAbility());
+        // {U}, {tap}: You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD, new HideawayPlayEffect(), new ManaCostsImpl("{U}"), new CardsInAnyLibraryCondition(Condition.ComparisonType.LessThan, 21));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
-    public IslebackSpawn(final IslebackSpawn card) {
+    public ShelldockIsle(final ShelldockIsle card) {
         super(card);
     }
 
     @Override
-    public IslebackSpawn copy() {
-        return new IslebackSpawn(this);
+    public ShelldockIsle copy() {
+        return new ShelldockIsle(this);
     }
 }

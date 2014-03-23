@@ -106,8 +106,9 @@ class PraetorsGraspEffect extends OneShotEffect<PraetorsGraspEffect> {
                 }
             }
             opponent.shuffleLibrary(game);
+            return true;
         }
-        return true;
+        return false;
     }
 }
 
