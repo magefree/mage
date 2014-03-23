@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.sets.legends;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.FlashAbility;
+import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -43,58 +43,50 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
 
 /**
  *
  * @author LevelX2
  */
-public class NotionThief extends CardImpl<NotionThief> {
+public class ChainsOfMephistopheles extends CardImpl<ChainsOfMephistopheles> {
 
-    public NotionThief(UUID ownerId) {
-        super(ownerId, 88, "Notion Thief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.expansionSetCode = "DGM";
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
+    public ChainsOfMephistopheles(UUID ownerId) {
+        super(ownerId, 5, "Chains of Mephistopheles", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+        this.expansionSetCode = "LEG";
 
-        this.color.setBlue(true);
         this.color.setBlack(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
 
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
-        // If an opponent would draw a card except the first one he or she draws in each of his or her draw steps, instead that player skips that draw and you draw a card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NotionThiefReplacementEffect()));
+        // If a player would draw a card except the first one he or she draws in his or her draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of his or her library into his or her graveyard.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChainsOfMephistophelesReplacementEffect()));
         this.addWatcher(new CardsDrawnDuringDrawStepWatcher());
-
     }
 
-    public NotionThief(final NotionThief card) {
+    public ChainsOfMephistopheles(final ChainsOfMephistopheles card) {
         super(card);
     }
 
     @Override
-    public NotionThief copy() {
-        return new NotionThief(this);
+    public ChainsOfMephistopheles copy() {
+        return new ChainsOfMephistopheles(this);
     }
 }
 
+class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl<ChainsOfMephistophelesReplacementEffect> {
 
-class NotionThiefReplacementEffect extends ReplacementEffectImpl<NotionThiefReplacementEffect> {
-
-    public NotionThiefReplacementEffect() {
+    public ChainsOfMephistophelesReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If an opponent would draw a card except the first one he or she draws in each of his or her draw steps, instead that player skips that draw and you draw a card";
+        staticText = "If a player would draw a card except the first one he or she draws in his or her draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of his or her library into his or her graveyard";
     }
 
-    public NotionThiefReplacementEffect(final NotionThiefReplacementEffect effect) {
+    public ChainsOfMephistophelesReplacementEffect(final ChainsOfMephistophelesReplacementEffect effect) {
         super(effect);
     }
 
     @Override
-    public NotionThiefReplacementEffect copy() {
-        return new NotionThiefReplacementEffect(this);
+    public ChainsOfMephistophelesReplacementEffect copy() {
+        return new ChainsOfMephistophelesReplacementEffect(this);
     }
 
     @Override
@@ -104,16 +96,26 @@ class NotionThiefReplacementEffect extends ReplacementEffectImpl<NotionThiefRepl
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
-            player.drawCards(1, game, event.getAppliedEffects());
+            if (player.getHand().isEmpty()) {
+                // he or she puts the top card of his or her library into his or her graveyard
+                Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(1);
+                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                effect.apply(game, source);
+                return true;
+            } else  {
+                // discards a card instead. If the player discards a card this way, he or she draws a card.
+                player.discard(1, source, game);
+                return false;
+            }
         }
-        return true;
+        return false;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DRAW_CARD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (event.getType() == EventType.DRAW_CARD) {
             if (game.getActivePlayerId().equals(event.getPlayerId())) {
                 CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
                 if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
