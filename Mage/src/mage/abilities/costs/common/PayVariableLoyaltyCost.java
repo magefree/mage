@@ -28,6 +28,7 @@
 
 package mage.abilities.costs.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
@@ -56,8 +57,14 @@ public class PayVariableLoyaltyCost extends VariableCostImpl<PayVariableLoyaltyC
     }
     
     @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        Permanent planeswalker = game.getPermanent(sourceId);
+        return planeswalker!= null && !planeswalker.isLoyaltyUsed();
+    }
+
+    @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
-        return new PayLoyaltyCost(xValue);
+        return new PayLoyaltyCost(-xValue);
     }
 
     @Override

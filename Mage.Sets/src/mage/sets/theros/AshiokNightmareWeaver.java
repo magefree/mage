@@ -120,11 +120,12 @@ class AshiokNightmareWeaverExileEffect extends OneShotEffect<AshiokNightmareWeav
     public boolean apply(Game game, Ability source) {
         UUID exileId = CardUtil.getCardExileZoneId(game, source);
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (opponent != null) {
+        Player controller = game.getPlayer(source.getSourceId());
+        if (opponent != null && controller != null) {
             for (int i = 0; i < 3; i++) {
                 Card card = opponent.getLibrary().getFromTop(game);
                 if (card != null) {
-                    card.moveToExile(exileId, "Ashiok, Nightmare Weaver", source.getSourceId(), game);
+                    controller.moveCardToExileWithInfo(card, exileId, "Ashiok, Nightmare Weaver", source.getSourceId(), game, Zone.HAND);
                 }
             }
         }
@@ -170,7 +171,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect<AshiokNightma
         if (target.canChoose(source.getSourceId(), player.getId(), game)) {
             if (player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
-                if (card != null && card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), player.getId())) {
+                if (card != null && player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId())) {
                     ContinuousEffectImpl effect = new AshiokNightmareWeaverAddTypeEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);

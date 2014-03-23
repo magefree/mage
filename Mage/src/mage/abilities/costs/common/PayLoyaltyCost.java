@@ -42,12 +42,14 @@ import mage.game.permanent.Permanent;
  */
 public class PayLoyaltyCost extends CostImpl<PayLoyaltyCost> {
 
-    private int amount;
+    private final int amount;
 
     public PayLoyaltyCost(int amount) {
         this.amount = amount;
         this.text = Integer.toString(amount);
-        if (amount >= 0) this.text = "+" + this.text;
+        if (amount >= 0) {
+            this.text = "+" + this.text;
+        }
     }
 
     public PayLoyaltyCost(PayLoyaltyCost cost) {
@@ -58,9 +60,7 @@ public class PayLoyaltyCost extends CostImpl<PayLoyaltyCost> {
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         Permanent planeswalker = game.getPermanent(sourceId);
-        if (planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && !planeswalker.isLoyaltyUsed())
-            return true;
-        return false;
+        return planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && !planeswalker.isLoyaltyUsed();
     }
 
     @Override
