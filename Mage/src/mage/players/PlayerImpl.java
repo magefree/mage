@@ -2170,7 +2170,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public boolean hasOpponent(UUID playerToCheckId, Game game) {
-        return game.isOpponent(this, playerToCheckId);
+        return !this.getId().equals(playerToCheckId) && game.isOpponent(this, playerToCheckId);
     }
 
     @Override

@@ -94,7 +94,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                         }
                         return true;
                     }
-            break;
+                    break;
                 case ANY:
                     if (setTargetPointer && getTargets().size() == 0) {
                         for (Effect effect : this.getEffects()) {
@@ -115,6 +115,9 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                             return true;
                         }
                     }
+                    break;
+                default:
+                    throw new UnsupportedOperationException("Value for targetController not supported: " + targetController.toString());
             }
         }
         return false;
