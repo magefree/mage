@@ -93,31 +93,33 @@ class MalfegorEffect extends OneShotEffect<MalfegorEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you == null) {
-            return false;
-        }
-        int handSizeBefore = you.getHand().size();
-        you.discardToMax(game);
-        int sacrificeNumber = handSizeBefore - you.getHand().size();
-        for (UUID opponentId : game.getOpponents(you.getId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent != null) {
-                for (int i = 0; i < sacrificeNumber; i++) {
-                    Target target = new TargetControlledPermanent(new FilterControlledCreaturePermanent());
-                    if (target.canChoose(opponentId, game)) {
-                        while (!target.isChosen() && target.canChoose(opponentId, game)) {
-                            opponent.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-                        }
-                        Permanent permanent = game.getPermanent(target.getFirstTarget());
-                        if (permanent != null) {
-                            permanent.sacrifice(source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int sacrificeNumber = controller.getHand().size();
+            if (sacrificeNumber > 0) {
+                controller.discard(sacrificeNumber, source, game);
+                for (UUID opponentId : game.getOpponents(controller.getId())) {
+                    Player opponent = game.getPlayer(opponentId);
+                    if (opponent != null) {
+                        for (int i = 0; i < sacrificeNumber; i++) {
+                            Target target = new TargetControlledPermanent(new FilterControlledCreaturePermanent());
+                            target.setRequired(true);
+                            if (target.canChoose(opponentId, game)) {
+                                if (opponent.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+                                    Permanent permanent = game.getPermanent(target.getFirstTarget());
+                                    if (permanent != null) {
+                                        permanent.sacrifice(source.getSourceId(), game);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
+            return true;
         }
-        return true;
+        return false;
+
     }
 
     @Override
