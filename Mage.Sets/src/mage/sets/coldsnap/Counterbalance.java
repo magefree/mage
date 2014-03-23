@@ -37,7 +37,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.constants.SetTargetPointer;
+import mage.constants.Zone;
+import mage.filter.FilterSpell;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
@@ -54,7 +58,7 @@ public class Counterbalance extends CardImpl<Counterbalance> {
         this.color.setBlue(true);
 
         // Whenever an opponent casts a spell, you may reveal the top card of your library. If you do, counter that spell if it has the same converted mana cost as the revealed card.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new CounterbalanceEffect(), true));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterbalanceEffect(), new FilterSpell(), true, SetTargetPointer.SPELL));
     }
 
     public Counterbalance(final Counterbalance card) {
@@ -85,24 +89,22 @@ class CounterbalanceEffect extends OneShotEffect<CounterbalanceEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you == null) {
-            return false;
-        }
-        Card topcard = you.getLibrary().getFromTop(game);
-        if (topcard == null) {
-            return false;
-        }
-        CardsImpl cards = new CardsImpl();
-        cards.add(topcard);
-        you.revealCards("Counterbalance", cards, game);
-        int cmc = topcard.getManaCost().convertedManaCost();
-        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (spell == null) {
-            return false;
-        }
-        if (cmc == spell.getManaCost().convertedManaCost()) {
-            return game.getStack().counter(spell.getSourceId(), source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (controller != null && sourcePermanent != null) {
+            StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+            if (spell != null) {
+                Card topcard = controller.getLibrary().getFromTop(game);
+                if (topcard != null) {
+                    CardsImpl cards = new CardsImpl();
+                    cards.add(topcard);
+                    controller.revealCards(sourcePermanent.getName(), cards, game);
+                    if (topcard.getManaCost().convertedManaCost() == spell.getManaCost().convertedManaCost()) {
+                        return game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                    }
+                }
+                return true;
+            }
         }
         return false;
     }

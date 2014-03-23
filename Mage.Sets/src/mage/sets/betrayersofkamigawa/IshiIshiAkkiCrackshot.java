@@ -30,11 +30,11 @@ package mage.sets.betrayersofkamigawa;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterSpiritOrArcaneCard;
@@ -64,7 +64,7 @@ public class IshiIshiAkkiCrackshot extends CardImpl<IshiIshiAkkiCrackshot> {
         this.toughness = new MageInt(1);
 
         // Whenever an opponent casts a Spirit or Arcane spell, Ishi-Ishi, Akki Crackshot deals 2 damage to that player.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"), filter, false, true));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"), filter, false, SetTargetPointer.PLAYER));
     }
 
     public IshiIshiAkkiCrackshot(final IshiIshiAkkiCrackshot card) {

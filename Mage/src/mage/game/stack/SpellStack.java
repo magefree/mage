@@ -80,6 +80,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 }
                 this.remove(stackObject);
                 stackObject.counter(sourceId, game);
+                game.informPlayers(new StringBuilder(stackObject.getName()).append(" is countered").toString());
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
                 return true;
             }

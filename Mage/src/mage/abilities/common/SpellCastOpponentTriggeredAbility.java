@@ -29,6 +29,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
@@ -44,7 +45,7 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl<Spel
 
     private static final FilterSpell spellCard = new FilterSpell("a spell");
     protected FilterSpell filter;
-    protected boolean setTargetPointerPlayer;
+    protected SetTargetPointer setTargetPointer;
 
     public SpellCastOpponentTriggeredAbility(Effect effect, boolean optional) {
         this(effect, spellCard, optional);
@@ -55,19 +56,27 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl<Spel
     }
 
     public SpellCastOpponentTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional) {
-        this(zone, effect, filter, optional, false);
+        this(zone, effect, filter, optional, SetTargetPointer.NONE);
     }
 
-    public SpellCastOpponentTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, boolean setTargetPointerPlayer) {
+    /**
+     *
+     * @param zone
+     * @param effect
+     * @param filter
+     * @param optional
+     * @param setTargetPointer Supported: SPELL, PLAYER
+     */
+    public SpellCastOpponentTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.filter = filter;
-        this.setTargetPointerPlayer = setTargetPointerPlayer;
+        this.setTargetPointer = setTargetPointer;
     }
 
     public SpellCastOpponentTriggeredAbility(final SpellCastOpponentTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
-        this.setTargetPointerPlayer = ability.setTargetPointerPlayer;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -75,9 +84,19 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl<Spel
         if (event.getType() == GameEvent.EventType.SPELL_CAST && game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && filter.match(spell, game)) {
-                if (setTargetPointerPlayer) {
+                if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
                     for (Effect effect: this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                        switch (setTargetPointer) {
+                            case SPELL:
+                                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                                break;
+                            case PLAYER:
+                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                                break;
+                            default:
+                                throw new UnsupportedOperationException("Value of SetTargetPointer not supported!");
+                        }
+                        
                     }
                 }
                 return true;
