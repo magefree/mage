@@ -131,7 +131,7 @@ class LlawanCephalidEmpressReplacementEffect extends ReplacementEffectImpl<Llawa
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null && game.isOpponent(null, event.getPlayerId())) {
+            if (controller != null && game.isOpponent(controller, event.getPlayerId())) {
                 Card card = game.getCard(event.getSourceId());
                 if (card != null && filter.match(card, source.getControllerId(), game)) {
                     return true;

@@ -28,7 +28,6 @@
 
 package mage.abilities.common;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -77,13 +76,9 @@ public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefie
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            UUID targetId = event.getTargetId();
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent.getControllerId().equals(this.getControllerId())
-                    && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                return true;
-            }
+        if (super.checkTrigger(event, game)) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            return permanent != null && permanent.getControllerId().equals(this.getControllerId());
         }
         return false;
     }
