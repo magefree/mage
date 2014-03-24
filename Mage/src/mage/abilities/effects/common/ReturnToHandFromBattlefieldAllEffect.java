@@ -35,6 +35,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -59,10 +60,15 @@ public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect<ReturnTo
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                controller.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+            }
+            return true;
         }
-        return true;
+        return false;
+
     }
 
     @Override

@@ -71,7 +71,7 @@ class SteelGolemEffect extends ReplacementEffectImpl<SteelGolemEffect> {
     
     public SteelGolemEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You can't cast creature spells.";
+        staticText = "You can't cast creature spells";
     }
 
     public SteelGolemEffect(final SteelGolemEffect effect) {
