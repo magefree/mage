@@ -12,7 +12,10 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author noxx
  *
- * Card: You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains "When this creature becomes the target of a spell or ability, sacrifice it."
+ * Card: You may have {this} enter the battlefield as a copy of any creature on the battlefield, except
+ * it's an Illusion in addition to its other types and it gains "When this creature becomes the target
+ * of a spell or ability, sacrifice it."
+ *
  */
 public class PhantasmalImageTest extends CardTestPlayerBase {
 
@@ -119,23 +122,38 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Illusionary Servant", 3);
     }
 
+
+    //  PhantasmalImageTest.testCopyAlreadyTransformed:143->
+    //  CardTestPlayerAPIImpl.assertPowerToughness:351->CardTestPlayerAPIImpl.assertPowerToughness:337
+    // There is no such creature under player's control with specified power&toughness, player=PlayerA,
+    // cardName=Ravager of the Fells (found similar: 1, one of them: power=8 toughness=8)
+
     /**
      * Tests copying already transformed creature
      * Makes sure it still has "When this creature becomes the target of a spell or ability, sacrifice it"
      */
     @Test
     public void testCopyAlreadyTransformed() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
         addCard(Zone.HAND, playerB, "Phantasmal Image");
         addCard(Zone.HAND, playerB, "Titanic Growth");
 
+        // Creatures you control have hexproof.
+        addCard(Zone.HAND, playerA, "Asceticism");
+
+        // Whenever this creature enters the battlefield or transforms into
+        // Huntmaster of the Fells, put a 2/2 green Wolf creature token onto
+        // the battlefield and you gain 2 life.
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
         addCard(Zone.BATTLEFIELD, playerA, "Huntmaster of the Fells");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Titanic Growth", "Ravager of the Fells");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Asceticism");
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "Titanic Growth", "Ravager of the Fells");
 
-        setStopAt(2, PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 18);

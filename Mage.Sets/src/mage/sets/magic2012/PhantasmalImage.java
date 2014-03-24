@@ -28,10 +28,6 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
@@ -40,6 +36,10 @@ import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,6 +65,9 @@ public class PhantasmalImage extends CardImpl<PhantasmalImage> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
+        // You may have Phantasmal Image enter the battlefield as a copy of any creature
+        // on the battlefield, except it's an Illusion in addition to its other types and
+        // it gains "When this creature becomes the target of a spell or ability, sacrifice it."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
                 new PhantasmalImageCopyEffect(), abilityText, true));
         this.addAbility(ability);
@@ -96,17 +99,18 @@ class PhantasmalImageCopyEffect extends OneShotEffect<PhantasmalImageCopyEffect>
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
             Target target = new TargetPermanent(new FilterCreaturePermanent());
-            if (target.canChoose(source.getControllerId(), game)) {
-                target.setRequired(true);
-                target.setNotTarget(true);
+            target.setRequired(true);
+            target.setNotTarget(true);
+            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
-                UUID targetId = target.getFirstTarget();
-                Permanent copyFromPermanent = game.getPermanent(targetId);
+                Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 if (copyFromPermanent != null) {
                     game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
                         @Override
                         public Boolean apply(Game game, Permanent permanent) {
-                            permanent.getSubtype().add("Illusion");
+                            if (!permanent.getSubtype().contains("Illusion")) {
+                                permanent.getSubtype().add("Illusion");
+                            }
                             permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), game);
                             return true;
                         }
