@@ -91,14 +91,15 @@ import mage.cards.repository.ExpansionRepository;
  * suitable for two player games and some multiplayer games
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> implements Player {
 
     private transient final static Logger log = Logger.getLogger(ComputerPlayer.class);
-    private transient Map<Mana, Card> unplayable = new TreeMap<Mana, Card>();
-    private transient List<Card> playableNonInstant = new ArrayList<Card>();
-    private transient List<Card> playableInstant = new ArrayList<Card>();
-    private transient List<ActivatedAbility> playableAbilities = new ArrayList<ActivatedAbility>();
+    private transient Map<Mana, Card> unplayable = new TreeMap<>();
+    private transient List<Card> playableNonInstant = new ArrayList<>();
+    private transient List<Card> playableInstant = new ArrayList<>();
+    private transient List<ActivatedAbility> playableAbilities = new ArrayList<>();
     private transient List<PickedCard> pickedCards;
     private transient List<ColoredManaSymbol> chosenColors;
 
@@ -106,12 +107,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         super(name, range);
         human = false;
         userData = new UserData(UserGroup.COMPUTER, 64, false);
-        pickedCards = new ArrayList<PickedCard>();
+        pickedCards = new ArrayList<>();
     }
 
     protected ComputerPlayer(UUID id) {
         super(id);
-        pickedCards = new ArrayList<PickedCard>();
+        pickedCards = new ArrayList<>();
     }
 
     public ComputerPlayer(final ComputerPlayer player) {
@@ -222,7 +223,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             return false;
         }
         if (target instanceof TargetCardInHand) {
-            List<Card> cards = new ArrayList<Card>();
+            List<Card> cards = new ArrayList<>();
             cards.addAll(this.hand.getCards(game));
             while(!target.isChosen() && !cards.isEmpty()) {
                 Card pick = pickTarget(cards, outcome, target, null, game);
@@ -300,7 +301,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             throw new IllegalStateException("TargetPermanentOrPlayer wasn't handled. class:" + target.getClass().toString());
         }
         if (target instanceof TargetCardInGraveyard) {
-            List<Card> cards = new ArrayList<Card>();
+            List<Card> cards = new ArrayList<>();
             for (Player player: game.getPlayers().values()) {
                 for (Card card: player.getGraveyard().getCards(game)) {
                     if (target.canTarget(card.getId(), game)) {
@@ -368,7 +369,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         }
         if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
             if (outcome.isGood()) {
-                ArrayList<Card> cardsInHand = new ArrayList<Card>(hand.getCards(game));
+                ArrayList<Card> cardsInHand = new ArrayList<>(hand.getCards(game));
                 while (!target.isChosen() && !cardsInHand.isEmpty() && target.getMaxNumberOfTargets() < target.getTargets().size()) {
                     Card card = pickBestCard(cardsInHand, null, target, source, game);
                     if (card != null) {
@@ -504,7 +505,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 return false;
         }
         if (target instanceof TargetCardInGraveyard) {
-            List<Card> cards = new ArrayList<Card>();
+            List<Card> cards = new ArrayList<>();
             for (Player player: game.getPlayers().values()) {
                 cards.addAll(player.getGraveyard().getCards(game));
             }
@@ -517,7 +518,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 return false;
         }
         if (target instanceof TargetCardInLibrary) {
-            List<Card> cards = new ArrayList<Card>(game.getPlayer(playerId).getLibrary().getCards(game));
+            List<Card> cards = new ArrayList<>(game.getPlayer(playerId).getLibrary().getCards(game));
             Card card = pickTarget(cards, outcome, target, source, game);
             if (card != null) {
                 target.addTarget(card.getId(), source, game);
@@ -526,7 +527,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             return false;
         }
         if (target instanceof TargetCardInYourGraveyard) {
-            List<Card> cards = new ArrayList<Card>(game.getPlayer(playerId).getGraveyard().getCards(game));
+            List<Card> cards = new ArrayList<>(game.getPlayer(playerId).getGraveyard().getCards(game));
             while(!target.isChosen() && !cards.isEmpty()) {
                 Card card = pickTarget(cards, outcome, target, source, game);
                 if (card != null) {
@@ -536,7 +537,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             return target.isChosen();
         }
         if (target instanceof TargetCardInHand) {
-            List<Card> cards = new ArrayList<Card>();
+            List<Card> cards = new ArrayList<>();
             cards.addAll(this.hand.getCards(game));
             while(!target.isChosen() && !cards.isEmpty()) {
                 Card pick = pickTarget(cards, outcome, target, source, game);
@@ -560,7 +561,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             return false;
         }
         if (target instanceof TargetCardInOpponentsGraveyard) {
-            List<Card> cards = new ArrayList<Card>();
+            List<Card> cards = new ArrayList<>();
             for (UUID uuid: game.getOpponents(playerId)) {
                 Player player = game.getPlayer(uuid);
                 if (player != null) {
@@ -598,7 +599,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         }
 
         if (target instanceof TargetCardInASingleGraveyard) {
-            List<Card> cards = new ArrayList<Card>();
+            List<Card> cards = new ArrayList<>();
             for (Player player: game.getPlayers().values()) {
                 cards.addAll(player.getGraveyard().getCards(game));
             }
@@ -1177,7 +1178,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             return true;
         }
 
-        ArrayList<Card> cardChoices = new ArrayList<Card>(cards.getCards(target.getFilter(), game));
+        ArrayList<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), game));
         while (!target.doneChosing()) {
             Card card = pickTarget(cardChoices, outcome, target, null, game);
             if (card != null) {
@@ -1206,7 +1207,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         UUID opponentId = game.getCombat().getDefenders().iterator().next();
         Attackers attackers = getPotentialAttackers(game);
         List<Permanent> blockers = getOpponentBlockers(opponentId, game);
-        List<Permanent> actualAttackers = new ArrayList<Permanent>();
+        List<Permanent> actualAttackers = new ArrayList<>();
         if (blockers.isEmpty()) {
             actualAttackers = attackers.getAttackers();
         }
@@ -1258,7 +1259,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 if (object != null) {
                     LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(object, game.getState().getZone(object.getId()), game);
                     if (useableAbilities != null && useableAbilities.size() > 0) {
-                        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<ActivatedAbility>(useableAbilities.values()));
+                        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
                         // TODO: Improve this
                         return (SpellAbility) useableAbilities.values().iterator().next();
                     }
@@ -1338,7 +1339,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
     private static void addBasicLands(Deck deck, String landName, int number) {
         Random random = new Random();
-        Set<String> landSets =  new HashSet<String>();
+        Set<String> landSets =  new HashSet<>();
 
         // decide from which sets basic lands are taken from
         for (String setCode :deck.getExpansionSetCodes()) {
@@ -1394,7 +1395,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
     public static Deck buildDeck(List<Card> cardPool, final List<ColoredManaSymbol> colors) {
         Deck deck = new Deck();
-        List<Card> sortedCards = new ArrayList<Card>(cardPool);
+        List<Card> sortedCards = new ArrayList<>(cardPool);
         Collections.sort(sortedCards, new Comparator<Card>() {
             @Override
             public int compare(Card o1, Card o2) {
@@ -1627,6 +1628,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
      * 1. there should be at least 3 cards in card pool
      * 2. at least 2 cards should have different colors
      * 3. get card colors as chosen starting from most rated card
+     * @return 
      */
     protected List<ColoredManaSymbol> chooseDeckColorsIfPossible() {
         if (pickedCards.size() > 2) {
@@ -1642,7 +1644,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                     return o2.score.compareTo(o1.score);
                 }
             });
-            Set<String> chosenSymbols = new HashSet<String>();
+            Set<String> chosenSymbols = new HashSet<>();
             for (PickedCard picked : pickedCards) {
                 int differentColorsInCost = RateCard.getDifferentColorManaCount(picked.card);
                 // choose only color card, but only if they are not too gold
@@ -1659,7 +1661,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 }
                 // only two or three color decks are allowed
                 if (chosenSymbols.size() >  1 && chosenSymbols.size() < 4) {
-                    List<ColoredManaSymbol> colorsChosen = new ArrayList<ColoredManaSymbol>();
+                    List<ColoredManaSymbol> colorsChosen = new ArrayList<>();
                     for (String symbol : chosenSymbols) {
                         ColoredManaSymbol manaSymbol = ColoredManaSymbol.lookup(symbol.charAt(0));
                         if (manaSymbol != null) {
@@ -1694,7 +1696,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             if (potential > 0 && creature.getPower().getValue() > 0) {
                 List<Permanent> l = attackers.get(potential);
                 if (l == null) {
-                    attackers.put(potential, l = new ArrayList<Permanent>());
+                    attackers.put(potential, l = new ArrayList<>());
                 }
                 l.add(creature);
             }
@@ -1734,7 +1736,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             while(binary.length() < attackersList.size()) {
                 binary = "0" + binary;
             }
-            List<Permanent> trialAttackers = new ArrayList<Permanent>();
+            List<Permanent> trialAttackers = new ArrayList<>();
             for (int j = 0; j < attackersList.size(); j++) {
                 if (binary.charAt(j) == '1') {
                     trialAttackers.add(attackersList.get(j));
@@ -1759,7 +1761,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
         TreeNode<CombatSimulator> simulations;
 
-        simulations = new TreeNode<CombatSimulator>(combat);
+        simulations = new TreeNode<>(combat);
         addBlockSimulations(blockers, simulations, game);
         combat.simulate();
 
@@ -1769,14 +1771,14 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
     protected void addBlockSimulations(List<Permanent> blockers, TreeNode<CombatSimulator> node, Game game) {
         int numGroups = node.getData().groups.size();
-        Copier<CombatSimulator> copier = new Copier<CombatSimulator>();
+        Copier<CombatSimulator> copier = new Copier<>();
         for (Permanent blocker: blockers) {
             List<Permanent> subList = remove(blockers, blocker);
             for (int i = 0; i < numGroups; i++) {
                 if (node.getData().groups.get(i).canBlock(blocker, game)) {
                     CombatSimulator combat = copier.copy(node.getData());
                     combat.groups.get(i).blockers.add(new CreatureSimulator(blocker));
-                    TreeNode<CombatSimulator> child = new TreeNode<CombatSimulator>(combat);
+                    TreeNode<CombatSimulator> child = new TreeNode<>(combat);
                     node.addChild(child);
                     addBlockSimulations(subList, child, game);
                     combat.simulate();
@@ -1786,7 +1788,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     }
 
     protected List<Permanent> remove(List<Permanent> source, Permanent element) {
-        List<Permanent> newList = new ArrayList<Permanent>();
+        List<Permanent> newList = new ArrayList<>();
         for (Permanent permanent: source) {
             if (!permanent.equals(element)) {
                 newList.add(permanent);
@@ -1840,7 +1842,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
     protected void logState(Game game) {
         if (log.isTraceEnabled()) {
-            logList("Computer player " + name + " hand: ", new ArrayList(hand.getCards(game)));
+            logList(new StringBuilder("Computer player ").append(name).append(" hand: ").toString(), new ArrayList(hand.getCards(game)));
         }
     }
 

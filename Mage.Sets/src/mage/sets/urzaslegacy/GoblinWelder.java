@@ -46,9 +46,8 @@ import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
@@ -81,9 +80,7 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
     public GoblinWelder copy() {
         return new GoblinWelder(this);
     }
-    
-    
-    
+       
     public class GoblinWelderEffect extends OneShotEffect<GoblinWelderEffect> {
 
         public GoblinWelderEffect() {
@@ -98,15 +95,13 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
         public boolean apply(Game game, Ability source) {
             Permanent artifact = game.getPermanent(source.getTargets().get(0).getFirstTarget());
             Card card = game.getCard(source.getTargets().get(1).getFirstTarget());
-            
-            if (artifact != null && card != null) {
-                
+            Player controller = game.getPlayer(source.getControllerId());
+            if (artifact != null && card != null && controller != null) {                
                 Zone currentZone = game.getState().getZone(card.getId());
                 if(artifact.getCardType().contains(CardType.ARTIFACT) && card.getCardType().contains(CardType.ARTIFACT) && currentZone == Zone.GRAVEYARD && card.getOwnerId().equals(artifact.getControllerId()))
                 {
-                    boolean sacrifice = artifact.sacrifice(source.getId(), game);
-                    boolean putOnBF = card.putOntoBattlefield(game, currentZone, source.getId(), card.getOwnerId());
-
+                    boolean sacrifice = artifact.sacrifice(source.getSourceId(), game);                   
+                    boolean putOnBF = controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
                     if (sacrifice || putOnBF) {
                         return true;
                     }
@@ -126,10 +121,10 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
         }
     }
     
-    class GoblinWelderTarget extends TargetCard<TargetCardInYourGraveyard> {
+    class GoblinWelderTarget extends TargetCardInGraveyard {
 
         public GoblinWelderTarget() {
-            super(1, 1, Zone.GRAVEYARD, new FilterArtifactCard());
+            super(1, 1, new FilterArtifactCard());
             targetName = "target artifact card in that player's graveyard";
         }
 
@@ -139,22 +134,15 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
 
         @Override
         public boolean canTarget(UUID id, Ability source, Game game) {
-            UUID firstTarget = source.getFirstTarget();
-            Permanent artifact = game.getPermanent(firstTarget);
+            Permanent artifact = game.getPermanent(source.getFirstTarget());
             Player player = game.getPlayer(artifact.getControllerId());
-
             Card card = game.getCard(id);
-            if (card != null && player != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
-            {
-                if (player.getGraveyard().contains(id))
-                {
-                    return filter.match(card, game);
-                }
+            if (card != null && player != null && player.getGraveyard().contains(id)) {
+                return filter.match(card, game);
             }
             return false;
         }
-
-        
+      
 
         @Override
         public GoblinWelderTarget copy() {
