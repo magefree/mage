@@ -246,10 +246,11 @@ public class ConnectDialog extends MageDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
-        if (task != null && !task.isDone())
+        if (task != null && !task.isDone()) {
             task.cancel(true);
-        else
+        } else {
             this.hideDialog();
+        }
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed

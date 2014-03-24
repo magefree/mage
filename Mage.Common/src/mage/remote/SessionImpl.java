@@ -110,6 +110,11 @@ public class SessionImpl implements Session {
     }
 
     @Override
+    public String getSessionId() {
+        return sessionId;
+    }
+    
+    @Override
     public synchronized boolean connect(Connection connection) {
         if (isConnected()) {
             disconnect(true);

@@ -45,6 +45,7 @@ import javax.swing.SpinnerNumberModel;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
+import mage.client.table.TablePlayerPanel;
 import mage.client.table.TournamentPlayerPanel;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
@@ -71,12 +72,15 @@ public class NewTournamentDialog extends MageDialog {
     private UUID playerId;
     private UUID roomId;
     private Session session;
+    private String lastSessionId;
     private final List<TournamentPlayerPanel> players = new ArrayList<>();
     private final List<JComboBox> packs = new ArrayList<>();
 
     /** Creates new form NewTournamentDialog */
     public NewTournamentDialog() {
         initComponents();
+        session = MageFrame.getSession();
+        lastSessionId = "";
         txtName.setText("Tournament");
         this.spnNumWins.setModel(new SpinnerNumberModel(2, 1, 5, 1));
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
@@ -86,18 +90,23 @@ public class NewTournamentDialog extends MageDialog {
 
     public void showDialog(UUID roomId) {
         this.roomId = roomId;
-        session = MageFrame.getSession();
-        this.txtPlayer1Name.setText(session.getUserName());
-        cbTournamentType.setModel(new DefaultComboBoxModel(session.getTournamentTypes().toArray()));
-        cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
-        cbDraftCube.setModel(new DefaultComboBoxModel(session.getDraftCubes()));
-        cbDraftTiming.setModel(new DefaultComboBoxModel(DraftOptions.TimingOption.values()));
-        cbAllowSpectators.setSelected(true);
-
-        setTournamentSettingsFromPrefs();
-
-        this.setModal(true);
-        this.setLocation(150, 100);
+        if (!lastSessionId.equals(MageFrame.getSession().getSessionId())) {
+            lastSessionId = session.getSessionId();
+            this.txtPlayer1Name.setText(session.getUserName());
+            cbTournamentType.setModel(new DefaultComboBoxModel(session.getTournamentTypes().toArray()));
+            cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
+            cbDraftCube.setModel(new DefaultComboBoxModel(session.getDraftCubes()));
+            cbDraftTiming.setModel(new DefaultComboBoxModel(DraftOptions.TimingOption.values()));
+            // update player types
+            int i=2;
+            for (TournamentPlayerPanel tournamentPlayerPanel :players) {
+                tournamentPlayerPanel.init(i++);
+            }
+            cbAllowSpectators.setSelected(true);
+            setTournamentSettingsFromPrefs();
+            this.setModal(true);
+            this.setLocation(150, 100);            
+        }        
         this.setVisible(true);
     }
 
@@ -574,6 +583,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void createPlayers(int numPlayers) {
+        // add/remove player panels        
         if (numPlayers > players.size()) {
             while (players.size() != numPlayers) {
                 TournamentPlayerPanel playerPanel = new TournamentPlayerPanel();

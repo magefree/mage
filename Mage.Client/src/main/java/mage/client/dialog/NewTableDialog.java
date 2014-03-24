@@ -63,18 +63,22 @@ public class NewTableDialog extends MageDialog {
     private TableView table;
     private UUID playerId;
     private UUID roomId;
-    private Session session;
-    private List<TablePlayerPanel> players = new ArrayList<TablePlayerPanel>();
-    private List<String> prefPlayerTypes = new ArrayList<String>();
+    private final Session session;
+    private String lastSessionId;
+    private final List<TablePlayerPanel> players = new ArrayList<>();
+    private final List<String> prefPlayerTypes = new ArrayList<>();
 
     private static final String LIMITED = "Limited";
 
     /** Creates new form NewTableDialog */
     public NewTableDialog() {
+        session = MageFrame.getSession();
+        lastSessionId = "";
         initComponents();
         player1Panel.showLevel(false);
         this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
+        MageFrame.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);        
     }
 
     /** This method is called from within the constructor to
@@ -391,6 +395,7 @@ public class NewTableDialog extends MageDialog {
     }
 
     private void createPlayers(int numPlayers) {
+        // add missing player panels
         if (numPlayers > players.size()) {
             while (players.size() != numPlayers) {
                 TablePlayerPanel playerPanel = new TablePlayerPanel();
@@ -409,7 +414,9 @@ public class NewTableDialog extends MageDialog {
                     }
                 );
             }
-        }
+            
+        } 
+        // remove player panels no longer needed
         else if (numPlayers < players.size()) {
             while (players.size() != numPlayers) {
                 players.remove(players.size() - 1);
@@ -435,22 +442,26 @@ public class NewTableDialog extends MageDialog {
     }
 
     public void showDialog(UUID roomId) {
-        session = MageFrame.getSession();
-        MageFrame.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);
-        this.player1Panel.setPlayerName(session.getUserName());
-        cbGameType.setModel(new DefaultComboBoxModel(session.getGameTypes().toArray()));
-        cbDeckType.setModel(new DefaultComboBoxModel(session.getDeckTypes()));
-        selectLimitedByDefault();
-        cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
-        cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
-        cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
-
-        setGameSettingsFromPrefs();
-
-        this.roomId = roomId;
-        this.setModal(true);
-        setGameOptions();
-        this.setLocation(150, 100);
+        this.roomId = roomId;        
+        if (!lastSessionId.equals(MageFrame.getSession().getSessionId())) {
+            lastSessionId = session.getSessionId();
+            this.player1Panel.setPlayerName(session.getUserName());
+            cbGameType.setModel(new DefaultComboBoxModel(session.getGameTypes().toArray()));
+            cbDeckType.setModel(new DefaultComboBoxModel(session.getDeckTypes()));
+            selectLimitedByDefault();
+            cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
+            cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
+            cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
+            // Update the existing player panels (neccessary if server was changes = new session)
+            int i=2;
+            for (TablePlayerPanel tablePlayerPanel :players) {
+                tablePlayerPanel.init(i++, tablePlayerPanel.getPlayerType());
+            }
+            setGameSettingsFromPrefs();
+            this.setModal(true);
+            setGameOptions();
+            this.setLocation(150, 100);
+        }
         this.setVisible(true);
     }
 

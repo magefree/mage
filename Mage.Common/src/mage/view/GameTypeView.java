@@ -35,16 +35,16 @@ import mage.game.match.MatchType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameTypeView implements Serializable {
+public class GameTypeView extends Object implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String name;
-    private int minPlayers;
-    private int maxPlayers;
-    private int numTeams;
-    private int playersPerTeam;
-    private boolean useRange;
-    private boolean useAttackOption;
+    private final String name;
+    private final int minPlayers;
+    private final int maxPlayers;
+    private final int numTeams;
+    private final int playersPerTeam;
+    private final boolean useRange;
+    private final boolean useAttackOption;
 
     public GameTypeView(MatchType gameType) {
         this.name = gameType.getName();
