@@ -43,8 +43,8 @@ import mage.game.permanent.Permanent;
 public class PermanentEvaluator {
 
     //preserve calculations for efficiency
-    private Map<UUID, Integer> values = new HashMap<UUID, Integer>();
-    private CombatEvaluator combat = new CombatEvaluator();
+    private final Map<UUID, Integer> values = new HashMap<>();
+    private final CombatEvaluator combat = new CombatEvaluator();
 
     public int evaluate(Permanent permanent, Game game) {
         if (!values.containsKey(permanent.getId())) {

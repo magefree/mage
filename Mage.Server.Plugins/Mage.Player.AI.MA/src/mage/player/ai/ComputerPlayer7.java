@@ -95,7 +95,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     public boolean priority(Game game) {
         if (lastLoggedTurn != game.getTurnNum()) {
             lastLoggedTurn = game.getTurnNum();
-            logger.info(new StringBuilder("------------------------ ").append("Turn: ").append(game.getTurnNum()).append(" [").append(game.getPlayer(game.getActivePlayerId()).getName()).append("----------------------------------------------------").toString());
+            logger.info(new StringBuilder("============================== ").append("Turn: ").append(game.getTurnNum()).append(" [").append(game.getPlayer(game.getActivePlayerId()).getName()).append("] ====================================================").toString());
         }
         logState(game);
         logger.debug("Priority -- Step: " + (game.getTurn().getStepType() + "                       ").substring(0,25) + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
@@ -110,6 +110,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 if (game.getActivePlayerId().equals(playerId)) {
                     printOutState(game);
                     if (actions.size() == 0) {
+                        logger.info("Sim Calculate pre combat actions ----------------------------------------------------- ");
                         calculatePreCombatActions(game);
                     }
                     act(game);
@@ -126,6 +127,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 if (!game.getActivePlayerId().equals(playerId)) {
                     printOutState(game);
                     if (actions.size() == 0) {
+                        logger.info("Sim Calculate declare attackers actions ----------------------------------------------------- ");
                         calculatePreCombatActions(game);
                     }
                     act(game);
@@ -163,12 +165,11 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
         return false;
     }
 
-    protected void calculatePreCombatActions(Game game) {
+    protected void calculatePreCombatActions(Game game) {        
         if (!getNextAction(game)) {
             currentScore = GameStateEvaluator2.evaluate(playerId, game);
             Game sim = createSimulation(game);
             SimulationNode2.resetCount();
-            logger.info("Sim Calculate pre combat actions -----------------------------------------------------------------------------------------");
             root = new SimulationNode2(null, sim, maxDepth, playerId);
             
             addActionsTimed();
@@ -177,7 +178,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 root = root.children.get(0);
                 // int bestScore = root.getScore();
                 // if (bestScore > currentScore || allowBadMoves) {
-                actions = new LinkedList<Ability>(root.abilities);
+                actions = new LinkedList<>(root.abilities);
                 combat = root.combat;
                 for (Ability ability : actions) {
                     actionCache.add(ability.getRule() + "_" + ability.getSourceId());
@@ -185,6 +186,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             } else {
                 logger.info("[" + game.getPlayer(playerId).getName() + "][pre] Action: skip");
             }
+        } else {
+            logger.debug("Next Action exists!");
         }
     }
 

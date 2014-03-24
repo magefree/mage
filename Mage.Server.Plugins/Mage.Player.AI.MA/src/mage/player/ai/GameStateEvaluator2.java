@@ -5,15 +5,11 @@
 
 package mage.player.ai;
 
+import java.util.UUID;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.player.ai.ma.ArtificialScoringSystem;
 import mage.players.Player;
-import mage.util.Logging;
-
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -25,10 +21,6 @@ import java.util.logging.Logger;
 public class GameStateEvaluator2 {
 
     private static final transient org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(GameStateEvaluator2.class);
-//    private static final transient Logger logger = Logging.getLogger(GameStateEvaluator2.class.getName());
-//    static {
-//        logger.setLevel(Level.ALL);
-//    }
 
     public static final int WIN_GAME_SCORE = 100000000;
     public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
@@ -62,23 +54,50 @@ public class GameStateEvaluator2 {
         }
 
         int permanentScore = 0;
+        int playerScore = 0;
+        int opponentScore = 0;
         try {
+            StringBuilder sbPlayer = new StringBuilder();
+            StringBuilder sbOpponent = new StringBuilder();
+            // add values of player
             for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
-                permanentScore += evaluatePermanent(permanent, game);
+                int onePermScore = evaluatePermanent(permanent, game);
+                playerScore += onePermScore;
+                if (logger.isDebugEnabled()) {
+                    sbPlayer.append(permanent.getName()).append("[").append(onePermScore).append("] ");
+                }
             }
+            if (logger.isDebugEnabled()) {                
+                sbPlayer.insert(0, playerScore + " - ");
+                sbPlayer.insert(0, "Player..: ");
+                logger.debug(sbPlayer);
+            }
+
+            // add values of opponent
             for (Permanent permanent: game.getBattlefield().getAllActivePermanents(opponent.getId())) {
-                permanentScore -= evaluatePermanent(permanent, game);
+                int onePermScore = evaluatePermanent(permanent, game);
+                opponentScore += onePermScore;
+                if (logger.isDebugEnabled()) {
+                    sbOpponent.append(permanent.getName()).append("[").append(onePermScore).append("] ");
+                }
             }
+            if (logger.isDebugEnabled()) {
+                sbOpponent.insert(0, opponentScore + " - ");
+                sbOpponent.insert(0, "Opponent: ");
+                
+                logger.debug(sbOpponent);
+            }
+            permanentScore = playerScore - opponentScore;
         } catch (Throwable t) {
         }
         //permanentScore *= PERMANENT_FACTOR;
 
-        int handScore = 0;
+        int handScore;
         handScore = player.getHand().size() - opponent.getHand().size();
         handScore *= 5;
 
         int score = lifeScore + permanentScore + handScore;
-        logger.debug("game state evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore + " handScore:" + handScore + "  total:" + score);
+        logger.debug(score + " total Score (life:" + lifeScore + " permanents:" + permanentScore + " hand:" + handScore +")");
 
         return score;
     }
