@@ -29,33 +29,43 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackAllAnyPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IslandwalkAbility;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
+import static mage.constants.Layer.TypeChangingEffects_4;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class StormtideLeviathan extends CardImpl<StormtideLeviathan> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying or islandwalk");
+
+    static {
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+        filter.add(Predicates.not(new AbilityPredicate(IslandwalkAbility.class)));
+    }
 
     public StormtideLeviathan(UUID ownerId) {
         super(ownerId, 74, "Stormtide Leviathan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");
@@ -65,9 +75,12 @@ public class StormtideLeviathan extends CardImpl<StormtideLeviathan> {
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 
+        // Islandwalk (This creature is unblockable as long as defending player controls an Island.)
         this.addAbility(new IslandwalkAbility());
+        // All lands are Islands in addition to their other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect2()));
+        // Creatures without flying or islandwalk can't attack.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAllAnyPlayerEffect(Duration.WhileOnBattlefield, filter)));
 
     }
 
@@ -85,7 +98,7 @@ public class StormtideLeviathan extends CardImpl<StormtideLeviathan> {
 class StormtideLeviathanEffect extends ContinuousEffectImpl<StormtideLeviathanEffect> {
 
     public StormtideLeviathanEffect() {
-        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "All lands are Islands in addition to their other types";
     }
 
@@ -99,58 +112,38 @@ class StormtideLeviathanEffect extends ContinuousEffectImpl<StormtideLeviathanEf
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), game)) {
-            if (!permanent.hasSubtype("Island"))
-                permanent.getSubtype().add("Island");
-        }
-        return true;
-    }
-
-}
-
-class StormtideLeviathanEffect2 extends ReplacementEffectImpl<StormtideLeviathanEffect2> {
-
-    private static IslandwalkAbility islandwalk = new IslandwalkAbility();
-
-    public StormtideLeviathanEffect2() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Creatures without flying or islandwalk can't attack";
-    }
-
-    public StormtideLeviathanEffect2(final StormtideLeviathanEffect2 effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public StormtideLeviathanEffect2 copy() {
-        return new StormtideLeviathanEffect2(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DECLARE_ATTACKER) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (player.getInRange().contains(permanent.getControllerId())) {
-                    if (!(permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId()) ||
-                        permanent.getAbilities().contains(islandwalk)))
-                        return true;
-                }
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        for (Permanent land : game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), game)) {
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    if (!land.getSubtype().contains("Island")) {
+                        land.getSubtype().add("Island");
+                    }
+                    break;
+                case AbilityAddingRemovingEffects_6:
+                    boolean addAbility = true;
+                    for (Ability existingAbility : land.getAbilities()) {
+                        if (existingAbility instanceof BlueManaAbility) {
+                            addAbility = false;
+                            break;
+                        }
+                    }
+                    if (addAbility) {
+                        land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                    }
+                    break;
             }
         }
+        return true;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
         return false;
     }
 
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+    }
 }

@@ -28,9 +28,9 @@
 
 package mage.abilities.effects.common.combat;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -51,10 +51,7 @@ public class CantAttackAllSourceEffect extends RestrictionEffect<CantAttackAllSo
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return permanent.getId().equals(source.getSourceId());
     }
 
     @Override

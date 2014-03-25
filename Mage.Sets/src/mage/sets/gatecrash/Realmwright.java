@@ -162,7 +162,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl<RealmwrightEffect2> {
                                         }
                                     }
                                     if (addAbility) {
-                                        land.addAbility(new GreenManaAbility(), source.getId(), game);
+                                        land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                                     }
                                 }
                                 if (choice.equals("Plains")) {
@@ -173,7 +173,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl<RealmwrightEffect2> {
                                         }
                                     }
                                     if (addAbility) {
-                                        land.addAbility(new WhiteManaAbility(), source.getId(), game);
+                                        land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                                     }
                                 }
                                 if (choice.equals("Mountain")) {
@@ -184,7 +184,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl<RealmwrightEffect2> {
                                         }
                                     }
                                     if (addAbility) {
-                                        land.addAbility(new RedManaAbility(), source.getId(), game);
+                                        land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                                     }
                                 }
                                 if (choice.equals("Island")) {
@@ -195,7 +195,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl<RealmwrightEffect2> {
                                         }
                                     }
                                     if (addAbility) {
-                                        land.addAbility(new BlueManaAbility(), source.getId(), game);
+                                        land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                                     }
                                 }
                                 if (choice.equals("Swamp")) {
@@ -206,7 +206,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl<RealmwrightEffect2> {
                                         }
                                     }
                                     if (addAbility) {
-                                        land.addAbility(new BlackManaAbility(), source.getId(), game);
+                                        land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                                     }
                                 }
                             }

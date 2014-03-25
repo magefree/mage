@@ -29,22 +29,23 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -56,7 +57,9 @@ public class LeylineOfTheVoid extends CardImpl<LeylineOfTheVoid> {
         super(ownerId, 101, "Leyline of the Void", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "M11";
         this.color.setBlack(true);
+        // If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
+        // If a card would be put into an opponent's graveyard from anywhere, exile it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfTheVoidEffect()));
     }
 
@@ -94,16 +97,19 @@ class LeylineOfTheVoidEffect extends ReplacementEffectImpl<LeylineOfTheVoidEffec
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
-            Permanent permanent = ((ZoneChangeEvent)event).getTarget();
-            if (permanent != null) {
-                return permanent.moveToExile(null, "", source.getId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (((ZoneChangeEvent)event).getFromZone().equals(Zone.BATTLEFIELD)) {
+                Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+                if (permanent != null) {
+                    return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD);
+                }
             }
-        }
-        else {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null) {
-                return card.moveToExile(null, "", source.getId(), game);
+            else {
+                Card card = game.getCard(event.getTargetId());
+                if (card != null) {
+                    return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, ((ZoneChangeEvent)event).getFromZone());
+                }
             }
         }
         return false;
