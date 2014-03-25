@@ -88,15 +88,17 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
             Player player = game.getPlayer(playerId);
             if (player != null && player.canBeTargetedBy(targetSource, game) && filter.match(player, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         return false;
@@ -109,15 +111,17 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
             Player player = game.getPlayer(playerId);
             if (player != null && filter.match(player, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
             if (filter.match(permanent, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         return false;
@@ -125,7 +129,7 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
@@ -143,7 +147,7 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null && filter.match(player, game)) {
@@ -192,7 +196,7 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
         Player player = game.getPlayer(id);
         MageObject targetSource = game.getObject(attackerId);
         if (player != null) {
-            return player.canBeTargetedBy(targetSource, game) && filter.match(player, game);
+            return notTarget || (player.canBeTargetedBy(targetSource, game) && filter.match(player, game));
         }
         Permanent permanent = game.getPermanent(id);
         if (permanent != null) {
