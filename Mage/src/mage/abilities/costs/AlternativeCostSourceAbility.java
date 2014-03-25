@@ -101,7 +101,7 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(controllerId);
+            Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 if (player.chooseUse(Outcome.Detriment, "Pay alternative costs?", game)) {
                     ability.getManaCostsToPay().clear();

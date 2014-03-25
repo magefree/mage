@@ -184,6 +184,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
     @Override
     public boolean activate(Game game, boolean noMana) {
+        Player controller = game.getPlayer(this.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
         /* 20130201 - 601.2b
          * If the spell is modal the player announces the mode choice (see rule 700.2).
          */
@@ -199,7 +204,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             game.getContinuousEffects().applySpliceEffects(this, game);
         }
 
-
+        
         Card card = game.getCard(sourceId);
         if (card != null) {
             card.adjustChoices(this, game);
@@ -218,18 +223,32 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         // or her intentions to pay any or all of those costs (see rule 601.2e).
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
         if (card != null) {
+            boolean alternativeCostisUsed = false;
             for (Ability ability : card.getAbilities()) {
                 if (ability instanceof AlternativeSourceCosts) {
                     AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
                     if (alternativeSpellCosts.isAvailable(this, game)) {
                         if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
                             // only one alternative costs may be activated
+                            alternativeCostisUsed = true;
                             break;
                         }
                     }
-                }
+                }                
                 if (ability instanceof OptionalAdditionalSourceCosts) {
                     ((OptionalAdditionalSourceCosts)ability).addOptionalAdditionalCosts(this, game);
+                }
+            }
+            if (!alternativeCostisUsed) {
+                if (this.getAbilityType().equals(AbilityType.SPELL)) {
+                    for (AlternativeSourceCosts alternativeSourceCosts: controller.getAlternativeSourceCosts()) {
+                         if (alternativeSourceCosts.isAvailable(this, game)) {
+                            if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
+                                // only one alternative costs may be activated
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -237,8 +256,8 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         // 20121001 - 601.2b
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.
-        VariableManaCost variableManaCost = handleManaXCosts(game, noMana);
-        String announceString = handleOtherXCosts(game);
+        VariableManaCost variableManaCost = handleManaXCosts(game, noMana, controller);
+        String announceString = handleOtherXCosts(game, controller);
 
         for (UUID modeId :this.getModes().getSelectedModes()) {
             this.getModes().setMode(this.getModes().get(modeId));
@@ -264,10 +283,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             }
             if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
                 if (variableManaCost != null || announceString != null) {
-                    Player controller = game.getPlayer(this.getControllerId());
-                    if (controller != null) {
-                        game.informPlayer(controller, new StringBuilder(card != null ? card.getName(): "").append(": no valid targets with this value of X").toString());
-                    }
+                    game.informPlayer(controller, new StringBuilder(card != null ? card.getName(): "").append(": no valid targets with this value of X").toString());
                 } else {
                     logger.debug("activate failed - target");
                 }
@@ -279,7 +295,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         for (Cost cost : optionalCosts) {
               if (cost instanceof ManaCost) {
                 cost.clearPaid();
-                if (game.getPlayer(this.controllerId).chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", game)) {
+                if (controller.chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", game)) {
                     manaCostsToPay.add((ManaCost) cost);
                 }
             }
@@ -308,7 +324,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
              activatorId = ((ActivatedAbilityImpl)this).getActivatorId();
         }
         
-        if (!useAlternativeCost(game)) {
+        if (!useAlternativeCost(game)) { // old way still used?
 
             //20100716 - 601.2f
             if (!manaCostsToPay.pay(this, game, sourceId, activatorId, noMana)) {
@@ -329,19 +345,19 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         }
         if (variableManaCost != null) {
             int xValue = getManaCostsToPay().getX();
-            game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
+            game.informPlayers(new StringBuilder(controller.getName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
         }
         return true;
     }
 
     /**
      * Handles the setting of non mana X costs
-     *
+     * @param controller    *
      * @param game
      * @return announce message
      *
      */
-    protected String handleOtherXCosts(Game game) {
+    protected String handleOtherXCosts(Game game, Player controller) {
         String announceString = null;
         for (VariableCost variableCost : this.costs.getVariableCosts()) {
             if (!(variableCost instanceof VariableManaCost)) {
@@ -350,7 +366,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 // set the xcosts to paid
                 variableCost.setAmount(xValue);
                 ((Cost) variableCost).setPaid();
-                String message = new StringBuilder(game.getPlayer(this.controllerId).getName())
+                String message = new StringBuilder(controller.getName())
                         .append(" announces a value of ").append(xValue).append(" (").append(variableCost.getActionText()).append(")").toString();
                 if (announceString == null) {
                     announceString = message;
@@ -369,7 +385,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
      * @param noMana
      * @return variableManaCost for posting to log later
      */
-    protected VariableManaCost handleManaXCosts(Game game, boolean noMana) {
+    protected VariableManaCost handleManaXCosts(Game game, boolean noMana, Player controller) {
         // 20121001 - 601.2b
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.
@@ -385,7 +401,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             int xValue;
             if (!variableManaCost.isPaid()) { // should only happen for human players
                 if (!noMana) {
-                    xValue = game.getPlayer(this.controllerId).announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), "Announce the value for " + variableManaCost.getText(), game, this);
+                    xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), "Announce the value for " + variableManaCost.getText(), game, this);
                     int amountMana = xValue * variableManaCost.getMultiplier();
                     StringBuilder manaString = new StringBuilder();
                     if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isColorless()) {
@@ -423,6 +439,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     @Override
     public void reset(Game game) {}
 
+    // Is this still needed?
     protected boolean useAlternativeCost(Game game) {
         for (AlternativeCost cost: alternativeCosts) {
             if (cost.isAvailable(game, this)) {

@@ -57,6 +57,7 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.AlternativeCost;
+import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
@@ -167,6 +168,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected boolean canLoseLife = true;
     protected boolean canPayLifeCost = true;
     protected boolean canPaySacrificeCost = true;
+    protected final List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
+    
     protected boolean isGameUnderControl = true;
     protected UUID turnController;
     protected Set<UUID> playersUnderYourControl = new HashSet<>();
@@ -237,6 +240,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.userData = player.userData;
         this.canPayLifeCost = player.canPayLifeCost;
         this.canPaySacrificeCost = player.canPaySacrificeCost;
+        this.alternativeSourceCosts.addAll(player.alternativeSourceCosts);
         this.storedBookmark = player.storedBookmark;
 
         this.topCardRevealed = player.topCardRevealed;
@@ -290,6 +294,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.userData = player.getUserData();
         this.canPayLifeCost = player.canPayLifeCost();
         this.canPaySacrificeCost = player.canPaySacrificeCost();
+        this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
         this.storedBookmark = player.getStoredBookmark();
 
         this.topCardRevealed = player.isTopCardRevealed();
@@ -355,6 +360,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.canPayLifeCost = true;
         this.canPaySacrificeCost = true;
         this.topCardRevealed = false;
+        this.alternativeSourceCosts.clear();
     }
 
     @Override
@@ -1265,6 +1271,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         return canGainLife | canLoseLife;
     }
 
+    @Override
+    public List<AlternativeSourceCosts> getAlternativeSourceCosts() {
+        return alternativeSourceCosts;
+    }
+    
     @Override
     public boolean isCanLoseLife() {
         return canLoseLife;

@@ -43,6 +43,7 @@ import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.cards.Card;
@@ -85,19 +86,29 @@ public interface Player extends MageItem, Copyable<Player> {
     int getLife();
     void setLife(int life, Game game);
     int loseLife(int amount, Game game);
-    boolean isCanLoseLife();
-    void setCanLoseLife(boolean canLoseLife);
     int gainLife(int amount, Game game);
-    boolean isCanGainLife();
-    void setCanGainLife(boolean canGainLife);
-    boolean isLifeTotalCanChange();
-    void setCanPayLifeCost(boolean canPayLifeCost);
-    boolean canPayLifeCost();
-    void setCanPaySacrificeCost(boolean canPaySacrificeCost);
-    boolean canPaySacrificeCost();
-    void setLifeTotalCanChange(boolean lifeTotalCanChange);
     int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
     int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, ArrayList<UUID> appliedEffects);
+        
+    // to handle rule changing effects (613.10)
+    boolean isCanLoseLife();
+    void setCanLoseLife(boolean canLoseLife);   
+    void setCanGainLife(boolean canGainLife);
+    boolean isCanGainLife();
+    void setCanPayLifeCost(boolean canPayLifeCost);
+    boolean canPayLifeCost();
+    void setCanPaySacrificeCost(boolean canPaySacrificeCost);    
+    boolean canPaySacrificeCost();
+    void setLifeTotalCanChange(boolean lifeTotalCanChange);
+    boolean isLifeTotalCanChange();    
+    /**
+     * Returns alternative casting costs a player can cast spells for
+     * 
+     * @return 
+     */
+    List<AlternativeSourceCosts> getAlternativeSourceCosts();
+    
+    
     Cards getHand();
     int getLandsPlayed();
     int getLandsPerTurn();
