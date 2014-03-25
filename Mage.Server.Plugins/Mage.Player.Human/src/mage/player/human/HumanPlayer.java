@@ -662,6 +662,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         }
         else {
             TargetDefender target = new TargetDefender(possibleDefender, attackerId);
+            target.setNotTarget(true); // player hexproof does not prevent attacking a player
             if (forcedToAttack) {
                 StringBuilder sb = new StringBuilder(target.getTargetName());
                 Permanent attacker = game.getPermanent(attackerId);
