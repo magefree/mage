@@ -53,7 +53,7 @@ public class VividMeadow extends CardImpl<VividMeadow> {
         super(ownerId, 279, "Vivid Meadow", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "LRW";
         // Vivid Meadow enters the battlefield tapped with two charge counters on it.
-        EntersBattlefieldEffect effect = new EntersBattlefieldEffect(new TapSourceEffect(true), "tapped with two charge counters on it");
+        EntersBattlefieldEffect effect = new EntersBattlefieldEffect(new TapSourceEffect(true), "{this} enters the battlefield tapped with two charge counters on it");
         effect.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // {tap}: Add {W} to your mana pool.

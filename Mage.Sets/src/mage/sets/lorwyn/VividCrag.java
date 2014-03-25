@@ -53,7 +53,7 @@ public class VividCrag extends CardImpl<VividCrag> {
         super(ownerId, 275, "Vivid Crag", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "LRW";
         // Vivid Crag enters the battlefield tapped with two charge counters on it.
-        EntersBattlefieldEffect effect = new EntersBattlefieldEffect(new TapSourceEffect(true), "tapped with two charge counters on it");
+        EntersBattlefieldEffect effect = new EntersBattlefieldEffect(new TapSourceEffect(true), "{this} enters the battlefield tapped with two charge counters on it");
         effect.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // {tap}: Add {R} to your mana pool.

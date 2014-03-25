@@ -53,7 +53,7 @@ public class VividCreek extends CardImpl<VividCreek> {
         super(ownerId, 276, "Vivid Creek", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "LRW";
         // Vivid Creek enters the battlefield tapped with two charge counters on it.
-        EntersBattlefieldEffect effect = new EntersBattlefieldEffect(new TapSourceEffect(true), "tapped with two charge counters on it");
+        EntersBattlefieldEffect effect = new EntersBattlefieldEffect(new TapSourceEffect(true), "{this} enters the battlefield tapped with two charge counters on it");
         effect.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // {tap}: Add {U} to your mana pool.
