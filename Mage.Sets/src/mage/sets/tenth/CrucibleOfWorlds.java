@@ -92,11 +92,9 @@ class CrucibleOfWorldsEffect extends ContinuousEffectImpl<CrucibleOfWorldsEffect
                 Card card = game.getCard(cardId);
                 if(card != null && card.getCardType().contains(CardType.LAND)){
                     PlayLandFromGraveyardAbility ability = new PlayLandFromGraveyardAbility(card.getName());
-                    if (ability != null) {
-                        ability.setSourceId(cardId);
-                        ability.setControllerId(card.getOwnerId());
-                        game.getState().addOtherAbility(cardId, ability);
-                    }
+                    ability.setSourceId(cardId);
+                    ability.setControllerId(card.getOwnerId());
+                    game.getState().addOtherAbility(cardId, ability);
                 }
             }
             return true;
