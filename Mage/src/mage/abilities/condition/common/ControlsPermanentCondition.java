@@ -50,6 +50,7 @@ public class ControlsPermanentCondition implements Condition {
     private Condition condition;
     private CountType type;
     private int count;
+    private boolean onlyControlled;
 
     /**
      * Applies a filter and delegates creation to
@@ -72,9 +73,14 @@ public class ControlsPermanentCondition implements Condition {
      * @param count
      */
     public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count ) {
+        this(filter, type, count, true);
+    }
+    
+    public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count, boolean onlyControlled ) {
         this.filter = filter;
         this.type = type;
-        this.count = count;
+        this.count = count;        
+        this.onlyControlled = onlyControlled;
     }
 
     /**
@@ -98,7 +104,9 @@ public class ControlsPermanentCondition implements Condition {
         boolean conditionApplies = false;
 
         FilterPermanent localFilter = filter.copy();
-        localFilter.add(new ControllerIdPredicate(source.getControllerId()));
+        if (onlyControlled) {
+            localFilter.add(new ControllerIdPredicate(source.getControllerId()));
+        }
 
         switch ( this.type ) {
             case FEWER_THAN:

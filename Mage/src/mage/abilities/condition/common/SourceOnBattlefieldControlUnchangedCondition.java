@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class PermanentOnBattlefieldControlUnchangedCondition implements Condition {
+public class SourceOnBattlefieldControlUnchangedCondition implements Condition {
     
     private UUID controllerId;
 

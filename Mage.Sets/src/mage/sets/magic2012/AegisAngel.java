@@ -36,7 +36,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.PermanentOnBattlefieldControlUnchangedCondition;
+import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -73,7 +73,7 @@ public class AegisAngel extends CardImpl<AegisAngel> {
 
         ConditionalContinousEffect effect = new ConditionalContinousEffect(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.Custom),
-                new PermanentOnBattlefieldControlUnchangedCondition(),
+                new SourceOnBattlefieldControlUnchangedCondition(),
                 "another target permanent is indestructible for as long as you control Aegis Angel");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         Target target = new TargetPermanent(filter);

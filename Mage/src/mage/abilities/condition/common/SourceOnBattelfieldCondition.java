@@ -38,7 +38,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class PermanentOnBattelfieldCondition implements Condition {
+public class SourceOnBattelfieldCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
