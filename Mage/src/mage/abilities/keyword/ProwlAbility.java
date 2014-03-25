@@ -62,7 +62,7 @@ import mage.watchers.common.ProwlWatcher;
 public class ProwlAbility extends StaticAbility<ProwlAbility> implements AlternativeSourceCosts {
 
     private static final String PROWL_KEYWORD = "Prowl";
-    private final List<AlternativeCost2> prowlCosts = new LinkedList<AlternativeCost2>();
+    private final List<AlternativeCost2> prowlCosts = new LinkedList<>();
     private String reminderText;
 
     public ProwlAbility(Card card, String manaString) {
@@ -191,11 +191,11 @@ public class ProwlAbility extends StaticAbility<ProwlAbility> implements Alterna
         for (String subtype: card.getSubtype()) {
             i++;
             sb.append(subtype);
-            if (card.getSupertype().size() > 1 && i < card.getSupertype().size()) {
+            if (card.getSubtype().size() > 1 && i < card.getSubtype().size()) {
                 sb.append(" or ");
-            }
+            }            
         }
-    //private static final String REMINDER_TEXT = "{subtypes}.)";
+        sb.append(".)");
 
         reminderText = sb.toString();
     }
