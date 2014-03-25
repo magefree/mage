@@ -28,28 +28,33 @@
 
 package mage.sets.magic2011;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class DemonOfDeathsGate extends CardImpl<DemonOfDeathsGate> {
+    
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
 
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
+    
     public DemonOfDeathsGate(UUID ownerId) {
         super(ownerId, 92, "Demon of Death's Gate", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
         this.expansionSetCode = "M11";
@@ -57,7 +62,11 @@ public class DemonOfDeathsGate extends CardImpl<DemonOfDeathsGate> {
         this.color.setBlack(true);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
-        this.getSpellAbility().addAlternativeCost(new DemonOfDeathsGateAlternativeCost());
+        
+        // You may pay 6 life and sacrifice three black creatures rather than pay Demon of Death's Gate's mana cost
+        AlternativeCostSourceAbility alternateCosts = new AlternativeCostSourceAbility(new PayLifeCost(6));
+        alternateCosts.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
+        this.addAbility(alternateCosts);
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
@@ -70,35 +79,6 @@ public class DemonOfDeathsGate extends CardImpl<DemonOfDeathsGate> {
     @Override
     public DemonOfDeathsGate copy() {
         return new DemonOfDeathsGate(this);
-    }
-
-}
-
-class DemonOfDeathsGateAlternativeCost extends AlternativeCostImpl<DemonOfDeathsGateAlternativeCost> {
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
-
-    public DemonOfDeathsGateAlternativeCost() {
-        super("pay 6 life and sacrifice three black creatures");
-        this.add(new PayLifeCost(6));
-        this.add(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
-    }
-
-    public DemonOfDeathsGateAlternativeCost(final DemonOfDeathsGateAlternativeCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public DemonOfDeathsGateAlternativeCost copy() {
-        return new DemonOfDeathsGateAlternativeCost(this);
-    }
-
-    @Override
-    public String getText() {
-        return "You may pay 6 life and sacrifice three black creatures rather than pay Demon of Death's Gate's mana cost";
     }
 
 }

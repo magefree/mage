@@ -29,21 +29,28 @@ package mage.sets.worldwake;
 
 import java.util.List;
 import java.util.UUID;
+import mage.ObjectColor;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
+import mage.players.Player;
 import mage.target.common.TargetAttackingCreature;
 import mage.util.CardUtil;
 
@@ -53,6 +60,14 @@ import mage.util.CardUtil;
  */
 public class NemesisTrap extends CardImpl<NemesisTrap> {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("If a white creature is attacking");
+    
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter.add(new AttackingPredicate());
+    }
+  
+    
     public NemesisTrap(UUID ownerId) {
         super(ownerId, 61, "Nemesis Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{B}{B}");
         this.expansionSetCode = "WWK";
@@ -61,7 +76,7 @@ public class NemesisTrap extends CardImpl<NemesisTrap> {
         this.color.setBlack(true);
 
         // If a white creature is attacking, you may pay {B}{B} rather than pay Nemesis Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new NemesisTrapAlternativeCost());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}{B}"), new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0, false)));
 
         // Exile target attacking creature. Put a token that's a copy of that creature onto the battlefield. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new NemesisTrapEffect());
@@ -75,40 +90,6 @@ public class NemesisTrap extends CardImpl<NemesisTrap> {
     @Override
     public NemesisTrap copy() {
         return new NemesisTrap(this);
-    }
-}
-
-class NemesisTrapAlternativeCost extends AlternativeCostImpl<NemesisTrapAlternativeCost> {
-
-    public NemesisTrapAlternativeCost() {
-        super("you may pay {B}{B} rather than pay {this}'s mana cost");
-        this.add(new ManaCostsImpl("{B}{B}"));
-    }
-
-    public NemesisTrapAlternativeCost(final NemesisTrapAlternativeCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public NemesisTrapAlternativeCost copy() {
-        return new NemesisTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
-        List<UUID> attackers = game.getCombat().getAttackers();
-        for (UUID creatureId : attackers) {
-            Permanent creature = game.getPermanent(creatureId);
-            if (creature.getColor().isWhite()) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    @Override
-    public String getText() {
-        return "If a white creature is attacking, you may pay {B}{B} rather than pay Nemesis Trap's mana cost";
     }
 }
 
@@ -130,12 +111,10 @@ class NemesisTrapEffect extends OneShotEffect<NemesisTrapEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetedCreature = game.getPermanent(source.getFirstTarget());
-        if (targetedCreature == null) {
-            targetedCreature = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-        if (targetedCreature != null) {
-            targetedCreature.moveToExile(id, "Nemesis Trap Exile", id, game);
+        Permanent targetedCreature = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && targetedCreature != null) {
+            controller.moveCardToExileWithInfo(targetedCreature, null, null, source.getSourceId(), game, Zone.BATTLEFIELD);
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(targetedCreature);
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
