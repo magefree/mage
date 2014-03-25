@@ -28,15 +28,14 @@
 
 package mage.abilities.effects.common.search;
 
-import java.util.List;
 import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -93,7 +92,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Cards cards = new CardsImpl();
-                for (UUID cardId: (List<UUID>)target.getTargets()) {
+                for (UUID cardId: target.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
                     if (card != null){
                         card.moveToZone(Zone.HAND, source.getId(), game, false);

@@ -45,8 +45,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class CyclingAbility extends ActivatedAbilityImpl<CyclingAbility> {
 
-    private Cost cost;
-    private String text;
+    private final Cost cost;
+    private final String text;
     
     public CyclingAbility(Cost cost) {
         super(Zone.HAND, new DrawCardControllerEffect(1), cost);
@@ -56,7 +56,7 @@ public class CyclingAbility extends ActivatedAbilityImpl<CyclingAbility> {
     }
     
     public CyclingAbility(Cost cost, FilterCard filter, String text){
-        super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), cost);
+        super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), cost);
         this.addCost(new DiscardSourceCost());
         this.cost = cost;
         this.text = text;
@@ -75,14 +75,15 @@ public class CyclingAbility extends ActivatedAbilityImpl<CyclingAbility> {
 
     @Override
     public String getRule() {
-        String rule;
+        StringBuilder rule = new StringBuilder(this.text);
         if(cost instanceof ManaCosts){
-            rule = this.text + " " + cost.getText() + " <i>(" + super.getRule() + ")</i>";
+            rule.append(" ");  
         }
         else{
-            rule = this.text + "-" + cost.getText() + " <i>(" + super.getRule() + ")</i>";
+            rule.append(" - ");  
         }
-        return rule;
+        rule.append(cost.getText()).append(" <i>(").append(super.getRule(true)).append(")</i>");
+        return rule.toString();
     }
 
 }
