@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
-import mage.sets.tokens.EmptyToken;
+import mage.game.permanent.token.EmptyToken;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 

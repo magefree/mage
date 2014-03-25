@@ -49,7 +49,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.tokens.EmptyToken;
+import mage.game.permanent.token.EmptyToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;

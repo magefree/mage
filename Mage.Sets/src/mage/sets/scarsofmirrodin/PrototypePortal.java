@@ -48,7 +48,7 @@ import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.tokens.EmptyToken;
+import mage.game.permanent.token.EmptyToken;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 

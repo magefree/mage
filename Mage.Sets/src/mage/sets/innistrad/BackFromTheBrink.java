@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.sets.tokens.EmptyToken;
+import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;

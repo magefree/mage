@@ -27,8 +27,6 @@
  */
 package mage.sets.mirage;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;

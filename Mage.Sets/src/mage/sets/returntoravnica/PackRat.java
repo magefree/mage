@@ -49,7 +49,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.tokens.EmptyToken;
+import mage.game.permanent.token.EmptyToken;
 import mage.util.CardUtil;
 
 /**

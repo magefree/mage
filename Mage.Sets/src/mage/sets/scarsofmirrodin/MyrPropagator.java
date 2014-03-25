@@ -40,7 +40,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.tokens.EmptyToken;
+import mage.game.permanent.token.EmptyToken;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -80,7 +80,7 @@ class MyrPropagatorCreateTokenEffect extends OneShotEffect<MyrPropagatorCreateTo
 
     public MyrPropagatorCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a token that's a copy of Myr Propagator onto the battlefield";
+        this.staticText = "Put a token that's a copy of {this} onto the battlefield";
     }
 
     public MyrPropagatorCreateTokenEffect(final MyrPropagatorCreateTokenEffect effect) {

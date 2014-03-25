@@ -25,9 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tokens;
-
-import mage.game.permanent.token.Token;
+package mage.game.permanent.token;
 
 /**
  * @author nantuko

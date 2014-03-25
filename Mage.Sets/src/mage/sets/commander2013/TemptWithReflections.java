@@ -41,7 +41,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
-import mage.sets.tokens.EmptyToken;
+import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 

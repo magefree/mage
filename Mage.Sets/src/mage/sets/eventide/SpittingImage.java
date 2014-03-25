@@ -41,7 +41,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.tokens.EmptyToken;
+import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;

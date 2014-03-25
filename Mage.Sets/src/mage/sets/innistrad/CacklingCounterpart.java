@@ -40,7 +40,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.tokens.EmptyToken;
+import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
