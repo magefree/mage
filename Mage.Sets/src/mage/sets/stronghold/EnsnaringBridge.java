@@ -28,15 +28,15 @@
 package mage.sets.stronghold;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -51,7 +51,7 @@ public class EnsnaringBridge extends CardImpl<EnsnaringBridge> {
         this.expansionSetCode = "STH";
 
         // Creatures with power greater than the number of cards in your hand can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnsnaringBridgeEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnsnaringBridgeRestrictionEffect()));
     }
 
     public EnsnaringBridge(final EnsnaringBridge card) {
@@ -64,49 +64,35 @@ public class EnsnaringBridge extends CardImpl<EnsnaringBridge> {
     }
 }
 
-class EnsnaringBridgeEffect extends ReplacementEffectImpl<EnsnaringBridgeEffect> {
 
+class EnsnaringBridgeRestrictionEffect extends RestrictionEffect<EnsnaringBridgeRestrictionEffect> {
 
-    public EnsnaringBridgeEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Creatures with power greater than the number of cards in your hand can't attack";
+    public EnsnaringBridgeRestrictionEffect() {
+        super(Duration.WhileOnBattlefield);
+        this.staticText = "Creatures with power greater than the number of cards in your hand can't attack";
     }
 
-    public EnsnaringBridgeEffect(final EnsnaringBridgeEffect effect) {
+    public EnsnaringBridgeRestrictionEffect(final EnsnaringBridgeRestrictionEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public EnsnaringBridgeEffect copy() {
-        return new EnsnaringBridgeEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DECLARE_ATTACKER) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null && player.getInRange().contains(permanent.getControllerId())) {
-                    Player controller = game.getPlayer(source.getControllerId());
-                    int cardInHand = controller.getHand().size();
-                    if (permanent.getPower().getValue() > cardInHand){
-                        return true;
-                    }
-                }
-            }
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            return permanent.getPower().getValue() > controller.getHand().size();
         }
         return false;
+    }
+
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
+
+    @Override
+    public EnsnaringBridgeRestrictionEffect copy() {
+        return new EnsnaringBridgeRestrictionEffect(this);
     }
 
 }
