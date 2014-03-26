@@ -1172,7 +1172,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility) {
-        DelayedTriggeredAbility newAbility = (DelayedTriggeredAbility) delayedAbility.copy();
+        DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
         state.addDelayedTriggeredAbility(newAbility);
     }
