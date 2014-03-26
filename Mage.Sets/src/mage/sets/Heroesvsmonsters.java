@@ -45,5 +45,6 @@ public class Heroesvsmonsters extends ExpansionSet {
 
     private Heroesvsmonsters() {
         super("Duel Decks: Heroes vs. Monsters", "DDL", "mage.sets.heroesvsmonsters", new GregorianCalendar(2013, 9, 6).getTime(), SetType.REPRINT);
+        this.hasBasicLands = false;
     }
 }

@@ -24,5 +24,6 @@ public class JaceVsChandra extends ExpansionSet {
 
     private JaceVsChandra() {
         super("Duel Decks: Jace vs. Chandra", "DD2", "mage.sets.jacevschandra", new GregorianCalendar(2008, 11, 07).getTime(), SetType.REPRINT);
+        this.hasBasicLands = false;
     }
 }

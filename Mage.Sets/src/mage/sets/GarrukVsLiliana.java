@@ -24,5 +24,6 @@ public class GarrukVsLiliana extends ExpansionSet {
 
     private GarrukVsLiliana() {
         super("Duel Decks: Garruk vs. Liliana", "DDD", "mage.sets.garrukvsliliana", new GregorianCalendar(2009, 10, 30).getTime(), SetType.REPRINT);
+        this.hasBasicLands = false;
     }
 }

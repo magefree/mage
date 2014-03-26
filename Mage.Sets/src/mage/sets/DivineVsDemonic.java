@@ -46,5 +46,6 @@ public class DivineVsDemonic extends ExpansionSet {
 
     private DivineVsDemonic() {
         super("Duel Decks: Divine vs. Demonic", "DDC", "mage.sets.divinevsdemonic", new GregorianCalendar(2009, 04, 10).getTime(), SetType.REPRINT);
+        this.hasBasicLands = false;
     }
 }

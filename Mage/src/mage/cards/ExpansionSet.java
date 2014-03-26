@@ -108,7 +108,7 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     public List<Card> createBooster() {
-        List<Card> booster = new ArrayList<Card>();
+        List<Card> booster = new ArrayList<>();
         if (!hasBoosters) {
             return booster;
         }
