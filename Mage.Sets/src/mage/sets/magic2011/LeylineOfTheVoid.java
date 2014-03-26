@@ -118,7 +118,8 @@ class LeylineOfTheVoidEffect extends ReplacementEffectImpl<LeylineOfTheVoidEffec
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
-            if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null && game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) {
                 return true;
             }
         }

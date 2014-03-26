@@ -29,11 +29,11 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -47,7 +47,9 @@ public class Blightning extends CardImpl<Blightning> {
         this.expansionSetCode = "ALA";
         this.color.setBlack(true);
         this.color.setRed(true);
-        this.getSpellAbility().addTarget(new TargetPlayer());
+
+        // Blightning deals 3 damage to target player. That player discards two cards.
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
     }
