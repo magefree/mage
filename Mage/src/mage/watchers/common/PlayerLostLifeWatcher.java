@@ -47,7 +47,7 @@ import mage.watchers.WatcherImpl;
  */
 public class PlayerLostLifeWatcher extends WatcherImpl<PlayerLostLifeWatcher> {
 
-    private Map<UUID, Integer> amountOfLifeLostThisTurn = new HashMap<UUID, Integer>();
+    private final Map<UUID, Integer> amountOfLifeLostThisTurn = new HashMap<>();
 
     public PlayerLostLifeWatcher() {
         super("PlayerLostLifeWatcher", WatcherScope.GAME);

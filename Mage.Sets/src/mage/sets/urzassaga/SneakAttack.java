@@ -25,11 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -37,7 +38,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -56,49 +56,46 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ThroughTheBreach extends CardImpl<ThroughTheBreach> {
+public class SneakAttack extends CardImpl<SneakAttack> {
 
-    public ThroughTheBreach(UUID ownerId) {
-        super(ownerId, 193, "Through the Breach", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Arcane");
+    public SneakAttack(UUID ownerId) {
+        super(ownerId, 218, "Sneak Attack", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
+        this.expansionSetCode = "USG";
 
         this.color.setRed(true);
 
-        // You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step.
-        this.getSpellAbility().addEffect(new ThroughTheBreachEffect());
-        // Splice onto Arcane {2}{R}{R}
-        this.addAbility(new SpliceOntoArcaneAbility(new ManaCostsImpl("{2}{R}{R}")));
+        // {R}: You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SneakAttackEffect(), new ManaCostsImpl("{R}")));
     }
 
-    public ThroughTheBreach(final ThroughTheBreach card) {
+    public SneakAttack(final SneakAttack card) {
         super(card);
     }
 
     @Override
-    public ThroughTheBreach copy() {
-        return new ThroughTheBreach(this);
+    public SneakAttack copy() {
+        return new SneakAttack(this);
     }
 }
 
-class ThroughTheBreachEffect extends OneShotEffect<ThroughTheBreachEffect> {
+class SneakAttackEffect extends OneShotEffect<SneakAttackEffect> {
     
     private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
-
-    public ThroughTheBreachEffect() {
+    
+    public SneakAttackEffect() {
         super(Outcome.Benefit);
-        this.staticText = "You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step";
+        this.staticText = "You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step";
     }
-
-    public ThroughTheBreachEffect(final ThroughTheBreachEffect effect) {
+    
+    public SneakAttackEffect(final SneakAttackEffect effect) {
         super(effect);
     }
-
+    
     @Override
-    public ThroughTheBreachEffect copy() {
-        return new ThroughTheBreachEffect(this);
+    public SneakAttackEffect copy() {
+        return new SneakAttackEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -108,20 +105,23 @@ class ThroughTheBreachEffect extends OneShotEffect<ThroughTheBreachEffect> {
                 if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        if (card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId())) {
+                        if (player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId())) {
                             Permanent permanent = game.getPermanent(card.getId());
                             ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
                             effect.setTargetPointer(new FixedTarget(permanent.getId()));
                             game.addEffect(effect, source);
+                            
                             SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName());
                             sacrificeEffect.setTargetPointer(new FixedTarget(card.getId()));
                             DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(sacrificeEffect);
                             delayedAbility.setSourceId(source.getSourceId());
                             delayedAbility.setControllerId(source.getControllerId());
                             game.addDelayedTriggeredAbility(delayedAbility);
-                        }
-                        return true;
+                            
+                            return true;
+                        }                        
                     }
+                    return false;
                 }
             }
             return true;
