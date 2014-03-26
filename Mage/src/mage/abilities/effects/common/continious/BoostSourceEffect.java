@@ -57,6 +57,9 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> i
     }
 
     /**
+     * @param power
+     * @param toughness
+     * @param duration
      * @param lockedIn if true, power and toughness will be calculated only once, when the ability resolves
      */
     public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn) {

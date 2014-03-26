@@ -46,7 +46,7 @@ public class BushidoAbility extends BlocksOrBecomesBlockedTriggeredAbility {
     }
 
     public BushidoAbility(DynamicValue value) {
-        super(new BoostSourceEffect(value, value, Duration.EndOfTurn), false);
+        super(new BoostSourceEffect(value, value, Duration.EndOfTurn, true), false);
         if (rule == null) {
             rule = new StringBuilder("{this} has bushido X, where X is ").append(value.getMessage()).toString();
         }
