@@ -31,9 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -44,7 +42,6 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -85,7 +82,6 @@ class KnightOfNewAlaraEffect extends ContinuousEffectImpl<KnightOfNewAlaraEffect
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     static {
         filter.add(new MulticoloredPredicate());
-        filter.add(new AnotherPredicate());
     }
 
     public KnightOfNewAlaraEffect() {
@@ -105,7 +101,7 @@ class KnightOfNewAlaraEffect extends ContinuousEffectImpl<KnightOfNewAlaraEffect
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {            
-            if (creature != null) {
+            if (creature != null && !creature.getId().equals(source.getSourceId())) {
                 int colors = creature.getColor().getColorCount();
                 creature.addPower(colors);
                 creature.addToughness(colors);
