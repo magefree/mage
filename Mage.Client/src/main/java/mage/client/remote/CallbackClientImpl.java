@@ -208,7 +208,7 @@ public class CallbackClientImpl implements CallbackClient {
                                     panel.ask(message.getMessage(), message.getGameView(), callback.getMessageId());
                                 }       break;
                             }
-                        case "gameTarget":
+                        case "gameTarget": // e.g. Pick triggered ability
                             {
                                 GameClientMessage message = (GameClientMessage) callback.getData();
                                 GamePanel panel = MageFrame.getGame(callback.getObjectId());

@@ -661,7 +661,17 @@ public final class GamePanel extends javax.swing.JPanel {
         updateGame(gameView);
         this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, null, messageId);
     }
-
+    /**
+     * Shows a pick target dialog  and allows the player to pick a target (e.g. the pick triggered ability)
+     * 
+     * @param message
+     * @param cardView
+     * @param gameView
+     * @param targets
+     * @param required
+     * @param options
+     * @param messageId 
+     */
     public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
         ShowCardsDialog dialog = null;
         updateGame(gameView);

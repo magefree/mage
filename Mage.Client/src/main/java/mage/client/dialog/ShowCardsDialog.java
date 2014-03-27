@@ -154,7 +154,10 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        this.hideDialog();
+        // only hide dialog, if a cardPanel was selected
+        if (e.getSource() instanceof CardPanel) {
+            this.hideDialog();
+        }
     }
 
     @Override

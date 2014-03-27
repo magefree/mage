@@ -90,10 +90,10 @@ public class GameState implements Serializable, Copyable<GameState> {
     private final Turn turn;
     // revealed cards <Name, <Cards>>, will be reset if all players pass priority
     private final Revealed revealed;
-    private final Map<UUID, LookedAt> lookedAt = new HashMap<UUID, LookedAt>();
+    private final Map<UUID, LookedAt> lookedAt = new HashMap<>();
     private final DelayedTriggeredAbilities delayed;
     private final SpecialActions specialActions;
-    private final Map<UUID, Abilities<ActivatedAbility>> otherAbilities = new HashMap<UUID, Abilities<ActivatedAbility>>();
+    private final Map<UUID, Abilities<ActivatedAbility>> otherAbilities = new HashMap<>();
     private final TurnMods turnMods;
     private final Watchers watchers;
     
@@ -111,11 +111,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean paused;
     private ContinuousEffects effects;
     private TriggeredAbilities triggers;
-    private List<TriggeredAbility> triggered = new ArrayList<TriggeredAbility>();
+    private List<TriggeredAbility> triggered = new ArrayList<>();
     private Combat combat;
-    private Map<String, Object> values = new HashMap<String, Object>();
-    private Map<UUID, Zone> zones = new HashMap<UUID, Zone>();
-    private List<GameEvent> simultaneousEvents = new ArrayList<GameEvent>();
+    private Map<String, Object> values = new HashMap<>();
+    private Map<UUID, Zone> zones = new HashMap<>();
+    private List<GameEvent> simultaneousEvents = new ArrayList<>();
 
     public GameState() {
         players = new Players();
@@ -246,7 +246,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
 
         sb.append("permanents");
-        List<String> perms = new ArrayList<String>();
+        List<String> perms = new ArrayList<>();
         for (Permanent permanent: battlefield.getAllPermanents()) {
             perms.add(permanent.getValue());
         }
