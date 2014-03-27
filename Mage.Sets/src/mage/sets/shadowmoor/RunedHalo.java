@@ -66,6 +66,15 @@ public class RunedHalo extends CardImpl<RunedHalo> {
         // As Runed Halo enters the battlefield, name a card.
         this.addAbility(new AsEntersBattlefieldAbility(new NameCard()));
 
+        /**
+         * 5/1/2008: Runed Halo gives you protection from each object with the chosen name, whether it's a card, a token, or a copy of a spell. It doesn't matter what game zone that object is in.
+         * 5/1/2008: You can still be attacked by creatures with the chosen name.
+         * 5/1/2008: You'll have protection from the name, not from the word. For example, if you choose the name Forest, you'll have protection from anything named "Forest" -- but you won't have protection from Forests. An animated Sapseep Forest, for example, could deal damage to you even though its subtype is Forest.
+         * 5/1/2008: You can name either half of a split card, but not both. You'll have protection from the half you named (and from a fused split spell with that name), but not the other half.
+         * 5/1/2008: You can't choose [nothing] as a name. Face-down creatures have no name, so Runed Halo can't give you protection from them.
+         * 5/1/2008: You must choose the name of a card, not the name of a token. For example, you can't choose "Saproling" or "Voja." However, if a token happens to have the same name as a card (such as "Shapeshifter" or "Goldmeadow Harrier"), you can choose it.
+         * 5/1/2008: You may choose either one of a flip card's names. You'll have protection only from the appropriate version. For example, if you choose Nighteyes the Desecrator, you won't have protection from Nezumi Graverobber.
+         */
         // You have protection from the chosen name.
         Effect effect = new GainAbilityControllerEffect(new ProtectionAbility(new FilterObject("empty")));
         effect.setText("You have protection from the chosen name  <i>(You can't be targeted, dealt damage, or enchanted by anything with that name.)<i/>");
@@ -97,7 +106,8 @@ class NameCard extends OneShotEffect<NameCard> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (controller != null && sourcePermanent != null) {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNames());
             cardChoice.clearChoice();
@@ -110,16 +120,12 @@ class NameCard extends OneShotEffect<NameCard> {
             game.informPlayers("Runed Halo, named card: [" + cardName + "]");
             FilterCard filter = new FilterCard(cardName);
             filter.add(new NamePredicate(cardName));
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                for (Ability ability : permanent.getAbilities()) {
-                    if (ability instanceof ProtectionAbility) {
-                        ((ProtectionAbility) ability).setFilter(filter);
-                    }
+            for (Ability ability : sourcePermanent.getAbilities()) {
+                if (ability instanceof ProtectionAbility) {
+                    ((ProtectionAbility) ability).setFilter(filter);
                 }
             }
-            permanent.addInfo("Named card", new StringBuilder("[Named card: ").append(cardName).append("]").toString());
-
+            sourcePermanent.addInfo("Named card", new StringBuilder("[Named card: ").append(cardName).append("]").toString());
         }
         return false;
     }

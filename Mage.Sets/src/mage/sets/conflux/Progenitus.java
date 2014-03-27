@@ -28,10 +28,6 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,6 +38,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -67,6 +67,11 @@ public class Progenitus extends CardImpl<Progenitus> {
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
 
+        //     2/1/2009: "Protection from everything" means the following: Progenitus can't be blocked,
+        //               Progenitus can't be enchanted or equipped, Progenitus can't be the target of
+        //               spells or abilities, and all damage that would be dealt to Progenitus is prevented.
+        //     2/1/2009: Progenitus can still be affected by effects that don't target it or deal damage
+        //               to it (such as Day of Judgment).
         // Protection from everything
         this.addAbility(new ProgenitusProtectionAbility());
         // If Progenitus would be put into a graveyard from anywhere, reveal Progenitus and shuffle it into its owner's library instead.
