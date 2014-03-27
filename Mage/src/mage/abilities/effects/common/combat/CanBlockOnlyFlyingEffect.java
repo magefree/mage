@@ -1,4 +1,4 @@
-    /*
+/*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -25,56 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
 
-import java.util.UUID;
-import mage.MageInt;
+package mage.abilities.effects.common.combat;
+
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.BestowAbility;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.Duration;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
-public class NimbusNaiad extends CardImpl<NimbusNaiad> {
 
-    public NimbusNaiad(UUID ownerId) {
-        super(ownerId, 56, "Nimbus Naiad", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Nymph");
+public class CanBlockOnlyFlyingEffect extends RestrictionEffect<CanBlockOnlyFlyingEffect> {
 
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
 
-        // Bestow {4}{U} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-         this.addAbility(new BestowAbility(this, "{4}{U}"));
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Enchanted creature gets +2/+2 and has flying.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,2));
-        Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has flying");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+    public CanBlockOnlyFlyingEffect(Duration duration) {
+        super(duration);
+        this.staticText = "{this} can block only creatures with flying";
     }
 
-    public NimbusNaiad(final NimbusNaiad card) {
-        super(card);
+    public CanBlockOnlyFlyingEffect(final CanBlockOnlyFlyingEffect effect) {
+        super(effect);
     }
 
     @Override
-    public NimbusNaiad copy() {
-        return new NimbusNaiad(this);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getId().equals(source.getSourceId());
     }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return attacker.getAbilities().contains(FlyingAbility.getInstance());
+    }
+
+    @Override
+    public CanBlockOnlyFlyingEffect copy() {
+        return new CanBlockOnlyFlyingEffect(this);
+    }
+
 }
