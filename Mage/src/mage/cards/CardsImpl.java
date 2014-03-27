@@ -158,7 +158,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Set<Card> getCards(FilterCard filter, Game game) {
-        Set<Card> cards = new LinkedHashSet<Card>();
+        Set<Card> cards = new LinkedHashSet<>();
         for (UUID card: this) {
             boolean match = filter.match(game.getCard(card), game);
             if (match) {
@@ -170,7 +170,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Set<Card> getCards(Game game) {
-        Set<Card> cards = new LinkedHashSet<Card>();
+        Set<Card> cards = new LinkedHashSet<>();
         for (UUID card: this) {
             cards.add(game.getCard(card));
         }
@@ -186,7 +186,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Collection<Card> getUniqueCards(Game game) {
-        Map<String, Card> cards = new HashMap<String, Card>();
+        Map<String, Card> cards = new HashMap<>();
         for(UUID cardId: this) {
             Card card = game.getCard(cardId);
             if (!cards.containsKey(card.getName())) {

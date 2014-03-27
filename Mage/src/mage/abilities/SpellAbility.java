@@ -93,9 +93,10 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
             if (!controllerId.equals(playerId)) {
                 return false;
             }
-            if (this.getManaCosts().isEmpty()) {
-                return false;
-            }
+            // Why is this check made? It prevents Flashback with non mana costs (Cabal Therapy)
+//            if (this.getManaCosts().isEmpty()) {
+//                return false;
+//            }
             if (costs.canPay(sourceId, controllerId, game)) {
                 if (getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());

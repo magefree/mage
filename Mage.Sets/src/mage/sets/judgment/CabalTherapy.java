@@ -61,7 +61,7 @@ public class CabalTherapy extends CardImpl<CabalTherapy> {
         this.color.setBlack(true);
 
         // Name a nonland card. Target player reveals his or her hand and discards all cards with that name.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new CabalTherapyEffect());
         // Flashback-Sacrifice a creature.
         this.addAbility(new FlashbackAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), true)), TimingRule.SORCERY));
@@ -80,7 +80,7 @@ public class CabalTherapy extends CardImpl<CabalTherapy> {
 class CabalTherapyEffect extends OneShotEffect<CabalTherapyEffect> {
 
     public CabalTherapyEffect() {
-        super(Outcome.Exile);
+        super(Outcome.Discard);
         staticText = "Name a nonland card. Search target player's hand for all cards with that name and discard them";
     }
 
@@ -107,7 +107,7 @@ class CabalTherapyEffect extends OneShotEffect<CabalTherapyEffect> {
             game.informPlayers("Cabal Therapy, named card: [" + cardName + "]");
             for (Card card : player.getHand().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    player.discard(card, source, game);
                 }
             }
 
