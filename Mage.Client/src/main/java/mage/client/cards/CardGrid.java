@@ -67,14 +67,14 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     protected CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
     protected UUID gameId;
-    private Map<UUID, MageCard> cards = new HashMap<UUID, MageCard>();
+    private final Map<UUID, MageCard> cards = new HashMap<>();
     private Dimension cardDimension;
 
     /**
      * Max amount of cards in card grid for which card images will be drawn.
      * Done so to solve issue with memory for big piles of cards.
      */
-    public static final int MAX_IMAGES = 300;
+    public static final int MAX_IMAGES = 350;
 
     public CardGrid() {
         initComponents();
@@ -97,7 +97,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 
     @Override
     public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId, boolean merge) {
-        boolean drawImage = showCards.size() < MAX_IMAGES;
+        boolean drawImage = showCards.size() <= MAX_IMAGES;
         this.bigCard = bigCard;
         this.gameId = gameId;
         if (merge) {
