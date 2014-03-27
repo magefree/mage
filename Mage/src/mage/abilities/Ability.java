@@ -391,6 +391,7 @@ public interface Ability extends Controllable, Serializable {
      */
     boolean getRuleVisible();
     
+
     /**
      * Sets the value for the ruleVisible attribute
      *
@@ -401,7 +402,24 @@ public interface Ability extends Controllable, Serializable {
      */
     void setRuleVisible(boolean ruleVisible);
 
+    /**
+     * Returns true if the additional costs of the abilitiy should be visible on the tooltip text
+     *
+     * @return
+     */
+    boolean getAdditionalCostsRuleVisible();
 
+    /**
+     * Sets the value for the additional costs rule attribute
+     *
+     * true = rule will be shown for the card / permanent
+     * false = rule won't be shown
+     *
+     * @param ruleAdditionalCostsVisible
+     */
+    void setAdditionalCostsRuleVisible(boolean ruleAdditionalCostsVisible);
+
+    
     /**
      * Get the originalId of the ability
      * 

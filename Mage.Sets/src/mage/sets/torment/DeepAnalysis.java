@@ -40,6 +40,7 @@ import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
+import mage.abilities.costs.Cost;
 
 /**
  *
@@ -58,7 +59,7 @@ public class DeepAnalysis extends CardImpl<DeepAnalysis> {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Flashback-{1}{U}, Pay 3 life.
-        Costs costs = new CostsImpl();
+        CostsImpl costs = new CostsImpl();
         costs.add(new ManaCostsImpl("{1}{U}"));
         costs.add(new PayLifeCost(3));
         this.addAbility(new FlashbackAbility(costs, TimingRule.SORCERY));

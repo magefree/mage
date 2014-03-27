@@ -32,7 +32,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -64,7 +63,9 @@ public class CabalTherapy extends CardImpl<CabalTherapy> {
         this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new CabalTherapyEffect());
         // Flashback-Sacrifice a creature.
-        this.addAbility(new FlashbackAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), true)), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), true)), 
+                TimingRule.SORCERY));
     }
 
     public CabalTherapy(final CabalTherapy card) {

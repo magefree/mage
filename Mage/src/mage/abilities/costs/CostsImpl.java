@@ -40,6 +40,7 @@ import mage.target.Targets;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> {
 
@@ -97,7 +98,7 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     @Override
     public boolean isPaid() {
         for (T cost: this) {
-            if (!((T)cost instanceof VariableManaCost) && !cost.isPaid()) {
+            if (!(cost instanceof VariableManaCost) && !cost.isPaid()) {
                 return false;
             }
         }
@@ -120,7 +121,7 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 
     @Override
     public Costs<T> getUnpaid() {
-        Costs<T> unpaid = new CostsImpl<T>();
+        Costs<T> unpaid = new CostsImpl<>();
         for (T cost: this) {
             if (!cost.isPaid()) {
                 unpaid.add(cost);
@@ -139,7 +140,7 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 
     @Override
     public List<VariableCost> getVariableCosts() {
-        List<VariableCost> variableCosts = new ArrayList<VariableCost>();
+        List<VariableCost> variableCosts = new ArrayList<>();
         for (T cost: this) {
             if (cost instanceof VariableCost) {
                 variableCosts.add((VariableCost) cost);

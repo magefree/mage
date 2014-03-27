@@ -57,6 +57,7 @@ public class FlashbackAbility extends SpellAbility {
 
     public FlashbackAbility(Cost cost, TimingRule timingRule) {
         super(null, "", Zone.GRAVEYARD);
+        this.setAdditionalCostsRuleVisible(false);
         this.name = new StringBuilder("Flashback ").append(cost.getText()).toString();
         this.addEffect(new FlashbackEffect());
         this.addCost(cost);
@@ -76,7 +77,7 @@ public class FlashbackAbility extends SpellAbility {
     public FlashbackAbility copy() {
         return new FlashbackAbility(this);
     }
-
+   
     @Override
     public String getRule(boolean all) {
         return this.getRule();

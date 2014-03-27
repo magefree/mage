@@ -95,6 +95,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     protected boolean usesStack = true;
     protected boolean ruleAtTheTop = false;
     protected boolean ruleVisible = true;
+    protected boolean ruleAdditionalCostsVisible = true;
 
     @Override
     public abstract T copy();
@@ -130,6 +131,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         this.modes = ability.modes.copy();
         this.ruleAtTheTop = ability.ruleAtTheTop;
         this.ruleVisible = ability.ruleVisible;
+        this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
     }
 
     @Override
@@ -760,7 +762,16 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         this.ruleVisible = ruleVisible;
     }
 
+    @Override
+    public boolean getAdditionalCostsRuleVisible() {
+        return ruleAdditionalCostsVisible;
+    }
 
+    @Override
+    public void setAdditionalCostsRuleVisible(boolean ruleAdditionalCostsVisible) {
+        this.ruleAdditionalCostsVisible = ruleAdditionalCostsVisible;
+    }
+    
     @Override
     public UUID getOriginalId() {
         return this.originalId;

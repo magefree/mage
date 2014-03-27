@@ -95,7 +95,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                     }
                     rules.add(sbRule.toString());
                 }
-                if (ability.getCosts().size() > 0) {
+                if (ability.getAdditionalCostsRuleVisible() && ability.getCosts().size() > 0) {
                     StringBuilder sbRule = new StringBuilder();
                     for (Cost cost: ability.getCosts()) {
                         if (cost.getText() != null && !cost.getText().isEmpty()) {

@@ -40,7 +40,7 @@ import java.util.UUID;
  */
 public class PayLifeCost extends CostImpl<PayLifeCost> {
 
-    private int amount;
+    private final int amount;
 
     public PayLifeCost(int amount) {
         this.amount = amount;
