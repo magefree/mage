@@ -72,7 +72,7 @@ public class Token extends MageObjectImpl<Token> {
         this.description = description;
     }
 
-    public Token(String name, String description, ObjectColor color, List<String> subtype, int power, int toughness, Abilities abilities) {
+    public Token(String name, String description, ObjectColor color, List<String> subtype, int power, int toughness, Abilities<Ability> abilities) {
         this(name, description);
         this.cardType.add(CardType.CREATURE);
         this.color = color.copy();

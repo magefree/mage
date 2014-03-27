@@ -1,13 +1,17 @@
 package mage.abilities.effects.common;
 
+import java.util.Locale;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
+import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author Loki
@@ -55,8 +59,19 @@ public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffe
     @Override
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source);
-        token.putOntoBattlefield(value, game, source.getSourceId(), targetPointer.getFirst(game, source), tapped, attacking);
-        return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (value < 1) {
+                return true;
+            }
+            if(token.putOntoBattlefield(value, game, source.getSourceId(), targetPointer.getFirst(game, source), tapped, attacking)) {
+                game.informPlayers(new StringBuilder(controller.getName())
+                    .append(" puts ").append(CardUtil.numberToText(value,"a")).append(" ").append(token.getName())
+                    .append(value == 1?" token":" tokens").append(" onto the Battlefield").toString());
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

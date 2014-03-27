@@ -30,10 +30,12 @@ package mage.sets.modernmasters;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -85,7 +87,7 @@ public class WarrenWeirding extends CardImpl<WarrenWeirding> {
 
 class WarrenWeirdingEffect extends OneShotEffect<WarrenWeirdingEffect> {
 
-    private static final FilterCreaturePermanent filterGoblin = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filterGoblin = new FilterCreaturePermanent();
     static {
         filterGoblin.add(new SubtypePredicate("Goblin"));
     }
@@ -116,9 +118,19 @@ class WarrenWeirdingEffect extends OneShotEffect<WarrenWeirdingEffect> {
             if (permanent != null) {
                 permanent.sacrifice(source.getSourceId(), game);
                 if (filterGoblin.match(permanent, game)) {
-                    Effect effect = new CreateTokenTargetEffect(new WarrenWeirdingBlackGoblinRogueToken(), 2);
-                    effect.setTargetPointer(new FixedTarget(player.getId()));
-                    effect.apply(game, source);
+                    for (int i = 0; i < 2; i++) {
+                        Token token = new WarrenWeirdingBlackGoblinRogueToken();
+                        Effect effect = new CreateTokenTargetEffect(token);
+                        effect.setTargetPointer(new FixedTarget(player.getId()));
+                        if (effect.apply(game, source)) {
+                            Permanent tokenPermanent = game.getPermanent(token.getLastAddedToken());
+                            if (tokenPermanent != null) {
+                                ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+                                hasteEffect.setTargetPointer(new FixedTarget(tokenPermanent.getId()));
+                                game.addEffect(hasteEffect, source);
+                            }
+                        }
+                    }
                 }
             }
             return true;
@@ -142,8 +154,5 @@ class WarrenWeirdingBlackGoblinRogueToken extends Token {
         subtype.add("Rogue");
         power.setValue(1);
         toughness.setValue(1);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
     }
 }
