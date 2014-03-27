@@ -522,7 +522,7 @@ public class MageActionCallback implements ActionCallback {
             }
             bigCard.setCard(mageCard.getOriginal().getId(), enlargeMode,  image, mageCard.getOriginal().getRules());
             // if it's an ability, show only the ability text as overlay
-            if (mageCard.getOriginal().isAbility()) {
+            if (mageCard.getOriginal().isAbility() && enlargeMode.equals(EnlargeMode.NORMAL)) {
                 bigCard.showTextComponent();
             } else {
                 bigCard.hideTextComponent();
