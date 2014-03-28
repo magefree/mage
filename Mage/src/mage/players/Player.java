@@ -417,6 +417,20 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone);
 
     /**
+     * Uses card.moveToZone and posts a inform message about moving the card to graveyard
+     * into the game log
+     *
+     * @param card
+     * @param sourceId
+     * @param game
+     * @param fromZone if null, this info isn't postet
+     * @param toTop to the top of the library else to the bottom
+     * @return
+     */
+    boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop);
+
+    
+    /**
      * Uses putOntoBattlefield and posts also a info message about in the game log
      *
      * @param card

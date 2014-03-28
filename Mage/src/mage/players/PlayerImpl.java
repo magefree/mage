@@ -1469,13 +1469,14 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void quit(Game game) {
-        quit = true;
         this.concede(game);
     }
 
     @Override
-    public void concede(Game game) {
+    public void concede(Game game) {        
         game.leave(playerId);
+        lost(game);
+        this.left = true;
     }
 
     @Override
@@ -2143,6 +2144,19 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     .append(" puts ").append(card.getName()).append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
                     .append("into his or her graveyard").toString());
+            result = true;
+        }
+        return result;
+    }
+
+    @Override 
+    public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop) {
+        boolean result = false;
+        if (card.moveToZone(Zone.LIBRARY, sourceId, game, toTop)) {
+            game.informPlayers(new StringBuilder(this.getName())
+                    .append(" puts ").append(card.getName()).append(" ")
+                    .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
+                    .append("to the ").append(toTop ? "top":"bottom").append(" of his or her library").toString());
             result = true;
         }
         return result;

@@ -265,8 +265,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThought
 
             Cards pile1 = new CardsImpl();
             if (opponent.choose(Outcome.Neutral, cards, target, game)) {
-                List<UUID> targets = target.getTargets();
-                for (UUID targetId : targets) {
+                for (UUID targetId : (List<UUID>) target.getTargets()) {
                     Card card = cards.get(targetId, game);
                     if (card != null) {
                         pile1.add(card);
@@ -276,11 +275,14 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThought
             }
             player.revealCards("Pile 1 (Jace, Architect of Thought)", pile1, game);
             player.revealCards("Pile 2 (Jace, Architect of Thought)", cards, game);
-
+            
+            postPileToLog("Pile 1", pile1.getCards(game), game);
+            postPileToLog("Pile 2", cards.getCards(game), game);
+            
             Cards cardsToHand = cards;
             Cards cardsToLibrary = pile1;
-            List<Card> cardPile1 = new ArrayList<Card>();
-            List<Card> cardPile2 = new ArrayList<Card>();
+            List<Card> cardPile1 = new ArrayList<>();
+            List<Card> cardPile2 = new ArrayList<>();
             for (UUID cardId: pile1) {
                 cardPile1.add(game.getCard(cardId));
             }
@@ -290,7 +292,6 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThought
 
             boolean pileChoice = player.choosePile(Outcome.Neutral, "Choose a pile to to put into your hand.", cardPile1, cardPile2, game);
             if (pileChoice){
-
                 cardsToHand = pile1;
                 cardsToLibrary = cards;
             }
@@ -299,7 +300,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThought
             for (UUID cardUuid : cardsToHand) {
                 Card card = cardsToHand.get(cardUuid, game);
                 if (card != null) {
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                    player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
 
@@ -310,17 +311,28 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThought
                 Card card = cardsToLibrary.get(targetCard.getFirstTarget(), game);
                 if (card != null) {
                     cardsToLibrary.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                    player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false);
                 }
                 target.clearChosen();
             }
             if (cardsToLibrary.size() == 1) {
                 Card card = cardsToLibrary.get(cardsToLibrary.iterator().next(), game);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false);
             }
             return true;
         }
         return false;
+    }
+    
+    private void postPileToLog(String pileName, Set<Card> cards, Game game) {
+        StringBuilder message = new StringBuilder(pileName).append(": ");
+        for (Card card : cards) {
+                message.append(card.getName()).append(" ");
+        }
+        if (cards.isEmpty()) {
+            message.append(" (empty)");
+        }
+        game.informPlayers(message.toString());
     }
 }
 
