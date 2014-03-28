@@ -151,8 +151,9 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ReplacementEffectImpl<Bosei
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            game.informPlayer(player, new StringBuilder("This spell can't be countered by spells or abilities (Boseiju, Who Shelters All)").toString());
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (player != null && spell != null) {
+            game.informPlayers(new StringBuilder(spell.getName()).append(" can't be countered by spells or abilities (Boseiju, Who Shelters All) - counter ignored").toString());
         }
         return true;
     }

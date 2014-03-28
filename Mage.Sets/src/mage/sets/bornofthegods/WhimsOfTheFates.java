@@ -119,7 +119,7 @@ class WhimsOfTheFateEffect extends OneShotEffect<WhimsOfTheFateEffect> {
                 }
                 // if player is in range of controller he chooses 3 piles with all its permanents
                 if (currentPlayer != null && controller.getInRange().contains(currentPlayer.getId())) {
-                    Map<Integer, Set<UUID>> playerPiles = new HashMap<Integer, Set<UUID>>();
+                    Map<Integer, Set<UUID>> playerPiles = new HashMap<>();
                     for (int i = 1; i < 4; i++) {
                         playerPiles.put(i, new LinkedHashSet<UUID>());
                     }
