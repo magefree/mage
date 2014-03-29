@@ -28,9 +28,10 @@
 
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
+import java.util.Random;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.CardType;
 
 /**
  *
@@ -39,7 +40,16 @@ import mage.ObjectColor;
 public class ZombieToken extends Token {
 
     public ZombieToken() {
+        this("10E");
+    }
+
+    public ZombieToken(String expansionSetCode) {
         super("Zombie", "2/2 black Zombie creature token");
+        this.setOriginalExpansionSetCode(expansionSetCode);
+        if (expansionSetCode.equals("ISD")) {
+            Random random = new Random();
+            this.setTokenType(random.nextInt(3) + 1);
+        }
         cardType.add(CardType.CREATURE);
         color = ObjectColor.BLACK;
         subtype.add("Zombie");

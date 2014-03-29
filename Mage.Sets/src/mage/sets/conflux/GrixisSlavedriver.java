@@ -53,7 +53,7 @@ public class GrixisSlavedriver extends CardImpl<GrixisSlavedriver> {
         this.subtype.add("Giant");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken("ALA")), false));
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{3}{B}")));
     }
 

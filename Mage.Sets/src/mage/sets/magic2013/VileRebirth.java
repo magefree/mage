@@ -28,14 +28,16 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInGraveyard;
+
+
 
 /**
  *
@@ -54,7 +56,7 @@ public class VileRebirth extends CardImpl<VileRebirth> {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
 
         // Put a 2/2 black Zombie creature token onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken("M13")));
     }
 
     public VileRebirth(final VileRebirth card) {

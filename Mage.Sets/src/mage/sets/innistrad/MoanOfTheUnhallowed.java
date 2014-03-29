@@ -28,13 +28,12 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.game.permanent.token.ZombieToken;
 
@@ -51,7 +50,7 @@ public class MoanOfTheUnhallowed extends CardImpl<MoanOfTheUnhallowed> {
         this.color.setBlack(true);
 
         // Put two 2/2 black Zombie creature tokens onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken("ISD"), 2));
 
         // Flashback {5}{B}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}{B}"), TimingRule.SORCERY));

@@ -28,10 +28,6 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,8 +37,11 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
@@ -88,7 +87,7 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl<UndeadAlchemi
 
     public UndeadAlchemistTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect(), true);
-        this.addEffect(new CreateTokenEffect(new ZombieToken()));
+        this.addEffect(new CreateTokenEffect(new ZombieToken("ISD")));
     }
 
     public UndeadAlchemistTriggeredAbility(final UndeadAlchemistTriggeredAbility ability) {
@@ -139,10 +138,11 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl<UndeadAlchemistEffect>
             int cardsCount = Math.min(event.getAmount(), player.getLibrary().size());
             for (int i = 0; i < cardsCount; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
-                if (card != null)
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
-                else
+                if (card != null) {
+                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                } else {
                     break;
+                }
             }
 
             return true;
@@ -156,8 +156,9 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl<UndeadAlchemistEffect>
             DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
             if (damageEvent.isCombatDamage()) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent != null && permanent.hasSubtype("Zombie"))
+                if (permanent != null && permanent.hasSubtype("Zombie")) {
                     return true;
+                }
             }
         }
         return false;

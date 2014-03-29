@@ -110,7 +110,7 @@ class NecromancersConvenantEffect extends OneShotEffect<NecromancersConvenantEff
                 count += 1;
             }
         }
-        ZombieToken zombieToken = new ZombieToken();
+        ZombieToken zombieToken = new ZombieToken("ALA");
         if (zombieToken.putOntoBattlefield(count, game, source.getId(), source.getControllerId())) {
             return true;
         }

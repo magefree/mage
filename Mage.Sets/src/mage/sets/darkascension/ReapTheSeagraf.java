@@ -1,5 +1,6 @@
 package mage.sets.darkascension;
 
+import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -8,8 +9,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.game.permanent.token.ZombieToken;
-
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -22,7 +21,7 @@ public class ReapTheSeagraf extends CardImpl<ReapTheSeagraf> {
 
         this.color.setBlack(true);
 
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken("ISD")));
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{U}"), TimingRule.SORCERY));
     }
 

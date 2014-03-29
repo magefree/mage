@@ -159,7 +159,7 @@ class UnscytheEffect extends OneShotEffect<UnscytheEffect> {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
             if (card.moveToExile(null, "Unscythe Exile", source.getId(), game)) {
-                ZombieToken zombie = new ZombieToken();
+                ZombieToken zombie = new ZombieToken("ALA");
                 return zombie.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
             }
         }

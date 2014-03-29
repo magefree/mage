@@ -28,13 +28,13 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -56,7 +56,7 @@ public class EndlessRanksOfTheDead extends CardImpl<EndlessRanksOfTheDead> {
         // At the beginning of your upkeep, put X 2/2 black Zombie creature tokens onto the battlefield,
         // where X is half the number of Zombies you control, rounded down.
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep",
-                new CreateTokenEffect(new ZombieToken(), new HalfZombiesCount())));
+                new CreateTokenEffect(new ZombieToken("ISD"), new HalfZombiesCount())));
 
     }
 

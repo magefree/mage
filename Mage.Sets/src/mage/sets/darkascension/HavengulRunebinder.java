@@ -72,7 +72,7 @@ public class HavengulRunebinder extends CardImpl<HavengulRunebinder> {
         // {2}{U}, {tap}, Exile a creature card from your graveyard: Put a 2/2 black Zombie creature token onto the battlefield,
         // then put a +1/+1 counter on each Zombie creature you control.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new ZombieToken()),
+                new CreateTokenEffect(new ZombieToken("ISD")),
                 new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));

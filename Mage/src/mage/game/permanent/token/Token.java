@@ -42,6 +42,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentToken;
+import mage.players.Player;
+import mage.util.CardUtil;
 
 
 public class Token extends MageObjectImpl<Token> {
@@ -116,6 +118,10 @@ public class Token extends MageObjectImpl<Token> {
     }
 
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller == null) {
+            return false;
+        }
         Card source = game.getCard(sourceId);
         String setCode;
         if (this.getOriginalExpansionSetCode() != null && !this.getOriginalExpansionSetCode().isEmpty()) {
@@ -144,6 +150,9 @@ public class Token extends MageObjectImpl<Token> {
                     game.getCombat().addAttackingCreature(newToken.getId(), game);
                 }
             }
+            game.informPlayers(new StringBuilder(controller.getName()).append(" puts ")
+                    .append(CardUtil.numberToText(amount, "a")).append(" ").append(this.getName()).append(" token").append(amount==1?"":"s")
+                    .append(" onto the battlefield").toString());
             return true;
         }
         return false;

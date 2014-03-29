@@ -28,13 +28,13 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TimingRule;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TimingRule;
 import mage.game.permanent.token.ZombieToken;
 
 
@@ -50,7 +50,7 @@ public class ArmyOfTheDamned extends CardImpl<ArmyOfTheDamned> {
         this.color.setBlack(true);
 
         // Put thirteen 2/2 black Zombie creature tokens onto the battlefield tapped.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 13, true, false));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken("ISD"), 13, true, false));
 
         // Flashback {7}{B}{B}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{B}{B}{B}"), TimingRule.SORCERY));

@@ -74,7 +74,7 @@ public class GraveTitan extends CardImpl<GraveTitan> {
 class GraveTitanAbility extends TriggeredAbilityImpl<GraveTitanAbility> {
 
     public GraveTitanAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken(), 2), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken("M11"), 2), false);
     }
 
     public GraveTitanAbility(final GraveTitanAbility ability) {

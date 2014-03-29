@@ -53,7 +53,7 @@ public class ZombieInfestation extends CardImpl<ZombieInfestation> {
 
         // Discard two cards: Put a 2/2 black Zombie creature token onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new ZombieToken()),
+                new CreateTokenEffect(new ZombieToken("M12")),
                 new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
         this.addAbility(ability);
     }

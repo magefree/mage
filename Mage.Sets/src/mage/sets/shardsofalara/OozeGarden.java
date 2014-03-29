@@ -67,7 +67,7 @@ public class OozeGarden extends CardImpl<OozeGarden> {
         this.color.setGreen(true);
 
         // {1}{G}, Sacrifice a non-Ooze creature: Put an X/X green Ooze creature token onto the battlefield, where X is the sacrificed creature's power. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OozeGardenCreateTokenEffect(), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
         this.addAbility(ability);
     }
@@ -82,20 +82,20 @@ public class OozeGarden extends CardImpl<OozeGarden> {
     }
 }
 
-class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
+class OozeGardenCreateTokenEffect extends OneShotEffect<OozeGardenCreateTokenEffect> {
 
-    public CreateTokenEffect() {
+    public OozeGardenCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Put an X/X green Ooze creature token onto the battlefield, where X is the sacrificed creature's power";
     }
 
-    public CreateTokenEffect(final CreateTokenEffect effect) {
+    public OozeGardenCreateTokenEffect(final OozeGardenCreateTokenEffect effect) {
         super(effect);
     }
 
     @Override
-    public CreateTokenEffect copy() {
-        return new CreateTokenEffect(this);
+    public OozeGardenCreateTokenEffect copy() {
+        return new OozeGardenCreateTokenEffect(this);
     }
 
     @Override
@@ -106,7 +106,7 @@ class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
                 value = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
             }
         }
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         list.add("Ooze");
         Token token = new Token("Ooze", "X/X green Ooze creature token onto the battlefield, where X is the sacrificed creature's power", ObjectColor.GREEN, list, value, value, new AbilitiesImpl()) {
            

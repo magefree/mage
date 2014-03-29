@@ -29,13 +29,12 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -71,7 +70,7 @@ public class NestedGhoul extends CardImpl<NestedGhoul> {
 
 class NestedGhoulTriggeredAbility extends TriggeredAbilityImpl<NestedGhoulTriggeredAbility> {
     NestedGhoulTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()));
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken("MBS")));
     }
 
     NestedGhoulTriggeredAbility(final NestedGhoulTriggeredAbility ability) {
