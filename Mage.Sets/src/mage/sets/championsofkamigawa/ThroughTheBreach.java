@@ -101,27 +101,30 @@ class ThroughTheBreachEffect extends OneShotEffect<ThroughTheBreachEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (player.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
                 TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
-                if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+                if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        if (card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId())) {
+                        if (controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId())) {
                             Permanent permanent = game.getPermanent(card.getId());
-                            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                            effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                            game.addEffect(effect, source);
-                            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName());
-                            sacrificeEffect.setTargetPointer(new FixedTarget(card.getId()));
-                            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(sacrificeEffect);
-                            delayedAbility.setSourceId(source.getSourceId());
-                            delayedAbility.setControllerId(source.getControllerId());
-                            game.addDelayedTriggeredAbility(delayedAbility);
+                            if (permanent != null) {
+                                ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+                                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                                game.addEffect(effect, source);
+                                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName());
+                                sacrificeEffect.setTargetPointer(new FixedTarget(card.getId()));
+                                DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(sacrificeEffect);
+                                delayedAbility.setSourceId(source.getSourceId());
+                                delayedAbility.setControllerId(source.getControllerId());
+                                game.addDelayedTriggeredAbility(delayedAbility);
+                                return true;
+                            }
                         }
-                        return true;
                     }
+                    return false;
                 }
             }
             return true;
