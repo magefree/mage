@@ -59,8 +59,8 @@ public class CrypticCommandTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thoughtseize", playerB);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cryptic Command", "Thoughtseize");
-        setModeChoice(playerB, "0"); // Counter target spell
-        setModeChoice(playerB, "3"); // Draw a card
+        setModeChoice(playerB, "1"); // Counter target spell
+        setModeChoice(playerB, "4"); // Draw a card
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Remand", "Thoughtseize", "Cryptic Command");
 

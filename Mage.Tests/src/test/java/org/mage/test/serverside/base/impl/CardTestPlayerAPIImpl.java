@@ -256,18 +256,24 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertResult(Player player, GameResult result) throws AssertionError {
         if (player.equals(playerA)) {
             GameResult actual = CardTestAPI.GameResult.DRAW;
-            if (currentGame.getWinner().equals("Player PlayerA is the winner")) {
-                actual = CardTestAPI.GameResult.WON;
-            } else if (currentGame.getWinner().equals("Player PlayerB is the winner")) {
-                actual = CardTestAPI.GameResult.LOST;
+            switch (currentGame.getWinner()) {
+                case "Player PlayerA is the winner":
+                    actual = CardTestAPI.GameResult.WON;
+                    break;
+                case "Player PlayerB is the winner":
+                    actual = CardTestAPI.GameResult.LOST;
+                    break;
             }
             Assert.assertEquals("Game results are not equal", result, actual);
         } else if (player.equals(playerB)) {
             GameResult actual = CardTestAPI.GameResult.DRAW;
-            if (currentGame.getWinner().equals("Player PlayerB is the winner")) {
-                actual = CardTestAPI.GameResult.WON;
-            } else if (currentGame.getWinner().equals("Player PlayerA is the winner")) {
-                actual = CardTestAPI.GameResult.LOST;
+            switch (currentGame.getWinner()) {
+                case "Player PlayerB is the winner":
+                    actual = CardTestAPI.GameResult.WON;
+                    break;
+                case "Player PlayerA is the winner":
+                    actual = CardTestAPI.GameResult.LOST;
+                    break;
             }
             Assert.assertEquals("Game results are not equal", result, actual);
         }
@@ -668,6 +674,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:"+attacker);
     }
 
+    public void attack(int turnNum, TestPlayer player, String attacker, String planeswalker) {
+        player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, new StringBuilder("attack:").append(attacker).append(";planeswalker=").append(planeswalker).toString());
+    }
+
     public void block(int turnNum, TestPlayer player, String blocker, String attacker) {
         player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:"+blocker+";"+attacker);
     }
@@ -676,6 +686,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addChoice(choice);
     }
 
+    /**
+     * Set the modes for modal spells
+     * 
+     * @param player
+     * @param choice starting with "1" for mode 1, "2" for mode 2 and so on (to set multiple modes call the command multiple times)
+     */
     public void setModeChoice(TestPlayer player, String choice) {
         player.addModeChoice(choice);
     }

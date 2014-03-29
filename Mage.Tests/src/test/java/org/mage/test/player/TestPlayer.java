@@ -57,6 +57,7 @@ import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.filter.common.FilterCreatureForCombatBlock;
+import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.stack.StackObject;
 
 /**
@@ -147,16 +148,34 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
 
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
-        UUID opponentId = game.getCombat().getDefenders().iterator().next();
+        UUID defenderId = null;
         for (PlayerAction action: actions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
+                for (UUID uuid: game.getCombat().getDefenders()) {
+                    Player defender = game.getPlayer(uuid);
+                    if (defender != null) {
+                        defenderId = uuid;
+                    }
+                }
                 String command = action.getAction();
                 command = command.substring(command.indexOf("attack:") + 7);
+                String[] groups = command.split(";");
+                for (int i = 1; i < groups.length; i++) {
+                    String group = groups[i];
+                    if (group.startsWith("planeswalker=")) {
+                        String planeswalkerName = group.substring(group.indexOf("planeswalker=") + 13);
+                        for (Permanent permanent :game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), game)) {
+                            if (permanent.getName().equals(planeswalkerName)) {
+                                defenderId = permanent.getId();                                        
+                            }
+                        }
+                    }
+                }
                 FilterCreatureForCombat filter = new FilterCreatureForCombat();
-                filter.add(new NamePredicate(command));
+                filter.add(new NamePredicate(groups[0]));
                 Permanent attacker = findPermanent(filter, playerId, game);
                 if (attacker != null && attacker.canAttack(game)) {
-                    this.declareAttacker(attacker.getId(), opponentId, game);
+                    this.declareAttacker(attacker.getId(), defenderId, game);
                 }
             }
         }
@@ -189,7 +208,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         if (!modesSet.isEmpty() && modes.getMaxModes() > modes.getSelectedModes().size()) {
             int selectedMode = Integer.parseInt(modesSet.get(0));            
-            int i = 0;
+            int i = 1;
             for (Mode mode: modes.values()) {
                 if (i == selectedMode) {
                     modesSet.remove(0);
