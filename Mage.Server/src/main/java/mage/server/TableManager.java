@@ -47,6 +47,7 @@ import mage.game.match.MatchPlayer;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.players.Player;
+import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
 import org.apache.log4j.Logger;
 
@@ -171,6 +172,20 @@ public class TableManager {
         for (TableController controller: controllers.values()) {
             if (controller.getTable().isTournamentSubTable()) {
                 controller.leaveTable(userId);
+            }
+        }
+    }
+
+    // remove user from all sub tables of a tournament
+    public void userQuitTournamentSubTables(UUID tournamentId, UUID userId) {
+        for (TableController controller: controllers.values()) {
+            if (controller.getTable().isTournamentSubTable() && controller.getTable().getTournament().getId().equals(tournamentId)) {
+                Match match = controller.getTable().getMatch();
+                if (match != null) {
+                    if (match.getGame() != null) {
+                        GameManager.getInstance().quitMatch(match.getGame().getId(), userId);
+                    }
+                }
             }
         }
     }
@@ -341,20 +356,10 @@ public class TableManager {
                     logger.warn("Table expired: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
                     toRemove.add(table.getId());
                 }
-                // remove immediately non tournament tables with no human players
+                // remove tables not valid anymore
                 else if (!table.isTournament()) {
-                    boolean canBeRemoved = true;
-                    for (MatchPlayer matchPlayer :table.getMatch().getPlayers()) {
-                        Player player = matchPlayer.getPlayer();
-                        if (player != null && player.isHuman() && !player.hasLeft()) {
-                            canBeRemoved = false;
-                        }
-                        // tournament sub tables may not be removed as long the tournament is not finished
-                        if(table.isTournamentSubTable() && table.getTournament().getEndTime() == null) {
-                            canBeRemoved = false;
-                        }
-                    }
-                    if (canBeRemoved) {
+                    TableController tableController = getController(table.getId());
+                    if (!tableController.isMatchTableStillValid()) {
                         logger.warn("Table with no active human player: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
                         toRemove.add(table.getId());
                     }

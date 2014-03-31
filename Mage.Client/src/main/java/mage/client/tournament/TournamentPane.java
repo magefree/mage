@@ -54,7 +54,7 @@ public class TournamentPane extends MagePane {
         this.repaint();
     }
 
-    public void hideTournament() {
+    public void removeTournament() {
         tournamentPanel.cleanUp();
         removeFrame();
     }

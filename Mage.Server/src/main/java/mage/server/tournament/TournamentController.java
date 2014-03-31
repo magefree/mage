@@ -53,6 +53,7 @@ import mage.server.UserManager;
 import mage.server.draft.DraftController;
 import mage.server.draft.DraftManager;
 import mage.server.draft.DraftSession;
+import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;
@@ -91,6 +92,9 @@ public class TournamentController {
                 @Override
                 public void event(TableEvent event) {
                     switch (event.getEventType()) {
+                        case CHECK_STATE_PLAYERS:
+                            checkPlayersState();
+                            break;
                         case INFO:
                             ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, MessageType.STATUS);
                             logger.debug(tournament.getId() + " " + event.getMessage());
@@ -214,8 +218,8 @@ public class TournamentController {
             table.setTournament(tournament);
             TournamentPlayer player1 = pair.getPlayer1();
             TournamentPlayer player2 = pair.getPlayer2();
-            tableManager.addPlayer(getPlayerSessionId(player1.getPlayer().getId()), table.getId(), player1.getPlayer(), player1.getPlayerType(), player1.getDeck());
-            tableManager.addPlayer(getPlayerSessionId(player2.getPlayer().getId()), table.getId(), player2.getPlayer(), player2.getPlayerType(), player2.getDeck());
+            tableManager.addPlayer(getPlayerUserId(player1.getPlayer().getId()), table.getId(), player1.getPlayer(), player1.getPlayerType(), player1.getDeck());
+            tableManager.addPlayer(getPlayerUserId(player2.getPlayer().getId()), table.getId(), player2.getPlayer(), player2.getPlayerType(), player2.getDeck());
             tableManager.startTournamentSubMatch(null, table.getId());
             pair.setMatch(tableManager.getMatch(table.getId()));
             pair.setTableId(table.getId());
@@ -242,7 +246,7 @@ public class TournamentController {
         if (tournamentSessions.containsKey(playerId)) {
             TournamentSession tournamentSession = tournamentSessions.get(playerId);
             tournamentSession.construct(timeout);
-            UserManager.getInstance().getUser(getPlayerSessionId(playerId)).addConstructing(playerId, tournamentSession);
+            UserManager.getInstance().getUser(getPlayerUserId(playerId)).addConstructing(playerId, tournamentSession);
             TournamentPlayer player = tournament.getPlayer(playerId);
             player.setState(TournamentPlayerState.CONSTRUCTING);
         }
@@ -285,6 +289,8 @@ public class TournamentController {
                     String info;
                     if (tournament.isDoneConstructing()) {
                         info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();
+                        // quit active matches of that tournament
+                        TableManager.getInstance().userQuitTournamentSubTables(tournament.getId(), userId);
                     } else {
                         if (tPlayer.getState().equals(TournamentPlayerState.DRAFTING)) {
                             info = "during Draft phase";
@@ -344,7 +350,7 @@ public class TournamentController {
         return false;
     }
 
-    private UUID getPlayerSessionId(UUID playerId) {
+    private UUID getPlayerUserId(UUID playerId) {
         for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
             if (entry.getValue().equals(playerId)) {
                 return entry.getKey();
@@ -364,5 +370,29 @@ public class TournamentController {
 
     public boolean isAbort() {
         return tournament.isAbort();
+    }
+
+    public boolean isPlayerAlive(UUID playerId) {
+        if (tournamentSessions.containsKey(playerId)) {
+            return tournamentSessions.get(playerId).isKilled();
+        }
+        return false;
+    }
+
+    private void checkPlayersState() {
+        for (TournamentPlayer tournamentPlayer: tournament.getPlayers()) {
+            if (!tournamentPlayer.getEliminated()) {
+                if (tournamentSessions.containsKey(tournamentPlayer.getPlayer().getId())) {
+                    if (tournamentSessions.get(tournamentPlayer.getPlayer().getId()).isKilled()) {
+                        tournamentPlayer.setEliminated();
+                        tournamentPlayer.setStateInfo("disconnected");
+                    }
+                } else {
+                    tournamentPlayer.setEliminated();
+                    tournamentPlayer.setStateInfo("no tournament session");
+                }
+            }
+        }
+
     }
 }

@@ -50,7 +50,8 @@ public interface MageServer {
     // connection methods
     boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException;
     boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException;
-    void deregisterClient(String sessionId) throws MageException;
+// Not used
+//    void deregisterClient(String sessionId) throws MageException;
 
     // update methods
     List<ExpansionInfo> getMissingExpansionData(List<String> codes);

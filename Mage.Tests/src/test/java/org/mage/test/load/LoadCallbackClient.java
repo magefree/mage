@@ -34,44 +34,62 @@ public class LoadCallbackClient implements CallbackClient {
         controlCount = 0;
         log.info(callback.getMethod());
         callback.setData(CompressUtil.decompress(callback.getData()));
-        if (callback.getMethod().equals("startGame")) {
-            TableClientMessage message = (TableClientMessage) callback.getData();
-            gameId = message.getGameId();
-            playerId = message.getPlayerId();
-            session.joinGame(message.getGameId());
-            startControlThread();
-        } else if (callback.getMethod().equals("gameInform")) {
-            GameClientMessage message = (GameClientMessage) callback.getData();
-            log.info("Inform: " + message.getMessage());
-            gameView = message.getGameView();
-        } else if (callback.getMethod().equals("gameInit")) {
-
-        } else if (callback.getMethod().equals("gameTarget")) {
-            GameClientMessage message = (GameClientMessage) callback.getData();
-            log.info("Target: " + message.getMessage());
-            if (message.getMessage().equals("Select a starting player")) {
-                session.sendPlayerUUID(gameId, playerId);
-            } else if (message.getMessage().equals("Select a card to discard")) {
-                log.info("hand size: " + gameView.getHand().size());
-                SimpleCardView card = gameView.getHand().values().iterator().next();
-                session.sendPlayerUUID(gameId, card.getId());
-            }
-        } else if (callback.getMethod().equals("gameAsk")) {
-            GameClientMessage message = (GameClientMessage) callback.getData();
-            log.info("Ask: " + message.getMessage());
-            if (message.getMessage().equals("Do you want to take a mulligan?")) {
-                session.sendPlayerBoolean(gameId, false);
-            }
-        } else if (callback.getMethod().equals("gameSelect")) {
-            GameClientMessage message = (GameClientMessage) callback.getData();
-            log.info("Select: " + message.getMessage());
-            if (LoadPhaseManager.getInstance().isSkip(message.getGameView(), message.getMessage(), playerId)) {
-                log.info("Skipped: " + message.getMessage());
-                session.sendPlayerBoolean(gameId, false);
-            }
-        } else if (callback.getMethod().equals("gameOver")) {
-            log.info("Game over");
-            gameOver = true;
+        switch (callback.getMethod()) {
+            case "startGame":
+                {
+                    TableClientMessage message = (TableClientMessage) callback.getData();
+                    gameId = message.getGameId();
+                    playerId = message.getPlayerId();
+                    session.joinGame(message.getGameId());
+                    startControlThread();
+                    break;
+                }
+            case "gameInform":
+                {
+                    GameClientMessage message = (GameClientMessage) callback.getData();
+                    log.info("Inform: " + message.getMessage());
+                    gameView = message.getGameView();
+                    break;
+                }
+            case "gameInit":
+                break;
+            case "gameTarget":
+                {
+                    GameClientMessage message = (GameClientMessage) callback.getData();
+                    log.info("Target: " + message.getMessage());
+                    switch (message.getMessage()) {
+                        case "Select a starting player":
+                            session.sendPlayerUUID(gameId, playerId);
+                            break;
+                        case "Select a card to discard":
+                            log.info("hand size: " + gameView.getHand().size());
+                            SimpleCardView card = gameView.getHand().values().iterator().next();
+                            session.sendPlayerUUID(gameId, card.getId());
+                            break;
+                    }
+                    break;
+                }
+            case "gameAsk":
+                {
+                    GameClientMessage message = (GameClientMessage) callback.getData();
+                    log.info("Ask: " + message.getMessage());
+                    if (message.getMessage().equals("Do you want to take a mulligan?")) {
+                        session.sendPlayerBoolean(gameId, false);
+                    }       break;
+                }
+            case "gameSelect":
+                {
+                    GameClientMessage message = (GameClientMessage) callback.getData();
+                    log.info("Select: " + message.getMessage());
+                    if (LoadPhaseManager.getInstance().isSkip(message.getGameView(), message.getMessage(), playerId)) {
+                        log.info("Skipped: " + message.getMessage());
+                        session.sendPlayerBoolean(gameId, false);
+                    }       break;
+                }
+            case "gameOver":
+                log.info("Game over");
+                gameOver = true;
+                break;
         }
 
     }

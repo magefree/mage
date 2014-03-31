@@ -337,7 +337,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.wins = false;
         this.loses = false;
         this.left = false;
-        // quittet won't be reset because the player stays quit
+        this.quit = false;
         this.passed = false;
         this.passedTurn = false;
         this.passedAllTurns = false;
@@ -1469,6 +1469,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void quit(Game game) {
+        quit = true;
         this.concede(game);
     }
 

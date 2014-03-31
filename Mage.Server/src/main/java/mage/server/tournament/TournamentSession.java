@@ -39,7 +39,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
-import mage.view.*;
+import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
 /**
@@ -121,6 +121,10 @@ public class TournamentSession {
 
     public void setKilled() {
         killed = true;
+    }
+
+    public boolean isKilled() {
+        return killed;
     }
 
     private synchronized void setupTimeout(int seconds) {

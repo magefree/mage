@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.constants.TournamentPlayerState;
+import mage.game.events.TableEvent;
 
 /**
  *
@@ -45,7 +46,7 @@ public abstract class TournamentSwiss extends TournamentImpl {
     }
 
     @Override
-    protected void runTournament() {
+    protected void runTournament() {        
         for (Map.Entry<UUID, TournamentPlayer> entry: players.entrySet()) {
             if (entry.getValue().getPlayer().autoLoseGame()) {
                 entry.getValue().setEliminated();
@@ -54,6 +55,8 @@ public abstract class TournamentSwiss extends TournamentImpl {
         }
 
         while (this.getActivePlayers().size() > 1 && this.getNumberRounds() > this.getRounds().size()) {
+            // check if some player got killed / disconnected meanwhile and update their state
+            tableEventSource.fireTableEvent(TableEvent.EventType.CHECK_STATE_PLAYERS);
             // Swiss pairing 
             Round round = createRoundSwiss();
             playRound(round);

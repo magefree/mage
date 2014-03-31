@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
@@ -42,6 +43,7 @@ import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
 import mage.server.game.GameSession;
 import mage.server.tournament.TournamentSession;
+import mage.server.util.SystemUtil;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
 
@@ -131,6 +133,13 @@ public class User {
 
     public boolean isConnected() {
         return userState == UserState.Connected || userState == UserState.Reconnected;
+    }
+
+    public String getDisconnectDuration() {
+        long secondsDisconnected = SystemUtil.getDateDiff(lastActivity, new Date(), TimeUnit.SECONDS);
+        int minutes = (int) secondsDisconnected / 60;
+        int seconds = (int) secondsDisconnected % 60;
+        return new StringBuilder(Integer.toString(minutes)).append(":").append(seconds > 9 ? seconds: "0" + Integer.toString(seconds)).toString();
     }
 
     public Date getConnectionTime() {
@@ -246,7 +255,7 @@ public class User {
         }
         
         for (Entry<UUID, TournamentSession> entry: constructing.entrySet()) {
-            entry.getValue().construct(0);
+            entry.getValue().construct(0); // TODO: Check if this is correct
         }
         for (Entry<UUID, Deck> entry: sideboarding.entrySet()) {
             TableController controller = TableManager.getInstance().getController(entry.getKey());
@@ -323,10 +332,15 @@ public class User {
     }
 
     public String getGameInfo() {
-
         StringBuilder sb = new StringBuilder();
+
+        String disconnectInfo = "";
+        if (!isConnected()) {
+            disconnectInfo = new StringBuilder(" (discon. ").append(getDisconnectDuration()).append(")").toString();
+        }
         int draft = 0, match = 0, sideboard = 0, tournament = 0, construct = 0;
-        for (Table table : tables.values()) {
+        for (Map.Entry<UUID, Table> tableEntry : tables.entrySet()) {
+            Table table = tableEntry.getValue();
             if (table.isTournament()) {
                 switch (table.getState()) {
                     case CONSTRUCTING:
@@ -338,6 +352,11 @@ public class User {
                     case DUELING:
                         tournament++;
                         break;
+                }
+                if (!isConnected()) {
+                    table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo(disconnectInfo);
+                } else {
+                    table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo("");
                 }
             } else {
                 switch (table.getState()) {
@@ -365,6 +384,7 @@ public class User {
         if (tournament > 0) {
             sb.append("TP: ").append(tournament).append(" ");
         }
+        sb.append(disconnectInfo);
         return sb.toString();
     }
 

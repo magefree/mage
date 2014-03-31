@@ -8,11 +8,13 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.io.File;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -163,5 +165,18 @@ public class SystemUtil {
         System.out.println(sanitize("anPlsdf123_") + "|");
         System.out.println(sanitize("anPlsdf123 ") + "|");
         System.out.println(sanitize("anPlsdf123\r\n") + "|");
+    }
+
+    /**
+     * Get a diff between two dates
+     *
+     * @param date1 the oldest date
+     * @param date2 the newest date
+     * @param timeUnit the unit in which you want the diff
+     * @return the diff value, in the provided unit
+     */
+    public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 }

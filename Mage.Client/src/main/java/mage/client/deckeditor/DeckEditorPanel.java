@@ -329,6 +329,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
     }
 
+    public DeckEditorMode getDeckEditorMode() {
+        return mode;
+    }
+
     private BigCard getBigCard() {
         return this.bigCard;
     }

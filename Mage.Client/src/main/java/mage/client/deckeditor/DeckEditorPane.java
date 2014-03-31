@@ -88,6 +88,9 @@ public class DeckEditorPane extends MagePane {
         this.repaint();
     }
 
+    public DeckEditorMode getDeckEditorMode() {
+        return this.deckEditorPanel1.getDeckEditorMode();
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

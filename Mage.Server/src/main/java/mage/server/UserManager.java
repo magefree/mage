@@ -102,13 +102,13 @@ public class UserManager {
 
     public void disconnect(UUID userId, User.DisconnectReason reason) {
         if (userId != null) {
-            ChatManager.getInstance().removeUser(userId, reason);
             if (users.containsKey(userId)) {
                 User user = users.get(userId);
-                logger.debug(new StringBuilder("User ").append(user.getName()).append(" has lost connection  userId:").append(userId));
-                users.get(userId).setSessionId("");
+                user.setSessionId(""); // Session will be set again with new id if user reconnects
                 ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
+                logger.info(new StringBuilder("User ").append(user.getName()).append(" has lost connection  userId:").append(userId));                
             }
+            ChatManager.getInstance().removeUser(userId, reason);
         }
     }
 
@@ -143,6 +143,9 @@ public class UserManager {
         return false;
     }
 
+    /**
+     * Is the connection lost for more than 3 minutes, the user will be removed (within 3 minutes he can reconnect)
+     */
     private void checkExpired() {
         Calendar expired = Calendar.getInstance();
         expired.add(Calendar.MINUTE, -3) ;

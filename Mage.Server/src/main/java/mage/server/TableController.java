@@ -42,7 +42,6 @@ import mage.cards.decks.InvalidDeckException;
 import mage.constants.RangeOfInfluence;
 import mage.constants.TableState;
 import mage.game.GameException;
-import mage.game.GameOptions;
 import mage.game.Seat;
 import mage.game.Table;
 import mage.game.draft.Draft;
@@ -56,7 +55,6 @@ import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentPlayer;
 import mage.players.Player;
-import mage.server.challenge.ChallengeManager;
 import mage.server.draft.DraftManager;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
@@ -306,7 +304,7 @@ public class TableController {
         }
         else {
             TournamentManager.getInstance().submitDeck(tournament.getId(), playerId, deck);
-            UserManager.getInstance().getUser(userId).removeConstructing(table.getId());
+            UserManager.getInstance().getUser(userId).removeConstructing(playerId);
         }
     }
 
@@ -474,6 +472,14 @@ public class TableController {
                 if (!match.getPlayer(entry.getValue()).hasQuit()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
+                        if (!user.isConnected()) {
+                            // if the user is not connected but exits, the user is currently disconnected. So it's neccessary
+                            // to join the user to the game here, so he can join the game, if he reconnects in time.
+                            // remove a existing constructing for the player if it exists
+                            user.removeConstructing(match.getPlayer(entry.getValue()).getPlayer().getId());
+                            GameManager.getInstance().joinGame(match.getGame().getId(), user.getId());
+                        }
+
                         logger.info(new StringBuilder("User ").append(user.getName()).append(" game started - matchId ").append(match.getId()).append(" userId: ").append(user.getId()));
                         user.gameStarted(match.getGame().getId(), entry.getValue());
                         if (creator == null) {
@@ -486,10 +492,8 @@ public class TableController {
                         }
                     }
                     else {
-                        TableManager.getInstance().removeTable(table.getId());
-                        GameManager.getInstance().removeGame(match.getGame().getId());
                         logger.warn("Unable to find player " + entry.getKey());
-                        break;
+                        match.getPlayer(entry.getValue()).setQuit(true);
                     }
                 }
             }
@@ -658,7 +662,9 @@ public class TableController {
                             user.showUserMessage("Match info", sb.toString());
                         }
                         // remove table from user - table manager holds table for display of finished matches
-                        user.removeTable(entry.getValue());
+                        if (!table.isTournamentSubTable()) {
+                            user.removeTable(entry.getValue());
+                        }
                     }
                 }                
             }           
@@ -735,4 +741,29 @@ public class TableController {
         return match;
     }
 
+    public boolean isMatchTableStillValid() {
+        // check only normal match table
+        if (!table.isTournament() && !table.isTournamentSubTable()) {
+            int humanPlayers = 0;
+            int validHumanPlayers = 0;
+            if (match == null) {
+                return false;
+            }
+            for(Map.Entry<UUID, UUID> userPlayerEntry: userPlayerMap.entrySet()) {
+                MatchPlayer matchPlayer = match.getPlayer(userPlayerEntry.getValue());
+                if (matchPlayer.getPlayer().isHuman()) {
+                    humanPlayers++;
+                    if (!matchPlayer.hasQuit()) {
+                        User user = UserManager.getInstance().getUser(userPlayerEntry.getKey());
+                        if (user != null) {
+                            validHumanPlayers++;
+                        }
+                    }
+                }
+            }
+            // if at least 2 human players are valid (multiplayer) or all human players are valid the table is valid
+            return validHumanPlayers >= 2 || validHumanPlayers == humanPlayers;
+        }
+        return true;
+    }
 }

@@ -73,7 +73,7 @@ public class DraftPane extends MagePane {
         this.draftPanel1.showDraft(draftId);
     }
    
-    public void hideDraft() {
+    public void removeDraft() {
         draftPanel1.cleanUp();
         this.removeFrame();
     }

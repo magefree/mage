@@ -37,6 +37,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.server.util.ConfigSettings;
+import mage.view.ChatMessage;
 import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
@@ -88,6 +89,8 @@ public class Session {
             user = UserManager.getInstance().findUser(userName);
             if (user.getHost().equals(host)) {
                 if (user.getSessionId().isEmpty()) {
+                    // TODO Send Chat message to tables (user is not registered yet)
+                    // ChatManager.getInstance().broadcast([CHAT ID TABLES], "has reconnected", ChatMessage.MessageColor.GREEN);
                     logger.info("Reconnecting session for " + userName);
                 } else {
                     //throw new MageException("This machine is already connected");
@@ -124,7 +127,10 @@ public class Session {
                 userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(), userDataView.isShowAbilityPickerForced());
                 user.setUserData(userData);
             } else {
-                userData.setAvatarId(userDataView.getAvatarId());
+                if (userDataView.getAvatarId() == 51) { // Update special avatar if first avatar is selected
+                    updateAvatar(userName, userData);
+                }
+                userData.setAvatarId(userDataView.getAvatarId());                
                 userData.setShowAbilityPickerForced(userDataView.isShowAbilityPickerForced());
             }
             return true;

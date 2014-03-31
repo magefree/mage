@@ -46,7 +46,7 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 
     public enum EventType {
         UPDATE, INFO, STATUS, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END, END_GAME_INFO, ERROR,
-        INIT_TIMER, RESUME_TIMER, PAUSE_TIMER
+        INIT_TIMER, RESUME_TIMER, PAUSE_TIMER, CHECK_STATE_PLAYERS
     }
 
     private Game game;

@@ -112,9 +112,6 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         List<UsersView> users = new ArrayList<>();
         for (User user : UserManager.getInstance().getUsers()) {
             StringBuilder sb = new StringBuilder(user.getGameInfo());
-            if (!user.isConnected()) {
-                sb.append(" (discon.)");
-            } 
             users.add(new UsersView(user.getName(), user.getInfo(), sb.toString()));
         }
         Collections.sort(users, new UserNameSorter());

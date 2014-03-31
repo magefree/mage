@@ -186,7 +186,7 @@ public class TournamentPanel extends javax.swing.JPanel {
             c = c.getParent();
         }
         if (c != null) {
-            ((TournamentPane)c).hideTournament();
+            ((TournamentPane)c).removeTournament();
         }
     }
 
@@ -209,6 +209,9 @@ public class TournamentPanel extends javax.swing.JPanel {
             firstInitDone = true;
         }
 
+        if (txtEndTime == null) {
+            return;
+        }
         if (txtEndTime.getText().equals("running...") && tournament.getEndTime() != null) {
             txtEndTime.setText(df.format(tournament.getEndTime()));
         }
@@ -608,14 +611,16 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             this.publish(session.getTournament(tournamentId));    
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         }
         return null;
     }
 
     @Override
     protected void process(List<TournamentView> view) {
-        panel.update(view.get(0));
+        if (view != null) { // if user disconnects, view can be null for a short time
+            panel.update(view.get(0));
+        }
     }
 
     @Override

@@ -199,6 +199,7 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     protected void playRound(Round round) {
+
         for (TournamentPairing pair: round.getPairs()) {
             playMatch(pair);
         }
@@ -240,7 +241,7 @@ public abstract class TournamentImpl implements Tournament {
                 UUID player1Id = pair.getPlayer1().getPlayer().getId();
                 UUID player2Id = pair.getPlayer2().getPlayer().getId();
                 Match match = pair.getMatch();
-                if (match.isMatchOver()) {
+                if (match != null && match.isMatchOver()) {
                     if (round.getRoundNumber() == rounds.size()) {
                         if (players.get(player1Id).getState().equals(TournamentPlayerState.DUELING)) {
                             players.get(player1Id).setState(TournamentPlayerState.WAITING);
@@ -259,10 +260,10 @@ public abstract class TournamentImpl implements Tournament {
                     sb2.append("-").append(match.getPlayer(player1Id).getWins()).append(") ");
                     players.get(player1Id).setResults(sb1.toString());
                     players.get(player2Id).setResults(sb2.toString());
-                    if (match.getPlayer(player1Id).getWins() > match.getPlayer(player2Id).getWins()) {
+                    if (match.getPlayer(player2Id).hasQuit() || match.getPlayer(player1Id).getWins() > match.getPlayer(player2Id).getWins()) {
                         int points = players.get(player1Id).getPoints();
                         players.get(player1Id).setPoints(points + 3);
-                    } else if (match.getPlayer(player1Id).getWins() < match.getPlayer(player2Id).getWins()) {
+                    } else if (match.getPlayer(player1Id).hasQuit() || match.getPlayer(player1Id).getWins() < match.getPlayer(player2Id).getWins()) {
                         int points = players.get(player2Id).getPoints();
                         players.get(player2Id).setPoints(points + 3);
                     } else {

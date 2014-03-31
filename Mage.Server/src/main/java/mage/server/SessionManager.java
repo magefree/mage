@@ -111,7 +111,7 @@ public class SessionManager {
                 LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED, sessionId);
             }
         } else {
-            logger.info("could not find session with id " + sessionId);
+            logger.info("disconnect: could not find session with id " + sessionId);
         }
     }
 

@@ -30,6 +30,7 @@ package mage.game.tournament;
 
 import java.util.Map;
 import java.util.UUID;
+import mage.game.events.TableEvent;
 
 /**
  *
@@ -43,15 +44,15 @@ public abstract class TournamentSingleElimination extends TournamentImpl {
 
     @Override
     protected void runTournament() {
-
         for (Map.Entry<UUID, TournamentPlayer> entry: players.entrySet()) {
             if (entry.getValue().getPlayer().autoLoseGame()) {
                 entry.getValue().setEliminated();
                 entry.getValue().setResults("Auto Eliminated");
             }
-        }
-        
+        }        
         while (this.getActivePlayers().size() > 1) {
+            // check if some player got killed / disconnected meanwhile and update their state
+            tableEventSource.fireTableEvent(TableEvent.EventType.CHECK_STATE_PLAYERS);
             Round round = createRoundRandom();
             playRound(round);
             eliminatePlayers(round);

@@ -42,10 +42,11 @@ public class TournamentPlayer {
     protected int points;
     protected String playerType;
     protected TournamentPlayerState state;
-    protected String stateInfo = "";
+    protected String stateInfo;
+    protected String disconnectInfo;
     protected Player player;
     protected Deck deck;
-    protected String results = "";
+    protected String results;
     protected boolean eliminated = false;
     protected boolean quit = false;
     protected boolean doneConstructing;
@@ -55,6 +56,10 @@ public class TournamentPlayer {
         this.player = player;
         this.playerType = playerType;
         this.state = TournamentPlayerState.JOINED;
+        this.stateInfo = "";
+        this.disconnectInfo = "";
+        this.results = "";
+
     }
 
     public Player getPlayer() {
@@ -149,6 +154,14 @@ public class TournamentPlayer {
 
     public void setStateInfo(String stateInfo) {
         this.stateInfo = stateInfo;
+    }
+
+    public String getDisconnectInfo() {
+        return disconnectInfo;
+    }
+
+    public void setDisconnectInfo(String disconnectInfo) {
+        this.disconnectInfo = disconnectInfo;
     }
 
     public boolean hasQuit() {

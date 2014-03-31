@@ -175,7 +175,7 @@ public class DraftPanel extends javax.swing.JPanel {
             c = c.getParent();
         }
         if (c != null) {
-            ((DraftPane)c).hideDraft();
+            ((DraftPane)c).removeDraft();
         }
     }
 

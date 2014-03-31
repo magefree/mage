@@ -657,7 +657,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         for (JInternalFrame window : desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER)) {
             if (window instanceof DraftPane) {
                 DraftPane draftPane = (DraftPane) window;
-                draftPane.hideDraft();
+                draftPane.removeDraft();
             }
         }
     }
@@ -997,12 +997,21 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
             if (window instanceof DraftPane) {
                 DraftPane draftPane = (DraftPane) window;
-                draftPane.hideDraft();
+                draftPane.removeDraft();
             }
             if (window instanceof TournamentPane) {
                 TournamentPane tournamentPane = (TournamentPane) window;
-                tournamentPane.hideTournament();
+                tournamentPane.removeTournament();
             }
+            // close & remove sideboarding or construction pane if open
+            if (window instanceof DeckEditorPane) {
+                DeckEditorPane deckEditorPane = (DeckEditorPane) window;
+                if (deckEditorPane.getDeckEditorMode().equals(DeckEditorMode.Limited) 
+                        || deckEditorPane.getDeckEditorMode().equals(DeckEditorMode.Sideboard)){
+                    deckEditorPane.removeFrame();
+                }
+            }
+
         }
     }
 

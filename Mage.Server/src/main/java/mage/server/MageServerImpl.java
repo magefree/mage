@@ -109,6 +109,7 @@ public class MageServerImpl implements MageServer {
                 LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, userName, version.toString(), Main.getVersion().toString(), sessionId);
                 throw new MageVersionException(version, Main.getVersion());
             }
+            logger.info(new StringBuilder("RegisterClient - userName: ").append(userName).append(" sessionId = ").append(sessionId));
             return SessionManager.getInstance().registerUser(sessionId, userName);
         } catch (Exception ex) {
             if (ex instanceof MageVersionException) {
@@ -333,16 +334,16 @@ public class MageServerImpl implements MageServer {
         return SessionManager.getInstance().extendUserSession(sessionId);
     }
 
-    @Override
-    public void deregisterClient(final String sessionId) throws MageException {
-        execute("deregisterClient", sessionId, new Action() {
-            @Override
-            public void execute() {
-                SessionManager.getInstance().disconnect(sessionId, true);
-                logger.debug("Client deregistered ...");
-            }
-        });
-    }
+//    @Override
+//    public void deregisterClient(final String sessionId) throws MageException {
+//        execute("deregisterClient", sessionId, new Action() {
+//            @Override
+//            public void execute() {
+//                SessionManager.getInstance().disconnect(sessionId, true);
+//                logger.debug("Client deregistered ...");
+//            }
+//        });
+//    }
 
     @Override
     public void startMatch(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
