@@ -49,6 +49,7 @@ import mage.game.events.TableEvent;
 import mage.game.events.TableEvent.EventType;
 import mage.game.events.TableEventSource;
 import mage.game.match.Match;
+import mage.game.match.MatchPlayer;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
@@ -238,54 +239,66 @@ public abstract class TournamentImpl implements Tournament {
         }
         for (Round round: rounds) {
             for (TournamentPairing pair: round.getPairs()) {
-                UUID player1Id = pair.getPlayer1().getPlayer().getId();
-                UUID player2Id = pair.getPlayer2().getPlayer().getId();
                 Match match = pair.getMatch();
                 if (match != null && match.isMatchOver()) {
+                    TournamentPlayer tp1 = pair.getPlayer1();
+                    TournamentPlayer tp2 = pair.getPlayer2();
+                    MatchPlayer mp1 = match.getPlayer(pair.getPlayer1().getPlayer().getId());
+                    MatchPlayer mp2 = match.getPlayer(pair.getPlayer2().getPlayer().getId());
+                    // set player satte
                     if (round.getRoundNumber() == rounds.size()) {
-                        if (players.get(player1Id).getState().equals(TournamentPlayerState.DUELING)) {
-                            players.get(player1Id).setState(TournamentPlayerState.WAITING);
+                        if (tp1.getState().equals(TournamentPlayerState.DUELING)) {
+                            tp1.setState(TournamentPlayerState.WAITING);
                         }
-                        if (players.get(player2Id).getState().equals(TournamentPlayerState.DUELING)) {
-                            players.get(player2Id).setState(TournamentPlayerState.WAITING);
+                        if (tp2.getState().equals(TournamentPlayerState.DUELING)) {
+                            tp2.setState(TournamentPlayerState.WAITING);
                         }
                     }
-                    StringBuilder sb1 = new StringBuilder(players.get(player1Id).getResults());
-                    StringBuilder sb2 = new StringBuilder(players.get(player2Id).getResults());
-                    sb1.append(pair.getPlayer2().getPlayer().getName());
-                    sb1.append(" (").append(match.getPlayer(player1Id).getWins());
-                    sb1.append("-").append(match.getPlayer(player2Id).getWins()).append(") ");
-                    sb2.append(pair.getPlayer1().getPlayer().getName());
-                    sb2.append(" (").append(match.getPlayer(player2Id).getWins());
-                    sb2.append("-").append(match.getPlayer(player1Id).getWins()).append(") ");
-                    players.get(player1Id).setResults(sb1.toString());
-                    players.get(player2Id).setResults(sb2.toString());
-                    if (match.getPlayer(player2Id).hasQuit() || match.getPlayer(player1Id).getWins() > match.getPlayer(player2Id).getWins()) {
-                        int points = players.get(player1Id).getPoints();
-                        players.get(player1Id).setPoints(points + 3);
-                    } else if (match.getPlayer(player1Id).hasQuit() || match.getPlayer(player1Id).getWins() < match.getPlayer(player2Id).getWins()) {
-                        int points = players.get(player2Id).getPoints();
-                        players.get(player2Id).setPoints(points + 3);
+                    // Add round result
+                    tp1.setResults(addRoundResult(pair, tp1, tp2));
+                    tp2.setResults(addRoundResult(pair, tp2, tp1));
+
+                    // Add points
+                    if (mp2.hasQuit() || mp1.getWins() > mp2.getWins()) {
+                        tp1.setPoints(tp1.getPoints() + 3);
+                    } else if (mp1.hasQuit() || mp1.getWins() < mp2.getWins()) {
+                        tp2.setPoints(tp2.getPoints() + 3);
                     } else {
-                        int points = players.get(player1Id).getPoints();
-                        players.get(player1Id).setPoints(points + 1);
-                        points = players.get(player2Id).getPoints();
-                        players.get(player2Id).setPoints(points + 1);
+                        tp1.setPoints(tp1.getPoints() + 1);
+                        tp2.setPoints(tp2.getPoints() + 1);
                     }
                 }
             }
-            for (TournamentPlayer tournamentPlayer : round.getPlayerByes()) {
-                UUID player1Id = tournamentPlayer.getPlayer().getId();
-                StringBuilder sb1 = new StringBuilder(players.get(player1Id).getResults());
-                sb1.append("(Round Bye) ");
-                players.get(player1Id).setResults(sb1.toString());
-                int points = players.get(player1Id).getPoints();
-                players.get(player1Id).setPoints(points + 3);
+            for (TournamentPlayer tp : round.getPlayerByes()) {
+                tp.setResults(new StringBuilder(tp.getResults()).append("(Round Bye) ").toString());
+                tp.setPoints(tp.getPoints() + 3);
             }
         }
-
     }
 
+    private static String addRoundResult(TournamentPairing pair, TournamentPlayer TournamentPlayer, TournamentPlayer opponentPlayer) {
+        StringBuilder playerResult = new StringBuilder(TournamentPlayer.getResults());
+        playerResult.append(getMatchResultString(TournamentPlayer, opponentPlayer, pair.getMatch()));
+        return playerResult.toString();
+    }
+    
+    private static String getMatchResultString(TournamentPlayer p1, TournamentPlayer p2, Match match) {
+        MatchPlayer mp1 = match.getPlayer(p1.getPlayer().getId());
+        MatchPlayer mp2 = match.getPlayer(p2.getPlayer().getId());
+        StringBuilder matchResult = new StringBuilder(p1.getResults());
+        matchResult.append(p2.getPlayer().getName());
+        matchResult.append(" (").append(mp1.getWins());
+        if (mp1.hasQuit()) {
+            matchResult.append("Q");
+        }
+        matchResult.append("-").append(mp2.getWins());
+        if (mp2.hasQuit()) {
+            matchResult.append("Q");
+        }                
+        matchResult.append(") ");        
+        return matchResult.toString();
+    }
+    
     @Override
     public boolean isDoneConstructing() {
         for (TournamentPlayer player: this.players.values()) {
