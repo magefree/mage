@@ -137,9 +137,18 @@ public class User {
 
     public String getDisconnectDuration() {
         long secondsDisconnected = SystemUtil.getDateDiff(lastActivity, new Date(), TimeUnit.SECONDS);
-        int minutes = (int) secondsDisconnected / 60;
-        int seconds = (int) secondsDisconnected % 60;
-        return new StringBuilder(Integer.toString(minutes)).append(":").append(seconds > 9 ? seconds: "0" + Integer.toString(seconds)).toString();
+        long secondsLeft = 0;
+        String sign = "";
+        if (secondsDisconnected > (3 * 60)) {            
+            sign="-";
+            secondsLeft = secondsDisconnected - (3 *60);
+        } else {
+            secondsLeft = (3 * 60) - secondsDisconnected; 
+        }
+
+        int minutes = (int) secondsLeft / 60;
+        int seconds = (int) secondsLeft % 60;
+        return new StringBuilder(sign).append(Integer.toString(minutes)).append(":").append(seconds > 9 ? seconds: "0" + Integer.toString(seconds)).toString();
     }
 
     public Date getConnectionTime() {
