@@ -127,6 +127,8 @@ public class Main {
         logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
         logger.info("Config - max game threads: " + config.getMaxGameThreads());
         logger.info("Config - max AI opponents: " + config.getMaxAiOpponents());
+        logger.info("Config - min user name l.: " + config.getMinUserNameLength());
+        logger.info("Config - max user name l.: " + config.getMaxUserNameLength());
         logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "True":"false"));
         
         Connection connection = new Connection();
