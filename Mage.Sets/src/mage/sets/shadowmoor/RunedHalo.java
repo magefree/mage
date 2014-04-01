@@ -28,27 +28,35 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
+import mage.MageObject;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.StaticAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.GainAbilityControllerEffect;
 import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterObject;
+import mage.filter.FilterPermanent;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -76,9 +84,7 @@ public class RunedHalo extends CardImpl<RunedHalo> {
          * 5/1/2008: You may choose either one of a flip card's names. You'll have protection only from the appropriate version. For example, if you choose Nighteyes the Desecrator, you won't have protection from Nezumi Graverobber.
          */
         // You have protection from the chosen name.
-        Effect effect = new GainAbilityControllerEffect(new ProtectionAbility(new FilterObject("empty")));
-        effect.setText("You have protection from the chosen name  <i>(You can't be targeted, dealt damage, or enchanted by anything with that name.)<i/>");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RunedHaloRuleTextEffect()));
 
     }
 
@@ -117,15 +123,14 @@ class NameCard extends OneShotEffect<NameCard> {
                 }
             }
             String cardName = cardChoice.getChoice();
-            game.informPlayers("Runed Halo, named card: [" + cardName + "]");
-            FilterCard filter = new FilterCard(cardName);
-            filter.add(new NamePredicate(cardName));
-            for (Ability ability : sourcePermanent.getAbilities()) {
-                if (ability instanceof ProtectionAbility) {
-                    ((ProtectionAbility) ability).setFilter(filter);
-                }
-            }
+            game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(", named card: [").append(cardName).append("]").toString());
             sourcePermanent.addInfo("Named card", new StringBuilder("[Named card: ").append(cardName).append("]").toString());
+
+            FilterObject filter = new FilterObject("the name [" + cardName + "]");
+            filter.add(new NamePredicate(cardName));            
+            ContinuousEffect effect = new GainAbilityControllerEffect(new ProtectionAbility(filter), Duration.Custom);
+            game.addEffect(effect, source);
+            return true;
         }
         return false;
     }
@@ -135,4 +140,26 @@ class NameCard extends OneShotEffect<NameCard> {
         return new NameCard(this);
     }
 
+}
+
+class RunedHaloRuleTextEffect extends OneShotEffect<RunedHaloRuleTextEffect> {
+    
+    public RunedHaloRuleTextEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "You have protection from the chosen name  <i>(You can't be targeted, dealt damage, or enchanted by anything with that name.)<i/>";
+    }
+    
+    public RunedHaloRuleTextEffect(final RunedHaloRuleTextEffect effect) {
+        super(effect);
+    }
+    
+    @Override
+    public RunedHaloRuleTextEffect copy() {
+        return new RunedHaloRuleTextEffect(this);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 }

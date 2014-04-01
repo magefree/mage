@@ -53,6 +53,11 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl<GainAbilit
         this(ability, Duration.WhileOnBattlefield);
     }
 
+    /**
+     * 
+     * @param ability
+     * @param duration custom - effect will be discarded as soon there is no sourceId - permanent on the battlefield
+     */
     public GainAbilityControllerEffect(Ability ability, Duration duration) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
@@ -74,7 +79,14 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl<GainAbilit
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.addAbility(ability);
+            if (duration.equals(Duration.Custom)) {
+                if (game.getPermanent(source.getSourceId()) == null) {
+                    discard();
+                }
+            }
             return true;
+        } else {
+            discard();
         }
         return false;
     }

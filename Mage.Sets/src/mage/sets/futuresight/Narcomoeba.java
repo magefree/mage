@@ -88,6 +88,6 @@ class NarcomoebaAbility extends ZoneChangeTriggeredAbility<NarcomoebaAbility> {
  
     @Override
     public String getRule() {
-        return "When {this} is put into your graveyard from your library, you may put it onto the battlefield";
+        return "When {this} is put into your graveyard from your library, you may put it onto the battlefield.";
     }
 }
