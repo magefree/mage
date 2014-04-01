@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.common.DrawCardOpponentTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -47,7 +47,7 @@ public class MindsEye extends CardImpl<MindsEye> {
         this.expansionSetCode = "MRD";
 
         // Whenever an opponent draws a card, you may pay {1}. If you do, draw a card.
-        this.addAbility(new DrawCardOpponentTriggeredAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new GenericManaCost(1)), false, false));
+        this.addAbility(new DrawCardOpponentTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(1)), false, false));
     }
 
     public MindsEye(final MindsEye card) {

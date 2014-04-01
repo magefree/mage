@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RequirementEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -80,7 +80,7 @@ public class BidentOfThassa extends CardImpl<BidentOfThassa> {
 class BidentOfThassaTriggeredAbility extends TriggeredAbilityImpl<BidentOfThassaTriggeredAbility> {
 
     public BidentOfThassaTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
     public BidentOfThassaTriggeredAbility(final BidentOfThassaTriggeredAbility ability) {

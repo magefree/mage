@@ -32,7 +32,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -52,7 +52,7 @@ public class IdleThoughts extends CardImpl<IdleThoughts> {
 
         // {2}: Draw a card if you have no cards in hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(
-                new DrawCardControllerEffect(2), new CardsInHandCondition(), "Draw a card if you have no cards in hand"), new ManaCostsImpl("{2}")));
+                new DrawCardSourceControllerEffect(2), new CardsInHandCondition(), "Draw a card if you have no cards in hand"), new ManaCostsImpl("{2}")));
     }
 
     public IdleThoughts(final IdleThoughts card) {

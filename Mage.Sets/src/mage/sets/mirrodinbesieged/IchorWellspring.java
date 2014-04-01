@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
@@ -45,8 +45,8 @@ public class IchorWellspring extends CardImpl<IchorWellspring> {
     public IchorWellspring(UUID ownerId) {
         super(ownerId, 110, "Ichor Wellspring", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "MBS";
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
-        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public IchorWellspring(final IchorWellspring card) {

@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -70,7 +70,7 @@ public class DreamThief extends CardImpl<DreamThief> {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Dream Thief enters the battlefield, draw a card if you've cast another blue spell this turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DrawCardControllerEffect(1), new CastBlueSpellThisTurnCondition(), rule)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new CastBlueSpellThisTurnCondition(), rule)));
         this.addWatcher(new DreamThiefWatcher(this.getId()));
         
     }

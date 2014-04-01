@@ -33,7 +33,7 @@ import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.abilities.keyword.FlashAbility;
@@ -59,7 +59,7 @@ public class JinGitaxiasCoreAugur extends CardImpl<JinGitaxiasCoreAugur> {
         this.addAbility(FlashAbility.getInstance());
 
         // At the beginning of your end step, draw seven cards.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DrawCardControllerEffect(7), false));
+        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DrawCardSourceControllerEffect(7), false));
 
         // Each opponent's maximum hand size is reduced by seven.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

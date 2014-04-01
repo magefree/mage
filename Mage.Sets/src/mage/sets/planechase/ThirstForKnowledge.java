@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -57,7 +57,7 @@ public class ThirstForKnowledge extends CardImpl<ThirstForKnowledge> {
         this.color.setBlue(true);
 
         // Draw three cards. Then discard two cards unless you discard an artifact card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addEffect(new ThirstforKnowledgeEffect());
     }
 

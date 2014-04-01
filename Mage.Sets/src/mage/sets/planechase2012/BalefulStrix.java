@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class BalefulStrix extends CardImpl<BalefulStrix> {
         // vigilance
         this.addAbility(DeathtouchAbility.getInstance());
         // When Baleful Strix enters the battlefield, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
     }
 

@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -46,7 +46,7 @@ public class Vivisection extends CardImpl<Vivisection> {
         super(ownerId, 38, "Vivisection", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "MBS";
         this.color.setBlue(true);
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
     }
 

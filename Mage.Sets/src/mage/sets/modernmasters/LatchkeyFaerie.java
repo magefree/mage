@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ProwlCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
@@ -60,7 +60,7 @@ public class LatchkeyFaerie extends CardImpl<LatchkeyFaerie> {
         // Prowl {2}{U}
         this.addAbility(new ProwlAbility(this, "{2}{U}"));
         // When Latchkey Faerie enters the battlefield, if its prowl cost was paid, draw a card.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false);
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, ProwlCondition.getInstance(),
                 "When {this} enters the battlefield, if its prowl cost was paid, draw a card."));
 

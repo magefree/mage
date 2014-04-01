@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DiscardControllerEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -60,7 +60,7 @@ public class DrownedRusalka extends CardImpl<DrownedRusalka> {
         // {U}, Sacrifice a creature: Discard a card, then draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl("{U}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("a creature"), true, true)));
-        ability.addEffect(new DrawCardControllerEffect(1));
+        ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);
     }
 

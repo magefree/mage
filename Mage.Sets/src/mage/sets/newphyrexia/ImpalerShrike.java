@@ -32,7 +32,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class ImpalerShrike extends CardImpl<ImpalerShrike> {
 
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeSourceEffect(), true);
-        ability.addEffect(new DrawCardControllerEffect(3));
+        ability.addEffect(new DrawCardSourceControllerEffect(3));
         this.addAbility(ability);
     }
 

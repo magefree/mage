@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DiscardTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetOpponent;
 
@@ -47,7 +47,7 @@ public class Mindculling extends CardImpl<Mindculling> {
 
         this.color.setBlue(true);
 
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
     }

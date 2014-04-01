@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 
@@ -52,7 +52,7 @@ public class JungleBarrier extends CardImpl<JungleBarrier> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
     public JungleBarrier(final JungleBarrier card) {

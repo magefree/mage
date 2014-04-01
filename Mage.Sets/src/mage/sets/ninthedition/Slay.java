@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -59,7 +59,7 @@ public class Slay extends CardImpl<Slay> {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Slay(final Slay card) {

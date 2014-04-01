@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
@@ -51,7 +51,7 @@ public class UrzasBlueprints extends CardImpl<UrzasBlueprints> {
         // Echo {6}
         this.addAbility(new EchoAbility("{6}"));
         // {tap}: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost()));
     }
 
     public UrzasBlueprints(final UrzasBlueprints card) {

@@ -34,7 +34,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -61,7 +61,7 @@ public class RegalForce extends CardImpl<RegalForce> {
         this.toughness = new MageInt(5);
 
         // When Regal Force enters the battlefield, draw a card for each green creature you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(new PermanentsOnBattlefieldCount(filter))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter))));
     }
 
     public RegalForce(final RegalForce card) {

@@ -30,7 +30,7 @@ package mage.sets.apocalypse;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ public class LastCaress extends CardImpl<LastCaress> {
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new GainLifeEffect(1));
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public LastCaress(final LastCaress card) {

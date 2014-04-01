@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -59,7 +59,7 @@ public class BoneToAsh extends CardImpl<BoneToAsh> {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public BoneToAsh(final BoneToAsh card) {

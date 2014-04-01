@@ -30,7 +30,7 @@ package mage.sets.invasion;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,7 +51,7 @@ public class Repulse extends CardImpl<Repulse> {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Repulse(final Repulse card) {

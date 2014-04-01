@@ -28,7 +28,7 @@
 package mage.sets.commander2013;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -46,7 +46,7 @@ public class BrilliantPlan extends CardImpl<BrilliantPlan> {
         this.color.setBlue(true);
 
         // Draw three cards.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
     public BrilliantPlan(final BrilliantPlan card) {

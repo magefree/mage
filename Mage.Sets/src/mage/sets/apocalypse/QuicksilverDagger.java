@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -71,7 +71,7 @@ public class QuicksilverDagger extends CardImpl<QuicksilverDagger> {
         // Enchanted creature has "{tap}: This creature deals 1 damage to target player. You draw a card."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         gainAbility.addTarget(new TargetPlayer());
-        gainAbility.addEffect(new DrawCardControllerEffect(1));
+        gainAbility.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA)));
     }
 

@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -49,7 +49,7 @@ public class Oculus extends CardImpl<Oculus> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1), true));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
     public Oculus (final Oculus card) {

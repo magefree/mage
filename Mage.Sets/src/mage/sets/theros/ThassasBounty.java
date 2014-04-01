@@ -28,7 +28,7 @@
 package mage.sets.theros;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -48,7 +48,7 @@ public class ThassasBounty extends CardImpl<ThassasBounty> {
         this.color.setBlue(true);
 
         // Draw three cards. Target player puts the top three cards of his or her library into his or her graveyard.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer(true));
     }

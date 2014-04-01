@@ -30,7 +30,7 @@ package mage.sets.darkascension;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
@@ -52,7 +52,7 @@ public class Gravepurge extends CardImpl<Gravepurge> {
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Gravepurge(final Gravepurge card) {

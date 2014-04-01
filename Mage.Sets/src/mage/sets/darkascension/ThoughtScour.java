@@ -30,7 +30,7 @@ package mage.sets.darkascension;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;
@@ -51,7 +51,7 @@ public class ThoughtScour extends CardImpl<ThoughtScour> {
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(2));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public ThoughtScour(final ThoughtScour card) {

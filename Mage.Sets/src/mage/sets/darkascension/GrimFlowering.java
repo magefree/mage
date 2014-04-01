@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 
@@ -48,7 +48,7 @@ public class GrimFlowering extends CardImpl<GrimFlowering> {
         this.color.setGreen(true);
 
         // Draw a card for each creature card in your graveyard.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(new CardsInControllerGraveyardCount(new FilterCreatureCard())));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new CardsInControllerGraveyardCount(new FilterCreatureCard())));
     }
 
     public GrimFlowering(final GrimFlowering card) {

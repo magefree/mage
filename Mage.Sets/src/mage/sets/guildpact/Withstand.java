@@ -31,7 +31,7 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -49,7 +49,7 @@ public class Withstand extends CardImpl<Withstand> {
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Duration.EndOfTurn, 3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         // Prevent the next 3 damage that would be dealt to target creature or player this turn.
         // Draw a card.
     }

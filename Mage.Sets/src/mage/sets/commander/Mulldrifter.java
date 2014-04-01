@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class Mulldrifter extends CardImpl<Mulldrifter> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Mulldrifter enters the battlefield, draw two cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2)));
         // Evoke {2}{U}
         this.addAbility(new EvokeAbility(this, "{2}{U}"));
     }

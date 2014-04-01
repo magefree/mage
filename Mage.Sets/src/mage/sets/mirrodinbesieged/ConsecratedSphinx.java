@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
@@ -71,7 +71,7 @@ public class ConsecratedSphinx extends CardImpl<ConsecratedSphinx> {
 
 class ConsecratedSphinxTriggeredAbility extends TriggeredAbilityImpl<ConsecratedSphinxTriggeredAbility> {
     ConsecratedSphinxTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(2), true);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), true);
     }
 
     ConsecratedSphinxTriggeredAbility(final ConsecratedSphinxTriggeredAbility ability) {

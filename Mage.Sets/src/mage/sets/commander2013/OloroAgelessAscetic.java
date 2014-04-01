@@ -37,7 +37,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -103,7 +103,7 @@ class OloroAgelessAsceticEffect extends OneShotEffect<OloroAgelessAsceticEffect>
 
     @Override
     public boolean apply(Game game, Ability source) {
-        new DrawCardControllerEffect(1).apply(game, source);
+        new DrawCardSourceControllerEffect(1).apply(game, source);
         new DamagePlayersEffect(1, TargetController.OPPONENT).apply(game, source);
         return false;
     }

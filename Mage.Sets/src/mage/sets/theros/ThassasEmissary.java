@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.cards.CardImpl;
@@ -63,7 +63,7 @@ public class ThassasEmissary extends CardImpl<ThassasEmissary> {
         // Bestow {5}{U} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
         this.addAbility(new BestowAbility(this, "{5}{U}"));
         // Whenever Thassa's Emissary or enchanted creature deals combat damage to a player, draw a card.
-        this.addAbility(new ThassasEmissaryTriggeredAbility(new DrawCardControllerEffect(1), false));
+        this.addAbility(new ThassasEmissaryTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
         // Enchanted creature gets +3/+3.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,3)));
     }

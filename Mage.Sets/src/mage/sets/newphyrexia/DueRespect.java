@@ -34,7 +34,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,7 +55,7 @@ public class DueRespect extends CardImpl<DueRespect> {
         // Permanents enter the battlefield tapped this turn.
         this.getSpellAbility().addEffect(new DueRespectEffect());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public DueRespect(final DueRespect card) {

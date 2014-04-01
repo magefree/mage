@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 
@@ -51,7 +51,7 @@ public class ChromaticSphere extends CardImpl<ChromaticSphere> {
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addEffect(new DrawCardControllerEffect(1));
+        ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);
     }
 

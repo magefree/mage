@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -63,7 +63,7 @@ public class Peppersmoke extends CardImpl<Peppersmoke> {
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1,-1,Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(
-                new ConditionalOneShotEffect(new DrawCardControllerEffect(1),
+                new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1),
                 new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0),
                 "If you control a Faerie, draw a card"));
     }

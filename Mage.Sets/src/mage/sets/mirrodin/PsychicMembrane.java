@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BlocksTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 
@@ -52,7 +52,7 @@ public class PsychicMembrane extends CardImpl<PsychicMembrane> {
         this.addAbility(DefenderAbility.getInstance());
         
         // Whenever Psychic Membrane blocks, you may draw a card.
-        this.addAbility(new BlocksTriggeredAbility(new DrawCardControllerEffect(1), true));
+        this.addAbility(new BlocksTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
     public PsychicMembrane(final PsychicMembrane card) {

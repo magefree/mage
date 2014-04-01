@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -60,7 +60,7 @@ public class SavageGorilla extends CardImpl<SavageGorilla> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ManaCostsImpl("{U}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addEffect(new DrawCardControllerEffect(1));
+        ability.addEffect(new DrawCardSourceControllerEffect(1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

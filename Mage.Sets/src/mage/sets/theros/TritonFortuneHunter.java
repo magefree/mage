@@ -29,7 +29,7 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -52,7 +52,7 @@ public class TritonFortuneHunter extends CardImpl<TritonFortuneHunter> {
         this.toughness = new MageInt(2);
 
         // <i>Heroic</i> - Whenever you cast a spell that targets Triton Fortune Hunter, draw a card.
-        this.addAbility(new HeroicAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new HeroicAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public TritonFortuneHunter(final TritonFortuneHunter card) {

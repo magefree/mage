@@ -33,7 +33,7 @@ import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -65,7 +65,7 @@ public class OverbeingOfMyth extends CardImpl<OverbeingOfMyth> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(number, Duration.WhileOnBattlefield)));
         
         // At the beginning of your draw step, draw an additional card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardControllerEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false));
         
     }
 

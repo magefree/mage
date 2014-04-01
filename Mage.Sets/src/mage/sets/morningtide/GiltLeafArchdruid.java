@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -76,7 +76,7 @@ public class GiltLeafArchdruid extends CardImpl<GiltLeafArchdruid> {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Druid spell, you may draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardControllerEffect(1), filterSpell, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filterSpell, true));
         // Tap seven untapped Druids you control: Gain control of all lands target player controls.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlAllLandsEffect(Duration.EndOfGame), new TapTargetCost(new TargetControlledCreaturePermanent(7, 7, new FilterControlledCreaturePermanent("Druid", "Druids you control"), true)));
         ability.addTarget(new TargetPlayer());

@@ -30,7 +30,7 @@ package mage.sets.newphyrexia;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 
@@ -45,7 +45,7 @@ public class TezzeretsGambit extends CardImpl<TezzeretsGambit> {
         this.expansionSetCode = "NPH";
 
         this.color.setBlue(true);
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new ProliferateEffect());
     }
 

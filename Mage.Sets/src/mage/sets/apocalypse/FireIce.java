@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.SplitCard;
 import mage.target.TargetPermanent;
@@ -68,7 +68,7 @@ public class FireIce extends SplitCard<FireIce> {
         getRightHalfCard().getColor().setBlue(true);
         getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(true));
-        getRightHalfCard().getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
 
     }
 

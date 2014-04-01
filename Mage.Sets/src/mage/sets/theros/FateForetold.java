@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -61,9 +61,9 @@ public class FateForetold extends CardImpl<FateForetold> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // When Fate Foretold enters the battlefield, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1),false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1),false));
         // When enchanted creature dies, its controller draws a card.
-        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardControllerEffect(1),"enchanted creature", false));
+        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1),"enchanted creature", false));
     }
 
     public FateForetold(final FateForetold card) {

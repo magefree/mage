@@ -29,7 +29,7 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.ScryEffect;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ public class ReadTheBones extends CardImpl<ReadTheBones> {
 
         // Scry 2, then draw two cards. You lose 2 life.
         this.getSpellAbility().addEffect(new ScryEffect(2));
-        Effect effect = new DrawCardControllerEffect(2);
+        Effect effect = new DrawCardSourceControllerEffect(2);
         effect.setText("then draw two cards");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));

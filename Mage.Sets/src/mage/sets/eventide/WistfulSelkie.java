@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -51,7 +51,7 @@ public class WistfulSelkie extends CardImpl<WistfulSelkie> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public WistfulSelkie (final WistfulSelkie card) {

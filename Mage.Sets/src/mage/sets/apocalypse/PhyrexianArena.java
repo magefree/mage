@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
@@ -48,7 +48,7 @@ public class PhyrexianArena extends CardImpl<PhyrexianArena> {
         super(ownerId, 47, "Phyrexian Arena", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "APC";
         this.color.setBlack(true);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardControllerEffect(1), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false);
         ability.addEffect(new LoseLifeSourceControllerEffect(1));
         this.addAbility(ability);
     }

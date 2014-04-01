@@ -36,7 +36,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.BlackManaAbility;
@@ -77,7 +77,7 @@ public class NyleasPresence extends CardImpl<NyleasPresence> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // When Nylea's Presence enters the battlefield, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // Enchanted land is every basic land type in addition to its other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NyleasPresenceLandTypeEffect("Swamp", "Mountain", "Forest", "Island", "Plains")));
 

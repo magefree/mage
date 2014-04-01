@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -50,7 +50,7 @@ public class InvokeTheFiremind extends CardImpl<InvokeTheFiremind> {
         this.color.setRed(true);
         this.color.setBlue(true);
 
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new ManacostVariableValue()));
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
         mode.getTargets().add(new TargetCreatureOrPlayer());

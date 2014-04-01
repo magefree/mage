@@ -31,7 +31,7 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.cards.CardImpl;
 
@@ -49,7 +49,7 @@ public class Ponder extends CardImpl<Ponder> {
         // Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
         this.getSpellAbility().addEffect(new LookLibraryControllerEffect(3, true));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Ponder(final Ponder card) {

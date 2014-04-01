@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -68,7 +68,7 @@ public class Scarecrone extends CardImpl<Scarecrone> {
         this.toughness = new MageInt(2);
 
         // {1}, Sacrifice a Scarecrow: Draw a card.
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         firstAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filterScarecrow, false, true)));
         this.addAbility(firstAbility);
 

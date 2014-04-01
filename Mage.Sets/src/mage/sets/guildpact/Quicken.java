@@ -38,7 +38,7 @@ import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -64,7 +64,7 @@ public class Quicken extends CardImpl<Quicken> {
         this.addWatcher(new QuickenWatcher());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Quicken(final Quicken card) {

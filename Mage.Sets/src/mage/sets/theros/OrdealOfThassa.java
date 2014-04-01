@@ -34,7 +34,7 @@ import mage.abilities.common.SacrificeSourceTriggeredAbility;
 import mage.abilities.condition.common.AttachedToCounterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -72,7 +72,7 @@ public class OrdealOfThassa extends CardImpl<OrdealOfThassa> {
                 "Then if it has three or more +1/+1 counters on it, sacrifice {this}"));
         this.addAbility(ability);
         // When you sacrifice Ordeal of Thassa, draw two cards.
-        this.addAbility(new SacrificeSourceTriggeredAbility(new DrawCardControllerEffect(2), false));
+        this.addAbility(new SacrificeSourceTriggeredAbility(new DrawCardSourceControllerEffect(2), false));
 
     }
 

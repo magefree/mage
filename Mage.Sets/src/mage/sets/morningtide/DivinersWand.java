@@ -42,7 +42,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -78,7 +78,7 @@ public class DivinersWand extends CardImpl<DivinersWand> {
         effect.setText("Equipped creature has \"Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn\"");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new GainAbilityAttachedEffect(
-                new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(4)), AttachmentType.EQUIPMENT);
+                new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(4)), AttachmentType.EQUIPMENT);
         effect.setText("and \"{4}: Draw a card.\"");
         ability.addEffect(effect);
         this.addAbility(ability);

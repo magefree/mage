@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
@@ -58,7 +58,7 @@ public class SecretsOfTheDead extends CardImpl<SecretsOfTheDead> {
         this.color.setBlue(true);
 
         // Whenever you cast a spell from your graveyard, draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardControllerEffect(1), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
     }
 
     public SecretsOfTheDead(final SecretsOfTheDead card) {

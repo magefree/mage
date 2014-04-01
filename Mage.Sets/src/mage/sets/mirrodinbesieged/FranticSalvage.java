@@ -29,7 +29,7 @@ package mage.sets.mirrodinbesieged;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactCard;
@@ -50,7 +50,7 @@ public class FranticSalvage extends CardImpl<FranticSalvage> {
         this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterArtifactCard("artifact cards from your graveyard")));
     }
 

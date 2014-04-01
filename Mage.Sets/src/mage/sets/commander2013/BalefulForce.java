@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -55,7 +55,7 @@ public class BalefulForce extends CardImpl<BalefulForce> {
         this.toughness = new MageInt(7);
 
         // At the beginning of each upkeep, you draw a card and you lose 1 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardControllerEffect(1), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.ANY, false);
         Effect effect = new LoseLifeSourceControllerEffect(1);
         effect.setText("and you lose 1 life");
         ability.addEffect(effect);

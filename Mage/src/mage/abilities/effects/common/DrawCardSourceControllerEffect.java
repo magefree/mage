@@ -41,28 +41,28 @@ import mage.util.CardUtil;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class DrawCardControllerEffect extends OneShotEffect<DrawCardControllerEffect> {
+public class DrawCardSourceControllerEffect extends OneShotEffect<DrawCardSourceControllerEffect> {
 
     protected DynamicValue amount;
 
-    public DrawCardControllerEffect(int amount) {
+    public DrawCardSourceControllerEffect(int amount) {
         this(new StaticValue(amount));
     }
 
-    public DrawCardControllerEffect(DynamicValue amount) {
+    public DrawCardSourceControllerEffect(DynamicValue amount) {
         super(Outcome.DrawCard);
         this.amount = amount.copy();
         setText();
     }
 
-    public DrawCardControllerEffect(final DrawCardControllerEffect effect) {
+    public DrawCardSourceControllerEffect(final DrawCardSourceControllerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }
 
     @Override
-    public DrawCardControllerEffect copy() {
-        return new DrawCardControllerEffect(this);
+    public DrawCardSourceControllerEffect copy() {
+        return new DrawCardSourceControllerEffect(this);
     }
 
     @Override

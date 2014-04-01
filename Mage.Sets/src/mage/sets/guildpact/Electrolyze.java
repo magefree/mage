@@ -30,7 +30,7 @@ package mage.sets.guildpact;
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -55,7 +55,7 @@ public class Electrolyze extends CardImpl<Electrolyze> {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(2));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Electrolyze(final Electrolyze card) {

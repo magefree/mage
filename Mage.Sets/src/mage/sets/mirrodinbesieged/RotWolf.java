@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 
@@ -53,7 +53,7 @@ public class RotWolf extends CardImpl<RotWolf> {
 
         this.addAbility(InfectAbility.getInstance());
         // Whenever a creature dealt damage by Rot Wolf this turn dies, you may draw a card.
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new DrawCardControllerEffect(1), true));
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
     public RotWolf(final RotWolf card) {

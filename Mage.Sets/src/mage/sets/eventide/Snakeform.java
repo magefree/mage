@@ -29,7 +29,7 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continious.LoseAllAbilitiesTargetEffect;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class Snakeform extends CardImpl<Snakeform> {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         
         // Draw a card.
-        Effect effect = new DrawCardControllerEffect(1);
+        Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText("Draw a card.");
         this.getSpellAbility().addEffect(effect);
         

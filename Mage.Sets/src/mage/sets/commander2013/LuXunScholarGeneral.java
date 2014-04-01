@@ -30,7 +30,7 @@ package mage.sets.commander2013;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -56,7 +56,7 @@ public class LuXunScholarGeneral extends CardImpl<LuXunScholarGeneral> {
         // Horsemanship
         this.addAbility(HorsemanshipAbility.getInstance());
         // Whenever Lu Xun, Scholar General deals damage to an opponent, you may draw a card.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DrawCardControllerEffect(1), true));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
 
     }
 

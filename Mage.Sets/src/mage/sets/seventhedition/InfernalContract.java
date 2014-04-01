@@ -33,7 +33,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,7 +51,7 @@ public class InfernalContract extends CardImpl<InfernalContract> {
         this.color.setBlack(true);
 
         // Draw four cards. You lose half your life, rounded up.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(4));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
         this.getSpellAbility().addEffect(new InfernalContractLoseLifeEffect());
     }
 

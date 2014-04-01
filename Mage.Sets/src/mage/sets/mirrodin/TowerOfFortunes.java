@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
 
@@ -49,7 +49,7 @@ public class TowerOfFortunes extends CardImpl<TowerOfFortunes> {
     public TowerOfFortunes (UUID ownerId) {
         super(ownerId, 267, "Tower of Fortunes", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "MRD";
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(4), new GenericManaCost(8));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(4), new GenericManaCost(8));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

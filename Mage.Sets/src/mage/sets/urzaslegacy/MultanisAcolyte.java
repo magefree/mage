@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 
@@ -54,7 +54,7 @@ public class MultanisAcolyte extends CardImpl<MultanisAcolyte> {
         // Echo {G}{G}
         this.addAbility(new EchoAbility("{G}{G}"));
         // When Multani's Acolyte enters the battlefield, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public MultanisAcolyte(final MultanisAcolyte card) {

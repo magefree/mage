@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
@@ -55,7 +55,7 @@ public class ThievingMagpie extends CardImpl<ThievingMagpie> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Thieving Magpie deals damage to an opponent, draw a card.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public ThievingMagpie(final ThievingMagpie card) {

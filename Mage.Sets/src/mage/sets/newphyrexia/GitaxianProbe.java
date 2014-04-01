@@ -34,7 +34,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,7 +55,7 @@ public class GitaxianProbe extends CardImpl<GitaxianProbe> {
         this.getSpellAbility().addEffect(new GitaxianProbeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         
     }
 

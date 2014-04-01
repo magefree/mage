@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.AddCardTypeTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
@@ -50,7 +50,7 @@ public class ArgentMutation extends CardImpl<ArgentMutation> {
 
         this.getSpellAbility().addEffect(new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetPermanent());
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public ArgentMutation(final ArgentMutation card) {
