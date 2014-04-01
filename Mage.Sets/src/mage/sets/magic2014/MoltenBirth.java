@@ -27,6 +27,7 @@
  */
 package mage.sets.magic2014;
 
+import java.util.Random;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -105,6 +106,8 @@ class ElementalToken extends Token {
 
     public ElementalToken() {
         super("Elemental", "1/1 red Elemental creature");
+        this.setOriginalExpansionSetCode("M14");
+        this.setTokenType(new Random().nextInt(2) + 1);
         cardType.add(CardType.CREATURE);
         color = ObjectColor.RED;
         subtype.add("Elemental");

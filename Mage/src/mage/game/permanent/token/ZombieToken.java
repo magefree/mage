@@ -47,8 +47,7 @@ public class ZombieToken extends Token {
         super("Zombie", "2/2 black Zombie creature token");
         this.setOriginalExpansionSetCode(expansionSetCode);
         if (expansionSetCode.equals("ISD")) {
-            Random random = new Random();
-            this.setTokenType(random.nextInt(3) + 1);
+            this.setTokenType(new Random().nextInt(3) + 1);
         }
         cardType.add(CardType.CREATURE);
         color = ObjectColor.BLACK;

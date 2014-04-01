@@ -200,11 +200,10 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     protected void playRound(Round round) {
-
         for (TournamentPairing pair: round.getPairs()) {
             playMatch(pair);
         }
-
+        updateResults(); // show points from byes
         while (!round.isRoundOver()) {
             try {
                 //TODO: improve this
@@ -255,8 +254,8 @@ public abstract class TournamentImpl implements Tournament {
                         }
                     }
                     // Add round result
-                    tp1.setResults(addRoundResult(pair, tp1, tp2));
-                    tp2.setResults(addRoundResult(pair, tp2, tp1));
+                    tp1.setResults(addRoundResult(round.getRoundNumber(), pair, tp1, tp2));
+                    tp2.setResults(addRoundResult(round.getRoundNumber(), pair, tp2, tp1));
 
                     // Add points
                     if (mp2.hasQuit() || mp1.getWins() > mp2.getWins()) {
@@ -270,22 +269,23 @@ public abstract class TournamentImpl implements Tournament {
                 }
             }
             for (TournamentPlayer tp : round.getPlayerByes()) {
-                tp.setResults(new StringBuilder(tp.getResults()).append("(Round Bye) ").toString());
+                tp.setResults(new StringBuilder(tp.getResults()).append("R").append(round.getRoundNumber()).append(" ").append("Bye ").toString());
                 tp.setPoints(tp.getPoints() + 3);
             }
         }
     }
 
-    private static String addRoundResult(TournamentPairing pair, TournamentPlayer TournamentPlayer, TournamentPlayer opponentPlayer) {
-        StringBuilder playerResult = new StringBuilder(TournamentPlayer.getResults());
-        playerResult.append(getMatchResultString(TournamentPlayer, opponentPlayer, pair.getMatch()));
+    private static String addRoundResult(int round, TournamentPairing pair, TournamentPlayer tournamentPlayer, TournamentPlayer opponentPlayer) {
+        StringBuilder playerResult = new StringBuilder(tournamentPlayer.getResults());
+        playerResult.append("R").append(round).append(" ");
+        playerResult.append(getMatchResultString(tournamentPlayer, opponentPlayer, pair.getMatch()));
         return playerResult.toString();
     }
     
     private static String getMatchResultString(TournamentPlayer p1, TournamentPlayer p2, Match match) {
         MatchPlayer mp1 = match.getPlayer(p1.getPlayer().getId());
         MatchPlayer mp2 = match.getPlayer(p2.getPlayer().getId());
-        StringBuilder matchResult = new StringBuilder(p1.getResults());
+        StringBuilder matchResult = new StringBuilder();
         matchResult.append(p2.getPlayer().getName());
         matchResult.append(" (").append(mp1.getWins());
         if (mp1.hasQuit()) {
