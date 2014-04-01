@@ -206,7 +206,12 @@ public interface Player extends MageItem, Copyable<Player> {
     void init(Game game);
     void init(Game game, boolean testMode);
     void useDeck(Deck deck, Game game);
+    
+    /**
+     * Called before each applyEffects, to rest all what can be applyed by continuous effects
+     */
     void reset();
+    
     void shuffleLibrary(Game game);
     int drawCards(int num, Game game);
     int drawCards(int num, Game game, ArrayList<UUID> appliedEffects);

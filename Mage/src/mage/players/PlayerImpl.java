@@ -158,7 +158,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     // conceded or connection lost game
     protected boolean left;
-    // quit match
+    // set if the player quits the complete match
     protected boolean quit;
 
     protected RangeOfInfluence range;
@@ -337,7 +337,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.wins = false;
         this.loses = false;
         this.left = false;
-        this.quit = false;
+        this.quit = false; // reset is neccessary because in tournament player will be used for each round
         this.passed = false;
         this.passedTurn = false;
         this.passedAllTurns = false;
@@ -346,9 +346,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.topCardRevealed = false;
         this.setLife(game.getLife(), game);
         this.setReachedNextTurnAfterLeaving(false);
-        game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
+        game.getState().getWatchers().add(new BloodthirstWatcher(playerId));  
     }
-
+    
     @Override
     public void reset() {
         this.abilities.clear();

@@ -112,7 +112,7 @@ class KarnLiberatedEffect extends OneShotEffect<KarnLiberatedEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Card> cards = new ArrayList<Card>();
+        List<Card> cards = new ArrayList<>();
         for (ExileZone zone: game.getExile().getExileZones()) {
             if (zone.getId().equals(exileId)) {
                 for (Card card: zone.getCards(game)) {
@@ -186,7 +186,7 @@ class KarnLiberatedDelayedTriggeredAbility extends DelayedTriggeredAbility<KarnL
 
 class KarnLiberatedDelayedEffect extends OneShotEffect<KarnLiberatedDelayedEffect> {
 
-    private UUID exileId;
+    private final UUID exileId;
 
     public KarnLiberatedDelayedEffect(UUID exileId) {
         super(Outcome.PlayForFree);

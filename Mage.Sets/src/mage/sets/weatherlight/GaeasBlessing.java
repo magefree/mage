@@ -25,56 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.sets.weatherlight;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
-import mage.target.common.TargetCardInGraveyard;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class BeckonApparition extends CardImpl<BeckonApparition> {
+public class GaeasBlessing extends mage.sets.timeshifted.GaeasBlessing {
 
-    public BeckonApparition(UUID ownerId) {
-        super(ownerId, 82, "Beckon Apparition", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W/B}");
-        this.expansionSetCode = "EVE";
-        this.color.setBlack(true);
-        this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard());
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeckonApparitionToken(), 1));
+    public GaeasBlessing(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 71;
+        this.expansionSetCode = "WTH";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public BeckonApparition(final BeckonApparition card) {
+    public GaeasBlessing(final GaeasBlessing card) {
         super(card);
     }
 
     @Override
-    public BeckonApparition copy() {
-        return new BeckonApparition(this);
-    }
-}
-
-
-class BeckonApparitionToken extends Token {
-    BeckonApparitionToken() {
-        super("Spirit", "1/1 white and black Spirit creature token with flying");
-        this.setOriginalExpansionSetCode("GTC");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        color.setBlack(true);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
+    public GaeasBlessing copy() {
+        return new GaeasBlessing(this);
     }
 }

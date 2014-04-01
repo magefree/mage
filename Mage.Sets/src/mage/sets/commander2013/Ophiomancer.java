@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.condition.common.SourceOnBattelfieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DeathtouchAbility;

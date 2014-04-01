@@ -40,9 +40,21 @@ import mage.game.Game;
  */
 public class SourceOnBattelfieldCondition implements Condition {
 
+    private static final SourceOnBattelfieldCondition fInstance = new SourceOnBattelfieldCondition();
+
+    public static SourceOnBattelfieldCondition getInstance() {
+        return fInstance;
+    }
+    
     @Override
     public boolean apply(Game game, Ability source) {
         return (game.getPermanent(source.getSourceId()) != null);
     }
 
+    @Override
+    public String toString() {
+        return "if {this} is on the battlefield";
+    }
+
+    
 }

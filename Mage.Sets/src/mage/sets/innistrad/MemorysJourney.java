@@ -60,7 +60,7 @@ public class MemorysJourney extends CardImpl<MemorysJourney> {
 
         // Target player shuffles up to three target cards from his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new MemorysJourneyEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addTarget(new MemorysJourneyTarget());
         // Flashback {G}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), TimingRule.INSTANT));

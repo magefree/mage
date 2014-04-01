@@ -115,34 +115,42 @@ class ThievingSpriteEffect extends OneShotEffect<ThievingSpriteEffect> {
         filter.add(new SubtypePredicate("Faerie"));
         int numberOfFaeries = game.getBattlefield().countAll(filter, controller.getId(), game);
 
-        Cards cardsInHand = new CardsImpl(Zone.PICK);
-        cardsInHand.addAll(targetPlayer.getHand());
-        int count = Math.min(cardsInHand.size(), numberOfFaeries);
-
-        TargetCard target = new TargetCard(count, Zone.PICK, new FilterCard());
-        target.setRequired(true);
         Cards revealedCards = new CardsImpl();
+        if (numberOfFaeries > 0 && targetPlayer.getHand().size() > numberOfFaeries) {
+            Cards cardsInHand = new CardsImpl(Zone.PICK);
+            cardsInHand.addAll(targetPlayer.getHand());
 
-        if (targetPlayer.choose(Outcome.Discard, cardsInHand, target, game)) {
-            List<UUID> targets = target.getTargets();
-            for (UUID targetId : targets) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    revealedCards.add(card);
+            TargetCard target = new TargetCard(numberOfFaeries, Zone.PICK, new FilterCard());
+            target.setRequired(true);
+
+            if (targetPlayer.choose(Outcome.Discard, cardsInHand, target, game)) {
+                List<UUID> targets = target.getTargets();
+                for (UUID targetId : targets) {
+                    Card card = game.getCard(targetId);
+                    if (card != null) {
+                        revealedCards.add(card);
+                    }
                 }
-            }
+            }            
+        } else {
+            revealedCards.addAll(targetPlayer.getHand());
         }
-
+        
         TargetCard targetInHand = new TargetCard(Zone.PICK, new FilterCard("card to discard"));
         targetInHand.setRequired(true);
 
         if (!revealedCards.isEmpty()) {
             targetPlayer.revealCards("Thieving Sprite", revealedCards, game);
-            controller.choose(Outcome.Discard, revealedCards, targetInHand, game);
-            Card card = revealedCards.get(targetInHand.getFirstTarget(), game);
+            Card card = null;
+            if(revealedCards.size() > 1) {
+                controller.choose(Outcome.Discard, revealedCards, targetInHand, game);
+                card = revealedCards.get(targetInHand.getFirstTarget(), game);
+            } else {
+                card = revealedCards.getRandom(game);
+            }
+            
             if (card != null) {
                 targetPlayer.discard(card, source, game);
-                game.informPlayers(new StringBuilder("Thieving Sprite: ").append(targetPlayer.getName()).append(" discarded ").append(card.getName()).toString());
             }
         }
         return true;
