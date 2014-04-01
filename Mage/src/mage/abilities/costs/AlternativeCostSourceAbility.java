@@ -54,6 +54,10 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
         this(cost, null);
     }
 
+    public AlternativeCostSourceAbility(Condition conditon) {
+        this(null, conditon, null);
+    }
+
     public AlternativeCostSourceAbility(Cost cost, Condition conditon) {
         this(cost, conditon, null);
     }
@@ -103,7 +107,7 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
         if (ability instanceof SpellAbility) {
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
-                if (player.chooseUse(Outcome.Detriment, "Pay alternative costs?", game)) {
+                if (player.chooseUse(Outcome.Detriment, alternateCosts.isEmpty() ? "Cast without paying its mana cost?":"Pay alternative costs?", game)) {
                     ability.getManaCostsToPay().clear();
                     ability.getCosts().clear();
                     for (AlternativeCost2 alternateCost : alternateCosts) {
@@ -135,7 +139,7 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
 
     @Override
     public String getCastMessageSuffix() {
-        return " using alternative casting costs";
+        return alternateCosts.isEmpty() ? " without paying it's mana costs":" using alternative casting costs";
     }
 
     @Override
