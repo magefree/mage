@@ -587,8 +587,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             TargetDiscard target = new TargetDiscard(playerId);
             choose(Outcome.Discard, target, source.getSourceId(), game);
             Card card = hand.get(target.getFirstTarget(), game);
-            if (discard(card, source, game)) {
+            if (card != null) {
                 numDiscarded++;
+                discard(card, source, game);
             }
         }
     }
