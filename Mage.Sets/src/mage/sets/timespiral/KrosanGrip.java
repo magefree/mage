@@ -59,7 +59,7 @@ public class KrosanGrip extends CardImpl<KrosanGrip> {
         this.color.setGreen(true);
 
         // Split second
-        this.addAbility(SplitSecondAbility.getInstance());
+        this.addAbility(new SplitSecondAbility());
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

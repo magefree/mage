@@ -17,14 +17,9 @@ import mage.game.events.GameEvent;
  * As long as this spell is on the stack, players can't cast other spells or activate abilities that aren't mana abilities.
  */
 
-public class SplitSecondAbility extends SimpleStaticAbility implements MageSingleton {
-    private static final SplitSecondAbility ability = new SplitSecondAbility();
+public class SplitSecondAbility extends SimpleStaticAbility  {
 
-    public static SplitSecondAbility getInstance() {
-        return ability;
-    }
-
-    private SplitSecondAbility() {
+    public SplitSecondAbility() {
         super(Zone.STACK, new SplitSecondEffect());
         this.setRuleAtTheTop(true);
     }
@@ -34,9 +29,13 @@ public class SplitSecondAbility extends SimpleStaticAbility implements MageSingl
         return "Split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
     }
 
+    public SplitSecondAbility(SplitSecondAbility ability) {
+        super(ability);
+    }
+
     @Override
     public SimpleStaticAbility copy() {
-        return ability;
+          return new SplitSecondAbility(this);
     }
 }
 

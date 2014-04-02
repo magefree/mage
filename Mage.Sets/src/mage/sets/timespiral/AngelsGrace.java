@@ -54,7 +54,7 @@ public class AngelsGrace extends CardImpl<AngelsGrace> {
         this.color.setWhite(true);
 
         // Split second
-        this.addAbility(SplitSecondAbility.getInstance());
+        this.addAbility(new SplitSecondAbility());
         
         // You can't lose the game this turn and your opponents can't win the game this turn. Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
         this.getSpellAbility().addEffect(new AngelsGraceEffect());

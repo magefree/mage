@@ -28,11 +28,11 @@
 package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -49,7 +49,7 @@ public class Thoughtcast extends CardImpl<Thoughtcast> {
         // Affinity for artifacts
         this.addAbility(new AffinityForArtifactsAbility());
         // Draw two cards.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
     public Thoughtcast(final Thoughtcast card) {

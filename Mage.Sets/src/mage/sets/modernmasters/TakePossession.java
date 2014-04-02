@@ -56,7 +56,7 @@ public class TakePossession extends CardImpl<TakePossession> {
         this.color.setBlue(true);
 
         // Split second
-        this.addAbility(SplitSecondAbility.getInstance());
+        this.addAbility(new SplitSecondAbility());
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);

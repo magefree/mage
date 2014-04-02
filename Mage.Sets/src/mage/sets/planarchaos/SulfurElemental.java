@@ -65,7 +65,7 @@ public class SulfurElemental extends CardImpl<SulfurElemental> {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Split second
-        this.addAbility(SplitSecondAbility.getInstance());
+        this.addAbility(new SplitSecondAbility());
         // White creatures get +1/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,-1, Duration.WhileOnBattlefield, filter, false)));
     }

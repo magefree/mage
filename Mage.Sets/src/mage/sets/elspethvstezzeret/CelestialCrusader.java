@@ -65,7 +65,7 @@ public class CelestialCrusader extends CardImpl<CelestialCrusader> {
         this.toughness = new MageInt(2);
 
         this.addAbility(FlashAbility.getInstance());
-        this.addAbility(SplitSecondAbility.getInstance());
+        this.addAbility(new SplitSecondAbility());
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }

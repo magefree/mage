@@ -28,11 +28,11 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 
 /**
@@ -48,7 +48,7 @@ public class WipeAway extends CardImpl<WipeAway> {
         this.color.setBlue(true);
 
         // Split second
-        this.addAbility(SplitSecondAbility.getInstance());
+        this.addAbility(new SplitSecondAbility());
         // Return target permanent to its owner's hand.
         this.getSpellAbility().addTarget(new TargetPermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

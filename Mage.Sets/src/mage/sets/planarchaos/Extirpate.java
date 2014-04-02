@@ -29,10 +29,6 @@ package mage.sets.planarchaos;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SplitSecondAbility;
@@ -40,6 +36,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -69,7 +69,7 @@ public class Extirpate extends CardImpl<Extirpate> {
         this.color.setBlack(true);
 
         // Split second
-        this.addAbility(SplitSecondAbility.getInstance());
+        this.addAbility(new SplitSecondAbility());
         // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new ExtirpateEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
@@ -125,8 +125,7 @@ class ExtirpateEffect extends OneShotEffect<ExtirpateEffect> {
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getGraveyard().get(targetId, game);
                             if (targetCard != null) {
-                                targetPlayer.getGraveyard().remove(targetCard);
-                                targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
+                                player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.GRAVEYARD);
                             }
                         }
                     }
@@ -142,8 +141,7 @@ class ExtirpateEffect extends OneShotEffect<ExtirpateEffect> {
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getHand().get(targetId, game);
                             if (targetCard != null) {
-                                targetPlayer.getHand().remove(targetCard);
-                                targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
+                                player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.HAND);
                             }
                         }
                     }
@@ -161,18 +159,16 @@ class ExtirpateEffect extends OneShotEffect<ExtirpateEffect> {
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getLibrary().remove(targetId, game);
                             if (targetCard != null) {
-                                targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
+                                player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
                             }
                         }
                     }
                 } else {
                     player.lookAtCards(targetPlayer.getName() + " library", cardsInLibrary, game);
                 }
+                targetPlayer.shuffleLibrary(game);
+                return true;
             }
-
-            targetPlayer.shuffleLibrary(game);
-
-            return true;
         }
 
         return false;

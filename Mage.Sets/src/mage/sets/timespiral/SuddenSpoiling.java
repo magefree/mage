@@ -58,7 +58,7 @@ public class SuddenSpoiling extends CardImpl<SuddenSpoiling> {
         this.color.setBlack(true);
 
         // Split second
-        this.addAbility(SplitSecondAbility.getInstance());
+        this.addAbility(new SplitSecondAbility());
         // Creatures target player controls become 0/2 and lose all abilities until end of turn.
         this.getSpellAbility().addEffect(new SuddenSpoilingEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetPlayer());

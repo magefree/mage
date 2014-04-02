@@ -56,7 +56,7 @@ public class Trickbind extends CardImpl<Trickbind> {
         this.color.setBlue(true);
 
         // Split second
-        this.addAbility(SplitSecondAbility.getInstance());
+        this.addAbility(new SplitSecondAbility());
 
         // Counter target activated or triggered ability. If a permanent's ability is countered this way, activated abilities of that permanent can't be activated this turn.
         this.getSpellAbility().addEffect(new TrickbindCounterEffect());
