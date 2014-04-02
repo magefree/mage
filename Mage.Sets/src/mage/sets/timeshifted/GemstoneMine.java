@@ -34,7 +34,9 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
@@ -70,8 +72,8 @@ public class GemstoneMine extends CardImpl<GemstoneMine> {
         // {tap}, Remove a mining counter from Gemstone Mine: Add one mana of any color to your mana pool. If there are no mining counters on Gemstone Mine, sacrifice it.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.MINING.createInstance(1)));
+        ability.addEffect(new ConditionalOneShotEffect(new SacrificeSourceEffect(), new SourceHasCounterCondition(CounterType.MINING, 0,0), "If there are no mining counters on Gemstone Mine, sacrifice it"));
         this.addAbility(ability);
-        this.addAbility(new GemstoneMineTriggeredAbility());
     }
 
     public GemstoneMine(final GemstoneMine card) {
@@ -81,41 +83,5 @@ public class GemstoneMine extends CardImpl<GemstoneMine> {
     @Override
     public GemstoneMine copy() {
         return new GemstoneMine(this);
-    }
-}
-
-class GemstoneMineTriggeredAbility extends StateTriggeredAbility<GemstoneMineTriggeredAbility> {
-
-    private static final String staticText = "If there are no mining counters on {this}, sacrifice it.";
-
-    public GemstoneMineTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public GemstoneMineTriggeredAbility(GemstoneMineTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTER_REMOVED) {
-            Permanent gemstoneMine = game.getPermanent(this.getSourceId());
-            if (gemstoneMine != null) {
-                if (!gemstoneMine.getCounters().containsKey(CounterType.MINING)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public GemstoneMineTriggeredAbility copy() {
-        return new GemstoneMineTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return staticText;
     }
 }
