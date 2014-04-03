@@ -263,7 +263,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = requirementEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<>();
             for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, ability instanceof MageSingleton ? permanent : null, false)) {
                     if (effect.applies(permanent, ability, game)) {
                         applicableAbilities.add(ability);
                     }
