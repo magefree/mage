@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -58,7 +58,7 @@ public class SharedDiscovery extends CardImpl<SharedDiscovery> {
 
         // As an additional cost to cast Shared Discovery, tap four untapped creatures you control.
         // Draw three cards.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledCreaturePermanent(4, 4, filter, true)));
     }
 

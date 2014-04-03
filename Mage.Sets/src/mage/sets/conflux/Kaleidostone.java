@@ -37,7 +37,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 
@@ -52,7 +52,7 @@ public class Kaleidostone extends CardImpl<Kaleidostone> {
         this.expansionSetCode = "CON";
 
         // When Kaleidostone enters the battlefield, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // {5}, {tap}, Sacrifice Kaleidostone: Add {W}{U}{B}{R}{G} to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 1, 1, 1, 0, 0), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());

@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -54,7 +54,7 @@ public class GroundSeal extends CardImpl<GroundSeal> {
         this.color.setGreen(true);
 
         // When Ground Seal enters the battlefield, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         
         // Cards in graveyards can't be the targets of spells or abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GroundSealEffect()));

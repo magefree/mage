@@ -30,7 +30,7 @@ package mage.sets.alarareborn;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -57,7 +57,7 @@ public class MessengerFalcons extends CardImpl<MessengerFalcons> {
         this.addAbility(FlyingAbility.getInstance());
         
         // When Messenger Falcons enters the battlefield, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
     public MessengerFalcons(final MessengerFalcons card) {

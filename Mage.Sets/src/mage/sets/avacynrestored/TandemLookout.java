@@ -33,7 +33,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ public class TandemLookout extends CardImpl<TandemLookout> {
         this.addAbility(SoulbondAbility.getInstance());
 
         // As long as Tandem Lookout is paired with another creature, each of those creatures has "Whenever this creature deals damage to an opponent, draw a card."
-        Ability ability = new DealsDamageToOpponentTriggeredAbility(new DrawCardControllerEffect(1));
+        Ability ability = new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
     }
 

@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.AuraAttachedCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
@@ -68,7 +68,7 @@ public class KorSpiritdancer extends CardImpl<KorSpiritdancer> {
         AuraAttachedCount count = new AuraAttachedCount(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
         // Whenever you cast an Aura spell, you may draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardControllerEffect(1), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, true));
     }
 
     public KorSpiritdancer(final KorSpiritdancer card) {

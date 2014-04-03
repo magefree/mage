@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -71,7 +71,7 @@ public class FarsightMask extends CardImpl<FarsightMask> {
 class FarsightMaskTriggeredAbility extends TriggeredAbilityImpl<FarsightMaskTriggeredAbility> {
 
     public FarsightMaskTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ConditionalOneShotEffect(new DrawCardControllerEffect(1), new FarsightMaskCondition(), ""), false);
+        super(Zone.BATTLEFIELD, new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new FarsightMaskCondition(), ""), false);
     }
 
     public FarsightMaskTriggeredAbility(final FarsightMaskTriggeredAbility ability) {

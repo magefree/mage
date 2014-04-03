@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
@@ -72,7 +72,7 @@ class GlimpseOfNatureTriggeredAbility extends DelayedTriggeredAbility<GlimpseOfN
     }
 
     public GlimpseOfNatureTriggeredAbility() {
-        super(new DrawCardControllerEffect(1), Duration.EndOfTurn, false);
+        super(new DrawCardSourceControllerEffect(1), Duration.EndOfTurn, false);
     }
 
     public GlimpseOfNatureTriggeredAbility(GlimpseOfNatureTriggeredAbility ability) {

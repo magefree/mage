@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterEnchantment;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -68,7 +68,7 @@ public class AuraFinesse extends CardImpl<AuraFinesse> {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public AuraFinesse(final AuraFinesse card) {

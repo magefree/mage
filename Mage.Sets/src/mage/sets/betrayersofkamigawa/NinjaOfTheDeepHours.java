@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 
@@ -56,7 +56,7 @@ public class NinjaOfTheDeepHours extends CardImpl<NinjaOfTheDeepHours> {
         this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{U}")));
 
         // Whenever Ninja of the Deep Hours deals combat damage to a player, you may draw a card.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1), true, false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true, false));
     }
 
     public NinjaOfTheDeepHours(final NinjaOfTheDeepHours card) {

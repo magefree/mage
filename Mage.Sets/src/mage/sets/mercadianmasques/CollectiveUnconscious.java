@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -48,7 +48,7 @@ public class CollectiveUnconscious extends CardImpl<CollectiveUnconscious> {
         this.color.setGreen(true);
 
         // Draw a card for each creature you control.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));
     }
 
     public CollectiveUnconscious(final CollectiveUnconscious card) {

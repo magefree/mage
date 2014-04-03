@@ -30,7 +30,7 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -56,7 +56,7 @@ public class Insight extends CardImpl<Insight> {
         this.color.setBlue(true);
 
         // Whenever an opponent casts a green spell, you draw a card.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new DrawCardControllerEffect(1), filter, false));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
     }
 
     public Insight(final Insight card) {

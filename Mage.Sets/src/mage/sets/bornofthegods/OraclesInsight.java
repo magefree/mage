@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ScryEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -69,7 +69,7 @@ public class OraclesInsight extends CardImpl<OraclesInsight> {
         this.addAbility(ability);
         // Enchanted creature has "{T}: Scry 1, then draw a card."
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new TapSourceCost());
-        Effect effect = new DrawCardControllerEffect(1);
+        Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText("then draw a card");
         ability.addEffect(effect);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield)));

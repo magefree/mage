@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -56,7 +56,7 @@ public class Peek extends CardImpl<Peek> {
         this.getSpellAbility().addEffect(new PeekEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Peek(final Peek card) {

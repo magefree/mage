@@ -30,7 +30,7 @@ package mage.sets.fifthdawn;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ScryEffect;
 import mage.cards.CardImpl;
 
@@ -47,7 +47,7 @@ public class SerumVisions extends CardImpl<SerumVisions> {
         this.color.setBlue(true);
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         // Scry 2.
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }

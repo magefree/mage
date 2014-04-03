@@ -37,7 +37,7 @@ import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
@@ -60,7 +60,7 @@ public class ScrollOfAvacyn extends CardImpl<ScrollOfAvacyn> {
         this.expansionSetCode = "AVR";
 
         // {1}, Sacrifice Scroll of Avacyn: Draw a card. If you control an Angel, you gain 5 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new GainLifeEffect(5), new ControlsPermanentCondition(filter), "If you control an Angel, you gain 5 life"));
         this.addAbility(ability);

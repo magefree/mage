@@ -40,7 +40,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -65,7 +65,7 @@ public class AngelheartVial extends CardImpl<AngelheartVial> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(4))));
-        ability.addEffect(new DrawCardControllerEffect(1));
+        ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);
     }
 

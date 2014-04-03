@@ -30,7 +30,7 @@ package mage.sets.eighthedition;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 
@@ -47,7 +47,7 @@ public class AmbitionsCost extends CardImpl<AmbitionsCost> {
         this.color.setBlack(true);
 
         // You draw three cards and you lose 3 life.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(3));
     }
 

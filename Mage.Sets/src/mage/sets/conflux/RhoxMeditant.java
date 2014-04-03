@@ -34,7 +34,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -66,7 +66,7 @@ public class RhoxMeditant extends CardImpl<RhoxMeditant> {
         this.toughness = new MageInt(4);
 
         // When Rhox Meditant enters the battlefield, if you control a green permanent, draw a card.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false);
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new ControlsPermanentCondition(filter), rule));
         
     }

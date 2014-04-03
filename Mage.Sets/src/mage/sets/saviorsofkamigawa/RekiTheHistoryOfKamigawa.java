@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -59,7 +59,7 @@ public class RekiTheHistoryOfKamigawa extends CardImpl<RekiTheHistoryOfKamigawa>
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         // Whenever you cast a legendary spell, draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardControllerEffect(1), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
     }
 
     public RekiTheHistoryOfKamigawa(final RekiTheHistoryOfKamigawa card) {

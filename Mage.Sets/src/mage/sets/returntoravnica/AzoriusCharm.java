@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Mode;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.LifelinkAbility;
@@ -59,7 +59,7 @@ public class AzoriusCharm extends CardImpl<AzoriusCharm> {
 
         // or draw a card;
         Mode mode = new Mode();
-        mode.getEffects().add(new DrawCardControllerEffect(1));
+        mode.getEffects().add(new DrawCardSourceControllerEffect(1));
         this.getSpellAbility().addMode(mode);
 
         // or put target attacking or blocking creature on top of its owner's library.

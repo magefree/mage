@@ -37,7 +37,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -67,7 +67,7 @@ public class PrimeSpeakerZegana extends CardImpl<PrimeSpeakerZegana> {
         //Prime Speaker Zegana enters the battlefield with X +1/+1 counters on it, where X is the greatest power among other creatures you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new greatestPowerCount(), true), "where X is the greatest power among other creatures you control"));
         //When Prime Speaker Zegana enters the battlefield, draw cards equal to its power.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(new SourcePermanentPowerCount())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new SourcePermanentPowerCount())));
     }
 
     public PrimeSpeakerZegana(final PrimeSpeakerZegana card) {

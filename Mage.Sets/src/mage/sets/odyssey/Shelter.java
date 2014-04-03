@@ -28,7 +28,7 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
@@ -55,7 +55,7 @@ public class Shelter extends CardImpl<Shelter> {
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
         // 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Shelter(final Shelter card) {

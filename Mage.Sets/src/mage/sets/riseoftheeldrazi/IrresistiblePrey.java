@@ -29,7 +29,7 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
@@ -58,7 +58,7 @@ public class IrresistiblePrey extends CardImpl<IrresistiblePrey> {
                 new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneTargetEffect()),
                 Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public IrresistiblePrey(final IrresistiblePrey card) {

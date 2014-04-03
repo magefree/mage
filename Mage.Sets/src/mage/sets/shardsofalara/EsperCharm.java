@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -65,7 +65,7 @@ public class EsperCharm extends CardImpl<EsperCharm> {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         // or draw two cards;
         Mode mode = new Mode();
-        mode.getEffects().add(new DrawCardControllerEffect(2));
+        mode.getEffects().add(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addMode(mode);
         // or target player discards two cards.
         mode = new Mode();

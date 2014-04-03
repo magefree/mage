@@ -30,7 +30,7 @@ package mage.sets.dragonsmaze;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;
@@ -50,7 +50,7 @@ public class PilferedPlans extends CardImpl<PilferedPlans> {
 
         // Target player puts the top two cards of his or her library into his or her graveyard. Draw two cards.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(2));
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer());
         
     }

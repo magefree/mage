@@ -31,7 +31,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -61,7 +61,7 @@ public class Opt extends CardImpl<Opt> {
         // This is functionally the same as scry, copy scry effect, removing "scry", unless theres a simpler way im overlooking?
         this.getSpellAbility().addEffect(new OptEffect());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Opt(final Opt card) {

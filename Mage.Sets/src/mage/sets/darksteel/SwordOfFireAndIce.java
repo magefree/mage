@@ -40,7 +40,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -94,7 +94,7 @@ class SwordOfFireAndIceAbility extends TriggeredAbilityImpl<SwordOfFireAndIceAbi
 
     public SwordOfFireAndIceAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
-        this.addEffect(new DrawCardControllerEffect(1));
+        this.addEffect(new DrawCardSourceControllerEffect(1));
         this.addTarget(new TargetCreatureOrPlayer());
     }
 

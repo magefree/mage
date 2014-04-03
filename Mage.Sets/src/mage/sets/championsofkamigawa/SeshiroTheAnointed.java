@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -85,7 +85,7 @@ public class SeshiroTheAnointed extends CardImpl<SeshiroTheAnointed> {
 class SeshiroTheAnointedAbility extends TriggeredAbilityImpl<SeshiroTheAnointedAbility> {
 
     public SeshiroTheAnointedAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
     public SeshiroTheAnointedAbility(final SeshiroTheAnointedAbility ability) {

@@ -37,7 +37,7 @@ import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -65,7 +65,7 @@ public class NivMizzetDracogenius extends CardImpl<NivMizzetDracogenius> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever Niv-Mizzet, Dracogenius deals damage to a player, you may draw a card.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1), true));
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
         
         // {U}{R}: Niv-Mizzet, Dracogenius deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1),new ManaCostsImpl("{U}{R}"));

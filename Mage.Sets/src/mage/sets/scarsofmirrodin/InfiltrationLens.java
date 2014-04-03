@@ -35,7 +35,7 @@ import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -54,7 +54,7 @@ public class InfiltrationLens extends CardImpl<InfiltrationLens> {
         this.subtype.add("Equipment");
 
         // Whenever equipped creature becomes blocked by a creature, you may draw two cards.
-        this.addAbility(new EquippedBecomesBlockedTriggeredAbility(new DrawCardControllerEffect(2), true));
+        this.addAbility(new EquippedBecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(2), true));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));

@@ -36,7 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continious.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -73,7 +73,7 @@ public class SoulRansom extends CardImpl<SoulRansom> {
         Effect effect = new SacrificeSourceEffect();
         effect.setText("{this}'s controller sacrifices it");
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect , new DiscardTargetCost(new TargetCardInHand(2,2, new FilterCard("two cards"))));
-        effect = new DrawCardControllerEffect(2);
+        effect = new DrawCardSourceControllerEffect(2);
         effect.setText("Then draws two cards. Only any opponent may activate this ability");
         ability2.addEffect(effect);
         ability2.setMayActivate(TargetController.OPPONENT);

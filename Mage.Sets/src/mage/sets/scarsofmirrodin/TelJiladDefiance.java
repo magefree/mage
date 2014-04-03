@@ -30,7 +30,7 @@ package mage.sets.scarsofmirrodin;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainProtectionFromTypeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -50,7 +50,7 @@ public class TelJiladDefiance extends CardImpl<TelJiladDefiance> {
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new GainProtectionFromTypeTargetEffect(Duration.EndOfTurn, new FilterArtifactCard("artifacts")));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public TelJiladDefiance(final TelJiladDefiance card) {

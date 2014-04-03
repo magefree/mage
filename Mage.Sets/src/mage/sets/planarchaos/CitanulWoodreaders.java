@@ -34,7 +34,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 
@@ -58,7 +58,7 @@ public class CitanulWoodreaders extends CardImpl<CitanulWoodreaders> {
         this.addAbility(new KickerAbility("{2}{G}"));
         // When Citanul Woodreaders enters the battlefield, if it was kicked, draw two cards.
         this.addAbility(new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(2)),
+                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2)),
                 KickedCondition.getInstance(),"When Citanul Woodreaders enters the battlefield, if it was kicked, draw two cards."));
     }
 

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,7 +55,7 @@ public class FlowOfIdeas extends CardImpl<FlowOfIdeas> {
         this.color.setBlue(true);
 
         // Draw a card for each Island you control.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
     public FlowOfIdeas(final FlowOfIdeas card) {

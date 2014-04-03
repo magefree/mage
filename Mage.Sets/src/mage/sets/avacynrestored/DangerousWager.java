@@ -33,7 +33,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -53,7 +53,7 @@ public class DangerousWager extends CardImpl<DangerousWager> {
 
         // Discard your hand, then draw two cards.
         this.getSpellAbility().addEffect(new DangerousWagerEffect());
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
     public DangerousWager(final DangerousWager card) {

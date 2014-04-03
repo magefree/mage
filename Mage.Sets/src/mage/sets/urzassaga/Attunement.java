@@ -34,7 +34,7 @@ import mage.constants.Zone;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandSourceCost;
 import mage.abilities.effects.common.DiscardControllerEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -49,7 +49,7 @@ public class Attunement extends CardImpl<Attunement> {
         this.color.setBlue(true);
 
         // Return Attunement to its owner's hand: Draw three cards, then discard four cards.
-		SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(3), new ReturnToHandSourceCost());
+		SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new ReturnToHandSourceCost());
 		ability.addEffect(new DiscardControllerEffect(4));
         this.addAbility(ability);
     }

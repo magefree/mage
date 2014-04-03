@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class Skullclamp extends CardImpl<Skullclamp> {
         // Equipped creature gets +1/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, -1)));
         // Whenever equipped creature dies, draw two cards.
-        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardControllerEffect(2), "equipped"));
+        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(2), "equipped"));
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }

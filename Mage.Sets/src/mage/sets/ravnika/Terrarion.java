@@ -38,7 +38,7 @@ import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -66,7 +66,7 @@ public class Terrarion extends CardImpl<Terrarion> {
         ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
         // When Terrarion is put into a graveyard from the battlefield, draw a card.
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public Terrarion(final Terrarion card) {

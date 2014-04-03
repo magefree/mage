@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -113,7 +113,7 @@ class SkipYourDrawStepEffect extends ReplacementEffectImpl<SkipYourDrawStepEffec
 class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl<DragonAppeasementTriggeredAbility> {
 
     public DragonAppeasementTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
     public DragonAppeasementTriggeredAbility(final DragonAppeasementTriggeredAbility ability) {

@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -64,7 +64,7 @@ public class Runewing extends CardImpl<Runewing> {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Runewing dies, draw a card.
-        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1), false));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
     public Runewing(final Runewing card) {

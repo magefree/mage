@@ -34,7 +34,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevouredCreaturesCount;
 import mage.abilities.effects.common.DevourEffect.DevourFactor;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 
@@ -57,7 +57,7 @@ public class Skullmulcher extends CardImpl<Skullmulcher> {
 
         // When Skullmulcher enters the battlefield, draw a card for each creature it devoured.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DrawCardControllerEffect(new DevouredCreaturesCount()),false));
+                new DrawCardSourceControllerEffect(new DevouredCreaturesCount()),false));
     }
 
     public Skullmulcher(final Skullmulcher card) {

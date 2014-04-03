@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.TimingRule;
@@ -50,7 +50,7 @@ public class ThinkTwice extends CardImpl<ThinkTwice> {
         this.color.setBlue(true);
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
 
         // Flashback {2}{U}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{U}"), TimingRule.INSTANT));

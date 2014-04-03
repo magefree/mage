@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 
@@ -52,7 +52,7 @@ public class SphinxsRevelation extends CardImpl<SphinxsRevelation> {
         // You gain X life and draw X cards.
         ManacostVariableValue manaX = new ManacostVariableValue();
         this.getSpellAbility().addEffect(new GainLifeEffect(manaX));
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(manaX));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(manaX));
     }
 
     public SphinxsRevelation (final SphinxsRevelation card) {

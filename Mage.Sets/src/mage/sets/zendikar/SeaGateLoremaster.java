@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -64,7 +64,7 @@ public class SeaGateLoremaster extends CardImpl<SeaGateLoremaster> {
         this.toughness = new MageInt(3);
 
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DrawCardControllerEffect(new PermanentsOnBattlefieldCount(filter)),
+                new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)),
                 new TapSourceCost()));
     }
 

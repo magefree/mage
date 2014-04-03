@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -47,7 +47,7 @@ public class SeersSundial extends CardImpl<SeersSundial> {
         this.expansionSetCode = "WWK";
 
         // Landfall - Whenever a land enters the battlefield under your control, you may pay {2}. If you do, draw a card.
-        this.addAbility(new LandfallAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{2}")), false)); // optional = false because DoIfCost is already optonal
+        this.addAbility(new LandfallAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}")), false)); // optional = false because DoIfCost is already optonal
     }
 
     public SeersSundial(final SeersSundial card) {

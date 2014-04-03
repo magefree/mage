@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -52,7 +52,7 @@ public class Sanguimancy extends CardImpl<Sanguimancy> {
 
         // You draw X cards and you lose X life, where X is your devotion to black.
         DynamicValue blackDevotion = new DevotionCount(ColoredManaSymbol.B);
-        Effect effect = new DrawCardControllerEffect(blackDevotion);
+        Effect effect = new DrawCardSourceControllerEffect(blackDevotion);
         effect.setText("You draw X cards");
         this.getSpellAbility().addEffect(effect);
         effect = new LoseLifeSourceControllerEffect(blackDevotion);

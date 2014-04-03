@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
@@ -51,7 +51,7 @@ public class AvenFisher extends CardImpl<AvenFisher> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1), true));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
     public AvenFisher(final AvenFisher card) {

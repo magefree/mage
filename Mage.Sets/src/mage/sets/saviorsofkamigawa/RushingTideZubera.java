@@ -34,7 +34,7 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -60,7 +60,7 @@ public class RushingTideZubera extends CardImpl<RushingTideZubera> {
         this.toughness = new MageInt(3);
 
         // When Rushing-Tide Zubera dies, if 4 or more damage was dealt to it this turn, draw three cards.
-        Ability ability = new ConditionalTriggeredAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(3)),new RushingTideZuberaCondition(),
+        Ability ability = new ConditionalTriggeredAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(3)),new RushingTideZuberaCondition(),
                 "When {this} dies, if 4 or more damage was dealt to it this turn, draw three cards.");
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);

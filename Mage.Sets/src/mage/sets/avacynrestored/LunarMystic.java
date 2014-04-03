@@ -33,7 +33,7 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -63,7 +63,7 @@ public class LunarMystic extends CardImpl<LunarMystic> {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an instant spell, you may pay {1}. If you do, draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new GenericManaCost(1)), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(1)), filter, false));
     }
 
     public LunarMystic(final LunarMystic card) {

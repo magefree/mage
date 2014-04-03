@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -47,7 +47,7 @@ public class KeepWatch extends CardImpl<KeepWatch> {
         this.color.setBlue(true);
 
         // Draw a card for each attacking creature.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(new AttackingCreatureCount()));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new AttackingCreatureCount()));
     }
 
     public KeepWatch(final KeepWatch card) {

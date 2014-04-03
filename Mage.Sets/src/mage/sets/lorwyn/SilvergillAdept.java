@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
@@ -66,7 +66,7 @@ public class SilvergillAdept extends CardImpl<SilvergillAdept> {
         // As an additional cost to cast Silvergill Adept, reveal a Merfolk card from your hand or pay {3}.
         this.getSpellAbility().addCost(new SilvergillAdeptCost());
         // When Silvergill Adept enters the battlefield, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public SilvergillAdept(final SilvergillAdept card) {

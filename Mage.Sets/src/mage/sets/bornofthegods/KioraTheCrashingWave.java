@@ -36,7 +36,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continious.PlayAdditionalLandsControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -86,7 +86,7 @@ public class KioraTheCrashingWave extends CardImpl<KioraTheCrashingWave> {
         this.addAbility(ability);
 
         // -1: Draw a card. You may play an additional land this turn.
-        ability = new LoyaltyAbility(new DrawCardControllerEffect(1), -1);
+        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), -1);
         ability.addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
         this.addAbility(ability);
 

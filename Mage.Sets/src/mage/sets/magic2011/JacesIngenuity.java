@@ -31,7 +31,7 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -44,7 +44,7 @@ public class JacesIngenuity extends CardImpl<JacesIngenuity> {
         super(ownerId, 60, "Jace's Ingenuity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "M11";
         this.color.setBlue(true);
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
     public JacesIngenuity(final JacesIngenuity card) {

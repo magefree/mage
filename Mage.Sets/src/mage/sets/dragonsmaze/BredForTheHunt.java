@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -72,7 +72,7 @@ public class BredForTheHunt extends CardImpl<BredForTheHunt> {
 class BredForTheHuntTriggeredAbility extends TriggeredAbilityImpl<BredForTheHuntTriggeredAbility> {
 
     public BredForTheHuntTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1));
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
         this.optional = true;
     }
 

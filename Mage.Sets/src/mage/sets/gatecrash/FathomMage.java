@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EvolveAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
@@ -81,7 +81,7 @@ public class FathomMage extends CardImpl<FathomMage> {
 class FathomMageTriggeredAbility extends TriggeredAbilityImpl<FathomMageTriggeredAbility> {
 
     public FathomMageTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
     public FathomMageTriggeredAbility(FathomMageTriggeredAbility ability) {

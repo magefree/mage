@@ -32,7 +32,7 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.PlayAdditionalLandsControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -52,7 +52,7 @@ public class UrbanEvolution extends CardImpl<UrbanEvolution> {
         this.color.setBlue(true);
         
         //Draw three cards. 
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         
         //You may play an additional land this turn.
         this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));

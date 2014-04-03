@@ -31,7 +31,7 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ScryEffect;
 import mage.cards.CardImpl;
 
@@ -46,7 +46,7 @@ public class Preordain extends CardImpl<Preordain> {
         this.expansionSetCode = "M11";
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new ScryEffect(2));
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Preordain(final Preordain card) {

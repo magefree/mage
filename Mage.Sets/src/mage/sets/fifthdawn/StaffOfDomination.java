@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
@@ -70,7 +70,7 @@ public class StaffOfDomination extends CardImpl<StaffOfDomination> {
         ability4.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability4);
         // {5}, {tap}: Draw a card.
-        Ability ability5 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new ManaCostsImpl("{5}"));
+        Ability ability5 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{5}"));
         ability5.addCost(new TapSourceCost());
         this.addAbility(ability5);
     }

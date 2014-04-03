@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -76,7 +76,7 @@ public class CrypticCommand extends CardImpl<CrypticCommand> {
         this.getSpellAbility().getModes().addMode(mode);
         // or draw a card.
         mode = new Mode();
-        mode.getEffects().add(new DrawCardControllerEffect(1));
+        mode.getEffects().add(new DrawCardSourceControllerEffect(1));
         this.getSpellAbility().getModes().addMode(mode);
     }
 

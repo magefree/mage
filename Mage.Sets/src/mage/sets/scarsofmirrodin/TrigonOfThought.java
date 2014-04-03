@@ -38,7 +38,7 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -62,7 +62,7 @@ public class TrigonOfThought extends CardImpl<TrigonOfThought> {
         Costs costs = new CostsImpl();
         costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         costs.add(new TapSourceCost());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), costs);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), costs);
         ability.addManaCost(new GenericManaCost(2));
         this.addAbility(ability);
 

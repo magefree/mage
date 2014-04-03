@@ -38,7 +38,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -59,7 +59,7 @@ public class FloatingDreamZubera extends CardImpl<FloatingDreamZubera> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(new ZuberasDiedDynamicValue())));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(new ZuberasDiedDynamicValue())));
         this.addWatcher(new ZuberasDiedWatcher());
     }
 

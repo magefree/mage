@@ -36,7 +36,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -62,7 +62,7 @@ public class Squelch extends CardImpl<Squelch> {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new ActivatedAbilityTarget());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Squelch(final Squelch card) {

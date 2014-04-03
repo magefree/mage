@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
@@ -52,7 +52,7 @@ public class DarkslickDrake extends CardImpl<DarkslickDrake> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1), false));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
     public DarkslickDrake (final DarkslickDrake card) {

@@ -32,7 +32,7 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.SwitchPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -49,7 +49,7 @@ public class TwistedImage extends CardImpl<TwistedImage> {
         this.expansionSetCode = "SOM";
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

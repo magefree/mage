@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -60,7 +60,7 @@ public class JaceMemoryAdept extends CardImpl<JaceMemoryAdept> {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Draw a card. Target player puts the top card of his or her library into his or her graveyard.
-        LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardControllerEffect(1), 1);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);
         ability1.addEffect(new PutLibraryIntoGraveTargetEffect(1));
         ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);

@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,7 +57,7 @@ public class AEtherSpellbomb extends CardImpl<AEtherSpellbomb> {
         this.addAbility(ability);
         
         //{1}, Sacrifice Æther Spellbomb: Draw a card.
-        SimpleActivatedAbility drawCardAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
+        SimpleActivatedAbility drawCardAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         drawCardAbility.addCost(new SacrificeSourceCost());
         this.addAbility(drawCardAbility);
 

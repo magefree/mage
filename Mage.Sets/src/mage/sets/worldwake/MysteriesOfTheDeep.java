@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.watchers.common.LandfallWatcher;
 
@@ -51,7 +51,7 @@ public class MysteriesOfTheDeep extends CardImpl<MysteriesOfTheDeep> {
         // Draw two cards.
         // Landfall - If you had a land enter the battlefield under your control this turn, draw three cards instead.
         this.addWatcher(new LandfallWatcher());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardControllerEffect(3), new DrawCardControllerEffect(2), LandfallCondition.getInstance(), "Draw 2 cards. Landfall - If you had a land enter the battlefield under your control this turn, draw three cards instead"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(3), new DrawCardSourceControllerEffect(2), LandfallCondition.getInstance(), "Draw 2 cards. Landfall - If you had a land enter the battlefield under your control this turn, draw three cards instead"));
     }
 
     public MysteriesOfTheDeep(final MysteriesOfTheDeep card) {

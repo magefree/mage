@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetSpell;
@@ -57,7 +57,7 @@ public class SpellContortion extends CardImpl<SpellContortion> {
         
         // Counter target spell unless its controller pays {2}. Draw a card for each time Spell Contortion was kicked.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(new MultikickerCount()));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new MultikickerCount()));
         this.getSpellAbility().addTarget(new TargetSpell());
         
     }

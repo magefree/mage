@@ -33,7 +33,7 @@ import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class EnterTheInfinite extends CardImpl<EnterTheInfinite> {
         this.color.setBlue(true);
 
         // Draw cards equal to the number of cards in your library, 
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(new CardsInControllerLibraryCount()));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new CardsInControllerLibraryCount()));
         //then put a card from your hand on top of your library.
         this.getSpellAbility().addEffect(new PutCardOnLibraryEffect());
         //You have no maximum hand size until your next turn.

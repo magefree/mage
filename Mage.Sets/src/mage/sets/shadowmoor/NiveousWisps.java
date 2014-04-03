@@ -33,7 +33,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class NiveousWisps extends CardImpl<NiveousWisps> {
         this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new TapTargetEffect());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public NiveousWisps (final NiveousWisps card) {

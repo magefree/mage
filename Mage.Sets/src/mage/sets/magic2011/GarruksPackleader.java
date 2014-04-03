@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -63,7 +63,7 @@ public class GarruksPackleader extends CardImpl<GarruksPackleader> {
         this.toughness = new MageInt(4);
 
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new DrawCardControllerEffect(1), filter, true));
+                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
     }
 
     public GarruksPackleader(final GarruksPackleader card) {

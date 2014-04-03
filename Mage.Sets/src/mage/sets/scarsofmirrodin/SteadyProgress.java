@@ -31,7 +31,7 @@ package mage.sets.scarsofmirrodin;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 
@@ -46,7 +46,7 @@ public class SteadyProgress extends CardImpl<SteadyProgress> {
         this.expansionSetCode = "SOM";
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new ProliferateEffect());
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public SteadyProgress (final SteadyProgress card) {

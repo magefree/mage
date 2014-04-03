@@ -39,7 +39,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -81,7 +81,7 @@ class KozilekButcherOfTruthOnCastAbility extends TriggeredAbilityImpl<KozilekBut
     private static final String abilityText = "When you cast {this}, draw four cards";
 
     KozilekButcherOfTruthOnCastAbility() {
-        super(Zone.STACK, new DrawCardControllerEffect(4));
+        super(Zone.STACK, new DrawCardSourceControllerEffect(4));
     }
 
     KozilekButcherOfTruthOnCastAbility(final KozilekButcherOfTruthOnCastAbility ability) {

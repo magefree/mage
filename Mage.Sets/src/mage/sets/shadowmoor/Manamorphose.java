@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
@@ -57,7 +57,7 @@ public class Manamorphose extends CardImpl<Manamorphose> {
         this.getSpellAbility().addChoice(new ChoiceColor());
         this.getSpellAbility().addChoice(new ChoiceColor());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Manamorphose(final Manamorphose card) {

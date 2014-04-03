@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -62,7 +62,7 @@ public class KeenSense extends CardImpl<KeenSense> {
         this.addAbility(ability);
 
         // Whenever enchanted creature deals damage to an opponent, you may draw a card.
-        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardControllerEffect(1), "enchanted creature", true, false, false, TargetController.OPPONENT));
+        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "enchanted creature", true, false, false, TargetController.OPPONENT));
     }
 
     public KeenSense(final KeenSense card) {

@@ -3,7 +3,7 @@ package mage.abilities;
 /**
  * Marker class for singleton abilities and effects.
  * Prevents effects and abilities to get new Id across the games on the server.
- * Can be used only for stateless effects and abilities.
+ * Can be used only for stateless effects and abilities. (e.g. no Duration)
  *
  * Intended to be used to avoid bugs and for performance reasons.
  *

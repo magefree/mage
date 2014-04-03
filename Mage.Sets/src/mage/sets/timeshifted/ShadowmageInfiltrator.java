@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 
@@ -56,7 +56,7 @@ public class ShadowmageInfiltrator extends CardImpl<ShadowmageInfiltrator> {
         // Fear
         this.addAbility(FearAbility.getInstance());
         // Whenever Shadowmage Infiltrator deals combat damage to a player, you may draw a card.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1), true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
     public ShadowmageInfiltrator(final ShadowmageInfiltrator card) {

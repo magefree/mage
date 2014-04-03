@@ -38,7 +38,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -71,7 +71,7 @@ public class SphinxOfTheChimes extends CardImpl<SphinxOfTheChimes> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Discard two nonland cards with the same name: Draw four cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(4), new DiscardTwoNonlandCardsWithTheSameNameCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(4), new DiscardTwoNonlandCardsWithTheSameNameCost());
         this.addAbility(ability);
 
     }

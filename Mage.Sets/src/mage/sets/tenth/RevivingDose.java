@@ -30,7 +30,7 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 
@@ -45,7 +45,7 @@ public class RevivingDose extends CardImpl<RevivingDose> {
         this.expansionSetCode = "10E";
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public RevivingDose(final RevivingDose card) {

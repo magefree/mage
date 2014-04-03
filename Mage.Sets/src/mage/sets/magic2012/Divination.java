@@ -31,7 +31,7 @@ package mage.sets.magic2012;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -44,7 +44,7 @@ public class Divination extends CardImpl<Divination> {
         super(ownerId, 50, "Divination", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "M12";
         this.color.setBlue(true);
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
     public Divination (final Divination card) {

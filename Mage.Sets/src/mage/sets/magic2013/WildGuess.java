@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCardInHand;
 
@@ -50,7 +50,7 @@ public class WildGuess extends CardImpl<WildGuess> {
         // As an additional cost to cast Wild Guess, discard a card.
         this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand()));
         // Draw two cards.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
     public WildGuess(final WildGuess card) {

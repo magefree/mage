@@ -32,7 +32,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
@@ -84,7 +84,7 @@ public class Curiosity extends CardImpl<Curiosity> {
 class CuriosityAbility extends TriggeredAbilityImpl<CuriosityAbility> {
 
     public CuriosityAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
     public CuriosityAbility(final CuriosityAbility ability) {

@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
@@ -66,7 +66,7 @@ public class SoulOfTheHarvest extends CardImpl<SoulOfTheHarvest> {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever another nontoken creature enters the battlefield under your control, you may draw a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), filter, true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
     }
 
     public SoulOfTheHarvest(final SoulOfTheHarvest card) {

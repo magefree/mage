@@ -40,7 +40,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -86,7 +86,7 @@ public class TamiyoTheMoonSage extends CardImpl<TamiyoTheMoonSage> {
         this.addAbility(ability);
 
         // -2: Draw a card for each tapped creature target player controls.
-        ability = new LoyaltyAbility(new DrawCardControllerEffect(new TappedCreaturesControlledByTargetCount()), -2);
+        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(new TappedCreaturesControlledByTargetCount()), -2);
         ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
 

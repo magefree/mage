@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class Griselbrand extends CardImpl<Griselbrand> {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
         // Pay 7 life: Draw seven cards.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(7), new PayLifeCost(7)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(7), new PayLifeCost(7)));
     }
 
     public Griselbrand(final Griselbrand card) {

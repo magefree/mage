@@ -44,7 +44,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
 
@@ -97,17 +97,17 @@ class PatronOfTheMoonEffect extends OneShotEffect<PatronOfTheMoonEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID cardId : targetPointer.getTargets(game, source)) {
-            Card c = game.getCard(cardId);
-            if (c != null) {
-                c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
-                Permanent land = game.getPermanent(cardId);
-                if (land != null) {
-                    land.setTapped(true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID cardId : targetPointer.getTargets(game, source)) {
+                Card card = game.getCard(cardId);
+                if (card != null) {
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), true);
                 }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

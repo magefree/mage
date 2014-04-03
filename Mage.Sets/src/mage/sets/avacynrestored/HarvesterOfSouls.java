@@ -31,7 +31,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,7 +65,7 @@ public class HarvesterOfSouls extends CardImpl<HarvesterOfSouls> {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever another nontoken creature dies, you may draw a card.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardControllerEffect(1), true, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), true, filter));
     }
 
     public HarvesterOfSouls(final HarvesterOfSouls card) {

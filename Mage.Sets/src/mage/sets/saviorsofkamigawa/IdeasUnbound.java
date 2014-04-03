@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DiscardControllerEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -50,7 +50,7 @@ public class IdeasUnbound extends CardImpl<IdeasUnbound> {
         this.color.setBlue(true);
 
         // Draw three cards. Discard three cards at the beginning of the next end step.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtEndOfTurnDelayedTriggeredAbility(new DiscardControllerEffect(3))));
     }
 

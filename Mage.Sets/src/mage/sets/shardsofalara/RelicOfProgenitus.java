@@ -38,7 +38,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
@@ -65,7 +65,7 @@ public class RelicOfProgenitus extends CardImpl<RelicOfProgenitus> {
         // {1}, Exile Relic of Progenitus: Exile all cards from all graveyards. Draw a card.
         Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RelicOfProgenitusEffect2(),new GenericManaCost(1));
         secondAbility.addCost(new SacrificeSourceCost());
-        secondAbility.addEffect(new DrawCardControllerEffect(1));
+        secondAbility.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(secondAbility);
 
     }

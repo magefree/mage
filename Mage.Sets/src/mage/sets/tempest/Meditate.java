@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -52,7 +52,7 @@ public class Meditate extends CardImpl<Meditate> {
         this.color.setBlue(true);
 
         // Draw four cards. You skip your next turn.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(4));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
         this.getSpellAbility().addEffect(new SpipTurnEffect());
     }
 

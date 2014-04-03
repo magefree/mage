@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
@@ -80,7 +80,7 @@ public class IsperiaSupremeJudge extends CardImpl<IsperiaSupremeJudge> {
 class IsperiaSupremeJudgeTriggeredAbility extends TriggeredAbilityImpl<IsperiaSupremeJudgeTriggeredAbility> {
 
     public IsperiaSupremeJudgeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
     public IsperiaSupremeJudgeTriggeredAbility(final IsperiaSupremeJudgeTriggeredAbility ability) {

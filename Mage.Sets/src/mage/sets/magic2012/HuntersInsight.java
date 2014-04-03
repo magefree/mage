@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -89,7 +89,7 @@ class HuntersInsightTriggeredAbility extends TriggeredAbilityImpl<HuntersInsight
         if ((event.getType() == EventType.DAMAGED_PLAYER || event.getType() == EventType.DAMAGED_PLANESWALKER)
                 && event.getSourceId().equals(this.sourceId) && ((DamagedEvent) event).isCombatDamage()) {
             this.getEffects().clear();
-            this.addEffect(new DrawCardControllerEffect(event.getAmount()));
+            this.addEffect(new DrawCardSourceControllerEffect(event.getAmount()));
             return true;
         }
         return false;

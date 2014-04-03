@@ -30,7 +30,7 @@ package mage.sets.visions;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ZoneChangeAllTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -56,7 +56,7 @@ public class FemerefEnchantress extends CardImpl<FemerefEnchantress> {
 
         // Whenever an enchantment is put into a graveyard from the battlefield, draw a card.
         this.addAbility(new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD,
-                new DrawCardControllerEffect(1), new FilterEnchantmentPermanent(),
+                new DrawCardSourceControllerEffect(1), new FilterEnchantmentPermanent(),
                 "Whenever an enchantment is put into a graveyard from the battlefield, ", false));
     }
 

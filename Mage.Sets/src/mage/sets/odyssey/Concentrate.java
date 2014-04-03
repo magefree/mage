@@ -30,7 +30,7 @@ package mage.sets.odyssey;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -46,7 +46,7 @@ public class Concentrate extends CardImpl<Concentrate> {
         this.color.setBlue(true);
 
         // Draw three cards.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
     public Concentrate(final Concentrate card) {

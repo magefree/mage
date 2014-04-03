@@ -30,7 +30,7 @@ package mage.sets.onslaught;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -60,7 +60,7 @@ public class WirewoodSavage extends CardImpl<WirewoodSavage> {
         this.toughness = new MageInt(2);
 
         // Whenever a Beast enters the battlefield, you may draw a card.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), filter, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
     }
 
     public WirewoodSavage(final WirewoodSavage card) {

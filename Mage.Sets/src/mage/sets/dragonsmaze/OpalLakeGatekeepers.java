@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -64,7 +64,7 @@ public class OpalLakeGatekeepers extends CardImpl<OpalLakeGatekeepers> {
 
         // When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card.
         this.addAbility(new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)),
+                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 1),
                 "When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card."));
     }

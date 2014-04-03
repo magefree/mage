@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -58,7 +58,7 @@ public class SynapseSliver extends CardImpl<SynapseSliver> {
         this.toughness = new MageInt(3);
 
         // Whenever a Sliver deals combat damage to a player, its controller may draw a card.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1), true);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true);
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("Sliver", "Sliver")));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
     }

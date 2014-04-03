@@ -33,7 +33,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
@@ -66,7 +66,7 @@ public class ViridianRevel extends CardImpl<ViridianRevel> {
 
 class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl<ViridianRevelTriggeredAbility> {
     ViridianRevelTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
     ViridianRevelTriggeredAbility(final ViridianRevelTriggeredAbility ability) {

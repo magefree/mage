@@ -30,7 +30,7 @@ package mage.sets.magic2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -81,7 +81,7 @@ class WindreaderSphinxTriggeredAbility extends TriggeredAbilityImpl<WindreaderSp
     }
 
     public WindreaderSphinxTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
     public WindreaderSphinxTriggeredAbility(final WindreaderSphinxTriggeredAbility ability) {

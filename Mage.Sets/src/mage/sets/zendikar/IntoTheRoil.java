@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class IntoTheRoil extends CardImpl<IntoTheRoil> {
         // Return target nonland permanent to its owner's hand. If Into the Roil was kicked, draw a card.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DrawCardControllerEffect(1),
+                new DrawCardSourceControllerEffect(1),
                 KickedCondition.getInstance(),
                 "If {this} was kicked, draw a card"));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());

@@ -65,7 +65,7 @@ public class CruelUltimatum extends CardImpl<CruelUltimatum> {
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));
 
         this.getSpellAbility().addEffect(new CruelUltimatumEffect());
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addEffect(new GainLifeEffect(5));
     }
 

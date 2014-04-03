@@ -30,7 +30,7 @@ package mage.sets.torment;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 
@@ -49,7 +49,7 @@ public class ObsessiveSearch extends CardImpl<ObsessiveSearch> {
         this.color.setBlue(true);
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
 
         // Madness {U}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{U}")));

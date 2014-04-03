@@ -30,7 +30,7 @@ package mage.sets.magic2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -54,7 +54,7 @@ public class MessengerDrake extends CardImpl<MessengerDrake> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Messenger Drake dies, draw a card.
-        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public MessengerDrake(final MessengerDrake card) {

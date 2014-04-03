@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.SplitCard;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
@@ -88,7 +88,7 @@ class BeckTriggeredAbility extends DelayedTriggeredAbility<BeckTriggeredAbility>
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public BeckTriggeredAbility() {
-        super(new DrawCardControllerEffect(1), Duration.EndOfTurn, false);
+        super(new DrawCardSourceControllerEffect(1), Duration.EndOfTurn, false);
         optional = true;
     }
 

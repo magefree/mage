@@ -33,7 +33,7 @@ import mage.constants.*;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FearAbility;
@@ -56,7 +56,7 @@ public class MaskOfRiddles extends CardImpl<MaskOfRiddles> {
         // Equipped creature has fear.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // Whenever equipped creature deals combat damage to a player, you may draw a card.
-        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardControllerEffect(1), "equipped", true));
+        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "equipped", true));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }

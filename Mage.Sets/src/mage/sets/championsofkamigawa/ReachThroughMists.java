@@ -32,7 +32,7 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -46,7 +46,7 @@ public class ReachThroughMists extends CardImpl<ReachThroughMists> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
         this.color.setBlue(true);
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public ReachThroughMists (final ReachThroughMists card) {

@@ -33,7 +33,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DiscardControllerEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -68,7 +68,7 @@ public class SiftThroughSands extends CardImpl<SiftThroughSands> {
         this.color.setBlue(true);
 
         // Draw two cards, then discard a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         Effect effect = new DiscardControllerEffect(1);
         effect.setText(", then discard a card");
         this.getSpellAbility().addEffect(effect);

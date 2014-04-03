@@ -28,7 +28,7 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -53,7 +53,7 @@ public class TouchOfInvisibility extends CardImpl<TouchOfInvisibility> {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public TouchOfInvisibility(final TouchOfInvisibility card) {

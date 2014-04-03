@@ -36,7 +36,7 @@ import mage.abilities.condition.common.EnchantedCreatureColorCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -71,7 +71,7 @@ public class HelmOfTheGhastlord extends CardImpl<HelmOfTheGhastlord> {
         this.addAbility(ability);
         // As long as enchanted creature is blue, it gets +1/+1 and has "Whenever this creature deals damage to an opponent, draw a card."
         SimpleStaticAbility blueAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "As long as enchanted creature is blue, it gets +1/+1"));
-        blueAbility.addEffect(new ConditionalContinousEffect(new GainAbilityAttachedEffect(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1),false), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "and has \"Whenever this creature deals damage to an opponent, draw a card.\""));
+        blueAbility.addEffect(new ConditionalContinousEffect(new GainAbilityAttachedEffect(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1),false), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "and has \"Whenever this creature deals damage to an opponent, draw a card.\""));
         this.addAbility(blueAbility);
         // As long as enchanted creature is black, it gets +1/+1 and has "Whenever this creature deals damage to an opponent, that player discards a card."
         SimpleStaticAbility blackAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "As long as enchanted creature is black, it gets +1/+1"));

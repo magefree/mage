@@ -37,7 +37,7 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DiscardControllerEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -64,7 +64,7 @@ public class SphinxOfLostTruths extends CardImpl<SphinxOfLostTruths> {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Sphinx of Lost Truths enters the battlefield, draw three cards. Then if it wasn't kicked, discard three cards.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(3));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(3));
         ability.addEffect(new ConditionalOneShotEffect(new DiscardControllerEffect(3), new InvertCondition(KickedCondition.getInstance()),
                 "Then if it wasn't kicked, discard three cards"));
         this.addAbility(ability);

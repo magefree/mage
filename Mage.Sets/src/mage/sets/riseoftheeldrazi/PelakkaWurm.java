@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class PelakkaWurm extends CardImpl<PelakkaWurm> {
 
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(7), false));
-        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1), false));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
     public PelakkaWurm(final PelakkaWurm card) {

@@ -70,30 +70,29 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
         if (player != null) {
             boolean revealed = player.isTopCardRevealed(); // by looking at the cards with scry you have not to reveal the next card
             player.setTopCardRevealed(false);
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cards = new CardsImpl();
             int count = Math.min(scryNumber, player.getLibrary().size());
             if (count == 0) {
-                return false;
+                return true;
             }
             for (int i = 0; i < count; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 cards.add(card);
-                game.setZone(card.getId(), Zone.PICK);
             }
-            TargetCard target1 = new TargetCard(Zone.PICK, filter1);
+            TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
             // move cards to the bottom of the library
             while (cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                 }
                 target1.clearChosen();
             }
             // move cards to the top of the library
             int onBottom = scryNumber - cards.size();
             if (cards.size() > 1) {
-                TargetCard target2 = new TargetCard(Zone.PICK, filter2);
+                TargetCard target2 = new TargetCard(Zone.LIBRARY, filter2);
                 target2.setRequired(true);
                 while (cards.size() > 1) {
                     player.choose(Outcome.Benefit, cards, target2, game);

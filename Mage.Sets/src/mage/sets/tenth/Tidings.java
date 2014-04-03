@@ -30,7 +30,7 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -43,7 +43,7 @@ public class Tidings extends CardImpl<Tidings> {
         super(ownerId, 116, "Tidings", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "10E";
         this.color.setBlue(true);
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(4));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
     }
 
     public Tidings(final Tidings card) {

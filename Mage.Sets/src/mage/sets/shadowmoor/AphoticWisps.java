@@ -33,7 +33,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
 import mage.abilities.keyword.FearAbility;
@@ -56,7 +56,7 @@ public class AphoticWisps extends CardImpl<AphoticWisps> {
         this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.BLACK, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public AphoticWisps (final AphoticWisps card) {

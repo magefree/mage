@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -66,7 +66,7 @@ public class MentorOfTheMeek extends CardImpl<MentorOfTheMeek> {
 
         //Whenever another creature with power 2 or less enters the battlefield under your control, you may pay 1. If you do, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{1}")),filter, true));
+                Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}")),filter, true));
 
     }
 

@@ -34,7 +34,7 @@ import mage.abilities.costs.common.DiscardHandCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -53,7 +53,7 @@ public class SlateOfAncestry extends CardImpl<SlateOfAncestry> {
 
         // {4}, {tap}, Discard your hand: Draw a card for each creature you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new DrawCardControllerEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("creature you control"))), 
+                new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("creature you control"))), 
                 new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardHandCost());

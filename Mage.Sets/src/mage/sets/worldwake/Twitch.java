@@ -30,7 +30,7 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
@@ -63,7 +63,7 @@ public class Twitch extends CardImpl<Twitch> {
         // Draw a card.
         this.getSpellAbility().addEffect(new MayTapOrUntapTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Twitch(final Twitch card) {

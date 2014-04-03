@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,7 +56,7 @@ public class EnchantresssPresence extends CardImpl<EnchantresssPresence> {
         this.color.setGreen(true);
 
         // Whenever you cast an enchantment spell, draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardControllerEffect(1), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
     }
 
     public EnchantresssPresence(final EnchantresssPresence card) {

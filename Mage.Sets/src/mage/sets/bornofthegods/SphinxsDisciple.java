@@ -29,7 +29,7 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class SphinxsDisciple extends CardImpl<SphinxsDisciple> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // <i>Inspired</i> - Whenever Sphinx's Disciple becomes untapped, draw a card.
-        this.addAbility(new InspiredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new InspiredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public SphinxsDisciple(final SphinxsDisciple card) {

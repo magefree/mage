@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetSpell;
 
@@ -52,7 +52,7 @@ public class Remand extends CardImpl<Remand> {
         this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.HAND));
         this.getSpellAbility().addTarget(new TargetSpell());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
     public Remand(final Remand card) {

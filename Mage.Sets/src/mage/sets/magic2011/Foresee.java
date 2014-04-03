@@ -31,7 +31,7 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ScryEffect;
 import mage.cards.CardImpl;
 
@@ -46,7 +46,7 @@ public class Foresee extends CardImpl<Foresee> {
         this.expansionSetCode = "M11";
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new ScryEffect(4));
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
     public Foresee(final Foresee card) {

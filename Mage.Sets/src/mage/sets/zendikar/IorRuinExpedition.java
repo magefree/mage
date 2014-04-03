@@ -34,7 +34,7 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
@@ -55,7 +55,7 @@ public class IorRuinExpedition extends CardImpl<IorRuinExpedition> {
         this.color.setBlue(true);
 
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(3), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceImpl;
@@ -58,7 +58,7 @@ public class ElsewhereFlask extends CardImpl<ElsewhereFlask> {
         this.expansionSetCode = "SHM";
 
         // When Elsewhere Flask enters the battlefield, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // Sacrifice Elsewhere Flask: Choose a basic land type. Each land you control becomes that type until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElsewhereFlaskEffect(), new SacrificeSourceCost()));
