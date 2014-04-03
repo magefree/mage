@@ -65,6 +65,7 @@ import mage.client.util.ImageHelper;
 import mage.client.util.PhaseManager;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.remote.Connection;
+import mage.remote.Connection.ProxyType;
 import org.apache.log4j.Logger;
 
 /**
@@ -87,6 +88,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
     public static final String KEY_CARD_IMAGES_CHECK = "cardImagesCheck";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
+    public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferedImageLaguage";
     
     public static final String KEY_BACKGROUND_IMAGE = "backgroundImage";
     public static final String KEY_BATTLEFIELD_IMAGE = "battlefieldImage";
@@ -259,8 +261,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         txtImageFolderPath.setEditable(false);
-        cbProxyType.setModel(new DefaultComboBoxModel(Connection.ProxyType.values()));
+        cbProxyType.setModel(new DefaultComboBoxModel<>(Connection.ProxyType.values()));
         addAvatars();
+        
+        cbPreferedImageLanguage.setModel(new DefaultComboBoxModel<>(new String[] {"en","de","fr","it","es","pt","jp","cn","ru","tw","ko"}));
+        
     }
 
     /** This method is called from within the constructor to
@@ -309,13 +314,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         checkBoxMain2Others = new javax.swing.JCheckBox();
         checkBoxEndTurnOthers = new javax.swing.JCheckBox();
         tabImages = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        panelCardImages = new javax.swing.JPanel();
         cbUseDefaultImageFolder = new javax.swing.JCheckBox();
         txtImageFolderPath = new javax.swing.JTextField();
         btnBrowseImageLocation = new javax.swing.JButton();
         cbCheckForNewImages = new javax.swing.JCheckBox();
         cbSaveToZipFiles = new javax.swing.JCheckBox();
-        jPanel23 = new javax.swing.JPanel();
+        cbPreferedImageLanguage = new javax.swing.JComboBox<String>();
+        labelPreferedImageLanguage = new javax.swing.JLabel();
+        panelBackgroundImages = new javax.swing.JPanel();
         cbUseDefaultBackground = new javax.swing.JCheckBox();
         txtBackgroundImagePath = new javax.swing.JTextField();
         btnBrowseBackgroundImage = new javax.swing.JButton();
@@ -336,7 +343,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         btnBattlefieldBGMBrowse = new javax.swing.JButton();
         tabConnection = new javax.swing.JPanel();
         lblProxyType = new javax.swing.JLabel();
-        cbProxyType = new javax.swing.JComboBox();
+        cbProxyType = new javax.swing.JComboBox<ProxyType>();
         pnlProxySettings = new javax.swing.JPanel();
         pnlProxy = new javax.swing.JPanel();
         lblProxyServer = new javax.swing.JLabel();
@@ -598,7 +605,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Phases", tabPhases);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images:"));
+        panelCardImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images:"));
 
         cbUseDefaultImageFolder.setText("Use default location to save images");
         cbUseDefaultImageFolder.addActionListener(new java.awt.event.ActionListener() {
@@ -628,39 +635,55 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        labelPreferedImageLanguage.setText("Prefered image language:");
+        labelPreferedImageLanguage.setFocusable(false);
+
+        javax.swing.GroupLayout panelCardImagesLayout = new javax.swing.GroupLayout(panelCardImages);
+        panelCardImages.setLayout(panelCardImagesLayout);
+        panelCardImagesLayout.setHorizontalGroup(
+            panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCardImagesLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(txtImageFolderPath)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBrowseImageLocation))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCardImagesLayout.createSequentialGroup()
+                .addGroup(panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbUseDefaultImageFolder)
                     .addComponent(cbCheckForNewImages)
-                    .addComponent(cbSaveToZipFiles))
+                    .addGroup(panelCardImagesLayout.createSequentialGroup()
+                        .addGroup(panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCardImagesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(labelPreferedImageLanguage))
+                            .addComponent(cbSaveToZipFiles, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbPreferedImageLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        panelCardImagesLayout.setVerticalGroup(
+            panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCardImagesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cbUseDefaultImageFolder)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtImageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBrowseImageLocation))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbCheckForNewImages)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbSaveToZipFiles)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbPreferedImageLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelPreferedImageLanguage))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel23.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images setting:"));
+        panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images setting:"));
 
         cbUseDefaultBackground.setText("Use default image");
         cbUseDefaultBackground.addActionListener(new java.awt.event.ActionListener() {
@@ -713,46 +736,46 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         jLabel15.setText("Battlefield:");
 
-        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
-        jPanel23.setLayout(jPanel23Layout);
-        jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel23Layout.createSequentialGroup()
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel23Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelBackgroundImagesLayout = new javax.swing.GroupLayout(panelBackgroundImages);
+        panelBackgroundImages.setLayout(panelBackgroundImagesLayout);
+        panelBackgroundImagesLayout.setHorizontalGroup(
+            panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
+                .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jLabel14))
-                    .addGroup(jPanel23Layout.createSequentialGroup()
+                    .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel15)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel23Layout.createSequentialGroup()
+                .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
                         .addComponent(txtBattlefieldImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBrowseBattlefieldImage))
-                    .addGroup(jPanel23Layout.createSequentialGroup()
+                    .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
                         .addComponent(txtBackgroundImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBrowseBackgroundImage)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel23Layout.createSequentialGroup()
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 21, Short.MAX_VALUE))
+            .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
+                .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbUseRandomBattleImage)
                     .addComponent(cbUseDefaultBattleImage)
                     .addComponent(cbUseDefaultBackground))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel23Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtBackgroundImagePath, txtBattlefieldImagePath});
+        panelBackgroundImagesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtBackgroundImagePath, txtBattlefieldImagePath});
 
-        jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel23Layout.createSequentialGroup()
+        panelBackgroundImagesLayout.setVerticalGroup(
+            panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cbUseDefaultBackground)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBackgroundImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBrowseBackgroundImage)
                     .addComponent(jLabel14))
@@ -761,7 +784,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbUseRandomBattleImage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBattlefieldImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBrowseBattlefieldImage)
                     .addComponent(jLabel15)))
@@ -774,18 +797,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(tabImagesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(tabImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelCardImages, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelBackgroundImages, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabImagesLayout.setVerticalGroup(
             tabImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabImagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelCardImages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(panelBackgroundImages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
@@ -1348,7 +1371,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbUseDefaultImageFolder, KEY_CARD_IMAGES_USE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
         saveImagesPath(prefs);
         save(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);        
+        save(prefs, dialog.cbPreferedImageLanguage, KEY_CARD_IMAGES_PREF_LANGUAGE);
         
         save(prefs, dialog.cbUseDefaultBackground, KEY_BACKGROUND_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbUseDefaultBattleImage, KEY_BATTLEFIELD_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
@@ -1698,6 +1722,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
         load(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true");
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
+        dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, "en"));
+        
         //add background load precedure 
         prop = prefs.get(KEY_BACKGROUND_IMAGE_DEFAULT, "true");
         if(prop.equals("true")){
@@ -1987,7 +2013,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbEnableGameSounds;
     private javax.swing.JCheckBox cbEnableOtherSounds;
     private javax.swing.JCheckBox cbGameLogAutoSave;
-    private javax.swing.JComboBox cbProxyType;
+    private javax.swing.JComboBox<String> cbPreferedImageLanguage;
+    private javax.swing.JComboBox<ProxyType> cbProxyType;
     private javax.swing.JCheckBox cbSaveToZipFiles;
     private javax.swing.JCheckBox cbUseDefaultBackground;
     private javax.swing.JCheckBox cbUseDefaultBattleImage;
@@ -2037,10 +2064,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelPreferedImageLanguage;
     private javax.swing.JLabel lblProxyPassword;
     private javax.swing.JLabel lblProxyPort;
     private javax.swing.JLabel lblProxyServer;
@@ -2050,6 +2076,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel main_game;
     private javax.swing.JPanel main_gamelog;
     private javax.swing.JCheckBox nonLandPermanentsInOnePile;
+    private javax.swing.JPanel panelBackgroundImages;
+    private javax.swing.JPanel panelCardImages;
     private javax.swing.JPanel pnlProxy;
     private javax.swing.JPanel pnlProxySettings;
     private javax.swing.JCheckBox rememberPswd;

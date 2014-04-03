@@ -97,7 +97,7 @@ public class Connection {
     public enum ProxyType {
         SOCKS("Socks"), HTTP("HTTP"), NONE("None");
 
-        private String text;
+        private final String text;
 
         ProxyType(String text) {
             this.text = text;
@@ -110,7 +110,9 @@ public class Connection {
 
         public static ProxyType valueByText(String value) {
             for (ProxyType type : values()) {
-                if (type.text.equals(value)) return type;
+                if (type.text.equals(value)) {
+                    return type;
+                }
             }
             return NONE;
         }

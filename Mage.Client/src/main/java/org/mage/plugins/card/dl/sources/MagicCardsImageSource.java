@@ -2,6 +2,9 @@ package org.mage.plugins.card.dl.sources;
 
 import java.util.HashMap;
 import java.util.Map;
+import mage.client.MageFrame;
+import mage.client.dialog.PreferencesDialog;
+import static mage.client.dialog.PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.utils.CardImageUtils;
 
@@ -82,7 +85,9 @@ public class MagicCardsImageSource implements CardImageSource {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
         String set = CardImageUtils.updateSet(cardSet, true);
-        StringBuilder url = new StringBuilder("http://magiccards.info/scans/en/");
+        String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
+               
+        StringBuilder url = new StringBuilder("http://magiccards.info/scans/").append(preferedLanguage).append("/");
         url.append(set.toLowerCase()).append("/").append(collectorId);
 
         if (card.isTwoFacedCard()) {
