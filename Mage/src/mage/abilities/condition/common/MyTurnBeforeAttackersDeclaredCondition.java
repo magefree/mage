@@ -25,51 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
 
-import java.util.UUID;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.TargetPlayer;
+package mage.abilities.condition.common;
+
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.constants.TurnPhase;
+import mage.game.Game;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class MiresToll extends CardImpl<MiresToll> {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("the number of Swamps you control");
+public class MyTurnBeforeAttackersDeclaredCondition implements Condition {
+    private static final MyTurnBeforeAttackersDeclaredCondition fInstance = new MyTurnBeforeAttackersDeclaredCondition();
 
-    static {
-        filter.add(new SubtypePredicate("Swamp"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-    
-    public MiresToll(UUID ownerId) {
-        super(ownerId, 60, "Mire's Toll", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "WWK";
-
-        this.color.setBlack(true);
-
-        // Target player reveals a number of cards from his or her hand equal to the number of Swamps you control. You choose one of them. That player discards that card.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, new PermanentsOnBattlefieldCount(filter)));
-
-    }
-
-    public MiresToll(final MiresToll card) {
-        super(card);
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
-    public MiresToll copy() {
-        return new MiresToll(this);
+    public boolean apply(Game game, Ability source) {
+        if (game.getActivePlayerId().equals(source.getControllerId())) {
+            TurnPhase turnPhase = game.getTurn().getPhase().getType();
+            if (turnPhase.equals(TurnPhase.BEGINNING) || turnPhase.equals(TurnPhase.PRECOMBAT_MAIN)) {
+                return true;
+            }
+            if (turnPhase.equals(TurnPhase.COMBAT)) {
+                return !game.getTurn().isDeclareAttackersStepStarted();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+	return "during your turn, before attackers are declared";
     }
 }
+

@@ -133,12 +133,11 @@ class VizkopaConfessorEffect extends OneShotEffect<VizkopaConfessorEffect> {
                 targetInHand.setRequired(true);
 
                 if (!revealedCards.isEmpty()) {
-                    targetPlayer.revealCards("Vizkopa Confessor", revealedCards, game);
+                    targetPlayer.revealCards(sourceCard.getName(), revealedCards, game);
                     controller.chooseTarget(Outcome.Exile, revealedCards, targetInHand, source, game);
                     Card card = revealedCards.get(targetInHand.getFirstTarget(), game);
                     if (card != null) {
-                        card.moveToExile(null, null, source.getSourceId(), game);
-                        game.informPlayers(new StringBuilder(sourceCard.getName()).append(": Exiled card ").append(card.getName()).toString());
+                        controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.HAND);
                     }
                 }
                 return true;

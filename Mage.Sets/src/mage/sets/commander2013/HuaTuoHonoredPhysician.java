@@ -31,17 +31,14 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.MyTurnBeforeAttackersDeclaredCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.game.turn.Phase;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -73,32 +70,5 @@ public class HuaTuoHonoredPhysician extends CardImpl<HuaTuoHonoredPhysician> {
     @Override
     public HuaTuoHonoredPhysician copy() {
         return new HuaTuoHonoredPhysician(this);
-    }
-}
-
-class MyTurnBeforeAttackersDeclaredCondition implements Condition {
-    private static MyTurnBeforeAttackersDeclaredCondition fInstance = new MyTurnBeforeAttackersDeclaredCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (game.getActivePlayerId().equals(source.getControllerId())) {
-            TurnPhase turnPhase = game.getTurn().getPhase().getType();
-            if (turnPhase.equals(TurnPhase.BEGINNING) || turnPhase.equals(TurnPhase.PRECOMBAT_MAIN)) {
-                return true;
-            }
-            if (turnPhase.equals(TurnPhase.COMBAT)) {
-                return !game.getTurn().isDeclareAttackersStepStarted();
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-	return "during your turn, before attackers are declared";
     }
 }

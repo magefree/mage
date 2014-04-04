@@ -7,13 +7,19 @@ import mage.game.Game;
 
 public class StaticValue implements DynamicValue {
     private int value = 0;
-
+    private String message;
+    
     public StaticValue(int value) {
+        this(value, "");
+    }
+    public StaticValue(int value, String message) {
         this.value = value;
+        this.message = message;
     }
 
     public StaticValue(final StaticValue staticValue) {
         this.value = staticValue.value;
+        this.message = staticValue.message;
     }
 
     @Override
@@ -33,6 +39,6 @@ public class StaticValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "";
+        return message;
     }
 }

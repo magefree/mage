@@ -27,59 +27,150 @@
  */
 package mage.abilities.condition.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.TargetController;
 import mage.game.Game;
+import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
- * Cards in controller hand condition.  This condition can decorate other conditions
- * as well as be used standalone.
+ * Cards in controller hand condition. This condition can decorate other
+ * conditions as well as be used standalone.
  *
  *
  * @author LevelX
  */
 public class CardsInHandCondition implements Condition {
 
-    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO };
+    public static enum CountType {
+        MORE_THAN, FEWER_THAN, EQUAL_TO
+    };
+    
     private Condition condition;
     private CountType type;
     private int count;
+    private TargetController targetController;
 
-        public CardsInHandCondition() {
-            this(CountType.EQUAL_TO, 0);
-        }
-
-    public CardsInHandCondition (CountType type, int count ) {
-        this.type = type;
-        this.count = count;
+    public CardsInHandCondition() {
+        this(CountType.EQUAL_TO, 0);
     }
 
-    public CardsInHandCondition (CountType type, int count, Condition conditionToDecorate ) {
-                this(type, count);
+    public CardsInHandCondition(CountType type, int count) {
+        this(type, count, null);
+    }
+    
+    public CardsInHandCondition(CountType type, int count, Condition conditionToDecorate) {
+        this(type, count, conditionToDecorate, TargetController.YOU);
+    }
+
+    public CardsInHandCondition(CountType type, int count, Condition conditionToDecorate, TargetController targetController) {
+        this.type = type;
+        this.count = count;
         this.condition = conditionToDecorate;
+        this.targetController = targetController;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean apply(Game game, Ability source) {        
         boolean conditionApplies = false;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            switch (targetController) {
+                case YOU:
+                    switch (this.type) {
+                        case FEWER_THAN:
+                            conditionApplies = game.getPlayer(source.getControllerId()).getHand().size() < this.count;
+                            break;
+                        case MORE_THAN:
+                            conditionApplies = game.getPlayer(source.getControllerId()).getHand().size() > this.count;
+                            break;
+                        case EQUAL_TO:
+                            conditionApplies = game.getPlayer(source.getControllerId()).getHand().size() == this.count;
+                            break;
+                    }
+                    break;
+                case ANY:
+                    boolean conflict = false;
+                    switch (this.type) {
+                        case FEWER_THAN:
+                            for (UUID playerId :controller.getInRange()) {
+                                Player player = game.getPlayer(playerId);
+                                if (player != null) {
+                                    if (player.getHand().size() >= this.count) {
+                                        conflict = true;
+                                        break;
+                                    }
+                                }
+                            }                            
+                            break;
+                        case MORE_THAN:
+                            for (UUID playerId :controller.getInRange()) {
+                                Player player = game.getPlayer(playerId);
+                                if (player != null) {
+                                    if (player.getHand().size() <= this.count) {
+                                        conflict = true;
+                                        break;
+                                    }
+                                }
+                            }                            
+                            break;
+                        case EQUAL_TO:
+                            for (UUID playerId :controller.getInRange()) {
+                                Player player = game.getPlayer(playerId);
+                                if (player != null) {
+                                    if (player.getHand().size() != this.count) {
+                                        conflict = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                    }                
+                    conditionApplies = !conflict;
+                    break;
+                default:
+                    throw new UnsupportedOperationException("Value of TargetController not supported for this class.");                    
+            }
 
-        switch ( this.type ) {
-            case FEWER_THAN:
-                conditionApplies = game.getPlayer(source.getControllerId()).getHand().size() < this.count;
-                break;
-            case MORE_THAN:
-                conditionApplies = game.getPlayer(source.getControllerId()).getHand().size()  > this.count;
-                break;
-            case EQUAL_TO:
-                conditionApplies = game.getPlayer(source.getControllerId()).getHand().size()  == this.count;
-                break;
-        }
-
-        //If a decorated condition exists, check it as well and apply them together.
-        if ( this.condition != null ) {
-            conditionApplies = conditionApplies && this.condition.apply(game, source);
+            //If a decorated condition exists, check it as well and apply them together.
+            if (this.condition != null) {
+                conditionApplies = conditionApplies && this.condition.apply(game, source);
+            }
         }
 
         return conditionApplies;
     }
+
+    @Override
+    public String toString() {
+        int workCount = count;
+        StringBuilder sb = new StringBuilder("if ");
+        switch (targetController) {
+            case YOU:
+                sb.append(" you have");
+                break;
+            case ANY:
+                sb.append(" each player has");
+                break;
+        }
+        switch (this.type) {
+            case FEWER_THAN:
+                sb.append(" less or equal than ");
+                workCount++;
+                break;
+            case MORE_THAN:
+                sb.append(" more than ");
+                break;
+        }
+        if (count == 0) {
+            sb.append(" no ");
+        } else {
+            sb.append(CardUtil.numberToText(workCount));
+        }                
+        sb.append("cards in hand");
+        return sb.toString();
+    }
+    
 }

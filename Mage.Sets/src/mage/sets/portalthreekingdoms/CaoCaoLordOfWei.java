@@ -25,51 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.common.MyTurnBeforeAttackersDeclaredCondition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.TargetPlayer;
+import mage.constants.Zone;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class MiresToll extends CardImpl<MiresToll> {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("the number of Swamps you control");
+public class CaoCaoLordOfWei extends CardImpl<CaoCaoLordOfWei> {
 
-    static {
-        filter.add(new SubtypePredicate("Swamp"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-    
-    public MiresToll(UUID ownerId) {
-        super(ownerId, 60, "Mire's Toll", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "WWK";
+    public CaoCaoLordOfWei(UUID ownerId) {
+        super(ownerId, 68, "Cao Cao, Lord of Wei", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.expansionSetCode = "PTK";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
 
         this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Target player reveals a number of cards from his or her hand equal to the number of Swamps you control. You choose one of them. That player discards that card.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, new PermanentsOnBattlefieldCount(filter)));
-
+        // {tap}: Target opponent discards two cards. Activate this ability only during your turn, before attackers are declared.
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
+        ability.addTarget(new TargetOpponent(true));
+        this.addAbility(ability);        
     }
 
-    public MiresToll(final MiresToll card) {
+    public CaoCaoLordOfWei(final CaoCaoLordOfWei card) {
         super(card);
     }
 
     @Override
-    public MiresToll copy() {
-        return new MiresToll(this);
+    public CaoCaoLordOfWei copy() {
+        return new CaoCaoLordOfWei(this);
     }
 }

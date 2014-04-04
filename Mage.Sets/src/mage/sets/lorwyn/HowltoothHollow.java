@@ -25,51 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.common.CardsInHandCondition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.HideawayPlayEffect;
+import mage.abilities.keyword.HideawayAbility;
+import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.TargetPlayer;
+import mage.constants.Zone;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class MiresToll extends CardImpl<MiresToll> {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("the number of Swamps you control");
+public class HowltoothHollow extends CardImpl<HowltoothHollow> {
 
-    static {
-        filter.add(new SubtypePredicate("Swamp"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+    public HowltoothHollow(UUID ownerId) {
+        super(ownerId, 269, "Howltooth Hollow", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "LRW";
+
+        // Hideaway
+        this.addAbility(new HideawayAbility(this));
+        // {tap}: Add {B} to your mana pool.
+        this.addAbility(new BlackManaAbility());
+        
+        // {B}, {tap}: You may play the exiled card without paying its mana cost if each player has no cards in hand.
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD, 
+                new HideawayPlayEffect(), 
+                new ManaCostsImpl("{B}"), 
+                new CardsInHandCondition(CardsInHandCondition.CountType.EQUAL_TO, 0, null, TargetController.ANY));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);        
     }
-    
-    public MiresToll(UUID ownerId) {
-        super(ownerId, 60, "Mire's Toll", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "WWK";
 
-        this.color.setBlack(true);
-
-        // Target player reveals a number of cards from his or her hand equal to the number of Swamps you control. You choose one of them. That player discards that card.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, new PermanentsOnBattlefieldCount(filter)));
-
-    }
-
-    public MiresToll(final MiresToll card) {
+    public HowltoothHollow(final HowltoothHollow card) {
         super(card);
     }
 
     @Override
-    public MiresToll copy() {
-        return new MiresToll(this);
+    public HowltoothHollow copy() {
+        return new HowltoothHollow(this);
     }
 }

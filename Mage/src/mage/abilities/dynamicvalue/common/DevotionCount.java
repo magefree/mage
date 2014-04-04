@@ -20,7 +20,7 @@ import mage.game.permanent.Permanent;
  */
 public class DevotionCount implements DynamicValue {
 
-    private ArrayList<ColoredManaSymbol> devotionColors = new ArrayList();
+    private ArrayList<ColoredManaSymbol> devotionColors = new ArrayList<>();
 
     public DevotionCount(ColoredManaSymbol... devotionColor) {
         this.devotionColors.addAll(Arrays.asList(devotionColor));

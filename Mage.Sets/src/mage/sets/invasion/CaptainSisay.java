@@ -25,51 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.TargetPlayer;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class MiresToll extends CardImpl<MiresToll> {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("the number of Swamps you control");
+public class CaptainSisay extends CardImpl<CaptainSisay> {
 
+    private static final FilterCard filter = new FilterCard("legendary card");
+    
     static {
-        filter.add(new SubtypePredicate("Swamp"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new SupertypePredicate("Legendary"));
     }
     
-    public MiresToll(UUID ownerId) {
-        super(ownerId, 60, "Mire's Toll", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "WWK";
+    public CaptainSisay(UUID ownerId) {
+        super(ownerId, 237, "Captain Sisay", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
+        this.expansionSetCode = "INV";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
 
-        this.color.setBlack(true);
+        this.color.setGreen(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Target player reveals a number of cards from his or her hand equal to the number of Swamps you control. You choose one of them. That player discards that card.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, new PermanentsOnBattlefieldCount(filter)));
-
+        // {tap}: Search your library for a legendary card, reveal that card, and put it into your hand. Then shuffle your library.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), new TapSourceCost()));
     }
 
-    public MiresToll(final MiresToll card) {
+    public CaptainSisay(final CaptainSisay card) {
         super(card);
     }
 
     @Override
-    public MiresToll copy() {
-        return new MiresToll(this);
+    public CaptainSisay copy() {
+        return new CaptainSisay(this);
     }
 }

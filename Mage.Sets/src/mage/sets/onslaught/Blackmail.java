@@ -25,51 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPlayer;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class MiresToll extends CardImpl<MiresToll> {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("the number of Swamps you control");
+public class Blackmail extends CardImpl<Blackmail> {
 
-    static {
-        filter.add(new SubtypePredicate("Swamp"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-    
-    public MiresToll(UUID ownerId) {
-        super(ownerId, 60, "Mire's Toll", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "WWK";
+    public Blackmail(UUID ownerId) {
+        super(ownerId, 127, "Blackmail", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
+        this.expansionSetCode = "ONS";
 
         this.color.setBlack(true);
 
-        // Target player reveals a number of cards from his or her hand equal to the number of Swamps you control. You choose one of them. That player discards that card.
+        // Target player reveals three cards from his or her hand and you choose one of them. That player discards that card.
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, 3));
         this.getSpellAbility().addTarget(new TargetPlayer(true));
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, new PermanentsOnBattlefieldCount(filter)));
-
     }
 
-    public MiresToll(final MiresToll card) {
+    public Blackmail(final Blackmail card) {
         super(card);
     }
 
     @Override
-    public MiresToll copy() {
-        return new MiresToll(this);
+    public Blackmail copy() {
+        return new Blackmail(this);
     }
 }
