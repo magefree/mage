@@ -1307,6 +1307,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     @Override
     public int getAmount(int min, int max, String message, Game game) {
         log.debug("getAmount");
+        if (message.startsWith("Assign damage to ")) {
+            return min;
+        }
         //TODO: improve this
         if (min < max && min == 0) {
             return new Random().nextInt(max+1);

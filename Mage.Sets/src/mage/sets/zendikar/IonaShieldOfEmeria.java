@@ -96,13 +96,15 @@ class IonaShieldOfEmeriaChooseColorEffect extends OneShotEffect<IonaShieldOfEmer
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (player != null && perm != null) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null && permanent != null) {
             ChoiceColor colorChoice = new ChoiceColor();
             if (player.choose(Outcome.Detriment, colorChoice, game)) {
-                game.informPlayers(perm.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
-                game.getState().setValue(perm.getId() + "_color", colorChoice.getColor());
+                game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
+                game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
+                permanent.addInfo("chosen color", new StringBuilder("<font color='blue'>Chosen color: ").append(colorChoice.getChoice()).append("</font>").toString());
             }
+            return true;
         }
         return false;
     }

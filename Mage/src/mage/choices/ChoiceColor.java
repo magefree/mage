@@ -57,20 +57,22 @@ public class ChoiceColor extends ChoiceImpl<ChoiceColor> {
 
     public ObjectColor getColor() {
         ObjectColor color = new ObjectColor();
-        if (choice.equals("Black")) {
-            color.setBlack(true);
-        }
-        else if (choice.equals("Blue")) {
-            color.setBlue(true);
-        }
-        else if (choice.equals("Green")) {
-            color.setGreen(true);
-        }
-        else if (choice.equals("Red")) {
-            color.setRed(true);
-        }
-        else if (choice.equals("White")) {
-            color.setWhite(true);
+        switch (choice) {
+            case "Black":
+                color.setBlack(true);
+                break;
+            case "Blue":
+                color.setBlue(true);
+                break;
+            case "Green":
+                color.setGreen(true);
+                break;
+            case "Red":
+                color.setRed(true);
+                break;
+            case "White":
+                color.setWhite(true);
+                break;
         }
         return color;
     }
