@@ -28,7 +28,6 @@
 
 package mage.interfaces;
 
-import java.util.UUID;
 import mage.interfaces.callback.CallbackClient;
 import mage.utils.MageVersion;
 
@@ -38,7 +37,6 @@ import mage.utils.MageVersion;
  */
 public interface MageClient extends CallbackClient {
 
-    UUID getId();
     MageVersion getVersion();
     void connected(String message);
     void disconnected();

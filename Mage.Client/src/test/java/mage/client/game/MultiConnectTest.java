@@ -58,12 +58,6 @@ public class MultiConnectTest {
         }
 
         @Override
-        public UUID getId() {
-            logger.info("getId");
-            return null;
-        }
-
-        @Override
         public MageVersion getVersion() {
             logger.info("getVersion");
             return version;
