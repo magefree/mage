@@ -8,11 +8,10 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
-import mage.target.Target;
 
 public class FirstTargetPointer implements TargetPointer {
 
-    private Map<UUID, Integer> zoneChangeCounter = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
 
     public static FirstTargetPointer getInstance() {
         return new FirstTargetPointer();
@@ -22,7 +21,7 @@ public class FirstTargetPointer implements TargetPointer {
     }
 
     public FirstTargetPointer(FirstTargetPointer firstTargetPointer) {
-        this.zoneChangeCounter = new HashMap<UUID, Integer>();
+        this.zoneChangeCounter = new HashMap<>();
         for (Map.Entry<UUID, Integer> entry : firstTargetPointer.zoneChangeCounter.entrySet()) {
             this.zoneChangeCounter.put(entry.getKey(), entry.getValue());
         }
@@ -42,7 +41,7 @@ public class FirstTargetPointer implements TargetPointer {
 
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
-        ArrayList<UUID> target = new ArrayList<UUID>();
+        ArrayList<UUID> target = new ArrayList<>();
         if (source.getTargets().size() > 0) {
             for (UUID targetId : source.getTargets().get(0).getTargets()) {
                 Card card = game.getCard(targetId);

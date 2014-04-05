@@ -27,18 +27,17 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -55,6 +54,7 @@ public class FerventCathar extends CardImpl<FerventCathar> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        // Haste
         this.addAbility(HasteAbility.getInstance());
 
         // When Fervent Cathar enters the battlefield, target creature can't block this turn.

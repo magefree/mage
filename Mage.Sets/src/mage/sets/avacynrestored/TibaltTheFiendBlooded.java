@@ -41,8 +41,11 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DiscardControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -72,10 +75,15 @@ public class TibaltTheFiendBlooded extends CardImpl<TibaltTheFiendBlooded> {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2)), false));
 
         // +1: Draw a card, then discard a card at random.
-        this.addAbility(new LoyaltyAbility(new TibaltTheFiendBloodedFirstEffect(), 1));
+        LoyaltyAbility ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);
+        Effect effect = new DiscardControllerEffect(1, true);
+        effect.setText(", then discard a card at random");
+        ability.addEffect(effect);
+        this.addAbility(ability);
         // -4: Tibalt, the Fiend-Blooded deals damage equal to the number of cards in target player's hand to that player.
-        LoyaltyAbility ability = new LoyaltyAbility(new DamageTargetEffect(new CardsInTargetHandCount()), -4);
-        ability.addTarget(new TargetPlayer());
+        //effect =
+        ability = new LoyaltyAbility(new DamageTargetEffect(new CardsInTargetHandCount(), true, "that player"), -4);
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
         // -6: Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.
         this.addAbility(new LoyaltyAbility(new TibaltTheFiendBloodedThirdEffect(), -6));
@@ -158,7 +166,7 @@ class TibaltTheFiendBloodedThirdEffect extends OneShotEffect<TibaltTheFiendBlood
 
 class TibaltTheFiendBloodedControlEffect extends ContinuousEffectImpl<TibaltTheFiendBloodedControlEffect> {
 
-    private UUID controllerId;
+    private final UUID controllerId;
 
     public TibaltTheFiendBloodedControlEffect(UUID controllerId) {
         super(Duration.EndOfTurn, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);

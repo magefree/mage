@@ -67,6 +67,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
         Assert.assertFalse(clone.getAbilities().contains(LifelinkAbility.getInstance()));
         Assert.assertFalse(clone.getAbilities().contains(FirstStrikeAbility.getInstance()));
     }
+
     @Test
     public void testEquipmentDetached() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
@@ -89,6 +90,39 @@ public class CloudshiftTest extends CardTestPlayerBase {
         Assert.assertTrue("Bonesplitter must not be connected to Silvercoat Lion",bonesplitter.getAttachedTo() == null);
         Assert.assertEquals("Silvercoat Lion's power without equipment has to be 2",2, silvercoatLion.getPower().getValue());
         Assert.assertEquals("Silvercoat Lion's toughness has to be 2",2, silvercoatLion.getToughness().getValue());
+    }
+
+    /**
+     * Tests that casting Cloudshift makes creature able to block again
+     * if it before was targeted with can't block effect
+     *
+     */
+    @Test
+    public void testCreatureCanBlockAgainAfterCloudshift() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Timberland Guide");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
+
+        addCard(Zone.HAND, playerA, "Cloudshift");
+        addCard(Zone.HAND, playerB, "Fervent Cathar");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Fervent Cathar");
+        addTarget(playerB, "Timberland Guide");
+        attack(2, playerB, "Fervent Cathar");
+        castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerA, "Cloudshift", "Timberland Guide");
+        block(2, playerA, "Timberland Guide", "Fervent Cathar");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        // blocked and therefore no more on the battlefield
+        assertPermanentCount(playerB, "Fervent Cathar", 0);
+        assertPermanentCount(playerA, "Timberland Guide", 0);
+
+
     }
 
 }
