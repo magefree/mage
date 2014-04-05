@@ -241,7 +241,7 @@ class SuspendExileEffect extends OneShotEffect<SuspendExileEffect> {
         Card card = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
-            // check if the user really wants to suspend the card (only if spell can't be casted because else the choose ability dialog appears)
+            // check if the user really wants to suspend the card (only if the spell can't be casted because else the choose ability dialog appears)
             if (!card.getSpellAbility().canActivate(source.getControllerId(), game)) {
                 if (!controller.chooseUse(outcome, new StringBuilder("Suspend ").append(card.getName()).append("?").toString(), game)) {
                     return false;
@@ -322,7 +322,7 @@ class SuspendPlayCardEffect extends OneShotEffect<SuspendPlayCardEffect> {
         Card card = game.getCard(source.getSourceId());
         if (player != null && card != null) {
             // remove temporary suspend ability (used e.g. for Epochrasite)
-            List<Ability> abilitiesToRemove = new ArrayList<Ability>();
+            List<Ability> abilitiesToRemove = new ArrayList<>();
             for (Ability ability : card.getAbilities()) {
                 if (ability instanceof SuspendAbility) {
                     if (((SuspendAbility)ability).isGainedTemporary()) {

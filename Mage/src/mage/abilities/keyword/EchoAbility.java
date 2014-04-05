@@ -60,6 +60,7 @@ public class EchoAbility extends TriggeredAbilityImpl<EchoAbility> {
         super(Zone.BATTLEFIELD, new EchoEffect(new ManaCostsImpl(manaString)), false);
         this.echoPaid = false;
         this.echoCosts.add(new ManaCostsImpl(manaString));
+        this.lastController = null;
     }
 
     public EchoAbility(Cost echoCost) {
@@ -67,6 +68,7 @@ public class EchoAbility extends TriggeredAbilityImpl<EchoAbility> {
         this.echoPaid = false;
         this.echoCosts.add(echoCost);
         this.manaEcho = false;
+        this.lastController = null;
     }
 
     public EchoAbility(final EchoAbility ability) {
@@ -74,6 +76,7 @@ public class EchoAbility extends TriggeredAbilityImpl<EchoAbility> {
         this.echoPaid = ability.echoPaid;
         this.echoCosts = ability.echoCosts.copy();
         this.manaEcho = ability.manaEcho;
+        this.lastController = ability.lastController;
     }
 
     @Override
@@ -83,21 +86,22 @@ public class EchoAbility extends TriggeredAbilityImpl<EchoAbility> {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent)event;
-            if(zEvent.getFromZone() == null && this.echoPaid) {
-                this.echoPaid = false;
-            }
+        // reset the echo paid state back, if creature enteres the battlefield
+        if (event.getType().equals(GameEvent.EventType.ENTERS_THE_BATTLEFIELD) 
+                && event.getTargetId().equals(this.getSourceId())) {
+            this.echoPaid = false;
         }
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
+        if (event.getType().equals(GameEvent.EventType.UPKEEP_STEP_PRE)) {
             if(lastController != null){
                 if(!lastController.equals(this.controllerId)){
                     this.echoPaid = false;
                 }
             }
+            // remember the last controller
             lastController = this.getControllerId();
         }
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE &&
+        // if echo not paid yet, controller has to pay
+        if (event.getType().equals(GameEvent.EventType.UPKEEP_STEP_PRE) &&
             event.getPlayerId().equals(this.controllerId) &&
             lastController.equals(this.controllerId) && !this.echoPaid){
             this.echoPaid = true;
