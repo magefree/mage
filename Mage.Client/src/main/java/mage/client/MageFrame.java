@@ -1204,11 +1204,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public UUID getId() {
-        return clientId;
-    }
-
-    @Override
     public void connected(final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
             setStatusText(message);
