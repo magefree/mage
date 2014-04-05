@@ -27,13 +27,13 @@
  */
 package mage.abilities.keyword;
 
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -62,7 +62,7 @@ public class DredgeAbility extends SimpleStaticAbility {
 
 class DredgeEffect extends ReplacementEffectImpl<DredgeEffect> {
 
-    private int amount;
+    private final int amount;
 
     public DredgeEffect(int value) {
         super(Duration.WhileInGraveyard, Outcome.ReturnToHand);
@@ -96,15 +96,17 @@ class DredgeEffect extends ReplacementEffectImpl<DredgeEffect> {
         if (player != null && player.getLibrary().size() >= amount 
                 && player.chooseUse(outcome, new StringBuilder("Dredge ").append(sourceCard.getName()).
                 append(" (").append(amount).append(" cards go from top of library to graveyard)").toString(), game)) {
+
             for (int i = 0; i < amount; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                game.informPlayers(new StringBuilder(player.getName()).append(" dreges ").append(card.getName()).toString());
+                player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
             }
             return true;
         }
@@ -113,9 +115,6 @@ class DredgeEffect extends ReplacementEffectImpl<DredgeEffect> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DRAW_CARD) && event.getPlayerId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
+        return event.getType().equals(GameEvent.EventType.DRAW_CARD) && event.getPlayerId().equals(source.getControllerId());
     }
 }
