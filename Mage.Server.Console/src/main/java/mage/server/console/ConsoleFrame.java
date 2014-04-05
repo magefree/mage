@@ -221,11 +221,6 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public UUID getId() {
-        return null;
-    }
-
-    @Override
     public void connected(final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
             setStatusText(message);

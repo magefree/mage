@@ -28,11 +28,6 @@ public class SimpleMageClient implements MageClient {
     }
 
     @Override
-    public UUID getId() {
-        return clientId;
-    }
-
-    @Override
     public MageVersion getVersion() {
         return version;
     }
