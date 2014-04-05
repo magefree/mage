@@ -28,12 +28,12 @@
 
 package mage.watchers.common;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicate;
@@ -88,6 +88,7 @@ public class SoulbondWatcher extends WatcherImpl<SoulbondWatcher> {
                                     if (chosen != null) {
                                         chosen.setPairedCard(permanent.getId());
                                         permanent.setPairedCard(chosen.getId());
+                                        game.informPlayers(new StringBuilder(controller.getName()).append(" souldbounded ").append(permanent.getName()).append(" with ").append(chosen.getName()).toString());
                                     }
                                 }
                             }
@@ -111,6 +112,7 @@ public class SoulbondWatcher extends WatcherImpl<SoulbondWatcher> {
                                 if (controller.chooseUse(Outcome.Benefit, "Use Soulbond for recent " + permanent.getName() + "?", game)) {
                                     chosen.setPairedCard(permanent.getId());
                                     permanent.setPairedCard(chosen.getId());
+                                    game.informPlayers(new StringBuilder(controller.getName()).append(" souldbounded ").append(permanent.getName()).append(" with ").append(chosen.getName()).toString());
                                     break;
                                 }
                             }
