@@ -64,16 +64,12 @@ import org.apache.log4j.Logger;
 public class CallbackClientImpl implements CallbackClient {
 
     private static final Logger logger = Logger.getLogger(CallbackClientImpl.class);
-    private final UUID clientId;
     private final MageFrame frame;
     private int messageId = 0;
     private int gameInformMessageId = 0;
-    private final boolean firstRun;
 
     public CallbackClientImpl(MageFrame frame) {
-        this.clientId = UUID.randomUUID();
         this.frame = frame;
-        this.firstRun = true;
     }
 
     @Override
@@ -399,10 +395,6 @@ public class CallbackClientImpl implements CallbackClient {
                 break;
 
         }
-    }
-
-    public UUID getId() {
-        return clientId;
     }
 
     private void joinedTable(UUID roomId, UUID tableId, boolean isTournament) {
