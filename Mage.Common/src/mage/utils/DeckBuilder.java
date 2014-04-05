@@ -1,6 +1,5 @@
 package mage.utils;
 
-import gnu.trove.set.hash.THashSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -265,7 +264,7 @@ public class DeckBuilder {
             final Map<String, Integer> singleCount = new HashMap<String, Integer>();
             int maxSingleCount = 0;
             int multicolor = 0;
-            Set<String> colors = new THashSet<String>();
+            Set<String> colors = new HashSet<String>();
             for (String symbol : card.getManaCost().getSymbols()) {
                 int count = 0;
                 symbol = symbol.replace("{", "").replace("}", "");
