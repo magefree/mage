@@ -64,10 +64,7 @@ public class SacrificeSourceCost extends CostImpl<SacrificeSourceCost> {
             return false;
         }
         Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            return true;
-        }
-        return false;
+        return permanent != null;
     }
 
     @Override
