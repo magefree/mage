@@ -27,10 +27,10 @@
  */
 package mage.abilities.effects.common.combat;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -52,10 +52,7 @@ public class CantBlockTargetEffect extends RestrictionEffect<CantBlockTargetEffe
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (this.targetPointer.getTargets(game, source).contains(permanent.getId())) {
-            return true;
-        }
-        return false;
+        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
     }
 
     @Override
