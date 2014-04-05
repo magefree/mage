@@ -95,19 +95,15 @@ class DredgeEffect extends ReplacementEffectImpl<DredgeEffect> {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.getLibrary().size() >= amount 
                 && player.chooseUse(outcome, new StringBuilder("Dredge ").append(sourceCard.getName()).
-                append(" (").append(amount).append(" cards go from top of library to graveyard)").toString(), game)) {
-
+                append("? (").append(amount).append(" cards go from top of library to graveyard)").toString(), game)) {
+            game.informPlayers(new StringBuilder(player.getName()).append(" dreges ").append(sourceCard.getName()).toString());
             for (int i = 0; i < amount; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
-            Card card = game.getCard(source.getSourceId());
-            if (card != null) {
-                game.informPlayers(new StringBuilder(player.getName()).append(" dreges ").append(card.getName()).toString());
-                player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
-            }
+            player.moveCardToHandWithInfo(sourceCard, source.getSourceId(), game, Zone.GRAVEYARD);
             return true;
         }
         return false;

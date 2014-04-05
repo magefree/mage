@@ -88,7 +88,7 @@ public class SoulbondWatcher extends WatcherImpl<SoulbondWatcher> {
                                     if (chosen != null) {
                                         chosen.setPairedCard(permanent.getId());
                                         permanent.setPairedCard(chosen.getId());
-                                        game.informPlayers(new StringBuilder(controller.getName()).append(" souldbounded ").append(permanent.getName()).append(" with ").append(chosen.getName()).toString());
+                                        game.informPlayers(new StringBuilder(controller.getName()).append(" souldbonds ").append(permanent.getName()).append(" with ").append(chosen.getName()).toString());
                                     }
                                 }
                             }
@@ -112,7 +112,7 @@ public class SoulbondWatcher extends WatcherImpl<SoulbondWatcher> {
                                 if (controller.chooseUse(Outcome.Benefit, "Use Soulbond for recent " + permanent.getName() + "?", game)) {
                                     chosen.setPairedCard(permanent.getId());
                                     permanent.setPairedCard(chosen.getId());
-                                    game.informPlayers(new StringBuilder(controller.getName()).append(" souldbounded ").append(permanent.getName()).append(" with ").append(chosen.getName()).toString());
+                                    game.informPlayers(new StringBuilder(controller.getName()).append(" souldbonds ").append(permanent.getName()).append(" with ").append(chosen.getName()).toString());
                                     break;
                                 }
                             }
