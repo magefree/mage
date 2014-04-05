@@ -42,8 +42,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
 import mage.filter.Filter;
+import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -57,7 +57,7 @@ import mage.target.TargetSpell;
  */
 public class SpellstutterSprite extends CardImpl<SpellstutterSprite> {
     
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("number of Faeries you control");
+    public static final FilterPermanent filter = new FilterPermanent("number of Faeries you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate("Faerie"));
@@ -130,7 +130,6 @@ class SpellstutterSpriteCounterTargetEffect extends OneShotEffect<SpellstutterSp
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
         if (stackObject.getManaCost().convertedManaCost() <= numberFaeries) {
             if (game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
-                game.informPlayers(new StringBuilder(stackObject.getName()).append(" was countered").toString());
                 return true;
             }
         }

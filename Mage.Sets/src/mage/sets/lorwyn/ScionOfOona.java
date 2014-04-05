@@ -41,6 +41,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -51,11 +52,14 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class ScionOfOona extends CardImpl<ScionOfOona> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Faeries");
+    private static final FilterPermanent filter = new FilterPermanent("Faeries");
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Faeries");
 
     static {
         filter.add(new SubtypePredicate("Faerie"));
         filter.add(new ControllerPredicate(TargetController.YOU));
+        filterCreature.add(new SubtypePredicate("Faerie"));
+        filterCreature.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public ScionOfOona(UUID ownerId) {
@@ -72,7 +76,7 @@ public class ScionOfOona extends CardImpl<ScionOfOona> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Other Faerie creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterCreature, true)));
         // Other Faeries you control have shroud.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
