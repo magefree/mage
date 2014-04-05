@@ -93,10 +93,10 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
             if (!controllerId.equals(playerId)) {
                 return false;
             }
-            // Why is this check made? It prevents Flashback with non mana costs (Cabal Therapy)
-//            if (this.getManaCosts().isEmpty()) {
-//                return false;
-//            }
+            // Check if spell has no costs (not {0} mana costs), than it's not castable. E.g. for spells like Living End, that only can be cast by Suspend Ability.
+            if (this.getManaCosts().isEmpty() && this.getCosts().isEmpty()) {
+                return false;
+            }
             if (costs.canPay(sourceId, controllerId, game)) {
                 if (getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
