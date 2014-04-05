@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -57,12 +58,16 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card != null) {
-            Zone currentZone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, currentZone, source.getId(), source.getControllerId())) {
-                return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(targetPointer.getFirst(game, source));
+            if (card != null) {
+                Zone currentZone = game.getState().getZone(card.getId());
+                if (controller.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId())) {
+                    return true;
+                }
             }
+
         }
         return false;
     }

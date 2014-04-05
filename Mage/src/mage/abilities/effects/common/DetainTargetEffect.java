@@ -86,7 +86,6 @@ public class DetainTargetEffect extends OneShotEffect<DetainTargetEffect> {
             }
         }
         DetainRestrictionEffect effect = new DetainRestrictionEffect();
-        effect.getTargetPointer().init(game, source); // needed to init zoneChangeCounter
         game.addEffect(effect, source);
         return true;
     }

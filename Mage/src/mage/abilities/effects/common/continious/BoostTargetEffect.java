@@ -92,7 +92,6 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
             power = new StaticValue(power.calculate(game, source));
             toughness = new StaticValue(toughness.calculate(game, source));
         }
-        targetPointer.init(game, source);
     }
 
     @Override

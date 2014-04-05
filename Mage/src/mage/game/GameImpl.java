@@ -1227,8 +1227,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             }
         }
 
-        List<Permanent> planeswalkers = new ArrayList<Permanent>();
-        List<Permanent> legendary = new ArrayList<Permanent>();
+        List<Permanent> planeswalkers = new ArrayList<>();
+        List<Permanent> legendary = new ArrayList<>();
         for (Permanent perm: getBattlefield().getAllActivePermanents()) {
             if (perm.getCardType().contains(CardType.CREATURE)) {
                 //20091005 - 704.5f

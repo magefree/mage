@@ -71,7 +71,7 @@ public class DetainAllEffect extends OneShotEffect<DetainAllEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<FixedTarget> detainedObjects = new ArrayList<FixedTarget>();
+        List<FixedTarget> detainedObjects = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             game.informPlayers("Detained permanent: " + permanent.getName());
             FixedTarget fixedTarget = new FixedTarget(permanent.getId());
@@ -86,7 +86,7 @@ public class DetainAllEffect extends OneShotEffect<DetainAllEffect> {
 
 class DetainAllRestrictionEffect extends RestrictionEffect<DetainAllRestrictionEffect> {
 
-    private List<FixedTarget> detainedObjects;
+    private final List<FixedTarget> detainedObjects;
 
     public DetainAllRestrictionEffect(List<FixedTarget> detainedObjects) {
         super(Duration.Custom);

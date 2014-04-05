@@ -29,13 +29,15 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -66,14 +68,17 @@ public class ExileTargetForSourceEffect extends OneShotEffect<ExileTargetForSour
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        UUID exileId = source.getSourceId();
-        if (permanent != null) {
-            return permanent.moveToExile(exileId, exileZone, source.getId(), game);
-        } else {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (card != null) {
-                return card.moveToExile(exileId, exileZone, source.getId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            UUID exileId = source.getSourceId();
+            if (permanent != null) {
+                return controller.moveCardToExileWithInfo(permanent, exileId, exileZone, source.getSourceId(), game, Zone.BATTLEFIELD);
+            } else {
+                Card card = game.getCard(targetPointer.getFirst(game, source));
+                if (card != null) {
+                    return controller.moveCardToExileWithInfo(card, exileId, exileZone, source.getSourceId(), game, game.getState().getZone(card.getId()));
+                }
             }
         }
         return false;

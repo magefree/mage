@@ -113,7 +113,7 @@ class SharedAnimosityEffect extends ContinuousEffectImpl<SharedAnimosityEffect> 
                 }
             }   
             if(!isChangeling){
-                ArrayList<Predicate<MageObject>> predicateList = new ArrayList<Predicate<MageObject>>();
+                ArrayList<Predicate<MageObject>> predicateList = new ArrayList<>();
                 for(String subtype : permanent.getSubtype()){
                     predicateList.add(new SubtypePredicate(subtype));
                 }
@@ -122,7 +122,6 @@ class SharedAnimosityEffect extends ContinuousEffectImpl<SharedAnimosityEffect> 
             
             power = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game).size();
         }
-        targetPointer.init(game, source);
     }
 
     @Override

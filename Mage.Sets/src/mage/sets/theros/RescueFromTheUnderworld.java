@@ -154,7 +154,7 @@ class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShot
         for(Effect effect : delayedAbility.getEffects()) {
             effect.getTargetPointer().init(game, source);
         }
-        // add the scraificed creature as target
+        // add the sacrificed creature as target
         for (Cost cost :source.getCosts()) {
             if (cost instanceof SacrificeTargetCost) {
                 SacrificeTargetCost sacCost = (SacrificeTargetCost) cost;
@@ -193,10 +193,7 @@ class RescueFromTheUnderworldDelayedTriggeredAbility extends DelayedTriggeredAbi
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId);
     }
 
     @Override

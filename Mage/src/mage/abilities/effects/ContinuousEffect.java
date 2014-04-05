@@ -41,6 +41,7 @@ import java.util.UUID;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public interface ContinuousEffect<T extends ContinuousEffect<T>> extends Effect<T> {
 

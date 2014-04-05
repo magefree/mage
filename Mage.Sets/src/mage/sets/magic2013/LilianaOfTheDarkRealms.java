@@ -137,8 +137,6 @@ class LilianaOfTheDarkRealmsEffect extends ContinuousEffectImpl<LilianaOfTheDark
         if (player != null && player.chooseUse(Outcome.Neutral, message, game)) {
             this.amount *= -1;
         }
-
-        targetPointer.init(game, source);
     }
 
     @Override

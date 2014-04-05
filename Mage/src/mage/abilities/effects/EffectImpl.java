@@ -42,6 +42,7 @@ import java.util.UUID;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 
@@ -65,7 +66,7 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
         this.staticText = effect.staticText;
         this.targetPointer = effect.targetPointer.copy();
         if (effect.values != null) {
-            values = new HashMap<String, Object>();
+            values = new HashMap<>();
             Map<String, Object> map = effect.values;
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 values.put(entry.getKey(), entry.getValue());
@@ -120,7 +121,7 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
     public void setValue(String key, Object value) {
         synchronized (this) {
             if (values == null) {
-                values = new HashMap<String, Object>();
+                values = new HashMap<>();
             }
         }
         values.put(key, value);

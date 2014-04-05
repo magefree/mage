@@ -144,6 +144,7 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 
     @Override
     public void init(Ability source, Game game) {
+        targetPointer.init(game, source);
         //20100716 - 611.2c
         if (source instanceof ActivatedAbility || source instanceof TriggeredAbility) {
             if (layer != null) {
