@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -79,7 +78,7 @@ public class KavuPredator extends CardImpl<KavuPredator> {
 class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl<KavuPredatorTriggeredAbility> {
 
     public KavuPredatorTriggeredAbility() {
-        super(Zone.GRAVEYARD, new KavuPredatorEffect());
+        super(Zone.BATTLEFIELD, new KavuPredatorEffect());
     }
 
     public KavuPredatorTriggeredAbility(final KavuPredatorTriggeredAbility ability) {
@@ -93,7 +92,7 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl<KavuPredatorTrig
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.GAINED_LIFE && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+        if (event.getType().equals(GameEvent.EventType.GAINED_LIFE) && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             this.getEffects().get(0).setValue("gainedLife", new Integer(event.getAmount()));
             return true;
         }
@@ -134,6 +133,7 @@ class KavuPredatorEffect extends OneShotEffect<KavuPredatorEffect> {
                     game.informPlayers(new StringBuilder(player.getName()).append(" puts ").append(gainedLife).append(" +1/+1 counter on ").append(permanent.getName()).toString());
                 }
             }
+            return true;
         }
         return false;
     }
