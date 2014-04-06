@@ -1064,7 +1064,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         // Be proactive! Always use abilities, the evaluation function will decide if it's good or not
         // Otherwise some abilities won't be used by AI like LoseTargetEffect that has "bad" outcome
         // but still is good when targets opponent
-        return true;
+        return !outcome.equals(Outcome.AIDontUseIt); // Added for Desecration Demon sacrifice ability
     }
 
     @Override

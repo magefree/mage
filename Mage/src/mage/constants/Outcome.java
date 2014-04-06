@@ -38,9 +38,9 @@ public enum Outcome {
     Benefit(true),
     Detriment(false),
     Neutral(true),
-    Removal(false);
-
-    private boolean good;
+    Removal(false),
+    AIDontUseIt(false);
+    private final boolean good;
     private boolean canTargetAll;
 
     Outcome(boolean good) {
