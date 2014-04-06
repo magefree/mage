@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -66,11 +66,17 @@ public class Shinewend extends CardImpl<Shinewend> {
         this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
+
+        // Shinewend enters the battlefield with a +1/+1 counter on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1))));
+        
+        // {1}{W}, Remove a +1/+1 counter from Shinewend: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
     }
 
