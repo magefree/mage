@@ -44,6 +44,7 @@ import mage.players.Player;
 import mage.target.Target;
 
 import java.util.UUID;
+import mage.game.stack.Spell;
 
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no
@@ -89,12 +90,20 @@ public class AuraReplacementEffect extends ReplacementEffectImpl<AuraReplacement
 
         UUID targetId = null;
         MageObject sourceObject = game.getObject(sourceId);
+
+        if (sourceObject instanceof Spell) {
+            if (fromZone.equals(Zone.EXILED)) {
+                // cast from exile (e.g. Neightveil Spector) -> no replacement
+                return false;
+            }
+        }
         if (sourceObject instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) sourceObject;
             if (!stackAbility.getEffects().isEmpty()) {
                 targetId = stackAbility.getEffects().get(0).getTargetPointer().getFirst(game, stackAbility);
             }
         }
+        
         if (targetId == null) {
             Target target = card.getSpellAbility().getTargets().get(0);
             Player player = game.getPlayer(card.getOwnerId());

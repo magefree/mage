@@ -107,7 +107,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             this.spellCards.add(spellCard.copy());
         }
         if (spell.spellAbilities.get(0).equals(spell.ability)) {
-            this.ability = spellAbilities.get(0);
+            this.ability = this.spellAbilities.get(0);
         } else {
             this.ability = spell.ability.copy();
         }
