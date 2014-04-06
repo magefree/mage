@@ -33,9 +33,11 @@ import java.util.UUID;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -72,11 +74,17 @@ public class ExileAllEffect extends OneShotEffect<ExileAllEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game);
-        for (Permanent permanent: permanents) {
-            permanent.moveToExile(exileId, exileZone, source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+            for (Permanent permanent: permanents) {
+                controller.moveCardToExileWithInfo(permanent, exileId, exileZone, source.getSourceId(), game, Zone.BATTLEFIELD);
+            }
+            return true;
         }
-        return true;
+        return false;
+
+
     }
 
     private void setText() {

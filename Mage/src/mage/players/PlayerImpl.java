@@ -1622,10 +1622,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         //20091005 - 701.14c
         Library searchedLibrary = null;
         if (targetPlayerId.equals(playerId)) {
+            game.informPlayers(new StringBuilder(getName()).append(" searches his or her library").toString());
             searchedLibrary = library;
         } else {
             Player targetPlayer = game.getPlayer(targetPlayerId);
             if (targetPlayer != null) {
+                game.informPlayers(new StringBuilder(getName()).append(" searches the library of ").append(targetPlayer.getName()).toString());
                 searchedLibrary = targetPlayer.getLibrary();
             }
         }

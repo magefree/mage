@@ -29,11 +29,6 @@
 package mage.sets.dissension;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,6 +40,10 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -59,9 +58,19 @@ public class RakdosPitDragon extends CardImpl<RakdosPitDragon> {
         this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}{R}")));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield), HellbentCondition.getInstance(), "Hellbent - Rakdos Pit Dragon has double strike as long as you have no cards in hand")));
+        // {R}{R}: Rakdos Pit Dragon gains flying until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
+                new ManaCostsImpl("{R}{R}")));
+        // {R}: Rakdos Pit Dragon gets +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BoostSourceEffect(1, 0, Duration.EndOfTurn),
+                new ManaCostsImpl("{R}")));
+        // Hellbent — Rakdos Pit Dragon has double strike as long as you have no cards in hand.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+                new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
+                HellbentCondition.getInstance(),
+                "Hellbent - Rakdos Pit Dragon has double strike as long as you have no cards in hand")));
     }
 
     public RakdosPitDragon (final RakdosPitDragon card) {
