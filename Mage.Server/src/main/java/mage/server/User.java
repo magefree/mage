@@ -132,7 +132,7 @@ public class User {
     }
 
     public boolean isConnected() {
-        return userState == UserState.Connected || userState == UserState.Reconnected;
+        return userState.equals(UserState.Connected) || userState.equals(UserState.Reconnected);
     }
 
     public String getDisconnectDuration() {
