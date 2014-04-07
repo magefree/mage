@@ -39,8 +39,9 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
             }
             if (player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false))
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;
+                }
             }
             permanent.sacrifice(source.getSourceId(), game);
             return true;
@@ -57,7 +58,11 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
     public String getText(Mode mode) {
             StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
             String costText = cost.getText();
-            if (costText.toLowerCase().startsWith("discard") || costText.toLowerCase().startsWith("remove") || costText.toLowerCase().startsWith("return") || costText.toLowerCase().startsWith("exile")) {
+            if (costText.toLowerCase().startsWith("discard") 
+                    || costText.toLowerCase().startsWith("remove")
+                    || costText.toLowerCase().startsWith("return")
+                    || costText.toLowerCase().startsWith("exile")
+                    || costText.toLowerCase().startsWith("sacrifice")) {
                 sb.append(costText.substring(0, 1).toLowerCase());
                 sb.append(costText.substring(1));
             } 

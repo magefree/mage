@@ -27,8 +27,8 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.OneControlledCreatureCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -38,17 +38,17 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-
-import java.util.UUID;
 
 /**
  * @author noxx
  */
 public class HomicidalSeclusion extends CardImpl<HomicidalSeclusion> {
 
-    private static final String rule = "As long as you control exactly one creature, that creature gets +3/+1 and lifelink";
+    private static final String rule = "As long as you control exactly one creature, that creature gets +3/+1";
 
     public HomicidalSeclusion(UUID ownerId) {
         super(ownerId, 108, "Homicidal Seclusion", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
@@ -59,10 +59,14 @@ public class HomicidalSeclusion extends CardImpl<HomicidalSeclusion> {
         // As long as you control exactly one creature, that creature gets +3/+1 and has lifelink.
         ContinuousEffect boostEffect = new BoostControlledEffect(3, 1, Duration.WhileOnBattlefield);
         Effect effect = new ConditionalContinousEffect(boostEffect, new OneControlledCreatureCondition(), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ContinuousEffect lifelinkEffect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield);
-        effect = new ConditionalContinousEffect(lifelinkEffect, new OneControlledCreatureCondition(), null);
+        effect = new ConditionalContinousEffect(lifelinkEffect, new OneControlledCreatureCondition(), "and has lifelink");
+        ability.addEffect(effect);
+        this.addAbility(ability);
+
+        
+        
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

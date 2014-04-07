@@ -37,7 +37,7 @@ import mage.game.Game;
  */
 public class OneControlledCreatureCondition implements Condition {
 
-    private static OneControlledCreatureCondition fInstance = new OneControlledCreatureCondition();
+    private static final OneControlledCreatureCondition fInstance = new OneControlledCreatureCondition();
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
@@ -49,4 +49,10 @@ public class OneControlledCreatureCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return game.getBattlefield().countAll(filter, source.getControllerId(), game) == 1;
     }
+
+    @Override
+    public String toString() {
+        return "you control exactly one creature";
+    }
+
 }
