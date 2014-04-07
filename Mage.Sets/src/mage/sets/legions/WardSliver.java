@@ -95,7 +95,7 @@ class WardSliverEffect extends OneShotEffect<WardSliverEffect> {
 
     public WardSliverEffect() {
         super(Outcome.BoostCreature);
-        staticText = "choose a creature type";
+        staticText = "choose a color";
     }
 
     public WardSliverEffect(final WardSliverEffect effect) {

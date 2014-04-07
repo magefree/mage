@@ -57,6 +57,7 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
@@ -200,11 +201,20 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
                 if (card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId)) {
+                    if (this.getSpellAbility() instanceof BestowAbility) { 
+                        Permanent permanent = game.getPermanent(card.getId());
+                        if (permanent != null) {
+                            // Must be removed first time, after that will be removed by continous effect
+                            // Otherwise effects like evolve trigger from creature comes into play event
+                            permanent.getCardType().remove(CardType.CREATURE);
+                        }                        
+                    }
                     game.getState().handleSimultaneousEvent(game);
                     return ability.resolve(game);
                 }
                 return false;
             }
+            // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (this.getSpellAbility() instanceof BestowAbility) { 
                 updateOptionalCosts(0);
                 result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);

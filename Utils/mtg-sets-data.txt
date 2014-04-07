@@ -56,6 +56,7 @@ Planechase 2012 Edition|PC2|
 Ice Age|ICE|
 Innistrad|ISD|
 Invasion|INV|
+Journey into Nyx|JOU|
 Judgment|JUD|
 Limited Edition Alpha|LEA|
 Limited Edition Beta|LEB|

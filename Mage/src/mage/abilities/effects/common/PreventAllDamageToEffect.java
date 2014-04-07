@@ -82,13 +82,15 @@ public class PreventAllDamageToEffect extends PreventionEffectImpl<PreventAllDam
         if (super.applies(event, source, game)) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
-                if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game))
+                if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
                     return true;
+                }
             }
             else {
                 Player player = game.getPlayer(event.getTargetId());
-                if (player != null && filter.match(player, source.getSourceId(), source.getControllerId(), game))
+                if (player != null && filter.match(player, source.getSourceId(), source.getControllerId(), game)) {
                     return true;
+                }
             }
         }
         return false;
