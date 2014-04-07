@@ -25,43 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.sets.journeyintonyx;
 
 import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventAllNonCombatDamageToEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreatureInPlay;
+import mage.counters.CounterType;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class MarkOfAsylum extends CardImpl<MarkOfAsylum> {
-    
-    private static final FilterControlledCreatureInPlay filter = new FilterControlledCreatureInPlay("creatures you control");
-    
-    public MarkOfAsylum(UUID ownerId) {
-        super(ownerId, 10, "Mark of Asylum", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "CON";
+public class HeroesBane extends CardImpl<HeroesBane> {
 
-        this.color.setWhite(true);
+    public HeroesBane(UUID ownerId) {
+        super(ownerId, 126, "Heroes' Bane", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "JOU";
+        this.subtype.add("Hydra");
 
-        // Prevent all noncombat damage that would be dealt to creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllNonCombatDamageToEffect(Duration.WhileOnBattlefield, filter)));
-        
+        this.color.setGreen(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
+
+        // Heroe's Bane enters the battlefield with four +1/+1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4), true), 
+                "with four +1/+1 counters on it"));
+        // {2}{G}{G}: Put X +1/+1 counters on Heroe's Bane, where X is its power.
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new SourcePermanentPowerCount(), true);
+        effect.setText("Put X +1/+1 counters on Heroe's Bane, where X is its power");
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{G}{G}")));
     }
 
-    public MarkOfAsylum(final MarkOfAsylum card) {
+    public HeroesBane(final HeroesBane card) {
         super(card);
     }
 
     @Override
-    public MarkOfAsylum copy() {
-        return new MarkOfAsylum(this);
+    public HeroesBane copy() {
+        return new HeroesBane(this);
     }
 }

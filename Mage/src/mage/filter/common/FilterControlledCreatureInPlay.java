@@ -34,6 +34,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.constants.TargetController;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -50,6 +52,7 @@ public class FilterControlledCreatureInPlay extends FilterImpl<Object> implement
     public FilterControlledCreatureInPlay(String name) {
         super(name);
         creatureFilter = new FilterCreaturePermanent();
+        creatureFilter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public FilterControlledCreatureInPlay(final FilterControlledCreatureInPlay filter) {

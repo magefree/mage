@@ -90,7 +90,7 @@ class StriveCostIncreasementEffect extends CostModificationEffectImpl<StriveCost
         Target target = abilityToModify.getTargets().get(0);
         int additionalTargets = target.getTargets().size() - 1;
         for (int i = 0; i < additionalTargets; i++) {
-            abilityToModify.getManaCostsToPay().add(striveCosts);
+            abilityToModify.getManaCostsToPay().add(striveCosts.copy());
         }
         return true;
     }

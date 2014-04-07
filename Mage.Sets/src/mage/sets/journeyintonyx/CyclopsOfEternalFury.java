@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class CyclopsOfEternalFury extends CardImpl<CyclopsOfEternalFury> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
     
     public CyclopsOfEternalFury(UUID ownerId) {
         super(ownerId, 92, "Cyclops of Eternal Fury", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{R}{R}");
