@@ -86,4 +86,55 @@ public class BestowTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Hopeful Eidolon", 1, 1);
     }
 
+    /**
+     * Test that cast with bestow does not trigger evolve
+     */
+    @Test
+    public void bestowEnchantmentDoesNotTriggerEvolve() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Silent Artisan");
+        
+        addCard(Zone.HAND, playerA, "Experiment One");
+        addCard(Zone.HAND, playerA, "Boon Satyr");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Experiment One");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Boon Satyr using bestow", "Silent Artisan");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // because Boon Satyr is no creature on the battlefield, evolve may not trigger
+        assertPermanentCount(playerA, "Silent Artisan", 1);
+        assertPowerToughness(playerA, "Silent Artisan", 7, 7);
+        assertPermanentCount(playerA, "Experiment One", 1);
+        assertPowerToughness(playerA, "Experiment One", 1, 1);
+    }
+    
+    /**
+     * Test that the bestow enchantment becomes a creature if the enchanted creature dies
+     */
+    @Test
+    public void bestowEnchantmentBecomesCreature() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");        
+        addCard(Zone.HAND, playerA, "Hopeful Eidolon");
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+                
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Silvercoat Lion");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // because Boon Satyr is no creature on the battlefield, evolve may not trigger
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertPermanentCount(playerA, "Hopeful Eidolon", 1);
+        assertPowerToughness(playerA, "Hopeful Eidolon", 1, 1);
+    }
+    
 }
