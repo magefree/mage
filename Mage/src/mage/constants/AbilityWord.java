@@ -34,6 +34,7 @@ package mage.constants;
  */
 public enum AbilityWord {
     BLOODRUSH("Bloodrush"),
+    CONSTELLATION("Constellation"),
     HELLBENT("Hellbent"),
     HEROIC("Heroic"),
     LANDFALL("Landfall"),
