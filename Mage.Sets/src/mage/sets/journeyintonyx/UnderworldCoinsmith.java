@@ -1,5 +1,4 @@
 /*
-/*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -26,63 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.journeyintonyx;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.abilityword.ConstellationAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
-import mage.constants.Duration;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class FoundryChampion extends CardImpl<FoundryChampion> {
+public class UnderworldCoinsmith extends CardImpl<UnderworldCoinsmith> {
 
-    public FoundryChampion(UUID ownerId) {
-        super(ownerId, 165, "Foundry Champion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");
-        this.expansionSetCode = "GTC";
-        this.subtype.add("Elemental");
-        this.subtype.add("Soldier");
+    public UnderworldCoinsmith(UUID ownerId) {
+        super(ownerId, 157, "Underworld Coinsmith", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{W}{B}");
+        this.expansionSetCode = "JOU";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
 
-        this.color.setRed(true);
+        this.color.setBlack(true);
         this.color.setWhite(true);
-        
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        //When Foundry Champion enters the battlefield, it deals damage to target creature or player equal to the number of creatures you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        // Constellation - Whenever Underworld Coinsmith or an enchantment enters the battlefield under your control, you gain 1 life.
+        this.addAbility(new ConstellationAbility(new GainLifeEffect(1)));
+        // {W}{B}, Pay 1 life: Each opponent loses 1 life.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), new ManaCostsImpl("{W}{B}"));
+        ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
-        
-        //{R}: Foundry Champion gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-        
-        //{W}: Foundry Champion gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public FoundryChampion(final FoundryChampion card) {
+    public UnderworldCoinsmith(final UnderworldCoinsmith card) {
         super(card);
     }
 
     @Override
-    public FoundryChampion copy() {
-        return new FoundryChampion(this);
+    public UnderworldCoinsmith copy() {
+        return new UnderworldCoinsmith(this);
     }
 }
-

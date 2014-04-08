@@ -1,5 +1,4 @@
 /*
-/*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -26,63 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.journeyintonyx;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class FoundryChampion extends CardImpl<FoundryChampion> {
+public class SpawnOfThraxes extends CardImpl<SpawnOfThraxes> {
+    
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
 
-    public FoundryChampion(UUID ownerId) {
-        super(ownerId, 165, "Foundry Champion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");
-        this.expansionSetCode = "GTC";
-        this.subtype.add("Elemental");
-        this.subtype.add("Soldier");
+    static {
+        filter.add(new SubtypePredicate("Mountain"));
+    }
+    
+    public SpawnOfThraxes(UUID ownerId) {
+        super(ownerId, 112, "Spawn of Thraxes", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
+        this.expansionSetCode = "JOU";
+        this.subtype.add("Dragon");
 
         this.color.setRed(true);
-        this.color.setWhite(true);
-        
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        //When Foundry Champion enters the battlefield, it deals damage to target creature or player equal to the number of creatures you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Spawn of Thraxes enters the battlefield, it deals damage to target creature or player equal to the number of Mountains you control.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
         ability.addTarget(new TargetCreatureOrPlayer(true));
-        this.addAbility(ability);
-        
-        //{R}: Foundry Champion gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-        
-        //{W}: Foundry Champion gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(ability);        
     }
 
-    public FoundryChampion(final FoundryChampion card) {
+    public SpawnOfThraxes(final SpawnOfThraxes card) {
         super(card);
     }
 
     @Override
-    public FoundryChampion copy() {
-        return new FoundryChampion(this);
+    public SpawnOfThraxes copy() {
+        return new SpawnOfThraxes(this);
     }
 }
-

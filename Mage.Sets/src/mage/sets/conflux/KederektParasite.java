@@ -87,16 +87,18 @@ class KederektParasiteTriggeredAbility extends TriggeredAbilityImpl<KederektPara
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean youControlRedPermanent = false;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controllerId)) {
-            if (permanent.getColor().isRed()) {
-                youControlRedPermanent = true;
+        if (event.getType() == GameEvent.EventType.DREW_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
+            boolean youControlRedPermanent = false;
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(this.getControllerId())) {
+                if (permanent.getColor().isRed()) {
+                    youControlRedPermanent = true;
+                    break;
+                }
+            } 
+            if (youControlRedPermanent) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
+                return true;
             }
-        }
-        if (event.getType() == GameEvent.EventType.DREW_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId()) &&
-                youControlRedPermanent) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-            return true;
         }
         return false;
     }

@@ -25,62 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.journeyintonyx;
 
 import java.util.UUID;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.effects.common.continious.PlayAdditionalLandsAllEffect;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- * @author nantuko
+ *
+ * @author LevelX2
  */
-public class RitesOfFlourishing extends CardImpl<RitesOfFlourishing> {
+public class DictateOfKruphix extends CardImpl<DictateOfKruphix> {
 
-    public RitesOfFlourishing(UUID ownerId) {
-        super(ownerId, 192, "Rites of Flourishing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "M12";
+    public DictateOfKruphix(UUID ownerId) {
+        super(ownerId, 37, "Dictate of Kruphix", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
+        this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
+        this.color.setBlue(true);
 
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
         // At the beginning of each player's draw step, that player draws an additional card.
-        this.addAbility(new RitesOfFlourishingAbility());
-
-        // Each player may play an additional land on each of his or her turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));
+        this.addAbility(new DictateOfKruphixAbility());
     }
 
-    public RitesOfFlourishing(final RitesOfFlourishing card) {
+    public DictateOfKruphix(final DictateOfKruphix card) {
         super(card);
     }
 
     @Override
-    public RitesOfFlourishing copy() {
-        return new RitesOfFlourishing(this);
+    public DictateOfKruphix copy() {
+        return new DictateOfKruphix(this);
     }
 }
 
-class RitesOfFlourishingAbility extends TriggeredAbilityImpl<RitesOfFlourishingAbility> {
+class DictateOfKruphixAbility extends TriggeredAbilityImpl<DictateOfKruphixAbility> {
 
-    public RitesOfFlourishingAbility() {
+    public DictateOfKruphixAbility() {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));
     }
 
-    public RitesOfFlourishingAbility(final RitesOfFlourishingAbility ability) {
+    public DictateOfKruphixAbility(final DictateOfKruphixAbility ability) {
         super(ability);
     }
 
     @Override
-    public RitesOfFlourishingAbility copy() {
-        return new RitesOfFlourishingAbility(this);
+    public DictateOfKruphixAbility copy() {
+        return new DictateOfKruphixAbility(this);
     }
 
     @Override

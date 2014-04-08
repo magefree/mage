@@ -57,7 +57,7 @@ import mage.watchers.WatcherImpl;
  */
 public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
 
-    private Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<UUID, Integer>();
+    private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
 
     public MiracleWatcher() {
         super("MiracleWatcher", WatcherScope.GAME);
