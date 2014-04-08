@@ -37,7 +37,7 @@ public class Savannah extends mage.sets.limitedalpha.Savannah {
 
     public Savannah(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 223;
+        this.cardNumber = 297;
         this.expansionSetCode = "3ED";
     }
 
