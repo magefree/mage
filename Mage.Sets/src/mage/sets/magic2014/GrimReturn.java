@@ -80,7 +80,7 @@ public class GrimReturn extends CardImpl<GrimReturn> {
         CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
         if (watcher != null) {
             FilterCard filter = new FilterCreatureCard(textFilter);
-            List<CardIdPredicate> uuidPredicates = new ArrayList<CardIdPredicate>();
+            List<CardIdPredicate> uuidPredicates = new ArrayList<>();
             for (UUID uuid :watcher.getCardsPutToGraveyardFromBattlefield()) {
                 uuidPredicates.add(new CardIdPredicate(uuid));
             }
