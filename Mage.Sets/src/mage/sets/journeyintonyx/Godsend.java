@@ -41,6 +41,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -50,6 +51,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
@@ -219,12 +221,17 @@ class GodsendReplacementEffect extends ReplacementEffectImpl<GodsendReplacementE
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            List<String> nameOfExiledCards = new ArrayList<>();
-            // game.getExile()
-//            MageObject object = game.getObject(event.getSourceId());
-//            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {
-//                return true;
-//            }
+            MageObject object = game.getObject(event.getSourceId());
+            if (object != null) {
+                ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+                if ((exileZone != null)) {
+                    for(Card card:exileZone.getCards(game)) {
+                        if ((card.getName().equals(object.getName()))) {
+                            return true;
+                        }
+                    }                 
+                }
+            }
         }
         return false;
     }

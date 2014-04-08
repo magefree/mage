@@ -9,7 +9,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 public class CountersCount implements DynamicValue {
-    private CounterType counter;
+    private final CounterType counter;
 
     public CountersCount(CounterType counter) {
         this.counter = counter;
