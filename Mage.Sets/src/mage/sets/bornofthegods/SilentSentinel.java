@@ -66,7 +66,7 @@ public class SilentSentinel extends CardImpl<SilentSentinel> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Silent Sentinel attacks, you may return target enchantment card from your graveyard to the battlefield.
-        Ability ability = new AttacksTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(true), true);
+        Ability ability = new AttacksTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
     }
