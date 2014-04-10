@@ -57,10 +57,7 @@ public class BlocksIfAbleTargetEffect extends RequirementEffect<BlocksIfAbleTarg
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent creature = game.getPermanent(source.getFirstTarget());
-        if (creature != null && creature.getId().equals(permanent.getId())) {
-            return true;
-        }
-        return false;
+        return creature != null && creature.getId().equals(permanent.getId());
     }
 
     @Override
