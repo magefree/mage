@@ -90,7 +90,7 @@ class OmnathReplacementEffect extends ReplacementEffectImpl<OmnathReplacementEff
     }
 
     public OmnathReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Green mana doesn't empty from your mana pool as steps and phases end";
     }
 
