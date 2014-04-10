@@ -28,18 +28,19 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -107,8 +108,11 @@ class LivingEndEffect extends OneShotEffect<LivingEndEffect> {
                 permanent.sacrifice(source.getSourceId(), game);
             }
             // put exiled cards to battlefield
-            for (Card card : game.getState().getExile().getExileZone(source.getSourceId()).getCards(game)) {
-                card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), card.getOwnerId());
+            ExileZone exileZone = game.getState().getExile().getExileZone(source.getSourceId());
+            if (exileZone != null) {
+                for (Card card : exileZone.getCards(game)) {
+                    card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), card.getOwnerId());
+                }
             }
             return true;
         }

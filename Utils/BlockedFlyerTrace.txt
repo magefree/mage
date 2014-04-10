@@ -255,3 +255,292 @@ ERROR [2014-03-20 11:19 [35:784]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b
 ERROR [2014-03-20 11:19 [35:785]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         contains ability: true
 ERROR [2014-03-20 11:19 [35:786]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]         test_zone: LIBRARY
 ERROR [2014-03-20 11:19 [35:787]] TraceUtil[pool-2-thread-26]: [95395a88-67bb-4b64-b641-48c49a67614f]
+
+WARN  [2014-04-10 14:21 [23:866]] TraceUtil[pool-2-thread-92]: Found creature with intimidate blocked by non artifact not sharing color creature
+ERROR [2014-04-10 14:21 [23:868]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6] Tracing game state...
+ERROR [2014-04-10 14:21 [23:869]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6] Wall of Frost could block Accursed Spirit
+ERROR [2014-04-10 14:21 [23:869]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]
+ERROR [2014-04-10 14:21 [23:870]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6] Attacker abilities:
+ERROR [2014-04-10 14:21 [23:871]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      Cast Accursed Spirit, id=806f4476-5579-4e2e-97ea-7929d1496c2d
+ERROR [2014-04-10 14:21 [23:871]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      Intimidate, id=85aadf31-f06b-43d5-a955-5c8a9c36c77b
+ERROR [2014-04-10 14:21 [23:872]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      {1}{G}: Regenerate {this}., id=e275247d-2afa-4464-a793-c1b6ab8c3a00
+ERROR [2014-04-10 14:21 [23:872]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6] Blocker abilities:
+ERROR [2014-04-10 14:21 [23:873]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      Cast Wall of Frost, id=6d1e8fb1-f36d-4a90-b6c3-d172d55d3850
+ERROR [2014-04-10 14:21 [23:874]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      Defender, id=79cc79b7-8a96-44c5-9ca1-3fd157f4fe09
+ERROR [2014-04-10 14:21 [23:874]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      Whenever {this} blocks a creature, that creature doesn't untap during its controller's next untap step., id=a6de17da-6230-4f72-846e-f997dee6c7c4
+ERROR [2014-04-10 14:21 [23:875]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]
+ERROR [2014-04-10 14:21 [23:875]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6] Flying ability id: eac56aa9-b719-4553-892a-600e2b521424
+ERROR [2014-04-10 14:21 [23:876]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6] Reach ability id: a3dcfd2a-f9b5-4266-a56d-31eb653b47b2
+ERROR [2014-04-10 14:21 [23:876]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6] Intimidate ability id: 85aadf31-f06b-43d5-a955-5c8a9c36c77b
+ERROR [2014-04-10 14:21 [23:877]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]
+ERROR [2014-04-10 14:21 [23:878]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6] Restriction effects:
+ERROR [2014-04-10 14:21 [23:878]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]     mage.abilities.keyword.FlyingEffect@79d7e686
+ERROR [2014-04-10 14:21 [23:879]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         id=5e032af7-8b17-4c14-97d2-99061152f04f
+ERROR [2014-04-10 14:21 [23:879]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to attacker=false
+ERROR [2014-04-10 14:21 [23:880]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to blocker=false
+ERROR [2014-04-10 14:21 [23:880]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]     mage.abilities.keyword.LandwalkEffect@4cf904cc
+ERROR [2014-04-10 14:21 [23:881]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         id=5287800a-63cf-4f55-9987-b9f14bb758f7
+ERROR [2014-04-10 14:21 [23:881]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to attacker=true
+ERROR [2014-04-10 14:21 [23:882]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to blocker=false
+ERROR [2014-04-10 14:21 [23:882]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]     mage.abilities.effects.common.combat.CantAttackAllAnyPlayerEffect@5cf073d2
+ERROR [2014-04-10 14:21 [23:883]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         id=017c74e6-c09b-4df2-9e3b-a3cf7e1dc938
+ERROR [2014-04-10 14:21 [23:884]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to attacker=true
+ERROR [2014-04-10 14:21 [23:884]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to blocker=true
+ERROR [2014-04-10 14:21 [23:885]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]     mage.abilities.keyword.LandwalkEffect@399bc576
+ERROR [2014-04-10 14:21 [23:885]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         id=43740732-b8be-42bc-bbe9-ea8861bd75f4
+ERROR [2014-04-10 14:21 [23:886]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to attacker=true
+ERROR [2014-04-10 14:21 [23:886]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to blocker=false
+ERROR [2014-04-10 14:21 [23:887]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]     mage.sets.magic2011.HarborSerpentEffect@5d88c10b
+ERROR [2014-04-10 14:21 [23:887]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         id=5426d16c-0f9c-43a0-8b77-224054454008
+ERROR [2014-04-10 14:21 [23:888]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to attacker=false
+ERROR [2014-04-10 14:21 [23:888]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to blocker=false
+ERROR [2014-04-10 14:21 [23:889]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]     mage.abilities.keyword.LandwalkEffect@5260df96
+ERROR [2014-04-10 14:21 [23:889]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         id=9a0358c3-fa62-4dd3-97bd-bdb81675062f
+ERROR [2014-04-10 14:21 [23:890]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to attacker=true
+ERROR [2014-04-10 14:21 [23:890]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to blocker=false
+ERROR [2014-04-10 14:21 [23:891]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]     mage.abilities.effects.common.combat.CantBlockSourceEffect@649f3a23
+ERROR [2014-04-10 14:21 [23:891]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         id=7f2ba853-d008-48b6-9ee6-525b45dc8ec9
+ERROR [2014-04-10 14:21 [23:892]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to attacker=true
+ERROR [2014-04-10 14:21 [23:893]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to blocker=false
+ERROR [2014-04-10 14:21 [23:893]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]     mage.abilities.effects.common.combat.UnblockableSourceEffect@db936df
+ERROR [2014-04-10 14:21 [23:894]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         id=889e554a-037a-40dc-9577-9bc6f86c0fe7
+ERROR [2014-04-10 14:21 [23:894]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to attacker=true
+ERROR [2014-04-10 14:21 [23:895]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         applies to blocker=false
+ERROR [2014-04-10 14:21 [23:895]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.keyword.FlyingEffect@79d7e686 id=5e032af7-8b17-4c14-97d2-99061152f04f
+ERROR [2014-04-10 14:21 [23:896]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability=Flying
+ERROR [2014-04-10 14:21 [23:902]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability=Flying
+ERROR [2014-04-10 14:21 [23:902]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:903]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: null
+ERROR [2014-04-10 14:21 [23:903]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: null
+ERROR [2014-04-10 14:21 [23:904]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.keyword.LandwalkEffect@4cf904cc id=5287800a-63cf-4f55-9987-b9f14bb758f7
+ERROR [2014-04-10 14:21 [23:905]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:905]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:906]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:906]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2013.StormtideLeviathan@1178352e
+ERROR [2014-04-10 14:21 [23:907]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:907]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: HAND
+ERROR [2014-04-10 14:21 [23:908]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.effects.common.combat.CantAttackAllAnyPlayerEffect@5cf073d2 id=017c74e6-c09b-4df2-9e3b-a3cf7e1dc938
+ERROR [2014-04-10 14:21 [23:909]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability=Creatures without flying or islandwalk can't attack.
+ERROR [2014-04-10 14:21 [23:909]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability=Creatures without flying or islandwalk can't attack.
+ERROR [2014-04-10 14:21 [23:910]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:910]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2013.StormtideLeviathan@1178352e
+ERROR [2014-04-10 14:21 [23:911]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:911]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: HAND
+ERROR [2014-04-10 14:21 [23:912]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.keyword.LandwalkEffect@399bc576 id=43740732-b8be-42bc-bbe9-ea8861bd75f4
+ERROR [2014-04-10 14:21 [23:912]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:913]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:913]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:914]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2013.HarborSerpent@77b02094
+ERROR [2014-04-10 14:21 [23:914]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:915]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: LIBRARY
+ERROR [2014-04-10 14:21 [23:915]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.sets.magic2011.HarborSerpentEffect@5d88c10b id=5426d16c-0f9c-43a0-8b77-224054454008
+ERROR [2014-04-10 14:21 [23:916]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability={this} can't attack unless there are five or more Islands on the battlefield.
+ERROR [2014-04-10 14:21 [23:916]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability={this} can't attack unless there are five or more Islands on the battlefield.
+ERROR [2014-04-10 14:21 [23:917]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:917]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2013.HarborSerpent@77b02094
+ERROR [2014-04-10 14:21 [23:918]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:919]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: LIBRARY
+ERROR [2014-04-10 14:21 [23:919]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.keyword.LandwalkEffect@5260df96 id=9a0358c3-fa62-4dd3-97bd-bdb81675062f
+ERROR [2014-04-10 14:21 [23:920]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:920]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:921]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:921]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2014.MerfolkSpy@1fa688fa
+ERROR [2014-04-10 14:21 [23:922]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:922]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: GRAVEYARD
+ERROR [2014-04-10 14:21 [23:923]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.effects.common.combat.CantBlockSourceEffect@649f3a23 id=7f2ba853-d008-48b6-9ee6-525b45dc8ec9
+ERROR [2014-04-10 14:21 [23:923]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability={this} can't block
+ERROR [2014-04-10 14:21 [23:924]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability={this} can't block
+ERROR [2014-04-10 14:21 [23:924]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:925]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2012.TormentedSoul@17555b23
+ERROR [2014-04-10 14:21 [23:926]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:926]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: GRAVEYARD
+ERROR [2014-04-10 14:21 [23:927]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.effects.common.combat.UnblockableSourceEffect@db936df id=889e554a-037a-40dc-9577-9bc6f86c0fe7
+ERROR [2014-04-10 14:21 [23:927]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability={this} is unblockable.
+ERROR [2014-04-10 14:21 [23:928]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability={this} is unblockable.
+ERROR [2014-04-10 14:21 [23:928]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:929]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2012.TormentedSoul@17555b23
+ERROR [2014-04-10 14:21 [23:929]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:930]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: GRAVEYARD
+ERROR [2014-04-10 14:21 [23:930]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.keyword.FlyingEffect@79d7e686 id=5e032af7-8b17-4c14-97d2-99061152f04f
+ERROR [2014-04-10 14:21 [23:931]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability=Flying
+ERROR [2014-04-10 14:21 [23:931]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability=Flying
+ERROR [2014-04-10 14:21 [23:932]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:932]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: null
+ERROR [2014-04-10 14:21 [23:933]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: null
+ERROR [2014-04-10 14:21 [23:933]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.keyword.LandwalkEffect@4cf904cc id=5287800a-63cf-4f55-9987-b9f14bb758f7
+ERROR [2014-04-10 14:21 [23:934]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:935]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:935]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:936]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2013.StormtideLeviathan@1178352e
+ERROR [2014-04-10 14:21 [23:936]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:937]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: HAND
+ERROR [2014-04-10 14:21 [23:938]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.effects.common.combat.CantAttackAllAnyPlayerEffect@5cf073d2 id=017c74e6-c09b-4df2-9e3b-a3cf7e1dc938
+ERROR [2014-04-10 14:21 [23:938]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability=Creatures without flying or islandwalk can't attack.
+ERROR [2014-04-10 14:21 [23:939]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability=Creatures without flying or islandwalk can't attack.
+ERROR [2014-04-10 14:21 [23:939]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:940]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2013.StormtideLeviathan@1178352e
+ERROR [2014-04-10 14:21 [23:940]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:941]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: HAND
+ERROR [2014-04-10 14:21 [23:941]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.keyword.LandwalkEffect@399bc576 id=43740732-b8be-42bc-bbe9-ea8861bd75f4
+ERROR [2014-04-10 14:21 [23:942]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:942]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:943]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:944]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2013.HarborSerpent@77b02094
+ERROR [2014-04-10 14:21 [23:944]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:945]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: LIBRARY
+ERROR [2014-04-10 14:21 [23:945]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.sets.magic2011.HarborSerpentEffect@5d88c10b id=5426d16c-0f9c-43a0-8b77-224054454008
+ERROR [2014-04-10 14:21 [23:949]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability={this} can't attack unless there are five or more Islands on the battlefield.
+ERROR [2014-04-10 14:21 [23:950]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability={this} can't attack unless there are five or more Islands on the battlefield.
+ERROR [2014-04-10 14:21 [23:950]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:951]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2013.HarborSerpent@77b02094
+ERROR [2014-04-10 14:21 [23:952]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:952]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: LIBRARY
+ERROR [2014-04-10 14:21 [23:953]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.keyword.LandwalkEffect@5260df96 id=9a0358c3-fa62-4dd3-97bd-bdb81675062f
+ERROR [2014-04-10 14:21 [23:954]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:954]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability=Islandwalk.
+ERROR [2014-04-10 14:21 [23:955]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:955]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2014.MerfolkSpy@1fa688fa
+ERROR [2014-04-10 14:21 [23:956]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:957]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: GRAVEYARD
+ERROR [2014-04-10 14:21 [23:957]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.effects.common.combat.CantBlockSourceEffect@649f3a23 id=7f2ba853-d008-48b6-9ee6-525b45dc8ec9
+ERROR [2014-04-10 14:21 [23:958]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability={this} can't block
+ERROR [2014-04-10 14:21 [23:958]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability={this} can't block
+ERROR [2014-04-10 14:21 [23:959]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:959]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2012.TormentedSoul@17555b23
+ERROR [2014-04-10 14:21 [23:974]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:975]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: GRAVEYARD
+ERROR [2014-04-10 14:21 [23:975]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]      effect=mage.abilities.effects.common.combat.UnblockableSourceEffect@db936df id=889e554a-037a-40dc-9577-9bc6f86c0fe7
+ERROR [2014-04-10 14:21 [23:976]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         instanceof StaticAbility: true, ability={this} is unblockable.
+ERROR [2014-04-10 14:21 [23:976]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         usable zone: false, ability={this} is unblockable.
+ERROR [2014-04-10 14:21 [23:977]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:21 [23:977]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         object: mage.sets.magic2012.TormentedSoul@17555b23
+ERROR [2014-04-10 14:21 [23:978]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         contains ability: true
+ERROR [2014-04-10 14:21 [23:978]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]         test_zone: GRAVEYARD
+ERROR [2014-04-10 14:21 [23:979]] TraceUtil[pool-2-thread-92]: [55f53cb7-6343-4f94-b8a3-424fc8829fe6]
+
+WARN  [2014-04-10 14:11 [41:061]] TraceUtil[pool-2-thread-91]: Found creature with intimidate blocked by non artifact not sharing color creature
+ERROR [2014-04-10 14:11 [41:062]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001] Tracing game state...
+ERROR [2014-04-10 14:11 [41:063]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001] Wall of Fire could block Accursed Spirit
+ERROR [2014-04-10 14:11 [41:063]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]
+ERROR [2014-04-10 14:11 [41:064]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001] Attacker abilities:
+ERROR [2014-04-10 14:11 [41:064]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      Cast Accursed Spirit, id=976adee1-d92b-4c62-aeff-0e5d7446113d
+ERROR [2014-04-10 14:11 [41:065]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      Intimidate, id=85aadf31-f06b-43d5-a955-5c8a9c36c77b
+ERROR [2014-04-10 14:11 [41:066]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001] Blocker abilities:
+ERROR [2014-04-10 14:11 [41:066]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      Cast Wall of Fire, id=7c43dee6-747a-4cbd-a164-ae30da112aeb
+ERROR [2014-04-10 14:11 [41:070]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      Defender, id=79cc79b7-8a96-44c5-9ca1-3fd157f4fe09
+ERROR [2014-04-10 14:11 [41:071]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      {R}: {this} gets +1/+0 until end of turn., id=d733522e-97ca-4af7-8abb-f3a3ea963478
+ERROR [2014-04-10 14:11 [41:072]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]
+ERROR [2014-04-10 14:11 [41:072]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001] Flying ability id: 3e2cfbd3-cf35-48c1-a488-25f537f6d6f6
+ERROR [2014-04-10 14:11 [41:073]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001] Reach ability id: a3dcfd2a-f9b5-4266-a56d-31eb653b47b2
+ERROR [2014-04-10 14:11 [41:073]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001] Intimidate ability id: 85aadf31-f06b-43d5-a955-5c8a9c36c77b
+ERROR [2014-04-10 14:11 [41:074]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]
+ERROR [2014-04-10 14:11 [41:075]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001] Restriction effects:
+ERROR [2014-04-10 14:11 [41:075]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]     mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect@66b16216
+ERROR [2014-04-10 14:11 [41:076]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         id=85570d4d-98b3-4f92-9d95-c9d1b0d3ec5a
+ERROR [2014-04-10 14:11 [41:077]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         applies to attacker=false
+ERROR [2014-04-10 14:11 [41:077]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         applies to blocker=false
+ERROR [2014-04-10 14:11 [41:078]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]     mage.abilities.keyword.FlyingEffect@3087ce1d
+ERROR [2014-04-10 14:11 [41:078]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         id=5e032af7-8b17-4c14-97d2-99061152f04f
+ERROR [2014-04-10 14:11 [41:079]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         applies to attacker=false
+ERROR [2014-04-10 14:11 [41:079]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         applies to blocker=false
+ERROR [2014-04-10 14:11 [41:080]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]     mage.sets.magic2014.CyclopsTyrantEffect@3612fe54
+ERROR [2014-04-10 14:11 [41:080]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         id=df95d78d-0818-4cc4-88d3-61a82fa206e4
+ERROR [2014-04-10 14:11 [41:081]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         applies to attacker=true
+ERROR [2014-04-10 14:11 [41:082]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         applies to blocker=false
+ERROR [2014-04-10 14:11 [41:084]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]     mage.abilities.effects.common.combat.CantBlockAttachedEffect@1d394693
+ERROR [2014-04-10 14:11 [41:085]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         id=980bb8cc-d099-4a81-8b55-965174ac9b94
+ERROR [2014-04-10 14:11 [41:086]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         applies to attacker=false
+ERROR [2014-04-10 14:11 [41:086]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         applies to blocker=false
+ERROR [2014-04-10 14:11 [41:087]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      effect=mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect@66b16216 id=85570d4d-98b3-4f92-9d95-c9d1b0d3ec5a
+ERROR [2014-04-10 14:11 [41:088]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         instanceof StaticAbility: true, ability=Enchanted creature can't attack or block.
+ERROR [2014-04-10 14:11 [41:088]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         usable zone: false, ability=Enchanted creature can't attack or block.
+ERROR [2014-04-10 14:11 [41:089]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:11 [41:089]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         object: mage.sets.magic2014.Pacifism@771507b1
+ERROR [2014-04-10 14:11 [41:090]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         contains ability: true
+ERROR [2014-04-10 14:11 [41:090]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         test_zone: LIBRARY
+ERROR [2014-04-10 14:11 [41:091]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      effect=mage.abilities.keyword.FlyingEffect@3087ce1d id=5e032af7-8b17-4c14-97d2-99061152f04f
+ERROR [2014-04-10 14:11 [41:092]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         instanceof StaticAbility: true, ability=Flying
+ERROR [2014-04-10 14:11 [41:092]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         usable zone: false, ability=Flying
+ERROR [2014-04-10 14:11 [41:093]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:11 [41:093]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         object: null
+ERROR [2014-04-10 14:11 [41:094]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         test_zone: null
+ERROR [2014-04-10 14:11 [41:094]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      effect=mage.sets.magic2014.CyclopsTyrantEffect@3612fe54 id=df95d78d-0818-4cc4-88d3-61a82fa206e4
+ERROR [2014-04-10 14:11 [41:095]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         instanceof StaticAbility: true, ability={this} can't block creatures with power 2 or less.
+ERROR [2014-04-10 14:11 [41:095]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         usable zone: false, ability={this} can't block creatures with power 2 or less.
+ERROR [2014-04-10 14:11 [41:096]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:11 [41:096]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         object: mage.sets.magic2014.CyclopsTyrant@3d5f88cb
+ERROR [2014-04-10 14:11 [41:097]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         contains ability: true
+ERROR [2014-04-10 14:11 [41:097]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         test_zone: OUTSIDE
+ERROR [2014-04-10 14:11 [41:098]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      effect=mage.abilities.effects.common.combat.CantBlockAttachedEffect@1d394693 id=980bb8cc-d099-4a81-8b55-965174ac9b94
+ERROR [2014-04-10 14:11 [41:099]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         instanceof StaticAbility: true, ability=Enchanted creature can't block.
+ERROR [2014-04-10 14:11 [41:099]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         usable zone: false, ability=Enchanted creature can't block.
+ERROR [2014-04-10 14:11 [41:100]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:11 [41:100]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         object: mage.sets.magic2013.CripplingBlight@37bdde2c
+ERROR [2014-04-10 14:11 [41:101]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         contains ability: true
+ERROR [2014-04-10 14:11 [41:101]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         test_zone: GRAVEYARD
+ERROR [2014-04-10 14:11 [41:102]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      effect=mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect@66b16216 id=85570d4d-98b3-4f92-9d95-c9d1b0d3ec5a
+ERROR [2014-04-10 14:11 [41:103]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         instanceof StaticAbility: true, ability=Enchanted creature can't attack or block.
+ERROR [2014-04-10 14:11 [41:103]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         usable zone: false, ability=Enchanted creature can't attack or block.
+ERROR [2014-04-10 14:11 [41:104]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:11 [41:104]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         object: mage.sets.magic2014.Pacifism@771507b1
+ERROR [2014-04-10 14:11 [41:105]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         contains ability: true
+ERROR [2014-04-10 14:11 [41:105]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         test_zone: LIBRARY
+ERROR [2014-04-10 14:11 [41:106]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      effect=mage.abilities.keyword.FlyingEffect@3087ce1d id=5e032af7-8b17-4c14-97d2-99061152f04f
+ERROR [2014-04-10 14:11 [41:106]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         instanceof StaticAbility: true, ability=Flying
+ERROR [2014-04-10 14:11 [41:107]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         usable zone: false, ability=Flying
+ERROR [2014-04-10 14:11 [41:107]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:11 [41:108]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         object: null
+ERROR [2014-04-10 14:11 [41:109]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         test_zone: null
+ERROR [2014-04-10 14:11 [41:109]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      effect=mage.sets.magic2014.CyclopsTyrantEffect@3612fe54 id=df95d78d-0818-4cc4-88d3-61a82fa206e4
+ERROR [2014-04-10 14:11 [41:110]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         instanceof StaticAbility: true, ability={this} can't block creatures with power 2 or less.
+ERROR [2014-04-10 14:11 [41:110]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         usable zone: false, ability={this} can't block creatures with power 2 or less.
+ERROR [2014-04-10 14:11 [41:111]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:11 [41:112]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         object: mage.sets.magic2014.CyclopsTyrant@3d5f88cb
+ERROR [2014-04-10 14:11 [41:112]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         contains ability: true
+ERROR [2014-04-10 14:11 [41:127]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         test_zone: OUTSIDE
+ERROR [2014-04-10 14:11 [41:128]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]      effect=mage.abilities.effects.common.combat.CantBlockAttachedEffect@1d394693 id=980bb8cc-d099-4a81-8b55-965174ac9b94
+ERROR [2014-04-10 14:11 [41:128]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         instanceof StaticAbility: true, ability=Enchanted creature can't block.
+ERROR [2014-04-10 14:11 [41:129]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         usable zone: false, ability=Enchanted creature can't block.
+ERROR [2014-04-10 14:11 [41:129]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         zone: BATTLEFIELD
+ERROR [2014-04-10 14:11 [41:130]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         object: mage.sets.magic2013.CripplingBlight@37bdde2c
+ERROR [2014-04-10 14:11 [41:130]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         contains ability: true
+ERROR [2014-04-10 14:11 [41:131]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]         test_zone: GRAVEYARD
+ERROR [2014-04-10 14:11 [41:132]] TraceUtil[pool-2-thread-91]: [5273d20e-8e1a-4592-a09f-6688cf1f0001]
+
+WARN  [2014-04-10 02:36 [56:347]] TraceUtil[pool-2-thread-105]: Found creature with intimidate blocked by non artifact not sharing color creature
+ERROR [2014-04-10 02:36 [56:349]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346] Tracing game state...
+ERROR [2014-04-10 02:36 [56:349]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346] Mercurial Chemister could block Lifebane Zombie
+ERROR [2014-04-10 02:36 [56:350]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]
+ERROR [2014-04-10 02:36 [56:350]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346] Attacker abilities:
+ERROR [2014-04-10 02:36 [56:351]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]      Cast Lifebane Zombie, id=745b5c15-7fc1-44ef-9524-98ffdcda6193
+ERROR [2014-04-10 02:36 [56:351]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]      Intimidate, id=e69d7638-8002-4b1f-b591-09a49500df3e
+ERROR [2014-04-10 02:36 [56:354]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]      When {this} enters the battlefield, Target opponent reveals his or her hand. You choose a green or white creature card from it and exile that card., id=a83ef01c-db05-4ceb-ab63-67acdf67015b
+ERROR [2014-04-10 02:36 [56:355]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346] Blocker abilities:
+ERROR [2014-04-10 02:36 [56:355]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]      Cast Mercurial Chemister, id=74023eae-76b1-47a1-bec6-07e1ed8ec08a
+ERROR [2014-04-10 02:36 [56:356]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]      {U},{T}: Draw two cards., id=e3f117e2-9825-4b4a-842f-25034d0f924a
+ERROR [2014-04-10 02:36 [56:356]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]      {R},{T}, Discard a card: {source} deals  damage to target creature equal to the discarded card's converted mana cost., id=e3a1611c-a3db-458b-9d9e-c5626014e734
+ERROR [2014-04-10 02:36 [56:357]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]
+ERROR [2014-04-10 02:36 [56:357]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346] Flying ability id: 932d53b3-621c-403e-ad13-e084ac2a72ba
+ERROR [2014-04-10 02:36 [56:358]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346] Reach ability id: ab4534e0-53c2-4772-b1ee-7be4a02283d6
+ERROR [2014-04-10 02:36 [56:358]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346] Intimidate ability id: e69d7638-8002-4b1f-b591-09a49500df3e
+ERROR [2014-04-10 02:36 [56:359]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]
+ERROR [2014-04-10 02:36 [56:359]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346] Restriction effects:
+ERROR [2014-04-10 02:36 [56:360]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]     mage.abilities.keyword.FlyingEffect@21788ee5
+ERROR [2014-04-10 02:36 [56:360]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         id=7bb221b7-b9df-452d-91a3-c8f7b0816196
+ERROR [2014-04-10 02:36 [56:361]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         applies to attacker=false
+ERROR [2014-04-10 02:36 [56:361]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         applies to blocker=false
+ERROR [2014-04-10 02:36 [56:362]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]      effect=mage.abilities.keyword.FlyingEffect@21788ee5 id=7bb221b7-b9df-452d-91a3-c8f7b0816196
+ERROR [2014-04-10 02:36 [56:362]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         instanceof StaticAbility: true, ability=Flying
+ERROR [2014-04-10 02:36 [56:363]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         usable zone: false, ability=Flying
+ERROR [2014-04-10 02:36 [56:363]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         zone: BATTLEFIELD
+ERROR [2014-04-10 02:36 [56:364]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         object: mage.sets.theros.StormbreathDragon@7a0944ef
+ERROR [2014-04-10 02:36 [56:365]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         contains ability: true
+ERROR [2014-04-10 02:36 [56:366]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         test_zone: HAND
+ERROR [2014-04-10 02:36 [56:367]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]      effect=mage.abilities.keyword.FlyingEffect@21788ee5 id=7bb221b7-b9df-452d-91a3-c8f7b0816196
+ERROR [2014-04-10 02:36 [56:367]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         instanceof StaticAbility: true, ability=Flying
+ERROR [2014-04-10 02:36 [56:367]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         usable zone: false, ability=Flying
+ERROR [2014-04-10 02:36 [56:368]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         zone: BATTLEFIELD
+ERROR [2014-04-10 02:36 [56:368]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         object: mage.sets.theros.StormbreathDragon@7a0944ef
+ERROR [2014-04-10 02:36 [56:369]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         contains ability: true
+ERROR [2014-04-10 02:36 [56:369]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]         test_zone: HAND
+ERROR [2014-04-10 02:36 [56:370]] TraceUtil[pool-2-thread-105]: [5976964d-dbf4-430f-97d8-55759c746346]
