@@ -123,59 +123,63 @@ class HeartbeatOfSpringEffect extends ManaEffect<HeartbeatOfSpringEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
-        Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
-        Mana types = new Mana();
-        for (ManaAbility ability : mana) {
-            types.add(ability.getNetMana(game));
-        }
-        Choice choice = new ChoiceImpl(true);
-        choice.setMessage("Pick a mana color");
-        if (types.getBlack() > 0) {
-            choice.getChoices().add("Black");
-        }
-        if (types.getRed() > 0) {
-            choice.getChoices().add("Red");
-        }
-        if (types.getBlue() > 0) {
-            choice.getChoices().add("Blue");
-        }
-        if (types.getGreen() > 0) {
-            choice.getChoices().add("Green");
-        }
-        if (types.getWhite() > 0) {
-            choice.getChoices().add("White");
-        }
-        if (types.getColorless() > 0) {
-            choice.getChoices().add("Colorless");
-        }
-        if (choice.getChoices().size() > 0) {
-            Player player = game.getPlayer(land.getControllerId());
-            if (choice.getChoices().size() == 1) {
-                choice.setChoice(choice.getChoices().iterator().next());
-            } else {
-                player.choose(outcome, choice, game);
+        if (land != null) {
+            Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
+            Mana types = new Mana();
+            for (ManaAbility ability : mana) {
+                types.add(ability.getNetMana(game));
             }
-            if (choice.getChoice().equals("Black")) {
-                player.getManaPool().addMana(Mana.BlackMana, game, source);
-                return true;
-            } else if (choice.getChoice().equals("Blue")) {
-                player.getManaPool().addMana(Mana.BlueMana, game, source);
-                return true;
-            } else if (choice.getChoice().equals("Red")) {
-                player.getManaPool().addMana(Mana.RedMana, game, source);
-                return true;
-            } else if (choice.getChoice().equals("Green")) {
-                player.getManaPool().addMana(Mana.GreenMana, game, source);
-                return true;
-            } else if (choice.getChoice().equals("White")) {
-                player.getManaPool().addMana(Mana.WhiteMana, game, source);
-                return true;
-            } else if (choice.getChoice().equals("Colorless")) {
-                player.getManaPool().addMana(Mana.ColorlessMana, game, source);
-                return true;
+            Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Pick a mana color");
+            if (types.getBlack() > 0) {
+                choice.getChoices().add("Black");
             }
+            if (types.getRed() > 0) {
+                choice.getChoices().add("Red");
+            }
+            if (types.getBlue() > 0) {
+                choice.getChoices().add("Blue");
+            }
+            if (types.getGreen() > 0) {
+                choice.getChoices().add("Green");
+            }
+            if (types.getWhite() > 0) {
+                choice.getChoices().add("White");
+            }
+            if (types.getColorless() > 0) {
+                choice.getChoices().add("Colorless");
+            }
+            if (choice.getChoices().size() > 0) {
+                Player player = game.getPlayer(land.getControllerId());
+                if (choice.getChoices().size() == 1) {
+                    choice.setChoice(choice.getChoices().iterator().next());
+                } else {
+                    player.choose(outcome, choice, game);
+                }
+                switch (choice.getChoice()) {
+                    case "Black":
+                        player.getManaPool().addMana(Mana.BlackMana, game, source);
+                        return true;
+                    case "Blue":
+                        player.getManaPool().addMana(Mana.BlueMana, game, source);
+                        return true;
+                    case "Red":
+                        player.getManaPool().addMana(Mana.RedMana, game, source);
+                        return true;
+                    case "Green":
+                        player.getManaPool().addMana(Mana.GreenMana, game, source);
+                        return true;
+                    case "White":
+                        player.getManaPool().addMana(Mana.WhiteMana, game, source);
+                        return true;
+                    case "Colorless":
+                        player.getManaPool().addMana(Mana.ColorlessMana, game, source);
+                        return true;
+                }
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
