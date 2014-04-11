@@ -84,7 +84,7 @@ public class ChampionAbility extends StaticAbility<ChampionAbility> {
         this.subtypes = subtypes;
 
         StringBuilder sb = new StringBuilder("another ");
-        ArrayList<Predicate<MageObject>> subtypesPredicates = new ArrayList<Predicate<MageObject>>();
+        ArrayList<Predicate<MageObject>> subtypesPredicates = new ArrayList<>();
         int i = 0;
         for (String subtype : this.subtypes) {
             subtypesPredicates.add(new SubtypePredicate(subtype));
@@ -128,7 +128,7 @@ public class ChampionAbility extends StaticAbility<ChampionAbility> {
         StringBuilder sb = new StringBuilder("Champion ").append(objectDescription);
         sb.append("<i>(When this enters the battlefield, sacrifice it unless you exile another ");
         sb.append(objectDescription);
-        sb.append("you control. When this leaves the battlefield, that card returns to the battlefield.)</i>");
+        sb.append(" you control. When this leaves the battlefield, that card returns to the battlefield.)</i>");
         return sb.toString();
     }
 }

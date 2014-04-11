@@ -49,7 +49,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCardInLibrary;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -117,14 +116,14 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect<TezzeretTheSeekerEffect2> {
             }
         }
 
-        FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost " + cmc);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.Equal, cmc));
+        FilterArtifactCard filter = new FilterArtifactCard(new StringBuilder("artifact card with converted mana cost ").append(cmc).append(" or less").toString());
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, cmc + 1));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
         if (player.searchLibrary(target, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
+                player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
             }
             player.shuffleLibrary(game);
             return true;
