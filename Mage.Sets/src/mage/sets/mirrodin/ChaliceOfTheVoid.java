@@ -28,10 +28,7 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import static javax.xml.bind.JAXBIntrospector.getValue;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +37,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -140,7 +140,7 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl<ChaliceOfThe
 
     @Override
     public String getRule() {
-        return "Whenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell";
+        return "Whenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.";
     }
 }
 
