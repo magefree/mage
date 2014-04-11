@@ -78,6 +78,7 @@ public abstract class VariableCostImpl<T extends VariableCostImpl<T>> implements
         this.targets = cost.targets.copy();
         this.xText = cost.xText;
         this.actionText = cost.actionText;
+        this.amountPaid = cost.amountPaid;
     }
 
     @Override
