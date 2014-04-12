@@ -38,6 +38,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessAllEffect;
 import mage.abilities.keyword.ChangelingAbility;
@@ -49,6 +50,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  * @author Plopman
  */
 public class MirrorEntity extends CardImpl<MirrorEntity> {
+
+    static private FilterControlledCreaturePermanent filter = new  FilterControlledCreaturePermanent("Creatures you control");
 
     public MirrorEntity(UUID ownerId) {
         super(ownerId, 31, "Mirror Entity", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -62,9 +65,13 @@ public class MirrorEntity extends CardImpl<MirrorEntity> {
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());
         // {X}: Creatures you control become X/X and gain all creature types until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ChangelingAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control")),new VariableManaCost());
         DynamicValue variableMana = new ManacostVariableValue();
-        ability.addEffect(new SetPowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control"), true));
+        Effect effect = new SetPowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, filter, true);
+        effect.setText("Creatures you control become X/X");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new VariableManaCost());
+        effect = new GainAbilityAllEffect(ChangelingAbility.getInstance(), Duration.EndOfTurn, filter);
+        effect.setText("and gain all creature types until end of turn");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class KruphixsInsight extends CardImpl<KruphixsInsight> {
 
-    private static final FilterCard filter = new FilterCard("enchantment cards");
+    private static final FilterCard filter = new FilterCard("up to three enchantment cards");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

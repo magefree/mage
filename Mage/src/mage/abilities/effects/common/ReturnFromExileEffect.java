@@ -29,13 +29,17 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import static mage.constants.Zone.BATTLEFIELD;
+import static mage.constants.Zone.GRAVEYARD;
+import static mage.constants.Zone.HAND;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -79,11 +83,13 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
     @Override
     public boolean apply(Game game, Ability source) {
         ExileZone exile = game.getExile().getExileZone(exileId);
-        if (exile != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && exile != null) {
             exile = exile.copy();
             for (UUID cardId: exile) {
                 Card card = game.getCard(cardId);
-                card.moveToZone(zone, source.getId(), game, tapped);
+                card.moveToZone(zone, source.getSourceId(), game, tapped);
+                game.informPlayers(new StringBuilder(controller.getName()).append(" moves ").append(card.getName()).append(" to ").append(zone.toString()).toString());
             }
             game.getExile().getExileZone(exileId).clear();
             return true;
@@ -97,8 +103,9 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
         switch(zone) {
             case BATTLEFIELD:
                 sb.append("to the battlefield under its owner's control");
-                if (tapped)
+                if (tapped) {
                     sb.append(" tapped");
+                }
                 break;
             case HAND:
                 sb.append("to their owner's hand");

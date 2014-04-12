@@ -44,6 +44,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -98,8 +99,10 @@ class FlickerwispEffect extends OneShotEffect<FlickerwispEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Flickerwisp Exile", source.getId(), game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (controller != null && permanent != null && sourcePermanent != null) {
+            if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getName(), source.getSourceId(), game, Zone.BATTLEFIELD)) {
                 //create delayed triggered ability
                 AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, false));
                 delayedAbility.setSourceId(source.getSourceId());

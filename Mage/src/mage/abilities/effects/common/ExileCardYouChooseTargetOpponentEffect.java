@@ -64,7 +64,7 @@ public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect<ExileC
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
+        if (player != null && !player.getHand().isEmpty()) {
             player.revealCards("Exile " + filter.getMessage(), player.getHand(), game);
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
@@ -73,7 +73,7 @@ public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect<ExileC
                 if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
-                        card.moveToExile(null, null , source.getSourceId(), game);
+                        player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.HAND);
                     }
                 }
             }

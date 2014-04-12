@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author Loki
  */
 public class LordOfLineage extends CardImpl<LordOfLineage> {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Vampire creatures");
 
     static {
         filter.add(new SubtypePredicate("Vampire"));
@@ -70,7 +70,6 @@ public class LordOfLineage extends CardImpl<LordOfLineage> {
         this.addAbility(FlyingAbility.getInstance());
         // Other Vampire creatures you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
-        // {tap}: Put a 2/2 black Vampire creature token with flying onto the battlefield.
         // {tap}: Put a 2/2 black Vampire creature token with flying onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
     }
