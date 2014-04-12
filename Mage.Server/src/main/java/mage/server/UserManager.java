@@ -27,8 +27,10 @@
  */
 package mage.server;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
@@ -59,7 +61,9 @@ public class UserManager {
         expireExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
+                logger.debug("Check expired start");
                 checkExpired();
+                logger.debug("Check expired end");
             }
         }, 60, 60, TimeUnit.SECONDS);
     }
@@ -149,7 +153,9 @@ public class UserManager {
     private void checkExpired() {
         Calendar expired = Calendar.getInstance();
         expired.add(Calendar.MINUTE, -3) ;
-        for (User user: users.values()) {
+        List<User> usersToCheck = new ArrayList<>();
+        usersToCheck.addAll(users.values());
+        for (User user: usersToCheck) {
             if (user.isExpired(expired.getTime())) {
                 logger.info(new StringBuilder(user.getName()).append(" session expired userId: ").append(user.getId())
                         .append(" sessionId: ").append(user.getSessionId()));
