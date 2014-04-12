@@ -381,7 +381,7 @@ public class TournamentController {
 
     private void checkPlayersState() {
         for (TournamentPlayer tournamentPlayer: tournament.getPlayers()) {
-            if (!tournamentPlayer.getEliminated()) {
+            if (!tournamentPlayer.getEliminated() && tournamentPlayer.getPlayer().isHuman()) {
                 if (tournamentSessions.containsKey(tournamentPlayer.getPlayer().getId())) {
                     if (tournamentSessions.get(tournamentPlayer.getPlayer().getId()).isKilled()) {
                         tournamentPlayer.setEliminated();
