@@ -45,7 +45,7 @@ import mage.constants.Zone;
 public class NyxbornEidolon extends CardImpl<NyxbornEidolon> {
 
     public NyxbornEidolon(UUID ownerId) {
-        super(ownerId, 76, "Nyxborn Eidolon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}");
+        super(ownerId, 78, "Nyxborn Eidolon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "BNG";
         this.subtype.add("Spirit");
 
