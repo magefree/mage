@@ -53,6 +53,7 @@ public class InterpretTheSigns extends CardImpl<InterpretTheSigns> {
 
         // Scry 3, then reveal the top card of your library. Draw cards equal to that card's converted mana cost.
         this.getSpellAbility().addEffect(new ScryEffect(3));
+        this.getSpellAbility().addEffect(new InterpretTheSignsEffect());
 
     }
 
