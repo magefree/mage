@@ -85,8 +85,8 @@ public abstract class MatchImpl implements Match {
 
     @Override
     public void addPlayer(Player player, Deck deck) {
-        MatchPlayer mPlayer = new MatchPlayer(player, deck);
-        players.add(mPlayer);
+        MatchPlayer matchPlayer = new MatchPlayer(player, deck);
+        players.add(matchPlayer);
     }
 
     @Override
@@ -181,8 +181,12 @@ public abstract class MatchImpl implements Match {
                 game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
                 game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck());
                 // set the priority time left for the match
-                if (matchPlayer.getPriorityTimeLeft() > 0) {
-                    matchPlayer.getPlayer().setPriorityTimeLeft(matchPlayer.getPriorityTimeLeft());
+                if (games.isEmpty()) { // first game full time 
+                       matchPlayer.getPlayer().setPriorityTimeLeft(options.getPriorityTime());
+                } else {
+                    if (matchPlayer.getPriorityTimeLeft() > 0) {
+                        matchPlayer.getPlayer().setPriorityTimeLeft(matchPlayer.getPriorityTimeLeft());
+                    }
                 }
             }
         }
