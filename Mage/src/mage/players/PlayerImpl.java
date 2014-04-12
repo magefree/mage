@@ -532,16 +532,14 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void discardToMax(Game game) {
-        int cardsStart = hand.size();
-        if (cardsStart > this.maxHandSize) {
+        if (hand.size() > this.maxHandSize) {
+            game.informPlayers(new StringBuilder(getName()).append(" discards down to ").append(this.maxHandSize).append(this.maxHandSize == 1?" hand card":" hand cards").toString());
             while (hand.size() > this.maxHandSize) {
                 TargetDiscard target = new TargetDiscard(playerId);
                 target.setTargetName(new StringBuilder(" card to discard (").append(hand.size() - this.maxHandSize).append(" in total)").toString());
                 choose(Outcome.Discard, target, null, game);
                 discard(hand.get(target.getFirstTarget(), game), null, game);
             }
-            int discarded =cardsStart - hand.size();
-            game.informPlayers(new StringBuilder(getName()).append(" discards ").append(discarded).append(discarded == 1?" card":" cards").append(" (cleanup)").toString());
         }
     }
 

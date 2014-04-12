@@ -78,7 +78,7 @@ class EidolonOfTheGreatRevelTriggeredAbility extends TriggeredAbilityImpl<Eidolo
 
 
     public EidolonOfTheGreatRevelTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"));
     }
 
 

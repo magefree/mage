@@ -30,6 +30,7 @@ package mage.sets.mirrodin;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -40,6 +41,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetDiscard;
 
 /**
  *
@@ -88,17 +90,17 @@ class WrenchMindEffect extends OneShotEffect<WrenchMindEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
-            Target target = new TargetCardInHand(new FilterArtifactCard());
-            target.setRequired(true);
-            if (target.canChoose(source.getSourceId(), targetPlayer.getId(), game)
-                    && targetPlayer.chooseUse(outcome, "Discard an artifact?", game)
-                    && targetPlayer.chooseTarget(outcome, target, source, game)) {
-                return targetPlayer.discard(targetPlayer.getHand().get(target.getFirstTarget(), game), source, game);
-            } else {
-                targetPlayer.discard(Math.min(targetPlayer.getHand().size(), 2), source, game);
-            }
-            return true;
+        if (targetPlayer != null && !targetPlayer.getHand().isEmpty()) {
+            TargetDiscard target = new TargetDiscard(targetPlayer.getId());
+            targetPlayer.choose(Outcome.Discard, target, source.getSourceId(), game);
+            Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
+            if (card != null) {
+                targetPlayer.discard(card, source, game);
+                if (!card.getCardType().contains(CardType.ARTIFACT) && !targetPlayer.getHand().isEmpty()) {
+                    targetPlayer.discard(1, source, game);
+                }
+                return true;
+            }            
         }
         return false;
     }
