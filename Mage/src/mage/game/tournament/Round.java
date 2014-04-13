@@ -78,6 +78,9 @@ public class Round {
                 if (!pair.isAlreadyPublished()) {
                     tournament.updateResults();
                     pair.setAlreadyPublished(true);
+                    if (tournament instanceof TournamentSingleElimination) {
+                        pair.eliminatePlayers();
+                    }
                 }
             }
         }

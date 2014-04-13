@@ -113,6 +113,7 @@ public abstract class TournamentSwiss extends TournamentImpl {
                     round.getPlayerByes().add(player1);
                     player1.setState(TournamentPlayerState.WAITING);
                     player1.setStateInfo("Round Bye");
+                    updateResults();
                 }
             }
         }

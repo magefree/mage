@@ -72,13 +72,15 @@ public class TournamentPairing {
     }
 
     public void eliminatePlayers() {
-        MatchPlayer mPlayer1 = match.getPlayer(player1.getPlayer().getId());
-        MatchPlayer mPlayer2 = match.getPlayer(player2.getPlayer().getId());
-        if (mPlayer1.hasQuit() || (!mPlayer2.hasQuit() && mPlayer1.getWins() < match.getWinsNeeded())) {
-            player1.setEliminated();
-        }
-        if (mPlayer2.hasQuit() || (!mPlayer1.hasQuit() && mPlayer2.getWins() < match.getWinsNeeded())) {
-            player2.setEliminated();
+        if (match.isMatchOver()) {
+            MatchPlayer mPlayer1 = match.getPlayer(player1.getPlayer().getId());
+            MatchPlayer mPlayer2 = match.getPlayer(player2.getPlayer().getId());
+            if (mPlayer1.hasQuit() || (!mPlayer2.hasQuit() && mPlayer1.getWins() < match.getWinsNeeded())) {
+                player1.setEliminated();
+            }
+            if (mPlayer2.hasQuit() || (!mPlayer1.hasQuit() && mPlayer2.getWins() < match.getWinsNeeded())) {
+                player2.setEliminated();
+            }
         }
     }
 

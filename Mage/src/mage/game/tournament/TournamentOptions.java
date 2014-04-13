@@ -41,7 +41,7 @@ public class TournamentOptions implements Serializable {
 
     protected String name;
     protected String tournamentType;;
-    protected List<String> playerTypes = new ArrayList<String>();
+    protected List<String> playerTypes = new ArrayList<>();
     protected MatchOptions matchOptions = new MatchOptions("", "Two Player Duel");
     protected LimitedOptions limitedOptions;
     protected boolean watchingAllowed = true;

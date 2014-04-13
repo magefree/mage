@@ -195,6 +195,7 @@ public abstract class TournamentImpl implements Tournament {
             round.getPlayerByes().add(player1);
             player1.setState(TournamentPlayerState.WAITING);
             player1.setStateInfo("Round Bye");
+            updateResults();
         }
         return round;
     }
@@ -244,13 +245,21 @@ public abstract class TournamentImpl implements Tournament {
                     TournamentPlayer tp2 = pair.getPlayer2();
                     MatchPlayer mp1 = match.getPlayer(pair.getPlayer1().getPlayer().getId());
                     MatchPlayer mp2 = match.getPlayer(pair.getPlayer2().getPlayer().getId());
-                    // set player satte
-                    if (round.getRoundNumber() == rounds.size()) {
+                    // set player state if he finished the round
+                    if (round.getRoundNumber() == rounds.size()) { // for elimination getRoundNumber = 0 so never true here
                         if (tp1.getState().equals(TournamentPlayerState.DUELING)) {
-                            tp1.setState(TournamentPlayerState.WAITING);
+                            if (round.getRoundNumber() == getNumberRounds()) {
+                                tp1.setState(TournamentPlayerState.FINISHED);
+                            } else {
+                                tp1.setState(TournamentPlayerState.WAITING);
+                            }
                         }
                         if (tp2.getState().equals(TournamentPlayerState.DUELING)) {
-                            tp2.setState(TournamentPlayerState.WAITING);
+                            if (round.getRoundNumber() == getNumberRounds()) {
+                                tp2.setState(TournamentPlayerState.FINISHED);
+                            } else {
+                                tp2.setState(TournamentPlayerState.WAITING);
+                            }
                         }
                     }
                     // Add round result
