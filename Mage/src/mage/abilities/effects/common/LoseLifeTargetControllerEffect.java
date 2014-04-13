@@ -31,6 +31,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
@@ -70,6 +71,9 @@ public class LoseLifeTargetControllerEffect extends OneShotEffect<LoseLifeTarget
             MageObject obj = game.getObject(targetPointer.getFirst(game, source));
             if ( obj instanceof Card ) {
                 targetCard = (Card)obj;
+            } else {
+                // if target is a countered spell
+                targetCard = game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
             }
         }
 
