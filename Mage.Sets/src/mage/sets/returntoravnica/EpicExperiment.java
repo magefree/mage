@@ -28,15 +28,14 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -46,7 +45,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
-
 
 /**
  *
@@ -79,9 +77,10 @@ public class EpicExperiment extends CardImpl<EpicExperiment> {
 
 class EpicExperimentEffect extends OneShotEffect<EpicExperimentEffect> {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filterStatic = new FilterCard();
+
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT),
+        filterStatic.add(Predicates.or(new CardTypePredicate(CardType.INSTANT),
                                  new CardTypePredicate(CardType.SORCERY)));
     }
 
@@ -96,28 +95,27 @@ class EpicExperimentEffect extends OneShotEffect<EpicExperimentEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             // move cards from library to exile
             for (int i = 0; i < source.getManaCostsToPay().getX(); i++) {
-                if (player != null && player.getLibrary().size() > 0) {
-                    Card topCard = player.getLibrary().getFromTop(game);
-                    topCard.moveToExile(source.getSourceId(), "Cards exiled by Epic Experiment", source.getId(), game);
+                if (controller.getLibrary().size() > 0) {
+                    Card topCard = controller.getLibrary().getFromTop(game);
+                    controller.moveCardToExileWithInfo(topCard, source.getSourceId(), "Cards exiled by Epic Experiment",  source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
             // cast the possible cards without paying the mana
             ExileZone epicExperimentExileZone = game.getExile().getExileZone(source.getSourceId());
+            FilterCard filter = filterStatic.copy();
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
             filter.setMessage("instant and sorcery cards with converted mana cost "+ source.getManaCostsToPay().getX() +" or less");
-            while (player != null && epicExperimentExileZone != null && epicExperimentExileZone.count(filter, game) > 0
-                    && player.chooseUse(Outcome.PlayForFree, "Cast cards exiled with Epic Experiment without paying its mana cost?", game)) {
+            while (epicExperimentExileZone != null && epicExperimentExileZone.count(filter, game) > 0
+                    && controller.chooseUse(Outcome.PlayForFree, "Cast cards exiled with Epic Experiment without paying its mana cost?", game)) {
                 TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
-                while (epicExperimentExileZone.count(filter, game) > 0 && player.choose(Outcome.PlayForFree, epicExperimentExileZone, target, game)) {
+                while (epicExperimentExileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, epicExperimentExileZone, target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            
-                            if (player.cast(card.getSpellAbility(), game, true))
+                        if (card != null) {                            
+                            if (controller.cast(card.getSpellAbility(), game, true))
                             {
                                 game.getExile().removeCard(card, game);
                             }
@@ -125,17 +123,12 @@ class EpicExperimentEffect extends OneShotEffect<EpicExperimentEffect> {
                         target.clearChosen();
                 }
             }
-            // move not casted cards to graveyard
-            UUID exileId = source.getSourceId();
-            ExileZone exile = game.getExile().getExileZone(exileId);
+            // move cards not cast to graveyard
+            ExileZone exile = game.getExile().getExileZone(source.getSourceId());
             if (exile != null) {
-                exile = exile.copy();
-                for (UUID cardId : exile) {
-                    Card card = game.getCard(cardId);
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
+                for (Card card : exile.getCards(game)) {
+                    controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.EXILED);
                 }
-                game.getExile().getExileZone(exileId).clear();
-
             }
             return true;
         }
