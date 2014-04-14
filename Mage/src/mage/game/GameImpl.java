@@ -491,8 +491,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public int bookmarkState() {
         if (!simulation) {
             saveState(true);
-            if (logger.isDebugEnabled()) {
-                logger.debug("Bookmarking state: " + gameStates.getSize());
+            if (logger.isTraceEnabled()) {
+                logger.trace("Bookmarking state: " + gameStates.getSize());
             }
             savedStates.push(gameStates.getSize() - 1);
             return savedStates.size();
