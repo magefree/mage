@@ -69,7 +69,7 @@ public class SpellheartChimera extends CardImpl<SpellheartChimera> {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Spellheart Chimera's power is equal to the number of instant and sorcery cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellheartChimeraEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellheartChimeraEffect()));
     }
 
     public SpellheartChimera(final SpellheartChimera card) {
@@ -87,7 +87,7 @@ class SpellheartChimeraEffect extends ContinuousEffectImpl<SpellheartChimeraEffe
     private static final FilterCard filter = new FilterInstantOrSorceryCard();
 
     public SpellheartChimeraEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         staticText = "{this}'s power is equal to the number of instant and sorcery cards in your graveyard";
     }
 
