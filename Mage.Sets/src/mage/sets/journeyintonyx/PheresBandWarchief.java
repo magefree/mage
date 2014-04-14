@@ -60,7 +60,7 @@ public class PheresBandWarchief extends CardImpl<PheresBandWarchief> {
     }
 
     public PheresBandWarchief(UUID ownerId) {
-        super(ownerId, 135, "Pheres Band Warchief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        super(ownerId, 135, "Pheres-Band Warchief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Centaur");
         this.subtype.add("Warrior");

@@ -25,45 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.sets.journeyintonyx;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.sets.bornofthegods.TokenAndCounters.GoldToken;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.TargetController;
 
 /**
  *
  * @author LevelX2
  */
-public class Gild extends CardImpl<Gild> {
+public class MasterOfTheFeast extends CardImpl<MasterOfTheFeast> {
 
-    public Gild(UUID ownerId) {
-        super(ownerId, 73, "Gild", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "BNG";
+    public MasterOfTheFeast(UUID ownerId) {
+        super(ownerId, 75, "Master of the Feast", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{B}");
+        this.expansionSetCode = "JOU";
+        this.subtype.add("Demon");
 
         this.color.setBlack(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        // Exile target creature.
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
-        // Put a colorless artifact token named Gold onto the battlefield. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
-        Effect effect = new CreateTokenEffect(new GoldToken());
-        effect.setText("Put a colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
-        this.getSpellAbility().addEffect(effect);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // At the beginning of your upkeep, each opponent draws a card.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardAllEffect(1, TargetController.OPPONENT), TargetController.YOU, false));
     }
 
-    public Gild(final Gild card) {
+    public MasterOfTheFeast(final MasterOfTheFeast card) {
         super(card);
     }
 
     @Override
-    public Gild copy() {
-        return new Gild(this);
+    public MasterOfTheFeast copy() {
+        return new MasterOfTheFeast(this);
     }
 }

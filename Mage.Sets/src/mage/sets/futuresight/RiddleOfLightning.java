@@ -25,45 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.sets.bornofthegods.TokenAndCounters.GoldToken;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class Gild extends CardImpl<Gild> {
+public class RiddleOfLightning extends mage.sets.journeyintonyx.RiddleOfLightning {
 
-    public Gild(UUID ownerId) {
-        super(ownerId, 73, "Gild", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "BNG";
-
-        this.color.setBlack(true);
-
-        // Exile target creature.
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
-        // Put a colorless artifact token named Gold onto the battlefield. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
-        Effect effect = new CreateTokenEffect(new GoldToken());
-        effect.setText("Put a colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
-        this.getSpellAbility().addEffect(effect);
+    public RiddleOfLightning(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 105;
+        this.expansionSetCode = "FUT";
+        this.rarity = Rarity.COMMON;
     }
 
-    public Gild(final Gild card) {
+    public RiddleOfLightning(final RiddleOfLightning card) {
         super(card);
     }
 
     @Override
-    public Gild copy() {
-        return new Gild(this);
+    public RiddleOfLightning copy() {
+        return new RiddleOfLightning(this);
     }
 }

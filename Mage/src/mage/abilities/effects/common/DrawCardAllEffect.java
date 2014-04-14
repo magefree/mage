@@ -34,6 +34,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -44,22 +45,32 @@ import mage.util.CardUtil;
  */
 public class DrawCardAllEffect extends OneShotEffect<DrawCardAllEffect> {
 
+    private TargetController targetController;
     protected DynamicValue amount;
 
     public DrawCardAllEffect(int amount) {
-        this(new StaticValue(amount));
-
+        this(amount, TargetController.ANY);
+    }
+    
+    public DrawCardAllEffect(DynamicValue amount) {
+        this(amount, TargetController.ANY);
     }
 
-    public DrawCardAllEffect(DynamicValue amount) {
+    public DrawCardAllEffect(int amount, TargetController targetController) {
+        this(new StaticValue(amount), targetController);
+    }
+
+    public DrawCardAllEffect(DynamicValue amount, TargetController targetController) {
         super(Outcome.DrawCard);
         this.amount = amount;
-        staticText = "Each player draws " + CardUtil.numberToText(amount.toString()) + " card" + (amount.toString().equals("1")?"":"s");
+        this.targetController = targetController;
+        staticText = setText();
     }
 
     public DrawCardAllEffect(final DrawCardAllEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.targetController = effect.targetController;
     }
 
     @Override
@@ -69,15 +80,44 @@ public class DrawCardAllEffect extends OneShotEffect<DrawCardAllEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
         Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId: sourcePlayer.getInRange()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.drawCards(amount.calculate(game, source), game);
-            }
+        switch(targetController) {
+            case ANY:
+                for (UUID playerId: sourcePlayer.getInRange()) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.drawCards(amount.calculate(game, source), game);
+                    }
+                }
+                break;
+            case OPPONENT:
+                for (UUID playerId: game.getOpponents(sourcePlayer.getId())) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.drawCards(amount.calculate(game, source), game);
+                    }
+                }                
+                break;
         }
         return true;
     }
 
+    private String setText() {
+        StringBuilder sb = new StringBuilder("Each ");
+        switch(targetController) {
+            case ANY:
+                sb.append("player");
+                break;
+            case OPPONENT:
+                sb.append("opponent");
+                break;
+            default:
+                throw new UnsupportedOperationException("Not supported value for targetController");
+        }
+        sb.append(" draws ");
+        sb.append(CardUtil.numberToText(amount.toString(),"a"));
+        sb.append(" card");
+        sb.append(amount.toString().equals("1")?"":"s");
+        return sb.toString();
+    }
 }

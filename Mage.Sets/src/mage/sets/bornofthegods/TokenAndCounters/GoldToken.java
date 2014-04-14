@@ -25,45 +25,32 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
 
-import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.cards.CardImpl;
+package mage.sets.bornofthegods.TokenAndCounters;
+
+import mage.abilities.Ability;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.mana.SimpleManaAbility;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.sets.bornofthegods.TokenAndCounters.GoldToken;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.Zone;
+import mage.game.permanent.token.Token;
 
 /**
  *
  * @author LevelX2
  */
-public class Gild extends CardImpl<Gild> {
+public class GoldToken extends Token {
 
-    public Gild(UUID ownerId) {
-        super(ownerId, 73, "Gild", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "BNG";
+    public GoldToken() {
+        super("Gold", "colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
+        this.setOriginalExpansionSetCode("BNG");
+        cardType.add(CardType.ARTIFACT);
+        subtype.add("Gold");
 
-        this.color.setBlack(true);
-
-        // Exile target creature.
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
-        // Put a colorless artifact token named Gold onto the battlefield. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
-        Effect effect = new CreateTokenEffect(new GoldToken());
-        effect.setText("Put a colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
-        this.getSpellAbility().addEffect(effect);
-    }
-
-    public Gild(final Gild card) {
-        super(card);
-    }
-
-    @Override
-    public Gild copy() {
-        return new Gild(this);
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost());
+        ability.addChoice(new ChoiceColor());
+        this.addAbility(ability);
     }
 }

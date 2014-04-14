@@ -25,45 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.sets.journeyintonyx;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.sets.bornofthegods.TokenAndCounters.GoldToken;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.TargetController;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class Gild extends CardImpl<Gild> {
+public class RiptideChimera extends CardImpl<RiptideChimera> {
 
-    public Gild(UUID ownerId) {
-        super(ownerId, 73, "Gild", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "BNG";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchanment you control");
+    
+    static {
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+    }
+    
+    
+    public RiptideChimera(UUID ownerId) {
+        super(ownerId, 48, "Riptide Chimera", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "JOU";
+        this.subtype.add("Chimera");
 
-        this.color.setBlack(true);
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
 
-        // Exile target creature.
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
-        // Put a colorless artifact token named Gold onto the battlefield. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
-        Effect effect = new CreateTokenEffect(new GoldToken());
-        effect.setText("Put a colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
-        this.getSpellAbility().addEffect(effect);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // At the beginning of your upkeep, return an enchanment you control to its owner's hand.
+        Effect effect = new ReturnToHandChosenControlledPermanentEffect(filter, 1);
+        effect.setText("return an enchanment you control to its owner's hand");
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
     }
 
-    public Gild(final Gild card) {
+    public RiptideChimera(final RiptideChimera card) {
         super(card);
     }
 
     @Override
-    public Gild copy() {
-        return new Gild(this);
+    public RiptideChimera copy() {
+        return new RiptideChimera(this);
     }
 }

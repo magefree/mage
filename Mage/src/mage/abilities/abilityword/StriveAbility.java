@@ -87,12 +87,17 @@ class StriveCostIncreasementEffect extends CostModificationEffectImpl<StriveCost
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Target target = abilityToModify.getTargets().get(0);
-        int additionalTargets = target.getTargets().size() - 1;
-        for (int i = 0; i < additionalTargets; i++) {
-            abilityToModify.getManaCostsToPay().add(striveCosts.copy());
+        // Target target = abilityToModify.getTargets().get(0);
+        for (Target target : abilityToModify.getTargets()) {
+            if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
+                int additionalTargets = target.getTargets().size() - 1;
+                for (int i = 0; i < additionalTargets; i++) {
+                    abilityToModify.getManaCostsToPay().add(striveCosts.copy());
+                }
+                return true;
+            }
         }
-        return true;
+        return false;
     }
 
     @Override

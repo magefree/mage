@@ -45,8 +45,6 @@ public class ManaConfluence extends CardImpl<ManaConfluence> {
         super(ownerId, 163, "Mana Confluence", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
-
         // {T}, Pay 1 life: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new PayLifeCost(1));
