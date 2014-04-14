@@ -109,9 +109,9 @@ public class MageServerImpl implements MageServer {
                 LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, userName, version.toString(), Main.getVersion().toString(), sessionId);
                 throw new MageVersionException(version, Main.getVersion());
             }
-            logger.info(new StringBuilder("RegisterClient - userName: ").append(userName).append(" sessionId = ").append(sessionId));
+            logger.debug(new StringBuilder("RegisterClient - userName: ").append(userName).append(" sessionId = ").append(sessionId));
             return SessionManager.getInstance().registerUser(sessionId, userName);
-        } catch (Exception ex) {
+        } catch (MageException ex) {
             if (ex instanceof MageVersionException) {
                 throw (MageVersionException)ex;
             }
@@ -901,7 +901,7 @@ public class MageServerImpl implements MageServer {
         return executeWithResult("getUsers", sessionId, new ActionWithNullNegativeResult<List<UserView>>() {
             @Override
             public List<UserView> execute() throws MageException {
-                List<UserView> users = new ArrayList<UserView>();
+                List<UserView> users = new ArrayList<>();
                 for (User user : UserManager.getInstance().getUsers()) {
                     users.add(new UserView(user.getName(), "", user.getSessionId(), user.getConnectionTime()));
                 }
@@ -1037,7 +1037,7 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public List<ExpansionInfo> getMissingExpansionData(List<String> codes) {
-        List<ExpansionInfo> result = new ArrayList<ExpansionInfo>();
+        List<ExpansionInfo> result = new ArrayList<>();
         for (ExpansionInfo expansionInfo : ExpansionRepository.instance.getAll()) {
             if (!codes.contains(expansionInfo.getCode())) {
                 result .add(expansionInfo);

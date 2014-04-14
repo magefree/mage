@@ -216,7 +216,9 @@ public class SessionImpl implements Session {
                 UserDataView userDataView = new UserDataView(connection.getAvatarId(), connection.isShowAbilityPickerForced());
                 // for backward compatibility. don't remove twice call - first one does nothing but for version checking
                 registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
-                server.setUserData(connection.getUsername(), sessionId, userDataView);
+                if (registerResult) {
+                    server.setUserData(connection.getUsername(), sessionId, userDataView);
+                }
             } else {
                 registerResult = server.registerAdmin(connection.getPassword(), sessionId, client.getVersion());
             }
@@ -229,7 +231,7 @@ public class SessionImpl implements Session {
                 return true;
             }
             disconnect(false);
-            client.showMessage("Unable to connect to server.");
+            // client.showMessage("Unable to connect to server.");
         } catch (MalformedURLException ex) {
             logger.fatal("", ex);
             client.showMessage("Unable to connect to server. "  + ex.getMessage());

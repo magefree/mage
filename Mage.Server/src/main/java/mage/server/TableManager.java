@@ -209,9 +209,11 @@ public class TableManager {
     public void leaveTable(UUID userId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             // table not started yet and user is the owner, remove the table
-            if (isTableOwner(tableId, userId)
-                    && (getTable(tableId).getState().equals(TableState.WAITING)
-                    || getTable(tableId).getState().equals(TableState.STARTING))) {
+            Table table = getTable(tableId);
+            if (table != null
+                    && isTableOwner(tableId, userId)
+                    && (table.getState().equals(TableState.WAITING)
+                    || table.getState().equals(TableState.STARTING))) {
                 removeTable(tableId);
 
             } else {

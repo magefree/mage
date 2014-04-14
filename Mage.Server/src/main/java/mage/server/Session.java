@@ -28,7 +28,10 @@
 
 package mage.server;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,7 +40,6 @@ import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.server.util.ConfigSettings;
-import mage.view.ChatMessage;
 import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
@@ -68,21 +70,29 @@ public class Session {
         this.timeConnected = new Date();
     }
 
-    public void registerUser(String userName) throws MageException {
+    public String registerUser(String userName) throws MageException {
+        String returnMessage = registerUserHandling(userName);
+        if (returnMessage != null) {
+            sendErrorMessageToClient(returnMessage);
+        }
+        return returnMessage;
+    }
+
+    public String registerUserHandling(String userName) throws MageException {
         this.isAdmin = false;
         if (userName.equals("Admin")) {
-            throw new MageException("User name already in use");
+            return "User name Admin already in use";
         }
         if (userName.length() > ConfigSettings.getInstance().getMaxUserNameLength()) {
-            throw new MageException(new StringBuilder("User name may not be longer than ").append(ConfigSettings.getInstance().getMaxUserNameLength()).append(" characters").toString());
+            return new StringBuilder("User name may not be longer than ").append(ConfigSettings.getInstance().getMaxUserNameLength()).append(" characters").toString();
         }
         if (userName.length() < ConfigSettings.getInstance().getMinUserNameLength()) {
-            throw new MageException(new StringBuilder("User name may not be shorter than ").append(ConfigSettings.getInstance().getMinUserNameLength()).append(" characters").toString());
+            return new StringBuilder("User name may not be shorter than ").append(ConfigSettings.getInstance().getMinUserNameLength()).append(" characters").toString();
         }
         Pattern p = Pattern.compile(ConfigSettings.getInstance().getUserNamePattern(), Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(userName);
         if (m.find()) {
-           throw new MageException("User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9");
+            return new StringBuilder("User name '").append(userName).append("' includes not allowed characters: use a-z, A-Z and 0-9").toString();
         }
         User user = UserManager.getInstance().createUser(userName, host);
         if (user == null) {  // user already exists
@@ -93,20 +103,20 @@ public class Session {
                     // ChatManager.getInstance().broadcast([CHAT ID TABLES], "has reconnected", ChatMessage.MessageColor.GREEN);
                     logger.info("Reconnecting session for " + userName);
                 } else {
-                    //throw new MageException("This machine is already connected");
+                        //throw new MageException("This machine is already connected");
                     //disconnect previous one
                     logger.info("Disconnecting another user instance: " + userName);
                     UserManager.getInstance().disconnect(user.getId(), User.DisconnectReason.ConnectingOtherInstance);
                 }
-            }
-            else {
-                throw new MageException("User name " + userName + " already in use");
+            } else {
+                return new StringBuilder("User name ").append(userName).append(" already in use (or your IP address changed)").toString();
             }
         }
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
-            throw new MageException("Error connecting " + userName);
+            return new StringBuilder("Error connecting ").append(userName).toString();
         }
         this.userId = user.getId();
+        return null;
     }
 
     public void registerAdmin() {
@@ -231,5 +241,12 @@ public class Session {
 
     void setHost(String hostAddress) {
         this.host = hostAddress;
+    }
+
+    void sendErrorMessageToClient(String message) {
+        List<String> messageData = new LinkedList<>();
+        messageData.add("Error while connecting to server");
+        messageData.add(message);
+        fireCallback(new ClientCallback("showUserMessage", null, messageData));
     }
 }

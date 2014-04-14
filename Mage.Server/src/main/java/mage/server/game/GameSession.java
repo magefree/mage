@@ -233,7 +233,7 @@ public class GameSession extends GameWatcher {
         gameView.setHand(new SimpleCardsView(player.getHand().getCards(game)));
 
         if (player.getPlayersUnderYourControl().size() > 0) {
-            Map<String, SimpleCardsView> handCards = new HashMap<String, SimpleCardsView>();
+            Map<String, SimpleCardsView> handCards = new HashMap<>();
             for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {
                 Player opponent = game.getPlayer(controlledPlayerId);
                 handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game)));
@@ -243,7 +243,7 @@ public class GameSession extends GameWatcher {
 
         //TODO: should player who controls another player's turn be able to look at all these cards?
 
-        List<LookedAtView> list = new ArrayList<LookedAtView>();
+        List<LookedAtView> list = new ArrayList<>();
         for (Entry<String, Cards> entry : game.getState().getLookedAt(playerId).entrySet()) {
             list.add(new LookedAtView(entry.getKey(), entry.getValue(), game));
         }
@@ -265,7 +265,9 @@ public class GameSession extends GameWatcher {
     }
 
     public void kill() {
-        game.quit(playerId);
+        if (game != null) {
+            game.quit(playerId);
+        }
     }
 
     public void setUserData(UserData userData) {

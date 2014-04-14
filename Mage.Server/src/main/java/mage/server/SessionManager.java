@@ -66,13 +66,17 @@ public class SessionManager {
     public boolean registerUser(String sessionId, String userName) throws MageException {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            session.registerUser(userName);
+            String returnMessage =  session.registerUser(userName);
+            if (returnMessage == null) {
             LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
             logger.info(new StringBuilder("User: ").append(userName)
                     .append(" userId: ").append(session.getUserId())
                     .append(" connected from: ").append(session.getHost())
                     .append(" sessionId: ").append(sessionId));
             return true;
+            } else {
+                logger.info(new StringBuilder("User not registered - ").append(returnMessage));
+            }
         }
         return false;
     }
