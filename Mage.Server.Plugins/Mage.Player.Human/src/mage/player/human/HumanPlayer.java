@@ -47,6 +47,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -864,7 +865,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 return true;
             }
             for(Cost cost : ability.getCosts() ) {
-                if (!(cost instanceof TapSourceCost)) {
+                if (!(cost instanceof TapSourceCost) && !(cost instanceof PayLifeCost)) {
                     // if cost exists that have to be paid, pick ability dialog can be suppressed
                     return true;
                 }
