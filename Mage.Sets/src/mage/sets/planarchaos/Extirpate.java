@@ -125,7 +125,7 @@ class ExtirpateEffect extends OneShotEffect<ExtirpateEffect> {
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getGraveyard().get(targetId, game);
                             if (targetCard != null) {
-                                player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.GRAVEYARD);
+                                player.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.GRAVEYARD);
                             }
                         }
                     }
@@ -141,7 +141,7 @@ class ExtirpateEffect extends OneShotEffect<ExtirpateEffect> {
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getHand().get(targetId, game);
                             if (targetCard != null) {
-                                player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.HAND);
+                                player.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.HAND);
                             }
                         }
                     }
@@ -159,7 +159,7 @@ class ExtirpateEffect extends OneShotEffect<ExtirpateEffect> {
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getLibrary().remove(targetId, game);
                             if (targetCard != null) {
-                                player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
+                                player.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.LIBRARY);
                             }
                         }
                     }
