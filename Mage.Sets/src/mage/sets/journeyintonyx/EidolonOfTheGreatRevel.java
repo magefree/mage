@@ -36,10 +36,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
@@ -50,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
 public class EidolonOfTheGreatRevel extends CardImpl<EidolonOfTheGreatRevel> {
 
     public EidolonOfTheGreatRevel(UUID ownerId) {
-        super(ownerId, 999, "Eidolon of the Great Revel", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{R}{R}");
+        super(ownerId, 9992, "Eidolon of the Great Revel", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{R}{R}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Spirit");
 

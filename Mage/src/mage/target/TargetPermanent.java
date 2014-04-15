@@ -182,7 +182,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
          for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
             if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
@@ -194,7 +194,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
             if (!targets.containsKey(permanent.getId())) {
                 possibleTargets.add(permanent.getId());

@@ -178,16 +178,19 @@ public class CardUtil {
      * @param reduceCount
      */
     private static void adjustCost(Ability ability, int reduceCount) {
+        int restToReduce = reduceCount;
         ManaCosts<ManaCost> previousCost = ability.getManaCostsToPay();
-        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
+        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
         boolean updated = false;
         for (ManaCost manaCost : previousCost) {
             Mana mana = manaCost.getOptions().get(0);
             int colorless = mana != null ? mana.getColorless() : 0;
             if (!updated && colorless > 0) {
-                if ((colorless - reduceCount) > 0) {
-                    int newColorless = colorless - reduceCount;
+                if ((colorless - restToReduce) > 0) {
+                    int newColorless = colorless - restToReduce;
                     adjustedCost.add(new GenericManaCost(newColorless));
+                } else {
+                    restToReduce =- colorless;
                 }
                 updated = true;
             } else {

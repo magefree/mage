@@ -35,6 +35,7 @@ import mage.target.TargetPermanent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class TargetControlledPermanent<T extends TargetControlledPermanent<T>> extends TargetPermanent<TargetControlledPermanent<T>> {
 

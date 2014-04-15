@@ -67,7 +67,7 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect<CreateDel
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility delayedAbility = (DelayedTriggeredAbility) ability.copy();
+        DelayedTriggeredAbility delayedAbility = ability.copy();
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         if (this.copyTargets) {
@@ -82,6 +82,9 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect<CreateDel
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()){
+            return staticText;
+        }
         return ability.getRule();
     }
 

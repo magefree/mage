@@ -45,16 +45,23 @@ import mage.game.permanent.Permanent;
 public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeControlTargetEffect> {
  
     private String rule;
-    private Boolean withSource;
-    private Map<UUID, UUID> lockedControllers;
+    private boolean withSource;
+    private boolean withSecondTarget;
+    private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
+    private Map<UUID, UUID> lockedControllers = new HashMap<>();
  
     public ExchangeControlTargetEffect(Duration duration, String rule) {
         this(duration, rule, false);
     }
  
-    public ExchangeControlTargetEffect(Duration duration, String rule, Boolean withSource) {
+    public ExchangeControlTargetEffect(Duration duration, String rule, boolean withSource) {
+        this(duration, rule, withSource, false);
+    }
+    
+    public ExchangeControlTargetEffect(Duration duration, String rule, boolean withSource, boolean withSecondTarget) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.withSource = withSource;
+        this.withSecondTarget = withSecondTarget;
         this.rule = rule;
     }
  
@@ -62,7 +69,9 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
         super(effect);
         this.rule = effect.rule;
         this.withSource = effect.withSource;
+        this.withSecondTarget = effect.withSecondTarget;
         this.lockedControllers = effect.lockedControllers;
+        this.zoneChangeCounter = effect.zoneChangeCounter;
     }
  
     @Override
@@ -72,91 +81,70 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
  
     @Override
     public boolean isInactive(Ability source, Game game) {
-        // if there are no more creatures that are effected, the effect can be removed
-        return this.lockedControllers != null && this.lockedControllers.size() > 0;
+       return isDiscarded();
     }
  
     @Override
     public void init(Ability source, Game game) {
-        Set<UUID> controllers = new HashSet<UUID>();
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null) {
-                controllers.add(permanent.getControllerId());
-            }
-        }
+        Permanent permanent1 = null;
+        Permanent permanent2 = null;
+        
         if (withSource) {
-            controllers.add(source.getControllerId());
-        }
-        // exchange works only for two different controllers
-        if (controllers.size() != 2) {
-            // discard effect
-            this.discarded = true;
-            return;
-        }
- 
-        this.lockedControllers = new HashMap<UUID, UUID>();
- 
-        Iterator<UUID> it = controllers.iterator();
-        UUID firstController = it.next();
-        UUID secondController = it.next();
- 
-        if (withSource) {
-            Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (targetPermanent != null && sourcePermanent != null) {
-                    this.lockedControllers.put(targetPermanent.getId(), sourcePermanent.getControllerId());
-                    this.lockedControllers.put(sourcePermanent.getId(), targetPermanent.getControllerId());
-            }
-        }
-        else {
+            permanent1 = game.getPermanent(targetPointer.getFirst(game, source));
+            permanent2 = game.getPermanent(source.getSourceId());
+        } else {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
-                Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null) {
-                    this.lockedControllers.put(permanent.getId(), permanent.getControllerId().equals(firstController) ? secondController : firstController);
+                if (permanent1 == null) {
+                    permanent1 = game.getPermanent(permanentId);
+                }
+                if (permanent2 == null) {
+                    permanent2 = game.getPermanent(permanentId);
                 }
             }
+            if (withSecondTarget) {
+                UUID uuid = source.getTargets().get(1).getFirstTarget();
+                permanent2 = game.getPermanent(uuid);
+            }
+        }
+        if (permanent1 != null && permanent2 != null) {
+            // exchange works only for two different controllers
+            if (permanent1.getControllerId().equals(permanent2.getControllerId())) {
+                // discard effect if controller of both permanents is the same
+                discard();
+                return;
+            }
+            this.lockedControllers.put(permanent1.getId(), permanent2.getControllerId());
+            this.zoneChangeCounter.put(permanent1.getId(), permanent1.getZoneChangeCounter());
+            this.lockedControllers.put(permanent2.getId(), permanent1.getControllerId());
+            this.zoneChangeCounter.put(permanent2.getId(), permanent2.getZoneChangeCounter());            
+        } else {
+            // discard if there are less than 2 permanents
+            discard();
         }
     }
  
     @Override
     public boolean apply(Game game, Ability source) {
-        int countChangeControl = 0;
-        Map<UUID, UUID> remainingLockedControllers = new HashMap<UUID, UUID>();
-        if (this.lockedControllers != null) {
-            for (UUID permanentId : targetPointer.getTargets(game, source)) {
-                Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null) {
-                    UUID controllerId = this.lockedControllers.get(permanent.getId());
-                    if (controllerId != null) {
-                        if(permanent.changeControllerId(controllerId, game)) {
-                            remainingLockedControllers.put(permanentId, controllerId);
-                            ++countChangeControl;
-                        }
-                    }
-                }
+        Set<UUID> toDelete = new HashSet<>();
+        for (Map.Entry<UUID, Integer> entry: zoneChangeCounter.entrySet()) {
+            Permanent permanent = game.getPermanent(entry.getKey());
+            if (permanent == null || permanent.getZoneChangeCounter() != entry.getValue()) {
+                // controll effect cease if the same permanent is no longer on the battlefield
+                toDelete.add(entry.getKey());
+                continue;
             }
-            if (withSource) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    UUID controllerId = this.lockedControllers.get(permanent.getId());
-                    if (controllerId != null) {
-                        if (permanent.changeControllerId(controllerId, game)) {
-                            remainingLockedControllers.put(source.getSourceId(), controllerId);
-                            ++countChangeControl;
-                        }
-                    }
-                }
+            permanent.changeControllerId(lockedControllers.get(permanent.getId()), game);
+        }
+        if (!toDelete.isEmpty()) {
+            for(UUID uuid: toDelete) {
+                zoneChangeCounter.remove(uuid);            
+            }
+            if (zoneChangeCounter.isEmpty()) {
+                discard();
+                return false;
             }
         }
-        // if the permanent is not existent (card in hand or graveyard) the control changing effect has to end
-        // else a previous controlled card that will be enter the battlefield again will be immediately be affected
-        this.lockedControllers = remainingLockedControllers;
-        if (countChangeControl > 0) {
-            return true;
-        }
-        return false;
- 
+        return true;
     }
  
     @Override

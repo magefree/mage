@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SpiteOfMogis extends CardImpl<SpiteOfMogis> {
 
     public SpiteOfMogis(UUID ownerId) {
-        super(ownerId, 999, "Spite of Mogis", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
+        super(ownerId, 113, "Spite of Mogis", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "JOU";
 
         this.color.setRed(true);

@@ -43,7 +43,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class ForgebornOreads extends CardImpl<ForgebornOreads> {
 
     public ForgebornOreads(UUID ownerId) {
-        super(ownerId, 999, "Forgeborn Oreads", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{R}{R}");
+        super(ownerId, 98, "Forgeborn Oreads", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Nymph");
 

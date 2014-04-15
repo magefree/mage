@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SilenceTheBelievers extends CardImpl<SilenceTheBelievers> {
 
     public SilenceTheBelievers(UUID ownerId) {
-        super(ownerId, 999, "Silence the Believers", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
+        super(ownerId, 82, "Silence the Believers", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
         this.expansionSetCode = "JOU";
 
         this.color.setBlack(true);
