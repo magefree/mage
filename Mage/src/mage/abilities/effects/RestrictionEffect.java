@@ -43,7 +43,11 @@ import mage.game.permanent.Permanent;
 public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends ContinuousEffectImpl<T> {
 
     public RestrictionEffect(Duration duration) {
-        super(duration, Outcome.Detriment);
+        this(duration, Outcome.Detriment);
+    }
+
+    public RestrictionEffect(Duration duration, Outcome outcome) {
+        super(duration, outcome);
         this.effectType = EffectType.RESTRICTION;        
     }
 

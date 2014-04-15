@@ -33,6 +33,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ScryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -86,9 +87,11 @@ class InterpretTheSignsEffect extends OneShotEffect<InterpretTheSignsEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (controller != null && sourceCard != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
+                controller.revealCards(sourceCard.getName(), new CardsImpl(card), game);
                 controller.drawCards(card.getManaCost().convertedManaCost(), game);
             }
             return true;

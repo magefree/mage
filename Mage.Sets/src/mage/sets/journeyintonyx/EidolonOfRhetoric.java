@@ -27,6 +27,8 @@
  */
 package mage.sets.journeyintonyx;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,6 +44,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
@@ -78,8 +81,10 @@ public class EidolonOfRhetoric extends CardImpl<EidolonOfRhetoric> {
 
 class EidolonOfRhetoricWatcher extends WatcherImpl<EidolonOfRhetoricWatcher> {
 
+    private final Set<UUID> players = new HashSet<>();
+
     public EidolonOfRhetoricWatcher() {
-        super("SpellCast", WatcherScope.PLAYER);
+        super("SpellCast", WatcherScope.GAME);
     }
 
     public EidolonOfRhetoricWatcher(final EidolonOfRhetoricWatcher watcher) {
@@ -93,20 +98,24 @@ class EidolonOfRhetoricWatcher extends WatcherImpl<EidolonOfRhetoricWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) {//no need to check - condition has already occured
-            return;
-        }
         if (event.getType() == GameEvent.EventType.SPELL_CAST ) {
-            Permanent enchantment = game.getPermanent(this.sourceId);
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                Player player = game.getPlayer(enchantment.getAttachedTo());
-                if (player != null && event.getPlayerId().equals(player.getId())) {
-                    condition = true;
-                }
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null) {
+                players.add(spell.getControllerId());
             }
         }
     }
 
+    @Override
+    public void reset() {
+        super.reset();
+        players.clear();
+    }
+
+
+    public boolean playerCastSpellThisTurn(UUID playerId) {
+        return players.contains(playerId);
+    }
 }
 
 class EidolonOfRhetoricEffect extends ReplacementEffectImpl<EidolonOfRhetoricEffect> {
@@ -138,8 +147,8 @@ class EidolonOfRhetoricEffect extends ReplacementEffectImpl<EidolonOfRhetoricEff
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            Watcher watcher = game.getState().getWatchers().get("SpellCast", event.getPlayerId());
-            if (watcher != null && watcher.conditionMet()) {
+            EidolonOfRhetoricWatcher watcher = (EidolonOfRhetoricWatcher) game.getState().getWatchers().get("SpellCast", event.getPlayerId());
+            if (watcher != null && watcher.playerCastSpellThisTurn(event.getPlayerId())) {
                 return true;
             }
         }

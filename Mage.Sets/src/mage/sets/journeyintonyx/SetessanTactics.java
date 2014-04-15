@@ -28,6 +28,7 @@
 package mage.sets.journeyintonyx;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,6 +41,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,6 +50,12 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public class SetessanTactics extends CardImpl<SetessanTactics> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public SetessanTactics(UUID ownerId) {
         super(ownerId, 140, "Setessan Tactics", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}");
@@ -61,7 +70,9 @@ public class SetessanTactics extends CardImpl<SetessanTactics> {
         Effect effect = new BoostTargetEffect(1,1, Duration.EndOfTurn);
         effect.setText("Until end of turn, any number of target creatures each get +1/+1");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FightTargetSourceEffect(), new TapSourceCost()), Duration.EndOfTurn,
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FightTargetSourceEffect(), new TapSourceCost());
+        gainedAbility.addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn,
                 "and gain \"T: This creature fights another target creature"));
     }
 

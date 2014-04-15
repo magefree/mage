@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -43,7 +44,7 @@ import mage.target.Target;
 public class CantBeBlockedTargetEffect extends RestrictionEffect<CantBeBlockedTargetEffect> {
 
     public CantBeBlockedTargetEffect(Duration duration) {
-        super(duration);
+        super(duration, Outcome.Benefit);
     }
 
     public CantBeBlockedTargetEffect(final CantBeBlockedTargetEffect effect) {
@@ -52,10 +53,7 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect<CantBeBlockedTa
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (this.getTargetPointer().getTargets(game, source).contains(permanent.getId())) {
-            return true;
-        }
-        return false;
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
     @Override
