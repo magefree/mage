@@ -25,53 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+package mage.abilities.effects.common.combat;
+
+import mage.abilities.Ability;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class Whimwader extends CardImpl<Whimwader> {
 
-    private static final FilterPermanent filter = new FilterPermanent("a blue permanent");
+public class CantAttackUnlessDefenderControllsPermanent extends ReplacementEffectImpl<CantAttackUnlessDefenderControllsPermanent> {
 
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
+    private final FilterPermanent filter;
+
+    public CantAttackUnlessDefenderControllsPermanent(FilterPermanent filter) {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        this.filter = filter;
+        staticText = new StringBuilder("{this} can't attack unless defending player controls ").append(filter.getMessage()).toString();
     }
 
-    public Whimwader(UUID ownerId) {
-        super(ownerId, 54, "Whimwader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "SHM";
-        this.subtype.add("Elemental");
-
-        this.color.setBlue(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
-
-        // Whimwader can't attack unless defending player controls a blue permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
-        
-    }
-
-    public Whimwader(final Whimwader card) {
-        super(card);
+    public CantAttackUnlessDefenderControllsPermanent(final CantAttackUnlessDefenderControllsPermanent effect) {
+        super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
-    public Whimwader copy() {
-        return new Whimwader(this);
+    public CantAttackUnlessDefenderControllsPermanent copy() {
+        return new CantAttackUnlessDefenderControllsPermanent(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
+            if (game.getBattlefield().countAll(filter, event.getTargetId(), game) == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

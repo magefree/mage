@@ -29,16 +29,17 @@ package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
-import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -48,6 +49,12 @@ import mage.game.events.GameEvent;
 
  */
 public class SeaSerpent extends CardImpl<SeaSerpent> {
+
+    private static final FilterLandPermanent filter = new FilterLandPermanent("an Island");
+
+    static {
+        filter.add(new SubtypePredicate("Island"));
+    }
 
     public SeaSerpent(UUID ownerId) {
         super(ownerId, 77, "Sea Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
@@ -59,7 +66,7 @@ public class SeaSerpent extends CardImpl<SeaSerpent> {
         this.toughness = new MageInt(5);
 
         // Sea Serpent can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SeaSerpentEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
         // When you control no Islands, sacrifice Sea Serpent.
         this.addAbility(new SeaSerpentTriggeredAbility());
     }
@@ -71,46 +78,6 @@ public class SeaSerpent extends CardImpl<SeaSerpent> {
     @Override
     public SeaSerpent copy() {
         return new SeaSerpent(this);
-    }
-}
-
-class SeaSerpentEffect extends ReplacementEffectImpl<SeaSerpentEffect> {
-
-    public SeaSerpentEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "{this} can't attack unless defending player controls an Island";
-    }
-
-    public SeaSerpentEffect(final SeaSerpentEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SeaSerpentEffect copy() {
-        return new SeaSerpentEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
-            FilterPermanent filter = new FilterPermanent();
-            filter.add(new SubtypePredicate("Island"));
-
-            if (game.getBattlefield().countAll(filter, event.getTargetId(), game) == 0) {
-                return true;
-            }
-        }
-        return false;
     }
 }
 
