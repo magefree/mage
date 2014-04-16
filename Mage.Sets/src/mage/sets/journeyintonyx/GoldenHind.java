@@ -25,40 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.journeyintonyx;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.MageInt;
+import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author LevelX2
  */
-public class MarchOfTheReturned extends CardImpl<MarchOfTheReturned> {
+public class GoldenHind extends CardImpl<GoldenHind> {
 
-    public MarchOfTheReturned(UUID ownerId) {
-        super(ownerId, 96, "March of the Returned", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "THS";
+    public GoldenHind(UUID ownerId) {
+        super(ownerId, 124, "Golden Hind", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "JOU";
+        this.subtype.add("Elk");
 
-        this.color.setBlack(true);
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Return up to two target creature cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0,2, new FilterCreatureCard("creature cards from your graveyard")));
+        // T: Add {G} to your mana pool.
+        this.addAbility(new GreenManaAbility());
     }
 
-    public MarchOfTheReturned(final MarchOfTheReturned card) {
+    public GoldenHind(final GoldenHind card) {
         super(card);
     }
 
     @Override
-    public MarchOfTheReturned copy() {
-        return new MarchOfTheReturned(this);
+    public GoldenHind copy() {
+        return new GoldenHind(this);
     }
 }

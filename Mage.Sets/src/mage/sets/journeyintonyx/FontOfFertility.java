@@ -25,40 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.journeyintonyx;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.Zone;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author LevelX2
  */
-public class MarchOfTheReturned extends CardImpl<MarchOfTheReturned> {
+public class FontOfFertility extends CardImpl<FontOfFertility> {
 
-    public MarchOfTheReturned(UUID ownerId) {
-        super(ownerId, 96, "March of the Returned", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "THS";
+    public FontOfFertility(UUID ownerId) {
+        super(ownerId, 125, "Font of Fertility", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
+        this.color.setGreen(true);
 
-        // Return up to two target creature cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0,2, new FilterCreatureCard("creature cards from your graveyard")));
+        // {1}{G}, Sacrifice Font of Fertility: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+        TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay), new ManaCostsImpl("{1}{G}"));
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
     }
 
-    public MarchOfTheReturned(final MarchOfTheReturned card) {
+    public FontOfFertility(final FontOfFertility card) {
         super(card);
     }
 
     @Override
-    public MarchOfTheReturned copy() {
-        return new MarchOfTheReturned(this);
+    public FontOfFertility copy() {
+        return new FontOfFertility(this);
     }
 }

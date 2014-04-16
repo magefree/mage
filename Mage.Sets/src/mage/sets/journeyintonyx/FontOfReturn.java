@@ -25,14 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.journeyintonyx;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -40,25 +44,27 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class MarchOfTheReturned extends CardImpl<MarchOfTheReturned> {
+public class FontOfReturn extends CardImpl<FontOfReturn> {
 
-    public MarchOfTheReturned(UUID ownerId) {
-        super(ownerId, 96, "March of the Returned", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "THS";
+    public FontOfReturn(UUID ownerId) {
+        super(ownerId, 71, "Font of Return", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+        this.expansionSetCode = "JOU";
 
         this.color.setBlack(true);
 
-        // Return up to two target creature cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0,2, new FilterCreatureCard("creature cards from your graveyard")));
+        // {3}{B}, Sacrifice Font of Return: Return up to three target creature cards from your graveyard to your hand.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCardInYourGraveyard(0, 3, new FilterCreatureCard("creature cards from your graveyard")));
+        this.addAbility(ability);        
     }
 
-    public MarchOfTheReturned(final MarchOfTheReturned card) {
+    public FontOfReturn(final FontOfReturn card) {
         super(card);
     }
 
     @Override
-    public MarchOfTheReturned copy() {
-        return new MarchOfTheReturned(this);
+    public FontOfReturn copy() {
+        return new FontOfReturn(this);
     }
 }

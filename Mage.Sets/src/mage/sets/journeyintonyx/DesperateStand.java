@@ -25,40 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.journeyintonyx;
 
 import java.util.UUID;
+import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class MarchOfTheReturned extends CardImpl<MarchOfTheReturned> {
+public class DesperateStand extends CardImpl<DesperateStand> {
 
-    public MarchOfTheReturned(UUID ownerId) {
-        super(ownerId, 96, "March of the Returned", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "THS";
+    public DesperateStand(UUID ownerId) {
+        super(ownerId, 147, "Desperate Stand", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}{W}");
+        this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
+        this.color.setRed(true);
+        this.color.setWhite(true);
 
-        // Return up to two target creature cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0,2, new FilterCreatureCard("creature cards from your graveyard")));
+        // Strive - Desperate Stand costs RW more to cast for each target beyond the first.
+        this.addAbility(new StriveAbility("{R}{W}"));
+        // Any number of target creatures each get +2/+0 and gain first strike and vigilance until end of turn.
+        Effect effect = new BoostTargetEffect(2,0,Duration.EndOfTurn);
+        effect.setText("Any number of target creatures each get +2/+0");
+        this.getSpellAbility().addEffect(effect);        
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, "and gain first strike"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, "and vigilance until end of turn"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
+        
     }
 
-    public MarchOfTheReturned(final MarchOfTheReturned card) {
+    public DesperateStand(final DesperateStand card) {
         super(card);
     }
 
     @Override
-    public MarchOfTheReturned copy() {
-        return new MarchOfTheReturned(this);
+    public DesperateStand copy() {
+        return new DesperateStand(this);
     }
 }

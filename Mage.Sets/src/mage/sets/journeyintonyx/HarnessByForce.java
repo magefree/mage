@@ -25,40 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.journeyintonyx;
 
 import java.util.UUID;
+import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class MarchOfTheReturned extends CardImpl<MarchOfTheReturned> {
+public class HarnessByForce extends CardImpl<HarnessByForce> {
 
-    public MarchOfTheReturned(UUID ownerId) {
-        super(ownerId, 96, "March of the Returned", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "THS";
+    public HarnessByForce(UUID ownerId) {
+        super(ownerId, 100, "Harness by Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
+        this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
+        this.color.setRed(true);
 
-        // Return up to two target creature cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0,2, new FilterCreatureCard("creature cards from your graveyard")));
+        // Strive - Harness by Force costs {2}{R} more to cast for each target beyond the first.
+        this.addAbility(new StriveAbility("{2}{R}"));
+        // Gain control of any number of target creatures until end of turn. Untap those creatures. They gain haste until end of turn.
+        Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
+        effect.setText("Gain control of any number of target creatures until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        effect = new UntapTargetEffect();
+        effect.setText("Untap those creatures");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, "They gain haste until end of turn"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public MarchOfTheReturned(final MarchOfTheReturned card) {
+    public HarnessByForce(final HarnessByForce card) {
         super(card);
     }
 
     @Override
-    public MarchOfTheReturned copy() {
-        return new MarchOfTheReturned(this);
+    public HarnessByForce copy() {
+        return new HarnessByForce(this);
     }
 }

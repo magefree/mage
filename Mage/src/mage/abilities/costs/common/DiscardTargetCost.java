@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  */
 public class DiscardTargetCost extends CostImpl<DiscardTargetCost> {
     
-    List<Card> cards = new ArrayList<Card>();
+    List<Card> cards = new ArrayList<>();
     protected boolean randomDiscard;
 
     public DiscardTargetCost(TargetCardInHand target) {

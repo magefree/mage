@@ -28,6 +28,7 @@
 package mage.sets.journeyintonyx;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.ConstellationAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -48,6 +49,8 @@ public class ForgebornOreads extends CardImpl<ForgebornOreads> {
         this.subtype.add("Nymph");
 
         this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(2);
 
         // Constellation - Whenever Forgeborn Oreads or another enchantment enters the battlefield under your control, Forgeborn Oreads deals 1 damage to target creature or player.
         Ability ability = new ConstellationAbility(new DamageTargetEffect(1));

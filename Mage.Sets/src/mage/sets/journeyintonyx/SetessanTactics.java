@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SetessanTactics extends CardImpl<SetessanTactics> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature");
 
     static {
         filter.add(new AnotherPredicate());

@@ -38,6 +38,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -96,15 +97,26 @@ public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTar
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null) {
-            if (controllingPlayerId != null) {
-                return permanent.changeControllerId(controllingPlayerId, game);
-            } else {
-                return permanent.changeControllerId(source.getControllerId(), game);
+        Player controller = game.getPlayer(source.getControllerId());        
+        if (controller != null) {
+            boolean targetStillExists = false;
+            for (UUID permanentId: this.getTargetPointer().getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(permanentId);
+                if (permanent != null) {
+                    targetStillExists = true;
+                    if (controllingPlayerId != null) {
+                        permanent.changeControllerId(controllingPlayerId, game);                        
+                    } else {
+                        permanent.changeControllerId(source.getControllerId(), game);
+                    }
+                }                
             }
-        }
-        this.discard();
+            if (!targetStillExists) {
+                // no valid target exists, effect can be discarded
+                this.discard();
+            }
+            return true;
+        }   
         return false;
     }
 
