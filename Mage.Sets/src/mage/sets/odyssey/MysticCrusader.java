@@ -54,10 +54,9 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 public class MysticCrusader extends CardImpl<MysticCrusader> {
     
     static final FilterCard filter = new FilterCard("black and from red");
-    
+
     static {
-        filter.add(Predicates.and(new ColorPredicate(ObjectColor.BLACK), 
-                                 new ColorPredicate(ObjectColor.RED)));
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK),new ColorPredicate(ObjectColor.RED)));
     }
 
     public MysticCrusader(UUID ownerId) {

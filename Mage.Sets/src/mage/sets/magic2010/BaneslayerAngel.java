@@ -39,6 +39,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -46,12 +47,11 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author BetaSteward_at_googlemail.com
  */
 public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
-    private static final FilterPermanent filter1 = new FilterCreaturePermanent("Demons");
-    private static final FilterPermanent filter2 = new FilterCreaturePermanent("Dragons");
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("Demons and from Dragons");
 
     static {
-        filter1.add(new SubtypePredicate("Demon"));
-        filter2.add(new SubtypePredicate("Dragon"));
+        filter.add(Predicates.or(new SubtypePredicate("Demon"), new SubtypePredicate("Dragon")));
     }
 
     public BaneslayerAngel(UUID ownerId) {
@@ -62,11 +62,11 @@ public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Flying, first strike, lifelink, protection from Demons and from Dragons
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(FirstStrikeAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
-        this.addAbility(new ProtectionAbility(filter1));
-        this.addAbility(new ProtectionAbility(filter2));
+        this.addAbility(new ProtectionAbility(filter));
     }
 
     public BaneslayerAngel(final BaneslayerAngel card) {

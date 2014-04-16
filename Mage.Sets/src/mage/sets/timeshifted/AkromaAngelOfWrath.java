@@ -35,6 +35,7 @@ import mage.ObjectColor;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -42,13 +43,11 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author Loki
  */
 public class AkromaAngelOfWrath extends CardImpl<AkromaAngelOfWrath> {
-    private static final FilterCard filter = new FilterCard("Black");
-    private static final FilterCard filter2 = new FilterCard("Red");
+
+    private static final FilterCard protectionFilter = new FilterCard("black and from red");
 
     static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-
-        filter2.add(new ColorPredicate(ObjectColor.RED));
+        protectionFilter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK),new ColorPredicate(ObjectColor.RED)));
     }
 
     public AkromaAngelOfWrath(UUID ownerId) {
@@ -67,8 +66,7 @@ public class AkromaAngelOfWrath extends CardImpl<AkromaAngelOfWrath> {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         // protection from black and from red
-        this.addAbility(new ProtectionAbility(filter));
-        this.addAbility(new ProtectionAbility(filter2));
+        this.addAbility(new ProtectionAbility(protectionFilter));
     }
 
     public AkromaAngelOfWrath(final AkromaAngelOfWrath card) {
