@@ -56,7 +56,7 @@ public class TillingTreefolk extends CardImpl<TillingTreefolk> {
         this.toughness = new MageInt(3);
 
         // When Tilling Treefolk enters the battlefield, you may return up to two target land cards from your graveyard to your hand.
-        Effect effect = new ReturnFromGraveyardToHandTargetEffect(true);
+        Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("you may return up to two target land cards from your graveyard to your hand");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
         ability.addTarget(new TargetCardInYourGraveyard(0, 2, new FilterLandCard()));

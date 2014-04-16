@@ -37,6 +37,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  *
@@ -44,20 +46,12 @@ import mage.players.Player;
  */
 public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect<ReturnFromGraveyardToHandTargetEffect> {
 
-    boolean informPlayers;
-
     public ReturnFromGraveyardToHandTargetEffect() {
-        this(true);
-    }
-
-    public ReturnFromGraveyardToHandTargetEffect(boolean informPlayers) {
         super(Outcome.ReturnToHand);
-        this.informPlayers = informPlayers;
     }
 
     public ReturnFromGraveyardToHandTargetEffect(final ReturnFromGraveyardToHandTargetEffect effect) {
         super(effect);
-        this.informPlayers = effect.informPlayers;
     }
 
     @Override
@@ -71,13 +65,8 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect<ReturnF
             Card card = game.getCard(cardId);
             if (card != null && game.getState().getZone(cardId).equals(Zone.GRAVEYARD)) {
                 Player player = game.getPlayer(card.getOwnerId());
-                if (player != null) {
-                    
-                    if (informPlayers) {
-                        player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
-                    } else {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                    }
+                if (player != null) {                    
+                    player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
                 }
             }
         }
@@ -90,7 +79,14 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect<ReturnF
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
+        Target target = mode.getTargets().get(0);        
         sb.append("Return ");
+        if (target.getMaxNumberOfTargets() > 1) {
+            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                sb.append("up to ");
+            }
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
+        }        
         if (!mode.getTargets().get(0).getTargetName().startsWith("another")) {
             sb.append("target ");
         }

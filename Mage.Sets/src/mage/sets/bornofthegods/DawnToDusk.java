@@ -68,7 +68,7 @@ public class DawnToDusk extends CardImpl<DawnToDusk> {
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(2);
         // Return target enchantment card from your graveyard to your hand;
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect(true));
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard));
         // and/or destroy target enchantment.
         Mode mode = new Mode();

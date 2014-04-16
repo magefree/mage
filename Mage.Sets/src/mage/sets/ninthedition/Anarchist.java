@@ -61,7 +61,7 @@ public class Anarchist extends CardImpl<Anarchist> {
         this.toughness = new MageInt(2);
 
         // When Anarchist enters the battlefield, you may return target sorcery card from your graveyard to your hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(true), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

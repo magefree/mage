@@ -34,6 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
@@ -52,7 +53,8 @@ public class MorbidPlunder extends CardImpl<MorbidPlunder> {
 
         this.color.setBlack(true);
 
-        this.getSpellAbility().addEffect(new MorbidPlunderEffect());
+        // Return up to two target creature cards from your graveyard to your hand.
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
@@ -63,34 +65,5 @@ public class MorbidPlunder extends CardImpl<MorbidPlunder> {
     @Override
     public MorbidPlunder copy() {
         return new MorbidPlunder(this);
-    }
-}
-
-class MorbidPlunderEffect extends OneShotEffect<MorbidPlunderEffect> {
-
-    public MorbidPlunderEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "Return up to two target creature cards from your graveyard to your hand";
-    }
-
-    public MorbidPlunderEffect(final MorbidPlunderEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MorbidPlunderEffect copy() {
-        return new MorbidPlunderEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        boolean result = false;
-        for (UUID target : targetPointer.getTargets(game, source)) {
-            Card card = game.getCard(target);
-            if (card != null) {
-                result |= card.moveToZone(Zone.HAND, source.getId(), game, true);
-            }
-        }
-        return result;
     }
 }
