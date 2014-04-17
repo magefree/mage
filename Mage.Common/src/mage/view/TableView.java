@@ -52,10 +52,10 @@ public class TableView implements Serializable {
     private String gameType;
     private int wins;
     private int freeMulligans;
-    private String deckType;
+    private final String deckType;
     private String tableName;
     private String controllerName;
-    private String additionalInfo;
+    private final String additionalInfo;
     private Date createTime;
     private TableState tableState;
     private boolean isTournament;

@@ -116,37 +116,40 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl<GodsendTriggeredAbili
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType().equals(GameEvent.EventType.DECLARED_BLOCKERS)) {
-            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield((this.getSourceId()));
-            if (sourcePermanent != null) {
-                possibleTargets.clear();
-                if (sourcePermanent.isAttacking()) {
-                    for (CombatGroup group: game.getCombat().getBlockingGroups()) {
-                        if (group.getAttackers().contains(this.getSourceId())) {
-                            possibleTargets.addAll(group.getBlockers());
+            Permanent equipment = game.getPermanentOrLKIBattlefield((this.getSourceId()));
+            if (equipment != null && equipment.getAttachedTo()!= null) {
+                Permanent equippedPermanent = game.getPermanentOrLKIBattlefield((this.getSourceId()));
+                if (equippedPermanent != null) {
+                    possibleTargets.clear();
+                    if (equippedPermanent.isAttacking()) {
+                        for (CombatGroup group: game.getCombat().getBlockingGroups()) {
+                            if (group.getAttackers().contains(this.getSourceId())) {
+                                possibleTargets.addAll(group.getBlockers());
+                            }
                         }
+
                     }
-                    
-                }
-                if (sourcePermanent.getBlocking() > 0) {
-                    for (CombatGroup group: game.getCombat().getBlockingGroups()) {
-                        if (group.getBlockers().contains(this.getSourceId())) {
-                            possibleTargets.addAll(group.getAttackers());
+                    if (equippedPermanent.getBlocking() > 0) {
+                        for (CombatGroup group: game.getCombat().getBlockingGroups()) {
+                            if (group.getBlockers().contains(this.getSourceId())) {
+                                possibleTargets.addAll(group.getAttackers());
+                            }
                         }
+
                     }
-                    
-                }
-                if (possibleTargets.size() > 0) {
-                    if (possibleTargets.size() == 1) {
-                        this.getTargets().clear();
-                        this.getEffects().get(0).setTargetPointer(new FixedTarget(possibleTargets.iterator().next()));
-                    } else {
-                        FilterCreaturePermanent filter = new FilterCreaturePermanent("one blocking or blocked creature");                        
-                        List<PermanentIdPredicate> uuidPredicates = new ArrayList<>();
-                        for (UUID creatureId : possibleTargets) {
-                            uuidPredicates.add(new PermanentIdPredicate(creatureId));
+                    if (possibleTargets.size() > 0) {
+                        if (possibleTargets.size() == 1) {
+                            this.getTargets().clear();
+                            this.getEffects().get(0).setTargetPointer(new FixedTarget(possibleTargets.iterator().next()));
+                        } else {
+                            FilterCreaturePermanent filter = new FilterCreaturePermanent("one blocking or blocked creature");
+                            List<PermanentIdPredicate> uuidPredicates = new ArrayList<>();
+                            for (UUID creatureId : possibleTargets) {
+                                uuidPredicates.add(new PermanentIdPredicate(creatureId));
+                            }
+                            filter.add(Predicates.or(uuidPredicates));
+                            this.getTargets().add(new TargetCreaturePermanent(filter, true));
                         }
-                        filter.add(Predicates.or(uuidPredicates));
-                        this.getTargets().add(new TargetCreaturePermanent(filter, true));
                     }
                 }
             }

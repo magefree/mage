@@ -73,12 +73,6 @@ public class AjaniMentorOfHeroes extends CardImpl<AjaniMentorOfHeroes> {
                 new CardTypePredicate(CardType.PLANESWALKER)));
     }
     
-    
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));
-    }    
-    
     public AjaniMentorOfHeroes(UUID ownerId) {
         super(ownerId, 145, "Ajani, Mentor of Heroes", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{W}");
         this.expansionSetCode = "JOU";
