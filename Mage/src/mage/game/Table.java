@@ -255,4 +255,20 @@ public class Table implements Serializable {
         this.tournamentSubTable = tournamentSubTable;
     }
 
+    public Date getStartTime() {
+        if (isTournament) {
+            return tournament.getStartTime();
+        } else {
+            return match.getStartTime();
+        }        
+    }
+    
+    public Date getEndTime() {
+        if (isTournament) {
+            return tournament.getEndTime();
+        } else {
+            return match.getEndTime();
+        }        
+    }
+    
 }

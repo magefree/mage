@@ -36,8 +36,8 @@ import java.util.UUID;
  */
 public abstract class RoomImpl implements Room {
 
-    private UUID chatId;
-    private UUID roomId;
+    private final UUID chatId;
+    private final UUID roomId;
 
     public RoomImpl() {
         roomId = UUID.randomUUID();

@@ -87,8 +87,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         ArrayList<TableView> tableList = new ArrayList<>();
         ArrayList<MatchView> matchList = new ArrayList<>();
         List<Table> allTables = new ArrayList<>(tables.values());
-        Collections.sort(allTables, new TimestampSorter());
-        Collections.reverse(allTables);
+        Collections.sort(allTables, new TableListSorter());
         for (Table table: allTables) {
             if (table.getState() != TableState.FINISHED) {
                 tableList.add(new TableView(table));
@@ -197,10 +196,39 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
 }
 
-class TimestampSorter implements Comparator<Table> {
+/**
+ * Sorts the tables for table and match view of the client room
+ * 
+ * @author LevelX2
+ */
+class TableListSorter implements Comparator<Table> {
     @Override
     public int compare(Table one, Table two) {
-        return one.getCreateTime().compareTo(two.getCreateTime());
+        // priority 1 - Not started yet
+        if (one.getState().equals(TableState.STARTING) || one.getState().equals(TableState.WAITING)) {
+            if (two.getState().equals(TableState.STARTING) || two.getState().equals(TableState.WAITING)) {
+                return two.getCreateTime().compareTo(one.getCreateTime());
+            } else {
+                return -1; // one has higher priority
+            }
+        }
+        // priority 2 - Not finished yet -> Sorted by time started
+        if (two.getState().equals(TableState.STARTING) || two.getState().equals(TableState.WAITING)) {
+            return -1;
+        } else if (one.getEndTime() == null) {
+            if (two.getEndTime() == null) {                    
+                return two.getStartTime().compareTo(one.getStartTime());
+            } else {
+                return -1;
+            }                
+        }
+        // priority 3 - Finished tables -> Sorted by time finished       
+        if (two.getEndTime() == null) {
+            return 1;
+        } else {
+            return two.getEndTime().compareTo(one.getEndTime());
+        }
+        
     }
 }
 
