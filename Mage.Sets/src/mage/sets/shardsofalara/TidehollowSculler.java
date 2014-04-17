@@ -42,6 +42,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
@@ -101,17 +102,18 @@ class TidehollowScullerExileEffect extends OneShotEffect<TidehollowScullerExileE
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (player != null && targetPlayer != null) {
-            targetPlayer.revealCards("Tidehollow Sculler", targetPlayer.getHand(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Player opponent = game.getPlayer(source.getFirstTarget());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (controller != null && opponent != null && sourcePermanent != null) {
+            opponent.revealCards(sourcePermanent.getName(), opponent.getHand(), game);
 
             TargetCard target = new TargetCard(Zone.PICK, new FilterNonlandCard("nonland card to exile"));
             target.setRequired(true);
-            if (player.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
-                Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
+            if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
+                Card card = opponent.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Tidehollow Sculler", source.getSourceId(), game);
+                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
                 }
             }
 
@@ -141,14 +143,17 @@ class TidehollowScullerLeaveEffect extends OneShotEffect<TidehollowScullerLeaveE
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-        if (exZone != null) {
-            for (Card card : exZone.getCards(game)) {
-                if (card != null) {
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ExileZone exZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+            if (exZone != null) {
+                for (Card card : exZone.getCards(game)) {
+                    if (card != null) {
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);
+                    }
                 }
-            }
-            return true;
+                return true;
+            }            
         }
         return false;
     }

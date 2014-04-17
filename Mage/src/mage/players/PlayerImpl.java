@@ -2132,7 +2132,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             game.informPlayers(new StringBuilder(this.getName())
                     .append(" puts ").append(card.getName()).append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
-                    .append("into his or her hand").toString());
+                    .append(card.getOwnerId().equals(this.getId()) ? "into his or her hand":"into its owner's hand").toString());
             result = true;
         }
         return result;

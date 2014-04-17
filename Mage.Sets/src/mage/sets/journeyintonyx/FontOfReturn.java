@@ -53,7 +53,7 @@ public class FontOfReturn extends CardImpl<FontOfReturn> {
         this.color.setBlack(true);
 
         // {3}{B}, Sacrifice Font of Return: Return up to three target creature cards from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{3}{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(0, 3, new FilterCreatureCard("creature cards from your graveyard")));
         this.addAbility(ability);        

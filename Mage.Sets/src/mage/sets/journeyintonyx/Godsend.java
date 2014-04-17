@@ -59,6 +59,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
@@ -118,31 +119,33 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl<GodsendTriggeredAbili
         if (event.getType().equals(GameEvent.EventType.DECLARED_BLOCKERS)) {
             Permanent equipment = game.getPermanentOrLKIBattlefield((this.getSourceId()));
             if (equipment != null && equipment.getAttachedTo()!= null) {
-                Permanent equippedPermanent = game.getPermanentOrLKIBattlefield((this.getSourceId()));
+                Permanent equippedPermanent = game.getPermanentOrLKIBattlefield((equipment.getAttachedTo()));
                 if (equippedPermanent != null) {
                     possibleTargets.clear();
-                    if (equippedPermanent.isAttacking()) {
-                        for (CombatGroup group: game.getCombat().getBlockingGroups()) {
-                            if (group.getAttackers().contains(this.getSourceId())) {
+                    String targetName = "";
+                    if (equippedPermanent.isAttacking()) {                        
+                        for (CombatGroup group: game.getCombat().getGroups()) {                            
+                            if (group.getAttackers().contains(equippedPermanent.getId())) {
                                 possibleTargets.addAll(group.getBlockers());
                             }
                         }
-
-                    }
-                    if (equippedPermanent.getBlocking() > 0) {
-                        for (CombatGroup group: game.getCombat().getBlockingGroups()) {
-                            if (group.getBlockers().contains(this.getSourceId())) {
+                        targetName = "a creature blocking attacker ";
+                    } else if (equippedPermanent.getBlocking() > 0) {
+                        for (CombatGroup group: game.getCombat().getGroups()) {
+                            if (group.getBlockers().contains(equippedPermanent.getId())) {
                                 possibleTargets.addAll(group.getAttackers());
                             }
                         }
-
-                    }
-                    if (possibleTargets.size() > 0) {
-                        if (possibleTargets.size() == 1) {
-                            this.getTargets().clear();
+                        targetName = "a creature blocked by creature ";
+                    }                    
+                    if (possibleTargets.size() > 0) {                    
+                        this.getTargets().clear();
+                        if (possibleTargets.size() == 1) {                            
                             this.getEffects().get(0).setTargetPointer(new FixedTarget(possibleTargets.iterator().next()));
                         } else {
-                            FilterCreaturePermanent filter = new FilterCreaturePermanent("one blocking or blocked creature");
+                            this.getEffects().get(0).setTargetPointer(new FirstTargetPointer());
+                            targetName = new StringBuilder(targetName).append("equipped by ").append(equipment.getName()).toString();
+                            FilterCreaturePermanent filter = new FilterCreaturePermanent(targetName);
                             List<PermanentIdPredicate> uuidPredicates = new ArrayList<>();
                             for (UUID creatureId : possibleTargets) {
                                 uuidPredicates.add(new PermanentIdPredicate(creatureId));
@@ -150,6 +153,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl<GodsendTriggeredAbili
                             filter.add(Predicates.or(uuidPredicates));
                             this.getTargets().add(new TargetCreaturePermanent(filter, true));
                         }
+                        return true;
                     }
                 }
             }
@@ -218,6 +222,12 @@ class GodsendReplacementEffect extends ReplacementEffectImpl<GodsendReplacementE
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player player = game.getPlayer(event.getPlayerId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (player != null && sourcePermanent != null) {
+            game.informPlayer(player, new StringBuilder("You can't cast this spell because a card with the same name is exiled by ")
+                    .append(sourcePermanent.getName()).append(".").toString());
+        }
         return true;
     }
 
