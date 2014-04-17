@@ -344,7 +344,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      *
      */
     private void logBlockerInfo(Player defender, Game game) {
-        boolean shownDefendingPlayer = false;
+        boolean shownDefendingPlayer = game.getPlayers().size() < 3; // only two players no ned to sow the attacked player
         for (CombatGroup group : this.getGroups()) {
             if (group.defendingPlayerId.equals(defender.getId())) {
                 if (!shownDefendingPlayer) {
@@ -352,9 +352,12 @@ public class Combat implements Serializable, Copyable<Combat> {
                     shownDefendingPlayer = true;
                 }
                 StringBuilder sb = new StringBuilder();
+                boolean attackerExists = false;
                 for (UUID attackingCreatureId : group.getAttackers()) {
+                    attackerExists = true;
                     Permanent attackingCreature = game.getPermanent(attackingCreatureId);
                     if (attackingCreature != null) {
+                        sb.append("Attacker: ");
                         sb.append(attackingCreature.getName()).append(" (");
                         sb.append(attackingCreature.getPower().getValue()).append("/").append(attackingCreature.getToughness().getValue()).append(") ");
                     } else {
@@ -365,18 +368,20 @@ public class Combat implements Serializable, Copyable<Combat> {
                         }
                     }
                 }
-                if (group.getBlockers().size() > 0) {
-                    sb.append("blocked by ");
-                    for (UUID blockingCreatureId : group.getBlockers()) {
-                        Permanent blockingCreature = game.getPermanent(blockingCreatureId);
-                        if (blockingCreature != null) {
-                            sb.append(blockingCreature.getName()).append(" (");
-                            sb.append(blockingCreature.getPower().getValue()).append("/").append(blockingCreature.getToughness().getValue()).append(") ");
+                if (attackerExists) {
+                    if (group.getBlockers().size() > 0) {
+                        sb.append("blocked by ");
+                        for (UUID blockingCreatureId : group.getBlockers()) {
+                            Permanent blockingCreature = game.getPermanent(blockingCreatureId);
+                            if (blockingCreature != null) {
+                                sb.append(blockingCreature.getName()).append(" (");
+                                sb.append(blockingCreature.getPower().getValue()).append("/").append(blockingCreature.getToughness().getValue()).append(") ");
+                            }
                         }
-                    }
 
-                } else {
-                    sb.append("unblocked");
+                    } else {
+                        sb.append("unblocked");
+                    }
                 }
                 game.informPlayers(sb.toString());
             }
