@@ -103,9 +103,9 @@ class VerdantHavenTriggeredAbility extends TriggeredManaAbility<VerdantHavenTrig
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
+    public boolean checkTrigger(GameEvent event, Game game) {        
         if(event.getType() == GameEvent.EventType.TAPPED_FOR_MANA){
+            Permanent enchantment = game.getPermanent(this.getSourceId());
             if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
                 return true;
             }

@@ -130,11 +130,8 @@ class AxebaneGuardianManaEffect extends ManaEffect<AxebaneGuardianManaEffect> {
                 }
             }
 
-
-            if (mana != null) {
-                player.getManaPool().addMana(mana, game, source);
-                return true;
-            }
+            player.getManaPool().addMana(mana, game, source);
+            return true;
 
         }
         return false;
