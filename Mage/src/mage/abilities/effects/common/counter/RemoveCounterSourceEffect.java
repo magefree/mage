@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  */
 
 public class RemoveCounterSourceEffect extends OneShotEffect<RemoveCounterSourceEffect> {
-    private Counter counter;
+    private final Counter counter;
 
     public RemoveCounterSourceEffect(Counter counter) {
         super(Outcome.UnboostCreature);
