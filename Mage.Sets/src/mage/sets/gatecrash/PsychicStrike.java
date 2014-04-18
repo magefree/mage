@@ -100,7 +100,7 @@ class PsychicStrikeEffect extends OneShotEffect<PsychicStrikeEffect> {
                 for (int i = 0; i < cardsCount; i++) {
                     Card card = controller.getLibrary().removeFromTop(game);
                     if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                        controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
             }

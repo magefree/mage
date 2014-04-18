@@ -28,6 +28,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.EvasionAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.UnblockableSourceEffect;
 
 /**
@@ -36,7 +37,15 @@ import mage.abilities.effects.common.combat.UnblockableSourceEffect;
 public class UnblockableAbility extends EvasionAbility<UnblockableAbility> {
 
     public UnblockableAbility() {
-        this.addEffect(new UnblockableSourceEffect());
+        this("");
+    }
+
+    public UnblockableAbility(String ruleText) {
+        Effect effect = new UnblockableSourceEffect();
+        if (ruleText != null && !ruleText.isEmpty()) {
+            effect.setText(ruleText);
+        }
+        this.addEffect(effect);
     }
 
     private UnblockableAbility(UnblockableAbility ability) {
