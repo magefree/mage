@@ -51,9 +51,9 @@ public class JourneyIntoNyx extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
-        this.numBoosterCommon = 3;
-        this.numBoosterUncommon = 6;
-        this.numBoosterRare = 6;
+        this.numBoosterCommon = 11;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
     }
 
