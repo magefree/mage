@@ -27,21 +27,20 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.PreventAllDamageByAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -63,7 +62,7 @@ public class Defang extends CardImpl<Defang> {
         this.addAbility(ability);
 
         // Prevent all damage that would be dealt by enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DefangEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false)));
     }
 
     public Defang(final Defang card) {
@@ -74,51 +73,4 @@ public class Defang extends CardImpl<Defang> {
     public Defang copy() {
         return new Defang(this);
     }
-}
-
-class DefangEffect extends PreventionEffectImpl<DefangEffect> {
-
-    public DefangEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Prevent all damage that would be dealt by enchanted creature";
-    }
-
-    public DefangEffect(final DefangEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DefangEffect copy() {
-        return new DefangEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game) && event instanceof DamageEvent) {
-            Permanent aura = game.getPermanent(source.getSourceId());
-            if (aura != null && aura.getAttachedTo() != null) {
-                if (event.getSourceId().equals(aura.getAttachedTo())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
 }

@@ -42,7 +42,7 @@ import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.Target;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -70,7 +70,7 @@ public class OrderOfWhiteclay extends CardImpl<OrderOfWhiteclay> {
         // {1}{W}{W}, {untap}: Return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{1}{W}{W}"));
         ability.addCost(new UntapSourceCost());
-        Target target = new TargetCardInGraveyard(filter);
+        Target target = new TargetCardInYourGraveyard(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

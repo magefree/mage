@@ -106,7 +106,7 @@ class UnexpectedlyAbsentEffect extends OneShotEffect<UnexpectedlyAbsentEffect> {
             if (owner != null) {
                 int xValue = Math.min(source.getManaCostsToPay().getX(), owner.getLibrary().size());
                 Cards cards = new CardsImpl(Zone.PICK);
-                List<UUID> cardIds = new ArrayList<UUID>();
+                List<UUID> cardIds = new ArrayList<>();
                 for (int i = 0; i < xValue; i++) {
                     Card card = owner.getLibrary().getFromTop(game);
                     cards.add(card);

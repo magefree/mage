@@ -39,27 +39,27 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class PreventAllDamageAttachedEffect extends PreventionEffectImpl<PreventAllDamageAttachedEffect> {
+public class PreventAllDamageToAttachedEffect extends PreventionEffectImpl<PreventAllDamageToAttachedEffect> {
 
-    private String attachedDescription;
-    private boolean combatOnly;
+    private final String attachedDescription;
+    private final boolean combatOnly;
 
-    public PreventAllDamageAttachedEffect(Duration duration, String attachedDescription, boolean combatOnly) {
+    public PreventAllDamageToAttachedEffect(Duration duration, String attachedDescription, boolean combatOnly) {
         super(duration);
         this.attachedDescription = attachedDescription;
         this.combatOnly = combatOnly;
         staticText = setText();
     }
 
-    public PreventAllDamageAttachedEffect(final PreventAllDamageAttachedEffect effect) {
+    public PreventAllDamageToAttachedEffect(final PreventAllDamageToAttachedEffect effect) {
         super(effect);
         this.attachedDescription = effect.attachedDescription;
         this.combatOnly = effect.combatOnly;
     }
 
     @Override
-    public PreventAllDamageAttachedEffect copy() {
-        return new PreventAllDamageAttachedEffect(this);
+    public PreventAllDamageToAttachedEffect copy() {
+        return new PreventAllDamageToAttachedEffect(this);
     }
 
     @Override

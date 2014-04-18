@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  */
 public class EquippedMatchesFilterCondition implements Condition {
 
-    private FilterCreaturePermanent filter;    
+    private final FilterCreaturePermanent filter;
 
     public EquippedMatchesFilterCondition(FilterCreaturePermanent filter) {
         this.filter = filter;

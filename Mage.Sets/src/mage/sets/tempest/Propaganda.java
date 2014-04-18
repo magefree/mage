@@ -93,7 +93,7 @@ class PropagandaReplacementEffect extends ReplacementEffectImpl<PropagandaReplac
             if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
                  player.chooseUse(Outcome.Neutral, "Pay {2} to declare attacker?", game) )
             {
-                if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId()) ) {
+                if (propagandaTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId()) ) {
                     return false;
                 }
             }
