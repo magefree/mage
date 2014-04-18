@@ -67,10 +67,12 @@ public class CantBlockTargetEffect extends RestrictionEffect<CantBlockTargetEffe
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         if (mode.getTargets().isEmpty()) {
             return "";
         }
-
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
         if (target.getMaxNumberOfTargets() > 1) {

@@ -68,7 +68,7 @@ public class RiseOfEagles extends CardImpl<RiseOfEagles> {
 class RiseOfEaglesBirdToken extends Token {
 
     public RiseOfEaglesBirdToken() {
-        super("Bird", "2/2 blue Bird enchantment creature tokens with flyingn");
+        super("Bird", "2/2 blue Bird enchantment creature tokens with flying");
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.BLUE);

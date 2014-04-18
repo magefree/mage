@@ -25,18 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,15 +46,15 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BurntheImpure extends CardImpl<BurntheImpure> {
 
-    public BurntheImpure (UUID ownerId) {
+    public BurntheImpure(UUID ownerId) {
         super(ownerId, 59, "Burn the Impure", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "MBS";
         this.color.setRed(true);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BurntheImpureEffect(3));
+        this.getSpellAbility().addEffect(new BurntheImpureEffect());
     }
 
-    public BurntheImpure (final BurntheImpure card) {
+    public BurntheImpure(final BurntheImpure card) {
         super(card);
     }
 
@@ -65,23 +63,17 @@ public class BurntheImpure extends CardImpl<BurntheImpure> {
         return new BurntheImpure(this);
     }
 
-    public class BurntheImpureEffect extends OneShotEffect<BurntheImpureEffect> {
+}
 
-    protected int amount;
+class BurntheImpureEffect extends OneShotEffect<BurntheImpureEffect> {
 
-    public BurntheImpureEffect(int amount) {
+    public BurntheImpureEffect() {
         super(Outcome.Damage);
-        this.amount = amount;
         staticText = "{this} deals 3 damage to target creature. If that creature has infect, {this} deals 3 damage to that creature's controller.";
-    }
-
-    public int getAmount() {
-        return amount;
     }
 
     public BurntheImpureEffect(final BurntheImpureEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
@@ -91,20 +83,18 @@ public class BurntheImpure extends CardImpl<BurntheImpure> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            permanent.damage(amount, source.getId(), game, true, false);
+            permanent.damage(3, source.getSourceId(), game, true, false);
             if (permanent.getAbilities().contains(InfectAbility.getInstance())) {
                 Player controller = game.getPlayer(permanent.getControllerId());
                 if (controller != null) {
-                    controller.damage(amount, source.getSourceId(), game, true, false);
+                    controller.damage(3, source.getSourceId(), game, false, true);
                 }
             }
             return true;
         }
         return false;
     }
-
-}
 
 }
