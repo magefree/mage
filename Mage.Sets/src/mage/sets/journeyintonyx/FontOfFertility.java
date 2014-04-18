@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
 public class FontOfFertility extends CardImpl<FontOfFertility> {
 
     public FontOfFertility(UUID ownerId) {
-        super(ownerId, 125, "Font of Fertility", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        super(ownerId, 123, "Font of Fertility", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "JOU";
 
         this.color.setGreen(true);

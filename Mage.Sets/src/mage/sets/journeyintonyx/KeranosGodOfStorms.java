@@ -59,7 +59,7 @@ public class KeranosGodOfStorms extends CardImpl<KeranosGodOfStorms> {
 
     
     public KeranosGodOfStorms(UUID ownerId) {
-        super(ownerId, 156, "Keranos, God of Storms", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{U}{R}");
+        super(ownerId, 151, "Keranos, God of Storms", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{U}{R}");
         this.expansionSetCode = "JOU";
         this.supertype.add("Legendary");
         this.subtype.add("God");

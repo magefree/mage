@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
 public class EidolonOfTheGreatRevel extends CardImpl<EidolonOfTheGreatRevel> {
 
     public EidolonOfTheGreatRevel(UUID ownerId) {
-        super(ownerId, 9992, "Eidolon of the Great Revel", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{R}{R}");
+        super(ownerId, 94, "Eidolon of the Great Revel", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{R}{R}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Spirit");
 

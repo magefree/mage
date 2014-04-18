@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
 public class WorstFears extends CardImpl<WorstFears> {
 
     public WorstFears(UUID ownerId) {
-        super(ownerId, 97, "Worst Fears", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{B}");
+        super(ownerId, 87, "Worst Fears", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{B}");
         this.expansionSetCode = "JOU";
 
         this.color.setBlack(true);

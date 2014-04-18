@@ -51,8 +51,7 @@ public class ExtinguishAllHope extends CardImpl<ExtinguishAllHope> {
     
     
     public ExtinguishAllHope(UUID ownerId) {
-        //TODO: Fix card number
-        super(ownerId, 999, "Extinguish All Hope", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
+        super(ownerId, 68, "Extinguish All Hope", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "JOU";
 
         this.color.setBlack(true);

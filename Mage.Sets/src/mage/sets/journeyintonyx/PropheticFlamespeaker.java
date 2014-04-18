@@ -47,7 +47,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.turn.Step;
 import mage.players.Library;
 import mage.players.Player;
 
@@ -58,7 +57,7 @@ import mage.players.Player;
 public class PropheticFlamespeaker extends CardImpl<PropheticFlamespeaker> {
 
     public PropheticFlamespeaker(UUID ownerId) {
-        super(ownerId, 165, "Prophetic Flamespeaker", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        super(ownerId, 106, "Prophetic Flamespeaker", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Human");
         this.subtype.add("Shaman");
