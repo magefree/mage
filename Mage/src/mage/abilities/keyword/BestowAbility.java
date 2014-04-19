@@ -42,6 +42,7 @@ import mage.constants.Layer;
 import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -107,6 +108,7 @@ public class BestowAbility extends SpellAbility {
 
     public BestowAbility(Card card, String manaString) {
         super(new ManaCostsImpl(manaString), card.getName() + " using bestow");
+        this.timing = TimingRule.SORCERY;
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.addTarget(auraTarget);
         this.addEffect(new AttachEffect(Outcome.BoostCreature));
