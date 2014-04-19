@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class LeoninIconclast extends CardImpl<LeoninIconclast> {
+public class LeoninIconoclast extends CardImpl<LeoninIconoclast> {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment creature an opponent controls");
 
@@ -55,8 +55,8 @@ public class LeoninIconclast extends CardImpl<LeoninIconclast> {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public LeoninIconclast(UUID ownerId) {
-        super(ownerId, 16, "Leonin Iconclast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public LeoninIconoclast(UUID ownerId) {
+        super(ownerId, 16, "Leonin Iconoclast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Cat");
         this.subtype.add("Monk");
@@ -71,12 +71,12 @@ public class LeoninIconclast extends CardImpl<LeoninIconclast> {
         this.addAbility(ability);
     }
 
-    public LeoninIconclast(final LeoninIconclast card) {
+    public LeoninIconoclast(final LeoninIconoclast card) {
         super(card);
     }
 
     @Override
-    public LeoninIconclast copy() {
-        return new LeoninIconclast(this);
+    public LeoninIconoclast copy() {
+        return new LeoninIconoclast(this);
     }
 }
