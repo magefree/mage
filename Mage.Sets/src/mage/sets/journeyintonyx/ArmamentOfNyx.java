@@ -30,8 +30,13 @@ package mage.sets.journeyintonyx;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.EquippedMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalReplacementEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.PreventAllDamageByAttachedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
@@ -74,15 +79,15 @@ public class ArmamentOfNyx extends CardImpl<ArmamentOfNyx> {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-
+        Condition condition = new EquippedMatchesFilterCondition(filter);
         // Enchanted creature has double strike as long as it's an enchantment. Otherwise, prevent all damage that would be dealt by enchanted creature
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield),
-                new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false),
-                new EquippedMatchesFilterCondition(filter),
-                "Enchanted creature has double strike as long as it's an enchantment. Otherwise, prevent all damage that would be dealt by enchanted creature"));
+                condition, "Enchanted creature has double strike as long as it's an enchantment"));
+        ReplacementEffect effect = new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false);
+        effect.setText("Otherwise, prevent all damage that would be dealt by enchanted creature");
+        ability.addEffect(new ConditionalReplacementEffect(effect, new InvertCondition(condition), false));
         this.addAbility(ability);
-
     }
 
     public ArmamentOfNyx(final ArmamentOfNyx card) {
