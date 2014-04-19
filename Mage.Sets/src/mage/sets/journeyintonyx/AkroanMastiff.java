@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
@@ -56,6 +57,7 @@ public class AkroanMastiff extends CardImpl<AkroanMastiff> {
 
         // {W},{T}: Tap target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}"));
+        ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
