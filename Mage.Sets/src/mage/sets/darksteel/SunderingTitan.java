@@ -41,7 +41,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -97,11 +96,10 @@ class SunderingTitanDestroyLandEffect extends OneShotEffect<SunderingTitanDestro
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Set<UUID> lands = new HashSet<UUID>();
+        Set<UUID> lands = new HashSet<>();
         if (controller != null && sourcePermanent != null) {
             for (String landName : new String[] {"Forest","Island","Mountain","Plains","Swamp"}) {
                 FilterLandPermanent filter = new FilterLandPermanent(new StringBuilder(landName).append(" to destroy").toString());
-                filter.add(new SupertypePredicate("Basic"));
                 filter.add(new SubtypePredicate(landName));
                 Target target = new TargetLandPermanent(1,1, filter, true);
                 target.setRequired(true);
