@@ -28,9 +28,9 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.CantCounterSourceEffect;
+import mage.constants.Zone;
 
 /**
  *

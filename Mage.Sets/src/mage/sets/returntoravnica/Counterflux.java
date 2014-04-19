@@ -34,7 +34,9 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -42,6 +44,7 @@ import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -70,7 +73,11 @@ public class Counterflux extends CardImpl<mage.sets.returntoravnica.Counterflux>
         this.color.setRed(true);
 
         // Counterflux can't be countered by spells or abilities.
-        this.getSpellAbility().addEffect(new CantCounterSourceEffect());
+        Effect effect =  new CantCounterSourceEffect();
+        effect.setText("{this} can't be countered by spells or abilities");
+        Ability ability = new SimpleStaticAbility(Zone.STACK,effect);
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
 
         // Counter target spell you don't control.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

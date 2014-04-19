@@ -34,6 +34,8 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.Card;
@@ -41,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -59,7 +62,11 @@ public class SlaughterGames extends CardImpl<SlaughterGames> {
         this.color.setRed(true);
 
         // Slaughter Games can't be countered by spells or abilities.
-        this.getSpellAbility().addEffect(new CantCounterSourceEffect());
+        Effect effect =  new CantCounterSourceEffect();
+        effect.setText("{this} can't be countered by spells or abilities");
+        Ability ability = new SimpleStaticAbility(Zone.STACK,effect);
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
 
         // Name a nonland card. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new SlaughterGamesEffect());
