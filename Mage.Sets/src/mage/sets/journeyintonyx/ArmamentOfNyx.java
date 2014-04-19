@@ -35,7 +35,6 @@ import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.EquippedMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalReplacementEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.PreventAllDamageByAttachedEffect;

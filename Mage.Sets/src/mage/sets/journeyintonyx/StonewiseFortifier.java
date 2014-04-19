@@ -29,6 +29,7 @@ package mage.sets.journeyintonyx;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -38,11 +39,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import static mage.filter.predicate.permanent.ControllerControlsIslandPredicate.filter;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -100,11 +98,19 @@ class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl<St
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, event.getTargetId(), event.getSourceId(), source.getControllerId(), event.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
+            int preventedDamage = event.getAmount();
+            MageObject damageSource = game.getObject(event.getSourceId());
+            MageObject preventionSource = game.getObject(source.getSourceId());
+            if (damageSource != null && preventionSource != null) {
+                StringBuilder message = new StringBuilder(preventedDamage).append(" damage from ");
+                message.append(damageSource.getName()).append(" prevented ");
+                message.append("(").append(preventionSource).append(")");
+                game.informPlayers(message.toString());
+            }
             event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), preventedDamage));
         }
         return false;
     }
