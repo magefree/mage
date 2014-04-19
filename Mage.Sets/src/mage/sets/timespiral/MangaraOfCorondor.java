@@ -28,9 +28,6 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +35,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 
@@ -59,7 +58,7 @@ public class MangaraOfCorondor extends CardImpl<MangaraOfCorondor> {
         this.toughness = new MageInt(1);
 
         // {tap}: Exile Mangara of Corondor and target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(Zone.BATTLEFIELD), new TapSourceCost());
         ability.addEffect(new ExileTargetEffect());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

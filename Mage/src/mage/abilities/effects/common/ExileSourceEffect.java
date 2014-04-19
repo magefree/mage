@@ -28,10 +28,11 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -42,13 +43,21 @@ import mage.players.Player;
  */
 public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
 
+    private Zone onlyfromZone;
+
     public ExileSourceEffect() {
+        this(Zone.ALL);
+    }
+    
+    public ExileSourceEffect(Zone onlyFromZone) {
         super(Outcome.Exile);
         staticText = "Exile {this}";
+        this.onlyfromZone = onlyFromZone;
     }
 
     public ExileSourceEffect(final ExileSourceEffect effect) {
         super(effect);
+        this.onlyfromZone = effect.onlyfromZone;
     }
 
     @Override
@@ -58,12 +67,14 @@ public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (!game.getState().getZone(source.getSourceId()).match(onlyfromZone)) {
+            return false;
+        }
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (permanent != null) {
             return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, null);
         } else {
-            // try to exile card -> is this correct in all cases? (LevelX2)
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
                 return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, null);
