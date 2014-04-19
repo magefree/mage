@@ -53,7 +53,7 @@ public class SquelchingLeeches extends CardImpl<SquelchingLeeches> {
     }
     
     public SquelchingLeeches(UUID ownerId) {
-        super(ownerId, 84, "Squelching Leeches", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        super(ownerId, 84, "Squelching Leeches", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Leech");
 

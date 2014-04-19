@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class WarWingSiren extends CardImpl<WarWingSiren> {
 
     public WarWingSiren(UUID ownerId) {
-        super(ownerId, 57, "War-Wing Siren", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{U}{U}");
+        super(ownerId, 57, "War-Wing Siren", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Nymph");
 

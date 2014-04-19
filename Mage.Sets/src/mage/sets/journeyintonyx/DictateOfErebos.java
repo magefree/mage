@@ -52,7 +52,7 @@ public class DictateOfErebos extends CardImpl<DictateOfErebos> {
     }
     
     public DictateOfErebos(UUID ownerId) {
-        super(ownerId, 63, "Dictate of Erebos", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
+        super(ownerId, 65, "Dictate of Erebos", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "JOU";
 
         this.color.setBlack(true);

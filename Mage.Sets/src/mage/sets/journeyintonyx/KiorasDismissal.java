@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
 public class KiorasDismissal extends CardImpl<KiorasDismissal> {
 
     public KiorasDismissal(UUID ownerId) {
-        super(ownerId, 44, "Kiora's Dismissal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
+        super(ownerId, 44, "Kiora's Dismissal", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "JOU";
 
         this.color.setBlue(true);
