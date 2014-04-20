@@ -28,17 +28,16 @@
 
 package mage.cards;
 
-import mage.constants.Rarity;
-import mage.constants.SetType;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -113,13 +112,9 @@ public abstract class ExpansionSet implements Serializable {
             return booster;
         }
 
-        CardCriteria criteria = new CardCriteria();
-        criteria.setCodes(!hasBasicLands && parentSet != null ? parentSet.code : this.code).rarities(Rarity.LAND).doubleFaced(false);
-        List<CardInfo> basicLand = CardRepository.instance.findCards(criteria);
-
         List<CardInfo> common = getCommon();
 
-        criteria = new CardCriteria();
+        CardCriteria criteria = new CardCriteria();
         criteria.setCodes(this.code).rarities(Rarity.UNCOMMON).doubleFaced(false);
         List<CardInfo> uncommon = CardRepository.instance.findCards(criteria);
 
@@ -131,9 +126,15 @@ public abstract class ExpansionSet implements Serializable {
         criteria.setCodes(this.code).rarities(Rarity.MYTHIC).doubleFaced(false);
         List<CardInfo> mythic = CardRepository.instance.findCards(criteria);
      
-        for (int i = 0; i < numBoosterLands; i++) {
-            addToBooster(booster, basicLand);
+        if (numBoosterLands > 0) {
+            criteria = new CardCriteria();
+            criteria.setCodes(!hasBasicLands && parentSet != null ? parentSet.code : this.code).rarities(Rarity.LAND).doubleFaced(false);
+            List<CardInfo> basicLand = CardRepository.instance.findCards(criteria);
+            for (int i = 0; i < numBoosterLands; i++) {
+                addToBooster(booster, basicLand);
+            }
         }
+
         for (int i = 0; i < numBoosterCommon; i++) {
             addToBooster(booster, common);
         }

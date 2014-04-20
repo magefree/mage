@@ -54,7 +54,7 @@ public class HumblerOfMortals extends CardImpl<HumblerOfMortals> {
         this.toughness = new MageInt(5);
 
         // Constellation - Whenever Humbler of Mortals or another enchantment enters the battlefield under your control, creatures you control gain trample until end of turn.
-        this.addAbility(new ConstellationAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent())));
+        this.addAbility(new ConstellationAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures"))));
     }
 
     public HumblerOfMortals(final HumblerOfMortals card) {
