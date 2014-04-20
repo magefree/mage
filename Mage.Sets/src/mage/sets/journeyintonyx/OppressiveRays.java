@@ -75,7 +75,7 @@ public class OppressiveRays extends CardImpl<OppressiveRays> {
         // Enchanted creature can't attack or block unless its controller pays 3.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OppressiveRaysEffect()));
         // Activated abilities of enchanted creature cost {3} more to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OppressiveRaysCostReductionEffect() ));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OppressiveRaysCostModificationEffect() ));
     }
 
     public OppressiveRays(final OppressiveRays card) {
@@ -125,8 +125,8 @@ class OppressiveRaysEffect extends ReplacementEffectImpl<OppressiveRaysEffect> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
-            Permanent attacker = game.getPermanent(event.getTargetId());
+        if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
+            Permanent attacker = game.getPermanent(event.getSourceId());
             return attacker != null && attacker.getAttachments().contains(source.getSourceId());
         }
         return false;
@@ -139,20 +139,20 @@ class OppressiveRaysEffect extends ReplacementEffectImpl<OppressiveRaysEffect> {
 
 }
 
-class OppressiveRaysCostReductionEffect extends CostModificationEffectImpl<OppressiveRaysCostReductionEffect> {
+class OppressiveRaysCostModificationEffect extends CostModificationEffectImpl<OppressiveRaysCostModificationEffect> {
 
-    OppressiveRaysCostReductionEffect ( ) {
+    OppressiveRaysCostModificationEffect ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "Activated abilities of enchanted creature cost {3} more to activate";
     }
 
-    OppressiveRaysCostReductionEffect(OppressiveRaysCostReductionEffect effect) {
+    OppressiveRaysCostModificationEffect(OppressiveRaysCostModificationEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.increaseCost(abilityToModify, 2);
+        CardUtil.increaseCost(abilityToModify, 3);
         return true;
     }
 
@@ -169,8 +169,8 @@ class OppressiveRaysCostReductionEffect extends CostModificationEffectImpl<Oppre
     }
 
     @Override
-    public OppressiveRaysCostReductionEffect copy() {
-        return new OppressiveRaysCostReductionEffect(this);
+    public OppressiveRaysCostModificationEffect copy() {
+        return new OppressiveRaysCostModificationEffect(this);
     }
 
 }
