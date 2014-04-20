@@ -29,14 +29,12 @@ package mage.sets.journeyintonyx;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.abilityword.ConstellationAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
+import mage.counters.CounterType;
 
 /**
  *
@@ -45,18 +43,17 @@ import mage.target.common.TargetCreaturePermanent;
 public class WarWingSiren extends CardImpl<WarWingSiren> {
 
     public WarWingSiren(UUID ownerId) {
-        super(ownerId, 57, "War-Wing Siren", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{U}{U}");
+        super(ownerId, 57, "War-Wing Siren", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "JOU";
-        this.subtype.add("Nymph");
+        this.subtype.add("Siren");
+        this.subtype.add("Soldier");
 
         this.color.setBlue(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        // Constellation — Whenever Whitewater Naiads or another enchantment enters the battlefield under your control, target creature can't be blocked this turn.
-        Ability ability = new ConstellationAbility(new CantBeBlockedTargetEffect(Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
-        this.addAbility(ability);
+        // Heroic — Whenever you cast a spell that targets War-Wing Siren, put a +1/+1 counter on War-Wing Siren.
+        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)));
     }
 
     public WarWingSiren(final WarWingSiren card) {
