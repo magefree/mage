@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  */
 public class DesecrationPlague extends CardImpl<DesecrationPlague> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("enchantment or land");
+    private static final FilterPermanent filter = new FilterPermanent("enchantment or land");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ENCHANTMENT), new CardTypePredicate(CardType.LAND)));
