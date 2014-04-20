@@ -56,7 +56,7 @@ public class LeoninIconoclast extends CardImpl<LeoninIconoclast> {
     }
 
     public LeoninIconoclast(UUID ownerId) {
-        super(ownerId, 16, "Leonin Iconoclast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        super(ownerId, 16, "Leonin Iconoclast", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Cat");
         this.subtype.add("Monk");
