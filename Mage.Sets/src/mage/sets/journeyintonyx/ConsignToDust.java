@@ -37,6 +37,8 @@ import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -61,6 +63,9 @@ public class ConsignToDust extends CardImpl<ConsignToDust> {
         // Destroy any number of target artifacts and/or enchantments.
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy any number of target artifacts and/or enchantments");
+        Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, false);
+        target.setRequired(true);
+        this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(effect);
     }
 
