@@ -39,16 +39,42 @@ import mage.game.events.GameEvent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> extends ReplacementEffectImpl<T> implements PreventionEffect<T> {
 
+    private Integer amountToPrevent;
+
     public PreventionEffectImpl(Duration duration) {
+        this(duration, Integer.MAX_VALUE);
+    }
+
+    public PreventionEffectImpl(Duration duration, int amountToPrevent) {
         super(duration, Outcome.PreventDamage);
         this.effectType = EffectType.PREVENTION;
+        this.amountToPrevent = amountToPrevent;
     }
 
     public PreventionEffectImpl(final PreventionEffectImpl effect) {
         super(effect);
+        this.amountToPrevent = effect.amountToPrevent;
+    }
+
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        // not used for prevention effect
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        game.preventDamage(event, source, game, amountToPrevent);
+        if (amountToPrevent == 0) {
+            this.used = true;
+        }
+        // damage amount is reduced or set to 0 so replace of damage event is never neccessary
+        return false;
     }
 
     @Override

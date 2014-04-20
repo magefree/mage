@@ -181,6 +181,27 @@ public interface Game extends MageItem, Serializable {
     void addSimultaneousEvent(GameEvent event);
     boolean replaceEvent(GameEvent event);
 
+    /**
+     * Creates and fires an damage prevention event
+     *
+     * @param damageEvent damage event that will be replaced (instanceof check will be done)
+     * @param source ability that's the source of the prevention effect
+     * @param game
+     * @param amountToPrevent
+     * @return true prevention was successfull / false prevention was replaced
+     */
+    boolean preventDamage(GameEvent damageEvent, Ability source, Game game, Integer amountToPrevent);
+    /**
+     * Creates and fires an damage prevention event
+     *
+     * @param event damage event that will be replaced (instanceof check will be done)
+     * @param source ability that's the source of the prevention effect
+     * @param game
+     * @param preventAllDamage true if there is no limit to the damage that can be prevented
+     * @return true prevention was successfull / false prevention was replaced
+     */
+    boolean preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage);
+
     //game play methods
     void start(UUID choosingPlayerId);
     void start(UUID choosingPlayerId, GameOptions options);

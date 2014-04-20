@@ -88,6 +88,7 @@ import mage.game.combat.Combat;
 import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
@@ -1818,6 +1819,38 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         return state.replaceEvent(event, this);
     }
 
+    @Override
+    public boolean preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage) {
+        return preventDamage(event, source, game, Integer.MAX_VALUE);
+    }
+
+    @Override
+    public boolean preventDamage(GameEvent event, Ability source, Game game, Integer amountToPrevent) {
+        if (!(event instanceof DamageEvent)) {
+            return false;
+        }
+        DamageEvent damageEvent = (DamageEvent) event;
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, damageEvent.getTargetId(), damageEvent.getSourceId(), source.getControllerId(), damageEvent.getAmount(), false);
+        if (!game.replaceEvent(preventEvent)) {
+            int preventedDamage = damageEvent.getAmount();
+            MageObject damageSource = game.getObject(damageEvent.getSourceId());
+            MageObject preventionSource = game.getObject(source.getSourceId());
+            if (damageSource != null && preventionSource != null) {
+                StringBuilder message = new StringBuilder(Integer.toString(preventedDamage)).append(" damage from ");
+                message.append(damageSource.getName()).append(" prevented ");
+                message.append("(").append(preventionSource).append(")");
+                game.informPlayers(message.toString());
+            }
+            damageEvent.setAmount(0);
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, damageEvent.getTargetId(), source.getSourceId(), source.getControllerId(), preventedDamage));
+            return true;
+        }
+        return false;
+    }
+
+
+
+
     protected void removeCreaturesFromCombat() {
         //20091005 - 511.3
         getCombat().endCombat(this);
@@ -1831,7 +1864,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
         //initialize transient objects during deserialization
         in.defaultReadObject();
-        savedStates = new Stack<Integer>();
+        savedStates = new Stack<>();
         tableEventSource = new TableEventSource();
         playerQueryEventSource = new PlayerQueryEventSource();
         gameStates = new GameStates();

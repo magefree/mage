@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -44,7 +45,7 @@ import mage.game.permanent.Permanent;
 public class PreventAllDamageEffect extends PreventionEffectImpl<PreventAllDamageEffect> {
 
     private FilterPermanent filter;
-    private boolean onlyCombat;
+    private final boolean onlyCombat;
 
     public PreventAllDamageEffect(FilterPermanent filter, Duration duration, boolean onlyCombat) {
         super(duration);
@@ -52,7 +53,7 @@ public class PreventAllDamageEffect extends PreventionEffectImpl<PreventAllDamag
         this.onlyCombat = onlyCombat;
     }
 
-        public PreventAllDamageEffect(Duration duration, boolean onlyCombat) {
+    public PreventAllDamageEffect(Duration duration, boolean onlyCombat) {
         super(duration);
         this.onlyCombat = onlyCombat;
     }
@@ -73,29 +74,6 @@ public class PreventAllDamageEffect extends PreventionEffectImpl<PreventAllDamag
     @Override
     public PreventAllDamageEffect copy() {
         return new PreventAllDamageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            StringBuilder sourceName = new StringBuilder();
-            if (permanent != null) {
-                sourceName.append(" from ").append(permanent.getName());
-            }
-            sourceName.insert(0, "Damage").append(" has been prevented: ").append(damage);
-            event.setAmount(0);
-            game.informPlayers(sourceName.toString());
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-        }
-        return false;
     }
 
     @Override

@@ -55,7 +55,7 @@ public enum CardRepository {
 
     private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
     private static final String VERSION_ENTITY_NAME = "card";
-    private static final long CARD_DB_VERSION = 27;
+    private static final long CARD_DB_VERSION = 28;
 
     private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
