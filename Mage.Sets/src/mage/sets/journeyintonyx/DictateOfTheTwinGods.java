@@ -54,7 +54,7 @@ import mage.players.Player;
 public class DictateOfTheTwinGods extends CardImpl<DictateOfTheTwinGods> {
 
     public DictateOfTheTwinGods(UUID ownerId) {
-        super(ownerId, 95, "Dictate of the Twin Gods", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
+        super(ownerId, 93, "Dictate of the Twin Gods", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
         this.expansionSetCode = "JOU";
 
         this.color.setRed(true);

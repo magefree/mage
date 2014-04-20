@@ -59,7 +59,7 @@ import mage.util.CardUtil;
 public class BattlefieldThaumaturge extends CardImpl<BattlefieldThaumaturge> {
 
     public BattlefieldThaumaturge(UUID ownerId) {
-        super(ownerId, 32, "Battlefield Thaumaturge", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        super(ownerId, 31, "Battlefield Thaumaturge", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
