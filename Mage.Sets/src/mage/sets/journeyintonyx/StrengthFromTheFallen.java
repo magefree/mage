@@ -44,15 +44,15 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StrengthOfTheFallen extends CardImpl<StrengthOfTheFallen> {
+public class StrengthFromTheFallen extends CardImpl<StrengthFromTheFallen> {
 
-    public StrengthOfTheFallen(UUID ownerId) {
-        super(ownerId, 143, "Strength of the Fallen", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
+    public StrengthFromTheFallen(UUID ownerId) {
+        super(ownerId, 143, "Strength from the Fallen", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "JOU";
 
         this.color.setGreen(true);
 
-        // Constellation - Whenever Strength of the Fallen or another entchantment enters the battlefield under your control, target creature gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
+        // Constellation - Whenever Strength from the Fallen or another entchantment enters the battlefield under your control, target creature gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
         DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
         Ability ability = new ConstellationAbility(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true));
         ability.addTarget(new TargetCreaturePermanent(true));
@@ -60,12 +60,12 @@ public class StrengthOfTheFallen extends CardImpl<StrengthOfTheFallen> {
 
     }
 
-    public StrengthOfTheFallen(final StrengthOfTheFallen card) {
+    public StrengthFromTheFallen(final StrengthFromTheFallen card) {
         super(card);
     }
 
     @Override
-    public StrengthOfTheFallen copy() {
-        return new StrengthOfTheFallen(this);
+    public StrengthFromTheFallen copy() {
+        return new StrengthFromTheFallen(this);
     }
 }
