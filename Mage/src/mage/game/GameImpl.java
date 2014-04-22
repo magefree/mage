@@ -1202,11 +1202,23 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 if (abilities.isEmpty()) {
                     break;
                 }
+                // triggered abilities that don't use the stack have to be executed first (e.g. Banisher Priest Return exiled creature
+                for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext();) {
+                    TriggeredAbility triggeredAbility = it.next();
+                    if (!triggeredAbility.isUsesStack()) {
+                        state.removeTriggeredAbility(triggeredAbility);
+                        played |= player.triggerAbility(triggeredAbility, this);
+                        it.remove();
+                    }                    
+                }
+                if (abilities.isEmpty()) {
+                    break;
+                }
                 if (abilities.size() == 1) {
                     state.removeTriggeredAbility(abilities.get(0));
                     played |= player.triggerAbility(abilities.get(0), this);
                 }
-                else {
+                else {                    
                     TriggeredAbility ability = player.chooseTriggeredAbility(abilities, this);
                     if (ability != null) {
                         state.removeTriggeredAbility(ability);
