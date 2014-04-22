@@ -559,6 +559,41 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 }
             }
             return false;
+        }        
+        if (target instanceof TargetSpellOrPermanent) {
+            List<Permanent> targets;
+            boolean outcomeTargets = true;
+            if (outcome.isGood()) {
+                targets = threats(playerId, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
+            }
+            else {
+                targets = threats(opponentId, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
+            }            
+            if (targets.isEmpty() && target.isRequired()) {
+                targets = threats(null, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                Collections.reverse(targets);
+                outcomeTargets = false;
+                //targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
+            }
+            for (Permanent permanent: targets) {
+                if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), source, game)) {
+                    target.addTarget(permanent.getId(), source, game);
+                    if (!outcomeTargets || target.getMaxNumberOfTargets() <= target.getTargets().size()) {
+                        return true;
+                    }
+                }
+            }           
+            if (game.getStack().size() > 0) {
+                Iterator<StackObject> it = game.getStack().iterator();
+                while (it.hasNext()) {
+                    StackObject o = it.next();
+                    if (o instanceof Spell && !source.getId().equals(o.getStackAbility().getId())) {
+                        target.addTarget(o.getId(), source, game);
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
         if (target instanceof TargetCardInOpponentsGraveyard) {
             List<Card> cards = new ArrayList<>();
