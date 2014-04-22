@@ -2,9 +2,7 @@ package org.mage.plugins.card.dl.sources;
 
 import java.util.HashMap;
 import java.util.Map;
-import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
-import static mage.client.dialog.PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.utils.CardImageUtils;
 

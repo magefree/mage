@@ -18,7 +18,7 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
+            <version>1.2.17</version>
             <type>jar</type>
         </dependency>
 
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.j256.ormlite</groupId>
             <artifactId>ormlite-jdbc</artifactId>
-            <version>4.42</version>
+            <version>4.48</version>
         </dependency>
     </dependencies>
 

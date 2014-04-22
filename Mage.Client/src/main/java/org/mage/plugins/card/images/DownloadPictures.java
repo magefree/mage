@@ -35,6 +35,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.mage.plugins.card.dl.sources.MtgImageSource;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
@@ -111,7 +112,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         p0.add(jLabel1);
         p0.add(Box.createVerticalStrut(5));
-        ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com"/*, "mtgathering.ru HQ", "mtgathering.ru MQ", "mtgathering.ru LQ"*/});
+        ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com", "mtgimage.com (HQ)"  /*, "mtgathering.ru HQ", "mtgathering.ru MQ", "mtgathering.ru LQ"*/});
         jComboBox1 = new JComboBox();
 
         cardImageSource = MagicCardsImageSource.getInstance();
@@ -128,6 +129,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         break;
                     case 1:
                         cardImageSource = WizardCardsImageSource.getInstance();
+                        break;
+                    case 2:
+                        cardImageSource = MtgImageSource.getInstance();
                         break;
                 }
                 int count = DownloadPictures.this.cards.size();
@@ -172,7 +176,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             public void actionPerformed(ActionEvent e) {
                 ArrayList<CardDownloadData> cardsToDownload = DownloadPictures.this.cards;
                 if (checkBox.isSelected()) {
-                    DownloadPictures.this.type2cards = new ArrayList<CardDownloadData>();
+                    DownloadPictures.this.type2cards = new ArrayList<>();
                     for (CardDownloadData data : DownloadPictures.this.cards) {
                         if (data.isType2() || data.isToken()) {
                             DownloadPictures.this.type2cards.add(data);
@@ -213,12 +217,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     private static ArrayList<CardDownloadData> getNeededCards(List<CardInfo> allCards) {
 
-        ArrayList<CardDownloadData> cardsToDownload = new ArrayList<CardDownloadData>();
+        ArrayList<CardDownloadData> cardsToDownload = new ArrayList<>();
 
         /**
          * read all card names and urls
          */
-        ArrayList<CardDownloadData> allCardsUrls = new ArrayList<CardDownloadData>();
+        ArrayList<CardDownloadData> allCardsUrls = new ArrayList<>();
         HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
         /**
