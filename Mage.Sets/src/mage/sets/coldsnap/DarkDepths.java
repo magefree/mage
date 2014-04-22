@@ -108,7 +108,7 @@ class DarkDepthsAbility extends StateTriggeredAbility<DarkDepthsAbility> {
 
     @Override
     public String getRule() {
-        return "When Dark Depths has no ice counters on it, sacrifice it. If you do, put a legendary 20/20 black Avatar creature token with flying and \"This creature is indestructible\" named Marit Lage onto the battlefield";
+        return "When {this} has no ice counters on it, sacrifice it. If you do, put a legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage onto the battlefield.";
     }
 
 }
@@ -117,18 +117,18 @@ class DarkDepthsAbility extends StateTriggeredAbility<DarkDepthsAbility> {
 class MaritLageToken extends Token {
 
     public MaritLageToken() {
-        super("Marit Lage", "legendary 20/20 black Avatar creature token with flying and \"This creature is indestructible\" named Marit Lage");
+        super("Marit Lage", "legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage");
+        this.setOriginalExpansionSetCode("CSP");
         cardType.add(CardType.CREATURE);
         subtype.add("Avatar");
         supertype.add("Legendary");
-        
 
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         power = new MageInt(20);
         toughness = new MageInt(20);
         
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(IndestructibleAbility.getInstance());
-        this.setOriginalExpansionSetCode("CSP");
+
     }
 }

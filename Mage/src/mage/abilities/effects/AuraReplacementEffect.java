@@ -48,8 +48,10 @@ import mage.game.stack.Spell;
 
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no
- * valid target on the battlefield. Also, when entering the Battlefield and it
- * was not cast, this effect gets the target to witch to attach it.
+ * valid target on the battlefield. Also, when entering the battlefield and it
+ * was not cast (so from Zone != Hand), this effect gets the target to witch to attach it
+ * and adds the Aura the the battlefield and attachs it to the target.
+ * The "attachTo:" value in game state has to be set therefore.
  *
  * This effect is automatically added to ContinuousEffects at the start of a game
  *
@@ -149,12 +151,13 @@ public class AuraReplacementEffect extends ReplacementEffectImpl<AuraReplacement
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && ((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getFromZone() != Zone.HAND) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura")) {
-                return true;
+        if (event.getType().equals(GameEvent.EventType.ZONE_CHANGE)) {
+            if (((ZoneChangeEvent) event).getToZone().equals(Zone.BATTLEFIELD)
+                    && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.HAND)) ) {
+                Card card = game.getCard(event.getTargetId());
+                if (card != null && card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura")) {
+                    return true;
+                }
             }
         }
         return false;

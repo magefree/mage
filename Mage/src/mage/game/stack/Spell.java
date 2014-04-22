@@ -200,18 +200,22 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype().contains("Aura")) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
+                boolean bestow = this.getSpellAbility() instanceof BestowAbility;
+                if (bestow) { 
+                    // Must be removed first time, after that will be removed by continous effect
+                    // Otherwise effects like evolve trigger from creature comes into play event
+                    card.getCardType().remove(CardType.CREATURE);
+                }
                 if (card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId)) {
-                    if (this.getSpellAbility() instanceof BestowAbility) { 
-                        Permanent permanent = game.getPermanent(card.getId());
-                        if (permanent != null) {
-                            // Must be removed first time, after that will be removed by continous effect
-                            // Otherwise effects like evolve trigger from creature comes into play event
-                            permanent.getCardType().remove(CardType.CREATURE);
-                        }                        
-                    }
+                    if (bestow) { 
+                        card.getCardType().add(CardType.CREATURE);
+                    }                
                     game.getState().handleSimultaneousEvent(game);
                     return ability.resolve(game);
                 }
+                if (bestow) { 
+                    card.getCardType().add(CardType.CREATURE);
+                }                
                 return false;
             }
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature

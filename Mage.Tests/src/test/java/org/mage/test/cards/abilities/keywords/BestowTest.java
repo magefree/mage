@@ -28,9 +28,9 @@
 
 package org.mage.test.cards.abilities.keywords;
 
-import mage.abilities.keyword.HexproofAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -137,4 +137,30 @@ public class BestowTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Hopeful Eidolon", 1, 1);
     }
     
+    /**
+     * Test that card cast with bestow will not be tapped, if creatures come into play tapped
+     */
+    @Test
+    public void bestowEnchantmentWillNotBeTapped() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Silent Artisan");
+        
+        addCard(Zone.HAND, playerA, "Boon Satyr");
+        
+        // Enchantment {1}{W}
+        // Creatures your opponents control enter the battlefield tapped.
+        addCard(Zone.BATTLEFIELD, playerB, "Imposing Sovereign");
+        
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Boon Satyr using bestow", "Silent Artisan");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // because Boon Satyr is no creature on the battlefield, evolve may not trigger
+        assertPermanentCount(playerA, "Silent Artisan", 1);
+        assertPowerToughness(playerA, "Silent Artisan", 7, 7);
+        // because cast with bestow, Boon Satyr may not be tapped
+        assertTapped("Boon Satyr", false);
+        
+    }    
 }
