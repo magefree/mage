@@ -30,6 +30,7 @@ package mage.sets.journeyintonyx;
 import java.util.UUID;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -50,7 +51,7 @@ public class ArmoryOfIroas extends CardImpl<ArmoryOfIroas> {
         this.subtype.add("Equipment");
 
         // Whenever equipped creature attacks, put a +1/+1 counter on it.
-        this.addAbility(new AttacksAttachedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true)));
+        this.addAbility(new AttacksAttachedTriggeredAbility(new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), "it")));
         
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
