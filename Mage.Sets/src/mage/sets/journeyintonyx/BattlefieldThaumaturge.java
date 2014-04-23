@@ -27,6 +27,8 @@
  */
 package mage.sets.journeyintonyx;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -103,16 +105,16 @@ class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEf
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int creatureTargets = 0;
+        Set<UUID> creaturesTargeted = new HashSet<>();
         for (Target target: abilityToModify.getTargets()) {
             for (UUID uuid: target.getTargets()) {
                 Permanent permanent = game.getPermanent(uuid); 
                 if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
-                    creatureTargets++;
+                    creaturesTargeted.add(permanent.getId());
                 }
             }
         }
-        CardUtil.reduceCost(abilityToModify, creatureTargets);
+        CardUtil.reduceCost(abilityToModify, creaturesTargeted.size());
         return true;
     }
 
