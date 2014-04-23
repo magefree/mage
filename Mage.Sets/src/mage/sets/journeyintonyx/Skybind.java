@@ -58,7 +58,7 @@ public class Skybind extends CardImpl<Skybind> {
     }
 
     public Skybind(UUID ownerId) {
-        super(ownerId, 25, "Skybind", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
+        super(ownerId, 25, "Skybind", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
         this.expansionSetCode = "JOU";
 
         this.color.setWhite(true);
