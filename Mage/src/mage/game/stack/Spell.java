@@ -58,6 +58,7 @@ import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
@@ -208,6 +209,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                 }
                 if (card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId)) {
                     if (bestow) { 
+                        // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
+                        // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
+                        Permanent permanent = game.getPermanent(card.getId());
+                        if (permanent != null && permanent instanceof PermanentCard) {
+                                ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);
+                        }
                         card.getCardType().add(CardType.CREATURE);
                     }                
                     game.getState().handleSimultaneousEvent(game);

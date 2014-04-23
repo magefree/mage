@@ -28,6 +28,8 @@
 
 package org.mage.test.cards.abilities.keywords;
 
+import junit.framework.Assert;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
@@ -135,6 +137,12 @@ public class BestowTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
         assertPermanentCount(playerA, "Hopeful Eidolon", 1);
         assertPowerToughness(playerA, "Hopeful Eidolon", 1, 1);
+
+        Permanent hopefulEidolon = getPermanent("Hopeful Eidolon", playerA);
+        Assert.assertTrue("Hopeful Eidolon has to be a creature but is not", hopefulEidolon.getCardType().contains(CardType.CREATURE));
+        Assert.assertTrue("Hopeful Eidolon has to be an enchantment but is not", hopefulEidolon.getCardType().contains(CardType.ENCHANTMENT));
+
+
     }
     
     /**
