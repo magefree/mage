@@ -37,8 +37,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PreventCombatDamageFromSourceEffect;
-import mage.abilities.effects.common.PreventCombatDamageSourceEffect;
+import mage.abilities.effects.common.PreventCombatDamageBySourceEffect;
+import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
 import mage.abilities.Ability;
 
 
@@ -60,8 +60,8 @@ public class MoonlightGeist extends CardImpl<MoonlightGeist> {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{W}: Prevent all combat damage that would be dealt to and dealt by Moonlight Geist this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventCombatDamageSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}{W}"));
-        ability.addEffect(new PreventCombatDamageFromSourceEffect(Duration.EndOfTurn));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventCombatDamageToSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}{W}"));
+        ability.addEffect(new PreventCombatDamageBySourceEffect(Duration.EndOfTurn));
         this.addAbility(ability);
     }
 

@@ -35,10 +35,16 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.other.PlayerIdPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -50,11 +56,11 @@ import mage.game.permanent.Permanent;
 public class EtherswornShieldmage extends CardImpl<EtherswornShieldmage> {
 
     final private static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures");
-
+    
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
-
+    
     public EtherswornShieldmage(UUID ownerId) {
         super(ownerId, 4, "Ethersworn Shieldmage", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}{U}");
         this.expansionSetCode = "ARB";
@@ -70,7 +76,7 @@ public class EtherswornShieldmage extends CardImpl<EtherswornShieldmage> {
         this.addAbility(FlashAbility.getInstance());
 
         // When Ethersworn Shieldmage enters the battlefield, prevent all damage that would be dealt to artifact creatures this turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PreventAllDamageToCreatureEffect(Duration.EndOfTurn, filter), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter), false));
     }
 
     public EtherswornShieldmage(final EtherswornShieldmage card) {
@@ -80,55 +86,5 @@ public class EtherswornShieldmage extends CardImpl<EtherswornShieldmage> {
     @Override
     public EtherswornShieldmage copy() {
         return new EtherswornShieldmage(this);
-    }
-}
-
-class PreventAllDamageToCreatureEffect extends PreventionEffectImpl<PreventAllDamageToCreatureEffect> {
-
-    protected FilterCreaturePermanent filter;
-
-    public PreventAllDamageToCreatureEffect(Duration duration, FilterCreaturePermanent filter) {
-        super(duration);
-        this.filter = filter;
-        staticText = "Prevent all damage that would be dealt to " + filter.getMessage() + " " + duration.toString();
-    }
-
-    public PreventAllDamageToCreatureEffect(final PreventAllDamageToCreatureEffect effect) {
-        super(effect);
-        this.filter = effect.filter.copy();
-    }
-
-    @Override
-    public PreventAllDamageToCreatureEffect copy() {
-        return new PreventAllDamageToCreatureEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

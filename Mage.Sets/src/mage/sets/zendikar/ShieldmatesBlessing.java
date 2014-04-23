@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -47,7 +47,7 @@ public class ShieldmatesBlessing extends CardImpl<ShieldmatesBlessing> {
 
         this.color.setWhite(true);
 
-        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Duration.EndOfTurn, 3));
+        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 

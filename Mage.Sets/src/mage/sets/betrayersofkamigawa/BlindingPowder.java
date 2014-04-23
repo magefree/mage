@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventCombatDamageSourceEffect;
+import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class BlindingPowder extends CardImpl<BlindingPowder> {
         this.subtype.add("Equipment");
 
         // Equipped creature has "Unattach Blinding Powder: Prevent all combat damage that would be dealt to this creature this turn."
-        Effect effect = new PreventCombatDamageSourceEffect(Duration.EndOfTurn);
+        Effect effect = new PreventCombatDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all combat damage that would be dealt to this creature this turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new BlindingPowderUnattachCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));

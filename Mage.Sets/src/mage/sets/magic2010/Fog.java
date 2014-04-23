@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PreventAllDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -45,7 +45,7 @@ public class Fog extends CardImpl<Fog> {
         super(ownerId, 182, "Fog", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "M10";
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new PreventAllDamageEffect(Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
     }
 
     public Fog(final Fog card) {

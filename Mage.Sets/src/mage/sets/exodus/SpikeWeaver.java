@@ -37,7 +37,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.PreventAllDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -71,7 +71,7 @@ public class SpikeWeaver extends CardImpl<SpikeWeaver> {
         this.addAbility(ability);
         
         // {1}, Remove a +1/+1 counter from Spike Weaver: Prevent all combat damage that would be dealt this turn.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageEffect(Duration.EndOfTurn, true), new GenericManaCost(1));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageByAllEffect(Duration.EndOfTurn, true), new GenericManaCost(1));
         ability2.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         this.addAbility(ability2);
     }

@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
-import mage.abilities.effects.common.PreventAllDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 
@@ -53,7 +53,7 @@ public class LeeryFogbeast extends CardImpl<LeeryFogbeast> {
         this.toughness = new MageInt(2);
 
         // Whenever Leery Fogbeast becomes blocked, prevent all combat damage that would be dealt this turn.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new PreventAllDamageEffect(Duration.EndOfTurn, true), false));
+        this.addAbility(new BecomesBlockedTriggeredAbility(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true), false));
     }
 
     public LeeryFogbeast(final LeeryFogbeast card) {

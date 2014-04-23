@@ -29,7 +29,7 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventAllNonCombatDamageToEffect;
+import mage.abilities.effects.common.PreventAllNonCombatDamageToAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -52,7 +52,7 @@ public class MarkOfAsylum extends CardImpl<MarkOfAsylum> {
         this.color.setWhite(true);
 
         // Prevent all noncombat damage that would be dealt to creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllNonCombatDamageToEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllNonCombatDamageToAllEffect(Duration.WhileOnBattlefield, filter)));
         
     }
 

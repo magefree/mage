@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -100,7 +100,7 @@ class KitsunePalliatorEffect extends OneShotEffect<KitsunePalliatorEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PreventDamageTargetEffect effect = new PreventDamageTargetEffect(Duration.EndOfTurn, 1);
+        PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, 1);
 
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
         for (Permanent permanent: permanents) {

@@ -36,6 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.combat.CantAttackAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -58,11 +59,11 @@ public class Cessation extends CardImpl<Cessation> {
         //Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        //Enchanted creature can't attack.
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));        
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CessationEffect()));
+        //Enchanted creature can't attack.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
         //When Cessation is put into a graveyard from the battlefield, return Cessation to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
     }
@@ -74,35 +75,5 @@ public class Cessation extends CardImpl<Cessation> {
     @Override
     public Cessation copy() {
         return new Cessation(this);
-    }
-}
-
-class CessationEffect extends RestrictionEffect<CessationEffect> {
-
-    public CessationEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Enchanted creature can't attack";
-    }
-
-    public CessationEffect(final CessationEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAttachments().contains((source.getSourceId()))) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canAttack(Game game) {
-        return false;
-    }
-
-    @Override
-    public CessationEffect copy() {
-        return new CessationEffect(this);
     }
 }

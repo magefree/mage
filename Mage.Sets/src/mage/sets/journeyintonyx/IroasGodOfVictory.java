@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageToEffect;
+import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
 import mage.abilities.effects.common.continious.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -84,7 +84,7 @@ public class IroasGodOfVictory extends CardImpl<IroasGodOfVictory> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneAllEffect(2, filter)));
         
         // Prevent all damage that would be dealt to attacking creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToEffect(Duration.WhileOnBattlefield, filterAttacking)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filterAttacking)));
         
     }
 

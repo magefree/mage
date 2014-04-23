@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -57,7 +57,7 @@ public class Caregiver extends CardImpl<Caregiver> {
         this.toughness = new MageInt(1);
 
         // {W}, Sacrifice a creature: Prevent the next 1 damage that would be dealt to target creature or player this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);

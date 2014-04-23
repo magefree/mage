@@ -25,54 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvstezzeret;
 
-import java.util.UUID;
-import mage.MageInt;
+package mage.abilities.effects.common.combat;
+
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PreventDamageToTargetMultiAmountEffect;
-import mage.abilities.keyword.ConvokeAbility;
-import mage.abilities.keyword.FlashAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
+import mage.abilities.effects.RestrictionEffect;
+import mage.constants.AttachmentType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
-public class AngelOfSalvation extends CardImpl<AngelOfSalvation> {
 
-    public AngelOfSalvation(UUID ownerId) {
-        super(ownerId, 20, "Angel of Salvation", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}{W}");
-        this.expansionSetCode = "DDF";
-        this.subtype.add("Angel");
+public class CantAttackAttachedEffect extends RestrictionEffect<CantAttackAttachedEffect> {
 
-        this.color.setWhite(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flash; convoke
-        this.addAbility(FlashAbility.getInstance());
-        this.addAbility(new ConvokeAbility());
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Angel of Salvation enters the battlefield, prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 5));
-        ability.addTarget(new TargetCreatureOrPlayerAmount(5));
-        this.addAbility(ability);
+    public CantAttackAttachedEffect(AttachmentType attachmentType) {
+        super(Duration.WhileOnBattlefield);
+        if (attachmentType.equals(AttachmentType.AURA)) {
+            this.staticText = "Enchanted creature can't attack";
+        } else {
+            this.staticText = "Equiped creature can't attack";
+        }        
     }
 
-    public AngelOfSalvation(final AngelOfSalvation card) {
-        super(card);
+    public CantAttackAttachedEffect(final CantAttackAttachedEffect effect) {
+        super(effect);
     }
 
     @Override
-    public AngelOfSalvation copy() {
-        return new AngelOfSalvation(this);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getAttachments().contains((source.getSourceId()));
     }
+
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
+
+    @Override
+    public CantAttackAttachedEffect copy() {
+        return new CantAttackAttachedEffect(this);
+    }
+
 }

@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;
@@ -57,7 +57,7 @@ public class NobleVestige extends CardImpl<NobleVestige> {
         this.toughness = new MageInt(2);
 
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

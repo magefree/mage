@@ -41,7 +41,7 @@ import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.FlipSourceEffect;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -110,7 +110,7 @@ class KaisoMemoryOfLoyalty extends Token {
         // Remove a ki counter from Kaiso, Memory of Loyalty: Prevent all damage that would be dealt to target creature this turn.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new PreventDamageTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE),
+                new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE),
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);

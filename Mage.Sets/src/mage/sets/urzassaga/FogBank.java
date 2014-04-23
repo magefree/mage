@@ -35,8 +35,8 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventCombatDamageFromSourceEffect;
-import mage.abilities.effects.common.PreventCombatDamageSourceEffect;
+import mage.abilities.effects.common.PreventCombatDamageBySourceEffect;
+import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -64,8 +64,8 @@ public class FogBank extends CardImpl<FogBank> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Prevent all combat damage that would be dealt to and dealt by Fog Bank.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventCombatDamageSourceEffect(Duration.WhileOnBattlefield));
-        ability.addEffect(new PreventCombatDamageFromSourceEffect(Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventCombatDamageToSourceEffect(Duration.WhileOnBattlefield));
+        ability.addEffect(new PreventCombatDamageBySourceEffect(Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
 

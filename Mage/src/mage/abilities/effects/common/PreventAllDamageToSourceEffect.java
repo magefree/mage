@@ -28,69 +28,37 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.filter.FilterInPlay;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PreventAllDamageToEffect extends PreventionEffectImpl<PreventAllDamageToEffect> {
+public class PreventAllDamageToSourceEffect extends PreventionEffectImpl<PreventAllDamageToSourceEffect> {
 
-    protected FilterInPlay filter;
-
-    public PreventAllDamageToEffect(Duration duration, FilterInPlay filter) {
-        super(duration);
-        this.filter = filter;
-        staticText = "Prevent all damage that would be dealt to " + filter.getMessage() + " " + duration.toString();
+    public PreventAllDamageToSourceEffect(Duration duration) {
+        super(duration, Integer.MAX_VALUE, false);
+        staticText = "Prevent all damage that would be dealt to {this} " + duration.toString();
     }
 
-    public PreventAllDamageToEffect(final PreventAllDamageToEffect effect) {
+    public PreventAllDamageToSourceEffect(final PreventAllDamageToSourceEffect effect) {
         super(effect);
-        this.filter = effect.filter.copy();
     }
 
     @Override
-    public PreventAllDamageToEffect copy() {
-        return new PreventAllDamageToEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-        }
-        return false;
+    public PreventAllDamageToSourceEffect copy() {
+        return new PreventAllDamageToSourceEffect(this);
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-                    return true;
-                }
-            }
-            else {
-                Player player = game.getPlayer(event.getTargetId());
-                if (player != null && filter.match(player, source.getSourceId(), source.getControllerId(), game)) {
-                    return true;
-                }
+            if (event.getTargetId().equals(source.getSourceId())) {
+                return true;
             }
         }
         return false;

@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class RakaDisciple extends CardImpl<RakaDisciple> {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability firstAbility  = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability firstAbility  = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));
         firstAbility.addCost(new TapSourceCost());
         firstAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(firstAbility);

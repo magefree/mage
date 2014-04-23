@@ -25,86 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *
- * @author LevelX
+ * @author BetaSteward_at_googlemail.com
  */
-public class PreventAllDamageEffect extends PreventionEffectImpl<PreventAllDamageEffect> {
+public class PreventDamageToTargetEffect extends PreventionEffectImpl<PreventDamageToTargetEffect> {
 
-    private FilterPermanent filter;
-    private final boolean onlyCombat;
-
-    public PreventAllDamageEffect(FilterPermanent filter, Duration duration, boolean onlyCombat) {
-        super(duration);
-        this.filter = filter;
-        this.onlyCombat = onlyCombat;
+    public PreventDamageToTargetEffect(Duration duration, int amount) {
+        super(duration, amount, false);
     }
 
-    public PreventAllDamageEffect(Duration duration, boolean onlyCombat) {
-        super(duration);
-        this.onlyCombat = onlyCombat;
-    }
-
-    public PreventAllDamageEffect(Duration duration) {
-        super(duration);
-        this.onlyCombat = false;
-    }
-
-    public PreventAllDamageEffect(final PreventAllDamageEffect effect) {
+    public PreventDamageToTargetEffect(final PreventDamageToTargetEffect effect) {
         super(effect);
-        if (effect.filter != null) {
-            this.filter = effect.filter.copy();
-        }
-        this.onlyCombat = effect.onlyCombat;
     }
 
     @Override
-    public PreventAllDamageEffect copy() {
-        return new PreventAllDamageEffect(this);
+    public PreventDamageToTargetEffect copy() {
+        return new PreventDamageToTargetEffect(this);
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game) && event instanceof DamageEvent && event.getAmount() > 0) {
-            DamageEvent damageEvent = (DamageEvent) event;
-            if (damageEvent.isCombatDamage() || !onlyCombat) {
-                if (filter == null) {
-                    return true;
-                }
-                Permanent permanent = game.getPermanent(damageEvent.getSourceId());
-                if (permanent != null && filter.match(permanent, game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return !this.used && super.applies(event, source, game) && event.getTargetId().equals(targetPointer.getFirst(game, source));
     }
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder("Prevent all ");
-        if (onlyCombat) {
-            sb.append("combat ");
+        StringBuilder sb = new StringBuilder();
+        if (amountToPrevent == Integer.MAX_VALUE) {
+            sb.append("Prevent all damage that would be dealt to target ");
+        } else {
+            sb.append("Prevent the next ").append(amountToPrevent).append(" damage that would be dealt to target ");
         }
-        sb.append("damage ");
-        sb.append(duration.toString());
-        if (filter != null) {
-            sb.append(" dealt by ");
-            sb.append(filter.getMessage());
-        }
+        sb.append(mode.getTargets().get(0).getTargetName()).append(" ").append(duration.toString());
         return sb.toString();
     }
+
 }

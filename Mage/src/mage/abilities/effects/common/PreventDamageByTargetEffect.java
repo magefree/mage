@@ -41,36 +41,23 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class PreventDamageFromTargetEffect extends PreventionEffectImpl<PreventDamageFromTargetEffect> {
+public class PreventDamageByTargetEffect extends PreventionEffectImpl<PreventDamageByTargetEffect> {
 
-    private int amount;
-    private boolean all;
-
-    public PreventDamageFromTargetEffect(Duration duration, int amount) {
-        super(duration);
-        this.amount = amount;
+    public PreventDamageByTargetEffect(Duration duration, int amount) {
+        super(duration, amount, false);
     }
 
-    public PreventDamageFromTargetEffect(Duration duration, boolean all) {
-        super(duration);
-        this.amount = 0;
-        this.all = all;
+    public PreventDamageByTargetEffect(Duration duration, boolean all) {
+        super(duration, Integer.MAX_VALUE, false);
     }
 
-    public PreventDamageFromTargetEffect(final PreventDamageFromTargetEffect effect) {
+    public PreventDamageByTargetEffect(final PreventDamageByTargetEffect effect) {
         super(effect);
-        this.amount = effect.amount;
-        this.all = effect.all;
     }
 
     @Override
-    public PreventDamageFromTargetEffect copy() {
-        return new PreventDamageFromTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public PreventDamageByTargetEffect copy() {
+        return new PreventDamageByTargetEffect(this);
     }
 
     @Override
@@ -88,20 +75,20 @@ public class PreventDamageFromTargetEffect extends PreventionEffectImpl<PreventD
     private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
         GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getId(), source.getControllerId(), event.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
-            if (all) {
+            if (amountToPrevent == Integer.MAX_VALUE) {
                 int damage = event.getAmount();
                 event.setAmount(0);
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
             } else {
-                if (event.getAmount() >= this.amount) {
-                    int damage = amount;
-                    event.setAmount(event.getAmount() - amount);
+                if (event.getAmount() >= amountToPrevent) {
+                    int damage = amountToPrevent;
+                    event.setAmount(event.getAmount() - amountToPrevent);
                     this.used = true;
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
                 } else {
                     int damage = event.getAmount();
                     event.setAmount(0);
-                    amount -= damage;
+                    amountToPrevent -= damage;
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
                 }
             }
@@ -124,14 +111,14 @@ public class PreventDamageFromTargetEffect extends PreventionEffectImpl<PreventD
 
     @Override
     public String getText(Mode mode) {
-        if (this.all) {
+        if (amountToPrevent == Integer.MAX_VALUE) {
             StringBuilder sb = new StringBuilder();
             sb.append("Prevent all damage target ");
             sb.append(mode.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
             return sb.toString();
         } else {
             StringBuilder sb = new StringBuilder();
-            sb.append("Prevent the next ").append(amount).append(" damage that ");
+            sb.append("Prevent the next ").append(amountToPrevent).append(" damage that ");
             sb.append(mode.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
             return sb.toString();
         }

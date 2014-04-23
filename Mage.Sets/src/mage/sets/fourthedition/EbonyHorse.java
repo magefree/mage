@@ -61,8 +61,8 @@ public class EbonyHorse extends CardImpl<EbonyHorse> {
         // {2}, {tap}: Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new PreventCombatDamageSourceEffect(Duration.EndOfTurn));
-        ability.addEffect(new PreventCombatDamageFromSourceEffect(Duration.EndOfTurn));
+        ability.addEffect(new PreventCombatDamageToSourceEffect(Duration.EndOfTurn));
+        ability.addEffect(new PreventCombatDamageBySourceEffect(Duration.EndOfTurn));
         Target target = new TargetCreaturePermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);

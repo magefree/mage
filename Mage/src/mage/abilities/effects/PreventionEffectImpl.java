@@ -33,6 +33,7 @@ import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 
 
@@ -43,21 +44,24 @@ import mage.game.events.GameEvent;
  */
 public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> extends ReplacementEffectImpl<T> implements PreventionEffect<T> {
 
-    private Integer amountToPrevent;
+    protected int amountToPrevent;
+    protected final boolean onlyCombat;
 
     public PreventionEffectImpl(Duration duration) {
-        this(duration, Integer.MAX_VALUE);
+        this(duration, Integer.MAX_VALUE, false);
     }
 
-    public PreventionEffectImpl(Duration duration, int amountToPrevent) {
+    public PreventionEffectImpl(Duration duration, int amountToPrevent, boolean onlyCombat) {
         super(duration, Outcome.PreventDamage);
         this.effectType = EffectType.PREVENTION;
         this.amountToPrevent = amountToPrevent;
+        this.onlyCombat = onlyCombat;
     }
 
     public PreventionEffectImpl(final PreventionEffectImpl effect) {
         super(effect);
         this.amountToPrevent = effect.amountToPrevent;
+        this.onlyCombat = effect.onlyCombat;
     }
 
 
@@ -70,6 +74,11 @@ public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> ex
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         game.preventDamage(event, source, game, amountToPrevent);
+        String data = event.getData();
+        if (amountToPrevent != Integer.MAX_VALUE && data != null && !data.isEmpty()) {
+            // update the amount to the amount not prevented yet
+            amountToPrevent = Integer.parseInt(event.getData());
+        }
         if (amountToPrevent == 0) {
             this.used = true;
         }
@@ -83,8 +92,8 @@ public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> ex
             case DAMAGE_CREATURE:
             case DAMAGE_PLAYER:
             case DAMAGE_PLANESWALKER:
-                // return preventable flag
-                return event.getFlag();
+                // return preventable flag && combatOnly check
+                return event.getFlag() && (!onlyCombat || ((DamageEvent)event).isCombatDamage());
             default:
                 return false;
         }

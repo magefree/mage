@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalGainActivatedAbility;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -60,12 +60,12 @@ public class HallowedHealer extends CardImpl<HallowedHealer> {
         this.toughness = new MageInt(1);
 
         // {tap}: Prevent the next 2 damage that would be dealt to target creature or player this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn,2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn,2), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer(true));
         this.addAbility(ability);
         // Threshold - {tap}: Prevent the next 4 damage that would be dealt to target creature or player this turn. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD, 
-                                                                        new PreventDamageTargetEffect(Duration.EndOfTurn,4), 
+                                                                        new PreventDamageToTargetEffect(Duration.EndOfTurn,4), 
                                                                         new TapSourceCost(), 
                                                                         new CardsInControllerGraveCondition(7), 
                                                                         "<i>Threshold</i> - {T}: Prevent the next 4 damage that would be dealt to target creature or player this turn. Activate this ability only if seven or more cards are in your graveyard.");

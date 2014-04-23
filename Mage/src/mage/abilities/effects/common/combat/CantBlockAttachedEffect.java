@@ -40,13 +40,22 @@ import mage.game.permanent.Permanent;
  */
 public class CantBlockAttachedEffect extends RestrictionEffect<CantBlockAttachedEffect> {
 
-    public CantBlockAttachedEffect(AttachmentType attachmentType) {
-        super(Duration.WhileOnBattlefield);
+    public CantBlockAttachedEffect(AttachmentType attachmentType) {        
+        this(attachmentType, Duration.WhileOnBattlefield);
+    }
+    
+    public CantBlockAttachedEffect(AttachmentType attachmentType, Duration duration) {        
+        super(duration);
+        StringBuilder sb = new StringBuilder();
         if (attachmentType.equals(AttachmentType.AURA)) {
-            this.staticText = "Enchanted creature can't block";
+            sb.append("Enchanted creature can't block");
         } else {
-            this.staticText = "Equiped creature can't block";
+            sb.append("Equiped creature can't block");
         }
+        if (!duration.toString().isEmpty()) {
+            sb.append(" ").append(duration.toString());
+        }
+        staticText = sb.toString();
     }
 
     public CantBlockAttachedEffect(final CantBlockAttachedEffect effect) {
@@ -55,12 +64,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect<CantBlockAttached
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment != null && attachment.getAttachedTo() != null
-                && permanent.getId().equals(attachment.getAttachedTo())) {
-            return true;
-        }
-        return false;
+        return permanent.getAttachments().contains(source.getSourceId());
     }
 
     @Override

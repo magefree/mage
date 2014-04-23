@@ -1837,30 +1837,53 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
-    public boolean preventDamage(GameEvent event, Ability source, Game game, Integer amountToPrevent) {
+    public boolean preventDamage(GameEvent event, Ability source, Game game, int amountToPrevent) {
         if (!(event instanceof DamageEvent)) {
             return false;
         }
         DamageEvent damageEvent = (DamageEvent) event;
         GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, damageEvent.getTargetId(), damageEvent.getSourceId(), source.getControllerId(), damageEvent.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
-            int preventedDamage = damageEvent.getAmount();
+            int preventedDamage;
+            if (event.getAmount() > amountToPrevent) {
+                preventedDamage = amountToPrevent;
+                damageEvent.setAmount(event.getAmount() - amountToPrevent);
+            } else {
+                preventedDamage = event.getAmount();
+                damageEvent.setAmount(0);
+
+            } 
+            if (amountToPrevent != Integer.MAX_VALUE) {
+                amountToPrevent -= preventedDamage;
+                // set remaining amount 
+                event.setData(Integer.toString(amountToPrevent));
+            }            
             MageObject damageSource = game.getObject(damageEvent.getSourceId());
             MageObject preventionSource = game.getObject(source.getSourceId());
+            
             if (damageSource != null && preventionSource != null) {
-                StringBuilder message = new StringBuilder(Integer.toString(preventedDamage)).append(" damage from ");
-                message.append(damageSource.getName()).append(" prevented ");
-                message.append("(").append(preventionSource).append(")");
+                MageObject targetObject = game.getObject(event.getTargetId());
+                String targetName = "";
+                if (targetObject == null) {
+                    Player targetPlayer = game.getPlayer(event.getTargetId());
+                    if (targetPlayer != null) {
+                        targetName = targetPlayer.getName();
+                    }
+                } else {
+                    targetName = targetObject.getName();
+                }
+                StringBuilder message = new StringBuilder(preventionSource.getName()).append(": Prevented ");
+                message.append(Integer.toString(preventedDamage)).append(" damage from ").append(damageSource.getName());
+                if (!targetName.isEmpty()) {
+                    message.append(" to ").append(targetName);
+                }
                 game.informPlayers(message.toString());
             }
-            damageEvent.setAmount(0);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, damageEvent.getTargetId(), source.getSourceId(), source.getControllerId(), preventedDamage));
             return true;
         }
         return false;
     }
-
-
 
 
     protected void removeCreaturesFromCombat() {

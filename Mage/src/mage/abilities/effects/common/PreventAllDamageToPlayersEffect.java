@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
@@ -44,17 +43,13 @@ import mage.players.Player;
 
 public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl<PreventAllDamageToPlayersEffect> {
 
-    private boolean onlyCombat;
-
     public PreventAllDamageToPlayersEffect(Duration duration, boolean onlyCombat) {
         super(duration);
-        this.onlyCombat = onlyCombat;
         staticText = setText();
     }
 
     public PreventAllDamageToPlayersEffect(final PreventAllDamageToPlayersEffect effect) {
         super(effect);
-        this.onlyCombat = effect.onlyCombat;
     }
 
     @Override
@@ -68,27 +63,12 @@ public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl<Preven
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-        }
-        return false;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)) {
-            DamageEvent damageEvent = (DamageEvent) event;
-            if ((damageEvent.isCombatDamage() || !onlyCombat) && damageEvent.isPreventable()) {
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null && controller.getInRange().contains(event.getTargetId())){
-                    return true;
-                }
+        if (super.applies(event, source, game) && event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null && controller.getInRange().contains(event.getTargetId())){
+                return true;
             }
-
         }
         return false;
     }

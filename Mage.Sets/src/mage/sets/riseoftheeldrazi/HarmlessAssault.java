@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PreventAllDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
 
@@ -51,7 +51,7 @@ public class HarmlessAssault extends CardImpl<HarmlessAssault> {
         // Prevent all combat damage that would be dealt this turn by attacking
         // creatures.
         this.getSpellAbility().addEffect(
-                new PreventAllDamageEffect(new FilterAttackingCreature(), Duration.EndOfTurn, true));
+                new PreventAllDamageByAllEffect(new FilterAttackingCreature(), Duration.EndOfTurn, true));
     }
 
     public HarmlessAssault(final HarmlessAssault card) {

@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class Dawnfluke extends CardImpl<Dawnfluke> {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // When Dawnfluke enters the battlefield, prevent the next 3 damage that would be dealt to target creature or player this turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new PreventDamageTargetEffect(Duration.EndOfTurn, 3));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
         Target target = new TargetCreatureOrPlayer();
         target.setRequired(true);
         ability.addTarget(target);

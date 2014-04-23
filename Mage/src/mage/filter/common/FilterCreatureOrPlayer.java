@@ -92,6 +92,10 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object> implements Filter
         return this.playerFilter;
     }
 
+    public void setCreatureFilter(FilterCreaturePermanent creatureFilter) {
+        this.creatureFilter = creatureFilter;
+    }
+
     @Override
     public FilterCreatureOrPlayer copy() {
         return new FilterCreatureOrPlayer(this);

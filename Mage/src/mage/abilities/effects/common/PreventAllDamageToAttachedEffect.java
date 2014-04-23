@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
@@ -42,19 +43,16 @@ import mage.game.permanent.Permanent;
 public class PreventAllDamageToAttachedEffect extends PreventionEffectImpl<PreventAllDamageToAttachedEffect> {
 
     private final String attachedDescription;
-    private final boolean combatOnly;
 
     public PreventAllDamageToAttachedEffect(Duration duration, String attachedDescription, boolean combatOnly) {
-        super(duration);
+        super(duration, Integer.MAX_VALUE, false);
         this.attachedDescription = attachedDescription;
-        this.combatOnly = combatOnly;
         staticText = setText();
     }
 
     public PreventAllDamageToAttachedEffect(final PreventAllDamageToAttachedEffect effect) {
         super(effect);
         this.attachedDescription = effect.attachedDescription;
-        this.combatOnly = effect.combatOnly;
     }
 
     @Override
@@ -63,30 +61,16 @@ public class PreventAllDamageToAttachedEffect extends PreventionEffectImpl<Preve
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-        }
-        return false;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            Permanent attachment = game.getPermanent(source.getSourceId());
-            if (attachment != null 
-                    && attachment.getAttachedTo() != null) {
-                if (event.getTargetId().equals(attachment.getAttachedTo())) {
-                    return true;
-                }
+            if (!onlyCombat || ((DamageEvent)event).isCombatDamage()) {
+                Permanent attachment = game.getPermanent(source.getSourceId());
+                if (attachment != null 
+                        && attachment.getAttachedTo() != null) {
+                    if (event.getTargetId().equals(attachment.getAttachedTo())) {
+                        return true;
+                    }
+                }                
             }
         }
         return false;
@@ -94,7 +78,7 @@ public class PreventAllDamageToAttachedEffect extends PreventionEffectImpl<Preve
 
     private String setText() {
         StringBuilder sb = new StringBuilder("Prevent all ");
-        if (combatOnly) {
+        if (onlyCombat) {
             sb.append("combat ");
         }
         sb.append("damage that would be dealt to ");

@@ -38,7 +38,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PreventAllDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCardInHand;
 
@@ -59,7 +59,7 @@ public class Dawnstrider extends CardImpl<Dawnstrider> {
         this.toughness = new MageInt(1);
 
         // {G}, {tap}, Discard a card: Prevent all combat damage that would be dealt this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageEffect(Duration.EndOfTurn, true), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageByAllEffect(Duration.EndOfTurn, true), new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability);

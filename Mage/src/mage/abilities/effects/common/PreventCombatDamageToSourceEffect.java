@@ -32,55 +32,37 @@ import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 
 /**
  *
  * @author jeffwadsworth
  */
-public class PreventCombatDamageFromSourceEffect extends PreventionEffectImpl<PreventCombatDamageFromSourceEffect> {
+public class PreventCombatDamageToSourceEffect extends PreventionEffectImpl<PreventCombatDamageToSourceEffect> {
 
-    public PreventCombatDamageFromSourceEffect(Duration duration) {
-            super(duration);
-            staticText = "Prevent all combat damage that would be dealt by {this}" + duration.toString();
+    public PreventCombatDamageToSourceEffect(Duration duration) {
+            super(duration, Integer.MAX_VALUE, true);
+            staticText = "Prevent all combat damage that would be dealt to {this}" + duration.toString();
     }
 
-    public PreventCombatDamageFromSourceEffect(final PreventCombatDamageFromSourceEffect effect) {
+    public PreventCombatDamageToSourceEffect(final PreventCombatDamageToSourceEffect effect) {
             super(effect);
     }
 
     @Override
-    public PreventCombatDamageFromSourceEffect copy() {
-            return new PreventCombatDamageFromSourceEffect(this);
+    public PreventCombatDamageToSourceEffect copy() {
+            return new PreventCombatDamageToSourceEffect(this);
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-            return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getSourceId(), source.getFirstTarget(), source.getControllerId(), event.getAmount(), false);
-            if (!game.replaceEvent(preventEvent)) {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getSourceId(), source.getFirstTarget(), source.getControllerId(), damage));
-                return true;
-            }
-            return false;
-        }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-            if (super.applies(event, source, game)) {
-                DamageEvent damageEvent = (DamageEvent) event;
-                if (event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage()) {
-                    return true;
-                }
+        if (super.applies(event, source, game)) {
+            if (event.getTargetId().equals(source.getSourceId())) {
+                return true;
             }
-            return false;
+        }
+        return false;
     }
 
 }
+

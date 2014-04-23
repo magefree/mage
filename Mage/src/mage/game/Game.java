@@ -187,10 +187,10 @@ public interface Game extends MageItem, Serializable {
      * @param damageEvent damage event that will be replaced (instanceof check will be done)
      * @param source ability that's the source of the prevention effect
      * @param game
-     * @param amountToPrevent
+     * @param amountToPrevent max preventable amount
      * @return true prevention was successfull / false prevention was replaced
      */
-    boolean preventDamage(GameEvent damageEvent, Ability source, Game game, Integer amountToPrevent);
+    boolean preventDamage(GameEvent damageEvent, Ability source, Game game, int amountToPrevent);
     /**
      * Creates and fires an damage prevention event
      *

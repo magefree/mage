@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.abilities.effects.common.PreventAllDamageToEffect;
+import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.other.PlayerPredicate;
@@ -56,7 +56,7 @@ public class SafePassage  extends CardImpl<SafePassage> {
         super(ownerId, 28, "Safe Passage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "M10";
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new PreventAllDamageToEffect(Duration.EndOfTurn, filter));
+        this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter));
     }
 
     public SafePassage(final SafePassage card) {

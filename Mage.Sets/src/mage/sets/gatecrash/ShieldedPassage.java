@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,7 +48,7 @@ public class ShieldedPassage extends CardImpl<ShieldedPassage> {
         this.color.setWhite(true);
 
         // Prevent all damage that would be dealt to target creature this turn.
-        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE));
+        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 

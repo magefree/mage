@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
 public class PreventAllDamageToControllerEffect extends PreventionEffectImpl<PreventAllDamageToControllerEffect> {
 
     public PreventAllDamageToControllerEffect(Duration duration) {
-        super(duration);
+        super(duration, Integer.MAX_VALUE, false);
         staticText = setText();
     }
 
@@ -54,22 +54,6 @@ public class PreventAllDamageToControllerEffect extends PreventionEffectImpl<Pre
     @Override
     public PreventAllDamageToControllerEffect copy() {
         return new PreventAllDamageToControllerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-        }
-        return false;
     }
 
     @Override

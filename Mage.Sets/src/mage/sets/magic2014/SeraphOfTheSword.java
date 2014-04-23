@@ -30,8 +30,8 @@ package mage.sets.magic2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventAllDamageSourceEffect;
-import mage.abilities.effects.common.PreventCombatDamageSourceEffect;
+import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
+import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -57,7 +57,7 @@ public class SeraphOfTheSword extends CardImpl<SeraphOfTheSword> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Prevent all combat damage that would be dealt to Seraph of the Sword.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventCombatDamageSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventCombatDamageToSourceEffect(Duration.WhileOnBattlefield)));
     }
 
     public SeraphOfTheSword(final SeraphOfTheSword card) {

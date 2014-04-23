@@ -28,7 +28,7 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PreventAllDamageToEffect;
+import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -58,7 +58,7 @@ public class Endure extends CardImpl<Endure> {
         this.color.setWhite(true);
 
         // Prevent all damage that would be dealt to you and permanents you control this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageToEffect(Duration.EndOfTurn, filter));
+        this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter));
         
     }
 

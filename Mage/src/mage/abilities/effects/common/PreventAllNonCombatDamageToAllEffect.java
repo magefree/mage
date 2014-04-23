@@ -42,24 +42,24 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class PreventAllNonCombatDamageToEffect extends PreventionEffectImpl<PreventAllNonCombatDamageToEffect> {
+public class PreventAllNonCombatDamageToAllEffect extends PreventionEffectImpl<PreventAllNonCombatDamageToAllEffect> {
 
     protected FilterInPlay filter;
 
-    public PreventAllNonCombatDamageToEffect(Duration duration, FilterInPlay filter) {
-        super(duration, Integer.MAX_VALUE);
+    public PreventAllNonCombatDamageToAllEffect(Duration duration, FilterInPlay filter) {
+        super(duration, Integer.MAX_VALUE, false);
         this.filter = filter;
         staticText = "Prevent all non combat damage that would be dealt to " + filter.getMessage() + " " + duration.toString();
     }
 
-    public PreventAllNonCombatDamageToEffect(final PreventAllNonCombatDamageToEffect effect) {
+    public PreventAllNonCombatDamageToAllEffect(final PreventAllNonCombatDamageToAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
 
     @Override
-    public PreventAllNonCombatDamageToEffect copy() {
-        return new PreventAllNonCombatDamageToEffect(this);
+    public PreventAllNonCombatDamageToAllEffect copy() {
+        return new PreventAllNonCombatDamageToAllEffect(this);
     }
 
     @Override

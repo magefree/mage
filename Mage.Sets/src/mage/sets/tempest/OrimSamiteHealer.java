@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -56,7 +56,7 @@ public class OrimSamiteHealer extends CardImpl<OrimSamiteHealer> {
         this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 3), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 3), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         // {tap}: Prevent the next 3 damage that would be dealt to target creature or player this turn.

@@ -28,7 +28,6 @@
 
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
@@ -44,29 +43,21 @@ import mage.game.permanent.Permanent;
 public class PreventAllDamageByAttachedEffect extends PreventionEffectImpl<PreventAllDamageByAttachedEffect> {
 
     private final String attachedDescription;
-    private final boolean combatOnly;
 
-    public PreventAllDamageByAttachedEffect(Duration duration, String attachedDescription, boolean combatOnly) {
-        super(duration);
+    public PreventAllDamageByAttachedEffect(Duration duration, String attachedDescription, boolean onlyCombat) {
+        super(duration, Integer.MAX_VALUE, onlyCombat);
         this.attachedDescription = attachedDescription;
-        this.combatOnly = combatOnly;
         staticText = setText();
     }
 
     public PreventAllDamageByAttachedEffect(final PreventAllDamageByAttachedEffect effect) {
         super(effect);
         this.attachedDescription = effect.attachedDescription;
-        this.combatOnly = effect.combatOnly;
     }
 
     @Override
     public PreventAllDamageByAttachedEffect copy() {
         return new PreventAllDamageByAttachedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -84,7 +75,7 @@ public class PreventAllDamageByAttachedEffect extends PreventionEffectImpl<Preve
 
     private String setText() {
         StringBuilder sb = new StringBuilder("prevent all ");
-        if (combatOnly) {
+        if (onlyCombat) {
             sb.append("combat ");
         }
         sb.append("damage that would be dealt by ");

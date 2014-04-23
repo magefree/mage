@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.ConstellationAbility;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -54,7 +54,7 @@ public class HarvestguardAlseids extends CardImpl<HarvestguardAlseids> {
         this.toughness = new MageInt(3);
 
         // Constellation — Whenever Harvestguard Alseids or another enchantment enters the battlefield under your control, prevent all damage that would be dealt to target creature this turn.
-        Ability ability = new ConstellationAbility(new PreventDamageTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), false);
+        Ability ability = new ConstellationAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), false);
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }

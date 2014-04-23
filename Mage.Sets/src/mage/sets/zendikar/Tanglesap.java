@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PreventAllDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,7 +57,7 @@ public class Tanglesap extends CardImpl<Tanglesap> {
         this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt this turn by creatures without trample.
-        this.getSpellAbility().addEffect(new PreventAllDamageEffect(filter, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(filter, Duration.EndOfTurn, true));
         
     }
 

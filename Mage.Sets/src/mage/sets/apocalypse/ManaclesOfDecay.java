@@ -34,13 +34,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.CantAttackAttachedEffect;
+import mage.abilities.effects.common.combat.CantBlockAttachedEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,14 +53,20 @@ public class ManaclesOfDecay extends CardImpl<ManaclesOfDecay> {
         this.expansionSetCode = "APC";
         this.subtype.add("Aura");
         this.color.setWhite(true);
+        
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaclesOfDecayFirstEffect()));
+        
+        // Enchanted creature can't attack.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
+        // {B}: Enchanted creature gets -1/-1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManaclesOfDecaySecondEffect(), new ColoredManaCost(ColoredManaSymbol.R)));
+        // {R}: Enchanted creature can't block this turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.AURA, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
 
     }
 
@@ -73,66 +78,4 @@ public class ManaclesOfDecay extends CardImpl<ManaclesOfDecay> {
     public ManaclesOfDecay copy() {
         return new ManaclesOfDecay(this);
     }
-}
-
-class ManaclesOfDecayFirstEffect extends RestrictionEffect<ManaclesOfDecayFirstEffect> {
-
-    public ManaclesOfDecayFirstEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Enchanted creature can't attack";
-    }
-
-    public ManaclesOfDecayFirstEffect(final ManaclesOfDecayFirstEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAttachments().contains((source.getSourceId()))) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canAttack(Game game) {
-        return false;
-    }
-
-    @Override
-    public ManaclesOfDecayFirstEffect copy() {
-        return new ManaclesOfDecayFirstEffect(this);
-    }
-
-}
-
-class ManaclesOfDecaySecondEffect extends RestrictionEffect<ManaclesOfDecaySecondEffect> {
-
-    public ManaclesOfDecaySecondEffect() {
-        super(Duration.EndOfTurn);
-        staticText = "Enchanted creature can't block until end of turn";
-    }
-
-    public ManaclesOfDecaySecondEffect(final ManaclesOfDecaySecondEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAttachments().contains((source.getSourceId()))) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public ManaclesOfDecaySecondEffect copy() {
-        return new ManaclesOfDecaySecondEffect(this);
-    }
-
 }

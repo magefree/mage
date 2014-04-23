@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PreventDamageFromTargetEffect;
+import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,7 +49,7 @@ public class SoulParry extends CardImpl<SoulParry> {
         this.color.setWhite(true);
         Target target = new TargetCreaturePermanent(1,2);
         target.setTargetName("one or two creatures");
-        this.getSpellAbility().addEffect(new PreventDamageFromTargetEffect(Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(target);
     }
 

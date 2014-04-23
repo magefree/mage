@@ -47,24 +47,21 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  * @author LevelX2
  */
 
-public class PreventDamageTargetAmountEffect extends PreventionEffectImpl<PreventDamageTargetAmountEffect> {
+public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl<PreventDamageToTargetMultiAmountEffect> {
 
-    private final int amount;
     private final Map<UUID, Integer> targetAmountMap = new HashMap<>();
 
-    public PreventDamageTargetAmountEffect(Duration duration, int amount) {
-        super(duration);
-        this.amount = amount;
+    public PreventDamageToTargetMultiAmountEffect(Duration duration, int amount) {
+        super(duration, amount, false);
     }
 
-    public PreventDamageTargetAmountEffect(final PreventDamageTargetAmountEffect effect) {
+    public PreventDamageToTargetMultiAmountEffect(final PreventDamageToTargetMultiAmountEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
-    public PreventDamageTargetAmountEffect copy() {
-        return new PreventDamageTargetAmountEffect(this);
+    public PreventDamageToTargetMultiAmountEffect copy() {
+        return new PreventDamageToTargetMultiAmountEffect(this);
     }
 
     @Override
@@ -102,18 +99,18 @@ public class PreventDamageTargetAmountEffect extends PreventionEffectImpl<Preven
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int targetAmount = targetAmountMap.get(event.getTargetId());
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
             if (event.getAmount() >= targetAmount) {
                 int damage = targetAmount;
                 event.setAmount(event.getAmount() - targetAmount);
                 targetAmountMap.remove(event.getTargetId());
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), damage));
             } else {
                 int damage = event.getAmount();
                 event.setAmount(0);
                 targetAmountMap.put(event.getTargetId(), targetAmount -= damage);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), damage));
             }
             if (targetAmountMap.isEmpty()) {
                 this.used = true;
@@ -132,9 +129,8 @@ public class PreventDamageTargetAmountEffect extends PreventionEffectImpl<Preven
 
     @Override
     public String getText(Mode mode) {
-        // prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose
         StringBuilder sb = new StringBuilder();
-        sb.append("Prevent the next ").append(amount).append(" damage that would be dealt ");
+        sb.append("Prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
         if (duration.equals(Duration.EndOfTurn)) {
             sb.append("this turn ");
         }

@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PreventAllDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -48,7 +48,7 @@ public class EtherealHaze extends CardImpl<EtherealHaze> {
     this.color.setWhite(true);
 
         // Prevent all damage that would be dealt by creatures this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageEffect(new FilterCreaturePermanent("creatures"), Duration.EndOfTurn, false));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(new FilterCreaturePermanent("creatures"), Duration.EndOfTurn, false));
 
     }
 

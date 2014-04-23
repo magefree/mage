@@ -28,8 +28,8 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PreventAllDamageEffect;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -49,7 +49,7 @@ public class HoldAtBay extends CardImpl<HoldAtBay> {
         this.color.setWhite(true);
 
         // Prevent the next 7 damage that would be dealt to target creature or player this turn.
-        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Duration.EndOfTurn, 7));
+        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 7));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
     }
 

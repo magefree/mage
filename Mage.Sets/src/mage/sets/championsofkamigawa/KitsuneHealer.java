@@ -37,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -67,7 +67,7 @@ public class KitsuneHealer extends CardImpl<KitsuneHealer> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         firstAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(firstAbility);
         Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KitsuneHealerEffect(), new TapSourceCost());

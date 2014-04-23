@@ -35,7 +35,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventAllDamageToEffect;
+import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.other.PlayerIdPredicate;
@@ -68,7 +68,7 @@ public class EmmaraTandris extends CardImpl<EmmaraTandris> {
         this.toughness = new MageInt(7);
 
         // Prevent all damage that would be dealt to creature tokens you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public EmmaraTandris(final EmmaraTandris card) {

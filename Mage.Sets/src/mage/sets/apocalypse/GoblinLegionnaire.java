@@ -36,7 +36,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -59,7 +59,7 @@ public class GoblinLegionnaire extends CardImpl<GoblinLegionnaire> {
         firstAbility.addCost(new SacrificeSourceCost());
         firstAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 2), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ColoredManaCost(ColoredManaSymbol.W));
         secondAbility.addCost(new SacrificeSourceCost());
         secondAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(secondAbility);

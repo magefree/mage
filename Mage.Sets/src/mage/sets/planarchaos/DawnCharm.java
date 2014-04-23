@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.PreventAllDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
@@ -64,7 +64,7 @@ public class DawnCharm extends CardImpl<DawnCharm> {
         this.color.setWhite(true);
 
         // Choose one - Prevent all combat damage that would be dealt this turn; or regenerate target creature; or counter target spell that targets you.
-        this.getSpellAbility().addEffect(new PreventAllDamageEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn));
 
         Mode mode = new Mode();
         mode.getEffects().add(new RegenerateTargetEffect());

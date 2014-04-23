@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.FlipSourceEffect;
-import mage.abilities.effects.common.PreventAllDamageToEffect;
+import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -120,6 +120,6 @@ class RuneTailEssence extends Token {
         color.setWhite(true);
 
         // Prevent all damage that would be dealt to creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToEffect(Duration.WhileOnBattlefield, new FilterControlledCreatureInPlay())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, new FilterControlledCreatureInPlay())));
     }
 }

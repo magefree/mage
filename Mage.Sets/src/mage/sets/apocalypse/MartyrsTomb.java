@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -51,7 +51,7 @@ public class MartyrsTomb extends CardImpl<MartyrsTomb> {
         this.expansionSetCode = "APC";
         this.color.setBlack(true);
         this.color.setWhite(true);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 1), new PayLifeCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new PayLifeCost(2));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

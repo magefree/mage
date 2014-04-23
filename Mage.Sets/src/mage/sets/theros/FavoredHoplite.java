@@ -30,7 +30,7 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.PreventAllDamageSourceEffect;
+import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class FavoredHoplite extends CardImpl<FavoredHoplite> {
 
         // Heroic - Whenever you cast a spell that targets Favored Hoplite, put a +1/+1 counter on Favored Hoplite and prevent all damage that would be dealt to it this turn.
         Ability ability = new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        ability.addEffect(new PreventAllDamageSourceEffect(Duration.EndOfTurn));
+        ability.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn));
         this.addAbility(ability);
     }
 
