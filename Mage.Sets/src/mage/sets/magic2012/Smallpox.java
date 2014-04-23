@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DiscardEachPlayerEffect;
+import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;

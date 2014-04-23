@@ -34,7 +34,7 @@ import mage.abilities.common.SacrificeSourceTriggeredAbility;
 import mage.abilities.condition.common.AttachedToCounterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;

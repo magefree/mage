@@ -30,7 +30,7 @@ package mage.sets.avacynrestored;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;

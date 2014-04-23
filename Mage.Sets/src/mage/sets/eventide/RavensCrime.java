@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.constants.TimingRule;

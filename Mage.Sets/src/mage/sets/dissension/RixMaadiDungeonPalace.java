@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DiscardEachPlayerEffect;
+import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;

@@ -35,7 +35,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.DrawDiscardTargetEffect;
 import mage.constants.Zone;

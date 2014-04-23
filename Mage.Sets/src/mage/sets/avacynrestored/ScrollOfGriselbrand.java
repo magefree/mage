@@ -37,7 +37,7 @@ import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;

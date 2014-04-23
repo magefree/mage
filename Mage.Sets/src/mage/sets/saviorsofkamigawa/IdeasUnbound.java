@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DiscardControllerEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 

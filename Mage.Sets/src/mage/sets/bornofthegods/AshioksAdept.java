@@ -29,7 +29,7 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.effects.common.DiscardEachPlayerEffect;
+import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

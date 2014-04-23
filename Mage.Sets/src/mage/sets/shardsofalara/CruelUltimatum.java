@@ -27,6 +27,7 @@
  */
 package mage.sets.shardsofalara;
 
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;

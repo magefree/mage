@@ -37,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;

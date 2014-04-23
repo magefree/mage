@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.PutCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

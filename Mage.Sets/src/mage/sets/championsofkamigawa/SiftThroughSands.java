@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DiscardControllerEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;

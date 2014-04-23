@@ -1,4 +1,4 @@
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.discard;
 
 import java.util.HashMap;
 import java.util.UUID;

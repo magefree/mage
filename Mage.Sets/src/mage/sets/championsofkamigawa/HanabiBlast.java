@@ -33,7 +33,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DiscardControllerEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.ReturnToHandSpellEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;

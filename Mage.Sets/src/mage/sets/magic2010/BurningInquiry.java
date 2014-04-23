@@ -29,7 +29,7 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DiscardEachPlayerEffect;
+import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

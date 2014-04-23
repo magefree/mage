@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DiscardControllerEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;

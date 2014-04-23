@@ -32,7 +32,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.SweepNumber;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.SweepEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

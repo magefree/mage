@@ -34,7 +34,7 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.ChannelAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

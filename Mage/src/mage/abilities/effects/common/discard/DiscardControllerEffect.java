@@ -25,11 +25,10 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.discard;
 
 import mage.constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -42,74 +41,76 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
+public class DiscardControllerEffect extends OneShotEffect<DiscardControllerEffect> {
 
     protected DynamicValue amount;
     protected boolean randomDiscard;
 
-    public DiscardTargetEffect(DynamicValue amount) {
-        this(amount, false);
-    }
-
-    public DiscardTargetEffect(DynamicValue amount, boolean randomDiscard) {
-        super(Outcome.Discard);
-        this.randomDiscard = randomDiscard;
-        this.amount = amount;
-    }
-
-    public DiscardTargetEffect(int amount) {
+    public DiscardControllerEffect(int amount) {
         this(new StaticValue(amount));
     }
 
-    public DiscardTargetEffect(int amount, boolean randomDiscard) {
+    public DiscardControllerEffect(int amount, boolean randomDiscard) {
         this(new StaticValue(amount), randomDiscard);
     }
 
-    public DiscardTargetEffect(final DiscardTargetEffect effect) {
+    public DiscardControllerEffect(DynamicValue amount) {
+        this(amount, false);
+    }
+
+    public DiscardControllerEffect(DynamicValue amount, boolean randomDiscard) {
+        super(Outcome.Discard);
+        this.amount = amount;
+        this.randomDiscard = randomDiscard;
+        setText();
+    }
+
+    public DiscardControllerEffect(final DiscardControllerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.randomDiscard = effect.randomDiscard;
     }
 
     @Override
-    public DiscardTargetEffect copy() {
-        return new DiscardTargetEffect(this);
+    public DiscardControllerEffect copy() {
+        return new DiscardControllerEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        boolean result = false;
+        Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (randomDiscard) {
                 int maxAmount = Math.min(amount.calculate(game, source), player.getHand().size());
                 for (int i = 0; i < maxAmount; i++) {
                     Card card = player.getHand().getRandom(game);
                     if (card != null) {
-                        player.discard(card, source, game);
+                        result |= player.discard(card, source, game);
                     }
                 }
             } else {
                 player.discard(amount.calculate(game, source), source, game);
+                result = true;
             }
-
-            return true;
         }
-        return false;
+        return result;
     }
 
-    @Override
-    public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        if(mode.getTargets().isEmpty()){
-            sb.append("that player");
-        } else {
-            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
-        }
-        sb.append(" discards ");
+    private void setText() {
+        StringBuilder sb = new StringBuilder("Discard ");
         if (amount.toString().equals("1")) {
-            sb.append(" a card");
+            sb.append("a");
         } else {
-            sb.append(CardUtil.numberToText(amount.toString())).append(" cards");
+            sb.append(CardUtil.numberToText(amount.toString()));
+        }
+        sb.append(" card");
+        try {
+            if (Integer.parseInt(amount.toString()) > 1) {
+                sb.append("s");
+            }
+        } catch (Exception e) {
+            sb.append("s");
         }
         if (randomDiscard) {
             sb.append(" at random");
@@ -119,6 +120,6 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
             sb.append(" for each ");
         }
         sb.append(message);
-        return sb.toString();
+        staticText = sb.toString();
     }
 }

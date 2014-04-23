@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EnchantedCreatureColorCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;

@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevouredCreaturesCount;
 import mage.abilities.effects.common.DevourEffect.DevourFactor;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;

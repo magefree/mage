@@ -29,7 +29,7 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

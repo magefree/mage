@@ -33,7 +33,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.ControlsBiggestOrTiedCreatureCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
 import mage.target.Target;

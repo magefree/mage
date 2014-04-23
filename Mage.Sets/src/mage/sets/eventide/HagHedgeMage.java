@@ -34,7 +34,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.condition.common.ControlsPermanentCondition.CountType;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
