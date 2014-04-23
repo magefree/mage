@@ -27,11 +27,12 @@
  */
 package mage.abilities.effects.common;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.constants.Duration;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -44,22 +45,18 @@ import mage.game.permanent.Permanent;
 public class PreventAllDamageByAllEffect extends PreventionEffectImpl<PreventAllDamageByAllEffect> {
 
     private FilterPermanent filter;
-    private final boolean onlyCombat;
 
-    public PreventAllDamageByAllEffect(FilterPermanent filter, Duration duration, boolean onlyCombat) {
-        super(duration);
-        this.filter = filter;
-        this.onlyCombat = onlyCombat;
+    public PreventAllDamageByAllEffect(Duration duration) {
+        this(null, duration, false);
     }
 
     public PreventAllDamageByAllEffect(Duration duration, boolean onlyCombat) {
-        super(duration);
-        this.onlyCombat = onlyCombat;
+        this(null, duration, onlyCombat);
     }
 
-    public PreventAllDamageByAllEffect(Duration duration) {
-        super(duration);
-        this.onlyCombat = false;
+    public PreventAllDamageByAllEffect(FilterCreaturePermanent filter, Duration duration, boolean onlyCombat) {
+        super(duration, Integer.MAX_VALUE, false);
+        this.filter = filter;
     }
 
     public PreventAllDamageByAllEffect(final PreventAllDamageByAllEffect effect) {
@@ -67,7 +64,6 @@ public class PreventAllDamageByAllEffect extends PreventionEffectImpl<PreventAll
         if (effect.filter != null) {
             this.filter = effect.filter.copy();
         }
-        this.onlyCombat = effect.onlyCombat;
     }
 
     @Override

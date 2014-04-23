@@ -53,8 +53,6 @@ import java.util.UUID;
  */
 public class ClingingMists extends CardImpl<ClingingMists> {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-
     public ClingingMists(UUID ownerId) {
         super(ownerId, 109, "Clinging Mists", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "DKA";
@@ -62,7 +60,7 @@ public class ClingingMists extends CardImpl<ClingingMists> {
         this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(filter, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(null, Duration.EndOfTurn, true));
 
         // Fateful hour - If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controller's next untap step.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ClingingMistsEffect(),

@@ -28,16 +28,14 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -54,7 +52,7 @@ public class TerrifyingPresence extends CardImpl<TerrifyingPresence> {
 
         // Prevent all combat damage that would be dealt by creatures other than target creature this turn.
         this.getSpellAbility().addEffect(new TerrifyingPresenceEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public TerrifyingPresence(final TerrifyingPresence card) {
@@ -70,7 +68,7 @@ public class TerrifyingPresence extends CardImpl<TerrifyingPresence> {
 class TerrifyingPresenceEffect extends PreventionEffectImpl<TerrifyingPresenceEffect> {
 
     public TerrifyingPresenceEffect() {
-        super(Duration.EndOfTurn);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, true);
         this.staticText = "Prevent all combat damage that would be dealt by creatures other than target creature this turn";
     }
 
@@ -84,36 +82,7 @@ class TerrifyingPresenceEffect extends PreventionEffectImpl<TerrifyingPresenceEf
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            StringBuilder message = new StringBuilder();
-            if (permanent != null) {
-                message.append(" from ").append(permanent.getName());
-            }
-            message.insert(0, "Damage").append(" has been prevented: ").append(damage);
-            event.setAmount(0);
-            game.informPlayers(message.toString());
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-        }
-        return false;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game) && event instanceof DamageEvent) {
-            DamageEvent damageEvent = (DamageEvent) event;
-            if (damageEvent.isCombatDamage() && !damageEvent.getSourceId().equals(source.getFirstTarget())) {
-                return true;
-            }
-        }
-        return false;
+        return super.applies(event, source, game) && !event.getSourceId().equals(getTargetPointer().getFirst(game, source));
     }
 }

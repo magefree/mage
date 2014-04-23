@@ -96,24 +96,24 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl<Div
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
             if (amount == -1) {
                 // define once
                 amount = source.getManaCostsToPay().getX();
             }
-            int prevented = 0;
+            int prevented;
             if (event.getAmount() >= this.amount) {
                 int damage = amount;
                 event.setAmount(event.getAmount() - amount);
                 this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), damage));
                 prevented = damage;
             } else {
                 int damage = event.getAmount();
                 event.setAmount(0);
                 amount -= damage;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), damage));
                 prevented = damage;
             }
 
@@ -130,7 +130,7 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl<Div
                 if (player != null) {
                     game.informPlayers("Dealing " + prevented + " to " + player.getName() + " instead");
                     // keep the original source id as it is redirecting
-                    player.damage(prevented, event.getSourceId(), game, true, false);
+                    player.damage(prevented, event.getSourceId(), game, false, true);
                 }
             }
         }
@@ -162,12 +162,9 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl<Div
                 }
             }
             //   check player
-            Player player = game.getPlayer(event.getTargetId());
-            if (player != null) {
-                if (player.getId().equals(source.getControllerId())) {
-                    // it is you
-                    return true;
-                }
+            if (source.getControllerId().equals(event.getTargetId())) {
+                // it is you
+                return true;
             }
         }
         return false;

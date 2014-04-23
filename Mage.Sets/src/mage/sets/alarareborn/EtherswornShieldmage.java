@@ -28,26 +28,16 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreatureOrPlayer;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.other.PlayerIdPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *
