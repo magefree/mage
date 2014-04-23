@@ -160,7 +160,9 @@ public class UserManager {
                 logger.info(new StringBuilder(user.getName()).append(" session expired userId: ").append(user.getId())
                         .append(" sessionId: ").append(user.getSessionId()));
                 user.kill(User.DisconnectReason.LostConnection);
+                logger.debug("check Expired: Removing user");
                 users.remove(user.getId());
+                logger.debug("check Expired: user removed");
             }
         }
     }

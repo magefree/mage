@@ -47,9 +47,9 @@ import org.apache.log4j.Logger;
 public class ChatSession {
 
     private static final Logger logger = Logger.getLogger(ChatSession.class);
-    private ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<UUID, String>();
-    private UUID chatId;
-    private DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
+    private final ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<>();
+    private final UUID chatId;
+    private final DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
 
     public ChatSession() {
         chatId = UUID.randomUUID();
@@ -65,11 +65,13 @@ public class ChatSession {
         }
     }
 
-    public void kill(UUID userId, User.DisconnectReason reason) {
+    synchronized public void  kill(UUID userId, User.DisconnectReason reason) {
         if (userId != null && clients.containsKey(userId)) {
+            logger.debug("kill user: Start kill userId " + userId);
             String userName = clients.get(userId);
             String message;
             clients.remove(userId);
+            logger.debug("kill user: After remove " + userId);
             switch (reason) {
                 case Disconnected:
                     message = " has left MAGE";
@@ -81,7 +83,7 @@ public class ChatSession {
                      message = " has left chat";
             }
             broadcast(null, new StringBuilder(userName).append(message).toString(), MessageColor.BLUE, true, MessageType.STATUS);
-            logger.debug(userName + message + " " + chatId);
+            logger.debug("kill user: " + userName + message + " " + chatId);
         }
     }
 
@@ -123,7 +125,7 @@ public class ChatSession {
             final String msg = message;
             final String time = (withTime ? timeFormatter.format(new Date()):"");
             final String username = userName;
-            logger.debug("Broadcasting '" + msg + "' for " + chatId);
+            logger.trace("Broadcasting '" + msg + "' for " + chatId);
             for (UUID userId: clients.keySet()) {
                 User user = UserManager.getInstance().getUser(userId);
                 if (user != null) {

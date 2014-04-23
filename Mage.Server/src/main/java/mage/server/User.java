@@ -237,8 +237,12 @@ public class User {
     }
 
     public boolean isExpired(Date expired) {
+        if (lastActivity.before(expired)) {
+            logger.debug(new StringBuilder(userName).append(" is expired!"));
+            return true;
+        }
         logger.trace(new StringBuilder("isExpired: User ").append(userName).append(" lastActivity: ").append(lastActivity).append(" expired: ").append(expired).toString());
-        return /*userState == UserState.Disconnected && */ lastActivity.before(expired);
+        return false; /*userState == UserState.Disconnected && */ 
     }
 
     private void reconnect() {
@@ -317,24 +321,21 @@ public class User {
     }
 
     public void kill(DisconnectReason reason) {
-        logger.debug("kill: kill game sessions");
         for (GameSession gameSession: gameSessions.values()) {
             gameSession.kill();
         }
-        logger.debug("kill: kill draft sessions");
         for (DraftSession draftSession: draftSessions.values()) {
             draftSession.setKilled();
         }
-        logger.debug("kill: kill tournament sessions");
         for (TournamentSession tournamentSession: tournamentSessions.values()) {
             tournamentSession.setKilled();
         }
-        logger.debug("kill: leave tables");
         for (Entry<UUID, Table> entry: tables.entrySet()) {
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
-        logger.debug("kill: remove user from chat");
+        logger.debug("kill: remove user from chat before");
         ChatManager.getInstance().removeUser(userId, reason);
+        logger.debug("kill: remove user from chat after");
     }
 
     public void setUserData(UserData userData) {

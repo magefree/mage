@@ -62,7 +62,7 @@ public class TableWaitingDialog extends MageDialog {
     private UUID roomId;
     private boolean isTournament;
     private Session session;
-    private TableWaitModel tableWaitModel;
+    private final TableWaitModel tableWaitModel;
     private UpdateSeatsTask updateTask;
 
     /** Creates new form TableWaitingDialog */

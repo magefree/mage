@@ -34,6 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -158,8 +159,10 @@ public class ChatManager {
     }
 
     public void removeUser(UUID userId, User.DisconnectReason reason) {
+        Logger.getLogger(ChatManager.class).debug("Remove user start");
         for (ChatSession chat: chatSessions.values()) {
             chat.kill(userId, reason);
         }
+        Logger.getLogger(ChatManager.class).debug("Remove user end");
     }
 }
