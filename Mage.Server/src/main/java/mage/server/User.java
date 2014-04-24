@@ -321,15 +321,19 @@ public class User {
     }
 
     public void kill(DisconnectReason reason) {
+        logger.debug("kill: game sessions " + gameSessions.size());
         for (GameSession gameSession: gameSessions.values()) {
             gameSession.kill();
         }
+        logger.debug("kill: draft sessions " + draftSessions.size());
         for (DraftSession draftSession: draftSessions.values()) {
             draftSession.setKilled();
         }
+        logger.debug("kill: tournament sessions " + tournamentSessions.size());
         for (TournamentSession tournamentSession: tournamentSessions.values()) {
             tournamentSession.setKilled();
         }
+        logger.debug("kill: tables " + tables.size());
         for (Entry<UUID, Table> entry: tables.entrySet()) {
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }

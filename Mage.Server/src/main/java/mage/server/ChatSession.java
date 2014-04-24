@@ -66,12 +66,11 @@ public class ChatSession {
     }
 
     synchronized public void  kill(UUID userId, User.DisconnectReason reason) {
-        if (userId != null && clients.containsKey(userId)) {
-            logger.debug("kill user: Start kill userId " + userId);
+        if (userId != null && clients.containsKey(userId)) {            
             String userName = clients.get(userId);
-            String message;
+            logger.debug(userName + " leaves chat: " + chatId);
             clients.remove(userId);
-            logger.debug("kill user: After remove " + userId);
+            String message;
             switch (reason) {
                 case Disconnected:
                     message = " has left MAGE";
@@ -83,7 +82,7 @@ public class ChatSession {
                      message = " has left chat";
             }
             broadcast(null, new StringBuilder(userName).append(message).toString(), MessageColor.BLUE, true, MessageType.STATUS);
-            logger.debug("kill user: " + userName + message + " " + chatId);
+            logger.debug(userName + "left chat with reason " + message + " " + chatId);
         }
     }
 

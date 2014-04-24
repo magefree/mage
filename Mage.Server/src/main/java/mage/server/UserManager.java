@@ -58,6 +58,16 @@ public class UserManager {
     }
 
     private UserManager() {
+
+        Thread.setDefaultUncaughtExceptionHandler(
+        new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                System.out.println(t.getName() + ": " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+
         expireExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -109,7 +119,7 @@ public class UserManager {
             if (users.containsKey(userId)) {
                 User user = users.get(userId);
                 user.setSessionId(""); // Session will be set again with new id if user reconnects
-                ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
+                // ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
                 logger.info(new StringBuilder("User ").append(user.getName()).append(" has lost connection  userId:").append(userId));                
             }
             ChatManager.getInstance().removeUser(userId, reason);
@@ -130,8 +140,8 @@ public class UserManager {
                     .append(" userId: ").append(userId)
                     .append(" sessionId: ").append(user.getSessionId())
                     .append(" Reason: ").append(reason.toString()));
-            ChatManager.getInstance().removeUser(userId, reason);
             ChatManager.getInstance().broadcast(userId, new StringBuilder("has disconnected (").append(reason.toString()).append(")").toString(), MessageColor.BLACK);
+            ChatManager.getInstance().removeUser(userId, reason);
             users.get(userId).kill(reason);
             users.remove(userId);
         } else {

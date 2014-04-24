@@ -207,7 +207,8 @@ public class TableManager {
     }
 
     public void leaveTable(UUID userId, UUID tableId) {
-        if (controllers.containsKey(tableId)) {
+        TableController tableController = controllers.get(tableId);
+        if (tableController != null) {
             // table not started yet and user is the owner, remove the table
             Table table = getTable(tableId);
             if (table != null
@@ -217,7 +218,7 @@ public class TableManager {
                 removeTable(tableId);
 
             } else {
-                controllers.get(tableId).leaveTable(userId);
+                tableController.leaveTable(userId);
             }
         }
     }
