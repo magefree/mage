@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -80,17 +81,13 @@ public class VassalsDuty extends CardImpl<VassalsDuty> {
 
 class VassalsDutyPreventDamageTargetEffect extends PreventionEffectImpl<VassalsDutyPreventDamageTargetEffect> {
 
-    private int amount;
-
     public VassalsDutyPreventDamageTargetEffect(Duration duration, int amount) {
-        super(duration);
-        this.amount = amount;
+        super(duration, amount, false);
         staticText = "The next " + amount + " damage that would be dealt to target legendary creature you control this turn is dealt to you instead";
     }
 
     public VassalsDutyPreventDamageTargetEffect(final VassalsDutyPreventDamageTargetEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
@@ -99,51 +96,27 @@ class VassalsDutyPreventDamageTargetEffect extends PreventionEffectImpl<VassalsD
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int prevented;
-            if (event.getAmount() >= this.amount) {
-                int damage = amount;
-                event.setAmount(event.getAmount() - amount);
-                this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), damage));
-                prevented = damage;
-            } else {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                amount -= damage;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), damage));
-                prevented = damage;
-            }
-
-            // deal damage now
-            if (prevented > 0) {
-                UUID redirectTo = source.getControllerId();
-                Player player = game.getPlayer(redirectTo);
-                if (player != null) {
-                    game.informPlayers("Dealing " + prevented + " to " + player.getName() + " instead");
-                    // keep the original source id as it is redirecting
-                    player.damage(prevented, event.getSourceId(), game, true, false);
-                }
+        PreventionEffectData preventionResult = preventDamageAction(event, source, game);
+        // deal damage now
+        if (preventionResult.getPreventedDamage() > 0) {
+            UUID redirectTo = source.getControllerId();
+            Player player = game.getPlayer(redirectTo);
+            if (player != null) {
+                game.informPlayers("Dealing " + preventionResult.getPreventedDamage() + " to " + player.getName() + " instead");
+                // keep the original source id as it is redirecting
+                player.damage(preventionResult.getPreventedDamage(), event.getSourceId(), game, false, true);
             }
         }
+        // damage amount is reduced or set to 0 so complete replacement of damage event is never neccessary
         return false;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                if (permanent.getId().equals(this.getTargetPointer().getFirst(game, source))) {
-                    return true;
-                }
+            if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
+                return game.getPermanent(event.getTargetId()) != null;
             }
         }
         return false;

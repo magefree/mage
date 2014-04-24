@@ -114,14 +114,8 @@ class PhantomNantukoPreventionEffect extends PreventionEffectImpl<PhantomNantuko
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        boolean retValue = false;
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getSourceId(), event.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        int damage = event.getAmount();
-        if (!game.replaceEvent(preventEvent)) {
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getSourceId(), event.getSourceId(), source.getControllerId(), damage));
-            retValue = true;
-        }
+        preventDamageAction(event, source, game);
+
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             boolean removeCounter = true;
@@ -135,15 +129,16 @@ class PhantomNantukoPreventionEffect extends PreventionEffectImpl<PhantomNantuko
                     combatPhaseStep = game.getTurn().getStep();
                 }
             }
-            StringBuilder sb = new StringBuilder(permanent.getName()).append(": ");
+            
             if(removeCounter && permanent.getCounters().containsKey(CounterType.P1P1)) {
+                StringBuilder sb = new StringBuilder(permanent.getName()).append(": ");
                 permanent.removeCounters(CounterType.P1P1.createInstance(), game);
-                sb.append("removed a +1/+1 counter ");
-            }
-            game.informPlayers(sb.append(" prevented ").append(damage).append(" Damage").toString());
+                sb.append("Removed a +1/+1 counter ");
+                game.informPlayers(sb.toString());
+            }            
         }
 
-        return retValue;
+        return false;
     }
 
     @Override

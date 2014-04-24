@@ -85,7 +85,7 @@ class ThunderstaffPreventionEffect extends PreventionEffectImpl<ThunderstaffPrev
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public ThunderstaffPreventionEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, 1, true, false);
         staticText = "As long as {this} is untapped, if a creature would deal combat damage to you, prevent 1 of that damage";
     }
 
@@ -96,30 +96,6 @@ class ThunderstaffPreventionEffect extends PreventionEffectImpl<ThunderstaffPrev
     @Override
     public ThunderstaffPreventionEffect copy() {
         return new ThunderstaffPreventionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getSourceId(), source.getControllerId(), 1, false);
-        if (!game.replaceEvent(preventEvent)) {
-            event.setAmount(event.getAmount() - 1);
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (permanent != null && sourcePermanent != null) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(sourcePermanent.getName()).append(": ");
-                sb.append(1).append(" damage").append(" from ").append(permanent.getName());
-                sb.append(" has been prevented");
-                game.informPlayers(sb.toString());
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getControllerId(), source.getSourceId(), source.getControllerId(), 1));
-        }
-        return false;
     }
 
     @Override

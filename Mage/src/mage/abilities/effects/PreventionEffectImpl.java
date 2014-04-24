@@ -43,15 +43,19 @@ import mage.game.events.GameEvent;
  * @param <T>
  */
 public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> extends ReplacementEffectImpl<T> implements PreventionEffect<T> {
-
+   
     protected int amountToPrevent;
     protected final boolean onlyCombat;
+    protected boolean consumable;
 
     public PreventionEffectImpl(Duration duration) {
         this(duration, Integer.MAX_VALUE, false);
     }
 
     public PreventionEffectImpl(Duration duration, int amountToPrevent, boolean onlyCombat) {
+        this(duration, amountToPrevent, onlyCombat, true);
+    }
+    public PreventionEffectImpl(Duration duration, int amountToPrevent, boolean onlyCombat, boolean consumable) {
         super(duration, Outcome.PreventDamage);
         this.effectType = EffectType.PREVENTION;
         this.amountToPrevent = amountToPrevent;
@@ -62,6 +66,7 @@ public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> ex
         super(effect);
         this.amountToPrevent = effect.amountToPrevent;
         this.onlyCombat = effect.onlyCombat;
+        this.consumable = effect.consumable;
     }
 
 
@@ -71,18 +76,23 @@ public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> ex
         return true;
     }
 
+    protected PreventionEffectData preventDamageAction(GameEvent event, Ability source, Game game) {
+        PreventionEffectData preventionData = game.preventDamage(event, source, game, amountToPrevent);
+        if (!preventionData.isError() && !preventionData.isReplaced()) {
+            if (consumable) {
+                amountToPrevent = preventionData.getRemainingAmount();
+            }
+            if (amountToPrevent == 0) {
+                this.used = true;
+            }            
+        }
+        return preventionData;
+    }
+    
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        game.preventDamage(event, source, game, amountToPrevent);
-        String data = event.getData();
-        if (amountToPrevent != Integer.MAX_VALUE && data != null && !data.isEmpty()) {
-            // update the amount to the amount not prevented yet
-            amountToPrevent = Integer.parseInt(event.getData());
-        }
-        if (amountToPrevent == 0) {
-            this.used = true;
-        }
-        // damage amount is reduced or set to 0 so replace of damage event is never neccessary
+        preventDamageAction(event, source, game);
+        // damage amount is reduced or set to 0 so complete replacement of damage event is never neccessary
         return false;
     }
 

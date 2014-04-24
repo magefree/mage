@@ -54,6 +54,7 @@ import mage.abilities.common.ChancellorAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.continious.SourceEffect;
 import mage.abilities.keyword.LeylineAbility;
@@ -1832,57 +1833,60 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
-    public boolean preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage) {
+    public PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage) {
         return preventDamage(event, source, game, Integer.MAX_VALUE);
     }
 
     @Override
-    public boolean preventDamage(GameEvent event, Ability source, Game game, int amountToPrevent) {
+    public PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, int amountToPrevent) {
+        PreventionEffectData result = new PreventionEffectData(amountToPrevent);
         if (!(event instanceof DamageEvent)) {
-            return false;
+            result.setError(true);
+            return result;
         }
         DamageEvent damageEvent = (DamageEvent) event;
         GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, damageEvent.getTargetId(), damageEvent.getSourceId(), source.getControllerId(), damageEvent.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int preventedDamage;
-            if (event.getAmount() > amountToPrevent) {
-                preventedDamage = amountToPrevent;
-                damageEvent.setAmount(event.getAmount() - amountToPrevent);
-            } else {
-                preventedDamage = event.getAmount();
-                damageEvent.setAmount(0);
-
-            } 
-            if (amountToPrevent != Integer.MAX_VALUE) {
-                amountToPrevent -= preventedDamage;
-                // set remaining amount 
-                event.setData(Integer.toString(amountToPrevent));
-            }            
-            MageObject damageSource = game.getObject(damageEvent.getSourceId());
-            MageObject preventionSource = game.getObject(source.getSourceId());
-            
-            if (damageSource != null && preventionSource != null) {
-                MageObject targetObject = game.getObject(event.getTargetId());
-                String targetName = "";
-                if (targetObject == null) {
-                    Player targetPlayer = game.getPlayer(event.getTargetId());
-                    if (targetPlayer != null) {
-                        targetName = targetPlayer.getName();
-                    }
-                } else {
-                    targetName = targetObject.getName();
-                }
-                StringBuilder message = new StringBuilder(preventionSource.getName()).append(": Prevented ");
-                message.append(Integer.toString(preventedDamage)).append(" damage from ").append(damageSource.getName());
-                if (!targetName.isEmpty()) {
-                    message.append(" to ").append(targetName);
-                }
-                game.informPlayers(message.toString());
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, damageEvent.getTargetId(), source.getSourceId(), source.getControllerId(), preventedDamage));
-            return true;
+        if (game.replaceEvent(preventEvent)) {
+            result.setReplaced(true);
+            return result;
         }
-        return false;
+        
+        if (event.getAmount() > amountToPrevent) {
+            result.setPreventedDamage(amountToPrevent);
+            damageEvent.setAmount(event.getAmount() - amountToPrevent);
+        } else {
+            result.setPreventedDamage(event.getAmount());
+            damageEvent.setAmount(0);
+
+        } 
+        if (amountToPrevent != Integer.MAX_VALUE) {
+            // set remaining amount
+            event.setData(Integer.toString(amountToPrevent -= result.getPreventedDamage()));
+        }            
+        MageObject damageSource = game.getObject(damageEvent.getSourceId());
+        MageObject preventionSource = game.getObject(source.getSourceId());
+
+        if (damageSource != null && preventionSource != null) {
+            MageObject targetObject = game.getObject(event.getTargetId());
+            String targetName = "";
+            if (targetObject == null) {
+                Player targetPlayer = game.getPlayer(event.getTargetId());
+                if (targetPlayer != null) {
+                    targetName = targetPlayer.getName();
+                }
+            } else {
+                targetName = targetObject.getName();
+            }
+            StringBuilder message = new StringBuilder(preventionSource.getName()).append(": Prevented ");
+            message.append(Integer.toString(result.getPreventedDamage())).append(" damage from ").append(damageSource.getName());
+            if (!targetName.isEmpty()) {
+                message.append(" to ").append(targetName);
+            }
+            game.informPlayers(message.toString());
+        }
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, damageEvent.getTargetId(), source.getSourceId(), source.getControllerId(), result.getPreventedDamage()));
+        return result;
+
     }
 
 

@@ -67,10 +67,13 @@ public class KitsuneHealer extends CardImpl<KitsuneHealer> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        
+        // {T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.        
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         firstAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KitsuneHealerEffect(), new TapSourceCost());
+        // {T}: Prevent all damage that would be dealt to target legendary creature this turn.
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new TapSourceCost());
         secondAbility.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(secondAbility);
     }
@@ -82,40 +85,6 @@ public class KitsuneHealer extends CardImpl<KitsuneHealer> {
     @Override
     public KitsuneHealer copy() {
         return new KitsuneHealer(this);
-    }
-
-}
-
-class KitsuneHealerEffect extends PreventionEffectImpl<KitsuneHealerEffect> {
-
-    public KitsuneHealerEffect() {
-        super(Duration.EndOfTurn);
-        staticText = "Prevent all damage that would be dealt to target legendary creature this turn";
-    }
-
-    public KitsuneHealerEffect(final KitsuneHealerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KitsuneHealerEffect copy() {
-        return new KitsuneHealerEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-        }
-        return false;
     }
 
 }

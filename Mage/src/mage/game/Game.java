@@ -66,6 +66,7 @@ import mage.util.functions.ApplyToPermanent;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.abilities.effects.PreventionEffectData;
 import mage.game.command.Commander;
 
 public interface Game extends MageItem, Serializable {
@@ -190,7 +191,7 @@ public interface Game extends MageItem, Serializable {
      * @param amountToPrevent max preventable amount
      * @return true prevention was successfull / false prevention was replaced
      */
-    boolean preventDamage(GameEvent damageEvent, Ability source, Game game, int amountToPrevent);
+    PreventionEffectData preventDamage(GameEvent damageEvent, Ability source, Game game, int amountToPrevent);
     /**
      * Creates and fires an damage prevention event
      *
@@ -200,7 +201,7 @@ public interface Game extends MageItem, Serializable {
      * @param preventAllDamage true if there is no limit to the damage that can be prevented
      * @return true prevention was successfull / false prevention was replaced
      */
-    boolean preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage);
+    PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage);
 
     //game play methods
     void start(UUID choosingPlayerId);
