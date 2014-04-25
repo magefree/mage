@@ -109,7 +109,7 @@ class ShowAndTellEffect extends OneShotEffect<ShowAndTellEffect> {
                 if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        card.putOntoBattlefield(game, Zone.HAND, source.getId(), player.getId());
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
                     }
                 }
             }

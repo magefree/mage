@@ -52,6 +52,13 @@ public class ClingingMistsTest extends CardTestPlayerBase {
     public void testCardExile2() {
         setLife(playerA, 5);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        /**
+         * Clinging Mists
+         * Instant
+         * Prevent all combat damage that would be dealt this turn.
+         * Fateful hour - If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controller's next untap step.
+         *
+         */
         addCard(Zone.HAND, playerA, "Clinging Mists");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
         addCard(Zone.BATTLEFIELD, playerB, "Abbey Griffin");

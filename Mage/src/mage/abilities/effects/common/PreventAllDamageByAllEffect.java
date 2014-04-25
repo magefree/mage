@@ -55,7 +55,7 @@ public class PreventAllDamageByAllEffect extends PreventionEffectImpl<PreventAll
     }
 
     public PreventAllDamageByAllEffect(FilterCreaturePermanent filter, Duration duration, boolean onlyCombat) {
-        super(duration, Integer.MAX_VALUE, false);
+        super(duration, Integer.MAX_VALUE, onlyCombat);
         this.filter = filter;
     }
 
