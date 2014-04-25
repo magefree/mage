@@ -48,16 +48,13 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class DawnToDusk extends CardImpl<DawnToDusk> {
 
-    private static final FilterCard filterCard = new FilterCard("enchantment card");
+    private static final FilterCard filterCard = new FilterCard("enchantment card from your graveyard");
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
     static {
         filterCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
     public DawnToDusk(UUID ownerId) {
         super(ownerId, 6, "Dawn to Dusk", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
         this.expansionSetCode = "BNG";
