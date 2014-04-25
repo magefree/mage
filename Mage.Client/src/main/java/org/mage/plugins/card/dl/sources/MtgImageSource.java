@@ -28,12 +28,8 @@
 
 package org.mage.plugins.card.dl.sources;
 
-import java.util.HashMap;
-import java.util.Map;
-import static javax.swing.UIManager.put;
-import mage.client.dialog.PreferencesDialog;
+import mage.cards.SplitCard;
 import org.mage.plugins.card.images.CardDownloadData;
-import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  *
@@ -58,11 +54,15 @@ public class MtgImageSource implements CardImageSource {
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
-        String set = CardImageUtils.updateSet(cardSet, true);
-               
         StringBuilder url = new StringBuilder("http://mtgimage.com/set/");
-        url.append(set.toUpperCase()).append("/").append(card.getName());
+        url.append(cardSet.toUpperCase()).append("/");
 
+        if (card.isSplitCard()) {            
+            url.append(card.getName().replaceAll(" // ", ""));
+        } else {
+            url.append(card.getName());
+        }
+        
         if (card.isTwoFacedCard()) {
             url.append(card.isSecondSide() ? "b" : "a");
         }
