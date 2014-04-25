@@ -7,7 +7,8 @@ package mage.constants;
 public enum SetType {
     CORE("Core"),
     EXPANSION("Expansion"),
-    REPRINT("Reprint");
+    REPRINT("Reprint"),
+    JOKESET("Joke Set");
 
     private String text;
 

@@ -28,12 +28,13 @@
 
 package mage.deck;
 
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
+import mage.cards.decks.Constructed;
+import mage.constants.SetType;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import mage.constants.SetType;
-import mage.cards.ExpansionSet;
-import mage.cards.decks.Constructed;
-import mage.cards.Sets;
 
 /**
  *
@@ -52,7 +53,8 @@ public class Standard extends Constructed {
             cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 2, Calendar.SEPTEMBER, 1);
         }
         for (ExpansionSet set: Sets.getInstance().values()) {
-            if (set.getReleaseDate().after(cutoff.getTime()) && set.getSetType() != SetType.REPRINT) {
+            if (set.getReleaseDate().after(cutoff.getTime()) && set.getSetType() != SetType.REPRINT
+                    && set.getSetType() != SetType.JOKESET) {
                 setCodes.add(set.getCode());
             }
         }
