@@ -214,7 +214,7 @@ class TableListSorter implements Comparator<Table> {
         }
         // priority 2 - Not finished yet -> Sorted by time started
         if (two.getState().equals(TableState.STARTING) || two.getState().equals(TableState.WAITING)) {
-            return -1;
+            return 1; // two has higher priority
         } else if (one.getEndTime() == null) {
             if (two.getEndTime() == null) {                    
                 return two.getStartTime().compareTo(one.getStartTime());
