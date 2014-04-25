@@ -34,24 +34,6 @@
 
 package mage.client.game;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-import javax.swing.JComponent;
-import javax.swing.JLayeredPane;
-import javax.swing.JScrollPane;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
@@ -61,6 +43,16 @@ import mage.client.util.audio.AudioManager;
 import mage.constants.CardType;
 import mage.utils.CardUtil;
 import mage.view.PermanentView;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.util.*;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  *
@@ -139,6 +131,19 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                         int s2 = oldMagePermanent.getLinks().size();
                         if (s1 != s2) {
                             changed = true;
+                        } else if (s1 > 0) {
+                            Set<UUID> attachmentIds = new HashSet<UUID>();
+                            attachmentIds.addAll(permanent.getAttachments());
+                            for (MagePermanent magePermanent : oldMagePermanent.getLinks()) {
+                                if (!attachmentIds.contains(magePermanent.getOriginalPermanent().getId())) {
+                                    // that means that the amount of attachments is the same
+                                    // but they are different:
+                                    // we've just found an attachment on previous view
+                                    // that doesn't exist anymore on current view
+                                    changed = true;
+                                    break;
+                                }
+                            }
                         }
                     }
 
