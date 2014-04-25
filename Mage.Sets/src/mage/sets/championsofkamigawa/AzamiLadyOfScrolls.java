@@ -65,6 +65,8 @@ public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
         this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
+        
+        // Tap an untapped Wizard you control: Draw a card.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
     }
 

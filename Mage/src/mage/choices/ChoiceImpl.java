@@ -35,13 +35,14 @@ import java.util.Set;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class ChoiceImpl<T extends ChoiceImpl<T>> implements Choice, Serializable {
 
     protected boolean chosen;
     protected boolean required;
     protected String choice;
-    protected Set<String> choices = new LinkedHashSet<String>();
+    protected Set<String> choices = new LinkedHashSet<>();
     protected String message;
 
     public ChoiceImpl() {

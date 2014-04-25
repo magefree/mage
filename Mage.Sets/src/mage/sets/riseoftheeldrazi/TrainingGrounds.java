@@ -29,6 +29,7 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -91,40 +92,44 @@ class TrainingGroundsEffect extends CostModificationEffectImpl<TrainingGroundsEf
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Mana mana = abilityToModify.getManaCostsToPay().getMana();
-        int reduceMax = mana.getColorless();
-        if(mana.count() == mana.getColorless()){
-            reduceMax--;
-        }
-        if(reduceMax > 2){
-            reduceMax = 2;
-        }
-        Player player = game.getPlayer(abilityToModify.getControllerId());
-        if(player != null){
-            ChoiceImpl choice = new ChoiceImpl(true);
-            LinkedHashSet<String> set = new LinkedHashSet<String>();
-            
-            for(int i = 0; i <= reduceMax; i++){
-                set.add(String.valueOf(i));
+        Player controller = game.getPlayer(abilityToModify.getControllerId());
+        if (controller != null){
+            Mana mana = abilityToModify.getManaCostsToPay().getMana();
+            int reduceMax = mana.getColorless();
+            if (reduceMax > 0 && mana.count() == mana.getColorless()){
+                reduceMax--;
             }
-            choice.setChoices(set);
-            choice.setMessage("Reduce ability cost");
-            if(player.choose(Outcome.Benefit, choice, game)){
-                int reduce = Integer.parseInt(choice.getChoice());
-                mana.setColorless(mana.getColorless() - reduce);
-                abilityToModify.getManaCostsToPay().load(mana.toString());
-                return true;
+            if (reduceMax > 2){
+                reduceMax = 2;
             }
+            if (reduceMax > 0) {
+                ChoiceImpl choice = new ChoiceImpl(true);
+                Set<String> set = new LinkedHashSet<>();
+
+                for(int i = 0; i <= reduceMax; i++){
+                    set.add(String.valueOf(i));
+                }
+                choice.setChoices(set);
+                choice.setMessage("Reduce ability cost");
+                if(controller.choose(Outcome.Benefit, choice, game)){
+                    int reduce = Integer.parseInt(choice.getChoice());
+                    mana.setColorless(mana.getColorless() - reduce);
+                    abilityToModify.getManaCostsToPay().load(mana.toString());
+                }
+            }
+            return true;
         }
          return false;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        //Activated abilities of creatures you control
-        Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
-        if (abilityToModify instanceof ActivatedAbility && permanent != null && filter.match(permanent, source.getId(), source.getControllerId(), game)) {
-            return true;
+        if (abilityToModify instanceof ActivatedAbility) {
+            //Activated abilities of creatures you control
+            Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
+            if (permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+                return true;             
+            }
         }
         return false;
     }
