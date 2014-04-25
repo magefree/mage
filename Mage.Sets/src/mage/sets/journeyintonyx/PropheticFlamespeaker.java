@@ -151,7 +151,7 @@ class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl<Prophe
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null ) {
                     if (card.getCardType().contains(CardType.LAND)) {
-                        // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
+                        // If the revealed card is a land, you can play it only if it's your turn and you can play still a land this turn.
                         if (player.canPlayLand() 
                                 && game.getActivePlayerId().equals(player.getId())
                                 && game.getStack().isEmpty() 
