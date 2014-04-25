@@ -28,19 +28,16 @@
 
 package mage.server.game;
 
+import java.util.UUID;
 import mage.game.Game;
+import mage.game.match.Match;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.view.GameClientMessage;
+import mage.view.GameEndView;
 import mage.view.GameView;
 import org.apache.log4j.Logger;
-
-import java.rmi.RemoteException;
-import java.util.UUID;
-import mage.game.GameState;
-import mage.game.match.Match;
-import mage.view.GameEndView;
 
 /**
  *
@@ -74,10 +71,10 @@ public class GameWatcher {
 
     public void update() {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
-            }
+                User user = UserManager.getInstance().getUser(userId);
+                if (user != null) {
+                    user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
+                }
         }
     }
 
@@ -117,11 +114,6 @@ public class GameWatcher {
         }
     }
 
-    protected void handleRemoteException(RemoteException ex) {
-        logger.fatal("GameWatcher error", ex);
-        GameManager.getInstance().kill(game.getId(), userId);
-    }
-
     public void setKilled() {
         killed = true;
     }
@@ -137,5 +129,5 @@ public class GameWatcher {
     public boolean isPlayer() {
         return isPlayer;
     }
-
+       
 }

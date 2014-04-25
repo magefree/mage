@@ -33,9 +33,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;
 import org.apache.log4j.Logger;
 
@@ -57,23 +59,13 @@ public class UserManager {
         return INSTANCE;
     }
 
-    private UserManager() {
-
-        Thread.setDefaultUncaughtExceptionHandler(
-        new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread t, Throwable e) {
-                System.out.println(t.getName() + ": " + e.getMessage());
-                e.printStackTrace();
-            }
-        });
-
+    private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
+    
+    private UserManager()  {
         expireExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                logger.debug("Check expired start");
                 checkExpired();
-                logger.debug("Check expired end");
             }
         }, 60, 60, TimeUnit.SECONDS);
     }
@@ -119,8 +111,6 @@ public class UserManager {
             if (users.containsKey(userId)) {
                 User user = users.get(userId);
                 user.setSessionId(""); // Session will be set again with new id if user reconnects
-                // ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
-                logger.info(new StringBuilder("User ").append(user.getName()).append(" has lost connection  userId:").append(userId));                
             }
             ChatManager.getInstance().removeUser(userId, reason);
         }
@@ -158,23 +148,40 @@ public class UserManager {
     }
 
     /**
-     * Is the connection lost for more than 3 minutes, the user will be removed (within 3 minutes he can reconnect)
+     * Is the connection lost for more than 3 minutes, the user will be removed (within 3 minutes the user can reconnect)
      */
     private void checkExpired() {
-        Calendar expired = Calendar.getInstance();
-        expired.add(Calendar.MINUTE, -3) ;
-        List<User> usersToCheck = new ArrayList<>();
-        usersToCheck.addAll(users.values());
-        for (User user: usersToCheck) {
-            if (user.isExpired(expired.getTime())) {
-                logger.info(new StringBuilder(user.getName()).append(" session expired userId: ").append(user.getId())
-                        .append(" sessionId: ").append(user.getSessionId()));
-                user.kill(User.DisconnectReason.LostConnection);
-                logger.debug("check Expired: Removing user");
-                users.remove(user.getId());
-                logger.debug("check Expired: user removed");
-            }
+        // calling this with executer saves the sceduled job to be dying becuase of exception.
+        // Also exceptions were not reported as now with this handling
+        try {
+            callExecutor.execute(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Calendar expired = Calendar.getInstance();
+                        expired.add(Calendar.MINUTE, -3);
+                        List<User> usersToCheck = new ArrayList<>();
+                        usersToCheck.addAll(users.values());
+                        for (User user : usersToCheck) {
+                            if (user.isExpired(expired.getTime())) {
+                                logger.info(new StringBuilder(user.getName()).append(": session expired userId: ").append(user.getId())
+                                        .append(" Host: ").append(user.getHost()));
+                                user.kill(User.DisconnectReason.LostConnection);
+                                users.remove(user.getId());
+                            }
+                        }
+                    }
+                }
+            );
+            
+        } catch (Exception ex) {
+            handleException(ex);
         }
     }
 
+    public void handleException(Exception ex) {
+        if (!ex.getMessage().equals("No message")) {
+            logger.fatal("", ex);            
+        }
+    }
 }
