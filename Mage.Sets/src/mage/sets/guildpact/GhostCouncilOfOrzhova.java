@@ -130,17 +130,20 @@ class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOr
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), " Ghost Council of Orzhova Exile", source.getId(), game)) {
-                //create delayed triggered ability
-                AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
-                        new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                game.addDelayedTriggeredAbility(delayedAbility);
-                return true;
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null) {
+                if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), permanent.getName(), source.getSourceId(), game, Zone.BATTLEFIELD)) {
+                    //create delayed triggered ability
+                    AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
+                            new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+                    delayedAbility.setSourceId(source.getSourceId());
+                    delayedAbility.setControllerId(source.getControllerId());
+                    game.addDelayedTriggeredAbility(delayedAbility);
+                    return true;
+                }
+            }            
         }
         return false;
     }

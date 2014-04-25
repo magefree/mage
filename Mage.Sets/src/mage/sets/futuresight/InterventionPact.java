@@ -32,6 +32,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.PactDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
@@ -97,20 +98,11 @@ class InterventionPactPreventDamageEffect extends PreventionEffectImpl<Intervent
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int prevented = event.getAmount();
-            event.setAmount(0);
-            this.used = true;
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), prevented));
-            
-
-            
-            if (prevented > 0) {
-                Player player = game .getPlayer(source.getControllerId());
-                if(player != null){
-                    player.gainLife(prevented, game);
-                }
+        PreventionEffectData preventEffectData = preventDamageAction(event, source, game);
+        if (preventEffectData.getPreventedDamage() > 0) {
+            Player player = game .getPlayer(source.getControllerId());
+            if(player != null){
+                player.gainLife(preventEffectData.getPreventedDamage(), game);
             }
         }
         return false;

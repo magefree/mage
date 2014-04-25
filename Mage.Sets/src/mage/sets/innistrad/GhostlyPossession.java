@@ -84,7 +84,7 @@ public class GhostlyPossession extends CardImpl<GhostlyPossession> {
 class GhostlyPossessionEffect extends PreventionEffectImpl<GhostlyPossessionEffect> {
 
     public GhostlyPossessionEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, true);
         staticText = "Prevent all combat damage that would be dealt to and dealt by enchanted creature";
     }
 
@@ -100,17 +100,6 @@ class GhostlyPossessionEffect extends PreventionEffectImpl<GhostlyPossessionEffe
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-        }
-        return false;
     }
 
     @Override

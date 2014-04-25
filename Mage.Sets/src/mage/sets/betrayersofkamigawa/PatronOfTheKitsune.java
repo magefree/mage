@@ -84,10 +84,7 @@ class PatronOfTheKitsuneTriggeredAbility extends TriggeredAbilityImpl<PatronOfTh
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            return true;
-        }
-        return false;
+        return event.getType().equals(GameEvent.EventType.ATTACKER_DECLARED);
     }
 
     @Override

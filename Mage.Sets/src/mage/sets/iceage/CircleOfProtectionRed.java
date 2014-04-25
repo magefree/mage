@@ -72,10 +72,12 @@ public class CircleOfProtectionRed extends CardImpl<CircleOfProtectionRed> {
 class CircleOfProtectionRedEffect extends PreventionEffectImpl<CircleOfProtectionRedEffect> {
 
     private static final FilterObject filter = new FilterObject("red source");
+    
     static{
         filter.add(new ColorPredicate(ObjectColor.RED));
-    } 
-    private TargetSource target;
+    }
+    
+    private final TargetSource target;
 
     public CircleOfProtectionRedEffect() {
         super(Duration.EndOfTurn);
@@ -95,32 +97,15 @@ class CircleOfProtectionRedEffect extends PreventionEffectImpl<CircleOfProtectio
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
-            preventDamage(event, source, target.getFirstTarget(), game);
-            return true;
-        }
+        preventDamageAction(event, source, game);
+        this.used = true;
         return false;
-    }
-
-    private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            this.used = true;
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getSourceId(), source.getControllerId(), damage));
-        }
     }
 
     @Override

@@ -100,7 +100,7 @@ class DamageCantBePreventedEffect extends ReplacementEffectImpl<DamageCantBePrev
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.PREVENT_DAMAGE) {
+        if (event.getType().equals(GameEvent.EventType.PREVENT_DAMAGE)) {
             return true;
         }
         return false;

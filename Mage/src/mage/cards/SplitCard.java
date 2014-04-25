@@ -120,7 +120,7 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
 
     @Override
     public List<String> getRules() {
-        List<String> rules = new ArrayList<String>();
+        List<String> rules = new ArrayList<>();
 //        rules.addAll(leftHalfCard.getRules());
 //        rules.addAll(rightHalfCard.getRules());
         if (getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
@@ -149,7 +149,7 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
 
     @Override
     public List<Watcher> getWatchers() {
-        List<Watcher> allWatchers = new ArrayList<Watcher>();
+        List<Watcher> allWatchers = new ArrayList<>();
         allWatchers.addAll(super.getWatchers());
         allWatchers.addAll(leftHalfCard.getWatchers());
         allWatchers.addAll(rightHalfCard.getWatchers());

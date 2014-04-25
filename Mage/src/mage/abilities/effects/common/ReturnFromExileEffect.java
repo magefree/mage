@@ -88,8 +88,24 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
             exile = exile.copy();
             for (UUID cardId: exile) {
                 Card card = game.getCard(cardId);
-                card.moveToZone(zone, source.getSourceId(), game, tapped);
-                game.informPlayers(new StringBuilder(controller.getName()).append(" moves ").append(card.getName()).append(" to ").append(zone.toString()).toString());
+                switch (zone) {
+                    case BATTLEFIELD:
+                        controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED,  source.getSourceId(), tapped);
+                        break;
+                    case HAND:
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);
+                        break;
+                    case GRAVEYARD:
+                        controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.EXILED);
+                        break;
+                    case LIBRARY:
+                        controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.EXILED, true);
+                        break;
+                    default:
+                        card.moveToZone(zone, source.getSourceId(), game, tapped);
+                        game.informPlayers(new StringBuilder(controller.getName()).append(" moves ").append(card.getName()).append(" to ").append(zone.toString()).toString());
+                }
+                
             }
             game.getExile().getExileZone(exileId).clear();
             return true;
