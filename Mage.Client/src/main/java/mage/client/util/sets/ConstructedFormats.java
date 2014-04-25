@@ -1,13 +1,10 @@
 package mage.client.util.sets;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.constants.SetType;
+
+import java.util.*;
 
 /**
  * Utility class for constructed formats (expansions and other editions).
@@ -53,6 +50,7 @@ public class ConstructedFormats {
             "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
             "Portal Three Kingdoms",
             "Guru",
+            "Unhinged",
             "Duel Decks: Elves vs. Goblins",
             "Duel Decks: Jace vs. Chandra",
             "Duel Decks: Divine vs. Demonic",
@@ -398,6 +396,9 @@ public class ConstructedFormats {
         if (format.equals("Guru")) {
             return Arrays.asList("GUR");
         }
+        if (format.equals("Unhinged")) {
+            return Arrays.asList("UNH");
+        }
         if (format.equals("Portal Three Kingdoms")) {
             return Arrays.asList("PTK");
         }
@@ -448,7 +449,7 @@ public class ConstructedFormats {
 
     private static void buildLists() {
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
-            if (!set.getType().equals(SetType.REPRINT)) {
+            if (!set.getType().equals(SetType.REPRINT) && !set.getType().equals(SetType.JOKESET)) {
                 if (set.getReleaseDate().after(standardDate)) {
                     standard.add(set.getCode());
                 }
