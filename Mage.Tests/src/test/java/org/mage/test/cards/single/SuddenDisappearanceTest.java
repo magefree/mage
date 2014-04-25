@@ -11,6 +11,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class SuddenDisappearanceTest extends CardTestPlayerBase {
 
+    /**
+     * Sudden Disappearance
+     * Sorcery {5}{W}
+     * Exile all nonland permanents target player controls. 
+     * Return the exiled cards to the battlefield under 
+     * their owner's control at the beginning of the next end step
+     */
     @Test
     public void testCard() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);

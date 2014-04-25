@@ -27,22 +27,22 @@
  */
 package mage.sets.darkascension;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPlayer;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -58,7 +58,7 @@ public class SuddenDisappearance extends CardImpl<SuddenDisappearance> {
 
         // Exile all nonland permanents target player controls. Return the exiled cards to the battlefield under their owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new SuddenDisappearanceEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
 
     }
 
@@ -78,6 +78,7 @@ class SuddenDisappearanceEffect extends OneShotEffect<SuddenDisappearanceEffect>
 
     public SuddenDisappearanceEffect() {
         super(Outcome.Exile);
+        staticText = "Exile all nonland permanents target player controls. Return the exiled cards to the battlefield under their owner's control at the beginning of the next end step";
     }
 
     public SuddenDisappearanceEffect(final SuddenDisappearanceEffect effect) {
@@ -86,17 +87,22 @@ class SuddenDisappearanceEffect extends OneShotEffect<SuddenDisappearanceEffect>
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> perms = game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game);
-        if (perms.size() > 0) {
-            for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
-                permanent.moveToExile(source.getSourceId(), "Sudden Disappearance", source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            List<Permanent> perms = game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game);
+            if (perms.size() > 0) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
+                    controller.moveCardToExileWithInfo(permanent, source.getSourceId(), "Sudden Disappearance", source.getSourceId(), game, Zone.BATTLEFIELD);
+                }
+                AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(delayedAbility);
+
             }
-            AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(delayedAbility);
             return true;
         }
+
         return false;
     }
 
