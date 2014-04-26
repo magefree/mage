@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
@@ -63,7 +64,9 @@ public class TitanOfEternalFire extends CardImpl<TitanOfEternalFire> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Human", "Each Human creature"))));
+        Effect effect = new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Human", "Each Human creature"));
+        effect.setText("Each Human creature you control has \"{R}, {T}: This creature deals 1 damage to target creature or player.\"");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public TitanOfEternalFire(final TitanOfEternalFire card) {
