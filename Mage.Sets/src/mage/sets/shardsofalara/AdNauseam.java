@@ -28,16 +28,15 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -87,23 +86,19 @@ class AdNauseamEffect extends OneShotEffect<AdNauseamEffect> {
     public boolean apply(Game game, Ability source) {
         String message = "Reveal the top card of your library and put that card into your hand? You lose life equal to its converted mana cost.";
         Card sourceCard = game.getCard(source.getSourceId());
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || sourceCard == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || sourceCard == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        while (player.chooseUse(outcome, message, game) && player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().removeFromTop(game);
+        while (controller.chooseUse(outcome, message, game) && controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-
+                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 int cmc = card.getManaCost().convertedManaCost();
                 if (cmc > 0) {
-                    player.loseLife(cmc, game);
+                    controller.loseLife(cmc, game);
                 }
-                cards.add(card);
-                player.revealCards("card(s) from top of library put into hand by " + sourceCard.getName(), cards, game);
-                game.informPlayers(sourceCard.getName() + ": "+ player.getName() + " revealed " +card.getName() + " and lost " + cmc + " live");
+                controller.revealCards(new StringBuilder(sourceCard.getName()).append(" put into hand").toString(), new CardsImpl(card), game);
             }
         }
         return true;

@@ -56,10 +56,11 @@ public class Revealed extends HashMap<String, Cards> implements Serializable, Co
     }
 
     public void add(String name, Cards cards) {
-        if (!this.containsKey(name)) {
-            createRevealed(name);
+        if (this.containsKey(name)) {
+            this.get(name).addAll(cards);
+        } else  {
+            this.put(name, cards.copy());
         }
-        this.put(name, cards.copy());
     }
 
     public Cards createRevealed(String name) {
