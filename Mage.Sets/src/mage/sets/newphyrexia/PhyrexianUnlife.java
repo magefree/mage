@@ -28,16 +28,17 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.continious.DontLoseByZeroOrLessLifeEffect;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
@@ -60,7 +61,7 @@ public class PhyrexianUnlife extends CardImpl<PhyrexianUnlife> {
         this.color.setWhite(true);
 
         // You don't lose the game for having 0 or less life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianUnlifeEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));
 
         // As long as you have 0 or less life, all damage is dealt to you as though its source had infect.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianUnlifeEffect2()));
@@ -75,45 +76,6 @@ public class PhyrexianUnlife extends CardImpl<PhyrexianUnlife> {
     public PhyrexianUnlife copy() {
         return new PhyrexianUnlife(this);
     }
-}
-
-class PhyrexianUnlifeEffect extends ReplacementEffectImpl<PhyrexianUnlifeEffect> {
-
-    public PhyrexianUnlifeEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You don't lose the game for having 0 or less life";
-    }
-
-    public PhyrexianUnlifeEffect(final PhyrexianUnlifeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PhyrexianUnlifeEffect copy() {
-        return new PhyrexianUnlifeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.LOSES && event.getPlayerId().equals(source.getControllerId())) {
-            Player player = game.getPlayer(event.getPlayerId());
-              if (!player.hasLost() && (player.getLife() <= 0 && !player.isEmptyDraw() && player.getCounters().getCount(CounterType.POISON) < 10)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
 
 class PhyrexianUnlifeEffect2 extends ReplacementEffectImpl<PhyrexianUnlifeEffect2> {

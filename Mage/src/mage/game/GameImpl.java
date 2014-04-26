@@ -1236,7 +1236,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
         //20091005 - 704.5a/704.5b/704.5c
         for (Player player: state.getPlayers().values()) {
-            if (!player.hasLost() && (player.getLife() <= 0 || player.isEmptyDraw() || player.getCounters().getCount(CounterType.POISON) >= 10)) {
+            if (!player.hasLost()
+                    && ((player.getLife() <= 0 && player.canLoseByZeroOrLessLife())
+                    || player.isEmptyDraw()
+                    || player.getCounters().getCount(CounterType.POISON) >= 10)) {
                 player.lost(this);
             }
         }

@@ -163,11 +163,14 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     protected RangeOfInfluence range;
     protected Set<UUID> inRange = new HashSet<>();
+
     protected boolean isTestMode = false;
     protected boolean canGainLife = true;
     protected boolean canLoseLife = true;
     protected boolean canPayLifeCost = true;
     protected boolean canPaySacrificeCost = true;
+    protected boolean loseByZeroOrLessLife = true;
+
     protected final List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
     
     protected boolean isGameUnderControl = true;
@@ -234,6 +237,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.range = player.range;
         this.canGainLife = player.canGainLife;
         this.canLoseLife = player.canLoseLife;
+        this.loseByZeroOrLessLife = player.loseByZeroOrLessLife;
+
         this.attachments.addAll(player.attachments);
 
         this.inRange.addAll(player.inRange);
@@ -294,6 +299,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.userData = player.getUserData();
         this.canPayLifeCost = player.canPayLifeCost();
         this.canPaySacrificeCost = player.canPaySacrificeCost();
+        this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
         this.storedBookmark = player.getStoredBookmark();
 
@@ -359,6 +365,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.canLoseLife = true;
         this.canPayLifeCost = true;
         this.canPaySacrificeCost = true;
+        this.loseByZeroOrLessLife = true;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
     }
@@ -1558,7 +1565,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                         opponentsAlive++;
                     }
                 }
-                if (opponentsAlive == 0) {
+                if (opponentsAlive == 0 && !hasWon()) {
                     game.informPlayers(new StringBuilder(this.getName()).append(" has won the game").toString());
                     this.wins = true;
                     game.end();
@@ -2040,6 +2047,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public void setCanPaySacrificeCost(boolean canPaySacrificeCost) {
         this.canPaySacrificeCost = canPaySacrificeCost;
+    }
+
+    @Override
+    public boolean canLoseByZeroOrLessLife() {
+        return loseByZeroOrLessLife;
+    }
+
+    @Override
+    public void setLoseByZeroOrLessLife(boolean loseByZeroOrLessLife) {
+        this.loseByZeroOrLessLife = loseByZeroOrLessLife;
     }
 
     @Override
