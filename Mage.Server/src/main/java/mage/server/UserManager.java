@@ -126,11 +126,10 @@ public class UserManager {
     public void removeUser(UUID userId, User.DisconnectReason reason) {
         User user = users.get(userId);
         if (user != null) {
-            logger.info(new StringBuilder("Remove user: ").append(user.getName())
+            logger.debug(new StringBuilder("Remove user: ").append(user.getName())
                     .append(" userId: ").append(userId)
                     .append(" sessionId: ").append(user.getSessionId())
                     .append(" Reason: ").append(reason.toString()));
-            ChatManager.getInstance().broadcast(userId, new StringBuilder("has disconnected (").append(reason.toString()).append(")").toString(), MessageColor.BLACK);
             ChatManager.getInstance().removeUser(userId, reason);
             users.get(userId).kill(reason);
             users.remove(userId);
