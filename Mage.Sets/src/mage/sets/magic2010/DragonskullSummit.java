@@ -61,7 +61,7 @@ public class DragonskullSummit extends CardImpl<DragonskullSummit> {
         this.expansionSetCode = "M10";
 
         Condition controls = new InvertCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-        String abilityText = "tap it unless you control a Swamp or a Mountain";
+        String abilityText = "tapped unless you control a Swamp or a Mountain";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
