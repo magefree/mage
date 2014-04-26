@@ -31,8 +31,10 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -45,7 +47,6 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
@@ -90,7 +91,8 @@ public class MortalObstinacy extends CardImpl<MortalObstinacy> {
 class MortalObstinacyAbility extends TriggeredAbilityImpl<MortalObstinacyAbility> {
 
     public MortalObstinacyAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()));
+        addTarget(new TargetEnchantmentPermanent(true));
     }
 
     public MortalObstinacyAbility(final MortalObstinacyAbility ability) {
@@ -108,18 +110,7 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl<MortalObstinacyAbility
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
             Permanent damageMakingCreature = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && damageMakingCreature != null && damageMakingCreature.getAttachments().contains(this.getSourceId())) {
-                Player controller = game.getPlayer(this.getControllerId());
-                Permanent sourceEnchantment = game.getPermanent(this.getSourceId());
-                if (controller != null && sourceEnchantment != null) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("Do you wish to sacrifice ").append(sourceEnchantment.getName());
-                    sb.append(" to destroy target enchantment?");
-                    if (controller.chooseUse(Outcome.DestroyPermanent, sb.toString(), game)) {
-                        this.getTargets().clear();
-                        this.addTarget(new TargetEnchantmentPermanent(true));
-                        return true;
-                    }
-                }
+                return true;
             }
         }
         return false;
@@ -127,6 +118,7 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl<MortalObstinacyAbility
 
     @Override
     public String getRule() {
-        return "Whenever enchanted creature deals combat damage to a player, you may sacrifice {this}. If you do, destroy target enchantment.";
+        return new StringBuilder("Whenever enchanted creature deals combat damage to a player, ").append(super.getRule()).toString();
     }
 }
+

@@ -24,7 +24,7 @@ You will need to have the [Java Runtime Environment](http://java.com/en/) Versio
 
 Here you can find a log of the latest changes: [Release changes] (http://github.com/magefree/mage/wiki/Release-changes)
 
-(looke here for more in detail description what to do: http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=13632)
+(look here for more in detail description what to do: http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=13632)
 
 ## Developer
 
