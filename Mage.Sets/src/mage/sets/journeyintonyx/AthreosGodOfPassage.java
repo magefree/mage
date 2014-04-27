@@ -30,7 +30,7 @@ package mage.sets.journeyintonyx;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
@@ -50,6 +50,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -85,7 +87,7 @@ public class AthreosGodOfPassage extends CardImpl<AthreosGodOfPassage> {
         effect.setText("As long as your devotion to white and black is less than seven, Athreos isn't a creature");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));        
         // Whenever another creature you own dies, return it to your hand unless target opponent pays 3 life.
-        Ability ability = new DiesCreatureTriggeredAbility(new AthreosGodOfPassageReturnEffect(), false, filter, true);
+        Ability ability = new AthreosDiesCreatureTriggeredAbility(new AthreosGodOfPassageReturnEffect(), false, filter, true);
         ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
         
@@ -119,9 +121,10 @@ class AthreosGodOfPassageReturnEffect extends OneShotEffect<AthreosGodOfPassageR
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());        
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent creature = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+            UUID creatureId = (UUID) this.getValue("creatureId");
+            Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
             if (creature != null) {
                 Player opponent = game.getPlayer(source.getFirstTarget());
                 boolean paid = false;
@@ -140,5 +143,51 @@ class AthreosGodOfPassageReturnEffect extends OneShotEffect<AthreosGodOfPassageR
             return true;
         }
         return false;
+    }
+}
+
+class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl<AthreosDiesCreatureTriggeredAbility> {
+
+    protected FilterCreaturePermanent filter;
+    private boolean setTargetPointer;
+
+    public AthreosDiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, boolean setTargetPointer) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.filter = filter;
+        this.setTargetPointer = setTargetPointer;
+    }
+
+    public AthreosDiesCreatureTriggeredAbility(AthreosDiesCreatureTriggeredAbility ability) {
+        super(ability);
+        this.filter = ability.filter;
+    }
+
+    @Override
+    public AthreosDiesCreatureTriggeredAbility copy() {
+        return new AthreosDiesCreatureTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType().equals(GameEvent.EventType.ZONE_CHANGE)) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.getFromZone().equals(Zone.BATTLEFIELD) && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
+                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+                if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+                    if (setTargetPointer) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setValue("creatureId", event.getTargetId());
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever " + filter.getMessage() + " dies, " + super.getRule();
     }
 }
