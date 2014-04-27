@@ -185,8 +185,10 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
          for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                possibleTargets.add(permanent.getId());
+            if (!targets.containsKey(permanent.getId())) {
+                if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    possibleTargets.add(permanent.getId());
+                }
             }
         }
         return possibleTargets;
