@@ -38,6 +38,7 @@ import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.HybridManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -220,7 +221,7 @@ public class CardUtil {
      */
     public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
         ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
-        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
+        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
         // save X value (e.g. convoke ability)
         for (VariableCost vCost: previousCost.getVariableCosts()) {
             if (vCost instanceof VariableManaCost) {
@@ -284,7 +285,11 @@ public class CardUtil {
                     reduceMana.setWhite(0);
                 }
             }
-            if (mana.count() > 0) {
+            if (newManaCost instanceof HybridManaCost) {
+                if (mana.count() > 1) {
+                    adjustedCost.add(newManaCost);
+                }
+            } else if (mana.count() > 0) {
                 adjustedCost.add(newManaCost);
             }
         }

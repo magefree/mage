@@ -35,8 +35,8 @@ import mage.players.ManaPool;
 
 public class HybridManaCost extends ManaCostImpl<HybridManaCost> {
 
-    private ColoredManaSymbol mana1;
-    private ColoredManaSymbol mana2;
+    private final ColoredManaSymbol mana1;
+    private final ColoredManaSymbol mana2;
 
     public HybridManaCost(ColoredManaSymbol mana1, ColoredManaSymbol mana2) {
         this.mana1 = mana1;
