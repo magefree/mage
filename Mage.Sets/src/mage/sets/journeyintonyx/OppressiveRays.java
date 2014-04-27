@@ -111,10 +111,16 @@ class OppressiveRaysEffect extends ReplacementEffectImpl<OppressiveRaysEffect> {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
-            ManaCostsImpl attackTax = new ManaCostsImpl("{3}");
-            if (attackTax.canPay(source.getSourceId(), event.getPlayerId(), game)
-                    && player.chooseUse(Outcome.Neutral, "Pay {3} to attack?", game)) {
-                if (attackTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
+            String chooseText;
+            if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
+                chooseText = "Pay {3} to attack?";
+            } else {
+                chooseText = "Pay {3} to block?";
+            }
+            ManaCostsImpl attackBlockTax = new ManaCostsImpl("{3}");
+            if (attackBlockTax.canPay(source.getSourceId(), event.getPlayerId(), game)
+                    && player.chooseUse(Outcome.Neutral, chooseText, game)) {
+                if (attackBlockTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                     return false;
                 }
             }
@@ -128,6 +134,10 @@ class OppressiveRaysEffect extends ReplacementEffectImpl<OppressiveRaysEffect> {
         if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
             Permanent attacker = game.getPermanent(event.getSourceId());
             return attacker != null && attacker.getAttachments().contains(source.getSourceId());
+        }
+        if (event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER)) {
+            Permanent blocker = game.getPermanent(event.getSourceId());
+            return blocker != null && blocker.getAttachments().contains(source.getSourceId());
         }
         return false;
     }
