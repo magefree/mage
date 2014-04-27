@@ -148,7 +148,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public ManaCosts<T> getUnpaid() {
-        ManaCosts<T> unpaid = new ManaCostsImpl<T>();
+        ManaCosts<T> unpaid = new ManaCostsImpl<>();
         for (T cost : this) {
             if (!(cost instanceof VariableManaCost) && !cost.isPaid()) {
                 unpaid.add((T) cost.getUnpaid());
@@ -159,7 +159,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public ManaCosts<T> getUnpaidVariableCosts() {
-        ManaCosts<T> unpaid = new ManaCostsImpl<T>();
+        ManaCosts<T> unpaid = new ManaCostsImpl<>();
         for (ManaCost cost : this) {
             if (cost instanceof VariableManaCost && !cost.isPaid()) {
                 unpaid.add((T) cost.getUnpaid());
@@ -171,7 +171,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public List<VariableCost> getVariableCosts() {
-        List<VariableCost> variableCosts = new ArrayList<VariableCost>();
+        List<VariableCost> variableCosts = new ArrayList<>();
         for (ManaCost cost : this) {
             if (cost instanceof VariableCost) {
                 variableCosts.add((VariableCost) cost);

@@ -27,6 +27,7 @@
  */
 package mage.abilities.keyword;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
@@ -71,6 +72,17 @@ public class FlashbackAbility extends SpellAbility {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
         this.abilityName = ability.abilityName;
+    }
+
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        if (super.canActivate(playerId, game)) {
+            Card card = game.getCard(getSourceId());
+            if (card != null) {
+                return card.getSpellAbility().canActivate(playerId, game);
+            }
+        }
+        return false;
     }
 
     @Override
@@ -157,11 +169,13 @@ class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
                 }
 
                 spellAbility.clear();
+                // used if flashbacked spell has a {X} cost
                 int amount = source.getManaCostsToPay().getX();
                 spellAbility.getManaCostsToPay().setX(amount);
                 for (Target target : spellAbility.getTargets()) {
                     target.setRequired(true);
                 }
+                game.informPlayers(new StringBuilder(controller.getName()).append(" flashbacks ").append(card.getName()).toString());
                 return controller.cast(spellAbility, game, true);
             }
         }

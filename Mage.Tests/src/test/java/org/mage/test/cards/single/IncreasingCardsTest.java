@@ -43,7 +43,11 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
         assertExileCount("Increasing Ambition", 1);
 
     }
-
+    // Increasing Confusion {X}{U}
+    // Sorcery
+    // Target player puts the top X cards of his or her library into his or her graveyard.
+    // If Increasing Confusion was cast from a graveyard, that player puts twice that many
+    // cards into his or her graveyard instead.
     @Test
     public void testIncreasingConfusion() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
@@ -101,6 +105,11 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
         assertExileCount("Increasing Savagery", 1);
 
     }
+
+    // Increasing Vengeance
+    // Instant
+    // Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
+    // Flashback {3}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 
     @Test
     public void testIncreasingVengeance() {

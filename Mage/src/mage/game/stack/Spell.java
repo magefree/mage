@@ -146,7 +146,13 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     public String getActivatedMessage(Game game) {
-        return ability.getGameLogMessage(game);
+        StringBuilder sb = new StringBuilder();
+        if (isCopiedSpell()) {
+            sb.append(" copies ");
+        } else {
+            sb.append(" casts ");
+        }
+        return sb.append(ability.getGameLogMessage(game)).toString();
     }
 
     @Override

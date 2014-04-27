@@ -49,6 +49,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PostResolveEffect;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.choices.Choice;
@@ -219,15 +220,25 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             }
         }
 
+        // if ability can be cast for no mana, clear the mana costs now, because additional mana costs must be paid.
+        // For Flashback ability can be set X before, so the X costs have to be restored for the flashbacked ability
+        if (noMana) {
+            int xValue = this.getManaCostsToPay().getX();
+            this.getManaCostsToPay().clear();
+            VariableManaCost xCosts = new VariableManaCost();
+            xCosts.setAmount(xValue);
+            this.getManaCostsToPay().add(xCosts);
+        }
         // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
         // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
         // or her intentions to pay any or all of those costs (see rule 601.2e).
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
-        if (card != null) {
+        if (card != null && !(this instanceof FlashbackAbility)) {
             boolean alternativeCostisUsed = false;
             for (Ability ability : card.getAbilities()) {
-                if (ability instanceof AlternativeSourceCosts) {
+                // if cast for noMana no Alternative costs are allowed
+                if (!noMana && ability instanceof AlternativeSourceCosts) {
                     AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
                     if (alternativeSpellCosts.isAvailable(this, game)) {
                         if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
@@ -241,7 +252,8 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                     ((OptionalAdditionalSourceCosts)ability).addOptionalAdditionalCosts(this, game);
                 }
             }
-            if (!alternativeCostisUsed) {
+            // controller specific alternate spell costs
+            if (!noMana && !alternativeCostisUsed) {
                 if (this.getAbilityType().equals(AbilityType.SPELL)) {
                     for (AlternativeSourceCosts alternativeSourceCosts: controller.getAlternativeSourceCosts()) {
                          if (alternativeSourceCosts.isAvailable(this, game)) {
@@ -328,8 +340,8 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         
         if (!useAlternativeCost(game)) { // old way still used?
 
-            //20100716 - 601.2f
-            if (!manaCostsToPay.pay(this, game, sourceId, activatorId, noMana)) {
+            //20100716 - 601.2f  (noMana is not used here, because mana costs were cleared for this abaility before adding additional costs and applying cost modification effects)
+            if (!manaCostsToPay.pay(this, game, sourceId, activatorId, false)) {
                 logger.debug("activate failed - mana");
                 return false;
             }
@@ -385,6 +397,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
      * 
      * @param game
      * @param noMana
+     * @param controller
      * @return variableManaCost for posting to log later
      */
     protected VariableManaCost handleManaXCosts(Game game, boolean noMana, Player controller) {

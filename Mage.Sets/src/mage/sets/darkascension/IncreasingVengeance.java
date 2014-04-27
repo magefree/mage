@@ -41,6 +41,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetSpell;
 
 /**
@@ -66,7 +68,9 @@ public class IncreasingVengeance extends CardImpl<IncreasingVengeance> {
 
         // Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
         this.getSpellAbility().addEffect(new IncreasingVengeanceEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        Target target = new TargetSpell(filter);
+        target.setRequired(true);
+        this.getSpellAbility().addTarget(target);
 
         // Flashback {3}{R}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}{R}"), TimingRule.INSTANT));
@@ -95,24 +99,29 @@ class IncreasingVengeanceEffect extends OneShotEffect<IncreasingVengeanceEffect>
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell != null) {
-            Spell copy = spell.copySpell();
-            copy.setControllerId(source.getControllerId());
-            copy.setCopiedSpell(true);
-            game.getStack().push(copy);
-            copy.chooseNewTargets(game, source.getControllerId());
-            Spell sourceSpell = (Spell) game.getStack().getStackObject(source.getSourceId());
-            if (sourceSpell != null) {
-                if (sourceSpell.getFromZone() == Zone.GRAVEYARD) {
-                    copy = spell.copySpell();
-                    copy.setControllerId(source.getControllerId());
-                    copy.setCopiedSpell(true);
-                    game.getStack().push(copy);
-                    copy.chooseNewTargets(game, source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+            if (spell != null) {
+                Spell copy = spell.copySpell();
+                copy.setControllerId(source.getControllerId());
+                copy.setCopiedSpell(true);
+                game.getStack().push(copy);
+                copy.chooseNewTargets(game, source.getControllerId());
+                game.informPlayers(new StringBuilder(controller.getName()).append(copy.getActivatedMessage(game)).toString());
+                Spell sourceSpell = (Spell) game.getStack().getStackObject(source.getSourceId());
+                if (sourceSpell != null) {
+                    if (sourceSpell.getFromZone() == Zone.GRAVEYARD) {
+                        copy = spell.copySpell();
+                        copy.setControllerId(source.getControllerId());
+                        copy.setCopiedSpell(true);
+                        game.getStack().push(copy);
+                        copy.chooseNewTargets(game, source.getControllerId());
+                        game.informPlayers(new StringBuilder(controller.getName()).append(copy.getActivatedMessage(game)).toString());
+                    }
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }
