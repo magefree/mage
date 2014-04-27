@@ -64,7 +64,6 @@ public interface OptionalAdditionalCost extends Cost {
     /**
      * If the player intends to pay the cost, the cost will be activated
      *
-     * @param activated
      */
     void activate();
 
@@ -77,6 +76,7 @@ public interface OptionalAdditionalCost extends Cost {
     /**
      * Set if the cost be multiple times activated
      *
+     * @param repeatable
      */
     void setRepeatable(boolean repeatable);
 

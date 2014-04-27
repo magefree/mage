@@ -90,7 +90,7 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
 
     protected String keywordText;
     protected String reminderText;
-    protected List<OptionalAdditionalCost> kickerCosts = new LinkedList<OptionalAdditionalCost>();
+    protected List<OptionalAdditionalCost> kickerCosts = new LinkedList<>();
     private   int xManaValue = 0;
     // needed to reset kicked status, if card changes zone after casting it
     private   int zoneChangeCounter = 0;

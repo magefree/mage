@@ -31,6 +31,7 @@ package mage.abilities.costs;
 /**
  *
  * @author LevelX2
+ * @param <T>
  */
 
 
@@ -111,11 +112,14 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>
      */
     @Override
     public String getCastSuffixMessage(int position) {
-        StringBuilder sb = new StringBuilder(position > 0 ? " and ":"").append(" with ");
-        if (isRepeatable()) {
-            sb.append(getActivateCount()).append(getActivateCount() > 1? " times ":" time ");
+        StringBuilder sb = new StringBuilder();
+        if (isActivated() && (!isRepeatable() || getActivateCount() > 0)) {
+            sb.append(position > 0 ? " and ":"").append(" with ");
+            if (isRepeatable()) {
+                sb.append(getActivateCount()).append(getActivateCount() > 1? " times ":" time ");
+            }
+            sb.append(name);
         }
-        sb.append(name);
         return  sb.toString();
     }
 
@@ -123,7 +127,6 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>
     /**
      * If the player intends to pay the cost, the cost will be activated
      *
-     * @param activated
      */
     @Override
     public void activate() {
@@ -144,6 +147,7 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>
     /**
      * Set if the cost be multiple times activated
      *
+     * @param repeatable
      */
     @Override
     public void setRepeatable(boolean repeatable) {
