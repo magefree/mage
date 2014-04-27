@@ -55,6 +55,8 @@ public class FelhidePetrifier extends CardImpl<FelhidePetrifier> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
+        // Deathtouch
+        this.addAbility(DeathtouchAbility.getInstance());
         // Other Minotaur creatures you control have deathtouch.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
                 DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield,
