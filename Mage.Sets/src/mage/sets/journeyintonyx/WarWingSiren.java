@@ -30,6 +30,7 @@ package mage.sets.journeyintonyx;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -52,6 +53,8 @@ public class WarWingSiren extends CardImpl<WarWingSiren> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
         // Heroic — Whenever you cast a spell that targets War-Wing Siren, put a +1/+1 counter on War-Wing Siren.
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)));
     }
