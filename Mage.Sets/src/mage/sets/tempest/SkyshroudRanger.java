@@ -32,15 +32,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
-import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -59,7 +56,7 @@ public class SkyshroudRanger extends CardImpl<SkyshroudRanger> {
         this.toughness = new MageInt(1);
 
         // {tap}: You may put a land card from your hand onto the battlefield. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new SkyshroudRangerEffect(), new TapSourceCost());
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInHand(0, 1, new FilterLandCard()));
         this.addAbility(ability);
         
@@ -74,30 +71,3 @@ public class SkyshroudRanger extends CardImpl<SkyshroudRanger> {
         return new SkyshroudRanger(this);
     }
 }
-
-class SkyshroudRangerEffect extends OneShotEffect<SkyshroudRangerEffect> {
-
-    SkyshroudRangerEffect() {
-        super(Outcome.PutLandInPlay);
-        staticText = "You may put a land card from your hand onto the battlefield";
-    }
-
-    SkyshroudRangerEffect(final SkyshroudRangerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card != null) {
-            card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
-        }
-        return true;
-    }
-
-    @Override
-    public SkyshroudRangerEffect copy() {
-        return new SkyshroudRangerEffect(this);
-    }
-
- }

@@ -26,46 +26,49 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandCard;
-import mage.target.common.TargetCardInHand;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class WalkingAtlas extends CardImpl<WalkingAtlas> {
+public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect<PutLandFromHandOntoBattlefieldEffect> {
 
-    public WalkingAtlas (UUID ownerId) {
-        super(ownerId, 131, "Walking Atlas", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "WWK";
-        this.subtype.add("Construct");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        // {tap}: You may put a land card from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCardInHand(new FilterLandCard()));
-        this.addAbility(ability);
+    public PutLandFromHandOntoBattlefieldEffect() {
+        super(Outcome.PutLandInPlay);
+        staticText = "You may put a land card from your hand onto the battlefield";
     }
 
-    public WalkingAtlas (final WalkingAtlas card) {
-        super(card);
+    public PutLandFromHandOntoBattlefieldEffect(final PutLandFromHandOntoBattlefieldEffect effect) {
+        super(effect);
     }
 
     @Override
-    public WalkingAtlas copy() {
-        return new WalkingAtlas(this);
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(targetPointer.getFirst(game, source));
+            if (card != null) {
+                controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+            }
+            return true;
+
+        }
+        return false;
+
     }
 
-}
+    @Override
+    public PutLandFromHandOntoBattlefieldEffect copy() {
+        return new PutLandFromHandOntoBattlefieldEffect(this);
+    }
+
+ }

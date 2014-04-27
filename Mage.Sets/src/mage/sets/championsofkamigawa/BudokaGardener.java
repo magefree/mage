@@ -40,7 +40,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -49,12 +48,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
 
 /**
  * @author Loki
@@ -73,7 +69,9 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
         this.flipCardName = "Dokai, Weaver of Life";
 
         // {T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BudokaGardenerEffect(), new TapSourceCost()));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BudokaGardenerEffect(), new TapSourceCost());
+        ability.addEffect(new BudokaGardenerEffect());
+        this.addAbility(ability);
     }
 
     public BudokaGardener(final BudokaGardener card) {
@@ -91,7 +89,7 @@ class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
 
     BudokaGardenerEffect() {
         super(Outcome.PutLandInPlay);
-        staticText = "You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip {this}";
+        staticText = "If you control ten or more lands, flip {this}";
     }
 
     BudokaGardenerEffect(final BudokaGardenerEffect effect) {
@@ -102,17 +100,6 @@ class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetCardInHand(new FilterLandCard());
-            target.setRequired(true);
-            target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && controller.chooseUse(outcome, "Put land onto the battlefield?", game)
-                    && controller.chooseTarget(outcome, target, source, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                }
-            }
             if (game.getBattlefield().count(DokaiWeaverofLifeToken.filterLands, source.getSourceId(), source.getControllerId(), game) >= 10) {
                 new FlipSourceEffect(new DokaiWeaverofLife()).apply(game, source);
             }

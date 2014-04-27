@@ -25,8 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.worldwake;
+package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -43,29 +42,33 @@ import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class WalkingAtlas extends CardImpl<WalkingAtlas> {
+public class SakuraTribeScout extends CardImpl<SakuraTribeScout> {
 
-    public WalkingAtlas (UUID ownerId) {
-        super(ownerId, 131, "Walking Atlas", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "WWK";
-        this.subtype.add("Construct");
+    public SakuraTribeScout(UUID ownerId) {
+        super(ownerId, 144, "Sakura-Tribe Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "SOK";
+        this.subtype.add("Snake");
+        this.subtype.add("Shaman");
+        this.subtype.add("Scout");
+
+        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
         // {tap}: You may put a land card from your hand onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInHand(new FilterLandCard()));
         this.addAbility(ability);
     }
 
-    public WalkingAtlas (final WalkingAtlas card) {
+    public SakuraTribeScout(final SakuraTribeScout card) {
         super(card);
     }
 
     @Override
-    public WalkingAtlas copy() {
-        return new WalkingAtlas(this);
+    public SakuraTribeScout copy() {
+        return new SakuraTribeScout(this);
     }
-
 }
