@@ -25,41 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.sets.guildpact;
 
 import java.util.UUID;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.ReplicateAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Zap extends CardImpl<Zap> {
+public class Vacuumelt extends CardImpl<Vacuumelt> {
 
-    public Zap(UUID ownerId) {
-        super(ownerId, 180, "Zap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "INV";
+    public Vacuumelt(UUID ownerId) {
+        super(ownerId, 40, "Vacuumelt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
+        this.expansionSetCode = "GPT";
 
-        this.color.setRed(true);
+        this.color.setBlue(true);
 
-        // Zap deals 1 damage to target creature or player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        // Replicate {2}{U}
+        this.addAbility(new ReplicateAbility(this, "{2}{U}"));
+        // Return target creature to its owner's hand.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public Zap(final Zap card) {
+    public Vacuumelt(final Vacuumelt card) {
         super(card);
     }
 
     @Override
-    public Zap copy() {
-        return new Zap(this);
+    public Vacuumelt copy() {
+        return new Vacuumelt(this);
     }
 }

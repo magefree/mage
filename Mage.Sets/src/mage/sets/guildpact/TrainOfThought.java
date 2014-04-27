@@ -25,41 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.sets.guildpact;
 
 import java.util.UUID;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.keyword.ReplicateAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Zap extends CardImpl<Zap> {
+public class TrainOfThought extends CardImpl<TrainOfThought> {
 
-    public Zap(UUID ownerId) {
-        super(ownerId, 180, "Zap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "INV";
+    public TrainOfThought(UUID ownerId) {
+        super(ownerId, 39, "Train of Thought", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
+        this.expansionSetCode = "GPT";
 
-        this.color.setRed(true);
+        this.color.setBlue(true);
 
-        // Zap deals 1 damage to target creature or player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        // Replicate {1}{U}
+        this.addAbility(new ReplicateAbility(this, "{1}{U}"));
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Zap(final Zap card) {
+    public TrainOfThought(final TrainOfThought card) {
         super(card);
     }
 
     @Override
-    public Zap copy() {
-        return new Zap(this);
+    public TrainOfThought copy() {
+        return new TrainOfThought(this);
     }
 }

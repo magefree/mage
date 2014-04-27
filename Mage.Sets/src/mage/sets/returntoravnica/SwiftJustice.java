@@ -29,6 +29,7 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -51,10 +52,16 @@ public class SwiftJustice extends CardImpl<SwiftJustice> {
         this.color.setWhite(true);
 
         // Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1,0,Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        Effect effect = new BoostTargetEffect(1,0,Duration.EndOfTurn);
+        effect.setText("Until end of turn, target creature gets +1/+0");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains first strike");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and lifelink");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public SwiftJustice(final SwiftJustice card) {

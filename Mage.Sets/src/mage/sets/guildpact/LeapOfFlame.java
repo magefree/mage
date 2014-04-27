@@ -25,41 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Zap extends CardImpl<Zap> {
+public class LeapOfFlame extends CardImpl<LeapOfFlame> {
 
-    public Zap(UUID ownerId) {
-        super(ownerId, 180, "Zap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "INV";
+    public LeapOfFlame(UUID ownerId) {
+        super(ownerId, 121, "Leap of Flame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{R}");
+        this.expansionSetCode = "GPT";
 
         this.color.setRed(true);
+        this.color.setBlue(true);
 
-        // Zap deals 1 damage to target creature or player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        // Replicate {U}{R}
+        this.addAbility(new ReplicateAbility(this, "{U}{R}"));
+        // Target creature gets +1/+0 and gains flying and first strike until end of turn.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        Effect effect = new BoostTargetEffect(1,0,Duration.EndOfTurn);
+        effect.setText("Target creature gets +1/+0");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains flying");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and first strike until end of turn");
+        this.getSpellAbility().addEffect(effect);
+
+
     }
 
-    public Zap(final Zap card) {
+    public LeapOfFlame(final LeapOfFlame card) {
         super(card);
     }
 
     @Override
-    public Zap copy() {
-        return new Zap(this);
+    public LeapOfFlame copy() {
+        return new LeapOfFlame(this);
     }
 }

@@ -45,7 +45,7 @@ public class Unsummon extends CardImpl<Unsummon> {
         super(ownerId, 122, "Unsummon", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "10E";
         this.color.setBlue(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 

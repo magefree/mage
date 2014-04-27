@@ -25,41 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.sets.coldsnap;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Zap extends CardImpl<Zap> {
+public class OhranViper extends mage.sets.jacevsvraska.OhranViper {
 
-    public Zap(UUID ownerId) {
-        super(ownerId, 180, "Zap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "INV";
-
-        this.color.setRed(true);
-
-        // Zap deals 1 damage to target creature or player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+    public OhranViper(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 115;
+        this.expansionSetCode = "CSP";
     }
 
-    public Zap(final Zap card) {
+    public OhranViper(final OhranViper card) {
         super(card);
     }
 
     @Override
-    public Zap copy() {
-        return new Zap(this);
+    public OhranViper copy() {
+        return new OhranViper(this);
     }
 }

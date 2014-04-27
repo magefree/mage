@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
@@ -43,18 +44,15 @@ import mage.target.TargetPermanent;
  */
 public class Smash extends CardImpl<Smash> {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Smash(UUID ownerId) {
         super(ownerId, 69, "Smash", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "APC";
         this.color.setRed(true);
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+
+        // Destroy target artifact.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
+        // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 

@@ -47,7 +47,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**

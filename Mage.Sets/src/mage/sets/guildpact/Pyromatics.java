@@ -25,41 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.sets.guildpact;
 
 import java.util.UUID;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.ReplicateAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Zap extends CardImpl<Zap> {
+public class Pyromatics extends CardImpl<Pyromatics> {
 
-    public Zap(UUID ownerId) {
-        super(ownerId, 180, "Zap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "INV";
+    public Pyromatics(UUID ownerId) {
+        super(ownerId, 72, "Pyromatics", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        this.expansionSetCode = "GPT";
 
         this.color.setRed(true);
 
-        // Zap deals 1 damage to target creature or player.
+        // Replicate {1}{R}
+        this.addAbility(new ReplicateAbility(this, "{1}{R}"));
+        // Pyromatics deals 1 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+
     }
 
-    public Zap(final Zap card) {
+    public Pyromatics(final Pyromatics card) {
         super(card);
     }
 
     @Override
-    public Zap copy() {
-        return new Zap(this);
+    public Pyromatics copy() {
+        return new Pyromatics(this);
     }
 }
