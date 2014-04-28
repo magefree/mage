@@ -30,58 +30,6 @@ package mage.client;
 import de.schlichtherle.truezip.file.TArchiveDetector;
 import de.schlichtherle.truezip.file.TConfig;
 import de.schlichtherle.truezip.fs.FsOutputOption;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.SplashScreen;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.prefs.Preferences;
-import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComponent;
-import javax.swing.JDesktopPane;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JToggleButton;
-import javax.swing.JToolBar.Separator;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -97,13 +45,7 @@ import mage.client.components.tray.MageTray;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deckeditor.DeckEditorPane;
 import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
-import mage.client.dialog.AboutDialog;
-import mage.client.dialog.ConnectDialog;
-import mage.client.dialog.ErrorDialog;
-import mage.client.dialog.FeedbackDialog;
-import mage.client.dialog.GameEndDialog;
-import mage.client.dialog.PreferencesDialog;
-import mage.client.dialog.TableWaitingDialog;
+import mage.client.dialog.*;
 import mage.client.draft.DraftPane;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePane;
@@ -116,6 +58,7 @@ import mage.client.util.EDTExceptionHandler;
 import mage.client.util.SettingsManager;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.ArrowBuilder;
+import mage.client.util.stats.UpdateMemUsageTask;
 import mage.components.ImagePanel;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
@@ -131,6 +74,26 @@ import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.DownloadPictures;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.JToolBar.Separator;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.prefs.Preferences;
 
 
 /**
@@ -164,6 +127,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final MageUI ui = new MageUI();
 
     private static final ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
+    private static UpdateMemUsageTask updateMemUsageTask;
 
     private static long startTime;
 
@@ -250,6 +214,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 session.ping();
             }
         }, 60, 60, TimeUnit.SECONDS);
+
+        updateMemUsageTask = new UpdateMemUsageTask(jMemUsageLabel);
 
         try {
             tablesPane = new TablesPane();
@@ -341,6 +307,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_CHECK, "false").equals("true")) {
                     checkForNewImages();
                 }
+                updateMemUsageTask.execute();
                 logger.info("Client start up time: " + ((System.currentTimeMillis() - startTime) / 1000 + " seconds"));
                 if (autoConnect()) {
                     enableButtons();
@@ -767,9 +734,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnAbout = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
         btnExit = new javax.swing.JButton();
+        jMemUsageLabel = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JToolBar.Separator();
         lblStatus = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
 
         desktopPane.setBackground(new java.awt.Color(204, 204, 204));
@@ -877,23 +846,27 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         });
         mageToolbar.add(btnExit);
 
-        lblStatus.setText("Not connected ");
+        jMemUsageLabel.setText("100% Free mem");
         mageToolbar.add(Box.createHorizontalGlue());
+        mageToolbar.add(jMemUsageLabel);
+        mageToolbar.add(jSeparator8);
+
+        lblStatus.setText("Not connected ");
         mageToolbar.add(lblStatus);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
-            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
+            .addComponent(desktopPane)
+            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE))
+                .addComponent(desktopPane))
         );
 
         pack();
@@ -1138,6 +1111,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private javax.swing.JButton btnPreferences;
     private javax.swing.JButton btnSendFeedback;
     private static javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JLabel jMemUsageLabel;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
@@ -1145,6 +1119,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
+    private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JToolBar mageToolbar;
     // End of variables declaration//GEN-END:variables

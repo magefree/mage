@@ -9,7 +9,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -26,8 +25,8 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="desktopPane" alignment="0" pref="1144" max="32767" attributes="0"/>
-          <Component id="mageToolbar" alignment="0" pref="1144" max="32767" attributes="0"/>
+          <Component id="desktopPane" alignment="0" max="32767" attributes="0"/>
+          <Component id="mageToolbar" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -35,7 +34,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="mageToolbar" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-              <Component id="desktopPane" pref="880" max="32767" attributes="0"/>
+              <Component id="desktopPane" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,9 +51,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
       </AuxValues>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout"/>
     </Container>
     <Container class="javax.swing.JToolBar" name="mageToolbar">
       <Properties>
@@ -191,13 +188,20 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblStatus">
+        <Component class="javax.swing.JLabel" name="jMemUsageLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Not connected "/>
+            <Property name="text" type="java.lang.String" value="100% Free mem"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="mageToolbar.add(Box.createHorizontalGlue());"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator8">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblStatus">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Not connected "/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
