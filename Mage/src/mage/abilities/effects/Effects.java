@@ -85,7 +85,7 @@ public class Effects extends ArrayList<Effect> {
     }
 
     public List<Outcome> getOutcomes() {
-        Set<Outcome> outcomes = new HashSet<Outcome>();
+        Set<Outcome> outcomes = new HashSet<>();
         for (Effect effect: this) {
             outcomes.add(effect.getOutcome());
         }

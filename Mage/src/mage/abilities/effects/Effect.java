@@ -40,6 +40,7 @@ import mage.target.targetpointer.TargetPointer;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public interface Effect<T extends Effect<T>> extends Serializable {
 
