@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class PharikasMender extends CardImpl<PharikasMender> {
 
-    private static final FilterCard filter = new FilterCard("creature or enchantment card");
+    private static final FilterCard filter = new FilterCard("creature or enchantment card from your graveyard");
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.CREATURE),
