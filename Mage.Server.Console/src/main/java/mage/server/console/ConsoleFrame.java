@@ -258,6 +258,11 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
+    public void reconnect() {
+        logger.info("Not implemented.");
+    }
+
+    @Override
     public void showMessage(final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
             JOptionPane.showMessageDialog(this, message);

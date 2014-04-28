@@ -54,6 +54,7 @@ import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
 
+import javax.swing.*;
 import java.net.*;
 import java.util.*;
 
@@ -1285,7 +1286,10 @@ public class SessionImpl implements Session {
         try {
             if (isConnected()) {
                 if (!server.ping(sessionId)) {
-                     logger.error(new StringBuilder("Ping failed: ").append(this.getUserName()).append(" Session: ").append(sessionId).append(" to MAGE server at ").append(connection.getHost()).append(":").append(connection.getPort()).toString());
+                    logger.error(new StringBuilder("Ping failed: ").append(this.getUserName()).append(" Session: ").append(sessionId).append(" to MAGE server at ").append(connection.getHost()).append(":").append(connection.getPort()).toString());
+                    if (JOptionPane.showConfirmDialog(null, "The connection to server was lost. Reconnect?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        client.reconnect();
+                    }
                 }
             }
             return true;
