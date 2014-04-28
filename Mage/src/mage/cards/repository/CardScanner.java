@@ -73,7 +73,7 @@ public class CardScanner {
             }
         }
         if (!cardsToAdd.isEmpty()) {
-            logger.info("Cards needed to be stored in DB: " + cardsToAdd.size());
+            logger.info("Cards need storing in DB: " + cardsToAdd.size());
             CardRepository.instance.addCards(cardsToAdd);
         }
     }
