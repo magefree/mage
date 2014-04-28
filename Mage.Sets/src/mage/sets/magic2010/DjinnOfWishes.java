@@ -113,7 +113,7 @@ class DjinnOfWishesEffect extends OneShotEffect<DjinnOfWishesEffect> {
             if (player.chooseUse(Outcome.PlayForFree, "Play " + card.getName() + " without paying its mana cost?", game)) {
                 if (card.getCardType().contains(CardType.LAND)) {
                     // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
-                    if (game.getActivePlayerId().equals(player.getId()) && player.getLandsPlayed() < player.getLandsPerTurn()) {
+                    if (game.getActivePlayerId().equals(player.getId()) && player.canPlayLand()) {
                         used = true;
                         player.playLand(card, game);
                     }

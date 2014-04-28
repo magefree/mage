@@ -58,6 +58,7 @@ public class Galvanoth extends CardImpl<Galvanoth> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
+        // At the beginning of your upkeep, you may look at the top card of your library. If it's an instant or sorcery card, you may cast it without paying its mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GalvanothEffect(), TargetController.YOU, true));
     }
 
@@ -84,21 +85,19 @@ class GalvanothEffect extends OneShotEffect<GalvanothEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.lookAtCards("Galvanoth", cards, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().getFromTop(game);
+            Cards cards = new CardsImpl(card);
+            controller.lookAtCards("Galvanoth", cards, game);
 
             if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
-                String message = "Cast " + card.getName() + " without paying its mana cost?";
-                if (player.chooseUse(Outcome.PlayForFree, message, game)) {
-                    player.getLibrary().removeFromTop(game);
-                    player.cast(card.getSpellAbility(), game, true);
+                StringBuilder message = new StringBuilder("Cast ").append(card.getName()).append(" without paying its mana cost?");
+                if (controller.chooseUse(Outcome.PlayForFree, message.toString(), game)) {
+                    controller.getLibrary().removeFromTop(game);
+                    controller.cast(card.getSpellAbility(), game, true);
                 }
             }
-
             return true;
         }
         return false;

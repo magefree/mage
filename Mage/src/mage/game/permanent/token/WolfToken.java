@@ -39,14 +39,20 @@ import mage.ObjectColor;
 public class WolfToken extends Token {
 
     public WolfToken() {
+        this("ISD");
+    }
+    
+    public WolfToken(String setCode) {
         super("Wolf", "2/2 green Wolf creature token");
+        this.setOriginalExpansionSetCode(setCode);
+        if (setCode.equals("ISD")) {
+            setTokenType(Type.SECOND.code);
+        }
         cardType.add(CardType.CREATURE);
         color = ObjectColor.GREEN;
         subtype.add("Wolf");
         power = new MageInt(2);
         toughness = new MageInt(2);
-        setTokenType(Type.SECOND.code);
-        this.setOriginalExpansionSetCode("ISD");
     }
 
     public WolfToken(Token.Type type) {

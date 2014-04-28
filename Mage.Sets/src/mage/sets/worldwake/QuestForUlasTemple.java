@@ -95,15 +95,15 @@ class QuestForUlasTempleEffect extends OneShotEffect<QuestForUlasTempleEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.lookAtCards("This card", cards, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourcePermanent != null && controller != null && controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().getFromTop(game);
+            Cards cards = new CardsImpl(card);
+            controller.lookAtCards(sourcePermanent.getName(), cards, game);
             if (card.getCardType().contains(CardType.CREATURE)) {
-                if (player.chooseUse(Outcome.DrawCard, "Do you wish to reveal the creature card at the top of the library?", game)) {
-                    player.revealCards("Quest for Ula's Temple", cards, game);
+                if (controller.chooseUse(Outcome.DrawCard, "Do you wish to reveal the creature card at the top of the library?", game)) {
+                    controller.revealCards(sourcePermanent.getName(), cards, game);
                     Permanent questForUlasTemple = game.getPermanent(source.getSourceId());
                     if (questForUlasTemple != null) {
                         questForUlasTemple.addCounters(CounterType.QUEST.createInstance(), game);
@@ -133,11 +133,9 @@ class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl<QuestForUl
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent quest = game.getPermanent(super.getSourceId());
-        if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE
-                && quest != null
-                && quest.getCounters().getCount(CounterType.QUEST) >= 3) {
-            return true;
+        if (event.getType().equals(GameEvent.EventType.END_TURN_STEP_PRE)) {
+            Permanent quest = game.getPermanent(super.getSourceId());
+            return quest != null && quest.getCounters().getCount(CounterType.QUEST) >= 3;
         }
         return false;
     }
@@ -171,17 +169,19 @@ class QuestForUlasTempleEffect2 extends OneShotEffect<QuestForUlasTempleEffect2>
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, query, game)) {
-            return false;
-        }
-        TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
-                return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            TargetCardInHand target = new TargetCardInHand(filter);
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                    &&controller.chooseUse(Outcome.PutCreatureInPlay, query, game)) {
+                if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+                    Card card = game.getCard(target.getFirstTarget());
+                    if (card != null) {
+                        controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                    }
+                }
             }
+            return true;
         }
         return false;
     }
