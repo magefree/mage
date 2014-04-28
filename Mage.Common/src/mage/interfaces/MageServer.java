@@ -146,6 +146,7 @@ public interface MageServer {
     //admin methods
     List<UserView> getUsers(String sessionId) throws MageException;
     void disconnectUser(String sessionId, String userSessionId) throws MageException;
+    void endUserSession(String sessionId, String userSessionId) throws MageException;
     void removeTable(String sessionId, UUID tableId) throws MageException;
     void sendBroadcastMessage(String sessionId, String message) throws MageException;
 }

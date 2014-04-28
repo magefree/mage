@@ -33,18 +33,18 @@
  */
 package mage.server.console;
 
+import mage.remote.Session;
+import mage.view.TableView;
+import mage.view.UserView;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import javax.swing.SwingWorker;
-import javax.swing.table.AbstractTableModel;
-
-import mage.remote.Session;
-import mage.view.TableView;
-import mage.view.UserView;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -113,12 +113,13 @@ public class ConsolePanel extends javax.swing.JPanel {
         tblUsers = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         btnDisconnect = new javax.swing.JButton();
+        btnEndSession = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTables = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
-        btnDelete = new javax.swing.JButton();
+        btnRemoveTable = new javax.swing.JButton();
 
         jSplitPane1.setDividerLocation(250);
         jSplitPane1.setResizeWeight(0.5);
@@ -134,7 +135,7 @@ public class ConsolePanel extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
         );
 
         jPanel4.setVerifyInputWhenFocusTarget(false);
@@ -146,19 +147,30 @@ public class ConsolePanel extends javax.swing.JPanel {
             }
         });
 
+        btnEndSession.setText("End session");
+        btnEndSession.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEndSessionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(btnDisconnect)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addComponent(btnDisconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEndSession)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(btnDisconnect)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDisconnect)
+                    .addComponent(btnEndSession))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -189,13 +201,13 @@ public class ConsolePanel extends javax.swing.JPanel {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
         );
 
-        btnDelete.setText("Remove");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+        btnRemoveTable.setLabel("Remove Table");
+        btnRemoveTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
+                btnRemoveTableActionPerformed(evt);
             }
         });
 
@@ -204,13 +216,13 @@ public class ConsolePanel extends javax.swing.JPanel {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(btnDelete)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addComponent(btnRemoveTable)
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(btnDelete)
+                .addComponent(btnRemoveTable)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -219,7 +231,7 @@ public class ConsolePanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +251,7 @@ public class ConsolePanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -248,14 +260,20 @@ public class ConsolePanel extends javax.swing.JPanel {
         ConsoleFrame.getSession().disconnectUser((String)tableUserModel.getValueAt(row, 3));
     }//GEN-LAST:event_btnDisconnectActionPerformed
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+    private void btnRemoveTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveTableActionPerformed
         int row = this.tblTables.getSelectedRow();
         ConsoleFrame.getSession().removeTable((UUID)tableTableModel.getValueAt(row, 7));
-    }//GEN-LAST:event_btnDeleteActionPerformed
+    }//GEN-LAST:event_btnRemoveTableActionPerformed
+
+    private void btnEndSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndSessionActionPerformed
+        int row = this.tblUsers.getSelectedRow();
+        ConsoleFrame.getSession().endUserSession((String) tableUserModel.getValueAt(row, 3));
+    }//GEN-LAST:event_btnEndSessionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDisconnect;
+    private javax.swing.JButton btnEndSession;
+    private javax.swing.JButton btnRemoveTable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -399,6 +417,7 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
 
     private Session session;
     private ConsolePanel panel;
+    private List<UserView> previousUsers;
 
     private static final Logger logger = Logger.getLogger(UpdateUsersTask.class);
 
@@ -410,10 +429,40 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            this.publish(session.getUsers());
+            List<UserView> users = session.getUsers();
+            if (previousUsers == null || checkUserListChanged(users)) {
+                logger.debug("Need to update the user list");
+                this.publish(users);
+                previousUsers = users;
+            }
             Thread.sleep(1000);
         }
         return null;
+    }
+
+    private boolean checkUserListChanged(List<UserView> usersToCheck) {
+        if (previousUsers == null || usersToCheck == null) {
+            return true;
+        }
+        if (previousUsers.size() != usersToCheck.size()) {
+            // new user appeared
+            return true;
+        }
+        for (UserView u1 : previousUsers) {
+            boolean found = false;
+            for (UserView u2 : usersToCheck) {
+                if (u1.getUserName().equals(u2.getUserName())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                // some new user replaced old one
+                return true;
+            }
+        }
+        // seems nothing has been changed
+        return false;
     }
 
     @Override

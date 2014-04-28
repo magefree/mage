@@ -28,18 +28,6 @@
 
 package mage.remote;
 
-import java.net.Authenticator;
-import java.net.ConnectException;
-import java.net.MalformedURLException;
-import java.net.PasswordAuthentication;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -56,28 +44,18 @@ import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
-import mage.view.DraftPickView;
-import mage.view.GameTypeView;
-import mage.view.MatchView;
-import mage.view.TableView;
-import mage.view.TournamentTypeView;
-import mage.view.TournamentView;
-import mage.view.UserDataView;
-import mage.view.UserView;
-import mage.view.UsersView;
+import mage.view.*;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.CannotConnectException;
-import org.jboss.remoting.Client;
-import org.jboss.remoting.ConnectionListener;
-import org.jboss.remoting.ConnectionValidator;
-import org.jboss.remoting.InvokerLocator;
-import org.jboss.remoting.Remoting;
+import org.jboss.remoting.*;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
+
+import java.net.*;
+import java.util.*;
 
 /**
  *
@@ -1240,6 +1218,21 @@ public class SessionImpl implements Session {
             handleMageException(ex);
         } catch (Throwable t) {
             handleThrowable(t);        
+        }
+        return false;
+    }
+
+    @Override
+    public boolean endUserSession(String userSessionId) {
+        try {
+            if (isConnected()) {
+                server.endUserSession(sessionId, userSessionId);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
         }
         return false;
     }

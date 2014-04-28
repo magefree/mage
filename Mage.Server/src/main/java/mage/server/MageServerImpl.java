@@ -28,11 +28,6 @@
 
 package mage.server;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
-import java.util.concurrent.ExecutorService;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -51,13 +46,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.MageVersionException;
 import mage.server.draft.CubeFactory;
 import mage.server.draft.DraftManager;
-import mage.server.game.DeckValidatorFactory;
-import mage.server.game.GameFactory;
-import mage.server.game.GameManager;
-import mage.server.game.GamesRoom;
-import mage.server.game.GamesRoomManager;
-import mage.server.game.PlayerFactory;
-import mage.server.game.ReplayManager;
+import mage.server.game.*;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.services.impl.LogServiceImpl;
@@ -66,22 +55,16 @@ import mage.server.tournament.TournamentManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
-import mage.utils.ActionWithBooleanResult;
-import mage.utils.ActionWithNullNegativeResult;
-import mage.utils.ActionWithTableViewResult;
-import mage.utils.CompressUtil;
-import mage.utils.MageVersion;
-import mage.view.ChatMessage;
+import mage.utils.*;
+import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
-import mage.view.DraftPickView;
-import mage.view.GameView;
-import mage.view.MatchView;
-import mage.view.TableView;
-import mage.view.TournamentView;
-import mage.view.UserDataView;
-import mage.view.UserView;
-import mage.view.UsersView;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
 
 /**
  *
@@ -916,6 +899,16 @@ public class MageServerImpl implements MageServer {
             @Override
             public void execute() {
                 SessionManager.getInstance().disconnectUser(sessionId, userSessionId);
+            }
+        });
+    }
+
+    @Override
+    public void endUserSession(final String sessionId, final String userSessionId) throws MageException {
+        execute("endUserSession", sessionId, new Action() {
+            @Override
+            public void execute() {
+                SessionManager.getInstance().endUserSession(sessionId, userSessionId);
             }
         });
     }

@@ -27,7 +27,6 @@
 */
 package mage.remote.interfaces;
 
-import java.util.UUID;
 import mage.remote.Connection;
 
 /**
@@ -48,6 +47,8 @@ public interface Connect {
     boolean isConnected();
 
     boolean disconnectUser(String userSessionId);
-    
+
+    boolean endUserSession(String userSessionId);
+
     String getSessionId();
 }

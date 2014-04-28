@@ -17,6 +17,8 @@ public interface LogKeys {
 
     String KEY_SESSION_DISCONNECTED_BY_ADMIN = "sessionDisconnectedByAdmin";
 
+    String KEY_SESSION_END_BY_ADMIN = "sessionEndSessionByAdmin";
+
     String KEY_NOT_VALID_SESSION = "sessionNotValid";
 
     String KEY_NOT_VALID_SESSION_INTERNAL = "sessionNotValidInternal";

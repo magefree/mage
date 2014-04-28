@@ -27,15 +27,16 @@
  */
 package mage.server;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
 import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -131,6 +132,13 @@ public class SessionManager {
         if (isAdmin(sessionId)) {
             disconnect(userSessionId, true);
             LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED_BY_ADMIN, sessionId, userSessionId);
+        }
+    }
+
+    public void endUserSession(String sessionId, String userSessionId) {
+        if (isAdmin(sessionId)) {
+            disconnect(userSessionId, false);
+            LogServiceImpl.instance.log(LogKeys.KEY_SESSION_END_BY_ADMIN, sessionId, userSessionId);
         }
     }
 
