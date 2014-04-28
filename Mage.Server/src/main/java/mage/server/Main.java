@@ -28,14 +28,6 @@
 
 package mage.server;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.Map;
-import javax.management.MBeanServer;
 import mage.cards.repository.CardScanner;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
@@ -54,14 +46,7 @@ import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.Client;
-import org.jboss.remoting.ClientDisconnectedException;
-import org.jboss.remoting.ConnectionListener;
-import org.jboss.remoting.InvocationRequest;
-import org.jboss.remoting.InvokerLocator;
-import org.jboss.remoting.Remoting;
-import org.jboss.remoting.ServerInvocationHandler;
-import org.jboss.remoting.ServerInvoker;
+import org.jboss.remoting.*;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.callback.ServerInvokerCallbackHandler;
 import org.jboss.remoting.transport.Connector;
@@ -69,6 +54,15 @@ import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
 import org.jboss.remoting.transporter.TransporterServer;
 import org.w3c.dom.Element;
+
+import javax.management.MBeanServer;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -88,6 +82,7 @@ public class Main {
     public static PluginClassLoader classLoader = new PluginClassLoader();
     public static TransporterServer server;
     protected static boolean testMode;
+
     /**
      * @param args the command line arguments
      */
@@ -95,7 +90,9 @@ public class Main {
 
         logger.info("Starting MAGE server version " + version);
         logger.info("Logging level: " + logger.getEffectiveLevel());
+        logger.info("Loading cards...");
         CardScanner.scan();
+        logger.info("Done.");
         deleteSavedGames();
         ConfigSettings config = ConfigSettings.getInstance();
         for (GamePlugin plugin: config.getGameTypes()) {

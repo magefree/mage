@@ -27,14 +27,12 @@
  */
 package mage.cards.repository;
 
+import mage.cards.*;
+import mage.util.ClassScanner;
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
-import mage.cards.SplitCard;
-import mage.util.ClassScanner;
 
 /**
  *
@@ -44,6 +42,9 @@ public class CardScanner {
 
     private static boolean scanned = false;
 
+    private static final Logger logger = Logger.getLogger(CardScanner.class);
+
+
     public static void scan() {
         if (scanned) {
             return;
@@ -52,6 +53,7 @@ public class CardScanner {
 
         List<CardInfo> cardsToAdd = new ArrayList<CardInfo>();
         List<String> packages = new ArrayList<String>();
+
         for (ExpansionSet set : Sets.getInstance().values()) {
             packages.add(set.getPackageName());
             ExpansionRepository.instance.add(new ExpansionInfo(set));
@@ -71,6 +73,7 @@ public class CardScanner {
             }
         }
         if (!cardsToAdd.isEmpty()) {
+            logger.info("Cards needed to be stored in DB: " + cardsToAdd.size());
             CardRepository.instance.addCards(cardsToAdd);
         }
     }
