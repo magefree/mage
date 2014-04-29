@@ -25,51 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class KuroPitlord extends CardImpl<KuroPitlord> {
+public class SunQuanLordOfWu extends CardImpl<SunQuanLordOfWu> {
 
-    public KuroPitlord(UUID ownerId) {
-        super(ownerId, 123, "Kuro, Pitlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
-        this.expansionSetCode = "CHK";
+    public SunQuanLordOfWu(UUID ownerId) {
+        super(ownerId, 56, "Sun Quan, Lord of Wu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
+        this.expansionSetCode = "PTK";
         this.supertype.add("Legendary");
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
-        this.color.setBlack(true);
-        this.power = new MageInt(9);
-        this.toughness = new MageInt(9);
-        // At the beginning of your upkeep, sacrifice Kuro, Pitlord unless you pay {B}{B}{B}{B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}{B}{B}")), TargetController.YOU, false));
-        // Pay 1 life: Target creature gets -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new PayLifeCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // Creatures you control have horsemanship.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HorsemanshipAbility.getInstance(), 
+                Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
     }
 
-    public KuroPitlord(final KuroPitlord card) {
+    public SunQuanLordOfWu(final SunQuanLordOfWu card) {
         super(card);
     }
 
     @Override
-    public KuroPitlord copy() {
-        return new KuroPitlord(this);
+    public SunQuanLordOfWu copy() {
+        return new SunQuanLordOfWu(this);
     }
 }

@@ -25,51 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.legends;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.discard.DiscardHandTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class KuroPitlord extends CardImpl<KuroPitlord> {
+public class NicolBolas extends CardImpl<NicolBolas> {
 
-    public KuroPitlord(UUID ownerId) {
-        super(ownerId, 123, "Kuro, Pitlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
-        this.expansionSetCode = "CHK";
+    public NicolBolas(UUID ownerId) {
+        super(ownerId, 286, "Nicol Bolas", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{B}{B}{R}{R}");
+        this.expansionSetCode = "LEG";
         this.supertype.add("Legendary");
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
+        this.subtype.add("Elder");
+        this.subtype.add("Dragon");
+
+        this.color.setRed(true);
+        this.color.setBlue(true);
         this.color.setBlack(true);
-        this.power = new MageInt(9);
-        this.toughness = new MageInt(9);
-        // At the beginning of your upkeep, sacrifice Kuro, Pitlord unless you pay {B}{B}{B}{B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}{B}{B}")), TargetController.YOU, false));
-        // Pay 1 life: Target creature gets -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new PayLifeCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // At the beginning of your upkeep, sacrifice Nicol Bolas unless you pay {U}{B}{R}.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}{B}{R}")), TargetController.YOU, false));
+        
+        // Whenever Nicol Bolas deals damage to an opponent, that player discards his or her hand.
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardHandTargetEffect("that player"), false));
     }
 
-    public KuroPitlord(final KuroPitlord card) {
+    public NicolBolas(final NicolBolas card) {
         super(card);
     }
 
     @Override
-    public KuroPitlord copy() {
-        return new KuroPitlord(this);
+    public NicolBolas copy() {
+        return new NicolBolas(this);
     }
 }

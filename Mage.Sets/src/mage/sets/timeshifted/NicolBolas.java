@@ -25,51 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.timeshifted;
 
 import java.util.UUID;
-
-import mage.constants.*;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.Rarity;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class KuroPitlord extends CardImpl<KuroPitlord> {
+public class NicolBolas extends mage.sets.legends.NicolBolas {
 
-    public KuroPitlord(UUID ownerId) {
-        super(ownerId, 123, "Kuro, Pitlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
-        this.color.setBlack(true);
-        this.power = new MageInt(9);
-        this.toughness = new MageInt(9);
-        // At the beginning of your upkeep, sacrifice Kuro, Pitlord unless you pay {B}{B}{B}{B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}{B}{B}")), TargetController.YOU, false));
-        // Pay 1 life: Target creature gets -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new PayLifeCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    public NicolBolas(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 98;
+        this.expansionSetCode = "TSB";
+        this.rarity = Rarity.SPECIAL;
     }
 
-    public KuroPitlord(final KuroPitlord card) {
+    public NicolBolas(final NicolBolas card) {
         super(card);
     }
 
     @Override
-    public KuroPitlord copy() {
-        return new KuroPitlord(this);
+    public NicolBolas copy() {
+        return new NicolBolas(this);
     }
 }

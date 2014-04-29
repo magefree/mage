@@ -25,51 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.legends;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class KuroPitlord extends CardImpl<KuroPitlord> {
+public class XiraArien extends CardImpl<XiraArien> {
 
-    public KuroPitlord(UUID ownerId) {
-        super(ownerId, 123, "Kuro, Pitlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
-        this.expansionSetCode = "CHK";
+    public XiraArien(UUID ownerId) {
+        super(ownerId, 310, "Xira Arien", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
+        this.expansionSetCode = "LEG";
         this.supertype.add("Legendary");
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
+        this.subtype.add("Insect");
+        this.subtype.add("Wizard");
+
+        this.color.setRed(true);
+        this.color.setGreen(true);
         this.color.setBlack(true);
-        this.power = new MageInt(9);
-        this.toughness = new MageInt(9);
-        // At the beginning of your upkeep, sacrifice Kuro, Pitlord unless you pay {B}{B}{B}{B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}{B}{B}")), TargetController.YOU, false));
-        // Pay 1 life: Target creature gets -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new PayLifeCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {B}{R}{G}, {tap}: Target player draws a card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new ManaCostsImpl("{B}{R}{G}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 
-    public KuroPitlord(final KuroPitlord card) {
+    public XiraArien(final XiraArien card) {
         super(card);
     }
 
     @Override
-    public KuroPitlord copy() {
-        return new KuroPitlord(this);
+    public XiraArien copy() {
+        return new XiraArien(this);
     }
 }

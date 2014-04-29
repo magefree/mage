@@ -25,51 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.alliances;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class KuroPitlord extends CardImpl<KuroPitlord> {
-
-    public KuroPitlord(UUID ownerId) {
-        super(ownerId, 123, "Kuro, Pitlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
-        this.expansionSetCode = "CHK";
+public class Kaysa extends CardImpl<Kaysa> {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Green creatures");
+    
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+    }
+            
+    public Kaysa(UUID ownerId) {
+        super(ownerId, 80, "Kaysa", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "ALL";
         this.supertype.add("Legendary");
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
-        this.color.setBlack(true);
-        this.power = new MageInt(9);
-        this.toughness = new MageInt(9);
-        // At the beginning of your upkeep, sacrifice Kuro, Pitlord unless you pay {B}{B}{B}{B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}{B}{B}")), TargetController.YOU, false));
-        // Pay 1 life: Target creature gets -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new PayLifeCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.subtype.add("Elf");
+        this.subtype.add("Druid");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // Green creatures you control get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1, Duration.WhileOnBattlefield, filter)));
     }
 
-    public KuroPitlord(final KuroPitlord card) {
+    public Kaysa(final Kaysa card) {
         super(card);
     }
 
     @Override
-    public KuroPitlord copy() {
-        return new KuroPitlord(this);
+    public Kaysa copy() {
+        return new Kaysa(this);
     }
 }

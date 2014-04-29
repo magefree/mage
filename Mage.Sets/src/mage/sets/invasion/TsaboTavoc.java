@@ -25,51 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.invasion;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class KuroPitlord extends CardImpl<KuroPitlord> {
+public class TsaboTavoc extends CardImpl<TsaboTavoc> {
 
-    public KuroPitlord(UUID ownerId) {
-        super(ownerId, 123, "Kuro, Pitlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
-        this.expansionSetCode = "CHK";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creatures");  
+    private static final FilterCreaturePermanent filterDestroy = new FilterCreaturePermanent("legendary creature");
+    
+    static {
+        filter.add(new SupertypePredicate("Legendary"));
+        filterDestroy.add(new SupertypePredicate("Legendary"));
+    }
+    
+    public TsaboTavoc(UUID ownerId) {
+        super(ownerId, 281, "Tsabo Tavoc", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");
+        this.expansionSetCode = "INV";
         this.supertype.add("Legendary");
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
+        this.subtype.add("Horror");
+
+        this.color.setRed(true);
         this.color.setBlack(true);
-        this.power = new MageInt(9);
-        this.toughness = new MageInt(9);
-        // At the beginning of your upkeep, sacrifice Kuro, Pitlord unless you pay {B}{B}{B}{B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}{B}{B}")), TargetController.YOU, false));
-        // Pay 1 life: Target creature gets -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new PayLifeCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(4);
+
+        // First strike
+        this.addAbility(FirstStrikeAbility.getInstance());
+        // protection from legendary creatures
+        this.addAbility(new ProtectionAbility(filter));
+        // {B}{B}, {tap}: Destroy target legendary creature. It can't be regenerated.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new ManaCostsImpl("{B}{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filterDestroy, true));
+        this.addAbility(ability);        
     }
 
-    public KuroPitlord(final KuroPitlord card) {
+    public TsaboTavoc(final TsaboTavoc card) {
         super(card);
     }
 
     @Override
-    public KuroPitlord copy() {
-        return new KuroPitlord(this);
+    public TsaboTavoc copy() {
+        return new TsaboTavoc(this);
     }
 }
