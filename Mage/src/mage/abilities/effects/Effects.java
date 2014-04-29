@@ -63,8 +63,10 @@ public class Effects extends ArrayList<Effect> {
             }
             rule = effect.getText(mode);
             if (rule != null) {
-                if (rule.startsWith("and ") || rule.startsWith(",")) {
+                if (rule.startsWith("and ")) {
                     endString = " ";
+                } else if (rule.startsWith(",")) {
+                    endString = "";
                 }
                 sbText.append(endString).append(rule);
             }

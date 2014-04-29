@@ -61,8 +61,9 @@ public class AddCountersControllerEffect extends OneShotEffect<AddCountersContro
 
     public AddCountersControllerEffect(final AddCountersControllerEffect effect) {
         super(effect);
-        if (effect.counter != null)
+        if (effect.counter != null) {
             this.counter = effect.counter.copy();
+        }
         this.enchantedEquipped = effect.enchantedEquipped;
     }
 
@@ -76,8 +77,12 @@ public class AddCountersControllerEffect extends OneShotEffect<AddCountersContro
                 Permanent permanent = game.getPermanent(eUuid);
                 if (permanent != null) {
                     uuid = permanent.getControllerId();
-                } else return false;
-            } else return false;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
         Player player = game.getPlayer(uuid);
         if (player != null) {
@@ -92,8 +97,9 @@ public class AddCountersControllerEffect extends OneShotEffect<AddCountersContro
             StringBuilder sb = new StringBuilder();
             sb.append("its controller gets ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters");
             staticText = sb.toString();
-        } else
+        } else {
             staticText = "its controller gets a " + counter.getName() + " counter";
+        }
     }
 
     @Override

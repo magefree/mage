@@ -37,6 +37,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -80,27 +81,40 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int affectedTargets = 0;
-        for (UUID uuid : targetPointer.getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(uuid);
-            if (permanent != null) {
-                if (counter != null) {
-                    Counter newCounter = counter.copy();
-                    newCounter.add(amount.calculate(game, source));
-                    permanent.addCounters(newCounter, game);
-                    affectedTargets ++;
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            int affectedTargets = 0;
+            for (UUID uuid : targetPointer.getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(uuid);
+                if (permanent != null) {
+                    if (counter != null) {
+                        Counter newCounter = counter.copy();
+                        newCounter.add(amount.calculate(game, source));
+                        permanent.addCounters(newCounter, game);
+                        affectedTargets ++;
+                        game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
+                                .append(controller.getName()).append(" puts ")
+                                .append(counter.getCount()).append(" ").append(counter.getName().toLowerCase())
+                                .append(" counter on ").append(permanent.getName()).toString());                        
+                    }
+                } else {
+                    Player player = game.getPlayer(uuid);
+                    if (player != null) {
+                        Counter newCounter = counter.copy();
+                        newCounter.add(amount.calculate(game, source));
+                        player.addCounters(newCounter, game);
+                        affectedTargets ++;
+                        game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
+                                .append(controller.getName()).append(" puts ")
+                                .append(counter.getCount()).append(" ").append(counter.getName().toLowerCase())
+                                .append(" counter on ").append(player.getName()).toString());                        
+                    }
                 }
-            } else {
-                Player player = game.getPlayer(uuid);
-                if (player != null) {
-                    Counter newCounter = counter.copy();
-                    newCounter.add(amount.calculate(game, source));
-                    player.addCounters(newCounter, game);
-                    affectedTargets ++;
-                }
-            }
+            }  
+            return affectedTargets > 0;
         }
-        return affectedTargets > 0;
+        return false;
     }
 
     @Override

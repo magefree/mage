@@ -29,6 +29,7 @@ package mage.abilities.effects.common.counter;
 
 import java.util.List;
 import java.util.UUID;
+import mage.MageObject;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -36,6 +37,7 @@ import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -43,8 +45,8 @@ import mage.game.permanent.Permanent;
  */
 public class AddCountersAllEffect extends OneShotEffect<AddCountersAllEffect> {
 
-    private Counter counter;
-    private FilterPermanent filter;
+    private final Counter counter;
+    private final FilterPermanent filter;
 
     public AddCountersAllEffect(Counter counter, FilterPermanent filter) {
         super(Outcome.Benefit);
@@ -61,27 +63,34 @@ public class AddCountersAllEffect extends OneShotEffect<AddCountersAllEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean applied = false;
-        if (counter != null) {
-            UUID controllerId = source.getControllerId();
-            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents();
-            for (Permanent permanent : permanents) {
-                if (filter.match(permanent, source.getSourceId(), controllerId, game)) {
-                    permanent.addCounters(counter.copy(), game);
-                    applied = true;
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            if (counter != null) {
+                UUID controllerId = source.getControllerId();
+                List<Permanent> permanents = game.getBattlefield().getAllActivePermanents();
+                for (Permanent permanent : permanents) {
+                    if (filter.match(permanent, source.getSourceId(), controllerId, game)) {
+                        permanent.addCounters(counter.copy(), game);
+                        game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
+                                .append(controller.getName()).append(" puts ")
+                                .append(counter.getCount()).append(" ").append(counter.getName().toLowerCase())
+                                .append(" counter on ").append(permanent.getName()).toString());
+                    }
                 }
-            }
-        }
-        return applied;
+            }            
+            return true;
+        }        
+        return false;
     }
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("put ");
         if (counter.getCount() > 1) {
-            sb.append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters on each ");
+            sb.append(Integer.toString(counter.getCount())).append(" ").append(counter.getName().toLowerCase()).append(" counters on each ");
         } else {
-            sb.append("a ").append(counter.getName()).append(" counter on each ");
+            sb.append("a ").append(counter.getName().toLowerCase()).append(" counter on each ");
         }
         sb.append(filter.getMessage());
         staticText = sb.toString();

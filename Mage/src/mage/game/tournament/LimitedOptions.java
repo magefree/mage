@@ -39,7 +39,7 @@ import mage.game.draft.DraftCube;
  */
 public class LimitedOptions implements Serializable {
 
-    protected List<String> sets = new ArrayList<String>();
+    protected List<String> sets = new ArrayList<>();
     protected int constructionTime;
     protected String draftCubeName;
     protected DraftCube draftCube;
