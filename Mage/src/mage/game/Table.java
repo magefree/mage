@@ -58,7 +58,7 @@ public class Table implements Serializable {
     private boolean isTournament;
     private boolean tournamentSubTable;
     private DeckValidator validator;
-    private TableState state = TableState.WAITING;
+    private TableState state;
     private Match match;
     private Tournament tournament;
 
@@ -68,12 +68,14 @@ public class Table implements Serializable {
         this(roomId, gameType, name, controllerName, validator, playerTypes);
         this.tournament = tournament;
         this.isTournament = true;
+        setState(TableState.WAITING);        
     }
 
     public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, Match match) {
         this(roomId, gameType, name, controllerName, validator, playerTypes);
         this.match = match;
-        this.isTournament = false;
+        this.isTournament = false;        
+        setState(TableState.WAITING);        
     }
 
     protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes) {
@@ -106,23 +108,24 @@ public class Table implements Serializable {
     }
 
     public void initGame() {
-        state = TableState.DUELING;
+        setState(TableState.DUELING);        
     }
 
     public void initTournament() {
-        state = TableState.DUELING;
+        setState(TableState.DUELING);        
+        
     }
 
     public void endTournament() {
-        state = TableState.FINISHED;
+        setState(TableState.FINISHED);        
     }
 
     public void initDraft() {
-        state = TableState.DRAFTING;
+        setState(TableState.DRAFTING);
     }
 
     public void construct() {
-        state = TableState.CONSTRUCTING;
+        setState(TableState.CONSTRUCTING);
     }
 
     /**
@@ -131,7 +134,7 @@ public class Table implements Serializable {
      *
      */
     public void closeTable() {
-        state = TableState.FINISHED;
+        setState(TableState.FINISHED);
         this.validator = null;
     }
 
@@ -167,7 +170,7 @@ public class Table implements Serializable {
         }
         seat.setPlayer(player);
         if (isReady()) {
-            state = TableState.STARTING;
+            setState(TableState.STARTING);
         }
         return seat.getPlayer().getId();
     }
@@ -203,11 +206,18 @@ public class Table implements Serializable {
             Player player = seats[i].getPlayer();
             if (player != null && player.getId().equals(playerId)) {
                 seats[i].setPlayer(null);
-                if (state == TableState.STARTING) {
-                    state = TableState.WAITING;
+                if (getState().equals(TableState.STARTING)) {
+                    setState(TableState.WAITING);
                 }
                 break;
             }
+        }
+    }
+
+    final public void setState(TableState state) {
+        this.state = state;
+        if (isTournament()) {
+            getTournament().setTournamentState(state.toString());
         }
     }
 
@@ -220,7 +230,7 @@ public class Table implements Serializable {
     }
 
     public void sideboard() {
-        state = TableState.SIDEBOARDING;
+        setState(TableState.SIDEBOARDING);
     }
 
     public String getName() {

@@ -46,7 +46,8 @@ public class TournamentView implements Serializable {
 
     private final String tournamentName;
     private final String tournamentType;
-
+    private final String tournamentState;
+    
     private final Date startTime;
     private final Date endTime;
 
@@ -63,6 +64,7 @@ public class TournamentView implements Serializable {
         startTime = tournament.getStartTime();
         endTime = tournament.getEndTime();
         watchingAllowed = tournament.getOptions().isWatchingAllowed();
+        tournamentState = tournament.getTournamentState();
 
         for (TournamentPlayer player: tournament.getPlayers()) {
             players.add(new TournamentPlayerView(player));
@@ -103,4 +105,9 @@ public class TournamentView implements Serializable {
     public List<RoundView> getRounds() {
         return rounds;
     }
+
+    public String getTournamentState() {
+        return tournamentState;
+    }
+    
 }

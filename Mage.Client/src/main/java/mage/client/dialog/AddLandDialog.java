@@ -50,9 +50,9 @@ import mage.constants.Rarity;
 public class AddLandDialog extends MageDialog {
 
     private Deck deck;
-    private Set<String> setCodesland = new HashSet<String>();
+    private final Set<String> setCodesland = new HashSet<>();
     
-    private static int DEFAULT_SEALED_DECK_CARD_NUMBER = 40;
+    private static final int DEFAULT_SEALED_DECK_CARD_NUMBER = 40;
 
     /** Creates new form AddLandDialog */
     public AddLandDialog() {

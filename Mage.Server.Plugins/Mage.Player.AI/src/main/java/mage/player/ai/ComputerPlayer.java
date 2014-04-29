@@ -1512,7 +1512,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 }
                 chosenColors = chooseDeckColorsIfPossible();
             }
-            deck = buildDeck(new ArrayList<Card>(deck.getSideboard()), chosenColors);
+            deck = buildDeck(new ArrayList<>(deck.getSideboard()), chosenColors);
         }
         tournament.submitDeck(playerId, deck);
     }

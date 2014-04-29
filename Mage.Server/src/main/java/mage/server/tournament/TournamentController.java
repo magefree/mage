@@ -53,7 +53,6 @@ import mage.server.UserManager;
 import mage.server.draft.DraftController;
 import mage.server.draft.DraftManager;
 import mage.server.draft.DraftSession;
-import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;

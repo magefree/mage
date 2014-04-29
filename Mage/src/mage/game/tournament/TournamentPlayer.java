@@ -28,10 +28,18 @@
 
 package mage.game.tournament;
 
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.Rarity;
 import mage.constants.TournamentPlayerState;
 import mage.players.Player;
+import mage.util.TournamentUtil;
 
 /**
  *
@@ -105,7 +113,7 @@ public class TournamentPlayer {
     }
 
     public void submitDeck(Deck deck) {
-        this.deck = deck;
+        this.deck = deck; // Check if player manipulated available cards???
         this.doneConstructing = true;
         this.setState(TournamentPlayerState.WAITING);
     }
@@ -115,15 +123,30 @@ public class TournamentPlayer {
     }
 
     public Deck generateDeck() {
-        //TODO: improve this
-        while (deck.getCards().size() < 40 && deck.getSideboard().size() > 0) {
-            Card card = deck.getSideboard().iterator().next();
-            deck.getCards().add(card);
-            deck.getSideboard().remove(card);
+        // user passed to submit deck in time
+        // all all cards to deck
+        deck.getCards().addAll(deck.getSideboard());
+        deck.getSideboard().clear();
+        // add lands to deck
+        int landsPerType = 7;
+        if (deck.getCards().size() >= 90) {
+            landsPerType = 14;
         }
+        Set<String> landSets = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes());
+        deck.getCards().addAll(TournamentUtil.getLands("Mountain", landsPerType, landSets));
+        deck.getCards().addAll(TournamentUtil.getLands("Plains", landsPerType, landSets));
+        deck.getCards().addAll(TournamentUtil.getLands("Swamp", landsPerType, landSets));
+        deck.getCards().addAll(TournamentUtil.getLands("Forest", landsPerType, landSets));
+        deck.getCards().addAll(TournamentUtil.getLands("Island", landsPerType, landSets));
+        
+        this.doneConstructing = true;
+        this.setState(TournamentPlayerState.WAITING);
+        
         return deck;
     }
 
+
+    
     public boolean isDoneConstructing() {
         return this.doneConstructing;
     }

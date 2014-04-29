@@ -75,7 +75,8 @@ public abstract class TournamentImpl implements Tournament {
     protected Date startTime;
     protected Date endTime;
     protected boolean abort;
-
+    protected String tournamentState;
+   
     public TournamentImpl(TournamentOptions options) {
         this.options = options;
         startTime = new Date();
@@ -107,6 +108,9 @@ public abstract class TournamentImpl implements Tournament {
         if (players.containsKey(playerId)) {
             players.get(playerId).submitDeck(deck);
         }
+        synchronized (this) {
+            this.notifyAll();
+        }        
     }
 
     @Override
@@ -358,11 +362,16 @@ public abstract class TournamentImpl implements Tournament {
                     }
                 ).start();
             }
+            // add autosubmit trigger
+            
+            
             synchronized(this) {
                 while (!isDoneConstructing()) {
                     try {
                         this.wait();
-                    } catch (InterruptedException ex) { }
+                    } catch (InterruptedException ex) {
+                        
+                    }
                 }
             }
         }
@@ -458,6 +467,16 @@ public abstract class TournamentImpl implements Tournament {
     @Override
     public void setAbort(boolean abort) {
         this.abort = abort;
+    }
+
+    @Override
+    public String getTournamentState() {
+        return tournamentState;
+    }
+
+    @Override
+    public void setTournamentState(String tournamentState) {
+        this.tournamentState = tournamentState;
     }
 
 }

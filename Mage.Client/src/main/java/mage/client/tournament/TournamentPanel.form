@@ -22,7 +22,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="actionPanel" alignment="0" max="32767" attributes="0"/>
-          <Component id="jSplitPane2" alignment="1" pref="908" max="32767" attributes="0"/>
+          <Component id="jSplitPane2" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -30,7 +30,7 @@
           <Group type="102" attributes="0">
               <Component id="actionPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSplitPane2" pref="494" max="32767" attributes="0"/>
+              <Component id="jSplitPane2" pref="511" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -49,26 +49,30 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtName" pref="260" max="32767" attributes="0"/>
+                      <Component id="txtName" pref="175" max="32767" attributes="0"/>
                       <Component id="txtType" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lablEndTime" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtEndTime" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblStartTime" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtStartTime" min="-2" pref="203" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="lblStartTime" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTournamentState" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtTournamentState" max="32767" attributes="0"/>
+                      <Component id="txtStartTime" pref="203" max="32767" attributes="0"/>
+                  </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnCloseWindow" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
-                      <Component id="btnQuitTournament" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="txtEndTime" min="-2" pref="203" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" pref="47" max="32767" attributes="0"/>
+                          <Component id="btnQuitTournament" min="-2" pref="129" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+                          <Component id="btnCloseWindow" min="-2" pref="129" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -84,16 +88,17 @@
                       <Component id="lblStartTime" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtStartTime" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnQuitTournament" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtEndTime" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblType" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtType" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lablEndTime" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtEndTime" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnCloseWindow" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTournamentState" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTournamentState" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -109,7 +114,6 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="text" type="java.lang.String" value="tournament name"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 22]"/>
@@ -126,35 +130,42 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="text" type="java.lang.String" value="tournament type"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblStartTime">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Start time:"/>
+            <Property name="text" type="java.lang.String" value="Start / end  time:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtStartTime">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
             <Property name="focusable" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lablEndTime">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="End time:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEndTime">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="jTextField2"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTournamentState">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="State:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtTournamentState">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="focusable" type="boolean" value="false"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnQuitTournament">
           <Properties>

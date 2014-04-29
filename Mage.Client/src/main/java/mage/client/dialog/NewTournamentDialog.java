@@ -428,7 +428,8 @@ public class NewTournamentDialog extends MageDialog {
             if (tOptions.getLimitedOptions() == null) {
                 tOptions.setLimitedOptions(new LimitedOptions());
             }
-            tOptions.getLimitedOptions().setConstructionTime((Integer)this.spnConstructTime.getValue() * 60);
+            tOptions.getLimitedOptions().setConstructionTime(60);
+            // tOptions.getLimitedOptions().setConstructionTime((Integer)this.spnConstructTime.getValue() * 60);
             if (tournamentType.isCubeBooster()) {
                 tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
             } else {

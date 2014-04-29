@@ -81,7 +81,10 @@ public interface Tournament {
     // tournament type
     TournamentType getTournamentType(); 
     void setTournamentType(TournamentType tournamentType);
-
+    // tournamentState
+    String getTournamentState(); 
+    void setTournamentState(String tournamentState);
+    
     int getNumberRounds();
     void cleanUpOnTournamentEnd();
     boolean isAbort();
