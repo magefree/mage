@@ -40,6 +40,7 @@ public interface MageClient extends CallbackClient {
     MageVersion getVersion();
     void connected(String message);
     void disconnected();
+    void reconnect();
     void showMessage(String message);
     void showError(String message);
 

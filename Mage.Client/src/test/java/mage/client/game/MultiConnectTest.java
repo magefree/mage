@@ -1,8 +1,5 @@
 package mage.client.game;
 
-import java.util.UUID;
-import java.util.concurrent.CountDownLatch;
-import javax.swing.SwingUtilities;
 import mage.client.components.MageUI;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.ClientCallback;
@@ -12,6 +9,9 @@ import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
+
+import javax.swing.*;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Test for emulating the connection from multi mage clients.
@@ -72,6 +72,11 @@ public class MultiConnectTest {
         @Override
         public void disconnected() {
             logger.info("disconnected");
+        }
+
+        @Override
+        public void reconnect() {
+            logger.info("Not implemented");
         }
 
         @Override

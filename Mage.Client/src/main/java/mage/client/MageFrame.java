@@ -669,40 +669,46 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public boolean autoConnect() {
-        boolean autoConnect = Boolean.parseBoolean(prefs.get("autoConnect", "false"));
-        if (autoConnect) {
-            String userName = prefs.get("userName", "");
-            String server = prefs.get("serverAddress", "");
-            int port = Integer.parseInt(prefs.get("serverPort", ""));
-            String proxyServer = prefs.get("proxyAddress", "");
-            int proxyPort = Integer.parseInt(prefs.get("proxyPort", ""));
-            ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
-            String proxyUsername = prefs.get("proxyUsername", "");
-            String proxyPassword = prefs.get("proxyPassword", "");
-            int avatarId = PreferencesDialog.getSelectedAvatar();
-            boolean showAbilityPickerForced = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true");
-            try {
-                setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                Connection connection = new Connection();
-                connection.setUsername(userName);
-                connection.setHost(server);
-                connection.setPort(port);
-                connection.setProxyType(proxyType);
-                connection.setProxyHost(proxyServer);
-                connection.setProxyPort(proxyPort);
-                connection.setProxyUsername(proxyUsername);
-                connection.setProxyPassword(proxyPassword);
-                connection.setAvatarId(avatarId);
-                connection.setShowAbilityPickerForced(showAbilityPickerForced);
-                logger.debug("connecting (auto): " + proxyType + " " + proxyServer + " " + proxyPort + " " + proxyUsername);
-                if (MageFrame.connect(connection)) {
-                    return true;
-                } else {
-                    showMessage("Unable to connect to server");
-                }
-            } finally {
-                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        boolean autoConnectParamValue = Boolean.parseBoolean(prefs.get("autoConnect", "false"));
+        boolean status = false;
+        if (autoConnectParamValue) {
+            status = performConnect();
+        }
+        return status;
+    }
+
+    private boolean performConnect() {
+        String userName = prefs.get("userName", "");
+        String server = prefs.get("serverAddress", "");
+        int port = Integer.parseInt(prefs.get("serverPort", ""));
+        String proxyServer = prefs.get("proxyAddress", "");
+        int proxyPort = Integer.parseInt(prefs.get("proxyPort", ""));
+        ProxyType proxyType = ProxyType.valueByText(prefs.get("proxyType", "None"));
+        String proxyUsername = prefs.get("proxyUsername", "");
+        String proxyPassword = prefs.get("proxyPassword", "");
+        int avatarId = PreferencesDialog.getSelectedAvatar();
+        boolean showAbilityPickerForced = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true");
+        try {
+            setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            Connection connection = new Connection();
+            connection.setUsername(userName);
+            connection.setHost(server);
+            connection.setPort(port);
+            connection.setProxyType(proxyType);
+            connection.setProxyHost(proxyServer);
+            connection.setProxyPort(proxyPort);
+            connection.setProxyUsername(proxyUsername);
+            connection.setProxyPassword(proxyPassword);
+            connection.setAvatarId(avatarId);
+            connection.setShowAbilityPickerForced(showAbilityPickerForced);
+            logger.debug("connecting (auto): " + proxyType + " " + proxyServer + " " + proxyPort + " " + proxyUsername);
+            if (MageFrame.connect(connection)) {
+                return true;
+            } else {
+                showMessage("Unable to connect to server");
             }
+        } finally {
+            setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
         return false;
     }
@@ -941,6 +947,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         Plugins.getInstance().shutdown();
         dispose();
         System.exit(0);
+    }
+
+    public void reconnect() {
+        session.disconnect(false);
+        tablesPane.clearChat();
+        disableButtons();
+        if (performConnect()) {
+            enableButtons();
+        }
     }
 
     public void enableButtons() {
