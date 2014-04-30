@@ -40,6 +40,14 @@ public class ThreadExecutor {
     private static final ExecutorService gameExecutor = Executors.newFixedThreadPool(ConfigSettings.getInstance().getMaxGameThreads());
     private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(5);
 
+    /**
+     * noxx: what the settings below do is setting the ability to keep OS threads for new games for 60 seconds
+     * If there is no new game created within this time period, the thread may be discarded.
+     * But anyway if new game is created later, new OS/java thread will be created for it
+     * taking MaxGameThreads limit into account.
+     *
+     * This all is done for performance reasons as creating new OS threads is resource consuming process.
+     */
     static {
         ((ThreadPoolExecutor)callExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor)callExecutor).allowCoreThreadTimeOut(true);
