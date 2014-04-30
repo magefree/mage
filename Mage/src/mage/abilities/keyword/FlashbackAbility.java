@@ -32,6 +32,8 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -171,7 +173,27 @@ class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
                 spellAbility.clear();
                 // used if flashbacked spell has a {X} cost
                 int amount = source.getManaCostsToPay().getX();
-                spellAbility.getManaCostsToPay().setX(amount);
+                if (amount == 0) {
+                    // add variable cost like Discard X cards to get the X value to the spell
+                    // because there is currently no way to set the x value in anotehr way, it#s set for the 
+                    // x mana value to be known by the spell
+                    for (Cost cost:source.getCosts()) {
+                        if (cost instanceof VariableCost && cost.isPaid()) {
+                            amount = ((VariableCost) cost).getAmount();
+                            break;
+                        }
+                    }                    
+                }
+                if (amount > 0) {
+                    // multiplier must be taken into account because if the base spell has {X}{X} the x value would be wrongly halfed
+                    for (VariableCost variableCost: spellAbility.getManaCostsToPay().getVariableCosts()) {
+                        if (variableCost instanceof  VariableManaCost) {
+                            amount = amount * ((VariableManaCost)variableCost).getMultiplier();
+                            break;
+                        }
+                    }
+                    spellAbility.getManaCostsToPay().setX(amount);
+                }
                 for (Target target : spellAbility.getTargets()) {
                     target.setRequired(true);
                 }

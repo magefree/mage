@@ -37,7 +37,7 @@ import mage.game.Game;
  */
 public interface VariableCost {
     /**
-     * Returns the variable amount if alreaady set
+     * Returns the variable amount if already set
      * 
      * @return
      */
@@ -79,7 +79,7 @@ public interface VariableCost {
      */
     int announceXValue(Ability source, Game game);
     /**
-     * Returns a fixed cost with the announced variabke value
+     * Returns a fixed cost with the announced variable value
      *
      * @param xValue
      * @return
