@@ -29,18 +29,17 @@ package mage.sets.odyssey;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -75,7 +74,7 @@ public class Entomb extends CardImpl<Entomb> {
 class SearchLibraryPutInGraveyard extends SearchEffect<SearchLibraryPutInGraveyard> {
 
   public SearchLibraryPutInGraveyard() {
-        super(new TargetCardInLibrary(new FilterCreatureCard()), Outcome.Neutral);
+        super(new TargetCardInLibrary(new FilterCard()), Outcome.Neutral);
         staticText = "Search your library for a card and put that card into your graveyard. Then shuffle your library";
     }
 
@@ -90,26 +89,24 @@ class SearchLibraryPutInGraveyard extends SearchEffect<SearchLibraryPutInGraveya
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        if (player.searchLibrary(target, game)) {
+        boolean result = false;
+        if (controller.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
-                Cards cards = new CardsImpl();
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
-                    if (card != null){
-                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    Card card = controller.getLibrary().remove(cardId, game);
+                    if (card != null) {
+                        controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
             }
-            player.shuffleLibrary(game);
-            return true;
+            result = true;
         }
-        player.shuffleLibrary(game);
-        return false;
+        controller.shuffleLibrary(game);
+        return result;
     }
-
     
 }
