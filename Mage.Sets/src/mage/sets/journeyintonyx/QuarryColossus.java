@@ -27,10 +27,10 @@
  */
 package mage.sets.journeyintonyx;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.UUID;
+import java.util.logging.Logger;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -106,17 +106,20 @@ class QuarryColossusReturnLibraryEffect extends OneShotEffect<QuarryColossusRetu
                 int plains = game.getBattlefield().countAll(new FilterPermanent("Plains", "Plains you control"), source.getControllerId(), game);
                 int xValue = Math.min(plains, owner.getLibrary().size());
                 Cards cards = new CardsImpl();
-                List<UUID> cardIds = new ArrayList<>();
+                Deque<UUID> cardIds = new LinkedList<>();
                 for (int i = 0; i < xValue; i++) {
-                    Card card = owner.getLibrary().getFromTop(game);
+                    Card card = owner.getLibrary().removeFromTop(game);
                     cards.add(card);
-                    cardIds.add(card.getId());
+                    cardIds.push(card.getId());
                 }
                 // return cards back to library
-                controller.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true);
-                ListIterator<UUID> libraryCards = cardIds.listIterator();
-                while(libraryCards.hasPrevious()) {
-                    UUID cardId = libraryCards.previous();
+                permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                game.informPlayers(new StringBuilder(controller.getName())
+                        .append(" puts ").append(permanent.getName())
+                        .append(" beneath the top ").append(xValue)
+                        .append(" cards of ").append(owner.getName()).append("'s library").toString());
+                while(!cardIds.isEmpty()) {
+                    UUID cardId = cardIds.poll();
                     Card card = cards.get(cardId, game);
                     if (card != null) {
                         card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);

@@ -28,6 +28,8 @@
 package mage.sets.commander2013;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.UUID;
@@ -100,31 +102,38 @@ class UnexpectedlyAbsentEffect extends OneShotEffect<UnexpectedlyAbsentEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            Player owner = game.getPlayer(permanent.getOwnerId());
-            if (owner != null) {
-                int xValue = Math.min(source.getManaCostsToPay().getX(), owner.getLibrary().size());
-                Cards cards = new CardsImpl(Zone.PICK);
-                List<UUID> cardIds = new ArrayList<>();
-                for (int i = 0; i < xValue; i++) {
-                    Card card = owner.getLibrary().getFromTop(game);
-                    cards.add(card);
-                    cardIds.add(card.getId());
-                }
-                // return cards back to library
-                permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                ListIterator<UUID> l = cardIds.listIterator();
-                while(l.hasPrevious()) {
-                    UUID cardId = l.previous();
-                    Card card = cards.get(cardId, game);
-                    if (card != null) {
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+            if (permanent != null) {
+                Player owner = game.getPlayer(permanent.getOwnerId());
+                if (owner != null) {
+                    int xValue = Math.min(source.getManaCostsToPay().getX(), owner.getLibrary().size());
+                    Cards cards = new CardsImpl(Zone.PICK);
+                    Deque<UUID> cardIds = new LinkedList<>();
+                    for (int i = 0; i < xValue; i++) {
+                        Card card = owner.getLibrary().removeFromTop(game);
+                        cards.add(card);
+                        cardIds.push(card.getId());
                     }
+                    // return cards back to library
+                    game.informPlayers(new StringBuilder(controller.getName())
+                            .append(" puts ").append(permanent.getName())
+                            .append(" beneath the top ").append(xValue)
+                            .append(" cards of ").append(owner.getName()).append("'s library").toString());
+                    permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                    while(!cardIds.isEmpty()) {
+                        UUID cardId = cardIds.poll();
+                        Card card = cards.get(cardId, game);
+                        if (card != null) {
+                            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                        }
+                    }
+                    return true;
                 }
-                return true;
             }
         }
+
         return false;
     }
 }
