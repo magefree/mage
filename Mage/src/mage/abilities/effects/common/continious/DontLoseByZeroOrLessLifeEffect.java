@@ -45,7 +45,7 @@ import mage.players.Player;
 public class DontLoseByZeroOrLessLifeEffect extends ContinuousEffectImpl<DontLoseByZeroOrLessLifeEffect> {
 
     public DontLoseByZeroOrLessLifeEffect(Duration duration) {
-        super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "You don't lose the game for having 0 or less life";
     }
 
