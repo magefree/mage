@@ -28,13 +28,6 @@
 
 package mage.server;
 
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -68,6 +61,14 @@ import mage.server.util.ConfigSettings;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
+
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -480,7 +481,7 @@ public class TableController {
                             GameManager.getInstance().joinGame(match.getGame().getId(), user.getId());
                         }
 
-                        logger.info(new StringBuilder("User ").append(user.getName()).append(" game started - matchId ").append(match.getId()).append(" userId: ").append(user.getId()));
+                        logger.info(new StringBuilder("User ").append(user.getName()).append(" game started - gameId ").append(match.getGame().getId()).append(" matchId ").append(match.getId()).append(" userId: ").append(user.getId()));
                         user.gameStarted(match.getGame().getId(), entry.getValue());
                         if (creator == null) {
                             creator = user.getName();
