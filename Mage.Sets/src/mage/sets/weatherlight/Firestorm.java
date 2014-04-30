@@ -27,7 +27,6 @@
  */
 package mage.sets.weatherlight;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.DiscardXTargetCost;

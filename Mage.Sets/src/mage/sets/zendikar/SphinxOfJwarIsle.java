@@ -28,9 +28,13 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -39,10 +43,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -61,12 +61,11 @@ public class SphinxOfJwarIsle extends CardImpl<SphinxOfJwarIsle> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Flying, shroud
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(ShroudAbility.getInstance());
+        // TODO: this should be a static ability
+        this.addAbility(new SphinxOfJwarIsleLookAbility());
 
-        // You may look at the top card of your library. (You may do this at any time.)
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SphinxOfJwarIsleEffect(), new GenericManaCost(0)));
     }
 
     public SphinxOfJwarIsle(final SphinxOfJwarIsle card) {
@@ -79,10 +78,28 @@ public class SphinxOfJwarIsle extends CardImpl<SphinxOfJwarIsle> {
     }
 }
 
+class SphinxOfJwarIsleLookAbility extends ActivatedAbilityImpl<SphinxOfJwarIsleLookAbility> {
+
+    public SphinxOfJwarIsleLookAbility() {
+        super(Zone.BATTLEFIELD, new SphinxOfJwarIsleEffect(), new GenericManaCost(0));
+        this.usesStack = false;
+    }
+
+    public SphinxOfJwarIsleLookAbility(SphinxOfJwarIsleLookAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public SphinxOfJwarIsleLookAbility copy() {
+        return new SphinxOfJwarIsleLookAbility(this);
+    }
+
+}
+
 class SphinxOfJwarIsleEffect extends OneShotEffect<SphinxOfJwarIsleEffect> {
 
     public SphinxOfJwarIsleEffect() {
-        super(Outcome.AIDontUseIt); // AI can't use the information anyway and seems to do it again and again
+        super(Outcome.Neutral);        
         this.staticText = "You may look at the top card of your library";
     }
 
@@ -104,7 +121,8 @@ class SphinxOfJwarIsleEffect extends OneShotEffect<SphinxOfJwarIsleEffect> {
 
         Card card = player.getLibrary().getFromTop(game);
         if (card != null) {
-            Cards cards = new CardsImpl(card);
+            Cards cards = new CardsImpl(Zone.PICK);
+            cards.add(card);
             player.lookAtCards("Sphinx of Jwar Isle", cards, game);
         } else {
             return false;
