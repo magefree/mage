@@ -28,12 +28,12 @@
 
 package mage.server.game;
 
+import mage.MageException;
 import mage.game.Game;
 import org.apache.log4j.Logger;
 
 import java.util.UUID;
 import java.util.concurrent.Callable;
-import mage.MageException;
 
 /**
  *
@@ -61,7 +61,11 @@ public class GameWorker implements Callable {
             result.gameResult(game.getWinner());
             game.cleanUp();
         } catch (MageException ex) {
-            logger.fatal("GameWorker error ", ex);
+            logger.fatal("GameWorker mage error [" + game.getId() + "]", ex);
+        } catch (Exception e) {
+            logger.fatal("GameWorker general exception [" + game.getId() + "]", e);
+        } catch (Error err) {
+            logger.fatal("GameWorker general error [" + game.getId() + "]", err);
         }
         return null;
     }
