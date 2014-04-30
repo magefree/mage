@@ -918,7 +918,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             if (ability instanceof OptionalAdditionalSourceCosts) {
                 sb.append(((OptionalAdditionalSourceCosts) ability).getCastMessageSuffix());
             }
-            if (ability instanceof AlternativeSourceCosts) {
+            if (ability instanceof AlternativeSourceCosts && ((AlternativeSourceCosts) ability).isActivated()) {
                 sb.append(((AlternativeSourceCosts) ability).getCastMessageSuffix());
             }
         }
