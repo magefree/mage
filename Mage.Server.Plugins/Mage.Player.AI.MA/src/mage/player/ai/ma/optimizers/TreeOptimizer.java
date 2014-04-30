@@ -1,9 +1,8 @@
 package mage.player.ai.ma.optimizers;
 
+import java.util.List;
 import mage.abilities.Ability;
 import mage.game.Game;
-
-import java.util.List;
 
 /**
  * Interface for ai optimizer that cuts the tree of decision.

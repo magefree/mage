@@ -54,7 +54,7 @@ public abstract class BaseTreeOptimizer implements TreeOptimizer {
      */
     protected void removeAbility(Ability ability) {
         if (toRemove == null) {
-            toRemove = new ArrayList<Ability>();
+            toRemove = new ArrayList<>();
         }
         toRemove.add(ability);
     }

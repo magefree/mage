@@ -1,9 +1,8 @@
 package mage.player.ai.ma.optimizers.impl;
 
+import java.util.List;
 import mage.abilities.Ability;
 import mage.game.Game;
-
-import java.util.List;
 
 /**
  * Removes abilities that require only discard a card for activation.

@@ -28,10 +28,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +39,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -61,8 +61,11 @@ public class SphinxOfJwarIsle extends CardImpl<SphinxOfJwarIsle> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Flying, shroud
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(ShroudAbility.getInstance());
+
+        // You may look at the top card of your library. (You may do this at any time.)
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SphinxOfJwarIsleEffect(), new GenericManaCost(0)));
     }
 
@@ -79,7 +82,7 @@ public class SphinxOfJwarIsle extends CardImpl<SphinxOfJwarIsle> {
 class SphinxOfJwarIsleEffect extends OneShotEffect<SphinxOfJwarIsleEffect> {
 
     public SphinxOfJwarIsleEffect() {
-        super(Outcome.Neutral);
+        super(Outcome.AIDontUseIt); // AI can't use the information anyway and seems to do it again and again
         this.staticText = "You may look at the top card of your library";
     }
 
@@ -101,8 +104,7 @@ class SphinxOfJwarIsleEffect extends OneShotEffect<SphinxOfJwarIsleEffect> {
 
         Card card = player.getLibrary().getFromTop(game);
         if (card != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
-            cards.add(card);
+            Cards cards = new CardsImpl(card);
             player.lookAtCards("Sphinx of Jwar Isle", cards, game);
         } else {
             return false;

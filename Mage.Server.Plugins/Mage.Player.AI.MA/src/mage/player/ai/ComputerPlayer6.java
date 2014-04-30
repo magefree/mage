@@ -62,6 +62,7 @@ import mage.target.Targets;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
+import mage.player.ai.ma.optimizers.impl.OutcomeOptimizer;
 
 /**
  *
@@ -74,22 +75,23 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     protected int maxDepth;
     protected int maxNodes;
     protected int maxThink;
-    protected LinkedList<Ability> actions = new LinkedList<Ability>();
-    protected List<UUID> targets = new ArrayList<UUID>();
-    protected List<String> choices = new ArrayList<String>();
+    protected LinkedList<Ability> actions = new LinkedList<>();
+    protected List<UUID> targets = new ArrayList<>();
+    protected List<String> choices = new ArrayList<>();
     protected Combat combat;
     protected int currentScore;
     protected SimulationNode2 root;
     private static final String FILE_WITH_INSTRUCTIONS = "config/ai.please.cast.this.txt";
-    private List<String> suggested = new ArrayList<String>();
+    private final List<String> suggested = new ArrayList<>();
     protected Set<String> actionCache;
-    private static final List<TreeOptimizer> optimizers = new ArrayList<TreeOptimizer>();
+    private static final List<TreeOptimizer> optimizers = new ArrayList<>();
     protected int lastLoggedTurn = 0;
 
     static {
         optimizers.add(new LevelUpOptimizer());
         optimizers.add(new EquipOptimizer());
         optimizers.add(new DiscardCardOptimizer());
+        optimizers.add(new OutcomeOptimizer());
     }
 
     public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
@@ -102,7 +104,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         maxThink = skill * 3;
         maxNodes = Config2.maxNodes;
         getSuggestedActions();
-        this.actionCache = new HashSet<String>();
+        this.actionCache = new HashSet<>();
     }
 
     public ComputerPlayer6(final ComputerPlayer6 player) {
@@ -275,7 +277,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 //GameStateEvaluator2.evaluate(playerId, root.getGame());
                 int bestScore = root.getScore();
                 //if (bestScore > currentScore) {
-                actions = new LinkedList<Ability>(root.abilities);
+                actions = new LinkedList<>(root.abilities);
                 combat = root.combat;
                 //} else {
                 //System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: not better score");
@@ -314,7 +316,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                  */
 
                 logger.info("simulating -- continuing previous action chain");
-                actions = new LinkedList<Ability>(root.abilities);
+                actions = new LinkedList<>(root.abilities);
                 combat = root.combat;
                 return true;
             } else {
@@ -646,6 +648,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     /**
      * Various AI optimizations for actions.
      *
+     * @param game
      * @param allActions
      */
     protected void optimize(Game game, List<Ability> allActions) {
