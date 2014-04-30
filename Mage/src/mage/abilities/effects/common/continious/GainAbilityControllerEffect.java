@@ -59,7 +59,7 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl<GainAbilit
      * @param duration custom - effect will be discarded as soon there is no sourceId - permanent on the battlefield
      */
     public GainAbilityControllerEffect(Ability ability, Duration duration) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         staticText = "You have " + ability.getRule() + " " + duration.toString();
     }
