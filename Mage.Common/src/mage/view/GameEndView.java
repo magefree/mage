@@ -45,16 +45,17 @@ import mage.players.Player;
 public class GameEndView implements Serializable {
 
     private PlayerView clientPlayer = null;
-    private List<PlayerView> players = new ArrayList<PlayerView>();
-    private Date startTime;
-    private Date endTime;
-    private String resultMessage;
+    private final List<PlayerView> players = new ArrayList<>();
+    private final Date startTime;
+    private final Date endTime;
+    private String gameInfo;
+    private final String matchInfo;
+    private final String additionalInfo;
     private boolean won;
-    private MatchView matchView;
+    private final MatchView matchView;
     private int wins;
     private int loses;
-    private int winsNeeded;
-    private String nameMatchWinner = null;
+    private final int winsNeeded;
 
     public GameEndView(GameState state, Game game, UUID playerId, Match match) {
         startTime = game.getStartTime();
@@ -68,6 +69,7 @@ public class GameEndView implements Serializable {
             if (playerView.getPlayerId().equals(playerId)) {
                 clientPlayer = playerView;
                 you = player;
+                won = you.hasWon(); // needed to control image
             }
             players.add(playerView);
             if (player.hasWon()) {
@@ -75,28 +77,57 @@ public class GameEndView implements Serializable {
             }
         }
         if (you != null) {
-            won = you.hasWon();
             if (you.hasWon()) {
-                resultMessage = new StringBuilder("You won the game on turn ").append(game.getTurnNum()).append(".").toString();
+                gameInfo = new StringBuilder("You won the game on turn ").append(game.getTurnNum()).append(".").toString();
             } else if (winner > 0) {
-                resultMessage = new StringBuilder("You lost the game on turn ").append(game.getTurnNum()).append(".").toString();
+                gameInfo = new StringBuilder("You lost the game on turn ").append(game.getTurnNum()).append(".").toString();
             } else {
-                resultMessage = new StringBuilder("Game is a draw on Turn ").append(game.getTurnNum()).append(".").toString();
+                gameInfo = new StringBuilder("Game is a draw on Turn ").append(game.getTurnNum()).append(".").toString();
             }
         }
         matchView = new MatchView(match);
-        
-        winsNeeded = match.getOptions().getWinsNeeded();
-        for (MatchPlayer mPlayer: match.getPlayers()) {
-            if (mPlayer.getPlayer().equals(you)) {
-                wins = mPlayer.getWins();
-                loses = mPlayer.getLoses();
 
+        MatchPlayer matchWinner = null;
+        winsNeeded = match.getOptions().getWinsNeeded();
+        StringBuilder additonalText = new StringBuilder();
+        for (MatchPlayer matchPlayer: match.getPlayers()) {
+            if (matchPlayer.getPlayer().equals(you)) {
+                wins = matchPlayer.getWins();
             }
-            if (mPlayer.getWins() == winsNeeded) {
-                nameMatchWinner = mPlayer.getName();
+            if (matchPlayer.isMatchWinner()) {
+                matchWinner = matchPlayer;
+            }
+            if (matchPlayer.hasTimerTimeout()) {
+                if (matchPlayer.getPlayer().equals(you)) {
+                    additonalText.append("You run out of time. ");
+                } else {
+                    additonalText.append(matchPlayer.getName()).append(" runs out of time. ");
+                }
+            } else if (matchPlayer.hasQuit()) {
+                if (matchPlayer.getPlayer().equals(you)) {
+                    additonalText.append("You have quit the match. ");
+                } else {
+                    additonalText.append(matchPlayer.getName()).append(" has quit the match. ");
+                }
+            } else if (matchPlayer.getPlayer().hasIdleTimeout()) {
+                if (matchPlayer.getPlayer().equals(you)) {
+                    additonalText.append("You lost the match for beeing idle. ");
+                } else {
+                    additonalText.append(matchPlayer.getName()).append(" lost for beeing idle. ");
+                }
             }
         }
+
+        if (matchWinner != null) {
+            if (matchWinner.getPlayer().equals(you)) {
+                matchInfo = "You won the match!";
+            } else {
+                matchInfo = new StringBuilder(matchWinner.getName()).append(" won the match!").toString();
+            }
+        } else {
+            matchInfo = new StringBuilder("You need ").append(winsNeeded - wins == 1 ? "one more win ":winsNeeded - wins + " more wins ").append("to win the match.").toString();
+        }
+        additionalInfo = additonalText.toString();
 
     }
 
@@ -112,8 +143,16 @@ public class GameEndView implements Serializable {
         return players;
     }
 
-    public String getResultMessage() {
-        return resultMessage;
+    public String getGameInfo() {
+        return gameInfo;
+    }
+
+    public String getMatchInfo() {
+        return matchInfo;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
     }
 
     public boolean hasWon() {
@@ -134,10 +173,6 @@ public class GameEndView implements Serializable {
 
     public int getWinsNeeded() {
         return winsNeeded;
-    }
-
-    public String getNameMatchWinner() {
-        return nameMatchWinner;
     }
 
     public PlayerView getClientPlayer() {
