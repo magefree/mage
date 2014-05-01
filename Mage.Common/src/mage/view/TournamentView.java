@@ -50,7 +50,9 @@ public class TournamentView implements Serializable {
     
     private final Date startTime;
     private final Date endTime;
-
+    private final Date stepStartTime;
+    private final Date serverTime;
+    private final int constructionTime;
     private final boolean watchingAllowed;
 
     private final List<RoundView> rounds = new ArrayList<>();
@@ -60,10 +62,14 @@ public class TournamentView implements Serializable {
     public TournamentView(Tournament tournament) {
 
         tournamentName = tournament.getOptions().getName();
-        tournamentType = tournament.getOptions().getTournamentType();
+
+        tournamentType = new StringBuilder(tournament.getOptions().getTournamentType()).append(" ").append(tournament.getNumberRounds()).append(" rounds").toString();
         startTime = tournament.getStartTime();
         endTime = tournament.getEndTime();
+        stepStartTime = tournament.getStepStartTime();
+        constructionTime = tournament.getOptions().getLimitedOptions().getConstructionTime();
         watchingAllowed = tournament.getOptions().isWatchingAllowed();
+        serverTime = new Date();
         tournamentState = tournament.getTournamentState();
 
         for (TournamentPlayer player: tournament.getPlayers()) {
@@ -108,6 +114,18 @@ public class TournamentView implements Serializable {
 
     public String getTournamentState() {
         return tournamentState;
+    }
+
+    public Date getStepStartTime() {
+        return stepStartTime;
+    }
+
+    public int getConstructionTime() {
+        return constructionTime;
+    }
+
+    public Date getServerTime() {
+        return serverTime;
     }
     
 }

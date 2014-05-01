@@ -52,6 +52,7 @@ import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ButtonColumn;
+import mage.client.util.Format;
 import mage.remote.Session;
 import mage.view.RoundView;
 import mage.view.TournamentGameView;
@@ -208,9 +209,20 @@ public class TournamentPanel extends javax.swing.JPanel {
             
             firstInitDone = true;
         }
+        switch (tournament.getTournamentState()) {
+            case "Constructing":
+                String constructionTime = Format.getDuration(tournament.getConstructionTime() - (tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime())/1000);
+                txtTournamentState.setText(new StringBuilder(tournament.getTournamentState()).append(" (").append(constructionTime).append(")").toString());
+                break;
+            case "Dueling":
+                String duelingTime = Format.getDuration((tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime())/1000);
+                txtTournamentState.setText(new StringBuilder(tournament.getTournamentState()).append(" (").append(duelingTime).append(")").toString());
+                break;
+            default:
+                txtTournamentState.setText(tournament.getTournamentState());
+                break;
+        }
 
-        txtTournamentState.setText(tournament.getTournamentState());
-        
         if (txtEndTime == null) {
             return;
         }
@@ -263,17 +275,18 @@ public class TournamentPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         actionPanel = new javax.swing.JPanel();
-        lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        lblType = new javax.swing.JLabel();
         txtType = new javax.swing.JTextField();
-        lblStartTime = new javax.swing.JLabel();
         txtStartTime = new javax.swing.JTextField();
         txtEndTime = new javax.swing.JTextField();
-        lblTournamentState = new javax.swing.JLabel();
         txtTournamentState = new javax.swing.JTextField();
         btnQuitTournament = new javax.swing.JButton();
         btnCloseWindow = new javax.swing.JButton();
+        lblName = new javax.swing.JLabel();
+        lblType = new javax.swing.JLabel();
+        lblState = new javax.swing.JLabel();
+        lblStartTime = new javax.swing.JLabel();
+        lblEndTime = new javax.swing.JLabel();
         jSplitPane2 = new javax.swing.JSplitPane();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -284,36 +297,49 @@ public class TournamentPanel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(908, 580));
 
-        lblName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblName.setText("Name:");
+        actionPanel.setBackground(java.awt.SystemColor.controlHighlight);
+        actionPanel.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         txtName.setEditable(false);
         txtName.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtName.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtName.setFocusable(false);
         txtName.setMaximumSize(new java.awt.Dimension(50, 22));
-
-        lblType.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblType.setText("Type:");
+        txtName.setOpaque(false);
+        txtName.setRequestFocusEnabled(false);
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
 
         txtType.setEditable(false);
         txtType.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtType.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtType.setFocusable(false);
-
-        lblStartTime.setText("Start / end  time:");
+        txtType.setOpaque(false);
+        txtType.setRequestFocusEnabled(false);
 
         txtStartTime.setEditable(false);
         txtStartTime.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtStartTime.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtStartTime.setFocusable(false);
+        txtStartTime.setOpaque(false);
+        txtStartTime.setRequestFocusEnabled(false);
 
         txtEndTime.setEditable(false);
         txtEndTime.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEndTime.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtEndTime.setFocusable(false);
-
-        lblTournamentState.setText("State:");
+        txtEndTime.setOpaque(false);
+        txtEndTime.setRequestFocusEnabled(false);
 
         txtTournamentState.setEditable(false);
         txtTournamentState.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTournamentState.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTournamentState.setFocusable(false);
+        txtTournamentState.setOpaque(false);
+        txtTournamentState.setRequestFocusEnabled(false);
 
         btnQuitTournament.setText("Quit Tournament");
         btnQuitTournament.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -331,59 +357,88 @@ public class TournamentPanel extends javax.swing.JPanel {
             }
         });
 
+        lblName.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblName.setText("Name:");
+
+        lblType.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblType.setText("Type:");
+
+        lblState.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblState.setText("State:");
+
+        lblStartTime.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblStartTime.setText("Start time:");
+
+        lblEndTime.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblEndTime.setText("End time:");
+
         javax.swing.GroupLayout actionPanelLayout = new javax.swing.GroupLayout(actionPanel);
         actionPanel.setLayout(actionPanelLayout);
         actionPanelLayout.setHorizontalGroup(
             actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(actionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblName)
-                    .addComponent(lblType))
+                    .addComponent(lblState)
+                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(txtTournamentState))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addComponent(txtType))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblStartTime)
-                    .addComponent(lblTournamentState))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTournamentState)
-                    .addComponent(txtStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
-                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblType)
+                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(actionPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 47, Short.MAX_VALUE)
-                        .addComponent(btnQuitTournament, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actionPanelLayout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(btnCloseWindow, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblStartTime))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEndTime)
+                            .addComponent(txtEndTime))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnQuitTournament, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCloseWindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         actionPanelLayout.setVerticalGroup(
             actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(actionPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStartTime)
-                    .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnQuitTournament)
-                    .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblType)
-                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCloseWindow)
-                    .addComponent(lblTournamentState)
-                    .addComponent(txtTournamentState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(actionPanelLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(lblName))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actionPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblType)))
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(actionPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnQuitTournament))
+                        .addGap(13, 13, 13)
+                        .addComponent(btnCloseWindow))
+                    .addGroup(actionPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblState)
+                            .addComponent(lblStartTime)
+                            .addComponent(lblEndTime))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(actionPanelLayout.createSequentialGroup()
+                                .addComponent(txtTournamentState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtStartTime)
+                                .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
 
+        jSplitPane2.setBackground(java.awt.SystemColor.controlHighlight);
         jSplitPane2.setResizeWeight(1.0);
         jSplitPane2.setToolTipText("");
 
@@ -407,6 +462,8 @@ public class TournamentPanel extends javax.swing.JPanel {
         jSplitPane1.setBottomComponent(jScrollPane2);
 
         jSplitPane2.setLeftComponent(jSplitPane1);
+
+        chatPanel1.setStartMessageDone(true);
         jSplitPane2.setRightComponent(chatPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -421,7 +478,8 @@ public class TournamentPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(actionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE))
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -436,6 +494,10 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnQuitTournamentActionPerformed
 
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionPanel;
@@ -446,9 +508,10 @@ public class TournamentPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JLabel lblEndTime;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblStartTime;
-    private javax.swing.JLabel lblTournamentState;
+    private javax.swing.JLabel lblState;
     private javax.swing.JLabel lblType;
     private javax.swing.JTable tableMatches;
     private javax.swing.JTable tablePlayers;
