@@ -240,8 +240,8 @@ public class GameController implements GameCallback {
         PriorityTimer timer = new PriorityTimer(count, delay, new Action() {
             @Override
             public void execute() throws MageException {
-                game.concede(initPlayerId);
-                logger.debug("Game timeout for player: " + initPlayerId + ". Conceding.");
+                game.timerTimeout(initPlayerId);
+                logger.debug(new StringBuilder("Game timeout for player: ").append(initPlayerId).append(". Conceding."));
             }
         });
         timers.put(playerId, timer);
@@ -399,7 +399,7 @@ public class GameController implements GameCallback {
                     .append(ConfigSettings.getInstance().getMaxSecondsIdle())
                     .append(" seconds ) - Auto concede.");
             ChatManager.getInstance().broadcast(chatId, "", sb.toString() , MessageColor.BLACK, true, MessageType.STATUS);
-            concede(userId);
+            game.idleTimeout(getPlayerId(userId));
         }
     }
 

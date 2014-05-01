@@ -13,7 +13,7 @@ public enum TableState {
     CONSTRUCTING ("Constructing"),
     FINISHED ("Finished");
 
-    private String text;
+    private final String text;
 
     TableState(String text) {
         this.text = text;

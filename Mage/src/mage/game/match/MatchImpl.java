@@ -126,20 +126,31 @@ public abstract class MatchImpl implements Match {
     }
 
     @Override
-    public boolean isMatchOver() {
+    public boolean hasEnded() {
+        return endTime != null;
+    };
+
+    @Override
+    public boolean checkIfMatchEnds() {
         int activePlayers = 0;
-        for (MatchPlayer player: players) {
-            if (!player.hasQuit()) {
+        MatchPlayer matchWinner = null;
+        for (MatchPlayer matchPlayer: players) {
+            if (!matchPlayer.hasQuit()) {
                 activePlayers++;
+                matchWinner = matchPlayer;
             }
-            if (player.getWins() >= options.getWinsNeeded()) {
+            if (matchPlayer.getWins() >= options.getWinsNeeded()) {
+                matchPlayer.setMatchWinner(true);
                 endTime = new Date();
                 return true;
             }
         }
         if (activePlayers < 2) {
-                endTime = new Date();
-                return true;
+            if (matchWinner != null) {
+                matchWinner.setMatchWinner(true);
+            }
+            endTime = new Date();
+            return true;
         }
         return false;
     }
@@ -200,24 +211,28 @@ public abstract class MatchImpl implements Match {
     @Override
     public void endGame() {
         Game game = getGame();
-        for (MatchPlayer player: this.players) {
-            Player p = game.getPlayer(player.getPlayer().getId());
-            if (p != null) {
+        for (MatchPlayer matchPlayer: this.players) {
+            Player player = game.getPlayer(matchPlayer.getPlayer().getId());
+            if (player != null) {
                 // get the left time from player priority timer
                 if (game.getPriorityTime() > 0) {
-                    player.setPriorityTimeLeft(p.getPriorityTimeLeft());
+                    matchPlayer.setPriorityTimeLeft(player.getPriorityTimeLeft());
                 }
-                if (p.hasQuit()) {
-                    player.setQuit(true);
+                if (player.hasQuit()) {
+                    matchPlayer.setQuit(true);
                 }
-                if (p.hasWon()) {
-                    player.addWin();
+                if (player.hasTimerTimeout()) {
+                    matchPlayer.setTimerTimeout(true);
                 }
-                if (p.hasLost()) {
-                    player.addLose();
+                if (player.hasWon()) {
+                    matchPlayer.addWin();
+                }
+                if (player.hasLost()) {
+                    matchPlayer.addLose();
                 }
             }
         }
+        checkIfMatchEnds();
         game.fireGameEndInfo();
     }
 

@@ -191,7 +191,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             //20101001 - 508.1d
             checkAttackRequirements(player, game);
             player.selectAttackers(game, attackerId);
-            if (game.isPaused() || game.isGameOver()) {
+            if (game.isPaused() || game.gameOver(null)) {
                 return;
             }
             checkAttackRestrictions(player, game);
@@ -316,7 +316,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
                 while (choose) {
                     blockController.selectBlockers(game, defenderId);
-                    if (game.isPaused() || game.isGameOver()) {
+                    if (game.isPaused() || game.gameOver(null)) {
                         return;
                     }
                     if (!this.checkBlockRestrictions(defender, game)) {

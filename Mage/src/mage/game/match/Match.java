@@ -48,7 +48,8 @@ public interface Match {
 
     UUID getId();
     String getName();
-    boolean isMatchOver();
+    boolean hasEnded();
+    boolean checkIfMatchEnds();
     List<MatchPlayer> getPlayers();
     MatchPlayer getPlayer(UUID playerId);
 

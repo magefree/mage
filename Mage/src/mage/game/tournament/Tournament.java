@@ -78,6 +78,10 @@ public interface Tournament {
     // tournament times
     Date getStartTime();
     Date getEndTime();
+
+    Date getStepStartTime();
+    void setStepStartTime(Date date);
+
     // tournament type
     TournamentType getTournamentType(); 
     void setTournamentType(TournamentType tournamentType);

@@ -114,7 +114,10 @@ import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
 import org.apache.log4j.Logger;
 
-
+/**
+ *
+ *  * @param <T>
+ */
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
 
     private static final transient Logger log = Logger.getLogger(PlayerImpl.class);
@@ -160,6 +163,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected boolean left;
     // set if the player quits the complete match
     protected boolean quit;
+    // set if the player lost match because of priority timeout
+    protected boolean timerTimeout;
+    // set if the player lost match because of idle timeout
+    protected boolean idleTimeout;
 
     protected RangeOfInfluence range;
     protected Set<UUID> inRange = new HashSet<>();
@@ -234,6 +241,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
         this.left = player.left;
         this.quit = player.quit;
+        this.timerTimeout = player.timerTimeout;
+        this.idleTimeout = player.idleTimeout;
         this.range = player.range;
         this.canGainLife = player.canGainLife;
         this.canLoseLife = player.canLoseLife;
@@ -288,6 +297,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
         this.left = player.hasLeft();
         this.quit = player.hasQuit();
+        this.timerTimeout = player.hasTimerTimeout();
+        this.idleTimeout = player.hasIdleTimeout();
         this.range = player.getRange();
         this.canGainLife = player.isCanGainLife();
         this.canLoseLife = player.isCanLoseLife();
@@ -343,7 +354,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.wins = false;
         this.loses = false;
         this.left = false;
-        this.quit = false; // reset is neccessary because in tournament player will be used for each round
+        // reset is neccessary because in tournament player will be used for each round
+        this.quit = false;
+        this.timerTimeout = false;
+        this.idleTimeout = false;
+
         this.passed = false;
         this.passedTurn = false;
         this.passedAllTurns = false;
@@ -732,7 +747,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     resetStoredBookmark(game);
                     return true;
                 }
-                if (!game.isGameOver()) { // if player left or game is over no undo is possible - this could lead to wrong winner
+                if (!game.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
                     game.restoreState(bookmark);
                 }
             }
@@ -1475,13 +1490,30 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void quit(Game game) {
+        game.informPlayers(new StringBuilder(getName()).append(" quits the match.").toString());
         quit = true;
         this.concede(game);
     }
 
     @Override
+    public void timerTimeout(Game game) {
+        game.informPlayers(new StringBuilder(getName()).append(" has run out of time. Loosing the Match.").toString());
+        quit = true;
+        timerTimeout = true;
+        this.concede(game);
+    }
+
+    @Override
+    public void idleTimeout(Game game) {
+        game.informPlayers(new StringBuilder(getName()).append(" has run out of time. Loosing the Match.").toString());
+        quit = true;
+        idleTimeout = true;
+        this.concede(game);
+    }
+
+    @Override
     public void concede(Game game) {        
-        game.leave(playerId);
+        game.gameOver(playerId);
         lost(game);
         this.left = true;
     }
@@ -2115,6 +2147,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public boolean hasQuit() {
         return quit;
+    }
+
+    @Override
+    public boolean hasTimerTimeout() {
+        return timerTimeout;
+    }
+
+    @Override
+    public boolean hasIdleTimeout() {
+        return idleTimeout;
     }
 
     @Override

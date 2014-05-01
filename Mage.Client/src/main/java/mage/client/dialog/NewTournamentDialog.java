@@ -71,10 +71,12 @@ public class NewTournamentDialog extends MageDialog {
     private TableView table;
     private UUID playerId;
     private UUID roomId;
-    private Session session;
+    private final Session session;
     private String lastSessionId;
     private final List<TournamentPlayerPanel> players = new ArrayList<>();
     private final List<JComboBox> packs = new ArrayList<>();
+    private final int CONSTRUCTION_TIME_MIN = 6;
+    private final int CONSTRUCTION_TIME_MAX = 30;
 
     /** Creates new form NewTournamentDialog */
     public NewTournamentDialog() {
@@ -84,7 +86,7 @@ public class NewTournamentDialog extends MageDialog {
         txtName.setText("Tournament");
         this.spnNumWins.setModel(new SpinnerNumberModel(2, 1, 5, 1));
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
-        this.spnConstructTime.setModel(new SpinnerNumberModel(10, 10, 30, 5));
+        this.spnConstructTime.setModel(new SpinnerNumberModel(10, CONSTRUCTION_TIME_MIN, CONSTRUCTION_TIME_MAX, 2));
         this.spnNumRounds.setModel(new SpinnerNumberModel(2, 2, 10, 1));
     }
 
@@ -427,9 +429,8 @@ public class NewTournamentDialog extends MageDialog {
         if (tournamentType.isLimited()) {
             if (tOptions.getLimitedOptions() == null) {
                 tOptions.setLimitedOptions(new LimitedOptions());
-            }
-            tOptions.getLimitedOptions().setConstructionTime(60);
-            // tOptions.getLimitedOptions().setConstructionTime((Integer)this.spnConstructTime.getValue() * 60);
+            }            
+            tOptions.getLimitedOptions().setConstructionTime((Integer)this.spnConstructTime.getValue() * 60);
             if (tournamentType.isCubeBooster()) {
                 tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
             } else {
@@ -646,7 +647,11 @@ public class NewTournamentDialog extends MageDialog {
                 break;
             }
         }
-        this.spnConstructTime.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_CONSTR_TIME, "600"))/60);
+        int constructionTime = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_CONSTR_TIME, "600")) / 60;
+        if (constructionTime < CONSTRUCTION_TIME_MIN || constructionTime > CONSTRUCTION_TIME_MAX) {
+            constructionTime = CONSTRUCTION_TIME_MIN;
+        }
+        this.spnConstructTime.setValue(constructionTime);
         String tournamentTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TYPE, "Sealed Elimination");
         for (TournamentTypeView tournamentTypeView : session.getTournamentTypes()) {
             if (tournamentTypeView.getName().equals(tournamentTypeName)) {

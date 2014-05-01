@@ -122,7 +122,8 @@ public interface Game extends MageItem, Serializable {
     UUID getActivePlayerId();
     UUID getPriorityPlayerId();
     void leave(UUID playerId);
-    boolean isGameOver();
+    boolean gameOver(UUID playerId);
+    boolean hasEnded();
     Battlefield getBattlefield();
     SpellStack getStack();
     Exile getExile();
@@ -218,6 +219,8 @@ public interface Game extends MageItem, Serializable {
     void mulligan(UUID playerId);
     void endMulligan(UUID playerId);
     void quit(UUID playerId);
+    void timerTimeout(UUID playerId);
+    void idleTimeout(UUID playerId);
     void concede(UUID playerId);
     void undo(UUID playerId);
     void emptyManaPools();

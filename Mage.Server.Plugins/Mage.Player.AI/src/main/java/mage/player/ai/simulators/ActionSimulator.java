@@ -60,11 +60,13 @@ public class ActionSimulator {
 
     public int evaluateState() {
         Player opponent = game.getPlayer(game.getOpponents(player.getId()).iterator().next());
-        if (game.isGameOver()) {
-            if (player.hasLost() || opponent.hasWon())
+        if (game.gameOver(null)) {
+            if (player.hasLost() || opponent.hasWon()) {
                 return Integer.MIN_VALUE;
-            if (opponent.hasLost() || player.hasWon())
+            }
+            if (opponent.hasLost() || player.hasWon()) {
                 return Integer.MAX_VALUE;
+            }
         }
         int value = player.getLife();
         value -= opponent.getLife();

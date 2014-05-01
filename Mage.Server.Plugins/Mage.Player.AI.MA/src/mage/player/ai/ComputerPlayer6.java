@@ -467,7 +467,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             logger.trace("interrupted - " + val);
             return val;
         }
-        if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.isGameOver()) {
+        if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.gameOver(null)) {
             logger.trace("Add actions -- reached end state, node count=" + SimulationNode2.nodeCount + ", depth=" + depth);
             val = GameStateEvaluator2.evaluate(playerId, game);
             UUID currentPlayerId = node.getGame().getPlayerList().get();
@@ -488,7 +488,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 }
             }
 
-            if (game.isGameOver()) {
+            if (game.gameOver(null)) {
                 val = GameStateEvaluator2.evaluate(playerId, game);
             } else if (node.getChildren().size() > 0) {
                 //declared attackers or blockers or triggered abilities
@@ -534,7 +534,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     logger.debug("Sim Prio [" + depth + "] -- repeated action: " + action.toString());
                     continue;
                 }
-                if (!sim.isGameOver() && action.isUsesStack()) {
+                if (!sim.gameOver(null) && action.isUsesStack()) {
                     // only pass if the last action uses the stack
                     sim.getPlayer(currentPlayer.getId()).pass(game);
                     sim.getPlayerList().getNext();
@@ -797,7 +797,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     break;
                 case CLEANUP:
                     game.getPhase().getStep().beginStep(game, activePlayerId);
-                    if (!game.checkStateAndTriggered() && !game.isGameOver()) {
+                    if (!game.checkStateAndTriggered() && !game.gameOver(null)) {
                         game.getState().setActivePlayerId(game.getState().getPlayerList(game.getActivePlayerId()).getNext());
                         game.getTurn().setPhase(new BeginningPhase());
                         game.getPhase().setStep(new UntapStep());

@@ -47,7 +47,7 @@ public class Turn implements Serializable {
 
     private Phase currentPhase;
     private UUID activePlayerId;
-    private List<Phase> phases = new ArrayList<Phase>();
+    private final List<Phase> phases = new ArrayList<>();
     private boolean declareAttackersStepStarted = false;
 
     public Turn() {
@@ -109,7 +109,7 @@ public class Turn implements Serializable {
 
     public void play(Game game, UUID activePlayerId) {
         this.setDeclareAttackersStepStarted(false);
-        if (game.isPaused() || game.isGameOver()) {
+        if (game.isPaused() || game.gameOver(null)) {
             return;
         }
 
@@ -123,7 +123,7 @@ public class Turn implements Serializable {
         resetCounts();
         game.getPlayer(activePlayerId).beginTurn(game);
         for (Phase phase: phases) {
-            if (game.isPaused() || game.isGameOver()) {
+                if (game.isPaused() || game.gameOver(null)) {
                 return;
             }
             currentPhase = phase;
@@ -168,7 +168,7 @@ public class Turn implements Serializable {
         }
         while (it.hasNext()) {
             phase = it.next();
-            if (game.isPaused() || game.isGameOver()) {
+            if (game.isPaused() || game.gameOver(null)) {
                 return;
             }
             currentPhase = phase;
