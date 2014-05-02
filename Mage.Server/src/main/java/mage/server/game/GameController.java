@@ -234,16 +234,29 @@ public class GameController implements GameCallback {
         checkStart();
     }
 
+    /**
+     * We create a timer that will run every 250 ms individually for a player decreasing his internal game counter.
+     * Later on this counter is used to get time left to play the whole match.
+     *
+     * What we also do here is passing Action to PriorityTimer that is the action that will be executed once game timer is over.
+     *
+     * @param playerId
+     * @param count
+     * @return
+     */
     private PriorityTimer createPlayerTimer(UUID playerId, int count) {
         final UUID initPlayerId = playerId;
-        long delay = 250L; // run each 250 seconds
-        PriorityTimer timer = new PriorityTimer(count, delay, new Action() {
+        long delayMs = 250L; // run each 250 ms
+
+        Action executeOnNoTimeLeft = new Action() {
             @Override
             public void execute() throws MageException {
                 game.concede(initPlayerId);
-                logger.debug("Game timeout for player: " + initPlayerId + ". Conceding.");
+                logger.debug("Player has no time left to end the match: " + initPlayerId + ". Conceding.");
             }
-        });
+        };
+
+        PriorityTimer timer = new PriorityTimer(count, delayMs, executeOnNoTimeLeft);
         timers.put(playerId, timer);
         timer.init();
         return timer;
