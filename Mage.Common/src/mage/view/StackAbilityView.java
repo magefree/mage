@@ -47,7 +47,7 @@ import mage.target.targetpointer.TargetPointer;
 public class StackAbilityView extends CardView {
     private static final long serialVersionUID = 1L;
 
-    private CardView sourceCard;
+    private final CardView sourceCard;
 
     public StackAbilityView(Game game, StackAbility ability, String sourceName, CardView sourceCard) {
         this.id = ability.getId();
@@ -55,7 +55,7 @@ public class StackAbilityView extends CardView {
         this.sourceCard = sourceCard;
         this.sourceCard.setMageObjectType(mageObjectType);
         this.name = "Ability";
-        this.rules = new ArrayList<String>();
+        this.rules = new ArrayList<>();
         rules.add(ability.getRule(sourceName));
         this.power = ability.getPower().toString();
         this.toughness = ability.getToughness().toString();
@@ -65,17 +65,19 @@ public class StackAbilityView extends CardView {
         this.superTypes = ability.getSupertype();
         this.color = ability.getColor();
         this.manaCost = ability.getManaCost().getSymbols();
+        this.counters = sourceCard.getCounters();
+
         updateTargets(game, ability);
     }
 
     private void updateTargets(Game game, StackAbility ability) {
-        List<String> names = new ArrayList<String>();
+        List<String> names = new ArrayList<>();
         for(UUID modeId : ability.getModes().getSelectedModes()) {
             ability.getModes().setMode(ability.getModes().get(modeId));
             if (ability.getTargets().size() > 0) {
                 setTargets(ability.getTargets());
             } else {
-                List<UUID> targetList = new ArrayList<UUID>();
+                List<UUID> targetList = new ArrayList<>();
                 for (Effect effect : ability.getEffects()) {
                     TargetPointer targetPointer = effect.getTargetPointer();
                     if (targetPointer instanceof FixedTarget) {

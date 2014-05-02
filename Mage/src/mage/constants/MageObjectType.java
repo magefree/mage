@@ -29,14 +29,14 @@ public enum MageObjectType {
     CARD ("Card", false, true),
     COPY_CARD ("Copy of a Card", false, true),
     TOKEN ("Token", true, true),
-    SPELL ("Spell", false, false),
+    SPELL ("Spell", false, true),
     PERMANENT ("Permanent", true, true),
     EMBLEM ("Emblem", false, false),
     COMMANDER ("Commander", false, false);
 
-    private String text;
-    private boolean permanent;
-    private boolean canHaveCounters;
+    private final String text;
+    private final boolean permanent;
+    private final boolean canHaveCounters;
 
 
     MageObjectType(String text, boolean permanent, boolean canHaveCounters) {

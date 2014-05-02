@@ -41,7 +41,6 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.constants.Rarity;
-import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
