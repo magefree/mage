@@ -28,15 +28,8 @@
 
 package mage.game.tournament;
 
-import java.util.List;
-import java.util.Random;
 import java.util.Set;
-import mage.cards.Card;
 import mage.cards.decks.Deck;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.constants.Rarity;
 import mage.constants.TournamentPlayerState;
 import mage.players.Player;
 import mage.util.TournamentUtil;
