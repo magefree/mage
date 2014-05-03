@@ -28,11 +28,6 @@
 
 package mage.server.tournament;
 
-import java.rmi.RemoteException;
-import java.util.UUID;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
 import mage.interfaces.callback.ClientCallback;
@@ -41,6 +36,12 @@ import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
+
+import java.rmi.RemoteException;
+import java.util.UUID;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -115,7 +116,7 @@ public class TournamentSession {
     }
 
     protected void handleRemoteException(RemoteException ex) {
-        logger.fatal("TournamentSession error ", ex);
+        logger.fatal("TournamentSession error - userId " + userId + " tId " + tournament.getId(), ex);
         TournamentManager.getInstance().kill(tournament.getId(), userId);
     }
 
@@ -137,7 +138,11 @@ public class TournamentSession {
                 new Runnable() {
                     @Override
                     public void run() {
-                        TournamentManager.getInstance().timeout(tournament.getId(), userId);
+                        try {
+                            TournamentManager.getInstance().timeout(tournament.getId(), userId);
+                        } catch (Exception e) {
+                            logger.fatal("TournamentSession error - userId " + userId + " tId " + tournament.getId(), e);
+                        }
                     }
                 },
                 seconds, TimeUnit.SECONDS
