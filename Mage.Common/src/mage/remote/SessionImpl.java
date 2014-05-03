@@ -206,7 +206,7 @@ public class SessionImpl implements Session {
                 serverState = server.getServerState();
                 updateDatabase();
                 logger.info(new StringBuilder("Connected as ").append(this.getUserName()).append(" to MAGE server at ").append(connection.getHost()).append(":").append(connection.getPort()).toString());
-                client.connected(new StringBuilder("Connected as ").append(this.getUserName()).append(" to ").append(connection.getHost()).append(":").append(connection.getPort()).append(" ").toString());
+                client.connected(new StringBuilder(this.getUserName()).append("@").append(connection.getHost()).append(":").append(connection.getPort()).append(" ").toString());
                 return true;
             }
             disconnect(false);
