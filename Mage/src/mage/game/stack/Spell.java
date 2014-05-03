@@ -372,6 +372,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     public boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
+            StringBuilder newTargetDescription = new StringBuilder();
             // Fused split spells or spells where "Splice on Arcane" was used can have more than one ability
             for (SpellAbility spellAbility : spellAbilities) {
                 // Some spells can have more than one mode
@@ -386,9 +387,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                         }
 
                     }
+                    newTargetDescription.append(getSpellAbility().getTargetDescription(mode.getTargets(), game));
                 }
 
             }
+            game.informPlayers(this.getName() + " is now " + newTargetDescription.toString());
             return true;
         }
         return false;
@@ -851,26 +854,38 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
     @Override
     public Counters getCounters() {
-        return null;
+        return card.getCounters();
     }
 
     @Override
-    public void addCounters(String name, int amount, Game game) {}
+    public void addCounters(String name, int amount, Game game) {
+        card.addCounters(name, amount, game);
+    }
 
     @Override
-    public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {}
+    public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
+        card.addCounters(name, amount, game, appliedEffects);
+    }
 
     @Override
-    public void addCounters(Counter counter, Game game) {}
+    public void addCounters(Counter counter, Game game) {
+        card.addCounters(counter, game);
+    }
 
     @Override
-    public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {}
+    public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
+        card.addCounters(counter, game, appliedEffects);
+    }
 
     @Override
-    public void removeCounters(String name, int amount, Game game) {}
+    public void removeCounters(String name, int amount, Game game) {
+        card.removeCounters(name, amount, game);
+    }
 
     @Override
-    public void removeCounters(Counter counter, Game game) {}
+    public void removeCounters(Counter counter, Game game) {
+        card.removeCounters(counter, game);
+    }
 
     public Card getCard() {
         return card;

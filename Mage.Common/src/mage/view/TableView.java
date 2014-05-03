@@ -39,7 +39,6 @@ import mage.game.Seat;
 import mage.game.Table;
 import mage.game.match.MatchPlayer;
 import mage.game.tournament.TournamentPlayer;
-import org.jboss.logging.Logger;
 
 /**
  *

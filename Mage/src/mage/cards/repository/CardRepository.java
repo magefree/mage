@@ -35,12 +35,15 @@ import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import mage.constants.CardType;
-
 import java.io.File;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.Callable;
+import mage.constants.CardType;
 
 /**
  *
@@ -52,7 +55,7 @@ public enum CardRepository {
 
     private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
     private static final String VERSION_ENTITY_NAME = "card";
-    private static final long CARD_DB_VERSION = 30;
+    private static final long CARD_DB_VERSION = 31;
 
     private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;

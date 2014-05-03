@@ -112,8 +112,8 @@ public class Table implements Serializable {
     }
 
     public void initTournament() {
-        setState(TableState.DUELING);        
-        
+        setState(TableState.DUELING);
+        tournament.setStepStartTime(new Date());
     }
 
     public void endTournament() {
@@ -122,10 +122,12 @@ public class Table implements Serializable {
 
     public void initDraft() {
         setState(TableState.DRAFTING);
+        tournament.setStepStartTime(new Date());
     }
 
     public void construct() {
         setState(TableState.CONSTRUCTING);
+        tournament.setStepStartTime(new Date());
     }
 
     /**

@@ -284,11 +284,7 @@ public class Main {
             return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder", ex);
-        } catch (IllegalAccessException ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
-        } catch (InstantiationException ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
-        } catch (MalformedURLException ex) {
+        } catch (Exception ex) {
             logger.fatal("Error loading game type " + plugin.getJar(), ex);
         }
         return null;
@@ -301,11 +297,7 @@ public class Main {
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getName() + " / "+ plugin.getJar() + " - check plugin folder", ex);
-        } catch (IllegalAccessException ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
-        } catch (InstantiationException ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
-        } catch (MalformedURLException ex) {
+        } catch (Exception ex) {
             logger.fatal("Error loading game type " + plugin.getJar(), ex);
         }
         return null;

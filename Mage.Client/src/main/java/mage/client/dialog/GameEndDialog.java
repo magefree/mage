@@ -45,13 +45,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.ImageIcon;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import mage.client.MageFrame;
 import mage.client.game.GamePanel;
-import mage.client.util.audio.AudioManager;
 import mage.client.util.Format;
 import mage.client.util.ImageHelper;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.view.GameEndView;
 import mage.view.PlayerView;
@@ -65,7 +64,8 @@ public class GameEndDialog extends MageDialog {
     private final DateFormat df = DateFormat.getDateTimeInstance();;
 
 
-    /** Creates new form GameEndDialog */
+    /** Creates new form GameEndDialog
+     * @param gameEndView */
     public GameEndDialog(GameEndView gameEndView) {
 
         initComponents();
@@ -80,13 +80,14 @@ public class GameEndDialog extends MageDialog {
         ImageIcon icon = new ImageIcon(imageResult);
         lblResultImage.setIcon(icon);
 
-        this.lblResultText.setText(gameEndView.getResultMessage());
+        this.lblGameInfo.setText(gameEndView.getGameInfo());
+        this.lblMatchInfo.setText(gameEndView.getMatchInfo());
+        this.lblAdditionalInfo.setText(gameEndView.getAdditionalInfo());
 
         String autoSave = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_LOG_AUTO_SAVE, "true");
         if (autoSave.equals("true")) {
             this.saveGameLog(gameEndView);
         }
-        
 
         // game duration
         txtDurationGame.setText(Format.getDuration(gameEndView.getStartTime(), gameEndView.getEndTime()));
@@ -110,17 +111,6 @@ public class GameEndDialog extends MageDialog {
         }
 
         txtMatchScore.setText(gameEndView.getMatchView().getResult());
-
-        if (gameEndView.getNameMatchWinner() != null) {
-            if (gameEndView.getClientPlayer().getName().equals(gameEndView.getNameMatchWinner())) {
-                lblMatchInfo.setText("You won the match!");
-            } else {
-                lblMatchInfo.setText(new StringBuilder(gameEndView.getNameMatchWinner()).append(" won the match!").toString());
-            }
-        } else {
-            int winsNeeded = gameEndView.getWinsNeeded() - gameEndView.getWins();
-            lblMatchInfo.setText(new StringBuilder("You need ").append(winsNeeded == 1 ? "one win ":winsNeeded + " wins ").append("to win the match.").toString());
-        }
     }
 
     private void saveGameLog(GameEndView gameEndView) {
@@ -169,8 +159,9 @@ public class GameEndDialog extends MageDialog {
         tabPane = new javax.swing.JTabbedPane();
         tabResult = new javax.swing.JLayeredPane();
         pnlText = new javax.swing.JLayeredPane();
+        lblGameInfo = new javax.swing.JLabel();
         lblMatchInfo = new javax.swing.JLabel();
-        lblResultText = new javax.swing.JLabel();
+        lblAdditionalInfo = new javax.swing.JLabel();
         lblResultImage = new javax.swing.JLabel();
         tabStatistics = new javax.swing.JPanel();
         lblDurationGame = new javax.swing.JLabel();
@@ -202,25 +193,31 @@ public class GameEndDialog extends MageDialog {
         pnlText.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlText.setOpaque(true);
 
-        lblMatchInfo.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        lblGameInfo.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        lblGameInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGameInfo.setText("gameInfo");
+        pnlText.add(lblGameInfo);
+        lblGameInfo.setBounds(11, 1, 550, 25);
+
+        lblMatchInfo.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         lblMatchInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMatchInfo.setText("matchInfo");
-        lblMatchInfo.setBounds(11, 42, 550, 40);
-        pnlText.add(lblMatchInfo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pnlText.add(lblMatchInfo);
+        lblMatchInfo.setBounds(10, 30, 550, 25);
 
-        lblResultText.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
-        lblResultText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblResultText.setText("result text");
-        lblResultText.setBounds(11, 1, 550, 40);
-        pnlText.add(lblResultText, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        lblAdditionalInfo.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        lblAdditionalInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAdditionalInfo.setText("additionalInfo");
+        pnlText.add(lblAdditionalInfo);
+        lblAdditionalInfo.setBounds(10, 60, 550, 25);
 
+        tabResult.add(pnlText);
         pnlText.setBounds(20, 150, 570, 90);
-        tabResult.add(pnlText, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         lblResultImage.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblResultImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tabResult.add(lblResultImage);
         lblResultImage.setBounds(0, 0, 610, 250);
-        tabResult.add(lblResultImage, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         tabPane.addTab("Result", tabResult);
 
@@ -249,22 +246,17 @@ public class GameEndDialog extends MageDialog {
         tabStatisticsLayout.setHorizontalGroup(
             tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabStatisticsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabStatisticsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPlayerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDurationMatch, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMatchScore, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(tabStatisticsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDurationGame, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblLife, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lblPlayerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDurationMatch, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMatchScore, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDurationGame, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLife, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPlayerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtDurationGame, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                    .addComponent(txtDurationGame, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                     .addComponent(txtLife, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                     .addComponent(txtDurationMatch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                     .addComponent(txtMatchScore, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
@@ -292,7 +284,7 @@ public class GameEndDialog extends MageDialog {
                 .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPlayerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         tabPane.addTab("Statistics", tabStatistics);
@@ -322,7 +314,7 @@ public class GameEndDialog extends MageDialog {
                 .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOk)
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         pack();
@@ -335,14 +327,15 @@ public class GameEndDialog extends MageDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblAdditionalInfo;
     private javax.swing.JLabel lblDurationGame;
     private javax.swing.JLabel lblDurationMatch;
+    private javax.swing.JLabel lblGameInfo;
     private javax.swing.JLabel lblLife;
     private javax.swing.JLabel lblMatchInfo;
     private javax.swing.JLabel lblMatchScore;
     private javax.swing.JLabel lblPlayerInfo;
     private javax.swing.JLabel lblResultImage;
-    private javax.swing.JLabel lblResultText;
     private javax.swing.JLayeredPane pnlText;
     private javax.swing.JTabbedPane tabPane;
     private javax.swing.JLayeredPane tabResult;

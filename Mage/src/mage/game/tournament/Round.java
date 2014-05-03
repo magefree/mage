@@ -72,7 +72,7 @@ public class Round {
     public boolean isRoundOver() {
         boolean roundIsOver = true;
         for (TournamentPairing pair: pairs) {
-            if (pair.getMatch() != null && !pair.getMatch().isMatchOver()) {
+            if (pair.getMatch() != null && !pair.getMatch().hasEnded()) {
                 roundIsOver = false;
             } else {
                 if (!pair.isAlreadyPublished()) {

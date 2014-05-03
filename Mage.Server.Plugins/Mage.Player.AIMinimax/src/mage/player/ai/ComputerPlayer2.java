@@ -330,7 +330,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
             return GameStateEvaluator.evaluate(playerId, game);
         }
         int val;
-        if (node.depth > maxDepth || game.isGameOver()) {
+        if (node.depth > maxDepth || game.gameOver(null)) {
             logger.debug(indent(node.depth) + "simulating -- reached end state");
             val = GameStateEvaluator.evaluate(playerId, game);
         }
@@ -357,7 +357,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
                 }
             }
 
-            if (game.isGameOver()) {
+            if (game.gameOver(null)) {
                 val = GameStateEvaluator.evaluate(playerId, game);
             }
             else if (node.getChildren().size() > 0) {
@@ -403,7 +403,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
                     logger.debug(indent(node.depth) + "found useless action: " + action);
                     continue;
                 }
-                if (!sim.isGameOver() && action.isUsesStack()) {
+                if (!sim.gameOver(null) && action.isUsesStack()) {
                     // only pass if the last action uses the stack
                     sim.getPlayer(currentPlayer.getId()).pass(game);
                     sim.getPlayerList().getNext();
@@ -587,7 +587,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
                     break;
                 case CLEANUP:
                     game.getPhase().getStep().beginStep(game, activePlayerId);
-                    if (!game.checkStateAndTriggered() && !game.isGameOver()) {
+                    if (!game.checkStateAndTriggered() && !game.gameOver(null)) {
                         game.getState().setActivePlayerId(game.getState().getPlayerList(game.getActivePlayerId()).getNext());
                         game.getTurn().setPhase(new BeginningPhase());
                         game.getPhase().setStep(new UntapStep());

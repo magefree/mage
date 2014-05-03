@@ -593,7 +593,6 @@ public class TableController {
      * @return true if table can be closed
      */
     public boolean endGameAndStartNextGame() {
-        boolean matchIsOver = false;
         // get player that chooses who goes first
         UUID choosingPlayerId = match.getChooser();
         match.endGame();
@@ -604,27 +603,24 @@ public class TableController {
         }
         GameManager.getInstance().removeGame(match.getGame().getId());
         try {
-            if (!match.isMatchOver()) {
+            if (!match.hasEnded()) {
                 table.sideboard();
                 setupTimeout(Match.SIDEBOARD_TIME);
                 match.sideboard();
                 cancelTimeout();
-                if (!match.isMatchOver()) {
+                if (!match.hasEnded()) {
                     startGame(choosingPlayerId);
                 } else {
-                    matchIsOver = true;
                     closeTable();
                 }
             }
             else {
-                // if match has only one game
-                matchIsOver = true;
                 closeTable();
             }
         } catch (GameException ex) {
             logger.fatal(null, ex);
         }
-        return matchIsOver;
+        return match.hasEnded();
     }
 
     /**

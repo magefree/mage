@@ -34,7 +34,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  */
 public class ConsignToDust extends CardImpl<ConsignToDust> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifacts and/or enchantments");
+    private static final FilterPermanent filter = new FilterPermanent("artifacts and/or enchantments");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));

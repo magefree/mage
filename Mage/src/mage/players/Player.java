@@ -129,6 +129,10 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean hasWon();
     boolean hasQuit();
     void quit(Game game);
+    boolean hasTimerTimeout();
+    void timerTimeout(Game game);
+    boolean hasIdleTimeout();
+    void idleTimeout(Game game);
     boolean hasLeft();
     /**
      * Player is still active in game (has not left, lost or won the game).

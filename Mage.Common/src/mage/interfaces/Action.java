@@ -12,6 +12,7 @@ public interface Action {
 
     /**
      * Executes action.
+     * @throws mage.MageException
      */
     void execute() throws MageException;
 }

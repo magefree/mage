@@ -74,6 +74,7 @@ public abstract class TournamentImpl implements Tournament {
 
     protected Date startTime;
     protected Date endTime;
+    protected Date stepStartTime;
     protected boolean abort;
     protected String tournamentState;
    
@@ -244,7 +245,7 @@ public abstract class TournamentImpl implements Tournament {
         for (Round round: rounds) {
             for (TournamentPairing pair: round.getPairs()) {
                 Match match = pair.getMatch();
-                if (match != null && match.isMatchOver()) {
+                if (match != null && match.hasEnded()) {
                     TournamentPlayer tp1 = pair.getPlayer1();
                     TournamentPlayer tp2 = pair.getPlayer2();
                     MatchPlayer mp1 = match.getPlayer(pair.getPlayer1().getPlayer().getId());
@@ -302,11 +303,11 @@ public abstract class TournamentImpl implements Tournament {
         matchResult.append(p2.getPlayer().getName());
         matchResult.append(" (").append(mp1.getWins());
         if (mp1.hasQuit()) {
-            matchResult.append("Q");
+            matchResult.append(mp1.hasTimerTimeout()?"T":"Q");
         }
         matchResult.append("-").append(mp2.getWins());
         if (mp2.hasQuit()) {
-            matchResult.append("Q");
+            matchResult.append(mp2.hasTimerTimeout()?"T":"Q");
         }                
         matchResult.append(") ");        
         return matchResult.toString();
@@ -478,5 +479,19 @@ public abstract class TournamentImpl implements Tournament {
     public void setTournamentState(String tournamentState) {
         this.tournamentState = tournamentState;
     }
+
+    @Override
+    public Date getStepStartTime() {
+        if (stepStartTime != null) {
+            return new Date(stepStartTime.getTime());
+        }
+        return null;
+    }
+
+    @Override
+    public void setStepStartTime(Date stepStartTime) {
+        this.stepStartTime = stepStartTime;
+    }
+
 
 }

@@ -412,7 +412,7 @@ public class GameController implements GameCallback {
                     .append(ConfigSettings.getInstance().getMaxSecondsIdle())
                     .append(" seconds ) - Auto concede.");
             ChatManager.getInstance().broadcast(chatId, "", sb.toString() , MessageColor.BLACK, true, MessageType.STATUS);
-            concede(userId);
+            game.idleTimeout(getPlayerId(userId));
         }
     }
 

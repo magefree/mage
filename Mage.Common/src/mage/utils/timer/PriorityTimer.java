@@ -1,11 +1,10 @@
 package mage.utils.timer;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import mage.MageException;
 import mage.interfaces.Action;
 import org.apache.log4j.Logger;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * @author noxx
@@ -14,14 +13,11 @@ public class PriorityTimer extends TimerTask {
 
     private static final Logger logger = Logger.getLogger(PriorityTimer.class);
 
+    private final long delay;
+    private final Action taskOnTimeout;
+
     private int count;
-
-    private long delay;
-
-    private Action taskOnTimeout;
-
     private Action taskOnTick;
-
     private States state = States.NONE;
 
     enum States {

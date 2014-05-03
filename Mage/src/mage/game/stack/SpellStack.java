@@ -105,12 +105,9 @@ public class SpellStack extends ArrayDeque<StackObject> {
 
     public Spell getSpell(UUID id) {
         for (StackObject stackObject: this) {
-            if (stackObject.getId().equals(id)) {
-                if (stackObject instanceof Spell) {
+            if (stackObject instanceof Spell) {
+                if (stackObject.getId().equals(id) || stackObject.getSourceId().equals(id)) {
                     return (Spell)stackObject;
-                }
-                else {
-                    return null;
                 }
             }
         }

@@ -72,14 +72,18 @@ public class MatchView implements Serializable {
         }
         StringBuilder sb1 = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
-        for (MatchPlayer player: match.getPlayers()) {
-            sb1.append(player.getName());
-            if(player.hasQuit()) {
-               sb1.append(" [quit] ");
+        for (MatchPlayer matchPlayer: match.getPlayers()) {
+            sb1.append(matchPlayer.getName());
+            if(matchPlayer.hasQuit()) {
+                if (matchPlayer.hasTimerTimeout()) {
+                    sb1.append(" [timer] ");
+                } else {
+                    sb1.append(" [quit] ");
+                }
             }
             sb1.append(", ");
-            sb2.append(player.getName()).append(" ");
-            sb2.append(player.getWins()).append("-").append(player.getLoses()).append(", ");
+            sb2.append(matchPlayer.getName()).append(" ");
+            sb2.append(matchPlayer.getWins()).append("-").append(matchPlayer.getLoses()).append(", ");
         }
         players = sb1.substring(0, sb1.length() - 2);
         result = sb2.substring(0, sb2.length() - 2);

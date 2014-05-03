@@ -889,6 +889,10 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         return sb.toString();
     }
 
+    public String getTargetDescription(Targets targets, Game game) {
+        return getTargetDescriptionForLog(targets, game);
+    }
+    
     protected String getTargetDescriptionForLog(Targets targets, Game game) {
         StringBuilder sb = new StringBuilder();
         if (targets.size() > 0) {

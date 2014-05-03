@@ -39,12 +39,14 @@ import mage.players.Player;
 public class MatchPlayer {
     private int wins;
     private int loses;
-    
+    private boolean matchWinner;
+
     private Deck deck;
     private Player player;
     private final String name;
     
     private boolean quit;
+    private boolean timerTimeout;
     private boolean doneSideboarding;
     private int priorityTimeLeft;
 
@@ -55,7 +57,9 @@ public class MatchPlayer {
         this.loses = 0;
         this.doneSideboarding = true;
         this.quit = false;
+        this.timerTimeout = false;
         this.name = player.getName();
+        this.matchWinner = false;
     }
 
     public int getPriorityTimeLeft() {
@@ -125,7 +129,23 @@ public class MatchPlayer {
         this.doneSideboarding = true;
         this.quit = quit;
     }
-    
+
+    public boolean hasTimerTimeout() {
+        return timerTimeout;
+    }
+
+    public void setTimerTimeout(boolean timerTimeout) {
+        this.timerTimeout = timerTimeout;
+    }
+
+    public boolean isMatchWinner() {
+        return matchWinner;
+    }
+
+    public void setMatchWinner(boolean matchWinner) {
+        this.matchWinner = matchWinner;
+    }
+
     public void cleanUpOnMatchEnd() {
         // Free resources that are not needed after match end
         this.deck = null;

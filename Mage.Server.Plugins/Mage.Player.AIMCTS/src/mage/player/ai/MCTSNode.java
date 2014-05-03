@@ -58,11 +58,11 @@ public class MCTSNode {
     private int visits = 0;
     private int wins = 0;
     private MCTSNode parent;
-    private List<MCTSNode> children = new ArrayList<MCTSNode>();
+    private final List<MCTSNode> children = new ArrayList<MCTSNode>();
     private Ability action;
     private Game game;
     private Combat combat;
-    private String stateValue;
+    private final String stateValue;
     private UUID playerId;
     private boolean terminal = false;
 
@@ -71,7 +71,7 @@ public class MCTSNode {
     public MCTSNode(Game game) {
         this.game = game;
         this.stateValue = game.getState().getValue(false, game);
-        this.terminal = game.isGameOver();
+        this.terminal = game.gameOver(null);
         setPlayer();
         nodeCount = 1;
     }    
@@ -79,7 +79,7 @@ public class MCTSNode {
     protected MCTSNode(MCTSNode parent, Game game, Ability action) {
         this.game = game;
         this.stateValue = game.getState().getValue(false, game);
-        this.terminal = game.isGameOver();
+        this.terminal = game.gameOver(null);
         this.parent = parent;
         this.action = action;
         setPlayer();
@@ -90,20 +90,21 @@ public class MCTSNode {
         this.game = game;
         this.combat = combat;
         this.stateValue = game.getState().getValue(false, game);
-        this.terminal = game.isGameOver();
+        this.terminal = game.gameOver(null);
         this.parent = parent;
         setPlayer();
         nodeCount++;
     }
 
     private void setPlayer() {
-        if (game.getStep().getStepPart() == StepPart.PRIORITY)
+        if (game.getStep().getStepPart() == StepPart.PRIORITY) {
             playerId = game.getPriorityPlayerId();
-        else {
-            if (game.getStep().getType() == PhaseStep.DECLARE_BLOCKERS)
+        } else {
+            if (game.getStep().getType() == PhaseStep.DECLARE_BLOCKERS) {
                 playerId = game.getCombat().getDefenders().iterator().next();
-            else
+            } else {
                 playerId = game.getActivePlayerId();
+            }
         }
     }
 

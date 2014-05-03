@@ -172,9 +172,7 @@ public class MageServerImpl implements MageServer {
                     logger.debug("Tournament table " + table.getTableId() + " created");
                     LogServiceImpl.instance.log(LogKeys.KEY_TOURNAMENT_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
                     return table;
-                } catch (NumberFormatException ex) {
-                    handleException(ex);
-                } catch (MageException ex) {
+                } catch (Exception ex) {
                     handleException(ex);
                 }
                 return null;

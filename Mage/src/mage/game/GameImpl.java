@@ -418,8 +418,26 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         }
     }
 
+    /**
+     * Starts check if game over or if playerId is given
+     * let the player concede.
+     *
+     * @param playerId
+     * @return
+     */
     @Override
-    public synchronized boolean isGameOver() {
+    public synchronized boolean gameOver(UUID playerId) {
+        if (playerId == null) {
+            boolean result = checkIfGameIsOver();
+            return result;
+        }  else {
+            leave(playerId);
+            return true;
+        }
+    }
+
+    
+    private boolean checkIfGameIsOver() {
         if (state.isGameOver()) {
             return true;
         }
@@ -445,6 +463,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean hasEnded() {
+        return endTime != null;
     }
 
     @Override
@@ -546,13 +569,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         Player player = getPlayer(players.get());
         boolean wasPaused = state.isPaused();
         state.resume();
-        if (!isGameOver()) {
+        if (!gameOver(null)) {
             fireInformEvent(new StringBuilder("Turn ").append(state.getTurnNum()).toString());
             if (checkStopOnTurnOption()) {
                 return;
             }
             state.getTurn().resumePlay(this, wasPaused);
-            if (!isPaused() && !isGameOver()) {
+            if (!isPaused() && !gameOver(null)) {
                 endOfTurn();
                 player = players.getNext(this);
                 state.setTurnNum(state.getTurnNum() + 1);
@@ -562,10 +585,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     protected void play(UUID nextPlayerId) {
-        if (!isPaused() && !isGameOver()) {
+        if (!isPaused() && !gameOver(null)) {
             PlayerList players = state.getPlayerList(nextPlayerId);
             Player player = getPlayer(players.get());
-            while (!isPaused() && !isGameOver()) {
+            while (!isPaused() && !gameOver(null)) {
 
                 if (!playTurn(player)) {
                     break;
@@ -583,7 +606,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 player = players.getNext(this);
             }
         }
-        if (isGameOver()) {
+        if (gameOver(null)) {
             winnerId = findWinnersAndLosers();
             logger.info(new StringBuilder("Game with gameId ").append(this.getId()).append(" ended."));
         }
@@ -597,7 +620,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         state.setActivePlayerId(player.getId());
         player.becomesActivePlayer();
         state.getTurn().play(this, player.getId());
-        if (isPaused() || isGameOver()) {
+        if (isPaused() || gameOver(null)) {
             return false;
         }
         endOfTurn();
@@ -865,9 +888,30 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     @Override
     public synchronized void quit(UUID playerId) {
         Player player = state.getPlayer(playerId);
-        if (player != null) {
-            fireInformEvent(player.getName() + " quits the match.");
+        if (player != null) {            
             player.quit(this);            
+        }else {
+            logger.error(new StringBuilder("player not found - playerId: ").append(playerId));
+        }
+    }
+
+    @Override
+    public synchronized void timerTimeout(UUID playerId) {
+        Player player = state.getPlayer(playerId);
+        if (player != null) {
+            player.timerTimeout(this);
+        } else {
+            logger.error(new StringBuilder("player not found - playerId: ").append(playerId));
+        }
+    }
+
+    @Override
+    public synchronized void idleTimeout(UUID playerId) {
+        Player player = state.getPlayer(playerId);
+        if (player != null) {
+            player.idleTimeout(this);
+        } else {
+            logger.error(new StringBuilder("player not found - playerId: ").append(playerId));
         }
     }
 
@@ -923,7 +967,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         int bookmark = 0;
         clearAllBookmarks();
         try {
-            while (!isPaused() && !isGameOver()) {
+            while (!isPaused() && !gameOver(null)) {
                 if (!resuming) {
                     state.getPlayers().resetPassed();
                     state.getPlayerList().setCurrent(activePlayerId);
@@ -933,13 +977,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 }
                 fireUpdatePlayersEvent();
                 Player player;
-                while (!isPaused() && !isGameOver()) {
+                while (!isPaused() && !gameOver(null)) {
                     try {
                         //if (bookmark == 0)
                             //bookmark = bookmarkState();
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
-                        while (!player.isPassed() && player.isInGame() && !isPaused() && !isGameOver()) {
+                        while (!player.isPassed() && player.isInGame() && !isPaused() && !gameOver(null)) {
                             if (!resuming) {
                                 if (checkStateAndTriggered()) {
                                     applyEffects();
@@ -947,7 +991,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                                 //resetLKI();
                                 applyEffects();
                                 saveState(false);
-                                if (isPaused() || isGameOver()) {
+                                if (isPaused() || gameOver(null)) {
                                     return;
                                 }
                                 // resetPassed should be called if player performs any action
@@ -962,7 +1006,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         }
                         resetShortLivingLKI();
                         resuming = false;
-                        if (isPaused() || isGameOver()) {
+                        if (isPaused() || gameOver(null)) {
                             return;
                         }
                         if (allPassed()) {
@@ -1164,9 +1208,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public boolean checkStateAndTriggered() {
         boolean somethingHappened = false;
         //20091005 - 115.5
-        while (!isPaused() && !this.isGameOver()) {
+        while (!isPaused() && !gameOver(null)) {
             if (!checkStateBasedActions() ) {
-                if (isPaused() || this.isGameOver() || !checkTriggered()) {
+                if (isPaused() || gameOver(null) || !checkTriggered()) {
                     break;
                 }
             }
@@ -1729,7 +1773,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             return;
         }
         player.leave();
-        if (this.isGameOver()) {
+        if (gameOver(null)) {
             // no need to remove objects if only one player is left so the game is over
             return;
         }
