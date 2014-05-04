@@ -137,7 +137,9 @@ class AthreosGodOfPassageReturnEffect extends OneShotEffect<AthreosGodOfPassageR
                     }            
                 }
                 if (opponent == null || !paid) {
-                    controller.moveCardToHandWithInfo(creature, source.getSourceId(), game, null);
+                    if (game.getState().getZone(creature.getId()).equals(Zone.GRAVEYARD)) {
+                        controller.moveCardToHandWithInfo(creature, source.getSourceId(), game, Zone.GRAVEYARD);
+                    }
                 }                
             }
             return true;
