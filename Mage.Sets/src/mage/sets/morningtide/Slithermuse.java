@@ -37,6 +37,7 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -99,7 +100,7 @@ class SlithermuseEffect extends OneShotEffect<SlithermuseEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = (Permanent)game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if (player != null && permanent != null) {
             TargetOpponent target = new TargetOpponent();
             target.setRequired(true);

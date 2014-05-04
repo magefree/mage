@@ -29,6 +29,7 @@ package mage.sets.mercadianmasques;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.CostImpl;
@@ -55,7 +56,7 @@ public class LandGrant extends CardImpl<LandGrant> {
         this.color.setGreen(true);
 
         // If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new LandGrantReavealCost(), new CardsInHandCondition(CardsInHandCondition.CountType.EQUAL_TO, 0),
+        this.addAbility(new AlternativeCostSourceAbility(new LandGrantReavealCost(), new LandGrantCondition(),
             "If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost."));
 
         // Search your library for a Forest card, reveal that card, and put it into your hand. Then shuffle your library.
@@ -69,6 +70,23 @@ public class LandGrant extends CardImpl<LandGrant> {
     @Override
     public LandGrant copy() {
         return new LandGrant(this);
+    }
+}
+
+class LandGrantCondition implements Condition {
+ 
+    @Override
+    public boolean apply(Game game, Ability source) {   
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null && player.getHand().count(new FilterLandCard(), game) == 0) {
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public String toString() {
+        return "If you have no land cards in hand";
     }
 }
 
