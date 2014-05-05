@@ -306,9 +306,17 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
             e.consume();
             Object obj = e.getSource();
             if (obj instanceof Card) {
-                cardEventSource.doubleClick(((Card) obj).getOriginal(), "double-click");
+                if (e.isShiftDown()) {
+                    cardEventSource.shiftDoubleClick(((Card) obj).getOriginal(), "shift-double-click");
+                } else {
+                    cardEventSource.doubleClick(((Card) obj).getOriginal(), "double-click");
+                }
             } else if (obj instanceof MageCard) {
-                cardEventSource.doubleClick(((MageCard) obj).getOriginal(), "double-click");
+                if (e.isShiftDown()) {
+                    cardEventSource.shiftDoubleClick(((MageCard) obj).getOriginal(), "shift-double-click");
+                } else {
+                    cardEventSource.doubleClick(((MageCard) obj).getOriginal(), "double-click");
+                }
             }
         }
     }

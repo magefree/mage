@@ -83,10 +83,10 @@ import mage.view.CardsView;
  */
 public class CardSelector extends javax.swing.JPanel implements ComponentListener {
 
-    private final List<Card> cards = new ArrayList<Card>();
+    private final List<Card> cards = new ArrayList<>();
     private BigCard bigCard;
     private boolean limited = false;
-    private SortSetting sortSetting;
+    private final SortSetting sortSetting;
 
     private final ActionListener searchAction = new ActionListener() {
         @Override
@@ -154,7 +154,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             public void mousePressed(MouseEvent e) {
                 if (e.getClickCount() == 2 && !e.isConsumed()) {
                     e.consume();
-                    jButtonAddToMainActionPerformed(null);
+                    if (e.isShiftDown()) {
+                        jButtonAddToSideboardActionPerformed(null);                        
+                    } else {
+                        jButtonAddToMainActionPerformed(null);
+                    }
                 }
             }
         });

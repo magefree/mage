@@ -162,7 +162,11 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             public void mousePressed(MouseEvent e) {
                 if (e.getClickCount() == 2 && !e.isConsumed()) {
                     e.consume();
-                    handleDoubleClick();
+                    if (e.isShiftDown()) {
+                        handleShiftDoubleClick();
+                    } else {
+                        handleDoubleClick();
+                    }
                 }
             }
         });
@@ -180,7 +184,18 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             }
         }
     }
-
+    
+    public void handleShiftDoubleClick() {
+        if (mainTable.getSelectedRowCount() > 0) {
+            int[] n = mainTable.getSelectedRows();
+            List<Integer> indexes = asList(n);
+            Collections.reverse(indexes);
+            for (Integer index : indexes) {
+                mainModel.shiftDoubleClick(index);
+            }
+        }
+    }
+    
     public ICardGrid getMainModel() {
         return mainModel;
     }

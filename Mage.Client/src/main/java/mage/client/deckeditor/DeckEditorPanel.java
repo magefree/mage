@@ -62,7 +62,6 @@ import static mage.client.constants.Constants.DeckEditorMode.Constructed;
 import static mage.client.constants.Constants.DeckEditorMode.Limited;
 import static mage.client.constants.Constants.DeckEditorMode.Sideboard;
 import mage.client.dialog.AddLandDialog;
-import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -159,7 +158,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             case Sideboard:
                 this.btnSubmit.setVisible(true);
                 if (deck != null) {
-                    this.cardSelector.loadSideboard(new ArrayList<Card>(deck.getSideboard()), this.bigCard);
+                    this.cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), this.bigCard);
                 }
                 // TODO: take from preferences
                 this.cardSelector.switchToGrid();
@@ -205,51 +204,25 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             component.addCardEventListener(
                     new Listener<Event>() {
                 @Override
-                public void event(Event event) {
-                    if (event.getEventName().equals("double-click")) {
-                        SimpleCardView cardView = (SimpleCardView) event.getSource();
-                        CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
-                        Card card = null;
-                        if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
-                            Iterator sideboard = deck.getSideboard().iterator();
-                            while (sideboard.hasNext()) {
-                                card = (Card) sideboard.next();
-                                if (card.getId().equals(cardView.getId())) {
-                                    break;
-                                }
+                public void event(Event event) {                    
+                    switch (event.getEventName()) {                        
+                        case "double-click":
+                            moveSelectorCardToDeck(event);
+                            break;
+                        case "shift-double-click":
+                            if (mode == DeckEditorMode.Constructed) { 
+                                moveSelectorCardToSideboard(event);
+                            } else {
+                                // because in match mode selector is used as sideboard the card goes to deck also for shift click
+                                moveSelectorCardToDeck(event);
                             }
-                        } else {
-                            card = cardInfo != null ? cardInfo.getMockCard() : null;
-                        }
-                        if (card != null) {
-                            deck.getCards().add(card);
-                            if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
-                                deck.getSideboard().remove(card);
-                                cardSelector.removeCard(card.getId());
-                                cardSelector.setCardCount(deck.getSideboard().size());
-                                cardSelector.refresh();
-                            }
-                            if (cardInfoPane instanceof CardInfoPane) {
-                                ((CardInfoPane) cardInfoPane).setCard(new CardView(card), null);
-                            }
-                            hidePopup();
-                        }
-
-                    } else if (event.getEventName().equals("shift-double-click") && mode == DeckEditorMode.Constructed) {
-                        SimpleCardView cardView = (SimpleCardView) event.getSource();
-                        CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
-                        Card card = cardInfo != null ? cardInfo.getMockCard() : null;
-                        if (card != null) {
-                            deck.getSideboard().add(card);
-                        }
-                        if (cardInfoPane instanceof CardInfoPane) {
-                            ((CardInfoPane) cardInfoPane).setCard(new CardView(card), null);
-                        }
-                        hidePopup();
-                    } else if (event.getEventName().equals("remove-main")) {
-                        DeckEditorPanel.this.deckArea.getDeckList().handleDoubleClick();
-                    } else if (event.getEventName().equals("remove-sideboard")) {
-                        DeckEditorPanel.this.deckArea.getSideboardList().handleDoubleClick();
+                            break;
+                        case "remove-main":
+                            DeckEditorPanel.this.deckArea.getDeckList().handleDoubleClick();
+                            break;
+                        case "remove-sideboard":
+                            DeckEditorPanel.this.deckArea.getSideboardList().handleDoubleClick();
+                            break;
                     }
                     refreshDeck();
                 }
@@ -260,31 +233,56 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 new Listener<Event>() {
             @Override
             public void event(Event event) {
-                if (event.getEventName().equals("double-click")) {
-                    SimpleCardView cardView = (SimpleCardView) event.getSource();
-                    for (Card card : deck.getCards()) {
-                        if (card.getId().equals(cardView.getId())) {
-                            deck.getCards().remove(card);
-                            if (mode == DeckEditorMode.Limited || mode == DeckEditorMode.Sideboard) {
-                                deck.getSideboard().add(card);
-                                cardSelector.loadSideboard(new ArrayList<Card>(deck.getSideboard()), getBigCard());
+                if (mode.equals(DeckEditorMode.Constructed)) {
+                    switch (event.getEventName()) {
+                        case "double-click":
+                        {
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getCards()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getCards().remove(card);
+                                    break;
+                                }
                             }
+                            hidePopup();
+                            refreshDeck();
+                            break;
+                        }
+                        case "shift-double-click":
+                        {
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getCards()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getCards().remove(card);
+                                    deck.getSideboard().add(card);
+                                    break;
+                                }
+                            }
+                            hidePopup();
+                            refreshDeck();
                             break;
                         }
                     }
-                    hidePopup();
-                    refreshDeck();
-                } else if (event.getEventName().equals("shift-double-click") && mode == DeckEditorMode.Constructed) {
-                    SimpleCardView cardView = (SimpleCardView) event.getSource();
-                    for (Card card : deck.getCards()) {
-                        if (card.getId().equals(cardView.getId())) {
-                            deck.getCards().remove(card);
-                            deck.getSideboard().add(card);
+                } else {
+                    // constructing phase or sideboarding during match -> card goes always to sideboard
+                    switch (event.getEventName()) {
+                        case "double-click":
+                        case "shift-double-click":
+                        {
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getCards()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getCards().remove(card);
+                                    deck.getSideboard().add(card);
+                                    cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), getBigCard());
+                                    break;
+                                }
+                            }       
+                            hidePopup();
+                            refreshDeck();
                             break;
                         }
-                    }
-                    hidePopup();
-                    refreshDeck();
+                    }                    
                 }
             }
         });
@@ -292,17 +290,51 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 new Listener<Event>() {
             @Override
             public void event(Event event) {
-                if (event.getEventName().equals("double-click")) {
-                    SimpleCardView cardView = (SimpleCardView) event.getSource();
-                    for (Card card : deck.getSideboard()) {
-                        if (card.getId().equals(cardView.getId())) {
-                            deck.getSideboard().remove(card);
-                            deck.getCards().add(card);
+                if (mode.equals(DeckEditorMode.Constructed)) {
+                    // normal edit mode
+                    switch (event.getEventName()) {
+                        case "double-click":
+                            // remove card from sideboard (don't add it to deck)
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getSideboard()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getSideboard().remove(card);
+                                    break;
+                                }
+                            }   
+                            hidePopup();
+                            refreshDeck();
                             break;
-                        }
+                        case "shift-double-click":
+                            // remove card from sideboard
+                            cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getSideboard()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getSideboard().remove(card);
+                                    deck.getCards().add(card);
+                                    break;
+                                }
+                            }   
+                            hidePopup();
+                            refreshDeck();                            
+                            break;
+                    }                    
+                } else {
+                    // construct phase or sideboarding during match
+                    switch (event.getEventName()) {
+                        case "double-click":
+                        case "shift-double-click":                                                        
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getSideboard()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getSideboard().remove(card);
+                                    deck.getCards().add(card);
+                                    break;
+                                }
+                            }   hidePopup();
+                            refreshDeck();
+                            break;
                     }
-                    hidePopup();
-                    refreshDeck();
                 }
             }
         });
@@ -312,6 +344,50 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.repaint();
     }
 
+    
+    private void moveSelectorCardToDeck(Event event) {
+        SimpleCardView cardView = (SimpleCardView) event.getSource();
+        CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
+        Card card = null;
+        if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+            Iterator sideboard = deck.getSideboard().iterator();
+            while (sideboard.hasNext()) {
+                card = (Card) sideboard.next();
+                if (card.getId().equals(cardView.getId())) {
+                    break;
+                }
+            }
+        } else {
+            card = cardInfo != null ? cardInfo.getMockCard() : null;
+        }
+        if (card != null) {
+            deck.getCards().add(card);
+            if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+                deck.getSideboard().remove(card);
+                cardSelector.removeCard(card.getId());
+                cardSelector.setCardCount(deck.getSideboard().size());
+                cardSelector.refresh();
+            }
+            if (cardInfoPane instanceof CardInfoPane) {
+                ((CardInfoPane) cardInfoPane).setCard(new CardView(card), null);
+            }
+            hidePopup();
+        }        
+    }
+
+    private void moveSelectorCardToSideboard(Event event) {
+        SimpleCardView cardView = (SimpleCardView) event.getSource();
+        CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
+        Card card = cardInfo != null ? cardInfo.getMockCard() : null;
+        if (card != null) {
+            deck.getSideboard().add(card);
+        }
+        if (cardInfoPane instanceof CardInfoPane) {
+            ((CardInfoPane) cardInfoPane).setCard(new CardView(card), null);
+        }
+        hidePopup();
+    }
+    
     private void hidePopup() {
         Plugins.getInstance().getActionCallback().mouseExited(null, null);
     }

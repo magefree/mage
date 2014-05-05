@@ -79,9 +79,9 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     protected CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
     protected UUID gameId;
-    private final Map<UUID, CardView> cards = new LinkedHashMap<UUID, CardView>();
-    private final Map<String, Integer> cardsNoCopies = new LinkedHashMap<String, Integer>();
-    private final List<CardView> view = new ArrayList<CardView>();
+    private final Map<UUID, CardView> cards = new LinkedHashMap<>();
+    private final Map<String, Integer> cardsNoCopies = new LinkedHashMap<>();
+    private final List<CardView> view = new ArrayList<>();
     private Dimension cardDimension;
 
     private boolean displayNoCopies = false;
