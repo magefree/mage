@@ -1,13 +1,19 @@
 NAME:Voracious Rage
 1 [JOU:78] Pharika's Chosen
+3 [THS:240] Swamp
 2 [BNG:70] Felhide Brawler
 2 [BNG:153] Ragemonger
+3 [THS:244] Mountain
 2 [THS:195] Kragma Warcaller
+4 [THS:243] Mountain
+4 [THS:242] Mountain
 1 [JOU:102] Lightning Diadem
+2 [THS:241] Swamp
 2 [JOU:103] Magma Spray
 1 [BNG:111] Searing Blood
-3 [JOU:105] Pensive Minotaur
 1 [THS:92] Insatiable Harpy
+3 [JOU:105] Pensive Minotaur
+3 [THS:245] Mountain
 1 [JOU:108] Rollick of Abandon
 1 [THS:121] Fanatic of Mogis
 1 [JOU:70] Felhide Petrifier
@@ -19,8 +25,8 @@ NAME:Voracious Rage
 1 [THS:138] Rageblood Shaman
 1 [JOU:63] Cast into Darkness
 2 [JOU:114] Starfall
-11 [DDM:79] Swamp
-14 [C13:349] Mountain
+3 [THS:239] Swamp
+3 [THS:238] Swamp
 1 [BNG:105] Pinnacle of Rage
 2 [THS:114] Borderland Minotaur
 2 [JOU:83] Spiteful Blow

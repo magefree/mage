@@ -2,14 +2,18 @@ NAME:Fates Foreseen
 1 [THS:45] Crackling Triton
 1 [JOU:38] Font of Fortunes
 2 [BNG:36] Divination
+3 [THS:244] Mountain
+3 [THS:243] Mountain
+4 [THS:242] Mountain
 1 [JOU:32] Cloaked Siren
 2 [JOU:101] Knowledge and Power
 2 [JOU:52] Sigiled Starfish
-1 [JOU:51] Scourge of Fleets
 1 [JOU:103] Magma Spray
-2 [JOU:105] Pensive Minotaur
-1 [JOU:90] Bladetusk Boar
+1 [JOU:51] Scourge of Fleets
+3 [THS:245] Mountain
 2 [BNG:112] Stormcaller of Keranos
+1 [JOU:90] Bladetusk Boar
+2 [JOU:105] Pensive Minotaur
 2 [THS:123] Flamespeaker Adept
 2 [JOU:107] Riddle of Lightning
 1 [JOU:92] Cyclops of Eternal Fury
@@ -23,6 +27,8 @@ NAME:Fates Foreseen
 1 [JOU:43] Interpret the Signs
 2 [JOU:111] Sigiled Skink
 1 [THS:137] Rage of Purphoros
-13 [C13:349] Mountain
+3 [THS:235] Island
+4 [THS:234] Island
+3 [THS:237] Island
+3 [THS:236] Island
 1 [THS:60] Prognostic Sphinx
-13 [DDM:37] Island
