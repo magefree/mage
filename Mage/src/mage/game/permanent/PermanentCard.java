@@ -161,7 +161,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
                             break;
                     }
                     game.setZone(objectId, event.getToZone());
-                    game.fireEvent(event);
+                    game.addSimultaneousEvent(event);
                     if (event.getFromZone().equals(Zone.BATTLEFIELD)) {
                         game.resetForSourceId(getId());
                         game.applyEffects(); // LevelX2: needed to execute isInactive for of custom duration copy effect if source returns directly (e.g. cloudshifted clone)

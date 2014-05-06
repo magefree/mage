@@ -494,11 +494,17 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void handleSimultaneousEvent(Game game) {
         if (!simultaneousEvents.isEmpty()) {
-            for (GameEvent event:simultaneousEvents) {
+            // it can happen, that the events add new simultaneous events, so copy the list before
+            List<GameEvent> eventsToHandle = new ArrayList<>();
+            eventsToHandle.addAll(simultaneousEvents);
+            simultaneousEvents.clear();
+            for (GameEvent event:eventsToHandle) {
                 this.handleEvent(event, game);
             }
-            simultaneousEvents.clear();
         }
+    }
+    public boolean hasSimultaneousEvents() {
+        return !simultaneousEvents.isEmpty();
     }
 
     public void handleEvent(GameEvent event, Game game) {

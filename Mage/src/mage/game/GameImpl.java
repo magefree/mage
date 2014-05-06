@@ -986,7 +986,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         while (!player.isPassed() && player.isInGame() && !isPaused() && !gameOver(null)) {
                             if (!resuming) {
                                 if (checkStateAndTriggered()) {
-                                    applyEffects();
+                                    do {
+                                        state.handleSimultaneousEvent(this);
+                                        applyEffects();
+                                    } while (state.hasSimultaneousEvents());
                                 }
                                 //resetLKI();
                                 applyEffects();
@@ -1057,6 +1060,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         } finally {
             if (top != null) {
                 state.getStack().remove(top);
+                state.handleSimultaneousEvent(this);
             }
         }
     }

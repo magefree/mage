@@ -376,7 +376,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             }
             setControllerId(ownerId);
             game.setZone(objectId, event.getToZone());
-            game.fireEvent(event);
+            game.addSimultaneousEvent(event);
             return game.getState().getZone(objectId) == toZone;
         }
         return false;

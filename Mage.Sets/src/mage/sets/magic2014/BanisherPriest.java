@@ -79,6 +79,8 @@ public class BanisherPriest extends CardImpl<BanisherPriest> {
         // Implemented as triggered effect that doesn't uses the stack (implementation with watcher does not work correctly because if the returned creature
         // has a DiesTriggeredAll ability it triggers for the dying Banish Priest, what shouldn't happen)
         this.addAbility(new BanisherPriestReturnExiledAbility());
+        
+        
 
     }
 

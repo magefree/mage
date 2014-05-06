@@ -145,4 +145,83 @@ public class EvolveTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Experiment One", 3, 3);
 
     }
+    
+    @Test
+    public void testMultipleCreaturesComeIntoPlay() {
+
+        // Cloudfin Raptor gets one +1/+1 because itself and other creatur return from exile
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Judge's Familiar", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Cloudfin Raptor", 1);
+        addCard(Zone.HAND, playerA, "Mizzium Mortars", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 6);
+        addCard(Zone.HAND, playerB, "Banisher Priest", 2);
+        
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banisher Priest");
+        addTarget(playerB, "Cloudfin Raptor");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banisher Priest");
+        addTarget(playerB, "Judge's Familiar");
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mizzium Mortars with overload");
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerB, "Banisher Priest", 0);
+        
+        assertGraveyardCount(playerB, 2);
+        assertGraveyardCount(playerA, 1);
+
+        assertPermanentCount(playerA, "Cloudfin Raptor", 1);
+        assertPermanentCount(playerA, "Judge's Familiar", 1);
+
+        assertPowerToughness(playerA, "Cloudfin Raptor", 1, 2);
+        
+        
+    }    
+    
+    @Test
+    public void testMultipleCreaturesComeIntoPlaySuddenDisappearance() {
+
+        // Sudden Disappearance
+        // Sorcery {5}{W}
+        // Exile all nonland permanents target player controls. Return the exiled cards 
+        // to the battlefield under their owner's control at the beginning of the next end step.
+        
+        // Battering Krasis (2/1) and Crocanura (1/3) get both a +1/+1 counter each other because they come into play at the same time
+
+        addCard(Zone.BATTLEFIELD, playerA, "Battering Krasis", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Crocanura", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 6);
+        addCard(Zone.HAND, playerB, "Sudden Disappearance", 2);
+        
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sudden Disappearance", playerA);
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+       
+        assertGraveyardCount(playerB, 1);
+        assertGraveyardCount(playerA, 0);
+
+        assertPermanentCount(playerA, "Battering Krasis", 1);
+        assertPermanentCount(playerA, "Crocanura", 1);
+
+        assertPowerToughness(playerA, "Battering Krasis", 3, 2);
+        assertPowerToughness(playerA, "Crocanura", 2, 4);
+        
+        
+    }        
+    
+    
 }

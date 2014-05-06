@@ -42,6 +42,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
     public CardTestPlayerBase() {
     }
 
+    @Override
     protected TestPlayer createNewPlayer(String playerName) {
         return createPlayer(playerName);
     }
