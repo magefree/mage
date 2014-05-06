@@ -28,9 +28,6 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -39,7 +36,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactPermanent;
@@ -81,11 +80,14 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
         return new GoblinWelder(this);
     }
        
+
     public class GoblinWelderEffect extends OneShotEffect<GoblinWelderEffect> {
 
         public GoblinWelderEffect() {
             super(Outcome.PutCardInPlay);
+            staticText = "Choose target artifact a player controls and target artifact card in that player's graveyard. If both targets are still legal as this ability resolves, that player simultaneously sacrifices the artifact and returns the artifact card to the battlefield";
         }
+
 
         public GoblinWelderEffect(final GoblinWelderEffect effect) {
             super(effect);
@@ -93,15 +95,19 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent artifact = game.getPermanent(source.getTargets().get(0).getFirstTarget());
+            Permanent artifact = game.getPermanent(getTargetPointer().getFirst(game, source));
             Card card = game.getCard(source.getTargets().get(1).getFirstTarget());
             Player controller = game.getPlayer(source.getControllerId());
-            if (artifact != null && card != null && controller != null) {                
+            if (artifact != null && card != null && controller != null) {
                 Zone currentZone = game.getState().getZone(card.getId());
-                if(artifact.getCardType().contains(CardType.ARTIFACT) && card.getCardType().contains(CardType.ARTIFACT) && currentZone == Zone.GRAVEYARD && card.getOwnerId().equals(artifact.getControllerId()))
-                {
-                    boolean sacrifice = artifact.sacrifice(source.getSourceId(), game);                   
-                    boolean putOnBF = controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                Player owner = game.getPlayer(card.getOwnerId());
+                if (owner != null
+                        && artifact.getCardType().contains(CardType.ARTIFACT)
+                        && card.getCardType().contains(CardType.ARTIFACT)
+                        && currentZone == Zone.GRAVEYARD
+                        && card.getOwnerId().equals(artifact.getControllerId())) {
+                    boolean sacrifice = artifact.sacrifice(source.getSourceId(), game);
+                    boolean putOnBF = owner.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
                     if (sacrifice || putOnBF) {
                         return true;
                     }
@@ -115,10 +121,6 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
             return new GoblinWelderEffect(this);
         }
 
-        @Override
-        public String getText(Mode mode) {
-            return  "Choose " + mode.getTargets().get(0).getTargetName() + " and " + mode.getTargets().get(1).getTargetName() + ". If both targets are still legal as this ability resolves, that player simultaneously sacrifices the artifact and returns the artifact card to the battlefield";
-        }
     }
     
     class GoblinWelderTarget extends TargetCardInGraveyard {
