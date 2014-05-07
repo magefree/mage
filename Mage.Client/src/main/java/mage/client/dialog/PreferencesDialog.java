@@ -383,6 +383,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         main_card.setLayout(new java.awt.BorderLayout());
 
         displayBigCardsInHand.setText("Use big images (for high resolution screens)");
+        displayBigCardsInHand.setToolTipText("Changes the size of the cards shown in hand. Switch this option off if you have a small screen size.");
         displayBigCardsInHand.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         displayBigCardsInHand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -442,6 +443,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         cbGameLogAutoSave.setSelected(true);
         cbGameLogAutoSave.setText("Auto save game logs     (to \"../Mage.Client/gamelogs/\" directory)");
+        cbGameLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
         cbGameLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbGameLogAutoSaveActionPerformed(evt);
@@ -613,6 +615,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 cbUseDefaultImageFolderActionPerformed(evt);
             }
         });
+
+        txtImageFolderPath.setToolTipText("The selected image will be used as background picture. You have to restart MAGE to view a changed background image.");
 
         btnBrowseImageLocation.setText("Browse...");
         btnBrowseImageLocation.addActionListener(new java.awt.event.ActionListener() {

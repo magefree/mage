@@ -112,6 +112,7 @@
                 <Component class="javax.swing.JCheckBox" name="displayBigCardsInHand">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Use big images (for high resolution screens)"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Changes the size of the cards shown in hand. Switch this option off if you have a small screen size."/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
@@ -228,6 +229,7 @@
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Auto save game logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
+                    <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbGameLogAutoSaveActionPerformed"/>
@@ -579,6 +581,9 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtImageFolderPath">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="The selected image will be used as background picture. You have to restart MAGE to view a changed background image."/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBrowseImageLocation">
                   <Properties>
