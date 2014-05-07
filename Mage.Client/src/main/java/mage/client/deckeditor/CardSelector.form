@@ -29,7 +29,7 @@
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Component id="tbTypes" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-              <Component id="cardSelectorScrollPane" pref="220" max="32767" attributes="0"/>
+              <Component id="cardSelectorScrollPane" pref="215" max="32767" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="cardSelectorBottomPanel" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -307,20 +307,20 @@
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="ListView"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalAlignment" type="int" value="10"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[2, 4, 2, 4]"/>
+              <Insets value="[2, 2, 2, 2]"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[51, 21]"/>
+              <Dimension value="[70, 23]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[51, 21]"/>
+              <Dimension value="[70, 23]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[51, 21]"/>
+              <Dimension value="[70, 23]"/>
             </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -331,9 +331,21 @@
         <Component class="javax.swing.JToggleButton" name="jToggleCardView">
           <Properties>
             <Property name="text" type="java.lang.String" value="CardView"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalAlignment" type="int" value="10"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[2, 2, 2, 2]"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[70, 23]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[70, 23]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[70, 23]"/>
+            </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
@@ -350,7 +362,7 @@
       <Properties>
         <Property name="opaque" type="boolean" value="false"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[897, 35]"/>
+          <Dimension value="[897, 40]"/>
         </Property>
       </Properties>
 
@@ -384,10 +396,9 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonAddToMain" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonRemoveFromMain" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonAddToSideboard" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonRemoveFromSideboard" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -397,6 +408,7 @@
                       <Component id="jButtonClean" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cardCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cardCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonAddToMain" alignment="3" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -409,16 +421,16 @@
             <Property name="text" type="java.lang.String" value="+"/>
             <Property name="toolTipText" type="java.lang.String" value="Add selected card to deck"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[2, 10, 2, 10]"/>
+              <Insets value="null"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[42, 23]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[42, 23]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[42, 30]"/>
             </Property>
           </Properties>
           <Events>
@@ -430,16 +442,16 @@
             <Property name="text" type="java.lang.String" value="+S"/>
             <Property name="toolTipText" type="java.lang.String" value="Add to Sideboard"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[2, 4, 2, 4]"/>
+              <Insets value="[2, 0, 2, 0]"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[100, 30]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[10, 30]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[50, 30]"/>
             </Property>
           </Properties>
           <Events>
@@ -490,16 +502,16 @@
             <Property name="text" type="java.lang.String" value="-"/>
             <Property name="toolTipText" type="java.lang.String" value="Remove selected card from deck"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[2, 10, 2, 10]"/>
+              <Insets value="null"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[42, 23]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[42, 23]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[42, 30]"/>
             </Property>
           </Properties>
           <Events>
@@ -511,16 +523,16 @@
             <Property name="text" type="java.lang.String" value="-S"/>
             <Property name="toolTipText" type="java.lang.String" value="Remove from Sideboard"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[2, 4, 2, 4]"/>
+              <Insets value="[2, 0, 2, 0]"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[10, 30]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[100, 30]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 23]"/>
+              <Dimension value="[50, 30]"/>
             </Property>
           </Properties>
           <Events>

@@ -643,13 +643,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         jToggleListView.setSelected(true);
         jToggleListView.setText("ListView");
+        jToggleListView.setBorderPainted(false);
         jToggleListView.setFocusable(false);
-        jToggleListView.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         jToggleListView.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jToggleListView.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        jToggleListView.setMaximumSize(new java.awt.Dimension(51, 21));
-        jToggleListView.setMinimumSize(new java.awt.Dimension(51, 21));
-        jToggleListView.setPreferredSize(new java.awt.Dimension(51, 21));
+        jToggleListView.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        jToggleListView.setMaximumSize(new java.awt.Dimension(70, 23));
+        jToggleListView.setMinimumSize(new java.awt.Dimension(70, 23));
+        jToggleListView.setPreferredSize(new java.awt.Dimension(70, 23));
         jToggleListView.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToggleListView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -659,9 +659,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbTypes.add(jToggleListView);
 
         jToggleCardView.setText("CardView");
+        jToggleCardView.setBorderPainted(false);
         jToggleCardView.setFocusable(false);
-        jToggleCardView.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         jToggleCardView.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToggleCardView.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        jToggleCardView.setMaximumSize(new java.awt.Dimension(70, 23));
+        jToggleCardView.setMinimumSize(new java.awt.Dimension(70, 23));
+        jToggleCardView.setPreferredSize(new java.awt.Dimension(70, 23));
         jToggleCardView.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToggleCardView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -671,14 +675,14 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbTypes.add(jToggleCardView);
 
         cardSelectorBottomPanel.setOpaque(false);
-        cardSelectorBottomPanel.setPreferredSize(new java.awt.Dimension(897, 35));
+        cardSelectorBottomPanel.setPreferredSize(new java.awt.Dimension(897, 40));
 
         jButtonAddToMain.setText("+");
         jButtonAddToMain.setToolTipText("Add selected card to deck");
-        jButtonAddToMain.setMargin(new java.awt.Insets(2, 10, 2, 10));
-        jButtonAddToMain.setMaximumSize(new java.awt.Dimension(36, 23));
-        jButtonAddToMain.setMinimumSize(new java.awt.Dimension(36, 23));
-        jButtonAddToMain.setPreferredSize(new java.awt.Dimension(36, 23));
+        jButtonAddToMain.setMargin(null);
+        jButtonAddToMain.setMaximumSize(new java.awt.Dimension(42, 23));
+        jButtonAddToMain.setMinimumSize(new java.awt.Dimension(42, 23));
+        jButtonAddToMain.setPreferredSize(new java.awt.Dimension(42, 30));
         jButtonAddToMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddToMainActionPerformed(evt);
@@ -687,10 +691,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         jButtonAddToSideboard.setText("+S");
         jButtonAddToSideboard.setToolTipText("Add to Sideboard");
-        jButtonAddToSideboard.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        jButtonAddToSideboard.setMaximumSize(new java.awt.Dimension(36, 23));
-        jButtonAddToSideboard.setMinimumSize(new java.awt.Dimension(36, 23));
-        jButtonAddToSideboard.setPreferredSize(new java.awt.Dimension(36, 23));
+        jButtonAddToSideboard.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        jButtonAddToSideboard.setMaximumSize(new java.awt.Dimension(100, 30));
+        jButtonAddToSideboard.setMinimumSize(new java.awt.Dimension(10, 30));
+        jButtonAddToSideboard.setPreferredSize(new java.awt.Dimension(50, 30));
         jButtonAddToSideboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddToSideboardActionPerformed(evt);
@@ -719,10 +723,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         jButtonRemoveFromMain.setText("-");
         jButtonRemoveFromMain.setToolTipText("Remove selected card from deck");
-        jButtonRemoveFromMain.setMargin(new java.awt.Insets(2, 10, 2, 10));
-        jButtonRemoveFromMain.setMaximumSize(new java.awt.Dimension(36, 23));
-        jButtonRemoveFromMain.setMinimumSize(new java.awt.Dimension(36, 23));
-        jButtonRemoveFromMain.setPreferredSize(new java.awt.Dimension(36, 23));
+        jButtonRemoveFromMain.setMargin(null);
+        jButtonRemoveFromMain.setMaximumSize(new java.awt.Dimension(42, 23));
+        jButtonRemoveFromMain.setMinimumSize(new java.awt.Dimension(42, 23));
+        jButtonRemoveFromMain.setPreferredSize(new java.awt.Dimension(42, 30));
         jButtonRemoveFromMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRemoveFromMainActionPerformed(evt);
@@ -731,10 +735,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         jButtonRemoveFromSideboard.setText("-S");
         jButtonRemoveFromSideboard.setToolTipText("Remove from Sideboard");
-        jButtonRemoveFromSideboard.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        jButtonRemoveFromSideboard.setMaximumSize(new java.awt.Dimension(36, 23));
-        jButtonRemoveFromSideboard.setMinimumSize(new java.awt.Dimension(36, 23));
-        jButtonRemoveFromSideboard.setPreferredSize(new java.awt.Dimension(36, 23));
+        jButtonRemoveFromSideboard.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        jButtonRemoveFromSideboard.setMaximumSize(new java.awt.Dimension(10, 30));
+        jButtonRemoveFromSideboard.setMinimumSize(new java.awt.Dimension(100, 30));
+        jButtonRemoveFromSideboard.setPreferredSize(new java.awt.Dimension(50, 30));
         jButtonRemoveFromSideboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRemoveFromSideboardActionPerformed(evt);
@@ -773,7 +777,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             .addGroup(cardSelectorBottomPanelLayout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAddToMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonRemoveFromMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAddToSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonRemoveFromSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -782,7 +785,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                     .addComponent(jButtonSearch)
                     .addComponent(jButtonClean)
                     .addComponent(cardCountLabel)
-                    .addComponent(cardCount))
+                    .addComponent(cardCount)
+                    .addComponent(jButtonAddToMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -805,7 +809,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addGap(0, 0, 0)
                 .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
