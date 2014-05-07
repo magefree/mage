@@ -49,7 +49,7 @@ import mage.game.permanent.PermanentCard;
 */
 public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
 
-    private Map<String, List<UUID>> sources = new HashMap<String, List<UUID>>();
+    private final Map<String, List<UUID>> sources = new HashMap<>();
 
     public TriggeredAbilities() {}
 
@@ -122,7 +122,7 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
      */
     public void add(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {
         this.add(ability, attachedTo);
-        List<UUID> uuidList = new LinkedList<UUID>();
+        List<UUID> uuidList = new LinkedList<>();
         uuidList.add(sourceId);
         // if the object that gained the ability moves zone, also then the triggered ability must be removed
         uuidList.add(attachedTo.getId());
@@ -145,9 +145,10 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
      * Removes gained abilities by sourceId
      *
      * @param sourceId
+     * @return
      */
     public List<String> removeGainedAbilitiesForSource(UUID sourceId) {
-        List<String> keysToRemove = new ArrayList<String>();
+        List<String> keysToRemove = new ArrayList<>();
 
         for (Map.Entry<String, List<UUID>> entry : sources.entrySet()) {
             if (entry.getValue().contains(sourceId)) {

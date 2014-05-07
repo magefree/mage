@@ -25,39 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetCardInLibrary;
+import mage.constants.Zone;
 
 /**
  *
- * @author Quercitron
+ * @author Loki
  */
-public class VampiricTutor extends CardImpl<VampiricTutor> {
+public class HengeGuardian extends CardImpl<HengeGuardian> {
 
-    public VampiricTutor(UUID ownerId) {
-        super(ownerId, 22, "Vampiric Tutor", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "VIS";
+    public HengeGuardian(UUID ownerId) {
+        super(ownerId, 297, "Henge Guardian", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Dragon");
+        this.subtype.add("Wurm");
 
-        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
 
-        // Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
-        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(), false, true));
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
+        // {2}: Henge Guardian gains trample until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}")));
     }
 
-    public VampiricTutor(final VampiricTutor card) {
+    public HengeGuardian(final HengeGuardian card) {
         super(card);
     }
 
     @Override
-    public VampiricTutor copy() {
-        return new VampiricTutor(this);
+    public HengeGuardian copy() {
+        return new HengeGuardian(this);
     }
 }

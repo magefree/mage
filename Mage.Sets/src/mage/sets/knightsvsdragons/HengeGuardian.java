@@ -25,39 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.sets.knightsvsdragons;
 
 import java.util.UUID;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author Quercitron
+ * @author Loki
  */
-public class VampiricTutor extends CardImpl<VampiricTutor> {
+public class HengeGuardian extends mage.sets.mercadianmasques.HengeGuardian {
 
-    public VampiricTutor(UUID ownerId) {
-        super(ownerId, 22, "Vampiric Tutor", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "VIS";
-
-        this.color.setBlack(true);
-
-        // Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
-        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(), false, true));
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
+    public HengeGuardian(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 55;
+        this.expansionSetCode = "DDG";
     }
 
-    public VampiricTutor(final VampiricTutor card) {
+    public HengeGuardian(final HengeGuardian card) {
         super(card);
     }
 
     @Override
-    public VampiricTutor copy() {
-        return new VampiricTutor(this);
+    public HengeGuardian copy() {
+        return new HengeGuardian(this);
     }
 }
