@@ -52,7 +52,7 @@ public class AegisOfTheGods extends CardImpl<AegisOfTheGods> {
 
         this.color.setWhite(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(1);
 
         // You have hexproof.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield)));
