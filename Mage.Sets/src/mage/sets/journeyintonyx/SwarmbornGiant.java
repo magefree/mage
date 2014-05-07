@@ -44,7 +44,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 
 /**
@@ -105,8 +105,8 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl<SwarmbornGiant
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER) && event.getTargetId().equals(this.getControllerId())) {
-            DamageEvent damageEvent = (DamageEvent) event;
-            return damageEvent.isCombatDamage();
+            DamagedEvent damagedEvent = (DamagedEvent) event;
+            return damagedEvent.isCombatDamage();
         }
         return false;
     }
