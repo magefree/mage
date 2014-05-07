@@ -891,7 +891,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (player != null) {            
             player.quit(this);            
         }else {
-            logger.error(new StringBuilder("player not found - playerId: ").append(playerId));
+            logger.error(new StringBuilder("quit - player not found - playerId: ").append(playerId));
         }
     }
 
@@ -901,7 +901,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (player != null) {
             player.timerTimeout(this);
         } else {
-            logger.error(new StringBuilder("player not found - playerId: ").append(playerId));
+            logger.error(new StringBuilder("timerTimeout - player not found - playerId: ").append(playerId));
         }
     }
 
@@ -911,7 +911,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (player != null) {
             player.idleTimeout(this);
         } else {
-            logger.error(new StringBuilder("player not found - playerId: ").append(playerId));
+            logger.error(new StringBuilder("idleTimeout - player not found - playerId: ").append(playerId));
         }
     }
 
