@@ -145,9 +145,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         mainTable.getColumnModel().getColumn(7).setPreferredWidth(15);
 
         cardSelectorScrollPane.setViewportView(mainTable);
-
         mainTable.setOpaque(false);
-
         cbSortBy.setEnabled(false);
         chkPiles.setEnabled(false);
 
@@ -164,6 +162,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 }
             }
         });
+        
+        jToggleCardView.setToolTipText(jToggleCardView.getToolTipText() + " (works only up to " + CardGrid.MAX_IMAGES + " cards).");
     }
     
     /**
@@ -221,22 +221,22 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         if (limited) {
             ArrayList<Predicate<MageObject>> predicates = new ArrayList<>();
 
-            if (this.rdoGreen.isSelected()) {
+            if (this.tbGreen.isSelected()) {
                 predicates.add(new ColorPredicate(ObjectColor.GREEN));
             }
-            if (this.rdoRed.isSelected()) {
+            if (this.tbRed.isSelected()) {
                 predicates.add(new ColorPredicate(ObjectColor.RED));
             }
-            if (this.rdoBlack.isSelected()) {
+            if (this.tbBlack.isSelected()) {
                 predicates.add(new ColorPredicate(ObjectColor.BLACK));
             }
-            if (this.rdoBlue.isSelected()) {
+            if (this.tbBlue.isSelected()) {
                 predicates.add(new ColorPredicate(ObjectColor.BLUE));
             }
-            if (this.rdoWhite.isSelected()) {
+            if (this.tbWhite.isSelected()) {
                 predicates.add(new ColorPredicate(ObjectColor.WHITE));
             }
-            if (this.rdoColorless.isSelected()) {
+            if (this.tbColorless.isSelected()) {
                 predicates.add(new ColorlessPredicate());
             }
             filter.add(Predicates.or(predicates));
@@ -283,12 +283,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     private CardCriteria buildCriteria() {
         CardCriteria criteria = new CardCriteria();
-        criteria.black(this.rdoBlack.isSelected());
-        criteria.blue(this.rdoBlue.isSelected());
-        criteria.green(this.rdoGreen.isSelected());
-        criteria.red(this.rdoRed.isSelected());
-        criteria.white(this.rdoWhite.isSelected());
-        criteria.colorless(this.rdoColorless.isSelected());
+        criteria.black(this.tbBlack.isSelected());
+        criteria.blue(this.tbBlue.isSelected());
+        criteria.green(this.tbGreen.isSelected());
+        criteria.red(this.tbRed.isSelected());
+        criteria.white(this.tbWhite.isSelected());
+        criteria.colorless(this.tbColorless.isSelected());
 
         if (this.rdoLand.isSelected()) {
             criteria.types(CardType.LAND);
@@ -323,6 +323,42 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         return criteria;
     }
 
+    private boolean inverter(boolean invert, String string1, String string2) {
+        if (invert) {
+            return string1.equals(string2);
+        } else {
+            return !string1.equals(string2);
+        }
+    }
+    
+    private void filterCardsColor(int modifiers, String actionCommand) {
+        // ALT Button was pushed
+        if ((modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK || (modifiers & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
+            boolean invert = (modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK;
+            tbBlack.setSelected(inverter(invert, tbBlack.getActionCommand(), actionCommand));
+            tbBlue.setSelected(inverter(invert, tbBlue.getActionCommand(), actionCommand));
+            tbColorless.setSelected(inverter(invert, tbColorless.getActionCommand(), actionCommand));
+            tbGreen.setSelected(inverter(invert, tbGreen.getActionCommand(), actionCommand));
+            tbRed.setSelected(inverter(invert, tbRed.getActionCommand(), actionCommand));
+            tbWhite.setSelected(inverter(invert, tbWhite.getActionCommand(), actionCommand));
+        } 
+        filterCards();        
+    }
+    
+    private void filterCardsType(int modifiers, String actionCommand) {
+        // ALT Button was pushed
+        if ((modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK) {
+            rdoArtifacts.setSelected(rdoArtifacts.getActionCommand().equals(actionCommand));
+            rdoCreatures.setSelected(rdoCreatures.getActionCommand().equals(actionCommand));
+            rdoEnchantments.setSelected(rdoEnchantments.getActionCommand().equals(actionCommand));
+            rdoInstants.setSelected(rdoInstants.getActionCommand().equals(actionCommand));
+            rdoLand.setSelected(rdoLand.getActionCommand().equals(actionCommand));
+            rdoPlaneswalkers.setSelected(rdoPlaneswalkers.getActionCommand().equals(actionCommand));
+            rdoSorceries.setSelected(rdoSorceries.getActionCommand().equals(actionCommand));
+        } 
+        filterCards();        
+    }
+    
     private void filterCards() {
         FilterCard filter = buildFilter();
         try {
@@ -386,14 +422,17 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgView = new javax.swing.ButtonGroup();
         tbColor = new javax.swing.JToolBar();
-        rdoRed = new javax.swing.JRadioButton();
-        rdoGreen = new javax.swing.JRadioButton();
-        rdoBlue = new javax.swing.JRadioButton();
-        rdoBlack = new javax.swing.JRadioButton();
-        rdoWhite = new javax.swing.JRadioButton();
-        rdoColorless = new javax.swing.JRadioButton();
+        tbRed = new javax.swing.JToggleButton();
+        tbGreen = new javax.swing.JToggleButton();
+        tbBlue = new javax.swing.JToggleButton();
+        tbBlack = new javax.swing.JToggleButton();
+        tbWhite = new javax.swing.JToggleButton();
+        tbColorless = new javax.swing.JToggleButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
         cbExpansionSet = new javax.swing.JComboBox<String>();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         btnBooster = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         tbTypes = new javax.swing.JToolBar();
@@ -404,15 +443,18 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         rdoInstants = new javax.swing.JRadioButton();
         rdoSorceries = new javax.swing.JRadioButton();
         rdoPlaneswalkers = new javax.swing.JRadioButton();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
         chkPiles = new javax.swing.JCheckBox();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
         cbSortBy = new javax.swing.JComboBox<SortBy>();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
         jToggleListView = new javax.swing.JToggleButton();
         jToggleCardView = new javax.swing.JToggleButton();
         cardSelectorScrollPane = new javax.swing.JScrollPane();
         cardSelectorBottomPanel = new javax.swing.JPanel();
         jButtonAddToMain = new javax.swing.JButton();
         jButtonAddToSideboard = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelSearch = new javax.swing.JLabel();
         jTextFieldSearch = new javax.swing.JTextField();
         jButtonSearch = new javax.swing.JButton();
         jButtonClean = new javax.swing.JButton();
@@ -423,80 +465,102 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbColor.setFloatable(false);
         tbColor.setRollover(true);
+        tbColor.setToolTipText("Click with ALT to deselct all other colors or CTRL for invert selection.");
         tbColor.setBorderPainted(false);
         tbColor.setName(""); // NOI18N
 
-        rdoRed.setSelected(true);
-        rdoRed.setText("Red ");
-        rdoRed.setFocusable(false);
-        rdoRed.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoRed.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoRed.addActionListener(new java.awt.event.ActionListener() {
+        tbRed.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_red_off.png")); // NOI18N
+        tbRed.setSelected(true);
+        tbRed.setToolTipText("<html><font color='red'><strong>Red</strong><font/><br/>" 
+            + tbColor.getToolTipText());
+        tbRed.setActionCommand("Red");
+        tbRed.setFocusable(false);
+        tbRed.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbRed.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_red.png")); // NOI18N
+        tbRed.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbRed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoRedActionPerformed(evt);
+                tbRedActionPerformed(evt);
             }
         });
-        tbColor.add(rdoRed);
+        tbColor.add(tbRed);
 
-        rdoGreen.setSelected(true);
-        rdoGreen.setText("Green ");
-        rdoGreen.setFocusable(false);
-        rdoGreen.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoGreen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoGreen.addActionListener(new java.awt.event.ActionListener() {
+        tbGreen.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_green_off.png")); // NOI18N
+        tbGreen.setSelected(true);
+        tbGreen.setToolTipText("<html>Green<br/>" + tbColor.getToolTipText());
+        tbGreen.setActionCommand("Green");
+        tbGreen.setFocusable(false);
+        tbGreen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbGreen.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_green.png")); // NOI18N
+        tbGreen.setVerifyInputWhenFocusTarget(false);
+        tbGreen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbGreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoGreenActionPerformed(evt);
+                tbGreenActionPerformed(evt);
             }
         });
-        tbColor.add(rdoGreen);
+        tbColor.add(tbGreen);
 
-        rdoBlue.setSelected(true);
-        rdoBlue.setText("Blue ");
-        rdoBlue.setFocusable(false);
-        rdoBlue.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoBlue.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoBlue.addActionListener(new java.awt.event.ActionListener() {
+        tbBlue.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_blueOff.png")); // NOI18N
+        tbBlue.setSelected(true);
+        tbBlue.setToolTipText("<html>Blue<br/>" + tbColor.getToolTipText());
+        tbBlue.setActionCommand("Blue");
+        tbBlue.setFocusable(false);
+        tbBlue.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbBlue.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_blue.png")); // NOI18N
+        tbBlue.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbBlue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoBlueActionPerformed(evt);
+                tbBlueActionPerformed(evt);
             }
         });
-        tbColor.add(rdoBlue);
+        tbColor.add(tbBlue);
 
-        rdoBlack.setSelected(true);
-        rdoBlack.setText("Black ");
-        rdoBlack.setFocusable(false);
-        rdoBlack.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoBlack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoBlack.addActionListener(new java.awt.event.ActionListener() {
+        tbBlack.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_black_off.png")); // NOI18N
+        tbBlack.setSelected(true);
+        tbBlack.setToolTipText("<html>Black<br/>" + tbColor.getToolTipText());
+        tbBlack.setActionCommand("Black");
+        tbBlack.setFocusable(false);
+        tbBlack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbBlack.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_black.png")); // NOI18N
+        tbBlack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbBlack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoBlackActionPerformed(evt);
+                tbBlackActionPerformed(evt);
             }
         });
-        tbColor.add(rdoBlack);
+        tbColor.add(tbBlack);
 
-        rdoWhite.setSelected(true);
-        rdoWhite.setText("White ");
-        rdoWhite.setFocusable(false);
-        rdoWhite.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoWhite.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoWhite.addActionListener(new java.awt.event.ActionListener() {
+        tbWhite.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_white_off.png")); // NOI18N
+        tbWhite.setSelected(true);
+        tbWhite.setToolTipText("<html>White<br/>" + tbColor.getToolTipText());
+        tbWhite.setActionCommand("White");
+        tbWhite.setFocusable(false);
+        tbWhite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbWhite.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_white.png")); // NOI18N
+        tbWhite.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbWhite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoWhiteActionPerformed(evt);
+                tbWhiteActionPerformed(evt);
             }
         });
-        tbColor.add(rdoWhite);
+        tbColor.add(tbWhite);
 
-        rdoColorless.setSelected(true);
-        rdoColorless.setText("Colorless ");
-        rdoColorless.setFocusable(false);
-        rdoColorless.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoColorless.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoColorless.addActionListener(new java.awt.event.ActionListener() {
+        tbColorless.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\colorless_off.png")); // NOI18N
+        tbColorless.setSelected(true);
+        tbColorless.setToolTipText("<html>Colorless<br/>" + tbColor.getToolTipText());
+        tbColorless.setActionCommand("Colorless");
+        tbColorless.setFocusable(false);
+        tbColorless.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbColorless.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\colorless.png")); // NOI18N
+        tbColorless.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbColorless.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoColorlessActionPerformed(evt);
+                tbColorlessActionPerformed(evt);
             }
         });
-        tbColor.add(rdoColorless);
+        tbColor.add(tbColorless);
+        tbColor.add(jSeparator1);
 
         cbExpansionSet.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbExpansionSet.setMaximumSize(new java.awt.Dimension(250, 25));
@@ -508,8 +572,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
         tbColor.add(cbExpansionSet);
+        tbColor.add(jSeparator2);
 
         btnBooster.setText("Open Booster");
+        btnBooster.setToolTipText("(CURRENTLY NOT WORKING) Generates a booster of the selected set and adds the cards to the card selector.");
         btnBooster.setFocusable(false);
         btnBooster.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBooster.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -533,6 +599,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbTypes.setFloatable(false);
         tbTypes.setRollover(true);
+        tbTypes.setToolTipText("Click card type with ALT-KEY to only get the clicked card type.");
         tbTypes.setPreferredSize(new java.awt.Dimension(732, 27));
 
         rdoLand.setSelected(true);
@@ -618,8 +685,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
         tbTypes.add(rdoPlaneswalkers);
+        tbTypes.add(jSeparator5);
 
         chkPiles.setText("Piles");
+        chkPiles.setToolTipText("Shows the card in piles by the selected sort.");
         chkPiles.setFocusable(false);
         chkPiles.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         chkPiles.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -629,6 +698,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
         tbTypes.add(chkPiles);
+        tbTypes.add(jSeparator3);
 
         cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbSortBy.setMaximumSize(new java.awt.Dimension(120, 20));
@@ -640,17 +710,19 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
         tbTypes.add(cbSortBy);
+        tbTypes.add(jSeparator4);
 
+        bgView.add(jToggleListView);
+        jToggleListView.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\list_panel.png")); // NOI18N
         jToggleListView.setSelected(true);
-        jToggleListView.setText("ListView");
+        jToggleListView.setToolTipText("Shows the cards as a list.");
         jToggleListView.setBorderPainted(false);
         jToggleListView.setFocusable(false);
         jToggleListView.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToggleListView.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        jToggleListView.setMaximumSize(new java.awt.Dimension(70, 23));
-        jToggleListView.setMinimumSize(new java.awt.Dimension(70, 23));
-        jToggleListView.setPreferredSize(new java.awt.Dimension(70, 23));
-        jToggleListView.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToggleListView.setMaximumSize(new java.awt.Dimension(37, 22));
+        jToggleListView.setMinimumSize(new java.awt.Dimension(37, 22));
+        jToggleListView.setPreferredSize(new java.awt.Dimension(37, 22));
         jToggleListView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleListViewActionPerformed(evt);
@@ -658,14 +730,17 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(jToggleListView);
 
-        jToggleCardView.setText("CardView");
+        bgView.add(jToggleCardView);
+        jToggleCardView.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\card_panel.png")); // NOI18N
+        jToggleCardView.setToolTipText("Shows the card as images.");
         jToggleCardView.setBorderPainted(false);
         jToggleCardView.setFocusable(false);
         jToggleCardView.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToggleCardView.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        jToggleCardView.setMaximumSize(new java.awt.Dimension(70, 23));
-        jToggleCardView.setMinimumSize(new java.awt.Dimension(70, 23));
-        jToggleCardView.setPreferredSize(new java.awt.Dimension(70, 23));
+        jToggleCardView.setMaximumSize(new java.awt.Dimension(37, 22));
+        jToggleCardView.setMinimumSize(new java.awt.Dimension(37, 22));
+        jToggleCardView.setName(""); // NOI18N
+        jToggleCardView.setPreferredSize(new java.awt.Dimension(37, 22));
         jToggleCardView.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToggleCardView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -677,33 +752,37 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         cardSelectorBottomPanel.setOpaque(false);
         cardSelectorBottomPanel.setPreferredSize(new java.awt.Dimension(897, 40));
 
-        jButtonAddToMain.setText("+");
-        jButtonAddToMain.setToolTipText("Add selected card to deck");
+        jButtonAddToMain.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\deck_in.png")); // NOI18N
+        jButtonAddToMain.setToolTipText("Add selected cards to deck");
         jButtonAddToMain.setMargin(null);
         jButtonAddToMain.setMaximumSize(new java.awt.Dimension(42, 23));
         jButtonAddToMain.setMinimumSize(new java.awt.Dimension(42, 23));
-        jButtonAddToMain.setPreferredSize(new java.awt.Dimension(42, 30));
+        jButtonAddToMain.setPreferredSize(new java.awt.Dimension(28, 22));
         jButtonAddToMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddToMainActionPerformed(evt);
             }
         });
 
-        jButtonAddToSideboard.setText("+S");
-        jButtonAddToSideboard.setToolTipText("Add to Sideboard");
+        jButtonAddToSideboard.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\sideboard_in.png")); // NOI18N
+        jButtonAddToSideboard.setToolTipText("Add selected cards to sideboard.");
         jButtonAddToSideboard.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButtonAddToSideboard.setMaximumSize(new java.awt.Dimension(100, 30));
         jButtonAddToSideboard.setMinimumSize(new java.awt.Dimension(10, 30));
-        jButtonAddToSideboard.setPreferredSize(new java.awt.Dimension(50, 30));
+        jButtonAddToSideboard.setPreferredSize(new java.awt.Dimension(28, 22));
         jButtonAddToSideboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddToSideboardActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Search (by name,in rules):");
+        jLabelSearch.setText("Search:");
+        jLabelSearch.setToolTipText("Searches for card names and in the rule text of the card.");
+
+        jTextFieldSearch.setToolTipText("Searches for card names and in the rule text of the card.");
 
         jButtonSearch.setText("Search");
+        jButtonSearch.setToolTipText("Performs the search.");
         jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSearchActionPerformed(evt);
@@ -711,6 +790,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
 
         jButtonClean.setText("Clear");
+        jButtonClean.setToolTipText("Clears the search field.");
         jButtonClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCleanActionPerformed(evt);
@@ -718,27 +798,28 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
 
         cardCountLabel.setText("Card count:");
+        cardCountLabel.setToolTipText("Number of cards currently shown.");
 
         cardCount.setText("0");
 
-        jButtonRemoveFromMain.setText("-");
-        jButtonRemoveFromMain.setToolTipText("Remove selected card from deck");
+        jButtonRemoveFromMain.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\deck_out.png")); // NOI18N
+        jButtonRemoveFromMain.setToolTipText("Remove selected cards from deck");
         jButtonRemoveFromMain.setMargin(null);
         jButtonRemoveFromMain.setMaximumSize(new java.awt.Dimension(42, 23));
         jButtonRemoveFromMain.setMinimumSize(new java.awt.Dimension(42, 23));
-        jButtonRemoveFromMain.setPreferredSize(new java.awt.Dimension(42, 30));
+        jButtonRemoveFromMain.setPreferredSize(new java.awt.Dimension(28, 22));
         jButtonRemoveFromMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRemoveFromMainActionPerformed(evt);
             }
         });
 
-        jButtonRemoveFromSideboard.setText("-S");
-        jButtonRemoveFromSideboard.setToolTipText("Remove from Sideboard");
+        jButtonRemoveFromSideboard.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\sideboard_out.png")); // NOI18N
+        jButtonRemoveFromSideboard.setToolTipText("Remove selected cards from sideboard.");
         jButtonRemoveFromSideboard.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButtonRemoveFromSideboard.setMaximumSize(new java.awt.Dimension(10, 30));
         jButtonRemoveFromSideboard.setMinimumSize(new java.awt.Dimension(100, 30));
-        jButtonRemoveFromSideboard.setPreferredSize(new java.awt.Dimension(50, 30));
+        jButtonRemoveFromSideboard.setPreferredSize(new java.awt.Dimension(28, 22));
         jButtonRemoveFromSideboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRemoveFromSideboardActionPerformed(evt);
@@ -759,7 +840,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRemoveFromSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(jLabelSearch)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
@@ -780,14 +861,14 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                     .addComponent(jButtonRemoveFromMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAddToSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonRemoveFromSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelSearch)
                     .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSearch)
                     .addComponent(jButtonClean)
                     .addComponent(cardCountLabel)
                     .addComponent(cardCount)
                     .addComponent(jButtonAddToMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(4, 4, 4))
         );
 
         cardCountLabel.getAccessibleContext().setAccessibleName("cardCountLabel");
@@ -808,63 +889,39 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addComponent(tbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rdoGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoGreenActionPerformed
-        filterCards();
-    }//GEN-LAST:event_rdoGreenActionPerformed
-
-    private void rdoBlackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBlackActionPerformed
-        filterCards();
-    }//GEN-LAST:event_rdoBlackActionPerformed
-
-    private void rdoWhiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoWhiteActionPerformed
-        filterCards();
-    }//GEN-LAST:event_rdoWhiteActionPerformed
-
-    private void rdoRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoRedActionPerformed
-        filterCards();
-    }//GEN-LAST:event_rdoRedActionPerformed
-
-    private void rdoBlueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBlueActionPerformed
-        filterCards();
-    }//GEN-LAST:event_rdoBlueActionPerformed
-
-    private void rdoColorlessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoColorlessActionPerformed
-        filterCards();
-    }//GEN-LAST:event_rdoColorlessActionPerformed
-
     private void rdoLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoLandActionPerformed
-        filterCards();
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
     }//GEN-LAST:event_rdoLandActionPerformed
 
     private void rdoCreaturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoCreaturesActionPerformed
-        filterCards();
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
     }//GEN-LAST:event_rdoCreaturesActionPerformed
 
     private void rdoArtifactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoArtifactsActionPerformed
-        filterCards();
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
     }//GEN-LAST:event_rdoArtifactsActionPerformed
 
     private void rdoEnchantmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoEnchantmentsActionPerformed
-        filterCards();
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
     }//GEN-LAST:event_rdoEnchantmentsActionPerformed
 
     private void rdoInstantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoInstantsActionPerformed
-        filterCards();
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
     }//GEN-LAST:event_rdoInstantsActionPerformed
 
     private void rdoSorceriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoSorceriesActionPerformed
-        filterCards();
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
     }//GEN-LAST:event_rdoSorceriesActionPerformed
 
     private void rdoPlaneswalkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoPlaneswalkersActionPerformed
-        filterCards();
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
     }//GEN-LAST:event_rdoPlaneswalkersActionPerformed
 
     private void cbExpansionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExpansionSetActionPerformed
@@ -916,8 +973,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void jToggleListViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleListViewActionPerformed
         if (!(currentView instanceof TableModel)) {
             toggleViewMode();
-        } else {
-            jToggleListView.setSelected(true);
         }
         filterCards();
     }//GEN-LAST:event_jToggleListViewActionPerformed
@@ -925,13 +980,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void jToggleCardViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCardViewActionPerformed
         if (currentView.cardsSize() > CardGrid.MAX_IMAGES) {
             jToggleCardView.setSelected(false);
+            jToggleListView.setSelected(true);
             JOptionPane.showMessageDialog(this, new StringBuilder("The card view can't be used for more than ").append(CardGrid.MAX_IMAGES).append(" cards.").toString());
-
         } else {
             if (!(currentView instanceof CardGrid)) {
                 toggleViewMode();
-            } else {
-                jToggleCardView.setSelected(true);
             }
             filterCards();
         }
@@ -985,6 +1038,30 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         filterCards();
     }//GEN-LAST:event_jButtonCleanActionPerformed
 
+    private void tbRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbRedActionPerformed
+        filterCardsColor(evt.getModifiers(), evt.getActionCommand());
+    }//GEN-LAST:event_tbRedActionPerformed
+
+    private void tbGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbGreenActionPerformed
+        filterCardsColor(evt.getModifiers(), evt.getActionCommand());
+    }//GEN-LAST:event_tbGreenActionPerformed
+
+    private void tbBlueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbBlueActionPerformed
+        filterCardsColor(evt.getModifiers(), evt.getActionCommand());
+    }//GEN-LAST:event_tbBlueActionPerformed
+
+    private void tbBlackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbBlackActionPerformed
+        filterCardsColor(evt.getModifiers(), evt.getActionCommand());
+    }//GEN-LAST:event_tbBlackActionPerformed
+
+    private void tbWhiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbWhiteActionPerformed
+        filterCardsColor(evt.getModifiers(), evt.getActionCommand());        
+    }//GEN-LAST:event_tbWhiteActionPerformed
+
+    private void tbColorlessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbColorlessActionPerformed
+        filterCardsColor(evt.getModifiers(), evt.getActionCommand());     
+    }//GEN-LAST:event_tbColorlessActionPerformed
+
     private void toggleViewMode() {
         if (currentView instanceof CardGrid) {
             jToggleListView.setSelected(true);
@@ -1029,6 +1106,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private ICardGrid currentView;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgView;
     private javax.swing.JButton btnBooster;
     private javax.swing.JButton btnClear;
     private javax.swing.JLabel cardCount;
@@ -1044,25 +1122,30 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JButton jButtonRemoveFromMain;
     private javax.swing.JButton jButtonRemoveFromSideboard;
     private javax.swing.JButton jButtonSearch;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelSearch;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JTextField jTextFieldSearch;
     private javax.swing.JToggleButton jToggleCardView;
     private javax.swing.JToggleButton jToggleListView;
     private javax.swing.JRadioButton rdoArtifacts;
-    private javax.swing.JRadioButton rdoBlack;
-    private javax.swing.JRadioButton rdoBlue;
-    private javax.swing.JRadioButton rdoColorless;
     private javax.swing.JRadioButton rdoCreatures;
     private javax.swing.JRadioButton rdoEnchantments;
-    private javax.swing.JRadioButton rdoGreen;
     private javax.swing.JRadioButton rdoInstants;
     private javax.swing.JRadioButton rdoLand;
     private javax.swing.JRadioButton rdoPlaneswalkers;
-    private javax.swing.JRadioButton rdoRed;
     private javax.swing.JRadioButton rdoSorceries;
-    private javax.swing.JRadioButton rdoWhite;
+    private javax.swing.JToggleButton tbBlack;
+    private javax.swing.JToggleButton tbBlue;
     private javax.swing.JToolBar tbColor;
+    private javax.swing.JToggleButton tbColorless;
+    private javax.swing.JToggleButton tbGreen;
+    private javax.swing.JToggleButton tbRed;
     private javax.swing.JToolBar tbTypes;
+    private javax.swing.JToggleButton tbWhite;
     // End of variables declaration//GEN-END:variables
 
     private final mage.client.cards.CardGrid cardGrid;

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="bgView">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -30,7 +34,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="panelCardArea" alignment="0" max="32767" attributes="0"/>
-          <Component id="panelControl" pref="674" max="32767" attributes="0"/>
+          <Component id="panelControl" pref="754" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -38,7 +42,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="panelControl" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-              <Component id="panelCardArea" pref="69" max="32767" attributes="0"/>
+              <Component id="panelCardArea" pref="49" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,23 +78,28 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="cbSortBy" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jToggleListView" min="-2" pref="76" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="jToggleCardView" min="-2" pref="85" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="jToggleListView" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jToggleCardView" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cbSortBy" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCount" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCreatureCount" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblLandCount" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jToggleCardView" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
-                  <Component id="chkPiles" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jToggleListView" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="cbSortBy" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCreatureCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblLandCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkPiles" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jToggleListView" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jToggleCardView" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -147,34 +156,48 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="jToggleListView">
           <Properties>
-            <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="ListView"/>
-            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="bgView"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\list_panel.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Shows the cards as a list."/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[2, 6, 2, 6]"/>
+            </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[45, 21]"/>
+              <Dimension value="[37, 25]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[54, 21]"/>
+              <Dimension value="[37, 25]"/>
             </Property>
+            <Property name="opaque" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[45, 21]"/>
+              <Dimension value="[37, 22]"/>
             </Property>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Switch between image and table view."/>
+          </AccessibilityProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleListViewActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="jToggleCardView">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CardView"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[77, 21]"/>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="bgView"/>
             </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[77, 21]"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\card_panel.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Shows the card as images."/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[2, 6, 2, 6]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[77, 21]"/>
+              <Dimension value="[33, 22]"/>
             </Property>
           </Properties>
           <Events>

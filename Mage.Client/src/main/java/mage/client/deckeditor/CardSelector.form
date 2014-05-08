@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="bgView">
+    </Component>
+  </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -28,10 +32,10 @@
               <Component id="tbColor" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Component id="tbTypes" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-              <Component id="cardSelectorScrollPane" pref="215" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="cardSelectorScrollPane" pref="232" max="32767" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="cardSelectorBottomPanel" min="-2" max="-2" attributes="0"/>
+              <Component id="cardSelectorBottomPanel" min="-2" pref="31" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -41,83 +45,141 @@
       <Properties>
         <Property name="floatable" type="boolean" value="false"/>
         <Property name="rollover" type="boolean" value="true"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click with ALT to deselct all other colors or CTRL for invert selection."/>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JRadioButton" name="rdoRed">
+        <Component class="javax.swing.JToggleButton" name="tbRed">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\color_red_off.png"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Red "/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;&lt;font color=&apos;red&apos;&gt;&lt;strong&gt;Red&lt;/strong&gt;&lt;font/&gt;&lt;br/&gt;&quot; &#xd;&#xa;+ tbColor.getToolTipText()" type="code"/>
+            </Property>
+            <Property name="actionCommand" type="java.lang.String" value="Red"/>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="4"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\color_red.png"/>
+            </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoRedActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbRedActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rdoGreen">
+        <Component class="javax.swing.JToggleButton" name="tbGreen">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\color_green_off.png"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Green "/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;Green&lt;br/&gt;&quot; + tbColor.getToolTipText()" type="code"/>
+            </Property>
+            <Property name="actionCommand" type="java.lang.String" value="Green"/>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="4"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\color_green.png"/>
+            </Property>
+            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoGreenActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbGreenActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rdoBlue">
+        <Component class="javax.swing.JToggleButton" name="tbBlue">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\color_blueOff.png"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Blue "/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;Blue&lt;br/&gt;&quot; + tbColor.getToolTipText()" type="code"/>
+            </Property>
+            <Property name="actionCommand" type="java.lang.String" value="Blue"/>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="4"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\color_blue.png"/>
+            </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoBlueActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbBlueActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rdoBlack">
+        <Component class="javax.swing.JToggleButton" name="tbBlack">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\color_black_off.png"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Black "/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;Black&lt;br/&gt;&quot; + tbColor.getToolTipText()" type="code"/>
+            </Property>
+            <Property name="actionCommand" type="java.lang.String" value="Black"/>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="4"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\color_black.png"/>
+            </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoBlackActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbBlackActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rdoWhite">
+        <Component class="javax.swing.JToggleButton" name="tbWhite">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\color_white_off.png"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="White "/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;White&lt;br/&gt;&quot; + tbColor.getToolTipText()" type="code"/>
+            </Property>
+            <Property name="actionCommand" type="java.lang.String" value="White"/>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="4"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\color_white.png"/>
+            </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoWhiteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbWhiteActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rdoColorless">
+        <Component class="javax.swing.JToggleButton" name="tbColorless">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\colorless_off.png"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Colorless "/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;Colorless&lt;br/&gt;&quot; + tbColor.getToolTipText()" type="code"/>
+            </Property>
+            <Property name="actionCommand" type="java.lang.String" value="Colorless"/>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="4"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\colorless.png"/>
+            </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoColorlessActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbColorlessActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator1">
         </Component>
         <Component class="javax.swing.JComboBox" name="cbExpansionSet">
           <Properties>
@@ -146,9 +208,12 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
+        </Component>
         <Component class="javax.swing.JButton" name="btnBooster">
           <Properties>
             <Property name="text" type="java.lang.String" value="Open Booster"/>
+            <Property name="toolTipText" type="java.lang.String" value="(CURRENTLY NOT WORKING) Generates a booster of the selected set and adds the cards to the card selector."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -174,6 +239,7 @@
       <Properties>
         <Property name="floatable" type="boolean" value="false"/>
         <Property name="rollover" type="boolean" value="true"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click card type with ALT-KEY to only get the clicked card type."/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[732, 27]"/>
         </Property>
@@ -265,9 +331,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoPlaneswalkersActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator5">
+        </Component>
         <Component class="javax.swing.JCheckBox" name="chkPiles">
           <Properties>
             <Property name="text" type="java.lang.String" value="Piles"/>
+            <Property name="toolTipText" type="java.lang.String" value="Shows the card in piles by the selected sort."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -275,6 +344,8 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkPilesActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator3">
         </Component>
         <Component class="javax.swing.JComboBox" name="cbSortBy">
           <Properties>
@@ -303,10 +374,18 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;SortBy&gt;"/>
           </AuxValues>
         </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator4">
+        </Component>
         <Component class="javax.swing.JToggleButton" name="jToggleListView">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="bgView"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\list_panel.png"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="ListView"/>
+            <Property name="toolTipText" type="java.lang.String" value="Shows the cards as a list."/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -314,15 +393,14 @@
               <Insets value="[2, 2, 2, 2]"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[70, 23]"/>
+              <Dimension value="[37, 22]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[70, 23]"/>
+              <Dimension value="[37, 22]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[70, 23]"/>
+              <Dimension value="[37, 22]"/>
             </Property>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleListViewActionPerformed"/>
@@ -330,7 +408,13 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="jToggleCardView">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CardView"/>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="bgView"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\card_panel.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Shows the card as images."/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -338,13 +422,14 @@
               <Insets value="[2, 2, 2, 2]"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[70, 23]"/>
+              <Dimension value="[37, 22]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[70, 23]"/>
+              <Dimension value="[37, 22]"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="" noResource="true"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[70, 23]"/>
+              <Dimension value="[37, 22]"/>
             </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -379,7 +464,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonRemoveFromSideboard" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelSearch" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTextFieldSearch" min="-2" pref="135" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
@@ -402,7 +487,7 @@
                       <Component id="jButtonRemoveFromMain" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonAddToSideboard" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonRemoveFromSideboard" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonClean" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -410,7 +495,7 @@
                       <Component id="cardCount" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonAddToMain" alignment="3" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -418,8 +503,10 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonAddToMain">
           <Properties>
-            <Property name="text" type="java.lang.String" value="+"/>
-            <Property name="toolTipText" type="java.lang.String" value="Add selected card to deck"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\deck_in.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Add selected cards to deck"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="null"/>
             </Property>
@@ -430,7 +517,7 @@
               <Dimension value="[42, 23]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[42, 30]"/>
+              <Dimension value="[28, 22]"/>
             </Property>
           </Properties>
           <Events>
@@ -439,8 +526,10 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAddToSideboard">
           <Properties>
-            <Property name="text" type="java.lang.String" value="+S"/>
-            <Property name="toolTipText" type="java.lang.String" value="Add to Sideboard"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\sideboard_in.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Add selected cards to sideboard."/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 0, 2, 0]"/>
             </Property>
@@ -451,23 +540,28 @@
               <Dimension value="[10, 30]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[50, 30]"/>
+              <Dimension value="[28, 22]"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddToSideboardActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jLabelSearch">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Search (by name,in rules):"/>
+            <Property name="text" type="java.lang.String" value="Search:"/>
+            <Property name="toolTipText" type="java.lang.String" value="Searches for card names and in the rule text of the card."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldSearch">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Searches for card names and in the rule text of the card."/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSearch">
           <Properties>
             <Property name="text" type="java.lang.String" value="Search"/>
+            <Property name="toolTipText" type="java.lang.String" value="Performs the search."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSearchActionPerformed"/>
@@ -476,6 +570,7 @@
         <Component class="javax.swing.JButton" name="jButtonClean">
           <Properties>
             <Property name="text" type="java.lang.String" value="Clear"/>
+            <Property name="toolTipText" type="java.lang.String" value="Clears the search field."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCleanActionPerformed"/>
@@ -484,6 +579,7 @@
         <Component class="javax.swing.JLabel" name="cardCountLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Card count:"/>
+            <Property name="toolTipText" type="java.lang.String" value="Number of cards currently shown."/>
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="cardCountLabel"/>
@@ -499,8 +595,10 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonRemoveFromMain">
           <Properties>
-            <Property name="text" type="java.lang.String" value="-"/>
-            <Property name="toolTipText" type="java.lang.String" value="Remove selected card from deck"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\deck_out.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Remove selected cards from deck"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="null"/>
             </Property>
@@ -511,7 +609,7 @@
               <Dimension value="[42, 23]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[42, 30]"/>
+              <Dimension value="[28, 22]"/>
             </Property>
           </Properties>
           <Events>
@@ -520,8 +618,10 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonRemoveFromSideboard">
           <Properties>
-            <Property name="text" type="java.lang.String" value="-S"/>
-            <Property name="toolTipText" type="java.lang.String" value="Remove from Sideboard"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Projekte\mag\mageRep\localmage\Mage.Client\src\main\resources\buttons\sideboard_out.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Remove selected cards from sideboard."/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 0, 2, 0]"/>
             </Property>
@@ -532,7 +632,7 @@
               <Dimension value="[100, 30]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[50, 30]"/>
+              <Dimension value="[28, 22]"/>
             </Property>
           </Properties>
           <Events>
