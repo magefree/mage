@@ -32,8 +32,8 @@
               <Component id="tbColor" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Component id="tbTypes" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="cardSelectorScrollPane" pref="230" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="cardSelectorScrollPane" pref="237" max="32767" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="cardSelectorBottomPanel" min="-2" pref="31" max="-2" attributes="0"/>
           </Group>
@@ -123,7 +123,7 @@
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;&lt;html&gt;Black&lt;br/&gt;&quot; + tbColor.getToolTipText()" type="code"/>
+              <Connection code="&quot;&lt;html&gt;&lt;font color=&apos;black&apos;&gt;&lt;strong&gt;Black&lt;/strong&gt;&lt;/font&gt;&lt;br/&gt;&quot; + tbColor.getToolTipText()" type="code"/>
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="Black"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -144,7 +144,7 @@
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;&lt;html&gt;White&lt;br/&gt;&quot; + tbColor.getToolTipText()" type="code"/>
+              <Connection code="&quot;&lt;html&lt;font color=&apos;white&apos;&gt;&lt;strong&gt;White&lt;/strong&gt;&lt;/font&gt;&lt;br/&gt;&quot; + tbColor.getToolTipText()" type="code"/>
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="White"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -183,13 +183,8 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="cbExpansionSet">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new DefaultComboBoxModel&lt;&gt;(ConstructedFormats.getTypes())" type="code"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[250, 25]"/>
@@ -197,6 +192,7 @@
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[250, 25]"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="cbExpansionSet" noResource="true"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[250, 25]"/>
             </Property>
@@ -239,7 +235,7 @@
       <Properties>
         <Property name="floatable" type="boolean" value="false"/>
         <Property name="rollover" type="boolean" value="true"/>
-        <Property name="toolTipText" type="java.lang.String" value="Click card type with ALT-KEY to only get the clicked card type."/>
+        <Property name="toolTipText" type="java.lang.String" value="Click with ALT to deselect all other card types or with CTRL to deselect only clicked type." noResource="true"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[732, 27]"/>
         </Property>
@@ -250,6 +246,9 @@
         <Component class="javax.swing.JRadioButton" name="rdoLand">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;&lt;strong&gt;Land&lt;/strong&gt;&lt;br/&gt;&quot; &#xd;&#xa;+ tbTypes.getToolTipText()" type="code"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="label" type="java.lang.String" value="Land "/>
@@ -262,6 +261,9 @@
         <Component class="javax.swing.JRadioButton" name="rdoCreatures">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;&lt;strong&gt;Creatures&lt;/strong&gt;&lt;br/&gt;&quot; &#xd;&#xa;+ tbTypes.getToolTipText()" type="code"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="label" type="java.lang.String" value="Creatures "/>
@@ -275,6 +277,9 @@
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Artifacts "/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;&lt;strong&gt;Artifacts&lt;/strong&gt;&lt;br/&gt;&quot; &#xd;&#xa;+ tbTypes.getToolTipText()" type="code"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -287,6 +292,9 @@
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Enchantments "/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;&lt;strong&gt;Enchantments&lt;/strong&gt;&lt;br/&gt;&quot; &#xd;&#xa;+ tbTypes.getToolTipText()" type="code"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="verticalTextPosition" type="int" value="3"/>

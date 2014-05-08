@@ -207,7 +207,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         this.btnBooster.setVisible(true);
         this.btnClear.setVisible(true);
         this.cbExpansionSet.setVisible(true);
-        cbExpansionSet.setModel(new DefaultComboBoxModel<>(ConstructedFormats.getTypes()));
+//        cbExpansionSet.setModel(new DefaultComboBoxModel<>(ConstructedFormats.getTypes()));
         // Action event on Expansion set triggers loadCards method
         cbExpansionSet.setSelectedIndex(0);
     }
@@ -332,7 +332,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }
     
     private void filterCardsColor(int modifiers, String actionCommand) {
-        // ALT Button was pushed
+        // ALT or CTRL button was pushed
         if ((modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK || (modifiers & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
             boolean invert = (modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK;
             tbBlack.setSelected(inverter(invert, tbBlack.getActionCommand(), actionCommand));
@@ -346,15 +346,16 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }
     
     private void filterCardsType(int modifiers, String actionCommand) {
-        // ALT Button was pushed
-        if ((modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK) {
-            rdoArtifacts.setSelected(rdoArtifacts.getActionCommand().equals(actionCommand));
-            rdoCreatures.setSelected(rdoCreatures.getActionCommand().equals(actionCommand));
-            rdoEnchantments.setSelected(rdoEnchantments.getActionCommand().equals(actionCommand));
-            rdoInstants.setSelected(rdoInstants.getActionCommand().equals(actionCommand));
-            rdoLand.setSelected(rdoLand.getActionCommand().equals(actionCommand));
-            rdoPlaneswalkers.setSelected(rdoPlaneswalkers.getActionCommand().equals(actionCommand));
-            rdoSorceries.setSelected(rdoSorceries.getActionCommand().equals(actionCommand));
+        // ALT or CTRL button was pushed
+        if ((modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK || (modifiers & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
+            boolean invert = (modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK;
+            rdoArtifacts.setSelected(inverter(invert, rdoArtifacts.getActionCommand(), actionCommand));
+            rdoCreatures.setSelected(inverter(invert, rdoCreatures.getActionCommand(), actionCommand));
+            rdoEnchantments.setSelected(inverter(invert, rdoEnchantments.getActionCommand(), actionCommand));
+            rdoInstants.setSelected(inverter(invert, rdoInstants.getActionCommand(), actionCommand));
+            rdoLand.setSelected(inverter(invert, rdoLand.getActionCommand(), actionCommand));
+            rdoPlaneswalkers.setSelected(inverter(invert, rdoPlaneswalkers.getActionCommand(), actionCommand));
+            rdoSorceries.setSelected(inverter(invert, rdoSorceries.getActionCommand(), actionCommand));
         } 
         filterCards();        
     }
@@ -518,7 +519,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbBlack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_black_off.png"))); // NOI18N
         tbBlack.setSelected(true);
-        tbBlack.setToolTipText("<html>Black<br/>" + tbColor.getToolTipText());
+        tbBlack.setToolTipText("<html><font color='black'><strong>Black</strong></font><br/>" + tbColor.getToolTipText());
         tbBlack.setActionCommand("Black");
         tbBlack.setFocusable(false);
         tbBlack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -533,7 +534,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbWhite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_white_off.png"))); // NOI18N
         tbWhite.setSelected(true);
-        tbWhite.setToolTipText("<html>White<br/>" + tbColor.getToolTipText());
+        tbWhite.setToolTipText("<html<font color='white'><strong>White</strong></font><br/>" + tbColor.getToolTipText());
         tbWhite.setActionCommand("White");
         tbWhite.setFocusable(false);
         tbWhite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -562,9 +563,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbColor.add(tbColorless);
         tbColor.add(jSeparator1);
 
-        cbExpansionSet.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbExpansionSet.setModel(new DefaultComboBoxModel<>(ConstructedFormats.getTypes()));
         cbExpansionSet.setMaximumSize(new java.awt.Dimension(250, 25));
         cbExpansionSet.setMinimumSize(new java.awt.Dimension(250, 25));
+        cbExpansionSet.setName("cbExpansionSet"); // NOI18N
         cbExpansionSet.setPreferredSize(new java.awt.Dimension(250, 25));
         cbExpansionSet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -599,10 +601,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbTypes.setFloatable(false);
         tbTypes.setRollover(true);
-        tbTypes.setToolTipText("Click card type with ALT-KEY to only get the clicked card type.");
+        tbTypes.setToolTipText("Click with ALT to deselect all other card types or with CTRL to deselect only clicked type."); // NOI18N
         tbTypes.setPreferredSize(new java.awt.Dimension(732, 27));
 
         rdoLand.setSelected(true);
+        rdoLand.setToolTipText("<html><strong>Land</strong><br/>" 
+            + tbTypes.getToolTipText());
         rdoLand.setFocusable(false);
         rdoLand.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         rdoLand.setLabel("Land ");
@@ -615,6 +619,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbTypes.add(rdoLand);
 
         rdoCreatures.setSelected(true);
+        rdoCreatures.setToolTipText("<html><strong>Creatures</strong><br/>" 
+            + tbTypes.getToolTipText());
         rdoCreatures.setFocusable(false);
         rdoCreatures.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         rdoCreatures.setLabel("Creatures ");
@@ -628,6 +634,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         rdoArtifacts.setSelected(true);
         rdoArtifacts.setText("Artifacts ");
+        rdoArtifacts.setToolTipText("<html><strong>Artifacts</strong><br/>" 
+            + tbTypes.getToolTipText());
         rdoArtifacts.setFocusable(false);
         rdoArtifacts.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         rdoArtifacts.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -640,6 +648,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         rdoEnchantments.setSelected(true);
         rdoEnchantments.setText("Enchantments ");
+        rdoEnchantments.setToolTipText("<html><strong>Enchantments</strong><br/>" 
+            + tbTypes.getToolTipText());
         rdoEnchantments.setFocusable(false);
         rdoEnchantments.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         rdoEnchantments.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -889,8 +899,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addComponent(tbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
