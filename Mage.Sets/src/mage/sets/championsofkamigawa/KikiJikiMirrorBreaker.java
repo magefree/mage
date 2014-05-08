@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
@@ -62,7 +62,7 @@ public class KikiJikiMirrorBreaker extends CardImpl<KikiJikiMirrorBreaker> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nonlegendary creature you control");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Legendary")));
+        filter.add(Predicates.not(new SupertypePredicate("Legendary")));
     }
 
     public KikiJikiMirrorBreaker(UUID ownerId) {
