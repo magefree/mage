@@ -465,18 +465,18 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbColor.setFloatable(false);
         tbColor.setRollover(true);
-        tbColor.setToolTipText("Click with ALT to deselct all other colors or CTRL for invert selection.");
+        tbColor.setToolTipText("Click with ALT to deselect all other colors or with CTRL to invert selection.");
         tbColor.setBorderPainted(false);
         tbColor.setName(""); // NOI18N
 
-        tbRed.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_red_off.png")); // NOI18N
+        tbRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_red_off.png"))); // NOI18N
         tbRed.setSelected(true);
-        tbRed.setToolTipText("<html><font color='red'><strong>Red</strong><font/><br/>" 
+        tbRed.setToolTipText("<html><font color='red'><strong>Red</strong></font><br/>" 
             + tbColor.getToolTipText());
         tbRed.setActionCommand("Red");
         tbRed.setFocusable(false);
         tbRed.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbRed.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_red.png")); // NOI18N
+        tbRed.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_red.png"))); // NOI18N
         tbRed.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbRed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -485,13 +485,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(tbRed);
 
-        tbGreen.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_green_off.png")); // NOI18N
+        tbGreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_green_off.png"))); // NOI18N
         tbGreen.setSelected(true);
-        tbGreen.setToolTipText("<html>Green<br/>" + tbColor.getToolTipText());
+        tbGreen.setToolTipText("<html><font color='Green'><strong>Green</strong></font><br/>" + tbColor.getToolTipText());
         tbGreen.setActionCommand("Green");
         tbGreen.setFocusable(false);
         tbGreen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbGreen.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_green.png")); // NOI18N
+        tbGreen.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_green.png"))); // NOI18N
         tbGreen.setVerifyInputWhenFocusTarget(false);
         tbGreen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbGreen.addActionListener(new java.awt.event.ActionListener() {
@@ -501,13 +501,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(tbGreen);
 
-        tbBlue.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_blueOff.png")); // NOI18N
+        tbBlue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_blueOff.png"))); // NOI18N
         tbBlue.setSelected(true);
-        tbBlue.setToolTipText("<html>Blue<br/>" + tbColor.getToolTipText());
+        tbBlue.setToolTipText("<html><font color='blue'><strong>Blue</strong></font><br/>" + tbColor.getToolTipText());
         tbBlue.setActionCommand("Blue");
         tbBlue.setFocusable(false);
         tbBlue.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbBlue.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_blue.png")); // NOI18N
+        tbBlue.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_blue.png"))); // NOI18N
         tbBlue.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbBlue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -516,13 +516,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(tbBlue);
 
-        tbBlack.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_black_off.png")); // NOI18N
+        tbBlack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_black_off.png"))); // NOI18N
         tbBlack.setSelected(true);
         tbBlack.setToolTipText("<html>Black<br/>" + tbColor.getToolTipText());
         tbBlack.setActionCommand("Black");
         tbBlack.setFocusable(false);
         tbBlack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbBlack.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_black.png")); // NOI18N
+        tbBlack.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_black.png"))); // NOI18N
         tbBlack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbBlack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -531,13 +531,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(tbBlack);
 
-        tbWhite.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_white_off.png")); // NOI18N
+        tbWhite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_white_off.png"))); // NOI18N
         tbWhite.setSelected(true);
         tbWhite.setToolTipText("<html>White<br/>" + tbColor.getToolTipText());
         tbWhite.setActionCommand("White");
         tbWhite.setFocusable(false);
         tbWhite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbWhite.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\color_white.png")); // NOI18N
+        tbWhite.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_white.png"))); // NOI18N
         tbWhite.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbWhite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -546,13 +546,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(tbWhite);
 
-        tbColorless.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\colorless_off.png")); // NOI18N
+        tbColorless.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/colorless_off.png"))); // NOI18N
         tbColorless.setSelected(true);
         tbColorless.setToolTipText("<html>Colorless<br/>" + tbColor.getToolTipText());
         tbColorless.setActionCommand("Colorless");
         tbColorless.setFocusable(false);
         tbColorless.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbColorless.setSelectedIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\colorless.png")); // NOI18N
+        tbColorless.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/colorless.png"))); // NOI18N
         tbColorless.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbColorless.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -713,7 +713,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbTypes.add(jSeparator4);
 
         bgView.add(jToggleListView);
-        jToggleListView.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\list_panel.png")); // NOI18N
+        jToggleListView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/list_panel.png"))); // NOI18N
         jToggleListView.setSelected(true);
         jToggleListView.setToolTipText("Shows the cards as a list.");
         jToggleListView.setBorderPainted(false);
@@ -731,7 +731,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbTypes.add(jToggleListView);
 
         bgView.add(jToggleCardView);
-        jToggleCardView.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\card_panel.png")); // NOI18N
+        jToggleCardView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/card_panel.png"))); // NOI18N
         jToggleCardView.setToolTipText("Shows the card as images.");
         jToggleCardView.setBorderPainted(false);
         jToggleCardView.setFocusable(false);
@@ -752,7 +752,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         cardSelectorBottomPanel.setOpaque(false);
         cardSelectorBottomPanel.setPreferredSize(new java.awt.Dimension(897, 40));
 
-        jButtonAddToMain.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\deck_in.png")); // NOI18N
+        jButtonAddToMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_in.png"))); // NOI18N
         jButtonAddToMain.setToolTipText("Add selected cards to deck");
         jButtonAddToMain.setMargin(null);
         jButtonAddToMain.setMaximumSize(new java.awt.Dimension(42, 23));
@@ -764,7 +764,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        jButtonAddToSideboard.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\sideboard_in.png")); // NOI18N
+        jButtonAddToSideboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/sideboard_in.png"))); // NOI18N
         jButtonAddToSideboard.setToolTipText("Add selected cards to sideboard.");
         jButtonAddToSideboard.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButtonAddToSideboard.setMaximumSize(new java.awt.Dimension(100, 30));
@@ -802,7 +802,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         cardCount.setText("0");
 
-        jButtonRemoveFromMain.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\deck_out.png")); // NOI18N
+        jButtonRemoveFromMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_out.png"))); // NOI18N
         jButtonRemoveFromMain.setToolTipText("Remove selected cards from deck");
         jButtonRemoveFromMain.setMargin(null);
         jButtonRemoveFromMain.setMaximumSize(new java.awt.Dimension(42, 23));
@@ -814,7 +814,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        jButtonRemoveFromSideboard.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\sideboard_out.png")); // NOI18N
+        jButtonRemoveFromSideboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/sideboard_out.png"))); // NOI18N
         jButtonRemoveFromSideboard.setToolTipText("Remove selected cards from sideboard.");
         jButtonRemoveFromSideboard.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButtonRemoveFromSideboard.setMaximumSize(new java.awt.Dimension(10, 30));
@@ -890,7 +890,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addGap(0, 0, 0)
                 .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );

@@ -432,12 +432,11 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         });
 
         bgView.add(jToggleListView);
-        jToggleListView.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\list_panel.png")); // NOI18N
+        jToggleListView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/list_panel.png"))); // NOI18N
         jToggleListView.setToolTipText("Shows the cards as a list.");
         jToggleListView.setMargin(new java.awt.Insets(2, 6, 2, 6));
         jToggleListView.setMaximumSize(new java.awt.Dimension(37, 25));
         jToggleListView.setMinimumSize(new java.awt.Dimension(37, 25));
-        jToggleListView.setOpaque(false);
         jToggleListView.setPreferredSize(new java.awt.Dimension(37, 22));
         jToggleListView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -446,7 +445,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         });
 
         bgView.add(jToggleCardView);
-        jToggleCardView.setIcon(new javax.swing.ImageIcon("D:\\Projekte\\mag\\mageRep\\localmage\\Mage.Client\\src\\main\\resources\\buttons\\card_panel.png")); // NOI18N
+        jToggleCardView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/card_panel.png"))); // NOI18N
         jToggleCardView.setToolTipText("Shows the card as images.");
         jToggleCardView.setMargin(new java.awt.Insets(2, 6, 2, 6));
         jToggleCardView.setPreferredSize(new java.awt.Dimension(33, 22));
@@ -502,14 +501,14 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelCardArea)
-            .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
+            .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelCardArea, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+                .addComponent(panelCardArea, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
