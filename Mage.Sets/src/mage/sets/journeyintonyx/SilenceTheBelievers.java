@@ -27,6 +27,7 @@
  */
 package mage.sets.journeyintonyx;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.StriveAbility;
@@ -93,10 +94,11 @@ class SilenceTheBelieversExileEffect extends OneShotEffect<SilenceTheBelieversEx
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID targetId: this.getTargetPointer().getTargets(null, source)) {
+            for (UUID targetId: this.getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
-                    for (UUID attachmentId: creature.getAttachments()) {
+                    ArrayList<UUID> attachments = new ArrayList<>(creature.getAttachments());
+                    for (UUID attachmentId: attachments) {
                         Permanent attachment = game.getPermanent(attachmentId);
                         if (attachment != null && attachment.getSubtype().contains("Aura")) {
                             controller.moveCardToExileWithInfo(attachment, null, null, source.getSourceId(), game, Zone.BATTLEFIELD);
