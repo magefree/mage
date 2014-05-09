@@ -47,8 +47,11 @@ import java.util.List;
 import java.util.UUID;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import mage.constants.CardType;
 import mage.cards.MageCard;
+import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.SortSetting;
 import mage.client.deckeditor.table.TableModel;
@@ -57,6 +60,7 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.*;
 import mage.client.util.Event;
+import mage.client.util.gui.TableSpinnerEditor;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.mage.card.arcane.CardPanel;
@@ -66,7 +70,7 @@ import org.mage.card.arcane.CardPanel;
  * @author BetaSteward_at_googlemail.com
  */
 public class CardsList extends javax.swing.JPanel implements MouseListener, ICardGrid {
-
+   
     protected CardEventSource cardEventSource = new CardEventSource();
     private Dimension cardDimension;
     private CardsView cards;
@@ -77,7 +81,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     private TableModel mainModel;
     private JTable mainTable;
     private ICardGrid currentView;
-
+        
     /** Creates new form Cards */
     public CardsList() {
         initComponents();
@@ -172,6 +176,30 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         mainModel.setUpdateCountsCallback(new UpdateCountsCallback(lblCount, lblCreatureCount, lblLandCount));
     }
 
+    // if you use the deck ediot to build a free deck, numbers can be set directly in deck and sideboard
+    public void setDeckEditorMode(DeckEditorMode mode) {
+        if (mode.equals(DeckEditorMode.FREE_BUILDING)) {
+            // activate spinner for card number change
+            mainModel.setNumberEditable(true);
+            TableColumnModel tcm = mainTable.getColumnModel();
+            TableColumn tc = tcm.getColumn(0);            
+            tc.setMaxWidth(55);
+            tc.setMinWidth(55);
+            tc.setPreferredWidth(55);
+            tc.setCellEditor(new TableSpinnerEditor(this));            
+        }
+    }
+    
+    public void handleSetNumber(int number) {
+        if (mainTable.getSelectedRowCount() == 1) {
+            int[] n = mainTable.getSelectedRows();
+            List<Integer> indexes = asList(n);
+            for (Integer index : indexes) {
+                 mainModel.setNumber(index, number);
+            }
+        }        
+    }
+    
     public void handleDoubleClick() {
         if (mainTable.getSelectedRowCount() > 0) {
             int[] n = mainTable.getSelectedRows();
@@ -398,7 +426,10 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setMinimumSize(new java.awt.Dimension(30, 30));
-        setPreferredSize((!Beans.isDesignTime())?(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)):(new Dimension(100, 100)));
+        setPreferredSize((!Beans.isDesignTime())?
+            (new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight))
+            :(new Dimension(600, 600)));
+        setRequestFocusEnabled(false);
 
         panelControl.setMaximumSize(new java.awt.Dimension(32767, 23));
         panelControl.setMinimumSize(new java.awt.Dimension(616, 23));
@@ -474,7 +505,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                 .addComponent(jToggleListView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleCardView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(195, 195, 195))
+                .addGap(287, 287, 287))
         );
         panelControlLayout.setVerticalGroup(
             panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,14 +532,14 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelCardArea)
-            .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+            .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelCardArea, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                .addComponent(panelCardArea, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

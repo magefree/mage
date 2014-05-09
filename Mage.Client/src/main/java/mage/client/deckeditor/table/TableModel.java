@@ -87,13 +87,18 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     private boolean displayNoCopies = false;
     private UpdateCountsCallback updateCountsCallback;
 
-    private final String column[] = { "", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set" };
+    private final String column[] = { "Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set" };
 
     private SortSetting sortSetting;
     private int recentSortedColumn;
     private boolean recentAscending;
 
-
+    private boolean numberEditable;
+            
+    public TableModel() {
+        this.numberEditable = false;
+    }    
+    
     public void clear() {
         this.clearCardEventListeners();
         this.clearCards();
@@ -303,6 +308,11 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         cardEventSource.clearListeners();
     }
 
+    public void setNumber(int index, int number) {
+        CardView card = view.get(index);
+        cardEventSource.setNumber(card, "set-number", number);
+    }
+
     public void doubleClick(int index) {
         CardView card = view.get(index);
         cardEventSource.doubleClick(card, "double-click");
@@ -326,9 +336,13 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
         table.addKeyListener(new KeyListener() {
             @Override
-            public void keyPressed(KeyEvent ev) {}
+            public void keyPressed(KeyEvent ev) {
+            }
+
             @Override
-            public void keyTyped(KeyEvent ev) {}
+            public void keyTyped(KeyEvent ev) {
+            }
+
             @Override
             public void keyReleased(KeyEvent ev) {
                 int row = table.getSelectedRow();
@@ -431,8 +445,22 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         this.updateCountsCallback = callback;
     }
 
+    public void setNumberEditable(boolean numberEditable) {
+        this.numberEditable = numberEditable;
+    }
+
     @Override
     public int cardsSize() {
         return cards.size();
     }
+
+    @Override
+    public boolean isCellEditable(int row, int col) {
+        if (numberEditable && col == 0) {
+            return true;
+        }
+        return super.isCellEditable(row, col); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

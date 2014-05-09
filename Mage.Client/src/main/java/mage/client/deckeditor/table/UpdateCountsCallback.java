@@ -8,9 +8,9 @@ import javax.swing.*;
  */
 public class UpdateCountsCallback {
 
-    private javax.swing.JLabel lblCount;
-    private javax.swing.JLabel lblCreatureCount;
-    private javax.swing.JLabel lblLandCount;
+    private final javax.swing.JLabel lblCount;
+    private final javax.swing.JLabel lblCreatureCount;
+    private final javax.swing.JLabel lblLandCount;
 
     public UpdateCountsCallback(JLabel count, JLabel creatures, JLabel lands) {
         this.lblCount = count;

@@ -35,12 +35,18 @@ import java.io.Serializable;
  * @author BetaSteward_at_googlemail.com
  */
 public class Event implements Serializable {
-    private Object source;
-    private String eventName;
+    private final Object source;
+    private final String eventName;
+    private final int number;
 
     public Event(Object source, String eventName) {
+        this(source, eventName, 0);
+    }
+    
+    public Event(Object source, String eventName, int number) {
         this.source = source;
         this.eventName = eventName;
+        this.number = number;
     }
 
     public Object getSource() {
@@ -50,4 +56,9 @@ public class Event implements Serializable {
     public String getEventName() {
         return eventName;
     }
+
+    public int getNumber() {
+        return number;
+    }
+    
 }

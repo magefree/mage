@@ -88,9 +88,9 @@ public final class Constants {
     }
 
     public enum DeckEditorMode {
-        Constructed,
-        Limited,
-        Sideboard
+        FREE_BUILDING,
+        LIMITED_BUILDING,
+        SIDEBOARDING
     }
 
     public enum SortBy {
@@ -101,7 +101,7 @@ public final class Constants {
         NAME ("Name"),
         UNSORTED ("Unsorted");
 
-        private String text;
+        private final String text;
 
         SortBy(String text) {
             this.text = text;
@@ -113,18 +113,19 @@ public final class Constants {
         }
 
         public static SortBy getByString(String text) {
-            if (text.equals("Casting Cost")) {
-                return CASTING_COST;
-            } else if (text.equals("Rarity")) {
-                return RARITY;
-            } else if (text.equals("Color")) {
-                return COLOR;
-            }else if (text.equals("Color Detailed")) {
-                return COLOR_DETAILED;
-            }else if (text.equals("Name")) {
-                return NAME;
-            }else  {
-                return UNSORTED;
+            switch (text) {
+                case "Casting Cost":
+                    return CASTING_COST;
+                case "Rarity":
+                    return RARITY;
+                case "Color":
+                    return COLOR;
+                case "Color Detailed":
+                    return COLOR_DETAILED;
+                case "Name":
+                    return NAME;
+                default:
+                    return UNSORTED;
             }
         }
 

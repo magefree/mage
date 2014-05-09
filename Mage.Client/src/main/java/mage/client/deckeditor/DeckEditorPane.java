@@ -56,7 +56,7 @@ public class DeckEditorPane extends MagePane {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         boolean initialized = false;
         if (Plugins.getInstance().isThemePluginLoaded()) {
-            Map<String, JComponent> uiMap = new HashMap<String, JComponent>();
+            Map<String, JComponent> uiMap = new HashMap<>();
             JComponent container = Plugins.getInstance().updateTablePanel(uiMap);
             if (container != null) {
                 deckEditorPanel1 = new mage.client.deckeditor.DeckEditorPanel();
@@ -73,7 +73,7 @@ public class DeckEditorPane extends MagePane {
     }
 
     public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
-        if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
             this.setTitle("Deck Editor - " + tableId.toString());
         }
         else {

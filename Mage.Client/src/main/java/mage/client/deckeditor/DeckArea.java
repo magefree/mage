@@ -38,6 +38,7 @@ package mage.client.deckeditor;
 import mage.cards.decks.Deck;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardsList;
+import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.view.CardsView;
@@ -69,6 +70,11 @@ public class DeckArea extends javax.swing.JPanel {
         this.sideboardList.setVisible(show);
     }
 
+    public void setDeckEditorMode(DeckEditorMode mode) {
+        this.deckList.setDeckEditorMode(mode);
+        this.sideboardList.setDeckEditorMode(mode);
+    }
+    
     public void loadDeck(Deck deck, BigCard bigCard) {
         deckList.loadCards(new CardsView(deck.getCards()), bigCard, null);
         if (sideboardList.isVisible()) {

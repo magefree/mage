@@ -469,11 +469,11 @@ public class CallbackClientImpl implements CallbackClient {
     }
 
     protected void sideboard(Deck deck, UUID tableId, int time) {
-        frame.showDeckEditor(DeckEditorMode.Sideboard, deck, tableId, time);
+        frame.showDeckEditor(DeckEditorMode.SIDEBOARDING, deck, tableId, time);
     }
 
     protected void construct(Deck deck, UUID tableId, int time) {
-        frame.showDeckEditor(DeckEditorMode.Limited, deck, tableId, time);
+        frame.showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
     }
 
     private void handleException(Exception ex) {

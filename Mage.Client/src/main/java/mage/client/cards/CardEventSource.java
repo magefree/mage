@@ -49,6 +49,10 @@ public class CardEventSource implements EventSource<Event>, Serializable {
         dispatcher.addListener(listener);
     }
 
+    public void setNumber(SimpleCardView card, String message, int number) {
+        dispatcher.fireEvent(new Event(card, message, number));
+    }
+
     public void doubleClick(SimpleCardView card, String message) {
         dispatcher.fireEvent(new Event(card, message));
     }

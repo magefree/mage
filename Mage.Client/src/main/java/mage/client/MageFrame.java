@@ -879,7 +879,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeckEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
-        showDeckEditor(DeckEditorMode.Constructed, null, null, 0);
+        showDeckEditor(DeckEditorMode.FREE_BUILDING, null, null, 0);
     }//GEN-LAST:event_btnDeckEditorActionPerformed
 
     private void btnGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGamesActionPerformed
@@ -994,8 +994,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             // close & remove sideboarding or construction pane if open
             if (window instanceof DeckEditorPane) {
                 DeckEditorPane deckEditorPane = (DeckEditorPane) window;
-                if (deckEditorPane.getDeckEditorMode().equals(DeckEditorMode.Limited) 
-                        || deckEditorPane.getDeckEditorMode().equals(DeckEditorMode.Sideboard)){
+                if (deckEditorPane.getDeckEditorMode().equals(DeckEditorMode.LIMITED_BUILDING) 
+                        || deckEditorPane.getDeckEditorMode().equals(DeckEditorMode.SIDEBOARDING)){
                     deckEditorPane.removeFrame();
                 }
             }
@@ -1005,7 +1005,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
         String name;
-        if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
             name = "Deck Editor - " + tableId.toString();
         } else {
             if (deck != null) {

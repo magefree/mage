@@ -36,6 +36,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -58,9 +60,9 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
-import static mage.client.constants.Constants.DeckEditorMode.Constructed;
-import static mage.client.constants.Constants.DeckEditorMode.Limited;
-import static mage.client.constants.Constants.DeckEditorMode.Sideboard;
+import static mage.client.constants.Constants.DeckEditorMode.FREE_BUILDING;
+import static mage.client.constants.Constants.DeckEditorMode.LIMITED_BUILDING;
+import static mage.client.constants.Constants.DeckEditorMode.SIDEBOARDING;
 import mage.client.dialog.AddLandDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
@@ -151,11 +153,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.tableId = tableId;
         this.mode = mode;
         this.btnAddLand.setVisible(false);
+        
         switch (mode) {
-            case Limited:
+            case LIMITED_BUILDING:
                 this.btnAddLand.setVisible(true);
                 this.txtTimeRemaining.setVisible(true);
-            case Sideboard:
+            case SIDEBOARDING:
                 this.btnSubmit.setVisible(true);
                 if (deck != null) {
                     this.cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), this.bigCard);
@@ -180,7 +183,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     }
                 }
                 break;
-            case Constructed:
+            case FREE_BUILDING:
                 this.btnSubmit.setVisible(false);
                 this.cardSelector.loadCards(this.bigCard);
                 //this.cardTableSelector.loadCards(this.bigCard);
@@ -194,6 +197,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 break;
         }
         init();
+        this.deckArea.setDeckEditorMode(mode);
     }
 
     private void init() {
@@ -210,7 +214,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             moveSelectorCardToDeck(event);
                             break;
                         case "shift-double-click":
-                            if (mode == DeckEditorMode.Constructed) { 
+                            if (mode == DeckEditorMode.FREE_BUILDING) { 
                                 moveSelectorCardToSideboard(event);
                             } else {
                                 // because in match mode selector is used as sideboard the card goes to deck also for shift click
@@ -233,7 +237,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 new Listener<Event>() {
             @Override
             public void event(Event event) {
-                if (mode.equals(DeckEditorMode.Constructed)) {
+                if (mode.equals(DeckEditorMode.FREE_BUILDING)) {
                     switch (event.getEventName()) {
                         case "double-click":
                         {
@@ -262,6 +266,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             refreshDeck();
                             break;
                         }
+                        case "set-number":
+                        {
+                            setCardNumberToCardsList(event, deck.getCards());
+                        }                        
                     }
                 } else {
                     // constructing phase or sideboarding during match -> card goes always to sideboard
@@ -290,7 +298,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 new Listener<Event>() {
             @Override
             public void event(Event event) {
-                if (mode.equals(DeckEditorMode.Constructed)) {
+                if (mode.equals(DeckEditorMode.FREE_BUILDING)) {
                     // normal edit mode
                     switch (event.getEventName()) {
                         case "double-click":
@@ -318,6 +326,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             hidePopup();
                             refreshDeck();                            
                             break;
+                        case "set-number":
+                        {
+                            setCardNumberToCardsList(event, deck.getSideboard());
+                        }                             
                     }                    
                 } else {
                     // construct phase or sideboarding during match
@@ -344,12 +356,43 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.repaint();
     }
 
+    private void setCardNumberToCardsList(Event event, Set<Card> cards) {
+        CardView cardView = (CardView) event.getSource();
+        int numberToSet = event.getNumber();
+        int cardsFound = 0;
+        List<Card> toDelete = new ArrayList<>();
+        for (Card card : cards) {
+            if (card.getName().equals(cardView.getName()) 
+                    && card.getCardNumber() == cardView.getCardNumber() 
+                    && card.getExpansionSetCode().equals(cardView.getExpansionSetCode())) {
+                cardsFound++;
+                if (cardsFound > numberToSet) {
+                    toDelete.add(card);
+
+                }
+            }
+        }                            
+        if (toDelete.isEmpty()) {
+            // add cards
+            CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
+            for (int i = cardsFound; i < numberToSet; i++) {
+                cards.add(cardInfo.getMockCard());
+            }                                     
+        } else {
+            // remove cards 
+            for (Card card: toDelete) {
+                cards.remove(card);
+            }
+        }
+        hidePopup();
+        refreshDeck();
+    }
     
     private void moveSelectorCardToDeck(Event event) {
         SimpleCardView cardView = (SimpleCardView) event.getSource();
         CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
         Card card = null;
-        if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
             Iterator sideboard = deck.getSideboard().iterator();
             while (sideboard.hasNext()) {
                 card = (Card) sideboard.next();
@@ -362,7 +405,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
         if (card != null) {
             deck.getCards().add(card);
-            if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+            if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
                 deck.getSideboard().remove(card);
                 cardSelector.removeCard(card.getId());
                 cardSelector.setCardCount(deck.getSideboard().size());
@@ -685,7 +728,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
             for (Card card : deck.getCards()) {
                 deck.getSideboard().add(card);
             }
