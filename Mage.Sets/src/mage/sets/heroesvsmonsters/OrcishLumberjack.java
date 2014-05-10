@@ -33,7 +33,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -44,14 +44,23 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author LevelX2
  */
 public class OrcishLumberjack extends CardImpl<OrcishLumberjack> {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
+
+    static {
+        filter.add(new SubtypePredicate("Forest"));
+    }
 
     public OrcishLumberjack(UUID ownerId) {
         super(ownerId, 44, "Orcish Lumberjack", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
@@ -64,7 +73,7 @@ public class OrcishLumberjack extends CardImpl<OrcishLumberjack> {
 
         // {tap}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G} to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new OrcishLumberjackManaEffect(),  new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
 
     }
@@ -100,7 +109,7 @@ class OrcishLumberjackManaEffect extends ManaEffect <OrcishLumberjackManaEffect>
         Player player = game.getPlayer(source.getControllerId());
         if(player != null){
             Choice manaChoice = new ChoiceImpl();
-            Set<String> choices = new LinkedHashSet<String>();
+            Set<String> choices = new LinkedHashSet<>();
             choices.add("Red");
             choices.add("Green");
             manaChoice.setChoices(choices);
@@ -113,11 +122,13 @@ class OrcishLumberjackManaEffect extends ManaEffect <OrcishLumberjackManaEffect>
                         return false;
                     }
                 }
-
-                if (manaChoice.getChoice().equals("Green")) {
-                    mana.addGreen();
-                } else if (manaChoice.getChoice().equals("Red")) {
-                    mana.addRed();
+                switch (manaChoice.getChoice()) {
+                    case "Green":
+                        mana.addGreen();
+                        break;
+                    case "Red":
+                        mana.addRed();
+                        break;
                 }
                 player.getManaPool().addMana(mana, game, source);
             }
