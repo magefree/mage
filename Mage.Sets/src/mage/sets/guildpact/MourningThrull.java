@@ -29,19 +29,11 @@ package mage.sets.guildpact;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.players.Player;
 
 /**
  *
@@ -62,7 +54,7 @@ public class MourningThrull extends CardImpl<MourningThrull> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Mourning Thrull deals damage, you gain that much life.
-        this.addAbility(new MourningThrullTriggeredAbility());
+        this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
     }
 
     public MourningThrull(final MourningThrull card) {
@@ -72,71 +64,5 @@ public class MourningThrull extends CardImpl<MourningThrull> {
     @Override
     public MourningThrull copy() {
         return new MourningThrull(this);
-    }
-}
-
-class MourningThrullTriggeredAbility extends TriggeredAbilityImpl<MourningThrullTriggeredAbility> {
-
-    public MourningThrullTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MourningThrullEffect(), false);
-    }
-
-    public MourningThrullTriggeredAbility(final MourningThrullTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MourningThrullTriggeredAbility copy() {
-        return new MourningThrullTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGED_CREATURE)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLANESWALKER)) {
-            if (event.getSourceId().equals(this.getSourceId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals damage, " + super.getRule();
-    }
-}
-
-class MourningThrullEffect extends OneShotEffect<MourningThrullEffect> {
-
-    public MourningThrullEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain that much life";
-    }
-
-    public MourningThrullEffect(final MourningThrullEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MourningThrullEffect copy() {
-        return new MourningThrullEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                controller.gainLife(amount, game);
-                return true;
-            }
-        }
-        return false;
     }
 }

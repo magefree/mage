@@ -97,10 +97,11 @@ public class ProwlAbility extends StaticAbility<ProwlAbility> implements Alterna
             cost.reset();
         }
     }
+
     @Override
-    public boolean isActivated() {
+    public boolean isActivated(Ability ability, Game game) {
         for (AlternativeCost2 cost: prowlCosts) {
-            if(cost.isActivated()) {
+            if(cost.isActivated(game)) {
                 return true;
             }
         }
@@ -148,7 +149,7 @@ public class ProwlAbility extends StaticAbility<ProwlAbility> implements Alterna
                 }
             }
         }
-        return isActivated();
+        return isActivated(ability, game);
     }
 
     @Override
@@ -173,11 +174,11 @@ public class ProwlAbility extends StaticAbility<ProwlAbility> implements Alterna
     }
 
     @Override
-    public String getCastMessageSuffix() {
+    public String getCastMessageSuffix(Game game) {
         StringBuilder sb = new StringBuilder();
         int position = 0;
         for (AlternativeCost2 cost : prowlCosts) {
-            if (cost.isActivated()) {
+            if (cost.isActivated(game)) {
                 sb.append(cost.getCastSuffixMessage(position));
                 ++position;
             }

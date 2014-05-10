@@ -28,24 +28,16 @@
 package mage.sets.modernmasters;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
 
 /**
  *
@@ -66,7 +58,7 @@ public class StirThePride extends CardImpl<StirThePride> {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2,2, Duration.EndOfTurn));
         // or until end of turn, creatures you control gain "Whenever this creature deals damage, you gain that much life."
         Mode mode = new Mode();
-        Effect effect = new GainAbilityControlledEffect(new StirThePrideTriggeredAbility(), Duration.EndOfTurn);
+        Effect effect = new GainAbilityControlledEffect(new DealsDamageGainLifeSourceTriggeredAbility(), Duration.EndOfTurn);
         effect.setText("until end of turn, creatures you control gain \"Whenever this creature deals damage, you gain that much life.\"");
         mode.getEffects().add(effect);
         this.getSpellAbility().getModes().addMode(mode);
@@ -83,73 +75,5 @@ public class StirThePride extends CardImpl<StirThePride> {
     @Override
     public StirThePride copy() {
         return new StirThePride(this);
-    }
-}
-
-class StirThePrideTriggeredAbility extends TriggeredAbilityImpl<StirThePrideTriggeredAbility> {
-
-    public StirThePrideTriggeredAbility() {
-            super(Zone.BATTLEFIELD, new StirThePrideGainLifeEffect(), false);
-    }
-
-    public StirThePrideTriggeredAbility(final StirThePrideTriggeredAbility ability) {
-            super(ability);
-    }
-
-    @Override
-    public StirThePrideTriggeredAbility copy() {
-            return new StirThePrideTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType().equals(EventType.DAMAGED_CREATURE)
-                    || event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                    || event.getType().equals(GameEvent.EventType.DAMAGED_PLANESWALKER)) {
-                if (event.getSourceId().equals(this.getSourceId())) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setValue("damage", event.getAmount());
-                    }
-                    return true;
-                }
-
-            }
-            return false;
-    }
-
-    @Override
-    public String getRule() {
-            return "Whenever {this} deals damage, " + super.getRule();
-    }
-
-}
-
-class StirThePrideGainLifeEffect extends OneShotEffect<StirThePrideGainLifeEffect> {
-
-    public StirThePrideGainLifeEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain that much life";
-    }
-
-    public StirThePrideGainLifeEffect(final StirThePrideGainLifeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StirThePrideGainLifeEffect copy() {
-        return new StirThePrideGainLifeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                controller.gainLife(amount, game);
-                return true;
-            }
-        }
-        return false;
     }
 }

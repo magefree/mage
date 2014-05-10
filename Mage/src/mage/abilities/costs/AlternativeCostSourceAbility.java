@@ -124,13 +124,13 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
                 }
             }
         }
-        return isActivated();
+        return isActivated(ability, game);
     }
 
     @Override
-    public boolean isActivated() {
+    public boolean isActivated(Ability source, Game game) {
         for (AlternativeCost2 cost : alternateCosts) {
-            if (cost.isActivated()) {
+            if (cost.isActivated(game)) {
                 return true;
             }
         }
@@ -138,7 +138,7 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
     }
 
     @Override
-    public String getCastMessageSuffix() {
+    public String getCastMessageSuffix(Game game) {
         return alternateCosts.isEmpty() ? " without paying it's mana costs":" using alternative casting costs";
     }
 

@@ -59,7 +59,7 @@ public class ProwlCondition implements Condition {
         if (card != null) {
             for (Ability ability: card.getAbilities()) {
                 if (ability instanceof ProwlAbility) {
-                    if(((ProwlAbility) ability).isActivated()) {
+                    if(((ProwlAbility) ability).isActivated(source, game)) {
                         return true;
                     }
                 }

@@ -43,7 +43,6 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -185,7 +184,7 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
         kickerCost.activate();
         // remember zone change counter
         if (zoneChangeCounter == 0) {
-            Card card = game.getCard(sourceId);
+            Card card = game.getCard(getSourceId());
             if (card != null) {
                 zoneChangeCounter = card.getZoneChangeCounter();
             } else {

@@ -34,11 +34,14 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
@@ -55,10 +58,20 @@ public class RagingRavine extends CardImpl<RagingRavine> {
     public RagingRavine(UUID ownerId) {
         super(ownerId, 141, "Raging Ravine", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "WWK";
+
+        // Raging Ravine enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+        // Tap: Add Red or Green to your mana pool.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new RedManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new RagingRavineToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{2}{R}{G}")));
+        Effect effect = new BecomesCreatureSourceEffect(new RagingRavineToken(), "land", Duration.EndOfTurn);
+        effect.setText("Until end of turn, {this} becomes a 3/3 red and green Elemental creature");
+        // {2}{R}{G}: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with "Whenever this creature attacks, put a +1/+1 counter on it." It's still a land.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{R}{G}"));
+        effect = new GainAbilitySourceEffect(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false), Duration.EndOfTurn);
+        effect.setText("with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public RagingRavine(final RagingRavine card) {
@@ -75,13 +88,12 @@ public class RagingRavine extends CardImpl<RagingRavine> {
 class RagingRavineToken extends Token {
 
     public RagingRavineToken() {
-        super("", "3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\"");
+        super("", "3/3 red and green Elemental creature");
         cardType.add(CardType.CREATURE);
         subtype.add("Elemental");
         color.setRed(true);
         color.setGreen(true);
         power = new MageInt(3);
-        toughness = new MageInt(3);
-        addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        toughness = new MageInt(3);        
     }
 }

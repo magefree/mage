@@ -28,6 +28,8 @@
 
 package mage.abilities.costs;
 
+import mage.game.Game;
+
 /**
  * Alternative costs
  * 
@@ -136,10 +138,11 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
     /**
      * Returns if the cost was activated
      *
+     * @param game
      * @return
      */
     @Override
-    public boolean isActivated(){
+    public boolean isActivated(Game game){
         return activated;
     };
 

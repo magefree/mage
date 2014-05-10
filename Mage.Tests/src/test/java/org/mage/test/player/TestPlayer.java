@@ -360,7 +360,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                         }
                     } else {
                         if (ability.getTargets().size() == 0) {
-                            throw new AssertionError("Ability has no targets.");
+                            throw new AssertionError("Ability has no targets. " + ability.toString());
                         }
                         for (UUID id: ability.getTargets().get(0).possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
                             MageObject object = game.getObject(id);

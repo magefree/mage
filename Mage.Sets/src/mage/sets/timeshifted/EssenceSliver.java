@@ -73,7 +73,7 @@ public class EssenceSliver extends CardImpl<EssenceSliver> {
 
 class DealsDamageTriggeredAbility extends TriggeredAbilityImpl<DealsDamageTriggeredAbility> {
 
-    private boolean setTargetPointer;
+    private final boolean setTargetPointer;
 
     public DealsDamageTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);

@@ -59,7 +59,7 @@ public class EvokedCondition implements Condition {
         if (card != null) {
             for (Ability ability: card.getAbilities()) {
                 if (ability instanceof EvokeAbility) {
-                    if(((EvokeAbility) ability).isActivated()) {
+                    if(((EvokeAbility) ability).isActivated(source, game)) {
                         return true;
                     }
                 }

@@ -59,13 +59,17 @@ public interface AlternativeSourceCosts {
     
     /**
      * Was the alternative cost activated
+     * @param game
+     * @param source
      * @return
      */
-    boolean isActivated();
+    boolean isActivated(Ability source, Game game);
     
     /**
      * Suffix string to use for game log
+     * @param game
      * @return 
      */
-    String getCastMessageSuffix();
+    String getCastMessageSuffix(Game game);
+
 }

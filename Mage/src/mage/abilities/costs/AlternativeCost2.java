@@ -27,6 +27,8 @@
  */
 package mage.abilities.costs;
 
+import mage.game.Game;
+
 /**
  *
  * @author LevelX2
@@ -78,9 +80,10 @@ public interface AlternativeCost2 extends Cost {
     /**
      * Returns if the cost was activated
      *
+     * @param game
      * @return
      */
-    boolean isActivated();
+    boolean isActivated(Game game);
 
     Cost getCost();
 

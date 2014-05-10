@@ -31,8 +31,6 @@ package mage.abilities.keyword;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -48,6 +46,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -61,7 +60,10 @@ public class EvokeAbility extends StaticAbility<EvokeAbility> implements Alterna
     protected static final String EVOKE_KEYWORD = "Evoke";
     protected static final String REMINDER_TEXT = "(You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)";
 
-    protected List<AlternativeCost2> evokeCosts = new LinkedList<AlternativeCost2>();
+    protected List<AlternativeCost2> evokeCosts = new LinkedList<>();
+
+    // needed to check activation status, if card changes zone after casting it
+    private   int zoneChangeCounter = 0;
 
     public EvokeAbility(Card card, String manaString) {
         super(Zone.ALL, null);
@@ -76,6 +78,7 @@ public class EvokeAbility extends StaticAbility<EvokeAbility> implements Alterna
     public EvokeAbility(final EvokeAbility ability) {
        super(ability);
        this.evokeCosts.addAll(ability.evokeCosts);
+       this.zoneChangeCounter = ability.zoneChangeCounter;
     }
 
     @Override
@@ -93,12 +96,17 @@ public class EvokeAbility extends StaticAbility<EvokeAbility> implements Alterna
         for (AlternativeCost2 cost: evokeCosts) {
             cost.reset();
         }
+        zoneChangeCounter = 0;
     }
+
     @Override
-    public boolean isActivated() {
-        for (AlternativeCost2 cost: evokeCosts) {
-            if(cost.isActivated()) {
-                return true;
+    public boolean isActivated(Ability ability, Game game) {
+        Card card = game.getCard(sourceId);
+        if (card != null && card.getZoneChangeCounter() <= zoneChangeCounter +1) {
+            for (AlternativeCost2 cost: evokeCosts) {
+                if(cost.isActivated(game)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -118,7 +126,7 @@ public class EvokeAbility extends StaticAbility<EvokeAbility> implements Alterna
                 for (AlternativeCost2 evokeCost: evokeCosts) {
                     if (evokeCost.canPay(sourceId, controllerId, game) &&
                         player.chooseUse(Outcome.Benefit, new StringBuilder(EVOKE_KEYWORD).append(" the creature for ").append(evokeCost.getText(true)).append(" ?").toString(), game)) {
-                        evokeCost.activate();
+                        activateEvoke(evokeCost, game);
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
                         for (Iterator it = ((Costs) evokeCost).iterator(); it.hasNext();) {
@@ -133,7 +141,20 @@ public class EvokeAbility extends StaticAbility<EvokeAbility> implements Alterna
                 }
             }
         }
-        return isActivated();
+        return isActivated(ability, game);
+    }
+
+    private void activateEvoke(AlternativeCost2 cost, Game game) {
+        cost.activate();
+        // remember zone change counter
+        if (zoneChangeCounter == 0) {
+            Card card = game.getCard(getSourceId());
+            if (card != null) {
+                zoneChangeCounter = card.getZoneChangeCounter();
+            } else {
+                throw new IllegalArgumentException("Evoke source card not found");
+            }
+        }
     }
 
     @Override
@@ -158,11 +179,11 @@ public class EvokeAbility extends StaticAbility<EvokeAbility> implements Alterna
     }
 
     @Override
-    public String getCastMessageSuffix() {
+    public String getCastMessageSuffix(Game game) {
         StringBuilder sb = new StringBuilder();
         int position = 0;
         for (AlternativeCost2 cost : evokeCosts) {
-            if (cost.isActivated()) {
+            if (cost.isActivated(game)) {
                 sb.append(cost.getCastSuffixMessage(position));
                 ++position;
             }
