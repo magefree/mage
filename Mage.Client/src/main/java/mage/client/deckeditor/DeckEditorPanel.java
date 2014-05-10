@@ -213,7 +213,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         case "double-click":
                             moveSelectorCardToDeck(event);
                             break;
-                        case "shift-double-click":
+                        case "alt-double-click":
                             if (mode == DeckEditorMode.FREE_BUILDING) { 
                                 moveSelectorCardToSideboard(event);
                             } else {
@@ -252,7 +252,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             refreshDeck();
                             break;
                         }
-                        case "shift-double-click":
+                        case "alt-double-click":
                         {
                             SimpleCardView cardView = (SimpleCardView) event.getSource();
                             for (Card card : deck.getCards()) {
@@ -275,7 +275,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     // constructing phase or sideboarding during match -> card goes always to sideboard
                     switch (event.getEventName()) {
                         case "double-click":
-                        case "shift-double-click":
+                        case "alt-double-click":
                         {
                             SimpleCardView cardView = (SimpleCardView) event.getSource();
                             for (Card card : deck.getCards()) {
@@ -313,7 +313,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             hidePopup();
                             refreshDeck();
                             break;
-                        case "shift-double-click":
+                        case "alt-double-click":
                             // remove card from sideboard
                             cardView = (SimpleCardView) event.getSource();
                             for (Card card : deck.getSideboard()) {
@@ -335,7 +335,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     // construct phase or sideboarding during match
                     switch (event.getEventName()) {
                         case "double-click":
-                        case "shift-double-click":                                                        
+                        case "alt-double-click":
                             SimpleCardView cardView = (SimpleCardView) event.getSource();
                             for (Card card : deck.getSideboard()) {
                                 if (card.getId().equals(cardView.getId())) {

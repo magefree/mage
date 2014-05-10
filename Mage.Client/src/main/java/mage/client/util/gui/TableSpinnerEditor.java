@@ -54,7 +54,7 @@ public class TableSpinnerEditor extends DefaultCellEditor {
     JSpinner.DefaultEditor editor;
     JTextField textField;
     boolean valueSet;
-    private JTable lastTable;
+    private JTable table;
     private int lastRow = -1;
     private int currentRow = -1;
     private int lastOriginalHeigh;
@@ -75,6 +75,14 @@ public class TableSpinnerEditor extends DefaultCellEditor {
         textField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
+                lastOriginalHeigh = currentOriginalHeigh;
+                currentOriginalHeigh = 0;
+                lastRow = currentRow;
+                currentRow = -1;
+                if (lastOriginalHeigh < NEEDED_HIGH) {
+                    table.setRowHeight(lastRow, NEEDED_HIGH);
+                }
+
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
@@ -86,7 +94,8 @@ public class TableSpinnerEditor extends DefaultCellEditor {
             }
 
             @Override
-            public void focusLost(FocusEvent fe) {   
+            public void focusLost(FocusEvent fe) {
+                resetRow();
                 if (currentRow < 0) {
                     stopCellEditing();
                 }                
@@ -100,31 +109,23 @@ public class TableSpinnerEditor extends DefaultCellEditor {
         });
     }
 
-    private synchronized void setTableRowHeigh(JTable table, int row) {
-        if (lastRow >=0 && lastOriginalHeigh < NEEDED_HIGH) {            
-            lastTable.setRowHeight(lastRow, lastOriginalHeigh);            
-        }   
-        if (row >= 0 && currentRow >=0) {
-            lastRow = currentRow;
-            lastOriginalHeigh = currentOriginalHeigh;
-            currentRow = -1;
-            currentOriginalHeigh = -1;
-        } 
-        lastRow = -1;
-        if (table != null) {
-            lastTable = table;
-            currentOriginalHeigh = table.getRowHeight(row);
-            currentRow = row; 
-            if (currentOriginalHeigh < NEEDED_HIGH) {
-                lastTable.setRowHeight(currentRow, NEEDED_HIGH);
-            }
-        } 
+    private synchronized void resetRow() {
+        if (lastRow >= 0) {
+            cardsList.handleSetNumber((Integer) spinner.getValue());
+            table.setRowHeight(lastRow, lastOriginalHeigh);
+            lastRow = -1;
+        }
     }
     
     // Prepares the spinner component and returns it.
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        setTableRowHeigh(table, row);
+        if (this.table == null) {
+            this.table = table;
+        }
+        currentOriginalHeigh = table.getRowHeight(row);
+        currentRow = row;
+        
         if (!valueSet) {
             spinner.setValue(value);
         }
@@ -159,9 +160,9 @@ public class TableSpinnerEditor extends DefaultCellEditor {
     public boolean stopCellEditing() {
         try {
             editor.commitEdit();
-            spinner.commitEdit();
-            cardsList.handleSetNumber((Integer) spinner.getValue());
-            setTableRowHeigh(null, 0);
+            spinner.commitEdit();            
+            resetRow();
+
         } catch (java.text.ParseException e) {
             JOptionPane.showMessageDialog(null,
                     "Invalid value, discarding.");

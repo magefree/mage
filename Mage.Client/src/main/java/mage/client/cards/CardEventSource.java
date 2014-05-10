@@ -57,7 +57,7 @@ public class CardEventSource implements EventSource<Event>, Serializable {
         dispatcher.fireEvent(new Event(card, message));
     }
 
-    public void shiftDoubleClick(SimpleCardView card, String message) {
+    public void altDoubleClick(SimpleCardView card, String message) {
         dispatcher.fireEvent(new Event(card, message));
     }
 

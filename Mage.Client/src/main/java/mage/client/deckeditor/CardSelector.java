@@ -144,6 +144,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         mainTable.getColumnModel().getColumn(6).setPreferredWidth(15);
         mainTable.getColumnModel().getColumn(7).setPreferredWidth(15);
 
+        // mainTable.setToolTipText(cardSelectorScrollPane.getToolTipText());
         cardSelectorScrollPane.setViewportView(mainTable);
         mainTable.setOpaque(false);
         cbSortBy.setEnabled(false);
@@ -154,7 +155,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             public void mousePressed(MouseEvent e) {
                 if (e.getClickCount() == 2 && !e.isConsumed()) {
                     e.consume();
-                    if (e.isShiftDown()) {
+                    if (e.isAltDown()) {
                         jButtonAddToSideboardActionPerformed(null);                        
                     } else {
                         jButtonAddToMainActionPerformed(null);
@@ -242,25 +243,25 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             filter.add(Predicates.or(predicates));
 
             predicates.clear();
-            if (this.rdoLand.isSelected()) {
+            if (this.tbLand.isSelected()) {
                 predicates.add(new CardTypePredicate(CardType.LAND));
             }
-            if (this.rdoArtifacts.isSelected()) {
+            if (this.tbArifiacts.isSelected()) {
                 predicates.add(new CardTypePredicate(CardType.ARTIFACT));
             }
-            if (this.rdoCreatures.isSelected()) {
+            if (this.tbCreatures.isSelected()) {
                 predicates.add(new CardTypePredicate(CardType.CREATURE));
             }
-            if (this.rdoEnchantments.isSelected()) {
+            if (this.tbEnchantments.isSelected()) {
                 predicates.add(new CardTypePredicate(CardType.ENCHANTMENT));
             }
-            if (this.rdoInstants.isSelected()) {
+            if (this.tbInstants.isSelected()) {
                 predicates.add(new CardTypePredicate(CardType.INSTANT));
             }
-            if (this.rdoSorceries.isSelected()) {
+            if (this.tbSorceries.isSelected()) {
                 predicates.add(new CardTypePredicate(CardType.SORCERY));
             }
-            if (this.rdoPlaneswalkers.isSelected()) {
+            if (this.tbPlaneswalkers.isSelected()) {
                 predicates.add(new CardTypePredicate(CardType.PLANESWALKER));
             }
             filter.add(Predicates.or(predicates));
@@ -290,25 +291,25 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         criteria.white(this.tbWhite.isSelected());
         criteria.colorless(this.tbColorless.isSelected());
 
-        if (this.rdoLand.isSelected()) {
+        if (this.tbLand.isSelected()) {
             criteria.types(CardType.LAND);
         }
-        if (this.rdoArtifacts.isSelected()) {
+        if (this.tbArifiacts.isSelected()) {
             criteria.types(CardType.ARTIFACT);
         }
-        if (this.rdoCreatures.isSelected()) {
+        if (this.tbCreatures.isSelected()) {
             criteria.types(CardType.CREATURE);
         }
-        if (this.rdoEnchantments.isSelected()) {
+        if (this.tbEnchantments.isSelected()) {
             criteria.types(CardType.ENCHANTMENT);
         }
-        if (this.rdoInstants.isSelected()) {
+        if (this.tbInstants.isSelected()) {
             criteria.types(CardType.INSTANT);
         }
-        if (this.rdoSorceries.isSelected()) {
+        if (this.tbSorceries.isSelected()) {
             criteria.types(CardType.SORCERY);
         }
-        if (this.rdoPlaneswalkers.isSelected()) {
+        if (this.tbPlaneswalkers.isSelected()) {
             criteria.types(CardType.PLANESWALKER);
         }
 
@@ -349,13 +350,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         // ALT or CTRL button was pushed
         if ((modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK || (modifiers & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
             boolean invert = (modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK;
-            rdoArtifacts.setSelected(inverter(invert, rdoArtifacts.getActionCommand(), actionCommand));
-            rdoCreatures.setSelected(inverter(invert, rdoCreatures.getActionCommand(), actionCommand));
-            rdoEnchantments.setSelected(inverter(invert, rdoEnchantments.getActionCommand(), actionCommand));
-            rdoInstants.setSelected(inverter(invert, rdoInstants.getActionCommand(), actionCommand));
-            rdoLand.setSelected(inverter(invert, rdoLand.getActionCommand(), actionCommand));
-            rdoPlaneswalkers.setSelected(inverter(invert, rdoPlaneswalkers.getActionCommand(), actionCommand));
-            rdoSorceries.setSelected(inverter(invert, rdoSorceries.getActionCommand(), actionCommand));
+            tbArifiacts.setSelected(inverter(invert, tbArifiacts.getActionCommand(), actionCommand));
+            tbCreatures.setSelected(inverter(invert, tbCreatures.getActionCommand(), actionCommand));
+            tbEnchantments.setSelected(inverter(invert, tbEnchantments.getActionCommand(), actionCommand));
+            tbInstants.setSelected(inverter(invert, tbInstants.getActionCommand(), actionCommand));
+            tbLand.setSelected(inverter(invert, tbLand.getActionCommand(), actionCommand));
+            tbPlaneswalkers.setSelected(inverter(invert, tbPlaneswalkers.getActionCommand(), actionCommand));
+            tbSorceries.setSelected(inverter(invert, tbSorceries.getActionCommand(), actionCommand));
         } 
         filterCards();        
     }
@@ -437,14 +438,14 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         btnBooster = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         tbTypes = new javax.swing.JToolBar();
-        rdoLand = new javax.swing.JRadioButton();
-        rdoCreatures = new javax.swing.JRadioButton();
-        rdoArtifacts = new javax.swing.JRadioButton();
-        rdoEnchantments = new javax.swing.JRadioButton();
-        rdoInstants = new javax.swing.JRadioButton();
-        rdoSorceries = new javax.swing.JRadioButton();
-        rdoPlaneswalkers = new javax.swing.JRadioButton();
-        jSeparator5 = new javax.swing.JToolBar.Separator();
+        tbLand = new javax.swing.JToggleButton();
+        tbCreatures = new javax.swing.JToggleButton();
+        tbArifiacts = new javax.swing.JToggleButton();
+        tbSorceries = new javax.swing.JToggleButton();
+        tbInstants = new javax.swing.JToggleButton();
+        tbEnchantments = new javax.swing.JToggleButton();
+        tbPlaneswalkers = new javax.swing.JToggleButton();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
         chkPiles = new javax.swing.JCheckBox();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         cbSortBy = new javax.swing.JComboBox<SortBy>();
@@ -466,7 +467,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbColor.setFloatable(false);
         tbColor.setRollover(true);
-        tbColor.setToolTipText("Click with ALT to deselect all other colors or with CTRL to invert selection.");
+        tbColor.setToolTipText("Hold the ALT-key while clicking to deselect all other colors or hold the CTRL-key to select only all other colors.");
         tbColor.setBorderPainted(false);
         tbColor.setName(""); // NOI18N
 
@@ -534,7 +535,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbWhite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_white_off.png"))); // NOI18N
         tbWhite.setSelected(true);
-        tbWhite.setToolTipText("<html<font color='white'><strong>White</strong></font><br/>" + tbColor.getToolTipText());
+        tbWhite.setToolTipText("<html><font color='grey'><strong>White</strong></font><br/>" + tbColor.getToolTipText());
         tbWhite.setActionCommand("White");
         tbWhite.setFocusable(false);
         tbWhite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -601,101 +602,114 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbTypes.setFloatable(false);
         tbTypes.setRollover(true);
-        tbTypes.setToolTipText("Click with ALT to deselect all other card types or with CTRL to deselect only clicked type."); // NOI18N
+        tbTypes.setToolTipText("Hold the ALT-key while clicking to deselect all other card types or hold the CTRL-key to only select all other card types."); // NOI18N
         tbTypes.setPreferredSize(new java.awt.Dimension(732, 27));
 
-        rdoLand.setSelected(true);
-        rdoLand.setToolTipText("<html><strong>Land</strong><br/>" 
+        tbLand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_land.png"))); // NOI18N
+        tbLand.setSelected(true);
+        tbLand.setToolTipText("<html><strong>Land</strong><br/>" 
             + tbTypes.getToolTipText());
-        rdoLand.setFocusable(false);
-        rdoLand.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoLand.setLabel("Land ");
-        rdoLand.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoLand.addActionListener(new java.awt.event.ActionListener() {
+        tbLand.setActionCommand("Lands");
+        tbLand.setFocusable(false);
+        tbLand.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbLand.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbLand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoLandActionPerformed(evt);
+                tbLandActionPerformed(evt);
             }
         });
-        tbTypes.add(rdoLand);
+        tbTypes.add(tbLand);
 
-        rdoCreatures.setSelected(true);
-        rdoCreatures.setToolTipText("<html><strong>Creatures</strong><br/>" 
+        tbCreatures.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_creatures.png"))); // NOI18N
+        tbCreatures.setSelected(true);
+        tbCreatures.setToolTipText("<html><strong>Creatures</strong><br/>" 
             + tbTypes.getToolTipText());
-        rdoCreatures.setFocusable(false);
-        rdoCreatures.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoCreatures.setLabel("Creatures ");
-        rdoCreatures.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoCreatures.addActionListener(new java.awt.event.ActionListener() {
+        tbCreatures.setActionCommand("Creatures");
+        tbCreatures.setFocusable(false);
+        tbCreatures.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbCreatures.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbCreatures.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoCreaturesActionPerformed(evt);
+                tbCreaturesActionPerformed(evt);
             }
         });
-        tbTypes.add(rdoCreatures);
+        tbTypes.add(tbCreatures);
 
-        rdoArtifacts.setSelected(true);
-        rdoArtifacts.setText("Artifacts ");
-        rdoArtifacts.setToolTipText("<html><strong>Artifacts</strong><br/>" 
+        tbArifiacts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_artifact.png"))); // NOI18N
+        tbArifiacts.setSelected(true);
+        tbArifiacts.setToolTipText("<html><strong>Artifacts</strong><br/>" 
             + tbTypes.getToolTipText());
-        rdoArtifacts.setFocusable(false);
-        rdoArtifacts.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoArtifacts.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoArtifacts.addActionListener(new java.awt.event.ActionListener() {
+        tbArifiacts.setActionCommand("Artifacts");
+        tbArifiacts.setFocusable(false);
+        tbArifiacts.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbArifiacts.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbArifiacts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoArtifactsActionPerformed(evt);
+                tbArifiactsActionPerformed(evt);
             }
         });
-        tbTypes.add(rdoArtifacts);
+        tbTypes.add(tbArifiacts);
 
-        rdoEnchantments.setSelected(true);
-        rdoEnchantments.setText("Enchantments ");
-        rdoEnchantments.setToolTipText("<html><strong>Enchantments</strong><br/>" 
+        tbSorceries.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_sorcery.png"))); // NOI18N
+        tbSorceries.setSelected(true);
+        tbSorceries.setToolTipText("<html><strong>Sorceries</strong><br/>" 
             + tbTypes.getToolTipText());
-        rdoEnchantments.setFocusable(false);
-        rdoEnchantments.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoEnchantments.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoEnchantments.addActionListener(new java.awt.event.ActionListener() {
+        tbSorceries.setActionCommand("Soceries");
+        tbSorceries.setFocusable(false);
+        tbSorceries.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbSorceries.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbSorceries.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoEnchantmentsActionPerformed(evt);
+                tbSorceriesActionPerformed(evt);
             }
         });
-        tbTypes.add(rdoEnchantments);
+        tbTypes.add(tbSorceries);
 
-        rdoInstants.setSelected(true);
-        rdoInstants.setText("Instants ");
-        rdoInstants.setFocusable(false);
-        rdoInstants.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoInstants.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoInstants.addActionListener(new java.awt.event.ActionListener() {
+        tbInstants.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_instant.png"))); // NOI18N
+        tbInstants.setSelected(true);
+        tbInstants.setToolTipText("<html><strong>Instants</strong><br/>" 
+            + tbTypes.getToolTipText());
+        tbInstants.setActionCommand("Instants");
+        tbInstants.setFocusable(false);
+        tbInstants.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbInstants.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbInstants.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoInstantsActionPerformed(evt);
+                tbInstantsActionPerformed(evt);
             }
         });
-        tbTypes.add(rdoInstants);
+        tbTypes.add(tbInstants);
 
-        rdoSorceries.setSelected(true);
-        rdoSorceries.setText("Sorceries ");
-        rdoSorceries.setFocusable(false);
-        rdoSorceries.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoSorceries.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoSorceries.addActionListener(new java.awt.event.ActionListener() {
+        tbEnchantments.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_enchantment.png"))); // NOI18N
+        tbEnchantments.setSelected(true);
+        tbEnchantments.setToolTipText("<html><strong>Enchantments</strong><br/>" 
+            + tbTypes.getToolTipText());
+        tbEnchantments.setActionCommand("Enchantments");
+        tbEnchantments.setFocusable(false);
+        tbEnchantments.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbEnchantments.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbEnchantments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoSorceriesActionPerformed(evt);
+                tbEnchantmentsActionPerformed(evt);
             }
         });
-        tbTypes.add(rdoSorceries);
+        tbTypes.add(tbEnchantments);
 
-        rdoPlaneswalkers.setSelected(true);
-        rdoPlaneswalkers.setText("Planeswalkers ");
-        rdoPlaneswalkers.setFocusable(false);
-        rdoPlaneswalkers.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rdoPlaneswalkers.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rdoPlaneswalkers.addActionListener(new java.awt.event.ActionListener() {
+        tbPlaneswalkers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_planeswalker.png"))); // NOI18N
+        tbPlaneswalkers.setSelected(true);
+        tbPlaneswalkers.setToolTipText("<html><strong>Planeswalker</strong><br/>" 
+            + tbTypes.getToolTipText());
+        tbPlaneswalkers.setActionCommand("Planeswalkers");
+        tbPlaneswalkers.setFocusable(false);
+        tbPlaneswalkers.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbPlaneswalkers.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbPlaneswalkers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoPlaneswalkersActionPerformed(evt);
+                tbPlaneswalkersActionPerformed(evt);
             }
         });
-        tbTypes.add(rdoPlaneswalkers);
-        tbTypes.add(jSeparator5);
+        tbTypes.add(tbPlaneswalkers);
+        tbTypes.add(jSeparator6);
 
         chkPiles.setText("Piles");
         chkPiles.setToolTipText("Shows the card in piles by the selected sort.");
@@ -759,15 +773,17 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(jToggleCardView);
 
+        cardSelectorScrollPane.setToolTipText("<HTML>Double click to add the card to the main deck.<br/>\nALT + Double click to add the card to the sideboard.");
+
         cardSelectorBottomPanel.setOpaque(false);
         cardSelectorBottomPanel.setPreferredSize(new java.awt.Dimension(897, 40));
 
         jButtonAddToMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_in.png"))); // NOI18N
-        jButtonAddToMain.setToolTipText("Add selected cards to deck");
+        jButtonAddToMain.setToolTipText("<html>Add selected cards to deck.<br/>\nAlternative: <strong>Double click</strong> the card in card selector to move a card to the deck.");
         jButtonAddToMain.setMargin(null);
         jButtonAddToMain.setMaximumSize(new java.awt.Dimension(42, 23));
         jButtonAddToMain.setMinimumSize(new java.awt.Dimension(42, 23));
-        jButtonAddToMain.setPreferredSize(new java.awt.Dimension(28, 22));
+        jButtonAddToMain.setPreferredSize(new java.awt.Dimension(40, 28));
         jButtonAddToMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddToMainActionPerformed(evt);
@@ -775,11 +791,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
 
         jButtonAddToSideboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/sideboard_in.png"))); // NOI18N
-        jButtonAddToSideboard.setToolTipText("Add selected cards to sideboard.");
+        jButtonAddToSideboard.setToolTipText("<html>Add selected cards to sideboard.<br/>\nAlternative: <strong>ALT key + Double click</strong> the card in card selector to move a card to the sideboard.");
         jButtonAddToSideboard.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButtonAddToSideboard.setMaximumSize(new java.awt.Dimension(100, 30));
         jButtonAddToSideboard.setMinimumSize(new java.awt.Dimension(10, 30));
-        jButtonAddToSideboard.setPreferredSize(new java.awt.Dimension(28, 22));
+        jButtonAddToSideboard.setPreferredSize(new java.awt.Dimension(40, 28));
         jButtonAddToSideboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddToSideboardActionPerformed(evt);
@@ -817,7 +833,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jButtonRemoveFromMain.setMargin(null);
         jButtonRemoveFromMain.setMaximumSize(new java.awt.Dimension(42, 23));
         jButtonRemoveFromMain.setMinimumSize(new java.awt.Dimension(42, 23));
-        jButtonRemoveFromMain.setPreferredSize(new java.awt.Dimension(28, 22));
+        jButtonRemoveFromMain.setPreferredSize(new java.awt.Dimension(40, 28));
         jButtonRemoveFromMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRemoveFromMainActionPerformed(evt);
@@ -829,7 +845,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jButtonRemoveFromSideboard.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButtonRemoveFromSideboard.setMaximumSize(new java.awt.Dimension(10, 30));
         jButtonRemoveFromSideboard.setMinimumSize(new java.awt.Dimension(100, 30));
-        jButtonRemoveFromSideboard.setPreferredSize(new java.awt.Dimension(28, 22));
+        jButtonRemoveFromSideboard.setPreferredSize(new java.awt.Dimension(40, 28));
         jButtonRemoveFromSideboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRemoveFromSideboardActionPerformed(evt);
@@ -889,9 +905,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
+            .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 1057, Short.MAX_VALUE)
             .addComponent(cardSelectorScrollPane)
-            .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1057, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -905,34 +921,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rdoLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoLandActionPerformed
-        filterCardsType(evt.getModifiers(), evt.getActionCommand());
-    }//GEN-LAST:event_rdoLandActionPerformed
-
-    private void rdoCreaturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoCreaturesActionPerformed
-        filterCardsType(evt.getModifiers(), evt.getActionCommand());
-    }//GEN-LAST:event_rdoCreaturesActionPerformed
-
-    private void rdoArtifactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoArtifactsActionPerformed
-        filterCardsType(evt.getModifiers(), evt.getActionCommand());
-    }//GEN-LAST:event_rdoArtifactsActionPerformed
-
-    private void rdoEnchantmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoEnchantmentsActionPerformed
-        filterCardsType(evt.getModifiers(), evt.getActionCommand());
-    }//GEN-LAST:event_rdoEnchantmentsActionPerformed
-
-    private void rdoInstantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoInstantsActionPerformed
-        filterCardsType(evt.getModifiers(), evt.getActionCommand());
-    }//GEN-LAST:event_rdoInstantsActionPerformed
-
-    private void rdoSorceriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoSorceriesActionPerformed
-        filterCardsType(evt.getModifiers(), evt.getActionCommand());
-    }//GEN-LAST:event_rdoSorceriesActionPerformed
-
-    private void rdoPlaneswalkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoPlaneswalkersActionPerformed
-        filterCardsType(evt.getModifiers(), evt.getActionCommand());
-    }//GEN-LAST:event_rdoPlaneswalkersActionPerformed
 
     private void cbExpansionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExpansionSetActionPerformed
         filterCards();
@@ -1021,7 +1009,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             List<Integer> indexes = asList(n);
             Collections.reverse(indexes);
             for (Integer index : indexes) {
-                mainModel.shiftDoubleClick(index);
+                mainModel.altDoubleClick(index);
             }
             //if (!mode.equals(Constants.DeckEditorMode.Constructed))
             if (limited) {
@@ -1071,6 +1059,34 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void tbColorlessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbColorlessActionPerformed
         filterCardsColor(evt.getModifiers(), evt.getActionCommand());     
     }//GEN-LAST:event_tbColorlessActionPerformed
+
+    private void tbCreaturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbCreaturesActionPerformed
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
+    }//GEN-LAST:event_tbCreaturesActionPerformed
+
+    private void tbArifiactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbArifiactsActionPerformed
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
+    }//GEN-LAST:event_tbArifiactsActionPerformed
+
+    private void tbSorceriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbSorceriesActionPerformed
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
+    }//GEN-LAST:event_tbSorceriesActionPerformed
+
+    private void tbInstantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbInstantsActionPerformed
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
+    }//GEN-LAST:event_tbInstantsActionPerformed
+
+    private void tbEnchantmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbEnchantmentsActionPerformed
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
+    }//GEN-LAST:event_tbEnchantmentsActionPerformed
+
+    private void tbPlaneswalkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbPlaneswalkersActionPerformed
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
+    }//GEN-LAST:event_tbPlaneswalkersActionPerformed
+
+    private void tbLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbLandActionPerformed
+        filterCardsType(evt.getModifiers(), evt.getActionCommand());
+    }//GEN-LAST:event_tbLandActionPerformed
 
     private void toggleViewMode() {
         if (currentView instanceof CardGrid) {
@@ -1137,23 +1153,23 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
-    private javax.swing.JToolBar.Separator jSeparator5;
+    private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JTextField jTextFieldSearch;
     private javax.swing.JToggleButton jToggleCardView;
     private javax.swing.JToggleButton jToggleListView;
-    private javax.swing.JRadioButton rdoArtifacts;
-    private javax.swing.JRadioButton rdoCreatures;
-    private javax.swing.JRadioButton rdoEnchantments;
-    private javax.swing.JRadioButton rdoInstants;
-    private javax.swing.JRadioButton rdoLand;
-    private javax.swing.JRadioButton rdoPlaneswalkers;
-    private javax.swing.JRadioButton rdoSorceries;
+    private javax.swing.JToggleButton tbArifiacts;
     private javax.swing.JToggleButton tbBlack;
     private javax.swing.JToggleButton tbBlue;
     private javax.swing.JToolBar tbColor;
     private javax.swing.JToggleButton tbColorless;
+    private javax.swing.JToggleButton tbCreatures;
+    private javax.swing.JToggleButton tbEnchantments;
     private javax.swing.JToggleButton tbGreen;
+    private javax.swing.JToggleButton tbInstants;
+    private javax.swing.JToggleButton tbLand;
+    private javax.swing.JToggleButton tbPlaneswalkers;
     private javax.swing.JToggleButton tbRed;
+    private javax.swing.JToggleButton tbSorceries;
     private javax.swing.JToolBar tbTypes;
     private javax.swing.JToggleButton tbWhite;
     // End of variables declaration//GEN-END:variables
