@@ -336,6 +336,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         }
     }
 
+    /**
+     * Cast e.g. from Karn Liberated to restart the current game
+     * @param game 
+     */
     @Override
     public void init(Game game) {
         init(game, false);
@@ -359,6 +363,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.timerTimeout = false;
         this.idleTimeout = false;
 
+        this.turns = 0;
         this.passed = false;
         this.passedTurn = false;
         this.passedAllTurns = false;
