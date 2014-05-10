@@ -391,7 +391,13 @@ public class ChatPanel extends javax.swing.JPanel {
 
         jTablePlayers.setModel(this.tableModel);
         jTablePlayers.setToolTipText("Connected players");
+        jTablePlayers.setAutoscrolls(false);
+        jTablePlayers.setFocusable(false);
         jTablePlayers.setGridColor(new java.awt.Color(255, 255, 255));
+        jTablePlayers.setRequestFocusEnabled(false);
+        jTablePlayers.setRowSelectionAllowed(false);
+        jTablePlayers.setUpdateSelectionOnSort(false);
+        jTablePlayers.setVerifyInputWhenFocusTarget(false);
         jScrollPanePlayers.setViewportView(jTablePlayers);
 
         jSplitPane1.setTopComponent(jScrollPanePlayers);
