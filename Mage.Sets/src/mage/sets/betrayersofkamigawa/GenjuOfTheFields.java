@@ -28,11 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
@@ -45,17 +40,18 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureAttachedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-
-
 
 /**
  *
@@ -88,6 +84,7 @@ public class GenjuOfTheFields extends CardImpl<GenjuOfTheFields> {
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect,new GenericManaCost(2));
         effect = new GainAbilityAttachedEffect(new DealsDamageGainLifeSourceTriggeredAbility(), AttachmentType.AURA, Duration.EndOfTurn);
         effect.setText("with \"Whenever this creature deals damage, its controller gains that much life.\".  It's still a land");
+        ability2.addEffect(effect);
         this.addAbility(ability2);
 
         // When enchanted Plains is put into a graveyard, you may return Genju of the Fields from your graveyard to your hand.

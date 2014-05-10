@@ -214,6 +214,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     public void addAbility(Ability ability, UUID sourceId, Game game) {
         if (!abilities.containsKey(ability.getId())) {
             Ability copyAbility = ability.copy();
+            copyAbility.newId(); // needed so that sourc can get an ability multiple times (e.g. Raging Ravine)
             copyAbility.setControllerId(controllerId);
             copyAbility.setSourceId(objectId);
             game.getState().addAbility(copyAbility, sourceId, this);
