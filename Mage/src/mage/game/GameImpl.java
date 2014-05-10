@@ -1893,7 +1893,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         } 
         if (amountToPrevent != Integer.MAX_VALUE) {
             // set remaining amount
-            event.setData(Integer.toString(amountToPrevent -= result.getPreventedDamage()));
+            result.setRemainingAmount(amountToPrevent -= result.getPreventedDamage());
         }            
         MageObject damageSource = game.getObject(damageEvent.getSourceId());
         MageObject preventionSource = game.getObject(source.getSourceId());

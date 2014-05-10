@@ -60,6 +60,7 @@ public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> ex
         this.effectType = EffectType.PREVENTION;
         this.amountToPrevent = amountToPrevent;
         this.onlyCombat = onlyCombat;
+        this.consumable = consumable;
     }
 
     public PreventionEffectImpl(final PreventionEffectImpl effect) {
@@ -83,7 +84,7 @@ public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> ex
                 amountToPrevent = preventionData.getRemainingAmount();
             }
             if (amountToPrevent == 0) {
-                this.used = true;
+                this.discard();
             }            
         }
         return preventionData;

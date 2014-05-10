@@ -27,10 +27,10 @@
  */
 package mage.abilities.effects.common;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -40,16 +40,12 @@ import mage.game.events.GameEvent;
  */
 public class PreventDamageSourceEffect extends PreventionEffectImpl<PreventDamageSourceEffect> {
 
-    private int amount;
-
-    public PreventDamageSourceEffect(Duration duration, int amount) {
-        super(duration);
-        this.amount = amount;
+    public PreventDamageSourceEffect(Duration duration, int amountToPrevent) {
+        super(duration, amountToPrevent, false);
     }
 
     public PreventDamageSourceEffect(final PreventDamageSourceEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
@@ -63,30 +59,8 @@ public class PreventDamageSourceEffect extends PreventionEffectImpl<PreventDamag
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getSourceId(), source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            if (event.getAmount() >= this.amount) {
-                int damage = amount;
-                event.setAmount(event.getAmount() - amount);
-                this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getSourceId(), source.getId(), source.getControllerId(), damage));
-            } else {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                amount -= damage;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getSourceId(), source.getId(), source.getControllerId(), damage));
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return super.applies(event, source, game) && event.getTargetId().equals(source.getSourceId());
     }
 
     @Override
@@ -95,10 +69,10 @@ public class PreventDamageSourceEffect extends PreventionEffectImpl<PreventDamag
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        if (amount == Integer.MAX_VALUE) {
+        if (amountToPrevent == Integer.MAX_VALUE) {
             sb.append("Prevent all damage that would be dealt to ");
         } else {
-            sb.append("Prevent the next ").append(amount).append(" damage that would be dealt to ");
+            sb.append("Prevent the next ").append(amountToPrevent).append(" damage that would be dealt to ");
         }
         sb.append("{source} ").append(duration.toString());
         return sb.toString();
