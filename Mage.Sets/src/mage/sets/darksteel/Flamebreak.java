@@ -25,65 +25,75 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.darksteel;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.DamageEverythingEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class Incinerate extends CardImpl<Incinerate> {
+public class Flamebreak extends CardImpl<Flamebreak> {
 
-    public Incinerate(UUID ownerId) {
-        super(ownerId, 213, "Incinerate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "10E";
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature without flying");
+
+    static {
+        filter1.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+    }
+
+    public Flamebreak(UUID ownerId) {
+        super(ownerId, 61, "Flamebreak", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{R}{R}");
+        this.expansionSetCode = "DST";
 
         this.color.setRed(true);
 
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
-        this.getSpellAbility().addEffect(new IncinerateEffect());
-        this.addWatcher(new DamagedByWatcher());
+        // Flamebreak deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(new StaticValue(3), filter1));
+        this.getSpellAbility().addEffect(new FlamebreakCantRegenerateEffect());
+        this.addWatcher(new DamagedByWatcher());        
     }
 
-    public Incinerate(final Incinerate card) {
+    public Flamebreak(final Flamebreak card) {
         super(card);
     }
 
     @Override
-    public Incinerate copy() {
-        return new Incinerate(this);
+    public Flamebreak copy() {
+        return new Flamebreak(this);
     }
 }
 
-class IncinerateEffect extends ReplacementEffectImpl<IncinerateEffect> {
+class FlamebreakCantRegenerateEffect extends ReplacementEffectImpl<FlamebreakCantRegenerateEffect> {
 
-    public IncinerateEffect() {
+    public FlamebreakCantRegenerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "A creature dealt damage this way can't be regenerated this turn";
+        staticText = "Creatures dealt damage this way can't be regenerated this turn";
     }
 
-    public IncinerateEffect(final IncinerateEffect effect) {
+    public FlamebreakCantRegenerateEffect(final FlamebreakCantRegenerateEffect effect) {
         super(effect);
     }
 
     @Override
-    public IncinerateEffect copy() {
-        return new IncinerateEffect(this);
+    public FlamebreakCantRegenerateEffect copy() {
+        return new FlamebreakCantRegenerateEffect(this);
     }
 
     @Override

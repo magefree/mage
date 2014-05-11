@@ -86,10 +86,7 @@ class DosanTheFallingLeafEffect extends ReplacementEffectImpl<DosanTheFallingLea
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL && !game.getActivePlayerId().equals(event.getPlayerId())) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.CAST_SPELL && !game.getActivePlayerId().equals(event.getPlayerId());
     }
 
     @Override
