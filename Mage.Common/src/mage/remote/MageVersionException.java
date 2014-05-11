@@ -36,10 +36,10 @@ import mage.utils.MageVersion;
  */
 public class MageVersionException extends MageException {
 
-    private MageVersion serverVersion;
+    private final MageVersion serverVersion;
 
        public MageVersionException(MageVersion clientVersion, MageVersion serverVersion) {
-        super("Wrong client version " + clientVersion + ", expecting version " + serverVersion + ". \r\n\r\nPlease download latest version at download.magefree.com and use mage-updater.");
+        super("Wrong client version " + clientVersion + ", expecting version " + serverVersion + ". \r\n\r\nPlease download needed version at http://176.31.186.181/.");
         this.serverVersion = serverVersion;
     }
 
