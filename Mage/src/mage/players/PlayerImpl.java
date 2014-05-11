@@ -75,6 +75,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
+import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -974,10 +975,18 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     }
                 }
             }
+            getOtherUseableActivatedAbilities(object, zone, game, useable);
+        }
+        return useable;
+    } 
 
-            Abilities<ActivatedAbility> otherAbilities = game.getState().getOtherAbilities(object.getId(), zone);
-            if (otherAbilities != null) {
-                for (ActivatedAbility ability: otherAbilities) {
+
+    // Adds special abilities that are given to non permanants by continuous effects
+
+    private void getOtherUseableActivatedAbilities(MageObject object, Zone zone, Game game, Map<UUID, ActivatedAbility> useable) {
+        Abilities<ActivatedAbility> otherAbilities = game.getState().getActivatedOtherAbilities(object.getId(), zone);
+        if (otherAbilities != null) {
+            for (ActivatedAbility ability: otherAbilities) {
                     Card card = game.getCard(ability.getSourceId());
                     if (card.isSplitCard() && ability instanceof FlashbackAbility) {
                         FlashbackAbility flashbackAbility;
@@ -1007,11 +1016,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     } else {
                         useable.put(ability.getId(), ability);
                     }
-                }
+
             }
         }
-        return useable;
-    } 
+    }
 
     protected LinkedHashMap<UUID, ManaAbility> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ManaAbility> useable = new LinkedHashMap<>();

@@ -31,14 +31,6 @@ package mage.abilities.keyword;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -51,12 +43,19 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.Card;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
 
 /**
  *
@@ -192,13 +191,10 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
-        if ((object.getCardType().contains(CardType.INSTANT) ||
-                object.getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
+        return (object.getCardType().contains(CardType.INSTANT) ||
+                object.hasAbility(FlashAbility.getInstance().getId(), game) ||
                 game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, playerId,  game) ||
-                game.canPlaySorcery(playerId))) {
-            return true;
-        }
-        return false;
+                game.canPlaySorcery(playerId));
     }
 
     @Override

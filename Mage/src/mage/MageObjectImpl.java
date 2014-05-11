@@ -129,6 +129,15 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
     }
 
     @Override
+    public boolean hasAbility(UUID abilityId, Game game) {
+        if (this.getAbilities().containsKey(abilityId)) {
+            return true;
+        }
+        Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
+        return  otherAbilities != null && otherAbilities.containsKey(abilityId);
+    }
+
+    @Override
     public MageInt getPower() {
         return power;
     }

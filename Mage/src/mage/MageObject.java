@@ -1,14 +1,14 @@
 package mage;
 
-import mage.constants.CardType;
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.constants.CardType;
 import mage.game.Game;
-
-import java.io.Serializable;
-import java.util.List;
 
 public interface MageObject extends MageItem, Serializable {
 
@@ -22,6 +22,8 @@ public interface MageObject extends MageItem, Serializable {
     List<String> getSupertype();
 
     Abilities<Ability> getAbilities();
+    boolean hasAbility(UUID abilityId, Game game);
+
     ObjectColor getColor();
     ManaCosts<ManaCost> getManaCost();
 

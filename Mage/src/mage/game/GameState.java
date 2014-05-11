@@ -93,7 +93,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private final Map<UUID, LookedAt> lookedAt = new HashMap<>();
     private final DelayedTriggeredAbilities delayed;
     private final SpecialActions specialActions;
-    private final Map<UUID, Abilities<ActivatedAbility>> otherAbilities = new HashMap<>();
+    private final Map<UUID, Abilities<Ability>> otherAbilities = new HashMap<>();
     private final TurnMods turnMods;
     private final Watchers watchers;
     
@@ -170,7 +170,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         }
         this.zones.putAll(state.zones);
-        for (Map.Entry<UUID, Abilities<ActivatedAbility>> entry: state.otherAbilities.entrySet()) {
+        for (Map.Entry<UUID, Abilities<Ability>> entry: state.otherAbilities.entrySet()) {
             otherAbilities.put(entry.getKey(), entry.getValue().copy());
         }
         this.paused = state.paused;
@@ -620,7 +620,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * Other abilities are used to implement some special kind of continious effects given to non permanents.
+     * Other abilities are used to implement some special kind of continuous effects that give abilities to non permanents.
      *
      * Crucible of Worlds - You may play land cards from your graveyard.
      * Past in Flames - Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
@@ -630,14 +630,23 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param zone
      * @return
      */
-    public Abilities<ActivatedAbility> getOtherAbilities(UUID objectId, Zone zone) {
+    public Abilities<ActivatedAbility> getActivatedOtherAbilities(UUID objectId, Zone zone) {
         if (otherAbilities.containsKey(objectId)) {
             return otherAbilities.get(objectId).getActivatedAbilities(zone);
         }
         return null;
     }
+    
+    public Abilities<Ability> getAllOtherAbilities(UUID objectId) {
+        if (otherAbilities.containsKey(objectId)) {
+            return otherAbilities.get(objectId);
+        }
+        return null;
+    }
 
-    public void addOtherAbility(UUID objectId, ActivatedAbility ability) {
+
+
+    public void addOtherAbility(UUID objectId, Ability ability) {
         if (!otherAbilities.containsKey(objectId)) {
             otherAbilities.put(objectId, new AbilitiesImpl(ability));
         } else {

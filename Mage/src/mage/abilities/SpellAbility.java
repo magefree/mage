@@ -78,7 +78,7 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
     public boolean spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
         return timing == TimingRule.INSTANT ||
-                object.getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
+                object.hasAbility(FlashAbility.getInstance().getId(), game) ||
                 game.canPlaySorcery(playerId);
     }
 
