@@ -102,6 +102,11 @@ class EpicReplacementEffect extends ReplacementEffectImpl<EpicReplacementEffect>
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && mageObject != null) {
+            game.informPlayer(controller, "For the rest of the game, you can't cast spells (Epic - " + mageObject.getName() +")");
+        }
         return true;
     }
 
