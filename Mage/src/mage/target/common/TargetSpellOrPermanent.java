@@ -32,19 +32,17 @@ package mage.target.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterSpellOrPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.target.TargetImpl;
-
 
 /**
  *
@@ -155,7 +153,7 @@ public class TargetSpellOrPermanent extends TargetImpl<TargetSpellOrPermanent> {
                 }
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+        for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -207,7 +205,7 @@ public class TargetSpellOrPermanent extends TargetImpl<TargetSpellOrPermanent> {
                 possibleTargets.add(spell.getId());
             }
         }
-                for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+                for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
@@ -224,7 +222,7 @@ public class TargetSpellOrPermanent extends TargetImpl<TargetSpellOrPermanent> {
                 possibleTargets.add(spell.getId());
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+        for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, game)) {
             if (filter.match(permanent, null, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
