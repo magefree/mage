@@ -33,7 +33,6 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -46,7 +45,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RatToken;
 
 /**
  *
@@ -89,17 +88,5 @@ public class OgreSlumlord extends CardImpl<OgreSlumlord> {
     @Override
     public OgreSlumlord copy() {
         return new OgreSlumlord(this);
-    }
-}
-
-class RatToken extends Token {
-
-    public RatToken() {
-        super("Rat", "1/1 black Rat creature token");
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
-        subtype.add("Rat");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

@@ -34,7 +34,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -49,7 +48,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RatToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -95,19 +94,6 @@ public class MarrowGnawer extends CardImpl<MarrowGnawer> {
     @Override
     public MarrowGnawer copy() {
         return new MarrowGnawer(this);
-    }
-
-}
-
-class RatToken extends Token {
-
-    public RatToken() {
-        super("Rat", "1/1 black Rat creature token");
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
-        subtype.add("Rat");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 
 }

@@ -30,12 +30,10 @@ package mage.sets.stronghold;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RatToken;
 
 /**
  *
@@ -62,17 +60,5 @@ public class LabRats extends CardImpl<LabRats> {
     @Override
     public LabRats copy() {
         return new LabRats(this);
-    }
-}
-
-class RatToken extends Token {
-
-    public RatToken() {
-        super("Rat", "1/1 black Rat creature token");
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
-        subtype.add("Rat");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }
