@@ -1,3 +1,10 @@
+|Generate|TOK:JOU|Sphinx|
+|Generate|TOK:JOU|Zombie|
+|Generate|TOK:JOU|Minotaur|
+|Generate|TOK:JOU|Hydra|
+|Generate|TOK:JOU|Spider|
+|Generate|TOK:JOU|Snake|
+
 |Generate|TOK:BNG|Bird 1|
 |Generate|TOK:BNG|Cat Soldier|
 |Generate|TOK:BNG|Soldier|
