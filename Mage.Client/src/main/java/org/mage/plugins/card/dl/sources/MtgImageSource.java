@@ -58,16 +58,13 @@ public class MtgImageSource implements CardImageSource {
         url.append(cardSet.toUpperCase()).append("/");
 
         if (card.isSplitCard()) {            
-            url.append(card.getName().replaceAll(" // ", ""));
+            url.append(card.getDownloadName().replaceAll(" // ", ""));
         } else {
-            url.append(card.getName());
+            url.append(card.getDownloadName());
         }
         
         if (card.isTwoFacedCard()) {
             url.append(card.isSecondSide() ? "b" : "a");
-        }
-        if (card.isSplitCard()) {
-            url.append("a");
         }
         if (card.isFlipCard()) {
             if (card.isFlippedSide()) { // download rotated by 180 degree image
