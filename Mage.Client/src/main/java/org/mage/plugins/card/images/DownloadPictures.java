@@ -29,9 +29,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -429,6 +431,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
 
                     if (url != null) {
+                        Logger.getLogger(this.getClass()).info(url);
                         Runnable task = new DownloadTask(card, new URL(url), cardsToDownload.size());
                         executor.execute(task);
                     } else {
@@ -459,12 +462,17 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         }
         closeButton.setText("Close");
     }
-
+    
+    static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+    
     private final class DownloadTask implements Runnable {
 
-        private CardDownloadData card;
-        private URL url;
-        private int count;
+        private final CardDownloadData card;
+        private final URL url;
+        private final int count;
 
         public DownloadTask(CardDownloadData card, URL url, int count) {
             this.card = card;
@@ -497,48 +505,56 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
                     return;
                 }
+                BufferedOutputStream out;
 
-                BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream());
-                BufferedOutputStream out = new BufferedOutputStream(new TFileOutputStream(temporaryFile));
-
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = in.read(buf)) != -1) {
-                    // user cancelled
-                    if (cancel) {
-                        in.close();
-                        out.flush();
-                        out.close();
-                        temporaryFile.delete();
-                        return;
-                    }
-                    out.write(buf, 0, len);
-                }
-
-                in.close();
-                out.flush();
-                out.close();
-
-                if (card.isTwoFacedCard()) {
-                    BufferedImage image = ImageIO.read(temporaryFile);
-                    if (image.getHeight() == 470) {
-                        BufferedImage renderedImage = new BufferedImage(265, 370, BufferedImage.TYPE_INT_RGB);
-                        renderedImage.getGraphics();
-                        Graphics2D graphics2D = renderedImage.createGraphics();
-                        if (card.isTwoFacedCard() && card.isSecondSide()) {
-                            graphics2D.drawImage(image, 0, 0, 265, 370, 313, 62, 578, 432, null);
-                        } else {
-                            graphics2D.drawImage(image, 0, 0, 265, 370, 41, 62, 306, 432, null);
+                // Logger.getLogger(this.getClass()).info(url.toString());
+                URLConnection httpConn = url.openConnection(p);
+                httpConn.connect();
+                if (((HttpURLConnection) httpConn).getResponseCode() == 200) {
+                    try (BufferedInputStream in = new BufferedInputStream(((HttpURLConnection) httpConn).getInputStream())) {
+                        //try (BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream())) {
+                        out = new BufferedOutputStream(new TFileOutputStream(temporaryFile));
+                        byte[] buf = new byte[1024];
+                        int len;
+                        while ((len = in.read(buf)) != -1) {
+                            // user cancelled
+                            if (cancel) {
+                                in.close();
+                                out.flush();
+                                out.close();
+                                temporaryFile.delete();
+                                return;
+                            }
+                            out.write(buf, 0, len);
                         }
-                        graphics2D.dispose();
-                        writeImageToFile(renderedImage, outputFile);
+
+                    }
+                    out.flush();
+                    out.close();
+
+                    if (card.isTwoFacedCard()) {
+                        BufferedImage image = ImageIO.read(temporaryFile);
+                        if (image.getHeight() == 470) {
+                            BufferedImage renderedImage = new BufferedImage(265, 370, BufferedImage.TYPE_INT_RGB);
+                            renderedImage.getGraphics();
+                            Graphics2D graphics2D = renderedImage.createGraphics();
+                            if (card.isTwoFacedCard() && card.isSecondSide()) {
+                                graphics2D.drawImage(image, 0, 0, 265, 370, 313, 62, 578, 432, null);
+                            } else {
+                                graphics2D.drawImage(image, 0, 0, 265, 370, 41, 62, 306, 432, null);
+                            }
+                            graphics2D.dispose();
+                            writeImageToFile(renderedImage, outputFile);
+                        } else {
+                            new TFile(temporaryFile).cp_rp(outputFile);
+                        }
+                        temporaryFile.delete();
                     } else {
                         new TFile(temporaryFile).cp_rp(outputFile);
+                        temporaryFile.delete();
                     }
-                    temporaryFile.delete();
                 } else {
-                    new TFile(temporaryFile).cp_rp(outputFile);
-                    temporaryFile.delete();
+                    Logger.getLogger(this.getClass()).error(convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
                 }
 
             } catch (Exception e) {
@@ -549,7 +565,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 update(cardIndex + 1, count);
             }
         }
+        
 
+        
         private void writeImageToFile(BufferedImage image, TFile file) throws IOException {
             Iterator iter = ImageIO.getImageWritersByFormatName("jpg");
 
