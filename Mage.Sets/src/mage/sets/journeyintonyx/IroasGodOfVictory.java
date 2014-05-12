@@ -58,7 +58,7 @@ public class IroasGodOfVictory extends CardImpl<IroasGodOfVictory> {
     private static final FilterControlledCreatureInPlay filterAttacking = new FilterControlledCreatureInPlay("attacking creatures you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filterAttacking.add(new AttackingPredicate());
+        filterAttacking.getCreatureFilter().add(new AttackingPredicate());
     }
     
     public IroasGodOfVictory(UUID ownerId) {
