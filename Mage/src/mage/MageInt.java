@@ -63,8 +63,9 @@ public class MageInt implements Serializable, Copyable<MageInt> {
 
     @Override
     public MageInt copy() {
-        if (this == EmptyMageInt)
+        if (this == EmptyMageInt) {
             return this;
+        }
         return new MageInt(baseValue, cardValue);
     }
 

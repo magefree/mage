@@ -27,22 +27,21 @@
  */
 package mage.sets.magic2012;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -77,11 +76,11 @@ class GrandAbolisherEffect extends ReplacementEffectImpl<GrandAbolisherEffect> {
 
     public GrandAbolisherEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments";
     }
 
     public GrandAbolisherEffect(final GrandAbolisherEffect effect) {
-        super(effect);
-        staticText = "During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments";
+        super(effect);        
     }
 
     @Override
