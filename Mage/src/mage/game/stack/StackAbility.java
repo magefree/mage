@@ -147,6 +147,11 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
+    public boolean hasAbility(UUID abilityId, Game game) {
+        return false;
+    }
+
+    @Override
     public ObjectColor getColor() {
         return emptyColor;
     }

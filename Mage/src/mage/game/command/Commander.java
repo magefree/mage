@@ -51,7 +51,7 @@ import mage.game.Game;
 public class Commander implements CommandObject{
 
     private final Card card;
-    private final Abilities<Ability> abilites = new AbilitiesImpl<Ability>();
+    private final Abilities<Ability> abilites = new AbilitiesImpl<>();
 
     
     public Commander(Card card){
@@ -126,6 +126,15 @@ public class Commander implements CommandObject{
     @Override
     public Abilities<Ability> getAbilities() {
         return abilites;
+    }
+
+    @Override
+    public boolean hasAbility(UUID abilityId, Game game) {
+        if (this.getAbilities().containsKey(abilityId)) {
+            return true;
+        }
+        Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
+        return  otherAbilities != null && otherAbilities.containsKey(abilityId);
     }
 
     @Override

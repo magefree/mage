@@ -566,6 +566,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     @Override
+    public boolean hasAbility(UUID abilityId, Game game) {
+        return card.hasAbility(abilityId, game);
+    }
+
+    @Override
     public ObjectColor getColor() {
         return card.getColor();
     }

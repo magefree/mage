@@ -133,6 +133,11 @@ public class Emblem implements CommandObject {
     }
 
     @Override
+    public boolean hasAbility(UUID abilityId, Game game) {
+        return abilites.containsKey(abilityId);
+    }
+
+    @Override
     public ObjectColor getColor() {
         return emptyColor;
     }
