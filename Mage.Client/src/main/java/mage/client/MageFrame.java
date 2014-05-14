@@ -744,7 +744,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         jSeparator8 = new javax.swing.JToolBar.Separator();
         lblStatus = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
 
         desktopPane.setBackground(new java.awt.Color(204, 204, 204));
@@ -949,6 +949,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         System.exit(0);
     }
 
+    @Override
     public void reconnect() {
         session.disconnect(false);
         tablesPane.clearChat();
