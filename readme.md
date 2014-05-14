@@ -16,7 +16,7 @@ You can visit the MAGE forum [here](http://www.slightlymagic.net/forum/viewforum
  * Sealed (2-16)
 
 ## Installation
-Download the latest release from [here](http://download.magefree.com). You need this to be able to play on the official server.
+Download the latest release from [here](http://176.31.186.181/). You need this to be able to play on the official server.
 
 After you extract the content of the archive, you will find batch files to start the client/server in the corresponding directories. See the included readme files for more instructions.
 
