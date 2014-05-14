@@ -116,7 +116,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl<GutterGrimeTrigge
 
     @Override
     public String getRule() {
-        return "Whenever a nontoken creature you control dies, put a slime counter on Gutter Grime, then put a green Ooze creature token onto the battlefield with \"This creature's power and toughness are each equal to the number of slime counters on Gutter Grime.\"";
+        return "Whenever a nontoken creature you control dies, put a slime counter on {this}, then put a green Ooze creature token onto the battlefield with \"This creature's power and toughness are each equal to the number of slime counters on {this}.\"";
     }
 }
 
@@ -160,7 +160,7 @@ class GutterGrimeToken extends Token {
 
 class GutterGrimeCounters implements DynamicValue {
 
-    private UUID sourceId;
+    private final UUID sourceId;
 
     public GutterGrimeCounters(UUID sourceId) {
         this.sourceId = sourceId;

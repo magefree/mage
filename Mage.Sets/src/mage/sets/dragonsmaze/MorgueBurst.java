@@ -61,7 +61,7 @@ public class MorgueBurst extends CardImpl<MorgueBurst> {
         // Return target creature card from your graveyard to your hand. Morgue Burst deals damage to target creature or player equal to the power of the card returned this way.
         this.getSpellAbility().addEffect(new MorgueBurstEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
     }
 
     public MorgueBurst(final MorgueBurst card) {
@@ -95,7 +95,7 @@ class MorgueBurstEffect extends OneShotEffect<MorgueBurstEffect> {
         if (card != null) {
             Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.HAND);
                 int damage = card.getPower().getValue();
                 Permanent creature = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
                 if (creature != null) {

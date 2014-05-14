@@ -68,7 +68,7 @@ public class Cantivore extends CardImpl<Cantivore> {
         this.addAbility(VigilanceAbility.getInstance());
         // Cantivore's power and toughness are each equal to the number of enchantment cards in all graveyards.
         DynamicValue value = (new CardsInAllGraveyardsCount(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value , Duration.WhileOnBattlefield))); 
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value , Duration.EndOfGame))); 
     }
 
     public Cantivore(final Cantivore card) {

@@ -62,7 +62,7 @@ public class SoullessOne extends CardImpl<SoullessOne> {
         this.toughness = new MageInt(0);
 
         // Soulless One's power and toughness are each equal to the number of Zombies on the battlefield plus the number of Zombie cards in all graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new SoullessOneDynamicCount(), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new SoullessOneDynamicCount(), Duration.EndOfGame)));
     }
 
     public SoullessOne(final SoullessOne card) {

@@ -35,6 +35,7 @@ import mage.constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -75,24 +76,42 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getSourceId());
-        if (target != null) {
-            if (amount != null) {
-                int value = amount.calculate(game, source);
-                target.getPower().setValue(value);
-                target.getToughness().setValue(value);
-                return true;
+        Card targetCard = game.getCard(source.getSourceId()); // there are character definig abilities (e.g. P/T Nightmare) that have to work also for P/T of cards
+        Permanent targetPermanent = game.getPermanent(source.getSourceId());
+        if (targetCard == null && targetPermanent == null) {
+            return false;
+        }
+        if (amount != null) {
+            int value = amount.calculate(game, source);
+            if (targetPermanent != null) {
+                targetPermanent.getPower().setValue(value);
+                targetPermanent.getToughness().setValue(value);
+            } else if (targetCard != null) {
+                targetCard.getPower().setValue(value);
+                targetCard.getToughness().setValue(value);
             }
-            else {
-                if (power != Integer.MIN_VALUE) {
-                    target.getPower().setValue(power);
+            return true;
+        }
+        else {
+            if (power != Integer.MIN_VALUE) {
+                if (targetCard != null) {
+                    targetCard.getPower().setValue(power);
                 }
-                if (toughness != Integer.MIN_VALUE) {
-                    target.getToughness().setValue(toughness);
+                if (targetPermanent != null) {
+                    targetPermanent.getPower().setValue(power);
                 }
+            }
+            if (toughness != Integer.MIN_VALUE) {
+                if (targetCard != null) {
+                    targetCard.getToughness().setValue(toughness);
+                }
+                if (targetPermanent != null) {
+                    targetPermanent.getToughness().setValue(toughness);
+                }
+
             }
         }
-        return false;
+        return true;
     }
 
 }

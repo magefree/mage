@@ -60,7 +60,11 @@ public class ChimericMass extends CardImpl<ChimericMass> {
     public ChimericMass(UUID ownerId) {
         super(ownerId, 141, "Chimeric Mass", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}");
         this.expansionSetCode = "SOM";
+        
+        // Chimeric Mass enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new ChimericMassEffect(), "{this} enters the battlefield with X charge counters on it"));
+        
+        // {1}: Until end of turn, Chimeric Mass becomes a Construct artifact creature with "This creature's power and toughness are each equal to the number of charge counters on it."
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ChimericMassToken(), "", Duration.EndOfTurn), new GenericManaCost(1)));
     }
 

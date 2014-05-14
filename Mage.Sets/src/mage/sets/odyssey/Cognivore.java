@@ -67,7 +67,7 @@ public class Cognivore extends CardImpl<Cognivore> {
         this.addAbility(FlyingAbility.getInstance());
         // Cognivore's power and toughness are each equal to the number of instant cards in all graveyards.
         DynamicValue value = (new CardsInAllGraveyardsCount(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Duration.WhileOnBattlefield))); 
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Duration.EndOfGame))); 
     }
 
     public Cognivore(final Cognivore card) {
