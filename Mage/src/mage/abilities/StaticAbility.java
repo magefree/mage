@@ -50,7 +50,7 @@ public abstract class StaticAbility<T extends StaticAbility<T>> extends AbilityI
         }
     }
 
-    public StaticAbility(StaticAbility ability) {
+    public StaticAbility(StaticAbility<T> ability) {
         super(ability);
     }
 }

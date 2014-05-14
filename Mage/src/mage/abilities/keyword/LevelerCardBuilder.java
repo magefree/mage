@@ -63,7 +63,7 @@ public class LevelerCardBuilder {
     private int toughness;
     private String rule = "";
 
-    private Abilities<Ability> abilities = new AbilitiesImpl<Ability>();
+    private Abilities<Ability> abilities = new AbilitiesImpl<>();
 
     /**
      * Main method constructing ability.
@@ -71,7 +71,7 @@ public class LevelerCardBuilder {
      * @return
      */
     public List<Ability> build() {
-        List<Ability> constructed = new ArrayList<Ability>();
+        List<Ability> constructed = new ArrayList<>();
 
         Condition condition = new SourceHasCounterCondition(CounterType.LEVEL, level1, level2);
         for (Ability ability : abilities) {
@@ -173,12 +173,12 @@ public class LevelerCardBuilder {
 
     public static class LevelAbility {
 
-        private int level1;
-        private int level2;
-        private int power;
-        private int toughness;
+        private final int level1;
+        private final int level2;
+        private final int power;
+        private final int toughness;
 
-        private Abilities<Ability> abilities = new AbilitiesImpl<Ability>();
+        private Abilities<Ability> abilities = new AbilitiesImpl<>();
 
         public LevelAbility(int level1, int level2, Abilities<Ability> abilities, int power, int toughness) {
             this.level1 = level1;

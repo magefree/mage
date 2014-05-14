@@ -129,7 +129,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
         rarity = card.rarity;
-        for (Watcher watcher: (List<Watcher>)card.watchers) {
+        for (Watcher watcher: (List<Watcher>)card.getWatchers()) {
             watchers.add(watcher.copy());
         }
         faceDown = card.faceDown;
@@ -276,7 +276,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     @Override
     public List<Mana> getMana() {
-        List<Mana> mana = new ArrayList<Mana>();
+        List<Mana> mana = new ArrayList<>();
         for (ManaAbility ability : this.abilities.getManaAbilities(Zone.BATTLEFIELD)) {
             mana.add(ability.getNetMana(null));
         }

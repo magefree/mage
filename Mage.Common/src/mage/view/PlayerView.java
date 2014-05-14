@@ -59,11 +59,11 @@ public class PlayerView implements Serializable {
     private final boolean hasLeft;
     private final ManaPoolView manaPool;
     private final SimpleCardsView graveyard = new SimpleCardsView();
-    private final Map<UUID, PermanentView> battlefield = new LinkedHashMap<UUID, PermanentView>();
+    private final Map<UUID, PermanentView> battlefield = new LinkedHashMap<>();
     private final CardView topCard;
     private final UserDataView userDataView;
-    private final List<CommandObjectView> commandList = new ArrayList<CommandObjectView>();
-    private final List<UUID> attachments = new ArrayList<UUID>();
+    private final List<CommandObjectView> commandList = new ArrayList<>();
+    private final List<UUID> attachments = new ArrayList<>();
     private final int statesSavedSize;
     private final int priorityTimeLeft;
 
