@@ -53,11 +53,16 @@ public class Batterskull extends CardImpl<Batterskull> {
         super(ownerId, 130, "Batterskull", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Equipment");
+
+        // Living weapon (When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)
         this.addAbility(new LivingWeaponAbility());
+        // Equipped creature gets +4/+4 and has vigilance and lifelink.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 4)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        // {3}: Return Batterskull to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new GenericManaCost(3)));
+        // Equip {5}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5)));
     }
 

@@ -117,7 +117,7 @@ class AEtherVialEffect extends OneShotEffect<AEtherVialEffect> {
         if (player.choose(this.outcome, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
+                player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
                 return true;
             }
         }
