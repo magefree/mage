@@ -1,4 +1,4 @@
-/*
+    /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -37,7 +37,7 @@ public class BlackLotus extends mage.sets.limitedalpha.BlackLotus {
 
     public BlackLotus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 233;
+        this.cardNumber = 234;
         this.expansionSetCode = "LEB";
     }
 
