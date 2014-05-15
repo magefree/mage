@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
@@ -68,8 +69,8 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
     public void init(Ability source, Game game) {
         super.init(source, game);
         Target target = source.getTargets().get(0);
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (target instanceof TargetCreatureOrPlayerAmount && sourcePermanent != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (target instanceof TargetCreatureOrPlayerAmount && sourceObject != null) {
             TargetCreatureOrPlayerAmount multiTarget = (TargetCreatureOrPlayerAmount) target;
             for (UUID targetId: multiTarget.getTargets()) {
                 Player player = null;
@@ -78,7 +79,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
                     player = game.getPlayer(targetId);
                 }
                 targetAmountMap.put(targetId, multiTarget.getTargetAmount(targetId));
-                StringBuilder sb = new StringBuilder(sourcePermanent.getName()).append(": Prevent the next ");
+                StringBuilder sb = new StringBuilder(sourceObject.getName()).append(": Prevent the next ");
                 sb.append(multiTarget.getTargetAmount(targetId)).append(" damage to ");
                 if (player != null) {
                     sb.append(player.getName());

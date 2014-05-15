@@ -135,6 +135,14 @@ public class CardUtil {
         CardUtil.adjustCost((Ability) spellAbility, reduceCount);
         adjustAlternativeCosts(spellAbility, reduceCount);
     }
+    
+    public static ManaCosts<ManaCost> increaseCost(ManaCosts<ManaCost> manaCosts, int increaseCount) {
+        return adjustCost(manaCosts, -increaseCount);
+    }
+
+    public static ManaCosts<ManaCost> reduceCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
+        return adjustCost(manaCosts, reduceCount);
+    }
 
     private static void adjustAlternativeCosts(Ability ability, int reduceCount) {
         for (AlternativeCost alternativeCost : ability.getAlternativeCosts()) {
@@ -179,11 +187,16 @@ public class CardUtil {
      * @param reduceCount
      */
     private static void adjustCost(Ability ability, int reduceCount) {
+        ManaCosts<ManaCost> adjustedCost = adjustCost(ability.getManaCostsToPay(), reduceCount);
+        ability.getManaCostsToPay().clear();
+        ability.getManaCostsToPay().addAll(adjustedCost);
+    }
+    
+    private static ManaCosts<ManaCost> adjustCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
         int restToReduce = reduceCount;
-        ManaCosts<ManaCost> previousCost = ability.getManaCostsToPay();
         ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
         boolean updated = false;
-        for (ManaCost manaCost : previousCost) {
+        for (ManaCost manaCost : manaCosts) {
             Mana mana = manaCost.getOptions().get(0);
             int colorless = mana != null ? mana.getColorless() : 0;
             if (!updated && colorless > 0) {
@@ -191,7 +204,7 @@ public class CardUtil {
                     int newColorless = colorless - restToReduce;
                     adjustedCost.add(new GenericManaCost(newColorless));
                 } else {
-                    restToReduce =- colorless;
+                    restToReduce = -colorless;
                 }
                 updated = true;
             } else {
@@ -203,11 +216,20 @@ public class CardUtil {
         if (!updated && reduceCount < 0) {
             adjustedCost.add(new GenericManaCost(-reduceCount));
         }
-
-        ability.getManaCostsToPay().clear();
-        ability.getManaCostsToPay().addAll(adjustedCost);
+        
+        return adjustedCost;
     }
 
+    public static ManaCosts<ManaCost> removeVariableManaCost(ManaCosts<ManaCost> manaCosts) {
+        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
+        for (ManaCost manaCost: manaCosts) {
+            if (!(manaCost instanceof VariableManaCost)) {
+                adjustedCost.add(manaCost);
+            }
+        }
+        return adjustedCost;
+    }
+    
     public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
         adjustCost(spellAbility, manaCostsToReduce, true);
     }
