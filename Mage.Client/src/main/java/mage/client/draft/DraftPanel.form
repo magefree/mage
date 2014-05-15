@@ -68,7 +68,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblPack1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtPack1" min="-2" pref="112" max="-2" attributes="0"/>
+                                  <Component id="txtPack1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblPack3" min="-2" max="-2" attributes="0"/>
@@ -160,6 +160,9 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[130, 22]"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkPack1">
@@ -173,6 +176,9 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[130, 22]"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkPack2">
@@ -186,6 +192,9 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[130, 22]"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkPack3">

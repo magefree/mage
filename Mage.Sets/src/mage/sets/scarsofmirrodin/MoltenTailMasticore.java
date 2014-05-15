@@ -29,9 +29,6 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -43,6 +40,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -62,11 +62,15 @@ public class MoltenTailMasticore extends CardImpl<MoltenTailMasticore> {
         this.subtype.add("Masticore");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+
+        // At the beginning of your upkeep, sacrifice Molten-Tail Masticore unless you discard a card.
         this.addAbility(new MoltenTailMasticoreAbility());
+        // {4}, Exile a creature card from your graveyard: Molten-Tail Masticore deals 4 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new GenericManaCost(4));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"))));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card from your graveyard"))));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
+        // {2}: Regenerate Molten-Tail Masticore.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)));
     }
 
@@ -97,10 +101,7 @@ class MoltenTailMasticoreAbility extends TriggeredAbilityImpl<MoltenTailMasticor
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId);
     }
 
     @Override
