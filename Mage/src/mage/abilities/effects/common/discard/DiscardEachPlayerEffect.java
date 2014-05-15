@@ -61,7 +61,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         // Store for each player the cards to discard, that's important because all discard shall happen at the same time
-        HashMap<UUID, Cards> cardsToDiscard = new HashMap<UUID, Cards>();
+        HashMap<UUID, Cards> cardsToDiscard = new HashMap<>();
         if (controller != null) {
             // choose cards to discard
             for (UUID playerId : controller.getInRange()) {

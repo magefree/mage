@@ -27,27 +27,15 @@
  */
 package mage.sets.journeyintonyx;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.continious.CantCastMoreThanOneSpellEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.players.Player;
-import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -65,8 +53,7 @@ public class EidolonOfRhetoric extends CardImpl<EidolonOfRhetoric> {
         this.toughness = new MageInt(4);
 
         // Each player can't cast more than one spell each turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EidolonOfRhetoricEffect()));
-        this.addWatcher(new EidolonOfRhetoricWatcher());        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.ANY)));   
     }
 
     public EidolonOfRhetoric(final EidolonOfRhetoric card) {
@@ -77,82 +64,4 @@ public class EidolonOfRhetoric extends CardImpl<EidolonOfRhetoric> {
     public EidolonOfRhetoric copy() {
         return new EidolonOfRhetoric(this);
     }
-}
-
-class EidolonOfRhetoricWatcher extends WatcherImpl<EidolonOfRhetoricWatcher> {
-
-    private final Set<UUID> players = new HashSet<>();
-
-    public EidolonOfRhetoricWatcher() {
-        super("SpellCast", WatcherScope.GAME);
-    }
-
-    public EidolonOfRhetoricWatcher(final EidolonOfRhetoricWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public EidolonOfRhetoricWatcher copy() {
-        return new EidolonOfRhetoricWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST ) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null) {
-                players.add(spell.getControllerId());
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        players.clear();
-    }
-
-
-    public boolean playerCastSpellThisTurn(UUID playerId) {
-        return players.contains(playerId);
-    }
-}
-
-class EidolonOfRhetoricEffect extends ReplacementEffectImpl<EidolonOfRhetoricEffect> {
-
-    public EidolonOfRhetoricEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Each player can't cast more than one spell each turn";
-    }
-
-    public EidolonOfRhetoricEffect(final EidolonOfRhetoricEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EidolonOfRhetoricEffect copy() {
-        return new EidolonOfRhetoricEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            EidolonOfRhetoricWatcher watcher = (EidolonOfRhetoricWatcher) game.getState().getWatchers().get("SpellCast", event.getPlayerId());
-            if (watcher != null && watcher.playerCastSpellThisTurn(event.getPlayerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

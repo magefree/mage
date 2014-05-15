@@ -44,9 +44,9 @@ import mage.watchers.WatcherImpl;
 */
 public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatcher> {
 
-    private Map<UUID, Integer> amountOfSpellsCastOnPrevTurn = new HashMap<UUID, Integer>();
-    private Map<UUID, Integer> amountOfSpellsCastOnCurrentTurn = new HashMap<UUID, Integer>();
-    private List<UUID> spellsCastThisTurnInOrder = new ArrayList<UUID>();
+    private final Map<UUID, Integer> amountOfSpellsCastOnPrevTurn = new HashMap<>();
+    private final Map<UUID, Integer> amountOfSpellsCastOnCurrentTurn = new HashMap<>();
+    private final List<UUID> spellsCastThisTurnInOrder = new ArrayList<>();
 
     public CastSpellLastTurnWatcher() {
        super("CastSpellLastTurnWatcher", WatcherScope.GAME);

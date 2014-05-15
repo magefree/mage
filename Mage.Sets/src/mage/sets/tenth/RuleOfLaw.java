@@ -28,18 +28,13 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-
-import mage.constants.*;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.continious.CantCastMoreThanOneSpellEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 
 /**
  *
@@ -54,8 +49,7 @@ public class RuleOfLaw extends CardImpl<RuleOfLaw> {
         this.color.setWhite(true);
 
         // Each player can't cast more than one spell each turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RuleOfLawEffect()));
-        this.addWatcher(new RuleOfLawWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.ANY)));
 
     }
 
@@ -67,76 +61,4 @@ public class RuleOfLaw extends CardImpl<RuleOfLaw> {
     public RuleOfLaw copy() {
         return new RuleOfLaw(this);
     }
-}
-
-class RuleOfLawWatcher extends WatcherImpl<RuleOfLawWatcher> {
-
-    public RuleOfLawWatcher() {
-        super("SpellCast", WatcherScope.PLAYER);
-    }
-
-    public RuleOfLawWatcher(final RuleOfLawWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public RuleOfLawWatcher copy() {
-        return new RuleOfLawWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (condition == true) {//no need to check - condition has already occured
-            return;
-        }
-        if (event.getType() == GameEvent.EventType.SPELL_CAST ) {
-            Permanent enchantment = game.getPermanent(this.sourceId);
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                Player player = game.getPlayer(enchantment.getAttachedTo());
-                if (player != null && event.getPlayerId().equals(player.getId())) {
-                    condition = true;
-                }
-            }
-        }
-    }
-
-}
-
-class RuleOfLawEffect extends ReplacementEffectImpl<RuleOfLawEffect> {
-
-    public RuleOfLawEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Each player can't cast more than one spell each turn";
-    }
-
-    public RuleOfLawEffect(final RuleOfLawEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RuleOfLawEffect copy() {
-        return new RuleOfLawEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            Watcher watcher = game.getState().getWatchers().get("SpellCast", event.getPlayerId());
-            if (watcher != null && watcher.conditionMet()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
