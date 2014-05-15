@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common.continious;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -70,6 +71,10 @@ public class CantCastMoreThanOneSpellEffect extends ReplacementEffectImpl<CantCa
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            game.informPlayers(mageObject + ": You can't cast more than one spell each turn.");
+        }
         return true;
     }
 
@@ -93,7 +98,7 @@ public class CantCastMoreThanOneSpellEffect extends ReplacementEffectImpl<CantCa
                         return false;
                     }                    
             }
-            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher", event.getPlayerId());
+            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
             if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId())> 0) {
                 return true;
             }
