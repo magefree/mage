@@ -36,13 +36,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.RevealHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
 /**
@@ -65,7 +64,11 @@ public class ThoughtcutterAgent extends CardImpl<ThoughtcutterAgent> {
         // {U}{B}, {tap}: Target player loses 1 life and reveals his or her hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{U}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new RevealHandTargetEffect());
+        
+        Effect revealEffect = new RevealHandTargetEffect(TargetController.ANY);
+        revealEffect.setText("and reveals his or her hand");
+        ability.addEffect(revealEffect);
+        
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -78,34 +81,4 @@ public class ThoughtcutterAgent extends CardImpl<ThoughtcutterAgent> {
     public ThoughtcutterAgent copy() {
         return new ThoughtcutterAgent(this);
     }
-}
-
-
-class RevealHandTargetEffect extends OneShotEffect<RevealHandTargetEffect> {
-
-
-    public RevealHandTargetEffect() {
-        super(Outcome.Discard);
-        staticText = "and reveals his or her hand";
-    }
-
-    public RevealHandTargetEffect(final RevealHandTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Thoughtcutter Agent", player.getHand(), game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public RevealHandTargetEffect copy() {
-        return new RevealHandTargetEffect(this);
-    }
-
 }
