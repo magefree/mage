@@ -677,7 +677,7 @@ public class MTGOMarchCube2014 extends DraftCube {
         cubeCards.add(new CardIdentity("Daxos of Meletis",""));
         cubeCards.add(new CardIdentity("Aurelia's Fury",""));
         cubeCards.add(new CardIdentity("Bant Charm",""));
-        cubeCards.add(new CardIdentity("Wear//Tear",""));
+        cubeCards.add(new CardIdentity("Wear // Tear",""));
         cubeCards.add(new CardIdentity("Dimir Charm",""));
         cubeCards.add(new CardIdentity("Electrolyze",""));
         cubeCards.add(new CardIdentity("Esper Charm",""));
