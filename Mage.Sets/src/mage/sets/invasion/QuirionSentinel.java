@@ -29,10 +29,12 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.cards.CardImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 
@@ -53,7 +55,9 @@ public class QuirionSentinel extends CardImpl<QuirionSentinel> {
         this.toughness = new MageInt(1);
 
         // When Quirion Sentinel enters the battlefield, add one mana of any color to your mana pool.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect());
+        ability.addChoice(new ChoiceColor());
+        this.addAbility(ability);
     }
 
     public QuirionSentinel(final QuirionSentinel card) {
