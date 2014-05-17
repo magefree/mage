@@ -83,8 +83,8 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
         if (lockedInCondition) {
             condition = new FixedCondition(condition.apply(game, source));
         }
-        effect.init(source, game);
         effect.setTargetPointer(this.targetPointer);
+        effect.init(source, game);        
         if (otherwiseEffect != null) {
             otherwiseEffect.setTargetPointer(this.targetPointer);
             otherwiseEffect.init(source, game);
@@ -97,15 +97,16 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
         if (!initDone) { // if simpleStaticAbility, init won't be called
             init(source, game);
         }
-        if (condition.apply(game, source)) {
+        boolean conditionState = condition.apply(game, source);
+        if (conditionState) {
             return effect.apply(layer, sublayer, source, game);
         } else if (otherwiseEffect != null) {
             return otherwiseEffect.apply(layer, sublayer, source, game);
         }
-        if (!condition.apply(game, source) && effect.getDuration() == Duration.OneUse) {
+        if (!conditionState && effect.getDuration() == Duration.OneUse) {
             used = true;
         }
-        if (!condition.apply(game, source) && effect.getDuration() == Duration.Custom) {
+        if (!conditionState && effect.getDuration() == Duration.Custom) {
             this.discard();
         }
         return false;
@@ -113,17 +114,18 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (condition.apply(game, source)) {
+        boolean conditionState = condition.apply(game, source);
+        if (conditionState) {
             effect.setTargetPointer(this.targetPointer);
             return effect.apply(game, source);
         } else if (otherwiseEffect != null) {
             otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.apply(game, source);
         }
-        if (!condition.apply(game, source) && effect.getDuration() == Duration.OneUse) {
+        if (!conditionState && effect.getDuration() == Duration.OneUse) {
             used = true;
         }
-        if (!condition.apply(game, source) && effect.getDuration() == Duration.Custom) {
+        if (!conditionState && effect.getDuration() == Duration.Custom) {
             this.discard();
         }
         return false;

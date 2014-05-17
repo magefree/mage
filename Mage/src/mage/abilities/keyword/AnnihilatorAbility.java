@@ -94,12 +94,6 @@ class AnnihilatorEffect extends OneShotEffect<AnnihilatorEffect> {
     private final int count;
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
-    ;
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
     AnnihilatorEffect(int count) {
         super(Outcome.Sacrifice);
         this.count = count;
@@ -139,7 +133,7 @@ class AnnihilatorEffect extends OneShotEffect<AnnihilatorEffect> {
                     Permanent permanent = game.getPermanent((UUID) target.getTargets().get(idx));
 
                     if (permanent != null) {
-                        abilityApplied |= permanent.sacrifice(source.getId(), game);
+                        abilityApplied |= permanent.sacrifice(source.getSourceId(), game);
                     }
                 }
 
