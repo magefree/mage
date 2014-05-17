@@ -344,7 +344,7 @@ public class MonoBlueCube extends DraftCube {
         cubeCards.add(new CardIdentity("Treachery",""));
         cubeCards.add(new CardIdentity("Veiled Serpent",""));
         cubeCards.add(new CardIdentity("Aeolipile",""));
-        cubeCards.add(new CardIdentity("Aether Spellbomb",""));
+        cubeCards.add(new CardIdentity("AEther Spellbomb",""));
         cubeCards.add(new CardIdentity("AEther Vial",""));
         cubeCards.add(new CardIdentity("Ankh of Mishra",""));
         cubeCards.add(new CardIdentity("Basalt Monolith",""));
