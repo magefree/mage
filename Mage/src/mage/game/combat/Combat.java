@@ -207,7 +207,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
-        game.informPlayers(new StringBuilder(player.getName()).append(" attacks with ").append(groups.size()).append(" creatures").toString());
+        game.informPlayers(new StringBuilder(player.getName()).append(" attacks with ").append(groups.size()).append(groups.size() == 1 ? " creature":" creatures").toString());
     }
 
     protected void checkAttackRequirements(Player player, Game game) {
