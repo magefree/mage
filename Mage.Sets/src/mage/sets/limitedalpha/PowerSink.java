@@ -120,6 +120,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect<PowerSinkCounterUnl
                         for (Ability ability : landAbilities) {
                             if (ability instanceof ManaAbility) {
                                 land.tap(game);
+                                break;
                             }
                         }
                     }

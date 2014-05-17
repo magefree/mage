@@ -98,6 +98,8 @@ class ManaShortEffect extends OneShotEffect<ManaShortEffect> {
             }
             
             targetPlayer.getManaPool().emptyPool();
+            
+            return true;
         }
         return false;
     }
