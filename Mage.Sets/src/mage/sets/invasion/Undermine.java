@@ -25,50 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.invasion;
 
 import java.util.UUID;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.costs.common.RevealTargetFromHandCost;
-import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInHand;
+import mage.filter.FilterSpell;
+import mage.target.TargetSpell;
 
 /**
  *
  * @author LevelX2
  */
-public class WanderwineHub extends CardImpl<WanderwineHub> {
+public class Undermine extends CardImpl<Undermine> {
 
-    private static final FilterCard filter = new FilterCard("a Merfolk card from your hand");
-    static {
-        filter.add(new SubtypePredicate("Merfolk"));
-    }
+    public Undermine(UUID ownerId) {
+        super(ownerId, 282, "Undermine", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}{B}");
+        this.expansionSetCode = "INV";
 
-    public WanderwineHub(UUID ownerId) {
-        super(ownerId, 280, "Wanderwine Hub", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
+        this.color.setBlue(true);
+        this.color.setBlack(true);
 
-        // As Wanderwine Hub enters the battlefield, you may reveal a Merfolk card from your hand. If you don't, Wanderwine Hub enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Merfolk card from your hand. If you don't, {this} enters the battlefield tapped"));
-        // {tap}: Add {W} or {U} to your mana pool.
-        this.addAbility(new WhiteManaAbility());
-        this.addAbility(new BlueManaAbility());
+        // Counter target spell. Its controller loses 3 life.
+        this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell()));
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(3));
 
     }
 
-    public WanderwineHub(final WanderwineHub card) {
+    public Undermine(final Undermine card) {
         super(card);
     }
 
     @Override
-    public WanderwineHub copy() {
-        return new WanderwineHub(this);
+    public Undermine copy() {
+        return new Undermine(this);
     }
 }

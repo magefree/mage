@@ -92,37 +92,39 @@ class JaradsOrdersEffect extends OneShotEffect<JaradsOrdersEffect> {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterCreatureCard());
+    public boolean apply(Game game, Ability source) {        
         Player player = game.getPlayer(source.getControllerId());
-        if (player.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
-                Cards revealed = new CardsImpl();
-                for (UUID cardId: (List<UUID>)target.getTargets()) {
-                    Card card = player.getLibrary().getCard(cardId, game);
-                    revealed.add(card);
-                }
-                player.revealCards("Jarad's Orders", revealed, game);
-                if (target.getTargets().size() == 2) {
-                    TargetCard target2 = new TargetCard(Zone.PICK, filter);
-                    target2.setRequired(true);
-                    player.choose(Outcome.Benefit, revealed, target2, game);
-                    Card card = revealed.get(target2.getFirstTarget(), game);
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
-                    revealed.remove(card);
-                    card = revealed.getCards(game).iterator().next();
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
-                }
-                else if (target.getTargets().size() == 1) {
-                    Card card = revealed.getCards(game).iterator().next();
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
-                }
+        if (player != null) {
+            TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterCreatureCard("creature cards"));
+            if (player.searchLibrary(target, game)) {
+                if (target.getTargets().size() > 0) {
+                    Cards revealed = new CardsImpl();
+                    for (UUID cardId: (List<UUID>)target.getTargets()) {
+                        Card card = player.getLibrary().getCard(cardId, game);
+                        revealed.add(card);
+                    }
+                    player.revealCards("Jarad's Orders", revealed, game);
+                    if (target.getTargets().size() == 2) {
+                        TargetCard target2 = new TargetCard(Zone.PICK, filter);
+                        target2.setRequired(true);
+                        player.choose(Outcome.Benefit, revealed, target2, game);
+                        Card card = revealed.get(target2.getFirstTarget(), game);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        revealed.remove(card);
+                        card = revealed.getCards(game).iterator().next();
+                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+                    }
+                    else if (target.getTargets().size() == 1) {
+                        Card card = revealed.getCards(game).iterator().next();
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                    }
 
+                }
+                player.shuffleLibrary(game);
+                return true;
             }
             player.shuffleLibrary(game);
-            return true;
         }
-        player.shuffleLibrary(game);
         return false;
 
     }

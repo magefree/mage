@@ -25,50 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.dissension;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.costs.common.RevealTargetFromHandCost;
-import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
  * @author LevelX2
  */
-public class WanderwineHub extends CardImpl<WanderwineHub> {
+public class CourtHussar extends mage.sets.commander.CourtHussar {
 
-    private static final FilterCard filter = new FilterCard("a Merfolk card from your hand");
-    static {
-        filter.add(new SubtypePredicate("Merfolk"));
+    public CourtHussar(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 22;
+        this.expansionSetCode = "DIS";
     }
 
-    public WanderwineHub(UUID ownerId) {
-        super(ownerId, 280, "Wanderwine Hub", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
-
-        // As Wanderwine Hub enters the battlefield, you may reveal a Merfolk card from your hand. If you don't, Wanderwine Hub enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Merfolk card from your hand. If you don't, {this} enters the battlefield tapped"));
-        // {tap}: Add {W} or {U} to your mana pool.
-        this.addAbility(new WhiteManaAbility());
-        this.addAbility(new BlueManaAbility());
-
-    }
-
-    public WanderwineHub(final WanderwineHub card) {
+    public CourtHussar(final CourtHussar card) {
         super(card);
     }
 
     @Override
-    public WanderwineHub copy() {
-        return new WanderwineHub(this);
+    public CourtHussar copy() {
+        return new CourtHussar(this);
     }
 }

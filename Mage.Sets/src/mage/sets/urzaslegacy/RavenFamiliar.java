@@ -34,7 +34,9 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -68,7 +70,9 @@ public class RavenFamiliar extends CardImpl<RavenFamiliar> {
         // Echo {2}{U}
         this.addAbility(new EchoAbility("{2}{U}"));
         // When Raven Familiar enters the battlefield, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RavenFamiliarEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false),
+                false));
     }
 
     public RavenFamiliar(final RavenFamiliar card) {

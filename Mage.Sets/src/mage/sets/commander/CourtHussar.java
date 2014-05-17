@@ -25,50 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.commander;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.costs.common.RevealTargetFromHandCost;
-import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.ManaWasSpentCondition;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
  * @author LevelX2
  */
-public class WanderwineHub extends CardImpl<WanderwineHub> {
+public class CourtHussar extends CardImpl<CourtHussar> {
 
-    private static final FilterCard filter = new FilterCard("a Merfolk card from your hand");
-    static {
-        filter.add(new SubtypePredicate("Merfolk"));
+    public CourtHussar(UUID ownerId) {
+        super(ownerId, 43, "Court Hussar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "CMD";
+        this.subtype.add("Vedalken");
+        this.subtype.add("Knight");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+
+        // Vigilance
+        this.addAbility(VigilanceAbility.getInstance());
+        // When Court Hussar enters the battlefield, look at the top three cards of your library, then put one of them into your hand and the rest on the bottom of your library in any order.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false),
+                false));
+        // When Court Hussar enters the battlefield, sacrifice it unless {W} was spent to cast it.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.W)), false));
     }
 
-    public WanderwineHub(UUID ownerId) {
-        super(ownerId, 280, "Wanderwine Hub", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
-
-        // As Wanderwine Hub enters the battlefield, you may reveal a Merfolk card from your hand. If you don't, Wanderwine Hub enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Merfolk card from your hand. If you don't, {this} enters the battlefield tapped"));
-        // {tap}: Add {W} or {U} to your mana pool.
-        this.addAbility(new WhiteManaAbility());
-        this.addAbility(new BlueManaAbility());
-
-    }
-
-    public WanderwineHub(final WanderwineHub card) {
+    public CourtHussar(final CourtHussar card) {
         super(card);
     }
 
     @Override
-    public WanderwineHub copy() {
-        return new WanderwineHub(this);
+    public CourtHussar copy() {
+        return new CourtHussar(this);
     }
 }

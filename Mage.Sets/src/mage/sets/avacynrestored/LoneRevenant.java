@@ -28,29 +28,21 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.keyword.HexproofAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.keyword.HexproofAbility;
-import mage.cards.CardImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -88,7 +80,7 @@ class LoneRevenantTriggeredAbility extends TriggeredAbilityImpl<LoneRevenantTrig
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     public LoneRevenantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LoneRevenantEffect());
+        super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false));
     }
 
     public LoneRevenantTriggeredAbility(final LoneRevenantTriggeredAbility ability) {
@@ -110,70 +102,14 @@ class LoneRevenantTriggeredAbility extends TriggeredAbilityImpl<LoneRevenantTrig
             if (permanent != null && number != 1) {
                 return false;
             }
-            if (permanent == null && number != 0) {
-                return false;
-            }
-            return true;
+            return permanent != null || number == 0;
         }
         return false;
     }
-}
-
-class LoneRevenantEffect extends OneShotEffect<LoneRevenantEffect> {
-
-    public LoneRevenantEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Whenever Lone Revenant deals combat damage to a player, if you control no other creatures, look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order";
-    }
-
-    public LoneRevenantEffect(final LoneRevenantEffect effect) {
-        super(effect);
-    }
 
     @Override
-    public LoneRevenantEffect copy() {
-        return new LoneRevenantEffect(this);
+    public String getRule() {
+        return "Whenever {this} deals combat damage to a player, if you control no other creatures, " + super.getRule();
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Cards cards = new CardsImpl(Zone.PICK);
-        int count = Math.min(player.getLibrary().size(), 4);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                game.setZone(card.getId(), Zone.PICK);
-            }
-        }
-        player.lookAtCards("Lone Revenant", cards, game);
-
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put into your hand"));
-        if (player.choose(Outcome.DrawCard, cards, target, game)) {
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.HAND, source.getId(), game, false);
-            }
-        }
-
-        target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-        target.setRequired(true);
-        while (cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-        }
-
-        return true;
-    }
 }
