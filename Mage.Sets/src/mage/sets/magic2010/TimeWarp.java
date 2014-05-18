@@ -49,7 +49,7 @@ public class TimeWarp extends CardImpl<TimeWarp> {
         super(ownerId, 75, "Time Warp", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "M10";
         this.color.setBlue(true);
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new TimeWarpEffect());
     }
 
