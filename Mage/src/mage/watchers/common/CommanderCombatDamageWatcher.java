@@ -106,7 +106,7 @@ public class CommanderCombatDamageWatcher extends WatcherImpl<CommanderCombatDam
             sb.append("<b>Commander</b>");
             Integer castCount = (Integer)game.getState().getValue(sourceId + "_castCount");
             if (castCount != null) {
-                sb.append(" was ").append(castCount).append(castCount.intValue() == 1 ? " time":" times").append(" casted from the command zone.");
+                sb.append(" ").append(castCount).append(castCount.intValue() == 1 ? " time":" times").append(" casted from the command zone.");
             }
             this.addInfo(object, "Commander",sb.toString());
             for (Map.Entry<UUID, Integer> entry : damageToPlayer.entrySet()) {
