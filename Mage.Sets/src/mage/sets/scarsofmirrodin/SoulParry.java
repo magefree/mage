@@ -47,9 +47,11 @@ public class SoulParry extends CardImpl<SoulParry> {
         super(ownerId, 21, "Soul Parry", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "SOM";
         this.color.setWhite(true);
+        
+        // Prevent all damage one or two target creatures would deal this turn
         Target target = new TargetCreaturePermanent(1,2);
         target.setTargetName("one or two creatures");
-        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(target);
     }
 

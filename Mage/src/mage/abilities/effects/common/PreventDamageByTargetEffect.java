@@ -43,14 +43,22 @@ import java.util.UUID;
  */
 public class PreventDamageByTargetEffect extends PreventionEffectImpl<PreventDamageByTargetEffect> {
 
+    public PreventDamageByTargetEffect(Duration duration) {
+        this(duration, false);
+    }
+    
     public PreventDamageByTargetEffect(Duration duration, int amount) {
-        super(duration, amount, false);
+        this(duration, amount, false);
     }
 
-    public PreventDamageByTargetEffect(Duration duration, boolean all) {
-        super(duration, Integer.MAX_VALUE, false);
+    public PreventDamageByTargetEffect(Duration duration, boolean onlyCombat) {
+        this(duration, Integer.MAX_VALUE, onlyCombat);
     }
-
+    
+    public PreventDamageByTargetEffect(Duration duration, int amount, boolean onlyCombat) {
+        super(duration, amount, onlyCombat);
+    }
+    
     public PreventDamageByTargetEffect(final PreventDamageByTargetEffect effect) {
         super(effect);
     }

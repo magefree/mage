@@ -41,10 +41,22 @@ import mage.game.events.GameEvent;
  */
 public class PreventDamageToTargetEffect extends PreventionEffectImpl<PreventDamageToTargetEffect> {
 
-    public PreventDamageToTargetEffect(Duration duration, int amount) {
-        super(duration, amount, false);
+    public PreventDamageToTargetEffect(Duration duration) {
+        this(duration, false);
     }
-
+    
+    public PreventDamageToTargetEffect(Duration duration, boolean onlyCombat) {
+        this(duration, Integer.MAX_VALUE, onlyCombat);
+    }
+    
+    public PreventDamageToTargetEffect(Duration duration, int amount) {
+        this(duration, amount, false);
+    }
+    
+    public PreventDamageToTargetEffect(Duration duration, int amount, boolean onlyCombat) {
+        super(duration, amount, onlyCombat);
+    }
+    
     public PreventDamageToTargetEffect(final PreventDamageToTargetEffect effect) {
         super(effect);
     }
