@@ -81,7 +81,7 @@ public class PermanentView extends CardView {
         this.copy = permanent.isCopy();
 
         // for fipped, transformed or copied cards, switch the names
-        if (!original.getName().equals(this.getName())) {
+        if (original != null && !original.getName().equals(this.getName())) {
             if (permanent.isCopy() && permanent.isFlipCard()) {
                 this.alternateName = permanent.getFlipCardName();
                 this.originalName = this.getName();
