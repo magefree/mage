@@ -25,16 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 
@@ -42,30 +39,28 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class QuirionSentinel extends CardImpl<QuirionSentinel> {
+public class SageOfEpityr extends CardImpl<SageOfEpityr> {
 
-    public QuirionSentinel(UUID ownerId) {
-        super(ownerId, 204, "Quirion Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "INV";
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
+    public SageOfEpityr(UUID ownerId) {
+        super(ownerId, 74, "Sage of Epityr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(2);
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Quirion Sentinel enters the battlefield, add one mana of any color to your mana pool.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect());
-        ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
+        // When Sage of Epityr enters the battlefield, look at the top four cards of your library, then put them back in any order.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(4)));
     }
 
-    public QuirionSentinel(final QuirionSentinel card) {
+    public SageOfEpityr(final SageOfEpityr card) {
         super(card);
     }
 
     @Override
-    public QuirionSentinel copy() {
-        return new QuirionSentinel(this);
+    public SageOfEpityr copy() {
+        return new SageOfEpityr(this);
     }
 }

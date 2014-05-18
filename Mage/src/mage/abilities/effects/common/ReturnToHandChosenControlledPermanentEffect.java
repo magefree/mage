@@ -94,9 +94,9 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect<R
         sb.append(CardUtil.numberToText(number, "a"));
         sb.append(" ").append(filter.getMessage());
         if (number > 1) {
-            sb.append(" to its owner's hand");
-        } else {
             sb.append(" to their owner's hand");
+        } else {
+            sb.append(" to its owner's hand");
         }
         return sb.toString();
     }

@@ -25,47 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.sets.visions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
  * @author Plopman
  */
-public class QuirionSentinel extends CardImpl<QuirionSentinel> {
+public class ShriekingDrake extends CardImpl<ShriekingDrake> {
 
-    public QuirionSentinel(UUID ownerId) {
-        super(ownerId, 204, "Quirion Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "INV";
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
+    public ShriekingDrake(UUID ownerId) {
+        super(ownerId, 43, "Shrieking Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+        this.expansionSetCode = "VIS";
+        this.subtype.add("Drake");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(2);
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Quirion Sentinel enters the battlefield, add one mana of any color to your mana pool.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect());
-        ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Shrieking Drake enters the battlefield, return a creature you control to its owner's hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent())));
     }
 
-    public QuirionSentinel(final QuirionSentinel card) {
+    public ShriekingDrake(final ShriekingDrake card) {
         super(card);
     }
 
     @Override
-    public QuirionSentinel copy() {
-        return new QuirionSentinel(this);
+    public ShriekingDrake copy() {
+        return new ShriekingDrake(this);
     }
 }
