@@ -55,7 +55,7 @@ public class Mightstone extends CardImpl<Mightstone> {
         this.expansionSetCode = "ATQ";
 
         // Attacking creatures get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect( -1, 0, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect( 1, 0, Duration.WhileOnBattlefield, filter, false)));
     }
 
     public Mightstone(final Mightstone card) {
