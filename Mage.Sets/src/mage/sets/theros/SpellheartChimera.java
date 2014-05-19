@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -103,18 +104,20 @@ class SpellheartChimeraEffect extends ContinuousEffectImpl<SpellheartChimeraEffe
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getSourceId());
-        if (target != null) {
+        Card sourceCard = game.getCard(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null || sourceCard != null) {
             int number = 0;
-
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 number =  player.getGraveyard().count(filter, game);
             }
-
-            target.getPower().setValue(number);
+            if (sourcePermanent != null) {
+                sourcePermanent.getPower().setValue(number);
+            } else {
+                sourceCard.getPower().setValue(number);
+            }
             return true;
-
         }
         return false;
     }

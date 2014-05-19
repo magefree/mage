@@ -79,11 +79,12 @@ public class SwarmOfRats extends CardImpl<SwarmOfRats> {
 class SwarmOfRatsEffect extends ContinuousEffectImpl<SwarmOfRatsEffect> {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Rats you control");
+
     static{
         filter.add(new SubtypePredicate("Rat"));
     }
     
-    private DynamicValue amount;
+    private final DynamicValue amount;
 
     public SwarmOfRatsEffect() {
         super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);

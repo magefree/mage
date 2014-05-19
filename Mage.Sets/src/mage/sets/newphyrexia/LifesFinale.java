@@ -29,16 +29,14 @@ package mage.sets.newphyrexia;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -105,7 +103,7 @@ class LifesFinaleEffect extends OneShotEffect {
                 for (UUID targetId : targets) {
                     Card card = opponent.getLibrary().remove(targetId, game);
                     if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+                        player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
             }
