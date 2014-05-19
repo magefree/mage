@@ -33,11 +33,12 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  * @author Loki
@@ -47,10 +48,22 @@ public class CascadeBluffs extends CardImpl<CascadeBluffs> {
     public CascadeBluffs(UUID ownerId) {
         super(ownerId, 175, "Cascade Bluffs", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "EVE";
+        
+        // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new CascadeBluffsFirstManaAbility());
-        this.addAbility(new CascadeBluffsSecondManaAbility());
-        this.addAbility(new CascadeBluffsThirdManaAbility());
+
+        // {U/R}, {tap}: Add {U}{U}, {U}{R}, or {R}{R} to your mana pool.
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(2), new ManaCostsImpl("{U/R}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 1, 0, 0, 0, 0), new ManaCostsImpl("{U/R}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new ManaCostsImpl("{U/R}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);        
     }
 
     public CascadeBluffs(final CascadeBluffs card) {
@@ -60,60 +73,5 @@ public class CascadeBluffs extends CardImpl<CascadeBluffs> {
     @Override
     public CascadeBluffs copy() {
         return new CascadeBluffs(this);
-    }
-}
-
-class CascadeBluffsFirstManaAbility extends BasicManaAbility<CascadeBluffsFirstManaAbility> {
-
-    public CascadeBluffsFirstManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{U/R}"));
-        this.netMana.setBlue(2);
-    }
-
-    public CascadeBluffsFirstManaAbility(final CascadeBluffsFirstManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CascadeBluffsFirstManaAbility copy() {
-        return new CascadeBluffsFirstManaAbility(this);
-    }
-}
-
-class CascadeBluffsSecondManaAbility extends BasicManaAbility<CascadeBluffsSecondManaAbility> {
-
-    public CascadeBluffsSecondManaAbility() {
-        super(new BasicManaEffect(new Mana(1, 0, 1, 0, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{U/R}"));
-        this.netMana.setBlue(1);
-        this.netMana.setRed(1);
-    }
-
-    public CascadeBluffsSecondManaAbility(final CascadeBluffsSecondManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CascadeBluffsSecondManaAbility copy() {
-        return new CascadeBluffsSecondManaAbility(this);
-    }
-}
-
-class CascadeBluffsThirdManaAbility extends BasicManaAbility<CascadeBluffsThirdManaAbility> {
-
-    public CascadeBluffsThirdManaAbility() {
-        super(new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{U/R}"));
-        this.netMana.setRed(2);
-    }
-
-    public CascadeBluffsThirdManaAbility(final CascadeBluffsThirdManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CascadeBluffsThirdManaAbility copy() {
-        return new CascadeBluffsThirdManaAbility(this);
     }
 }

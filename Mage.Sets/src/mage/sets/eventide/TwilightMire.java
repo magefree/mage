@@ -32,11 +32,12 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -47,11 +48,22 @@ public class TwilightMire extends CardImpl<TwilightMire> {
     public TwilightMire (UUID ownerId) {
         super(ownerId, 180, "Twilight Mire", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "EVE";
+        
+        // {R/W}, {tap}: Add {R}{R}, {R}{W}, or {W}{W} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new TwilightMireFirstManaAbility());
-        this.addAbility(new TwilightMireSecondManaAbility());
-        this.addAbility(new TwilightMireThirdManaAbility());
-    }
+        
+        // {B/G}, {tap}: Add {B}{B}, {B}{G}, or {G}{G} to your mana pool.
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new ManaCostsImpl("{B/G}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 1, 0, 0), new ManaCostsImpl("{B/G}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new ManaCostsImpl("{B/G}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);        }
 
     public TwilightMire (final TwilightMire card) {
         super(card);
@@ -62,59 +74,4 @@ public class TwilightMire extends CardImpl<TwilightMire> {
         return new TwilightMire(this);
     }
 
-}
-
-class TwilightMireFirstManaAbility extends BasicManaAbility<TwilightMireFirstManaAbility> {
-
-    public TwilightMireFirstManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{B/G}"));
-        this.netMana.setBlack(2);
-    }
-
-    public TwilightMireFirstManaAbility(final TwilightMireFirstManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TwilightMireFirstManaAbility copy() {
-        return new TwilightMireFirstManaAbility(this);
-    }
-}
-
-class TwilightMireSecondManaAbility extends BasicManaAbility<TwilightMireSecondManaAbility> {
-
-    public TwilightMireSecondManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{B/G}"));
-        this.netMana.setBlack(1);
-        this.netMana.setGreen(1);
-    }
-
-    public TwilightMireSecondManaAbility(final TwilightMireSecondManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TwilightMireSecondManaAbility copy() {
-        return new TwilightMireSecondManaAbility(this);
-    }
-}
-
-class TwilightMireThirdManaAbility extends BasicManaAbility<TwilightMireThirdManaAbility> {
-
-    public TwilightMireThirdManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{B/G}"));
-        this.netMana.setGreen(2);
-    }
-
-    public TwilightMireThirdManaAbility(final TwilightMireThirdManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TwilightMireThirdManaAbility copy() {
-        return new TwilightMireThirdManaAbility(this);
-    }
 }

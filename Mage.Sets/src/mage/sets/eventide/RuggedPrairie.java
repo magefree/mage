@@ -32,11 +32,12 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -47,10 +48,21 @@ public class RuggedPrairie extends CardImpl<RuggedPrairie> {
     public RuggedPrairie (UUID ownerId) {
         super(ownerId, 178, "Rugged Prairie", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "EVE";
+        // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new RuggedPrairieFirstManaAbility());
-        this.addAbility(new RuggedPrairieSecondManaAbility());
-        this.addAbility(new RuggedPrairieThirdManaAbility());
+        
+        // {R/W}, {tap}: Add {R}{R}, {R}{W}, or {W}{W} to your mana pool.
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new ManaCostsImpl("{R/W}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 1, 0, 0, 0), new ManaCostsImpl("{R/W}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new ManaCostsImpl("{R/W}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);          
     }
 
     public RuggedPrairie (final RuggedPrairie card) {
@@ -60,60 +72,5 @@ public class RuggedPrairie extends CardImpl<RuggedPrairie> {
     @Override
     public RuggedPrairie copy() {
         return new RuggedPrairie(this);
-    }
-}
-
-class RuggedPrairieFirstManaAbility extends BasicManaAbility<RuggedPrairieFirstManaAbility> {
-
-    public RuggedPrairieFirstManaAbility() {
-        super(new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{R/W}"));
-        this.netMana.setRed(2);
-    }
-
-    public RuggedPrairieFirstManaAbility(final RuggedPrairieFirstManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RuggedPrairieFirstManaAbility copy() {
-        return new RuggedPrairieFirstManaAbility(this);
-    }
-}
-
-class RuggedPrairieSecondManaAbility extends BasicManaAbility<RuggedPrairieSecondManaAbility> {
-
-    public RuggedPrairieSecondManaAbility() {
-        super(new BasicManaEffect(new Mana(1, 0, 0, 1, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{R/W}"));
-        this.netMana.setRed(1);
-        this.netMana.setWhite(1);
-    }
-
-    public RuggedPrairieSecondManaAbility(final RuggedPrairieSecondManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RuggedPrairieSecondManaAbility copy() {
-        return new RuggedPrairieSecondManaAbility(this);
-    }
-}
-
-class RuggedPrairieThirdManaAbility extends BasicManaAbility<RuggedPrairieThirdManaAbility> {
-
-    public RuggedPrairieThirdManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{R/W}"));
-        this.netMana.setWhite(2);
-    }
-
-    public RuggedPrairieThirdManaAbility(final RuggedPrairieThirdManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RuggedPrairieThirdManaAbility copy() {
-        return new RuggedPrairieThirdManaAbility(this);
     }
 }

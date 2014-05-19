@@ -32,11 +32,15 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -47,10 +51,23 @@ public class FloodedGrove extends CardImpl<FloodedGrove> {
     public FloodedGrove (UUID ownerId) {
         super(ownerId, 177, "Flooded Grove", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "EVE";
+        
+        // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new FloodedGroveFirstManaAbility());
-        this.addAbility(new FloodedGroveSecondManaAbility());
-        this.addAbility(new FloodedGroveThirdManaAbility());
+        
+        // {(G/U)}, {T}: Add {G}{G}, {G}{U}, or {U}{U} to your mana pool. 
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new ManaCostsImpl("{G/U}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0), new ManaCostsImpl("{G/U}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(2), new ManaCostsImpl("{G/U}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);           
+        
     }
 
     public FloodedGrove (final FloodedGrove card) {
@@ -62,59 +79,4 @@ public class FloodedGrove extends CardImpl<FloodedGrove> {
         return new FloodedGrove(this);
     }
 
-}
-
-class FloodedGroveFirstManaAbility extends BasicManaAbility<FloodedGroveFirstManaAbility> {
-
-    public FloodedGroveFirstManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{G/U}"));
-        this.netMana.setGreen(2);
-    }
-
-    public FloodedGroveFirstManaAbility(final FloodedGroveFirstManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FloodedGroveFirstManaAbility copy() {
-        return new FloodedGroveFirstManaAbility(this);
-    }
-}
-
-class FloodedGroveSecondManaAbility extends BasicManaAbility<FloodedGroveSecondManaAbility> {
-
-    public FloodedGroveSecondManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 1, 1, 0, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{G/U}"));
-        this.netMana.setGreen(1);
-        this.netMana.setBlue(1);
-    }
-
-    public FloodedGroveSecondManaAbility(final FloodedGroveSecondManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FloodedGroveSecondManaAbility copy() {
-        return new FloodedGroveSecondManaAbility(this);
-    }
-}
-
-class FloodedGroveThirdManaAbility extends BasicManaAbility<FloodedGroveThirdManaAbility> {
-
-    public FloodedGroveThirdManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{G/U}"));
-        this.netMana.setBlue(2);
-    }
-
-    public FloodedGroveThirdManaAbility(final FloodedGroveThirdManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FloodedGroveThirdManaAbility copy() {
-        return new FloodedGroveThirdManaAbility(this);
-    }
 }

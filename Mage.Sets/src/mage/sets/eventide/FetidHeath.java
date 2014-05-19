@@ -32,11 +32,14 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -47,10 +50,22 @@ public class FetidHeath extends CardImpl<FetidHeath> {
     public FetidHeath (UUID ownerId) {
         super(ownerId, 176, "Fetid Heath", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "EVE";
+        
+        // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new FetidHeathFirstManaAbility());
-        this.addAbility(new FetidHeathSecondManaAbility());
-        this.addAbility(new FetidHeathThirdManaAbility());
+        
+        // {W/B}, {tap}: Add {W}{W}, {W}{B}, or {B}{B} to your mana pool.
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new ManaCostsImpl("{W/B}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 1, 1, 0, 0), new ManaCostsImpl("{W/B}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new ManaCostsImpl("{W/B}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);          
     }
 
     public FetidHeath (final FetidHeath card) {
@@ -62,59 +77,4 @@ public class FetidHeath extends CardImpl<FetidHeath> {
         return new FetidHeath(this);
     }
 
-}
-
-class FetidHeathFirstManaAbility extends BasicManaAbility<FetidHeathFirstManaAbility> {
-
-    public FetidHeathFirstManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{W/B}"));
-        this.netMana.setWhite(2);
-    }
-
-    public FetidHeathFirstManaAbility(final FetidHeathFirstManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FetidHeathFirstManaAbility copy() {
-        return new FetidHeathFirstManaAbility(this);
-    }
-}
-
-class FetidHeathSecondManaAbility extends BasicManaAbility<FetidHeathSecondManaAbility> {
-
-    public FetidHeathSecondManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 0, 1, 1, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{W/B}"));
-        this.netMana.setBlack(1);
-        this.netMana.setWhite(1);
-    }
-
-    public FetidHeathSecondManaAbility(final FetidHeathSecondManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FetidHeathSecondManaAbility copy() {
-        return new FetidHeathSecondManaAbility(this);
-    }
-}
-
-class FetidHeathThirdManaAbility extends BasicManaAbility<FetidHeathThirdManaAbility> {
-
-    public FetidHeathThirdManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{W/B}"));
-        this.netMana.setBlack(2);
-    }
-
-    public FetidHeathThirdManaAbility(final FetidHeathThirdManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FetidHeathThirdManaAbility copy() {
-        return new FetidHeathThirdManaAbility(this);
-    }
 }

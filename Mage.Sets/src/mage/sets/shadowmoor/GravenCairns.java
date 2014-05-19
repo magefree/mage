@@ -31,11 +31,12 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -47,12 +48,21 @@ public class GravenCairns extends CardImpl<GravenCairns> {
         super(ownerId, 272, "Graven Cairns", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "SHM";
 
-        // {tap}: Add {1} to your mana pool.
+        // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        // {BR}, {tap}: Add {B}{B}, {B}{R}, or {R}{R} to your mana pool.
-        this.addAbility(new GravenCairnsFirstManaAbility());
-        this.addAbility(new GravenCairnsSecondManaAbility());
-        this.addAbility(new GravenCairnsThirdManaAbility());
+        
+        // {B/R}, {tap}: Add {B}{B}, {B}{R}, or {R}{R} to your mana pool.
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new ManaCostsImpl("{B/R}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 1, 0, 0), new ManaCostsImpl("{B/R}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new ManaCostsImpl("{B/R}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);          
     }
 
     public GravenCairns(final GravenCairns card) {
@@ -62,60 +72,5 @@ public class GravenCairns extends CardImpl<GravenCairns> {
     @Override
     public GravenCairns copy() {
         return new GravenCairns(this);
-    }
-}
-
-class GravenCairnsFirstManaAbility extends BasicManaAbility<GravenCairnsFirstManaAbility> {
-
-    public GravenCairnsFirstManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{B/R}"));
-        this.netMana.setBlack(2);
-    }
-
-    public GravenCairnsFirstManaAbility(final GravenCairnsFirstManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GravenCairnsFirstManaAbility copy() {
-        return new GravenCairnsFirstManaAbility(this);
-    }
-}
-
-class GravenCairnsSecondManaAbility extends BasicManaAbility<GravenCairnsSecondManaAbility> {
-
-    public GravenCairnsSecondManaAbility() {
-        super(new BasicManaEffect(new Mana(1, 0, 0, 0, 1, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{B/R}"));
-        this.netMana.setBlack(1);
-        this.netMana.setRed(1);
-    }
-
-    public GravenCairnsSecondManaAbility(final GravenCairnsSecondManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GravenCairnsSecondManaAbility copy() {
-        return new GravenCairnsSecondManaAbility(this);
-    }
-}
-
-class GravenCairnsThirdManaAbility extends BasicManaAbility<GravenCairnsThirdManaAbility> {
-
-    public GravenCairnsThirdManaAbility() {
-        super(new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
-        this.addManaCost(new ManaCostsImpl("{B/R}"));
-        this.netMana.setRed(2);
-    }
-
-    public GravenCairnsThirdManaAbility(final GravenCairnsThirdManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GravenCairnsThirdManaAbility copy() {
-        return new GravenCairnsThirdManaAbility(this);
     }
 }
