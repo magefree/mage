@@ -269,8 +269,20 @@ public class TournamentController {
 
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
-            TournamentPlayer player = tournament.getPlayer(userPlayerMap.get(userId));
-            tournament.autoSubmit(userPlayerMap.get(userId), player.generateDeck());
+            TournamentPlayer tournamentPlayer = tournament.getPlayer(userPlayerMap.get(userId));
+            if (tournamentPlayer.getDeck() != null) {
+                tournament.autoSubmit(userPlayerMap.get(userId), tournamentPlayer.generateDeck());
+            } else {
+                StringBuilder sb = new StringBuilder();
+                User user = UserManager.getInstance().getUser(userId);
+                if (user != null) {
+                    sb.append(user.getName());
+                }
+                sb.append(" - no deck found for auto submit");
+                logger.fatal(sb);
+                tournamentPlayer.setEliminated();
+                tournamentPlayer.setStateInfo("No deck for auto submit");
+            }
         }
     }
 
