@@ -46,7 +46,7 @@ import mage.players.Player;
  */
 public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTargetEffect> {
 
-    private UUID controllingPlayerId;
+    protected UUID controllingPlayerId;
     private boolean fixedControl;
 
     public GainControlTargetEffect(Duration duration) {
