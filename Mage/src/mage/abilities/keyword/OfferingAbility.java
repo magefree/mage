@@ -206,7 +206,7 @@ class OfferingCostReductionEffect extends CostModificationEffectImpl<OfferingCos
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.adjustCost((SpellAbility) abilityToModify, manaCostsToReduce);
+        CardUtil.reduceCost((SpellAbility) abilityToModify, manaCostsToReduce);
         this.used = true;
         return true;
     }

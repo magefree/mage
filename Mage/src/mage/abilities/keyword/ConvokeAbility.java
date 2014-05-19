@@ -156,7 +156,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
                             if (chooseManaType.getChoice().equals("Colorless")) {
                                 ++adjCost;
                             }
-                            CardUtil.adjustCost((SpellAbility)ability, manaCostsToReduce);
+                            CardUtil.reduceCost((SpellAbility)ability, manaCostsToReduce);
                         } else {
                             ++adjCost;
                         }

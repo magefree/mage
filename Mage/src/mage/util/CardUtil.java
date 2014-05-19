@@ -230,8 +230,19 @@ public class CardUtil {
         return adjustedCost;
     }
     
-    public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
+    public static void reduceCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
         adjustCost(spellAbility, manaCostsToReduce, true);
+    }
+    
+    public static void increaseCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToIncrease) {
+        ManaCosts<ManaCost> increasedCost = spellAbility.getManaCostsToPay().copy();
+
+        for (ManaCost manaCost : manaCostsToIncrease) {
+            increasedCost.add(manaCost.copy());
+        }
+
+        spellAbility.getManaCostsToPay().clear();
+        spellAbility.getManaCostsToPay().addAll(increasedCost);
     }
 
     /**
