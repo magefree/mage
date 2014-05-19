@@ -34,8 +34,11 @@ import java.util.Set;
 import java.util.UUID;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -47,6 +50,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private final Set<UUID> selectedModes = new LinkedHashSet<UUID>();
     private int minModes;
     private int maxModes;
+    private TargetController modeChooser;
 
     public Modes() {
         Mode mode = new Mode();
@@ -55,7 +59,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.minModes = 1;
         this.maxModes = 1;
         this.selectedModes.add(modeId);
-
+        this.modeChooser = TargetController.YOU;
     }
 
     public Modes(Modes modes) {
@@ -66,6 +70,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.minModes = modes.minModes;
         this.maxModes = modes.maxModes;
         this.selectedModes.addAll(modes.selectedModes);
+        this.modeChooser = modes.modeChooser;
     }
 
     public Modes copy() {
@@ -94,6 +99,14 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
     public int getMaxModes() {
         return this.maxModes;
+    }
+    
+    public void setModeChooser(TargetController modeChooser) {
+        this.modeChooser = modeChooser;
+    }
+    
+    public TargetController getModeChooser() {
+        return this.modeChooser;
     }
 
     public void setMode(Mode mode) {
@@ -128,8 +141,24 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 }
                 return selectedModes.size() > 0;
             }
+            
+            // 700.2d
+            // Some spells and abilities specify that a player other than their controller chooses a mode for it.
+            // In that case, the other player does so when the spell or ability’s controller normally would do so.
+            // If there is more than one other player who could make such a choice, the spell or ability’s controller decides which of those players will make the choice. 
+            UUID playerId = null;
+            if (modeChooser == TargetController.OPPONENT) {
+                TargetOpponent targetOpponent = new TargetOpponent(true);
+                if (targetOpponent.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game)) {
+                    playerId = targetOpponent.getFirstTarget();
+                }
+            }
+            if (playerId == null ) {
+                playerId = source.getControllerId();
+            }
+            Player player = game.getPlayer(playerId);
+            
             // player chooses modes manually
-            Player player = game.getPlayer(source.getControllerId());
             while (this.selectedModes.size() < this.getMaxModes()) {
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
