@@ -92,7 +92,7 @@ class Borrowing100000ArrowsEffect extends OneShotEffect<Borrowing100000ArrowsEff
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new TappedPredicate());
             filter.add(new ControllerIdPredicate(opponent.getId()));
-            return new DrawCardSourceControllerEffect(game.getBattlefield().count(filter, source.getSourceId(), source.getSourceId(), game)).apply(game, source);
+            return new DrawCardSourceControllerEffect(game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game)).apply(game, source);
         }
         return false;
     }
