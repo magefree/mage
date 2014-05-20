@@ -21,11 +21,11 @@ import java.util.regex.Pattern;
 public class ManaSymbols {
 
     private static final Logger log = Logger.getLogger(ManaSymbols.class);
-    private static final Map<String, BufferedImage> manaImages = new HashMap<String, BufferedImage>();
-    private static final Map<String, Image> manaImagesOriginal = new HashMap<String, Image>();
-    private static final Map<String, Image> setImages = new HashMap<String, Image>();
-    private static final Map<String, Dimension> setImagesExist = new HashMap<String, Dimension>();
-    private static Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
+    private static final Map<String, BufferedImage> manaImages = new HashMap<>();
+    private static final Map<String, Image> manaImagesOriginal = new HashMap<>();
+    private static final Map<String, Image> setImages = new HashMap<>();
+    private static final Map<String, Dimension> setImagesExist = new HashMap<>();
+    private static final Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
     private static String cachedPath;
 
     public static void loadImages() {
@@ -96,7 +96,7 @@ public class ManaSymbols {
                             ImageIO.write(resized, "png", newFile);
                         }
                     } catch (Exception e) {
-                        if (file != null && file.exists()) {
+                        if (file.exists()) {
                             file.delete();
                         }
                     }

@@ -43,13 +43,13 @@ public class DownloadGui extends JPanel {
     private final BoundedRangeModel               model            = new DefaultBoundedRangeModel(0, 0, 0, 0);
     private final JProgressBar                    progress         = new JProgressBar(model);
 
-    private final Map<DownloadJob, DownloadPanel> progresses       = new HashMap<DownloadJob, DownloadPanel>();
+    private final Map<DownloadJob, DownloadPanel> progresses       = new HashMap<>();
     private final JPanel                          panel            = new JPanel();
 
-    public DownloadGui(Downloader d) {
+    public DownloadGui(Downloader downloader) {
         super(new BorderLayout());
-        this.d = d;
-        d.addPropertyChangeListener(l);
+        this.d = downloader;
+        downloader.addPropertyChangeListener(l);
 
         JPanel p = new JPanel(new BorderLayout());
         p.setBorder(BorderFactory.createTitledBorder("Progress:"));
@@ -68,8 +68,9 @@ public class DownloadGui extends JPanel {
         JScrollPane pane = new JScrollPane(panel);
         pane.setPreferredSize(new Dimension(500, 300));
         add(pane);
-        for(int i = 0; i < d.getJobs().size(); i++)
-            addJob(i, d.getJobs().get(i));
+        for(int i = 0; i < downloader.getJobs().size(); i++) {
+            addJob(i, downloader.getJobs().get(i));
+        }
     }
 
     public Downloader getDownloader() {
@@ -82,24 +83,23 @@ public class DownloadGui extends JPanel {
             String name = evt.getPropertyName();
             if(evt.getSource() instanceof DownloadJob) {
                 DownloadPanel p = progresses.get(evt.getSource());
-                if("state".equals(name)) {
-                    if(evt.getOldValue() == State.FINISHED || evt.getOldValue() == State.ABORTED) {
-                        changeProgress(-1, 0);
-                    }
-                    if(evt.getNewValue() == State.FINISHED || evt.getOldValue() == State.ABORTED) {
+                switch (name) {
+                    case "state":
+                        if(evt.getOldValue() == State.FINISHED || evt.getOldValue() == State.ABORTED) {
+                            changeProgress(-1, 0);
+                        }   if(evt.getNewValue() == State.FINISHED || evt.getOldValue() == State.ABORTED) {
                         changeProgress(+1, 0);
-                    }
-                    if(p != null) {
+                    }   if(p != null) {
                         p.setVisible(p.getJob().getState() != State.FINISHED);
                         p.revalidate();
-                    }
-                } else if("message".equals(name)) {
-                    if(p != null) {
-                        JProgressBar bar = p.getBar();
-                        String message = p.getJob().getMessage();
-                        bar.setStringPainted(message != null);
-                        bar.setString(message);
-                    }
+                    }   break;
+                    case "message":
+                        if(p != null) {
+                            JProgressBar bar = p.getBar();
+                            String message = p.getJob().getMessage();
+                            bar.setStringPainted(message != null);
+                            bar.setString(message);
+                        }   break;
                 }
             } else if(evt.getSource() == d) {
                 if("jobs".equals(name)) {
@@ -107,10 +107,14 @@ public class DownloadGui extends JPanel {
                     int index = ev.getIndex();
 
                     DownloadJob oldValue = (DownloadJob) ev.getOldValue();
-                    if(oldValue != null) removeJob(index, oldValue);
+                    if(oldValue != null) {
+                        removeJob(index, oldValue);
+                    }
 
                     DownloadJob newValue = (DownloadJob) ev.getNewValue();
-                    if(newValue != null) addJob(index, newValue);
+                    if(newValue != null) {
+                        addJob(index, newValue);
+                    }
                 }
             }
         }
@@ -146,8 +150,8 @@ public class DownloadGui extends JPanel {
     private class DownloadPanel extends JPanel {
         private static final long serialVersionUID = 1187986738303477168L;
 
-        private DownloadJob       job;
-        private JProgressBar      bar;
+        private final DownloadJob       job;
+        private final JProgressBar      bar;
 
         public DownloadPanel(DownloadJob job) {
             super(new BorderLayout());

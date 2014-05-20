@@ -41,13 +41,13 @@ import org.mage.plugins.card.dl.lm.AbstractLaternaBean;
  */
 public class Downloader extends AbstractLaternaBean implements Disposable {
 
-    private static final Logger log = Logger.getLogger(Downloader.class);
+    private static final Logger logger = Logger.getLogger(Downloader.class);
 
     private final List<DownloadJob>    jobs    = properties.list("jobs");
-    private final Channel<DownloadJob> channel = new MemoryChannel<DownloadJob>();
+    private final Channel<DownloadJob> channel = new MemoryChannel<>();
 
     private final ExecutorService      pool    = Executors.newCachedThreadPool();
-    private final List<Fiber>          fibers  = new ArrayList<Fiber>();
+    private final List<Fiber>          fibers  = new ArrayList<>();
 
     public Downloader() {
         PoolFiberFactory f = new PoolFiberFactory(pool);
@@ -70,11 +70,16 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
             }
         }
 
-        for(Fiber f:fibers)
+        for(Fiber f:fibers) {
             f.dispose();
+        }
         pool.shutdown();
     }
 
+    /**
+     *
+     * @throws Throwable
+     */
     @Override
     protected void finalize() throws Throwable {
         dispose();
@@ -82,8 +87,12 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
     }
 
     public void add(DownloadJob job) {
-        if(job.getState() == State.WORKING) throw new IllegalArgumentException("Job already running");
-        if(job.getState() == State.FINISHED) throw new IllegalArgumentException("Job already finished");
+        if(job.getState() == State.WORKING) {
+            throw new IllegalArgumentException("Job already running");
+        }
+        if(job.getState() == State.FINISHED) {
+            throw new IllegalArgumentException("Job already finished");
+        }
         job.setState(State.NEW);
         jobs.add(job);
         channel.publish(job);
@@ -102,7 +111,9 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
         public void onMessage(DownloadJob job) {
             //the job won't be processed by multiple threads
             synchronized(job) {
-                if(job.getState() != State.NEW) return;
+                if(job.getState() != State.NEW) {
+                    return;
+                }
                 job.setState(State.WORKING);
             }
             try {
@@ -122,7 +133,9 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
                             byte[] buf = new byte[8 * 1024];
                             int total = 0;
                             for(int len; (len = is.read(buf)) != -1;) {
-                                if(job.getState() == State.ABORTED) throw new IOException("Job was aborted");
+                                if(job.getState() == State.ABORTED) {
+                                    throw new IOException("Job was aborted");
+                                }
                                 progress.setValue(total += len);
                                 os.write(buf, 0, len);
                             }
@@ -130,21 +143,21 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
                             try {
                                 dst.delete();
                             } catch(IOException ex1) {
-                                log.warn("While deleting", ex1);
+                                logger.warn("While deleting", ex1);
                             }
                             throw ex;
                         } finally {
                             try {
                                 os.close();
                             } catch(IOException ex) {
-                                log.warn("While closing", ex);
+                                logger.warn("While closing", ex);
                             }
                         }
                     } finally {
                         try {
                             is.close();
                         } catch(IOException ex) {
-                            log.warn("While closing", ex);
+                            logger.warn("While closing", ex);
                         }
                     }
                 }
