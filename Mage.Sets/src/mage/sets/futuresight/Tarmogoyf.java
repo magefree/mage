@@ -27,14 +27,8 @@
  */
 package mage.sets.futuresight;
 
+import java.util.ArrayList;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,10 +36,16 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -76,15 +76,12 @@ public class Tarmogoyf extends CardImpl<Tarmogoyf> {
     }
 }
 
-
 class TarmogoyfEffect extends ContinuousEffectImpl<TarmogoyfEffect> {
-
 
     public TarmogoyfEffect() {
         super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         staticText = "{this}'s power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1";
     }
-
 
     public TarmogoyfEffect(final TarmogoyfEffect effect) {
         super(effect);
@@ -97,31 +94,25 @@ class TarmogoyfEffect extends ContinuousEffectImpl<TarmogoyfEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject target = game.getObject(source.getSourceId());
-        if (target != null) {
-            int number = 0;
-            Cards cards = new CardsImpl();
-            for(Player player : game.getPlayers().values()){
-                if(player != null){
-                    cards.addAll(player.getGraveyard());
-                }
-            }
-            
-            for(CardType cardtype : CardType.values())
-            {
-                for(UUID uuid : cards)
-                {
-                    Card card = game.getCard(uuid);
-                    if(card.getCardType().contains(cardtype)){
-                        number++;
-                        break;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            MageObject target = game.getObject(source.getSourceId());
+            if (target != null) {
+                ArrayList<CardType> foundCardTypes = new ArrayList<>();
+                for (UUID playerId : controller.getInRange()) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        for (Card card : player.getGraveyard().getCards(game)) {
+                            foundCardTypes.addAll(card.getCardType());
+                        }
                     }
                 }
+                int number = foundCardTypes.size();
+
+                target.getPower().setValue(number);
+                target.getToughness().setValue(number + 1);
+                return true;
             }
-            target.getPower().setValue(number);
-            target.getToughness().setValue(number + 1);
-            return true;
-            
         }
         return false;
     }
