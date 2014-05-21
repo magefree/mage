@@ -28,30 +28,29 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continious.SetPowerSourceEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author Plopman
  */
 public class SwarmOfRats extends CardImpl<SwarmOfRats> {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Rats you control");
+
+    static{
+        filter.add(new SubtypePredicate("Rat"));
+    }
 
     public SwarmOfRats(UUID ownerId) {
         super(ownerId, 166, "Swarm of Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -63,7 +62,7 @@ public class SwarmOfRats extends CardImpl<SwarmOfRats> {
         this.toughness = new MageInt(1);
 
         // Swarm of Rats's power is equal to the number of Rats you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SwarmOfRatsEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
     public SwarmOfRats(final SwarmOfRats card) {
@@ -74,44 +73,4 @@ public class SwarmOfRats extends CardImpl<SwarmOfRats> {
     public SwarmOfRats copy() {
         return new SwarmOfRats(this);
     }
-}
-
-class SwarmOfRatsEffect extends ContinuousEffectImpl<SwarmOfRatsEffect> {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Rats you control");
-
-    static{
-        filter.add(new SubtypePredicate("Rat"));
-    }
-    
-    private final DynamicValue amount;
-
-    public SwarmOfRatsEffect() {
-        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
-        this.amount = new PermanentsOnBattlefieldCount(filter);
-        staticText = "{this}'s power is equal to the number of Rats you control";
-    }
-
-
-    public SwarmOfRatsEffect(final SwarmOfRatsEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public SwarmOfRatsEffect copy() {
-        return new SwarmOfRatsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getSourceId());
-        if (target != null) {
-            int value = amount.calculate(game, source);
-            target.getPower().setValue(value);
-            return true;
-        }
-        return false;
-    }
-
 }

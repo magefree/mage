@@ -25,9 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.urzassaga;
-
 
 import java.util.UUID;
 import mage.constants.CardType;
@@ -50,22 +48,23 @@ public class TreefolkSeedlings extends CardImpl<TreefolkSeedlings> {
 
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
-        static {
-            filterLands.add(new SubtypePredicate("Forest"));
-        }
+    static {
+        filterLands.add(new SubtypePredicate("Forest"));
+    }
 
-        public TreefolkSeedlings (UUID ownerId) {
+    public TreefolkSeedlings(UUID ownerId) {
         super(ownerId, 278, "Treefolk Seedlings", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Treefolk");
-    this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(0);
 
+        // Treefolk Seedlings's toughness is equal to the number of Forests you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame)));
     }
 
-    public TreefolkSeedlings (final TreefolkSeedlings card) {
+    public TreefolkSeedlings(final TreefolkSeedlings card) {
         super(card);
     }
 

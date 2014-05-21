@@ -29,25 +29,17 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.effects.common.continious.SetPowerSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -70,7 +62,8 @@ public class SpellheartChimera extends CardImpl<SpellheartChimera> {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Spellheart Chimera's power is equal to the number of instant and sorcery cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellheartChimeraEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(
+                new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard("instant and sorcery cards in your graveyard")), Duration.EndOfGame)));
     }
 
     public SpellheartChimera(final SpellheartChimera card) {
@@ -81,45 +74,4 @@ public class SpellheartChimera extends CardImpl<SpellheartChimera> {
     public SpellheartChimera copy() {
         return new SpellheartChimera(this);
     }
-}
-
-class SpellheartChimeraEffect extends ContinuousEffectImpl<SpellheartChimeraEffect> {
-
-    private static final FilterCard filter = new FilterInstantOrSorceryCard();
-
-    public SpellheartChimeraEffect() {
-        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
-        staticText = "{this}'s power is equal to the number of instant and sorcery cards in your graveyard";
-    }
-
-
-    public SpellheartChimeraEffect(final SpellheartChimeraEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SpellheartChimeraEffect copy() {
-        return new SpellheartChimeraEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card sourceCard = game.getCard(source.getSourceId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null || sourceCard != null) {
-            int number = 0;
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                number =  player.getGraveyard().count(filter, game);
-            }
-            if (sourcePermanent != null) {
-                sourcePermanent.getPower().setValue(number);
-            } else {
-                sourceCard.getPower().setValue(number);
-            }
-            return true;
-        }
-        return false;
-    }
-
 }
