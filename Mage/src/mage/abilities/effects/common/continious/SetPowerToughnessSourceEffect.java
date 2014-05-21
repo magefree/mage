@@ -28,16 +28,15 @@
 
 package mage.abilities.effects.common.continious;
 
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.Card;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -76,42 +75,23 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card targetCard = game.getCard(source.getSourceId()); // there are character definig abilities (e.g. P/T Nightmare) that have to work also for P/T of cards
-        Permanent targetPermanent = game.getPermanent(source.getSourceId());
-        if (targetCard == null && targetPermanent == null) {
+        MageObject mageObject = game.getObject(source.getSourceId()); // there are character definig abilities (e.g. P/T Nightmare) that have to work also for P/T of cards
+        if (mageObject == null) {
             return false;
         }
         if (amount != null) {
             int value = amount.calculate(game, source);
-            if (targetPermanent != null) {
-                targetPermanent.getPower().setValue(value);
-                targetPermanent.getToughness().setValue(value);
-            } else if (targetCard != null) {
-                targetCard.getPower().setValue(value);
-                targetCard.getToughness().setValue(value);
-            }
+            mageObject.getPower().setValue(value);
+            mageObject.getToughness().setValue(value);
             return true;
-        }
-        else {
+        } else {
             if (power != Integer.MIN_VALUE) {
-                if (targetCard != null) {
-                    targetCard.getPower().setValue(power);
-                }
-                if (targetPermanent != null) {
-                    targetPermanent.getPower().setValue(power);
-                }
+                mageObject.getPower().setValue(power);
             }
             if (toughness != Integer.MIN_VALUE) {
-                if (targetCard != null) {
-                    targetCard.getToughness().setValue(toughness);
-                }
-                if (targetPermanent != null) {
-                    targetPermanent.getToughness().setValue(toughness);
-                }
-
+                mageObject.getToughness().setValue(toughness);
             }
         }
         return true;
     }
-
 }

@@ -28,24 +28,22 @@
 
 package mage.abilities.effects.common.continious;
 
-
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  * @author Backfir3, noxx
  */
 public class SetToughnessSourceEffect extends ContinuousEffectImpl<SetToughnessSourceEffect> {
 
-    private DynamicValue amount;
-    private int toughness;
+    private final DynamicValue amount;
 
     public SetToughnessSourceEffect(DynamicValue amount, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
@@ -53,16 +51,9 @@ public class SetToughnessSourceEffect extends ContinuousEffectImpl<SetToughnessS
         staticText = "{this}'s toughness is equal to the number of " + amount.getMessage();
     }
 
-    public SetToughnessSourceEffect(int power, int toughness, Duration duration) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
-        this.toughness = toughness;
-        staticText = "{this}'s toughness is " + toughness;
-    }
-
     public SetToughnessSourceEffect(final SetToughnessSourceEffect effect) {
         super(effect);
         this.amount = effect.amount;
-        this.toughness = effect.toughness;
     }
 
     @Override
@@ -72,16 +63,11 @@ public class SetToughnessSourceEffect extends ContinuousEffectImpl<SetToughnessS
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getSourceId());
-        if (target != null) {
-            if (amount != null) {
-                int value = amount.calculate(game, source);
-                target.getToughness().setValue(value);
-                return true;
-            } else {
-                if (toughness != Integer.MIN_VALUE)
-                    target.getToughness().setValue(toughness);
-            }
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            int value = amount.calculate(game, source);
+            mageObject.getToughness().setValue(value);
+            return true;
         }
         return false;
     }
