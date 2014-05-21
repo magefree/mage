@@ -31,13 +31,16 @@ import java.util.UUID;
 
 import mage.constants.*;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -91,21 +94,25 @@ class LhurgoyfEffect extends ContinuousEffectImpl<LhurgoyfEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getSourceId());
-        if (target != null) {
-            int number = 0;
-            
-            for(Player player : game.getPlayers().values()){
-                if(player != null){
-                    number += player.getGraveyard().count(new FilterCreatureCard(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            MageObject mageObject = game.getObject(source.getSourceId());
+            if (mageObject != null) {
+                int number = 0;
+                for (UUID playerId : controller.getInRange()) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        number += player.getGraveyard().count(new FilterCreatureCard(), game);
+                    }
                 }
+
+                mageObject.getPower().setValue(number);
+                mageObject.getToughness().setValue(number + 1);
+                return true;
+
             }
-            
-            target.getPower().setValue(number);
-            target.getToughness().setValue(number + 1);
-            return true;
-            
         }
+
         return false;
     }
 

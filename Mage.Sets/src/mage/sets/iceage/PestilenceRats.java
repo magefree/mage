@@ -37,8 +37,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continious.SetPowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -48,10 +50,10 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class PestilenceRats extends CardImpl<PestilenceRats> {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Rat you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Rats on the battlefield");
     static{
         filter.add(new SubtypePredicate("Rat"));
-        filter.add(new AnotherPredicate());
+        filter.add(new AnotherCardPredicate());
     }
 
     public PestilenceRats(UUID ownerId) {
@@ -64,7 +66,7 @@ public class PestilenceRats extends CardImpl<PestilenceRats> {
         this.toughness = new MageInt(3);
 
         // Pestilence Rats's power is equal to the number of other Rats on the battlefield. (For example, as long as there are two other Rats on the battlefield, Pestilence Rats's power and toughness are 2/3.)
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
     public PestilenceRats(final PestilenceRats card) {

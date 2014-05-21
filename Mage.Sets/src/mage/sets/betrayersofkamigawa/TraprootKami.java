@@ -36,6 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -50,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class TraprootKami extends CardImpl<TraprootKami> {
 
-    private static final FilterPermanent filter = new FilterPermanent("Forest");
+    private static final FilterPermanent filter = new FilterPermanent("the number of Forests on the battlefield");
 
     static {
         filter.add(new SubtypePredicate("Forest"));
@@ -67,7 +68,7 @@ public class TraprootKami extends CardImpl<TraprootKami> {
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(ReachAbility.getInstance());
         // Traproot Kami's toughness is equal to the number of Forests on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BoostSourceEffect(new StaticValue(0), new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
     public TraprootKami(final TraprootKami card) {

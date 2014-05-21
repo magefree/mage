@@ -29,21 +29,15 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continious.SetToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -65,7 +59,7 @@ public class AvenTrailblazer extends CardImpl<AvenTrailblazer> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Domain - Aven Trailblazer's toughness is equal to the number of basic land types among lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AvenTrailblazerEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetToughnessSourceEffect(new DomainValue(), Duration.EndOfGame)));
         
     }
 
@@ -77,33 +71,4 @@ public class AvenTrailblazer extends CardImpl<AvenTrailblazer> {
     public AvenTrailblazer copy() {
         return new AvenTrailblazer(this);
     }
-}
-
-class AvenTrailblazerEffect extends ContinuousEffectImpl<AvenTrailblazerEffect> {
-
-    public AvenTrailblazerEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
-        staticText = "{this}'s toughness is equal to the number of basic land types among lands you control";
-    }
-
-    public AvenTrailblazerEffect(final AvenTrailblazerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AvenTrailblazerEffect copy() {
-        return new AvenTrailblazerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int value = (new DomainValue()).calculate(game, source);
-        Permanent avenTrailblazer = game.getPermanent(source.getSourceId());
-        if (avenTrailblazer != null) {
-            avenTrailblazer.getToughness().setValue(value);
-            return true;
-        }
-        return false;
-    }
-
 }
