@@ -28,17 +28,13 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -52,8 +48,7 @@ public class CopperTablet extends CardImpl<CopperTablet> {
         this.expansionSetCode = "LEA";
 
         // At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CopperTabletEffect(), TargetController.ANY, false);
-        this.addAbility(ability);
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "that player"), TargetController.ANY, false, true));        
     }
 
     public CopperTablet(final CopperTablet card) {
@@ -63,32 +58,5 @@ public class CopperTablet extends CardImpl<CopperTablet> {
     @Override
     public CopperTablet copy() {
         return new CopperTablet(this);
-    }
-}
-
-class CopperTabletEffect extends OneShotEffect<CopperTabletEffect> {
-
-    public CopperTabletEffect() {
-        super(Outcome.Damage);
-        staticText = "Copper Tablet deals 1 damage to that player";
-    }
-
-    public CopperTabletEffect(final CopperTabletEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CopperTabletEffect copy() {
-        return new CopperTabletEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.damage(1, source.getId(), game, false, true);
-            return true;
-        }
-        return false;
     }
 }
