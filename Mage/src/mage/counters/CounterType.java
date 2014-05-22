@@ -35,6 +35,7 @@ import mage.counters.common.AwakeningCounter;
 import mage.counters.common.BlazeCounter;
 import mage.counters.common.BriberyCounter;
 import mage.counters.common.ChargeCounter;
+import mage.counters.common.DepletionCounter;
 import mage.counters.common.DespairCounter;
 import mage.counters.common.DevotionCounter;
 import mage.counters.common.DivinityCounter;
@@ -86,6 +87,7 @@ public enum CounterType {
     BLAZE(new BlazeCounter().name),
     BRIBERY(new BriberyCounter().name),
     CHARGE(new ChargeCounter().name),
+    DEPLETION(new DepletionCounter().name),
     DESPAIR(new DespairCounter().name),
     DEVOTION(new DevotionCounter().name),
     DIVINITY(new DivinityCounter().name),
@@ -166,6 +168,8 @@ public enum CounterType {
                 return new PoisonCounter(amount);
             case CHARGE:
                 return new ChargeCounter(amount);
+            case DEPLETION:
+                return new DepletionCounter(amount);
             case DOOM:
                 return new DoomCounter(amount);
             case LORE:
