@@ -21,7 +21,7 @@ public enum ExpansionRepository {
 
     instance;
 
-    private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
+    private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2";
     private static final String VERSION_ENTITY_NAME = "expansion";
     private static final long EXPANSION_DB_VERSION = 3;
 
@@ -43,13 +43,14 @@ public enum ExpansionRepository {
             TableUtils.createTableIfNotExists(connectionSource, ExpansionInfo.class);
             expansionDao = DaoManager.createDao(connectionSource, ExpansionInfo.class);
         } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 
     public void add(ExpansionInfo expansion) {
         try {
             expansionDao.create(expansion);
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
         }
     }
 
