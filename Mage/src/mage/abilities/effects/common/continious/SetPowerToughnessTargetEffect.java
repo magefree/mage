@@ -87,6 +87,9 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl<SetPower
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ");
         sb.append(power).append("/").append(toughness).append(" ").append(duration.toString());

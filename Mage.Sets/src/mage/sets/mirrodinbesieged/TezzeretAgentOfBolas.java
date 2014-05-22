@@ -32,15 +32,16 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
+import mage.abilities.effects.common.continious.AddCardTypeTargetEffect;
+import mage.abilities.effects.common.continious.SetPowerToughnessTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -48,7 +49,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetArtifactPermanent;
@@ -76,8 +76,13 @@ public class TezzeretAgentOfBolas extends CardImpl<TezzeretAgentOfBolas> {
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(5, 1, filter, true), 1));
 
         // -1: Target artifact becomes a 5/5 artifact creature.
-        LoyaltyAbility ability1 = new LoyaltyAbility(new BecomesCreatureTargetEffect(new ArtifactCreatureToken(), "", Duration.EndOfGame), -1);
-        ability1.addTarget(new TargetArtifactPermanent());
+        Effect effect = new AddCardTypeTargetEffect(CardType.CREATURE, Duration.EndOfGame);
+        effect.setText("");
+        LoyaltyAbility ability1 = new LoyaltyAbility(effect, -1);
+        effect = new SetPowerToughnessTargetEffect(5,5, Duration.EndOfGame);
+        effect.setText("Target artifact becomes a 5/5 artifact creature");
+        ability1.addEffect(effect);
+        ability1.addTarget(new TargetArtifactPermanent(true));
         this.addAbility(ability1);
 
         // -4: Target player loses X life and you gain X life, where X is twice the number of artifacts you control.
@@ -96,17 +101,6 @@ public class TezzeretAgentOfBolas extends CardImpl<TezzeretAgentOfBolas> {
         return new TezzeretAgentOfBolas(this);
     }
 
-}
-
-class ArtifactCreatureToken extends Token {
-
-    public ArtifactCreatureToken() {
-        super("", "5/5 artifact creature");
-        this.cardType.add(CardType.CREATURE);
-
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-    }
 }
 
 class TezzeretAgentOfBolasEffect2 extends OneShotEffect<TezzeretAgentOfBolasEffect2> {

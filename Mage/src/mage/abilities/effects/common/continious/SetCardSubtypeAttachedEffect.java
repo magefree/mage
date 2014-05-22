@@ -41,8 +41,8 @@ import mage.game.permanent.Permanent;
  */
 public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl<SetCardSubtypeAttachedEffect> {
 
-    private List<String> setSubtypes = new ArrayList<String>();
-    private AttachmentType attachmentType;
+    private List<String> setSubtypes = new ArrayList<>();
+    private final AttachmentType attachmentType;
 
     public SetCardSubtypeAttachedEffect(String setSubtype, Duration duration, AttachmentType attachmentType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
@@ -84,10 +84,11 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl<SetCardSu
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == AttachmentType.AURA)
+        if (attachmentType == AttachmentType.AURA) {
             sb.append("Enchanted");
-        else if (attachmentType == AttachmentType.EQUIPMENT)
+        } else if (attachmentType == AttachmentType.EQUIPMENT) {
             sb.append("Equipped");
+        }
 
         sb.append(" creature is a");
         for (String subtype: this.setSubtypes) {
