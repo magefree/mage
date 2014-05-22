@@ -1423,13 +1423,17 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                     }
                 }
             }
-            //20091005 - 704.5q
-               if (perm.getAttachments().size() > 0) {
-                for (UUID attachmentId: perm.getAttachments()) {
+            //20091005 - 704.5q If a creature is attached to an object or player, it becomes unattached and remains on the battlefield.
+            // Similarly, if a permanent thats neither an Aura, an Equipment, nor a Fortification is attached to an object or player, 
+            // it becomes unattached and remains on the battlefield.
+            if (perm.getAttachments().size() > 0) {
+                for (UUID attachmentId : perm.getAttachments()) {
                     Permanent attachment = getPermanent(attachmentId);
-                    if (attachment != null && !(attachment.getSubtype().contains("Aura") ||
-                            attachment.getSubtype().contains("Equipment") ||
-                            attachment.getSubtype().contains("Fortification"))) {
+                    if (attachment != null && 
+                            (attachment.getCardType().contains(CardType.CREATURE) ||
+                            !(attachment.getSubtype().contains("Aura")
+                               || attachment.getSubtype().contains("Equipment")
+                               || attachment.getSubtype().contains("Fortification")))) {
                         if (perm.removeAttachment(attachment.getId(), this)) {
                             somethingHappened = true;
                             break;
