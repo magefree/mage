@@ -67,7 +67,7 @@ public class CentaurArcher extends CardImpl<CentaurArcher> {
 
         // {tap}: Centaur Archer deals 1 damage to target creature with flying.
         Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        activatedAbility.addTarget(new TargetCreaturePermanent(filter));
+        activatedAbility.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(activatedAbility);
     }
 
