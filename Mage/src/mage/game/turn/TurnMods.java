@@ -49,16 +49,16 @@ public class TurnMods extends ArrayList<TurnMod> {
         }
     }
 
-    public boolean extraTurn(UUID playerId) {
+    public UUID getExtraTurn(UUID playerId) {
         ListIterator<TurnMod> it = this.listIterator(this.size());
         while (it.hasPrevious()) {
             TurnMod turnMod = it.previous();
             if (turnMod.isExtraTurn() == true && turnMod.getPlayerId().equals(playerId)) {
                 it.remove();
-                return true;
+                return turnMod.getId();
             }
         }
-        return false;
+        return null;
     }
 
     public boolean skipTurn(UUID playerId) {

@@ -597,11 +597,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 state.setTurnNum(state.getTurnNum() + 1);
 
                 //20091005 - 500.7
-                while (getState().getTurnMods().extraTurn(player.getId())) {
+                UUID extraTurnId = getState().getTurnMods().getExtraTurn(player.getId());
+                while (extraTurnId != null) {
                     state.setExtraTurn(true);
+                    state.setTurnId(extraTurnId);
                     playTurn(player);
                     state.setTurnNum(state.getTurnNum() + 1);
+
+                    extraTurnId = getState().getTurnMods().getExtraTurn(player.getId());
                 }
+                state.setTurnId(null);
                 state.setExtraTurn(false);
                 player = players.getNext(this);
             }

@@ -105,6 +105,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Exile exile;
     private Battlefield battlefield;
     private int turnNum = 1;
+    private UUID turnId = null;
     private boolean extraTurn = false;
     private boolean legendaryRuleActive = true;
     private boolean gameOver;
@@ -356,6 +357,14 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void setTurnNum(int turnNum) {
         this.turnNum = turnNum;
+    }
+
+    public UUID getTurnId() {
+        return this.turnId;
+    }
+
+    public void setTurnId(UUID turnId) {
+        this.turnId = turnId;
     }
 
     public boolean isExtraTurn() {
