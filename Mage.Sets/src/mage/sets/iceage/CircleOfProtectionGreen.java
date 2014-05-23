@@ -29,24 +29,30 @@ package mage.sets.iceage;
 
 import java.util.UUID;
 
-import mage.constants.*;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.target.TargetSource;
 
 /**
  *
  * @author Plopman
  */
 public class CircleOfProtectionGreen extends CardImpl<CircleOfProtectionGreen> {
+
+    private static final FilterObject filter = new FilterObject("green source");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+    }
 
     public CircleOfProtectionGreen(UUID ownerId) {
         super(ownerId, 238, "Circle of Protection: Green", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
@@ -55,8 +61,8 @@ public class CircleOfProtectionGreen extends CardImpl<CircleOfProtectionGreen> {
         this.color.setWhite(true);
 
         // {1}: The next time a green source of your choice would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CircleOfProtectionGreenEffect() , new ManaCostsImpl("1")));
-
+        Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("1")));
     }
 
     public CircleOfProtectionGreen(final CircleOfProtectionGreen card) {
@@ -67,53 +73,4 @@ public class CircleOfProtectionGreen extends CardImpl<CircleOfProtectionGreen> {
     public CircleOfProtectionGreen copy() {
         return new CircleOfProtectionGreen(this);
     }
-}
-
-class CircleOfProtectionGreenEffect extends PreventionEffectImpl<CircleOfProtectionGreenEffect> {
-
-    private static final FilterObject filter = new FilterObject("green source");
-    static{
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    } 
-    private final TargetSource target;
-
-    public CircleOfProtectionGreenEffect() {
-        super(Duration.EndOfTurn);
-        target = new TargetSource(filter);
-        
-        staticText = "The next time a green source of your choice would deal damage to you this turn, prevent that damage";
-    }
-
-    public CircleOfProtectionGreenEffect(final CircleOfProtectionGreenEffect effect) {
-        super(effect);
-        this.target = effect.target.copy();
-    }
-
-    @Override
-    public CircleOfProtectionGreenEffect copy() {
-        return new CircleOfProtectionGreenEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        preventDamageAction(event, source, game);
-        this.used = true;
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
