@@ -29,6 +29,7 @@
 package mage.abilities.effects.common.continious;
 
 import java.util.Locale;
+import java.util.UUID;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -86,8 +87,10 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl<SetPowerTou
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            objects.add(perm.getId());
+        if (affectedObjectsSet) {
+            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                objects.add(perm.getId());
+            }
         }
         if (lockedInPT) {
             power = new StaticValue(power.calculate(game, source));
@@ -99,8 +102,16 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl<SetPowerTou
     public boolean apply(Game game, Ability source) {
         int newPower = power.calculate(game, source);
         int newToughness = toughness.calculate(game, source);
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if(objects.contains(permanent.getId())){
+        if (affectedObjectsSet) {
+            for (UUID permanentId :objects) {
+                Permanent permanent = game.getPermanent(permanentId);
+                if (permanent != null) {
+                    permanent.getPower().setValue(newPower);
+                    permanent.getToughness().setValue(newToughness);
+                }
+            }
+        } else {
+            for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 permanent.getPower().setValue(newPower);
                 permanent.getToughness().setValue(newToughness);
             }
