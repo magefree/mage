@@ -138,18 +138,19 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
         addCard(Zone.HAND, playerB, "Phantasmal Image");
+        // Target creature gets +4/+4 until end of turn.
         addCard(Zone.HAND, playerB, "Titanic Growth");
 
-        // Creatures you control have hexproof.
+        // Enchantment - Creatures you control have hexproof.
         addCard(Zone.HAND, playerA, "Asceticism");
 
         // Whenever this creature enters the battlefield or transforms into
         // Huntmaster of the Fells, put a 2/2 green Wolf creature token onto
         // the battlefield and you gain 2 life.
-        // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells. ==> Ravager of the Fells
         addCard(Zone.BATTLEFIELD, playerA, "Huntmaster of the Fells");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // copy target: Ravergers of the Fells
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Asceticism");
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "Titanic Growth", "Ravager of the Fells");
 
@@ -159,9 +160,11 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
         // check opponent's creature wasn't chosen as a target for Titanic Growth
         assertPowerToughness(playerA, "Ravager of the Fells", 4, 4);
-        // check playerA's creature was sacrificed
-        assertPermanentCount(playerB, "Ravager of the Fells", 0);
+        assertGraveyardCount(playerB, "Titanic Growth", 1);
+        // check playerB's creature was sacrificed
         assertGraveyardCount(playerB, "Phantasmal Image", 1);
+        assertPermanentCount(playerB, "Ravager of the Fells", 0);
+        
     }
 
     /**

@@ -98,7 +98,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
-            Permanent target = (Permanent) game.getPermanent(permanentId);
+            Permanent target = game.getPermanent(permanentId);
             if (target != null) {
                 target.addPower(power.calculate(game, source));
                 target.addToughness(toughness.calculate(game, source));

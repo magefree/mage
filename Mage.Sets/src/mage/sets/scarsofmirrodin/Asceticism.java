@@ -28,42 +28,37 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterStackObject;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author ayratn
  */
 public class Asceticism extends CardImpl<Asceticism> {
 
-    private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
-
     public Asceticism(UUID ownerId) {
         super(ownerId, 110, "Asceticism", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
         this.expansionSetCode = "SOM";
         this.color.setGreen(true);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AsceticismEffect(filter, Duration.WhileOnBattlefield)));
+        
+        // Creatures you control have hexproof.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent())));
+        // {1}{G}: Regenerate target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{G}"));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 
@@ -77,51 +72,3 @@ public class Asceticism extends CardImpl<Asceticism> {
     }
 
 }
-
-class AsceticismEffect extends ReplacementEffectImpl<AsceticismEffect> {
-
-    private FilterStackObject filterSource;
-
-    public AsceticismEffect(FilterStackObject filterSource, Duration duration) {
-        super(duration, Outcome.Benefit);
-        this.filterSource = filterSource;
-        staticText = "Creatures you control can't be the targets of spells or abilities your opponents control";
-    }
-
-    public AsceticismEffect(final AsceticismEffect effect) {
-        super(effect);
-        this.filterSource = effect.filterSource.copy();
-    }
-
-    @Override
-    public AsceticismEffect copy() {
-        return new AsceticismEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGET) {
-            Permanent permanent = game.getBattlefield().getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
-                    && permanent.getCardType().contains(CardType.CREATURE)) {
-                StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-                if (sourceObject != null && filterSource.match(sourceObject, source.getControllerId(), game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-}
-
