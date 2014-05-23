@@ -31,7 +31,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                                                  "TSP", "TSB", "PLC", "FUT", 
                                                  "LRW", "MOR", 
                                                  "SHM", "EVE",
-                                                 "PTK"};
+                                                 "POR", "PO2", "PTK"};
     
     private static final String[] withMythics = {"M10", "M11", "M12", "M13", "M14",
                                                  "DDF", "DDL",

@@ -48,7 +48,7 @@ public class ConstructedFormats {
             "* Ice Age Block", "Coldsnap", "Alliances", "Ice Age", "Fourth Edition",
             "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",
             "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
-            "Portal Three Kingdoms",
+            "Portal", "Portal Second Age", "Portal Three Kingdoms",
             "Guru",
             "Unhinged",
             "Duel Decks: Elves vs. Goblins",
@@ -398,6 +398,12 @@ public class ConstructedFormats {
         }
         if (format.equals("Unhinged")) {
             return Arrays.asList("UNH");
+        }
+        if (format.equals("Portal")) {
+            return Arrays.asList("POR");
+        }
+        if (format.equals("Portal Second Age")) {
+            return Arrays.asList("PO2");
         }
         if (format.equals("Portal Three Kingdoms")) {
             return Arrays.asList("PTK");

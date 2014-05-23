@@ -94,4 +94,6 @@ Modern Masters|modernmasters|
 Theros|theros|
 Born of the Gods|bornofthegods|
 Journey into Nyx|journeyintonyx|
+Portal|portal|
+Portal Second Age|portalsecondage|
 Portal Three Kingdoms|portalthreekingdoms
