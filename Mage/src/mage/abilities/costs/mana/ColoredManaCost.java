@@ -28,9 +28,9 @@
 
 package mage.abilities.costs.mana;
 
-import mage.constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.ManaPool;
 

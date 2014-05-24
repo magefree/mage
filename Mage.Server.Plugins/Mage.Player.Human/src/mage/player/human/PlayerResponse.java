@@ -30,6 +30,7 @@ package mage.player.human;
 
 import java.io.Serializable;
 import java.util.UUID;
+import mage.constants.ManaType;
 
 /**
  *
@@ -41,12 +42,14 @@ public class PlayerResponse implements Serializable {
     private UUID responseUUID;
     private Boolean responseBoolean;
     private Integer responseInteger;
+    private ManaType responseManaType;
 
     public void clear() {
         responseString = null;
         responseUUID = null;
         responseBoolean = null;
         responseInteger = null;
+        responseManaType = null;
     }
 
     public String getString() {
@@ -79,6 +82,14 @@ public class PlayerResponse implements Serializable {
 
     public void setInteger(Integer responseInteger) {
         this.responseInteger = responseInteger;
+    }
+
+    public ManaType getManaType() {
+        return responseManaType;
+    }
+
+    public void setManaType(ManaType responseManaType) {
+        this.responseManaType = responseManaType;
     }
 
 }

@@ -28,6 +28,23 @@
 
 package mage.game;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
+import java.util.Stack;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -51,7 +68,13 @@ import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -66,8 +89,14 @@ import mage.game.combat.Combat;
 import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
-import mage.game.events.*;
+import mage.game.events.DamageEvent;
+import mage.game.events.GameEvent;
+import mage.game.events.Listener;
+import mage.game.events.PlayerQueryEvent;
+import mage.game.events.PlayerQueryEventSource;
+import mage.game.events.TableEvent;
 import mage.game.events.TableEvent.EventType;
+import mage.game.events.TableEventSource;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -85,15 +114,13 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.functions.ApplyToPermanent;
-import mage.watchers.common.*;
+import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.watchers.common.MiracleWatcher;
+import mage.watchers.common.MorbidWatcher;
+import mage.watchers.common.PlayerDamagedBySourceWatcher;
+import mage.watchers.common.PlayerLostLifeWatcher;
+import mage.watchers.common.SoulbondWatcher;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-
-
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -960,6 +987,14 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
+    public synchronized void setManaPoolMode(UUID playerId, boolean autoPayment) {
+        Player player = state.getPlayer(playerId);
+        if (player != null) {
+            player.getManaPool().setAutoPayment(autoPayment);
+        }
+    }
+
+    @Override
     public synchronized void restorePriority(UUID playerId) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
@@ -1184,7 +1219,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         copiedCard.assignNewId();
         copiedCard.setControllerId(newController);
         copiedCard.setCopy(true);
-        Set<Card> cards = new HashSet<Card>();
+        Set<Card> cards = new HashSet<>();
         cards.add(copiedCard);
         loadCards(cards, source.getControllerId());
 
@@ -2003,7 +2038,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             if (lkiMap != null) {
                 lkiMap.put(objectId, copy);
             } else {
-                HashMap<UUID, MageObject> newMap = new HashMap<UUID, MageObject>();
+                HashMap<UUID, MageObject> newMap = new HashMap<>();
                 newMap.put(objectId, copy);
                 lki.put(zone, newMap);
             }
@@ -2012,7 +2047,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             if (shortLivingLkiMap != null) {
                 shortLivingLkiMap.put(objectId, copy);
             } else {
-                HashMap<UUID, MageObject> newMap = new HashMap<UUID, MageObject>();
+                HashMap<UUID, MageObject> newMap = new HashMap<>();
                 newMap.put(objectId, copy);
                 shortLivingLKI.put(zone, newMap);
             }
@@ -2147,7 +2182,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (cards == null) {
             return;
         }
-        Set<Card> set = new HashSet<Card>(cards);
+        Set<Card> set = new HashSet<>(cards);
         loadCards(set, ownerId);
     }
 
@@ -2158,7 +2193,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 removeCard(card);
             }
             player.getLibrary().clear();
-            Set<Card> cards = new HashSet<Card>();
+            Set<Card> cards = new HashSet<>();
             for (Card card : cardsDownToTop) {
                 cards.add(card);
             }

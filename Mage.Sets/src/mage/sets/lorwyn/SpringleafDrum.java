@@ -27,18 +27,17 @@
  */
 package mage.sets.lorwyn;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -54,7 +53,7 @@ public class SpringleafDrum extends CardImpl<SpringleafDrum> {
     public SpringleafDrum(UUID ownerId) {
         super(ownerId, 261, "Springleaf Drum", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "LRW";
-        // {tap}, Tap an untapped creature you control: Add one mana of any color to your mana pool.
+        // {T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         this.addAbility(ability);

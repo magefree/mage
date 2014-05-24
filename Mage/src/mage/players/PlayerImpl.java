@@ -75,9 +75,9 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
-import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SpellAbilityType;
@@ -117,7 +117,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- *  * @param <T>
+ * @param <T>
  */
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
 
@@ -1470,6 +1470,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void setResponseString(String responseString) {}
+    
+    @Override
+    public void setResponseManaType(ManaType responseManaType) {}
 
     @Override
     public void setResponseUUID(UUID responseUUID) {}

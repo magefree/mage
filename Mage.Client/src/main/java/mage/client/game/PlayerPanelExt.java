@@ -74,6 +74,7 @@ import mage.client.util.Command;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.components.ImagePanel;
+import mage.constants.ManaType;
 import mage.remote.Session;
 import mage.utils.timer.PriorityTimer;
 import mage.view.CardView;
@@ -440,51 +441,104 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         });
 
-
         // Add mana symbols
-        BufferedImage imageManaW = ManaSymbols.getManaSymbolImageSmall("W");
-        ImagePanel manaW = new ImagePanel(imageManaW, ImagePanel.ACTUAL);
-        manaW.setOpaque(false);
         JLabel manaCountLabelW = new JLabel();
+        manaCountLabelW.setToolTipText("White mana");
         manaCountLabelW.setText("0");
         manaLabels.put("W", manaCountLabelW);
+        r = new Rectangle(12, 12);
+        BufferedImage imageManaW = ManaSymbols.getManaSymbolImageSmall("W");
+        HoverButton btnWhiteMana = new HoverButton(null, imageManaW, imageManaW, imageManaW, r);
+        btnWhiteMana.setToolTipText("White mana");
+        btnWhiteMana.setOpaque(false);
+        btnWhiteMana.setObserver(new Command() {
+            @Override
+            public void execute() {
+                btnManaActionPerformed(ManaType.WHITE);
+            }
+        });
 
-        BufferedImage imageManaU = ManaSymbols.getManaSymbolImageSmall("U");
-        ImagePanel manaU = new ImagePanel(imageManaU, ImagePanel.ACTUAL);
-        manaU.setOpaque(false);
         JLabel manaCountLabelU = new JLabel();
+        manaCountLabelU.setToolTipText("Blue mana");
         manaCountLabelU.setText("0");
         manaLabels.put("U", manaCountLabelU);
+        r = new Rectangle(12, 12);
+        BufferedImage imageManaU = ManaSymbols.getManaSymbolImageSmall("U");
+        HoverButton btnBlueMana = new HoverButton(null, imageManaU, imageManaU, imageManaU, r);
+        btnBlueMana.setToolTipText("Blue mana");
+        btnBlueMana.setOpaque(false);
+        btnBlueMana.setObserver(new Command() {
+            @Override
+            public void execute() {
+                btnManaActionPerformed(ManaType.BLUE);
+            }
+        });
 
-        BufferedImage imageManaB = ManaSymbols.getManaSymbolImageSmall("B");
-        ImagePanel manaB = new ImagePanel(imageManaB, ImagePanel.ACTUAL);
-        manaB.setOpaque(false);
         JLabel manaCountLabelB = new JLabel();
+        manaCountLabelB.setToolTipText("Black mana");
         manaCountLabelB.setText("0");
         manaLabels.put("B", manaCountLabelB);
+        r = new Rectangle(12, 12);
+        BufferedImage imageManaB = ManaSymbols.getManaSymbolImageSmall("B");
+        HoverButton btnBlackMana = new HoverButton(null, imageManaB, imageManaB, imageManaB, r);
+        btnBlackMana.setToolTipText("Black mana");
+        btnBlackMana.setOpaque(false);
+        btnBlackMana.setObserver(new Command() {
+            @Override
+            public void execute() {
+                btnManaActionPerformed(ManaType.BLACK);
+            }
+        });
 
-        BufferedImage imageManaR = ManaSymbols.getManaSymbolImageSmall("R");
-        ImagePanel manaR = new ImagePanel(imageManaR, ImagePanel.ACTUAL);
-        manaR.setOpaque(false);
         JLabel manaCountLabelR = new JLabel();
+        manaCountLabelR.setToolTipText("Red mana");
         manaCountLabelR.setText("0");
         manaLabels.put("R", manaCountLabelR);
+        r = new Rectangle(12, 12);
+        BufferedImage imageManaR = ManaSymbols.getManaSymbolImageSmall("R");
+        HoverButton btnRedMana = new HoverButton(null, imageManaR, imageManaR, imageManaR, r);
+        btnRedMana.setToolTipText("Red mana");
+        btnRedMana.setOpaque(false);
+        btnRedMana.setObserver(new Command() {
+            @Override
+            public void execute() {
+                btnManaActionPerformed(ManaType.RED);
+            }
+        });
 
-        BufferedImage imageManaG = ManaSymbols.getManaSymbolImageSmall("G");
-        ImagePanel manaG = new ImagePanel(imageManaG, ImagePanel.ACTUAL);
-        manaG.setOpaque(false);
         JLabel manaCountLabelG = new JLabel();
+        manaCountLabelG.setToolTipText("Green mana");
         manaCountLabelG.setText("0");
         manaLabels.put("G", manaCountLabelG);
+        r = new Rectangle(12, 12);
+        BufferedImage imageManaG = ManaSymbols.getManaSymbolImageSmall("G");
+        HoverButton btnGreenMana = new HoverButton(null, imageManaG, imageManaG, imageManaG, r);
+        btnGreenMana.setToolTipText("Green mana");
+        btnGreenMana.setOpaque(false);
+        btnGreenMana.setObserver(new Command() {
+            @Override
+            public void execute() {
+                btnManaActionPerformed(ManaType.GREEN);
+            }
+        });
 
-        BufferedImage imageManaX = ManaSymbols.getManaSymbolImageSmall("X");
-        ImagePanel manaX = new ImagePanel(imageManaX, ImagePanel.ACTUAL);
-        manaX.setOpaque(false);
         JLabel manaCountLabelX = new JLabel();
+        manaCountLabelX.setToolTipText("Colorless mana");
         manaCountLabelX.setText("0");
         manaLabels.put("X", manaCountLabelX);
-        GroupLayout gl_panelBackground = new GroupLayout(panelBackground);
+        r = new Rectangle(12, 12);
+        BufferedImage imageManaX = ManaSymbols.getManaSymbolImageSmall("X");
+        HoverButton btnColorlessMana = new HoverButton(null, imageManaX, imageManaX, imageManaX, r);
+        btnColorlessMana.setToolTipText("Colorless mana");
+        btnColorlessMana.setOpaque(false);
+        btnColorlessMana.setObserver(new Command() {
+            @Override
+            public void execute() {
+                btnManaActionPerformed(ManaType.COLORLESS);
+            }
+        });
 
+        GroupLayout gl_panelBackground = new GroupLayout(panelBackground);
         gl_panelBackground.setHorizontalGroup(
                 gl_panelBackground.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_panelBackground.createSequentialGroup()
@@ -506,13 +560,13 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                 .addComponent(poison, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(2)
-                                                .addComponent(manaW, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(2)
-                                                .addComponent(manaU, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(2)
-                                                .addComponent(manaB, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(btnBlackMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
                                         .addComponent(grave, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
                                 )
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
@@ -524,7 +578,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                         .addComponent(poisonLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                                 .addGap(20)
-                                                                .addComponent(manaR, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(btnRedMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                                 .addGap(1)
                                                                 .addComponent(manaCountLabelW, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
@@ -536,12 +590,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                         .addComponent(manaCountLabelB, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                                 .addGap(19)
-                                                                .addComponent(manaX, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)))
+                                                                .addComponent(btnColorlessMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)))
                                                 .addGap(5)
                                                 .addComponent(manaCountLabelX, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(20)
-                                                .addComponent(manaG, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(btnGreenMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(40)
                                                 .addComponent(manaCountLabelG, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
@@ -594,11 +648,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                 .addGap(4)
                                                 .addComponent(poison, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(4)
-                                                .addComponent(manaW, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(2)
-                                                .addComponent(manaU, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(2)
-                                                .addComponent(manaB, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnBlackMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(5)
                                                 .addComponent(grave, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
                                         )
@@ -611,7 +665,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                                                 .addComponent(library, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
                                                                         .addComponent(poisonLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
                                                                 .addGap(2)
-                                                                .addComponent(manaR, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(btnRedMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                                 .addGap(14)
                                                                 .addComponent(manaCountLabelW, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
@@ -623,11 +677,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                         .addComponent(manaCountLabelB, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                                 .addGap(8)
-                                                                .addComponent(manaX, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(btnColorlessMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
                                                         .addComponent(manaCountLabelX, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(39)
-                                                .addComponent(manaG, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(btnGreenMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(31)
                                                 .addComponent(manaCountLabelG, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
@@ -680,6 +734,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
     }
 
+    private void btnManaActionPerformed(ManaType manaType) {
+        session.sendPlayerManaType(gameId, manaType);
+    }
+
     private void btnGraveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraveActionPerformed
         /*if (graveyard == null) {
             graveyard = new ShowCardsDialog();
@@ -706,6 +764,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private ImagePanel life;
     private ImagePanel poison;
     private ImagePanel hand;
+
+//    private HoverButton btnWhiteMana;
+//    private HoverButton btnBlueMana;
+
     private HoverButton grave;
     private ImagePanel library;
     private CardView topCard;

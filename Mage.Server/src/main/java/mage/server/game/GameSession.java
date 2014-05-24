@@ -29,12 +29,18 @@
 package mage.server.game;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import mage.cards.Cards;
+import mage.constants.ManaType;
 import mage.game.Game;
 import mage.game.match.Match;
 import mage.interfaces.callback.ClientCallback;
@@ -213,6 +219,11 @@ public class GameSession extends GameWatcher {
     public void sendPlayerString(String data) {
         cancelTimeout();
         game.getPlayer(playerId).setResponseString(data);
+    }
+
+    public void sendPlayerManaType(ManaType manaType) {
+        cancelTimeout();
+        game.getPlayer(playerId).setResponseManaType(manaType);
     }
 
     public void sendPlayerBoolean(Boolean data) {

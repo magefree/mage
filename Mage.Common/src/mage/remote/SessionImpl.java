@@ -57,6 +57,7 @@ import org.jboss.remoting.transporter.TransporterClient;
 import javax.swing.*;
 import java.net.*;
 import java.util.*;
+import mage.constants.ManaType;
 
 /**
  *
@@ -624,6 +625,21 @@ public class SessionImpl implements Session {
     }
 
     @Override
+    public boolean sendPlayerManaType(UUID gameId, ManaType data) {
+        try {
+            if (isConnected()) {
+                server.sendPlayerManaType(gameId, sessionId, data);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
+    @Override
     public DraftPickView sendCardPick(UUID draftId, UUID cardId) {
         try {
             if (isConnected()) {
@@ -1161,6 +1177,21 @@ public class SessionImpl implements Session {
             handleMageException(ex);
         } catch (Throwable t) {
             handleThrowable(t);        
+        }
+        return false;
+    }
+
+    @Override
+    public boolean setManaPoolMode(boolean autoPayment, UUID gameId) {
+        try {
+            if (isConnected()) {
+                server.setManaPoolMode(gameId, sessionId, autoPayment);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
         }
         return false;
     }

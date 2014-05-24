@@ -28,19 +28,21 @@
 
 package mage.abilities.costs.mana;
 
-import java.util.*;
-import mage.constants.ColoredManaSymbol;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.mana.ManaOptions;
+import mage.constants.ColoredManaSymbol;
 import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Targets;
-
-
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -50,7 +52,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     protected UUID id;
 
-    private static Map<String, ManaCosts> costs = new HashMap<String, ManaCosts>();
+    private static Map<String, ManaCosts> costs = new HashMap<>();
 
     public ManaCostsImpl() {
         this.id = UUID.randomUUID();
@@ -204,6 +206,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool) {
+        if (!pool.isAutoPayment() && pool.getUnlockedManaType() == null) {
+            // if auto payment is inactive and no mana type was clicked manually - do nothing
+            return;
+        }
+
         //attempt to pay colored costs first
 
         for (ManaCost cost : this) {
@@ -235,6 +242,8 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 cost.assignPayment(game, ability, pool);
             }
         }
+        // stop using mana of the clicked mana type
+        pool.lockManaType();
     }
 
     @Override

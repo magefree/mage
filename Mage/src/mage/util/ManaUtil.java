@@ -1,11 +1,16 @@
 package mage.util;
 
-import mage.Mana;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.mana.*;
-
 import java.util.LinkedHashMap;
 import java.util.UUID;
+import mage.Mana;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
 
 /**
  * @author noxx

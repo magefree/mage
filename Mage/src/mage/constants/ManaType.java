@@ -12,7 +12,7 @@ public enum ManaType {
     WHITE ("white"),
     COLORLESS("colorless");
 
-    private String text;
+    private final String text;
 
     ManaType(String text) {
         this.text = text;

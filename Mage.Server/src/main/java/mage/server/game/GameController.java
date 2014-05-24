@@ -54,6 +54,7 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.ManaType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
@@ -356,6 +357,10 @@ public class GameController implements GameCallback {
         game.concede(getPlayerId(userId));
     }
 
+    public void setManaPoolMode(UUID userId, boolean autoPayment) {
+        game.setManaPoolMode(getPlayerId(userId), autoPayment);
+    }
+
     public void quit(UUID userId) {
         game.quit(getPlayerId(userId));
     }
@@ -466,6 +471,15 @@ public class GameController implements GameCallback {
             @Override
             public void execute(UUID playerId) {
                 getGameSession(playerId).sendPlayerString(data);
+            }
+        });
+    }
+
+    public void sendPlayerManaType(UUID userId, final ManaType data) {
+        sendMessage(userId, new Command() {
+            @Override
+            public void execute(UUID playerId) {
+                getGameSession(playerId).sendPlayerManaType(data);
             }
         });
     }

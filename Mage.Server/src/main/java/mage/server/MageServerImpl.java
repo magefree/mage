@@ -65,6 +65,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
+import mage.constants.ManaType;
 
 /**
  *
@@ -569,6 +570,21 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
+    public void sendPlayerManaType(final UUID gameId, final String sessionId, final ManaType data) throws MageException {
+        execute("sendPlayerManaType", sessionId, new Action() {
+            @Override
+            public void execute() {
+                User user = SessionManager.getInstance().getUser(sessionId);
+                if (user != null) {
+                    user.sendPlayerManaType(gameId, data);
+                } else {
+                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
+                }
+            }
+        });
+    }
+
+    @Override
     public void sendPlayerBoolean(final UUID gameId, final String sessionId, final Boolean data) throws MageException {
         execute("sendPlayerBoolean", sessionId, new Action() {
             @Override
@@ -605,6 +621,17 @@ public class MageServerImpl implements MageServer {
             public DraftPickView execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 return DraftManager.getInstance().sendCardPick(draftId, userId, cardPick);
+            }
+        });
+    }
+
+    @Override
+    public void setManaPoolMode(final UUID gameId, final String sessionId, final boolean autoPayment) throws MageException {
+        execute("setManaPoolMode", sessionId, new Action() {
+            @Override
+            public void execute() {
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                GameManager.getInstance().setManaPoolMode(gameId, userId, autoPayment);
             }
         });
     }

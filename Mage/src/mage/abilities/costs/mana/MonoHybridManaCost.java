@@ -35,7 +35,7 @@ import mage.players.ManaPool;
 
 public class MonoHybridManaCost extends ManaCostImpl<MonoHybridManaCost> {
 
-    private ColoredManaSymbol mana;
+    private final ColoredManaSymbol mana;
     private int mana2 = 2;
 
     public MonoHybridManaCost(ColoredManaSymbol mana) {

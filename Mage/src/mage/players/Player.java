@@ -50,6 +50,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
@@ -277,6 +278,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void setResponseUUID(UUID responseUUID);
     void setResponseBoolean(Boolean responseBoolean);
     void setResponseInteger(Integer data);
+    void setResponseManaType(ManaType responseManaType);
 
     boolean priority(Game game);
     boolean choose(Outcome outcome, Target target, UUID sourceId, Game game);

@@ -50,14 +50,22 @@ import mage.game.events.ManaEvent;
  */
 public class ManaPool implements Serializable {
 
-    private List<ManaPoolItem> manaItems = new ArrayList<ManaPoolItem>();
+    private final List<ManaPoolItem> manaItems = new ArrayList<>();
 
-    public ManaPool() {}
+    private boolean autoPayment; // auto payment from mana pool: true - mode is active
+    private ManaType unlockedManaType; // type of mana that was selected to pay manually
+
+    public ManaPool() {
+        autoPayment = true;
+        unlockedManaType = null;
+    }
 
     public ManaPool(final ManaPool pool) {
         for (ManaPoolItem item: pool.manaItems) {
             manaItems.add(item.copy());
         }
+        this.autoPayment = pool.autoPayment;
+        this.unlockedManaType = pool.unlockedManaType;
     }
 
     public int getRed() {
@@ -81,8 +89,13 @@ public class ManaPool implements Serializable {
     }
 
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game) {
+        if (!autoPayment && !manaType.equals(unlockedManaType)) {
+            // if manual payment and the needed mana type was not unlocked, nothing will be paid
+            return false;
+        }
         if (getConditional(manaType, ability, filter, game) > 0) {
             removeConditional(manaType, ability, game);
+            lockManaType(); // pay only one mana if mana payment is set to manually
             return true;
         }
         for (ManaPoolItem mana : manaItems) {
@@ -95,6 +108,7 @@ public class ManaPool implements Serializable {
                     } else {
                         mana.remove(manaType);
                     }
+                    lockManaType(); // pay only one mana if mana payment is set to manually
                     return true;
                 }
             }
@@ -302,7 +316,7 @@ public class ManaPool implements Serializable {
     }
 
     public List<ConditionalMana> getConditionalMana() {
-        List<ConditionalMana> conditionalMana = new ArrayList<ConditionalMana>();
+        List<ConditionalMana> conditionalMana = new ArrayList<>();
         for (ManaPoolItem item: manaItems) {
             if (item.isConditional()) {
                 conditionalMana.add(item.getConditionalMana());
@@ -332,4 +346,25 @@ public class ManaPool implements Serializable {
             }
         }
     }
+
+    public boolean isAutoPayment() {
+        return autoPayment;
+    }
+
+    public void setAutoPayment(boolean autoPayment) {
+        this.autoPayment = autoPayment;
+    }
+
+    public ManaType getUnlockedManaType() {
+        return unlockedManaType;
+    }
+
+    public void unlockManaType(ManaType manaType) {
+        this.unlockedManaType = manaType;
+    }
+
+    public void lockManaType() {
+        this.unlockedManaType = null;
+    }
+
 }

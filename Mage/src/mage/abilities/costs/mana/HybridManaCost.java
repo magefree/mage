@@ -60,10 +60,7 @@ public class HybridManaCost extends ManaCostImpl<HybridManaCost> {
 
     @Override
     public boolean isPaid() {
-        if (paid || isColoredPaid(this.mana1) || isColoredPaid(this.mana2)) {
-            return true;
-        }
-        return false;
+        return paid || isColoredPaid(this.mana1) || isColoredPaid(this.mana2);
     }
 
     @Override

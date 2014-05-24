@@ -28,9 +28,9 @@
 
 package mage.abilities.costs.mana;
 
-import mage.abilities.Ability;
-import mage.abilities.costs.*;
 import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
 import mage.filter.Filter;

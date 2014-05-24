@@ -31,6 +31,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -39,6 +40,7 @@ import java.util.UUID;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -158,7 +160,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().passTurnPriority(gameId);;
+                gamePanel.getSession().passTurnPriority(gameId);
             }
         });
 
@@ -170,6 +172,21 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gamePanel.getSession().passPriorityUntilNextYourTurn(gameId);
+            }
+        });
+
+        popupMenu.addSeparator();
+
+        menuItem = new JCheckBoxMenuItem("Use mana from pool automatically", true);
+        menuItem.setMnemonic(KeyEvent.VK_M);
+        menuItem.setToolTipText("If not active, you have to click the type of mana you want to pay in the player panel.");
+        popupMenu.add(menuItem);
+
+        // Auto pay mana from mana pool
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.getSession().setManaPoolMode(((JCheckBoxMenuItem)e.getSource()).getState(), gameId);
             }
         });
 

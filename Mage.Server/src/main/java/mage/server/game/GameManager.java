@@ -28,12 +28,12 @@
 
 package mage.server.game;
 
-import mage.cards.decks.DeckCardLists;
-import mage.game.Game;
-import mage.view.GameView;
-
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.cards.decks.DeckCardLists;
+import mage.constants.ManaType;
+import mage.game.Game;
+import mage.view.GameView;
 
 /**
  *
@@ -85,6 +85,12 @@ public class GameManager {
         }
     }
 
+    public void sendPlayerManaType(UUID gameId, UUID userId, ManaType data) {
+        if (gameControllers.containsKey(gameId)) {
+            gameControllers.get(gameId).sendPlayerManaType(userId, data);
+        }
+    }
+
     public void sendPlayerBoolean(UUID gameId, UUID userId, Boolean data) {
         if (gameControllers.containsKey(gameId)) {
             gameControllers.get(gameId).sendPlayerBoolean(userId, data);
@@ -94,6 +100,12 @@ public class GameManager {
     public void sendPlayerInteger(UUID gameId, UUID userId, Integer data) {
         if (gameControllers.containsKey(gameId)) {
             gameControllers.get(gameId).sendPlayerInteger(userId, data);
+        }
+    }
+
+    public void setManaPoolMode(UUID gameId, UUID userId, boolean autoPayment) {
+        if (gameControllers.containsKey(gameId)) {
+            gameControllers.get(gameId).setManaPoolMode(userId, autoPayment);
         }
     }
 

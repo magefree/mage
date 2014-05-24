@@ -27,10 +27,10 @@
 */
 package mage.remote.interfaces;
 
-import mage.cards.decks.DeckCardLists;
-import mage.view.DraftPickView;
-
 import java.util.UUID;
+import mage.cards.decks.DeckCardLists;
+import mage.constants.ManaType;
+import mage.view.DraftPickView;
 
 /**
  * @author noxx
@@ -50,6 +50,8 @@ public interface GamePlay {
     boolean sendPlayerInteger(UUID gameId, int data);
 
     boolean sendPlayerString(UUID gameId, String data);
+
+    boolean sendPlayerManaType(UUID gameId, ManaType data);
 
     boolean concedeGame(UUID gameId);
 
@@ -98,5 +100,14 @@ public interface GamePlay {
      * @return
      */
     boolean restorePriority(UUID gameId);
+
+    /**
+     * This method toggles usage of mana pool 
+     * 
+     * @param automatic true mana in pool will be used automatically
+     * @param gameId
+     * @return 
+     */
+    boolean setManaPoolMode(boolean automatic, UUID gameId);
 
 }

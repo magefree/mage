@@ -28,6 +28,13 @@
 
 package mage.game;
 
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -36,6 +43,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
+import mage.abilities.effects.PreventionEffectData;
 import mage.actions.impl.MageAction;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -46,6 +54,7 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.game.combat.Combat;
+import mage.game.command.Commander;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.Listener;
@@ -63,11 +72,6 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.functions.ApplyToPermanent;
-
-import java.io.Serializable;
-import java.util.*;
-import mage.abilities.effects.PreventionEffectData;
-import mage.game.command.Commander;
 
 public interface Game extends MageItem, Serializable {
 
@@ -222,6 +226,7 @@ public interface Game extends MageItem, Serializable {
     void timerTimeout(UUID playerId);
     void idleTimeout(UUID playerId);
     void concede(UUID playerId);
+    void setManaPoolMode(UUID playerId, boolean autoPayment);
     void undo(UUID playerId);
     void emptyManaPools();
     void addEffect(ContinuousEffect continuousEffect, Ability source);

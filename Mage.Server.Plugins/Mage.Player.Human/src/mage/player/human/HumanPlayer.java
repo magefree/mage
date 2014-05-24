@@ -60,6 +60,7 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import static mage.constants.SpellAbilityType.SPLIT;
@@ -511,7 +512,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                     }
                 }
             }
-        } 
+        } else if (response.getManaType() != null) {
+            // this mana type can be paid once from pool
+            this.getManaPool().unlockManaType(response.getManaType());
+        }
         return true;
     }
 
@@ -826,7 +830,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     protected void specialAction(Game game) {
         updateGameStatePriority("specialAction", game);
         LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId);
-        game.fireGetChoiceEvent(playerId, name, null, new ArrayList<SpecialAction>(specialActions.values()));
+        game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
         waitForResponse(game);
         if (response.getUUID() != null) {
             if (specialActions.containsKey(response.getUUID())) {
@@ -844,7 +848,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 return;
             }
         }
-        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<ActivatedAbility>(abilities.values()));
+        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(abilities.values()));
         waitForResponse(game);
         if (response.getUUID() != null) {
             if (abilities.containsKey(response.getUUID())) {
@@ -887,7 +891,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                     if (useableAbilities != null && useableAbilities.size() == 1) {
                         return (SpellAbility) useableAbilities.values().iterator().next();
                     } else if (useableAbilities != null && useableAbilities.size() > 0) {
-                        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<ActivatedAbility>(useableAbilities.values()));
+                        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
                         waitForResponse(game);
                         if (response.getUUID() != null) {
                             if (useableAbilities.containsKey(response.getUUID())) {
@@ -907,7 +911,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("chooseMode", game);
         if (modes.size() > 1) {
             MageObject obj = game.getObject(source.getSourceId());
-            Map<UUID, String> modeMap = new LinkedHashMap<UUID, String>();
+            Map<UUID, String> modeMap = new LinkedHashMap<>();
             for (Mode mode: modes.values()) {
                 if (!modes.getSelectedModes().contains(mode.getId()) // show only modes not already selected
                         && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and where targets are available
@@ -951,6 +955,15 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             response.setString(responseString);
             response.notify();
             log.debug("Got response string from player: " + getId());
+        }
+    }
+
+    @Override
+    public void setResponseManaType(ManaType manaType) {
+        synchronized(response) {
+            response.setManaType(manaType);
+            response.notify();
+            log.debug("Got response mana type from player: " + getId());
         }
     }
 

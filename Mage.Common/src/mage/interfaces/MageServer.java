@@ -28,18 +28,25 @@
 
 package mage.interfaces;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.ExpansionInfo;
+import mage.constants.ManaType;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.utils.MageVersion;
-import mage.view.*;
-
-import java.util.List;
-import java.util.UUID;
+import mage.view.DraftPickView;
+import mage.view.GameView;
+import mage.view.MatchView;
+import mage.view.TableView;
+import mage.view.TournamentView;
+import mage.view.UserDataView;
+import mage.view.UserView;
+import mage.view.UsersView;
 
 /**
  *
@@ -107,9 +114,11 @@ public interface MageServer {
     void sendPlayerString(UUID gameId, String sessionId, String data) throws MageException;
     void sendPlayerBoolean(UUID gameId, String sessionId, Boolean data) throws MageException;
     void sendPlayerInteger(UUID gameId, String sessionId, Integer data) throws MageException;
+    void sendPlayerManaType(UUID gameId, String sessionId, ManaType data) throws MageException;
     void concedeGame(UUID gameId, String sessionId) throws MageException;
     void quitMatch(UUID gameId, String sessionId) throws MageException;
     void undo(UUID gameId, String sessionId) throws MageException;
+    void setManaPoolMode(UUID gameId, String sessionId, boolean autoPayment) throws MageException;
     GameView getGameView(UUID gameId, String sessionId, UUID playerId) throws MageException;
 
     //priority methods

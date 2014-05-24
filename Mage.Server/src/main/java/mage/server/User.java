@@ -36,6 +36,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
+import mage.constants.ManaType;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
@@ -137,7 +138,7 @@ public class User {
 
     public String getDisconnectDuration() {
         long secondsDisconnected = SystemUtil.getDateDiff(lastActivity, new Date(), TimeUnit.SECONDS);
-        long secondsLeft = 0;
+        long secondsLeft;
         String sign = "";
         if (secondsDisconnected > (3 * 60)) {            
             sign="-";
@@ -220,6 +221,11 @@ public class User {
     public void sendPlayerString(final UUID gameId, final String data) {
         lastActivity = new Date();
         GameManager.getInstance().sendPlayerString(gameId, userId, data);
+    }
+
+    public void sendPlayerManaType(final UUID gameId, final ManaType data) {
+        lastActivity = new Date();
+        GameManager.getInstance().sendPlayerManaType(gameId, userId, data);
     }
 
     public void sendPlayerBoolean(final UUID gameId, final Boolean data)  {

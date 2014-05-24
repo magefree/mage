@@ -60,8 +60,9 @@ public class GenericManaCost extends ManaCostImpl<GenericManaCost> {
 
     @Override
     public boolean isPaid() {
-        if (paid)
+        if (paid) {
             return true;
+        }
         return this.isColorlessPaid(mana);
     }
 
