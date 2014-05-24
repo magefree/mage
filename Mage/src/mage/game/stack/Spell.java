@@ -235,7 +235,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             if (this.getSpellAbility() instanceof BestowAbility) { 
                 updateOptionalCosts(0);
                 result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
-                game.getState().handleSimultaneousEvent(game);
                 return result;
             } else {
                 //20091005 - 608.2b
@@ -246,7 +245,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         } else {
             updateOptionalCosts(0);
             result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
-            game.getState().handleSimultaneousEvent(game);
             return result;
         }
     }

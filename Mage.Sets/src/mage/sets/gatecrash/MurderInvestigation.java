@@ -28,10 +28,6 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -39,9 +35,12 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.SoldierToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -64,7 +63,6 @@ public class MurderInvestigation extends CardImpl<MurderInvestigation> {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-
 
         // When enchanted creature dies, put X 1/1 white Soldier creature tokens onto the battlefield, where X is its power.
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new SoldierToken(), new AttachedPermanentPowerCount()), "enchanted creature"));

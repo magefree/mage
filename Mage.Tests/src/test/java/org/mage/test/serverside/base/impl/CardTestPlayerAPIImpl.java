@@ -228,6 +228,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     /**
      * Define turn number and step to stop the game on.
+     * The game stops after executing the step
      * @param turn
      * @param step
      */

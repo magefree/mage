@@ -43,12 +43,12 @@ public abstract class MageTestPlayerBase {
 
     protected Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)(:\\{tapped\\})?");
 
-    protected Map<TestPlayer, List<Card>> handCards = new HashMap<TestPlayer, List<Card>>();
-    protected Map<TestPlayer, List<PermanentCard>> battlefieldCards = new HashMap<TestPlayer, List<PermanentCard>>();
-    protected Map<TestPlayer, List<Card>> graveyardCards = new HashMap<TestPlayer, List<Card>>();
-    protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<TestPlayer, List<Card>>();
+    protected Map<TestPlayer, List<Card>> handCards = new HashMap<>();
+    protected Map<TestPlayer, List<PermanentCard>> battlefieldCards = new HashMap<>();
+    protected Map<TestPlayer, List<Card>> graveyardCards = new HashMap<>();
+    protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<>();
 
-    protected Map<TestPlayer, Map<Zone, String>> commands = new HashMap<TestPlayer, Map<Zone, String>>();
+    protected Map<TestPlayer, Map<Zone, String>> commands = new HashMap<>();
 
     protected TestPlayer playerA;
     protected TestPlayer playerB;
@@ -90,7 +90,7 @@ public abstract class MageTestPlayerBase {
      * battlefield:ComputerB:Tine Shrike:0
      * graveyard:ComputerB:Tine Shrike:1
      */
-    protected List<String> expectedResults = new ArrayList<String>();
+    protected List<String> expectedResults = new ArrayList<>();
 
     protected static final String TESTS_PATH = "tests" + File.separator;
 
@@ -148,8 +148,9 @@ public abstract class MageTestPlayerBase {
 
     private static void deleteSavedGames() {
         File directory = new File("saved/");
-        if (!directory.exists())
+        if (!directory.exists()) {
             directory.mkdirs();
+        }
         File[] files = directory.listFiles(
                 new FilenameFilter() {
                     @Override
@@ -170,7 +171,9 @@ public abstract class MageTestPlayerBase {
         try {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
-                if (line == null || line.isEmpty() || line.startsWith("#")) continue;
+                if (line == null || line.isEmpty() || line.startsWith("#")) {
+                    continue;
+                }
                 if (line.startsWith("$include")) {
                     includeFrom(line);
                     continue;
@@ -273,7 +276,7 @@ public abstract class MageTestPlayerBase {
         if (handCards.containsKey(player)) {
             return handCards.get(player);
         }
-        List<Card> hand = new ArrayList<Card>();
+        List<Card> hand = new ArrayList<>();
         handCards.put(player, hand);
         return hand;
     }
@@ -282,7 +285,7 @@ public abstract class MageTestPlayerBase {
         if (graveyardCards.containsKey(player)) {
             return graveyardCards.get(player);
         }
-        List<Card> grave = new ArrayList<Card>();
+        List<Card> grave = new ArrayList<>();
         graveyardCards.put(player, grave);
         return grave;
     }
@@ -291,7 +294,7 @@ public abstract class MageTestPlayerBase {
         if (libraryCards.containsKey(player)) {
             return libraryCards.get(player);
         }
-        List<Card> library = new ArrayList<Card>();
+        List<Card> library = new ArrayList<>();
         libraryCards.put(player, library);
         return library;
     }
@@ -300,7 +303,7 @@ public abstract class MageTestPlayerBase {
         if (battlefieldCards.containsKey(player)) {
             return battlefieldCards.get(player);
         }
-        List<PermanentCard> battlefield = new ArrayList<PermanentCard>();
+        List<PermanentCard> battlefield = new ArrayList<>();
         battlefieldCards.put(player, battlefield);
         return battlefield;
     }
@@ -309,7 +312,7 @@ public abstract class MageTestPlayerBase {
         if (commands.containsKey(player)) {
             return commands.get(player);
         }
-        Map<Zone, String> command = new HashMap<Zone, String>();
+        Map<Zone, String> command = new HashMap<>();
         commands.put(player, command);
         return command;
     }

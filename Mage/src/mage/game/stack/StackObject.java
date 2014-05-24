@@ -28,12 +28,11 @@
 
 package mage.game.stack;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.game.Controllable;
 import mage.game.Game;
-
-import java.util.UUID;
 
 public interface StackObject extends MageObject, Controllable {
 

@@ -108,12 +108,13 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
                     return false;
                 }
                 currentStep = step;
-                if (!game.isSimulation() && checkStopOnStepOption(game)) {
-                    return false;
-                }
                 if (!game.getState().getTurnMods().skipStep(activePlayerId, getStep().getType())) {
                     playStep(game);
                 }
+                if (!game.isSimulation() && checkStopOnStepOption(game)) {
+                    return false;
+                }
+
             }
             if (game.isPaused() || game.gameOver(null)) {
                 return false;
