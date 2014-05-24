@@ -28,14 +28,17 @@
 
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 
@@ -50,6 +53,7 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
      */
     private MageObject target;
     private UUID sourceId;
+    private int zoneChangeCounter;
 
     public CopyEffect(Permanent target, UUID sourceId) {
         this(Duration.Custom, target, sourceId);
@@ -65,6 +69,16 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
         super(effect);
         this.target = effect.target.copy();
         this.sourceId = effect.sourceId;
+        this.zoneChangeCounter = effect.zoneChangeCounter;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent != null) {
+            this.zoneChangeCounter = permanent.getZoneChangeCounter();
+        }
     }
 
     @Override
@@ -119,12 +133,9 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        // The copy effect is added, if the copy takes place. If source leaves battlefield, the copy effect must cease to exist
+        // The copy effect is added, if the copy takes place. If source left battlefield, the copy effect must cease to exist
         Permanent permanent = game.getPermanent(this.sourceId);
-        if (permanent == null) {
-            return true;
-        }
-        return false;
+        return permanent == null || permanent.getZoneChangeCounter() != this.zoneChangeCounter;
     }
 
     @Override

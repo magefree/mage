@@ -107,7 +107,8 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         this.rarity = card.getRarity();
         this.cardNumber = card.getCardNumber();
         this.usesVariousArt = card.getUsesVariousArt();
-
+        this.zoneChangeCounter = card.getZoneChangeCounter();
+        
         canTransform = card.canTransform();
         if (canTransform) {
             secondSideCard = card.getSecondCardFace();
@@ -162,11 +163,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
                     }
                     game.setZone(objectId, event.getToZone());
                     game.addSimultaneousEvent(event);
-                    if (event.getFromZone().equals(Zone.BATTLEFIELD)) {
-                        game.getState().handleSimultaneousEvent(game);
-                        game.resetForSourceId(getId());
-                        game.applyEffects(); // LevelX2: needed to execute isInactive for of custom duration copy effect if source returns directly (e.g. cloudshifted clone)
-                    }
                     return game.getState().getZone(objectId) == toZone;
                 }
             }
@@ -193,11 +189,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
                     game.getExile().createZone(exileId, name).add(card);
                 }
                 game.setZone(objectId, event.getToZone());
-                game.fireEvent(event);
-                if (event.getFromZone().equals(Zone.BATTLEFIELD)) {
-                    game.resetForSourceId(getId());
-                    game.applyEffects();
-                }
+                game.addSimultaneousEvent(event);
                 return true;
             }
         }

@@ -461,7 +461,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             }
             updateZoneChangeCounter();
             game.setZone(objectId, event.getToZone());
-            game.fireEvent(event);
+            game.addSimultaneousEvent(event);
             return true;
         }
         return false;
@@ -604,7 +604,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     @Override
     public void addInfo(String key, String value) {
         if (info == null) {
-            info = new HashMap<String, String>();
+            info = new HashMap<>();
         }
         info.put(key, value);
     }
