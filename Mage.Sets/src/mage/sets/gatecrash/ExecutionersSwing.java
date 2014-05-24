@@ -41,7 +41,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.SourceDidDamageWatcher;
 
 /**
@@ -74,7 +73,7 @@ public class ExecutionersSwing extends CardImpl<ExecutionersSwing> {
     }
 }
 
-class TargetCreaturePermanentThatDealtDamageThisTurn<T extends TargetCreaturePermanent<T>> extends TargetPermanent<TargetCreaturePermanent<T>> {
+class TargetCreaturePermanentThatDealtDamageThisTurn extends TargetPermanent<TargetCreaturePermanentThatDealtDamageThisTurn> {
 
     public TargetCreaturePermanentThatDealtDamageThisTurn() {
         super(1, 1, new FilterCreaturePermanent(), false);

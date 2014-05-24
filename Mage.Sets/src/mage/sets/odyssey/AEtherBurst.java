@@ -39,7 +39,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -94,12 +94,12 @@ public class AEtherBurst extends CardImpl<AEtherBurst> {
     }
 }
 
-class DynamicTargetCreaturePermanent<T extends DynamicTargetCreaturePermanent<T>> extends TargetCreaturePermanent<DynamicTargetCreaturePermanent<T>> {
+class DynamicTargetCreaturePermanent extends TargetPermanent<DynamicTargetCreaturePermanent> {
 
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creatures");
 
     public DynamicTargetCreaturePermanent() {
-        super(new TargetCreaturePermanent(filterCreature));
+        super(filterCreature);
     }
 
     public DynamicTargetCreaturePermanent(final DynamicTargetCreaturePermanent target) {

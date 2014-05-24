@@ -45,7 +45,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 import mage.watchers.common.LandfallWatcher;
 
@@ -122,7 +121,7 @@ class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
 
 }
 
-class SearingBlazeTarget<T extends TargetCreaturePermanent<T>> extends TargetPermanent<TargetCreaturePermanent<T>> {
+class SearingBlazeTarget extends TargetPermanent<SearingBlazeTarget> {
 
     public SearingBlazeTarget() {
         super(1, 1, new FilterCreaturePermanent(), false);

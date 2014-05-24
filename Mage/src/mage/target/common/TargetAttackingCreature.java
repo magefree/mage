@@ -29,12 +29,13 @@
 package mage.target.common;
 
 import mage.filter.common.FilterAttackingCreature;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetAttackingCreature extends TargetCreaturePermanent<TargetAttackingCreature> {
+public class TargetAttackingCreature extends TargetPermanent<TargetAttackingCreature> {
 
     public TargetAttackingCreature() {
         this(1, 1, new FilterAttackingCreature(), false);

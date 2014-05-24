@@ -45,7 +45,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
 /**
@@ -88,7 +87,7 @@ public class GiltspireAvenger extends CardImpl<GiltspireAvenger> {
     }
 }
 
-class GiltspireAvengerTarget<T extends TargetCreaturePermanent<T>> extends TargetPermanent<TargetCreaturePermanent<T>> {
+class GiltspireAvengerTarget extends TargetPermanent<GiltspireAvengerTarget> {
 
     public GiltspireAvengerTarget() {
         super(1, 1, new FilterCreaturePermanent(), false);

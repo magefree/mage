@@ -41,7 +41,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
 /**
@@ -69,7 +68,7 @@ public class Reciprocate extends CardImpl<Reciprocate> {
 
 }
 
-class ReciprocateTarget<T extends TargetCreaturePermanent<T>> extends TargetPermanent<TargetCreaturePermanent<T>> {
+class ReciprocateTarget extends TargetPermanent<ReciprocateTarget> {
 
     public ReciprocateTarget() {
         super(1, 1, new FilterCreaturePermanent(), false);

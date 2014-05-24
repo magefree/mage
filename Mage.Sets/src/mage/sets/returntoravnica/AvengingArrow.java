@@ -39,7 +39,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.SourceDidDamageWatcher;
 
 /**
@@ -70,7 +69,7 @@ public class AvengingArrow extends CardImpl<AvengingArrow> {
     }
 }
 
-class AvengingArrowTarget<T extends TargetCreaturePermanent<T>> extends TargetPermanent<TargetCreaturePermanent<T>> {
+class AvengingArrowTarget extends TargetPermanent<AvengingArrowTarget> {
 
     public AvengingArrowTarget() {
         super(1, 1, new FilterCreaturePermanent(), false);
