@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventDamageSourceEffect;
+import mage.abilities.effects.common.PreventDamageToSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -55,7 +55,7 @@ public class EtherealChampion extends CardImpl<EtherealChampion> {
         this.toughness = new MageInt(4);
 
         // Pay 1 life: Prevent the next 1 damage that would be dealt to Ethereal Champion this turn.
-        Effect effect = new PreventDamageSourceEffect(Duration.EndOfTurn, 1);
+        Effect effect = new PreventDamageToSourceEffect(Duration.EndOfTurn, 1);
         effect.setText("Pay 1 life: Prevent the next 1 damage that would be dealt to {source} this turn");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new PayLifeCost(1)));
     }

@@ -38,19 +38,19 @@ import mage.game.events.GameEvent;
  *
  * @author Quercitron
  */
-public class PreventDamageSourceEffect extends PreventionEffectImpl<PreventDamageSourceEffect> {
+public class PreventDamageToSourceEffect extends PreventionEffectImpl<PreventDamageToSourceEffect> {
 
-    public PreventDamageSourceEffect(Duration duration, int amountToPrevent) {
+    public PreventDamageToSourceEffect(Duration duration, int amountToPrevent) {
         super(duration, amountToPrevent, false);
     }
 
-    public PreventDamageSourceEffect(final PreventDamageSourceEffect effect) {
+    public PreventDamageToSourceEffect(final PreventDamageToSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public PreventDamageSourceEffect copy() {
-        return new PreventDamageSourceEffect(this);
+    public PreventDamageToSourceEffect copy() {
+        return new PreventDamageToSourceEffect(this);
     }
 
     @Override

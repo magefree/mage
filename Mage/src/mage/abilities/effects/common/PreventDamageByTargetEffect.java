@@ -28,15 +28,12 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.Target;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -69,56 +66,18 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl<PreventDam
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        for (Target target : source.getTargets()) {
-            for (UUID chosen : target.getTargets()) {
-                if (event.getSourceId().equals(chosen)) {
-                    preventDamage(event, source, chosen, game);
-                }
-            }
-        }
-        return false;
-    }
-
-    private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            if (amountToPrevent == Integer.MAX_VALUE) {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
-            } else {
-                if (event.getAmount() >= amountToPrevent) {
-                    int damage = amountToPrevent;
-                    event.setAmount(event.getAmount() - amountToPrevent);
-                    this.used = true;
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
-                } else {
-                    int damage = event.getAmount();
-                    event.setAmount(0);
-                    amountToPrevent -= damage;
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
-                }
-            }
-        }
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
-            for (Target target : source.getTargets()) {
-                for (UUID chosen : target.getTargets()) {
-                    if (event.getSourceId().equals(chosen)) {
-                        return true;
-                    }
-                }
-            }
+            return this.getTargetPointer().getTargets(game, source).contains(event.getSourceId());
         }
         return false;
     }
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         if (amountToPrevent == Integer.MAX_VALUE) {
             StringBuilder sb = new StringBuilder();
             sb.append("Prevent all damage target ");

@@ -112,31 +112,35 @@ public class TargetSource extends TargetObject<TargetSource> {
         for (StackObject stackObject: game.getStack()) {
             if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
             if (filter.match(permanent, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         for (Player player : game.getPlayers().values()) {
             for (Card card : player.getGraveyard().getCards(game)) {
                 if (filter.match(card, game)) {
                     count++;
-                    if (count >= this.minNumberOfTargets)
+                    if (count >= this.minNumberOfTargets) {
                         return true;
+                    }
                 }
             }
         }
         for (Card card : game.getExile().getAllCards(game)) {
             if (filter.match(card, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         return false;
@@ -149,7 +153,7 @@ public class TargetSource extends TargetObject<TargetSource> {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject: game.getStack()) {
             if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
                 possibleTargets.add(stackObject.getId());

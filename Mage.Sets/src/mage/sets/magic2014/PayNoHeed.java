@@ -29,7 +29,9 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -51,8 +53,12 @@ public class PayNoHeed extends CardImpl<PayNoHeed> {
         this.color.setWhite(true);
 
         // Prevent all damage a source of your choice would deal this turn.
-        this.getSpellAbility().addEffect(new PayNoHeedEffect());
-        this.getSpellAbility().addTarget(new TargetSource());
+        Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, false);
+        effect.setText("Prevent all damage a source of your choice would deal this turn");
+        this.getSpellAbility().addEffect(effect);
+        TargetSource targetSource = new TargetSource();
+        targetSource.setRequired(true);
+        this.getSpellAbility().addTarget(targetSource);
         
     }
 
@@ -69,7 +75,7 @@ public class PayNoHeed extends CardImpl<PayNoHeed> {
 class PayNoHeedEffect extends PreventionEffectImpl<PayNoHeedEffect> {
 
     public PayNoHeedEffect() {
-        super(Duration.EndOfTurn);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
         staticText = "Prevent all damage a source of your choice would deal this turn";
     }
 
@@ -85,21 +91,6 @@ class PayNoHeedEffect extends PreventionEffectImpl<PayNoHeedEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        preventDamage(event, source, event.getSourceId(), game);
-        return true;
-    }
-
-    private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getSourceId(), source.getControllerId(), damage));
-        }
     }
 
     @Override
