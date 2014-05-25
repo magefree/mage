@@ -757,25 +757,44 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         }
 
         //20091005 - 103.4
-        for (UUID playerId: state.getPlayerList(startingPlayerId)) {
-            Player player = getPlayer(playerId);
-            GameEvent event = new GameEvent(GameEvent.EventType.CAN_TAKE_MULLIGAN, null, null, playerId);
-            while (player.getHand().size() > 0)  {
-                if (replaceEvent(event)) {
-                    continue;
+        List<UUID> keepPlayers = new ArrayList<>();
+        List<UUID> mulliganPlayers = new ArrayList<>();
+        do {
+            mulliganPlayers.clear();
+            for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+                if (!keepPlayers.contains(playerId)) {
+                    Player player = getPlayer(playerId);
+                    boolean keep = true;
+                    while (true) {
+                        if (player.getHand().isEmpty()) {
+                            break;
+                        }
+                        GameEvent event = new GameEvent(GameEvent.EventType.CAN_TAKE_MULLIGAN, null, null, playerId);
+                        if (!replaceEvent(event)) {
+                            fireEvent(event);
+                            if (player.chooseMulligan(this)) {
+                                keep = false;
+                            }
+                            break;
+                        }
+                    }
+                    if (keep) {
+                        endMulligan(player.getId());
+                        keepPlayers.add(playerId);
+                        fireInformEvent(player.getName() + " keeps hand");
+                    } else {
+                        mulliganPlayers.add(playerId);
+                        fireInformEvent(player.getName() + " decides to take mulligan");
+                    }
                 }
-                fireEvent(event);
-                if (!player.chooseMulligan(this)) {
-                    endMulligan(player.getId());
-                    break;
-                }
-
-                mulligan(player.getId());
             }
-            fireInformEvent(player.getName() + " keeps hand");
+            for (UUID mulliganPlayerId : mulliganPlayers) {
+                mulligan(mulliganPlayerId);
+            }
             saveState(false);
-        }
+        } while (!mulliganPlayers.isEmpty());
 
+        // add watchers
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             state.getWatchers().add(new PlayerDamagedBySourceWatcher(playerId));
         }
