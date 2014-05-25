@@ -56,6 +56,7 @@ import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
+import mage.abilities.TriggeredAbility;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.stack.StackObject;
@@ -288,7 +289,20 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
         return super.chooseTarget(outcome, target, source, game);
     }
 
-        @Override
+    @Override
+    public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
+        if (!choices.isEmpty()) {
+            for(TriggeredAbility ability :abilities) {
+                if (choices.get(0).equals(ability.toString())) {
+                    choices.remove(0);
+                    return ability;
+                }
+            }
+        }
+        return super.chooseTriggeredAbility(abilities, game);
+    }
+
+    @Override
     public boolean chooseUse(Outcome outcome, String message, Game game) {
         if (!choices.isEmpty()) {
             if (choices.get(0).equals("No")) {
@@ -315,7 +329,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
         if (groups.length > 2 && groups[2].startsWith("spellOnStack=")) {
             String spellOnStack = groups[2].substring(13);
             for (StackObject stackObject: game.getStack()) {
-                if (stackObject.getName().equals(spellOnStack)) {
+                if (stackObject.getStackAbility().toString().equals(spellOnStack)) {
                     return true;
                 }
             }

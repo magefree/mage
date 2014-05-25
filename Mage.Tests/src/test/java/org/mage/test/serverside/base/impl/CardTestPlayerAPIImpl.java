@@ -642,7 +642,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Spell will only be cast, if a spell with the given name is already on the stack
+     * Spell will only be cast, if a spell / ability with the given name is on the stack
      * 
      * @param turnNum
      * @param step
