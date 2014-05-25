@@ -69,7 +69,8 @@ class RiseOfEaglesBirdToken extends Token {
 
     public RiseOfEaglesBirdToken() {
         super("Bird", "2/2 blue Bird enchantment creature tokens with flying");
-        this.setOriginalExpansionSetCode("JOU");
+        this.setOriginalExpansionSetCode("BNG");
+        this.setTokenType(2);
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.BLUE);
         subtype.add("Bird");
