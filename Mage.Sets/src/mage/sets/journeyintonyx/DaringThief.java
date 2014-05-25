@@ -140,7 +140,7 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
         Player controller = game.getPlayer(sourceControllerId);
         Set<CardType> cardTypes = new HashSet<>();
         if (controller != null) {
-            for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceId, game)) {
+            for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
                 if (controller.hasOpponent(permanent.getControllerId(), game)) {
                     cardTypes.addAll(permanent.getCardType());
                 }
