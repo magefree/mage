@@ -451,19 +451,25 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             } else if (response.getString() != null && response.getString().equals("special")) {
                 specialAction(game);
             } else if (response.getUUID() != null) {
+                boolean result = false;
                 MageObject object = game.getObject(response.getUUID());
                 if (object != null) {
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
                         if (object instanceof Card && ((Card) object).isFaceDown()) {
                             revealFaceDownCard((Card) object, game);
+                            result = true;
                         }
                         LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getUseableActivatedAbilities(object, zone, game);
                         if (useableAbilities != null && useableAbilities.size() > 0) {
                             activateAbility(useableAbilities, object, game);
+                            result = true;
                         }
                     }
                 }
+                return result;
+            } else if (response.getManaType() != null) {
+                return false;
             }
             return true;
         }
