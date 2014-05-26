@@ -188,4 +188,12 @@ public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostS
         }
         return sb.toString();
     }
+
+    @Override
+    public Costs<Cost> getCosts() {
+        Costs<Cost> alterCosts = new CostsImpl<>();
+        alterCosts.addAll(alternateCosts);
+        return alterCosts;
+    }
+    
 }
