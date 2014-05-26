@@ -27,21 +27,22 @@
  */
 package mage.sets.magic2010;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSource;
 import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -55,9 +56,9 @@ public class HarmsWay extends CardImpl<HarmsWay> {
         this.color.setWhite(true);
 
         // The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead.
-        this.getSpellAbility().addEffect(new HarmsWayPreventDamageTargetEffect(Duration.EndOfTurn, 2));
+        this.getSpellAbility().addEffect(new HarmsWayPreventDamageTargetEffect());
         this.getSpellAbility().addTarget(new TargetSource());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
     }
 
     public HarmsWay(final HarmsWay card) {
@@ -72,17 +73,13 @@ public class HarmsWay extends CardImpl<HarmsWay> {
 
 class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl<HarmsWayPreventDamageTargetEffect> {
 
-    private int amount;
-
-    public HarmsWayPreventDamageTargetEffect(Duration duration, int amount) {
-        super(duration);
-        this.amount = amount;
-        staticText = "The next " + amount + " damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead";
+    public HarmsWayPreventDamageTargetEffect() {
+        super(Duration.EndOfTurn, 2, false, true);
+        staticText = "The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead";
     }
 
     public HarmsWayPreventDamageTargetEffect(final HarmsWayPreventDamageTargetEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
@@ -97,40 +94,23 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl<HarmsWayPre
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int prevented = 0;
-            if (event.getAmount() >= this.amount) {
-                int damage = amount;
-                event.setAmount(event.getAmount() - amount);
-                this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-                prevented = damage;
-            } else {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                amount -= damage;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-                prevented = damage;
+        PreventionEffectData preventionData = preventDamageAction(event, source, game);
+        // deal damage now
+        if (preventionData.getPreventedDamage() > 0) {
+            UUID redirectTo = source.getTargets().get(1).getFirstTarget();
+            Permanent permanent = game.getPermanent(redirectTo);
+            if (permanent != null) {
+                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + permanent.getName() + " instead");
+                // keep the original source id as it is redirecting
+                permanent.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, true, false);
             }
-
-            // deal damage now
-            if (prevented > 0) {
-                UUID redirectTo = source.getTargets().get(1).getFirstTarget();
-                Permanent permanent = game.getPermanent(redirectTo);
-                if (permanent != null) {
-                    game.informPlayers("Dealing " + prevented + " to " + permanent.getName() + " instead");
-                    // keep the original source id as it is redirecting
-                    permanent.damage(prevented, event.getSourceId(), game, true, false);
-                }
-                Player player = game.getPlayer(redirectTo);
-                if (player != null) {
-                    game.informPlayers("Dealing " + prevented + " to " + player.getName() + " instead");
-                    // keep the original source id as it is redirecting
-                    player.damage(prevented, event.getSourceId(), game, true, false);
-                }
+            Player player = game.getPlayer(redirectTo);
+            if (player != null) {
+                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + player.getName() + " instead");
+                // keep the original source id as it is redirecting
+                player.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, false, true);
             }
-        }
+        }        
         return false;
     }
 
@@ -145,7 +125,8 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl<HarmsWayPre
                 return false;
             }
 
-            if (!object.getId().equals(source.getFirstTarget())) {
+            if (!object.getId().equals(source.getFirstTarget()) &&
+                (!(object instanceof Spell) || !((Spell) object).getSourceId().equals(source.getFirstTarget()))) {
                 return false;
             }
 

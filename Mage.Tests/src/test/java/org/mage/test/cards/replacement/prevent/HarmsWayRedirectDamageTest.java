@@ -2,7 +2,6 @@ package org.mage.test.cards.replacement.prevent;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -65,26 +64,30 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
      * Tests redirecting from triggered ability
      */
     @Test
-    @Ignore
     // This test doesn't work in test framework but the test case works fine in real game
     //  -- this is because of no possibility to ask AI to play spell when triggered is in the stack
     public void testRedirectTriggeredAbilityDamage() {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
+        // The next 2 damage that a source of your choice would deal to you and/or permanents
+        // you control this turn is dealt to target creature or player instead.
         addCard(Zone.HAND, playerA, "Harm's Way");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
 
+        // Flying
+        // When Magma Phoenix dies, it deals 3 damage to each creature and each player.
         addCard(Zone.BATTLEFIELD, playerB, "Magma Phoenix");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Magma Phoenix");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Harm's Way", "Magma Phoenix^targetPlayer=PlayerB");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Harm's Way", "Magma Phoenix^targetPlayer=PlayerB"/**,
+                "When Magma Phoenix dies, Magma Phoenix deals 3 damage to each creature and each player"**/);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Magma Phoenix");
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertLife(playerA, 19);
+        assertLife(playerA, 19); // 3 damage from dying Phoenix -> 2 redirected to playerB so playerA gets only 1 damage
 
-        assertLife(playerB, 15);
+        assertLife(playerB, 15); // 3 damage from dying Phoenix directly and 2 redirected damage from playerA
     }
 
 }
