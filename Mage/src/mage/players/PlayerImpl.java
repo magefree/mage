@@ -57,6 +57,7 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.AlternativeCost;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
@@ -1834,6 +1835,15 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 }
             }
 
+            MageObject object = game.getObject(ability.getSourceId());
+            for (Ability objectAbility :object.getAbilities()) {
+                if (objectAbility instanceof AlternativeCostSourceAbility) {
+                    if (objectAbility.getCosts().canPay(ability.getSourceId(), playerId, game)) {
+                        return true;
+                    }
+                }                
+            }
+            
             for (AlternativeCost cost: ability.getAlternativeCosts()) {
                 if (cost.isAvailable(game, ability) && cost.canPay(ability.getSourceId(), playerId, game)) {
                     return true;
