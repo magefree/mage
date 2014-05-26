@@ -30,7 +30,6 @@ package mage.sets.prophecy;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
