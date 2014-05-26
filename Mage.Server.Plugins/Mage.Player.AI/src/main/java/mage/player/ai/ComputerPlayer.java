@@ -224,7 +224,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         }
         if (target instanceof TargetCardInHand) {
             List<Card> cards = new ArrayList<>();
-            cards.addAll(this.hand.getCards(game));
+            for (UUID cardId: ((TargetCardInHand)target).possibleTargets(this.getId(), hand, game)) {
+                Card card = game.getCard(cardId);
+                if (card != null) {
+                    cards.add(card);
+                }
+            }            
             while(!target.isChosen() && !cards.isEmpty()) {
                 Card pick = pickTarget(cards, outcome, target, null, game);
                 if (pick != null) {
