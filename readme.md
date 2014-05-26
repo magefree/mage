@@ -1,10 +1,10 @@
-# MAGE - Magic, Another Game Engine
+# XMage - Magic, Another Game Engine
 
-MAGE allows you to play magic against one or more online players or computer opponents. It includes full rules enforcement for about **8,000** unique cards (13,715 in all). Starting with Eventide, all regular sets have nearly all the cards implemented ([see here in detail which cards are implemented](http://ct-magefree.rhcloud.com/stats)).
+XMage allows you to play magic against one or more online players or computer opponents. It includes full rules enforcement for about **8,000** unique cards (13,715 in all). Starting with Eventide, all regular sets have nearly all the cards implemented ([see here in detail which cards are implemented](http://ct-magefree.rhcloud.com/stats)).
 
-There are public servers where you can play MAGE against other players. Apart from this, you can also host your own server to play against the AI and/or your friends.
+There are public servers where you can play XMage against other players. Apart from this, you can also host your own server to play against the AI and/or your friends.
 
-You can visit the MAGE forum [here](http://www.slightlymagic.net/forum/viewforum.php?f=70).
+You can visit the XMage forum [here](http://www.slightlymagic.net/forum/viewforum.php?f=70).
 
 ## Features
 * There is a basic computer AI opponent available.
@@ -16,7 +16,7 @@ You can visit the MAGE forum [here](http://www.slightlymagic.net/forum/viewforum
  * Sealed (2-16)
 
 ## Installation
-Download the latest release from [here](http://176.31.186.181/). You need this to be able to play on the official server.
+Download the latest release from [here](http://XMage.info). You need this to be able to play on the official server.
 
 After you extract the content of the archive, you will find batch files to start the client/server in the corresponding directories. See the included readme files for more instructions.
 
@@ -28,7 +28,7 @@ Here you can find a log of the latest changes: [Release changes] (http://github.
 
 ## Developer
 
-If you are interesting in developing MAGE here are a couple of links that might interest you:
+If you are interesting in developing XMage here are a couple of links that might interest you:
 * [Developer Getting Started](http://github.com/magefree/mage/wiki/Developer-Getting-Started)
 * [Developer Notes](http://github.com/magefree/mage/wiki/Developer-Notes)
 * [Developer Testing Tools] (http://github.com/magefree/mage/wiki/Developer-Testing-Tools)
