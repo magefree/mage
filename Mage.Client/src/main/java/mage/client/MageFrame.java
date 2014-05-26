@@ -168,7 +168,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      */
     public MageFrame() {
 
-        setTitle("Mage, version " + version);
+        setTitle("XMage, version " + version);
         clientId = UUID.randomUUID();
 
         EDTExceptionHandler.registerExceptionHandler();

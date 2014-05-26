@@ -424,7 +424,7 @@ public class ConnectDialog extends MageDialog {
             }
 
             String selectedServer = (String) JOptionPane.showInputDialog(null,
-                    "Choose MAGE Public Server:", "Input",
+                    "Choose XMage Public Server:", "Input",
                     JOptionPane.INFORMATION_MESSAGE, null, servers.toArray(),
                     servers.get(0));
             if (selectedServer != null) {

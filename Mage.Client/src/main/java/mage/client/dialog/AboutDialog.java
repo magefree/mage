@@ -74,7 +74,8 @@ public class AboutDialog extends MageDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setTitle("About MAGE");
+        setMaximizable(true);
+        setTitle("About XMage");
 
         btnOk.setText("OK");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +84,7 @@ public class AboutDialog extends MageDialog {
             }
         });
 
-        jLabel1.setText("MAGE client");
+        jLabel1.setText("XMage client");
 
         lblVersion.setText("0.0.0");
 

@@ -85,11 +85,11 @@ Ninth Edition|9ED|
 Nemesis|NMS|
 Odyssey|ODY|
 Onslaught|ONS|
-Portal Second Age|PO2|
 Prophecy|PCY|
 Planar Chaos|PLC|
 Planeshift|PLS|
 Portal|POR|
+Portal Second Age|PO2|
 Portal Three Kingdoms|PTK|
 Premium Deck Series: Fire and Lightning|PD2|
 Premium Deck Series: Slivers|PDS|
