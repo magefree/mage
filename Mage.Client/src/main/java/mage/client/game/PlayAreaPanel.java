@@ -65,6 +65,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private boolean playingMode = true;
     private GamePanel gamePanel;
 
+    private JCheckBoxMenuItem manaPoolMenuItem;
+    
     public static final int PANEL_HEIGHT = 242;
     public static final int PANEL_HEIGHT_SMALL = 190;
 
@@ -177,16 +179,18 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         popupMenu.addSeparator();
 
-        menuItem = new JCheckBoxMenuItem("Use mana from pool automatically", true);
-        menuItem.setMnemonic(KeyEvent.VK_M);
-        menuItem.setToolTipText("If not active, you have to click the type of mana you want to pay in the player panel.");
-        popupMenu.add(menuItem);
+        manaPoolMenuItem = new JCheckBoxMenuItem("Use mana from pool automatically", true);
+        manaPoolMenuItem.setMnemonic(KeyEvent.VK_M);
+        manaPoolMenuItem.setToolTipText("If not active, you have to click the type of mana you want to pay in the player panel.");
+        popupMenu.add(manaPoolMenuItem);
 
         // Auto pay mana from mana pool
-        menuItem.addActionListener(new ActionListener() {
+        manaPoolMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().setManaPoolMode(((JCheckBoxMenuItem)e.getSource()).getState(), gameId);
+                boolean manaPoolAutomatic = ((JCheckBoxMenuItem)e.getSource()).getState();
+                gamePanel.setMenuStates(manaPoolAutomatic);
+                gamePanel.getSession().setManaPoolMode(manaPoolAutomatic, gameId);
             }
         });
 
@@ -367,6 +371,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.playingMode = playingMode;
     }
 
+    public void setMenuStates(boolean manaPoolAutomatic) {
+        manaPoolMenuItem.setSelected(manaPoolAutomatic);
+    }
+    
     private mage.client.game.BattlefieldPanel battlefieldPanel;
     private javax.swing.JButton btnCheat;
     //private javax.swing.JScrollPane jScrollPane1;

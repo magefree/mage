@@ -968,10 +968,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     }
 
     @Override
-    public void setResponseManaType(UUID playerId, ManaType manaType) {
+    public void setResponseManaType(UUID manaTypePlayerId, ManaType manaType) {
         synchronized(response) {
             response.setManaType(manaType);
-            response.setResponseManaTypePlayerId(playerId);
+            response.setResponseManaTypePlayerId(manaTypePlayerId);
             response.notify();
             log.debug("Got response mana type from player: " + getId());
         }

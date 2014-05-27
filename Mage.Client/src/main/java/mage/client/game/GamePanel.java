@@ -581,6 +581,16 @@ public final class GamePanel extends javax.swing.JPanel {
         this.repaint();
     }
 
+    /**
+     * Set the same state for menu selections to all player areas.
+     * @param manaPoolAutomatic 
+     */
+    public void setMenuStates(boolean manaPoolAutomatic) {
+       for(PlayAreaPanel playAreaPanel: players.values()) {
+           playAreaPanel.setMenuStates(manaPoolAutomatic);
+       } 
+    }
+    
     private void displayStack(GameView game, BigCard bigCard, FeedbackPanel feedbackPanel, UUID gameId) {
         this.stack.loadCards(game.getStack(), bigCard, gameId, null);
     }

@@ -1473,7 +1473,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public void setResponseString(String responseString) {}
     
     @Override
-    public void setResponseManaType(UUID playerId, ManaType responseManaType) {}
+    public void setResponseManaType(UUID manaTypePlayerId, ManaType responseManaType) {}
 
     @Override
     public void setResponseUUID(UUID responseUUID) {}

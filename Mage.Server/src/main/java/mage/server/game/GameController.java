@@ -475,11 +475,11 @@ public class GameController implements GameCallback {
         });
     }
 
-    public void sendPlayerManaType(UUID userId, UUID playerId, final ManaType data) {
+    public void sendPlayerManaType(UUID userId, final UUID manaTypePlayerId, final ManaType data) {
         sendMessage(userId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                getGameSession(playerId).sendPlayerManaType(data, playerId);
+                getGameSession(playerId).sendPlayerManaType(data, manaTypePlayerId);
             }
         });
     }
