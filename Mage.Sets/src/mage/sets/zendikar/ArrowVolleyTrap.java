@@ -28,25 +28,24 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanentAmount;
-
 
 /**
  * @author LevelX2
  */
 public class ArrowVolleyTrap extends CardImpl<ArrowVolleyTrap> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
 
     static {
         filter.add(new AttackingPredicate());
@@ -94,14 +93,11 @@ class ArrowVolleyTrapAlternativeCost extends AlternativeCostImpl<ArrowVolleyTrap
 
     @Override
     public boolean isAvailable(Game game, Ability source) {
-        if (game.getCombat().getAttackers().size() > 3) {
-            return true;
-        }
-        return false;
+        return game.getCombat().getAttackers().size() > 3;
     }
 
     @Override
     public String getText() {
-        return "If four or more creatures are attacking, you may pay {1}{W} rather than pay Arrow Volley Trap's mana cost";
+        return "If four or more creatures are attacking, you may pay {1}{W} rather than pay {this}'s mana cost";
     }
 }
