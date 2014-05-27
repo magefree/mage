@@ -28,17 +28,21 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -74,7 +78,7 @@ public class KabiraEvangel extends CardImpl<KabiraEvangel> {
         new SubtypePredicate("Ally")));
 
         // Whenever Kabira Evangel or another Ally enters the battlefield under your control, you may choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new ChooseColorEffect(), filter, true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new ChooseColorEffect(), filter, true));
     }
 
     public KabiraEvangel(final KabiraEvangel card) {
@@ -108,6 +112,7 @@ class ChooseColorEffect extends OneShotEffect<ChooseColorEffect> {
                 game.informPlayers(perm.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.addEffect(new GainProtectionFromChosenColorEffect(colorChoice.getColor()), source);
             }
+            return true;
         }
         return false;
     }
@@ -126,8 +131,8 @@ class GainProtectionFromChosenColorEffect extends GainAbilityControlledEffect {
         filter1.add(new ControllerPredicate(TargetController.YOU));
         filter1.add(new SubtypePredicate("Ally"));
     }
-    private FilterCard filter2;
-    private ObjectColor chosenColor;
+    private final FilterCard filter2;
+    private final ObjectColor chosenColor;
 
     public GainProtectionFromChosenColorEffect(ObjectColor chosenColor) {
         super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);
