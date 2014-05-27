@@ -1051,7 +1051,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public void shuffleLibrary(Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SHUFFLE_LIBRARY, playerId, playerId))) {
             this.library.shuffle();
-            game.informPlayers(new StringBuilder(this.name).append(" shuffels his or her library.").toString());
+            game.informPlayers(new StringBuilder(this.name).append(" shuffles his or her library.").toString());
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SHUFFLED, playerId, playerId));
         }
     }
