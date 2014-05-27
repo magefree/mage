@@ -148,10 +148,11 @@ class WhirlpoolWarriorActivatedEffect extends OneShotEffect<WhirlpoolWarriorActi
                         for (UUID cardId: player.getHand()) {
                             Card card = game.getCard(cardId);
                             if (card != null) {
-                                player.removeFromHand(card, game);
-                                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                                player.removeFromHand(card, game);                                
+                                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                             }
                         }
+                        game.informPlayers(player.getName() + " shuffles the cards from his or her hand into his or her library");
                         player.shuffleLibrary(game);
                         player.drawCards(cardsHand, game);
                     }

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.sets.fourthedition;
 
 import java.util.UUID;
 
@@ -37,8 +37,8 @@ public class WindsOfChange extends mage.sets.fifthedition.WindsOfChange {
 
     public WindsOfChange(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
-        this.expansionSetCode = "POR";
+        this.cardNumber = 250;
+        this.expansionSetCode = "4ED";
     }
 
     public WindsOfChange(final WindsOfChange card) {

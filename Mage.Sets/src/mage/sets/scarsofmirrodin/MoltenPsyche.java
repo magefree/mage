@@ -38,7 +38,9 @@ import mage.constants.WatcherScope;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -88,9 +90,15 @@ class MoltenPsycheEffect extends OneShotEffect<MoltenPsycheEffect> {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 int count = player.getHand().size();
-                player.getLibrary().addAll(player.getHand().getCards(game), game);
+                for (UUID cardId: player.getHand()) {
+                    Card card = game.getCard(cardId);
+                    if (card != null) {
+                        player.removeFromHand(card, game);                                
+                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                    }
+                }
+                game.informPlayers(player.getName() + " shuffles the cards from his or her hand into his or her library");
                 player.shuffleLibrary(game);
-                player.getHand().clear();
                 player.drawCards(count, game);
                 if (MetalcraftCondition.getInstance().apply(game, source) && !playerId.equals(source.getControllerId())) {
                     MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get("CardsDrawn");
@@ -110,7 +118,7 @@ class MoltenPsycheEffect extends OneShotEffect<MoltenPsycheEffect> {
 
 class MoltenPsycheWatcher extends WatcherImpl<MoltenPsycheWatcher> {
 
-    private Map<UUID, Integer> draws = new HashMap<UUID, Integer>();
+    private final Map<UUID, Integer> draws = new HashMap<>();
 
     public MoltenPsycheWatcher() {
         super("CardsDrawn", WatcherScope.GAME);
