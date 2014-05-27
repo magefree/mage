@@ -51,7 +51,7 @@ public interface GamePlay {
 
     boolean sendPlayerString(UUID gameId, String data);
 
-    boolean sendPlayerManaType(UUID gameId, ManaType data);
+    boolean sendPlayerManaType(UUID gameId, UUID playerId, ManaType data);
 
     boolean concedeGame(UUID gameId);
 

@@ -278,7 +278,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void setResponseUUID(UUID responseUUID);
     void setResponseBoolean(Boolean responseBoolean);
     void setResponseInteger(Integer data);
-    void setResponseManaType(ManaType responseManaType);
+    void setResponseManaType(UUID playerId, ManaType responseManaType);
 
     boolean priority(Game game);
     boolean choose(Outcome outcome, Target target, UUID sourceId, Game game);

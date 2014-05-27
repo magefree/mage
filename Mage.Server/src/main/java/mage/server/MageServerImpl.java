@@ -570,13 +570,13 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public void sendPlayerManaType(final UUID gameId, final String sessionId, final ManaType data) throws MageException {
+    public void sendPlayerManaType(final UUID gameId, final UUID playerId, final String sessionId, final ManaType data) throws MageException {
         execute("sendPlayerManaType", sessionId, new Action() {
             @Override
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
                 if (user != null) {
-                    user.sendPlayerManaType(gameId, data);
+                    user.sendPlayerManaType(gameId, playerId, data);
                 } else {
                     logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
                 }

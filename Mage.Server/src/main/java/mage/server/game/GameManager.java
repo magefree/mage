@@ -85,9 +85,9 @@ public class GameManager {
         }
     }
 
-    public void sendPlayerManaType(UUID gameId, UUID userId, ManaType data) {
+    public void sendPlayerManaType(UUID gameId, UUID playerId, UUID userId, ManaType data) {
         if (gameControllers.containsKey(gameId)) {
-            gameControllers.get(gameId).sendPlayerManaType(userId, data);
+            gameControllers.get(gameId).sendPlayerManaType(userId, playerId, data);
         }
     }
 

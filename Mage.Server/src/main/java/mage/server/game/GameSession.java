@@ -221,9 +221,9 @@ public class GameSession extends GameWatcher {
         game.getPlayer(playerId).setResponseString(data);
     }
 
-    public void sendPlayerManaType(ManaType manaType) {
+    public void sendPlayerManaType(ManaType manaType, UUID playerId) {
         cancelTimeout();
-        game.getPlayer(playerId).setResponseManaType(manaType);
+        game.getPlayer(playerId).setResponseManaType(playerId, manaType);
     }
 
     public void sendPlayerBoolean(Boolean data) {

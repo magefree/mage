@@ -520,7 +520,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             }
         } else if (response.getManaType() != null) {
             // this mana type can be paid once from pool
-            this.getManaPool().unlockManaType(response.getManaType());
+            if (response.getResponseManaTypePlayerId().equals(this.getId())) {
+                this.getManaPool().unlockManaType(response.getManaType());
+            }
+            // TODO: Handle if mana pool 
         }
         return true;
     }
@@ -965,9 +968,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     }
 
     @Override
-    public void setResponseManaType(ManaType manaType) {
+    public void setResponseManaType(UUID playerId, ManaType manaType) {
         synchronized(response) {
             response.setManaType(manaType);
+            response.setResponseManaTypePlayerId(playerId);
             response.notify();
             log.debug("Got response mana type from player: " + getId());
         }

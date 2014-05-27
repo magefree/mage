@@ -223,9 +223,9 @@ public class User {
         GameManager.getInstance().sendPlayerString(gameId, userId, data);
     }
 
-    public void sendPlayerManaType(final UUID gameId, final ManaType data) {
+    public void sendPlayerManaType(final UUID gameId, final UUID playerId, final ManaType data) {
         lastActivity = new Date();
-        GameManager.getInstance().sendPlayerManaType(gameId, userId, data);
+        GameManager.getInstance().sendPlayerManaType(gameId, playerId, userId, data);
     }
 
     public void sendPlayerBoolean(final UUID gameId, final Boolean data)  {

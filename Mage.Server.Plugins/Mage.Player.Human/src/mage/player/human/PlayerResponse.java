@@ -43,6 +43,7 @@ public class PlayerResponse implements Serializable {
     private Boolean responseBoolean;
     private Integer responseInteger;
     private ManaType responseManaType;
+    private UUID responseManaTypePlayerId;
 
     public void clear() {
         responseString = null;
@@ -50,6 +51,7 @@ public class PlayerResponse implements Serializable {
         responseBoolean = null;
         responseInteger = null;
         responseManaType = null;
+        responseManaTypePlayerId = null;
     }
 
     public String getString() {
@@ -90,6 +92,14 @@ public class PlayerResponse implements Serializable {
 
     public void setManaType(ManaType responseManaType) {
         this.responseManaType = responseManaType;
+    }
+
+    public UUID getResponseManaTypePlayerId() {
+        return responseManaTypePlayerId;
+    }
+
+    public void setResponseManaTypePlayerId(UUID responseManaTypePlayerId) {
+        this.responseManaTypePlayerId = responseManaTypePlayerId;
     }
 
 }

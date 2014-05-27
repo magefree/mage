@@ -114,7 +114,7 @@ public interface MageServer {
     void sendPlayerString(UUID gameId, String sessionId, String data) throws MageException;
     void sendPlayerBoolean(UUID gameId, String sessionId, Boolean data) throws MageException;
     void sendPlayerInteger(UUID gameId, String sessionId, Integer data) throws MageException;
-    void sendPlayerManaType(UUID gameId, String sessionId, ManaType data) throws MageException;
+    void sendPlayerManaType(UUID gameId, UUID playerId, String sessionId, ManaType data) throws MageException;
     void concedeGame(UUID gameId, String sessionId) throws MageException;
     void quitMatch(UUID gameId, String sessionId) throws MageException;
     void undo(UUID gameId, String sessionId) throws MageException;

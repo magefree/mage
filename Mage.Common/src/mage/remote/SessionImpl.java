@@ -625,10 +625,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean sendPlayerManaType(UUID gameId, ManaType data) {
+    public boolean sendPlayerManaType(UUID gameId, UUID playerId, ManaType data) {
         try {
             if (isConnected()) {
-                server.sendPlayerManaType(gameId, sessionId, data);
+                server.sendPlayerManaType(gameId, playerId, sessionId, data);
                 return true;
             }
         } catch (MageException ex) {

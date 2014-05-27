@@ -414,7 +414,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         zonesPanel.setSize(100, 20);
         zonesPanel.setLayout(null);
 
-        //
         image = ImageHelper.getImageFromResources("/info/command_zone.png");
         r = new Rectangle(21, 21);
         resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
@@ -735,7 +734,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnManaActionPerformed(ManaType manaType) {
-        session.sendPlayerManaType(gameId, manaType);
+        session.sendPlayerManaType(gameId, player.getPlayerId(), manaType);
     }
 
     private void btnGraveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraveActionPerformed
@@ -764,10 +763,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private ImagePanel life;
     private ImagePanel poison;
     private ImagePanel hand;
-
-//    private HoverButton btnWhiteMana;
-//    private HoverButton btnBlueMana;
-
     private HoverButton grave;
     private ImagePanel library;
     private CardView topCard;
