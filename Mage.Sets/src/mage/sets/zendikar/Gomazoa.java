@@ -27,10 +27,9 @@
  */
 package mage.sets.zendikar;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,16 +38,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.WatcherImpl;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -91,7 +90,7 @@ class GomazoaEffect extends OneShotEffect<GomazoaEffect> {
 
     public GomazoaEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Put Gomazoa and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries";
+        this.staticText = "Put {this} and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries";
     }
 
     public GomazoaEffect(final GomazoaEffect effect) {
@@ -105,37 +104,45 @@ class GomazoaEffect extends OneShotEffect<GomazoaEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<UUID> creaturesBlocked = new ArrayList<UUID>();
-        List<UUID> players = new ArrayList<UUID>();
-        Permanent gomazoa = game.getPermanent(source.getSourceId());
-        if (gomazoa != null) {
-            gomazoa.moveToZone(Zone.LIBRARY, id, game, true);
-        }
-        
-        BlockedByWatcher watcher = (BlockedByWatcher) game.getState().getWatchers().get("BlockedByWatcher", source.getSourceId());
-        
-        creaturesBlocked = watcher.blockedByWatcher;
-        
-        for (UUID blockedById : creaturesBlocked) {
-            Permanent blockedByGomazoa = game.getPermanent(blockedById);
-            if (blockedByGomazoa != null && blockedByGomazoa.isAttacking()) {
-                players.add(blockedByGomazoa.getOwnerId());
-                blockedByGomazoa.moveToZone(Zone.LIBRARY, id, game, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            List<UUID> creaturesBlocked;
+            List<UUID> players = new ArrayList<>();
+            Permanent gomazoa = game.getPermanent(source.getSourceId());
+            if (gomazoa != null) {
+                controller.moveCardToLibraryWithInfo(gomazoa, source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                players.add(gomazoa.getOwnerId());
             }
-        }
-        for (UUID player : players) {
-            Player owner = game.getPlayer(player);
-            if (owner != null) {
-                owner.shuffleLibrary(game);
+
+            BlockedByWatcher watcher = (BlockedByWatcher) game.getState().getWatchers().get("BlockedByWatcher", source.getSourceId());
+            creaturesBlocked = watcher.blockedByWatcher;
+
+            for (UUID blockedById : creaturesBlocked) {
+                Permanent blockedByGomazoa = game.getPermanent(blockedById);
+                if (blockedByGomazoa != null && blockedByGomazoa.isAttacking()) {
+                    players.add(blockedByGomazoa.getOwnerId());
+                    Player owner = game.getPlayer(blockedByGomazoa.getOwnerId());
+                    if (owner != null) {
+                        owner.moveCardToLibraryWithInfo(blockedByGomazoa, source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                    }
+                }
             }
+            for (UUID player : players) {
+                Player owner = game.getPlayer(player);
+                if (owner != null) {
+                    owner.shuffleLibrary(game);
+                }
+            }
+            return true;
         }
-        return true;
+        return false;
+
     }
 }
 
 class BlockedByWatcher extends WatcherImpl<BlockedByWatcher> {
 
-    public List<UUID> blockedByWatcher = new ArrayList<UUID>();
+    public List<UUID> blockedByWatcher = new ArrayList<>();
 
     public BlockedByWatcher() {
         super("BlockedByWatcher", WatcherScope.CARD);
