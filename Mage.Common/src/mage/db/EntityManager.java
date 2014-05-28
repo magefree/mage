@@ -15,7 +15,7 @@ import mage.db.model.Log;
 /**
  * @author noxx, North
  */
-public enum EntityManager implements Storage {
+public enum EntityManager {
 
     instance;
 
@@ -42,18 +42,12 @@ public enum EntityManager implements Storage {
         }
     }
 
-    @Override
     public void insertLog(String key, java.util.Date date, String... args) throws SQLException {
         Log logEntity = new Log(key, date);
         logEntity.setArguments(args);
         logDao.create(logEntity);
     }
 
-    /**
-     * Get all logs
-     * @return
-     */
-    @Override
     public List<Log> getAllLogs() {
         List<Log> logs = new ArrayList<Log>();
         try {
@@ -64,13 +58,11 @@ public enum EntityManager implements Storage {
         return logs;
     }
 
-    @Override
     public void insertFeedback(String username, String title, String type, String message, String email, String host, java.util.Date created) throws SQLException {
         Feedback feedback = new Feedback(username, title, type, message, email, host, created, "new");
         feedbackDao.create(feedback);
     }
 
-    @Override
     public List<Feedback> getAllFeedbacks() {
         List<Feedback> feedbacks = new ArrayList<Feedback>();
         try {
