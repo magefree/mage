@@ -19,8 +19,8 @@ public enum EntityManager {
 
     instance;
 
-    private static final String LOG_JDBC_URL = "jdbc:sqlite:db/mage.db";
-    private static final String FEEDBACK_JDBC_URL = "jdbc:sqlite:db/feedback.db";
+    private static final String LOG_JDBC_URL = "jdbc:h2:file:./db/mage.h2;AUTO_SERVER=TRUE";
+    private static final String FEEDBACK_JDBC_URL = "jdbc:h2:file:./db/feedback.h2;AUTO_SERVER=TRUE";
 
     private Dao<Log, Object> logDao;
     private Dao<Feedback, Object> feedbackDao;
