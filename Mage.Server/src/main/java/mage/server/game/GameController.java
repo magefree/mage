@@ -672,7 +672,7 @@ public class GameController implements GameCallback {
         if (controller == null) {
             return;
         }
-        final String message = new StringBuilder(game.getStep().toString()).append(" - Waiting for ").append(controller.getName()).toString();
+        final String message = new StringBuilder(game.getStep().getType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
         for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
             boolean skip = false;
             for (UUID uuid : players) {

@@ -88,6 +88,7 @@ public class TurnMod implements Serializable {
      * @param playerId
      * @param phase
      * @param afterPhase - set to null if extraPhase is after the next phase
+     * @param skip
      */
     public TurnMod(UUID playerId, TurnPhase phase, TurnPhase afterPhase, boolean skip) {
         this.id = UUID.randomUUID();
