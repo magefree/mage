@@ -53,7 +53,7 @@ public enum CardRepository {
 
     instance;
 
-    private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2";
+    private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
     private static final long CARD_DB_VERSION = 33;
 
