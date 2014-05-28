@@ -43,11 +43,6 @@ public class SimpleMageClient implements MageClient {
     }
 
     @Override
-    public void reconnect() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void showMessage(String message) {
         log.info(message);
     }

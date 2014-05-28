@@ -75,11 +75,6 @@ public class MultiConnectTest {
         }
 
         @Override
-        public void reconnect() {
-            logger.info("Not implemented");
-        }
-
-        @Override
         public void showMessage(String message) {
             logger.info("showMessage: " + message);
         }
