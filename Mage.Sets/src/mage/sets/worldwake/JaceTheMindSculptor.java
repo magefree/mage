@@ -29,11 +29,6 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -44,6 +39,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -123,7 +122,7 @@ class JaceTheMindSculptorEffect1 extends OneShotEffect<JaceTheMindSculptorEffect
                 if (controller.chooseUse(outcome, "Do you wish to put card on the bottom of player's library?", game)) {
                     Card card = player.getLibrary().removeFromTop(game);
                     if (card != null) {
-                        card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                        controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
                     }
                 }
                 return true;
@@ -169,7 +168,7 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect<JaceTheMindSculptorEffect
         Card card = player.getHand().get(target.getFirstTarget(), game);
         if (card != null) {
             player.getHand().remove(card);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true, false);
         }
         return true;
     }
@@ -198,15 +197,17 @@ class JaceTheMindSculptorEffect3 extends OneShotEffect<JaceTheMindSculptorEffect
         ExileZone exile = game.getExile().getPermanentExile();
         if (player != null) {
             while (true) {
-                if (player.getLibrary().getFromTop(game) == null)
+                if (player.getLibrary().getFromTop(game) == null) {
                     break;
+                }
                 Card card = player.getLibrary().removeFromTop(game);
                 exile.add(card);
                 game.setZone(card.getId(), Zone.EXILED);
             }
             for (Card card : player.getHand().getCards(game)) {
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
             }
+            player.shuffleLibrary(game);
             return true;
         }
         return false;
