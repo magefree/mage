@@ -70,6 +70,7 @@ public class HideawayPlayEffect extends OneShotEffect<HideawayPlayEffect> {
                 // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
                 if (game.getActivePlayerId().equals(source.getControllerId()) && controller.canPlayLand()) {
                     if (controller.chooseUse(Outcome.Benefit, new StringBuilder("Play ").append(card.getName()).append(" from Exile?").toString(), game)) {
+                        card.setFaceDown(false);
                         return controller.playLand(card, game);
                     }
                 } else {
@@ -80,6 +81,7 @@ public class HideawayPlayEffect extends OneShotEffect<HideawayPlayEffect> {
                 // Timing restrictions based on the card's type are ignored (for instance, if it's a creature or sorcery).
                 // Other play restrictions are not (such as "Play [this card] only during combat").
                 if (controller.chooseUse(Outcome.Benefit, new StringBuilder("Cast ").append(card.getName()).append(" without paying it's mana cost?").toString(), game)) {
+                    card.setFaceDown(false);
                     return controller.cast(card.getSpellAbility(), game, true);
                 }
             }
