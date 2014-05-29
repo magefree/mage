@@ -29,6 +29,7 @@ package mage.sets.journeyintonyx;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
@@ -43,6 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -69,9 +71,9 @@ public class BloodcrazedHoplite extends CardImpl<BloodcrazedHoplite> {
         // Heroic - Whenever you cast a spell that targets Bloodcrazed Hoplite, put a +1/+1 counter on it.
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)));
         // Whenever a +1/+1 counter is placed on Bloodcrazed Hoplite, remove a +1/+1 counter from target creature an opponent controls.
-        this.addAbility(new BloodcrazedHopliteTriggeredAbility());
-
-
+        Ability ability = new BloodcrazedHopliteTriggeredAbility();
+        ability.addTarget(new TargetCreaturePermanent(true));
+        this.addAbility(ability);
     }
 
     public BloodcrazedHoplite(final BloodcrazedHoplite card) {
