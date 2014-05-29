@@ -585,6 +585,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void watchGame(UUID gameId) {
         try {
+            for(Component component :desktopPane.getComponents()) {
+                if (component instanceof GamePane
+                        && ((GamePane) component).getGameId().equals(gameId)) {
+                    setActive((GamePane) component);
+                    return;
+                }
+            }
             GamePane gamePane = new GamePane();
             desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
             gamePane.setMaximum(true);

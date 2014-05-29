@@ -377,8 +377,12 @@ public class ChatPanel extends javax.swing.JPanel {
         jTablePlayers = new javax.swing.JTable();
         txtMessage = new javax.swing.JTextField();
 
+        jSplitPane1.setBorder(null);
+        jSplitPane1.setDividerSize(10);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.25);
+
+        jScrollPaneTxt.setBorder(null);
 
         txtConversation.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtConversation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -389,11 +393,15 @@ public class ChatPanel extends javax.swing.JPanel {
 
         jSplitPane1.setRightComponent(jScrollPaneTxt);
 
+        jScrollPanePlayers.setBorder(null);
+
         jTablePlayers.setModel(this.tableModel);
         jTablePlayers.setToolTipText("Connected players");
         jTablePlayers.setAutoscrolls(false);
+        jTablePlayers.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTablePlayers.setFocusable(false);
         jTablePlayers.setGridColor(new java.awt.Color(255, 255, 255));
+        jTablePlayers.setOpaque(false);
         jTablePlayers.setRequestFocusEnabled(false);
         jTablePlayers.setRowSelectionAllowed(false);
         jTablePlayers.setUpdateSelectionOnSort(false);
@@ -419,7 +427,7 @@ public class ChatPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents

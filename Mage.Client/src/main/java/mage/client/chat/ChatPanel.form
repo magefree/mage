@@ -24,7 +24,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Component id="jSplitPane1" pref="288" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="txtMessage" min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -33,6 +33,10 @@
   <SubComponents>
     <Container class="javax.swing.JSplitPane" name="jSplitPane1">
       <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="dividerSize" type="int" value="10"/>
         <Property name="orientation" type="int" value="0"/>
         <Property name="resizeWeight" type="double" value="0.25"/>
       </Properties>
@@ -40,6 +44,11 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
       <SubComponents>
         <Container class="javax.swing.JScrollPane" name="jScrollPaneTxt">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="right"/>
@@ -68,6 +77,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JScrollPane" name="jScrollPanePlayers">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -86,10 +100,14 @@
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Connected players"/>
                 <Property name="autoscrolls" type="boolean" value="false"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Standardcursor"/>
+                </Property>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
+                <Property name="opaque" type="boolean" value="false"/>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
                 <Property name="rowSelectionAllowed" type="boolean" value="false"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">

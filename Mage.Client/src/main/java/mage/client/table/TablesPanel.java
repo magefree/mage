@@ -535,20 +535,26 @@ public class TablesPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jSplitPane1.setDividerSize(3);
+        jSplitPane1.setBorder(null);
+        jSplitPane1.setDividerSize(10);
         jSplitPane1.setResizeWeight(1.0);
 
         chatPanel.setMinimumSize(new java.awt.Dimension(100, 43));
         jSplitPane1.setRightComponent(chatPanel);
 
+        jSplitPane2.setBorder(null);
+        jSplitPane2.setDividerSize(10);
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane2.setResizeWeight(0.5);
+
+        jScrollPane1.setBorder(null);
 
         tableTables.setModel(this.tableModel);
         jScrollPane1.setViewportView(tableTables);
 
         jSplitPane2.setLeftComponent(jScrollPane1);
 
+        jScrollPane2.setBorder(null);
         jScrollPane2.setMinimumSize(new java.awt.Dimension(23, 0));
 
         tableCompleted.setModel(this.matchesModel);
@@ -560,11 +566,11 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanel3);
@@ -574,7 +580,7 @@ public class TablesPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE))
         );
@@ -587,7 +593,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 580, Short.MAX_VALUE))
+                .addGap(0, 584, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
