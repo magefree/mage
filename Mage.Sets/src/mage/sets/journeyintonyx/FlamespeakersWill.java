@@ -29,10 +29,12 @@ package mage.sets.journeyintonyx;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -40,12 +42,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -73,8 +71,10 @@ public class FlamespeakersWill extends CardImpl<FlamespeakersWill> {
         // Enchanted creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield)));
         // Whenever enchanted creature deals combat damage to a player, you may sacrifice Flamespeaker's Will. If you do, destroy target artifact.
-        this.addAbility(new FlamespeakersWillAbility());
-
+        ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
+                new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()), "enchanted creature", false, false, true, TargetController.ANY);
+        ability.addTarget(new TargetArtifactPermanent(true));
+        this.addAbility(ability);
     }
 
     public FlamespeakersWill(final FlamespeakersWill card) {
@@ -84,49 +84,5 @@ public class FlamespeakersWill extends CardImpl<FlamespeakersWill> {
     @Override
     public FlamespeakersWill copy() {
         return new FlamespeakersWill(this);
-    }
-}
-
-class FlamespeakersWillAbility extends TriggeredAbilityImpl<FlamespeakersWillAbility> {
-
-    public FlamespeakersWillAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
-    }
-
-    public FlamespeakersWillAbility(final FlamespeakersWillAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FlamespeakersWillAbility copy() {
-        return new FlamespeakersWillAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-            Permanent damageMakingCreature = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && damageMakingCreature != null && damageMakingCreature.getAttachments().contains(this.getSourceId())) {
-                Player controller = game.getPlayer(this.getControllerId());
-                Permanent sourceEnchantment = game.getPermanent(this.getSourceId());
-                if (controller != null && sourceEnchantment != null) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("Do you wish to sacrifice ").append(sourceEnchantment.getName());
-                    sb.append(" to destroy target artifact?");
-                    if (controller.chooseUse(Outcome.DestroyPermanent, sb.toString(), game)) {
-                        this.getTargets().clear();
-                        this.addTarget(new TargetArtifactPermanent(true));
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted creature deals combat damage to a player, you may sacrifice {this}. If you do, destroy target artifact.";
     }
 }
