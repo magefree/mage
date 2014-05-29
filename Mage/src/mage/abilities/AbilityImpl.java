@@ -97,6 +97,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     protected boolean ruleAtTheTop = false;
     protected boolean ruleVisible = true;
     protected boolean ruleAdditionalCostsVisible = true;
+    protected boolean costModificationActive = true;
 
     @Override
     public abstract T copy();
@@ -133,6 +134,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         this.ruleAtTheTop = ability.ruleAtTheTop;
         this.ruleVisible = ability.ruleVisible;
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
+        this.costModificationActive = ability.costModificationActive;
     }
 
     @Override
@@ -221,11 +223,15 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         // if ability can be cast for no mana, clear the mana costs now, because additional mana costs must be paid.
         // For Flashback ability can be set X before, so the X costs have to be restored for the flashbacked ability
         if (noMana) {
-            int xValue = this.getManaCostsToPay().getX();
-            this.getManaCostsToPay().clear();
-            VariableManaCost xCosts = new VariableManaCost();
-            xCosts.setAmount(xValue);
-            this.getManaCostsToPay().add(xCosts);
+            if (this.getManaCostsToPay().getVariableCosts().size() > 0) {
+                int xValue = this.getManaCostsToPay().getX();
+                this.getManaCostsToPay().clear();
+                VariableManaCost xCosts = new VariableManaCost();
+                xCosts.setAmount(xValue);
+                this.getManaCostsToPay().add(xCosts);
+            } else {
+                this.getManaCostsToPay().clear();
+            }
         }
         // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
@@ -329,7 +335,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         }
 
         //20101001 - 601.2e
-        game.getContinuousEffects().costModification(this, game);
+        if (costModificationActive) {
+            game.getContinuousEffects().costModification(this, game);
+        } else {
+            costModificationActive = true;
+        }
         
         UUID activatorId = controllerId;
         if ((this instanceof ActivatedAbilityImpl) && ((ActivatedAbilityImpl)this).getActivatorId()!= null) {
@@ -925,6 +935,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public void setCostModificationActive(boolean active) {
+        this.costModificationActive = active;
     }
 
 }

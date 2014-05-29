@@ -28,9 +28,9 @@
 
 package mage.abilities;
 
-import mage.constants.AbilityType;
-import mage.constants.EffectType;
-import mage.constants.Zone;
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
@@ -41,15 +41,14 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.choices.Choice;
 import mage.choices.Choices;
+import mage.constants.AbilityType;
+import mage.constants.AbilityWord;
+import mage.constants.EffectType;
+import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
-import mage.constants.AbilityWord;
 
 /**
  * Practically everything in the game is started from an Ability.  This
@@ -446,5 +445,12 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     String getGameLogMessage(Game game);
-    
+
+    /**
+     * Used to deactivate cost modification logic of ability activation for some special handling
+     * (e.g. FlashbackAbility gets cost modifiaction twice because of how it#s ahndled now)
+     *
+     * @param active execute no cost modification
+     */
+    void setCostModificationActive(boolean active);
 }
