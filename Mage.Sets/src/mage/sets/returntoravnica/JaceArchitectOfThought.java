@@ -311,13 +311,13 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThought
                 Card card = cardsToLibrary.get(targetCard.getFirstTarget(), game);
                 if (card != null) {
                     cardsToLibrary.remove(card);
-                    player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false);
+                    player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
                 }
                 target.clearChosen();
             }
             if (cardsToLibrary.size() == 1) {
                 Card card = cardsToLibrary.get(cardsToLibrary.iterator().next(), game);
-                player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false);
+                player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
             }
             return true;
         }

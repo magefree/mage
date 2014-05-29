@@ -563,7 +563,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public void discardToMax(Game game) {
         if (hand.size() > this.maxHandSize) {
             game.informPlayers(new StringBuilder(getName()).append(" discards down to ").append(this.maxHandSize).append(this.maxHandSize == 1?" hand card":" hand cards").toString());
-            while (hand.size() > this.maxHandSize) {
+            while (isInGame() && hand.size() > this.maxHandSize) {
                 TargetDiscard target = new TargetDiscard(playerId);
                 target.setTargetName(new StringBuilder(" card to discard (").append(hand.size() - this.maxHandSize).append(" in total)").toString());
                 choose(Outcome.Discard, target, null, game);
@@ -607,7 +607,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             return;
         }
         int numDiscarded = 0;
-        while (numDiscarded < amount) {
+        while (isInGame() && numDiscarded < amount) {
             if (hand.size() == 0) {
                 break;
             }
@@ -713,7 +713,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             } else {
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
                 target.setRequired(true);
-                while (cards.size() > 1) {
+                while (isInGame() && cards.size() > 1) {
                     this.choose(Outcome.Neutral, cards, target, game);
                     Card chosenCard = cards.get(target.getFirstTarget(), game);
                     if (chosenCard != null) {
@@ -1130,7 +1130,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                               filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
                         }
                         // while targets left and there is still allowed to untap
-                        while (leftForUntap.size() > 0 && numberToUntap > 0) {
+                        while (isInGame() && leftForUntap.size() > 0 && numberToUntap > 0) {
                             // player has to select the permanent he wants to untap for this restriction
                             Ability ability = handledEntry.getKey().getValue().iterator().next();
                             if (ability != null) {
@@ -1180,7 +1180,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     }
                 }
 
-            } while (playerCanceledSelection);
+            } while (isInGame() && playerCanceledSelection);
 
             // show in log which permanents were selected to untap
             for(Permanent permanent :selectedToUntap) {
@@ -2237,11 +2237,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
     @Override 
-    public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop) {
+    public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName) {
         boolean result = false;
         if (card.moveToZone(Zone.LIBRARY, sourceId, game, toTop)) {
             game.informPlayers(new StringBuilder(this.getName())
-                    .append(" puts ").append(card.getName()).append(" ")
+                    .append(" puts ").append(withName ? card.getName():"a card").append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
                     .append("to the ").append(toTop ? "top":"bottom").append(" of his or her library").toString());
             result = true;

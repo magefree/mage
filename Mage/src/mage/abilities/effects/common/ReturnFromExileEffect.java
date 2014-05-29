@@ -102,7 +102,7 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
                             controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.EXILED);
                             break;
                         case LIBRARY:
-                            controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.EXILED, true);
+                            controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.EXILED, true, true);
                             break;
                         default:
                             card.moveToZone(zone, source.getSourceId(), game, tapped);

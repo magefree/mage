@@ -98,7 +98,7 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect<RevealLibraryP
             }
         }
 
-        while (cards.size() > 1) {
+        while (player.isInGame() && cards.size() > 1) {
             Card card;
             if (anyOrder) {
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));

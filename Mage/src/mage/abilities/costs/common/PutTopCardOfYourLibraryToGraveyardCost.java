@@ -67,7 +67,7 @@ public class PutTopCardOfYourLibraryToGraveyardCost extends CostImpl<PutTopCardO
         if (player != null && player.getLibrary().size() >= numberOfCards) {
             int i = 0;
             paid = true;
-            while (i < numberOfCards) {
+            while (player.isInGame() && i < numberOfCards) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     // all cards must reach the graveyard to pay the costs

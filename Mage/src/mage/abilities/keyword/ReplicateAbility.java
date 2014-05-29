@@ -114,7 +114,7 @@ public class ReplicateAbility extends StaticAbility<ReplicateAbility> implements
                 this.resetReplicate();
 
                 boolean again = true;
-                while (again) {
+                while (player.isInGame() && again) {
                     String times = "";
                     if (additionalCost.isRepeatable()) {
                         int activated = additionalCost.getActivateCount();

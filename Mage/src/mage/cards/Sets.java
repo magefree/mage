@@ -104,7 +104,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
         int count = 0;
         int tries = 0;
-        List<Card> cardPool = new ArrayList<Card>();
+        List<Card> cardPool = new ArrayList<>();
         while (count < cardsCount) {
             CardInfo cardInfo = cards.get(rnd.nextInt(cards.size()));
             Card card = cardInfo != null ? cardInfo.getCard() : null;

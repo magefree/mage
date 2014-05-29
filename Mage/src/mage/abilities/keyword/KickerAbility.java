@@ -201,7 +201,7 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
                 this.resetKicker();
                 for (OptionalAdditionalCost kickerCost: kickerCosts) {
                     boolean again = true;
-                    while (again) {
+                    while (player.isInGame() && again) {
                         String times = "";
                         if (kickerCost.isRepeatable()) {
                             int activated = kickerCost.getActivateCount();

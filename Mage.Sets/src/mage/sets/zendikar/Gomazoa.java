@@ -110,7 +110,7 @@ class GomazoaEffect extends OneShotEffect<GomazoaEffect> {
             List<UUID> players = new ArrayList<>();
             Permanent gomazoa = game.getPermanent(source.getSourceId());
             if (gomazoa != null) {
-                controller.moveCardToLibraryWithInfo(gomazoa, source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                controller.moveCardToLibraryWithInfo(gomazoa, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
                 players.add(gomazoa.getOwnerId());
             }
 
@@ -123,7 +123,7 @@ class GomazoaEffect extends OneShotEffect<GomazoaEffect> {
                     players.add(blockedByGomazoa.getOwnerId());
                     Player owner = game.getPlayer(blockedByGomazoa.getOwnerId());
                     if (owner != null) {
-                        owner.moveCardToLibraryWithInfo(blockedByGomazoa, source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                        owner.moveCardToLibraryWithInfo(blockedByGomazoa, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
                     }
                 }
             }

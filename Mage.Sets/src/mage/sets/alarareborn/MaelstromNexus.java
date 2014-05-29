@@ -167,6 +167,9 @@ class CascadeEffect extends OneShotEffect<CascadeEffect> {
     public boolean apply(Game game, Ability source) {
         Card card;
         Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
         ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
         Card stackCard = game.getCard(targetPointer.getFirst(game, source));
         if (stackCard == null) {
@@ -179,7 +182,7 @@ class CascadeEffect extends OneShotEffect<CascadeEffect> {
                 break;
             }
                 
-            card.moveToExile(exile.getId(), exile.getName(), source.getId(), game);
+            player.moveCardToExileWithInfo(card, source.getId(), exile.getName(), source.getSourceId(), game, Zone.LIBRARY);
         } while (card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
 
         if (card != null) {
@@ -192,7 +195,7 @@ class CascadeEffect extends OneShotEffect<CascadeEffect> {
         while (exile.size() > 0) {
             card = exile.getRandom(game);
             exile.remove(card.getId());
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+            player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.EXILED, false, false);
         }
 
         return true;

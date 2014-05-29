@@ -439,9 +439,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @param fromZone if null, this info isn't postet
      * @param toTop to the top of the library else to the bottom
+     * @param withName show the card name in the log
      * @return
      */
-    boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop);
+    boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName);
 
     
     /**

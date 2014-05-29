@@ -82,7 +82,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
                     int numberOfCardsToDiscard = Math.min(amount.calculate(game, source), player.getHand().size());
                     Cards cards = new CardsImpl();
                     if (randomDiscard) {
-                        while (cards.size() < numberOfCardsToDiscard) {
+                        while (player.isInGame() && cards.size() < numberOfCardsToDiscard) {
                             Card card = player.getHand().getRandom(game);
                             if (!cards.contains(card.getId())) {
                                 cards.add(card);

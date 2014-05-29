@@ -28,13 +28,13 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -81,37 +81,32 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
             }
             TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
             // move cards to the bottom of the library
-            while (cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
+            while (player.isInGame() && cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                    player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
                 }
                 target1.clearChosen();
             }
             // move cards to the top of the library
-            int onBottom = scryNumber - cards.size();
             if (cards.size() > 1) {
                 TargetCard target2 = new TargetCard(Zone.LIBRARY, filter2);
                 target2.setRequired(true);
-                while (cards.size() > 1) {
+                while (player.isInGame() && cards.size() > 1) {
                     player.choose(Outcome.Benefit, cards, target2, game);
                     Card card = cards.get(target2.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                        player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
                     }
                     target2.clearChosen();
                 }
             }
             if (cards.size() == 1) {
                 Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
             }
-            game.informPlayers(new StringBuilder(player.getName()).append(" puts ")
-                    .append(onBottom).append(onBottom == 1 ?" card":" cards")
-                    .append(" on the bottom of his or her library (scry ")
-                    .append(scryNumber).append(")").toString());
             game.fireEvent(new GameEvent(GameEvent.EventType.SCRY, source.getControllerId(), source.getSourceId(), source.getControllerId()));
             player.setTopCardRevealed(revealed);
             return true;

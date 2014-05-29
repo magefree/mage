@@ -99,14 +99,13 @@ class AgonizingMemoriesEffect extends OneShotEffect<AgonizingMemoriesEffect> {
     }
     
     private void chooseCardInHandAndPutOnTopOfLibrary(Game game, Ability source, Player you, Player targetPlayer) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
         if (targetPlayer.getHand().size() > 0) {
             TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the top of library (last chosen will be on top)"));
             target.setRequired(true);
             if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                 Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    targetPlayer.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true);
+                    targetPlayer.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true, false);
                 }
             }
         }
