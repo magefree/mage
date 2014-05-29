@@ -7,11 +7,13 @@
 package org.mage.plugins.card.dl.sources;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.mage.plugins.card.dl.DownloadJob;
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
-
 
 /**
  * Used when we need to point to direct links to download resources from.
@@ -22,7 +24,7 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
 
     private static final String backsideUrl = "http://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg";
 
-    private static final Map<String, String> directLinks = new LinkedHashMap<String, String>();
+    private static final Map<String, String> directLinks = new LinkedHashMap<>();
 
     public static final String cardbackFilename = "cardback.jpg";
     public static final String tokenFrameFilename = "tokenFrame.png";
@@ -45,7 +47,7 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
 
     @Override
     public Iterator<DownloadJob> iterator() {
-        ArrayList<DownloadJob> jobs = new ArrayList<DownloadJob>();
+        ArrayList<DownloadJob> jobs = new ArrayList<>();
 
         for (Map.Entry<String, String> url : directLinks.entrySet()) {
             File dst = new File(outDir, url.getKey());

@@ -1,5 +1,6 @@
 package org.mage.card.arcane;
 
+import de.schlichtherle.truezip.file.TFile;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,6 +19,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -43,6 +45,7 @@ import mage.view.StackAbilityView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
+import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
@@ -257,10 +260,16 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 try {
                     tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
                     flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
-                    if (!loadImage || gameCard.isFaceDown()) {
+                    if (!loadImage) {
                         return;
                     }
-                    BufferedImage srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
+                    BufferedImage srcImage;
+                    if (gameCard.isFaceDown()) {
+                        TFile file = new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename);
+                        srcImage = ImageCache.loadImage(file);
+                    } else {
+                        srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
+                    }
                     if (srcImage != null) {
                         hasImage = true;
                         setText(gameCard);
