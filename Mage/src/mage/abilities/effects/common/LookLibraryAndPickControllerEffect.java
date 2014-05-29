@@ -136,9 +136,10 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                         if (card != null) {
                             cards.remove(card);
                             if (targetZoneLookedCards.equals(Zone.BATTLEFIELD)) {
-                                card.putOntoBattlefield(game, Zone.PICK, source.getSourceId(), source.getControllerId());
+                                player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                             } else {
-                                card.moveToZone(targetPickedCards, source.getId(), game, false);
+                                card.moveToZone(targetPickedCards, source.getSourceId(), game, false);
+                                game.informPlayers(player.getName() + " moves a card to " + targetPickedCards.toString());
                             }
                             if (revealPickedCards) {
                                 reveal.add(card);
