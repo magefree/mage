@@ -337,9 +337,7 @@ public class TableController {
             if (userPlayerMap.get(userId) != null) {
                 return false;
             }
-            UserManager.getInstance().getUser(userId).watchGame(match.getGame().getId());
-            return true;
-
+            return UserManager.getInstance().getUser(userId).watchGame(match.getGame().getId());
         }
     }
 

@@ -336,11 +336,16 @@ public class GameController implements GameCallback {
             // You can't watch a game if you already a player in it
             return;
         }
+        if (watchers.get(userId) != null) {
+            // You can't watch a game if you already watch it
+            return;
+        }
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
             GameWatcher gameWatcher = new GameWatcher(userId, game, false);
             watchers.put(userId, gameWatcher);
             gameWatcher.init();
+            user.addGameWatchInfo(game.getId());
             ChatManager.getInstance().broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
         }
     }
@@ -349,6 +354,7 @@ public class GameController implements GameCallback {
         watchers.remove(userId);
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
+            user.removeGameWatchInfo(game.getId());
             ChatManager.getInstance().broadcast(chatId, user.getName(), " has stopped watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
         }
     }

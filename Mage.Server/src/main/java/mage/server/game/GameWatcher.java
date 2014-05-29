@@ -100,6 +100,7 @@ public class GameWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
+                user.removeGameWatchInfo(game.getId());
                 user.fireCallback(new ClientCallback("gameOver", game.getId(), message));
             }
         }

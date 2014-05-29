@@ -27,6 +27,7 @@
  */
 package mage.server;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -75,6 +76,7 @@ public class User {
     private final Map<UUID, TournamentSession> tournamentSessions;
     private final Map<UUID, TournamentSession> constructing;
     private final Map<UUID, Deck> sideboarding;
+    private final List<UUID> watchedGames;
     
     private String sessionId;
     private String info;
@@ -97,6 +99,7 @@ public class User {
         this.tournamentSessions = new ConcurrentHashMap<>();
         this.constructing = new ConcurrentHashMap<>();
         this.sideboarding = new ConcurrentHashMap<>();
+        this.watchedGames = new ArrayList<>();
         
         this.sessionId = "";
     }
@@ -205,8 +208,9 @@ public class User {
         fireCallback(new ClientCallback("showUserMessage", null, messageData ));
     }
 
-    public void watchGame(final UUID gameId) {
+    public boolean watchGame(final UUID gameId) {
         fireCallback(new ClientCallback("watchGame", gameId));
+        return true;
     }
 
     public void replayGame(final UUID gameId) {
@@ -405,6 +409,10 @@ public class User {
         if (tournament > 0) {
             sb.append("TP: ").append(tournament).append(" ");
         }
+        if (watchedGames.size() > 0) {
+            sb.append("WA: ").append(watchedGames.size()).append(" ");
+        }
+
         sb.append(disconnectInfo);
         return sb.toString();
     }
@@ -415,5 +423,13 @@ public class User {
 
     public void setInfo(String Info) {
         this.info = Info;
+    }
+
+    public void addGameWatchInfo(UUID gameId) {
+        watchedGames.add(gameId);
+    }
+
+    public void removeGameWatchInfo(UUID gameId) {
+        watchedGames.remove(gameId);
     }
 }
