@@ -48,6 +48,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -877,14 +878,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             if (ability instanceof ManaAbility) {
                 return true;
             }
-            for(Cost cost : ability.getCosts() ) {
-                if (!(cost instanceof TapSourceCost) && !(cost instanceof PayLifeCost)) {
-                    // if cost exists that have to be paid, pick ability dialog can be suppressed
-                    return true;
-                }
-            }
-            return false;
-                
+            // if ability has no mana costs you have to pick it from ability picker
+            return !ability.getManaCostsToPay().isEmpty();               
         }
         return true;
     }
