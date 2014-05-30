@@ -61,7 +61,7 @@ public class ChatPanel extends javax.swing.JPanel {
 
     private UUID chatId;
     private Session session;
-    private List<String> players = new ArrayList<String>();
+    private final List<String> players = new ArrayList<String>();
     private final TableModel tableModel;
     /**
      * Chat message color for opponents.
@@ -121,7 +121,7 @@ public class ChatPanel extends javax.swing.JPanel {
     /**
      * Maps message colors to {@link Color}.
      */
-    private static final Map<MessageColor, Color> colorMap = new EnumMap<MessageColor, Color>(MessageColor.class);
+    private static final Map<MessageColor, Color> colorMap = new EnumMap<>(MessageColor.class);
 
     static {
         colorMap.put(MessageColor.BLACK, Color.black);
@@ -144,6 +144,7 @@ public class ChatPanel extends javax.swing.JPanel {
      */
     /**
      * Creates new form ChatPanel
+     * @param addPlayersTab
      */
     public ChatPanel(boolean addPlayersTab) {
         tableModel = new TableModel();
@@ -299,7 +300,7 @@ public class ChatPanel extends javax.swing.JPanel {
 
     class TableModel extends AbstractTableModel {
 
-        private String[] columnNames = new String[]{"Players", "Info", "Games"};
+        private final String[] columnNames = new String[]{"Players", "Info", "Games"};
         private UsersView[] players = new UsersView[0];
 
         public void loadData(Collection<UsersView> players) throws MageRemoteException {

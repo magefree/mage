@@ -41,11 +41,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * a thread-safe circular list
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <E>
  */
 public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
     //TODO: might have to make E extend Copyable
 
-    protected List<E> list = new ArrayList<E>();
+    protected List<E> list = new ArrayList<>();
 
     protected final ReentrantLock lock = new ReentrantLock();
 
@@ -63,11 +64,13 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
     }
 
     public CircularList<E> copy() {
-        return new CircularList<E>(this);
+        return new CircularList<>(this);
     }
 
     /**
      *  Inserts an element into the current position
+     * @param e
+     * @return
      */
     @Override
     public boolean add(E e) {
@@ -102,6 +105,7 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
 
     /**
      *  Retrieves the element at the current position
+     * @return
      */
     public E get() {
         return list.get(this.index);
@@ -182,8 +186,9 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
 
     private int incrementListPointer(int index) {
         index++;
-        if (index >= list.size())
+        if (index >= list.size()) {
             index = 0;
+        }
         return index;
     }
 
@@ -200,8 +205,9 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
 
     private int decrementListPointer(int index) {
         index--;
-        if (index < 0)
+        if (index < 0) {
             index = list.size() - 1;
+        }
         return index;
     }
 
@@ -213,8 +219,9 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
         if (index > list.size()) {
             index = list.size() - 1;
         }
-        else if (index < 0)
+        else if (index < 0) {
             index = 0;
+        }
         return index;
     }
 
@@ -343,17 +350,17 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
 
     @Override
     public Iterator<E> iterator() {
-        return new CircularIterator<E>();
+        return new CircularIterator<>();
     }
 
     @Override
     public ListIterator<E> listIterator() {
-        return new CircularListIterator<E>();
+        return new CircularListIterator<>();
     }
 
     @Override
     public ListIterator<E> listIterator(int index) {
-        return new CircularListIterator<E>(index);
+        return new CircularListIterator<>(index);
     }
 
     private class CircularIterator<E>  implements Iterator<E> {
@@ -371,23 +378,27 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
 
         @Override
         public boolean hasNext() {
-            if (!hasMoved && size() > 0)
+            if (!hasMoved && size() > 0) {
                 return true;
+            }
             return cursor != lastIndex;
         }
 
         @Override
         public E next() {
-            if (!this.hasNext())
+            if (!this.hasNext()) {
                 throw new IllegalStateException();
-            if (curModCount != modCount)
+            }
+            if (curModCount != modCount) {
                 throw new ConcurrentModificationException();
+            }
             E data = (E) list.get(cursor);
             cursor = incrementListPointer(cursor);
             hasMoved = true;
             return data;
         }
 
+        @Override
         public void remove() {
             throw new UnsupportedOperationException("Not supported yet.");
         }
@@ -412,59 +423,76 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
             lastIndex = index;
         }
 
+        @Override
         public boolean hasNext() {
-            if (!hasMoved && size() > 0)
+            if (!hasMoved && size() > 0) {
                 return true;
+            }
             return cursor != lastIndex;
         }
 
+        @Override
         public E next() {
-            if (!this.hasNext())
+            if (!this.hasNext()) {
                 throw new IllegalStateException();
-            if (curModCount != modCount)
+            }
+            if (curModCount != modCount) {
                 throw new ConcurrentModificationException();
+            }
             E data = (E) list.get(cursor);
             cursor = incrementListPointer(cursor);
             hasMoved = true;
             return data;
         }
 
+        @Override
         public boolean hasPrevious() {
-            if (!hasMoved && size() > 0)
+            if (!hasMoved && size() > 0) {
                 return true;
+            }
             return cursor != firstIndex;
         }
 
+        @Override
         public E previous() {
-            if (!this.hasPrevious())
+            if (!this.hasPrevious()) {
                 throw new IllegalStateException();
-            if (curModCount != modCount)
+            }
+            if (curModCount != modCount) {
                 throw new ConcurrentModificationException();
+            }
             cursor = decrementListPointer(cursor);
             hasMoved = true;
             return (E) list.get(cursor);
         }
 
+        @Override
         public int nextIndex() {
-            if (this.hasNext())
+            if (this.hasNext()) {
                 return incrementListPointer(cursor);
+            }
             return list.size();
         }
 
+        @Override
         public int previousIndex() {
-            if (this.hasPrevious())
+            if (this.hasPrevious()) {
                 return decrementListPointer(cursor);
+            }
             return -1;
         }
 
+        @Override
         public void remove() {
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
+        @Override
         public void set(E arg0) {
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
+        @Override
         public void add(E arg0) {
             throw new UnsupportedOperationException("Not supported yet.");
         }
