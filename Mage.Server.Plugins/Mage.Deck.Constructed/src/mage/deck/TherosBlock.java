@@ -40,7 +40,7 @@ public class TherosBlock extends Constructed {
         super("Constructed - Theros Block");
         setCodes.add("THS");
         setCodes.add("BNG");
-        setCodes.add("JIN");
+        setCodes.add("JOU");
     }
 
 }
