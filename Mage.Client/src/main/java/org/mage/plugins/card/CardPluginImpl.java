@@ -120,6 +120,11 @@ public class CardPluginImpl implements CardPlugin {
                 continue;
             }
 
+            // put enchanted lands separately
+            if (!empty(permanent.getLinks())) {
+                continue;
+            }
+
             int insertIndex = -1;
 
             // Find lands with the same name.
@@ -127,13 +132,19 @@ public class CardPluginImpl implements CardPlugin {
                 Stack stack = allLands.get(i);
                 MagePermanent firstPanel = stack.get(0);
                 if (firstPanel.getOriginal().getName().equals(permanent.getOriginal().getName())) {
+                    // put enchanted lands separately
+                    if (!empty(permanent.getLinks())) {
+                        break;
+                    }
+
                     if (!empty(firstPanel.getLinks())) {
                         // Put this land to the left of lands with the same name and attachments.
                         insertIndex = i;
                         break;
                     }
-                    if (!empty(permanent.getLinks()) || stack.size() == landStackMax) {
-                        // If this land has attachments or the stack is full, put it to the right.
+
+                    if (stack.size() == landStackMax) {
+                        // If the stack is full, put it to the right.
                         insertIndex = i + 1;
                         continue;
                     }

@@ -40,6 +40,8 @@ import mage.client.cards.Permanent;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.audio.AudioManager;
+import mage.client.util.layout.CardLayoutStrategy;
+import mage.client.util.layout.impl.OldCardLayoutStrategy;
 import mage.constants.CardType;
 import mage.utils.CardUtil;
 import mage.view.PermanentView;
@@ -68,9 +70,11 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     protected Map<UUID, PermanentView> battlefield;
     private Dimension cardDimension;
 
-    private JComponent jPanel;
+    private JLayeredPane jPanel;
     private JScrollPane jScrollPane;
     private int width;
+
+    private CardLayoutStrategy layoutStrategy = new OldCardLayoutStrategy();
 
     //private static int iCounter = 0;
 
@@ -188,20 +192,13 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         }
     }
 
-    //TODO: review sorting stuff
     public void sortLayout() {
-        int height = Plugins.getInstance().sortPermanents(uiComponentsList, permanents.values());
-        BattlefieldPanel.this.jPanel.setPreferredSize(new Dimension(width - 30, height));
-        this.jScrollPane.repaint();
-        this.jScrollPane.revalidate();
-
         if (battlefield == null) {return;}
 
-        for (PermanentView permanent: battlefield.values()) {
-            if (permanent.getAttachments() != null) {
-                groupAttachments(permanent);
-            }
-        }
+        layoutStrategy.doLayout(this, width);
+
+        this.jScrollPane.repaint();
+        this.jScrollPane.revalidate();
 
         invalidate();
         repaint();
@@ -247,44 +244,6 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         }
     }
 
-    private void groupAttachments(PermanentView permanent) {
-        MagePermanent perm = permanents.get(permanent.getId());
-        if (perm == null) {
-            return;
-        }
-        int position = getPosition(perm);
-        perm.getLinks().clear();
-        Rectangle r = perm.getBounds();
-        if (!Plugins.getInstance().isCardPluginLoaded()) {
-            for (UUID attachmentId: permanent.getAttachments()) {
-                MagePermanent link = permanents.get(attachmentId);
-                if (link != null) {
-                    perm.getLinks().add(link);
-                    r.translate(20, 20);
-                    link.setBounds(r);
-                    setPosition(link, ++position);
-                }
-            }
-        } else {
-            int index = permanent.getAttachments().size();
-            for (UUID attachmentId: permanent.getAttachments()) {
-                MagePermanent link = permanents.get(attachmentId);
-                if (link != null) {
-                    link.setBounds(r);
-                    perm.getLinks().add(link);
-                    r.translate(8, 10);
-                    perm.setBounds(r);
-                    moveToFront(link);
-                    moveToFront(perm);
-                    jPanel.setComponentZOrder(link, index);
-                    index--;
-                }
-            }
-            jPanel.setComponentZOrder(perm, index);
-        }
-
-    }
-
     private void removePermanent(UUID permanentId, final int count) {
         for (Component c: this.jPanel.getComponents()) {
             final Component comp = c;
@@ -312,29 +271,6 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         }
     }
 
-//    private Rectangle findEmptySpace(Dimension size) {
-//        int battlefieldWidth = this.getWidth();
-//        Rectangle r = new Rectangle(size);
-//        boolean intersects;
-//        while (true) {
-//            intersects = false;
-//            for (MagePermanent perm: permanents.values()) {
-//                Rectangle pr = perm.getBounds();
-//                if (r.intersects(pr)) {
-//                    intersects = true;
-//                    if (pr.x + pr.width + r.width > battlefieldWidth)
-//                        r.setLocation(0, pr.y + pr.height + 1);
-//                    else
-//                        r.translate(pr.x + pr.width - r.x, 0);
-//                    break;
-//                }
-//            }
-//            if (!intersects)
-//                break;
-//        }
-//        return r;
-//    }
-
     @Override
     public boolean isOptimizedDrawingEnabled () {
         return false;
@@ -361,7 +297,15 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         this.add(jScrollPane);
     }
 
-    public JComponent getMainPanel() {
+    public JLayeredPane getMainPanel() {
         return jPanel;
+    }
+
+    public Map<UUID, PermanentView> getBattlefield() {
+        return battlefield;
+    }
+
+    public Map<String, JComponent> getUiComponentsList() {
+        return uiComponentsList;
     }
 }
