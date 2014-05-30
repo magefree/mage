@@ -419,6 +419,11 @@ public class StackAbility implements StackObject, Ability {
     public String getGameLogMessage(Game game) {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void setCostModificationActive(boolean active) {
+        throw new UnsupportedOperationException("Not supported. Only neede for flashbacked spells"); 
+    }
     
     
 }
