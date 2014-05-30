@@ -28,10 +28,6 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
@@ -39,6 +35,10 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -61,8 +61,11 @@ public class JorKadeenThePrevailer extends CardImpl<JorKadeenThePrevailer> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
+        // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostControlledEffect(3, 0, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true),
+
+        // Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostControlledEffect(3, 0, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false),
                 MetalcraftCondition.getInstance(), effectText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
