@@ -27,8 +27,7 @@
  */
 package mage.sets.shadowmoor;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,15 +38,15 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -95,12 +94,13 @@ class LureboundScarecrowChooseColorEffect extends OneShotEffect<LureboundScarecr
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         StackObject sourceStackObject = game.getStack().getStackObject(source.getSourceId());
-        Card card = game.getCard(source.getSourceId());
-        if (player != null && sourceStackObject != null && card != null) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null && sourceStackObject != null && permanent != null) {
             ChoiceColor colorChoice = new ChoiceColor();
             if (player.choose(Outcome.BoostCreature, colorChoice, game)) {
                 game.informPlayers(sourceStackObject.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
-                game.getState().setValue(card.getId() + "_color", colorChoice.getColor());
+                game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
+                permanent.addInfo("chosen color", new StringBuilder("<font color='blue'>Chosen color: ").append(colorChoice.getColor().getDescription()).append("</font>").toString());
             }
         }
         return false;

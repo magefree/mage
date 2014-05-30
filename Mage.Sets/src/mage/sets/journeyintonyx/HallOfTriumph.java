@@ -102,7 +102,7 @@ class HallOfTriumphEffect extends OneShotEffect<HallOfTriumphEffect> {
             if (colorChoice.getChoice() != null) {
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
-                permanent.addInfo("chosen color", "<i>Chosen color: " + colorChoice.getChoice().toString() + "</i>");
+                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>");
             }
         }
         return false;

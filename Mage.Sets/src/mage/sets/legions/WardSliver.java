@@ -107,7 +107,7 @@ class WardSliverEffect extends OneShotEffect<WardSliverEffect> {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            Choice colorChoice = new ChoiceColor();
+            ChoiceColor colorChoice = new ChoiceColor();
             colorChoice.setMessage("Choose color");
             while (!player.choose(Outcome.BoostCreature, colorChoice, game)) {
                 if (!player.isInGame()) {
@@ -117,7 +117,7 @@ class WardSliverEffect extends OneShotEffect<WardSliverEffect> {
             if (colorChoice.getChoice() != null) {
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_color", colorChoice.getChoice());
-                permanent.addInfo("chosen color", "<i>Chosen color: " + colorChoice.getChoice().toString() + "</i>");
+                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>");
             }
         }
         return false;

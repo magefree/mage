@@ -182,7 +182,6 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     }
 
     public String getDescription() {
-        StringBuilder sb = new StringBuilder();
         if (getColorCount() > 1) {
             return "multicolored";
         } else {

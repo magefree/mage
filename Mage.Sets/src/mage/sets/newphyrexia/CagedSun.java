@@ -103,6 +103,7 @@ class CagedSunEffect1 extends OneShotEffect<CagedSunEffect1> {
             if (player.choose(Outcome.BoostCreature, colorChoice, game)) {
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
+                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>");
             }
         }
         return false;
@@ -173,8 +174,9 @@ class CagedSunTriggeredAbility extends TriggeredManaAbility<CagedSunTriggeredAbi
             }
             if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                 ObjectColor color = (ObjectColor) game.getState().getValue(this.sourceId + "_color");
-                if (color != null && event.getData().contains(color.toString()))
+                if (color != null && event.getData().contains(color.toString())) {
                     return true;
+                }
             }
         }
         return false;
@@ -208,16 +210,17 @@ class CagedSunEffect extends ManaEffect<CagedSunEffect> {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-            if (color.isBlack())
+            if (color.isBlack()) {
                 player.getManaPool().addMana(Mana.BlackMana, game, source);
-            else if (color.isBlue())
+            } else if (color.isBlue()) {
                 player.getManaPool().addMana(Mana.BlueMana, game, source);
-            else if (color.isRed())
+            } else if (color.isRed()) {
                 player.getManaPool().addMana(Mana.RedMana, game, source);
-            else if (color.isGreen())
+            } else if (color.isGreen()) {
                 player.getManaPool().addMana(Mana.GreenMana, game, source);
-            else if (color.isWhite())
+            } else if (color.isWhite()) {
                 player.getManaPool().addMana(Mana.WhiteMana, game, source);
+            }
         }
         return true;
     }

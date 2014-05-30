@@ -96,12 +96,13 @@ class ChooseColorEffect extends OneShotEffect<ChooseColorEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(source.getSourceId());
-        if (player != null && card != null) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null && permanent != null) {
             ChoiceColor colorChoice = new ChoiceColor();
             if (player.choose(Outcome.Neutral, colorChoice, game)) {
-                game.informPlayers(new StringBuilder(card.getName()).append(": ").append(player.getName()).append(" has chosen ").append(colorChoice.getChoice()).toString());
+                game.informPlayers(new StringBuilder(permanent.getName()).append(": ").append(player.getName()).append(" has chosen ").append(colorChoice.getChoice()).toString());
                 game.getState().setValue(source.getSourceId() + "_color", colorChoice.getColor());
+                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>");
             }
         }
         return false;

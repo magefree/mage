@@ -97,6 +97,7 @@ class CurseOfWizardryChooseColorEffect extends OneShotEffect<CurseOfWizardryChoo
             if (player.choose(Outcome.Detriment, colorChoice, game)) {
                 game.informPlayers(curseOfWizardry.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(curseOfWizardry.getId() + "_color", colorChoice.getColor());
+                curseOfWizardry.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>");
             }
         }
         return false;
