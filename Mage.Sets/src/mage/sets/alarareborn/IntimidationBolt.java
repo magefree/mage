@@ -55,7 +55,7 @@ public class IntimidationBolt extends CardImpl<IntimidationBolt> {
         // Intimidation Bolt deals 3 damage to target creature. Other creatures can't attack this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addEffect(new IntimidationEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         
     }
 

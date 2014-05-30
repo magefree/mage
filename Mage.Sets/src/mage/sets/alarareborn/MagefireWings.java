@@ -60,7 +60,7 @@ public class MagefireWings extends CardImpl<MagefireWings> {
         this.color.setBlue(true);
         this.color.setRed(true);
 
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

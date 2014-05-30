@@ -61,7 +61,7 @@ public class GiantAmbushBeetle extends CardImpl<GiantAmbushBeetle> {
         
         // When Giant Ambush Beetle enters the battlefield, you may have target creature block it this turn if able.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn), true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

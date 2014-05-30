@@ -71,8 +71,11 @@ public class ShuffleSpellEffect extends PostResolveEffect<ShuffleSpellEffect> im
 
     @Override
     public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-        card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-        Player player = game.getPlayer(card.getOwnerId());
-        if (player != null) player.shuffleLibrary(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Player owner = game.getPlayer(card.getOwnerId());
+        if (controller != null && owner != null) {
+            controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.STACK, true, true);
+            owner.shuffleLibrary(game);
+        }
     }
 }

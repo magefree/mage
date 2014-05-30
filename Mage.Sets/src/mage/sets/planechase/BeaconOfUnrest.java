@@ -28,14 +28,15 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -43,7 +44,7 @@ import mage.target.common.TargetCardInGraveyard;
  * @author Loki
  */
 public class BeaconOfUnrest extends CardImpl<BeaconOfUnrest> {
-    private static final FilterCard filter = new FilterCard("artifact or creature");
+    private static final FilterCard filter = new FilterCard("artifact or creature card from a graveyard");
 
     static {
         filter.add(Predicates.or(
@@ -60,7 +61,9 @@ public class BeaconOfUnrest extends CardImpl<BeaconOfUnrest> {
         // Put target artifact or creature card from a graveyard onto the battlefield under your control. Shuffle Beacon of Unrest into its owner's library.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+        Target target = new TargetCardInGraveyard(filter);
+        target.setRequired(true);
+        this.getSpellAbility().addTarget(target);
     }
 
     public BeaconOfUnrest(final BeaconOfUnrest card) {

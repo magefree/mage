@@ -61,7 +61,7 @@ public class SigilOfTheNayanGods extends CardImpl<SigilOfTheNayanGods> {
         this.color.setGreen(true);
         this.color.setWhite(true);
 
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

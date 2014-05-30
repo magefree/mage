@@ -49,7 +49,7 @@ public class ColossalMight extends CardImpl<ColossalMight> {
         this.expansionSetCode = "ARB";
         this.color.setRed(true);
         this.color.setGreen(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 2, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
     }

@@ -29,14 +29,14 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -63,9 +63,13 @@ public class PhyrexianCrusader extends CardImpl<PhyrexianCrusader> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
+        // First strike,
         this.addAbility(FirstStrikeAbility.getInstance());
+        // protection from red and from white
         this.addAbility(new ProtectionAbility(filter));
         this.addAbility(new ProtectionAbility(filter2));
+        // Infect
         this.addAbility(InfectAbility.getInstance());
     }
 

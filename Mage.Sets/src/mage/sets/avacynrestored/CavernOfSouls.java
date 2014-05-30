@@ -27,8 +27,10 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.ConditionalMana;
-import mage.constants.*;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -44,16 +46,18 @@ import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.WatcherImpl;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -226,6 +230,11 @@ class CavernOfSoulsCantCounterEffect extends ReplacementEffectImpl<CavernOfSouls
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player caster = game.getPlayer(event.getPlayerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (caster != null) {
+            game.informPlayer(caster, "This spell can't be countered because a colored mana from " + sourceObject.getName() + " was spent to cast it.");
+        }
         return true;
     }
 

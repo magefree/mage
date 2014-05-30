@@ -60,7 +60,7 @@ public class StunSniper extends CardImpl<StunSniper> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new TapTargetEffect());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 
