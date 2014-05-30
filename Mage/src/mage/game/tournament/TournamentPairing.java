@@ -29,6 +29,7 @@
 package mage.game.tournament;
 
 import java.util.UUID;
+import mage.constants.TournamentPlayerState;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
 
@@ -85,6 +86,18 @@ public class TournamentPairing {
                 player2.setEliminated();
             }
         }
+    }
+    public void finishPlayersThatPlayedLastRound() {
+        if (match.hasEnded()) {
+            if (!player1.isEliminated()) {
+                player1.setEliminated();
+                player1.setState(TournamentPlayerState.FINISHED);
+            }
+            if (!player2.isEliminated()) {
+                player2.setEliminated();
+                player2.setState(TournamentPlayerState.FINISHED);
+            }            
+        }        
     }
 
     public void eliminateComputer() {

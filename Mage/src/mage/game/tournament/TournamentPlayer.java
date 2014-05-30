@@ -83,7 +83,7 @@ public class TournamentPlayer {
         this.points = points;
     }
 
-    public boolean getEliminated() {
+    public boolean isEliminated() {
         return eliminated;
     }
 
@@ -208,6 +208,12 @@ public class TournamentPlayer {
                 || this.getState().equals(TournamentPlayerState.WAITING)) {
             this.setState(TournamentPlayerState.FINISHED);
         }
+    }
+    
+    public boolean isInTournament() {
+        return !this.getState().equals(TournamentPlayerState.CANCELED)
+                && !this.getState().equals(TournamentPlayerState.ELIMINATED)
+                && !this.getState().equals(TournamentPlayerState.FINISHED);
     }
 }
 

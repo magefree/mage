@@ -45,18 +45,18 @@ public class TournamentPlayerView implements Serializable, Comparable{
     private final int points;
     private final boolean quit;
 
-    TournamentPlayerView(TournamentPlayer player) {
-        this.name = player.getPlayer().getName();
-        StringBuilder sb  = new StringBuilder(player.getState().toString());
-        String stateInfo = player.getStateInfo();
+    TournamentPlayerView(TournamentPlayer tournamentPlayer) {
+        this.name = tournamentPlayer.getPlayer().getName();
+        StringBuilder sb  = new StringBuilder(tournamentPlayer.getState().toString());
+        String stateInfo = tournamentPlayer.getStateInfo();
         if (!stateInfo.isEmpty()) {
             sb.append(" (").append(stateInfo).append(")");
         }
-        sb.append(player.getDisconnectInfo());
+        sb.append(tournamentPlayer.getDisconnectInfo());
         this.state = sb.toString();
-        this.points = player.getPoints();
-        this.results = player.getResults();
-        this.quit = player.getState().equals(TournamentPlayerState.ELIMINATED) || player.getState().equals(TournamentPlayerState.CANCELED);
+        this.points = tournamentPlayer.getPoints();
+        this.results = tournamentPlayer.getResults();
+        this.quit = !tournamentPlayer.isInTournament();
     }
 
     public String getName() {

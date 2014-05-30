@@ -296,34 +296,36 @@ public class TournamentController {
             TournamentPlayer tPlayer = tournament.getPlayer(playerId);
             if (tPlayer != null) {
                 if (started) {
-                    ChatManager.getInstance().broadcast(chatId, "", tPlayer.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK, true, MessageType.STATUS, SoundToPlay.PlayerLeft);
-                    String info;
-                    if (tournament.isDoneConstructing()) {
-                        info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();
-                        // quit active matches of that tournament
-                        TableManager.getInstance().userQuitTournamentSubTables(tournament.getId(), userId);
-                    } else {
-                        if (tPlayer.getState().equals(TournamentPlayerState.DRAFTING)) {
-                            info = "during Draft phase";
-                            if (!checkToReplaceDraftPlayerByAi(userId, tPlayer)) {
-                                this.abortDraftTournament();
-                            } else {
-                                DraftController draftController = DraftManager.getInstance().getController(tableId);
-                                if (draftController != null) {
-                                    DraftSession draftSession = draftController.getDraftSession(playerId);
-                                    if (draftSession != null) {
-                                        DraftManager.getInstance().kill(draftSession.getDraftId(), userId);
+                    if (tPlayer.isInTournament()) {
+                        ChatManager.getInstance().broadcast(chatId, "", tPlayer.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK, true, MessageType.STATUS, SoundToPlay.PlayerLeft);
+                        String info;
+                        if (tournament.isDoneConstructing()) {
+                            info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();
+                            // quit active matches of that tournament
+                            TableManager.getInstance().userQuitTournamentSubTables(tournament.getId(), userId);
+                        } else {
+                            if (tPlayer.getState().equals(TournamentPlayerState.DRAFTING)) {
+                                info = "during Draft phase";
+                                if (!checkToReplaceDraftPlayerByAi(userId, tPlayer)) {
+                                    this.abortDraftTournament();
+                                } else {
+                                    DraftController draftController = DraftManager.getInstance().getController(tableId);
+                                    if (draftController != null) {
+                                        DraftSession draftSession = draftController.getDraftSession(playerId);
+                                        if (draftSession != null) {
+                                            DraftManager.getInstance().kill(draftSession.getDraftId(), userId);
+                                        }
                                     }
                                 }
+                            } else if (tPlayer.getState().equals(TournamentPlayerState.CONSTRUCTING)) {
+                                info = "during Construction phase";
+                            } else {
+                                info = "";
                             }
-                        } else if (tPlayer.getState().equals(TournamentPlayerState.CONSTRUCTING)) {
-                            info = "during Construction phase";
-                        } else {
-                            info = "";
                         }
+                        tPlayer.setQuit(info);
+                        tournament.quit(playerId);
                     }
-                    tPlayer.setQuit(info);
-                    tournament.quit(playerId);
                 } else {
                     tournament.leave(playerId);
                 }
@@ -392,7 +394,7 @@ public class TournamentController {
 
     private void checkPlayersState() {
         for (TournamentPlayer tournamentPlayer: tournament.getPlayers()) {
-            if (!tournamentPlayer.getEliminated() && tournamentPlayer.getPlayer().isHuman()) {
+            if (!tournamentPlayer.isEliminated() && tournamentPlayer.getPlayer().isHuman()) {
                 if (tournamentSessions.containsKey(tournamentPlayer.getPlayer().getId())) {
                     if (tournamentSessions.get(tournamentPlayer.getPlayer().getId()).isKilled()) {
                         tournamentPlayer.setEliminated();

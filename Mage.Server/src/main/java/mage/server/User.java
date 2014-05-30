@@ -365,7 +365,7 @@ public class User {
         for (Map.Entry<UUID, Table> tableEntry : tables.entrySet()) {
             Table table = tableEntry.getValue();
             if (table.isTournament()) {
-                if (!table.getTournament().getPlayer(tableEntry.getKey()).getEliminated()) {
+                if (!table.getTournament().getPlayer(tableEntry.getKey()).isEliminated()) {
                     switch (table.getState()) {
                         case CONSTRUCTING:
                             construct++;

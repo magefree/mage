@@ -225,7 +225,7 @@ public abstract class TournamentImpl implements Tournament {
     protected List<TournamentPlayer> getActivePlayers() {
         List<TournamentPlayer> activePlayers = new ArrayList<>();
         for (TournamentPlayer player: players.values()) {
-            if (!player.getEliminated()) {
+            if (!player.isEliminated()) {
                 activePlayers.add(player);
             }
         }
@@ -440,16 +440,20 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     protected void winners() {
-        // TODO: Generate StateInfo for Swiss pairing (1st, 2nd, ...)
-        for(TournamentPlayer winner: this.getActivePlayers()) {
-            winner.setState(TournamentPlayerState.FINISHED);
-            if (options.getNumberRounds() == 0) { // if no swiss, last active is the winner
-                if (isAbort()) {
-                    winner.setStateInfo("Tournament canceled");
-                } else {
-                    winner.setStateInfo("Winner");
-                }
+        List<TournamentPlayer> winners = new ArrayList<>();
+        int pointsWinner = Integer.MIN_VALUE;
+        for(TournamentPlayer tournamentPlayer: this.getPlayers()) {
+            if (pointsWinner < tournamentPlayer.getPoints()) {
+                winners.clear();
+                winners.add(tournamentPlayer);
+                pointsWinner = tournamentPlayer.getPoints();
+            } else if (pointsWinner == tournamentPlayer.getPoints()) {
+                winners.add(tournamentPlayer);
             }
+        }
+        // set winner state for the players with the most points
+        for (TournamentPlayer tournamentPlayer: winners) {
+            tournamentPlayer.setStateInfo("Winner");
         }
     }
 

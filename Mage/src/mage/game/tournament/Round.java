@@ -40,8 +40,8 @@ public class Round {
 
     private final int roundNum;
     private final Tournament tournament;
-    private final List<TournamentPairing> pairs = new ArrayList<TournamentPairing>();
-    private final List<TournamentPlayer> playerByes = new ArrayList<TournamentPlayer>();
+    private final List<TournamentPairing> pairs = new ArrayList<>();
+    private final List<TournamentPlayer> playerByes = new ArrayList<>();
 
     public Round(int roundNum, Tournament tournament) {
         this.roundNum = roundNum;
@@ -80,6 +80,10 @@ public class Round {
                     pair.setAlreadyPublished(true);
                     if (tournament instanceof TournamentSingleElimination) {
                         pair.eliminatePlayers();
+                    }
+                    // if it's the last round, finish all players for the tournament if their match is finished
+                    if (getRoundNumber() == tournament.getNumberRounds()) {
+                        pair.finishPlayersThatPlayedLastRound();
                     }
                 }
             }
