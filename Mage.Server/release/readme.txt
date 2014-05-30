@@ -1,24 +1,23 @@
-MAGE - is an acronym for Magic, Another Game Engine
+XMage - is an acronym for Extended - Magic, Another Game Engine
 
-MAGE is a client/server implementation of a popular CCG without the collecting part.
-The server hosts games and enforces the rules.  The client creates or joins games, 
+XMage is a client/server implementation of a popular CCG without the collecting part.
+The server hosts games and enforces the rules.  The client creates or joins games,
 displays the current state of a game in progress and sends user events to the server.
 
-You will need to have the Java Runtime Environment Version 7.x .
+You will need to have the Java Runtime Environment Version 7 or greater.
 You can download this from:  http://java.com/
 
 -----------------------------------------------------------------------------------
-Installing and running MAGE
+Installing and running XMage
 
 You will need to download both the client and the server applications.  These can be
-obtained from 
-http://download.magefree.com
+obtained from HTTP://XMage.info.
 Extact the client and the server to separate folders.
 
 To play a game you can either connect to a server or start your own server.  To
 connect to a server you will need to know the server name or IP address and the port.
-To start a server run the startServer.bat command.  If you want to use a different 
-port or change the timeout setting then modify the config.properties file in the 
+To start a server run the startServer.bat command.  If you want to use a different
+port or change the timeout setting then modify the config.properties file in the
 config folder.
 
 To launch the client run the startClient.bat command.  Click on the connect button on
@@ -42,17 +41,20 @@ graveyard by clicking on the graveyard count.
 -----------------------------------------------------------------------------------
 Deck editor
 
-A deck editor is available by clicking on the Deck Editor button on the 
+A simple deck editor is available by clicking on the Deck Editor button on the
 toolbar.  All the available cards are displayed in the top section.  Your deck
 and sideboard are displayed at the bottom.  To add a card to your deck double
 click on the card in the top section.  To remove it from your deck double click
-on the card in the deck area.
+on the card in the deck area.  The sideboard section is not ready yet (don't
+worry it's coming soon).
 
 You can save or load a deck  using the Save or Load buttons.
 
 -----------------------------------------------------------------------------------
 Notes
 
-If you notice anything or want to make suggestions
-goto https://github.com/magefree/mage/issues
-
+XMage is still in the testing phase so there can be bugs and/or
+missing functionality.  Please be patient.  If you notice anything or want to
+make suggestions please visit our board at
+    http://www.slightlymagic.net/forum/viewforum.php?f=70
+and give us some feedback.

@@ -82,7 +82,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Courtesy: BetaSteward@googlemail.com. Site: http://176.31.186.181/"/>
+        <Property name="text" type="java.lang.String" value="Courtesy: BetaSteward@googlemail.com. Site: http://XMage.info/"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

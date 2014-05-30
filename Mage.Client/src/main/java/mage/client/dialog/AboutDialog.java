@@ -88,7 +88,7 @@ public class AboutDialog extends MageDialog {
 
         lblVersion.setText("0.0.0");
 
-        jLabel2.setText("Courtesy: BetaSteward@googlemail.com. Site: http://176.31.186.181/");
+        jLabel2.setText("Courtesy: BetaSteward@googlemail.com. Site: http://XMage.info/");
 
         jLabel3.setText("Devs: BetaSteward, Noxx, Eugen.Rivniy, North, LevelX2, Jeff, Plopman. ");
 

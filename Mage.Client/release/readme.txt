@@ -1,17 +1,17 @@
-MAGE - is an acronym for Magic, Another Game Engine
+XMage - is an acronym for Extended - Magic, Another Game Engine
 
-MAGE is a client/server implementation of a popular CCG without the collecting part.
+XMage is a client/server implementation of a popular CCG without the collecting part.
 The server hosts games and enforces the rules.  The client creates or joins games, 
 displays the current state of a game in progress and sends user events to the server.
 
-You will need to have the Java Runtime Environment Version 6 Update 10 or greater.
+You will need to have the Java Runtime Environment Version 7 or greater.
 You can download this from:  http://java.com/
 
 -----------------------------------------------------------------------------------
-Installing and running MAGE
+Installing and running XMage
 
 You will need to download both the client and the server applications.  These can be
-obtained from http://code.google.com/p/magic--another-game-engine/downloads/list.
+obtained from HTTP://XMage.info.
 Extact the client and the server to separate folders.
 
 To play a game you can either connect to a server or start your own server.  To
@@ -53,6 +53,8 @@ You can save or load a deck  using the Save or Load buttons.
 -----------------------------------------------------------------------------------
 Notes
 
-MAGE is still very much in the testing phase so there can be lots of bugs and/or
+XMage is still in the testing phase so there can be bugs and/or
 missing functionality.  Please be patient.  If you notice anything or want to
-make suggestions please contact me at BetaSteward@googlemail.com
+make suggestions please visit our board at
+    http://www.slightlymagic.net/forum/viewforum.php?f=70
+and give us some feedback.
