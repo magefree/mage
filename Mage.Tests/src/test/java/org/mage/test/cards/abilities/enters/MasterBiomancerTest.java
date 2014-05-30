@@ -82,4 +82,49 @@ public class MasterBiomancerTest extends CardTestPlayerBase {
         //   P/T = 2/5 + 2* (2 * +1/+1) = 6 / 9
         assertPowerToughness(playerA, "Mindeye Drake", 6, 9);
     }
+
+
+    /**
+     * Progenitor Mimic
+     * Creature - Shapeshifter
+     * 0/0
+     * You may have Progenitor Mimic enter the battlefield as a copy of any creature on
+     * the battlefield except it gains "At the beginning of your upkeep, if this creature
+     * isn't a token, put a token onto the battlefield that's a copy of this creature."
+     *
+     * If Progenitor Mimic comes into play, it gets two +1/+1 counters from
+     * the Master Biomancer already in play. It copies the Master Biomancer and
+     * is therfore a 4/6 creature.
+     * The Token generated next round from Progenitor Mimic has to get 2 + 4 counters
+     * and is therefore a 8/10 creature.
+     */
+
+    @Test
+    public void testWithProgenitorMimic() {
+
+        // a creature enters the battlefield and gets a counter for each point of power of Master Biomancer
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Master Biomancer", 1);
+        addCard(Zone.HAND, playerA, "Progenitor Mimic");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Progenitor Mimic");
+        playerA.addTarget("Master Biomancer");
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Master Biomancer", 3);
+
+        // the original Master Biomancer
+        assertPowerToughness(playerA, "Master Biomancer", 2, 4);
+        // the Progenitor Mimic copying the Master Biomancer
+        assertPowerToughness(playerA, "Master Biomancer", 4, 6);
+        // the first token created by the Progenitor Mimic copying the Master Biomancer
+        assertPowerToughness(playerA, "Master Biomancer", 8, 10);
+    }
 }

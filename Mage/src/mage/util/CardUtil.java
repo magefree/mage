@@ -371,6 +371,7 @@ public class CardUtil {
      * Returns function that copies params\abilities from one card to {@link Token}.
      *
      * @param target
+     * @return
      */
     public static CopyTokenFunction copyTo(Token target) {
         return new CopyTokenFunction(target);

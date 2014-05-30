@@ -28,11 +28,6 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -46,12 +41,19 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 
 /**
@@ -141,6 +143,7 @@ class ProgenitorMimicCopyEffect extends OneShotEffect<ProgenitorMimicCopyEffect>
         }
         if (copyFromPermanent != null) {
             EmptyToken token = new EmptyToken();
+            CardUtil.copyTo(token).from(copyFromPermanent); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             Permanent sourcePermanent = game.getPermanent(token.getLastAddedToken());
             if (sourcePermanent != null) {
