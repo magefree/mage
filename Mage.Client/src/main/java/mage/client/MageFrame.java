@@ -30,6 +30,57 @@ package mage.client;
 import de.schlichtherle.truezip.file.TArchiveDetector;
 import de.schlichtherle.truezip.file.TConfig;
 import de.schlichtherle.truezip.fs.FsOutputOption;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.SplashScreen;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.prefs.Preferences;
+import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
+import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComponent;
+import javax.swing.JDesktopPane;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JToggleButton;
+import javax.swing.JToolBar.Separator;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -45,7 +96,13 @@ import mage.client.components.tray.MageTray;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deckeditor.DeckEditorPane;
 import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
-import mage.client.dialog.*;
+import mage.client.dialog.AboutDialog;
+import mage.client.dialog.ConnectDialog;
+import mage.client.dialog.ErrorDialog;
+import mage.client.dialog.FeedbackDialog;
+import mage.client.dialog.GameEndDialog;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.dialog.TableWaitingDialog;
 import mage.client.draft.DraftPane;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePane;
@@ -74,27 +131,6 @@ import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.DownloadPictures;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.JToolBar.Separator;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.prefs.Preferences;
-
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -260,7 +296,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             mageToolbar.add(separator);
 
             JButton btnDownloadSymbols = new JButton("Symbols");
-            btnDownloadSymbols.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
             btnDownloadSymbols.setFocusable(false);
             btnDownloadSymbols.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
             btnDownloadSymbols.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -276,7 +311,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             mageToolbar.add(separator);
 
             JButton btnDownload = new JButton("Images");
-            btnDownload.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
             btnDownload.setFocusable(false);
             btnDownload.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
             btnDownload.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -772,7 +806,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator4);
 
         btnConnect.setText("Connect");
-        btnConnect.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnConnect.setFocusable(false);
         btnConnect.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnConnect.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -785,7 +818,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator3);
 
         btnGames.setText("Games");
-        btnGames.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnGames.setFocusable(false);
         btnGames.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGames.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -798,7 +830,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator1);
 
         btnDeckEditor.setText("Deck Editor");
-        btnDeckEditor.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnDeckEditor.setFocusable(false);
         btnDeckEditor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDeckEditor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -835,7 +866,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator6);
 
         btnAbout.setText("About");
-        btnAbout.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnAbout.setFocusable(false);
         btnAbout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAbout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -848,7 +878,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator7);
 
         btnExit.setText("Exit");
-        btnExit.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnExit.setFocusable(false);
         btnExit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnExit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -872,7 +901,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(desktopPane)
-            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
