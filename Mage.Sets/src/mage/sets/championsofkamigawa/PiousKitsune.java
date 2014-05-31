@@ -44,7 +44,6 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.counters.common.DevotionCounter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -71,7 +70,7 @@ public class PiousKitsune extends CardImpl<PiousKitsune> {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PiousKitsuneEffect(), TargetController.YOU, false));
         // {tap}, Remove a devotion counter from Pious Kitsune: You gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost());
-        ability.addCost(new RemoveCountersSourceCost(new DevotionCounter()));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.DEVOTION.createInstance()));
         this.addAbility(ability);
         
     }
@@ -110,7 +109,7 @@ class PiousKitsuneEffect extends OneShotEffect<PiousKitsuneEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result;
-        result = new AddCountersSourceEffect(new DevotionCounter()).apply(game, source);
+        result = new AddCountersSourceEffect(CounterType.DEVOTION.createInstance()).apply(game, source);
         if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {

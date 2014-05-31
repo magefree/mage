@@ -44,7 +44,6 @@ import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.counters.common.AimCounter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -107,7 +106,7 @@ class HankyuAddCounterEffect extends OneShotEffect<HankyuAddCounterEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent equipment = game.getPermanent(this.effectGivingEquipmentId);
         if (equipment != null) {
-            equipment.addCounters(new AimCounter(), game);
+            equipment.addCounters(CounterType.AIM.createInstance(), game);
         }
         return true;
     }

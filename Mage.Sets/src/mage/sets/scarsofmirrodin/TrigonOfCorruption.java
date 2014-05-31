@@ -44,7 +44,6 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.counters.common.ChargeCounter;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -61,7 +60,7 @@ public class TrigonOfCorruption extends CardImpl<TrigonOfCorruption> {
         super(ownerId, 213, "Trigon of Corruption", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "SOM";
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)), ""));
 
         Costs costs = new CostsImpl();
         costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));

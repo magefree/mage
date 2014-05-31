@@ -44,7 +44,6 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.counters.common.BriberyCounter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -113,7 +112,7 @@ class GwafaHazidProfiteerEffect1 extends OneShotEffect<GwafaHazidProfiteerEffect
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
             Player controller = game.getPlayer(targetCreature.getControllerId());
-            targetCreature.addCounters(new BriberyCounter(), game);
+            targetCreature.addCounters(CounterType.BRIBERY.createInstance(), game);
             if (controller != null) {
                 controller.drawCards(1, game);
             }

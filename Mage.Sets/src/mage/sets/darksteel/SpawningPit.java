@@ -43,7 +43,6 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.counters.common.ChargeCounter;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -56,7 +55,7 @@ public class SpawningPit extends CardImpl<SpawningPit> {
     public SpawningPit (UUID ownerId) {
         super(ownerId, 141, "Spawning Pit", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "DST";
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(new ChargeCounter()), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpawningPitToken()), new GenericManaCost(1));
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2)));
         this.addAbility(ability);

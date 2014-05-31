@@ -43,7 +43,6 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.counters.common.ChargeCounter;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -142,7 +141,7 @@ class LightningStormAddCounterEffect extends OneShotEffect<LightningStormAddCoun
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (spell != null) {
-            spell.addCounters(new ChargeCounter(2), game);
+            spell.addCounters(CounterType.CHARGE.createInstance(2), game);
             return spell.chooseNewTargets(game, source.getControllerId(), false, false);
         }
         return false;

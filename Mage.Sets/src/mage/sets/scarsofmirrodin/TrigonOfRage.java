@@ -45,7 +45,6 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.counters.common.ChargeCounter;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -61,7 +60,7 @@ public class TrigonOfRage extends CardImpl<TrigonOfRage> {
         super(ownerId, 216, "Trigon of Rage", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)), ""));
 
         Costs costs = new CostsImpl();
         costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));

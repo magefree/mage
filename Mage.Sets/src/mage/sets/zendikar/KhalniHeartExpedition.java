@@ -41,7 +41,6 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.counters.common.QuestCounter;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -56,7 +55,7 @@ public class KhalniHeartExpedition extends CardImpl<KhalniHeartExpedition> {
         this.expansionSetCode = "ZEN";
         this.color.setGreen(true);
 
-        this.addAbility(new LandfallAbility(new AddCountersSourceEffect(new QuestCounter()), true));
+        this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay),
