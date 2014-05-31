@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author LevelX2
  */
-public class FuseCounter extends Counter<FuseCounter> {
+public class FuseCounter extends Counter {
 
     public FuseCounter() {
         super("fuse");

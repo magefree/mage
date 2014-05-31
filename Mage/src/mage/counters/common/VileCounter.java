@@ -34,7 +34,7 @@ import mage.counters.Counter;
  * @author LevelX2
  */
 
-public class VileCounter extends Counter<VileCounter> {
+public class VileCounter extends Counter {
 
     public VileCounter() {
         super("vile");

@@ -33,7 +33,7 @@ import mage.counters.Counter;
  *
  * @author jeff
  */
-public class PetrificationCounter extends Counter<PetrificationCounter> {
+public class PetrificationCounter extends Counter {
 
     public PetrificationCounter() {
         super("petrification");

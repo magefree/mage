@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author noxx
  */
-public class DespairCounter extends Counter<DespairCounter> {
+public class DespairCounter extends Counter {
 
     public DespairCounter() {
         super("Despair");

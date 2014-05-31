@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class TimeCounter extends Counter<TimeCounter> {
+public class TimeCounter extends Counter {
 
     public TimeCounter() {
         super("Time");

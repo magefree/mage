@@ -107,7 +107,7 @@ class WallOfRootsCost extends CostImpl<WallOfRootsCost> {
     }
 }
 
-class WallOfRootsCounter extends BoostCounter<WallOfRootsCounter> {
+class WallOfRootsCounter extends BoostCounter {
 
     public WallOfRootsCounter() {
         super(0, -1);

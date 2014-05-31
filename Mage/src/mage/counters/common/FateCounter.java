@@ -7,7 +7,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class FateCounter extends Counter<FateCounter> {
+public class FateCounter extends Counter {
 
     public FateCounter() {
         super("Fate");

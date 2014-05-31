@@ -7,7 +7,7 @@ import mage.counters.Counter;
  *
  * @author Loki
  */
-public class DevotionCounter extends Counter<DevotionCounter> {
+public class DevotionCounter extends Counter {
 
     public DevotionCounter() {
         super("Devotion");

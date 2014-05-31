@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author jeffwadsworth
  */
-public class BriberyCounter extends Counter<BriberyCounter> {
+public class BriberyCounter extends Counter {
 
     public BriberyCounter() {
         super("bribery");

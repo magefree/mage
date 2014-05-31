@@ -7,7 +7,7 @@ import mage.counters.Counter;
  *
  * @author Loki
  */
-public class DivinityCounter extends Counter<DivinityCounter> {
+public class DivinityCounter extends Counter {
 
     public DivinityCounter() {
         super("Divinity");

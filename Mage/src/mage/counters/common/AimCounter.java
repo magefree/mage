@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author LevelX
  */
-public class AimCounter extends Counter<AimCounter> {
+public class AimCounter extends Counter {
 
     public AimCounter() {
         super("aim");

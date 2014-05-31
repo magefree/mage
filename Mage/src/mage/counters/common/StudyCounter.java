@@ -33,7 +33,7 @@ import mage.counters.Counter;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class StudyCounter extends Counter<StudyCounter> {
+public class StudyCounter extends Counter {
 
     public StudyCounter() {
         this(1);

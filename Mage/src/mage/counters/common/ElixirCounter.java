@@ -33,7 +33,7 @@ import mage.counters.Counter;
  *
  * @author North
  */
-public class ElixirCounter extends Counter<ElixirCounter> {
+public class ElixirCounter extends Counter {
 
     public ElixirCounter() {
         super("Elixir");

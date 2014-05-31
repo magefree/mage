@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class ChargeCounter extends Counter<ChargeCounter> {
+public class ChargeCounter extends Counter {
 
     public ChargeCounter() {
         super("Charge");

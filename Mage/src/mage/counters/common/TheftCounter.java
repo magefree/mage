@@ -33,7 +33,7 @@ import mage.counters.Counter;
  *
  * @author LevelX2
  */
-public class TheftCounter  extends Counter<TheftCounter> {
+public class TheftCounter  extends Counter {
 
     public TheftCounter() {
         super("Theft");

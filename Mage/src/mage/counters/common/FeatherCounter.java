@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class FeatherCounter extends Counter<FeatherCounter> {
+public class FeatherCounter extends Counter {
 
     public FeatherCounter() {
         super("Feather");

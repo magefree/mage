@@ -33,7 +33,7 @@ import mage.counters.Counter;
  *
  * @author Plopman
  */
-public class IceCounter extends Counter<IceCounter> {
+public class IceCounter extends Counter {
 
     public IceCounter() {
         super("Ice");

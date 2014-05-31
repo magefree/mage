@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author Loki
  */
-public class SporeCounter extends Counter<SporeCounter> {
+public class SporeCounter extends Counter {
 
     public SporeCounter() {
         super("Spore");

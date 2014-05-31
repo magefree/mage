@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class EonCounter extends Counter<EonCounter> {
+public class EonCounter extends Counter {
 
     public EonCounter() {
         super("Eon");

@@ -33,7 +33,7 @@ import mage.counters.Counter;
  *
  * @author North
  */
-public class EyeballCounter  extends Counter<EyeballCounter> {
+public class EyeballCounter  extends Counter {
 
     public EyeballCounter() {
         super("Eyeball");

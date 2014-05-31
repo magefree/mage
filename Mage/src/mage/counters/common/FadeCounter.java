@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class FadeCounter extends Counter<FadeCounter> {
+public class FadeCounter extends Counter {
 
     public FadeCounter() {
         super("Fade");

@@ -33,7 +33,7 @@ import mage.counters.Counter;
  *
  * @author jeff
  */
-public class PressureCounter extends Counter<PressureCounter> {
+public class PressureCounter extends Counter {
 
     public PressureCounter() {
         super("pressure");

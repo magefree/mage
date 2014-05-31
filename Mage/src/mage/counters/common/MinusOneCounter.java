@@ -34,7 +34,7 @@ import mage.counters.BoostCounter;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MinusOneCounter extends BoostCounter<MinusOneCounter> {
+public class MinusOneCounter extends BoostCounter {
 
     public MinusOneCounter() {
         super(-1, -1);

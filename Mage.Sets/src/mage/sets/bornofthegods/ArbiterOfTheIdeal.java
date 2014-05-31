@@ -141,7 +141,7 @@ class ArbiterOfTheIdealEffect extends OneShotEffect<ArbiterOfTheIdealEffect> {
     }
 }
 
-class ManifestationCounter extends Counter<ManifestationCounter> {
+class ManifestationCounter extends Counter {
 
     public ManifestationCounter() {
         super("manifestation");

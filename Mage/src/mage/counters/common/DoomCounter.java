@@ -35,7 +35,7 @@ import mage.counters.Counter;
  * @author LevelX2
  */
 
-public class DoomCounter extends Counter<DoomCounter> {
+public class DoomCounter extends Counter {
 
     public DoomCounter() {
         this(1);

@@ -34,7 +34,7 @@ import mage.counters.Counter;
  * @author LevelX2
  */
 
-public class PlagueCounter extends Counter<PlagueCounter> {
+public class PlagueCounter extends Counter {
 
     public PlagueCounter() {
         super("plague");

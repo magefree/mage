@@ -87,7 +87,7 @@ public class SenseiGoldenTail extends CardImpl<SenseiGoldenTail> {
 }
 
 
-class TrainingCounter extends Counter<TrainingCounter> {
+class TrainingCounter extends Counter {
 
     public TrainingCounter() {
         this(1);

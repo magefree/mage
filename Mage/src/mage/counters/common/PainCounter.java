@@ -33,7 +33,7 @@ import mage.counters.Counter;
  *
  * @author North
  */
-public class PainCounter extends Counter<PainCounter> {
+public class PainCounter extends Counter {
 
     public PainCounter() {
         super("Pain");

@@ -33,7 +33,7 @@ import mage.counters.Counter;
  *
  * @author jeffwadsworth
  */
-public class TowerCounter extends Counter<TowerCounter> {
+public class TowerCounter extends Counter {
 
     public TowerCounter() {
         super("Tower");

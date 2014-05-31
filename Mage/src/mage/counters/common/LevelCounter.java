@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class LevelCounter extends Counter<LevelCounter> {
+public class LevelCounter extends Counter {
 
     public LevelCounter() {
         super("Level");

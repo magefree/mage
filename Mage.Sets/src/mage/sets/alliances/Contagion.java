@@ -86,7 +86,7 @@ public class Contagion extends CardImpl<Contagion> {
     }
 }
 
-class ContagionCounter extends BoostCounter<ContagionCounter> {
+class ContagionCounter extends BoostCounter {
 
     public ContagionCounter(int count) {
         super(-2, -1);

@@ -12,7 +12,7 @@ import mage.counters.Counter;
  *
  * @author Plopman
  */
-public class DepletionCounter extends Counter<DepletionCounter> {
+public class DepletionCounter extends Counter {
 
     public DepletionCounter() {
         super("Depletion");

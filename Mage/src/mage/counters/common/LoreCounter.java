@@ -5,7 +5,7 @@ import mage.counters.Counter;
 /**
  * Lore counter
  */
-public class LoreCounter extends Counter<LoreCounter> {
+public class LoreCounter extends Counter {
     public LoreCounter() {
         super("Lore");
         this.count = 1;

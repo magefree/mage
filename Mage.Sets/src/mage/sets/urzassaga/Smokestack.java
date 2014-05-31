@@ -72,7 +72,7 @@ public class Smokestack extends CardImpl<Smokestack> {
     }
 }
 
-class SootCounter extends Counter<SootCounter> {
+class SootCounter extends Counter {
 
     public SootCounter() {
         super("soot");

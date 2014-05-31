@@ -33,9 +33,8 @@ import java.io.Serializable;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public class Counter<T extends Counter<T>> implements Serializable {
+public class Counter implements Serializable {
 
     protected String name;
     protected int count;
@@ -86,7 +85,7 @@ public class Counter<T extends Counter<T>> implements Serializable {
         return count;
     }
 
-    public T copy() {
-        return (T)new Counter(this);
+    public Counter copy() {
+        return new Counter(this);
     }
 }

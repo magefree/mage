@@ -34,7 +34,7 @@ import mage.counters.Counter;
  *
  * @author LevelX2
  */
-public class StorageCounter extends Counter<SlimeCounter> {
+public class StorageCounter extends Counter {
 
     public StorageCounter() {
         this(1);

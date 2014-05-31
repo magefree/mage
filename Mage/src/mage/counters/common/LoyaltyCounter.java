@@ -41,7 +41,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class LoyaltyCounter extends Counter<LoyaltyCounter> {
+public class LoyaltyCounter extends Counter {
 
     public LoyaltyCounter() {
         super("Loyalty");

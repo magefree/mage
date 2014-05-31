@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class PoisonCounter extends Counter<PoisonCounter> {
+public class PoisonCounter extends Counter {
 
     public PoisonCounter() {
         super("Poison");

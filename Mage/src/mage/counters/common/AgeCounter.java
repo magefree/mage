@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author Plopman
  */
-public class AgeCounter extends Counter<AgeCounter> {
+public class AgeCounter extends Counter {
 
     public AgeCounter() {
         super("age");

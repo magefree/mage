@@ -7,7 +7,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class WishCounter extends Counter<WishCounter> {
+public class WishCounter extends Counter {
 
     public WishCounter() {
         super("Wish");

@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class ArrowheadCounter extends Counter<ArrowheadCounter> {
+public class ArrowheadCounter extends Counter {
 
     public ArrowheadCounter() {
         super("arrowhead");

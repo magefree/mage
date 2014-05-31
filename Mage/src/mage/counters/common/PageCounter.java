@@ -33,7 +33,7 @@ import mage.counters.Counter;
  *
  * @author Backfir3
  */
-public class PageCounter extends Counter<PageCounter> {
+public class PageCounter extends Counter {
 
     public PageCounter() {
         super("Page");

@@ -35,7 +35,7 @@ import mage.counters.Counter;
  *
  * @author nantuko
  */
-public class QuestCounter extends Counter<QuestCounter> {
+public class QuestCounter extends Counter {
 
     public QuestCounter() {
         super("Quest");

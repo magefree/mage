@@ -33,7 +33,7 @@ import mage.counters.Counter;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SlimeCounter extends Counter<SlimeCounter> {
+public class SlimeCounter extends Counter {
 
     public SlimeCounter() {
         this(1);

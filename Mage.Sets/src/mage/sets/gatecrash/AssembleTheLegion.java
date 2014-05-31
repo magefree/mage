@@ -112,7 +112,7 @@ class AssembleTheLegionEffect extends OneShotEffect<AssembleTheLegionEffect> {
     }
 }
 
-class MusterCounter extends Counter<MusterCounter> {
+class MusterCounter extends Counter {
 
     public MusterCounter() {
        super("Muster");

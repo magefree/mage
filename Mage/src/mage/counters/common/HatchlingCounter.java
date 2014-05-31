@@ -6,7 +6,7 @@ import mage.counters.Counter;
  * Hatchling counter
  * @author Loki
  */
-public class HatchlingCounter extends Counter<HatchlingCounter> {
+public class HatchlingCounter extends Counter {
     public HatchlingCounter() {
         super("Hatchling");
         this.count = 1;
