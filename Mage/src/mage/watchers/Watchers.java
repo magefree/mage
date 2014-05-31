@@ -70,28 +70,7 @@ public class Watchers extends HashMap<String, Watcher> {
         }
     }
 
-//    public void setSourceId(UUID sourceId) {
-//        for (Watcher watcher: this.values()) {
-//            watcher.setSourceId(sourceId);
-//        }
-//    }
-//    
-//    public void setControllerId(UUID controllerId) {
-//        for (Watcher watcher: this.values()) {
-//            watcher.setControllerId(controllerId);
-//        }
-//    }
-
     public Watcher get(String key, UUID id) {
         return this.get(id + key);
     }
-
-//    public Watcher get(UUID controllerId, UUID sourceId, String key) {
-//        for (Watcher watcher: this) {
-//            if ((watcher.getControllerId() == null || watcher.getControllerId().equals(controllerId)) && watcher.getKey().equals(key) && watcher.getSourceId().equals(sourceId))
-//                return watcher;
-//        }
-//        return null;
-//    }
-
 }
