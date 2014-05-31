@@ -36,6 +36,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -69,13 +70,15 @@ public class CrimsonHellkite extends CardImpl<CrimsonHellkite> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {X}, {tap}: Crimson Hellkite deals X damage to target creature. Spend only red mana this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue()), new ManaCostsImpl("{X}"));
+        Effect effect = new DamageTargetEffect(new ManacostVariableValue());
+        effect.setText("{this} deals X damage to target creature. Spend only red mana this way");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         VariableCost variableCost = ability.getManaCostsToPay().getVariableCosts().get(0);
         if (variableCost instanceof VariableManaCost) {
             ((VariableManaCost) variableCost).setFilter(filterRedMana);
         }
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

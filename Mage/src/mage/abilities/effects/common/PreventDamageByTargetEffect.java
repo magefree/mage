@@ -80,12 +80,20 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl<PreventDam
         }
         if (amountToPrevent == Integer.MAX_VALUE) {
             StringBuilder sb = new StringBuilder();
-            sb.append("Prevent all damage target ");
+            sb.append("Prevent all");
+            if (onlyCombat) {
+                sb.append("combat ");
+            }
+            sb.append(" damage target ");
             sb.append(mode.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
             return sb.toString();
         } else {
             StringBuilder sb = new StringBuilder();
-            sb.append("Prevent the next ").append(amountToPrevent).append(" damage that ");
+            sb.append("Prevent the next ").append(amountToPrevent);
+            if (onlyCombat) {
+                sb.append("combat ");
+            }
+            sb.append(" damage that ");
             sb.append(mode.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
             return sb.toString();
         }

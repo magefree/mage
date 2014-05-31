@@ -28,17 +28,17 @@
 package mage.sets.thedark;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetAttackingCreature;
 
@@ -54,9 +54,13 @@ public class MazeOfIth extends CardImpl<MazeOfIth> {
 
         // {tap}: Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        ability.addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true));
-        ability.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, true));
-        ability.addTarget(new TargetAttackingCreature());
+        Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
+        effect.setText("Prevent all combat damage that would be dealt to");
+        ability.addEffect(effect);
+        effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, true);
+        effect.setText("and dealt by that creature this turn");
+        ability.addEffect(effect);
+        ability.addTarget(new TargetAttackingCreature(true));
         this.addAbility(ability);
     }
 
