@@ -32,22 +32,26 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class ZombieMaster extends CardImpl<ZombieMaster> {
 
-        private static final FilterPermanent filter = new FilterPermanent("Zombies");
+    private static final FilterPermanent filter = new FilterPermanent("Zombies");
 
     static {
         filter.add(new SubtypePredicate("Zombie"));
@@ -65,7 +69,9 @@ public class ZombieMaster extends CardImpl<ZombieMaster> {
         // Other Zombie creatures have swampwalk.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new SwampwalkAbility(), Duration.WhileOnBattlefield, filter, true)));
         // Other Zombies have "{B}: Regenerate this permanent."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}{B}")), Duration.WhileOnBattlefield, filter, true)));
+        Effect effect = new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")), Duration.WhileOnBattlefield, filter, true);
+        effect.setText("Other Zombies have \"{B}: Regenerate this permanent.\"");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }
 
