@@ -28,51 +28,8 @@
 
 package mage.counters;
 
-import mage.counters.common.AgeCounter;
-import mage.counters.common.AimCounter;
-import mage.counters.common.ArrowheadCounter;
-import mage.counters.common.AwakeningCounter;
-import mage.counters.common.BlazeCounter;
-import mage.counters.common.BriberyCounter;
-import mage.counters.common.ChargeCounter;
-import mage.counters.common.DepletionCounter;
-import mage.counters.common.DespairCounter;
-import mage.counters.common.DevotionCounter;
-import mage.counters.common.DivinityCounter;
-import mage.counters.common.DoomCounter;
-import mage.counters.common.ElixirCounter;
-import mage.counters.common.EonCounter;
-import mage.counters.common.EyeballCounter;
-import mage.counters.common.FadeCounter;
-import mage.counters.common.FateCounter;
-import mage.counters.common.FeatherCounter;
-import mage.counters.common.FuseCounter;
-import mage.counters.common.HatchlingCounter;
-import mage.counters.common.HoofprintCounter;
-import mage.counters.common.IceCounter;
-import mage.counters.common.KiCounter;
-import mage.counters.common.LevelCounter;
-import mage.counters.common.LoreCounter;
-import mage.counters.common.LoyaltyCounter;
-import mage.counters.common.MiningCounter;
 import mage.counters.common.MinusOneCounter;
-import mage.counters.common.PageCounter;
-import mage.counters.common.PainCounter;
-import mage.counters.common.PetrificationCounter;
-import mage.counters.common.PlagueCounter;
 import mage.counters.common.PlusOneCounter;
-import mage.counters.common.PoisonCounter;
-import mage.counters.common.PressureCounter;
-import mage.counters.common.QuestCounter;
-import mage.counters.common.SlimeCounter;
-import mage.counters.common.SporeCounter;
-import mage.counters.common.StorageCounter;
-import mage.counters.common.StudyCounter;
-import mage.counters.common.TheftCounter;
-import mage.counters.common.TimeCounter;
-import mage.counters.common.TowerCounter;
-import mage.counters.common.VileCounter;
-import mage.counters.common.WishCounter;
 
 /**
  * Enum for counters, names and instances.
@@ -80,51 +37,51 @@ import mage.counters.common.WishCounter;
  * @author nantuko
  */
 public enum CounterType {
-    AGE(new AgeCounter().name),
-    AIM(new AimCounter().name),
-    ARROWHEAD(new ArrowheadCounter().name),
-    AWAKENING(new AwakeningCounter().name),
-    BLAZE(new BlazeCounter().name),
-    BRIBERY(new BriberyCounter().name),
-    CHARGE(new ChargeCounter().name),
-    DEPLETION(new DepletionCounter().name),
-    DESPAIR(new DespairCounter().name),
-    DEVOTION(new DevotionCounter().name),
-    DIVINITY(new DivinityCounter().name),
-    DOOM(new DoomCounter().name),
-    ELIXIR(new ElixirCounter().name),
-    EON(new EonCounter().name),
-    EYEBALL(new EyeballCounter().name),
-    FADE(new FadeCounter().name),
-    FATE(new FateCounter().name),
-    FEATHER(new FeatherCounter().name),
-    FUSE(new FuseCounter().name),
-    HATCHLING(new HatchlingCounter().name),
-    HOOFPRINT(new HoofprintCounter().name),
-    ICE(new IceCounter().name),
-    KI(new KiCounter().name),
-    LEVEL(new LevelCounter().name),
-    LORE(new LoreCounter().name),
-    LOYALTY(new LoyaltyCounter().name),
+    AGE("Age"),
+    AIM("Aim"),
+    ARROWHEAD("Arrowhead"),
+    AWAKENING("Awakening"),
+    BLAZE("Blaze"),
+    BRIBERY("Bribery"),
+    CHARGE("Charge"),
+    DEPLETION("Depletion"),
+    DESPAIR("Despair"),
+    DEVOTION("Devotion"),
+    DIVINITY("Divinity"),
+    DOOM("Doom"),
+    ELIXIR("Elixir"),
+    EON("Eon"),
+    EYEBALL("Eyeball"),
+    FADE("Fade"),
+    FATE("Fate"),
+    FEATHER("Feather"),
+    FUSE("Fuse"),
+    HATCHLING("Hatchling"),
+    HOOFPRINT("Hoofprint"),
+    ICE("Ice"),
+    KI("Ki"),
+    LEVEL("Level"),
+    LORE("Lore"),
+    LOYALTY("Loyalty"),
     M1M1(new MinusOneCounter().name),
-    MINING(new MiningCounter().name),
+    MINING("Mining"),
     P1P1(new PlusOneCounter().name),
-    PAGE(new PageCounter().name),
-    PAIN(new PainCounter().name),
-    PETRIFICATION(new PetrificationCounter().name),
-    PLAGUE(new PlagueCounter().name),
-    POISON(new PoisonCounter().name),
-    PRESSURE(new PressureCounter().name),
-    QUEST(new QuestCounter().name),
-    SLIME(new SlimeCounter().name),
-    SPORE(new SporeCounter().name),
-    STORAGE(new StorageCounter().name),
-    STUDY(new StudyCounter().name),
-    THEFT(new TheftCounter().name),
-    TIME(new TimeCounter().name),
-    TOWER(new TowerCounter().name),
-    VILE(new VileCounter().name),
-    WISH(new WishCounter().name);
+    PAGE("Page"),
+    PAIN("Pain"),
+    PETRIFICATION("Petrification"),
+    PLAGUE("Plague"),
+    POISON("Poison"),
+    PRESSURE("Pressure"),
+    QUEST("Quest"),
+    SLIME("Slime"),
+    SPORE("Spore"),
+    STORAGE("Storage"),
+    STUDY("Study"),
+    THEFT("Theft"),
+    TIME("Time"),
+    TOWER("Tower"),
+    VILE("Vile"),
+    WISH("Wish");
 
     private final String name;
 
@@ -157,97 +114,13 @@ public enum CounterType {
      * @return
      */
     public Counter createInstance(int amount) {
-        switch(this) {
-            case TOWER:
-                return new TowerCounter(amount);
+        switch (this) {
             case P1P1:
                 return new PlusOneCounter(amount);
             case M1M1:
                 return new MinusOneCounter(amount);
-            case POISON:
-                return new PoisonCounter(amount);
-            case CHARGE:
-                return new ChargeCounter(amount);
-            case DEPLETION:
-                return new DepletionCounter(amount);
-            case DOOM:
-                return new DoomCounter(amount);
-            case LORE:
-                return new LoreCounter(amount);
-            case LOYALTY:
-                return new LoyaltyCounter(amount);
-            case LEVEL:
-                return new LevelCounter(amount);
-            case TIME:
-                return new TimeCounter(amount);
-            case FADE:
-                return new FadeCounter(amount);
-            case FATE:
-                return new FateCounter(amount);
-            case FEATHER:
-                return new FeatherCounter(amount);
-            case FUSE:
-                return new FuseCounter(amount);
-            case QUEST:
-                return new QuestCounter(amount);
-            case ARROWHEAD:
-                return new ArrowheadCounter(amount);
-            case AIM:
-                return new AimCounter(amount);
-            case EON:
-                return new EonCounter(amount);
-            case AWAKENING:
-                return new AwakeningCounter(amount);
-            case DEVOTION:
-                return new DevotionCounter(amount);
-            case DIVINITY:
-                return new DivinityCounter(amount);
-            case WISH:
-                return new WishCounter(amount);
-            case HOOFPRINT:
-                return new HoofprintCounter(amount);
-            case HATCHLING:
-                return new HatchlingCounter(amount);
-            case KI:
-                return new KiCounter(amount);
-            case SLIME:
-                return new SlimeCounter(amount);
-            case SPORE:
-                return new SporeCounter(amount);
-            case STORAGE:
-                return new StorageCounter(amount);
-            case STUDY:
-                return new StudyCounter(amount);
-            case EYEBALL:
-                return new EyeballCounter(amount);
-            case ELIXIR:
-                return new ElixirCounter(amount);
-            case PAIN:
-                return new PainCounter(amount);
-            case DESPAIR:
-                return new DespairCounter(amount);
-            case PAGE:
-                return new PageCounter(amount);
-            case PLAGUE:
-                return new PlagueCounter(amount);
-            case PRESSURE:
-                return new PressureCounter(amount);
-            case PETRIFICATION:
-                return new PetrificationCounter(amount);
-            case MINING:
-                return new MiningCounter(amount);
-            case THEFT:
-                return new TheftCounter(amount);
-            case AGE:
-                return new AgeCounter(amount);
-            case BLAZE:
-                return new BlazeCounter(amount);
-            case ICE:
-                return new IceCounter(amount);
-            case VILE:
-                return new VileCounter(amount);
-                                                                                    
+            default:
+                return new Counter(name, amount);
         }
-        return null;
     }
 }
