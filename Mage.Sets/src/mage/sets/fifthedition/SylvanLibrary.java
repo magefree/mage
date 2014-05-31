@@ -49,7 +49,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -161,7 +161,7 @@ class SylvanLibraryEffect extends OneShotEffect<SylvanLibraryEffect> {
     }
 }
 
-class CardsDrawnThisTurnWatcher extends WatcherImpl<CardsDrawnThisTurnWatcher> {
+class CardsDrawnThisTurnWatcher extends Watcher<CardsDrawnThisTurnWatcher> {
 
     private final Set<UUID> cardsDrawnThisTurn = new HashSet<UUID>();
 

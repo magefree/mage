@@ -44,7 +44,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.UUID;
 import mage.constants.WatcherScope;
@@ -76,7 +76,7 @@ public class TunnelIgnus extends CardImpl<TunnelIgnus> {
 
 }
 
-class TunnelIgnusWatcher extends WatcherImpl {
+class TunnelIgnusWatcher extends Watcher {
     protected Map<UUID, Integer> counts = new HashMap<UUID, Integer>();
 
     public TunnelIgnusWatcher() {

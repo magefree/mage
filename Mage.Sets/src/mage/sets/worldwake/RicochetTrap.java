@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -86,7 +86,7 @@ public class RicochetTrap extends CardImpl<RicochetTrap> {
     }
 }
 
-class RicochetTrapWatcher extends WatcherImpl<RicochetTrapWatcher> {
+class RicochetTrapWatcher extends Watcher<RicochetTrapWatcher> {
 
     public RicochetTrapWatcher() {
         super("RicochetTrapWatcher", WatcherScope.GAME);

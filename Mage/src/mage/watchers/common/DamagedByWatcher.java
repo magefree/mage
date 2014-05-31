@@ -31,7 +31,7 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamagedByWatcher extends WatcherImpl<DamagedByWatcher> {
+public class DamagedByWatcher extends Watcher<DamagedByWatcher> {
 
     public List<UUID> damagedCreatures = new ArrayList<>();
 

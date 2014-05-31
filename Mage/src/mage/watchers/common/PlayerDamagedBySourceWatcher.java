@@ -35,14 +35,14 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.util.CardUtil;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  * Watcher stores whitch sources did damage to a player
  * 
  * @author LevelX
  */
-public class PlayerDamagedBySourceWatcher extends WatcherImpl<PlayerDamagedBySourceWatcher> {
+public class PlayerDamagedBySourceWatcher extends Watcher<PlayerDamagedBySourceWatcher> {
 
     private Set<String> damageSourceIds = new HashSet<String>();
 

@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -129,7 +129,7 @@ class GainReboundEffect extends ContinuousEffectImpl<GainReboundEffect> {
 
 class AttachedReboundAbility extends ReboundAbility {}
 
-class LeavesBattlefieldWatcher extends WatcherImpl<LeavesBattlefieldWatcher> {
+class LeavesBattlefieldWatcher extends Watcher<LeavesBattlefieldWatcher> {
 
     public LeavesBattlefieldWatcher() {
         super("LeavesBattlefieldWatcher", WatcherScope.CARD);

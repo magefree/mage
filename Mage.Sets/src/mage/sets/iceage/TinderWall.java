@@ -48,7 +48,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +97,7 @@ public class TinderWall extends CardImpl<TinderWall> {
 }
 
 
-class BlockedByWatcher extends WatcherImpl<BlockedByWatcher> {
+class BlockedByWatcher extends Watcher<BlockedByWatcher> {
 
     public List<UUID> blockedByWatcher = new ArrayList<UUID>();
 

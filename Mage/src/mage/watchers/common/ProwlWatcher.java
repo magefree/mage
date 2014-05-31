@@ -41,7 +41,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  * Watcher stores with which creature subtypes a player made combat damage to
@@ -49,7 +49,7 @@ import mage.watchers.WatcherImpl;
  *
  * @author LevelX
  */
-public class ProwlWatcher extends WatcherImpl<ProwlWatcher> {
+public class ProwlWatcher extends Watcher<ProwlWatcher> {
 
     private Map<UUID, Set<String>> damagingSubtypes = new HashMap<UUID, Set<String>>();
     private Set<UUID> allSubtypes = new HashSet<UUID>();

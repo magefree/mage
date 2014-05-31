@@ -30,7 +30,7 @@ package mage.watchers.common;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class AttackedThisTurnWatcher extends WatcherImpl<AttackedThisTurnWatcher> {
+public class AttackedThisTurnWatcher extends Watcher<AttackedThisTurnWatcher> {
 
     public Set<UUID> attackedThisTurnCreatures = new HashSet<UUID>();
 

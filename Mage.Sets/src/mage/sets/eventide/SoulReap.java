@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -104,7 +104,7 @@ class CastBlackSpellThisTurnCondition implements Condition {
     }
 }
 
-class SoulReapWatcher extends WatcherImpl<SoulReapWatcher> {
+class SoulReapWatcher extends Watcher<SoulReapWatcher> {
 
     private static final FilterSpell filter = new FilterSpell();
     

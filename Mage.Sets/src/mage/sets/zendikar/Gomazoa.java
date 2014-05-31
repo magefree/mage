@@ -47,7 +47,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -140,7 +140,7 @@ class GomazoaEffect extends OneShotEffect<GomazoaEffect> {
     }
 }
 
-class BlockedByWatcher extends WatcherImpl<BlockedByWatcher> {
+class BlockedByWatcher extends Watcher<BlockedByWatcher> {
 
     public List<UUID> blockedByWatcher = new ArrayList<>();
 

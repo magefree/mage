@@ -46,7 +46,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -97,7 +97,7 @@ class CastBlueSpellThisTurnCondition implements Condition {
     }
 }
 
-class DreamThiefWatcher extends WatcherImpl<DreamThiefWatcher> {
+class DreamThiefWatcher extends Watcher<DreamThiefWatcher> {
 
     private static final FilterSpell filter = new FilterSpell();
     static {

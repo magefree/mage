@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -144,7 +144,7 @@ class ShipbreakerKrakenReplacementEffect extends ReplacementEffectImpl<Shipbreak
     }
 }
 
-class ShipbreakerKrakenWatcher extends WatcherImpl<ShipbreakerKrakenWatcher> {
+class ShipbreakerKrakenWatcher extends Watcher<ShipbreakerKrakenWatcher> {
 
     ShipbreakerKrakenWatcher () {
         super("ControlLost", WatcherScope.CARD);

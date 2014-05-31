@@ -45,13 +45,12 @@ import mage.constants.WatcherScope;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.util.CardUtil;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -173,7 +172,7 @@ class JelevaNephaliasCastEffect extends OneShotEffect<JelevaNephaliasCastEffect>
     }
 }
 
-class JelevaNephaliasWatcher extends WatcherImpl<JelevaNephaliasWatcher> {
+class JelevaNephaliasWatcher extends Watcher<JelevaNephaliasWatcher> {
 
     private Map<Integer, Integer> manaSpendToCast = new HashMap<Integer, Integer>(); // cast
 

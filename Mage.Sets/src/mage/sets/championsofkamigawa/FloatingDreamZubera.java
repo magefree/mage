@@ -44,7 +44,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  * @author Loki
@@ -75,7 +75,7 @@ public class FloatingDreamZubera extends CardImpl<FloatingDreamZubera> {
 }
 
 
-class ZuberasDiedWatcher extends WatcherImpl<ZuberasDiedWatcher> {
+class ZuberasDiedWatcher extends Watcher<ZuberasDiedWatcher> {
 
     public int zuberasDiedThisTurn = 0;
 

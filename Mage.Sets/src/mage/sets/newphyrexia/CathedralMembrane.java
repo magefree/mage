@@ -37,7 +37,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,7 +135,7 @@ class CathedralMembraneEffect extends OneShotEffect<CathedralMembraneEffect> {
     }
 }
 
-class CathedralMembraneWatcher extends WatcherImpl<CathedralMembraneWatcher> {
+class CathedralMembraneWatcher extends Watcher<CathedralMembraneWatcher> {
 
     public List<UUID> blockedCreatures = new ArrayList<UUID>();
 

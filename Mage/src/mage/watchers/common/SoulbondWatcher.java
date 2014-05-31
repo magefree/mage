@@ -44,14 +44,14 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  * Reacts on various events to pair or unpair creatures on the battlefield.
  *
  * @author noxx
  */
-public class SoulbondWatcher extends WatcherImpl<SoulbondWatcher> {
+public class SoulbondWatcher extends Watcher<SoulbondWatcher> {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another not paired creature you control");
 

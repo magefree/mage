@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -99,7 +99,7 @@ class FaithsRewardEffect extends OneShotEffect<FaithsRewardEffect> {
     }
 }
 
-class FaithsRewardWatcher extends WatcherImpl<FaithsRewardWatcher> {
+class FaithsRewardWatcher extends Watcher<FaithsRewardWatcher> {
     ArrayList<UUID> cards = new ArrayList<UUID>();
 
     public FaithsRewardWatcher() {

@@ -50,7 +50,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -139,7 +139,7 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl<SavageSummoningAs
 }
 
 
-class SavageSummoningWatcher extends WatcherImpl<SavageSummoningWatcher> {
+class SavageSummoningWatcher extends Watcher<SavageSummoningWatcher> {
 
     private Set<String> savageSummoningSpells = new HashSet<String>();;
     private Map<UUID, Set<String>> spellsCastWithSavageSummoning = new LinkedHashMap<UUID, Set<String>>();

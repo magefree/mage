@@ -39,7 +39,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -105,7 +104,7 @@ class IncursionTriggeredAbility extends TriggeredAbilityImpl<IncursionTriggeredA
     }
 }
 
-class IncursionWatcher extends WatcherImpl<IncursionWatcher> {
+class IncursionWatcher extends Watcher<IncursionWatcher> {
 
     int spellCount = 0;
 

@@ -40,7 +40,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.UUID;
 
@@ -105,7 +105,7 @@ class TargetPlayerCardsInHandCount implements DynamicValue {
     }
 }
 
-class CardsDrawnOpponentWatcher extends WatcherImpl<CardsDrawnOpponentWatcher> {
+class CardsDrawnOpponentWatcher extends Watcher<CardsDrawnOpponentWatcher> {
 
     int cardsDrawn;
 

@@ -43,7 +43,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -78,7 +78,7 @@ public class WhiplashTrap extends CardImpl<WhiplashTrap> {
     }
 }
 
-class WhiplashTrapWatcher extends WatcherImpl<WhiplashTrapWatcher> {
+class WhiplashTrapWatcher extends Watcher<WhiplashTrapWatcher> {
 
     private Map<UUID, Integer> amountOfCreaturesPlayedThisTurn = new HashMap<UUID, Integer>();
 

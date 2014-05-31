@@ -43,7 +43,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -76,7 +76,7 @@ public class BalothCageTrap extends CardImpl<BalothCageTrap> {
     }
 }
 
-class BalothCageTrapWatcher extends WatcherImpl<BalothCageTrapWatcher> {
+class BalothCageTrapWatcher extends Watcher<BalothCageTrapWatcher> {
 
     public BalothCageTrapWatcher() {
         super("BalothCageTrapWatcher", WatcherScope.GAME);

@@ -53,7 +53,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -159,7 +159,7 @@ class TidebinderMageEffect extends ReplacementEffectImpl<TidebinderMageEffect> {
     }
 }
 
-class TidebinderMageWatcher extends WatcherImpl<TidebinderMageWatcher> {
+class TidebinderMageWatcher extends Watcher<TidebinderMageWatcher> {
 
     TidebinderMageWatcher () {
         super("ControlLost", WatcherScope.CARD);

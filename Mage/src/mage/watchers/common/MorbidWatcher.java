@@ -35,13 +35,13 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MorbidWatcher extends WatcherImpl<MorbidWatcher> {
+public class MorbidWatcher extends Watcher<MorbidWatcher> {
 
     public MorbidWatcher() {
         super("Morbid", WatcherScope.GAME);

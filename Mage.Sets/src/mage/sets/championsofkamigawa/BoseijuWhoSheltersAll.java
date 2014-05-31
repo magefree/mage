@@ -52,7 +52,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -90,7 +90,7 @@ public class BoseijuWhoSheltersAll extends CardImpl<BoseijuWhoSheltersAll> {
     }
 }
 
-class BoseijuWhoSheltersAllWatcher extends WatcherImpl<BoseijuWhoSheltersAllWatcher> {
+class BoseijuWhoSheltersAllWatcher extends Watcher<BoseijuWhoSheltersAllWatcher> {
 
     public List<UUID> spells = new ArrayList<>();
 

@@ -56,7 +56,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -167,7 +167,7 @@ class UnscytheEffect extends OneShotEffect<UnscytheEffect> {
     }
 }
 
-class EquippedDidDamageWatcher extends WatcherImpl<EquippedDidDamageWatcher> {
+class EquippedDidDamageWatcher extends Watcher<EquippedDidDamageWatcher> {
 
     public List<UUID> equippedDamagedTargets = new ArrayList<UUID>();
 

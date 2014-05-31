@@ -42,7 +42,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -75,7 +74,7 @@ public class SpiritOfTheLabyrinth extends CardImpl<SpiritOfTheLabyrinth> {
     }
 }
 
-class SpiritOfTheLabyrinthWatcher extends WatcherImpl<SpiritOfTheLabyrinthWatcher> {
+class SpiritOfTheLabyrinthWatcher extends Watcher<SpiritOfTheLabyrinthWatcher> {
 
     public SpiritOfTheLabyrinthWatcher() {
         super("DrewCard", WatcherScope.PLAYER);

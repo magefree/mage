@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCardInLibrary;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -99,7 +99,7 @@ class SiftThroughSandsCondition implements Condition {
     }
 }
 
-class SiftThroughSandsWatcher extends WatcherImpl<SiftThroughSandsWatcher> {
+class SiftThroughSandsWatcher extends Watcher<SiftThroughSandsWatcher> {
 
     boolean castPeerThroughDepths = false;
     boolean castReachThroughMists = false;

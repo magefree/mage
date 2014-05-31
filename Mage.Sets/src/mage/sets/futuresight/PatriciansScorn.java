@@ -44,7 +44,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -93,7 +93,7 @@ class CastWhiteSpellThisTurnCondition implements Condition {
     }
 }
 
-class PatriciansScornWatcher extends WatcherImpl<PatriciansScornWatcher> {
+class PatriciansScornWatcher extends Watcher<PatriciansScornWatcher> {
 
     private static final FilterSpell filter = new FilterSpell();
     static {

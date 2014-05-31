@@ -41,7 +41,7 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -75,7 +75,7 @@ public class InfernoTrap extends CardImpl<InfernoTrap> {
     }
 }
 
-class ControllerDamagedByCreatureWatcher extends WatcherImpl<ControllerDamagedByCreatureWatcher> {
+class ControllerDamagedByCreatureWatcher extends Watcher<ControllerDamagedByCreatureWatcher> {
 
     int numCreaturesDamagedController;
 

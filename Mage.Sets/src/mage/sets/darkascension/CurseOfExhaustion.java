@@ -42,7 +42,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -79,7 +78,7 @@ public class CurseOfExhaustion extends CardImpl<CurseOfExhaustion> {
     }
 }
 
-class CurseOfExhaustionWatcher extends WatcherImpl<CurseOfExhaustionWatcher> {
+class CurseOfExhaustionWatcher extends Watcher<CurseOfExhaustionWatcher> {
 
     public CurseOfExhaustionWatcher() {
         super("SpellCast", WatcherScope.PLAYER);

@@ -34,7 +34,7 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 
 
@@ -42,7 +42,7 @@ import mage.watchers.WatcherImpl;
 *
 * @author nantuko, BetaSteward_at_googlemail.com
 */
-public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatcher> {
+public class CastSpellLastTurnWatcher extends Watcher<CastSpellLastTurnWatcher> {
 
     private final Map<UUID, Integer> amountOfSpellsCastOnPrevTurn = new HashMap<>();
     private final Map<UUID, Integer> amountOfSpellsCastOnCurrentTurn = new HashMap<>();

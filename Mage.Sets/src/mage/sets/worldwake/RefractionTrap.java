@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSource;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -83,7 +83,7 @@ public class RefractionTrap extends CardImpl<RefractionTrap> {
     }
 }
 
-class RefractionTrapWatcher extends WatcherImpl<RefractionTrapWatcher> {
+class RefractionTrapWatcher extends Watcher<RefractionTrapWatcher> {
 
     public RefractionTrapWatcher() {
         super("RefractionTrapWatcher", WatcherScope.GAME);

@@ -46,7 +46,6 @@ import mage.game.permanent.token.SnakeToken;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -79,7 +78,7 @@ public class CobraTrap extends CardImpl<CobraTrap> {
     }
 }
 
-class CobraTrapWatcher extends WatcherImpl<CobraTrapWatcher> {
+class CobraTrapWatcher extends Watcher<CobraTrapWatcher> {
 
     public CobraTrapWatcher() {
         super("noncreature permanent destroyed", WatcherScope.PLAYER);

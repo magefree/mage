@@ -43,7 +43,7 @@ import mage.target.common.TargetDiscard;
 
 import java.util.UUID;
 import mage.game.events.GameEvent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  * @author nantuko
@@ -80,7 +80,7 @@ public class CivilizedScholar extends CardImpl<CivilizedScholar> {
     }
 }
 
-class HomicidalBruteWatcher extends WatcherImpl<HomicidalBruteWatcher> {
+class HomicidalBruteWatcher extends Watcher<HomicidalBruteWatcher> {
 
     public HomicidalBruteWatcher() {
         super("HomicidalBruteAttacked", WatcherScope.CARD);
