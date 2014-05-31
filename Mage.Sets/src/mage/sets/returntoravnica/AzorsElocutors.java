@@ -84,7 +84,7 @@ public class AzorsElocutors extends CardImpl<AzorsElocutors> {
 class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl<AzorsElocutorsTriggeredAbility> {
 
     public AzorsElocutorsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(new Counter("filibuster",1)), false);
+        super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(new Counter("filibuster")), false);
     }
 
     public AzorsElocutorsTriggeredAbility(final AzorsElocutorsTriggeredAbility ability) {
@@ -126,7 +126,7 @@ class AzorsElocutorsEffect extends OneShotEffect<AzorsElocutorsEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addCounters(new Counter("filibuster",1), game);
+            permanent.addCounters(new Counter("filibuster"), game);
             if (permanent.getCounters().getCount("filibuster") > 4) {
                 Player player = game.getPlayer(permanent.getControllerId());
                 if (player != null) {
