@@ -28,9 +28,6 @@
 
 package mage.counters;
 
-import mage.counters.common.MinusOneCounter;
-import mage.counters.common.PlusOneCounter;
-
 /**
  * Enum for counters, names and instances.
  *
@@ -63,9 +60,9 @@ public enum CounterType {
     LEVEL("Level"),
     LORE("Lore"),
     LOYALTY("Loyalty"),
-    M1M1(new MinusOneCounter().name),
+    M1M1(new BoostCounter(-1, -1).name),
     MINING("Mining"),
-    P1P1(new PlusOneCounter().name),
+    P1P1(new BoostCounter(1, 1).name),
     PAGE("Page"),
     PAIN("Pain"),
     PETRIFICATION("Petrification"),
@@ -116,9 +113,9 @@ public enum CounterType {
     public Counter createInstance(int amount) {
         switch (this) {
             case P1P1:
-                return new PlusOneCounter(amount);
+                return new BoostCounter(1, 1, amount);
             case M1M1:
-                return new MinusOneCounter(amount);
+                return new BoostCounter(-1, -1, amount);
             default:
                 return new Counter(name, amount);
         }

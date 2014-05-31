@@ -35,7 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.common.PlusOneCounter;
+import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -64,7 +64,7 @@ public class Soulcatcher extends CardImpl<Soulcatcher> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever a creature with flying dies, put a +1/+1 counter on Soulcatcher.
-        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(new PlusOneCounter()), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter));
     }
 
     public Soulcatcher(final Soulcatcher card) {

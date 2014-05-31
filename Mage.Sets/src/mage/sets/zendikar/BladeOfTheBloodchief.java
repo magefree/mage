@@ -39,7 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-import mage.counters.common.PlusOneCounter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -129,10 +129,10 @@ class BladeOfTheBloodchiefEffect extends OneShotEffect<BladeOfTheBloodchiefEffec
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
                 if ( creature.hasSubtype("Vampire") ) {
-                    creature.addCounters(new PlusOneCounter(2), game);
+                    creature.addCounters(CounterType.P1P1.createInstance(2), game);
                 }
                 else {
-                    creature.addCounters(new PlusOneCounter(1), game);
+                    creature.addCounters(CounterType.P1P1.createInstance(), game);
                 }
             }
         }

@@ -32,13 +32,17 @@ package mage.counters;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class BoostCounter extends Counter {
+public class BoostCounter extends Counter {
 
     protected int power;
     protected int toughness;
 
     public BoostCounter(int power, int toughness) {
-        super(String.format("%1$+d/%2$+d", power, toughness));
+        this(power, toughness, 1);
+    }
+
+    public BoostCounter(int power, int toughness, int count) {
+        super(String.format("%1$+d/%2$+d", power, toughness), count);
         this.power = power;
         this.toughness = toughness;
     }
@@ -57,4 +61,8 @@ public abstract class BoostCounter extends Counter {
         return toughness;
     }
 
+    @Override
+    public BoostCounter copy() {
+        return new BoostCounter(this);
+    }
 }

@@ -95,7 +95,7 @@ class WallOfRootsCost extends CostImpl<WallOfRootsCost> {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
-            permanent.addCounters(new WallOfRootsCounter(), game);
+            permanent.addCounters(new BoostCounter(0, -1), game);
             this.paid = true;
         }
         return paid;
@@ -104,21 +104,5 @@ class WallOfRootsCost extends CostImpl<WallOfRootsCost> {
     @Override
     public WallOfRootsCost copy() {
         return new WallOfRootsCost(this);
-    }
-}
-
-class WallOfRootsCounter extends BoostCounter {
-
-    public WallOfRootsCounter() {
-        super(0, -1);
-    }
-
-    public WallOfRootsCounter(final WallOfRootsCounter counter) {
-        super(counter);
-    }
-
-    @Override
-    public WallOfRootsCounter copy() {
-        return new WallOfRootsCounter(this);
     }
 }

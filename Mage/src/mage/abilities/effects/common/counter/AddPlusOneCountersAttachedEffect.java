@@ -32,7 +32,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.counters.common.PlusOneCounter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -70,7 +70,7 @@ public class AddPlusOneCountersAttachedEffect extends OneShotEffect<AddPlusOneCo
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
-                creature.addCounters(new PlusOneCounter(amount), game);
+                creature.addCounters(CounterType.P1P1.createInstance(amount), game);
             }
         }
         return true;

@@ -35,7 +35,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.common.PlusOneCounter;
+import mage.counters.CounterType;
 
 /**
  *
@@ -53,7 +53,7 @@ public class IvyElemental extends CardImpl<IvyElemental> {
         this.toughness = new MageInt(0);
 
         // Ivy Elemental enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new PlusOneCounter(), new ManacostVariableValue(), true), "with X +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), new ManacostVariableValue(), true), "with X +1/+1 counters on it"));
     }
 
     public IvyElemental(final IvyElemental card) {

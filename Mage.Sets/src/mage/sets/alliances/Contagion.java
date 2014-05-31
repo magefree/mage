@@ -86,23 +86,6 @@ public class Contagion extends CardImpl<Contagion> {
     }
 }
 
-class ContagionCounter extends BoostCounter {
-
-    public ContagionCounter(int count) {
-        super(-2, -1);
-        this.count = count;
-    }
-
-    public ContagionCounter(final ContagionCounter counter) {
-        super(counter);
-    }
-
-    @Override
-    public ContagionCounter copy() {
-        return new ContagionCounter(this);
-    }
-}
-
 class DistributeCountersEffect extends OneShotEffect<DistributeCountersEffect> {
 
 
@@ -126,7 +109,8 @@ class DistributeCountersEffect extends OneShotEffect<DistributeCountersEffect> {
             for (UUID target: multiTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(target);
                 if (permanent != null) {
-                    permanent.addCounters(new ContagionCounter(multiTarget.getTargetAmount(target)), game);
+                    int amount = multiTarget.getTargetAmount(target);
+                    permanent.addCounters(new BoostCounter(-2, -1, amount), game);
                 }
             }
         }

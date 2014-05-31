@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.common.PlusOneCounter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -63,9 +63,9 @@ public class SavageFirecat extends CardImpl<SavageFirecat> {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Savage Firecat enters the battlefield with seven +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new PlusOneCounter(7))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(7))));
         // Whenever you tap a land for mana, remove a +1/+1 counter from Savage Firecat.
-        this.addAbility(new SavageFirecatTriggeredAbility(new RemoveCounterSourceEffect(new PlusOneCounter(1))));
+        this.addAbility(new SavageFirecatTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance())));
 
     }
 

@@ -38,7 +38,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.counters.common.PlusOneCounter;
+import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -54,7 +54,7 @@ public class MarkOfMutiny extends CardImpl<MarkOfMutiny> {
         this.color.setRed(true);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new AddCountersTargetEffect(new PlusOneCounter()));
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
     }
