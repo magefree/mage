@@ -4,7 +4,6 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,7 +11,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author BetaSteward
  */
-@Ignore
 public class SoulSeizerTest extends CardTestPlayerBase {
 
     @Test
