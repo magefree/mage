@@ -62,10 +62,9 @@ public class IroasGodOfVictory extends CardImpl<IroasGodOfVictory> {
     }
     
     public IroasGodOfVictory(UUID ownerId) {
-        super(ownerId, 150, "Iroas, God of Victory", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
+        super(ownerId, 150, "Iroas, God of Victory", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{R}{W}");
         this.expansionSetCode = "JOU";
-        this.supertype.add("Legendary");
-        this.supertype.add("Enhantment");
+        this.supertype.add("Legendary");        
         this.subtype.add("God");
 
         this.color.setRed(true);
