@@ -25,44 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.MageInt;
+import mage.abilities.common.EmptyEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.counters.CounterType;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class BattlefieldForge extends CardImpl<BattlefieldForge> {
+public class OonasProwler extends CardImpl<OonasProwler> {
 
-    public BattlefieldForge(UUID ownerId) {
-        super(ownerId, 139, "Battlefield Forge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "APC";
-        this.addAbility(new ColorlessManaAbility());
+    public OonasProwler(UUID ownerId) {
+        super(ownerId, 133, "Oona's Prowler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "LRW";
+        this.subtype.add("Faerie");
+        this.subtype.add("Rogue");
 
-        Ability redManaAbility = new RedManaAbility();
-        redManaAbility.addEffect(new DamageControllerEffect(1));
-        this.addAbility(redManaAbility);
+        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-        Ability whiteManaAbility = new WhiteManaAbility();
-        whiteManaAbility.addEffect(new DamageControllerEffect(1));
-        this.addAbility(whiteManaAbility);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Discard a card: Oona's Prowler gets -2/-0 until end of turn. Any player may activate this ability.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-2,-0, Duration.EndOfTurn) , new DiscardCardCost());
+        ability.setMayActivate(TargetController.ANY);
+        ability.addEffect(new EmptyEffect("Any player may activate this ability"));
+        this.addAbility(ability);
     }
 
-    public BattlefieldForge(final BattlefieldForge card) {
+    public OonasProwler(final OonasProwler card) {
         super(card);
     }
 
     @Override
-    public BattlefieldForge copy() {
-        return new BattlefieldForge(this);
+    public OonasProwler copy() {
+        return new OonasProwler(this);
     }
 }

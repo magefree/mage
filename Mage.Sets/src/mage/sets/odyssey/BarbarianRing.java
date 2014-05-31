@@ -25,44 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.odyssey;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalGainActivatedAbility;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.mana.RedManaAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
+import mage.constants.Zone;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class BattlefieldForge extends CardImpl<BattlefieldForge> {
+public class BarbarianRing extends CardImpl<BarbarianRing> {
 
-    public BattlefieldForge(UUID ownerId) {
-        super(ownerId, 139, "Battlefield Forge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "APC";
-        this.addAbility(new ColorlessManaAbility());
+    public BarbarianRing(UUID ownerId) {
+        super(ownerId, 313, "Barbarian Ring", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "ODY";
 
+        // {T}: Add {R} to your mana pool. Barbarian Ring deals 1 damage to you.
         Ability redManaAbility = new RedManaAbility();
         redManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(redManaAbility);
 
-        Ability whiteManaAbility = new WhiteManaAbility();
-        whiteManaAbility.addEffect(new DamageControllerEffect(1));
-        this.addAbility(whiteManaAbility);
+        // Threshold - {R}, {T}, Sacrifice Barbarian Ring: Barbarian Ring deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.
+        Ability thresholdAbility = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD,
+            new DamageTargetEffect(2),
+            new ManaCostsImpl("{R}"),
+            new CardsInControllerGraveCondition(7),
+            "<i>Threshold</i> - {R}, {T}, Sacrifice {this}: {this} deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.");
+        thresholdAbility.addCost(new TapSourceCost());
+        thresholdAbility.addCost(new SacrificeSourceCost());
+        thresholdAbility.addTarget(new TargetCreatureOrPlayer(true));
+        this.addAbility(thresholdAbility);
     }
 
-    public BattlefieldForge(final BattlefieldForge card) {
+    public BarbarianRing(final BarbarianRing card) {
         super(card);
     }
 
     @Override
-    public BattlefieldForge copy() {
-        return new BattlefieldForge(this);
+    public BarbarianRing copy() {
+        return new BarbarianRing(this);
     }
 }

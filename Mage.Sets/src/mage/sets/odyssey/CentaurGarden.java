@@ -28,57 +28,55 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalGainActivatedAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class Chainflinger extends CardImpl<Chainflinger> {
+public class CentaurGarden extends CardImpl<CentaurGarden> {
 
-    public Chainflinger(UUID ownerId) {
-        super(ownerId, 181, "Chainflinger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+    public CentaurGarden(UUID ownerId) {
+        super(ownerId, 316, "Centaur Garden", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ODY";
-        this.subtype.add("Beast");
 
-        this.color.setRed(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // {tap}: Add {G} to your mana pool. Centaur Garden deals 1 damage to you.
+        Ability manaAbility = new GreenManaAbility();
+        manaAbility.addEffect(new DamageControllerEffect(1));
+        this.addAbility(manaAbility);
 
-        // {1}{R}, {tap}: Chainflinger deals 1 damage to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1),new ManaCostsImpl("{1}{R}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer(true));
-        this.addAbility(ability);
-        // Threshold - {2}{R}, {tap}: Chainflinger deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.
+        // Threshold - {G}, {tap}, Sacrifice Centaur Garden: Target creature gets +3/+3 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD,
-            new DamageTargetEffect(2),
-            new ManaCostsImpl("2}{R}"),
+            new BoostTargetEffect(+3,+3, Duration.EndOfTurn),
+            new ManaCostsImpl("{G}"),
             new CardsInControllerGraveCondition(7),
-            "<i>Threshold</i> - {2}{R}, {t}: {this} deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.");
+            "<i>Threshold</i> - {G}, {T}, Sacrifice {this}: Target creature gets +3/+3 until end of turn. Activate this ability only if seven or more cards are in your graveyard.");
         thresholdAbility.addCost(new TapSourceCost());
-        thresholdAbility.addTarget(new TargetCreatureOrPlayer(true));
+        thresholdAbility.addCost(new SacrificeSourceCost());
+        thresholdAbility.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(thresholdAbility);
     }
 
-    public Chainflinger(final Chainflinger card) {
+    public CentaurGarden(final CentaurGarden card) {
         super(card);
     }
 
     @Override
-    public Chainflinger copy() {
-        return new Chainflinger(this);
+    public CentaurGarden copy() {
+        return new CentaurGarden(this);
     }
 }

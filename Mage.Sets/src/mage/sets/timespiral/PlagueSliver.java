@@ -25,44 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class BattlefieldForge extends CardImpl<BattlefieldForge> {
+public class PlagueSliver extends CardImpl<PlagueSliver> {
 
-    public BattlefieldForge(UUID ownerId) {
-        super(ownerId, 139, "Battlefield Forge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "APC";
-        this.addAbility(new ColorlessManaAbility());
+    private static final FilterCreaturePermanent filterSliver = new FilterCreaturePermanent();
 
-        Ability redManaAbility = new RedManaAbility();
-        redManaAbility.addEffect(new DamageControllerEffect(1));
-        this.addAbility(redManaAbility);
-
-        Ability whiteManaAbility = new WhiteManaAbility();
-        whiteManaAbility.addEffect(new DamageControllerEffect(1));
-        this.addAbility(whiteManaAbility);
+    static {
+        filterSliver.add(new SubtypePredicate("Sliver"));
     }
 
-    public BattlefieldForge(final BattlefieldForge card) {
+    public PlagueSliver(UUID ownerId) {
+        super(ownerId, 124, "Plague Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Sliver");
+
+        this.color.setBlack(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // All Slivers have "At the beginning of your upkeep, this permanent deals 1 damage to you."
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), TargetController.YOU, false);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+                ability, Duration.WhileOnBattlefield,
+                filterSliver, "All Slivers have \"At the beginning of your upkeep, this permanent deals 1 damage to you.\"")));
+    }
+
+    public PlagueSliver(final PlagueSliver card) {
         super(card);
     }
 
     @Override
-    public BattlefieldForge copy() {
-        return new BattlefieldForge(this);
+    public PlagueSliver copy() {
+        return new PlagueSliver(this);
     }
 }

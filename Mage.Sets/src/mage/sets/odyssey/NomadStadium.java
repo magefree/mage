@@ -25,44 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalGainActivatedAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.RedManaAbility;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class BattlefieldForge extends CardImpl<BattlefieldForge> {
+public class NomadStadium extends CardImpl<NomadStadium> {
 
-    public BattlefieldForge(UUID ownerId) {
-        super(ownerId, 139, "Battlefield Forge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "APC";
-        this.addAbility(new ColorlessManaAbility());
+    public NomadStadium(UUID ownerId) {
+        super(ownerId, 322, "Nomad Stadium", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "ODY";
 
-        Ability redManaAbility = new RedManaAbility();
-        redManaAbility.addEffect(new DamageControllerEffect(1));
-        this.addAbility(redManaAbility);
+        // {tap}: Add {W} to your mana pool. Nomad Stadium deals 1 damage to you.
+        Ability manaAbility = new WhiteManaAbility();
+        manaAbility.addEffect(new DamageControllerEffect(1));
+        this.addAbility(manaAbility);
 
-        Ability whiteManaAbility = new WhiteManaAbility();
-        whiteManaAbility.addEffect(new DamageControllerEffect(1));
-        this.addAbility(whiteManaAbility);
+        // Threshold - {W}, {tap}, Sacrifice Nomad Stadium: You gain 4 life. Activate this ability only if seven or more cards are in your graveyard.
+        Ability thresholdAbility = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD,
+            new GainLifeEffect(4),
+            new ManaCostsImpl("{W}"),
+            new CardsInControllerGraveCondition(7),
+            "<i>Threshold</i> - {W}, {T}, Sacrifice {this}: You gain 4 life. Activate this ability only if seven or more cards are in your graveyard.");
+        thresholdAbility.addCost(new TapSourceCost());
+        thresholdAbility.addCost(new SacrificeSourceCost());
+        this.addAbility(thresholdAbility);
     }
 
-    public BattlefieldForge(final BattlefieldForge card) {
+    public NomadStadium(final NomadStadium card) {
         super(card);
     }
 
     @Override
-    public BattlefieldForge copy() {
-        return new BattlefieldForge(this);
+    public NomadStadium copy() {
+        return new NomadStadium(this);
     }
 }

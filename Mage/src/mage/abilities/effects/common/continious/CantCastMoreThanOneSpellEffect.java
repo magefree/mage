@@ -38,6 +38,7 @@ import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
@@ -72,8 +73,10 @@ public class CantCastMoreThanOneSpellEffect extends ReplacementEffectImpl<CantCa
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (mageObject != null) {
-            game.informPlayers(mageObject + ": You can't cast more than one spell each turn.");
+        Player caster = game.getPlayer(event.getPlayerId());
+        if (mageObject != null && caster != null) {
+
+            game.informPlayer(caster, mageObject.getName() + ": You can't cast more than one spell each turn.");
         }
         return true;
     }
@@ -82,6 +85,11 @@ public class CantCastMoreThanOneSpellEffect extends ReplacementEffectImpl<CantCa
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             switch (targetController) {
+                case YOU:
+                    if (!event.getPlayerId().equals(source.getControllerId())) {
+                        return false;
+                    }
+                    break;
                 case NOT_YOU:
                     if (event.getPlayerId().equals(source.getControllerId())) {
                         return false;
@@ -113,6 +121,9 @@ public class CantCastMoreThanOneSpellEffect extends ReplacementEffectImpl<CantCa
         }
         StringBuilder sb = new StringBuilder();
         switch(targetController) {
+            case YOU:
+                sb.append("You");
+                break;
             case NOT_YOU:
                 sb.append("Each other player");
                 break;

@@ -122,7 +122,7 @@ class YawgmothsAgendaCanPlayCardsFromGraveyardEffect extends ContinuousEffectImp
 class YawgmothsAgendaReplacementEffect extends ReplacementEffectImpl<YawgmothsAgendaReplacementEffect> {
 
     public YawgmothsAgendaReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "If a card would be put into your graveyard from anywhere, exile it instead";
     }
 
