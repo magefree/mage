@@ -127,7 +127,7 @@ class ArbiterOfTheIdealEffect extends OneShotEffect<ArbiterOfTheIdealEffect> {
                     card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
-                        permanent.addCounters(new ManifestationCounter(), game);
+                        permanent.addCounters(new Counter("Manifestation"), game);
                         ContinuousEffect effect = new AddCardTypeTargetEffect(CardType.ENCHANTMENT, Duration.Custom);
                         effect.setTargetPointer(new FixedTarget(permanent.getId()));
                         game.addEffect(effect, source);
@@ -138,13 +138,5 @@ class ArbiterOfTheIdealEffect extends OneShotEffect<ArbiterOfTheIdealEffect> {
         }
 
         return false;
-    }
-}
-
-class ManifestationCounter extends Counter {
-
-    public ManifestationCounter() {
-        super("manifestation");
-        this.count = 1;
     }
 }

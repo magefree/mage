@@ -56,7 +56,7 @@ public class Smokestack extends CardImpl<Smokestack> {
         this.expansionSetCode = "USG";
 
         // At the beginning of your upkeep, you may put a soot counter on Smokestack.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(new SootCounter()), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(new Counter("Soot")), TargetController.YOU, true));
 
         // At the beginning of each player's upkeep, that player sacrifices a permanent for each soot counter on Smokestack.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SmokestackEffect(), TargetController.ANY, false));
@@ -69,19 +69,6 @@ public class Smokestack extends CardImpl<Smokestack> {
     @Override
     public Smokestack copy() {
         return new Smokestack(this);
-    }
-}
-
-class SootCounter extends Counter {
-
-    public SootCounter() {
-        super("soot");
-        this.count = 1;
-    }
-
-    public SootCounter(int amount) {
-        super("soot");
-        this.count = amount;
     }
 }
 
@@ -106,7 +93,7 @@ class SmokestackEffect extends OneShotEffect<SmokestackEffect> {
         Player activePlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (activePlayer != null && sourcePermanent != null) {
-            int count = sourcePermanent.getCounters().getCount("soot");
+            int count = sourcePermanent.getCounters().getCount("Soot");
             if (count > 0) {
                 int amount = Math.min(count, game.getBattlefield().countAll(new FilterControlledPermanent(), activePlayer.getId(), game));
                 Target target = new TargetControlledPermanent(amount, amount, new FilterControlledPermanent(), false);
@@ -119,14 +106,12 @@ class SmokestackEffect extends OneShotEffect<SmokestackEffect> {
                     }
 
                     for (int idx = 0; idx < target.getTargets().size(); idx++) {
-                        Permanent permanent = game.getPermanent((UUID) target.getTargets().get(idx));
+                        Permanent permanent = game.getPermanent(target.getTargets().get(idx));
 
                         if (permanent != null) {
                             permanent.sacrifice(source.getSourceId(), game);
                         }
                     }
-
-
                 }
             }
             return true;

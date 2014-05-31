@@ -71,6 +71,7 @@ public class AssembleTheLegion extends CardImpl<AssembleTheLegion> {
 }
 
 class AssembleTheLegionEffect extends OneShotEffect<AssembleTheLegionEffect> {
+    private static final String MUSTER_COUNTER_NAME = "Muster";
 
     public AssembleTheLegionEffect() {
        super(Outcome.Copy);
@@ -98,29 +99,16 @@ class AssembleTheLegionEffect extends OneShotEffect<AssembleTheLegionEffect> {
        if (sourcePermanent == null) {
            Permanent lki = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
            if (lki != null) {
-               amountCounters = lki.getCounters().getCount("Muster");
+               amountCounters = lki.getCounters().getCount(MUSTER_COUNTER_NAME);
            }
        } else {
-           new AddCountersSourceEffect(new MusterCounter(),false).apply(game, source);
-           amountCounters = sourcePermanent.getCounters().getCount("Muster");
+           new AddCountersSourceEffect(new Counter(MUSTER_COUNTER_NAME),false).apply(game, source);
+           amountCounters = sourcePermanent.getCounters().getCount(MUSTER_COUNTER_NAME);
            
        }
        if (amountCounters > 0) {
            return new CreateTokenEffect(new SoldierToken(), amountCounters).apply(game, source);
        }
        return false;
-    }
-}
-
-class MusterCounter extends Counter {
-
-    public MusterCounter() {
-       super("Muster");
-       this.count = 1;
-    }
-
-    public MusterCounter(int amount) {
-       super("Muster");
-       this.count = amount;
     }
 }
