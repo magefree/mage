@@ -130,6 +130,18 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     }
 
     @Override
+    public Abilities<ActivatedAbility> getPlayableAbilities(Zone zone) {
+        Abilities<ActivatedAbility> zonedAbilities = new AbilitiesImpl<>();
+        for (T ability: this) {
+            if (((ability instanceof SpellAbility) || (ability instanceof PlayLandAbility))
+                    && ability.getZone().match(zone)) {
+                zonedAbilities.add((ActivatedAbility)ability);
+            }
+        }
+        return zonedAbilities;
+    }
+
+    @Override
     public Abilities<ManaAbility> getManaAbilities(Zone zone) {
         Abilities<ManaAbility> abilities = new AbilitiesImpl<>();
         for (T ability: this) {

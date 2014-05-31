@@ -35,6 +35,7 @@ import mage.constants.Zone;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  * Represents a collection of {@link Ability Abilities}.  This is the top most
@@ -70,6 +71,16 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @see mage.cards.CardImpl#getSpellAbility()
      */
     Abilities<ActivatedAbility> getActivatedAbilities(Zone zone);
+
+    /**
+     * Retrieves all playable abilities for the given {@link Zone}.
+     *
+     * @param zone The {@link Zone} for which abilities should be retrieved.
+     * @return All abilities for the given {@link Zone}
+     *
+     * @see mage.cards.CardImpl#getSpellAbility()
+     */
+    Abilities<ActivatedAbility> getPlayableAbilities(Zone zone);
 
     /**
      * Retrieves all {@link ManaAbility mana abilities} in the given {@link Zone}.

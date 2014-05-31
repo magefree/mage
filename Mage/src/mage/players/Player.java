@@ -102,8 +102,10 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean canPaySacrificeCost();
     void setLifeTotalCanChange(boolean lifeTotalCanChange);
     boolean isLifeTotalCanChange();    
-    void setLoseByZeroOrLessLife(boolean LoseByZeroOrLessLife);
+    void setLoseByZeroOrLessLife(boolean loseByZeroOrLessLife);
     boolean canLoseByZeroOrLessLife();
+    void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard);
+    boolean canPlayCardsFromGraveyard();
 
     /**
      * Returns alternative casting costs a player can cast spells for

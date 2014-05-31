@@ -179,6 +179,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected boolean canPayLifeCost = true;
     protected boolean canPaySacrificeCost = true;
     protected boolean loseByZeroOrLessLife = true;
+    protected boolean canPlayCardsFromGraveyard = true;
 
     protected final List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
     
@@ -249,6 +250,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.canGainLife = player.canGainLife;
         this.canLoseLife = player.canLoseLife;
         this.loseByZeroOrLessLife = player.loseByZeroOrLessLife;
+        this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard;
 
         this.attachments.addAll(player.attachments);
 
@@ -313,6 +315,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.canPayLifeCost = player.canPayLifeCost();
         this.canPaySacrificeCost = player.canPaySacrificeCost();
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
+        this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
         this.storedBookmark = player.getStoredBookmark();
 
@@ -388,6 +391,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.canPayLifeCost = true;
         this.canPaySacrificeCost = true;
         this.loseByZeroOrLessLife = true;
+        this.canPlayCardsFromGraveyard = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
     }
@@ -967,6 +971,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 }
             }
             if (zone != Zone.HAND) {
+                if (Zone.GRAVEYARD.equals(zone) && canPlayCardsFromGraveyard()) {
+                    for (ActivatedAbility ability: object.getAbilities().getPlayableAbilities(Zone.HAND)) {
+                        if (ability.canActivate(playerId, game)) {
+                            useable.put(ability.getId(), ability);
+                        }
+                    }
+                }
                 if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, this.getId(), game)) {
                     for (Ability ability: object.getAbilities()) {
                         ability.setControllerId(this.getId());
@@ -2115,6 +2126,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public void setLoseByZeroOrLessLife(boolean loseByZeroOrLessLife) {
         this.loseByZeroOrLessLife = loseByZeroOrLessLife;
+    }
+
+    @Override
+    public boolean canPlayCardsFromGraveyard() {
+        return canPlayCardsFromGraveyard;
+    }
+
+    @Override
+    public void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard) {
+        this.canPlayCardsFromGraveyard = playCardsFromGraveyard;
     }
 
     @Override
