@@ -27,7 +27,7 @@
  */
 package mage.sets.futuresight;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -45,7 +45,6 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -98,7 +97,7 @@ class TarmogoyfEffect extends ContinuousEffectImpl<TarmogoyfEffect> {
         if (controller != null) {
             MageObject target = game.getObject(source.getSourceId());
             if (target != null) {
-                ArrayList<CardType> foundCardTypes = new ArrayList<>();
+                HashSet<CardType> foundCardTypes = new HashSet<>();
                 for (UUID playerId : controller.getInRange()) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
