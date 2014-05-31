@@ -28,14 +28,13 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -54,7 +53,7 @@ public class Pyroblast extends CardImpl<Pyroblast> {
         this.color.setRed(true);
 
         // Choose one - Counter target spell if it's blue; or destroy target permanent if it's blue.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addEffect(new PyroblastCounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
         
         Mode mode = new Mode();
@@ -74,19 +73,19 @@ public class Pyroblast extends CardImpl<Pyroblast> {
     }
 }
 
-class CounterTargetEffect extends OneShotEffect<CounterTargetEffect> {
+class PyroblastCounterTargetEffect extends OneShotEffect<PyroblastCounterTargetEffect> {
 
-    public CounterTargetEffect() {
+    public PyroblastCounterTargetEffect() {
         super(Outcome.Detriment);
     }
 
-    public CounterTargetEffect(final CounterTargetEffect effect) {
+    public PyroblastCounterTargetEffect(final PyroblastCounterTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public CounterTargetEffect copy() {
-        return new CounterTargetEffect(this);
+    public PyroblastCounterTargetEffect copy() {
+        return new PyroblastCounterTargetEffect(this);
     }
 
     @Override
