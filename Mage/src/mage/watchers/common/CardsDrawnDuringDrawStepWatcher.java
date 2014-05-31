@@ -36,7 +36,7 @@ import mage.constants.PhaseStep;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -46,7 +46,7 @@ import mage.watchers.WatcherImpl;
  * 
  */
 
-public class CardsDrawnDuringDrawStepWatcher extends WatcherImpl<CardsDrawnDuringDrawStepWatcher> {
+public class CardsDrawnDuringDrawStepWatcher extends Watcher<CardsDrawnDuringDrawStepWatcher> {
 
     private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
 

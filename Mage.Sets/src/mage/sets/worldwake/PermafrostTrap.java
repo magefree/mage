@@ -43,7 +43,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -79,7 +79,7 @@ public class PermafrostTrap extends CardImpl<PermafrostTrap> {
     }
 }
 
-class PermafrostTrapWatcher extends WatcherImpl<PermafrostTrapWatcher> {
+class PermafrostTrapWatcher extends Watcher<PermafrostTrapWatcher> {
 
     public PermafrostTrapWatcher() {
         super("PermafrostTrapWatcher", WatcherScope.GAME);

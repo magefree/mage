@@ -45,7 +45,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -79,7 +78,7 @@ public class AngelicArbiter extends CardImpl<AngelicArbiter> {
 
 }
 
-class AngelicArbiterWatcher1 extends WatcherImpl<AngelicArbiterWatcher1> {
+class AngelicArbiterWatcher1 extends Watcher<AngelicArbiterWatcher1> {
 
     public AngelicArbiterWatcher1() {
         super("OpponentCastSpell", WatcherScope.PLAYER);
@@ -104,7 +103,7 @@ class AngelicArbiterWatcher1 extends WatcherImpl<AngelicArbiterWatcher1> {
 
 }
 
-class AngelicArbiterWatcher2 extends WatcherImpl<AngelicArbiterWatcher2> {
+class AngelicArbiterWatcher2 extends Watcher<AngelicArbiterWatcher2> {
 
     public AngelicArbiterWatcher2() {
         super("OpponentAttacked", WatcherScope.PLAYER);

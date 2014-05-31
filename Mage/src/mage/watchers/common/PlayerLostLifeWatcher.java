@@ -35,7 +35,7 @@ import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 
 
@@ -45,7 +45,7 @@ import mage.watchers.WatcherImpl;
  *
  * @author LevelX2
  */
-public class PlayerLostLifeWatcher extends WatcherImpl<PlayerLostLifeWatcher> {
+public class PlayerLostLifeWatcher extends Watcher<PlayerLostLifeWatcher> {
 
     private final Map<UUID, Integer> amountOfLifeLostThisTurn = new HashMap<>();
 

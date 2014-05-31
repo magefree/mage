@@ -45,7 +45,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -81,7 +81,7 @@ public class LavaballTrap extends CardImpl<LavaballTrap> {
     }
 }
 
-class LavaballTrapWatcher extends WatcherImpl<LavaballTrapWatcher> {
+class LavaballTrapWatcher extends Watcher<LavaballTrapWatcher> {
 
     private Map<UUID, Integer> amountOfLandsPlayedThisTurn = new HashMap<UUID, Integer>();
 

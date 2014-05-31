@@ -43,7 +43,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -109,7 +108,7 @@ class VengevineAbility extends TriggeredAbilityImpl<VengevineAbility> {
 }
 
 
-class VengevineWatcher extends WatcherImpl<VengevineWatcher> {
+class VengevineWatcher extends Watcher<VengevineWatcher> {
 
     int creatureSpellCount = 0;
 

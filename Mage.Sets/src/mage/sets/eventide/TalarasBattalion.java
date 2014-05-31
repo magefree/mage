@@ -48,7 +48,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -135,7 +135,7 @@ class CastGreenSpellThisTurnCondition implements Condition {
     }
 }
 
-class TalarasBattalionWatcher extends WatcherImpl<TalarasBattalionWatcher> {
+class TalarasBattalionWatcher extends Watcher<TalarasBattalionWatcher> {
 
     private static final FilterSpell filter = new FilterSpell();
 

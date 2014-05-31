@@ -48,7 +48,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -98,7 +98,7 @@ class CastRedSpellThisTurnCondition implements Condition {
     }
 }
 
-class HotHeadedGiantWatcher extends WatcherImpl<HotHeadedGiantWatcher> {
+class HotHeadedGiantWatcher extends Watcher<HotHeadedGiantWatcher> {
 
     private static final FilterSpell filter = new FilterSpell();
     static {

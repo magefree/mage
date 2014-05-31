@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.BeastToken;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -71,7 +71,7 @@ public class FreshMeat extends CardImpl<FreshMeat> {
     }
 }
 
-class FreshMeatWatcher extends WatcherImpl<FreshMeatWatcher> {
+class FreshMeatWatcher extends Watcher<FreshMeatWatcher> {
 
     private int creaturesCount = 0;
 

@@ -50,7 +50,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -188,7 +188,7 @@ class AureliasFuryCantCastEffect extends ReplacementEffectImpl<AureliasFuryCantC
     }
 }
 
-class AureliasFuryDamagedByWatcher extends WatcherImpl<AureliasFuryDamagedByWatcher> {
+class AureliasFuryDamagedByWatcher extends Watcher<AureliasFuryDamagedByWatcher> {
 
     public List<UUID> damagedCreatures = new ArrayList<UUID>();
     public List<UUID> damagedPlayers = new ArrayList<UUID>();

@@ -52,7 +52,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -119,7 +119,7 @@ class GroundingPouncerCondition implements Condition {
     }
 }
 
-class ActivatedAbilityUsedThisTurnWatcher extends WatcherImpl<ActivatedAbilityUsedThisTurnWatcher> {
+class ActivatedAbilityUsedThisTurnWatcher extends Watcher<ActivatedAbilityUsedThisTurnWatcher> {
 
     public Set<UUID> activatedThisTurn = new HashSet<UUID>();
 

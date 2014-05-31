@@ -42,7 +42,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.UUID;
 
@@ -108,7 +108,7 @@ class ArchmageAscensionTriggeredAbility extends TriggeredAbilityImpl<ArchmageAsc
     }
 }
 
-class CardsDrawnControllerWatcher extends WatcherImpl<CardsDrawnControllerWatcher> {
+class CardsDrawnControllerWatcher extends Watcher<CardsDrawnControllerWatcher> {
 
     int cardsDrawn;
 

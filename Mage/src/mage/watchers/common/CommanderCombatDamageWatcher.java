@@ -39,7 +39,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /* 20130711
  *903.14a A player that’s been dealt 21 or more combat damage by the same commander
@@ -48,7 +48,7 @@ import mage.watchers.WatcherImpl;
  *
  * @author Plopman
  */
-public class CommanderCombatDamageWatcher extends WatcherImpl<CommanderCombatDamageWatcher> {
+public class CommanderCombatDamageWatcher extends Watcher<CommanderCombatDamageWatcher> {
 
     public Map<UUID, Integer> damageToPlayer = new HashMap<UUID, Integer>();
 

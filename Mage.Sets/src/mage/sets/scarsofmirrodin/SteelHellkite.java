@@ -43,7 +43,7 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,7 +114,7 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
     }
 }
 
-class SteelHellkiteWatcher extends WatcherImpl<SteelHellkiteWatcher> {
+class SteelHellkiteWatcher extends Watcher<SteelHellkiteWatcher> {
 
     public List<UUID> damagedPlayers = new ArrayList<UUID>();
 

@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -114,7 +114,7 @@ class MaelstromNexusTriggeredAbility extends TriggeredAbilityImpl<MaelstromNexus
     }
 }
 
-class FirstSpellCastThisTurnWatcher extends WatcherImpl<FirstSpellCastThisTurnWatcher> {
+class FirstSpellCastThisTurnWatcher extends Watcher<FirstSpellCastThisTurnWatcher> {
 
     int spellCount = 0;
 

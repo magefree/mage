@@ -31,7 +31,7 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class SourceDidDamageWatcher extends WatcherImpl<SourceDidDamageWatcher> {
+public class SourceDidDamageWatcher extends Watcher<SourceDidDamageWatcher> {
 
     public List<UUID> damageSources = new ArrayList<UUID>();
 

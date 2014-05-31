@@ -44,7 +44,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -80,7 +79,7 @@ public class WindbriskHeights extends CardImpl<WindbriskHeights> {
     }
 }
 
-class WindbriskHeightsWatcher extends WatcherImpl<WindbriskHeightsWatcher> {
+class WindbriskHeightsWatcher extends Watcher<WindbriskHeightsWatcher> {
 
     private int numberOfattackers;
 

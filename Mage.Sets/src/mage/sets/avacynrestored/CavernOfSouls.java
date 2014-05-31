@@ -57,7 +57,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -172,7 +172,7 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
     }
 }
 
-class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
+class CavernOfSoulsWatcher extends Watcher<CavernOfSoulsWatcher> {
 
     public List<UUID> spells = new ArrayList<>();
 

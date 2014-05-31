@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -206,7 +206,7 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect<TritonTacticsEndOfCom
     }
 }
 
-class BlockedCreaturesWatcher extends WatcherImpl<BlockedCreaturesWatcher> {
+class BlockedCreaturesWatcher extends Watcher<BlockedCreaturesWatcher> {
 
     public BlockedCreaturesWatcher() {
         super("BlockedCreatures", WatcherScope.CARD);

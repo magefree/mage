@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.UUID;
 import mage.game.permanent.Permanent;
@@ -155,7 +155,7 @@ class DungeonGeistsEffect extends ReplacementEffectImpl<DungeonGeistsEffect> {
     }
 }
 
-class DungeonGeistsWatcher extends WatcherImpl<DungeonGeistsWatcher> {
+class DungeonGeistsWatcher extends Watcher<DungeonGeistsWatcher> {
 
     DungeonGeistsWatcher () {
         super("ControlLost", WatcherScope.CARD);

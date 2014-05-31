@@ -15,7 +15,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.UUID;
 
@@ -214,7 +214,7 @@ class MadnessExileEffect extends OneShotEffect<MadnessExileEffect> {
 /**
  * Whenever phase is changed, this watcher returns all cards exiled by madness to graveyard and informs players about it.
  */
-class MadnessCleanUpWatcher extends WatcherImpl<MadnessCleanUpWatcher> {
+class MadnessCleanUpWatcher extends Watcher<MadnessCleanUpWatcher> {
 
     public MadnessCleanUpWatcher() {
         super("MadnessPlayWasCanceled", WatcherScope.GAME);

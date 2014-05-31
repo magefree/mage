@@ -31,6 +31,7 @@ package mage.sets.zendikar;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.constants.WatcherScope;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
@@ -40,10 +41,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 import java.util.UUID;
-import mage.constants.WatcherScope;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -74,7 +73,7 @@ public class ArchiveTrap extends CardImpl<ArchiveTrap> {
 
 }
 
-class ArchiveTrapWatcher extends WatcherImpl<ArchiveTrapWatcher> {
+class ArchiveTrapWatcher extends Watcher<ArchiveTrapWatcher> {
 
     public ArchiveTrapWatcher() {
         super("LibrarySearched", WatcherScope.PLAYER);

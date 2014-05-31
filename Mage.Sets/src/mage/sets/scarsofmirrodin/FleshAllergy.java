@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -78,7 +78,7 @@ public class FleshAllergy extends CardImpl<FleshAllergy> {
     }
 }
 
-class FleshAllergyWatcher extends WatcherImpl<FleshAllergyWatcher> {
+class FleshAllergyWatcher extends Watcher<FleshAllergyWatcher> {
 
     public int creaturesDiedThisTurn = 0;
 

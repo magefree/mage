@@ -5,13 +5,13 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  * @author BetaSteward_at_googlemail.com
  * @author Loki
  */
-public class LandfallWatcher extends WatcherImpl<LandfallWatcher> {
+public class LandfallWatcher extends Watcher<LandfallWatcher> {
 
     public LandfallWatcher() {
         super("LandPlayed", WatcherScope.PLAYER);

@@ -5,9 +5,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
-public class CastFromHandWatcher extends WatcherImpl<CastFromHandWatcher> {
+public class CastFromHandWatcher extends Watcher<CastFromHandWatcher> {
     public CastFromHandWatcher() {
         super("CastFromHand", WatcherScope.CARD);
     }

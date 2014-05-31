@@ -40,7 +40,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -73,7 +73,7 @@ public class EtherswornCanonist extends CardImpl<EtherswornCanonist> {
     }
 }
 
-class EtherswornCanonistWatcher extends WatcherImpl<EtherswornCanonistWatcher> {
+class EtherswornCanonistWatcher extends Watcher<EtherswornCanonistWatcher> {
 
     private Map<UUID, Boolean> castNonartifactSpell = new HashMap<UUID, Boolean>();
     

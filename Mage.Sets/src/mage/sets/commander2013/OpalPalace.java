@@ -56,7 +56,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -162,7 +162,7 @@ class OpalPalaceManaEffect extends ManaEffect<OpalPalaceManaEffect> {
     }
 }
 
-class OpalPalaceWatcher extends WatcherImpl<OpalPalaceWatcher> {
+class OpalPalaceWatcher extends Watcher<OpalPalaceWatcher> {
 
     public List<UUID> commanderId = new ArrayList<UUID>();
 

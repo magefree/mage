@@ -31,7 +31,7 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ import java.util.UUID;
  * Must be installed to player for proper Bloodthirst work
  * @author Loki
  */
-public class BloodthirstWatcher extends WatcherImpl<BloodthirstWatcher> {
+public class BloodthirstWatcher extends Watcher<BloodthirstWatcher> {
     public BloodthirstWatcher(UUID controllerId) {
         super("DamagedOpponents", WatcherScope.PLAYER);
         this.controllerId = controllerId;

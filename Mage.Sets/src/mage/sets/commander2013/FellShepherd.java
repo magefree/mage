@@ -55,7 +55,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -99,7 +99,7 @@ public class FellShepherd extends CardImpl<FellShepherd> {
     }
 }
 
-class FellShepherdWatcher extends WatcherImpl<FellShepherdWatcher> {
+class FellShepherdWatcher extends Watcher<FellShepherdWatcher> {
 
     private Set<UUID> creatureIds = new HashSet<UUID>();
 

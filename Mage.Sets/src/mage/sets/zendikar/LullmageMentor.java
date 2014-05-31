@@ -55,7 +55,7 @@ import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -143,7 +143,7 @@ class MerfolkToken extends Token {
     }
 }
 
-class CastedSpellsWithSpellTarget extends WatcherImpl<CastedSpellsWithSpellTarget> {
+class CastedSpellsWithSpellTarget extends Watcher<CastedSpellsWithSpellTarget> {
 
     // <SourceId_TargetSpellId, controllerId>
     private Map<String, UUID> casted = new HashMap<String, UUID>();

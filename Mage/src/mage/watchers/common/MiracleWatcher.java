@@ -45,7 +45,7 @@ import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 
 
@@ -55,7 +55,7 @@ import mage.watchers.WatcherImpl;
  *
  * @author noxx
  */
-public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
+public class MiracleWatcher extends Watcher<MiracleWatcher> {
 
     private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
 

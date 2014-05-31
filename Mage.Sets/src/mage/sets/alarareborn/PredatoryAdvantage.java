@@ -46,7 +46,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -97,7 +96,7 @@ class DidNotCastCreatureCondition implements Condition {
     }
 }
 
-class CastCreatureWatcher extends WatcherImpl<CastCreatureWatcher> {
+class CastCreatureWatcher extends Watcher<CastCreatureWatcher> {
 
     public CastCreatureWatcher() {
         super("CastCreature", WatcherScope.CARD);

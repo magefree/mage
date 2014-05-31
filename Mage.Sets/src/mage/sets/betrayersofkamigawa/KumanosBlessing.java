@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -134,7 +134,7 @@ class KumanosBlessingEffect extends ReplacementEffectImpl<KumanosBlessingEffect>
 
 }
 
-class DamagedByEnchantedWatcher extends WatcherImpl<DamagedByEnchantedWatcher> {
+class DamagedByEnchantedWatcher extends Watcher<DamagedByEnchantedWatcher> {
 
     public List<UUID> damagedCreatures = new ArrayList<>();
 

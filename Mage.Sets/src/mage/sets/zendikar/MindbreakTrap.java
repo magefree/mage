@@ -47,7 +47,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -83,7 +82,7 @@ public class MindbreakTrap extends CardImpl<MindbreakTrap> {
     }
 }
 
-class MindbreakTrapWatcher extends WatcherImpl<MindbreakTrapWatcher> {
+class MindbreakTrapWatcher extends Watcher<MindbreakTrapWatcher> {
 
     private Map<UUID, Integer> counts = new HashMap<UUID, Integer>();
 

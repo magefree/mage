@@ -44,7 +44,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.watchers.WatcherImpl;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -116,7 +116,7 @@ class MoltenPsycheEffect extends OneShotEffect<MoltenPsycheEffect> {
 
 }
 
-class MoltenPsycheWatcher extends WatcherImpl<MoltenPsycheWatcher> {
+class MoltenPsycheWatcher extends Watcher<MoltenPsycheWatcher> {
 
     private final Map<UUID, Integer> draws = new HashMap<>();
 

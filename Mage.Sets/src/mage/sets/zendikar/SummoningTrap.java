@@ -51,7 +51,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  * 
@@ -89,7 +88,7 @@ public class SummoningTrap extends CardImpl<SummoningTrap> {
     }
 }
 
-class SummoningTrapWatcher extends WatcherImpl<SummoningTrapWatcher> {
+class SummoningTrapWatcher extends Watcher<SummoningTrapWatcher> {
 
     public SummoningTrapWatcher() {
         super("CreatureSpellCountered", WatcherScope.PLAYER);
