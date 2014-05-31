@@ -831,7 +831,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 }
             } else {
                 if (object instanceof Spell) {
-                    Spell<?> spell = (Spell<?>) object;
+                    Spell spell = (Spell) object;
                     String castText = spell.getSpellAbility().toString();
                     sb.append((castText.startsWith("Cast ") ? castText.substring(5):castText));
                     if (spell.getFromZone() == Zone.GRAVEYARD) {
@@ -847,7 +847,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         }
         if (object instanceof Spell && ((Spell) object).getSpellAbilities().size() > 1) {
             if (((Spell) object).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
-                Spell<?> spell = (Spell<?>) object;
+                Spell spell = (Spell) object;
                 int i = 0;
                 for (SpellAbility spellAbility : spell.getSpellAbilities()) {
                     i++;
@@ -865,7 +865,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                     }
                 }
             } else {
-                Spell<?> spell = (Spell<?>) object;
+                Spell spell = (Spell) object;
                 int i = 0;
                 for (SpellAbility spellAbility : spell.getSpellAbilities()) {
                     i++;

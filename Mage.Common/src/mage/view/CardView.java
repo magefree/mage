@@ -224,7 +224,7 @@ public class CardView extends SimpleCardView {
 
         if (card instanceof Spell) {
             this.mageObjectType = MageObjectType.SPELL;
-            Spell<?> spell = (Spell<?>) card;
+            Spell spell = (Spell) card;
             for (SpellAbility spellAbility: spell.getSpellAbilities()) {
                 for(UUID modeId : spellAbility.getModes().getSelectedModes()) {
                     spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));

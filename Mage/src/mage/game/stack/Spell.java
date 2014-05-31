@@ -67,9 +67,8 @@ import mage.watchers.Watcher;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public class Spell<T extends Spell<T>> implements StackObject, Card {
+public class Spell implements StackObject, Card {
 
     private final List<Card> spellCards = new ArrayList<>();
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
@@ -100,7 +99,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         this.fromZone = fromZone;
     }
 
-    public Spell(final Spell<T> spell) {
+    public Spell(final Spell spell) {
         this.id = spell.id;
         for (SpellAbility spellAbility: spell.spellAbilities) {
             this.spellAbilities.add(spellAbility.copy());
