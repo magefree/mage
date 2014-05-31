@@ -79,7 +79,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl<Forb
 
     public ForbiddenCryptDrawCardReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        this.staticText = "If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game.";
+        this.staticText = "If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game";
     }
     
     public ForbiddenCryptDrawCardReplacementEffect(final ForbiddenCryptDrawCardReplacementEffect effect) {
@@ -122,10 +122,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl<Forb
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DRAW_CARD && event.getPlayerId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
+        return event.getType() == EventType.DRAW_CARD && event.getPlayerId().equals(source.getControllerId());
     }
     
 }
@@ -134,7 +131,7 @@ class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEff
 
     public ForbiddenCryptPutIntoYourGraveyardReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        this.staticText = "If a card would be put into your graveyard from anywhere, exile that card instead.";
+        this.staticText = "If a card would be put into your graveyard from anywhere, exile that card instead";
     }
     
     public ForbiddenCryptPutIntoYourGraveyardReplacementEffect(final ForbiddenCryptPutIntoYourGraveyardReplacementEffect effect) {
@@ -153,18 +150,22 @@ class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEff
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-            Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-            if (permanent != null) {
-                return permanent.moveToExile(null, "", source.getId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+                Permanent permanent = ((ZoneChangeEvent) event).getTarget();
+                if (permanent != null) {
+                    return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone());
+                }
+            } else {
+                Card card = game.getCard(event.getTargetId());
+                if (card != null) {
+                    return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone());
+                }
             }
-        } else {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null) {
-                return card.moveToExile(null, "", source.getId(), game);
-            }
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
