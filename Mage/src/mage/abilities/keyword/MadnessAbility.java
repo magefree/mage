@@ -214,7 +214,7 @@ class MadnessExileEffect extends OneShotEffect<MadnessExileEffect> {
 /**
  * Whenever phase is changed, this watcher returns all cards exiled by madness to graveyard and informs players about it.
  */
-class MadnessCleanUpWatcher extends Watcher<MadnessCleanUpWatcher> {
+class MadnessCleanUpWatcher extends Watcher {
 
     public MadnessCleanUpWatcher() {
         super("MadnessPlayWasCanceled", WatcherScope.GAME);

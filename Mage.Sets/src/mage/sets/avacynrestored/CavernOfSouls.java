@@ -172,7 +172,7 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
     }
 }
 
-class CavernOfSoulsWatcher extends Watcher<CavernOfSoulsWatcher> {
+class CavernOfSoulsWatcher extends Watcher {
 
     public List<UUID> spells = new ArrayList<>();
 

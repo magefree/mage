@@ -55,7 +55,7 @@ import mage.watchers.Watcher;
  *
  * @author noxx
  */
-public class MiracleWatcher extends Watcher<MiracleWatcher> {
+public class MiracleWatcher extends Watcher {
 
     private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
 

@@ -78,7 +78,7 @@ public class CurseOfExhaustion extends CardImpl<CurseOfExhaustion> {
     }
 }
 
-class CurseOfExhaustionWatcher extends Watcher<CurseOfExhaustionWatcher> {
+class CurseOfExhaustionWatcher extends Watcher {
 
     public CurseOfExhaustionWatcher() {
         super("SpellCast", WatcherScope.PLAYER);

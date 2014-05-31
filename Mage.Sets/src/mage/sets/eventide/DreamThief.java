@@ -97,7 +97,7 @@ class CastBlueSpellThisTurnCondition implements Condition {
     }
 }
 
-class DreamThiefWatcher extends Watcher<DreamThiefWatcher> {
+class DreamThiefWatcher extends Watcher {
 
     private static final FilterSpell filter = new FilterSpell();
     static {

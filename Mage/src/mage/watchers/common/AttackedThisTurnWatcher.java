@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class AttackedThisTurnWatcher extends Watcher<AttackedThisTurnWatcher> {
+public class AttackedThisTurnWatcher extends Watcher {
 
     public Set<UUID> attackedThisTurnCreatures = new HashSet<UUID>();
 

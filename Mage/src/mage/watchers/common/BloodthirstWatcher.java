@@ -39,7 +39,7 @@ import java.util.UUID;
  * Must be installed to player for proper Bloodthirst work
  * @author Loki
  */
-public class BloodthirstWatcher extends Watcher<BloodthirstWatcher> {
+public class BloodthirstWatcher extends Watcher {
     public BloodthirstWatcher(UUID controllerId) {
         super("DamagedOpponents", WatcherScope.PLAYER);
         this.controllerId = controllerId;

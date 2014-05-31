@@ -99,7 +99,7 @@ public class FellShepherd extends CardImpl<FellShepherd> {
     }
 }
 
-class FellShepherdWatcher extends Watcher<FellShepherdWatcher> {
+class FellShepherdWatcher extends Watcher {
 
     private Set<UUID> creatureIds = new HashSet<UUID>();
 

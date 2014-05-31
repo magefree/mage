@@ -104,7 +104,7 @@ class CastBlackSpellThisTurnCondition implements Condition {
     }
 }
 
-class SoulReapWatcher extends Watcher<SoulReapWatcher> {
+class SoulReapWatcher extends Watcher {
 
     private static final FilterSpell filter = new FilterSpell();
     

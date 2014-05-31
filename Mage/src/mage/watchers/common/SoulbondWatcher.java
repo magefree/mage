@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
  *
  * @author noxx
  */
-public class SoulbondWatcher extends Watcher<SoulbondWatcher> {
+public class SoulbondWatcher extends Watcher {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another not paired creature you control");
 

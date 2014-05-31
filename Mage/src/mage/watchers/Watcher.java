@@ -40,7 +40,7 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Watcher<T extends Watcher<T>> implements Serializable {
+public abstract class Watcher implements Serializable {
 
     protected UUID controllerId;
     protected UUID sourceId;
@@ -99,5 +99,5 @@ public abstract class Watcher<T extends Watcher<T>> implements Serializable {
 
     public abstract void watch(GameEvent event, Game game);
 
-    public abstract T copy();
+    public abstract Watcher copy();
 }

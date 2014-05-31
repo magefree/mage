@@ -78,7 +78,7 @@ public class FleshAllergy extends CardImpl<FleshAllergy> {
     }
 }
 
-class FleshAllergyWatcher extends Watcher<FleshAllergyWatcher> {
+class FleshAllergyWatcher extends Watcher {
 
     public int creaturesDiedThisTurn = 0;
 

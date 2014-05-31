@@ -97,7 +97,7 @@ public class TinderWall extends CardImpl<TinderWall> {
 }
 
 
-class BlockedByWatcher extends Watcher<BlockedByWatcher> {
+class BlockedByWatcher extends Watcher {
 
     public List<UUID> blockedByWatcher = new ArrayList<UUID>();
 

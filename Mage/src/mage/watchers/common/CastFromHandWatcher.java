@@ -7,7 +7,7 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
-public class CastFromHandWatcher extends Watcher<CastFromHandWatcher> {
+public class CastFromHandWatcher extends Watcher {
     public CastFromHandWatcher() {
         super("CastFromHand", WatcherScope.CARD);
     }

@@ -79,7 +79,7 @@ public class WindbriskHeights extends CardImpl<WindbriskHeights> {
     }
 }
 
-class WindbriskHeightsWatcher extends Watcher<WindbriskHeightsWatcher> {
+class WindbriskHeightsWatcher extends Watcher {
 
     private int numberOfattackers;
 

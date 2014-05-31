@@ -114,7 +114,7 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
     }
 }
 
-class SteelHellkiteWatcher extends Watcher<SteelHellkiteWatcher> {
+class SteelHellkiteWatcher extends Watcher {
 
     public List<UUID> damagedPlayers = new ArrayList<UUID>();
 

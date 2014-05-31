@@ -139,7 +139,7 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl<SavageSummoningAs
 }
 
 
-class SavageSummoningWatcher extends Watcher<SavageSummoningWatcher> {
+class SavageSummoningWatcher extends Watcher {
 
     private Set<String> savageSummoningSpells = new HashSet<String>();;
     private Map<UUID, Set<String>> spellsCastWithSavageSummoning = new LinkedHashMap<UUID, Set<String>>();

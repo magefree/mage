@@ -93,7 +93,7 @@ class CastWhiteSpellThisTurnCondition implements Condition {
     }
 }
 
-class PatriciansScornWatcher extends Watcher<PatriciansScornWatcher> {
+class PatriciansScornWatcher extends Watcher {
 
     private static final FilterSpell filter = new FilterSpell();
     static {

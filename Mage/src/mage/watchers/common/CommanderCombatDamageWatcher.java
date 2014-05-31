@@ -48,7 +48,7 @@ import mage.watchers.Watcher;
  *
  * @author Plopman
  */
-public class CommanderCombatDamageWatcher extends Watcher<CommanderCombatDamageWatcher> {
+public class CommanderCombatDamageWatcher extends Watcher {
 
     public Map<UUID, Integer> damageToPlayer = new HashMap<UUID, Integer>();
 

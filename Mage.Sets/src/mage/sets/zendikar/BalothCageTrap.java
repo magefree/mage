@@ -76,7 +76,7 @@ public class BalothCageTrap extends CardImpl<BalothCageTrap> {
     }
 }
 
-class BalothCageTrapWatcher extends Watcher<BalothCageTrapWatcher> {
+class BalothCageTrapWatcher extends Watcher {
 
     public BalothCageTrapWatcher() {
         super("BalothCageTrapWatcher", WatcherScope.GAME);

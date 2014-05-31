@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX
  */
-public class ProwlWatcher extends Watcher<ProwlWatcher> {
+public class ProwlWatcher extends Watcher {
 
     private Map<UUID, Set<String>> damagingSubtypes = new HashMap<UUID, Set<String>>();
     private Set<UUID> allSubtypes = new HashSet<UUID>();

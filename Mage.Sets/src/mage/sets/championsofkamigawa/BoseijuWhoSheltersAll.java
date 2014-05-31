@@ -90,7 +90,7 @@ public class BoseijuWhoSheltersAll extends CardImpl<BoseijuWhoSheltersAll> {
     }
 }
 
-class BoseijuWhoSheltersAllWatcher extends Watcher<BoseijuWhoSheltersAllWatcher> {
+class BoseijuWhoSheltersAllWatcher extends Watcher {
 
     public List<UUID> spells = new ArrayList<>();
 

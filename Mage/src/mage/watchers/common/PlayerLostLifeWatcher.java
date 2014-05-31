@@ -45,7 +45,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class PlayerLostLifeWatcher extends Watcher<PlayerLostLifeWatcher> {
+public class PlayerLostLifeWatcher extends Watcher {
 
     private final Map<UUID, Integer> amountOfLifeLostThisTurn = new HashMap<>();
 

@@ -78,7 +78,7 @@ public class AngelicArbiter extends CardImpl<AngelicArbiter> {
 
 }
 
-class AngelicArbiterWatcher1 extends Watcher<AngelicArbiterWatcher1> {
+class AngelicArbiterWatcher1 extends Watcher {
 
     public AngelicArbiterWatcher1() {
         super("OpponentCastSpell", WatcherScope.PLAYER);
@@ -103,7 +103,7 @@ class AngelicArbiterWatcher1 extends Watcher<AngelicArbiterWatcher1> {
 
 }
 
-class AngelicArbiterWatcher2 extends Watcher<AngelicArbiterWatcher2> {
+class AngelicArbiterWatcher2 extends Watcher {
 
     public AngelicArbiterWatcher2() {
         super("OpponentAttacked", WatcherScope.PLAYER);

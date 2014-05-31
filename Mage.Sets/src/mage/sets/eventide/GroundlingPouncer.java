@@ -119,7 +119,7 @@ class GroundingPouncerCondition implements Condition {
     }
 }
 
-class ActivatedAbilityUsedThisTurnWatcher extends Watcher<ActivatedAbilityUsedThisTurnWatcher> {
+class ActivatedAbilityUsedThisTurnWatcher extends Watcher {
 
     public Set<UUID> activatedThisTurn = new HashSet<UUID>();
 

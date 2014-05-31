@@ -172,7 +172,7 @@ class JelevaNephaliasCastEffect extends OneShotEffect<JelevaNephaliasCastEffect>
     }
 }
 
-class JelevaNephaliasWatcher extends Watcher<JelevaNephaliasWatcher> {
+class JelevaNephaliasWatcher extends Watcher {
 
     private Map<Integer, Integer> manaSpendToCast = new HashMap<Integer, Integer>(); // cast
 

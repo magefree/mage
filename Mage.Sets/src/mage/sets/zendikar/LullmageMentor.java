@@ -143,7 +143,7 @@ class MerfolkToken extends Token {
     }
 }
 
-class CastedSpellsWithSpellTarget extends Watcher<CastedSpellsWithSpellTarget> {
+class CastedSpellsWithSpellTarget extends Watcher {
 
     // <SourceId_TargetSpellId, controllerId>
     private Map<String, UUID> casted = new HashMap<String, UUID>();

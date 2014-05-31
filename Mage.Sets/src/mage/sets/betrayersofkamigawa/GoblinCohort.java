@@ -121,7 +121,7 @@ class GoblinCohortEffect extends RestrictionEffect<GoblinCohortEffect> {
     }
 }
 
-class PlayerCastCreatureWatcher extends Watcher<PlayerCastCreatureWatcher> {
+class PlayerCastCreatureWatcher extends Watcher {
 
     Set<UUID> playerIds = new HashSet<>();
 

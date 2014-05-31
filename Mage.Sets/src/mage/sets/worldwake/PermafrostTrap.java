@@ -79,7 +79,7 @@ public class PermafrostTrap extends CardImpl<PermafrostTrap> {
     }
 }
 
-class PermafrostTrapWatcher extends Watcher<PermafrostTrapWatcher> {
+class PermafrostTrapWatcher extends Watcher {
 
     public PermafrostTrapWatcher() {
         super("PermafrostTrapWatcher", WatcherScope.GAME);

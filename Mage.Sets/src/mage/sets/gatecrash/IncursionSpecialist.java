@@ -104,7 +104,7 @@ class IncursionTriggeredAbility extends TriggeredAbilityImpl<IncursionTriggeredA
     }
 }
 
-class IncursionWatcher extends Watcher<IncursionWatcher> {
+class IncursionWatcher extends Watcher {
 
     int spellCount = 0;
 

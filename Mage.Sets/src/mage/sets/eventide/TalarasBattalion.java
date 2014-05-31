@@ -135,7 +135,7 @@ class CastGreenSpellThisTurnCondition implements Condition {
     }
 }
 
-class TalarasBattalionWatcher extends Watcher<TalarasBattalionWatcher> {
+class TalarasBattalionWatcher extends Watcher {
 
     private static final FilterSpell filter = new FilterSpell();
 

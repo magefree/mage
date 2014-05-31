@@ -116,7 +116,7 @@ class MoltenPsycheEffect extends OneShotEffect<MoltenPsycheEffect> {
 
 }
 
-class MoltenPsycheWatcher extends Watcher<MoltenPsycheWatcher> {
+class MoltenPsycheWatcher extends Watcher {
 
     private final Map<UUID, Integer> draws = new HashMap<>();
 

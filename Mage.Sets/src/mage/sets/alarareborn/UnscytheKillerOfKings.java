@@ -167,7 +167,7 @@ class UnscytheEffect extends OneShotEffect<UnscytheEffect> {
     }
 }
 
-class EquippedDidDamageWatcher extends Watcher<EquippedDidDamageWatcher> {
+class EquippedDidDamageWatcher extends Watcher {
 
     public List<UUID> equippedDamagedTargets = new ArrayList<UUID>();
 

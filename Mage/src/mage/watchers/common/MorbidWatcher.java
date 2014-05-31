@@ -41,7 +41,7 @@ import mage.watchers.Watcher;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MorbidWatcher extends Watcher<MorbidWatcher> {
+public class MorbidWatcher extends Watcher {
 
     public MorbidWatcher() {
         super("Morbid", WatcherScope.GAME);

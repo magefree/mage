@@ -42,7 +42,7 @@ import mage.watchers.Watcher;
 *
 * @author nantuko, BetaSteward_at_googlemail.com
 */
-public class CastSpellLastTurnWatcher extends Watcher<CastSpellLastTurnWatcher> {
+public class CastSpellLastTurnWatcher extends Watcher {
 
     private final Map<UUID, Integer> amountOfSpellsCastOnPrevTurn = new HashMap<>();
     private final Map<UUID, Integer> amountOfSpellsCastOnCurrentTurn = new HashMap<>();

@@ -101,7 +101,7 @@ class SecondSunriseEffect extends OneShotEffect<SecondSunriseEffect> {
     }
 }
 
-class SecondSunriseWatcher extends Watcher<SecondSunriseWatcher> {
+class SecondSunriseWatcher extends Watcher {
     ArrayList<UUID> cards = new ArrayList<UUID>();
 
     public SecondSunriseWatcher() {

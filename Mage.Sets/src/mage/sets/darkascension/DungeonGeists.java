@@ -155,7 +155,7 @@ class DungeonGeistsEffect extends ReplacementEffectImpl<DungeonGeistsEffect> {
     }
 }
 
-class DungeonGeistsWatcher extends Watcher<DungeonGeistsWatcher> {
+class DungeonGeistsWatcher extends Watcher {
 
     DungeonGeistsWatcher () {
         super("ControlLost", WatcherScope.CARD);

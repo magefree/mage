@@ -134,7 +134,7 @@ class KumanosBlessingEffect extends ReplacementEffectImpl<KumanosBlessingEffect>
 
 }
 
-class DamagedByEnchantedWatcher extends Watcher<DamagedByEnchantedWatcher> {
+class DamagedByEnchantedWatcher extends Watcher {
 
     public List<UUID> damagedCreatures = new ArrayList<>();
 

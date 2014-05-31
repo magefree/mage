@@ -88,7 +88,7 @@ public class SummoningTrap extends CardImpl<SummoningTrap> {
     }
 }
 
-class SummoningTrapWatcher extends Watcher<SummoningTrapWatcher> {
+class SummoningTrapWatcher extends Watcher {
 
     public SummoningTrapWatcher() {
         super("CreatureSpellCountered", WatcherScope.PLAYER);

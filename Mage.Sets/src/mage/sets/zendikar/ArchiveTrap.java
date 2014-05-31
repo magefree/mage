@@ -73,7 +73,7 @@ public class ArchiveTrap extends CardImpl<ArchiveTrap> {
 
 }
 
-class ArchiveTrapWatcher extends Watcher<ArchiveTrapWatcher> {
+class ArchiveTrapWatcher extends Watcher {
 
     public ArchiveTrapWatcher() {
         super("LibrarySearched", WatcherScope.PLAYER);

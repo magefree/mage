@@ -86,7 +86,7 @@ public class RicochetTrap extends CardImpl<RicochetTrap> {
     }
 }
 
-class RicochetTrapWatcher extends Watcher<RicochetTrapWatcher> {
+class RicochetTrapWatcher extends Watcher {
 
     public RicochetTrapWatcher() {
         super("RicochetTrapWatcher", WatcherScope.GAME);

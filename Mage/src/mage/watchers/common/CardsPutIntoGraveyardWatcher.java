@@ -47,7 +47,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class CardsPutIntoGraveyardWatcher extends Watcher<CardsPutIntoGraveyardWatcher> {
+public class CardsPutIntoGraveyardWatcher extends Watcher {
 
     private final Map<UUID, Integer> amountOfCardsThisTurn = new HashMap<UUID, Integer>();
     private final Set<UUID> cardsPutToGraveyardFromBattlefield = new HashSet<UUID>();

@@ -188,7 +188,7 @@ class AureliasFuryCantCastEffect extends ReplacementEffectImpl<AureliasFuryCantC
     }
 }
 
-class AureliasFuryDamagedByWatcher extends Watcher<AureliasFuryDamagedByWatcher> {
+class AureliasFuryDamagedByWatcher extends Watcher {
 
     public List<UUID> damagedCreatures = new ArrayList<UUID>();
     public List<UUID> damagedPlayers = new ArrayList<UUID>();

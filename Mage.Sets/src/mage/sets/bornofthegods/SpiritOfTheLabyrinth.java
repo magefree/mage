@@ -74,7 +74,7 @@ public class SpiritOfTheLabyrinth extends CardImpl<SpiritOfTheLabyrinth> {
     }
 }
 
-class SpiritOfTheLabyrinthWatcher extends Watcher<SpiritOfTheLabyrinthWatcher> {
+class SpiritOfTheLabyrinthWatcher extends Watcher {
 
     public SpiritOfTheLabyrinthWatcher() {
         super("DrewCard", WatcherScope.PLAYER);

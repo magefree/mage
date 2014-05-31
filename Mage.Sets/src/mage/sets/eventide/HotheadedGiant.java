@@ -98,7 +98,7 @@ class CastRedSpellThisTurnCondition implements Condition {
     }
 }
 
-class HotHeadedGiantWatcher extends Watcher<HotHeadedGiantWatcher> {
+class HotHeadedGiantWatcher extends Watcher {
 
     private static final FilterSpell filter = new FilterSpell();
     static {

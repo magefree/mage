@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class SourceDidDamageWatcher extends Watcher<SourceDidDamageWatcher> {
+public class SourceDidDamageWatcher extends Watcher {
 
     public List<UUID> damageSources = new ArrayList<UUID>();
 

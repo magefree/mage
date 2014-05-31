@@ -162,7 +162,7 @@ class OpalPalaceManaEffect extends ManaEffect<OpalPalaceManaEffect> {
     }
 }
 
-class OpalPalaceWatcher extends Watcher<OpalPalaceWatcher> {
+class OpalPalaceWatcher extends Watcher {
 
     public List<UUID> commanderId = new ArrayList<UUID>();
 

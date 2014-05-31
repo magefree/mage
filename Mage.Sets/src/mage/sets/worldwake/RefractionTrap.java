@@ -83,7 +83,7 @@ public class RefractionTrap extends CardImpl<RefractionTrap> {
     }
 }
 
-class RefractionTrapWatcher extends Watcher<RefractionTrapWatcher> {
+class RefractionTrapWatcher extends Watcher {
 
     public RefractionTrapWatcher() {
         super("RefractionTrapWatcher", WatcherScope.GAME);

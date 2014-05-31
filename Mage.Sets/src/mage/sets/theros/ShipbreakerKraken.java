@@ -144,7 +144,7 @@ class ShipbreakerKrakenReplacementEffect extends ReplacementEffectImpl<Shipbreak
     }
 }
 
-class ShipbreakerKrakenWatcher extends Watcher<ShipbreakerKrakenWatcher> {
+class ShipbreakerKrakenWatcher extends Watcher {
 
     ShipbreakerKrakenWatcher () {
         super("ControlLost", WatcherScope.CARD);

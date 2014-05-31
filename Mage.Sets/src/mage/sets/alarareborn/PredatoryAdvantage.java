@@ -96,7 +96,7 @@ class DidNotCastCreatureCondition implements Condition {
     }
 }
 
-class CastCreatureWatcher extends Watcher<CastCreatureWatcher> {
+class CastCreatureWatcher extends Watcher {
 
     public CastCreatureWatcher() {
         super("CastCreature", WatcherScope.CARD);

@@ -99,7 +99,7 @@ class FaithsRewardEffect extends OneShotEffect<FaithsRewardEffect> {
     }
 }
 
-class FaithsRewardWatcher extends Watcher<FaithsRewardWatcher> {
+class FaithsRewardWatcher extends Watcher {
     ArrayList<UUID> cards = new ArrayList<UUID>();
 
     public FaithsRewardWatcher() {

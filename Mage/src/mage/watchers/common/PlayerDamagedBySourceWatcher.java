@@ -42,7 +42,7 @@ import mage.watchers.Watcher;
  * 
  * @author LevelX
  */
-public class PlayerDamagedBySourceWatcher extends Watcher<PlayerDamagedBySourceWatcher> {
+public class PlayerDamagedBySourceWatcher extends Watcher {
 
     private Set<String> damageSourceIds = new HashSet<String>();
 

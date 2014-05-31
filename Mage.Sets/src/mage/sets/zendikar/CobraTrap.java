@@ -78,7 +78,7 @@ public class CobraTrap extends CardImpl<CobraTrap> {
     }
 }
 
-class CobraTrapWatcher extends Watcher<CobraTrapWatcher> {
+class CobraTrapWatcher extends Watcher {
 
     public CobraTrapWatcher() {
         super("noncreature permanent destroyed", WatcherScope.PLAYER);

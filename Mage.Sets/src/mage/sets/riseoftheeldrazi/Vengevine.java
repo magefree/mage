@@ -108,7 +108,7 @@ class VengevineAbility extends TriggeredAbilityImpl<VengevineAbility> {
 }
 
 
-class VengevineWatcher extends Watcher<VengevineWatcher> {
+class VengevineWatcher extends Watcher {
 
     int creatureSpellCount = 0;
 

@@ -75,7 +75,7 @@ public class FloatingDreamZubera extends CardImpl<FloatingDreamZubera> {
 }
 
 
-class ZuberasDiedWatcher extends Watcher<ZuberasDiedWatcher> {
+class ZuberasDiedWatcher extends Watcher {
 
     public int zuberasDiedThisTurn = 0;
 

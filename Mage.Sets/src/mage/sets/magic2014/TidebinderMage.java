@@ -159,7 +159,7 @@ class TidebinderMageEffect extends ReplacementEffectImpl<TidebinderMageEffect> {
     }
 }
 
-class TidebinderMageWatcher extends Watcher<TidebinderMageWatcher> {
+class TidebinderMageWatcher extends Watcher {
 
     TidebinderMageWatcher () {
         super("ControlLost", WatcherScope.CARD);

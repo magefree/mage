@@ -78,7 +78,7 @@ public class WhiplashTrap extends CardImpl<WhiplashTrap> {
     }
 }
 
-class WhiplashTrapWatcher extends Watcher<WhiplashTrapWatcher> {
+class WhiplashTrapWatcher extends Watcher {
 
     private Map<UUID, Integer> amountOfCreaturesPlayedThisTurn = new HashMap<UUID, Integer>();
 

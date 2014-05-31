@@ -82,7 +82,7 @@ public class MindbreakTrap extends CardImpl<MindbreakTrap> {
     }
 }
 
-class MindbreakTrapWatcher extends Watcher<MindbreakTrapWatcher> {
+class MindbreakTrapWatcher extends Watcher {
 
     private Map<UUID, Integer> counts = new HashMap<UUID, Integer>();
 

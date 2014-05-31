@@ -161,7 +161,7 @@ class SylvanLibraryEffect extends OneShotEffect<SylvanLibraryEffect> {
     }
 }
 
-class CardsDrawnThisTurnWatcher extends Watcher<CardsDrawnThisTurnWatcher> {
+class CardsDrawnThisTurnWatcher extends Watcher {
 
     private final Set<UUID> cardsDrawnThisTurn = new HashSet<UUID>();
 

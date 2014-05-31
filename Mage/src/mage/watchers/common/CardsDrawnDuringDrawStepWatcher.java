@@ -46,7 +46,7 @@ import mage.watchers.Watcher;
  * 
  */
 
-public class CardsDrawnDuringDrawStepWatcher extends Watcher<CardsDrawnDuringDrawStepWatcher> {
+public class CardsDrawnDuringDrawStepWatcher extends Watcher {
 
     private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
 

@@ -75,7 +75,7 @@ public class InfernoTrap extends CardImpl<InfernoTrap> {
     }
 }
 
-class ControllerDamagedByCreatureWatcher extends Watcher<ControllerDamagedByCreatureWatcher> {
+class ControllerDamagedByCreatureWatcher extends Watcher {
 
     int numCreaturesDamagedController;
 

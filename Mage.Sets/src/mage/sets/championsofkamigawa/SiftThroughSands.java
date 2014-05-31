@@ -99,7 +99,7 @@ class SiftThroughSandsCondition implements Condition {
     }
 }
 
-class SiftThroughSandsWatcher extends Watcher<SiftThroughSandsWatcher> {
+class SiftThroughSandsWatcher extends Watcher {
 
     boolean castPeerThroughDepths = false;
     boolean castReachThroughMists = false;

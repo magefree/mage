@@ -11,7 +11,7 @@ import mage.watchers.Watcher;
  * @author BetaSteward_at_googlemail.com
  * @author Loki
  */
-public class LandfallWatcher extends Watcher<LandfallWatcher> {
+public class LandfallWatcher extends Watcher {
 
     public LandfallWatcher() {
         super("LandPlayed", WatcherScope.PLAYER);

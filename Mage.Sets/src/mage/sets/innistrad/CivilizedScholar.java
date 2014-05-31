@@ -80,7 +80,7 @@ public class CivilizedScholar extends CardImpl<CivilizedScholar> {
     }
 }
 
-class HomicidalBruteWatcher extends Watcher<HomicidalBruteWatcher> {
+class HomicidalBruteWatcher extends Watcher {
 
     public HomicidalBruteWatcher() {
         super("HomicidalBruteAttacked", WatcherScope.CARD);

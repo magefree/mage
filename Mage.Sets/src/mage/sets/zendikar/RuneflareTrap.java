@@ -105,7 +105,7 @@ class TargetPlayerCardsInHandCount implements DynamicValue {
     }
 }
 
-class CardsDrawnOpponentWatcher extends Watcher<CardsDrawnOpponentWatcher> {
+class CardsDrawnOpponentWatcher extends Watcher {
 
     int cardsDrawn;
 

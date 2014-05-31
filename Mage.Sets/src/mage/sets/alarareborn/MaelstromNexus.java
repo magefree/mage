@@ -114,7 +114,7 @@ class MaelstromNexusTriggeredAbility extends TriggeredAbilityImpl<MaelstromNexus
     }
 }
 
-class FirstSpellCastThisTurnWatcher extends Watcher<FirstSpellCastThisTurnWatcher> {
+class FirstSpellCastThisTurnWatcher extends Watcher {
 
     int spellCount = 0;
 

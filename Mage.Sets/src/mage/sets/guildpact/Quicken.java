@@ -126,7 +126,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl<QuickenAsThoughEffect> {
 
 }
 
-class QuickenWatcher extends Watcher<QuickenWatcher> {
+class QuickenWatcher extends Watcher {
 
     public List<String> activeQuickenSpells = new ArrayList<String>();
 

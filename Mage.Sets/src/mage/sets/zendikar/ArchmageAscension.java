@@ -108,7 +108,7 @@ class ArchmageAscensionTriggeredAbility extends TriggeredAbilityImpl<ArchmageAsc
     }
 }
 
-class CardsDrawnControllerWatcher extends Watcher<CardsDrawnControllerWatcher> {
+class CardsDrawnControllerWatcher extends Watcher {
 
     int cardsDrawn;
 

@@ -71,7 +71,7 @@ public class FreshMeat extends CardImpl<FreshMeat> {
     }
 }
 
-class FreshMeatWatcher extends Watcher<FreshMeatWatcher> {
+class FreshMeatWatcher extends Watcher {
 
     private int creaturesCount = 0;
 

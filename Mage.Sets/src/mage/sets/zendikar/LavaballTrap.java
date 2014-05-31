@@ -81,7 +81,7 @@ public class LavaballTrap extends CardImpl<LavaballTrap> {
     }
 }
 
-class LavaballTrapWatcher extends Watcher<LavaballTrapWatcher> {
+class LavaballTrapWatcher extends Watcher {
 
     private Map<UUID, Integer> amountOfLandsPlayedThisTurn = new HashMap<UUID, Integer>();
 

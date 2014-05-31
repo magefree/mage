@@ -108,7 +108,7 @@ class HadAnotherCreatureEnterTheBattlefieldCondition implements Condition {
     }
 }
 
-class CreatureEnteredBattlefieldLastTurnWatcher extends Watcher<CreatureEnteredBattlefieldLastTurnWatcher> {
+class CreatureEnteredBattlefieldLastTurnWatcher extends Watcher {
 
     private boolean anotherCreatureEntered = false;
 

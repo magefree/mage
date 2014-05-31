@@ -129,7 +129,7 @@ class GainReboundEffect extends ContinuousEffectImpl<GainReboundEffect> {
 
 class AttachedReboundAbility extends ReboundAbility {}
 
-class LeavesBattlefieldWatcher extends Watcher<LeavesBattlefieldWatcher> {
+class LeavesBattlefieldWatcher extends Watcher {
 
     public LeavesBattlefieldWatcher() {
         super("LeavesBattlefieldWatcher", WatcherScope.CARD);

@@ -140,7 +140,7 @@ class GomazoaEffect extends OneShotEffect<GomazoaEffect> {
     }
 }
 
-class BlockedByWatcher extends Watcher<BlockedByWatcher> {
+class BlockedByWatcher extends Watcher {
 
     public List<UUID> blockedByWatcher = new ArrayList<>();
 

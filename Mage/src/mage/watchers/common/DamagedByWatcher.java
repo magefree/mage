@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamagedByWatcher extends Watcher<DamagedByWatcher> {
+public class DamagedByWatcher extends Watcher {
 
     public List<UUID> damagedCreatures = new ArrayList<>();
 

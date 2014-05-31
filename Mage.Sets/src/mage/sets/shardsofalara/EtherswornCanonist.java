@@ -73,7 +73,7 @@ public class EtherswornCanonist extends CardImpl<EtherswornCanonist> {
     }
 }
 
-class EtherswornCanonistWatcher extends Watcher<EtherswornCanonistWatcher> {
+class EtherswornCanonistWatcher extends Watcher {
 
     private Map<UUID, Boolean> castNonartifactSpell = new HashMap<UUID, Boolean>();
     
