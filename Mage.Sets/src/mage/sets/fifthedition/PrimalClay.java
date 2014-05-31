@@ -92,23 +92,30 @@ class PrimalClayEffect extends ContinuousEffectImpl<PrimalClayEffect> {
         switch (layer) {
             case PTChangingEffects_7:
                 if (sublayer.equals(SubLayer.SetPT_7b)) {
-                    if (choice.getChoice().equals("a 3/3 artifact creature")) {
-                        permanent.getPower().setValue(3);
-                        permanent.getToughness().setValue(3);
-                    } else if (choice.getChoice().equals("a 2/2 artifact creature with flying")) {
-                        permanent.getPower().setValue(2);
-                        permanent.getToughness().setValue(2);
-                    } else if (choice.getChoice().equals("a 1/6 Wall artifact creature with defender")) {
-                        permanent.getPower().setValue(1);
-                        permanent.getToughness().setValue(6);
+                    switch (choice.getChoice()) {
+                        case "a 3/3 artifact creature":
+                            permanent.getPower().setValue(3);
+                            permanent.getToughness().setValue(3);
+                            break;
+                        case "a 2/2 artifact creature with flying":
+                            permanent.getPower().setValue(2);
+                            permanent.getToughness().setValue(2);
+                            break;
+                        case "a 1/6 Wall artifact creature with defender":
+                            permanent.getPower().setValue(1);
+                            permanent.getToughness().setValue(6);
+                            break;
                     }
                 }
                 break;
             case AbilityAddingRemovingEffects_6:
-                if (choice.getChoice().equals("a 2/2 artifact creature with flying")) {
-                    permanent.addAbility(FlyingAbility.getInstance(), game);
-                } else if (choice.getChoice().equals("a 1/6 Wall artifact creature with defender")) {
-                    permanent.addAbility(DefenderAbility.getInstance(), game);
+                switch (choice.getChoice()) {
+                    case "a 2/2 artifact creature with flying":
+                        permanent.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
+                        break;
+                    case "a 1/6 Wall artifact creature with defender":
+                        permanent.addAbility(DefenderAbility.getInstance(), source.getSourceId(),  game);
+                        break;
                 }
                 break;
         }
@@ -134,6 +141,7 @@ class PrimalClayEffect extends ContinuousEffectImpl<PrimalClayEffect> {
 class PrimalClayChoice extends ChoiceImpl<PrimalClayChoice> {
     PrimalClayChoice() {
         super(true);
+        this.setMessage("Choose for Primal Clay to be");
         this.choices.add("a 3/3 artifact creature");
         this.choices.add("a 2/2 artifact creature with flying");
         this.choices.add("a 1/6 Wall artifact creature with defender");
