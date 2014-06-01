@@ -675,7 +675,7 @@ public class GameController implements GameCallback {
         if (players != null && players.size() > 0) {
             controller = game.getPlayer(players.get(0));
         }
-        if (controller == null) {
+        if (controller == null || game.getStep() == null || game.getStep().getType() == null) {
             return;
         }
         final String message = new StringBuilder(game.getStep().getType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
