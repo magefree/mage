@@ -73,7 +73,7 @@ public class MycoidShepherd extends CardImpl<MycoidShepherd> {
     }
 }
 
-class MycoidShepherdTriggeredAbility extends TriggeredAbilityImpl<MycoidShepherdTriggeredAbility> {
+class MycoidShepherdTriggeredAbility extends TriggeredAbilityImpl {
 
     public MycoidShepherdTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(5), true);

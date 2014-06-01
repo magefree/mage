@@ -164,7 +164,7 @@ class ChainedToTheRocksEffect extends OneShotEffect<ChainedToTheRocksEffect> {
  * @author LevelX2
  */
 
-class ChainedToTheRocksReturnExiledAbility extends TriggeredAbilityImpl<ChainedToTheRocksReturnExiledAbility> {
+class ChainedToTheRocksReturnExiledAbility extends TriggeredAbilityImpl {
 
     public ChainedToTheRocksReturnExiledAbility() {
         super(Zone.BATTLEFIELD, new ReturnExiledCreatureChainedToTheRocksEffect());

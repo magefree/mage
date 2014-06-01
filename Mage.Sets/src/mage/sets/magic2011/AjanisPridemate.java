@@ -70,7 +70,7 @@ public class AjanisPridemate extends CardImpl<AjanisPridemate> {
 
 }
 
-class AjanisPridemateAbility extends TriggeredAbilityImpl<AjanisPridemateAbility> {
+class AjanisPridemateAbility extends TriggeredAbilityImpl {
 
     public AjanisPridemateAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);

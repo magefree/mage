@@ -8,7 +8,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
-public class AnotherCreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl<AnotherCreatureEntersBattlefieldTriggeredAbility> {
+public class AnotherCreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     public AnotherCreatureEntersBattlefieldTriggeredAbility(Effect effect) {
         this(effect, false);

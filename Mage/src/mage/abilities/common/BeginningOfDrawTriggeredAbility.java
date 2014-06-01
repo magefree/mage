@@ -9,7 +9,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl<BeginningOfDrawTriggeredAbility> {
+public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
     private TargetController targetController;
 
     /**

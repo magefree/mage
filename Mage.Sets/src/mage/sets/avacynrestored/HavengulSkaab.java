@@ -73,7 +73,7 @@ public class HavengulSkaab extends CardImpl<HavengulSkaab> {
     }
 }
 
-class HavengulSkaabAbility extends TriggeredAbilityImpl<HavengulSkaabAbility> {
+class HavengulSkaabAbility extends TriggeredAbilityImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
 

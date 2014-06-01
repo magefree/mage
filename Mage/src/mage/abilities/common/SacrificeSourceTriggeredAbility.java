@@ -39,7 +39,7 @@ import mage.game.events.GameEvent;
  * @author LevelX2
  */
 
-public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl<SacrificeSourceTriggeredAbility> {
+public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public SacrificeSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.ALL, effect, optional);

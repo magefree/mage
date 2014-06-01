@@ -8,7 +8,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
-public class VanishingSacrificeAbility extends TriggeredAbilityImpl<VanishingSacrificeAbility> {
+public class VanishingSacrificeAbility extends TriggeredAbilityImpl {
     public VanishingSacrificeAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
         this.setRuleVisible(false);

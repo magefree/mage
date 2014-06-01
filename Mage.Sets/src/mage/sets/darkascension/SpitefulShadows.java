@@ -78,7 +78,7 @@ public class SpitefulShadows extends CardImpl<SpitefulShadows> {
     }
 }
 
-class SpitefulShadowsTriggeredAbility extends TriggeredAbilityImpl<SpitefulShadowsTriggeredAbility> {
+class SpitefulShadowsTriggeredAbility extends TriggeredAbilityImpl {
 
     public SpitefulShadowsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SpitefulShadowsEffect());

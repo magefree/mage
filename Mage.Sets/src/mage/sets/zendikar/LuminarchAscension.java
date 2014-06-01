@@ -81,7 +81,7 @@ public class LuminarchAscension extends CardImpl<LuminarchAscension> {
     }
 }
 
-class LuminarchAscensionTriggeredAbility extends TriggeredAbilityImpl<LuminarchAscensionTriggeredAbility> {
+class LuminarchAscensionTriggeredAbility extends TriggeredAbilityImpl {
 
         public LuminarchAscensionTriggeredAbility() {
             super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);

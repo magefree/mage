@@ -80,7 +80,7 @@ public class FlayerOfTheHatebound extends CardImpl<FlayerOfTheHatebound> {
     }
 }
 
-class FlayerTriggeredAbility extends TriggeredAbilityImpl<FlayerTriggeredAbility> {
+class FlayerTriggeredAbility extends TriggeredAbilityImpl {
 
     public FlayerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new FlayerEffect(), false);

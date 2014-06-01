@@ -94,7 +94,7 @@ public class SpreadingAlgae extends CardImpl<SpreadingAlgae> {
 }
 
 
-class SpreadingAlgaeTriggeredAbility extends TriggeredAbilityImpl<SpreadingAlgaeTriggeredAbility> {
+class SpreadingAlgaeTriggeredAbility extends TriggeredAbilityImpl {
 
     public SpreadingAlgaeTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);

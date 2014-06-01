@@ -38,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VigilanceAbility extends StaticAbility<VigilanceAbility> implements MageSingleton {
+public class VigilanceAbility extends StaticAbility implements MageSingleton {
 
     private static final VigilanceAbility fINSTANCE =  new VigilanceAbility();
 

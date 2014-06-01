@@ -71,7 +71,7 @@ public class OrchardSpirit extends CardImpl<OrchardSpirit> {
     }
 }
 
-class OrchardSpiritAbility extends EvasionAbility<OrchardSpiritAbility> {
+class OrchardSpiritAbility extends EvasionAbility {
 
     private static OrchardSpiritAbility instance;
 

@@ -76,7 +76,7 @@ public class WarrenInstigator extends CardImpl<WarrenInstigator> {
     }
 }
 
-class WarrenInstigatorTriggeredAbility extends TriggeredAbilityImpl<WarrenInstigatorTriggeredAbility> {
+class WarrenInstigatorTriggeredAbility extends TriggeredAbilityImpl {
 
     public WarrenInstigatorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new WarrenInstigatorEffect(), true);

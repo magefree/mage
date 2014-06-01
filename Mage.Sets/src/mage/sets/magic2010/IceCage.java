@@ -84,7 +84,7 @@ public class IceCage extends CardImpl<IceCage> {
     }
 }
 
-class IceCageAbility extends TriggeredAbilityImpl<IceCageAbility> {
+class IceCageAbility extends TriggeredAbilityImpl {
 
     public IceCageAbility() {
         super(Zone.BATTLEFIELD, new DestroySourceEffect());

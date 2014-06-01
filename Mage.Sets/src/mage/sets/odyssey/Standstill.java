@@ -68,7 +68,7 @@ public class Standstill extends CardImpl<Standstill> {
     }
 }
 
-class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTriggeredAbility> {
+class SpellCastTriggeredAbility extends TriggeredAbilityImpl {
 
     public SpellCastTriggeredAbility() {
         super(Zone.BATTLEFIELD, new StandstillEffect(), false);

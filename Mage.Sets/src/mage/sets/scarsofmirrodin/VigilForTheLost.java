@@ -69,7 +69,7 @@ public class VigilForTheLost extends CardImpl<VigilForTheLost> {
 
 }
 
-class VigilForTheLostTriggeredAbility extends TriggeredAbilityImpl<VigilForTheLostTriggeredAbility> {
+class VigilForTheLostTriggeredAbility extends TriggeredAbilityImpl {
     VigilForTheLostTriggeredAbility() {
         super(Zone.BATTLEFIELD, new VigilForTheLostEffect());
     }

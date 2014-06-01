@@ -88,7 +88,7 @@ public class NumbingDose extends CardImpl<NumbingDose> {
     }
 }
 
-class NumbingDoseTriggeredAbility extends TriggeredAbilityImpl<NumbingDoseTriggeredAbility> {
+class NumbingDoseTriggeredAbility extends TriggeredAbilityImpl {
 
     public NumbingDoseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);

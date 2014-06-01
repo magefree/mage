@@ -74,7 +74,7 @@ public class ShimmeringGlasskite extends CardImpl<ShimmeringGlasskite> {
     }
 }
 
-class ShimmeringGlasskiteAbility extends TriggeredAbilityImpl<ShimmeringGlasskiteAbility> {
+class ShimmeringGlasskiteAbility extends TriggeredAbilityImpl {
 
     protected int turnUsed;
 

@@ -37,7 +37,7 @@ import mage.abilities.effects.common.TapSourceEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EntersBattlefieldTappedAbility extends StaticAbility<EntersBattlefieldTappedAbility> {
+public class EntersBattlefieldTappedAbility extends StaticAbility {
 
     private String ruleText;
     

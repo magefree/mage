@@ -137,7 +137,7 @@ class TritonTacticsUntapTargetEffect extends OneShotEffect<TritonTacticsUntapTar
 
 }
 
-class TritonTacticsTriggeredAbility extends DelayedTriggeredAbility<TritonTacticsTriggeredAbility> {
+class TritonTacticsTriggeredAbility extends DelayedTriggeredAbility {
 
     public TritonTacticsTriggeredAbility() {
         super(new TritonTacticsEndOfCombatEffect(), Duration.EndOfTurn, true);

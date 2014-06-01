@@ -71,7 +71,7 @@ public class RakishHeir extends CardImpl<RakishHeir> {
     }
 }
 
-class RakishHeirTriggeredAbility extends TriggeredAbilityImpl<RakishHeirTriggeredAbility> {
+class RakishHeirTriggeredAbility extends TriggeredAbilityImpl {
 
     public RakishHeirTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);

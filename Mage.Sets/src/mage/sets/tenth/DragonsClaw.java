@@ -63,7 +63,7 @@ public class DragonsClaw extends CardImpl<DragonsClaw> {
 
 }
 
-class DragonsClawAbility extends TriggeredAbilityImpl<DragonsClawAbility> {
+class DragonsClawAbility extends TriggeredAbilityImpl {
 
     public DragonsClawAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);

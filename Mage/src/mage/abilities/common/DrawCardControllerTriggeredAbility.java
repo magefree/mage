@@ -37,7 +37,7 @@ import mage.game.events.GameEvent;
  *
  * @author North
  */
-public class DrawCardControllerTriggeredAbility  extends TriggeredAbilityImpl<DrawCardControllerTriggeredAbility> {
+public class DrawCardControllerTriggeredAbility  extends TriggeredAbilityImpl {
 
     public DrawCardControllerTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

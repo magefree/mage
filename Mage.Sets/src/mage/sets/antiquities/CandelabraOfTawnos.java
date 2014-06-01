@@ -70,7 +70,7 @@ public class CandelabraOfTawnos extends CardImpl<CandelabraOfTawnos> {
 
 
 
-class CandelabraOfTawnosAbility extends ActivatedAbilityImpl<CandelabraOfTawnosAbility> implements AdjustingSourceCosts{
+class CandelabraOfTawnosAbility extends ActivatedAbilityImpl implements AdjustingSourceCosts{
     public CandelabraOfTawnosAbility(){
         super(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
         addTarget(new TargetLandPermanent(0, Integer.MAX_VALUE, new FilterLandPermanent(), false));

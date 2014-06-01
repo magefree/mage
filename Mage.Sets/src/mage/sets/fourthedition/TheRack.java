@@ -69,7 +69,7 @@ public class TheRack extends CardImpl<TheRack> {
     }
 }
 
-class TheRackTriggeredAbility extends TriggeredAbilityImpl<TheRackTriggeredAbility> {
+class TheRackTriggeredAbility extends TriggeredAbilityImpl {
 
 
     public TheRackTriggeredAbility() {

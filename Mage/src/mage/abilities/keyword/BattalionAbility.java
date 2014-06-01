@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
  */
 
 
-public class BattalionAbility extends TriggeredAbilityImpl<BattalionAbility> {
+public class BattalionAbility extends TriggeredAbilityImpl {
 
     public BattalionAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);

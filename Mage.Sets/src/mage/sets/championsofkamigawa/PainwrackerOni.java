@@ -77,7 +77,7 @@ public class PainwrackerOni extends CardImpl<PainwrackerOni> {
 
 }
 
-class PainwrackerOniTriggeredAbility1 extends TriggeredAbilityImpl<PainwrackerOniTriggeredAbility1> {
+class PainwrackerOniTriggeredAbility1 extends TriggeredAbilityImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

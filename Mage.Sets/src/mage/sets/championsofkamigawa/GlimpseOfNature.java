@@ -64,7 +64,7 @@ public class GlimpseOfNature extends CardImpl<GlimpseOfNature> {
 
 }
 
-class GlimpseOfNatureTriggeredAbility extends DelayedTriggeredAbility<GlimpseOfNatureTriggeredAbility> {
+class GlimpseOfNatureTriggeredAbility extends DelayedTriggeredAbility {
 
     private static final FilterSpell filter = new FilterSpell();
     static {

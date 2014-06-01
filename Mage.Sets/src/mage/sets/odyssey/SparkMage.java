@@ -73,7 +73,7 @@ public class SparkMage extends CardImpl<SparkMage> {
     }
 }
 
-class SparkMageTriggeredAbility extends TriggeredAbilityImpl<SparkMageTriggeredAbility> {
+class SparkMageTriggeredAbility extends TriggeredAbilityImpl {
 
     public SparkMageTriggeredAbility(){
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));

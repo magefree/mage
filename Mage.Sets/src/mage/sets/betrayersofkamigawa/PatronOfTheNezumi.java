@@ -77,7 +77,7 @@ public class PatronOfTheNezumi extends CardImpl<PatronOfTheNezumi> {
     }
 }
 
-class PatronOfTheNezumiTriggeredAbility extends TriggeredAbilityImpl<PatronOfTheNezumiTriggeredAbility> {
+class PatronOfTheNezumiTriggeredAbility extends TriggeredAbilityImpl {
 
     public PatronOfTheNezumiTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);

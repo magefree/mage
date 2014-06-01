@@ -38,7 +38,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl<BecomesMonstrousSourceTriggeredAbility> {
+public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     private int monstrosityValue;
 

@@ -4,7 +4,7 @@ import mage.abilities.AbilityImpl;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 
-class MockAbility extends AbilityImpl<MockAbility> {
+class MockAbility extends AbilityImpl {
 
     private final String text;
 

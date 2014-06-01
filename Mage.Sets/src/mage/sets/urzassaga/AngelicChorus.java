@@ -69,7 +69,7 @@ public class AngelicChorus extends CardImpl<AngelicChorus> {
     }
 }
 
-class AngelicChorusTriggeredAbility extends TriggeredAbilityImpl<AngelicChorusTriggeredAbility> {
+class AngelicChorusTriggeredAbility extends TriggeredAbilityImpl {
 
     public AngelicChorusTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AngelicChorusEffect(), false);

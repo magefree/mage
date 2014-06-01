@@ -89,7 +89,7 @@ public class VolatileRig extends CardImpl<VolatileRig> {
     }
 }
 
-class VolatileRigTriggeredAbility extends TriggeredAbilityImpl<VolatileRigTriggeredAbility> {
+class VolatileRigTriggeredAbility extends TriggeredAbilityImpl {
 
     private Boolean triggerdThisCombatStep = false;
 

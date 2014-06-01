@@ -72,7 +72,7 @@ public class ReaperOfSheoldred extends CardImpl<ReaperOfSheoldred> {
     }
 }
 
-class ReaperOfSheoldredTriggeredAbility extends TriggeredAbilityImpl<ReaperOfSheoldredTriggeredAbility> {
+class ReaperOfSheoldredTriggeredAbility extends TriggeredAbilityImpl {
     ReaperOfSheoldredTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.POISON.createInstance()));
     }

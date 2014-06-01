@@ -97,7 +97,7 @@ public class GrimgrinCorpseBorn extends CardImpl<GrimgrinCorpseBorn> {
     }
 }
 
-class GrimgrinCorpseBornAbility extends TriggeredAbilityImpl<GrimgrinCorpseBornAbility> {
+class GrimgrinCorpseBornAbility extends TriggeredAbilityImpl {
 
     public GrimgrinCorpseBornAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());

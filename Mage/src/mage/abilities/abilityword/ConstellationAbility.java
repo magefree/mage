@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class ConstellationAbility extends TriggeredAbilityImpl<ConstellationAbility> {
+public class ConstellationAbility extends TriggeredAbilityImpl {
 
     public ConstellationAbility(Effect effect) {
         this(effect, false);

@@ -78,7 +78,7 @@ public class NefaroxOverlordOfGrixis extends CardImpl<NefaroxOverlordOfGrixis> {
     }
 }
 
-class NefaroxOverlordOfGrixisTriggeredAbility extends TriggeredAbilityImpl<NefaroxOverlordOfGrixisTriggeredAbility> {
+class NefaroxOverlordOfGrixisTriggeredAbility extends TriggeredAbilityImpl {
     
     private static final FilterControlledPermanent filter;
 

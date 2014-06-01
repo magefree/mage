@@ -17,7 +17,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 
-public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityImpl<BeginningOfPreCombatMainTriggeredAbility> {
+public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityImpl {
 
     private TargetController targetController;
     private boolean setTargetPointer;

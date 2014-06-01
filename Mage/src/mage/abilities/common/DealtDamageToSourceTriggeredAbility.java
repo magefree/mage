@@ -39,7 +39,7 @@ import mage.game.events.GameEvent;
  * @author LevelX2
  */
 
-public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl<DealtDamageToSourceTriggeredAbility> {
+public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);

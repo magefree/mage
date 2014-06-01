@@ -76,7 +76,7 @@ public class PyromancerAscension extends CardImpl<PyromancerAscension> {
 
 }
 
-class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl<PyromancerAscensionQuestTriggeredAbility> {
+class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl {
 
     PyromancerAscensionQuestTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(), true), true);
@@ -124,7 +124,7 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl<Pyro
     }
 }
 
-class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl<PyromancerAscensionCopyTriggeredAbility> {
+class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     PyromancerAscensionCopyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), true);

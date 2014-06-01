@@ -76,7 +76,7 @@ public class SlaveringNulls extends CardImpl<SlaveringNulls> {
     }
 }
 
-class SlaveringNullsTriggeredAbility extends TriggeredAbilityImpl<SlaveringNullsTriggeredAbility> {
+class SlaveringNullsTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 

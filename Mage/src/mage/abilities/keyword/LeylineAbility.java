@@ -38,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LeylineAbility extends StaticAbility<LeylineAbility> implements MageSingleton {
+public class LeylineAbility extends StaticAbility implements MageSingleton {
 
     private static final LeylineAbility fINSTANCE =  new LeylineAbility();
 

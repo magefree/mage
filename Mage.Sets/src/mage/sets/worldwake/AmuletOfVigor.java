@@ -62,7 +62,7 @@ public class AmuletOfVigor extends CardImpl<AmuletOfVigor> {
     }
 }
 
-class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl<AmuletOfVigorTriggeredAbility> {
+class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl {
     AmuletOfVigorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new UntapTargetEffect());
     }

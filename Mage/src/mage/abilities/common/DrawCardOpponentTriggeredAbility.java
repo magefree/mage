@@ -40,7 +40,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 
-public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl<DrawCardOpponentTriggeredAbility> {
+public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
     boolean setTargetPointer;
 

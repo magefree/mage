@@ -82,7 +82,7 @@ public class MimicVat extends CardImpl<MimicVat> {
     }
 }
 
-class MimicVatTriggeredAbility extends TriggeredAbilityImpl<MimicVatTriggeredAbility> {
+class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
 
     MimicVatTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MimicVatEffect(), true);

@@ -127,7 +127,7 @@ creature to Old Man of the seas power. It's not possible to do this as condition
 time the effect checks its condition, the layered effects that modify power are not applied yet.
 result is save to a state value to be available for the condition of the continuous effect
 */
-class OldManOfTheSeaStateBasedTriggeredAbility extends StateTriggeredAbility<OldManOfTheSeaStateBasedTriggeredAbility> {
+class OldManOfTheSeaStateBasedTriggeredAbility extends StateTriggeredAbility {
 
     public OldManOfTheSeaStateBasedTriggeredAbility() {
         super(Zone.BATTLEFIELD, new EmptyEffect(""));

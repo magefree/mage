@@ -74,7 +74,7 @@ public class InfernoTitan extends CardImpl<InfernoTitan> {
 
 }
 
-class InfernoTitanAbility extends TriggeredAbilityImpl<InfernoTitanAbility> {
+class InfernoTitanAbility extends TriggeredAbilityImpl {
 
     public InfernoTitanAbility() {
         super(Zone.BATTLEFIELD, new DamageMultiEffect(3), false);

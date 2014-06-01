@@ -78,7 +78,7 @@ public class RelicPutrescence extends CardImpl<RelicPutrescence> {
 
 }
 
-class RelicPutrescenceAbility extends TriggeredAbilityImpl<RelicPutrescenceAbility> {
+class RelicPutrescenceAbility extends TriggeredAbilityImpl {
 
     public RelicPutrescenceAbility() {
         super(Zone.BATTLEFIELD, new AddCountersControllerEffect(CounterType.POISON.createInstance(), true));

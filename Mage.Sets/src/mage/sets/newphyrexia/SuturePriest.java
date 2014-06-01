@@ -86,7 +86,7 @@ public class SuturePriest extends CardImpl<SuturePriest> {
     }
 }
 
-class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl<SuturePriestSecondTriggeredAbility> {
+class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl {
     SuturePriestSecondTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), true);
     }

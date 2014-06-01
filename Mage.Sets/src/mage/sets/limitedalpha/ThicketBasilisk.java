@@ -73,7 +73,7 @@ public class ThicketBasilisk extends CardImpl<ThicketBasilisk> {
     }
 }
 
-class ThicketBasiliskTriggeredAbility extends TriggeredAbilityImpl<ThicketBasiliskTriggeredAbility> {
+class ThicketBasiliskTriggeredAbility extends TriggeredAbilityImpl {
 
     ThicketBasiliskTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ThicketBasiliskEffect());

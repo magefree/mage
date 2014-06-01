@@ -5,7 +5,7 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-public class AtTheBeginOfCombatDelayedTriggeredAbility extends DelayedTriggeredAbility<AtTheBeginOfCombatDelayedTriggeredAbility> {
+public class AtTheBeginOfCombatDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public AtTheBeginOfCombatDelayedTriggeredAbility(Effect effect) {
         super(effect);
     }

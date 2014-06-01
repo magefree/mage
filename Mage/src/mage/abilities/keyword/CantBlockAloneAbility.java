@@ -37,7 +37,7 @@ import java.io.ObjectStreamException;
 /**
  * @author magenoxx_at_googlemail.com
  */
-public class CantBlockAloneAbility extends StaticAbility<CantBlockAloneAbility> implements MageSingleton {
+public class CantBlockAloneAbility extends StaticAbility implements MageSingleton {
 
     private static final CantBlockAloneAbility fINSTANCE = new CantBlockAloneAbility();
 

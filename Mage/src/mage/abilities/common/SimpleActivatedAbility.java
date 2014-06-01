@@ -39,7 +39,7 @@ import mage.abilities.effects.Effect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimpleActivatedAbility extends ActivatedAbilityImpl<SimpleActivatedAbility> {
+public class SimpleActivatedAbility extends ActivatedAbilityImpl {
 
     public SimpleActivatedAbility(Zone zone, Effect effect, ManaCosts cost) {
         super(zone, effect, cost);

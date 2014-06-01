@@ -61,7 +61,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class BuybackAbility extends StaticAbility<BuybackAbility> implements OptionalAdditionalSourceCosts {
+public class BuybackAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     private static final String keywordText = "Buyback";
     private static final String reminderTextCost = "<i>(You may {cost} in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)</i>";

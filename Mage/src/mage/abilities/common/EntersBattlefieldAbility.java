@@ -38,7 +38,7 @@ import mage.abilities.effects.EntersBattlefieldEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbility> {
+public class EntersBattlefieldAbility extends StaticAbility {
 
     protected String abilityRule;
     protected Boolean showRule;

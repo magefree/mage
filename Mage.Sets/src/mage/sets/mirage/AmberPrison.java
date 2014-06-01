@@ -160,7 +160,7 @@ class AmberPrisonRestrictionEffect extends RestrictionEffect<AmberPrisonRestrict
 }
 
 
-class AmberPrisonUntapTriggeredAbility extends TriggeredAbilityImpl<AmberPrisonUntapTriggeredAbility> {
+class AmberPrisonUntapTriggeredAbility extends TriggeredAbilityImpl {
 
     public AmberPrisonUntapTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AmberPrisonReleaseOnUntapEffect(), false);

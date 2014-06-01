@@ -12,7 +12,7 @@ import mage.game.events.GameEvent;
  *
  * @author nantuko
  */
-public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<ConditionalTriggeredAbility> {
+public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
 
     protected TriggeredAbility ability;
     protected Condition condition;

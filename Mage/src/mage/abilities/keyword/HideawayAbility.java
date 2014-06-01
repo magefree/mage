@@ -62,7 +62,7 @@ import mage.util.CardUtil;
  * controlled the permanent that exiled this card may look at this card in the
  * exile zone.'"
  */
-public class HideawayAbility extends StaticAbility<HideawayAbility> {
+public class HideawayAbility extends StaticAbility {
 
     public HideawayAbility(Card card) {
         super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new TapSourceEffect(true)));

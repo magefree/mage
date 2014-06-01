@@ -82,7 +82,7 @@ public class ScreechingBat extends CardImpl<ScreechingBat> {
     }
 }
 
-class ScreechingBatBeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<ScreechingBatBeginningOfUpkeepTriggeredAbility> {
+class ScreechingBatBeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
 
     public ScreechingBatBeginningOfUpkeepTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ScreechingBatTransformSourceEffect());

@@ -74,7 +74,7 @@ public class KalastriaHighborn extends CardImpl<KalastriaHighborn> {
     }
 }
 
-class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl<KalastriaHighbornTriggeredAbility> {
+class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl {
     KalastriaHighbornTriggeredAbility ( ) {
         super(Zone.ALL, new LoseLifeTargetEffect(2), false);
         this.addCost(new ManaCostsImpl("{B}"));

@@ -92,7 +92,7 @@ public class CorruptedRoots extends CardImpl<CorruptedRoots> {
     }
 }
 
-class CorruptedRootsTriggeredAbility extends TriggeredAbilityImpl<CorruptedRootsTriggeredAbility> {
+class CorruptedRootsTriggeredAbility extends TriggeredAbilityImpl {
 
     CorruptedRootsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));

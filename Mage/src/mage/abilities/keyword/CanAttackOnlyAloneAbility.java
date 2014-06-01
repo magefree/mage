@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
 /**
  * @author LevelX2
  */
-public class CanAttackOnlyAloneAbility extends StaticAbility<CanAttackOnlyAloneAbility> implements MageSingleton {
+public class CanAttackOnlyAloneAbility extends StaticAbility implements MageSingleton {
 
     private static final CanAttackOnlyAloneAbility fINSTANCE = new CanAttackOnlyAloneAbility();
 

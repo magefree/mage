@@ -6,7 +6,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl<AttacksOrBlocksTriggeredAbility> {
+public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl {
     public AttacksOrBlocksTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }

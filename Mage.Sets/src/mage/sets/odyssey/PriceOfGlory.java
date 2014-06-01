@@ -67,7 +67,7 @@ public class PriceOfGlory extends CardImpl<PriceOfGlory> {
     }
 }
 
-class PriceOfGloryAbility extends TriggeredAbilityImpl<PriceOfGloryAbility> {
+class PriceOfGloryAbility extends TriggeredAbilityImpl {
 
     private static final String staticText = "Whenever a player taps a land for mana, if it's not that player's turn, destroy that land.";
 

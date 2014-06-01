@@ -69,7 +69,7 @@ public class Worldslayer extends CardImpl<Worldslayer> {
     }
 }
 
-class WorldslayerTriggeredAbility extends TriggeredAbilityImpl<WorldslayerTriggeredAbility> {
+class WorldslayerTriggeredAbility extends TriggeredAbilityImpl {
 
     WorldslayerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new WorldslayerEffect(), false);

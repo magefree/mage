@@ -70,7 +70,7 @@ public class HellfireMongrel extends CardImpl<HellfireMongrel> {
     }
 }
 
-class HellfireMongrelTriggeredAbility extends TriggeredAbilityImpl<HellfireMongrelTriggeredAbility> {
+class HellfireMongrelTriggeredAbility extends TriggeredAbilityImpl {
 
     public HellfireMongrelTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);

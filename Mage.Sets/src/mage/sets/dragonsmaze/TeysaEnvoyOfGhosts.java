@@ -85,7 +85,7 @@ public class TeysaEnvoyOfGhosts extends CardImpl<TeysaEnvoyOfGhosts> {
     }
 }
 
-class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl<TeysaEnvoyOfGhostsTriggeredAbility> {
+class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
 
     public TeysaEnvoyOfGhostsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());

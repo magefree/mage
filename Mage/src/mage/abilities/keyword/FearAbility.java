@@ -43,7 +43,7 @@ import java.io.ObjectStreamException;
  *
  * @author Loki
  */
-public class FearAbility extends EvasionAbility<FearAbility> implements MageSingleton {
+public class FearAbility extends EvasionAbility implements MageSingleton {
 
     private static final FearAbility fINSTANCE =  new FearAbility();
 

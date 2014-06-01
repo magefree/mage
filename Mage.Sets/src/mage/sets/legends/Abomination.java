@@ -74,7 +74,7 @@ public class Abomination extends CardImpl<Abomination> {
     }
 }
 
-class AbominationTriggeredAbility extends TriggeredAbilityImpl<AbominationTriggeredAbility> {
+class AbominationTriggeredAbility extends TriggeredAbilityImpl {
 
     AbominationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AbominationEffect());

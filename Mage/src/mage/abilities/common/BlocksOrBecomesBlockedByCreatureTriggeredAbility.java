@@ -38,7 +38,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class BlocksOrBecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityImpl<BlocksOrBecomesBlockedByCreatureTriggeredAbility> {
+public class BlocksOrBecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     protected String rule;
 

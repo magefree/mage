@@ -78,7 +78,7 @@ public class GutterGrime extends CardImpl<GutterGrime> {
     }
 }
 
-class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl<GutterGrimeTriggeredAbility> {
+class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
 
     public GutterGrimeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.SLIME.createInstance()), false);

@@ -148,7 +148,7 @@ class AthreosGodOfPassageReturnEffect extends OneShotEffect<AthreosGodOfPassageR
     }
 }
 
-class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl<AthreosDiesCreatureTriggeredAbility> {
+class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterCreaturePermanent filter;
     private boolean setTargetPointer;

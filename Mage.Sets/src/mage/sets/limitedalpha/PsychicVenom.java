@@ -80,7 +80,7 @@ public class PsychicVenom extends CardImpl<PsychicVenom> {
     }
 }
 
-class PsychicVenomAbility extends TriggeredAbilityImpl<PsychicVenomAbility> {
+class PsychicVenomAbility extends TriggeredAbilityImpl {
     PsychicVenomAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that land's controller"));
     }

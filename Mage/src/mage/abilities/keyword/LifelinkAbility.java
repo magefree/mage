@@ -38,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LifelinkAbility extends StaticAbility<LifelinkAbility> implements MageSingleton {
+public class LifelinkAbility extends StaticAbility implements MageSingleton {
 
     private static final LifelinkAbility fINSTANCE =  new LifelinkAbility();
 

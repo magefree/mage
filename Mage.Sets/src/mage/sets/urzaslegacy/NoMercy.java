@@ -66,7 +66,7 @@ public class NoMercy extends CardImpl<NoMercy> {
         return new NoMercy(this);
     }
     
-    public class NoMercyTriggeredAbility extends TriggeredAbilityImpl<NoMercyTriggeredAbility> {
+    public class NoMercyTriggeredAbility extends TriggeredAbilityImpl {
         public NoMercyTriggeredAbility()
         {
             super(Zone.BATTLEFIELD, new DestroyTargetEffect());

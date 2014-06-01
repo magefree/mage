@@ -70,7 +70,7 @@ public class NemesisOfReason extends CardImpl<NemesisOfReason> {
     }
 }
 
-class NemesisOfReasonTriggeredAbility extends TriggeredAbilityImpl<NemesisOfReasonTriggeredAbility> {
+class NemesisOfReasonTriggeredAbility extends TriggeredAbilityImpl {
     NemesisOfReasonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(10));
     }

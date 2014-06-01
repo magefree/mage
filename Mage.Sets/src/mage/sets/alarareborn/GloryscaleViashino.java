@@ -71,7 +71,7 @@ public class GloryscaleViashino extends CardImpl<GloryscaleViashino> {
 
 }
 
-class GloryscaleViashinoAbility extends TriggeredAbilityImpl<GloryscaleViashinoAbility> {
+class GloryscaleViashinoAbility extends TriggeredAbilityImpl {
     public GloryscaleViashinoAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn));
     }

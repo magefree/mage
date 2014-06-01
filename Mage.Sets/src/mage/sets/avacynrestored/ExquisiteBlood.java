@@ -64,7 +64,7 @@ public class ExquisiteBlood extends CardImpl<ExquisiteBlood> {
     }
 }
 
-class ExquisiteBloodTriggeredAbility extends TriggeredAbilityImpl<ExquisiteBloodTriggeredAbility> {
+class ExquisiteBloodTriggeredAbility extends TriggeredAbilityImpl {
 
     public ExquisiteBloodTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);

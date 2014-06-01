@@ -72,7 +72,7 @@ public class TitaniasChosen extends CardImpl<TitaniasChosen> {
 
 }
 
-class TitaniasChosenAbility extends TriggeredAbilityImpl<TitaniasChosenAbility> {
+class TitaniasChosenAbility extends TriggeredAbilityImpl {
 
     public TitaniasChosenAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));

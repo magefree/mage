@@ -72,7 +72,7 @@ public class Sangromancer extends CardImpl<Sangromancer> {
     }
 }
 
-class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl<SangromancerFirstTriggeredAbility> {
+class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl {
     SangromancerFirstTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(3), true);
     }
@@ -103,7 +103,7 @@ class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl<Sangromance
     }
 }
 
-class SangromancerSecondTriggeredAbility extends TriggeredAbilityImpl<SangromancerSecondTriggeredAbility> {
+class SangromancerSecondTriggeredAbility extends TriggeredAbilityImpl {
     SangromancerSecondTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(3), true);
     }

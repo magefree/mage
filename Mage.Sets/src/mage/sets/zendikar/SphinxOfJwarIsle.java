@@ -78,7 +78,7 @@ public class SphinxOfJwarIsle extends CardImpl<SphinxOfJwarIsle> {
     }
 }
 
-class SphinxOfJwarIsleLookAbility extends ActivatedAbilityImpl<SphinxOfJwarIsleLookAbility> {
+class SphinxOfJwarIsleLookAbility extends ActivatedAbilityImpl {
 
     public SphinxOfJwarIsleLookAbility() {
         super(Zone.BATTLEFIELD, new SphinxOfJwarIsleEffect(), new GenericManaCost(0));

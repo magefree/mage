@@ -84,7 +84,7 @@ public class PrecursorGolem extends CardImpl<PrecursorGolem> {
     }
 }
 
-class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl<PrecursorGolemCopyTriggeredAbility> {
+class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterSpell filter = new FilterSpell();
 

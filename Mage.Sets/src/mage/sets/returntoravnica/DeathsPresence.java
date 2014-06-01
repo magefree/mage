@@ -68,7 +68,7 @@ public class DeathsPresence extends CardImpl<DeathsPresence> {
     }
 }
 
-class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl<DeathsPresenceTriggeredAbility> {
+class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl {
 
     public DeathsPresenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);

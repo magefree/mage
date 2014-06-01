@@ -122,7 +122,7 @@ class BanishingLightExileEffect extends OneShotEffect<BanishingLightExileEffect>
  * @author LevelX2
  */
 
-class BanishingLightReturnExiledAbility extends TriggeredAbilityImpl<BanishingLightReturnExiledAbility> {
+class BanishingLightReturnExiledAbility extends TriggeredAbilityImpl {
 
     public BanishingLightReturnExiledAbility() {
         super(Zone.BATTLEFIELD, new ReturnExiledCreatureEffect());

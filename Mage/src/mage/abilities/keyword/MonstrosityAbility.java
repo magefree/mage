@@ -68,7 +68,7 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 
-public class MonstrosityAbility extends ActivatedAbilityImpl<MonstrosityAbility> {
+public class MonstrosityAbility extends ActivatedAbilityImpl {
 
     private int monstrosityValue;
 

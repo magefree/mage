@@ -67,7 +67,7 @@ public class MemoryErosion extends CardImpl<MemoryErosion> {
 }
 
 
-class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTriggeredAbility> {
+class SpellCastTriggeredAbility extends TriggeredAbilityImpl {
 
     public SpellCastTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), false);

@@ -70,7 +70,7 @@ public class PunishingFire extends CardImpl<PunishingFire> {
     }
 }
 
-class PunishingFireTriggeredAbility extends TriggeredAbilityImpl<PunishingFireTriggeredAbility> {
+class PunishingFireTriggeredAbility extends TriggeredAbilityImpl {
 
     public PunishingFireTriggeredAbility() {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl("{R}")));

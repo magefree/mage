@@ -78,7 +78,7 @@ public class FathomMage extends CardImpl<FathomMage> {
 }
 
 
-class FathomMageTriggeredAbility extends TriggeredAbilityImpl<FathomMageTriggeredAbility> {
+class FathomMageTriggeredAbility extends TriggeredAbilityImpl {
 
     public FathomMageTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);

@@ -82,7 +82,7 @@ public class GraveBetrayal extends CardImpl<GraveBetrayal> {
     }
 }
 
-class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl<GraveBetrayalTriggeredAbility> {
+class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
 
     public GraveBetrayalTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);

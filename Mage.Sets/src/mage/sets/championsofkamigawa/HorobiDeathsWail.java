@@ -83,7 +83,7 @@ public class HorobiDeathsWail extends CardImpl<HorobiDeathsWail> {
 
 }
 
-class HorobiDeathsWailAbility extends TriggeredAbilityImpl<HorobiDeathsWailAbility> {
+class HorobiDeathsWailAbility extends TriggeredAbilityImpl {
 
     public HorobiDeathsWailAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);

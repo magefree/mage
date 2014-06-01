@@ -87,7 +87,7 @@ public class KaaliaOfTheVast extends CardImpl<KaaliaOfTheVast> {
 
 }
 
-class KaaliaOfTheVastAttacksAbility extends TriggeredAbilityImpl<KaaliaOfTheVastAttacksAbility> {
+class KaaliaOfTheVastAttacksAbility extends TriggeredAbilityImpl {
 
     public KaaliaOfTheVastAttacksAbility() {
         super(Zone.BATTLEFIELD, new KaaliaOfTheVastEffect(), false);

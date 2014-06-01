@@ -72,7 +72,7 @@ public class Electropotence extends CardImpl<Electropotence> {
     }
 }
 
-class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl<ElectropotenceTriggeredAbility> {
+class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
     public ElectropotenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ElectropotenceEffect());

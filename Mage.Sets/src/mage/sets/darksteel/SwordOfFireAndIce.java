@@ -90,7 +90,7 @@ public class SwordOfFireAndIce extends CardImpl<SwordOfFireAndIce> {
 
 }
 
-class SwordOfFireAndIceAbility extends TriggeredAbilityImpl<SwordOfFireAndIceAbility> {
+class SwordOfFireAndIceAbility extends TriggeredAbilityImpl {
 
     public SwordOfFireAndIceAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));

@@ -77,7 +77,7 @@ public class BidentOfThassa extends CardImpl<BidentOfThassa> {
     }
 }
 
-class BidentOfThassaTriggeredAbility extends TriggeredAbilityImpl<BidentOfThassaTriggeredAbility> {
+class BidentOfThassaTriggeredAbility extends TriggeredAbilityImpl {
 
     public BidentOfThassaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);

@@ -64,7 +64,7 @@ public class FontOfMythos extends CardImpl<FontOfMythos> {
 
 }
 
-class FontOfMythosAbility extends TriggeredAbilityImpl<FontOfMythosAbility> {
+class FontOfMythosAbility extends TriggeredAbilityImpl {
 
     public FontOfMythosAbility() {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));

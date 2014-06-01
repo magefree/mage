@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class KinshipAbility extends TriggeredAbilityImpl<KinshipAbility> {
+public class KinshipAbility extends TriggeredAbilityImpl {
     
     public KinshipAbility(Effect kinshipEffect) {
         super(Zone.BATTLEFIELD, new KinshipBaseEffect(kinshipEffect), true);        

@@ -73,7 +73,7 @@ public class PawnOfUlamog extends CardImpl<PawnOfUlamog> {
     }
 }
 
-class PawnOfUlamogTriggeredAbility extends TriggeredAbilityImpl<PawnOfUlamogTriggeredAbility> {
+class PawnOfUlamogTriggeredAbility extends TriggeredAbilityImpl {
 
     public PawnOfUlamogTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new EldraziSpawnToken()), true);

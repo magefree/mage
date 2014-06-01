@@ -69,7 +69,7 @@ public class CityOfTraitors extends CardImpl<CityOfTraitors> {
     }
 }
 
-class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl<CityOfTraitorsTriggeredAbility> {
+class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl {
 
     CityOfTraitorsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

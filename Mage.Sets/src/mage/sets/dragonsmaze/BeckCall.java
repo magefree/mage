@@ -83,7 +83,7 @@ public class BeckCall extends SplitCard<BeckCall> {
     }
 }
 
-class BeckTriggeredAbility extends DelayedTriggeredAbility<BeckTriggeredAbility> {
+class BeckTriggeredAbility extends DelayedTriggeredAbility {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

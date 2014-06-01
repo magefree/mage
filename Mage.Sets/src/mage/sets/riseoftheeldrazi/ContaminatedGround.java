@@ -82,7 +82,7 @@ public class ContaminatedGround extends CardImpl<ContaminatedGround> {
     }
 }
 
-class ContaminatedGroundAbility extends TriggeredAbilityImpl<ContaminatedGroundAbility> {
+class ContaminatedGroundAbility extends TriggeredAbilityImpl {
     ContaminatedGroundAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
     }

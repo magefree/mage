@@ -74,7 +74,7 @@ public class IllusionistsBracers extends CardImpl<IllusionistsBracers> {
     }
 }
 
-class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl<AbilityActivatedTriggeredAbility> {
+class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
     AbilityActivatedTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyActivatedAbilityEffect());
     }

@@ -75,7 +75,7 @@ public class MightyEmergence extends CardImpl<MightyEmergence> {
 }
 
 
-class MightyEmergenceTriggeredAbility extends TriggeredAbilityImpl<MightyEmergenceTriggeredAbility> {
+class MightyEmergenceTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature with power 5 or greater");
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));

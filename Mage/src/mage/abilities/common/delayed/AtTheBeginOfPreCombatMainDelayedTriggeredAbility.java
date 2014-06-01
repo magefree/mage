@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class AtTheBeginOfPreCombatMainDelayedTriggeredAbility extends DelayedTriggeredAbility<AtTheBeginOfPreCombatMainDelayedTriggeredAbility> {
+public class AtTheBeginOfPreCombatMainDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private TargetController targetController;
 

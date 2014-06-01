@@ -109,7 +109,7 @@ class OmenMachineEffect extends ReplacementEffectImpl<OmenMachineEffect> {
 
 }
 
-class OmenMachineAbility extends TriggeredAbilityImpl<OmenMachineAbility> {
+class OmenMachineAbility extends TriggeredAbilityImpl {
 
     public OmenMachineAbility() {
         super(Zone.BATTLEFIELD, new OmenMachineEffect2());

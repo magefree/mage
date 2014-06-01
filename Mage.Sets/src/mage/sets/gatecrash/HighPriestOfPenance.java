@@ -73,7 +73,7 @@ public class HighPriestOfPenance extends CardImpl<HighPriestOfPenance> {
     }
 }
 
-class HighPriestOfPenanceTriggeredAbility extends TriggeredAbilityImpl<HighPriestOfPenanceTriggeredAbility> {
+class HighPriestOfPenanceTriggeredAbility extends TriggeredAbilityImpl {
 
 
     public HighPriestOfPenanceTriggeredAbility() {

@@ -38,7 +38,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PassAbility extends ActivatedAbilityImpl<PassAbility> {
+public class PassAbility extends ActivatedAbilityImpl {
 
     public PassAbility() {
         super(Zone.ALL, new PassEffect());

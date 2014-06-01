@@ -38,7 +38,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl<BeginningOfEndStepTriggeredAbility> {
+public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
     private TargetController targetController;
     private Condition interveningIfClauseCondition;
 

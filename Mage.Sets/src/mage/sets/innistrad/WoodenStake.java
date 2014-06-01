@@ -76,7 +76,7 @@ public class WoodenStake extends CardImpl<WoodenStake> {
     }
 }
 
-class WoodenStakeBlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl<WoodenStakeBlocksOrBecomesBlockedTriggeredAbility> {
+class WoodenStakeBlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
     public WoodenStakeBlocksOrBecomesBlockedTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(true), false);

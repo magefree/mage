@@ -87,7 +87,7 @@ public class EndrekSahrMasterBreeder extends CardImpl<EndrekSahrMasterBreeder> {
     }
 }
 
-class EndrekSahrMasterBreederTriggeredAbility extends StateTriggeredAbility<EndrekSahrMasterBreederTriggeredAbility> {
+class EndrekSahrMasterBreederTriggeredAbility extends StateTriggeredAbility {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

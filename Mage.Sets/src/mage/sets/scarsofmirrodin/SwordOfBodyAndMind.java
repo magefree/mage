@@ -92,7 +92,7 @@ public class SwordOfBodyAndMind extends CardImpl<SwordOfBodyAndMind> {
     }
 }
 
-class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl<SwordOfBodyAndMindAbility> {
+class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl {
 
     public SwordOfBodyAndMindAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()));

@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AlternativeCostSourceAbility extends StaticAbility<AlternativeCostSourceAbility> implements AlternativeSourceCosts {
+public class AlternativeCostSourceAbility extends StaticAbility implements AlternativeSourceCosts {
 
     protected List<AlternativeCost2> alternateCosts = new LinkedList<>();
     protected Condition condition;

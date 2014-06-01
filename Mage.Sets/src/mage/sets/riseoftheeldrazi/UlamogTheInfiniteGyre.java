@@ -85,7 +85,7 @@ public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
     }
 }
 
-class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl<UlamogTheInfiniteGyreDestroyOnCastAbility> {
+class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl {
 
     UlamogTheInfiniteGyreDestroyOnCastAbility ( ) {
         super(Zone.STACK, new DestroyTargetEffect());

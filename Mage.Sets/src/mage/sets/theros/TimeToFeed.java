@@ -129,7 +129,7 @@ class TimeToFeedTextEffect extends OneShotEffect<TimeToFeedTextEffect> {
     }
 }
 
-class TimeToFeedDiesTriggeredAbility extends DelayedTriggeredAbility<TimeToFeedDiesTriggeredAbility> {
+class TimeToFeedDiesTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID watchedCreatureId;
     private int zoneChangeCounter;

@@ -61,7 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 
-public class HauntAbility extends TriggeredAbilityImpl<HauntAbility> {
+public class HauntAbility extends TriggeredAbilityImpl {
 
     private boolean usedFromExile = false;
 

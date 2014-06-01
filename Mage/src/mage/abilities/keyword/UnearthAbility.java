@@ -60,7 +60,7 @@ import mage.game.events.ZoneChangeEvent;
  * Activate this ability only any time you could cast a sorcery."
  *
  */
-public class UnearthAbility extends ActivatedAbilityImpl<UnearthAbility> {
+public class UnearthAbility extends ActivatedAbilityImpl {
 
     public UnearthAbility(ManaCosts costs) {
         super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), costs);
@@ -89,7 +89,7 @@ public class UnearthAbility extends ActivatedAbilityImpl<UnearthAbility> {
 
 }
 
-class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility<UnearthDelayedTriggeredAbility> {
+class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public UnearthDelayedTriggeredAbility() {
         super(new ExileSourceEffect());

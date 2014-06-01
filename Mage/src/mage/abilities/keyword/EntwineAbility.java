@@ -58,7 +58,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class EntwineAbility extends StaticAbility<EntwineAbility> implements OptionalAdditionalModeSourceCosts {
+public class EntwineAbility extends StaticAbility implements OptionalAdditionalModeSourceCosts {
 
     private static final String keywordText = "Entwine";
     private static final String reminderText = "<i> (Choose both if you pay the entwine cost.)</i>";

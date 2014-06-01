@@ -72,7 +72,7 @@ public class BelltowerSphinx extends CardImpl<BelltowerSphinx> {
     }
 }
 
-class BelltowerSphinxEffect extends TriggeredAbilityImpl<BelltowerSphinxEffect> {
+class BelltowerSphinxEffect extends TriggeredAbilityImpl {
 
     public BelltowerSphinxEffect() {
         super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(0));

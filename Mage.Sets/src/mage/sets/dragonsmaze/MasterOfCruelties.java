@@ -87,7 +87,7 @@ public class MasterOfCruelties extends CardImpl<MasterOfCruelties> {
     }
 }
 
-class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl<MasterOfCrueltiesTriggeredAbility> {
+class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
 
     public MasterOfCrueltiesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MasterOfCrueltiesEffect());

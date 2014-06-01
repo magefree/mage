@@ -78,7 +78,7 @@ public class ThassasEmissary extends CardImpl<ThassasEmissary> {
     }
 }
 
-class ThassasEmissaryTriggeredAbility extends TriggeredAbilityImpl<ThassasEmissaryTriggeredAbility> {
+class ThassasEmissaryTriggeredAbility extends TriggeredAbilityImpl {
 
     public ThassasEmissaryTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

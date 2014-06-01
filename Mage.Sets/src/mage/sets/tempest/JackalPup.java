@@ -73,7 +73,7 @@ public class JackalPup extends CardImpl<JackalPup> {
     }
 }
 
-class JackalPupTriggeredAbility extends TriggeredAbilityImpl<JackalPupTriggeredAbility> {
+class JackalPupTriggeredAbility extends TriggeredAbilityImpl {
 
     public JackalPupTriggeredAbility() {
         super(Zone.BATTLEFIELD, new JackalPupEffect());

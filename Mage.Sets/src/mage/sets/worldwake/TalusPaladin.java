@@ -80,7 +80,7 @@ public class TalusPaladin extends CardImpl<TalusPaladin> {
     }
 }
 
-class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl<TalusPaladinTriggeredAbility> {
+class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("all allies you control");
     

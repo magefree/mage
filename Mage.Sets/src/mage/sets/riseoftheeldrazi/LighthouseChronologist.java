@@ -87,7 +87,7 @@ public class LighthouseChronologist extends LevelerCard<LighthouseChronologist> 
 
 }
 
-class LighthouseChronologistAbility extends TriggeredAbilityImpl<LighthouseChronologistAbility> {
+class LighthouseChronologistAbility extends TriggeredAbilityImpl {
 
     public LighthouseChronologistAbility() {
         super(Zone.BATTLEFIELD, new LighthouseChronologistEffect(), false);

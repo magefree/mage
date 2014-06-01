@@ -75,7 +75,7 @@ public class SunseedNurturer extends CardImpl<SunseedNurturer> {
     }
 }
 
-class SunseedNurturerTriggeredAbility extends TriggeredAbilityImpl<SunseedNurturerTriggeredAbility> {
+class SunseedNurturerTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 

@@ -128,7 +128,7 @@ class BanisherPriestExileEffect extends OneShotEffect<BanisherPriestExileEffect>
  * @author LevelX2
  */
 
-class BanisherPriestReturnExiledAbility extends TriggeredAbilityImpl<BanisherPriestReturnExiledAbility> {
+class BanisherPriestReturnExiledAbility extends TriggeredAbilityImpl {
 
     public BanisherPriestReturnExiledAbility() {
         super(Zone.BATTLEFIELD, new ReturnExiledCreatureEffect());

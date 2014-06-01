@@ -74,7 +74,7 @@ public class Vengevine extends CardImpl<Vengevine> {
 
 }
 
-class VengevineAbility extends TriggeredAbilityImpl<VengevineAbility> {
+class VengevineAbility extends TriggeredAbilityImpl {
 
     public VengevineAbility() {
         super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true);

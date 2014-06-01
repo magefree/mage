@@ -197,7 +197,7 @@ class VorinclexEffect extends ManaEffect<VorinclexEffect> {
 
 }
 
-class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl<VorinclexTriggeredAbility2> {
+class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
 
     private static final String staticText = "Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.";
 

@@ -116,7 +116,7 @@ class QuestForUlasTempleEffect extends OneShotEffect<QuestForUlasTempleEffect> {
     }
 }
 
-class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl<QuestForUlasTempleTriggeredAbility> {
+class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl {
 
     public QuestForUlasTempleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new QuestForUlasTempleEffect2(), true);

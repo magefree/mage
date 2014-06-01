@@ -63,7 +63,7 @@ public class AngelsFeather extends CardImpl<AngelsFeather> {
 
 }
 
-class AngelsFeatherAbility extends TriggeredAbilityImpl<AngelsFeatherAbility> {
+class AngelsFeatherAbility extends TriggeredAbilityImpl {
 
     public AngelsFeatherAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);

@@ -79,7 +79,7 @@ public class SavageFirecat extends CardImpl<SavageFirecat> {
     }
 }
 
-class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl<SavageFirecatTriggeredAbility> {
+class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl {
 
     public SavageFirecatTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);

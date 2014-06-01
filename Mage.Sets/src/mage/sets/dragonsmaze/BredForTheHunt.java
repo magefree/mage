@@ -69,7 +69,7 @@ public class BredForTheHunt extends CardImpl<BredForTheHunt> {
     }
 }
 
-class BredForTheHuntTriggeredAbility extends TriggeredAbilityImpl<BredForTheHuntTriggeredAbility> {
+class BredForTheHuntTriggeredAbility extends TriggeredAbilityImpl {
 
     public BredForTheHuntTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));

@@ -45,7 +45,7 @@ import mage.game.Game;
  *
  * @author LevelX
  */
-public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl<ConditionalGainActivatedAbility> {
+public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
 
         private Condition condition;
         private String staticText = "";

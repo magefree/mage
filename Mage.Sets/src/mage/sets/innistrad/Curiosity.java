@@ -81,7 +81,7 @@ public class Curiosity extends CardImpl<Curiosity> {
 }
 
 
-class CuriosityAbility extends TriggeredAbilityImpl<CuriosityAbility> {
+class CuriosityAbility extends TriggeredAbilityImpl {
 
     public CuriosityAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);

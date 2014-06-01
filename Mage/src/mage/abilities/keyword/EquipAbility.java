@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class EquipAbility extends ActivatedAbilityImpl<EquipAbility> {
+public class EquipAbility extends ActivatedAbilityImpl {
 
     public EquipAbility(Outcome outcome, Cost cost) {
         this(outcome, cost, new TargetControlledCreaturePermanent(true));

@@ -116,7 +116,7 @@ class TunnelIgnusWatcher extends Watcher {
     }
 }
 
-class TunnelIgnusTriggeredAbility extends TriggeredAbilityImpl<TunnelIgnusTriggeredAbility> {
+class TunnelIgnusTriggeredAbility extends TriggeredAbilityImpl {
     TunnelIgnusTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3));
     }

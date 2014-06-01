@@ -77,7 +77,7 @@ public class RoninWarclub extends CardImpl<RoninWarclub> {
         return new RoninWarclub(this);
     }
     
-    private class RoninWarclubTriggeredAbility extends TriggeredAbilityImpl<RoninWarclubTriggeredAbility> {
+    private class RoninWarclubTriggeredAbility extends TriggeredAbilityImpl {
 
         public RoninWarclubTriggeredAbility() {
            super(Zone.BATTLEFIELD, new RoninWarclubAttachEffect(), false);

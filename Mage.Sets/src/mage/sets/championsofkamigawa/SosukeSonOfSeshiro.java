@@ -86,7 +86,7 @@ public class SosukeSonOfSeshiro extends CardImpl<SosukeSonOfSeshiro> {
     }
 }
 
-class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl<SosukeSonOfSeshiroTriggeredAbility> {
+class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl {
 
     SosukeSonOfSeshiroTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SosukeSonOfSeshiroEffect());

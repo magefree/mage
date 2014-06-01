@@ -81,7 +81,7 @@ public class Blight extends CardImpl<Blight> {
     }
 }
 
-class BlightTriggeredAbility extends TriggeredAbilityImpl<BlightTriggeredAbility> {
+class BlightTriggeredAbility extends TriggeredAbilityImpl {
     BlightTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());
     }

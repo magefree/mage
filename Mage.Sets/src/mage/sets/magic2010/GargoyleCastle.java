@@ -67,7 +67,7 @@ public class GargoyleCastle extends CardImpl<GargoyleCastle> {
 
 }
 
-class GargoyleCastleAbility extends ActivatedAbilityImpl<GargoyleCastleAbility> {
+class GargoyleCastleAbility extends ActivatedAbilityImpl {
 
     public GargoyleCastleAbility() {
         super(Zone.BATTLEFIELD, null);

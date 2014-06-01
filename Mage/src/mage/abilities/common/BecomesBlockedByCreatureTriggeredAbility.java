@@ -38,7 +38,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityImpl<BecomesBlockedByCreatureTriggeredAbility> {
+public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesBlockedByCreatureTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

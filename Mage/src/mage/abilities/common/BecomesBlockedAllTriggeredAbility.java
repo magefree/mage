@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 
-public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl<BecomesBlockedAllTriggeredAbility> {
+public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private FilterCreaturePermanent filter;
     private boolean setTargetPointer;

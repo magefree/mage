@@ -148,7 +148,7 @@ class JaceArchitectOfThoughtGainAbilityEffect extends ContinuousEffectImpl<JaceA
     }
 }
 
-class JaceArchitectOfThoughtTriggeredAbility extends TriggeredAbilityImpl<JaceArchitectOfThoughtTriggeredAbility> {
+class JaceArchitectOfThoughtTriggeredAbility extends TriggeredAbilityImpl {
 
     public JaceArchitectOfThoughtTriggeredAbility() {
         super(Zone.BATTLEFIELD, new JaceArchitectOfThoughtEffectUnboostEffect(-1,0, Duration.EndOfTurn));

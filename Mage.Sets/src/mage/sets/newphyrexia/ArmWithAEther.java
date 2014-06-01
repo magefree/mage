@@ -72,7 +72,7 @@ public class ArmWithAEther extends CardImpl<ArmWithAEther> {
     }
 }
 
-class ArmWithAEtherTriggeredAbility extends TriggeredAbilityImpl<ArmWithAEtherTriggeredAbility> {
+class ArmWithAEtherTriggeredAbility extends TriggeredAbilityImpl {
 
     public ArmWithAEtherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), true);

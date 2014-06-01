@@ -87,7 +87,7 @@ public class BrinkOfDisaster extends CardImpl<BrinkOfDisaster> {
     }
 }
 
-class EnchantedBecomesTappedTriggeredAbility extends TriggeredAbilityImpl<EnchantedBecomesTappedTriggeredAbility> {
+class EnchantedBecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
 
     public EnchantedBecomesTappedTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);

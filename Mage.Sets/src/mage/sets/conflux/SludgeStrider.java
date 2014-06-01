@@ -84,7 +84,7 @@ public class SludgeStrider extends CardImpl<SludgeStrider> {
     }
 }
 
-class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl<SludgeStriderTriggeredAbility> {
+class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("another artifact under your control");
     static {

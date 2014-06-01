@@ -41,7 +41,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 
-public class BlocksCreatureAttachedTriggeredAbility extends TriggeredAbilityImpl<BlocksCreatureAttachedTriggeredAbility>{
+public class BlocksCreatureAttachedTriggeredAbility extends TriggeredAbilityImpl{
     private boolean setFixedTargetPointer;
     private String attachedDescription;
     private boolean setFixedTargetPointerToBlocked;

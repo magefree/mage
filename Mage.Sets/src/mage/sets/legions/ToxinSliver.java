@@ -71,7 +71,7 @@ public class ToxinSliver extends CardImpl<ToxinSliver> {
     }
 }
 
-class DealsDamageTriggeredAbility extends TriggeredAbilityImpl<DealsDamageTriggeredAbility> {
+class DealsDamageTriggeredAbility extends TriggeredAbilityImpl {
     
      private boolean setTargetPointer;
 

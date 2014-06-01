@@ -12,7 +12,7 @@ import mage.game.permanent.Permanent;
  * "When enchanted/equipped creature dies" triggered ability
  * @author Loki
  */
-public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl<DiesAttachedTriggeredAbility> {
+public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
     
     private String attachedDescription;
     private boolean diesRuleText;

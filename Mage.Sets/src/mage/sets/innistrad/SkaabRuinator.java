@@ -85,7 +85,7 @@ public class SkaabRuinator extends CardImpl<SkaabRuinator> {
     }
 }
 
-class SkaabRuinatorAbility extends ActivatedAbilityImpl<SkaabRuinatorAbility> {
+class SkaabRuinatorAbility extends ActivatedAbilityImpl {
 
     public SkaabRuinatorAbility(ManaCosts costs, TimingRule timingRule) {
         super(Zone.GRAVEYARD, new SkaabRuinatorEffect(), costs);

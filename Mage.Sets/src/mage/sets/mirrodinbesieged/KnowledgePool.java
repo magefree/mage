@@ -107,7 +107,7 @@ class KnowledgePoolEffect1 extends OneShotEffect<KnowledgePoolEffect1> {
 
 }
 
-class KnowledgePoolAbility extends TriggeredAbilityImpl<KnowledgePoolAbility> {
+class KnowledgePoolAbility extends TriggeredAbilityImpl {
 
     public KnowledgePoolAbility() {
         super(Zone.BATTLEFIELD, new KnowledgePoolEffect2(), false);

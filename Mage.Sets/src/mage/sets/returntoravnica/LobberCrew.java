@@ -79,7 +79,7 @@ public class LobberCrew extends CardImpl<LobberCrew> {
     }
 }
 
-class LobberCrewTriggeredAbility extends TriggeredAbilityImpl<LobberCrewTriggeredAbility> {
+class LobberCrewTriggeredAbility extends TriggeredAbilityImpl {
     public LobberCrewTriggeredAbility() {
         super(Zone.BATTLEFIELD, new UntapSourceEffect());
     }

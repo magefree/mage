@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  * @author BetaSteward_at_googlemail.com
  * @param <T>
  */
-public class ZoneChangeTriggeredAbility<T extends ZoneChangeTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
+public class ZoneChangeTriggeredAbility<T extends ZoneChangeTriggeredAbility<T>> extends TriggeredAbilityImpl {
 
     protected Zone fromZone;
     protected Zone toZone;

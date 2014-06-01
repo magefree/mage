@@ -68,7 +68,7 @@ public class MyrSuperion extends CardImpl<MyrSuperion> {
     }
 }
 
-class MyrSuperionStaticAbility extends StaticAbility<MyrSuperionStaticAbility> {
+class MyrSuperionStaticAbility extends StaticAbility {
 
     public MyrSuperionStaticAbility() {
         super(Zone.STACK, null);

@@ -84,7 +84,7 @@ public class TrostaniSelesnyasVoice extends CardImpl<TrostaniSelesnyasVoice> {
     }
 }
 
-class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl<TrostaniSelesnyasVoiceTriggeredAbility> {
+class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
 
     public TrostaniSelesnyasVoiceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TrostaniSelesnyasVoiceEffect(), false);

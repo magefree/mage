@@ -80,7 +80,7 @@ public class VoiceOfResurgence extends CardImpl<VoiceOfResurgence> {
     }
 }
 
-class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl<VoiceOfResurgenceTriggeredAbility> {
+class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl {
 
     public VoiceOfResurgenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new VoiceOfResurgenceToken()), false);

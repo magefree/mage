@@ -73,7 +73,7 @@ public class Imperiosaur extends CardImpl<Imperiosaur> {
     }
 }
 
-class ImperiosaurStaticAbility extends StaticAbility<ImperiosaurStaticAbility> {
+class ImperiosaurStaticAbility extends StaticAbility {
 
     public ImperiosaurStaticAbility() {
         super(Zone.STACK, null);

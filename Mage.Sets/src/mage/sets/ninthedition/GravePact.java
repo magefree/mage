@@ -70,7 +70,7 @@ public class GravePact extends CardImpl<GravePact> {
     }
 }
 
-class GravePactTriggeredAbility extends TriggeredAbilityImpl<GravePactTriggeredAbility> {
+class GravePactTriggeredAbility extends TriggeredAbilityImpl {
 
     public GravePactTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GravePactEffect());

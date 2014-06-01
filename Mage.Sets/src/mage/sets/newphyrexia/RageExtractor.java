@@ -67,7 +67,7 @@ public class RageExtractor extends CardImpl<RageExtractor> {
     }
 }
 
-class RageExtractorTriggeredAbility extends TriggeredAbilityImpl<RageExtractorTriggeredAbility> {
+class RageExtractorTriggeredAbility extends TriggeredAbilityImpl {
     RageExtractorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
         this.addTarget(new TargetCreatureOrPlayer());

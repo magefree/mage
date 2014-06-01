@@ -118,7 +118,7 @@ class TatsumaTheDragonsFangEffect extends OneShotEffect<TatsumaTheDragonsFangEff
     }
 }
 
-class TatsumaTheDragonsFangTriggeredAbility extends DelayedTriggeredAbility<TatsumaTheDragonsFangTriggeredAbility> {
+class TatsumaTheDragonsFangTriggeredAbility extends DelayedTriggeredAbility {
 
     protected FixedTarget fixedTarget;
 

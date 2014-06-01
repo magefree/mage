@@ -64,7 +64,7 @@ public class AetherSting extends CardImpl<AetherSting> {
     }
 }
 
-class AetherStingTriggeredAbility extends TriggeredAbilityImpl<AetherStingTriggeredAbility> {
+class AetherStingTriggeredAbility extends TriggeredAbilityImpl {
 
     public AetherStingTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1), false);

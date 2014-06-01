@@ -67,7 +67,7 @@ public class CrystalRod extends CardImpl<CrystalRod> {
     }
 }
 
-class CrystalRodAbility extends TriggeredAbilityImpl<CrystalRodAbility> {
+class CrystalRodAbility extends TriggeredAbilityImpl {
 
     public CrystalRodAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);

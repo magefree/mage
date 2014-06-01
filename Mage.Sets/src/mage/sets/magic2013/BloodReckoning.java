@@ -67,7 +67,7 @@ public class BloodReckoning extends CardImpl<BloodReckoning> {
     }
 }
 
-class BloodReckoningTriggeredAbility extends TriggeredAbilityImpl<BloodReckoningTriggeredAbility> {
+class BloodReckoningTriggeredAbility extends TriggeredAbilityImpl {
 
     public BloodReckoningTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));

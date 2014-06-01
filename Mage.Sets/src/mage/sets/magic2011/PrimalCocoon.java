@@ -79,7 +79,7 @@ public class PrimalCocoon extends CardImpl<PrimalCocoon> {
     }
 }
 
-class PrimalCocoonAbility1 extends TriggeredAbilityImpl<PrimalCocoonAbility1> {
+class PrimalCocoonAbility1 extends TriggeredAbilityImpl {
 
     public PrimalCocoonAbility1() {
         super(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1));
@@ -108,7 +108,7 @@ class PrimalCocoonAbility1 extends TriggeredAbilityImpl<PrimalCocoonAbility1> {
     }
 }
 
-class PrimalCocoonAbility2 extends TriggeredAbilityImpl<PrimalCocoonAbility2> {
+class PrimalCocoonAbility2 extends TriggeredAbilityImpl {
 
     public PrimalCocoonAbility2() {
         super(Zone.BATTLEFIELD, new DestroySourceEffect());

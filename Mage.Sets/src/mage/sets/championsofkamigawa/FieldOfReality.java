@@ -84,7 +84,7 @@ public class FieldOfReality extends CardImpl<FieldOfReality> {
 
 }
 
-class FieldOfRealityEvasionAbility extends EvasionAbility<FieldOfRealityEvasionAbility> {
+class FieldOfRealityEvasionAbility extends EvasionAbility {
 
     public FieldOfRealityEvasionAbility() {
         this.addEffect(new FieldOfRealityEvasionEffect());

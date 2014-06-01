@@ -55,7 +55,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class EvokeAbility extends StaticAbility<EvokeAbility> implements AlternativeSourceCosts {
+public class EvokeAbility extends StaticAbility implements AlternativeSourceCosts {
 
     protected static final String EVOKE_KEYWORD = "Evoke";
     protected static final String REMINDER_TEXT = "(You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)";

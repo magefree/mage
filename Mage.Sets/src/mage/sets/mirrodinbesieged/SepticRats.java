@@ -72,7 +72,7 @@ public class SepticRats extends CardImpl<SepticRats> {
     }
 }
 
-class SepticRatsTriggeredAbility extends TriggeredAbilityImpl<SepticRatsTriggeredAbility> {
+class SepticRatsTriggeredAbility extends TriggeredAbilityImpl {
     SepticRatsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn));
     }

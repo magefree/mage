@@ -77,7 +77,7 @@ public class KamiOfTheHonoredDead extends CardImpl<KamiOfTheHonoredDead> {
     }
 }
 
-class KamiOfTheHonoredDeadTriggeredAbility extends TriggeredAbilityImpl<KamiOfTheHonoredDeadTriggeredAbility> {
+class KamiOfTheHonoredDeadTriggeredAbility extends TriggeredAbilityImpl {
 
     public KamiOfTheHonoredDeadTriggeredAbility() {
         super(Zone.BATTLEFIELD, new KamiOfTheHonoredDeadGainLifeEffect());

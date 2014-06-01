@@ -82,7 +82,7 @@ public class QasaliAmbusher extends CardImpl<QasaliAmbusher> {
     }
 }
 
-class QasaliAmbusherAbility extends ActivatedAbilityImpl<QasaliAmbusherAbility> {
+class QasaliAmbusherAbility extends ActivatedAbilityImpl {
 
     private static final FilterControlledLandPermanent filterPlains = new FilterControlledLandPermanent();
     private static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent();

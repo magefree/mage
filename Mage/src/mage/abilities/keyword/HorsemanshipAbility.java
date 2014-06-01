@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class HorsemanshipAbility extends EvasionAbility<HorsemanshipAbility> implements MageSingleton {
+public class HorsemanshipAbility extends EvasionAbility implements MageSingleton {
     private static final HorsemanshipAbility fINSTANCE =  new HorsemanshipAbility();
 
     private Object readResolve() throws ObjectStreamException {

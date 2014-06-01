@@ -79,7 +79,7 @@ public class BlindZealot extends CardImpl<BlindZealot> {
     }
 }
 
-class BlindZealotTriggeredAbility extends TriggeredAbilityImpl<BlindZealotTriggeredAbility> {
+class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
 
     public BlindZealotTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BlindZealotEffect(), false);

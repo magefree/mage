@@ -40,7 +40,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Quercitron
  */
-public class TapLandForManaAllTriggeredAbility extends TriggeredAbilityImpl<TapLandForManaAllTriggeredAbility> {
+public class TapLandForManaAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private final boolean setTargetPointer;
 

@@ -75,7 +75,7 @@ public class Justice extends CardImpl<Justice> {
     }
 }
 
-class JusticeTriggeredAbility extends TriggeredAbilityImpl<JusticeTriggeredAbility> {
+class JusticeTriggeredAbility extends TriggeredAbilityImpl {
 
     public JusticeTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);

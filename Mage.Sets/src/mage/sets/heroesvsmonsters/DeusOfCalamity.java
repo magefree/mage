@@ -77,7 +77,7 @@ public class DeusOfCalamity extends CardImpl<DeusOfCalamity> {
     }
 }
 
-class DeusOfCalamityTriggeredAbility extends TriggeredAbilityImpl<DeusOfCalamityTriggeredAbility> {
+class DeusOfCalamityTriggeredAbility extends TriggeredAbilityImpl {
 
     public DeusOfCalamityTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);

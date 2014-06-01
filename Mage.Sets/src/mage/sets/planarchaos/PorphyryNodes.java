@@ -138,7 +138,7 @@ class PorphyryNodesEffect extends OneShotEffect<PorphyryNodesEffect> {
     }
 }
 
-class PorphyryNodesStateTriggeredAbility extends StateTriggeredAbility<PorphyryNodesStateTriggeredAbility> {
+class PorphyryNodesStateTriggeredAbility extends StateTriggeredAbility {
 
     public PorphyryNodesStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

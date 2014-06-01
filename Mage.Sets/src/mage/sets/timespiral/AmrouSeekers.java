@@ -78,7 +78,7 @@ public class AmrouSeekers extends CardImpl<AmrouSeekers> {
     }
 }
 
-class AmrouSeekersEvasionAbility extends EvasionAbility<AmrouSeekersEvasionAbility> implements MageSingleton  {
+class AmrouSeekersEvasionAbility extends EvasionAbility implements MageSingleton  {
 
     public AmrouSeekersEvasionAbility() {
         super();

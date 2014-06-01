@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author garnold
  */
-public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl<BlocksAttachedTriggeredAbility>{
+public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl{
     private String attachedDescription;
 
     public BlocksAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {

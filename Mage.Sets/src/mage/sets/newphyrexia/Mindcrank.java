@@ -67,7 +67,7 @@ public class Mindcrank extends CardImpl<Mindcrank> {
     }
 }
 
-class MindcrankTriggeredAbility extends TriggeredAbilityImpl<MindcrankTriggeredAbility> {
+class MindcrankTriggeredAbility extends TriggeredAbilityImpl {
 
     public MindcrankTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MindcrankEffect(), false);

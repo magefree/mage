@@ -41,7 +41,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author noxx
  */
-public class AttacksCreatureYourControlTriggeredAbility extends TriggeredAbilityImpl<AttacksCreatureYourControlTriggeredAbility> {
+public class AttacksCreatureYourControlTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterControlledCreaturePermanent filter;
     protected boolean setTargetPointer;

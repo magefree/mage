@@ -41,7 +41,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExaltedAbility extends TriggeredAbilityImpl<ExaltedAbility> {
+public class ExaltedAbility extends TriggeredAbilityImpl {
 
     public ExaltedAbility() {
         super(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn));

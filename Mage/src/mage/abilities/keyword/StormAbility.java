@@ -46,7 +46,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author Plopman
  */
-public class StormAbility extends TriggeredAbilityImpl<StormAbility> {
+public class StormAbility extends TriggeredAbilityImpl {
 
     public StormAbility() {
         super(Zone.STACK, new StormEffect());

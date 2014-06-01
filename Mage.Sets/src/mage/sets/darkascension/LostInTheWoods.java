@@ -116,7 +116,7 @@ class LostInTheWoodsEffect extends OneShotEffect<LostInTheWoodsEffect> {
 
 }
 
-class LostInTheWoodsTriggeredAbility extends TriggeredAbilityImpl<LostInTheWoodsTriggeredAbility> {
+class LostInTheWoodsTriggeredAbility extends TriggeredAbilityImpl {
 
     public LostInTheWoodsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LostInTheWoodsEffect(), false);

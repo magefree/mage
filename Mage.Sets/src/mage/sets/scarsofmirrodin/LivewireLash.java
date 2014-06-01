@@ -75,7 +75,7 @@ public class LivewireLash extends CardImpl<LivewireLash> {
     }
 }
 
-class LivewireLashAbility extends TriggeredAbilityImpl<LivewireLashAbility> {
+class LivewireLashAbility extends TriggeredAbilityImpl {
 
     public LivewireLashAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));

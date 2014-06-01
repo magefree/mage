@@ -75,7 +75,7 @@ public class Spitemare extends CardImpl<Spitemare> {
     }
 }
 
-class SpitemareTriggeredAbility extends TriggeredAbilityImpl<SpitemareTriggeredAbility> {
+class SpitemareTriggeredAbility extends TriggeredAbilityImpl {
 
     public SpitemareTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SpitemareEffect());

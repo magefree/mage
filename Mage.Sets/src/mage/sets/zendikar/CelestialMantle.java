@@ -80,7 +80,7 @@ public class CelestialMantle extends CardImpl<CelestialMantle> {
 
 }
 
-class CelestialMantleAbility extends TriggeredAbilityImpl<CelestialMantleAbility> {
+class CelestialMantleAbility extends TriggeredAbilityImpl {
 
     public CelestialMantleAbility() {
         super(Zone.BATTLEFIELD, new CelestialMantleEffect());

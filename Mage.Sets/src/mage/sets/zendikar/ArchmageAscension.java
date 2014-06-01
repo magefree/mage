@@ -77,7 +77,7 @@ public class ArchmageAscension extends CardImpl<ArchmageAscension> {
     }
 }
 
-class ArchmageAscensionTriggeredAbility extends TriggeredAbilityImpl<ArchmageAscensionTriggeredAbility> {
+class ArchmageAscensionTriggeredAbility extends TriggeredAbilityImpl {
 
     public ArchmageAscensionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)), true);

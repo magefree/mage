@@ -80,7 +80,7 @@ public class SpitefulReturned extends CardImpl<SpitefulReturned> {
     }
 }
 
-class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl<SpitefulReturnedTriggeredAbility> {
+class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
 
     public SpitefulReturnedTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);

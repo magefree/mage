@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class AtEndOfTurnDelayedTriggeredAbility extends DelayedTriggeredAbility<AtEndOfTurnDelayedTriggeredAbility> {
+public class AtEndOfTurnDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private TargetController targetController;
 

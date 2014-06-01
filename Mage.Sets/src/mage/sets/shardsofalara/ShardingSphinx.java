@@ -76,7 +76,7 @@ public class ShardingSphinx extends CardImpl<ShardingSphinx> {
     }
 }
 
-class ShardingSphinxTriggeredAbility extends TriggeredAbilityImpl<ShardingSphinxTriggeredAbility> {
+class ShardingSphinxTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("artifact creature you control");
     static{

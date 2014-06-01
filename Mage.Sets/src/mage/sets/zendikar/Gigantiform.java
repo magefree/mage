@@ -98,7 +98,7 @@ public class Gigantiform extends CardImpl<Gigantiform> {
     }
 }
 
-class GigantiformAbility extends StaticAbility<GigantiformAbility> {
+class GigantiformAbility extends StaticAbility {
 
     public GigantiformAbility() {
         super(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA));

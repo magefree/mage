@@ -85,7 +85,7 @@ public class JarOfEyeballs extends CardImpl<JarOfEyeballs> {
     }
 }
 
-class JarOfEyeballsTriggeredAbility extends TriggeredAbilityImpl<JarOfEyeballsTriggeredAbility> {
+class JarOfEyeballsTriggeredAbility extends TriggeredAbilityImpl {
 
     public JarOfEyeballsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.EYEBALL.createInstance(2)));

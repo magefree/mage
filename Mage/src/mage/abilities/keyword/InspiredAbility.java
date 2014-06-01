@@ -41,7 +41,7 @@ import mage.game.events.GameEvent;
  * @author LevelX2
  */
 
-public class InspiredAbility extends TriggeredAbilityImpl<InspiredAbility> {
+public class InspiredAbility extends TriggeredAbilityImpl {
 
     public InspiredAbility(Effect effect) {
         this(effect, false);

@@ -90,7 +90,7 @@ public class PollenbrightWings extends CardImpl<PollenbrightWings> {
     }
 }
 
-class PollenbrightWingsAbility extends TriggeredAbilityImpl<PollenbrightWingsAbility> {
+class PollenbrightWingsAbility extends TriggeredAbilityImpl {
 
     public PollenbrightWingsAbility() {
         super(Zone.BATTLEFIELD, new PollenbrightWingsEffect());

@@ -75,7 +75,7 @@ public class KavuPredator extends CardImpl<KavuPredator> {
     }
 }
 
-class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl<KavuPredatorTriggeredAbility> {
+class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
 
     public KavuPredatorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new KavuPredatorEffect());

@@ -67,7 +67,7 @@ public class IsolationCell extends CardImpl<IsolationCell> {
     }
 }
 
-class IsolationCellTriggeredAbility extends TriggeredAbilityImpl<IsolationCellTriggeredAbility> {
+class IsolationCellTriggeredAbility extends TriggeredAbilityImpl {
 
     public IsolationCellTriggeredAbility() {
         super(Zone.BATTLEFIELD, new IsolationCellEffect(), false);

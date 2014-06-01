@@ -87,7 +87,7 @@ public class SwarmbornGiant extends CardImpl<SwarmbornGiant> {
     }
 }
 
-class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl<SwarmbornGiantTriggeredAbility> {
+class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
 
     public SwarmbornGiantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);

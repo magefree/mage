@@ -83,7 +83,7 @@ public class CurseOfOblivion extends CardImpl<CurseOfOblivion> {
     }
 }
 
-class CurseOfOblivionAbility extends TriggeredAbilityImpl<CurseOfOblivionAbility> {
+class CurseOfOblivionAbility extends TriggeredAbilityImpl {
 
     public CurseOfOblivionAbility() {
         super(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, null, "", new FilterCard(), 2));

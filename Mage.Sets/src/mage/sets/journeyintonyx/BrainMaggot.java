@@ -130,7 +130,7 @@ class BrainMaggotExileEffect extends OneShotEffect<BrainMaggotExileEffect> {
  * @author LevelX2
  */
 
-class BrainMaggotReturnExiledAbility extends TriggeredAbilityImpl<BrainMaggotReturnExiledAbility> {
+class BrainMaggotReturnExiledAbility extends TriggeredAbilityImpl {
 
     public BrainMaggotReturnExiledAbility() {
         super(Zone.BATTLEFIELD, new BrainMaggotReturnExiledCreatureEffect());

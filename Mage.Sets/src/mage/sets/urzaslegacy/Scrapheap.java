@@ -66,7 +66,7 @@ public class Scrapheap extends CardImpl<Scrapheap> {
     }
 }
 
-class ScrapheapTriggeredAbility extends TriggeredAbilityImpl<ScrapheapTriggeredAbility> {
+class ScrapheapTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

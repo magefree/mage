@@ -67,7 +67,7 @@ public class IronStar extends CardImpl<IronStar> {
     }
 }
 
-class IronStarAbility extends TriggeredAbilityImpl<IronStarAbility> {
+class IronStarAbility extends TriggeredAbilityImpl {
 
     public IronStarAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);

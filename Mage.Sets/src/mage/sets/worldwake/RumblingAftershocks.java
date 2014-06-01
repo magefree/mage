@@ -83,7 +83,7 @@ public class RumblingAftershocks extends CardImpl<RumblingAftershocks> {
     }
 }
 
-class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl<RumblingAftershocksTriggeredAbility> {
+class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
 
     RumblingAftershocksTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RumblingAftershocksDealDamageEffect(), true);

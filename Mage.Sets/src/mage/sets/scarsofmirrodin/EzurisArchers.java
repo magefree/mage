@@ -74,7 +74,7 @@ public class EzurisArchers extends CardImpl<EzurisArchers> {
     }
 }
 
-class BlocksCreatureWithFlyingTriggeredAbility extends TriggeredAbilityImpl<BlocksCreatureWithFlyingTriggeredAbility> {
+class BlocksCreatureWithFlyingTriggeredAbility extends TriggeredAbilityImpl {
 
     public BlocksCreatureWithFlyingTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

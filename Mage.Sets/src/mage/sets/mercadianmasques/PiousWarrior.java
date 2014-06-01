@@ -73,7 +73,7 @@ public class PiousWarrior extends CardImpl<PiousWarrior> {
     }
 }
 
-class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl<PiousWarriorTriggeredAbility> {
+class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl {
 
     public PiousWarriorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiousWarriorGainLifeEffect());

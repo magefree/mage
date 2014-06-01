@@ -36,7 +36,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class AsEntersBattlefieldAbility extends StaticAbility<AsEntersBattlefieldAbility> {
+public class AsEntersBattlefieldAbility extends StaticAbility {
 
     public AsEntersBattlefieldAbility(Effect effect) {
         super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect));

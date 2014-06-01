@@ -78,7 +78,7 @@ public class SunDroplet extends CardImpl<SunDroplet> {
     }
 }
 
-class SunDropletTriggeredAbility extends TriggeredAbilityImpl<SunDropletTriggeredAbility> {
+class SunDropletTriggeredAbility extends TriggeredAbilityImpl {
 
     public SunDropletTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SunDropletEffect(), false);

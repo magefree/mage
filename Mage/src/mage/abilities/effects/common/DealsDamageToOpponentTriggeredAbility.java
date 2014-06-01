@@ -39,7 +39,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author noxx
  */
-public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl<DealsDamageToOpponentTriggeredAbility> {
+public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
     boolean onlyCombat;
 

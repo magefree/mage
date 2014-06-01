@@ -81,7 +81,7 @@ public class SeaSerpent extends CardImpl<SeaSerpent> {
     }
 }
 
-class SeaSerpentTriggeredAbility extends StateTriggeredAbility<SeaSerpentTriggeredAbility> {
+class SeaSerpentTriggeredAbility extends StateTriggeredAbility {
 
     public SeaSerpentTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

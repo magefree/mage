@@ -83,7 +83,7 @@ public class MoltenDisaster extends CardImpl<MoltenDisaster> {
     }
 }
 
-class MoltenDisasterTriggeredAbility extends TriggeredAbilityImpl<MoltenDisasterTriggeredAbility> {
+class MoltenDisasterTriggeredAbility extends TriggeredAbilityImpl {
 
     public MoltenDisasterTriggeredAbility() {
         super(Zone.HAND, new GainAbilitySourceEffect(new SplitSecondAbility(), Duration.WhileOnStack), false);

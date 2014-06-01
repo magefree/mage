@@ -64,7 +64,7 @@ public class EvolvingWilds extends CardImpl<EvolvingWilds> {
 
 }
 
-class EvolvingWildsAbility extends ActivatedAbilityImpl<EvolvingWildsAbility> {
+class EvolvingWildsAbility extends ActivatedAbilityImpl {
 
     public EvolvingWildsAbility() {
         super(Zone.BATTLEFIELD, null);

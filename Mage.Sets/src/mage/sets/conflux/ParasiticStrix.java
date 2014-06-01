@@ -76,7 +76,7 @@ public class ParasiticStrix extends CardImpl<ParasiticStrix> {
     }
 }
 
-class ParasiticStrixTriggeredAbility extends TriggeredAbilityImpl<ParasiticStrixTriggeredAbility> {
+class ParasiticStrixTriggeredAbility extends TriggeredAbilityImpl {
 
     public ParasiticStrixTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));

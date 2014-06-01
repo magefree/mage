@@ -37,7 +37,7 @@ import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AttacksEachTurnStaticAbility extends StaticAbility<AttacksEachTurnStaticAbility> {
+public class AttacksEachTurnStaticAbility extends StaticAbility {
 
     public AttacksEachTurnStaticAbility() {
         super(Zone.BATTLEFIELD, new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield));

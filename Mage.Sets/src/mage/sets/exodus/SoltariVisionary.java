@@ -77,7 +77,7 @@ public class SoltariVisionary extends CardImpl<SoltariVisionary> {
     }
 }
 
-class SoltariVisionaryTriggeredAbility extends TriggeredAbilityImpl<SoltariVisionaryTriggeredAbility> {
+class SoltariVisionaryTriggeredAbility extends TriggeredAbilityImpl {
 
     SoltariVisionaryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);

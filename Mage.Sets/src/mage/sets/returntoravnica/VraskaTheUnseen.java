@@ -184,7 +184,7 @@ class VraskaTheUnseenLoseGameEffect extends OneShotEffect<VraskaTheUnseenLoseGam
     }
 }
 
-class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl<VraskaTheUnseenTriggeredAbility> {
+class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
 
     public VraskaTheUnseenTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());

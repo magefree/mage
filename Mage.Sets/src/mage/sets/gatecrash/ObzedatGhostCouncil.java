@@ -125,7 +125,7 @@ class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect<ObzedatGhostCou
 
 }
 
-class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility<BeginningOfYourUpkeepdelayTriggeredAbility> {
+class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility {
 
     public BeginningOfYourUpkeepdelayTriggeredAbility() {
         this(new ObzedatGhostCouncilReturnEffect(), TargetController.YOU);

@@ -74,7 +74,7 @@ public class Mirrorworks extends CardImpl<Mirrorworks> {
 
 }
 
-class MirrorworksAbility extends TriggeredAbilityImpl<MirrorworksAbility> {
+class MirrorworksAbility extends TriggeredAbilityImpl {
 
     public MirrorworksAbility() {
         super(Zone.BATTLEFIELD, new MirrorworksEffect());

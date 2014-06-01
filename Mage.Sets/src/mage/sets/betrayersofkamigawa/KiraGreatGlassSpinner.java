@@ -84,7 +84,7 @@ public class KiraGreatGlassSpinner extends CardImpl<KiraGreatGlassSpinner> {
 // not perfectly implemented. It doesnt't handles if a creature was already targeted the turn Kira comes into play.
 // Maybe it's better to implement it with a watcher
 
-class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl<KiraGreatGlassSpinnerAbility> {
+class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
 
     protected Map<UUID,Integer> turnUsed = new HashMap<UUID,Integer>();
 

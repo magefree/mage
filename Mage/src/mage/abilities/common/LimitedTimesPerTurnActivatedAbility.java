@@ -40,7 +40,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl<LimitedTimesPerTurnActivatedAbility> {
+public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
 
     private int maxActivationsPerTurn;
 

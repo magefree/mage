@@ -79,7 +79,7 @@ public class QuietusSpike extends CardImpl<QuietusSpike> {
     }
 }
 
-class QuietusSpikeTriggeredAbility extends TriggeredAbilityImpl<QuietusSpikeTriggeredAbility> {
+class QuietusSpikeTriggeredAbility extends TriggeredAbilityImpl {
 
     public QuietusSpikeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new QuietusSpikeEffect());

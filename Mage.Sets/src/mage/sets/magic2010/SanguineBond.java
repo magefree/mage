@@ -66,7 +66,7 @@ public class SanguineBond extends CardImpl<SanguineBond> {
     }
 }
 
-class SanguineBondTriggeredAbility extends TriggeredAbilityImpl<SanguineBondTriggeredAbility> {
+class SanguineBondTriggeredAbility extends TriggeredAbilityImpl {
 
     public SanguineBondTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);

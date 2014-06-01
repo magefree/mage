@@ -39,7 +39,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OnEventTriggeredAbility extends TriggeredAbilityImpl<OnEventTriggeredAbility> {
+public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
 
     private EventType eventType;
     private String eventName;

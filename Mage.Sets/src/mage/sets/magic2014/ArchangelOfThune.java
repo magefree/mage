@@ -76,7 +76,7 @@ public class ArchangelOfThune extends CardImpl<ArchangelOfThune> {
     }
 }
 
-class ArchangelOfThuneAbility extends TriggeredAbilityImpl<ArchangelOfThuneAbility> {
+class ArchangelOfThuneAbility extends TriggeredAbilityImpl {
 
     public ArchangelOfThuneAbility() {
         super(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), false);

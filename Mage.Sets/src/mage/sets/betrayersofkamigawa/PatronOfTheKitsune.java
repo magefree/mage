@@ -72,7 +72,7 @@ public class PatronOfTheKitsune extends CardImpl<PatronOfTheKitsune> {
     }
 }
 
-class PatronOfTheKitsuneTriggeredAbility extends TriggeredAbilityImpl<PatronOfTheKitsuneTriggeredAbility> {
+class PatronOfTheKitsuneTriggeredAbility extends TriggeredAbilityImpl {
 
     public PatronOfTheKitsuneTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);

@@ -70,7 +70,7 @@ public class PsychicSurgery extends CardImpl<PsychicSurgery> {
     }
 }
 
-class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl<PsychicSurgeryTriggeredAbility> {
+class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
 
     public PsychicSurgeryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PsychicSurgeryEffect(), true);

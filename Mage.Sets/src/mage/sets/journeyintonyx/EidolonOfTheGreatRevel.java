@@ -72,7 +72,7 @@ public class EidolonOfTheGreatRevel extends CardImpl<EidolonOfTheGreatRevel> {
 }
 
 
-class EidolonOfTheGreatRevelTriggeredAbility extends TriggeredAbilityImpl<EidolonOfTheGreatRevelTriggeredAbility> {
+class EidolonOfTheGreatRevelTriggeredAbility extends TriggeredAbilityImpl {
 
 
     public EidolonOfTheGreatRevelTriggeredAbility() {

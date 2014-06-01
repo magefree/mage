@@ -71,7 +71,7 @@ public class Hellrider extends CardImpl<Hellrider> {
     }
 }
 
-class HellriderTriggeredAbility extends TriggeredAbilityImpl<HellriderTriggeredAbility> {
+class HellriderTriggeredAbility extends TriggeredAbilityImpl {
 
     public HellriderTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));

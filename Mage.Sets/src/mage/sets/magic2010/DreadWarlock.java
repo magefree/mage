@@ -69,7 +69,7 @@ public class DreadWarlock extends CardImpl<DreadWarlock> {
     }
 }
 
-class DreadWarlockAbility extends EvasionAbility<DreadWarlockAbility> {
+class DreadWarlockAbility extends EvasionAbility {
 
     private static DreadWarlockAbility instance;
 

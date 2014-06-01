@@ -38,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PhasingAbility extends StaticAbility<PhasingAbility> implements MageSingleton {
+public class PhasingAbility extends StaticAbility implements MageSingleton {
 
     private static final PhasingAbility fINSTANCE =  new PhasingAbility();
 

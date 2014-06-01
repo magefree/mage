@@ -38,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TrampleAbility extends StaticAbility<TrampleAbility> implements MageSingleton {
+public class TrampleAbility extends StaticAbility implements MageSingleton {
 
     private static final TrampleAbility fINSTANCE =  new TrampleAbility();
 

@@ -66,7 +66,7 @@ public class IvoryCup extends CardImpl<IvoryCup> {
         return new IvoryCup(this);
     }
 }
-class IvoryCupAbility extends TriggeredAbilityImpl<IvoryCupAbility> {
+class IvoryCupAbility extends TriggeredAbilityImpl {
 
     public IvoryCupAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);

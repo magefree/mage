@@ -161,7 +161,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 
     }
 
-    class ProteanHydraAbility extends TriggeredAbilityImpl<ProteanHydraAbility> {
+    class ProteanHydraAbility extends TriggeredAbilityImpl {
 
         public ProteanHydraAbility() {
             super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), false);
@@ -191,7 +191,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 
     }
 
-    class ProteanHydraDelayedTriggeredAbility extends DelayedTriggeredAbility<ProteanHydraDelayedTriggeredAbility> {
+    class ProteanHydraDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
         public ProteanHydraDelayedTriggeredAbility() {
             super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));

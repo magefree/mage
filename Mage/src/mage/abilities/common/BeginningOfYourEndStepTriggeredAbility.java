@@ -10,7 +10,7 @@ import mage.game.events.GameEvent;
  * Beginning of controlled end step triggered ability
  * @author Loki
  */
-public class BeginningOfYourEndStepTriggeredAbility extends TriggeredAbilityImpl<BeginningOfYourEndStepTriggeredAbility> {
+public class BeginningOfYourEndStepTriggeredAbility extends TriggeredAbilityImpl {
     public BeginningOfYourEndStepTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }

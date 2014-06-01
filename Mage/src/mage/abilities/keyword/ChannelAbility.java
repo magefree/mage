@@ -37,7 +37,7 @@ import mage.constants.TimingRule;
 
 
 
-public class ChannelAbility extends ActivatedAbilityImpl<ChannelAbility> {
+public class ChannelAbility extends ActivatedAbilityImpl {
 
     public ChannelAbility(String manaString, Effect effect) {
         this(manaString, effect, TimingRule.INSTANT);

@@ -80,7 +80,7 @@ public class FinestHour extends CardImpl<FinestHour> {
 
 }
 
-class FinestHourAbility extends TriggeredAbilityImpl<FinestHourAbility> {
+class FinestHourAbility extends TriggeredAbilityImpl {
 
     public FinestHourAbility() {
         super(Zone.BATTLEFIELD, new FinestHourEffect());

@@ -47,9 +47,8 @@ import mage.game.Game;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> extends AbilityImpl<T> implements ActivatedAbility {
+public abstract class ActivatedAbilityImpl extends AbilityImpl implements ActivatedAbility {
 
     protected TimingRule timing = TimingRule.INSTANT;
     protected TargetController mayActivate = TargetController.YOU;
@@ -150,6 +149,9 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
             }
         }
     }
+
+    @Override
+    public abstract ActivatedAbilityImpl copy();
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {

@@ -88,7 +88,7 @@ public class WerewolfRansacker extends CardImpl<WerewolfRansacker> {
     }
 }
 
-class WerewolfRansackerAbility extends TriggeredAbilityImpl<WerewolfRansackerAbility> {
+class WerewolfRansackerAbility extends TriggeredAbilityImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
     public static final String RULE_TEXT = "Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller";

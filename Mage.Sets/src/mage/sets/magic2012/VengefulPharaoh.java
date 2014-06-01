@@ -76,7 +76,7 @@ public class VengefulPharaoh extends CardImpl<VengefulPharaoh> {
     }
 }
 
-class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl<VengefulPharaohTriggeredAbility> {
+class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl {
 
     public VengefulPharaohTriggeredAbility() {
         super(Zone.GRAVEYARD, new VengefulPharaohEffect(), false);

@@ -73,7 +73,7 @@ public class DarienKingOfKjeldor extends CardImpl<DarienKingOfKjeldor> {
         return new DarienKingOfKjeldor(this);
     }
 }
-class DarienKingOfKjeldorTriggeredAbility extends TriggeredAbilityImpl<DarienKingOfKjeldorTriggeredAbility> {
+class DarienKingOfKjeldorTriggeredAbility extends TriggeredAbilityImpl {
 
     public DarienKingOfKjeldorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DarienKingOfKjeldorEffect(), true);

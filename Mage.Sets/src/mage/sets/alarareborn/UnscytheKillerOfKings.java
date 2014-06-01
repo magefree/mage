@@ -96,7 +96,7 @@ public class UnscytheKillerOfKings extends CardImpl<UnscytheKillerOfKings> {
     }
 }
 
-class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl<UnscytheKillerOfKingsTriggeredAbility> {
+class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
 
     public UnscytheKillerOfKingsTriggeredAbility(Effect effect) {
         this(effect, true);

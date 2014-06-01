@@ -71,7 +71,7 @@ public class ChandrasSpitfire extends CardImpl<ChandrasSpitfire> {
 
 }
 
-class ChandrasSpitfireAbility extends TriggeredAbilityImpl<ChandrasSpitfireAbility> {
+class ChandrasSpitfireAbility extends TriggeredAbilityImpl {
 
     public ChandrasSpitfireAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), false);

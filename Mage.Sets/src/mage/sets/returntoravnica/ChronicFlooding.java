@@ -81,7 +81,7 @@ public class ChronicFlooding extends CardImpl<ChronicFlooding> {
     }
 }
  
-class ChronicFloodingAbility extends TriggeredAbilityImpl<ChronicFloodingAbility> {
+class ChronicFloodingAbility extends TriggeredAbilityImpl {
     ChronicFloodingAbility() {
         super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(3));
     }

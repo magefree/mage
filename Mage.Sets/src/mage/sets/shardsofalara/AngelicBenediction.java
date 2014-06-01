@@ -67,7 +67,7 @@ public class AngelicBenediction extends CardImpl<AngelicBenediction> {
     }
 }
 
-class AngelicBenedictionTriggeredAbility extends TriggeredAbilityImpl<AngelicBenedictionTriggeredAbility> {
+class AngelicBenedictionTriggeredAbility extends TriggeredAbilityImpl {
 
     public AngelicBenedictionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TapTargetEffect(), true);

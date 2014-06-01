@@ -81,7 +81,7 @@ public class CurseOfPredation extends CardImpl<CurseOfPredation> {
     }
 }
 
-class CurseOfPredationTriggeredAbility extends TriggeredAbilityImpl<CurseOfPredationTriggeredAbility> {
+class CurseOfPredationTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfPredationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(), Outcome.BoostCreature), false);

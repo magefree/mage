@@ -106,7 +106,7 @@ class ChaliceOfTheVoidEffect extends OneShotEffect<ChaliceOfTheVoidEffect> {
     }
 }
 
-class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl<ChaliceOfTheVoidTriggeredAbility> {
+class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
    
 
     public ChaliceOfTheVoidTriggeredAbility() {

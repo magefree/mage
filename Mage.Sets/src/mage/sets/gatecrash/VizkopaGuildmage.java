@@ -98,7 +98,7 @@ public class VizkopaGuildmage extends CardImpl<VizkopaGuildmage> {
     }
 }
 
-class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility<VizkopaGuildmageDelayedTriggeredAbility> {
+class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public VizkopaGuildmageDelayedTriggeredAbility() {
         super(new OpponentsLoseLifeEffect(), Duration.EndOfTurn, false);

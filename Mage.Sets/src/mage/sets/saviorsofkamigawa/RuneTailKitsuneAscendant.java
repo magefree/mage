@@ -78,7 +78,7 @@ public class RuneTailKitsuneAscendant extends CardImpl<RuneTailKitsuneAscendant>
     }
 }
 
-class RuneTailKitsuneAscendantFlipAbility extends StateTriggeredAbility<RuneTailKitsuneAscendantFlipAbility> {
+class RuneTailKitsuneAscendantFlipAbility extends StateTriggeredAbility {
 
     public RuneTailKitsuneAscendantFlipAbility() {
         super(Zone.BATTLEFIELD, new FlipSourceEffect(new RuneTailEssence()));

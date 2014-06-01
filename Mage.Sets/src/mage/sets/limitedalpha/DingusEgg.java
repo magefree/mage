@@ -67,7 +67,7 @@ public class DingusEgg extends CardImpl<DingusEgg> {
     }
 }
 
-class DingusEggTriggeredAbility extends TriggeredAbilityImpl<DingusEggTriggeredAbility> {
+class DingusEggTriggeredAbility extends TriggeredAbilityImpl {
 
     public DingusEggTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);

@@ -69,7 +69,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class NinjutsuAbility extends ActivatedAbilityImpl<NinjutsuAbility> {
+public class NinjutsuAbility extends ActivatedAbilityImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("unblocked attacker you control");
 

@@ -38,7 +38,7 @@ import mage.constants.Zone;
 /**
  * @author BetaSteward
  */
-public class DamageAsThoughNotBlockedAbility extends StaticAbility<DamageAsThoughNotBlockedAbility> implements MageSingleton {
+public class DamageAsThoughNotBlockedAbility extends StaticAbility implements MageSingleton {
 
     private static final DamageAsThoughNotBlockedAbility fINSTANCE =  new DamageAsThoughNotBlockedAbility();
 

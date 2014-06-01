@@ -108,7 +108,7 @@ class ChancellorOfTheAnnexEffect extends OneShotEffect<ChancellorOfTheAnnexEffec
 
 }
 
-class ChancellorOfTheAnnexDelayedTriggeredAbility extends DelayedTriggeredAbility<ChancellorOfTheAnnexDelayedTriggeredAbility> {
+class ChancellorOfTheAnnexDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID playerId;
 

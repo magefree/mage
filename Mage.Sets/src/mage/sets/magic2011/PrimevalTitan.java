@@ -73,7 +73,7 @@ public class PrimevalTitan extends CardImpl<PrimevalTitan> {
 
 }
 
-class PrimevalTitanAbility extends TriggeredAbilityImpl<PrimevalTitanAbility> {
+class PrimevalTitanAbility extends TriggeredAbilityImpl {
 
     public PrimevalTitanAbility() {
         super(Zone.BATTLEFIELD, null, true);

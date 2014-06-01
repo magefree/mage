@@ -181,7 +181,7 @@ class MemoryJarDelayedEffect extends OneShotEffect<MemoryJarDelayedEffect> {
     
 }
 
-class MemoryJarDelayedTriggeredAbility extends DelayedTriggeredAbility<MemoryJarDelayedTriggeredAbility> {
+class MemoryJarDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public MemoryJarDelayedTriggeredAbility(Effect effect) {
         super(effect);

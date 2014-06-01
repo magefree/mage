@@ -55,7 +55,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class ReplicateAbility extends StaticAbility<ReplicateAbility> implements OptionalAdditionalSourceCosts {
+public class ReplicateAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     private static final String keywordText = "Replicate";
     private static final String reminderTextMana = "<i>(When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)</i>";
@@ -168,7 +168,7 @@ public class ReplicateAbility extends StaticAbility<ReplicateAbility> implements
     }
 }
 
-class ReplicateTriggeredAbility extends TriggeredAbilityImpl<ReplicateTriggeredAbility> {
+class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
 
     public ReplicateTriggeredAbility() {
         super(Zone.STACK, new ReplicateCopyEffect());

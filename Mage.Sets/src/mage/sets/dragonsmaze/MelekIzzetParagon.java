@@ -95,7 +95,7 @@ public class MelekIzzetParagon extends CardImpl<MelekIzzetParagon> {
     }
 }
 
-class MelekIzzetParagonTriggeredAbility extends TriggeredAbilityImpl<MelekIzzetParagonTriggeredAbility> {
+class MelekIzzetParagonTriggeredAbility extends TriggeredAbilityImpl {
 
     public MelekIzzetParagonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), false);

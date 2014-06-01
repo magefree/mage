@@ -75,7 +75,7 @@ public class Drumhunter extends CardImpl<Drumhunter> {
     }
 }
 
-class DrumHunterTriggeredAbility extends TriggeredAbilityImpl<DrumHunterTriggeredAbility> {
+class DrumHunterTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 

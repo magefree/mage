@@ -125,7 +125,7 @@ class CountrysideCrusherEffect extends OneShotEffect<CountrysideCrusherEffect> {
 }
 
 
-class CountrysideCrusherTriggeredAbility extends TriggeredAbilityImpl<CountrysideCrusherTriggeredAbility> {
+class CountrysideCrusherTriggeredAbility extends TriggeredAbilityImpl {
 
     public CountrysideCrusherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);

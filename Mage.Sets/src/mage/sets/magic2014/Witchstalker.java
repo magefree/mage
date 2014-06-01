@@ -77,7 +77,7 @@ public class Witchstalker extends CardImpl<Witchstalker> {
     }
 }
 
-class WitchstalkerTriggeredAbility extends TriggeredAbilityImpl<WitchstalkerTriggeredAbility> {
+class WitchstalkerTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCard filter = new FilterCard("blue or black spell");
     static {

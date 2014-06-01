@@ -78,7 +78,7 @@ public class QuestForTheGemblades extends CardImpl<QuestForTheGemblades> {
     }
 }
 
-class QuestForTheGembladesTriggeredAbility extends TriggeredAbilityImpl<QuestForTheGembladesTriggeredAbility> {
+class QuestForTheGembladesTriggeredAbility extends TriggeredAbilityImpl {
 
     public QuestForTheGembladesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);

@@ -78,7 +78,7 @@ public class GahijiHonoredOne extends CardImpl<GahijiHonoredOne> {
     }
 }
 
-class GahijiHonoredOneTriggeredAbility extends TriggeredAbilityImpl<GahijiHonoredOneTriggeredAbility> {
+class GahijiHonoredOneTriggeredAbility extends TriggeredAbilityImpl {
 
     public GahijiHonoredOneTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostTargetEffect(2,0, Duration.EndOfTurn), false);

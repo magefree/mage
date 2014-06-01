@@ -65,7 +65,7 @@ public class Pyroconvergence extends CardImpl<Pyroconvergence> {
         return new Pyroconvergence(this);
     }
 }
-class PyroconvergenceTriggeredAbility extends TriggeredAbilityImpl<PyroconvergenceTriggeredAbility> {
+class PyroconvergenceTriggeredAbility extends TriggeredAbilityImpl {
     public PyroconvergenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
         TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();

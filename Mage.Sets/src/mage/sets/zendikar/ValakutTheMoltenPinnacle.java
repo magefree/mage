@@ -83,7 +83,7 @@ public class ValakutTheMoltenPinnacle extends CardImpl<ValakutTheMoltenPinnacle>
     }
 }
 
-class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl<ValakutTheMoltenPinnacleTriggeredAbility> {
+class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
 
     ValakutTheMoltenPinnacleTriggeredAbility () {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3), true);

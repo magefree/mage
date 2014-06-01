@@ -121,7 +121,7 @@ class AdarkarValkyrieEffect extends OneShotEffect<AdarkarValkyrieEffect> {
 }
 
 
-class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility<AdarkarValkyrieDelayedTriggeredAbility> {
+class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     protected FixedTarget fixedTarget;
 

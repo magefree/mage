@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Plopman
  */
-public class RetraceAbility extends ActivatedAbilityImpl<RetraceAbility> {
+public class RetraceAbility extends ActivatedAbilityImpl {
 
     public RetraceAbility(Cost cost, TimingRule timingRule) {
         super(Zone.GRAVEYARD, new RetraceEffect(), cost);

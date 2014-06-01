@@ -81,7 +81,7 @@ public class CurseOfTheBloodyTome extends CardImpl<CurseOfTheBloodyTome> {
     }
 }
 
-class CurseOfTheBloodyTomeAbility extends TriggeredAbilityImpl<CurseOfTheBloodyTomeAbility> {
+class CurseOfTheBloodyTomeAbility extends TriggeredAbilityImpl {
 
     public CurseOfTheBloodyTomeAbility() {
         super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2));

@@ -65,7 +65,7 @@ public class ProperBurial extends CardImpl<ProperBurial> {
     }
 }
 
-class ProperBurialTriggeredAbility extends TriggeredAbilityImpl<ProperBurialTriggeredAbility> {
+class ProperBurialTriggeredAbility extends TriggeredAbilityImpl {
 
     public ProperBurialTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);

@@ -38,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DeathtouchAbility extends StaticAbility<DeathtouchAbility> implements MageSingleton {
+public class DeathtouchAbility extends StaticAbility implements MageSingleton {
 
     private static final DeathtouchAbility fINSTANCE =  new DeathtouchAbility();
 

@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LandfallAbility extends TriggeredAbilityImpl<LandfallAbility> {
+public class LandfallAbility extends TriggeredAbilityImpl {
 
     public LandfallAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

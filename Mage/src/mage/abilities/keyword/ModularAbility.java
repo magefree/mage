@@ -104,7 +104,7 @@ public class ModularAbility extends DiesTriggeredAbility {
 
 }
 
-class ModularStaticAbility extends StaticAbility<ModularStaticAbility> {
+class ModularStaticAbility extends StaticAbility {
 
     private String ruleText;
 

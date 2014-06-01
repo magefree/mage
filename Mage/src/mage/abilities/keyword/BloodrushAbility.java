@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingCreature;
  */
 
 
-public class BloodrushAbility extends ActivatedAbilityImpl<BloodrushAbility> {
+public class BloodrushAbility extends ActivatedAbilityImpl {
 
     public BloodrushAbility(String manaString, Effect effect) {
         super(Zone.HAND, effect, new ManaCostsImpl(manaString));

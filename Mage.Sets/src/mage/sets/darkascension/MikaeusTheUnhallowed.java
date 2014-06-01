@@ -90,7 +90,7 @@ public class MikaeusTheUnhallowed extends CardImpl<MikaeusTheUnhallowed> {
     }
 }
 
-class MikaeusTheUnhallowedAbility extends TriggeredAbilityImpl<MikaeusTheUnhallowedAbility> {
+class MikaeusTheUnhallowedAbility extends TriggeredAbilityImpl {
 
     public MikaeusTheUnhallowedAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());

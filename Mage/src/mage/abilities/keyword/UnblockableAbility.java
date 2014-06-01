@@ -34,7 +34,7 @@ import mage.abilities.effects.common.combat.UnblockableSourceEffect;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class UnblockableAbility extends EvasionAbility<UnblockableAbility> {
+public class UnblockableAbility extends EvasionAbility {
 
     public UnblockableAbility() {
         this("");

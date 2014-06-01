@@ -38,7 +38,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class BlocksTriggeredAbility extends TriggeredAbilityImpl<BlocksTriggeredAbility> {
+public class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
 //    private boolean fixedTargetPointer;
 

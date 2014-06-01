@@ -57,7 +57,7 @@ import java.io.ObjectStreamException;
  *
  *  @author nantuko
  */
-public class InfectAbility extends StaticAbility<InfectAbility> implements MageSingleton {
+public class InfectAbility extends StaticAbility implements MageSingleton {
 
     private static final InfectAbility fINSTANCE =  new InfectAbility();
 

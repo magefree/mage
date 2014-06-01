@@ -74,7 +74,7 @@ public class RockBasilisk extends CardImpl<RockBasilisk> {
     }
 }
 
-class RockBasiliskTriggeredAbility extends TriggeredAbilityImpl<RockBasiliskTriggeredAbility> {
+class RockBasiliskTriggeredAbility extends TriggeredAbilityImpl {
 
     RockBasiliskTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RockBasiliskEffect());

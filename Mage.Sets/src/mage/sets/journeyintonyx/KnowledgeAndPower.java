@@ -72,7 +72,7 @@ public class KnowledgeAndPower extends CardImpl<KnowledgeAndPower> {
     }
 }
 
-class ScryTriggeredAbility extends TriggeredAbilityImpl<ScryTriggeredAbility> {
+class ScryTriggeredAbility extends TriggeredAbilityImpl {
 
     public ScryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), false);

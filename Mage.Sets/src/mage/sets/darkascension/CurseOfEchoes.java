@@ -86,7 +86,7 @@ public class CurseOfEchoes extends CardImpl<CurseOfEchoes> {
     }
 }
 
-class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl<CurseOfEchoesCopyTriggeredAbility> {
+class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterSpell filter = new FilterSpell();
 

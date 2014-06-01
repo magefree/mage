@@ -80,7 +80,7 @@ public class QuestForPureFlame extends CardImpl<QuestForPureFlame> {
     }
 }
 
-class QuestForPureFlameTriggeredAbility extends TriggeredAbilityImpl<QuestForPureFlameTriggeredAbility> {
+class QuestForPureFlameTriggeredAbility extends TriggeredAbilityImpl {
 
     public QuestForPureFlameTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);

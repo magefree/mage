@@ -37,7 +37,7 @@ import mage.game.events.GameEvent;
  *
  * @author Plopman
  */
-public class CastSourceTriggeredAbility extends TriggeredAbilityImpl<CastSourceTriggeredAbility> {
+public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public CastSourceTriggeredAbility(Effect effect) {
         this(effect, false);

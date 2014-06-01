@@ -117,7 +117,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
 
 }
 
-class GraftStaticAbility extends StaticAbility<GraftStaticAbility> {
+class GraftStaticAbility extends StaticAbility {
 
     private String ruleText;
 

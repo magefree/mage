@@ -72,7 +72,7 @@ public class NaturesWill extends CardImpl<NaturesWill> {
     }
 }
 
-class NaturesWillTriggeredAbility extends TriggeredAbilityImpl<NaturesWillTriggeredAbility> {
+class NaturesWillTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean madeDamge = false;
     private Set<UUID> damagedPlayers = new HashSet<UUID>();

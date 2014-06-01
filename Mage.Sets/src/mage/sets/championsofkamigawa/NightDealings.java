@@ -85,7 +85,7 @@ public class NightDealings extends CardImpl<NightDealings> {
     }
 
 
-    private class NightDealingsTriggeredAbility extends TriggeredAbilityImpl<NightDealingsTriggeredAbility> {
+    private class NightDealingsTriggeredAbility extends TriggeredAbilityImpl {
 
         public NightDealingsTriggeredAbility() {
             super(Zone.BATTLEFIELD, new NightDealingsEffect());

@@ -82,7 +82,7 @@ public class SkillBorrower extends CardImpl<SkillBorrower> {
 }
 
 
-class SkillBorrowerAbility extends StaticAbility<SkillBorrowerAbility> {
+class SkillBorrowerAbility extends StaticAbility {
 
     public SkillBorrowerAbility() {
         super(Zone.BATTLEFIELD, new SkillBorrowerEffect());

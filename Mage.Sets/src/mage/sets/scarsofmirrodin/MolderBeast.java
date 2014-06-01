@@ -72,7 +72,7 @@ public class MolderBeast extends CardImpl<MolderBeast> {
     }
 }
 
-class MolderBeastTriggeredAbility extends TriggeredAbilityImpl<MolderBeastTriggeredAbility> {
+class MolderBeastTriggeredAbility extends TriggeredAbilityImpl {
 
     public MolderBeastTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), false);

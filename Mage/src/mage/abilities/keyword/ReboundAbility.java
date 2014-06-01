@@ -73,7 +73,7 @@ import java.util.UUID;
  *
  * @author maurer.it_at_gmail.com, noxx
  */
-public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
+public class ReboundAbility extends TriggeredAbilityImpl {
     //20101001 - 702.85
     private boolean installReboundEffect;
     private static String reboundText = "Rebound <i>(If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)</i>";
@@ -248,7 +248,7 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<Rebound
  *
  * @author maurer.it_at_gmail.com
  */
-class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility<ReboundEffectCastFromExileDelayedTrigger> {
+class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility {
 
     ReboundEffectCastFromExileDelayedTrigger(UUID cardId, UUID sourceId) {
         super(new ReboundCastSpellFromExileEffect(cardId));

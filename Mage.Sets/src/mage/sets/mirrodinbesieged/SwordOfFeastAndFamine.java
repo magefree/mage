@@ -90,7 +90,7 @@ public class SwordOfFeastAndFamine extends CardImpl<SwordOfFeastAndFamine> {
     }
 }
 
-class SwordOfFeastAndFamineAbility extends TriggeredAbilityImpl<SwordOfFeastAndFamineAbility> {
+class SwordOfFeastAndFamineAbility extends TriggeredAbilityImpl {
 
     public SwordOfFeastAndFamineAbility() {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1));

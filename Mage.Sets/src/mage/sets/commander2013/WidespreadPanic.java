@@ -70,7 +70,7 @@ public class WidespreadPanic extends CardImpl<WidespreadPanic> {
     }
 }
 
-class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl<WidespreadPanicTriggeredAbility> {
+class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
 
     public WidespreadPanicTriggeredAbility() {
         super(Zone.BATTLEFIELD, new WidespreadPanicEffect(), false);

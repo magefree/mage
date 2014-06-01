@@ -73,7 +73,7 @@ public class SigilCaptain extends CardImpl<SigilCaptain> {
     }
 }
 
-class SigilCaptainTriggeredAbility extends TriggeredAbilityImpl<SigilCaptainTriggeredAbility> {
+class SigilCaptainTriggeredAbility extends TriggeredAbilityImpl {
 
     public SigilCaptainTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));

@@ -82,7 +82,7 @@ public class BloodchiefAscension extends CardImpl<BloodchiefAscension> {
     }
 }
 
-class BloodchiefAscensionTriggeredAbility extends TriggeredAbilityImpl<BloodchiefAscensionTriggeredAbility> {
+class BloodchiefAscensionTriggeredAbility extends TriggeredAbilityImpl {
 
     private Condition condition;
 

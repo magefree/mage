@@ -8,7 +8,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
-public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl<BeginningOfCombatTriggeredAbility> {
+public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     
     private TargetController targetController;
     private boolean setTargetPointer;

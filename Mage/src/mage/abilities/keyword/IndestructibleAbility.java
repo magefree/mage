@@ -52,7 +52,7 @@ import mage.abilities.StaticAbility;
  * @author BetaSteward_at_googlemail.com
  */
 
-public class IndestructibleAbility extends StaticAbility<IndestructibleAbility> {
+public class IndestructibleAbility extends StaticAbility {
 
     private static final IndestructibleAbility fINSTANCE;
 

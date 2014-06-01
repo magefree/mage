@@ -64,7 +64,7 @@ public class ViridianRevel extends CardImpl<ViridianRevel> {
     }
 }
 
-class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl<ViridianRevelTriggeredAbility> {
+class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl {
     ViridianRevelTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }

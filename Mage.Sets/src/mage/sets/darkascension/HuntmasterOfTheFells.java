@@ -100,7 +100,7 @@ public class HuntmasterOfTheFells extends CardImpl<HuntmasterOfTheFells> {
     }
 }
 
-class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl<HuntmasterOfTheFellsAbility> {
+class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl {
 
     public HuntmasterOfTheFellsAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken(Token.Type.SECOND)), false);
@@ -137,7 +137,7 @@ class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl<HuntmasterOfTheFe
 
 }
 
-class RavagerOfTheFellsAbility extends TriggeredAbilityImpl<RavagerOfTheFellsAbility> {
+class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
 
     public RavagerOfTheFellsAbility() {
         super(Zone.BATTLEFIELD, new RavagerOfTheFellsEffect(), false);

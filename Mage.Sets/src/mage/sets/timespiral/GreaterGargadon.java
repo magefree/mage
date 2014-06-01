@@ -81,7 +81,7 @@ public class GreaterGargadon extends CardImpl<GreaterGargadon> {
 }
 
 
-class GreaterGargadonAbility extends ActivatedAbilityImpl<GreaterGargadonAbility> {
+class GreaterGargadonAbility extends ActivatedAbilityImpl {
    
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact, creature, or land");
     static {

@@ -108,7 +108,7 @@ class QuenchableFireEffect extends OneShotEffect<QuenchableFireEffect> {
 
 }
 
-class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility<QuenchableFireDelayedTriggeredAbility> {
+class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID specialActionId;
 

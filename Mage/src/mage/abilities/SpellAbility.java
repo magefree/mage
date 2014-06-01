@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
+public class SpellAbility extends ActivatedAbilityImpl {
 
     private SpellAbilityType spellAbilityType;
 

@@ -38,7 +38,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimpleEvasionAbility extends EvasionAbility<SimpleEvasionAbility> {
+public class SimpleEvasionAbility extends EvasionAbility {
 
     public SimpleEvasionAbility(Effect effect) {
         super();

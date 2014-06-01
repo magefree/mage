@@ -82,7 +82,7 @@ public class CurseOfShallowGraves extends CardImpl<CurseOfShallowGraves> {
     }
 }
 
-class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl<CurseOfShallowTriggeredAbility> {
+class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfShallowTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new ZombieToken(), new StaticValue(1), true, false), true);

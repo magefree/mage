@@ -10,7 +10,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-public class DiesAndDealtDamageThisTurnTriggeredAbility extends TriggeredAbilityImpl<DiesAndDealtDamageThisTurnTriggeredAbility> {
+public class DiesAndDealtDamageThisTurnTriggeredAbility extends TriggeredAbilityImpl {
 
     public DiesAndDealtDamageThisTurnTriggeredAbility(Effect effect) {
         this(effect, false);

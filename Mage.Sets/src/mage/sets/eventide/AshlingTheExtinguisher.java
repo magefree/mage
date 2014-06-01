@@ -74,7 +74,7 @@ public class AshlingTheExtinguisher extends CardImpl<AshlingTheExtinguisher> {
 
 }
 
-class AshlingTheExtinguisherTriggeredAbility extends TriggeredAbilityImpl<AshlingTheExtinguisherTriggeredAbility> {
+class AshlingTheExtinguisherTriggeredAbility extends TriggeredAbilityImpl {
     public AshlingTheExtinguisherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeTargetEffect());
         this.addTarget(new TargetCreaturePermanent());

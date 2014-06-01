@@ -44,7 +44,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityImpl<DealsDamageGainLifeSourceTriggeredAbility> {
+public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public DealsDamageGainLifeSourceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainThatMuchLifeEffect(), false);

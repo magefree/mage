@@ -85,7 +85,7 @@ public class CurseOfStalkedPrey extends CardImpl<CurseOfStalkedPrey> {
     }
 }
 
-class CurseOfStalkedPreyTriggeredAbility extends TriggeredAbilityImpl<CurseOfStalkedPreyTriggeredAbility> {
+class CurseOfStalkedPreyTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfStalkedPreyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));

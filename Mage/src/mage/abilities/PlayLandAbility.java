@@ -37,7 +37,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlayLandAbility extends ActivatedAbilityImpl<PlayLandAbility> {
+public class PlayLandAbility extends ActivatedAbilityImpl {
 
     public PlayLandAbility(String cardName) {
         super(AbilityType.PLAY_LAND, Zone.HAND);

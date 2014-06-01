@@ -82,7 +82,7 @@ public class CurseOfThirst extends CardImpl<CurseOfThirst> {
     }
 }
 
-class CurseOfThirstAbility extends TriggeredAbilityImpl<CurseOfThirstAbility> {
+class CurseOfThirstAbility extends TriggeredAbilityImpl {
 
     public CurseOfThirstAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(new CursesAttachedCount()));

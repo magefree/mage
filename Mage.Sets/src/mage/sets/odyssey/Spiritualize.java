@@ -74,7 +74,7 @@ public class Spiritualize extends CardImpl<Spiritualize> {
     }
 }
 
-class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility<SpiritualizeTriggeredAbility> {
+class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
 
     public SpiritualizeTriggeredAbility() {
         super(new SpiritualizeEffect(), Duration.EndOfTurn, false);

@@ -78,7 +78,7 @@ public class AvacynsCollar extends CardImpl<AvacynsCollar> {
     }
 }
 
-class AvacynsCollarTriggeredAbility extends TriggeredAbilityImpl<AvacynsCollarTriggeredAbility> {
+class AvacynsCollarTriggeredAbility extends TriggeredAbilityImpl {
 
     public AvacynsCollarTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()));

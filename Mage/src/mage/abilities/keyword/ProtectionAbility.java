@@ -45,7 +45,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ProtectionAbility extends StaticAbility<ProtectionAbility> {
+public class ProtectionAbility extends StaticAbility {
 
     protected Filter filter;
 

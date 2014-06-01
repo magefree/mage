@@ -71,7 +71,7 @@ public class BurningTreeShaman extends CardImpl<BurningTreeShaman> {
     }
 }
 
-class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl<BurningTreeShamanTriggeredAbility> {
+class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
     BurningTreeShamanTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
         this.addTarget(new TargetPlayer());

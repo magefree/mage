@@ -76,7 +76,7 @@ public class AncientHellkite extends CardImpl<AncientHellkite> {
 
 }
 
-class AncientHellkiteAbility extends ActivatedAbilityImpl<AncientHellkiteAbility> {
+class AncientHellkiteAbility extends ActivatedAbilityImpl {
 
     private static final FilterCreaturePermanent filterTemplate = new FilterCreaturePermanent("creature defending player controls");
 

@@ -84,7 +84,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 
 
-public class EvolveAbility extends TriggeredAbilityImpl<EvolveAbility> {
+public class EvolveAbility extends TriggeredAbilityImpl {
 
     public EvolveAbility() {
         super(Zone.BATTLEFIELD, new EvolveEffect());

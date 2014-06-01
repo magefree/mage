@@ -85,7 +85,7 @@ public class PyrewildShaman extends CardImpl<PyrewildShaman> {
 
 }
 
-class PyrewildShamanTriggeredAbility extends TriggeredAbilityImpl<PyrewildShamanTriggeredAbility> {
+class PyrewildShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     List<UUID> damagedPlayerIds = new ArrayList<UUID>();
 

@@ -84,7 +84,7 @@ public class WolfhuntersQuiver extends CardImpl<WolfhuntersQuiver> {
     }
 }
 
-class WolfhuntersQuiverAbility extends ActivatedAbilityImpl<WolfhuntersQuiverAbility> {
+class WolfhuntersQuiverAbility extends ActivatedAbilityImpl {
 
     private String ruleText;
 

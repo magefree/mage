@@ -83,7 +83,7 @@ public class UndeadAlchemist extends CardImpl<UndeadAlchemist> {
     }
 }
 
-class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl<UndeadAlchemistTriggeredAbility> {
+class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
 
     public UndeadAlchemistTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect(), true);

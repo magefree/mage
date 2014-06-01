@@ -80,7 +80,7 @@ public class SpiritLink extends CardImpl<SpiritLink> {
     }
 }
 
-class SpiritLinkTriggeredAbility extends TriggeredAbilityImpl<SpiritLinkTriggeredAbility> {
+class SpiritLinkTriggeredAbility extends TriggeredAbilityImpl {
 
     public SpiritLinkTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SpiritLinkEffect(), false);

@@ -51,7 +51,7 @@ import mage.abilities.costs.Cost;
  *
  * @author noxx
  */
-public class MiracleAbility extends StaticAbility<MiracleAbility> {
+public class MiracleAbility extends StaticAbility {
 
     private static final String staticRule = " (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)";
 

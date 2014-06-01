@@ -78,7 +78,7 @@ public class LightwielderPaladin extends CardImpl<LightwielderPaladin> {
     }
 }
 
-class LightwielderPaladinTriggeredAbility extends TriggeredAbilityImpl<LightwielderPaladinTriggeredAbility> {
+class LightwielderPaladinTriggeredAbility extends TriggeredAbilityImpl {
 
     public LightwielderPaladinTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect(), true);

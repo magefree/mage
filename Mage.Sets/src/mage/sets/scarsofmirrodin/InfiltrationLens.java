@@ -70,7 +70,7 @@ public class InfiltrationLens extends CardImpl<InfiltrationLens> {
     }
 }
 
-class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl<EquippedBecomesBlockedTriggeredAbility> {
+class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
     public EquippedBecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

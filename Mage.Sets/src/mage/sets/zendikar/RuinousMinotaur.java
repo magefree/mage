@@ -71,7 +71,7 @@ public class RuinousMinotaur extends CardImpl<RuinousMinotaur> {
     }
 }
 
-class RuinousMinotaurTriggeredAbility extends TriggeredAbilityImpl<RuinousMinotaurTriggeredAbility> {
+class RuinousMinotaurTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

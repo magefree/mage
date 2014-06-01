@@ -81,7 +81,7 @@ import mage.players.Player;
  * @author LevelX2
  *
  */
-public class KickerAbility extends StaticAbility<KickerAbility> implements OptionalAdditionalSourceCosts {
+public class KickerAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     protected static final String KICKER_KEYWORD = "Kicker";
     protected static final String KICKER_REMINDER_MANA = "(You may pay an additional {cost} as you cast this spell.)";

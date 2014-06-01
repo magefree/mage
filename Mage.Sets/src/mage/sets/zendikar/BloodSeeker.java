@@ -72,7 +72,7 @@ public class BloodSeeker extends CardImpl<BloodSeeker> {
     }
 }
 
-class BloodSeekerTriggeredAbility extends TriggeredAbilityImpl<BloodSeekerTriggeredAbility> {
+class BloodSeekerTriggeredAbility extends TriggeredAbilityImpl {
     BloodSeekerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), true);
     }

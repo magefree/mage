@@ -67,7 +67,7 @@ public class AnkhOfMishra extends CardImpl<AnkhOfMishra> {
     }
 }
 
-class AnkhOfMishraAbility extends TriggeredAbilityImpl<AnkhOfMishraAbility> {
+class AnkhOfMishraAbility extends TriggeredAbilityImpl {
 
     public AnkhOfMishraAbility() {
             super(Zone.BATTLEFIELD, new DamageTargetEffect(2));

@@ -36,7 +36,7 @@ import mage.abilities.effects.Effect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class DelayedTriggeredAbility<T extends DelayedTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
+public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
 
     private Duration duration;
     private Boolean triggerOnlyOnce;
@@ -62,7 +62,7 @@ public abstract class DelayedTriggeredAbility<T extends DelayedTriggeredAbility<
     }
 
     @Override
-    public abstract T copy();
+    public abstract DelayedTriggeredAbility copy();
 
     public Duration getDuration() {
         return duration;

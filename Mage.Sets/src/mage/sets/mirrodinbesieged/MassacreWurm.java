@@ -75,7 +75,7 @@ public class MassacreWurm extends CardImpl<MassacreWurm> {
 
 }
 
-class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl<MassacreWurmTriggeredAbility> {
+class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
     MassacreWurmTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
     }

@@ -75,7 +75,7 @@ public class LoneRevenant extends CardImpl<LoneRevenant> {
     }
 }
 
-class LoneRevenantTriggeredAbility extends TriggeredAbilityImpl<LoneRevenantTriggeredAbility> {
+class LoneRevenantTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

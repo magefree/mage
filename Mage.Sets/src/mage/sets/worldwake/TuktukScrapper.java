@@ -76,7 +76,7 @@ public class TuktukScrapper extends CardImpl<TuktukScrapper> {
     }
 }
 
-class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl<TuktukScrapperTriggeredAbility> {
+class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
 
     public TuktukScrapperTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TuktukScrapperEffect(), true);

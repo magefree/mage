@@ -113,7 +113,7 @@ class LureboundScarecrowChooseColorEffect extends OneShotEffect<LureboundScarecr
     
 }
 
-class LureboundScarecrowTriggeredAbility extends StateTriggeredAbility<LureboundScarecrowTriggeredAbility> {
+class LureboundScarecrowTriggeredAbility extends StateTriggeredAbility {
     
     private static final String staticText = "When you control no permanents of the chosen color, sacrifice {this}.";
 

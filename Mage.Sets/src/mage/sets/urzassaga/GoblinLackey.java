@@ -74,7 +74,7 @@ public class GoblinLackey extends CardImpl<GoblinLackey> {
     }
 }
 
-class GoblinLackeyTriggeredAbility extends TriggeredAbilityImpl<GoblinLackeyTriggeredAbility> {
+class GoblinLackeyTriggeredAbility extends TriggeredAbilityImpl {
 
     public GoblinLackeyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GoblinLackeyEffect(), true);

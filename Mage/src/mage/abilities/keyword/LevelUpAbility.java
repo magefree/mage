@@ -39,7 +39,7 @@ import mage.counters.CounterType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LevelUpAbility extends ActivatedAbilityImpl<LevelUpAbility> {
+public class LevelUpAbility extends ActivatedAbilityImpl {
 
     public LevelUpAbility(ManaCosts costs) {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.LEVEL.createInstance()), costs);

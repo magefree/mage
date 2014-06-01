@@ -36,7 +36,7 @@ import mage.constants.Zone;
 /**
  * @author noxx
  */
-public class SoulbondAbility extends StaticAbility<SoulbondAbility> implements MageSingleton {
+public class SoulbondAbility extends StaticAbility implements MageSingleton {
 
     private static final SoulbondAbility fINSTANCE = new SoulbondAbility();
 

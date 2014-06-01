@@ -64,7 +64,7 @@ public class FurnaceCelebration extends CardImpl<FurnaceCelebration> {
 
 }
 
-class FurnaceCelebrationAbility extends TriggeredAbilityImpl<FurnaceCelebrationAbility> {
+class FurnaceCelebrationAbility extends TriggeredAbilityImpl {
 
     public FurnaceCelebrationAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(2), new ManaCostsImpl("{2}")));

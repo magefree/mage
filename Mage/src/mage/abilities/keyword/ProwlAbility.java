@@ -59,7 +59,7 @@ import mage.watchers.common.ProwlWatcher;
  * @author LevelX2
  */
 
-public class ProwlAbility extends StaticAbility<ProwlAbility> implements AlternativeSourceCosts {
+public class ProwlAbility extends StaticAbility implements AlternativeSourceCosts {
 
     private static final String PROWL_KEYWORD = "Prowl";
     private final List<AlternativeCost2> prowlCosts = new LinkedList<>();

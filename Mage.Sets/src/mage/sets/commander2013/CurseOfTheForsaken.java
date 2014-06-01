@@ -80,7 +80,7 @@ public class CurseOfTheForsaken extends CardImpl<CurseOfTheForsaken> {
     }
 }
 
-class CurseOfTheForsakenTriggeredAbility extends TriggeredAbilityImpl<CurseOfTheForsakenTriggeredAbility> {
+class CurseOfTheForsakenTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfTheForsakenTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeTargetEffect(1), false);

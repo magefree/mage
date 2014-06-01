@@ -68,7 +68,7 @@ public class GravityWell extends CardImpl<GravityWell> {
     }
 }
 
-class GravityWellTriggeredAbility extends TriggeredAbilityImpl<GravityWellTriggeredAbility> {
+class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
 
     public GravityWellTriggeredAbility() {
     super(Zone.BATTLEFIELD, new GravityWellEffect());

@@ -77,7 +77,7 @@ public class MistbladeShinobi extends CardImpl<MistbladeShinobi> {
     }
 }
 
-class MistbladeShinobiTriggeredAbility extends TriggeredAbilityImpl<MistbladeShinobiTriggeredAbility> {
+class MistbladeShinobiTriggeredAbility extends TriggeredAbilityImpl {
 
     MistbladeShinobiTriggeredAbility() {
         super(Zone.BATTLEFIELD,  new ReturnToHandTargetEffect(), true);

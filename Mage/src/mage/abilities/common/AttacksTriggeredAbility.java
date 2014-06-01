@@ -39,7 +39,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AttacksTriggeredAbility extends TriggeredAbilityImpl<AttacksTriggeredAbility> {
+public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
     
     protected String text;
 

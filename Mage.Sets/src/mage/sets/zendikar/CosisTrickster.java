@@ -68,7 +68,7 @@ public class CosisTrickster extends CardImpl<CosisTrickster> {
     }
 }
 
-class CosisTricksterTriggeredAbility extends TriggeredAbilityImpl<CosisTricksterTriggeredAbility> {
+class CosisTricksterTriggeredAbility extends TriggeredAbilityImpl {
 
     public CosisTricksterTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);

@@ -68,7 +68,7 @@ public class Rowen extends CardImpl<Rowen> {
     }
 }
 
-class RowenAbility extends TriggeredAbilityImpl<RowenAbility> {
+class RowenAbility extends TriggeredAbilityImpl {
 
     private int lastTriggeredTurn;
 

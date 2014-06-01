@@ -75,7 +75,7 @@ public class PerimeterCaptain extends CardImpl<PerimeterCaptain> {
     }
 }
 
-class PerimeterCaptainTriggeredAbility extends TriggeredAbilityImpl<PerimeterCaptainTriggeredAbility> {
+class PerimeterCaptainTriggeredAbility extends TriggeredAbilityImpl {
 
     public PerimeterCaptainTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

@@ -96,7 +96,7 @@ public class BombSquad extends CardImpl<BombSquad> {
     }
 }
 
-class BombSquadTriggeredAbility extends TriggeredAbilityImpl<BombSquadTriggeredAbility> {
+class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

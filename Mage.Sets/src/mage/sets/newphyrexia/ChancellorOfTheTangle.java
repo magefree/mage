@@ -75,7 +75,7 @@ public class ChancellorOfTheTangle extends CardImpl<ChancellorOfTheTangle> {
     }
 }
 
-class ChancellorOfTheTangleDelayedTriggeredAbility extends DelayedTriggeredAbility<ChancellorOfTheTangleDelayedTriggeredAbility> {
+class ChancellorOfTheTangleDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     ChancellorOfTheTangleDelayedTriggeredAbility () {
         super(new BasicManaEffect(Mana.GreenMana));

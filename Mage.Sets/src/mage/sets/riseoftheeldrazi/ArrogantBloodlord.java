@@ -74,7 +74,7 @@ public class ArrogantBloodlord extends CardImpl<ArrogantBloodlord> {
     }
 }
 
-class ArrogantBloodlordTriggeredAbility extends TriggeredAbilityImpl<ArrogantBloodlordTriggeredAbility> {
+class ArrogantBloodlordTriggeredAbility extends TriggeredAbilityImpl {
 
     ArrogantBloodlordTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ArrogantBloodlordEffect());

@@ -123,7 +123,7 @@ class PirateShipEffect extends ReplacementEffectImpl<PirateShipEffect> {
     }
 }
 
-class PirateShipTriggeredAbility extends StateTriggeredAbility<PirateShipTriggeredAbility> {
+class PirateShipTriggeredAbility extends StateTriggeredAbility {
 
     public PirateShipTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

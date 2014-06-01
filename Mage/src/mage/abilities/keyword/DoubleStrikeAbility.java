@@ -38,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DoubleStrikeAbility extends StaticAbility<DoubleStrikeAbility> implements MageSingleton {
+public class DoubleStrikeAbility extends StaticAbility implements MageSingleton {
 
     private static final DoubleStrikeAbility fINSTANCE =  new DoubleStrikeAbility();
 

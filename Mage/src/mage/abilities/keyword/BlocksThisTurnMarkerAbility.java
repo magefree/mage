@@ -40,7 +40,7 @@ import java.io.ObjectStreamException;
  *
  * @author magenoxx_at_googlemail.com
  */
-public class BlocksThisTurnMarkerAbility extends StaticAbility<BlocksThisTurnMarkerAbility> implements MageSingleton {
+public class BlocksThisTurnMarkerAbility extends StaticAbility implements MageSingleton {
 
     private static final BlocksThisTurnMarkerAbility fINSTANCE =  new BlocksThisTurnMarkerAbility();
 

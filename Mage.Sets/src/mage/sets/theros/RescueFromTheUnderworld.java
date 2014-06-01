@@ -177,7 +177,7 @@ class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShot
 
 }
 
-class RescueFromTheUnderworldDelayedTriggeredAbility extends DelayedTriggeredAbility<RescueFromTheUnderworldDelayedTriggeredAbility> {
+class RescueFromTheUnderworldDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public RescueFromTheUnderworldDelayedTriggeredAbility() {
         this(new RescueFromTheUnderworldReturnEffect(), TargetController.YOU);

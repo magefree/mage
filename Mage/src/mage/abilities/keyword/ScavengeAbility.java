@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
 //    a sorcery."
 //
 
-public class ScavengeAbility extends ActivatedAbilityImpl<ScavengeAbility> {
+public class ScavengeAbility extends ActivatedAbilityImpl {
 
     public ScavengeAbility(ManaCosts costs) {
         super(Zone.GRAVEYARD, new ScavengeEffect(), costs);

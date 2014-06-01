@@ -9,7 +9,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
-public class AttacksOrBlocksEnchantedTriggeredAbility extends TriggeredAbilityImpl<AttacksOrBlocksEnchantedTriggeredAbility> {
+public class AttacksOrBlocksEnchantedTriggeredAbility extends TriggeredAbilityImpl {
 
     public AttacksOrBlocksEnchantedTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect);

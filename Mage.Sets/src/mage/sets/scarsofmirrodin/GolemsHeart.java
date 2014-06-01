@@ -62,7 +62,7 @@ public class GolemsHeart extends CardImpl<GolemsHeart> {
 
 }
 
-class GolemsHeartAbility extends TriggeredAbilityImpl<GolemsHeartAbility> {
+class GolemsHeartAbility extends TriggeredAbilityImpl {
 
     public GolemsHeartAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);

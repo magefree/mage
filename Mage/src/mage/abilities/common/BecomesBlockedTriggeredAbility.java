@@ -38,7 +38,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class BecomesBlockedTriggeredAbility extends TriggeredAbilityImpl<BecomesBlockedTriggeredAbility> {
+public class BecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

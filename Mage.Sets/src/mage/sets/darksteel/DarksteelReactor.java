@@ -72,7 +72,7 @@ public class DarksteelReactor extends CardImpl<DarksteelReactor> {
     }
 }
 
-class DarksteelReactorStateTriggeredAbility extends StateTriggeredAbility<DarksteelReactorStateTriggeredAbility> {
+class DarksteelReactorStateTriggeredAbility extends StateTriggeredAbility {
 
     public DarksteelReactorStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new WinGameEffect());

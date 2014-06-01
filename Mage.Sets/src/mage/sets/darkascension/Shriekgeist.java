@@ -72,7 +72,7 @@ public class Shriekgeist extends CardImpl<Shriekgeist> {
     }
 }
 
-class ShriekgeistTriggeredAbility extends TriggeredAbilityImpl<ShriekgeistTriggeredAbility> {
+class ShriekgeistTriggeredAbility extends TriggeredAbilityImpl {
 
     public ShriekgeistTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2));

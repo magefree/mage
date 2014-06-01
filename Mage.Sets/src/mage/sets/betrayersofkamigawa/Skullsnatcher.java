@@ -85,7 +85,7 @@ public class Skullsnatcher extends CardImpl<Skullsnatcher> {
     }
 }
 
-class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl<SkullsnatcherTriggeredAbility> {
+class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
 
     SkullsnatcherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect(), false);

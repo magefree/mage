@@ -73,7 +73,7 @@ public class AkkiUnderminer extends CardImpl<AkkiUnderminer> {
 
 }
 
-class AkkiUnderminerAbility extends TriggeredAbilityImpl<AkkiUnderminerAbility> {
+class AkkiUnderminerAbility extends TriggeredAbilityImpl {
 
     public AkkiUnderminerAbility() {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 1, ""));

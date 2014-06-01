@@ -36,9 +36,8 @@ import mage.game.Game;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class StateTriggeredAbility<T extends StateTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
+public abstract class StateTriggeredAbility extends TriggeredAbilityImpl {
 
     public StateTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect);

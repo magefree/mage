@@ -126,7 +126,7 @@ class ChooseCreatureTypeEffect extends OneShotEffect<ChooseCreatureTypeEffect> {
 
 }
 
-class AddCounterAbility extends TriggeredAbilityImpl<AddCounterAbility> {
+class AddCounterAbility extends TriggeredAbilityImpl {
 
     public AddCounterAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), false);

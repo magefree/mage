@@ -17,7 +17,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Jeff
  */
-public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl<BeginningOfUntapTriggeredAbility> {
+public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl {
     
     private TargetController targetController;
 

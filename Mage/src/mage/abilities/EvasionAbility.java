@@ -34,9 +34,8 @@ import mage.constants.Zone;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class EvasionAbility<T extends EvasionAbility<T>> extends StaticAbility<T> {
+public abstract class EvasionAbility extends StaticAbility {
 
     public EvasionAbility() {
         super(AbilityType.EVASION, Zone.BATTLEFIELD);

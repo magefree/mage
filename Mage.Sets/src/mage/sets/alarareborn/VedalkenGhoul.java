@@ -72,7 +72,7 @@ public class VedalkenGhoul extends CardImpl<VedalkenGhoul> {
     }
 }
 
-class VedalkenGhoulTriggeredAbility extends TriggeredAbilityImpl<VedalkenGhoulTriggeredAbility> {
+class VedalkenGhoulTriggeredAbility extends TriggeredAbilityImpl {
 
     public VedalkenGhoulTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(4), false);

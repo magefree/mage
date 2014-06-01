@@ -92,7 +92,7 @@ public class ArmadilloCloak extends CardImpl<ArmadilloCloak> {
     }
 }
 
-class ArmadilloCloakTriggeredAbility extends TriggeredAbilityImpl<ArmadilloCloakTriggeredAbility> {
+class ArmadilloCloakTriggeredAbility extends TriggeredAbilityImpl {
 
     public ArmadilloCloakTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ArmadilloCloakEffect(), false);

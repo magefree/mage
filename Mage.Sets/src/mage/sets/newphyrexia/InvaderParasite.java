@@ -105,7 +105,7 @@ class InvaderParasiteImprintEffect extends OneShotEffect<InvaderParasiteImprintE
     }
 }
 
-class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl<InvaderParasiteTriggeredAbility> {
+class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
     InvaderParasiteTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }

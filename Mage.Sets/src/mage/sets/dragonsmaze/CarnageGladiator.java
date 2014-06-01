@@ -84,7 +84,7 @@ public class CarnageGladiator extends CardImpl<CarnageGladiator> {
 
 }
 
-class CarnageGladiatorTriggeredAbility extends TriggeredAbilityImpl<CarnageGladiatorTriggeredAbility> {
+class CarnageGladiatorTriggeredAbility extends TriggeredAbilityImpl {
 
     public CarnageGladiatorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));

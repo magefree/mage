@@ -69,7 +69,7 @@ public class GideonsAvenger extends CardImpl<GideonsAvenger> {
     }
 }
 
-class GideonsAvengerTriggeredAbility extends TriggeredAbilityImpl<GideonsAvengerTriggeredAbility> {
+class GideonsAvengerTriggeredAbility extends TriggeredAbilityImpl {
     GideonsAvengerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
     }

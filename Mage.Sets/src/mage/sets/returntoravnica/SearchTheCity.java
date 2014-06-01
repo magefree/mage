@@ -115,7 +115,7 @@ class SearchTheCityExileEffect extends OneShotEffect<SearchTheCityExileEffect> {
 }
 
 
-class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl<SearchTheCityTriggeredAbility> {
+class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl {
 
     public SearchTheCityTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SearchTheCityExiledCardToHandEffect(), true);

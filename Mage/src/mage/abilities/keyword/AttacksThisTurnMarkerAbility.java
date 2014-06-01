@@ -40,7 +40,7 @@ import java.io.ObjectStreamException;
  *
  * @author magenoxx_at_googlemail.com
  */
-public class AttacksThisTurnMarkerAbility extends StaticAbility<AttacksThisTurnMarkerAbility> implements MageSingleton {
+public class AttacksThisTurnMarkerAbility extends StaticAbility implements MageSingleton {
 
     private static final AttacksThisTurnMarkerAbility fINSTANCE =  new AttacksThisTurnMarkerAbility();
 

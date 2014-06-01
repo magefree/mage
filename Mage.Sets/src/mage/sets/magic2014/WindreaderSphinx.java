@@ -73,7 +73,7 @@ public class WindreaderSphinx extends CardImpl<WindreaderSphinx> {
     }
 }
 
-class WindreaderSphinxTriggeredAbility extends TriggeredAbilityImpl<WindreaderSphinxTriggeredAbility> {
+class WindreaderSphinxTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

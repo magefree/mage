@@ -35,7 +35,7 @@ import mage.abilities.StaticAbility;
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
-public class EnchantAbility extends StaticAbility<EnchantAbility> {
+public class EnchantAbility extends StaticAbility {
 
     protected String targetName;
 

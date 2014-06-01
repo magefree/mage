@@ -85,7 +85,7 @@ public class KusariGama extends CardImpl<KusariGama> {
     }
 }
 
-class KusariGamaAbility extends TriggeredAbilityImpl<KusariGamaAbility> {
+class KusariGamaAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent filter = new FilterBlockingCreature();
 

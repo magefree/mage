@@ -66,7 +66,7 @@ public class Glimmervoid extends CardImpl<Glimmervoid> {
     }
 }
 
-class GlimmervoidTriggeredAbility extends TriggeredAbilityImpl<GlimmervoidTriggeredAbility> {
+class GlimmervoidTriggeredAbility extends TriggeredAbilityImpl {
 
     GlimmervoidTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

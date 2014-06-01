@@ -81,7 +81,7 @@ public class PossibilityStorm extends CardImpl<PossibilityStorm> {
 }
 
 
-class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl<PossibilityStormTriggeredAbility> {
+class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
     public PossibilityStormTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PossibilityStormEffect(), false);

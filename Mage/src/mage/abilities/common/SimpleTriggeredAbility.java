@@ -39,7 +39,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimpleTriggeredAbility extends TriggeredAbilityImpl<SimpleTriggeredAbility> {
+public class SimpleTriggeredAbility extends TriggeredAbilityImpl {
 
     private EventType eventType;
     private boolean onlyController;

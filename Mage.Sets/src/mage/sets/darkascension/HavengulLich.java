@@ -156,7 +156,7 @@ class HavengulLichPlayedEffect extends OneShotEffect<HavengulLichPlayedEffect> {
 }
 
 // when card is played create continuous effect
-class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility<HavengulLichDelayedTriggeredAbility> {
+class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID cardId;
 

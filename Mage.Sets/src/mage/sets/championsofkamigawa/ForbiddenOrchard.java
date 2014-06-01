@@ -67,7 +67,7 @@ public class ForbiddenOrchard extends CardImpl<ForbiddenOrchard> {
     }
 }
 
-class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl<ForbiddenOrchardTriggeredAbility> {
+class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
 
     public ForbiddenOrchardTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new SpiritToken()));

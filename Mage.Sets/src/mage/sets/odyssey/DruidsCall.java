@@ -82,7 +82,7 @@ public class DruidsCall extends CardImpl<DruidsCall> {
     }
 }
 
-class DruidsCallTriggeredAbility extends TriggeredAbilityImpl<DruidsCallTriggeredAbility> {
+class DruidsCallTriggeredAbility extends TriggeredAbilityImpl {
 
     public DruidsCallTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DruidsCallEffect());

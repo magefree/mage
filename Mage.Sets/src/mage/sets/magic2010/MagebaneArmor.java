@@ -79,7 +79,7 @@ public class MagebaneArmor extends CardImpl<MagebaneArmor> {
     }
 }
 
-class MagebaneArmorAbility extends StaticAbility<MagebaneArmorAbility> {
+class MagebaneArmorAbility extends StaticAbility {
 
     public MagebaneArmorAbility() {
         super(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 4));

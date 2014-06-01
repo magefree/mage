@@ -77,7 +77,7 @@ public class FiveAlarmFire extends CardImpl<FiveAlarmFire> {
 }
 
 
-class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl<FiveAlarmFireTriggeredAbility> {
+class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     

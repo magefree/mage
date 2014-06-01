@@ -88,7 +88,7 @@ public class DiregrafCaptain extends CardImpl<DiregrafCaptain> {
     }
 }
 
-class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl<DiregrafCaptainTriggeredAbility> {
+class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
 

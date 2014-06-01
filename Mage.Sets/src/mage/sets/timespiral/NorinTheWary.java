@@ -76,7 +76,7 @@ public class NorinTheWary extends CardImpl<NorinTheWary> {
     }
 }
 
-class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl<NorinTheWaryTriggeredAbility> {
+class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
 
     public NorinTheWaryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new NorinTheWaryRemovingEffect(), false);

@@ -86,7 +86,7 @@ public class ChancellorOfTheForge extends CardImpl<ChancellorOfTheForge> {
     }
 }
 
-class ChancellorOfTheForgeDelayedTriggeredAbility extends DelayedTriggeredAbility<ChancellorOfTheForgeDelayedTriggeredAbility> {
+class ChancellorOfTheForgeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     ChancellorOfTheForgeDelayedTriggeredAbility () {
         super(new CreateTokenEffect(new GoblinToken()));

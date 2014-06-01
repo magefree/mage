@@ -136,7 +136,7 @@ import mage.players.Player;
  */
 
 
-public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
+public class SuspendAbility extends ActivatedAbilityImpl {
 
     private String ruleText;
     private boolean gainedTemporary;
@@ -258,7 +258,7 @@ class SuspendExileEffect extends OneShotEffect<SuspendExileEffect> {
     }
 }
 
-class SuspendPlayCardAbility extends TriggeredAbilityImpl<SuspendPlayCardAbility> {
+class SuspendPlayCardAbility extends TriggeredAbilityImpl {
 
     public SuspendPlayCardAbility(boolean isCreature) {
         super(Zone.EXILED, new SuspendPlayCardEffect(isCreature));

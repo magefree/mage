@@ -69,7 +69,7 @@ public class HiveMind extends CardImpl<HiveMind> {
     }
 }
 
-class HiveMindTriggeredAbility extends TriggeredAbilityImpl<HiveMindTriggeredAbility> {
+class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
 
     public HiveMindTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HiveMindEffect());

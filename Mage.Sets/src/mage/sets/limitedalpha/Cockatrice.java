@@ -76,7 +76,7 @@ public class Cockatrice extends CardImpl<Cockatrice> {
     }
 }
 
-class CockatriceTriggeredAbility extends TriggeredAbilityImpl<CockatriceTriggeredAbility> {
+class CockatriceTriggeredAbility extends TriggeredAbilityImpl {
 
     CockatriceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CockatriceEffect());

@@ -68,7 +68,7 @@ public class HuntedGhoul extends CardImpl<HuntedGhoul> {
     }
 }
 
-class HuntedGhoulAbility extends EvasionAbility<HuntedGhoulAbility> {
+class HuntedGhoulAbility extends EvasionAbility {
 
     private static HuntedGhoulAbility instance;
 

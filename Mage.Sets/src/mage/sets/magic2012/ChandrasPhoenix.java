@@ -72,7 +72,7 @@ public class ChandrasPhoenix extends CardImpl<ChandrasPhoenix> {
     }
 }
 
-class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl<ChandrasPhoenixTriggeredAbility> {
+class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl {
     ChandrasPhoenixTriggeredAbility() {
         super(Zone.GRAVEYARD, new ReturnToHandSourceEffect());
     }

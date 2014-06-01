@@ -86,7 +86,7 @@ public class ZulaportEnforcer extends LevelerCard<ZulaportEnforcer> {
     }
 }
 
-class ZulaportEnforcerAbility extends EvasionAbility<ZulaportEnforcerAbility> {
+class ZulaportEnforcerAbility extends EvasionAbility {
 
     private static ZulaportEnforcerAbility instance;
 

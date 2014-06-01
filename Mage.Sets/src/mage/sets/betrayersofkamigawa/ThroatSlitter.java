@@ -79,7 +79,7 @@ public class ThroatSlitter extends CardImpl<ThroatSlitter> {
     }
 }
 
-class ThroatSlitterTriggeredAbility extends TriggeredAbilityImpl<ThroatSlitterTriggeredAbility> {
+class ThroatSlitterTriggeredAbility extends TriggeredAbilityImpl {
 
     ThroatSlitterTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);

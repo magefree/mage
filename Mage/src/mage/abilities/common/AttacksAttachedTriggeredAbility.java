@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl<AttacksAttachedTriggeredAbility> {
+public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
     
     private AttachmentType attachmentType;
     

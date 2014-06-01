@@ -109,7 +109,7 @@ class CurseOfWizardryChooseColorEffect extends OneShotEffect<CurseOfWizardryChoo
     }
 }
 
-class CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility extends TriggeredAbilityImpl<CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility> {
+class CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);

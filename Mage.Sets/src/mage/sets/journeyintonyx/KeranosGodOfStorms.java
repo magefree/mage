@@ -94,7 +94,7 @@ public class KeranosGodOfStorms extends CardImpl<KeranosGodOfStorms> {
     }
 }
 
-class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl<KeranosGodOfStormsTriggeredAbility> {
+class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
 
     private int lastTriggeredTurn;
     

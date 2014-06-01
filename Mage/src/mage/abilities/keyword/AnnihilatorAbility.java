@@ -55,7 +55,7 @@ import java.util.UUID;
  *
  * @author maurer.it_at_gmail.com
  */
-public class AnnihilatorAbility extends TriggeredAbilityImpl<AnnihilatorAbility> {
+public class AnnihilatorAbility extends TriggeredAbilityImpl {
 
     int count;
 

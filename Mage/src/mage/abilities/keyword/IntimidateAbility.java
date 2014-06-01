@@ -22,7 +22,7 @@ import mage.game.permanent.Permanent;
  *
  *
  */
-public class IntimidateAbility extends EvasionAbility<IntimidateAbility> implements MageSingleton  {
+public class IntimidateAbility extends EvasionAbility implements MageSingleton  {
     private static final IntimidateAbility fInstance = new IntimidateAbility();
 
     public static IntimidateAbility getInstance() {

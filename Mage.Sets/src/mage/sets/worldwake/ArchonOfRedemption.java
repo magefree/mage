@@ -75,7 +75,7 @@ public class ArchonOfRedemption extends CardImpl<ArchonOfRedemption> {
     }
 }
 
-class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl<ArchonOfRedemptionTriggeredAbility> {
+class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl {
     ArchonOfRedemptionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ArchonOfRedemptionEffect(), true);
     }

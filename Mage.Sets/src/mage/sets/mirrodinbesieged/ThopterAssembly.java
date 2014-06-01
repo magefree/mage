@@ -77,7 +77,7 @@ public class ThopterAssembly extends CardImpl<ThopterAssembly> {
     }
 }
 
-class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl<ThopterAssemblyTriggeredAbility> {
+class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {

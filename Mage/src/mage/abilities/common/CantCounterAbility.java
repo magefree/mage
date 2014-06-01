@@ -36,7 +36,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantCounterAbility extends StaticAbility<CantCounterAbility> {
+public class CantCounterAbility extends StaticAbility {
 
     public CantCounterAbility() {
         super(Zone.STACK, new CantCounterSourceEffect());

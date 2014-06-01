@@ -140,7 +140,7 @@ class RelentlessAssaultAddPhasesEffect extends OneShotEffect<RelentlessAssaultAd
     }
 }
 
-class RelentlessAssaultDelayedAddMainPhaseAbility extends DelayedTriggeredAbility<RelentlessAssaultDelayedAddMainPhaseAbility> {
+class RelentlessAssaultDelayedAddMainPhaseAbility extends DelayedTriggeredAbility {
 
     private UUID connectedTurnMod;
     private boolean enabled;

@@ -81,7 +81,7 @@ public class IllusionaryArmor extends CardImpl<IllusionaryArmor> {
 }
 
 
-class IllusionaryArmorAbility extends TriggeredAbilityImpl<IllusionaryArmorAbility> {
+class IllusionaryArmorAbility extends TriggeredAbilityImpl {
 
     public IllusionaryArmorAbility() {
         super(Zone.BATTLEFIELD, new DestroySourceEffect());

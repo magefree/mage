@@ -78,7 +78,7 @@ public class XantidSwarm extends CardImpl<XantidSwarm> {
     }
 }
 
-class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl<XantidSwarmTriggeredAbility> {
+class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl {
 
     public XantidSwarmTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);

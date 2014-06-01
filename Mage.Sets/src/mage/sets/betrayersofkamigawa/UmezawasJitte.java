@@ -88,7 +88,7 @@ public class UmezawasJitte extends CardImpl<UmezawasJitte> {
     }
 }
 
-class UmezawasJitteAbility extends TriggeredAbilityImpl<UmezawasJitteAbility> {
+class UmezawasJitteAbility extends TriggeredAbilityImpl {
 
     public UmezawasJitteAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));

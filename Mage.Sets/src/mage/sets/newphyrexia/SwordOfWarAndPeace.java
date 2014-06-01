@@ -92,7 +92,7 @@ public class SwordOfWarAndPeace extends CardImpl<SwordOfWarAndPeace> {
 
 }
 
-class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl<SwordOfWarAndPeaceAbility> {
+class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl {
 
     public SwordOfWarAndPeaceAbility() {
         super(Zone.BATTLEFIELD, new SwordOfWarAndPeaceDamageEffect());

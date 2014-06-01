@@ -40,7 +40,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeff
  */
-public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl<DealsDamageToAPlayerTriggeredAbility> {
+public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
     private boolean setTargetPointer;
 
     public DealsDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {

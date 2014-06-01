@@ -78,7 +78,7 @@ public class MireBlight extends CardImpl<MireBlight> {
     }
 }
 
-class MireBlightTriggeredAbility extends TriggeredAbilityImpl<MireBlightTriggeredAbility> {
+class MireBlightTriggeredAbility extends TriggeredAbilityImpl {
 
     public MireBlightTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());

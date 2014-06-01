@@ -74,7 +74,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class OfferingAbility extends StaticAbility<OfferingAbility> {
+public class OfferingAbility extends StaticAbility {
 
     private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

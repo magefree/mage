@@ -67,7 +67,7 @@ public class AEtherFlash extends CardImpl<AEtherFlash> {
     }
 }
 
-class AEtherFlashTriggeredAbility extends TriggeredAbilityImpl<AEtherFlashTriggeredAbility> {
+class AEtherFlashTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

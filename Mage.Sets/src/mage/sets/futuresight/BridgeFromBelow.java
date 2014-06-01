@@ -87,7 +87,7 @@ public class BridgeFromBelow extends CardImpl<BridgeFromBelow> {
     }
 }
 
-class BridgeFromBelowAbility extends TriggeredAbilityImpl<BridgeFromBelowAbility> {
+class BridgeFromBelowAbility extends TriggeredAbilityImpl {
 
     protected FilterCreaturePermanent filter;
 

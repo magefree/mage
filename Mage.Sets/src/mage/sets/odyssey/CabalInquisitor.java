@@ -87,7 +87,7 @@ public class CabalInquisitor extends CardImpl<CabalInquisitor> {
 }
 
 
-class ActivateAsSorceryConditionalActivatedAbility extends ActivatedAbilityImpl<ActivateAsSorceryConditionalActivatedAbility> {
+class ActivateAsSorceryConditionalActivatedAbility extends ActivatedAbilityImpl {
     
     private Condition condition;
     private String ruleText = "<i>Threshold<i/> - {1}{B}, {t}, Exile two cards from your graveyard: Target player discards a card. Activate this ability only any time you could cast a sorcery, and only if seven or more cards are in your graveyard.";

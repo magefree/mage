@@ -87,7 +87,7 @@ public class Crystallization extends CardImpl<Crystallization> {
     }
 }
 
-class CrystallizationTriggeredAbility extends TriggeredAbilityImpl<CrystallizationTriggeredAbility> {
+class CrystallizationTriggeredAbility extends TriggeredAbilityImpl {
     
     public CrystallizationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect());

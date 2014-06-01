@@ -71,7 +71,7 @@ public class EssenceSliver extends CardImpl<EssenceSliver> {
     }
 }
 
-class DealsDamageTriggeredAbility extends TriggeredAbilityImpl<DealsDamageTriggeredAbility> {
+class DealsDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     private final boolean setTargetPointer;
 

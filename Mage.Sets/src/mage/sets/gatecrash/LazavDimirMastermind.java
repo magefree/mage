@@ -83,7 +83,7 @@ public class LazavDimirMastermind extends CardImpl<LazavDimirMastermind> {
     }
 }
 
-class CreatureCardPutOpponentGraveyardTriggeredAbility extends TriggeredAbilityImpl<CreatureCardPutOpponentGraveyardTriggeredAbility> {
+class CreatureCardPutOpponentGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
     public CreatureCardPutOpponentGraveyardTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LazavDimirEffect(), true);

@@ -81,7 +81,7 @@ public class NirkanaRevenant extends CardImpl<NirkanaRevenant> {
     }
 }
 
-  class NirkanaRevenantTriggeredAbility extends TriggeredAbilityImpl<NirkanaRevenantTriggeredAbility> {
+  class NirkanaRevenantTriggeredAbility extends TriggeredAbilityImpl {
 
     public NirkanaRevenantTriggeredAbility() {
     super(Zone.BATTLEFIELD, new NirkanaRevenantEffect());

@@ -84,7 +84,7 @@ public class ReaperFromTheAbyss extends CardImpl<ReaperFromTheAbyss> {
 
 }
 
-class ReaperFromTheAbyssAbility extends TriggeredAbilityImpl<ReaperFromTheAbyssAbility> {
+class ReaperFromTheAbyssAbility extends TriggeredAbilityImpl {
 
     public ReaperFromTheAbyssAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);

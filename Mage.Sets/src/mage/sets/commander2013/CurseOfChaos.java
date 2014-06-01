@@ -81,7 +81,7 @@ public class CurseOfChaos extends CardImpl<CurseOfChaos> {
     }
 }
 
-class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl<CurseOfChaosTriggeredAbility> {
+class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfChaosTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfChaosEffect(), false); // false because handled in effect

@@ -73,7 +73,7 @@ public class EmeriaTheSkyRuin extends CardImpl<EmeriaTheSkyRuin> {
     }
 }
 
-class EmeriaTheSkyRuinTriggeredAbility extends TriggeredAbilityImpl<EmeriaTheSkyRuinTriggeredAbility> {
+class EmeriaTheSkyRuinTriggeredAbility extends TriggeredAbilityImpl {
 
     static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
 

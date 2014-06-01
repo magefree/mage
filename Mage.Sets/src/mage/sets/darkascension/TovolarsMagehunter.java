@@ -84,7 +84,7 @@ public class TovolarsMagehunter extends CardImpl<TovolarsMagehunter> {
     }
 }
 
-class TovolarsMagehunterTriggeredAbility extends TriggeredAbilityImpl<TovolarsMagehunterTriggeredAbility> {
+class TovolarsMagehunterTriggeredAbility extends TriggeredAbilityImpl {
 
     public TovolarsMagehunterTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);

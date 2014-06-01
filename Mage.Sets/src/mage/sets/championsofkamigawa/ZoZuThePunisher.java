@@ -80,7 +80,7 @@ public class ZoZuThePunisher extends CardImpl<ZoZuThePunisher> {
     }
 }
 
-class ZoZuThePunisherAbility extends TriggeredAbilityImpl<ZoZuThePunisherAbility> {
+class ZoZuThePunisherAbility extends TriggeredAbilityImpl {
 
     public ZoZuThePunisherAbility() {
             super(Zone.BATTLEFIELD, new DamageTargetEffect(2));

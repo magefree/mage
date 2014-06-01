@@ -85,7 +85,7 @@ public class ColossalWhale extends CardImpl<ColossalWhale> {
     }
 }
 
-class ColossalWhaleAbility extends TriggeredAbilityImpl<ColossalWhaleAbility> {
+class ColossalWhaleAbility extends TriggeredAbilityImpl {
 
     public ColossalWhaleAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -157,7 +157,7 @@ class ColossalWhaleExileEffect extends OneShotEffect<ColossalWhaleExileEffect> {
  * @author LevelX2
  */
 
-class ColossalWhaleReturnExiledAbility extends TriggeredAbilityImpl<ColossalWhaleReturnExiledAbility> {
+class ColossalWhaleReturnExiledAbility extends TriggeredAbilityImpl {
 
     public ColossalWhaleReturnExiledAbility() {
         super(Zone.BATTLEFIELD, new ReturnExiledCreatureColossalWhaleEffect());

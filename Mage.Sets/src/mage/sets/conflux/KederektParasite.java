@@ -70,7 +70,7 @@ public class KederektParasite extends CardImpl<KederektParasite> {
     }
 }
 
-class KederektParasiteTriggeredAbility extends TriggeredAbilityImpl<KederektParasiteTriggeredAbility> {
+class KederektParasiteTriggeredAbility extends TriggeredAbilityImpl {
 
     KederektParasiteTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1, false, "opponent"), true);

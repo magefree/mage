@@ -38,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ShroudAbility extends StaticAbility<ShroudAbility> implements MageSingleton {
+public class ShroudAbility extends StaticAbility implements MageSingleton {
 
     private static final ShroudAbility fINSTANCE =  new ShroudAbility();
 

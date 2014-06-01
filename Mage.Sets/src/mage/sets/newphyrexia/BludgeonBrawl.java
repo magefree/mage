@@ -78,7 +78,7 @@ public class BludgeonBrawl extends CardImpl<BludgeonBrawl> {
     }
 }
 
-class BludgeonBrawlAbility extends StaticAbility<BludgeonBrawlAbility> {
+class BludgeonBrawlAbility extends StaticAbility {
 
     public BludgeonBrawlAbility() {
         super(Zone.BATTLEFIELD, new BludgeonBrawlAddSubtypeEffect());

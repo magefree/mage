@@ -133,7 +133,7 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
     }
 }
 
-class TamiyoTheMoonSageTriggeredAbility extends TriggeredAbilityImpl<TamiyoTheMoonSageTriggeredAbility> {
+class TamiyoTheMoonSageTriggeredAbility extends TriggeredAbilityImpl {
 
     public TamiyoTheMoonSageTriggeredAbility() {
         super(Zone.COMMAND, new TamiyoTheMoonSageEffect(), true);

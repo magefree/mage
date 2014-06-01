@@ -70,7 +70,7 @@ public class BrambleElemental extends CardImpl<BrambleElemental> {
     }
 }
 
-class AttachedTriggeredAbility extends TriggeredAbilityImpl<AttachedTriggeredAbility> {
+class AttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     public AttachedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

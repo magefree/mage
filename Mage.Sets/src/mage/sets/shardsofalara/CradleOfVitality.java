@@ -73,7 +73,7 @@ public class CradleOfVitality extends CardImpl<CradleOfVitality> {
 }
 
 
-class CradleOfVitalityGainLifeTriggeredAbility extends TriggeredAbilityImpl<CradleOfVitalityGainLifeTriggeredAbility> {
+class CradleOfVitalityGainLifeTriggeredAbility extends TriggeredAbilityImpl {
 
     public CradleOfVitalityGainLifeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CradleOfVitalityEffect(), false);

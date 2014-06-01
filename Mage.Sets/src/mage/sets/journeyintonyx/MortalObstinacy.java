@@ -88,7 +88,7 @@ public class MortalObstinacy extends CardImpl<MortalObstinacy> {
     }
 }
 
-class MortalObstinacyAbility extends TriggeredAbilityImpl<MortalObstinacyAbility> {
+class MortalObstinacyAbility extends TriggeredAbilityImpl {
 
     public MortalObstinacyAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()));

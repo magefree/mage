@@ -64,7 +64,7 @@ public class TerramorphicExpanse extends CardImpl<TerramorphicExpanse> {
 
 }
 
-class TerramorphicExpanseAbility extends ActivatedAbilityImpl<TerramorphicExpanseAbility> {
+class TerramorphicExpanseAbility extends ActivatedAbilityImpl {
 
     public TerramorphicExpanseAbility() {
         super(Zone.BATTLEFIELD, null);

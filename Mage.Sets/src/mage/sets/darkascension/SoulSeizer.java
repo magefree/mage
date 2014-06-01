@@ -84,7 +84,7 @@ public class SoulSeizer extends CardImpl<SoulSeizer> {
     }
 }
 
-class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl<SoulSeizerTriggeredAbility> {
+class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
 
     public SoulSeizerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SoulSeizerEffect(), true);

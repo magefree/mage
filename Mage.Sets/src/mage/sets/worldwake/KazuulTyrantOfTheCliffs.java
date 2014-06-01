@@ -78,7 +78,7 @@ public class KazuulTyrantOfTheCliffs extends CardImpl<KazuulTyrantOfTheCliffs> {
     }
 }
 
-class KazuulTyrantOfTheCliffsTriggeredAbility extends TriggeredAbilityImpl<KazuulTyrantOfTheCliffsTriggeredAbility> {
+class KazuulTyrantOfTheCliffsTriggeredAbility extends TriggeredAbilityImpl {
 
     public KazuulTyrantOfTheCliffsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new KazuulTyrantOfTheCliffsEffect(new GenericManaCost(3)));

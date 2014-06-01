@@ -65,7 +65,7 @@ public class Bereavement extends CardImpl<Bereavement> {
     }
 }
 
-class BereavementTriggeredAbility extends TriggeredAbilityImpl<BereavementTriggeredAbility> {
+class BereavementTriggeredAbility extends TriggeredAbilityImpl {
 
     public BereavementTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1));

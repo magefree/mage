@@ -66,7 +66,7 @@ public class DeathPitsOfRath extends CardImpl<DeathPitsOfRath> {
     }
 }
 
-class DeathPitsOfRathTriggeredAbility extends TriggeredAbilityImpl<DeathPitsOfRathTriggeredAbility> {
+class DeathPitsOfRathTriggeredAbility extends TriggeredAbilityImpl {
 
     public DeathPitsOfRathTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(true));

@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl<CreatureEntersBattlefieldTriggeredAbility> {
+public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean opponentController;
     protected FilterCreaturePermanent filter = new FilterCreaturePermanent();

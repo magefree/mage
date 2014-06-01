@@ -73,9 +73,8 @@ import org.apache.log4j.Logger;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
+public abstract class AbilityImpl implements Ability {
 
     private static final transient Logger logger = Logger.getLogger(AbilityImpl.class);
 
@@ -99,9 +98,6 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     protected boolean ruleAdditionalCostsVisible = true;
     protected boolean costModificationActive = true;
 
-    @Override
-    public abstract T copy();
-
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
         this.originalId = id;
@@ -114,7 +110,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         this.modes = new Modes();
     }
 
-    public AbilityImpl(final AbilityImpl<T> ability) {
+    public AbilityImpl(final AbilityImpl ability) {
         this.id = ability.id;
         this.originalId = ability.originalId;
         this.abilityType = ability.abilityType;

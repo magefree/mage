@@ -71,7 +71,7 @@ public class Deathgazer extends CardImpl<Deathgazer> {
     }
 }
 
-class DeathgazerTriggeredAbility extends TriggeredAbilityImpl<DeathgazerTriggeredAbility> {
+class DeathgazerTriggeredAbility extends TriggeredAbilityImpl {
 
     
     

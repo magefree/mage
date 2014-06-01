@@ -73,7 +73,7 @@ public class OdricMasterTactician extends CardImpl<OdricMasterTactician> {
     }
 }
 
-class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl<OdricMasterTacticianTriggeredAbility> {
+class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
 
     public OdricMasterTacticianTriggeredAbility() {
         super(Zone.BATTLEFIELD, new OdricMasterTacticianEffect());

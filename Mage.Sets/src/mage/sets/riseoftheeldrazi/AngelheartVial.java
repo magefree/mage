@@ -79,7 +79,7 @@ public class AngelheartVial extends CardImpl<AngelheartVial> {
     }
 }
 
-class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl<AngelheartVialTriggeredAbility> {
+class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
 
     public AngelheartVialTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AngelheartVialEffect(), true);

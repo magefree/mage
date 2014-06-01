@@ -68,7 +68,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  */
 
-public class ChampionAbility extends StaticAbility<ChampionAbility> {
+public class ChampionAbility extends StaticAbility {
 
     protected String[] subtypes;
     protected String objectDescription;

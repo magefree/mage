@@ -74,7 +74,7 @@ public class AstralSlide extends CardImpl<AstralSlide> {
 }
 
 
-class AstralSlideTriggeredAbility extends TriggeredAbilityImpl<AstralSlideTriggeredAbility> {
+class AstralSlideTriggeredAbility extends TriggeredAbilityImpl {
 
     public AstralSlideTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AstralSlideEffect(), true);

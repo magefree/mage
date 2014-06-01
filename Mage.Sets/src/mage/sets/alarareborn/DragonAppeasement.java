@@ -110,7 +110,7 @@ class SkipYourDrawStepEffect extends ReplacementEffectImpl<SkipYourDrawStepEffec
     }
 }
 
-class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl<DragonAppeasementTriggeredAbility> {
+class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl {
 
     public DragonAppeasementTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);

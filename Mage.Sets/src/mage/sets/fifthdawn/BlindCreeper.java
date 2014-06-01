@@ -71,7 +71,7 @@ public class BlindCreeper extends CardImpl<BlindCreeper> {
     }
 }
 
-class BlindCreeperAbility extends TriggeredAbilityImpl<BlindCreeperAbility> {
+class BlindCreeperAbility extends TriggeredAbilityImpl {
 
     public BlindCreeperAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(-1, -1, Duration.EndOfTurn), false);

@@ -84,7 +84,7 @@ public class SovereignsOfLostAlara extends CardImpl<SovereignsOfLostAlara> {
     }
 }
 
-class CreatureControlledAttacksAloneTriggeredAbility extends TriggeredAbilityImpl<CreatureControlledAttacksAloneTriggeredAbility> {
+class CreatureControlledAttacksAloneTriggeredAbility extends TriggeredAbilityImpl {
 
     public CreatureControlledAttacksAloneTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SovereignsOfLostAlaraEffect(), true);

@@ -67,7 +67,7 @@ public class ThroneOfBone extends CardImpl<ThroneOfBone> {
     }
 }
 
-class ThroneOfBoneAbility extends TriggeredAbilityImpl<ThroneOfBoneAbility> {
+class ThroneOfBoneAbility extends TriggeredAbilityImpl {
 
     public ThroneOfBoneAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);

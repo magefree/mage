@@ -14,7 +14,7 @@ import java.io.ObjectStreamException;
  * "Shadow" keyword
  * @author Loki
  */
-public class ShadowAbility extends EvasionAbility<ShadowAbility> implements MageSingleton {
+public class ShadowAbility extends EvasionAbility implements MageSingleton {
     private static final ShadowAbility fINSTANCE =  new ShadowAbility();
 
     private Object readResolve() throws ObjectStreamException {

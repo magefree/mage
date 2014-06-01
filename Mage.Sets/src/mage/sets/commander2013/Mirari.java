@@ -71,7 +71,7 @@ public class Mirari extends CardImpl<Mirari> {
 }
 
 
-class MirariTriggeredAbility extends TriggeredAbilityImpl<MirariTriggeredAbility> {
+class MirariTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterSpell filter = new FilterSpell();
 

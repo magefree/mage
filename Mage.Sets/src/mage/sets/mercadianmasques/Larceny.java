@@ -68,7 +68,7 @@ public class Larceny extends CardImpl<Larceny> {
     }
 }
 
-class LarcenyTriggeredAbility extends TriggeredAbilityImpl<LarcenyTriggeredAbility> {
+class LarcenyTriggeredAbility extends TriggeredAbilityImpl {
 
     public LarcenyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1), false);

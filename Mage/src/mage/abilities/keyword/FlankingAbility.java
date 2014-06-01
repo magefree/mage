@@ -19,7 +19,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 
 
-public class FlankingAbility extends TriggeredAbilityImpl<FlankingAbility> {
+public class FlankingAbility extends TriggeredAbilityImpl {
 
     public FlankingAbility() {
         super(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), false);

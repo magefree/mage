@@ -37,7 +37,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FlashAbility extends StaticAbility<FlashAbility> implements MageSingleton {
+public class FlashAbility extends StaticAbility implements MageSingleton {
 
     private static final FlashAbility fINSTANCE =  new FlashAbility();
 

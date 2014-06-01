@@ -73,7 +73,7 @@ public class PhyrexianObliterator extends CardImpl<PhyrexianObliterator> {
     }
 }
 
-class PhyrexianObliteratorTriggeredAbility extends TriggeredAbilityImpl<PhyrexianObliteratorTriggeredAbility> {
+class PhyrexianObliteratorTriggeredAbility extends TriggeredAbilityImpl {
     PhyrexianObliteratorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 0, ""));
     }

@@ -121,7 +121,7 @@ public class PerplexingChimera extends CardImpl<PerplexingChimera> {
     }
 }
 
-class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl<PerplexingChimeraTriggeredAbility> {
+class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
 
     public PerplexingChimeraTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PerplexingChimeraControlExchangeEffect(), true);

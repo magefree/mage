@@ -74,7 +74,7 @@ public class BloodhallOoze extends CardImpl<BloodhallOoze> {
 
 }
 
-class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl<BloodhallOozeTriggeredAbility1> {
+class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 
@@ -114,7 +114,7 @@ class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl<BloodhallOozeT
     }
 }
 
-class BloodhallOozeTriggeredAbility2 extends TriggeredAbilityImpl<BloodhallOozeTriggeredAbility2> {
+class BloodhallOozeTriggeredAbility2 extends TriggeredAbilityImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

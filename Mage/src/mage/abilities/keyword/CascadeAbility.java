@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CascadeAbility extends TriggeredAbilityImpl<CascadeAbility> {
+public class CascadeAbility extends TriggeredAbilityImpl {
     //20091005 - 702.82
 
     private boolean withReminder;

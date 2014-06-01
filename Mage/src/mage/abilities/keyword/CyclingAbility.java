@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CyclingAbility extends ActivatedAbilityImpl<CyclingAbility> {
+public class CyclingAbility extends ActivatedAbilityImpl {
 
     private final Cost cost;
     private final String text;

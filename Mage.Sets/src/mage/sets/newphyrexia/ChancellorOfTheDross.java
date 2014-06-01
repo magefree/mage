@@ -76,7 +76,7 @@ public class ChancellorOfTheDross extends CardImpl<ChancellorOfTheDross> {
     }
 }
 
-class ChancellorOfTheDrossDelayedTriggeredAbility extends DelayedTriggeredAbility<ChancellorOfTheDrossDelayedTriggeredAbility> {
+class ChancellorOfTheDrossDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     ChancellorOfTheDrossDelayedTriggeredAbility () {
         super(new ChancellorOfTheDrossEffect());

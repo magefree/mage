@@ -86,7 +86,7 @@ public class NimDeathmantle extends CardImpl<NimDeathmantle> {
     }
 }
 
-class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl<NimDeathmantleTriggeredAbility> {
+class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
 
     NimDeathmantleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new NimDeathmantleEffect(), true);

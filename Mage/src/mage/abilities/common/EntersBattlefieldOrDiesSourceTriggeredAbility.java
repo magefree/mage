@@ -41,7 +41,7 @@ import mage.game.events.ZoneChangeEvent;
  * @author LevelX2
  */
 
-public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbilityImpl<EntersBattlefieldOrDiesSourceTriggeredAbility> {
+public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public EntersBattlefieldOrDiesSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

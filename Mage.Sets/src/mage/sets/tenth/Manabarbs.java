@@ -67,7 +67,7 @@ public class Manabarbs extends CardImpl<Manabarbs> {
     }
 }
 
-class ManabarbsTriggeredAbility extends TriggeredAbilityImpl<ManabarbsTriggeredAbility> {
+class ManabarbsTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final String staticText = "Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.";
 

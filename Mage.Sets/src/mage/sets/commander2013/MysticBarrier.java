@@ -84,7 +84,7 @@ public class MysticBarrier extends CardImpl<MysticBarrier> {
     }
 }
 
-class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl<MysticBarrierTriggeredAbility> {
+class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl {
 
     public MysticBarrierTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MysticBarrierChooseEffect(), false);

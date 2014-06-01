@@ -185,7 +185,7 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl<GrinningTotemMayPlay
     
 }
 
-class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility<GrinningTotemDelayedTriggeredAbility> {
+class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public GrinningTotemDelayedTriggeredAbility() {
         super(new GrinningTotemPutIntoGraveyardEffect());

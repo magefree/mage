@@ -68,7 +68,7 @@ public class RitesOfFlourishing extends CardImpl<RitesOfFlourishing> {
     }
 }
 
-class RitesOfFlourishingAbility extends TriggeredAbilityImpl<RitesOfFlourishingAbility> {
+class RitesOfFlourishingAbility extends TriggeredAbilityImpl {
 
     public RitesOfFlourishingAbility() {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));

@@ -103,7 +103,7 @@ class ReincarnationEffect extends OneShotEffect<ReincarnationEffect> {
     }
 }
 
-class ReincarnationDelayedTriggeredAbility extends DelayedTriggeredAbility<ReincarnationDelayedTriggeredAbility> {
+class ReincarnationDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID target;
 

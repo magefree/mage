@@ -93,7 +93,7 @@ public class SatyrFiredancer extends CardImpl<SatyrFiredancer> {
     }
 }
 
-class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl<SatyrFiredancerTriggeredAbility> {
+class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
     private List<UUID> handledStackObjects = new ArrayList<UUID>();
 

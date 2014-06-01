@@ -98,7 +98,7 @@ public class LullmageMentor extends CardImpl<LullmageMentor> {
     }
 }
 
-class LullmageMentorTriggeredAbility extends TriggeredAbilityImpl<LullmageMentorTriggeredAbility> {
+class LullmageMentorTriggeredAbility extends TriggeredAbilityImpl {
 
     public LullmageMentorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new MerfolkToken()), false);

@@ -82,7 +82,7 @@ public class SeshiroTheAnointed extends CardImpl<SeshiroTheAnointed> {
 
 }
 
-class SeshiroTheAnointedAbility extends TriggeredAbilityImpl<SeshiroTheAnointedAbility> {
+class SeshiroTheAnointedAbility extends TriggeredAbilityImpl {
 
     public SeshiroTheAnointedAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);

@@ -69,7 +69,7 @@ public class PainfulQuandary extends CardImpl<PainfulQuandary> {
 
 }
 
-class PainfulQuandryAbility extends TriggeredAbilityImpl<PainfulQuandryAbility> {
+class PainfulQuandryAbility extends TriggeredAbilityImpl {
 
     public PainfulQuandryAbility() {
         super(Zone.BATTLEFIELD, new PainfulQuandryEffect());

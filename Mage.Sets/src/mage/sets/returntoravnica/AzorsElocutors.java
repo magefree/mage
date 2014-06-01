@@ -81,7 +81,7 @@ public class AzorsElocutors extends CardImpl<AzorsElocutors> {
         return new AzorsElocutors(this);
     }
 }
-class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl<AzorsElocutorsTriggeredAbility> {
+class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
 
     public AzorsElocutorsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(new Counter("filibuster")), false);

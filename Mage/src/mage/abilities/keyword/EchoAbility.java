@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Backfir3
  */
-public class EchoAbility extends TriggeredAbilityImpl<EchoAbility> {
+public class EchoAbility extends TriggeredAbilityImpl {
 
     protected UUID lastController;
     protected boolean echoPaid;

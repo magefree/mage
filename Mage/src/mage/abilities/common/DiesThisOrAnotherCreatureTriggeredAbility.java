@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author noxx
  */
-public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityImpl<DiesThisOrAnotherCreatureTriggeredAbility> {
+public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterCreaturePermanent filter;
 

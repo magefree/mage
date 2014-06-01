@@ -70,7 +70,7 @@ public class WildDefiance extends CardImpl<WildDefiance> {
     }
 }
 
-class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityImpl<CreaturesYouControlBecomesTargetTriggeredAbility> {
+class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
 
     public CreaturesYouControlBecomesTargetTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);

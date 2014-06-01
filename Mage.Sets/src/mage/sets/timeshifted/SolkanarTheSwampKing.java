@@ -75,7 +75,7 @@ public class SolkanarTheSwampKing extends CardImpl<SolkanarTheSwampKing> {
     }
 }
 
-class SolkanarTheSwampKingAbility extends TriggeredAbilityImpl<SolkanarTheSwampKingAbility> {
+class SolkanarTheSwampKingAbility extends TriggeredAbilityImpl {
 
     public SolkanarTheSwampKingAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), false);

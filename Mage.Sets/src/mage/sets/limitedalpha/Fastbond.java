@@ -71,7 +71,7 @@ public class Fastbond extends CardImpl<Fastbond> {
 }
 
 
-class PlayALandTriggeredAbility extends TriggeredAbilityImpl<PlayALandTriggeredAbility> {
+class PlayALandTriggeredAbility extends TriggeredAbilityImpl {
 
 
 

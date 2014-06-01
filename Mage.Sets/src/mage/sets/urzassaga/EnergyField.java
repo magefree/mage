@@ -115,7 +115,7 @@ class EnergyFieldEffect extends PreventionEffectImpl<EnergyFieldEffect> {
     }
 }
 
-class PutIntoYourGraveyardTriggeredAbility extends TriggeredAbilityImpl<PutIntoYourGraveyardTriggeredAbility> {
+class PutIntoYourGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
 
 

@@ -78,7 +78,7 @@ public class PhylacteryLich extends CardImpl<PhylacteryLich> {
         return new PhylacteryLich(this);
     }
 
-    class PhylacteryLichAbility extends StateTriggeredAbility<PhylacteryLichAbility> {
+    class PhylacteryLichAbility extends StateTriggeredAbility {
 
         public PhylacteryLichAbility() {
             super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

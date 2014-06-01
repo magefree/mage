@@ -38,7 +38,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North, Loki
  */
-public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl<BlocksOrBecomesBlockedTriggeredAbility> {
+public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
     public BlocksOrBecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

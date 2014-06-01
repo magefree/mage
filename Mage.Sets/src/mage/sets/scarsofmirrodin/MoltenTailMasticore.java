@@ -85,7 +85,7 @@ public class MoltenTailMasticore extends CardImpl<MoltenTailMasticore> {
 
 }
 
-class MoltenTailMasticoreAbility extends TriggeredAbilityImpl<MoltenTailMasticoreAbility> {
+class MoltenTailMasticoreAbility extends TriggeredAbilityImpl {
     public MoltenTailMasticoreAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand())));
     }

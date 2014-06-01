@@ -77,7 +77,7 @@ public class SunTitan extends CardImpl<SunTitan> {
 
 }
 
-class SunTitanAbility extends TriggeredAbilityImpl<SunTitanAbility> {
+class SunTitanAbility extends TriggeredAbilityImpl {
 
     private static final FilterCard filter = new FilterCard("permanent card with converted mana cost 3 or less from your graveyard");
 

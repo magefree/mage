@@ -41,7 +41,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl<ActivateIfConditionActivatedAbility> {
+public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
 
     private final Condition condition;
 

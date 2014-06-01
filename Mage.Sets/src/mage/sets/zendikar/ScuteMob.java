@@ -69,7 +69,7 @@ public class ScuteMob extends CardImpl<ScuteMob> {
 
 }
 
-class ScuteMobAbility extends TriggeredAbilityImpl<ScuteMobAbility> {
+class ScuteMobAbility extends TriggeredAbilityImpl {
 
     private FilterLandPermanent filter = new FilterLandPermanent();
 

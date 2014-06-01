@@ -80,7 +80,7 @@ public class ImmortalCoil extends CardImpl<ImmortalCoil> {
     }
 }
 
-class ImmortalCoilAbility extends StateTriggeredAbility<ImmortalCoilAbility> {
+class ImmortalCoilAbility extends StateTriggeredAbility {
 
     public ImmortalCoilAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

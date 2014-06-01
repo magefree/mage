@@ -74,7 +74,7 @@ public class Manaplasm extends CardImpl<Manaplasm> {
 }
 
 
-class ManaplasmAbility extends TriggeredAbilityImpl<ManaplasmAbility> {
+class ManaplasmAbility extends TriggeredAbilityImpl {
 
     public ManaplasmAbility() {
         super(Zone.BATTLEFIELD, new EmptyEffect("{this} gets +X/+X until end of turn, where X is that spell's converted mana cost"), false);

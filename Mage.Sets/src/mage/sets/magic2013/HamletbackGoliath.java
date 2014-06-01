@@ -75,7 +75,7 @@ public class HamletbackGoliath extends CardImpl<HamletbackGoliath> {
     }
 }
 
-class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl<HamletbackGoliathTriggeredAbility> {
+class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl {
     HamletbackGoliathTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HamletbackGoliathEffect(), true);
     }

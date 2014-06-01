@@ -81,7 +81,7 @@ public class DarkDepths extends CardImpl<DarkDepths> {
     }
 }
 
-class DarkDepthsAbility extends StateTriggeredAbility<DarkDepthsAbility> {
+class DarkDepthsAbility extends StateTriggeredAbility {
 
     public DarkDepthsAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

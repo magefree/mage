@@ -40,7 +40,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 
-public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl<GainLifeControllerTriggeredAbility> {
+public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
     private boolean setTargetPointer;
 
     public GainLifeControllerTriggeredAbility(Effect effect, boolean optional) {

@@ -39,7 +39,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class BlocksCreatureTriggeredAbility extends TriggeredAbilityImpl<BlocksCreatureTriggeredAbility> {
+public class BlocksCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean setTargetPointer;
 

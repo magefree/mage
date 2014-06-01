@@ -81,7 +81,7 @@ public class RafiqOfTheMany extends CardImpl<RafiqOfTheMany> {
 
 }
 
-class RafiqOfTheManyAbility extends TriggeredAbilityImpl<RafiqOfTheManyAbility> {
+class RafiqOfTheManyAbility extends TriggeredAbilityImpl {
 
     public RafiqOfTheManyAbility() {
         super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));

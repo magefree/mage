@@ -107,7 +107,7 @@ class SkeletonizeEffect extends OneShotEffect<SkeletonizeEffect> {
     }
 }
 
-class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility<SkeletonizeDelayedTriggeredAbility> {
+class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public SkeletonizeDelayedTriggeredAbility() {
         super(new CreateTokenEffect(new SkeletonToken()), Duration.EndOfTurn);

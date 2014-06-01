@@ -77,7 +77,7 @@ public class IsperiaSupremeJudge extends CardImpl<IsperiaSupremeJudge> {
     }
 }
 
-class IsperiaSupremeJudgeTriggeredAbility extends TriggeredAbilityImpl<IsperiaSupremeJudgeTriggeredAbility> {
+class IsperiaSupremeJudgeTriggeredAbility extends TriggeredAbilityImpl {
 
     public IsperiaSupremeJudgeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);

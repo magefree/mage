@@ -36,7 +36,7 @@ import mage.abilities.effects.Effect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimpleStaticAbility extends StaticAbility<SimpleStaticAbility> {
+public class SimpleStaticAbility extends StaticAbility {
 
     public SimpleStaticAbility(Zone zone, Effect effect) {
         super(zone, effect);

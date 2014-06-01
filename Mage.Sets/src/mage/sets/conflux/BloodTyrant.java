@@ -90,7 +90,7 @@ public class BloodTyrant extends CardImpl<BloodTyrant> {
     }
 }
 
-class PlayerLosesTheGameTriggeredAbility extends TriggeredAbilityImpl<PlayerLosesTheGameTriggeredAbility> {
+class PlayerLosesTheGameTriggeredAbility extends TriggeredAbilityImpl {
 
     public PlayerLosesTheGameTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), false);

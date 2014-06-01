@@ -78,7 +78,7 @@ public class MaelstromNexus extends CardImpl<MaelstromNexus> {
     }
 }
 
-class MaelstromNexusTriggeredAbility extends TriggeredAbilityImpl<MaelstromNexusTriggeredAbility> {
+class MaelstromNexusTriggeredAbility extends TriggeredAbilityImpl {
 
     public MaelstromNexusTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CascadeEffect());

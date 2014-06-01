@@ -14,7 +14,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Loki
  */
-public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbilityImpl<DealsDamageToAPlayerAttachedTriggeredAbility> {
+public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbilityImpl {
     private boolean setFixedTargetPointer;
     private String attachedDescription;
     private boolean onlyCombat;

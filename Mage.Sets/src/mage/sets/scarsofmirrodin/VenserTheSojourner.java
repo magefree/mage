@@ -153,7 +153,7 @@ class VenserTheSojournerEmblem extends Emblem {
     }
 }
 
-class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl<VenserTheSojournerSpellCastTriggeredAbility> {
+class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterSpell spellCard = new FilterSpell("a spell");
     protected FilterSpell filter;

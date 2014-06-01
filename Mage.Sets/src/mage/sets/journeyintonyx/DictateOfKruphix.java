@@ -67,7 +67,7 @@ public class DictateOfKruphix extends CardImpl<DictateOfKruphix> {
     }
 }
 
-class DictateOfKruphixAbility extends TriggeredAbilityImpl<DictateOfKruphixAbility> {
+class DictateOfKruphixAbility extends TriggeredAbilityImpl {
 
     public DictateOfKruphixAbility() {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));

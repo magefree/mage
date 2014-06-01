@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LandwalkAbility extends EvasionAbility<LandwalkAbility> {
+public class LandwalkAbility extends EvasionAbility {
 
     public LandwalkAbility(FilterLandPermanent filter) {
         this.addEffect(new LandwalkEffect(filter));

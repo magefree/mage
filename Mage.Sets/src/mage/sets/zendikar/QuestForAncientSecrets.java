@@ -81,7 +81,7 @@ public class QuestForAncientSecrets extends CardImpl<QuestForAncientSecrets> {
     }
 }
 
-class QuestForAncientSecretsTriggeredAbility extends TriggeredAbilityImpl<QuestForAncientSecretsTriggeredAbility> {
+class QuestForAncientSecretsTriggeredAbility extends TriggeredAbilityImpl {
 
     public QuestForAncientSecretsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);

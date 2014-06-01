@@ -78,7 +78,7 @@ public class VampireNocturnus extends CardImpl<VampireNocturnus> {
     }
 }
 
-class VampireNocturnusAbility extends StaticAbility<VampireNocturnusAbility> {
+class VampireNocturnusAbility extends StaticAbility {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

@@ -72,7 +72,7 @@ public class RapaciousOne extends CardImpl<RapaciousOne> {
     }
 }
 
-class RapaciousOneTriggeredAbility extends TriggeredAbilityImpl<RapaciousOneTriggeredAbility> {
+class RapaciousOneTriggeredAbility extends TriggeredAbilityImpl {
 
     public RapaciousOneTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);

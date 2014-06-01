@@ -80,7 +80,7 @@ public class RenegadeKrasis extends CardImpl<RenegadeKrasis> {
 
 }
 
-class RenegadeKrasisTriggeredAbility extends TriggeredAbilityImpl<RenegadeKrasisTriggeredAbility> {
+class RenegadeKrasisTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     static {

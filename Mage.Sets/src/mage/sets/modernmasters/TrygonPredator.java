@@ -79,7 +79,7 @@ public class TrygonPredator extends CardImpl<TrygonPredator> {
     }
 }
 
-class TrygonPredatorTriggeredAbility extends TriggeredAbilityImpl<TrygonPredatorTriggeredAbility> {
+class TrygonPredatorTriggeredAbility extends TriggeredAbilityImpl {
 
     public TrygonPredatorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);

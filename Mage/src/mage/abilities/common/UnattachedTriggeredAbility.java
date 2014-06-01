@@ -40,7 +40,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author nantuko
  */
-public class UnattachedTriggeredAbility extends TriggeredAbilityImpl<UnattachedTriggeredAbility> {
+public class UnattachedTriggeredAbility extends TriggeredAbilityImpl {
 
     public UnattachedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

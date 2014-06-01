@@ -38,7 +38,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl<BecomesTargetTriggeredAbility> {
+public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesTargetTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);

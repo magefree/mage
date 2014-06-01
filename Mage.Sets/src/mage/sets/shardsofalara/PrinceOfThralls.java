@@ -79,7 +79,7 @@ public class PrinceOfThralls extends CardImpl<PrinceOfThralls> {
     }
 }
 
-class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl<PrinceOfThrallsTriggeredAbility> {
+class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
 
     PrinceOfThrallsTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);

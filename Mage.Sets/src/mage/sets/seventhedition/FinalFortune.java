@@ -100,7 +100,7 @@ class FinalFortuneEffect extends OneShotEffect<FinalFortuneEffect> {
     
 }
 
-class FinalFortuneLoseDelayedTriggeredAbility extends DelayedTriggeredAbility<FinalFortuneLoseDelayedTriggeredAbility> {
+class FinalFortuneLoseDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID connectedTurnMod;
 

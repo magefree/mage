@@ -85,7 +85,7 @@ public class GreatbowDoyen extends CardImpl<GreatbowDoyen> {
     }
 }
 
-class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl<GreatbowDoyenTriggeredAbility> {
+class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
 
     public GreatbowDoyenTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GreatbowDoyenEffect());

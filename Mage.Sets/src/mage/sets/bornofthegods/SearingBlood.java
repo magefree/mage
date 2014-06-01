@@ -100,7 +100,7 @@ class SearingBloodEffect extends OneShotEffect<SearingBloodEffect> {
     }
 }
 
-class SearingBloodDelayedTriggeredAbility extends DelayedTriggeredAbility<SearingBloodDelayedTriggeredAbility> {
+class SearingBloodDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID target;
 

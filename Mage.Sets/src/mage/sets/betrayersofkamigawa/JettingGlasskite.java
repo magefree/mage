@@ -74,7 +74,7 @@ public class JettingGlasskite extends CardImpl<JettingGlasskite> {
     }
 }
 
-class JettingGlasskiteAbility extends TriggeredAbilityImpl<JettingGlasskiteAbility> {
+class JettingGlasskiteAbility extends TriggeredAbilityImpl {
 
     protected int turnUsed;
 

@@ -37,7 +37,7 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.game.permanent.PermanentToken;
 
-public class OpponentSacrificesNonTokenPermanentTriggeredAbility extends TriggeredAbilityImpl<OpponentSacrificesNonTokenPermanentTriggeredAbility> {
+public class OpponentSacrificesNonTokenPermanentTriggeredAbility extends TriggeredAbilityImpl {
 
     public OpponentSacrificesNonTokenPermanentTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);

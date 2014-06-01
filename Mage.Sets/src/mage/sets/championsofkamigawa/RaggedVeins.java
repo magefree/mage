@@ -84,7 +84,7 @@ public class RaggedVeins extends CardImpl<RaggedVeins> {
     }
 }
 
-class RaggedVeinsTriggeredAbility extends TriggeredAbilityImpl<RaggedVeinsTriggeredAbility> {
+class RaggedVeinsTriggeredAbility extends TriggeredAbilityImpl {
 
     public RaggedVeinsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RaggedVeinsEffect());

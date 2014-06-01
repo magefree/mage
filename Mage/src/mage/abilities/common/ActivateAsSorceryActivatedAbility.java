@@ -33,7 +33,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 
-public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl<ActivateAsSorceryActivatedAbility> {
+public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
     public ActivateAsSorceryActivatedAbility(Zone zone, Effect effect, Cost cost) {
         super(zone, effect, cost);
         timing = TimingRule.SORCERY;

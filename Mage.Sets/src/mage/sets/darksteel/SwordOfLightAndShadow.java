@@ -94,7 +94,7 @@ public class SwordOfLightAndShadow extends CardImpl<SwordOfLightAndShadow> {
 
 }
 
-class SwordOfLightAndShadowAbility extends TriggeredAbilityImpl<SwordOfLightAndShadowAbility> {
+class SwordOfLightAndShadowAbility extends TriggeredAbilityImpl {
 
     public SwordOfLightAndShadowAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());

@@ -77,7 +77,7 @@ public class SwordOfKaldra extends CardImpl<SwordOfKaldra> {
     }
 }
 
-class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl<SwordOfKaldraTriggeredAbility> {
+class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
 
     public SwordOfKaldraTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect("exile that creature"), false);

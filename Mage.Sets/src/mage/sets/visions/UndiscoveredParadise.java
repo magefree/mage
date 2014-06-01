@@ -99,7 +99,7 @@ class UndiscoveredParadiseEffect extends OneShotEffect<UndiscoveredParadiseEffec
     }
 }
 
-class AtBeginningOfUntapDelayedTriggeredAbility extends DelayedTriggeredAbility<AtBeginningOfUntapDelayedTriggeredAbility> {
+class AtBeginningOfUntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public AtBeginningOfUntapDelayedTriggeredAbility(Effect effect) {
         super(effect);

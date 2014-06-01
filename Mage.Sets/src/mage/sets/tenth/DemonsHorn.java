@@ -63,7 +63,7 @@ public class DemonsHorn extends CardImpl<DemonsHorn> {
 
 }
 
-class DemonsHornAbility extends TriggeredAbilityImpl<DemonsHornAbility> {
+class DemonsHornAbility extends TriggeredAbilityImpl {
 
     public DemonsHornAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);

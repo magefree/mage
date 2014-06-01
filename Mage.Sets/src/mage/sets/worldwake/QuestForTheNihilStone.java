@@ -74,7 +74,7 @@ public class QuestForTheNihilStone extends CardImpl<QuestForTheNihilStone> {
     }
 }
 
-class QuestForTheNihilStoneTriggeredAbility extends TriggeredAbilityImpl<QuestForTheNihilStoneTriggeredAbility> {
+class QuestForTheNihilStoneTriggeredAbility extends TriggeredAbilityImpl {
 
     public QuestForTheNihilStoneTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(), true), true);
@@ -103,7 +103,7 @@ class QuestForTheNihilStoneTriggeredAbility extends TriggeredAbilityImpl<QuestFo
     }
 }
 
-class QuestForTheNihilStoneTriggeredAbility2 extends TriggeredAbilityImpl<QuestForTheNihilStoneTriggeredAbility2> {
+class QuestForTheNihilStoneTriggeredAbility2 extends TriggeredAbilityImpl {
 
     public QuestForTheNihilStoneTriggeredAbility2() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(5), true);

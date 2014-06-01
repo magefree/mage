@@ -69,7 +69,7 @@ public class HuntersInsight extends CardImpl<HuntersInsight> {
     }
 }
 
-class HuntersInsightTriggeredAbility extends TriggeredAbilityImpl<HuntersInsightTriggeredAbility> {
+class HuntersInsightTriggeredAbility extends TriggeredAbilityImpl {
 
     public HuntersInsightTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);

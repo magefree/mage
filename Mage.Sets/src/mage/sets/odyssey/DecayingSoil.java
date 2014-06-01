@@ -101,7 +101,7 @@ public class DecayingSoil extends CardImpl<DecayingSoil> {
     }
 }
 
-class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl<DecayingSoilTriggeredAbility> {
+class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterCreaturePermanent filter;
 

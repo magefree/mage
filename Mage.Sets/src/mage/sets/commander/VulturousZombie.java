@@ -78,7 +78,7 @@ public class VulturousZombie extends CardImpl<VulturousZombie> {
     }
 }
 
-class VulturousZombieTriggeredAbility extends TriggeredAbilityImpl<VulturousZombieTriggeredAbility> {
+class VulturousZombieTriggeredAbility extends TriggeredAbilityImpl {
 
     public VulturousZombieTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);

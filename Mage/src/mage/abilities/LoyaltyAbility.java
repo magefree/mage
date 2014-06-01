@@ -39,7 +39,7 @@ import mage.abilities.effects.Effects;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LoyaltyAbility extends ActivatedAbilityImpl<LoyaltyAbility> {
+public class LoyaltyAbility extends ActivatedAbilityImpl {
 
     public LoyaltyAbility(Effect effect, int loyalty) {
         super(Zone.BATTLEFIELD, effect, new PayLoyaltyCost(loyalty));

@@ -81,7 +81,7 @@ public class AuntiesSnitch extends CardImpl<AuntiesSnitch> {
     }
 }
 
-class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl<AuntiesSnitchTriggeredAbility> {
+class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin or Rogue you control");
     static {

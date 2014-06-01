@@ -85,7 +85,7 @@ public class RustScarab extends CardImpl<RustScarab> {
 }
 
 
-class BecomesBlockedTriggeredAbility extends TriggeredAbilityImpl<BecomesBlockedTriggeredAbility> {
+class BecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

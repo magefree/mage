@@ -87,7 +87,7 @@ public class GruulRagebeast extends CardImpl<GruulRagebeast> {
     }
 }
 
-class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl<GruulRagebeastTriggeredAbility> {
+class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
 
     GruulRagebeastTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GruulRagebeastEffect(), false);

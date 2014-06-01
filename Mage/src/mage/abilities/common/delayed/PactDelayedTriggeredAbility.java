@@ -39,7 +39,7 @@ import mage.players.Player;
 /**
  * @author nantuko
  */
-public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility<PactDelayedTriggeredAbility> {
+public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public PactDelayedTriggeredAbility(ManaCosts cost) {
         super(new PactEffect(cost));

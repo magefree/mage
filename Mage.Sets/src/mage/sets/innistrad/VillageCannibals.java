@@ -70,7 +70,7 @@ public class VillageCannibals extends CardImpl<VillageCannibals> {
     }
 }
 
-class VillageCannibalsTriggeredAbility extends TriggeredAbilityImpl<VillageCannibalsTriggeredAbility> {
+class VillageCannibalsTriggeredAbility extends TriggeredAbilityImpl {
 
     public VillageCannibalsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));

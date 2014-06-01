@@ -111,7 +111,7 @@ class PlagueBoilerEffect extends OneShotEffect<PlagueBoilerEffect> {
     }
 }
 
-class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl<PlagueBoilerTriggeredAbility> {
+class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
 
     public PlagueBoilerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PlagueBoilerSacrificeDestroyEffect(), false);

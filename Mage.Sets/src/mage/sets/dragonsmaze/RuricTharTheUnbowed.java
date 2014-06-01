@@ -86,7 +86,7 @@ public class RuricTharTheUnbowed extends CardImpl<RuricTharTheUnbowed> {
     }
 }
 
-class RuricTharTheUnbowedAbility extends TriggeredAbilityImpl<RuricTharTheUnbowedAbility> {
+class RuricTharTheUnbowedAbility extends TriggeredAbilityImpl {
 
     public RuricTharTheUnbowedAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(6), false);

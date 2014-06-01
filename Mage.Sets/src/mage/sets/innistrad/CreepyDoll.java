@@ -75,7 +75,7 @@ public class CreepyDoll extends CardImpl<CreepyDoll> {
     }
 }
 
-class CreepyDollTriggeredAbility extends TriggeredAbilityImpl<CreepyDollTriggeredAbility> {
+class CreepyDollTriggeredAbility extends TriggeredAbilityImpl {
 
     CreepyDollTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreepyDollEffect());

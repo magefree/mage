@@ -62,7 +62,7 @@ public class HornOfGreed extends CardImpl<HornOfGreed> {
     }
 }
 
-class HornOfGreedAbility extends TriggeredAbilityImpl<HornOfGreedAbility> {
+class HornOfGreedAbility extends TriggeredAbilityImpl {
 
     public HornOfGreedAbility() {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), false);

@@ -68,7 +68,7 @@ public class ThranQuarry extends CardImpl<ThranQuarry> {
     }
 }
 
-class ThranQuarryTriggeredAbility extends TriggeredAbilityImpl<ThranQuarryTriggeredAbility> {
+class ThranQuarryTriggeredAbility extends TriggeredAbilityImpl {
 
     ThranQuarryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

@@ -38,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DefenderAbility extends StaticAbility<DefenderAbility> implements MageSingleton {
+public class DefenderAbility extends StaticAbility implements MageSingleton {
 
     private static final DefenderAbility fINSTANCE =  new DefenderAbility();
 

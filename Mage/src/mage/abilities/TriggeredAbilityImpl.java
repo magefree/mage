@@ -39,9 +39,8 @@ import mage.players.Player;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> extends AbilityImpl<T> implements TriggeredAbility {
+public abstract class TriggeredAbilityImpl extends AbilityImpl implements TriggeredAbility {
 
     protected boolean optional;
 
@@ -57,7 +56,7 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
         this.optional = optional;
     }
 
-    public TriggeredAbilityImpl(final TriggeredAbilityImpl<T> ability) {
+    public TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {
         super(ability);
         this.optional = ability.optional;
     }

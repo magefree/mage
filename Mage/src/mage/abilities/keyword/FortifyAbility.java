@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  */
 
 //20091005 - 702.64
-public class FortifyAbility extends ActivatedAbilityImpl<FortifyAbility> {
+public class FortifyAbility extends ActivatedAbilityImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
 

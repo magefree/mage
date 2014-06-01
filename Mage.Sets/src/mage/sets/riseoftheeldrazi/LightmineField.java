@@ -68,7 +68,7 @@ public class LightmineField extends CardImpl<LightmineField> {
     }
 }
 
-class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl<LightmineFieldTriggeredAbility> {
+class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
 
     public LightmineFieldTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LightmineFieldEffect());

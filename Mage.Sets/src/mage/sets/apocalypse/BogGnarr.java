@@ -71,7 +71,7 @@ public class BogGnarr extends CardImpl<BogGnarr> {
 
 }
 
-class BogGnarrTriggeredAbility extends TriggeredAbilityImpl<BogGnarrTriggeredAbility> {
+class BogGnarrTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCard filter = new FilterCard("a black spell");
 

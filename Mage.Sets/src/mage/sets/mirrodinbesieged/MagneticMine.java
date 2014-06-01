@@ -66,7 +66,7 @@ public class MagneticMine extends CardImpl<MagneticMine> {
     }
 }
 
-class MagneticMineTriggeredAbility extends TriggeredAbilityImpl<MagneticMineTriggeredAbility> {
+class MagneticMineTriggeredAbility extends TriggeredAbilityImpl {
 
     public MagneticMineTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);

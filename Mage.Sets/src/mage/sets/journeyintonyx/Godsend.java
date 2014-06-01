@@ -97,7 +97,7 @@ public class Godsend extends CardImpl<Godsend> {
     }
 }
 
-class GodsendTriggeredAbility extends TriggeredAbilityImpl<GodsendTriggeredAbility> {
+class GodsendTriggeredAbility extends TriggeredAbilityImpl {
 
     private Set<UUID> possibleTargets = new HashSet<>();
     

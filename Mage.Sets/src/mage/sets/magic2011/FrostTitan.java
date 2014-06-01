@@ -74,7 +74,7 @@ public class FrostTitan extends CardImpl<FrostTitan> {
 
 }
 
-class FrostTitanAbility1 extends TriggeredAbilityImpl<FrostTitanAbility1> {
+class FrostTitanAbility1 extends TriggeredAbilityImpl {
 
     public FrostTitanAbility1() {
         super(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(2)), false);
@@ -108,7 +108,7 @@ class FrostTitanAbility1 extends TriggeredAbilityImpl<FrostTitanAbility1> {
 
 }
 
-class FrostTitanAbility2 extends TriggeredAbilityImpl<FrostTitanAbility2> {
+class FrostTitanAbility2 extends TriggeredAbilityImpl {
 
     public FrostTitanAbility2() {
         super(Zone.BATTLEFIELD, new TapTargetEffect(), false);

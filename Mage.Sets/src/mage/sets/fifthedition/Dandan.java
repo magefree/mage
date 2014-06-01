@@ -114,7 +114,7 @@ class DandanEffect extends ReplacementEffectImpl<DandanEffect> {
     }
 }
 
-class DandanTriggeredAbility extends StateTriggeredAbility<DandanTriggeredAbility> {
+class DandanTriggeredAbility extends StateTriggeredAbility {
 
     public DandanTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

@@ -81,7 +81,7 @@ public class ContestedWarZone extends CardImpl<ContestedWarZone> {
 
 }
 
-class ContestedWarZoneAbility extends TriggeredAbilityImpl<ContestedWarZoneAbility> {
+class ContestedWarZoneAbility extends TriggeredAbilityImpl {
 
     public ContestedWarZoneAbility() {
         super(Zone.BATTLEFIELD, new ContestedWarZoneEffect());

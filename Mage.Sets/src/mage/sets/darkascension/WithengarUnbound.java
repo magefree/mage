@@ -80,7 +80,7 @@ public class WithengarUnbound extends CardImpl<WithengarUnbound> {
     }
 }
 
-class WithengarUnboundTriggeredAbility extends TriggeredAbilityImpl<WithengarUnboundTriggeredAbility> {
+class WithengarUnboundTriggeredAbility extends TriggeredAbilityImpl {
 
     public WithengarUnboundTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(13)), false);

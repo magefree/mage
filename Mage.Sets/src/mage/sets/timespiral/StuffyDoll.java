@@ -118,7 +118,7 @@ class StuffyDollChoosePlayerEffect extends OneShotEffect<StuffyDollChoosePlayerE
     }
 }
 
-class StuffyDollTriggeredAbility extends TriggeredAbilityImpl<StuffyDollTriggeredAbility> {
+class StuffyDollTriggeredAbility extends TriggeredAbilityImpl {
 
     public StuffyDollTriggeredAbility() {
         super(Zone.BATTLEFIELD, new StuffyDollGainLifeEffect());

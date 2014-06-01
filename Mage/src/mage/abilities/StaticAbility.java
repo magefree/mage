@@ -35,9 +35,8 @@ import mage.abilities.effects.Effect;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class StaticAbility<T extends StaticAbility<T>> extends AbilityImpl<T> {
+public abstract class StaticAbility extends AbilityImpl {
 
     protected StaticAbility(AbilityType abilityType, Zone zone) {
         super(abilityType, zone);
@@ -50,7 +49,7 @@ public abstract class StaticAbility<T extends StaticAbility<T>> extends AbilityI
         }
     }
 
-    public StaticAbility(StaticAbility<T> ability) {
+    public StaticAbility(StaticAbility ability) {
         super(ability);
     }
 }

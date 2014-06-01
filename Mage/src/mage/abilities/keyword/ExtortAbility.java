@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ExtortAbility extends TriggeredAbilityImpl<ExtortAbility> {
+public class ExtortAbility extends TriggeredAbilityImpl {
 
     public ExtortAbility() {
         super(Zone.BATTLEFIELD, new ExtortEffect(), false);

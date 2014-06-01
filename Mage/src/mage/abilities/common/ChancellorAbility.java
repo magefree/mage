@@ -39,7 +39,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ChancellorAbility extends StaticAbility<ChancellorAbility> {
+public class ChancellorAbility extends StaticAbility {
 
     public ChancellorAbility(DelayedTriggeredAbility ability, String text) {
         super(Zone.HAND, new ChancellorEffect(ability, text));

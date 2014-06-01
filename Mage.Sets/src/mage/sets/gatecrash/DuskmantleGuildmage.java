@@ -86,7 +86,7 @@ public class DuskmantleGuildmage extends CardImpl<DuskmantleGuildmage> {
     }
 }
 
-class CardPutIntoOpponentGraveThisTurn extends DelayedTriggeredAbility<CardPutIntoOpponentGraveThisTurn> {
+class CardPutIntoOpponentGraveThisTurn extends DelayedTriggeredAbility {
 
     public CardPutIntoOpponentGraveThisTurn() {
         super(new LoseLifeTargetEffect(1), Duration.EndOfTurn, false);

@@ -81,7 +81,7 @@ public class AshZealot extends CardImpl<AshZealot> {
     }
 }
 
-class AshZealotTriggeredAbility extends TriggeredAbilityImpl<AshZealotTriggeredAbility> {
+class AshZealotTriggeredAbility extends TriggeredAbilityImpl {
 
     public AshZealotTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3), false);

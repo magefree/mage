@@ -88,7 +88,7 @@ public class EmrakulTheAeonsTorn extends CardImpl<EmrakulTheAeonsTorn> {
         return new EmrakulTheAeonsTorn(this);
     }
 }
-class EmrakulTheAeonsTornOnCastAbility extends TriggeredAbilityImpl<EmrakulTheAeonsTornOnCastAbility> {
+class EmrakulTheAeonsTornOnCastAbility extends TriggeredAbilityImpl {
 
     private static final String abilityText = "When you cast {this}, take an extra turn after this one";
 

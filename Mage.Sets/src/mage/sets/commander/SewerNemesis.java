@@ -149,7 +149,7 @@ class CardsInTargetOpponentsGraveyardCount implements DynamicValue {
     }
 }
 
-class SewerNemesisTriggeredAbility extends TriggeredAbilityImpl<SewerNemesisTriggeredAbility> {
+class SewerNemesisTriggeredAbility extends TriggeredAbilityImpl {
 
     public SewerNemesisTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveTargetEffect(1), false);

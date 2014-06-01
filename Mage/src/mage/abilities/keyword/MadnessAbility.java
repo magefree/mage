@@ -35,7 +35,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class MadnessAbility extends StaticAbility<MadnessAbility> {
+public class MadnessAbility extends StaticAbility {
 
     private Cost madnessCost;
     
@@ -132,7 +132,7 @@ class MadnessPlayEffect extends AsThoughEffectImpl<MadnessPlayEffect> {
  * It also marks it with "madness" mark storing unique value to game state
  * that will be used to check that card can be cast from exile zone.
  */
-class MadnessTriggeredAbility extends TriggeredAbilityImpl<MadnessTriggeredAbility> {
+class MadnessTriggeredAbility extends TriggeredAbilityImpl {
 
     MadnessTriggeredAbility() {
         super(Zone.GRAVEYARD, new MadnessExileEffect(), true);

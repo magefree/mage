@@ -126,7 +126,7 @@ class OgreGeargrabberEffect1 extends OneShotEffect<OgreGeargrabberEffect1> {
 
 }
 
-class OgreGeargrabberDelayedTriggeredAbility extends DelayedTriggeredAbility<OgreGeargrabberDelayedTriggeredAbility> {
+class OgreGeargrabberDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID equipmentId;
 

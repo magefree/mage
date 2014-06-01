@@ -86,7 +86,7 @@ public class SpectralPrison extends CardImpl<SpectralPrison> {
     }
 }
 
-class SpectralPrisonAbility extends TriggeredAbilityImpl<SpectralPrisonAbility> {
+class SpectralPrisonAbility extends TriggeredAbilityImpl {
 
     public SpectralPrisonAbility() {
         super(Zone.BATTLEFIELD, new DestroySourceEffect());

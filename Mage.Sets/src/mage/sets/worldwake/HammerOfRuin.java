@@ -80,7 +80,7 @@ public class HammerOfRuin extends CardImpl<HammerOfRuin> {
 
 }
 
-class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl<HammerOfRuinTriggeredAbility> {
+class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl {
 
     HammerOfRuinTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);

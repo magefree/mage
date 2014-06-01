@@ -67,7 +67,7 @@ public class WoodenSphere extends CardImpl<WoodenSphere> {
     }
 }
 
-class WoodenSphereAbility extends TriggeredAbilityImpl<WoodenSphereAbility> {
+class WoodenSphereAbility extends TriggeredAbilityImpl {
 
     public WoodenSphereAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);

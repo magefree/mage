@@ -73,7 +73,7 @@ public class FalkenrathNoble extends CardImpl<FalkenrathNoble> {
     }
 }
 
-class FalkenrathNobleTriggeredAbility extends TriggeredAbilityImpl<FalkenrathNobleTriggeredAbility> {
+class FalkenrathNobleTriggeredAbility extends TriggeredAbilityImpl {
 
     public FalkenrathNobleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);

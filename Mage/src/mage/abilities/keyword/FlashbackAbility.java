@@ -206,7 +206,7 @@ class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
     }
 }
 
-class FlashbackTriggeredAbility extends DelayedTriggeredAbility<FlashbackTriggeredAbility> {
+class FlashbackTriggeredAbility extends DelayedTriggeredAbility {
 
     public FlashbackTriggeredAbility() {
         super(new ExileSourceEffect());

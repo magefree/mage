@@ -75,7 +75,7 @@ public class RenegadeDoppelganger extends CardImpl<RenegadeDoppelganger> {
     }
 }
 
-class RenegadeDoppelgangerTriggeredAbility extends TriggeredAbilityImpl<RenegadeDoppelgangerTriggeredAbility> {
+class RenegadeDoppelgangerTriggeredAbility extends TriggeredAbilityImpl {
 
     RenegadeDoppelgangerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RenegadeDoppelgangerEffect(), true);

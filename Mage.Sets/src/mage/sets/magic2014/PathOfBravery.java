@@ -103,7 +103,7 @@ class LifeCondition implements Condition {
     }
 }
 
-class PathOfBraveryTriggeredAbility extends TriggeredAbilityImpl<PathOfBraveryTriggeredAbility> {
+class PathOfBraveryTriggeredAbility extends TriggeredAbilityImpl {
 
     public PathOfBraveryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PathOfBraveryEffect(), false);

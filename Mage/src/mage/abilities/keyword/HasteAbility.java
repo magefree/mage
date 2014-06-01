@@ -38,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HasteAbility extends StaticAbility<HasteAbility> implements MageSingleton {
+public class HasteAbility extends StaticAbility implements MageSingleton {
 
     private static final HasteAbility fINSTANCE =  new HasteAbility();
 

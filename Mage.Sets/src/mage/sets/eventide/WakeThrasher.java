@@ -72,7 +72,7 @@ public class WakeThrasher extends CardImpl<WakeThrasher> {
     }
 }
 
-class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilityImpl<BecomesUntappedControlledPermanentTriggeredAbility>{
+class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilityImpl{
 
     public BecomesUntappedControlledPermanentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

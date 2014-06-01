@@ -47,7 +47,7 @@ import java.io.ObjectStreamException;
  *
  *  @author nantuko
  */
-public class WitherAbility extends StaticAbility<WitherAbility> implements MageSingleton {
+public class WitherAbility extends StaticAbility implements MageSingleton {
 
     private static final WitherAbility fINSTANCE =  new WitherAbility();
 

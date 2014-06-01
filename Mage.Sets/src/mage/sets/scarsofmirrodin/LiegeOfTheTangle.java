@@ -81,7 +81,7 @@ public class LiegeOfTheTangle extends CardImpl<LiegeOfTheTangle> {
     }
 }
 
-class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl<LiegeOfTheTangleTriggeredAbility> {
+class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl {
     LiegeOfTheTangleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.AWAKENING.createInstance()));
         this.addEffect(new LiegeOfTheTangleEffect());

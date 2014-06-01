@@ -81,7 +81,7 @@ public class BattlegraceAngel extends CardImpl<BattlegraceAngel> {
 
 }
 
-class BattlegraceAngelAbility extends TriggeredAbilityImpl<BattlegraceAngelAbility> {
+class BattlegraceAngelAbility extends TriggeredAbilityImpl {
 
     public BattlegraceAngelAbility() {
         super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), false);

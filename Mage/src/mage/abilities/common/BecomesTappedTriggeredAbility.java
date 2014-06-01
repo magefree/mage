@@ -38,7 +38,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author nantuko
  */
-public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl<BecomesTappedTriggeredAbility> {
+public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesTappedTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);

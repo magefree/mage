@@ -77,7 +77,7 @@ public class SoulsOfTheFaultless extends CardImpl<SoulsOfTheFaultless> {
     }
 }
 
-class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl<SoulsOfTheFaultlessTriggeredAbility> {
+class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl {
 
     public SoulsOfTheFaultlessTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SoulsOfTheFaultlessEffect());

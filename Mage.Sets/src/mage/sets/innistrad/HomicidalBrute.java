@@ -75,7 +75,7 @@ public class HomicidalBrute extends CardImpl<HomicidalBrute> {
 
 }
 
-class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl<HomicidalBruteTriggeredAbility> {
+class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl {
 
     public HomicidalBruteTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TapSourceEffect(), false);

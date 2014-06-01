@@ -76,7 +76,7 @@ public class RetaliatorGriffin extends CardImpl<RetaliatorGriffin> {
     }
 }
 
-class RetaliatorGriffinTriggeredAbility extends TriggeredAbilityImpl<RetaliatorGriffinTriggeredAbility> {
+class RetaliatorGriffinTriggeredAbility extends TriggeredAbilityImpl {
 
     public RetaliatorGriffinTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RetaliatorGriffinEffect(), false);

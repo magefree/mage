@@ -66,7 +66,7 @@ public class MesmericOrb extends CardImpl<MesmericOrb> {
     }
 }
 
-class BecomesUntappedPermanentTriggeredAbility extends TriggeredAbilityImpl<BecomesUntappedPermanentTriggeredAbility>{
+class BecomesUntappedPermanentTriggeredAbility extends TriggeredAbilityImpl{
 
     public BecomesUntappedPermanentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

@@ -35,7 +35,7 @@ import mage.game.events.GameEvent;
 /**
  * @author nantuko
  */
-public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTriggeredAbility<AtTheEndOfTurnStepPostDelayedTriggeredAbility> {
+public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect) {
         super(effect);

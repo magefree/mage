@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FetchLandActivatedAbility extends ActivatedAbilityImpl<FetchLandActivatedAbility> {
+public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
 
     public FetchLandActivatedAbility(String[] subtypes) {
         this(true, subtypes);

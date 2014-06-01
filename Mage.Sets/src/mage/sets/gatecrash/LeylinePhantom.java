@@ -72,7 +72,7 @@ public class LeylinePhantom extends CardImpl<LeylinePhantom> {
 }
 
 
-class LeylinePhantomTriggeredAbility extends TriggeredAbilityImpl<LeylinePhantomTriggeredAbility> {
+class LeylinePhantomTriggeredAbility extends TriggeredAbilityImpl {
 
 
     public LeylinePhantomTriggeredAbility() {

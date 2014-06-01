@@ -69,7 +69,7 @@ public class FilthyCur extends CardImpl<FilthyCur> {
     }
 }
 
-class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl<DealtDamageLoseLifeTriggeredAbility> {
+class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl {
 
     public DealtDamageLoseLifeTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);

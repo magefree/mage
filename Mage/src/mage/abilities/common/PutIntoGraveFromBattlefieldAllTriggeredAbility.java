@@ -42,7 +42,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl<PutIntoGraveFromBattlefieldAllTriggeredAbility> {
+public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private FilterPermanent filter;
     private boolean setTargetPointer;

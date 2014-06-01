@@ -53,7 +53,7 @@ public class AkkiLavarunner extends CardImpl<AkkiLavarunner> {
     }
 }
 
-class AkkiLavarunnerAbility extends TriggeredAbilityImpl<AkkiLavarunnerAbility> {
+class AkkiLavarunnerAbility extends TriggeredAbilityImpl {
 
     public AkkiLavarunnerAbility() {
         super(Zone.BATTLEFIELD, new FlipSourceEffect(new TokTokVolcanoBorn()));

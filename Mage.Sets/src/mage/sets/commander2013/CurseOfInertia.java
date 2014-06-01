@@ -84,7 +84,7 @@ public class CurseOfInertia extends CardImpl<CurseOfInertia> {
     }
 }
 
-class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl<CurseOfInertiaTriggeredAbility> {
+class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfInertiaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfInertiaTapOrUntapTargetEffect(), false);

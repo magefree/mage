@@ -71,7 +71,7 @@ public class BladeOfTheBloodchief extends CardImpl<BladeOfTheBloodchief> {
     }
 }
 
-class BladeOfTheBloodChiefTriggeredAbility extends TriggeredAbilityImpl<BladeOfTheBloodChiefTriggeredAbility> {
+class BladeOfTheBloodChiefTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final String text = "Whenever a creature dies, put a +1/+1 counter on equipped "
             + "creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.";

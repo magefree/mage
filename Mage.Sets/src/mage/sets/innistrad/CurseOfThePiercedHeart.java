@@ -82,7 +82,7 @@ public class CurseOfThePiercedHeart extends CardImpl<CurseOfThePiercedHeart> {
     }
 }
 
-class CurseOfThePiercedHeartAbility extends TriggeredAbilityImpl<CurseOfThePiercedHeartAbility> {
+class CurseOfThePiercedHeartAbility extends TriggeredAbilityImpl {
 
     public CurseOfThePiercedHeartAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));

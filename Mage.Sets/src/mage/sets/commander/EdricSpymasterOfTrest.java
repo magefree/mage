@@ -73,7 +73,7 @@ public class EdricSpymasterOfTrest extends CardImpl<EdricSpymasterOfTrest> {
     }
 }
 
-class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl<EdricSpymasterOfTrestTriggeredAbility> {
+class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl {
 
     public EdricSpymasterOfTrestTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), true);

@@ -71,7 +71,7 @@ public class TideOfWar extends CardImpl<TideOfWar> {
     }
 }
 
-class BlocksTriggeredAbility extends TriggeredAbilityImpl<BlocksTriggeredAbility> {
+class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
     public BlocksTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

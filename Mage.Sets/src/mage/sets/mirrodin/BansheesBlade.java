@@ -76,7 +76,7 @@ public class BansheesBlade extends CardImpl<BansheesBlade> {
     }
 }
 
-class BansheesBladeAbility extends TriggeredAbilityImpl<BansheesBladeAbility> {
+class BansheesBladeAbility extends TriggeredAbilityImpl {
 
     public BansheesBladeAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)));

@@ -98,7 +98,7 @@ public class GodoBanditWarlord extends CardImpl<GodoBanditWarlord> {
     }
 }
 
-class GodoBanditWarlordAttacksTriggeredAbility extends TriggeredAbilityImpl<GodoBanditWarlordAttacksTriggeredAbility> {
+class GodoBanditWarlordAttacksTriggeredAbility extends TriggeredAbilityImpl {
 
     public GodoBanditWarlordAttacksTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

@@ -160,7 +160,7 @@ class FuryOfTheHordeAddPhasesEffect extends OneShotEffect<FuryOfTheHordeAddPhase
 
 }
 
-class DelayedAddMainPhaseAbility extends DelayedTriggeredAbility<DelayedAddMainPhaseAbility> {
+class DelayedAddMainPhaseAbility extends DelayedTriggeredAbility {
 
     private UUID connectedTurnMod;
     private boolean enabled;

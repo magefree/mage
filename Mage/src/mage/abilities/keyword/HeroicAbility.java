@@ -45,7 +45,7 @@ import mage.target.Target;
  * @author LevelX2
  */
 
-public class HeroicAbility extends TriggeredAbilityImpl<HeroicAbility> {
+public class HeroicAbility extends TriggeredAbilityImpl {
 
     public HeroicAbility(Effect effect) {
         this(effect, false);

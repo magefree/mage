@@ -21,7 +21,7 @@ import mage.game.Game;
  *
  * @author LevelX
  */
-public class ConditionalActivatedAbility extends ActivatedAbilityImpl<ConditionalActivatedAbility> {
+public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     private Condition condition;
     private String ruleText = null;

@@ -122,7 +122,7 @@ class SlumberingDragonEffect extends RestrictionEffect<SlumberingDragonEffect> {
     }
 }
 
-class SlumberingDragonTriggeredAbility extends TriggeredAbilityImpl<SlumberingDragonTriggeredAbility> {
+class SlumberingDragonTriggeredAbility extends TriggeredAbilityImpl {
 
     public SlumberingDragonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);

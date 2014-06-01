@@ -62,7 +62,7 @@ public class HowlingMine extends CardImpl<HowlingMine> {
 
 }
 
-class HowlingMineAbility extends TriggeredAbilityImpl<HowlingMineAbility> {
+class HowlingMineAbility extends TriggeredAbilityImpl {
 
     public HowlingMineAbility() {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));

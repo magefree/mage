@@ -81,7 +81,7 @@ public class DemigodOfRevenge extends CardImpl<DemigodOfRevenge> {
     }
 }
 
-class DemigodOfRevengeTriggeredAbility extends TriggeredAbilityImpl<DemigodOfRevengeTriggeredAbility> {
+class DemigodOfRevengeTriggeredAbility extends TriggeredAbilityImpl {
 
     public DemigodOfRevengeTriggeredAbility() {
         super(Zone.STACK, new DemigodOfRevengeReturnEffect(), false);

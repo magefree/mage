@@ -78,7 +78,7 @@ public class NecropolisRegent extends CardImpl<NecropolisRegent> {
     }
 }
 
-class NecropolisRegentTriggeredAbility extends TriggeredAbilityImpl<NecropolisRegentTriggeredAbility> {
+class NecropolisRegentTriggeredAbility extends TriggeredAbilityImpl {
 
     public NecropolisRegentTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), false);

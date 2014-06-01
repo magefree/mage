@@ -80,7 +80,7 @@ public class BlazeCommando extends CardImpl<BlazeCommando> {
     }
 
 }
-class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl<BlazeCommandoTriggeredAbility> {
+class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
 
     private List<UUID> handledStackObjects = new ArrayList<UUID>();
 

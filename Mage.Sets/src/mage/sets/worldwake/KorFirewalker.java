@@ -81,7 +81,7 @@ public class KorFirewalker extends CardImpl<KorFirewalker> {
 
 }
 
-class KorFirewalkerAbility extends TriggeredAbilityImpl<KorFirewalkerAbility> {
+class KorFirewalkerAbility extends TriggeredAbilityImpl {
 
     public KorFirewalkerAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);

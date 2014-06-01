@@ -65,7 +65,7 @@ public class BattleStrain extends CardImpl<BattleStrain> {
     }
 }
 
-class BattleStrainTriggeredAbility extends TriggeredAbilityImpl<BattleStrainTriggeredAbility> {
+class BattleStrainTriggeredAbility extends TriggeredAbilityImpl {
 
     public BattleStrainTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));

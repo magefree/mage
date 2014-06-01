@@ -73,7 +73,7 @@ public class GuardianOfTheAges extends CardImpl<GuardianOfTheAges>{
     }
 }
 
-class GuardianOfTheAgesTriggerAbility extends TriggeredAbilityImpl<GuardianOfTheAgesTriggerAbility> {
+class GuardianOfTheAgesTriggerAbility extends TriggeredAbilityImpl {
     
     private static final FilterCard filter = new FilterCard("creature");
     static{

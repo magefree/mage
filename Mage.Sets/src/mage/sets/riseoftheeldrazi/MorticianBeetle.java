@@ -72,7 +72,7 @@ public class MorticianBeetle extends CardImpl<MorticianBeetle> {
     }
 }
 
-class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl<PlayerSacrificesCreatureTriggeredAbility> {
+class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     public PlayerSacrificesCreatureTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

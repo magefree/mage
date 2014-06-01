@@ -78,7 +78,7 @@ public class ShriekingAffliction extends CardImpl<ShriekingAffliction> {
     }
 }
 
-class ShriekingAfflictionTriggeredAbility extends TriggeredAbilityImpl<ShriekingAfflictionTriggeredAbility> {
+class ShriekingAfflictionTriggeredAbility extends TriggeredAbilityImpl {
 
     public ShriekingAfflictionTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);

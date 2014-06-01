@@ -70,7 +70,7 @@ public class SignalPest extends CardImpl<SignalPest> {
     }
 }
 
-class SignalPestAbility extends EvasionAbility<SignalPestAbility> {
+class SignalPestAbility extends EvasionAbility {
 
     private static SignalPestAbility instance;
 

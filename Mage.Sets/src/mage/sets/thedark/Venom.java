@@ -79,7 +79,7 @@ public class Venom extends CardImpl<Venom> {
     }
 }
 
-class VenomTriggeredAbility extends TriggeredAbilityImpl<VenomTriggeredAbility> {
+class VenomTriggeredAbility extends TriggeredAbilityImpl {
 
     VenomTriggeredAbility() {
         super(Zone.BATTLEFIELD, new VenomEffect());

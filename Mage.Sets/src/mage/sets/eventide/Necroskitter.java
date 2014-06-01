@@ -77,7 +77,7 @@ public class Necroskitter extends CardImpl<Necroskitter> {
     }
 }
 
-class NecroskitterTriggeredAbility extends TriggeredAbilityImpl<NecroskitterTriggeredAbility> {
+class NecroskitterTriggeredAbility extends TriggeredAbilityImpl {
 
     public NecroskitterTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnToBattlefieldUnderYourControlTargetEffect());

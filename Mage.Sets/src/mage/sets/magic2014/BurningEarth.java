@@ -65,7 +65,7 @@ public class BurningEarth extends CardImpl<BurningEarth> {
     }
 }
 
-class BurningEarthTriggeredAbility extends TriggeredAbilityImpl<BurningEarthTriggeredAbility> {
+class BurningEarthTriggeredAbility extends TriggeredAbilityImpl {
 
     public BurningEarthTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));

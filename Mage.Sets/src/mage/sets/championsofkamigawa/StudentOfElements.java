@@ -77,7 +77,7 @@ public class StudentOfElements extends CardImpl<StudentOfElements> {
     }
 }
 
-class StudentOfElementsHasFlyingAbility extends StateTriggeredAbility<StudentOfElementsHasFlyingAbility> {
+class StudentOfElementsHasFlyingAbility extends StateTriggeredAbility {
 
     public StudentOfElementsHasFlyingAbility() {
         super(Zone.BATTLEFIELD, new FlipSourceEffect(new TobitaMasterOfWinds()));

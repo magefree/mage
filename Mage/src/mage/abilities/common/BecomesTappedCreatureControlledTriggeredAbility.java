@@ -16,7 +16,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Jeff
  */
-public class BecomesTappedCreatureControlledTriggeredAbility extends TriggeredAbilityImpl<BecomesTappedCreatureControlledTriggeredAbility>{
+public class BecomesTappedCreatureControlledTriggeredAbility extends TriggeredAbilityImpl{
     
     public BecomesTappedCreatureControlledTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

@@ -11,7 +11,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko, loki
  */
-public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilityImpl<PutIntoGraveFromBattlefieldTriggeredAbility> {
+public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect) {
         this(effect, false);

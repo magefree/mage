@@ -89,7 +89,7 @@ public class AureliaTheWarleader extends CardImpl<AureliaTheWarleader> {
     }
 }
 
-class AureliaAttacksTriggeredAbility extends TriggeredAbilityImpl<AureliaAttacksTriggeredAbility> {
+class AureliaAttacksTriggeredAbility extends TriggeredAbilityImpl {
 
     protected String text;
 

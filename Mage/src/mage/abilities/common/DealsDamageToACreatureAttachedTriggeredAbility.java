@@ -42,7 +42,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX
  */
-public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbilityImpl<DealsDamageToACreatureAttachedTriggeredAbility> {
+public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean combatOnly;
     private boolean setTargetPointer;

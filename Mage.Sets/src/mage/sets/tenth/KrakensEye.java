@@ -63,7 +63,7 @@ public class KrakensEye extends CardImpl<KrakensEye> {
 
 }
 
-class KrakensEyeAbility extends TriggeredAbilityImpl<KrakensEyeAbility> {
+class KrakensEyeAbility extends TriggeredAbilityImpl {
 
     public KrakensEyeAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);

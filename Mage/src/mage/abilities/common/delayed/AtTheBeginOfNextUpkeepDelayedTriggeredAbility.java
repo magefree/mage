@@ -38,7 +38,7 @@ import mage.game.events.GameEvent;
  * @author LevelX2
  */
 
-public class AtTheBeginOfNextUpkeepDelayedTriggeredAbility extends DelayedTriggeredAbility<AtTheBeginOfNextUpkeepDelayedTriggeredAbility> {
+public class AtTheBeginOfNextUpkeepDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public AtTheBeginOfNextUpkeepDelayedTriggeredAbility(Effect effect) {
         this(effect, Duration.Custom);

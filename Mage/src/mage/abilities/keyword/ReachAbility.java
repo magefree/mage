@@ -38,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReachAbility extends StaticAbility<ReachAbility> implements MageSingleton {
+public class ReachAbility extends StaticAbility implements MageSingleton {
 
     private static final ReachAbility fINSTANCE =  new ReachAbility();
 

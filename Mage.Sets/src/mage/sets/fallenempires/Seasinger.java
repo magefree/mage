@@ -106,7 +106,7 @@ public class Seasinger extends CardImpl<Seasinger> {
     }
 }
 
-class SeasingerTriggeredAbility extends StateTriggeredAbility<SeasingerTriggeredAbility> {
+class SeasingerTriggeredAbility extends StateTriggeredAbility {
 
     public SeasingerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

@@ -69,7 +69,7 @@ public class BanefulOmen extends CardImpl<BanefulOmen> {
         return new BanefulOmen(this);
     }
 
-    class BanefulOmenTriggeredAbility extends TriggeredAbilityImpl<BanefulOmenTriggeredAbility> {
+    class BanefulOmenTriggeredAbility extends TriggeredAbilityImpl {
 
         public BanefulOmenTriggeredAbility() {
             super(Zone.BATTLEFIELD, new BanefulOmenEffect(), true);

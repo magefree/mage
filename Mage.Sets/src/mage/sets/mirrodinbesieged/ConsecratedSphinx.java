@@ -69,7 +69,7 @@ public class ConsecratedSphinx extends CardImpl<ConsecratedSphinx> {
 
 }
 
-class ConsecratedSphinxTriggeredAbility extends TriggeredAbilityImpl<ConsecratedSphinxTriggeredAbility> {
+class ConsecratedSphinxTriggeredAbility extends TriggeredAbilityImpl {
     ConsecratedSphinxTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), true);
     }

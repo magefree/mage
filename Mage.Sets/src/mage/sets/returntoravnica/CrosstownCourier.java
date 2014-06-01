@@ -71,7 +71,7 @@ public class CrosstownCourier extends CardImpl<CrosstownCourier> {
         return new CrosstownCourier(this);
     }
 
-    class CrosstownCourierTriggeredAbility extends TriggeredAbilityImpl<CrosstownCourierTriggeredAbility> {
+    class CrosstownCourierTriggeredAbility extends TriggeredAbilityImpl {
 
         public CrosstownCourierTriggeredAbility() {
             super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(0), false);

@@ -71,7 +71,7 @@ public class IncursionSpecialist extends CardImpl<IncursionSpecialist> {
     }
 }
 
-class IncursionTriggeredAbility extends TriggeredAbilityImpl<IncursionTriggeredAbility> {
+class IncursionTriggeredAbility extends TriggeredAbilityImpl {
 
     public IncursionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn));

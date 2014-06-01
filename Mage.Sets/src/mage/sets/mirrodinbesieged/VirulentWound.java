@@ -102,7 +102,7 @@ class VirulentWoundEffect extends OneShotEffect<VirulentWoundEffect> {
     }
 }
 
-class VirulentWoundDelayedTriggeredAbility extends DelayedTriggeredAbility<VirulentWoundDelayedTriggeredAbility> {
+class VirulentWoundDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID target;
 

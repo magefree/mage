@@ -68,7 +68,7 @@ public class CircleOfFlame extends CardImpl<CircleOfFlame> {
     }
 }
 
-class CircleOfFlameTriggeredAbility extends TriggeredAbilityImpl<CircleOfFlameTriggeredAbility> {
+class CircleOfFlameTriggeredAbility extends TriggeredAbilityImpl {
 
     public CircleOfFlameTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));

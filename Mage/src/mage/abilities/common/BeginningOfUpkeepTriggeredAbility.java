@@ -42,7 +42,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author Loki
  */
 
-public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<BeginningOfUpkeepTriggeredAbility> {
+public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     private TargetController targetController;
     private boolean setTargetPointer;
 

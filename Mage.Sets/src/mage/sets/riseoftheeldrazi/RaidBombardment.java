@@ -66,7 +66,7 @@ public class RaidBombardment extends CardImpl<RaidBombardment> {
     }
 }
 
-class RaidBombardmentTriggeredAbility extends TriggeredAbilityImpl<RaidBombardmentTriggeredAbility> {
+class RaidBombardmentTriggeredAbility extends TriggeredAbilityImpl {
 
     public RaidBombardmentTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));

@@ -15,7 +15,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author jeffwadsworth
  */
-public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl<DiscardsACardOpponentTriggeredAbility> {
+public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
     public DiscardsACardOpponentTriggeredAbility(Effect effect, Boolean isOptional) {
         super(Zone.BATTLEFIELD, effect, isOptional);

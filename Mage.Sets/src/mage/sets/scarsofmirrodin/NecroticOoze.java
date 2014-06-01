@@ -74,7 +74,7 @@ public class NecroticOoze extends CardImpl<NecroticOoze> {
 
 }
 
-class NecroticOozeAbility extends StaticAbility<NecroticOozeAbility> {
+class NecroticOozeAbility extends StaticAbility {
 
     public NecroticOozeAbility() {
         super(Zone.BATTLEFIELD, new NecroticOozeEffect());

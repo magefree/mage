@@ -73,7 +73,7 @@ public class MichikoKondaTruthSeeker extends CardImpl<MichikoKondaTruthSeeker> {
     }
 }
 
-class MichikoKondaTruthSeekerAbility extends TriggeredAbilityImpl<MichikoKondaTruthSeekerAbility> {
+class MichikoKondaTruthSeekerAbility extends TriggeredAbilityImpl {
 
     public MichikoKondaTruthSeekerAbility() {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 1, "that player"), false);

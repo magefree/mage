@@ -71,7 +71,7 @@ public class WarstormSurge extends CardImpl<WarstormSurge> {
     }
 }
 
-class WarstormSurgeTriggeredAbility extends TriggeredAbilityImpl<WarstormSurgeTriggeredAbility> {
+class WarstormSurgeTriggeredAbility extends TriggeredAbilityImpl {
 
     public WarstormSurgeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new WarstormSurgeEffect(), false);

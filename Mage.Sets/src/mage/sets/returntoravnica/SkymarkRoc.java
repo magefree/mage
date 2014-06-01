@@ -79,7 +79,7 @@ public class SkymarkRoc extends CardImpl<SkymarkRoc> {
     }
 }
 
-class SkymarkRocAbility extends TriggeredAbilityImpl<SkymarkRocAbility> {
+class SkymarkRocAbility extends TriggeredAbilityImpl {
 
     public SkymarkRocAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), true);

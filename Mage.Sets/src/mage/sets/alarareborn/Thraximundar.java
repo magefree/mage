@@ -86,7 +86,7 @@ public class Thraximundar extends CardImpl<Thraximundar> {
     }
 }
 
-class ThraximundarTriggeredAbility extends TriggeredAbilityImpl<ThraximundarTriggeredAbility> {
+class ThraximundarTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterControlledPermanent filter;
 
@@ -125,7 +125,7 @@ class ThraximundarTriggeredAbility extends TriggeredAbilityImpl<ThraximundarTrig
     }
 }
 
-class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl<PlayerSacrificesCreatureTriggeredAbility> {
+class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     public PlayerSacrificesCreatureTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

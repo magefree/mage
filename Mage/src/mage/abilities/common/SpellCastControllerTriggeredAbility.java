@@ -40,7 +40,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl<SpellCastControllerTriggeredAbility> {
+public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterSpell spellCard = new FilterSpell("a spell");
     protected FilterSpell filter;

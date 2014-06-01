@@ -68,7 +68,7 @@ public class FarsightMask extends CardImpl<FarsightMask> {
     }
 }
 
-class FarsightMaskTriggeredAbility extends TriggeredAbilityImpl<FarsightMaskTriggeredAbility> {
+class FarsightMaskTriggeredAbility extends TriggeredAbilityImpl {
 
     public FarsightMaskTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new FarsightMaskCondition(), ""), false);

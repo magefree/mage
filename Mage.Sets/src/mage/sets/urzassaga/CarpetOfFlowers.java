@@ -77,7 +77,7 @@ public class CarpetOfFlowers extends CardImpl<CarpetOfFlowers> {
 
 
 
-class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl<CarpetOfFlowersTriggeredAbility> {
+class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
 
     public CarpetOfFlowersTriggeredAbility() {

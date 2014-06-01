@@ -68,7 +68,7 @@ public class NestedGhoul extends CardImpl<NestedGhoul> {
 
 }
 
-class NestedGhoulTriggeredAbility extends TriggeredAbilityImpl<NestedGhoulTriggeredAbility> {
+class NestedGhoulTriggeredAbility extends TriggeredAbilityImpl {
     NestedGhoulTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken("MBS")));
     }

@@ -65,7 +65,7 @@ public class DissipationField extends CardImpl<DissipationField> {
     }
 }
 
-class DissipationFieldAbility extends TriggeredAbilityImpl<DissipationFieldAbility> {
+class DissipationFieldAbility extends TriggeredAbilityImpl {
 
     public DissipationFieldAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());

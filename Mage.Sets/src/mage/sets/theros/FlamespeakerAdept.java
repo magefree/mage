@@ -71,7 +71,7 @@ public class FlamespeakerAdept extends CardImpl<FlamespeakerAdept> {
         return new FlamespeakerAdept(this);
     }
 }
-class ScryTriggeredAbility extends TriggeredAbilityImpl<ScryTriggeredAbility> {
+class ScryTriggeredAbility extends TriggeredAbilityImpl {
 
     public ScryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(2,0, Duration.EndOfTurn), false);

@@ -107,7 +107,7 @@ class WorldAtWarEffect extends OneShotEffect<WorldAtWarEffect> {
 
 }
 
-class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility<UntapDelayedTriggeredAbility> {
+class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID connectedTurnMod;
     private boolean enabled;

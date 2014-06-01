@@ -63,7 +63,7 @@ public class WurmsTooth extends CardImpl<WurmsTooth> {
 
 }
 
-class WurmsToothAbility extends TriggeredAbilityImpl<WurmsToothAbility> {
+class WurmsToothAbility extends TriggeredAbilityImpl {
 
     public WurmsToothAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);

@@ -76,7 +76,7 @@ public class ExuberantFirestoker extends CardImpl<ExuberantFirestoker> {
     }
 }
 
-class ExuberantFirestokerTriggeredAbility extends TriggeredAbilityImpl<ExuberantFirestokerTriggeredAbility> {
+class ExuberantFirestokerTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 

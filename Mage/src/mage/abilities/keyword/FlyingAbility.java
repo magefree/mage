@@ -42,7 +42,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FlyingAbility extends EvasionAbility<FlyingAbility> implements MageSingleton {
+public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
     private static final FlyingAbility fINSTANCE =  new FlyingAbility();
 

@@ -70,7 +70,7 @@ public class GladeGnarr extends CardImpl<GladeGnarr> {
     }
 }
 
-class GladeGnarrTriggeredAbility extends TriggeredAbilityImpl<GladeGnarrTriggeredAbility> {
+class GladeGnarrTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCard filter = new FilterCard("a black spell");
 

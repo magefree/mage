@@ -76,7 +76,7 @@ public class ViashinoSandstalker extends CardImpl<ViashinoSandstalker> {
     }
 }
 
-class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl<BeginningOfEndStepTriggeredAbility> {
+class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
 
     public BeginningOfEndStepTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

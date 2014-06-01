@@ -159,7 +159,7 @@ class KarnLiberatedEffect extends OneShotEffect<KarnLiberatedEffect> {
 
 }
 
-class KarnLiberatedDelayedTriggeredAbility extends DelayedTriggeredAbility<KarnLiberatedDelayedTriggeredAbility> {
+class KarnLiberatedDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public KarnLiberatedDelayedTriggeredAbility(UUID exileId) {
         super(new KarnLiberatedDelayedEffect(exileId));
