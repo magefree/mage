@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class FarAway extends SplitCard<FarAway> {
+public class FarAway extends SplitCard {
 
     public FarAway(UUID ownerId) {
         super(ownerId, 127, "Far", "Away", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}", "{2}{B}", true);

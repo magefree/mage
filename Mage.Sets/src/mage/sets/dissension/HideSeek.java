@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class HideSeek extends SplitCard<HideSeek> {
+public class HideSeek extends SplitCard {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

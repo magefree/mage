@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GiveTake extends SplitCard<GiveTake> {
+public class GiveTake extends SplitCard {
 
     public GiveTake(UUID ownerId) {
         super(ownerId, 129, "Give", "Take", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}","{2}{U}", true);

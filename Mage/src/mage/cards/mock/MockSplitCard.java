@@ -12,7 +12,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class MockSplitCard extends SplitCard<MockSplitCard> {
+public class MockSplitCard extends SplitCard {
 
     public MockSplitCard(CardInfo card) {
         super(null,

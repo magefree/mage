@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  */
 
 
-public class ToilTrouble extends SplitCard<ToilTrouble> {
+public class ToilTrouble extends SplitCard {
 
     public ToilTrouble(UUID ownerId) {
         super(ownerId, 133, "Toil", "Trouble", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}", "{2}{R}",true);

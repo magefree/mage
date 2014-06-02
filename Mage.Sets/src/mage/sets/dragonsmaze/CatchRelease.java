@@ -64,7 +64,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 
 
-public class CatchRelease extends SplitCard<CatchRelease> {
+public class CatchRelease extends SplitCard {
 
     public CatchRelease(UUID ownerId) {
         super(ownerId, 125, "Catch", "Release", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{R}", "{4}{R}{W}",true);

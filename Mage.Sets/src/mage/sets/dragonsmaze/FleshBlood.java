@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class FleshBlood extends SplitCard<FleshBlood> {
+public class FleshBlood extends SplitCard {
 
     public FleshBlood(UUID ownerId) {
         super(ownerId, 128, "Flesh", "Blood", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{G}", "{R}{G}",true);

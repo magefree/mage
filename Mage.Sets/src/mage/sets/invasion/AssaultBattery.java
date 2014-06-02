@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 
 
-public class AssaultBattery extends SplitCard<AssaultBattery> {
+public class AssaultBattery extends SplitCard {
 
     public AssaultBattery(UUID ownerId) {
         super(ownerId, 295, "Assault", "Battery", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}", "{3}{G}", false);

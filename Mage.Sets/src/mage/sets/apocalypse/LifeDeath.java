@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author LevelX2
  */
 
-public class LifeDeath extends SplitCard<LifeDeath> {
+public class LifeDeath extends SplitCard {
 
     public LifeDeath(UUID ownerId) {
         super(ownerId, 130, "Life", "Death", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}", "{1}{B}", false);

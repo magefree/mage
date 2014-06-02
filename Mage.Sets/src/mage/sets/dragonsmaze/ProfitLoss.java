@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 
 
-public class ProfitLoss extends SplitCard<ProfitLoss> {
+public class ProfitLoss extends SplitCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
     static {

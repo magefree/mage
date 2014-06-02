@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class ProtectServe extends SplitCard<ProtectServe> {
+public class ProtectServe extends SplitCard {
 
     public ProtectServe(UUID ownerId) {
         super(ownerId, 131, "Protect", "Serve", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}", "{1}{U}", true);

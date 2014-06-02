@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  */
 
 
-public class BeckCall extends SplitCard<BeckCall> {
+public class BeckCall extends SplitCard {
 
     public BeckCall(UUID ownerId) {
         super(ownerId, 123, "Beck", "Call", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{U}", "{4}{W}{U}", true);

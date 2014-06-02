@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 
-public class NightDay extends SplitCard<NightDay> {
+public class NightDay extends SplitCard {
 
     public NightDay(UUID ownerId) {
         super(ownerId, 131, "Night", "Day", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}", "{2}{W}", false);

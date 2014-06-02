@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 
 
-public class DownDirty extends SplitCard<DownDirty> {
+public class DownDirty extends SplitCard {
 
     public DownDirty(UUID ownerId) {
         super(ownerId, 126, "Down", "Dirty", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}", "{2}{G}", true);

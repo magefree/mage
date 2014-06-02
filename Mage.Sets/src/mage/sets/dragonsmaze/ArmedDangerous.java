@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class ArmedDangerous extends SplitCard<ArmedDangerous> {
+public class ArmedDangerous extends SplitCard {
 
     public ArmedDangerous(UUID ownerId) {
         super(ownerId, 122, "Armed", "Dangerous", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}", "{3}{G}", true);

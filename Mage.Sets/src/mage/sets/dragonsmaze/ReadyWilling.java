@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ReadyWilling extends SplitCard<ReadyWilling> {
+public class ReadyWilling extends SplitCard {
 
     public ReadyWilling(UUID ownerId) {
         super(ownerId, 132, "Ready", "Willing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{W}", "{1}{W}{B}", true);

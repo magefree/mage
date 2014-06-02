@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 
 
-public class BreakingEntering extends SplitCard<BreakingEntering> {
+public class BreakingEntering extends SplitCard {
 
     public BreakingEntering(UUID ownerId) {
         super(ownerId, 124, "Breaking", "Entering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{B}", "{4}{B}{R}", true);

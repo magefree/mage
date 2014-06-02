@@ -41,7 +41,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class WearTear extends SplitCard<WearTear> {
+public class WearTear extends SplitCard {
 
     public WearTear(UUID ownerId) {
         super(ownerId, 135, "Wear", "Tear", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}", "{W}", true);

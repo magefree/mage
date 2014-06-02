@@ -45,7 +45,7 @@ import mage.target.common.TargetSpellOrPermanent;
  * @author LevelX2
  */
 
-public class IllusionReality extends SplitCard<IllusionReality> {
+public class IllusionReality extends SplitCard {
 
     public IllusionReality(UUID ownerId) {
         super(ownerId, 129, "Illusion", "Reality", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}", "{2}{G}", false);

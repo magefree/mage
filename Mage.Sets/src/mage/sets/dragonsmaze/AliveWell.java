@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AliveWell extends SplitCard<AliveWell> {
+public class AliveWell extends SplitCard {
 
     public AliveWell(UUID ownerId) {
         super(ownerId, 121, "Alive", "Well", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}","{W}", true);

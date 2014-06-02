@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingCreature;
  */
 
 
-public class OrderChaos extends SplitCard<OrderChaos> {
+public class OrderChaos extends SplitCard {
 
     public OrderChaos(UUID ownerId) {
         super(ownerId, 132, "Order", "Chaos", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}", "{2}{R}", false);

@@ -52,7 +52,7 @@ import mage.target.TargetSpell;
  */
 
 
-public class OddsEnds extends SplitCard<OddsEnds> {
+public class OddsEnds extends SplitCard {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
     static {

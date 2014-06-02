@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 
 
-public class FireIce extends SplitCard<FireIce> {
+public class FireIce extends SplitCard {
 
     public FireIce(UUID ownerId) {
         super(ownerId, 128, "Fire", "Ice", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}", "{1}{U}", false);
