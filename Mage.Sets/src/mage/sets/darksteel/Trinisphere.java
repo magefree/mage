@@ -68,7 +68,7 @@ public class Trinisphere extends CardImpl {
     }
 }
 
-class TrinisphereEffect extends CostModificationEffectImpl<TrinisphereEffect> {
+class TrinisphereEffect extends CostModificationEffectImpl {
 
     public TrinisphereEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, CostModificationType.SET_COST);

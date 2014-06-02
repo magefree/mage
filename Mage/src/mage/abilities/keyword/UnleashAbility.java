@@ -127,7 +127,7 @@ class UnleashReplacementEffect extends ReplacementEffectImpl {
  
 }
  
-class UnleashRestrictionEffect extends RestrictionEffect<UnleashRestrictionEffect> {
+class UnleashRestrictionEffect extends RestrictionEffect {
  
     public UnleashRestrictionEffect() {
         super(Duration.WhileOnBattlefield);

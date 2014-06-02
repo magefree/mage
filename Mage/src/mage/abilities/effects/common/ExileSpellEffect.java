@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileSpellEffect extends PostResolveEffect<ExileSpellEffect> implements MageSingleton {
+public class ExileSpellEffect extends PostResolveEffect implements MageSingleton {
 
     private static final ExileSpellEffect fINSTANCE =  new ExileSpellEffect();
 

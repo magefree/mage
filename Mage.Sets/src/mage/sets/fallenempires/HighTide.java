@@ -113,7 +113,7 @@ class HighTideTriggeredAbility extends DelayedTriggeredManaAbility<HighTideTrigg
     }
 }
 
-class AddBlueToTargetEffect extends ManaEffect<AddBlueToTargetEffect> {
+class AddBlueToTargetEffect extends ManaEffect {
     
 
     public AddBlueToTargetEffect() {

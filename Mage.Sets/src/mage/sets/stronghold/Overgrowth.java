@@ -114,7 +114,7 @@ class OvergrowthTriggeredAbility extends TriggeredManaAbility<OvergrowthTriggere
     }
 }
 
-class OvergrowthEffect extends ManaEffect<OvergrowthEffect> {
+class OvergrowthEffect extends ManaEffect {
 
     public OvergrowthEffect() {
         super();

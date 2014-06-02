@@ -92,7 +92,7 @@ public class KyrenToy extends CardImpl {
         }
 }
 
-    private class KyrenToyManaEffect extends ManaEffect<KyrenToyManaEffect> {
+    private class KyrenToyManaEffect extends ManaEffect {
 
         KyrenToyManaEffect() {
             super();

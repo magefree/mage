@@ -145,7 +145,7 @@ public class SpliceOntoArcaneAbility extends SimpleStaticAbility {
 }
 
 
-class SpliceOntoArcaneEffect extends SpliceCardEffectImpl<SpliceOntoArcaneEffect> {
+class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
 
     public SpliceOntoArcaneEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy);

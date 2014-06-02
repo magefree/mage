@@ -74,7 +74,7 @@ public class GoblinAssault extends CardImpl {
 }
 
 
-class GoblinAssaultEffect extends RequirementEffect<GoblinAssaultEffect> {
+class GoblinAssaultEffect extends RequirementEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
     static {

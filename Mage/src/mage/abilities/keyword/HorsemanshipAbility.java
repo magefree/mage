@@ -69,7 +69,7 @@ public class HorsemanshipAbility extends EvasionAbility implements MageSingleton
 
 }
 
-class Horsemanship extends RestrictionEffect<Horsemanship> implements MageSingleton {
+class Horsemanship extends RestrictionEffect implements MageSingleton {
 
     public Horsemanship() {
         super(Duration.EndOfGame);

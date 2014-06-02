@@ -71,7 +71,7 @@ public class Entomb extends CardImpl {
 }
 
 
-class SearchLibraryPutInGraveyard extends SearchEffect<SearchLibraryPutInGraveyard> {
+class SearchLibraryPutInGraveyard extends SearchEffect {
 
   public SearchLibraryPutInGraveyard() {
         super(new TargetCardInLibrary(new FilterCard()), Outcome.Neutral);

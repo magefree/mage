@@ -81,7 +81,7 @@ public class AxebaneGuardian extends CardImpl {
 }
 
 
-class AxebaneGuardianManaEffect extends ManaEffect<AxebaneGuardianManaEffect> {
+class AxebaneGuardianManaEffect extends ManaEffect {
 
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures with defender you control");

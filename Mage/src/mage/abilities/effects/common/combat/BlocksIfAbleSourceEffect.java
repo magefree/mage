@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class BlocksIfAbleSourceEffect extends RequirementEffect<BlocksIfAbleSourceEffect> {
+public class BlocksIfAbleSourceEffect extends RequirementEffect {
 
     public BlocksIfAbleSourceEffect(Duration duration) {
         super(duration);

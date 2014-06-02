@@ -94,7 +94,7 @@ public class InfiltratorsMagemark extends CardImpl {
     }
 }
 
-class InfiltratorsMagemarkUnblockableAllEffect extends RestrictionEffect<InfiltratorsMagemarkUnblockableAllEffect> {
+class InfiltratorsMagemarkUnblockableAllEffect extends RestrictionEffect {
 
     private FilterPermanent filter;
 

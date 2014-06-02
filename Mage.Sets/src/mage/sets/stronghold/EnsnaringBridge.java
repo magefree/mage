@@ -65,7 +65,7 @@ public class EnsnaringBridge extends CardImpl {
 }
 
 
-class EnsnaringBridgeRestrictionEffect extends RestrictionEffect<EnsnaringBridgeRestrictionEffect> {
+class EnsnaringBridgeRestrictionEffect extends RestrictionEffect {
 
     public EnsnaringBridgeRestrictionEffect() {
         super(Duration.WhileOnBattlefield);

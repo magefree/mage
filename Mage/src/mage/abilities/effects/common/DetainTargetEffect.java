@@ -124,7 +124,7 @@ public class DetainTargetEffect extends OneShotEffect {
     }
 }
  
-class DetainRestrictionEffect extends RestrictionEffect<DetainRestrictionEffect> {
+class DetainRestrictionEffect extends RestrictionEffect {
  
     public DetainRestrictionEffect() {
         super(Duration.Custom);

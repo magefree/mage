@@ -67,7 +67,7 @@ public class TectonicRift extends CardImpl {
     }
 }
 
-class TectonicRiftEffect extends RestrictionEffect<TectonicRiftEffect> {
+class TectonicRiftEffect extends RestrictionEffect {
 
     TectonicRiftEffect() {
         super(Duration.EndOfTurn);

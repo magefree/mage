@@ -79,7 +79,7 @@ public class Terrarion extends CardImpl {
     }
 }
 
-class TerrarionManaEffect extends ManaEffect<TerrarionManaEffect> {
+class TerrarionManaEffect extends ManaEffect {
 
     public TerrarionManaEffect() {
         super();

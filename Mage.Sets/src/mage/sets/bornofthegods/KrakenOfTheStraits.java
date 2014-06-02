@@ -73,7 +73,7 @@ public class KrakenOfTheStraits extends CardImpl {
     }
 }
 
-class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect<CantBeBlockedByCreaturesWithLessPowerEffect> {
+class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands");
     

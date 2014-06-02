@@ -123,7 +123,7 @@ class VorinclexTriggeredAbility1 extends TriggeredManaAbility<VorinclexTriggered
 }
 
 
-class VorinclexEffect extends ManaEffect<VorinclexEffect> {
+class VorinclexEffect extends ManaEffect {
 
     public VorinclexEffect() {
         super();

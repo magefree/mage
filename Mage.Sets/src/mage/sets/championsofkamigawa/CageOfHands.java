@@ -75,7 +75,7 @@ public class CageOfHands extends CardImpl {
     }
 }
 
-class CageOfHandsEffect extends RestrictionEffect<CageOfHandsEffect> {
+class CageOfHandsEffect extends RestrictionEffect {
 
     public CageOfHandsEffect() {
         super(Duration.WhileOnBattlefield);

@@ -82,7 +82,7 @@ public class HellraiserGoblin extends CardImpl {
     }
 }
 
-class AttacksIfAbleAllEffect extends RequirementEffect<AttacksIfAbleAllEffect> {
+class AttacksIfAbleAllEffect extends RequirementEffect {
 
     private FilterControlledCreaturePermanent filter;
 

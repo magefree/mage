@@ -69,7 +69,7 @@ public class IntimidationBolt extends CardImpl {
     }
 }
 
-class IntimidationEffect extends RestrictionEffect<IntimidationEffect> {
+class IntimidationEffect extends RestrictionEffect {
 
     public IntimidationEffect(Duration duration) {
         super(duration);

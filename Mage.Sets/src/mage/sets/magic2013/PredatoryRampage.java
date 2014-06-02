@@ -80,7 +80,7 @@ public class PredatoryRampage extends CardImpl {
     }
 }
 
-class PredatoryRampageEffect extends RequirementEffect<PredatoryRampageEffect> {
+class PredatoryRampageEffect extends RequirementEffect {
 
     public PredatoryRampageEffect(Duration duration) {
         super(duration);

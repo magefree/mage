@@ -83,7 +83,7 @@ public class StoneIdolTrap extends CardImpl {
     }
 }
 
-class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl<StoneIdolTrapCostReductionEffect> {
+class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

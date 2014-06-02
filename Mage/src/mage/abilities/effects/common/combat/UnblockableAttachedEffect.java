@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class UnblockableAttachedEffect extends RestrictionEffect<UnblockableAttachedEffect> {
+public class UnblockableAttachedEffect extends RestrictionEffect {
 
     public UnblockableAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield);

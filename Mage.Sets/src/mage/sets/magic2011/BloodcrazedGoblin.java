@@ -72,7 +72,7 @@ public class BloodcrazedGoblin extends CardImpl {
 
 }
 
-class BloodcrazedGoblinEffect extends RestrictionEffect<BloodcrazedGoblinEffect> {
+class BloodcrazedGoblinEffect extends RestrictionEffect {
 
     public BloodcrazedGoblinEffect() {
         super(Duration.WhileOnBattlefield);

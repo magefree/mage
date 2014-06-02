@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutInPlayEffect> {
+public class SearchLibraryPutInPlayEffect extends SearchEffect {
 
     private boolean tapped;
     private boolean forceShuffle;

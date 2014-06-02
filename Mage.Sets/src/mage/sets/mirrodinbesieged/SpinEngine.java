@@ -72,7 +72,7 @@ public class SpinEngine extends CardImpl {
 
 }
 
-class SpinEngineEffect extends RestrictionEffect<SpinEngineEffect> {
+class SpinEngineEffect extends RestrictionEffect {
 
     public SpinEngineEffect() {
         super(Duration.EndOfTurn);

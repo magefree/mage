@@ -78,7 +78,7 @@ public class CurseOfTheNightlyHunt extends CardImpl {
     }
 }
 
-class CurseOfTheNightlyHuntEffect extends RequirementEffect<CurseOfTheNightlyHuntEffect> {
+class CurseOfTheNightlyHuntEffect extends RequirementEffect {
 
     public CurseOfTheNightlyHuntEffect() {
         super(Duration.WhileOnBattlefield);

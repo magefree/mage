@@ -73,7 +73,7 @@ public class TransmuteArtifact extends CardImpl {
     }
 }
 
-class TransmuteArtifactEffect extends SearchEffect<TransmuteArtifactEffect> {
+class TransmuteArtifactEffect extends SearchEffect {
 
 
     public TransmuteArtifactEffect() {

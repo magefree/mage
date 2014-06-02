@@ -70,7 +70,7 @@ public class Manamorphose extends CardImpl {
     }
 }
 
-class ManamorphoseEffect extends ManaEffect<ManamorphoseEffect> {
+class ManamorphoseEffect extends ManaEffect {
 
     public ManamorphoseEffect() {
         super();

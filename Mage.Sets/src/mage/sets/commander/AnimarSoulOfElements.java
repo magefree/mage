@@ -105,7 +105,7 @@ public class AnimarSoulOfElements extends CardImpl {
     }
 }
 
-class AnimarCostReductionEffect extends CostModificationEffectImpl<AnimarCostReductionEffect> {
+class AnimarCostReductionEffect extends CostModificationEffectImpl {
 
     AnimarCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);

@@ -72,7 +72,7 @@ public class InameDeathAspect extends CardImpl {
     }
 }
 
-class InameDeathAspectEffect extends SearchEffect<InameDeathAspectEffect> {
+class InameDeathAspectEffect extends SearchEffect {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard();
 

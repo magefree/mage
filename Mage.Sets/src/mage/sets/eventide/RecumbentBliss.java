@@ -73,7 +73,7 @@ public class RecumbentBliss extends CardImpl {
     }
 }
 
-class RecumbentBlissEffect extends RestrictionEffect<RecumbentBlissEffect> {
+class RecumbentBlissEffect extends RestrictionEffect {
 
     public RecumbentBlissEffect() {
         super(Duration.WhileOnBattlefield);

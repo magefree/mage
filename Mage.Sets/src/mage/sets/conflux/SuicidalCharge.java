@@ -71,7 +71,7 @@ public class SuicidalCharge extends CardImpl {
     }
 }
 
-class SuicidalChargeEffect extends RequirementEffect<SuicidalChargeEffect> {
+class SuicidalChargeEffect extends RequirementEffect {
 
     public SuicidalChargeEffect() {
         super(Duration.EndOfTurn);

@@ -40,7 +40,7 @@ import mage.util.CardUtil;
  *
  * @author North
  */
-public class UnblockableTargetEffect extends RestrictionEffect<UnblockableTargetEffect> {
+public class UnblockableTargetEffect extends RestrictionEffect {
 
     public UnblockableTargetEffect() {
         super(Duration.EndOfTurn);

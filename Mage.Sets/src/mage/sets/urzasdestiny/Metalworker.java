@@ -77,7 +77,7 @@ public class Metalworker extends CardImpl {
 }
 
 
-class MetalworkerManaEffect extends ManaEffect<MetalworkerManaEffect> {
+class MetalworkerManaEffect extends ManaEffect {
 
     
     private static final FilterCard filter = new FilterArtifactCard();

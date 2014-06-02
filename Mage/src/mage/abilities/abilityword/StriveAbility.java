@@ -71,7 +71,7 @@ public class StriveAbility extends SimpleStaticAbility {
     }
 }
 
-class StriveCostIncreasementEffect extends CostModificationEffectImpl<StriveCostIncreasementEffect> {
+class StriveCostIncreasementEffect extends CostModificationEffectImpl {
 
     private ManaCostsImpl striveCosts = null;
 

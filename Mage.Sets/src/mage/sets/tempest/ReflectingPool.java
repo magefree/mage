@@ -73,7 +73,7 @@ public class ReflectingPool extends CardImpl {
     }
 }
 
-class ReflectingPoolEffect extends ManaEffect<ReflectingPoolEffect> {
+class ReflectingPoolEffect extends ManaEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

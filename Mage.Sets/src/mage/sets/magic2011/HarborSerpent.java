@@ -72,7 +72,7 @@ public class HarborSerpent extends CardImpl {
     }
 }
 
-class HarborSerpentEffect extends RestrictionEffect<HarborSerpentEffect> {
+class HarborSerpentEffect extends RestrictionEffect {
 
     private final FilterLandPermanent filter = new FilterLandPermanent("Island");
 

@@ -77,7 +77,7 @@ public class WarFalcon extends CardImpl {
     }
 }
 
-class WarFalconEffect extends RestrictionEffect<WarFalconEffect> {
+class WarFalconEffect extends RestrictionEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Knight or a Soldier");
     

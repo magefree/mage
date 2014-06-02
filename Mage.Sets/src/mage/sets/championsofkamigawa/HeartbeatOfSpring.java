@@ -109,7 +109,7 @@ class HeartbeatOfSpringAbility extends TriggeredManaAbility<HeartbeatOfSpringAbi
     }
 }
 
-class HeartbeatOfSpringEffect extends ManaEffect<HeartbeatOfSpringEffect> {
+class HeartbeatOfSpringEffect extends ManaEffect {
 
     public HeartbeatOfSpringEffect() {
         super();

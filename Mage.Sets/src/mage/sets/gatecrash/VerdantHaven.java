@@ -120,7 +120,7 @@ class VerdantHavenTriggeredAbility extends TriggeredManaAbility<VerdantHavenTrig
     }
 }
 
-class VerdantHavenManaEffect extends ManaEffect<VerdantHavenManaEffect> {
+class VerdantHavenManaEffect extends ManaEffect {
 
     public VerdantHavenManaEffect() {
         super();

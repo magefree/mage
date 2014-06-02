@@ -37,11 +37,10 @@ import mage.game.Game;
  * called once and only once from the {@link mage.abilities.AbilityImpl#activate(mage.game.Game,
  * boolean) Ability.activate} method before alternative or additional costs are paid.
  *
- * @param <T>
  * @author levelX2
  */
 
-public interface SpliceCardEffect<T extends SpliceCardEffect<T>> extends ContinuousEffect {
+public interface SpliceCardEffect extends ContinuousEffect {
     /**
      * Called by the {@link ContinuousEffects#costModification(Ability abilityToModify, Game game) ContinuousEffects.costModification}
      * method.

@@ -37,7 +37,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class UnblockableSourceEffect extends RestrictionEffect<UnblockableSourceEffect> {
+public class UnblockableSourceEffect extends RestrictionEffect {
 
     public UnblockableSourceEffect() {
         this(Duration.WhileOnBattlefield);

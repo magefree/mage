@@ -161,7 +161,7 @@ class UtopiaSprawlTriggeredAbility extends TriggeredManaAbility<UtopiaSprawlTrig
 }
 
 
-class UtopiaSprawlEffect extends ManaEffect<UtopiaSprawlEffect> {
+class UtopiaSprawlEffect extends ManaEffect {
 
     public UtopiaSprawlEffect() {
         super();

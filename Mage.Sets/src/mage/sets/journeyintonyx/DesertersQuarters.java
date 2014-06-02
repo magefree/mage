@@ -119,7 +119,7 @@ class DesertersQuartersTapTargetEffect extends TapTargetEffect {
     }
 }
 
-class DesertersQuartersRestrictionEffect extends RestrictionEffect<DesertersQuartersRestrictionEffect> {
+class DesertersQuartersRestrictionEffect extends RestrictionEffect {
 
     public DesertersQuartersRestrictionEffect() {
         super(Duration.WhileOnBattlefield);

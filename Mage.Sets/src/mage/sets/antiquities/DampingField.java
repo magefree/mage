@@ -67,7 +67,7 @@ public class DampingField extends CardImpl {
     }
 }
 
-class DampingFieldEffect extends RestrictionUntapNotMoreThanEffect<DampingFieldEffect> {
+class DampingFieldEffect extends RestrictionUntapNotMoreThanEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledArtifactPermanent("an artifact");
 

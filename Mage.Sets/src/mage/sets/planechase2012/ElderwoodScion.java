@@ -85,7 +85,7 @@ public class ElderwoodScion extends CardImpl {
     }
 }
 
-class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl<ElderwoodScionCostReductionEffect> {
+class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl {
 
     private static final String effectText = "Spells you cast that target {this} cost {2} less to cast";
 
@@ -128,7 +128,7 @@ class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl<Elder
 
 }
 
-class ElderwoodScionCostReductionEffect2 extends CostModificationEffectImpl<ElderwoodScionCostReductionEffect2> {
+class ElderwoodScionCostReductionEffect2 extends CostModificationEffectImpl {
 
     private static final String effectText = "Spells your opponents cast that target Elderwood Scion cost {2} more to cast";
 

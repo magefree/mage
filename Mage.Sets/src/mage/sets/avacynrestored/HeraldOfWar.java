@@ -80,7 +80,7 @@ public class HeraldOfWar extends CardImpl {
     }
 }
 
-class HeraldOfWarCostReductionEffect extends CostModificationEffectImpl<HeraldOfWarCostReductionEffect> {
+class HeraldOfWarCostReductionEffect extends CostModificationEffectImpl {
 
     HeraldOfWarCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);

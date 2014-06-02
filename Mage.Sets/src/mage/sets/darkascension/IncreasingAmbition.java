@@ -76,7 +76,7 @@ public class IncreasingAmbition extends CardImpl {
     }
 }
 
-class IncreasingAmbitionEffect extends SearchEffect<IncreasingAmbitionEffect> {
+class IncreasingAmbitionEffect extends SearchEffect {
 
     public IncreasingAmbitionEffect() {
         super(new TargetCardInLibrary(), Outcome.DrawCard);

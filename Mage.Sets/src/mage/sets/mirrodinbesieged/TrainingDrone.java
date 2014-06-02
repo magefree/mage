@@ -69,7 +69,7 @@ public class TrainingDrone extends CardImpl {
     }
 }
 
-class TrainingDroneEffect extends RestrictionEffect<TrainingDroneEffect> {
+class TrainingDroneEffect extends RestrictionEffect {
 
     public TrainingDroneEffect() {
         super(Duration.WhileOnBattlefield);

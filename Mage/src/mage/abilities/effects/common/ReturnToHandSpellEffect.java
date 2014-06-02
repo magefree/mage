@@ -14,7 +14,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ReturnToHandSpellEffect extends PostResolveEffect<ReturnToHandSpellEffect> implements MageSingleton {
+public class ReturnToHandSpellEffect extends PostResolveEffect implements MageSingleton {
     private static final ReturnToHandSpellEffect fINSTANCE =  new ReturnToHandSpellEffect();
 
         private Object readResolve() throws ObjectStreamException {

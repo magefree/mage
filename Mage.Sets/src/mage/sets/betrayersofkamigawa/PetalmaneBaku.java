@@ -98,7 +98,7 @@ public class PetalmaneBaku extends CardImpl {
         }
 }
 
-    private class PetalmaneBakuManaEffect extends ManaEffect<PetalmaneBakuManaEffect> {
+    private class PetalmaneBakuManaEffect extends ManaEffect {
 
         PetalmaneBakuManaEffect() {
             super();

@@ -183,7 +183,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
 }
 
 
-class OfferingCostReductionEffect extends CostModificationEffectImpl<OfferingCostReductionEffect> {
+class OfferingCostReductionEffect extends CostModificationEffectImpl {
 
     private UUID spellAbilityId;
     private UUID activationId;

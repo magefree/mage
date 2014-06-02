@@ -67,7 +67,7 @@ public class CommandTower extends CardImpl {
     }
 }
 
-class CommandTowerManaEffect extends ManaEffect<CommandTowerManaEffect> {
+class CommandTowerManaEffect extends ManaEffect {
 
     public CommandTowerManaEffect() {
         super();

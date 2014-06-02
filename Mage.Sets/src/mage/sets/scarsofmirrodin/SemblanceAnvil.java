@@ -114,7 +114,7 @@ class SemblanceAnvilEffect extends OneShotEffect {
 
 }
 
-class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl<SemblanceAnvilCostReductionEffect> {
+class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
 
     private static final String effectText = "Spells you cast that share a card type with the exiled card cost {2} less to cast";
 

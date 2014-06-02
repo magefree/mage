@@ -155,7 +155,7 @@ class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
     }
 }
 
-class IllusionistsGambitRequirementEffect extends RequirementEffect<IllusionistsGambitRequirementEffect> {
+class IllusionistsGambitRequirementEffect extends RequirementEffect {
 
     private List attackers;
     private Phase phase;

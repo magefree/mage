@@ -75,7 +75,7 @@ public class HunterSliver extends CardImpl {
     }
 }
 
-class ProvokeEffect extends RequirementEffect<ProvokeEffect> {
+class ProvokeEffect extends RequirementEffect {
 
     public ProvokeEffect() {
         this(Duration.EndOfTurn);

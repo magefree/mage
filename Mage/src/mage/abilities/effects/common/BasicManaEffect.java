@@ -5,7 +5,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.game.Game;
 
-public class BasicManaEffect extends ManaEffect<BasicManaEffect> {
+public class BasicManaEffect extends ManaEffect {
     protected Mana mana;
 
     public BasicManaEffect(Mana mana) {

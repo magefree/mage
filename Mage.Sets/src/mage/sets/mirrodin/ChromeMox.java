@@ -122,7 +122,7 @@ class ChromeMoxEffect extends OneShotEffect {
 
 }
 
-class ChromeMoxManaEffect extends ManaEffect<ChromeMoxManaEffect> {
+class ChromeMoxManaEffect extends ManaEffect {
 
 
     ChromeMoxManaEffect() {

@@ -69,7 +69,7 @@ public class Omniscience extends CardImpl {
     }
 }
 
-class OmniscienceEffect extends CostModificationEffectImpl<OmniscienceEffect> {
+class OmniscienceEffect extends CostModificationEffectImpl {
 
     public OmniscienceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.PlayForFree, CostModificationType.SET_COST);

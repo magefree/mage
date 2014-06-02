@@ -112,7 +112,7 @@ class AvatarOfFuryAdjustingCostsAbility extends SimpleStaticAbility implements A
     }
 }
 
-//class AvatarOfFuryAdjustingCostsEffect extends CostModificationEffectImpl<AvatarOfFuryAdjustingCostsEffect> {
+//class AvatarOfFuryAdjustingCostsEffect extends CostModificationEffectImpl {
 //
 //    public AvatarOfFuryAdjustingCostsEffect() {
 //        super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);

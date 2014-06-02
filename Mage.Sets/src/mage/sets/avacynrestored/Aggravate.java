@@ -107,7 +107,7 @@ class AggraveteEffect extends OneShotEffect {
     }
 }
 
-class AggravateRequirementEffect extends RequirementEffect<AggravateRequirementEffect> {
+class AggravateRequirementEffect extends RequirementEffect {
 
     public AggravateRequirementEffect() {
         super(Duration.EndOfTurn);

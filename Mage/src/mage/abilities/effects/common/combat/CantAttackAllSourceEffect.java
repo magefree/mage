@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  * 
  * @author BetaSteward_at_googlemail.com
  */
-public class CantAttackAllSourceEffect extends RestrictionEffect<CantAttackAllSourceEffect> {
+public class CantAttackAllSourceEffect extends RestrictionEffect {
 
     public CantAttackAllSourceEffect(Duration duration) {
         super(duration);

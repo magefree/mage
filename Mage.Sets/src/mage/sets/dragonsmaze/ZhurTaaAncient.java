@@ -116,7 +116,7 @@ class ZhurTaaAncientAbility extends TriggeredManaAbility<ZhurTaaAncientAbility> 
     }
 }
 
-class ZhurTaaAncientEffect extends ManaEffect<ZhurTaaAncientEffect> {
+class ZhurTaaAncientEffect extends ManaEffect {
 
     public ZhurTaaAncientEffect() {
         super();

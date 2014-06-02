@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class AttacksIfAbleAttachedEffect extends RequirementEffect<AttacksIfAbleAttachedEffect> {
+public class AttacksIfAbleAttachedEffect extends RequirementEffect {
 
     public AttacksIfAbleAttachedEffect(Duration duration, AttachmentType attachmentType) {
         super(duration);

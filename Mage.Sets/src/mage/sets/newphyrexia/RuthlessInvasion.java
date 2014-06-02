@@ -63,7 +63,7 @@ public class RuthlessInvasion extends CardImpl {
 
 }
 
-class RuthlessInvasionEffect extends RestrictionEffect<RuthlessInvasionEffect> {
+class RuthlessInvasionEffect extends RestrictionEffect {
     RuthlessInvasionEffect() {
         super(Duration.EndOfTurn);
         staticText = "Nonartifact creatures can't block this turn";

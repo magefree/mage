@@ -68,7 +68,7 @@ public class Smoke extends CardImpl {
     }
 }
 
-class SmokeEffect extends RestrictionUntapNotMoreThanEffect<SmokeEffect> {
+class SmokeEffect extends RestrictionUntapNotMoreThanEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent();
 

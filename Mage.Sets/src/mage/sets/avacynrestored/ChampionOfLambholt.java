@@ -76,7 +76,7 @@ public class ChampionOfLambholt extends CardImpl {
     }
 }
 
-class ChampionOfLambholtEffect extends RestrictionEffect<ChampionOfLambholtEffect> {
+class ChampionOfLambholtEffect extends RestrictionEffect {
 
     ChampionOfLambholtEffect() {
         super(Duration.WhileOnBattlefield);

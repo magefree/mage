@@ -84,7 +84,7 @@ public class DetainAllEffect extends OneShotEffect {
     }
 }
 
-class DetainAllRestrictionEffect extends RestrictionEffect<DetainAllRestrictionEffect> {
+class DetainAllRestrictionEffect extends RestrictionEffect {
 
     private final List<FixedTarget> detainedObjects;
 

@@ -65,7 +65,7 @@ public class DefenseGrid extends CardImpl {
     }
 }
 
-class DefenseGridCostModificationEffect extends CostModificationEffectImpl<DefenseGridCostModificationEffect> {
+class DefenseGridCostModificationEffect extends CostModificationEffectImpl {
 
     DefenseGridCostModificationEffect ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);

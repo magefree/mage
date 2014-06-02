@@ -65,7 +65,7 @@ public class RiteOfFlame extends CardImpl {
     }
 }
 
-class RiteOfFlameManaEffect extends ManaEffect<RiteOfFlameManaEffect> {
+class RiteOfFlameManaEffect extends ManaEffect {
     private static final FilterCard filter = new FilterCard();
 
     static {

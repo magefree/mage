@@ -101,7 +101,7 @@ class AmrouSeekersEvasionAbility extends EvasionAbility implements MageSingleton
 }
 
 
-class AmrouSeekersRestrictionEffect extends RestrictionEffect<AmrouSeekersRestrictionEffect>  {
+class AmrouSeekersRestrictionEffect extends RestrictionEffect  {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures and/or white creatures");
     static {

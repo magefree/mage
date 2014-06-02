@@ -70,7 +70,7 @@ public class HoodedHorror extends CardImpl {
     }
 }
 
-class HoodedHorrorCantBeBlockedEffect extends RestrictionEffect<HoodedHorrorCantBeBlockedEffect> {
+class HoodedHorrorCantBeBlockedEffect extends RestrictionEffect {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

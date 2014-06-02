@@ -108,7 +108,7 @@ class GideonJuraToken extends Token {
 
 }
 
-class GideonJuraEffect extends RequirementEffect<GideonJuraEffect> {
+class GideonJuraEffect extends RequirementEffect {
 
     public GideonJuraEffect() {
         super(Duration.Custom);

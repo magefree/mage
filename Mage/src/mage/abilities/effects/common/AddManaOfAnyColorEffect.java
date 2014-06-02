@@ -37,7 +37,7 @@ import mage.util.CardUtil;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class AddManaOfAnyColorEffect extends ManaEffect<AddManaOfAnyColorEffect> {
+public class AddManaOfAnyColorEffect extends ManaEffect {
 
     protected int amount;
 

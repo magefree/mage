@@ -126,7 +126,7 @@ class RakdosLordOfRiotsCost extends CostImpl {
     }
 }
 
-class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl<RakdosLordOfRiotsCostReductionEffect> {
+class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
 
     RakdosLordOfRiotsCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);

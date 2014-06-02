@@ -126,7 +126,7 @@ class AmberPrisonTapTargetEffect extends OneShotEffect {
     
 }
 
-class AmberPrisonRestrictionEffect extends RestrictionEffect<AmberPrisonRestrictionEffect> {
+class AmberPrisonRestrictionEffect extends RestrictionEffect {
 
     public AmberPrisonRestrictionEffect() {
         super(Duration.WhileOnBattlefield);

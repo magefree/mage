@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MustBeBlockedByAllSourceEffect extends RequirementEffect<MustBeBlockedByAllSourceEffect> {
+public class MustBeBlockedByAllSourceEffect extends RequirementEffect {
 
     public MustBeBlockedByAllSourceEffect() {
         this(Duration.WhileOnBattlefield);

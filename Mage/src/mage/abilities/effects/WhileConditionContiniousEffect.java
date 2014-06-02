@@ -8,7 +8,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 
-public abstract class WhileConditionContiniousEffect<T extends WhileConditionContiniousEffect<T>> extends ContinuousEffectImpl {
+public abstract class WhileConditionContiniousEffect extends ContinuousEffectImpl {
     protected Condition condition;
 
     public WhileConditionContiniousEffect(Duration duration, Layer layer, SubLayer sublayer, Condition condition, Outcome outcome) {

@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AttacksIfAbleSourceEffect extends RequirementEffect<AttacksIfAbleSourceEffect> {
+public class AttacksIfAbleSourceEffect extends RequirementEffect {
 
     public AttacksIfAbleSourceEffect(Duration duration) {
         super(duration);

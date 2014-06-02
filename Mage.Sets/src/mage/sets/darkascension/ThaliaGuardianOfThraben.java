@@ -77,7 +77,7 @@ public class ThaliaGuardianOfThraben extends CardImpl {
     }
 }
 
-class ThaliaGuardianOfThrabenCostReductionEffect extends CostModificationEffectImpl<ThaliaGuardianOfThrabenCostReductionEffect> {
+class ThaliaGuardianOfThrabenCostReductionEffect extends CostModificationEffectImpl {
 
     ThaliaGuardianOfThrabenCostReductionEffect ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);

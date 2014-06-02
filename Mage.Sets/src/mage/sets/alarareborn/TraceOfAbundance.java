@@ -125,7 +125,7 @@ class TraceOfAbundanceTriggeredAbility extends TriggeredManaAbility<TraceOfAbund
     }
 }
 
-class TraceOfAbundanceEffect extends ManaEffect<TraceOfAbundanceEffect> {
+class TraceOfAbundanceEffect extends ManaEffect {
 
     public TraceOfAbundanceEffect() {
         super();

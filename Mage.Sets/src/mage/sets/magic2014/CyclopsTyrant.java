@@ -74,7 +74,7 @@ public class CyclopsTyrant extends CardImpl {
     }
 }
 
-class CyclopsTyrantEffect extends RestrictionEffect<CyclopsTyrantEffect> {
+class CyclopsTyrantEffect extends RestrictionEffect {
 
     public CyclopsTyrantEffect() {
         super(Duration.WhileOnBattlefield);

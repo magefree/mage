@@ -74,7 +74,7 @@ public class Intuition extends CardImpl {
     }
 }
 
-class IntuitionEffect extends SearchEffect<IntuitionEffect> {
+class IntuitionEffect extends SearchEffect {
 
     
 

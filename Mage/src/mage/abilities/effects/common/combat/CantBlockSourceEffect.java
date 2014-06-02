@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantBlockSourceEffect extends RestrictionEffect<CantBlockSourceEffect> {
+public class CantBlockSourceEffect extends RestrictionEffect {
 
     public CantBlockSourceEffect(Duration duration) {
         super(duration);

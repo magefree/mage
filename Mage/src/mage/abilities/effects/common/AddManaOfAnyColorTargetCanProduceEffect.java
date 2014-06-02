@@ -44,7 +44,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect<AddManaOfAnyColorTargetCanProduceEffect> {
+public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
 
     public AddManaOfAnyColorTargetCanProduceEffect() {
         super();

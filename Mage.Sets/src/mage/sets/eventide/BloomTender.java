@@ -73,7 +73,7 @@ public class BloomTender extends CardImpl {
     }
 }
 
-class BloomTenderEffect extends ManaEffect<BloomTenderEffect> {
+class BloomTenderEffect extends ManaEffect {
 
     public BloomTenderEffect() {
         super();

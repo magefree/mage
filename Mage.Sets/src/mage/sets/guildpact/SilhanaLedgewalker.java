@@ -77,7 +77,7 @@ public class SilhanaLedgewalker extends CardImpl {
 
 }
 
-class SilhanaLedgewalkerEffect extends RestrictionEffect<SilhanaLedgewalkerEffect> {
+class SilhanaLedgewalkerEffect extends RestrictionEffect {
 
     public SilhanaLedgewalkerEffect() {
         super(Duration.WhileOnBattlefield);

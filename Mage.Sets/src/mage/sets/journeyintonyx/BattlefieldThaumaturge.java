@@ -86,7 +86,7 @@ public class BattlefieldThaumaturge extends CardImpl {
     }
 }
 
-class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEffectImpl<BattlefieldThaumaturgeSpellsCostReductionEffect> {
+class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEffectImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant and sorcery spell");
 

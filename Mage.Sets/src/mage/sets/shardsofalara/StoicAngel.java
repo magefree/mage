@@ -79,7 +79,7 @@ public class StoicAngel extends CardImpl {
     }
 }
 
-class StoicAngelEffect extends RestrictionUntapNotMoreThanEffect<StoicAngelEffect> {
+class StoicAngelEffect extends RestrictionUntapNotMoreThanEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent();
 

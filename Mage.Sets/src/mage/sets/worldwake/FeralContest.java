@@ -73,7 +73,7 @@ public class FeralContest extends CardImpl {
     }
 }
 
-class FeralContestEffect extends RequirementEffect<FeralContestEffect> {
+class FeralContestEffect extends RequirementEffect {
 
     public FeralContestEffect() {
         this(Duration.EndOfTurn);

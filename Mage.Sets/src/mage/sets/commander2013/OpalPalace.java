@@ -92,7 +92,7 @@ public class OpalPalace extends CardImpl {
     }
 }
 
-class OpalPalaceManaEffect extends ManaEffect<OpalPalaceManaEffect> {
+class OpalPalaceManaEffect extends ManaEffect {
 
     public OpalPalaceManaEffect() {
         super();

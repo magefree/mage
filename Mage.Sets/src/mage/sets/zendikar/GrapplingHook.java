@@ -78,7 +78,7 @@ public class GrapplingHook extends CardImpl {
     }
 }
 
-class GrapplingHookEffect extends RequirementEffect<GrapplingHookEffect> {
+class GrapplingHookEffect extends RequirementEffect {
 
     public GrapplingHookEffect() {
         this(Duration.EndOfTurn);

@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryPutOnLibraryEffect> {
+public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
     
     private boolean reveal;
     private boolean forceShuffle;

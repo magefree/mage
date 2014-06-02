@@ -108,7 +108,7 @@ public class ShrewdHatchling extends CardImpl {
     }
 }
 
-class ShrewdHatchlingEffect extends RestrictionEffect<ShrewdHatchlingEffect> {
+class ShrewdHatchlingEffect extends RestrictionEffect {
 
     public ShrewdHatchlingEffect() {
         super(Duration.EndOfTurn);

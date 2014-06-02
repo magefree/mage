@@ -91,7 +91,7 @@ public class Tromokratis extends CardImpl {
 }
 
 
-class CantBeBlockedUnlessAllEffect extends RestrictionEffect<CantBeBlockedUnlessAllEffect> {
+class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();   
             

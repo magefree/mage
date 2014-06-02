@@ -70,7 +70,7 @@ public class StorageMatrix extends CardImpl {
 
 
 
-class StorageMatrixRestrictionEffect extends RestrictionEffect<StorageMatrixRestrictionEffect> {
+class StorageMatrixRestrictionEffect extends RestrictionEffect {
 
     private int turn;
     private boolean applies;

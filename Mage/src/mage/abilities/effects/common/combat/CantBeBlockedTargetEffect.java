@@ -41,7 +41,7 @@ import mage.target.Target;
  * @author LevelX2
  */
 
-public class CantBeBlockedTargetEffect extends RestrictionEffect<CantBeBlockedTargetEffect> {
+public class CantBeBlockedTargetEffect extends RestrictionEffect {
 
     public CantBeBlockedTargetEffect(Duration duration) {
         super(duration, Outcome.Benefit);

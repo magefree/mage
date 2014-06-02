@@ -70,7 +70,7 @@ public class BuriedAlive extends CardImpl {
     }
 }
 
-class BuriedAliveEffect extends SearchEffect<BuriedAliveEffect> {
+class BuriedAliveEffect extends SearchEffect {
 
   public BuriedAliveEffect() {
         super(new TargetCardInLibrary(0, 3, new FilterCreatureCard()), Outcome.Detriment);

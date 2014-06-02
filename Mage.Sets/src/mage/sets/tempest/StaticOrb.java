@@ -66,7 +66,7 @@ public class StaticOrb extends CardImpl {
 }
 
 
-class StaticOrbEffect extends RestrictionUntapNotMoreThanEffect<StaticOrbEffect> {
+class StaticOrbEffect extends RestrictionUntapNotMoreThanEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

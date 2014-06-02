@@ -40,9 +40,8 @@ import mage.game.Game;
  * construction to setup the object for use by the mage framework.
 
  * @author maurer.it_at_gmail.com
- * @param <T>
  */
-public abstract class CostModificationEffectImpl<T extends CostModificationEffectImpl<T>> extends ContinuousEffectImpl implements CostModificationEffect<T> {
+public abstract class CostModificationEffectImpl extends ContinuousEffectImpl implements CostModificationEffect {
 
     private final CostModificationType modificationType;
     
@@ -52,7 +51,7 @@ public abstract class CostModificationEffectImpl<T extends CostModificationEffec
         this.modificationType = type;
     }
 
-    public CostModificationEffectImpl(final CostModificationEffectImpl<T> effect) {
+    public CostModificationEffectImpl(final CostModificationEffectImpl effect) {
         super(effect);
         this.effectType = effect.effectType;
         this.modificationType = effect.modificationType;

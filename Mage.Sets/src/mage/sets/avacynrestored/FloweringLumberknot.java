@@ -70,7 +70,7 @@ public class FloweringLumberknot extends CardImpl {
     }
 }
 
-class FloweringLumberknotEffect extends RestrictionEffect<FloweringLumberknotEffect> {
+class FloweringLumberknotEffect extends RestrictionEffect {
 
     public FloweringLumberknotEffect() {
         super(Duration.WhileOnBattlefield);

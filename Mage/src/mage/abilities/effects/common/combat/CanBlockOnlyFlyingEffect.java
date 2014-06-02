@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class CanBlockOnlyFlyingEffect extends RestrictionEffect<CanBlockOnlyFlyingEffect> {
+public class CanBlockOnlyFlyingEffect extends RestrictionEffect {
 
 
     public CanBlockOnlyFlyingEffect(Duration duration) {

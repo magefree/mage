@@ -143,7 +143,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 
-class CarpetOfFlowersEffect extends ManaEffect<CarpetOfFlowersEffect> {
+class CarpetOfFlowersEffect extends ManaEffect {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Island ");
 

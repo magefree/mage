@@ -72,7 +72,7 @@ public class GoblinDiplomats extends CardImpl {
     }
 }
 
-class GoblinDiplomatsEffect extends RequirementEffect<GoblinDiplomatsEffect> {
+class GoblinDiplomatsEffect extends RequirementEffect {
 
     public GoblinDiplomatsEffect() {
         super(Duration.EndOfTurn);

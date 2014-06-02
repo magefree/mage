@@ -43,7 +43,7 @@ import mage.game.Game;
  * @author maurer.it_at_gmail.com
  */
 //20101001 - 601.2e/613.10
-public interface CostModificationEffect<T extends CostModificationEffect<T>> extends ContinuousEffect {
+public interface CostModificationEffect extends ContinuousEffect {
     /**
      * Called by the {@link ContinuousEffects#costModification(java.util.UUID, mage.abilities.Ability, mage.game.Game) ContinuousEffects.costModification}
      * method.
@@ -61,7 +61,7 @@ public interface CostModificationEffect<T extends CostModificationEffect<T>> ext
      * 
      * @param abilityToModify The ability to possibly modify.
      * @param source The source ability of this effect.
-     * @param game The game for which this effect shoul dbe applied.
+     * @param game The game for which this effect should be applied.
      * @return
      */
     boolean applies(Ability abilityToModify, Ability source, Game game);

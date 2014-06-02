@@ -112,7 +112,7 @@ class ZulaportEnforcerAbility extends EvasionAbility {
     }
 }
 
-class ZulaportEnforcerEffect extends RestrictionEffect<ZulaportEnforcerEffect> {
+class ZulaportEnforcerEffect extends RestrictionEffect {
 
     public ZulaportEnforcerEffect() {
         super(Duration.WhileOnBattlefield);

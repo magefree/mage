@@ -113,7 +113,7 @@ class DawnsReflectionTriggeredAbility extends TriggeredManaAbility<DawnsReflecti
 }
 
 
-class DawnsReflectionManaEffect extends ManaEffect<DawnsReflectionManaEffect> {
+class DawnsReflectionManaEffect extends ManaEffect {
 
     public DawnsReflectionManaEffect() {
         super();

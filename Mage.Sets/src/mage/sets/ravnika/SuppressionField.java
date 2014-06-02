@@ -70,7 +70,7 @@ public class SuppressionField extends CardImpl {
     }
 }
 
-class SuppressionFieldCostReductionEffect extends CostModificationEffectImpl<SuppressionFieldCostReductionEffect> {
+class SuppressionFieldCostReductionEffect extends CostModificationEffectImpl {
 
     SuppressionFieldCostReductionEffect ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);

@@ -64,7 +64,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class MustBeBlockedByAtLeastOneSourceEffect extends RequirementEffect<MustBeBlockedByAtLeastOneSourceEffect> {
+public class MustBeBlockedByAtLeastOneSourceEffect extends RequirementEffect {
 
     public MustBeBlockedByAtLeastOneSourceEffect() {
         this(Duration.EndOfTurn);

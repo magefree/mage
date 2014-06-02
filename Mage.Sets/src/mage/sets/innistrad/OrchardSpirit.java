@@ -97,7 +97,7 @@ class OrchardSpiritAbility extends EvasionAbility {
     }
 }
 
-class OrchardSpiritEffect extends RestrictionEffect<OrchardSpiritEffect> {
+class OrchardSpiritEffect extends RestrictionEffect {
 
     public OrchardSpiritEffect() {
         super(Duration.WhileOnBattlefield);

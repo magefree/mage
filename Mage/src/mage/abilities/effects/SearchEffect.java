@@ -36,7 +36,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class SearchEffect<T extends SearchEffect<T>> extends OneShotEffect {
+public abstract class SearchEffect extends OneShotEffect {
 
     protected TargetCardInLibrary target;
 

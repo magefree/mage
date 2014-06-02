@@ -46,7 +46,7 @@ import mage.game.Game;
 /*903.10. A player may cast a commander he or she owns from the command zone.
  * Doing so costs that player an additional {2} for each previous time he or she cast that commander from the command zone that game.
  * */
-public class CommanderCostModification extends CostModificationEffectImpl<CommanderCostModification> {
+public class CommanderCostModification extends CostModificationEffectImpl {
 
     private UUID commanderId;
     

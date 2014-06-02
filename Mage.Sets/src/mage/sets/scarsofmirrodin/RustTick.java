@@ -124,7 +124,7 @@ class RustTickTapTargetEffect extends TapTargetEffect {
     }
 }
 
-class RustTickRestrictionEffect extends RestrictionEffect<RustTickRestrictionEffect> {
+class RustTickRestrictionEffect extends RestrictionEffect {
 
     public RustTickRestrictionEffect() {
         super(Duration.WhileOnBattlefield);

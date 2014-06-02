@@ -94,7 +94,7 @@ class HuntedGhoulAbility extends EvasionAbility {
     }
 }
 
-class HuntedGhoulEffect extends RestrictionEffect<HuntedGhoulEffect> {
+class HuntedGhoulEffect extends RestrictionEffect {
 
     public HuntedGhoulEffect() {
         super(Duration.WhileOnBattlefield);

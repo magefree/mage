@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CantAttackTargetEffect extends RestrictionEffect<CantAttackTargetEffect> {
+public class CantAttackTargetEffect extends RestrictionEffect {
 
     public CantAttackTargetEffect(Duration duration) {
         super(duration);

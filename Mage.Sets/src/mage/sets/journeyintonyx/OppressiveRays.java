@@ -149,7 +149,7 @@ class OppressiveRaysEffect extends ReplacementEffectImpl {
 
 }
 
-class OppressiveRaysCostModificationEffect extends CostModificationEffectImpl<OppressiveRaysCostModificationEffect> {
+class OppressiveRaysCostModificationEffect extends CostModificationEffectImpl {
 
     OppressiveRaysCostModificationEffect ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);

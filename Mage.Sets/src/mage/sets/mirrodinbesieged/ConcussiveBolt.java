@@ -95,7 +95,7 @@ class ConcussiveBoltEffect extends OneShotEffect {
     }
 }
 
-class ConcussiveBoltRestrictionEffect extends RestrictionEffect<ConcussiveBoltRestrictionEffect> {
+class ConcussiveBoltRestrictionEffect extends RestrictionEffect {
 
     public ConcussiveBoltRestrictionEffect() {
         super(Duration.EndOfTurn);

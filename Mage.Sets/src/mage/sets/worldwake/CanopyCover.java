@@ -87,7 +87,7 @@ public class CanopyCover extends CardImpl {
     }
 }
 
-class OrchardSpiritEffect extends RestrictionEffect<OrchardSpiritEffect> {
+class OrchardSpiritEffect extends RestrictionEffect {
 
     public OrchardSpiritEffect() {
         super(Duration.WhileOnBattlefield);

@@ -57,7 +57,7 @@ public class LandwalkAbility extends EvasionAbility {
 
 }
 
-class LandwalkEffect extends RestrictionEffect<LandwalkEffect> {
+class LandwalkEffect extends RestrictionEffect {
 
     protected FilterLandPermanent filter;
 

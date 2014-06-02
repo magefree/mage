@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class RequirementEffect<T extends RequirementEffect<T>> extends ContinuousEffectImpl {
+public abstract class RequirementEffect extends ContinuousEffectImpl {
 
     public RequirementEffect(Duration duration) {
         super(duration, Outcome.Detriment);

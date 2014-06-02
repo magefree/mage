@@ -41,14 +41,14 @@ import mage.game.Game;
 
  * @author LevelX2
  */
-public abstract class SpliceCardEffectImpl<T extends SpliceCardEffectImpl<T>> extends ContinuousEffectImpl implements SpliceCardEffect<T> {
+public abstract class SpliceCardEffectImpl extends ContinuousEffectImpl implements SpliceCardEffect {
 
     public SpliceCardEffectImpl ( Duration duration, Outcome outcome ) {
         super(duration, outcome);
         this.effectType = EffectType.SPLICE;
     }
 
-    public SpliceCardEffectImpl(final SpliceCardEffectImpl<T> effect) {
+    public SpliceCardEffectImpl(final SpliceCardEffectImpl effect) {
         super(effect);
         this.effectType = effect.effectType;
     }

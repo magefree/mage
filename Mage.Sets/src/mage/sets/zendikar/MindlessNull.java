@@ -70,7 +70,7 @@ public class MindlessNull extends CardImpl {
     }
 }
 
-class MindlessNullEffect extends RestrictionEffect<MindlessNullEffect> {
+class MindlessNullEffect extends RestrictionEffect {
 
     private final FilterControlledPermanent filter = new FilterControlledPermanent("Vampire");
 

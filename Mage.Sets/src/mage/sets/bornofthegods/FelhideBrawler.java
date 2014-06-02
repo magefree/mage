@@ -72,7 +72,7 @@ public class FelhideBrawler extends CardImpl {
     }
 }
 
-class FelhideBrawlerRestrictionEffect extends RestrictionEffect<FelhideBrawlerRestrictionEffect> {
+class FelhideBrawlerRestrictionEffect extends RestrictionEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Minotaur");
 

@@ -77,7 +77,7 @@ public class SacellumGodspeaker extends CardImpl {
 }
 
 
-class SacellumGodspeakerEffect extends ManaEffect<SacellumGodspeakerEffect> {
+class SacellumGodspeakerEffect extends ManaEffect {
 
     
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with power 5 or greater from your hand");

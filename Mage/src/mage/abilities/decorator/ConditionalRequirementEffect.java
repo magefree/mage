@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class ConditionalRequirementEffect extends RequirementEffect<ConditionalRequirementEffect>  {
+public class ConditionalRequirementEffect extends RequirementEffect  {
 
     protected RequirementEffect effect;
     protected RequirementEffect otherwiseEffect;

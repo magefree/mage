@@ -72,7 +72,7 @@ public class SignalTheClans extends CardImpl {
     }
 }
 
-class SignalTheClansEffect extends SearchEffect<SignalTheClansEffect> {
+class SignalTheClansEffect extends SearchEffect {
 
 
     public SignalTheClansEffect() {

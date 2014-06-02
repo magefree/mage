@@ -37,7 +37,7 @@ import mage.players.Player;
 /**
  * @author noxx
  */
-public class AddConditionalManaOfAnyColorEffect extends ManaEffect<AddConditionalManaOfAnyColorEffect> {
+public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
 
     private int amount;
     private ConditionalManaBuilder manaBuilder;

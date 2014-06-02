@@ -96,7 +96,7 @@ class SignalPestAbility extends EvasionAbility {
     }
 }
 
-class SignalPestEffect extends RestrictionEffect<SignalPestEffect> {
+class SignalPestEffect extends RestrictionEffect {
 
     public SignalPestEffect() {
         super(Duration.WhileOnBattlefield);

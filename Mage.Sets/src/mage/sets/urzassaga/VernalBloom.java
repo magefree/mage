@@ -111,7 +111,7 @@ class VernalBloomTriggeredAbility extends TriggeredManaAbility<VernalBloomTrigge
     }
 }
 
-class AddGreenToTargetEffect extends ManaEffect<AddGreenToTargetEffect> {
+class AddGreenToTargetEffect extends ManaEffect {
     
 
     public AddGreenToTargetEffect() {

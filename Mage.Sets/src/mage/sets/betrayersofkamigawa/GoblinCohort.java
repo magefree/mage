@@ -81,7 +81,7 @@ public class GoblinCohort extends CardImpl {
     }
 }
 
-class GoblinCohortEffect extends RestrictionEffect<GoblinCohortEffect> {
+class GoblinCohortEffect extends RestrictionEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another artifact");
 

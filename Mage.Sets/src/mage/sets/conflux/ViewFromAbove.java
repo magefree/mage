@@ -74,7 +74,7 @@ public class ViewFromAbove extends CardImpl {
     }
 }
 
-class ViewFromAboveEffect extends PostResolveEffect<ViewFromAboveEffect> {
+class ViewFromAboveEffect extends PostResolveEffect {
 
     public ViewFromAboveEffect() {
         this.staticText = "If you control a white permanent, return {this} to its owner's hand";

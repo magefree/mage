@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 
-public class SpellCostReductionSourceEffect extends CostModificationEffectImpl<SpellCostReductionSourceEffect> {
+public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
 
     private final int amount;
     private ManaCosts<ManaCost> manaCostsToReduce = null;

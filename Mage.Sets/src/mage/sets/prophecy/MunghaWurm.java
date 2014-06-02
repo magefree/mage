@@ -71,7 +71,7 @@ public class MunghaWurm extends CardImpl {
     }
 }
 
-class MunghaWurmEffect extends RestrictionUntapNotMoreThanEffect<MunghaWurmEffect> {
+class MunghaWurmEffect extends RestrictionUntapNotMoreThanEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

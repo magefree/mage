@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class CantAttackAttachedEffect extends RestrictionEffect<CantAttackAttachedEffect> {
+public class CantAttackAttachedEffect extends RestrictionEffect {
 
     public CantAttackAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield);

@@ -70,7 +70,7 @@ public class LodestoneGolem extends CardImpl {
     }
 }
 
-class LodestoneGolemCostReductionEffect extends CostModificationEffectImpl<LodestoneGolemCostReductionEffect> {
+class LodestoneGolemCostReductionEffect extends CostModificationEffectImpl {
 
     LodestoneGolemCostReductionEffect ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);

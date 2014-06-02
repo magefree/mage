@@ -115,7 +115,7 @@ class MarketFestivalTriggeredAbility extends TriggeredManaAbility<MarketFestival
 }
 
 
-class MarketFestivalManaEffect extends ManaEffect<MarketFestivalManaEffect> {
+class MarketFestivalManaEffect extends ManaEffect {
 
     public MarketFestivalManaEffect() {
         super();

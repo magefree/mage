@@ -73,7 +73,7 @@ public class DeathcultRogue extends CardImpl {
     }
 }
 
-class DeathcultRogueRestrictionEffect extends RestrictionEffect<DeathcultRogueRestrictionEffect>  {
+class DeathcultRogueRestrictionEffect extends RestrictionEffect  {
 
     public DeathcultRogueRestrictionEffect() {
         super(Duration.WhileOnBattlefield);

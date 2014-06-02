@@ -70,7 +70,7 @@ public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
 }
 
-class FlyingEffect extends RestrictionEffect<FlyingEffect> implements MageSingleton {
+class FlyingEffect extends RestrictionEffect implements MageSingleton {
 
     public FlyingEffect() {
         super(Duration.EndOfGame);

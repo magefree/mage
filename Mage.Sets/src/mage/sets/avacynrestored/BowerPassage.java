@@ -66,7 +66,7 @@ public class BowerPassage extends CardImpl {
     }
 }
 
-class BowerPassageEffect extends RestrictionEffect<BowerPassageEffect> {
+class BowerPassageEffect extends RestrictionEffect {
 
     BowerPassageEffect() {
         super(Duration.WhileOnBattlefield);

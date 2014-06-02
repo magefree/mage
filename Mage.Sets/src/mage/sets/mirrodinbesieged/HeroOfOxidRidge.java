@@ -73,7 +73,7 @@ public class HeroOfOxidRidge extends CardImpl {
 
 }
 
-class HeroOfOxidRidgeEffect extends RestrictionEffect<HeroOfOxidRidgeEffect> {
+class HeroOfOxidRidgeEffect extends RestrictionEffect {
 
     public HeroOfOxidRidgeEffect() {
         super(Duration.EndOfTurn);

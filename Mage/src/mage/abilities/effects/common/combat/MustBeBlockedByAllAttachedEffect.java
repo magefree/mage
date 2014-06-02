@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class MustBeBlockedByAllAttachedEffect extends RequirementEffect<MustBeBlockedByAllAttachedEffect> {
+public class MustBeBlockedByAllAttachedEffect extends RequirementEffect {
 
     protected AttachmentType attachmentType;
 

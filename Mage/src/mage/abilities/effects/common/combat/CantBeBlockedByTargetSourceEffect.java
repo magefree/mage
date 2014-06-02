@@ -40,7 +40,7 @@ import mage.target.Target;
  * @author LevelX2
  */
 
-public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect<CantBeBlockedByTargetSourceEffect> {
+public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
 
     /**
      * Target creature(s) cant block the source creature

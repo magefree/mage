@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CantBlockAllEffect extends RestrictionEffect<CantBlockAllEffect> {
+public class CantBlockAllEffect extends RestrictionEffect {
 
     private final FilterCreaturePermanent filter;
 

@@ -73,7 +73,7 @@ public class TrainingGrounds extends CardImpl {
     }
 }
 
-class TrainingGroundsEffect extends CostModificationEffectImpl<TrainingGroundsEffect> {
+class TrainingGroundsEffect extends CostModificationEffectImpl {
     
     private static final String effectText = "Activated abilities of creatures you control cost up to {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana";
     private static final FilterControlledCreaturePermanent filter;

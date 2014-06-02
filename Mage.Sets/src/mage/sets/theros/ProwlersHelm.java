@@ -70,7 +70,7 @@ public class ProwlersHelm extends CardImpl {
     }
 }
 
-class CantBeBlockedByWallsEffect extends RestrictionEffect<CantBeBlockedByWallsEffect> {
+class CantBeBlockedByWallsEffect extends RestrictionEffect {
 
     public CantBeBlockedByWallsEffect() {
         super(Duration.WhileOnBattlefield);

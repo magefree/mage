@@ -91,7 +91,7 @@ public class GrandArbiterAugustinIV extends CardImpl {
     }
 }
 
-class GrandArbiterAugustinIVCostIncreaseEffect extends CostModificationEffectImpl<GrandArbiterAugustinIVCostIncreaseEffect> {
+class GrandArbiterAugustinIVCostIncreaseEffect extends CostModificationEffectImpl {
 
     private static final String effectText = "Spells your opponents cast cost {1} more to cast";
 

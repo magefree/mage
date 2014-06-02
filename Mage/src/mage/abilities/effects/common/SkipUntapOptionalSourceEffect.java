@@ -41,7 +41,7 @@ import mage.players.Player;
  */
 
 
-public class SkipUntapOptionalSourceEffect extends RestrictionEffect<SkipUntapOptionalSourceEffect> {
+public class SkipUntapOptionalSourceEffect extends RestrictionEffect {
 
     public SkipUntapOptionalSourceEffect() {
         super(Duration.WhileOnBattlefield);

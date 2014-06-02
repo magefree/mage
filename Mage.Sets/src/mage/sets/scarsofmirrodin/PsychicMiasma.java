@@ -103,7 +103,7 @@ class PsychicMiasmaEffect1 extends OneShotEffect {
 
 }
 
-class PsychicMiasmaEffect2 extends PostResolveEffect<PsychicMiasmaEffect2> {
+class PsychicMiasmaEffect2 extends PostResolveEffect {
 
     public PsychicMiasmaEffect2() {
         staticText = "If a land card is discarded this way, return {this} to its owner's hand";

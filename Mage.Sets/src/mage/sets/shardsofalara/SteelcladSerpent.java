@@ -73,7 +73,7 @@ public class SteelcladSerpent extends CardImpl {
     }
 }
 
-class SteelcladSerpentEffect extends RestrictionEffect<SteelcladSerpentEffect> {
+class SteelcladSerpentEffect extends RestrictionEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another artifact");
     

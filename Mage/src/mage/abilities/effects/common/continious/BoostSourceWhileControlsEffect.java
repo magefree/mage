@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostSourceWhileControlsEffect extends WhileConditionContiniousEffect<BoostSourceWhileControlsEffect> {
+public class BoostSourceWhileControlsEffect extends WhileConditionContiniousEffect {
 
     private int power;
     private int toughness;

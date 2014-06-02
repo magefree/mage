@@ -77,7 +77,7 @@ public class StromkirkNoble extends CardImpl {
     }
 }
 
-class StromkirkEffect extends RestrictionEffect<StromkirkEffect> {
+class StromkirkEffect extends RestrictionEffect {
 
     public StromkirkEffect() {
         super(Duration.WhileOnBattlefield);

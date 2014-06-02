@@ -17,7 +17,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class AttacksIfAbleAllEffect extends RequirementEffect<AttacksIfAbleAllEffect> {
+public class AttacksIfAbleAllEffect extends RequirementEffect {
 
     private final FilterCreaturePermanent filter;
 

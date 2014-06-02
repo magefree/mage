@@ -74,7 +74,7 @@ public class SpireTracer extends CardImpl {
     }
 }
 
-class CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect extends RestrictionEffect<CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect> {
+class CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect extends RestrictionEffect {
 
     public CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect() {
         super(Duration.WhileOnBattlefield);

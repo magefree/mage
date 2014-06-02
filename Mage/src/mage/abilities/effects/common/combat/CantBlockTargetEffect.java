@@ -40,7 +40,7 @@ import mage.util.CardUtil;
  *
  * @author North
  */
-public class CantBlockTargetEffect extends RestrictionEffect<CantBlockTargetEffect> {
+public class CantBlockTargetEffect extends RestrictionEffect {
 
     public CantBlockTargetEffect(Duration duration) {
         super(duration);

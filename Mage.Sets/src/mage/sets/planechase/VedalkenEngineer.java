@@ -128,7 +128,7 @@ class VedalkenEngineerAbility extends ManaAbility<VedalkenEngineerAbility> {
     }
 }
 
-class VedalkenEngineerEffect extends ManaEffect<VedalkenEngineerEffect> {
+class VedalkenEngineerEffect extends ManaEffect {
 
     private int amount;
     private ConditionalManaBuilder manaBuilder;

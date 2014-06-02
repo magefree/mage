@@ -82,7 +82,7 @@ public class QuietSpeculation extends CardImpl {
     }
 }
 
-class SearchLibraryPutInGraveEffect extends SearchEffect<SearchLibraryPutInGraveEffect> {
+class SearchLibraryPutInGraveEffect extends SearchEffect {
 
     public SearchLibraryPutInGraveEffect(TargetCardInLibrary target) {
         super(target, Outcome.Neutral);

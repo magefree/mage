@@ -10,7 +10,7 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 
-public class AffinityEffect extends CostModificationEffectImpl<AffinityEffect> {
+public class AffinityEffect extends CostModificationEffectImpl {
     private FilterControlledPermanent filter;
 
     public AffinityEffect(FilterControlledPermanent affinityFilter) {

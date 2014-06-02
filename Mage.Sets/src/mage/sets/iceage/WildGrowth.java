@@ -114,7 +114,7 @@ class WildGrowthTriggeredAbility extends TriggeredManaAbility<WildGrowthTriggere
     }
 }
 
-class WildGrowthEffect extends ManaEffect<WildGrowthEffect> {
+class WildGrowthEffect extends ManaEffect {
 
     public WildGrowthEffect() {
         super();

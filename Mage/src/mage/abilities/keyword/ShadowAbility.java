@@ -41,7 +41,7 @@ public class ShadowAbility extends EvasionAbility implements MageSingleton {
 
 }
 
-class ShadowEffect extends RestrictionEffect<ShadowEffect> implements MageSingleton {
+class ShadowEffect extends RestrictionEffect implements MageSingleton {
 
     public ShadowEffect() {
         super(Duration.EndOfGame);

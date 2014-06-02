@@ -71,7 +71,7 @@ public class FearAbility extends EvasionAbility implements MageSingleton {
 
 }
 
-class FearEffect extends RestrictionEffect<FearEffect> implements MageSingleton {
+class FearEffect extends RestrictionEffect implements MageSingleton {
 
     public FearEffect() {
         super(Duration.WhileOnBattlefield);

@@ -72,7 +72,7 @@ public class SkyblinderStaff extends CardImpl {
     }
 }
 
-class CantBeBlockedByCreaturesWithFlyingAttachedEffect extends RestrictionEffect<CantBeBlockedByCreaturesWithFlyingAttachedEffect> {
+class CantBeBlockedByCreaturesWithFlyingAttachedEffect extends RestrictionEffect {
 
     public CantBeBlockedByCreaturesWithFlyingAttachedEffect() {
         super(Duration.WhileOnBattlefield);

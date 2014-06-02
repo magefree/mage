@@ -83,7 +83,7 @@ public class BlazingTorch extends CardImpl {
     }
 }
 
-class BlazingTorchEvasionEffect extends RestrictionEffect<BlazingTorchEvasionEffect> {
+class BlazingTorchEvasionEffect extends RestrictionEffect {
 
     public BlazingTorchEvasionEffect() {
         super(Duration.WhileOnBattlefield);

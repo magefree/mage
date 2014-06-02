@@ -74,7 +74,7 @@ public class BlindSpotGiant extends CardImpl {
     }
 }
 
-class BlindSpotGiantEffect extends RestrictionEffect<BlindSpotGiantEffect> {
+class BlindSpotGiantEffect extends RestrictionEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Giant");
     static {

@@ -129,7 +129,7 @@ class GwafaHazidProfiteerEffect1 extends OneShotEffect {
 
 }
 
-class GwafaHazidProfiteerEffect2 extends RestrictionEffect<GwafaHazidProfiteerEffect2> {
+class GwafaHazidProfiteerEffect2 extends RestrictionEffect {
 
     public GwafaHazidProfiteerEffect2() {
         super(Duration.WhileOnBattlefield);

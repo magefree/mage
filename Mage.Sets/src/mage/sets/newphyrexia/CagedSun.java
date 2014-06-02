@@ -194,7 +194,7 @@ class CagedSunTriggeredAbility extends TriggeredManaAbility<CagedSunTriggeredAbi
 }
 
 
-class CagedSunEffect extends ManaEffect<CagedSunEffect> {
+class CagedSunEffect extends ManaEffect {
 
     public CagedSunEffect() {
         super();

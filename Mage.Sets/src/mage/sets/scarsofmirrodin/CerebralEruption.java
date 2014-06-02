@@ -112,7 +112,7 @@ class CerebralEruptionEffect1 extends OneShotEffect {
 
 }
 
-class CerebralEruptionEffect2 extends PostResolveEffect<CerebralEruptionEffect2> {
+class CerebralEruptionEffect2 extends PostResolveEffect {
 
     public CerebralEruptionEffect2() {
         staticText = "If a land card is revealed this way, return {this} to its owner's hand";

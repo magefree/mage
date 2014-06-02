@@ -106,7 +106,7 @@ class PlasmCaptureCounterEffect extends OneShotEffect {
     }
 }
 
-class PlasmCaptureManaEffect extends ManaEffect<PlasmCaptureManaEffect> {
+class PlasmCaptureManaEffect extends ManaEffect {
 
     int amountOfMana;
 

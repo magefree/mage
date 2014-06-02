@@ -67,7 +67,7 @@ public class ArcaneMelee extends CardImpl {
     }
 }
 
-class ArcaneMeleeCostReductionEffect extends CostModificationEffectImpl<ArcaneMeleeCostReductionEffect> {
+class ArcaneMeleeCostReductionEffect extends CostModificationEffectImpl {
 
     ArcaneMeleeCostReductionEffect ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);

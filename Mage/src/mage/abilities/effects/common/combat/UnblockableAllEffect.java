@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class UnblockableAllEffect extends RestrictionEffect<UnblockableAllEffect> {
+public class UnblockableAllEffect extends RestrictionEffect {
 
     private FilterPermanent filter;
 

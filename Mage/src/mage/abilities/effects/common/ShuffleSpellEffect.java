@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class ShuffleSpellEffect extends PostResolveEffect<ShuffleSpellEffect> implements MageSingleton {
+public class ShuffleSpellEffect extends PostResolveEffect implements MageSingleton {
 
     private static final ShuffleSpellEffect fINSTANCE =  new ShuffleSpellEffect();
 

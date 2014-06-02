@@ -170,7 +170,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ReplacementEffectImpl {
     }
 }
 
-class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl<CouncilOfTheAbsoluteCostReductionEffect> {
+class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl {
 
     public CouncilOfTheAbsoluteCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);

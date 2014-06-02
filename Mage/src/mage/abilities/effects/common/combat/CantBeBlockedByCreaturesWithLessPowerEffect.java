@@ -37,7 +37,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect<CantBeBlockedByCreaturesWithLessPowerEffect> {
+public class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect {
 
     public CantBeBlockedByCreaturesWithLessPowerEffect() {
         super(Duration.WhileOnBattlefield);

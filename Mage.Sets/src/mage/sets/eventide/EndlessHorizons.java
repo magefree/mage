@@ -78,7 +78,7 @@ public class EndlessHorizons extends CardImpl {
     }
 }
 
-class EndlessHorizonsEffect extends SearchEffect<EndlessHorizonsEffect> {
+class EndlessHorizonsEffect extends SearchEffect {
 
     private static final FilterLandCard filter = new FilterLandCard("Plains card");
 

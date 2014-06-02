@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MustBeBlockedByTargetSourceEffect extends RequirementEffect<MustBeBlockedByTargetSourceEffect> {
+public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
 
     public MustBeBlockedByTargetSourceEffect() {
         this(Duration.EndOfTurn);

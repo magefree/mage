@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class MustBeBlockedByAllTargetEffect extends RequirementEffect<MustBeBlockedByAllTargetEffect> {
+public class MustBeBlockedByAllTargetEffect extends RequirementEffect {
 
     public MustBeBlockedByAllTargetEffect(Duration duration) {
         super(duration);

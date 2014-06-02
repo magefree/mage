@@ -72,7 +72,7 @@ public class RooftopStorm extends CardImpl {
 
 
 //TODO : change to alternativCost
-class RooftopStormCostReductionEffect extends CostModificationEffectImpl<RooftopStormCostReductionEffect> {
+class RooftopStormCostReductionEffect extends CostModificationEffectImpl {
 
     private static final String effectText = "You may pay {0} rather than pay the mana cost for Zombie creature spells you cast";
 

@@ -113,7 +113,7 @@ class AdjustingCostsAbility extends SimpleStaticAbility implements AdjustingSour
     }
 }
 
-class AdjustingCostsEffect extends CostModificationEffectImpl<AdjustingCostsEffect> {
+class AdjustingCostsEffect extends CostModificationEffectImpl {
 
     public AdjustingCostsEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);

@@ -75,7 +75,7 @@ public class Sunweb extends CardImpl {
     }
 }
 
-class SunwebEffect extends RestrictionEffect<SunwebEffect> {
+class SunwebEffect extends RestrictionEffect {
 
     public SunwebEffect() {
         super(Duration.WhileOnBattlefield);

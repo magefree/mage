@@ -88,7 +88,7 @@ public class OrcishLumberjack extends CardImpl {
     }
 }
 
-class OrcishLumberjackManaEffect extends ManaEffect <OrcishLumberjackManaEffect> {
+class OrcishLumberjackManaEffect extends ManaEffect {
 
     public OrcishLumberjackManaEffect() {
         super();

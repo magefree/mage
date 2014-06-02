@@ -134,7 +134,7 @@ class PetalsOfInsightEffect extends OneShotEffect {
     }
 }
 
-class PetalsOfInsightReturnEffect extends PostResolveEffect<PetalsOfInsightReturnEffect> {
+class PetalsOfInsightReturnEffect extends PostResolveEffect {
 
     public PetalsOfInsightReturnEffect() {
         staticText = "If you do, return Petals of Insight to its owner's hand. Otherwise, draw three cards";

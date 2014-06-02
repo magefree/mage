@@ -68,7 +68,7 @@ public class ImiStatue extends CardImpl {
     }
 }
 
-class ImiStatueEffect extends RestrictionUntapNotMoreThanEffect<ImiStatueEffect> {
+class ImiStatueEffect extends RestrictionUntapNotMoreThanEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledArtifactPermanent("an artifact");
 

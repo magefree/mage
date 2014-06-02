@@ -40,7 +40,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public abstract class RestrictionUntapNotMoreThanEffect<T extends RestrictionUntapNotMoreThanEffect<T>> extends ContinuousEffectImpl {
+public abstract class RestrictionUntapNotMoreThanEffect extends ContinuousEffectImpl {
 
     private int number;
     private FilterControlledPermanent filter;

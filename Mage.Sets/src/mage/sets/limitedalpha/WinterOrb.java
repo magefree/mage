@@ -66,7 +66,7 @@ public class WinterOrb extends CardImpl {
     }
 }
 
-class WinterOrbEffect extends RestrictionUntapNotMoreThanEffect<WinterOrbEffect> {
+class WinterOrbEffect extends RestrictionUntapNotMoreThanEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

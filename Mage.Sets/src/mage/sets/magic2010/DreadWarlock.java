@@ -95,7 +95,7 @@ class DreadWarlockAbility extends EvasionAbility {
     }
 }
 
-class DreadWarlockEffect extends RestrictionEffect<DreadWarlockEffect> {
+class DreadWarlockEffect extends RestrictionEffect {
 
     public DreadWarlockEffect() {
         super(Duration.WhileOnBattlefield);

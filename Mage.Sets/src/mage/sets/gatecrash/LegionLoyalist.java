@@ -84,7 +84,7 @@ public class LegionLoyalist extends CardImpl {
     }
 }
 
-class CantBeBlockedByTokenEffect extends RestrictionEffect<CantBeBlockedByTokenEffect> {
+class CantBeBlockedByTokenEffect extends RestrictionEffect {
 
     public CantBeBlockedByTokenEffect() {
         super(Duration.EndOfTurn);

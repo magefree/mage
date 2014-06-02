@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CantAttackAllAnyPlayerEffect extends RestrictionEffect<CantAttackAllAnyPlayerEffect> {
+public class CantAttackAllAnyPlayerEffect extends RestrictionEffect {
 
     private final FilterCreaturePermanent filter;
 

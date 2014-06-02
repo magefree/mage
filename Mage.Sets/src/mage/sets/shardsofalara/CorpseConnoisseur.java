@@ -81,7 +81,7 @@ public class CorpseConnoisseur extends CardImpl {
     }
 }
 
-class SearchLibraryPutInGraveyard extends SearchEffect<SearchLibraryPutInGraveyard> {
+class SearchLibraryPutInGraveyard extends SearchEffect {
 
   public SearchLibraryPutInGraveyard() {
         super(new TargetCardInLibrary(new FilterCreatureCard()), Outcome.Neutral);

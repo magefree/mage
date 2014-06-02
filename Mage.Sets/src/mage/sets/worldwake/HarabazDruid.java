@@ -89,7 +89,7 @@ class HarabazDruidManaAbility extends BasicManaAbility<HarabazDruidManaAbility> 
     }
 }
 
-class HarabazDruidManaEffect extends ManaEffect<HarabazDruidManaEffect> {
+class HarabazDruidManaEffect extends ManaEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {

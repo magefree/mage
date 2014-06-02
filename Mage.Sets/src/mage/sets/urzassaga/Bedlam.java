@@ -66,7 +66,7 @@ public class Bedlam extends CardImpl {
     }
 }
 
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
+class BedlamEffect extends RestrictionEffect {
 
     BedlamEffect() {
         super(Duration.WhileOnBattlefield);

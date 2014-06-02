@@ -74,7 +74,7 @@ public class ExoticOrchard extends CardImpl {
     }
 }
 
-class ExoticOrchardEffect extends ManaEffect<ExoticOrchardEffect> {
+class ExoticOrchardEffect extends ManaEffect {
 
     private static final FilterPermanent filter = new FilterLandPermanent();
     static {

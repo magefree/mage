@@ -45,7 +45,7 @@ import mage.util.CardUtil;
  *
  * @author LokiX, BetaSteward_at_googlemail.com
  */
-public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutInHandEffect> {
+public class SearchLibraryPutInHandEffect extends SearchEffect {
 
     private boolean revealCards = false;
     private boolean forceShuffle;

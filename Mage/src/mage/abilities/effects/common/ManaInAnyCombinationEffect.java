@@ -21,9 +21,9 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class ManaInAnyCombinationEffect extends ManaEffect <ManaInAnyCombinationEffect> {
+public class ManaInAnyCombinationEffect extends ManaEffect {
 
-    private ArrayList<ColoredManaSymbol> manaSymbols = new ArrayList();
+    private ArrayList<ColoredManaSymbol> manaSymbols = new ArrayList<>();
     private final DynamicValue amount;
 
     public ManaInAnyCombinationEffect(int amount, ColoredManaSymbol... coloredManaSymbols) {

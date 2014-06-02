@@ -111,7 +111,7 @@ class BidentOfThassaTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class BidentOfThassaMustAttackEffect extends RequirementEffect<BidentOfThassaMustAttackEffect> {
+class BidentOfThassaMustAttackEffect extends RequirementEffect {
 
     public BidentOfThassaMustAttackEffect() {
         super(Duration.EndOfTurn);

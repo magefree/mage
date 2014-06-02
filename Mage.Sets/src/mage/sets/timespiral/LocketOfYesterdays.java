@@ -66,7 +66,7 @@ public class LocketOfYesterdays extends CardImpl {
     }
 }
 
-class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl<LocketOfYesterdaysCostReductionEffect> {
+class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl {
 
     LocketOfYesterdaysCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);

@@ -83,7 +83,7 @@ public class SlumberingDragon extends CardImpl {
     }
 }
 
-class SlumberingDragonEffect extends RestrictionEffect<SlumberingDragonEffect> {
+class SlumberingDragonEffect extends RestrictionEffect {
 
     public SlumberingDragonEffect() {
         super(Duration.WhileOnBattlefield);

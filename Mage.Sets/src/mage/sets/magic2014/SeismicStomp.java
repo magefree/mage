@@ -64,7 +64,7 @@ public class SeismicStomp extends CardImpl {
     }
 }
 
-class SeismicStompEffect extends RestrictionEffect<SeismicStompEffect> {
+class SeismicStompEffect extends RestrictionEffect {
 
     SeismicStompEffect() {
         super(Duration.EndOfTurn);

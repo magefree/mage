@@ -74,7 +74,7 @@ public class MarshmistTitan extends CardImpl {
     }
 }
 
-class MarshmistTitanCostReductionEffect extends CostModificationEffectImpl<MarshmistTitanCostReductionEffect> {
+class MarshmistTitanCostReductionEffect extends CostModificationEffectImpl {
 
     public MarshmistTitanCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);

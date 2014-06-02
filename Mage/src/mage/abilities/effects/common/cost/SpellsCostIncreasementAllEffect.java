@@ -43,7 +43,7 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class SpellsCostIncreasementAllEffect extends CostModificationEffectImpl<SpellsCostIncreasementAllEffect> {
+public class SpellsCostIncreasementAllEffect extends CostModificationEffectImpl {
 
     private FilterCard filter;
     private int amount;
