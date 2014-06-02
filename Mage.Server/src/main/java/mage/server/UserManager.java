@@ -157,6 +157,7 @@ public class UserManager {
                 new Runnable() {
                     @Override
                     public void run() {
+                        logger.debug("checkExpired - start");
                         Calendar expired = Calendar.getInstance();
                         expired.add(Calendar.MINUTE, -3);
                         List<User> usersToCheck = new ArrayList<>();
@@ -169,6 +170,7 @@ public class UserManager {
                                 users.remove(user.getId());
                             }
                         }
+                        logger.debug("checkExpired - end");
                     }
                 }
             );
