@@ -85,7 +85,7 @@ public class DaringThief extends CardImpl {
     }
 }
 
-class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetControlledPermanent<TargetControlledPermanentSharingOpponentPermanentCardType> {
+class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetControlledPermanent {
     
     public TargetControlledPermanentSharingOpponentPermanentCardType() {
         super();

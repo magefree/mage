@@ -29,12 +29,13 @@
 package mage.target.common;
 
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetControlledCreaturePermanent extends TargetControlledPermanent<TargetControlledCreaturePermanent> {
+public class TargetControlledCreaturePermanent extends TargetPermanent {
 
     public TargetControlledCreaturePermanent() {
         this(1, 1, new FilterControlledCreaturePermanent(), false);

@@ -34,10 +34,8 @@ import mage.target.TargetPermanent;
 /**
  *
  * @author LevelX2
- * 
- * @param <T>
  */
-public class TargetEnchantmentPermanent<T extends TargetEnchantmentPermanent<T>> extends TargetPermanent {
+public class TargetEnchantmentPermanent extends TargetPermanent {
 
     public TargetEnchantmentPermanent(boolean required) {
         this();

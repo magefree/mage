@@ -35,7 +35,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetLandPermanent<T extends TargetLandPermanent<T>> extends TargetPermanent {
+public class TargetLandPermanent extends TargetPermanent {
 
     public TargetLandPermanent() {
         this(1, 1, new FilterLandPermanent(), false);
