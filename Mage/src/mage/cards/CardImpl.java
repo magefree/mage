@@ -59,7 +59,7 @@ import mage.game.command.Commander;
  *
  * @param <T>
  */
-public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
+public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl implements Card {
     private static final long serialVersionUID = 1L;
 
     private static final Logger logger = Logger.getLogger(CardImpl.class);

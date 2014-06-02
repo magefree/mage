@@ -41,7 +41,7 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.CardType;
 import mage.game.Game;
 
-public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements MageObject {
+public abstract class MageObjectImpl implements MageObject {
 
     protected UUID objectId;
 
@@ -57,9 +57,6 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
     protected MageInt toughness;
     protected boolean copy;
 
-    @Override
-    public abstract T copy();
-
     public MageObjectImpl() {
         this(UUID.randomUUID());
     }
@@ -73,7 +70,7 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
         abilities = new AbilitiesImpl<>();
     }
 
-    public MageObjectImpl(final MageObjectImpl<T> object) {
+    public MageObjectImpl(final MageObjectImpl object) {
         objectId = object.objectId;
         name = object.name;
         manaCost = object.manaCost.copy();

@@ -46,7 +46,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 
-public class Token extends MageObjectImpl<Token> {
+public class Token extends MageObjectImpl {
 
     protected String description;
     private UUID lastAddedTokenId;
