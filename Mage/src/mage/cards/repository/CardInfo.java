@@ -176,7 +176,7 @@ public class CardInfo {
         return color;
     }
 
-    private String joinList(List items) {
+    private String joinList(List<String> items) {
         StringBuilder sb = new StringBuilder();
         for (Object item : items) {
             sb.append(item.toString()).append(SEPARATOR);
@@ -186,13 +186,13 @@ public class CardInfo {
 
     private List<String> parseList(String list) {
         if (list.isEmpty()) {
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
         return Arrays.asList(list.split(SEPARATOR));
     }
 
     public final List<CardType> getTypes() {
-        ArrayList<CardType> list = new ArrayList<CardType>();
+        ArrayList<CardType> list = new ArrayList<>();
         for (String type : this.types.split(SEPARATOR)) {
             try {
                 list.add(CardType.valueOf(type));
