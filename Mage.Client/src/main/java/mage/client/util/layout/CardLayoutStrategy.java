@@ -7,7 +7,7 @@ import javax.swing.*;
  *
  * @author noxx
  */
-public interface ICardLayoutStrategy {
+public interface CardLayoutStrategy {
 
     int getDefaultZOrder();
 
