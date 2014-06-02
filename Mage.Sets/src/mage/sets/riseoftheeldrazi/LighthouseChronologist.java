@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com, noxx
  */
-public class LighthouseChronologist extends LevelerCard<LighthouseChronologist> {
+public class LighthouseChronologist extends LevelerCard {
 
     public LighthouseChronologist (UUID ownerId) {
         super(ownerId, 75, "Lighthouse Chronologist", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{U}");

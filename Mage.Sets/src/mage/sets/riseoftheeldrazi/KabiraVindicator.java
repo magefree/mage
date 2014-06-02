@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author North, noxx
  */
-public class KabiraVindicator extends LevelerCard<KabiraVindicator> {
+public class KabiraVindicator extends LevelerCard {
 
     public KabiraVindicator(UUID ownerId) {
         super(ownerId, 28, "Kabira Vindicator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

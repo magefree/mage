@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author Loki, noxx
  */
-public class BrimstoneMage extends LevelerCard<BrimstoneMage> {
+public class BrimstoneMage extends LevelerCard {
 
     public BrimstoneMage (UUID ownerId) {
         super(ownerId, 137, "Brimstone Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

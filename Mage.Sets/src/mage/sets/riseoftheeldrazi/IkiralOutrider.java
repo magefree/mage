@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki, noxx
  */
-public class IkiralOutrider extends LevelerCard<IkiralOutrider> {
+public class IkiralOutrider extends LevelerCard {
 
     public IkiralOutrider (UUID ownerId) {
         super(ownerId, 27, "Ikiral Outrider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

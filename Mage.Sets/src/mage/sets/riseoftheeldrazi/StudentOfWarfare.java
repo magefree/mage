@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Loki, noxx
  */
-public class StudentOfWarfare extends LevelerCard<StudentOfWarfare> {
+public class StudentOfWarfare extends LevelerCard {
 
     public StudentOfWarfare (UUID ownerId) {
         super(ownerId, 47, "Student of Warfare", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");

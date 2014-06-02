@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author North, noxx
  */
-public class ZulaportEnforcer extends LevelerCard<ZulaportEnforcer> {
+public class ZulaportEnforcer extends LevelerCard {
 
     public ZulaportEnforcer(UUID ownerId) {
         super(ownerId, 133, "Zulaport Enforcer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

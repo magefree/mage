@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CoralhelmCommander extends LevelerCard<CoralhelmCommander> {
+public class CoralhelmCommander extends LevelerCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk creatures");
 

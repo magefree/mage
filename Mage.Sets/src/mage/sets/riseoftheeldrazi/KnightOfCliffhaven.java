@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author North, noxx
  */
-public class KnightOfCliffhaven extends LevelerCard<KnightOfCliffhaven> {
+public class KnightOfCliffhaven extends LevelerCard {
 
     public KnightOfCliffhaven(UUID ownerId) {
         super(ownerId, 29, "Knight of Cliffhaven", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

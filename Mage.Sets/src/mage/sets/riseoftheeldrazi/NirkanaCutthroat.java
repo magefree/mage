@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Loki, noxx
  */
-public class NirkanaCutthroat extends LevelerCard<NirkanaCutthroat> {
+public class NirkanaCutthroat extends LevelerCard {
 
     public NirkanaCutthroat (UUID ownerId) {
         super(ownerId, 119, "Nirkana Cutthroat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

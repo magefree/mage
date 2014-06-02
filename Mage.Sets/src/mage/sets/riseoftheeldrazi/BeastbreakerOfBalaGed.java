@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author North, noxx
  */
-public class BeastbreakerOfBalaGed extends LevelerCard<BeastbreakerOfBalaGed> {
+public class BeastbreakerOfBalaGed extends LevelerCard {
 
     public BeastbreakerOfBalaGed(UUID ownerId) {
         super(ownerId, 178, "Beastbreaker of Bala Ged", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

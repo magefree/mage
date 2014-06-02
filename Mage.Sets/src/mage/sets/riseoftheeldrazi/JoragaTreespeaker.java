@@ -55,7 +55,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author BetaSteward_at_googlemail.com, noxx
  */
-public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
+public class JoragaTreespeaker extends LevelerCard {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elves");
 

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Loki, noxx
  */
-public class NullChampion extends LevelerCard<NullChampion> {
+public class NullChampion extends LevelerCard {
 
     public NullChampion (UUID ownerId) {
         super(ownerId, 121, "Null Champion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

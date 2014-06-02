@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com, noxx
  */
-public class EnclaveCryptologist extends LevelerCard<EnclaveCryptologist> {
+public class EnclaveCryptologist extends LevelerCard {
 
     public EnclaveCryptologist (UUID ownerId) {
         super(ownerId, 66, "Enclave Cryptologist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");

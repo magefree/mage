@@ -35,9 +35,8 @@ import mage.constants.Rarity;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class LevelerCard<T extends LevelerCard<T>> extends CardImpl {
+public abstract class LevelerCard extends CardImpl {
 
     private int maxLevelCounters;
 

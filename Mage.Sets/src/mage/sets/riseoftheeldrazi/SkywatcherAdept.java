@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author North, noxx
  */
-public class SkywatcherAdept extends LevelerCard<SkywatcherAdept> {
+public class SkywatcherAdept extends LevelerCard {
 
     public SkywatcherAdept(UUID ownerId) {
         super(ownerId, 88, "Skywatcher Adept", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

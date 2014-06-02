@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CaravanEscort extends LevelerCard<CaravanEscort> {
+public class CaravanEscort extends LevelerCard {
 
     public CaravanEscort(UUID ownerId) {
         super(ownerId, 15, "Caravan Escort", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

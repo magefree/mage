@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author Loki, noxx
  */
-public class GuulDrazAssassin extends LevelerCard<GuulDrazAssassin> {
+public class GuulDrazAssassin extends LevelerCard {
 
     public GuulDrazAssassin (UUID ownerId) {
         super(ownerId, 112, "Guul Draz Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}");

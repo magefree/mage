@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author North, noxx
  */
-public class HalimarWavewatch extends LevelerCard<HalimarWavewatch> {
+public class HalimarWavewatch extends LevelerCard {
 
     public HalimarWavewatch(UUID ownerId) {
         super(ownerId, 72, "Halimar Wavewatch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

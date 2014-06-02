@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author North, noxx
  */
-public class HadaSpyPatrol extends LevelerCard<HadaSpyPatrol> {
+public class HadaSpyPatrol extends LevelerCard {
 
     public HadaSpyPatrol(UUID ownerId) {
         super(ownerId, 71, "Hada Spy Patrol", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

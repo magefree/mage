@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com, noxx
  */
-public class KarganDragonlord extends LevelerCard<KarganDragonlord> {
+public class KarganDragonlord extends LevelerCard {
 
     public KarganDragonlord(UUID ownerId) {
         super(ownerId, 152, "Kargan Dragonlord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{R}{R}");

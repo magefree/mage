@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author North, noxx
  */
-public class TranscendentMaster extends LevelerCard<TranscendentMaster> {
+public class TranscendentMaster extends LevelerCard {
 
     public TranscendentMaster(UUID ownerId) {
         super(ownerId, 51, "Transcendent Master", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

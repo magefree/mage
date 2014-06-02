@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author North, noxx
  */
-public class KazanduTuskcaller extends LevelerCard<KazanduTuskcaller> {
+public class KazanduTuskcaller extends LevelerCard {
 
     public KazanduTuskcaller(UUID ownerId) {
         super(ownerId, 191, "Kazandu Tuskcaller", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
