@@ -47,7 +47,7 @@ import mage.target.TargetObject;
  */
 
 
-public class TargetActivatedOrTriggeredAbility extends TargetObject<TargetActivatedOrTriggeredAbility> {
+public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
         public TargetActivatedOrTriggeredAbility() {
         this.minNumberOfTargets = 1;

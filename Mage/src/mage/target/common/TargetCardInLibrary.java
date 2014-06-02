@@ -47,7 +47,7 @@ import mage.target.TargetCard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
+public class TargetCardInLibrary extends TargetCard {
 
     private int librarySearchLimit;
 

@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
-public class TargetOpponent extends TargetPlayer<TargetOpponent> {
+public class TargetOpponent extends TargetPlayer {
 
     public TargetOpponent() {
         this(false);

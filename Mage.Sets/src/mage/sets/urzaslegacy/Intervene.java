@@ -72,7 +72,7 @@ public class Intervene extends CardImpl<Intervene> {
         return new Intervene(this);
     }
     
-    private class InterveneTargetSpell extends TargetObject<InterveneTargetSpell> {
+    private class InterveneTargetSpell extends TargetObject {
 
 
         public InterveneTargetSpell() {

@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetSource extends TargetObject<TargetSource> {
+public class TargetSource extends TargetObject {
 
     protected FilterObject filter;
 

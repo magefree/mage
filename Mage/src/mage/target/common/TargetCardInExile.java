@@ -43,7 +43,7 @@ import mage.target.TargetCard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCardInExile extends TargetCard<TargetCardInExile> {
+public class TargetCardInExile extends TargetCard {
 
     private UUID zoneId;
     private boolean allExileZones;

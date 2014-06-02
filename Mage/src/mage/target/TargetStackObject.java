@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetStackObject extends TargetObject<TargetStackObject> {
+public class TargetStackObject extends TargetObject {
 
     protected FilterStackObject filter;
 

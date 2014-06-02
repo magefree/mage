@@ -42,7 +42,7 @@ import mage.filter.predicate.other.OwnerIdPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetDiscard extends TargetCard<TargetDiscard> {
+public class TargetDiscard extends TargetCard {
 
     private UUID playerId;
 

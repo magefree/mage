@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class TargetPermanentOrPlayer extends TargetImpl<TargetPermanentOrPlayer> {
+public class TargetPermanentOrPlayer extends TargetImpl {
 
     protected FilterPermanentOrPlayer filter;
     protected FilterPermanent filterPermanent;

@@ -206,7 +206,7 @@ class RavagerOfTheFellsEffect extends OneShotEffect {
 
 }
 
-class RavagerOfTheFellsTarget extends TargetPermanent<RavagerOfTheFellsTarget> {
+class RavagerOfTheFellsTarget extends TargetPermanent {
 
     public RavagerOfTheFellsTarget() {
         super(0, 1, new FilterCreaturePermanent(), false);

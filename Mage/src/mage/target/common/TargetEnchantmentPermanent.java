@@ -37,7 +37,7 @@ import mage.target.TargetPermanent;
  * 
  * @param <T>
  */
-public class TargetEnchantmentPermanent<T extends TargetEnchantmentPermanent<T>> extends TargetPermanent<TargetEnchantmentPermanent<T>> {
+public class TargetEnchantmentPermanent<T extends TargetEnchantmentPermanent<T>> extends TargetPermanent {
 
     public TargetEnchantmentPermanent(boolean required) {
         this();

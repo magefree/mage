@@ -110,7 +110,7 @@ class LoamingShamanEffect extends OneShotEffect {
     }
 }
 
-class LoamingShamanTargetCardsInGraveyard extends TargetCard<LoamingShamanTargetCardsInGraveyard> {
+class LoamingShamanTargetCardsInGraveyard extends TargetCard {
 
     public LoamingShamanTargetCardsInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
         super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);

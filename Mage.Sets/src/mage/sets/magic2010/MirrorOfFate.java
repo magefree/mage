@@ -146,7 +146,7 @@ class FaceUpPredicate implements Predicate<Card> {
     }
 }
 
-class MirrorOfFateTarget extends TargetCard<MirrorOfFateTarget> {
+class MirrorOfFateTarget extends TargetCard {
 
     public MirrorOfFateTarget() {
         super(0, 7, Zone.EXILED, new FilterCard());

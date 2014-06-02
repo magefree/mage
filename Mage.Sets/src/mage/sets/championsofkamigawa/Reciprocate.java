@@ -68,7 +68,7 @@ public class Reciprocate extends CardImpl<Reciprocate> {
 
 }
 
-class ReciprocateTarget extends TargetPermanent<ReciprocateTarget> {
+class ReciprocateTarget extends TargetPermanent {
 
     public ReciprocateTarget() {
         super(1, 1, new FilterCreaturePermanent(), false);

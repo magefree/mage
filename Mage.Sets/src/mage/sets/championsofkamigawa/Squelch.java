@@ -75,7 +75,7 @@ public class Squelch extends CardImpl<Squelch> {
     }
 }
 
-class ActivatedAbilityTarget extends TargetObject<ActivatedAbilityTarget> {
+class ActivatedAbilityTarget extends TargetObject {
 
     public ActivatedAbilityTarget() {
         this.minNumberOfTargets = 1;

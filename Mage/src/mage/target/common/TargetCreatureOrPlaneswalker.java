@@ -35,7 +35,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class TargetCreatureOrPlaneswalker<T extends TargetCreatureOrPlaneswalker<T>> extends TargetPermanent<TargetCreatureOrPlaneswalker<T>> {
+public class TargetCreatureOrPlaneswalker<T extends TargetCreatureOrPlaneswalker<T>> extends TargetPermanent {
 
     public TargetCreatureOrPlaneswalker() {
         this(1, 1 ,new FilterCreatureOrPlaneswalkerPermanent(), false);

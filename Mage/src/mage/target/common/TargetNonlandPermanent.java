@@ -35,7 +35,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetNonlandPermanent extends TargetPermanent<TargetNonlandPermanent> {
+public class TargetNonlandPermanent extends TargetPermanent {
 
     public TargetNonlandPermanent() {
         this(1, 1, false);

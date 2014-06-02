@@ -43,7 +43,7 @@ import mage.target.TargetCard;
  */
 
 
-public class TargetCardInASingleGraveyard extends TargetCard<TargetCardInASingleGraveyard> {
+public class TargetCardInASingleGraveyard extends TargetCard {
 
     public TargetCardInASingleGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
         super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);

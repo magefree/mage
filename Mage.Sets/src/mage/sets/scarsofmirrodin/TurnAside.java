@@ -73,7 +73,7 @@ public class TurnAside extends CardImpl<TurnAside> {
         return new TurnAside(this);
     }
 
-    private class CustomTargetSpell extends TargetObject<CustomTargetSpell> {
+    private class CustomTargetSpell extends TargetObject {
 
         protected FilterSpell filter;
 

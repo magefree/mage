@@ -39,9 +39,8 @@ import mage.players.Player;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl<T> {
+public abstract class TargetAmount extends TargetImpl {
 
     boolean amountWasSet = false;
     DynamicValue amount;
@@ -64,6 +63,9 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
         this.remainingAmount = target.remainingAmount;
         this.amountWasSet = target.amountWasSet;
     }
+
+    @Override
+    public abstract TargetAmount copy();
 
     public int getAmountRemaining() {
         return remainingAmount;
@@ -127,8 +129,8 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
     }
 
     @Override
-    public List<T> getTargetOptions(Ability source, Game game) {
-        List<T> options = new ArrayList<>();
+    public List<? extends TargetAmount> getTargetOptions(Ability source, Game game) {
+        List<TargetAmount> options = new ArrayList<>();
         Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
 
         addTargets(this, possibleTargets, options, source, game);
@@ -136,13 +138,13 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
         return options;
     }
 
-    protected void addTargets(TargetAmount<T> target, Set<UUID> targets, List<T> options, Ability source, Game game) {
+    protected void addTargets(TargetAmount target, Set<UUID> targets, List<TargetAmount> options, Ability source, Game game) {
         if (!amountWasSet) {
             setAmount(source, game);
         }
         for (UUID targetId: targets) {
             for (int n = 1; n <= target.remainingAmount; n++) {
-                T t = target.copy();
+                TargetAmount t = target.copy();
                 t.addTarget(targetId, n, source, game, true);
                 if (t.remainingAmount > 0) {
                     if (targets.size() > 1) {

@@ -42,9 +42,8 @@ import mage.game.permanent.Permanent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<TargetPermanent<T>> {
+public class TargetPermanent extends TargetObject {
 
     protected FilterPermanent filter;
 
@@ -79,7 +78,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
         this.notTarget = notTarget;
     }
 
-    public TargetPermanent(final TargetPermanent<T> target) {
+    public TargetPermanent(final TargetPermanent target) {
         super(target);
         this.filter = target.filter.copy();
     }

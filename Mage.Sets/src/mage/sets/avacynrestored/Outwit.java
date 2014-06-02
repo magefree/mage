@@ -76,7 +76,7 @@ public class Outwit extends CardImpl<Outwit> {
         return new Outwit(this);
     }
 
-    private class CustomTargetSpell extends TargetObject<CustomTargetSpell> {
+    private class CustomTargetSpell extends TargetObject {
 
         protected FilterSpell filter;
 

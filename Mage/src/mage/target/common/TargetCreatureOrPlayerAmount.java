@@ -48,7 +48,7 @@ import mage.target.TargetAmount;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrPlayerAmount> {
+public class TargetCreatureOrPlayerAmount extends TargetAmount {
 
     protected FilterCreatureOrPlayer filter;
 

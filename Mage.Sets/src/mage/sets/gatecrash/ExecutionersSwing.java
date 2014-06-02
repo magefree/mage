@@ -73,7 +73,7 @@ public class ExecutionersSwing extends CardImpl<ExecutionersSwing> {
     }
 }
 
-class TargetCreaturePermanentThatDealtDamageThisTurn extends TargetPermanent<TargetCreaturePermanentThatDealtDamageThisTurn> {
+class TargetCreaturePermanentThatDealtDamageThisTurn extends TargetPermanent {
 
     public TargetCreaturePermanentThatDealtDamageThisTurn() {
         super(1, 1, new FilterCreaturePermanent(), false);

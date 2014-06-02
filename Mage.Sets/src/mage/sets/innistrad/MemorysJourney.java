@@ -117,7 +117,7 @@ class MemorysJourneyEffect extends OneShotEffect {
     }
 }
 
-class MemorysJourneyTarget extends TargetCard<MemorysJourneyTarget> {
+class MemorysJourneyTarget extends TargetCard {
 
     public MemorysJourneyTarget() {
         super(0, 3, Zone.GRAVEYARD, new FilterCard());

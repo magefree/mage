@@ -42,9 +42,8 @@ import java.util.*;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
+public abstract class TargetImpl implements Target {
 
     protected Map<UUID, Integer> targets = new LinkedHashMap<>();
     protected Map<UUID, Integer> zoneChangeCounters = new HashMap<>();
@@ -60,7 +59,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
     protected boolean atRandom = false;
 
     @Override
-    public abstract T copy();
+    public abstract TargetImpl copy();
 
     public TargetImpl() {
         this(false);
@@ -70,7 +69,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
         this.notTarget = notTarget;
     }
 
-    public TargetImpl(final TargetImpl<T> target) {
+    public TargetImpl(final TargetImpl target) {
         this.targetName = target.targetName;
         this.zone = target.zone;
         this.maxNumberOfTargets = target.maxNumberOfTargets;
@@ -340,14 +339,14 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
     }
 
     @Override
-    public List<T> getTargetOptions(Ability source, Game game) {
-        List<T> options = new ArrayList<T>();
+    public List<? extends TargetImpl> getTargetOptions(Ability source, Game game) {
+        List<TargetImpl> options = new ArrayList<>();
         Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
         possibleTargets.removeAll(getTargets());
         Iterator<UUID> it = possibleTargets.iterator();
         while (it.hasNext()) {
             UUID targetId = it.next();
-            T target = this.copy();
+            TargetImpl target = this.copy();
             target.clearChosen();
             target.addTarget(targetId, source, game, true);
             if (!target.isChosen()) {

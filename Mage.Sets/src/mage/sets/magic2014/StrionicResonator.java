@@ -130,7 +130,7 @@ class StrionicResonatorEffect extends OneShotEffect {
     }
 }
 
-class TargetTriggeredAbility extends TargetObject<TargetTriggeredAbility> {
+class TargetTriggeredAbility extends TargetObject {
 
     public TargetTriggeredAbility() {
         this.minNumberOfTargets = 1;

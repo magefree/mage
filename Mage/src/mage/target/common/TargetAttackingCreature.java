@@ -35,7 +35,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetAttackingCreature extends TargetPermanent<TargetAttackingCreature> {
+public class TargetAttackingCreature extends TargetPermanent {
 
     public TargetAttackingCreature() {
         this(1, 1, new FilterAttackingCreature(), false);

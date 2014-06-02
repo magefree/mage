@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPlayer<T>> {
+public class TargetPlayer extends TargetImpl {
 
     protected FilterPlayer filter;
 

@@ -139,7 +139,7 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
     }
 }
 
-class ChandraPyromasterTarget extends TargetPermanent<ChandraPyromasterTarget> {
+class ChandraPyromasterTarget extends TargetPermanent {
 
     public ChandraPyromasterTarget() {
         super(0, 1, new FilterCreaturePermanent("creature that the targeted player controls"), false);

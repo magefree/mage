@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetDefender extends TargetImpl<TargetDefender> {
+public class TargetDefender extends TargetImpl {
 
     protected FilterPlaneswalkerOrPlayer filter;
     protected UUID attackerId;

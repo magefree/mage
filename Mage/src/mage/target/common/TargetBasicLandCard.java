@@ -38,7 +38,7 @@ import mage.target.TargetCard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetBasicLandCard extends TargetCard<TargetBasicLandCard> {
+public class TargetBasicLandCard extends TargetCard {
 
     public TargetBasicLandCard(Zone zone) {
         super(zone);

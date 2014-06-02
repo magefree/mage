@@ -151,7 +151,7 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
 }
 
 
-class DaringThiefSecondTarget extends TargetPermanent<DaringThiefSecondTarget> {
+class DaringThiefSecondTarget extends TargetPermanent {
 
     private Permanent firstTarget = null;
             

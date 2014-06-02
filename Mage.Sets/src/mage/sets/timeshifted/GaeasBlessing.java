@@ -120,7 +120,7 @@ class GaeasBlessingEffect extends OneShotEffect {
     }
 }
 
-class GaeasBlessingTarget extends TargetCard<GaeasBlessingTarget> {
+class GaeasBlessingTarget extends TargetCard {
 
     public GaeasBlessingTarget() {
         super(0, 3, Zone.GRAVEYARD, new FilterCard());

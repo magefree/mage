@@ -10,7 +10,7 @@ import mage.target.TargetCard;
 import java.util.UUID;
 
 
-public class TargetCardInOpponentsGraveyard extends TargetCard<TargetCardInOpponentsGraveyard> {
+public class TargetCardInOpponentsGraveyard extends TargetCard {
 
     protected boolean allFromOneOpponent;
 

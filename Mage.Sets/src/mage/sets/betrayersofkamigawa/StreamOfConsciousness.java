@@ -113,7 +113,7 @@ class StreamOfConsciousnessEffect extends OneShotEffect {
     }
 }
 
-class StreamOfConsciousnessTarget extends TargetCard<StreamOfConsciousnessTarget> {
+class StreamOfConsciousnessTarget extends TargetCard {
 
     public StreamOfConsciousnessTarget() {
         super(0, 4, Zone.GRAVEYARD, new FilterCard("cards from target player's graveyard"));

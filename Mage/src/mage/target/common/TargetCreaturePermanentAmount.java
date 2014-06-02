@@ -46,7 +46,7 @@ import mage.target.TargetAmount;
  *
  * @author North
  */
-public class TargetCreaturePermanentAmount extends TargetAmount<TargetCreaturePermanentAmount> {
+public class TargetCreaturePermanentAmount extends TargetAmount {
 
     protected FilterCreaturePermanent filter;
 

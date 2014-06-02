@@ -40,7 +40,7 @@ import mage.target.TargetCard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCardInHand extends TargetCard<TargetCardInHand> {
+public class TargetCardInHand extends TargetCard {
 
     public TargetCardInHand() {
         this(1, 1, new FilterCard());

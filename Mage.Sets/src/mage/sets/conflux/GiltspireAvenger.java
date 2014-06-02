@@ -87,7 +87,7 @@ public class GiltspireAvenger extends CardImpl<GiltspireAvenger> {
     }
 }
 
-class GiltspireAvengerTarget extends TargetPermanent<GiltspireAvengerTarget> {
+class GiltspireAvengerTarget extends TargetPermanent {
 
     public GiltspireAvengerTarget() {
         super(1, 1, new FilterCreaturePermanent(), false);

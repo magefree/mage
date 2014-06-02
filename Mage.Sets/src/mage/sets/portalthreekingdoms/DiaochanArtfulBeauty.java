@@ -116,7 +116,7 @@ class DiaochanArtfulBeautyDestroyEffect extends OneShotEffect {
     }
 }
 
-class TargetOpponentsChoiceCreaturePermanent extends TargetPermanent<TargetOpponentsChoiceCreaturePermanent> {
+class TargetOpponentsChoiceCreaturePermanent extends TargetPermanent {
 
     private UUID opponentId = null;
 

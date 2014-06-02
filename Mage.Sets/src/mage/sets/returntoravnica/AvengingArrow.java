@@ -69,7 +69,7 @@ public class AvengingArrow extends CardImpl<AvengingArrow> {
     }
 }
 
-class AvengingArrowTarget extends TargetPermanent<AvengingArrowTarget> {
+class AvengingArrowTarget extends TargetPermanent {
 
     public AvengingArrowTarget() {
         super(1, 1, new FilterCreaturePermanent(), false);

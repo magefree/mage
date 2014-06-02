@@ -87,7 +87,7 @@ public class NotOfThisWorld extends CardImpl<NotOfThisWorld> {
     }
 }
 
-class TargetSpellTargetingControlledPermanent extends TargetObject<TargetSpellTargetingControlledPermanent> {
+class TargetSpellTargetingControlledPermanent extends TargetObject {
 
     
     public TargetSpellTargetingControlledPermanent() {

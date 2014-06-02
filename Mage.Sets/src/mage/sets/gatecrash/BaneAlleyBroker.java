@@ -165,7 +165,7 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
     }
 }
 
-class TargetCardInBaneAlleyBrokerExile extends TargetCard<TargetCardInBaneAlleyBrokerExile> {
+class TargetCardInBaneAlleyBrokerExile extends TargetCard {
 
     public TargetCardInBaneAlleyBrokerExile(UUID CardId) {
        super(1, 1, Zone.EXILED, new FilterCard("card exiled with Bane Alley Broker"));

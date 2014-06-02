@@ -42,7 +42,7 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetSpell extends TargetObject<TargetSpell> {
+public class TargetSpell extends TargetObject {
 
     protected FilterSpell filter;
 

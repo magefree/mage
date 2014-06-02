@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
+public class TargetCreatureOrPlayer extends TargetImpl {
 
     protected FilterCreatureOrPlayer filter;
 

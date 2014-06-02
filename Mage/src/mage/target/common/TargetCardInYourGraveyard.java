@@ -40,7 +40,7 @@ import mage.target.TargetCard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGraveyard> {
+public class TargetCardInYourGraveyard extends TargetCard {
 
     public TargetCardInYourGraveyard() {
         this(1, 1, new FilterCard("card from your graveyard"));

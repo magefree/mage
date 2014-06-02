@@ -48,7 +48,7 @@ import mage.target.TargetImpl;
  *
  * @author LevelX
  */
-public class TargetSpellOrPermanent extends TargetImpl<TargetSpellOrPermanent> {
+public class TargetSpellOrPermanent extends TargetImpl {
 
     protected FilterSpellOrPermanent filter;
     protected FilterPermanent filterPermanent;

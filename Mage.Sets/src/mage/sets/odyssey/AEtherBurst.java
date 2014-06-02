@@ -94,7 +94,7 @@ public class AEtherBurst extends CardImpl<AEtherBurst> {
     }
 }
 
-class DynamicTargetCreaturePermanent extends TargetPermanent<DynamicTargetCreaturePermanent> {
+class DynamicTargetCreaturePermanent extends TargetPermanent {
 
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creatures");
 

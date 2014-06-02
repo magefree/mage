@@ -33,9 +33,8 @@ import mage.target.TargetPermanent;
 
 /**
  * @author ayratn
- * @param <T>
  */
-public class TargetArtifactPermanent<T extends TargetArtifactPermanent<T>> extends TargetPermanent<TargetArtifactPermanent<T>> {
+public class TargetArtifactPermanent extends TargetPermanent {
 
     public TargetArtifactPermanent(boolean required) {
         this();
