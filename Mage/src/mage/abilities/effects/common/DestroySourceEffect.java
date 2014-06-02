@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DestroySourceEffect extends OneShotEffect<DestroySourceEffect> {
+public class DestroySourceEffect extends OneShotEffect {
 
     protected boolean noRegen;
 

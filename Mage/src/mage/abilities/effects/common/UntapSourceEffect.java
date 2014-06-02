@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class UntapSourceEffect extends OneShotEffect<UntapSourceEffect> {
+public class UntapSourceEffect extends OneShotEffect {
 
     public UntapSourceEffect() {
     super(Outcome.Untap);

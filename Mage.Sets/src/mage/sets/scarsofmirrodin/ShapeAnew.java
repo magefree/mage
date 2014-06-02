@@ -78,7 +78,7 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
         return new ShapeAnew(this);
     }
 
-    private class ShapeAnewEffect extends OneShotEffect<ShapeAnewEffect> {
+    private class ShapeAnewEffect extends OneShotEffect {
 
         public ShapeAnewEffect() {
             super(Outcome.PutCardInPlay);

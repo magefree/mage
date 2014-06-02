@@ -71,7 +71,7 @@ public class DevastationTide extends CardImpl<DevastationTide> {
     }
 }
 
-class DevastationTideEffect extends OneShotEffect<DevastationTideEffect> {
+class DevastationTideEffect extends OneShotEffect {
 
     public DevastationTideEffect() {
         super(Outcome.ReturnToHand);

@@ -71,7 +71,7 @@ public class IncreasingConfusion extends CardImpl<IncreasingConfusion> {
     }
 }
 
-class IncreasingConfusionEffect extends OneShotEffect<IncreasingConfusionEffect> {
+class IncreasingConfusionEffect extends OneShotEffect {
 
     public IncreasingConfusionEffect() {
         super(Outcome.Detriment);

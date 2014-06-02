@@ -79,7 +79,7 @@ public class SpittingImage extends CardImpl<SpittingImage> {
     }
 }
 
-class SpittingImageEffect extends OneShotEffect<SpittingImageEffect> {
+class SpittingImageEffect extends OneShotEffect {
 
     public SpittingImageEffect() {
         super(Outcome.PutCreatureInPlay);

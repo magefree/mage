@@ -118,7 +118,7 @@ class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl {
     }
 }
 
-class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect<UlamogTheInfiniteGyreEnterGraveyardEffect> {
+class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect {
 
     UlamogTheInfiniteGyreEnterGraveyardEffect ( ) {
         super(Outcome.Benefit);

@@ -107,7 +107,7 @@ public class QuillmaneBaku extends CardImpl<QuillmaneBaku> {
         return new QuillmaneBaku(this);
     }
     
-    class QuillmaneBakuReturnEffect extends OneShotEffect<QuillmaneBakuReturnEffect> {
+    class QuillmaneBakuReturnEffect extends OneShotEffect {
 
         public QuillmaneBakuReturnEffect() {
             super(Outcome.ReturnToHand);

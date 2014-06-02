@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  *
  * @author Plopmans
  */
-public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect<ReturnToHandChosenControlledPermanentEffect> {
+public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
     
     private final FilterControlledPermanent filter;
     private int number;

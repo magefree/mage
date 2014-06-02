@@ -79,7 +79,7 @@ public class Woeleecher extends CardImpl<Woeleecher> {
     }
 }
 
-class WoeleecherEffect extends OneShotEffect<WoeleecherEffect> {
+class WoeleecherEffect extends OneShotEffect {
 
     private int numberCountersOriginal = 0;
     private int numberCountersAfter = 0;

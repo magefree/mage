@@ -153,7 +153,7 @@ class HauntExileAbility extends ZoneChangeTriggeredAbility<HauntExileAbility> {
     }
 }
 
-class HauntEffect extends OneShotEffect<HauntEffect> {
+class HauntEffect extends OneShotEffect {
 
     public HauntEffect() {
         super(Outcome.Benefit);

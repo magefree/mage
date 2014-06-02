@@ -82,7 +82,7 @@ public class SilentBladeOni extends CardImpl<SilentBladeOni> {
     }
 }
 
-class SilentBladeOniEffect extends OneShotEffect<SilentBladeOniEffect> {
+class SilentBladeOniEffect extends OneShotEffect {
 
     public SilentBladeOniEffect() {
         super(Outcome.PlayForFree);

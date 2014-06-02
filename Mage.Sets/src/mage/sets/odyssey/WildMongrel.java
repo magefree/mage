@@ -82,7 +82,7 @@ public class WildMongrel extends CardImpl<WildMongrel> {
     }
 }
 
-class ChangeColorEffect extends OneShotEffect<ChangeColorEffect> {
+class ChangeColorEffect extends OneShotEffect {
 
     public ChangeColorEffect() {
         super(Outcome.Neutral);

@@ -86,7 +86,7 @@ public class ClockworkHydra extends CardImpl<ClockworkHydra> {
 
 }
 
-class ClockworkHydraEffect extends OneShotEffect<ClockworkHydraEffect> {
+class ClockworkHydraEffect extends OneShotEffect {
 
     public ClockworkHydraEffect() {
         super(Outcome.Damage);

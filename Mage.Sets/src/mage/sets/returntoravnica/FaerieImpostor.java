@@ -80,7 +80,7 @@ public class FaerieImpostor extends CardImpl<FaerieImpostor> {
     }
 }
 
-class FaerieImpostorEffect extends OneShotEffect<FaerieImpostorEffect> {
+class FaerieImpostorEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
     private static final String effectText = "sacrifice it unless you return another creature you control to its owner's hand";

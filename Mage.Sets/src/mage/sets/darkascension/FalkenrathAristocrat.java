@@ -86,7 +86,7 @@ public class FalkenrathAristocrat extends CardImpl<FalkenrathAristocrat> {
     }
 }
 
-class FalkenrathAristocratEffect extends OneShotEffect<FalkenrathAristocratEffect> {
+class FalkenrathAristocratEffect extends OneShotEffect {
 
     public FalkenrathAristocratEffect() {
         super(Outcome.BoostCreature);

@@ -68,7 +68,7 @@ public class BeaconOfImmortality extends CardImpl<BeaconOfImmortality> {
     }
 }
 
-class BeaconOfImmortalityEffect extends OneShotEffect<BeaconOfImmortalityEffect> {
+class BeaconOfImmortalityEffect extends OneShotEffect {
 
     public BeaconOfImmortalityEffect() {
         super(Outcome.GainLife);

@@ -83,7 +83,7 @@ public class MarkForDeath extends CardImpl<MarkForDeath> {
     }
 }
 
-class MarkForDeathEffect extends OneShotEffect<MarkForDeathEffect> {
+class MarkForDeathEffect extends OneShotEffect {
 
     public MarkForDeathEffect() {
         super(Outcome.Damage);

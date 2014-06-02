@@ -88,7 +88,7 @@ public class HiredTorturer extends CardImpl<HiredTorturer> {
 
 }
 
-class HiredTorturerEffect extends OneShotEffect<HiredTorturerEffect> {
+class HiredTorturerEffect extends OneShotEffect {
 
     public HiredTorturerEffect() {
         super(Outcome.Detriment);

@@ -70,19 +70,21 @@ public class ChatSession {
             String userName = clients.get(userId);
             logger.debug(userName + " leaves chat: " + chatId);
             clients.remove(userId);
-            String message;
+            String message = null;
             switch (reason) {
                 case Disconnected:
-                    message = " has left MAGE";
+                    message = " has left XMage";
                     break;
                  case LostConnection:
                     message = " has lost connection";
                     break;
                  default:
-                     message = " has left chat";
+                     logger.debug(userName + " left chat with reason: " + reason.name() + " " + chatId);
             }
-            broadcast(null, new StringBuilder(userName).append(message).toString(), MessageColor.BLUE, true, MessageType.STATUS);
-            logger.debug(userName + "left chat with reason " + message + " " + chatId);
+            if (message != null) {
+                broadcast(null, new StringBuilder(userName).append(message).toString(), MessageColor.BLUE, true, MessageType.STATUS);
+                logger.debug(userName + " left chat with reason: " + message + " " + chatId);
+            }
         }
     }
 

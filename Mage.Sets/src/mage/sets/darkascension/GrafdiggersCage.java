@@ -70,7 +70,7 @@ public class GrafdiggersCage extends CardImpl<GrafdiggersCage> {
     }
 }
 
-class GrafdiggersCageEffect extends ReplacementEffectImpl<GrafdiggersCageEffect> {
+class GrafdiggersCageEffect extends ReplacementEffectImpl {
 
     public GrafdiggersCageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -112,7 +112,7 @@ class GrafdiggersCageEffect extends ReplacementEffectImpl<GrafdiggersCageEffect>
 
 }
 
-class GrafdiggersCageEffect2 extends ReplacementEffectImpl<GrafdiggersCageEffect2> {
+class GrafdiggersCageEffect2 extends ReplacementEffectImpl {
 
     public GrafdiggersCageEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

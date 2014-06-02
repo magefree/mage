@@ -70,7 +70,7 @@ public class SoulConduit extends CardImpl<SoulConduit> {
     }
 }
 
-class SoulConduitEffect extends OneShotEffect<SoulConduitEffect> {
+class SoulConduitEffect extends OneShotEffect {
 
     public SoulConduitEffect() {
         super(Outcome.Neutral);

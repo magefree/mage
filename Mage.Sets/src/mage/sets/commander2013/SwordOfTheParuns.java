@@ -101,7 +101,7 @@ public class SwordOfTheParuns extends CardImpl<SwordOfTheParuns> {
     }
 }
 
-class MayTapOrUntapAttachedEffect extends OneShotEffect<MayTapOrUntapAttachedEffect> {
+class MayTapOrUntapAttachedEffect extends OneShotEffect {
 
     public MayTapOrUntapAttachedEffect() {
         super(Outcome.Benefit);

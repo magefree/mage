@@ -78,7 +78,7 @@ public class SphinxAmbassador extends CardImpl<SphinxAmbassador> {
     }
 }
 
-class SphinxAmbassadorEffect extends OneShotEffect<SphinxAmbassadorEffect> {
+class SphinxAmbassadorEffect extends OneShotEffect {
 
     public SphinxAmbassadorEffect() {
         super(Outcome.PutCreatureInPlay);

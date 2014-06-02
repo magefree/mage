@@ -85,7 +85,7 @@ public class DarkImpostor extends CardImpl<DarkImpostor> {
     }
 }
 
-class DarkImpostorContinuousEffect extends ContinuousEffectImpl<DarkImpostorContinuousEffect> {
+class DarkImpostorContinuousEffect extends ContinuousEffectImpl {
 
     public DarkImpostorContinuousEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

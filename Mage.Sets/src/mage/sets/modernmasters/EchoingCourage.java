@@ -70,7 +70,7 @@ public class EchoingCourage extends CardImpl<EchoingCourage> {
     }
 }
 
-class EchoingCourageEffect extends OneShotEffect<EchoingCourageEffect> {
+class EchoingCourageEffect extends OneShotEffect {
 
     public EchoingCourageEffect() {
         super(Outcome.Benefit);

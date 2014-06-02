@@ -78,7 +78,7 @@ public class JuganTheRisingStar extends CardImpl<JuganTheRisingStar> {
 
 }
 
-class JuganTheRisingStarMultiEffect extends OneShotEffect<JuganTheRisingStarMultiEffect> {
+class JuganTheRisingStarMultiEffect extends OneShotEffect {
 
     public JuganTheRisingStarMultiEffect() {
         super(Outcome.BoostCreature);

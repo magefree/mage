@@ -86,7 +86,7 @@ public class Duplicant extends CardImpl<Duplicant> {
         return new Duplicant(this);
     }
 }
-class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
+class ExileTargetEffect extends OneShotEffect {
 
 
     public ExileTargetEffect() {
@@ -124,7 +124,7 @@ class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
 }
 
 
-class DuplicantContinuousEffect extends ContinuousEffectImpl<DuplicantContinuousEffect> {
+class DuplicantContinuousEffect extends ContinuousEffectImpl {
 
     public DuplicantContinuousEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

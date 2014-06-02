@@ -115,7 +115,7 @@ class ArrogantBloodlordTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ArrogantBloodlordEffect extends OneShotEffect<ArrogantBloodlordEffect> {
+class ArrogantBloodlordEffect extends OneShotEffect {
 
     ArrogantBloodlordEffect() {
         super(Outcome.Detriment);

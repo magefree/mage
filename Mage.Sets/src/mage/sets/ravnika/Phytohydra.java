@@ -72,7 +72,7 @@ public class Phytohydra extends CardImpl<Phytohydra> {
     }
 }
 
-class PhytohydraEffect extends ReplacementEffectImpl<PhytohydraEffect> {
+class PhytohydraEffect extends ReplacementEffectImpl {
     PhytohydraEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "If damage would be dealt to {this}, put that many +1/+1 counters on it instead";

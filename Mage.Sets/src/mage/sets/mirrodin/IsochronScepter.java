@@ -80,7 +80,7 @@ public class IsochronScepter extends CardImpl<IsochronScepter> {
     }
 }
 
-class IsochronScepterImprintEffect extends OneShotEffect<IsochronScepterImprintEffect> {
+class IsochronScepterImprintEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("card with converted mana cost 2 or less from your hand");
     static  {
@@ -127,7 +127,7 @@ class IsochronScepterImprintEffect extends OneShotEffect<IsochronScepterImprintE
 
 }
 
-class IsochronScepterCopyEffect extends OneShotEffect<IsochronScepterCopyEffect> {
+class IsochronScepterCopyEffect extends OneShotEffect {
 
     public IsochronScepterCopyEffect() {
         super(Outcome.Copy);

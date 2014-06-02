@@ -69,7 +69,7 @@ public class RitesOfReaping extends CardImpl<RitesOfReaping> {
     }
 }
 
-class RitesOfReapingEffect extends ContinuousEffectImpl<RitesOfReapingEffect> {
+class RitesOfReapingEffect extends ContinuousEffectImpl {
 
     public RitesOfReapingEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

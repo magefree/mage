@@ -79,7 +79,7 @@ public class GoblinWarPaint extends CardImpl<GoblinWarPaint> {
     }
 }
 
-class GoblinWarPaintEffect extends ContinuousEffectImpl<GoblinWarPaintEffect> {
+class GoblinWarPaintEffect extends ContinuousEffectImpl {
 
     public GoblinWarPaintEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

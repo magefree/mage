@@ -82,7 +82,7 @@ public class ArachnusWeb extends CardImpl<ArachnusWeb> {
     }
 }
 
-class ArachnusWebEffect2 extends OneShotEffect<ArachnusWebEffect2> {
+class ArachnusWebEffect2 extends OneShotEffect {
 
     public ArachnusWebEffect2() {
         super(Outcome.Benefit);

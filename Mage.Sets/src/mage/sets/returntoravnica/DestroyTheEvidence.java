@@ -74,7 +74,7 @@ public class DestroyTheEvidence extends CardImpl<DestroyTheEvidence> {
     }
 }
 
-class DestroyTheEvidenceEffect extends OneShotEffect<DestroyTheEvidenceEffect> {
+class DestroyTheEvidenceEffect extends OneShotEffect {
 
     public DestroyTheEvidenceEffect() {
         super(Outcome.Discard);

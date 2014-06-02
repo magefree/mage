@@ -67,7 +67,7 @@ public class WitsEnd extends CardImpl<WitsEnd> {
     }
 }
 
-class WitsEndEffect extends OneShotEffect<WitsEndEffect> {
+class WitsEndEffect extends OneShotEffect {
 
     public WitsEndEffect() {
         super(Outcome.Benefit);

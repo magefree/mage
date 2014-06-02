@@ -79,7 +79,7 @@ public class PublicExecution extends CardImpl<PublicExecution> {
     }
 }
 
-class PublicExecutionEffect extends OneShotEffect<PublicExecutionEffect> {
+class PublicExecutionEffect extends OneShotEffect {
     
     public PublicExecutionEffect() {
         super(Outcome.Benefit);

@@ -85,7 +85,7 @@ public class SowerOfTemptation extends CardImpl<SowerOfTemptation> {
     }
 }
 
-class SowerOfTemptationGainControlEffect extends OneShotEffect<SowerOfTemptationGainControlEffect> {
+class SowerOfTemptationGainControlEffect extends OneShotEffect {
 
     public SowerOfTemptationGainControlEffect() {
         super(Outcome.GainControl);

@@ -74,7 +74,7 @@ public class LeylineOfTheVoid extends CardImpl<LeylineOfTheVoid> {
 
 }
 
-class LeylineOfTheVoidEffect extends ReplacementEffectImpl<LeylineOfTheVoidEffect> {
+class LeylineOfTheVoidEffect extends ReplacementEffectImpl {
 
     public LeylineOfTheVoidEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

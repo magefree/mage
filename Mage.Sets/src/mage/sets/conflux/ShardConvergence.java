@@ -71,7 +71,7 @@ public class ShardConvergence extends CardImpl<ShardConvergence> {
     }
 }
 
-class ShardConvergenceEffect extends OneShotEffect<ShardConvergenceEffect> {
+class ShardConvergenceEffect extends OneShotEffect {
     ShardConvergenceEffect() {
         super(Outcome.DrawCard);
         staticText = "Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards and put them into your hand. Then shuffle your library";

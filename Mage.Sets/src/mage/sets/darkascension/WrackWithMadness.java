@@ -65,7 +65,7 @@ public class WrackWithMadness extends CardImpl<WrackWithMadness> {
     }
 }
 
-class WrackWithMadnessEffect extends OneShotEffect<WrackWithMadnessEffect> {
+class WrackWithMadnessEffect extends OneShotEffect {
 
     public WrackWithMadnessEffect() {
         super(Outcome.Damage);

@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect<ReturnSourceFromGraveyardToBattlefieldEffect> {
+public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect {
 
     private boolean tapped;
 

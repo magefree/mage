@@ -72,7 +72,7 @@ public class TemptWithReflections extends CardImpl<TemptWithReflections> {
     }
 }
 
-class TemptWithReflectionsEffect extends OneShotEffect<TemptWithReflectionsEffect> {
+class TemptWithReflectionsEffect extends OneShotEffect {
 
     public TemptWithReflectionsEffect() {
         super(Outcome.PutCreatureInPlay);

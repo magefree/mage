@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
+public class ExileSourceEffect extends OneShotEffect {
 
     private Zone onlyfromZone;
 

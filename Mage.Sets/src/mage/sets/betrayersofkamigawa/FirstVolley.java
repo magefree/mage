@@ -67,7 +67,7 @@ public class FirstVolley extends CardImpl<FirstVolley> {
     }
 }
 
-class FirstVolleyEffect extends OneShotEffect<FirstVolleyEffect> {
+class FirstVolleyEffect extends OneShotEffect {
 
     public FirstVolleyEffect() {
         super(Outcome.Damage);

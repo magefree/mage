@@ -79,7 +79,7 @@ public class TributeAbility extends EntersBattlefieldAbility{
     }
 }
 
-class TributeEffect extends OneShotEffect<TributeEffect> {
+class TributeEffect extends OneShotEffect {
 
     private int tributeValue;
 

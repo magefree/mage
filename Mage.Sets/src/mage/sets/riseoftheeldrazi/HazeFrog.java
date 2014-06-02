@@ -75,7 +75,7 @@ public class HazeFrog extends CardImpl<HazeFrog> {
     }
 }
 
-class HazeFrogEffect extends PreventionEffectImpl<HazeFrogEffect> {
+class HazeFrogEffect extends PreventionEffectImpl {
 
     public HazeFrogEffect() {
         super(Duration.EndOfTurn);

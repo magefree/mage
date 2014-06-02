@@ -98,7 +98,7 @@ public class XathridGorgon extends CardImpl<XathridGorgon> {
     }
 }
 
-class XathridGorgonEffect extends ReplacementEffectImpl<XathridGorgonEffect> {
+class XathridGorgonEffect extends ReplacementEffectImpl {
 
     public XathridGorgonEffect() {
         super(Duration.Custom, Outcome.Detriment);

@@ -74,7 +74,7 @@ public class DragonAppeasement extends CardImpl<DragonAppeasement> {
     }
 }
 
-class SkipYourDrawStepEffect extends ReplacementEffectImpl<SkipYourDrawStepEffect> {
+class SkipYourDrawStepEffect extends ReplacementEffectImpl {
 
     public SkipYourDrawStepEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

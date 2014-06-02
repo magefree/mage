@@ -64,7 +64,7 @@ public class BoonReflection extends CardImpl<BoonReflection> {
     }
 }
 
-class BoonReflectionEffect extends ReplacementEffectImpl<BoonReflectionEffect> {
+class BoonReflectionEffect extends ReplacementEffectImpl {
 
     public BoonReflectionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

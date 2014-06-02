@@ -92,7 +92,7 @@ public class WrexialTheRisenDeep extends CardImpl<WrexialTheRisenDeep> {
     }
 }
 
-class WrexialEffect extends OneShotEffect<WrexialEffect> {
+class WrexialEffect extends OneShotEffect {
 
     static final private FilterCard filter = new FilterCard("target instant or sorcery card from damaged player's graveyard");
 
@@ -135,7 +135,7 @@ class WrexialEffect extends OneShotEffect<WrexialEffect> {
     }
 }
 
-class WrexialReplacementEffect extends ReplacementEffectImpl<WrexialReplacementEffect> {
+class WrexialReplacementEffect extends ReplacementEffectImpl {
 
     private UUID cardid;
 

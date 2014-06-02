@@ -117,7 +117,7 @@ class HatchetBullyCost extends CostImpl<HatchetBullyCost> {
     }
 }
 
-class HatchetBullyEffect extends OneShotEffect<HatchetBullyEffect> {
+class HatchetBullyEffect extends OneShotEffect {
     
     public HatchetBullyEffect() {
         super(Outcome.Damage);

@@ -83,7 +83,7 @@ public class InfernalKirin extends CardImpl<InfernalKirin> {
     }
 }
 
-class InfernalKirinEffect extends OneShotEffect<InfernalKirinEffect> {
+class InfernalKirinEffect extends OneShotEffect {
 
     public InfernalKirinEffect() {
         super(Outcome.Detriment);

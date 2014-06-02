@@ -95,7 +95,7 @@ public class ErebosGodOfTheDead extends CardImpl<ErebosGodOfTheDead> {
     }
 }
 
-class OpponentsCantGainLifeEffect extends ContinuousEffectImpl<OpponentsCantGainLifeEffect> {
+class OpponentsCantGainLifeEffect extends ContinuousEffectImpl {
 
     public OpponentsCantGainLifeEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);

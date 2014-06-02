@@ -73,7 +73,7 @@ public class JaradsOrders extends CardImpl<JaradsOrders> {
         return new JaradsOrders(this);
     }
 }
-class JaradsOrdersEffect extends OneShotEffect<JaradsOrdersEffect> {
+class JaradsOrdersEffect extends OneShotEffect {
 
     protected static final FilterCard filter = new FilterCard("card to put into your hand");
 

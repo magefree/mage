@@ -74,7 +74,7 @@ public class HourOfNeed extends CardImpl<HourOfNeed> {
     }
 }
 
-class HourOfNeedExileEffect extends OneShotEffect<HourOfNeedExileEffect> {
+class HourOfNeedExileEffect extends OneShotEffect {
 
     public HourOfNeedExileEffect() {
         super(Outcome.Benefit);

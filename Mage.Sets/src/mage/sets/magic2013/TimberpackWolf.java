@@ -79,7 +79,7 @@ public class TimberpackWolf extends CardImpl<TimberpackWolf> {
     }
 
 
-    class TimberpackWolfEffect extends ContinuousEffectImpl<TimberpackWolfEffect> {
+    class TimberpackWolfEffect extends ContinuousEffectImpl {
 
         public TimberpackWolfEffect() {
             super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

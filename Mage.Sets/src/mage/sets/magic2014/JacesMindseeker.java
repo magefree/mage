@@ -83,7 +83,7 @@ public class JacesMindseeker extends CardImpl<JacesMindseeker> {
     }
 }
 
-class JaceMindseekerEffect extends OneShotEffect<JaceMindseekerEffect> {
+class JaceMindseekerEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterInstantOrSorceryCard();
 

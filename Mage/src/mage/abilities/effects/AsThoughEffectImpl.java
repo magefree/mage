@@ -37,7 +37,7 @@ import mage.constants.Outcome;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class AsThoughEffectImpl<T extends AsThoughEffectImpl<T>> extends ContinuousEffectImpl<T> implements AsThoughEffect<T> {
+public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements AsThoughEffect {
 
     protected AsThoughEffectType type;
 

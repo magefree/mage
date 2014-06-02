@@ -125,7 +125,7 @@ class TortureChamberCost extends CostImpl<TortureChamberCost> {
     }
 }
 
-class TortureChamberEffect1 extends OneShotEffect<TortureChamberEffect1> {
+class TortureChamberEffect1 extends OneShotEffect {
 
     public TortureChamberEffect1() {
         super(Outcome.Damage);
@@ -154,7 +154,7 @@ class TortureChamberEffect1 extends OneShotEffect<TortureChamberEffect1> {
     }
 }
 
-class TortureChamberEffect2 extends OneShotEffect<TortureChamberEffect2> {
+class TortureChamberEffect2 extends OneShotEffect {
 
     public TortureChamberEffect2() {
         super(Outcome.Damage);

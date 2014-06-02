@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryIntoGraveTargetEffect> {
+public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
 
     private DynamicValue amount;
 

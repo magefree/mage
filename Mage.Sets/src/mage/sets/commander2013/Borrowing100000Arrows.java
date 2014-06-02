@@ -69,7 +69,7 @@ public class Borrowing100000Arrows extends CardImpl<Borrowing100000Arrows> {
     }
 }
 
-class Borrowing100000ArrowsEffect extends OneShotEffect<Borrowing100000ArrowsEffect> {
+class Borrowing100000ArrowsEffect extends OneShotEffect {
 
     public Borrowing100000ArrowsEffect() {
         super(Outcome.DrawCard);

@@ -96,7 +96,7 @@ public class SepulchralPrimordial extends CardImpl<SepulchralPrimordial> {
     }
 }
 
-class SepulchralPrimordialEffect extends OneShotEffect<SepulchralPrimordialEffect> {
+class SepulchralPrimordialEffect extends OneShotEffect {
 
     public SepulchralPrimordialEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -106,7 +106,7 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ElectropotenceEffect extends OneShotEffect<ElectropotenceEffect> {
+class ElectropotenceEffect extends OneShotEffect {
 
     public ElectropotenceEffect() {
         super(Outcome.Damage);

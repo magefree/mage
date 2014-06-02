@@ -84,7 +84,7 @@ public class AEtherling extends CardImpl<AEtherling> {
     }
 
 }
-class AEherlingRemovingEffect extends OneShotEffect<AEherlingRemovingEffect> {
+class AEherlingRemovingEffect extends OneShotEffect {
 
     private static final String effectText = "Exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
 

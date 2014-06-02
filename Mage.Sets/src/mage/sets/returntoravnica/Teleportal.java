@@ -90,7 +90,7 @@ public class Teleportal extends CardImpl<Teleportal> {
     }
 }
 
-class TeleportalEffect extends OneShotEffect<TeleportalEffect> {
+class TeleportalEffect extends OneShotEffect {
 
     private FilterCreaturePermanent filter;
 

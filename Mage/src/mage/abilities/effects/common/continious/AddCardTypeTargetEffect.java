@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class AddCardTypeTargetEffect extends ContinuousEffectImpl<AddCardTypeTargetEffect> {
+public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
     private CardType addedCardType;
 
     public AddCardTypeTargetEffect(CardType addedCardType, Duration duration) {

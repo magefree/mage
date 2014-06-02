@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect<ReturnFromGraveyardToBattlefieldTargetEffect> {
+public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect {
 
     private boolean tapped;
 

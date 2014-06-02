@@ -117,7 +117,7 @@ class ControlTwoOrMoreBlackPermanentsCost extends CostImpl<ControlTwoOrMoreBlack
     }
 }
 
-class LeechriddenSwampLoseLifeEffect extends OneShotEffect<LeechriddenSwampLoseLifeEffect> {
+class LeechriddenSwampLoseLifeEffect extends OneShotEffect {
 
     private static final String effectText = "each opponent loses 1 life";
 

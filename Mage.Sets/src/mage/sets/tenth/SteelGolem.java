@@ -67,7 +67,7 @@ public class SteelGolem extends CardImpl<SteelGolem> {
     }
 }
 
-class SteelGolemEffect extends ReplacementEffectImpl<SteelGolemEffect> {
+class SteelGolemEffect extends ReplacementEffectImpl {
     
     public SteelGolemEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

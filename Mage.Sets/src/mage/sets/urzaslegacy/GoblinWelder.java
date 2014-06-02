@@ -81,7 +81,7 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
     }
        
 
-    public class GoblinWelderEffect extends OneShotEffect<GoblinWelderEffect> {
+    public class GoblinWelderEffect extends OneShotEffect {
 
         public GoblinWelderEffect() {
             super(Outcome.PutCardInPlay);

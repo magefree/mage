@@ -13,7 +13,7 @@ import mage.game.permanent.Permanent;
 import java.util.Set;
 import java.util.UUID;
 
-public class BoostOpponentsEffect extends ContinuousEffectImpl<BoostOpponentsEffect> {
+public class BoostOpponentsEffect extends ContinuousEffectImpl {
     protected int power;
     protected int toughness;
     protected FilterCreaturePermanent filter;

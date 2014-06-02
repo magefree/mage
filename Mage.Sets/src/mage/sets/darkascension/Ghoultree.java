@@ -84,7 +84,7 @@ public class Ghoultree extends CardImpl<Ghoultree> {
     }
 }
 
-class GhoultreeEffect extends OneShotEffect<GhoultreeEffect> {
+class GhoultreeEffect extends OneShotEffect {
 
     public GhoultreeEffect() {
         super(Outcome.Neutral);

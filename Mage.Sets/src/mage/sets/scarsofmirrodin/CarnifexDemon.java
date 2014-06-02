@@ -78,7 +78,7 @@ public class CarnifexDemon extends CardImpl<CarnifexDemon> {
     }
 }
 
-class CarnifexDemonEffect extends OneShotEffect<CarnifexDemonEffect> {
+class CarnifexDemonEffect extends OneShotEffect {
     public CarnifexDemonEffect() {
         super(Outcome.UnboostCreature);
         staticText = "Put a -1/-1 counter on each other creature";

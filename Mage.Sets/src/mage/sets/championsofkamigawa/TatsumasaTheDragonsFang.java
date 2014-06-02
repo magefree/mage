@@ -88,7 +88,7 @@ public class TatsumasaTheDragonsFang extends CardImpl<TatsumasaTheDragonsFang> {
     }
 }
 
-class TatsumaTheDragonsFangEffect extends OneShotEffect<TatsumaTheDragonsFangEffect> {
+class TatsumaTheDragonsFangEffect extends OneShotEffect {
 
     public TatsumaTheDragonsFangEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -105,7 +105,7 @@ class SpitemareTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SpitemareEffect extends OneShotEffect<SpitemareEffect> {
+class SpitemareEffect extends OneShotEffect {
 
     public SpitemareEffect() {
         super(Outcome.Damage);

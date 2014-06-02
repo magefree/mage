@@ -125,7 +125,7 @@ class HelmOfKaldraCondition implements Condition {
 
 }
 
-class HelmOfKaldraEffect extends OneShotEffect<HelmOfKaldraEffect> {
+class HelmOfKaldraEffect extends OneShotEffect {
 
     public HelmOfKaldraEffect() {
         super(Outcome.Benefit);

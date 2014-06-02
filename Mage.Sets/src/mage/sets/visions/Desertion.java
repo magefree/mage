@@ -73,7 +73,7 @@ public class Desertion extends CardImpl<Desertion> {
     }
 }
 
-class DesertionEffect extends OneShotEffect<DesertionEffect> {
+class DesertionEffect extends OneShotEffect {
 
     private static final FilterSpell filter = new FilterSpell("artifact or creature spell");
 

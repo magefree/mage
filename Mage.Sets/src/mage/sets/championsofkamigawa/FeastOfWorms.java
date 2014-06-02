@@ -75,7 +75,7 @@ public class FeastOfWorms extends CardImpl<FeastOfWorms> {
 
 }
 
-class FeastOfWormsEffect extends OneShotEffect<FeastOfWormsEffect> {
+class FeastOfWormsEffect extends OneShotEffect {
 
     FeastOfWormsEffect() {
         super(Outcome.Sacrifice);

@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlefieldEffect> {
+public class EntersBattlefieldEffect extends ReplacementEffectImpl {
 
     protected Effects baseEffects = new Effects();
     protected String text;

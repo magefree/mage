@@ -89,7 +89,7 @@ public class RalZarek extends CardImpl<RalZarek> {
 }
 
 
-class RalZarekTapUntapEffect extends OneShotEffect<RalZarekTapUntapEffect> {
+class RalZarekTapUntapEffect extends OneShotEffect {
 
     public RalZarekTapUntapEffect() {
         super(Outcome.Tap);
@@ -128,7 +128,7 @@ class RalZarekTapUntapEffect extends OneShotEffect<RalZarekTapUntapEffect> {
     }
 }
 
-class RalZarekExtraTurnsEffect extends OneShotEffect<RalZarekExtraTurnsEffect> {
+class RalZarekExtraTurnsEffect extends OneShotEffect {
 
     public RalZarekExtraTurnsEffect() {
         super(Outcome.ExtraTurn);

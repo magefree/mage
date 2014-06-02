@@ -77,7 +77,7 @@ public class YawgmothsWill extends CardImpl<YawgmothsWill> {
     }
 }
 
-class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl<CanPlayCardsFromGraveyardEffect> {
+class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
 
     public CanPlayCardsFromGraveyardEffect() {
         this(Duration.EndOfTurn);
@@ -115,7 +115,7 @@ class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl<CanPlayCardsF
 
 }
 
-class YawgmothsWillReplacementEffect extends ReplacementEffectImpl<YawgmothsWillReplacementEffect> {
+class YawgmothsWillReplacementEffect extends ReplacementEffectImpl {
 
     public YawgmothsWillReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);

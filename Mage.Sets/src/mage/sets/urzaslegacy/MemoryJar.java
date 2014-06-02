@@ -81,7 +81,7 @@ public class MemoryJar extends CardImpl<MemoryJar> {
     }
 }
 
-class MemoryJarEffect extends OneShotEffect<MemoryJarEffect> {
+class MemoryJarEffect extends OneShotEffect {
 
     public MemoryJarEffect()
     {
@@ -139,7 +139,7 @@ class MemoryJarEffect extends OneShotEffect<MemoryJarEffect> {
     }
 }
 
-class MemoryJarDelayedEffect extends OneShotEffect<MemoryJarDelayedEffect> {
+class MemoryJarDelayedEffect extends OneShotEffect {
         
     public MemoryJarDelayedEffect()
     {

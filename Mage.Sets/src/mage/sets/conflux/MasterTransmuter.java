@@ -83,7 +83,7 @@ public class MasterTransmuter extends CardImpl<MasterTransmuter> {
     }
 }
 
-class MasterTransmuterEffect extends OneShotEffect<MasterTransmuterEffect> {
+class MasterTransmuterEffect extends OneShotEffect {
 
     public MasterTransmuterEffect() {
         super(Outcome.Benefit);

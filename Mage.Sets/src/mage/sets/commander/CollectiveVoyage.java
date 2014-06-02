@@ -69,7 +69,7 @@ public class CollectiveVoyage extends CardImpl<CollectiveVoyage> {
     }
 }
 
-class CollectiveVoyageEffect extends OneShotEffect<CollectiveVoyageEffect> {
+class CollectiveVoyageEffect extends OneShotEffect {
 
     public CollectiveVoyageEffect() {
         super(Outcome.Detriment);

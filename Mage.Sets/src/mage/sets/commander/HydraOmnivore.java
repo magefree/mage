@@ -69,7 +69,7 @@ public class HydraOmnivore extends CardImpl<HydraOmnivore> {
     }
 }
 
-class HydraOmnivoreEffect extends OneShotEffect<HydraOmnivoreEffect> {
+class HydraOmnivoreEffect extends OneShotEffect {
 
     public HydraOmnivoreEffect() {
         super(Outcome.Benefit);

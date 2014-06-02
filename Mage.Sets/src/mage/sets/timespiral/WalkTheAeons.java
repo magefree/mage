@@ -78,7 +78,7 @@ public class WalkTheAeons extends CardImpl<WalkTheAeons> {
     }
 }
 
-class ExtraTurnEffect extends OneShotEffect<ExtraTurnEffect> {
+class ExtraTurnEffect extends OneShotEffect {
 
     public ExtraTurnEffect() {
         super(Outcome.ExtraTurn);

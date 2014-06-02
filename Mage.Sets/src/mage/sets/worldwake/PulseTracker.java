@@ -69,7 +69,7 @@ public class PulseTracker extends CardImpl<PulseTracker> {
     }
 }
 
-class PulseTrackerLoseLifeEffect extends OneShotEffect<PulseTrackerLoseLifeEffect> {
+class PulseTrackerLoseLifeEffect extends OneShotEffect {
 
     private static final String effectText = "each opponent loses 1 life";
 

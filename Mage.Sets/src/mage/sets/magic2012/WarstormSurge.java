@@ -106,7 +106,7 @@ class WarstormSurgeTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class WarstormSurgeEffect extends OneShotEffect<WarstormSurgeEffect> {
+class WarstormSurgeEffect extends OneShotEffect {
 
     public WarstormSurgeEffect() {
         super(Outcome.Damage);

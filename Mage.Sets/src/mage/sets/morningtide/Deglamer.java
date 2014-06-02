@@ -78,7 +78,7 @@ public class Deglamer extends CardImpl<Deglamer> {
     }
 }
 
-class DeglamerShuffleIntoLibraryEffect extends OneShotEffect<DeglamerShuffleIntoLibraryEffect> {
+class DeglamerShuffleIntoLibraryEffect extends OneShotEffect {
 
     public DeglamerShuffleIntoLibraryEffect() {
         super(Outcome.Detriment);

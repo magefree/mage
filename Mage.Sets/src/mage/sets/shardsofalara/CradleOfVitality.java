@@ -104,7 +104,7 @@ class CradleOfVitalityGainLifeTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class CradleOfVitalityEffect extends OneShotEffect<CradleOfVitalityEffect> {
+class CradleOfVitalityEffect extends OneShotEffect {
 
     public CradleOfVitalityEffect() {
         super(Outcome.Benefit);

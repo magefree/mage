@@ -72,7 +72,7 @@ public class LeafCrownedElder extends CardImpl<LeafCrownedElder> {
     }
 }
 
-class LeafCrownedElderPlayEffect extends OneShotEffect<LeafCrownedElderPlayEffect> {
+class LeafCrownedElderPlayEffect extends OneShotEffect {
 
     public LeafCrownedElderPlayEffect() {
         super(Outcome.PlayForFree);

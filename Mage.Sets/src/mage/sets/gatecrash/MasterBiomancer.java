@@ -78,7 +78,7 @@ public class MasterBiomancer extends CardImpl<MasterBiomancer> {
     }
 }
 
-class MasterBiomancerEntersBattlefieldEffect extends ReplacementEffectImpl<MasterBiomancerEntersBattlefieldEffect> {
+class MasterBiomancerEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     public MasterBiomancerEntersBattlefieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

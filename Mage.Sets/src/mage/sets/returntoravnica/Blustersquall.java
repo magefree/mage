@@ -83,7 +83,7 @@ public class Blustersquall extends CardImpl<Blustersquall> {
     }
 }
 
-class BlustersqallTapAllEffect extends OneShotEffect<BlustersqallTapAllEffect> {
+class BlustersqallTapAllEffect extends OneShotEffect {
 
     protected FilterCreaturePermanent filter;
 

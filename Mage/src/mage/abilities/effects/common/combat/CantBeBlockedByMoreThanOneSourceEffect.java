@@ -43,7 +43,7 @@ import mage.util.CardUtil;
  *
  * @author Quercitron
  */
-public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl<CantBeBlockedByMoreThanOneSourceEffect> {
+public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl {
 
     protected int amount;
 

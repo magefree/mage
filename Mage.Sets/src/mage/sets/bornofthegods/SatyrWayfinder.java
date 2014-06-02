@@ -74,7 +74,7 @@ public class SatyrWayfinder extends CardImpl<SatyrWayfinder> {
     }
 }
 
-class SatyrWayfinderEffect extends OneShotEffect<SatyrWayfinderEffect> {
+class SatyrWayfinderEffect extends OneShotEffect {
 
     private static final FilterLandCard filterPutInHand = new FilterLandCard("land card to put in hand");
 

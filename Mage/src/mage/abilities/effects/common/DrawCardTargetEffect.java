@@ -42,7 +42,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
+public class DrawCardTargetEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     protected boolean optional;

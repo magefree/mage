@@ -82,7 +82,7 @@ public class VortexElemental extends CardImpl<VortexElemental> {
     }
 }
 
-class VortexElementaöEffect extends OneShotEffect<VortexElementaöEffect> {
+class VortexElementaöEffect extends OneShotEffect {
 
     public VortexElementaöEffect() {
         super(Outcome.Benefit);

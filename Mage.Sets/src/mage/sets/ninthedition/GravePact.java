@@ -104,7 +104,7 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class GravePactEffect extends OneShotEffect<GravePactEffect> {
+class GravePactEffect extends OneShotEffect {
 
     public GravePactEffect() {
         super(Outcome.Sacrifice);

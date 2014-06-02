@@ -76,7 +76,7 @@ public class DescendantsPath extends CardImpl<DescendantsPath> {
     }
 }
 
-class DescendantsPathEffect extends OneShotEffect<DescendantsPathEffect> {
+class DescendantsPathEffect extends OneShotEffect {
 
     public DescendantsPathEffect() {
         super(Outcome.Discard);

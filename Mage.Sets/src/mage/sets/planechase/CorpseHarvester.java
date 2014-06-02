@@ -92,7 +92,7 @@ public class CorpseHarvester extends CardImpl<CorpseHarvester> {
     }
 }
 
-class CorpseHarvesterEffect extends OneShotEffect<CorpseHarvesterEffect> {
+class CorpseHarvesterEffect extends OneShotEffect {
     
     CorpseHarvesterEffect() {
         super(Outcome.DrawCard);

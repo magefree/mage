@@ -78,7 +78,7 @@ public class JunkyoBell extends CardImpl<JunkyoBell> {
     }
 
     
-private class JunkyoBellSacrificeEffect extends OneShotEffect<JunkyoBellSacrificeEffect> {
+private class JunkyoBellSacrificeEffect extends OneShotEffect {
 
     public JunkyoBellSacrificeEffect() {
         super(Outcome.Sacrifice);

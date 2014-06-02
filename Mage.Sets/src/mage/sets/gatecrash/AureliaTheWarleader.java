@@ -153,7 +153,7 @@ class AureliaAttacksTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class AdditionalCombatPhaseEffect extends OneShotEffect<AdditionalCombatPhaseEffect> {
+class AdditionalCombatPhaseEffect extends OneShotEffect {
 
     public AdditionalCombatPhaseEffect() {
        super(Outcome.Benefit);

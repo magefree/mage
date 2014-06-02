@@ -74,7 +74,7 @@ public class MorgueBurst extends CardImpl<MorgueBurst> {
     }
 }
 
-class MorgueBurstEffect extends OneShotEffect<MorgueBurstEffect> {
+class MorgueBurstEffect extends OneShotEffect {
 
     public MorgueBurstEffect() {
         super(Outcome.ReturnToHand);

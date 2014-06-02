@@ -79,7 +79,7 @@ public class AngelOfGlorysRise extends CardImpl<AngelOfGlorysRise> {
     }
 }
 
-class AngelOfGlorysRiseEffect extends OneShotEffect<AngelOfGlorysRiseEffect> {
+class AngelOfGlorysRiseEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filterHuman = new FilterCreatureCard();
     private static final FilterCreaturePermanent filterZombie = new FilterCreaturePermanent();

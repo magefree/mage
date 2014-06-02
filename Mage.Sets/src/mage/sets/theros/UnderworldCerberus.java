@@ -84,7 +84,7 @@ public class UnderworldCerberus extends CardImpl<UnderworldCerberus> {
     }
 }
 
-class UnderworldCerberusEffect extends ReplacementEffectImpl<UnderworldCerberusEffect> {
+class UnderworldCerberusEffect extends ReplacementEffectImpl {
 
     public UnderworldCerberusEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

@@ -67,7 +67,7 @@ public class WretchedBanquet extends CardImpl<WretchedBanquet> {
     }
 }
 
-class WretchedBanquetEffect extends OneShotEffect<WretchedBanquetEffect> {
+class WretchedBanquetEffect extends OneShotEffect {
 
     public WretchedBanquetEffect() {
         super(Outcome.DestroyPermanent);

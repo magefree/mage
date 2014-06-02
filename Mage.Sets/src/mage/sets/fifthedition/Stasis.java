@@ -70,7 +70,7 @@ public class Stasis extends CardImpl<Stasis> {
     }
 }
 
-class SkipUntapStepEffect extends ReplacementEffectImpl<SkipUntapStepEffect> {
+class SkipUntapStepEffect extends ReplacementEffectImpl {
 
     public SkipUntapStepEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

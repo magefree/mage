@@ -74,7 +74,7 @@ public class Scrambleverse extends CardImpl<Scrambleverse> {
     }
 }
 
-class ScrambleverseEffect extends OneShotEffect<ScrambleverseEffect> {
+class ScrambleverseEffect extends OneShotEffect {
 
     public ScrambleverseEffect() {
         super(Outcome.Damage);
@@ -107,7 +107,7 @@ class ScrambleverseEffect extends OneShotEffect<ScrambleverseEffect> {
     }
 }
 
-class ScrambleverseControlEffect extends ContinuousEffectImpl<ScrambleverseControlEffect> {
+class ScrambleverseControlEffect extends ContinuousEffectImpl {
 
     private UUID controllerId;
 

@@ -40,7 +40,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect<PutLandFromHandOntoBattlefieldEffect> {
+public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
 
     public PutLandFromHandOntoBattlefieldEffect() {
         super(Outcome.PutLandInPlay);

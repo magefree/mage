@@ -69,7 +69,7 @@ public class IntruderAlarm extends CardImpl<IntruderAlarm> {
     }
 }
 
-class UntapAllCreatureEffect extends OneShotEffect<UntapAllCreatureEffect> {
+class UntapAllCreatureEffect extends OneShotEffect {
 
     public UntapAllCreatureEffect() {
         super(Outcome.Untap);

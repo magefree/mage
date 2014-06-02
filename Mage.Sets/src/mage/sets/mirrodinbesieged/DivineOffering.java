@@ -75,7 +75,7 @@ public class DivineOffering extends CardImpl<DivineOffering> {
         return new DivineOffering(this);
     }
 
-    private class DivineOfferingEffect extends OneShotEffect<DivineOfferingEffect> {
+    private class DivineOfferingEffect extends OneShotEffect {
 
         public DivineOfferingEffect() {
             super(Outcome.DestroyPermanent);

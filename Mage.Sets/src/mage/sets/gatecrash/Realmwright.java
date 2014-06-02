@@ -83,7 +83,7 @@ public class Realmwright extends CardImpl<Realmwright> {
     }
 }
 
-class RealmwrightEffect extends OneShotEffect<RealmwrightEffect> {
+class RealmwrightEffect extends OneShotEffect {
 
     public RealmwrightEffect() {
         super(Outcome.Neutral);
@@ -121,7 +121,7 @@ class RealmwrightEffect extends OneShotEffect<RealmwrightEffect> {
     }
 }
 
-class RealmwrightEffect2 extends ContinuousEffectImpl<RealmwrightEffect2> {
+class RealmwrightEffect2 extends ContinuousEffectImpl {
 
     public RealmwrightEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

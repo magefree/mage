@@ -74,7 +74,7 @@ public class ScrollRack extends CardImpl<ScrollRack> {
     }
 }
 
-class ScrollRackEffect extends OneShotEffect<ScrollRackEffect> {
+class ScrollRackEffect extends OneShotEffect {
 
     public ScrollRackEffect() {
         super(Outcome.Neutral);

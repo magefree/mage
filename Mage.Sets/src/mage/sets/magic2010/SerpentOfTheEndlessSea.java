@@ -83,7 +83,7 @@ public class SerpentOfTheEndlessSea extends CardImpl<SerpentOfTheEndlessSea> {
     }
 }
 
-class SerpentOfTheEndlessSeaEffect extends ReplacementEffectImpl<SerpentOfTheEndlessSeaEffect> {
+class SerpentOfTheEndlessSeaEffect extends ReplacementEffectImpl {
 
     public SerpentOfTheEndlessSeaEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

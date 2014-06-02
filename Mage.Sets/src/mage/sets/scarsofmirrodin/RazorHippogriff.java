@@ -83,7 +83,7 @@ public class RazorHippogriff extends CardImpl<RazorHippogriff> {
         return new RazorHippogriff(this);
     }
 
-    public class RazorHippogriffGainLifeEffect extends OneShotEffect<RazorHippogriffGainLifeEffect> {
+    public class RazorHippogriffGainLifeEffect extends OneShotEffect {
 
         public RazorHippogriffGainLifeEffect() {
             super(Outcome.GainLife);

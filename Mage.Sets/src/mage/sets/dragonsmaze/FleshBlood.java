@@ -94,7 +94,7 @@ public class FleshBlood extends SplitCard<FleshBlood> {
     }
 }
 
-class FleshEffect extends OneShotEffect<FleshEffect> {
+class FleshEffect extends OneShotEffect {
 
     public FleshEffect() {
         super(Outcome.BoostCreature);
@@ -129,7 +129,7 @@ class FleshEffect extends OneShotEffect<FleshEffect> {
 
 }
 
-class BloodEffect extends OneShotEffect<BloodEffect> {
+class BloodEffect extends OneShotEffect {
 
     public BloodEffect() {
         super(Outcome.Damage);

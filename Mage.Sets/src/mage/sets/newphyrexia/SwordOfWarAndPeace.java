@@ -128,7 +128,7 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SwordOfWarAndPeaceDamageEffect extends OneShotEffect<SwordOfWarAndPeaceDamageEffect> {
+class SwordOfWarAndPeaceDamageEffect extends OneShotEffect {
     SwordOfWarAndPeaceDamageEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals damage to that player equal to the number of cards in his or her hand";

@@ -72,7 +72,7 @@ public class KessigCagebreakers extends CardImpl<KessigCagebreakers> {
     }
 }
 
-class KessigCagebreakersEffect extends OneShotEffect<KessigCagebreakersEffect> {
+class KessigCagebreakersEffect extends OneShotEffect {
 
     public KessigCagebreakersEffect() {
         super(Outcome.PutCreatureInPlay);

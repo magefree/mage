@@ -99,7 +99,7 @@ public class TidebinderMage extends CardImpl<TidebinderMage> {
     }
 }
 
-class TidebinderMageEffect extends ReplacementEffectImpl<TidebinderMageEffect> {
+class TidebinderMageEffect extends ReplacementEffectImpl {
 
     public TidebinderMageEffect() {
         super(Duration.OneUse, Outcome.Detriment);

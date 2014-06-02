@@ -65,7 +65,7 @@ public class ChancellorAbility extends StaticAbility {
 
 }
 
-class ChancellorEffect extends OneShotEffect<ChancellorEffect> {
+class ChancellorEffect extends OneShotEffect {
 
     private DelayedTriggeredAbility ability;
 

@@ -72,7 +72,7 @@ public class SerumPowder extends CardImpl<SerumPowder> {
     }
 }
 
-class SerumPowderReplaceEffect extends ReplacementEffectImpl<SerumPowderReplaceEffect> {
+class SerumPowderReplaceEffect extends ReplacementEffectImpl {
     SerumPowderReplaceEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Any time you could mulligan and {this} is in your hand, you may exile all the cards from your hand, then draw that many cards";

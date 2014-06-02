@@ -78,7 +78,7 @@ public class LeylineOfPunishment extends CardImpl<LeylineOfPunishment> {
 
 }
 
-class LeylineOfPunishmentEffect2 extends ReplacementEffectImpl<LeylineOfPunishmentEffect2> {
+class LeylineOfPunishmentEffect2 extends ReplacementEffectImpl {
 
     public LeylineOfPunishmentEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

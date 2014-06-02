@@ -74,7 +74,7 @@ public class InterventionPact extends CardImpl<InterventionPact> {
 }
 
 
-class InterventionPactPreventDamageEffect extends PreventionEffectImpl<InterventionPactPreventDamageEffect> {
+class InterventionPactPreventDamageEffect extends PreventionEffectImpl {
 
 
     public InterventionPactPreventDamageEffect() {

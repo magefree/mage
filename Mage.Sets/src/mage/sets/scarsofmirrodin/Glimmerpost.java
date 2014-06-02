@@ -68,7 +68,7 @@ public class Glimmerpost extends CardImpl<Glimmerpost> {
 
 }
 
-class GlimmerpostEffect extends OneShotEffect<GlimmerpostEffect> {
+class GlimmerpostEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {

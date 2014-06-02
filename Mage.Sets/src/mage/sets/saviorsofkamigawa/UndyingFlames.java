@@ -75,7 +75,7 @@ public class UndyingFlames extends CardImpl<UndyingFlames> {
     }
 }
 
-class UndyingFlamesEffect extends OneShotEffect<UndyingFlamesEffect> {
+class UndyingFlamesEffect extends OneShotEffect {
 
     public UndyingFlamesEffect() {
         super(Outcome.Benefit);

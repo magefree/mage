@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ExileAllEffect extends OneShotEffect<ExileAllEffect> {
+public class ExileAllEffect extends OneShotEffect {
 
     private FilterPermanent filter;
     private String exileZone = null;

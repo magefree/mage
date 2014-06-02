@@ -121,7 +121,7 @@ class LightningStormCountCondition implements DynamicValue {
     }
 }
 
-class LightningStormAddCounterEffect extends OneShotEffect<LightningStormAddCounterEffect> {
+class LightningStormAddCounterEffect extends OneShotEffect {
 
     public LightningStormAddCounterEffect() {
         super(Outcome.Benefit);

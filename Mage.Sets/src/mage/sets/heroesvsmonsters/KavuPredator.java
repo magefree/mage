@@ -105,7 +105,7 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class KavuPredatorEffect extends OneShotEffect<KavuPredatorEffect> {
+class KavuPredatorEffect extends OneShotEffect {
 
     public KavuPredatorEffect() {
         super(Outcome.BoostCreature);

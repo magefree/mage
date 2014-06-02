@@ -106,7 +106,7 @@ class WarrenInstigatorTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class WarrenInstigatorEffect extends OneShotEffect<WarrenInstigatorEffect> {
+class WarrenInstigatorEffect extends OneShotEffect {
 
     public WarrenInstigatorEffect() {
         super(Outcome.PutCreatureInPlay);

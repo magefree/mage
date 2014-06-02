@@ -103,7 +103,7 @@ public class AjaniMentorOfHeroes extends CardImpl<AjaniMentorOfHeroes> {
     }
 }
 
-class AjaniMentorOfHeroesAddCountersEffect extends OneShotEffect<AjaniMentorOfHeroesAddCountersEffect> {
+class AjaniMentorOfHeroesAddCountersEffect extends OneShotEffect {
 
     public AjaniMentorOfHeroesAddCountersEffect() {
         super(Outcome.BoostCreature);

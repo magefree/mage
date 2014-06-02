@@ -117,7 +117,7 @@ public class NirkanaRevenant extends CardImpl<NirkanaRevenant> {
     }
 }
 
-class NirkanaRevenantEffect extends OneShotEffect<NirkanaRevenantEffect> {
+class NirkanaRevenantEffect extends OneShotEffect {
 
     NirkanaRevenantEffect() {
         super(Outcome.PutManaInPool);

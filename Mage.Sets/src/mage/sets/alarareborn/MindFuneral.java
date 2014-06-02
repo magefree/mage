@@ -71,7 +71,7 @@ public class MindFuneral extends CardImpl<MindFuneral> {
     }
 }
 
-class MindFuneralEffect extends OneShotEffect<MindFuneralEffect> {
+class MindFuneralEffect extends OneShotEffect {
 
     public MindFuneralEffect() {
         super(Outcome.Detriment);

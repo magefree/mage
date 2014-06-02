@@ -81,7 +81,7 @@ public class StolenIdentity extends CardImpl<StolenIdentity> {
 }
 
 
-class StolenIdentityEffect extends OneShotEffect<StolenIdentityEffect> {
+class StolenIdentityEffect extends OneShotEffect {
     
 
     

@@ -73,7 +73,7 @@ public class CerebralEruption extends CardImpl<CerebralEruption> {
 
 }
 
-class CerebralEruptionEffect1 extends OneShotEffect<CerebralEruptionEffect1> {
+class CerebralEruptionEffect1 extends OneShotEffect {
 
     private static FilterPermanent filter = new FilterCreaturePermanent();
 

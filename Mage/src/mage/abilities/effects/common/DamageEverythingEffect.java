@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamageEverythingEffect extends OneShotEffect<DamageEverythingEffect> {
+public class DamageEverythingEffect extends OneShotEffect {
 
     private DynamicValue amount;
     private FilterPermanent filter;

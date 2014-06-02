@@ -74,7 +74,7 @@ public class NissasChosen extends CardImpl<NissasChosen> {
     }
 }
 
-class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
+class NissasChosenEffect extends ReplacementEffectImpl {
 
     public NissasChosenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

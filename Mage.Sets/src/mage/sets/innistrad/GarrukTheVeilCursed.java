@@ -129,7 +129,7 @@ class GarrukTheVeilCursedValue implements DynamicValue {
     }
 }
 
-class GarrukTheVeilCursedEffect extends OneShotEffect<GarrukTheVeilCursedEffect> {
+class GarrukTheVeilCursedEffect extends OneShotEffect {
 
     private static final FilterPermanent filterCreature = new FilterPermanent("a creature you control");
 

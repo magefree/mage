@@ -106,7 +106,7 @@ public class JaceArchitectOfThought extends CardImpl<JaceArchitectOfThought> {
     }
 }
 
-class JaceArchitectOfThoughtGainAbilityEffect extends ContinuousEffectImpl<JaceArchitectOfThoughtGainAbilityEffect> {
+class JaceArchitectOfThoughtGainAbilityEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
 
@@ -214,7 +214,7 @@ class JaceArchitectOfThoughtEffectUnboostEffect extends BoostTargetEffect {
     }
 }
 
-class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThoughtEffect2> {
+class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
 
     public JaceArchitectOfThoughtEffect2() {
         super(Outcome.DrawCard);
@@ -336,7 +336,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThought
     }
 }
 
-class JaceArchitectOfThoughtEffect3 extends OneShotEffect<JaceArchitectOfThoughtEffect3> {
+class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
 
     public JaceArchitectOfThoughtEffect3() {
         super(Outcome.PlayForFree);

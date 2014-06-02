@@ -113,7 +113,7 @@ public class PolukranosWorldEater extends CardImpl<PolukranosWorldEater> {
     }
 }
 
-class PolukranosWorldEaterEffect extends OneShotEffect<PolukranosWorldEaterEffect> {
+class PolukranosWorldEaterEffect extends OneShotEffect {
 
     public PolukranosWorldEaterEffect() {
         super(Outcome.Benefit);

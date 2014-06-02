@@ -39,7 +39,7 @@ import mage.players.Player;
 /**
  * @author mluds
  */
-public class DiscardHandAllEffect extends OneShotEffect<DiscardHandAllEffect> {
+public class DiscardHandAllEffect extends OneShotEffect {
 
     public DiscardHandAllEffect() {
         super(Outcome.Discard);

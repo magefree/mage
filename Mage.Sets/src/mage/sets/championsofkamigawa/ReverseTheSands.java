@@ -67,7 +67,7 @@ public class ReverseTheSands extends CardImpl<ReverseTheSands> {
     }
 }
 
-class ReverseTheSandsEffect extends OneShotEffect<ReverseTheSandsEffect> {
+class ReverseTheSandsEffect extends OneShotEffect {
 
     public ReverseTheSandsEffect() {
         super(Outcome.Benefit);

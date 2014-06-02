@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 
-public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect<PutTopCardOfLibraryIntoGraveEachPlayerEffect> {
+public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect {
 
     private final int numberCards;
     private final TargetController targetController;

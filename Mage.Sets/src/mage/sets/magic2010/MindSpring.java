@@ -62,7 +62,7 @@ public class MindSpring extends CardImpl<MindSpring> {
 
 }
 
-class MindSpringEffect extends OneShotEffect<MindSpringEffect> {
+class MindSpringEffect extends OneShotEffect {
 
     public MindSpringEffect() {
         super(Outcome.DrawCard);

@@ -69,7 +69,7 @@ public class SuddenDemise extends CardImpl<SuddenDemise> {
     }
 }
 
-class SuddenDemiseDamageEffect extends OneShotEffect<SuddenDemiseDamageEffect> {
+class SuddenDemiseDamageEffect extends OneShotEffect {
 
     public SuddenDemiseDamageEffect() {
         super(Outcome.Damage);

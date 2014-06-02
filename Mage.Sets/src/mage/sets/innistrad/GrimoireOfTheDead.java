@@ -88,7 +88,7 @@ public class GrimoireOfTheDead extends CardImpl<GrimoireOfTheDead> {
     }
 }
 
-class GrimoireOfTheDeadEffect extends OneShotEffect<GrimoireOfTheDeadEffect> {
+class GrimoireOfTheDeadEffect extends OneShotEffect {
 
     public GrimoireOfTheDeadEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -119,7 +119,7 @@ class GrimoireOfTheDeadEffect extends OneShotEffect<GrimoireOfTheDeadEffect> {
 
 }
 
-class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl<GrimoireOfTheDeadEffect2> {
+class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
 
     private UUID targetId;
 

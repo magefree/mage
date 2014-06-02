@@ -38,7 +38,7 @@ import mage.game.events.GameEvent;
  *
  * @author jeffwadsworth
  */
-public class PreventCombatDamageToSourceEffect extends PreventionEffectImpl<PreventCombatDamageToSourceEffect> {
+public class PreventCombatDamageToSourceEffect extends PreventionEffectImpl {
 
     public PreventCombatDamageToSourceEffect(Duration duration) {
             super(duration, Integer.MAX_VALUE, true);

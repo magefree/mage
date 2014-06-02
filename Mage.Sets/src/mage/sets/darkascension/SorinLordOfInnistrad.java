@@ -125,7 +125,7 @@ class SorinEmblem extends Emblem {
     }
 }
 
-class SorinLordOfInnistradEffect extends OneShotEffect<SorinLordOfInnistradEffect> {
+class SorinLordOfInnistradEffect extends OneShotEffect {
 
     public SorinLordOfInnistradEffect() {
         super(Outcome.Sacrifice);

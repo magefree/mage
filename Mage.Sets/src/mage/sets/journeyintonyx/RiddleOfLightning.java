@@ -73,7 +73,7 @@ public class RiddleOfLightning extends CardImpl<RiddleOfLightning> {
     }
 }
 
-class RiddleOfLightningEffect extends OneShotEffect<RiddleOfLightningEffect> {
+class RiddleOfLightningEffect extends OneShotEffect {
     
     public RiddleOfLightningEffect() {
         super(Outcome.Damage);

@@ -74,7 +74,7 @@ public class KodamasReach extends CardImpl<KodamasReach> {
     }
 }
 
-class KodamasReachEffect extends OneShotEffect<KodamasReachEffect> {
+class KodamasReachEffect extends OneShotEffect {
 
     protected static final FilterCard filter = new FilterCard("card to put on the battlefield tapped");
 

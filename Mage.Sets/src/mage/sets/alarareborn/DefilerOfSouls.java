@@ -78,7 +78,7 @@ public class DefilerOfSouls extends CardImpl<DefilerOfSouls> {
     }
 }
 
-class DefilerOfSoulsEffect extends OneShotEffect<DefilerOfSoulsEffect> {
+class DefilerOfSoulsEffect extends OneShotEffect {
 
     DefilerOfSoulsEffect() {
         super(Outcome.Sacrifice);

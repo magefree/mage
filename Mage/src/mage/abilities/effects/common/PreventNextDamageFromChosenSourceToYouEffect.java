@@ -17,7 +17,7 @@ import mage.target.TargetSource;
  *
  * @author Quercitron
  */
-public class PreventNextDamageFromChosenSourceToYouEffect extends PreventionEffectImpl<PreventNextDamageFromChosenSourceToYouEffect> {
+public class PreventNextDamageFromChosenSourceToYouEffect extends PreventionEffectImpl {
 
     private final TargetSource targetSource;
     

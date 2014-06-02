@@ -74,7 +74,7 @@ public class GlitteringWish extends CardImpl<GlitteringWish> {
     }
 }
 
-class GlitteringWishEffect extends OneShotEffect<GlitteringWishEffect> {
+class GlitteringWishEffect extends OneShotEffect {
 
     private static final String choiceText = "Choose a multicolored card you own from outside the game, and put it into your hand";
 

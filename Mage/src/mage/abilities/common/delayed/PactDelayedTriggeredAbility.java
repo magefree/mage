@@ -69,7 +69,7 @@ public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 }
 
-class PactEffect extends OneShotEffect<PactEffect> {
+class PactEffect extends OneShotEffect {
 
     private ManaCosts cost;
 

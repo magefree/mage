@@ -76,7 +76,7 @@ public class ThespiansStage extends CardImpl<ThespiansStage> {
     }
 }
 
-class ThespiansStageCopyEffect extends OneShotEffect<ThespiansStageCopyEffect> {
+class ThespiansStageCopyEffect extends OneShotEffect {
 
     public ThespiansStageCopyEffect() {
         super(Outcome.Benefit);

@@ -116,7 +116,7 @@ class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class MysticBarrierChooseEffect extends OneShotEffect<MysticBarrierChooseEffect> {
+class MysticBarrierChooseEffect extends OneShotEffect {
 
     public static final String[] SET_VALUES = new String[] { MysticBarrier.ALLOW_ATTACKING_LEFT, MysticBarrier.ALLOW_ATTACKING_RIGHT };
     public static final Set<String> CHOICES = new HashSet<String>(Arrays.asList(SET_VALUES));
@@ -159,7 +159,7 @@ class MysticBarrierChooseEffect extends OneShotEffect<MysticBarrierChooseEffect>
     }
 }
 
-class MysticBarrierReplacementEffect extends ReplacementEffectImpl<MysticBarrierReplacementEffect> {
+class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
 
     MysticBarrierReplacementEffect ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

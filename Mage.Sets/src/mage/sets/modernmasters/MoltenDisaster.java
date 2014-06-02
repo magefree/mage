@@ -112,7 +112,7 @@ class MoltenDisasterTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class MoltenDisasterEffect extends OneShotEffect<MoltenDisasterEffect> {
+class MoltenDisasterEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

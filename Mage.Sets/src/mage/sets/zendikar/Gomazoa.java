@@ -86,7 +86,7 @@ public class Gomazoa extends CardImpl<Gomazoa> {
     }
 }
 
-class GomazoaEffect extends OneShotEffect<GomazoaEffect> {
+class GomazoaEffect extends OneShotEffect {
 
     public GomazoaEffect() {
         super(Outcome.Neutral);

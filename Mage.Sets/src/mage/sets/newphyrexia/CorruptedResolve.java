@@ -68,7 +68,7 @@ public class CorruptedResolve extends CardImpl<CorruptedResolve> {
     }
 }
 
-class CorruptedResolveEffect extends OneShotEffect<CorruptedResolveEffect> {
+class CorruptedResolveEffect extends OneShotEffect {
     CorruptedResolveEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell if its controller is poisoned";

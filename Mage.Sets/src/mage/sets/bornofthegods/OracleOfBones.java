@@ -85,7 +85,7 @@ public class OracleOfBones extends CardImpl<OracleOfBones> {
     }
 }
 
-class OracleOfBonesCastEffect extends OneShotEffect<OracleOfBonesCastEffect> {
+class OracleOfBonesCastEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from your hand");
 

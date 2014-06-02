@@ -86,7 +86,7 @@ public class BitingTether extends CardImpl<BitingTether> {
     }
 }
 
-class BitingTetherEffect extends OneShotEffect<BitingTetherEffect> {
+class BitingTetherEffect extends OneShotEffect {
 
     public BitingTetherEffect() {
         super(Outcome.Neutral);

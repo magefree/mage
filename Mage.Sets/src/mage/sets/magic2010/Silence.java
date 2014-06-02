@@ -63,7 +63,7 @@ public class Silence extends CardImpl<Silence> {
     }
 }
 
-class SilenceEffect extends ReplacementEffectImpl<SilenceEffect> {
+class SilenceEffect extends ReplacementEffectImpl {
 
     public SilenceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

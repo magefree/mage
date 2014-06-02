@@ -70,7 +70,7 @@ public class KillingWave extends CardImpl<KillingWave> {
     }
 }
 
-class KillingWaveEffect extends OneShotEffect<KillingWaveEffect> {
+class KillingWaveEffect extends OneShotEffect {
 
     public KillingWaveEffect() {
         super(Outcome.Sacrifice);

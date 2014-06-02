@@ -70,7 +70,7 @@ public class InquisitorsFlail extends CardImpl<InquisitorsFlail> {
     }
 }
 
-class InquisitorsFlailEffect extends ReplacementEffectImpl<InquisitorsFlailEffect> {
+class InquisitorsFlailEffect extends ReplacementEffectImpl {
 
     public InquisitorsFlailEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);

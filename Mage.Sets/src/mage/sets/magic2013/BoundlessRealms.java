@@ -72,7 +72,7 @@ public class BoundlessRealms extends CardImpl<BoundlessRealms> {
     }
 }
 
-class BoundlessRealmsEffect extends OneShotEffect<BoundlessRealmsEffect> {
+class BoundlessRealmsEffect extends OneShotEffect {
 
     public BoundlessRealmsEffect() {
         super(Outcome.Benefit);

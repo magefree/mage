@@ -85,7 +85,7 @@ public class BrainMaggot extends CardImpl<BrainMaggot> {
     }
 }
 
-class BrainMaggotExileEffect extends OneShotEffect<BrainMaggotExileEffect> {
+class BrainMaggotExileEffect extends OneShotEffect {
 
     public BrainMaggotExileEffect() {
         super(Outcome.Benefit);
@@ -159,7 +159,7 @@ class BrainMaggotReturnExiledAbility extends TriggeredAbilityImpl {
     }
 }
 
-class BrainMaggotReturnExiledCreatureEffect extends OneShotEffect<BrainMaggotReturnExiledCreatureEffect> {
+class BrainMaggotReturnExiledCreatureEffect extends OneShotEffect {
 
     public BrainMaggotReturnExiledCreatureEffect() {
         super(Outcome.Benefit);

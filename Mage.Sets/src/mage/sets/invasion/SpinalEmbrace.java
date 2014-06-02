@@ -97,7 +97,7 @@ public class SpinalEmbrace extends CardImpl<SpinalEmbrace> {
     }
 }
 
-class SpinalEmbraceEffect extends ReplacementEffectImpl<SpinalEmbraceEffect> {
+class SpinalEmbraceEffect extends ReplacementEffectImpl {
     SpinalEmbraceEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only during combat";
@@ -131,7 +131,7 @@ class SpinalEmbraceEffect extends ReplacementEffectImpl<SpinalEmbraceEffect> {
     }
 }
 
-class SpinalEmbraceAddDelayedEffect extends OneShotEffect<SpinalEmbraceAddDelayedEffect> {
+class SpinalEmbraceAddDelayedEffect extends OneShotEffect {
 
     public SpinalEmbraceAddDelayedEffect() {
         super(Outcome.Sacrifice);
@@ -159,7 +159,7 @@ class SpinalEmbraceAddDelayedEffect extends OneShotEffect<SpinalEmbraceAddDelaye
     }
 }
 
-class SpinalEmbraceSacrificeEffect extends OneShotEffect<SpinalEmbraceSacrificeEffect> {
+class SpinalEmbraceSacrificeEffect extends OneShotEffect {
 
     public SpinalEmbraceSacrificeEffect() {
         super(Outcome.Benefit);

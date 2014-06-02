@@ -105,7 +105,7 @@ class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 
-class PiousWarriorGainLifeEffect extends OneShotEffect<PiousWarriorGainLifeEffect> {
+class PiousWarriorGainLifeEffect extends OneShotEffect {
 
 	public PiousWarriorGainLifeEffect() {
 		super(Outcome.GainLife);

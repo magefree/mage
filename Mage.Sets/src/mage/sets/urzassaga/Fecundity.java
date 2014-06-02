@@ -66,7 +66,7 @@ public class Fecundity extends CardImpl<Fecundity> {
     }
 }
 
-class FecundityEffect extends OneShotEffect<FecundityEffect> {
+class FecundityEffect extends OneShotEffect {
 
     public FecundityEffect() {
         super(Outcome.DrawCard);

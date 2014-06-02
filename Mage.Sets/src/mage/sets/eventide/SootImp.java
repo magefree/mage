@@ -86,7 +86,7 @@ public class SootImp extends CardImpl<SootImp> {
     }
 }
 
-class SootImpEffect extends OneShotEffect<SootImpEffect> {
+class SootImpEffect extends OneShotEffect {
 
     public SootImpEffect() {
         super(Outcome.Neutral);

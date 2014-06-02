@@ -77,7 +77,7 @@ public class BloodScrivener  extends CardImpl<BloodScrivener> {
 
 }
 
-class BloodScrivenerReplacementEffect extends ReplacementEffectImpl<BloodScrivenerReplacementEffect> {
+class BloodScrivenerReplacementEffect extends ReplacementEffectImpl {
 
     public BloodScrivenerReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

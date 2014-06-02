@@ -77,7 +77,7 @@ public class BloodshotCyclops extends CardImpl<BloodshotCyclops> {
     }
 }
 
-class BloodshotCyclopsEffect extends OneShotEffect<BloodshotCyclopsEffect> {
+class BloodshotCyclopsEffect extends OneShotEffect {
 
     public BloodshotCyclopsEffect() {
         super(Outcome.Damage);

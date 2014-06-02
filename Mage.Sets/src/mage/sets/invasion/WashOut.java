@@ -78,7 +78,7 @@ public class WashOut extends CardImpl<WashOut> {
     }
 }
 
-class WashOutEffect extends OneShotEffect<WashOutEffect> {
+class WashOutEffect extends OneShotEffect {
 
     public WashOutEffect() {
         super(Outcome.ReturnToHand);

@@ -67,7 +67,7 @@ public class InfernalGenesis extends CardImpl<InfernalGenesis> {
     }
 }
 
-class InfernalGenesisEffect extends OneShotEffect<InfernalGenesisEffect> {
+class InfernalGenesisEffect extends OneShotEffect {
 
     InfernalGenesisEffect() {
         super(Outcome.BoostCreature);

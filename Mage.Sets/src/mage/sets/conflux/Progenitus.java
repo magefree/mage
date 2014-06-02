@@ -114,7 +114,7 @@ class ProgenitusProtectionAbility extends ProtectionAbility {
     }
 }
 
-class ProgenitusEffect extends OneShotEffect<ProgenitusEffect> {
+class ProgenitusEffect extends OneShotEffect {
 
     public ProgenitusEffect() {
         super(Outcome.Benefit);

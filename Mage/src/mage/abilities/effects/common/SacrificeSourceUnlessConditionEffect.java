@@ -40,7 +40,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SacrificeSourceUnlessConditionEffect extends OneShotEffect<SacrificeSourceUnlessConditionEffect> {
+public class SacrificeSourceUnlessConditionEffect extends OneShotEffect {
 
     protected Condition condition;
 

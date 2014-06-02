@@ -78,7 +78,7 @@ public class VampireHexmage extends CardImpl<VampireHexmage> {
     }
 }
 
-class VampireHexmageEffect extends OneShotEffect<VampireHexmageEffect> {
+class VampireHexmageEffect extends OneShotEffect {
 
     VampireHexmageEffect ( ) {
         super(Outcome.Benefit);

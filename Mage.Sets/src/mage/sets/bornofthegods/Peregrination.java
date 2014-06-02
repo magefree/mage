@@ -78,7 +78,7 @@ public class Peregrination extends CardImpl<Peregrination> {
     }
 }
 
-class PeregrinationEffect extends OneShotEffect<PeregrinationEffect> {
+class PeregrinationEffect extends OneShotEffect {
 
     protected static final FilterCard filter = new FilterCard("card to put on the battlefield tapped");
 

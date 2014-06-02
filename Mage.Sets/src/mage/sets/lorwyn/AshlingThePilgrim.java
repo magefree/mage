@@ -79,7 +79,7 @@ public class AshlingThePilgrim extends CardImpl<AshlingThePilgrim> {
     }
 }
 
-class AshlingThePilgrimEffect extends OneShotEffect<AshlingThePilgrimEffect> {
+class AshlingThePilgrimEffect extends OneShotEffect {
 
     class ActivationInfo {
         public int zoneChangeCounter;

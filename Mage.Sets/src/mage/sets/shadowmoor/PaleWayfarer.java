@@ -80,7 +80,7 @@ public class PaleWayfarer extends CardImpl<PaleWayfarer> {
     }
 }
 
-class PaleWayfarerEffect extends OneShotEffect<PaleWayfarerEffect> {
+class PaleWayfarerEffect extends OneShotEffect {
 
     public PaleWayfarerEffect() {
         super(Outcome.BoostCreature);

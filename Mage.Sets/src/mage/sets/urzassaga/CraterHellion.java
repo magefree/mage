@@ -75,7 +75,7 @@ public class CraterHellion extends CardImpl<CraterHellion>{
 
 }
 
-class CraterHellionEffect extends OneShotEffect<CraterHellionEffect> {
+class CraterHellionEffect extends OneShotEffect {
 
     public CraterHellionEffect() {
         super(Outcome.Damage);

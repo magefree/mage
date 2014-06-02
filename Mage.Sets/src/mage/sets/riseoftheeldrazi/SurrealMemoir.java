@@ -70,7 +70,7 @@ public class SurrealMemoir extends CardImpl<SurrealMemoir> {
     }
 }
 
-class SurrealMemoirEffect extends OneShotEffect<SurrealMemoirEffect> {
+class SurrealMemoirEffect extends OneShotEffect {
 
     public SurrealMemoirEffect() {
         super(Outcome.ReturnToHand);

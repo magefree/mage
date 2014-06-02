@@ -89,7 +89,7 @@ public class UnexpectedResults extends CardImpl<UnexpectedResults> {
     }
 }
 
-class UnexpectedResultEffect extends OneShotEffect<UnexpectedResultEffect> {
+class UnexpectedResultEffect extends OneShotEffect {
 
     public UnexpectedResultEffect() {
         super(Outcome.PlayForFree);

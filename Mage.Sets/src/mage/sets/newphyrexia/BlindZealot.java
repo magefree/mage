@@ -127,7 +127,7 @@ class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class BlindZealotEffect extends OneShotEffect<BlindZealotEffect> {
+class BlindZealotEffect extends OneShotEffect {
 
     public BlindZealotEffect() {
         super(Outcome.DestroyPermanent);

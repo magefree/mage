@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Quercitron
  */
-public class PreventAllDamageToAndByAttachedEffect extends PreventionEffectImpl<PreventAllDamageToAndByAttachedEffect> {
+public class PreventAllDamageToAndByAttachedEffect extends PreventionEffectImpl {
 
     private final String attachedDescription;
     

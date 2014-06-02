@@ -139,7 +139,7 @@ public class MarathWillOfTheWild extends CardImpl<MarathWillOfTheWild> {
 }
 
 
-class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect<MarathWillOfTheWildCreateTokenEffect> {
+class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect {
 
     public MarathWillOfTheWildCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -68,7 +68,7 @@ public class TrapfindersTrick extends CardImpl<TrapfindersTrick> {
     }
 }
 
-class TrapfindersTrickEffect extends OneShotEffect<TrapfindersTrickEffect> {
+class TrapfindersTrickEffect extends OneShotEffect {
 
     public TrapfindersTrickEffect() {
         super(Outcome.Discard);

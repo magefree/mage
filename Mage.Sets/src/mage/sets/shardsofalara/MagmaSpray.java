@@ -74,7 +74,7 @@ public class MagmaSpray extends CardImpl<MagmaSpray> {
     }
 }
 
-class MagmaSprayEffect extends ReplacementEffectImpl<MagmaSprayEffect> {
+class MagmaSprayEffect extends ReplacementEffectImpl {
 
     public MagmaSprayEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);

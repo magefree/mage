@@ -79,7 +79,7 @@ public class AvenMindcensor extends CardImpl<AvenMindcensor> {
     }
 }
 
-class AvenMindcensorEffect extends ReplacementEffectImpl<AvenMindcensorEffect> {
+class AvenMindcensorEffect extends ReplacementEffectImpl {
     AvenMindcensorEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If an opponent would search a library, that player searches the top four cards of that library instead";

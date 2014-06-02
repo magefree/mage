@@ -69,7 +69,7 @@ public class ImmortalServitude extends CardImpl<ImmortalServitude> {
     }
 }
 
-class ImmortalServitudeEffect extends OneShotEffect<ImmortalServitudeEffect> {
+class ImmortalServitudeEffect extends OneShotEffect {
 
     public ImmortalServitudeEffect() {
         super(Outcome.PutCreatureInPlay);

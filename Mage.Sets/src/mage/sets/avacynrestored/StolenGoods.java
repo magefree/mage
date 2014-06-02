@@ -68,7 +68,7 @@ public class StolenGoods extends CardImpl<StolenGoods> {
     }
 }
 
-class StolenGoodsEffect extends OneShotEffect<StolenGoodsEffect> {
+class StolenGoodsEffect extends OneShotEffect {
 
     public StolenGoodsEffect() {
         super(Outcome.Detriment);
@@ -107,7 +107,7 @@ class StolenGoodsEffect extends OneShotEffect<StolenGoodsEffect> {
     }
 }
 
-class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl<StolenGoodsCastFromExileEffect> {
+class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl {
 
     private UUID cardId;
 

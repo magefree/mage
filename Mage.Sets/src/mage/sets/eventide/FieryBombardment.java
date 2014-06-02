@@ -83,7 +83,7 @@ public class FieryBombardment extends CardImpl<FieryBombardment> {
     }
 }
 
-class FieryBombardmentEffect extends OneShotEffect<FieryBombardmentEffect> {
+class FieryBombardmentEffect extends OneShotEffect {
 
     public FieryBombardmentEffect() {
         super(Outcome.Benefit);

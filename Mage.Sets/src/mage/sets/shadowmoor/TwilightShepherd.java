@@ -85,7 +85,7 @@ public class TwilightShepherd extends CardImpl<TwilightShepherd> {
     }
 }
 
-class TwilightShepherdEffect extends OneShotEffect<TwilightShepherdEffect> {
+class TwilightShepherdEffect extends OneShotEffect {
 
     boolean applied = false;
 

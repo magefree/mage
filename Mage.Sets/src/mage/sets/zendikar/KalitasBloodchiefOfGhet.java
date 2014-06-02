@@ -80,7 +80,7 @@ public class KalitasBloodchiefOfGhet extends CardImpl<KalitasBloodchiefOfGhet> {
     }
 }
 
-class KalitasDestroyEffect extends OneShotEffect<KalitasDestroyEffect> {
+class KalitasDestroyEffect extends OneShotEffect {
 
     public KalitasDestroyEffect() {
         super(Outcome.DestroyPermanent);

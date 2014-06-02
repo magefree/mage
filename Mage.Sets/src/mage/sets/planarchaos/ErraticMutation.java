@@ -75,7 +75,7 @@ public class ErraticMutation extends CardImpl<ErraticMutation> {
     }
 }
 
-class ErraticMutationEffect extends OneShotEffect<ErraticMutationEffect> {
+class ErraticMutationEffect extends OneShotEffect {
 
     public ErraticMutationEffect() {
         super(Outcome.DrawCard);

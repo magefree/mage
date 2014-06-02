@@ -68,7 +68,7 @@ public class AgentOfMasks extends CardImpl<AgentOfMasks> {
     }
 }
 
-class AgentOfMasksEffect extends OneShotEffect<AgentOfMasksEffect> {
+class AgentOfMasksEffect extends OneShotEffect {
     public AgentOfMasksEffect() {
         super(Outcome.Damage);
         staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";

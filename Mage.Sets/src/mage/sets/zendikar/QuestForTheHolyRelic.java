@@ -89,7 +89,7 @@ public class QuestForTheHolyRelic extends CardImpl<QuestForTheHolyRelic> {
     }
 }
 
-class QuestForTheHolyRelicEffect extends OneShotEffect<QuestForTheHolyRelicEffect> {
+class QuestForTheHolyRelicEffect extends OneShotEffect {
 
     public QuestForTheHolyRelicEffect() {
         super(Outcome.PutCardInPlay);

@@ -79,7 +79,7 @@ public class Meglonoth extends CardImpl<Meglonoth> {
     }
 }
 
-class MeglonothEffect extends OneShotEffect<MeglonothEffect> {
+class MeglonothEffect extends OneShotEffect {
 
     public MeglonothEffect() {
         super(Outcome.Damage);

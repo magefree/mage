@@ -95,7 +95,7 @@ public class Evershrike extends CardImpl<Evershrike> {
     }
 }
 
-class EvershrikeEffect extends OneShotEffect<EvershrikeEffect> {
+class EvershrikeEffect extends OneShotEffect {
 
     public EvershrikeEffect() {
         super(Outcome.Benefit);

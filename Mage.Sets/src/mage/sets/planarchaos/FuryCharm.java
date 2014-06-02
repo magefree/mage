@@ -130,7 +130,7 @@ public class FuryCharm extends CardImpl<FuryCharm> {
     }
 }
 
-class FuryCharmRemoveCounterEffect extends OneShotEffect<FuryCharmRemoveCounterEffect> {
+class FuryCharmRemoveCounterEffect extends OneShotEffect {
 
     public FuryCharmRemoveCounterEffect() {
         super(Outcome.Benefit);

@@ -78,7 +78,7 @@ public class WildRicochet extends CardImpl<WildRicochet> {
     }
 }
 
-class WildRicochetEffect extends OneShotEffect<WildRicochetEffect> {
+class WildRicochetEffect extends OneShotEffect {
 
     public WildRicochetEffect() {
         super(Outcome.Neutral);

@@ -77,7 +77,7 @@ public class GraveExchange extends CardImpl<GraveExchange> {
     }
 }
 
-class GraveExchangeEffect extends OneShotEffect<GraveExchangeEffect> {
+class GraveExchangeEffect extends OneShotEffect {
 
     public GraveExchangeEffect() {
         super(Outcome.Sacrifice);

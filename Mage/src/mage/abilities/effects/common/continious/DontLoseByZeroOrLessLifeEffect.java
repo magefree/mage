@@ -42,7 +42,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class DontLoseByZeroOrLessLifeEffect extends ContinuousEffectImpl<DontLoseByZeroOrLessLifeEffect> {
+public class DontLoseByZeroOrLessLifeEffect extends ContinuousEffectImpl {
 
     public DontLoseByZeroOrLessLifeEffect(Duration duration) {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);

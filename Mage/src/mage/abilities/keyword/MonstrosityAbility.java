@@ -99,7 +99,7 @@ public class MonstrosityAbility extends ActivatedAbilityImpl {
 }
 
 
-class BecomeMonstrousSourceEffect extends OneShotEffect<BecomeMonstrousSourceEffect> {
+class BecomeMonstrousSourceEffect extends OneShotEffect {
 
     public BecomeMonstrousSourceEffect(int monstrosityValue) {
         super(Outcome.BoostCreature);

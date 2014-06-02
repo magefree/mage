@@ -81,7 +81,7 @@ public class BubblingCauldron extends CardImpl<BubblingCauldron> {
     }
 }
 
-class BubblingCauldronEffect extends OneShotEffect<BubblingCauldronEffect> {
+class BubblingCauldronEffect extends OneShotEffect {
 
     public BubblingCauldronEffect() {
         super(Outcome.Damage);

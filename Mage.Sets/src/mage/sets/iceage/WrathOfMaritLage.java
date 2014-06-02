@@ -82,7 +82,7 @@ public class WrathOfMaritLage extends CardImpl<WrathOfMaritLage> {
     }
 }
 
-class TapAllEffect extends OneShotEffect<TapAllEffect> {
+class TapAllEffect extends OneShotEffect {
    
     public TapAllEffect() {
         super(Outcome.Tap);

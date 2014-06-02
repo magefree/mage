@@ -77,7 +77,7 @@ public class MagusOfTheMoon extends CardImpl<MagusOfTheMoon> {
     }
 }
 
-class MagusOfTheMoonEffect extends ContinuousEffectImpl<MagusOfTheMoonEffect> {
+class MagusOfTheMoonEffect extends ContinuousEffectImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     static {

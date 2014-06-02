@@ -102,7 +102,7 @@ public class IbHalfheartGoblinTactician extends CardImpl<IbHalfheartGoblinTactic
     }
 }
 
-class IbHalfheartGoblinTacticianEffect extends OneShotEffect<IbHalfheartGoblinTacticianEffect> {
+class IbHalfheartGoblinTacticianEffect extends OneShotEffect {
 
     public IbHalfheartGoblinTacticianEffect() {
         super(Outcome.Damage);

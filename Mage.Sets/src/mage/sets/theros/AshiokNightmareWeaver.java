@@ -100,7 +100,7 @@ public class AshiokNightmareWeaver extends CardImpl<AshiokNightmareWeaver> {
     }
 }
 
-class AshiokNightmareWeaverExileEffect extends OneShotEffect<AshiokNightmareWeaverExileEffect> {
+class AshiokNightmareWeaverExileEffect extends OneShotEffect {
 
     public AshiokNightmareWeaverExileEffect() {
         super(Outcome.Exile);
@@ -134,7 +134,7 @@ class AshiokNightmareWeaverExileEffect extends OneShotEffect<AshiokNightmareWeav
     }
 }
 
-class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect<AshiokNightmareWeaverPutIntoPlayEffect> {
+class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
 
     public AshiokNightmareWeaverPutIntoPlayEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -184,7 +184,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect<AshiokNightma
     }
 }
 
-class AshiokNightmareWeaverAddTypeEffect extends ContinuousEffectImpl<AshiokNightmareWeaverAddTypeEffect> {
+class AshiokNightmareWeaverAddTypeEffect extends ContinuousEffectImpl {
 
     public AshiokNightmareWeaverAddTypeEffect() {
         super(Duration.Custom, Outcome.Neutral);
@@ -230,7 +230,7 @@ class AshiokNightmareWeaverAddTypeEffect extends ContinuousEffectImpl<AshiokNigh
 
 }
 
-class AshiokNightmareWeaverExileAllEffect extends OneShotEffect<AshiokNightmareWeaverExileAllEffect> {
+class AshiokNightmareWeaverExileAllEffect extends OneShotEffect {
 
     public AshiokNightmareWeaverExileAllEffect() {
         super(Outcome.Exile);

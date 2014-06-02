@@ -86,7 +86,7 @@ public class MephidrossVampire extends CardImpl<MephidrossVampire> {
     }
 }
 
-class MephidrossVampireEffect extends ContinuousEffectImpl<MephidrossVampireEffect> {
+class MephidrossVampireEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

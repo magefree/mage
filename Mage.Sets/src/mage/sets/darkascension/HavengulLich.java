@@ -92,7 +92,7 @@ public class HavengulLich extends CardImpl<HavengulLich> {
 }
 
 //allow card in graveyard to be played
-class HavengulLichPlayEffect extends AsThoughEffectImpl<HavengulLichPlayEffect> {
+class HavengulLichPlayEffect extends AsThoughEffectImpl {
 
     public HavengulLichPlayEffect() {
         super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
@@ -128,7 +128,7 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl<HavengulLichPlayEffect> 
 }
 
 //create delayed triggered ability to watch for card being played
-class HavengulLichPlayedEffect extends OneShotEffect<HavengulLichPlayedEffect> {
+class HavengulLichPlayedEffect extends OneShotEffect {
 
     public HavengulLichPlayedEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -187,7 +187,7 @@ class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility {
 }
 
 // copy activated abilities of card
-class HavengulLichEffect extends ContinuousEffectImpl<HavengulLichEffect> {
+class HavengulLichEffect extends ContinuousEffectImpl {
 
     private final UUID cardId;
 

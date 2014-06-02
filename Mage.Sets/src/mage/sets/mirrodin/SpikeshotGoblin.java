@@ -75,7 +75,7 @@ public class SpikeshotGoblin extends CardImpl<SpikeshotGoblin> {
     }
 }
 
-class SpikeshotGoblinEffect extends OneShotEffect<SpikeshotGoblinEffect> {
+class SpikeshotGoblinEffect extends OneShotEffect {
     public SpikeshotGoblinEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals damage equal to its power to target creature or player";

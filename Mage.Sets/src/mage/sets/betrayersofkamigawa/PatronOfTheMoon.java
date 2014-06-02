@@ -85,7 +85,7 @@ public class PatronOfTheMoon extends CardImpl<PatronOfTheMoon> {
     }
 }
 
-class PatronOfTheMoonEffect extends OneShotEffect<PatronOfTheMoonEffect> {
+class PatronOfTheMoonEffect extends OneShotEffect {
     PatronOfTheMoonEffect() {
         super(Outcome.PutLandInPlay);
         staticText = "Put up to two land cards from your hand onto the battlefield tapped";

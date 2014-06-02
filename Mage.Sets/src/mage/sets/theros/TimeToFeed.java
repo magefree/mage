@@ -101,7 +101,7 @@ public class TimeToFeed extends CardImpl<TimeToFeed> {
     }
 }
 
-class TimeToFeedTextEffect extends OneShotEffect<TimeToFeedTextEffect> {
+class TimeToFeedTextEffect extends OneShotEffect {
 
     public TimeToFeedTextEffect() {
         super(Outcome.Detriment);

@@ -76,7 +76,7 @@ public class SunderingTitan extends CardImpl<SunderingTitan> {
     }
 }
 
-class SunderingTitanDestroyLandEffect extends OneShotEffect<SunderingTitanDestroyLandEffect> {
+class SunderingTitanDestroyLandEffect extends OneShotEffect {
 
     public SunderingTitanDestroyLandEffect() {
         super(Outcome.DestroyPermanent);

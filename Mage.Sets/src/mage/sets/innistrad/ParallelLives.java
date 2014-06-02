@@ -67,7 +67,7 @@ public class ParallelLives extends CardImpl<ParallelLives> {
     }
 }
 
-class ParallelLivesEffect extends ReplacementEffectImpl<ParallelLivesEffect> {
+class ParallelLivesEffect extends ReplacementEffectImpl {
 
     public ParallelLivesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy);

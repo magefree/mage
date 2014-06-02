@@ -75,7 +75,7 @@ public class EssenceOfTheWild extends CardImpl<EssenceOfTheWild> {
     }
 }
 
-class EssenceOfTheWildEffect extends ReplacementEffectImpl<EssenceOfTheWildEffect> {
+class EssenceOfTheWildEffect extends ReplacementEffectImpl {
 
     public EssenceOfTheWildEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy, false);
@@ -121,7 +121,7 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl<EssenceOfTheWildEffec
 
 }
 
-class EssenceOfTheWildCopyEffect extends ContinuousEffectImpl<EssenceOfTheWildCopyEffect> {
+class EssenceOfTheWildCopyEffect extends ContinuousEffectImpl {
 
     private Permanent essence;
     private UUID targetId;

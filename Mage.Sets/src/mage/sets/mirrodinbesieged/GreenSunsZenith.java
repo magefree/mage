@@ -73,7 +73,7 @@ public class GreenSunsZenith extends CardImpl<GreenSunsZenith> {
 
 }
 
-class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEffect> {
+class GreenSunsZenithSearchEffect extends OneShotEffect {
     GreenSunsZenithSearchEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library";

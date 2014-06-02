@@ -73,7 +73,7 @@ public class Trickbind extends CardImpl<Trickbind> {
     }
 }
 
-class TrickbindCounterEffect extends OneShotEffect<TrickbindCounterEffect> {
+class TrickbindCounterEffect extends OneShotEffect {
 
     public TrickbindCounterEffect() {
         super(Outcome.Detriment);
@@ -103,7 +103,7 @@ class TrickbindCounterEffect extends OneShotEffect<TrickbindCounterEffect> {
 
 }
 
-class TrickbindReplacementEffect extends ReplacementEffectImpl<TrickbindReplacementEffect> {
+class TrickbindReplacementEffect extends ReplacementEffectImpl {
 
     public TrickbindReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.LoseAbility);

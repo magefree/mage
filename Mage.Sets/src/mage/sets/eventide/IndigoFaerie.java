@@ -82,7 +82,7 @@ public class IndigoFaerie extends CardImpl<IndigoFaerie> {
     }
 }
 
-class BecomesBlueTargetEffect extends ContinuousEffectImpl<BecomesBlueTargetEffect> {
+class BecomesBlueTargetEffect extends ContinuousEffectImpl {
 
     public BecomesBlueTargetEffect() {
         super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Neutral);

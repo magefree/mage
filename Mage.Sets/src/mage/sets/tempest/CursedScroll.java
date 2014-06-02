@@ -77,7 +77,7 @@ public class CursedScroll extends CardImpl<CursedScroll> {
     }
 }
 
-class CursedScrollEffect extends OneShotEffect<CursedScrollEffect> {
+class CursedScrollEffect extends OneShotEffect {
 
     public CursedScrollEffect() {
         super(Outcome.Neutral);

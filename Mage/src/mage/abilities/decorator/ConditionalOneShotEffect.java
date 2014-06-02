@@ -38,7 +38,7 @@ import mage.game.Game;
  *
  * @author maurer.it_at_gmail.com
  */
-public class ConditionalOneShotEffect extends OneShotEffect<ConditionalOneShotEffect> {
+public class ConditionalOneShotEffect extends OneShotEffect {
 
     private OneShotEffect effect;
     private OneShotEffect otherwiseEffect;

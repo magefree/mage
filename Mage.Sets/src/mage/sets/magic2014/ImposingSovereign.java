@@ -72,7 +72,7 @@ public class ImposingSovereign extends CardImpl<ImposingSovereign> {
     }
 }
 
-class ImposingSovereignEffect extends ReplacementEffectImpl<ImposingSovereignEffect> {
+class ImposingSovereignEffect extends ReplacementEffectImpl {
     
     ImposingSovereignEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Tap);

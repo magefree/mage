@@ -62,7 +62,7 @@ public class ThranLens extends CardImpl<ThranLens> {
     
    
 }
- class ThranLensEffect extends ContinuousEffectImpl<ThranLensEffect> {
+ class ThranLensEffect extends ContinuousEffectImpl {
 
     private static ObjectColor colorless = new ObjectColor();
     

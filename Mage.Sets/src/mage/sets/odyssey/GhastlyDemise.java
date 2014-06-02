@@ -76,7 +76,7 @@ public class GhastlyDemise extends CardImpl<GhastlyDemise> {
     }
 }
 
-class GhastlyDemiseEffect extends OneShotEffect<GhastlyDemiseEffect> {
+class GhastlyDemiseEffect extends OneShotEffect {
 
     protected boolean noRegen;
 

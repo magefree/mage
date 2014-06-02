@@ -63,7 +63,7 @@ public class TempestOfLight extends CardImpl<TempestOfLight> {
     }
 }
 
-class TempestOfLightEffect extends OneShotEffect<TempestOfLightEffect> {
+class TempestOfLightEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("");
 

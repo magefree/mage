@@ -35,13 +35,14 @@ import mage.game.events.GameEvent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public interface ReplacementEffect<T extends ReplacementEffect<T>> extends ContinuousEffect<T> {
+public interface ReplacementEffect extends ContinuousEffect {
 
     boolean replaceEvent(GameEvent event, Ability source, Game game);
     boolean applies(GameEvent event, Ability source, Game game);
 
     boolean hasSelfScope();
 
+    @Override
+    public ContinuousEffect copy();
 }

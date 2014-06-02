@@ -69,7 +69,7 @@ public class DosanTheFallingLeaf extends CardImpl<DosanTheFallingLeaf> {
     }
 }
 
-class DosanTheFallingLeafEffect extends ReplacementEffectImpl<DosanTheFallingLeafEffect> {
+class DosanTheFallingLeafEffect extends ReplacementEffectImpl {
     DosanTheFallingLeafEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can cast spells only during their own turns";

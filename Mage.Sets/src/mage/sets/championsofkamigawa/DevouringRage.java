@@ -85,7 +85,7 @@ public class DevouringRage extends CardImpl<DevouringRage> {
     }
 }
 
-class DevouringRageEffect extends OneShotEffect<DevouringRageEffect> {
+class DevouringRageEffect extends OneShotEffect {
 
     public DevouringRageEffect() {
         super(Outcome.LoseLife);

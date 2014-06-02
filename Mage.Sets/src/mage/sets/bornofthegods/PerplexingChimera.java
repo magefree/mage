@@ -153,7 +153,7 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class PerplexingChimeraControlExchangeEffect extends OneShotEffect<PerplexingChimeraControlExchangeEffect> {
+class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
 
     public PerplexingChimeraControlExchangeEffect() {
         super(Outcome.Benefit);
@@ -192,7 +192,7 @@ class PerplexingChimeraControlExchangeEffect extends OneShotEffect<PerplexingChi
     }
 }
 
-class PerplexingChimeraControlEffect extends ContinuousEffectImpl<PerplexingChimeraControlEffect> {
+class PerplexingChimeraControlEffect extends ContinuousEffectImpl {
 
     public PerplexingChimeraControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);

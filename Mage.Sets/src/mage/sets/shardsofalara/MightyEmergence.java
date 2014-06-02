@@ -117,7 +117,7 @@ class MightyEmergenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class MightyEmergenceAddCountersTargetEffect extends OneShotEffect<MightyEmergenceAddCountersTargetEffect> {
+class MightyEmergenceAddCountersTargetEffect extends OneShotEffect {
 
 
 

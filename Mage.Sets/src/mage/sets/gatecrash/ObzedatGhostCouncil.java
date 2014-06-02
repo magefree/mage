@@ -98,7 +98,7 @@ public class ObzedatGhostCouncil extends CardImpl<ObzedatGhostCouncil> {
 }
 
 
-class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect<ObzedatGhostCouncilExileSourceEffect> {
+class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
 
     public ObzedatGhostCouncilExileSourceEffect() {
         super(Outcome.Exile);
@@ -156,7 +156,7 @@ class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility
     }
 }
 
-class ObzedatGhostCouncilReturnEffect extends OneShotEffect<ObzedatGhostCouncilReturnEffect> {
+class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
 
     public ObzedatGhostCouncilReturnEffect() {
         super(Outcome.Benefit);

@@ -74,7 +74,7 @@ public class KnowledgePool extends CardImpl<KnowledgePool> {
 
 }
 
-class KnowledgePoolEffect1 extends OneShotEffect<KnowledgePoolEffect1> {
+class KnowledgePoolEffect1 extends OneShotEffect {
 
     public KnowledgePoolEffect1() {
         super(Outcome.Neutral);
@@ -138,7 +138,7 @@ class KnowledgePoolAbility extends TriggeredAbilityImpl {
 
 }
 
-class KnowledgePoolEffect2 extends OneShotEffect<KnowledgePoolEffect2> {
+class KnowledgePoolEffect2 extends OneShotEffect {
 
     private static FilterNonlandCard filter = new FilterNonlandCard("nonland card exiled with Knowledge Pool");
 

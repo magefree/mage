@@ -71,7 +71,7 @@ public class Doomsday extends CardImpl<Doomsday> {
 }
 
 
-class DoomsdayEffect extends OneShotEffect<DoomsdayEffect> {
+class DoomsdayEffect extends OneShotEffect {
 
     public DoomsdayEffect() {
         super(Outcome.LoseLife);

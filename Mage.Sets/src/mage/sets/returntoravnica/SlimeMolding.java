@@ -65,7 +65,7 @@ public class SlimeMolding extends CardImpl<SlimeMolding> {
     }
 }
 
-class SlimeMoldingEffect extends OneShotEffect<SlimeMoldingEffect> {
+class SlimeMoldingEffect extends OneShotEffect {
 
     public SlimeMoldingEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -42,7 +42,7 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantTargetSourceEffect extends ReplacementEffectImpl<CantTargetSourceEffect> {
+public class CantTargetSourceEffect extends ReplacementEffectImpl {
 
     private FilterStackObject filterSource;
 

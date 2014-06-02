@@ -66,7 +66,7 @@ public class HeedTheMists extends CardImpl<HeedTheMists> {
         return new HeedTheMists(this);
     }
     
-    private class HeedTheMistsEffect extends OneShotEffect<HeedTheMistsEffect> {
+    private class HeedTheMistsEffect extends OneShotEffect {
 
             public HeedTheMistsEffect() {
                     super(Outcome.DrawCard);

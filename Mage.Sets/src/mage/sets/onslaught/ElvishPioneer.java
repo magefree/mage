@@ -75,7 +75,7 @@ public class ElvishPioneer extends CardImpl<ElvishPioneer> {
     }
 }
 
-class PutLandOnBattlefieldEffect extends OneShotEffect<PutLandOnBattlefieldEffect> {
+class PutLandOnBattlefieldEffect extends OneShotEffect {
 
     private static final String choiceText = "Put a land card from your hand onto the battlefield?";
 

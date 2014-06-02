@@ -81,7 +81,7 @@ public class OrcishSettlers extends CardImpl<OrcishSettlers> {
     }
 }
 
-class OrcishSettlersEffect extends OneShotEffect<OrcishSettlersEffect> {
+class OrcishSettlersEffect extends OneShotEffect {
 
     public OrcishSettlersEffect() {
         super(Outcome.DestroyPermanent);

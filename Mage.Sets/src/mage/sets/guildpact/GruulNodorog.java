@@ -67,7 +67,7 @@ public class GruulNodorog extends CardImpl<GruulNodorog> {
     }
 }
 
-class GruulNodorogEffect extends OneShotEffect<GruulNodorogEffect> {
+class GruulNodorogEffect extends OneShotEffect {
     public GruulNodorogEffect() {
         super(Outcome.Damage);
         staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";

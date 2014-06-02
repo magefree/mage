@@ -70,7 +70,7 @@ public class Recall extends CardImpl<Recall> {
     }
 }
 
-class RecallEffect extends OneShotEffect<RecallEffect> {
+class RecallEffect extends OneShotEffect {
 
     public RecallEffect() {
         super(Outcome.ReturnToHand);

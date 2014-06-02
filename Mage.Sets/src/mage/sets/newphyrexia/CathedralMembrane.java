@@ -104,7 +104,7 @@ class CathedralMembraneAbility extends ZoneChangeTriggeredAbility<CathedralMembr
 
 }
 
-class CathedralMembraneEffect extends OneShotEffect<CathedralMembraneEffect> {
+class CathedralMembraneEffect extends OneShotEffect {
 
     public CathedralMembraneEffect() {
         super(Outcome.Damage);

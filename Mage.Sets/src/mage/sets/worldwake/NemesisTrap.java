@@ -91,7 +91,7 @@ public class NemesisTrap extends CardImpl<NemesisTrap> {
     }
 }
 
-class NemesisTrapEffect extends OneShotEffect<NemesisTrapEffect> {
+class NemesisTrapEffect extends OneShotEffect {
 
     public NemesisTrapEffect() {
         super(Outcome.Exile);

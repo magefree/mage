@@ -75,7 +75,7 @@ public class EmissaryOfHope extends CardImpl<EmissaryOfHope> {
     }
 }
 
-class EmissaryOfHopeEffect extends OneShotEffect<EmissaryOfHopeEffect> {
+class EmissaryOfHopeEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {

@@ -73,7 +73,7 @@ public class TyrantOfDiscord extends CardImpl<TyrantOfDiscord> {
     }
 }
 
-class TyrantOfDiscordEffect extends OneShotEffect<TyrantOfDiscordEffect> {
+class TyrantOfDiscordEffect extends OneShotEffect {
 
     public TyrantOfDiscordEffect() {
         super(Outcome.Benefit);

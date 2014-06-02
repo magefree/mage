@@ -71,7 +71,7 @@ public class Hubris extends CardImpl<Hubris> {
     }
 }
 
-class HubrisReturnEffect extends OneShotEffect<HubrisReturnEffect> {
+class HubrisReturnEffect extends OneShotEffect {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
 

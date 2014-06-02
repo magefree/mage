@@ -103,7 +103,7 @@ class SkillBorrowerAbility extends StaticAbility {
     }
 }
 
-class SkillBorrowerEffect extends ContinuousEffectImpl<SkillBorrowerEffect> {
+class SkillBorrowerEffect extends ContinuousEffectImpl {
 
     public SkillBorrowerEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

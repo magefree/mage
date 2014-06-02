@@ -70,7 +70,7 @@ public class RetraceAbility extends ActivatedAbilityImpl {
         return "Retrace <i>(You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)</i>";
     }
 }
-class RetraceEffect extends OneShotEffect<RetraceEffect> {
+class RetraceEffect extends OneShotEffect {
 
     public RetraceEffect() {
         super(Outcome.Benefit);

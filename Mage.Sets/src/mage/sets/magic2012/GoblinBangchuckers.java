@@ -76,7 +76,7 @@ public class GoblinBangchuckers extends CardImpl<GoblinBangchuckers> {
     }
 }
 
-class GoblinBangchuckersEffect extends OneShotEffect<GoblinBangchuckersEffect> {
+class GoblinBangchuckersEffect extends OneShotEffect {
 
     public GoblinBangchuckersEffect() {
         super(Outcome.Damage);

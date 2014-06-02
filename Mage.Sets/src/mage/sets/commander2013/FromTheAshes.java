@@ -75,7 +75,7 @@ public class FromTheAshes extends CardImpl<FromTheAshes> {
     }
 }
 
-class FromTheAshesEffect extends OneShotEffect<FromTheAshesEffect> {
+class FromTheAshesEffect extends OneShotEffect {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic lands");
     static {

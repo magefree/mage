@@ -50,7 +50,7 @@ import mage.game.stack.StackObject;
  */
 
 
-public class SetCardColorSourceEffect extends ContinuousEffectImpl<SetCardColorSourceEffect> {
+public class SetCardColorSourceEffect extends ContinuousEffectImpl {
 
     private ObjectColor setColor;
 

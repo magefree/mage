@@ -80,7 +80,7 @@ public class GeistOfSaintTraft extends CardImpl<GeistOfSaintTraft> {
     }
 }
 
-class GeistOfSaintTraftEffect extends OneShotEffect<GeistOfSaintTraftEffect> {
+class GeistOfSaintTraftEffect extends OneShotEffect {
     GeistOfSaintTraftEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "put a 4/4 white Angel creature token with flying onto the battlefield tapped and attacking. Exile that token at end of combat";

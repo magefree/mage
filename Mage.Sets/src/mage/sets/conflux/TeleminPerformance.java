@@ -69,7 +69,7 @@ public class TeleminPerformance extends CardImpl<TeleminPerformance> {
     }
 }
 
-class TeleminPerformanceEffect extends OneShotEffect<TeleminPerformanceEffect> {
+class TeleminPerformanceEffect extends OneShotEffect {
 
     public TeleminPerformanceEffect() {
         super(Outcome.PutCreatureInPlay);

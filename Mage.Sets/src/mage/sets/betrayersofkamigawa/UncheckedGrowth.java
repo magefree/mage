@@ -72,7 +72,7 @@ public class UncheckedGrowth extends CardImpl<UncheckedGrowth> {
         return new UncheckedGrowth(this);
     }
     
-    private class UncheckedGrowthTrampleEffect extends ContinuousEffectImpl<UncheckedGrowthTrampleEffect> {
+    private class UncheckedGrowthTrampleEffect extends ContinuousEffectImpl {
 
         public UncheckedGrowthTrampleEffect() {
             super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

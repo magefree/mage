@@ -41,7 +41,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect<ExileCardYouChooseTargetOpponentEffect> {
+public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect {
 
     private FilterCard filter;
 

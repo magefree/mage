@@ -69,7 +69,7 @@ public class GlimpseTheFuture extends CardImpl<GlimpseTheFuture> {
         return new GlimpseTheFuture(this);
     }
 }
-class GlimpseTheFutureEffect extends OneShotEffect<GlimpseTheFutureEffect> {
+class GlimpseTheFutureEffect extends OneShotEffect {
 
     public GlimpseTheFutureEffect() {
         super(Outcome.DrawCard);

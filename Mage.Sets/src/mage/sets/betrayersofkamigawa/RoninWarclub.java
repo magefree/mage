@@ -117,7 +117,7 @@ public class RoninWarclub extends CardImpl<RoninWarclub> {
         }
     }
     
-    private class RoninWarclubAttachEffect extends OneShotEffect<RoninWarclubAttachEffect> {
+    private class RoninWarclubAttachEffect extends OneShotEffect {
 
         public RoninWarclubAttachEffect() {
             super(Outcome.BoostCreature);

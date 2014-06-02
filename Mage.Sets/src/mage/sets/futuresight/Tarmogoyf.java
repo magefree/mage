@@ -75,7 +75,7 @@ public class Tarmogoyf extends CardImpl<Tarmogoyf> {
     }
 }
 
-class TarmogoyfEffect extends ContinuousEffectImpl<TarmogoyfEffect> {
+class TarmogoyfEffect extends ContinuousEffectImpl {
 
     public TarmogoyfEffect() {
         super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);

@@ -73,7 +73,7 @@ public class PutAway extends CardImpl<PutAway> {
     }
 }
 
-class PutAwayEffect extends OneShotEffect<PutAwayEffect> {
+class PutAwayEffect extends OneShotEffect {
     
     boolean countered = false;
 

@@ -71,7 +71,7 @@ public class EnergyField extends CardImpl<EnergyField> {
     }
 }
 
-class EnergyFieldEffect extends PreventionEffectImpl<EnergyFieldEffect> {
+class EnergyFieldEffect extends PreventionEffectImpl {
 
     public EnergyFieldEffect() {
         super(Duration.WhileOnBattlefield);

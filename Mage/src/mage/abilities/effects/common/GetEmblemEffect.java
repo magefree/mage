@@ -38,7 +38,7 @@ import mage.game.command.Emblem;
  *
  * @author nantuko
  */
-public class GetEmblemEffect extends OneShotEffect<GetEmblemEffect> {
+public class GetEmblemEffect extends OneShotEffect {
 
     private Emblem emblem;
 

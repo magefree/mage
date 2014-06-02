@@ -66,7 +66,7 @@ public class KrarksThumb extends CardImpl<KrarksThumb> {
     }
 }
 
-class KrarksThumbEffect extends ReplacementEffectImpl<KrarksThumbEffect> {
+class KrarksThumbEffect extends ReplacementEffectImpl {
     KrarksThumbEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would flip a coin, instead flip two coins and ignore one";

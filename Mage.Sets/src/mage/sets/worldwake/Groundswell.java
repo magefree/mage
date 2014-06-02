@@ -72,7 +72,7 @@ public class Groundswell extends CardImpl<Groundswell> {
     }
 }
 
-class GroundswellEffect extends ContinuousEffectImpl<GroundswellEffect> {
+class GroundswellEffect extends ContinuousEffectImpl {
 
     public GroundswellEffect(Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

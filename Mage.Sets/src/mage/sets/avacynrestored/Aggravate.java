@@ -75,7 +75,7 @@ public class Aggravate extends CardImpl<Aggravate> {
     }
 }
 
-class AggraveteEffect extends OneShotEffect<AggraveteEffect> {
+class AggraveteEffect extends OneShotEffect {
 
     public AggraveteEffect() {
         super(Outcome.Damage);

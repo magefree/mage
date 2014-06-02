@@ -85,7 +85,7 @@ public class PiousKitsune extends CardImpl<PiousKitsune> {
     }
 }
 
-class PiousKitsuneEffect extends OneShotEffect<PiousKitsuneEffect> {
+class PiousKitsuneEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature named Eight-and-a-Half-Tails");
     static {

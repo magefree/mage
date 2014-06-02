@@ -74,7 +74,7 @@ public class OgreJailbreaker extends CardImpl<OgreJailbreaker> {
     }
 }
 
-class OgreJailbreakerEffect extends AsThoughEffectImpl<OgreJailbreakerEffect> {
+class OgreJailbreakerEffect extends AsThoughEffectImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
     private ControlsPermanentCondition gateCondition;

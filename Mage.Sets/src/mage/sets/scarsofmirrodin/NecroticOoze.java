@@ -91,7 +91,7 @@ class NecroticOozeAbility extends StaticAbility {
 
 }
 
-class NecroticOozeEffect extends ContinuousEffectImpl<NecroticOozeEffect> {
+class NecroticOozeEffect extends ContinuousEffectImpl {
 
     public NecroticOozeEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

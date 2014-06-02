@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEffect> {
+public class GainAbilityAllEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
     protected boolean excludeSource;

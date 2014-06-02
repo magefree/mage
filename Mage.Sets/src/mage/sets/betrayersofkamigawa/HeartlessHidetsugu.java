@@ -73,7 +73,7 @@ public class HeartlessHidetsugu extends CardImpl<HeartlessHidetsugu> {
     }
 }
 
-class HeartlessHidetsuguDamageEffect extends OneShotEffect<HeartlessHidetsuguDamageEffect> {
+class HeartlessHidetsuguDamageEffect extends OneShotEffect {
 
     public HeartlessHidetsuguDamageEffect() {
         super(Outcome.Detriment);

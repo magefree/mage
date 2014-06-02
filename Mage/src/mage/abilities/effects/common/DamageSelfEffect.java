@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North, Quercitron
  */
-public class DamageSelfEffect extends OneShotEffect<DamageSelfEffect> {
+public class DamageSelfEffect extends OneShotEffect {
     
     protected int amount;
 

@@ -71,7 +71,7 @@ public class SolidarityOfHeroes extends CardImpl<SolidarityOfHeroes> {
     }
 }
 
-class SolidarityOfHeroesEffect extends OneShotEffect<SolidarityOfHeroesEffect> {
+class SolidarityOfHeroesEffect extends OneShotEffect {
 
     public SolidarityOfHeroesEffect() {
         super(Outcome.Benefit);

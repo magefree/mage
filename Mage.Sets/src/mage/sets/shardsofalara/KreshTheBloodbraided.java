@@ -75,7 +75,7 @@ public class KreshTheBloodbraided extends CardImpl<KreshTheBloodbraided> {
     }
 }
 
-class KreshTheBloodbraidedEffect extends OneShotEffect<KreshTheBloodbraidedEffect> {
+class KreshTheBloodbraidedEffect extends OneShotEffect {
 
     KreshTheBloodbraidedEffect() {
         super(Outcome.BoostCreature);

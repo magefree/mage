@@ -75,7 +75,7 @@ public class HelmOfObedience extends CardImpl<HelmOfObedience> {
 }
 
 
-class HelmOfObedienceEffect extends OneShotEffect<HelmOfObedienceEffect> {
+class HelmOfObedienceEffect extends OneShotEffect {
 
 
     private static final ManacostVariableValue amount = new ManacostVariableValue();

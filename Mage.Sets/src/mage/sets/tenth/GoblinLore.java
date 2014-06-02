@@ -65,7 +65,7 @@ public class GoblinLore extends CardImpl<GoblinLore> {
     }
 }
 
-class GoblinLoreEffect extends OneShotEffect<GoblinLoreEffect> {
+class GoblinLoreEffect extends OneShotEffect {
 
     public GoblinLoreEffect() {
         super(Outcome.DrawCard);

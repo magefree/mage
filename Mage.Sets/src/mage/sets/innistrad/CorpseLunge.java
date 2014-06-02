@@ -73,7 +73,7 @@ public class CorpseLunge extends CardImpl<CorpseLunge> {
     }
 }
 
-class CorpseLungeEffect extends OneShotEffect<CorpseLungeEffect> {
+class CorpseLungeEffect extends OneShotEffect {
 
     public CorpseLungeEffect() {
         super(Outcome.DrawCard);

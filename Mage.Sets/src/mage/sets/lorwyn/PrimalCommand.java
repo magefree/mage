@@ -101,7 +101,7 @@ public class PrimalCommand extends CardImpl<PrimalCommand> {
     }
 }
 
-class PrimalCommandShuffleGraveyardEffect extends OneShotEffect<PrimalCommandShuffleGraveyardEffect> {
+class PrimalCommandShuffleGraveyardEffect extends OneShotEffect {
 
     public PrimalCommandShuffleGraveyardEffect() {
         super(Outcome.Neutral);

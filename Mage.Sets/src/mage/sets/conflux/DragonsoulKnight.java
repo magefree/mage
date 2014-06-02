@@ -93,7 +93,7 @@ public class DragonsoulKnight extends CardImpl<DragonsoulKnight> {
         return new DragonsoulKnight(this);
     }
 
-    private class DragonsoulKnightEffect extends ContinuousEffectImpl<DragonsoulKnightEffect> {
+    private class DragonsoulKnightEffect extends ContinuousEffectImpl {
 
         public DragonsoulKnightEffect() {
             super(Duration.EndOfTurn, Outcome.BecomeCreature);

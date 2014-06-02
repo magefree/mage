@@ -80,7 +80,7 @@ public class ElementalAppeal extends CardImpl<ElementalAppeal> {
     }
 }
 
-class ElementalAppealEffect extends OneShotEffect<ElementalAppealEffect> {
+class ElementalAppealEffect extends OneShotEffect {
 
     public ElementalAppealEffect() {
         super(Outcome.PutCreatureInPlay);

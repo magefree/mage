@@ -104,7 +104,7 @@ class AngelicChorusTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class AngelicChorusEffect extends OneShotEffect<AngelicChorusEffect> {
+class AngelicChorusEffect extends OneShotEffect {
 
     public AngelicChorusEffect() {
         super(Outcome.GainLife);

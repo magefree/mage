@@ -84,7 +84,7 @@ public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
     }
 }
 
-class CumulativeUpkeepEffect extends OneShotEffect<CumulativeUpkeepEffect> {
+class CumulativeUpkeepEffect extends OneShotEffect {
     
     private Cost cumulativeCost;
     

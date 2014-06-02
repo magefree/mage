@@ -80,7 +80,7 @@ public class ScribNibblers extends CardImpl<ScribNibblers> {
     }
 }
 
-class ScribNibblersEffect extends OneShotEffect<ScribNibblersEffect> {
+class ScribNibblersEffect extends OneShotEffect {
 
     public ScribNibblersEffect() {
         super(Outcome.Neutral);

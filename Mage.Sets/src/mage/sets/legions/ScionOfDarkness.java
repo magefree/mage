@@ -85,7 +85,7 @@ public class ScionOfDarkness extends CardImpl<ScionOfDarkness> {
     }
 }
 
-class ScionOfDarknessEffect extends OneShotEffect<ScionOfDarknessEffect> {
+class ScionOfDarknessEffect extends OneShotEffect {
 
     public ScionOfDarknessEffect() {
         super(Outcome.PutCreatureInPlay);

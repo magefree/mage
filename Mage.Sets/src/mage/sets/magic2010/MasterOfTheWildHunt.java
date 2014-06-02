@@ -88,7 +88,7 @@ public class MasterOfTheWildHunt extends CardImpl<MasterOfTheWildHunt> {
     }
 }
 
-class MasterOfTheWildHuntEffect extends OneShotEffect<MasterOfTheWildHuntEffect> {
+class MasterOfTheWildHuntEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

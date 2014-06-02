@@ -111,7 +111,7 @@ class CurseOfExhaustionWatcher extends Watcher {
 
 }
 
-class CurseOfExhaustionEffect extends ReplacementEffectImpl<CurseOfExhaustionEffect> {
+class CurseOfExhaustionEffect extends ReplacementEffectImpl {
 
     public CurseOfExhaustionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

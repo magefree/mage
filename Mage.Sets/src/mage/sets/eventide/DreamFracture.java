@@ -70,7 +70,7 @@ public class DreamFracture extends CardImpl<DreamFracture> {
     }
 }
 
-class DreamFractureEffect extends OneShotEffect<DreamFractureEffect> {
+class DreamFractureEffect extends OneShotEffect {
 
     public DreamFractureEffect() {
         super(Outcome.Neutral);

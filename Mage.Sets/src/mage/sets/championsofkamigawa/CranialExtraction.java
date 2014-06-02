@@ -73,7 +73,7 @@ public class CranialExtraction extends CardImpl<CranialExtraction> {
 
 }
 
-class CranialExtractionEffect extends OneShotEffect<CranialExtractionEffect> {
+class CranialExtractionEffect extends OneShotEffect {
 
     public CranialExtractionEffect() {
         super(Outcome.Exile);

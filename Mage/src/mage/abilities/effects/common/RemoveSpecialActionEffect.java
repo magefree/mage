@@ -39,7 +39,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RemoveSpecialActionEffect extends OneShotEffect<RemoveSpecialActionEffect> {
+public class RemoveSpecialActionEffect extends OneShotEffect {
 
     protected UUID actionId;
 

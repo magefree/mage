@@ -72,7 +72,7 @@ public class Browse extends CardImpl<Browse> {
     }
 }
 
-class BrowseEffect extends OneShotEffect<BrowseEffect> {
+class BrowseEffect extends OneShotEffect {
 
     public BrowseEffect() {
         super(Outcome.DrawCard);

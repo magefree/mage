@@ -89,7 +89,7 @@ public class PilgrimOfJustice extends CardImpl<PilgrimOfJustice> {
     }
 }
 
-class PilgrimOfJusticeEffect extends PreventionEffectImpl<PilgrimOfJusticeEffect> {
+class PilgrimOfJusticeEffect extends PreventionEffectImpl {
 
     private static final FilterObject filter = new FilterObject("red source");
     static{

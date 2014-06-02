@@ -41,9 +41,8 @@ import java.util.UUID;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public interface ContinuousEffect<T extends ContinuousEffect<T>> extends Effect<T> {
+public interface ContinuousEffect extends Effect {
 
     boolean isUsed();
     boolean isDiscarded();
@@ -62,4 +61,6 @@ public interface ContinuousEffect<T extends ContinuousEffect<T>> extends Effect<
 
     @Override
     void newId();
+    @Override
+    ContinuousEffect copy();
 }

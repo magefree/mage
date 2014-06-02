@@ -119,7 +119,7 @@ class SkaabRuinatorAbility extends ActivatedAbilityImpl {
     }
 }
 
-class SkaabRuinatorEffect extends OneShotEffect<SkaabRuinatorEffect> {
+class SkaabRuinatorEffect extends OneShotEffect {
 
     public SkaabRuinatorEffect() {
         super(Outcome.PutCreatureInPlay);

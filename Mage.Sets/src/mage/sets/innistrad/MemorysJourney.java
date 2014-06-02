@@ -76,7 +76,7 @@ public class MemorysJourney extends CardImpl<MemorysJourney> {
     }
 }
 
-class MemorysJourneyEffect extends OneShotEffect<MemorysJourneyEffect> {
+class MemorysJourneyEffect extends OneShotEffect {
 
     public MemorysJourneyEffect() {
         super(Outcome.Neutral);

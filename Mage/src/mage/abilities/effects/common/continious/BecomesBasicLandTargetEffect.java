@@ -55,7 +55,7 @@ import mage.players.Player;
  */
 
 
-public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl<BecomesBasicLandTargetEffect> {
+public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
 
     protected boolean chooseLandType;
     protected ArrayList<String> landTypes = new ArrayList();

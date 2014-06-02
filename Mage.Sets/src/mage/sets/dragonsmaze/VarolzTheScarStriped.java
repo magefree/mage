@@ -94,7 +94,7 @@ public class VarolzTheScarStriped extends CardImpl<VarolzTheScarStriped> {
     }
 }
 
-class VarolzTheScarStripedEffect extends ContinuousEffectImpl<VarolzTheScarStripedEffect> {
+class VarolzTheScarStripedEffect extends ContinuousEffectImpl {
 
     VarolzTheScarStripedEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

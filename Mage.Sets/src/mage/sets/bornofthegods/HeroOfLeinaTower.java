@@ -76,7 +76,7 @@ public class HeroOfLeinaTower extends CardImpl<HeroOfLeinaTower> {
     }
 }
 
-class HeroOfLeinaTowerEffect extends OneShotEffect<HeroOfLeinaTowerEffect> {
+class HeroOfLeinaTowerEffect extends OneShotEffect {
 
     public HeroOfLeinaTowerEffect() {
         super(Outcome.BoostCreature);

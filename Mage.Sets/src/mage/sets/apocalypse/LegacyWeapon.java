@@ -77,7 +77,7 @@ public class LegacyWeapon extends CardImpl<LegacyWeapon> {
     }
 }
 
-class LegacyWeaponEffect extends OneShotEffect<LegacyWeaponEffect> {
+class LegacyWeaponEffect extends OneShotEffect {
 
     public LegacyWeaponEffect() {
         super(Outcome.Benefit);

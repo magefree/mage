@@ -67,7 +67,7 @@ public class DruidsDeliverance extends CardImpl<DruidsDeliverance> {
     }
 }
 
-class DruidsDeliverancePreventCombatDamageEffect extends PreventionEffectImpl<DruidsDeliverancePreventCombatDamageEffect> {
+class DruidsDeliverancePreventCombatDamageEffect extends PreventionEffectImpl {
 
     public DruidsDeliverancePreventCombatDamageEffect() {
             super(Duration.EndOfTurn);

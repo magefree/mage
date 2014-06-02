@@ -96,7 +96,7 @@ public class OrzhovCharm extends CardImpl<OrzhovCharm> {
     }
 }
 
-class OrzhovCharmReturnToHandEffect extends OneShotEffect<OrzhovCharmReturnToHandEffect> {
+class OrzhovCharmReturnToHandEffect extends OneShotEffect {
 
     public OrzhovCharmReturnToHandEffect() {
         super(Outcome.ReturnToHand);
@@ -134,7 +134,7 @@ class OrzhovCharmReturnToHandEffect extends OneShotEffect<OrzhovCharmReturnToHan
     }
 }
 
-class OrzhovCharmDestroyAndLoseLifeEffect extends OneShotEffect<OrzhovCharmDestroyAndLoseLifeEffect> {
+class OrzhovCharmDestroyAndLoseLifeEffect extends OneShotEffect {
 
     public OrzhovCharmDestroyAndLoseLifeEffect() {
         super(Outcome.DestroyPermanent);

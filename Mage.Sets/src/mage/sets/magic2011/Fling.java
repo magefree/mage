@@ -68,7 +68,7 @@ public class Fling extends CardImpl<Fling> {
     }
 }
 
-class FlingEffect extends OneShotEffect<FlingEffect> {
+class FlingEffect extends OneShotEffect {
 
     public FlingEffect() {
         super(Outcome.Damage);

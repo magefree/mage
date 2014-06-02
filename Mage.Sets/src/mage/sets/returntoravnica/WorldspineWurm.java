@@ -79,7 +79,7 @@ public class WorldspineWurm extends CardImpl<WorldspineWurm> {
 }
 
 
-class WorldspineWurmEffect extends OneShotEffect<WorldspineWurmEffect> {
+class WorldspineWurmEffect extends OneShotEffect {
     WorldspineWurmEffect() {
         super(Outcome.Neutral);
         staticText = "shuffle it into its owner's library";

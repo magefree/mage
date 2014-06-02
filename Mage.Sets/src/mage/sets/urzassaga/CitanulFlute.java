@@ -77,7 +77,7 @@ public class CitanulFlute extends CardImpl<CitanulFlute> {
     }
 }
 
-class CitanulFluteSearchEffect extends OneShotEffect<CitanulFluteSearchEffect> {
+class CitanulFluteSearchEffect extends OneShotEffect {
 
     public CitanulFluteSearchEffect() {
         super(Outcome.DrawCard);

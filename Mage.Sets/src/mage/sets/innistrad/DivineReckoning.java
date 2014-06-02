@@ -78,7 +78,7 @@ public class DivineReckoning extends CardImpl<DivineReckoning> {
     }
 }
 
-class DivineReckoningEffect extends OneShotEffect<DivineReckoningEffect> {
+class DivineReckoningEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
 

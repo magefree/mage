@@ -62,7 +62,7 @@ public class OverwhelmingStampede extends CardImpl<OverwhelmingStampede> {
     }
 }
 
-class OverwhelmingStampedeEffect extends ContinuousEffectImpl<OverwhelmingStampedeEffect> {
+class OverwhelmingStampedeEffect extends ContinuousEffectImpl {
 
     public OverwhelmingStampedeEffect() {
         super(Duration.EndOfTurn, Outcome.AddAbility);

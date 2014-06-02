@@ -75,7 +75,7 @@ public class HexParasite extends CardImpl<HexParasite> {
     }
 }
 
-class HexParasiteEffect extends OneShotEffect<HexParasiteEffect> {
+class HexParasiteEffect extends OneShotEffect {
 
     HexParasiteEffect ( ) {
         super(Outcome.Benefit);

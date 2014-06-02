@@ -71,7 +71,7 @@ public class PithingNeedle extends CardImpl<PithingNeedle> {
     }
 }
 
-class NameCard extends OneShotEffect<NameCard> {
+class NameCard extends OneShotEffect {
 
     public NameCard() {
         super(Outcome.Detriment);
@@ -108,7 +108,7 @@ class NameCard extends OneShotEffect<NameCard> {
 
 }
 
-class PithingNeedleEffect extends ReplacementEffectImpl<PithingNeedleEffect> {
+class PithingNeedleEffect extends ReplacementEffectImpl {
 
     public PithingNeedleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

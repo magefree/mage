@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileTargetForSourceEffect extends OneShotEffect<ExileTargetForSourceEffect> {
+public class ExileTargetForSourceEffect extends OneShotEffect {
 
     private String exileZone = null;
 

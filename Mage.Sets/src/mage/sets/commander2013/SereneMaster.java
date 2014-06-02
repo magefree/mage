@@ -79,7 +79,7 @@ public class SereneMaster extends CardImpl<SereneMaster> {
     }
 }
 
-class SereneMasterEffect extends OneShotEffect<SereneMasterEffect> {
+class SereneMasterEffect extends OneShotEffect {
 
     public SereneMasterEffect() {
         super(Outcome.Benefit);

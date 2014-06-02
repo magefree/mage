@@ -72,7 +72,7 @@ public class Grindstone extends CardImpl<Grindstone> {
     }
 }
 
-class GrindstoneEffect extends OneShotEffect<GrindstoneEffect> {
+class GrindstoneEffect extends OneShotEffect {
     
     public GrindstoneEffect() {
         super(Outcome.Benefit);

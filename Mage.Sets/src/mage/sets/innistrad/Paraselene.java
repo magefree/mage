@@ -65,7 +65,7 @@ public class Paraselene extends CardImpl<Paraselene> {
     }
 }
 
-class ParaseleneEffect extends OneShotEffect<ParaseleneEffect> {
+class ParaseleneEffect extends OneShotEffect {
 
     public ParaseleneEffect() {
         super(Outcome.DestroyPermanent);

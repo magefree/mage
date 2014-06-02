@@ -66,7 +66,7 @@ public class MindShatter extends CardImpl<MindShatter> {
     }
 }
 
-class MindShatterEffect extends OneShotEffect<MindShatterEffect> {
+class MindShatterEffect extends OneShotEffect {
 
     public MindShatterEffect() {
         super(Outcome.Discard);

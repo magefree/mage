@@ -47,7 +47,7 @@ import mage.game.stack.StackObject;
 /**
  * @author LevelX
  */
-public class SetCardColorTargetEffect extends ContinuousEffectImpl<SetCardColorTargetEffect> {
+public class SetCardColorTargetEffect extends ContinuousEffectImpl {
 
     private final ObjectColor setColor;
 

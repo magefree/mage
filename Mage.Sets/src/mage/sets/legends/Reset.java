@@ -72,7 +72,7 @@ public class Reset extends CardImpl<Reset> {
     }
 }
 
-class ResetReplacementEffect extends ReplacementEffectImpl<ResetReplacementEffect> {
+class ResetReplacementEffect extends ReplacementEffectImpl {
     ResetReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only during an opponent's turn after his or her upkeep step";

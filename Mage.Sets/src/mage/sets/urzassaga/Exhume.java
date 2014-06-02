@@ -68,7 +68,7 @@ public class Exhume extends CardImpl<Exhume> {
     }
 }
 
-class ExhumeEffect extends OneShotEffect<ExhumeEffect> {
+class ExhumeEffect extends OneShotEffect {
 
     public ExhumeEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -93,7 +93,7 @@ public class AmberPrison extends CardImpl<AmberPrison> {
     }
 }
 
-class AmberPrisonTapTargetEffect extends OneShotEffect<AmberPrisonTapTargetEffect> {
+class AmberPrisonTapTargetEffect extends OneShotEffect {
 
     public AmberPrisonTapTargetEffect() {
         super(Outcome.Tap);
@@ -187,7 +187,7 @@ class AmberPrisonUntapTriggeredAbility extends TriggeredAbilityImpl {
     
 }
 
-class AmberPrisonReleaseOnUntapEffect extends OneShotEffect<AmberPrisonReleaseOnUntapEffect> {
+class AmberPrisonReleaseOnUntapEffect extends OneShotEffect {
 
     public AmberPrisonReleaseOnUntapEffect() {
         super(Outcome.Detriment);

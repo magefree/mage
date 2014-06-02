@@ -99,7 +99,7 @@ class ChancellorOfTheDrossDelayedTriggeredAbility extends DelayedTriggeredAbilit
     }
 }
 
-class ChancellorOfTheDrossEffect extends OneShotEffect<ChancellorOfTheDrossEffect> {
+class ChancellorOfTheDrossEffect extends OneShotEffect {
 
     ChancellorOfTheDrossEffect () {
         super(Outcome.Benefit);

@@ -78,7 +78,7 @@ public class GiveTake extends SplitCard<GiveTake> {
     }
 }
 
-class TakeEffect extends OneShotEffect<TakeEffect> {
+class TakeEffect extends OneShotEffect {
 
     public TakeEffect() {
         super(Outcome.DrawCard);

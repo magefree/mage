@@ -69,7 +69,7 @@ public class LightOfDay extends CardImpl<LightOfDay> {
     }
 }
 
-class LightOfDayEffect extends ReplacementEffectImpl<LightOfDayEffect> {
+class LightOfDayEffect extends ReplacementEffectImpl {
 
     public LightOfDayEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

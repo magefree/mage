@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  *
  * @author Quercitron
  */
-public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl<CantBeBlockedByMoreThanOneAllEffect> {
+public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl {
 
     private FilterPermanent filter;
     protected int amount;

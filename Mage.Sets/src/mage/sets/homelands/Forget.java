@@ -65,7 +65,7 @@ public class Forget extends CardImpl<Forget> {
     }
 }
 
-class ForgetEffect extends OneShotEffect<ForgetEffect> {
+class ForgetEffect extends OneShotEffect {
 
     public ForgetEffect() {
         super(Outcome.DrawCard);

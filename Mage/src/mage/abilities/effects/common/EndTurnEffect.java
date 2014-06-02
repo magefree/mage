@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 
-public class EndTurnEffect extends OneShotEffect<EndTurnEffect> {
+public class EndTurnEffect extends OneShotEffect {
 
     public EndTurnEffect() {
         super(Outcome.Detriment);

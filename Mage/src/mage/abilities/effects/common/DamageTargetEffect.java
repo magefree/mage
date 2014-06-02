@@ -44,7 +44,7 @@ import mage.target.Target;
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
-public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
+public class DamageTargetEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     protected boolean preventable;

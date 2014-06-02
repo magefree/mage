@@ -65,7 +65,7 @@ public class WarReport extends CardImpl<WarReport> {
     }
 }
 
-class WarReportEffect extends OneShotEffect<WarReportEffect> {
+class WarReportEffect extends OneShotEffect {
 
     public WarReportEffect() {
         super(Outcome.GainLife);

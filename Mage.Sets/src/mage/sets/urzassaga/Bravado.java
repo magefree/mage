@@ -75,7 +75,7 @@ public class Bravado extends CardImpl<Bravado> {
     }
 }
 
-class BravadoBoostEnchantedEffect extends ContinuousEffectImpl<BravadoBoostEnchantedEffect> {
+class BravadoBoostEnchantedEffect extends ContinuousEffectImpl {
 
     public BravadoBoostEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

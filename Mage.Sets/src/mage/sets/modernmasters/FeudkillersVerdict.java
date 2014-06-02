@@ -68,7 +68,7 @@ public class FeudkillersVerdict extends CardImpl<FeudkillersVerdict> {
     }
 }
 
-class FeudkillersVerdictEffect extends OneShotEffect<FeudkillersVerdictEffect> {
+class FeudkillersVerdictEffect extends OneShotEffect {
 
     public FeudkillersVerdictEffect() {
         super(Outcome.Benefit);

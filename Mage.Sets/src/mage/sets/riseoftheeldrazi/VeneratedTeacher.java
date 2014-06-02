@@ -73,7 +73,7 @@ public class VeneratedTeacher extends CardImpl<VeneratedTeacher> {
     }
 }
 
-class VeneratedTeacherEffect extends OneShotEffect<VeneratedTeacherEffect> {
+class VeneratedTeacherEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 

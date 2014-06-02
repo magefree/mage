@@ -72,7 +72,7 @@ public class CommuneWithTheGods extends CardImpl<CommuneWithTheGods> {
     }
 }
 
-class CommuneWithTheGodsEffect extends OneShotEffect<CommuneWithTheGodsEffect> {
+class CommuneWithTheGodsEffect extends OneShotEffect {
 
     private static final FilterCard filterPutInHand = new FilterCard("creature or enchantment card to put in hand");
     static {

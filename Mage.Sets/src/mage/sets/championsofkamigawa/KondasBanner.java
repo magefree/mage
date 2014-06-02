@@ -94,7 +94,7 @@ public class KondasBanner extends CardImpl<KondasBanner> {
     }        
 }
 
-class InfoEffect extends OneShotEffect<InfoEffect> {
+class InfoEffect extends OneShotEffect {
 
     public InfoEffect() {
         super(Outcome.Benefit);

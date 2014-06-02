@@ -86,7 +86,7 @@ public class NezumiGraverobber extends CardImpl<NezumiGraverobber> {
     }
 }
 
-class NezumiGraverobberFlipEffect extends OneShotEffect<NezumiGraverobberFlipEffect> {
+class NezumiGraverobberFlipEffect extends OneShotEffect {
 
     NezumiGraverobberFlipEffect() {
         super(Outcome.BecomeCreature);

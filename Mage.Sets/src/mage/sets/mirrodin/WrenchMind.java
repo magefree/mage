@@ -71,7 +71,7 @@ public class WrenchMind extends CardImpl<WrenchMind> {
     }
 }
 
-class WrenchMindEffect extends OneShotEffect<WrenchMindEffect> {
+class WrenchMindEffect extends OneShotEffect {
 
     public WrenchMindEffect() {
         super(Outcome.Discard);

@@ -67,7 +67,7 @@ public class TranquilPath extends CardImpl<TranquilPath> {
     }
 }
 
-class TranquilPathEffect extends OneShotEffect<TranquilPathEffect> {
+class TranquilPathEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("");
 

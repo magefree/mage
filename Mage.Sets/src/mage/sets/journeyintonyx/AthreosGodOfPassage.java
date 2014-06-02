@@ -103,7 +103,7 @@ public class AthreosGodOfPassage extends CardImpl<AthreosGodOfPassage> {
     }
 }
 
-class AthreosGodOfPassageReturnEffect extends OneShotEffect<AthreosGodOfPassageReturnEffect> {
+class AthreosGodOfPassageReturnEffect extends OneShotEffect {
     
     public AthreosGodOfPassageReturnEffect() {
         super(Outcome.Benefit);

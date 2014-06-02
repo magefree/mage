@@ -123,7 +123,7 @@ class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SosukeSonOfSeshiroEffect extends OneShotEffect<SosukeSonOfSeshiroEffect> {
+class SosukeSonOfSeshiroEffect extends OneShotEffect {
 
     SosukeSonOfSeshiroEffect() {
         super(Outcome.DestroyPermanent);

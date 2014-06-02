@@ -83,7 +83,7 @@ public class HokoriDustDrinker extends CardImpl<HokoriDustDrinker> {
     }
 }
 
-class HokoriDustDrinkerUntapEffect extends OneShotEffect<HokoriDustDrinkerUntapEffect> {
+class HokoriDustDrinkerUntapEffect extends OneShotEffect {
 
     public HokoriDustDrinkerUntapEffect() {
         super(Outcome.Untap);

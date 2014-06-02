@@ -65,7 +65,7 @@ public class TorporOrb extends CardImpl<TorporOrb> {
     }
 }
 
-class TorporOrbEffect extends ReplacementEffectImpl<TorporOrbEffect> {
+class TorporOrbEffect extends ReplacementEffectImpl {
     TorporOrbEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false);
         staticText = "Creatures entering the battlefield don't cause abilities to trigger";

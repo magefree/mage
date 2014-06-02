@@ -124,7 +124,7 @@ public class EchoAbility extends TriggeredAbilityImpl {
     }
 }
 
-class EchoEffect extends OneShotEffect<EchoEffect> {
+class EchoEffect extends OneShotEffect {
     protected Cost cost;
 
     public EchoEffect(Cost costs) {

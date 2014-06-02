@@ -92,7 +92,7 @@ public class BreakingEntering extends SplitCard<BreakingEntering> {
     }
 }
 
-class EnteringReturnFromGraveyardToBattlefieldEffect extends OneShotEffect<EnteringReturnFromGraveyardToBattlefieldEffect> {
+class EnteringReturnFromGraveyardToBattlefieldEffect extends OneShotEffect {
 
     public EnteringReturnFromGraveyardToBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);

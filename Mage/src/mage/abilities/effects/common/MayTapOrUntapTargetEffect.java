@@ -11,7 +11,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class MayTapOrUntapTargetEffect extends OneShotEffect<MayTapOrUntapTargetEffect> {
+public class MayTapOrUntapTargetEffect extends OneShotEffect {
     public MayTapOrUntapTargetEffect() {
         super(Outcome.Benefit);
     }

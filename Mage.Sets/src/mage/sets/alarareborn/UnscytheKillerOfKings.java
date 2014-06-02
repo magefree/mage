@@ -138,7 +138,7 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class UnscytheEffect extends OneShotEffect<UnscytheEffect> {
+class UnscytheEffect extends OneShotEffect {
 
     public UnscytheEffect() {
         super(Outcome.PutCreatureInPlay);

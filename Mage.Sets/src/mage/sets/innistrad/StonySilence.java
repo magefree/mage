@@ -69,7 +69,7 @@ public class StonySilence extends CardImpl<StonySilence> {
     }
 }
 
-class StonySilenceEffect extends ReplacementEffectImpl<StonySilenceEffect> {
+class StonySilenceEffect extends ReplacementEffectImpl {
 
     public StonySilenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

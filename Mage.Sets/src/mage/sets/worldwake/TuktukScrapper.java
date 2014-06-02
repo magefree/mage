@@ -113,7 +113,7 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class TuktukScrapperEffect extends OneShotEffect<TuktukScrapperEffect> {
+class TuktukScrapperEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

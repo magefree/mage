@@ -85,7 +85,7 @@ public class RavenFamiliar extends CardImpl<RavenFamiliar> {
     }
     
     
-    class RavenFamiliarEffect extends OneShotEffect<RavenFamiliarEffect> {
+    class RavenFamiliarEffect extends OneShotEffect {
 
         public RavenFamiliarEffect() {
             super(Outcome.DrawCard);

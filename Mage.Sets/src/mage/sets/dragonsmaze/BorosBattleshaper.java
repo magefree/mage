@@ -93,7 +93,7 @@ public class BorosBattleshaper extends CardImpl<BorosBattleshaper> {
 
 }
 
-class BorosBattleshaperEffect extends OneShotEffect<BorosBattleshaperEffect> {
+class BorosBattleshaperEffect extends OneShotEffect {
 
     public BorosBattleshaperEffect() {
         super(Outcome.Benefit);

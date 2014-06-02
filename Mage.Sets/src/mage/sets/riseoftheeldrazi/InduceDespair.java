@@ -73,7 +73,7 @@ public class InduceDespair extends CardImpl<InduceDespair> {
     }
 }
 
-class InduceDespairEffect extends OneShotEffect<InduceDespairEffect> {
+class InduceDespairEffect extends OneShotEffect {
 
     public InduceDespairEffect() {
         super(Outcome.UnboostCreature);

@@ -126,7 +126,7 @@ class KothOfTheHammerEmblem extends Emblem {
     }
 }
 
-class KothOfTheHammerThirdEffect extends ContinuousEffectImpl<KothOfTheHammerThirdEffect> {
+class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
     public KothOfTheHammerThirdEffect() {
         super(Duration.EndOfGame, Outcome.AddAbility);
         staticText = "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to target creature or player.'\"";

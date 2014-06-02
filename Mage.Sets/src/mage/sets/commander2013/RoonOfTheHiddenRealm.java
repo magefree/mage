@@ -96,7 +96,7 @@ public class RoonOfTheHiddenRealm extends CardImpl<RoonOfTheHiddenRealm> {
     }
 }
 
-class RoonOfTheHiddenRealmEffect extends OneShotEffect<RoonOfTheHiddenRealmEffect> {
+class RoonOfTheHiddenRealmEffect extends OneShotEffect {
 
     public RoonOfTheHiddenRealmEffect() {
         super(Outcome.Benefit);

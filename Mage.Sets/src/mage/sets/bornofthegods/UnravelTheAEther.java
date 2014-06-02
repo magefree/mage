@@ -78,7 +78,7 @@ public class UnravelTheAEther extends CardImpl<UnravelTheAEther> {
         return new UnravelTheAEther(this);
     }
 }
-class UnravelTheAEtherShuffleIntoLibraryEffect extends OneShotEffect<UnravelTheAEtherShuffleIntoLibraryEffect> {
+class UnravelTheAEtherShuffleIntoLibraryEffect extends OneShotEffect {
 
     public UnravelTheAEtherShuffleIntoLibraryEffect() {
         super(Outcome.Detriment);

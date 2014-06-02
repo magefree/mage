@@ -45,7 +45,7 @@ import java.util.*;
 /**
  * @author nantuko
  */
-public class ProliferateEffect extends OneShotEffect<ProliferateEffect> {
+public class ProliferateEffect extends OneShotEffect {
 
     public ProliferateEffect() {
         super(Outcome.Benefit);

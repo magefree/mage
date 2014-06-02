@@ -77,7 +77,7 @@ public class ElspethTirel extends CardImpl<ElspethTirel> {
     }
 }
 
-class ElspethTirelFirstEffect extends OneShotEffect<ElspethTirelFirstEffect> {
+class ElspethTirelFirstEffect extends OneShotEffect {
     public ElspethTirelFirstEffect() {
         super(Outcome.GainLife);
         staticText = "You gain 1 life for each creature you control";
@@ -104,7 +104,7 @@ class ElspethTirelFirstEffect extends OneShotEffect<ElspethTirelFirstEffect> {
 
 }
 
-class ElspethTirelThirdEffect extends OneShotEffect<ElspethTirelThirdEffect> {
+class ElspethTirelThirdEffect extends OneShotEffect {
     public ElspethTirelThirdEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy all other permanents except for lands and tokens";

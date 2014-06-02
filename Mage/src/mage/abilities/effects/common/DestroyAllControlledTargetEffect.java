@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DestroyAllControlledTargetEffect extends OneShotEffect<DestroyAllControlledTargetEffect> {
+public class DestroyAllControlledTargetEffect extends OneShotEffect {
 
     private FilterPermanent filter;
 

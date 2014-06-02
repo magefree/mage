@@ -66,7 +66,7 @@ public class PersonalSanctuary extends CardImpl<PersonalSanctuary> {
     }
 }
 
-class PersonalSanctuaryEffect extends PreventionEffectImpl<PersonalSanctuaryEffect> {
+class PersonalSanctuaryEffect extends PreventionEffectImpl {
 
     public PersonalSanctuaryEffect() {
         super(Duration.WhileOnBattlefield);

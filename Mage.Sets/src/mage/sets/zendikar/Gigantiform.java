@@ -121,7 +121,7 @@ class GigantiformAbility extends StaticAbility {
     }
 }
 
-class GigantiformEffect extends OneShotEffect<GigantiformEffect> {
+class GigantiformEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("card named Gigantiform");
 

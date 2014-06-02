@@ -78,7 +78,7 @@ public class ViashinoHeretic extends CardImpl<ViashinoHeretic> {
     }
 }
 
-class ViashinoHereticEffect extends OneShotEffect<ViashinoHereticEffect> {
+class ViashinoHereticEffect extends OneShotEffect {
 
     
     public ViashinoHereticEffect() {

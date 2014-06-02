@@ -73,7 +73,7 @@ public class GuardianSeraph extends CardImpl<GuardianSeraph> {
     }
 }
 
-class GuardianSeraphEffect extends PreventionEffectImpl<GuardianSeraphEffect> {
+class GuardianSeraphEffect extends PreventionEffectImpl {
 
     public GuardianSeraphEffect() {
         super(Duration.WhileOnBattlefield);

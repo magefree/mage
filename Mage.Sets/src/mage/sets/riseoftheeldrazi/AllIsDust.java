@@ -62,7 +62,7 @@ public class AllIsDust extends CardImpl<AllIsDust> {
     }
 }
 
-class AllIsDustEffect extends OneShotEffect<AllIsDustEffect> {
+class AllIsDustEffect extends OneShotEffect {
 
     AllIsDustEffect() {
         super(Outcome.DestroyPermanent);

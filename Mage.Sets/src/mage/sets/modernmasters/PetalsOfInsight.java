@@ -72,7 +72,7 @@ public class PetalsOfInsight extends CardImpl<PetalsOfInsight> {
     }
 }
 
-class PetalsOfInsightEffect extends OneShotEffect<PetalsOfInsightEffect> {
+class PetalsOfInsightEffect extends OneShotEffect {
 
     public PetalsOfInsightEffect() {
         super(Outcome.Benefit);

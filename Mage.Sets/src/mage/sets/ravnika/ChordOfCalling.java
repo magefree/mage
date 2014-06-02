@@ -75,7 +75,7 @@ public class ChordOfCalling extends CardImpl<ChordOfCalling> {
     }
 }
 
-class ChordofCallingSearchEffect extends OneShotEffect<ChordofCallingSearchEffect> {
+class ChordofCallingSearchEffect extends OneShotEffect {
 
     ChordofCallingSearchEffect() {
         super(Outcome.PutCreatureInPlay);

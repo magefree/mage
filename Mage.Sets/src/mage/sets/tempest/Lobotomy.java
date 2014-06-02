@@ -75,7 +75,7 @@ public class Lobotomy extends CardImpl<Lobotomy> {
     }
 }
 
-class LobotomyEffect extends OneShotEffect<LobotomyEffect> {
+class LobotomyEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("card other than a basic land card");
 

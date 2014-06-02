@@ -81,7 +81,7 @@ public class Slithermuse extends CardImpl<Slithermuse> {
  * you'll draw.
  *
  */
-class SlithermuseEffect extends OneShotEffect<SlithermuseEffect> {
+class SlithermuseEffect extends OneShotEffect {
 
     public SlithermuseEffect() {
         super(Outcome.Benefit);

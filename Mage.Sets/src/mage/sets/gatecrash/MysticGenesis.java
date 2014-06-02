@@ -70,7 +70,7 @@ public class MysticGenesis extends CardImpl<MysticGenesis> {
     }
 }
 
-class MysticGenesisEffect extends OneShotEffect<MysticGenesisEffect> {
+class MysticGenesisEffect extends OneShotEffect {
 
     public MysticGenesisEffect() {
         super(Outcome.Detriment);

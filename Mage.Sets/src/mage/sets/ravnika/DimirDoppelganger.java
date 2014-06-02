@@ -80,7 +80,7 @@ public class DimirDoppelganger extends CardImpl<DimirDoppelganger> {
     }
 }
 
-class DimirDoppelgangerEffect extends ContinuousEffectImpl<DimirDoppelgangerEffect> {
+class DimirDoppelgangerEffect extends ContinuousEffectImpl {
 
     public DimirDoppelgangerEffect() {
         super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);

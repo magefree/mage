@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class SwitchPowerToughnessSourceEffect extends ContinuousEffectImpl<SwitchPowerToughnessSourceEffect> {
+public class SwitchPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     public SwitchPowerToughnessSourceEffect(Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, Outcome.BoostCreature);

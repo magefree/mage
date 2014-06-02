@@ -70,7 +70,7 @@ public class DesperateRavings extends CardImpl<DesperateRavings> {
     }
 }
 
-class DesperateRavingsEffect extends OneShotEffect<DesperateRavingsEffect> {
+class DesperateRavingsEffect extends OneShotEffect {
 
     public DesperateRavingsEffect() {
         super(Outcome.DrawCard);

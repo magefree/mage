@@ -71,7 +71,7 @@ public class TeferisPuzzleBox extends CardImpl<TeferisPuzzleBox> {
     }
 }
 
-class TeferisPuzzleBoxEffect extends OneShotEffect<TeferisPuzzleBoxEffect> {
+class TeferisPuzzleBoxEffect extends OneShotEffect {
 
     public TeferisPuzzleBoxEffect() {
         super(Outcome.Neutral);

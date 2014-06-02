@@ -77,7 +77,7 @@ public class ThadaAdelAcquisitor extends CardImpl<ThadaAdelAcquisitor> {
     }
 }
 
-class ThadaAdelAcquisitorEffect extends OneShotEffect<ThadaAdelAcquisitorEffect> {
+class ThadaAdelAcquisitorEffect extends OneShotEffect {
 
     ThadaAdelAcquisitorEffect() {
         super(Outcome.Exile);
@@ -117,7 +117,7 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect<ThadaAdelAcquisitorEffect>
     }
 }
 
-class ThadaAdelPlayFromExileEffect extends AsThoughEffectImpl<ThadaAdelPlayFromExileEffect> {
+class ThadaAdelPlayFromExileEffect extends AsThoughEffectImpl {
 
     private UUID cardId;
 

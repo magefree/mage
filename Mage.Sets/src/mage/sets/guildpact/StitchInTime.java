@@ -66,7 +66,7 @@ public class StitchInTime extends CardImpl<StitchInTime> {
     }
 }
 
-class StitchInTimeEffect extends OneShotEffect<StitchInTimeEffect> {
+class StitchInTimeEffect extends OneShotEffect {
 
     public StitchInTimeEffect() {
         super(Outcome.DrawCard);

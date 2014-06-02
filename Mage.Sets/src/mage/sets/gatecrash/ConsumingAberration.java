@@ -83,7 +83,7 @@ public class ConsumingAberration extends CardImpl<ConsumingAberration> {
 }
 
 
-class ConsumingAberrationEffect extends OneShotEffect<ConsumingAberrationEffect> {
+class ConsumingAberrationEffect extends OneShotEffect {
 
     public ConsumingAberrationEffect() {
         super(Outcome.PutCardInPlay);

@@ -78,7 +78,7 @@ public class SharedAnimosity extends CardImpl<SharedAnimosity> {
     }
 }
 
-class SharedAnimosityEffect extends ContinuousEffectImpl<SharedAnimosityEffect> {
+class SharedAnimosityEffect extends ContinuousEffectImpl {
 
     private int power;
 

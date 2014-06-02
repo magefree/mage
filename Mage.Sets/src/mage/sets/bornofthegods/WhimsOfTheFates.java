@@ -75,7 +75,7 @@ public class WhimsOfTheFates extends CardImpl<WhimsOfTheFates> {
     }
 }
 
-class WhimsOfTheFateEffect extends OneShotEffect<WhimsOfTheFateEffect> {
+class WhimsOfTheFateEffect extends OneShotEffect {
 
     protected static Random rnd = new Random();
 

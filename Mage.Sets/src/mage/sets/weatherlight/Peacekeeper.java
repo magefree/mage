@@ -79,7 +79,7 @@ public class Peacekeeper extends CardImpl<Peacekeeper> {
     }
 }
 
-class PeacekeeperCantAttackEffect extends ReplacementEffectImpl<PeacekeeperCantAttackEffect> {
+class PeacekeeperCantAttackEffect extends ReplacementEffectImpl {
 
     private static final String effectText = "Creatures can't attack";
 

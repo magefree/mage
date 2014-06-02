@@ -83,7 +83,7 @@ public class FiendslayerPaladin extends CardImpl<FiendslayerPaladin> {
     }
 }
 
-class FiendslayerPaladinEffect extends ReplacementEffectImpl<FiendslayerPaladinEffect> {
+class FiendslayerPaladinEffect extends ReplacementEffectImpl {
 
     public FiendslayerPaladinEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

@@ -69,7 +69,7 @@ public class DeathByDragons extends CardImpl<DeathByDragons> {
     }
 }
 
-class DeathByDragonsEffect extends OneShotEffect<DeathByDragonsEffect> {
+class DeathByDragonsEffect extends OneShotEffect {
 
     public DeathByDragonsEffect() {
         super(Outcome.Detriment);

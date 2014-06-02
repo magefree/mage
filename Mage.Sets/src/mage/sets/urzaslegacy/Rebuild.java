@@ -70,7 +70,7 @@ public class Rebuild extends CardImpl<Rebuild> {
     }
 }
 
-class RebuildEffect extends OneShotEffect<RebuildEffect> {
+class RebuildEffect extends OneShotEffect {
     public RebuildEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return all artifacts to their owner's hand.";

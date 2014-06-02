@@ -71,7 +71,7 @@ public class FieryGambit extends CardImpl<FieryGambit> {
 }
 
 
-class FieryGambitEffect extends OneShotEffect<FieryGambitEffect> {
+class FieryGambitEffect extends OneShotEffect {
 
     public FieryGambitEffect() {
         super(Outcome.Benefit);

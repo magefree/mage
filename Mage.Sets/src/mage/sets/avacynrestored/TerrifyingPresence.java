@@ -65,7 +65,7 @@ public class TerrifyingPresence extends CardImpl<TerrifyingPresence> {
     }
 }
 
-class TerrifyingPresenceEffect extends PreventionEffectImpl<TerrifyingPresenceEffect> {
+class TerrifyingPresenceEffect extends PreventionEffectImpl {
 
     public TerrifyingPresenceEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, true);

@@ -77,7 +77,7 @@ public class LoamingShaman extends CardImpl<LoamingShaman> {
     }
 }
 
-class LoamingShamanEffect extends OneShotEffect<LoamingShamanEffect> {
+class LoamingShamanEffect extends OneShotEffect {
 
     public LoamingShamanEffect() {
         super(Outcome.Benefit);

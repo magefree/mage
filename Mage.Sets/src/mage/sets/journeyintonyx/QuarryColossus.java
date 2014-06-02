@@ -80,7 +80,7 @@ public class QuarryColossus extends CardImpl<QuarryColossus> {
     }
 }
 
-class QuarryColossusReturnLibraryEffect extends OneShotEffect<QuarryColossusReturnLibraryEffect> {
+class QuarryColossusReturnLibraryEffect extends OneShotEffect {
 
     public QuarryColossusReturnLibraryEffect() {
         super(Outcome.Benefit);

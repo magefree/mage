@@ -86,7 +86,7 @@ public class MirrorSheen extends CardImpl<MirrorSheen> {
     }
 }
 
-class MirrorSheenEffect extends OneShotEffect<MirrorSheenEffect> {
+class MirrorSheenEffect extends OneShotEffect {
 
     public MirrorSheenEffect() {
         super(Outcome.Copy);

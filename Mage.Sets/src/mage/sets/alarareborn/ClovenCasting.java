@@ -82,7 +82,7 @@ public class ClovenCasting extends CardImpl<ClovenCasting> {
     }
 }
 
-class ClovenCastingEffect extends OneShotEffect<ClovenCastingEffect> {
+class ClovenCastingEffect extends OneShotEffect {
 
     public ClovenCastingEffect() {
         super(Outcome.Copy);

@@ -67,7 +67,7 @@ public class FaithsReward extends CardImpl<FaithsReward> {
     }
 }
 
-class FaithsRewardEffect extends OneShotEffect<FaithsRewardEffect> {
+class FaithsRewardEffect extends OneShotEffect {
 
     FaithsRewardEffect() {
         super(Outcome.PutCardInPlay);

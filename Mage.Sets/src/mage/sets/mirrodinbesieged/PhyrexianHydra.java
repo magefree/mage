@@ -73,7 +73,7 @@ public class PhyrexianHydra extends CardImpl<PhyrexianHydra> {
 
 }
 
-class PhyrexianHydraEffect extends PreventionEffectImpl<PhyrexianHydraEffect> {
+class PhyrexianHydraEffect extends PreventionEffectImpl {
 
     public PhyrexianHydraEffect() {
         super(Duration.WhileOnBattlefield);

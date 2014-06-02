@@ -39,7 +39,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class AddPoisonCounterTargetEffect extends OneShotEffect<AddPoisonCounterTargetEffect> {
+public class AddPoisonCounterTargetEffect extends OneShotEffect {
 
     protected int amount;
 

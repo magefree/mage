@@ -110,7 +110,7 @@ class RenegadeDoppelgangerTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class RenegadeDoppelgangerEffect extends OneShotEffect<RenegadeDoppelgangerEffect> {
+class RenegadeDoppelgangerEffect extends OneShotEffect {
 
     public RenegadeDoppelgangerEffect() {
         super(Outcome.Benefit);

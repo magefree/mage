@@ -121,7 +121,7 @@ public class BowOfNylea extends CardImpl<BowOfNylea> {
     }
 }
 
-class PutCardsFromGraveyardToLibraryEffect extends OneShotEffect<PutCardsFromGraveyardToLibraryEffect> {
+class PutCardsFromGraveyardToLibraryEffect extends OneShotEffect {
 
     public PutCardsFromGraveyardToLibraryEffect() {
         super(Outcome.Detriment);

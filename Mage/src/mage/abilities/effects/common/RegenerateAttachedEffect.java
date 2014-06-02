@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeff
  */
-public class RegenerateAttachedEffect extends ReplacementEffectImpl<RegenerateAttachedEffect> {
+public class RegenerateAttachedEffect extends ReplacementEffectImpl {
 
     protected AttachmentType attachmentType;
 

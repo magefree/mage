@@ -69,7 +69,7 @@ public class GloomSurgeon extends CardImpl<GloomSurgeon> {
     }
 }
 
-class GloomSurgeonEffect extends ReplacementEffectImpl<GloomSurgeonEffect> {
+class GloomSurgeonEffect extends ReplacementEffectImpl {
 
     GloomSurgeonEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);

@@ -125,7 +125,7 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
     }
 }
 
-class BoseijuWhoSheltersAllCantCounterEffect extends ReplacementEffectImpl<BoseijuWhoSheltersAllCantCounterEffect> {
+class BoseijuWhoSheltersAllCantCounterEffect extends ReplacementEffectImpl {
 
     private static final FilterCard filter = new FilterInstantOrSorceryCard();
     

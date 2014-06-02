@@ -89,7 +89,7 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
 
 }
 
-class AnnihilatorEffect extends OneShotEffect<AnnihilatorEffect> {
+class AnnihilatorEffect extends OneShotEffect {
 
     private final int count;
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();

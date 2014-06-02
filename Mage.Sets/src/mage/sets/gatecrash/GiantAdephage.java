@@ -77,7 +77,7 @@ public class GiantAdephage extends CardImpl<GiantAdephage> {
     }
 }
 
-class GiantAdephageCopyEffect extends OneShotEffect<GiantAdephageCopyEffect> {
+class GiantAdephageCopyEffect extends OneShotEffect {
 
     public GiantAdephageCopyEffect() {
         super(Outcome.Copy);

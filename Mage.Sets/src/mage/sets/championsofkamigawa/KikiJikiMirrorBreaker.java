@@ -95,7 +95,7 @@ public class KikiJikiMirrorBreaker extends CardImpl<KikiJikiMirrorBreaker> {
     }
 }
 
-class KikiJikiMirrorBreakerEffect extends OneShotEffect<KikiJikiMirrorBreakerEffect> {
+class KikiJikiMirrorBreakerEffect extends OneShotEffect {
 
     public KikiJikiMirrorBreakerEffect() {
         super(Outcome.PutCreatureInPlay);

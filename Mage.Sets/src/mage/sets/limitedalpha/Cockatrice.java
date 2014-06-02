@@ -118,7 +118,7 @@ class CockatriceTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class CockatriceEffect extends OneShotEffect<CockatriceEffect> {
+class CockatriceEffect extends OneShotEffect {
 
     CockatriceEffect() {
         super(Outcome.DestroyPermanent);

@@ -72,7 +72,7 @@ public class Karma extends CardImpl<Karma> {
     }
 }
 
-class KarmaDamageTargetEffect extends OneShotEffect<KarmaDamageTargetEffect>{
+class KarmaDamageTargetEffect extends OneShotEffect{
     
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("Swamps");
     static{

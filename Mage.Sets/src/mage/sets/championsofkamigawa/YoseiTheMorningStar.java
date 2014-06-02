@@ -115,7 +115,7 @@ public class YoseiTheMorningStar extends CardImpl<YoseiTheMorningStar> {
 
 }
 
-class YoseiTheMorningStarTapEffect extends OneShotEffect<YoseiTheMorningStarTapEffect> {
+class YoseiTheMorningStarTapEffect extends OneShotEffect {
 
     public YoseiTheMorningStarTapEffect() {
         super(Outcome.Tap);

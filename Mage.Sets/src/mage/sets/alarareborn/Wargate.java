@@ -73,7 +73,7 @@ public class Wargate extends CardImpl<Wargate> {
 }
 
 
-class WargateEffect extends OneShotEffect<WargateEffect> {
+class WargateEffect extends OneShotEffect {
     WargateEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Search your library for a permanent card with converted mana cost X or less, put it onto the battlefield, then shuffle your library";

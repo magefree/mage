@@ -94,7 +94,7 @@ public class LlawanCephalidEmpress extends CardImpl<LlawanCephalidEmpress> {
 }
 
 
-class LlawanCephalidEmpressReplacementEffect extends ReplacementEffectImpl<LlawanCephalidEmpressReplacementEffect> {
+class LlawanCephalidEmpressReplacementEffect extends ReplacementEffectImpl {
 
     private static final FilterCard filter = new FilterCard("blue creature spells");
 

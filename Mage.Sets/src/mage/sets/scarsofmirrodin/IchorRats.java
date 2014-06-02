@@ -71,7 +71,7 @@ public class IchorRats extends CardImpl<IchorRats> {
 
 }
 
-class IchorRatsEffect extends OneShotEffect<IchorRatsEffect> {
+class IchorRatsEffect extends OneShotEffect {
     public IchorRatsEffect() {
         super(Outcome.Damage);
         staticText = "each player gets a poison counter";

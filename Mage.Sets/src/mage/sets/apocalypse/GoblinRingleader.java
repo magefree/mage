@@ -79,7 +79,7 @@ public class GoblinRingleader extends CardImpl<GoblinRingleader> {
     }
 }
 
-class GoblinRingleaderEffect extends OneShotEffect<GoblinRingleaderEffect> {
+class GoblinRingleaderEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("Goblin");
     static {

@@ -70,7 +70,7 @@ public class RealitySpasm extends CardImpl<RealitySpasm> {
     }
 }
 
-class RealitySpasmTapEffect extends OneShotEffect<RealitySpasmTapEffect> {
+class RealitySpasmTapEffect extends OneShotEffect {
     
     private static final FilterPermanent filter = new FilterPermanent("permanent");
 
@@ -110,7 +110,7 @@ class RealitySpasmTapEffect extends OneShotEffect<RealitySpasmTapEffect> {
 
 }
 
-class RealitySpasmUntapEffect extends OneShotEffect<RealitySpasmUntapEffect> {
+class RealitySpasmUntapEffect extends OneShotEffect {
     
     private static final FilterPermanent filter = new FilterPermanent("permanent");
 

@@ -115,7 +115,7 @@ class ThicketBasiliskTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ThicketBasiliskEffect extends OneShotEffect<ThicketBasiliskEffect> {
+class ThicketBasiliskEffect extends OneShotEffect {
 
     ThicketBasiliskEffect() {
         super(Outcome.DestroyPermanent);

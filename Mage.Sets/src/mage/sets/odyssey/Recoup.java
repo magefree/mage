@@ -82,7 +82,7 @@ public class Recoup extends CardImpl<Recoup> {
     }
 }
 
-class RecoupEffect extends ContinuousEffectImpl<RecoupEffect> {
+class RecoupEffect extends ContinuousEffectImpl {
 
     public RecoupEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

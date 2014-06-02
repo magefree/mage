@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffect> {
+public class BoostEquippedEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;

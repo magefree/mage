@@ -85,7 +85,7 @@ public class PhantomNantuko extends CardImpl<PhantomNantuko> {
     }
 }
 
-class PhantomNantukoPreventionEffect extends PreventionEffectImpl<PhantomNantukoPreventionEffect> {
+class PhantomNantukoPreventionEffect extends PreventionEffectImpl {
 
     // remember turn and phase step to check if counter in this step was already removed
     private int turn = 0;

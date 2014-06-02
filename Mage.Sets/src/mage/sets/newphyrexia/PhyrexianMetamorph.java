@@ -81,7 +81,7 @@ public class PhyrexianMetamorph extends CardImpl<PhyrexianMetamorph> {
 
 }
 
-class PhyrexianMetamorphEffect extends OneShotEffect<PhyrexianMetamorphEffect> {
+class PhyrexianMetamorphEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 

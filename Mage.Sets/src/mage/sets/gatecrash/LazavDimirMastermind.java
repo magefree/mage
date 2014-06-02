@@ -122,7 +122,7 @@ class CreatureCardPutOpponentGraveyardTriggeredAbility extends TriggeredAbilityI
     }
 }
 
-class LazavDimirEffect extends ContinuousEffectImpl<LazavDimirEffect> {
+class LazavDimirEffect extends ContinuousEffectImpl {
 
     protected UUID IdOfCopiedCard;
     protected Card cardToCopy;

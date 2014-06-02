@@ -72,7 +72,7 @@ public class HarmonicConvergence extends CardImpl<HarmonicConvergence> {
     }
 }
 
-class HarmonicConvergenceEffect extends OneShotEffect<HarmonicConvergenceEffect> {
+class HarmonicConvergenceEffect extends OneShotEffect {
 
     public HarmonicConvergenceEffect() {
         super(Outcome.Neutral);

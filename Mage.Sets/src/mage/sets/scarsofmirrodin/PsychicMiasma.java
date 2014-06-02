@@ -69,7 +69,7 @@ public class PsychicMiasma extends CardImpl<PsychicMiasma> {
 
 }
 
-class PsychicMiasmaEffect1 extends OneShotEffect<PsychicMiasmaEffect1> {
+class PsychicMiasmaEffect1 extends OneShotEffect {
 
     public PsychicMiasmaEffect1() {
         super(Outcome.Discard);

@@ -101,7 +101,7 @@ public class LegionsInitiative extends CardImpl<LegionsInitiative> {
     }
 }
 
-class LegionsInitiativeExileEffect extends OneShotEffect<LegionsInitiativeExileEffect> {
+class LegionsInitiativeExileEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("all creatures you control");
     static {
@@ -145,7 +145,7 @@ class LegionsInitiativeExileEffect extends OneShotEffect<LegionsInitiativeExileE
     }
 }
 
-class LegionsInitiativeReturnFromExileEffect extends OneShotEffect<LegionsInitiativeReturnFromExileEffect> {
+class LegionsInitiativeReturnFromExileEffect extends OneShotEffect {
 
     public LegionsInitiativeReturnFromExileEffect() {
         super(Outcome.PutCardInPlay);

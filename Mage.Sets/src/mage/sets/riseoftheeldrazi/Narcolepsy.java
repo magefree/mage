@@ -81,7 +81,7 @@ public class Narcolepsy extends CardImpl<Narcolepsy> {
     }
 }
 
-class NarcolepsyEffect extends OneShotEffect<NarcolepsyEffect> {
+class NarcolepsyEffect extends OneShotEffect {
 
     public NarcolepsyEffect() {
         super(Outcome.Detriment);

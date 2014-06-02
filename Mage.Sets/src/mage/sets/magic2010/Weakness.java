@@ -76,7 +76,7 @@ public class Weakness extends CardImpl<Weakness> {
     }
 }
 
-class WeaknessEffect extends ContinuousEffectImpl<WeaknessEffect> {
+class WeaknessEffect extends ContinuousEffectImpl {
 
     public WeaknessEffect() {
         super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);

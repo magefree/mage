@@ -133,7 +133,7 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class CurseOfEchoesEffect extends OneShotEffect<CurseOfEchoesEffect> {
+class CurseOfEchoesEffect extends OneShotEffect {
 
     public CurseOfEchoesEffect() {
         super(Outcome.Copy);

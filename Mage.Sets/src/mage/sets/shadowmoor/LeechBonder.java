@@ -91,7 +91,7 @@ public class LeechBonder extends CardImpl<LeechBonder> {
     }
 }
 
-class LeechBonderEffect extends OneShotEffect<LeechBonderEffect> {
+class LeechBonderEffect extends OneShotEffect {
 
     public LeechBonderEffect() {
         super(Outcome.Detriment);

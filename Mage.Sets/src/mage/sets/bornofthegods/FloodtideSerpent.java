@@ -77,7 +77,7 @@ public class FloodtideSerpent extends CardImpl<FloodtideSerpent> {
     }
 }
 
-class FloodtideSerpentReplacementEffect extends ReplacementEffectImpl<FloodtideSerpentReplacementEffect> {
+class FloodtideSerpentReplacementEffect extends ReplacementEffectImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchantment you control");
 

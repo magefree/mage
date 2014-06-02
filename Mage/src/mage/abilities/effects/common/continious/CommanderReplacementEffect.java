@@ -50,7 +50,7 @@ import mage.players.Player;
  * 903.11. If a commander would be put into its owner’s graveyard from anywhere, that player may put it into the command zone instead.
  * 903.12. If a commander would be put into the exile zone from anywhere, its owner may put it into the command zone instead.
  */
-public class CommanderReplacementEffect extends ReplacementEffectImpl<CommanderReplacementEffect> {
+public class CommanderReplacementEffect extends ReplacementEffectImpl {
 
     private final UUID commanderId;
 

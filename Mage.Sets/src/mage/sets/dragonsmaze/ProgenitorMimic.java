@@ -109,7 +109,7 @@ class ProgenitorMimicApplyToPermanent extends ApplyToPermanent {
     }
 }
 
-class ProgenitorMimicCopyEffect extends OneShotEffect<ProgenitorMimicCopyEffect> {
+class ProgenitorMimicCopyEffect extends OneShotEffect {
 
     public ProgenitorMimicCopyEffect() {
         super(Outcome.PutCreatureInPlay);

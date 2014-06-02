@@ -89,7 +89,7 @@ public class ChameleonColossus extends CardImpl<ChameleonColossus> {
     }
 }
 
-class ChameleonColossusEffect extends ContinuousEffectImpl<ChameleonColossusEffect> {
+class ChameleonColossusEffect extends ContinuousEffectImpl {
     public ChameleonColossusEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "{this} gets +X/+X until end of turn, where X is its power";

@@ -66,7 +66,7 @@ public class DistantMemories extends CardImpl<DistantMemories> {
     }
 }
 
-class DistantMemoriesEffect extends OneShotEffect<DistantMemoriesEffect> {
+class DistantMemoriesEffect extends OneShotEffect {
 
     public DistantMemoriesEffect() {
         super(Outcome.DrawCard);

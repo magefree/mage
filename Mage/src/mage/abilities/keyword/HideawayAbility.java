@@ -90,7 +90,7 @@ public class HideawayAbility extends StaticAbility {
     }
 }
 
-class HideawayExileEffect extends OneShotEffect<HideawayExileEffect> {
+class HideawayExileEffect extends OneShotEffect {
 
     private static FilterCard filter1 = new FilterCard("card to exile face down");
     private static FilterCard filter2 = new FilterCard("card to put on the bottom of your library");
@@ -158,7 +158,7 @@ class HideawayExileEffect extends OneShotEffect<HideawayExileEffect> {
     }
 }
 
-class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl<HideawayLookAtFaceDownCardEffect> {
+class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
 
     public HideawayLookAtFaceDownCardEffect() {
         super(AsThoughEffectType.REVEAL_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);

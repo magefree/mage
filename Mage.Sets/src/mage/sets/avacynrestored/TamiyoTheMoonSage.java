@@ -166,7 +166,7 @@ class TamiyoTheMoonSageTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class TamiyoTheMoonSageEffect extends OneShotEffect<TamiyoTheMoonSageEffect> {
+class TamiyoTheMoonSageEffect extends OneShotEffect {
 
     public TamiyoTheMoonSageEffect() {
         super(Outcome.ReturnToHand);

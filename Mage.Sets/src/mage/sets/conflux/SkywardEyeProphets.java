@@ -75,7 +75,7 @@ public class SkywardEyeProphets extends CardImpl<SkywardEyeProphets> {
         return new SkywardEyeProphets(this);
     }
     
-    public static class SkywardEyeProphetsEffect extends OneShotEffect<SkywardEyeProphetsEffect> {
+    public static class SkywardEyeProphetsEffect extends OneShotEffect {
 
         public SkywardEyeProphetsEffect() {
             super(Outcome.DrawCard);

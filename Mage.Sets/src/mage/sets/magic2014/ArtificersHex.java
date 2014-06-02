@@ -86,7 +86,7 @@ public class ArtificersHex extends CardImpl<ArtificersHex> {
 }
 
 
-class ArtificersHexEffect extends OneShotEffect<ArtificersHexEffect> {
+class ArtificersHexEffect extends OneShotEffect {
 
     public ArtificersHexEffect() {
         super(Outcome.Benefit);

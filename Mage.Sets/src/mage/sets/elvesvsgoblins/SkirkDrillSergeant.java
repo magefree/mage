@@ -84,7 +84,7 @@ public class SkirkDrillSergeant extends CardImpl<SkirkDrillSergeant> {
     }
 }
 
-class SkirkDrillSergeantEffect extends OneShotEffect<SkirkDrillSergeantEffect> {
+class SkirkDrillSergeantEffect extends OneShotEffect {
 
     public SkirkDrillSergeantEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -69,7 +69,7 @@ public class BloodClock extends CardImpl<BloodClock> {
     }
 }
 
-class BloodClockEffect extends OneShotEffect<BloodClockEffect> {
+class BloodClockEffect extends OneShotEffect {
 
     public BloodClockEffect() {
         super(Outcome.ReturnToHand);

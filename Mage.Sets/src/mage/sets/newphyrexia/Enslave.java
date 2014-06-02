@@ -76,7 +76,7 @@ public class Enslave extends CardImpl<Enslave> {
 
 }
 
-class EnslaveEffect extends OneShotEffect<EnslaveEffect> {
+class EnslaveEffect extends OneShotEffect {
     EnslaveEffect() {
         super(Outcome.Damage);
         staticText = "enchanted creature deals 1 damage to its owner";

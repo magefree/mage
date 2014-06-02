@@ -72,7 +72,7 @@ public class GrandAbolisher extends CardImpl<GrandAbolisher> {
     }
 }
 
-class GrandAbolisherEffect extends ReplacementEffectImpl<GrandAbolisherEffect> {
+class GrandAbolisherEffect extends ReplacementEffectImpl {
 
     public GrandAbolisherEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

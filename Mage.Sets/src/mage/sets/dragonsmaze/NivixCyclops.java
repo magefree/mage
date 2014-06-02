@@ -91,7 +91,7 @@ public class NivixCyclops extends CardImpl<NivixCyclops> {
     }    
 }
 
-class AsThoughNoDefenderEffect extends AsThoughEffectImpl<AsThoughNoDefenderEffect> {
+class AsThoughNoDefenderEffect extends AsThoughEffectImpl {
 
     public AsThoughNoDefenderEffect() {
         super(AsThoughEffectType.ATTACK, Duration.EndOfTurn, Outcome.Benefit);

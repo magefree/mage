@@ -84,7 +84,7 @@ public class PropheticFlamespeaker extends CardImpl<PropheticFlamespeaker> {
     }
 }
 
-class PropheticFlamespeakerExileEffect extends OneShotEffect<PropheticFlamespeakerExileEffect> {
+class PropheticFlamespeakerExileEffect extends OneShotEffect {
 
     public PropheticFlamespeakerExileEffect() {
         super(Outcome.Detriment);
@@ -118,7 +118,7 @@ class PropheticFlamespeakerExileEffect extends OneShotEffect<PropheticFlamespeak
     }
 }
 
-class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl<PropheticFlamespeakerCastFromExileEffect> {
+class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl {
 
     private final UUID cardId;
 

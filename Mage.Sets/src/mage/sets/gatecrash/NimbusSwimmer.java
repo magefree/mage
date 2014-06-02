@@ -75,7 +75,7 @@ public class NimbusSwimmer extends CardImpl<NimbusSwimmer> {
     }
 }
 
-class NimbusSwimmerEffect extends OneShotEffect<NimbusSwimmerEffect> {
+class NimbusSwimmerEffect extends OneShotEffect {
 
     public NimbusSwimmerEffect() {
         super(Outcome.BoostCreature);

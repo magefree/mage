@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamageAllEffect extends OneShotEffect<DamageAllEffect> {
+public class DamageAllEffect extends OneShotEffect {
 
     private FilterPermanent filter;
     private DynamicValue amount;

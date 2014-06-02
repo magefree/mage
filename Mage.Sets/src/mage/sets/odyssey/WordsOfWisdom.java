@@ -66,7 +66,7 @@ public class WordsOfWisdom extends CardImpl<WordsOfWisdom> {
     }
 }
 
-class WordsOfWisdomEffect extends OneShotEffect<WordsOfWisdomEffect> {
+class WordsOfWisdomEffect extends OneShotEffect {
 
     public WordsOfWisdomEffect() {
         super(Outcome.Detriment);

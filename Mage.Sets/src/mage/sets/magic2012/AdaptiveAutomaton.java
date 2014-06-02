@@ -76,7 +76,7 @@ public class AdaptiveAutomaton extends CardImpl<AdaptiveAutomaton> {
     }
 }
 
-class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
+class AdaptiveAutomatonEffect extends OneShotEffect {
 
     public AdaptiveAutomatonEffect() {
         super(Outcome.BoostCreature);
@@ -114,7 +114,7 @@ class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
 
 }
 
-class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl<AdaptiveAutomatonAddSubtypeEffect> {
+class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl {
     public AdaptiveAutomatonAddSubtypeEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "{this} is the chosen type in addition to its other types";
@@ -142,7 +142,7 @@ class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl<AdaptiveAut
     }
 }
 
-class AdaptiveAutomatonBoostControlledEffect extends ContinuousEffectImpl<AdaptiveAutomatonBoostControlledEffect> {
+class AdaptiveAutomatonBoostControlledEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

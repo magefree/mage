@@ -96,7 +96,7 @@ public class GwafaHazidProfiteer extends CardImpl<GwafaHazidProfiteer> {
     }
 }
 
-class GwafaHazidProfiteerEffect1 extends OneShotEffect<GwafaHazidProfiteerEffect1> {
+class GwafaHazidProfiteerEffect1 extends OneShotEffect {
     
     GwafaHazidProfiteerEffect1() {
         super(Outcome.Detriment);

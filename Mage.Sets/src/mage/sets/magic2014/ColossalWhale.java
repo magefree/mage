@@ -123,7 +123,7 @@ class ColossalWhaleAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ColossalWhaleExileEffect extends OneShotEffect<ColossalWhaleExileEffect> {
+class ColossalWhaleExileEffect extends OneShotEffect {
 
     public ColossalWhaleExileEffect() {
         super(Outcome.Benefit);
@@ -186,7 +186,7 @@ class ColossalWhaleReturnExiledAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ReturnExiledCreatureColossalWhaleEffect extends OneShotEffect<ReturnExiledCreatureColossalWhaleEffect> {
+class ReturnExiledCreatureColossalWhaleEffect extends OneShotEffect {
 
     public ReturnExiledCreatureColossalWhaleEffect() {
         super(Outcome.Benefit);

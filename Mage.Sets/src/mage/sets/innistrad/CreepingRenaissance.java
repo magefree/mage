@@ -70,7 +70,7 @@ public class CreepingRenaissance extends CardImpl<CreepingRenaissance> {
     }
 }
 
-class CreepingRenaissanceEffect extends OneShotEffect<CreepingRenaissanceEffect> {
+class CreepingRenaissanceEffect extends OneShotEffect {
 
     public CreepingRenaissanceEffect() {
         super(Outcome.Detriment);

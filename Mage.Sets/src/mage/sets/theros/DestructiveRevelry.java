@@ -78,7 +78,7 @@ public class DestructiveRevelry extends CardImpl<DestructiveRevelry> {
     }
 }
 
-class DestructiveRevelryEffect extends OneShotEffect<DestructiveRevelryEffect> {
+class DestructiveRevelryEffect extends OneShotEffect {
 
     public DestructiveRevelryEffect() {
         super(Outcome.DestroyPermanent);

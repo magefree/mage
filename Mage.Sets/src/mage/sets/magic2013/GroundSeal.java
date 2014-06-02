@@ -70,7 +70,7 @@ public class GroundSeal extends CardImpl<GroundSeal> {
     }
 }
 
-class GroundSealEffect extends ReplacementEffectImpl<GroundSealEffect> {
+class GroundSealEffect extends ReplacementEffectImpl {
 
     public GroundSealEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

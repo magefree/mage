@@ -71,7 +71,7 @@ public class CommonBond extends CardImpl<CommonBond> {
     }
 }
 
-class CommonBondEffect extends OneShotEffect<CommonBondEffect> {
+class CommonBondEffect extends OneShotEffect {
 
     public CommonBondEffect() {
         super(Outcome.BoostCreature);

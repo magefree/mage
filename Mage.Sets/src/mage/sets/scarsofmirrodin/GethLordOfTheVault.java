@@ -102,7 +102,7 @@ public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
     }
 
 }
-class GethLordOfTheVaultEffect extends OneShotEffect<GethLordOfTheVaultEffect> {
+class GethLordOfTheVaultEffect extends OneShotEffect {
 
     public GethLordOfTheVaultEffect() {
         super(Outcome.Benefit);

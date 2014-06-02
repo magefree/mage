@@ -77,7 +77,7 @@ public class NeedleSpecter extends CardImpl<NeedleSpecter> {
     }
 }
 
-class NeedleSpecterEffect extends OneShotEffect<NeedleSpecterEffect> {
+class NeedleSpecterEffect extends OneShotEffect {
 
         public NeedleSpecterEffect() {
             super(Outcome.Discard);

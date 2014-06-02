@@ -96,7 +96,7 @@ public class WiltLeafLiege extends CardImpl<WiltLeafLiege> {
     }
 }
 
-class WiltLeafLiegeEffect extends ReplacementEffectImpl<WiltLeafLiegeEffect> {
+class WiltLeafLiegeEffect extends ReplacementEffectImpl {
 
     public WiltLeafLiegeEffect() {
         super(Duration.EndOfGame, Outcome.PutCardInPlay);

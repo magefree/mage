@@ -81,7 +81,7 @@ public class Nyxathid extends CardImpl<Nyxathid> {
     }
 }
 
-class ChooseOpponent extends OneShotEffect<ChooseOpponent> {
+class ChooseOpponent extends OneShotEffect {
 
     public ChooseOpponent() {
         super(Outcome.Neutral);

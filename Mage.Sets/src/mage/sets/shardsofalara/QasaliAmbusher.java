@@ -133,7 +133,7 @@ class QasaliAmbusherAbility extends ActivatedAbilityImpl {
     }
 }
 
-class QasaliAmbusherEffect extends OneShotEffect<QasaliAmbusherEffect> {
+class QasaliAmbusherEffect extends OneShotEffect {
 
     public QasaliAmbusherEffect() {
         super(Outcome.Benefit);

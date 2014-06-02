@@ -74,7 +74,7 @@ public class PrimalPlasma extends CardImpl<PrimalPlasma> {
     }
 }
 
-class PrimalPlasmaEffect extends ContinuousEffectImpl<PrimalPlasmaEffect> {
+class PrimalPlasmaEffect extends ContinuousEffectImpl {
     PrimalPlasmaEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
     }

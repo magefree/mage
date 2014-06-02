@@ -69,7 +69,7 @@ public class IncrementalGrowth extends CardImpl<IncrementalGrowth> {
     }
 }
 
-class IncrementalGrowthEffect extends OneShotEffect<IncrementalGrowthEffect> {
+class IncrementalGrowthEffect extends OneShotEffect {
 
     public IncrementalGrowthEffect() {
         super(Outcome.UnboostCreature);

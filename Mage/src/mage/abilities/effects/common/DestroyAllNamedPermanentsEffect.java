@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DestroyAllNamedPermanentsEffect extends OneShotEffect<DestroyAllNamedPermanentsEffect> {
+public class DestroyAllNamedPermanentsEffect extends OneShotEffect {
 
     public DestroyAllNamedPermanentsEffect() {
         super(Outcome.DestroyPermanent);

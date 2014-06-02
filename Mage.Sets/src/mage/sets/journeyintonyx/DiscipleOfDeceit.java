@@ -82,7 +82,7 @@ public class DiscipleOfDeceit extends CardImpl<DiscipleOfDeceit> {
     }
 }
 
-class DiscipleOfDeceitEffect extends OneShotEffect<DiscipleOfDeceitEffect> {
+class DiscipleOfDeceitEffect extends OneShotEffect {
     
     public DiscipleOfDeceitEffect() {
         super(Outcome.Benefit);

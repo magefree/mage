@@ -67,7 +67,7 @@ public class SearchWarrant extends CardImpl<SearchWarrant> {
     }
 }
 
-class SearchWarrantEffect extends OneShotEffect<SearchWarrantEffect> {
+class SearchWarrantEffect extends OneShotEffect {
 
     public SearchWarrantEffect() {
         super(Outcome.Exile);

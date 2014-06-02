@@ -72,7 +72,7 @@ public class FiligreeAngel extends CardImpl<FiligreeAngel> {
     }
 }
 
-class FiligreeAngelEffect extends OneShotEffect<FiligreeAngelEffect> {
+class FiligreeAngelEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {

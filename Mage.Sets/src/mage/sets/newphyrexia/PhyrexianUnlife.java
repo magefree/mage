@@ -78,7 +78,7 @@ public class PhyrexianUnlife extends CardImpl<PhyrexianUnlife> {
     }
 }
 
-class PhyrexianUnlifeEffect2 extends ReplacementEffectImpl<PhyrexianUnlifeEffect2> {
+class PhyrexianUnlifeEffect2 extends ReplacementEffectImpl {
 
     public PhyrexianUnlifeEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

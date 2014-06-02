@@ -69,7 +69,7 @@ public class UnwindingClock extends CardImpl<UnwindingClock> {
     }
 }
 
-class UnwindingClockEffect extends ContinuousEffectImpl<UnwindingClockEffect> {
+class UnwindingClockEffect extends ContinuousEffectImpl {
 
     private static FilterArtifactPermanent filter = new FilterArtifactPermanent();
 

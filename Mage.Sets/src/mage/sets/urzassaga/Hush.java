@@ -67,7 +67,7 @@ public class Hush extends CardImpl<Hush> {
     }
 }
 
-class HushEffect extends OneShotEffect<HushEffect> {
+class HushEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("");
 

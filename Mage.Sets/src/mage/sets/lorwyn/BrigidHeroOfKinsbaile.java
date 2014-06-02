@@ -87,7 +87,7 @@ public class BrigidHeroOfKinsbaile extends CardImpl<BrigidHeroOfKinsbaile> {
     }
 }
 
-class BrigidHeroOfKinsbaileEffect extends OneShotEffect<BrigidHeroOfKinsbaileEffect> {
+class BrigidHeroOfKinsbaileEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("each attacking or blocking creature target player controls");
 

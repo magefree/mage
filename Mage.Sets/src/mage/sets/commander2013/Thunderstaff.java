@@ -80,7 +80,7 @@ public class Thunderstaff extends CardImpl<Thunderstaff> {
     }
 }
 
-class ThunderstaffPreventionEffect extends PreventionEffectImpl<ThunderstaffPreventionEffect> {
+class ThunderstaffPreventionEffect extends PreventionEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

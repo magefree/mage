@@ -118,7 +118,7 @@ class EndrekSahrMasterBreederTriggeredAbility extends StateTriggeredAbility {
     }
 }
 
-class EndrekSahrMasterBreederEffect extends OneShotEffect<EndrekSahrMasterBreederEffect> {
+class EndrekSahrMasterBreederEffect extends OneShotEffect {
 
     public EndrekSahrMasterBreederEffect() {
         super(Outcome.PutCreatureInPlay);

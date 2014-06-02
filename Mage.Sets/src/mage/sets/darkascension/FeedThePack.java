@@ -72,7 +72,7 @@ public class FeedThePack extends CardImpl<FeedThePack> {
     }
 }
 
-class FeedThePackEffect extends OneShotEffect<FeedThePackEffect> {
+class FeedThePackEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nontoken creature");
 

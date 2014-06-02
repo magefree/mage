@@ -75,7 +75,7 @@ public class SoldierOfFortune extends CardImpl<SoldierOfFortune> {
     }
 }
 
-class SoldierOfFortuneEffect extends OneShotEffect<SoldierOfFortuneEffect> {
+class SoldierOfFortuneEffect extends OneShotEffect {
 
     public SoldierOfFortuneEffect() {
         super(Outcome.Neutral);

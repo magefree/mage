@@ -40,7 +40,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class SkipUntapSourceEffect extends ReplacementEffectImpl<SkipUntapSourceEffect> {
+public class SkipUntapSourceEffect extends ReplacementEffectImpl {
 
     public SkipUntapSourceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

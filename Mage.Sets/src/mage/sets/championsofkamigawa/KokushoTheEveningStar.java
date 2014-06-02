@@ -70,7 +70,7 @@ public class KokushoTheEveningStar extends CardImpl<KokushoTheEveningStar> {
 
 }
 
-class KokushoTheEveningStarEffect extends OneShotEffect<KokushoTheEveningStarEffect> {
+class KokushoTheEveningStarEffect extends OneShotEffect {
     public KokushoTheEveningStarEffect() {
         super(Outcome.Damage);
         staticText = "each opponent loses 5 life. You gain life equal to the life lost this way";

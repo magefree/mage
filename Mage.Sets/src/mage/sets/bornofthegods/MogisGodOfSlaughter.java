@@ -96,7 +96,7 @@ public class MogisGodOfSlaughter extends CardImpl<MogisGodOfSlaughter> {
     }
 }
 
-class DoUnlessTargetPaysCost extends OneShotEffect<DoUnlessTargetPaysCost> {
+class DoUnlessTargetPaysCost extends OneShotEffect {
     private final OneShotEffect executingEffect;
     private final Cost cost;
     private final String userMessage;

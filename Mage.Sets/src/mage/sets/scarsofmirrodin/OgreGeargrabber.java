@@ -88,7 +88,7 @@ public class OgreGeargrabber extends CardImpl<OgreGeargrabber> {
 
 }
 
-class OgreGeargrabberEffect1 extends OneShotEffect<OgreGeargrabberEffect1> {
+class OgreGeargrabberEffect1 extends OneShotEffect {
 
     public OgreGeargrabberEffect1() {
         super(Outcome.GainControl);
@@ -153,7 +153,7 @@ class OgreGeargrabberDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 }
 
-class OgreGeargrabberEffect2 extends OneShotEffect<OgreGeargrabberEffect2> {
+class OgreGeargrabberEffect2 extends OneShotEffect {
 
     private UUID equipmentId;
 

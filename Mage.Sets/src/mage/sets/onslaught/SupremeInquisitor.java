@@ -93,7 +93,7 @@ public class SupremeInquisitor extends CardImpl<SupremeInquisitor> {
     }
 }
 
-class SupremeInquisitorEffect extends OneShotEffect<SupremeInquisitorEffect> {
+class SupremeInquisitorEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard();
 

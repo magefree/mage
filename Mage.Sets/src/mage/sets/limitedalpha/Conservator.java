@@ -71,7 +71,7 @@ public class Conservator extends CardImpl<Conservator> {
     }
 }
 
-class ConservatorEffect extends PreventionEffectImpl<ConservatorEffect> {
+class ConservatorEffect extends PreventionEffectImpl {
 
     private int amount = 2;
 

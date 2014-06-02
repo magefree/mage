@@ -85,7 +85,7 @@ public class EldraziMonument extends CardImpl<EldraziMonument> {
 
 }
 
-class EldraziMonumentEffect extends OneShotEffect<EldraziMonumentEffect> {
+class EldraziMonumentEffect extends OneShotEffect {
 
     public EldraziMonumentEffect() {
         super(Outcome.Sacrifice);

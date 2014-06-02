@@ -95,7 +95,7 @@ public class StormtideLeviathan extends CardImpl<StormtideLeviathan> {
 
 }
 
-class StormtideLeviathanEffect extends ContinuousEffectImpl<StormtideLeviathanEffect> {
+class StormtideLeviathanEffect extends ContinuousEffectImpl {
 
     public StormtideLeviathanEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

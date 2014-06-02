@@ -43,7 +43,7 @@ import mage.game.Game;
  * @author LevelX2
  */
 
-public class SetPowerSourceEffect extends ContinuousEffectImpl<SetPowerSourceEffect> {
+public class SetPowerSourceEffect extends ContinuousEffectImpl {
 
     private final DynamicValue amount;
 

@@ -72,7 +72,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 
 
-public class CipherEffect extends OneShotEffect<CipherEffect> {
+public class CipherEffect extends OneShotEffect {
 
     public CipherEffect() {
         super(Outcome.Copy);
@@ -116,7 +116,7 @@ public class CipherEffect extends OneShotEffect<CipherEffect> {
     }
 }
 
-class CipherStoreEffect extends OneShotEffect<CipherStoreEffect> {
+class CipherStoreEffect extends OneShotEffect {
 
     private UUID  cipherCardId;
 

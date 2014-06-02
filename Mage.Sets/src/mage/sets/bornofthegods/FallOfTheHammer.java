@@ -83,7 +83,7 @@ public class FallOfTheHammer extends CardImpl<FallOfTheHammer> {
     }
 }
 
-class FallOfTheHammerDamageEffect extends OneShotEffect<FallOfTheHammerDamageEffect> {
+class FallOfTheHammerDamageEffect extends OneShotEffect {
 
     public FallOfTheHammerDamageEffect() {
         super(Outcome.Damage);

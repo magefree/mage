@@ -80,7 +80,7 @@ public class Myrsmith extends CardImpl<Myrsmith> {
 
 }
 
-class MyrsmithEffect extends OneShotEffect<MyrsmithEffect> {
+class MyrsmithEffect extends OneShotEffect {
     public MyrsmithEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "you may pay {1}. If you do, put a 1/1 colorless Myr artifact creature token onto the battlefield";

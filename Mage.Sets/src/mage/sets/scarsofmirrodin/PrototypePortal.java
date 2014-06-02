@@ -101,7 +101,7 @@ public class PrototypePortal extends CardImpl<PrototypePortal> {
     }
 }
 
-class PrototypePortalEffect extends OneShotEffect<PrototypePortalEffect> {
+class PrototypePortalEffect extends OneShotEffect {
 
     private static final FilterCard  filter = new FilterArtifactCard();
 
@@ -141,7 +141,7 @@ class PrototypePortalEffect extends OneShotEffect<PrototypePortalEffect> {
 
 }
 
-class PrototypePortalCreateTokenEffect extends OneShotEffect<PrototypePortalCreateTokenEffect> {
+class PrototypePortalCreateTokenEffect extends OneShotEffect {
 
     public PrototypePortalCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);

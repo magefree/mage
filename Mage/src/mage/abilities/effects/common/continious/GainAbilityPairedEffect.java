@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author noxx
  */
-public class GainAbilityPairedEffect extends ContinuousEffectImpl<GainAbilityPairedEffect> {
+public class GainAbilityPairedEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
 

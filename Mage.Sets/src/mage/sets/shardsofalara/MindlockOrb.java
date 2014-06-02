@@ -68,7 +68,7 @@ public class MindlockOrb extends CardImpl<MindlockOrb> {
     }
 }
 
-class MindlockOrbReplacementEffect extends ReplacementEffectImpl<MindlockOrbReplacementEffect> {
+class MindlockOrbReplacementEffect extends ReplacementEffectImpl {
 
     private static final String effectText = "Players can't search libraries";
     

@@ -76,7 +76,7 @@ public class Polymorph extends CardImpl<Polymorph> {
     }
 }
 
-class PolymorphEffect extends OneShotEffect<PolymorphEffect> {
+class PolymorphEffect extends OneShotEffect {
 
     public PolymorphEffect() {
         super(Outcome.PutCreatureInPlay);

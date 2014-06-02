@@ -80,7 +80,7 @@ public class Reweave extends CardImpl<Reweave> {
     }
 }
 
-class ReweaveEffect extends OneShotEffect<ReweaveEffect> {
+class ReweaveEffect extends OneShotEffect {
 
     public ReweaveEffect() {
         super(Outcome.Detriment);

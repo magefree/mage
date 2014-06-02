@@ -69,7 +69,7 @@ public class ThroneOfEmpires extends CardImpl<ThroneOfEmpires> {
     }
 }
 
-class ThroneOfEmpiresEffect extends OneShotEffect<ThroneOfEmpiresEffect> {
+class ThroneOfEmpiresEffect extends OneShotEffect {
 
     public ThroneOfEmpiresEffect() {
         super(Outcome.PutCreatureInPlay);

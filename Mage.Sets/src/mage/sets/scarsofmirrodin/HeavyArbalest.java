@@ -84,7 +84,7 @@ public class HeavyArbalest extends CardImpl<HeavyArbalest> {
     }
 }
 
-class HeavyArbalestEffect extends ReplacementEffectImpl<HeavyArbalestEffect> {
+class HeavyArbalestEffect extends ReplacementEffectImpl {
 
     public HeavyArbalestEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

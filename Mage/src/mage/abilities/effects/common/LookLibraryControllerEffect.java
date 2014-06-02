@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX
  */
-public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryControllerEffect> {
+public class LookLibraryControllerEffect extends OneShotEffect {
 
     protected DynamicValue numberOfCards;
     protected boolean mayShuffleAfter = false;

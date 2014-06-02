@@ -83,7 +83,7 @@ public class Moonhold extends CardImpl<Moonhold> {
     }
 }
 
-class MoonholdEffect extends ReplacementEffectImpl<MoonholdEffect> {
+class MoonholdEffect extends ReplacementEffectImpl {
 
     public MoonholdEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
@@ -118,7 +118,7 @@ class MoonholdEffect extends ReplacementEffectImpl<MoonholdEffect> {
     }
 }
 
-class MoonholdEffect2 extends ReplacementEffectImpl<MoonholdEffect2> {
+class MoonholdEffect2 extends ReplacementEffectImpl {
 
     public MoonholdEffect2() {
         super(Duration.EndOfTurn, Outcome.Detriment);

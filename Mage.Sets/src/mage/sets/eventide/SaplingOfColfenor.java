@@ -81,7 +81,7 @@ public class SaplingOfColfenor extends CardImpl<SaplingOfColfenor> {
     }
 }
 
-class SaplingOfColfenorEffect extends OneShotEffect<SaplingOfColfenorEffect> {
+class SaplingOfColfenorEffect extends OneShotEffect {
     
     Cards cards = new CardsImpl();
 

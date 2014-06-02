@@ -75,7 +75,7 @@ public class DecreeOfPain extends CardImpl<DecreeOfPain> {
     }
 }
 
-class DecreeOfPainEffect extends OneShotEffect<DecreeOfPainEffect> {
+class DecreeOfPainEffect extends OneShotEffect {
 
     public DecreeOfPainEffect() {
         super(Outcome.DestroyPermanent);

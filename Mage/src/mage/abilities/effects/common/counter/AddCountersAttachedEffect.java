@@ -42,7 +42,7 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 
-public class AddCountersAttachedEffect extends OneShotEffect<AddCountersAttachedEffect> {
+public class AddCountersAttachedEffect extends OneShotEffect {
 
     private Counter counter;
     private DynamicValue amount;

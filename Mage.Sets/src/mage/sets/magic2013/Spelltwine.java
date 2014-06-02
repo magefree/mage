@@ -87,7 +87,7 @@ public class Spelltwine extends CardImpl<Spelltwine> {
     }
 }
 
-class SpelltwineEffect extends OneShotEffect<SpelltwineEffect> {
+class SpelltwineEffect extends OneShotEffect {
 
     public SpelltwineEffect() {
         super(Outcome.PlayForFree);

@@ -75,7 +75,7 @@ public class TavernSwindler extends CardImpl<TavernSwindler> {
     }
 }
 
-class TavernSwindlerEffect extends OneShotEffect<TavernSwindlerEffect> {
+class TavernSwindlerEffect extends OneShotEffect {
 
     public TavernSwindlerEffect() {
         super(Outcome.Damage);

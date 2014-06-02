@@ -80,7 +80,7 @@ public class DevouringGreed extends CardImpl<DevouringGreed> {
     }
 }
 
-class DevouringGreedEffect extends OneShotEffect<DevouringGreedEffect> {
+class DevouringGreedEffect extends OneShotEffect {
 
     public DevouringGreedEffect() {
         super(Outcome.LoseLife);

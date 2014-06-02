@@ -76,7 +76,7 @@ public class FuriousResistance extends CardImpl<FuriousResistance> {
     }
 }
 
-class FuriousResistanceEffect extends OneShotEffect<FuriousResistanceEffect> {
+class FuriousResistanceEffect extends OneShotEffect {
 
     public FuriousResistanceEffect() {
         super(Outcome.BoostCreature);

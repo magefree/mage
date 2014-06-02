@@ -72,7 +72,7 @@ public class Bribery extends CardImpl<Bribery> {
     }
 }
 
-class BriberyEffect extends OneShotEffect<BriberyEffect> {
+class BriberyEffect extends OneShotEffect {
 
     public BriberyEffect() {
         super(Outcome.PutCardInPlay);

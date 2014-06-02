@@ -80,7 +80,7 @@ public class GlacialChasm extends CardImpl<GlacialChasm> {
         return new GlacialChasm(this);
     }
 }
-class SacrificeControllerEffect extends OneShotEffect<SacrificeControllerEffect>{
+class SacrificeControllerEffect extends OneShotEffect{
 
     private FilterPermanent filter;
     private DynamicValue count;
@@ -152,7 +152,7 @@ class SacrificeControllerEffect extends OneShotEffect<SacrificeControllerEffect>
 }
 
 
-class CantAttackEffect extends ReplacementEffectImpl<CantAttackEffect> {
+class CantAttackEffect extends ReplacementEffectImpl {
 
     public CantAttackEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

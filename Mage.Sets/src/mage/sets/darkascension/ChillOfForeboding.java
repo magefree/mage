@@ -71,7 +71,7 @@ public class ChillOfForeboding extends CardImpl<ChillOfForeboding> {
     }
 }
 
-class ChillOfForebodingEffect extends OneShotEffect<ChillOfForebodingEffect> {
+class ChillOfForebodingEffect extends OneShotEffect {
 
     public ChillOfForebodingEffect() {
         super(Outcome.Detriment);

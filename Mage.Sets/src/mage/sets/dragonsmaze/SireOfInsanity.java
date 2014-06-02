@@ -75,7 +75,7 @@ public class SireOfInsanity extends CardImpl<SireOfInsanity> {
 
 }
 
-class SireOfInsanityEffect extends OneShotEffect<SireOfInsanityEffect> {
+class SireOfInsanityEffect extends OneShotEffect {
     SireOfInsanityEffect() {
         super(Outcome.Discard);
         staticText = "each player discards his or her hand";

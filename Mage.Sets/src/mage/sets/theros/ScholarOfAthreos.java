@@ -70,7 +70,7 @@ public class ScholarOfAthreos extends CardImpl<ScholarOfAthreos> {
     }
 }
 
-class ScholarOfAthreosEffect extends OneShotEffect<ScholarOfAthreosEffect> {
+class ScholarOfAthreosEffect extends OneShotEffect {
 
     public ScholarOfAthreosEffect() {
         super(Outcome.Damage);

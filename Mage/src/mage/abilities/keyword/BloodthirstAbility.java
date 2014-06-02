@@ -47,7 +47,7 @@ public class BloodthirstAbility extends EntersBattlefieldAbility {
     }
 }
 
-class BloodthirstEffect extends OneShotEffect<BloodthirstEffect> {
+class BloodthirstEffect extends OneShotEffect {
     private int amount;
 
     BloodthirstEffect(int amount) {

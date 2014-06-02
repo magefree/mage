@@ -83,7 +83,7 @@ public class StrengthOfTheTajuru extends CardImpl<StrengthOfTheTajuru> {
     }
 }
 
-class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect<StrengthOfTheTajuruAddCountersTargetEffect> {
+class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect {
 
     public StrengthOfTheTajuruAddCountersTargetEffect() {
         super(Outcome.BoostCreature);

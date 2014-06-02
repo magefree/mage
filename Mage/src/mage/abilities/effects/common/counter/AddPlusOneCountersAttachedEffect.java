@@ -41,7 +41,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AddPlusOneCountersAttachedEffect extends OneShotEffect<AddPlusOneCountersAttachedEffect> {
+public class AddPlusOneCountersAttachedEffect extends OneShotEffect {
 
     private int amount;
 

@@ -70,7 +70,7 @@ public class LostInTheMist extends CardImpl<LostInTheMist> {
     }
 }
 
-class LostInTheMistEffect extends OneShotEffect<LostInTheMistEffect> {
+class LostInTheMistEffect extends OneShotEffect {
 
     public LostInTheMistEffect() {
         super(Outcome.ReturnToHand);

@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class TapAllEffect extends OneShotEffect<TapAllEffect> {
+public class TapAllEffect extends OneShotEffect {
 
     protected FilterPermanent filter;
 

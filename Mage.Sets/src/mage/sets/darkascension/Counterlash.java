@@ -75,7 +75,7 @@ public class Counterlash extends CardImpl<Counterlash> {
     }
 }
 
-class CounterlashEffect extends OneShotEffect<CounterlashEffect> {
+class CounterlashEffect extends OneShotEffect {
 
     public CounterlashEffect() {
         super(Outcome.Detriment);

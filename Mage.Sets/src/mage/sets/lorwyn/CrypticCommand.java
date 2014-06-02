@@ -90,7 +90,7 @@ public class CrypticCommand extends CardImpl<CrypticCommand> {
     }
 }
 
-class CrypticCommandEffect extends OneShotEffect<CrypticCommandEffect> {
+class CrypticCommandEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
     static {

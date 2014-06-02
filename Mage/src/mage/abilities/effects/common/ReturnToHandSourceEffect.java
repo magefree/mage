@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class ReturnToHandSourceEffect extends OneShotEffect<ReturnToHandSourceEffect> {
+public class ReturnToHandSourceEffect extends OneShotEffect {
 
     boolean fromBattlefieldOnly = false;
 

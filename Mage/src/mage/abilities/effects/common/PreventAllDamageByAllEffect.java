@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX
  */
-public class PreventAllDamageByAllEffect extends PreventionEffectImpl<PreventAllDamageByAllEffect> {
+public class PreventAllDamageByAllEffect extends PreventionEffectImpl {
 
     private FilterPermanent filter;
 

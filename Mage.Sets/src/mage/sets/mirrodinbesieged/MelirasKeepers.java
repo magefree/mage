@@ -71,7 +71,7 @@ public class MelirasKeepers extends CardImpl<MelirasKeepers> {
 
 }
 
-class MelirasKeepersEffect extends ReplacementEffectImpl<MelirasKeepersEffect> {
+class MelirasKeepersEffect extends ReplacementEffectImpl {
 
     public MelirasKeepersEffect() {
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);

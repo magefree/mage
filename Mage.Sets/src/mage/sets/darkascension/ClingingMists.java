@@ -77,7 +77,7 @@ public class ClingingMists extends CardImpl<ClingingMists> {
     }
 }
 
-class ClingingMistsEffect extends OneShotEffect<ClingingMistsEffect> {
+class ClingingMistsEffect extends OneShotEffect {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creatures");
 
@@ -106,7 +106,7 @@ class ClingingMistsEffect extends OneShotEffect<ClingingMistsEffect> {
 
 }
 
-class ClingingMistsEffect2 extends ReplacementEffectImpl<ClingingMistsEffect2> {
+class ClingingMistsEffect2 extends ReplacementEffectImpl {
 
     protected UUID creatureId;
 

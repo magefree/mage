@@ -40,7 +40,7 @@ import mage.players.Player;
  */
 
 
-public class DiscardHandControllerEffect extends OneShotEffect<DiscardHandControllerEffect> {
+public class DiscardHandControllerEffect extends OneShotEffect {
 
     public DiscardHandControllerEffect() {
         super(Outcome.Discard);

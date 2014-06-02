@@ -91,7 +91,7 @@ public class WardSliver extends CardImpl<WardSliver> {
     }
 }
 
-class WardSliverEffect extends OneShotEffect<WardSliverEffect> {
+class WardSliverEffect extends OneShotEffect {
 
     public WardSliverEffect() {
         super(Outcome.BoostCreature);
@@ -130,7 +130,7 @@ class WardSliverEffect extends OneShotEffect<WardSliverEffect> {
 
 }
 
-class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl<WardSliverGainAbilityControlledEffect> {
+class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Slivers");
 

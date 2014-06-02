@@ -80,7 +80,7 @@ public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityI
     }
 }
 
-class GainThatMuchLifeEffect extends OneShotEffect<GainThatMuchLifeEffect> {
+class GainThatMuchLifeEffect extends OneShotEffect {
 
     public GainThatMuchLifeEffect() {
         super(Outcome.GainLife);

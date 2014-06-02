@@ -99,7 +99,7 @@ public class ShattergangBrothers extends CardImpl<ShattergangBrothers> {
     }
 }
 
-class ShattergangBrothersEffect extends OneShotEffect<ShattergangBrothersEffect> {
+class ShattergangBrothersEffect extends OneShotEffect {
 
     private FilterControlledPermanent filter;
 

@@ -66,7 +66,7 @@ public class FossilFind extends CardImpl<FossilFind> {
     }
 }
 
-class FossilFindEffect extends OneShotEffect<FossilFindEffect> {
+class FossilFindEffect extends OneShotEffect {
 
     public FossilFindEffect() {
         super(Outcome.ReturnToHand);

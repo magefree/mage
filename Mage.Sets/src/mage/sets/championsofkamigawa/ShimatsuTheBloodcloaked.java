@@ -75,7 +75,7 @@ public class ShimatsuTheBloodcloaked extends CardImpl<ShimatsuTheBloodcloaked> {
     }
 }
 
-class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl<ShimatsuTheBloodcloakedEffect> {
+class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
     
     public ShimatsuTheBloodcloakedEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

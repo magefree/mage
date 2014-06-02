@@ -76,7 +76,7 @@ public class Seance extends CardImpl<Seance> {
     }
 }
 
-class SeanceEffect extends OneShotEffect<SeanceEffect> {
+class SeanceEffect extends OneShotEffect {
 
     public SeanceEffect() {
         super(Outcome.PutCreatureInPlay);

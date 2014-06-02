@@ -86,7 +86,7 @@ public class TezzeretTheSeeker extends CardImpl<TezzeretTheSeeker> {
     }
 }
 
-class TezzeretTheSeekerEffect2 extends OneShotEffect<TezzeretTheSeekerEffect2> {
+class TezzeretTheSeekerEffect2 extends OneShotEffect {
 
     public TezzeretTheSeekerEffect2() {
         super(Outcome.DrawCard);
@@ -133,7 +133,7 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect<TezzeretTheSeekerEffect2> {
     }
 }
 
-class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl<TezzeretTheSeekerEffect3> {
+class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl {
 
     public TezzeretTheSeekerEffect3() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);

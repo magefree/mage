@@ -125,7 +125,7 @@ class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class TalusPaladinEffect extends OneShotEffect<TalusPaladinEffect> {
+class TalusPaladinEffect extends OneShotEffect {
     
     public TalusPaladinEffect() {
         super(Outcome.Benefit);

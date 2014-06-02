@@ -97,7 +97,7 @@ public class RiseOfTheHobgoblins extends CardImpl<RiseOfTheHobgoblins> {
     }
 }
 
-class RiseOfTheHobgoblinsEffect extends OneShotEffect<RiseOfTheHobgoblinsEffect> {
+class RiseOfTheHobgoblinsEffect extends OneShotEffect {
 
     public RiseOfTheHobgoblinsEffect() {
         super(Outcome.PutCreatureInPlay);

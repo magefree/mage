@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LoseLifeAllPlayersEffect extends OneShotEffect<LoseLifeAllPlayersEffect> {
+public class LoseLifeAllPlayersEffect extends OneShotEffect {
 
     private final DynamicValue amount;
 

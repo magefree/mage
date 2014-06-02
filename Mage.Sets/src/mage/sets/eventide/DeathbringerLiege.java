@@ -93,7 +93,7 @@ public class DeathbringerLiege extends CardImpl<DeathbringerLiege> {
 
 }
 
-class DeathbringerLiegeEffect extends OneShotEffect<DeathbringerLiegeEffect> {
+class DeathbringerLiegeEffect extends OneShotEffect {
     DeathbringerLiegeEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy target creature if it's tapped";

@@ -83,7 +83,7 @@ public class DisruptingShoal extends CardImpl<DisruptingShoal> {
     }
 }
 
-class DisruptingShoalCounterTargetEffect extends OneShotEffect<DisruptingShoalCounterTargetEffect> {
+class DisruptingShoalCounterTargetEffect extends OneShotEffect {
 
     public DisruptingShoalCounterTargetEffect() {
         super(Outcome.Detriment);

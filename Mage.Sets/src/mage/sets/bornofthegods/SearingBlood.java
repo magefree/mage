@@ -73,7 +73,7 @@ public class SearingBlood extends CardImpl<SearingBlood> {
     }
 }
 
-class SearingBloodEffect extends OneShotEffect<SearingBloodEffect> {
+class SearingBloodEffect extends OneShotEffect {
 
     public SearingBloodEffect() {
         super(Outcome.Damage);
@@ -136,7 +136,7 @@ class SearingBloodDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 }
 
-class SearingBloodDelayedEffect extends OneShotEffect<SearingBloodDelayedEffect> {
+class SearingBloodDelayedEffect extends OneShotEffect {
 
     protected UUID target;
 

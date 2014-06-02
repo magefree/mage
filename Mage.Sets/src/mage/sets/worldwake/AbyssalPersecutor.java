@@ -73,7 +73,7 @@ public class AbyssalPersecutor extends CardImpl<AbyssalPersecutor> {
     }
 }
 
-class AbyssalPersecutorCannotWinEffect extends ReplacementEffectImpl<AbyssalPersecutorCannotWinEffect> {
+class AbyssalPersecutorCannotWinEffect extends ReplacementEffectImpl {
 
     AbyssalPersecutorCannotWinEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

@@ -80,7 +80,7 @@ public class InfernalTutor extends CardImpl<InfernalTutor> {
     }
 }
 
-class InfernalTutorEffect extends OneShotEffect<InfernalTutorEffect> {
+class InfernalTutorEffect extends OneShotEffect {
 
     public InfernalTutorEffect() {
         super(Outcome.Benefit);

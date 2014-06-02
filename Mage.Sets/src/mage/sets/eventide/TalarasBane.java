@@ -74,7 +74,7 @@ public class TalarasBane extends CardImpl<TalarasBane> {
     }
 }
 
-class TalarasBaneEffect extends OneShotEffect<TalarasBaneEffect> {
+class TalarasBaneEffect extends OneShotEffect {
     
     private static final FilterCard filter = new FilterCard("a green or white creature card");
     

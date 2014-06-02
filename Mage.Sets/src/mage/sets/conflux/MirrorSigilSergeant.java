@@ -95,7 +95,7 @@ public class MirrorSigilSergeant extends CardImpl<MirrorSigilSergeant> {
     }
 }
 
-class MirrorSigilSergeantEffect extends OneShotEffect<MirrorSigilSergeantEffect> {
+class MirrorSigilSergeantEffect extends OneShotEffect {
 
     public MirrorSigilSergeantEffect() {
         super(Outcome.PutCreatureInPlay);

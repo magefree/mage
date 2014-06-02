@@ -92,7 +92,7 @@ public class BorborygmosEnraged extends CardImpl<BorborygmosEnraged> {
     }
 }
 
-class BorborygmosEnragedEffect extends OneShotEffect<BorborygmosEnragedEffect> {
+class BorborygmosEnragedEffect extends OneShotEffect {
 
     public BorborygmosEnragedEffect() {
         super(Outcome.DrawCard);

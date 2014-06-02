@@ -128,7 +128,7 @@ class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 }
 
-class OpponentsLoseLifeEffect extends OneShotEffect<OpponentsLoseLifeEffect> {
+class OpponentsLoseLifeEffect extends OneShotEffect {
 
     public OpponentsLoseLifeEffect() {
         super(Outcome.Damage);

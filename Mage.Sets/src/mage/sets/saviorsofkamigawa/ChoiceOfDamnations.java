@@ -71,7 +71,7 @@ public class ChoiceOfDamnations extends CardImpl<ChoiceOfDamnations> {
     }
 }
 
-class ChoiceOfDamnationsEffect extends OneShotEffect<ChoiceOfDamnationsEffect> {
+class ChoiceOfDamnationsEffect extends OneShotEffect {
 
     public ChoiceOfDamnationsEffect() {
         super(Outcome.Benefit);

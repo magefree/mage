@@ -102,7 +102,7 @@ public class SpellstutterSprite extends CardImpl<SpellstutterSprite> {
     }
 }
 
-class SpellstutterSpriteCounterTargetEffect extends OneShotEffect<SpellstutterSpriteCounterTargetEffect> {
+class SpellstutterSpriteCounterTargetEffect extends OneShotEffect {
 
     public SpellstutterSpriteCounterTargetEffect() {
         super(Outcome.Detriment);

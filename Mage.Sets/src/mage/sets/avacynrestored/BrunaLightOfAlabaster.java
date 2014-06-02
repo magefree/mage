@@ -85,7 +85,7 @@ public class BrunaLightOfAlabaster extends CardImpl<BrunaLightOfAlabaster> {
     }
 }
 
-class BrunaLightOfAlabasterEffect extends OneShotEffect<BrunaLightOfAlabasterEffect> {
+class BrunaLightOfAlabasterEffect extends OneShotEffect {
 
     public BrunaLightOfAlabasterEffect() {
         super(Outcome.Benefit);

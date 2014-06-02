@@ -71,7 +71,7 @@ public class GiftOfTheGargantuan extends CardImpl<GiftOfTheGargantuan> {
     }
 }
 
-class GiftOfTheGargantuanEffect extends OneShotEffect<GiftOfTheGargantuanEffect> {
+class GiftOfTheGargantuanEffect extends OneShotEffect {
 
     public GiftOfTheGargantuanEffect() {
         super(Outcome.DrawCard);

@@ -88,7 +88,7 @@ public class IncendiaryCommand extends CardImpl<IncendiaryCommand> {
     }
 }
 
-class IncendiaryCommandDrawEffect extends OneShotEffect<IncendiaryCommandDrawEffect> {
+class IncendiaryCommandDrawEffect extends OneShotEffect {
 
     public IncendiaryCommandDrawEffect() {
         super(Outcome.Detriment);

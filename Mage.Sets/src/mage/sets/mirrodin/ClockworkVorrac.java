@@ -78,7 +78,7 @@ public class ClockworkVorrac extends CardImpl<ClockworkVorrac> {
     }
 }
 
-class ClockworkVorracEffect extends OneShotEffect<ClockworkVorracEffect> {
+class ClockworkVorracEffect extends OneShotEffect {
     ClockworkVorracEffect() {
         super(Outcome.UnboostCreature);
         staticText = "remove a +1/+1 counter from {this} at end of combat";

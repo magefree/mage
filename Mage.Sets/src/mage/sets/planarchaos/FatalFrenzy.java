@@ -77,7 +77,7 @@ public class FatalFrenzy extends CardImpl<FatalFrenzy> {
     }
 }
 
-class FatalFrenzyEffect extends OneShotEffect<FatalFrenzyEffect> {
+class FatalFrenzyEffect extends OneShotEffect {
 
     public FatalFrenzyEffect() {
         super(Outcome.Sacrifice);

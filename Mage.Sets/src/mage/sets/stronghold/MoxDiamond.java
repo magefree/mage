@@ -72,7 +72,7 @@ public class MoxDiamond extends CardImpl<MoxDiamond> {
     }
 }
 
-class MoxDiamondReplacementEffect extends ReplacementEffectImpl<MoxDiamondReplacementEffect> {
+class MoxDiamondReplacementEffect extends ReplacementEffectImpl {
 
     public MoxDiamondReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);

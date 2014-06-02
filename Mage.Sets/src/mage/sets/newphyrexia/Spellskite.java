@@ -77,7 +77,7 @@ public class Spellskite extends CardImpl<Spellskite> {
     }
 }
 
-class SpellskiteEffect extends OneShotEffect<SpellskiteEffect> {
+class SpellskiteEffect extends OneShotEffect {
 
     public SpellskiteEffect() {
         super(Outcome.Neutral);

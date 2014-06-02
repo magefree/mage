@@ -41,7 +41,7 @@ import mage.util.CardUtil;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class DrawCardSourceControllerEffect extends OneShotEffect<DrawCardSourceControllerEffect> {
+public class DrawCardSourceControllerEffect extends OneShotEffect {
 
     protected DynamicValue amount;
 

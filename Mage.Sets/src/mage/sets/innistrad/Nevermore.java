@@ -77,7 +77,7 @@ public class Nevermore extends CardImpl<Nevermore> {
     }
 
 }
-class NevermoreEffect1 extends OneShotEffect<NevermoreEffect1> {
+class NevermoreEffect1 extends OneShotEffect {
 
     public NevermoreEffect1() {
         super(Outcome.Detriment);
@@ -114,7 +114,7 @@ class NevermoreEffect1 extends OneShotEffect<NevermoreEffect1> {
 
 }
 
-class NevermoreEffect2 extends ReplacementEffectImpl<NevermoreEffect2> {
+class NevermoreEffect2 extends ReplacementEffectImpl {
 
     public NevermoreEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

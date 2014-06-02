@@ -129,7 +129,7 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl<HisokaMinamoSenseiDis
 
 }
 
-class HisokaMinamoSenseiCounterEffect extends OneShotEffect<HisokaMinamoSenseiCounterEffect> {
+class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
     HisokaMinamoSenseiCounterEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell if it has the same converted mana cost as the discarded card";

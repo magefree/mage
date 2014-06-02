@@ -61,7 +61,7 @@ import mage.util.CardUtil;
 //
 
 
-public class PopulateEffect extends OneShotEffect<PopulateEffect> {
+public class PopulateEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("token for populate");
     

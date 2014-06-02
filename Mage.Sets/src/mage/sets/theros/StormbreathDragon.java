@@ -88,7 +88,7 @@ public class StormbreathDragon extends CardImpl<StormbreathDragon> {
     }
 }
 
-class StormbreathDragonDamageEffect extends OneShotEffect<StormbreathDragonDamageEffect> {
+class StormbreathDragonDamageEffect extends OneShotEffect {
 
     public StormbreathDragonDamageEffect() {
         super(Outcome.Damage);

@@ -71,7 +71,7 @@ public class SlateStreetRuffian extends CardImpl<SlateStreetRuffian> {
     }
 }
 
-class SlateStreetRuffianDiscardEffect extends OneShotEffect<SlateStreetRuffianDiscardEffect> {
+class SlateStreetRuffianDiscardEffect extends OneShotEffect {
 
     public SlateStreetRuffianDiscardEffect() {
         super(Outcome.Discard);

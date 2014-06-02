@@ -81,7 +81,7 @@ public class HoardSmelterDragon extends CardImpl<HoardSmelterDragon> {
     }
 }
 
-class HoardSmelterEffect extends ContinuousEffectImpl<HoardSmelterEffect> {
+class HoardSmelterEffect extends ContinuousEffectImpl {
     private int costValue = 0;
 
     HoardSmelterEffect() {

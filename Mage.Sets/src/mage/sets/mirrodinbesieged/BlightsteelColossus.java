@@ -76,7 +76,7 @@ public class BlightsteelColossus extends CardImpl<BlightsteelColossus> {
 
 }
 
-class BlightsteelColossusEffect extends OneShotEffect<BlightsteelColossusEffect> {
+class BlightsteelColossusEffect extends OneShotEffect {
     BlightsteelColossusEffect() {
         super(Outcome.Benefit);
         staticText = "reveal {this} and shuffle it into its owner's library";

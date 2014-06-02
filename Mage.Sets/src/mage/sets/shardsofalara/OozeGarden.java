@@ -82,7 +82,7 @@ public class OozeGarden extends CardImpl<OozeGarden> {
     }
 }
 
-class OozeGardenCreateTokenEffect extends OneShotEffect<OozeGardenCreateTokenEffect> {
+class OozeGardenCreateTokenEffect extends OneShotEffect {
 
     public OozeGardenCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);

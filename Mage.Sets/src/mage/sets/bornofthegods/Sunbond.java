@@ -84,7 +84,7 @@ public class Sunbond extends CardImpl<Sunbond> {
     }
 }
 
-class SunbondEffect extends OneShotEffect<SunbondEffect> {
+class SunbondEffect extends OneShotEffect {
     
     public SunbondEffect() {
         super(Outcome.Benefit);

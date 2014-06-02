@@ -39,7 +39,7 @@ import mage.game.events.GameEvent;
  *
  * @author jeffwadsworth
  */
-public class PreventCombatDamageBySourceEffect extends PreventionEffectImpl<PreventCombatDamageBySourceEffect> {
+public class PreventCombatDamageBySourceEffect extends PreventionEffectImpl {
 
     public PreventCombatDamageBySourceEffect(Duration duration) {
             super(duration, Integer.MAX_VALUE, true);

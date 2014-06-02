@@ -176,7 +176,7 @@ class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
 
 }
 
-class RavagerOfTheFellsEffect extends OneShotEffect<RavagerOfTheFellsEffect> {
+class RavagerOfTheFellsEffect extends OneShotEffect {
 
     public RavagerOfTheFellsEffect() {
         super(Outcome.Damage);

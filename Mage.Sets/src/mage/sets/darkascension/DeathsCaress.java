@@ -70,7 +70,7 @@ public class DeathsCaress extends CardImpl<DeathsCaress> {
     }
 }
 
-class DeathsCaressEffect extends OneShotEffect<DeathsCaressEffect> {
+class DeathsCaressEffect extends OneShotEffect {
 
     public DeathsCaressEffect() {
         super(Outcome.GainLife);

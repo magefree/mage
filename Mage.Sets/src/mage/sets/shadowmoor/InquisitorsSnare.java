@@ -75,7 +75,7 @@ public class InquisitorsSnare extends CardImpl<InquisitorsSnare> {
     }
 }
 
-class InquisitorsSnareEffect extends OneShotEffect<InquisitorsSnareEffect> {
+class InquisitorsSnareEffect extends OneShotEffect {
 
     public InquisitorsSnareEffect() {
         super(Outcome.Detriment);

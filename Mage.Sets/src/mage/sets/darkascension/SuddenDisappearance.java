@@ -72,7 +72,7 @@ public class SuddenDisappearance extends CardImpl<SuddenDisappearance> {
     }
 }
 
-class SuddenDisappearanceEffect extends OneShotEffect<SuddenDisappearanceEffect> {
+class SuddenDisappearanceEffect extends OneShotEffect {
 
     private static FilterNonlandPermanent filter = new FilterNonlandPermanent();
 

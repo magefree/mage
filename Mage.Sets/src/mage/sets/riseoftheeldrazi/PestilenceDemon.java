@@ -73,7 +73,7 @@ public class PestilenceDemon extends CardImpl<PestilenceDemon> {
 
 }
 
-class PestilenceDemonEffect extends OneShotEffect<PestilenceDemonEffect> {
+class PestilenceDemonEffect extends OneShotEffect {
     PestilenceDemonEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 1 damage to each creature and each player";

@@ -28,13 +28,20 @@
 
 package mage.player.ai;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
@@ -48,7 +55,6 @@ import mage.players.Player;
 import mage.target.Target;
 import org.apache.log4j.Logger;
 
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -56,12 +62,12 @@ import org.apache.log4j.Logger;
 public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 
     private static final transient Logger logger = Logger.getLogger(SimulatedPlayer2.class);
-    private boolean isSimulatedPlayer;
+    private final boolean isSimulatedPlayer;
     private transient ConcurrentLinkedQueue<Ability> allActions;
     private boolean forced;
     private static PassAbility pass = new PassAbility();
 
-    private List<String> suggested;
+    private final List<String> suggested;
 
     public SimulatedPlayer2(UUID id, boolean isSimulatedPlayer, List<String> suggested) {
         super(id);
@@ -73,7 +79,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
     public SimulatedPlayer2(final SimulatedPlayer2 player) {
         super(player);
         this.isSimulatedPlayer = player.isSimulatedPlayer;
-        this.suggested = new ArrayList<String>();
+        this.suggested = new ArrayList<>();
         for (String s : player.suggested) {
             this.suggested.add(s);
         }
@@ -86,13 +92,13 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
     }
 
     public List<Ability> simulatePriority(Game game) {
-        allActions = new ConcurrentLinkedQueue<Ability>();
+        allActions = new ConcurrentLinkedQueue<>();
         Game sim = game.copy();
-
+        sim.setSimulation(true);
         forced = false;
         simulateOptions(sim);
 
-        ArrayList<Ability> list = new ArrayList<Ability>(allActions);
+        ArrayList<Ability> list = new ArrayList<>(allActions);
         Collections.reverse(list);
 
         if (!forced) {
@@ -170,7 +176,9 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
                         // add the specific value for x
                         newAbility.getManaCostsToPay().add(new ManaCostsImpl(new StringBuilder("{").append(xAmount).append("}").toString()));
                         newAbility.getManaCostsToPay().setX(xAmount);
-                        varCost.setPaid();
+                        if (varCost != null) {
+                            varCost.setPaid();
+                        }
                         card.adjustTargets(newAbility, game);
                         // add the different possible target option for the specific X value
                         if (newAbility.getTargets().getUnchosen().size() > 0) {
@@ -211,7 +219,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
         if (suggested == null || suggested.isEmpty()) {
             return playables;
         }
-        List<Ability> filtered = new ArrayList<Ability>();
+        List<Ability> filtered = new ArrayList<>();
         for (Ability ability : playables) {
             Card card = game.getCard(ability.getSourceId());
             for (String s : suggested) {
@@ -235,7 +243,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
         if (suggested == null || suggested.isEmpty()) {
             return options;
         }
-        List<Ability> filtered = new ArrayList<Ability>();
+        List<Ability> filtered = new ArrayList<>();
         for (Ability option : options) {
             if (option.getTargets().size() > 0 && option.getTargets().get(0).getMaxNumberOfTargets() == 1) {
                 Card card = game.getCard(ability.getSourceId());
@@ -245,15 +253,15 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
                     if (groups.length == 2) {
                         if (groups[0].equals(card.getName()) && groups[1].startsWith("name=")) {
                             // extract target and compare to suggested
-                            String name = groups[1].split("=")[1];
+                            String targetName = groups[1].split("=")[1];
                             Player player = game.getPlayer(option.getFirstTarget());
-                            if (player != null && name.equals(player.getName())) {
+                            if (player != null && targetName.equals(player.getName())) {
                                 System.out.println("matched(option): " + s);
                                 filtered.add(option);
                                 return filtered;
                             } else {
                                 Card target = game.getCard(option.getFirstTarget());
-                                if (target != null && target.getName().equals(name)) {
+                                if (target != null && target.getName().equals(targetName)) {
                                     System.out.println("matched(option): " + s);
                                     filtered.add(option);
                                     return filtered;
@@ -323,7 +331,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
     }
 
     public List<Combat> addAttackers(Game game) {
-        Map<Integer, Combat> engagements = new HashMap<Integer, Combat>();
+        Map<Integer, Combat> engagements = new HashMap<>();
         //useful only for two player games - will only attack first opponent
         UUID defenderId = game.getOpponents(playerId).iterator().next();
         List<Permanent> attackersList = super.getAvailableAttackers(game);
@@ -338,8 +346,9 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
                 binary.insert(0, "0");
             }
             for (int j = 0; j < attackersList.size(); j++) {
-                if (binary.charAt(j) == '1')
+                if (binary.charAt(j) == '1') {
                     sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, sim);
+                }
             }
             if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null) {
                 logger.debug("simulating -- found redundant attack combination");
@@ -348,7 +357,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
                 logger.debug("simulating -- attack:" + sim.getCombat().getGroups().size());
             }
         }
-        List list = new ArrayList<Combat>(engagements.values());
+        List list = new ArrayList<>(engagements.values());
         Collections.sort(list, new Comparator<Combat>() {
             @Override
             public int compare(Combat o1, Combat o2) {
@@ -359,9 +368,11 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
     }
 
     public List<Combat> addBlockers(Game game) {
-        Map<Integer, Combat> engagements = new HashMap<Integer, Combat>();
+        Map<Integer, Combat> engagements = new HashMap<>();
         int numGroups = game.getCombat().getGroups().size();
-        if (numGroups == 0) return new ArrayList<Combat>();
+        if (numGroups == 0) {
+            return new ArrayList<>();
+        }
 
         //add a node with no blockers
         Game sim = game.copy();
@@ -371,12 +382,13 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
         List<Permanent> blockers = getAvailableBlockers(game);
         addBlocker(game, blockers, engagements);
 
-        return new ArrayList<Combat>(engagements.values());
+        return new ArrayList<>(engagements.values());
     }
 
     protected void addBlocker(Game game, List<Permanent> blockers, Map<Integer, Combat> engagements) {
-        if (blockers.isEmpty())
+        if (blockers.isEmpty()) {
             return;
+        }
         int numGroups = game.getCombat().getGroups().size();
         //try to block each attacker with each potential blocker
         Permanent blocker = blockers.get(0);
@@ -386,8 +398,9 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
             if (game.getCombat().getGroups().get(i).canBlock(blocker, game)) {
                 Game sim = game.copy();
                 sim.getCombat().getGroups().get(i).addBlocker(blocker.getId(), playerId, sim);
-                if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null)
+                if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null) {
                     logger.debug("simulating -- found redundant block combination");
+                }
                 addBlocker(sim, remaining, engagements);  // and recurse minus the used blocker
             }
         }
@@ -408,7 +421,9 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
         else {
             SimulationNode2 parent = (SimulationNode2) game.getCustomData();
             int depth = parent.getDepth() - 1;
-            if (depth == 0) return true;
+            if (depth == 0) {
+                return true;
+            }
             logger.debug("simulating -- triggered ability - adding children:" + options.size());
             for (Ability option: options) {
                 addAbilityNode(parent, option, depth, game);

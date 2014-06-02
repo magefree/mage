@@ -70,7 +70,7 @@ public class AgonizingMemories extends CardImpl<AgonizingMemories> {
     }
 }
 
-class AgonizingMemoriesEffect extends OneShotEffect<AgonizingMemoriesEffect> {
+class AgonizingMemoriesEffect extends OneShotEffect {
 
     public AgonizingMemoriesEffect() {
         super(Outcome.Discard);

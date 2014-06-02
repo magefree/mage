@@ -11,7 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
-public class CopyTokenEffect extends ContinuousEffectImpl<CopyTokenEffect> {
+public class CopyTokenEffect extends ContinuousEffectImpl {
     protected Token token;
 
     public CopyTokenEffect(Token token) {

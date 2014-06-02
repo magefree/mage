@@ -74,7 +74,7 @@ public class DisasterRadius extends CardImpl<DisasterRadius> {
     }
 }
 
-class DisasterRadiusEffect extends OneShotEffect<DisasterRadiusEffect> {
+class DisasterRadiusEffect extends OneShotEffect {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control");
     

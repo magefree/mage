@@ -97,7 +97,7 @@ class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class LightmineFieldEffect extends OneShotEffect<LightmineFieldEffect> {
+class LightmineFieldEffect extends OneShotEffect {
 
     public LightmineFieldEffect() {
         super(Outcome.Damage);

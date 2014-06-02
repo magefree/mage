@@ -81,7 +81,7 @@ public class GhostlyPossession extends CardImpl<GhostlyPossession> {
     }
 }
 
-class GhostlyPossessionEffect extends PreventionEffectImpl<GhostlyPossessionEffect> {
+class GhostlyPossessionEffect extends PreventionEffectImpl {
 
     public GhostlyPossessionEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, true);

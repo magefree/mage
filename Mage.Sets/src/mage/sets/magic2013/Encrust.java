@@ -88,7 +88,7 @@ public class Encrust extends CardImpl<Encrust> {
     }
 }
 
-class EncrustEffect extends ReplacementEffectImpl<EncrustEffect> {
+class EncrustEffect extends ReplacementEffectImpl {
 
     public EncrustEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

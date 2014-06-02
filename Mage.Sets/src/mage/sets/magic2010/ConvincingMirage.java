@@ -91,7 +91,7 @@ public class ConvincingMirage extends CardImpl<ConvincingMirage> {
     }
 }
 
-class ConvincingMirageEffect extends OneShotEffect<ConvincingMirageEffect> {
+class ConvincingMirageEffect extends OneShotEffect {
 
     public ConvincingMirageEffect() {
         super(Outcome.Neutral);
@@ -127,7 +127,7 @@ class ConvincingMirageEffect extends OneShotEffect<ConvincingMirageEffect> {
     }
 }
 
-class ConvincingMirageContinousEffect extends ContinuousEffectImpl<ConvincingMirageContinousEffect> {
+class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
 
     public ConvincingMirageContinousEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

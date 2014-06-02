@@ -65,7 +65,7 @@ public class BalanceOfPower extends CardImpl<BalanceOfPower> {
     }
 }
 
-class BalanceOfPowerEffect extends OneShotEffect<BalanceOfPowerEffect> {
+class BalanceOfPowerEffect extends OneShotEffect {
 
     public BalanceOfPowerEffect() {
         super(Outcome.DrawCard);

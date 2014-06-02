@@ -42,7 +42,7 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 
-public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl<CanBlockAdditionalCreatureEffect> {
+public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
 
     protected int amount;
 

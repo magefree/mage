@@ -87,7 +87,7 @@ public class Hankyu extends CardImpl<Hankyu> {
     }
 }
 
-class HankyuAddCounterEffect extends OneShotEffect<HankyuAddCounterEffect> {
+class HankyuAddCounterEffect extends OneShotEffect {
 
         private UUID effectGivingEquipmentId;
 
@@ -120,7 +120,7 @@ class HankyuAddCounterEffect extends OneShotEffect<HankyuAddCounterEffect> {
 }
 
 
-class HankyuDealsDamageEffect extends OneShotEffect<HankyuDealsDamageEffect> {
+class HankyuDealsDamageEffect extends OneShotEffect {
 
     public HankyuDealsDamageEffect() {
         super(Outcome.Damage);

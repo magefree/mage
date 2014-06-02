@@ -80,7 +80,7 @@ public class FiligreeFracture extends CardImpl<FiligreeFracture> {
     }
 }
 
-class FiligreeFractureEffect extends OneShotEffect<FiligreeFractureEffect> {
+class FiligreeFractureEffect extends OneShotEffect {
 
     public FiligreeFractureEffect() {
         super(Outcome.DrawCard);

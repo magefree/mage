@@ -104,7 +104,7 @@ class GoblinLackeyTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class GoblinLackeyEffect extends OneShotEffect<GoblinLackeyEffect> {
+class GoblinLackeyEffect extends OneShotEffect {
 
     public GoblinLackeyEffect() {
         super(Outcome.PutCreatureInPlay);

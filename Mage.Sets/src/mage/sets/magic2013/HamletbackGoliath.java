@@ -111,7 +111,7 @@ class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class HamletbackGoliathEffect extends OneShotEffect<HamletbackGoliathEffect> {
+class HamletbackGoliathEffect extends OneShotEffect {
     HamletbackGoliathEffect() {
         super(Outcome.BoostCreature);
     }

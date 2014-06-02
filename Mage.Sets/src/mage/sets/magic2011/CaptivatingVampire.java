@@ -94,7 +94,7 @@ public class CaptivatingVampire extends CardImpl<CaptivatingVampire> {
 
 }
 
-class CaptivatingVampireEffect extends ContinuousEffectImpl<CaptivatingVampireEffect> {
+class CaptivatingVampireEffect extends ContinuousEffectImpl {
 
     public CaptivatingVampireEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

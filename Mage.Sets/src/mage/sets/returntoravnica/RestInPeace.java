@@ -91,7 +91,7 @@ public class RestInPeace extends CardImpl<RestInPeace> {
     }
 }
 
-class RestInPeaceExileAllEffect extends OneShotEffect<RestInPeaceExileAllEffect> {
+class RestInPeaceExileAllEffect extends OneShotEffect {
 
     public RestInPeaceExileAllEffect() {
         super(Outcome.Detriment);
@@ -125,7 +125,7 @@ class RestInPeaceExileAllEffect extends OneShotEffect<RestInPeaceExileAllEffect>
     }
 }
 
-class RestInPeaceReplacementEffect extends ReplacementEffectImpl<RestInPeaceReplacementEffect> {
+class RestInPeaceReplacementEffect extends ReplacementEffectImpl {
 
     public RestInPeaceReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);

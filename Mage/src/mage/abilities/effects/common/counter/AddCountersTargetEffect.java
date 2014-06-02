@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffect> {
+public class AddCountersTargetEffect extends OneShotEffect {
 
     private Counter counter;
     private DynamicValue amount;

@@ -80,7 +80,7 @@ public class StormAbility extends TriggeredAbilityImpl {
     }
 }
 
-class StormEffect extends OneShotEffect<StormEffect> {
+class StormEffect extends OneShotEffect {
 
     public StormEffect() {
         super(Outcome.Copy);

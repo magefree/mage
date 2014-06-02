@@ -76,7 +76,7 @@ public class WingPuncture extends CardImpl<WingPuncture> {
     }
 }
 
-class WingPunctureEffect extends OneShotEffect<WingPunctureEffect> {
+class WingPunctureEffect extends OneShotEffect {
 
     public WingPunctureEffect() {
         super(Outcome.Damage);

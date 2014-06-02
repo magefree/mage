@@ -73,7 +73,7 @@ public class DecoratedGriffin extends CardImpl<DecoratedGriffin> {
     }
 }
 
-class DecoratedGriffinPreventEffect extends PreventionEffectImpl<DecoratedGriffinPreventEffect> {
+class DecoratedGriffinPreventEffect extends PreventionEffectImpl {
 
     public DecoratedGriffinPreventEffect() {
         super(Duration.EndOfTurn);

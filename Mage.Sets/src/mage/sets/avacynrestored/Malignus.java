@@ -111,7 +111,7 @@ class HighestLifeTotalAmongOpponentsCount implements DynamicValue {
     }
 }
 
-class MalignusEffect extends ReplacementEffectImpl<MalignusEffect> {
+class MalignusEffect extends ReplacementEffectImpl {
 
     public MalignusEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

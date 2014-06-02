@@ -86,7 +86,7 @@ public class StalkingVengeance extends CardImpl<StalkingVengeance> {
     }
 }
 
-class StalkingVengeanceDamageEffect extends OneShotEffect<StalkingVengeanceDamageEffect> {
+class StalkingVengeanceDamageEffect extends OneShotEffect {
 
     public StalkingVengeanceDamageEffect() {
         super(Outcome.Damage);

@@ -77,7 +77,7 @@ public class KnightOfNewAlara extends CardImpl<KnightOfNewAlara> {
     }
 }
 
-class KnightOfNewAlaraEffect extends ContinuousEffectImpl<KnightOfNewAlaraEffect> {
+class KnightOfNewAlaraEffect extends ContinuousEffectImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     static {

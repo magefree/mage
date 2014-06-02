@@ -86,7 +86,7 @@ public class ShivsEmbrace extends CardImpl<ShivsEmbrace> {
     }
 }
 
-class ShivsEmbraceEffect extends ContinuousEffectImpl<ShivsEmbraceEffect> {
+class ShivsEmbraceEffect extends ContinuousEffectImpl {
 
     public ShivsEmbraceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

@@ -64,7 +64,7 @@ public class TimeWarp extends CardImpl<TimeWarp> {
 
 }
 
-class TimeWarpEffect extends OneShotEffect<TimeWarpEffect> {
+class TimeWarpEffect extends OneShotEffect {
 
     public TimeWarpEffect() {
         super(Outcome.ExtraTurn);

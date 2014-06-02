@@ -69,7 +69,7 @@ public class LairDelve extends CardImpl<LairDelve> {
     }
 }
 
-class LairDelveEffect extends OneShotEffect<LairDelveEffect> {
+class LairDelveEffect extends OneShotEffect {
 
     public LairDelveEffect() {
         super(Outcome.DrawCard);

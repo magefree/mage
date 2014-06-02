@@ -157,7 +157,7 @@ class SummoningTrapAlternativeCost extends AlternativeCostImpl<SummoningTrapAlte
     }
 }
 
-class SummoningTrapEffect extends OneShotEffect<SummoningTrapEffect> {
+class SummoningTrapEffect extends OneShotEffect {
 
     public SummoningTrapEffect(final SummoningTrapEffect effect) {
         super(effect);

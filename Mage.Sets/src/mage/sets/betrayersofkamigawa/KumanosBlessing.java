@@ -90,7 +90,7 @@ public class KumanosBlessing extends CardImpl<KumanosBlessing> {
     }
 }
 
-class KumanosBlessingEffect extends ReplacementEffectImpl<KumanosBlessingEffect> {
+class KumanosBlessingEffect extends ReplacementEffectImpl {
 
     public KumanosBlessingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);

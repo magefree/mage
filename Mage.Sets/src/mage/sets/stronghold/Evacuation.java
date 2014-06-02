@@ -67,7 +67,7 @@ public class Evacuation extends CardImpl<Evacuation> {
 }
 
 
-class EvacuationEffect extends OneShotEffect<EvacuationEffect> {
+class EvacuationEffect extends OneShotEffect {
 
 
     

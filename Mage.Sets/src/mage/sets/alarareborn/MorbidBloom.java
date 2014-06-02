@@ -69,7 +69,7 @@ public class MorbidBloom extends CardImpl<MorbidBloom> {
     }
 }
 
-class MorbidBloomEffect extends OneShotEffect<MorbidBloomEffect> {
+class MorbidBloomEffect extends OneShotEffect {
 
     public MorbidBloomEffect() {
         super(Outcome.PutCreatureInPlay);

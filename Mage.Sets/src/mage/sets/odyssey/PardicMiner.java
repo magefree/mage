@@ -75,7 +75,7 @@ public class PardicMiner extends CardImpl<PardicMiner> {
     }
 }
 
-class PardicMinerEffect extends ReplacementEffectImpl<PardicMinerEffect> {
+class PardicMinerEffect extends ReplacementEffectImpl {
    
     public PardicMinerEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);

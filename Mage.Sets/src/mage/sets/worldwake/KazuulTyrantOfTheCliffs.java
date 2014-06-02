@@ -114,7 +114,7 @@ class KazuulTyrantOfTheCliffsTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class KazuulTyrantOfTheCliffsEffect extends OneShotEffect<KazuulTyrantOfTheCliffsEffect> {
+class KazuulTyrantOfTheCliffsEffect extends OneShotEffect {
 
     protected Cost cost;
     private static OgreToken token = new OgreToken();

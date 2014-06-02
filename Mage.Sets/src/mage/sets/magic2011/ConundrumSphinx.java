@@ -77,7 +77,7 @@ public class ConundrumSphinx extends CardImpl<ConundrumSphinx> {
 
 }
 
-class ConundrumSphinxEffect extends OneShotEffect<ConundrumSphinxEffect> {
+class ConundrumSphinxEffect extends OneShotEffect {
 
     public ConundrumSphinxEffect() {
         super(Outcome.DrawCard);

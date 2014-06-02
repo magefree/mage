@@ -72,7 +72,7 @@ public class RiteOfConsumption extends CardImpl<RiteOfConsumption> {
     }
 }
 
-class RiteOfConsumptionEffect extends OneShotEffect<RiteOfConsumptionEffect> {
+class RiteOfConsumptionEffect extends OneShotEffect {
 
     public RiteOfConsumptionEffect() {
         super(Outcome.Benefit);

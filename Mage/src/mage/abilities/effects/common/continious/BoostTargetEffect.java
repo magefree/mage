@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
+public class BoostTargetEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;

@@ -65,7 +65,7 @@ public class Traumatize extends CardImpl<Traumatize> {
     }
 }
 
-class TraumatizeEffect extends OneShotEffect<TraumatizeEffect> {
+class TraumatizeEffect extends OneShotEffect {
 
     public TraumatizeEffect() {
         super(Outcome.Detriment);

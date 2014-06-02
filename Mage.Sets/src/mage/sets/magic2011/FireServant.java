@@ -71,7 +71,7 @@ public class FireServant extends CardImpl<FireServant> {
 
 }
 
-class FireServantEffect extends ReplacementEffectImpl<FireServantEffect> {
+class FireServantEffect extends ReplacementEffectImpl {
 
     public FireServantEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);

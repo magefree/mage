@@ -78,7 +78,7 @@ public class DreadSlaver extends CardImpl<DreadSlaver> {
     }
 }
 
-class DreadSlaverEffect extends OneShotEffect<DreadSlaverEffect> {
+class DreadSlaverEffect extends OneShotEffect {
 
     public DreadSlaverEffect() {
         super(Outcome.Benefit);
@@ -111,7 +111,7 @@ class DreadSlaverEffect extends OneShotEffect<DreadSlaverEffect> {
 
 }
 
-class DreadSlaverContiniousEffect extends ContinuousEffectImpl<DreadSlaverContiniousEffect> {
+class DreadSlaverContiniousEffect extends ContinuousEffectImpl {
 
     public DreadSlaverContiniousEffect() {
         super(Duration.Custom, Outcome.Neutral);

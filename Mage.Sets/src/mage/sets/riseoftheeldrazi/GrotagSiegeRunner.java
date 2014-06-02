@@ -88,7 +88,7 @@ public class GrotagSiegeRunner extends CardImpl<GrotagSiegeRunner> {
     }
 }
 
-class GrotageSiegeRunnerEffect extends OneShotEffect<GrotageSiegeRunnerEffect> {
+class GrotageSiegeRunnerEffect extends OneShotEffect {
 
     public GrotageSiegeRunnerEffect() {
         super(Outcome.Damage);

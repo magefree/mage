@@ -81,7 +81,7 @@ public class RagDealer extends CardImpl<RagDealer> {
 
 }
 
-class RagDealerExileEffect extends OneShotEffect<RagDealerExileEffect> {
+class RagDealerExileEffect extends OneShotEffect {
 
     public RagDealerExileEffect() {
             super(Outcome.Exile);

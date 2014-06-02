@@ -89,7 +89,7 @@ public class GlaringSpotlight extends CardImpl<GlaringSpotlight> {
     }
 }
 
-class GlaringSpotlightEffect extends AsThoughEffectImpl<GlaringSpotlightEffect> {
+class GlaringSpotlightEffect extends AsThoughEffectImpl {
 
     public GlaringSpotlightEffect() {
         super(AsThoughEffectType.HEXPROOF, Duration.WhileOnBattlefield, Outcome.Benefit);

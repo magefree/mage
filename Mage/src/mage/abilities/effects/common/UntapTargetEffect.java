@@ -41,7 +41,7 @@ import mage.target.Target;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class UntapTargetEffect extends OneShotEffect<UntapTargetEffect> {
+public class UntapTargetEffect extends OneShotEffect {
 
     public UntapTargetEffect() {
         super(Outcome.Untap);

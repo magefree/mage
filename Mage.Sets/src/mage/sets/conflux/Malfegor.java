@@ -80,7 +80,7 @@ public class Malfegor extends CardImpl<Malfegor> {
     }
 }
 
-class MalfegorEffect extends OneShotEffect<MalfegorEffect> {
+class MalfegorEffect extends OneShotEffect {
 
     public MalfegorEffect() {
         super(Outcome.Neutral);

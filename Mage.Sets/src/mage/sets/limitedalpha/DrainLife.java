@@ -83,7 +83,7 @@ public class DrainLife extends CardImpl<DrainLife> {
     }
 }
 
-class DrainLifeEffect extends OneShotEffect<DrainLifeEffect> {
+class DrainLifeEffect extends OneShotEffect {
 
     public DrainLifeEffect() {
         super(Outcome.Damage);

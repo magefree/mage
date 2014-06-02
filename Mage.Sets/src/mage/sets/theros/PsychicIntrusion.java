@@ -77,7 +77,7 @@ public class PsychicIntrusion extends CardImpl<PsychicIntrusion> {
     }
 }
 
-class PsychicIntrusionExileEffect extends OneShotEffect<PsychicIntrusionExileEffect> {
+class PsychicIntrusionExileEffect extends OneShotEffect {
 
     private static final FilterNonlandCard filter = new FilterNonlandCard();
 
@@ -155,7 +155,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect<PsychicIntrusionExileEff
     }
 }
 
-class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl<PsychicIntrusionCastFromExileEffect> {
+class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
 
     private UUID cardId;
     private UUID exileId;
@@ -197,7 +197,7 @@ class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl<PsychicIntr
     }
 }
 
-class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl<PsychicIntrusionSpendAnyManaEffect> {
+class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl {
 
     private UUID cardId;
 

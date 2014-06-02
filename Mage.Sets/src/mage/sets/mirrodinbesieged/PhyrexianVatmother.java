@@ -71,7 +71,7 @@ public class PhyrexianVatmother extends CardImpl<PhyrexianVatmother> {
 
 }
 
-class PoisonControllerEffect extends OneShotEffect<PoisonControllerEffect> {
+class PoisonControllerEffect extends OneShotEffect {
 
     public PoisonControllerEffect() {
         super(Outcome.Damage);

@@ -78,7 +78,7 @@ public class DakraMystic extends CardImpl<DakraMystic> {
     }
 }
 
-class DakraMysticEffect extends OneShotEffect<DakraMysticEffect> {
+class DakraMysticEffect extends OneShotEffect {
     
     public DakraMysticEffect() {
         super(Outcome.Detriment);

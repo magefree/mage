@@ -71,7 +71,7 @@ public class CaravanVigil extends CardImpl<CaravanVigil> {
     }
 }
 
-class CaravanVigilEffect extends OneShotEffect<CaravanVigilEffect> {
+class CaravanVigilEffect extends OneShotEffect {
 
     public CaravanVigilEffect() {
         super(Outcome.PutLandInPlay);

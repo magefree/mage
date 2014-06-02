@@ -39,7 +39,7 @@ import mage.game.Game;
  *
  * @author noxx
  */
-public class ReturnToBattlefieldUnderYourControlSourceEffect extends OneShotEffect<ReturnToBattlefieldUnderYourControlSourceEffect> {
+public class ReturnToBattlefieldUnderYourControlSourceEffect extends OneShotEffect {
 
     public ReturnToBattlefieldUnderYourControlSourceEffect() {
         super(Outcome.Benefit);

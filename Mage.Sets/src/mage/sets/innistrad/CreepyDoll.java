@@ -107,7 +107,7 @@ class CreepyDollTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class CreepyDollEffect extends OneShotEffect<CreepyDollEffect> {
+class CreepyDollEffect extends OneShotEffect {
 
     CreepyDollEffect() {
         super(Outcome.DestroyPermanent);

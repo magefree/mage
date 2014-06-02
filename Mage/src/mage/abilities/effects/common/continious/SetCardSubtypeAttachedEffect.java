@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl<SetCardSubtypeAttachedEffect> {
+public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
 
     private List<String> setSubtypes = new ArrayList<>();
     private final AttachmentType attachmentType;

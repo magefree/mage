@@ -76,7 +76,7 @@ public class GeistSnatch extends CardImpl<GeistSnatch> {
     }
 }
 
-class GeistSnatchCounterTargetEffect extends OneShotEffect<GeistSnatchCounterTargetEffect> {
+class GeistSnatchCounterTargetEffect extends OneShotEffect {
 
     public GeistSnatchCounterTargetEffect() {
         super(Outcome.Detriment);

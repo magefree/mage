@@ -77,7 +77,7 @@ public class SigardaHostOfHerons extends CardImpl<SigardaHostOfHerons> {
     }
 }
 
-class SigardaHostOfHeronsEffect extends ReplacementEffectImpl<SigardaHostOfHeronsEffect> {
+class SigardaHostOfHeronsEffect extends ReplacementEffectImpl {
 
     public SigardaHostOfHeronsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

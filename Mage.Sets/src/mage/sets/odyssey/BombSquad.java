@@ -135,7 +135,7 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class BombSquadDamgeEffect extends OneShotEffect<BombSquadDamgeEffect> {
+class BombSquadDamgeEffect extends OneShotEffect {
 
     public BombSquadDamgeEffect() {
         super(Outcome.Benefit);
@@ -173,7 +173,7 @@ class BombSquadDamgeEffect extends OneShotEffect<BombSquadDamgeEffect> {
 }
 
 
-class BombSquadBeginningEffect extends OneShotEffect<BombSquadBeginningEffect> {
+class BombSquadBeginningEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a fuse counter on it");
     static {

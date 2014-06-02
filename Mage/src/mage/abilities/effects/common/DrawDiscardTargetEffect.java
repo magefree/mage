@@ -39,7 +39,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class DrawDiscardTargetEffect extends OneShotEffect<DrawDiscardTargetEffect> {
+public class DrawDiscardTargetEffect extends OneShotEffect {
 
     private int cardsToDraw;
     private int cardsToDiscard;

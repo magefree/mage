@@ -40,7 +40,7 @@ import mage.players.Player;
 /**
  * @author nantuko
  */
-public class LifeTotalCantChangeControllerEffect extends ContinuousEffectImpl<LifeTotalCantChangeControllerEffect> {
+public class LifeTotalCantChangeControllerEffect extends ContinuousEffectImpl {
 
     public LifeTotalCantChangeControllerEffect(Duration duration) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);

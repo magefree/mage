@@ -100,7 +100,7 @@ public class HellkiteTyrant extends CardImpl<HellkiteTyrant> {
     }
 }
 
-class HellkiteTyrantEffect extends OneShotEffect<HellkiteTyrantEffect> {
+class HellkiteTyrantEffect extends OneShotEffect {
 
     public HellkiteTyrantEffect() {
         super(Outcome.GainControl);
@@ -135,7 +135,7 @@ class HellkiteTyrantEffect extends OneShotEffect<HellkiteTyrantEffect> {
     }
 }
 
-class HellkiteTyrantControlEffect extends ContinuousEffectImpl<HellkiteTyrantControlEffect> {
+class HellkiteTyrantControlEffect extends ContinuousEffectImpl {
 
     private UUID controllerId;
 

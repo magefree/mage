@@ -86,7 +86,7 @@ public class JhoiraOfTheGhitu extends CardImpl<JhoiraOfTheGhitu> {
     }
 }
 
-class JhoiraOfTheGhituSuspendEffect extends OneShotEffect<JhoiraOfTheGhituSuspendEffect> {
+class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
 
     public JhoiraOfTheGhituSuspendEffect() {
         super(Outcome.PutCardInPlay);

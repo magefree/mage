@@ -76,7 +76,7 @@ public class GemOfBecoming extends CardImpl<GemOfBecoming> {
     }
 }
 
-class GemOfBecomingEffect extends OneShotEffect<GemOfBecomingEffect> {
+class GemOfBecomingEffect extends OneShotEffect {
 
     public GemOfBecomingEffect() {
         super(Outcome.DrawCard);

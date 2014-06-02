@@ -93,7 +93,7 @@ public class GremlinMine extends CardImpl<GremlinMine> {
     }
 }
 
-class GremlinMineEffect extends OneShotEffect<GremlinMineEffect> {
+class GremlinMineEffect extends OneShotEffect {
 
     public GremlinMineEffect() {
         super(Outcome.Detriment);

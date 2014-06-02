@@ -90,7 +90,7 @@ public class UnstoppableAsh extends CardImpl<UnstoppableAsh> {
     }
 }
 
-class UnstoppableAshEffect extends OneShotEffect<UnstoppableAshEffect> {
+class UnstoppableAshEffect extends OneShotEffect {
 
     UnstoppableAshEffect() {
         super(Outcome.Neutral);

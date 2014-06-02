@@ -78,7 +78,7 @@ public class SwanSong extends CardImpl<SwanSong> {
     }
 }
 
-class SwanSongEffect extends OneShotEffect<SwanSongEffect> {
+class SwanSongEffect extends OneShotEffect {
 
     public SwanSongEffect() {
         super(Outcome.Benefit);

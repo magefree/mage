@@ -76,7 +76,7 @@ public class DiscipleOfGriselbrand extends CardImpl<DiscipleOfGriselbrand> {
     }
 }
 
-class DiscipleOfGriselbrandEffect extends OneShotEffect<DiscipleOfGriselbrandEffect> {
+class DiscipleOfGriselbrandEffect extends OneShotEffect {
 
     public DiscipleOfGriselbrandEffect() {
         super(Outcome.GainLife);

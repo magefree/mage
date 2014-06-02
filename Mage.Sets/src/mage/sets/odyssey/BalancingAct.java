@@ -71,7 +71,7 @@ public class BalancingAct extends CardImpl<BalancingAct> {
     }
 }
 
-class BalancingActEffect extends OneShotEffect<BalancingActEffect> {
+class BalancingActEffect extends OneShotEffect {
 
    
     public BalancingActEffect() {

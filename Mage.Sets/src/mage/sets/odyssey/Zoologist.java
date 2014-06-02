@@ -77,7 +77,7 @@ public class Zoologist extends CardImpl<Zoologist> {
     }
 }
 
-class ZoologistEffect extends OneShotEffect<ZoologistEffect> {
+class ZoologistEffect extends OneShotEffect {
 
     public ZoologistEffect() {
         super(Outcome.PutCreatureInPlay);

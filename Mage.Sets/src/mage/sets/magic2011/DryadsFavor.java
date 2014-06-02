@@ -79,7 +79,7 @@ public class DryadsFavor extends CardImpl<DryadsFavor> {
     }
 }
 
-class DryadsFavorEffect extends ContinuousEffectImpl<DryadsFavorEffect> {
+class DryadsFavorEffect extends ContinuousEffectImpl {
 
     public DryadsFavorEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

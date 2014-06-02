@@ -70,7 +70,7 @@ public class Resurrection extends CardImpl<Resurrection> {
     }
 }
 
-class ResurrectionEffect extends OneShotEffect<ResurrectionEffect> {
+class ResurrectionEffect extends OneShotEffect {
 
     public ResurrectionEffect() {
         super(Outcome.PutCreatureInPlay);

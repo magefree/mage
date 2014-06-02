@@ -78,7 +78,7 @@ public class SneakAttack extends CardImpl<SneakAttack> {
     }
 }
 
-class SneakAttackEffect extends OneShotEffect<SneakAttackEffect> {
+class SneakAttackEffect extends OneShotEffect {
     
     private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
     

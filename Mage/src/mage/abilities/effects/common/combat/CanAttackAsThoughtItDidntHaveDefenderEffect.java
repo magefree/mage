@@ -40,7 +40,7 @@ import mage.game.Game;
  * @author LevelX2
  */
 
-public class CanAttackAsThoughtItDidntHaveDefenderEffect extends AsThoughEffectImpl<CanAttackAsThoughtItDidntHaveDefenderEffect> {
+public class CanAttackAsThoughtItDidntHaveDefenderEffect extends AsThoughEffectImpl {
 
     public CanAttackAsThoughtItDidntHaveDefenderEffect(Duration duration) {
         super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);

@@ -80,7 +80,7 @@ public class MistformSliver extends CardImpl<MistformSliver> {
     }
 }
 
- class MistformSliverEffect extends OneShotEffect<MistformSliverEffect> {
+ class MistformSliverEffect extends OneShotEffect {
 
         public MistformSliverEffect() {
             super(Outcome.Benefit);

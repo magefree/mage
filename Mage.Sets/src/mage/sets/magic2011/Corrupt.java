@@ -69,7 +69,7 @@ public class Corrupt extends CardImpl<Corrupt> {
 
 }
 
-class CorruptEffect extends OneShotEffect<CorruptEffect> {
+class CorruptEffect extends OneShotEffect {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamps");
 

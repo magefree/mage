@@ -16,7 +16,7 @@ import mage.game.Game;
  *
  * @author nantuko
  */
-public class ConditionalContinousEffect extends ContinuousEffectImpl<ConditionalContinousEffect> {
+public class ConditionalContinousEffect extends ContinuousEffectImpl {
 
     protected ContinuousEffect effect;
     protected ContinuousEffect otherwiseEffect;

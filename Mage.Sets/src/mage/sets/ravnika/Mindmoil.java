@@ -71,7 +71,7 @@ public class Mindmoil extends CardImpl<Mindmoil> {
     }
 }
 
-class MindmoilEffect extends OneShotEffect<MindmoilEffect> {
+class MindmoilEffect extends OneShotEffect {
 
     public MindmoilEffect() {
         super(Outcome.Neutral);

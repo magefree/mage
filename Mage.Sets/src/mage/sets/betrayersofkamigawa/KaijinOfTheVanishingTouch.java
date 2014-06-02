@@ -76,7 +76,7 @@ public class KaijinOfTheVanishingTouch extends CardImpl<KaijinOfTheVanishingTouc
     }
 }
 
-class KaijinOfTheVanishingTouchEffect extends OneShotEffect<KaijinOfTheVanishingTouchEffect> {
+class KaijinOfTheVanishingTouchEffect extends OneShotEffect {
 
     KaijinOfTheVanishingTouchEffect() {
         super(Outcome.ReturnToHand);

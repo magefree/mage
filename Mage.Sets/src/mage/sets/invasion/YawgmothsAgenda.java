@@ -81,7 +81,7 @@ public class YawgmothsAgenda extends CardImpl<YawgmothsAgenda> {
     }
 }
 
-class YawgmothsAgendaCanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl<YawgmothsAgendaCanPlayCardsFromGraveyardEffect> {
+class YawgmothsAgendaCanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
 
     public YawgmothsAgendaCanPlayCardsFromGraveyardEffect() {
         this(Duration.WhileOnBattlefield);
@@ -119,7 +119,7 @@ class YawgmothsAgendaCanPlayCardsFromGraveyardEffect extends ContinuousEffectImp
 
 }
 
-class YawgmothsAgendaReplacementEffect extends ReplacementEffectImpl<YawgmothsAgendaReplacementEffect> {
+class YawgmothsAgendaReplacementEffect extends ReplacementEffectImpl {
 
     public YawgmothsAgendaReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

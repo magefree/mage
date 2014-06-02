@@ -44,7 +44,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class CastAsThoughItHadFlashEffect extends AsThoughEffectImpl<CastAsThoughItHadFlashEffect> {
+public class CastAsThoughItHadFlashEffect extends AsThoughEffectImpl {
 
     private final FilterCard filter;
     private final boolean anyPlayer;

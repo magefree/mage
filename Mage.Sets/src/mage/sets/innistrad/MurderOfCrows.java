@@ -70,7 +70,7 @@ public class MurderOfCrows extends CardImpl<MurderOfCrows> {
     }
 }
 
-class MurderOfCrowsEffect extends OneShotEffect<MurderOfCrowsEffect> {
+class MurderOfCrowsEffect extends OneShotEffect {
 
     public MurderOfCrowsEffect() {
         super(Outcome.DrawCard);

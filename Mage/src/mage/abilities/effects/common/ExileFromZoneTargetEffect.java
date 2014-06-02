@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTargetEffect> {
+public class ExileFromZoneTargetEffect extends OneShotEffect {
 
     private Zone zone;
     private FilterCard filter;

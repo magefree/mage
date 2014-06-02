@@ -69,7 +69,7 @@ public class RoilingTerrain extends CardImpl<RoilingTerrain> {
     }
 }
 
-class RoilingTerrainEffect extends OneShotEffect<RoilingTerrainEffect> {
+class RoilingTerrainEffect extends OneShotEffect {
     
     private static final FilterCard filter = new FilterCard("lands in graveyard");
     

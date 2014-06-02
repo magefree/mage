@@ -72,7 +72,7 @@ public class StreamOfConsciousness extends CardImpl<StreamOfConsciousness> {
     }
 }
 
-class StreamOfConsciousnessEffect extends OneShotEffect<StreamOfConsciousnessEffect> {
+class StreamOfConsciousnessEffect extends OneShotEffect {
 
     public StreamOfConsciousnessEffect() {
         super(Outcome.Neutral);

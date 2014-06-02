@@ -76,7 +76,7 @@ public class AEtherVial extends CardImpl<AEtherVial> {
     }
 }
 
-class AEtherVialEffect extends OneShotEffect<AEtherVialEffect> {
+class AEtherVialEffect extends OneShotEffect {
 
     public AEtherVialEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -71,7 +71,7 @@ public class DryadMilitant extends CardImpl<DryadMilitant> {
     }
 }
 
-class DryadMilitantReplacementEffect extends ReplacementEffectImpl<DryadMilitantReplacementEffect> {
+class DryadMilitantReplacementEffect extends ReplacementEffectImpl {
 
     public DryadMilitantReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);

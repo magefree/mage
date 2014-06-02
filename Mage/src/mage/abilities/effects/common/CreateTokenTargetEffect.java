@@ -17,7 +17,7 @@ import mage.util.CardUtil;
  * @author Loki
  */
 
-public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffect> {
+public class CreateTokenTargetEffect extends OneShotEffect {
     private Token token;
     private DynamicValue amount;
     private boolean tapped;

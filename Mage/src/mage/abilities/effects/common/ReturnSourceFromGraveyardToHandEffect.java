@@ -40,7 +40,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect<ReturnSourceFromGraveyardToHandEffect> {
+public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
 
     public ReturnSourceFromGraveyardToHandEffect() {
         super(Outcome.PutCreatureInPlay);

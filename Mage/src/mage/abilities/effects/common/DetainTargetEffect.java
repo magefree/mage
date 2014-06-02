@@ -57,7 +57,7 @@ import mage.util.CardUtil;
 //    or block and its activated abilities can’t be activated.
 //
 
-public class DetainTargetEffect extends OneShotEffect<DetainTargetEffect> {
+public class DetainTargetEffect extends OneShotEffect {
 
     public DetainTargetEffect() {
         super(Outcome.LoseAbility);

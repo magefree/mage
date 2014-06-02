@@ -86,7 +86,7 @@ public class TeferiMageOfZhalfir extends CardImpl<TeferiMageOfZhalfir> {
     }
 }
 
-class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl<TeferiMageOfZhalfirAddFlashEffect> {
+class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
 
     public TeferiMageOfZhalfirAddFlashEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
@@ -133,7 +133,7 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl<TeferiMageO
     }
 }
 
-class TeferiMageOfZhalfirReplacementEffect extends ReplacementEffectImpl<TeferiMageOfZhalfirReplacementEffect> {
+class TeferiMageOfZhalfirReplacementEffect extends ReplacementEffectImpl {
     TeferiMageOfZhalfirReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Each opponent can cast spells only any time he or she could cast a sorcery";

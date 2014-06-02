@@ -66,7 +66,7 @@ public class Convalescence extends CardImpl<Convalescence> {
     }
 }
 
-class ConvalescenceEffect extends OneShotEffect<ConvalescenceEffect> {
+class ConvalescenceEffect extends OneShotEffect {
 
     public ConvalescenceEffect() {
         super(Outcome.Neutral);

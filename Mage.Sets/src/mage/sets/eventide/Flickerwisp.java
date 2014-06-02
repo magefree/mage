@@ -85,7 +85,7 @@ public class Flickerwisp extends CardImpl<Flickerwisp> {
     }
 }
 
-class FlickerwispEffect extends OneShotEffect<FlickerwispEffect> {
+class FlickerwispEffect extends OneShotEffect {
 
     public FlickerwispEffect() {
         super(Outcome.Detriment);

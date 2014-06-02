@@ -78,7 +78,7 @@ public class CoalitionRelic extends CardImpl<CoalitionRelic> {
     }
 }
 
-class CoalitionRelicEffect extends OneShotEffect<CoalitionRelicEffect> {
+class CoalitionRelicEffect extends OneShotEffect {
 
     public CoalitionRelicEffect() {
         super(Outcome.PutManaInPool);

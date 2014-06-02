@@ -71,7 +71,7 @@ public class DeathWish extends CardImpl<DeathWish> {
     }
 }
 
-class DeathWishEffect extends OneShotEffect<DeathWishEffect> {
+class DeathWishEffect extends OneShotEffect {
 
     private static final String choiceText = "Choose a card you own from outside the game, and put it into your hand";
 

@@ -89,7 +89,7 @@ public class OppressiveRays extends CardImpl<OppressiveRays> {
 }
 
 
-class OppressiveRaysEffect extends ReplacementEffectImpl<OppressiveRaysEffect> {
+class OppressiveRaysEffect extends ReplacementEffectImpl {
 
     private static final String effectText = "Enchanted creature can't attack or block unless its controller pays {3}";
 

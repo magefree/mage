@@ -72,7 +72,7 @@ public class SpoilsOfTheVault extends CardImpl<SpoilsOfTheVault> {
 }
 
 
-class SpoilsOfTheVaultEffect extends OneShotEffect<SpoilsOfTheVaultEffect> {
+class SpoilsOfTheVaultEffect extends OneShotEffect {
 
     public SpoilsOfTheVaultEffect() {
         super(Outcome.Damage);

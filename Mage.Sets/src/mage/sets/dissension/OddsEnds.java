@@ -95,7 +95,7 @@ public class OddsEnds extends SplitCard<OddsEnds> {
     }
 }
 
-class OddsEffect extends OneShotEffect<OddsEffect> {
+class OddsEffect extends OneShotEffect {
 
     public OddsEffect() {
         super(Outcome.Benefit);

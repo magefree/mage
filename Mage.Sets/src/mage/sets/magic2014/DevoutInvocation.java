@@ -72,7 +72,7 @@ public class DevoutInvocation extends CardImpl<DevoutInvocation> {
     }
 }
 
-class DevoutInvocationEffect extends OneShotEffect<DevoutInvocationEffect> {
+class DevoutInvocationEffect extends OneShotEffect {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
     

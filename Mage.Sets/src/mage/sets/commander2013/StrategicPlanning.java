@@ -69,7 +69,7 @@ public class StrategicPlanning extends CardImpl<StrategicPlanning> {
     }
 }
 
-class StrategicPlanningEffect extends OneShotEffect<StrategicPlanningEffect> {
+class StrategicPlanningEffect extends OneShotEffect {
 
     public StrategicPlanningEffect() {
         super(Outcome.DrawCard);

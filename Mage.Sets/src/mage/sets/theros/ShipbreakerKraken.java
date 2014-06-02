@@ -84,7 +84,7 @@ public class ShipbreakerKraken extends CardImpl<ShipbreakerKraken> {
     }
 }
 
-class ShipbreakerKrakenReplacementEffect extends ReplacementEffectImpl<ShipbreakerKrakenReplacementEffect> {
+class ShipbreakerKrakenReplacementEffect extends ReplacementEffectImpl {
 
     public ShipbreakerKrakenReplacementEffect() {
         super(Duration.OneUse, Outcome.Detriment);

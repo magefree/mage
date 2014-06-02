@@ -69,7 +69,7 @@ public class AllianceOfArms extends CardImpl<AllianceOfArms> {
     }
 }
 
-class AllianceOfArmsEffect extends OneShotEffect<AllianceOfArmsEffect> {
+class AllianceOfArmsEffect extends OneShotEffect {
 
     public AllianceOfArmsEffect() {
         super(Outcome.Detriment);

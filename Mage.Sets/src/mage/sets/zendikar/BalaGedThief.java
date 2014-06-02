@@ -93,7 +93,7 @@ public class BalaGedThief extends CardImpl<BalaGedThief> {
     }
 }
 
-class BalaGedThiefEffect extends OneShotEffect<BalaGedThiefEffect> {
+class BalaGedThiefEffect extends OneShotEffect {
 
     public BalaGedThiefEffect() {
         super(Outcome.Discard);

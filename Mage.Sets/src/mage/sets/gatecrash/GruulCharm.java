@@ -94,7 +94,7 @@ public class GruulCharm extends CardImpl<GruulCharm> {
     }
 }
 
-class GainControlAllEffect extends ContinuousEffectImpl<GainControlAllEffect> {
+class GainControlAllEffect extends ContinuousEffectImpl {
 
     final FilterPermanent filter;
 

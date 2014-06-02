@@ -77,7 +77,7 @@ public class UrgeToFeed extends CardImpl<UrgeToFeed> {
     }
 }
 
-class UrgeToFeedEffect extends OneShotEffect<UrgeToFeedEffect> {
+class UrgeToFeedEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped Vampire creatures you control");
 

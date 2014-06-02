@@ -80,7 +80,7 @@ public class MirkoVoskMindDrinker extends CardImpl<MirkoVoskMindDrinker> {
 
 }
 
-class MirkoVoskMindDrinkerEffect extends OneShotEffect<MirkoVoskMindDrinkerEffect> {
+class MirkoVoskMindDrinkerEffect extends OneShotEffect {
 
     public MirkoVoskMindDrinkerEffect() {
         super(Outcome.Benefit);

@@ -39,7 +39,7 @@ import mage.game.stack.Spell;
  * @author BetaSteward_at_googlemail.com
  *
  */
-public class ChooseNewTargetsTargetEffect extends OneShotEffect<ChooseNewTargetsTargetEffect> {
+public class ChooseNewTargetsTargetEffect extends OneShotEffect {
 
     private boolean forceChange;
     private boolean onlyOneTarget;

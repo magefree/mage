@@ -80,7 +80,7 @@ public class DuskmantleSeer extends CardImpl<DuskmantleSeer> {
     }
 }
 
-class DuskmantleSeerEffect extends OneShotEffect<DuskmantleSeerEffect> {
+class DuskmantleSeerEffect extends OneShotEffect {
 
     public DuskmantleSeerEffect() {
         super(Outcome.Detriment);

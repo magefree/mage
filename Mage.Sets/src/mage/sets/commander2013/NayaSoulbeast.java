@@ -82,7 +82,7 @@ public class NayaSoulbeast extends CardImpl<NayaSoulbeast> {
     }
 }
 
-class NayaSoulbeastCastEffect extends OneShotEffect<NayaSoulbeastCastEffect> {
+class NayaSoulbeastCastEffect extends OneShotEffect {
 
     public NayaSoulbeastCastEffect() {
         super(Outcome.Benefit);
@@ -124,7 +124,7 @@ class NayaSoulbeastCastEffect extends OneShotEffect<NayaSoulbeastCastEffect> {
     }
 }
 
-class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl<NayaSoulbeastReplacementEffect> {
+class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
 
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 

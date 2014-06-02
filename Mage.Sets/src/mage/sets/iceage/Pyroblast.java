@@ -73,7 +73,7 @@ public class Pyroblast extends CardImpl<Pyroblast> {
     }
 }
 
-class PyroblastCounterTargetEffect extends OneShotEffect<PyroblastCounterTargetEffect> {
+class PyroblastCounterTargetEffect extends OneShotEffect {
 
     public PyroblastCounterTargetEffect() {
         super(Outcome.Detriment);
@@ -104,7 +104,7 @@ class PyroblastCounterTargetEffect extends OneShotEffect<PyroblastCounterTargetE
 }
 
 
-class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
+class DestroyTargetEffect extends OneShotEffect {
 
 
     public DestroyTargetEffect() {

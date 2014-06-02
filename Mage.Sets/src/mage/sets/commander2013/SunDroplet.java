@@ -108,7 +108,7 @@ class SunDropletTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SunDropletEffect extends OneShotEffect<SunDropletEffect> {
+class SunDropletEffect extends OneShotEffect {
 
     public SunDropletEffect() {
         super(Outcome.Benefit);

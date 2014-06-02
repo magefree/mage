@@ -73,7 +73,7 @@ public class GravebaneZombie extends CardImpl<GravebaneZombie> {
     }
 }
 
-class GravebaneZombieEffect extends ReplacementEffectImpl<GravebaneZombieEffect> {
+class GravebaneZombieEffect extends ReplacementEffectImpl {
 
     GravebaneZombieEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

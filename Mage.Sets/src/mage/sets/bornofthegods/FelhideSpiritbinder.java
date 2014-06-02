@@ -90,7 +90,7 @@ public class FelhideSpiritbinder extends CardImpl<FelhideSpiritbinder> {
     }
 }
 
-class FelhideSpiritbinderEffect extends OneShotEffect<FelhideSpiritbinderEffect> {
+class FelhideSpiritbinderEffect extends OneShotEffect {
 
     public FelhideSpiritbinderEffect() {
         super(Outcome.PutCreatureInPlay);

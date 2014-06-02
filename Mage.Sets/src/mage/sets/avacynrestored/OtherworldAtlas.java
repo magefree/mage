@@ -70,7 +70,7 @@ public class OtherworldAtlas extends CardImpl<OtherworldAtlas> {
     }
 }
 
-class OtherworldAtlasDrawEffect extends OneShotEffect<OtherworldAtlasDrawEffect> {
+class OtherworldAtlasDrawEffect extends OneShotEffect {
 
     public OtherworldAtlasDrawEffect() {
         super(Outcome.DrawCard);

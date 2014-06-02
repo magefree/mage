@@ -51,7 +51,7 @@ public class UndyingAbility extends DiesTriggeredAbility {
     }
 }
 
-class UndyingEffect extends OneShotEffect<UndyingEffect> {
+class UndyingEffect extends OneShotEffect {
 
     public UndyingEffect() {
         super(Outcome.Benefit);
@@ -74,7 +74,7 @@ class UndyingEffect extends OneShotEffect<UndyingEffect> {
     }
 }
 
-class UndyingReplacementEffect extends ReplacementEffectImpl<UndyingReplacementEffect> {
+class UndyingReplacementEffect extends ReplacementEffectImpl {
 
     UndyingReplacementEffect() {
         super(Duration.OneUse, Outcome.BoostCreature, false);

@@ -72,7 +72,7 @@ public class SeaMonster extends CardImpl<SeaMonster> {
     }
 }
 
-class SeaMonsterEffect extends ReplacementEffectImpl<SeaMonsterEffect> {
+class SeaMonsterEffect extends ReplacementEffectImpl {
 
     public SeaMonsterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

@@ -68,7 +68,7 @@ public class OpenTheVaults extends CardImpl<OpenTheVaults> {
     }
 }
 
-class OpenTheVaultsEffect extends OneShotEffect<OpenTheVaultsEffect> {
+class OpenTheVaultsEffect extends OneShotEffect {
 
     public OpenTheVaultsEffect() {
         super(Outcome.PutCardInPlay);

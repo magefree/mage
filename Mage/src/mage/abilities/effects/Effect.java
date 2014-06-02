@@ -40,9 +40,8 @@ import mage.target.targetpointer.TargetPointer;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public interface Effect<T extends Effect<T>> extends Serializable {
+public interface Effect extends Serializable {
 
     UUID getId();
     void newId();
@@ -58,6 +57,6 @@ public interface Effect<T extends Effect<T>> extends Serializable {
     void setApplyEffectsAfter();
     boolean applyEffectsAfter();
 
-    T copy();
+    Effect copy();
 
 }

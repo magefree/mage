@@ -41,7 +41,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class DiscardHandTargetEffect extends OneShotEffect<DiscardHandTargetEffect> {
+public class DiscardHandTargetEffect extends OneShotEffect {
 
     protected String targetDescription;
     

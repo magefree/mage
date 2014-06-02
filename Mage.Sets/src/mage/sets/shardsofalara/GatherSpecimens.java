@@ -69,7 +69,7 @@ public class GatherSpecimens extends CardImpl<GatherSpecimens> {
     }
 }
 
-class GatherSpecimensReplacementEffect extends ReplacementEffectImpl<GatherSpecimensReplacementEffect> {
+class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard();
 

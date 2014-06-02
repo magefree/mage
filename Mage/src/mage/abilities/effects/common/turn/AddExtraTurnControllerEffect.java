@@ -37,7 +37,7 @@ import mage.players.Player;
 /**
  * @author noxx
  */
-public class AddExtraTurnControllerEffect extends OneShotEffect<AddExtraTurnControllerEffect> {
+public class AddExtraTurnControllerEffect extends OneShotEffect {
 
     public AddExtraTurnControllerEffect() {
         super(Outcome.ExtraTurn);

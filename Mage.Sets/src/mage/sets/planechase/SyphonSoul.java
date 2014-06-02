@@ -61,7 +61,7 @@ public class SyphonSoul extends CardImpl<SyphonSoul> {
     }
 }
 
-class SyphonSoulEffect extends OneShotEffect<SyphonSoulEffect> {
+class SyphonSoulEffect extends OneShotEffect {
     public SyphonSoulEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to each other player. You gain life equal to the damage dealt this way";

@@ -71,7 +71,7 @@ public class TheTabernacleAtPendrellVale extends CardImpl<TheTabernacleAtPendrel
 }
 
 
-class DestroySourceUnlessPaysEffect extends OneShotEffect<DestroySourceUnlessPaysEffect> {
+class DestroySourceUnlessPaysEffect extends OneShotEffect {
     protected Cost cost;
 
     public DestroySourceUnlessPaysEffect(Cost cost) {

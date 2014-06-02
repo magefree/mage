@@ -76,7 +76,7 @@ public class MindGrind extends CardImpl<MindGrind> {
     }
 }
 
-class MindGrindEffect extends OneShotEffect<MindGrindEffect> {
+class MindGrindEffect extends OneShotEffect {
 
     public MindGrindEffect() {
         super(Outcome.Discard);

@@ -73,7 +73,7 @@ public class OtherworldlyJourney extends CardImpl<OtherworldlyJourney> {
 
 }
 
-class OtherworldlyJourneyEffect extends OneShotEffect<OtherworldlyJourneyEffect> {
+class OtherworldlyJourneyEffect extends OneShotEffect {
 
     private static final String effectText = "Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it";
 

@@ -73,7 +73,7 @@ public class RelentlessAssault extends CardImpl<RelentlessAssault> {
     }
 }
 
-class RelentlessAssaultUntapEffect extends OneShotEffect<RelentlessAssaultUntapEffect> {
+class RelentlessAssaultUntapEffect extends OneShotEffect {
 
     public RelentlessAssaultUntapEffect() {
         super(Outcome.Benefit);
@@ -106,7 +106,7 @@ class RelentlessAssaultUntapEffect extends OneShotEffect<RelentlessAssaultUntapE
     }
 }
 
-class RelentlessAssaultAddPhasesEffect extends OneShotEffect<RelentlessAssaultAddPhasesEffect> {
+class RelentlessAssaultAddPhasesEffect extends OneShotEffect {
 
     public RelentlessAssaultAddPhasesEffect() {
         super(Outcome.Benefit);

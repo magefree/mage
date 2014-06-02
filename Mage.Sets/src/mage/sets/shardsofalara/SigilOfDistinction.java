@@ -81,7 +81,7 @@ public class SigilOfDistinction extends CardImpl<SigilOfDistinction> {
     }
 }
 
-class SigilOfDistinctionEffect extends OneShotEffect<SigilOfDistinctionEffect> {
+class SigilOfDistinctionEffect extends OneShotEffect {
     public SigilOfDistinctionEffect() {
         super(Outcome.Benefit);
     }

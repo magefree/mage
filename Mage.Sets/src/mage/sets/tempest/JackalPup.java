@@ -104,7 +104,7 @@ class JackalPupTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 
-class JackalPupEffect extends OneShotEffect<JackalPupEffect> {
+class JackalPupEffect extends OneShotEffect {
 
         public JackalPupEffect() {
             super(Outcome.Damage);

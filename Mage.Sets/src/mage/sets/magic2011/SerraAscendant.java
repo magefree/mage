@@ -77,7 +77,7 @@ public class SerraAscendant extends CardImpl<SerraAscendant> {
 
 }
 
-class SerraAscendantEffect extends ContinuousEffectImpl<SerraAscendantEffect> {
+class SerraAscendantEffect extends ContinuousEffectImpl {
 
     public SerraAscendantEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

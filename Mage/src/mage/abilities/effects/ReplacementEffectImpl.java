@@ -35,9 +35,8 @@ import mage.constants.Outcome;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class ReplacementEffectImpl<T extends ReplacementEffectImpl<T>> extends ContinuousEffectImpl<T> implements ReplacementEffect<T> {
+public abstract class ReplacementEffectImpl extends ContinuousEffectImpl implements ReplacementEffect {
 
     // 614.12
     // Some replacement effects modify how a permanent enters the battlefield. (See rules 614.1c-d.)

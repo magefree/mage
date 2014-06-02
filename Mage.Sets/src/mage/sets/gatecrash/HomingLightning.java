@@ -69,7 +69,7 @@ public class HomingLightning extends CardImpl<HomingLightning> {
     }
 }
 
-class HomingLightningEffect extends OneShotEffect<HomingLightningEffect> {
+class HomingLightningEffect extends OneShotEffect {
 
     public HomingLightningEffect() {
         super(Outcome.Damage);

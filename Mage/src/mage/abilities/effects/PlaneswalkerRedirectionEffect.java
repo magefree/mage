@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlaneswalkerRedirectionEffect extends RedirectionEffect<PlaneswalkerRedirectionEffect> {
+public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
 
     private static FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent();
 

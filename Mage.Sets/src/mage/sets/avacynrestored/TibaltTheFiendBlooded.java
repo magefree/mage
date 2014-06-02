@@ -99,7 +99,7 @@ public class TibaltTheFiendBlooded extends CardImpl<TibaltTheFiendBlooded> {
     }
 }
 
-class TibaltTheFiendBloodedFirstEffect extends OneShotEffect<TibaltTheFiendBloodedFirstEffect> {
+class TibaltTheFiendBloodedFirstEffect extends OneShotEffect {
 
     public TibaltTheFiendBloodedFirstEffect() {
         super(Outcome.Benefit);
@@ -130,7 +130,7 @@ class TibaltTheFiendBloodedFirstEffect extends OneShotEffect<TibaltTheFiendBlood
     }
 }
 
-class TibaltTheFiendBloodedThirdEffect extends OneShotEffect<TibaltTheFiendBloodedThirdEffect> {
+class TibaltTheFiendBloodedThirdEffect extends OneShotEffect {
 
     public TibaltTheFiendBloodedThirdEffect() {
         super(Outcome.GainControl);
@@ -164,7 +164,7 @@ class TibaltTheFiendBloodedThirdEffect extends OneShotEffect<TibaltTheFiendBlood
     }
 }
 
-class TibaltTheFiendBloodedControlEffect extends ContinuousEffectImpl<TibaltTheFiendBloodedControlEffect> {
+class TibaltTheFiendBloodedControlEffect extends ContinuousEffectImpl {
 
     private final UUID controllerId;
 

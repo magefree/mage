@@ -66,7 +66,7 @@ public class GhoulcallersBell extends CardImpl<GhoulcallersBell> {
     }
 }
 
-class GhoulcallersBellEffect extends OneShotEffect<GhoulcallersBellEffect> {
+class GhoulcallersBellEffect extends OneShotEffect {
 
     public GhoulcallersBellEffect() {
         super(Outcome.Discard);

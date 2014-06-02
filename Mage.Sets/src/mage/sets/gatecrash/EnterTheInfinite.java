@@ -101,7 +101,7 @@ class CardsInControllerLibraryCount implements DynamicValue {
     }
 }
 
-class PutCardOnLibraryEffect extends OneShotEffect<PutCardOnLibraryEffect> {
+class PutCardOnLibraryEffect extends OneShotEffect {
 
     public PutCardOnLibraryEffect() {
         super(Outcome.DrawCard);

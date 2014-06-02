@@ -71,7 +71,7 @@ public class Flash extends CardImpl<Flash> {
     }
 }
 
-class FlashEffect extends OneShotEffect<FlashEffect> {
+class FlashEffect extends OneShotEffect {
     
     private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
 

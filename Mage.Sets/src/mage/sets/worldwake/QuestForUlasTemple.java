@@ -77,7 +77,7 @@ public class QuestForUlasTemple extends CardImpl<QuestForUlasTemple> {
     }
 }
 
-class QuestForUlasTempleEffect extends OneShotEffect<QuestForUlasTempleEffect> {
+class QuestForUlasTempleEffect extends OneShotEffect {
 
     public QuestForUlasTempleEffect() {
         super(Outcome.Benefit);
@@ -146,7 +146,7 @@ class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class QuestForUlasTempleEffect2 extends OneShotEffect<QuestForUlasTempleEffect2> {
+class QuestForUlasTempleEffect2 extends OneShotEffect {
 
     private static final String query = "Do you want to put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield?";
     private static final FilterCreatureCard filter = new FilterCreatureCard("Kraken, Leviathan, Octopus, or Serpent creature card from your hand");

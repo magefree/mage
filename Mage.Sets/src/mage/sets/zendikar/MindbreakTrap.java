@@ -158,7 +158,7 @@ class MindbreakTrapAlternativeCost extends AlternativeCostImpl<MindbreakTrapAlte
     }
 }
 
-class MindbreakEffect extends OneShotEffect<MindbreakEffect>{
+class MindbreakEffect extends OneShotEffect{
 
     MindbreakEffect(MindbreakEffect effect) {
         super(effect);

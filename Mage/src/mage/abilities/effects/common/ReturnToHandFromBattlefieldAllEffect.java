@@ -43,7 +43,7 @@ import mage.players.Player;
  */
 
 
-public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect<ReturnToHandFromBattlefieldAllEffect> {
+public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect {
 
     private final FilterPermanent filter;
     

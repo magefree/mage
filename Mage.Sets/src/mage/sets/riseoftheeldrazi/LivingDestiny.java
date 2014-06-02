@@ -71,7 +71,7 @@ public class LivingDestiny extends CardImpl<LivingDestiny> {
     }
 }
 
-class LivingDestinyEffect extends OneShotEffect<LivingDestinyEffect> {
+class LivingDestinyEffect extends OneShotEffect {
 
     public LivingDestinyEffect() {
         super(Outcome.GainLife);

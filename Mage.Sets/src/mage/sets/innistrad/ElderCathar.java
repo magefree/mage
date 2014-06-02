@@ -74,7 +74,7 @@ public class ElderCathar extends CardImpl<ElderCathar> {
     }
 }
 
-class ElderCatharAddCountersTargetEffect extends OneShotEffect<ElderCatharAddCountersTargetEffect> {
+class ElderCatharAddCountersTargetEffect extends OneShotEffect {
 
     private Counter counter;
     private Counter counter2;

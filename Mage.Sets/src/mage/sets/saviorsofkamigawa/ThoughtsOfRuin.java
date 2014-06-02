@@ -71,7 +71,7 @@ public class ThoughtsOfRuin extends CardImpl<ThoughtsOfRuin> {
     }
 }
 
-class ThoughtsOfRuinEffect extends OneShotEffect<ThoughtsOfRuinEffect> {
+class ThoughtsOfRuinEffect extends OneShotEffect {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

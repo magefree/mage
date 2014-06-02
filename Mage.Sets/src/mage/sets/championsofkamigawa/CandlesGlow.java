@@ -70,7 +70,7 @@ public class CandlesGlow extends CardImpl<CandlesGlow> {
     }
 }
 
-class CandlesGlowPreventDamageTargetEffect extends PreventionEffectImpl<CandlesGlowPreventDamageTargetEffect> {
+class CandlesGlowPreventDamageTargetEffect extends PreventionEffectImpl {
 
     private int amount = 3;
 

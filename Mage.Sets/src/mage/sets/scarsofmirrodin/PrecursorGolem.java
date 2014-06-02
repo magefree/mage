@@ -154,7 +154,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class PrecursorGolemCopySpellEffect extends OneShotEffect<PrecursorGolemCopySpellEffect> {
+class PrecursorGolemCopySpellEffect extends OneShotEffect {
 
     private static final FilterPermanent filterGolem = new FilterPermanent();
 

@@ -76,7 +76,7 @@ public class EngulfingFlames extends CardImpl<EngulfingFlames> {
 }
 
 
-class EngulfingFlamesEffect extends ReplacementEffectImpl<EngulfingFlamesEffect> {
+class EngulfingFlamesEffect extends ReplacementEffectImpl {
 
     public EngulfingFlamesEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);

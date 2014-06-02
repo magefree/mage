@@ -74,7 +74,7 @@ public class AnvilOfBogardan extends CardImpl<AnvilOfBogardan> {
     }
 }
 
-class AnvilOfBogardanEffect extends OneShotEffect<AnvilOfBogardanEffect> {
+class AnvilOfBogardanEffect extends OneShotEffect {
     
     public AnvilOfBogardanEffect(final AnvilOfBogardanEffect effect) {
         super(effect);

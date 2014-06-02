@@ -77,7 +77,7 @@ public class MoltenInfluence extends CardImpl<MoltenInfluence> {
     }
 }
 
-class MoltenInfluenceEffect extends OneShotEffect<MoltenInfluenceEffect> {
+class MoltenInfluenceEffect extends OneShotEffect {
 
     public MoltenInfluenceEffect() {
         super(Outcome.Detriment);

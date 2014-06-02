@@ -79,7 +79,7 @@ public class TrepanationBlade extends CardImpl<TrepanationBlade> {
     }
 }
 
-class TrepanationBladeDiscardEffect extends OneShotEffect<TrepanationBladeDiscardEffect> {
+class TrepanationBladeDiscardEffect extends OneShotEffect {
 
     public TrepanationBladeDiscardEffect() {
         super(Outcome.Discard);
@@ -139,7 +139,7 @@ class TrepanationBladeDiscardEffect extends OneShotEffect<TrepanationBladeDiscar
     }
 }
 
-class TrepanationBladeBoostEffect extends ContinuousEffectImpl<TrepanationBladeBoostEffect> {
+class TrepanationBladeBoostEffect extends ContinuousEffectImpl {
 
     public TrepanationBladeBoostEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

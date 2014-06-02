@@ -102,7 +102,7 @@ public class LilianaOfTheDarkRealms extends CardImpl<LilianaOfTheDarkRealms> {
     }
 }
 
-class LilianaOfTheDarkRealmsEffect extends ContinuousEffectImpl<LilianaOfTheDarkRealmsEffect> {
+class LilianaOfTheDarkRealmsEffect extends ContinuousEffectImpl {
 
     private int amount;
 

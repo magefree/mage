@@ -85,7 +85,7 @@ public class EntropicSpecter extends CardImpl<EntropicSpecter> {
     }
 }
 
-class ChooseOpponent extends OneShotEffect<ChooseOpponent> {
+class ChooseOpponent extends OneShotEffect {
 
     public ChooseOpponent() {
         super(Outcome.Neutral);

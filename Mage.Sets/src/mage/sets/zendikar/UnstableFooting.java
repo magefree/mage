@@ -91,7 +91,7 @@ public class UnstableFooting extends CardImpl<UnstableFooting> {
     }
 }
 
-class UnstableFootingEffect extends ReplacementEffectImpl<UnstableFootingEffect> {
+class UnstableFootingEffect extends ReplacementEffectImpl {
 
     public UnstableFootingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

@@ -67,7 +67,7 @@ public class TaintedPact extends CardImpl<TaintedPact> {
     }
 }
 
-class TaintedPactEffect extends OneShotEffect<TaintedPactEffect>{
+class TaintedPactEffect extends OneShotEffect{
     
         public TaintedPactEffect() {
         super(Outcome.DrawCard);

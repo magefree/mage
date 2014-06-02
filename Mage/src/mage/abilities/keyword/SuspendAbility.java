@@ -213,7 +213,7 @@ public class SuspendAbility extends ActivatedAbilityImpl {
 
 }
 
-class SuspendExileEffect extends OneShotEffect<SuspendExileEffect> {
+class SuspendExileEffect extends OneShotEffect {
     private int suspend;
 
     public SuspendExileEffect(int suspend) {
@@ -295,7 +295,7 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SuspendPlayCardEffect extends OneShotEffect<SuspendPlayCardEffect> {
+class SuspendPlayCardEffect extends OneShotEffect {
 
     public SuspendPlayCardEffect(boolean isCreature) {
         super(Outcome.PutCardInPlay);
@@ -346,7 +346,7 @@ class SuspendPlayCardEffect extends OneShotEffect<SuspendPlayCardEffect> {
     }
 }
 
-class GainHasteEffect extends ContinuousEffectImpl<GainHasteEffect> {
+class GainHasteEffect extends ContinuousEffectImpl {
 
     private UUID suspendController;
 

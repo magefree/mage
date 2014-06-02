@@ -83,7 +83,7 @@ public class VenserShaperSavant extends CardImpl<VenserShaperSavant> {
     }
 }
 
-class VenserShaperSavantEffect extends OneShotEffect<VenserShaperSavantEffect> {
+class VenserShaperSavantEffect extends OneShotEffect {
 
     public VenserShaperSavantEffect() {
         super(Outcome.ReturnToHand);

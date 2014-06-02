@@ -69,7 +69,7 @@ public class Hibernation extends CardImpl<Hibernation> {
 }
 
 
-class HibernationEffect extends OneShotEffect<HibernationEffect> {
+class HibernationEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("green permanents");
     static {

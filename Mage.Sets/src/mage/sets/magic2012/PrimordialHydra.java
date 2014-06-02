@@ -82,7 +82,7 @@ public class PrimordialHydra extends CardImpl<PrimordialHydra> {
     }
 }
 
-class PrimordialHydraEntersEffect extends OneShotEffect<PrimordialHydraEntersEffect> {
+class PrimordialHydraEntersEffect extends OneShotEffect {
     public PrimordialHydraEntersEffect() {
         super(Outcome.BoostCreature);
     }
@@ -112,7 +112,7 @@ class PrimordialHydraEntersEffect extends OneShotEffect<PrimordialHydraEntersEff
     }
 }
 
-class PrimordialHydraDoubleEffect extends OneShotEffect<PrimordialHydraDoubleEffect> {
+class PrimordialHydraDoubleEffect extends OneShotEffect {
     PrimordialHydraDoubleEffect() {
         super(Outcome.BoostCreature);
         staticText = "double the number of +1/+1 counters on {this}";

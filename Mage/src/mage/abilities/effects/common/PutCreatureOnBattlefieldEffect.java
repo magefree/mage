@@ -13,7 +13,7 @@ import mage.target.common.TargetCardInHand;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class PutCreatureOnBattlefieldEffect extends OneShotEffect<PutCreatureOnBattlefieldEffect> {
+public class PutCreatureOnBattlefieldEffect extends OneShotEffect {
 
     private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
 

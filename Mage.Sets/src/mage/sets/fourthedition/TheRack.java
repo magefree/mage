@@ -100,7 +100,7 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
 
 }
 
-class ChooseOpponent extends OneShotEffect<ChooseOpponent> {
+class ChooseOpponent extends OneShotEffect {
 
     public ChooseOpponent() {
         super(Outcome.Neutral);
@@ -137,7 +137,7 @@ class ChooseOpponent extends OneShotEffect<ChooseOpponent> {
     }
 }
 
-class TheRackEffect extends OneShotEffect<TheRackEffect> {
+class TheRackEffect extends OneShotEffect {
 
     public TheRackEffect() {
         super(Outcome.Benefit);

@@ -71,7 +71,7 @@ public class Hinder extends CardImpl<Hinder> {
     }
 }
 
-class HinderEffect extends OneShotEffect<HinderEffect> {
+class HinderEffect extends OneShotEffect {
 
     public HinderEffect() {
         super(Outcome.Detriment);

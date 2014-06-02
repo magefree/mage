@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author ayratn
  */
-public class SacrificeTargetEffect extends OneShotEffect<SacrificeTargetEffect> {
+public class SacrificeTargetEffect extends OneShotEffect {
 
     public SacrificeTargetEffect() {
         super(Outcome.Sacrifice);

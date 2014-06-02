@@ -71,7 +71,7 @@ public class ReinforcedBulwark extends CardImpl<ReinforcedBulwark> {
     }
 }
 
-class ReinforcedBulwarkEffect extends PreventionEffectImpl<ReinforcedBulwarkEffect> {
+class ReinforcedBulwarkEffect extends PreventionEffectImpl {
 
     public ReinforcedBulwarkEffect() {
         super(Duration.EndOfTurn);

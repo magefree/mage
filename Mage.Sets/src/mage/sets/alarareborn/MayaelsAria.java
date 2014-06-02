@@ -72,7 +72,7 @@ public class MayaelsAria extends CardImpl<MayaelsAria> {
     }
 }
 
-class MayaelsAriaEffect extends OneShotEffect<MayaelsAriaEffect> {
+class MayaelsAriaEffect extends OneShotEffect {
 
     public MayaelsAriaEffect() {
         super(Outcome.Benefit);

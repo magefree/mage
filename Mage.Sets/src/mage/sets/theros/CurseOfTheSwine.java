@@ -78,7 +78,7 @@ public class CurseOfTheSwine extends CardImpl<CurseOfTheSwine> {
     }
 }
 
-class CurseOfTheSwineEffect extends OneShotEffect<CurseOfTheSwineEffect> {
+class CurseOfTheSwineEffect extends OneShotEffect {
 
     public CurseOfTheSwineEffect() {
         super(Outcome.Exile);

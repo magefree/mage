@@ -78,7 +78,7 @@ public class SphinxOfUthuun extends CardImpl<SphinxOfUthuun> {
     }
 }
 
-class SphinxOfUthuunEffect extends OneShotEffect<SphinxOfUthuunEffect> {
+class SphinxOfUthuunEffect extends OneShotEffect {
 
     public SphinxOfUthuunEffect() {
         super(Outcome.DrawCard);

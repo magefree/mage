@@ -98,7 +98,7 @@ public class SimicManipulator extends CardImpl<SimicManipulator> {
     }
 }
 
-class SimicManipulatorGainControlTargetEffect extends ContinuousEffectImpl<SimicManipulatorGainControlTargetEffect> {
+class SimicManipulatorGainControlTargetEffect extends ContinuousEffectImpl {
 
     private boolean valid;
 

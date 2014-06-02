@@ -93,7 +93,7 @@ public class NyleasPresence extends CardImpl<NyleasPresence> {
     }
 }
 
-class NyleasPresenceLandTypeEffect extends ContinuousEffectImpl<NyleasPresenceLandTypeEffect> {
+class NyleasPresenceLandTypeEffect extends ContinuousEffectImpl {
 
     protected ArrayList<String> landTypes = new ArrayList();
 

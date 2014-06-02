@@ -84,7 +84,7 @@ public class PhantomWings extends CardImpl<PhantomWings> {
         return new PhantomWings(this);
     }
 
-    private class PhantomWingsReturnEffect extends OneShotEffect<PhantomWingsReturnEffect> {
+    private class PhantomWingsReturnEffect extends OneShotEffect {
 
         public PhantomWingsReturnEffect() {
             super(Outcome.ReturnToHand);

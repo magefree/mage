@@ -89,7 +89,7 @@ public class GrinningTotem extends CardImpl<GrinningTotem> {
     }
 }
 
-class GrinningTotemSearchAndExileEffect extends OneShotEffect<GrinningTotemSearchAndExileEffect> {
+class GrinningTotemSearchAndExileEffect extends OneShotEffect {
 
     public GrinningTotemSearchAndExileEffect() {
         super(Outcome.Benefit);
@@ -129,7 +129,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect<GrinningTotemSearc
     
 }
 
-class GrinningTotemMayPlayEffect extends AsThoughEffectImpl<GrinningTotemMayPlayEffect> {
+class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
 
     public GrinningTotemMayPlayEffect() {
         super(AsThoughEffectType.CAST, Duration.Custom, Outcome.Benefit);
@@ -231,7 +231,7 @@ class GrinningTotemYouHaveNotPlayedCondition implements Condition {
     
 }
 
-class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect<GrinningTotemPutIntoGraveyardEffect> {
+class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {
 
     public GrinningTotemPutIntoGraveyardEffect() {
         super(Outcome.Detriment);

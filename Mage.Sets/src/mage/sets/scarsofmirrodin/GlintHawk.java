@@ -75,7 +75,7 @@ public class GlintHawk extends CardImpl<GlintHawk> {
     }
 }
 
-class GlintHawkEffect extends OneShotEffect<GlintHawkEffect> {
+class GlintHawkEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filter;
     private static final String effectText = "sacrifice it unless you return an artifact you control to its owner's hand";

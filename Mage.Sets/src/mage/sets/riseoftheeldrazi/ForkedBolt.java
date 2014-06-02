@@ -67,7 +67,7 @@ public class ForkedBolt extends CardImpl<ForkedBolt> {
     }
 }
 
-class ForkedBoltEffect extends OneShotEffect<ForkedBoltEffect> {
+class ForkedBoltEffect extends OneShotEffect {
 
     public ForkedBoltEffect() {
         super(Outcome.Damage);

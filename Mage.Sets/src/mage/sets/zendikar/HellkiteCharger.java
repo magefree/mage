@@ -81,7 +81,7 @@ public class HellkiteCharger extends CardImpl<HellkiteCharger> {
     }
 }
 
-class HellkiteChargerEffect extends OneShotEffect<HellkiteChargerEffect> {
+class HellkiteChargerEffect extends OneShotEffect {
 
     HellkiteChargerEffect() {
         super(Outcome.Benefit);

@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * 
  * @author LevelX2
  */
-public class DevourEffect extends ReplacementEffectImpl<DevourEffect> {
+public class DevourEffect extends ReplacementEffectImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures to devour");
     static {

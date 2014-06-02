@@ -38,7 +38,7 @@ import mage.game.events.GameEvent;
  *
  * @author Quercitron
  */
-public class PreventDamageToSourceEffect extends PreventionEffectImpl<PreventDamageToSourceEffect> {
+public class PreventDamageToSourceEffect extends PreventionEffectImpl {
 
     public PreventDamageToSourceEffect(Duration duration, int amountToPrevent) {
         super(duration, amountToPrevent, false);

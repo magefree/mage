@@ -64,7 +64,7 @@ public class VisionsOfBeyond extends CardImpl<VisionsOfBeyond> {
     }
 }
 
-class VisionsOfBeyondEffect extends OneShotEffect<VisionsOfBeyondEffect> {
+class VisionsOfBeyondEffect extends OneShotEffect {
 
     public VisionsOfBeyondEffect() {
         super(Outcome.DrawCard);

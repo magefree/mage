@@ -70,7 +70,7 @@ public class AncestralMemories extends CardImpl<AncestralMemories> {
     }
 }
 
-class AncestralMemoriesEffect extends OneShotEffect<AncestralMemoriesEffect> {
+class AncestralMemoriesEffect extends OneShotEffect {
 
     public AncestralMemoriesEffect() {
         super(Outcome.DrawCard);

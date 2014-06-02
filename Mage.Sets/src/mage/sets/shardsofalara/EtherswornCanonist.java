@@ -119,7 +119,7 @@ class EtherswornCanonistWatcher extends Watcher {
 
 }
 
-class EtherswornCanonistReplacementEffect extends ReplacementEffectImpl<EtherswornCanonistReplacementEffect> {
+class EtherswornCanonistReplacementEffect extends ReplacementEffectImpl {
 
     public EtherswornCanonistReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

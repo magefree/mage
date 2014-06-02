@@ -71,7 +71,7 @@ public class WitchbaneOrb extends CardImpl<WitchbaneOrb> {
     }
 }
 
-class WitchbaneOrbEffect extends OneShotEffect<WitchbaneOrbEffect> {
+class WitchbaneOrbEffect extends OneShotEffect {
 
     public WitchbaneOrbEffect() {
         super(Outcome.Protect);

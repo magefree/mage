@@ -40,7 +40,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class RevealHandTargetEffect extends OneShotEffect<RevealHandTargetEffect> {
+public class RevealHandTargetEffect extends OneShotEffect {
 
     private final TargetController targetController;
     

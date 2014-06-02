@@ -89,7 +89,7 @@ public class PhyrexianIngester extends CardImpl<PhyrexianIngester> {
     }
 }
 
-class PhyrexianIngesterImprintEffect extends OneShotEffect<PhyrexianIngesterImprintEffect> {
+class PhyrexianIngesterImprintEffect extends OneShotEffect {
 
     public PhyrexianIngesterImprintEffect() {
         super(Outcome.Exile);
@@ -118,7 +118,7 @@ class PhyrexianIngesterImprintEffect extends OneShotEffect<PhyrexianIngesterImpr
     }
 }
 
-class PhyrexianIngesterBoostEffect extends ContinuousEffectImpl<PhyrexianIngesterBoostEffect> {
+class PhyrexianIngesterBoostEffect extends ContinuousEffectImpl {
 
     public PhyrexianIngesterBoostEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

@@ -75,7 +75,7 @@ public class EmpyrialArchangel extends CardImpl<EmpyrialArchangel> {
     }
 }
 
-class EmpyrialArchangelEffect extends ReplacementEffectImpl<EmpyrialArchangelEffect> {
+class EmpyrialArchangelEffect extends ReplacementEffectImpl {
     EmpyrialArchangelEffect() {
         super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
         staticText = "All damage that would be dealt to you is dealt to {this} instead";

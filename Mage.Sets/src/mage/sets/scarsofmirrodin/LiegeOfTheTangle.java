@@ -116,7 +116,7 @@ class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class LiegeOfTheTangleEffect extends ContinuousEffectImpl<LiegeOfTheTangleEffect> {
+class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
 
     private static AwakeningLandToken token = new AwakeningLandToken();
 

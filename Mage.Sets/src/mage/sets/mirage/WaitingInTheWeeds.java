@@ -70,7 +70,7 @@ public class WaitingInTheWeeds extends CardImpl<WaitingInTheWeeds> {
     }
 }
 
-class WaitingInTheWeedsEffect extends OneShotEffect<WaitingInTheWeedsEffect> {
+class WaitingInTheWeedsEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("untapped Forest he or she controls");
     

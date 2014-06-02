@@ -83,7 +83,7 @@ public class RidersOfGavony extends CardImpl<RidersOfGavony> {
     }
 }
 
-class RidersOfGavonyEffect extends OneShotEffect<RidersOfGavonyEffect> {
+class RidersOfGavonyEffect extends OneShotEffect {
 
     public RidersOfGavonyEffect() {
         super(Outcome.BoostCreature);
@@ -123,7 +123,7 @@ class RidersOfGavonyEffect extends OneShotEffect<RidersOfGavonyEffect> {
 
 }
 
-class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl<RidersOfGavonyGainAbilityControlledEffect> {
+class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human creatures you control");
 

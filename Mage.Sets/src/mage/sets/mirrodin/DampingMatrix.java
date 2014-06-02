@@ -71,7 +71,7 @@ public class DampingMatrix extends CardImpl<DampingMatrix> {
     }
 }
 
-class DampingMatrixEffect extends ReplacementEffectImpl<DampingMatrixEffect> {
+class DampingMatrixEffect extends ReplacementEffectImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifacts and creatures");
     static {

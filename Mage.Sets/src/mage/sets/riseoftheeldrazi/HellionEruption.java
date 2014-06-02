@@ -68,7 +68,7 @@ public class HellionEruption extends CardImpl<HellionEruption> {
     }
 }
 
-class HellionEruptionEffect extends OneShotEffect<HellionEruptionEffect> {
+class HellionEruptionEffect extends OneShotEffect {
 
     public HellionEruptionEffect() {
         super(Outcome.PutCreatureInPlay);

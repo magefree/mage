@@ -39,7 +39,7 @@ import org.apache.log4j.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LoseAbilityAttachedEffect extends ContinuousEffectImpl<LoseAbilityAttachedEffect> {
+public class LoseAbilityAttachedEffect extends ContinuousEffectImpl {
 
     private static final Logger logger = Logger.getLogger(LoseAbilityAttachedEffect.class);
 

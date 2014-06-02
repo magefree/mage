@@ -87,7 +87,7 @@ public class UrbanBurgeoning extends CardImpl<UrbanBurgeoning> {
     }
 }
 
-class UrbanBurgeoningUntapEffect extends ContinuousEffectImpl<UrbanBurgeoningUntapEffect> {
+class UrbanBurgeoningUntapEffect extends ContinuousEffectImpl {
 
     public UrbanBurgeoningUntapEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

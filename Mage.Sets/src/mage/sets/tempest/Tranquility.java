@@ -63,7 +63,7 @@ public class Tranquility extends CardImpl<Tranquility> {
     }
 }
 
-class TranquilityEffect extends OneShotEffect<TranquilityEffect> {
+class TranquilityEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("");
 

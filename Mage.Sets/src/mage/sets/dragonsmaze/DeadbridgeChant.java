@@ -76,7 +76,7 @@ public class DeadbridgeChant extends CardImpl<DeadbridgeChant> {
     }
 }
 
-class DeadbridgeChantEffect extends OneShotEffect<DeadbridgeChantEffect> {
+class DeadbridgeChantEffect extends OneShotEffect {
 
     public DeadbridgeChantEffect() {
         super(Outcome.PutCreatureInPlay);

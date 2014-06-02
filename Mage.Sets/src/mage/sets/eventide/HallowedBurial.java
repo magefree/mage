@@ -67,7 +67,7 @@ public class HallowedBurial extends CardImpl<HallowedBurial> {
     }
 }
 
-class HallowedBurialEffect extends OneShotEffect<HallowedBurialEffect> {
+class HallowedBurialEffect extends OneShotEffect {
 
     public HallowedBurialEffect() {
         super(Outcome.Neutral);

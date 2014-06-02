@@ -67,7 +67,7 @@ public class ChimericStaff extends CardImpl<ChimericStaff> {
     }
 }
 
-class ChimericStaffEffect extends ContinuousEffectImpl<ChimericStaffEffect> {
+class ChimericStaffEffect extends ContinuousEffectImpl {
 
     public ChimericStaffEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);

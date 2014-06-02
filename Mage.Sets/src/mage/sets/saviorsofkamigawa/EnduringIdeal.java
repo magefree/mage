@@ -74,7 +74,7 @@ public class EnduringIdeal extends CardImpl<EnduringIdeal> {
     }
 }
 
-class EnduringIdealEffect extends OneShotEffect<EnduringIdealEffect> {
+class EnduringIdealEffect extends OneShotEffect {
     
     private static final FilterCard filter = new FilterCard();
     

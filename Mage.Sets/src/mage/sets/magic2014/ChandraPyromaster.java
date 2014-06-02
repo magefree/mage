@@ -106,7 +106,7 @@ public class ChandraPyromaster extends CardImpl<ChandraPyromaster> {
     }
 }
 
-class ChandraPyromasterEffect1 extends OneShotEffect<ChandraPyromasterEffect1> {
+class ChandraPyromasterEffect1 extends OneShotEffect {
 
     public ChandraPyromasterEffect1() {
         super(Outcome.Damage);
@@ -192,7 +192,7 @@ class ChandraPyromasterTarget extends TargetPermanent<ChandraPyromasterTarget> {
     }
 }
 
-class ChandraPyromasterEffect2 extends OneShotEffect<ChandraPyromasterEffect2> {
+class ChandraPyromasterEffect2 extends OneShotEffect {
 
     public ChandraPyromasterEffect2() {
         super(Outcome.Detriment);
@@ -224,7 +224,7 @@ class ChandraPyromasterEffect2 extends OneShotEffect<ChandraPyromasterEffect2> {
     }
 }
 
-class ChandraPyromasterCastFromExileEffect extends AsThoughEffectImpl<ChandraPyromasterCastFromExileEffect> {
+class ChandraPyromasterCastFromExileEffect extends AsThoughEffectImpl {
 
     private UUID cardId;
 
@@ -274,7 +274,7 @@ class ChandraPyromasterCastFromExileEffect extends AsThoughEffectImpl<ChandraPyr
     }
 }
 
-class ChandraPyromasterEffect3 extends OneShotEffect<ChandraPyromasterEffect3> {
+class ChandraPyromasterEffect3 extends OneShotEffect {
 
     public ChandraPyromasterEffect3() {
         super(Outcome.PutCardInPlay);

@@ -74,7 +74,7 @@ public class TestamentOfFaith extends CardImpl<TestamentOfFaith> {
     }
 }
 
-class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl<TestamentOfFaithBecomesCreatureSourceEffect> implements SourceEffect {
+class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl implements SourceEffect {
 
     protected Token token;
     protected String type;

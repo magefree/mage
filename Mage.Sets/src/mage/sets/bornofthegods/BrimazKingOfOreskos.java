@@ -82,7 +82,7 @@ public class BrimazKingOfOreskos extends CardImpl<BrimazKingOfOreskos> {
     }
 }
 
-class BrimazKingOfOreskosEffect extends OneShotEffect<BrimazKingOfOreskosEffect> {
+class BrimazKingOfOreskosEffect extends OneShotEffect {
     
     public BrimazKingOfOreskosEffect() {
         super(Outcome.Benefit);

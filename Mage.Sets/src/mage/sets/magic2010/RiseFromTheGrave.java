@@ -70,7 +70,7 @@ public class RiseFromTheGrave extends CardImpl<RiseFromTheGrave> {
     }
 }
 
-class RiseFromTheGraveEffect extends ContinuousEffectImpl<RiseFromTheGraveEffect> {
+class RiseFromTheGraveEffect extends ContinuousEffectImpl {
 
     public RiseFromTheGraveEffect() {
         super(Duration.Custom, Outcome.Neutral);

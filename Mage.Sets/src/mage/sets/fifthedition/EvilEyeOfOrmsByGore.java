@@ -85,7 +85,7 @@ public class EvilEyeOfOrmsByGore extends CardImpl<EvilEyeOfOrmsByGore> {
     }
 }
 
-class EvilEyeOfOrmsByGoreEffect extends ReplacementEffectImpl<EvilEyeOfOrmsByGoreEffect> {
+class EvilEyeOfOrmsByGoreEffect extends ReplacementEffectImpl {
 
     public EvilEyeOfOrmsByGoreEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

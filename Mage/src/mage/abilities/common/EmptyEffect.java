@@ -38,7 +38,7 @@ import mage.game.Game;
  *
  * @author magenoxx_at_gmail.com
  */
-public class EmptyEffect extends OneShotEffect<EmptyEffect> {
+public class EmptyEffect extends OneShotEffect {
 
     public EmptyEffect(String rule) {
         super(Outcome.Neutral);

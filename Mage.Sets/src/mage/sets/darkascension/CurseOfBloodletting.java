@@ -77,7 +77,7 @@ public class CurseOfBloodletting extends CardImpl<CurseOfBloodletting> {
     }
 }
 
-class CurseOfBloodlettingEffect extends ReplacementEffectImpl<CurseOfBloodlettingEffect> {
+class CurseOfBloodlettingEffect extends ReplacementEffectImpl {
 
     public CurseOfBloodlettingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);

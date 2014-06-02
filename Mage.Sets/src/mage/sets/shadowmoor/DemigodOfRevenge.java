@@ -110,7 +110,7 @@ class DemigodOfRevengeTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class DemigodOfRevengeReturnEffect extends OneShotEffect<DemigodOfRevengeReturnEffect> {
+class DemigodOfRevengeReturnEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard();
     static {

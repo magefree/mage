@@ -137,7 +137,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class NimDeathmantleEffect extends OneShotEffect<NimDeathmantleEffect> {
+class NimDeathmantleEffect extends OneShotEffect {
 
     private final Cost cost = new GenericManaCost(4);
 

@@ -67,7 +67,7 @@ public class EarlyHarvest extends CardImpl<EarlyHarvest> {
     }
 }
 
-class UntapAllLandsTargetEffect extends OneShotEffect<UntapAllLandsTargetEffect> {
+class UntapAllLandsTargetEffect extends OneShotEffect {
 
     public UntapAllLandsTargetEffect() {
         super(Outcome.Untap);

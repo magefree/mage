@@ -99,7 +99,7 @@ public class ToshiroUmezawa extends CardImpl<ToshiroUmezawa> {
     }
 }
 
-class ToshiroUmezawaEffect extends OneShotEffect<ToshiroUmezawaEffect> {
+class ToshiroUmezawaEffect extends OneShotEffect {
 
     public ToshiroUmezawaEffect() {
         super(Outcome.Benefit);
@@ -129,7 +129,7 @@ class ToshiroUmezawaEffect extends OneShotEffect<ToshiroUmezawaEffect> {
     }
 }
 
-class ToshiroUmezawaReplacementEffect extends ReplacementEffectImpl<ToshiroUmezawaReplacementEffect> {
+class ToshiroUmezawaReplacementEffect extends ReplacementEffectImpl {
 
     private UUID cardId;
 

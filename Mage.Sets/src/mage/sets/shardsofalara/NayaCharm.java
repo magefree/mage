@@ -85,7 +85,7 @@ public class NayaCharm extends CardImpl<NayaCharm> {
     }
 }
 
-class NayaCharmEffect extends OneShotEffect<NayaCharmEffect> {
+class NayaCharmEffect extends OneShotEffect {
 
     public NayaCharmEffect() {
         super(Outcome.Tap);

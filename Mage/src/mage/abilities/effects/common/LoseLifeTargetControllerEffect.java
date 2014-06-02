@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class LoseLifeTargetControllerEffect extends OneShotEffect<LoseLifeTargetControllerEffect> {
+public class LoseLifeTargetControllerEffect extends OneShotEffect {
 
     protected int amount;
 

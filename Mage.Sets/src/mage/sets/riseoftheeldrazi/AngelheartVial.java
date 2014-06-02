@@ -109,7 +109,7 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class AngelheartVialEffect extends OneShotEffect<AngelheartVialEffect> {
+class AngelheartVialEffect extends OneShotEffect {
 
     public AngelheartVialEffect() {
         super(Outcome.Benefit);

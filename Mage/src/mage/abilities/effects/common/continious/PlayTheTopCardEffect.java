@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class PlayTheTopCardEffect extends AsThoughEffectImpl<PlayTheTopCardEffect> {
+public class PlayTheTopCardEffect extends AsThoughEffectImpl {
 
     private FilterCard filter;
 

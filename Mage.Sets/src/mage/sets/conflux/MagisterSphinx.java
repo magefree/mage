@@ -78,7 +78,7 @@ public class MagisterSphinx extends CardImpl<MagisterSphinx> {
     }
 }
 
-class MagisterSphinxEffect extends OneShotEffect<MagisterSphinxEffect> {
+class MagisterSphinxEffect extends OneShotEffect {
 
     MagisterSphinxEffect() {
         super(Outcome.Detriment);

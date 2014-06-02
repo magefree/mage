@@ -68,7 +68,7 @@ public class InfectiousHorror extends CardImpl<InfectiousHorror> {
     }
 }
 
-class InfectiousHorrorEffect extends OneShotEffect<InfectiousHorrorEffect> {
+class InfectiousHorrorEffect extends OneShotEffect {
 
     InfectiousHorrorEffect() {
         super(Outcome.Damage);

@@ -94,7 +94,7 @@ public class AdarkarValkyrie extends CardImpl<AdarkarValkyrie> {
     }
 }
 
-class AdarkarValkyrieEffect extends OneShotEffect<AdarkarValkyrieEffect> {
+class AdarkarValkyrieEffect extends OneShotEffect {
 
     public AdarkarValkyrieEffect() {
         super(Outcome.PutCreatureInPlay);

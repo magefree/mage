@@ -78,7 +78,7 @@ public class InvaderParasite extends CardImpl<InvaderParasite> {
     }
 }
 
-class InvaderParasiteImprintEffect extends OneShotEffect<InvaderParasiteImprintEffect> {
+class InvaderParasiteImprintEffect extends OneShotEffect {
     InvaderParasiteImprintEffect() {
         super(Outcome.Exile);
         staticText = "exile target land";

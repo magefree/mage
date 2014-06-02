@@ -100,7 +100,7 @@ class BludgeonBrawlAbility extends StaticAbility {
     }
 }
 
-class BludgeonBrawlAddSubtypeEffect extends ContinuousEffectImpl<BludgeonBrawlAddSubtypeEffect> {
+class BludgeonBrawlAddSubtypeEffect extends ContinuousEffectImpl {
 
     public BludgeonBrawlAddSubtypeEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
@@ -134,7 +134,7 @@ class BludgeonBrawlAddSubtypeEffect extends ContinuousEffectImpl<BludgeonBrawlAd
     }
 }
 
-class BludgeonBrawlGainAbilityEffect extends ContinuousEffectImpl<BludgeonBrawlGainAbilityEffect> {
+class BludgeonBrawlGainAbilityEffect extends ContinuousEffectImpl {
 
     public BludgeonBrawlGainAbilityEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

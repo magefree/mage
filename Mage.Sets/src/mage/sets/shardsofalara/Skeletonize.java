@@ -81,7 +81,7 @@ public class Skeletonize extends CardImpl<Skeletonize> {
     }
 }
 
-class SkeletonizeEffect extends OneShotEffect<SkeletonizeEffect> {
+class SkeletonizeEffect extends OneShotEffect {
 
     public SkeletonizeEffect() {
         super(Outcome.PutCreatureInPlay);

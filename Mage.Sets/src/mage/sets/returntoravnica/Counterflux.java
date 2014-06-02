@@ -97,7 +97,7 @@ public class Counterflux extends CardImpl<mage.sets.returntoravnica.Counterflux>
     }
 }
 
-class CounterfluxEffect extends OneShotEffect<CounterfluxEffect> {
+class CounterfluxEffect extends OneShotEffect {
 
     public CounterfluxEffect() {
         super(Outcome.Detriment);

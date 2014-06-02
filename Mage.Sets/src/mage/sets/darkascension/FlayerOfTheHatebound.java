@@ -116,7 +116,7 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class FlayerEffect extends OneShotEffect<FlayerEffect> {
+class FlayerEffect extends OneShotEffect {
 
     public FlayerEffect() {
         super(Outcome.Damage);

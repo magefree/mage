@@ -91,7 +91,7 @@ public class ZameckGuildmage extends CardImpl<ZameckGuildmage> {
     }
 }
 
-class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlefieldEffect> {
+class EntersBattlefieldEffect extends ReplacementEffectImpl {
 
     protected Effects baseEffects = new Effects();
     protected String text;

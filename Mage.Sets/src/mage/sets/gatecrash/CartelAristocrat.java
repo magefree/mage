@@ -91,7 +91,7 @@ public class CartelAristocrat extends CardImpl<CartelAristocrat> {
         return new CartelAristocrat(this);
     }
 }
-class CartelAristocratEffect extends OneShotEffect<CartelAristocratEffect> {
+class CartelAristocratEffect extends OneShotEffect {
     
     public CartelAristocratEffect() {
         super(Outcome.Protect);

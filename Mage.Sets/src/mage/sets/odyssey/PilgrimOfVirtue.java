@@ -89,7 +89,7 @@ public class PilgrimOfVirtue extends CardImpl<PilgrimOfVirtue> {
     }
 }
 
-class PilgrimOfVirtueEffect extends PreventionEffectImpl<PilgrimOfVirtueEffect> {
+class PilgrimOfVirtueEffect extends PreventionEffectImpl {
 
     private static final FilterObject filter = new FilterObject("black source");
     static{

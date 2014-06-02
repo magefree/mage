@@ -40,9 +40,8 @@ import mage.game.events.GameEvent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> extends ReplacementEffectImpl<T> implements PreventionEffect<T> {
+public abstract class PreventionEffectImpl extends ReplacementEffectImpl implements PreventionEffect {
    
     protected int amountToPrevent;
     protected final boolean onlyCombat;

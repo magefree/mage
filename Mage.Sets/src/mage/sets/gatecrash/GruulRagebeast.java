@@ -126,7 +126,7 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class GruulRagebeastEffect extends OneShotEffect<GruulRagebeastEffect> {
+class GruulRagebeastEffect extends OneShotEffect {
 
     GruulRagebeastEffect() {
         super(Outcome.Damage);

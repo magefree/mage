@@ -83,7 +83,7 @@ public class StormchaserChimera extends CardImpl<StormchaserChimera> {
     }
 }
 
-class StormchaserChimeraEffect extends OneShotEffect<StormchaserChimeraEffect> {
+class StormchaserChimeraEffect extends OneShotEffect {
 
     public StormchaserChimeraEffect() {
         super(Outcome.Benefit);

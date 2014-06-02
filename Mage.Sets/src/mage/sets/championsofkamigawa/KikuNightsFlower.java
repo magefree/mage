@@ -83,7 +83,7 @@ public class KikuNightsFlower extends CardImpl<KikuNightsFlower> {
     }
 }
 
-class KikuNightsFlowerEffect extends OneShotEffect<KikuNightsFlowerEffect> {
+class KikuNightsFlowerEffect extends OneShotEffect {
 
         public KikuNightsFlowerEffect() {
             super(Outcome.Damage);

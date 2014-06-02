@@ -95,7 +95,7 @@ public class CouncilOfTheAbsolute extends CardImpl<CouncilOfTheAbsolute> {
 
 }
 
-class CouncilOfTheAbsoluteChooseCardEffect extends OneShotEffect<CouncilOfTheAbsoluteChooseCardEffect> {
+class CouncilOfTheAbsoluteChooseCardEffect extends OneShotEffect {
 
     public CouncilOfTheAbsoluteChooseCardEffect() {
         super(Outcome.Detriment);
@@ -132,7 +132,7 @@ class CouncilOfTheAbsoluteChooseCardEffect extends OneShotEffect<CouncilOfTheAbs
 
 }
 
-class CouncilOfTheAbsoluteReplacementEffect extends ReplacementEffectImpl<CouncilOfTheAbsoluteReplacementEffect> {
+class CouncilOfTheAbsoluteReplacementEffect extends ReplacementEffectImpl {
 
     public CouncilOfTheAbsoluteReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

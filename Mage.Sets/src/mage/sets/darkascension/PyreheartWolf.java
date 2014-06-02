@@ -72,7 +72,7 @@ public class PyreheartWolf extends CardImpl<PyreheartWolf> {
     }
 }
 
-class PyreheartWolfEffect extends OneShotEffect<PyreheartWolfEffect> {
+class PyreheartWolfEffect extends OneShotEffect {
 
     public PyreheartWolfEffect() {
         super(Outcome.Benefit);

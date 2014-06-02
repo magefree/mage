@@ -84,7 +84,7 @@ public class RakdosCharm extends CardImpl<RakdosCharm> {
     }
 
 
-    private class RakdosCharmDamageEffect extends OneShotEffect<RakdosCharmDamageEffect> {
+    private class RakdosCharmDamageEffect extends OneShotEffect {
 
     public RakdosCharmDamageEffect() {
             super(Outcome.Detriment);

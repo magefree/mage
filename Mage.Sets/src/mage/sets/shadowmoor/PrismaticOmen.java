@@ -78,7 +78,7 @@ public class PrismaticOmen extends CardImpl<PrismaticOmen> {
     }
 }
 
-class BecomesBasicLandTypeAllEffect extends ContinuousEffectImpl<BecomesBasicLandTypeAllEffect> {
+class BecomesBasicLandTypeAllEffect extends ContinuousEffectImpl {
 
     protected ArrayList<String> landTypes = new ArrayList();
 

@@ -76,7 +76,7 @@ public class RiteOfReplication extends CardImpl<RiteOfReplication> {
     }
 }
 
-class RiteOfReplicationEffect extends OneShotEffect<RiteOfReplicationEffect> {
+class RiteOfReplicationEffect extends OneShotEffect {
 
     private int amount;
 

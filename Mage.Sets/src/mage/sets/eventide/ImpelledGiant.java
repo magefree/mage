@@ -141,7 +141,7 @@ class ImpelledGiantCost extends CostImpl<ImpelledGiantCost> {
 }
 
 
-class ImpelledGiantBoostEffect extends OneShotEffect<ImpelledGiantBoostEffect> {
+class ImpelledGiantBoostEffect extends OneShotEffect {
 
     public ImpelledGiantBoostEffect() {
         super(Outcome.BoostCreature);

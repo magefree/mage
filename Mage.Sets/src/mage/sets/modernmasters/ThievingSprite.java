@@ -87,7 +87,7 @@ public class ThievingSprite extends CardImpl<ThievingSprite> {
     }
 }
 
-class ThievingSpriteEffect extends OneShotEffect<ThievingSpriteEffect> {
+class ThievingSpriteEffect extends OneShotEffect {
 
     public ThievingSpriteEffect() {
         super(Outcome.Discard);

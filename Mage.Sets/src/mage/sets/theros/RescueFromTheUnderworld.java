@@ -104,7 +104,7 @@ public class RescueFromTheUnderworld extends CardImpl<RescueFromTheUnderworld> {
     }
 }
 
-class RescueFromTheUnderworldTextEffect extends OneShotEffect<RescueFromTheUnderworldTextEffect> {
+class RescueFromTheUnderworldTextEffect extends OneShotEffect {
 
     public RescueFromTheUnderworldTextEffect() {
         super(Outcome.Benefit);
@@ -126,7 +126,7 @@ class RescueFromTheUnderworldTextEffect extends OneShotEffect<RescueFromTheUnder
     }
 }
 
-class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShotEffect<RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect> {
+class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
     protected DelayedTriggeredAbility ability;
 
@@ -207,7 +207,7 @@ class RescueFromTheUnderworldDelayedTriggeredAbility extends DelayedTriggeredAbi
     }
 }
 
-class RescueFromTheUnderworldReturnEffect extends OneShotEffect<RescueFromTheUnderworldReturnEffect> {
+class RescueFromTheUnderworldReturnEffect extends OneShotEffect {
 
     private boolean tapped;
 

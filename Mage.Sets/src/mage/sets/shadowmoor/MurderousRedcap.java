@@ -79,7 +79,7 @@ public class MurderousRedcap extends CardImpl<MurderousRedcap> {
     }
 }
 
-class MurderousRedcapEffect extends OneShotEffect<MurderousRedcapEffect> {
+class MurderousRedcapEffect extends OneShotEffect {
 
     public MurderousRedcapEffect() {
         super(Outcome.Damage);

@@ -144,7 +144,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SatyrFiredancerDamageEffect extends OneShotEffect<SatyrFiredancerDamageEffect> {
+class SatyrFiredancerDamageEffect extends OneShotEffect {
 
     public SatyrFiredancerDamageEffect() {
         super(Outcome.Damage);

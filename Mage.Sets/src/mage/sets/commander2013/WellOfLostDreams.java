@@ -63,7 +63,7 @@ public class WellOfLostDreams extends CardImpl<WellOfLostDreams> {
     }
 }
 
-class WellOfLostDreamsEffect extends OneShotEffect<WellOfLostDreamsEffect> {
+class WellOfLostDreamsEffect extends OneShotEffect {
 
     public WellOfLostDreamsEffect() {
         super(Outcome.Benefit);

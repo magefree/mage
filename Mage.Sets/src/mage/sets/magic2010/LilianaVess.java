@@ -82,7 +82,7 @@ public class LilianaVess extends CardImpl<LilianaVess> {
 
 }
 
-class LilianaVessEffect extends OneShotEffect<LilianaVessEffect> {
+class LilianaVessEffect extends OneShotEffect {
 
     public LilianaVessEffect() {
         super(Outcome.PutCreatureInPlay);

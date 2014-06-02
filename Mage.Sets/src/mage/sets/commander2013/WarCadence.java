@@ -71,7 +71,7 @@ public class WarCadence extends CardImpl<WarCadence> {
     }
 }
 
-class WarCadenceReplacementEffect extends ReplacementEffectImpl<WarCadenceReplacementEffect> {
+class WarCadenceReplacementEffect extends ReplacementEffectImpl {
 
     DynamicValue xCosts = new ManacostVariableValue();
 

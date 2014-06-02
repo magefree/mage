@@ -108,7 +108,7 @@ class KamiOfTheHonoredDeadTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 
-class KamiOfTheHonoredDeadGainLifeEffect extends OneShotEffect<KamiOfTheHonoredDeadGainLifeEffect> {
+class KamiOfTheHonoredDeadGainLifeEffect extends OneShotEffect {
 
         public KamiOfTheHonoredDeadGainLifeEffect() {
             super(Outcome.GainLife);

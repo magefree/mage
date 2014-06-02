@@ -86,7 +86,7 @@ public class Godtoucher extends CardImpl<Godtoucher> {
     }
 }
 
-class GodtoucherEffect extends PreventionEffectImpl<GodtoucherEffect> {
+class GodtoucherEffect extends PreventionEffectImpl {
 
     public GodtoucherEffect(Duration duration) {
         super(duration);

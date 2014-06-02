@@ -100,7 +100,7 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class PsychicSurgeryEffect extends OneShotEffect<PsychicSurgeryEffect> {
+class PsychicSurgeryEffect extends OneShotEffect {
 
     public PsychicSurgeryEffect() {
         super(Outcome.Exile);

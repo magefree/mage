@@ -89,7 +89,7 @@ public class ActOfAuthority extends CardImpl<ActOfAuthority> {
     }
 }
 
-class ActOfAuthorityEffect extends OneShotEffect<ActOfAuthorityEffect> {
+class ActOfAuthorityEffect extends OneShotEffect {
 
     public ActOfAuthorityEffect() {
         super(Outcome.Exile);
@@ -118,7 +118,7 @@ class ActOfAuthorityEffect extends OneShotEffect<ActOfAuthorityEffect> {
     }
 }
 
-class ActOfAuthorityGainControlEffect extends ContinuousEffectImpl<ActOfAuthorityGainControlEffect> {
+class ActOfAuthorityGainControlEffect extends ContinuousEffectImpl {
 
     UUID controller;
 

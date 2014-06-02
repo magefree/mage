@@ -114,7 +114,7 @@ class CelestialMantleAbility extends TriggeredAbilityImpl {
     }
 }
 
-class CelestialMantleEffect extends OneShotEffect<CelestialMantleEffect> {
+class CelestialMantleEffect extends OneShotEffect {
     CelestialMantleEffect() {
         super(Outcome.GainLife);
     }

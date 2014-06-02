@@ -74,7 +74,7 @@ public class CircularLogic extends CardImpl<CircularLogic> {
     }
 }
 
-class CircularLogicCounterUnlessPaysEffect extends OneShotEffect<CircularLogicCounterUnlessPaysEffect> {
+class CircularLogicCounterUnlessPaysEffect extends OneShotEffect {
 
     public CircularLogicCounterUnlessPaysEffect() {
         super(Outcome.Detriment);

@@ -74,7 +74,7 @@ public class ColdEyedSelkie extends CardImpl<ColdEyedSelkie> {
     }
 }
 
-class ColdEyeSelkieEffect extends OneShotEffect<ColdEyeSelkieEffect> {
+class ColdEyeSelkieEffect extends OneShotEffect {
 
     public ColdEyeSelkieEffect() {
         super(Outcome.DrawCard);

@@ -65,7 +65,7 @@ public class DebtToTheDeathless extends CardImpl<DebtToTheDeathless> {
     }
 }
 
-class DebtToTheDeathlessEffect extends OneShotEffect<DebtToTheDeathlessEffect> {
+class DebtToTheDeathlessEffect extends OneShotEffect {
 
     public DebtToTheDeathlessEffect() {
         super(Outcome.Benefit);

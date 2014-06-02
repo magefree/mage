@@ -73,7 +73,7 @@ public class Restore extends CardImpl<Restore> {
     }
 }
 
-class RestoreEffect extends OneShotEffect<RestoreEffect> {
+class RestoreEffect extends OneShotEffect {
 
     public RestoreEffect() {
         super(Outcome.PutLandInPlay);

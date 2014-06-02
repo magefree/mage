@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class FightTargetSourceEffect extends OneShotEffect<FightTargetSourceEffect> {
+public class FightTargetSourceEffect extends OneShotEffect {
 
     public FightTargetSourceEffect() {
         super(Outcome.Damage);

@@ -133,7 +133,7 @@ class ArmadilloCloakTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ArmadilloCloakEffect extends OneShotEffect<ArmadilloCloakEffect> {
+class ArmadilloCloakEffect extends OneShotEffect {
 
     public ArmadilloCloakEffect() {
         super(Outcome.GainLife);

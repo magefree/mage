@@ -76,7 +76,7 @@ public class AuriokReplica extends CardImpl<AuriokReplica> {
 
 }
 
-class AuriokReplicaEffect extends PreventionEffectImpl<AuriokReplicaEffect> {
+class AuriokReplicaEffect extends PreventionEffectImpl {
 
     public AuriokReplicaEffect() {
         super(Duration.EndOfTurn);

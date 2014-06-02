@@ -65,7 +65,7 @@ public class BurntheImpure extends CardImpl<BurntheImpure> {
 
 }
 
-class BurntheImpureEffect extends OneShotEffect<BurntheImpureEffect> {
+class BurntheImpureEffect extends OneShotEffect {
 
     public BurntheImpureEffect() {
         super(Outcome.Damage);

@@ -68,7 +68,7 @@ public class SharedTrauma extends CardImpl<SharedTrauma> {
     }
 }
 
-class SharedTraumaEffect extends OneShotEffect<SharedTraumaEffect> {
+class SharedTraumaEffect extends OneShotEffect {
 
     public SharedTraumaEffect() {
         super(Outcome.Detriment);

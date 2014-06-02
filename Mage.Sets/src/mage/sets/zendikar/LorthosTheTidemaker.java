@@ -83,7 +83,7 @@ public class LorthosTheTidemaker extends CardImpl<LorthosTheTidemaker> {
     }
 }
 
-class LorthosTheTideMakerEffect extends OneShotEffect<LorthosTheTideMakerEffect> {
+class LorthosTheTideMakerEffect extends OneShotEffect {
 
     public LorthosTheTideMakerEffect() {
         super(Outcome.Tap);
@@ -122,7 +122,7 @@ class LorthosTheTideMakerEffect extends OneShotEffect<LorthosTheTideMakerEffect>
     }
 }
 
-class LorthosTheTideMakerEffect2 extends ReplacementEffectImpl<LorthosTheTideMakerEffect2> {
+class LorthosTheTideMakerEffect2 extends ReplacementEffectImpl {
 
     protected UUID permanentId;
 

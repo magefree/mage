@@ -121,7 +121,7 @@ public class NecroticPlague extends CardImpl<NecroticPlague> {
 
 }
 
-class NecroticPlagueEffect extends OneShotEffect<NecroticPlagueEffect> {
+class NecroticPlagueEffect extends OneShotEffect {
 
 
 

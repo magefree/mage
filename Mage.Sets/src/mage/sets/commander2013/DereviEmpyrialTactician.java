@@ -154,7 +154,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
 
 }
 
-class PutCommanderOnBattlefieldEffect extends OneShotEffect<PutCommanderOnBattlefieldEffect> {
+class PutCommanderOnBattlefieldEffect extends OneShotEffect {
 
     public PutCommanderOnBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -119,7 +119,7 @@ class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 }
 
-class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl<UnearthLeavesBattlefieldEffect> {
+class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
 
     public UnearthLeavesBattlefieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);

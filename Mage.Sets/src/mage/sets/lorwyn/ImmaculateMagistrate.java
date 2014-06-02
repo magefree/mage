@@ -80,7 +80,7 @@ public class ImmaculateMagistrate extends CardImpl<ImmaculateMagistrate> {
     }
 }
 
-class ImmaculateMagistrateEffect extends OneShotEffect<ImmaculateMagistrateEffect> {
+class ImmaculateMagistrateEffect extends OneShotEffect {
     static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf");
     static {
         filter.add(new SubtypePredicate("Elf"));

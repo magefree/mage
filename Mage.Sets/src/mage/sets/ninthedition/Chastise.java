@@ -69,7 +69,7 @@ public class Chastise extends CardImpl<Chastise> {
     }
 }
 
-class ChastiseEffect extends OneShotEffect<ChastiseEffect> {
+class ChastiseEffect extends OneShotEffect {
 
     public ChastiseEffect() {
         super(Outcome.GainLife);

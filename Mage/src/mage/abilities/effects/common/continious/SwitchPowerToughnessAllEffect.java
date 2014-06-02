@@ -48,7 +48,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class SwitchPowerToughnessAllEffect extends ContinuousEffectImpl<SwitchPowerToughnessAllEffect> {
+public class SwitchPowerToughnessAllEffect extends ContinuousEffectImpl {
 
     static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

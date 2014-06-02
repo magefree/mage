@@ -68,7 +68,7 @@ public class SurvivalCache extends CardImpl<SurvivalCache> {
     }
 }
 
-class SurvivalCacheEffect extends OneShotEffect<SurvivalCacheEffect> {
+class SurvivalCacheEffect extends OneShotEffect {
     SurvivalCacheEffect() {
         super(Outcome.DrawCard);
         staticText = "Then if you have more life than an opponent, draw a card";

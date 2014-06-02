@@ -40,7 +40,7 @@ import mage.game.events.GameEvent;
  */
 
 
-public class PreventAllDamageToControllerEffect extends PreventionEffectImpl<PreventAllDamageToControllerEffect> {
+public class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
 
     public PreventAllDamageToControllerEffect(Duration duration) {
         super(duration, Integer.MAX_VALUE, false);

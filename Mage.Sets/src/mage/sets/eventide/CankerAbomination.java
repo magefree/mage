@@ -81,7 +81,7 @@ public class CankerAbomination extends CardImpl<CankerAbomination> {
     }
 }
 
-class CankerAbominationEffect extends OneShotEffect<CankerAbominationEffect> {
+class CankerAbominationEffect extends OneShotEffect {
 
     public CankerAbominationEffect() {
         super(Outcome.Neutral);

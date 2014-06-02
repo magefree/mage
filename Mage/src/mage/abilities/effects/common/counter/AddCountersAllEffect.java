@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class AddCountersAllEffect extends OneShotEffect<AddCountersAllEffect> {
+public class AddCountersAllEffect extends OneShotEffect {
 
     private final Counter counter;
     private final FilterPermanent filter;

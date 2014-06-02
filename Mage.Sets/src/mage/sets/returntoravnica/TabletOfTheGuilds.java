@@ -72,7 +72,7 @@ public class TabletOfTheGuilds extends CardImpl<TabletOfTheGuilds> {
     }
 }
 
-class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect<TabletOfTheGuildsEntersBattlefieldEffect> {
+class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect {
 
     public TabletOfTheGuildsEntersBattlefieldEffect() {
         super(Outcome.BoostCreature);
@@ -118,7 +118,7 @@ class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect<TabletOfThe
 
 }
 
-class TabletOfTheGuildsGainLifeEffect extends OneShotEffect<TabletOfTheGuildsGainLifeEffect> {
+class TabletOfTheGuildsGainLifeEffect extends OneShotEffect {
 
     public TabletOfTheGuildsGainLifeEffect() {
         super(Outcome.Neutral);

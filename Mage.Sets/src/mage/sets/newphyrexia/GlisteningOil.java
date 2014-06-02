@@ -78,7 +78,7 @@ public class GlisteningOil extends CardImpl<GlisteningOil> {
     }
 }
 
-class GlisteningOilEffect extends OneShotEffect<GlisteningOilEffect> {
+class GlisteningOilEffect extends OneShotEffect {
     GlisteningOilEffect() {
         super(Outcome.UnboostCreature);
         staticText = "put a -1/-1 counter on enchanted creature";

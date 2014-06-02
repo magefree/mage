@@ -67,7 +67,7 @@ public class Mulch extends CardImpl<Mulch> {
     }
 }
 
-class MulchEffect extends OneShotEffect<MulchEffect> {
+class MulchEffect extends OneShotEffect {
 
     public MulchEffect() {
         super(Outcome.DrawCard);

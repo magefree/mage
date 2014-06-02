@@ -83,7 +83,7 @@ public class CagedSun extends CardImpl<CagedSun> {
     }
 }
 
-class CagedSunEffect1 extends OneShotEffect<CagedSunEffect1> {
+class CagedSunEffect1 extends OneShotEffect {
 
     public CagedSunEffect1() {
         super(Outcome.BoostCreature);
@@ -116,7 +116,7 @@ class CagedSunEffect1 extends OneShotEffect<CagedSunEffect1> {
 
 }
 
-class CagedSunEffect2 extends ContinuousEffectImpl<CagedSunEffect2> {
+class CagedSunEffect2 extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

@@ -74,7 +74,7 @@ public class PsychosisCrawler extends CardImpl<PsychosisCrawler> {
     }
 }
 
-class LoseLifeOpponentsEffect extends OneShotEffect<LoseLifeOpponentsEffect> {
+class LoseLifeOpponentsEffect extends OneShotEffect {
 
     public LoseLifeOpponentsEffect() {
         super(Outcome.Damage);

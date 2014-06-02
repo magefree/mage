@@ -82,7 +82,7 @@ public class Burrowing extends CardImpl<Burrowing> {
     }
 }
 
-class BurrowingEffect extends ContinuousEffectImpl<BurrowingEffect> {
+class BurrowingEffect extends ContinuousEffectImpl {
 
     public BurrowingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

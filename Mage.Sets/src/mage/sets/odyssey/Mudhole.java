@@ -68,7 +68,7 @@ public class Mudhole extends CardImpl<Mudhole> {
     }
 }
 
-class MudholeEffect extends OneShotEffect<MudholeEffect> {
+class MudholeEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterLandCard();
 

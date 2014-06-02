@@ -41,7 +41,7 @@ import mage.target.Target;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DestroyMultiTargetEffect extends OneShotEffect<DestroyMultiTargetEffect> {
+public class DestroyMultiTargetEffect extends OneShotEffect {
     protected boolean noRegen;
 
     public DestroyMultiTargetEffect() {

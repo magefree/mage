@@ -72,7 +72,7 @@ public class PrimalVigor extends CardImpl<PrimalVigor> {
     }
 }
 
-class PrimalVigorTokenEffect extends ReplacementEffectImpl<PrimalVigorTokenEffect> {
+class PrimalVigorTokenEffect extends ReplacementEffectImpl {
 
     public PrimalVigorTokenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy);
@@ -110,7 +110,7 @@ class PrimalVigorTokenEffect extends ReplacementEffectImpl<PrimalVigorTokenEffec
 
 }
 
-class PrimalVigorCounterEffect extends ReplacementEffectImpl<PrimalVigorCounterEffect> {
+class PrimalVigorCounterEffect extends ReplacementEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

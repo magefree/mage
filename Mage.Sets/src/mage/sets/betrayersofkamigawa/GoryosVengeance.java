@@ -90,7 +90,7 @@ public class GoryosVengeance extends CardImpl<GoryosVengeance> {
     }
 }
 
-class GoryosVengeanceEffect extends OneShotEffect<GoryosVengeanceEffect> {
+class GoryosVengeanceEffect extends OneShotEffect {
 
     public GoryosVengeanceEffect() {
         super(Outcome.PutCardInPlay);

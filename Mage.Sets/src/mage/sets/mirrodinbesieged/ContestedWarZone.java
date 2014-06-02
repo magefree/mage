@@ -116,7 +116,7 @@ class ContestedWarZoneAbility extends TriggeredAbilityImpl {
 
 }
 
-class ContestedWarZoneEffect extends ContinuousEffectImpl<ContestedWarZoneEffect> {
+class ContestedWarZoneEffect extends ContinuousEffectImpl {
 
     public ContestedWarZoneEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);

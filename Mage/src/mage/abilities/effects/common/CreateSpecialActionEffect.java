@@ -40,7 +40,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CreateSpecialActionEffect extends OneShotEffect<CreateSpecialActionEffect> {
+public class CreateSpecialActionEffect extends OneShotEffect {
 
     protected SpecialAction action;
 

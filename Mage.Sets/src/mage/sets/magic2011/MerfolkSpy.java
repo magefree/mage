@@ -74,7 +74,7 @@ public class MerfolkSpy extends CardImpl<MerfolkSpy> {
 
 }
 
-class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
+class MerfolkSpyEffect extends OneShotEffect {
 
     public MerfolkSpyEffect() {
         super(Outcome.Detriment);

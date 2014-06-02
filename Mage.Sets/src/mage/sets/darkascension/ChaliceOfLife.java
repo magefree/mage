@@ -72,7 +72,7 @@ public class ChaliceOfLife extends CardImpl<ChaliceOfLife> {
     }
 }
 
-class ChaliceOfLifeEffect extends OneShotEffect<ChaliceOfLifeEffect> {
+class ChaliceOfLifeEffect extends OneShotEffect {
 
     public ChaliceOfLifeEffect() {
         super(Outcome.GainLife);

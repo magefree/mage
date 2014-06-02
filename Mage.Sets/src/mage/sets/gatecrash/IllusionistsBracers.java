@@ -110,7 +110,7 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class CopyActivatedAbilityEffect extends OneShotEffect<CopyActivatedAbilityEffect> {
+class CopyActivatedAbilityEffect extends OneShotEffect {
 
     public CopyActivatedAbilityEffect() {
         super(Outcome.Benefit);

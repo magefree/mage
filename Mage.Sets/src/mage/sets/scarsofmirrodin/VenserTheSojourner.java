@@ -100,7 +100,7 @@ public class VenserTheSojourner extends CardImpl<VenserTheSojourner> {
 
 }
 
-class VenserTheSojournerEffect extends OneShotEffect<VenserTheSojournerEffect> {
+class VenserTheSojournerEffect extends OneShotEffect {
 
     private static final String effectText = "Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step";
 

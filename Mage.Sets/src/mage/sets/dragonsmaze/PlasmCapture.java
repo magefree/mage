@@ -73,7 +73,7 @@ public class PlasmCapture extends CardImpl<PlasmCapture> {
     }
 }
 
-class PlasmCaptureCounterEffect extends OneShotEffect<PlasmCaptureCounterEffect> {
+class PlasmCaptureCounterEffect extends OneShotEffect {
 
     public PlasmCaptureCounterEffect() {
         super(Outcome.Benefit);

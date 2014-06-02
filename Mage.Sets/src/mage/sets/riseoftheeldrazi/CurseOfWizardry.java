@@ -77,7 +77,7 @@ public class CurseOfWizardry extends CardImpl<CurseOfWizardry> {
     }
 }
 
-class CurseOfWizardryChooseColorEffect extends OneShotEffect<CurseOfWizardryChooseColorEffect> {
+class CurseOfWizardryChooseColorEffect extends OneShotEffect {
 
     public CurseOfWizardryChooseColorEffect() {
         super(Outcome.Detriment);

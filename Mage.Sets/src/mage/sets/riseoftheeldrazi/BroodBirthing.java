@@ -64,7 +64,7 @@ public class BroodBirthing extends CardImpl<BroodBirthing> {
     }
 }
 
-class BroodBirthingEffect extends OneShotEffect<BroodBirthingEffect> {
+class BroodBirthingEffect extends OneShotEffect {
 
     public BroodBirthingEffect() {
         super(Outcome.PutCreatureInPlay);

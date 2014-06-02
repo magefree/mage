@@ -107,7 +107,7 @@ class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class NorinTheWaryRemovingEffect extends OneShotEffect<NorinTheWaryRemovingEffect> {
+class NorinTheWaryRemovingEffect extends OneShotEffect {
 
     private static final String effectText = "exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
 

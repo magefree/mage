@@ -72,7 +72,7 @@ public class SanityGrinding extends CardImpl<SanityGrinding> {
     }
 }
 
-class SanityGrindingEffect extends OneShotEffect<SanityGrindingEffect> {
+class SanityGrindingEffect extends OneShotEffect {
 
     public SanityGrindingEffect() {
         super(Outcome.Neutral);

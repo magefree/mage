@@ -85,7 +85,7 @@ public class TrueNameNemesis extends CardImpl<TrueNameNemesis> {
     }
 }
 
-class TrueNameNemesisChoosePlayerEffect extends OneShotEffect<TrueNameNemesisChoosePlayerEffect> {
+class TrueNameNemesisChoosePlayerEffect extends OneShotEffect {
 
     public TrueNameNemesisChoosePlayerEffect() {
         super(Outcome.Detriment);

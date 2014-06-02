@@ -79,7 +79,7 @@ public class Fettergeist extends CardImpl<Fettergeist> {
     }
 }
 
-class FettergeistUnlessPaysEffect extends OneShotEffect<FettergeistUnlessPaysEffect> {
+class FettergeistUnlessPaysEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

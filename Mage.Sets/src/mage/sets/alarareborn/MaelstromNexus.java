@@ -153,7 +153,7 @@ class FirstSpellCastThisTurnWatcher extends Watcher {
     }
 }
 
-class CascadeEffect extends OneShotEffect<CascadeEffect> {
+class CascadeEffect extends OneShotEffect {
 
     public CascadeEffect() {
         super(Outcome.PutCardInPlay);

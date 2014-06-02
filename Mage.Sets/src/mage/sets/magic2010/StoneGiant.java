@@ -111,7 +111,7 @@ class StoneGiantTarget extends TargetPermanent {
     }
 }
 
-class StoneGiantEffect extends OneShotEffect<StoneGiantEffect> {
+class StoneGiantEffect extends OneShotEffect {
 
     public StoneGiantEffect() {
         super(Outcome.Detriment);

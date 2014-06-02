@@ -77,7 +77,7 @@ public class MasakoTheHumorless extends CardImpl<MasakoTheHumorless> {
     }
 }
 
-class BlockTappedEffect extends AsThoughEffectImpl<BlockTappedEffect> {
+class BlockTappedEffect extends AsThoughEffectImpl {
 
     public BlockTappedEffect() {
         super(AsThoughEffectType.BLOCK_TAPPED, Duration.WhileOnBattlefield, Outcome.Benefit);

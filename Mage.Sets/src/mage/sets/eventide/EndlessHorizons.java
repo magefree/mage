@@ -123,7 +123,7 @@ class EndlessHorizonsEffect extends SearchEffect<EndlessHorizonsEffect> {
     }
 }
 
-    class EndlessHorizonsEffect2 extends OneShotEffect<EndlessHorizonsEffect2> {
+    class EndlessHorizonsEffect2 extends OneShotEffect {
 
         public EndlessHorizonsEffect2() {
             super(Outcome.ReturnToHand);

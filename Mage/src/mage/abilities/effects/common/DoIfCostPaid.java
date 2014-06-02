@@ -10,7 +10,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
+public class DoIfCostPaid extends OneShotEffect {
     private final OneShotEffect executingEffect;
     private final Cost cost;
     private String chooseUseText;

@@ -80,7 +80,7 @@ public class SylvanLibrary extends CardImpl<SylvanLibrary> {
     }
 }
 
-class SylvanLibraryEffect extends OneShotEffect<SylvanLibraryEffect> {
+class SylvanLibraryEffect extends OneShotEffect {
 
     public SylvanLibraryEffect() {
         super(Outcome.DrawCard);

@@ -126,7 +126,7 @@ class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl {
 
 }
 
-class CurseOfInertiaTapOrUntapTargetEffect extends OneShotEffect<CurseOfInertiaTapOrUntapTargetEffect> {
+class CurseOfInertiaTapOrUntapTargetEffect extends OneShotEffect {
     public CurseOfInertiaTapOrUntapTargetEffect() {
         super(Outcome.Tap);
         staticText = "tap or untap target permanent of his or her choice";

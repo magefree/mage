@@ -45,7 +45,7 @@ import mage.players.Player;
  * 
  * @author LevelX2
  */
-public class CantAttackControllerAttachedEffect extends ReplacementEffectImpl<CantAttackControllerAttachedEffect> implements MageSingleton {
+public class CantAttackControllerAttachedEffect extends ReplacementEffectImpl implements MageSingleton {
 
     /**
      * The creature this permanent is attached to can't attack the controller 

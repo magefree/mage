@@ -65,7 +65,7 @@ public class WindsOfChange extends CardImpl<WindsOfChange> {
     }
 }
 
-class WindsOfChangeEffect extends OneShotEffect<WindsOfChangeEffect> {
+class WindsOfChangeEffect extends OneShotEffect {
 
     public WindsOfChangeEffect() {
         super(Outcome.Benefit);

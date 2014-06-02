@@ -42,7 +42,7 @@ import mage.util.CardUtil;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
+public class TapTargetEffect extends OneShotEffect {
 
     public TapTargetEffect() {
         super(Outcome.Tap);

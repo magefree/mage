@@ -103,7 +103,7 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class GravityWellEffect extends ContinuousEffectImpl<GravityWellEffect> {
+class GravityWellEffect extends ContinuousEffectImpl {
 
     public GravityWellEffect() {
     super(Duration.EndOfTurn, Outcome.LoseAbility);

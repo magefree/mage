@@ -80,7 +80,7 @@ public class AjanisChosen extends CardImpl<AjanisChosen> {
     }
 }
 
-class AjanisChosenEffect extends OneShotEffect<AjanisChosenEffect> {
+class AjanisChosenEffect extends OneShotEffect {
 
 
     public AjanisChosenEffect() {

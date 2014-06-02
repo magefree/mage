@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class CreaturesCantGetOrHaveAbilityEffect extends ContinuousEffectImpl<CreaturesCantGetOrHaveAbilityEffect> {
+public class CreaturesCantGetOrHaveAbilityEffect extends ContinuousEffectImpl {
 
     private Ability ability;
     private FilterCreaturePermanent filter;

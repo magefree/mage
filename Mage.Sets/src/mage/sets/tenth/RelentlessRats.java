@@ -82,7 +82,7 @@ public class RelentlessRats extends CardImpl<RelentlessRats> {
         return new RelentlessRats(this);
     }
 
-    class RelentlessRatsEffect extends ContinuousEffectImpl<RelentlessRatsEffect> {
+    class RelentlessRatsEffect extends ContinuousEffectImpl {
 
         public RelentlessRatsEffect() {
             super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

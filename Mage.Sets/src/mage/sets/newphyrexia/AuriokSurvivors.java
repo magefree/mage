@@ -83,7 +83,7 @@ public class AuriokSurvivors extends CardImpl<AuriokSurvivors> {
     }
 }
 
-class AuriokSurvivorsEffect extends OneShotEffect<AuriokSurvivorsEffect> {
+class AuriokSurvivorsEffect extends OneShotEffect {
     AuriokSurvivorsEffect() {
         super(Outcome.Neutral);
         staticText = "If you do, you may attach it to {this}";

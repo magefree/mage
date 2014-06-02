@@ -69,7 +69,7 @@ public class IntoTheMawOfHell extends CardImpl<IntoTheMawOfHell> {
     }
 }
 
-class IntoTheMawOfHellEffect extends OneShotEffect<IntoTheMawOfHellEffect> {
+class IntoTheMawOfHellEffect extends OneShotEffect {
 
     public IntoTheMawOfHellEffect() {
         super(Outcome.Damage);

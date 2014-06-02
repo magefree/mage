@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  * @author BetaSteward_at_googlemail.com
  * @param <T>
  */
-public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends ContinuousEffectImpl<T> {
+public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends ContinuousEffectImpl {
 
     public RestrictionEffect(Duration duration) {
         this(duration, Outcome.Detriment);

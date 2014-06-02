@@ -87,7 +87,7 @@ public class Void extends CardImpl<Void> {
     }
 }
 
-class VoidEffect extends OneShotEffect<VoidEffect> {
+class VoidEffect extends OneShotEffect {
 
     public VoidEffect() {
         super(Outcome.DestroyPermanent);

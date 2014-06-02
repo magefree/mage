@@ -86,7 +86,7 @@ public class EtherwroughtPage extends CardImpl<EtherwroughtPage> {
     }
 }
 
-class EtherwroughtPageEffect extends OneShotEffect<EtherwroughtPageEffect> {
+class EtherwroughtPageEffect extends OneShotEffect {
 
     public EtherwroughtPageEffect() {
         super(Outcome.DrawCard);

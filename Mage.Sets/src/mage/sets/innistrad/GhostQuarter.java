@@ -78,7 +78,7 @@ public class GhostQuarter extends CardImpl<GhostQuarter> {
     }
 }
 
-class GhostQuarterEffect extends OneShotEffect<GhostQuarterEffect> {
+class GhostQuarterEffect extends OneShotEffect {
 
     public GhostQuarterEffect() {
         super(Outcome.PutLandInPlay);

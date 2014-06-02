@@ -74,7 +74,7 @@ public class Repopulate extends CardImpl<Repopulate> {
     }
 }
 
-class RepopulateEffect extends OneShotEffect<RepopulateEffect> {
+class RepopulateEffect extends OneShotEffect {
 
     RepopulateEffect() {
         super(Outcome.Benefit);

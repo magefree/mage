@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Quercitron
  */
-public class ReturnToBattlefieldUnderOwnerControlAttachedEffect extends OneShotEffect<ReturnToBattlefieldUnderOwnerControlAttachedEffect> {
+public class ReturnToBattlefieldUnderOwnerControlAttachedEffect extends OneShotEffect {
 
     public ReturnToBattlefieldUnderOwnerControlAttachedEffect() {
         super(Outcome.Neutral);

@@ -83,7 +83,7 @@ public class VizkopaConfessor extends CardImpl<VizkopaConfessor> {
     }
 }
 
-class VizkopaConfessorEffect extends OneShotEffect<VizkopaConfessorEffect> {
+class VizkopaConfessorEffect extends OneShotEffect {
 
     public VizkopaConfessorEffect() {
         super(Outcome.Benefit);

@@ -73,7 +73,7 @@ public class Cultivate extends CardImpl<Cultivate> {
 
 }
 
-class CultivateEffect extends OneShotEffect<CultivateEffect> {
+class CultivateEffect extends OneShotEffect {
 
     protected static final FilterCard filter = new FilterCard("card to put on the battlefield tapped");
 

@@ -84,7 +84,7 @@ public class UndercityInformer extends CardImpl<UndercityInformer> {
 }
 
 
-class UndercityInformerEffect extends OneShotEffect<UndercityInformerEffect> {
+class UndercityInformerEffect extends OneShotEffect {
 
     public UndercityInformerEffect() {
         super(Outcome.PutCardInPlay);

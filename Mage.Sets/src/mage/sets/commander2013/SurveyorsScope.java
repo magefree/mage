@@ -71,7 +71,7 @@ public class SurveyorsScope extends CardImpl<SurveyorsScope> {
     }
 }
 
-class SurveyorsScopeEffect extends OneShotEffect<SurveyorsScopeEffect> {
+class SurveyorsScopeEffect extends OneShotEffect {
 
     public SurveyorsScopeEffect() {
         super(Outcome.PutLandInPlay);

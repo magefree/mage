@@ -81,7 +81,7 @@ public class ThoughtGorger extends CardImpl<ThoughtGorger> {
 
 }
 
-class ThoughtGorgerEffectEnters extends OneShotEffect<ThoughtGorgerEffectEnters> {
+class ThoughtGorgerEffectEnters extends OneShotEffect {
 
     public ThoughtGorgerEffectEnters() {
         super(Outcome.Benefit);
@@ -111,7 +111,7 @@ class ThoughtGorgerEffectEnters extends OneShotEffect<ThoughtGorgerEffectEnters>
     }
 }
 
-class ThoughtGorgerEffectLeaves extends OneShotEffect<ThoughtGorgerEffectLeaves> {
+class ThoughtGorgerEffectLeaves extends OneShotEffect {
 
     public ThoughtGorgerEffectLeaves() {
         super(Outcome.Neutral);

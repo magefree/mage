@@ -128,7 +128,7 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class GraveBetrayalEffect extends OneShotEffect<GraveBetrayalEffect> {
+class GraveBetrayalEffect extends OneShotEffect {
 
     public GraveBetrayalEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -166,7 +166,7 @@ class GraveBetrayalEffect extends OneShotEffect<GraveBetrayalEffect> {
 
 }
 
-class GraveBetrayalContiniousEffect extends ContinuousEffectImpl<GraveBetrayalContiniousEffect> {
+class GraveBetrayalContiniousEffect extends ContinuousEffectImpl {
 
     public GraveBetrayalContiniousEffect() {
         super(Duration.Custom, Outcome.Neutral);

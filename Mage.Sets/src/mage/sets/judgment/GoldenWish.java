@@ -73,7 +73,7 @@ public class GoldenWish extends CardImpl<GoldenWish> {
     }
 }
 
-class GoldenWishEffect extends OneShotEffect<GoldenWishEffect> {
+class GoldenWishEffect extends OneShotEffect {
 
     private static final String choiceText = "Choose an artifact or enchantment card you own from outside the game, and put it into your hand";
 

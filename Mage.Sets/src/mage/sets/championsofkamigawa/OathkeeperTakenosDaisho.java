@@ -92,7 +92,7 @@ public class OathkeeperTakenosDaisho extends CardImpl<OathkeeperTakenosDaisho> {
     }
 }
 
-class ExileEquippedEffect extends OneShotEffect<ExileEquippedEffect> {
+class ExileEquippedEffect extends OneShotEffect {
 
     public ExileEquippedEffect() {
         super(Outcome.Exile);

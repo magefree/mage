@@ -66,7 +66,7 @@ public class SoulsMight extends CardImpl<SoulsMight> {
     }
 }
 
-class SoulsMightEffect extends OneShotEffect<SoulsMightEffect> {
+class SoulsMightEffect extends OneShotEffect {
 
     public SoulsMightEffect() {
         super(Outcome.BoostCreature);

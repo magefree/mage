@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  * @author LevelX2
  * 
  */
-public class BecomesCreatureAllEffect extends ContinuousEffectImpl<BecomesCreatureAllEffect> {
+public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
     protected Token token;
     protected String type;

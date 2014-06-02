@@ -42,7 +42,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect<ExileGraveyardAllTargetPlayerEffect> {
+public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
 
     public ExileGraveyardAllTargetPlayerEffect() {
         super(Outcome.Exile);

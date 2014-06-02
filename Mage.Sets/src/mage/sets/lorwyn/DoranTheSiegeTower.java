@@ -85,7 +85,7 @@ public class DoranTheSiegeTower extends CardImpl<DoranTheSiegeTower> {
     }
 }
 
-class DoranTheSiegeTowerCombatDamageRuleEffect extends ContinuousEffectImpl<DoranTheSiegeTowerCombatDamageRuleEffect> {
+class DoranTheSiegeTowerCombatDamageRuleEffect extends ContinuousEffectImpl {
 
     public DoranTheSiegeTowerCombatDamageRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

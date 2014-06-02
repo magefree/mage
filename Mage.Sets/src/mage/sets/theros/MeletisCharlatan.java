@@ -90,7 +90,7 @@ public class MeletisCharlatan extends CardImpl<MeletisCharlatan> {
     }
 }
 
-class MeletisCharlatanCopyTargetSpellEffect extends OneShotEffect<MeletisCharlatanCopyTargetSpellEffect> {
+class MeletisCharlatanCopyTargetSpellEffect extends OneShotEffect {
 
     public MeletisCharlatanCopyTargetSpellEffect() {
         super(Outcome.Copy);

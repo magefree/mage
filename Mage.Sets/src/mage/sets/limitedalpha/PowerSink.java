@@ -73,7 +73,7 @@ public class PowerSink extends CardImpl<PowerSink> {
     }
 }
 
-class PowerSinkCounterUnlessPaysEffect extends OneShotEffect<PowerSinkCounterUnlessPaysEffect> {
+class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
 
     public PowerSinkCounterUnlessPaysEffect() {
         super(Outcome.Detriment);

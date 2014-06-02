@@ -81,7 +81,7 @@ public class VoidstoneGargoyle extends CardImpl<VoidstoneGargoyle> {
     }
 }
 
-class VoidstoneGargoyleChooseCardEffect extends OneShotEffect<VoidstoneGargoyleChooseCardEffect> {
+class VoidstoneGargoyleChooseCardEffect extends OneShotEffect {
 
     public VoidstoneGargoyleChooseCardEffect() {
         super(Outcome.Detriment);
@@ -118,7 +118,7 @@ class VoidstoneGargoyleChooseCardEffect extends OneShotEffect<VoidstoneGargoyleC
 
 }
 
-class VoidstoneGargoyleReplacementEffect1 extends ReplacementEffectImpl<VoidstoneGargoyleReplacementEffect1> {
+class VoidstoneGargoyleReplacementEffect1 extends ReplacementEffectImpl {
 
     public VoidstoneGargoyleReplacementEffect1() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -157,7 +157,7 @@ class VoidstoneGargoyleReplacementEffect1 extends ReplacementEffectImpl<Voidston
 
 }
 
-class VoidstoneGargoyleReplacementEffect2 extends ReplacementEffectImpl<VoidstoneGargoyleReplacementEffect2> {
+class VoidstoneGargoyleReplacementEffect2 extends ReplacementEffectImpl {
 
     public VoidstoneGargoyleReplacementEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

@@ -68,7 +68,7 @@ public class ReforgeTheSoul extends CardImpl<ReforgeTheSoul> {
     }
 }
 
-class ReforgeTheSoulEffect extends OneShotEffect<ReforgeTheSoulEffect> {
+class ReforgeTheSoulEffect extends OneShotEffect {
 
     public ReforgeTheSoulEffect() {
         super(Outcome.DrawCard);

@@ -77,7 +77,7 @@ public class Tariff extends CardImpl<Tariff> {
     }
 }
 
-class TariffEffect extends OneShotEffect<TariffEffect> {
+class TariffEffect extends OneShotEffect {
     
     public TariffEffect() {
         super(Outcome.DestroyPermanent);

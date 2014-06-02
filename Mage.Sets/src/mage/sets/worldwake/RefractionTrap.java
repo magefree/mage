@@ -154,7 +154,7 @@ class RefractionTrapAlternativeCost extends AlternativeCostImpl<RefractionTrapAl
     }
 }
 
-class RefractionTrapPreventDamageEffect extends PreventionEffectImpl<RefractionTrapPreventDamageEffect> {
+class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
 
     private int amount;
 

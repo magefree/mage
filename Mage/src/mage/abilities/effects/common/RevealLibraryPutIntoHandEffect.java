@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  * @author LevelX
  */
 
-public class RevealLibraryPutIntoHandEffect extends OneShotEffect<RevealLibraryPutIntoHandEffect> {
+public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
 
     private int amountCards;
     private FilterCard filter;

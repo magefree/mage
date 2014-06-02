@@ -71,7 +71,7 @@ public class RapidHybridization extends CardImpl<RapidHybridization> {
     }
 }
 
-class RapidHybridizationEffect extends OneShotEffect<RapidHybridizationEffect> {
+class RapidHybridizationEffect extends OneShotEffect {
 
     public RapidHybridizationEffect() {
         super(Outcome.PutCreatureInPlay);

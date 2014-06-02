@@ -87,7 +87,7 @@ public class AlphaAuthority extends CardImpl<AlphaAuthority> {
     }
 }
 
-class CantBeBlockedByMoreThanOneAttachedEffect extends ContinuousEffectImpl<CantBeBlockedByMoreThanOneAttachedEffect> {
+class CantBeBlockedByMoreThanOneAttachedEffect extends ContinuousEffectImpl {
 
     protected int amount;
     protected AttachmentType attachmentType;

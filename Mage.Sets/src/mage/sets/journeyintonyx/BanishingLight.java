@@ -88,7 +88,7 @@ public class BanishingLight extends CardImpl<BanishingLight> {
     }
 }
 
-class BanishingLightExileEffect extends OneShotEffect<BanishingLightExileEffect> {
+class BanishingLightExileEffect extends OneShotEffect {
 
     public BanishingLightExileEffect() {
         super(Outcome.Benefit);
@@ -151,7 +151,7 @@ class BanishingLightReturnExiledAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ReturnExiledCreatureEffect extends OneShotEffect<ReturnExiledCreatureEffect> {
+class ReturnExiledCreatureEffect extends OneShotEffect {
 
     public ReturnExiledCreatureEffect() {
         super(Outcome.Benefit);

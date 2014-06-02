@@ -67,7 +67,7 @@ public class WheelOfTorture extends CardImpl<WheelOfTorture> {
 }
 
 
-class WheelOfTortureEffect extends OneShotEffect<WheelOfTortureEffect> {
+class WheelOfTortureEffect extends OneShotEffect {
 
     private WheelOfTortureEffect(final WheelOfTortureEffect effect) {
         super(effect);

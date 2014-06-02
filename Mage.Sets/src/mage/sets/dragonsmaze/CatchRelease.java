@@ -99,7 +99,7 @@ public class CatchRelease extends SplitCard<CatchRelease> {
     }
 }
 
-class ReleaseSacrificeEffect extends OneShotEffect<ReleaseSacrificeEffect> {
+class ReleaseSacrificeEffect extends OneShotEffect {
 
     private static final FilterArtifactPermanent filter1 = new FilterArtifactPermanent("artifact you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature you control");

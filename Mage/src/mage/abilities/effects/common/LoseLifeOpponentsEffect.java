@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class LoseLifeOpponentsEffect extends OneShotEffect<LoseLifeOpponentsEffect> {
+public class LoseLifeOpponentsEffect extends OneShotEffect {
 
     private DynamicValue amount;
 

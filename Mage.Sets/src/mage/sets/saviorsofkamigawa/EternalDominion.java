@@ -78,7 +78,7 @@ public class EternalDominion extends CardImpl<EternalDominion> {
     }
 }
 
-class EternalDominionEffect extends OneShotEffect<EternalDominionEffect> {
+class EternalDominionEffect extends OneShotEffect {
     
     private static final FilterCard filter = new FilterCard("an artifact, creature, enchantment, or land card");
     

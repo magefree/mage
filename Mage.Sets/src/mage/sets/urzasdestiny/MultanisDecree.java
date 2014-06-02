@@ -65,7 +65,7 @@ public class MultanisDecree extends CardImpl<MultanisDecree> {
         return new MultanisDecree(this);
     }
 }
-class MultanisDecreeDestroyEffect extends OneShotEffect<MultanisDecreeDestroyEffect> {
+class MultanisDecreeDestroyEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {

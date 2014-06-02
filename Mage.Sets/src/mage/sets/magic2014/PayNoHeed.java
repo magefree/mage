@@ -72,7 +72,7 @@ public class PayNoHeed extends CardImpl<PayNoHeed> {
     }
 }
 
-class PayNoHeedEffect extends PreventionEffectImpl<PayNoHeedEffect> {
+class PayNoHeedEffect extends PreventionEffectImpl {
 
     public PayNoHeedEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false);

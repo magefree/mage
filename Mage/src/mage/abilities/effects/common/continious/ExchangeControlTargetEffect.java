@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author magenoxx_at_googlemail.com
  */
-public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeControlTargetEffect> {
+public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
  
     private String rule;
     private boolean withSource;

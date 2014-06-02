@@ -72,7 +72,7 @@ public class EternityVessel extends CardImpl<EternityVessel> {
     }
 }
 
-class EternityVesselEffect extends OneShotEffect<EternityVesselEffect> {
+class EternityVesselEffect extends OneShotEffect {
     public EternityVesselEffect() {
         super(Outcome.Benefit);
         staticText = "with X charge counters on it, where X is your life total";
@@ -105,7 +105,7 @@ class EternityVesselEffect extends OneShotEffect<EternityVesselEffect> {
     }
 }
 
-class EternityVesselEffect2 extends OneShotEffect<EternityVesselEffect2> {
+class EternityVesselEffect2 extends OneShotEffect {
     public EternityVesselEffect2() {
         super(Outcome.Benefit);
         staticText = "you may have your life total become the number of charge counters on Eternity Vessel";

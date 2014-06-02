@@ -46,7 +46,7 @@ import mage.game.permanent.PermanentToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
+public class CopyEffect extends ContinuousEffectImpl {
 
     /**
      * Object we copy from

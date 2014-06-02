@@ -68,7 +68,7 @@ public class BrimstoneVolley extends CardImpl<BrimstoneVolley> {
     }
 }
 
-class BrimstoneVolleyEffect extends OneShotEffect<BrimstoneVolleyEffect> {
+class BrimstoneVolleyEffect extends OneShotEffect {
 
     public BrimstoneVolleyEffect() {
         super(Outcome.Damage);

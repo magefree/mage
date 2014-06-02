@@ -77,7 +77,7 @@ public class SingeMindOgre extends CardImpl<SingeMindOgre> {
     }
 }
 
-class SingeMindOgreEffect extends OneShotEffect<SingeMindOgreEffect> {
+class SingeMindOgreEffect extends OneShotEffect {
 
     public SingeMindOgreEffect() {
         super(Outcome.LoseLife);

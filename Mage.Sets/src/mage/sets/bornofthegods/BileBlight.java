@@ -68,7 +68,7 @@ public class BileBlight extends CardImpl<BileBlight> {
     }
 }
 
-class BileBlightEffect extends ContinuousEffectImpl<BileBlightEffect> {
+class BileBlightEffect extends ContinuousEffectImpl {
 
     public BileBlightEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.UnboostCreature);

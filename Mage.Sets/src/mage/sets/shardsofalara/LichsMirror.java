@@ -66,7 +66,7 @@ public class LichsMirror extends CardImpl<LichsMirror> {
     }
 }
 
-class LichsMirrorEffect extends ReplacementEffectImpl<LichsMirrorEffect> {
+class LichsMirrorEffect extends ReplacementEffectImpl {
 
     public LichsMirrorEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

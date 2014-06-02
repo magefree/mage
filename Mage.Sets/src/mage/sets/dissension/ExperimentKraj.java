@@ -89,7 +89,7 @@ public class ExperimentKraj extends CardImpl<ExperimentKraj> {
     }
 }
 
-class ExperimentKrajEffect extends ContinuousEffectImpl<ExperimentKrajEffect> {
+class ExperimentKrajEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

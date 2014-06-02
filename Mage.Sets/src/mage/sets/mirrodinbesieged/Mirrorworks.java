@@ -108,7 +108,7 @@ class MirrorworksAbility extends TriggeredAbilityImpl {
 
 }
 
-class MirrorworksEffect extends OneShotEffect<MirrorworksEffect> {
+class MirrorworksEffect extends OneShotEffect {
 
     public MirrorworksEffect() {
         super(Outcome.PutCreatureInPlay);

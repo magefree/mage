@@ -90,7 +90,7 @@ public class CallToTheKindred extends CardImpl<CallToTheKindred> {
     }
 }
 
-class CallToTheKindredEffect extends OneShotEffect<CallToTheKindredEffect> {
+class CallToTheKindredEffect extends OneShotEffect {
 
     public CallToTheKindredEffect() {
         super(Outcome.PutCreatureInPlay);

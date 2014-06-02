@@ -81,7 +81,7 @@ public class PorphyryNodes extends CardImpl<PorphyryNodes> {
     }
 }
 
-class PorphyryNodesEffect extends OneShotEffect<PorphyryNodesEffect> {
+class PorphyryNodesEffect extends OneShotEffect {
     
     public PorphyryNodesEffect() {
         super(Outcome.DestroyPermanent);

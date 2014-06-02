@@ -77,7 +77,7 @@ import mage.players.Player;
     }
 }
  
-class UnleashReplacementEffect extends ReplacementEffectImpl<UnleashReplacementEffect> {
+class UnleashReplacementEffect extends ReplacementEffectImpl {
  
     public UnleashReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);

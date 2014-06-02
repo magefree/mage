@@ -144,7 +144,7 @@ class CardsDrawnControllerWatcher extends Watcher {
     }
 }
 
-class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl<ArchmageAscensionReplacementEffect> {
+class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
 
     public ArchmageAscensionReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

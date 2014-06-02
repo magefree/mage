@@ -103,7 +103,7 @@ public class VraskaTheUnseen extends CardImpl<VraskaTheUnseen> {
 }
 
 
-class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl<VraskaTheUnseenGainAbilityEffect> {
+class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
 
@@ -157,7 +157,7 @@ class AssassinToken extends Token {
     }
 }
 
-class VraskaTheUnseenLoseGameEffect extends OneShotEffect<VraskaTheUnseenLoseGameEffect> {
+class VraskaTheUnseenLoseGameEffect extends OneShotEffect {
 
     public VraskaTheUnseenLoseGameEffect() {
         super(Outcome.Damage);

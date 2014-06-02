@@ -68,7 +68,7 @@ public class EssenceHarvest extends CardImpl<EssenceHarvest> {
     }
 }
 
-class EssenceHarvestEffect extends OneShotEffect<EssenceHarvestEffect> {
+class EssenceHarvestEffect extends OneShotEffect {
 
     public EssenceHarvestEffect() {
         super(Outcome.Damage);

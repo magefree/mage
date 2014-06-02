@@ -93,7 +93,7 @@ public class JaceTheMindSculptor extends CardImpl<JaceTheMindSculptor> {
 
 }
 
-class JaceTheMindSculptorEffect1 extends OneShotEffect<JaceTheMindSculptorEffect1> {
+class JaceTheMindSculptorEffect1 extends OneShotEffect {
 
     public JaceTheMindSculptorEffect1() {
         super(Outcome.Detriment);
@@ -133,7 +133,7 @@ class JaceTheMindSculptorEffect1 extends OneShotEffect<JaceTheMindSculptorEffect
 
 }
 
-class JaceTheMindSculptorEffect2 extends OneShotEffect<JaceTheMindSculptorEffect2> {
+class JaceTheMindSculptorEffect2 extends OneShotEffect {
 
     public JaceTheMindSculptorEffect2() {
         super(Outcome.DrawCard);
@@ -175,7 +175,7 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect<JaceTheMindSculptorEffect
 
 }
 
-class JaceTheMindSculptorEffect3 extends OneShotEffect<JaceTheMindSculptorEffect3> {
+class JaceTheMindSculptorEffect3 extends OneShotEffect {
 
     public JaceTheMindSculptorEffect3() {
         super(Outcome.DrawCard);

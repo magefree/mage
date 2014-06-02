@@ -84,7 +84,7 @@ public class CruelRevival extends CardImpl<CruelRevival> {
     }
 }
 
-class CruelRevivalEffect extends OneShotEffect<CruelRevivalEffect> {
+class CruelRevivalEffect extends OneShotEffect {
 
     public CruelRevivalEffect() {
         super(Outcome.DestroyPermanent);

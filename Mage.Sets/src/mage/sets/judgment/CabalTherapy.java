@@ -78,7 +78,7 @@ public class CabalTherapy extends CardImpl<CabalTherapy> {
     }
 }
 
-class CabalTherapyEffect extends OneShotEffect<CabalTherapyEffect> {
+class CabalTherapyEffect extends OneShotEffect {
 
     public CabalTherapyEffect() {
         super(Outcome.Discard);

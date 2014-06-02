@@ -106,7 +106,7 @@ public class KioraTheCrashingWave extends CardImpl<KioraTheCrashingWave> {
     }
 }
 
-class KioraPreventionEffect extends PreventionEffectImpl<KioraPreventionEffect> {
+class KioraPreventionEffect extends PreventionEffectImpl {
 
     public KioraPreventionEffect() {
         super(Duration.Custom);

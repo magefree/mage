@@ -87,7 +87,7 @@ public class Shuriken extends CardImpl<Shuriken> {
     }
 }
 
-class ShurikenDamageEffect extends OneShotEffect<ShurikenDamageEffect> {
+class ShurikenDamageEffect extends OneShotEffect {
 
     public ShurikenDamageEffect() {
         super(Outcome.Damage);
@@ -181,7 +181,7 @@ class ShurikenUnattachCost extends CostImpl<ShurikenUnattachCost> {
     }
 }
 
-class ShurikenControlEffect extends OneShotEffect<ShurikenControlEffect> {
+class ShurikenControlEffect extends OneShotEffect {
 
     public ShurikenControlEffect() {
         super(Outcome.Benefit);
@@ -229,7 +229,7 @@ class ShurikenControlEffect extends OneShotEffect<ShurikenControlEffect> {
     }
 }
 
-class ShurikenGainControlEffect extends ContinuousEffectImpl<ShurikenGainControlEffect> {
+class ShurikenGainControlEffect extends ContinuousEffectImpl {
 
     UUID controller;
 

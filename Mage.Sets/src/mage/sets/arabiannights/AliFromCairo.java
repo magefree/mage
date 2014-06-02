@@ -68,7 +68,7 @@ public class AliFromCairo extends CardImpl<AliFromCairo> {
     }
 }
 
-class AliFromCairoReplacementEffect extends ReplacementEffectImpl<AliFromCairoReplacementEffect> {
+class AliFromCairoReplacementEffect extends ReplacementEffectImpl {
 
     public AliFromCairoReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

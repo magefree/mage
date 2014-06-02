@@ -114,7 +114,7 @@ public class TriadOfFates extends CardImpl<TriadOfFates> {
     }
 }
 
-class DrawCardControllerTargetEffect extends OneShotEffect<DrawCardControllerTargetEffect> {
+class DrawCardControllerTargetEffect extends OneShotEffect {
 
     public DrawCardControllerTargetEffect() {
         super(Outcome.Benefit);

@@ -77,7 +77,7 @@ public class HellcarverDemon extends CardImpl<HellcarverDemon> {
     }
 }
 
-class HellcarverDemonEffect extends OneShotEffect<HellcarverDemonEffect> {
+class HellcarverDemonEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filterPermanents = new FilterControlledPermanent("Permanent");
     private static FilterNonlandCard filter = new FilterNonlandCard("nonland card exiled with Hellcarver Demon");

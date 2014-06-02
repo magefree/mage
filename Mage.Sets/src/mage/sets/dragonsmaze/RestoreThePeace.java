@@ -68,7 +68,7 @@ public class RestoreThePeace extends CardImpl<RestoreThePeace> {
     }
 }
 
-class RestoreThePeaceEffect extends OneShotEffect<RestoreThePeaceEffect> {
+class RestoreThePeaceEffect extends OneShotEffect {
     
     public RestoreThePeaceEffect() {
         super(Outcome.ReturnToHand);

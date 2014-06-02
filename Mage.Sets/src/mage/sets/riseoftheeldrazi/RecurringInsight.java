@@ -69,7 +69,7 @@ public class RecurringInsight extends CardImpl<RecurringInsight> {
     }
 }
 
-class RecurringInsightEffect extends OneShotEffect<RecurringInsightEffect> {
+class RecurringInsightEffect extends OneShotEffect {
 
     public RecurringInsightEffect() {
         super(Outcome.DrawCard);

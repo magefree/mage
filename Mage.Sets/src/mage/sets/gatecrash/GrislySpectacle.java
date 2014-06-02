@@ -79,7 +79,7 @@ public class GrislySpectacle extends CardImpl<GrislySpectacle> {
     }
 }
 
-class GrislySpectacleEffect extends OneShotEffect<GrislySpectacleEffect> {
+class GrislySpectacleEffect extends OneShotEffect {
 
     public GrislySpectacleEffect() {
         super(Outcome.DestroyPermanent);

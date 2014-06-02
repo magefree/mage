@@ -71,7 +71,7 @@ public class DruidicSatchel extends CardImpl<DruidicSatchel> {
     }
 }
 
-class DruidicSatchelEffect extends OneShotEffect<DruidicSatchelEffect> {
+class DruidicSatchelEffect extends OneShotEffect {
 
     public DruidicSatchelEffect() {
         super(Outcome.Benefit);

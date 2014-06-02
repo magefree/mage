@@ -102,7 +102,7 @@ class VigilForTheLostTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class VigilForTheLostEffect extends OneShotEffect<VigilForTheLostEffect> {
+class VigilForTheLostEffect extends OneShotEffect {
     VigilForTheLostEffect() {
         super(Outcome.GainLife);
         staticText = "you may pay {X}. If you do, you gain X life";

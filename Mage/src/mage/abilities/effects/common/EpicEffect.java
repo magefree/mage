@@ -32,7 +32,7 @@ import mage.players.Player;
  * resolves, but effects (such as the epic ability itself) can still put copies
  * of spells onto the stack. *
  */
-public class EpicEffect extends OneShotEffect<EpicEffect> {
+public class EpicEffect extends OneShotEffect {
 
     final String rule = "<br><br/>Epic <i>(For the rest of the game, you can't cast spells.  At the beginning of each of your upkeeps for the rest of the game, copy this spell except for its epic ability.  If the spell has targets, you may choose new targets for the copy)";
 
@@ -79,7 +79,7 @@ public class EpicEffect extends OneShotEffect<EpicEffect> {
     }
 }
 
-class EpicReplacementEffect extends ReplacementEffectImpl<EpicReplacementEffect> {
+class EpicReplacementEffect extends ReplacementEffectImpl {
 
     public EpicReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Neutral);
@@ -123,7 +123,7 @@ class EpicReplacementEffect extends ReplacementEffectImpl<EpicReplacementEffect>
     }
 }
 
-class EpicPushEffect extends OneShotEffect<EpicPushEffect> {
+class EpicPushEffect extends OneShotEffect {
 
     final private Spell spell;
 

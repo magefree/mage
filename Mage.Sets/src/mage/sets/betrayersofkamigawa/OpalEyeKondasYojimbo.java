@@ -93,7 +93,7 @@ public class OpalEyeKondasYojimbo extends CardImpl<OpalEyeKondasYojimbo> {
     }
 }
 
-class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl<OpalEyeKondasYojimboRedirectionEffect> {
+class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl {
 
     OpalEyeKondasYojimboRedirectionEffect() {
         super(Duration.EndOfTurn, Outcome.RedirectDamage);
@@ -166,7 +166,7 @@ class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl<OpalEy
     }
 }
 
-class OpalEyeKondasYojimboPreventEffect extends PreventionEffectImpl<OpalEyeKondasYojimboPreventEffect> {
+class OpalEyeKondasYojimboPreventEffect extends PreventionEffectImpl {
 
     public OpalEyeKondasYojimboPreventEffect() {
         super(Duration.EndOfTurn);

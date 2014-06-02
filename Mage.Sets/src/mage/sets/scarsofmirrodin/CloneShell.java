@@ -79,7 +79,7 @@ public class CloneShell extends CardImpl<CloneShell> {
     }
 }
 
-class CloneShellEffect extends OneShotEffect<CloneShellEffect> {
+class CloneShellEffect extends OneShotEffect {
 
     protected static FilterCard filter1 = new FilterCard("card to exile face down");
     protected static FilterCard filter2 = new FilterCard("card to put on the bottom of your library");
@@ -149,7 +149,7 @@ class CloneShellEffect extends OneShotEffect<CloneShellEffect> {
 
 }
 
-class CloneShellDiesEffect extends OneShotEffect<CloneShellDiesEffect> {
+class CloneShellDiesEffect extends OneShotEffect {
 
     public CloneShellDiesEffect() {
         super(Outcome.Benefit);

@@ -67,7 +67,7 @@ public class Blistergrub extends CardImpl<Blistergrub> {
     }
 }
 
-class BlistergrubEffect extends OneShotEffect<BlistergrubEffect> {
+class BlistergrubEffect extends OneShotEffect {
 
     public BlistergrubEffect() {
         super(Outcome.Damage);

@@ -96,7 +96,7 @@ class SphinxOfJwarIsleLookAbility extends ActivatedAbilityImpl {
 
 }
 
-class SphinxOfJwarIsleEffect extends OneShotEffect<SphinxOfJwarIsleEffect> {
+class SphinxOfJwarIsleEffect extends OneShotEffect {
 
     public SphinxOfJwarIsleEffect() {
         super(Outcome.Neutral);        

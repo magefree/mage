@@ -70,7 +70,7 @@ public class WorldlyCounsel extends CardImpl<WorldlyCounsel> {
     }
 }
 
-class WorldlyCounselEffect extends OneShotEffect<WorldlyCounselEffect> {
+class WorldlyCounselEffect extends OneShotEffect {
 
     public WorldlyCounselEffect() {
         super(Outcome.DrawCard);

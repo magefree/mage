@@ -88,7 +88,7 @@ public class BlindingBeam extends CardImpl<BlindingBeam> {
     }
 }
 
-class BlindingBeamEffect extends OneShotEffect<BlindingBeamEffect> {
+class BlindingBeamEffect extends OneShotEffect {
 
     public BlindingBeamEffect() {
         super(Outcome.Tap);
@@ -116,7 +116,7 @@ class BlindingBeamEffect extends OneShotEffect<BlindingBeamEffect> {
 
 }
 
-class BlindingBeamEffect2 extends ReplacementEffectImpl<BlindingBeamEffect2> {
+class BlindingBeamEffect2 extends ReplacementEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

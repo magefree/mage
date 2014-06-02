@@ -84,7 +84,7 @@ public class RenderSilent extends CardImpl<RenderSilent> {
     }
 }
 
-class RenderSilentCounterEffect extends OneShotEffect<RenderSilentCounterEffect> {
+class RenderSilentCounterEffect extends OneShotEffect {
 
     public RenderSilentCounterEffect() {
         super(Outcome.Detriment);
@@ -116,7 +116,7 @@ class RenderSilentCounterEffect extends OneShotEffect<RenderSilentCounterEffect>
 
 }
 
-class RenderSilentEffect extends ReplacementEffectImpl<RenderSilentEffect> {
+class RenderSilentEffect extends ReplacementEffectImpl {
 
     public RenderSilentEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

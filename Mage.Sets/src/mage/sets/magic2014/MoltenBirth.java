@@ -70,7 +70,7 @@ public class MoltenBirth extends CardImpl<MoltenBirth> {
     }
 }
 
-class MoltenBirthEffect extends OneShotEffect<MoltenBirthEffect> {
+class MoltenBirthEffect extends OneShotEffect {
 
     public MoltenBirthEffect() {
         super(Outcome.PutCreatureInPlay);

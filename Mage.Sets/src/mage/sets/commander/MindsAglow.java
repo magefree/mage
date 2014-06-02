@@ -66,7 +66,7 @@ public class MindsAglow extends CardImpl<MindsAglow> {
     }
 }
 
-class MindsAglowEffect extends OneShotEffect<MindsAglowEffect> {
+class MindsAglowEffect extends OneShotEffect {
     
     public MindsAglowEffect() {
         super(Outcome.Detriment);

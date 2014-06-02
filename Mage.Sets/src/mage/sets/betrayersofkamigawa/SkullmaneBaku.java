@@ -89,7 +89,7 @@ public class SkullmaneBaku extends CardImpl<SkullmaneBaku> {
         return new SkullmaneBaku(this);
     }
     
-    class SkullmaneBakuUnboostEffect extends OneShotEffect<SkullmaneBakuUnboostEffect> {
+    class SkullmaneBakuUnboostEffect extends OneShotEffect {
 
         public SkullmaneBakuUnboostEffect() {
             super(Outcome.UnboostCreature);

@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class RegenerateTargetEffect  extends ReplacementEffectImpl<RegenerateTargetEffect> {
+public class RegenerateTargetEffect  extends ReplacementEffectImpl {
 
     public RegenerateTargetEffect ( ) {
         super(Duration.EndOfTurn, Outcome.Regenerate);

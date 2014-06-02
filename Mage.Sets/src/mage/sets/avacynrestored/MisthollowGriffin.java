@@ -74,7 +74,7 @@ public class MisthollowGriffin extends CardImpl<MisthollowGriffin> {
     }
 }
 
-class MisthollowGriffinPlayEffect extends AsThoughEffectImpl<MisthollowGriffinPlayEffect> {
+class MisthollowGriffinPlayEffect extends AsThoughEffectImpl {
 
     public MisthollowGriffinPlayEffect() {
         super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);

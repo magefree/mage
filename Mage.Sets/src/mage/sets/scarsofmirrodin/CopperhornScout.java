@@ -102,7 +102,7 @@ class CopperhornScoutTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class CopperhornScoutUntapEffect extends OneShotEffect<CopperhornScoutUntapEffect> {
+class CopperhornScoutUntapEffect extends OneShotEffect {
 
     CopperhornScoutUntapEffect ( ) {
         super(Outcome.Untap);

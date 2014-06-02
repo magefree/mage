@@ -84,7 +84,7 @@ public class SurgicalExtraction extends CardImpl<SurgicalExtraction> {
     }
 }
 
-class SurgicalExtractionEffect extends OneShotEffect<SurgicalExtractionEffect> {
+class SurgicalExtractionEffect extends OneShotEffect {
 
     public SurgicalExtractionEffect() {
         super(Outcome.Exile);

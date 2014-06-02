@@ -77,7 +77,7 @@ public class Fireball extends CardImpl<Fireball> {
     }
 }
 
-class FireballEffect extends OneShotEffect<FireballEffect> {
+class FireballEffect extends OneShotEffect {
 
     public FireballEffect() {
         super(Outcome.Damage);

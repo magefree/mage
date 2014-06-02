@@ -73,7 +73,7 @@ public class OozeFlux extends CardImpl<OozeFlux> {
     }
 }
 
-class OozeFluxCreateTokenEffect extends OneShotEffect<OozeFluxCreateTokenEffect> {
+class OozeFluxCreateTokenEffect extends OneShotEffect {
 
     private Token token;
 

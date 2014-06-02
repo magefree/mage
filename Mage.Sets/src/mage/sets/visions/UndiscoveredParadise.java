@@ -69,7 +69,7 @@ public class UndiscoveredParadise extends CardImpl<UndiscoveredParadise> {
     }
 }
 
-class UndiscoveredParadiseEffect extends OneShotEffect<UndiscoveredParadiseEffect> {
+class UndiscoveredParadiseEffect extends OneShotEffect {
 
     public UndiscoveredParadiseEffect() {
         super(Outcome.Neutral);

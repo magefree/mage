@@ -76,7 +76,7 @@ public class CryptbornHorror extends CardImpl<CryptbornHorror> {
         return new CryptbornHorror(this);
     }
 }
-class CryptbornHorrorEffect extends OneShotEffect<CryptbornHorrorEffect> {
+class CryptbornHorrorEffect extends OneShotEffect {
     CryptbornHorrorEffect() {
         super(Outcome.BoostCreature);
     }

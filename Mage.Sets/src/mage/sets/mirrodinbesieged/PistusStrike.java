@@ -78,7 +78,7 @@ public class PistusStrike extends CardImpl<PistusStrike> {
     }
 }
 
-class PoisonControllerTargetCreatureEffect extends OneShotEffect<PoisonControllerTargetCreatureEffect> {
+class PoisonControllerTargetCreatureEffect extends OneShotEffect {
 
     public PoisonControllerTargetCreatureEffect() {
         super(Outcome.Damage);

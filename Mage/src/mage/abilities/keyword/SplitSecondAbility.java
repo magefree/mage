@@ -39,7 +39,7 @@ public class SplitSecondAbility extends SimpleStaticAbility  {
     }
 }
 
-class SplitSecondEffect extends ReplacementEffectImpl<SplitSecondEffect> implements MageSingleton {
+class SplitSecondEffect extends ReplacementEffectImpl implements MageSingleton {
     SplitSecondEffect() {
         super(Duration.WhileOnStack, Outcome.Detriment);
     }

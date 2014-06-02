@@ -72,7 +72,7 @@ public class Skullcrack extends CardImpl<Skullcrack> {
     }
 }
 
-class DamageCantBePreventedEffect extends ReplacementEffectImpl<DamageCantBePreventedEffect> {
+class DamageCantBePreventedEffect extends ReplacementEffectImpl {
 
     public DamageCantBePreventedEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

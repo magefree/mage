@@ -132,7 +132,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class MimicVatEffect extends OneShotEffect<MimicVatEffect> {
+class MimicVatEffect extends OneShotEffect {
 
     public MimicVatEffect() {
         super(Outcome.Benefit);
@@ -173,7 +173,7 @@ class MimicVatEffect extends OneShotEffect<MimicVatEffect> {
 
 }
 
-class MimicVatCreateTokenEffect extends OneShotEffect<MimicVatCreateTokenEffect> {
+class MimicVatCreateTokenEffect extends OneShotEffect {
 
     public MimicVatCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);

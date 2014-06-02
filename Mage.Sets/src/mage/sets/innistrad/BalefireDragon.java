@@ -73,7 +73,7 @@ public class BalefireDragon extends CardImpl<BalefireDragon> {
     }
 }
 
-class BalefireDragonEffect extends OneShotEffect<BalefireDragonEffect> {
+class BalefireDragonEffect extends OneShotEffect {
 
     public BalefireDragonEffect() {
         super(Outcome.Damage);

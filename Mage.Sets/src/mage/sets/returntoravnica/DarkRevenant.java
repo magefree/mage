@@ -75,7 +75,7 @@ public class DarkRevenant extends CardImpl<DarkRevenant> {
     }
 }
 
-class DarkRevenantEffect extends OneShotEffect<DarkRevenantEffect> {
+class DarkRevenantEffect extends OneShotEffect {
 
     public DarkRevenantEffect() {
         super(Outcome.ReturnToHand);

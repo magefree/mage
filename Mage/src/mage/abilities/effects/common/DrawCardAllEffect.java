@@ -43,7 +43,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DrawCardAllEffect extends OneShotEffect<DrawCardAllEffect> {
+public class DrawCardAllEffect extends OneShotEffect {
 
     private TargetController targetController;
     protected DynamicValue amount;

@@ -75,7 +75,7 @@ public class QuicksilverGargantuan extends CardImpl<QuicksilverGargantuan> {
         return new QuicksilverGargantuan(this);
     }
 
-    private class QuicksilverGargantuanCopyEffect extends ContinuousEffectImpl<QuicksilverGargantuanCopyEffect> {
+    private class QuicksilverGargantuanCopyEffect extends ContinuousEffectImpl {
 
         public QuicksilverGargantuanCopyEffect() {
             super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);

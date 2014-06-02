@@ -73,7 +73,7 @@ public class MageSlayer extends CardImpl<MageSlayer> {
     }
 }
 
-class MageSlayerEffect extends OneShotEffect<MageSlayerEffect> {
+class MageSlayerEffect extends OneShotEffect {
 
     public MageSlayerEffect() {
         super(Outcome.Damage);

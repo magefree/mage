@@ -162,7 +162,7 @@ class JarOfEyeballsCost extends CostImpl<JarOfEyeballsCost> {
     }
 }
 
-class JarOfEyeballsEffect extends OneShotEffect<JarOfEyeballsEffect> {
+class JarOfEyeballsEffect extends OneShotEffect {
 
     public JarOfEyeballsEffect() {
         super(Outcome.DrawCard);

@@ -81,7 +81,7 @@ public class CloudhoofKirin extends CardImpl<CloudhoofKirin> {
     }
 }
 
-class CloudhoofKirinEffect extends OneShotEffect<CloudhoofKirinEffect> {
+class CloudhoofKirinEffect extends OneShotEffect {
 
     public CloudhoofKirinEffect() {
         super(Outcome.Detriment);

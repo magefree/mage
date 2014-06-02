@@ -125,7 +125,7 @@ class PollenbrightWingsAbility extends TriggeredAbilityImpl {
     }
 }
 
-class PollenbrightWingsEffect extends OneShotEffect<PollenbrightWingsEffect> {
+class PollenbrightWingsEffect extends OneShotEffect {
 
     public PollenbrightWingsEffect() {
         super(Outcome.Benefit);

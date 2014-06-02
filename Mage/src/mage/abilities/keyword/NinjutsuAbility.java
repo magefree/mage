@@ -104,7 +104,7 @@ public class NinjutsuAbility extends ActivatedAbilityImpl {
     }
 }
 
-class NinjutsuEffect extends OneShotEffect<NinjutsuEffect> {
+class NinjutsuEffect extends OneShotEffect {
 
     public NinjutsuEffect() {
         super(Outcome.PutCreatureInPlay);

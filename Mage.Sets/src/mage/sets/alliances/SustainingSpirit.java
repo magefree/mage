@@ -74,7 +74,7 @@ public class SustainingSpirit extends CardImpl<SustainingSpirit> {
     }
 }
 
-class SustainingSpiritReplacementEffect extends ReplacementEffectImpl<SustainingSpiritReplacementEffect> {
+class SustainingSpiritReplacementEffect extends ReplacementEffectImpl {
 
     public SustainingSpiritReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

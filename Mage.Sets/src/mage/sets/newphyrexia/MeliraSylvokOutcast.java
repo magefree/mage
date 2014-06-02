@@ -88,7 +88,7 @@ public class MeliraSylvokOutcast extends CardImpl<MeliraSylvokOutcast> {
     }
 }
 
-class MeliraSylvokOutcastEffect extends ReplacementEffectImpl<MeliraSylvokOutcastEffect> {
+class MeliraSylvokOutcastEffect extends ReplacementEffectImpl {
 
     public MeliraSylvokOutcastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
@@ -124,7 +124,7 @@ class MeliraSylvokOutcastEffect extends ReplacementEffectImpl<MeliraSylvokOutcas
 
 }
 
-class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl<MeliraSylvokOutcastEffect2> {
+class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
 
     public MeliraSylvokOutcastEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
@@ -162,7 +162,7 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl<MeliraSylvokOutca
 
 }
 
-class MeliraSylvokOutcastEffect3 extends ContinuousEffectImpl<MeliraSylvokOutcastEffect3> {
+class MeliraSylvokOutcastEffect3 extends ContinuousEffectImpl {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

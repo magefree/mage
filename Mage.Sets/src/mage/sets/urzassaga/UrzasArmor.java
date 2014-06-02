@@ -63,7 +63,7 @@ public class UrzasArmor extends CardImpl<UrzasArmor> {
     }
 }
 
-class UrzasArmorEffect extends PreventionEffectImpl<UrzasArmorEffect> {
+class UrzasArmorEffect extends PreventionEffectImpl {
 
     public UrzasArmorEffect() {
         super(Duration.WhileOnBattlefield);

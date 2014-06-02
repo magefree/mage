@@ -72,7 +72,7 @@ public class FatedInfatuation extends CardImpl<FatedInfatuation> {
     }
 }
 
-class FatedInfatuationCopyEffect extends OneShotEffect<FatedInfatuationCopyEffect> {
+class FatedInfatuationCopyEffect extends OneShotEffect {
 
     public FatedInfatuationCopyEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -428,7 +428,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
      * @return
      */
     protected Integer addActionsTimed() {
-        FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
+        FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
                 return addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
@@ -528,6 +528,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 break;
             }
             Game sim = game.copy();
+            sim.setSimulation(true);
             if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
                 sim.applyEffects();
                 if (checkForRepeatedAction(sim, node, action, currentPlayer.getId())) {
@@ -867,7 +868,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     private List<Permanent> filterOutNonblocking(Game game, List<Permanent> attackers, List<Permanent> blockers) {
-        List<Permanent> blockersLeft = new ArrayList<Permanent>();
+        List<Permanent> blockersLeft = new ArrayList<>();
         for (Permanent blocker : blockers) {
             for (Permanent attacker : attackers) {
                 if (blocker.canBlock(attacker.getId(), game)) {
@@ -880,7 +881,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     private List<Permanent> filterOutUnblockable(Game game, List<Permanent> attackers, List<Permanent> blockers) {
-        List<Permanent> attackersLeft = new ArrayList<Permanent>();
+        List<Permanent> attackersLeft = new ArrayList<>();
         for (Permanent attacker : attackers) {
             if (CombatUtil.canBeBlocked(game, attacker, blockers)) {
                 attackersLeft.add(attacker);
@@ -895,7 +896,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             return null;
         }
 
-        List<Permanent> attackers = new ArrayList<Permanent>();
+        List<Permanent> attackers = new ArrayList<>();
         for (UUID attackerId : attackersUUID) {
             Permanent permanent = game.getPermanent(attackerId);
             attackers.add(permanent);
@@ -1291,6 +1292,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
      */
     protected Game createSimulation(Game game) {
         Game sim = game.copy();
+        sim.setSimulation(true);
         for (Player copyPlayer : sim.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
             if (!suggested.isEmpty()) {

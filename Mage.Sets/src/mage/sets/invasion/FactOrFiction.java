@@ -72,7 +72,7 @@ public class FactOrFiction extends CardImpl<FactOrFiction> {
     }
 }
 
-class FactOrFictionEffect extends OneShotEffect<FactOrFictionEffect> {
+class FactOrFictionEffect extends OneShotEffect {
 
     public FactOrFictionEffect() {
         super(Outcome.DrawCard);

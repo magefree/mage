@@ -70,7 +70,7 @@ public class ZombieApocalypse extends CardImpl<ZombieApocalypse> {
     }
 }
 
-class ZombieApocalypseEffect extends OneShotEffect<ZombieApocalypseEffect> {
+class ZombieApocalypseEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filterZombie = new FilterCreatureCard();
     private static final FilterCreaturePermanent filterHuman = new FilterCreaturePermanent();

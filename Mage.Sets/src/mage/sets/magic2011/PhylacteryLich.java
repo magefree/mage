@@ -112,7 +112,7 @@ public class PhylacteryLich extends CardImpl<PhylacteryLich> {
 
 }
 
-class PhylacteryLichEffect extends OneShotEffect<PhylacteryLichEffect> {
+class PhylacteryLichEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
 

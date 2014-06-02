@@ -114,7 +114,7 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class JusticeEffect extends OneShotEffect<JusticeEffect> {
+class JusticeEffect extends OneShotEffect {
 
     public JusticeEffect() {
         super(Outcome.Damage);

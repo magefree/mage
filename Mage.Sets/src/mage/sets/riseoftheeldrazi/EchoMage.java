@@ -109,7 +109,7 @@ public class EchoMage extends CardImpl<EchoMage> {
     }
 }
 
-class EchoMageEffect extends OneShotEffect<EchoMageEffect> {
+class EchoMageEffect extends OneShotEffect {
 
     public EchoMageEffect() {
         super(Outcome.Copy);

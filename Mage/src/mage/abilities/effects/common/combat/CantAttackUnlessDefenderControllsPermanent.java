@@ -41,7 +41,7 @@ import mage.game.events.GameEvent;
  * @author LevelX2
  */
 
-public class CantAttackUnlessDefenderControllsPermanent extends ReplacementEffectImpl<CantAttackUnlessDefenderControllsPermanent> {
+public class CantAttackUnlessDefenderControllsPermanent extends ReplacementEffectImpl {
 
     private final FilterPermanent filter;
 

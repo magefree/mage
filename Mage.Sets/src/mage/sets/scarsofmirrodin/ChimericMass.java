@@ -79,7 +79,7 @@ public class ChimericMass extends CardImpl<ChimericMass> {
 
 }
 
-class ChimericMassEffect extends OneShotEffect<ChimericMassEffect> {
+class ChimericMassEffect extends OneShotEffect {
     public ChimericMassEffect() {
         super(Outcome.Benefit);
     }

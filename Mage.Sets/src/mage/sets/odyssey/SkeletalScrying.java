@@ -85,7 +85,7 @@ public class SkeletalScrying extends CardImpl<SkeletalScrying> {
     }
 }
 
-class SkeletalScryingRuleEffect extends OneShotEffect<SkeletalScryingRuleEffect> {
+class SkeletalScryingRuleEffect extends OneShotEffect {
 
     public SkeletalScryingRuleEffect() {
         super(Outcome.Benefit);
@@ -106,7 +106,7 @@ class SkeletalScryingRuleEffect extends OneShotEffect<SkeletalScryingRuleEffect>
         return true;
     }
 }
-class SkeletalScryingEffect extends OneShotEffect<SkeletalScryingEffect> {
+class SkeletalScryingEffect extends OneShotEffect {
 
     protected DynamicValue amount;
 

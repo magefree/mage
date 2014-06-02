@@ -85,7 +85,7 @@ public class SoratamiSeer extends CardImpl<SoratamiSeer> {
 
 }
 
-class SoratamiSeerEffect extends OneShotEffect<SoratamiSeerEffect> {
+class SoratamiSeerEffect extends OneShotEffect {
 
     public SoratamiSeerEffect() {
         super(Outcome.DrawCard);

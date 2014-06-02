@@ -78,7 +78,7 @@ public class GilderBairn extends CardImpl<GilderBairn> {
     }
 }
 
-class GilderBairnEffect extends OneShotEffect<GilderBairnEffect> {
+class GilderBairnEffect extends OneShotEffect {
 
     public GilderBairnEffect() {
         super(Outcome.Benefit);

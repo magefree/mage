@@ -44,7 +44,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
+public class CopyPermanentEffect extends OneShotEffect {
 
     private FilterPermanent filter;
     private ApplyToPermanent applier;

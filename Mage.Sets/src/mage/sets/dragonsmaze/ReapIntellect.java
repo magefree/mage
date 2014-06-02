@@ -77,7 +77,7 @@ public class ReapIntellect extends CardImpl<ReapIntellect> {
     }
 }
 
-class ReapIntellectEffect extends OneShotEffect<ReapIntellectEffect> {
+class ReapIntellectEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("up to X nonland cards");
 

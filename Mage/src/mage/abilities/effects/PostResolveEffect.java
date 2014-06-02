@@ -37,7 +37,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class PostResolveEffect<T extends PostResolveEffect<T>> extends OneShotEffect<T> {
+public abstract class PostResolveEffect<T extends PostResolveEffect<T>> extends OneShotEffect {
 
     public PostResolveEffect() {
         super(Outcome.Neutral);

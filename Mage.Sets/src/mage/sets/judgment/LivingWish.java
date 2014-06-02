@@ -73,7 +73,7 @@ public class LivingWish extends CardImpl<LivingWish> {
     }
 }
 
-class LivingWishEffect extends OneShotEffect<LivingWishEffect> {
+class LivingWishEffect extends OneShotEffect {
 
     private static final String choiceText = "Choose a creature or land card you own from outside the game, and put it into your hand";
 

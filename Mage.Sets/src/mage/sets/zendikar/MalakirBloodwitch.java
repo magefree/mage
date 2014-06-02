@@ -84,7 +84,7 @@ public class MalakirBloodwitch extends CardImpl<MalakirBloodwitch> {
     }
 }
 
-class MalakirBloodwitchEffect extends OneShotEffect<MalakirBloodwitchEffect> {
+class MalakirBloodwitchEffect extends OneShotEffect {
 
     public MalakirBloodwitchEffect() {
         super(Outcome.Benefit);

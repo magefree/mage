@@ -88,7 +88,7 @@ public class LilianaOfTheVeil extends CardImpl<LilianaOfTheVeil> {
     }
 }
 
-class LilianaOfTheVeilEffect extends OneShotEffect<LilianaOfTheVeilEffect> {
+class LilianaOfTheVeilEffect extends OneShotEffect {
 
     public LilianaOfTheVeilEffect() {
         super(Outcome.Sacrifice);

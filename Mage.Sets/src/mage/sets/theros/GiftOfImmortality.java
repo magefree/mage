@@ -83,7 +83,7 @@ public class GiftOfImmortality extends CardImpl<GiftOfImmortality> {
     }
 }
 
-class GiftOfImmortalityEffect extends OneShotEffect<GiftOfImmortalityEffect> {
+class GiftOfImmortalityEffect extends OneShotEffect {
 
     public GiftOfImmortalityEffect() {
         super(Outcome.Benefit);
@@ -125,7 +125,7 @@ class GiftOfImmortalityEffect extends OneShotEffect<GiftOfImmortalityEffect> {
     }
 }
 
-class GiftOfImmortalityReturnEnchantmentEffect extends OneShotEffect<GiftOfImmortalityReturnEnchantmentEffect> {
+class GiftOfImmortalityReturnEnchantmentEffect extends OneShotEffect {
 
     public GiftOfImmortalityReturnEnchantmentEffect() {
         super(Outcome.BoostCreature);

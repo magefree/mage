@@ -76,7 +76,7 @@ public class BrackwaterElemental extends CardImpl<BrackwaterElemental> {
     }
 }
 
-class BrackwaterElementalSacrificeEffect extends OneShotEffect<BrackwaterElementalSacrificeEffect> {
+class BrackwaterElementalSacrificeEffect extends OneShotEffect {
 
     public BrackwaterElementalSacrificeEffect() {
         super(Outcome.Sacrifice);

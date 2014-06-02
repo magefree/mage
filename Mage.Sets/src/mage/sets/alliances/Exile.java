@@ -82,7 +82,7 @@ public class Exile extends CardImpl<Exile> {
     }
 }
 
-class ExileEffect extends OneShotEffect<ExileEffect> {
+class ExileEffect extends OneShotEffect {
 
     public ExileEffect() {
         super(Outcome.GainLife);

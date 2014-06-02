@@ -70,7 +70,7 @@ public class Extract extends CardImpl<Extract> {
     }
 }
 
-class ExtractEffect extends OneShotEffect<ExtractEffect> {
+class ExtractEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard();
 

@@ -124,7 +124,7 @@ public class BaneAlleyBroker extends CardImpl<BaneAlleyBroker> {
     }
 }
 
-class BaneAlleyBrokerDrawExileEffect extends OneShotEffect<BaneAlleyBrokerDrawExileEffect> {
+class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
 
     public BaneAlleyBrokerDrawExileEffect() {
       super(Outcome.DrawCard);
@@ -225,7 +225,7 @@ class TargetCardInBaneAlleyBrokerExile extends TargetCard<TargetCardInBaneAlleyB
     }
 }
 
-class BaneAlleyBrokerLookAtCardEffect extends AsThoughEffectImpl<BaneAlleyBrokerLookAtCardEffect> {
+class BaneAlleyBrokerLookAtCardEffect extends AsThoughEffectImpl {
 
     public BaneAlleyBrokerLookAtCardEffect() {
         super(AsThoughEffectType.REVEAL_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);

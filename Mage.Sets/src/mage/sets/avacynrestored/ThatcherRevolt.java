@@ -70,7 +70,7 @@ public class ThatcherRevolt extends CardImpl<ThatcherRevolt> {
     }
 }
 
-class ThatcherRevoltEffect extends OneShotEffect<ThatcherRevoltEffect> {
+class ThatcherRevoltEffect extends OneShotEffect {
 
     public ThatcherRevoltEffect() {
         super(Outcome.PutCreatureInPlay);

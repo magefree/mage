@@ -69,7 +69,7 @@ public class BeastWithin extends CardImpl<BeastWithin> {
     }
 }
 
-class BeastWithinEffect extends OneShotEffect<BeastWithinEffect> {
+class BeastWithinEffect extends OneShotEffect {
 
     public BeastWithinEffect() {
         super(Outcome.PutCreatureInPlay);

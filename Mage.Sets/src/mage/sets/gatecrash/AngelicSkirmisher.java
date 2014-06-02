@@ -97,7 +97,7 @@ public class AngelicSkirmisher extends CardImpl<AngelicSkirmisher> {
     }
 }
 
-class AngelicSkirmisherEffect extends OneShotEffect<AngelicSkirmisherEffect> {
+class AngelicSkirmisherEffect extends OneShotEffect {
     AngelicSkirmisherEffect() {
         super(Outcome.AddAbility);
         staticText = "choose first strike, vigilance or lifelink. Creatures you control gain that ability until end of turn";

@@ -88,7 +88,7 @@ public class VastwoodHydra extends CardImpl<VastwoodHydra> {
     }
 }
 
-class VastwoodHydraEffect extends OneShotEffect<VastwoodHydraEffect> {
+class VastwoodHydraEffect extends OneShotEffect {
 
     public VastwoodHydraEffect() {
         super(Outcome.BoostCreature);
@@ -121,7 +121,7 @@ class VastwoodHydraEffect extends OneShotEffect<VastwoodHydraEffect> {
 
 }
 
-class VastwoodHydraDistributeEffect extends OneShotEffect<VastwoodHydraDistributeEffect> {
+class VastwoodHydraDistributeEffect extends OneShotEffect {
 
     public VastwoodHydraDistributeEffect() {
         super(Outcome.BoostCreature);

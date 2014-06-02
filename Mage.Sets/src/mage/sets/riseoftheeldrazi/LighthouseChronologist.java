@@ -116,7 +116,7 @@ class LighthouseChronologistAbility extends TriggeredAbilityImpl {
     }
 }
 
-class LighthouseChronologistEffect extends OneShotEffect<LighthouseChronologistEffect> {
+class LighthouseChronologistEffect extends OneShotEffect {
 
     public LighthouseChronologistEffect() {
         super(Outcome.ExtraTurn);

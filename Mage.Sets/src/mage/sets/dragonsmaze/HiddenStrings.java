@@ -75,7 +75,7 @@ public class HiddenStrings extends CardImpl<HiddenStrings> {
 
 }
 
-class HiddenStringsEffect extends OneShotEffect<HiddenStringsEffect> {
+class HiddenStringsEffect extends OneShotEffect {
 
     public HiddenStringsEffect() {
         super(Outcome.Tap);

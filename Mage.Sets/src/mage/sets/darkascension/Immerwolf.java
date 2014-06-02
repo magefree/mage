@@ -86,7 +86,7 @@ public class Immerwolf extends CardImpl<Immerwolf> {
     }
 }
 
-class ImmerwolfEffect extends ReplacementEffectImpl<ImmerwolfEffect> {
+class ImmerwolfEffect extends ReplacementEffectImpl {
 
     private static final FilterCreaturePermanent filterWerewolf = new FilterCreaturePermanent("Werewolf creature");
     private static final FilterCreaturePermanent filterNonhuman = new FilterCreaturePermanent("Non-human creature");

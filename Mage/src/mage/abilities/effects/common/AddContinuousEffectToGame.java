@@ -37,7 +37,7 @@ import mage.game.Game;
 /**
  * @author noxx
  */
-public class AddContinuousEffectToGame extends OneShotEffect<AddContinuousEffectToGame> {
+public class AddContinuousEffectToGame extends OneShotEffect {
 
     private ContinuousEffect effect;
 

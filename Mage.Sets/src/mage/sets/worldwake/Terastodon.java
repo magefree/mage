@@ -83,7 +83,7 @@ public class Terastodon extends CardImpl<Terastodon> {
     }
 }
 
-class TerastodonEffect extends OneShotEffect<TerastodonEffect> {
+class TerastodonEffect extends OneShotEffect {
 
     public TerastodonEffect() {
         super(Outcome.DestroyPermanent);

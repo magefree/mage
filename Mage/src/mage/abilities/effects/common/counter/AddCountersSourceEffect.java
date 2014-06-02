@@ -43,7 +43,7 @@ import mage.util.CardUtil;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffect> {
+public class AddCountersSourceEffect extends OneShotEffect {
 
     private Counter counter;
     private boolean informPlayers;

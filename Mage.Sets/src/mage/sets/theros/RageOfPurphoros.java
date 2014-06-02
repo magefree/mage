@@ -74,7 +74,7 @@ public class RageOfPurphoros extends CardImpl<RageOfPurphoros> {
     }
 }
 
-class RageOfPurphorosEffect extends ReplacementEffectImpl<RageOfPurphorosEffect> {
+class RageOfPurphorosEffect extends ReplacementEffectImpl {
 
     public RageOfPurphorosEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);

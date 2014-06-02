@@ -39,7 +39,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEffect<ReturnToBattlefieldUnderOwnerControlSourceEffect> {
+public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEffect {
 
     private boolean tapped;
 

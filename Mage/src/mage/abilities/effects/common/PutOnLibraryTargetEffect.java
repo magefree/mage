@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class PutOnLibraryTargetEffect extends OneShotEffect<PutOnLibraryTargetEffect> {
+public class PutOnLibraryTargetEffect extends OneShotEffect {
 
     boolean onTop;
 

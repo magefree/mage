@@ -65,7 +65,7 @@ public class PartTheVeil extends CardImpl<PartTheVeil> {
 
 }
 
-class PartTheVeilEffect extends OneShotEffect<PartTheVeilEffect> {
+class PartTheVeilEffect extends OneShotEffect {
     public PartTheVeilEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return all creatures you control to their owner's hand.";

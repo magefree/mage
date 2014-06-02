@@ -77,7 +77,7 @@ public class VanguardsShield extends CardImpl<VanguardsShield> {
     }
 }
 
-class VanguardsShieldEffect extends ContinuousEffectImpl<VanguardsShieldEffect> {
+class VanguardsShieldEffect extends ContinuousEffectImpl {
 
     public VanguardsShieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.AddAbility);

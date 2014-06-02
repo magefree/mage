@@ -19,7 +19,7 @@ import mage.target.Target;
  *
  * @author jeffwadsworth
  */
-public class LoseAbilityTargetEffect extends ContinuousEffectImpl<LoseAbilityTargetEffect>{
+public class LoseAbilityTargetEffect extends ContinuousEffectImpl{
     
     protected Ability ability;
     

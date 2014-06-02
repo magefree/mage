@@ -42,7 +42,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com, North
  */
-public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPowerToughnessSourceEffect> {
+public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     private DynamicValue amount;
     private int power;

@@ -77,7 +77,7 @@ public class DesecratorHag extends CardImpl<DesecratorHag> {
     }
 }
 
-class DesecratorHagEffect extends OneShotEffect<DesecratorHagEffect> {
+class DesecratorHagEffect extends OneShotEffect {
 
     int creatureGreatestPower = 0;
     Cards cards = new CardsImpl();

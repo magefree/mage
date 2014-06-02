@@ -101,7 +101,7 @@ public class MindwrackLiege extends CardImpl<MindwrackLiege> {
     }
 }
 
-class MindwrackLiegeEffect extends OneShotEffect<MindwrackLiegeEffect> {
+class MindwrackLiegeEffect extends OneShotEffect {
 
     private static final String choiceText = "Put a blue or red creature card from your hand onto the battlefield?";
     

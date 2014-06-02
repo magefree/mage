@@ -71,7 +71,7 @@ public class HarmsWay extends CardImpl<HarmsWay> {
     }
 }
 
-class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl<HarmsWayPreventDamageTargetEffect> {
+class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
 
     public HarmsWayPreventDamageTargetEffect() {
         super(Duration.EndOfTurn, 2, false, true);

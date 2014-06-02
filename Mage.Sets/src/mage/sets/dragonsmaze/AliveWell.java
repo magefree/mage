@@ -76,7 +76,7 @@ public class AliveWell extends SplitCard<AliveWell> {
     }
 }
 
-class WellEffect extends OneShotEffect<WellEffect> {
+class WellEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

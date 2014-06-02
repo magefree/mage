@@ -105,7 +105,7 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
     }
 }
 
-class PriceOfGloryEffect extends OneShotEffect<PriceOfGloryEffect> {
+class PriceOfGloryEffect extends OneShotEffect {
 
     public PriceOfGloryEffect() {
         super(Outcome.DestroyPermanent);

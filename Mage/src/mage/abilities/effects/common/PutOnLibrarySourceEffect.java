@@ -42,7 +42,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class PutOnLibrarySourceEffect extends OneShotEffect<PutOnLibrarySourceEffect> {
+public class PutOnLibrarySourceEffect extends OneShotEffect {
 
     boolean onTop;
 

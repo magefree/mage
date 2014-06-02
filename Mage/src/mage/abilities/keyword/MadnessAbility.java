@@ -74,7 +74,7 @@ public class MadnessAbility extends StaticAbility {
  * 3. It been discarded so it contains 'madness' mark stored in game state
  *
  */
-class MadnessPlayEffect extends AsThoughEffectImpl<MadnessPlayEffect> {
+class MadnessPlayEffect extends AsThoughEffectImpl {
 
     private Cost cost;
 
@@ -172,7 +172,7 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class MadnessExileEffect extends OneShotEffect<MadnessExileEffect> {
+class MadnessExileEffect extends OneShotEffect {
 
     public MadnessExileEffect() {
         super(Outcome.Benefit);

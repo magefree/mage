@@ -75,7 +75,7 @@ public class StonewiseFortifier extends CardImpl<StonewiseFortifier> {
     }
 }
 
-class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl<StonewiseFortifierPreventAllDamageToEffect> {
+class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
 
     public StonewiseFortifierPreventAllDamageToEffect() {
         super(Duration.EndOfTurn);

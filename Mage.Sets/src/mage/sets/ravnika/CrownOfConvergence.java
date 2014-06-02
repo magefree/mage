@@ -124,7 +124,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
     }
 }
 
-class CrownOfConvergenceEffect extends OneShotEffect<CrownOfConvergenceEffect> {
+class CrownOfConvergenceEffect extends OneShotEffect {
 
     public CrownOfConvergenceEffect() {
     super(Outcome.Neutral);

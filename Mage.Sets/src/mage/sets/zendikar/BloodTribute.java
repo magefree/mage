@@ -95,7 +95,7 @@ public class BloodTribute extends CardImpl<BloodTribute> {
     }
 }
 
-class BloodTributeLoseLifeEffect extends OneShotEffect<BloodTributeLoseLifeEffect> {
+class BloodTributeLoseLifeEffect extends OneShotEffect {
 
     public BloodTributeLoseLifeEffect() {
         super(Outcome.Damage);
@@ -126,7 +126,7 @@ class BloodTributeLoseLifeEffect extends OneShotEffect<BloodTributeLoseLifeEffec
     }
 }
 
-class BloodTributeGainLifeEffect extends OneShotEffect<BloodTributeGainLifeEffect> {
+class BloodTributeGainLifeEffect extends OneShotEffect {
 
     public BloodTributeGainLifeEffect() {
         super(Outcome.GainLife);

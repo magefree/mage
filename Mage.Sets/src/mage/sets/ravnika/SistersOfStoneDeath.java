@@ -101,7 +101,7 @@ public class SistersOfStoneDeath extends CardImpl<SistersOfStoneDeath> {
     }
 }
 
-class SistersOfStoneDeathEffect extends OneShotEffect<SistersOfStoneDeathEffect> {
+class SistersOfStoneDeathEffect extends OneShotEffect {
     
     private UUID exileId;
     

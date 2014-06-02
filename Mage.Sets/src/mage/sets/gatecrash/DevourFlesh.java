@@ -78,7 +78,7 @@ public class DevourFlesh extends CardImpl<DevourFlesh> {
     }
 }
 
-class DevourFleshSacrificeEffect extends OneShotEffect<DevourFleshSacrificeEffect> {
+class DevourFleshSacrificeEffect extends OneShotEffect {
 
     public DevourFleshSacrificeEffect() {
         super(Outcome.Sacrifice);

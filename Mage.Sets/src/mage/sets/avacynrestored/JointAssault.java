@@ -68,7 +68,7 @@ public class JointAssault extends CardImpl<JointAssault> {
     }
 }
 
-class JointAssaultBoostTargetEffect extends ContinuousEffectImpl<JointAssaultBoostTargetEffect> {
+class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
 
     private int power;
     private int toughness;

@@ -86,7 +86,7 @@ public class Contagion extends CardImpl<Contagion> {
     }
 }
 
-class DistributeCountersEffect extends OneShotEffect<DistributeCountersEffect> {
+class DistributeCountersEffect extends OneShotEffect {
 
 
     public DistributeCountersEffect() {

@@ -103,7 +103,7 @@ public class SkyfireKirin extends CardImpl<SkyfireKirin> {
     }
 }
 
-class SkyfireKirinEffect extends OneShotEffect<SkyfireKirinEffect> {
+class SkyfireKirinEffect extends OneShotEffect {
 
     public SkyfireKirinEffect() {
         super(Outcome.Detriment);

@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
  *
  * @author Noahsark
  */
-public class LoseAbilitySourceEffect extends ContinuousEffectImpl<LoseAbilitySourceEffect>{
+public class LoseAbilitySourceEffect extends ContinuousEffectImpl{
     
     private static final Logger logger = Logger.getLogger(LoseAbilitySourceEffect.class);
     protected Ability ability;

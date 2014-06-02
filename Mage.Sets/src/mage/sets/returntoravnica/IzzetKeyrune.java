@@ -73,7 +73,7 @@ public class IzzetKeyrune extends CardImpl<IzzetKeyrune> {
         return new IzzetKeyrune(this);
     }
 
-    private class IzzetKeyruneEffect extends OneShotEffect<IzzetKeyruneEffect> {
+    private class IzzetKeyruneEffect extends OneShotEffect {
 
         public IzzetKeyruneEffect() {
             super(Outcome.DrawCard);

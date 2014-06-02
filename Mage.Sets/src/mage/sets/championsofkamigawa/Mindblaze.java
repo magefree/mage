@@ -79,7 +79,7 @@ public class Mindblaze extends CardImpl<Mindblaze> {
 
 }
 
-class MindblazeEffect extends OneShotEffect<MindblazeEffect> {
+class MindblazeEffect extends OneShotEffect {
     MindblazeEffect() {
         super(Outcome.Damage);
         staticText = "Name a nonland card and choose a number greater than 0. Target player reveals his or her library. If that library contains exactly the chosen number of the named card, {this} deals 8 damage to that player. Then that player shuffles his or her library";

@@ -77,7 +77,7 @@ public class WineOfBloodAndIron extends CardImpl<WineOfBloodAndIron> {
     }
 }
 
-class WineOfBloodAndIronEffect extends OneShotEffect<WineOfBloodAndIronEffect> {
+class WineOfBloodAndIronEffect extends OneShotEffect {
 
     public WineOfBloodAndIronEffect() {
         super(Outcome.Sacrifice);

@@ -72,7 +72,7 @@ public class ObstinateFamiliar extends CardImpl<ObstinateFamiliar> {
     }
 }
 
-class ObstinateFamiliarReplacementEffect extends ReplacementEffectImpl<ObstinateFamiliarReplacementEffect> {
+class ObstinateFamiliarReplacementEffect extends ReplacementEffectImpl {
 
     public ObstinateFamiliarReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

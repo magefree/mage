@@ -107,7 +107,7 @@ class StabwhiskerTheOdious extends Token {
     }
 }
 
-class StabwhiskerLoseLifeEffect extends OneShotEffect<StabwhiskerLoseLifeEffect> {
+class StabwhiskerLoseLifeEffect extends OneShotEffect {
 
     public StabwhiskerLoseLifeEffect() {
         super(Outcome.LoseLife);

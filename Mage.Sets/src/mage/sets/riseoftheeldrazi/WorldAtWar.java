@@ -76,7 +76,7 @@ public class WorldAtWar extends CardImpl<WorldAtWar> {
     }
 }
 
-class WorldAtWarEffect extends OneShotEffect<WorldAtWarEffect> {
+class WorldAtWarEffect extends OneShotEffect {
 
     public WorldAtWarEffect() {
         super(Outcome.Benefit);
@@ -152,7 +152,7 @@ class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 }
 
-class UntapAttackingThisTurnEffect extends OneShotEffect<UntapAttackingThisTurnEffect> {
+class UntapAttackingThisTurnEffect extends OneShotEffect {
 
     public UntapAttackingThisTurnEffect() {
         super(Outcome.Benefit);
