@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class RubblebeltRaiders extends CardImpl<RubblebeltRaiders> {
+public class RubblebeltRaiders extends CardImpl {
 
     public RubblebeltRaiders(UUID ownerId) {
         super(ownerId, 224, "Rubblebelt Raiders", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R/G}{R/G}{R/G}");

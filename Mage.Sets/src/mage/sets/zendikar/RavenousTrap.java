@@ -49,7 +49,7 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
  *
  * @author LevelX2
  */
-public class RavenousTrap extends CardImpl<RavenousTrap> {
+public class RavenousTrap extends CardImpl {
 
     public RavenousTrap(UUID ownerId) {
         super(ownerId, 109, "Ravenous Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");

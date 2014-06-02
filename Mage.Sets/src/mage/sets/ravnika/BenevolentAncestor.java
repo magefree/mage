@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class BenevolentAncestor extends CardImpl<BenevolentAncestor> {
+public class BenevolentAncestor extends CardImpl {
 
     public BenevolentAncestor(UUID ownerId) {
         super(ownerId, 3, "Benevolent Ancestor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class UndercityPlague extends CardImpl<UndercityPlague> {
+public class UndercityPlague extends CardImpl {
 
     public UndercityPlague(UUID ownerId) {
         super(ownerId, 83, "Undercity Plague", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

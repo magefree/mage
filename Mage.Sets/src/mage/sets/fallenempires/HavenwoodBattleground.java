@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class HavenwoodBattleground extends CardImpl<HavenwoodBattleground> {
+public class HavenwoodBattleground extends CardImpl {
 
     public HavenwoodBattleground(UUID ownerId) {
         super(ownerId, 181, "Havenwood Battleground", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

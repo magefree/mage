@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class VillagersOfEstwald extends CardImpl<VillagersOfEstwald> {
+public class VillagersOfEstwald extends CardImpl {
 
     public VillagersOfEstwald(UUID ownerId) {
         super(ownerId, 209, "Villagers of Estwald", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

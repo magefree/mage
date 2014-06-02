@@ -53,7 +53,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class NecromancersCovenant extends CardImpl<NecromancersCovenant> {
+public class NecromancersCovenant extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
     

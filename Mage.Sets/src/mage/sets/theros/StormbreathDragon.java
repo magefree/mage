@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class StormbreathDragon extends CardImpl<StormbreathDragon> {
+public class StormbreathDragon extends CardImpl {
     
     private static final FilterObject filter = new FilterObject("white");
     static {

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class AEtherSpellbomb extends CardImpl<AEtherSpellbomb> {
+public class AEtherSpellbomb extends CardImpl {
 
     public AEtherSpellbomb(UUID ownerId) {
         super(ownerId, 61, "AEther Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

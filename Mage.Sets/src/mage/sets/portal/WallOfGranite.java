@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class WallOfGranite extends CardImpl<WallOfGranite> {
+public class WallOfGranite extends CardImpl {
 
     public WallOfGranite(UUID ownerId) {
         super(ownerId, 161, "Wall of Granite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

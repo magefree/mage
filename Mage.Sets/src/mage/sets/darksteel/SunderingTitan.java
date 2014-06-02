@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class SunderingTitan extends CardImpl<SunderingTitan> {
+public class SunderingTitan extends CardImpl {
 
     public SunderingTitan(UUID ownerId) {
         super(ownerId, 146, "Sundering Titan", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{8}");

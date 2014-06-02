@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Goatnapper extends CardImpl<Goatnapper> {
+public class Goatnapper extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Goat");
 

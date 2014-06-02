@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class GeneralsKabuto extends CardImpl<GeneralsKabuto> {
+public class GeneralsKabuto extends CardImpl {
 
     public GeneralsKabuto (UUID ownerId) {
         super(ownerId, 251, "General's Kabuto", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

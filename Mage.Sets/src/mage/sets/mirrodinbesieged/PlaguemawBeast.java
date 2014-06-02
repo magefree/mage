@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class PlaguemawBeast extends CardImpl<PlaguemawBeast> {
+public class PlaguemawBeast extends CardImpl {
 
     public PlaguemawBeast (UUID ownerId) {
         super(ownerId, 87, "Plaguemaw Beast", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

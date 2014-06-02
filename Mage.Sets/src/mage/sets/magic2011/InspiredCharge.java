@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class InspiredCharge extends CardImpl<InspiredCharge> {
+public class InspiredCharge extends CardImpl {
 
     public InspiredCharge(UUID ownerId) {
         super(ownerId, 19, "Inspired Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");

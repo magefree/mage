@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BayFalcon extends CardImpl<BayFalcon> {
+public class BayFalcon extends CardImpl {
 
     public BayFalcon(UUID ownerId) {
         super(ownerId, 54, "Bay Falcon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

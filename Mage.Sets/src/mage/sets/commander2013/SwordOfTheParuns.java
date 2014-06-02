@@ -57,7 +57,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SwordOfTheParuns extends CardImpl<SwordOfTheParuns> {
+public class SwordOfTheParuns extends CardImpl {
 
     private static final FilterCreaturePermanent filterTapped = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent filterUntapped = new FilterCreaturePermanent();

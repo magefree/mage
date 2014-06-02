@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Quercitron
  */
-public class Kismet extends CardImpl<Kismet> {
+public class Kismet extends CardImpl {
 
     public Kismet(UUID ownerId) {
         super(ownerId, 319, "Kismet", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

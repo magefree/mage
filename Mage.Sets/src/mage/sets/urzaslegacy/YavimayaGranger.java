@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class YavimayaGranger extends CardImpl<YavimayaGranger> {
+public class YavimayaGranger extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 

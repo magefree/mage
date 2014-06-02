@@ -45,7 +45,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author Plopman
  */
-public class HighPriestOfPenance extends CardImpl<HighPriestOfPenance> {
+public class HighPriestOfPenance extends CardImpl {
 
     public HighPriestOfPenance(UUID ownerId) {
         super(ownerId, 171, "High Priest of Penance", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{B}");

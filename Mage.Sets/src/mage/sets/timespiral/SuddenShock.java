@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class SuddenShock extends CardImpl<SuddenShock> {
+public class SuddenShock extends CardImpl {
 
     public SuddenShock(UUID ownerId) {
         super(ownerId, 179, "Sudden Shock", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

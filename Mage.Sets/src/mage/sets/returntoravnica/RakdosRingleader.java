@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RakdosRingleader extends CardImpl<RakdosRingleader> {
+public class RakdosRingleader extends CardImpl {
 
     public RakdosRingleader(UUID ownerId) {
         super(ownerId, 186, "Rakdos Ringleader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");

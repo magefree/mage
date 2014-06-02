@@ -38,7 +38,7 @@ import java.util.UUID;
 /**
  * @author LevelX
  */
-public class Index extends CardImpl<Index> {
+public class Index extends CardImpl {
 
     public Index(UUID ownerId) {
         super(ownerId, 25, "Index", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Cathodion extends CardImpl<Cathodion> {
+public class Cathodion extends CardImpl {
 
     public Cathodion(UUID ownerId) {
         super(ownerId, 149, "Cathodion", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class DampingMatrix extends CardImpl<DampingMatrix> {
+public class DampingMatrix extends CardImpl {
 
     public DampingMatrix(UUID ownerId) {
         super(ownerId, 161, "Damping Matrix", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class ResistanceFighter extends CardImpl<ResistanceFighter> {
+public class ResistanceFighter extends CardImpl {
 
     public ResistanceFighter(UUID ownerId) {
         super(ownerId, 118, "Resistance Fighter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

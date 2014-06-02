@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author maurer.it_at_gmail.com
  */
-public class ArcTrail extends CardImpl<ArcTrail> {
+public class ArcTrail extends CardImpl {
 
     public ArcTrail (UUID ownerId) {
         super(ownerId, 81, "Arc Trail", Rarity.UNCOMMON, new CardType[] { CardType.SORCERY }, "{1}{R}");

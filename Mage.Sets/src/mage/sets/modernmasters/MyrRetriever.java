@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class MyrRetriever extends CardImpl<MyrRetriever> {
+public class MyrRetriever extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("another target artifact card from your graveyard");
     static {

@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com, Loki
  */
-public class MoxOpal extends CardImpl<MoxOpal> {
+public class MoxOpal extends CardImpl {
 
     public MoxOpal(UUID ownerId) {
         super(ownerId, 179, "Mox Opal", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{0}");

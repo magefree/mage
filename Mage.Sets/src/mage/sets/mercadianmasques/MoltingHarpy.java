@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class MoltingHarpy extends CardImpl<MoltingHarpy> {
+public class MoltingHarpy extends CardImpl {
 
     public MoltingHarpy(UUID ownerId) {
 		super(ownerId, 148, "Molting Harpy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");

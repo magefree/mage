@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class DeathpactAngel extends CardImpl<DeathpactAngel> {
+public class DeathpactAngel extends CardImpl {
 
     public DeathpactAngel(UUID ownerId) {
         super(ownerId, 153, "Deathpact Angel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{B}{B}");

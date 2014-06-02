@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class CurseOfChaos extends CardImpl<CurseOfChaos> {
+public class CurseOfChaos extends CardImpl {
 
     public CurseOfChaos(UUID ownerId) {
         super(ownerId, 105, "Curse of Chaos", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ScourgeServant extends CardImpl<ScourgeServant> {
+public class ScourgeServant extends CardImpl {
 
     public ScourgeServant (UUID ownerId) {
         super(ownerId, 54, "Scourge Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

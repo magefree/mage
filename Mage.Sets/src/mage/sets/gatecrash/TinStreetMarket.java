@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class TinStreetMarket extends CardImpl<TinStreetMarket> {
+public class TinStreetMarket extends CardImpl {
 
     public TinStreetMarket(UUID ownerId) {
         super(ownerId, 108, "Tin Street Market", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");

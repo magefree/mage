@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class TraprootKami extends CardImpl<TraprootKami> {
+public class TraprootKami extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("the number of Forests on the battlefield");
 

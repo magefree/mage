@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class LizardWarrior extends CardImpl<LizardWarrior> {
+public class LizardWarrior extends CardImpl {
 
     public LizardWarrior(UUID ownerId) {
         super(ownerId, 144, "Lizard Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

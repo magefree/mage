@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MacetailHystrodon extends CardImpl<MacetailHystrodon> {
+public class MacetailHystrodon extends CardImpl {
 
     public MacetailHystrodon(UUID ownerId) {
         super(ownerId, 106, "Macetail Hystrodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{R}");

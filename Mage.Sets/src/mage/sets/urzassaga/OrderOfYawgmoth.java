@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class OrderOfYawgmoth extends CardImpl<OrderOfYawgmoth> {
+public class OrderOfYawgmoth extends CardImpl {
 
     public OrderOfYawgmoth(UUID ownerId) {
         super(ownerId, 144, "Order of Yawgmoth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

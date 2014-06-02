@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class Pyroblast extends CardImpl<Pyroblast> {
+public class Pyroblast extends CardImpl {
     
     public Pyroblast(UUID ownerId) {
         super(ownerId, 213, "Pyroblast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

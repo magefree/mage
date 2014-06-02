@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class IzzetChronarch extends CardImpl<IzzetChronarch> {
+public class IzzetChronarch extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 

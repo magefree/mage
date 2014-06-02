@@ -54,7 +54,7 @@ import mage.players.Player;
 /**
  * @author LevelX2
  */
-public class PatronOfTheOrochi extends CardImpl<PatronOfTheOrochi> {
+public class PatronOfTheOrochi extends CardImpl {
 
     public PatronOfTheOrochi(UUID ownerId) {
         super(ownerId, 138, "Patron of the Orochi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

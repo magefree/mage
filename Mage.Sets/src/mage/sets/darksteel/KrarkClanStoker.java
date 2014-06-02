@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class KrarkClanStoker extends CardImpl<KrarkClanStoker> {
+public class KrarkClanStoker extends CardImpl {
 
     public KrarkClanStoker(UUID ownerId) {
         super(ownerId, 65, "Krark-Clan Stoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

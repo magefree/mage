@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class StandingTroops extends CardImpl<StandingTroops> {
+public class StandingTroops extends CardImpl {
 
     public StandingTroops(UUID ownerId) {
         super(ownerId, 48, "Standing Troops", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

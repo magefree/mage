@@ -68,7 +68,7 @@ import mage.target.targetpointer.FixedTarget;
  * 
  * @author LevelX2
  */
-public class VraskaTheUnseen extends CardImpl<VraskaTheUnseen> {
+public class VraskaTheUnseen extends CardImpl {
 
     public VraskaTheUnseen(UUID ownerId) {
         super(ownerId, 208, "Vraska the Unseen", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{G}");

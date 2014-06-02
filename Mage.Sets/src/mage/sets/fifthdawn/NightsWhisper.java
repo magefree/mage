@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class NightsWhisper extends CardImpl<NightsWhisper> {
+public class NightsWhisper extends CardImpl {
 
     public NightsWhisper(UUID ownerId) {
         super(ownerId, 55, "Night's Whisper", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

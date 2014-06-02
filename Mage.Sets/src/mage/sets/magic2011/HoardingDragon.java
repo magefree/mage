@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HoardingDragon extends CardImpl<HoardingDragon> {
+public class HoardingDragon extends CardImpl {
 
     public HoardingDragon(UUID ownerId) {
         super(ownerId, 144, "Hoarding Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

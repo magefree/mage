@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class ProclamationOfRebirth extends CardImpl<ProclamationOfRebirth> {
+public class ProclamationOfRebirth extends CardImpl {
 
     private static final FilterCreatureCard filter1 = new FilterCreatureCard("creature card with converted mana cost {1} or less from your graveyard");
     private static final FilterCreatureCard filter3 = new FilterCreatureCard("creature cards with converted mana cost {1} or less from your graveyard");

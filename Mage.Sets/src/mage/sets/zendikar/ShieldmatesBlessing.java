@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class ShieldmatesBlessing extends CardImpl<ShieldmatesBlessing> {
+public class ShieldmatesBlessing extends CardImpl {
 
     public ShieldmatesBlessing(UUID ownerId) {
         super(ownerId, 35, "Shieldmate's Blessing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

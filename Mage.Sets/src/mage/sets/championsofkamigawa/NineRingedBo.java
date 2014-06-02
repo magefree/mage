@@ -53,7 +53,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX
  */
-public class NineRingedBo extends CardImpl<NineRingedBo> {
+public class NineRingedBo extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("spirit");
 

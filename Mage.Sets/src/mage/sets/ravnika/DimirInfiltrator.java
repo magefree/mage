@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DimirInfiltrator extends CardImpl<DimirInfiltrator> {
+public class DimirInfiltrator extends CardImpl {
 
     public DimirInfiltrator(UUID ownerId) {
         super(ownerId, 203, "Dimir Infiltrator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");

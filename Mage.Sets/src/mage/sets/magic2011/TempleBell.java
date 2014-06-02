@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TempleBell extends CardImpl<TempleBell> {
+public class TempleBell extends CardImpl {
 
     public TempleBell(UUID ownerId) {
         super(ownerId, 217, "Temple Bell", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

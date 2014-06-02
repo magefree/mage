@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SlateStreetRuffian extends CardImpl<SlateStreetRuffian> {
+public class SlateStreetRuffian extends CardImpl {
 
     public SlateStreetRuffian(UUID ownerId) {
         super(ownerId, 78, "Slate Street Ruffian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

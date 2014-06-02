@@ -55,7 +55,7 @@ import mage.game.permanent.Permanent;
  */
 
 
-public class PyrewildShaman extends CardImpl<PyrewildShaman> {
+public class PyrewildShaman extends CardImpl {
 
     public PyrewildShaman (UUID ownerId) {
         super(ownerId, 36, "Pyrewild Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");

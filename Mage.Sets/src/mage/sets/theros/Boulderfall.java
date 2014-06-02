@@ -38,7 +38,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  *
  * @author Plopman
  */
-public class Boulderfall extends CardImpl<Boulderfall> {
+public class Boulderfall extends CardImpl {
 
     public Boulderfall(UUID ownerId) {
         super(ownerId, 115, "Boulderfall", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{6}{R}{R}");

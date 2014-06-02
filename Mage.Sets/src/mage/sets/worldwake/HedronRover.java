@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class HedronRover extends CardImpl<HedronRover> {
+public class HedronRover extends CardImpl {
 
     public HedronRover (UUID ownerId) {
         super(ownerId, 125, "Hedron Rover", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

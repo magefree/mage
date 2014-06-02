@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Corrupt extends CardImpl<Corrupt> {
+public class Corrupt extends CardImpl {
 
     public Corrupt(UUID ownerId) {
         super(ownerId, 89, "Corrupt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");

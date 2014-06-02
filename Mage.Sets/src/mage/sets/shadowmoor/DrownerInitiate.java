@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  * @author jeffwadsworth
 
  */
-public class DrownerInitiate extends CardImpl<DrownerInitiate> {
+public class DrownerInitiate extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a blue spell");
     

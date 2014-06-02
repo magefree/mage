@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SpikeFeeder extends CardImpl<SpikeFeeder> {
+public class SpikeFeeder extends CardImpl {
 
     public SpikeFeeder(UUID ownerId) {
         super(ownerId, 84, "Spike Feeder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

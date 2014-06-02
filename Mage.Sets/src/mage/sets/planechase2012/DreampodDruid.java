@@ -45,7 +45,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author LevelX2
  */
-public class DreampodDruid extends CardImpl<DreampodDruid> {
+public class DreampodDruid extends CardImpl {
 
     public DreampodDruid(UUID ownerId) {
         super(ownerId, 64, "Dreampod Druid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class ViridianZealot extends CardImpl<ViridianZealot> {
+public class ViridianZealot extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

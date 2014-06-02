@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class Propaganda extends CardImpl<Propaganda> {
+public class Propaganda extends CardImpl {
 
     public Propaganda (UUID ownerId) {
         super(ownerId, 80, "Propaganda", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jeffwadsworth
  */
-public class BonescytheSliver extends CardImpl<BonescytheSliver> {
+public class BonescytheSliver extends CardImpl {
     
     public BonescytheSliver(UUID ownerId) {
         super(ownerId, 9, "Bonescythe Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");

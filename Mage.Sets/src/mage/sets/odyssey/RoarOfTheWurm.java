@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class RoarOfTheWurm extends CardImpl<RoarOfTheWurm> {
+public class RoarOfTheWurm extends CardImpl {
 
     public RoarOfTheWurm(UUID ownerId) {
         super(ownerId, 266, "Roar of the Wurm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{6}{G}");

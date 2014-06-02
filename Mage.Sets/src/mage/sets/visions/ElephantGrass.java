@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class ElephantGrass extends CardImpl<ElephantGrass> {
+public class ElephantGrass extends CardImpl {
 
     public ElephantGrass(UUID ownerId) {
         super(ownerId, 54, "Elephant Grass", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

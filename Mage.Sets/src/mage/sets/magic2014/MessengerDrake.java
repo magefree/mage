@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class MessengerDrake extends CardImpl<MessengerDrake> {
+public class MessengerDrake extends CardImpl {
 
     public MessengerDrake(UUID ownerId) {
         super(ownerId, 63, "Messenger Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

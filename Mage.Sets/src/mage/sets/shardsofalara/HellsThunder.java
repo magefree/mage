@@ -45,7 +45,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HellsThunder extends CardImpl<HellsThunder> {
+public class HellsThunder extends CardImpl {
 
     public HellsThunder(UUID ownerId) {
         super(ownerId, 103, "Hell's Thunder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

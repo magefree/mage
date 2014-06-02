@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ReaperOfTheWilds extends CardImpl<ReaperOfTheWilds> {
+public class ReaperOfTheWilds extends CardImpl {
 
     public ReaperOfTheWilds(UUID ownerId) {
         super(ownerId, 201, "Reaper of the Wilds", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");

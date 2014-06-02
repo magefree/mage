@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Stonecloaker extends CardImpl<Stonecloaker> {
+public class Stonecloaker extends CardImpl {
 
     public Stonecloaker(UUID ownerId) {
         super(ownerId, 22, "Stonecloaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

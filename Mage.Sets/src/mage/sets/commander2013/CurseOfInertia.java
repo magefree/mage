@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class CurseOfInertia extends CardImpl<CurseOfInertia> {
+public class CurseOfInertia extends CardImpl {
 
     public CurseOfInertia(UUID ownerId) {
         super(ownerId, 36, "Curse of Inertia", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

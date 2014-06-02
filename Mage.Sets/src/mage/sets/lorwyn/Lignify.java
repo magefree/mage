@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Lignify extends CardImpl<Lignify> {
+public class Lignify extends CardImpl {
 
     public Lignify(UUID ownerId) {
             super(ownerId, 228, "Lignify", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

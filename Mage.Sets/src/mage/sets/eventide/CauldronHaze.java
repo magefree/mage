@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class CauldronHaze extends CardImpl<CauldronHaze> {
+public class CauldronHaze extends CardImpl {
     
     private String rule = "Choose any number of target creatures. Each of those creatures gains persist until end of turn";
 

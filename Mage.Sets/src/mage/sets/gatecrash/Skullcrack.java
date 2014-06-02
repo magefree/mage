@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class Skullcrack extends CardImpl<Skullcrack> {
+public class Skullcrack extends CardImpl {
 
     public Skullcrack (UUID ownerId) {
         super(ownerId, 106, "Skullcrack", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

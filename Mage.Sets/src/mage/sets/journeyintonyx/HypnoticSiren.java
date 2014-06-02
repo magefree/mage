@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HypnoticSiren extends CardImpl<HypnoticSiren> {
+public class HypnoticSiren extends CardImpl {
 
     public HypnoticSiren(UUID ownerId) {
         super(ownerId, 42, "Hypnotic Siren", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{U}");

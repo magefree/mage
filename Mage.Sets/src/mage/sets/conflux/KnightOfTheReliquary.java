@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
+public class KnightOfTheReliquary extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("Forest or Plains");
 

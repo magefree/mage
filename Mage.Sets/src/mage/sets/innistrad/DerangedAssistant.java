@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DerangedAssistant extends CardImpl<DerangedAssistant> {
+public class DerangedAssistant extends CardImpl {
 
     public DerangedAssistant(UUID ownerId) {
         super(ownerId, 52, "Deranged Assistant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

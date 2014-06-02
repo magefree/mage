@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PinToTheEarth extends CardImpl<PinToTheEarth> {
+public class PinToTheEarth extends CardImpl {
 
     public PinToTheEarth(UUID ownerId) {
         super(ownerId, 45, "Pin to the Earth", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

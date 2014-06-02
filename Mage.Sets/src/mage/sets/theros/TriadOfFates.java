@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TriadOfFates extends CardImpl<TriadOfFates> {
+public class TriadOfFates extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent filterCounter = new FilterCreaturePermanent("creature that has a fate counter on it");

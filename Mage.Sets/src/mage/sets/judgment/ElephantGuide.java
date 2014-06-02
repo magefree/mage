@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ElephantGuide extends CardImpl<ElephantGuide> {
+public class ElephantGuide extends CardImpl {
 
     public ElephantGuide(UUID ownerId) {
         super(ownerId, 111, "Elephant Guide", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

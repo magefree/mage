@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class Fungusaur extends CardImpl<Fungusaur> {
+public class Fungusaur extends CardImpl {
 
     public Fungusaur(UUID ownerId) {
         super(ownerId, 104, "Fungusaur", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");

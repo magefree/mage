@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class Reset extends CardImpl<Reset> {
+public class Reset extends CardImpl {
 
     public Reset(UUID ownerId) {
         super(ownerId, 73, "Reset", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");

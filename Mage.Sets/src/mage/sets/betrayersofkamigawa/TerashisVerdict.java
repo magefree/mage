@@ -41,7 +41,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author Loki
  */
-public class TerashisVerdict extends CardImpl<TerashisVerdict> {
+public class TerashisVerdict extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with power 3 or less");
 

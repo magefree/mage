@@ -44,7 +44,7 @@ import mage.watchers.common.LandfallWatcher;
  *
  * @author LevelX2
  */
-public class RiverOfTears extends CardImpl<RiverOfTears> {
+public class RiverOfTears extends CardImpl {
 
     public RiverOfTears(UUID ownerId) {
         super(ownerId, 179, "River of Tears", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HorobisWhisper extends CardImpl<HorobisWhisper> {
+public class HorobisWhisper extends CardImpl {
 
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("nonblack creature");
     private static final FilterLandPermanent filterCondition = new FilterLandPermanent("Swamp");

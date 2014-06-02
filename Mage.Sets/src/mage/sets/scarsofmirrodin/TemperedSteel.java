@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Loki
  */
-public class TemperedSteel extends CardImpl<TemperedSteel> {
+public class TemperedSteel extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Artifact creatures");
 
     static {

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TirelessMissionaries extends CardImpl<TirelessMissionaries> {
+public class TirelessMissionaries extends CardImpl {
 
     public TirelessMissionaries(UUID ownerId) {
         super(ownerId, 36, "Tireless Missionaries", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class NantukoShade extends CardImpl<NantukoShade> {
+public class NantukoShade extends CardImpl {
 
     public NantukoShade(UUID ownerId) {
         super(ownerId, 106, "Nantuko Shade", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");

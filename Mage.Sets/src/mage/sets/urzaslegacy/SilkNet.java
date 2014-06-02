@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class SilkNet extends CardImpl<SilkNet> {
+public class SilkNet extends CardImpl {
 
     public SilkNet(UUID ownerId) {
         super(ownerId, 112, "Silk Net", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

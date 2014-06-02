@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class Bramblesnap extends CardImpl<Bramblesnap> {
+public class Bramblesnap extends CardImpl {
 
     public Bramblesnap(UUID ownerId) {
         super(ownerId, 180, "Bramblesnap", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class PsychosisCrawler extends CardImpl<PsychosisCrawler> {
+public class PsychosisCrawler extends CardImpl {
 
     public PsychosisCrawler(UUID ownerId) {
         super(ownerId, 126, "Psychosis Crawler", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

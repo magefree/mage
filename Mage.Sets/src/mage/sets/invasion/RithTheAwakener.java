@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class RithTheAwakener extends CardImpl<RithTheAwakener> {
+public class RithTheAwakener extends CardImpl {
 
     public RithTheAwakener(UUID ownerId) {
         super(ownerId, 267, "Rith, the Awakener", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");

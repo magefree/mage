@@ -51,7 +51,7 @@ import mage.abilities.effects.common.PutOntoBattlefieldTargetEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class StoneforgeMystic extends CardImpl<StoneforgeMystic> {
+public class StoneforgeMystic extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Equipment card");
 

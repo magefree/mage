@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class Rebuke extends CardImpl<Rebuke> {
+public class Rebuke extends CardImpl {
 
     public Rebuke(UUID ownerId) {
         super(ownerId, 29, "Rebuke", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

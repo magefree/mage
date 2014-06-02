@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Nourish extends CardImpl<Nourish> {
+public class Nourish extends CardImpl {
 
     public Nourish (UUID ownerId) {
         super(ownerId, 78, "Nourish", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}{G}");

@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ForsakenDrifters extends CardImpl<ForsakenDrifters> {
+public class ForsakenDrifters extends CardImpl {
 
     public ForsakenDrifters(UUID ownerId) {
         super(ownerId, 72, "Forsaken Drifters", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

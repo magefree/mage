@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class DesecrationPlague extends CardImpl<DesecrationPlague> {
+public class DesecrationPlague extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment or land");
 

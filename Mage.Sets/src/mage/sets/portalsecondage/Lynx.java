@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class Lynx extends CardImpl<Lynx> {
+public class Lynx extends CardImpl {
 
     public Lynx(UUID ownerId) {
         super(ownerId, 72, "Lynx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

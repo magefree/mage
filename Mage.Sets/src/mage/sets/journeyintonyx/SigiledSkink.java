@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SigiledSkink extends CardImpl<SigiledSkink> {
+public class SigiledSkink extends CardImpl {
 
     public SigiledSkink(UUID ownerId) {
         super(ownerId, 111, "Sigiled Skink", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

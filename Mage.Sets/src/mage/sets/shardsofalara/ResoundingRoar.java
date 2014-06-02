@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ResoundingRoar extends CardImpl<ResoundingRoar> {
+public class ResoundingRoar extends CardImpl {
 
     public ResoundingRoar(UUID ownerId) {
         super(ownerId, 144, "Resounding Roar", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

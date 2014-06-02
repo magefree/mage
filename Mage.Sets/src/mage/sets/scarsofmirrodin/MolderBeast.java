@@ -47,7 +47,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author Loki, North
  */
-public class MolderBeast extends CardImpl<MolderBeast> {
+public class MolderBeast extends CardImpl {
 
     public MolderBeast(UUID ownerId) {
         super(ownerId, 125, "Molder Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

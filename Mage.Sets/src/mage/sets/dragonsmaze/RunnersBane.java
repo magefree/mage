@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class RunnersBane extends CardImpl<RunnersBane> {
+public class RunnersBane extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
     static {

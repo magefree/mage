@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class RyuseiTheFallingStar extends CardImpl<RyuseiTheFallingStar> {
+public class RyuseiTheFallingStar extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 

@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class PreysVengeance extends CardImpl<PreysVengeance> {
+public class PreysVengeance extends CardImpl {
 
     public PreysVengeance (UUID ownerId) {
         super(ownerId, 205, "Prey's Vengeance", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class LightOfDay extends CardImpl<LightOfDay> {
+public class LightOfDay extends CardImpl {
 
     public LightOfDay(UUID ownerId) {
         super(ownerId, 239, "Light of Day", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

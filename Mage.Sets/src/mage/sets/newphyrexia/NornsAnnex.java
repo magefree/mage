@@ -47,7 +47,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class NornsAnnex extends CardImpl<NornsAnnex> {
+public class NornsAnnex extends CardImpl {
 
     public NornsAnnex(UUID ownerId) {
         super(ownerId, 17, "Norn's Annex", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}{WP}{WP}");

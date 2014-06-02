@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class OreskosSwiftclaw extends CardImpl<OreskosSwiftclaw> {
+public class OreskosSwiftclaw extends CardImpl {
 
     public OreskosSwiftclaw(UUID ownerId) {
         super(ownerId, 20, "Oreskos Swiftclaw", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

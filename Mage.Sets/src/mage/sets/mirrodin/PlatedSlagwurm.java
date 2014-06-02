@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PlatedSlagwurm extends CardImpl<PlatedSlagwurm> {
+public class PlatedSlagwurm extends CardImpl {
 
     public PlatedSlagwurm(UUID ownerId) {
         super(ownerId, 127, "Plated Slagwurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");

@@ -51,7 +51,7 @@ import mage.players.PlayerList;
  *
  * @author North
  */
-public class WarpWorld extends CardImpl<WarpWorld> {
+public class WarpWorld extends CardImpl {
 
     public WarpWorld(UUID ownerId) {
         super(ownerId, 163, "Warp World", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}{R}");

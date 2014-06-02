@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class RockBasilisk extends CardImpl<RockBasilisk> {
+public class RockBasilisk extends CardImpl {
 
     public RockBasilisk(UUID ownerId) {
         super(ownerId, 339, "Rock Basilisk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author jeffwadsworth
  */
-public class UktabiOrangutan extends CardImpl<UktabiOrangutan> {
+public class UktabiOrangutan extends CardImpl {
 
     public UktabiOrangutan(UUID ownerId) {
         super(ownerId, 73, "Uktabi Orangutan", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

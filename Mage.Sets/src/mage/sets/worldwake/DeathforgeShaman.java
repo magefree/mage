@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class DeathforgeShaman extends CardImpl<DeathforgeShaman> {
+public class DeathforgeShaman extends CardImpl {
 
     public DeathforgeShaman(UUID ownerId) {
         super(ownerId, 80, "Deathforge Shaman", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

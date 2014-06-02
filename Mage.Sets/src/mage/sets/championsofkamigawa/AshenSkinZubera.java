@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author Loki
  */
-public class AshenSkinZubera extends CardImpl<AshenSkinZubera> {
+public class AshenSkinZubera extends CardImpl {
 
     public AshenSkinZubera(UUID ownerId) {
         super(ownerId, 101, "Ashen-Skin Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

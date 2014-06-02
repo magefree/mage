@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class BloodClock extends CardImpl<BloodClock> {
+public class BloodClock extends CardImpl {
 
     public BloodClock(UUID ownerId) {
         super(ownerId, 153, "Blood Clock", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

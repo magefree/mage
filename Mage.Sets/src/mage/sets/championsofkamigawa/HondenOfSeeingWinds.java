@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 /**
  * @author Loki
  */
-public class HondenOfSeeingWinds extends CardImpl<HondenOfSeeingWinds> {
+public class HondenOfSeeingWinds extends CardImpl {
 
     final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 

@@ -47,7 +47,7 @@ import mage.util.CardUtil;
 /**
  * @author nantuko
  */
-public class CacklingCounterpart extends CardImpl<CacklingCounterpart> {
+public class CacklingCounterpart extends CardImpl {
 
     public CacklingCounterpart(UUID ownerId) {
         super(ownerId, 46, "Cackling Counterpart", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");

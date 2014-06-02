@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class Ghoulraiser extends CardImpl<Ghoulraiser> {
+public class Ghoulraiser extends CardImpl {
 
     public Ghoulraiser(UUID ownerId) {
         super(ownerId, 102, "Ghoulraiser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

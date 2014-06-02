@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BattleHurda extends CardImpl<BattleHurda> {
+public class BattleHurda extends CardImpl {
 
     public BattleHurda (UUID ownerId) {
         super(ownerId, 4, "Battle Hurda", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

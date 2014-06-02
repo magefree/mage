@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SwiftJustice extends CardImpl<SwiftJustice> {
+public class SwiftJustice extends CardImpl {
 
     public SwiftJustice(UUID ownerId) {
         super(ownerId, 26, "Swift Justice", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

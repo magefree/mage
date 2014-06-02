@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DoubleCleave extends CardImpl<DoubleCleave> {
+public class DoubleCleave extends CardImpl {
 
     public DoubleCleave(UUID ownerId) {
         super(ownerId, 135, "Double Cleave", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/W}");

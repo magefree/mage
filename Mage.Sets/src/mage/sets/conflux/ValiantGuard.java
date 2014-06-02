@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ValiantGuard extends CardImpl<ValiantGuard> {
+public class ValiantGuard extends CardImpl {
 
     public ValiantGuard(UUID ownerId) {
         super(ownerId, 19, "Valiant Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

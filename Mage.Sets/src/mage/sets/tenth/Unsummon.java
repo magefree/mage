@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Unsummon extends CardImpl<Unsummon> {
+public class Unsummon extends CardImpl {
 
     public Unsummon(UUID ownerId) {
         super(ownerId, 122, "Unsummon", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

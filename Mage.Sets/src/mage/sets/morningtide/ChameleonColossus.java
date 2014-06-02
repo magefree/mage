@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class ChameleonColossus extends CardImpl<ChameleonColossus> {
+public class ChameleonColossus extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("black");
 

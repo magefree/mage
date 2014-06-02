@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GuildscornWard extends CardImpl<GuildscornWard> {
+public class GuildscornWard extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("multicolored");
     static {

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FlayerHusk extends CardImpl<FlayerHusk> {
+public class FlayerHusk extends CardImpl {
 
     public FlayerHusk(UUID ownerId) {
         super(ownerId, 107, "Flayer Husk", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

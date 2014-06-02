@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BattlewiseValor extends CardImpl<BattlewiseValor> {
+public class BattlewiseValor extends CardImpl {
 
     public BattlewiseValor(UUID ownerId) {
         super(ownerId, 1, "Battlewise Valor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

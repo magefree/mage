@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WallOfSwords extends CardImpl<WallOfSwords> {
+public class WallOfSwords extends CardImpl {
 
     public WallOfSwords(UUID ownerId) {
         super(ownerId, 57, "Wall of Swords", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

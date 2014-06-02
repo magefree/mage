@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class ElderCathar extends CardImpl<ElderCathar> {
+public class ElderCathar extends CardImpl {
 
     public ElderCathar(UUID ownerId) {
         super(ownerId, 12, "Elder Cathar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

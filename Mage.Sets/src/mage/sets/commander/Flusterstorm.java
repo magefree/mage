@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class Flusterstorm extends CardImpl<Flusterstorm> {
+public class Flusterstorm extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
     static {

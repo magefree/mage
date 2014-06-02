@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class MarrowBats extends CardImpl<MarrowBats> {
+public class MarrowBats extends CardImpl {
 
     public MarrowBats(UUID ownerId) {
         super(ownerId, 113, "Marrow Bats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FugitiveWizard extends CardImpl<FugitiveWizard> {
+public class FugitiveWizard extends CardImpl {
 
     public FugitiveWizard(UUID ownerId) {
         super(ownerId, 86, "Fugitive Wizard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PelakkaWurm extends CardImpl<PelakkaWurm> {
+public class PelakkaWurm extends CardImpl {
 
     public PelakkaWurm(UUID ownerId) {
         super(ownerId, 204, "Pelakka Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");

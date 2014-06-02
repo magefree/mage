@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jeffwadsworth
  */
-public class DimirDoppelganger extends CardImpl<DimirDoppelganger> {
+public class DimirDoppelganger extends CardImpl {
 
     public DimirDoppelganger(UUID ownerId) {
         super(ownerId, 202, "Dimir Doppelganger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");

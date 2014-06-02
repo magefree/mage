@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class DriftingMeadow extends CardImpl<DriftingMeadow> {
+public class DriftingMeadow extends CardImpl {
 
     public DriftingMeadow(UUID ownerId) {
         super(ownerId, 320, "Drifting Meadow", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

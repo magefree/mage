@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author Melkhior
  */
-public class WirewoodElf extends CardImpl<WirewoodElf> {
+public class WirewoodElf extends CardImpl {
     public WirewoodElf(UUID ownerId) {
         super(ownerId, 301, "Wirewood Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "ONS";

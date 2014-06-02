@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class ArcboundLancer extends CardImpl<ArcboundLancer> {
+public class ArcboundLancer extends CardImpl {
 
     public ArcboundLancer(UUID ownerId) {
         super(ownerId, 98, "Arcbound Lancer", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

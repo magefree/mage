@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SpikeDrone extends CardImpl<SpikeDrone> {
+public class SpikeDrone extends CardImpl {
 
     public SpikeDrone(UUID ownerId) {
         super(ownerId, 152, "Spike Drone", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

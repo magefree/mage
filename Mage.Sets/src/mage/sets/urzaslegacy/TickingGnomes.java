@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class TickingGnomes extends CardImpl<TickingGnomes> {
+public class TickingGnomes extends CardImpl {
 
     public TickingGnomes(UUID ownerId) {
         super(ownerId, 136, "Ticking Gnomes", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

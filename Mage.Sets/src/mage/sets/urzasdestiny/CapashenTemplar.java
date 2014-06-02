@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class CapashenTemplar extends CardImpl<CapashenTemplar> {
+public class CapashenTemplar extends CardImpl {
 
     public CapashenTemplar(UUID ownerId) {
         super(ownerId, 5, "Capashen Templar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

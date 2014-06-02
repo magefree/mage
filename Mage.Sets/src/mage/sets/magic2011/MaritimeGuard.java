@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MaritimeGuard extends CardImpl<MaritimeGuard> {
+public class MaritimeGuard extends CardImpl {
 
     public MaritimeGuard(UUID ownerId) {
         super(ownerId, 63, "Maritime Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

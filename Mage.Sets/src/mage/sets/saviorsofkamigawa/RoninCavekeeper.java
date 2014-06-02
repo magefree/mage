@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RoninCavekeeper extends CardImpl<RoninCavekeeper> {
+public class RoninCavekeeper extends CardImpl {
 
     public RoninCavekeeper(UUID ownerId) {
         super(ownerId, 111, "Ronin Cavekeeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");

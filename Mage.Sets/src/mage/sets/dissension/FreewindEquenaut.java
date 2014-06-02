@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class FreewindEquenaut extends CardImpl<FreewindEquenaut> {
+public class FreewindEquenaut extends CardImpl {
 
     public FreewindEquenaut(UUID ownerId) {
         super(ownerId, 9, "Freewind Equenaut", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

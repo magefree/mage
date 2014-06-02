@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author Loki
  */
-public class MindsEye extends CardImpl<MindsEye> {
+public class MindsEye extends CardImpl {
 
     public MindsEye(UUID ownerId) {
         super(ownerId, 205, "Mind's Eye", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Thornling extends CardImpl<Thornling> {
+public class Thornling extends CardImpl {
 
     public Thornling(UUID ownerId) {
         super(ownerId, 95, "Thornling", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

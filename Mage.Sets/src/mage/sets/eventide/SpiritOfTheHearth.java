@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class SpiritOfTheHearth extends CardImpl<SpiritOfTheHearth> {
+public class SpiritOfTheHearth extends CardImpl {
 
     public SpiritOfTheHearth(UUID ownerId) {
         super(ownerId, 14, "Spirit of the Hearth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

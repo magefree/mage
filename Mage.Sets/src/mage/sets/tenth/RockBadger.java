@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RockBadger extends CardImpl<RockBadger> {
+public class RockBadger extends CardImpl {
 
     public RockBadger(UUID ownerId) {
         super(ownerId, 226, "Rock Badger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

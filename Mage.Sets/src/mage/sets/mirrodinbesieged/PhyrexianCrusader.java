@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Viserion
  */
-public class PhyrexianCrusader extends CardImpl<PhyrexianCrusader> {
+public class PhyrexianCrusader extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Red");
     private static final FilterCard filter2 = new FilterCard("White");

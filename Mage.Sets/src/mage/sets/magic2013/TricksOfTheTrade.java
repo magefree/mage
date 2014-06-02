@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TricksOfTheTrade extends CardImpl<TricksOfTheTrade> {
+public class TricksOfTheTrade extends CardImpl {
 
     public TricksOfTheTrade(UUID ownerId) {
         super(ownerId, 74, "Tricks of the Trade", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

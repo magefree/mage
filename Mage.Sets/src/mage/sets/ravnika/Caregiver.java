@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class Caregiver extends CardImpl<Caregiver> {
+public class Caregiver extends CardImpl {
 
     public Caregiver(UUID ownerId) {
         super(ownerId, 6, "Caregiver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

@@ -42,7 +42,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class GustcloakSentinel extends CardImpl<GustcloakSentinel> {
+public class GustcloakSentinel extends CardImpl {
 
     public GustcloakSentinel(UUID ownerId) {
         super(ownerId, 37, "Gustcloak Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

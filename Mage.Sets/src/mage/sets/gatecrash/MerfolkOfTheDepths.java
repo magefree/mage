@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class MerfolkOfTheDepths extends CardImpl<MerfolkOfTheDepths> {
+public class MerfolkOfTheDepths extends CardImpl {
 
     public MerfolkOfTheDepths(UUID ownerId) {
         super(ownerId, 221, "Merfolk of the Depths", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G/U}{G/U}");

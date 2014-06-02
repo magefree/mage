@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class StormcallersBoon extends CardImpl<StormcallersBoon> {
+public class StormcallersBoon extends CardImpl {
 
     public StormcallersBoon(UUID ownerId) {
         super(ownerId, 13, "Stormcaller's Boon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{U}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RiotDevils extends CardImpl<RiotDevils> {
+public class RiotDevils extends CardImpl {
 
     public RiotDevils(UUID ownerId) {
         super(ownerId, 160, "Riot Devils", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

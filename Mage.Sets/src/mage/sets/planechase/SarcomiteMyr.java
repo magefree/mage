@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SarcomiteMyr extends CardImpl<SarcomiteMyr> {
+public class SarcomiteMyr extends CardImpl {
 
     public SarcomiteMyr(UUID ownerId) {
         super(ownerId, 13, "Sarcomite Myr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Backfir3
  */
-public class DiscipleOfLaw extends CardImpl<DiscipleOfLaw> {
+public class DiscipleOfLaw extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Red");
 

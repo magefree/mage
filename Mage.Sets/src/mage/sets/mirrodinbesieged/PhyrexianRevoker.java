@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PhyrexianRevoker extends CardImpl<PhyrexianRevoker> {
+public class PhyrexianRevoker extends CardImpl {
 
     public PhyrexianRevoker(UUID ownerId) {
         super(ownerId, 122, "Phyrexian Revoker", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

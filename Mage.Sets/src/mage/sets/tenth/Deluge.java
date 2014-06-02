@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author cbt33
  */
-public class Deluge extends CardImpl<Deluge> {
+public class Deluge extends CardImpl {
     
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without flying");
     

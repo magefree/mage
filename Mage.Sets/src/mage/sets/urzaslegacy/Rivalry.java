@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class Rivalry extends CardImpl<Rivalry> {
+public class Rivalry extends CardImpl {
 
     public Rivalry(UUID ownerId) {
         super(ownerId, 90, "Rivalry", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

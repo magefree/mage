@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class VigilForTheLost extends CardImpl<VigilForTheLost> {
+public class VigilForTheLost extends CardImpl {
 
     public VigilForTheLost (UUID ownerId) {
         super(ownerId, 26, "Vigil for the Lost", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

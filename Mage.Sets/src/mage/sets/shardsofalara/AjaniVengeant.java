@@ -51,7 +51,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AjaniVengeant extends CardImpl<AjaniVengeant> {
+public class AjaniVengeant extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("lands");
 
     static {

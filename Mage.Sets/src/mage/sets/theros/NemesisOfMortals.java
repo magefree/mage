@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class NemesisOfMortals extends CardImpl<NemesisOfMortals> {
+public class NemesisOfMortals extends CardImpl {
 
     public NemesisOfMortals(UUID ownerId) {
         super(ownerId, 163, "Nemesis of Mortals", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

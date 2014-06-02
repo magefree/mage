@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Backfir3
  */
-public class KamahlFistOfKrosa extends CardImpl<KamahlFistOfKrosa> {
+public class KamahlFistOfKrosa extends CardImpl {
 
     public KamahlFistOfKrosa(UUID ownerId) {
         super(ownerId, 268, "Kamahl, Fist of Krosa", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

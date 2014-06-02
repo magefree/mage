@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author jonubuu
  */
-public class FleshbagMarauder extends CardImpl<FleshbagMarauder> {
+public class FleshbagMarauder extends CardImpl {
 
     public FleshbagMarauder(UUID ownerId) {
         super(ownerId, 76, "Fleshbag Marauder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

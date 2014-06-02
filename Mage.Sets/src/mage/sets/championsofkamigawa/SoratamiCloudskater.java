@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class SoratamiCloudskater extends CardImpl<SoratamiCloudskater> {
+public class SoratamiCloudskater extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

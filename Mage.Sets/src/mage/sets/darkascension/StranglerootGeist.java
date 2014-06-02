@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class StranglerootGeist extends CardImpl<StranglerootGeist> {
+public class StranglerootGeist extends CardImpl {
 
     public StranglerootGeist(UUID ownerId) {
         super(ownerId, 127, "Strangleroot Geist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");

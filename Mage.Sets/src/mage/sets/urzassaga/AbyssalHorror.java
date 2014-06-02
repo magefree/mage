@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author Backfir3
  */
-public class AbyssalHorror extends CardImpl<AbyssalHorror> {
+public class AbyssalHorror extends CardImpl {
 
     public AbyssalHorror (UUID ownerId) {
         super(ownerId, 115, "Abyssal Horror", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

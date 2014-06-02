@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class NyxbornTriton extends CardImpl<NyxbornTriton> {
+public class NyxbornTriton extends CardImpl {
 
     public NyxbornTriton(UUID ownerId) {
         super(ownerId, 46, "Nyxborn Triton", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{U}");

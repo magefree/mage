@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FireFieldOgre extends CardImpl<FireFieldOgre> {
+public class FireFieldOgre extends CardImpl {
 
     public FireFieldOgre(UUID ownerId) {
         super(ownerId, 168, "Fire-Field Ogre", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");

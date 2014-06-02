@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class MendingTouch extends CardImpl<MendingTouch> {
+public class MendingTouch extends CardImpl {
 
     public MendingTouch(UUID ownerId) {
         super(ownerId, 44, "Mending Touch", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

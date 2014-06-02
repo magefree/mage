@@ -55,7 +55,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class EchoMage extends CardImpl<EchoMage> {
+public class EchoMage extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 

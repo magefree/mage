@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class SvyeluniteTemple extends CardImpl<SvyeluniteTemple> {
+public class SvyeluniteTemple extends CardImpl {
 
     public SvyeluniteTemple(UUID ownerId) {
         super(ownerId, 187, "Svyelunite Temple", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

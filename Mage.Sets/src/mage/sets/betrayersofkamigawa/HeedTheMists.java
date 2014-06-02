@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HeedTheMists extends CardImpl<HeedTheMists> {
+public class HeedTheMists extends CardImpl {
 
     public HeedTheMists(UUID ownerId) {
         super(ownerId, 36, "Heed the Mists", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

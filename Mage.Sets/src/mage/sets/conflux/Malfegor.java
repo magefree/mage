@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class Malfegor extends CardImpl<Malfegor> {
+public class Malfegor extends CardImpl {
 
     public Malfegor(UUID ownerId) {
         super(ownerId, 117, "Malfegor", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{R}{R}");

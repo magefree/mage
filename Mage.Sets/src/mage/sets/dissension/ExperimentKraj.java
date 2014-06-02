@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ExperimentKraj extends CardImpl<ExperimentKraj> {
+public class ExperimentKraj extends CardImpl {
 
     public ExperimentKraj(UUID ownerId) {
         super(ownerId, 110, "Experiment Kraj", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{U}{U}");

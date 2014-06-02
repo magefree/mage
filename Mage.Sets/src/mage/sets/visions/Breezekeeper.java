@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Breezekeeper extends CardImpl<Breezekeeper> {
+public class Breezekeeper extends CardImpl {
 
     public Breezekeeper(UUID ownerId) {
         super(ownerId, 27, "Breezekeeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

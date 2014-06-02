@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ConstrictingTendrils extends CardImpl<ConstrictingTendrils> {
+public class ConstrictingTendrils extends CardImpl {
 
     public ConstrictingTendrils(UUID ownerId) {
         super(ownerId, 22, "Constricting Tendrils", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

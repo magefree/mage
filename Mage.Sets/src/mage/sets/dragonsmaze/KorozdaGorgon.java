@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KorozdaGorgon extends CardImpl<KorozdaGorgon> {
+public class KorozdaGorgon extends CardImpl {
 
     public KorozdaGorgon(UUID ownerId) {
         super(ownerId, 78, "Korozda Gorgon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");

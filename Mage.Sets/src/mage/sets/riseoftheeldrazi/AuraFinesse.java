@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class AuraFinesse extends CardImpl<AuraFinesse> {
+public class AuraFinesse extends CardImpl {
 
     private static final FilterEnchantment filter = new FilterEnchantment("Aura you control");
 

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class GroundshakerSliver extends CardImpl<GroundshakerSliver> {
+public class GroundshakerSliver extends CardImpl {
 
     public GroundshakerSliver(UUID ownerId) {
         super(ownerId, 177, "Groundshaker Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");

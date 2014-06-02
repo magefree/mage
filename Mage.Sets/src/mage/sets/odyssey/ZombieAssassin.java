@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class ZombieAssassin extends CardImpl<ZombieAssassin> {
+public class ZombieAssassin extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");    
     static {

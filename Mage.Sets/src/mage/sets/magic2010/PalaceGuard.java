@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PalaceGuard extends CardImpl<PalaceGuard> {
+public class PalaceGuard extends CardImpl {
 
     public PalaceGuard(UUID ownerId) {
         super(ownerId, 23, "Palace Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class SpoilsOfVictory extends CardImpl<SpoilsOfVictory> {
+public class SpoilsOfVictory extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Plains, Island, Swamp, Mountain, or Forest card");
     static {

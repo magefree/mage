@@ -40,7 +40,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class DebtToTheDeathless extends CardImpl<DebtToTheDeathless> {
+public class DebtToTheDeathless extends CardImpl {
 
     public DebtToTheDeathless(UUID ownerId) {
         super(ownerId, 64, "Debt to the Deathless", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{W}{W}{B}{B}");

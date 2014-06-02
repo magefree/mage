@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class ForkedBolt extends CardImpl<ForkedBolt> {
+public class ForkedBolt extends CardImpl {
 
     public ForkedBolt(UUID ownerId) {
         super(ownerId, 146, "Forked Bolt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");

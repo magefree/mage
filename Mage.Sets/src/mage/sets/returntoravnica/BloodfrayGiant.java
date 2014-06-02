@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class BloodfrayGiant extends CardImpl<BloodfrayGiant> {
+public class BloodfrayGiant extends CardImpl {
  
     public BloodfrayGiant(UUID ownerId) {
         super(ownerId, 89, "Bloodfray Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

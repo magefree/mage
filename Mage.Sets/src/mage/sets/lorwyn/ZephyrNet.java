@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ZephyrNet extends CardImpl<ZephyrNet> {
+public class ZephyrNet extends CardImpl {
 
     public ZephyrNet(UUID ownerId) {
         super(ownerId, 98, "Zephyr Net", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

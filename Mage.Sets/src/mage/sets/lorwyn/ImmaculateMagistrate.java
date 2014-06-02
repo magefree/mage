@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ImmaculateMagistrate extends CardImpl<ImmaculateMagistrate> {
+public class ImmaculateMagistrate extends CardImpl {
 
     public ImmaculateMagistrate(UUID ownerId) {
         super(ownerId, 219, "Immaculate Magistrate", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");

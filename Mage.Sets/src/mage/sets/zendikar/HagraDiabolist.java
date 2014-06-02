@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class HagraDiabolist extends CardImpl<HagraDiabolist> {
+public class HagraDiabolist extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Allies you control");
 

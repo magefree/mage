@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class NoDachi extends CardImpl<NoDachi> {
+public class NoDachi extends CardImpl {
 
     public NoDachi (UUID ownerId) {
         super(ownerId, 264, "No-Dachi", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

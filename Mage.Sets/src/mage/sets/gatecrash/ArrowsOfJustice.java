@@ -38,7 +38,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LevelX2
  */
-public class ArrowsOfJustice extends CardImpl<ArrowsOfJustice> {
+public class ArrowsOfJustice extends CardImpl {
 
     public ArrowsOfJustice(UUID ownerId) {
         super(ownerId, 211, "Arrows of Justice", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R/W}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class Crocanura extends CardImpl<Crocanura> {
+public class Crocanura extends CardImpl {
 
     public Crocanura(UUID ownerId) {
         super(ownerId, 116, "Crocanura", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

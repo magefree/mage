@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EpharasRadiance extends CardImpl<EpharasRadiance> {
+public class EpharasRadiance extends CardImpl {
 
     public EpharasRadiance(UUID ownerId) {
         super(ownerId, 9, "Ephara's Radiance", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

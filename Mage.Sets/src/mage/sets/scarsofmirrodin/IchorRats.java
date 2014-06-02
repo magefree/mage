@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class IchorRats extends CardImpl<IchorRats> {
+public class IchorRats extends CardImpl {
 
     public IchorRats (UUID ownerId) {
         super(ownerId, 67, "Ichor Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

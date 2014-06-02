@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class ViridianCorrupter extends CardImpl<ViridianCorrupter> {
+public class ViridianCorrupter extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

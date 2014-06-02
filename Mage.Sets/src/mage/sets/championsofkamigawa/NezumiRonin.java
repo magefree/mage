@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class NezumiRonin extends CardImpl<NezumiRonin> {
+public class NezumiRonin extends CardImpl {
 
     public NezumiRonin (UUID ownerId) {
         super(ownerId, 130, "Nezumi Ronin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

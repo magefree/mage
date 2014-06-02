@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class BazaarOfBaghdad extends CardImpl<BazaarOfBaghdad> {
+public class BazaarOfBaghdad extends CardImpl {
 
     public BazaarOfBaghdad(UUID ownerId) {
         super(ownerId, 84, "Bazaar of Baghdad", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

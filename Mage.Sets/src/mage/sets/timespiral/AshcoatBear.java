@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class AshcoatBear extends CardImpl<AshcoatBear> {
+public class AshcoatBear extends CardImpl {
 
     public AshcoatBear(UUID ownerId) {
         super(ownerId, 190, "Ashcoat Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

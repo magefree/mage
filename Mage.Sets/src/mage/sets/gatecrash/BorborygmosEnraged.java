@@ -55,7 +55,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class BorborygmosEnraged extends CardImpl<BorborygmosEnraged> {
+public class BorborygmosEnraged extends CardImpl {
 
     public BorborygmosEnraged(UUID ownerId) {
         super(ownerId, 147, "Borborygmos Enraged", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{G}{G}");

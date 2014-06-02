@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class TangleMantis extends CardImpl<TangleMantis> {
+public class TangleMantis extends CardImpl {
 
     public TangleMantis (UUID ownerId) {
         super(ownerId, 91, "Tangle Mantis", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

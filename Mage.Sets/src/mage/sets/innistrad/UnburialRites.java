@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class UnburialRites extends CardImpl<UnburialRites> {
+public class UnburialRites extends CardImpl {
 
     public UnburialRites(UUID ownerId) {
         super(ownerId, 122, "Unburial Rites", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");

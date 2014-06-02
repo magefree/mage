@@ -51,7 +51,7 @@ import mage.players.Player;
 /**
  * @author LevelX2
  */
-public class PetalmaneBaku extends CardImpl<PetalmaneBaku> {
+public class PetalmaneBaku extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

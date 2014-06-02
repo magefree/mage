@@ -54,7 +54,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class HotheadedGiant extends CardImpl<HotheadedGiant> {
+public class HotheadedGiant extends CardImpl {
 
     public HotheadedGiant(UUID ownerId) {
         super(ownerId, 57, "Hotheaded Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

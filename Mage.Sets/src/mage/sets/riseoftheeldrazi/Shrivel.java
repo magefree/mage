@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author North
  */
-public class Shrivel extends CardImpl<Shrivel> {
+public class Shrivel extends CardImpl {
 
     public Shrivel(UUID ownerId) {
         super(ownerId, 126, "Shrivel", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

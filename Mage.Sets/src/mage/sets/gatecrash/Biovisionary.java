@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author Plopman
  */
-public class Biovisionary extends CardImpl<Biovisionary> {
+public class Biovisionary extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control four or more creatures named Biovisionary");
     static{

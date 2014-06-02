@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BeaconHawk extends CardImpl<BeaconHawk> {
+public class BeaconHawk extends CardImpl {
 
     public BeaconHawk(UUID ownerId) {
         super(ownerId, 3, "Beacon Hawk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

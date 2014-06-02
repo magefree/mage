@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class ElderscaleWurm extends CardImpl<ElderscaleWurm> {
+public class ElderscaleWurm extends CardImpl {
 
     public ElderscaleWurm(UUID ownerId) {
         super(ownerId, 167, "Elderscale Wurm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");

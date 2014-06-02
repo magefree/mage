@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class IchorSlick extends CardImpl<IchorSlick> {
+public class IchorSlick extends CardImpl {
 
     public IchorSlick(UUID ownerId) {
         super(ownerId, 68, "Ichor Slick", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

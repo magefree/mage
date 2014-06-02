@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BerserkersOfBloodRidge  extends CardImpl<BerserkersOfBloodRidge> {
+public class BerserkersOfBloodRidge  extends CardImpl {
 
     public BerserkersOfBloodRidge(UUID ownerId) {
         super(ownerId, 126, "Berserkers of Blood Ridge", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class PitRaptor extends CardImpl<PitRaptor> {
+public class PitRaptor extends CardImpl {
 
     public PitRaptor(UUID ownerId) {
         super(ownerId, 72, "Pit Raptor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

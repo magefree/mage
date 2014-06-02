@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class TopanAscetic extends CardImpl<TopanAscetic> {
+public class TopanAscetic extends CardImpl {
    
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
     static{

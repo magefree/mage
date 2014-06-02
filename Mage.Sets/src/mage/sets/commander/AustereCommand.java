@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  *
  * @author LevelX2
  */
-public class AustereCommand extends CardImpl<AustereCommand> {
+public class AustereCommand extends CardImpl {
 
     private static final FilterCreaturePermanent filter3orLess = new FilterCreaturePermanent("creatures with converted mana cost 3 or less");
     private static final FilterCreaturePermanent filter4orMore = new FilterCreaturePermanent("creatures with converted mana cost 4 or greater");

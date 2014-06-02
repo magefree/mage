@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PrimalCocoon extends CardImpl<PrimalCocoon> {
+public class PrimalCocoon extends CardImpl {
 
     public PrimalCocoon(UUID ownerId) {
         super(ownerId, 191, "Primal Cocoon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

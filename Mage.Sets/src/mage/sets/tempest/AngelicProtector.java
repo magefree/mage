@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AngelicProtector extends CardImpl<AngelicProtector> {
+public class AngelicProtector extends CardImpl {
 
     public AngelicProtector(UUID ownerId) {
         super(ownerId, 214, "Angelic Protector", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

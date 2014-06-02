@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class RendSpirit extends CardImpl<RendSpirit> {
+public class RendSpirit extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Spirit");
 

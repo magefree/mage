@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Backfir3
  */
-public class ClawsOfGix extends CardImpl<ClawsOfGix> {
+public class ClawsOfGix extends CardImpl {
 
     public ClawsOfGix(UUID ownerId) {
         super(ownerId, 290, "Claws of Gix", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Omniscience extends CardImpl<Omniscience> {
+public class Omniscience extends CardImpl {
 
     public Omniscience(UUID ownerId) {
         super(ownerId, 63, "Omniscience", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{7}{U}{U}{U}");

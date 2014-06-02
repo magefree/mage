@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author KholdFuzion
  */
-public class GemhideSliver extends CardImpl<GemhideSliver> {
+public class GemhideSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

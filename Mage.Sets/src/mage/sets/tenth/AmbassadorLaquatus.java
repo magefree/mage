@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class AmbassadorLaquatus extends CardImpl<AmbassadorLaquatus> {
+public class AmbassadorLaquatus extends CardImpl {
 
     public AmbassadorLaquatus(UUID ownerId) {
         super(ownerId, 65, "Ambassador Laquatus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

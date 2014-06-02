@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class DarkFavor extends CardImpl<DarkFavor> {
+public class DarkFavor extends CardImpl {
 
     public DarkFavor(UUID ownerId) {
         super(ownerId, 89, "Dark Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

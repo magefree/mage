@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TestOfFaith extends CardImpl<TestOfFaith> {
+public class TestOfFaith extends CardImpl {
 
     public TestOfFaith(UUID ownerId) {
         super(ownerId, 33, "Test of Faith", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

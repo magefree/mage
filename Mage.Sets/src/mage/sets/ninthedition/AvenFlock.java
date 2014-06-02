@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class AvenFlock extends CardImpl<AvenFlock> {
+public class AvenFlock extends CardImpl {
 
     public AvenFlock(UUID ownerId) {
         super(ownerId, 4, "Aven Flock", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class JacesPhantasm extends CardImpl<JacesPhantasm> {
+public class JacesPhantasm extends CardImpl {
 
     public JacesPhantasm(UUID ownerId) {
         super(ownerId, 57, "Jace's Phantasm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");

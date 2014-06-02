@@ -41,7 +41,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author North
  */
-public class OrcishOriflamme extends CardImpl<OrcishOriflamme> {
+public class OrcishOriflamme extends CardImpl {
 
     public OrcishOriflamme(UUID ownerId) {
         super(ownerId, 167, "Orcish Oriflamme", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

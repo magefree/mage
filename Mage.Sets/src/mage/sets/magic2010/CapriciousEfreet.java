@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class CapriciousEfreet extends CardImpl<CapriciousEfreet> {
+public class CapriciousEfreet extends CardImpl {
 
     private static final FilterNonlandPermanent filterControlled = new FilterNonlandPermanent("nonland permanent you control");
     private static final FilterNonlandPermanent filterNotControlled = new FilterNonlandPermanent("nonland permanent you don't control");

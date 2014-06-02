@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class AvacynsPilgrim extends CardImpl<AvacynsPilgrim> {
+public class AvacynsPilgrim extends CardImpl {
 
     public AvacynsPilgrim(UUID ownerId) {
         super(ownerId, 170, "Avacyn's Pilgrim", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

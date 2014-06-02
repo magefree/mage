@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author anonymous
  */
-public class LoxodonWarhammer extends CardImpl<LoxodonWarhammer> {
+public class LoxodonWarhammer extends CardImpl {
 
     public LoxodonWarhammer(UUID ownerId) {
         super(ownerId, 118, "Loxodon Warhammer", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

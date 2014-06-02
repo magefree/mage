@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author Quercitron
  */
-public class Browse extends CardImpl<Browse> {
+public class Browse extends CardImpl {
 
     public Browse(UUID ownerId) {
         super(ownerId, 38, "Browse", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

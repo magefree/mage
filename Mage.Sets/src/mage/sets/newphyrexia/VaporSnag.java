@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class VaporSnag extends CardImpl<VaporSnag> {
+public class VaporSnag extends CardImpl {
 
     public VaporSnag (UUID ownerId) {
         super(ownerId, 48, "Vapor Snag", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

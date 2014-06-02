@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class ArmoredWolfRider extends CardImpl<ArmoredWolfRider> {
+public class ArmoredWolfRider extends CardImpl {
 
     public ArmoredWolfRider (UUID ownerId) {
         super(ownerId, 52, "Armored Wolf-Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");

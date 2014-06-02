@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class KazuulWarlord extends CardImpl<KazuulWarlord> {
+public class KazuulWarlord extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
 

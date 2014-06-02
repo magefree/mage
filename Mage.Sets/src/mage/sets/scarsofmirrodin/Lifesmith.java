@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class Lifesmith extends CardImpl<Lifesmith> {
+public class Lifesmith extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an artifact spell");
     static {

@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class PestilenceRats extends CardImpl<PestilenceRats> {
+public class PestilenceRats extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Rats on the battlefield");
     static{

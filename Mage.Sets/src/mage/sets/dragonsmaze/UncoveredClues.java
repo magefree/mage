@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 
 
-public class UncoveredClues extends CardImpl<UncoveredClues> {
+public class UncoveredClues extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("up to two instant and/or sorcery cards");
     static {

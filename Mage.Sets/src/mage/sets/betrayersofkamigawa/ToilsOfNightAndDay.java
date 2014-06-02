@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ToilsOfNightAndDay extends CardImpl<ToilsOfNightAndDay> {
+public class ToilsOfNightAndDay extends CardImpl {
 
     public ToilsOfNightAndDay(UUID ownerId) {
         super(ownerId, 57, "Toils of Night and Day", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

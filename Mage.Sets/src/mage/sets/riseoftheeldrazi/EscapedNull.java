@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class EscapedNull extends CardImpl<EscapedNull> {
+public class EscapedNull extends CardImpl {
 
     public EscapedNull(UUID ownerId) {
         super(ownerId, 109, "Escaped Null", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

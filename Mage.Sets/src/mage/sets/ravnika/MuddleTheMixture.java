@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class MuddleTheMixture extends CardImpl<MuddleTheMixture> {
+public class MuddleTheMixture extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 
     static {

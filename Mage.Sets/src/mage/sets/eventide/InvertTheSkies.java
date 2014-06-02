@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
  * @author jeffwadsworth
 
  */
-public class InvertTheSkies extends CardImpl<InvertTheSkies> {
+public class InvertTheSkies extends CardImpl {
 
     public InvertTheSkies(UUID ownerId) {
         super(ownerId, 155, "Invert the Skies", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G/U}");

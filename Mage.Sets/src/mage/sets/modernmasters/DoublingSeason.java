@@ -49,7 +49,7 @@ import mage.game.stack.StackObject;
  *
  * @author LevelX2
  */
-public class DoublingSeason extends CardImpl<DoublingSeason> {
+public class DoublingSeason extends CardImpl {
 
     public DoublingSeason(UUID ownerId) {
         super(ownerId, 141, "Doubling Season", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");

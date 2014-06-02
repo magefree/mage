@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ArcaneDenial extends CardImpl<ArcaneDenial> {
+public class ArcaneDenial extends CardImpl {
 
     public ArcaneDenial(UUID ownerId) {
         super(ownerId, 28, "Arcane Denial", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

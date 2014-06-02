@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class CageOfHands extends CardImpl<CageOfHands> {
+public class CageOfHands extends CardImpl {
 
     public CageOfHands (UUID ownerId) {
         super(ownerId, 3, "Cage of Hands", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class InfiltrationLens extends CardImpl<InfiltrationLens> {
+public class InfiltrationLens extends CardImpl {
 
     public InfiltrationLens(UUID ownerId) {
         super(ownerId, 167, "Infiltration Lens", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

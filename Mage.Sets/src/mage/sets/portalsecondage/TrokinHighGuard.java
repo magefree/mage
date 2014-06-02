@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class TrokinHighGuard extends CardImpl<TrokinHighGuard> {
+public class TrokinHighGuard extends CardImpl {
 
     public TrokinHighGuard(UUID ownerId) {
         super(ownerId, 146, "Trokin High Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

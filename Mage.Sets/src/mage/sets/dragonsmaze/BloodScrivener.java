@@ -50,7 +50,7 @@ import mage.players.Player;
  */
 
 
-public class BloodScrivener  extends CardImpl<BloodScrivener> {
+public class BloodScrivener  extends CardImpl {
 
     public BloodScrivener (UUID ownerId) {
         super(ownerId, 22, "Blood Scrivener", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}");

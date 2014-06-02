@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class WalkTheAeons extends CardImpl<WalkTheAeons> {
+public class WalkTheAeons extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("three Islands");
 

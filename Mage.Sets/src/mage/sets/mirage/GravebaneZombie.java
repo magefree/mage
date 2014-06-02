@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Quercitron
  */
-public class GravebaneZombie extends CardImpl<GravebaneZombie> {
+public class GravebaneZombie extends CardImpl {
 
     public GravebaneZombie(UUID ownerId) {
         super(ownerId, 25, "Gravebane Zombie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author maurer.it_at_gmail.com
  */
-public class NissaRevane extends CardImpl<NissaRevane> {
+public class NissaRevane extends CardImpl {
 
     private static final FilterCard nissasChosenFilter = new FilterCard("card named Nissa's Chosen");
     private static final FilterCard elfFilter = new FilterCard("Elf creature cards");

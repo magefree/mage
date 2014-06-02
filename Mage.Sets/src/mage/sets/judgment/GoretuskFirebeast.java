@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author Backfir3
  */
-public class GoretuskFirebeast extends CardImpl<GoretuskFirebeast> {
+public class GoretuskFirebeast extends CardImpl {
 
     public GoretuskFirebeast(UUID ownerId) {
         super(ownerId, 91, "Goretusk Firebeast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");

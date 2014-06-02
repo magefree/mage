@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DesertersQuarters extends CardImpl<DesertersQuarters> {
+public class DesertersQuarters extends CardImpl {
 
     public DesertersQuarters(UUID ownerId) {
         super(ownerId, 160, "Deserter's Quarters", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

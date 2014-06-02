@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class EngulfingSlagwurm extends CardImpl<EngulfingSlagwurm> {
+public class EngulfingSlagwurm extends CardImpl {
 
     public EngulfingSlagwurm (UUID ownerId) {
         super(ownerId, 118, "Engulfing Slagwurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

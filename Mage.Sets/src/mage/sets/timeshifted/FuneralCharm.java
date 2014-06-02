@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FuneralCharm extends CardImpl<FuneralCharm> {
+public class FuneralCharm extends CardImpl {
 
     public FuneralCharm(UUID ownerId) {
         super(ownerId, 44, "Funeral Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

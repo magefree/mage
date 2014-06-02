@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author maurer.it_at_gmail.com
  */
-public class AuriokEdgewright extends CardImpl<AuriokEdgewright> {
+public class AuriokEdgewright extends CardImpl {
 
     protected static String effectText = "Metalcraft - Auriok Edgewright has double strike as long as you control three or more artifacts.";
 

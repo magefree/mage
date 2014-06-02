@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GlorySeeker extends CardImpl<GlorySeeker> {
+public class GlorySeeker extends CardImpl {
 
     public GlorySeeker (UUID ownerId) {
         super(ownerId, 22, "Glory Seeker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

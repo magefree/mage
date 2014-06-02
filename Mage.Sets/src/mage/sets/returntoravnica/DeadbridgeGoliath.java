@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class DeadbridgeGoliath extends CardImpl<DeadbridgeGoliath> {
+public class DeadbridgeGoliath extends CardImpl {
 
     public DeadbridgeGoliath(UUID ownerId) {
         super(ownerId, 120, "Deadbridge Goliath", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

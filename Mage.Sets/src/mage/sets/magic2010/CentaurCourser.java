@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CentaurCourser extends CardImpl<CentaurCourser> {
+public class CentaurCourser extends CardImpl {
 
     public CentaurCourser(UUID ownerId) {
         super(ownerId, 172, "Centaur Courser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

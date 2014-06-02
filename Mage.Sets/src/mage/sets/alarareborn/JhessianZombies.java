@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class JhessianZombies extends CardImpl<JhessianZombies> {
+public class JhessianZombies extends CardImpl {
 
     public JhessianZombies(UUID ownerId) {
         super(ownerId, 22, "Jhessian Zombies", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");

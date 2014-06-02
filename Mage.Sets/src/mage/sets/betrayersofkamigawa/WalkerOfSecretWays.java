@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WalkerOfSecretWays extends CardImpl<WalkerOfSecretWays> {
+public class WalkerOfSecretWays extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("Ninja you control");
     static {

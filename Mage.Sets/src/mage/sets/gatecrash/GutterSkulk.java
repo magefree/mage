@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class GutterSkulk extends CardImpl<GutterSkulk> {
+public class GutterSkulk extends CardImpl {
 
     public GutterSkulk(UUID ownerId) {
         super(ownerId, 67, "Gutter Skulk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

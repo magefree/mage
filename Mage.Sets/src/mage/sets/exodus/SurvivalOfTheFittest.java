@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class SurvivalOfTheFittest extends CardImpl<SurvivalOfTheFittest> {
+public class SurvivalOfTheFittest extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("creature card");
     

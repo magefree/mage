@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class SerraAvatar extends CardImpl<SerraAvatar> {
+public class SerraAvatar extends CardImpl {
 
     public SerraAvatar(UUID ownerId) {
         super(ownerId, 45, "Serra Avatar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");

@@ -46,7 +46,7 @@ import mage.game.stack.Spell;
  *
  * @author Backfir3
  */
-public class TitaniasChosen extends CardImpl<TitaniasChosen> {
+public class TitaniasChosen extends CardImpl {
 
     public TitaniasChosen(UUID ownerId) {
         super(ownerId, 277, "Titania's Chosen", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

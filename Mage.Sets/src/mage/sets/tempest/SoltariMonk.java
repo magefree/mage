@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class SoltariMonk extends CardImpl<SoltariMonk> {
+public class SoltariMonk extends CardImpl {
     private static final FilterCard filter = new FilterCard("Black");
 
     static {

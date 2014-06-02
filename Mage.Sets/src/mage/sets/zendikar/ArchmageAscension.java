@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class ArchmageAscension extends CardImpl<ArchmageAscension> {
+public class ArchmageAscension extends CardImpl {
 
     public ArchmageAscension(UUID ownerId) {
         super(ownerId, 42, "Archmage Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

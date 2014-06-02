@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class TrestleTroll extends CardImpl<TrestleTroll> {
+public class TrestleTroll extends CardImpl {
 
     public TrestleTroll(UUID ownerId) {
         super(ownerId, 205, "Trestle Troll", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");

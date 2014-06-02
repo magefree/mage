@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MagusOfTheTabernacle extends CardImpl<MagusOfTheTabernacle> {
+public class MagusOfTheTabernacle extends CardImpl {
 
     static private final String rule = "All creatures have \"At the beginning of your upkeep, sacrifice this creature unless you pay {1}\"";
 

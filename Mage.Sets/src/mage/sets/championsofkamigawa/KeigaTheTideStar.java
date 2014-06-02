@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class KeigaTheTideStar extends CardImpl<KeigaTheTideStar> {
+public class KeigaTheTideStar extends CardImpl {
 
     public KeigaTheTideStar(UUID ownerId) {
         super(ownerId, 72, "Keiga, the Tide Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}");

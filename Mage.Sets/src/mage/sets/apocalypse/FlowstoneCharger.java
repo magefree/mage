@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class FlowstoneCharger extends CardImpl<FlowstoneCharger> {
+public class FlowstoneCharger extends CardImpl {
 
     public FlowstoneCharger(UUID ownerId) {
         super(ownerId, 99, "Flowstone Charger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");

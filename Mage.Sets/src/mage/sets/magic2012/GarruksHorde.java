@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class GarruksHorde extends CardImpl<GarruksHorde> {
+public class GarruksHorde extends CardImpl {
 
     public GarruksHorde(UUID ownerId) {
         super(ownerId, 176, "Garruk's Horde", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

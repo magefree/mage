@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class BoltOfKeranos extends CardImpl<BoltOfKeranos> {
+public class BoltOfKeranos extends CardImpl {
 
     public BoltOfKeranos(UUID ownerId) {
         super(ownerId, 89, "Bolt of Keranos", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

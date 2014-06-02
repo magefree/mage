@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Nullify extends CardImpl<Nullify> {
+public class Nullify extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("creature or Aura spell");
     

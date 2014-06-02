@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
  *
  * @author jonubuu
  */
-public class Glimmervoid extends CardImpl<Glimmervoid> {
+public class Glimmervoid extends CardImpl {
 
     public Glimmervoid(UUID ownerId) {
         super(ownerId, 281, "Glimmervoid", Rarity.RARE, new CardType[]{CardType.LAND}, "");

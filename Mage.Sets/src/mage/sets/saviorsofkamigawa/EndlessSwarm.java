@@ -41,7 +41,7 @@ import mage.game.permanent.token.SnakeToken;
  * @author jeffwadsworth
 
  */
-public class EndlessSwarm extends CardImpl<EndlessSwarm> {
+public class EndlessSwarm extends CardImpl {
 
     public EndlessSwarm(UUID ownerId) {
         super(ownerId, 129, "Endless Swarm", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}{G}{G}");

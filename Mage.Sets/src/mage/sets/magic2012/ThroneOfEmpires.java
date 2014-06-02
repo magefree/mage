@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class ThroneOfEmpires extends CardImpl<ThroneOfEmpires> {
+public class ThroneOfEmpires extends CardImpl {
 
     public ThroneOfEmpires(UUID ownerId) {
         super(ownerId, 221, "Throne of Empires", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

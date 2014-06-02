@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class MeletisAstronomer extends CardImpl<MeletisAstronomer> {
+public class MeletisAstronomer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an enchantment card");
     static {

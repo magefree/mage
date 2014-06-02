@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class DiscipleOfBolas extends CardImpl<DiscipleOfBolas> {
+public class DiscipleOfBolas extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(" another creature");
 

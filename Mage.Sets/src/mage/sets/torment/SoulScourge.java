@@ -47,7 +47,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class SoulScourge extends CardImpl<SoulScourge> {
+public class SoulScourge extends CardImpl {
 
     public SoulScourge(UUID ownerId) {
         super(ownerId, 85, "Soul Scourge", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

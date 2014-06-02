@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DivebomberGriffin extends CardImpl<DivebomberGriffin> {
+public class DivebomberGriffin extends CardImpl {
 
     public DivebomberGriffin(UUID ownerId) {
         super(ownerId, 14, "Divebomber Griffin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

@@ -53,7 +53,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author BetaSteward
  */
-public class EvilTwin extends CardImpl<EvilTwin> {
+public class EvilTwin extends CardImpl {
 
 
 

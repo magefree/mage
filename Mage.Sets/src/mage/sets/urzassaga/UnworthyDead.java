@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class UnworthyDead extends CardImpl<UnworthyDead>{
+public class UnworthyDead extends CardImpl{
 
     public UnworthyDead(UUID ownerId) {
         super(ownerId, 163, "Unworthy Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

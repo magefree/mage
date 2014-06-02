@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
 /**
  * @author Loki
  */
-public class Rootrunner extends CardImpl<Rootrunner> {
+public class Rootrunner extends CardImpl {
 
     public Rootrunner(UUID ownerId) {
         super(ownerId, 237, "Rootrunner", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

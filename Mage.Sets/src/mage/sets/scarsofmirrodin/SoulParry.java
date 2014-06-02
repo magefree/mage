@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class SoulParry extends CardImpl<SoulParry> {
+public class SoulParry extends CardImpl {
 
     public SoulParry (UUID ownerId) {
         super(ownerId, 21, "Soul Parry", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

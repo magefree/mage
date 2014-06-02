@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
 *
 * @author LevelX2
 */
-public class AbsolverThrull extends CardImpl<AbsolverThrull> {
+public class AbsolverThrull extends CardImpl {
 
     public AbsolverThrull(UUID ownerId) {
         super(ownerId, 1, "Absolver Thrull", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

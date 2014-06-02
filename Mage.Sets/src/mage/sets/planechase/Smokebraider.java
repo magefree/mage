@@ -45,7 +45,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class Smokebraider extends CardImpl<Smokebraider> {
+public class Smokebraider extends CardImpl {
 
     public Smokebraider(UUID ownerId) {
         super(ownerId, 66, "Smokebraider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

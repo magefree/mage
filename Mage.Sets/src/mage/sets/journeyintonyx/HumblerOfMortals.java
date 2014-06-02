@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HumblerOfMortals extends CardImpl<HumblerOfMortals> {
+public class HumblerOfMortals extends CardImpl {
 
     public HumblerOfMortals(UUID ownerId) {
         super(ownerId, 127, "Humbler of Mortals", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{G}{G}");

@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki, North
  */
-public class QuestForTheHolyRelic extends CardImpl<QuestForTheHolyRelic> {
+public class QuestForTheHolyRelic extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a creature spell");
     static {

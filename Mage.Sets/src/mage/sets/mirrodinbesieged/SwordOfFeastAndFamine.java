@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Viserion
  */
-public class SwordOfFeastAndFamine extends CardImpl<SwordOfFeastAndFamine> {
+public class SwordOfFeastAndFamine extends CardImpl {
     private static final FilterCard filter = new FilterCard("green and from black");
 
     static {

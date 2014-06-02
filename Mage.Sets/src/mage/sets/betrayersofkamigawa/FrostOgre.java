@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FrostOgre extends CardImpl<FrostOgre> {
+public class FrostOgre extends CardImpl {
 
     public FrostOgre(UUID ownerId) {
         super(ownerId, 102, "Frost Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

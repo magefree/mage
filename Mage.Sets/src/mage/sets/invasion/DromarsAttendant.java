@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class DromarsAttendant extends CardImpl<DromarsAttendant> {
+public class DromarsAttendant extends CardImpl {
 
     public DromarsAttendant(UUID ownerId) {
         super(ownerId, 303, "Dromar's Attendant", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class VisionSkeins extends CardImpl<VisionSkeins> {
+public class VisionSkeins extends CardImpl {
 
     public VisionSkeins(UUID ownerId) {
         super(ownerId, 65, "Vision Skeins", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

@@ -57,7 +57,7 @@ import mage.watchers.common.DamagedByWatcher;
 /**
  * @author LevelX
  */
-public class KumanoMasterYamabushi extends CardImpl<KumanoMasterYamabushi> {
+public class KumanoMasterYamabushi extends CardImpl {
 
     public KumanoMasterYamabushi(UUID ownerId) {
         super(ownerId, 176, "Kumano, Master Yamabushi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

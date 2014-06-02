@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VolcanicStrength extends CardImpl<VolcanicStrength> {
+public class VolcanicStrength extends CardImpl {
 
     public VolcanicStrength(UUID ownerId) {
         super(ownerId, 158, "Volcanic Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MistbladeShinobi extends CardImpl<MistbladeShinobi> {
+public class MistbladeShinobi extends CardImpl {
 
     public MistbladeShinobi(UUID ownerId) {
         super(ownerId, 43, "Mistblade Shinobi", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

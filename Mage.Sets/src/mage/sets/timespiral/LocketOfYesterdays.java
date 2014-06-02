@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class LocketOfYesterdays extends CardImpl<LocketOfYesterdays> {
+public class LocketOfYesterdays extends CardImpl {
 
     public LocketOfYesterdays(UUID ownerId) {
         super(ownerId, 258, "Locket of Yesterdays", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

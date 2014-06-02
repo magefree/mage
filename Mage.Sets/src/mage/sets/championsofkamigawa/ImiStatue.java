@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ImiStatue extends CardImpl<ImiStatue> {
+public class ImiStatue extends CardImpl {
 
     public ImiStatue(UUID ownerId) {
         super(ownerId, 255, "Imi Statue", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

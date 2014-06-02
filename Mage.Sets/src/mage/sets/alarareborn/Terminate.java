@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Terminate extends CardImpl<Terminate> {
+public class Terminate extends CardImpl {
 
     public Terminate(UUID ownerId) {
         super(ownerId, 46, "Terminate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{R}");

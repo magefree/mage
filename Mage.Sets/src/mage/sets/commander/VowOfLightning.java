@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VowOfLightning extends CardImpl<VowOfLightning> {
+public class VowOfLightning extends CardImpl {
 
     public VowOfLightning(UUID ownerId) {
         super(ownerId, 138, "Vow of Lightning", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

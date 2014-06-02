@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class FloodtideSerpent extends CardImpl<FloodtideSerpent> {
+public class FloodtideSerpent extends CardImpl {
 
     public FloodtideSerpent(UUID ownerId) {
         super(ownerId, 41, "Floodtide Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

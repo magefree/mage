@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jonubuu
  */
-public class GoblinLackey extends CardImpl<GoblinLackey> {
+public class GoblinLackey extends CardImpl {
 
     public GoblinLackey(UUID ownerId) {
         super(ownerId, 190, "Goblin Lackey", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");

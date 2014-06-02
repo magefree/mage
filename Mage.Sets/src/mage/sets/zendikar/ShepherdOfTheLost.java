@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ShepherdOfTheLost extends CardImpl<ShepherdOfTheLost> {
+public class ShepherdOfTheLost extends CardImpl {
 
     public ShepherdOfTheLost (UUID ownerId) {
         super(ownerId, 34, "Shepherd of the Lost", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class DeepSeaKraken extends CardImpl<DeepSeaKraken> {
+public class DeepSeaKraken extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an opponent casts");
     static {

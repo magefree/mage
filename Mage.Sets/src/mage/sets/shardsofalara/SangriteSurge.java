@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SangriteSurge extends CardImpl<SangriteSurge> {
+public class SangriteSurge extends CardImpl {
 
     public SangriteSurge(UUID ownerId) {
         super(ownerId, 190, "Sangrite Surge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{G}");

@@ -50,7 +50,7 @@ import mage.MageObject;
  *
  * @author nantuko
  */
-public class MyrPropagator extends CardImpl<MyrPropagator> {
+public class MyrPropagator extends CardImpl {
 
     public MyrPropagator(UUID ownerId) {
         super(ownerId, 182, "Myr Propagator", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

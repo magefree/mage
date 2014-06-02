@@ -42,7 +42,7 @@ import mage.constants.ColoredManaSymbol;
  *
  * @author Loki
  */
-public class OrochiLeafcaller extends CardImpl<OrochiLeafcaller> {
+public class OrochiLeafcaller extends CardImpl {
 
     public OrochiLeafcaller (UUID ownerId) {
         super(ownerId, 234, "Orochi Leafcaller", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

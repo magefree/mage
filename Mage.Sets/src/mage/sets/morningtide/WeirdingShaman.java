@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class WeirdingShaman extends CardImpl<WeirdingShaman> {
+public class WeirdingShaman extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
 

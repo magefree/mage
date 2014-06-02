@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author ayrat
  */
-public class LumengridDrake extends CardImpl<LumengridDrake> {
+public class LumengridDrake extends CardImpl {
 
     private static final String text = "Metalcraft - When Lumengrid Drake enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.";
 

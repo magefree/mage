@@ -61,7 +61,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class AnimarSoulOfElements extends CardImpl<AnimarSoulOfElements> {
+public class AnimarSoulOfElements extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a creature spell");
     private static final FilterCard filter = new FilterCard("white and from black");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GolgariLonglegs extends CardImpl<GolgariLonglegs> {
+public class GolgariLonglegs extends CardImpl {
 
     public GolgariLonglegs(UUID ownerId) {
         super(ownerId, 216, "Golgari Longlegs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B/G}{B/G}");

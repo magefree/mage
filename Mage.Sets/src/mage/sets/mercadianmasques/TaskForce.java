@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class TaskForce extends CardImpl<TaskForce> {
+public class TaskForce extends CardImpl {
 
     public TaskForce(UUID ownerId) {
         super(ownerId, 52, "Task Force", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

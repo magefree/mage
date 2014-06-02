@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CruelFeeding extends CardImpl<CruelFeeding> {
+public class CruelFeeding extends CardImpl {
 
     public CruelFeeding(UUID ownerId) {
         super(ownerId, 64, "Cruel Feeding", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

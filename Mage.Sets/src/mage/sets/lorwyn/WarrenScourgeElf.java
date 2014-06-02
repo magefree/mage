@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class WarrenScourgeElf extends CardImpl<WarrenScourgeElf> {
+public class WarrenScourgeElf extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Goblin");
 

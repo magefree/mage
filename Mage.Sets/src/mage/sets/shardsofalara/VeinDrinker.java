@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class VeinDrinker extends CardImpl<VeinDrinker> {
+public class VeinDrinker extends CardImpl {
 
     public VeinDrinker(UUID ownerId) {
         super(ownerId, 91, "Vein Drinker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class PhyrexianArena extends CardImpl<PhyrexianArena> {
+public class PhyrexianArena extends CardImpl {
 
     public PhyrexianArena(UUID ownerId) {
         super(ownerId, 47, "Phyrexian Arena", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");

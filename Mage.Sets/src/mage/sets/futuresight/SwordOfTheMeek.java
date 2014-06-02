@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SwordOfTheMeek extends CardImpl<SwordOfTheMeek> {
+public class SwordOfTheMeek extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a 1/1 creature");
 

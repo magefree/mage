@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VassalsDuty extends CardImpl<VassalsDuty> {
+public class VassalsDuty extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("legendary creature you control");
     static {

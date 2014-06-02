@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class EyeOfNowhere extends CardImpl<EyeOfNowhere> {
+public class EyeOfNowhere extends CardImpl {
 
     public EyeOfNowhere (UUID ownerId) {
         super(ownerId, 59, "Eye of Nowhere", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}{U}");

@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class LudevicsTestSubject extends CardImpl<LudevicsTestSubject> {
+public class LudevicsTestSubject extends CardImpl {
 
     public LudevicsTestSubject(UUID ownerId) {
         super(ownerId, 64, "Ludevic's Test Subject", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");

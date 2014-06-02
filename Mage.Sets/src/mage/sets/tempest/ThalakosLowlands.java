@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ThalakosLowlands extends CardImpl<ThalakosLowlands> {
+public class ThalakosLowlands extends CardImpl {
 
     public ThalakosLowlands(UUID ownerId) {
         super(ownerId, 338, "Thalakos Lowlands", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

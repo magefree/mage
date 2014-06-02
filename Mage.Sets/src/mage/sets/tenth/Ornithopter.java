@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Ornithopter extends CardImpl<Ornithopter> {
+public class Ornithopter extends CardImpl {
 
     public Ornithopter(UUID ownerId) {
         super(ownerId, 336, "Ornithopter", Rarity.COMMON, new CardType[]{CardType.CREATURE, CardType.ARTIFACT}, "{0}");

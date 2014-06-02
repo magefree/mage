@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AngelicWall extends CardImpl<AngelicWall> {
+public class AngelicWall extends CardImpl {
 
     public AngelicWall(UUID ownerId) {
         super(ownerId, 5, "Angelic Wall", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

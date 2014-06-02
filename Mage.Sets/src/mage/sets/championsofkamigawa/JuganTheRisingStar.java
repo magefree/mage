@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
 /**
  * @author LevelX
  */
-public class JuganTheRisingStar extends CardImpl<JuganTheRisingStar> {
+public class JuganTheRisingStar extends CardImpl {
 
     public JuganTheRisingStar(UUID ownerId) {
         super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");

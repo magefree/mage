@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author Loki
  */
-public class AgentOfMasks extends CardImpl<AgentOfMasks> {
+public class AgentOfMasks extends CardImpl {
 
     public AgentOfMasks(UUID ownerId) {
         super(ownerId, 100, "Agent of Masks", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");

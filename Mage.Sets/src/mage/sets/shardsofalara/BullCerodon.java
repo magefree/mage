@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BullCerodon extends CardImpl<BullCerodon> {
+public class BullCerodon extends CardImpl {
 
     public BullCerodon (UUID ownerId) {
         super(ownerId, 161, "Bull Cerodon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");

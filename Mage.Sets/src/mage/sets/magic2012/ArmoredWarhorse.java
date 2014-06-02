@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class ArmoredWarhorse extends CardImpl<ArmoredWarhorse> {
+public class ArmoredWarhorse extends CardImpl {
 
     public ArmoredWarhorse(UUID ownerId) {
         super(ownerId, 7, "Armored Warhorse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

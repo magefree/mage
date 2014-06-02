@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class RangersGuile extends CardImpl<RangersGuile> {
+public class RangersGuile extends CardImpl {
 
     public RangersGuile(UUID ownerId) {
         super(ownerId, 201, "Ranger's Guile", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

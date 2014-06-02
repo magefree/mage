@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class GatherCourage extends CardImpl<GatherCourage> {
+public class GatherCourage extends CardImpl {
 
     public GatherCourage(UUID ownerId) {
         super(ownerId, 165, "Gather Courage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

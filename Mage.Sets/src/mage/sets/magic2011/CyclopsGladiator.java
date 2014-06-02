@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CyclopsGladiator extends CardImpl<CyclopsGladiator> {
+public class CyclopsGladiator extends CardImpl {
 
     public CyclopsGladiator(UUID ownerId) {
         super(ownerId, 131, "Cyclops Gladiator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{R}");

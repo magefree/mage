@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class PatagiaGolem extends CardImpl<PatagiaGolem> {
+public class PatagiaGolem extends CardImpl {
 
     public PatagiaGolem(UUID ownerId) {
         super(ownerId, 310, "Patagia Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

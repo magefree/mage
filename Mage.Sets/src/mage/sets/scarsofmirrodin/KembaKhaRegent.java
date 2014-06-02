@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki, North
  */
-public class KembaKhaRegent extends CardImpl<KembaKhaRegent> {
+public class KembaKhaRegent extends CardImpl {
 
     public KembaKhaRegent(UUID ownerId) {
         super(ownerId, 12, "Kemba, Kha Regent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

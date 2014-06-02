@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author ayratn
  */
-public class Asceticism extends CardImpl<Asceticism> {
+public class Asceticism extends CardImpl {
 
     public Asceticism(UUID ownerId) {
         super(ownerId, 110, "Asceticism", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");

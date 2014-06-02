@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class TimelyReinforcements extends CardImpl<TimelyReinforcements> {
+public class TimelyReinforcements extends CardImpl {
 
     public TimelyReinforcements(UUID ownerId) {
         super(ownerId, 40, "Timely Reinforcements", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");

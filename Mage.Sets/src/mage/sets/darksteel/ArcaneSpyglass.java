@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class ArcaneSpyglass extends CardImpl<ArcaneSpyglass> {
+public class ArcaneSpyglass extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

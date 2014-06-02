@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author North
  */
-public class CleaverRiot extends CardImpl<CleaverRiot> {
+public class CleaverRiot extends CardImpl {
 
     public CleaverRiot(UUID ownerId) {
         super(ownerId, 125, "Cleaver Riot", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");

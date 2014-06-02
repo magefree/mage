@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class CoalitionRelic extends CardImpl<CoalitionRelic> {
+public class CoalitionRelic extends CardImpl {
 
     public CoalitionRelic(UUID ownerId) {
         super(ownerId, 161, "Coalition Relic", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

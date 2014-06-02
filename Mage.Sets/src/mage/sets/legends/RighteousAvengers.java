@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RighteousAvengers extends CardImpl<RighteousAvengers> {
+public class RighteousAvengers extends CardImpl {
 
     public RighteousAvengers(UUID ownerId) {
         super(ownerId, 203, "Righteous Avengers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

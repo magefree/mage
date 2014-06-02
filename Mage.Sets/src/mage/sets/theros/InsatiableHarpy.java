@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class InsatiableHarpy extends CardImpl<InsatiableHarpy> {
+public class InsatiableHarpy extends CardImpl {
 
     public InsatiableHarpy(UUID ownerId) {
         super(ownerId, 92, "Insatiable Harpy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

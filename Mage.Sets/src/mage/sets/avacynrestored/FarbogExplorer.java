@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FarbogExplorer extends CardImpl<FarbogExplorer> {
+public class FarbogExplorer extends CardImpl {
 
     public FarbogExplorer(UUID ownerId) {
         super(ownerId, 21, "Farbog Explorer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

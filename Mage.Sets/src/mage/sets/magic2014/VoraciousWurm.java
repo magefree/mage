@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class VoraciousWurm extends CardImpl<VoraciousWurm> {
+public class VoraciousWurm extends CardImpl {
 
     public VoraciousWurm(UUID ownerId) {
         super(ownerId, 200, "Voracious Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

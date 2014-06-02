@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
  *
  * @author cbt33
  */
-public class PiannaNomadCaptain extends CardImpl<PiannaNomadCaptain> {
+public class PiannaNomadCaptain extends CardImpl {
     
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
     

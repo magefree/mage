@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class YoungWolf extends CardImpl<YoungWolf> {
+public class YoungWolf extends CardImpl {
 
     public YoungWolf(UUID ownerId) {
         super(ownerId, 134, "Young Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

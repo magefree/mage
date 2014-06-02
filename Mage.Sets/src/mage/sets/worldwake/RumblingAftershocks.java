@@ -52,7 +52,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class RumblingAftershocks extends CardImpl<RumblingAftershocks> {
+public class RumblingAftershocks extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class TidehollowSculler extends CardImpl<TidehollowSculler> {
+public class TidehollowSculler extends CardImpl {
 
     public TidehollowSculler(UUID ownerId) {
         super(ownerId, 202, "Tidehollow Sculler", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{B}");

@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class Turnabout extends CardImpl<Turnabout> {
+public class Turnabout extends CardImpl {
 
     
     public Turnabout(UUID ownerId) {

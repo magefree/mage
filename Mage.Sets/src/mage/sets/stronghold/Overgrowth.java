@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class Overgrowth extends CardImpl<Overgrowth> {
+public class Overgrowth extends CardImpl {
 
     public Overgrowth(UUID ownerId) {
         super(ownerId, 61, "Overgrowth", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

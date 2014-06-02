@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class DeathWind extends CardImpl<DeathWind> {
+public class DeathWind extends CardImpl {
 
     public DeathWind(UUID ownerId) {
         super(ownerId, 93, "Death Wind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{B}");

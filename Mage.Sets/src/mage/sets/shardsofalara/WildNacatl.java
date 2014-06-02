@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WildNacatl extends CardImpl<WildNacatl> {
+public class WildNacatl extends CardImpl {
 
     private static final FilterPermanent filter1 = new FilterPermanent("Mountain");
     private static final FilterPermanent filter2 = new FilterPermanent("Plains");

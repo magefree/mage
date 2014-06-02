@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Alvin
  */
-public class KnightOfTheSkywardEye extends CardImpl<KnightOfTheSkywardEye> {
+public class KnightOfTheSkywardEye extends CardImpl {
 
     public KnightOfTheSkywardEye(UUID ownerId) {
         super(ownerId, 15, "Knight of the Skyward Eye", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

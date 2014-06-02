@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MoltenRavager extends CardImpl<MoltenRavager> {
+public class MoltenRavager extends CardImpl {
 
     public MoltenRavager(UUID ownerId) {
         super(ownerId, 138, "Molten Ravager", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

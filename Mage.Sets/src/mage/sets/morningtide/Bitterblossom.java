@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class Bitterblossom extends CardImpl<Bitterblossom> {
+public class Bitterblossom extends CardImpl {
 
     public Bitterblossom(UUID ownerId) {
         super(ownerId, 58, "Bitterblossom", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

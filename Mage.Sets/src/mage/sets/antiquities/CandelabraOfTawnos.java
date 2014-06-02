@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class CandelabraOfTawnos extends CardImpl<CandelabraOfTawnos> {
+public class CandelabraOfTawnos extends CardImpl {
 
     public CandelabraOfTawnos(UUID ownerId) {
         super(ownerId, 8, "Candelabra of Tawnos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

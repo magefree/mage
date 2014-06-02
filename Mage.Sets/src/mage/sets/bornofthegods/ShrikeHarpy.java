@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class ShrikeHarpy extends CardImpl<ShrikeHarpy> {
+public class ShrikeHarpy extends CardImpl {
 
     public ShrikeHarpy(UUID ownerId) {
         super(ownerId, 83, "Shrike Harpy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

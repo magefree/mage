@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  * 
  * @author Rafbill
  */
-public class PreeminentCaptain extends CardImpl<PreeminentCaptain> {
+public class PreeminentCaptain extends CardImpl {
 
     public PreeminentCaptain(UUID ownerId) {
         super(ownerId, 20, "Preeminent Captain", Rarity.RARE,

@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author cbt33
  */
-public class MinotaurExplorer extends CardImpl<MinotaurExplorer> {
+public class MinotaurExplorer extends CardImpl {
 
     public MinotaurExplorer(UUID ownerId) {
         super(ownerId, 206, "Minotaur Explorer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class FaerieSwarm extends CardImpl<FaerieSwarm> {
+public class FaerieSwarm extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("blue permanents you control");
 

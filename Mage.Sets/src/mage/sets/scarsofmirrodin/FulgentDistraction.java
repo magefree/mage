@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class FulgentDistraction extends CardImpl<FulgentDistraction> {
+public class FulgentDistraction extends CardImpl {
 
     public FulgentDistraction (UUID ownerId) {
         super(ownerId, 7, "Fulgent Distraction", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

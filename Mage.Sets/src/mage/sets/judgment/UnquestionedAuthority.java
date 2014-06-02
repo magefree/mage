@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class UnquestionedAuthority extends CardImpl<UnquestionedAuthority> {
+public class UnquestionedAuthority extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
 

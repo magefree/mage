@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com and jeff
  */
-public class WildEvocation extends CardImpl<WildEvocation> {
+public class WildEvocation extends CardImpl {
 
     public WildEvocation(UUID ownerId) {
         super(ownerId, 160, "Wild Evocation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");

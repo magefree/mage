@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class GrimGuardian extends CardImpl<GrimGuardian> {
+public class GrimGuardian extends CardImpl {
 
     public GrimGuardian(UUID ownerId) {
         super(ownerId, 73, "Grim Guardian", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{B}");

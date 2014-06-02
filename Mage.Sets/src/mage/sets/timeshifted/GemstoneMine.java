@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class GemstoneMine extends CardImpl<GemstoneMine> {
+public class GemstoneMine extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

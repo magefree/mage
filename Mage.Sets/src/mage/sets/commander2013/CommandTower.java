@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class CommandTower extends CardImpl<CommandTower> {
+public class CommandTower extends CardImpl {
 
     public CommandTower(UUID ownerId) {
         super(ownerId, 281, "Command Tower", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

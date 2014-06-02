@@ -41,7 +41,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BloodTithe extends CardImpl<BloodTithe> {
+public class BloodTithe extends CardImpl {
 
     public BloodTithe(UUID ownerId) {
         super(ownerId, 84, "Blood Tithe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class JadeMonolith extends CardImpl<JadeMonolith> {
+public class JadeMonolith extends CardImpl {
 
     public JadeMonolith(UUID ownerId) {
         super(ownerId, 252, "Jade Monolith", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

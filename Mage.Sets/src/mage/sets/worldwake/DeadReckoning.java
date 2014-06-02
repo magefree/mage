@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class DeadReckoning extends CardImpl<DeadReckoning> {
+public class DeadReckoning extends CardImpl {
 
     public DeadReckoning(UUID ownerId) {
         super(ownerId, 56, "Dead Reckoning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");

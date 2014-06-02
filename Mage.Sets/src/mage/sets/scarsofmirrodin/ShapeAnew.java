@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author ayratn
  */
-public class ShapeAnew extends CardImpl<ShapeAnew> {
+public class ShapeAnew extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("an artifact");
 

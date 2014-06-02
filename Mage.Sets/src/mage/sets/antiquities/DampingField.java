@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DampingField extends CardImpl<DampingField> {
+public class DampingField extends CardImpl {
 
     public DampingField(UUID ownerId) {
         super(ownerId, 98, "Damping Field", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class FadeIntoAntiquity extends CardImpl<FadeIntoAntiquity> {
+public class FadeIntoAntiquity extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     static {

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class VampireBats extends CardImpl<VampireBats> {
+public class VampireBats extends CardImpl {
 
     public VampireBats(UUID ownerId) {
         super(ownerId, 64, "Vampire Bats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

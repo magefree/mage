@@ -53,7 +53,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class Hankyu extends CardImpl<Hankyu> {
+public class Hankyu extends CardImpl {
 
     public Hankyu(UUID ownerId) {
         super(ownerId, 253, "Hankyu", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

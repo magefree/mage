@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class PinnacleOfRage extends CardImpl<PinnacleOfRage> {
+public class PinnacleOfRage extends CardImpl {
 
     public PinnacleOfRage(UUID ownerId) {
         super(ownerId, 105, "Pinnacle of Rage", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

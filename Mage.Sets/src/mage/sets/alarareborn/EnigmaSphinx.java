@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class EnigmaSphinx extends CardImpl<EnigmaSphinx> {
+public class EnigmaSphinx extends CardImpl {
 
     public EnigmaSphinx(UUID ownerId) {
         super(ownerId, 106, "Enigma Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{U}{B}");

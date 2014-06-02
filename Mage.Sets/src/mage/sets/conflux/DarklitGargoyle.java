@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DarklitGargoyle extends CardImpl<DarklitGargoyle> {
+public class DarklitGargoyle extends CardImpl {
 
     public DarklitGargoyle(UUID ownerId) {
         super(ownerId, 7, "Darklit Gargoyle", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}");

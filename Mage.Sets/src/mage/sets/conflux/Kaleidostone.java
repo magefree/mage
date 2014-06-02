@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Kaleidostone extends CardImpl<Kaleidostone> {
+public class Kaleidostone extends CardImpl {
 
     public Kaleidostone(UUID ownerId) {
         super(ownerId, 137, "Kaleidostone", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

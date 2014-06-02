@@ -44,7 +44,7 @@ import mage.constants.Zone;
 *
 * @author Loki
 */
-public class SelesnyaSignet extends CardImpl<SelesnyaSignet> {
+public class SelesnyaSignet extends CardImpl {
 
     public SelesnyaSignet (UUID ownerId) {
         super(ownerId, 270, "Selesnya Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

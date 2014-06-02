@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class IndomitableAncients extends CardImpl<IndomitableAncients> {
+public class IndomitableAncients extends CardImpl {
 
     public IndomitableAncients(UUID ownerId) {
         super(ownerId, 13, "Indomitable Ancients", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

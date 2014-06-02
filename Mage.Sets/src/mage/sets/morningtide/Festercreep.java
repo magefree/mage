@@ -48,7 +48,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class Festercreep extends CardImpl<Festercreep> {
+public class Festercreep extends CardImpl {
 
     public Festercreep(UUID ownerId) {
         super(ownerId, 62, "Festercreep", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

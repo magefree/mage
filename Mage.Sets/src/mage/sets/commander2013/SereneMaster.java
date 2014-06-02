@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SereneMaster extends CardImpl<SereneMaster> {
+public class SereneMaster extends CardImpl {
 
     public SereneMaster(UUID ownerId) {
         super(ownerId, 20, "Serene Master", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");

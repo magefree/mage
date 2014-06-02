@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class WirewoodSymbiote extends CardImpl<WirewoodSymbiote> {
+public class WirewoodSymbiote extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf");
 

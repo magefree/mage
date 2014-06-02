@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class MayaelsAria extends CardImpl<MayaelsAria> {
+public class MayaelsAria extends CardImpl {
 
     public MayaelsAria(UUID ownerId) {
         super(ownerId, 121, "Mayael's Aria", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}{G}{W}");

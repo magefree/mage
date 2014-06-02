@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LokiX
  */
-public class DoomBlade extends CardImpl<DoomBlade> {
+public class DoomBlade extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

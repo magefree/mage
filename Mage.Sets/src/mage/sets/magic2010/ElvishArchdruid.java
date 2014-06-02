@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author BetaSteward_at_googlemail.com, North
  */
-public class ElvishArchdruid extends CardImpl<ElvishArchdruid> {
+public class ElvishArchdruid extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
     private static final FilterControlledCreaturePermanent filterCount = new FilterControlledCreaturePermanent("Elf you control");

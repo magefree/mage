@@ -44,7 +44,7 @@ import mage.game.permanent.token.SpiritToken;
 /**
  * @author Loki
  */
-public class HondenOfLifesWeb extends CardImpl<HondenOfLifesWeb> {
+public class HondenOfLifesWeb extends CardImpl {
 
     final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 

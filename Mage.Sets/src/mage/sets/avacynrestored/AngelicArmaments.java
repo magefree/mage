@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class AngelicArmaments extends CardImpl<AngelicArmaments> {
+public class AngelicArmaments extends CardImpl {
 
     public AngelicArmaments(UUID ownerId) {
         super(ownerId, 212, "Angelic Armaments", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

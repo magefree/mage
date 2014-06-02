@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SunriseSovereign extends CardImpl<SunriseSovereign> {
+public class SunriseSovereign extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Giant");
 

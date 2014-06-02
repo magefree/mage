@@ -43,7 +43,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class DevilsPlay extends CardImpl<DevilsPlay> {
+public class DevilsPlay extends CardImpl {
 
     public DevilsPlay(UUID ownerId) {
         super(ownerId, 140, "Devil's Play", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");

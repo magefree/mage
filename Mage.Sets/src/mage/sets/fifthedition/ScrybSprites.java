@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ScrybSprites extends CardImpl<ScrybSprites> {
+public class ScrybSprites extends CardImpl {
 
     public ScrybSprites(UUID ownerId) {
         super(ownerId, 186, "Scryb Sprites", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

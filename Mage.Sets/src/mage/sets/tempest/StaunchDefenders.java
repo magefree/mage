@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class StaunchDefenders extends CardImpl<StaunchDefenders> {
+public class StaunchDefenders extends CardImpl {
 
     public StaunchDefenders(UUID ownerId) {
         super(ownerId, 261, "Staunch Defenders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

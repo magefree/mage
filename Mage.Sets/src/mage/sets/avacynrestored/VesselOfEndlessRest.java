@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class VesselOfEndlessRest extends CardImpl<VesselOfEndlessRest> {
+public class VesselOfEndlessRest extends CardImpl {
 
     public VesselOfEndlessRest(UUID ownerId) {
         super(ownerId, 224, "Vessel of Endless Rest", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

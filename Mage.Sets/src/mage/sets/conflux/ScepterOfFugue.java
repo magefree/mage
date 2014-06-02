@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class ScepterOfFugue extends CardImpl<ScepterOfFugue> {
+public class ScepterOfFugue extends CardImpl {
 
     public ScepterOfFugue(UUID ownerId) {
         super(ownerId, 53, "Scepter of Fugue", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{B}{B}");

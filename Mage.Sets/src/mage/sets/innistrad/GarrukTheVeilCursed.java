@@ -59,7 +59,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class GarrukTheVeilCursed extends CardImpl<GarrukTheVeilCursed> {
+public class GarrukTheVeilCursed extends CardImpl {
 
     public GarrukTheVeilCursed(UUID ownerId) {
         super(ownerId, 1181, "Garruk, the Veil-Cursed", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "");

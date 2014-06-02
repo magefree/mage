@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class SoulcageFiend extends CardImpl<SoulcageFiend> {
+public class SoulcageFiend extends CardImpl {
 
     public SoulcageFiend(UUID ownerId) {
         super(ownerId, 120, "Soulcage Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class PalladiumMyr extends CardImpl<PalladiumMyr> {
+public class PalladiumMyr extends CardImpl {
 
     public PalladiumMyr (UUID ownerId) {
         super(ownerId, 190, "Palladium Myr", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

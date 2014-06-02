@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author cbt33, noxx (DiscardCardYouChooseTargetOpponentEffect)
  */
-public class BalshanBeguiler extends CardImpl<BalshanBeguiler> {
+public class BalshanBeguiler extends CardImpl {
 
     public BalshanBeguiler(UUID ownerId) {
         super(ownerId, 66, "Balshan Beguiler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

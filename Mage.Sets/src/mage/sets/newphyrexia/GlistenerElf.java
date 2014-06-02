@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GlistenerElf extends CardImpl<GlistenerElf> {
+public class GlistenerElf extends CardImpl {
 
     public GlistenerElf(UUID ownerId) {
         super(ownerId, 111, "Glistener Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

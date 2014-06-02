@@ -56,7 +56,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class SharedAnimosity extends CardImpl<SharedAnimosity> {
+public class SharedAnimosity extends CardImpl {
 
     public SharedAnimosity(UUID ownerId) {
         super(ownerId, 104, "Shared Animosity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BrittleEffigy extends CardImpl<BrittleEffigy> {
+public class BrittleEffigy extends CardImpl {
 
     public BrittleEffigy(UUID ownerId) {
         super(ownerId, 202, "Brittle Effigy", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

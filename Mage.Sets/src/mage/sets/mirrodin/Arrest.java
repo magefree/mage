@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Arrest extends CardImpl<Arrest> {
+public class Arrest extends CardImpl {
 
     public Arrest (UUID ownerId) {
         super(ownerId, 2, "Arrest", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

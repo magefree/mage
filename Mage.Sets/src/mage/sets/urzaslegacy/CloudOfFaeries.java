@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class CloudOfFaeries extends CardImpl<CloudOfFaeries> {
+public class CloudOfFaeries extends CardImpl {
 
     public CloudOfFaeries(UUID ownerId) {
         super(ownerId, 29, "Cloud of Faeries", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

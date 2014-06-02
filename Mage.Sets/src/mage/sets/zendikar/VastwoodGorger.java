@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class VastwoodGorger extends CardImpl<VastwoodGorger> {
+public class VastwoodGorger extends CardImpl {
 
     public VastwoodGorger(UUID ownerId) {
         super(ownerId, 192, "Vastwood Gorger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");

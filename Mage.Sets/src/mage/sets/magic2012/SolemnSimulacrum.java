@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class SolemnSimulacrum extends CardImpl<SolemnSimulacrum> {
+public class SolemnSimulacrum extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 

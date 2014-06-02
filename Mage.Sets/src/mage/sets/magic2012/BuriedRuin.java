@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author Loki
  */
-public class BuriedRuin extends CardImpl<BuriedRuin> {
+public class BuriedRuin extends CardImpl {
 
     public BuriedRuin(UUID ownerId) {
         super(ownerId, 224, "Buried Ruin", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

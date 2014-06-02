@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class MurkfiendLiege extends CardImpl<MurkfiendLiege> {
+public class MurkfiendLiege extends CardImpl {
 
     private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("green creatures");
     private static final FilterCreaturePermanent filterBlue = new FilterCreaturePermanent("blue creatures");

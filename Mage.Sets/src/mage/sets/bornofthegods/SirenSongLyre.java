@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SirenSongLyre extends CardImpl<SirenSongLyre> {
+public class SirenSongLyre extends CardImpl {
 
     public SirenSongLyre(UUID ownerId) {
         super(ownerId, 161, "Siren Song Lyre", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

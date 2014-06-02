@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class ThreeTragedies extends CardImpl<ThreeTragedies> {
+public class ThreeTragedies extends CardImpl {
 
     public ThreeTragedies(UUID ownerId) {
         super(ownerId, 87, "Three Tragedies", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

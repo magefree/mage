@@ -60,7 +60,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class NightDealings extends CardImpl<NightDealings> {
+public class NightDealings extends CardImpl {
 
     public NightDealings (UUID ownerId) {
         super(ownerId, 132, "Night Dealings", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WallOfVines extends CardImpl<WallOfVines> {
+public class WallOfVines extends CardImpl {
 
     public WallOfVines(UUID ownerId) {
         super(ownerId, 199, "Wall of Vines", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class BraidwoodCup extends CardImpl<BraidwoodCup> {
+public class BraidwoodCup extends CardImpl {
 
     public BraidwoodCup(UUID ownerId) {
         super(ownerId, 126, "Braidwood Cup", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

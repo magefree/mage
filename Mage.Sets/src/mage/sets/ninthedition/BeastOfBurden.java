@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Plopman
  */
-public class BeastOfBurden extends CardImpl<BeastOfBurden> {
+public class BeastOfBurden extends CardImpl {
 
     public BeastOfBurden(UUID ownerId) {
         super(ownerId, 288, "Beast of Burden", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

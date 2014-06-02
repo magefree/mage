@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class VitalSurge extends CardImpl<VitalSurge> {
+public class VitalSurge extends CardImpl {
 
     public VitalSurge(UUID ownerId) {
         super(ownerId, 150, "Vital Surge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

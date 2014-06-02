@@ -44,7 +44,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class SecondSunrise extends CardImpl<SecondSunrise> {
+public class SecondSunrise extends CardImpl {
 
     public SecondSunrise(UUID ownerId) {
         super(ownerId, 20, "Second Sunrise", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");

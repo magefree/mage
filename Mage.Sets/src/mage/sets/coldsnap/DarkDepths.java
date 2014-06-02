@@ -55,7 +55,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class DarkDepths extends CardImpl<DarkDepths> {
+public class DarkDepths extends CardImpl {
 
     public DarkDepths(UUID ownerId) {
         super(ownerId, 145, "Dark Depths", Rarity.RARE, new CardType[]{CardType.LAND}, "");

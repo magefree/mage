@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BloodrageVampire extends CardImpl<BloodrageVampire> {
+public class BloodrageVampire extends CardImpl {
 
     public BloodrageVampire(UUID ownerId) {
         super(ownerId, 83, "Bloodrage Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

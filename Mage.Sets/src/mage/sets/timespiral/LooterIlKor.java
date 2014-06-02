@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LooterIlKor extends CardImpl<LooterIlKor> {
+public class LooterIlKor extends CardImpl {
 
     public LooterIlKor(UUID ownerId) {
         super(ownerId, 66, "Looter il-Kor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

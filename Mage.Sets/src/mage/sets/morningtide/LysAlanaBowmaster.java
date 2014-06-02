@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class LysAlanaBowmaster extends CardImpl<LysAlanaBowmaster> {
+public class LysAlanaBowmaster extends CardImpl {
 
     private static final FilterSpell filterElf = new FilterSpell("Elf");
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");

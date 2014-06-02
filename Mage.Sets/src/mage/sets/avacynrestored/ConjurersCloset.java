@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class ConjurersCloset extends CardImpl<ConjurersCloset> {
+public class ConjurersCloset extends CardImpl {
 
     public ConjurersCloset(UUID ownerId) {
         super(ownerId, 214, "Conjurer's Closet", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

@@ -44,7 +44,7 @@ import mage.constants.Duration;
  */
 
 
-public class RubblebeltMaaka extends CardImpl<RubblebeltMaaka> {
+public class RubblebeltMaaka extends CardImpl {
 
     public RubblebeltMaaka (UUID ownerId) {
         super(ownerId, 38, "Rubblebelt Maaka", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DrossProwler extends CardImpl<DrossProwler> {
+public class DrossProwler extends CardImpl {
 
     public DrossProwler(UUID ownerId) {
         super(ownerId, 64, "Dross Prowler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

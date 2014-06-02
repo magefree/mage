@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Quercitron
  */
-public class UntamedWilds extends CardImpl<UntamedWilds> {
+public class UntamedWilds extends CardImpl {
 
     public UntamedWilds(UUID ownerId) {
         super(ownerId, 279, "Untamed Wilds", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class Sicken extends CardImpl<Sicken> {
+public class Sicken extends CardImpl {
 
     public Sicken(UUID ownerId) {
         super(ownerId, 156, "Sicken", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

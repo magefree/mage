@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class RustsporeRam extends CardImpl<RustsporeRam> {
+public class RustsporeRam extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
 

@@ -41,7 +41,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author North
  */
-public class BurningOil extends CardImpl<BurningOil> {
+public class BurningOil extends CardImpl {
 
     public BurningOil(UUID ownerId) {
         super(ownerId, 84, "Burning Oil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 
 
-public class WoodlotCrawler extends CardImpl<WoodlotCrawler> {
+public class WoodlotCrawler extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("green");
     static {

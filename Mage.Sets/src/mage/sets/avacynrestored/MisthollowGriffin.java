@@ -47,7 +47,7 @@ import mage.game.Game;
  *
  * @author jeffwadsworth
  */
-public class MisthollowGriffin extends CardImpl<MisthollowGriffin> {
+public class MisthollowGriffin extends CardImpl {
 
     public MisthollowGriffin(UUID ownerId) {
         super(ownerId, 68, "Misthollow Griffin", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

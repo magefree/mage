@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class Cetavolver extends CardImpl<Cetavolver> {
+public class Cetavolver extends CardImpl {
 
     public Cetavolver(UUID ownerId) {
         super(ownerId, 21, "Cetavolver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");

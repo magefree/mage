@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class OhranViper extends CardImpl<OhranViper> {
+public class OhranViper extends CardImpl {
 
     public OhranViper(UUID ownerId) {
         super(ownerId, 57, "Ohran Viper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

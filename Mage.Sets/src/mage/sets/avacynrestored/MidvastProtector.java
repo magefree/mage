@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class MidvastProtector extends CardImpl<MidvastProtector> {
+public class MidvastProtector extends CardImpl {
 
     public MidvastProtector(UUID ownerId) {
         super(ownerId, 28, "Midvast Protector", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

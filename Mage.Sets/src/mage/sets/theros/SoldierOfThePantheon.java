@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  *
  * @author LevelX2
  */
-public class SoldierOfThePantheon extends CardImpl<SoldierOfThePantheon> {
+public class SoldierOfThePantheon extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("multicolored spell");
     private static final FilterObject filter = new FilterObject("multicolored");

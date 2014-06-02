@@ -44,7 +44,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class PharagaxGiant extends CardImpl<PharagaxGiant> {
+public class PharagaxGiant extends CardImpl {
 
     public PharagaxGiant(UUID ownerId) {
         super(ownerId, 104, "Pharagax Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

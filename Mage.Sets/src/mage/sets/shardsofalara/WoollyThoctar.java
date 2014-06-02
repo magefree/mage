@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WoollyThoctar extends CardImpl<WoollyThoctar> {
+public class WoollyThoctar extends CardImpl {
 
     public WoollyThoctar(UUID ownerId) {
         super(ownerId, 209, "Woolly Thoctar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");

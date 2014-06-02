@@ -51,7 +51,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ColossusOfAkros extends CardImpl<ColossusOfAkros> {
+public class ColossusOfAkros extends CardImpl {
 
     public ColossusOfAkros(UUID ownerId) {
         super(ownerId, 214, "Colossus of Akros", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{8}");

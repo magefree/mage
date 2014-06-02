@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SoaringSeacliff extends CardImpl<SoaringSeacliff> {
+public class SoaringSeacliff extends CardImpl {
 
     public SoaringSeacliff(UUID ownerId) {
         super(ownerId, 225, "Soaring Seacliff", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class RelentlessSkaabs extends CardImpl<RelentlessSkaabs> {
+public class RelentlessSkaabs extends CardImpl {
 
     public RelentlessSkaabs(UUID ownerId) {
         super(ownerId, 45, "Relentless Skaabs", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

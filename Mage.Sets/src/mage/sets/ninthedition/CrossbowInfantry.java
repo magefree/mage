@@ -44,7 +44,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Plopman
  */
-public class CrossbowInfantry extends CardImpl<CrossbowInfantry> {
+public class CrossbowInfantry extends CardImpl {
 
     public CrossbowInfantry(UUID ownerId) {
         super(ownerId, 12, "Crossbow Infantry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

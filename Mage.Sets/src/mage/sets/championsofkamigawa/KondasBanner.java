@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  * @author LevelX
  */
 
-public class KondasBanner extends CardImpl<KondasBanner> {
+public class KondasBanner extends CardImpl {
 
     private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("Legendary creatures");
 

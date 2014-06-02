@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class LoamLion extends CardImpl<LoamLion> {
+public class LoamLion extends CardImpl {
 
     private static final String rule = "{this} gets +1/+2 as long as you control a Forest";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");

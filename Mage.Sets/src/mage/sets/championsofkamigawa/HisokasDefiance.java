@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
 /**
  * @author Loki
  */
-public class HisokasDefiance extends CardImpl<HisokasDefiance> {
+public class HisokasDefiance extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Spirit or Arcane spell");
 

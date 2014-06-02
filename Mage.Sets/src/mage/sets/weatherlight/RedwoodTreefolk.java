@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author noxx
  */
-public class RedwoodTreefolk extends CardImpl<RedwoodTreefolk> {
+public class RedwoodTreefolk extends CardImpl {
 
     public RedwoodTreefolk(UUID ownerId) {
         super(ownerId, 80, "Redwood Treefolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

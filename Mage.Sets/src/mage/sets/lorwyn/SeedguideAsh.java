@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SeedguideAsh extends CardImpl<SeedguideAsh> {
+public class SeedguideAsh extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Forest");
 

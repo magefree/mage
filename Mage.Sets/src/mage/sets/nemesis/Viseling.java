@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class Viseling extends CardImpl<Viseling> {
+public class Viseling extends CardImpl {
 
     public Viseling(UUID ownerId) {
         super(ownerId, 140, "Viseling", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

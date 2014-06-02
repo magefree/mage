@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LochKorrigan extends CardImpl<LochKorrigan> {
+public class LochKorrigan extends CardImpl {
 
     public LochKorrigan(UUID ownerId) {
         super(ownerId, 71, "Loch Korrigan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

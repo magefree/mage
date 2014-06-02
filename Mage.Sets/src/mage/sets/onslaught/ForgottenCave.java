@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class ForgottenCave extends CardImpl<ForgottenCave> {
+public class ForgottenCave extends CardImpl {
 
     public ForgottenCave(UUID ownerId) {
         super(ownerId, 317, "Forgotten Cave", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

@@ -45,7 +45,7 @@ import mage.game.permanent.token.SnakeToken;
  *
  * @author LevelX2
  */
-public class SosukesSummons extends CardImpl<SosukesSummons> {
+public class SosukesSummons extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken Snake");
 

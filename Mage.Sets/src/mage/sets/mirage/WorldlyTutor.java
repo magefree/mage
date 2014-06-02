@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class WorldlyTutor extends CardImpl<WorldlyTutor> {
+public class WorldlyTutor extends CardImpl {
 
     public WorldlyTutor(UUID ownerId) {
         super(ownerId, 153, "Worldly Tutor", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");

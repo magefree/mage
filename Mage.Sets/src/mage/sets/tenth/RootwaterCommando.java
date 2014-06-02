@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RootwaterCommando extends CardImpl<RootwaterCommando> {
+public class RootwaterCommando extends CardImpl {
 
     public RootwaterCommando(UUID ownerId) {
         super(ownerId, 102, "Rootwater Commando", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

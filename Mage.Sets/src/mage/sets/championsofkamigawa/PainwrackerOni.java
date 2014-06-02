@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX
  */
-public class PainwrackerOni extends CardImpl<PainwrackerOni> {
+public class PainwrackerOni extends CardImpl {
 
     public PainwrackerOni (UUID ownerId) {
         super(ownerId, 136, "Painwracker Oni", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

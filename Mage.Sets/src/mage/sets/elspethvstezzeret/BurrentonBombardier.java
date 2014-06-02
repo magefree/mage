@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BurrentonBombardier extends CardImpl<BurrentonBombardier> {
+public class BurrentonBombardier extends CardImpl {
 
     public BurrentonBombardier (UUID ownerId) {
         super(ownerId, 11, "Burrenton Bombardier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author North
  */
-public class Fervor extends CardImpl<Fervor> {
+public class Fervor extends CardImpl {
 
     public Fervor(UUID ownerId) {
         super(ownerId, 129, "Fervor", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

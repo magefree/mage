@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInExile;
  *
  * @author LevelX2
  */
-public class EpicExperiment extends CardImpl<EpicExperiment> {
+public class EpicExperiment extends CardImpl {
 
     public EpicExperiment(UUID ownerId) {
         super(ownerId, 159, "Epic Experiment", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{U}{R}");

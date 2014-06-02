@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BoundInSilence extends CardImpl<BoundInSilence> {
+public class BoundInSilence extends CardImpl {
 
     public BoundInSilence(UUID ownerId) {
         super(ownerId, 8, "Bound in Silence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

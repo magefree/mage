@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Excommunicate extends CardImpl<Excommunicate> {
+public class Excommunicate extends CardImpl {
 
     public Excommunicate(UUID ownerId) {
         super(ownerId, 11, "Excommunicate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");

@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class CalciformPools extends CardImpl<CalciformPools> {
+public class CalciformPools extends CardImpl {
 
     public CalciformPools(UUID ownerId) {
         super(ownerId, 270, "Calciform Pools", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

@@ -62,7 +62,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class GarrukCallerOfBeasts extends CardImpl<GarrukCallerOfBeasts> {
+public class GarrukCallerOfBeasts extends CardImpl {
 
     private static final FilterCreatureCard filterGreenCreature = new FilterCreatureCard("a green creature card from your hand");
     static {

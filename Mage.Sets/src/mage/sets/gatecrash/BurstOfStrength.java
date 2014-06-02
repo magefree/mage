@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class BurstOfStrength extends CardImpl<BurstOfStrength> {
+public class BurstOfStrength extends CardImpl {
 
     public BurstOfStrength(UUID ownerId) {
         super(ownerId, 115, "Burst of Strength", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

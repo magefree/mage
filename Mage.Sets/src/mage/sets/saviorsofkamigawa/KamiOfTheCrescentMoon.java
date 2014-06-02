@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class KamiOfTheCrescentMoon extends CardImpl<KamiOfTheCrescentMoon> {
+public class KamiOfTheCrescentMoon extends CardImpl {
 
     public KamiOfTheCrescentMoon(UUID ownerId) {
         super(ownerId, 42, "Kami of the Crescent Moon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{U}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class NumotTheDevastator extends CardImpl<NumotTheDevastator> {
+public class NumotTheDevastator extends CardImpl {
 
     public NumotTheDevastator(UUID ownerId) {
         super(ownerId, 215, "Numot, the Devastator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{U}");

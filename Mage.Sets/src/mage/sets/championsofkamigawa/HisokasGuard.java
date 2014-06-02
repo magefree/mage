@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author nantuko
  */
-public class HisokasGuard extends CardImpl<HisokasGuard> {
+public class HisokasGuard extends CardImpl {
 
     public HisokasGuard(UUID ownerId) {
         super(ownerId, 68, "Hisoka's Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

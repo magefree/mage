@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BodyOfJukai extends CardImpl<BodyOfJukai> {
+public class BodyOfJukai extends CardImpl {
 
     public BodyOfJukai(UUID ownerId) {
         super(ownerId, 121, "Body of Jukai", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{7}{G}{G}");

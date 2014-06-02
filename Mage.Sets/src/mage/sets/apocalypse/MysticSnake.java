@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
 /**
  * @author Loki
  */
-public class MysticSnake extends CardImpl<MysticSnake> {
+public class MysticSnake extends CardImpl {
 
     public MysticSnake(UUID ownerId) {
         super(ownerId, 112, "Mystic Snake", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{U}{U}");

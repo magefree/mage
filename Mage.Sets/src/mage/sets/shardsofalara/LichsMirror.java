@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class LichsMirror extends CardImpl<LichsMirror> {
+public class LichsMirror extends CardImpl {
 
     public LichsMirror(UUID ownerId) {
         super(ownerId, 210, "Lich's Mirror", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");

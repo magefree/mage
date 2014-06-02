@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ControlledInstincts extends CardImpl<ControlledInstincts> {
+public class ControlledInstincts extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red or green creature");
 

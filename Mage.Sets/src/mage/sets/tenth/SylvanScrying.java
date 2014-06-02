@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class SylvanScrying extends CardImpl<SylvanScrying> {
+public class SylvanScrying extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("land card");
 

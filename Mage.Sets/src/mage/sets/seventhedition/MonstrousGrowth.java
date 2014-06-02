@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class MonstrousGrowth extends CardImpl<MonstrousGrowth> {
+public class MonstrousGrowth extends CardImpl {
 
     public MonstrousGrowth(UUID ownerId) {
         super(ownerId, 258, "Monstrous Growth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

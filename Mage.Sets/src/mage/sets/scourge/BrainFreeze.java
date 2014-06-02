@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class BrainFreeze extends CardImpl<BrainFreeze> {
+public class BrainFreeze extends CardImpl {
 
     public BrainFreeze(UUID ownerId) {
         super(ownerId, 29, "Brain Freeze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

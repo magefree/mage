@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandPermanent;
 /**
  * @author LevelX2
  */
-public class ChromaticLantern extends CardImpl<ChromaticLantern> {
+public class ChromaticLantern extends CardImpl {
 
     public ChromaticLantern(UUID ownerId) {
         super(ownerId, 226, "Chromatic Lantern", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

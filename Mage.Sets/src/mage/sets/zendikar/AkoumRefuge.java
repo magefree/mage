@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AkoumRefuge extends CardImpl<AkoumRefuge> {
+public class AkoumRefuge extends CardImpl {
 
     public AkoumRefuge(UUID ownerId) {
         super(ownerId, 210, "Akoum Refuge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

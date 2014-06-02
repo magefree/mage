@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class MoxRuby extends CardImpl<MoxRuby> {
+public class MoxRuby extends CardImpl {
 
     public MoxRuby(UUID ownerId) {
         super(ownerId, 264, "Mox Ruby", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");

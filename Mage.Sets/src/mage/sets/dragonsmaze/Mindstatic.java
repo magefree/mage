@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  */
 
 
-public class Mindstatic extends CardImpl<Mindstatic> {
+public class Mindstatic extends CardImpl {
 
     public Mindstatic(UUID ownerId) {
         super(ownerId, 14, "Mindstatic", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");

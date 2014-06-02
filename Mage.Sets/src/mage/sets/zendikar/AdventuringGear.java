@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AdventuringGear extends CardImpl<AdventuringGear> {
+public class AdventuringGear extends CardImpl {
 
     public AdventuringGear(UUID ownerId) {
         super(ownerId, 195, "Adventuring Gear", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

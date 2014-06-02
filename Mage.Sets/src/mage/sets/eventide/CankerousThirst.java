@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class CankerousThirst extends CardImpl<CankerousThirst> {
+public class CankerousThirst extends CardImpl {
 
     public CankerousThirst(UUID ownerId) {
         super(ownerId, 116, "Cankerous Thirst", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B/G}");

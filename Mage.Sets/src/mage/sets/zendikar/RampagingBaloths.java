@@ -42,7 +42,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RampagingBaloths extends CardImpl<RampagingBaloths> {
+public class RampagingBaloths extends CardImpl {
 
     public RampagingBaloths(UUID ownerId) {
         super(ownerId, 178, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

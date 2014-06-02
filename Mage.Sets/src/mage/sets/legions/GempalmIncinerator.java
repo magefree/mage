@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class GempalmIncinerator extends CardImpl<GempalmIncinerator> {
+public class GempalmIncinerator extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Goblins on the battlefield");
     static {

@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WallOfFaith extends CardImpl<WallOfFaith> {
+public class WallOfFaith extends CardImpl {
 
     public WallOfFaith(UUID ownerId) {
         super(ownerId, 40, "Wall of Faith", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

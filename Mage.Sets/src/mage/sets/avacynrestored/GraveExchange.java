@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class GraveExchange extends CardImpl<GraveExchange> {
+public class GraveExchange extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 

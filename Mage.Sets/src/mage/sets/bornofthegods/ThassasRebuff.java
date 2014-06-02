@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class ThassasRebuff extends CardImpl<ThassasRebuff> {
+public class ThassasRebuff extends CardImpl {
 
     public ThassasRebuff(UUID ownerId) {
         super(ownerId, 54, "Thassa's Rebuff", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

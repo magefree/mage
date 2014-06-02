@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class HuntersInsight extends CardImpl<HuntersInsight> {
+public class HuntersInsight extends CardImpl {
 
     public HuntersInsight(UUID ownerId) {
         super(ownerId, 180, "Hunter's Insight", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

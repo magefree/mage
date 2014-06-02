@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class AncientSilverback extends CardImpl<AncientSilverback> {
+public class AncientSilverback extends CardImpl {
 
     public AncientSilverback(UUID ownerId) {
         super(ownerId, 101, "Ancient Silverback", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

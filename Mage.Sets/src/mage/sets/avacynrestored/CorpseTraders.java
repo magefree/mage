@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class CorpseTraders extends CardImpl<CorpseTraders> {
+public class CorpseTraders extends CardImpl {
 
     public CorpseTraders(UUID ownerId) {
         super(ownerId, 90, "Corpse Traders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

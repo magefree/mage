@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class FlowstoneWyvern extends CardImpl<FlowstoneWyvern> {
+public class FlowstoneWyvern extends CardImpl {
 
     public FlowstoneWyvern(UUID ownerId) {
         super(ownerId, 176, "Flowstone Wyvern", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

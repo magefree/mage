@@ -40,7 +40,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class MendingHands extends CardImpl<MendingHands> {
+public class MendingHands extends CardImpl {
 
     public MendingHands(UUID ownerId) {
         super(ownerId, 15, "Mending Hands", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

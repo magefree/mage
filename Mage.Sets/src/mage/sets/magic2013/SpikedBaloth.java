@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SpikedBaloth extends CardImpl<SpikedBaloth> {
+public class SpikedBaloth extends CardImpl {
 
     public SpikedBaloth(UUID ownerId) {
         super(ownerId, 192, "Spiked Baloth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

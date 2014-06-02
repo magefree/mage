@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SeasideCitadel extends CardImpl<SeasideCitadel> {
+public class SeasideCitadel extends CardImpl {
 
     public SeasideCitadel (UUID ownerId) {
         super(ownerId, 229, "Seaside Citadel", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

@@ -44,7 +44,7 @@ import mage.game.permanent.token.WolfToken;
 /**
  * @author Loki
  */
-public class FableOfWolfAndOwl extends CardImpl<FableOfWolfAndOwl> {
+public class FableOfWolfAndOwl extends CardImpl {
 
     private static final FilterSpell filterGreenSpell = new FilterSpell("a green spell");
     private static final FilterSpell filterBlueSpell = new FilterSpell("a blue spell");

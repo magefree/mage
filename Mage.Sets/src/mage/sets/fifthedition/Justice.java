@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class Justice extends CardImpl<Justice> {
+public class Justice extends CardImpl {
 
     public Justice(UUID ownerId) {
         super(ownerId, 317, "Justice", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

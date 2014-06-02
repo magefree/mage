@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class WindbriskHeights extends CardImpl<WindbriskHeights> {
+public class WindbriskHeights extends CardImpl {
 
     public WindbriskHeights(UUID ownerId) {
         super(ownerId, 281, "Windbrisk Heights", Rarity.RARE, new CardType[]{CardType.LAND}, "");

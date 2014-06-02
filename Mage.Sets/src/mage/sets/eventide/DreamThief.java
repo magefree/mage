@@ -52,7 +52,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class DreamThief extends CardImpl<DreamThief> {
+public class DreamThief extends CardImpl {
     
     private static final String rule = "draw a card if you've cast another blue spell this turn";
 

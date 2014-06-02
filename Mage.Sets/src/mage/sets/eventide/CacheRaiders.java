@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class CacheRaiders extends CardImpl<CacheRaiders> {
+public class CacheRaiders extends CardImpl {
 
     public CacheRaiders(UUID ownerId) {
         super(ownerId, 18, "Cache Raiders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

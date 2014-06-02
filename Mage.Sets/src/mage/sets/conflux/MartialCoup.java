@@ -45,7 +45,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MartialCoup extends CardImpl<MartialCoup> {
+public class MartialCoup extends CardImpl {
 
     public MartialCoup(UUID ownerId) {
         super(ownerId, 11, "Martial Coup", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W}{W}");

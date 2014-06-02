@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class GuardianOfVituGhazi extends CardImpl<GuardianOfVituGhazi> {
+public class GuardianOfVituGhazi extends CardImpl {
 
     public GuardianOfVituGhazi(UUID ownerId) {
         super(ownerId, 212, "Guardian of Vitu-Ghazi", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{G}{W}");

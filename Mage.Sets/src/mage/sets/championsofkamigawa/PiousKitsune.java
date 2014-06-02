@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PiousKitsune extends CardImpl<PiousKitsune> {
+public class PiousKitsune extends CardImpl {
 
     public PiousKitsune(UUID ownerId) {
         super(ownerId, 38, "Pious Kitsune", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

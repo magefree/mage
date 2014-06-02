@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class PillarOfWar extends CardImpl<PillarOfWar> {
+public class PillarOfWar extends CardImpl {
 
     public PillarOfWar(UUID ownerId) {
         super(ownerId, 160, "Pillar of War", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

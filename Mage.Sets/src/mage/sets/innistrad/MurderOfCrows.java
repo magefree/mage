@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class MurderOfCrows extends CardImpl<MurderOfCrows> {
+public class MurderOfCrows extends CardImpl {
 
     public MurderOfCrows(UUID ownerId) {
         super(ownerId, 70, "Murder of Crows", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class BloodcrazedNeonate extends CardImpl<BloodcrazedNeonate> {
+public class BloodcrazedNeonate extends CardImpl {
 
     public BloodcrazedNeonate(UUID ownerId) {
         super(ownerId, 131, "Bloodcrazed Neonate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class GreatbowDoyen extends CardImpl<GreatbowDoyen> {
+public class GreatbowDoyen extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Archer creatures you control");
 

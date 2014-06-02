@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class SinkIntoTakenuma extends CardImpl<SinkIntoTakenuma> {
+public class SinkIntoTakenuma extends CardImpl {
 
     public SinkIntoTakenuma(UUID ownerId) {
         super(ownerId, 89, "Sink into Takenuma", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");

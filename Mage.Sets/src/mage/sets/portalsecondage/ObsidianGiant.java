@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class ObsidianGiant extends CardImpl<ObsidianGiant> {
+public class ObsidianGiant extends CardImpl {
 
     public ObsidianGiant(UUID ownerId) {
         super(ownerId, 109, "Obsidian Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

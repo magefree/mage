@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MyrWelder extends CardImpl<MyrWelder> {
+public class MyrWelder extends CardImpl {
 
     public MyrWelder(UUID ownerId) {
         super(ownerId, 118, "Myr Welder", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

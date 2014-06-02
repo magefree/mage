@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Plopman
  */
-public class StaffOfTheMindMagus extends CardImpl<StaffOfTheMindMagus> {
+public class StaffOfTheMindMagus extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a blue spell");
     private static final FilterLandPermanent filterLand = new FilterLandPermanent("an Island");

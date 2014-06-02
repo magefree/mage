@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class WindreaderSphinx extends CardImpl<WindreaderSphinx> {
+public class WindreaderSphinx extends CardImpl {
 
     public WindreaderSphinx(UUID ownerId) {
         super(ownerId, 81, "Windreader Sphinx", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class GraypeltHunter extends CardImpl<GraypeltHunter> {
+public class GraypeltHunter extends CardImpl {
 
     public GraypeltHunter(UUID ownerId) {
         super(ownerId, 103, "Graypelt Hunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

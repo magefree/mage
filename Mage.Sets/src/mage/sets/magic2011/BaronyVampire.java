@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BaronyVampire extends CardImpl<BaronyVampire> {
+public class BaronyVampire extends CardImpl {
 
     public BaronyVampire(UUID ownerId) {
         super(ownerId, 82, "Barony Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

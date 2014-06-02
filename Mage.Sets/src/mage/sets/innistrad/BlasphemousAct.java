@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class BlasphemousAct extends CardImpl<BlasphemousAct> {
+public class BlasphemousAct extends CardImpl {
 
     public BlasphemousAct(UUID ownerId) {
         super(ownerId, 130, "Blasphemous Act", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{R}");

@@ -56,7 +56,7 @@ import mage.watchers.Watcher;
  * 
  * @author Rafbill
  */
-public class SummoningTrap extends CardImpl<SummoningTrap> {
+public class SummoningTrap extends CardImpl {
 
     public SummoningTrap(UUID ownerId) {
         super(ownerId, 184, "Summoning Trap", Rarity.RARE,

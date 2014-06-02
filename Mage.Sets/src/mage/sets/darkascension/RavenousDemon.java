@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author intimidatingant
  */
-public class RavenousDemon extends CardImpl<RavenousDemon> {
+public class RavenousDemon extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {

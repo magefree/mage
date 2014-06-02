@@ -60,7 +60,7 @@ import mage.target.TargetCard;
  * @author jeffwadsworth
  *
  */
-public class Evershrike extends CardImpl<Evershrike> {
+public class Evershrike extends CardImpl {
 
     public Evershrike(UUID ownerId) {
         super(ownerId, 88, "Evershrike", Rarity.RARE, new CardType[]{CardType.CREATURE}, "3{W/B}{W/B}");

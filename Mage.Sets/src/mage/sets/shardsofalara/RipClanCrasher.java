@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RipClanCrasher extends CardImpl<RipClanCrasher> {
+public class RipClanCrasher extends CardImpl {
 
     public RipClanCrasher(UUID ownerId) {
         super(ownerId, 189, "Rip-Clan Crasher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{G}");

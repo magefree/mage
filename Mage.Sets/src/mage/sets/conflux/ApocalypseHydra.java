@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ApocalypseHydra extends CardImpl<ApocalypseHydra> {
+public class ApocalypseHydra extends CardImpl {
 
     public ApocalypseHydra(UUID ownerId) {
         super(ownerId, 98, "Apocalypse Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{R}{G}");

@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class ArchitectsOfWill extends CardImpl<ArchitectsOfWill> {
+public class ArchitectsOfWill extends CardImpl {
 
     public ArchitectsOfWill(UUID ownerId) {
         super(ownerId, 17, "Architects of Will", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}{B}");

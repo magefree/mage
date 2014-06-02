@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class JourneyToNowhere extends CardImpl<JourneyToNowhere> {
+public class JourneyToNowhere extends CardImpl {
 
     public JourneyToNowhere(UUID ownerId) {
         super(ownerId, 14, "Journey to Nowhere", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

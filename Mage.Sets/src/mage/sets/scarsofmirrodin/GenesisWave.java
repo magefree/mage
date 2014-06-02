@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GenesisWave extends CardImpl<GenesisWave> {
+public class GenesisWave extends CardImpl {
 
     public GenesisWave(UUID ownerId) {
         super(ownerId, 122, "Genesis Wave", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{G}{G}");

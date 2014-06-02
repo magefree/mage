@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class EmmessiTome extends CardImpl<EmmessiTome> {
+public class EmmessiTome extends CardImpl {
 
     public EmmessiTome(UUID ownerId) {
         super(ownerId, 274, "Emmessi Tome", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

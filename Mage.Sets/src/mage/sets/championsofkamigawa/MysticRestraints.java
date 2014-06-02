@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX
  */
-public class MysticRestraints extends CardImpl<MysticRestraints> {
+public class MysticRestraints extends CardImpl {
 
     public MysticRestraints(UUID ownerId) {
         super(ownerId, 76, "Mystic Restraints", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

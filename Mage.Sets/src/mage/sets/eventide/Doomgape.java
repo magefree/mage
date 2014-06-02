@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class Doomgape extends CardImpl<Doomgape> {
+public class Doomgape extends CardImpl {
 
     public Doomgape(UUID ownerId) {
         super(ownerId, 120, "Doomgape", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B/G}{B/G}{B/G}");

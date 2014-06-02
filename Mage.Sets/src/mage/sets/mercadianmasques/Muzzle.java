@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Muzzle extends CardImpl<Muzzle> {
+public class Muzzle extends CardImpl {
 
     public Muzzle(UUID ownerId) {
         super(ownerId, 30, "Muzzle", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

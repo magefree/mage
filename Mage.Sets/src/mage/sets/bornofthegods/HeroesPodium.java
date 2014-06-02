@@ -58,7 +58,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class HeroesPodium extends CardImpl<HeroesPodium> {
+public class HeroesPodium extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each legendary creature you control");
     static {
         filter.add(new SupertypePredicate("Legendary"));

@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author jeffwadsworth
  */
-public class YoungPyromancer extends CardImpl<YoungPyromancer> {
+public class YoungPyromancer extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
     

@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class AnthousaSetessanHero extends CardImpl<AnthousaSetessanHero> {
+public class AnthousaSetessanHero extends CardImpl {
 
     public AnthousaSetessanHero(UUID ownerId) {
         super(ownerId, 149, "Anthousa, Setessan Hero", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

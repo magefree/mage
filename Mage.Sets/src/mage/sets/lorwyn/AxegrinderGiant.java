@@ -38,7 +38,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class AxegrinderGiant extends CardImpl<AxegrinderGiant> {
+public class AxegrinderGiant extends CardImpl {
 
     public AxegrinderGiant(UUID ownerId) {
         super(ownerId, 151, "Axegrinder Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class EverbarkShaman extends CardImpl<EverbarkShaman> {
+public class EverbarkShaman extends CardImpl {
 
     private static final FilterCard filterForest = new FilterCard("Forest");
     private static final FilterCard filterTreefolk = new FilterCard("Treefolk from your graveyard");

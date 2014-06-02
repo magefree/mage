@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class LorescaleCoatl extends CardImpl<LorescaleCoatl> {
+public class LorescaleCoatl extends CardImpl {
 
     public LorescaleCoatl (UUID ownerId) {
         super(ownerId, 101, "Lorescale Coatl", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

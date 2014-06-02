@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DragonBlood extends CardImpl<DragonBlood> {
+public class DragonBlood extends CardImpl {
 
     public DragonBlood(UUID ownerId) {
         super(ownerId, 163, "Dragon Blood", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

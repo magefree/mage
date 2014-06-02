@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class PulsatingIllusion extends CardImpl<PulsatingIllusion> {
+public class PulsatingIllusion extends CardImpl {
 
     public PulsatingIllusion(UUID ownerId) {
         super(ownerId, 96, "Pulsating Illusion", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class LuminousGuardian extends CardImpl<LuminousGuardian> {
+public class LuminousGuardian extends CardImpl {
 
     public LuminousGuardian(UUID ownerId) {
         super(ownerId, 31, "Luminous Guardian", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

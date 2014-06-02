@@ -53,7 +53,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class BloodlineKeeper extends CardImpl<BloodlineKeeper> {
+public class BloodlineKeeper extends CardImpl {
 
     public BloodlineKeeper(UUID ownerId) {
         super(ownerId, 90, "Bloodline Keeper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

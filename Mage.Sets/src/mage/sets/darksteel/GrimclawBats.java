@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class GrimclawBats extends CardImpl<GrimclawBats> {
+public class GrimclawBats extends CardImpl {
 
     public GrimclawBats(UUID ownerId) {
         super(ownerId, 45, "Grimclaw Bats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSpy extends CardImpl<MerfolkSpy> {
+public class MerfolkSpy extends CardImpl {
 
     public MerfolkSpy(UUID ownerId) {
         super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

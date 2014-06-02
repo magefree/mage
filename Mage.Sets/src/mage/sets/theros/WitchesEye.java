@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class WitchesEye extends CardImpl<WitchesEye> {
+public class WitchesEye extends CardImpl {
 
     public WitchesEye(UUID ownerId) {
         super(ownerId, 222, "Witches' Eye", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

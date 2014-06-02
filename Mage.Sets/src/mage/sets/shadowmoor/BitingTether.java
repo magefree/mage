@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class BitingTether extends CardImpl<BitingTether> {
+public class BitingTether extends CardImpl {
 
     public BitingTether(UUID ownerId) {
         super(ownerId, 29, "Biting Tether", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");

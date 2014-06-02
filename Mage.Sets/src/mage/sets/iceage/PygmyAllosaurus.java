@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PygmyAllosaurus extends CardImpl<PygmyAllosaurus> {
+public class PygmyAllosaurus extends CardImpl {
 
     public PygmyAllosaurus(UUID ownerId) {
         super(ownerId, 145, "Pygmy Allosaurus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

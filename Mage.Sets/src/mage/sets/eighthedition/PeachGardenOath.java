@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author North
  */
-public class PeachGardenOath extends CardImpl<PeachGardenOath> {
+public class PeachGardenOath extends CardImpl {
 
     public PeachGardenOath(UUID ownerId) {
         super(ownerId, 34, "Peach Garden Oath", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{W}");

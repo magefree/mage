@@ -49,7 +49,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class MedomaiTheAgeless extends CardImpl<MedomaiTheAgeless> {
+public class MedomaiTheAgeless extends CardImpl {
 
     public MedomaiTheAgeless(UUID ownerId) {
         super(ownerId, 196, "Medomai the Ageless", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{U}");

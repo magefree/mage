@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class JointAssault extends CardImpl<JointAssault> {
+public class JointAssault extends CardImpl {
 
     public JointAssault(UUID ownerId) {
         super(ownerId, 183, "Joint Assault", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

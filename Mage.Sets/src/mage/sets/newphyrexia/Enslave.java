@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Enslave extends CardImpl<Enslave> {
+public class Enslave extends CardImpl {
 
     public Enslave (UUID ownerId) {
         super(ownerId, 58, "Enslave", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");

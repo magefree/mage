@@ -42,7 +42,7 @@ import mage.sets.bornofthegods.TokenAndCounters.CentaurEnchantmentCreatureToken;
  *
  * @author LevelX2
  */
-public class PheresBandRaiders extends CardImpl<PheresBandRaiders> {
+public class PheresBandRaiders extends CardImpl {
 
     public PheresBandRaiders(UUID ownerId) {
         super(ownerId, 133, "Pheres-Band Raiders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");

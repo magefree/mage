@@ -48,7 +48,7 @@ import mage.filter.common.FilterCreaturePermanent;
  * @author cbt33
  */
 
-public class SpectralSliver extends CardImpl<SpectralSliver> {
+public class SpectralSliver extends CardImpl {
 
     public SpectralSliver(UUID ownerId) {
         super(ownerId, 83, "Spectral Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

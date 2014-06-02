@@ -41,7 +41,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class Lunge extends CardImpl<Lunge> {
+public class Lunge extends CardImpl {
 
     public Lunge(UUID ownerId) {
         super(ownerId, 203, "Lunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

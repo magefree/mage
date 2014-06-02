@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class MakeAWish extends CardImpl<MakeAWish> {
+public class MakeAWish extends CardImpl {
 
     public MakeAWish(UUID ownerId) {
         super(ownerId, 192, "Make a Wish", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

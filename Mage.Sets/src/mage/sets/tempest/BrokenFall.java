@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BrokenFall extends CardImpl<BrokenFall> {
+public class BrokenFall extends CardImpl {
 
     public BrokenFall(UUID ownerId) {
         super(ownerId, 110, "Broken Fall", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

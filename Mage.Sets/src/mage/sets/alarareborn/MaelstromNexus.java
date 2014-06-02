@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class MaelstromNexus extends CardImpl<MaelstromNexus> {
+public class MaelstromNexus extends CardImpl {
 
     public MaelstromNexus(UUID ownerId) {
         super(ownerId, 130, "Maelstrom Nexus", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");

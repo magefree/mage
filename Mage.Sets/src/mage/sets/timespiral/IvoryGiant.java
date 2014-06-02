@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class IvoryGiant extends CardImpl<IvoryGiant> {
+public class IvoryGiant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonwhite creatures");
     static {

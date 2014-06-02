@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class Rancor extends CardImpl<Rancor> {
+public class Rancor extends CardImpl {
 
     public Rancor(UUID ownerId) {
         super(ownerId, 110, "Rancor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

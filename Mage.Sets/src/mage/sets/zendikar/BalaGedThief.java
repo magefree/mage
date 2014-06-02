@@ -57,7 +57,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class BalaGedThief extends CardImpl<BalaGedThief> {
+public class BalaGedThief extends CardImpl {
 
     public BalaGedThief(UUID ownerId) {
         super(ownerId, 79, "Bala Ged Thief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");

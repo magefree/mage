@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Unmake extends CardImpl<Unmake> {
+public class Unmake extends CardImpl {
 
     public Unmake (UUID ownerId) {
         super(ownerId, 96, "Unmake", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W/B}{W/B}{W/B}");

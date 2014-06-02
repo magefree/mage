@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Skybind extends CardImpl<Skybind> {
+public class Skybind extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nonenchantment permanent");
 

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author nantuko
  */
-public class InvisibleStalker extends CardImpl<InvisibleStalker> {
+public class InvisibleStalker extends CardImpl {
 
     public InvisibleStalker(UUID ownerId) {
         super(ownerId, 60, "Invisible Stalker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

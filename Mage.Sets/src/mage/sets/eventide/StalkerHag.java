@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class StalkerHag extends CardImpl<StalkerHag> {
+public class StalkerHag extends CardImpl {
 
     public StalkerHag(UUID ownerId) {
         super(ownerId, 129, "Stalker Hag", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B/G}{B/G}{B/G}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Hydrosurge extends CardImpl<Hydrosurge> {
+public class Hydrosurge extends CardImpl {
 
     public Hydrosurge(UUID ownerId) {
         super(ownerId, 54, "Hydrosurge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

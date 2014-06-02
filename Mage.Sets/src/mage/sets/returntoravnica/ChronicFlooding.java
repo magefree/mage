@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author LevelX2
  */
-public class ChronicFlooding extends CardImpl<ChronicFlooding> {
+public class ChronicFlooding extends CardImpl {
  
     public ChronicFlooding(UUID ownerId) {
         super(ownerId, 32, "Chronic Flooding", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

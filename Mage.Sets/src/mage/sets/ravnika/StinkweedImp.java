@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class StinkweedImp extends CardImpl<StinkweedImp> {
+public class StinkweedImp extends CardImpl {
 
     public StinkweedImp(UUID ownerId) {
         super(ownerId, 107, "Stinkweed Imp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

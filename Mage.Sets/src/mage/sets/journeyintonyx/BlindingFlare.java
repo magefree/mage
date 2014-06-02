@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BlindingFlare extends CardImpl<BlindingFlare> {
+public class BlindingFlare extends CardImpl {
 
     public BlindingFlare(UUID ownerId) {
         super(ownerId, 91, "Blinding Flare", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");

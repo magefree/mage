@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PendrellDrake extends CardImpl<PendrellDrake> {
+public class PendrellDrake extends CardImpl {
 
     public PendrellDrake(UUID ownerId) {
         super(ownerId, 86, "Pendrell Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

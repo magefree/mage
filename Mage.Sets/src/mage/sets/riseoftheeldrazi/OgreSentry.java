@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class OgreSentry extends CardImpl<OgreSentry> {
+public class OgreSentry extends CardImpl {
 
     public OgreSentry(UUID ownerId) {
         super(ownerId, 159, "Ogre Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

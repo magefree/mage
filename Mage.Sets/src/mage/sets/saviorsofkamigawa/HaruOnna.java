@@ -42,7 +42,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  *
  * @author Loki
  */
-public class HaruOnna extends CardImpl<HaruOnna> {
+public class HaruOnna extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

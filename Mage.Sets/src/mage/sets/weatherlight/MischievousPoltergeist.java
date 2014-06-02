@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class MischievousPoltergeist extends CardImpl<MischievousPoltergeist> {
+public class MischievousPoltergeist extends CardImpl {
 
     public MischievousPoltergeist(UUID ownerId) {
         super(ownerId, 16, "Mischievous Poltergeist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -49,7 +49,7 @@ import mage.target.TargetSource;
  *
  * @author LevelX2
  */
-public class PrahvSpiresOfOrder extends CardImpl<PrahvSpiresOfOrder> {
+public class PrahvSpiresOfOrder extends CardImpl {
 
     public PrahvSpiresOfOrder(UUID ownerId) {
         super(ownerId, 177, "Prahv, Spires of Order", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

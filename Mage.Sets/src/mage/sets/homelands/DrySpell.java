@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class DrySpell extends CardImpl<DrySpell> {
+public class DrySpell extends CardImpl {
 
     public DrySpell(UUID ownerId) {
         super(ownerId, 7, "Dry Spell", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

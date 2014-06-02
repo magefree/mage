@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OranRiefTheVastwood extends CardImpl<OranRiefTheVastwood> {
+public class OranRiefTheVastwood extends CardImpl {
 
     public OranRiefTheVastwood(UUID ownerId) {
         super(ownerId, 221, "Oran-Rief, the Vastwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);

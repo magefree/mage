@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SulfuricVortex extends CardImpl<SulfuricVortex> {
+public class SulfuricVortex extends CardImpl {
 
     public SulfuricVortex(UUID ownerId) {
         super(ownerId, 106, "Sulfuric Vortex", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");

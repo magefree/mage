@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class RavagerOfTheFells extends CardImpl<RavagerOfTheFells> {
+public class RavagerOfTheFells extends CardImpl {
 
     private static final String rule = "Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls";
     

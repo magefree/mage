@@ -50,7 +50,7 @@ import mage.counters.CounterType;
 /**
  * @author Loki
  */
-public class Anavolver extends CardImpl<Anavolver> {
+public class Anavolver extends CardImpl {
 
     public Anavolver(UUID ownerId) {
         super(ownerId, 75, "Anavolver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");

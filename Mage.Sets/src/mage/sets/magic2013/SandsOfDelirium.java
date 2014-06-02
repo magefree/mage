@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class SandsOfDelirium extends CardImpl<SandsOfDelirium> {
+public class SandsOfDelirium extends CardImpl {
 
     public SandsOfDelirium(UUID ownerId) {
         super(ownerId, 216, "Sands of Delirium", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

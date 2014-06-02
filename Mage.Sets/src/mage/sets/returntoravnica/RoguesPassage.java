@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX2
  */
-public class RoguesPassage extends CardImpl<RoguesPassage> {
+public class RoguesPassage extends CardImpl {
 
     public RoguesPassage(UUID ownerId) {
         super(ownerId, 245, "Rogue's Passage", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

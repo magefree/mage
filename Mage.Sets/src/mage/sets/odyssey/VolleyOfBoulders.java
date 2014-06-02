@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  *
  * @author cbt33
  */
-public class VolleyOfBoulders extends CardImpl<VolleyOfBoulders> {
+public class VolleyOfBoulders extends CardImpl {
 
     public VolleyOfBoulders(UUID ownerId) {
         super(ownerId, 227, "Volley of Boulders", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{R}");

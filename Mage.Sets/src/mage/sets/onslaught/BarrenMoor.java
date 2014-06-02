@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class BarrenMoor extends CardImpl<BarrenMoor> {
+public class BarrenMoor extends CardImpl {
 
     public BarrenMoor(UUID ownerId) {
         super(ownerId, 312, "Barren Moor", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

@@ -41,7 +41,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author Loki
  */
-public class HowlOfTheNightPack extends CardImpl<HowlOfTheNightPack> {
+public class HowlOfTheNightPack extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("for each Forest you control");
 

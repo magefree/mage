@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BarTheDoor extends CardImpl<BarTheDoor> {
+public class BarTheDoor extends CardImpl {
 
     public BarTheDoor(UUID ownerId) {
         super(ownerId, 2, "Bar the Door", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

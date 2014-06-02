@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BoonOfErebos extends CardImpl<BoonOfErebos> {
+public class BoonOfErebos extends CardImpl {
 
     public BoonOfErebos(UUID ownerId) {
         super(ownerId, 80, "Boon of Erebos", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

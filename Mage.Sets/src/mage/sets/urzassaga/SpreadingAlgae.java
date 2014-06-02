@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class SpreadingAlgae extends CardImpl<SpreadingAlgae> {
+public class SpreadingAlgae extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
     static{

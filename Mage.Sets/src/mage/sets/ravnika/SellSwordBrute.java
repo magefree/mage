@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SellSwordBrute extends CardImpl<SellSwordBrute> {
+public class SellSwordBrute extends CardImpl {
 
     public SellSwordBrute(UUID ownerId) {
         super(ownerId, 142, "Sell-Sword Brute", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class HellfireMongrel extends CardImpl<HellfireMongrel> {
+public class HellfireMongrel extends CardImpl {
 
     public HellfireMongrel(UUID ownerId) {
         super(ownerId, 130, "Hellfire Mongrel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

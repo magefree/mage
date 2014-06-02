@@ -51,7 +51,7 @@ import mage.target.TargetStackObject;
  *
  * @author LevelX2
  */
-public class KiraGreatGlassSpinner extends CardImpl<KiraGreatGlassSpinner> {
+public class KiraGreatGlassSpinner extends CardImpl {
 
     public KiraGreatGlassSpinner(UUID ownerId) {
         super(ownerId, 40, "Kira, Great Glass-Spinner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

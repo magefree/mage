@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LumengridWarden extends CardImpl<LumengridWarden> {
+public class LumengridWarden extends CardImpl {
 
     public LumengridWarden(UUID ownerId) {
         super(ownerId, 89, "Lumengrid Warden", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

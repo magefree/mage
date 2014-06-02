@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class IsperiaSupremeJudge extends CardImpl<IsperiaSupremeJudge> {
+public class IsperiaSupremeJudge extends CardImpl {
  
 
     public IsperiaSupremeJudge(UUID ownerId) {

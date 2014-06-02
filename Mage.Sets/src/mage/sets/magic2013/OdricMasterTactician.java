@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class OdricMasterTactician extends CardImpl<OdricMasterTactician> {
+public class OdricMasterTactician extends CardImpl {
 
     public OdricMasterTactician(UUID ownerId) {
         super(ownerId, 23, "Odric, Master Tactician", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

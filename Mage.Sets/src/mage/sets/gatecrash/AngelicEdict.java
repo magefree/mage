@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class AngelicEdict extends CardImpl<AngelicEdict> {
+public class AngelicEdict extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or enchantment");
     static {

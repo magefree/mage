@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class GorillaChieftain extends CardImpl<GorillaChieftain> {
+public class GorillaChieftain extends CardImpl {
 
     public GorillaChieftain(UUID ownerId) {
         super(ownerId, 250, "Gorilla Chieftain", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

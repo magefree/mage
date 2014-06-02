@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class Opportunity extends CardImpl<Opportunity> {
+public class Opportunity extends CardImpl {
 
     public Opportunity(UUID ownerId) {
         super(ownerId, 37, "Opportunity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");

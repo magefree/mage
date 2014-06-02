@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SanctumPlowbeast extends CardImpl<SanctumPlowbeast> {
+public class SanctumPlowbeast extends CardImpl {
 
     public SanctumPlowbeast(UUID ownerId) {
         super(ownerId, 10, "Sanctum Plowbeast", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}{U}");

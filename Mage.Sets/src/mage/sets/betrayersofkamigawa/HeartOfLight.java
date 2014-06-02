@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX2
  */
-public class HeartOfLight extends CardImpl<HeartOfLight> {
+public class HeartOfLight extends CardImpl {
 
     public HeartOfLight(UUID ownerId) {
         super(ownerId, 6, "Heart of Light", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

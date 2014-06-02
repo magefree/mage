@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class ThopterFoundry extends CardImpl<ThopterFoundry> {
+public class ThopterFoundry extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a nontoken artifact");
 

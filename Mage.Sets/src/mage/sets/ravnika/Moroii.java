@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class Moroii extends CardImpl<Moroii> {
+public class Moroii extends CardImpl {
 
     public Moroii(UUID ownerId) {
         super(ownerId, 216, "Moroii", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");

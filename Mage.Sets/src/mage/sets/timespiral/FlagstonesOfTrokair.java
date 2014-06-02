@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class FlagstonesOfTrokair extends CardImpl<FlagstonesOfTrokair> {
+public class FlagstonesOfTrokair extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard();
 

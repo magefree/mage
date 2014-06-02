@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FeveredConvulsions extends CardImpl<FeveredConvulsions> {
+public class FeveredConvulsions extends CardImpl {
 
     public FeveredConvulsions(UUID ownerId) {
         super(ownerId, 30, "Fevered Convulsions", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");

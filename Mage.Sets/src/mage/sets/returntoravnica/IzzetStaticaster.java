@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class IzzetStaticaster extends CardImpl<IzzetStaticaster> {
+public class IzzetStaticaster extends CardImpl {
 
     public IzzetStaticaster(UUID ownerId) {
         super(ownerId, 173, "Izzet Staticaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");

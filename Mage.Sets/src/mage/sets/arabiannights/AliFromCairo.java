@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author KholdFuzion
  */
-public class AliFromCairo extends CardImpl<AliFromCairo> {
+public class AliFromCairo extends CardImpl {
 
     public AliFromCairo(UUID ownerId) {
         super(ownerId, 44, "Ali from Cairo", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

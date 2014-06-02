@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class GethsVerdict extends CardImpl<GethsVerdict> {
+public class GethsVerdict extends CardImpl {
 
     public GethsVerdict (UUID ownerId) {
         super(ownerId, 61, "Geth's Verdict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");

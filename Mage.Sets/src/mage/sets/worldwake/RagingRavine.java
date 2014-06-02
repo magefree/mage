@@ -53,7 +53,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RagingRavine extends CardImpl<RagingRavine> {
+public class RagingRavine extends CardImpl {
 
     public RagingRavine(UUID ownerId) {
         super(ownerId, 141, "Raging Ravine", Rarity.RARE, new CardType[]{CardType.LAND}, null);

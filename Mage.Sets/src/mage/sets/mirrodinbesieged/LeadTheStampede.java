@@ -39,7 +39,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author North
  */
-public class LeadTheStampede extends CardImpl<LeadTheStampede> {
+public class LeadTheStampede extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("any number of creature cards");
     static {

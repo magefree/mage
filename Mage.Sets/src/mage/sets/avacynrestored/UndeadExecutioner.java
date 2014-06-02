@@ -44,7 +44,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class UndeadExecutioner extends CardImpl<UndeadExecutioner> {
+public class UndeadExecutioner extends CardImpl {
 
     public UndeadExecutioner(UUID ownerId) {
         super(ownerId, 123, "Undead Executioner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

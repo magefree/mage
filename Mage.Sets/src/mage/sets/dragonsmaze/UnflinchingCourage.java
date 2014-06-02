@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class UnflinchingCourage extends CardImpl<UnflinchingCourage> {
+public class UnflinchingCourage extends CardImpl {
 
     public UnflinchingCourage(UUID ownerId) {
         super(ownerId, 111, "Unflinching Courage", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{W}");

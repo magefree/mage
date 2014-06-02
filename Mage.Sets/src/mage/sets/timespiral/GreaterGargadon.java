@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class GreaterGargadon extends CardImpl<GreaterGargadon> {
+public class GreaterGargadon extends CardImpl {
 
 
     

@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Deathmark extends CardImpl<Deathmark> {
+public class Deathmark extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green or white creature");
 

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class LurkingPredators extends CardImpl<LurkingPredators> {
+public class LurkingPredators extends CardImpl {
 
     public LurkingPredators(UUID ownerId) {
         super(ownerId, 190, "Lurking Predators", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");

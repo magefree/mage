@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ExoticOrchard extends CardImpl<ExoticOrchard> {
+public class ExoticOrchard extends CardImpl {
 
     public ExoticOrchard(UUID ownerId) {
         super(ownerId, 142, "Exotic Orchard", Rarity.RARE, new CardType[]{CardType.LAND}, "");

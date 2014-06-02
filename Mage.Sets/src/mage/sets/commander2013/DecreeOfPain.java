@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DecreeOfPain extends CardImpl<DecreeOfPain> {
+public class DecreeOfPain extends CardImpl {
 
     public DecreeOfPain(UUID ownerId) {
         super(ownerId, 72, "Decree of Pain", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{B}{B}");

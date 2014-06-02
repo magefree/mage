@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class FranticSearch extends CardImpl<FranticSearch> {
+public class FranticSearch extends CardImpl {
 
     public FranticSearch(UUID ownerId) {
         super(ownerId, 32, "Frantic Search", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class DeathByDragons extends CardImpl<DeathByDragons> {
+public class DeathByDragons extends CardImpl {
 
     public DeathByDragons(UUID ownerId) {
         super(ownerId, 118, "Death by Dragons", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class KavuClimber extends CardImpl<KavuClimber> {
+public class KavuClimber extends CardImpl {
 
     public KavuClimber(UUID ownerId) {
         super(ownerId, 273, "Kavu Climber", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

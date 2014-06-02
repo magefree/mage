@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class CabalCoffers extends CardImpl<CabalCoffers> {
+public class CabalCoffers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamp you control");
 

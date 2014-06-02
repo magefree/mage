@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class CunningSparkmage extends CardImpl<CunningSparkmage> {
+public class CunningSparkmage extends CardImpl {
 
     public CunningSparkmage (UUID ownerId) {
         super(ownerId, 79, "Cunning Sparkmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

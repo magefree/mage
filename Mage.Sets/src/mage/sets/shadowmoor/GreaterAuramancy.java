@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.EnchantedPredicate;
  * @author jeffwadsworth
 
  */
-public class GreaterAuramancy extends CardImpl<GreaterAuramancy> {
+public class GreaterAuramancy extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("enchantments");
     private static final FilterPermanent filter2 = new FilterPermanent("Enchanted creatures");

@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class ZektarShrineExpedition extends CardImpl<ZektarShrineExpedition> {
+public class ZektarShrineExpedition extends CardImpl {
 
     public ZektarShrineExpedition(UUID ownerId) {
         super(ownerId, 155, "Zektar Shrine Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

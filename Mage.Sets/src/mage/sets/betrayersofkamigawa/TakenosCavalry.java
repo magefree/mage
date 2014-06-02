@@ -47,7 +47,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Loki
  */
-public class TakenosCavalry extends CardImpl<TakenosCavalry> {
+public class TakenosCavalry extends CardImpl {
 
     private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature("attacking or blocking Spirit");
 

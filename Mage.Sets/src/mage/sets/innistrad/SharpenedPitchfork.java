@@ -48,7 +48,7 @@ import mage.constants.Outcome;
  *
  * @author nantuko
  */
-public class SharpenedPitchfork extends CardImpl<SharpenedPitchfork> {
+public class SharpenedPitchfork extends CardImpl {
 
     private static final String staticText = "As long as equipped creature is a Human, it gets +1/+1";
 

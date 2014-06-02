@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class CloisteredYouth extends CardImpl<CloisteredYouth> {
+public class CloisteredYouth extends CardImpl {
 
     public CloisteredYouth(UUID ownerId) {
         super(ownerId, 8, "Cloistered Youth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class WoodlandChangeling extends CardImpl<WoodlandChangeling> {
+public class WoodlandChangeling extends CardImpl {
 
     public WoodlandChangeling(UUID ownerId) {
         super(ownerId, 242, "Woodland Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

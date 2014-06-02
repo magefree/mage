@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class Insurrection extends CardImpl<Insurrection> {
+public class Insurrection extends CardImpl {
 
     public Insurrection(UUID ownerId) {
         super(ownerId, 213, "Insurrection", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}{R}");

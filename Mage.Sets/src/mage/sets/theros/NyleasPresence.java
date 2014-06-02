@@ -61,7 +61,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class NyleasPresence extends CardImpl<NyleasPresence> {
+public class NyleasPresence extends CardImpl {
 
     public NyleasPresence(UUID ownerId) {
         super(ownerId, 169, "Nylea's Presence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

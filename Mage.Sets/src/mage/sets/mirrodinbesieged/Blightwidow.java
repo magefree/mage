@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Blightwidow extends CardImpl<Blightwidow> {
+public class Blightwidow extends CardImpl {
 
     public Blightwidow (UUID ownerId) {
         super(ownerId, 77, "Blightwidow", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

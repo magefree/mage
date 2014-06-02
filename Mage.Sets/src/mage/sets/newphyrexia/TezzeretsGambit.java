@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TezzeretsGambit extends CardImpl<TezzeretsGambit> {
+public class TezzeretsGambit extends CardImpl {
 
     public TezzeretsGambit(UUID ownerId) {
         super(ownerId, 47, "Tezzeret's Gambit", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{UP}");

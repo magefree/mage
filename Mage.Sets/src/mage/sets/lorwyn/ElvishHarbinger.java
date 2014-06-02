@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class ElvishHarbinger extends CardImpl<ElvishHarbinger> {
+public class ElvishHarbinger extends CardImpl {
 
     public static final FilterCard filter = new FilterCard("Elf card");
     static {

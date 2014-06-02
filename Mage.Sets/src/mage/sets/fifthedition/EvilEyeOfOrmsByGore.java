@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Quercitron
  */
-public class EvilEyeOfOrmsByGore extends CardImpl<EvilEyeOfOrmsByGore> {
+public class EvilEyeOfOrmsByGore extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
 

@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class SpellSnip extends CardImpl<SpellSnip> {
+public class SpellSnip extends CardImpl {
 
     public SpellSnip(UUID ownerId) {
         super(ownerId, 57, "Spell Snip", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

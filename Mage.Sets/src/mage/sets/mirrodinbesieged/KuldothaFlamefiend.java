@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  *
  * @author North
  */
-public class KuldothaFlamefiend extends CardImpl<KuldothaFlamefiend> {
+public class KuldothaFlamefiend extends CardImpl {
 
     public KuldothaFlamefiend(UUID ownerId) {
         super(ownerId, 69, "Kuldotha Flamefiend", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

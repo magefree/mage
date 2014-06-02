@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WallOfBone extends CardImpl<WallOfBone> {
+public class WallOfBone extends CardImpl {
 
     public WallOfBone(UUID ownerId) {
         super(ownerId, 119, "Wall of Bone", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class Mulldrifter extends CardImpl<Mulldrifter> {
+public class Mulldrifter extends CardImpl {
 
     public Mulldrifter(UUID ownerId) {
         super(ownerId, 52, "Mulldrifter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

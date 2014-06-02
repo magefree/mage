@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SunhomeFortressOfTheLegion extends CardImpl<SunhomeFortressOfTheLegion> {
+public class SunhomeFortressOfTheLegion extends CardImpl {
 
     public SunhomeFortressOfTheLegion(UUID ownerId) {
         super(ownerId, 138, "Sunhome, Fortress of the Legion", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class AuriokChampion extends CardImpl<AuriokChampion> {
+public class AuriokChampion extends CardImpl {
 
     static final FilterCard filter = new FilterCard("black and from red");
 

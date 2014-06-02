@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class SageOfEpityr extends CardImpl<SageOfEpityr> {
+public class SageOfEpityr extends CardImpl {
 
     public SageOfEpityr(UUID ownerId) {
         super(ownerId, 74, "Sage of Epityr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

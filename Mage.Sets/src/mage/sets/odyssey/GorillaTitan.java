@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class GorillaTitan extends CardImpl<GorillaTitan> {
+public class GorillaTitan extends CardImpl {
 
     public GorillaTitan(UUID ownerId) {
         super(ownerId, 241, "Gorilla Titan", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

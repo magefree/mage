@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class ErebossEmissary extends CardImpl<ErebossEmissary> {
+public class ErebossEmissary extends CardImpl {
 
     public ErebossEmissary(UUID ownerId) {
         super(ownerId, 86, "Erebos's Emissary", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");

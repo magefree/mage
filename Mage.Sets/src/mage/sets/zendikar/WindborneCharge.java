@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class WindborneCharge extends CardImpl<WindborneCharge> {
+public class WindborneCharge extends CardImpl {
 
     public WindborneCharge(UUID ownerId) {
         super(ownerId, 38, "Windborne Charge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");

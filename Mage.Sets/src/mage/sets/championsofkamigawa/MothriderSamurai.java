@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MothriderSamurai extends CardImpl<MothriderSamurai> {
+public class MothriderSamurai extends CardImpl {
 
     public MothriderSamurai (UUID ownerId) {
         super(ownerId, 34, "Mothrider Samurai", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

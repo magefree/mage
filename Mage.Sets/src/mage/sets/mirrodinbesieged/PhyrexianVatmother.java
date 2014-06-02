@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Viserion
  */
-public class PhyrexianVatmother extends CardImpl<PhyrexianVatmother> {
+public class PhyrexianVatmother extends CardImpl {
 
     public PhyrexianVatmother (UUID ownerId) {
         super(ownerId, 52, "Phyrexian Vatmother", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

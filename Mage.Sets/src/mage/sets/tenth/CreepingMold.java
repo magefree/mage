@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class CreepingMold extends CardImpl<CreepingMold> {
+public class CreepingMold extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
 

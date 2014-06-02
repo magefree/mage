@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class LlanowarReborn extends CardImpl<LlanowarReborn> {
+public class LlanowarReborn extends CardImpl {
 
     public LlanowarReborn(UUID ownerId) {
         super(ownerId, 72, "Llanowar Reborn", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

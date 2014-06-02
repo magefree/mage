@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class RighteousCharge extends CardImpl<RighteousCharge> {
+public class RighteousCharge extends CardImpl {
 
     public RighteousCharge (UUID ownerId) {
         super(ownerId, 23, "Righteous Charge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");

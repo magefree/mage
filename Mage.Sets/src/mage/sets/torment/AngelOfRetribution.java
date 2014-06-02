@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AngelOfRetribution extends CardImpl<AngelOfRetribution> {
+public class AngelOfRetribution extends CardImpl {
 
     public AngelOfRetribution(UUID ownerId) {
         super(ownerId, 1, "Angel of Retribution", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}");

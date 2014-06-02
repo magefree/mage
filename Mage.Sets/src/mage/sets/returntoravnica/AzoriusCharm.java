@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LevelX2
  */
-public class AzoriusCharm extends CardImpl<AzoriusCharm> {
+public class AzoriusCharm extends CardImpl {
 
     public AzoriusCharm(UUID ownerId) {
         super(ownerId, 145, "Azorius Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{U}");

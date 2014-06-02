@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class QuestForUlasTemple extends CardImpl<QuestForUlasTemple> {
+public class QuestForUlasTemple extends CardImpl {
 
     public QuestForUlasTemple(UUID ownerId) {
         super(ownerId, 35, "Quest for Ula's Temple", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}");

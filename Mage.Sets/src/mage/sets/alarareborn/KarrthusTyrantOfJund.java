@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class KarrthusTyrantOfJund extends CardImpl<KarrthusTyrantOfJund> {
+public class KarrthusTyrantOfJund extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Dragon creatures you control");
     

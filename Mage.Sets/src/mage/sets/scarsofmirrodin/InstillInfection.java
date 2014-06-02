@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class InstillInfection extends CardImpl<InstillInfection> {
+public class InstillInfection extends CardImpl {
 
     public InstillInfection (UUID ownerId) {
         super(ownerId, 68, "Instill Infection", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");

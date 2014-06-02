@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class CrosswayVampire extends CardImpl<CrosswayVampire> {
+public class CrosswayVampire extends CardImpl {
 
     public CrosswayVampire(UUID ownerId) {
         super(ownerId, 135, "Crossway Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

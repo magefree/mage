@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KodamasMight extends CardImpl<KodamasMight> {
+public class KodamasMight extends CardImpl {
 
     public KodamasMight(UUID ownerId) {
         super(ownerId, 224, "Kodama's Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

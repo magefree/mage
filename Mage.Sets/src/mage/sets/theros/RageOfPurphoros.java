@@ -47,7 +47,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX2
  */
-public class RageOfPurphoros extends CardImpl<RageOfPurphoros> {
+public class RageOfPurphoros extends CardImpl {
 
     public RageOfPurphoros(UUID ownerId) {
         super(ownerId, 137, "Rage of Purphoros", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");

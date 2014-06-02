@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author Backfir3
  */
-public class DarkwatchElves extends CardImpl<DarkwatchElves> {
+public class DarkwatchElves extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Black");
 

@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PlagueBoiler extends CardImpl<PlagueBoiler> {
+public class PlagueBoiler extends CardImpl {
 
     public PlagueBoiler(UUID ownerId) {
         super(ownerId, 254, "Plague Boiler", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

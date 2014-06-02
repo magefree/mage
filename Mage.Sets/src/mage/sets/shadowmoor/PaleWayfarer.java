@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class PaleWayfarer extends CardImpl<PaleWayfarer> {
+public class PaleWayfarer extends CardImpl {
 
     public PaleWayfarer(UUID ownerId) {
         super(ownerId, 17, "Pale Wayfarer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

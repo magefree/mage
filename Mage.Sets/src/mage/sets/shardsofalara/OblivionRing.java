@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OblivionRing extends CardImpl<OblivionRing> {
+public class OblivionRing extends CardImpl {
 
     private static final FilterNonlandPermanent anotherNonlandPermanent = new FilterNonlandPermanent("another nonland permanent");
 

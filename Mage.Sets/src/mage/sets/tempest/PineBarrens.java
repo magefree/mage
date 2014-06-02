@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class PineBarrens extends CardImpl<PineBarrens> {
+public class PineBarrens extends CardImpl {
 
     public PineBarrens(UUID ownerId) {
         super(ownerId, 323, "Pine Barrens", Rarity.RARE, new CardType[]{CardType.LAND}, "");

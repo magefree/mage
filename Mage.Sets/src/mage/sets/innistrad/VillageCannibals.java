@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class VillageCannibals extends CardImpl<VillageCannibals> {
+public class VillageCannibals extends CardImpl {
 
     public VillageCannibals(UUID ownerId) {
         super(ownerId, 125, "Village Cannibals", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

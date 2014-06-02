@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ScourgeDevil extends CardImpl<ScourgeDevil> {
+public class ScourgeDevil extends CardImpl {
 
     public ScourgeDevil(UUID ownerId) {
         super(ownerId, 113, "Scourge Devil", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

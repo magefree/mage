@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class PurgeTheProfane extends CardImpl<PurgeTheProfane> {
+public class PurgeTheProfane extends CardImpl {
 
     public PurgeTheProfane(UUID ownerId) {
         super(ownerId, 190, "Purge the Profane", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{B}");

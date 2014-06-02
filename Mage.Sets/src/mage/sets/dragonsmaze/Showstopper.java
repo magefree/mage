@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class Showstopper extends CardImpl<Showstopper> {
+public class Showstopper extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature an opponent controls");

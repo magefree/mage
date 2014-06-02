@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class CircularLogic extends CardImpl<CircularLogic> {
+public class CircularLogic extends CardImpl {
 
     public CircularLogic(UUID ownerId) {
         super(ownerId, 33, "Circular Logic", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

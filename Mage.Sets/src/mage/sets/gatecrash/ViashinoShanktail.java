@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ViashinoShanktail extends CardImpl<ViashinoShanktail> {
+public class ViashinoShanktail extends CardImpl {
 
     public ViashinoShanktail(UUID ownerId) {
         super(ownerId, 110, "Viashino Shanktail", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

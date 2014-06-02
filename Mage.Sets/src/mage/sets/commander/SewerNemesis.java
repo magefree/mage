@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SewerNemesis extends CardImpl<SewerNemesis> {
+public class SewerNemesis extends CardImpl {
 
     public SewerNemesis(UUID ownerId) {
         super(ownerId, 98, "Sewer Nemesis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");

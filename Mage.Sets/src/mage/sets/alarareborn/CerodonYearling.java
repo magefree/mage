@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CerodonYearling extends CardImpl<CerodonYearling> {
+public class CerodonYearling extends CardImpl {
 
     public CerodonYearling(UUID ownerId) {
         super(ownerId, 96, "Cerodon Yearling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");

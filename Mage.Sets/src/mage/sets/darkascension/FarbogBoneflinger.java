@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FarbogBoneflinger extends CardImpl<FarbogBoneflinger> {
+public class FarbogBoneflinger extends CardImpl {
 
     public FarbogBoneflinger(UUID ownerId) {
         super(ownerId, 61, "Farbog Boneflinger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

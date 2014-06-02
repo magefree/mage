@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WhispersilkCloak extends CardImpl<WhispersilkCloak> {
+public class WhispersilkCloak extends CardImpl {
 
     public WhispersilkCloak(UUID ownerId) {
         super(ownerId, 345, "Whispersilk Cloak", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FiremaneAngel extends CardImpl<FiremaneAngel> {
+public class FiremaneAngel extends CardImpl {
 
     public FiremaneAngel(UUID ownerId) {
         super(ownerId, 205, "Firemane Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{W}");

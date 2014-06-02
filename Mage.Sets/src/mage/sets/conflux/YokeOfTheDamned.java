@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class YokeOfTheDamned extends CardImpl<YokeOfTheDamned> {
+public class YokeOfTheDamned extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 

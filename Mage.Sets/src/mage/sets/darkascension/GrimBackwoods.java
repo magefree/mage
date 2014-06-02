@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class GrimBackwoods extends CardImpl<GrimBackwoods> {
+public class GrimBackwoods extends CardImpl {
 
     public GrimBackwoods(UUID ownerId) {
         super(ownerId, 156, "Grim Backwoods", Rarity.RARE, new CardType[]{CardType.LAND}, "");

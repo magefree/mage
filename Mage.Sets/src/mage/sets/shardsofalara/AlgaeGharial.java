@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class AlgaeGharial extends CardImpl<AlgaeGharial> {
+public class AlgaeGharial extends CardImpl {
 
     public AlgaeGharial(UUID ownerId) {
         super(ownerId, 123, "Algae Gharial", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

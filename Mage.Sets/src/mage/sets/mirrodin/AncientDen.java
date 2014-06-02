@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class AncientDen extends CardImpl<AncientDen> {
+public class AncientDen extends CardImpl {
 
     public AncientDen (UUID ownerId) {
         super(ownerId, 278, "Ancient Den", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);

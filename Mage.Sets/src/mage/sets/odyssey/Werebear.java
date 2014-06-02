@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class Werebear extends CardImpl<Werebear> {
+public class Werebear extends CardImpl {
 
     public Werebear(UUID ownerId) {
         super(ownerId, 282, "Werebear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -38,7 +38,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class LightningStrike extends CardImpl<LightningStrike> {
+public class LightningStrike extends CardImpl {
 
     public LightningStrike(UUID ownerId) {
         super(ownerId, 127, "Lightning Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

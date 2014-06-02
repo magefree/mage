@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class GriffinSentinel extends CardImpl<GriffinSentinel> {
+public class GriffinSentinel extends CardImpl {
 
     public GriffinSentinel(UUID ownerId) {
         super(ownerId, 12, "Griffin Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

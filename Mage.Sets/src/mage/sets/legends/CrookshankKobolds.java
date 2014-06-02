@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CrookshankKobolds extends CardImpl<CrookshankKobolds> {
+public class CrookshankKobolds extends CardImpl {
 
     public CrookshankKobolds(UUID ownerId) {
         super(ownerId, 220, "Crookshank Kobolds", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{0}");

@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class ReturnedCentaur extends CardImpl<ReturnedCentaur> {
+public class ReturnedCentaur extends CardImpl {
 
     public ReturnedCentaur(UUID ownerId) {
         super(ownerId, 103, "Returned Centaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

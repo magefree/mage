@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Alvin
  */
-public class SpectralFlight extends CardImpl<SpectralFlight> {
+public class SpectralFlight extends CardImpl {
 
     public SpectralFlight(UUID ownerId) {
         super(ownerId, 79, "Spectral Flight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

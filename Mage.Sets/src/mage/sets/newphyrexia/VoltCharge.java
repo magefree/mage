@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class VoltCharge extends CardImpl<VoltCharge> {
+public class VoltCharge extends CardImpl {
 
     public VoltCharge(UUID ownerId) {
         super(ownerId, 100, "Volt Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class PilgrimsEye extends CardImpl<PilgrimsEye> {
+public class PilgrimsEye extends CardImpl {
     private static final FilterCard filter = new FilterCard("basic land card");
 
     static {

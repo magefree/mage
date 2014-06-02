@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class BlastingStation extends CardImpl<BlastingStation> {
+public class BlastingStation extends CardImpl {
 
     public BlastingStation(UUID ownerId) {
         super(ownerId, 107, "Blasting Station", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -54,7 +54,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class HauntedPlateMail extends CardImpl<HauntedPlateMail> {
+public class HauntedPlateMail extends CardImpl {
 
     public HauntedPlateMail(UUID ownerId) {
         super(ownerId, 212, "Haunted Plate Mail", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

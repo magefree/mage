@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class SluicewayScorpion extends CardImpl<SluicewayScorpion> {
+public class SluicewayScorpion extends CardImpl {
 
     public SluicewayScorpion(UUID ownerId) {
         super(ownerId, 198, "Sluiceway Scorpion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");

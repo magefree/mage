@@ -39,7 +39,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class MawOfTheMire extends CardImpl<MawOfTheMire> {
+public class MawOfTheMire extends CardImpl {
 
     public MawOfTheMire(UUID ownerId) {
         super(ownerId, 108, "Maw of the Mire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");

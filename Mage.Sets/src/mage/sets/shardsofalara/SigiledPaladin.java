@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SigiledPaladin extends CardImpl<SigiledPaladin> {
+public class SigiledPaladin extends CardImpl {
 
     public SigiledPaladin (UUID ownerId) {
         super(ownerId, 27, "Sigiled Paladin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

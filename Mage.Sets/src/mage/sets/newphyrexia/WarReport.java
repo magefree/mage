@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class WarReport extends CardImpl<WarReport> {
+public class WarReport extends CardImpl {
 
     public WarReport(UUID ownerId) {
         super(ownerId, 26, "War Report", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");

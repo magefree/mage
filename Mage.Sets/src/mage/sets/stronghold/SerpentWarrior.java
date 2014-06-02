@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class SerpentWarrior extends CardImpl<SerpentWarrior> {
+public class SerpentWarrior extends CardImpl {
 
     public SerpentWarrior(UUID ownerId) {
         super(ownerId, 19, "Serpent Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

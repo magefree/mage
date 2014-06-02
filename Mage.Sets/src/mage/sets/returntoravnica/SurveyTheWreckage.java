@@ -39,7 +39,7 @@ import mage.target.common.TargetLandPermanent;
 /**
  * @author LevelX2
  */
-public class SurveyTheWreckage extends CardImpl<SurveyTheWreckage> {
+public class SurveyTheWreckage extends CardImpl {
 
     public SurveyTheWreckage(UUID ownerId) {
         super(ownerId, 107, "Survey the Wreckage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");

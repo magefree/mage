@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author Quercitron
  */
-public class AncestralMemories extends CardImpl<AncestralMemories> {
+public class AncestralMemories extends CardImpl {
 
     public AncestralMemories(UUID ownerId) {
         super(ownerId, 59, "Ancestral Memories", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{U}{U}");

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class BonfireOfTheDamned extends CardImpl<BonfireOfTheDamned> {
+public class BonfireOfTheDamned extends CardImpl {
 
     public BonfireOfTheDamned(UUID ownerId) {
         super(ownerId, 129, "Bonfire of the Damned", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");

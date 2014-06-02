@@ -50,7 +50,7 @@ import mage.game.stack.StackObject;
  *
  * @author jeffwadsworth
  */
-public class FiendslayerPaladin extends CardImpl<FiendslayerPaladin> {
+public class FiendslayerPaladin extends CardImpl {
 
     public FiendslayerPaladin(UUID ownerId) {
         super(ownerId, 18, "Fiendslayer Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

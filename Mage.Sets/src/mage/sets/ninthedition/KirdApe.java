@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jonubuu
  */
-public class KirdApe extends CardImpl<KirdApe> {
+public class KirdApe extends CardImpl {
 
     private static final String rule = "{this} gets +1/+2 as long as you control a Forest";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");

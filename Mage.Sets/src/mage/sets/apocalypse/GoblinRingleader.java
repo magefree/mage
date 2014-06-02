@@ -52,7 +52,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class GoblinRingleader extends CardImpl<GoblinRingleader> {
+public class GoblinRingleader extends CardImpl {
 
     public GoblinRingleader(UUID ownerId) {
         super(ownerId, 62, "Goblin Ringleader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author North
  */
-public class AEtherVial extends CardImpl<AEtherVial> {
+public class AEtherVial extends CardImpl {
 
     public AEtherVial(UUID ownerId) {
         super(ownerId, 91, "AEther Vial", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

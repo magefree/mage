@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class PsychicBarrier extends CardImpl<PsychicBarrier> {
+public class PsychicBarrier extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("creature spell");
 

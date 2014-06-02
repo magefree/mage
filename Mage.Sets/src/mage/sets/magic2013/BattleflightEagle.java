@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BattleflightEagle extends CardImpl<BattleflightEagle> {
+public class BattleflightEagle extends CardImpl {
 
     public BattleflightEagle(UUID ownerId) {
         super(ownerId, 7, "Battleflight Eagle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

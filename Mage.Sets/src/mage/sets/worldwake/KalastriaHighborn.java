@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author maurer.it_at_gmail.com
  */
-public class KalastriaHighborn extends CardImpl<KalastriaHighborn> {
+public class KalastriaHighborn extends CardImpl {
 
     public KalastriaHighborn(UUID ownerId) {
         super(ownerId, 59, "Kalastria Highborn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");

@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class FinalRevels extends CardImpl<FinalRevels> {
+public class FinalRevels extends CardImpl {
 
     public FinalRevels(UUID ownerId) {
         super(ownerId, 113, "Final Revels", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");

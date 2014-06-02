@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ChosenByHeliod extends CardImpl<ChosenByHeliod> {
+public class ChosenByHeliod extends CardImpl {
 
     public ChosenByHeliod(UUID ownerId) {
         super(ownerId, 5, "Chosen by Heliod", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

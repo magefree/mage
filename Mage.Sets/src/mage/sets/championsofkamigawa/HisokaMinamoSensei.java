@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
 /**
  * @author LevelX
  */
-public class HisokaMinamoSensei extends CardImpl<HisokaMinamoSensei> {
+public class HisokaMinamoSensei extends CardImpl {
 
     public HisokaMinamoSensei(UUID ownerId) {
         super(ownerId, 66, "Hisoka, Minamo Sensei", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

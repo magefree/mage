@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class RayOfRevelation extends CardImpl<RayOfRevelation> {
+public class RayOfRevelation extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 

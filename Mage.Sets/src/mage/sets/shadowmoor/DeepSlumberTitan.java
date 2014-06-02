@@ -44,7 +44,7 @@ import mage.constants.Zone;
  * @author jeffwadsworth
 
  */
-public class DeepSlumberTitan extends CardImpl<DeepSlumberTitan> {
+public class DeepSlumberTitan extends CardImpl {
 
     public DeepSlumberTitan(UUID ownerId) {
         super(ownerId, 89, "Deep-Slumber Titan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

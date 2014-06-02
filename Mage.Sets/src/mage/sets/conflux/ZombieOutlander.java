@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class ZombieOutlander extends CardImpl<ZombieOutlander> {
+public class ZombieOutlander extends CardImpl {
     private static final FilterCard filter = new FilterCard("green");
 
     static {

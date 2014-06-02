@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class VoyagerDrake extends CardImpl<VoyagerDrake> {
+public class VoyagerDrake extends CardImpl {
 
     public VoyagerDrake(UUID ownerId) {
         super(ownerId, 45, "Voyager Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -58,7 +58,7 @@ import mage.players.Player;
  *
  * @author cbt33, noxx (Riders of Gavony)
  */
-public class WardSliver extends CardImpl<WardSliver> {
+public class WardSliver extends CardImpl {
 
     static FilterPermanent filter = new FilterPermanent("chosen color");
     

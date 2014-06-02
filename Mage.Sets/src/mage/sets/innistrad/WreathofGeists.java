@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class WreathofGeists extends CardImpl<WreathofGeists> {
+public class WreathofGeists extends CardImpl {
 
     public WreathofGeists(UUID ownerId) {
         super(ownerId, 211, "Wreath of Geists", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

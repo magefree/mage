@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class DarkthicketWolf extends CardImpl<DarkthicketWolf> {
+public class DarkthicketWolf extends CardImpl {
 
     public DarkthicketWolf(UUID ownerId) {
         super(ownerId, 175, "Darkthicket Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

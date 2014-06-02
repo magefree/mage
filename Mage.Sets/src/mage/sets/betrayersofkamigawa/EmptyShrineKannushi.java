@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class EmptyShrineKannushi extends CardImpl<EmptyShrineKannushi> {
+public class EmptyShrineKannushi extends CardImpl {
 
     public EmptyShrineKannushi(UUID ownerId) {
         super(ownerId, 2, "Empty-Shrine Kannushi", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");

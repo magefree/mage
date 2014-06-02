@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class LightningDragon extends CardImpl<LightningDragon>{
+public class LightningDragon extends CardImpl{
 
     public LightningDragon(UUID ownerId) {
         super(ownerId, 202, "Lightning Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

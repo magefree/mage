@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class AsphodelWanderer extends CardImpl<AsphodelWanderer> {
+public class AsphodelWanderer extends CardImpl {
 
     public AsphodelWanderer(UUID ownerId) {
         super(ownerId, 77, "Asphodel Wanderer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

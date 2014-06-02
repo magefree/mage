@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class IshiIshiAkkiCrackshot extends CardImpl<IshiIshiAkkiCrackshot> {
+public class IshiIshiAkkiCrackshot extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

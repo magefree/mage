@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class OakgnarlWarrior extends CardImpl<OakgnarlWarrior> {
+public class OakgnarlWarrior extends CardImpl {
 
     public OakgnarlWarrior(UUID ownerId) {
         super(ownerId, 232, "Oakgnarl Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

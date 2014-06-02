@@ -47,7 +47,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class CallToGlory extends CardImpl<CallToGlory> {
+public class CallToGlory extends CardImpl {
 
 
 private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai");

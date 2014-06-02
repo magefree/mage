@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class ErraticPortal extends CardImpl<ErraticPortal> {
+public class ErraticPortal extends CardImpl {
 
     public ErraticPortal(UUID ownerId) {
         super(ownerId, 132, "Erratic Portal", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ChorusOfMight extends CardImpl<ChorusOfMight> {
+public class ChorusOfMight extends CardImpl {
 
     public ChorusOfMight(UUID ownerId) {
         super(ownerId, 119, "Chorus of Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");

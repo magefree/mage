@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FelhidePetrifier extends CardImpl<FelhidePetrifier> {
+public class FelhidePetrifier extends CardImpl {
 
     public FelhidePetrifier(UUID ownerId) {
         super(ownerId, 70, "Felhide Petrifier", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

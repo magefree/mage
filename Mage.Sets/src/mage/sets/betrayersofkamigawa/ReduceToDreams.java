@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class ReduceToDreams extends CardImpl<ReduceToDreams> {
+public class ReduceToDreams extends CardImpl {
 
     public ReduceToDreams(UUID ownerId) {
         super(ownerId, 49, "Reduce to Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

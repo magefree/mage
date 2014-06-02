@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class StreamOfConsciousness extends CardImpl<StreamOfConsciousness> {
+public class StreamOfConsciousness extends CardImpl {
 
     public StreamOfConsciousness(UUID ownerId) {
         super(ownerId, 53, "Stream of Consciousness", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

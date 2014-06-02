@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class CarpetOfFlowers extends CardImpl<CarpetOfFlowers> {
+public class CarpetOfFlowers extends CardImpl {
 
     public CarpetOfFlowers(UUID ownerId) {
         super(ownerId, 240, "Carpet of Flowers", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

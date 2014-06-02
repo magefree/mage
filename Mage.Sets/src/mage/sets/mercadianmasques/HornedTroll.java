@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class HornedTroll extends CardImpl<HornedTroll> {
+public class HornedTroll extends CardImpl {
 
     public HornedTroll(UUID ownerId) {
         super(ownerId, 251, "Horned Troll", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

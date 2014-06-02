@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class TemptWithReflections extends CardImpl<TemptWithReflections> {
+public class TemptWithReflections extends CardImpl {
 
     public TemptWithReflections(UUID ownerId) {
         super(ownerId, 60, "Tempt with Reflections", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");

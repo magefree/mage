@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class SummonersBane extends CardImpl<SummonersBane> {
+public class SummonersBane extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("creature spell");
 

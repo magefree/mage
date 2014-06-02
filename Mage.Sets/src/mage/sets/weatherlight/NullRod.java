@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class NullRod extends CardImpl<NullRod> {
+public class NullRod extends CardImpl {
 
     public NullRod(UUID ownerId) {
         super(ownerId, 154, "Null Rod", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

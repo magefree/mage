@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class GhostCouncilOfOrzhova extends CardImpl<GhostCouncilOfOrzhova> {
+public class GhostCouncilOfOrzhova extends CardImpl {
 
     public GhostCouncilOfOrzhova (UUID ownerId) {
         super(ownerId, 114, "Ghost Council of Orzhova", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}{B}{B}");

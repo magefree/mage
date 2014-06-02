@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class SkarrganSkybreaker extends CardImpl<SkarrganSkybreaker> {
+public class SkarrganSkybreaker extends CardImpl {
 
     public SkarrganSkybreaker(UUID ownerId) {
         super(ownerId, 60, "Skarrgan Skybreaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{G}");

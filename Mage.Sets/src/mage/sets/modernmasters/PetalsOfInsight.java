@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class PetalsOfInsight extends CardImpl<PetalsOfInsight> {
+public class PetalsOfInsight extends CardImpl {
 
     public PetalsOfInsight(UUID ownerId) {
         super(ownerId, 60, "Petals of Insight", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");

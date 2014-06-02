@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author loki
  */
-public class Manakin extends CardImpl<Manakin> {
+public class Manakin extends CardImpl {
 
     public Manakin(UUID ownerId) {
         super(ownerId, 286, "Manakin", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

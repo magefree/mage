@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class AncientTomb extends CardImpl<AncientTomb> {
+public class AncientTomb extends CardImpl {
 
     public AncientTomb(UUID ownerId) {
         super(ownerId, 305, "Ancient Tomb", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

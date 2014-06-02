@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class Spawnwrithe extends CardImpl<Spawnwrithe> {
+public class Spawnwrithe extends CardImpl {
 
     public Spawnwrithe(UUID ownerId) {
         super(ownerId, 171, "Spawnwrithe", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

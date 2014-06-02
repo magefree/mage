@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 /**
  * @author nantuko
  */
-public class IndomitableArchangel extends CardImpl<IndomitableArchangel> {
+public class IndomitableArchangel extends CardImpl {
 
     private static final String rule = "Metalcraft - Artifacts you control have shroud as long as you control three or more artifacts.";
 

@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jeffwadsworth
  */
-public class PrizedElephant extends CardImpl<PrizedElephant> {
+public class PrizedElephant extends CardImpl {
     
     private static final String rule = "{this} gets +1/+1 as long as you control a Forest";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");

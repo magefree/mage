@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class JaradsOrders extends CardImpl<JaradsOrders> {
+public class JaradsOrders extends CardImpl {
 
     public JaradsOrders(UUID ownerId) {
         super(ownerId, 175, "Jarad's Orders", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{G}");

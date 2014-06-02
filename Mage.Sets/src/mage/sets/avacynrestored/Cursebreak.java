@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class Cursebreak extends CardImpl<Cursebreak> {
+public class Cursebreak extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 

@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class CrystallineNautilus extends CardImpl<CrystallineNautilus> {
+public class CrystallineNautilus extends CardImpl {
 
     public CrystallineNautilus(UUID ownerId) {
         super(ownerId, 34, "Crystalline Nautilus", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{U}");

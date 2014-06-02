@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
 /**
  * @author Loki
  */
-public class BalefireLiege extends CardImpl<BalefireLiege> {
+public class BalefireLiege extends CardImpl {
 
     private static final FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("red creatures");
     private static final FilterCreaturePermanent filterWhiteCreature = new FilterCreaturePermanent("white creatures");

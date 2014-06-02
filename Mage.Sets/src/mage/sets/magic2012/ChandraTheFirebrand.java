@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class ChandraTheFirebrand extends CardImpl<ChandraTheFirebrand> {
+public class ChandraTheFirebrand extends CardImpl {
 
     public ChandraTheFirebrand (UUID ownerId) {
         super(ownerId, 124, "Chandra, the Firebrand", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{R}");

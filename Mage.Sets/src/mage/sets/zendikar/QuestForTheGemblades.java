@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class QuestForTheGemblades extends CardImpl<QuestForTheGemblades> {
+public class QuestForTheGemblades extends CardImpl {
 
     public QuestForTheGemblades(UUID ownerId) {
         super(ownerId, 177, "Quest for the Gemblades", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

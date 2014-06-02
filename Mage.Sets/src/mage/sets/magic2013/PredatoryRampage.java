@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class PredatoryRampage extends CardImpl<PredatoryRampage> {
+public class PredatoryRampage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

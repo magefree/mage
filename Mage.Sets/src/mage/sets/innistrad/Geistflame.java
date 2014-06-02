@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class Geistflame extends CardImpl<Geistflame> {
+public class Geistflame extends CardImpl {
 
     public Geistflame(UUID ownerId) {
         super(ownerId, 144, "Geistflame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

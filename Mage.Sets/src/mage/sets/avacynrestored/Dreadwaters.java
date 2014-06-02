@@ -44,7 +44,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class Dreadwaters extends CardImpl<Dreadwaters> {
+public class Dreadwaters extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("lands you control");
 

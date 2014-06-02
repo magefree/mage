@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class TitanicGrowth extends CardImpl<TitanicGrowth> {
+public class TitanicGrowth extends CardImpl {
 
     public TitanicGrowth(UUID ownerId) {
         super(ownerId, 198, "Titanic Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

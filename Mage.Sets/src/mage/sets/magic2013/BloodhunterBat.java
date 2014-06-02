@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class BloodhunterBat extends CardImpl<BloodhunterBat> {
+public class BloodhunterBat extends CardImpl {
 
     public BloodhunterBat(UUID ownerId) {
         super(ownerId, 82, "Bloodhunter Bat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

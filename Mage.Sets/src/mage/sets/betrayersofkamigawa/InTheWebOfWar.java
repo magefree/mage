@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class InTheWebOfWar extends CardImpl<InTheWebOfWar> {
+public class InTheWebOfWar extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 

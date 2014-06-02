@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author jeffwadsworth
  */
-public class GrixisSojourners extends CardImpl<GrixisSojourners> {
+public class GrixisSojourners extends CardImpl {
 
     public GrixisSojourners(UUID ownerId) {
         super(ownerId, 112, "Grixis Sojourners", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");

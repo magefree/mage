@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author LevelX2
  */
-public class AzoriusKeyrune extends CardImpl<AzoriusKeyrune> {
+public class AzoriusKeyrune extends CardImpl {
 
     public AzoriusKeyrune(UUID ownerId) {
         super(ownerId, 225, "Azorius Keyrune", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

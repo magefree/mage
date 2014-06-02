@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class MossfireValley extends CardImpl<MossfireValley> {
+public class MossfireValley extends CardImpl {
 
     public MossfireValley(UUID ownerId) {
         super(ownerId, 321, "Mossfire Valley", Rarity.RARE, new CardType[]{CardType.LAND}, "");

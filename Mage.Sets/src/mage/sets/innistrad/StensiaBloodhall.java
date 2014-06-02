@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class StensiaBloodhall extends CardImpl<StensiaBloodhall> {
+public class StensiaBloodhall extends CardImpl {
 
     public StensiaBloodhall(UUID ownerId) {
         super(ownerId, 247, "Stensia Bloodhall", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class BondBeetle extends CardImpl<BondBeetle> {
+public class BondBeetle extends CardImpl {
 
     public BondBeetle(UUID ownerId) {
         super(ownerId, 161, "Bond Beetle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

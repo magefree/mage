@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ForgestokerDragon extends CardImpl<ForgestokerDragon> {
+public class ForgestokerDragon extends CardImpl {
 
     public ForgestokerDragon(UUID ownerId) {
         super(ownerId, 98, "Forgestoker Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

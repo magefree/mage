@@ -40,7 +40,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class HoldAtBay extends CardImpl<HoldAtBay> {
+public class HoldAtBay extends CardImpl {
 
     public HoldAtBay(UUID ownerId) {
         super(ownerId, 18, "Hold at Bay", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

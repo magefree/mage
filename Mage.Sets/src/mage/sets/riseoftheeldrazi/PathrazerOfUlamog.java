@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PathrazerOfUlamog extends CardImpl<PathrazerOfUlamog> {
+public class PathrazerOfUlamog extends CardImpl {
 
     public PathrazerOfUlamog(UUID ownerId) {
         super(ownerId, 9, "Pathrazer of Ulamog", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{11}");

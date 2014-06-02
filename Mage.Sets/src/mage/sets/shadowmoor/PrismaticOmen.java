@@ -56,7 +56,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class PrismaticOmen extends CardImpl<PrismaticOmen> {
+public class PrismaticOmen extends CardImpl {
 
     public PrismaticOmen(UUID ownerId) {
         super(ownerId, 126, "Prismatic Omen", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class GhostLitWarder extends CardImpl<GhostLitWarder> {
+public class GhostLitWarder extends CardImpl {
 
     public GhostLitWarder(UUID ownerId) {
         super(ownerId, 39, "Ghost-Lit Warder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

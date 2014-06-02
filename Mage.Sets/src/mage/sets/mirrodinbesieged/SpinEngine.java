@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpinEngine extends CardImpl<SpinEngine> {
+public class SpinEngine extends CardImpl {
 
     public SpinEngine(UUID ownerId) {
         super(ownerId, 135, "Spin Engine", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

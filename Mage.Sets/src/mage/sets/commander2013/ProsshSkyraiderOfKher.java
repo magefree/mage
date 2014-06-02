@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ProsshSkyraiderOfKher extends CardImpl<ProsshSkyraiderOfKher> {
+public class ProsshSkyraiderOfKher extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
     static {

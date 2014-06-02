@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class Phytoburst extends CardImpl<Phytoburst> {
+public class Phytoburst extends CardImpl {
 
     public Phytoburst(UUID ownerId) {
         super(ownerId, 46, "Phytoburst", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

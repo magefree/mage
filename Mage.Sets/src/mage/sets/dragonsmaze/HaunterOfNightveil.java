@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class HaunterOfNightveil extends CardImpl<HaunterOfNightveil> {
+public class HaunterOfNightveil extends CardImpl {
 
     public HaunterOfNightveil(UUID ownerId) {
         super(ownerId, 76, "Haunter of Nightveil", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");

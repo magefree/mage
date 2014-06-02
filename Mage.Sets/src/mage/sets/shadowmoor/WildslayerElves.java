@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WildslayerElves extends CardImpl<WildslayerElves> {
+public class WildslayerElves extends CardImpl {
 
     public WildslayerElves(UUID ownerId) {
         super(ownerId, 133, "Wildslayer Elves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

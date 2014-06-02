@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class Wasteland extends CardImpl<Wasteland> {
+public class Wasteland extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
 
     static {

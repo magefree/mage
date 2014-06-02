@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class FlamekinSpitfire extends CardImpl<FlamekinSpitfire> {
+public class FlamekinSpitfire extends CardImpl {
 
     public FlamekinSpitfire(UUID ownerId) {
         super(ownerId, 168, "Flamekin Spitfire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class CollectiveVoyage extends CardImpl<CollectiveVoyage> {
+public class CollectiveVoyage extends CardImpl {
 
     public CollectiveVoyage(UUID ownerId) {
         super(ownerId, 147, "Collective Voyage", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}");

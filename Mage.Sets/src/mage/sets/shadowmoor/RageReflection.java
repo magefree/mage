@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class RageReflection extends CardImpl<RageReflection> {
+public class RageReflection extends CardImpl {
 
     public RageReflection(UUID ownerId) {
         super(ownerId, 104, "Rage Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");

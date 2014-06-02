@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class RuneTailKitsuneAscendant extends CardImpl<RuneTailKitsuneAscendant> {
+public class RuneTailKitsuneAscendant extends CardImpl {
 
     public RuneTailKitsuneAscendant(UUID ownerId) {
         super(ownerId, 27, "Rune-Tail, Kitsune Ascendant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");

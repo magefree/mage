@@ -58,7 +58,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class ManaBloom extends CardImpl<ManaBloom> {
+public class ManaBloom extends CardImpl {
 
     static final String rule = "with X charge counters on it";
 

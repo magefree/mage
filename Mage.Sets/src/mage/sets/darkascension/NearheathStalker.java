@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class NearheathStalker extends CardImpl<NearheathStalker> {
+public class NearheathStalker extends CardImpl {
 
     public NearheathStalker(UUID ownerId) {
         super(ownerId, 100, "Nearheath Stalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

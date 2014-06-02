@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class Foratog extends CardImpl<Foratog> {
+public class Foratog extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a Forest");
     static{

@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class SternMentor extends CardImpl<SternMentor> {
+public class SternMentor extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures has \"{tap}: Target player puts the top two cards of his or her library into his or her graveyard.\"";
 

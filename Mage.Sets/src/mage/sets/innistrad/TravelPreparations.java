@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TravelPreparations extends CardImpl<TravelPreparations> {
+public class TravelPreparations extends CardImpl {
 
     public TravelPreparations(UUID ownerId) {
         super(ownerId, 206, "Travel Preparations", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

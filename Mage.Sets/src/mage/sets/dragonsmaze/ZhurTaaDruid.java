@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class ZhurTaaDruid extends CardImpl<ZhurTaaDruid> {
+public class ZhurTaaDruid extends CardImpl {
 
     public ZhurTaaDruid(UUID ownerId) {
         super(ownerId, 120, "Zhur-Taa Druid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{G}");

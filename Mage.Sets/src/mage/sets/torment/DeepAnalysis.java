@@ -46,7 +46,7 @@ import mage.abilities.costs.Cost;
  *
  * @author magenoxx_at_gmail.com
  */
-public class DeepAnalysis extends CardImpl<DeepAnalysis> {
+public class DeepAnalysis extends CardImpl {
 
     public DeepAnalysis(UUID ownerId) {
         super(ownerId, 36, "Deep Analysis", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");

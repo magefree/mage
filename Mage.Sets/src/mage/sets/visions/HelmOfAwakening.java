@@ -42,7 +42,7 @@ import mage.filter.FilterSpell;
  *
  * @author LevelX2
  */
-public class HelmOfAwakening extends CardImpl<HelmOfAwakening> {
+public class HelmOfAwakening extends CardImpl {
 
     
     public HelmOfAwakening(UUID ownerId) {

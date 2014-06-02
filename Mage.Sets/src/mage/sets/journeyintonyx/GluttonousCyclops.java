@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class GluttonousCyclops extends CardImpl<GluttonousCyclops> {
+public class GluttonousCyclops extends CardImpl {
 
     public GluttonousCyclops(UUID ownerId) {
         super(ownerId, 99, "Gluttonous Cyclops", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");

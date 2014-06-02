@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class WorldQueller extends CardImpl<WorldQueller> {
+public class WorldQueller extends CardImpl {
 
     public WorldQueller(UUID ownerId) {
         super(ownerId, 39, "World Queller", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

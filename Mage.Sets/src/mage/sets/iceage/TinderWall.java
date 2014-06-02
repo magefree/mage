@@ -58,7 +58,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class TinderWall extends CardImpl<TinderWall> {
+public class TinderWall extends CardImpl {
 
     public TinderWall(UUID ownerId) {
         super(ownerId, 158, "Tinder Wall", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

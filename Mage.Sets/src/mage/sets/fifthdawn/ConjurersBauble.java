@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class ConjurersBauble extends CardImpl<ConjurersBauble> {
+public class ConjurersBauble extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("card from your graveyard");
     

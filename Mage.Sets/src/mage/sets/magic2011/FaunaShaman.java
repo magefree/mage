@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FaunaShaman extends CardImpl<FaunaShaman> {
+public class FaunaShaman extends CardImpl {
 
     public FaunaShaman(UUID ownerId) {
         super(ownerId, 172, "Fauna Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

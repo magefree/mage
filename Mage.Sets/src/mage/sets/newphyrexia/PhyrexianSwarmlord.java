@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class PhyrexianSwarmlord extends CardImpl<PhyrexianSwarmlord> {
+public class PhyrexianSwarmlord extends CardImpl {
 
     public PhyrexianSwarmlord(UUID ownerId) {
         super(ownerId, 119, "Phyrexian Swarmlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

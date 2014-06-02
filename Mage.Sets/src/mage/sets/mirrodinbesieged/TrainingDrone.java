@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class TrainingDrone extends CardImpl<TrainingDrone> {
+public class TrainingDrone extends CardImpl {
 
     public TrainingDrone(UUID ownerId) {
         super(ownerId, 142, "Training Drone", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

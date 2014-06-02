@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
 /**
  * @author nantuko
  */
-public class FiendHunter extends CardImpl<FiendHunter> {
+public class FiendHunter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {

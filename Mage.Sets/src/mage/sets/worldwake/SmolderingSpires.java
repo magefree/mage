@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SmolderingSpires extends CardImpl<SmolderingSpires> {
+public class SmolderingSpires extends CardImpl {
 
     public SmolderingSpires(UUID ownerId) {
         super(ownerId, 143, "Smoldering Spires", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

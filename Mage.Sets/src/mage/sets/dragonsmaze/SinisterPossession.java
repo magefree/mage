@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class SinisterPossession extends CardImpl<SinisterPossession> {
+public class SinisterPossession extends CardImpl {
 
     public SinisterPossession(UUID ownerId) {
         super(ownerId, 29, "Sinister Possession", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

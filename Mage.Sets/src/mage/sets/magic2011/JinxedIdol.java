@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JinxedIdol extends CardImpl<JinxedIdol> {
+public class JinxedIdol extends CardImpl {
 
     public JinxedIdol(UUID ownerId) {
         super(ownerId, 208, "Jinxed Idol", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

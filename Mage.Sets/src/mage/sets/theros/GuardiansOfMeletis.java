@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class GuardiansOfMeletis extends CardImpl<GuardiansOfMeletis> {
+public class GuardiansOfMeletis extends CardImpl {
 
     public GuardiansOfMeletis(UUID ownerId) {
         super(ownerId, 217, "Guardians of Meletis", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

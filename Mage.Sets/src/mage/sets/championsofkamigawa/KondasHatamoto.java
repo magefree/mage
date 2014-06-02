@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author LevelX
  */
-public class KondasHatamoto extends CardImpl<KondasHatamoto>{
+public class KondasHatamoto extends CardImpl{
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Legendary Samurai");
     private static final String rule1 = "As long as you control a legendary Samurai, {this} gets +1/+2";

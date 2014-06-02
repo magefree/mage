@@ -50,7 +50,7 @@ import mage.watchers.common.PlayerDamagedBySourceWatcher;
  *
  * @author North
  */
-public class WickedAkuba extends CardImpl<WickedAkuba> {
+public class WickedAkuba extends CardImpl {
 
     private static final FilterPlayer filter = new FilterPlayer("player dealt damage by Wicked Akuba this turn");
 

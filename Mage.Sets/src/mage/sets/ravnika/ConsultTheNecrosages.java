@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author anonymous
  */
-public class ConsultTheNecrosages extends CardImpl<ConsultTheNecrosages> {
+public class ConsultTheNecrosages extends CardImpl {
 
     public ConsultTheNecrosages(UUID ownerId) {
         super(ownerId, 199, "Consult the Necrosages", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}{B}");

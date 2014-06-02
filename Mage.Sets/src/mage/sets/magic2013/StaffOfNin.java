@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class StaffOfNin extends CardImpl<StaffOfNin> {
+public class StaffOfNin extends CardImpl {
 
     public StaffOfNin(UUID ownerId) {
         super(ownerId, 217, "Staff of Nin", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

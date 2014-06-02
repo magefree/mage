@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class SpikeJester extends CardImpl<SpikeJester> {
+public class SpikeJester extends CardImpl {
 
     public SpikeJester(UUID ownerId) {
         super(ownerId, 106, "Spike Jester", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}");

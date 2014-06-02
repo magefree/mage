@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class FieryTemper extends CardImpl<FieryTemper> {
+public class FieryTemper extends CardImpl {
 
     public FieryTemper(UUID ownerId) {
         super(ownerId, 62, "Fiery Temper", Rarity.SPECIAL, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");

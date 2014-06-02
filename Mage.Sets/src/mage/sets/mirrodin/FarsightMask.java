@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class FarsightMask extends CardImpl<FarsightMask> {
+public class FarsightMask extends CardImpl {
 
     public FarsightMask(UUID ownerId) {
         super(ownerId, 170, "Farsight Mask", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{5}");

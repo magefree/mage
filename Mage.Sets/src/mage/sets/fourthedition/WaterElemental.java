@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WaterElemental extends CardImpl<WaterElemental> {
+public class WaterElemental extends CardImpl {
 
     public WaterElemental(UUID ownerId) {
         super(ownerId, 115, "Water Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

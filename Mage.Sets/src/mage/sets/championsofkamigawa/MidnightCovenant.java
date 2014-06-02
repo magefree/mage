@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MidnightCovenant extends CardImpl<MidnightCovenant> {
+public class MidnightCovenant extends CardImpl {
 
     public MidnightCovenant(UUID ownerId) {
         super(ownerId, 125, "Midnight Covenant", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

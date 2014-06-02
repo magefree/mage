@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author jeffwadsworth
  */
-public class JoragaWarcaller extends CardImpl<JoragaWarcaller> {
+public class JoragaWarcaller extends CardImpl {
     
     private static final String rule = "Other Elf creatures you control get +1/+1 for each +1/+1 counter on Joraga Warcaller";
     

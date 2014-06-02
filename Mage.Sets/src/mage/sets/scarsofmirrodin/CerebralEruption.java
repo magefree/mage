@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CerebralEruption extends CardImpl<CerebralEruption> {
+public class CerebralEruption extends CardImpl {
 
     public CerebralEruption(UUID ownerId) {
         super(ownerId, 86, "Cerebral Eruption", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");

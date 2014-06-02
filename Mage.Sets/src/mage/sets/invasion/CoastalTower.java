@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class CoastalTower extends CardImpl<CoastalTower> {
+public class CoastalTower extends CardImpl {
 
     public CoastalTower(UUID ownerId) {
         super(ownerId, 321, "Coastal Tower", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

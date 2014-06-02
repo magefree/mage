@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class SphinxOfJwarIsle extends CardImpl<SphinxOfJwarIsle> {
+public class SphinxOfJwarIsle extends CardImpl {
 
     public SphinxOfJwarIsle(UUID ownerId) {
         super(ownerId, 68, "Sphinx of Jwar Isle", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

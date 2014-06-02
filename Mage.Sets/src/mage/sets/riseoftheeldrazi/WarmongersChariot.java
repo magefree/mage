@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class WarmongersChariot extends CardImpl<WarmongersChariot> {
+public class WarmongersChariot extends CardImpl {
 
     private static final String staticText = "As long as equipped creature has defender, it can attack as though it didn't have defender";
 

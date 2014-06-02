@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class MoltenSlagheap extends CardImpl<MoltenSlagheap> {
+public class MoltenSlagheap extends CardImpl {
 
     public MoltenSlagheap(UUID ownerId) {
         super(ownerId, 306, "Molten Slagheap", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

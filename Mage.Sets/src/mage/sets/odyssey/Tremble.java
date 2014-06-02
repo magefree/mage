@@ -38,7 +38,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author cbt33, jonubuu (Innocent Blood)
  */
-public class Tremble extends CardImpl<Tremble> {
+public class Tremble extends CardImpl {
 
     public Tremble(UUID ownerId) {
         super(ownerId, 225, "Tremble", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class CaveTiger extends CardImpl<CaveTiger> {
+public class CaveTiger extends CardImpl {
 
     public CaveTiger(UUID ownerId) {
         super(ownerId, 241, "Cave Tiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

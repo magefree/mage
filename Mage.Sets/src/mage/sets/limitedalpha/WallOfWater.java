@@ -44,7 +44,7 @@ import mage.constants.Zone;
  * @author KholdFuzion
 
  */
-public class WallOfWater extends CardImpl<WallOfWater> {
+public class WallOfWater extends CardImpl {
 
     public WallOfWater(UUID ownerId) {
         super(ownerId, 91, "Wall of Water", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

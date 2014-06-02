@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Crypsis extends CardImpl<Crypsis> {
+public class Crypsis extends CardImpl {
 
     public static final FilterCard filter = new FilterCard("creatures your opponents control");
 

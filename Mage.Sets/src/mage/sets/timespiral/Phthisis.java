@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Phthisis extends CardImpl<Phthisis> {
+public class Phthisis extends CardImpl {
 
     public Phthisis(UUID ownerId) {
         super(ownerId, 122, "Phthisis", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}{B}{B}");

@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class Narcomoeba extends CardImpl<Narcomoeba> {
+public class Narcomoeba extends CardImpl {
 
     public Narcomoeba(UUID ownerId) {
         super(ownerId, 54, "Narcomoeba", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

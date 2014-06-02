@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  * @author Loki
  */
-public class EmberWeaver extends CardImpl<EmberWeaver> {
+public class EmberWeaver extends CardImpl {
     private static final FilterPermanent redPermanentFilter = new FilterPermanent("red");
 
     static {

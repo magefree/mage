@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class TavernSwindler extends CardImpl<TavernSwindler> {
+public class TavernSwindler extends CardImpl {
 
     public TavernSwindler(UUID ownerId) {
         super(ownerId, 79, "Tavern Swindler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

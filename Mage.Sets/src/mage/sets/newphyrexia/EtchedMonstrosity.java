@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class EtchedMonstrosity extends CardImpl<EtchedMonstrosity> {
+public class EtchedMonstrosity extends CardImpl {
 
     public EtchedMonstrosity (UUID ownerId) {
         super(ownerId, 135, "Etched Monstrosity", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

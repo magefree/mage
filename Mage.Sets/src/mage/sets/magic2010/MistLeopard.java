@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MistLeopard extends CardImpl<MistLeopard> {
+public class MistLeopard extends CardImpl {
 
     public MistLeopard(UUID ownerId) {
         super(ownerId, 193, "Mist Leopard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

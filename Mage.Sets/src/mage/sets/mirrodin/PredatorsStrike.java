@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class PredatorsStrike extends CardImpl<PredatorsStrike> {
+public class PredatorsStrike extends CardImpl {
 
     public PredatorsStrike(UUID ownerId) {
         super(ownerId, 128, "Predator's Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

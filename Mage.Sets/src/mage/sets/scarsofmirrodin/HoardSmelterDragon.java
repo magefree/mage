@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class HoardSmelterDragon extends CardImpl<HoardSmelterDragon> {
+public class HoardSmelterDragon extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BlightedAgent extends CardImpl<BlightedAgent> {
+public class BlightedAgent extends CardImpl {
 
     public BlightedAgent(UUID ownerId) {
         super(ownerId, 29, "Blighted Agent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

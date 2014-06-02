@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class GlitteringWish extends CardImpl<GlitteringWish> {
+public class GlitteringWish extends CardImpl {
 
     public GlitteringWish(UUID ownerId) {
         super(ownerId, 156, "Glittering Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{W}");

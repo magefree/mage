@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class TropicalIsland extends CardImpl<TropicalIsland> {
+public class TropicalIsland extends CardImpl {
 
     public TropicalIsland(UUID ownerId) {
         super(ownerId, 293, "Tropical Island", Rarity.RARE, new CardType[]{CardType.LAND}, "");

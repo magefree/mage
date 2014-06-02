@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class CurseOfOblivion extends CardImpl<CurseOfOblivion> {
+public class CurseOfOblivion extends CardImpl {
 
     public CurseOfOblivion(UUID ownerId) {
         super(ownerId, 95, "Curse of Oblivion", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

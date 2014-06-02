@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class InterpretTheSigns extends CardImpl<InterpretTheSigns> {
+public class InterpretTheSigns extends CardImpl {
 
     public InterpretTheSigns(UUID ownerId) {
         super(ownerId, 43, "Interpret the Signs", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");

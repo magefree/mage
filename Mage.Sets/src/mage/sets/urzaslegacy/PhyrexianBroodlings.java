@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class PhyrexianBroodlings extends CardImpl<PhyrexianBroodlings> {
+public class PhyrexianBroodlings extends CardImpl {
 
     public PhyrexianBroodlings(UUID ownerId) {
         super(ownerId, 58, "Phyrexian Broodlings", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

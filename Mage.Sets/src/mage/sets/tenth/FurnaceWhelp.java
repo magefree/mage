@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class FurnaceWhelp extends CardImpl<FurnaceWhelp> {
+public class FurnaceWhelp extends CardImpl {
 
     public FurnaceWhelp(UUID ownerId) {
         super(ownerId, 205, "Furnace Whelp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

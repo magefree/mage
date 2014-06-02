@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class GiantOctopus extends CardImpl<GiantOctopus> {
+public class GiantOctopus extends CardImpl {
 
     public GiantOctopus(UUID ownerId) {
         super(ownerId, 77, "Giant Octopus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

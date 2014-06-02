@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class UnnaturalSpeed extends CardImpl<UnnaturalSpeed> {
+public class UnnaturalSpeed extends CardImpl {
 
     public UnnaturalSpeed (UUID ownerId) {
         super(ownerId, 197, "Unnatural Speed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

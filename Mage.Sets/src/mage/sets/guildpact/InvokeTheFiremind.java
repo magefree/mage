@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class InvokeTheFiremind extends CardImpl<InvokeTheFiremind> {
+public class InvokeTheFiremind extends CardImpl {
 
     public InvokeTheFiremind(UUID ownerId) {
         super(ownerId, 118, "Invoke the Firemind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}{R}");

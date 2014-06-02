@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class DarkTemper extends CardImpl<DarkTemper> {
+public class DarkTemper extends CardImpl {
 
     public DarkTemper(UUID ownerId) {
         super(ownerId, 61, "Dark Temper", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

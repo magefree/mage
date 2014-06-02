@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TitaniumGolem extends CardImpl<TitaniumGolem> {
+public class TitaniumGolem extends CardImpl {
 
     public TitaniumGolem(UUID ownerId) {
         super(ownerId, 263, "Titanium Golem", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

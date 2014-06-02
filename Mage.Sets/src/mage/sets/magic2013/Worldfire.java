@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class Worldfire extends CardImpl<Worldfire> {
+public class Worldfire extends CardImpl {
 
     public Worldfire(UUID ownerId) {
         super(ownerId, 158, "Worldfire", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{6}{R}{R}{R}");

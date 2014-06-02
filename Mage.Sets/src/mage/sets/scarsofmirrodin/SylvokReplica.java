@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class SylvokReplica extends CardImpl<SylvokReplica> {
+public class SylvokReplica extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {

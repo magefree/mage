@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class SplatterThug extends CardImpl<SplatterThug> {
+public class SplatterThug extends CardImpl {
  
     public SplatterThug(UUID ownerId) {
         super(ownerId, 105, "Splatter Thug", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

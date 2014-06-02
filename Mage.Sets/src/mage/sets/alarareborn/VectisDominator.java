@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class VectisDominator extends CardImpl<VectisDominator> {
+public class VectisDominator extends CardImpl {
 
     public VectisDominator(UUID ownerId) {
         super(ownerId, 84, "Vectis Dominator", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}{B}");

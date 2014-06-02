@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class SafeholdDuo extends CardImpl<SafeholdDuo> {
+public class SafeholdDuo extends CardImpl {
 
     private static final FilterSpell whiteFilter = new FilterSpell("a white spell");
     private static final FilterSpell greenFilter = new FilterSpell("a green spell");

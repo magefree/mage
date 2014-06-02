@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class LightwielderPaladin extends CardImpl<LightwielderPaladin> {
+public class LightwielderPaladin extends CardImpl {
 
     public LightwielderPaladin(UUID ownerId) {
         super(ownerId, 19, "Lightwielder Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

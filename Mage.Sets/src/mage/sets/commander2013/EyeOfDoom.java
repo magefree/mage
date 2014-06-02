@@ -57,7 +57,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class EyeOfDoom extends CardImpl<EyeOfDoom> {
+public class EyeOfDoom extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent with a doom counter on it");
     static {

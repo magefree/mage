@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class DrownerOfSecrets extends CardImpl<DrownerOfSecrets> {
+public class DrownerOfSecrets extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 

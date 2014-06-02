@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class Mawcor extends CardImpl<Mawcor> {
+public class Mawcor extends CardImpl {
 
     public Mawcor(UUID ownerId) {
         super(ownerId, 75, "Mawcor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

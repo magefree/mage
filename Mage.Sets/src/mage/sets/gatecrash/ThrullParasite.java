@@ -56,7 +56,7 @@ import mage.target.common.TargetNonlandPermanent;
 *
 * @author LevelX2
 */
-public class ThrullParasite extends CardImpl<ThrullParasite> {
+public class ThrullParasite extends CardImpl {
 
     public ThrullParasite(UUID ownerId) {
        super(ownerId, 81, "Thrull Parasite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");

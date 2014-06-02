@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class ImmobilizingInk extends CardImpl<ImmobilizingInk> {
+public class ImmobilizingInk extends CardImpl {
 
     public ImmobilizingInk(UUID ownerId) {
         super(ownerId, 87, "Immobilizing Ink", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

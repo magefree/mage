@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jonubuu
  */
-public class RegalForce extends CardImpl<RegalForce> {
+public class RegalForce extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green creature you control");
 

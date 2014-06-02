@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class ApostlesBlessing extends CardImpl<ApostlesBlessing> {
+public class ApostlesBlessing extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature you control");
 
     static {

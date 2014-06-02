@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class MoldgrafMonstrosity extends CardImpl<MoldgrafMonstrosity> {
+public class MoldgrafMonstrosity extends CardImpl {
 
     public MoldgrafMonstrosity(UUID ownerId) {
         super(ownerId, 194, "Moldgraf Monstrosity", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");

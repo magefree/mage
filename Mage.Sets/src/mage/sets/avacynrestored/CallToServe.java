@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class CallToServe extends CardImpl<CallToServe> {
+public class CallToServe extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
     static {

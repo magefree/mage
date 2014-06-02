@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TripNoose extends CardImpl<TripNoose> {
+public class TripNoose extends CardImpl {
 
     public TripNoose(UUID ownerId) {
         super(ownerId, 65, "Trip Noose", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

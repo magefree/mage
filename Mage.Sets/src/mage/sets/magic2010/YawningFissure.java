@@ -38,7 +38,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author North
  */
-public class YawningFissure extends CardImpl<YawningFissure> {
+public class YawningFissure extends CardImpl {
 
     public YawningFissure(UUID ownerId) {
         super(ownerId, 164, "Yawning Fissure", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");

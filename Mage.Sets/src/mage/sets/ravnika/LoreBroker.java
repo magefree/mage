@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class LoreBroker extends CardImpl<LoreBroker> {
+public class LoreBroker extends CardImpl {
 
     public LoreBroker(UUID ownerId) {
         super(ownerId, 57, "Lore Broker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

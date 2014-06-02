@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class ViashinoFirstblade extends CardImpl<ViashinoFirstblade> {
+public class ViashinoFirstblade extends CardImpl {
 
     public ViashinoFirstblade(UUID ownerId) {
         super(ownerId, 113, "Viashino Firstblade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");

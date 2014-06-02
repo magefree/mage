@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class GoblinGlider extends CardImpl<GoblinGlider> {
+public class GoblinGlider extends CardImpl {
 
     public GoblinGlider(UUID ownerId) {
         super(ownerId, 189, "Goblin Glider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

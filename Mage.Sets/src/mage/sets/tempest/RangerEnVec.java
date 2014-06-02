@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class RangerEnVec extends CardImpl<RangerEnVec> {
+public class RangerEnVec extends CardImpl {
 
     public RangerEnVec(UUID ownerId) {
         super(ownerId, 343, "Ranger en-Vec", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");

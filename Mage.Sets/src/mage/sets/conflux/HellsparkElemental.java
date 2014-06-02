@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class HellsparkElemental extends CardImpl<HellsparkElemental> {
+public class HellsparkElemental extends CardImpl {
 
     public HellsparkElemental(UUID ownerId) {
         super(ownerId, 65, "Hellspark Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

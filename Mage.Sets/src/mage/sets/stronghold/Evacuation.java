@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class Evacuation extends CardImpl<Evacuation> {
+public class Evacuation extends CardImpl {
 
     public Evacuation(UUID ownerId) {
         super(ownerId, 30, "Evacuation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

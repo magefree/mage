@@ -24,7 +24,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class AkkiLavarunner extends CardImpl<AkkiLavarunner> {
+public class AkkiLavarunner extends CardImpl {
 
     public AkkiLavarunner(UUID ownerId) {
         super(ownerId, 153, "Akki Lavarunner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

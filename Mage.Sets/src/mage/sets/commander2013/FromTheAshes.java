@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class FromTheAshes extends CardImpl<FromTheAshes> {
+public class FromTheAshes extends CardImpl {
 
     public FromTheAshes(UUID ownerId) {
         super(ownerId, 108, "From the Ashes", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}");

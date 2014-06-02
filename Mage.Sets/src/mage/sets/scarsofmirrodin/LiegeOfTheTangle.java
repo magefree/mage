@@ -58,7 +58,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class LiegeOfTheTangle extends CardImpl<LiegeOfTheTangle> {
+public class LiegeOfTheTangle extends CardImpl {
 
     public LiegeOfTheTangle (UUID ownerId) {
         super(ownerId, 123, "Liege of the Tangle", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

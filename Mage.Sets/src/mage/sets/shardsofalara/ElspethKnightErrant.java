@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
+public class ElspethKnightErrant extends CardImpl {
 
     public ElspethKnightErrant(UUID ownerId) {
         super(ownerId, 9, "Elspeth, Knight-Errant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");

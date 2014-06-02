@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class BorosCharm extends CardImpl<BorosCharm> {
+public class BorosCharm extends CardImpl {
 
     public BorosCharm (UUID ownerId) {
         super(ownerId, 148, "Boros Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}");

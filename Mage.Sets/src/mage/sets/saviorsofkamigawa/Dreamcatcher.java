@@ -42,7 +42,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  *
  * @author LevelX2
  */
-public class Dreamcatcher extends CardImpl<Dreamcatcher> {
+public class Dreamcatcher extends CardImpl {
 
     public Dreamcatcher(UUID ownerId) {
         super(ownerId, 34, "Dreamcatcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

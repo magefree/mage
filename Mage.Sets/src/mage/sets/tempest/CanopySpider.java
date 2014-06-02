@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CanopySpider extends CardImpl<CanopySpider> {
+public class CanopySpider extends CardImpl {
 
     public CanopySpider(UUID ownerId) {
         super(ownerId, 111, "Canopy Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

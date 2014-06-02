@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PlowThroughReito extends CardImpl<PlowThroughReito> {
+public class PlowThroughReito extends CardImpl {
 
     public PlowThroughReito(UUID ownerId) {
         super(ownerId, 22, "Plow Through Reito", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

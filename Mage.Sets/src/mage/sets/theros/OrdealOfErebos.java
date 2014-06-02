@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OrdealOfErebos extends CardImpl<OrdealOfErebos> {
+public class OrdealOfErebos extends CardImpl {
 
     public OrdealOfErebos(UUID ownerId) {
         super(ownerId, 99, "Ordeal of Erebos", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

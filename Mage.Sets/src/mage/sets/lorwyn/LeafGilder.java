@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class LeafGilder extends CardImpl<LeafGilder> {
+public class LeafGilder extends CardImpl {
 
     public LeafGilder(UUID ownerId) {
         super(ownerId, 227, "Leaf Gilder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TritonShorestalker extends CardImpl<TritonShorestalker> {
+public class TritonShorestalker extends CardImpl {
 
     public TritonShorestalker(UUID ownerId) {
         super(ownerId, 56, "Triton Shorestalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class MycoidShepherd extends CardImpl<MycoidShepherd> {
+public class MycoidShepherd extends CardImpl {
 
     public MycoidShepherd(UUID ownerId) {
         super(ownerId, 73, "Mycoid Shepherd", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}{W}");

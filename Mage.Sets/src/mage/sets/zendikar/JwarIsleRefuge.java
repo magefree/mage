@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class JwarIsleRefuge extends CardImpl<JwarIsleRefuge> {
+public class JwarIsleRefuge extends CardImpl {
 
     public JwarIsleRefuge(UUID ownerId) {
         super(ownerId, 215, "Jwar Isle Refuge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

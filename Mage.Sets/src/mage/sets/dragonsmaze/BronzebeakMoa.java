@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 
 
-public class BronzebeakMoa extends CardImpl<BronzebeakMoa> {
+public class BronzebeakMoa extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature under your control");
     static {

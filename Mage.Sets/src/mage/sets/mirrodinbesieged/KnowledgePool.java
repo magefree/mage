@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KnowledgePool extends CardImpl<KnowledgePool> {
+public class KnowledgePool extends CardImpl {
 
     public KnowledgePool(UUID ownerId) {
         super(ownerId, 111, "Knowledge Pool", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

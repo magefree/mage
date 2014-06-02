@@ -46,7 +46,7 @@ import mage.choices.ChoiceColor;
  *
  * @author North
  */
-public class LionsEyeDiamond extends CardImpl<LionsEyeDiamond> {
+public class LionsEyeDiamond extends CardImpl {
 
     public LionsEyeDiamond(UUID ownerId) {
         super(ownerId, 272, "Lion's Eye Diamond", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");

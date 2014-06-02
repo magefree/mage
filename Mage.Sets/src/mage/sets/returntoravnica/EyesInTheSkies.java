@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevleX2
  */
-public class EyesInTheSkies extends CardImpl<EyesInTheSkies> {
+public class EyesInTheSkies extends CardImpl {
 
     public EyesInTheSkies(UUID ownerId) {
         super(ownerId, 10, "Eyes in the Skies", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");

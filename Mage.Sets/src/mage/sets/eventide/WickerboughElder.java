@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class WickerboughElder extends CardImpl<WickerboughElder> {
+public class WickerboughElder extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

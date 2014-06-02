@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class ClearAPath extends CardImpl<ClearAPath> {
+public class ClearAPath extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with defender");
     static {

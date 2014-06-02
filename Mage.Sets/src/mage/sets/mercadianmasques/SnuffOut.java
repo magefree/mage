@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SnuffOut extends CardImpl<SnuffOut> {
+public class SnuffOut extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
     private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("If you control a Swamp");

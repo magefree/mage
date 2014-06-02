@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author magenoxx_at_gmail.com
  */
-public class RakdosShredFreak extends CardImpl<RakdosShredFreak> {
+public class RakdosShredFreak extends CardImpl {
 
     public RakdosShredFreak(UUID ownerId) {
         super(ownerId, 221, "Rakdos Shred-Freak", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B/R}{B/R}");

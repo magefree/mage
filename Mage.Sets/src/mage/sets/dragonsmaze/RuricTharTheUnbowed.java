@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class RuricTharTheUnbowed extends CardImpl<RuricTharTheUnbowed> {
+public class RuricTharTheUnbowed extends CardImpl {
 
     public RuricTharTheUnbowed(UUID ownerId) {
         super(ownerId, 99, "Ruric Thar, the Unbowed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");

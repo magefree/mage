@@ -40,7 +40,7 @@ import mage.filter.FilterCard;
  *
  * @author North
  */
-public class SleightOfHand extends CardImpl<SleightOfHand> {
+public class SleightOfHand extends CardImpl {
 
     public SleightOfHand(UUID ownerId) {
         super(ownerId, 99, "Sleight of Hand", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");

@@ -47,7 +47,7 @@ import mage.constants.Outcome;
  *
  * @author Loki
  */
-public class AccordersShield extends CardImpl<AccordersShield> {
+public class AccordersShield extends CardImpl {
 
     public AccordersShield (UUID ownerId) {
         super(ownerId, 136, "Accorder's Shield", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

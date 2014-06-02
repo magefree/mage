@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VipersKiss extends CardImpl<VipersKiss> {
+public class VipersKiss extends CardImpl {
 
     public VipersKiss(UUID ownerId) {
         super(ownerId, 109, "Viper's Kiss", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

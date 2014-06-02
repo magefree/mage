@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class LeafcrownDryad extends CardImpl<LeafcrownDryad> {
+public class LeafcrownDryad extends CardImpl {
 
     public LeafcrownDryad(UUID ownerId) {
         super(ownerId, 161, "Leafcrown Dryad", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{G}");

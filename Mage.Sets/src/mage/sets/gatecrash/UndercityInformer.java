@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class UndercityInformer extends CardImpl<UndercityInformer> {
+public class UndercityInformer extends CardImpl {
 
     public UndercityInformer(UUID ownerId) {
         super(ownerId, 82, "Undercity Informer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

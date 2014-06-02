@@ -36,7 +36,7 @@ import mage.constants.Rarity;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class CarefulStudy extends CardImpl<CarefulStudy> {
+public class CarefulStudy extends CardImpl {
 
     public CarefulStudy(UUID ownerId) {
         super(ownerId, 70, "Careful Study", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");

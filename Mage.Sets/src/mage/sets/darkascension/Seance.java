@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward
  */
-public class Seance extends CardImpl<Seance> {
+public class Seance extends CardImpl {
 
     public Seance(UUID ownerId) {
         super(ownerId, 20, "Seance", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

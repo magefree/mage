@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author jeffwadsworth
 
  */
-public class BarrentonMedic extends CardImpl<BarrentonMedic> {
+public class BarrentonMedic extends CardImpl {
 
     public BarrentonMedic(UUID ownerId) {
         super(ownerId, 4, "Barrenton Medic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

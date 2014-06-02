@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AshenmoorGouger extends CardImpl<AshenmoorGouger> {
+public class AshenmoorGouger extends CardImpl {
 
     public AshenmoorGouger(UUID ownerId) {
         super(ownerId, 180, "Ashenmoor Gouger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B/R}{B/R}{B/R}");

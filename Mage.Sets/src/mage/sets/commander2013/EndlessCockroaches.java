@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class EndlessCockroaches extends CardImpl<EndlessCockroaches> {
+public class EndlessCockroaches extends CardImpl {
 
     public EndlessCockroaches(UUID ownerId) {
         super(ownerId, 75, "Endless Cockroaches", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class GideonsAvenger extends CardImpl<GideonsAvenger> {
+public class GideonsAvenger extends CardImpl {
 
     public GideonsAvenger(UUID ownerId) {
         super(ownerId, 17, "Gideon's Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

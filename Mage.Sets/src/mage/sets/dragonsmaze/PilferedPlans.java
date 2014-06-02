@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class PilferedPlans extends CardImpl<PilferedPlans> {
+public class PilferedPlans extends CardImpl {
 
     public PilferedPlans(UUID ownerId) {
         super(ownerId, 90, "Pilfered Plans", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}{B}");

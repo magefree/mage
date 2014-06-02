@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class CallToHeel extends CardImpl<CallToHeel> {
+public class CallToHeel extends CardImpl {
 
     public CallToHeel(UUID ownerId) {
         super(ownerId, 32, "Call to Heel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

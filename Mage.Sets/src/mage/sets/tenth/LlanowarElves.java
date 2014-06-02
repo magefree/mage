@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LlanowarElves extends CardImpl<LlanowarElves> {
+public class LlanowarElves extends CardImpl {
 
     public LlanowarElves(UUID ownerId) {
         super(ownerId, 274, "Llanowar Elves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

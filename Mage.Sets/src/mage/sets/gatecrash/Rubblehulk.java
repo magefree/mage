@@ -48,7 +48,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author LevelX2
  */
-public class Rubblehulk extends CardImpl<Rubblehulk> {
+public class Rubblehulk extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 

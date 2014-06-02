@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author LevelX2
  */
-public class DreamStalker extends CardImpl<DreamStalker> {
+public class DreamStalker extends CardImpl {
 
     public DreamStalker(UUID ownerId) {
         super(ownerId, 7, "Dream Stalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

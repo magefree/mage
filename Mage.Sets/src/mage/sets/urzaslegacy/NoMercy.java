@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class NoMercy extends CardImpl<NoMercy> {
+public class NoMercy extends CardImpl {
 
     public NoMercy(UUID ownerId) {
         super(ownerId, 56, "No Mercy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

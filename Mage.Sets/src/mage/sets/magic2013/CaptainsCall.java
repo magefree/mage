@@ -38,7 +38,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author Loki
  */
-public class CaptainsCall extends CardImpl<CaptainsCall> {
+public class CaptainsCall extends CardImpl {
 
     public CaptainsCall(UUID ownerId) {
         super(ownerId, 9, "Captain's Call", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");

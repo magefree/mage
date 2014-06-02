@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BenalishKnight extends CardImpl<BenalishKnight> {
+public class BenalishKnight extends CardImpl {
 
     public BenalishKnight(UUID ownerId) {
         super(ownerId, 11, "Benalish Knight", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

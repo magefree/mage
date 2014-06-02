@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class NihilSpellbomb extends CardImpl<NihilSpellbomb> {
+public class NihilSpellbomb extends CardImpl {
 
     public NihilSpellbomb(UUID ownerId) {
         super(ownerId, 187, "Nihil Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

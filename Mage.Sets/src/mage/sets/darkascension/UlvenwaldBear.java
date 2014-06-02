@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class UlvenwaldBear extends CardImpl<UlvenwaldBear> {
+public class UlvenwaldBear extends CardImpl {
 
     public UlvenwaldBear(UUID ownerId) {
         super(ownerId, 129, "Ulvenwald Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

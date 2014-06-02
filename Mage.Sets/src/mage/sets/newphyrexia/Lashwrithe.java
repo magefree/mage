@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class Lashwrithe extends CardImpl<Lashwrithe> {
+public class Lashwrithe extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 

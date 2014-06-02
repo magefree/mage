@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SkyWeaver extends CardImpl<SkyWeaver> {
+public class SkyWeaver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white or black creature");
 

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LadyOrca extends CardImpl<LadyOrca> {
+public class LadyOrca extends CardImpl {
 
     public LadyOrca(UUID ownerId) {
         super(ownerId, 281, "Lady Orca", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class CloakOfMists extends CardImpl<CloakOfMists> {
+public class CloakOfMists extends CardImpl {
 
     public CloakOfMists(UUID ownerId) {
         super(ownerId, 65, "Cloak of Mists", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

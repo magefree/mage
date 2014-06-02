@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class BaneOfHanweir extends CardImpl<BaneOfHanweir> {
+public class BaneOfHanweir extends CardImpl {
 
     public BaneOfHanweir(UUID ownerId) {
         super(ownerId, 145, "Bane of Hanweir", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");

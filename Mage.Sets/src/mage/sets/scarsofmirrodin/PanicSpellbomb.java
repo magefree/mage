@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class PanicSpellbomb extends CardImpl<PanicSpellbomb> {
+public class PanicSpellbomb extends CardImpl {
 
     public PanicSpellbomb(UUID ownerId) {
         super(ownerId, 191, "Panic Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

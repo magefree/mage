@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class OathswornGiant extends CardImpl<OathswornGiant> {
+public class OathswornGiant extends CardImpl {
 
     public OathswornGiant(UUID ownerId) {
         super(ownerId, 27, "Oathsworn Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

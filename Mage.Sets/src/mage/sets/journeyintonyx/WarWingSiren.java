@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class WarWingSiren extends CardImpl<WarWingSiren> {
+public class WarWingSiren extends CardImpl {
 
     public WarWingSiren(UUID ownerId) {
         super(ownerId, 57, "War-Wing Siren", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class MoonbowIllusionist extends CardImpl<MoonbowIllusionist> {
+public class MoonbowIllusionist extends CardImpl {
 
     public MoonbowIllusionist(UUID ownerId) {
         super(ownerId, 46, "Moonbow Illusionist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

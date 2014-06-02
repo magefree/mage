@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LaunchParty extends CardImpl<LaunchParty> {
+public class LaunchParty extends CardImpl {
 
     public LaunchParty(UUID ownerId) {
         super(ownerId, 69, "Launch Party", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");

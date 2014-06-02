@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class ViashinoOutrider extends CardImpl<ViashinoOutrider>{
+public class ViashinoOutrider extends CardImpl{
 
     public ViashinoOutrider(UUID ownerId) {
         super(ownerId, 223, "Viashino Outrider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

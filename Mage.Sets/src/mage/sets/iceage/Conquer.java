@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Quercitron
  */
-public class Conquer extends CardImpl<Conquer> {
+public class Conquer extends CardImpl {
 
     public Conquer(UUID ownerId) {
         super(ownerId, 180, "Conquer", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");

@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class FlamesOfTheBloodHand extends CardImpl<FlamesOfTheBloodHand> {
+public class FlamesOfTheBloodHand extends CardImpl {
 
     public FlamesOfTheBloodHand(UUID ownerId) {
         super(ownerId, 101, "Flames of the Blood Hand", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

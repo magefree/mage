@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ElvishEulogist extends CardImpl<ElvishEulogist> {
+public class ElvishEulogist extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Elf");
 

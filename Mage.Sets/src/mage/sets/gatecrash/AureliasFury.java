@@ -80,7 +80,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class AureliasFury extends CardImpl<AureliasFury> {
+public class AureliasFury extends CardImpl {
 
     public AureliasFury(UUID ownerId) {
         super(ownerId, 144, "Aurelia's Fury", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{X}{R}{W}");

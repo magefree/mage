@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
  * @author KholdFuzion
 
  */
-public class IronStar extends CardImpl<IronStar> {
+public class IronStar extends CardImpl {
 
     public IronStar(UUID ownerId) {
         super(ownerId, 250, "Iron Star", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

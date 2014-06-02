@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class LaceWithMoonglove extends CardImpl<LaceWithMoonglove> {
+public class LaceWithMoonglove extends CardImpl {
 
     public LaceWithMoonglove(UUID ownerId) {
         super(ownerId, 225, "Lace with Moonglove", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

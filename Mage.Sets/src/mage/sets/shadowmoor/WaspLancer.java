@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WaspLancer extends CardImpl<WaspLancer> {
+public class WaspLancer extends CardImpl {
 
     public WaspLancer(UUID ownerId) {
         super(ownerId, 179, "Wasp Lancer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}{U/B}");

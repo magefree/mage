@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class CurseOfShallowGraves extends CardImpl<CurseOfShallowGraves> {
+public class CurseOfShallowGraves extends CardImpl {
 
     public CurseOfShallowGraves(UUID ownerId) {
         super(ownerId, 71, "Curse of Shallow Graves", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

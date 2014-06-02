@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Firefly extends CardImpl<Firefly> {
+public class Firefly extends CardImpl {
 
     public Firefly(UUID ownerId) {
         super(ownerId, 172, "Firefly", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

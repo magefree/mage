@@ -53,7 +53,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author Loki
  */
-public class PhyrexianMetamorph extends CardImpl<PhyrexianMetamorph> {
+public class PhyrexianMetamorph extends CardImpl {
 
     public PhyrexianMetamorph (UUID ownerId) {
         super(ownerId, 42, "Phyrexian Metamorph", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{UP}");

@@ -38,7 +38,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class HornedTurtle extends CardImpl<HornedTurtle> {
+public class HornedTurtle extends CardImpl {
 
     public HornedTurtle(UUID ownerId) {
         super(ownerId, 55, "Horned Turtle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

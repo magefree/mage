@@ -61,7 +61,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class FellShepherd extends CardImpl<FellShepherd> {
+public class FellShepherd extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
     static {

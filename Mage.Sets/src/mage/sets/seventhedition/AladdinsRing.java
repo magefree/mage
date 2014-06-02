@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class AladdinsRing extends CardImpl<AladdinsRing> {
+public class AladdinsRing extends CardImpl {
 
     public AladdinsRing(UUID ownerId) {
         super(ownerId, 286, "Aladdin's Ring", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{8}");

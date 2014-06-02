@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class DeeptreadMerrow extends CardImpl<DeeptreadMerrow> {
+public class DeeptreadMerrow extends CardImpl {
 
     public DeeptreadMerrow(UUID ownerId) {
         super(ownerId, 57, "Deeptread Merrow", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

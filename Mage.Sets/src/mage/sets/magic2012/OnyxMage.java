@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class OnyxMage extends CardImpl<OnyxMage> {
+public class OnyxMage extends CardImpl {
 
     public OnyxMage(UUID ownerId) {
         super(ownerId, 103, "Onyx Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

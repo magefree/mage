@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class ThaliaGuardianOfThraben extends CardImpl<ThaliaGuardianOfThraben> {
+public class ThaliaGuardianOfThraben extends CardImpl {
 
     public ThaliaGuardianOfThraben(UUID ownerId) {
         super(ownerId, 24, "Thalia, Guardian of Thraben", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");

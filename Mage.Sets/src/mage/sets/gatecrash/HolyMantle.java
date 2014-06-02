@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HolyMantle extends CardImpl<HolyMantle> {
+public class HolyMantle extends CardImpl {
 
     public HolyMantle(UUID ownerId) {
         super(ownerId, 17, "Holy Mantle", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

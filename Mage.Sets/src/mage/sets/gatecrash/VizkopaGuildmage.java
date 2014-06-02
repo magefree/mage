@@ -63,7 +63,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VizkopaGuildmage extends CardImpl<VizkopaGuildmage> {
+public class VizkopaGuildmage extends CardImpl {
 
     public VizkopaGuildmage(UUID ownerId) {
         super(ownerId, 206, "Vizkopa Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{B}");

@@ -53,7 +53,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class ShipbreakerKraken extends CardImpl<ShipbreakerKraken> {
+public class ShipbreakerKraken extends CardImpl {
 
     public ShipbreakerKraken(UUID ownerId) {
         super(ownerId, 63, "Shipbreaker Kraken", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

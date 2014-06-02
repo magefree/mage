@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WarclampMastiff extends CardImpl<WarclampMastiff> {
+public class WarclampMastiff extends CardImpl {
 
     public WarclampMastiff(UUID ownerId) {
         super(ownerId, 40, "Warclamp Mastiff", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

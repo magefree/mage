@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class IgniteMemories extends CardImpl<IgniteMemories> {
+public class IgniteMemories extends CardImpl {
 
     public IgniteMemories(UUID ownerId) {
         super(ownerId, 164, "Ignite Memories", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");

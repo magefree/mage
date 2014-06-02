@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward
  */
-public class FeedThePack extends CardImpl<FeedThePack> {
+public class FeedThePack extends CardImpl {
 
     public FeedThePack(UUID ownerId) {
         super(ownerId, 114, "Feed the Pack", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");

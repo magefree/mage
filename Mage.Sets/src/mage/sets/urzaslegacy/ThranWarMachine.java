@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class ThranWarMachine extends CardImpl<ThranWarMachine> {
+public class ThranWarMachine extends CardImpl {
 
     public ThranWarMachine(UUID ownerId) {
         super(ownerId, 134, "Thran War Machine", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

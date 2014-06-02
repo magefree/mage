@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX
  */
-public class ZoZuThePunisher extends CardImpl<ZoZuThePunisher> {
+public class ZoZuThePunisher extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("legendary spell");
 

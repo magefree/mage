@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LoxodonConvert extends CardImpl<LoxodonConvert> {
+public class LoxodonConvert extends CardImpl {
 
     public LoxodonConvert(UUID ownerId) {
         super(ownerId, 14, "Loxodon Convert", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

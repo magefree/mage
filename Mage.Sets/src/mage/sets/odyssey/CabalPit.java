@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CabalPit extends CardImpl<CabalPit> {
+public class CabalPit extends CardImpl {
 
     public CabalPit(UUID ownerId) {
         super(ownerId, 315, "Cabal Pit", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

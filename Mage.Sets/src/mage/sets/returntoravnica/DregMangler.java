@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class DregMangler extends CardImpl<DregMangler> {
+public class DregMangler extends CardImpl {
 
     public DregMangler(UUID ownerId) {
         super(ownerId, 158, "Dreg Mangler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");

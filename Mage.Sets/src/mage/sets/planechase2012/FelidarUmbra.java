@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FelidarUmbra extends CardImpl<FelidarUmbra> {
+public class FelidarUmbra extends CardImpl {
 
     public FelidarUmbra(UUID ownerId) {
         super(ownerId, 6, "Felidar Umbra", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

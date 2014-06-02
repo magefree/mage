@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class WintersGrasp extends CardImpl<WintersGrasp> {
+public class WintersGrasp extends CardImpl {
 
     public WintersGrasp(UUID ownerId) {
         super(ownerId, 159, "Winter's Grasp", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");

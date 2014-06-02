@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class Phytohydra extends CardImpl<Phytohydra> {
+public class Phytohydra extends CardImpl {
 
     public Phytohydra(UUID ownerId) {
         super(ownerId, 218, "Phytohydra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{W}");

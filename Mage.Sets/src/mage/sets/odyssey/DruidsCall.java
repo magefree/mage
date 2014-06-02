@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class DruidsCall extends CardImpl<DruidsCall> {
+public class DruidsCall extends CardImpl {
 
     public DruidsCall(UUID ownerId) {
         super(ownerId, 239, "Druid's Call", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

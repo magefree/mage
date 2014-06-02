@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class SkyshroudRanger extends CardImpl<SkyshroudRanger> {
+public class SkyshroudRanger extends CardImpl {
 
     public SkyshroudRanger(UUID ownerId) {
         super(ownerId, 150, "Skyshroud Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

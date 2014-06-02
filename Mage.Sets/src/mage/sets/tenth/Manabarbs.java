@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author nantuko
  */
-public class Manabarbs extends CardImpl<Manabarbs> {
+public class Manabarbs extends CardImpl {
 
     public Manabarbs(UUID ownerId) {
         super(ownerId, 218, "Manabarbs", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

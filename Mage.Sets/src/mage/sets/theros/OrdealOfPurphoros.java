@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class OrdealOfPurphoros extends CardImpl<OrdealOfPurphoros> {
+public class OrdealOfPurphoros extends CardImpl {
 
     public OrdealOfPurphoros(UUID ownerId) {
         super(ownerId, 131, "Ordeal of Purphoros", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

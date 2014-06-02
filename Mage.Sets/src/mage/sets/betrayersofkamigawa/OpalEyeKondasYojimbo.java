@@ -55,7 +55,7 @@ import mage.target.TargetSource;
 /**
  * @author LevelX2
  */
-public class OpalEyeKondasYojimbo extends CardImpl<OpalEyeKondasYojimbo> {
+public class OpalEyeKondasYojimbo extends CardImpl {
 
     public OpalEyeKondasYojimbo(UUID ownerId) {
         super(ownerId, 17, "Opal-Eye, Konda's Yojimbo", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

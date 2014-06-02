@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class CorpseHarvester extends CardImpl<CorpseHarvester> {
+public class CorpseHarvester extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature");
     

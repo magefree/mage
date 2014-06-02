@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class RakdosLordOfRiots extends CardImpl<RakdosLordOfRiots> {
+public class RakdosLordOfRiots extends CardImpl {
 
     public RakdosLordOfRiots(UUID ownerId) {
         super(ownerId, 187, "Rakdos, Lord of Riots", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{B}{B}{R}{R}");

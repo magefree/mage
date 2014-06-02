@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki, North
  */
-public class InexorableTide extends CardImpl<InexorableTide> {
+public class InexorableTide extends CardImpl {
 
     public InexorableTide (UUID ownerId) {
         super(ownerId, 35, "Inexorable Tide", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");

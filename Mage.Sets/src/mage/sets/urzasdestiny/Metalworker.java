@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author anonymous
  */
-public class Metalworker extends CardImpl<Metalworker> {
+public class Metalworker extends CardImpl {
 
     public Metalworker(UUID ownerId) {
         super(ownerId, 135, "Metalworker", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

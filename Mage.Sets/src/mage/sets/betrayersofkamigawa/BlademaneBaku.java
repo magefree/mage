@@ -53,7 +53,7 @@ import mage.game.Game;
 /**
  * @author LevelX2
  */
-public class BlademaneBaku extends CardImpl<BlademaneBaku> {
+public class BlademaneBaku extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

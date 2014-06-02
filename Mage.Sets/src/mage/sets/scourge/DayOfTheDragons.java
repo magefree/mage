@@ -52,7 +52,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jeffwadsworth
  */
-public class DayOfTheDragons extends CardImpl<DayOfTheDragons> {
+public class DayOfTheDragons extends CardImpl {
 
     public DayOfTheDragons(UUID ownerId) {
         super(ownerId, 31, "Day of the Dragons", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class AegisOfTheGods extends CardImpl<AegisOfTheGods> {
+public class AegisOfTheGods extends CardImpl {
 
     public AegisOfTheGods(UUID ownerId) {
         super(ownerId, 1, "Aegis of the Gods", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{W}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class EnatuGolem extends CardImpl<EnatuGolem> {
+public class EnatuGolem extends CardImpl {
 
     public EnatuGolem(UUID ownerId) {
         super(ownerId, 217, "Enatu Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class SurrealMemoir extends CardImpl<SurrealMemoir> {
+public class SurrealMemoir extends CardImpl {
 
     public SurrealMemoir(UUID ownerId) {
         super(ownerId, 167, "Surreal Memoir", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");

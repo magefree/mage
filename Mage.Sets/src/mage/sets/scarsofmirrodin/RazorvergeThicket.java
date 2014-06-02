@@ -46,7 +46,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class RazorvergeThicket extends CardImpl<RazorvergeThicket> {
+public class RazorvergeThicket extends CardImpl {
 
     private static FilterLandPermanent filter = new FilterLandPermanent();
 

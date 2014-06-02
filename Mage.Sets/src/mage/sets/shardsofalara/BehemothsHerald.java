@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class BehemothsHerald extends CardImpl<BehemothsHerald> {
+public class BehemothsHerald extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("card named Godsire");
     private static final FilterControlledCreaturePermanent filterRed = new FilterControlledCreaturePermanent("a red creature");

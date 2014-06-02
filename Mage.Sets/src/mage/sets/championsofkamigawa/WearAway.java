@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class WearAway extends CardImpl<WearAway> {
+public class WearAway extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     static {

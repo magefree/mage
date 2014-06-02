@@ -53,7 +53,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class SphinxOfUthuun extends CardImpl<SphinxOfUthuun> {
+public class SphinxOfUthuun extends CardImpl {
 
     public SphinxOfUthuun(UUID ownerId) {
         super(ownerId, 76, "Sphinx of Uthuun", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

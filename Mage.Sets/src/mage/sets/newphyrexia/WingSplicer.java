@@ -48,7 +48,7 @@ import mage.game.permanent.token.GolemToken;
  *
  * @author North
  */
-public class WingSplicer extends CardImpl<WingSplicer> {
+public class WingSplicer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
 

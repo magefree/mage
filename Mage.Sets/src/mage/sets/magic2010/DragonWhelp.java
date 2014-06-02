@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class DragonWhelp extends CardImpl<DragonWhelp> {
+public class DragonWhelp extends CardImpl {
 
     public DragonWhelp(UUID ownerId) {
         super(ownerId, 133, "Dragon Whelp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

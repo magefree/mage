@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class Narcolepsy extends CardImpl<Narcolepsy> {
+public class Narcolepsy extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature");
 

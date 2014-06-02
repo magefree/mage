@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Backfir3
  */
-public class ThermalGlider extends CardImpl<ThermalGlider> {
+public class ThermalGlider extends CardImpl {
 
 	private static final FilterCard filter = new FilterCard("Red");
 

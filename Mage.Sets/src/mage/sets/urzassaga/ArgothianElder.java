@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Backfir3
  */
-public class ArgothianElder extends CardImpl<ArgothianElder> {
+public class ArgothianElder extends CardImpl {
 
     public ArgothianElder(UUID ownerId) {
         super(ownerId, 233, "Argothian Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

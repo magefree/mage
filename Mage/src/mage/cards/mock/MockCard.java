@@ -11,7 +11,7 @@ import mage.cards.repository.CardRepository;
 /**
  * @author North
  */
-public class MockCard extends CardImpl<MockCard> {
+public class MockCard extends CardImpl {
     public MockCard(CardInfo card) {
         super(null, card.getName());
         this.cardNumber = card.getCardNumber();

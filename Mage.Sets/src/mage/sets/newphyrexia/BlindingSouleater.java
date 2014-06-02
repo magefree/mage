@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class BlindingSouleater extends CardImpl<BlindingSouleater> {
+public class BlindingSouleater extends CardImpl {
 
     public BlindingSouleater(UUID ownerId) {
         super(ownerId, 131, "Blinding Souleater", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

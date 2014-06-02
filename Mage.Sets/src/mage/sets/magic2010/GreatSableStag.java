@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GreatSableStag extends CardImpl<GreatSableStag> {
+public class GreatSableStag extends CardImpl {
     private static final FilterCard filter1 = new FilterCard("Blue");
     private static final FilterCard filter2 = new FilterCard("Black");
 

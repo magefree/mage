@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class VulshokRefugee extends CardImpl<VulshokRefugee> {
+public class VulshokRefugee extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Red");
 

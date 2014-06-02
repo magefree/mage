@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class DivineTransformation extends CardImpl<DivineTransformation> {
+public class DivineTransformation extends CardImpl {
 
     public DivineTransformation(UUID ownerId) {
         super(ownerId, 304, "Divine Transformation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

@@ -40,7 +40,7 @@ import java.util.UUID;
 /**
  * @author ayratn
  */
-public class IchorWellspring extends CardImpl<IchorWellspring> {
+public class IchorWellspring extends CardImpl {
 
     public IchorWellspring(UUID ownerId) {
         super(ownerId, 110, "Ichor Wellspring", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

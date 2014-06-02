@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class PillarfieldOx extends CardImpl<PillarfieldOx> {
+public class PillarfieldOx extends CardImpl {
 
     public PillarfieldOx (UUID ownerId) {
         super(ownerId, 31, "Pillarfield Ox", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

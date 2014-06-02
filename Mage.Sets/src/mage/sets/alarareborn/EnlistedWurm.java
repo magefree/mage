@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class EnlistedWurm extends CardImpl<EnlistedWurm> {
+public class EnlistedWurm extends CardImpl {
 
     public EnlistedWurm(UUID ownerId) {
         super(ownerId, 68, "Enlisted Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");

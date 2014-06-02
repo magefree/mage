@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class WashOut extends CardImpl<WashOut> {
+public class WashOut extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
     static {

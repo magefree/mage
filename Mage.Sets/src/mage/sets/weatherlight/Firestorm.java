@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class Firestorm extends CardImpl<Firestorm> {
+public class Firestorm extends CardImpl {
 
     public Firestorm(UUID ownerId) {
         super(ownerId, 101, "Firestorm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}");

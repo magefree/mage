@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class AltarOfTheLost extends CardImpl<AltarOfTheLost> {
+public class AltarOfTheLost extends CardImpl {
 
     public AltarOfTheLost(UUID ownerId) {
         super(ownerId, 144, "Altar of the Lost", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

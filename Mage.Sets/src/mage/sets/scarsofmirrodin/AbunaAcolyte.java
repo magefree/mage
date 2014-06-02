@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Martin Sagastume msr986@gmail.com
  */
-public class AbunaAcolyte extends CardImpl<AbunaAcolyte> {
+public class AbunaAcolyte extends CardImpl {
 
     final static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 

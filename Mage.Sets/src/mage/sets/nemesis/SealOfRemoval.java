@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class SealOfRemoval extends CardImpl<SealOfRemoval> {
+public class SealOfRemoval extends CardImpl {
 
     
     public SealOfRemoval(UUID ownerId) {

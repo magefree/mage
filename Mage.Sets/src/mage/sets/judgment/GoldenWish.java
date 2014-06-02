@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class GoldenWish extends CardImpl<GoldenWish> {
+public class GoldenWish extends CardImpl {
 
     public GoldenWish(UUID ownerId) {
         super(ownerId, 12, "Golden Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");

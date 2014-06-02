@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SkyreachManta extends CardImpl<SkyreachManta> {
+public class SkyreachManta extends CardImpl {
 
     public SkyreachManta(UUID ownerId) {
         super(ownerId, 152, "Skyreach Manta", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

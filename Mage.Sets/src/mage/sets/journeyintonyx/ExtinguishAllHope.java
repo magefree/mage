@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class ExtinguishAllHope extends CardImpl<ExtinguishAllHope> {
+public class ExtinguishAllHope extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nonenchantment creatures");
     

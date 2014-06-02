@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class VendilionClique extends CardImpl<VendilionClique> {
+public class VendilionClique extends CardImpl {
 
     public VendilionClique(UUID ownerId) {
         super(ownerId, 55, "Vendilion Clique", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

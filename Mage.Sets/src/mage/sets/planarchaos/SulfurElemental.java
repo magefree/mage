@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class SulfurElemental extends CardImpl<SulfurElemental> {
+public class SulfurElemental extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
     static {

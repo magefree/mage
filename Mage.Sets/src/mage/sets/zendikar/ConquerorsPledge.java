@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ConquerorsPledge extends CardImpl<ConquerorsPledge> {
+public class ConquerorsPledge extends CardImpl {
 
     public ConquerorsPledge(UUID ownerId) {
         super(ownerId, 8, "Conqueror's Pledge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");

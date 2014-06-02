@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class Tombstalker extends CardImpl<Tombstalker> {
+public class Tombstalker extends CardImpl {
 
     public Tombstalker(UUID ownerId) {
         super(ownerId, 102, "Tombstalker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{B}{B}");

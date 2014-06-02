@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class AstralCornucopia extends CardImpl<AstralCornucopia> {
+public class AstralCornucopia extends CardImpl {
 
     public AstralCornucopia(UUID ownerId) {
         super(ownerId, 157, "Astral Cornucopia", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}{X}{X}");

@@ -50,7 +50,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class BatwingBrume extends CardImpl<BatwingBrume> {
+public class BatwingBrume extends CardImpl {
 
     public BatwingBrume(UUID ownerId) {
         super(ownerId, 81, "Batwing Brume", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W/B}");

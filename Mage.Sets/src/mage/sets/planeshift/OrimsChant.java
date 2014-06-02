@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class OrimsChant extends CardImpl<OrimsChant> {
+public class OrimsChant extends CardImpl {
 
     public OrimsChant(UUID ownerId) {
         super(ownerId, 11, "Orim's Chant", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");

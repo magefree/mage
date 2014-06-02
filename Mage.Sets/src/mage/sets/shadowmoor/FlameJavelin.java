@@ -38,7 +38,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class FlameJavelin extends CardImpl<FlameJavelin> {
+public class FlameJavelin extends CardImpl {
 
     public FlameJavelin(UUID ownerId) {
         super(ownerId, 92, "Flame Javelin", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2/R}{2/R}{2/R}");

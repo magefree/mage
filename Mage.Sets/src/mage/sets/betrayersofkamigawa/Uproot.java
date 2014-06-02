@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class Uproot extends CardImpl<Uproot> {
+public class Uproot extends CardImpl {
 
     public Uproot(UUID ownerId) {
         super(ownerId, 149, "Uproot", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

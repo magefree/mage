@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MurderInvestigation extends CardImpl<MurderInvestigation> {
+public class MurderInvestigation extends CardImpl {
 
     public MurderInvestigation(UUID ownerId) {
         super(ownerId, 21, "Murder Investigation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

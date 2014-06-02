@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author Alvin
  */
-public class DelverOfSecrets extends CardImpl<DelverOfSecrets> {
+public class DelverOfSecrets extends CardImpl {
 
     public DelverOfSecrets(UUID ownerId) {
         super(ownerId, 51, "Delver of Secrets", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

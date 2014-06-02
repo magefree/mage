@@ -59,7 +59,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author LevelX2
  */
-public class DiluvianPrimordial extends CardImpl<DiluvianPrimordial> {
+public class DiluvianPrimordial extends CardImpl {
 
     public DiluvianPrimordial(UUID ownerId) {
         super(ownerId, 33, "Diluvian Primordial", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

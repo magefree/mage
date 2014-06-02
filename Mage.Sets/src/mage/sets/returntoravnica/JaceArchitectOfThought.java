@@ -74,7 +74,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class JaceArchitectOfThought extends CardImpl<JaceArchitectOfThought> {
+public class JaceArchitectOfThought extends CardImpl {
 
     public JaceArchitectOfThought(UUID ownerId) {
         super(ownerId, 44, "Jace, Architect of Thought", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");

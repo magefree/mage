@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class UrGolemsEye extends CardImpl<UrGolemsEye> {
+public class UrGolemsEye extends CardImpl {
 
     public UrGolemsEye (UUID ownerId) {
         super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

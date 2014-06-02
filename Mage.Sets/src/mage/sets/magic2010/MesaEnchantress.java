@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author North
  */
-public class MesaEnchantress extends CardImpl<MesaEnchantress> {
+public class MesaEnchantress extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 

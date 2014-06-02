@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class MawOfTheObzedat extends CardImpl<MawOfTheObzedat> {
+public class MawOfTheObzedat extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
     

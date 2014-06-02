@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author nantuko
  */
-public class PurifyTheGrave extends CardImpl<PurifyTheGrave> {
+public class PurifyTheGrave extends CardImpl {
 
     public PurifyTheGrave(UUID ownerId) {
         super(ownerId, 27, "Purify the Grave", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ContagionClasp extends CardImpl<ContagionClasp> {
+public class ContagionClasp extends CardImpl {
 
     public ContagionClasp (UUID ownerId) {
         super(ownerId, 144, "Contagion Clasp", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

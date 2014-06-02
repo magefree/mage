@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BarktoothWarbeard extends CardImpl<BarktoothWarbeard> {
+public class BarktoothWarbeard extends CardImpl {
 
     public BarktoothWarbeard(UUID ownerId) {
         super(ownerId, 261, "Barktooth Warbeard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{R}{R}");

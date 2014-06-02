@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Backfir3
  */
-public class Brawn extends CardImpl<Brawn> {
+public class Brawn extends CardImpl {
 
     private static final String ruleText = "As long as Brawn is in your graveyard and you control a Forest, creatures you control have trample";
 

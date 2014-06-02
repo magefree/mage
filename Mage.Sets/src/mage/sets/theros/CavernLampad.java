@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class CavernLampad extends CardImpl<CavernLampad> {
+public class CavernLampad extends CardImpl {
 
     public CavernLampad(UUID ownerId) {
         super(ownerId, 81, "Cavern Lampad", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");

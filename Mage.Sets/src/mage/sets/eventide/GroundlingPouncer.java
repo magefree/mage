@@ -59,7 +59,7 @@ import mage.watchers.Watcher;
  * @author jeffwadsworth
  *
  */
-public class GroundlingPouncer extends CardImpl<GroundlingPouncer> {
+public class GroundlingPouncer extends CardImpl {
     
     private String rule = "{this} gets +1/+3 and gains flying until end of turn. Activate this ability only once each turn and only if an opponent controls a creature with flying.";
 

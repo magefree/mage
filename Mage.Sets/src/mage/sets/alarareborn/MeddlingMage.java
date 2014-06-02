@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class MeddlingMage extends CardImpl<MeddlingMage> {
+public class MeddlingMage extends CardImpl {
 
     public MeddlingMage(UUID ownerId) {
         super(ownerId, 8, "Meddling Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}");

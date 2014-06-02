@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class AngelsTomb extends CardImpl<AngelsTomb> {
+public class AngelsTomb extends CardImpl {
 
     public AngelsTomb(UUID ownerId) {
         super(ownerId, 211, "Angel's Tomb", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

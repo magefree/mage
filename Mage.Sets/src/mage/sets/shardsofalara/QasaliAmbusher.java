@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class QasaliAmbusher extends CardImpl<QasaliAmbusher> {
+public class QasaliAmbusher extends CardImpl {
 
     public QasaliAmbusher(UUID ownerId) {
         super(ownerId, 184, "Qasali Ambusher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");

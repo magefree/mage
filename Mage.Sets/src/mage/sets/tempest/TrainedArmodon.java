@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TrainedArmodon extends CardImpl<TrainedArmodon> {
+public class TrainedArmodon extends CardImpl {
 
     public TrainedArmodon(UUID ownerId) {
         super(ownerId, 154, "Trained Armodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

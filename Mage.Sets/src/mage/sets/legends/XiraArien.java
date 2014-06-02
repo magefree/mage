@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class XiraArien extends CardImpl<XiraArien> {
+public class XiraArien extends CardImpl {
 
     public XiraArien(UUID ownerId) {
         super(ownerId, 310, "Xira Arien", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");

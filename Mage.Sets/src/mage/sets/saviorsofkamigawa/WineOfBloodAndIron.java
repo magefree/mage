@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class WineOfBloodAndIron extends CardImpl<WineOfBloodAndIron> {
+public class WineOfBloodAndIron extends CardImpl {
 
     public WineOfBloodAndIron(UUID ownerId) {
         super(ownerId, 161, "Wine of Blood and Iron", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

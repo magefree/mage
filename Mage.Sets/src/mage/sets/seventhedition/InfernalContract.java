@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class InfernalContract extends CardImpl<InfernalContract> {
+public class InfernalContract extends CardImpl {
 
     public InfernalContract(UUID ownerId) {
         super(ownerId, 143, "Infernal Contract", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");

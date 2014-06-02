@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class EssenceFeed extends CardImpl<EssenceFeed> {
+public class EssenceFeed extends CardImpl {
 
     public EssenceFeed (UUID ownerId) {
         super(ownerId, 110, "Essence Feed", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");

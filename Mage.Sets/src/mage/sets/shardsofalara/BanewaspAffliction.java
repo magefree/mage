@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class BanewaspAffliction extends CardImpl<BanewaspAffliction> {
+public class BanewaspAffliction extends CardImpl {
 
     public BanewaspAffliction(UUID ownerId) {
         super(ownerId, 65, "Banewasp Affliction", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

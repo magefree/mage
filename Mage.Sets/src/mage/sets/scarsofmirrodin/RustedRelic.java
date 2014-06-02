@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class RustedRelic extends CardImpl<RustedRelic> {
+public class RustedRelic extends CardImpl {
 
     public RustedRelic (UUID ownerId) {
         super(ownerId, 199, "Rusted Relic", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

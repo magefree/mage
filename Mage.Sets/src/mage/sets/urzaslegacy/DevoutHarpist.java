@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class DevoutHarpist extends CardImpl<DevoutHarpist> {
+public class DevoutHarpist extends CardImpl {
     private static final FilterEnchantment filter = new FilterEnchantment("Auras attached to a creature");
     static 
     {        

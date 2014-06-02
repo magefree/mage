@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class SyphonSliver extends CardImpl<SyphonSliver> {
+public class SyphonSliver extends CardImpl {
 
     public SyphonSliver(UUID ownerId) {
         super(ownerId, 117, "Syphon Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");

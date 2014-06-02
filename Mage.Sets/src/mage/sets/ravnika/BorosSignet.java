@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BorosSignet extends CardImpl<BorosSignet> {
+public class BorosSignet extends CardImpl {
 
     public BorosSignet (UUID ownerId) {
         super(ownerId, 255, "Boros Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

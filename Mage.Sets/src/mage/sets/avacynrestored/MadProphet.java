@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Loki
  */
-public class MadProphet extends CardImpl<MadProphet> {
+public class MadProphet extends CardImpl {
 
     public MadProphet(UUID ownerId) {
         super(ownerId, 146, "Mad Prophet", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

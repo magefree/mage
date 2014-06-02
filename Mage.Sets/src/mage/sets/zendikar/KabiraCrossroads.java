@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KabiraCrossroads extends CardImpl<KabiraCrossroads> {
+public class KabiraCrossroads extends CardImpl {
 
     public KabiraCrossroads(UUID ownerId) {
         super(ownerId, 216, "Kabira Crossroads", Rarity.COMMON, new CardType[]{CardType.LAND}, null);

@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class PrisonTerm extends CardImpl<PrisonTerm> {
+public class PrisonTerm extends CardImpl {
     
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
     

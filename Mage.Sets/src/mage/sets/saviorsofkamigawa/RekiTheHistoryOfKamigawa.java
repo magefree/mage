@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author Loki
  */
-public class RekiTheHistoryOfKamigawa extends CardImpl<RekiTheHistoryOfKamigawa> {
+public class RekiTheHistoryOfKamigawa extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("legendary spell");
 

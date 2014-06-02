@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class GriffinProtector extends CardImpl<GriffinProtector> {
+public class GriffinProtector extends CardImpl {
 
     public GriffinProtector(UUID ownerId) {
         super(ownerId, 16, "Griffin Protector", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

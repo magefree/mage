@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class DeathcultRogue extends CardImpl<DeathcultRogue> {
+public class DeathcultRogue extends CardImpl {
 
     public DeathcultRogue(UUID ownerId) {
         super(ownerId, 218, "Deathcult Rogue", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/B}{U/B}");

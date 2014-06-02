@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AjanisSunstriker extends CardImpl<AjanisSunstriker> {
+public class AjanisSunstriker extends CardImpl {
 
     public AjanisSunstriker(UUID ownerId) {
         super(ownerId, 2, "Ajani's Sunstriker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

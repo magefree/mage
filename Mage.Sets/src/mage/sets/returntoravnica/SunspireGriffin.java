@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SunspireGriffin extends CardImpl<SunspireGriffin> {
+public class SunspireGriffin extends CardImpl {
 
     public SunspireGriffin(UUID ownerId) {
         super(ownerId, 25, "Sunspire Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

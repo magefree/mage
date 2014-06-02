@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class WildheartInvoker extends CardImpl<WildheartInvoker> {
+public class WildheartInvoker extends CardImpl {
 
     public WildheartInvoker(UUID ownerId) {
         super(ownerId, 213, "Wildheart Invoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

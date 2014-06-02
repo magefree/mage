@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class StrongholdRats extends CardImpl<StrongholdRats> {
+public class StrongholdRats extends CardImpl {
 
     public StrongholdRats(UUID ownerId) {
         super(ownerId, 79, "Stronghold Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

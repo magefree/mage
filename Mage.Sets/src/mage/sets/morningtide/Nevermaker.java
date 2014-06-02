@@ -44,7 +44,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class Nevermaker extends CardImpl<Nevermaker> {
+public class Nevermaker extends CardImpl {
 
     public Nevermaker(UUID ownerId) {
         super(ownerId, 44, "Nevermaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

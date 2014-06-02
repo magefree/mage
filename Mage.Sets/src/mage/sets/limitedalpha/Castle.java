@@ -42,7 +42,7 @@ import mage.filter.common.FilterUntappedCreature;
  * @author KholdFuzion
 
  */
-public class Castle extends CardImpl<Castle> {
+public class Castle extends CardImpl {
 
     public Castle(UUID ownerId) {
         super(ownerId, 193, "Castle", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 /**
  * @author LevelX2
  */
-public class IzzetGuildgate extends CardImpl<IzzetGuildgate> {
+public class IzzetGuildgate extends CardImpl {
 
     public IzzetGuildgate(UUID ownerId) {
         super(ownerId, 242, "Izzet Guildgate", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

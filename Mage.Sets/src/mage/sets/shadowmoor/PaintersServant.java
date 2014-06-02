@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PaintersServant extends CardImpl<PaintersServant> {
+public class PaintersServant extends CardImpl {
 
     public PaintersServant(UUID ownerId) {
         super(ownerId, 257, "Painter's Servant", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

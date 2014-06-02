@@ -68,7 +68,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LevelX2
  */
-public class PolukranosWorldEater extends CardImpl<PolukranosWorldEater> {
+public class PolukranosWorldEater extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

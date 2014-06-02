@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HedronScrabbler extends CardImpl<HedronScrabbler> {
+public class HedronScrabbler extends CardImpl {
 
     public HedronScrabbler(UUID ownerId) {
         super(ownerId, 204, "Hedron Scrabbler", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

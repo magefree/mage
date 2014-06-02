@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ToxicDeluge extends CardImpl<ToxicDeluge> {
+public class ToxicDeluge extends CardImpl {
 
     public ToxicDeluge(UUID ownerId) {
         super(ownerId, 96, "Toxic Deluge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");

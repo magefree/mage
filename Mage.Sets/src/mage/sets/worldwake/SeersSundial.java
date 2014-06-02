@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class SeersSundial extends CardImpl<SeersSundial> {
+public class SeersSundial extends CardImpl {
 
     public SeersSundial(UUID ownerId) {
         super(ownerId, 130, "Seer's Sundial", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

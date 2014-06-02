@@ -46,7 +46,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class CopperlineGorge extends CardImpl<CopperlineGorge> {
+public class CopperlineGorge extends CardImpl {
 
     private static FilterLandPermanent filter = new FilterLandPermanent();
 

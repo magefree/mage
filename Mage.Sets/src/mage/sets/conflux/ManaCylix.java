@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North, Loki
  */
-public class ManaCylix extends CardImpl<ManaCylix> {
+public class ManaCylix extends CardImpl {
 
     public ManaCylix(UUID ownerId) {
         super(ownerId, 138, "Mana Cylix", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

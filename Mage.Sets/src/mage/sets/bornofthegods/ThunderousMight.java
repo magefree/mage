@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ThunderousMight extends CardImpl<ThunderousMight> {
+public class ThunderousMight extends CardImpl {
 
     public ThunderousMight(UUID ownerId) {
         super(ownerId, 114, "Thunderous Might", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

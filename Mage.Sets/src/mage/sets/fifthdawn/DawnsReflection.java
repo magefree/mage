@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class DawnsReflection extends CardImpl<DawnsReflection> {
+public class DawnsReflection extends CardImpl {
 
     public DawnsReflection(UUID ownerId) {
         super(ownerId, 85, "Dawn's Reflection", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

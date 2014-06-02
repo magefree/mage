@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author North
  */
-public class BattleHymn extends CardImpl<BattleHymn> {
+public class BattleHymn extends CardImpl {
 
     public BattleHymn(UUID ownerId) {
         super(ownerId, 128, "Battle Hymn", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

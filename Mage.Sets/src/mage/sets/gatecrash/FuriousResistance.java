@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class FuriousResistance extends CardImpl<FuriousResistance> {
+public class FuriousResistance extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
 

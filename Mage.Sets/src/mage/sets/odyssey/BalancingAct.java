@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman (Restore Balance), cbt33
  */
-public class BalancingAct extends CardImpl<BalancingAct> {
+public class BalancingAct extends CardImpl {
 
     public BalancingAct(UUID ownerId) {
         super(ownerId, 10, "Balancing Act", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");

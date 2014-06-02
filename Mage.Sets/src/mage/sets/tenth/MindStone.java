@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class MindStone extends CardImpl<MindStone> {
+public class MindStone extends CardImpl {
 
     public MindStone(UUID ownerId) {
         super(ownerId, 335, "Mind Stone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

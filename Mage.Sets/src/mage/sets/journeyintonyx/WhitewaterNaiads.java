@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WhitewaterNaiads extends CardImpl<WhitewaterNaiads> {
+public class WhitewaterNaiads extends CardImpl {
 
     public WhitewaterNaiads(UUID ownerId) {
         super(ownerId, 58, "Whitewater Naiads", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{U}{U}");

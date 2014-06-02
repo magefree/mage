@@ -47,7 +47,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LevelX2
  */
-public class WoodbornBehemoth extends CardImpl<WoodbornBehemoth> {
+public class WoodbornBehemoth extends CardImpl {
 
     public WoodbornBehemoth(UUID ownerId) {
         super(ownerId, 203, "Woodborn Behemoth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

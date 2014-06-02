@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class NobleVestige extends CardImpl<NobleVestige> {
+public class NobleVestige extends CardImpl {
 
     public NobleVestige(UUID ownerId) {
         super(ownerId, 29, "Noble Vestige", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

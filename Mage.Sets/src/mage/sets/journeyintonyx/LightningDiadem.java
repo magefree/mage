@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LightningDiadem extends CardImpl<LightningDiadem> {
+public class LightningDiadem extends CardImpl {
 
     public LightningDiadem(UUID ownerId) {
         super(ownerId, 102, "Lightning Diadem", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");

@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class BorderlandMinotaur extends CardImpl<BorderlandMinotaur> {
+public class BorderlandMinotaur extends CardImpl {
 
     public BorderlandMinotaur(UUID ownerId) {
         super(ownerId, 114, "Borderland Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

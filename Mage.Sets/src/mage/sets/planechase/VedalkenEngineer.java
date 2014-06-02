@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class VedalkenEngineer extends CardImpl<VedalkenEngineer> {
+public class VedalkenEngineer extends CardImpl {
 
     public VedalkenEngineer(UUID ownerId) {
         super(ownerId, 15, "Vedalken Engineer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

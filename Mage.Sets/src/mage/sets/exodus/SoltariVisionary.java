@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class SoltariVisionary extends CardImpl<SoltariVisionary> {
+public class SoltariVisionary extends CardImpl {
 
     public SoltariVisionary(UUID ownerId) {
         super(ownerId, 20, "Soltari Visionary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

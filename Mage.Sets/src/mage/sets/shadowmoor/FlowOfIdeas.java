@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class FlowOfIdeas extends CardImpl<FlowOfIdeas> {
+public class FlowOfIdeas extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Island you control");
 

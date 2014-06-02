@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class LeechingBite extends CardImpl<LeechingBite> {
+public class LeechingBite extends CardImpl {
 
     public LeechingBite(UUID ownerId) {
         super(ownerId, 113, "Leeching Bite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

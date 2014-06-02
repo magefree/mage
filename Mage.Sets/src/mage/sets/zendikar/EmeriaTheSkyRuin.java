@@ -49,7 +49,7 @@ import java.util.UUID;
  * @author North
  * @author LevelX - changed to checkInterveningIfClause 
  */
-public class EmeriaTheSkyRuin extends CardImpl<EmeriaTheSkyRuin> {
+public class EmeriaTheSkyRuin extends CardImpl {
 
     public EmeriaTheSkyRuin(UUID ownerId) {
         super(ownerId, 213, "Emeria, the Sky Ruin", Rarity.RARE, new CardType[]{CardType.LAND}, "");

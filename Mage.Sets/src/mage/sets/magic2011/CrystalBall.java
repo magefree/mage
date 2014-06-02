@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CrystalBall extends CardImpl<CrystalBall> {
+public class CrystalBall extends CardImpl {
 
     public CrystalBall(UUID ownerId) {
         super(ownerId, 203, "Crystal Ball", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

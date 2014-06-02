@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class JagwaspSwarm extends CardImpl<JagwaspSwarm> {
+public class JagwaspSwarm extends CardImpl {
 
     public JagwaspSwarm (UUID ownerId) {
         super(ownerId, 58, "Jagwasp Swarm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

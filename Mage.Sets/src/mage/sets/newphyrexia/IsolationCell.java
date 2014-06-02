@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class IsolationCell extends CardImpl<IsolationCell> {
+public class IsolationCell extends CardImpl {
 
     public IsolationCell(UUID ownerId) {
         super(ownerId, 141, "Isolation Cell", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

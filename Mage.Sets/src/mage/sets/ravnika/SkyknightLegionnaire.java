@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SkyknightLegionnaire extends CardImpl<SkyknightLegionnaire> {
+public class SkyknightLegionnaire extends CardImpl {
 
     public SkyknightLegionnaire (UUID ownerId) {
         super(ownerId, 232, "Skyknight Legionnaire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");

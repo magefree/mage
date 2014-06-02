@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Gild extends CardImpl<Gild> {
+public class Gild extends CardImpl {
 
     public Gild(UUID ownerId) {
         super(ownerId, 73, "Gild", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");

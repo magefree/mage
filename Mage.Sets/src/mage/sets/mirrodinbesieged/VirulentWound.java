@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class VirulentWound extends CardImpl<VirulentWound> {
+public class VirulentWound extends CardImpl {
 
     public VirulentWound(UUID ownerId) {
         super(ownerId, 57, "Virulent Wound", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

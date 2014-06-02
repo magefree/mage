@@ -40,7 +40,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class MausoleumGuard extends CardImpl<MausoleumGuard> {
+public class MausoleumGuard extends CardImpl {
 
     public MausoleumGuard(UUID ownerId) {
         super(ownerId, 20, "Mausoleum Guard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

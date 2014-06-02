@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RidgeRannet extends CardImpl<RidgeRannet> {
+public class RidgeRannet extends CardImpl {
 
     public RidgeRannet(UUID ownerId) {
         super(ownerId, 111, "Ridge Rannet", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

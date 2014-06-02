@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class Offalsnout extends CardImpl<Offalsnout> {
+public class Offalsnout extends CardImpl {
 
     public Offalsnout(UUID ownerId) {
         super(ownerId, 71, "Offalsnout", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

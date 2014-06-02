@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author KholdFuzion
  */
-public class NecroticSliver extends CardImpl<NecroticSliver> {
+public class NecroticSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
 

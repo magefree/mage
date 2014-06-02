@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class Greed extends CardImpl<Greed> {
+public class Greed extends CardImpl {
 
     public Greed(UUID ownerId) {
         super(ownerId, 79, "Greed", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GoliathSpider extends CardImpl<GoliathSpider> {
+public class GoliathSpider extends CardImpl {
 
     public GoliathSpider(UUID ownerId) {
         super(ownerId, 168, "Goliath Spider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VulshokBerserker extends CardImpl<VulshokBerserker> {
+public class VulshokBerserker extends CardImpl {
 
     public VulshokBerserker(UUID ownerId) {
         super(ownerId, 159, "Vulshok Berserker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

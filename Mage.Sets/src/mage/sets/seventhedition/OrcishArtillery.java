@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class OrcishArtillery extends CardImpl<OrcishArtillery> {
+public class OrcishArtillery extends CardImpl {
 
     public OrcishArtillery(UUID ownerId) {
         super(ownerId, 205, "Orcish Artillery", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

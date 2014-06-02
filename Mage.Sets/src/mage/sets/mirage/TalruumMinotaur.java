@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TalruumMinotaur extends CardImpl<TalruumMinotaur> {
+public class TalruumMinotaur extends CardImpl {
 
     public TalruumMinotaur(UUID ownerId) {
         super(ownerId, 196, "Talruum Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

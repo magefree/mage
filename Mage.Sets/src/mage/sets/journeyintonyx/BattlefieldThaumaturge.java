@@ -58,7 +58,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class BattlefieldThaumaturge extends CardImpl<BattlefieldThaumaturge> {
+public class BattlefieldThaumaturge extends CardImpl {
 
     public BattlefieldThaumaturge(UUID ownerId) {
         super(ownerId, 31, "Battlefield Thaumaturge", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");

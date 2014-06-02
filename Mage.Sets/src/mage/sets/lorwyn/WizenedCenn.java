@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class WizenedCenn extends CardImpl<WizenedCenn> {
+public class WizenedCenn extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kithkin creatures");
 

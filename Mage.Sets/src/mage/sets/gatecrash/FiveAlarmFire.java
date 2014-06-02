@@ -50,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class FiveAlarmFire extends CardImpl<FiveAlarmFire> {
+public class FiveAlarmFire extends CardImpl {
 
     public FiveAlarmFire(UUID ownerId) {
         super(ownerId, 91, "Five-Alarm Fire", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");

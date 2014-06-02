@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class Abduction extends CardImpl<Abduction> {
+public class Abduction extends CardImpl {
 
     public Abduction(UUID ownerId) {
         super(ownerId, 30, "Abduction", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

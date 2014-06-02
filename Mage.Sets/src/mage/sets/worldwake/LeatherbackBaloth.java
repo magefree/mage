@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LeatherbackBaloth extends CardImpl<LeatherbackBaloth> {
+public class LeatherbackBaloth extends CardImpl {
 
     public LeatherbackBaloth (UUID ownerId) {
         super(ownerId, 107, "Leatherback Baloth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{G}{G}");

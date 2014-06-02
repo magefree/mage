@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class FracturingGust extends CardImpl<FracturingGust> {
+public class FracturingGust extends CardImpl {
 
     public FracturingGust(UUID ownerId) {
         super(ownerId, 227, "Fracturing Gust", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G/W}{G/W}{G/W}");

@@ -52,7 +52,7 @@ import mage.constants.WatcherScope;
 /**
  * @author Loki
  */
-public class TunnelIgnus extends CardImpl<TunnelIgnus> {
+public class TunnelIgnus extends CardImpl {
 
     public TunnelIgnus(UUID ownerId) {
         super(ownerId, 105, "Tunnel Ignus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");

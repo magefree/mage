@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class BatonOfCourage extends CardImpl<BatonOfCourage> {
+public class BatonOfCourage extends CardImpl {
 
     public BatonOfCourage(UUID ownerId) {
         super(ownerId, 105, "Baton of Courage", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

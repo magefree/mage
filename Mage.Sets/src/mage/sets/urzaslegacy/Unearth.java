@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class Unearth extends CardImpl<Unearth> {
+public class Unearth extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("creature card with converted mana cost 3 or less from your graveyard");
 

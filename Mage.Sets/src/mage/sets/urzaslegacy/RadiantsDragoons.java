@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class RadiantsDragoons extends CardImpl<RadiantsDragoons> {
+public class RadiantsDragoons extends CardImpl {
 
     public RadiantsDragoons(UUID ownerId) {
         super(ownerId, 21, "Radiant's Dragoons", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

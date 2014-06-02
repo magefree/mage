@@ -46,7 +46,7 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  *
  * @author LevelX2
  */
-public class NeedlebiteTrap extends CardImpl<NeedlebiteTrap> {
+public class NeedlebiteTrap extends CardImpl {
 
     public NeedlebiteTrap(UUID ownerId) {
         super(ownerId, 105, "Needlebite Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{B}{B}");

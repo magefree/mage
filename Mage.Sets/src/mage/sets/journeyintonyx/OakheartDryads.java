@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OakheartDryads extends CardImpl<OakheartDryads> {
+public class OakheartDryads extends CardImpl {
 
     public OakheartDryads(UUID ownerId) {
         super(ownerId, 133, "Oakheart Dryads", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{G}");

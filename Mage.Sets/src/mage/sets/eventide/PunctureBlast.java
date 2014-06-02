@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 /**
  * @author Loki
  */
-public class PunctureBlast extends CardImpl<PunctureBlast> {
+public class PunctureBlast extends CardImpl {
 
     public PunctureBlast(UUID ownerId) {
         super(ownerId, 60, "Puncture Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

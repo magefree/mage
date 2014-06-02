@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author North
  */
-public class Shadowfeed extends CardImpl<Shadowfeed> {
+public class Shadowfeed extends CardImpl {
 
     public Shadowfeed(UUID ownerId) {
         super(ownerId, 86, "Shadowfeed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

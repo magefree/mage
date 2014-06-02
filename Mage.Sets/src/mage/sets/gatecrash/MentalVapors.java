@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class MentalVapors extends CardImpl<MentalVapors> {
+public class MentalVapors extends CardImpl {
 
     public MentalVapors (UUID ownerId) {
         super(ownerId, 72, "Mental Vapors", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");

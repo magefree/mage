@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DefiantElf extends CardImpl<DefiantElf> {
+public class DefiantElf extends CardImpl {
 
     public DefiantElf(UUID ownerId) {
         super(ownerId, 123, "Defiant Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

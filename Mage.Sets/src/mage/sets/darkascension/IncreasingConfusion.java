@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward
  */
-public class IncreasingConfusion extends CardImpl<IncreasingConfusion> {
+public class IncreasingConfusion extends CardImpl {
 
     public IncreasingConfusion(UUID ownerId) {
         super(ownerId, 41, "Increasing Confusion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}");

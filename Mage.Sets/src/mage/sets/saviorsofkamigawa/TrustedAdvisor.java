@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class TrustedAdvisor extends CardImpl<TrustedAdvisor> {
+public class TrustedAdvisor extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue creature you control");
 

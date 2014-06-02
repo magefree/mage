@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class CoercedConfession extends CardImpl<CoercedConfession> {
+public class CoercedConfession extends CardImpl {
 
     public CoercedConfession(UUID ownerId) {
         super(ownerId, 217, "Coerced Confession", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U/B}");

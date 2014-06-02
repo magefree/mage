@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class KrarkClanIronworks extends CardImpl<KrarkClanIronworks> {
+public class KrarkClanIronworks extends CardImpl {
 
     public KrarkClanIronworks(UUID ownerId) {
         super(ownerId, 134, "Krark-Clan Ironworks", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -57,7 +57,7 @@ import java.util.UUID;
 /**
  * @author LevelX
  */
-public class OrochiEggwatcher extends CardImpl<OrochiEggwatcher> {
+public class OrochiEggwatcher extends CardImpl {
 
     public OrochiEggwatcher(UUID ownerId) {
         super(ownerId, 233, "Orochi Eggwatcher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

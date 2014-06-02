@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class GlacialChasm extends CardImpl<GlacialChasm> {
+public class GlacialChasm extends CardImpl {
 
     public GlacialChasm(UUID ownerId) {
         super(ownerId, 331, "Glacial Chasm", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

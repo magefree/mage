@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author LevelX2
  */
-public class CodexShredder extends CardImpl<CodexShredder> {
+public class CodexShredder extends CardImpl {
 
     public CodexShredder(UUID ownerId) {
         super(ownerId, 228, "Codex Shredder", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

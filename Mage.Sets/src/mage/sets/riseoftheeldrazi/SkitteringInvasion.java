@@ -39,7 +39,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author Loki
  */
-public class SkitteringInvasion extends CardImpl<SkitteringInvasion> {
+public class SkitteringInvasion extends CardImpl {
 
     public SkitteringInvasion (UUID ownerId) {
         super(ownerId, 10, "Skittering Invasion", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{7}");

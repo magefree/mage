@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class DemonicCollusion extends CardImpl<DemonicCollusion> {
+public class DemonicCollusion extends CardImpl {
 
     public DemonicCollusion(UUID ownerId) {
         super(ownerId, 103, "Demonic Collusion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

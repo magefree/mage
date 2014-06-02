@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class UtopiaTree extends CardImpl<UtopiaTree> {
+public class UtopiaTree extends CardImpl {
 
     public UtopiaTree(UUID ownerId) {
         super(ownerId, 219, "Utopia Tree", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BituminousBlast extends CardImpl<BituminousBlast> {
+public class BituminousBlast extends CardImpl {
 
     public BituminousBlast(UUID ownerId) {
         super(ownerId, 34, "Bituminous Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{R}");

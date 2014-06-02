@@ -47,7 +47,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author LevelX2
  */
-public class WrenchMind extends CardImpl<WrenchMind> {
+public class WrenchMind extends CardImpl {
 
     public WrenchMind(UUID ownerId) {
         super(ownerId, 84, "Wrench Mind", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");

@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class GoldenBear extends CardImpl<GoldenBear> {
+public class GoldenBear extends CardImpl {
 
     public GoldenBear(UUID ownerId) {
         super(ownerId, 67, "Golden Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

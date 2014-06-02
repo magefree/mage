@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SickeningShoal extends CardImpl<SickeningShoal> {
+public class SickeningShoal extends CardImpl {
 
     public SickeningShoal(UUID ownerId) {
         super(ownerId, 82, "Sickening Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{B}{B}");

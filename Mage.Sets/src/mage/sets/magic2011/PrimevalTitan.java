@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PrimevalTitan extends CardImpl<PrimevalTitan> {
+public class PrimevalTitan extends CardImpl {
 
     public PrimevalTitan(UUID ownerId) {
         super(ownerId, 192, "Primeval Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

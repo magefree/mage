@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class MysticRetrieval extends CardImpl<MysticRetrieval> {
+public class MysticRetrieval extends CardImpl {
     private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 
     static {

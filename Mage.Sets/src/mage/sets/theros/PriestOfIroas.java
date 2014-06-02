@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class PriestOfIroas extends CardImpl<PriestOfIroas> {
+public class PriestOfIroas extends CardImpl {
 
     public PriestOfIroas(UUID ownerId) {
         super(ownerId, 134, "Priest of Iroas", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

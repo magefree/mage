@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ShivanDragon extends CardImpl<ShivanDragon> {
+public class ShivanDragon extends CardImpl {
 
     public ShivanDragon(UUID ownerId) {
         super(ownerId, 230, "Shivan Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

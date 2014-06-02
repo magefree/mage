@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SyggRiverGuide extends CardImpl<SyggRiverGuide> {
+public class SyggRiverGuide extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Merfolk you control");
 

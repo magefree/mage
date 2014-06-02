@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
 /**
  * @author nantuko
  */
-public class Distress extends CardImpl<Distress> {
+public class Distress extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("nonland card");
 

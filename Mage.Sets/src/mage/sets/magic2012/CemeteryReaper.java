@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInGraveyard;
 /**
  * @author Loki
  */
-public class CemeteryReaper extends CardImpl<CemeteryReaper> {
+public class CemeteryReaper extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
     static {

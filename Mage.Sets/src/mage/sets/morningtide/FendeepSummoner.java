@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
 /**
  * @author anonymous
  */
-public class FendeepSummoner extends CardImpl<FendeepSummoner> {
+public class FendeepSummoner extends CardImpl {
 
     static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
 

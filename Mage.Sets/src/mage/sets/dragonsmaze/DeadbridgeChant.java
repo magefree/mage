@@ -50,7 +50,7 @@ import mage.players.Player;
  */
 
 
-public class DeadbridgeChant extends CardImpl<DeadbridgeChant> {
+public class DeadbridgeChant extends CardImpl {
 
     public DeadbridgeChant(UUID ownerId) {
         super(ownerId, 63, "Deadbridge Chant", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{G}");

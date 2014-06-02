@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class CurseOfMisfortunes extends CardImpl<CurseOfMisfortunes> {
+public class CurseOfMisfortunes extends CardImpl {
 
     public CurseOfMisfortunes(UUID ownerId) {
         super(ownerId, 56, "Curse of Misfortunes", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");

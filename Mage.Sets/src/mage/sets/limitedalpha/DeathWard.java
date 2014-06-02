@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author KholdFuzion
 
  */
-public class DeathWard extends CardImpl<DeathWard> {
+public class DeathWard extends CardImpl {
 
     public DeathWard(UUID ownerId) {
         super(ownerId, 201, "Death Ward", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

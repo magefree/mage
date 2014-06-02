@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class ArgentumArmor extends CardImpl<ArgentumArmor> {
+public class ArgentumArmor extends CardImpl {
 
     public ArgentumArmor (UUID ownerId) {
         super(ownerId, 137, "Argentum Armor", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

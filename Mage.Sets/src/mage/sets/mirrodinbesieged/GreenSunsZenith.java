@@ -52,7 +52,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class GreenSunsZenith extends CardImpl<GreenSunsZenith> {
+public class GreenSunsZenith extends CardImpl {
 
     public GreenSunsZenith(UUID ownerId) {
         super(ownerId, 81, "Green Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");

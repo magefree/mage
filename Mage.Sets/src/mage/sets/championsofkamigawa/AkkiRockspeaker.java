@@ -41,7 +41,7 @@ import mage.constants.ColoredManaSymbol;
 /**
  * @author Loki, North
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class AkkiRockspeaker extends CardImpl {
 
     public AkkiRockspeaker(UUID ownerId) {
         super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

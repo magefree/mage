@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DeathRattle extends CardImpl<DeathRattle> {
+public class DeathRattle extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

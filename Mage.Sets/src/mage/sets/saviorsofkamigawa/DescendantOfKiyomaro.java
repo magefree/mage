@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class DescendantOfKiyomaro extends CardImpl<DescendantOfKiyomaro> {
+public class DescendantOfKiyomaro extends CardImpl {
 
     public DescendantOfKiyomaro(UUID ownerId) {
         super(ownerId, 7, "Descendant of Kiyomaro", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

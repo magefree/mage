@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author cbt33, LevelX2 (Walk the Aeons), KholdFuzion (Dandan)
  */
-public class Dreamwinder extends CardImpl<Dreamwinder> {
+public class Dreamwinder extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("an Island");
 

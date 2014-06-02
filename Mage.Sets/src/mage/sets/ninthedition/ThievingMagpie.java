@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class ThievingMagpie extends CardImpl<ThievingMagpie> {
+public class ThievingMagpie extends CardImpl {
 
     public ThievingMagpie(UUID ownerId) {
         super(ownerId, 103, "Thieving Magpie", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class CellarDoor extends CardImpl<CellarDoor> {
+public class CellarDoor extends CardImpl {
 
     public CellarDoor(UUID ownerId) {
         super(ownerId, 218, "Cellar Door", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

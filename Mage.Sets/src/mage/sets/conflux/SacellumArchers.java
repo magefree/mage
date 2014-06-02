@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Loki
  */
-public class SacellumArchers extends CardImpl<SacellumArchers> {
+public class SacellumArchers extends CardImpl {
 
     public SacellumArchers(UUID ownerId) {
         super(ownerId, 89, "Sacellum Archers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class Ichorid extends CardImpl<Ichorid> {
+public class Ichorid extends CardImpl {
 
     public Ichorid(UUID ownerId) {
         super(ownerId, 65, "Ichorid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");

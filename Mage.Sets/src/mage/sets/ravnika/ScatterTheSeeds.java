@@ -39,7 +39,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author jonubuu
  */
-public class ScatterTheSeeds extends CardImpl<ScatterTheSeeds> {
+public class ScatterTheSeeds extends CardImpl {
 
     public ScatterTheSeeds(UUID ownerId) {
         super(ownerId, 181, "Scatter the Seeds", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");

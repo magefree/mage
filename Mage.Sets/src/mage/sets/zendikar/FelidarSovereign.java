@@ -47,7 +47,7 @@ import mage.game.Game;
  *
  * @author Rafbill
  */
-public class FelidarSovereign extends CardImpl<FelidarSovereign> {
+public class FelidarSovereign extends CardImpl {
 
     public FelidarSovereign(UUID ownerId) {
         super(ownerId, 12, "Felidar Sovereign", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class ApexHawks extends CardImpl<ApexHawks> {
+public class ApexHawks extends CardImpl {
 
     public ApexHawks(UUID ownerId) {
         super(ownerId, 2, "Apex Hawks", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

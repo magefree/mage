@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  * @author jeffwadsworth
  *
  */
-public class OrcishSettlers extends CardImpl<OrcishSettlers> {
+public class OrcishSettlers extends CardImpl {
 
     public OrcishSettlers(UUID ownerId) {
         super(ownerId, 112, "Orcish Settlers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

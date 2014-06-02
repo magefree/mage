@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class MelokuTheCloudedMirror extends CardImpl<MelokuTheCloudedMirror> {
+public class MelokuTheCloudedMirror extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 

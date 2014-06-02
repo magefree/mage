@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
- public class WhereAncientsTread extends CardImpl<WhereAncientsTread> {
+ public class WhereAncientsTread extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
     static {

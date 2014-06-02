@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class GorgerWurm extends CardImpl<GorgerWurm> {
+public class GorgerWurm extends CardImpl {
 
     public GorgerWurm(UUID ownerId) {
         super(ownerId, 56, "Gorger Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");

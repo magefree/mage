@@ -54,7 +54,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class RacecourseFury extends CardImpl<RacecourseFury> {
+public class RacecourseFury extends CardImpl {
 
     static final String rule = "Enchanted land has \"{T}: Target creature gains haste until end of turn.\"";
 

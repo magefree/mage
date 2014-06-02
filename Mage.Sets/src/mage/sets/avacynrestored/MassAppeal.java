@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class MassAppeal extends CardImpl<MassAppeal> {
+public class MassAppeal extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human you control");
 

@@ -51,7 +51,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class NewPrahvGuildmage extends CardImpl<NewPrahvGuildmage> {
+public class NewPrahvGuildmage extends CardImpl {
 
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent an opponent control");
  

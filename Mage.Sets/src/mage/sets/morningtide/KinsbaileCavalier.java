@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class KinsbaileCavalier extends CardImpl<KinsbaileCavalier> {
+public class KinsbaileCavalier extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Knight");
 

@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class ExperimentOne extends CardImpl<ExperimentOne> {
+public class ExperimentOne extends CardImpl {
 
     public ExperimentOne(UUID ownerId) {
         super(ownerId, 119, "Experiment One", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");

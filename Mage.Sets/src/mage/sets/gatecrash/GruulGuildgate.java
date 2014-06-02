@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class GruulGuildgate extends CardImpl<GruulGuildgate> {
+public class GruulGuildgate extends CardImpl {
 
     public GruulGuildgate(UUID ownerId) {
         super(ownerId, 243, "Gruul Guildgate", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

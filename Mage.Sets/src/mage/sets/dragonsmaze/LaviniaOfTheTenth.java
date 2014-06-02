@@ -54,7 +54,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 
 
-public class LaviniaOfTheTenth  extends CardImpl<LaviniaOfTheTenth> {
+public class LaviniaOfTheTenth  extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("red");
     private static final FilterPermanent filterDetain = new FilterPermanent("each nonland permanent your opponents control with converted mana cost 4 or less");

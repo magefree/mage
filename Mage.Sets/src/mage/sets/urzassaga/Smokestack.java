@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class Smokestack extends CardImpl<Smokestack> {
+public class Smokestack extends CardImpl {
 
     public Smokestack(UUID ownerId) {
         super(ownerId, 309, "Smokestack", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

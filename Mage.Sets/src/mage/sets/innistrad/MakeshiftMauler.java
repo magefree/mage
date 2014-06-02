@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class MakeshiftMauler extends CardImpl<MakeshiftMauler> {
+public class MakeshiftMauler extends CardImpl {
 
     public MakeshiftMauler(UUID ownerId) {
         super(ownerId, 65, "Makeshift Mauler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

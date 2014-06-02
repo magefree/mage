@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class PollutedDead extends CardImpl<PollutedDead> {
+public class PollutedDead extends CardImpl {
 
     public PollutedDead(UUID ownerId) {
         super(ownerId, 116, "Polluted Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

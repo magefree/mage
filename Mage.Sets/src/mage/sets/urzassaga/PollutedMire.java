@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class PollutedMire extends CardImpl<PollutedMire> {
+public class PollutedMire extends CardImpl {
 
     public PollutedMire(UUID ownerId) {
         super(ownerId, 323, "Polluted Mire", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

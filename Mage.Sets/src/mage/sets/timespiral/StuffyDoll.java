@@ -53,7 +53,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class StuffyDoll extends CardImpl<StuffyDoll> {
+public class StuffyDoll extends CardImpl {
 
     public StuffyDoll(UUID ownerId) {
         super(ownerId, 264, "Stuffy Doll", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

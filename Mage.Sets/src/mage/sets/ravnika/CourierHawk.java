@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CourierHawk extends CardImpl<CourierHawk> {
+public class CourierHawk extends CardImpl {
 
     public CourierHawk(UUID ownerId) {
         super(ownerId, 12, "Courier Hawk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

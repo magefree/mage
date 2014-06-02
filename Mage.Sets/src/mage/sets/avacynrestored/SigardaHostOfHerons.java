@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
 /**
  * @author noxx
  */
-public class SigardaHostOfHerons extends CardImpl<SigardaHostOfHerons> {
+public class SigardaHostOfHerons extends CardImpl {
 
     public SigardaHostOfHerons(UUID ownerId) {
         super(ownerId, 210, "Sigarda, Host of Herons", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{W}");

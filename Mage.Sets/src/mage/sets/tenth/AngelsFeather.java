@@ -44,7 +44,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AngelsFeather extends CardImpl<AngelsFeather> {
+public class AngelsFeather extends CardImpl {
 
     public AngelsFeather(UUID ownerId) {
         super(ownerId, 311, "Angel's Feather", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

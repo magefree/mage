@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author North
  */
-public class WarrenInstigator extends CardImpl<WarrenInstigator> {
+public class WarrenInstigator extends CardImpl {
 
     public WarrenInstigator(UUID ownerId) {
         super(ownerId, 154, "Warren Instigator", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{R}{R}");

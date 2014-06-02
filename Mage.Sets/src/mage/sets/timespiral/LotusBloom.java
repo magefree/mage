@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class LotusBloom extends CardImpl<LotusBloom> {
+public class LotusBloom extends CardImpl {
 
     public LotusBloom(UUID ownerId) {
         super(ownerId, 259, "Lotus Bloom", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "");

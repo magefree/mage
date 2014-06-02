@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LokiX
  */
-public class MightOfOaks extends CardImpl<MightOfOaks> {
+public class MightOfOaks extends CardImpl {
 
     public MightOfOaks(UUID ownerId){
         super(ownerId, 192, "Might of Oaks", Rarity.RARE, new CardType[]{CardType.INSTANT},"{3}{G}");

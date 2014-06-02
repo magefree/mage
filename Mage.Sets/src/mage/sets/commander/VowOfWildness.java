@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VowOfWildness extends CardImpl<VowOfWildness> {
+public class VowOfWildness extends CardImpl {
 
     public VowOfWildness(UUID ownerId) {
         super(ownerId, 178, "Vow of Wildness", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

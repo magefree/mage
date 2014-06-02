@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class ChampionOfStraySouls extends CardImpl<ChampionOfStraySouls> {
+public class ChampionOfStraySouls extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creatures");
 

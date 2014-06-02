@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ZhurTaaSwine extends CardImpl<ZhurTaaSwine> {
+public class ZhurTaaSwine extends CardImpl {
 
     public ZhurTaaSwine(UUID ownerId) {
         super(ownerId, 210, "Zhur-Taa Swine", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");

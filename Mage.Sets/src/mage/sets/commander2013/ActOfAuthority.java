@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ActOfAuthority extends CardImpl<ActOfAuthority> {
+public class ActOfAuthority extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     static {

@@ -55,7 +55,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author North
  */
-public class Skeletonize extends CardImpl<Skeletonize> {
+public class Skeletonize extends CardImpl {
 
     public Skeletonize(UUID ownerId) {
         super(ownerId, 114, "Skeletonize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");

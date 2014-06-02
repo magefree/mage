@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WarMammoth extends CardImpl<WarMammoth> {
+public class WarMammoth extends CardImpl {
 
     public WarMammoth(UUID ownerId) {
         super(ownerId, 202, "War Mammoth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

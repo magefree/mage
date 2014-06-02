@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class EarlyHarvest extends CardImpl<EarlyHarvest> {
+public class EarlyHarvest extends CardImpl {
 
     public EarlyHarvest(UUID ownerId) {
         super(ownerId, 235, "Early Harvest", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{G}");

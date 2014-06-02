@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class SlaughterPact extends CardImpl<SlaughterPact> {
+public class SlaughterPact extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class MagusOfTheMoon extends CardImpl<MagusOfTheMoon> {
+public class MagusOfTheMoon extends CardImpl {
 
     public MagusOfTheMoon(UUID ownerId) {
         super(ownerId, 101, "Magus of the Moon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");

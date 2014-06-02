@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class OrimsThunder extends CardImpl<OrimsThunder> {
+public class OrimsThunder extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

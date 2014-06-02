@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ArmadilloCloak extends CardImpl<ArmadilloCloak> {
+public class ArmadilloCloak extends CardImpl {
 
     public ArmadilloCloak(UUID ownerId) {
         super(ownerId, 229, "Armadillo Cloak", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{W}");

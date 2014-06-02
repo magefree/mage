@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class MemorysJourney extends CardImpl<MemorysJourney> {
+public class MemorysJourney extends CardImpl {
 
     public MemorysJourney(UUID ownerId) {
         super(ownerId, 66, "Memory's Journey", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

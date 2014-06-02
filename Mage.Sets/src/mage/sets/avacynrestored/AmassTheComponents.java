@@ -45,7 +45,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class AmassTheComponents extends CardImpl<AmassTheComponents> {
+public class AmassTheComponents extends CardImpl {
 
     public AmassTheComponents(UUID ownerId) {
         super(ownerId, 43, "Amass the Components", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");

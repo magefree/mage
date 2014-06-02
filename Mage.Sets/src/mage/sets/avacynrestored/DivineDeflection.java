@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class DivineDeflection extends CardImpl<DivineDeflection> {
+public class DivineDeflection extends CardImpl {
 
     public DivineDeflection(UUID ownerId) {
         super(ownerId, 18, "Divine Deflection", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}");

@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class KongmingSleepingDragon extends CardImpl<KongmingSleepingDragon> {
+public class KongmingSleepingDragon extends CardImpl {
 
     public KongmingSleepingDragon(UUID ownerId) {
         super(ownerId, 16, "Kongming, 'Sleeping Dragon'", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

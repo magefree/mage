@@ -50,7 +50,7 @@ import mage.target.TargetCard;
  * @author jeffwadsworth
  *
  */
-public class DesecratorHag extends CardImpl<DesecratorHag> {
+public class DesecratorHag extends CardImpl {
 
     public DesecratorHag(UUID ownerId) {
         super(ownerId, 193, "Desecrator Hag", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B/G}{B/G}");

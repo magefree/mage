@@ -39,7 +39,7 @@ import mage.game.permanent.token.MyrToken;
  *
  * @author Loki
  */
-public class MastersCall extends CardImpl<MastersCall> {
+public class MastersCall extends CardImpl {
 
     public MastersCall (UUID ownerId) {
         super(ownerId, 13, "Master's Call", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

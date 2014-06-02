@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class RooftopStorm extends CardImpl<RooftopStorm> {
+public class RooftopStorm extends CardImpl {
 
     public RooftopStorm(UUID ownerId) {
         super(ownerId, 71, "Rooftop Storm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");

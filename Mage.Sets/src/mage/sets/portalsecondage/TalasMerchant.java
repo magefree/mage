@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class TalasMerchant extends CardImpl<TalasMerchant> {
+public class TalasMerchant extends CardImpl {
 
     public TalasMerchant(UUID ownerId) {
         super(ownerId, 50, "Talas Merchant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

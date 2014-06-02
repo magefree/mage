@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Gainsay extends CardImpl<Gainsay> {
+public class Gainsay extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("blue spell");
     static {

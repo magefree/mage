@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class CelestialFlare extends CardImpl<CelestialFlare> {
+public class CelestialFlare extends CardImpl {
 
     private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature("attacking or blocking creature");
 

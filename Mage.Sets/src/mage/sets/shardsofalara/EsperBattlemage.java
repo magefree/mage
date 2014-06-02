@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class EsperBattlemage extends CardImpl<EsperBattlemage> {
+public class EsperBattlemage extends CardImpl {
 
     public EsperBattlemage(UUID ownerId) {
         super(ownerId, 40, "Esper Battlemage", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");

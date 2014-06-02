@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author nantuko
  */
-public class DjinnOfWishes extends CardImpl<DjinnOfWishes> {
+public class DjinnOfWishes extends CardImpl {
 
     private static final String ruleText = "Djinn of Wishes enters the battlefield with three wish counters on it";
 

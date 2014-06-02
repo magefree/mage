@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class CatBurglar extends CardImpl<CatBurglar> {
+public class CatBurglar extends CardImpl {
 
     public CatBurglar(UUID ownerId) {
         super(ownerId, 54, "Cat Burglar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

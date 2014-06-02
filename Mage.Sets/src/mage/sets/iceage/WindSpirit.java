@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class WindSpirit extends CardImpl<WindSpirit> {
+public class WindSpirit extends CardImpl {
 
     public WindSpirit(UUID ownerId) {
         super(ownerId, 106, "Wind Spirit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

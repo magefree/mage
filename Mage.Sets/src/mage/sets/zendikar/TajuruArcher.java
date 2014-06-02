@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TajuruArcher extends CardImpl<TajuruArcher> {
+public class TajuruArcher extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Allies you control");
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature with flying");

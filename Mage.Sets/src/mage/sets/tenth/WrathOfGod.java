@@ -38,7 +38,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class WrathOfGod extends CardImpl<WrathOfGod> {
+public class WrathOfGod extends CardImpl {
 
     public WrathOfGod(UUID ownerId) {
         super(ownerId, 61, "Wrath of God", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");

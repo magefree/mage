@@ -53,7 +53,7 @@ import mage.game.stack.StackObject;
  */
 
 
-public class BlazeCommando extends CardImpl<BlazeCommando> {
+public class BlazeCommando extends CardImpl {
 
     public BlazeCommando (UUID ownerId) {
         super(ownerId, 56, "Blaze Commando", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");

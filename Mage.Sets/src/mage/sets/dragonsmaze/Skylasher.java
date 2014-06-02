@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 
 
-public class Skylasher extends CardImpl<Skylasher> {
+public class Skylasher extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("blue");
     static {

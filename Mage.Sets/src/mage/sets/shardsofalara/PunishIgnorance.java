@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class PunishIgnorance extends CardImpl<PunishIgnorance> {
+public class PunishIgnorance extends CardImpl {
 
     public PunishIgnorance(UUID ownerId) {
         super(ownerId, 183, "Punish Ignorance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}{U}{U}{B}");

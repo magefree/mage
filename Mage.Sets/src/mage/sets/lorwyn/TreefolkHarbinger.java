@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class TreefolkHarbinger extends CardImpl<TreefolkHarbinger> {
+public class TreefolkHarbinger extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Treefolk or Forest card");
     static {

@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class LightningReaver extends CardImpl<LightningReaver> {
+public class LightningReaver extends CardImpl {
 
     public LightningReaver(UUID ownerId) {
         super(ownerId, 42, "Lightning Reaver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");

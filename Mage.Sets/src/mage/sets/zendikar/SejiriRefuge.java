@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SejiriRefuge extends CardImpl<SejiriRefuge> {
+public class SejiriRefuge extends CardImpl {
 
     public SejiriRefuge(UUID ownerId) {
         super(ownerId, 224, "Sejiri Refuge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

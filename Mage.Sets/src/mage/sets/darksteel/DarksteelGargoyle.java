@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class DarksteelGargoyle extends CardImpl<DarksteelGargoyle> {
+public class DarksteelGargoyle extends CardImpl {
 
     public DarksteelGargoyle(UUID ownerId) {
         super(ownerId, 111, "Darksteel Gargoyle", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

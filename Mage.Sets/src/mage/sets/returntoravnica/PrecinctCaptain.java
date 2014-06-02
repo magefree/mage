@@ -41,7 +41,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author Loki
  */
-public class PrecinctCaptain extends CardImpl<PrecinctCaptain> {
+public class PrecinctCaptain extends CardImpl {
 
     public PrecinctCaptain(UUID ownerId) {
         super(ownerId, 17, "Precinct Captain", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class BonebreakerGiant extends CardImpl<BonebreakerGiant> {
+public class BonebreakerGiant extends CardImpl {
 
     public BonebreakerGiant(UUID ownerId) {
         super(ownerId, 123, "Bonebreaker Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

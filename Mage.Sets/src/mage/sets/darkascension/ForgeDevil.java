@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author anonymous
  */
-public class ForgeDevil extends CardImpl<ForgeDevil> {
+public class ForgeDevil extends CardImpl {
 
     public ForgeDevil(UUID ownerId) {
         super(ownerId, 91, "Forge Devil", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

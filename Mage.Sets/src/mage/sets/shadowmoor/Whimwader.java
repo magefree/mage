@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author jeffwadsworth
 
  */
-public class Whimwader extends CardImpl<Whimwader> {
+public class Whimwader extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a blue permanent");
 

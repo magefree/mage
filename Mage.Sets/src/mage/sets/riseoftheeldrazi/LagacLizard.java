@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LagacLizard extends CardImpl<LagacLizard> {
+public class LagacLizard extends CardImpl {
 
     public LagacLizard (UUID ownerId) {
         super(ownerId, 154, "Lagac Lizard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

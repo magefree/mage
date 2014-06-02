@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class FlameFusillade extends CardImpl<FlameFusillade> {
+public class FlameFusillade extends CardImpl {
 
     public FlameFusillade(UUID ownerId) {
         super(ownerId, 123, "Flame Fusillade", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}");

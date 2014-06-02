@@ -59,7 +59,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author Loki
  */
-public class SwordOfLightAndShadow extends CardImpl<SwordOfLightAndShadow> {
+public class SwordOfLightAndShadow extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("white and from black");
 

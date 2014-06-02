@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class Ghoultree extends CardImpl<Ghoultree> {
+public class Ghoultree extends CardImpl {
 
     public Ghoultree(UUID ownerId) {
         super(ownerId, 115, "Ghoultree", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{G}");

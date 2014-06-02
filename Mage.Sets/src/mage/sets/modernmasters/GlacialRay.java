@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class GlacialRay extends CardImpl<GlacialRay> {
+public class GlacialRay extends CardImpl {
 
     public GlacialRay(UUID ownerId) {
         super(ownerId, 115, "Glacial Ray", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

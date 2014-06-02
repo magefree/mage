@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class GravetillerWurm extends CardImpl<GravetillerWurm> {
+public class GravetillerWurm extends CardImpl {
 
     public GravetillerWurm(UUID ownerId) {
         super(ownerId, 116, "Gravetiller Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");

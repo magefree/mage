@@ -61,7 +61,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class ObzedatGhostCouncil extends CardImpl<ObzedatGhostCouncil> {
+public class ObzedatGhostCouncil extends CardImpl {
 
     public ObzedatGhostCouncil(UUID ownerId) {
         super(ownerId, 182, "Obzedat, Ghost Council", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{B}{B}");

@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class BorosElite extends CardImpl<BorosElite> {
+public class BorosElite extends CardImpl {
 
     public BorosElite(UUID ownerId) {
         super(ownerId, 7, "Boros Elite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");

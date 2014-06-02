@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GuardiansOfAkrasa extends CardImpl<GuardiansOfAkrasa> {
+public class GuardiansOfAkrasa extends CardImpl {
 
     public GuardiansOfAkrasa (UUID ownerId) {
         super(ownerId, 12, "Guardians of Akrasa", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

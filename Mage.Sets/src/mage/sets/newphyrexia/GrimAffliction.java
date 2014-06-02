@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class GrimAffliction extends CardImpl<GrimAffliction> {
+public class GrimAffliction extends CardImpl {
 
     public GrimAffliction(UUID ownerId) {
         super(ownerId, 63, "Grim Affliction", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

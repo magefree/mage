@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class ViciousShadows extends CardImpl<ViciousShadows> {
+public class ViciousShadows extends CardImpl {
 
     public ViciousShadows(UUID ownerId) {
         super(ownerId, 119, "Vicious Shadows", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{6}{R}");

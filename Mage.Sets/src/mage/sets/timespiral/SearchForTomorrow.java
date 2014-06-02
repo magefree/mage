@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class SearchForTomorrow extends CardImpl<SearchForTomorrow> {
+public class SearchForTomorrow extends CardImpl {
 
     public SearchForTomorrow(UUID ownerId) {
         super(ownerId, 216, "Search for Tomorrow", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class SlipperyKarst extends CardImpl<SlipperyKarst> {
+public class SlipperyKarst extends CardImpl {
 
     public SlipperyKarst(UUID ownerId) {
         super(ownerId, 327, "Slippery Karst", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

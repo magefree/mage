@@ -49,7 +49,7 @@ import mage.game.permanent.token.SpiritToken;
  *
  * @author Loki
  */
-public class BakuAltar extends CardImpl<BakuAltar> {
+public class BakuAltar extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

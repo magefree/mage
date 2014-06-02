@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class OmenMachine extends CardImpl<OmenMachine> {
+public class OmenMachine extends CardImpl {
 
     public OmenMachine(UUID ownerId) {
         super(ownerId, 148, "Omen Machine", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

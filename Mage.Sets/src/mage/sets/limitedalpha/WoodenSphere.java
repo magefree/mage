@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
  * @author KholdFuzion
 
  */
-public class WoodenSphere extends CardImpl<WoodenSphere> {
+public class WoodenSphere extends CardImpl {
 
     public WoodenSphere(UUID ownerId) {
         super(ownerId, 276, "Wooden Sphere", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

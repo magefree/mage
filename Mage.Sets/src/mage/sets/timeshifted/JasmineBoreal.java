@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class JasmineBoreal extends CardImpl<JasmineBoreal> {
+public class JasmineBoreal extends CardImpl {
 
     public JasmineBoreal(UUID ownerId) {
         super(ownerId, 93, "Jasmine Boreal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");

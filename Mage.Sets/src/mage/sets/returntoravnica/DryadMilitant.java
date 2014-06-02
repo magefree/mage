@@ -44,7 +44,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author LevelX2
  */
-public class DryadMilitant extends CardImpl<DryadMilitant> {
+public class DryadMilitant extends CardImpl {
 
     public DryadMilitant(UUID ownerId) {
         super(ownerId, 214, "Dryad Militant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G/W}");

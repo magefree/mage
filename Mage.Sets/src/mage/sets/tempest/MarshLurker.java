@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class MarshLurker extends CardImpl<MarshLurker> {
+public class MarshLurker extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Swamp");
 

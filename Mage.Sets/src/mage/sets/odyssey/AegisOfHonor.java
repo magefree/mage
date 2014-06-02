@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  * @author cbt33 / LevelX2
  */
 
-public class AegisOfHonor extends CardImpl<AegisOfHonor>{
+public class AegisOfHonor extends CardImpl{
 
 	public AegisOfHonor(UUID ownerId){
 	super(ownerId, 1, "Aegis of Honor", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");

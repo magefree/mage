@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class PlanarPortal extends CardImpl<PlanarPortal> {
+public class PlanarPortal extends CardImpl {
 
     public PlanarPortal(UUID ownerId) {
         super(ownerId, 308, "Planar Portal", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class BranchingBolt extends CardImpl<BranchingBolt> {
+public class BranchingBolt extends CardImpl {
 
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
     private static final FilterCreaturePermanent filterNotFlying = new FilterCreaturePermanent("creature without flying");

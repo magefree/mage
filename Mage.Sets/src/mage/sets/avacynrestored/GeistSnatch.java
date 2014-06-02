@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class GeistSnatch extends CardImpl<GeistSnatch> {
+public class GeistSnatch extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("creature spell");
 

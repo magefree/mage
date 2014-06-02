@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class MatcaRioters extends CardImpl<MatcaRioters> {
+public class MatcaRioters extends CardImpl {
 
     public MatcaRioters(UUID ownerId) {
         super(ownerId, 84, "Matca Rioters", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -58,7 +58,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 /**
  * @author Loki
  */
-public class SwordOfFireAndIce extends CardImpl<SwordOfFireAndIce> {
+public class SwordOfFireAndIce extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("red and from blue");
 

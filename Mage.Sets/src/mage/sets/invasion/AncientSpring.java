@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class AncientSpring extends CardImpl<AncientSpring> {
+public class AncientSpring extends CardImpl {
 
     public AncientSpring(UUID ownerId) {
         super(ownerId, 319, "Ancient Spring", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

@@ -53,7 +53,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class SaprazzanSkerry extends CardImpl<SaprazzanSkerry> {
+public class SaprazzanSkerry extends CardImpl {
 
     public SaprazzanSkerry(UUID ownerId) {
         super(ownerId, 328, "Saprazzan Skerry", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class FarhavenElf extends CardImpl<FarhavenElf> {
+public class FarhavenElf extends CardImpl {
 
     public FarhavenElf(UUID ownerId) {
         super(ownerId, 113, "Farhaven Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

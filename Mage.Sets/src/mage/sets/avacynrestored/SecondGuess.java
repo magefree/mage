@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class SecondGuess extends CardImpl<SecondGuess> {
+public class SecondGuess extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell that's the second spell cast this turn");
 

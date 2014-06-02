@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class FledglingGriffin extends CardImpl<FledglingGriffin> {
+public class FledglingGriffin extends CardImpl {
 
     public FledglingGriffin (UUID ownerId) {
         super(ownerId, 5, "Fledgling Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

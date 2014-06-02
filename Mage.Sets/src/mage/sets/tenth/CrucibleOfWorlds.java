@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class CrucibleOfWorlds extends CardImpl<CrucibleOfWorlds> {
+public class CrucibleOfWorlds extends CardImpl {
 
     public CrucibleOfWorlds(UUID ownerId) {
         super(ownerId, 319, "Crucible of Worlds", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

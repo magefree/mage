@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author North, Eugen
  */
-public class TitanicUltimatum extends CardImpl<TitanicUltimatum> {
+public class TitanicUltimatum extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
 
     public TitanicUltimatum(UUID ownerId) {

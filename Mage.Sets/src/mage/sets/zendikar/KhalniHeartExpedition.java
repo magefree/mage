@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Viserion
  */
-public class KhalniHeartExpedition extends CardImpl<KhalniHeartExpedition> {
+public class KhalniHeartExpedition extends CardImpl {
 
     public KhalniHeartExpedition(UUID ownerId) {
         super(ownerId, 167, "Khalni Heart Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

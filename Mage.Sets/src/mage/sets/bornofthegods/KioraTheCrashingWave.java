@@ -63,7 +63,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class KioraTheCrashingWave extends CardImpl<KioraTheCrashingWave> {
+public class KioraTheCrashingWave extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent an opponent control");
     static {

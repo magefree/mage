@@ -54,7 +54,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author anonymous
  */
-public class ChamberOfManipulation extends CardImpl<ChamberOfManipulation> {
+public class ChamberOfManipulation extends CardImpl {
 
     public ChamberOfManipulation(UUID ownerId) {
         super(ownerId, 76, "Chamber of Manipulation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

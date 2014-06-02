@@ -47,7 +47,7 @@ import mage.game.Game;
  *
  * @author Plopman
  */
-public class SecondChance extends CardImpl<SecondChance> {
+public class SecondChance extends CardImpl {
 
     public SecondChance(UUID ownerId) {
         super(ownerId, 41, "Second Chance", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

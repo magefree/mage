@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class SkyDiamond extends CardImpl<SkyDiamond> {
+public class SkyDiamond extends CardImpl {
 
     public SkyDiamond(UUID ownerId) {
         super(ownerId, 316, "Sky Diamond", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

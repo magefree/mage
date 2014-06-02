@@ -49,7 +49,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  * @author jeffwadsworth
  *
  */
-public class InquisitorsSnare extends CardImpl<InquisitorsSnare> {
+public class InquisitorsSnare extends CardImpl {
 
     public InquisitorsSnare(UUID ownerId) {
         super(ownerId, 8, "Inquisitor's Snare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

@@ -40,7 +40,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author Plopman
  */
-public class LesserGargadon extends CardImpl<LesserGargadon> {
+public class LesserGargadon extends CardImpl {
 
     public LesserGargadon(UUID ownerId) {
         super(ownerId, 97, "Lesser Gargadon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jonubuu
  */
-public class MagmaJet extends CardImpl<MagmaJet> {
+public class MagmaJet extends CardImpl {
 
     public MagmaJet(UUID ownerId) {
         super(ownerId, 73, "Magma Jet", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

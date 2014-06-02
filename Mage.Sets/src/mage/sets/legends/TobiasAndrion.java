@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TobiasAndrion extends CardImpl<TobiasAndrion> {
+public class TobiasAndrion extends CardImpl {
 
     public TobiasAndrion(UUID ownerId) {
         super(ownerId, 304, "Tobias Andrion", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GrayOgre extends CardImpl<GrayOgre> {
+public class GrayOgre extends CardImpl {
 
     public GrayOgre(UUID ownerId) {
         super(ownerId, 218, "Gray Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class NorthernPaladin extends CardImpl<NorthernPaladin> {
+public class NorthernPaladin extends CardImpl {
     private static FilterPermanent filter = new FilterPermanent("black permanent");
 
     static {

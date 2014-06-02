@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author jeffwadsworth
  */
-public class Tanglesap extends CardImpl<Tanglesap> {
+public class Tanglesap extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without trample");
     

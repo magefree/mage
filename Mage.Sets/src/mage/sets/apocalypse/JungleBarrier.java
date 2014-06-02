@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class JungleBarrier extends CardImpl<JungleBarrier> {
+public class JungleBarrier extends CardImpl {
 
     public JungleBarrier(UUID ownerId) {
         super(ownerId, 106, "Jungle Barrier", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");

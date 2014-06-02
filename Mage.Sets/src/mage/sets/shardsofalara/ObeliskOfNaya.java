@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ObeliskOfNaya extends CardImpl<ObeliskOfNaya> {
+public class ObeliskOfNaya extends CardImpl {
 
     public ObeliskOfNaya (UUID ownerId) {
         super(ownerId, 216, "Obelisk of Naya", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

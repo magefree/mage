@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class StomperCub extends CardImpl<StomperCub> {
+public class StomperCub extends CardImpl {
 
     public StomperCub (UUID ownerId) {
         super(ownerId, 210, "Stomper Cub", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LucentLiminid extends CardImpl<LucentLiminid> {
+public class LucentLiminid extends CardImpl {
 
     public LucentLiminid(UUID ownerId) {
         super(ownerId, 24, "Lucent Liminid", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{W}{W}");

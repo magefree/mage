@@ -60,7 +60,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class RiseOfTheHobgoblins extends CardImpl<RiseOfTheHobgoblins> {
+public class RiseOfTheHobgoblins extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Red creatures and white creatures");
 

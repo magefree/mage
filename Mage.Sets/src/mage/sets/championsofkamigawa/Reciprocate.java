@@ -46,7 +46,7 @@ import mage.watchers.common.PlayerDamagedBySourceWatcher;
 /**
  * @author LevelX2
  */
-public class Reciprocate extends CardImpl<Reciprocate> {
+public class Reciprocate extends CardImpl {
 
         public Reciprocate(UUID ownerId) {
         super(ownerId, 40, "Reciprocate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

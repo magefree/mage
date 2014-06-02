@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SorcerersStrongbox extends CardImpl<SorcerersStrongbox> {
+public class SorcerersStrongbox extends CardImpl {
 
     public SorcerersStrongbox(UUID ownerId) {
         super(ownerId, 213, "Sorcerer's Strongbox", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

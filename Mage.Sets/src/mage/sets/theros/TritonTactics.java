@@ -59,7 +59,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class TritonTactics extends CardImpl<TritonTactics> {
+public class TritonTactics extends CardImpl {
 
     public TritonTactics(UUID ownerId) {
         super(ownerId, 71, "Triton Tactics", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");

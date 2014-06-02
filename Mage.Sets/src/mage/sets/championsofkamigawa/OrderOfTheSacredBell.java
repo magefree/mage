@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class OrderOfTheSacredBell extends CardImpl<OrderOfTheSacredBell> {
+public class OrderOfTheSacredBell extends CardImpl {
 
     public OrderOfTheSacredBell (UUID ownerId) {
         super(ownerId, 232, "Order of the Sacred Bell", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

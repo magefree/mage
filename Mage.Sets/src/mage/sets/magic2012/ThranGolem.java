@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ThranGolem extends CardImpl<ThranGolem> {
+public class ThranGolem extends CardImpl {
 
     private static final String rule1 = "As long as {this} is enchanted, it gets +2/+2 ";
     private static final String rule2 = "As long as {this} is enchanted, it has flying";

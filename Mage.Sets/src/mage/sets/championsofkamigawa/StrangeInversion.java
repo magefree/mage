@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StrangeInversion extends CardImpl<StrangeInversion> {
+public class StrangeInversion extends CardImpl {
 
     public StrangeInversion(UUID ownerId) {
         super(ownerId, 192, "Strange Inversion", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

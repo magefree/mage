@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ParadiseMantle extends CardImpl<ParadiseMantle> {
+public class ParadiseMantle extends CardImpl {
 
     public ParadiseMantle(UUID ownerId) {
         super(ownerId, 142, "Paradise Mantle", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

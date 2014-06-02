@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class MalakirBloodwitch extends CardImpl<MalakirBloodwitch> {
+public class MalakirBloodwitch extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("white");
 

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class InnerChamberGuard extends CardImpl<InnerChamberGuard> {
+public class InnerChamberGuard extends CardImpl {
 
     public InnerChamberGuard(UUID ownerId) {
         super(ownerId, 13, "Inner-Chamber Guard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

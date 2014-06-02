@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class ShadowbloodRidge extends CardImpl<ShadowbloodRidge> {
+public class ShadowbloodRidge extends CardImpl {
 
     public ShadowbloodRidge(UUID ownerId) {
         super(ownerId, 326, "Shadowblood Ridge", Rarity.RARE, new CardType[]{CardType.LAND}, "");

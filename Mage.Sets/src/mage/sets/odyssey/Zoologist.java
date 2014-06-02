@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class Zoologist extends CardImpl<Zoologist> {
+public class Zoologist extends CardImpl {
 
     public Zoologist(UUID ownerId) {
         super(ownerId, 285, "Zoologist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");

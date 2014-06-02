@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EvolvingWilds extends CardImpl<EvolvingWilds> {
+public class EvolvingWilds extends CardImpl {
 
     public EvolvingWilds(UUID ownerId) {
         super(ownerId, 228, "Evolving Wilds", Rarity.COMMON, new CardType[]{CardType.LAND}, null);

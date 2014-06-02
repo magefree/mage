@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AridMesa extends CardImpl<AridMesa> {
+public class AridMesa extends CardImpl {
 
     public AridMesa(UUID ownerId) {
         super(ownerId, 211, "Arid Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, null);

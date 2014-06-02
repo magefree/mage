@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class NekusarTheMindrazer extends CardImpl<NekusarTheMindrazer> {
+public class NekusarTheMindrazer extends CardImpl {
 
     public NekusarTheMindrazer(UUID ownerId) {
         super(ownerId, 201, "Nekusar, the Mindrazer", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{U}{B}{R}");

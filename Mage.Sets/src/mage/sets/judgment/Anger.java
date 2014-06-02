@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Backfir3
  */
-public class Anger extends CardImpl<Anger> {
+public class Anger extends CardImpl {
 
     private static final String ruleText = "As long as Anger is in your graveyard and you control a Mountain, creatures you control have haste";
 

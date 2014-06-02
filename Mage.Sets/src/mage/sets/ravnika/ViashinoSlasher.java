@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ViashinoSlasher extends CardImpl<ViashinoSlasher> {
+public class ViashinoSlasher extends CardImpl {
 
     public ViashinoSlasher(UUID ownerId) {
         super(ownerId, 149, "Viashino Slasher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

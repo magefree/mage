@@ -47,7 +47,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Condemn extends CardImpl<Condemn> {
+public class Condemn extends CardImpl {
 
     public Condemn(UUID ownerId) {
         super(ownerId, 13, "Condemn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");

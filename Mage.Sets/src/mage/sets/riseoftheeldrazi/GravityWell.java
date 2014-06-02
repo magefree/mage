@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class GravityWell extends CardImpl<GravityWell> {
+public class GravityWell extends CardImpl {
 
     public GravityWell(UUID ownerId) {
         super(ownerId, 185, "Gravity Well", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");

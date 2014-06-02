@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class PrimalRage extends CardImpl<PrimalRage> {
+public class PrimalRage extends CardImpl {
 
     public PrimalRage(UUID ownerId) {
         super(ownerId, 286, "Primal Rage", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

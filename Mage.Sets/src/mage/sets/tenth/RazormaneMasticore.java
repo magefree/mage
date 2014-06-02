@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class RazormaneMasticore extends CardImpl<RazormaneMasticore> {
+public class RazormaneMasticore extends CardImpl {
 
     public RazormaneMasticore(UUID ownerId) {
         super(ownerId, 340, "Razormane Masticore", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class RecklessReveler extends CardImpl<RecklessReveler> {
+public class RecklessReveler extends CardImpl {
 
     public RecklessReveler(UUID ownerId) {
         super(ownerId, 106, "Reckless Reveler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

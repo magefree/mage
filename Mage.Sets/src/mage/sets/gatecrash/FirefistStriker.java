@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FirefistStriker extends CardImpl<FirefistStriker> {
+public class FirefistStriker extends CardImpl {
 
     public FirefistStriker(UUID ownerId) {
         super(ownerId, 90, "Firefist Striker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

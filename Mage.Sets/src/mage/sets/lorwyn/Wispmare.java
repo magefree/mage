@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Wispmare extends CardImpl<Wispmare> {
+public class Wispmare extends CardImpl {
 
     public Wispmare(UUID ownerId) {
         super(ownerId, 48, "Wispmare", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

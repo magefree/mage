@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class NumaiOutcast extends CardImpl<NumaiOutcast> {
+public class NumaiOutcast extends CardImpl {
 
     public NumaiOutcast (UUID ownerId) {
         super(ownerId, 134, "Numai Outcast", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

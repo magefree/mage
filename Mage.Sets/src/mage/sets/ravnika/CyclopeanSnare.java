@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class CyclopeanSnare extends CardImpl<CyclopeanSnare> {
+public class CyclopeanSnare extends CardImpl {
 
     public CyclopeanSnare(UUID ownerId) {
         super(ownerId, 259, "Cyclopean Snare", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

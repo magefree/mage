@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class VaultSkirge extends CardImpl<VaultSkirge> {
+public class VaultSkirge extends CardImpl {
 
     public VaultSkirge(UUID ownerId) {
         super(ownerId, 76, "Vault Skirge", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{BP}");

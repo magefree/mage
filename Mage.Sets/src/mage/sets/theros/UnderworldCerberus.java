@@ -52,7 +52,7 @@ import mage.game.stack.StackObject;
  *
  * @author LevelX2
  */
-public class UnderworldCerberus extends CardImpl<UnderworldCerberus> {
+public class UnderworldCerberus extends CardImpl {
 
     public UnderworldCerberus(UUID ownerId) {
         super(ownerId, 208, "Underworld Cerberus", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");

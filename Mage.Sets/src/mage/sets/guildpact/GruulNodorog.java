@@ -43,7 +43,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class GruulNodorog extends CardImpl<GruulNodorog> {
+public class GruulNodorog extends CardImpl {
 
     public GruulNodorog(UUID ownerId) {
         super(ownerId, 88, "Gruul Nodorog", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

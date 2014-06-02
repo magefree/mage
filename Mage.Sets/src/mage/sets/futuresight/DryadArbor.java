@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DryadArbor extends CardImpl<DryadArbor> {
+public class DryadArbor extends CardImpl {
 
     public DryadArbor(UUID ownerId) {
         super(ownerId, 174, "Dryad Arbor", Rarity.UNCOMMON, new CardType[]{CardType.LAND, CardType.CREATURE}, "");

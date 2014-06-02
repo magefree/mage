@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TerramorphicExpanse extends CardImpl<TerramorphicExpanse> {
+public class TerramorphicExpanse extends CardImpl {
 
     public TerramorphicExpanse(UUID ownerId) {
         super(ownerId, 360, "Terramorphic Expanse", Rarity.COMMON, new CardType[]{CardType.LAND}, null);

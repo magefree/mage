@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class RageThrower extends CardImpl<RageThrower> {
+public class RageThrower extends CardImpl {
 
     public RageThrower(UUID ownerId) {
         super(ownerId, 157, "Rage Thrower", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");

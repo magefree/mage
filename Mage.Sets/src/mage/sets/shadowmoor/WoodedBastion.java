@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class WoodedBastion extends CardImpl<WoodedBastion> {
+public class WoodedBastion extends CardImpl {
 
     public WoodedBastion(UUID ownerId) {
         super(ownerId, 281, "Wooded Bastion", Rarity.RARE, new CardType[]{CardType.LAND}, "");

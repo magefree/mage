@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class TetheredSkirge extends CardImpl<TetheredSkirge> {
+public class TetheredSkirge extends CardImpl {
 
     public TetheredSkirge(UUID ownerId) {
         super(ownerId, 70, "Tethered Skirge", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

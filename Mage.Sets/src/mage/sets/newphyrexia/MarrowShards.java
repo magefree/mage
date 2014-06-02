@@ -38,7 +38,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author North
  */
-public class MarrowShards extends CardImpl<MarrowShards> {
+public class MarrowShards extends CardImpl {
 
     public MarrowShards(UUID ownerId) {
         super(ownerId, 15, "Marrow Shards", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{WP}");

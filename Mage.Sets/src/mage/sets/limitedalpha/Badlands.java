@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class Badlands extends CardImpl<Badlands> {
+public class Badlands extends CardImpl {
 
     public Badlands(UUID ownerId) {
         super(ownerId, 277, "Badlands", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class Godsire extends CardImpl<Godsire> {
+public class Godsire extends CardImpl {
 
     public Godsire (UUID ownerId) {
         super(ownerId, 170, "Godsire", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{G}{G}{W}");

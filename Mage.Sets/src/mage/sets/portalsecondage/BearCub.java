@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class BearCub extends CardImpl<BearCub> {
+public class BearCub extends CardImpl {
 
     public BearCub(UUID ownerId) {
         super(ownerId, 63, "Bear Cub", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

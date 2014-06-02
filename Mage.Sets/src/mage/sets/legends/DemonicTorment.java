@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DemonicTorment extends CardImpl<DemonicTorment> {
+public class DemonicTorment extends CardImpl {
 
     public DemonicTorment(UUID ownerId) {
         super(ownerId, 9, "Demonic Torment", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

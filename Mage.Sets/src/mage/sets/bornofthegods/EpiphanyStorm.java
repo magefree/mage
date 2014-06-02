@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class EpiphanyStorm extends CardImpl<EpiphanyStorm> {
+public class EpiphanyStorm extends CardImpl {
 
     public EpiphanyStorm(UUID ownerId) {
         super(ownerId, 91, "Epiphany Storm", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

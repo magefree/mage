@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class SecludedGlen extends CardImpl<SecludedGlen> {
+public class SecludedGlen extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Faerie from your hand");
     static {

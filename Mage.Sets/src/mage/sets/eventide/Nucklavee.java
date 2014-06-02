@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class Nucklavee extends CardImpl<Nucklavee> {
+public class Nucklavee extends CardImpl {
     private static final FilterCard filterRed = new FilterCard("red sorcery card from your graveyard");
     private static final FilterCard filterBlue = new FilterCard("blue instant card from your graveyard");
 

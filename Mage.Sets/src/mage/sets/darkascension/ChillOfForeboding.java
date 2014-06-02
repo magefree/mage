@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class ChillOfForeboding extends CardImpl<ChillOfForeboding> {
+public class ChillOfForeboding extends CardImpl {
 
     public ChillOfForeboding(UUID ownerId) {
         super(ownerId, 32, "Chill of Foreboding", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");

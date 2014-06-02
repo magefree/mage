@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SkarrgTheRagePits extends CardImpl<SkarrgTheRagePits> {
+public class SkarrgTheRagePits extends CardImpl {
 
     public SkarrgTheRagePits(UUID ownerId) {
         super(ownerId, 163, "Skarrg, the Rage Pits", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

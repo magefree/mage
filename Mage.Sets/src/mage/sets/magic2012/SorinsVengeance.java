@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class SorinsVengeance extends CardImpl<SorinsVengeance> {
+public class SorinsVengeance extends CardImpl {
 
     public SorinsVengeance (UUID ownerId) {
         super(ownerId, 111, "Sorin's Vengeance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}{B}");

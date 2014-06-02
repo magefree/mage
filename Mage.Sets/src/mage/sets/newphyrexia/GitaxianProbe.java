@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class GitaxianProbe extends CardImpl<GitaxianProbe> {
+public class GitaxianProbe extends CardImpl {
 
     public GitaxianProbe (UUID ownerId) {
         super(ownerId, 35, "Gitaxian Probe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{UP}");

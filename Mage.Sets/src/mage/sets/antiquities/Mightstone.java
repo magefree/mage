@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
  *
  * @author anonymous
  */
-public class Mightstone extends CardImpl<Mightstone> {
+public class Mightstone extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
 

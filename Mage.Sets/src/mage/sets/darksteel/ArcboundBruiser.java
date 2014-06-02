@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class ArcboundBruiser extends CardImpl<ArcboundBruiser> {
+public class ArcboundBruiser extends CardImpl {
 
     public ArcboundBruiser(UUID ownerId) {
         super(ownerId, 94, "Arcbound Bruiser", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

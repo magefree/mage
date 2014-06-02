@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class WitsEnd extends CardImpl<WitsEnd> {
+public class WitsEnd extends CardImpl {
 
     public WitsEnd(UUID ownerId) {
         super(ownerId, 117, "Wit's End", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");

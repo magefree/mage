@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Fling extends CardImpl<Fling> {
+public class Fling extends CardImpl {
 
     public Fling(UUID ownerId) {
         super(ownerId, 139, "Fling", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

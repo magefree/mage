@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class RadjanSpirit extends CardImpl<RadjanSpirit> {
+public class RadjanSpirit extends CardImpl {
 
     public RadjanSpirit(UUID ownerId) {
         super(ownerId, 182, "Radjan Spirit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

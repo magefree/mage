@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 *
 * @author LevelX2
 */
-public class Overwhelm extends CardImpl<Overwhelm> {
+public class Overwhelm extends CardImpl {
 
     public Overwhelm(UUID ownerId) {
       super(ownerId, 175, "Overwhelm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");

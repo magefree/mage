@@ -46,7 +46,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author jeffwadsworth
  */
-public class GoblinDiplomats extends CardImpl<GoblinDiplomats> {
+public class GoblinDiplomats extends CardImpl {
 
     public GoblinDiplomats(UUID ownerId) {
         super(ownerId, 141, "Goblin Diplomats", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");

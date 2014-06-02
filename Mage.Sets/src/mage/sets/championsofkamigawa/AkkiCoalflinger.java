@@ -46,7 +46,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author Loki
  */
-public class AkkiCoalflinger extends CardImpl<AkkiCoalflinger> {
+public class AkkiCoalflinger extends CardImpl {
 
     public AkkiCoalflinger (UUID ownerId) {
         super(ownerId, 152, "Akki Coalflinger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class EsperCormorants extends CardImpl<EsperCormorants> {
+public class EsperCormorants extends CardImpl {
 
     public EsperCormorants(UUID ownerId) {
         super(ownerId, 105, "Esper Cormorants", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}{U}");

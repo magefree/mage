@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class TempleGarden extends CardImpl<TempleGarden> {
+public class TempleGarden extends CardImpl {
 
     public TempleGarden (UUID ownerId) {
         super(ownerId, 284, "Temple Garden", Rarity.RARE, new CardType[]{CardType.LAND}, null);

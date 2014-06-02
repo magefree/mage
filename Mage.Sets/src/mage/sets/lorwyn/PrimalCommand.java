@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class PrimalCommand extends CardImpl<PrimalCommand> {
+public class PrimalCommand extends CardImpl {
 
     private static final FilterPermanent filterNonCreature = new FilterPermanent("noncreature permanent");
     static {

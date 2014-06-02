@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class KeeningStone extends CardImpl<KeeningStone> {
+public class KeeningStone extends CardImpl {
 
     public KeeningStone(UUID ownerId) {
         super(ownerId, 219, "Keening Stone", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

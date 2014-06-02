@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class HiveMind extends CardImpl<HiveMind> {
+public class HiveMind extends CardImpl {
 
     public HiveMind(UUID ownerId) {
         super(ownerId, 54, "Hive Mind", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");

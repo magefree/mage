@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class Smash extends CardImpl<Smash> {
+public class Smash extends CardImpl {
 
     public Smash(UUID ownerId) {
         super(ownerId, 69, "Smash", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

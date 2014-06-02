@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author North
  */
-public class TrailblazersBoots extends CardImpl<TrailblazersBoots> {
+public class TrailblazersBoots extends CardImpl {
 
     public TrailblazersBoots(UUID ownerId) {
         super(ownerId, 208, "Trailblazer's Boots", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

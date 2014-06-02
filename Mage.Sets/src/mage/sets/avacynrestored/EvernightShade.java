@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class EvernightShade extends CardImpl<EvernightShade> {
+public class EvernightShade extends CardImpl {
 
     public EvernightShade(UUID ownerId) {
         super(ownerId, 101, "Evernight Shade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

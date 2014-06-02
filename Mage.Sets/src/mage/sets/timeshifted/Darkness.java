@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class Darkness extends CardImpl<Darkness> {
+public class Darkness extends CardImpl {
 
     public Darkness(UUID ownerId) {
         super(ownerId, 40, "Darkness", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class BorderGuard extends CardImpl<BorderGuard> {
+public class BorderGuard extends CardImpl {
 
     public BorderGuard(UUID ownerId) {
         super(ownerId, 171, "Border Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

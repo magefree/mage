@@ -59,7 +59,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class TidebinderMage extends CardImpl<TidebinderMage> {
+public class TidebinderMage extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red or green creature an opponent controls");
     static {

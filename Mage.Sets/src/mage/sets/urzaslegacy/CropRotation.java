@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class CropRotation extends CardImpl<CropRotation> {
+public class CropRotation extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

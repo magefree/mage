@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class KeeperOfProgenitus extends CardImpl<KeeperOfProgenitus> {
+public class KeeperOfProgenitus extends CardImpl {
 
     public KeeperOfProgenitus(UUID ownerId) {
         super(ownerId, 135, "Keeper of Progenitus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");

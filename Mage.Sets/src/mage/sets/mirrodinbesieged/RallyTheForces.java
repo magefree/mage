@@ -43,7 +43,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author Loki
  */
-public class RallyTheForces extends CardImpl<RallyTheForces> {
+public class RallyTheForces extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
 
     public RallyTheForces (UUID ownerId) {

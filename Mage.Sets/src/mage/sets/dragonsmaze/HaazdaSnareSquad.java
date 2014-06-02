@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class HaazdaSnareSquad extends CardImpl<HaazdaSnareSquad> {
+public class HaazdaSnareSquad extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
     static {

@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SkeletalChangeling extends CardImpl<SkeletalChangeling> {
+public class SkeletalChangeling extends CardImpl {
 
     public SkeletalChangeling(UUID ownerId) {
         super(ownerId, 140, "Skeletal Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

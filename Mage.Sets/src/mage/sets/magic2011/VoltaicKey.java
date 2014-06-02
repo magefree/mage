@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VoltaicKey extends CardImpl<VoltaicKey> {
+public class VoltaicKey extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class FungalReaches extends CardImpl<FungalReaches> {
+public class FungalReaches extends CardImpl {
 
     public FungalReaches(UUID ownerId) {
         super(ownerId, 274, "Fungal Reaches", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

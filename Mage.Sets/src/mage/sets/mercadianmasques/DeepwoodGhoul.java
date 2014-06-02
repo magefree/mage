@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class DeepwoodGhoul extends CardImpl<DeepwoodGhoul> {
+public class DeepwoodGhoul extends CardImpl {
 
     public DeepwoodGhoul(UUID ownerId) {
         super(ownerId, 131, "Deepwood Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class IllusoryDemon extends CardImpl<IllusoryDemon> {
+public class IllusoryDemon extends CardImpl {
 
     public IllusoryDemon(UUID ownerId) {
         super(ownerId, 21, "Illusory Demon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LostSoul extends CardImpl<LostSoul> {
+public class LostSoul extends CardImpl {
 
     public LostSoul(UUID ownerId) {
         super(ownerId, 37, "Lost Soul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

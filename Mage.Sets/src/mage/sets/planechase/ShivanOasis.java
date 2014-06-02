@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ShivanOasis extends CardImpl<ShivanOasis> {
+public class ShivanOasis extends CardImpl {
 
     public ShivanOasis(UUID ownerId) {
         super(ownerId, 137, "Shivan Oasis", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

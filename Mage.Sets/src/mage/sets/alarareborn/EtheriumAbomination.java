@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class EtheriumAbomination extends CardImpl<EtheriumAbomination> {
+public class EtheriumAbomination extends CardImpl {
 
     public EtheriumAbomination (UUID ownerId) {
         super(ownerId, 20, "Etherium Abomination", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}{B}");

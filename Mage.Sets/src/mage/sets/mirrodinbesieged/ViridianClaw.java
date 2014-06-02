@@ -46,7 +46,7 @@ import mage.constants.Outcome;
  *
  * @author Loki
  */
-public class ViridianClaw extends CardImpl<ViridianClaw> {
+public class ViridianClaw extends CardImpl {
 
     public ViridianClaw (UUID ownerId) {
         super(ownerId, 143, "Viridian Claw", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

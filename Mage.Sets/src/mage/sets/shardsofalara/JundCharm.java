@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class JundCharm extends CardImpl<JundCharm> {
+public class JundCharm extends CardImpl {
 
     public JundCharm(UUID ownerId) {
         super(ownerId, 175, "Jund Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{R}{G}");

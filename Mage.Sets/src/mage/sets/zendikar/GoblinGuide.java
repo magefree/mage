@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GoblinGuide extends CardImpl<GoblinGuide> {
+public class GoblinGuide extends CardImpl {
 
     public GoblinGuide(UUID ownerId) {
         super(ownerId, 126, "Goblin Guide", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");

@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class BalothCageTrap extends CardImpl<BalothCageTrap> {
+public class BalothCageTrap extends CardImpl {
 
     public BalothCageTrap(UUID ownerId) {
         super(ownerId, 156, "Baloth Cage Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");

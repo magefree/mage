@@ -46,7 +46,7 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  *
  * @author jeffwadsworth
  */
-public class AngelicAccord extends CardImpl<AngelicAccord> {
+public class AngelicAccord extends CardImpl {
 
     public AngelicAccord(UUID ownerId) {
         super(ownerId, 3, "Angelic Accord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

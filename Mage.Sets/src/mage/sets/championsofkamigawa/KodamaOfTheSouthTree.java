@@ -46,7 +46,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
 /**
  * @author Loki
  */
-public class KodamaOfTheSouthTree extends CardImpl<KodamaOfTheSouthTree> {
+public class KodamaOfTheSouthTree extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

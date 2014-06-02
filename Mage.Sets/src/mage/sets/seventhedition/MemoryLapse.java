@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class MemoryLapse extends CardImpl<MemoryLapse> {
+public class MemoryLapse extends CardImpl {
 
     public MemoryLapse(UUID ownerId) {
         super(ownerId, 88, "Memory Lapse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

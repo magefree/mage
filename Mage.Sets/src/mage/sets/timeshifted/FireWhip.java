@@ -52,7 +52,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class FireWhip extends CardImpl<FireWhip> {
+public class FireWhip extends CardImpl {
 
     public FireWhip(UUID ownerId) {
         super(ownerId, 63, "Fire Whip", Rarity.SPECIAL, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

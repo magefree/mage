@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author LevelX
  */
-public class CallousDeceiver extends CardImpl<CallousDeceiver> {
+public class CallousDeceiver extends CardImpl {
 
     public CallousDeceiver(UUID ownerId) {
         super(ownerId, 53, "Callous Deceiver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

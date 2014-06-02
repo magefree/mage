@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class DakmorScorpion extends CardImpl<DakmorScorpion> {
+public class DakmorScorpion extends CardImpl {
 
     public DakmorScorpion(UUID ownerId) {
         super(ownerId, 10, "Dakmor Scorpion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

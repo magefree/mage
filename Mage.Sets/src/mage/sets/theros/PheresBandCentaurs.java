@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class PheresBandCentaurs extends CardImpl<PheresBandCentaurs> {
+public class PheresBandCentaurs extends CardImpl {
 
     public PheresBandCentaurs(UUID ownerId) {
         super(ownerId, 171, "Pheres-Band Centaurs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

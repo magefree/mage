@@ -40,7 +40,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class AvenSquire extends CardImpl<AvenSquire> {
+public class AvenSquire extends CardImpl {
 
     public AvenSquire(UUID ownerId) {
         super(ownerId, 3, "Aven Squire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

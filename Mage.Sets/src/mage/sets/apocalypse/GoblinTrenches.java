@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class GoblinTrenches extends CardImpl<GoblinTrenches> {
+public class GoblinTrenches extends CardImpl {
 
     final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

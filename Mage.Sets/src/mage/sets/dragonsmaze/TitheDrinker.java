@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class TitheDrinker extends CardImpl<TitheDrinker> {
+public class TitheDrinker extends CardImpl {
 
     public TitheDrinker(UUID ownerId) {
         super(ownerId, 109, "Tithe Drinker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{B}");

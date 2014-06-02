@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author cbt33
  */
-public class RayOfDistortion extends CardImpl<RayOfDistortion> {
+public class RayOfDistortion extends CardImpl {
     
     static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     

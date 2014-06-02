@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class LaboratoryManiac extends CardImpl<LaboratoryManiac> {
+public class LaboratoryManiac extends CardImpl {
 
     public LaboratoryManiac(UUID ownerId) {
         super(ownerId, 61, "Laboratory Maniac", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");

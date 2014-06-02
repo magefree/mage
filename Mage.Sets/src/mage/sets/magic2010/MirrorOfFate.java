@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class MirrorOfFate extends CardImpl<MirrorOfFate> {
+public class MirrorOfFate extends CardImpl {
 
     public MirrorOfFate(UUID ownerId) {
         super(ownerId, 215, "Mirror of Fate", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WallOfEarth extends CardImpl<WallOfEarth> {
+public class WallOfEarth extends CardImpl {
 
     public WallOfEarth(UUID ownerId) {
         super(ownerId, 166, "Wall of Earth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

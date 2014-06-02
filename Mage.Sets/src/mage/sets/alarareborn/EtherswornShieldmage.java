@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author jeffwadsworth
  */
-public class EtherswornShieldmage extends CardImpl<EtherswornShieldmage> {
+public class EtherswornShieldmage extends CardImpl {
 
     final private static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures");
     

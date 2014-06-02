@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Quercitron
  */
-public class Insight extends CardImpl<Insight> {
+public class Insight extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("green spell");
 

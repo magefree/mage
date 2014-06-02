@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author Backfir3
  */
-public class Scrap extends CardImpl<Scrap> {
+public class Scrap extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

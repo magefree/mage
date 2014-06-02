@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class NaturesLore extends CardImpl<NaturesLore> {
+public class NaturesLore extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Forest card");
 

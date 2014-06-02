@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ReachThroughMists extends CardImpl<ReachThroughMists> {
+public class ReachThroughMists extends CardImpl {
 
     public ReachThroughMists (UUID ownerId) {
         super(ownerId, 81, "Reach Through Mists", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

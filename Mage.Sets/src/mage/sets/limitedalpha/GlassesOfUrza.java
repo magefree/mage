@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class GlassesOfUrza extends CardImpl<GlassesOfUrza> {
+public class GlassesOfUrza extends CardImpl {
 
     public GlassesOfUrza(UUID ownerId) {
         super(ownerId, 245, "Glasses of Urza", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

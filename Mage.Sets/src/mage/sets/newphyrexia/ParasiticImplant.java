@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ParasiticImplant extends CardImpl<ParasiticImplant> {
+public class ParasiticImplant extends CardImpl {
 
     public ParasiticImplant(UUID ownerId) {
         super(ownerId, 67, "Parasitic Implant", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

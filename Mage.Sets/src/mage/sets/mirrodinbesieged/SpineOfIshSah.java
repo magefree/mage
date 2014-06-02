@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class SpineOfIshSah extends CardImpl<SpineOfIshSah> {
+public class SpineOfIshSah extends CardImpl {
 
     public SpineOfIshSah(UUID ownerId) {
         super(ownerId, 136, "Spine of Ish Sah", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{7}");

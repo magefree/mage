@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Hubris extends CardImpl<Hubris> {
+public class Hubris extends CardImpl {
 
     public Hubris(UUID ownerId) {
         super(ownerId, 41, "Hubris", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

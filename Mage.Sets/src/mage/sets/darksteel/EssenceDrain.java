@@ -40,7 +40,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class EssenceDrain extends CardImpl<EssenceDrain> {
+public class EssenceDrain extends CardImpl {
 
     public EssenceDrain (UUID ownerId) {
         super(ownerId, 43, "Essence Drain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");

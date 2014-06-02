@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class BattlewiseHoplite extends CardImpl<BattlewiseHoplite> {
+public class BattlewiseHoplite extends CardImpl {
 
     public BattlewiseHoplite(UUID ownerId) {
         super(ownerId, 189, "Battlewise Hoplite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{U}");

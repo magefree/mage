@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author KholdFuzion
 
  */
-public class AspectOfWolf extends CardImpl<AspectOfWolf> {
+public class AspectOfWolf extends CardImpl {
 
     public AspectOfWolf(UUID ownerId) {
         super(ownerId, 93, "Aspect of Wolf", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

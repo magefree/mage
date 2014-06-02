@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TraitorousBlood extends CardImpl<TraitorousBlood> {
+public class TraitorousBlood extends CardImpl {
 
     public TraitorousBlood(UUID ownerId) {
         super(ownerId, 166, "Traitorous Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

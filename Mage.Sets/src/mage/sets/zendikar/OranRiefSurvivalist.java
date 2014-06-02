@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class OranRiefSurvivalist extends CardImpl<OranRiefSurvivalist> {
+public class OranRiefSurvivalist extends CardImpl {
 
     public OranRiefSurvivalist(UUID ownerId) {
         super(ownerId, 174, "Oran-Rief Survivalist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

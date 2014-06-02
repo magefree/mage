@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class NightguardPatrol extends CardImpl<NightguardPatrol> {
+public class NightguardPatrol extends CardImpl {
 
     public NightguardPatrol (UUID ownerId) {
         super(ownerId, 26, "Nightguard Patrol", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

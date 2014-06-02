@@ -55,7 +55,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class EpharaGodOfThePolis extends CardImpl<EpharaGodOfThePolis> {
+public class EpharaGodOfThePolis extends CardImpl {
 
     public EpharaGodOfThePolis(UUID ownerId) {
         super(ownerId, 145, "Ephara, God of the Polis", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}{U}");

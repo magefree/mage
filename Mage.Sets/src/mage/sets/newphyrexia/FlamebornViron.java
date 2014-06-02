@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FlamebornViron extends CardImpl<FlamebornViron> {
+public class FlamebornViron extends CardImpl {
 
     public FlamebornViron(UUID ownerId) {
         super(ownerId, 83, "Flameborn Viron", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

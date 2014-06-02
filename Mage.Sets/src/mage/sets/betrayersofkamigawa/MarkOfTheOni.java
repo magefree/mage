@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MarkOfTheOni extends CardImpl<MarkOfTheOni> {
+public class MarkOfTheOni extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("if you control no Demons");
     static {
         filter.add(new SubtypePredicate("Demon"));

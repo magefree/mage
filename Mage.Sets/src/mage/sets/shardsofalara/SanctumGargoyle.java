@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class SanctumGargoyle extends CardImpl<SanctumGargoyle> {
+public class SanctumGargoyle extends CardImpl {
 
     public SanctumGargoyle(UUID ownerId) {
         super(ownerId, 24, "Sanctum Gargoyle", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}");

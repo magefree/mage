@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class Ghoulflesh extends CardImpl<Ghoulflesh> {
+public class Ghoulflesh extends CardImpl {
 
     public Ghoulflesh(UUID ownerId) {
         super(ownerId, 103, "Ghoulflesh", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class IronrootTreefolk extends CardImpl<IronrootTreefolk> {
+public class IronrootTreefolk extends CardImpl {
 
     public IronrootTreefolk(UUID ownerId) {
         super(ownerId, 167, "Ironroot Treefolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

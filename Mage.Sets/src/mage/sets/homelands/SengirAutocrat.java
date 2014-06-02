@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Quercitron
  */
-public class SengirAutocrat extends CardImpl<SengirAutocrat> {
+public class SengirAutocrat extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Serf tokens");
 

@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Benthicore extends CardImpl<Benthicore> {
+public class Benthicore extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 

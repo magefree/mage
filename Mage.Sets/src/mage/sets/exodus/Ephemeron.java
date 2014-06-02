@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class Ephemeron extends CardImpl<Ephemeron> {
+public class Ephemeron extends CardImpl {
 
     public Ephemeron(UUID ownerId) {
         super(ownerId, 31, "Ephemeron", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

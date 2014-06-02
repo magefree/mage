@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class AscendedLawmage extends CardImpl<AscendedLawmage> {
+public class AscendedLawmage extends CardImpl {
 
     public AscendedLawmage (UUID ownerId) {
         super(ownerId, 53, "Ascended Lawmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");

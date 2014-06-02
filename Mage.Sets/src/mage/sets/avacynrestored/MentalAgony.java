@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class MentalAgony extends CardImpl<MentalAgony> {
+public class MentalAgony extends CardImpl {
 
     public MentalAgony(UUID ownerId) {
         super(ownerId, 114, "Mental Agony", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");

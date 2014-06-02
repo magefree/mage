@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class MercilessPredator extends CardImpl<MercilessPredator> {
+public class MercilessPredator extends CardImpl {
 
     public MercilessPredator(UUID ownerId) {
         super(ownerId, 159, "Merciless Predator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");

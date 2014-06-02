@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class ThreeDreams extends CardImpl<ThreeDreams> {
+public class ThreeDreams extends CardImpl {
 
     public ThreeDreams(UUID ownerId) {
         super(ownerId, 13, "Three Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}");

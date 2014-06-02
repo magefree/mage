@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class KalonianTusker extends CardImpl<KalonianTusker> {
+public class KalonianTusker extends CardImpl {
 
     public KalonianTusker(UUID ownerId) {
         super(ownerId, 182, "Kalonian Tusker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");

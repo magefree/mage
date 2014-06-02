@@ -43,7 +43,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SnakeOfTheGoldenGrove extends CardImpl<SnakeOfTheGoldenGrove> {
+public class SnakeOfTheGoldenGrove extends CardImpl {
 
     public SnakeOfTheGoldenGrove(UUID ownerId) {
         super(ownerId, 141, "Snake of the Golden Grove", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

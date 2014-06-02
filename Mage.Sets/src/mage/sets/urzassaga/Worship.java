@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class Worship extends CardImpl<Worship> {
+public class Worship extends CardImpl {
 
     public Worship(UUID ownerId) {
         super(ownerId, 57, "Worship", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class SeaGateLoremaster extends CardImpl<SeaGateLoremaster> {
+public class SeaGateLoremaster extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Ally you control");
 

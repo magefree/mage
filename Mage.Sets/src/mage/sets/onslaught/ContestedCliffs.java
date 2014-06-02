@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ContestedCliffs extends CardImpl<ContestedCliffs> {
+public class ContestedCliffs extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Beast creature you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature an opponent controls");

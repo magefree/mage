@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class IceCage extends CardImpl<IceCage> {
+public class IceCage extends CardImpl {
 
     public IceCage(UUID ownerId) {
         super(ownerId, 56, "Ice Cage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class NephaliaSeakite extends CardImpl<NephaliaSeakite> {
+public class NephaliaSeakite extends CardImpl {
 
     public NephaliaSeakite(UUID ownerId) {
         super(ownerId, 43, "Nephalia Seakite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

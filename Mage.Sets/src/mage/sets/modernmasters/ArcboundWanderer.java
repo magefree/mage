@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ArcboundWanderer extends CardImpl<ArcboundWanderer> {
+public class ArcboundWanderer extends CardImpl {
 
     public ArcboundWanderer(UUID ownerId) {
         super(ownerId, 200, "Arcbound Wanderer", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

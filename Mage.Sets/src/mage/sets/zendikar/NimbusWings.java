@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class NimbusWings extends CardImpl<NimbusWings> {
+public class NimbusWings extends CardImpl {
 
     public NimbusWings (UUID ownerId) {
         super(ownerId, 28, "Nimbus Wings", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class TurnToFrog extends CardImpl<TurnToFrog> {
+public class TurnToFrog extends CardImpl {
 
     public TurnToFrog(UUID ownerId) {
         super(ownerId, 78, "Turn to Frog", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

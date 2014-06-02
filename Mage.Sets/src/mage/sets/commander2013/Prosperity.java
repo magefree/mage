@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class Prosperity extends CardImpl<Prosperity> {
+public class Prosperity extends CardImpl {
 
     public Prosperity(UUID ownerId) {
         super(ownerId, 54, "Prosperity", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{U}");

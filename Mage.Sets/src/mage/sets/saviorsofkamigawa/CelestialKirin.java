@@ -50,7 +50,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class CelestialKirin extends CardImpl<CelestialKirin> {
+public class CelestialKirin extends CardImpl {
 
     public CelestialKirin(UUID ownerId) {
         super(ownerId, 3, "Celestial Kirin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

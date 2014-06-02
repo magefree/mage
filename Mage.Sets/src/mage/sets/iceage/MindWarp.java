@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class MindWarp extends CardImpl<MindWarp> {
+public class MindWarp extends CardImpl {
 
     public MindWarp(UUID ownerId) {
         super(ownerId, 14, "Mind Warp", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{3}{B}");

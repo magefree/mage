@@ -40,7 +40,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author LevelX2
  */
-public class WolfSkullShaman extends CardImpl<WolfSkullShaman> {
+public class WolfSkullShaman extends CardImpl {
     
     public WolfSkullShaman(UUID ownerId) {
         super(ownerId, 140, "Wolf-Skull Shaman", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

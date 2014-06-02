@@ -38,7 +38,7 @@ import mage.game.permanent.token.CitizenToken;
  *
  * @author Quercitron
  */
-public class IcatianTown extends CardImpl<IcatianTown> {
+public class IcatianTown extends CardImpl {
 
     public IcatianTown(UUID ownerId) {
         super(ownerId, 162, "Icatian Town", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}");

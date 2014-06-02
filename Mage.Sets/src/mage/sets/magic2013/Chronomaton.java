@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class Chronomaton extends CardImpl<Chronomaton> {
+public class Chronomaton extends CardImpl {
 
     public Chronomaton(UUID ownerId) {
         super(ownerId, 201, "Chronomaton", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

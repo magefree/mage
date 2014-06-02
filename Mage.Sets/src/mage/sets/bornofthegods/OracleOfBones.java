@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class OracleOfBones extends CardImpl<OracleOfBones> {
+public class OracleOfBones extends CardImpl {
 
     public OracleOfBones(UUID ownerId) {
         super(ownerId, 103, "Oracle of Bones", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
 /**
  * @author Loki
  */
-public class SteelshaperApprentice extends CardImpl<SteelshaperApprentice> {
+public class SteelshaperApprentice extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Equipment card");
 

@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class AkkiUnderling extends CardImpl<AkkiUnderling> {
+public class AkkiUnderling extends CardImpl {
 
     public AkkiUnderling(UUID ownerId) {
         super(ownerId, 93, "Akki Underling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

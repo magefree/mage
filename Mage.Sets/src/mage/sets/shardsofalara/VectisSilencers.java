@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class VectisSilencers extends CardImpl<VectisSilencers> {
+public class VectisSilencers extends CardImpl {
 
     public VectisSilencers (UUID ownerId) {
         super(ownerId, 62, "Vectis Silencers", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");

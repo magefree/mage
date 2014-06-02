@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Plopman
  */
-public class Eviscerator extends CardImpl<Eviscerator> {
+public class Eviscerator extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("white");
 

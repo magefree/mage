@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GrizzledLeotau extends CardImpl<GrizzledLeotau> {
+public class GrizzledLeotau extends CardImpl {
 
     public GrizzledLeotau(UUID ownerId) {
         super(ownerId, 69, "Grizzled Leotau", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{W}");

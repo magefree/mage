@@ -53,7 +53,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class GoblinCohort extends CardImpl<GoblinCohort> {
+public class GoblinCohort extends CardImpl {
 
     public GoblinCohort(UUID ownerId) {
         super(ownerId, 106, "Goblin Cohort", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

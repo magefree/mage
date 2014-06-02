@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author ayratn
  */
-public class QuicksilverGargantuan extends CardImpl<QuicksilverGargantuan> {
+public class QuicksilverGargantuan extends CardImpl {
 
     private static final String text = "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
 

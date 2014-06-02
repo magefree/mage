@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class OnduGiant extends CardImpl<OnduGiant> {
+public class OnduGiant extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 

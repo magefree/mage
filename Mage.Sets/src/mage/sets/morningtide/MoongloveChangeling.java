@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MoongloveChangeling extends CardImpl<MoongloveChangeling> {
+public class MoongloveChangeling extends CardImpl {
 
     public MoongloveChangeling(UUID ownerId) {
         super(ownerId, 67, "Moonglove Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class Erase extends CardImpl<Erase> {
+public class Erase extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {

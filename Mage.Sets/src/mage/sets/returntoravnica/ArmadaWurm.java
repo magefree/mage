@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class ArmadaWurm extends CardImpl<ArmadaWurm> {
+public class ArmadaWurm extends CardImpl {
 
     public ArmadaWurm(UUID ownerId) {
         super(ownerId, 143, "Armada Wurm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{W}{W}");

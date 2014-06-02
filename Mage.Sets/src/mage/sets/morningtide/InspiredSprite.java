@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class InspiredSprite extends CardImpl<InspiredSprite> {
+public class InspiredSprite extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Wizard");
 

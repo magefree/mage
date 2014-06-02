@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Quercitron
  */
-public class Sunweb extends CardImpl<Sunweb> {
+public class Sunweb extends CardImpl {
 
     public Sunweb(UUID ownerId) {
         super(ownerId, 51, "Sunweb", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");

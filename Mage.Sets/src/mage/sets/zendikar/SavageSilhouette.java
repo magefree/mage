@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SavageSilhouette extends CardImpl<SavageSilhouette> {
+public class SavageSilhouette extends CardImpl {
 
     public SavageSilhouette(UUID ownerId) {
         super(ownerId, 181, "Savage Silhouette", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

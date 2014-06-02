@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Scattershot extends CardImpl<Scattershot> {
+public class Scattershot extends CardImpl {
 
     public Scattershot(UUID ownerId) {
         super(ownerId, 102, "Scattershot", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

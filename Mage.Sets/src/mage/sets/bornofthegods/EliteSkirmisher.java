@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EliteSkirmisher extends CardImpl<EliteSkirmisher> {
+public class EliteSkirmisher extends CardImpl {
 
     public EliteSkirmisher(UUID ownerId) {
         super(ownerId, 8, "Elite Skirmisher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

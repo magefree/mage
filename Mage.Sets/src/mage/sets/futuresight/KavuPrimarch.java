@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class KavuPrimarch extends CardImpl<KavuPrimarch> {
+public class KavuPrimarch extends CardImpl {
 
     public KavuPrimarch(UUID ownerId) {
         super(ownerId, 128, "Kavu Primarch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

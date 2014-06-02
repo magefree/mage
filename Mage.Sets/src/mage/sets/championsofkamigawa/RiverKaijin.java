@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class RiverKaijin extends CardImpl<RiverKaijin> {
+public class RiverKaijin extends CardImpl {
 
     public RiverKaijin (UUID ownerId) {
         super(ownerId, 83, "River Kaijin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

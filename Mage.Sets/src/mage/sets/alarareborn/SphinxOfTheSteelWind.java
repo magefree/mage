@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class SphinxOfTheSteelWind extends CardImpl<SphinxOfTheSteelWind> {
+public class SphinxOfTheSteelWind extends CardImpl {
      private static final FilterCard filter = new FilterCard("red and from green");
 
     static {

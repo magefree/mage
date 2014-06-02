@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class Pariah extends CardImpl<Pariah> {
+public class Pariah extends CardImpl {
 
     public Pariah(UUID ownerId) {
         super(ownerId, 28, "Pariah", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

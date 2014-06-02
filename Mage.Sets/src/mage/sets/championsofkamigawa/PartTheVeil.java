@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class PartTheVeil extends CardImpl<PartTheVeil> {
+public class PartTheVeil extends CardImpl {
 
     public PartTheVeil(UUID ownerId) {
         super(ownerId, 77, "Part the Veil", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");

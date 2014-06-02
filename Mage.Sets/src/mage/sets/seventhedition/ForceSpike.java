@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author anonymous
  */
-public class ForceSpike extends CardImpl<ForceSpike> {
+public class ForceSpike extends CardImpl {
 
     public ForceSpike(UUID ownerId) {
         super(ownerId, 76, "Force Spike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

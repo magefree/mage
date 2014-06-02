@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Quercitron
  */
-public class Chill extends CardImpl<Chill> {
+public class Chill extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Red spells");
     static {

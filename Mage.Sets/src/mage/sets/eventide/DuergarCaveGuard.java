@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class DuergarCaveGuard extends CardImpl<DuergarCaveGuard> {
+public class DuergarCaveGuard extends CardImpl {
 
     public DuergarCaveGuard(UUID ownerId) {
         super(ownerId, 51, "Duergar Cave-Guard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

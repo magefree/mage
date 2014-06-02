@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class PearlDragon extends CardImpl<PearlDragon> {
+public class PearlDragon extends CardImpl {
 
     public PearlDragon(UUID ownerId) {
         super(ownerId, 237, "Pearl Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ElusiveKrasis extends CardImpl<ElusiveKrasis> {
+public class ElusiveKrasis extends CardImpl {
 
     public ElusiveKrasis(UUID ownerId) {
         super(ownerId, 160, "Elusive Krasis", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

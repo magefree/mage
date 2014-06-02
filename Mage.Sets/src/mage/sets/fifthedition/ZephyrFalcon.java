@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ZephyrFalcon extends CardImpl<ZephyrFalcon> {
+public class ZephyrFalcon extends CardImpl {
 
     public ZephyrFalcon(UUID ownerId) {
         super(ownerId, 137, "Zephyr Falcon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

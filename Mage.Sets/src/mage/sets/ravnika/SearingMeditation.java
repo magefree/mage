@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class SearingMeditation extends CardImpl<SearingMeditation> {
+public class SearingMeditation extends CardImpl {
 
     public SearingMeditation(UUID ownerId) {
         super(ownerId, 226, "Searing Meditation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{W}");

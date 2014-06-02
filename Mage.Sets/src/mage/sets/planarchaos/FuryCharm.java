@@ -61,7 +61,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FuryCharm extends CardImpl<FuryCharm> {
+public class FuryCharm extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("suspended card");
     static {

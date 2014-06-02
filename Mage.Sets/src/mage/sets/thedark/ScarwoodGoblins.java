@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ScarwoodGoblins extends CardImpl<ScarwoodGoblins> {
+public class ScarwoodGoblins extends CardImpl {
 
     public ScarwoodGoblins(UUID ownerId) {
         super(ownerId, 119, "Scarwood Goblins", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{G}");

@@ -52,7 +52,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class UmezawasJitte extends CardImpl<UmezawasJitte> {
+public class UmezawasJitte extends CardImpl {
 
     public UmezawasJitte(UUID ownerId) {
         super(ownerId, 163, "Umezawa's Jitte", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

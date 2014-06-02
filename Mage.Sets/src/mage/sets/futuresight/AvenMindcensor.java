@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AvenMindcensor extends CardImpl<AvenMindcensor> {
+public class AvenMindcensor extends CardImpl {
 
     public AvenMindcensor(UUID ownerId) {
         super(ownerId, 18, "Aven Mindcensor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SafePassage  extends CardImpl<SafePassage> {
+public class SafePassage  extends CardImpl {
 
     private static final FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("you and creatures you control");
 

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class MortusStrider extends CardImpl<MortusStrider> {
+public class MortusStrider extends CardImpl {
 
     public MortusStrider(UUID ownerId) {
         super(ownerId, 179, "Mortus Strider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Flight extends CardImpl<Flight> {
+public class Flight extends CardImpl {
 
     public Flight (UUID ownerId) {
         super(ownerId, 53, "Flight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

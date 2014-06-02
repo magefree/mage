@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class Glitterfang extends CardImpl<Glitterfang> {
+public class Glitterfang extends CardImpl {
 
     public Glitterfang(UUID ownerId) {
         super(ownerId, 100, "Glitterfang", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

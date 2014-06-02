@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class AncientAmphitheater extends CardImpl<AncientAmphitheater> {
+public class AncientAmphitheater extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Giant from your hand");
     static {

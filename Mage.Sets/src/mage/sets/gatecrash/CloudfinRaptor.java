@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class CloudfinRaptor extends CardImpl<CloudfinRaptor> {
+public class CloudfinRaptor extends CardImpl {
 
     public CloudfinRaptor(UUID ownerId) {
         super(ownerId, 32, "Cloudfin Raptor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

@@ -41,7 +41,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class FemerefEnchantress extends CardImpl<FemerefEnchantress> {
+public class FemerefEnchantress extends CardImpl {
 
     public FemerefEnchantress(UUID ownerId) {
         super(ownerId, 129, "Femeref Enchantress", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{W}");

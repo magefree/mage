@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
  *
  * @author North
  */
-public class FreshMeat extends CardImpl<FreshMeat> {
+public class FreshMeat extends CardImpl {
 
     public FreshMeat(UUID ownerId) {
         super(ownerId, 109, "Fresh Meat", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{G}");

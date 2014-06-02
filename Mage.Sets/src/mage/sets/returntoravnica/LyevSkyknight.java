@@ -46,7 +46,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class LyevSkyknight extends CardImpl<LyevSkyknight> {
+public class LyevSkyknight extends CardImpl {
 
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent an opponent controls");
  

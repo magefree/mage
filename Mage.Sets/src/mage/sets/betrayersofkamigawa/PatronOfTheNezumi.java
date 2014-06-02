@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author LevelX2
  */
-public class PatronOfTheNezumi extends CardImpl<PatronOfTheNezumi> {
+public class PatronOfTheNezumi extends CardImpl {
 
     public PatronOfTheNezumi(UUID ownerId) {
         super(ownerId, 77, "Patron of the Nezumi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

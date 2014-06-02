@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ProtectiveBubble extends CardImpl<ProtectiveBubble> {
+public class ProtectiveBubble extends CardImpl {
 
     public ProtectiveBubble(UUID ownerId) {
         super(ownerId, 80, "Protective Bubble", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

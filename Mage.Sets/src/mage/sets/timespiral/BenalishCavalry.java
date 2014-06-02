@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class BenalishCavalry extends CardImpl<BenalishCavalry> {
+public class BenalishCavalry extends CardImpl {
 
     public BenalishCavalry(UUID ownerId) {
         super(ownerId, 4, "Benalish Cavalry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

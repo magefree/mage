@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class ObsidianBattleAxe extends CardImpl<ObsidianBattleAxe> {
+public class ObsidianBattleAxe extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Warrior creature");
     static {

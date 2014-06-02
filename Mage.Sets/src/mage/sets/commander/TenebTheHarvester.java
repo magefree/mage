@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class TenebTheHarvester extends CardImpl<TenebTheHarvester> {
+public class TenebTheHarvester extends CardImpl {
 
     public TenebTheHarvester(UUID ownerId) {
         super(ownerId, 230, "Teneb, the Harvester", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{G}{W}");

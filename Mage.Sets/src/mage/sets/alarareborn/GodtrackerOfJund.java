@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author jeffwadsworth
  */
-public class GodtrackerOfJund extends CardImpl<GodtrackerOfJund> {
+public class GodtrackerOfJund extends CardImpl {
     
     final private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     

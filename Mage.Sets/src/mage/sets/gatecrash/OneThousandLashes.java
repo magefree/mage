@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OneThousandLashes extends CardImpl<OneThousandLashes> {
+public class OneThousandLashes extends CardImpl {
 
     public OneThousandLashes(UUID ownerId) {
         super(ownerId, 183, "One Thousand Lashes", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{B}");

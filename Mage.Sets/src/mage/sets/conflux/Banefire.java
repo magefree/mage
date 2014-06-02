@@ -54,7 +54,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class Banefire extends CardImpl<Banefire> {
+public class Banefire extends CardImpl {
 
     public Banefire(UUID ownerId) {
         super(ownerId, 58, "Banefire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");

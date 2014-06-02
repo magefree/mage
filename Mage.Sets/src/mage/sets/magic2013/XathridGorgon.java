@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class XathridGorgon extends CardImpl<XathridGorgon> {
+public class XathridGorgon extends CardImpl {
 
     public XathridGorgon(UUID ownerId) {
         super(ownerId, 118, "Xathrid Gorgon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}");

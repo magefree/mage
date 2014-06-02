@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class HeadlessSkaab extends CardImpl<HeadlessSkaab> {
+public class HeadlessSkaab extends CardImpl {
 
     public HeadlessSkaab(UUID ownerId) {
         super(ownerId, 40, "Headless Skaab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

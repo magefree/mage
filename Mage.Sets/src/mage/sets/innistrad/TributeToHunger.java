@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class TributeToHunger extends CardImpl<TributeToHunger> {
+public class TributeToHunger extends CardImpl {
 
     public TributeToHunger(UUID ownerId) {
         super(ownerId, 119, "Tribute to Hunger", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

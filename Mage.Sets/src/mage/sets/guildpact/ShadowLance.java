@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ShadowLance extends CardImpl<ShadowLance> {
+public class ShadowLance extends CardImpl {
 
     public ShadowLance(UUID ownerId) {
         super(ownerId, 14, "Shadow Lance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

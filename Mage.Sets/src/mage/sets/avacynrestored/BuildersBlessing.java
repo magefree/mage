@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class BuildersBlessing extends CardImpl<BuildersBlessing> {
+public class BuildersBlessing extends CardImpl {
 
     public BuildersBlessing(UUID ownerId) {
         super(ownerId, 8, "Builder's Blessing", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

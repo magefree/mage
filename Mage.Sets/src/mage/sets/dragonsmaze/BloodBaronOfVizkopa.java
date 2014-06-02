@@ -58,7 +58,7 @@ import mage.players.Player;
  */
 
 
-public class BloodBaronOfVizkopa extends CardImpl<BloodBaronOfVizkopa> {
+public class BloodBaronOfVizkopa extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("white and from black");
     static {

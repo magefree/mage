@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class CracklingPerimeter extends CardImpl<CracklingPerimeter> {
+public class CracklingPerimeter extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Gate you control");
 

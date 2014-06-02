@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LuminatePrimordial extends CardImpl<LuminatePrimordial> {
+public class LuminatePrimordial extends CardImpl {
 
     public LuminatePrimordial(UUID ownerId) {
         super(ownerId, 20, "Luminate Primordial", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

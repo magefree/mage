@@ -49,7 +49,7 @@ import mage.game.Game;
  *
  * @author maurer.it_at_gmail.com
  */
-public class KhalniHydra extends CardImpl<KhalniHydra> {
+public class KhalniHydra extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter;
 

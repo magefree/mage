@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author Plopman
  */
-public class Groundbreaker extends CardImpl<Groundbreaker> {
+public class Groundbreaker extends CardImpl {
 
     public Groundbreaker(UUID ownerId) {
         super(ownerId, 148, "Groundbreaker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}{G}");

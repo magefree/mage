@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class FrontierGuide extends CardImpl<FrontierGuide> {
+public class FrontierGuide extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 

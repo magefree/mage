@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class DestructiveRevelry extends CardImpl<DestructiveRevelry> {
+public class DestructiveRevelry extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     static {

@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class HeirsOfStromkirk extends CardImpl<HeirsOfStromkirk> {
+public class HeirsOfStromkirk extends CardImpl {
 
     public HeirsOfStromkirk(UUID ownerId) {
         super(ownerId, 140, "Heirs of Stromkirk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

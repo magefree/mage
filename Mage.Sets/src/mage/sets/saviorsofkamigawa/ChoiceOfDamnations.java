@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class ChoiceOfDamnations extends CardImpl<ChoiceOfDamnations> {
+public class ChoiceOfDamnations extends CardImpl {
 
     public ChoiceOfDamnations(UUID ownerId) {
         super(ownerId, 62, "Choice of Damnations", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B}");

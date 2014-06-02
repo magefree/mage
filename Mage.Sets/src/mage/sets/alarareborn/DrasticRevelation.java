@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class DrasticRevelation extends CardImpl<DrasticRevelation> {
+public class DrasticRevelation extends CardImpl {
 
     public DrasticRevelation(UUID ownerId) {
         super(ownerId, 111, "Drastic Revelation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{B}{R}");

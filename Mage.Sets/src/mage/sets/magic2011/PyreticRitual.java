@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PyreticRitual extends CardImpl<PyreticRitual> {
+public class PyreticRitual extends CardImpl {
 
     public PyreticRitual(UUID ownerId) {
         super(ownerId, 153, "Pyretic Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BloodbraidElf extends CardImpl<BloodbraidElf> {
+public class BloodbraidElf extends CardImpl {
 
     public BloodbraidElf(UUID ownerId) {
         super(ownerId, 50, "Bloodbraid Elf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");

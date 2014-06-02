@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class IncurableOgre extends CardImpl<IncurableOgre> {
+public class IncurableOgre extends CardImpl {
 
     public IncurableOgre (UUID ownerId) {
         super(ownerId, 105, "Incurable Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

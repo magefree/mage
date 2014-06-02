@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Fog extends CardImpl<Fog> {
+public class Fog extends CardImpl {
 
     public Fog(UUID ownerId) {
         super(ownerId, 182, "Fog", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

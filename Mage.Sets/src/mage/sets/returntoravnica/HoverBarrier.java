@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HoverBarrier extends CardImpl<HoverBarrier> {
+public class HoverBarrier extends CardImpl {
 
     public HoverBarrier(UUID ownerId) {
         super(ownerId, 40, "Hover Barrier", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

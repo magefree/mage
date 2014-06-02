@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class YavimayaWurm extends CardImpl<YavimayaWurm> {
+public class YavimayaWurm extends CardImpl {
 
     public YavimayaWurm(UUID ownerId) {
         super(ownerId, 200, "Yavimaya Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WaterServant extends CardImpl<WaterServant> {
+public class WaterServant extends CardImpl {
 
     public WaterServant(UUID ownerId) {
         super(ownerId, 80, "Water Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

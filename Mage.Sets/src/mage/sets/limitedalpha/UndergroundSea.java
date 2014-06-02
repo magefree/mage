@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class UndergroundSea extends CardImpl<UndergroundSea> {
+public class UndergroundSea extends CardImpl {
 
     public UndergroundSea(UUID ownerId) {
         super(ownerId, 295, "Underground Sea", Rarity.RARE, new CardType[]{CardType.LAND}, "");

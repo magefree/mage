@@ -38,7 +38,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LevelX2
  */
-public class RavagesOfWar extends CardImpl<RavagesOfWar> {
+public class RavagesOfWar extends CardImpl {
 
     public RavagesOfWar(UUID ownerId) {
         super(ownerId, 17, "Ravages of War", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}");

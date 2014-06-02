@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class ChildhoodHorror extends CardImpl<ChildhoodHorror> {
+public class ChildhoodHorror extends CardImpl {
 
     public ChildhoodHorror(UUID ownerId) {
         super(ownerId, 123, "Childhood Horror", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

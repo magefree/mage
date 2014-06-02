@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX
  */
-public class AphoticWisps extends CardImpl<AphoticWisps> {
+public class AphoticWisps extends CardImpl {
 
     public AphoticWisps (UUID ownerId) {
         super(ownerId, 55, "Aphotic Wisps", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

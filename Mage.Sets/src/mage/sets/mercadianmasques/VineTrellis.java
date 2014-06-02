@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class VineTrellis extends CardImpl<VineTrellis> {
+public class VineTrellis extends CardImpl {
 
     public VineTrellis(UUID ownerId) {
         super(ownerId, 285, "Vine Trellis", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

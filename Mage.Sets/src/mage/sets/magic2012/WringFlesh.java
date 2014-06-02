@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class WringFlesh extends CardImpl<WringFlesh> {
+public class WringFlesh extends CardImpl {
 
     public WringFlesh(UUID ownerId) {
         super(ownerId, 118, "Wring Flesh", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

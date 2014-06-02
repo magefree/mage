@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SunspringExpedition extends CardImpl<SunspringExpedition> {
+public class SunspringExpedition extends CardImpl {
 
     public SunspringExpedition(UUID ownerId) {
         super(ownerId, 37, "Sunspring Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

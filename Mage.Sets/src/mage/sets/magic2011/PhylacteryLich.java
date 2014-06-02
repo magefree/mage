@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PhylacteryLich extends CardImpl<PhylacteryLich> {
+public class PhylacteryLich extends CardImpl {
 
     public PhylacteryLich(UUID ownerId) {
         super(ownerId, 110, "Phylactery Lich", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");

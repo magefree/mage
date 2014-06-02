@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jeffwadsworth
  */
-public class RingOfValkas extends CardImpl<RingOfValkas> {
+public class RingOfValkas extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     

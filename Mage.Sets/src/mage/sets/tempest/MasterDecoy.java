@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MasterDecoy extends CardImpl<MasterDecoy> {
+public class MasterDecoy extends CardImpl {
 
     public MasterDecoy(UUID ownerId) {
         super(ownerId, 241, "Master Decoy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

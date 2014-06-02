@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author jeffwadsworth
  */
-public class LeoninArmorguard extends CardImpl<LeoninArmorguard> {
+public class LeoninArmorguard extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
     

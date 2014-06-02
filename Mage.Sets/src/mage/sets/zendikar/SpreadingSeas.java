@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpreadingSeas extends CardImpl<SpreadingSeas> {
+public class SpreadingSeas extends CardImpl {
 
     public SpreadingSeas(UUID ownerId) {
         super(ownerId, 70, "Spreading Seas", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

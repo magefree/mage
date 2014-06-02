@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Tarfire extends CardImpl<Tarfire> {
+public class Tarfire extends CardImpl {
 
     public Tarfire(UUID ownerId) {
         super(ownerId, 194, "Tarfire", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

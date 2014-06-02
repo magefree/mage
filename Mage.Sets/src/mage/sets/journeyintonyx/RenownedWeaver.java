@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class RenownedWeaver extends CardImpl<RenownedWeaver> {
+public class RenownedWeaver extends CardImpl {
 
     public RenownedWeaver(UUID ownerId) {
         super(ownerId, 137, "Renowned Weaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

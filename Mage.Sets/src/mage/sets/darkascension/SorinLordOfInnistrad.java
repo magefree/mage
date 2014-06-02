@@ -62,7 +62,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class SorinLordOfInnistrad extends CardImpl<SorinLordOfInnistrad> {
+public class SorinLordOfInnistrad extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker");
 

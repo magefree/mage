@@ -51,7 +51,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author LevelX
  */
-public class EightAndAHalfTale extends CardImpl<EightAndAHalfTale> {
+public class EightAndAHalfTale extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("white");
 

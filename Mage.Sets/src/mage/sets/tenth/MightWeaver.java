@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MightWeaver extends CardImpl<MightWeaver> {
+public class MightWeaver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red or white creature");
 

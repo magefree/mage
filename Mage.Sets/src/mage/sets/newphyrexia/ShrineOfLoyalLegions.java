@@ -53,7 +53,7 @@ import mage.game.permanent.token.MyrToken;
  *
  * @author North
  */
-public class ShrineOfLoyalLegions extends CardImpl<ShrineOfLoyalLegions> {
+public class ShrineOfLoyalLegions extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a white spell");
 

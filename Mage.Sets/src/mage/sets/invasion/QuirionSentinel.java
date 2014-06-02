@@ -42,7 +42,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class QuirionSentinel extends CardImpl<QuirionSentinel> {
+public class QuirionSentinel extends CardImpl {
 
     public QuirionSentinel(UUID ownerId) {
         super(ownerId, 204, "Quirion Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

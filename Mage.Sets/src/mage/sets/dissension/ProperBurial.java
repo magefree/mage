@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class ProperBurial extends CardImpl<ProperBurial> {
+public class ProperBurial extends CardImpl {
 
     public ProperBurial(UUID ownerId) {
         super(ownerId, 16, "Proper Burial", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ValakutFireboar extends CardImpl<ValakutFireboar> {
+public class ValakutFireboar extends CardImpl {
 
     public ValakutFireboar(UUID ownerId) {
         super(ownerId, 170, "Valakut Fireboar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class GrixisSlavedriver extends CardImpl<GrixisSlavedriver> {
+public class GrixisSlavedriver extends CardImpl {
 
     public GrixisSlavedriver(UUID ownerId) {
         super(ownerId, 46, "Grixis Slavedriver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");

@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HomewardPath extends CardImpl<HomewardPath> {
+public class HomewardPath extends CardImpl {
 
     public HomewardPath(UUID ownerId) {
         super(ownerId, 295, "Homeward Path", Rarity.RARE, new CardType[]{CardType.LAND}, "");

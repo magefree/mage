@@ -42,7 +42,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class AkroanCrusader extends CardImpl<AkroanCrusader> {
+public class AkroanCrusader extends CardImpl {
 
     public AkroanCrusader(UUID ownerId) {
         super(ownerId, 111, "Akroan Crusader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

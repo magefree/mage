@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class OnyxGoblet extends CardImpl<OnyxGoblet> {
+public class OnyxGoblet extends CardImpl {
 
     public OnyxGoblet (UUID ownerId) {
         super(ownerId, 81, "Onyx Goblet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}{B}");

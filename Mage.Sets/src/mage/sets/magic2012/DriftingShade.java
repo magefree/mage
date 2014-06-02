@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class DriftingShade extends CardImpl<DriftingShade> {
+public class DriftingShade extends CardImpl {
 
     public DriftingShade(UUID ownerId) {
         super(ownerId, 96, "Drifting Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class StromkirkCaptain extends CardImpl<StromkirkCaptain> {
+public class StromkirkCaptain extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampire creatures");
 
     static {

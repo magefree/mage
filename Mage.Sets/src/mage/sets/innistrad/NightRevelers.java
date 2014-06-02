@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class NightRevelers extends CardImpl<NightRevelers> {
+public class NightRevelers extends CardImpl {
 
     private static final String rule = "{this} has haste as long as an opponent controls a Human.";
 

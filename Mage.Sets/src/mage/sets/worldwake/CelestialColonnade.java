@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CelestialColonnade extends CardImpl<CelestialColonnade> {
+public class CelestialColonnade extends CardImpl {
 
     public CelestialColonnade(UUID ownerId) {
         super(ownerId, 133, "Celestial Colonnade", Rarity.RARE, new CardType[]{CardType.LAND}, null);

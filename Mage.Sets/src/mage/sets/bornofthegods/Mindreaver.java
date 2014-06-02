@@ -62,7 +62,7 @@ import mage.util.CardUtil;
 *
  * @author LevelX2
  */
-public class Mindreaver extends CardImpl<Mindreaver> {
+public class Mindreaver extends CardImpl {
 
     public Mindreaver(UUID ownerId) {
         super(ownerId, 44, "Mindreaver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{U}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class SickAndTired extends CardImpl<SickAndTired> {
+public class SickAndTired extends CardImpl {
 
     public SickAndTired(UUID ownerId) {
         super(ownerId, 66, "Sick and Tired", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

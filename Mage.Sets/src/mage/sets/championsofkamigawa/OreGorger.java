@@ -43,7 +43,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
 /**
  * @author Loki
  */
-public class OreGorger extends CardImpl<OreGorger> {
+public class OreGorger extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

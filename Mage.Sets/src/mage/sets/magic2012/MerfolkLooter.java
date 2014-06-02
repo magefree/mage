@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class MerfolkLooter extends CardImpl<MerfolkLooter> {
+public class MerfolkLooter extends CardImpl {
 
     public MerfolkLooter(UUID ownerId) {
         super(ownerId, 65, "Merfolk Looter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

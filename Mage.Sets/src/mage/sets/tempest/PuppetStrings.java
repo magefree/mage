@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class PuppetStrings extends CardImpl<PuppetStrings> {
+public class PuppetStrings extends CardImpl {
 
     public PuppetStrings(UUID ownerId) {
         super(ownerId, 294, "Puppet Strings", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

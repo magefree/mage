@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class DreadWarlock extends CardImpl<DreadWarlock> {
+public class DreadWarlock extends CardImpl {
 
     public DreadWarlock(UUID ownerId) {
         super(ownerId, 94, "Dread Warlock", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

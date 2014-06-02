@@ -53,7 +53,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class GoblinCharbelcher extends CardImpl<GoblinCharbelcher> {
+public class GoblinCharbelcher extends CardImpl {
 
     public GoblinCharbelcher(UUID ownerId) {
         super(ownerId, 176, "Goblin Charbelcher", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

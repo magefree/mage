@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Disentomb extends CardImpl<Disentomb> {
+public class Disentomb extends CardImpl {
 
     private static FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 

@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Morphling extends CardImpl<Morphling> {
+public class Morphling extends CardImpl {
 
     public Morphling(UUID ownerId) {
         super(ownerId, 85, "Morphling", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

@@ -53,7 +53,7 @@ import mage.game.turn.Step;
  *
  * @author LevelX2
  */
-public class PhantomNantuko extends CardImpl<PhantomNantuko> {
+public class PhantomNantuko extends CardImpl {
 
     public PhantomNantuko(UUID ownerId) {
         super(ownerId, 160, "Phantom Nantuko", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

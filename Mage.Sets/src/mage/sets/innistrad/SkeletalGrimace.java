@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SkeletalGrimace extends CardImpl<SkeletalGrimace> {
+public class SkeletalGrimace extends CardImpl {
 
     public SkeletalGrimace(UUID ownerId) {
         super(ownerId, 116, "Skeletal Grimace", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

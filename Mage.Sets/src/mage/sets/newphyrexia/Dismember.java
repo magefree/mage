@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class Dismember extends CardImpl<Dismember> {
+public class Dismember extends CardImpl {
 
     public Dismember (UUID ownerId) {
         super(ownerId, 57, "Dismember", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{BP}{BP}");

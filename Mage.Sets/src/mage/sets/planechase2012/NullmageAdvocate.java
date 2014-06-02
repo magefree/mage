@@ -51,7 +51,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class NullmageAdvocate extends CardImpl<NullmageAdvocate> {
+public class NullmageAdvocate extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {

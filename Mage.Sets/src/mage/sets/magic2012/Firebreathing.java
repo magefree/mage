@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Firebreathing extends CardImpl<Firebreathing> {
+public class Firebreathing extends CardImpl {
 
     public Firebreathing (UUID ownerId) {
         super(ownerId, 132, "Firebreathing", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

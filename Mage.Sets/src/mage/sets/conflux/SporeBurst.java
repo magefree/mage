@@ -39,7 +39,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author North
  */
-public class SporeBurst extends CardImpl<SporeBurst> {
+public class SporeBurst extends CardImpl {
 
     public SporeBurst(UUID ownerId) {
         super(ownerId, 93, "Spore Burst", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

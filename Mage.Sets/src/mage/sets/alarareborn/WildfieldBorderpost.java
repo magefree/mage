@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class WildfieldBorderpost extends CardImpl<WildfieldBorderpost> {
+public class WildfieldBorderpost extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a basic land");
 

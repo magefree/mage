@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class VineKami extends CardImpl<VineKami> {
+public class VineKami extends CardImpl {
 
     public VineKami(UUID ownerId) {
         super(ownerId, 249, "Vine Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class ArcboundStinger extends CardImpl<ArcboundStinger> {
+public class ArcboundStinger extends CardImpl {
 
     public ArcboundStinger(UUID ownerId) {
         super(ownerId, 103, "Arcbound Stinger", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

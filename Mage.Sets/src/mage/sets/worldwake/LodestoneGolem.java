@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class LodestoneGolem extends CardImpl<LodestoneGolem> {
+public class LodestoneGolem extends CardImpl {
 
     public LodestoneGolem(UUID ownerId) {
         super(ownerId, 127, "Lodestone Golem", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

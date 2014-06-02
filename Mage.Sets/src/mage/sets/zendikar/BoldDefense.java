@@ -50,7 +50,7 @@ import mage.game.Game;
 /**
  * @author nantuko, Loki
  */
-public class BoldDefense extends CardImpl<BoldDefense> {
+public class BoldDefense extends CardImpl {
 
     private final String staticText = "If {this]} was kicked, instead creatures you control get +2/+2 and gain first strike until end of turn";
 

@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  * @author jeffwadsworth
  *
  */
-public class NeverendingTorment extends CardImpl<NeverendingTorment> {
+public class NeverendingTorment extends CardImpl {
 
     public NeverendingTorment(UUID ownerId) {
         super(ownerId, 83, "Neverending Torment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

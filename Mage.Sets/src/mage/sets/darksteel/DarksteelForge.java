@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 /**
  * @author Loki
  */
-public class DarksteelForge extends CardImpl<DarksteelForge> {
+public class DarksteelForge extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts you control");
 

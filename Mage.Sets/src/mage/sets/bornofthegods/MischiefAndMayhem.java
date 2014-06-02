@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MischiefAndMayhem extends CardImpl<MischiefAndMayhem> {
+public class MischiefAndMayhem extends CardImpl {
 
     public MischiefAndMayhem(UUID ownerId) {
         super(ownerId, 126, "Mischief and Mayhem", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");

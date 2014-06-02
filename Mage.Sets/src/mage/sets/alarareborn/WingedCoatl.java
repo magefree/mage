@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WingedCoatl extends CardImpl<WingedCoatl> {
+public class WingedCoatl extends CardImpl {
 
     public WingedCoatl (UUID ownerId) {
         super(ownerId, 105, "Winged Coatl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

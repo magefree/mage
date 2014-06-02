@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class KarametrasAcolyte extends CardImpl<KarametrasAcolyte> {
+public class KarametrasAcolyte extends CardImpl {
 
     public KarametrasAcolyte(UUID ownerId) {
         super(ownerId, 160, "Karametra's Acolyte", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

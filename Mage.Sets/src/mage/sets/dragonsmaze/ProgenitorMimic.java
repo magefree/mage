@@ -60,7 +60,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author LevelX2
  */
-public class ProgenitorMimic extends CardImpl<ProgenitorMimic> {
+public class ProgenitorMimic extends CardImpl {
 
     public ProgenitorMimic(UUID ownerId) {
         super(ownerId, 92, "Progenitor Mimic", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{U}");

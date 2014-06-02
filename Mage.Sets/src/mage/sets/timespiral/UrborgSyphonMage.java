@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class UrborgSyphonMage extends CardImpl<UrborgSyphonMage> {
+public class UrborgSyphonMage extends CardImpl {
 
     public UrborgSyphonMage(UUID ownerId) {
         super(ownerId, 139, "Urborg Syphon-Mage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

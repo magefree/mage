@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class FangSkulkin extends CardImpl<FangSkulkin> {
+public class FangSkulkin extends CardImpl {
 
     private static final FilterCreaturePermanent filterBlackCreature = new FilterCreaturePermanent("black creature");
 

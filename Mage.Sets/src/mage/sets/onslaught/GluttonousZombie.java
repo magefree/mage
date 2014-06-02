@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GluttonousZombie extends CardImpl<GluttonousZombie> {
+public class GluttonousZombie extends CardImpl {
 
     public GluttonousZombie(UUID ownerId) {
         super(ownerId, 151, "Gluttonous Zombie", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

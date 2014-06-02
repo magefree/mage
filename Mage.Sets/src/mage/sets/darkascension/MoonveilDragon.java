@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MoonveilDragon extends CardImpl<MoonveilDragon> {
+public class MoonveilDragon extends CardImpl {
 
     public MoonveilDragon(UUID ownerId) {
         super(ownerId, 99, "Moonveil Dragon", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");

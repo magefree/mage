@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class SlithBloodletter extends CardImpl<SlithBloodletter> {
+public class SlithBloodletter extends CardImpl {
 
     public SlithBloodletter(UUID ownerId) {
         super(ownerId, 77, "Slith Bloodletter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");

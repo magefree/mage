@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Loki, noxx
  */
-public class Confiscate extends CardImpl<Confiscate> {
+public class Confiscate extends CardImpl {
 
     public Confiscate(UUID ownerId) {
         super(ownerId, 66, "Confiscate", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");

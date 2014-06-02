@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class HomingLightning extends CardImpl<HomingLightning> {
+public class HomingLightning extends CardImpl {
 
     public HomingLightning(UUID ownerId) {
         super(ownerId, 96, "Homing Lightning", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");

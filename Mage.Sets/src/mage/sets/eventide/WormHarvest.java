@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class WormHarvest extends CardImpl<WormHarvest> {
+public class WormHarvest extends CardImpl {
 
     public WormHarvest(UUID ownerId) {
         super(ownerId, 131, "Worm Harvest", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B/G}{B/G}{B/G}");

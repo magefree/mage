@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
 /**
  * @author Loki
  */
-public class Soilshaper extends CardImpl<Soilshaper> {
+public class Soilshaper extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

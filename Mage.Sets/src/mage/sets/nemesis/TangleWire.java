@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class TangleWire extends CardImpl<TangleWire> {
+public class TangleWire extends CardImpl {
 
     public TangleWire(UUID ownerId) {
         super(ownerId, 139, "Tangle Wire", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

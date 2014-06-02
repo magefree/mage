@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class Talonrend extends CardImpl<Talonrend> {
+public class Talonrend extends CardImpl {
 
     public Talonrend(UUID ownerId) {
         super(ownerId, 30, "Talonrend", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

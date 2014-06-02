@@ -43,7 +43,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class PullFromTheDeep extends CardImpl<PullFromTheDeep> {
+public class PullFromTheDeep extends CardImpl {
 
     private static final FilterCard filterInstant = new FilterCard("instant card from your graveyard");
     private static final FilterCard filterSorcery = new FilterCard("sorcery card from your graveyard");

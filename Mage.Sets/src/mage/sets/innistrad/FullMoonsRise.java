@@ -52,7 +52,7 @@ import mage.abilities.effects.Effect;
 /**
  * @author nantuko
  */
-public class FullMoonsRise extends CardImpl<FullMoonsRise> {
+public class FullMoonsRise extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf creatures");
 

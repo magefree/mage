@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class ShizoDeathsStorehouse extends CardImpl<ShizoDeathsStorehouse> {
+public class ShizoDeathsStorehouse extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class BlackLotus extends CardImpl<BlackLotus> {
+public class BlackLotus extends CardImpl {
 
     public BlackLotus(UUID ownerId) {
         super(ownerId, 232, "Black Lotus", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");

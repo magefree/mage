@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class BlindSpotGiant extends CardImpl<BlindSpotGiant> {
+public class BlindSpotGiant extends CardImpl {
 
     public BlindSpotGiant(UUID ownerId) {
         super(ownerId, 105, "Blind-Spot Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class Twinflame extends CardImpl<Twinflame> {
+public class Twinflame extends CardImpl {
 
     public Twinflame(UUID ownerId) {
         super(ownerId, 115, "Twinflame", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");

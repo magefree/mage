@@ -41,7 +41,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class ScorchTheFields extends CardImpl<ScorchTheFields> {
+public class ScorchTheFields extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creature");
 

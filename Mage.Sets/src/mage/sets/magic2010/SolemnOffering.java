@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SolemnOffering extends CardImpl<SolemnOffering> {
+public class SolemnOffering extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

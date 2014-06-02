@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class BeseechTheQueen extends CardImpl<BeseechTheQueen> {
+public class BeseechTheQueen extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("card with converted mana cost less than or equal to the number of lands you control");
     static{

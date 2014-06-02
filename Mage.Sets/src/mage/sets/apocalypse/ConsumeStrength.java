@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ConsumeStrength extends CardImpl<ConsumeStrength> {
+public class ConsumeStrength extends CardImpl {
 
     public ConsumeStrength(UUID ownerId) {
         super(ownerId, 93, "Consume Strength", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{G}");

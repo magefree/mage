@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author North
  */
-public class Vesuva extends CardImpl<Vesuva> {
+public class Vesuva extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("land");
 

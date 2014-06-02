@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SulfurousSprings extends CardImpl<SulfurousSprings> {
+public class SulfurousSprings extends CardImpl {
 
     public SulfurousSprings(UUID ownerId) {
         super(ownerId, 359, "Sulfurous Springs", Rarity.RARE, new CardType[]{CardType.LAND}, "");

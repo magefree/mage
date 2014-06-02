@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class FiredrinkerSatyr extends CardImpl<FiredrinkerSatyr> {
+public class FiredrinkerSatyr extends CardImpl {
 
     public FiredrinkerSatyr(UUID ownerId) {
         super(ownerId, 122, "Firedrinker Satyr", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HalimarDepths extends CardImpl<HalimarDepths> {
+public class HalimarDepths extends CardImpl {
 
     public HalimarDepths(UUID ownerId) {
         super(ownerId, 137, "Halimar Depths", Rarity.COMMON, new CardType[]{CardType.LAND}, null);

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class WeatherseedElf extends CardImpl<WeatherseedElf> {
+public class WeatherseedElf extends CardImpl {
 
     public WeatherseedElf(UUID ownerId) {
         super(ownerId, 115, "Weatherseed Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

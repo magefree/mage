@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class EntomberExarch extends CardImpl<EntomberExarch> {
+public class EntomberExarch extends CardImpl {
 
     public EntomberExarch(UUID ownerId) {
         super(ownerId, 59, "Entomber Exarch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

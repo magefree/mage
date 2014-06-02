@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Quercitron
  */
-public class LivingLands extends CardImpl<LivingLands> {
+public class LivingLands extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("All Forests");
 

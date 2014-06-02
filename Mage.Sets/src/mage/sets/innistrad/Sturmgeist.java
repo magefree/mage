@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Sturmgeist extends CardImpl<Sturmgeist> {
+public class Sturmgeist extends CardImpl {
 
     public Sturmgeist(UUID ownerId) {
         super(ownerId, 82, "Sturmgeist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

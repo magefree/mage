@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CurseOfTheSwine extends CardImpl<CurseOfTheSwine> {
+public class CurseOfTheSwine extends CardImpl {
 
     public CurseOfTheSwine(UUID ownerId) {
         super(ownerId, 46, "Curse of the Swine", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");

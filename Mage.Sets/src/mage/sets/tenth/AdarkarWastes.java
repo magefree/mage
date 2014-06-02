@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class AdarkarWastes extends CardImpl<AdarkarWastes> {
+public class AdarkarWastes extends CardImpl {
 
     public AdarkarWastes(UUID ownerId) {
         super(ownerId, 347, "Adarkar Wastes", Rarity.RARE, new CardType[]{CardType.LAND}, "");

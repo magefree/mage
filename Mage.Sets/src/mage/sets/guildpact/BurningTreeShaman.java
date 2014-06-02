@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class BurningTreeShaman extends CardImpl<BurningTreeShaman> {
+public class BurningTreeShaman extends CardImpl {
 
     public BurningTreeShaman (UUID ownerId) {
         super(ownerId, 105, "Burning-Tree Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");

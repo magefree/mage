@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class LabyrinthChampion extends CardImpl<LabyrinthChampion> {
+public class LabyrinthChampion extends CardImpl {
 
     public LabyrinthChampion(UUID ownerId) {
         super(ownerId, 126, "Labyrinth Champion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

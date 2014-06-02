@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LeapOfFlame extends CardImpl<LeapOfFlame> {
+public class LeapOfFlame extends CardImpl {
 
     public LeapOfFlame(UUID ownerId) {
         super(ownerId, 121, "Leap of Flame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{R}");

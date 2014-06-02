@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class BorosCluestone extends CardImpl<BorosCluestone> {
+public class BorosCluestone extends CardImpl {
 
     public BorosCluestone(UUID ownerId) {
         super(ownerId, 137, "Boros Cluestone", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

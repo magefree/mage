@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StrengthFromTheFallen extends CardImpl<StrengthFromTheFallen> {
+public class StrengthFromTheFallen extends CardImpl {
 
     public StrengthFromTheFallen(UUID ownerId) {
         super(ownerId, 143, "Strength from the Fallen", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

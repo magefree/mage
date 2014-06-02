@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class MyrMoonvessel extends CardImpl<MyrMoonvessel> {
+public class MyrMoonvessel extends CardImpl {
 
     public MyrMoonvessel(UUID ownerId) {
         super(ownerId, 133, "Myr Moonvessel", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

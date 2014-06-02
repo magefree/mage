@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class GyreSage extends CardImpl<GyreSage> {
+public class GyreSage extends CardImpl {
 
     public GyreSage(UUID ownerId) {
         super(ownerId, 123, "Gyre Sage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

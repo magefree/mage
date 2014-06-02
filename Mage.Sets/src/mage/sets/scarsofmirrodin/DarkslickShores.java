@@ -46,7 +46,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class DarkslickShores extends CardImpl<DarkslickShores> {
+public class DarkslickShores extends CardImpl {
 
     private static FilterLandPermanent filter = new FilterLandPermanent();
 

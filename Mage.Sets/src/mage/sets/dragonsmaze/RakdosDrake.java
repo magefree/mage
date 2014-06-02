@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 
 
-public class RakdosDrake extends CardImpl<RakdosDrake> {
+public class RakdosDrake extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other creatures you control");
     static {

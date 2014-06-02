@@ -49,7 +49,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author jeffwadsworth
  */
-public class TuktukScrapper extends CardImpl<TuktukScrapper> {
+public class TuktukScrapper extends CardImpl {
 
     public TuktukScrapper(UUID ownerId) {
         super(ownerId, 94, "Tuktuk Scrapper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

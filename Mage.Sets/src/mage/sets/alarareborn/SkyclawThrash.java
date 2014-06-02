@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author jeffwadsworth
  */
-public class SkyclawThrash extends CardImpl<SkyclawThrash> {
+public class SkyclawThrash extends CardImpl {
 
     public SkyclawThrash(UUID ownerId) {
         super(ownerId, 89, "Skyclaw Thrash", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}{R}");

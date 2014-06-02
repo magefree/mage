@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class PuncturingLight extends CardImpl<PuncturingLight> {
+public class PuncturingLight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterAttackingOrBlockingCreature("attacking or blocking creature with power 3 or less");
 

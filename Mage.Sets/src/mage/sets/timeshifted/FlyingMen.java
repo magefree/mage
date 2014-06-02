@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FlyingMen extends CardImpl<FlyingMen> {
+public class FlyingMen extends CardImpl {
 
     public FlyingMen(UUID ownerId) {
         super(ownerId, 20, "Flying Men", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

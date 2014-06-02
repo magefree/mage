@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX
  */
-public class SenseiGoldenTail extends CardImpl<SenseiGoldenTail> {
+public class SenseiGoldenTail extends CardImpl {
 
     public SenseiGoldenTail (UUID ownerId) {
         super(ownerId, 44, "Sensei Golden-Tail", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");

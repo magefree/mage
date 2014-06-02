@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class Foil extends CardImpl<Foil> {
+public class Foil extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Island card");
     static {

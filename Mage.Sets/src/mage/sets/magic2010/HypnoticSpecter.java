@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class HypnoticSpecter extends CardImpl<HypnoticSpecter> {
+public class HypnoticSpecter extends CardImpl {
 
     public HypnoticSpecter(UUID ownerId) {
         super(ownerId, 100, "Hypnotic Specter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

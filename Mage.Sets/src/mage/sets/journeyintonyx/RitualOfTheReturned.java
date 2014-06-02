@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class RitualOfTheReturned extends CardImpl<RitualOfTheReturned> {
+public class RitualOfTheReturned extends CardImpl {
 
     public RitualOfTheReturned(UUID ownerId) {
         super(ownerId, 80, "Ritual of the Returned", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");

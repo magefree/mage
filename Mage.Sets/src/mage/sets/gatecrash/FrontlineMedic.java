@@ -53,7 +53,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class FrontlineMedic extends CardImpl<FrontlineMedic> {
+public class FrontlineMedic extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell with {X} in its mana cost");
 

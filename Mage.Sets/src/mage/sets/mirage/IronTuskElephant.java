@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class IronTuskElephant extends CardImpl<IronTuskElephant> {
+public class IronTuskElephant extends CardImpl {
 
     public IronTuskElephant(UUID ownerId) {
         super(ownerId, 226, "Iron Tusk Elephant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

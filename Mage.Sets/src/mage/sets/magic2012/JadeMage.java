@@ -43,7 +43,7 @@ import mage.game.permanent.token.SaprolingToken;
 /**
  * @author Loki
  */
-public class JadeMage extends CardImpl<JadeMage> {
+public class JadeMage extends CardImpl {
 
     public JadeMage(UUID ownerId) {
         super(ownerId, 181, "Jade Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

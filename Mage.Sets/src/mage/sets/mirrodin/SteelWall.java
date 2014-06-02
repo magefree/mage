@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SteelWall extends CardImpl<SteelWall> {
+public class SteelWall extends CardImpl {
 
     public SteelWall (UUID ownerId) {
         super(ownerId, 248, "Steel Wall", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AmphinCutthroat extends CardImpl<AmphinCutthroat> {
+public class AmphinCutthroat extends CardImpl {
 
     public AmphinCutthroat(UUID ownerId) {
         super(ownerId, 43, "Amphin Cutthroat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

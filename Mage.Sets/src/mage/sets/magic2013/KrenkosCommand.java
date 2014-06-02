@@ -38,7 +38,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author North
  */
-public class KrenkosCommand extends CardImpl<KrenkosCommand> {
+public class KrenkosCommand extends CardImpl {
 
     public KrenkosCommand(UUID ownerId) {
         super(ownerId, 139, "Krenko's Command", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

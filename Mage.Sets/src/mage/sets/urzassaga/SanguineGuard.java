@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class SanguineGuard extends CardImpl<SanguineGuard>{
+public class SanguineGuard extends CardImpl{
 
     public SanguineGuard(UUID ownerId) {
         super(ownerId, 155, "Sanguine Guard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

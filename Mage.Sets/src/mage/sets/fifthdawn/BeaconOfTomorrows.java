@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class BeaconOfTomorrows extends CardImpl<BeaconOfTomorrows> {
+public class BeaconOfTomorrows extends CardImpl {
 
     public BeaconOfTomorrows(UUID ownerId) {
         super(ownerId, 24, "Beacon of Tomorrows", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{U}{U}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class Scapeshift extends CardImpl<Scapeshift> {
+public class Scapeshift extends CardImpl {
 
     public Scapeshift(UUID ownerId) {
         super(ownerId, 136, "Scapeshift", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");

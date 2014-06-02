@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class MoorlandHaunt extends CardImpl<MoorlandHaunt> {
+public class MoorlandHaunt extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card from your graveyard");
 

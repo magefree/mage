@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class HellionCrucible extends CardImpl<HellionCrucible> {
+public class HellionCrucible extends CardImpl {
 
     public HellionCrucible(UUID ownerId) {
         super(ownerId, 226, "Hellion Crucible", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ViashinoSlaughtermaster extends CardImpl<ViashinoSlaughtermaster> {
+public class ViashinoSlaughtermaster extends CardImpl {
 
     public ViashinoSlaughtermaster(UUID ownerId) {
         super(ownerId, 73, "Viashino Slaughtermaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

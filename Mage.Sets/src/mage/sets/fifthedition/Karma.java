@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class Karma extends CardImpl<Karma> {
+public class Karma extends CardImpl {
 
 
     

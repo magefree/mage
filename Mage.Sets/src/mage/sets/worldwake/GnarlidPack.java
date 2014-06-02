@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class GnarlidPack extends CardImpl<GnarlidPack> {
+public class GnarlidPack extends CardImpl {
 
     public GnarlidPack(UUID ownerId) {
         super(ownerId, 101, "Gnarlid Pack", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

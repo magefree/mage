@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class FemerefKnight extends CardImpl<FemerefKnight> {
+public class FemerefKnight extends CardImpl {
 
     public FemerefKnight(UUID ownerId) {
         super(ownerId, 222, "Femeref Knight", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

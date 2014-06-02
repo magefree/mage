@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class TajicBladeOfTheLegion extends CardImpl<TajicBladeOfTheLegion> {
+public class TajicBladeOfTheLegion extends CardImpl {
 
     public TajicBladeOfTheLegion(UUID ownerId) {
         super(ownerId, 107, "Tajic, Blade of the Legion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");

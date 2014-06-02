@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class PradeshGypsies extends CardImpl<PradeshGypsies> {
+public class PradeshGypsies extends CardImpl {
 
     public PradeshGypsies(UUID ownerId) {
         super(ownerId, 179, "Pradesh Gypsies", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

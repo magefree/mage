@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AutumnsVeil extends CardImpl<AutumnsVeil> {
+public class AutumnsVeil extends CardImpl {
 
     private static final FilterSpell filterTarget1 = new FilterSpell("spells you control");
     private static final FilterControlledCreaturePermanent filterTarget2 = new FilterControlledCreaturePermanent();

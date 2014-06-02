@@ -44,7 +44,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author Backfir3
  */
-public class NeurokSpy extends CardImpl<NeurokSpy> {
+public class NeurokSpy extends CardImpl {
 
     public NeurokSpy(UUID ownerId) {
         super(ownerId, 44, "Neurok Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class Mindcrank extends CardImpl<Mindcrank> {
+public class Mindcrank extends CardImpl {
 
     public Mindcrank(UUID ownerId) {
         super(ownerId, 144, "Mindcrank", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

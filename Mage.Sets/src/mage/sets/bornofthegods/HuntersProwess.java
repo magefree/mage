@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HuntersProwess extends CardImpl<HuntersProwess> {
+public class HuntersProwess extends CardImpl {
 
     public HuntersProwess(UUID ownerId) {
         super(ownerId, 124, "Hunter's Prowess", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");

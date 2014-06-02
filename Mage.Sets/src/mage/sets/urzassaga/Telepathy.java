@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class Telepathy extends CardImpl<Telepathy> {
+public class Telepathy extends CardImpl {
 
     public Telepathy(UUID ownerId) {
         super(ownerId, 102, "Telepathy", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

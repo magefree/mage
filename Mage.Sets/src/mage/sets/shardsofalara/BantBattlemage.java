@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BantBattlemage extends CardImpl<BantBattlemage> {
+public class BantBattlemage extends CardImpl {
 
     public BantBattlemage (UUID ownerId) {
         super(ownerId, 5, "Bant Battlemage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

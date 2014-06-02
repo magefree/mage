@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class WreakHavoc extends CardImpl<WreakHavoc> {
+public class WreakHavoc extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 

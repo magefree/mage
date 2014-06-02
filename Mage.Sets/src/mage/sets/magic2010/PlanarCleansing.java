@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class PlanarCleansing extends CardImpl<PlanarCleansing> {
+public class PlanarCleansing extends CardImpl {
 
     public PlanarCleansing(UUID ownerId) {
         super(ownerId, 24, "Planar Cleansing", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}{W}");

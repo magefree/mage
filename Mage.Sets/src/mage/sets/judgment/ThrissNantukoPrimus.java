@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class ThrissNantukoPrimus extends CardImpl<ThrissNantukoPrimus> {
+public class ThrissNantukoPrimus extends CardImpl {
 
     public ThrissNantukoPrimus(UUID ownerId) {
         super(ownerId, 134, "Thriss, Nantuko Primus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

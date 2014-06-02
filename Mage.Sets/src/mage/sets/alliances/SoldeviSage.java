@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Quercitron
  */
-public class SoldeviSage extends CardImpl<SoldeviSage> {
+public class SoldeviSage extends CardImpl {
 
     public SoldeviSage(UUID ownerId) {
         super(ownerId, 51, "Soldevi Sage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

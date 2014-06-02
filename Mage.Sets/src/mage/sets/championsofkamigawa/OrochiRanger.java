@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX
  */
-public class OrochiRanger extends CardImpl<OrochiRanger> {
+public class OrochiRanger extends CardImpl {
 
     public OrochiRanger(UUID ownerId) {
         super(ownerId, 235, "Orochi Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

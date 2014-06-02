@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Loki
  */
-public class InvaderParasite extends CardImpl<InvaderParasite> {
+public class InvaderParasite extends CardImpl {
 
     public InvaderParasite(UUID ownerId) {
         super(ownerId, 87, "Invader Parasite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

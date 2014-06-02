@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VisceraSeer extends CardImpl<VisceraSeer> {
+public class VisceraSeer extends CardImpl {
 
     public VisceraSeer(UUID ownerId) {
         super(ownerId, 120, "Viscera Seer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

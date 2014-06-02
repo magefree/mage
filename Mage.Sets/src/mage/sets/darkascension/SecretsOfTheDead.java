@@ -43,7 +43,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward
  */
-public class SecretsOfTheDead extends CardImpl<SecretsOfTheDead> {
+public class SecretsOfTheDead extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a spell from your graveyard");
 

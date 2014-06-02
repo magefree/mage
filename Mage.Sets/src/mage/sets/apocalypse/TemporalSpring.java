@@ -38,7 +38,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class TemporalSpring extends CardImpl<TemporalSpring> {
+public class TemporalSpring extends CardImpl {
 
     public TemporalSpring(UUID ownerId) {
         super(ownerId, 125, "Temporal Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");

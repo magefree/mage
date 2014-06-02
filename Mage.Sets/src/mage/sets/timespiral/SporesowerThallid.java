@@ -49,7 +49,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author LevelX2
  */
-public class SporesowerThallid extends CardImpl<SporesowerThallid> {
+public class SporesowerThallid extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Fungus you control");
     static {

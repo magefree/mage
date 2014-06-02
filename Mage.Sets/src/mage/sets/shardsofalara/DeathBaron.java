@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class DeathBaron extends CardImpl<DeathBaron> {
+public class DeathBaron extends CardImpl {
 
     private static final FilterCreaturePermanent filterSkeletons = new FilterCreaturePermanent("Skeleton creatures");
     private static final FilterCreaturePermanent filterZombie = new FilterCreaturePermanent("Zombie creatures");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CastIntoDarkness extends CardImpl<CastIntoDarkness> {
+public class CastIntoDarkness extends CardImpl {
 
     public CastIntoDarkness(UUID ownerId) {
         super(ownerId, 63, "Cast into Darkness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

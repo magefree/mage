@@ -43,7 +43,7 @@ import mage.game.turn.TurnMod;
  *
  * @author Plopman
  */
-public class Meditate extends CardImpl<Meditate> {
+public class Meditate extends CardImpl {
 
     public Meditate(UUID ownerId) {
         super(ownerId, 76, "Meditate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");

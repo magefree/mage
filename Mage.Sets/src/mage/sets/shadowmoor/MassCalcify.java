@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class MassCalcify extends CardImpl<MassCalcify> {
+public class MassCalcify extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonwhite creatures");
 

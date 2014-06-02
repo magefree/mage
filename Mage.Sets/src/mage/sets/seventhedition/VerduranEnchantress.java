@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Plopman
  */
-public class VerduranEnchantress extends CardImpl<VerduranEnchantress> {
+public class VerduranEnchantress extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an Enchantment spell");
 

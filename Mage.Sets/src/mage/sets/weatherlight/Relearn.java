@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Quercitron
  */
-public class Relearn extends CardImpl<Relearn> {
+public class Relearn extends CardImpl {
 
     public static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
     

@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author LevelX
  */
-public class JunkyoBell extends CardImpl<JunkyoBell> {
+public class JunkyoBell extends CardImpl {
 
     public JunkyoBell(UUID ownerId) {
         super(ownerId, 258, "Junkyo Bell", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

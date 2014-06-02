@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class Souldrinker extends CardImpl<Souldrinker> {
+public class Souldrinker extends CardImpl {
 
     public Souldrinker(UUID ownerId) {
         super(ownerId, 52, "Souldrinker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

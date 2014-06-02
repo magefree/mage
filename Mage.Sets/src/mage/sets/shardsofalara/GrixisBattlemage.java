@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class GrixisBattlemage extends CardImpl<GrixisBattlemage> {
+public class GrixisBattlemage extends CardImpl {
 
     public GrixisBattlemage(UUID ownerId) {
         super(ownerId, 78, "Grixis Battlemage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -61,7 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 
 
-public class BorosBattleshaper extends CardImpl<BorosBattleshaper> {
+public class BorosBattleshaper extends CardImpl {
 
     public BorosBattleshaper (UUID ownerId) {
         super(ownerId, 58, "Boros Battleshaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{W}");

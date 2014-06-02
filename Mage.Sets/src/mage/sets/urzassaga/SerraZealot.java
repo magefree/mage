@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SerraZealot extends CardImpl<SerraZealot> {
+public class SerraZealot extends CardImpl {
 
     public SerraZealot(UUID ownerId) {
         super(ownerId, 46, "Serra Zealot", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

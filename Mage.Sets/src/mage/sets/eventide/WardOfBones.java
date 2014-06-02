@@ -51,7 +51,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class WardOfBones extends CardImpl<WardOfBones> {
+public class WardOfBones extends CardImpl {
 
     public WardOfBones(UUID ownerId) {
         super(ownerId, 174, "Ward of Bones", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

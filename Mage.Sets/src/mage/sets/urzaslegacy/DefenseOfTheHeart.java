@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class DefenseOfTheHeart extends CardImpl<DefenseOfTheHeart> {
+public class DefenseOfTheHeart extends CardImpl {
 
     public DefenseOfTheHeart(UUID ownerId) {
         super(ownerId, 100, "Defense of the Heart", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

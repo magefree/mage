@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class Terrarion extends CardImpl<Terrarion> {
+public class Terrarion extends CardImpl {
 
     public Terrarion(UUID ownerId) {
         super(ownerId, 273, "Terrarion", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

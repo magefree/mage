@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class SoratamiMindsweeper extends CardImpl<SoratamiMindsweeper> {
+public class SoratamiMindsweeper extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

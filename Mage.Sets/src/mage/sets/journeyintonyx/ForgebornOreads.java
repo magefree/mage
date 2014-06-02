@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class ForgebornOreads extends CardImpl<ForgebornOreads> {
+public class ForgebornOreads extends CardImpl {
 
     public ForgebornOreads(UUID ownerId) {
         super(ownerId, 98, "Forgeborn Oreads", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{R}{R}");

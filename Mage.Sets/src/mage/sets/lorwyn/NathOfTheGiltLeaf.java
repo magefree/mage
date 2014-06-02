@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  * @author jeffwadsworth
  *
  */
-public class NathOfTheGiltLeaf extends CardImpl<NathOfTheGiltLeaf> {
+public class NathOfTheGiltLeaf extends CardImpl {
 
     public NathOfTheGiltLeaf(UUID ownerId) {
         super(ownerId, 250, "Nath of the Gilt-Leaf", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");

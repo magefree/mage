@@ -53,7 +53,7 @@ import mage.game.stack.Spell;
  *
  * @author noxx
  */
-public class SpectralPrison extends CardImpl<SpectralPrison> {
+public class SpectralPrison extends CardImpl {
 
     public SpectralPrison(UUID ownerId) {
         super(ownerId, 75, "Spectral Prison", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

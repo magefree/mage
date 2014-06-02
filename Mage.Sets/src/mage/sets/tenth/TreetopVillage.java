@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class TreetopVillage extends CardImpl<TreetopVillage> {
+public class TreetopVillage extends CardImpl {
 
     public TreetopVillage(UUID ownerId) {
         super(ownerId, 361, "Treetop Village", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

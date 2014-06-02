@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WiltLeafCavaliers extends CardImpl<WiltLeafCavaliers> {
+public class WiltLeafCavaliers extends CardImpl {
 
     public WiltLeafCavaliers(UUID ownerId) {
         super(ownerId, 244, "Wilt-Leaf Cavaliers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G/W}{G/W}{G/W}");

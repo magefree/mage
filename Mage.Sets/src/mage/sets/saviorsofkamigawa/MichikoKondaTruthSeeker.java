@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class MichikoKondaTruthSeeker extends CardImpl<MichikoKondaTruthSeeker> {
+public class MichikoKondaTruthSeeker extends CardImpl {
 
     public MichikoKondaTruthSeeker(UUID ownerId) {
         super(ownerId, 19, "Michiko Konda, Truth Seeker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");

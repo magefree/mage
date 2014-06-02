@@ -40,7 +40,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class Vivisection extends CardImpl<Vivisection> {
+public class Vivisection extends CardImpl {
 
     public Vivisection (UUID ownerId) {
         super(ownerId, 38, "Vivisection", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");

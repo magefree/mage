@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author North, Loki
  */
-public class SylvokLifestaff extends CardImpl<SylvokLifestaff> {
+public class SylvokLifestaff extends CardImpl {
 
     public SylvokLifestaff(UUID ownerId) {
         super(ownerId, 209, "Sylvok Lifestaff", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

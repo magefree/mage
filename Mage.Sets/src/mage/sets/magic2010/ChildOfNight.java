@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ChildOfNight extends CardImpl<ChildOfNight> {
+public class ChildOfNight extends CardImpl {
 
     public ChildOfNight(UUID ownerId) {
         super(ownerId, 88, "Child of Night", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

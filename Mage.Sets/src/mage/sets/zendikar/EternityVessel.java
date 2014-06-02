@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class EternityVessel extends CardImpl<EternityVessel> {
+public class EternityVessel extends CardImpl {
 
     public EternityVessel(UUID ownerId) {
         super(ownerId, 200, "Eternity Vessel", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{6}");

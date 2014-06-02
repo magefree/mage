@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class ChampionOfLambholt extends CardImpl<ChampionOfLambholt> {
+public class ChampionOfLambholt extends CardImpl {
 
     public ChampionOfLambholt(UUID ownerId) {
         super(ownerId, 171, "Champion of Lambholt", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

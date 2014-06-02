@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class StitchInTime extends CardImpl<StitchInTime> {
+public class StitchInTime extends CardImpl {
 
     public StitchInTime(UUID ownerId) {
         super(ownerId, 132, "Stitch in Time", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{R}");

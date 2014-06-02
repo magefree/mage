@@ -46,7 +46,7 @@ import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
  *
  * @author jeffwadsworth
  */
-public class LuminousWake extends CardImpl<LuminousWake> {
+public class LuminousWake extends CardImpl {
 
     public LuminousWake(UUID ownerId) {
         super(ownerId, 35, "Luminous Wake", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

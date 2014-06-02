@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class BalefulStrix extends CardImpl<BalefulStrix> {
+public class BalefulStrix extends CardImpl {
 
     public BalefulStrix(UUID ownerId) {
         super(ownerId, 82, "Baleful Strix", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{U}{B}");

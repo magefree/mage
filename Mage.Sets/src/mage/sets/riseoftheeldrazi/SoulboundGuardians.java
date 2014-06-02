@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SoulboundGuardians extends CardImpl<SoulboundGuardians> {
+public class SoulboundGuardians extends CardImpl {
 
     public SoulboundGuardians (UUID ownerId) {
         super(ownerId, 45, "Soulbound Guardians", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

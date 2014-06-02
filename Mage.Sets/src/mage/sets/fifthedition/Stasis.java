@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
  *
  * @author jeffwadsworth
  */
-public class Stasis extends CardImpl<Stasis> {
+public class Stasis extends CardImpl {
 
     public Stasis(UUID ownerId) {
         super(ownerId, 28, "Stasis", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

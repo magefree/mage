@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class IllusionaryServant extends CardImpl<IllusionaryServant> {
+public class IllusionaryServant extends CardImpl {
 
     public IllusionaryServant(UUID ownerId) {
         super(ownerId, 57, "Illusionary Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

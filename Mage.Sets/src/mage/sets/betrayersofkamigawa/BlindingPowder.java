@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class BlindingPowder extends CardImpl<BlindingPowder> {
+public class BlindingPowder extends CardImpl {
 
     public BlindingPowder(UUID ownerId) {
         super(ownerId, 153, "Blinding Powder", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

@@ -45,7 +45,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class OgreJailbreaker extends CardImpl<OgreJailbreaker> {
+public class OgreJailbreaker extends CardImpl {
 
     public OgreJailbreaker(UUID ownerId) {
         super(ownerId, 72, "Ogre Jailbreaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

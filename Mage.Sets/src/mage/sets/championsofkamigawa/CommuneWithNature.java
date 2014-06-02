@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX
  */
-public class CommuneWithNature extends CardImpl<CommuneWithNature> {
+public class CommuneWithNature extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a creature card");
     static {

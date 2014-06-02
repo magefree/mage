@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class RemoteIsle extends CardImpl<RemoteIsle> {
+public class RemoteIsle extends CardImpl {
 
     public RemoteIsle(UUID ownerId) {
         super(ownerId, 324, "Remote Isle", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

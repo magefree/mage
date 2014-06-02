@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class SkirkShaman extends CardImpl<SkirkShaman> {
+public class SkirkShaman extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by artifact creatures and/or red creatures");
 

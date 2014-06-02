@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JacesErasure extends CardImpl<JacesErasure> {
+public class JacesErasure extends CardImpl {
 
     public JacesErasure(UUID ownerId) {
         super(ownerId, 59, "Jace's Erasure", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Sparksmith extends CardImpl<Sparksmith> {
+public class Sparksmith extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Goblins on the battlefield");
     static {

@@ -41,7 +41,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AwakeningZone extends CardImpl<AwakeningZone> {
+public class AwakeningZone extends CardImpl {
 
     public AwakeningZone(UUID ownerId) {
         super(ownerId, 176, "Awakening Zone", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

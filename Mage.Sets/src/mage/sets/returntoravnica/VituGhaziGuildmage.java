@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class VituGhaziGuildmage extends CardImpl<VituGhaziGuildmage> {
+public class VituGhaziGuildmage extends CardImpl {
 
     public VituGhaziGuildmage(UUID ownerId) {
         super(ownerId, 207, "Vitu-Ghazi Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{W}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class HopeAndGlory extends CardImpl<HopeAndGlory> {
+public class HopeAndGlory extends CardImpl {
 
     public HopeAndGlory(UUID ownerId) {
         super(ownerId, 9, "Hope and Glory", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

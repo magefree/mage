@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ChoMannoRevolutionary extends CardImpl<ChoMannoRevolutionary> {
+public class ChoMannoRevolutionary extends CardImpl {
 
     public ChoMannoRevolutionary(UUID ownerId) {
         super(ownerId, 12, "Cho-Manno, Revolutionary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

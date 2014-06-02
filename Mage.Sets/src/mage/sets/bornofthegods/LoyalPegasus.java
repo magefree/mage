@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class LoyalPegasus extends CardImpl<LoyalPegasus> {
+public class LoyalPegasus extends CardImpl {
 
     public LoyalPegasus(UUID ownerId) {
         super(ownerId, 19, "Loyal Pegasus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

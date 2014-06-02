@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX
  */
-public class DescendantOfSoramaro extends CardImpl<DescendantOfSoramaro> {
+public class DescendantOfSoramaro extends CardImpl {
 
     public DescendantOfSoramaro(UUID ownerId) {
         super(ownerId, 33, "Descendant of Soramaro", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

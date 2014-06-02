@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward
  */
-public class HexParasite extends CardImpl<HexParasite> {
+public class HexParasite extends CardImpl {
 
     public HexParasite(UUID ownerId) {
         super(ownerId, 137, "Hex Parasite", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

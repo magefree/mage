@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  * @author jeffwadsworth
 
  */
-public class CallTheSkybreaker extends CardImpl<CallTheSkybreaker> {
+public class CallTheSkybreaker extends CardImpl {
 
     public CallTheSkybreaker(UUID ownerId) {
         super(ownerId, 188, "Call the Skybreaker", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U/R}{U/R}");

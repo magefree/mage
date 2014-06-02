@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author Backfir3
  */
-public class Catalog extends CardImpl<Catalog> {
+public class Catalog extends CardImpl {
 
     public Catalog(UUID ownerId) {
         super(ownerId, 64, "Catalog", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author mamaurer, nantuko
  */
-public class BladeOfTheBloodchief extends CardImpl<BladeOfTheBloodchief> {
+public class BladeOfTheBloodchief extends CardImpl {
 
     public BladeOfTheBloodchief ( UUID ownerId ) {
         super(ownerId, 196, "Blade of the Bloodchief", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

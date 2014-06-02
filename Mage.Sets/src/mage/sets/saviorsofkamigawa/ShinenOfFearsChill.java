@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ShinenOfFearsChill extends CardImpl<ShinenOfFearsChill> {
+public class ShinenOfFearsChill extends CardImpl {
 
     public ShinenOfFearsChill(UUID ownerId) {
         super(ownerId, 88, "Shinen of Fear's Chill", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

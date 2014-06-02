@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Melkhior
  */
-public class UrzasTower extends CardImpl<UrzasTower> {
+public class UrzasTower extends CardImpl {
     public UrzasTower(UUID ownerId) {
         super(ownerId, 449, "Urza's Tower", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "5ED";

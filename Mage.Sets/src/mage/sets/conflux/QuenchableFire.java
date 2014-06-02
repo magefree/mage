@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class QuenchableFire extends CardImpl<QuenchableFire> {
+public class QuenchableFire extends CardImpl {
 
     public QuenchableFire(UUID ownerId) {
         super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");

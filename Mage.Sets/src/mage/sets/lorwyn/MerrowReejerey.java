@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author jonubuu
  */
-public class MerrowReejerey extends CardImpl<MerrowReejerey> {
+public class MerrowReejerey extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Merfolk creatures you control");
     private static final FilterSpell filter2 = new FilterSpell("Merfolk spell");

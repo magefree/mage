@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class NagaoBoundByHonor extends CardImpl<NagaoBoundByHonor> {
+public class NagaoBoundByHonor extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai creatures");
 

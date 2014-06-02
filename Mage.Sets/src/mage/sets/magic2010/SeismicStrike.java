@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SeismicStrike extends CardImpl<SeismicStrike> {
+public class SeismicStrike extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
 

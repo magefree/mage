@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class TowerOfChampions extends CardImpl<TowerOfChampions> {
+public class TowerOfChampions extends CardImpl {
 
     public TowerOfChampions (UUID ownerId) {
         super(ownerId, 265, "Tower of Champions", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class ScorchedRusalka extends CardImpl<ScorchedRusalka> {
+public class ScorchedRusalka extends CardImpl {
 
     public ScorchedRusalka(UUID ownerId) {
         super(ownerId, 74, "Scorched Rusalka", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");

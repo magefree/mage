@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Lifelink extends CardImpl<Lifelink> {
+public class Lifelink extends CardImpl {
 
     public Lifelink (UUID ownerId) {
         super(ownerId, 24, "Lifelink", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

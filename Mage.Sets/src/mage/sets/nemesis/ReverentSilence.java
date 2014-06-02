@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class ReverentSilence extends CardImpl<ReverentSilence> {
+public class ReverentSilence extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("If you control a Forest");
     

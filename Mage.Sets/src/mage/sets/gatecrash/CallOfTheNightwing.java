@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class CallOfTheNightwing extends CardImpl<CallOfTheNightwing> {
+public class CallOfTheNightwing extends CardImpl {
 
     public CallOfTheNightwing(UUID ownerId) {
         super(ownerId, 149, "Call of the Nightwing", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");

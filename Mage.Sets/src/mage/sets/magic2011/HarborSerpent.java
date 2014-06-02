@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
-public class HarborSerpent extends CardImpl<HarborSerpent> {
+public class HarborSerpent extends CardImpl {
 
     public HarborSerpent(UUID ownerId) {
         super(ownerId, 56, "Harbor Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

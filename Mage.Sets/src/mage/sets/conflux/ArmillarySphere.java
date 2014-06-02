@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class ArmillarySphere extends CardImpl<ArmillarySphere> {
+public class ArmillarySphere extends CardImpl {
 
     public ArmillarySphere(UUID ownerId) {
         super(ownerId, 134, "Armillary Sphere", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

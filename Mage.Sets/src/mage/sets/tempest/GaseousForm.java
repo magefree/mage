@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class GaseousForm extends CardImpl<GaseousForm> {
+public class GaseousForm extends CardImpl {
 
     public GaseousForm(UUID ownerId) {
         super(ownerId, 65, "Gaseous Form", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

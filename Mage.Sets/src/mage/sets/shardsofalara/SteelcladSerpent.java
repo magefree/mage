@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class SteelcladSerpent extends CardImpl<SteelcladSerpent> {
+public class SteelcladSerpent extends CardImpl {
 
     public SteelcladSerpent(UUID ownerId) {
         super(ownerId, 59, "Steelclad Serpent", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}{U}");

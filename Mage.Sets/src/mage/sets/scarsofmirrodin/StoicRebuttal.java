@@ -45,7 +45,7 @@ import mage.constants.Zone;
 /**
  * @author ayrat
  */
-public class StoicRebuttal extends CardImpl<StoicRebuttal> {
+public class StoicRebuttal extends CardImpl {
 
     public StoicRebuttal(UUID ownerId) {
         super(ownerId, 46, "Stoic Rebuttal", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");

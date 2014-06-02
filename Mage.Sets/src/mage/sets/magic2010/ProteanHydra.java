@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ProteanHydra extends CardImpl<ProteanHydra> {
+public class ProteanHydra extends CardImpl {
 
     public ProteanHydra(UUID ownerId) {
         super(ownerId, 200, "Protean Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{G}");

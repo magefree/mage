@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SuntouchedMyr extends CardImpl<SuntouchedMyr> {
+public class SuntouchedMyr extends CardImpl {
 
     public SuntouchedMyr(UUID ownerId) {
         super(ownerId, 128, "Suntouched Myr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

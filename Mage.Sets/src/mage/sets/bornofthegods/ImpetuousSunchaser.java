@@ -42,7 +42,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ImpetuousSunchaser extends CardImpl<ImpetuousSunchaser> {
+public class ImpetuousSunchaser extends CardImpl {
 
     public ImpetuousSunchaser(UUID ownerId) {
         super(ownerId, 99, "Impetuous Sunchaser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

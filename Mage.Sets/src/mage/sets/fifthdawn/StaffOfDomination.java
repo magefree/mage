@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class StaffOfDomination extends CardImpl<StaffOfDomination> {
+public class StaffOfDomination extends CardImpl {
 
     public StaffOfDomination(UUID ownerId) {
         super(ownerId, 156, "Staff of Domination", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

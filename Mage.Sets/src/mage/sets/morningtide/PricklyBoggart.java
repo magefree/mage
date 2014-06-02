@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PricklyBoggart extends CardImpl<PricklyBoggart> {
+public class PricklyBoggart extends CardImpl {
 
     public PricklyBoggart(UUID ownerId) {
         super(ownerId, 74, "Prickly Boggart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

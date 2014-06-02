@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OrdealOfThassa extends CardImpl<OrdealOfThassa> {
+public class OrdealOfThassa extends CardImpl {
 
     public OrdealOfThassa(UUID ownerId) {
         super(ownerId, 58, "Ordeal of Thassa", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

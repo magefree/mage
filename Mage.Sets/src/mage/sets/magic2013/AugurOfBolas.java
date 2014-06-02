@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author jeffwadsworth
  */
-public class AugurOfBolas extends CardImpl<AugurOfBolas> {
+public class AugurOfBolas extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an instant or sorcery card");
     static {

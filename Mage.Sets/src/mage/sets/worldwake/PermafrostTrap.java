@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class PermafrostTrap extends CardImpl<PermafrostTrap> {
+public class PermafrostTrap extends CardImpl {
 
     public PermafrostTrap(UUID ownerId) {
         super(ownerId, 34, "Permafrost Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

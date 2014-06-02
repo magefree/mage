@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class MidnightRecovery extends CardImpl<MidnightRecovery> {
+public class MidnightRecovery extends CardImpl {
 
     public MidnightRecovery (UUID ownerId) {
         super(ownerId, 73, "Midnight Recovery", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");

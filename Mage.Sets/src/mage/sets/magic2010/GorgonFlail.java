@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GorgonFlail extends CardImpl<GorgonFlail> {
+public class GorgonFlail extends CardImpl {
 
     public GorgonFlail(UUID ownerId) {
         super(ownerId, 211, "Gorgon Flail", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

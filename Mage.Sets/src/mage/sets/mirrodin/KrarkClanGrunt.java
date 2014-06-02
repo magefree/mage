@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class KrarkClanGrunt extends CardImpl<KrarkClanGrunt> {
+public class KrarkClanGrunt extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 

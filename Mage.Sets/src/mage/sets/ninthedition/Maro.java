@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class Maro extends CardImpl<Maro> {
+public class Maro extends CardImpl {
 
     public Maro(UUID ownerId) {
         super(ownerId, 254, "Maro", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

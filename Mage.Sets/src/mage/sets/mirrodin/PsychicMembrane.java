@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class PsychicMembrane extends CardImpl<PsychicMembrane> {
+public class PsychicMembrane extends CardImpl {
 
     public PsychicMembrane(UUID ownerId) {
         super(ownerId, 46, "Psychic Membrane", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

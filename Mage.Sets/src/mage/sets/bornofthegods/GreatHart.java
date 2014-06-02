@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class GreatHart extends CardImpl<GreatHart> {
+public class GreatHart extends CardImpl {
 
     public GreatHart(UUID ownerId) {
         super(ownerId, 15, "Great Hart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

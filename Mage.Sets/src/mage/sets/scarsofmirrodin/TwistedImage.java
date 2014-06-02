@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ayratn
  */
-public class TwistedImage extends CardImpl<TwistedImage> {
+public class TwistedImage extends CardImpl {
 
     public TwistedImage (UUID ownerId) {
         super(ownerId, 50, "Twisted Image", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");

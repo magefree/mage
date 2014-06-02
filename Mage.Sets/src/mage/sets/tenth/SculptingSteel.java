@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author jeffwadsworth
  */
-public class SculptingSteel extends CardImpl<SculptingSteel> {
+public class SculptingSteel extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact");
     

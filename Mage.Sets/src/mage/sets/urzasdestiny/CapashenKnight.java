@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class CapashenKnight extends CardImpl<CapashenKnight> {
+public class CapashenKnight extends CardImpl {
 
     public CapashenKnight(UUID ownerId) {
         super(ownerId, 3, "Capashen Knight", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

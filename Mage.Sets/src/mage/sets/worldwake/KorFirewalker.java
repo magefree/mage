@@ -48,7 +48,7 @@ import mage.game.stack.Spell;
  *
  * @author Loki
  */
-public class KorFirewalker extends CardImpl<KorFirewalker> {
+public class KorFirewalker extends CardImpl {
     private static final FilterCard filter = new FilterCard("Red");
 
     static {

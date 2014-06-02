@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Geosurge extends CardImpl<Geosurge> {
+public class Geosurge extends CardImpl {
 
     public Geosurge(UUID ownerId) {
         super(ownerId, 85, "Geosurge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}{R}{R}{R}");

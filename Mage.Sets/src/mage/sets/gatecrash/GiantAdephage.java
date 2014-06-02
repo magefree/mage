@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class GiantAdephage extends CardImpl<GiantAdephage> {
+public class GiantAdephage extends CardImpl {
 
     public GiantAdephage(UUID ownerId) {
         super(ownerId, 121, "Giant Adephage", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

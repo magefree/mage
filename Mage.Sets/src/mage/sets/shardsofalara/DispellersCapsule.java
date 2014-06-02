@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class DispellersCapsule extends CardImpl<DispellersCapsule> {
+public class DispellersCapsule extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {

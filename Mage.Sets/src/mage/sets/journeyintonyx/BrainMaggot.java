@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class BrainMaggot extends CardImpl<BrainMaggot> {
+public class BrainMaggot extends CardImpl {
 
     public BrainMaggot(UUID ownerId) {
         super(ownerId, 62, "Brain Maggot", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}");

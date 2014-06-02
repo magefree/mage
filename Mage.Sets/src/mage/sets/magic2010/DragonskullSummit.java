@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DragonskullSummit extends CardImpl<DragonskullSummit> {
+public class DragonskullSummit extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

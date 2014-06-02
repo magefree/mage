@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SeizeTheInitiative extends CardImpl<SeizeTheInitiative> {
+public class SeizeTheInitiative extends CardImpl {
 
     public SeizeTheInitiative (UUID ownerId) {
         super(ownerId, 20, "Seize the Initiative", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

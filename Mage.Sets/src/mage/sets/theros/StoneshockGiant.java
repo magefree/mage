@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class StoneshockGiant extends CardImpl<StoneshockGiant> {
+public class StoneshockGiant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without flying your opponents control");
     static {

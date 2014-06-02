@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class RiotGear extends CardImpl<RiotGear> {
+public class RiotGear extends CardImpl {
 
     public RiotGear(UUID ownerId) {
         super(ownerId, 236, "Riot Gear", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

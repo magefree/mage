@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jonubuu
  */
-public class RishadanPort extends CardImpl<RishadanPort> {
+public class RishadanPort extends CardImpl {
 
     public RishadanPort(UUID ownerId) {
         super(ownerId, 324, "Rishadan Port", Rarity.RARE, new CardType[]{CardType.LAND}, null);

@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class FatedReturn extends CardImpl<FatedReturn> {
+public class FatedReturn extends CardImpl {
 
     public FatedReturn(UUID ownerId) {
         super(ownerId, 69, "Fated Return", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{B}{B}{B}");

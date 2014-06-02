@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class FloodPlain extends CardImpl<FloodPlain> {
+public class FloodPlain extends CardImpl {
 
     public FloodPlain(UUID ownerId) {
         super(ownerId, 34, "Flood Plain", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

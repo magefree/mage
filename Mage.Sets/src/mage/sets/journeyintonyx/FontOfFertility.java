@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class FontOfFertility extends CardImpl<FontOfFertility> {
+public class FontOfFertility extends CardImpl {
 
     public FontOfFertility(UUID ownerId) {
         super(ownerId, 123, "Font of Fertility", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

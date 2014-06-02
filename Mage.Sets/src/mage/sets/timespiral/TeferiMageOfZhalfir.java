@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class TeferiMageOfZhalfir extends CardImpl<TeferiMageOfZhalfir> {
+public class TeferiMageOfZhalfir extends CardImpl {
 
     public TeferiMageOfZhalfir(UUID ownerId) {
         super(ownerId, 83, "Teferi, Mage of Zhalfir", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");

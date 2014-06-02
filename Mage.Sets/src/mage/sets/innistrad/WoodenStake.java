@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class WoodenStake extends CardImpl<WoodenStake> {
+public class WoodenStake extends CardImpl {
 
     public WoodenStake(UUID ownerId) {
         super(ownerId, 237, "Wooden Stake", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

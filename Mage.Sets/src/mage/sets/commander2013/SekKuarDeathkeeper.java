@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class SekKuarDeathkeeper extends CardImpl<SekKuarDeathkeeper> {
+public class SekKuarDeathkeeper extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature you control");
     static {

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author Loki
  */
-public class Auramancer extends CardImpl<Auramancer> {
+public class Auramancer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
 

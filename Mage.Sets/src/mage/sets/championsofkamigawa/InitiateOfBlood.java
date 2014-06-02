@@ -50,7 +50,7 @@ import java.util.UUID;
 /**
  * @author LevelX
  */
-public class InitiateOfBlood extends CardImpl<InitiateOfBlood> {
+public class InitiateOfBlood extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
 

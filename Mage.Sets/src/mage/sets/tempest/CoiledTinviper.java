@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CoiledTinviper extends CardImpl<CoiledTinviper> {
+public class CoiledTinviper extends CardImpl {
 
     public CoiledTinviper(UUID ownerId) {
         super(ownerId, 269, "Coiled Tinviper", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

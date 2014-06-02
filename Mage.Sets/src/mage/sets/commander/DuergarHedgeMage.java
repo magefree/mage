@@ -49,7 +49,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author jeffwadsworth
  */
-public class DuergarHedgeMage extends CardImpl<DuergarHedgeMage> {
+public class DuergarHedgeMage extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Mountain");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("a Plains");

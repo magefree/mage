@@ -55,7 +55,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author LevelX2
  */
-public class ElspethSunsChampion extends CardImpl<ElspethSunsChampion> {
+public class ElspethSunsChampion extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 4 or greater");
     static {

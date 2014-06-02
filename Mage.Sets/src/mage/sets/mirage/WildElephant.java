@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WildElephant extends CardImpl<WildElephant> {
+public class WildElephant extends CardImpl {
 
     public WildElephant(UUID ownerId) {
         super(ownerId, 152, "Wild Elephant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

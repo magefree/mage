@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class NephaliaDrownyard extends CardImpl<NephaliaDrownyard> {
+public class NephaliaDrownyard extends CardImpl {
 
     public NephaliaDrownyard(UUID ownerId) {
         super(ownerId, 245, "Nephalia Drownyard", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
 /**
  * @author mluds
  */
-public class ParasiticStrix extends CardImpl<ParasiticStrix> {
+public class ParasiticStrix extends CardImpl {
 
     public ParasiticStrix(UUID ownerId) {
         super(ownerId, 32, "Parasitic Strix", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");

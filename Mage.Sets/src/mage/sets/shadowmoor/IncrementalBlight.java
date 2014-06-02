@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class IncrementalBlight extends CardImpl<IncrementalBlight> {
+public class IncrementalBlight extends CardImpl {
 
     public IncrementalBlight(UUID ownerId) {
         super(ownerId, 70, "Incremental Blight", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class KrosanTusker extends CardImpl<KrosanTusker> {
+public class KrosanTusker extends CardImpl {
 
     public KrosanTusker(UUID ownerId) {
         super(ownerId, 59, "Krosan Tusker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

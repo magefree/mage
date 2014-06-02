@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class RuleOfLaw extends CardImpl<RuleOfLaw> {
+public class RuleOfLaw extends CardImpl {
 
     public RuleOfLaw(UUID ownerId) {
         super(ownerId, 37, "Rule of Law", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

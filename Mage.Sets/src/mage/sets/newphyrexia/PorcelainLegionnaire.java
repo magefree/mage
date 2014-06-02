@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PorcelainLegionnaire extends CardImpl<PorcelainLegionnaire> {
+public class PorcelainLegionnaire extends CardImpl {
 
     public PorcelainLegionnaire(UUID ownerId) {
         super(ownerId, 19, "Porcelain Legionnaire", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{WP}");

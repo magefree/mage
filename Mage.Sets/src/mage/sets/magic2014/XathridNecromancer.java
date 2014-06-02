@@ -46,7 +46,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author LevelX2
  */
-public class XathridNecromancer extends CardImpl<XathridNecromancer> {
+public class XathridNecromancer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creature you control");
     static {

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TyphoidRats extends CardImpl<TyphoidRats> {
+public class TyphoidRats extends CardImpl {
 
     public TyphoidRats(UUID ownerId) {
         super(ownerId, 120, "Typhoid Rats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

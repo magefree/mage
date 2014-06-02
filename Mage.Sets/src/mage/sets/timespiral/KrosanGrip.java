@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author jonubuu
  */
-public class KrosanGrip extends CardImpl<KrosanGrip> {
+public class KrosanGrip extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

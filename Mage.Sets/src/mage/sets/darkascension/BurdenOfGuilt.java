@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BurdenOfGuilt extends CardImpl<BurdenOfGuilt> {
+public class BurdenOfGuilt extends CardImpl {
 
     public BurdenOfGuilt(UUID ownerId) {
         super(ownerId, 4, "Burden of Guilt", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

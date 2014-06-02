@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SetessanGriffin extends CardImpl<SetessanGriffin> {
+public class SetessanGriffin extends CardImpl {
 
     public SetessanGriffin(UUID ownerId) {
         super(ownerId, 30, "Setessan Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

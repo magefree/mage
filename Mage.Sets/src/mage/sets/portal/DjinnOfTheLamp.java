@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class DjinnOfTheLamp extends CardImpl<DjinnOfTheLamp> {
+public class DjinnOfTheLamp extends CardImpl {
 
     public DjinnOfTheLamp(UUID ownerId) {
         super(ownerId, 54, "Djinn of the Lamp", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

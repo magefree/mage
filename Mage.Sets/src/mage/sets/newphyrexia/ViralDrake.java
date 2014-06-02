@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ViralDrake extends CardImpl<ViralDrake> {
+public class ViralDrake extends CardImpl {
 
     public ViralDrake(UUID ownerId) {
         super(ownerId, 49, "Viral Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

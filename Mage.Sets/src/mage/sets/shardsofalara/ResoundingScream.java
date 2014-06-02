@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class ResoundingScream extends CardImpl<ResoundingScream> {
+public class ResoundingScream extends CardImpl {
 
     public ResoundingScream(UUID ownerId) {
         super(ownerId, 83, "Resounding Scream", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

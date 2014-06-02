@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class PraetorsGrasp extends CardImpl<PraetorsGrasp> {
+public class PraetorsGrasp extends CardImpl {
 
     public PraetorsGrasp(UUID ownerId) {
         super(ownerId, 71, "Praetor's Grasp", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");

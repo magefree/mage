@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class EarwigSquad extends CardImpl<EarwigSquad> {
+public class EarwigSquad extends CardImpl {
 
     public EarwigSquad(UUID ownerId) {
         super(ownerId, 82, "Earwig Squad", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

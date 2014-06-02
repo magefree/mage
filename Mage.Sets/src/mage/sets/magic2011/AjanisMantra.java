@@ -40,7 +40,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AjanisMantra extends CardImpl<AjanisMantra> {
+public class AjanisMantra extends CardImpl {
 
     public AjanisMantra(UUID ownerId) {
         super(ownerId, 2, "Ajani's Mantra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

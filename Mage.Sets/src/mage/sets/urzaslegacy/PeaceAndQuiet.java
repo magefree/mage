@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class PeaceAndQuiet extends CardImpl<PeaceAndQuiet> {
+public class PeaceAndQuiet extends CardImpl {
 
     public PeaceAndQuiet(UUID ownerId) {
         super(ownerId, 17, "Peace and Quiet", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

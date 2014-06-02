@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class Putrefy extends CardImpl<Putrefy> {
+public class Putrefy extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 
     static {

@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class SphinxOfMagosi extends CardImpl<SphinxOfMagosi> {
+public class SphinxOfMagosi extends CardImpl {
 
     public SphinxOfMagosi (UUID ownerId) {
         super(ownerId, 89, "Sphinx of Magosi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{U}");

@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class TwoHeadedDragon extends CardImpl<TwoHeadedDragon> {
+public class TwoHeadedDragon extends CardImpl {
 
     public TwoHeadedDragon(UUID ownerId) {
         super(ownerId, 221, "Two-Headed Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

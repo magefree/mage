@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class NourishingShoal extends CardImpl<NourishingShoal> {
+public class NourishingShoal extends CardImpl {
 
     public NourishingShoal(UUID ownerId) {
         super(ownerId, 137, "Nourishing Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}");

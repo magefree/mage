@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SeaGodsRevenge extends CardImpl<SeaGodsRevenge> {
+public class SeaGodsRevenge extends CardImpl {
 
     public SeaGodsRevenge(UUID ownerId) {
         super(ownerId, 61, "Sea God's Revenge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");

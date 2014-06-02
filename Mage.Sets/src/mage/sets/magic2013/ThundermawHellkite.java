@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class ThundermawHellkite extends CardImpl<ThundermawHellkite> {
+public class ThundermawHellkite extends CardImpl {
     
     final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with flying your opponents control");
     

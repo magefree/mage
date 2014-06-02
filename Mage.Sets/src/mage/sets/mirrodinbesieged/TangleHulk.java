@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TangleHulk extends CardImpl<TangleHulk> {
+public class TangleHulk extends CardImpl {
 
     public TangleHulk (UUID ownerId) {
         super(ownerId, 139, "Tangle Hulk", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

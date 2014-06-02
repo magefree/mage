@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class RagingMinotaur extends CardImpl<RagingMinotaur> {
+public class RagingMinotaur extends CardImpl {
 
     public RagingMinotaur(UUID ownerId) {
         super(ownerId, 152, "Raging Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

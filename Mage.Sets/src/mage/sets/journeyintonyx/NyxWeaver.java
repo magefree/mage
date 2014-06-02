@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class NyxWeaver extends CardImpl<NyxWeaver> {
+public class NyxWeaver extends CardImpl {
 
     public NyxWeaver(UUID ownerId) {
         super(ownerId, 153, "Nyx Weaver", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{G}");

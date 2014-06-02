@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class Blaze extends CardImpl<Blaze> {
+public class Blaze extends CardImpl {
 
     public Blaze(UUID ownerId) {
         super(ownerId, 47, "Blaze", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");

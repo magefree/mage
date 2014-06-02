@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CloudheathDrake extends CardImpl<CloudheathDrake> {
+public class CloudheathDrake extends CardImpl {
 
     public CloudheathDrake (UUID ownerId) {
         super(ownerId, 35, "Cloudheath Drake", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}");

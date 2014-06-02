@@ -43,7 +43,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author Loki
  */
-public class LuminousAngel extends CardImpl<LuminousAngel> {
+public class LuminousAngel extends CardImpl {
 
     public LuminousAngel(UUID ownerId) {
         super(ownerId, 15, "Luminous Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");

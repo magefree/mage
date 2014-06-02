@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class KessigMalcontents extends CardImpl<KessigMalcontents> {
+public class KessigMalcontents extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Humans you control");
 

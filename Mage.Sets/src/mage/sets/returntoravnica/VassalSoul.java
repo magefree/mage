@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class VassalSoul extends CardImpl<VassalSoul> {
+public class VassalSoul extends CardImpl {
 
     public VassalSoul(UUID ownerId) {
         super(ownerId, 224, "Vassal Soul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W/U}{W/U}");

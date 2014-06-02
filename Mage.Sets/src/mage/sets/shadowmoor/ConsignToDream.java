@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  * @author jeffwadsworth
  *
  */
-public class ConsignToDream extends CardImpl<ConsignToDream> {
+public class ConsignToDream extends CardImpl {
 
     public ConsignToDream(UUID ownerId) {
         super(ownerId, 32, "Consign to Dream", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

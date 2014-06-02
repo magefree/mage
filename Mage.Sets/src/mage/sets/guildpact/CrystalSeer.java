@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX
  */
-public class CrystalSeer extends CardImpl<CrystalSeer> {
+public class CrystalSeer extends CardImpl {
 
     public CrystalSeer (UUID ownerId) {
         super(ownerId, 23, "Crystal Seer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

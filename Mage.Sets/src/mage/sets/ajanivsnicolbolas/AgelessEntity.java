@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class AgelessEntity extends CardImpl<AgelessEntity> {
+public class AgelessEntity extends CardImpl {
 
     public AgelessEntity(UUID ownerId) {
         super(ownerId, 18, "Ageless Entity", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

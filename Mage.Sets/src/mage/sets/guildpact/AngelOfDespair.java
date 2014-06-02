@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class AngelOfDespair extends CardImpl<AngelOfDespair> {
+public class AngelOfDespair extends CardImpl {
 
     public AngelOfDespair (UUID ownerId) {
         super(ownerId, 101, "Angel of Despair", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{B}{B}");

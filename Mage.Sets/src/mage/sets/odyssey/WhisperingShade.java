@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class WhisperingShade extends CardImpl<WhisperingShade> {
+public class WhisperingShade extends CardImpl {
 
     public WhisperingShade(UUID ownerId) {
         super(ownerId, 167, "Whispering Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

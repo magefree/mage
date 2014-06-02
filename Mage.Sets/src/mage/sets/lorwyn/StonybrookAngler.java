@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class StonybrookAngler extends CardImpl<StonybrookAngler> {
+public class StonybrookAngler extends CardImpl {
 
     public StonybrookAngler(UUID ownerId) {
         super(ownerId, 90, "Stonybrook Angler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

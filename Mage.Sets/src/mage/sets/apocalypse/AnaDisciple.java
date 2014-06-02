@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class AnaDisciple extends CardImpl<AnaDisciple> {
+public class AnaDisciple extends CardImpl {
 
     public AnaDisciple(UUID ownerId) {
         super(ownerId, 73, "Ana Disciple", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

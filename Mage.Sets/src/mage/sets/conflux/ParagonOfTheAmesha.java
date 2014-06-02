@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class ParagonOfTheAmesha extends CardImpl<ParagonOfTheAmesha> {
+public class ParagonOfTheAmesha extends CardImpl {
 
     public ParagonOfTheAmesha(UUID ownerId) {
         super(ownerId, 14, "Paragon of the Amesha", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

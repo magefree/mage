@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class BaneOfProgress extends CardImpl<BaneOfProgress> {
+public class BaneOfProgress extends CardImpl {
 
     public BaneOfProgress(UUID ownerId) {
         super(ownerId, 137, "Bane of Progress", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

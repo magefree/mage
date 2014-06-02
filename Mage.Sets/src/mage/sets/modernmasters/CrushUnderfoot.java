@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CrushUnderfoot extends CardImpl<CrushUnderfoot> {
+public class CrushUnderfoot extends CardImpl {
 
     public CrushUnderfoot(UUID ownerId) {
         super(ownerId, 109, "Crush Underfoot", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BogImp extends CardImpl<BogImp> {
+public class BogImp extends CardImpl {
 
     public BogImp(UUID ownerId) {
         super(ownerId, 7, "Bog Imp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

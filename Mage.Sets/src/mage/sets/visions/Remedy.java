@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  *
  * @author Quercitron
  */
-public class Remedy extends CardImpl<Remedy> {
+public class Remedy extends CardImpl {
 
     public Remedy(UUID ownerId) {
         super(ownerId, 117, "Remedy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

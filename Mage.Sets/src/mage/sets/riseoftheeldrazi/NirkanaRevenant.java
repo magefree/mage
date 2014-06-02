@@ -52,7 +52,7 @@ import mage.abilities.effects.OneShotEffect;
  *
  * @author jeffwadsworth
  */
-public class NirkanaRevenant extends CardImpl<NirkanaRevenant> {
+public class NirkanaRevenant extends CardImpl {
 
     public NirkanaRevenant(UUID ownerId) {
         super(ownerId, 120, "Nirkana Revenant", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

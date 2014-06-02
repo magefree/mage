@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class Fettergeist extends CardImpl<Fettergeist> {
+public class Fettergeist extends CardImpl {
 
     public Fettergeist(UUID ownerId) {
         super(ownerId, 52, "Fettergeist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

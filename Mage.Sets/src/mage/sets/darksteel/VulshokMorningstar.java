@@ -43,7 +43,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class VulshokMorningstar extends CardImpl<VulshokMorningstar> {
+public class VulshokMorningstar extends CardImpl {
 
     public VulshokMorningstar(UUID ownerId) {
         super(ownerId, 157, "Vulshok Morningstar", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

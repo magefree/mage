@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class PentadPrism extends CardImpl<PentadPrism> {
+public class PentadPrism extends CardImpl {
 
     public PentadPrism(UUID ownerId) {
         super(ownerId, 122, "Pentad Prism", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

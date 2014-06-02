@@ -54,7 +54,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class PhyrexianIngester extends CardImpl<PhyrexianIngester> {
+public class PhyrexianIngester extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 

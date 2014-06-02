@@ -46,7 +46,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author jeffwadsworth
  */
-public class GatherSpecimens extends CardImpl<GatherSpecimens> {
+public class GatherSpecimens extends CardImpl {
 
     public GatherSpecimens(UUID ownerId) {
         super(ownerId, 45, "Gather Specimens", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}{U}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ArmWithAEther extends CardImpl<ArmWithAEther> {
+public class ArmWithAEther extends CardImpl {
 
     public ArmWithAEther(UUID ownerId) {
         super(ownerId, 28, "Arm with AEther", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");

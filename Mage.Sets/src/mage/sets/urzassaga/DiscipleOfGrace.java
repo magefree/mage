@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author Backfir3
  */
-public class DiscipleOfGrace extends CardImpl<DiscipleOfGrace> {
+public class DiscipleOfGrace extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Black");
 

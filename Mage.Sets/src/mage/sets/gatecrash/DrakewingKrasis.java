@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class DrakewingKrasis extends CardImpl<DrakewingKrasis> {
+public class DrakewingKrasis extends CardImpl {
 
     public DrakewingKrasis(UUID ownerId) {
         super(ownerId, 157, "Drakewing Krasis", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

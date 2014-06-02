@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class NantukoHusk extends CardImpl<NantukoHusk> {
+public class NantukoHusk extends CardImpl {
 
     public NantukoHusk(UUID ownerId) {
         super(ownerId, 162, "Nantuko Husk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

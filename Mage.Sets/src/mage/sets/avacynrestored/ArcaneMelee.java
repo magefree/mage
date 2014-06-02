@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class ArcaneMelee extends CardImpl<ArcaneMelee> {
+public class ArcaneMelee extends CardImpl {
 
     public ArcaneMelee(UUID ownerId) {
         super(ownerId, 44, "Arcane Melee", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");

@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class FranticPurification extends CardImpl<FranticPurification> {
+public class FranticPurification extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 

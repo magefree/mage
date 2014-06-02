@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jonubuu
  */
-public class Brainstorm extends CardImpl<Brainstorm> {
+public class Brainstorm extends CardImpl {
 
     public Brainstorm(UUID ownerId) {
         super(ownerId, 76, "Brainstorm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

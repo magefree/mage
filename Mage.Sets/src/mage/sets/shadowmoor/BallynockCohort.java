@@ -52,7 +52,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  * @author jeffwadsworth
 
  */
-public class BallynockCohort extends CardImpl<BallynockCohort> {
+public class BallynockCohort extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     

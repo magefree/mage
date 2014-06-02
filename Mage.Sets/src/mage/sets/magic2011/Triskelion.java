@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Triskelion extends CardImpl<Triskelion> {
+public class Triskelion extends CardImpl {
 
     public Triskelion(UUID ownerId) {
         super(ownerId, 218, "Triskelion", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

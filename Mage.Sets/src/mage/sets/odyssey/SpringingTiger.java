@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SpringingTiger extends CardImpl<SpringingTiger> {
+public class SpringingTiger extends CardImpl {
 
     public SpringingTiger(UUID ownerId) {
         super(ownerId, 272, "Springing Tiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

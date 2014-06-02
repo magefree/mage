@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class Earthcraft extends CardImpl<Earthcraft> {
+public class Earthcraft extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("untapped creature you control");
     private static final FilterControlledPermanent filterLand = new FilterControlledPermanent("basic land");

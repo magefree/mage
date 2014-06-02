@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Plopman
  */
-public class SteelformSliver extends CardImpl<SteelformSliver> {
+public class SteelformSliver extends CardImpl {
 
     public SteelformSliver(UUID ownerId) {
         super(ownerId, 38, "Steelform Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

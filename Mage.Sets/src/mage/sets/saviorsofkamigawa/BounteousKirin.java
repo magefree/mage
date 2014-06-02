@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class BounteousKirin extends CardImpl<BounteousKirin> {
+public class BounteousKirin extends CardImpl {
 
     public BounteousKirin(UUID ownerId) {
         super(ownerId, 123, "Bounteous Kirin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DryadsFavor extends CardImpl<DryadsFavor> {
+public class DryadsFavor extends CardImpl {
 
     public DryadsFavor(UUID ownerId) {
         super(ownerId, 169, "Dryad's Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

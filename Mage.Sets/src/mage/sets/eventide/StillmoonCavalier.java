@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class StillmoonCavalier extends CardImpl<StillmoonCavalier> {
+public class StillmoonCavalier extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("white and from black");
     static {

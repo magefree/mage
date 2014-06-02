@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class PrimalBellow extends CardImpl<PrimalBellow> {
+public class PrimalBellow extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 

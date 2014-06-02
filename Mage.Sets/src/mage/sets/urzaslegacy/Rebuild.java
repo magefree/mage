@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class Rebuild extends CardImpl<Rebuild> {
+public class Rebuild extends CardImpl {
 
     public Rebuild(UUID ownerId) {
         super(ownerId, 40, "Rebuild", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

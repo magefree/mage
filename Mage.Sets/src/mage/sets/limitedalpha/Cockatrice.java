@@ -49,7 +49,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class Cockatrice extends CardImpl<Cockatrice> {
+public class Cockatrice extends CardImpl {
 
     public Cockatrice(UUID ownerId) {
         super(ownerId, 98, "Cockatrice", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

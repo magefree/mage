@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class OrzhovSignet extends CardImpl<OrzhovSignet> {
+public class OrzhovSignet extends CardImpl {
 
     public OrzhovSignet(UUID ownerId) {
         super(ownerId, 155, "Orzhov Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

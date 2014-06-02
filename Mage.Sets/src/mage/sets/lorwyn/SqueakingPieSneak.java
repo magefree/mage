@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class SqueakingPieSneak extends CardImpl<SqueakingPieSneak> {
+public class SqueakingPieSneak extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Goblin card from your hand");
     static {

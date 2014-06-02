@@ -49,7 +49,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author LevelX2
  */
-public class PolymorphousRush extends CardImpl<PolymorphousRush> {
+public class PolymorphousRush extends CardImpl {
 
     public PolymorphousRush(UUID ownerId) {
         super(ownerId, 46, "Polymorphous Rush", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");

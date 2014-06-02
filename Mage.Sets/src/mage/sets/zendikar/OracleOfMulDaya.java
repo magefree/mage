@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author nantuko, BetaSteward_at_googlemail.com
  */
-public class OracleOfMulDaya extends CardImpl<OracleOfMulDaya> {
+public class OracleOfMulDaya extends CardImpl {
 
     public OracleOfMulDaya(UUID ownerId) {
         super(ownerId, 172, "Oracle of Mul Daya", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");

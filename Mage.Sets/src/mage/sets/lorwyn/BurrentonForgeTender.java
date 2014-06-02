@@ -50,7 +50,7 @@ import mage.target.TargetSource;
  *
  * @author LevelX2
  */
-public class BurrentonForgeTender extends CardImpl<BurrentonForgeTender> {
+public class BurrentonForgeTender extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Red");
     private static final FilterObject filterObject = new FilterObject("red source of your choice");

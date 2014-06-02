@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class InsideOut extends CardImpl<InsideOut> {
+public class InsideOut extends CardImpl {
 
     public InsideOut(UUID ownerId) {
         super(ownerId, 103, "Inside Out", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U/R}");

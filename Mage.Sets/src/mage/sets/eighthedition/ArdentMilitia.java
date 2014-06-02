@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ArdentMilitia extends CardImpl<ArdentMilitia> {
+public class ArdentMilitia extends CardImpl {
 
     public ArdentMilitia(UUID ownerId) {
         super(ownerId, 3, "Ardent Militia", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

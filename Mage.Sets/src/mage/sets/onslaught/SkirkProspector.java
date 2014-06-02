@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class SkirkProspector extends CardImpl<SkirkProspector> {
+public class SkirkProspector extends CardImpl {
 
     public SkirkProspector(UUID ownerId) {
         super(ownerId, 230, "Skirk Prospector", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

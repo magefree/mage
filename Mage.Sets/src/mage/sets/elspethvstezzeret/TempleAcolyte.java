@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class TempleAcolyte extends CardImpl<TempleAcolyte> {
+public class TempleAcolyte extends CardImpl {
 
     public TempleAcolyte (UUID ownerId) {
         super(ownerId, 9, "Temple Acolyte", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

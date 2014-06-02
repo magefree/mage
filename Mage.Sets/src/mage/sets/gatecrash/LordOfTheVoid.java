@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class LordOfTheVoid extends CardImpl<LordOfTheVoid> {
+public class LordOfTheVoid extends CardImpl {
 
     public LordOfTheVoid(UUID ownerId) {
         super(ownerId, 71, "Lord of the Void", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");

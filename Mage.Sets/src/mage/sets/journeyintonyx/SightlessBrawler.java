@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SightlessBrawler extends CardImpl<SightlessBrawler> {
+public class SightlessBrawler extends CardImpl {
 
     public SightlessBrawler(UUID ownerId) {
         super(ownerId, 24, "Sightless Brawler", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{W}");

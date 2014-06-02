@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SerraAscendant extends CardImpl<SerraAscendant> {
+public class SerraAscendant extends CardImpl {
 
     public SerraAscendant(UUID ownerId) {
         super(ownerId, 28, "Serra Ascendant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");

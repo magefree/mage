@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author maurer.it_at_gmail.com
  */
-public class LeoninArbiter extends CardImpl<LeoninArbiter> {
+public class LeoninArbiter extends CardImpl {
 
     public LeoninArbiter(UUID ownerId) {
         super(ownerId, 14, "Leonin Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");

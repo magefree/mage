@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class LoxodonWayfarer extends CardImpl<LoxodonWayfarer> {
+public class LoxodonWayfarer extends CardImpl {
 
     public LoxodonWayfarer (UUID ownerId) {
         super(ownerId, 15, "Loxodon Wayfarer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

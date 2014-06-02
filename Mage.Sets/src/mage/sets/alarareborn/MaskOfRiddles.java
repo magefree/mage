@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MaskOfRiddles extends CardImpl<MaskOfRiddles> {
+public class MaskOfRiddles extends CardImpl {
 
     public MaskOfRiddles(UUID ownerId) {
         super(ownerId, 25, "Mask of Riddles", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{U}{B}");

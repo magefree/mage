@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author Quercitron
  */
-public class Flash extends CardImpl<Flash> {
+public class Flash extends CardImpl {
 
     public Flash(UUID ownerId) {
         super(ownerId, 66, "Flash", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}");

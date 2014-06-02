@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ShatterskullGiant extends CardImpl<ShatterskullGiant> {
+public class ShatterskullGiant extends CardImpl {
 
     public ShatterskullGiant(UUID ownerId) {
         super(ownerId, 148, "Shatterskull Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

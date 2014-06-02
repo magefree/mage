@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class RuinsOfTrokair extends CardImpl<RuinsOfTrokair> {
+public class RuinsOfTrokair extends CardImpl {
 
     public RuinsOfTrokair(UUID ownerId) {
         super(ownerId, 185, "Ruins of Trokair", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

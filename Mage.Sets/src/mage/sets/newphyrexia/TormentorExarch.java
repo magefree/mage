@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class TormentorExarch extends CardImpl<TormentorExarch> {
+public class TormentorExarch extends CardImpl {
 
     public TormentorExarch(UUID ownerId) {
         super(ownerId, 97, "Tormentor Exarch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

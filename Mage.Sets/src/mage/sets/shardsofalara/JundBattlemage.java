@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class JundBattlemage extends CardImpl<JundBattlemage> {
+public class JundBattlemage extends CardImpl {
 
     public JundBattlemage (UUID ownerId) {
         super(ownerId, 106, "Jund Battlemage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class NyxbornEidolon extends CardImpl<NyxbornEidolon> {
+public class NyxbornEidolon extends CardImpl {
 
     public NyxbornEidolon(UUID ownerId) {
         super(ownerId, 78, "Nyxborn Eidolon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}");

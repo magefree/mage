@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CatWarriors extends CardImpl<CatWarriors> {
+public class CatWarriors extends CardImpl {
 
     public CatWarriors(UUID ownerId) {
         super(ownerId, 144, "Cat Warriors", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BrindleBoar extends CardImpl<BrindleBoar> {
+public class BrindleBoar extends CardImpl {
 
     public BrindleBoar(UUID ownerId) {
         super(ownerId, 166, "Brindle Boar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

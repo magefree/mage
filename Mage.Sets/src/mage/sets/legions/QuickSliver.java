@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author cbt33, Loki (Shimmer Myr)
  */
-public class QuickSliver extends CardImpl<QuickSliver> {
+public class QuickSliver extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Sliver cards");
     static {

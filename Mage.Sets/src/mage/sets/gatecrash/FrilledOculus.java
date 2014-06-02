@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class FrilledOculus extends CardImpl<FrilledOculus> {
+public class FrilledOculus extends CardImpl {
 
     public FrilledOculus(UUID ownerId) {
         super(ownerId, 35, "Frilled Oculus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

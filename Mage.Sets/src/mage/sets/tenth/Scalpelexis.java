@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class Scalpelexis extends CardImpl<Scalpelexis> {
+public class Scalpelexis extends CardImpl {
 
     public Scalpelexis(UUID ownerId) {
         super(ownerId, 105, "Scalpelexis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");

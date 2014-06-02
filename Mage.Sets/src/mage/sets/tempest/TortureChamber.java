@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TortureChamber extends CardImpl<TortureChamber> {
+public class TortureChamber extends CardImpl {
 
     public TortureChamber(UUID ownerId) {
         super(ownerId, 303, "Torture Chamber", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

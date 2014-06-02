@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class PhyrexianLens extends CardImpl<PhyrexianLens> {
+public class PhyrexianLens extends CardImpl {
 
     public PhyrexianLens(UUID ownerId) {
         super(ownerId, 307, "Phyrexian Lens", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

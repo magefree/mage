@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class LandGrant extends CardImpl<LandGrant> {
+public class LandGrant extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("Forest card");
     public LandGrant(UUID ownerId) {

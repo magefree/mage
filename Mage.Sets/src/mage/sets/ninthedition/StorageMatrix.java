@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class StorageMatrix extends CardImpl<StorageMatrix> {
+public class StorageMatrix extends CardImpl {
 
     public StorageMatrix(UUID ownerId) {
         super(ownerId, 310, "Storage Matrix", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class BelltowerSphinx extends CardImpl<BelltowerSphinx> {
+public class BelltowerSphinx extends CardImpl {
 
     public BelltowerSphinx(UUID ownerId) {
         super(ownerId, 38, "Belltower Sphinx", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

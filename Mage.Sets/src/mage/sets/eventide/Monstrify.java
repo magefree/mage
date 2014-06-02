@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Monstrify extends CardImpl<Monstrify> {
+public class Monstrify extends CardImpl {
 
     public Monstrify(UUID ownerId) {
         super(ownerId, 70, "Monstrify", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

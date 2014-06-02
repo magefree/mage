@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ElspethTirel extends CardImpl<ElspethTirel> {
+public class ElspethTirel extends CardImpl {
 
     public ElspethTirel (UUID ownerId) {
         super(ownerId, 6, "Elspeth Tirel", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");

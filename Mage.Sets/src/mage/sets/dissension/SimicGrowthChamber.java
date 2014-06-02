@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class SimicGrowthChamber extends CardImpl<SimicGrowthChamber> {
+public class SimicGrowthChamber extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

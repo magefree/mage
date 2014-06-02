@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FesteringGoblin extends CardImpl<FesteringGoblin> {
+public class FesteringGoblin extends CardImpl {
 
     public FesteringGoblin(UUID ownerId) {
         super(ownerId, 27, "Festering Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

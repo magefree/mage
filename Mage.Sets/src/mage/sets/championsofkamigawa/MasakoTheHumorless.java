@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class MasakoTheHumorless extends CardImpl<MasakoTheHumorless> {
+public class MasakoTheHumorless extends CardImpl {
 
     public MasakoTheHumorless(UUID ownerId) {
         super(ownerId, 33, "Masako the Humorless", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");

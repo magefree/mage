@@ -58,7 +58,7 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class PanopticMirror extends CardImpl<PanopticMirror> {
+public class PanopticMirror extends CardImpl {
 
     public PanopticMirror(UUID ownerId) {
         super(ownerId, 136, "Panoptic Mirror", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

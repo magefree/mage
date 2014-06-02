@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class ShivanRaptor extends CardImpl<ShivanRaptor>{
+public class ShivanRaptor extends CardImpl{
 
     public ShivanRaptor(UUID ownerId) {
         super(ownerId, 215, "Shivan Raptor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

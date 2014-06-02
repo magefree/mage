@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class ShadowRider extends CardImpl<ShadowRider> {
+public class ShadowRider extends CardImpl {
 
     public ShadowRider(UUID ownerId) {
         super(ownerId, 21, "Shadow Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

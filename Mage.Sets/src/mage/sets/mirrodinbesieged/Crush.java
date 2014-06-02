@@ -41,7 +41,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author North
  */
-public class Crush extends CardImpl<Crush> {
+public class Crush extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("noncreature artifact");
 

@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class Thraximundar extends CardImpl<Thraximundar> {
+public class Thraximundar extends CardImpl {
 
     public Thraximundar(UUID ownerId) {
         super(ownerId, 113, "Thraximundar", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{B}{R}");

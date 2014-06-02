@@ -58,7 +58,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author North
  */
-public class ChandraAblaze extends CardImpl<ChandraAblaze> {
+public class ChandraAblaze extends CardImpl {
 
     public ChandraAblaze(UUID ownerId) {
         super(ownerId, 120, "Chandra Ablaze", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class RuinationWurm extends CardImpl<RuinationWurm> {
+public class RuinationWurm extends CardImpl {
 
     public RuinationWurm(UUID ownerId) {
         super(ownerId, 192, "Ruination Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");

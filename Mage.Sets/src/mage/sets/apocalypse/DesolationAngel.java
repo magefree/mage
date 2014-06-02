@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class DesolationAngel extends CardImpl<DesolationAngel> {
+public class DesolationAngel extends CardImpl {
 
     public DesolationAngel(UUID ownerId) {
         super(ownerId, 38, "Desolation Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

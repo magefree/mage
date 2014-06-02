@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class EncroachingWastes extends CardImpl<EncroachingWastes> {
+public class EncroachingWastes extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
 
     public EncroachingWastes(UUID ownerId) {

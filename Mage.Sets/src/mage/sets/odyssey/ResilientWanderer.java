@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author cbt33, BetaSteward (GainProtectionFromColorTargetEffect)
  */
-public class ResilientWanderer extends CardImpl<ResilientWanderer> {
+public class ResilientWanderer extends CardImpl {
 
     public ResilientWanderer(UUID ownerId) {
         super(ownerId, 43, "Resilient Wanderer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Loki, North
  */
-public class Riddlesmith extends CardImpl<Riddlesmith> {
+public class Riddlesmith extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an artifact spell");
     static {

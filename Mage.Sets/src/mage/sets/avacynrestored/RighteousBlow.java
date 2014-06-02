@@ -38,7 +38,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class RighteousBlow extends CardImpl<RighteousBlow> {
+public class RighteousBlow extends CardImpl {
 
     public RighteousBlow(UUID ownerId) {
         super(ownerId, 34, "Righteous Blow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

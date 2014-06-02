@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TemporalIsolation extends CardImpl<TemporalIsolation> {
+public class TemporalIsolation extends CardImpl {
 
     public TemporalIsolation(UUID ownerId) {
         super(ownerId, 43, "Temporal Isolation", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

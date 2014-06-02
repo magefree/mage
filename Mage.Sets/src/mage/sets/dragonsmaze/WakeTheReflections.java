@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class WakeTheReflections extends CardImpl<WakeTheReflections> {
+public class WakeTheReflections extends CardImpl {
 
     public WakeTheReflections(UUID ownerId) {
         super(ownerId, 10, "Wake the Reflections", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}");

@@ -48,7 +48,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class UmbraStalker extends CardImpl<UmbraStalker> {
+public class UmbraStalker extends CardImpl {
 
     public UmbraStalker(UUID ownerId) {
         super(ownerId, 48, "Umbra Stalker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");

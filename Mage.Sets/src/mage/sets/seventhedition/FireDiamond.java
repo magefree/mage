@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class FireDiamond extends CardImpl<FireDiamond> {
+public class FireDiamond extends CardImpl {
 
     public FireDiamond(UUID ownerId) {
         super(ownerId, 296, "Fire Diamond", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class Archaeomancer extends CardImpl<Archaeomancer> {
+public class Archaeomancer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 

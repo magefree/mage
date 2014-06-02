@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class CateranSummons extends CardImpl<CateranSummons> {
+public class CateranSummons extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary card");
 

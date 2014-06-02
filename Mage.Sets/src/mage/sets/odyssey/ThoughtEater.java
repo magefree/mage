@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ThoughtEater extends CardImpl<ThoughtEater> {
+public class ThoughtEater extends CardImpl {
 
     public ThoughtEater(UUID ownerId) {
         super(ownerId, 106, "Thought Eater", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

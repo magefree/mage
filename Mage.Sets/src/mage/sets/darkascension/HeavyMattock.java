@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class HeavyMattock extends CardImpl<HeavyMattock> {
+public class HeavyMattock extends CardImpl {
 
     private static final String staticText = "As long as equipped creature is a Human, it gets an additional +1/+1";
 

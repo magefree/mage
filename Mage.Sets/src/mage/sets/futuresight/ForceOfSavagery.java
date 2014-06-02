@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ForceOfSavagery extends CardImpl<ForceOfSavagery> {
+public class ForceOfSavagery extends CardImpl {
 
     public ForceOfSavagery(UUID ownerId) {
         super(ownerId, 126, "Force of Savagery", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

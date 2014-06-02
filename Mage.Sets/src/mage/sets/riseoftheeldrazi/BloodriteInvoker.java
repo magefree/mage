@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class BloodriteInvoker extends CardImpl<BloodriteInvoker> {
+public class BloodriteInvoker extends CardImpl {
 
     public BloodriteInvoker (UUID ownerId) {
         super(ownerId, 97, "Bloodrite Invoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

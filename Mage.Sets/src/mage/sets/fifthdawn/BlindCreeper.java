@@ -45,7 +45,7 @@ import mage.game.stack.Spell;
  *
  * @author Loki
  */
-public class BlindCreeper extends CardImpl<BlindCreeper> {
+public class BlindCreeper extends CardImpl {
 
     public BlindCreeper(UUID ownerId) {
         super(ownerId, 42, "Blind Creeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

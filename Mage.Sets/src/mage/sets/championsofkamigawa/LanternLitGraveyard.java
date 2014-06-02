@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LanternLitGraveyard extends CardImpl<LanternLitGraveyard> {
+public class LanternLitGraveyard extends CardImpl {
 
     public LanternLitGraveyard(UUID ownerId) {
         super(ownerId, 278, "Lantern-Lit Graveyard", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

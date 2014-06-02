@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SlashPanther extends CardImpl<SlashPanther> {
+public class SlashPanther extends CardImpl {
 
     public SlashPanther(UUID ownerId) {
         super(ownerId, 96, "Slash Panther", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{RP}");

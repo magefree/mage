@@ -40,7 +40,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class HumanFrailty extends CardImpl<HumanFrailty> {
+public class HumanFrailty extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creature");
 

@@ -86,7 +86,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class BaneAlleyBroker extends CardImpl<BaneAlleyBroker> {
+public class BaneAlleyBroker extends CardImpl {
 
     public BaneAlleyBroker(UUID ownerId) {
         super(ownerId, 145, "Bane Alley Broker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");

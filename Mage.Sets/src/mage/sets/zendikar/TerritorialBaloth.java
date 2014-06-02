@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TerritorialBaloth extends CardImpl<TerritorialBaloth> {
+public class TerritorialBaloth extends CardImpl {
 
     public TerritorialBaloth(UUID ownerId) {
         super(ownerId, 188, "Territorial Baloth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

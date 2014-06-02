@@ -46,7 +46,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class GhostlyTouch extends CardImpl<GhostlyTouch> {
+public class GhostlyTouch extends CardImpl {
 
     public GhostlyTouch(UUID ownerId) {
         super(ownerId, 58, "Ghostly Touch", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

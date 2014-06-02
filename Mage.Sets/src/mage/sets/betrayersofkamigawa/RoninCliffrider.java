@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class RoninCliffrider extends CardImpl<RoninCliffrider> {
+public class RoninCliffrider extends CardImpl {
 
     public RoninCliffrider(UUID ownerId) {
         super(ownerId, 116, "Ronin Cliffrider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

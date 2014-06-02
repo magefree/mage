@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class RegathanFirecat extends CardImpl<RegathanFirecat> {
+public class RegathanFirecat extends CardImpl {
 
     public RegathanFirecat(UUID ownerId) {
         super(ownerId, 150, "Regathan Firecat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

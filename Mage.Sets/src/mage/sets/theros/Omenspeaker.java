@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class Omenspeaker extends CardImpl<Omenspeaker> {
+public class Omenspeaker extends CardImpl {
 
     public Omenspeaker(UUID ownerId) {
         super(ownerId, 57, "Omenspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

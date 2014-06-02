@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HerosResolve extends CardImpl<HerosResolve> {
+public class HerosResolve extends CardImpl {
 
     public HerosResolve(UUID ownerId) {
         super(ownerId, 235, "Hero's Resolve", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

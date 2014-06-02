@@ -55,7 +55,7 @@ import mage.constants.CostModificationType;
  *
  * @author Plopman
  */
-public class AvatarOfHope extends CardImpl<AvatarOfHope> {
+public class AvatarOfHope extends CardImpl {
 
     public AvatarOfHope(UUID ownerId) {
         super(ownerId, 3, "Avatar of Hope", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}{W}");

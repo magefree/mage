@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInGraveyard;
  * @author cbt33, jonubuu (Withered Wretch)
  */
 
-public class CoffinPurge extends CardImpl<CoffinPurge> {
+public class CoffinPurge extends CardImpl {
 
     public CoffinPurge(UUID ownerId) {
         super(ownerId, 124, "Coffin Purge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

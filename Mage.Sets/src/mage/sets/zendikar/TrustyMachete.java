@@ -44,7 +44,7 @@ import mage.constants.Outcome;
  *
  * @author Loki
  */
-public class TrustyMachete extends CardImpl<TrustyMachete> {
+public class TrustyMachete extends CardImpl {
 
     public TrustyMachete (UUID ownerId) {
         super(ownerId, 209, "Trusty Machete", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

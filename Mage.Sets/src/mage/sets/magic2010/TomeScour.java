@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TomeScour extends CardImpl<TomeScour> {
+public class TomeScour extends CardImpl {
 
     public TomeScour(UUID ownerId) {
         super(ownerId, 76, "Tome Scour", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");

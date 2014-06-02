@@ -53,7 +53,7 @@ import mage.target.TargetSource;
  *
  * @author cbt33, Plopman (Circle of Protection: Red)
  */
-public class PilgrimOfVirtue extends CardImpl<PilgrimOfVirtue> {
+public class PilgrimOfVirtue extends CardImpl {
     
         static final FilterCard filter = new FilterCard("black");
     

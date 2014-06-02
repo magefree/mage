@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class LiquimetalCoating extends CardImpl<LiquimetalCoating> {
+public class LiquimetalCoating extends CardImpl {
 
     public LiquimetalCoating (UUID ownerId) {
         super(ownerId, 171, "Liquimetal Coating", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class LeshracsRite extends CardImpl<LeshracsRite> {
+public class LeshracsRite extends CardImpl {
 
     public LeshracsRite(UUID ownerId) {
         super(ownerId, 31, "Leshrac's Rite", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

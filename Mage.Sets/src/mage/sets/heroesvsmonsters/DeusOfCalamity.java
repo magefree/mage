@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class DeusOfCalamity extends CardImpl<DeusOfCalamity> {
+public class DeusOfCalamity extends CardImpl {
 
     public DeusOfCalamity(UUID ownerId) {
         super(ownerId, 54, "Deus of Calamity", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R/G}{R/G}{R/G}{R/G}{R/G}");

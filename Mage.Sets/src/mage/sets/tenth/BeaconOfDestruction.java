@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class BeaconOfDestruction extends CardImpl<BeaconOfDestruction> {
+public class BeaconOfDestruction extends CardImpl {
 
     public BeaconOfDestruction(UUID ownerId) {
         super(ownerId, 189, "Beacon of Destruction", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");

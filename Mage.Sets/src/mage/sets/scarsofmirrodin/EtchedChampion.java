@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class EtchedChampion extends CardImpl<EtchedChampion> {
+public class EtchedChampion extends CardImpl {
     private static final String ruleText = "<i>Metalcraft</i> - Etched Champion has protection from all colors as long as you control three or more artifacts";
 
     private static final FilterCard filter = new FilterCard("all colors");

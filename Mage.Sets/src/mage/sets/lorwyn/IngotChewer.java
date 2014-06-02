@@ -43,7 +43,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class IngotChewer extends CardImpl<IngotChewer> {
+public class IngotChewer extends CardImpl {
 
     public IngotChewer(UUID ownerId) {
         super(ownerId, 180, "Ingot Chewer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

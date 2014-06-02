@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class BarrageOfExpendables extends CardImpl<BarrageOfExpendables> {
+public class BarrageOfExpendables extends CardImpl {
 
     public BarrageOfExpendables(UUID ownerId) {
         super(ownerId, 127, "Barrage of Expendables", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class SurrakarMarauder extends CardImpl<SurrakarMarauder> {
+public class SurrakarMarauder extends CardImpl {
 
     public SurrakarMarauder(UUID ownerId) {
         super(ownerId, 113, "Surrakar Marauder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

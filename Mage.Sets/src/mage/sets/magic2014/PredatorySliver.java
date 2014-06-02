@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PredatorySliver extends CardImpl<PredatorySliver> {
+public class PredatorySliver extends CardImpl {
 
     public PredatorySliver(UUID ownerId) {
         super(ownerId, 189, "Predatory Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

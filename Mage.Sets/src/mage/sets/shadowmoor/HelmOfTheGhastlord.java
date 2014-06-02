@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class HelmOfTheGhastlord extends CardImpl<HelmOfTheGhastlord> {
+public class HelmOfTheGhastlord extends CardImpl {
 
     public HelmOfTheGhastlord(UUID ownerId) {
         super(ownerId, 166, "Helm of the Ghastlord", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U/B}");

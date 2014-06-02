@@ -43,7 +43,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class TormentedHero extends CardImpl<TormentedHero> {
+public class TormentedHero extends CardImpl {
 
     public TormentedHero(UUID ownerId) {
         super(ownerId, 108, "Tormented Hero", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");

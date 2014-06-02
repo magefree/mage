@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SteamVents extends CardImpl<SteamVents> {
+public class SteamVents extends CardImpl {
 
     public SteamVents (UUID ownerId) {
         super(ownerId, 164, "Steam Vents", Rarity.RARE, new CardType[]{CardType.LAND}, null);

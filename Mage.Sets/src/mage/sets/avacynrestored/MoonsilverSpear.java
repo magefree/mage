@@ -44,7 +44,7 @@ import mage.game.permanent.token.AngelToken;
  *
  * @author Loki
  */
-public class MoonsilverSpear extends CardImpl<MoonsilverSpear> {
+public class MoonsilverSpear extends CardImpl {
 
     public MoonsilverSpear(UUID ownerId) {
         super(ownerId, 217, "Moonsilver Spear", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

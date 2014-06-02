@@ -49,7 +49,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class Witchstalker extends CardImpl<Witchstalker> {
+public class Witchstalker extends CardImpl {
 
     public Witchstalker(UUID ownerId) {
         super(ownerId, 202, "Witchstalker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

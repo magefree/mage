@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward
  */
-public class UnhallowedCathar extends CardImpl<UnhallowedCathar> {
+public class UnhallowedCathar extends CardImpl {
 
     public UnhallowedCathar(UUID ownerId) {
         super(ownerId, 13, "Unhallowed Cathar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");

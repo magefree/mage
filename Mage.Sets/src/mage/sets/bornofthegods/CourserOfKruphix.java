@@ -45,7 +45,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LevelX2
  */
-public class CourserOfKruphix extends CardImpl<CourserOfKruphix> {
+public class CourserOfKruphix extends CardImpl {
 
     public CourserOfKruphix(UUID ownerId) {
         super(ownerId, 119, "Courser of Kruphix", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{G}{G}");

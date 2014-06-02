@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
 /**
  * @author Loki
  */
-public class FloatingDreamZubera extends CardImpl<FloatingDreamZubera> {
+public class FloatingDreamZubera extends CardImpl {
 
     public FloatingDreamZubera(UUID ownerId) {
         super(ownerId, 61, "Floating-Dream Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

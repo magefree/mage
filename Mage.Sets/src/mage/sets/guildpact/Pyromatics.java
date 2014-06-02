@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class Pyromatics extends CardImpl<Pyromatics> {
+public class Pyromatics extends CardImpl {
 
     public Pyromatics(UUID ownerId) {
         super(ownerId, 72, "Pyromatics", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class PurphorossEmissary extends CardImpl<PurphorossEmissary> {
+public class PurphorossEmissary extends CardImpl {
 
     public PurphorossEmissary(UUID ownerId) {
         super(ownerId, 136, "Purphoros's Emissary", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{R}");

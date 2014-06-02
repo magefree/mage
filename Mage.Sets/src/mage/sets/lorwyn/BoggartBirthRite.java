@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class BoggartBirthRite extends CardImpl<BoggartBirthRite> {
+public class BoggartBirthRite extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Goblin card from your graveyard");
 

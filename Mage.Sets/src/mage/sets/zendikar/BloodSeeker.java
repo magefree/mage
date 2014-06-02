@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class BloodSeeker extends CardImpl<BloodSeeker> {
+public class BloodSeeker extends CardImpl {
 
     public BloodSeeker(UUID ownerId) {
         super(ownerId, 80, "Blood Seeker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

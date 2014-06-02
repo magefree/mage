@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FlamespeakersWill extends CardImpl<FlamespeakersWill> {
+public class FlamespeakersWill extends CardImpl {
 
     public FlamespeakersWill(UUID ownerId) {
         super(ownerId, 95, "Flamespeaker's Will", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

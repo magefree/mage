@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class Fleshformer extends CardImpl<Fleshformer> {
+public class Fleshformer extends CardImpl {
 
     public Fleshformer(UUID ownerId) {
         super(ownerId, 45, "Fleshformer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

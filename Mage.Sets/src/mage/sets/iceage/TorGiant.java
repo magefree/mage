@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TorGiant extends CardImpl<TorGiant> {
+public class TorGiant extends CardImpl {
 
     public TorGiant(UUID ownerId) {
         super(ownerId, 76, "Tor Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

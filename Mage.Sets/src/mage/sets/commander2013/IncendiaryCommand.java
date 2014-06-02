@@ -48,7 +48,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author LevelX2
  */
-public class IncendiaryCommand extends CardImpl<IncendiaryCommand> {
+public class IncendiaryCommand extends CardImpl {
 
     public IncendiaryCommand(UUID ownerId) {
         super(ownerId, 113, "Incendiary Command", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

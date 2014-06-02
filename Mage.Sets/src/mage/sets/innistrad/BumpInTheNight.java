@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class BumpInTheNight extends CardImpl<BumpInTheNight> {
+public class BumpInTheNight extends CardImpl {
 
     public BumpInTheNight(UUID ownerId) {
         super(ownerId, 92, "Bump in the Night", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");

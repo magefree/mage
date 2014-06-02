@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class TatteredDrake extends CardImpl<TatteredDrake> {
+public class TatteredDrake extends CardImpl {
 
     public TatteredDrake (UUID ownerId) {
         super(ownerId, 68, "Tattered Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

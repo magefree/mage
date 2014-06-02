@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author jeffwadsworth
  */
-public class JwariShapeshifter extends CardImpl<JwariShapeshifter> {
+public class JwariShapeshifter extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Ally creature");
     

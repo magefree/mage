@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class StoicAngel extends CardImpl<StoicAngel> {
+public class StoicAngel extends CardImpl {
 
     public StoicAngel(UUID ownerId) {
         super(ownerId, 199, "Stoic Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");

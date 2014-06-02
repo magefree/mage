@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class ThopterAssembly extends CardImpl<ThopterAssembly> {
+public class ThopterAssembly extends CardImpl {
 
     public ThopterAssembly(UUID ownerId) {
         super(ownerId, 140, "Thopter Assembly", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

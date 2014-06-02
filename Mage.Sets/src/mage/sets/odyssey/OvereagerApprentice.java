@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author cbt33, Loki (Dark Ritual)
  */
-public class OvereagerApprentice extends CardImpl<OvereagerApprentice> {
+public class OvereagerApprentice extends CardImpl {
 
     public OvereagerApprentice(UUID ownerId) {
         super(ownerId, 154, "Overeager Apprentice", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

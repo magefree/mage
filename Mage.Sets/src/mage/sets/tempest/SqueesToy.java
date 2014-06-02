@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SqueesToy extends CardImpl<SqueesToy> {
+public class SqueesToy extends CardImpl {
 
     public SqueesToy(UUID ownerId) {
         super(ownerId, 299, "Squee's Toy", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

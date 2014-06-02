@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SeethingSong extends CardImpl<SeethingSong> {
+public class SeethingSong extends CardImpl {
 
     public SeethingSong(UUID ownerId) {
         super(ownerId, 104, "Seething Song", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

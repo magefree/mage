@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 /**
  * @author Loki
  */
-public class FlameblastDragon extends CardImpl<FlameblastDragon> {
+public class FlameblastDragon extends CardImpl {
 
     public FlameblastDragon(UUID ownerId) {
         super(ownerId, 100, "Flameblast Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

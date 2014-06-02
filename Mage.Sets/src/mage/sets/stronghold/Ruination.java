@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author LevelX2
  */
-public class Ruination extends CardImpl<Ruination> {
+public class Ruination extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic lands");
     static {

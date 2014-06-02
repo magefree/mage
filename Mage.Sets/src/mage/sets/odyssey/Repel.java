@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33, BetaSteward_at_googlemail.com (Excommunicate)
  */
-public class Repel extends CardImpl<Repel> {
+public class Repel extends CardImpl {
 
     public Repel(UUID ownerId) {
         super(ownerId, 98, "Repel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");

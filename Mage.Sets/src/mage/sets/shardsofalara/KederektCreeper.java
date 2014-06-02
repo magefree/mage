@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KederektCreeper extends CardImpl<KederektCreeper> {
+public class KederektCreeper extends CardImpl {
 
     public KederektCreeper(UUID ownerId) {
         super(ownerId, 176, "Kederekt Creeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}{R}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class AdaptiveSnapjaw extends CardImpl<AdaptiveSnapjaw> {
+public class AdaptiveSnapjaw extends CardImpl {
 
     public AdaptiveSnapjaw(UUID ownerId) {
         super(ownerId, 113, "Adaptive Snapjaw", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

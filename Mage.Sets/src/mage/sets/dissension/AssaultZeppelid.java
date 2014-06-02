@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AssaultZeppelid extends CardImpl<AssaultZeppelid> {
+public class AssaultZeppelid extends CardImpl {
 
     public AssaultZeppelid(UUID ownerId) {
         super(ownerId, 103, "Assault Zeppelid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");

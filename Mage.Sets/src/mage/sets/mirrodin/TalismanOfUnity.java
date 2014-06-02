@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class TalismanOfUnity extends CardImpl<TalismanOfUnity> {
+public class TalismanOfUnity extends CardImpl {
 
     public TalismanOfUnity(UUID ownerId) {
         super(ownerId, 257, "Talisman of Unity", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

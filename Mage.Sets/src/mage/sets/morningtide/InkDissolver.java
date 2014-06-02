@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class InkDissolver extends CardImpl<InkDissolver> {
+public class InkDissolver extends CardImpl {
 
     public InkDissolver(UUID ownerId) {
         super(ownerId, 36, "Ink Dissolver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

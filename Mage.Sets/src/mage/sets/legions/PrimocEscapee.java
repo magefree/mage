@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PrimocEscapee extends CardImpl<PrimocEscapee> {
+public class PrimocEscapee extends CardImpl {
 
     public PrimocEscapee(UUID ownerId) {
         super(ownerId, 49, "Primoc Escapee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");

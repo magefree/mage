@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CryptbornHorror extends CardImpl<CryptbornHorror> {
+public class CryptbornHorror extends CardImpl {
 
     private static final String rule = "{this} enters the battlefield with X +1/+1 counters on it, where X is the total life lost by your opponents this turn";
 

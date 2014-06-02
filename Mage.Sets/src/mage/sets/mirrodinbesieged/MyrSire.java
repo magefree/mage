@@ -41,7 +41,7 @@ import mage.game.permanent.token.MyrToken;
  *
  * @author Loki
  */
-public class MyrSire extends CardImpl<MyrSire> {
+public class MyrSire extends CardImpl {
 
     public MyrSire (UUID ownerId) {
         super(ownerId, 116, "Myr Sire", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

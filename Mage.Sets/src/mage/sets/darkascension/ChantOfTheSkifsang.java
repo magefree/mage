@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class ChantOfTheSkifsang extends CardImpl<ChantOfTheSkifsang> {
+public class ChantOfTheSkifsang extends CardImpl {
 
     public ChantOfTheSkifsang(UUID ownerId) {
         super(ownerId, 31, "Chant of the Skifsang", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class Tanglebloom extends CardImpl<Tanglebloom> {
+public class Tanglebloom extends CardImpl {
 
     public Tanglebloom(UUID ownerId) {
         super(ownerId, 258, "Tanglebloom", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

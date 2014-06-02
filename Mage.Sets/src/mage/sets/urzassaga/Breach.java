@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Breach extends CardImpl<Breach> {
+public class Breach extends CardImpl {
 
     public Breach(UUID ownerId) {
         super(ownerId, 120, "Breach", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

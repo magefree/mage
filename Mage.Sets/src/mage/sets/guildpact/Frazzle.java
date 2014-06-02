@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
 /**
  * @author Loki
  */
-public class Frazzle extends CardImpl<Frazzle> {
+public class Frazzle extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("nonblue spell");
 

@@ -40,7 +40,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author LevelX2
  */
-public class HailOfArrows extends CardImpl<HailOfArrows> {
+public class HailOfArrows extends CardImpl {
 
     public HailOfArrows(UUID ownerId) {
         super(ownerId, 11, "Hail of Arrows", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{W}");

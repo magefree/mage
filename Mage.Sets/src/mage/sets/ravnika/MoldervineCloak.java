@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class MoldervineCloak extends CardImpl<MoldervineCloak> {
+public class MoldervineCloak extends CardImpl {
 
     public MoldervineCloak(UUID ownerId) {
         super(ownerId, 173, "Moldervine Cloak", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

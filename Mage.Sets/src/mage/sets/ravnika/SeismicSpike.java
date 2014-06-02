@@ -40,7 +40,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class SeismicSpike extends CardImpl<SeismicSpike> {
+public class SeismicSpike extends CardImpl {
 
     public SeismicSpike(UUID ownerId) {
         super(ownerId, 141, "Seismic Spike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");

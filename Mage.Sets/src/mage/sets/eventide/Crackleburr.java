@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class Crackleburr extends CardImpl<Crackleburr> {
+public class Crackleburr extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("two untapped red creatures you control");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("two tapped blue creatures you control");

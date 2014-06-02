@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class WanderingGoblins extends CardImpl<WanderingGoblins> {
+public class WanderingGoblins extends CardImpl {
 
     public WanderingGoblins(UUID ownerId) {
         super(ownerId, 76, "Wandering Goblins", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

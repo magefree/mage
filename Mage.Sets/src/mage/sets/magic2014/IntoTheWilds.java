@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class IntoTheWilds extends CardImpl<IntoTheWilds> {
+public class IntoTheWilds extends CardImpl {
 
     public IntoTheWilds(UUID ownerId) {
         super(ownerId, 180, "Into the Wilds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

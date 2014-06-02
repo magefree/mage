@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class PerishTheThought extends CardImpl<PerishTheThought> {
+public class PerishTheThought extends CardImpl {
 
     public PerishTheThought(UUID ownerId) {
         super(ownerId, 123, "Perish the Thought", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

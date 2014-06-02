@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class GlareOfHeresy extends CardImpl<GlareOfHeresy> {
+public class GlareOfHeresy extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("white permanent");
     static {

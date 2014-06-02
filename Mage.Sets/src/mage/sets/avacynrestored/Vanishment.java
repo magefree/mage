@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class Vanishment extends CardImpl<Vanishment> {
+public class Vanishment extends CardImpl {
 
     public Vanishment(UUID ownerId) {
         super(ownerId, 82, "Vanishment", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");

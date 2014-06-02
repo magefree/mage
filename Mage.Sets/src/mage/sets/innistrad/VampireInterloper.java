@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class VampireInterloper extends CardImpl<VampireInterloper> {
+public class VampireInterloper extends CardImpl {
 
     public VampireInterloper(UUID ownerId) {
         super(ownerId, 123, "Vampire Interloper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

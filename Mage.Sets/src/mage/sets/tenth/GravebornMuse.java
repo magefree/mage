@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class GravebornMuse extends CardImpl<GravebornMuse> {
+public class GravebornMuse extends CardImpl {
     private static FilterControlledPermanent filter = new FilterControlledPermanent("Zombie you control");
 
     static {

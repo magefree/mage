@@ -57,7 +57,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class KruphixGodOfHorizons extends CardImpl<KruphixGodOfHorizons> {
+public class KruphixGodOfHorizons extends CardImpl {
 
     public KruphixGodOfHorizons(UUID ownerId) {
         super(ownerId, 152, "Kruphix, God of Horizons", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{G}{U}");

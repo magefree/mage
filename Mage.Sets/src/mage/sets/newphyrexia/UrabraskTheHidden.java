@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class UrabraskTheHidden extends CardImpl<UrabraskTheHidden> {
+public class UrabraskTheHidden extends CardImpl {
 
     public UrabraskTheHidden(UUID ownerId) {
         super(ownerId, 98, "Urabrask the Hidden", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

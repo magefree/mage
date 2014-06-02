@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 /**
  * @author LevelX2
  */
-public class RakdosGuildgate extends CardImpl<RakdosGuildgate> {
+public class RakdosGuildgate extends CardImpl {
 
     public RakdosGuildgate(UUID ownerId) {
         super(ownerId, 244, "Rakdos Guildgate", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

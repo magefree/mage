@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Sunlance extends CardImpl<Sunlance> {
+public class Sunlance extends CardImpl {
 
     static final protected FilterCreaturePermanent filter = new FilterCreaturePermanent("nonwhite creature");
     static {

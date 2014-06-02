@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class WhimsOfTheFates extends CardImpl<WhimsOfTheFates> {
+public class WhimsOfTheFates extends CardImpl {
 
     public WhimsOfTheFates(UUID ownerId) {
         super(ownerId, 115, "Whims of the Fates", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}");

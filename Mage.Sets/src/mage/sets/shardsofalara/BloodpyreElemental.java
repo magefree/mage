@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class BloodpyreElemental extends CardImpl<BloodpyreElemental> {
+public class BloodpyreElemental extends CardImpl {
 
     public BloodpyreElemental(UUID ownerId) {
         super(ownerId, 93, "Bloodpyre Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

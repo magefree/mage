@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class ToothAndNail extends CardImpl<ToothAndNail> {
+public class ToothAndNail extends CardImpl {
 
     public ToothAndNail(UUID ownerId) {
         super(ownerId, 170, "Tooth and Nail", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");

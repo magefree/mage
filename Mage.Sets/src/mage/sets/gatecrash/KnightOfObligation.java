@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class KnightOfObligation extends CardImpl<KnightOfObligation> {
+public class KnightOfObligation extends CardImpl {
 
     public KnightOfObligation(UUID ownerId) {
         super(ownerId, 18, "Knight of Obligation", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

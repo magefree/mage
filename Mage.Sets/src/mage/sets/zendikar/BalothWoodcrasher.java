@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BalothWoodcrasher extends CardImpl<BalothWoodcrasher> {
+public class BalothWoodcrasher extends CardImpl {
 
     public BalothWoodcrasher(UUID ownerId) {
         super(ownerId, 157, "Baloth Woodcrasher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

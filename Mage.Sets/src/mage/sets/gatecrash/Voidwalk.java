@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class Voidwalk extends CardImpl<Voidwalk> {
+public class Voidwalk extends CardImpl {
 
     public Voidwalk(UUID ownerId) {
         super(ownerId, 55, "Voidwalk", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LevelX2
  */
-public class VastwoodHydra extends CardImpl<VastwoodHydra> {
+public class VastwoodHydra extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
     static {

@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class SorinMarkov extends CardImpl<SorinMarkov> {
+public class SorinMarkov extends CardImpl {
 
     public SorinMarkov(UUID ownerId) {
         super(ownerId, 111, "Sorin Markov", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}{B}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class SpawningBreath extends CardImpl<SpawningBreath> {
+public class SpawningBreath extends CardImpl {
 
     public SpawningBreath(UUID ownerId) {
         super(ownerId, 164, "Spawning Breath", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

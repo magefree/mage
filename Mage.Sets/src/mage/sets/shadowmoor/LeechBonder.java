@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class LeechBonder extends CardImpl<LeechBonder> {
+public class LeechBonder extends CardImpl {
 
     public LeechBonder(UUID ownerId) {
         super(ownerId, 43, "Leech Bonder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

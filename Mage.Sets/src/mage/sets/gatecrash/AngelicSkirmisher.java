@@ -57,7 +57,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AngelicSkirmisher extends CardImpl<AngelicSkirmisher> {
+public class AngelicSkirmisher extends CardImpl {
 
     private static final Choice abilityChoice = new ChoiceImpl(true);
     private static final Set<String> abilityChoices = new HashSet<String>();

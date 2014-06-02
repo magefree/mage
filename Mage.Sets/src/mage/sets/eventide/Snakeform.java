@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class Snakeform extends CardImpl<Snakeform> {
+public class Snakeform extends CardImpl {
 
     public Snakeform(UUID ownerId) {
         super(ownerId, 161, "Snakeform", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G/U}");

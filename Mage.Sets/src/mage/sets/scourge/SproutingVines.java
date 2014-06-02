@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class SproutingVines extends CardImpl<SproutingVines> {
+public class SproutingVines extends CardImpl {
 
     public SproutingVines(UUID ownerId) {
         super(ownerId, 128, "Sprouting Vines", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

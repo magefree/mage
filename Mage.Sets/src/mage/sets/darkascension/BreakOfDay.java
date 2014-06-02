@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  * @author Loki
 
  */
-public class BreakOfDay extends CardImpl<BreakOfDay> {
+public class BreakOfDay extends CardImpl {
 
     public BreakOfDay(UUID ownerId) {
         super(ownerId, 3, "Break of Day", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

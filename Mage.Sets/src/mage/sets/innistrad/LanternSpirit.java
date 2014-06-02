@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LanternSpirit extends CardImpl<LanternSpirit> {
+public class LanternSpirit extends CardImpl {
 
     public LanternSpirit(UUID ownerId) {
         super(ownerId, 62, "Lantern Spirit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

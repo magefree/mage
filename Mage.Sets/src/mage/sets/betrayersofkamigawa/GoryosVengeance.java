@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class GoryosVengeance extends CardImpl<GoryosVengeance> {
+public class GoryosVengeance extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("legendary creature card");
 

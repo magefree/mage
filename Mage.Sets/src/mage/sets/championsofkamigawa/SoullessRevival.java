@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class SoullessRevival extends CardImpl<SoullessRevival> {
+public class SoullessRevival extends CardImpl {
 
     public SoullessRevival(UUID ownerId) {
         super(ownerId, 144, "Soulless Revival", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");

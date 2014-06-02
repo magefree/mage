@@ -40,7 +40,7 @@ import mage.game.Game;
  *
  * @author Loki
  */
-public class SyphonSoul extends CardImpl<SyphonSoul> {
+public class SyphonSoul extends CardImpl {
 
     public SyphonSoul(UUID ownerId) {
         super(ownerId, 43, "Syphon Soul", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

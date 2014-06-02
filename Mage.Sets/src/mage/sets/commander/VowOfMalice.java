@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VowOfMalice extends CardImpl<VowOfMalice> {
+public class VowOfMalice extends CardImpl {
 
     public VowOfMalice(UUID ownerId) {
         super(ownerId, 107, "Vow of Malice", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

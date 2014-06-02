@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ChiseiHeartOfOceans extends CardImpl<ChiseiHeartOfOceans> {
+public class ChiseiHeartOfOceans extends CardImpl {
 
     private static final  FilterPermanent filter = new FilterControlledPermanent("remove a counter from a permanent you control");
     

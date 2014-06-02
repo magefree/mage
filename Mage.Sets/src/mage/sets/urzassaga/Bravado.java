@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class Bravado extends CardImpl<Bravado> {
+public class Bravado extends CardImpl {
 
     public Bravado(UUID ownerId) {
         super(ownerId, 177, "Bravado", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

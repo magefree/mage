@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class VividGrove extends CardImpl<VividGrove> {
+public class VividGrove extends CardImpl {
 
     public VividGrove(UUID ownerId) {
         super(ownerId, 277, "Vivid Grove", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

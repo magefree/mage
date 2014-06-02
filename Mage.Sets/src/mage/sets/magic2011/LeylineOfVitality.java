@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LeylineOfVitality extends CardImpl<LeylineOfVitality> {
+public class LeylineOfVitality extends CardImpl {
 
     public LeylineOfVitality(UUID ownerId) {
         super(ownerId, 183, "Leyline of Vitality", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

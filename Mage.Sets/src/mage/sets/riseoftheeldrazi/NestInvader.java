@@ -41,7 +41,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class NestInvader extends CardImpl<NestInvader> {
+public class NestInvader extends CardImpl {
 
     public NestInvader(UUID ownerId) {
         super(ownerId, 201, "Nest Invader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

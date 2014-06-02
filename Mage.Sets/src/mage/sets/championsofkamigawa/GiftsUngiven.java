@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class GiftsUngiven extends CardImpl<GiftsUngiven> {
+public class GiftsUngiven extends CardImpl {
 
     public GiftsUngiven(UUID ownerId) {
         super(ownerId, 62, "Gifts Ungiven", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");

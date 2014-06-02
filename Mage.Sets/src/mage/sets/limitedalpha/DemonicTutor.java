@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author KholdFuzion
 
  */
-public class DemonicTutor extends CardImpl<DemonicTutor> {
+public class DemonicTutor extends CardImpl {
 
     public DemonicTutor(UUID ownerId) {
         super(ownerId, 13, "Demonic Tutor", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class VithianRenegades extends CardImpl<VithianRenegades> {
+public class VithianRenegades extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {

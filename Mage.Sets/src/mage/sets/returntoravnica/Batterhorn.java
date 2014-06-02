@@ -42,7 +42,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class Batterhorn extends CardImpl<Batterhorn> {
+public class Batterhorn extends CardImpl {
 
     public Batterhorn (UUID ownerId) {
         super(ownerId, 87, "Batterhorn", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

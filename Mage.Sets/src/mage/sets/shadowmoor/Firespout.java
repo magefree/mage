@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LevelX2
  */
-public class Firespout extends CardImpl<Firespout> {
+public class Firespout extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature without flying");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with flying");

@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class LoxodonSmiter extends CardImpl<LoxodonSmiter> {
+public class LoxodonSmiter extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 

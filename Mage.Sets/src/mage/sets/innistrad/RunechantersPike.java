@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class RunechantersPike extends CardImpl<RunechantersPike> {
+public class RunechantersPike extends CardImpl {
 
     protected static final FilterCard filterCard = new FilterCard();
 

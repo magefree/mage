@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class Lumberknot extends CardImpl<Lumberknot> {
+public class Lumberknot extends CardImpl {
 
     public Lumberknot(UUID ownerId) {
         super(ownerId, 191, "Lumberknot", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

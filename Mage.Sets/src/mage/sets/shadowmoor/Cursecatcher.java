@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class Cursecatcher extends CardImpl<Cursecatcher> {
+public class Cursecatcher extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 

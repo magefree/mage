@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class SummerBloom extends CardImpl<SummerBloom> {
+public class SummerBloom extends CardImpl {
 
     public SummerBloom(UUID ownerId) {
         super(ownerId, 273, "Summer Bloom", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

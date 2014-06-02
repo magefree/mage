@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Backfir3
  */
-public class StrokeOfGenius extends CardImpl<StrokeOfGenius> {
+public class StrokeOfGenius extends CardImpl {
 
     public StrokeOfGenius (UUID ownerId) {
         super(ownerId, 100, "Stroke Of Genius", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{2}{U}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KingCheetah extends CardImpl<KingCheetah> {
+public class KingCheetah extends CardImpl {
 
     public KingCheetah(UUID ownerId) {
         super(ownerId, 250, "King Cheetah", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

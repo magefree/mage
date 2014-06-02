@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class LichLordOfUnx extends CardImpl<LichLordOfUnx> {
+public class LichLordOfUnx extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
 
     static {

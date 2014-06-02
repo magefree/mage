@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WallOfAir extends CardImpl<WallOfAir> {
+public class WallOfAir extends CardImpl {
 
     public WallOfAir(UUID ownerId) {
         super(ownerId, 124, "Wall of Air", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

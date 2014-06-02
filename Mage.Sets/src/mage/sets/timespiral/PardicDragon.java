@@ -58,7 +58,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PardicDragon extends CardImpl<PardicDragon> {
+public class PardicDragon extends CardImpl {
 
     public PardicDragon(UUID ownerId) {
         super(ownerId, 173, "Pardic Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

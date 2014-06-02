@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class Despise extends CardImpl<Despise> {
+public class Despise extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a creature or planeswalker card");
     static {

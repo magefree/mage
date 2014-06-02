@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class Rowen extends CardImpl<Rowen> {
+public class Rowen extends CardImpl {
 
     public Rowen(UUID ownerId) {
         super(ownerId, 266, "Rowen", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

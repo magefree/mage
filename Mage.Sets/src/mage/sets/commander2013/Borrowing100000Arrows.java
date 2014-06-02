@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class Borrowing100000Arrows extends CardImpl<Borrowing100000Arrows> {
+public class Borrowing100000Arrows extends CardImpl {
 
     public Borrowing100000Arrows(UUID ownerId) {
         super(ownerId, 33, "Borrowing 100,000 Arrows", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");

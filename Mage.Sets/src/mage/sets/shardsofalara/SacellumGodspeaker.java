@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Plopman
  */
-public class SacellumGodspeaker extends CardImpl<SacellumGodspeaker> {
+public class SacellumGodspeaker extends CardImpl {
     
     public SacellumGodspeaker(UUID ownerId) {
         super(ownerId, 146, "Sacellum Godspeaker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Twincast extends CardImpl<Twincast> {
+public class Twincast extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 

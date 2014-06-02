@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author jeffwadsworth
  */
-public class Endure extends CardImpl<Endure> {
+public class Endure extends CardImpl {
     
     private static final FilterPermanentOrPlayer filter = new FilterPermanentOrPlayer("you and permanents you control");
 

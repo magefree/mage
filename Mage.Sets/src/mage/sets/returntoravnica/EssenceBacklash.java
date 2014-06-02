@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class EssenceBacklash extends CardImpl<EssenceBacklash> {
+public class EssenceBacklash extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("creature spell");
 

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class WarpedPhysique extends CardImpl<WarpedPhysique> {
+public class WarpedPhysique extends CardImpl {
 
     public WarpedPhysique(UUID ownerId) {
         super(ownerId, 117, "Warped Physique", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");

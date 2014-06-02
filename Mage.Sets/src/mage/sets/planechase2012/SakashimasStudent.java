@@ -46,7 +46,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author LevelX2
  */
-public class SakashimasStudent extends CardImpl<SakashimasStudent> {
+public class SakashimasStudent extends CardImpl {
 
     public SakashimasStudent(UUID ownerId) {
         super(ownerId, 24, "Sakashima's Student", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

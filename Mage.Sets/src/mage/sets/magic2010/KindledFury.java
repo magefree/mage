@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class KindledFury extends CardImpl<KindledFury> {
+public class KindledFury extends CardImpl {
 
     public KindledFury(UUID ownerId) {
         super(ownerId, 144, "Kindled Fury", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

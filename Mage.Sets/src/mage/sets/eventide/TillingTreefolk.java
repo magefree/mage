@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class TillingTreefolk extends CardImpl<TillingTreefolk> {
+public class TillingTreefolk extends CardImpl {
     
     public TillingTreefolk(UUID ownerId) {
         super(ownerId, 78, "Tilling Treefolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

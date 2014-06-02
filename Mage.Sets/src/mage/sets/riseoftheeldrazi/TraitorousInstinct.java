@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TraitorousInstinct extends CardImpl<TraitorousInstinct> {
+public class TraitorousInstinct extends CardImpl {
 
     public TraitorousInstinct(UUID ownerId) {
         super(ownerId, 168, "Traitorous Instinct", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");

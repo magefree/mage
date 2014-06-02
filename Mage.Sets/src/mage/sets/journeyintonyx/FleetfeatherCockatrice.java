@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class FleetfeatherCockatrice extends CardImpl<FleetfeatherCockatrice> {
+public class FleetfeatherCockatrice extends CardImpl {
 
     public FleetfeatherCockatrice(UUID ownerId) {
         super(ownerId, 149, "Fleetfeather Cockatrice", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");

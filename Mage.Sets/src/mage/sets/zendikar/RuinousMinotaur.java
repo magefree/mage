@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class RuinousMinotaur extends CardImpl<RuinousMinotaur> {
+public class RuinousMinotaur extends CardImpl {
 
     public RuinousMinotaur(UUID ownerId) {
         super(ownerId, 145, "Ruinous Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class VulpineGoliath extends CardImpl<VulpineGoliath> {
+public class VulpineGoliath extends CardImpl {
 
     public VulpineGoliath(UUID ownerId) {
         super(ownerId, 183, "Vulpine Goliath", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

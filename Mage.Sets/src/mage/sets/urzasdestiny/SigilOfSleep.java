@@ -50,7 +50,7 @@ import mage.target.targetpointer.FirstTargetPointer;
  *
  * @author LevelX2
  */
-public class SigilOfSleep extends CardImpl<SigilOfSleep> {
+public class SigilOfSleep extends CardImpl {
 
     public SigilOfSleep(UUID ownerId) {
         super(ownerId, 46, "Sigil of Sleep", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class EternalDragon extends CardImpl<EternalDragon> {
+public class EternalDragon extends CardImpl {
 
     public EternalDragon(UUID ownerId) {
         super(ownerId, 12, "Eternal Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

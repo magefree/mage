@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class PlatedGeopede extends CardImpl<PlatedGeopede> {
+public class PlatedGeopede extends CardImpl {
 
     public PlatedGeopede (UUID ownerId) {
         super(ownerId, 141, "Plated Geopede", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

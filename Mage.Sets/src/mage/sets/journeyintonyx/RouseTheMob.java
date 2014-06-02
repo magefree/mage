@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RouseTheMob extends CardImpl<RouseTheMob> {
+public class RouseTheMob extends CardImpl {
 
     public RouseTheMob(UUID ownerId) {
         super(ownerId, 109, "Rouse the Mob", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

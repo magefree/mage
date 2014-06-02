@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class ElvishSpiritGuide extends CardImpl<ElvishSpiritGuide> {
+public class ElvishSpiritGuide extends CardImpl {
 
     public ElvishSpiritGuide(UUID ownerId) {
         super(ownerId, 69, "Elvish Spirit Guide", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PhyrexianHulk extends CardImpl<PhyrexianHulk> {
+public class PhyrexianHulk extends CardImpl {
 
     public PhyrexianHulk(UUID ownerId) {
         super(ownerId, 150, "Phyrexian Hulk", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

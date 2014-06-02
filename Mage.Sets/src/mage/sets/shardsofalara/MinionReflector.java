@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class MinionReflector extends CardImpl<MinionReflector> {
+public class MinionReflector extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
     static{

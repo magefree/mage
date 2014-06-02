@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class RoofstalkerWight extends CardImpl<RoofstalkerWight> {
+public class RoofstalkerWight extends CardImpl {
 
     public RoofstalkerWight (UUID ownerId) {
         super(ownerId, 102, "Roofstalker Wight", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

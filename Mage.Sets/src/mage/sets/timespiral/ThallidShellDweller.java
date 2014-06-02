@@ -47,7 +47,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author LevelX2
  */
-public class ThallidShellDweller extends CardImpl<ThallidShellDweller> {
+public class ThallidShellDweller extends CardImpl {
 
     public ThallidShellDweller(UUID ownerId) {
         super(ownerId, 226, "Thallid Shell-Dweller", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

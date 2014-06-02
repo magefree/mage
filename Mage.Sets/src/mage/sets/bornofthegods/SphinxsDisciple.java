@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SphinxsDisciple extends CardImpl<SphinxsDisciple> {
+public class SphinxsDisciple extends CardImpl {
 
     public SphinxsDisciple(UUID ownerId) {
         super(ownerId, 51, "Sphinx's Disciple", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

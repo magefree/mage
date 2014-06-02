@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class SatyrNyxSmith extends CardImpl<SatyrNyxSmith> {
+public class SatyrNyxSmith extends CardImpl {
 
     public SatyrNyxSmith(UUID ownerId) {
         super(ownerId, 109, "Satyr Nyx-Smith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

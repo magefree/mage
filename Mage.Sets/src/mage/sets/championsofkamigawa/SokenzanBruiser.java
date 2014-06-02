@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SokenzanBruiser extends CardImpl<SokenzanBruiser> {
+public class SokenzanBruiser extends CardImpl {
 
     public SokenzanBruiser (UUID ownerId) {
         super(ownerId, 188, "Sokenzan Bruiser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

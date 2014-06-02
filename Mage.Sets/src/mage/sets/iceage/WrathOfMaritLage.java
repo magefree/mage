@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class WrathOfMaritLage extends CardImpl<WrathOfMaritLage> {
+public class WrathOfMaritLage extends CardImpl {
 
     public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
     

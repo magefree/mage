@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RitesOfReaping extends CardImpl<RitesOfReaping> {
+public class RitesOfReaping extends CardImpl {
 
     public RitesOfReaping(UUID ownerId) {
         super(ownerId, 191, "Rites of Reaping", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{G}");

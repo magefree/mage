@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FlameSlash extends CardImpl<FlameSlash> {
+public class FlameSlash extends CardImpl {
 
     public FlameSlash(UUID ownerId) {
         super(ownerId, 145, "Flame Slash", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");

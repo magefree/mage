@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class EdgeOfTheDivinity extends CardImpl<EdgeOfTheDivinity> {
+public class EdgeOfTheDivinity extends CardImpl {
 
     public EdgeOfTheDivinity(UUID ownerId) {
         super(ownerId, 87, "Edge of the Divinity", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W/B}");

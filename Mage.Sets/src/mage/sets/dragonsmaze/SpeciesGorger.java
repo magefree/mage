@@ -39,7 +39,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class SpeciesGorger extends CardImpl<SpeciesGorger> {
+public class SpeciesGorger extends CardImpl {
 
     public SpeciesGorger(UUID ownerId) {
         super(ownerId, 105, "Species Gorger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");

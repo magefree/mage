@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BogardanRager extends CardImpl<BogardanRager> {
+public class BogardanRager extends CardImpl {
 
     public BogardanRager(UUID ownerId) {
         super(ownerId, 49, "Bogardan Rager", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");

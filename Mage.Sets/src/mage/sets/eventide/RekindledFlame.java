@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class RekindledFlame extends CardImpl<RekindledFlame> {
+public class RekindledFlame extends CardImpl {
     
     final String rule = "if an opponent has no cards in hand, you may return Rekindled Flame from your graveyard to your hand";
 

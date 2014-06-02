@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class RuthlessInvasion extends CardImpl<RuthlessInvasion> {
+public class RuthlessInvasion extends CardImpl {
 
     public RuthlessInvasion (UUID ownerId) {
         super(ownerId, 93, "Ruthless Invasion", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{RP}");

@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class EchoCirclet extends CardImpl<EchoCirclet> {
+public class EchoCirclet extends CardImpl {
 
     public EchoCirclet(UUID ownerId) {
         super(ownerId, 153, "Echo Circlet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

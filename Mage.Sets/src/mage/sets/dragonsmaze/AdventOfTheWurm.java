@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  */
 
 
-public class AdventOfTheWurm extends CardImpl<AdventOfTheWurm> {
+public class AdventOfTheWurm extends CardImpl {
 
     public AdventOfTheWurm(UUID ownerId) {
         super(ownerId, 51, "Advent of the Wurm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{G}{W}");

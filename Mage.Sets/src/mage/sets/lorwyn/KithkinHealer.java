@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class KithkinHealer extends CardImpl<KithkinHealer> {
+public class KithkinHealer extends CardImpl {
 
     public KithkinHealer(UUID ownerId) {
         super(ownerId, 27, "Kithkin Healer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

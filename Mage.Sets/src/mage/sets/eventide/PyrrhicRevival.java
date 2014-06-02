@@ -47,7 +47,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class PyrrhicRevival extends CardImpl<PyrrhicRevival> {
+public class PyrrhicRevival extends CardImpl {
 
     public PyrrhicRevival(UUID ownerId) {
         super(ownerId, 93, "Pyrrhic Revival", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W/B}{W/B}{W/B}");

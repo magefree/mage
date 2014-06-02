@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SeasonedMarshal extends CardImpl<SeasonedMarshal> {
+public class SeasonedMarshal extends CardImpl {
 
     public SeasonedMarshal(UUID ownerId) {
         super(ownerId, 15, "Seasoned Marshal", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

@@ -60,7 +60,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jeffwadsworth
  */
-public class WrexialTheRisenDeep extends CardImpl<WrexialTheRisenDeep> {
+public class WrexialTheRisenDeep extends CardImpl {
 
     public WrexialTheRisenDeep(UUID ownerId) {
         super(ownerId, 120, "Wrexial, the Risen Deep", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{B}");

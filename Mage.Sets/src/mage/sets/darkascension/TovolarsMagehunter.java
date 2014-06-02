@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class TovolarsMagehunter extends CardImpl<TovolarsMagehunter> {
+public class TovolarsMagehunter extends CardImpl {
 
     public TovolarsMagehunter(UUID ownerId) {
         super(ownerId, 98, "Tovolar's Magehunter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");

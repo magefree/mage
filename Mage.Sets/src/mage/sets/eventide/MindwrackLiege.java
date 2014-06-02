@@ -58,7 +58,7 @@ import mage.target.common.TargetCardInHand;
  * @author jeffwadsworth
 
  */
-public class MindwrackLiege extends CardImpl<MindwrackLiege> {
+public class MindwrackLiege extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("red creatures you control");

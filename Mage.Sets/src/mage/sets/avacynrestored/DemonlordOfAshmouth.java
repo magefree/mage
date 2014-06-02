@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class DemonlordOfAshmouth extends CardImpl<DemonlordOfAshmouth> {
+public class DemonlordOfAshmouth extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(" another creature");
 

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class NecrogenScudder extends CardImpl<NecrogenScudder> {
+public class NecrogenScudder extends CardImpl {
 
     public NecrogenScudder (UUID ownerId) {
         super(ownerId, 71, "Necrogen Scudder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

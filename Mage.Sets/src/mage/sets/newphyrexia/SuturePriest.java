@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class SuturePriest extends CardImpl<SuturePriest> {
+public class SuturePriest extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature");
     static {

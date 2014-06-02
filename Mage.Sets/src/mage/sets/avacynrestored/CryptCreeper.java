@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class CryptCreeper extends CardImpl<CryptCreeper> {
+public class CryptCreeper extends CardImpl {
 
     public CryptCreeper(UUID ownerId) {
         super(ownerId, 91, "Crypt Creeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

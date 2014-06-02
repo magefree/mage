@@ -43,7 +43,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Backfir3
  */
-public class AvalancheRiders extends CardImpl<AvalancheRiders> {
+public class AvalancheRiders extends CardImpl {
 
     public AvalancheRiders(UUID ownerId) {
         super(ownerId, 74, "Avalanche Riders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

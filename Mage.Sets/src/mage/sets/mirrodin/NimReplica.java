@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class NimReplica extends CardImpl<NimReplica> {
+public class NimReplica extends CardImpl {
 
     public NimReplica(UUID ownerId) {
         super(ownerId, 220, "Nim Replica", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

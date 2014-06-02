@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class AbyssalHunter extends CardImpl<AbyssalHunter> {
+public class AbyssalHunter extends CardImpl {
 
     public AbyssalHunter(UUID ownerId) {
         super(ownerId, 1, "Abyssal Hunter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");

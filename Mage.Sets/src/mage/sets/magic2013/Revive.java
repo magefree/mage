@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class Revive extends CardImpl<Revive> {
+public class Revive extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("green card from your graveyard");
 

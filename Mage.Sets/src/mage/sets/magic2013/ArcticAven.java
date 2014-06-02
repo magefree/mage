@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class ArcticAven extends CardImpl<ArcticAven> {
+public class ArcticAven extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Plains");
 

@@ -48,7 +48,7 @@ import mage.game.Game;
  *
  * @author Plopman
  */
-public class ImpendingDisaster extends CardImpl<ImpendingDisaster> {
+public class ImpendingDisaster extends CardImpl {
 
     public ImpendingDisaster(UUID ownerId) {
         super(ownerId, 82, "Impending Disaster", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

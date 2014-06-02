@@ -51,7 +51,7 @@ import mage.game.permanent.PermanentToken;
  *
  * @author Plopman
  */
-public class LegionLoyalist extends CardImpl<LegionLoyalist> {
+public class LegionLoyalist extends CardImpl {
 
     public LegionLoyalist(UUID ownerId) {
         super(ownerId, 97, "Legion Loyalist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");

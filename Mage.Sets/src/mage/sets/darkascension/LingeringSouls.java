@@ -42,7 +42,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author Loki
  */
-public class LingeringSouls extends CardImpl<LingeringSouls> {
+public class LingeringSouls extends CardImpl {
 
     public LingeringSouls(UUID ownerId) {
         super(ownerId, 12, "Lingering Souls", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");

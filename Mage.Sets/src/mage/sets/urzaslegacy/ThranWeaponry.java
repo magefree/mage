@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class ThranWeaponry extends CardImpl<ThranWeaponry> {
+public class ThranWeaponry extends CardImpl {
 
     public ThranWeaponry(UUID ownerId) {
         super(ownerId, 135, "Thran Weaponry", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

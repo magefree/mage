@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class BottledCloister extends CardImpl<BottledCloister> {
+public class BottledCloister extends CardImpl {
 
     public BottledCloister(UUID ownerId) {
         super(ownerId, 256, "Bottled Cloister", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WateryGrave extends CardImpl<WateryGrave> {
+public class WateryGrave extends CardImpl {
 
     public WateryGrave(UUID ownerId) {
         super(ownerId, 286, "Watery Grave", Rarity.RARE, new CardType[]{CardType.LAND}, null);

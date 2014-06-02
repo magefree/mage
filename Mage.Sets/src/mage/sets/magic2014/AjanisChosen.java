@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class AjanisChosen extends CardImpl<AjanisChosen> {
+public class AjanisChosen extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     static {

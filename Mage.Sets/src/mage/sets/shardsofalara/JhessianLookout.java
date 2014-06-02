@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class JhessianLookout extends CardImpl<JhessianLookout> {
+public class JhessianLookout extends CardImpl {
 
     public JhessianLookout (UUID ownerId) {
         super(ownerId, 46, "Jhessian Lookout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

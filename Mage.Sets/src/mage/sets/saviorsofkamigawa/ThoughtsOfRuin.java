@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class ThoughtsOfRuin extends CardImpl<ThoughtsOfRuin> {
+public class ThoughtsOfRuin extends CardImpl {
 
     public ThoughtsOfRuin(UUID ownerId) {
         super(ownerId, 118, "Thoughts of Ruin", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");

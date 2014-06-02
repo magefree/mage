@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author BetaSteward
  */
-public class SnapcasterMage extends CardImpl<SnapcasterMage> {
+public class SnapcasterMage extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card in your graveyard");
 

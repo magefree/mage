@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class KitsunePalliator extends CardImpl<KitsunePalliator> {
+public class KitsunePalliator extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai you control");
     static {

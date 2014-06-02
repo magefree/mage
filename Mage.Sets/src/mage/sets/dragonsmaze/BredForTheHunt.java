@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  */
 
 
-public class BredForTheHunt extends CardImpl<BredForTheHunt> {
+public class BredForTheHunt extends CardImpl {
 
     public BredForTheHunt(UUID ownerId) {
         super(ownerId, 59, "Bred for the Hunt", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{U}");

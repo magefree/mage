@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jeffwadsworth
  */
-public class ArmoryGuard extends CardImpl<ArmoryGuard> {
+public class ArmoryGuard extends CardImpl {
     
     private static final String rule = "Armory Guard has vigilance as long as you control a Gate";
     

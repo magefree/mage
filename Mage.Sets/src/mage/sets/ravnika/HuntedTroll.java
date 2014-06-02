@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class HuntedTroll extends CardImpl<HuntedTroll> {
+public class HuntedTroll extends CardImpl {
 
     public HuntedTroll(UUID ownerId) {
         super(ownerId, 170, "Hunted Troll", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

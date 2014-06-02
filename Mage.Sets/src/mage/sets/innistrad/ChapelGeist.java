@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ChapelGeist extends CardImpl<ChapelGeist> {
+public class ChapelGeist extends CardImpl {
 
     public ChapelGeist(UUID ownerId) {
         super(ownerId, 7, "Chapel Geist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

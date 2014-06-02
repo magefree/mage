@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class SulfurVent extends CardImpl<SulfurVent> {
+public class SulfurVent extends CardImpl {
 
     public SulfurVent(UUID ownerId) {
         super(ownerId, 328, "Sulfur Vent", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

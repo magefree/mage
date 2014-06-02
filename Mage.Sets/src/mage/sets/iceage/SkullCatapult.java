@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Quercitron
  */
-public class SkullCatapult extends CardImpl<SkullCatapult> {
+public class SkullCatapult extends CardImpl {
 
     public SkullCatapult(UUID ownerId) {
         super(ownerId, 311, "Skull Catapult", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

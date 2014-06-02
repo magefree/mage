@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class JacesMindseeker extends CardImpl<JacesMindseeker> {
+public class JacesMindseeker extends CardImpl {
 
     public JacesMindseeker(UUID ownerId) {
         super(ownerId, 61, "Jace's Mindseeker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

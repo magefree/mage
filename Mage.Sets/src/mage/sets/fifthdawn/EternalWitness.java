@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jonubuu
  */
-public class EternalWitness extends CardImpl<EternalWitness> {
+public class EternalWitness extends CardImpl {
 
     public EternalWitness(UUID ownerId) {
         super(ownerId, 86, "Eternal Witness", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class IslebackSpawn extends CardImpl<IslebackSpawn> {
+public class IslebackSpawn extends CardImpl {
 
     public IslebackSpawn(UUID ownerId) {
         super(ownerId, 40, "Isleback Spawn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

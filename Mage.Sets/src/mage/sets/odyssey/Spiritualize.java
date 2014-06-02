@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33, Unknown (Glimpse of Nature), LevelX2 (Armadillo Cloak)
  */
-public class Spiritualize extends CardImpl<Spiritualize> {
+public class Spiritualize extends CardImpl {
 
     public Spiritualize(UUID ownerId) {
         super(ownerId, 53, "Spiritualize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

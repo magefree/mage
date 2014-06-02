@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author LevelX2
  */
-public class TransguildPromenade extends CardImpl<TransguildPromenade> {
+public class TransguildPromenade extends CardImpl {
 
     public TransguildPromenade(UUID ownerId) {
         super(ownerId, 249, "Transguild Promenade", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

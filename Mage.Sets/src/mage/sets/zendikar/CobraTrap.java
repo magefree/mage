@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
  *
  * @author Rafbill
  */
-public class CobraTrap extends CardImpl<CobraTrap> {
+public class CobraTrap extends CardImpl {
 
     public CobraTrap(UUID ownerId) {
         super(ownerId, 160, "Cobra Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{G}{G}");

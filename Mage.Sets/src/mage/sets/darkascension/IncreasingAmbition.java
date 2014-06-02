@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward
  */
-public class IncreasingAmbition extends CardImpl<IncreasingAmbition> {
+public class IncreasingAmbition extends CardImpl {
 
     public IncreasingAmbition(UUID ownerId) {
         super(ownerId, 69, "Increasing Ambition", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");

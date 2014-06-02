@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class DinrovaHorror extends CardImpl<DinrovaHorror> {
+public class DinrovaHorror extends CardImpl {
 
     public DinrovaHorror(UUID ownerId) {
         super(ownerId, 155, "Dinrova Horror", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");

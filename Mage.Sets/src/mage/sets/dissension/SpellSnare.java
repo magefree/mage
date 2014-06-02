@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class SpellSnare extends CardImpl<SpellSnare> {
+public class SpellSnare extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 2");
 
     static {

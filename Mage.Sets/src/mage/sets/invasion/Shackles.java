@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class Shackles extends CardImpl<Shackles> {
+public class Shackles extends CardImpl {
 
     public Shackles(UUID ownerId) {
         super(ownerId, 37, "Shackles", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class MerfolkSkyscout extends CardImpl<MerfolkSkyscout> {
+public class MerfolkSkyscout extends CardImpl {
 
     public MerfolkSkyscout(UUID ownerId) {
         super(ownerId, 77, "Merfolk Skyscout", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

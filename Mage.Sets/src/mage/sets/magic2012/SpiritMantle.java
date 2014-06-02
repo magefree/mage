@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class SpiritMantle extends CardImpl<SpiritMantle> {
+public class SpiritMantle extends CardImpl {
 
     public SpiritMantle(UUID ownerId) {
         super(ownerId, 35, "Spirit Mantle", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

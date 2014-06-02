@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class BogardanFirefiend extends CardImpl<BogardanFirefiend> {
+public class BogardanFirefiend extends CardImpl {
 
     public BogardanFirefiend(UUID ownerId) {
         super(ownerId, 48, "Bogardan Firefiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

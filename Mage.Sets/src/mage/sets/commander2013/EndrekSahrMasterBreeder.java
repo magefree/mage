@@ -53,7 +53,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class EndrekSahrMasterBreeder extends CardImpl<EndrekSahrMasterBreeder> {
+public class EndrekSahrMasterBreeder extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a creature spell");
     static {

@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author KholdFuzion
 
  */
-public class Resurrection extends CardImpl<Resurrection> {
+public class Resurrection extends CardImpl {
 
     public Resurrection(UUID ownerId) {
         super(ownerId, 218, "Resurrection", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");

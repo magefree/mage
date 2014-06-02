@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jonubuu
  */
-public class GolgariThug extends CardImpl<GolgariThug> {
+public class GolgariThug extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("creature card from your graveyard");
 

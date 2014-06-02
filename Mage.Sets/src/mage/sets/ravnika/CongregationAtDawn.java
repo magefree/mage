@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class CongregationAtDawn extends CardImpl<CongregationAtDawn> {
+public class CongregationAtDawn extends CardImpl {
 
     public CongregationAtDawn(UUID ownerId) {
         super(ownerId, 198, "Congregation at Dawn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{G}{W}");

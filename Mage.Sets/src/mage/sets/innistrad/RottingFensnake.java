@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RottingFensnake extends CardImpl<RottingFensnake> {
+public class RottingFensnake extends CardImpl {
 
     public RottingFensnake(UUID ownerId) {
         super(ownerId, 113, "Rotting Fensnake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

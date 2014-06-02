@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Memnite extends CardImpl<Memnite> {
+public class Memnite extends CardImpl {
 
     public Memnite (UUID ownerId) {
         super(ownerId, 174, "Memnite", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{0}");

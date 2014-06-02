@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PursuitOfFlight extends CardImpl<PursuitOfFlight> {
+public class PursuitOfFlight extends CardImpl {
 
     static final String rule = "and has \"{U}: This creature gains flying until end of turn.\"";
 

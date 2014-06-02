@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class AkromasVengeance extends CardImpl<AkromasVengeance> {
+public class AkromasVengeance extends CardImpl {
 
     public AkromasVengeance(UUID ownerId) {
         super(ownerId, 1, "Akroma's Vengeance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");

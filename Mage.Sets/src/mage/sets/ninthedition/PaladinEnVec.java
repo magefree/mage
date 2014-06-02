@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class PaladinEnVec extends CardImpl<PaladinEnVec> {
+public class PaladinEnVec extends CardImpl {
     private static final FilterCard protectionFilter = new FilterCard("black and from red");
 
     static {

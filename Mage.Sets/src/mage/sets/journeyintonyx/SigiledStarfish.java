@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SigiledStarfish extends CardImpl<SigiledStarfish> {
+public class SigiledStarfish extends CardImpl {
 
     public SigiledStarfish(UUID ownerId) {
         super(ownerId, 52, "Sigiled Starfish", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

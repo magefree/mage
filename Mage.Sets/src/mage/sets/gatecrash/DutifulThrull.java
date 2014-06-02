@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class DutifulThrull extends CardImpl<DutifulThrull> {
+public class DutifulThrull extends CardImpl {
 
     public DutifulThrull(UUID ownerId) {
         super(ownerId, 11, "Dutiful Thrull", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

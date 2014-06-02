@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class GolgariCharm extends CardImpl<GolgariCharm> {
+public class GolgariCharm extends CardImpl {
 
     public GolgariCharm(UUID ownerId) {
         super(ownerId, 164, "Golgari Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{G}");

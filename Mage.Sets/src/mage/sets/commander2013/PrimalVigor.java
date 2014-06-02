@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class PrimalVigor extends CardImpl<PrimalVigor> {
+public class PrimalVigor extends CardImpl {
 
     public PrimalVigor(UUID ownerId) {
         super(ownerId, 162, "Primal Vigor", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");

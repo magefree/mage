@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author nantuko
  */
-public class DiregrafGhoul extends CardImpl<DiregrafGhoul> {
+public class DiregrafGhoul extends CardImpl {
 
     private static final String staticText = "{this} enters the battlefield tapped";
 

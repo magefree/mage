@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author North
  */
-public class GhituEncampment extends CardImpl<GhituEncampment> {
+public class GhituEncampment extends CardImpl {
 
     public GhituEncampment(UUID ownerId) {
         super(ownerId, 353, "Ghitu Encampment", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class WreckingOgre extends CardImpl<WreckingOgre> {
+public class WreckingOgre extends CardImpl {
 
     public WreckingOgre(UUID ownerId) {
         super(ownerId, 112, "Wrecking Ogre", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class GoblinMedics extends CardImpl<GoblinMedics> {
+public class GoblinMedics extends CardImpl {
 
     public GoblinMedics(UUID ownerId) {
         super(ownerId, 79, "Goblin Medics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

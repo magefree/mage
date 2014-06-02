@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class UrzasBlueprints extends CardImpl<UrzasBlueprints> {
+public class UrzasBlueprints extends CardImpl {
 
     public UrzasBlueprints(UUID ownerId) {
         super(ownerId, 137, "Urza's Blueprints", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SpiritWeaver extends CardImpl<SpiritWeaver> {
+public class SpiritWeaver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green or blue creature");
 

@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OraclesInsight extends CardImpl<OraclesInsight> {
+public class OraclesInsight extends CardImpl {
 
     public OraclesInsight(UUID ownerId) {
         super(ownerId, 47, "Oracle's Insight", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

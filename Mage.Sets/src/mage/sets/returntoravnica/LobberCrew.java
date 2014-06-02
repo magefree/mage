@@ -50,7 +50,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class LobberCrew extends CardImpl<LobberCrew> {
+public class LobberCrew extends CardImpl {
 
     public LobberCrew (UUID ownerId) {
         super(ownerId, 99, "Lobber Crew", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

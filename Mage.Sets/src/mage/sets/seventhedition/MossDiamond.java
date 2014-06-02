@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class MossDiamond extends CardImpl<MossDiamond> {
+public class MossDiamond extends CardImpl {
 
     public MossDiamond(UUID ownerId) {
         super(ownerId, 309, "Moss Diamond", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

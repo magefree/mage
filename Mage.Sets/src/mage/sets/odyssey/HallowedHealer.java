@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author cbt33
  */
  
-public class HallowedHealer extends CardImpl<HallowedHealer> {
+public class HallowedHealer extends CardImpl {
 
     public HallowedHealer(UUID ownerId) {
         super(ownerId, 25, "Hallowed Healer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

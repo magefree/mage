@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class InfernalGenesis extends CardImpl<InfernalGenesis> {
+public class InfernalGenesis extends CardImpl {
 
     public InfernalGenesis(UUID ownerId) {
         super(ownerId, 68, "Infernal Genesis", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");

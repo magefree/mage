@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OrdealOfHeliod extends CardImpl<OrdealOfHeliod> {
+public class OrdealOfHeliod extends CardImpl {
 
     public OrdealOfHeliod(UUID ownerId) {
         super(ownerId, 25, "Ordeal of Heliod", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

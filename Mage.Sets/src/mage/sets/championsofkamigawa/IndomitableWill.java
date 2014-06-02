@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class IndomitableWill extends CardImpl<IndomitableWill> {
+public class IndomitableWill extends CardImpl {
 
     public IndomitableWill (UUID ownerId) {
         super(ownerId, 17, "Indomitable Will", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author jeffwadsworth
  */
-public class JundHackblade extends CardImpl<JundHackblade> {
+public class JundHackblade extends CardImpl {
     
      private static final FilterControlledPermanent filter = new FilterControlledPermanent("another multicolor permanent");
     

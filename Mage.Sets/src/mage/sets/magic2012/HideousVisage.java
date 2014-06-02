@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class HideousVisage extends CardImpl<HideousVisage> {
+public class HideousVisage extends CardImpl {
 
     public HideousVisage(UUID ownerId) {
         super(ownerId, 100, "Hideous Visage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

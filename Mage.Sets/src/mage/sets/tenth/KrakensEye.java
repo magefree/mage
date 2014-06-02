@@ -44,7 +44,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KrakensEye extends CardImpl<KrakensEye> {
+public class KrakensEye extends CardImpl {
 
     public KrakensEye(UUID ownerId) {
         super(ownerId, 329, "Kraken's Eye", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author Quercitron
  */
-public class GoblinDiggingTeam extends CardImpl<GoblinDiggingTeam> {
+public class GoblinDiggingTeam extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Wall");
 

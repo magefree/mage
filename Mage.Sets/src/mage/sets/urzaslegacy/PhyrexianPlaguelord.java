@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class PhyrexianPlaguelord extends CardImpl<PhyrexianPlaguelord> {
+public class PhyrexianPlaguelord extends CardImpl {
 
     public PhyrexianPlaguelord(UUID ownerId) {
         super(ownerId, 62, "Phyrexian Plaguelord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

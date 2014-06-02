@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Dynacharge extends CardImpl<Dynacharge> {
+public class Dynacharge extends CardImpl {
 
     public Dynacharge(UUID ownerId) {
         super(ownerId, 92, "Dynacharge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

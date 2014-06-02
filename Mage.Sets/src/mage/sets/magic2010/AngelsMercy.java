@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AngelsMercy extends CardImpl<AngelsMercy> {
+public class AngelsMercy extends CardImpl {
 
     public AngelsMercy(UUID ownerId) {
         super(ownerId, 2, "Angel's Mercy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");

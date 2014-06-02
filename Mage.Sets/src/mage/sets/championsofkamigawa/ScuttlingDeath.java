@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class ScuttlingDeath extends CardImpl<ScuttlingDeath> {
+public class ScuttlingDeath extends CardImpl {
 
     public ScuttlingDeath(UUID ownerId) {
         super(ownerId, 142, "Scuttling Death", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

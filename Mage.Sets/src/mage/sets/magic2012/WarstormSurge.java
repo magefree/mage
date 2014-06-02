@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class WarstormSurge extends CardImpl<WarstormSurge> {
+public class WarstormSurge extends CardImpl {
 
     public WarstormSurge(UUID ownerId) {
         super(ownerId, 160, "Warstorm Surge", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");

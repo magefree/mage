@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class TerraRavager extends CardImpl<TerraRavager> {
+public class TerraRavager extends CardImpl {
 
     public TerraRavager(UUID ownerId) {
         super(ownerId, 126, "Terra Ravager", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

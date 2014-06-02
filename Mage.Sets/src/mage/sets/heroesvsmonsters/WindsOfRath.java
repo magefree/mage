@@ -40,7 +40,7 @@ import mage.filter.predicate.permanent.EnchantedPredicate;
  *
  * @author LevelX2
  */
-public class WindsOfRath extends CardImpl<WindsOfRath> {
+public class WindsOfRath extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that aren't enchanted");
     static {

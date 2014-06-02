@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class WarleadersHelix extends CardImpl<WarleadersHelix> {
+public class WarleadersHelix extends CardImpl {
 
     public WarleadersHelix(UUID ownerId) {
         super(ownerId, 116, "Warleader's Helix", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{W}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33
  */
-public class ScreamsOfTheDamned extends CardImpl<ScreamsOfTheDamned> {
+public class ScreamsOfTheDamned extends CardImpl {
 
     public ScreamsOfTheDamned(UUID ownerId) {
         super(ownerId, 160, "Screams of the Damned", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

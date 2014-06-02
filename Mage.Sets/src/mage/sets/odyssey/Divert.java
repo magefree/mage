@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author cbt33, Rafbill (Frightful Delustions)
  */
-public class Divert extends CardImpl<Divert> {
+public class Divert extends CardImpl {
 
     public Divert(UUID ownerId) {
         super(ownerId, 82, "Divert", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");

@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class GhostlyChangeling extends CardImpl<GhostlyChangeling> {
+public class GhostlyChangeling extends CardImpl {
 
     public GhostlyChangeling(UUID ownerId) {
         super(ownerId, 116, "Ghostly Changeling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

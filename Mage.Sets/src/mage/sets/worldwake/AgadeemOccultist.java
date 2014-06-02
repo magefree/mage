@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author jeffwadsworth
  */
-public class AgadeemOccultist extends CardImpl<AgadeemOccultist> {
+public class AgadeemOccultist extends CardImpl {
 
     public AgadeemOccultist(UUID ownerId) {
         super(ownerId, 48, "Agadeem Occultist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RubiniaSoulsinger extends CardImpl<RubiniaSoulsinger> {
+public class RubiniaSoulsinger extends CardImpl {
 
     public RubiniaSoulsinger(UUID ownerId) {
         super(ownerId, 207, "Rubinia Soulsinger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{U}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class SleepersGuile extends CardImpl<SleepersGuile> {
+public class SleepersGuile extends CardImpl {
 
     public SleepersGuile(UUID ownerId) {
         super(ownerId, 67, "Sleeper's Guile", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Backfir3
  */
-public class VerdantField extends CardImpl<VerdantField> {
+public class VerdantField extends CardImpl {
 
     public VerdantField(UUID ownerId) {
         super(ownerId, 130, "Verdant Field", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

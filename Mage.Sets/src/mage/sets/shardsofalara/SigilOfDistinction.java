@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class SigilOfDistinction extends CardImpl<SigilOfDistinction> {
+public class SigilOfDistinction extends CardImpl {
 
     public SigilOfDistinction(UUID ownerId) {
         super(ownerId, 219, "Sigil of Distinction", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}");

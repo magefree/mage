@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ViolentOutburst extends CardImpl<ViolentOutburst> {
+public class ViolentOutburst extends CardImpl {
 
     public ViolentOutburst(UUID ownerId) {
         super(ownerId, 63, "Violent Outburst", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{G}");

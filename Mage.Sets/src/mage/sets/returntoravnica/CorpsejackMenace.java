@@ -55,7 +55,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CorpsejackMenace extends CardImpl<CorpsejackMenace> {
+public class CorpsejackMenace extends CardImpl {
 
     public CorpsejackMenace(UUID ownerId) {
         super(ownerId, 152, "Corpsejack Menace", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");

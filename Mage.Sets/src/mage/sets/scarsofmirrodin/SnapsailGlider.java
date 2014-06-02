@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Loki, nantuko
  */
-public class SnapsailGlider extends CardImpl<SnapsailGlider> {
+public class SnapsailGlider extends CardImpl {
 
     protected static String rule = "Metalcraft - Snapsail Glider has flying as long as you control three or more artifacts";
 

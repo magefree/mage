@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class LandbindRitual extends CardImpl<LandbindRitual> {
+public class LandbindRitual extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains you control");
 

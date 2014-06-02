@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class AvenTrailblazer extends CardImpl<AvenTrailblazer> {
+public class AvenTrailblazer extends CardImpl {
 
     public AvenTrailblazer(UUID ownerId) {
         super(ownerId, 4, "Aven Trailblazer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

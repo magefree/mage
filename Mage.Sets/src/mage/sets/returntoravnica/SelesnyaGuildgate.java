@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 /**
  * @author LevelX2
  */
-public class SelesnyaGuildgate extends CardImpl<SelesnyaGuildgate> {
+public class SelesnyaGuildgate extends CardImpl {
 
     public SelesnyaGuildgate(UUID ownerId) {
         super(ownerId, 246, "Selesnya Guildgate", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

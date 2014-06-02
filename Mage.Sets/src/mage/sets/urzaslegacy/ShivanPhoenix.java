@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class ShivanPhoenix extends CardImpl<ShivanPhoenix> {
+public class ShivanPhoenix extends CardImpl {
 
     public ShivanPhoenix(UUID ownerId) {
         super(ownerId, 91, "Shivan Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

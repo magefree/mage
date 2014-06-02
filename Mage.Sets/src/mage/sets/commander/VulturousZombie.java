@@ -47,7 +47,7 @@ import mage.game.events.ZoneChangeEvent;
  * @author jeffwadsworth
  *
  */
-public class VulturousZombie extends CardImpl<VulturousZombie> {
+public class VulturousZombie extends CardImpl {
 
     public VulturousZombie(UUID ownerId) {
         super(ownerId, 236, "Vulturous Zombie", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");

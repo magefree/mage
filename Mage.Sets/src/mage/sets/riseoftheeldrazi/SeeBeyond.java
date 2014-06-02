@@ -46,7 +46,7 @@ import mage.target.TargetCard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SeeBeyond extends CardImpl<SeeBeyond> {
+public class SeeBeyond extends CardImpl {
 
     public SeeBeyond(UUID ownerId) {
         super(ownerId, 86, "See Beyond", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");

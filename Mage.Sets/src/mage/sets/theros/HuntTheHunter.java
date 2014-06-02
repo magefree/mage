@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HuntTheHunter extends CardImpl<HuntTheHunter> {
+public class HuntTheHunter extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterControlledGreen = new FilterControlledCreaturePermanent("green creature you control");
     private static final FilterCreaturePermanent filterOpponentGreen = new FilterCreaturePermanent("green creature an opponent controls");

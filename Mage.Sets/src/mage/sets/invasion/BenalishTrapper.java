@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BenalishTrapper extends CardImpl<BenalishTrapper> {
+public class BenalishTrapper extends CardImpl {
 
     public BenalishTrapper(UUID ownerId) {
         super(ownerId, 8, "Benalish Trapper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

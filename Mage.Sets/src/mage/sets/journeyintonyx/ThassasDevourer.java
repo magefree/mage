@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class ThassasDevourer extends CardImpl<ThassasDevourer> {
+public class ThassasDevourer extends CardImpl {
 
     public ThassasDevourer(UUID ownerId) {
         super(ownerId, 53, "Thassa's Devourer", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{U}");

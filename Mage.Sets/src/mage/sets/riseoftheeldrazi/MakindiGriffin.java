@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MakindiGriffin extends CardImpl<MakindiGriffin> {
+public class MakindiGriffin extends CardImpl {
 
     public MakindiGriffin (UUID ownerId) {
         super(ownerId, 36, "Makindi Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class KeldonNecropolis extends CardImpl<KeldonNecropolis> {
+public class KeldonNecropolis extends CardImpl {
 
     public KeldonNecropolis(UUID ownerId) {
         super(ownerId, 325, "Keldon Necropolis", Rarity.RARE, new CardType[]{CardType.LAND}, "");

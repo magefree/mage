@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KoboldsOfKherKeep extends CardImpl<KoboldsOfKherKeep> {
+public class KoboldsOfKherKeep extends CardImpl {
 
     public KoboldsOfKherKeep(UUID ownerId) {
         super(ownerId, 226, "Kobolds of Kher Keep", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{0}");

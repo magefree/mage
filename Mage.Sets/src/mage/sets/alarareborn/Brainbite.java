@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class Brainbite extends CardImpl<Brainbite> {
+public class Brainbite extends CardImpl {
 
     public Brainbite(UUID ownerId) {
         super(ownerId, 18, "Brainbite", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");

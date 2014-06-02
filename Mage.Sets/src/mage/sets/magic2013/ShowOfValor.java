@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ShowOfValor extends CardImpl<ShowOfValor> {
+public class ShowOfValor extends CardImpl {
 
     public ShowOfValor(UUID ownerId) {
         super(ownerId, 34, "Show of Valor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

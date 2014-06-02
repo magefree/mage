@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class NetherHorror extends CardImpl<NetherHorror> {
+public class NetherHorror extends CardImpl {
 
     public NetherHorror(UUID ownerId) {
         super(ownerId, 108, "Nether Horror", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

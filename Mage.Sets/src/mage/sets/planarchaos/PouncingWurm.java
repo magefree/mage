@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author Backfir3
  */
-public class PouncingWurm extends CardImpl<PouncingWurm> {
+public class PouncingWurm extends CardImpl {
 
     public PouncingWurm(UUID ownerId) {
         super(ownerId, 136, "Pouncing Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

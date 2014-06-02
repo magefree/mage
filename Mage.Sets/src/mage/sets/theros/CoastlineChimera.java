@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class CoastlineChimera extends CardImpl<CoastlineChimera> {
+public class CoastlineChimera extends CardImpl {
 
     public CoastlineChimera(UUID ownerId) {
         super(ownerId, 44, "Coastline Chimera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

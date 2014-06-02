@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class BattleOfWits extends CardImpl<BattleOfWits> {
+public class BattleOfWits extends CardImpl {
 
     public BattleOfWits(UUID ownerId) {
         super(ownerId, 65, "Battle of Wits", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");

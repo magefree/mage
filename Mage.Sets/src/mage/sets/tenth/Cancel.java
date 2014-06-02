@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Cancel extends CardImpl<Cancel> {
+public class Cancel extends CardImpl {
 
     public Cancel(UUID ownerId) {
         super(ownerId, 71, "Cancel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");

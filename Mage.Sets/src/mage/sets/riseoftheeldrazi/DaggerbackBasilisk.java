@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DaggerbackBasilisk extends CardImpl<DaggerbackBasilisk> {
+public class DaggerbackBasilisk extends CardImpl {
 
     public DaggerbackBasilisk(UUID ownerId) {
         super(ownerId, 182, "Daggerback Basilisk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

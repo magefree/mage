@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SamuraiEnforcers extends CardImpl<SamuraiEnforcers> {
+public class SamuraiEnforcers extends CardImpl {
 
     public SamuraiEnforcers (UUID ownerId) {
         super(ownerId, 42, "Samurai Enforcers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

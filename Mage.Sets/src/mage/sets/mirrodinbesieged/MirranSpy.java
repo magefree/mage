@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class MirranSpy extends CardImpl<MirranSpy> {
+public class MirranSpy extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an artifact spell");
 

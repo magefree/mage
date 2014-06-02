@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class HonorWornShaku extends CardImpl<HonorWornShaku> {
+public class HonorWornShaku extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped legendary permanent");
 

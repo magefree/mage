@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PhantasmalDragon extends CardImpl<PhantasmalDragon> {
+public class PhantasmalDragon extends CardImpl {
 
     public PhantasmalDragon(UUID ownerId) {
         super(ownerId, 71, "Phantasmal Dragon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

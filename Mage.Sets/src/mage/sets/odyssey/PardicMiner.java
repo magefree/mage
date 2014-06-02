@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author cbt33
  */
-public class PardicMiner extends CardImpl<PardicMiner> {
+public class PardicMiner extends CardImpl {
 
     public PardicMiner(UUID ownerId) {
         super(ownerId, 212, "Pardic Miner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");

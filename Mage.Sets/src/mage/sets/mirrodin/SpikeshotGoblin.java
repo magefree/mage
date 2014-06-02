@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class SpikeshotGoblin extends CardImpl<SpikeshotGoblin> {
+public class SpikeshotGoblin extends CardImpl {
 
     public SpikeshotGoblin(UUID ownerId) {
         super(ownerId, 108, "Spikeshot Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

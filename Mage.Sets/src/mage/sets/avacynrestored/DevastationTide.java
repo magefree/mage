@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author noxx
  */
-public class DevastationTide extends CardImpl<DevastationTide> {
+public class DevastationTide extends CardImpl {
 
     public DevastationTide(UUID ownerId) {
         super(ownerId, 48, "Devastation Tide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

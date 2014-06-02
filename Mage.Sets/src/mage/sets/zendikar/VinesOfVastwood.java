@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author nantuko
  */
-public class VinesOfVastwood extends CardImpl<VinesOfVastwood> {
+public class VinesOfVastwood extends CardImpl {
 
     private static final String staticText = "If Vines of Vastwood was kicked, that creature gets +4/+4 until end of turn";
 

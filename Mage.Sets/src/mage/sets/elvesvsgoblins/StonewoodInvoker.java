@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class StonewoodInvoker extends CardImpl<StonewoodInvoker> {
+public class StonewoodInvoker extends CardImpl {
 
     public StonewoodInvoker(UUID ownerId) {
         super(ownerId, 11, "Stonewood Invoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

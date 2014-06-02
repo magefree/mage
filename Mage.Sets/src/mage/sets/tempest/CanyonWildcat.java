@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CanyonWildcat extends CardImpl<CanyonWildcat> {
+public class CanyonWildcat extends CardImpl {
 
     public CanyonWildcat(UUID ownerId) {
         super(ownerId, 167, "Canyon Wildcat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

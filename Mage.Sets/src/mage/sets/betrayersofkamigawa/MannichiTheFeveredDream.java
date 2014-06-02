@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class MannichiTheFeveredDream extends CardImpl<MannichiTheFeveredDream> {
+public class MannichiTheFeveredDream extends CardImpl {
 
     public MannichiTheFeveredDream(UUID ownerId) {
         super(ownerId, 112, "Mannichi, the Fevered Dream", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -44,7 +44,7 @@ import mage.filter.FilterPermanent;
  *
  * @author LevelX2
  */
-public class BearerOfTheHeavens extends CardImpl<BearerOfTheHeavens> {
+public class BearerOfTheHeavens extends CardImpl {
 
     public BearerOfTheHeavens(UUID ownerId) {
         super(ownerId, 89, "Bearer of the Heavens", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{R}");

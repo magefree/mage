@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Threaten extends CardImpl<Threaten> {
+public class Threaten extends CardImpl {
 
     public Threaten(UUID ownerId) {
         super(ownerId, 242, "Threaten", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");

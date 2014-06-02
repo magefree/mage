@@ -49,7 +49,7 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward
  */
-public class IncreasingVengeance extends CardImpl<IncreasingVengeance> {
+public class IncreasingVengeance extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 

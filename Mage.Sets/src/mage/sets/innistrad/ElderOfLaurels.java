@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ElderOfLaurels extends CardImpl<ElderOfLaurels> {
+public class ElderOfLaurels extends CardImpl {
 
     public ElderOfLaurels(UUID ownerId) {
         super(ownerId, 177, "Elder of Laurels", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

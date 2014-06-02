@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class HavengulVampire extends CardImpl<HavengulVampire> {
+public class HavengulVampire extends CardImpl {
 
     public HavengulVampire(UUID ownerId) {
         super(ownerId, 139, "Havengul Vampire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

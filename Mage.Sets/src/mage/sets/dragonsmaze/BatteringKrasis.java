@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class BatteringKrasis extends CardImpl<BatteringKrasis> {
+public class BatteringKrasis extends CardImpl {
 
     public BatteringKrasis (UUID ownerId) {
         super(ownerId, 41, "Battering Krasis", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

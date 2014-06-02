@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Quercitron
  */
-public class Recall extends CardImpl<Recall> {
+public class Recall extends CardImpl {
 
     public Recall(UUID ownerId) {
         super(ownerId, 93, "Recall", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{U}");

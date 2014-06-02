@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author North
  */
-public class QuestForTheGravelord extends CardImpl<QuestForTheGravelord> {
+public class QuestForTheGravelord extends CardImpl {
 
     public QuestForTheGravelord(UUID ownerId) {
         super(ownerId, 108, "Quest for the Gravelord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

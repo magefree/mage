@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PhalanxFormation extends CardImpl<PhalanxFormation> {
+public class PhalanxFormation extends CardImpl {
 
     public PhalanxFormation(UUID ownerId) {
         super(ownerId, 21, "Phalanx Formation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

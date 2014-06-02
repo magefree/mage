@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class ZurTheEnchanter extends CardImpl<ZurTheEnchanter> {
+public class ZurTheEnchanter extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantment card with converted mana cost 3 or less");
 

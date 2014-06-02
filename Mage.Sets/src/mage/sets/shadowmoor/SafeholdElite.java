@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SafeholdElite extends CardImpl<SafeholdElite> {
+public class SafeholdElite extends CardImpl {
 
     public SafeholdElite(UUID ownerId) {
         super(ownerId, 239, "Safehold Elite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G/W}");

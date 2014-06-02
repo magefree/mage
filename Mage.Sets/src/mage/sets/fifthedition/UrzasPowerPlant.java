@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Melkhior
  */
-public class UrzasPowerPlant extends CardImpl<UrzasPowerPlant> {
+public class UrzasPowerPlant extends CardImpl {
     public UrzasPowerPlant(UUID ownerId) {
         super(ownerId, 448, "Urza's Power Plant", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "5ED";

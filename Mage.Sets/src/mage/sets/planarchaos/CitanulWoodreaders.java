@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class CitanulWoodreaders extends CardImpl<CitanulWoodreaders> {
+public class CitanulWoodreaders extends CardImpl {
 
     public CitanulWoodreaders(UUID ownerId) {
         super(ownerId, 125, "Citanul Woodreaders", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

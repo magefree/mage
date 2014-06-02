@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HellkiteCharger extends CardImpl<HellkiteCharger> {
+public class HellkiteCharger extends CardImpl {
 
     public HellkiteCharger(UUID ownerId) {
         super(ownerId, 131, "Hellkite Charger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

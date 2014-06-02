@@ -41,7 +41,7 @@ import mage.constants.TimingRule;
  *
  * @author nantuko
  */
-public class ThinkTwice extends CardImpl<ThinkTwice> {
+public class ThinkTwice extends CardImpl {
 
     public ThinkTwice(UUID ownerId) {
         super(ownerId, 83, "Think Twice", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class RepayInKind extends CardImpl<RepayInKind> {
+public class RepayInKind extends CardImpl {
 
     public RepayInKind(UUID ownerId) {
         super(ownerId, 125, "Repay in Kind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");

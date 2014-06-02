@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class OxiddaDaredevil extends CardImpl<OxiddaDaredevil> {
+public class OxiddaDaredevil extends CardImpl {
      private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {

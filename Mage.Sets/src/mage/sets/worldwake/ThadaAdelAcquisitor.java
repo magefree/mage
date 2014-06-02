@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class ThadaAdelAcquisitor extends CardImpl<ThadaAdelAcquisitor> {
+public class ThadaAdelAcquisitor extends CardImpl {
 
     public ThadaAdelAcquisitor(UUID ownerId) {
         super(ownerId, 40, "Thada Adel, Acquisitor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

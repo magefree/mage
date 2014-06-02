@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class GolgariCluestone extends CardImpl<GolgariCluestone> {
+public class GolgariCluestone extends CardImpl {
 
     public GolgariCluestone(UUID ownerId) {
         super(ownerId, 139, "Golgari Cluestone", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

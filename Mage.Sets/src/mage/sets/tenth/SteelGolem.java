@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author jeffwadsworth
  */
-public class SteelGolem extends CardImpl<SteelGolem> {
+public class SteelGolem extends CardImpl {
 
     public SteelGolem(UUID ownerId) {
         super(ownerId, 344, "Steel Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

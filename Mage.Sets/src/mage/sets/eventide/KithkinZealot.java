@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class KithkinZealot extends CardImpl<KithkinZealot> {
+public class KithkinZealot extends CardImpl {
 
     public KithkinZealot(UUID ownerId) {
         super(ownerId, 9, "Kithkin Zealot", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

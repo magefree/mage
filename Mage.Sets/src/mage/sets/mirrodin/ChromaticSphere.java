@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ChromaticSphere extends CardImpl<ChromaticSphere> {
+public class ChromaticSphere extends CardImpl {
 
     public ChromaticSphere(UUID ownerId) {
         super(ownerId, 151, "Chromatic Sphere", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

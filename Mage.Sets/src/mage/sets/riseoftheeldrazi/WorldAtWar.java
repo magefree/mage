@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class WorldAtWar extends CardImpl<WorldAtWar> {
+public class WorldAtWar extends CardImpl {
 
     public WorldAtWar(UUID ownerId) {
         super(ownerId, 172, "World at War", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

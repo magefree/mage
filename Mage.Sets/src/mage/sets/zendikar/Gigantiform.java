@@ -61,7 +61,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Gigantiform extends CardImpl<Gigantiform> {
+public class Gigantiform extends CardImpl {
 
     public Gigantiform(UUID ownerId) {
         super(ownerId, 162, "Gigantiform", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");

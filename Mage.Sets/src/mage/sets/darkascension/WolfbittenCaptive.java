@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WolfbittenCaptive extends CardImpl<WolfbittenCaptive> {
+public class WolfbittenCaptive extends CardImpl {
 
     public WolfbittenCaptive(UUID ownerId) {
         super(ownerId, 133, "Wolfbitten Captive", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");

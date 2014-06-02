@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class PierceStrider extends CardImpl<PierceStrider> {
+public class PierceStrider extends CardImpl {
 
     public PierceStrider (UUID ownerId) {
         super(ownerId, 123, "Pierce Strider", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

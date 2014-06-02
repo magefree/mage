@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jonubuu
  */
-public class CarrionFeeder extends CardImpl<CarrionFeeder> {
+public class CarrionFeeder extends CardImpl {
 
     public CarrionFeeder(UUID ownerId) {
         super(ownerId, 59, "Carrion Feeder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

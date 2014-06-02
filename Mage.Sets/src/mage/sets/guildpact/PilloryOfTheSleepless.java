@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author mluds
  */
-public class PilloryOfTheSleepless extends CardImpl<PilloryOfTheSleepless> {
+public class PilloryOfTheSleepless extends CardImpl {
 
     public PilloryOfTheSleepless(UUID ownerId) {
         super(ownerId, 125, "Pillory of the Sleepless", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{B}");

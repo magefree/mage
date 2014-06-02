@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Watercourser extends CardImpl<Watercourser> {
+public class Watercourser extends CardImpl {
 
     public Watercourser(UUID ownerId) {
         super(ownerId, 78, "Watercourser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

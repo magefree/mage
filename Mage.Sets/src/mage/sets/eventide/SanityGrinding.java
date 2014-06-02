@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  * @author jeffwadsworth
  *
  */
-public class SanityGrinding extends CardImpl<SanityGrinding> {
+public class SanityGrinding extends CardImpl {
 
     public SanityGrinding(UUID ownerId) {
         super(ownerId, 29, "Sanity Grinding", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{U}{U}");

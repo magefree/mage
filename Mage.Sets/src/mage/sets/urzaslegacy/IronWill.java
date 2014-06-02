@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class IronWill extends CardImpl<IronWill> {
+public class IronWill extends CardImpl {
 
     public IronWill(UUID ownerId) {
         super(ownerId, 10, "Iron Will", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

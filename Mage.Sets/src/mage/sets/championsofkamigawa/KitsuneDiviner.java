@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class KitsuneDiviner extends CardImpl<KitsuneDiviner> {
+public class KitsuneDiviner extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Spirit");
 

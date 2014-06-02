@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class ThoughtHemorrhage extends CardImpl<ThoughtHemorrhage> {
+public class ThoughtHemorrhage extends CardImpl {
 
     public ThoughtHemorrhage(UUID ownerId) {
         super(ownerId, 47, "Thought Hemorrhage", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");

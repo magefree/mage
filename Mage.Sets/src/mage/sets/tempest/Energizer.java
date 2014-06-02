@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class Energizer extends CardImpl<Energizer> {
+public class Energizer extends CardImpl {
 
     public Energizer(UUID ownerId) {
         super(ownerId, 275, "Energizer", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

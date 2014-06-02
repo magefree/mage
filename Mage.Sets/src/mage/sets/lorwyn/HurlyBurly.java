@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class HurlyBurly extends CardImpl<HurlyBurly> {
+public class HurlyBurly extends CardImpl {
 
     private static final FilterCreaturePermanent filterWithoutFlying = new FilterCreaturePermanent("creature without flying");
     private static final FilterCreaturePermanent filterWithFlying = new FilterCreaturePermanent("creature with flying");

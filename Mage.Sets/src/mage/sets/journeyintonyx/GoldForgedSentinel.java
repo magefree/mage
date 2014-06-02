@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class GoldForgedSentinel extends CardImpl<GoldForgedSentinel> {
+public class GoldForgedSentinel extends CardImpl {
 
     public GoldForgedSentinel(UUID ownerId) {
         super(ownerId, 161, "Gold-Forged Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

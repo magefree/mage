@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class HawkeaterMoth extends CardImpl<HawkeaterMoth> {
+public class HawkeaterMoth extends CardImpl {
 
     public HawkeaterMoth (UUID ownerId) {
         super(ownerId, 259, "Hawkeater Moth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

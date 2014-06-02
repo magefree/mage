@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DreadbringerLampads extends CardImpl<DreadbringerLampads> {
+public class DreadbringerLampads extends CardImpl {
 
     public DreadbringerLampads(UUID ownerId) {
         super(ownerId, 67, "Dreadbringer Lampads", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{B}");

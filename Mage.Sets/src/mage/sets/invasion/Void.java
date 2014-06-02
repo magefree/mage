@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class Void extends CardImpl<Void> {
+public class Void extends CardImpl {
 
     public Void(UUID ownerId) {
         super(ownerId, 287, "Void", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{R}");

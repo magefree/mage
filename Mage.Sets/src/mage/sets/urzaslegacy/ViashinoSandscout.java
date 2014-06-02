@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class ViashinoSandscout extends CardImpl<ViashinoSandscout> {
+public class ViashinoSandscout extends CardImpl {
 
     public ViashinoSandscout(UUID ownerId) {
         super(ownerId, 96, "Viashino Sandscout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

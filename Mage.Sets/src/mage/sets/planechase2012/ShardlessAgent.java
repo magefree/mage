@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 *
 * @author LevelX2
 */
-public class ShardlessAgent extends CardImpl<ShardlessAgent> {
+public class ShardlessAgent extends CardImpl {
 
     public ShardlessAgent(UUID ownerId) {
        super(ownerId, 104, "Shardless Agent", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

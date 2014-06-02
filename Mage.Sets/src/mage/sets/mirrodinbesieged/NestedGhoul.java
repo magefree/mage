@@ -44,7 +44,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author Loki
  */
-public class NestedGhoul extends CardImpl<NestedGhoul> {
+public class NestedGhoul extends CardImpl {
 
     public NestedGhoul (UUID ownerId) {
         super(ownerId, 48, "Nested Ghoul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

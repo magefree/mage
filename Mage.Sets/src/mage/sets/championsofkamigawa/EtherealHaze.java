@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX
  */
-public class EtherealHaze extends CardImpl<EtherealHaze> {
+public class EtherealHaze extends CardImpl {
 
     public EtherealHaze (UUID ownerId) {
         super(ownerId, 9, "Ethereal Haze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

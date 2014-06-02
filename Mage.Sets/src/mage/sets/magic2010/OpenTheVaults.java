@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class OpenTheVaults extends CardImpl<OpenTheVaults> {
+public class OpenTheVaults extends CardImpl {
 
     public OpenTheVaults(UUID ownerId) {
         super(ownerId, 21, "Open the Vaults", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");

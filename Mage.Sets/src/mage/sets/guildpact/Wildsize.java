@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Wildsize extends CardImpl<Wildsize> {
+public class Wildsize extends CardImpl {
 
     public Wildsize(UUID ownerId) {
         super(ownerId, 98, "Wildsize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

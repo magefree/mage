@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class LivingTsunami extends CardImpl<LivingTsunami> {
+public class LivingTsunami extends CardImpl {
     
     static final private FilterControlledPermanent filter = new FilterControlledPermanent("a land");
     

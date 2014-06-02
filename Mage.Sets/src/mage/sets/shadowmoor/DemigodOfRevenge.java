@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DemigodOfRevenge extends CardImpl<DemigodOfRevenge> {
+public class DemigodOfRevenge extends CardImpl {
 
     public DemigodOfRevenge(UUID ownerId) {
         super(ownerId, 183, "Demigod of Revenge", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B/R}{B/R}{B/R}{B/R}{B/R}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class ShockTroops extends CardImpl<ShockTroops> {
+public class ShockTroops extends CardImpl {
 
     public ShockTroops(UUID ownerId) {
         super(ownerId, 212, "Shock Troops", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

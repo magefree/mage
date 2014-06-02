@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
-public class PhantomBeast extends CardImpl<PhantomBeast> {
+public class PhantomBeast extends CardImpl {
 
     public PhantomBeast(UUID ownerId) {
         super(ownerId, 69, "Phantom Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

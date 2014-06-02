@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class SimicCluestone extends CardImpl<SimicCluestone> {
+public class SimicCluestone extends CardImpl {
 
     public SimicCluestone(UUID ownerId) {
         super(ownerId, 145, "Simic Cluestone", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

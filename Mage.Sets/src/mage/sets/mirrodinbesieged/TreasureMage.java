@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class TreasureMage extends CardImpl<TreasureMage> {
+public class TreasureMage extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact card with converted mana cost 6 or more");
 

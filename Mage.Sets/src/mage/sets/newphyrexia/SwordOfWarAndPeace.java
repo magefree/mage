@@ -62,7 +62,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class SwordOfWarAndPeace extends CardImpl<SwordOfWarAndPeace> {
+public class SwordOfWarAndPeace extends CardImpl {
     private static final FilterCard filter = new FilterCard("red and from white");
 
     static {

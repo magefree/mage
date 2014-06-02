@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class GoblinRazerunners extends CardImpl<GoblinRazerunners> {
+public class GoblinRazerunners extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

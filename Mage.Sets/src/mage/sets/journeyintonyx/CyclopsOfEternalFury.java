@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CyclopsOfEternalFury extends CardImpl<CyclopsOfEternalFury> {
+public class CyclopsOfEternalFury extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
     

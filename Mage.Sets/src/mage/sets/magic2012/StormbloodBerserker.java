@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author nantuko
  */
-public class StormbloodBerserker extends CardImpl<StormbloodBerserker> {
+public class StormbloodBerserker extends CardImpl {
 
     public StormbloodBerserker(UUID ownerId) {
         super(ownerId, 156, "Stormblood Berserker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PlatedSpider extends CardImpl<PlatedSpider> {
+public class PlatedSpider extends CardImpl {
 
     public PlatedSpider(UUID ownerId) {
         super(ownerId, 116, "Plated Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

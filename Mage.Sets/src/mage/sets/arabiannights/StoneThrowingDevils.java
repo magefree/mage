@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class StoneThrowingDevils extends CardImpl<StoneThrowingDevils> {
+public class StoneThrowingDevils extends CardImpl {
 
     public StoneThrowingDevils(UUID ownerId) {
         super(ownerId, 14, "Stone-Throwing Devils", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

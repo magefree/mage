@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FireElemental extends CardImpl<FireElemental> {
+public class FireElemental extends CardImpl {
 
     public FireElemental(UUID ownerId) {
         super(ownerId, 130, "Fire Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

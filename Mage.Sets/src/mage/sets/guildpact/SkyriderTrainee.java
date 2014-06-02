@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SkyriderTrainee extends CardImpl<SkyriderTrainee> {
+public class SkyriderTrainee extends CardImpl {
 
     public SkyriderTrainee(UUID ownerId) {
         super(ownerId, 17, "Skyrider Trainee", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

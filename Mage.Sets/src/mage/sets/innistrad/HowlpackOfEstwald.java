@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class HowlpackOfEstwald extends CardImpl<HowlpackOfEstwald> {
+public class HowlpackOfEstwald extends CardImpl {
 
     public HowlpackOfEstwald(UUID ownerId) {
         super(ownerId, 209, "Howlpack of Estwald", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");

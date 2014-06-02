@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class TruefirePaladin extends CardImpl<TruefirePaladin> {
+public class TruefirePaladin extends CardImpl {
 
     public TruefirePaladin(UUID ownerId) {
         super(ownerId, 202, "Truefire Paladin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");

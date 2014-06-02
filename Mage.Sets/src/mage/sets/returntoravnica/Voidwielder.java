@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Voidwielder extends CardImpl<Voidwielder> {
+public class Voidwielder extends CardImpl {
 
     public Voidwielder(UUID ownerId) {
         super(ownerId, 56, "Voidwielder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

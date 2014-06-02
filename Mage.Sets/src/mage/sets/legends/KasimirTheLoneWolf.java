@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KasimirTheLoneWolf extends CardImpl<KasimirTheLoneWolf> {
+public class KasimirTheLoneWolf extends CardImpl {
 
     public KasimirTheLoneWolf(UUID ownerId) {
         super(ownerId, 277, "Kasimir the Lone Wolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{U}");

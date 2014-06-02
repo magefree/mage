@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RidgetopRaptor extends CardImpl<RidgetopRaptor> {
+public class RidgetopRaptor extends CardImpl {
 
     public RidgetopRaptor(UUID ownerId) {
         super(ownerId, 108, "Ridgetop Raptor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -49,7 +49,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class VexingShusher extends CardImpl<VexingShusher> {
+public class VexingShusher extends CardImpl {
 
     public VexingShusher(UUID ownerId) {
         super(ownerId, 222, "Vexing Shusher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R/G}{R/G}");

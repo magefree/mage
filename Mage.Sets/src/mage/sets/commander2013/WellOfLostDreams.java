@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WellOfLostDreams extends CardImpl<WellOfLostDreams> {
+public class WellOfLostDreams extends CardImpl {
 
     public WellOfLostDreams(UUID ownerId) {
         super(ownerId, 271, "Well of Lost Dreams", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

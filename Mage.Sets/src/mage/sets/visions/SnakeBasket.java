@@ -45,7 +45,7 @@ import mage.game.permanent.token.SnakeToken;
  *
  * @author Quercitron
  */
-public class SnakeBasket extends CardImpl<SnakeBasket> {
+public class SnakeBasket extends CardImpl {
 
     public SnakeBasket(UUID ownerId) {
         super(ownerId, 155, "Snake Basket", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Repulse extends CardImpl<Repulse> {
+public class Repulse extends CardImpl {
 
     public Repulse(UUID ownerId) {
         super(ownerId, 70, "Repulse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

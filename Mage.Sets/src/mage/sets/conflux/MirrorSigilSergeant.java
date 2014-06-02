@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class MirrorSigilSergeant extends CardImpl<MirrorSigilSergeant> {
+public class MirrorSigilSergeant extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("blue permanent");
 

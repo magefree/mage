@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class SphinxSummoner extends CardImpl<SphinxSummoner> {
+public class SphinxSummoner extends CardImpl {
     private static final FilterCard filter = new FilterCard("artifact creature card");
 
     static {

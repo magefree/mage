@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class ManaShort extends CardImpl<ManaShort> {
+public class ManaShort extends CardImpl {
 
     public ManaShort(UUID ownerId) {
         super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");

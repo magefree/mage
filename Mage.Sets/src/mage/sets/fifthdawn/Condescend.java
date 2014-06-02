@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Condescend extends CardImpl<Condescend> {
+public class Condescend extends CardImpl {
 
     public Condescend(UUID ownerId) {
         super(ownerId, 27, "Condescend", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");

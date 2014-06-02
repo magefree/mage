@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class GoreVassal extends CardImpl<GoreVassal> {
+public class GoreVassal extends CardImpl {
 
     public GoreVassal(UUID ownerId) {
         super(ownerId, 7, "Gore Vassal", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

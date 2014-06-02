@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class DivineVerdict extends CardImpl<DivineVerdict> {
+public class DivineVerdict extends CardImpl {
 
     public DivineVerdict(UUID ownerId) {
         super(ownerId, 8, "Divine Verdict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");

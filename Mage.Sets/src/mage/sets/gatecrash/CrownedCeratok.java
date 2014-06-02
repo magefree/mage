@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author LevelX2
  */
-public class CrownedCeratok extends CardImpl<CrownedCeratok> {
+public class CrownedCeratok extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature you control with a +1/+1 counter on it");
     static {

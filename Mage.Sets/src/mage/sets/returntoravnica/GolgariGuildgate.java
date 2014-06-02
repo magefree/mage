@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 /**
  * @author LevelX2
  */
-public class GolgariGuildgate extends CardImpl<GolgariGuildgate> {
+public class GolgariGuildgate extends CardImpl {
 
     public GolgariGuildgate(UUID ownerId) {
         super(ownerId, 239, "Golgari Guildgate", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

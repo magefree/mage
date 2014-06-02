@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author cbt33
  */
-public class MasterApothecary extends CardImpl<MasterApothecary> {
+public class MasterApothecary extends CardImpl {
     
     public static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped Cleric you control");
     

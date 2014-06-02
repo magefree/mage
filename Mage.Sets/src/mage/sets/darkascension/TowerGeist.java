@@ -45,7 +45,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX
  */
-public class TowerGeist extends CardImpl<TowerGeist> {
+public class TowerGeist extends CardImpl {
 
     public TowerGeist(UUID ownerId) {
         super(ownerId, 53, "Tower Geist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class TolsimirWolfblood extends CardImpl<TolsimirWolfblood> {
+public class TolsimirWolfblood extends CardImpl {
 
     private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("green creatures you control");
     private static final FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("white creatures you control");

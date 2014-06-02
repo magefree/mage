@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ElderMastery extends CardImpl<ElderMastery> {
+public class ElderMastery extends CardImpl {
 
     public ElderMastery(UUID ownerId) {
         super(ownerId, 104, "Elder Mastery", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{B}{R}");

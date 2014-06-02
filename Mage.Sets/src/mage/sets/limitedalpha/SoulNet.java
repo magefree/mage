@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class SoulNet extends CardImpl<SoulNet> {
+public class SoulNet extends CardImpl {
 
     public SoulNet(UUID ownerId) {
         super(ownerId, 270, "Soul Net", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

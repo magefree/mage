@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class VastwoodZendikon extends CardImpl<VastwoodZendikon> {
+public class VastwoodZendikon extends CardImpl {
 
     public VastwoodZendikon(UUID ownerId) {
         super(ownerId, 117, "Vastwood Zendikon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");

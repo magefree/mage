@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class RushingTideZubera extends CardImpl<RushingTideZubera> {
+public class RushingTideZubera extends CardImpl {
 
     public RushingTideZubera(UUID ownerId) {
         super(ownerId, 52, "Rushing-Tide Zubera", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

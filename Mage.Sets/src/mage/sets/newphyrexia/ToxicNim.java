@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ToxicNim extends CardImpl<ToxicNim> {
+public class ToxicNim extends CardImpl {
 
     public ToxicNim(UUID ownerId) {
         super(ownerId, 75, "Toxic Nim", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

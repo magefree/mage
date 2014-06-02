@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
  * @author jeffwadsworth
 
  */
-public class WindbriskRaptor extends CardImpl<WindbriskRaptor> {
+public class WindbriskRaptor extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SuqAtaLancer extends CardImpl<SuqAtaLancer> {
+public class SuqAtaLancer extends CardImpl {
 
     public SuqAtaLancer(UUID ownerId) {
         super(ownerId, 69, "Suq'Ata Lancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

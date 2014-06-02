@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  * @author jeffwadsworth
  *
  */
-public class ViashinoSandstalker extends CardImpl<ViashinoSandstalker> {
+public class ViashinoSandstalker extends CardImpl {
 
     public ViashinoSandstalker(UUID ownerId) {
         super(ownerId, 225, "Viashino Sandstalker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

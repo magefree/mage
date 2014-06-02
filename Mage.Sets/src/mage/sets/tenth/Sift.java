@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Sift extends CardImpl<Sift> {
+public class Sift extends CardImpl {
 
     public Sift(UUID ownerId) {
         super(ownerId, 108, "Sift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");

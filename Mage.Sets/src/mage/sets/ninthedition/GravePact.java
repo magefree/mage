@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class GravePact extends CardImpl<GravePact> {
+public class GravePact extends CardImpl {
 
     public GravePact(UUID ownerId) {
         super(ownerId, 135, "Grave Pact", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}{B}");

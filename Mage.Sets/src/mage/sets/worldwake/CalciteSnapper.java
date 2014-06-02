@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CalciteSnapper extends CardImpl<CalciteSnapper> {
+public class CalciteSnapper extends CardImpl {
 
     public CalciteSnapper(UUID ownerId) {
         super(ownerId, 25, "Calcite Snapper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

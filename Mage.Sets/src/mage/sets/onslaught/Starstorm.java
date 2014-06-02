@@ -41,7 +41,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Starstorm extends CardImpl<Starstorm> {
+public class Starstorm extends CardImpl {
 
     public Starstorm(UUID ownerId) {
         super(ownerId, 238, "Starstorm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");

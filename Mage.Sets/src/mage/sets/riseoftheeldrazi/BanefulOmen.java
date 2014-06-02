@@ -48,7 +48,7 @@ import java.util.Set;
  *
  * @author jeffwadsworth
  */
-public class BanefulOmen extends CardImpl<BanefulOmen> {
+public class BanefulOmen extends CardImpl {
 
     public BanefulOmen(UUID ownerId) {
         super(ownerId, 96, "Baneful Omen", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}{B}");

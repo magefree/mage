@@ -43,7 +43,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WolfbriarElemental extends CardImpl<WolfbriarElemental> {
+public class WolfbriarElemental extends CardImpl {
 
     public WolfbriarElemental(UUID ownerId) {
         super(ownerId, 118, "Wolfbriar Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

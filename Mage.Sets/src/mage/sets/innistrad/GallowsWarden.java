@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class GallowsWarden extends CardImpl<GallowsWarden> {
+public class GallowsWarden extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit creatures");
 

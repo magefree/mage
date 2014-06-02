@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class BleakCovenVampires extends CardImpl<BleakCovenVampires> {
+public class BleakCovenVampires extends CardImpl {
 
     private final String effectText = "Metalcraft - When Bleak Coven Vampires enters the battlefield, if you control three or more artifacts, target player loses 4 life and you gain 4 life.";
 

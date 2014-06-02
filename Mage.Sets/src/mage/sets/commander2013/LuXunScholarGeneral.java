@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class LuXunScholarGeneral extends CardImpl<LuXunScholarGeneral> {
+public class LuXunScholarGeneral extends CardImpl {
 
     public LuXunScholarGeneral(UUID ownerId) {
         super(ownerId, 49, "Lu Xun, Scholar General", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

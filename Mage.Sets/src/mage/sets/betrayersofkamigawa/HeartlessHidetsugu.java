@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HeartlessHidetsugu extends CardImpl<HeartlessHidetsugu> {
+public class HeartlessHidetsugu extends CardImpl {
 
     public HeartlessHidetsugu(UUID ownerId) {
         super(ownerId, 107, "Heartless Hidetsugu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

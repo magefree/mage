@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class CorruptedResolve extends CardImpl<CorruptedResolve> {
+public class CorruptedResolve extends CardImpl {
 
     public CorruptedResolve(UUID ownerId) {
         super(ownerId, 32, "Corrupted Resolve", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class OmegaMyr extends CardImpl<OmegaMyr> {
+public class OmegaMyr extends CardImpl {
 
     public OmegaMyr(UUID ownerId) {
         super(ownerId, 223, "Omega Myr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

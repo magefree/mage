@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
  *
  * @author LevelX2
  */
-public class CavalryPegasus extends CardImpl<CavalryPegasus> {
+public class CavalryPegasus extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("each attacking Human");
     static {

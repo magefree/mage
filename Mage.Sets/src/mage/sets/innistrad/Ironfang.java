@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class Ironfang extends CardImpl<Ironfang> {
+public class Ironfang extends CardImpl {
 
     public Ironfang(UUID ownerId) {
         super(ownerId, 168, "Ironfang", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");

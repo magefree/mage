@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class BrimstoneDragon extends CardImpl<BrimstoneDragon> {
+public class BrimstoneDragon extends CardImpl {
 
     public BrimstoneDragon(UUID ownerId) {
         super(ownerId, 92, "Brimstone Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");

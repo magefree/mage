@@ -43,7 +43,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author Loki
  */
-public class SmogsteedRider extends CardImpl<SmogsteedRider> {
+public class SmogsteedRider extends CardImpl {
 
     public SmogsteedRider(UUID ownerId) {
         super(ownerId, 63, "Smogsteed Rider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

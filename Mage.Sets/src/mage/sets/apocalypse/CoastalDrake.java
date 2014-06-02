@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class CoastalDrake extends CardImpl<CoastalDrake> {
+public class CoastalDrake extends CardImpl {
 
     public CoastalDrake(UUID ownerId) {
         super(ownerId, 22, "Coastal Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

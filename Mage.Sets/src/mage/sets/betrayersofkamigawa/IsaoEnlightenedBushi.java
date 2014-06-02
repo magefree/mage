@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class IsaoEnlightenedBushi extends CardImpl<IsaoEnlightenedBushi> {
+public class IsaoEnlightenedBushi extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Samurai");
 

@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki, nantuko
  */
-public class DecimatorWeb extends CardImpl<DecimatorWeb> {
+public class DecimatorWeb extends CardImpl {
 
     public DecimatorWeb (UUID ownerId) {
         super(ownerId, 105, "Decimator Web", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX
  */
-public class MatsuTribeDecoy extends CardImpl<MatsuTribeDecoy> {
+public class MatsuTribeDecoy extends CardImpl {
 
     public MatsuTribeDecoy(UUID ownerId) {
         super(ownerId, 227, "Matsu-Tribe Decoy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

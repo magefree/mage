@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class PhyrexianGargantua extends CardImpl<PhyrexianGargantua> {
+public class PhyrexianGargantua extends CardImpl {
 
     public PhyrexianGargantua(UUID ownerId) {
         super(ownerId, 48, "Phyrexian Gargantua", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

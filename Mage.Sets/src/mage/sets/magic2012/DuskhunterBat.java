@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DuskhunterBat extends CardImpl<DuskhunterBat> {
+public class DuskhunterBat extends CardImpl {
 
     public DuskhunterBat(UUID ownerId) {
         super(ownerId, 97, "Duskhunter Bat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class Malignus extends CardImpl<Malignus> {
+public class Malignus extends CardImpl {
 
     public Malignus(UUID ownerId) {
         super(ownerId, 148, "Malignus", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

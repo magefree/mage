@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class OonasGrace extends CardImpl<OonasGrace> {
+public class OonasGrace extends CardImpl {
 
     public OonasGrace(UUID ownerId) {
         super(ownerId, 27, "Oona's Grace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class RudeAwakening extends CardImpl<RudeAwakening> {
+public class RudeAwakening extends CardImpl {
 
     public RudeAwakening(UUID ownerId) {
         super(ownerId, 160, "Rude Awakening", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");

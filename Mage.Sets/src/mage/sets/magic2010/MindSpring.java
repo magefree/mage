@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MindSpring extends CardImpl<MindSpring> {
+public class MindSpring extends CardImpl {
 
     public MindSpring(UUID ownerId) {
         super(ownerId, 64, "Mind Spring", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");

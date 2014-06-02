@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class VanguardOfBrimaz extends CardImpl<VanguardOfBrimaz> {
+public class VanguardOfBrimaz extends CardImpl {
 
     public VanguardOfBrimaz(UUID ownerId) {
         super(ownerId, 29, "Vanguard of Brimaz", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

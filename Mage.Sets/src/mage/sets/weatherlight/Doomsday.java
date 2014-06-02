@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class Doomsday extends CardImpl<Doomsday> {
+public class Doomsday extends CardImpl {
 
     public Doomsday(UUID ownerId) {
         super(ownerId, 8, "Doomsday", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");

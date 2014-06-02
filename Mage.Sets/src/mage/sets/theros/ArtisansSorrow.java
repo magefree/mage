@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ArtisansSorrow extends CardImpl<ArtisansSorrow> {
+public class ArtisansSorrow extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     static {

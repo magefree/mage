@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CivicSaber extends CardImpl<CivicSaber> {
+public class CivicSaber extends CardImpl {
  
     public CivicSaber(UUID ownerId) {
         super(ownerId, 227, "Civic Saber", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

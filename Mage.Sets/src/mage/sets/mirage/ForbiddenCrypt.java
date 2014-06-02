@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Quercitron
  */
-public class ForbiddenCrypt extends CardImpl<ForbiddenCrypt> {
+public class ForbiddenCrypt extends CardImpl {
 
     public ForbiddenCrypt(UUID ownerId) {
         super(ownerId, 22, "Forbidden Crypt", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

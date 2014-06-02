@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class Skullmulcher extends CardImpl<Skullmulcher> {
+public class Skullmulcher extends CardImpl {
 
     public Skullmulcher(UUID ownerId) {
         super(ownerId, 148, "Skullmulcher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");

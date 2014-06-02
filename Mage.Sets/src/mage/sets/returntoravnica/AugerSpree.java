@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class AugerSpree extends CardImpl<AugerSpree> {
+public class AugerSpree extends CardImpl {
 
     public AugerSpree(UUID ownerId) {
         super(ownerId, 144, "Auger Spree", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");

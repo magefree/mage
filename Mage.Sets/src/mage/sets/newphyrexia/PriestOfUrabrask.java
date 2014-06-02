@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PriestOfUrabrask extends CardImpl<PriestOfUrabrask> {
+public class PriestOfUrabrask extends CardImpl {
 
     public PriestOfUrabrask(UUID ownerId) {
         super(ownerId, 90, "Priest of Urabrask", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

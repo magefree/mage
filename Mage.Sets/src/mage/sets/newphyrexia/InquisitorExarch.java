@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class InquisitorExarch extends CardImpl<InquisitorExarch> {
+public class InquisitorExarch extends CardImpl {
 
     public InquisitorExarch(UUID ownerId) {
         super(ownerId, 12, "Inquisitor Exarch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

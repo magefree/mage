@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DeathbringerLiege extends CardImpl<DeathbringerLiege> {
+public class DeathbringerLiege extends CardImpl {
     private static final FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("white creatures");
     private static final FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("black creatures");
     private static final FilterSpell filterWhiteSpellCard = new FilterSpell("a white spell");

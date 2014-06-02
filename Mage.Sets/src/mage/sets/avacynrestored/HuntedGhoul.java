@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class HuntedGhoul extends CardImpl<HuntedGhoul> {
+public class HuntedGhoul extends CardImpl {
 
     public HuntedGhoul(UUID ownerId) {
         super(ownerId, 110, "Hunted Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

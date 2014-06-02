@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class TimberlandRuins extends CardImpl<TimberlandRuins> {
+public class TimberlandRuins extends CardImpl {
 
     public TimberlandRuins(UUID ownerId) {
         super(ownerId, 330, "Timberland Ruins", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

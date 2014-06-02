@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class DeathsCaress extends CardImpl<DeathsCaress> {
+public class DeathsCaress extends CardImpl {
 
     public DeathsCaress(UUID ownerId) {
         super(ownerId, 59, "Death's Caress", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

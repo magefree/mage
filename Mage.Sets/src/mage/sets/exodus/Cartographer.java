@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33
  */
-public class Cartographer extends CardImpl<Cartographer> {
+public class Cartographer extends CardImpl {
 
     public Cartographer(UUID ownerId) {
         super(ownerId, 107, "Cartographer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

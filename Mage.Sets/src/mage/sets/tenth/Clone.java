@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Clone extends CardImpl<Clone> {
+public class Clone extends CardImpl {
 
     public Clone(UUID ownerId) {
         super(ownerId, 73, "Clone", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");

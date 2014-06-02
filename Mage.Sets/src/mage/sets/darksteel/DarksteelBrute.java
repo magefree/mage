@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class DarksteelBrute extends CardImpl<DarksteelBrute> {
+public class DarksteelBrute extends CardImpl {
 
     public DarksteelBrute (UUID ownerId) {
         super(ownerId, 108, "Darksteel Brute", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

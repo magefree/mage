@@ -52,7 +52,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class SteelHellkite extends CardImpl<SteelHellkite> {
+public class SteelHellkite extends CardImpl {
 
     public SteelHellkite(UUID ownerId) {
         super(ownerId, 205, "Steel Hellkite", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

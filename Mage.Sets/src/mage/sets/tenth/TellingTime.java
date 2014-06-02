@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class TellingTime extends CardImpl<TellingTime> {
+public class TellingTime extends CardImpl {
 
     public TellingTime(UUID ownerId) {
         super(ownerId, 114, "Telling Time", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

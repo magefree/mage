@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RiverBoa extends CardImpl<RiverBoa> {
+public class RiverBoa extends CardImpl {
 
     public RiverBoa(UUID ownerId) {
         super(ownerId, 180, "River Boa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

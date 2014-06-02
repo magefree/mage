@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SpiteflameWitch extends CardImpl<SpiteflameWitch> {
+public class SpiteflameWitch extends CardImpl {
 
     public SpiteflameWitch(UUID ownerId) {
         super(ownerId, 197, "Spiteflame Witch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B/R}");

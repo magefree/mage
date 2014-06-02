@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CinderMarsh extends CardImpl<CinderMarsh> {
+public class CinderMarsh extends CardImpl {
 
     public CinderMarsh(UUID ownerId) {
         super(ownerId, 307, "Cinder Marsh", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

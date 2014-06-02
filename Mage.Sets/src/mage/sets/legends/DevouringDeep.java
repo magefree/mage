@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DevouringDeep extends CardImpl<DevouringDeep> {
+public class DevouringDeep extends CardImpl {
 
     public DevouringDeep(UUID ownerId) {
         super(ownerId, 50, "Devouring Deep", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

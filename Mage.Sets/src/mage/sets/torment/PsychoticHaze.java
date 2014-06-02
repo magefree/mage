@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class PsychoticHaze extends CardImpl<PsychoticHaze> {
+public class PsychoticHaze extends CardImpl {
 
     public PsychoticHaze(UUID ownerId) {
         super(ownerId, 76, "Psychotic Haze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");

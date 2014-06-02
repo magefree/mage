@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class FloweringLumberknot extends CardImpl<FloweringLumberknot> {
+public class FloweringLumberknot extends CardImpl {
 
     public FloweringLumberknot(UUID ownerId) {
         super(ownerId, 178, "Flowering Lumberknot", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

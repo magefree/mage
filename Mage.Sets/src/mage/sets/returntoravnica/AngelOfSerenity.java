@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class AngelOfSerenity extends CardImpl<AngelOfSerenity> {
+public class AngelOfSerenity extends CardImpl {
 
     public AngelOfSerenity(UUID ownerId) {
         super(ownerId, 1, "Angel of Serenity", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");

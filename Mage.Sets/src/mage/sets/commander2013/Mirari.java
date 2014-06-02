@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Mirari extends CardImpl<Mirari> {
+public class Mirari extends CardImpl {
 
     public Mirari(UUID ownerId) {
         super(ownerId, 246, "Mirari", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

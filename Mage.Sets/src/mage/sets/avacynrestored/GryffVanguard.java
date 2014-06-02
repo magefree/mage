@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class GryffVanguard extends CardImpl<GryffVanguard> {
+public class GryffVanguard extends CardImpl {
 
     public GryffVanguard(UUID ownerId) {
         super(ownerId, 59, "Gryff Vanguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

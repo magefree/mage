@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class DisruptingShoal extends CardImpl<DisruptingShoal> {
+public class DisruptingShoal extends CardImpl {
 
     public DisruptingShoal(UUID ownerId) {
         super(ownerId, 33, "Disrupting Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");

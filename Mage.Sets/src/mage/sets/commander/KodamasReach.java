@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class KodamasReach extends CardImpl<KodamasReach> {
+public class KodamasReach extends CardImpl {
 
     public KodamasReach(UUID ownerId) {
         super(ownerId, 163, "Kodama's Reach", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");

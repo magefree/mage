@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SkyspearCavalry extends CardImpl<SkyspearCavalry> {
+public class SkyspearCavalry extends CardImpl {
 
     public SkyspearCavalry(UUID ownerId) {
         super(ownerId, 26, "Skyspear Cavalry", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

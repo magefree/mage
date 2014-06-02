@@ -55,7 +55,7 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ChimericMass extends CardImpl<ChimericMass> {
+public class ChimericMass extends CardImpl {
 
     public ChimericMass(UUID ownerId) {
         super(ownerId, 141, "Chimeric Mass", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}");

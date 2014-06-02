@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Thragtusk extends CardImpl<Thragtusk> {
+public class Thragtusk extends CardImpl {
 
     public Thragtusk(UUID ownerId) {
         super(ownerId, 193, "Thragtusk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");

@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Batterskull extends CardImpl<Batterskull> {
+public class Batterskull extends CardImpl {
 
     public Batterskull (UUID ownerId) {
         super(ownerId, 130, "Batterskull", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");

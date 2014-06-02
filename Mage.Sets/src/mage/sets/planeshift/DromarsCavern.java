@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class DromarsCavern extends CardImpl<DromarsCavern> {
+public class DromarsCavern extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("non-Lair land");
     static{

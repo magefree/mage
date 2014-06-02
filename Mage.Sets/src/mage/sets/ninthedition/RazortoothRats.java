@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RazortoothRats extends CardImpl<RazortoothRats> {
+public class RazortoothRats extends CardImpl {
 
     public RazortoothRats(UUID ownerId) {
         super(ownerId, 158, "Razortooth Rats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

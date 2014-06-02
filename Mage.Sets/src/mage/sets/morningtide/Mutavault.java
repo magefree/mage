@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jonubuu
  */
-public class Mutavault extends CardImpl<Mutavault> {
+public class Mutavault extends CardImpl {
 
     public Mutavault(UUID ownerId) {
         super(ownerId, 148, "Mutavault", Rarity.RARE, new CardType[]{CardType.LAND}, "");

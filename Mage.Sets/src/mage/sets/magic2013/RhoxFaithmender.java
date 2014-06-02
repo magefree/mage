@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author noxx and jeffwadsworth
  */
-public class RhoxFaithmender extends CardImpl<RhoxFaithmender> {
+public class RhoxFaithmender extends CardImpl {
 
     public RhoxFaithmender(UUID ownerId) {
         super(ownerId, 29, "Rhox Faithmender", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");

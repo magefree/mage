@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SickleRipper extends CardImpl<SickleRipper> {
+public class SickleRipper extends CardImpl {
 
     public SickleRipper(UUID ownerId) {
         super(ownerId, 77, "Sickle Ripper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

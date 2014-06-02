@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class KavuPredator extends CardImpl<KavuPredator> {
+public class KavuPredator extends CardImpl {
 
     public KavuPredator(UUID ownerId) {
         super(ownerId, 46, "Kavu Predator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

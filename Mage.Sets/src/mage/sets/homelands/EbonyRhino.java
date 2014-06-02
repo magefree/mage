@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class EbonyRhino extends CardImpl<EbonyRhino> {
+public class EbonyRhino extends CardImpl {
 
     public EbonyRhino(UUID ownerId) {
         super(ownerId, 131, "Ebony Rhino", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class AshlingTheExtinguisher extends CardImpl<AshlingTheExtinguisher> {
+public class AshlingTheExtinguisher extends CardImpl {
 
     public AshlingTheExtinguisher (UUID ownerId) {
         super(ownerId, 33, "Ashling, the Extinguisher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MistyRainforest extends CardImpl<MistyRainforest> {
+public class MistyRainforest extends CardImpl {
 
     public MistyRainforest(UUID ownerId) {
         super(ownerId, 220, "Misty Rainforest", Rarity.RARE, new CardType[]{CardType.LAND}, null);

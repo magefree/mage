@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class KeymasterRogue extends CardImpl<KeymasterRogue> {
+public class KeymasterRogue extends CardImpl {
 
     public KeymasterRogue(UUID ownerId) {
         super(ownerId, 39, "Keymaster Rogue", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

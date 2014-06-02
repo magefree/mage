@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class AltarsLight extends CardImpl<AltarsLight> {
+public class AltarsLight extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

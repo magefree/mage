@@ -43,7 +43,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class RivalsDuel extends CardImpl<RivalsDuel> {
+public class RivalsDuel extends CardImpl {
 
     public RivalsDuel(UUID ownerId) {
         super(ownerId, 51, "Rivals' Duel", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");

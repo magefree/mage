@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class DemonicDread extends CardImpl<DemonicDread> {
+public class DemonicDread extends CardImpl {
 
     public DemonicDread(UUID ownerId) {
         super(ownerId, 38, "Demonic Dread", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");

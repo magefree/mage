@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jonubuu
  */
-public class Cloudpost extends CardImpl<Cloudpost> {
+public class Cloudpost extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Locus in play");
 

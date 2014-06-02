@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Plopman
  */
-public class WeatherseedFaeries extends CardImpl<WeatherseedFaeries> {
+public class WeatherseedFaeries extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("red");
 

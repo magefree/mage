@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class CateranSlaver extends CardImpl<CateranSlaver> {
+public class CateranSlaver extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary permanent card with converted mana cost 5 or less");
 

@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class MomentOfHeroism extends CardImpl<MomentOfHeroism> {
+public class MomentOfHeroism extends CardImpl {
 
     public MomentOfHeroism(UUID ownerId) {
         super(ownerId, 24, "Moment of Heroism", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class Choke extends CardImpl<Choke> {
+public class Choke extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Islands");
     

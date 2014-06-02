@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DranaKalastriaBloodchief extends CardImpl<DranaKalastriaBloodchief> {
+public class DranaKalastriaBloodchief extends CardImpl {
 
     public DranaKalastriaBloodchief(UUID ownerId) {
         super(ownerId, 107, "Drana, Kalastria Bloodchief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

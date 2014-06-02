@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class ScrapyardSalvo extends CardImpl<ScrapyardSalvo> {
+public class ScrapyardSalvo extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("artifact cards");
 

@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class CloudgoatRanger extends CardImpl<CloudgoatRanger> {
+public class CloudgoatRanger extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Kithkin you control");
 

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class NightsoilKami extends CardImpl<NightsoilKami> {
+public class NightsoilKami extends CardImpl {
 
     public NightsoilKami(UUID ownerId) {
         super(ownerId, 139, "Nightsoil Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

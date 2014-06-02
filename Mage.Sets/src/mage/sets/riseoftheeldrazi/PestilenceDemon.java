@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class PestilenceDemon extends CardImpl<PestilenceDemon> {
+public class PestilenceDemon extends CardImpl {
 
     public PestilenceDemon (UUID ownerId) {
         super(ownerId, 124, "Pestilence Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");

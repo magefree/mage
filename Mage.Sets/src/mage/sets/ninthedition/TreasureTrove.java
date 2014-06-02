@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class TreasureTrove extends CardImpl<TreasureTrove> {
+public class TreasureTrove extends CardImpl {
 
     public TreasureTrove(UUID ownerId) {
         super(ownerId, 110, "Treasure Trove", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class YavimayaCoast extends CardImpl<YavimayaCoast> {
+public class YavimayaCoast extends CardImpl {
 
     public YavimayaCoast(UUID ownerId) {
         super(ownerId, 143, "Yavimaya Coast", Rarity.RARE, new CardType[]{CardType.LAND}, "");

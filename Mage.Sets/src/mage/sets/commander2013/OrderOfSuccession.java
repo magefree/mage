@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class OrderOfSuccession extends CardImpl<OrderOfSuccession> {
+public class OrderOfSuccession extends CardImpl {
 
     public OrderOfSuccession(UUID ownerId) {
         super(ownerId, 52, "Order of Succession", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");

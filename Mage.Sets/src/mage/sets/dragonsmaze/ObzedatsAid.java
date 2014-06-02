@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class ObzedatsAid extends CardImpl<ObzedatsAid> {
+public class ObzedatsAid extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("permanent card from your graveyard");
     

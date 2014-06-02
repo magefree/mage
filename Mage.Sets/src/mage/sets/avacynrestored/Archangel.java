@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Archangel extends CardImpl<Archangel> {
+public class Archangel extends CardImpl {
 
     public Archangel(UUID ownerId) {
         super(ownerId, 5, "Archangel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

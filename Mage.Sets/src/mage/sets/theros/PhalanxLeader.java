@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PhalanxLeader extends CardImpl<PhalanxLeader> {
+public class PhalanxLeader extends CardImpl {
 
     public PhalanxLeader(UUID ownerId) {
         super(ownerId, 26, "Phalanx Leader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

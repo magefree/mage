@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class LordOfExtinction extends CardImpl<LordOfExtinction> {
+public class LordOfExtinction extends CardImpl {
 
     public LordOfExtinction(UUID ownerId) {
         super(ownerId, 91, "Lord of Extinction", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");

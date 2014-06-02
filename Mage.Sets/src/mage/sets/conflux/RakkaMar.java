@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class RakkaMar extends CardImpl<RakkaMar> {
+public class RakkaMar extends CardImpl {
     private static ElementalToken token = new ElementalToken();
 
     public RakkaMar(UUID ownerId) {

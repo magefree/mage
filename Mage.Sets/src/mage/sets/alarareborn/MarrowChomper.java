@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class MarrowChomper extends CardImpl<MarrowChomper> {
+public class MarrowChomper extends CardImpl {
 
     public MarrowChomper(UUID ownerId) {
         super(ownerId, 93, "Marrow Chomper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");

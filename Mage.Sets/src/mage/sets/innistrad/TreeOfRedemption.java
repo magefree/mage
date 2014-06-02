@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class TreeOfRedemption extends CardImpl<TreeOfRedemption> {
+public class TreeOfRedemption extends CardImpl {
 
     public TreeOfRedemption(UUID ownerId) {
         super(ownerId, 207, "Tree of Redemption", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}");

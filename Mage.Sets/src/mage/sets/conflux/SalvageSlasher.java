@@ -44,7 +44,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author North
  */
-public class SalvageSlasher extends CardImpl<SalvageSlasher> {
+public class SalvageSlasher extends CardImpl {
 
     public SalvageSlasher(UUID ownerId) {
         super(ownerId, 52, "Salvage Slasher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}");

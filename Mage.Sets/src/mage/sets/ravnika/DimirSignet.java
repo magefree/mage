@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DimirSignet extends CardImpl<DimirSignet> {
+public class DimirSignet extends CardImpl {
 
     public DimirSignet (UUID ownerId) {
         super(ownerId, 260, "Dimir Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

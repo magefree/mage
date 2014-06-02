@@ -52,7 +52,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class MyrReservoir extends CardImpl<MyrReservoir> {
+public class MyrReservoir extends CardImpl {
 
     private static final FilterCard myrCardFilter = new FilterCard("Myr card from your graveyard");
 

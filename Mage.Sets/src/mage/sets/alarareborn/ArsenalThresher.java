@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class ArsenalThresher extends CardImpl<ArsenalThresher> {
+public class ArsenalThresher extends CardImpl {
 
     public ArsenalThresher(UUID ownerId) {
         super(ownerId, 131, "Arsenal Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W/B}{U}");

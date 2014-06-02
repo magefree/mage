@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SkyfireKirin extends CardImpl<SkyfireKirin> {
+public class SkyfireKirin extends CardImpl {
 
     public SkyfireKirin(UUID ownerId) {
         super(ownerId, 113, "Skyfire Kirin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

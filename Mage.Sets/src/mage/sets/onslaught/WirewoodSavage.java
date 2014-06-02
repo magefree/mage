@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class WirewoodSavage extends CardImpl<WirewoodSavage> {
+public class WirewoodSavage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Beast");
 

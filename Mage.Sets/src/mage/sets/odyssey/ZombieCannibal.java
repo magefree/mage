@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author cbt33
  */
-public class ZombieCannibal extends CardImpl<ZombieCannibal> {
+public class ZombieCannibal extends CardImpl {
 
     public ZombieCannibal(UUID ownerId) {
         super(ownerId, 169, "Zombie Cannibal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

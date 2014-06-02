@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class MysticalTeachings extends CardImpl<MysticalTeachings> {
+public class MysticalTeachings extends CardImpl {
 
 
     private static final FilterCard filter = new FilterCard("creature an opponent controls");

@@ -39,7 +39,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class ShatteringBlow extends CardImpl<ShatteringBlow> {
+public class ShatteringBlow extends CardImpl {
 
     public ShatteringBlow (UUID ownerId) {
         super(ownerId, 225, "Shattering Blow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/W}");

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class PygmyPyrosaur extends CardImpl<PygmyPyrosaur> {
+public class PygmyPyrosaur extends CardImpl {
 
     public PygmyPyrosaur(UUID ownerId) {
         super(ownerId, 87, "Pygmy Pyrosaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

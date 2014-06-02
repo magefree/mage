@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class GriffinDreamfinder extends CardImpl<GriffinDreamfinder> {
+public class GriffinDreamfinder extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
     

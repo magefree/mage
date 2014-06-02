@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SpiderUmbra extends CardImpl<SpiderUmbra> {
+public class SpiderUmbra extends CardImpl {
 
     public SpiderUmbra(UUID ownerId) {
         super(ownerId, 208, "Spider Umbra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

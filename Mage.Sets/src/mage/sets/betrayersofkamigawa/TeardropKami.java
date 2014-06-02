@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TeardropKami extends CardImpl<TeardropKami> {
+public class TeardropKami extends CardImpl {
 
     public TeardropKami(UUID ownerId) {
         super(ownerId, 55, "Teardrop Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

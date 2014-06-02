@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class DeathsShadow extends CardImpl<DeathsShadow> {
+public class DeathsShadow extends CardImpl {
 
     public DeathsShadow(UUID ownerId) {
         super(ownerId, 57, "Death's Shadow", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}");

@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class PlowUnder extends CardImpl<PlowUnder> {
+public class PlowUnder extends CardImpl {
 
     public PlowUnder(UUID ownerId) {
         super(ownerId, 117, "Plow Under", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");

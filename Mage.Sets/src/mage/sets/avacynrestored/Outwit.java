@@ -52,7 +52,7 @@ import mage.target.Target;
  *
  * @author jeffwadsworth
  */
-public class Outwit extends CardImpl<Outwit> {
+public class Outwit extends CardImpl {
 
     private static FilterSpell filter = new FilterSpell("spell that targets a player");
 

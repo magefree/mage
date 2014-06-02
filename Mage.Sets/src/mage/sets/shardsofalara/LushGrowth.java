@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class LushGrowth extends CardImpl<LushGrowth> {
+public class LushGrowth extends CardImpl {
 
     public LushGrowth(UUID ownerId) {
         super(ownerId, 136, "Lush Growth", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

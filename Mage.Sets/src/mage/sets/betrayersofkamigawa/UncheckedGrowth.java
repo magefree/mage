@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class UncheckedGrowth extends CardImpl<UncheckedGrowth> {
+public class UncheckedGrowth extends CardImpl {
 
     public UncheckedGrowth(UUID ownerId) {
         super(ownerId, 148, "Unchecked Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

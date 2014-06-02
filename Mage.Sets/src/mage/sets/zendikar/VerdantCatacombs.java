@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VerdantCatacombs extends CardImpl<VerdantCatacombs> {
+public class VerdantCatacombs extends CardImpl {
 
     public VerdantCatacombs(UUID ownerId) {
         super(ownerId, 229, "Verdant Catacombs", Rarity.RARE, new CardType[]{CardType.LAND}, null);

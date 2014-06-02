@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WarpathGhoul extends CardImpl<WarpathGhoul> {
+public class WarpathGhoul extends CardImpl {
 
     public WarpathGhoul(UUID ownerId) {
         super(ownerId, 120, "Warpath Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

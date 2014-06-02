@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class TaintedPeak extends CardImpl<TaintedPeak> {
+public class TaintedPeak extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("you control a swamp");
     static {

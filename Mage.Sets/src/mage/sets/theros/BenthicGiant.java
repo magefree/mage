@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class BenthicGiant extends CardImpl<BenthicGiant> {
+public class BenthicGiant extends CardImpl {
 
     public BenthicGiant(UUID ownerId) {
         super(ownerId, 41, "Benthic Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");

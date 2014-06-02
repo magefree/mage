@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class TaintedStrike extends CardImpl<TaintedStrike> {
+public class TaintedStrike extends CardImpl {
 
     public TaintedStrike (UUID ownerId) {
         super(ownerId, 80, "Tainted Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

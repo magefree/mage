@@ -51,7 +51,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class SwarmbornGiant extends CardImpl<SwarmbornGiant> {
+public class SwarmbornGiant extends CardImpl {
 
     public SwarmbornGiant(UUID ownerId) {
         super(ownerId, 144, "Swarmborn Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

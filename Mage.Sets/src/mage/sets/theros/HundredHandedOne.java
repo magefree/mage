@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HundredHandedOne extends CardImpl<HundredHandedOne> {
+public class HundredHandedOne extends CardImpl {
 
     public HundredHandedOne(UUID ownerId) {
         super(ownerId, 20, "Hundred-Handed One", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

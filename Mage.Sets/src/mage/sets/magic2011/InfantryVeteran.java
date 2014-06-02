@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class InfantryVeteran extends CardImpl<InfantryVeteran> {
+public class InfantryVeteran extends CardImpl {
 
     public InfantryVeteran(UUID ownerId) {
         super(ownerId, 18, "Infantry Veteran", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

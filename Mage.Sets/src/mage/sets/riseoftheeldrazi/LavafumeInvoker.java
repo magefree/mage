@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LavafumeInvoker extends CardImpl<LavafumeInvoker> {
+public class LavafumeInvoker extends CardImpl {
 
     public LavafumeInvoker(UUID ownerId) {
         super(ownerId, 155, "Lavafume Invoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

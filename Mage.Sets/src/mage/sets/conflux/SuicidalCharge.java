@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class SuicidalCharge extends CardImpl<SuicidalCharge> {
+public class SuicidalCharge extends CardImpl {
 
     public SuicidalCharge(UUID ownerId) {
         super(ownerId, 128, "Suicidal Charge", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{R}");

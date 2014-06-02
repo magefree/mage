@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MoltingSkin extends CardImpl<MoltingSkin> {
+public class MoltingSkin extends CardImpl {
 
     public MoltingSkin(UUID ownerId) {
         super(ownerId, 138, "Molting Skin", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

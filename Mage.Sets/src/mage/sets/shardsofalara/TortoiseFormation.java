@@ -41,7 +41,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author North
  */
-public class TortoiseFormation extends CardImpl<TortoiseFormation> {
+public class TortoiseFormation extends CardImpl {
 
     public TortoiseFormation(UUID ownerId) {
         super(ownerId, 61, "Tortoise Formation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");

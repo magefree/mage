@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  * @author Alvin
  * @author ayratn
  */
-public class StromkirkNoble extends CardImpl<StromkirkNoble> {
+public class StromkirkNoble extends CardImpl {
 
     public StromkirkNoble(UUID ownerId) {
         super(ownerId, 164, "Stromkirk Noble", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");

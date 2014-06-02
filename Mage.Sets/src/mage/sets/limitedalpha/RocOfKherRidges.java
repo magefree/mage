@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RocOfKherRidges extends CardImpl<RocOfKherRidges> {
+public class RocOfKherRidges extends CardImpl {
 
     public RocOfKherRidges(UUID ownerId) {
         super(ownerId, 171, "Roc of Kher Ridges", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

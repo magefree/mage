@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class TormodsCrypt extends CardImpl<TormodsCrypt> {
+public class TormodsCrypt extends CardImpl {
 
     public TormodsCrypt(UUID ownerId) {
         super(ownerId, 115, "Tormod's Crypt", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

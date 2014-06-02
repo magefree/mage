@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class ElvishBard extends CardImpl<ElvishBard> {
+public class ElvishBard extends CardImpl {
 
     public ElvishBard(UUID ownerId) {
         super(ownerId, 236, "Elvish Bard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

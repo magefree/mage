@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class RiotPiker extends CardImpl<RiotPiker> {
+public class RiotPiker extends CardImpl {
 
     public RiotPiker (UUID ownerId) {
         super(ownerId, 37, "Riot Piker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

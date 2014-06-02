@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class IndebtedSamurai extends CardImpl<IndebtedSamurai> {
+public class IndebtedSamurai extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Samurai you control");
     static {

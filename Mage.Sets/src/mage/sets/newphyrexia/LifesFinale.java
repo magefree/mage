@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class LifesFinale extends CardImpl<LifesFinale> {
+public class LifesFinale extends CardImpl {
 
     public LifesFinale(UUID ownerId) {
         super(ownerId, 65, "Life's Finale", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

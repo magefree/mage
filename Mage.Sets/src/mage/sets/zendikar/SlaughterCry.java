@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SlaughterCry extends CardImpl<SlaughterCry> {
+public class SlaughterCry extends CardImpl {
 
     public SlaughterCry(UUID ownerId) {
         super(ownerId, 149, "Slaughter Cry", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

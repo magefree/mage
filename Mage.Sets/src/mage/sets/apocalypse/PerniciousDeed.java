@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class PerniciousDeed extends CardImpl<PerniciousDeed> {
+public class PerniciousDeed extends CardImpl {
 
   
     

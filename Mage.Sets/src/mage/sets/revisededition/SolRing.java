@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class SolRing extends CardImpl<SolRing> {
+public class SolRing extends CardImpl {
 
     public SolRing (UUID ownerId) {
         super(ownerId, 274, "Sol Ring", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

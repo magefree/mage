@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Pendelhaven extends CardImpl<Pendelhaven> {
+public class Pendelhaven extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("1/1 creature");
 
     static {

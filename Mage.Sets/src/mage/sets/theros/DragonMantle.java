@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class DragonMantle extends CardImpl<DragonMantle> {
+public class DragonMantle extends CardImpl {
 
     public DragonMantle(UUID ownerId) {
         super(ownerId, 119, "Dragon Mantle", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

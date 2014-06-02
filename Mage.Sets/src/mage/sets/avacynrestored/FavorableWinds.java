@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class FavorableWinds extends CardImpl<FavorableWinds> {
+public class FavorableWinds extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control with flying");
 

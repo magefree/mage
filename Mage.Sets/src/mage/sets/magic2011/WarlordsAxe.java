@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WarlordsAxe extends CardImpl<WarlordsAxe> {
+public class WarlordsAxe extends CardImpl {
 
     public WarlordsAxe(UUID ownerId) {
         super(ownerId, 220, "Warlord's Axe", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

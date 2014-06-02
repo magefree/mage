@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author KholdFuzion
  */
-public class AcidicSliver extends CardImpl<AcidicSliver> {
+public class AcidicSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
 

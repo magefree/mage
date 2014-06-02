@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class SylvanPrimordial extends CardImpl<SylvanPrimordial> {
+public class SylvanPrimordial extends CardImpl {
 
     public SylvanPrimordial(UUID ownerId) {
         super(ownerId, 136, "Sylvan Primordial", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

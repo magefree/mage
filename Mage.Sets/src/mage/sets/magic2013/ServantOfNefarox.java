@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ServantOfNefarox extends CardImpl<ServantOfNefarox> {
+public class ServantOfNefarox extends CardImpl {
 
     public ServantOfNefarox(UUID ownerId) {
         super(ownerId, 108, "Servant of Nefarox", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

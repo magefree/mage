@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class Attunement extends CardImpl<Attunement> {
+public class Attunement extends CardImpl {
 
     public Attunement(UUID ownerId) {
         super(ownerId, 61, "Attunement", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

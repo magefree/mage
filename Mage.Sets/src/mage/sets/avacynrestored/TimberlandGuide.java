@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class TimberlandGuide extends CardImpl<TimberlandGuide> {
+public class TimberlandGuide extends CardImpl {
 
     public TimberlandGuide(UUID ownerId) {
         super(ownerId, 197, "Timberland Guide", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

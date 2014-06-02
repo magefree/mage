@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class OrchardSpirit extends CardImpl<OrchardSpirit> {
+public class OrchardSpirit extends CardImpl {
 
     public OrchardSpirit(UUID ownerId) {
         super(ownerId, 198, "Orchard Spirit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  */
 
 
-public class HiddenStrings extends CardImpl<HiddenStrings> {
+public class HiddenStrings extends CardImpl {
 
     public HiddenStrings(UUID ownerId) {
         super(ownerId, 12, "Hidden Strings", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");

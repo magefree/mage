@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward
  */
-public class ChancellorOfTheForge extends CardImpl<ChancellorOfTheForge> {
+public class ChancellorOfTheForge extends CardImpl {
 
     private static String abilityText = "at the beginning of the first upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");

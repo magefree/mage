@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class Zephid extends CardImpl<Zephid> {
+public class Zephid extends CardImpl {
 
     public Zephid(UUID ownerId) {
         super(ownerId, 113, "Zephid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

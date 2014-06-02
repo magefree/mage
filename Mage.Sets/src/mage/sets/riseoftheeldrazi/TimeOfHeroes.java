@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author jeffwadsworth
  */
-public class TimeOfHeroes extends CardImpl<TimeOfHeroes> {
+public class TimeOfHeroes extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature you control with a level counter");
     

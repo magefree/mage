@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class SoullessOne extends CardImpl<SoullessOne> {
+public class SoullessOne extends CardImpl {
 
     public SoullessOne(UUID ownerId) {
         super(ownerId, 171, "Soulless One", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

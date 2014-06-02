@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class IntoTheVoid extends CardImpl<IntoTheVoid> {
+public class IntoTheVoid extends CardImpl {
 
     public IntoTheVoid(UUID ownerId) {
         super(ownerId, 62, "Into the Void", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");

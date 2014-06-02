@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class BassaraTowerArcher extends CardImpl<BassaraTowerArcher> {
+public class BassaraTowerArcher extends CardImpl {
 
     public BassaraTowerArcher(UUID ownerId) {
         super(ownerId, 117, "Bassara Tower Archer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");

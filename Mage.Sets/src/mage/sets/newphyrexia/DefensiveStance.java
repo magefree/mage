@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class DefensiveStance extends CardImpl<DefensiveStance> {
+public class DefensiveStance extends CardImpl {
 
     public DefensiveStance(UUID ownerId) {
         super(ownerId, 34, "Defensive Stance", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

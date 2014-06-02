@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class BidentOfThassa extends CardImpl<BidentOfThassa> {
+public class BidentOfThassa extends CardImpl {
 
     public BidentOfThassa(UUID ownerId) {
         super(ownerId, 42, "Bident of Thassa", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{2}{U}{U}");

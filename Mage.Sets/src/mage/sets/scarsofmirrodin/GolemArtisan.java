@@ -57,7 +57,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class GolemArtisan extends CardImpl<GolemArtisan> {
+public class GolemArtisan extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact creature");
 

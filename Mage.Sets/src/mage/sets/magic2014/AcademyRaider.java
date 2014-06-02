@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class AcademyRaider extends CardImpl<AcademyRaider> {
+public class AcademyRaider extends CardImpl {
 
     public AcademyRaider(UUID ownerId) {
         super(ownerId, 124, "Academy Raider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

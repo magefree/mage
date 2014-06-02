@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author ayratn
  */
-public class KuldothaRingleader extends CardImpl<KuldothaRingleader> {
+public class KuldothaRingleader extends CardImpl {
 
     public KuldothaRingleader (UUID ownerId) {
         super(ownerId, 70, "Kuldotha Ringleader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

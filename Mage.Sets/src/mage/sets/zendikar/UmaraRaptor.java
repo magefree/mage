@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class UmaraRaptor extends CardImpl<UmaraRaptor> {
+public class UmaraRaptor extends CardImpl {
 
     public UmaraRaptor(UUID ownerId) {
         super(ownerId, 75, "Umara Raptor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

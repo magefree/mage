@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Dreadwing extends CardImpl<Dreadwing> {
+public class Dreadwing extends CardImpl {
 
     public Dreadwing(UUID ownerId) {
         super(ownerId, 43, "Dreadwing", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BlightMamba extends CardImpl<BlightMamba> {
+public class BlightMamba extends CardImpl {
 
     public BlightMamba (UUID ownerId) {
         super(ownerId, 112, "Blight Mamba", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

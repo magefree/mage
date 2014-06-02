@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class KinscaerHarpoonist extends CardImpl<KinscaerHarpoonist> {
+public class KinscaerHarpoonist extends CardImpl {
 
     public KinscaerHarpoonist(UUID ownerId) {
         super(ownerId, 41, "Kinscaer Harpoonist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

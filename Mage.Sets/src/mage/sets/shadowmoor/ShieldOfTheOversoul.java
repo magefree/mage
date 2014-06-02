@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ShieldOfTheOversoul extends CardImpl<ShieldOfTheOversoul> {
+public class ShieldOfTheOversoul extends CardImpl {
 
     public ShieldOfTheOversoul(UUID ownerId) {
         super(ownerId, 242, "Shield of the Oversoul", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G/W}");

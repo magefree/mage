@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class ConcussiveBolt extends CardImpl<ConcussiveBolt> {
+public class ConcussiveBolt extends CardImpl {
 
     public ConcussiveBolt(UUID ownerId) {
         super(ownerId, 60, "Concussive Bolt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

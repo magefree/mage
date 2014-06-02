@@ -52,7 +52,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class RidersOfGavony extends CardImpl<RidersOfGavony> {
+public class RidersOfGavony extends CardImpl {
 
     public RidersOfGavony(UUID ownerId) {
         super(ownerId, 33, "Riders of Gavony", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

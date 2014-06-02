@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class BloodstoneCameo extends CardImpl<BloodstoneCameo> {
+public class BloodstoneCameo extends CardImpl {
 
     public BloodstoneCameo(UUID ownerId) {
         super(ownerId, 298, "Bloodstone Cameo", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

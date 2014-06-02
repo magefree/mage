@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author North, nantuko
  */
-public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
+public class SejiriMerfolk extends CardImpl {
 
     private static final String rule1 = "As long as you control a Plains, {this} has first strike.";
     private static final String rule2 = "As long as you control a Plains, {this} has lifelink.";

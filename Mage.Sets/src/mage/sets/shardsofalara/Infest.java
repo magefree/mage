@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class Infest extends CardImpl<Infest> {
+public class Infest extends CardImpl {
 
     public Infest(UUID ownerId) {
         super(ownerId, 80, "Infest", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");

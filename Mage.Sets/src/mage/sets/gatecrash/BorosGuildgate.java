@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class BorosGuildgate extends CardImpl<BorosGuildgate> {
+public class BorosGuildgate extends CardImpl {
 
     public BorosGuildgate(UUID ownerId) {
         super(ownerId, 239, "Boros Guildgate", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

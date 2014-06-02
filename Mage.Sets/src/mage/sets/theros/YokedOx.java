@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class YokedOx extends CardImpl<YokedOx> {
+public class YokedOx extends CardImpl {
 
     public YokedOx(UUID ownerId) {
         super(ownerId, 37, "Yoked Ox", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

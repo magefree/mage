@@ -47,7 +47,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class VexingDevil extends CardImpl<VexingDevil> {
+public class VexingDevil extends CardImpl {
 
     public VexingDevil(UUID ownerId) {
         super(ownerId, 164, "Vexing Devil", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");

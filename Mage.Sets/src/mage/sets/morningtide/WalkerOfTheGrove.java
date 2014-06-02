@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class WalkerOfTheGrove extends CardImpl<WalkerOfTheGrove> {
+public class WalkerOfTheGrove extends CardImpl {
 
     public WalkerOfTheGrove(UUID ownerId) {
         super(ownerId, 138, "Walker of the Grove", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

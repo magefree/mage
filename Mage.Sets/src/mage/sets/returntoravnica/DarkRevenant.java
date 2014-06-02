@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DarkRevenant extends CardImpl<DarkRevenant> {
+public class DarkRevenant extends CardImpl {
 
     public DarkRevenant(UUID ownerId) {
         super(ownerId, 61, "Dark Revenant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

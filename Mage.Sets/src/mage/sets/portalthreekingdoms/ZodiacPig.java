@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ZodiacPig extends CardImpl<ZodiacPig> {
+public class ZodiacPig extends CardImpl {
 
     public ZodiacPig(UUID ownerId) {
         super(ownerId, 97, "Zodiac Pig", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

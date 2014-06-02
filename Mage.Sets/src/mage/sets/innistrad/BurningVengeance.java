@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class BurningVengeance extends CardImpl<BurningVengeance> {
+public class BurningVengeance extends CardImpl {
 
     public BurningVengeance(UUID ownerId) {
         super(ownerId, 133, "Burning Vengeance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

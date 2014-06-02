@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class GoblinWarPaint extends CardImpl<GoblinWarPaint> {
+public class GoblinWarPaint extends CardImpl {
 
     public GoblinWarPaint(UUID ownerId) {
         super(ownerId, 129, "Goblin War Paint", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

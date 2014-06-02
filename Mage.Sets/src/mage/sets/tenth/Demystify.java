@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class Demystify extends CardImpl<Demystify> {
+public class Demystify extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 

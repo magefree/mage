@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class WoodedFoothills extends CardImpl<WoodedFoothills> {
+public class WoodedFoothills extends CardImpl {
 
     public WoodedFoothills(UUID ownerId) {
         super(ownerId, 330, "Wooded Foothills", Rarity.RARE, new CardType[]{CardType.LAND}, "");

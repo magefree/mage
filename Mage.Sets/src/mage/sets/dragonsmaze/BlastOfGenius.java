@@ -48,7 +48,7 @@ import mage.target.common.TargetDiscard;
  */
 
 
-public class BlastOfGenius extends CardImpl<BlastOfGenius> {
+public class BlastOfGenius extends CardImpl {
 
     public BlastOfGenius(UUID ownerId) {
         super(ownerId, 55, "Blast of Genius", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}{R}");

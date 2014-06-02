@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JacesIngenuity extends CardImpl<JacesIngenuity> {
+public class JacesIngenuity extends CardImpl {
 
     public JacesIngenuity(UUID ownerId) {
         super(ownerId, 60, "Jace's Ingenuity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

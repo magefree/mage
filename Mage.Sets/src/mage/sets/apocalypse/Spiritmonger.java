@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class Spiritmonger extends CardImpl<Spiritmonger> {
+public class Spiritmonger extends CardImpl {
 
     public Spiritmonger(UUID ownerId) {
         super(ownerId, 121, "Spiritmonger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");

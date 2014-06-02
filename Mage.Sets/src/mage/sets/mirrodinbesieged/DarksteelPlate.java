@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DarksteelPlate extends CardImpl<DarksteelPlate> {
+public class DarksteelPlate extends CardImpl {
 
     public DarksteelPlate (UUID ownerId) {
         super(ownerId, 104, "Darksteel Plate", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

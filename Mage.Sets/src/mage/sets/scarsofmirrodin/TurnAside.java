@@ -50,7 +50,7 @@ import mage.target.Target;
 /**
  * @author ayratn
  */
-public class TurnAside extends CardImpl<TurnAside> {
+public class TurnAside extends CardImpl {
 
     private static FilterSpell filter = new FilterSpell("spell that targets a permanent you control");
 

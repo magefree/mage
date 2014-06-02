@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class UlamogsCrusher extends CardImpl<UlamogsCrusher> {
+public class UlamogsCrusher extends CardImpl {
 
     public UlamogsCrusher (UUID ownerId) {
         super(ownerId, 13, "Ulamog's Crusher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{8}");

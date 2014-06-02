@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DerangedOutcast extends CardImpl<DerangedOutcast> {
+public class DerangedOutcast extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Human");
 
     static {

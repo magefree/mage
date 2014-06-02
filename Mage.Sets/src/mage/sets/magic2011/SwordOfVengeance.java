@@ -51,7 +51,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SwordOfVengeance extends CardImpl<SwordOfVengeance> {
+public class SwordOfVengeance extends CardImpl {
 
     public SwordOfVengeance(UUID ownerId) {
         super(ownerId, 216, "Sword of Vengeance", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

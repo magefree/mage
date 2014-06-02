@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class OvergrownEstate extends CardImpl<OvergrownEstate> {
+public class OvergrownEstate extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

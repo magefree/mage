@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class KithkinGreatheart extends CardImpl<KithkinGreatheart> {
+public class KithkinGreatheart extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Giant");
     static {

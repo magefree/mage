@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LandLeeches extends CardImpl<LandLeeches> {
+public class LandLeeches extends CardImpl {
 
     public LandLeeches(UUID ownerId) {
         super(ownerId, 139, "Land Leeches", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

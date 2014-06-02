@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Fireball extends CardImpl<Fireball> {
+public class Fireball extends CardImpl {
 
     public Fireball(UUID ownerId) {
         super(ownerId, 136, "Fireball", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");

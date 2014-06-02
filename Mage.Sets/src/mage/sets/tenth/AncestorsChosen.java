@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class AncestorsChosen extends CardImpl<AncestorsChosen> {
+public class AncestorsChosen extends CardImpl {
 
     public AncestorsChosen(UUID ownerId) {
         super(ownerId, 1, "Ancestor's Chosen", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

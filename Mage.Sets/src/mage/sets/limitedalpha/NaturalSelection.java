@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  * @author KholdFuzion
 
  */
-public class NaturalSelection extends CardImpl<NaturalSelection> {
+public class NaturalSelection extends CardImpl {
 
     public NaturalSelection(UUID ownerId) {
         super(ownerId, 121, "Natural Selection", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}");

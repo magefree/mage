@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class KorAeronaut extends CardImpl<KorAeronaut> {
+public class KorAeronaut extends CardImpl {
 
     public KorAeronaut(UUID ownerId) {
         super(ownerId, 17, "Kor Aeronaut", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

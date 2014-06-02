@@ -46,7 +46,7 @@ import mage.counters.CounterType;
 /**
  * @author nantuko, BetaSteward_at_googlemail.com
  */
-public class AetherFigment extends CardImpl<AetherFigment> {
+public class AetherFigment extends CardImpl {
 
     private static final String staticText = "with two +1/+1 counters on it, if it was kicked";
 

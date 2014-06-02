@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class EssenceScatter extends CardImpl<EssenceScatter> {
+public class EssenceScatter extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("creature spell");
 

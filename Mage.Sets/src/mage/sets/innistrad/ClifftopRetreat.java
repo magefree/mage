@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class ClifftopRetreat extends CardImpl<ClifftopRetreat> {
+public class ClifftopRetreat extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class BorderlandRanger extends CardImpl<BorderlandRanger> {
+public class BorderlandRanger extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 

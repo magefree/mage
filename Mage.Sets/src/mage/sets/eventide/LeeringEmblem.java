@@ -43,7 +43,7 @@ import mage.constants.Outcome;
  *
  * @author Loki
  */
-public class LeeringEmblem extends CardImpl<LeeringEmblem> {
+public class LeeringEmblem extends CardImpl {
 
     public LeeringEmblem(UUID ownerId) {
         super(ownerId, 171, "Leering Emblem", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

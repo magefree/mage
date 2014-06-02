@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class UnwindingClock extends CardImpl<UnwindingClock> {
+public class UnwindingClock extends CardImpl {
 
     public UnwindingClock(UUID ownerId) {
         super(ownerId, 164, "Unwinding Clock", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

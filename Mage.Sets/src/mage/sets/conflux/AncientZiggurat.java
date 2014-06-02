@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class AncientZiggurat extends CardImpl<AncientZiggurat> {
+public class AncientZiggurat extends CardImpl {
 
     public AncientZiggurat(UUID ownerId) {
         super(ownerId, 141, "Ancient Ziggurat", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

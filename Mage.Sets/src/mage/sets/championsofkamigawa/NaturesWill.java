@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class NaturesWill extends CardImpl<NaturesWill> {
+public class NaturesWill extends CardImpl {
 
     public NaturesWill(UUID ownerId) {
         super(ownerId, 230, "Nature's Will", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

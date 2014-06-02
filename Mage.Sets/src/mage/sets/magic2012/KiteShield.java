@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class KiteShield extends CardImpl<KiteShield> {
+public class KiteShield extends CardImpl {
 
     public KiteShield (UUID ownerId) {
         super(ownerId, 210, "Kite Shield", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

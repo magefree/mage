@@ -40,7 +40,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class PitchburnDevils extends CardImpl<PitchburnDevils> {
+public class PitchburnDevils extends CardImpl {
 
     public PitchburnDevils(UUID ownerId) {
         super(ownerId, 156, "Pitchburn Devils", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

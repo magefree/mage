@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class Shock extends CardImpl<Shock> {
+public class Shock extends CardImpl {
 
     public Shock (UUID ownerId) {
         super(ownerId, 232, "Shock", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

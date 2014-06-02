@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GalvanicJuggernaut extends CardImpl<GalvanicJuggernaut> {
+public class GalvanicJuggernaut extends CardImpl {
 
     public GalvanicJuggernaut(UUID ownerId) {
         super(ownerId, 222, "Galvanic Juggernaut", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

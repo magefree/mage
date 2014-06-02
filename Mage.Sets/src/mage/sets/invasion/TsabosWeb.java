@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class TsabosWeb extends CardImpl<TsabosWeb> {
+public class TsabosWeb extends CardImpl {
 
     public TsabosWeb(UUID ownerId) {
         super(ownerId, 317, "Tsabo's Web", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class BoneToAsh extends CardImpl<BoneToAsh> {
+public class BoneToAsh extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("creature spell");
 

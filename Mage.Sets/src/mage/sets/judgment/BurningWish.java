@@ -50,7 +50,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class BurningWish extends CardImpl<BurningWish> {
+public class BurningWish extends CardImpl {
 
     public BurningWish(UUID ownerId) {
         super(ownerId, 83, "Burning Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");

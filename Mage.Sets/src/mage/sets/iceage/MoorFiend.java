@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MoorFiend extends CardImpl<MoorFiend> {
+public class MoorFiend extends CardImpl {
 
     public MoorFiend(UUID ownerId) {
         super(ownerId, 41, "Moor Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Viserion
  */
-public class Explore extends CardImpl<Explore> {
+public class Explore extends CardImpl {
 
     public Explore(UUID ownerId) {
         super(ownerId, 99, "Explore", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

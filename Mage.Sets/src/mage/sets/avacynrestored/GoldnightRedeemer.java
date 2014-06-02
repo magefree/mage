@@ -45,7 +45,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class GoldnightRedeemer extends CardImpl<GoldnightRedeemer> {
+public class GoldnightRedeemer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
 

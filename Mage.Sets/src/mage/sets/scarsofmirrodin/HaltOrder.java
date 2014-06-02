@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class HaltOrder extends CardImpl<HaltOrder> {
+public class HaltOrder extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("artifact spell");
 

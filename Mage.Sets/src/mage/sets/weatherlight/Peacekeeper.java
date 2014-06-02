@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class Peacekeeper extends CardImpl<Peacekeeper> {
+public class Peacekeeper extends CardImpl {
 
     public Peacekeeper(UUID ownerId) {
         super(ownerId, 138, "Peacekeeper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");

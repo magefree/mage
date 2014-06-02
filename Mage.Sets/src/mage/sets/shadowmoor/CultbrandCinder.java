@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class CultbrandCinder extends CardImpl<CultbrandCinder> {
+public class CultbrandCinder extends CardImpl {
 
     public CultbrandCinder(UUID ownerId) {
         super(ownerId, 182, "Cultbrand Cinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B/R}");

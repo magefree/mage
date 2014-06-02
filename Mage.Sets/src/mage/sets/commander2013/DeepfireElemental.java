@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class DeepfireElemental extends CardImpl<DeepfireElemental> {
+public class DeepfireElemental extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature with converted mana cost X");
     static {

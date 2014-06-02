@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Redirect extends CardImpl<Redirect> {
+public class Redirect extends CardImpl {
 
     public Redirect(UUID ownerId) {
         super(ownerId, 71, "Redirect", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}");

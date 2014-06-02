@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class Miscalculation extends CardImpl<Miscalculation> {
+public class Miscalculation extends CardImpl {
 
     public Miscalculation(UUID ownerId) {
         super(ownerId, 36, "Miscalculation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

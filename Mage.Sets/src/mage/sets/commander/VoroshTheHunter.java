@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class VoroshTheHunter extends CardImpl<VoroshTheHunter> {
+public class VoroshTheHunter extends CardImpl {
 
     public VoroshTheHunter(UUID ownerId) {
         super(ownerId, 235, "Vorosh, the Hunter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{U}{B}");

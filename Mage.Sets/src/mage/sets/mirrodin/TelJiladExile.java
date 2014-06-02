@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TelJiladExile extends CardImpl<TelJiladExile> {
+public class TelJiladExile extends CardImpl {
 
     public TelJiladExile(UUID ownerId) {
         super(ownerId, 133, "Tel-Jilad Exile", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

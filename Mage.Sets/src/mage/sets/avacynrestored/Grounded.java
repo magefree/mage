@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class Grounded extends CardImpl<Grounded> {
+public class Grounded extends CardImpl {
 
     public Grounded(UUID ownerId) {
         super(ownerId, 181, "Grounded", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class Zombify extends CardImpl<Zombify> {
+public class Zombify extends CardImpl {
 
     public Zombify(UUID ownerId) {
         super(ownerId, 171, "Zombify", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");

@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Soliton extends CardImpl<Soliton> {
+public class Soliton extends CardImpl {
 
     public Soliton (UUID ownerId) {
         super(ownerId, 204, "Soliton", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

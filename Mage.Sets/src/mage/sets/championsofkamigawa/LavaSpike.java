@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class LavaSpike extends CardImpl<LavaSpike> {
+public class LavaSpike extends CardImpl {
 
     public LavaSpike (UUID ownerId) {
         super(ownerId, 178, "Lava Spike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");

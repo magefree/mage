@@ -48,7 +48,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author LevelX2
  */
-public class StormfrontRiders extends CardImpl<StormfrontRiders> {
+public class StormfrontRiders extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

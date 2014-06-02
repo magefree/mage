@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class SimicKeyrune extends CardImpl<SimicKeyrune> {
+public class SimicKeyrune extends CardImpl {
 
     public SimicKeyrune(UUID ownerId) {
         super(ownerId, 237, "Simic Keyrune", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

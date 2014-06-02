@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class NewBenalia extends CardImpl<NewBenalia> {
+public class NewBenalia extends CardImpl {
 
     public NewBenalia(UUID ownerId) {
         super(ownerId, 172, "New Benalia", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

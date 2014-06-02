@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ScepterOfInsight extends CardImpl<ScepterOfInsight> {
+public class ScepterOfInsight extends CardImpl {
 
     public ScepterOfInsight(UUID ownerId) {
         super(ownerId, 33, "Scepter of Insight", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}{U}{U}");

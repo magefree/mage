@@ -42,7 +42,7 @@ import mage.game.permanent.token.PlantToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KhalniGarden extends CardImpl<KhalniGarden> {
+public class KhalniGarden extends CardImpl {
 
     public KhalniGarden(UUID ownerId) {
         super(ownerId, 138, "Khalni Garden", Rarity.COMMON, new CardType[]{CardType.LAND}, null);

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BraveTheElements extends CardImpl<BraveTheElements> {
+public class BraveTheElements extends CardImpl {
 
     public BraveTheElements(UUID ownerId) {
         super(ownerId, 4, "Brave the Elements", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");

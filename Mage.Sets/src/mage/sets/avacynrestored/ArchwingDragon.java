@@ -42,7 +42,7 @@ import mage.game.events.GameEvent;
  *
  * @author Loki
  */
-public class ArchwingDragon extends CardImpl<ArchwingDragon> {
+public class ArchwingDragon extends CardImpl {
 
     public ArchwingDragon(UUID ownerId) {
         super(ownerId, 126, "Archwing Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

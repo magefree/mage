@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class Worldslayer extends CardImpl<Worldslayer> {
+public class Worldslayer extends CardImpl {
 
     public Worldslayer(UUID ownerId) {
         super(ownerId, 222, "Worldslayer", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

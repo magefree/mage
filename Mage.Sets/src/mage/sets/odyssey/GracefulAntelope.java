@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author cbt33, Loki (Contaminated Ground), Plopman (Larceny)
  */
-public class GracefulAntelope extends CardImpl<GracefulAntelope> {
+public class GracefulAntelope extends CardImpl {
 
     public GracefulAntelope(UUID ownerId) {
         super(ownerId, 24, "Graceful Antelope", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

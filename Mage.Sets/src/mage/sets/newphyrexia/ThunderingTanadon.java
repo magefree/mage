@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ThunderingTanadon extends CardImpl<ThunderingTanadon> {
+public class ThunderingTanadon extends CardImpl {
 
     public ThunderingTanadon(UUID ownerId) {
         super(ownerId, 122, "Thundering Tanadon", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{GP}{GP}");

@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class ElvishHexhunter extends CardImpl<ElvishHexhunter> {
+public class ElvishHexhunter extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 

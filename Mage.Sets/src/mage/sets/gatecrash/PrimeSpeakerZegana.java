@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class PrimeSpeakerZegana extends CardImpl<PrimeSpeakerZegana> {
+public class PrimeSpeakerZegana extends CardImpl {
 
     public PrimeSpeakerZegana(UUID ownerId) {
         super(ownerId, 188, "Prime Speaker Zegana", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{U}{U}");

@@ -55,7 +55,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class MikaeusTheLunarch extends CardImpl<MikaeusTheLunarch> {
+public class MikaeusTheLunarch extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

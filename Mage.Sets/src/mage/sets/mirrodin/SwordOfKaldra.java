@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SwordOfKaldra extends CardImpl<SwordOfKaldra> {
+public class SwordOfKaldra extends CardImpl {
 
     public SwordOfKaldra(UUID ownerId) {
         super(ownerId, 251, "Sword of Kaldra", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

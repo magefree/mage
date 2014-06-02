@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Blightning extends CardImpl<Blightning> {
+public class Blightning extends CardImpl {
 
     public Blightning(UUID ownerId) {
         super(ownerId, 156, "Blightning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");

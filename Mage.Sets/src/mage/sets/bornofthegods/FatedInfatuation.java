@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class FatedInfatuation extends CardImpl<FatedInfatuation> {
+public class FatedInfatuation extends CardImpl {
 
     public FatedInfatuation(UUID ownerId) {
         super(ownerId, 39, "Fated Infatuation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}{U}");

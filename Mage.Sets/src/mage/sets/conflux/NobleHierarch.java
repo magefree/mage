@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class NobleHierarch extends CardImpl<NobleHierarch> {
+public class NobleHierarch extends CardImpl {
 
     public NobleHierarch(UUID ownerId) {
         super(ownerId, 87, "Noble Hierarch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");

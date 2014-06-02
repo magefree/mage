@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class RakdosPitDragon extends CardImpl<RakdosPitDragon> {
+public class RakdosPitDragon extends CardImpl {
 
     public RakdosPitDragon (UUID ownerId) {
         super(ownerId, 69, "Rakdos Pit Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

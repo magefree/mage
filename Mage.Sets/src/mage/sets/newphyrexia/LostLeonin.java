@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LostLeonin extends CardImpl<LostLeonin> {
+public class LostLeonin extends CardImpl {
 
     public LostLeonin (UUID ownerId) {
         super(ownerId, 13, "Lost Leonin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

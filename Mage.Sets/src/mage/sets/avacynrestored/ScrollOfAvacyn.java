@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class ScrollOfAvacyn extends CardImpl<ScrollOfAvacyn> {
+public class ScrollOfAvacyn extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {

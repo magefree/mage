@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward
  */
-public class HereticsPunishment extends CardImpl<HereticsPunishment> {
+public class HereticsPunishment extends CardImpl {
 
     public HereticsPunishment(UUID ownerId) {
         super(ownerId, 147, "Heretic's Punishment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");

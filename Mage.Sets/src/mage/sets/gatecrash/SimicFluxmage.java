@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SimicFluxmage extends CardImpl<SimicFluxmage> {
+public class SimicFluxmage extends CardImpl {
 
     public SimicFluxmage(UUID ownerId) {
         super(ownerId, 49, "Simic Fluxmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

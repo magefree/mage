@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class PunishTheEnemy extends CardImpl<PunishTheEnemy> {
+public class PunishTheEnemy extends CardImpl {
 
     public PunishTheEnemy(UUID ownerId) {
         super(ownerId, 35, "Punish the Enemy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");

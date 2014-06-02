@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class HarvesterOfSouls extends CardImpl<HarvesterOfSouls> {
+public class HarvesterOfSouls extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature");
 

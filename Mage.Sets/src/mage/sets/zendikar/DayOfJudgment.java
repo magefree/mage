@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DayOfJudgment extends CardImpl<DayOfJudgment> {
+public class DayOfJudgment extends CardImpl {
 
     public DayOfJudgment(UUID ownerId) {
         super(ownerId, 9, "Day of Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");

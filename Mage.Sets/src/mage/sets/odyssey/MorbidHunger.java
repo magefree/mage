@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author cbt33
  */
-public class MorbidHunger extends CardImpl<MorbidHunger> {
+public class MorbidHunger extends CardImpl {
 
     public MorbidHunger(UUID ownerId) {
         super(ownerId, 150, "Morbid Hunger", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

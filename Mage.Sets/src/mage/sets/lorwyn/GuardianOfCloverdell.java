@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class GuardianOfCloverdell extends CardImpl<GuardianOfCloverdell> {
+public class GuardianOfCloverdell extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Kithkin");
 

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class ChoArrimBruiser extends CardImpl<ChoArrimBruiser> {
+public class ChoArrimBruiser extends CardImpl {
 
     public ChoArrimBruiser(UUID ownerId) {
         super(ownerId, 9, "Cho-Arrim Bruiser", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}");

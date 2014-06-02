@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class ZephidsEmbrace extends CardImpl<ZephidsEmbrace> {
+public class ZephidsEmbrace extends CardImpl {
 
     public ZephidsEmbrace(UUID ownerId) {
         super(ownerId, 114, "Zephid's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

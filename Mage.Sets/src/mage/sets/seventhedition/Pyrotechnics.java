@@ -38,7 +38,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  *
  * @author Quercitron
  */
-public class Pyrotechnics extends CardImpl<Pyrotechnics> {
+public class Pyrotechnics extends CardImpl {
 
     public Pyrotechnics(UUID ownerId) {
         super(ownerId, 210, "Pyrotechnics", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");

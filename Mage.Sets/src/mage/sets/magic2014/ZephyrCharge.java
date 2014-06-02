@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ZephyrCharge extends CardImpl<ZephyrCharge> {
+public class ZephyrCharge extends CardImpl {
 
     public ZephyrCharge(UUID ownerId) {
         super(ownerId, 82, "Zephyr Charge", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

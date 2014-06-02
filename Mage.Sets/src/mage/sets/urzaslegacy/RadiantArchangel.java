@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class RadiantArchangel extends CardImpl<RadiantArchangel> {
+public class RadiantArchangel extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

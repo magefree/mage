@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class DeathPitsOfRath extends CardImpl<DeathPitsOfRath> {
+public class DeathPitsOfRath extends CardImpl {
 
     public DeathPitsOfRath(UUID ownerId) {
         super(ownerId, 21, "Death Pits of Rath", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class SpawningGrounds extends CardImpl<SpawningGrounds> {
+public class SpawningGrounds extends CardImpl {
 
     public SpawningGrounds(UUID ownerId) {
         super(ownerId, 171, "Spawning Grounds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{6}{G}{G}");

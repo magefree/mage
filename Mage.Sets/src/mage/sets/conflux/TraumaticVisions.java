@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class TraumaticVisions extends CardImpl<TraumaticVisions> {
+public class TraumaticVisions extends CardImpl {
 
     public TraumaticVisions(UUID ownerId) {
         super(ownerId, 36, "Traumatic Visions", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

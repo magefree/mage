@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class VaultSkyward extends CardImpl<VaultSkyward> {
+public class VaultSkyward extends CardImpl {
 
     public VaultSkyward (UUID ownerId) {
         super(ownerId, 51, "Vault Skyward", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class NobleQuarry extends CardImpl<NobleQuarry> {
+public class NobleQuarry extends CardImpl {
 
     public NobleQuarry(UUID ownerId) {
         super(ownerId, 130, "Noble Quarry", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{G}");

@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class Windreaver extends CardImpl<Windreaver> {
+public class Windreaver extends CardImpl {
 
     public Windreaver(UUID ownerId) {
         super(ownerId, 138, "Windreaver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");

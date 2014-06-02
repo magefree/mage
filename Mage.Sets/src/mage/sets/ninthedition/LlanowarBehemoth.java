@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class LlanowarBehemoth extends CardImpl<LlanowarBehemoth> {
+public class LlanowarBehemoth extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter =  new FilterControlledCreaturePermanent("untapped creature you control");
     static {

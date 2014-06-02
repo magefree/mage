@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class SigilTracer extends CardImpl<SigilTracer> {
+public class SigilTracer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizards you control");
     private static final FilterSpell filterInstorSorc = new FilterSpell("instant or sorcery spell");

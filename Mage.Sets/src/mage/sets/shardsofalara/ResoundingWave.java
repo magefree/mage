@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class ResoundingWave extends CardImpl<ResoundingWave> {
+public class ResoundingWave extends CardImpl {
 
     public ResoundingWave(UUID ownerId) {
         super(ownerId, 54, "Resounding Wave", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

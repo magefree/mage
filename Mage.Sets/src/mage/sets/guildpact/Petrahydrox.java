@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Petrahydrox extends CardImpl<Petrahydrox> {
+public class Petrahydrox extends CardImpl {
 
     public Petrahydrox(UUID ownerId) {
         super(ownerId, 148, "Petrahydrox", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U/R}");

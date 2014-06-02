@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class VulshokBattlegear extends CardImpl<VulshokBattlegear> {
+public class VulshokBattlegear extends CardImpl {
 
     public VulshokBattlegear (UUID ownerId) {
         super(ownerId, 272, "Vulshok Battlegear", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

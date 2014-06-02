@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ChorusOfTheTides extends CardImpl<ChorusOfTheTides> {
+public class ChorusOfTheTides extends CardImpl {
 
     public ChorusOfTheTides(UUID ownerId) {
         super(ownerId, 33, "Chorus of the Tides", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

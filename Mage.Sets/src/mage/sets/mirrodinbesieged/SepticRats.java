@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class SepticRats extends CardImpl<SepticRats> {
+public class SepticRats extends CardImpl {
 
     public SepticRats(UUID ownerId) {
         super(ownerId, 55, "Septic Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

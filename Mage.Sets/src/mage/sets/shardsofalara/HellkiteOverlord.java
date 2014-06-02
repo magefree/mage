@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class HellkiteOverlord extends CardImpl<HellkiteOverlord> {
+public class HellkiteOverlord extends CardImpl {
 
     public HellkiteOverlord (UUID ownerId) {
         super(ownerId, 172, "Hellkite Overlord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{R}{R}{G}");

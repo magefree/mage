@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class SoulsOfTheFaultless extends CardImpl<SoulsOfTheFaultless> {
+public class SoulsOfTheFaultless extends CardImpl {
 
     public SoulsOfTheFaultless(UUID ownerId) {
         super(ownerId, 131, "Souls of the Faultless", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{B}{B}");

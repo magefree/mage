@@ -39,7 +39,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class SphereOfResistance extends CardImpl<SphereOfResistance> {
+public class SphereOfResistance extends CardImpl {
 
     public SphereOfResistance(UUID ownerId) {
         super(ownerId, 139, "Sphere of Resistance", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

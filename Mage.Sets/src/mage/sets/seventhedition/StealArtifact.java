@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Plopman
  */
-public class StealArtifact extends CardImpl<StealArtifact> {
+public class StealArtifact extends CardImpl {
 
     public StealArtifact(UUID ownerId) {
         super(ownerId, 99, "Steal Artifact", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

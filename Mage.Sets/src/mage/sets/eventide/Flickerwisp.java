@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class Flickerwisp extends CardImpl<Flickerwisp> {
+public class Flickerwisp extends CardImpl {
 
     private static final FilterPermanent filter  = new FilterPermanent();
     static{

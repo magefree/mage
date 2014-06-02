@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FirstVolley extends CardImpl<FirstVolley> {
+public class FirstVolley extends CardImpl {
 
     public FirstVolley(UUID ownerId) {
         super(ownerId, 100, "First Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

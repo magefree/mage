@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FaerieInvaders extends CardImpl<FaerieInvaders> {
+public class FaerieInvaders extends CardImpl {
 
     public FaerieInvaders(UUID ownerId) {
         super(ownerId, 51, "Faerie Invaders", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

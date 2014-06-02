@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ShadowbornApostle extends CardImpl<ShadowbornApostle> {
+public class ShadowbornApostle extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a Demon creature");
     private static final FilterControlledCreaturePermanent filterApostle = new FilterControlledCreaturePermanent("six creatures named Shadowborn Apostle");

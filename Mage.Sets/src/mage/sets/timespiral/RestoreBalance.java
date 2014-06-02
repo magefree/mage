@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class RestoreBalance extends CardImpl<RestoreBalance> {
+public class RestoreBalance extends CardImpl {
 
     public RestoreBalance(UUID ownerId) {
         super(ownerId, 38, "Restore Balance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "");

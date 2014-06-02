@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class Farseek extends CardImpl<Farseek> {
+public class Farseek extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Plains, Island, Swamp, or Mountain card");
 

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class InfernoTitan extends CardImpl<InfernoTitan> {
+public class InfernoTitan extends CardImpl {
 
     public InfernoTitan(UUID ownerId) {
         super(ownerId, 146, "Inferno Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

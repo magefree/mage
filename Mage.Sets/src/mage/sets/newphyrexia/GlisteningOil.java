@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class GlisteningOil extends CardImpl<GlisteningOil> {
+public class GlisteningOil extends CardImpl {
 
     public GlisteningOil(UUID ownerId) {
         super(ownerId, 62, "Glistening Oil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");

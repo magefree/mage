@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class HissingIguanar extends CardImpl<HissingIguanar> {
+public class HissingIguanar extends CardImpl {
 
     public HissingIguanar(UUID ownerId) {
         super(ownerId, 104, "Hissing Iguanar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

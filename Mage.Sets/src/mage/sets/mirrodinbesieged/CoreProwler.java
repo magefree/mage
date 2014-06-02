@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CoreProwler extends CardImpl<CoreProwler> {
+public class CoreProwler extends CardImpl {
 
     public CoreProwler (UUID ownerId) {
         super(ownerId, 103, "Core Prowler", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jonubuu
  */
-public class ChordOfCalling extends CardImpl<ChordOfCalling> {
+public class ChordOfCalling extends CardImpl {
 
     public ChordOfCalling(UUID ownerId) {
         super(ownerId, 156, "Chord of Calling", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}{G}");

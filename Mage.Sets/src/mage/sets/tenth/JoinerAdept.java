@@ -44,7 +44,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author Loki
  */
-public class JoinerAdept extends CardImpl<JoinerAdept> {
+public class JoinerAdept extends CardImpl {
 
     public JoinerAdept(UUID ownerId) {
         super(ownerId, 271, "Joiner Adept", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

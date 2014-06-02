@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class GangOfElk extends CardImpl<GangOfElk> {
+public class GangOfElk extends CardImpl {
 
     public GangOfElk(UUID ownerId) {
         super(ownerId, 102, "Gang of Elk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");

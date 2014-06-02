@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BorderPatrol extends CardImpl<BorderPatrol> {
+public class BorderPatrol extends CardImpl {
 
     public BorderPatrol(UUID ownerId) {
         super(ownerId, 6, "Border Patrol", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

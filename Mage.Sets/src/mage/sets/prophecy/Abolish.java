@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Backfir3
  */
-public class Abolish extends CardImpl<Abolish> {
+public class Abolish extends CardImpl {
 
     private static final FilterCard filterCost = new FilterCard("Plains card");
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");

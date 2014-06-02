@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class Blastoderm extends CardImpl<Blastoderm> {
+public class Blastoderm extends CardImpl {
 
     public Blastoderm(UUID ownerId) {
         super(ownerId, 102, "Blastoderm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

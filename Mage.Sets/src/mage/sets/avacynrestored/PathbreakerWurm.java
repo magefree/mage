@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class PathbreakerWurm extends CardImpl<PathbreakerWurm> {
+public class PathbreakerWurm extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, both creatures have trample";
 

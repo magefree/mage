@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class BurningSands extends CardImpl<BurningSands> {
+public class BurningSands extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a land");
 

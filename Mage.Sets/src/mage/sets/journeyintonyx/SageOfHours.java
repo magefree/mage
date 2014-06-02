@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class SageOfHours extends CardImpl<SageOfHours> {
+public class SageOfHours extends CardImpl {
 
     public SageOfHours(UUID ownerId) {
         super(ownerId, 50, "Sage of Hours", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class KathariRemnant extends CardImpl<KathariRemnant> {
+public class KathariRemnant extends CardImpl {
 
     public KathariRemnant (UUID ownerId) {
         super(ownerId, 23, "Kathari Remnant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");

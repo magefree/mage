@@ -42,7 +42,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class WildCelebrants extends CardImpl<WildCelebrants> {
+public class WildCelebrants extends CardImpl {
 
     public WildCelebrants(UUID ownerId) {
         super(ownerId, 147, "Wild Celebrants", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

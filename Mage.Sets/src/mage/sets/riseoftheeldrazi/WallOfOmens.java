@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WallOfOmens extends CardImpl<WallOfOmens> {
+public class WallOfOmens extends CardImpl {
 
     public WallOfOmens(UUID ownerId) {
         super(ownerId, 53, "Wall of Omens", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

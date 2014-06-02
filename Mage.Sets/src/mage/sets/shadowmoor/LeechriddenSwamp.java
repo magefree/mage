@@ -54,7 +54,7 @@ import mage.players.Players;
  *
  * @author jeffwadsworth
  */
-public class LeechriddenSwamp extends CardImpl<LeechriddenSwamp> {
+public class LeechriddenSwamp extends CardImpl {
 
     public LeechriddenSwamp(UUID ownerId) {
         super(ownerId, 273, "Leechridden Swamp", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

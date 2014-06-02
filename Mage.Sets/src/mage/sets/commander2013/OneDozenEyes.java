@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class OneDozenEyes extends CardImpl<OneDozenEyes> {
+public class OneDozenEyes extends CardImpl {
 
     public OneDozenEyes(UUID ownerId) {
         super(ownerId, 159, "One Dozen Eyes", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{G}");

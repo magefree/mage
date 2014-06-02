@@ -42,7 +42,7 @@ import mage.game.permanent.token.BeastToken;
  *
  * @author Plopman
  */
-public class SavageConception extends CardImpl<SavageConception> {
+public class SavageConception extends CardImpl {
 
     public SavageConception(UUID ownerId) {
         super(ownerId, 75, "Savage Conception", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");

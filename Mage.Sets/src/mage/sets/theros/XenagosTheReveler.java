@@ -63,7 +63,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class XenagosTheReveler extends CardImpl<XenagosTheReveler> {
+public class XenagosTheReveler extends CardImpl {
 
     public XenagosTheReveler(UUID ownerId) {
         super(ownerId, 209, "Xenagos, the Reveler", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");

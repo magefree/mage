@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class ShoalSerpent extends CardImpl<ShoalSerpent> {
+public class ShoalSerpent extends CardImpl {
     
     public ShoalSerpent(UUID ownerId) {
         super(ownerId, 65, "Shoal Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");

@@ -61,7 +61,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class GlaringSpotlight extends CardImpl<GlaringSpotlight> {
+public class GlaringSpotlight extends CardImpl {
 
     public GlaringSpotlight(UUID ownerId) {
         super(ownerId, 229, "Glaring Spotlight", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

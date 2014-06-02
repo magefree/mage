@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author KholdFuzion
  */
-public class PsychoticFury extends CardImpl<PsychoticFury> {
+public class PsychoticFury extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("multicolored creature");
 

@@ -54,7 +54,7 @@ import mage.watchers.common.CastFromHandWatcher;
 /**
  * @author LevelX
  */
-public class MyojinOfSeeingWinds extends CardImpl<MyojinOfSeeingWinds> {
+public class MyojinOfSeeingWinds extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent you control");
     static {

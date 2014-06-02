@@ -49,7 +49,7 @@ import mage.game.Game;
  * @author jeffwadsworth
 
  */
-public class HeartlashCinder extends CardImpl<HeartlashCinder> {
+public class HeartlashCinder extends CardImpl {
 
     public HeartlashCinder(UUID ownerId) {
         super(ownerId, 56, "Heartlash Cinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

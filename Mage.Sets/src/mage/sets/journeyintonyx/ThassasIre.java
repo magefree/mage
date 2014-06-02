@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ThassasIre extends CardImpl<ThassasIre> {
+public class ThassasIre extends CardImpl {
 
     public ThassasIre(UUID ownerId) {
         super(ownerId, 54, "Thassa's Ire", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

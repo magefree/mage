@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TenementCrasher extends CardImpl<TenementCrasher> {
+public class TenementCrasher extends CardImpl {
 
     public TenementCrasher(UUID ownerId) {
         super(ownerId, 108, "Tenement Crasher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");

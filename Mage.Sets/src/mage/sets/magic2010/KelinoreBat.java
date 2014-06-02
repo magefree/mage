@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class KelinoreBat extends CardImpl<KelinoreBat> {
+public class KelinoreBat extends CardImpl {
 
     public KelinoreBat(UUID ownerId) {
         super(ownerId, 101, "Kelinore Bat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Plopman
  */
-public class RagebloodShaman extends CardImpl<RagebloodShaman> {
+public class RagebloodShaman extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Minotaur", "Minotaur creatures");
     static {

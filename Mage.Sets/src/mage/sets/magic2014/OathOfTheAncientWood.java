@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OathOfTheAncientWood extends CardImpl<OathOfTheAncientWood> {
+public class OathOfTheAncientWood extends CardImpl {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Oath of the Ancient Wood or another enchantment");
     static {

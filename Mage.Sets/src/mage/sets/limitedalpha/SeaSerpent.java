@@ -48,7 +48,7 @@ import mage.game.events.GameEvent;
  * @author KholdFuzion
 
  */
-public class SeaSerpent extends CardImpl<SeaSerpent> {
+public class SeaSerpent extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("an Island");
 

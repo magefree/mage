@@ -56,7 +56,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class EmrakulTheAeonsTorn extends CardImpl<EmrakulTheAeonsTorn> {
+public class EmrakulTheAeonsTorn extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("colored spells");
 

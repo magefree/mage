@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MitoticSlime extends CardImpl<MitoticSlime> {
+public class MitoticSlime extends CardImpl {
 
     public MitoticSlime(UUID ownerId) {
         super(ownerId, 185, "Mitotic Slime", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");

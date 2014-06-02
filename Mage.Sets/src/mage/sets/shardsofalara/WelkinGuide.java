@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class WelkinGuide extends CardImpl<WelkinGuide> {
+public class WelkinGuide extends CardImpl {
 
     public WelkinGuide(UUID ownerId) {
         super(ownerId, 30, "Welkin Guide", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

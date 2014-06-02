@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MammothUmbra extends CardImpl<MammothUmbra> {
+public class MammothUmbra extends CardImpl {
 
     public MammothUmbra(UUID ownerId) {
         super(ownerId, 37, "Mammoth Umbra", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");

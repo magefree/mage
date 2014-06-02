@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HecklingFiends extends CardImpl<HecklingFiends> {
+public class HecklingFiends extends CardImpl {
 
     public HecklingFiends(UUID ownerId) {
         super(ownerId, 92, "Heckling Fiends", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

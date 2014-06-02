@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class CripplingChill extends CardImpl<CripplingChill> {
+public class CripplingChill extends CardImpl {
 
     public CripplingChill(UUID ownerId) {
         super(ownerId, 46, "Crippling Chill", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

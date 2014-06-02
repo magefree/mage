@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class TrashForTreasure extends CardImpl<TrashForTreasure> {
+public class TrashForTreasure extends CardImpl {
 
     private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("an artifact");
     private static final FilterCard filterCard = new FilterCard("artifact card from your graveyard");

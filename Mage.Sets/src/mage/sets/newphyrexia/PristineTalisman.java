@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PristineTalisman extends CardImpl<PristineTalisman> {
+public class PristineTalisman extends CardImpl {
 
     public PristineTalisman(UUID ownerId) {
         super(ownerId, 151, "Pristine Talisman", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class NaturesPanoply extends CardImpl<NaturesPanoply> {
+public class NaturesPanoply extends CardImpl {
 
     public NaturesPanoply(UUID ownerId) {
         super(ownerId, 131, "Nature's Panoply", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GlissasCourier extends CardImpl<GlissasCourier> {
+public class GlissasCourier extends CardImpl {
 
     public GlissasCourier (UUID ownerId) {
         super(ownerId, 80, "Glissa's Courier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

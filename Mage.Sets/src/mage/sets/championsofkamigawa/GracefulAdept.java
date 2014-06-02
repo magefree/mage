@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author nantuko
  */
-public class GracefulAdept extends CardImpl<GracefulAdept> {
+public class GracefulAdept extends CardImpl {
 
     public GracefulAdept(UUID ownerId) {
         super(ownerId, 63, "Graceful Adept", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

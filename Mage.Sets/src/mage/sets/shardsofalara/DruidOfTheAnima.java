@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DruidOfTheAnima extends CardImpl<DruidOfTheAnima> {
+public class DruidOfTheAnima extends CardImpl {
 
     public DruidOfTheAnima (UUID ownerId) {
         super(ownerId, 128, "Druid of the Anima", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

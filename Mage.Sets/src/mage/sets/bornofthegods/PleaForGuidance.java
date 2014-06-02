@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class PleaForGuidance extends CardImpl<PleaForGuidance> {
+public class PleaForGuidance extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantment cards");
     static {

@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SpinalEmbrace extends CardImpl<SpinalEmbrace> {
+public class SpinalEmbrace extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
     static {

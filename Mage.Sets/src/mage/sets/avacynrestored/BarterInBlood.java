@@ -39,7 +39,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author North
  */
-public class BarterInBlood extends CardImpl<BarterInBlood> {
+public class BarterInBlood extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature");
     

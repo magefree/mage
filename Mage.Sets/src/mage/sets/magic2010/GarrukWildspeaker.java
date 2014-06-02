@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GarrukWildspeaker extends CardImpl<GarrukWildspeaker> {
+public class GarrukWildspeaker extends CardImpl {
 
     private static BeastToken beastToken = new BeastToken();
 

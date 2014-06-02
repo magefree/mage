@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class AccursedSpirit extends CardImpl<AccursedSpirit> {
+public class AccursedSpirit extends CardImpl {
 
     public AccursedSpirit(UUID ownerId) {
         super(ownerId, 83, "Accursed Spirit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LevelX2
  */
-public class AjaniMentorOfHeroes extends CardImpl<AjaniMentorOfHeroes> {
+public class AjaniMentorOfHeroes extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
     private static final FilterCreatureCard filterCard = new FilterCreatureCard("an Aura, creature, or planeswalker card");

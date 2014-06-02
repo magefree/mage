@@ -43,7 +43,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class AEthersnipe extends CardImpl<AEthersnipe> {
+public class AEthersnipe extends CardImpl {
 
     public AEthersnipe(UUID ownerId) {
         super(ownerId, 39, "AEthersnipe", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");

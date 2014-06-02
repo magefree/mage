@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class BloodArtist extends CardImpl<BloodArtist> {
+public class BloodArtist extends CardImpl {
 
     public BloodArtist(UUID ownerId) {
         super(ownerId, 86, "Blood Artist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

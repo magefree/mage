@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class HellraiserGoblin extends CardImpl<HellraiserGoblin> {
+public class HellraiserGoblin extends CardImpl {
 
     public HellraiserGoblin(UUID ownerId) {
         super(ownerId, 95, "Hellraiser Goblin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class Trinisphere extends CardImpl<Trinisphere> {
+public class Trinisphere extends CardImpl {
 
     public Trinisphere(UUID ownerId) {
         super(ownerId, 154, "Trinisphere", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

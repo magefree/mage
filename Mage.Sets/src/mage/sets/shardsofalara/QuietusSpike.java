@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class QuietusSpike extends CardImpl<QuietusSpike> {
+public class QuietusSpike extends CardImpl {
 
     public QuietusSpike(UUID ownerId) {
         super(ownerId, 217, "Quietus Spike", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

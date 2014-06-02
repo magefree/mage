@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Loki
  */
-public class PrimordialSage extends CardImpl<PrimordialSage> {
+public class PrimordialSage extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a creature spell");
 

@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class DoubleNegative extends CardImpl<DoubleNegative> {
+public class DoubleNegative extends CardImpl {
 
     public DoubleNegative(UUID ownerId) {
         super(ownerId, 87, "Double Negative", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}{R}");

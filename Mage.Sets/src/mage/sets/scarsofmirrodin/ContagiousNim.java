@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ContagiousNim extends CardImpl<ContagiousNim> {
+public class ContagiousNim extends CardImpl {
 
     public ContagiousNim (UUID ownerId) {
         super(ownerId, 58, "Contagious Nim", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

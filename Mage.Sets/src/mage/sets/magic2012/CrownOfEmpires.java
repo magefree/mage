@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class CrownOfEmpires extends CardImpl<CrownOfEmpires> {
+public class CrownOfEmpires extends CardImpl {
 
     public CrownOfEmpires(UUID ownerId) {
         super(ownerId, 203, "Crown of Empires", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

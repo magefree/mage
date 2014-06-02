@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class Soulscour extends CardImpl<Soulscour> {
+public class Soulscour extends CardImpl {
 
     public Soulscour (UUID ownerId) {
         super(ownerId, 14, "Soulscour", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{W}{W}{W}");

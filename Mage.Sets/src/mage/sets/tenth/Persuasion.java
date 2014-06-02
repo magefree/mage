@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class Persuasion extends CardImpl<Persuasion> {
+public class Persuasion extends CardImpl {
 
     public Persuasion(UUID ownerId) {
         super(ownerId, 95, "Persuasion", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");

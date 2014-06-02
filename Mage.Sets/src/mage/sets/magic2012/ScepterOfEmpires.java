@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class ScepterOfEmpires extends CardImpl<ScepterOfEmpires> {
+public class ScepterOfEmpires extends CardImpl {
 
     public ScepterOfEmpires(UUID ownerId) {
         super(ownerId, 216, "Scepter of Empires", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

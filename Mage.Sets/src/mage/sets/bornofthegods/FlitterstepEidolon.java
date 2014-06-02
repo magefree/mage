@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class FlitterstepEidolon extends CardImpl<FlitterstepEidolon> {
+public class FlitterstepEidolon extends CardImpl {
 
     public FlitterstepEidolon(UUID ownerId) {
         super(ownerId, 40, "Flitterstep Eidolon", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{U}");

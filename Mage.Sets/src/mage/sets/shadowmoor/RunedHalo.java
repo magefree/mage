@@ -63,7 +63,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class RunedHalo extends CardImpl<RunedHalo> {
+public class RunedHalo extends CardImpl {
 
     public RunedHalo(UUID ownerId) {
         super(ownerId, 21, "Runed Halo", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class AccorderPaladin extends CardImpl<AccorderPaladin> {
+public class AccorderPaladin extends CardImpl {
 
     public AccorderPaladin (UUID ownerId) {
         super(ownerId, 1, "Accorder Paladin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

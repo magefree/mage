@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class RenegadeTroops extends CardImpl<RenegadeTroops> {
+public class RenegadeTroops extends CardImpl {
 
     public RenegadeTroops(UUID ownerId) {
         super(ownerId, 120, "Renegade Troops", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

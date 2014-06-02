@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class KorDuelist extends CardImpl<KorDuelist> {
+public class KorDuelist extends CardImpl {
 
     private static final String ruleText = "As long as Kor Duelist is equipped, it has double strike";
 

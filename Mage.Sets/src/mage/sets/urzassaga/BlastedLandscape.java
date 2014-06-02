@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class BlastedLandscape extends CardImpl<BlastedLandscape> {
+public class BlastedLandscape extends CardImpl {
 
     public BlastedLandscape(UUID ownerId) {
         super(ownerId, 319, "Blasted Landscape", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

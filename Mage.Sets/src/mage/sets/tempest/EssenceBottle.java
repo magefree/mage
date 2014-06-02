@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class EssenceBottle extends CardImpl<EssenceBottle> {
+public class EssenceBottle extends CardImpl {
 
     public EssenceBottle(UUID ownerId) {
         super(ownerId, 276, "Essence Bottle", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

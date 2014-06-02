@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ManaLeak extends CardImpl<ManaLeak> {
+public class ManaLeak extends CardImpl {
 
     public ManaLeak(UUID ownerId) {
         super(ownerId, 62, "Mana Leak", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

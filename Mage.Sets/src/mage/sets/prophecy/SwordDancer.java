@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author Plopman
  */
-public class SwordDancer extends CardImpl<SwordDancer> {
+public class SwordDancer extends CardImpl {
 
     public SwordDancer(UUID ownerId) {
         super(ownerId, 25, "Sword Dancer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

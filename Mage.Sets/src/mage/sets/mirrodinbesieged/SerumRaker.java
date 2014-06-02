@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SerumRaker extends CardImpl<SerumRaker> {
+public class SerumRaker extends CardImpl {
 
     public SerumRaker (UUID ownerId) {
         super(ownerId, 31, "Serum Raker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

@@ -41,7 +41,7 @@ import mage.filter.predicate.other.FaceDownPredicate;
  *
  * @author North
  */
-public class DreamChisel extends CardImpl<DreamChisel> {
+public class DreamChisel extends CardImpl {
 
     private static final FilterCreatureSpell filter = new FilterCreatureSpell("Face-down creature spells");
 

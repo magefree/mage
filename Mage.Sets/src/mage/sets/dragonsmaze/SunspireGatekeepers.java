@@ -47,7 +47,7 @@ import mage.game.permanent.token.KnightToken;
  */
 
 
-public class SunspireGatekeepers extends CardImpl<SunspireGatekeepers> {
+public class SunspireGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     static {

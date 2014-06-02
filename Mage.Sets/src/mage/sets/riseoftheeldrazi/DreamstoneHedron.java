@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DreamstoneHedron extends CardImpl<DreamstoneHedron> {
+public class DreamstoneHedron extends CardImpl {
 
     public DreamstoneHedron(UUID ownerId) {
         super(ownerId, 216, "Dreamstone Hedron", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{6}");

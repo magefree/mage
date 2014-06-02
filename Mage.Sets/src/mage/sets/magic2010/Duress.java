@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Duress extends CardImpl<Duress> {
+public class Duress extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a noncreature, nonland card");
     static {

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class OonasGatewarden extends CardImpl<OonasGatewarden> {
+public class OonasGatewarden extends CardImpl {
 
     public OonasGatewarden(UUID ownerId) {
         super(ownerId, 173, "Oona's Gatewarden", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U/B}");

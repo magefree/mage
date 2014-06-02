@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class Duskworker extends CardImpl<Duskworker> {
+public class Duskworker extends CardImpl {
 
     public Duskworker(UUID ownerId) {
         super(ownerId, 166, "Duskworker", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

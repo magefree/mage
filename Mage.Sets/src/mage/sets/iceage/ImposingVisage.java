@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ImposingVisage extends CardImpl<ImposingVisage> {
+public class ImposingVisage extends CardImpl {
 
     public ImposingVisage(UUID ownerId) {
         super(ownerId, 193, "Imposing Visage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

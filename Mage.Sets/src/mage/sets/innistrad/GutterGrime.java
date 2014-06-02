@@ -56,7 +56,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward
  */
-public class GutterGrime extends CardImpl<GutterGrime> {
+public class GutterGrime extends CardImpl {
 
     public GutterGrime(UUID ownerId) {
         super(ownerId, 186, "Gutter Grime", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");

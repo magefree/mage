@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class TreasureHunt extends CardImpl<TreasureHunt> {
+public class TreasureHunt extends CardImpl {
 
     public TreasureHunt(UUID ownerId) {
         super(ownerId, 42, "Treasure Hunt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");

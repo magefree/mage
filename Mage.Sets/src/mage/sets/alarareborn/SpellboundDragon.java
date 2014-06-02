@@ -49,7 +49,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author jeffwadsworth
  */
-public class SpellboundDragon extends CardImpl<SpellboundDragon> {
+public class SpellboundDragon extends CardImpl {
 
     public SpellboundDragon(UUID ownerId) {
         super(ownerId, 90, "Spellbound Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");

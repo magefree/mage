@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class Mortarpod extends CardImpl<Mortarpod> {
+public class Mortarpod extends CardImpl {
 
     public Mortarpod(UUID ownerId) {
         super(ownerId, 115, "Mortarpod", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

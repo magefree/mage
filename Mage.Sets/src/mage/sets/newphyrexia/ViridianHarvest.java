@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Loki
  */
-public class ViridianHarvest extends CardImpl<ViridianHarvest> {
+public class ViridianHarvest extends CardImpl {
 
     public ViridianHarvest(UUID ownerId) {
         super(ownerId, 125, "Viridian Harvest", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

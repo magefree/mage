@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Loki
  */
-public class MasterOfEtherium extends CardImpl<MasterOfEtherium> {
+public class MasterOfEtherium extends CardImpl {
 
     private static final FilterControlledPermanent filterCounted = new FilterControlledPermanent("artifacts you control");
     private static final FilterCreaturePermanent filterBoosted = new FilterCreaturePermanent("artifact creatures");

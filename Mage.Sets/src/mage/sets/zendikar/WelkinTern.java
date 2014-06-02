@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class WelkinTern extends CardImpl<WelkinTern> {
+public class WelkinTern extends CardImpl {
 
     public WelkinTern (UUID ownerId) {
         super(ownerId, 76, "Welkin Tern", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -46,7 +46,7 @@ import mage.target.TargetStackObject;
  *
  * @author jeffwadsworth
  */
-public class WildRicochet extends CardImpl<WildRicochet> {
+public class WildRicochet extends CardImpl {
 
     private static final FilterStackObject filter = new FilterStackObject("instant or sorcery spell");
 

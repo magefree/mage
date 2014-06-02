@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class TheUnspeakable extends CardImpl<TheUnspeakable> {
+public class TheUnspeakable extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Arcane card from your graveyard");
 

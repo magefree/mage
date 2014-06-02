@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class AstralSlide extends CardImpl<AstralSlide> {
+public class AstralSlide extends CardImpl {
 
     public AstralSlide(UUID ownerId) {
         super(ownerId, 4, "Astral Slide", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

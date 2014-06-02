@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ManOWar extends CardImpl<ManOWar> {
+public class ManOWar extends CardImpl {
 
     public ManOWar(UUID ownerId) {
         super(ownerId, 37, "Man-o'-War", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -41,7 +41,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author North
  */
-public class FangrenMarauder extends CardImpl<FangrenMarauder> {
+public class FangrenMarauder extends CardImpl {
 
     public FangrenMarauder(UUID ownerId) {
         super(ownerId, 79, "Fangren Marauder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");

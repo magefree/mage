@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jeffwadsworth
  */
-public class HarborBandit extends CardImpl<HarborBandit> {
+public class HarborBandit extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("island");
     private static final String rule = "{this} gets +1/+1 as long as you control an Island";

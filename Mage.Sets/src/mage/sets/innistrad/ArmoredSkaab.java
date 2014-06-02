@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class ArmoredSkaab extends CardImpl<ArmoredSkaab> {
+public class ArmoredSkaab extends CardImpl {
 
     public ArmoredSkaab(UUID ownerId) {
         super(ownerId, 43, "Armored Skaab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

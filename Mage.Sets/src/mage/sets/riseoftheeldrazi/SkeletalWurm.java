@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SkeletalWurm extends CardImpl<SkeletalWurm> {
+public class SkeletalWurm extends CardImpl {
 
     public SkeletalWurm(UUID ownerId) {
         super(ownerId, 127, "Skeletal Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{7}{B}");

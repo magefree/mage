@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevleX2
  */
-public class DruidsDeliverance extends CardImpl<DruidsDeliverance> {
+public class DruidsDeliverance extends CardImpl {
 
     public DruidsDeliverance(UUID ownerId) {
         super(ownerId, 123, "Druid's Deliverance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

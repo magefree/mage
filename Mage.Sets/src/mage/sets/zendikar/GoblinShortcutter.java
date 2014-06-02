@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class GoblinShortcutter extends CardImpl<GoblinShortcutter> {
+public class GoblinShortcutter extends CardImpl {
 
     public GoblinShortcutter(UUID ownerId) {
         super(ownerId, 128, "Goblin Shortcutter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

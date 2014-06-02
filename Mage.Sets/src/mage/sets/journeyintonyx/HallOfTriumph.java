@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HallOfTriumph extends CardImpl<HallOfTriumph> {
+public class HallOfTriumph extends CardImpl {
 
     public HallOfTriumph(UUID ownerId) {
         super(ownerId, 162, "Hall of Triumph", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

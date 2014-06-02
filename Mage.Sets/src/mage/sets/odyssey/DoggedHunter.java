@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author noxx (Harvester of Souls), cbt33
  */
-public class DoggedHunter extends CardImpl<DoggedHunter> {
+public class DoggedHunter extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature token");
     static {

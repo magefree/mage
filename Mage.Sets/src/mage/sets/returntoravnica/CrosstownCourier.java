@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class CrosstownCourier extends CardImpl<CrosstownCourier> {
+public class CrosstownCourier extends CardImpl {
 
     public CrosstownCourier(UUID ownerId) {
         super(ownerId, 34, "Crosstown Courier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

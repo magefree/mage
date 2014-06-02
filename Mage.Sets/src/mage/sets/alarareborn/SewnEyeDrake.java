@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SewnEyeDrake extends CardImpl<SewnEyeDrake> {
+public class SewnEyeDrake extends CardImpl {
 
     public SewnEyeDrake (UUID ownerId) {
         super(ownerId, 135, "Sewn-Eye Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U/R}{B}");

@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author BetaSteward_at_googlemail.com, North
  */
-public class EverflowingChalice extends CardImpl<EverflowingChalice> {
+public class EverflowingChalice extends CardImpl {
 
     protected static final String rule = "Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.";
 

@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class Tarmogoyf extends CardImpl<Tarmogoyf> {
+public class Tarmogoyf extends CardImpl {
 
     public Tarmogoyf(UUID ownerId) {
         super(ownerId, 153, "Tarmogoyf", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

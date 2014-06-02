@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author jeffwadsworth
  *
  */
-public class PutAway extends CardImpl<PutAway> {
+public class PutAway extends CardImpl {
 
     public PutAway(UUID ownerId) {
         super(ownerId, 48, "Put Away", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

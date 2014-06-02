@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class Peregrination extends CardImpl<Peregrination> {
+public class Peregrination extends CardImpl {
 
     public Peregrination(UUID ownerId) {
         super(ownerId, 132, "Peregrination", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MetallicSliver extends CardImpl<MetallicSliver> {
+public class MetallicSliver extends CardImpl {
 
     public MetallicSliver(UUID ownerId) {
         super(ownerId, 287, "Metallic Sliver", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

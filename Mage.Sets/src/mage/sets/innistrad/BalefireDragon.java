@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class BalefireDragon extends CardImpl<BalefireDragon> {
+public class BalefireDragon extends CardImpl {
 
     public BalefireDragon(UUID ownerId) {
         super(ownerId, 129, "Balefire Dragon", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

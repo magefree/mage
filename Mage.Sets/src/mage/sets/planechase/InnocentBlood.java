@@ -38,7 +38,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author jonubuu
  */
-public class InnocentBlood extends CardImpl<InnocentBlood> {
+public class InnocentBlood extends CardImpl {
     
 
     public InnocentBlood(UUID ownerId) {

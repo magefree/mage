@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SaltMarsh extends CardImpl<SaltMarsh> {
+public class SaltMarsh extends CardImpl {
 
     public SaltMarsh(UUID ownerId) {
         super(ownerId, 326, "Salt Marsh", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

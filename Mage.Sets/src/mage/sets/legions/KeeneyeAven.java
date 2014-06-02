@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KeeneyeAven extends CardImpl<KeeneyeAven> {
+public class KeeneyeAven extends CardImpl {
 
     public KeeneyeAven(UUID ownerId) {
         super(ownerId, 41, "Keeneye Aven", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

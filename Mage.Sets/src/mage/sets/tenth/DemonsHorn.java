@@ -44,7 +44,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DemonsHorn extends CardImpl<DemonsHorn> {
+public class DemonsHorn extends CardImpl {
 
     public DemonsHorn(UUID ownerId) {
         super(ownerId, 320, "Demon's Horn", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class NayaCharm extends CardImpl<NayaCharm> {
+public class NayaCharm extends CardImpl {
 
     public NayaCharm(UUID ownerId) {
         super(ownerId, 180, "Naya Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{G}{W}");

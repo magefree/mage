@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class BoonSatyr extends CardImpl<BoonSatyr> {
+public class BoonSatyr extends CardImpl {
 
     public BoonSatyr(UUID ownerId) {
         super(ownerId, 152, "Boon Satyr", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{G}{G}");

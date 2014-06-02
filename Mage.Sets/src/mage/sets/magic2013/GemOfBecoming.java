@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class GemOfBecoming extends CardImpl<GemOfBecoming> {
+public class GemOfBecoming extends CardImpl {
 
     public GemOfBecoming(UUID ownerId) {
         super(ownerId, 205, "Gem of Becoming", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

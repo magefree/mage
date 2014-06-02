@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MarkovPatrician extends CardImpl<MarkovPatrician> {
+public class MarkovPatrician extends CardImpl {
 
     public MarkovPatrician(UUID ownerId) {
         super(ownerId, 107, "Markov Patrician", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

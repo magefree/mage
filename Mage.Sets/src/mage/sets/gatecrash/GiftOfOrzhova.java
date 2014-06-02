@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GiftOfOrzhova extends CardImpl<GiftOfOrzhova> {
+public class GiftOfOrzhova extends CardImpl {
 
     public GiftOfOrzhova(UUID ownerId) {
         super(ownerId, 219, "Gift of Orzhova", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W/B}{W/B}");

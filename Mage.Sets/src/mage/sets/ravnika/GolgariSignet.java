@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class GolgariSignet extends CardImpl<GolgariSignet> {
+public class GolgariSignet extends CardImpl {
 
     public GolgariSignet (UUID ownerId) {
         super(ownerId, 262, "Golgari Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

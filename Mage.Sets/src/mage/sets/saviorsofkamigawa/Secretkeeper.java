@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class Secretkeeper extends CardImpl<Secretkeeper> {
+public class Secretkeeper extends CardImpl {
 
     public Secretkeeper(UUID ownerId) {
         super(ownerId, 54, "Secretkeeper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

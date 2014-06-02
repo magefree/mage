@@ -43,7 +43,7 @@ import mage.filter.FilterPermanent;
  *
  * @author Loki
  */
-public class PrivilegedPosition extends CardImpl<PrivilegedPosition> {
+public class PrivilegedPosition extends CardImpl {
 
     public PrivilegedPosition(UUID ownerId) {
         super(ownerId, 251, "Privileged Position", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G/W}{G/W}{G/W}");

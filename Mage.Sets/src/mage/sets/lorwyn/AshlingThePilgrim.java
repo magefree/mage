@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AshlingThePilgrim extends CardImpl<AshlingThePilgrim> {
+public class AshlingThePilgrim extends CardImpl {
 
     public AshlingThePilgrim(UUID ownerId) {
         super(ownerId, 149, "Ashling the Pilgrim", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");

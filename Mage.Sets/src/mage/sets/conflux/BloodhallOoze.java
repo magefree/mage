@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author loki
  */
-public class BloodhallOoze extends CardImpl<BloodhallOoze> {
+public class BloodhallOoze extends CardImpl {
 
     public BloodhallOoze(UUID ownerId) {
         super(ownerId, 59, "Bloodhall Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");

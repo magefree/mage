@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class HorseshoeCrab extends CardImpl<HorseshoeCrab> {
+public class HorseshoeCrab extends CardImpl {
 
     public HorseshoeCrab(UUID ownerId) {
         super(ownerId, 87, "Horseshoe Crab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

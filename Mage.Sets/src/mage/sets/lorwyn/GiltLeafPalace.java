@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class GiltLeafPalace extends CardImpl<GiltLeafPalace> {
+public class GiltLeafPalace extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Elf from your hand");
     static {

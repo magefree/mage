@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author LevelX
  */
-public class AncientStirrings extends CardImpl<AncientStirrings> {
+public class AncientStirrings extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a colorless card");
 

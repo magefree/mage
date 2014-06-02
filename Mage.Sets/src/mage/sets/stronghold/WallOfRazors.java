@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WallOfRazors extends CardImpl<WallOfRazors> {
+public class WallOfRazors extends CardImpl {
 
     public WallOfRazors(UUID ownerId) {
         super(ownerId, 100, "Wall of Razors", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

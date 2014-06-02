@@ -60,7 +60,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class ConvincingMirage extends CardImpl<ConvincingMirage> {
+public class ConvincingMirage extends CardImpl {
 
     public ConvincingMirage(UUID ownerId) {
         super(ownerId, 46, "Convincing Mirage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

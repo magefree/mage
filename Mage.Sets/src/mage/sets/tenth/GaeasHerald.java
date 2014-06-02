@@ -44,7 +44,7 @@ import mage.game.stack.Spell;
  *
  * @author Plopman
  */
-public class GaeasHerald extends CardImpl<GaeasHerald> {
+public class GaeasHerald extends CardImpl {
 
     public GaeasHerald(UUID ownerId) {
         super(ownerId, 265, "Gaea's Herald", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

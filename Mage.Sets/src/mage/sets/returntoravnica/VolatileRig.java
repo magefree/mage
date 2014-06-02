@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class VolatileRig extends CardImpl<VolatileRig> {
+public class VolatileRig extends CardImpl {
 
     public VolatileRig(UUID ownerId) {
         super(ownerId, 236, "Volatile Rig", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

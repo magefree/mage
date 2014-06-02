@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author Loki
  */
-public class AkkiRaider extends CardImpl<AkkiRaider> {
+public class AkkiRaider extends CardImpl {
 
     public AkkiRaider(UUID ownerId) {
         super(ownerId, 92, "Akki Raider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

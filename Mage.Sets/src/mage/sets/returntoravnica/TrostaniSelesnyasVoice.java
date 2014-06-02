@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class TrostaniSelesnyasVoice extends CardImpl<TrostaniSelesnyasVoice> {
+public class TrostaniSelesnyasVoice extends CardImpl {
 
     public TrostaniSelesnyasVoice(UUID ownerId) {
         super(ownerId, 206, "Trostani, Selesnya's Voice", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}{G}{W}{W}");

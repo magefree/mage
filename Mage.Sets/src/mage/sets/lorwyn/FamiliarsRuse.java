@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class FamiliarsRuse extends CardImpl<FamiliarsRuse> {
+public class FamiliarsRuse extends CardImpl {
 
     public FamiliarsRuse(UUID ownerId) {
         super(ownerId, 64, "Familiar's Ruse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ThunderscapeApprentice extends CardImpl<ThunderscapeApprentice> {
+public class ThunderscapeApprentice extends CardImpl {
 
     public ThunderscapeApprentice(UUID ownerId) {
         super(ownerId, 174, "Thunderscape Apprentice", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class MysticalTutor extends CardImpl<MysticalTutor> {
+public class MysticalTutor extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card");
     static{

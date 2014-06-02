@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class QuietDisrepair extends CardImpl<QuietDisrepair> {
+public class QuietDisrepair extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     static {

@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SlateOfAncestry extends CardImpl<SlateOfAncestry> {
+public class SlateOfAncestry extends CardImpl {
 
     public SlateOfAncestry(UUID ownerId) {
         super(ownerId, 310, "Slate of Ancestry", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

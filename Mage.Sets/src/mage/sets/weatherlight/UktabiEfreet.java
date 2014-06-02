@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class UktabiEfreet extends CardImpl<UktabiEfreet> {
+public class UktabiEfreet extends CardImpl {
 
     public UktabiEfreet(UUID ownerId) {
         super(ownerId, 85, "Uktabi Efreet", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

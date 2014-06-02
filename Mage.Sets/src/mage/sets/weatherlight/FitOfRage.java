@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class FitOfRage extends CardImpl<FitOfRage> {
+public class FitOfRage extends CardImpl {
 
     public FitOfRage(UUID ownerId) {
         super(ownerId, 102, "Fit of Rage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class TitanOfEternalFire extends CardImpl<TitanOfEternalFire> {
+public class TitanOfEternalFire extends CardImpl {
 
     public TitanOfEternalFire(UUID ownerId) {
         super(ownerId, 144, "Titan of Eternal Fire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");

@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class ClingingMists extends CardImpl<ClingingMists> {
+public class ClingingMists extends CardImpl {
 
     public ClingingMists(UUID ownerId) {
         super(ownerId, 109, "Clinging Mists", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class DemonicAppetite extends CardImpl<DemonicAppetite> {
+public class DemonicAppetite extends CardImpl {
 
    public DemonicAppetite (UUID ownerId) {
         super(ownerId, 106, "Demonic Appetite", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

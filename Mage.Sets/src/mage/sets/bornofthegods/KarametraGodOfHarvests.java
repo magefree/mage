@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class KarametraGodOfHarvests extends CardImpl<KarametraGodOfHarvests> {
+public class KarametraGodOfHarvests extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Forest or Plains card");
     static {

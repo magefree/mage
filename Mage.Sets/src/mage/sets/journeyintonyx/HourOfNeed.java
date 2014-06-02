@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HourOfNeed extends CardImpl<HourOfNeed> {
+public class HourOfNeed extends CardImpl {
 
     public HourOfNeed(UUID ownerId) {
         super(ownerId, 40, "Hour of Need", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

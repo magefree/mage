@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class SphinxSovereign extends CardImpl<SphinxSovereign> {
+public class SphinxSovereign extends CardImpl {
 
     public SphinxSovereign(UUID ownerId) {
         super(ownerId, 196, "Sphinx Sovereign", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}{U}{U}{B}");

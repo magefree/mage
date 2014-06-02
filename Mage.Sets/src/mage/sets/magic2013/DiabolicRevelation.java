@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class DiabolicRevelation extends CardImpl<DiabolicRevelation> {
+public class DiabolicRevelation extends CardImpl {
 
     public DiabolicRevelation(UUID ownerId) {
         super(ownerId, 87, "Diabolic Revelation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{3}{B}{B}");

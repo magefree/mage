@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class FurnaceScamp extends CardImpl<FurnaceScamp> {
+public class FurnaceScamp extends CardImpl {
 
     public FurnaceScamp(UUID ownerId) {
         super(ownerId, 84, "Furnace Scamp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

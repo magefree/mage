@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class GladecoverScout extends CardImpl<GladecoverScout> {
+public class GladecoverScout extends CardImpl {
 
     public GladecoverScout(UUID ownerId) {
         super(ownerId, 178, "Gladecover Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

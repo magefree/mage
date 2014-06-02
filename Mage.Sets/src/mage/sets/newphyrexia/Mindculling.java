@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class Mindculling extends CardImpl<Mindculling> {
+public class Mindculling extends CardImpl {
 
     public Mindculling(UUID ownerId) {
         super(ownerId, 39, "Mindculling", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");

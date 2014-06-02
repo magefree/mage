@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class HordeOfBoggarts extends CardImpl<HordeOfBoggarts> {
+public class HordeOfBoggarts extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("red permanents you control");
 

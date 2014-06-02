@@ -47,7 +47,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class FanaticOfXenagos extends CardImpl<FanaticOfXenagos> {
+public class FanaticOfXenagos extends CardImpl {
 
     public FanaticOfXenagos(UUID ownerId) {
         super(ownerId, 147, "Fanatic of Xenagos", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");

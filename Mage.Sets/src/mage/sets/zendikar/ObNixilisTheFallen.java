@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class ObNixilisTheFallen extends CardImpl<ObNixilisTheFallen> {
+public class ObNixilisTheFallen extends CardImpl {
 
     public ObNixilisTheFallen (UUID ownerId) {
         super(ownerId, 107, "Ob Nixilis, the Fallen", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

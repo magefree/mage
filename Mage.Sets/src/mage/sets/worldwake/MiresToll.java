@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class MiresToll extends CardImpl<MiresToll> {
+public class MiresToll extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("the number of Swamps you control");
 

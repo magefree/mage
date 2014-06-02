@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class UnexpectedlyAbsent extends CardImpl<UnexpectedlyAbsent> {
+public class UnexpectedlyAbsent extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nonland permanent");
     static {

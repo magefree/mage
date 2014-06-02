@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SteppeLynx extends CardImpl<SteppeLynx> {
+public class SteppeLynx extends CardImpl {
 
     public SteppeLynx(UUID ownerId) {
         super(ownerId, 36, "Steppe Lynx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

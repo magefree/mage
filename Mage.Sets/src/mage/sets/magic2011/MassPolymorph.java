@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MassPolymorph extends CardImpl<MassPolymorph> {
+public class MassPolymorph extends CardImpl {
 
     public MassPolymorph(UUID ownerId) {
         super(ownerId, 64, "Mass Polymorph", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");

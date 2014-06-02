@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  * @author cbt33, North (Merfolk Looter)
  *     
  */
-public class CephalidBroker extends CardImpl<CephalidBroker> {
+public class CephalidBroker extends CardImpl {
 
     public CephalidBroker(UUID ownerId) {
         super(ownerId, 71, "Cephalid Broker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author noxx
  */
-public class VanguardsShield extends CardImpl<VanguardsShield> {
+public class VanguardsShield extends CardImpl {
 
     public VanguardsShield(UUID ownerId) {
         super(ownerId, 223, "Vanguard's Shield", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

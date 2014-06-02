@@ -53,7 +53,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class ContagionEngine extends CardImpl<ContagionEngine> {
+public class ContagionEngine extends CardImpl {
 
     public ContagionEngine (UUID ownerId) {
         super(ownerId, 145, "Contagion Engine", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

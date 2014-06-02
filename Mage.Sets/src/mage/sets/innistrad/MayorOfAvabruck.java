@@ -51,7 +51,7 @@ import mage.abilities.condition.InvertCondition;
  *
  * @author North, noxx
  */
-public class MayorOfAvabruck extends CardImpl<MayorOfAvabruck> {
+public class MayorOfAvabruck extends CardImpl {
 
     private static final String ruleText = "Other Human creatures you control get +1/+1";
 

@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author North
  */
-public class RiteOfReplication extends CardImpl<RiteOfReplication> {
+public class RiteOfReplication extends CardImpl {
 
     public RiteOfReplication(UUID ownerId) {
         super(ownerId, 61, "Rite of Replication", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");

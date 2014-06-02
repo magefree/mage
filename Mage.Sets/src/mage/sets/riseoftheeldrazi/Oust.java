@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Oust extends CardImpl<Oust> {
+public class Oust extends CardImpl {
 
     public Oust(UUID ownerId) {
         super(ownerId, 40, "Oust", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{W}");

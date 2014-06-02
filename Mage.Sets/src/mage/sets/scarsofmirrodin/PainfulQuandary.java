@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PainfulQuandary extends CardImpl<PainfulQuandary> {
+public class PainfulQuandary extends CardImpl {
 
     public PainfulQuandary(UUID ownerId) {
         super(ownerId, 73, "Painful Quandary", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

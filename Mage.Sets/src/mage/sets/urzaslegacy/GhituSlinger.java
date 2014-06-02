@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Backfir3
  */
-public class GhituSlinger extends CardImpl<GhituSlinger> {
+public class GhituSlinger extends CardImpl {
 
     public GhituSlinger(UUID ownerId) {
         super(ownerId, 77, "Ghitu Slinger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

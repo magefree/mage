@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class NightTerrors extends CardImpl<NightTerrors> {
+public class NightTerrors extends CardImpl {
 
     public NightTerrors(UUID ownerId) {
         super(ownerId, 111, "Night Terrors", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

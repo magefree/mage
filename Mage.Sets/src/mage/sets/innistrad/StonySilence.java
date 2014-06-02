@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class StonySilence extends CardImpl<StonySilence> {
+public class StonySilence extends CardImpl {
 
     public StonySilence(UUID ownerId) {
         super(ownerId, 36, "Stony Silence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

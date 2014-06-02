@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 /**
  * @author Backfir3
  */
-public class PhyrexianDriver extends CardImpl<PhyrexianDriver> {
+public class PhyrexianDriver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Mercenary creatures");
 

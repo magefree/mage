@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author Backfir3
  */
-public class Rescind extends CardImpl<Rescind> {
+public class Rescind extends CardImpl {
 
     public Rescind(UUID ownerId) {
         super(ownerId, 92, "Rescind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");

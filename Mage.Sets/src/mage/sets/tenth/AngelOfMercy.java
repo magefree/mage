@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class AngelOfMercy extends CardImpl<AngelOfMercy> {
+public class AngelOfMercy extends CardImpl {
 
     public AngelOfMercy(UUID ownerId) {
         super(ownerId, 2, "Angel of Mercy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

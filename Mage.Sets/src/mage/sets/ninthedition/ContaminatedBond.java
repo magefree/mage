@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ContaminatedBond extends CardImpl<ContaminatedBond> {
+public class ContaminatedBond extends CardImpl {
 
     public ContaminatedBond(UUID ownerId) {
         super(ownerId, 120, "Contaminated Bond", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

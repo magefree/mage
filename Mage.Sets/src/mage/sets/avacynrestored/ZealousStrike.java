@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ZealousStrike extends CardImpl<ZealousStrike> {
+public class ZealousStrike extends CardImpl {
 
     public ZealousStrike(UUID ownerId) {
         super(ownerId, 41, "Zealous Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

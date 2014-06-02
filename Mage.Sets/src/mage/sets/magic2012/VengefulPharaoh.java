@@ -51,7 +51,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author North
  */
-public class VengefulPharaoh extends CardImpl<VengefulPharaoh> {
+public class VengefulPharaoh extends CardImpl {
 
     public VengefulPharaoh(UUID ownerId) {
         super(ownerId, 116, "Vengeful Pharaoh", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{B}");

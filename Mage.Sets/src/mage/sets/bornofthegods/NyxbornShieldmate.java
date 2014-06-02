@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class NyxbornShieldmate extends CardImpl<NyxbornShieldmate> {
+public class NyxbornShieldmate extends CardImpl {
 
     public NyxbornShieldmate(UUID ownerId) {
         super(ownerId, 21, "Nyxborn Shieldmate", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{W}");

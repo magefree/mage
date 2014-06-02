@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BurrGrafter extends CardImpl<BurrGrafter> {
+public class BurrGrafter extends CardImpl {
 
     public BurrGrafter(UUID ownerId) {
         super(ownerId, 203, "Burr Grafter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

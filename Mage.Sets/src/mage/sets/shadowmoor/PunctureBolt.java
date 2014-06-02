@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class PunctureBolt extends CardImpl<PunctureBolt> {
+public class PunctureBolt extends CardImpl {
 
     public PunctureBolt(UUID ownerId) {
         super(ownerId, 102, "Puncture Bolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

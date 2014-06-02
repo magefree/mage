@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class LagonnaBandTrailblazer extends CardImpl<LagonnaBandTrailblazer> {
+public class LagonnaBandTrailblazer extends CardImpl {
 
     public LagonnaBandTrailblazer(UUID ownerId) {
         super(ownerId, 14, "Lagonna-Band Trailblazer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

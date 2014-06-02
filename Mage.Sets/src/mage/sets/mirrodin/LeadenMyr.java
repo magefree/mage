@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LeadenMyr extends CardImpl<LeadenMyr> {
+public class LeadenMyr extends CardImpl {
 
     public LeadenMyr (UUID ownerId) {
         super(ownerId, 191, "Leaden Myr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

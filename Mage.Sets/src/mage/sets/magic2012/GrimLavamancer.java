@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class GrimLavamancer extends CardImpl<GrimLavamancer> {
+public class GrimLavamancer extends CardImpl {
 
     public GrimLavamancer(UUID ownerId) {
         super(ownerId, 145, "Grim Lavamancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");

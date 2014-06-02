@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class NorwoodRanger extends CardImpl<NorwoodRanger> {
+public class NorwoodRanger extends CardImpl {
 
     public NorwoodRanger(UUID ownerId) {
         super(ownerId, 260, "Norwood Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

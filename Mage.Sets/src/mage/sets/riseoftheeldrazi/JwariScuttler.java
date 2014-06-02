@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class JwariScuttler extends CardImpl<JwariScuttler> {
+public class JwariScuttler extends CardImpl {
 
     public JwariScuttler (UUID ownerId) {
         super(ownerId, 73, "Jwari Scuttler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

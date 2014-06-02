@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class TrevasRuins extends CardImpl<TrevasRuins> {
+public class TrevasRuins extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("non-Lair land");
     static{

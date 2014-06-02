@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class CloakedSiren extends CardImpl<CloakedSiren> {
+public class CloakedSiren extends CardImpl {
 
     public CloakedSiren(UUID ownerId) {
         super(ownerId, 32, "Cloaked Siren", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

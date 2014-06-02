@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class BloodPet extends CardImpl<BloodPet> {
+public class BloodPet extends CardImpl {
 
     public BloodPet(UUID ownerId) {
         super(ownerId, 3, "Blood Pet", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ShipwreckSinger extends CardImpl<ShipwreckSinger> {
+public class ShipwreckSinger extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent filterAttacking = new FilterCreaturePermanent("Attacking creatures");

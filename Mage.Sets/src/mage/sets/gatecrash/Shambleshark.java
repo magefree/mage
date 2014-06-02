@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class Shambleshark extends CardImpl<Shambleshark> {
+public class Shambleshark extends CardImpl {
 
     public Shambleshark(UUID ownerId) {
         super(ownerId, 193, "Shambleshark", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{U}");

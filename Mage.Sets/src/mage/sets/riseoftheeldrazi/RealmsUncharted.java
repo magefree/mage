@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class RealmsUncharted extends CardImpl<RealmsUncharted> {
+public class RealmsUncharted extends CardImpl {
 
     public RealmsUncharted(UUID ownerId) {
         super(ownerId, 206, "Realms Uncharted", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}");

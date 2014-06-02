@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class LogicKnot extends CardImpl<LogicKnot> {
+public class LogicKnot extends CardImpl {
 
     public LogicKnot(UUID ownerId) {
         super(ownerId, 51, "Logic Knot", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BlisteringDieflyn extends CardImpl<BlisteringDieflyn> {
+public class BlisteringDieflyn extends CardImpl {
 
     public BlisteringDieflyn(UUID ownerId) {
         super(ownerId, 82, "Blistering Dieflyn", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HydraOmnivore extends CardImpl<HydraOmnivore> {
+public class HydraOmnivore extends CardImpl {
 
     public HydraOmnivore(UUID ownerId) {
         super(ownerId, 161, "Hydra Omnivore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

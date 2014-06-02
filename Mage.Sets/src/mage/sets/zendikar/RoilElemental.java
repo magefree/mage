@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class RoilElemental extends CardImpl<RoilElemental> {
+public class RoilElemental extends CardImpl {
 
     public RoilElemental(UUID ownerId) {
         super(ownerId, 62, "Roil Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{U}");

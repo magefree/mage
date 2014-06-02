@@ -42,7 +42,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class FogElemental extends CardImpl<FogElemental> {
+public class FogElemental extends CardImpl {
 
     public FogElemental(UUID ownerId) {
         super(ownerId, 85, "Fog Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

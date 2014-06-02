@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class Sickleslicer extends CardImpl<Sickleslicer> {
+public class Sickleslicer extends CardImpl {
 
     public Sickleslicer (UUID ownerId) {
         super(ownerId, 157, "Sickleslicer", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

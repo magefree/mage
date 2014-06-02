@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class GeralfsMindcrusher extends CardImpl<GeralfsMindcrusher> {
+public class GeralfsMindcrusher extends CardImpl {
 
     public GeralfsMindcrusher(UUID ownerId) {
         super(ownerId, 37, "Geralf's Mindcrusher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

@@ -58,7 +58,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX2
  */
-public class JayaBallardTaskMage extends CardImpl<JayaBallardTaskMage> {
+public class JayaBallardTaskMage extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("blue permanent");
     

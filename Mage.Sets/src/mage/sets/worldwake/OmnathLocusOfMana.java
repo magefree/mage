@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class OmnathLocusOfMana extends CardImpl<OmnathLocusOfMana> {
+public class OmnathLocusOfMana extends CardImpl {
 
     public OmnathLocusOfMana(UUID ownerId) {
         super(ownerId, 109, "Omnath, Locus of Mana", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}");

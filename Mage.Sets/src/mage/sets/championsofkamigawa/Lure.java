@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Lure extends CardImpl<Lure> {
+public class Lure extends CardImpl {
 
     public Lure (UUID ownerId) {
         super(ownerId, 226, "Lure", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");

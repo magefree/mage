@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Viserion
  */
-public class PistusStrike extends CardImpl<PistusStrike> {
+public class PistusStrike extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

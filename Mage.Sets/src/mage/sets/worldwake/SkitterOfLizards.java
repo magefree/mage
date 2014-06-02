@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class SkitterOfLizards extends CardImpl<SkitterOfLizards> {
+public class SkitterOfLizards extends CardImpl {
 
     public SkitterOfLizards(UUID ownerId) {
         super(ownerId, 91, "Skitter of Lizards", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

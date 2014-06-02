@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class NivMizzetTheFiremind extends CardImpl<NivMizzetTheFiremind> {
+public class NivMizzetTheFiremind extends CardImpl {
 
     public NivMizzetTheFiremind(UUID ownerId) {
         super(ownerId, 123, "Niv-Mizzet, the Firemind", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{R}{R}");

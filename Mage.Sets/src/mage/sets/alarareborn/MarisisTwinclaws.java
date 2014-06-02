@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MarisisTwinclaws extends CardImpl<MarisisTwinclaws> {
+public class MarisisTwinclaws extends CardImpl {
 
     public MarisisTwinclaws (UUID ownerId) {
         super(ownerId, 140, "Marisi's Twinclaws", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}{G}");

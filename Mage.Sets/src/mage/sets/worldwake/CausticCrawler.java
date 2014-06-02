@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class CausticCrawler extends CardImpl<CausticCrawler> {
+public class CausticCrawler extends CardImpl {
 
     public CausticCrawler(UUID ownerId) {
         super(ownerId, 54, "Caustic Crawler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

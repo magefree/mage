@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author cbt33
  */
-public class LaquatussCreativity extends CardImpl<LaquatussCreativity> {
+public class LaquatussCreativity extends CardImpl {
 
     public LaquatussCreativity(UUID ownerId) {
         super(ownerId, 88, "Laquatus's Creativity", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");

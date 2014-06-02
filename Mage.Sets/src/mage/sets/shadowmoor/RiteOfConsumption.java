@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RiteOfConsumption extends CardImpl<RiteOfConsumption> {
+public class RiteOfConsumption extends CardImpl {
 
     public RiteOfConsumption(UUID ownerId) {
         super(ownerId, 76, "Rite of Consumption", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class FloodedStrand extends CardImpl<FloodedStrand> {
+public class FloodedStrand extends CardImpl {
 
     public FloodedStrand(UUID ownerId) {
         super(ownerId, 316, "Flooded Strand", Rarity.RARE, new CardType[]{CardType.LAND}, "");

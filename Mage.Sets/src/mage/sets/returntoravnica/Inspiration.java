@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class Inspiration extends CardImpl<Inspiration> {
+public class Inspiration extends CardImpl {
 
     public Inspiration(UUID ownerId) {
         super(ownerId, 42, "Inspiration", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");

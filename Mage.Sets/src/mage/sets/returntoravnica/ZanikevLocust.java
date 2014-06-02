@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ZanikevLocust extends CardImpl<ZanikevLocust> {
+public class ZanikevLocust extends CardImpl {
 
     public ZanikevLocust(UUID ownerId) {
         super(ownerId, 84, "Zanikev Locust", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");

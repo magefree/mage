@@ -67,7 +67,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RiftElemental extends CardImpl<RiftElemental> {
+public class RiftElemental extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("suspended card you own");
     static {

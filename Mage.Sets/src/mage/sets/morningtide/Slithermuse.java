@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class Slithermuse extends CardImpl<Slithermuse> {
+public class Slithermuse extends CardImpl {
 
     public Slithermuse(UUID ownerId) {
         super(ownerId, 50, "Slithermuse", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

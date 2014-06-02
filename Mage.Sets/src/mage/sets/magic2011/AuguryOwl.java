@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AuguryOwl extends CardImpl<AuguryOwl> {
+public class AuguryOwl extends CardImpl {
 
     public AuguryOwl(UUID ownerId) {
         super(ownerId, 45, "Augury Owl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

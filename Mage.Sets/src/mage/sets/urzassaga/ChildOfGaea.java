@@ -47,7 +47,7 @@ import mage.constants.TargetController;
  *
  * @author Backfir3
  */
-public class ChildOfGaea extends CardImpl<ChildOfGaea> {
+public class ChildOfGaea extends CardImpl {
 
     public ChildOfGaea(UUID ownerId) {
         super(ownerId, 242, "Child of Gaea", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");

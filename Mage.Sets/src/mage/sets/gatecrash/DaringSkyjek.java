@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class DaringSkyjek extends CardImpl<DaringSkyjek> {
+public class DaringSkyjek extends CardImpl {
 
     public DaringSkyjek(UUID ownerId) {
         super(ownerId, 9, "Daring Skyjek", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

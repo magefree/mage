@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class Progenitus extends CardImpl<Progenitus> {
+public class Progenitus extends CardImpl {
 
     public Progenitus(UUID ownerId) {
         super(ownerId, 121, "Progenitus", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}");

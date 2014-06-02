@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Howlgeist extends CardImpl<Howlgeist> {
+public class Howlgeist extends CardImpl {
 
     public Howlgeist(UUID ownerId) {
         super(ownerId, 182, "Howlgeist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");

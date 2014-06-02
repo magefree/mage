@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class TimeEbb extends CardImpl<TimeEbb> {
+public class TimeEbb extends CardImpl {
 
     public TimeEbb(UUID ownerId) {
         super(ownerId, 96, "Time Ebb", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");

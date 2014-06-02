@@ -38,7 +38,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jonubuu
  */
-public class HymnToTourach extends CardImpl<HymnToTourach> {
+public class HymnToTourach extends CardImpl {
 
     public HymnToTourach(UUID ownerId) {
         super(ownerId, 12, "Hymn to Tourach", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");

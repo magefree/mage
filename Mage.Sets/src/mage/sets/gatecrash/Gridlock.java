@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Gridlock extends CardImpl<Gridlock> {
+public class Gridlock extends CardImpl {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanents");
 
     public Gridlock(UUID ownerId) {

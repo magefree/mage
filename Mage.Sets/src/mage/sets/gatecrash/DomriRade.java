@@ -62,7 +62,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DomriRade extends CardImpl<DomriRade> {
+public class DomriRade extends CardImpl {
 
     public DomriRade(UUID ownerId) {
         super(ownerId, 156, "Domri Rade", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{G}");

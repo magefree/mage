@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class PrideGuardian extends CardImpl<PrideGuardian> {
+public class PrideGuardian extends CardImpl {
 
     public PrideGuardian(UUID ownerId) {
         super(ownerId, 31, "Pride Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

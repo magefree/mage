@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DauthiSlayer extends CardImpl<DauthiSlayer> {
+public class DauthiSlayer extends CardImpl {
 
     public DauthiSlayer(UUID ownerId) {
         super(ownerId, 20, "Dauthi Slayer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class AzoriusSignet extends CardImpl<AzoriusSignet> {
+public class AzoriusSignet extends CardImpl {
 
     public AzoriusSignet(UUID ownerId) {
         super(ownerId, 159, "Azorius Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

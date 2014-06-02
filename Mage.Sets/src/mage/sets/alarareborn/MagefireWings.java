@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MagefireWings extends CardImpl<MagefireWings> {
+public class MagefireWings extends CardImpl {
 
     public MagefireWings (UUID ownerId) {
         super(ownerId, 88, "Magefire Wings", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{R}");

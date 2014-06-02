@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class MirrorMadPhantasm extends CardImpl<MirrorMadPhantasm> {
+public class MirrorMadPhantasm extends CardImpl {
 
     public MirrorMadPhantasm(UUID ownerId) {
         super(ownerId, 68, "Mirror-Mad Phantasm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class DescentIntoMadness extends CardImpl<DescentIntoMadness> {
+public class DescentIntoMadness extends CardImpl {
 
     public DescentIntoMadness(UUID ownerId) {
         super(ownerId, 97, "Descent into Madness", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PhyrexianHydra extends CardImpl<PhyrexianHydra> {
+public class PhyrexianHydra extends CardImpl {
 
     public PhyrexianHydra(UUID ownerId) {
         super(ownerId, 85, "Phyrexian Hydra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

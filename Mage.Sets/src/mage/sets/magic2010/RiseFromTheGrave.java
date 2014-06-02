@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RiseFromTheGrave extends CardImpl<RiseFromTheGrave> {
+public class RiseFromTheGrave extends CardImpl {
 
     public RiseFromTheGrave(UUID ownerId) {
         super(ownerId, 109, "Rise from the Grave", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");

@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class KruphixsInsight extends CardImpl<KruphixsInsight> {
+public class KruphixsInsight extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("up to three enchantment cards");
 

@@ -54,7 +54,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class TalarasBattalion extends CardImpl<TalarasBattalion> {
+public class TalarasBattalion extends CardImpl {
 
     public TalarasBattalion(UUID ownerId) {
         super(ownerId, 77, "Talara's Battalion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

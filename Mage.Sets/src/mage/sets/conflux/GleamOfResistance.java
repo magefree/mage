@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class GleamOfResistance extends CardImpl<GleamOfResistance> {
+public class GleamOfResistance extends CardImpl {
 
     public GleamOfResistance(UUID ownerId) {
         super(ownerId, 8, "Gleam of Resistance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");

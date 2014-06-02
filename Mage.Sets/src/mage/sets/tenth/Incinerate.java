@@ -46,7 +46,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author North
  */
-public class Incinerate extends CardImpl<Incinerate> {
+public class Incinerate extends CardImpl {
 
     public Incinerate(UUID ownerId) {
         super(ownerId, 213, "Incinerate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

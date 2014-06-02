@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class ThoughtScour extends CardImpl<ThoughtScour> {
+public class ThoughtScour extends CardImpl {
 
     public ThoughtScour(UUID ownerId) {
         super(ownerId, 52, "Thought Scour", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

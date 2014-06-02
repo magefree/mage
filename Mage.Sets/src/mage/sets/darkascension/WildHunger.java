@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class WildHunger extends CardImpl<WildHunger> {
+public class WildHunger extends CardImpl {
 
     public WildHunger(UUID ownerId) {
         super(ownerId, 132, "Wild Hunger", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

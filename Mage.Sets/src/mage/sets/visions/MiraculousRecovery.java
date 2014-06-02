@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class MiraculousRecovery extends CardImpl<MiraculousRecovery> {
+public class MiraculousRecovery extends CardImpl {
 
     public MiraculousRecovery(UUID ownerId) {
         super(ownerId, 113, "Miraculous Recovery", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");

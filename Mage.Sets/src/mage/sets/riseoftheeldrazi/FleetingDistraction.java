@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FleetingDistraction extends CardImpl<FleetingDistraction> {
+public class FleetingDistraction extends CardImpl {
 
     public FleetingDistraction (UUID ownerId) {
         super(ownerId, 67, "Fleeting Distraction", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

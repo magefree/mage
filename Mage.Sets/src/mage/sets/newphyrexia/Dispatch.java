@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Dispatch extends CardImpl<Dispatch> {
+public class Dispatch extends CardImpl {
 
     public Dispatch (UUID ownerId) {
         super(ownerId, 7, "Dispatch", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");

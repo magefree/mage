@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class StonefareCrocodile extends CardImpl<StonefareCrocodile> {
+public class StonefareCrocodile extends CardImpl {
 
     public StonefareCrocodile(UUID ownerId) {
         super(ownerId, 136, "Stonefare Crocodile", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

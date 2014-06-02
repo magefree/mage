@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ShallowGrave extends CardImpl<ShallowGrave> {
+public class ShallowGrave extends CardImpl {
 
     public ShallowGrave(UUID ownerId) {
         super(ownerId, 39, "Shallow Grave", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");

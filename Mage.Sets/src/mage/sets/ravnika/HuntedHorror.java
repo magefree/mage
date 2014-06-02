@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class HuntedHorror extends CardImpl<HuntedHorror> {
+public class HuntedHorror extends CardImpl {
 
     public HuntedHorror(UUID ownerId) {
         super(ownerId, 90, "Hunted Horror", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");

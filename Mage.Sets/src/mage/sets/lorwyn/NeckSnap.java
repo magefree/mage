@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class NeckSnap extends CardImpl<NeckSnap> {
+public class NeckSnap extends CardImpl {
 
     public NeckSnap(UUID ownerId) {
         super(ownerId, 32, "Neck Snap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Manalith extends CardImpl<Manalith> {
+public class Manalith extends CardImpl {
 
     public Manalith (UUID ownerId) {
         super(ownerId, 212, "Manalith", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

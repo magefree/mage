@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class KrosanWarchief extends CardImpl<KrosanWarchief> {
+public class KrosanWarchief extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Beast spells");
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("Beast");

@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class WidespreadPanic extends CardImpl<WidespreadPanic> {
+public class WidespreadPanic extends CardImpl {
 
     public WidespreadPanic(UUID ownerId) {
         super(ownerId, 131, "Widespread Panic", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

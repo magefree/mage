@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledPermanent;
 /**
  * @author Loki
  */
-public class IzzetBoilerworks extends CardImpl<IzzetBoilerworks> {
+public class IzzetBoilerworks extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

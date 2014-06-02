@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Earthbrawn extends CardImpl<Earthbrawn> {
+public class Earthbrawn extends CardImpl {
 
     public Earthbrawn(UUID ownerId) {
         super(ownerId, 119, "Earthbrawn", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

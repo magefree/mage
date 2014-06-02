@@ -44,7 +44,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Loki
  */
-public class EliteArchers extends CardImpl<EliteArchers> {
+public class EliteArchers extends CardImpl {
 
     public EliteArchers(UUID ownerId) {
         super(ownerId, 13, "Elite Archers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class OrzhovPontiff extends CardImpl<OrzhovPontiff> {
+public class OrzhovPontiff extends CardImpl {
 
     private static final FilterCreaturePermanent filterControlled = new FilterCreaturePermanent("Creatures you control");
     private static final FilterCreaturePermanent filterNotControlled = new FilterCreaturePermanent("creatures you don't control");

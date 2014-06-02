@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author Quercitron
  */
-public class OrderOfTheSacredTorch extends CardImpl<OrderOfTheSacredTorch> {
+public class OrderOfTheSacredTorch extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("black spell");
     

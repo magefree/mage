@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class AvacynianPriest extends CardImpl<AvacynianPriest> {
+public class AvacynianPriest extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Human creature");
 

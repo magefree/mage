@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class ThranQuarry extends CardImpl<ThranQuarry> {
+public class ThranQuarry extends CardImpl {
 
     public ThranQuarry(UUID ownerId) {
         super(ownerId, 329, "Thran Quarry", Rarity.RARE, new CardType[]{CardType.LAND}, "");

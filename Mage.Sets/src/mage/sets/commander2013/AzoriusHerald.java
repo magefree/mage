@@ -43,7 +43,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class AzoriusHerald extends CardImpl<AzoriusHerald> {
+public class AzoriusHerald extends CardImpl {
 
     public AzoriusHerald(UUID ownerId) {
         super(ownerId, 6, "Azorius Herald", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

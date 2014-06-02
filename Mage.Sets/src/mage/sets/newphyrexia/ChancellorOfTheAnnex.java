@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class ChancellorOfTheAnnex extends CardImpl<ChancellorOfTheAnnex> {
+public class ChancellorOfTheAnnex extends CardImpl {
 
     public ChancellorOfTheAnnex(UUID ownerId) {
         super(ownerId, 6, "Chancellor of the Annex", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");

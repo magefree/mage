@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Nevermore extends CardImpl<Nevermore> {
+public class Nevermore extends CardImpl {
 
     public Nevermore(UUID ownerId) {
         super(ownerId, 25, "Nevermore", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");

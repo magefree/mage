@@ -59,7 +59,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class ShrineOfPiercingVision extends CardImpl<ShrineOfPiercingVision> {
+public class ShrineOfPiercingVision extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a blue spell");
 

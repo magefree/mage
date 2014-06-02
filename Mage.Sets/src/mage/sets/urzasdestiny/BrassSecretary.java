@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class BrassSecretary extends CardImpl<BrassSecretary> {
+public class BrassSecretary extends CardImpl {
 
     public BrassSecretary(UUID ownerId) {
         super(ownerId, 128, "Brass Secretary", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

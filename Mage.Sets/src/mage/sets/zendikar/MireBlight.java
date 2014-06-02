@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class MireBlight extends CardImpl<MireBlight> {
+public class MireBlight extends CardImpl {
 
     public MireBlight(UUID ownerId) {
         super(ownerId, 104, "Mire Blight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

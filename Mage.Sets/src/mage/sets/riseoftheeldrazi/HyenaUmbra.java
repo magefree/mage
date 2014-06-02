@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HyenaUmbra extends CardImpl<HyenaUmbra> {
+public class HyenaUmbra extends CardImpl {
 
     public HyenaUmbra(UUID ownerId) {
         super(ownerId, 26, "Hyena Umbra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

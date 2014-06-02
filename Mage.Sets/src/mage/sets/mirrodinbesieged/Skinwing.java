@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Skinwing extends CardImpl<Skinwing> {
+public class Skinwing extends CardImpl {
 
     public Skinwing(UUID ownerId) {
         super(ownerId, 133, "Skinwing", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

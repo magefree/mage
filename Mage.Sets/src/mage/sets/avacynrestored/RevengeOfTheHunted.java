@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class RevengeOfTheHunted extends CardImpl<RevengeOfTheHunted> {
+public class RevengeOfTheHunted extends CardImpl {
 
     public RevengeOfTheHunted(UUID ownerId) {
         super(ownerId, 191, "Revenge of the Hunted", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");

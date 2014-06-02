@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class DragDown extends CardImpl<DragDown> {
+public class DragDown extends CardImpl {
 
     public DragDown(UUID ownerId) {
         super(ownerId, 42, "Drag Down", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

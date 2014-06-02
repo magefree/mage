@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class BasilicaScreecher extends CardImpl<BasilicaScreecher> {
+public class BasilicaScreecher extends CardImpl {
 
     public BasilicaScreecher(UUID ownerId) {
         super(ownerId, 58, "Basilica Screecher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

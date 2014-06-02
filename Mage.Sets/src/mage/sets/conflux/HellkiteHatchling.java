@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class HellkiteHatchling extends CardImpl<HellkiteHatchling> {
+public class HellkiteHatchling extends CardImpl {
 
     public HellkiteHatchling(UUID ownerId) {
         super(ownerId, 111, "Hellkite Hatchling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class CloudcrestLake extends CardImpl<CloudcrestLake> {
+public class CloudcrestLake extends CardImpl {
 
     public CloudcrestLake(UUID ownerId) {
         super(ownerId, 274, "Cloudcrest Lake", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

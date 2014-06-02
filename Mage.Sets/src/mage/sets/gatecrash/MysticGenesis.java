@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class MysticGenesis extends CardImpl<MysticGenesis> {
+public class MysticGenesis extends CardImpl {
 
     public MysticGenesis(UUID ownerId) {
         super(ownerId, 180, "Mystic Genesis", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}{U}{U}");

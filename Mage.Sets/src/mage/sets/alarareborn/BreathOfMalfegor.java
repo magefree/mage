@@ -38,7 +38,7 @@ import mage.constants.TargetController;
  *
  * @author jeffwadsworth
  */
-public class BreathOfMalfegor extends CardImpl<BreathOfMalfegor> {
+public class BreathOfMalfegor extends CardImpl {
 
     public BreathOfMalfegor(UUID ownerId) {
         super(ownerId, 35, "Breath of Malfegor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{R}");

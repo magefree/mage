@@ -43,7 +43,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author North
  */
-public class BroodBirthing extends CardImpl<BroodBirthing> {
+public class BroodBirthing extends CardImpl {
 
     public BroodBirthing(UUID ownerId) {
         super(ownerId, 138, "Brood Birthing", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

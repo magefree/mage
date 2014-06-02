@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class MerchantOfSecrets extends CardImpl<MerchantOfSecrets> {
+public class MerchantOfSecrets extends CardImpl {
 
     public MerchantOfSecrets(UUID ownerId) {
         super(ownerId, 44, "Merchant of Secrets", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class Fecundity extends CardImpl<Fecundity> {
+public class Fecundity extends CardImpl {
 
     public Fecundity(UUID ownerId) {
         super(ownerId, 251, "Fecundity", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

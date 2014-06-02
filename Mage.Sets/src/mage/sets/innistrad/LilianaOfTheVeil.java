@@ -55,7 +55,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class LilianaOfTheVeil extends CardImpl<LilianaOfTheVeil> {
+public class LilianaOfTheVeil extends CardImpl {
 
     public LilianaOfTheVeil(UUID ownerId) {
         super(ownerId, 105, "Liliana of the Veil", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{B}");

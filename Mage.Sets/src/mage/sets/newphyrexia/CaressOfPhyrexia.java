@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class CaressOfPhyrexia extends CardImpl<CaressOfPhyrexia> {
+public class CaressOfPhyrexia extends CardImpl {
 
     public CaressOfPhyrexia(UUID ownerId) {
         super(ownerId, 53, "Caress of Phyrexia", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

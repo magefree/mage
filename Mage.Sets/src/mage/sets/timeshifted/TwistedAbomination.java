@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class TwistedAbomination extends CardImpl<TwistedAbomination> {
+public class TwistedAbomination extends CardImpl {
 
     public TwistedAbomination(UUID ownerId) {
         super(ownerId, 50, "Twisted Abomination", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");

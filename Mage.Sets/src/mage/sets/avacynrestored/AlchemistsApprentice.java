@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class AlchemistsApprentice extends CardImpl<AlchemistsApprentice> {
+public class AlchemistsApprentice extends CardImpl {
 
     public AlchemistsApprentice(UUID ownerId) {
         super(ownerId, 42, "Alchemist's Apprentice", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

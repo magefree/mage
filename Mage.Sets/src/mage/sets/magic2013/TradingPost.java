@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class TradingPost extends CardImpl<TradingPost> {
+public class TradingPost extends CardImpl {
     
     final static FilterControlledPermanent filter = new FilterControlledPermanent("creature");
     final static FilterControlledPermanent filter2 = new FilterControlledPermanent("artifact");

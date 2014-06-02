@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class NayaSojourners extends CardImpl<NayaSojourners> {
+public class NayaSojourners extends CardImpl {
 
     public NayaSojourners(UUID ownerId) {
         super(ownerId, 122, "Naya Sojourners", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");

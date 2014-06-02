@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class FinalFortune extends CardImpl<FinalFortune> {
+public class FinalFortune extends CardImpl {
 
     public FinalFortune(UUID ownerId) {
         super(ownerId, 182, "Final Fortune", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");

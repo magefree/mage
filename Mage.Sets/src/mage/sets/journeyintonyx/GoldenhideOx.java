@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GoldenhideOx extends CardImpl<GoldenhideOx> {
+public class GoldenhideOx extends CardImpl {
 
     public GoldenhideOx(UUID ownerId) {
         super(ownerId, 125, "Goldenhide Ox", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{5}{G}");

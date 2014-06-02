@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Foresee extends CardImpl<Foresee> {
+public class Foresee extends CardImpl {
 
     public Foresee(UUID ownerId) {
         super(ownerId, 54, "Foresee", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author maurer.it_at_gmail.com
  */
-public class Staggershock extends CardImpl<Staggershock> {
+public class Staggershock extends CardImpl {
 
     public Staggershock(UUID ownerId) {
         super(ownerId, 166, "Staggershock", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LeylineOfAnticipation extends CardImpl<LeylineOfAnticipation> {
+public class LeylineOfAnticipation extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("nonland cards");
     static {

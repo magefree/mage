@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class DictateOfKarametra extends CardImpl<DictateOfKarametra> {
+public class DictateOfKarametra extends CardImpl {
 
     public DictateOfKarametra(UUID ownerId) {
         super(ownerId, 121, "Dictate of Karametra", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");

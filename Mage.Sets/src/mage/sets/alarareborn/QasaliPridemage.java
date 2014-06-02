@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class QasaliPridemage extends CardImpl<QasaliPridemage> {
+public class QasaliPridemage extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

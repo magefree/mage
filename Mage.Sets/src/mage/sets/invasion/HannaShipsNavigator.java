@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class HannaShipsNavigator extends CardImpl<HannaShipsNavigator> {
+public class HannaShipsNavigator extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("artifact or enchantment card from your graveyard");
 

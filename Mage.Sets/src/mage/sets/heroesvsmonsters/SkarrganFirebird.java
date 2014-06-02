@@ -47,7 +47,7 @@ import mage.watchers.common.BloodthirstWatcher;
  *
  * @author LevelX2
  */
-public class SkarrganFirebird extends CardImpl<SkarrganFirebird> {
+public class SkarrganFirebird extends CardImpl {
 
     public SkarrganFirebird(UUID ownerId) {
         super(ownerId, 57, "Skarrgan Firebird", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

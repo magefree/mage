@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class KamiOfThePalaceFields extends CardImpl<KamiOfThePalaceFields> {
+public class KamiOfThePalaceFields extends CardImpl {
 
     public KamiOfThePalaceFields(UUID ownerId) {
         super(ownerId, 24, "Kami of the Palace Fields", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");

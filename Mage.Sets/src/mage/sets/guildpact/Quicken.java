@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
  * @author LevelX2
  *
  */
-public class Quicken extends CardImpl<Quicken> {
+public class Quicken extends CardImpl {
 
     public Quicken(UUID ownerId) {
         super(ownerId, 31, "Quicken", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");

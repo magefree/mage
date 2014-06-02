@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class IsolatedChapel extends CardImpl<IsolatedChapel> {
+public class IsolatedChapel extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

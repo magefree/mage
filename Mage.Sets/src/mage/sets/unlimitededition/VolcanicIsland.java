@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class VolcanicIsland extends CardImpl<VolcanicIsland> {
+public class VolcanicIsland extends CardImpl {
 
     public VolcanicIsland(UUID ownerId) {
         super(ownerId, 302, "Volcanic Island", Rarity.RARE, new CardType[]{CardType.LAND}, "");

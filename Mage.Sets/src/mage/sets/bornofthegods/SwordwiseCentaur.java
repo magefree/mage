@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SwordwiseCentaur extends CardImpl<SwordwiseCentaur> {
+public class SwordwiseCentaur extends CardImpl {
 
     public SwordwiseCentaur(UUID ownerId) {
         super(ownerId, 142, "Swordwise Centaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");

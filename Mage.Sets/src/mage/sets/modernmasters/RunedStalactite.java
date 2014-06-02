@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class RunedStalactite extends CardImpl<RunedStalactite> {
+public class RunedStalactite extends CardImpl {
 
     public RunedStalactite(UUID ownerId) {
         super(ownerId, 214, "Runed Stalactite", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

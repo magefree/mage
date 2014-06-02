@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class FiligreeAngel extends CardImpl<FiligreeAngel> {
+public class FiligreeAngel extends CardImpl {
 
     public FiligreeAngel (UUID ownerId) {
         super(ownerId, 6, "Filigree Angel", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}{W}{W}{U}");

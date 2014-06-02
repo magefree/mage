@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class BannersRaised extends CardImpl<BannersRaised> {
+public class BannersRaised extends CardImpl {
 
     public BannersRaised(UUID ownerId) {
         super(ownerId, 127, "Banners Raised", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

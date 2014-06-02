@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author ayratn
  */
-public class ScreechingSilcaw extends CardImpl<ScreechingSilcaw> {
+public class ScreechingSilcaw extends CardImpl {
 
     private static final String text = "Metalcraft - Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of his or her library into his or her graveyard.";
 

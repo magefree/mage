@@ -50,7 +50,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author North
  */
-public class RenegadeDoppelganger extends CardImpl<RenegadeDoppelganger> {
+public class RenegadeDoppelganger extends CardImpl {
 
     public RenegadeDoppelganger(UUID ownerId) {
         super(ownerId, 84, "Renegade Doppelganger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");

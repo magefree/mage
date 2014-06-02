@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class WallOfRoots extends CardImpl<WallOfRoots> {
+public class WallOfRoots extends CardImpl {
 
     public WallOfRoots(UUID ownerId) {
         super(ownerId, 89, "Wall of Roots", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

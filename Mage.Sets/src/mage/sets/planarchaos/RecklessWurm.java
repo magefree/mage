@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class RecklessWurm extends CardImpl<RecklessWurm> {
+public class RecklessWurm extends CardImpl {
 
     public RecklessWurm(UUID ownerId) {
         super(ownerId, 120, "Reckless Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

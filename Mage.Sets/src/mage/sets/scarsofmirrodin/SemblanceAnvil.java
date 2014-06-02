@@ -52,7 +52,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class SemblanceAnvil extends CardImpl<SemblanceAnvil> {
+public class SemblanceAnvil extends CardImpl {
 
     public SemblanceAnvil(UUID ownerId) {
         super(ownerId, 201, "Semblance Anvil", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

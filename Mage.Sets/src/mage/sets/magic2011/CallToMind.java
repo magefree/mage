@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CallToMind extends CardImpl<CallToMind> {
+public class CallToMind extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 

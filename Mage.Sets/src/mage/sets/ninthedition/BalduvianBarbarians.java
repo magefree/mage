@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BalduvianBarbarians extends CardImpl<BalduvianBarbarians> {
+public class BalduvianBarbarians extends CardImpl {
 
     public BalduvianBarbarians(UUID ownerId) {
         super(ownerId, 174, "Balduvian Barbarians", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

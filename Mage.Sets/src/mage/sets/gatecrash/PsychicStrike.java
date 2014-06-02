@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class PsychicStrike extends CardImpl<PsychicStrike> {
+public class PsychicStrike extends CardImpl {
 
     public PsychicStrike(UUID ownerId) {
         super(ownerId, 189, "Psychic Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");

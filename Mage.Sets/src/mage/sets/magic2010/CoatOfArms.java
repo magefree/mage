@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class CoatOfArms extends CardImpl<CoatOfArms> {
+public class CoatOfArms extends CardImpl {
 
     public CoatOfArms(UUID ownerId) {
         super(ownerId, 207, "Coat of Arms", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

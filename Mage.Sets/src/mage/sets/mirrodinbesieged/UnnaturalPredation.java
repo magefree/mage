@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class UnnaturalPredation extends CardImpl<UnnaturalPredation> {
+public class UnnaturalPredation extends CardImpl {
 
     public UnnaturalPredation (UUID ownerId) {
         super(ownerId, 93, "Unnatural Predation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

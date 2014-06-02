@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class Anthroplasm extends CardImpl<Anthroplasm> {
+public class Anthroplasm extends CardImpl {
 
     public Anthroplasm(UUID ownerId) {
         super(ownerId, 25, "Anthroplasm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

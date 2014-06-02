@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Plopman
  */
-public class ThornOfAmethyst extends CardImpl<ThornOfAmethyst> {
+public class ThornOfAmethyst extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Noncreature spells");
     static {

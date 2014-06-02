@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class GoblinLegionnaire extends CardImpl<GoblinLegionnaire> {
+public class GoblinLegionnaire extends CardImpl {
 
     public GoblinLegionnaire(UUID ownerId) {
         super(ownerId, 103, "Goblin Legionnaire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");

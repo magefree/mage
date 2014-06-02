@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class NightshadeSchemers extends CardImpl<NightshadeSchemers> {
+public class NightshadeSchemers extends CardImpl {
 
     public NightshadeSchemers(UUID ownerId) {
         super(ownerId, 69, "Nightshade Schemers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

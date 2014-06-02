@@ -53,7 +53,7 @@ import mage.watchers.common.LandfallWatcher;
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
-public class SearingBlaze extends CardImpl<SearingBlaze> {
+public class SearingBlaze extends CardImpl {
 
     public SearingBlaze(UUID ownerId) {
         super(ownerId, 90, "Searing Blaze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");

@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author nantuko
  */
-public class CobbledWings extends CardImpl<CobbledWings> {
+public class CobbledWings extends CardImpl {
 
     public CobbledWings(UUID ownerId) {
         super(ownerId, 219, "Cobbled Wings", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class Kaysa extends CardImpl<Kaysa> {
+public class Kaysa extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Green creatures");
     

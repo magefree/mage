@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class HalcyonGlaze extends CardImpl<HalcyonGlaze> {
+public class HalcyonGlaze extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a creature spell");
 

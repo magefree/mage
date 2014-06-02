@@ -54,7 +54,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class FlashOfInsight extends CardImpl<FlashOfInsight> {
+public class FlashOfInsight extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("blue cards from your graveyard");
 

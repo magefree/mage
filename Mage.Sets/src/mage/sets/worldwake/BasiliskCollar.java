@@ -47,7 +47,7 @@ import mage.constants.AttachmentType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BasiliskCollar extends CardImpl<BasiliskCollar> {
+public class BasiliskCollar extends CardImpl {
 
     public BasiliskCollar(UUID ownerId) {
         super(ownerId, 122, "Basilisk Collar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

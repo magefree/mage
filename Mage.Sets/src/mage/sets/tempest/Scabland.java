@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Scabland extends CardImpl<Scabland> {
+public class Scabland extends CardImpl {
 
     public Scabland(UUID ownerId) {
         super(ownerId, 331, "Scabland", Rarity.RARE, new CardType[]{CardType.LAND}, null);

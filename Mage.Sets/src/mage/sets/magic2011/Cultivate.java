@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Cultivate extends CardImpl<Cultivate> {
+public class Cultivate extends CardImpl {
 
     public Cultivate(UUID ownerId) {
         super(ownerId, 168, "Cultivate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");

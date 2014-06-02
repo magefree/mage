@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class FlameKinZealot extends CardImpl<FlameKinZealot> {
+public class FlameKinZealot extends CardImpl {
 
     public FlameKinZealot(UUID ownerId) {
         super(ownerId, 206, "Flame-Kin Zealot", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{W}");

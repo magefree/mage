@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WallOfWood extends CardImpl<WallOfWood> {
+public class WallOfWood extends CardImpl {
 
     public WallOfWood(UUID ownerId) {
         super(ownerId, 309, "Wall of Wood", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

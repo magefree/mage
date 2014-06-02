@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class RathiIntimidator extends CardImpl<RathiIntimidator> {
+public class RathiIntimidator extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary permanent card with converted mana cost 2 or less");
 

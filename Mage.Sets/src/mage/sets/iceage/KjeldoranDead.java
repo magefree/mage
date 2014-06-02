@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Quercitron
  */
-public class KjeldoranDead extends CardImpl<KjeldoranDead> {
+public class KjeldoranDead extends CardImpl {
 
     public KjeldoranDead(UUID ownerId) {
         super(ownerId, 25, "Kjeldoran Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

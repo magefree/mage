@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class DictateOfKruphix extends CardImpl<DictateOfKruphix> {
+public class DictateOfKruphix extends CardImpl {
 
     public DictateOfKruphix(UUID ownerId) {
         super(ownerId, 37, "Dictate of Kruphix", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");

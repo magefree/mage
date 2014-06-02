@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class BalefulEidolon extends CardImpl<BalefulEidolon> {
+public class BalefulEidolon extends CardImpl {
 
     public BalefulEidolon(UUID ownerId) {
         super(ownerId, 78, "Baleful Eidolon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}");

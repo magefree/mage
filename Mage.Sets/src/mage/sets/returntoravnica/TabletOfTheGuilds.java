@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class TabletOfTheGuilds extends CardImpl<TabletOfTheGuilds> {
+public class TabletOfTheGuilds extends CardImpl {
 
     public TabletOfTheGuilds(UUID ownerId) {
         super(ownerId, 235, "Tablet of the Guilds", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
 /**
  * @author Loki
  */
-public class EerieProcession extends CardImpl<EerieProcession> {
+public class EerieProcession extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Arcane card");
 

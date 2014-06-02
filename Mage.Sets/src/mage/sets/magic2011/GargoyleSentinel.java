@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GargoyleSentinel extends CardImpl<GargoyleSentinel> {
+public class GargoyleSentinel extends CardImpl {
 
     public GargoyleSentinel(UUID ownerId) {
         super(ownerId, 207, "Gargoyle Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class DisruptingScepter extends CardImpl<DisruptingScepter> {
+public class DisruptingScepter extends CardImpl {
 
     public DisruptingScepter(UUID ownerId) {
         super(ownerId, 293, "Disrupting Scepter", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

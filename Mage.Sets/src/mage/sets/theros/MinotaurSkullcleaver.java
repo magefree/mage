@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class MinotaurSkullcleaver extends CardImpl<MinotaurSkullcleaver> {
+public class MinotaurSkullcleaver extends CardImpl {
 
     public MinotaurSkullcleaver(UUID ownerId) {
         super(ownerId, 130, "Minotaur Skullcleaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

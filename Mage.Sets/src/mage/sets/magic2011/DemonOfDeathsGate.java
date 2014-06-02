@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DemonOfDeathsGate extends CardImpl<DemonOfDeathsGate> {
+public class DemonOfDeathsGate extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
 

@@ -42,7 +42,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  *
  * @author Loki
  */
-public class ScaledHulk extends CardImpl<ScaledHulk> {
+public class ScaledHulk extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

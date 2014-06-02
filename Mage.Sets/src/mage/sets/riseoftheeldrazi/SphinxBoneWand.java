@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class SphinxBoneWand extends CardImpl<SphinxBoneWand> {
+public class SphinxBoneWand extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
 

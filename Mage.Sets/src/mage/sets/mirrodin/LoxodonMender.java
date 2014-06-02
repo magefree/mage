@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class LoxodonMender extends CardImpl<LoxodonMender> {
+public class LoxodonMender extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

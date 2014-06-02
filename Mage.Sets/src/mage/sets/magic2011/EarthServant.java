@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author BetaSteward_at_googlemail.com, North
  */
-public class EarthServant extends CardImpl<EarthServant> {
+public class EarthServant extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
 

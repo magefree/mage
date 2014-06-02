@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
 /**
  * @author nantuko
  */
-public class SmiteTheMonstrous extends CardImpl<SmiteTheMonstrous> {
+public class SmiteTheMonstrous extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
 

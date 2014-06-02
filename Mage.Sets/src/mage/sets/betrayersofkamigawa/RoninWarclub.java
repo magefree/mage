@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RoninWarclub extends CardImpl<RoninWarclub> {
+public class RoninWarclub extends CardImpl {
 
     public RoninWarclub(UUID ownerId) {
         super(ownerId, 158, "Ronin Warclub", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

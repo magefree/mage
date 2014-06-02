@@ -43,7 +43,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class LagonnaBandElder extends CardImpl<LagonnaBandElder> {
+public class LagonnaBandElder extends CardImpl {
 
     public LagonnaBandElder(UUID ownerId) {
         super(ownerId, 21, "Lagonna-Band Elder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

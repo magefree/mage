@@ -49,7 +49,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author North
  */
-public class Aggravate extends CardImpl<Aggravate> {
+public class Aggravate extends CardImpl {
 
     public Aggravate(UUID ownerId) {
         super(ownerId, 125, "Aggravate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");

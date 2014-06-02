@@ -47,7 +47,7 @@ import mage.constants.Zone;
  * @author jeffwadsworth
 
  */
-public class OverbeingOfMyth extends CardImpl<OverbeingOfMyth> {
+public class OverbeingOfMyth extends CardImpl {
 
     public OverbeingOfMyth(UUID ownerId) {
         super(ownerId, 157, "Overbeing of Myth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G/U}{G/U}{G/U}{G/U}{G/U}");

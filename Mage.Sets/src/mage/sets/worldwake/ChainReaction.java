@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author North
  */
-public class ChainReaction extends CardImpl<ChainReaction> {
+public class ChainReaction extends CardImpl {
 
     public ChainReaction(UUID ownerId) {
         super(ownerId, 74, "Chain Reaction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");

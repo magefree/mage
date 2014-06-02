@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class GrotagSiegeRunner extends CardImpl<GrotagSiegeRunner> {
+public class GrotagSiegeRunner extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with defender");
 

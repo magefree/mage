@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  *
  * @author maurer.it_at_gmail.com
  */
-public class SpellPierce extends CardImpl<SpellPierce> {
+public class SpellPierce extends CardImpl {
 
 
     private static final FilterSpell filter = new FilterSpell("noncreature spell");

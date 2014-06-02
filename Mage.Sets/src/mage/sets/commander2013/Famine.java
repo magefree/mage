@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class Famine extends CardImpl<Famine> {
+public class Famine extends CardImpl {
 
     public Famine(UUID ownerId) {
         super(ownerId, 77, "Famine", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

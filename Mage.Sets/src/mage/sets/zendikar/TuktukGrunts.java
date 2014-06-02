@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class TuktukGrunts extends CardImpl<TuktukGrunts> {
+public class TuktukGrunts extends CardImpl {
 
     public TuktukGrunts(UUID ownerId) {
         super(ownerId, 152, "Tuktuk Grunts", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

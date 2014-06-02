@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class TolariaWest extends CardImpl<TolariaWest> {
+public class TolariaWest extends CardImpl {
 
     public TolariaWest(UUID ownerId) {
         super(ownerId, 173, "Tolaria West", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class FalkenrathNoble extends CardImpl<FalkenrathNoble> {
+public class FalkenrathNoble extends CardImpl {
 
     public FalkenrathNoble(UUID ownerId) {
         super(ownerId, 100, "Falkenrath Noble", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

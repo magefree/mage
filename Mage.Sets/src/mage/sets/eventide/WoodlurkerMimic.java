@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author jeffwadsworth
 
  */
-public class WoodlurkerMimic extends CardImpl<WoodlurkerMimic> {
+public class WoodlurkerMimic extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a spell that's both black and green");
     

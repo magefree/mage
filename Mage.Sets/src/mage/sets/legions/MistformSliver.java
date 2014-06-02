@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author cbt33, Plopman (Engineered Plague)
  */
-public class MistformSliver extends CardImpl<MistformSliver> {
+public class MistformSliver extends CardImpl {
 
     public MistformSliver(UUID ownerId) {
         super(ownerId, 46, "Mistform Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

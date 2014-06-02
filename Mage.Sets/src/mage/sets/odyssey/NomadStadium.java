@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class NomadStadium extends CardImpl<NomadStadium> {
+public class NomadStadium extends CardImpl {
 
     public NomadStadium(UUID ownerId) {
         super(ownerId, 322, "Nomad Stadium", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

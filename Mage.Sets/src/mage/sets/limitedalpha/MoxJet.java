@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class MoxJet extends CardImpl<MoxJet> {
+public class MoxJet extends CardImpl {
 
     public MoxJet(UUID ownerId) {
         super(ownerId, 262, "Mox Jet", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");

@@ -54,7 +54,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class NessianGameWarden extends CardImpl<NessianGameWarden> {
+public class NessianGameWarden extends CardImpl {
 
     public NessianGameWarden(UUID ownerId) {
         super(ownerId, 132, "Nessian Game Warden", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

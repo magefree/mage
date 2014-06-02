@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class CumberStone extends CardImpl<CumberStone> {
+public class CumberStone extends CardImpl {
 
     public CumberStone(UUID ownerId) {
         super(ownerId, 24, "Cumber Stone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}{U}");

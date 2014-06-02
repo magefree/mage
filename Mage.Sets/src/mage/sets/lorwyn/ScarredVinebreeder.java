@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ScarredVinebreeder extends CardImpl<ScarredVinebreeder> {
+public class ScarredVinebreeder extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Elf card from your graveyard");
 

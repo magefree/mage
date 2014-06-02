@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class MindShatter extends CardImpl<MindShatter> {
+public class MindShatter extends CardImpl {
 
     public MindShatter(UUID ownerId) {
         super(ownerId, 106, "Mind Shatter", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");

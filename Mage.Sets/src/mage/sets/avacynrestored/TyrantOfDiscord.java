@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class TyrantOfDiscord extends CardImpl<TyrantOfDiscord> {
+public class TyrantOfDiscord extends CardImpl {
 
     public TyrantOfDiscord(UUID ownerId) {
         super(ownerId, 162, "Tyrant of Discord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BlazingShoal extends CardImpl<BlazingShoal> {
+public class BlazingShoal extends CardImpl {
 
     public BlazingShoal(UUID ownerId) {
         super(ownerId, 96, "Blazing Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");

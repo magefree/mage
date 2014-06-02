@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author Quercitron
  */
-public class FelhideSpiritbinder extends CardImpl<FelhideSpiritbinder> {
+public class FelhideSpiritbinder extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class ImmortalCoil extends CardImpl<ImmortalCoil> {
+public class ImmortalCoil extends CardImpl {
 
     public ImmortalCoil(UUID ownerId) {
         super(ownerId, 79, "Immortal Coil", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}{B}{B}");

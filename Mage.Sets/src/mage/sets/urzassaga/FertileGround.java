@@ -49,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class FertileGround extends CardImpl<FertileGround> {
+public class FertileGround extends CardImpl {
 
     public FertileGround(UUID ownerId) {
         super(ownerId, 252, "Fertile Ground", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

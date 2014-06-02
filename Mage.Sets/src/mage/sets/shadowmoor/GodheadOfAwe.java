@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  * @author jeffwadsworth
  *
  */
-public class GodheadOfAwe extends CardImpl<GodheadOfAwe> {
+public class GodheadOfAwe extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Other creatures");
 

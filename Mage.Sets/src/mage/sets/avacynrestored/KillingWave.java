@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class KillingWave extends CardImpl<KillingWave> {
+public class KillingWave extends CardImpl {
 
     public KillingWave(UUID ownerId) {
         super(ownerId, 111, "Killing Wave", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}");

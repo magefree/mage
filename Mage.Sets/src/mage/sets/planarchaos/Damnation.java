@@ -38,7 +38,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class Damnation extends CardImpl<Damnation> {
+public class Damnation extends CardImpl {
 
     public Damnation(UUID ownerId) {
         super(ownerId, 85, "Damnation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GiantTortoise extends CardImpl<GiantTortoise> {
+public class GiantTortoise extends CardImpl {
 
     public GiantTortoise(UUID ownerId) {
         super(ownerId, 76, "Giant Tortoise", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

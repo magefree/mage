@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class QuagVampires extends CardImpl<QuagVampires> {
+public class QuagVampires extends CardImpl {
 
     public QuagVampires(UUID ownerId) {
         super(ownerId, 63, "Quag Vampires", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

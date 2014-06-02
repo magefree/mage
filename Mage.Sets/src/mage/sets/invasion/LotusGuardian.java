@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class LotusGuardian extends CardImpl<LotusGuardian> {
+public class LotusGuardian extends CardImpl {
 
     public LotusGuardian(UUID ownerId) {
         super(ownerId, 305, "Lotus Guardian", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class DrownInSorrow extends CardImpl<DrownInSorrow> {
+public class DrownInSorrow extends CardImpl {
 
     public DrownInSorrow(UUID ownerId) {
         super(ownerId, 65, "Drown in Sorrow", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");

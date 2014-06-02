@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Cinderbones extends CardImpl<Cinderbones> {
+public class Cinderbones extends CardImpl {
 
     public Cinderbones(UUID ownerId) {
         super(ownerId, 59, "Cinderbones", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

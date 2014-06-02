@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class ZuranOrb extends CardImpl<ZuranOrb> {
+public class ZuranOrb extends CardImpl {
 
     public ZuranOrb(UUID ownerId) {
         super(ownerId, 325, "Zuran Orb", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

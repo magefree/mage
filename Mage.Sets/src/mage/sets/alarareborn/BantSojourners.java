@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class BantSojourners extends CardImpl<BantSojourners> {
+public class BantSojourners extends CardImpl {
 
     public BantSojourners(UUID ownerId) {
         super(ownerId, 125, "Bant Sojourners", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");

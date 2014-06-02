@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class HadaFreeblade extends CardImpl<HadaFreeblade> {
+public class HadaFreeblade extends CardImpl {
 
     public HadaFreeblade(UUID ownerId) {
         super(ownerId, 7, "Hada Freeblade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");

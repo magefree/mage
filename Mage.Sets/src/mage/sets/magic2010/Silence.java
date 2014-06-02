@@ -44,7 +44,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Silence extends CardImpl<Silence> {
+public class Silence extends CardImpl {
 
     public Silence(UUID ownerId) {
         super(ownerId, 31, "Silence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");

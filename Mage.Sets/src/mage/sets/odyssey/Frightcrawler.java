@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class Frightcrawler extends CardImpl<Frightcrawler> {
+public class Frightcrawler extends CardImpl {
 
     public Frightcrawler(UUID ownerId) {
         super(ownerId, 138, "Frightcrawler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

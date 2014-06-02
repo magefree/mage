@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ThromokTheInsatiable extends CardImpl<ThromokTheInsatiable> {
+public class ThromokTheInsatiable extends CardImpl {
 
     public ThromokTheInsatiable(UUID ownerId) {
         super(ownerId, 106, "Thromok the Insatiable", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");

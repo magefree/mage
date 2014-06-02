@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FateForetold extends CardImpl<FateForetold> {
+public class FateForetold extends CardImpl {
 
     public FateForetold(UUID ownerId) {
         super(ownerId, 48, "Fate Foretold", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

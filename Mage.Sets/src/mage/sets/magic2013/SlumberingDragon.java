@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class SlumberingDragon extends CardImpl<SlumberingDragon> {
+public class SlumberingDragon extends CardImpl {
 
     public SlumberingDragon(UUID ownerId) {
         super(ownerId, 148, "Slumbering Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");

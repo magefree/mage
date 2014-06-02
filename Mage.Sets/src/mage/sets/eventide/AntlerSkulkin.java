@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class AntlerSkulkin extends CardImpl<AntlerSkulkin> {
+public class AntlerSkulkin extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creature");
     

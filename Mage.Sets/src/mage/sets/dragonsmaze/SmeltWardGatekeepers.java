@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class SmeltWardGatekeepers extends CardImpl<SmeltWardGatekeepers> {
+public class SmeltWardGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("creature an opponent controls");

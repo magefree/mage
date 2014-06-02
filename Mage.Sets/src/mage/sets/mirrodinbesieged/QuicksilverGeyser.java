@@ -38,7 +38,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author anonymous
  */
-public class QuicksilverGeyser extends CardImpl<QuicksilverGeyser> {
+public class QuicksilverGeyser extends CardImpl {
 
     public QuicksilverGeyser(UUID ownerId) {
         super(ownerId, 30, "Quicksilver Geyser", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");

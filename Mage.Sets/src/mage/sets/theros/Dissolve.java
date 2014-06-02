@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Dissolve extends CardImpl<Dissolve> {
+public class Dissolve extends CardImpl {
 
 
     public Dissolve(UUID ownerId) {

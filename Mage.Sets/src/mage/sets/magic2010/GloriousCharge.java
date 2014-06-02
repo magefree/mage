@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class GloriousCharge extends CardImpl<GloriousCharge> {
+public class GloriousCharge extends CardImpl {
 
     public GloriousCharge(UUID ownerId) {
         super(ownerId, 11, "Glorious Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class AshioksAdept extends CardImpl<AshioksAdept> {
+public class AshioksAdept extends CardImpl {
 
     public AshioksAdept(UUID ownerId) {
         super(ownerId, 59, "Ashiok's Adept", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

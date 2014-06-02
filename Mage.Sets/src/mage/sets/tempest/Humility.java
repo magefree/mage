@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class Humility extends CardImpl<Humility> {
+public class Humility extends CardImpl {
 
     public Humility(UUID ownerId) {
         super(ownerId, 236, "Humility", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

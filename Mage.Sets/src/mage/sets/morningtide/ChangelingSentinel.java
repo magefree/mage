@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ChangelingSentinel extends CardImpl<ChangelingSentinel> {
+public class ChangelingSentinel extends CardImpl {
 
     public ChangelingSentinel(UUID ownerId) {
         super(ownerId, 6, "Changeling Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class EelUmbra extends CardImpl<EelUmbra> {
+public class EelUmbra extends CardImpl {
 
     public EelUmbra(UUID ownerId) {
         super(ownerId, 65, "Eel Umbra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

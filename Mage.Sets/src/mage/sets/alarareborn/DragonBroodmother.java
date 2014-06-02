@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class DragonBroodmother extends CardImpl<DragonBroodmother> {
+public class DragonBroodmother extends CardImpl {
 
     public DragonBroodmother(UUID ownerId) {
         super(ownerId, 53, "Dragon Broodmother", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}{G}");

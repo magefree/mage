@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
 /**
  * @author LevelX2
  */
-public class ArrowVolleyTrap extends CardImpl<ArrowVolleyTrap> {
+public class ArrowVolleyTrap extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
 

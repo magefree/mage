@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KnightOfTheWhiteOrchid extends CardImpl<KnightOfTheWhiteOrchid> {
+public class KnightOfTheWhiteOrchid extends CardImpl {
 
     public KnightOfTheWhiteOrchid(UUID ownerId) {
         super(ownerId, 16, "Knight of the White Orchid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");

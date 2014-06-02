@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class Indestructibility extends CardImpl<Indestructibility> {
+public class Indestructibility extends CardImpl {
 
     public Indestructibility(UUID ownerId) {
         super(ownerId, 17, "Indestructibility", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class ObsessiveSearch extends CardImpl<ObsessiveSearch> {
+public class ObsessiveSearch extends CardImpl {
 
     public ObsessiveSearch(UUID ownerId) {
         super(ownerId, 43, "Obsessive Search", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

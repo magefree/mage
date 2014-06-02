@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInExile;
  *
  * @author BetaSteward
  */
-public class RunicRepetition extends CardImpl<RunicRepetition> {
+public class RunicRepetition extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("exiled card with flashback you own");
 

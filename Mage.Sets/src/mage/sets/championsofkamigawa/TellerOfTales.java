@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Ludwig
  */
 
-public class TellerOfTales extends CardImpl<TellerOfTales> {
+public class TellerOfTales extends CardImpl {
 
      private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class WitchbaneOrb extends CardImpl<WitchbaneOrb> {
+public class WitchbaneOrb extends CardImpl {
 
     public WitchbaneOrb(UUID ownerId) {
         super(ownerId, 236, "Witchbane Orb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

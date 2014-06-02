@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class RoaringPrimadox extends CardImpl<RoaringPrimadox> {
+public class RoaringPrimadox extends CardImpl {
 
     public RoaringPrimadox(UUID ownerId) {
         super(ownerId, 188, "Roaring Primadox", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

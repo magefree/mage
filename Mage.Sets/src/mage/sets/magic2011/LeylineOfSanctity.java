@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LeylineOfSanctity extends CardImpl<LeylineOfSanctity> {
+public class LeylineOfSanctity extends CardImpl {
 
     private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
 

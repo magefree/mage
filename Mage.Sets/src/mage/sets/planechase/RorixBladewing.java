@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RorixBladewing extends CardImpl<RorixBladewing> {
+public class RorixBladewing extends CardImpl {
 
     public RorixBladewing(UUID ownerId) {
         super(ownerId, 65, "Rorix Bladewing", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Invigorate extends CardImpl<Invigorate> {
+public class Invigorate extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("If you control a Forest");
     

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class BeguilerOfWills extends CardImpl<BeguilerOfWills> {
+public class BeguilerOfWills extends CardImpl {
 
     public BeguilerOfWills(UUID ownerId) {
         super(ownerId, 28, "Beguiler of Wills", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

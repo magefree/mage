@@ -58,7 +58,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class SoulReap extends CardImpl<SoulReap> {
+public class SoulReap extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nongreen creature");
     

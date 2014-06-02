@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Quercitron
  */
-public class DenseFoliage extends CardImpl<DenseFoliage> {
+public class DenseFoliage extends CardImpl {
 
     public DenseFoliage(UUID ownerId) {
         super(ownerId, 66, "Dense Foliage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

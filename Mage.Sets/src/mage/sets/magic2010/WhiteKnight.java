@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WhiteKnight extends CardImpl<WhiteKnight> {
+public class WhiteKnight extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Black");
 

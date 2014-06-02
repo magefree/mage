@@ -47,7 +47,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class GlimpseTheFuture extends CardImpl<GlimpseTheFuture> {
+public class GlimpseTheFuture extends CardImpl {
 
     public GlimpseTheFuture(UUID ownerId) {
         super(ownerId, 58, "Glimpse the Future", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SlinkingGiant extends CardImpl<SlinkingGiant> {
+public class SlinkingGiant extends CardImpl {
 
     public SlinkingGiant(UUID ownerId) {
         super(ownerId, 106, "Slinking Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

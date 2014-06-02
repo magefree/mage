@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MogissMarauder extends CardImpl<MogissMarauder> {
+public class MogissMarauder extends CardImpl {
 
     public MogissMarauder(UUID ownerId) {
         super(ownerId, 97, "Mogis's Marauder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

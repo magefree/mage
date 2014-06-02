@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author cbt33
  */
-public class FilthyCur extends CardImpl<FilthyCur> {
+public class FilthyCur extends CardImpl {
 
     public FilthyCur(UUID ownerId) {
         super(ownerId, 136, "Filthy Cur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

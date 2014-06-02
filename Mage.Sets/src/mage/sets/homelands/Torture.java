@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class Torture extends CardImpl<Torture> {
+public class Torture extends CardImpl {
     
     private static final String rule = "Testing rules";
 

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SageOwl extends CardImpl<SageOwl> {
+public class SageOwl extends CardImpl {
 
     public SageOwl(UUID ownerId) {
         super(ownerId, 69, "Sage Owl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

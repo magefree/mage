@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ReadTheBones extends CardImpl<ReadTheBones> {
+public class ReadTheBones extends CardImpl {
 
     public ReadTheBones(UUID ownerId) {
         super(ownerId, 101, "Read the Bones", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author noxx (Angel of Jubilation), cbt33
  */
-public class BlessedOrator extends CardImpl<BlessedOrator> {
+public class BlessedOrator extends CardImpl {
 
     public BlessedOrator(UUID ownerId) {
         super(ownerId, 6, "Blessed Orator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

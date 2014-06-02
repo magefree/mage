@@ -47,7 +47,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author BetaSteward
  */
-public class GrafdiggersCage extends CardImpl<GrafdiggersCage> {
+public class GrafdiggersCage extends CardImpl {
 
     public GrafdiggersCage(UUID ownerId) {
         super(ownerId, 149, "Grafdigger's Cage", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

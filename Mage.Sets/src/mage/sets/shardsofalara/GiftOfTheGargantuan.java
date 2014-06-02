@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class GiftOfTheGargantuan extends CardImpl<GiftOfTheGargantuan> {
+public class GiftOfTheGargantuan extends CardImpl {
 
     public GiftOfTheGargantuan(UUID ownerId) {
         super(ownerId, 132, "Gift of the Gargantuan", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");

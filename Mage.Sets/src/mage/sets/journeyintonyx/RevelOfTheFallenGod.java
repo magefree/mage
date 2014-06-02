@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class RevelOfTheFallenGod extends CardImpl<RevelOfTheFallenGod> {
+public class RevelOfTheFallenGod extends CardImpl {
 
     public RevelOfTheFallenGod(UUID ownerId) {
         super(ownerId, 155, "Revel of the Fallen God", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{G}{G}");

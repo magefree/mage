@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Asphyxiate extends CardImpl<Asphyxiate> {
+public class Asphyxiate extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
     

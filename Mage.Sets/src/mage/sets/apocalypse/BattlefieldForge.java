@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BattlefieldForge extends CardImpl<BattlefieldForge> {
+public class BattlefieldForge extends CardImpl {
 
     public BattlefieldForge(UUID ownerId) {
         super(ownerId, 139, "Battlefield Forge", Rarity.RARE, new CardType[]{CardType.LAND}, "");

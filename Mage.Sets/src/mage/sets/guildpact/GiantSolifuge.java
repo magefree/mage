@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GiantSolifuge extends CardImpl<GiantSolifuge> {
+public class GiantSolifuge extends CardImpl {
 
     public GiantSolifuge(UUID ownerId) {
         super(ownerId, 143, "Giant Solifuge", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R/G}{R/G}");

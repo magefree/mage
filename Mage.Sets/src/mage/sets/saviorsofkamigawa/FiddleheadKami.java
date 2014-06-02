@@ -40,7 +40,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  *
  * @author Loki
  */
-public class FiddleheadKami extends CardImpl<FiddleheadKami> {
+public class FiddleheadKami extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

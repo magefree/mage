@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class SawtoothThresher extends CardImpl<SawtoothThresher> {
+public class SawtoothThresher extends CardImpl {
 
     public SawtoothThresher(UUID ownerId) {
         super(ownerId, 149, "Sawtooth Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

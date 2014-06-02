@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class StreamHopper extends CardImpl<StreamHopper> {
+public class StreamHopper extends CardImpl {
 
     public StreamHopper(UUID ownerId) {
         super(ownerId, 113, "Stream Hopper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U/R}");

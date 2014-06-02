@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
 /**
  * @author LevelX2
  */
-public class PatronOfTheAkki extends CardImpl<PatronOfTheAkki> {
+public class PatronOfTheAkki extends CardImpl {
 
     public PatronOfTheAkki(UUID ownerId) {
         super(ownerId, 115, "Patron of the Akki", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

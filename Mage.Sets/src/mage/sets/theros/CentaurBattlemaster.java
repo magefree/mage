@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class CentaurBattlemaster extends CardImpl<CentaurBattlemaster> {
+public class CentaurBattlemaster extends CardImpl {
 
     public CentaurBattlemaster(UUID ownerId) {
         super(ownerId, 154, "Centaur Battlemaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

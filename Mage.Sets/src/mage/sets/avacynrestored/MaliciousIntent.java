@@ -47,7 +47,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class MaliciousIntent extends CardImpl<MaliciousIntent> {
+public class MaliciousIntent extends CardImpl {
 
     public MaliciousIntent(UUID ownerId) {
         super(ownerId, 147, "Malicious Intent", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

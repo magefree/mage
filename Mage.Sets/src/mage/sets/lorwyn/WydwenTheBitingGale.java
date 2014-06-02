@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class WydwenTheBitingGale extends CardImpl<WydwenTheBitingGale> {
+public class WydwenTheBitingGale extends CardImpl {
 
     public WydwenTheBitingGale(UUID ownerId) {
         super(ownerId, 253, "Wydwen, the Biting Gale", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");

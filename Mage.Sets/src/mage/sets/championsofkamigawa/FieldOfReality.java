@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX
  */
-public class FieldOfReality extends CardImpl<FieldOfReality> {
+public class FieldOfReality extends CardImpl {
 
     public FieldOfReality(UUID ownerId) {
         super(ownerId, 60, "Field of Reality", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

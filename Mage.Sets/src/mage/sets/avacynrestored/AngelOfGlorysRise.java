@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class AngelOfGlorysRise extends CardImpl<AngelOfGlorysRise> {
+public class AngelOfGlorysRise extends CardImpl {
 
     public AngelOfGlorysRise(UUID ownerId) {
         super(ownerId, 1, "Angel of Glory's Rise", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

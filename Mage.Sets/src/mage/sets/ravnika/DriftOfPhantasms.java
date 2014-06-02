@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DriftOfPhantasms extends CardImpl<DriftOfPhantasms> {
+public class DriftOfPhantasms extends CardImpl {
 
     public DriftOfPhantasms(UUID ownerId) {
         super(ownerId, 46, "Drift of Phantasms", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

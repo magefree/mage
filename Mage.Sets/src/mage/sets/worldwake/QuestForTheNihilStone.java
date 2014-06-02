@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class QuestForTheNihilStone extends CardImpl<QuestForTheNihilStone> {
+public class QuestForTheNihilStone extends CardImpl {
 
     public QuestForTheNihilStone(UUID ownerId) {
         super(ownerId, 64, "Quest for the Nihil Stone", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}");

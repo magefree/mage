@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class VedalkenDismisser extends CardImpl<VedalkenDismisser> {
+public class VedalkenDismisser extends CardImpl {
 
     public VedalkenDismisser(UUID ownerId) {
         super(ownerId, 73, "Vedalken Dismisser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");

@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ErebosGodOfTheDead extends CardImpl<ErebosGodOfTheDead> {
+public class ErebosGodOfTheDead extends CardImpl {
 
     public ErebosGodOfTheDead(UUID ownerId) {
         super(ownerId, 85, "Erebos, God of the Dead", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");

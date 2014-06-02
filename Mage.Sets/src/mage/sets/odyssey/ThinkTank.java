@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author cbt33
  */
-public class ThinkTank extends CardImpl<ThinkTank> {
+public class ThinkTank extends CardImpl {
 
     public ThinkTank(UUID ownerId) {
         super(ownerId, 104, "Think Tank", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

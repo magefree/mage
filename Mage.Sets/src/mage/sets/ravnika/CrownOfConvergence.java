@@ -56,7 +56,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class CrownOfConvergence extends CardImpl<CrownOfConvergence> {
+public class CrownOfConvergence extends CardImpl {
 
     private static final String rule1 = "As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1";
 

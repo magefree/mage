@@ -44,7 +44,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DragonsClaw extends CardImpl<DragonsClaw> {
+public class DragonsClaw extends CardImpl {
 
     public DragonsClaw(UUID ownerId) {
         super(ownerId, 322, "Dragon's Claw", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

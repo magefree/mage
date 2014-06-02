@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class LastWord extends CardImpl<LastWord> {
+public class LastWord extends CardImpl {
 
     public LastWord (UUID ownerId) {
         super(ownerId, 23, "Last Word", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class MudbuttonClanger extends CardImpl<MudbuttonClanger> {
+public class MudbuttonClanger extends CardImpl {
 
     public MudbuttonClanger(UUID ownerId) {
         super(ownerId, 95, "Mudbutton Clanger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

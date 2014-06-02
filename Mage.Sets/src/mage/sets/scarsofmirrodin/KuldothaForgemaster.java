@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class KuldothaForgemaster extends CardImpl<KuldothaForgemaster> {
+public class KuldothaForgemaster extends CardImpl {
 
     private static final FilterArtifactCard filterArtifactCard = new FilterArtifactCard();
     private static final FilterArtifactPermanent filterArtifactPermanent = new FilterArtifactPermanent();

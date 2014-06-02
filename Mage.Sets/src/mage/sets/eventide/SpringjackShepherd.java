@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  * @author jeffwadsworth
  *
  */
-public class SpringjackShepherd extends CardImpl<SpringjackShepherd> {
+public class SpringjackShepherd extends CardImpl {
 
     public SpringjackShepherd(UUID ownerId) {
         super(ownerId, 15, "Springjack Shepherd", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

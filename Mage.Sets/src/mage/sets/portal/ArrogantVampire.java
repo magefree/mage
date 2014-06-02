@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class ArrogantVampire extends CardImpl<ArrogantVampire> {
+public class ArrogantVampire extends CardImpl {
 
     public ArrogantVampire(UUID ownerId) {
         super(ownerId, 1, "Arrogant Vampire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

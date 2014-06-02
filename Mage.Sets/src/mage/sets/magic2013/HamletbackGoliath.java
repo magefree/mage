@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class HamletbackGoliath extends CardImpl<HamletbackGoliath> {
+public class HamletbackGoliath extends CardImpl {
 
     public HamletbackGoliath(UUID ownerId) {
         super(ownerId, 136, "Hamletback Goliath", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}");

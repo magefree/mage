@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class AlabasterMage extends CardImpl<AlabasterMage> {
+public class AlabasterMage extends CardImpl {
 
     public AlabasterMage(UUID ownerId) {
         super(ownerId, 2, "Alabaster Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

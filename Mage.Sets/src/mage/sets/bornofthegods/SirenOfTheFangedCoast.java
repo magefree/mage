@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SirenOfTheFangedCoast extends CardImpl<SirenOfTheFangedCoast> {
+public class SirenOfTheFangedCoast extends CardImpl {
 
     public SirenOfTheFangedCoast(UUID ownerId) {
         super(ownerId, 50, "Siren of the Fanged Coast", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

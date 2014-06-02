@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class LegacyWeapon extends CardImpl<LegacyWeapon> {
+public class LegacyWeapon extends CardImpl {
 
     public LegacyWeapon(UUID ownerId) {
         super(ownerId, 137, "Legacy Weapon", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{7}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class SealOfStrength extends CardImpl<SealOfStrength> {
+public class SealOfStrength extends CardImpl {
 
     public SealOfStrength(UUID ownerId) {
         super(ownerId, 115, "Seal of Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

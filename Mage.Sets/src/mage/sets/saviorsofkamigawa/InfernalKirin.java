@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class InfernalKirin extends CardImpl<InfernalKirin> {
+public class InfernalKirin extends CardImpl {
 
     public InfernalKirin(UUID ownerId) {
         super(ownerId, 72, "Infernal Kirin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

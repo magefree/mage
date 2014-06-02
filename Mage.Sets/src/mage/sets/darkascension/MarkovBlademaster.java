@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class MarkovBlademaster extends CardImpl<MarkovBlademaster> {
+public class MarkovBlademaster extends CardImpl {
 
     public MarkovBlademaster(UUID ownerId) {
         super(ownerId, 96, "Markov Blademaster", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

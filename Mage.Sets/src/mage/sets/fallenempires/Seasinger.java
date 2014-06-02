@@ -56,7 +56,7 @@ import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
  *
  * @author jeffwadsworth
  */
-public class Seasinger extends CardImpl<Seasinger> {
+public class Seasinger extends CardImpl {
 
     private static final String rule = "Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped";
     private static final FilterPermanent islandYouControl = new FilterPermanent("Island");

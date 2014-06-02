@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class HonorGuard extends CardImpl<HonorGuard> {
+public class HonorGuard extends CardImpl {
 
     public HonorGuard(UUID ownerId) {
         super(ownerId, 23, "Honor Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

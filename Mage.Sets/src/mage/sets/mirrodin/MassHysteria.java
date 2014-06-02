@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class MassHysteria extends CardImpl<MassHysteria> {
+public class MassHysteria extends CardImpl {
 
     public MassHysteria(UUID ownerId) {
         super(ownerId, 99, "Mass Hysteria", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LashOfTheWhip extends CardImpl<LashOfTheWhip> {
+public class LashOfTheWhip extends CardImpl {
 
     public LashOfTheWhip(UUID ownerId) {
         super(ownerId, 94, "Lash of the Whip", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");

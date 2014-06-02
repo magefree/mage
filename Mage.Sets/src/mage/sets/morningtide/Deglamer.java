@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Deglamer extends CardImpl<Deglamer> {
+public class Deglamer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

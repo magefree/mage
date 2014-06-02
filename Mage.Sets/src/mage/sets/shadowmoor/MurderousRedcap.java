@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jonubuu
  */
-public class MurderousRedcap extends CardImpl<MurderousRedcap> {
+public class MurderousRedcap extends CardImpl {
 
     public MurderousRedcap(UUID ownerId) {
         super(ownerId, 192, "Murderous Redcap", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B/R}{B/R}");

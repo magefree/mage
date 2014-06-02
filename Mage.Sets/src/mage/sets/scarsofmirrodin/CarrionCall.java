@@ -42,7 +42,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class CarrionCall extends CardImpl<CarrionCall> {
+public class CarrionCall extends CardImpl {
 
     public CarrionCall (UUID ownerId) {
         super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Qumulox extends CardImpl<Qumulox> {
+public class Qumulox extends CardImpl {
 
     public Qumulox(UUID ownerId) {
         super(ownerId, 59, "Qumulox", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");

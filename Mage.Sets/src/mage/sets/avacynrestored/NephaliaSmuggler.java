@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class NephaliaSmuggler extends CardImpl<NephaliaSmuggler> {
+public class NephaliaSmuggler extends CardImpl {
 
     public NephaliaSmuggler(UUID ownerId) {
         super(ownerId, 69, "Nephalia Smuggler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");

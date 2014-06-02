@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class DrossRipper extends CardImpl<DrossRipper> {
+public class DrossRipper extends CardImpl {
 
     public DrossRipper (UUID ownerId) {
         super(ownerId, 106, "Dross Ripper", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

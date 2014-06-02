@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LavaclawReaches extends CardImpl<LavaclawReaches> {
+public class LavaclawReaches extends CardImpl {
 
     public LavaclawReaches(UUID ownerId) {
         super(ownerId, 139, "Lavaclaw Reaches", Rarity.RARE, new CardType[]{CardType.LAND}, null);

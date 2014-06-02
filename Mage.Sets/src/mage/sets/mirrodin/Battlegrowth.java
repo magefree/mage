@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Battlegrowth extends CardImpl<Battlegrowth> {
+public class Battlegrowth extends CardImpl {
 
     public Battlegrowth(UUID ownerId) {
         super(ownerId, 113, "Battlegrowth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

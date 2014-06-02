@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class MageSlayer extends CardImpl<MageSlayer> {
+public class MageSlayer extends CardImpl {
 
     public MageSlayer(UUID ownerId) {
         super(ownerId, 57, "Mage Slayer", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{R}{G}");

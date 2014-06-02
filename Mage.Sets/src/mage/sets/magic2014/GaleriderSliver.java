@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class GaleriderSliver extends CardImpl<GaleriderSliver> {
+public class GaleriderSliver extends CardImpl {
 
     public GaleriderSliver(UUID ownerId) {
         super(ownerId, 57, "Galerider Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}");

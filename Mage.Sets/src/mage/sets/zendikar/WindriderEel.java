@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WindriderEel extends CardImpl<WindriderEel> {
+public class WindriderEel extends CardImpl {
 
     public WindriderEel (UUID ownerId) {
         super(ownerId, 78, "Windrider Eel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

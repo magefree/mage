@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WillowFaerie extends CardImpl<WillowFaerie> {
+public class WillowFaerie extends CardImpl {
 
     public WillowFaerie(UUID ownerId) {
         super(ownerId, 73, "Willow Faerie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

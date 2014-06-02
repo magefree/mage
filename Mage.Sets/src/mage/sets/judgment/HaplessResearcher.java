@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class HaplessResearcher extends CardImpl<HaplessResearcher> {
+public class HaplessResearcher extends CardImpl {
 
     public HaplessResearcher(UUID ownerId) {
         super(ownerId, 42, "Hapless Researcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

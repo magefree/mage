@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ViashinoGrappler extends CardImpl<ViashinoGrappler> {
+public class ViashinoGrappler extends CardImpl {
 
     public ViashinoGrappler(UUID ownerId) {
         super(ownerId, 179, "Viashino Grappler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

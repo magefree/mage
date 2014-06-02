@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jonubuu
  */
-public class RelicOfProgenitus extends CardImpl<RelicOfProgenitus> {
+public class RelicOfProgenitus extends CardImpl {
 
     public RelicOfProgenitus(UUID ownerId) {
         super(ownerId, 218, "Relic of Progenitus", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

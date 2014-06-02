@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class RakdosSignet extends CardImpl<RakdosSignet> {
+public class RakdosSignet extends CardImpl {
 
     public RakdosSignet(UUID ownerId) {
         super(ownerId, 165, "Rakdos Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

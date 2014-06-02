@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class SlowMotion extends CardImpl<SlowMotion> {
+public class SlowMotion extends CardImpl {
 
     public SlowMotion(UUID ownerId) {
         super(ownerId, 42, "Slow Motion", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

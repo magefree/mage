@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class HuntingPack extends CardImpl<HuntingPack> {
+public class HuntingPack extends CardImpl {
 
     public HuntingPack(UUID ownerId) {
         super(ownerId, 121, "Hunting Pack", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{G}{G}");

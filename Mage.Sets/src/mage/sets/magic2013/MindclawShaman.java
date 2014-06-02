@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class MindclawShaman extends CardImpl<MindclawShaman> {
+public class MindclawShaman extends CardImpl {
 
     public MindclawShaman(UUID ownerId) {
         super(ownerId, 142, "Mindclaw Shaman", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

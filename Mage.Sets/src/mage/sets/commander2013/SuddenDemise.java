@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SuddenDemise extends CardImpl<SuddenDemise> {
+public class SuddenDemise extends CardImpl {
 
     public SuddenDemise(UUID ownerId) {
         super(ownerId, 124, "Sudden Demise", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");

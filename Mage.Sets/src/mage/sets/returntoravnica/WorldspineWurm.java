@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class WorldspineWurm extends CardImpl<WorldspineWurm> {
+public class WorldspineWurm extends CardImpl {
 
     public WorldspineWurm(UUID ownerId) {
         super(ownerId, 140, "Worldspine Wurm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{8}{G}{G}{G}");

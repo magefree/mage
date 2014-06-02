@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class AbhorrentOverlord extends CardImpl<AbhorrentOverlord> {
+public class AbhorrentOverlord extends CardImpl {
 
     public AbhorrentOverlord(UUID ownerId) {
         super(ownerId, 75, "Abhorrent Overlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

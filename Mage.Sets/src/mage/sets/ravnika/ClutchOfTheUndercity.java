@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class ClutchOfTheUndercity extends CardImpl<ClutchOfTheUndercity> {
+public class ClutchOfTheUndercity extends CardImpl {
 
     public ClutchOfTheUndercity(UUID ownerId) {
         super(ownerId, 197, "Clutch of the Undercity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}{B}");

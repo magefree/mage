@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 /**
  * @author noxx
  */
-public class SomberwaldSage extends CardImpl<SomberwaldSage> {
+public class SomberwaldSage extends CardImpl {
 
     public SomberwaldSage(UUID ownerId) {
         super(ownerId, 194, "Somberwald Sage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

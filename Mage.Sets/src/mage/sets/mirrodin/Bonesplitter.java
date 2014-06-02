@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class Bonesplitter extends CardImpl<Bonesplitter> {
+public class Bonesplitter extends CardImpl {
 
     public Bonesplitter(UUID ownerId) {
         super(ownerId, 146, "Bonesplitter", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

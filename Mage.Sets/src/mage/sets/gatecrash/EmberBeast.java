@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class EmberBeast extends CardImpl<EmberBeast> {
+public class EmberBeast extends CardImpl {
 
     public EmberBeast(UUID ownerId) {
         super(ownerId, 89, "Ember Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

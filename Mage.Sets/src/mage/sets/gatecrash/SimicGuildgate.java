@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class SimicGuildgate extends CardImpl<SimicGuildgate> {
+public class SimicGuildgate extends CardImpl {
 
     public SimicGuildgate(UUID ownerId) {
         super(ownerId, 246, "Simic Guildgate", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

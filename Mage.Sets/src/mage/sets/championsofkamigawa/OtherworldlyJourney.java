@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author LevelX
  */
-public class OtherworldlyJourney extends CardImpl<OtherworldlyJourney> {
+public class OtherworldlyJourney extends CardImpl {
 
     public OtherworldlyJourney(UUID ownerId) {
         super(ownerId, 37, "Otherworldly Journey", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

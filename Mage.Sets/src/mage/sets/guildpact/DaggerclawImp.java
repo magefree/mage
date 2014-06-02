@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DaggerclawImp extends CardImpl<DaggerclawImp> {
+public class DaggerclawImp extends CardImpl {
 
     public DaggerclawImp (UUID ownerId) {
         super(ownerId, 48, "Daggerclaw Imp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

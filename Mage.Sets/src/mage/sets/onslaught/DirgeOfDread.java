@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DirgeOfDread extends CardImpl<DirgeOfDread> {
+public class DirgeOfDread extends CardImpl {
 
     public DirgeOfDread(UUID ownerId) {
         super(ownerId, 138, "Dirge of Dread", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

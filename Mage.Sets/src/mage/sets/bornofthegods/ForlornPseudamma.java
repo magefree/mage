@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class ForlornPseudamma extends CardImpl<ForlornPseudamma> {
+public class ForlornPseudamma extends CardImpl {
 
     public ForlornPseudamma(UUID ownerId) {
         super(ownerId, 71, "Forlorn Pseudamma", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

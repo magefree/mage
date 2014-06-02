@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class HanweirLancer extends CardImpl<HanweirLancer> {
+public class HanweirLancer extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, both creatures have first strike";
 

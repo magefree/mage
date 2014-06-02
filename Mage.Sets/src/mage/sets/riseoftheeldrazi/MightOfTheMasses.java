@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class MightOfTheMasses extends CardImpl<MightOfTheMasses> {
+public class MightOfTheMasses extends CardImpl {
 
     public MightOfTheMasses(UUID ownerId) {
         super(ownerId, 196, "Might of the Masses", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

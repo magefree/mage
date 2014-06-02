@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class KavuGlider extends CardImpl<KavuGlider> {
+public class KavuGlider extends CardImpl {
 
     public KavuGlider(UUID ownerId) {
         super(ownerId, 64, "Kavu Glider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

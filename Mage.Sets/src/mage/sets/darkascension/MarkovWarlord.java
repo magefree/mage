@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class MarkovWarlord extends CardImpl<MarkovWarlord> {
+public class MarkovWarlord extends CardImpl {
 
     public MarkovWarlord(UUID ownerId) {
         super(ownerId, 97, "Markov Warlord", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");

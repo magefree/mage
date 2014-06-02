@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class MnemonicWall extends CardImpl<MnemonicWall> {
+public class MnemonicWall extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 

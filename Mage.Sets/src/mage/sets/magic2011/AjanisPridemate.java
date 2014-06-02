@@ -45,7 +45,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AjanisPridemate extends CardImpl<AjanisPridemate> {
+public class AjanisPridemate extends CardImpl {
 
     public AjanisPridemate(UUID ownerId) {
         super(ownerId, 3, "Ajani's Pridemate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "1}{W}");

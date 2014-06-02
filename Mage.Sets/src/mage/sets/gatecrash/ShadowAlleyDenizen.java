@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ShadowAlleyDenizen extends CardImpl<ShadowAlleyDenizen> {
+public class ShadowAlleyDenizen extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another black creature");
 

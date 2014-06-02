@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class AegisAngel extends CardImpl<AegisAngel> {
+public class AegisAngel extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
 

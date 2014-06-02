@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author intimidatingant
  */
-public class PyreheartWolf extends CardImpl<PyreheartWolf> {
+public class PyreheartWolf extends CardImpl {
 
     public PyreheartWolf(UUID ownerId) {
         super(ownerId, 101, "Pyreheart Wolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

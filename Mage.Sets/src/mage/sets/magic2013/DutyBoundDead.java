@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DutyBoundDead extends CardImpl<DutyBoundDead> {
+public class DutyBoundDead extends CardImpl {
 
     public DutyBoundDead(UUID ownerId) {
         super(ownerId, 92, "Duty-Bound Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

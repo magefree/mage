@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class PinecrestRidge extends CardImpl<PinecrestRidge> {
+public class PinecrestRidge extends CardImpl {
 
     public PinecrestRidge(UUID ownerId) {
         super(ownerId, 281, "Pinecrest Ridge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

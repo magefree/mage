@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class EagleOfTheWatch extends CardImpl<EagleOfTheWatch> {
+public class EagleOfTheWatch extends CardImpl {
 
     public EagleOfTheWatch(UUID ownerId) {
         super(ownerId, 9, "Eagle of the Watch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

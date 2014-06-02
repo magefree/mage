@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class LivingEnd extends CardImpl<LivingEnd> {
+public class LivingEnd extends CardImpl {
 
     public LivingEnd(UUID ownerId) {
         super(ownerId, 115, "Living End", Rarity.RARE, new CardType[]{CardType.SORCERY}, "");

@@ -47,7 +47,7 @@ import mage.watchers.Watcher;
  *
  * @author BetaSteward
  */
-public class CurseOfExhaustion extends CardImpl<CurseOfExhaustion> {
+public class CurseOfExhaustion extends CardImpl {
 
     public CurseOfExhaustion(UUID ownerId) {
         super(ownerId, 5, "Curse of Exhaustion", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

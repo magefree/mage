@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class StaunchHeartedWarrior extends CardImpl<StaunchHeartedWarrior> {
+public class StaunchHeartedWarrior extends CardImpl {
 
     public StaunchHeartedWarrior(UUID ownerId) {
         super(ownerId, 179, "Staunch-Hearted Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

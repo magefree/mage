@@ -40,7 +40,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class GoldnightCommander extends CardImpl<GoldnightCommander> {
+public class GoldnightCommander extends CardImpl {
 
     public GoldnightCommander(UUID ownerId) {
         super(ownerId, 22, "Goldnight Commander", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

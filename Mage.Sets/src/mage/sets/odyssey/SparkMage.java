@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33, Loki (Ashling the Extinguisher)
  */
-public class SparkMage extends CardImpl<SparkMage> {
+public class SparkMage extends CardImpl {
 
     public SparkMage(UUID ownerId) {
         super(ownerId, 222, "Spark Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");

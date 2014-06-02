@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class AgentOfHorizons extends CardImpl<AgentOfHorizons> {
+public class AgentOfHorizons extends CardImpl {
 
     public AgentOfHorizons(UUID ownerId) {
         super(ownerId, 148, "Agent of Horizons", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

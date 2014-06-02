@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class RainOfTears extends CardImpl<RainOfTears> {
+public class RainOfTears extends CardImpl {
 
     public RainOfTears(UUID ownerId) {
         super(ownerId, 43, "Rain of Tears", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");

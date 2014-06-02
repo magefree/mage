@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class DaringThief extends CardImpl<DaringThief> {
+public class DaringThief extends CardImpl {
 
     public DaringThief(UUID ownerId) {
         super(ownerId, 36, "Daring Thief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");

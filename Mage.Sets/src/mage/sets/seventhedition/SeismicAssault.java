@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jonubuu
  */
-public class SeismicAssault extends CardImpl<SeismicAssault> {
+public class SeismicAssault extends CardImpl {
 
     private static final FilterCard filter = new FilterLandCard();
 

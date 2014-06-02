@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class Solidarity extends CardImpl<Solidarity> {
+public class Solidarity extends CardImpl {
 
     public Solidarity(UUID ownerId) {
         super(ownerId, 20, "Solidarity", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");

@@ -38,7 +38,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Plopman
  */
-public class RackAndRuin extends CardImpl<RackAndRuin> {
+public class RackAndRuin extends CardImpl {
 
     public RackAndRuin(UUID ownerId) {
         super(ownerId, 89, "Rack and Ruin", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

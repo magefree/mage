@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SteadfastGuard extends CardImpl<SteadfastGuard> {
+public class SteadfastGuard extends CardImpl {
 
     public SteadfastGuard(UUID ownerId) {
         super(ownerId, 48, "Steadfast Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class HarrowingJourney extends CardImpl<HarrowingJourney> {
+public class HarrowingJourney extends CardImpl {
 
     public HarrowingJourney(UUID ownerId) {
         super(ownerId, 67, "Harrowing Journey", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");

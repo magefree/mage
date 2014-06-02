@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class DrossHopper extends CardImpl<DrossHopper> {
+public class DrossHopper extends CardImpl {
 
     public DrossHopper (UUID ownerId) {
         super(ownerId, 60, "Dross Hopper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

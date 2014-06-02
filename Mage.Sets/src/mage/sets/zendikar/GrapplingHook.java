@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class GrapplingHook extends CardImpl<GrapplingHook> {
+public class GrapplingHook extends CardImpl {
 
     public GrapplingHook(UUID ownerId) {
         super(ownerId, 203, "Grappling Hook", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

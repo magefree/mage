@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Loki
  */
-public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
+public class DarksteelJuggernaut extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts you control");
 
     static {

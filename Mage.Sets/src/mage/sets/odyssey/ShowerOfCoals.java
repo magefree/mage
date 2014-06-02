@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author cbt33, LevelX2 (Kirtar's Wrath)
  */
-public class ShowerOfCoals extends CardImpl<ShowerOfCoals> {
+public class ShowerOfCoals extends CardImpl {
 
     public ShowerOfCoals(UUID ownerId) {
         super(ownerId, 221, "Shower of Coals", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

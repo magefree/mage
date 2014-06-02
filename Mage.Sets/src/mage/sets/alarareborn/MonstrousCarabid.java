@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class MonstrousCarabid extends CardImpl<MonstrousCarabid> {
+public class MonstrousCarabid extends CardImpl {
 
     public MonstrousCarabid(UUID ownerId) {
         super(ownerId, 43, "Monstrous Carabid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");

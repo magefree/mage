@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class PsychicPuppetry extends CardImpl<PsychicPuppetry> {
+public class PsychicPuppetry extends CardImpl {
 
     public PsychicPuppetry(UUID ownerId) {
         super(ownerId, 80, "Psychic Puppetry", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

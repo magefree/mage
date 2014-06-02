@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class BloodflowConnoisseur extends CardImpl<BloodflowConnoisseur> {
+public class BloodflowConnoisseur extends CardImpl {
 
     public BloodflowConnoisseur(UUID ownerId) {
         super(ownerId, 87, "Bloodflow Connoisseur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

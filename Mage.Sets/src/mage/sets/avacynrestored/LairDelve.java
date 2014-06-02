@@ -47,7 +47,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class LairDelve extends CardImpl<LairDelve> {
+public class LairDelve extends CardImpl {
 
     public LairDelve(UUID ownerId) {
         super(ownerId, 184, "Lair Delve", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class SealOfFire extends CardImpl<SealOfFire> {
+public class SealOfFire extends CardImpl {
 
     public SealOfFire(UUID ownerId) {
         super(ownerId, 98, "Seal of Fire", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

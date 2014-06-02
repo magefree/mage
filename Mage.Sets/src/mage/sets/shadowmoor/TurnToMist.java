@@ -37,7 +37,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TurnToMist extends CardImpl<TurnToMist> {
+public class TurnToMist extends CardImpl {
 
     public TurnToMist(UUID ownerId) {
         super(ownerId, 155, "Turn to Mist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W/U}");

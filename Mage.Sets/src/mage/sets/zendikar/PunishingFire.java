@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class PunishingFire extends CardImpl<PunishingFire> {
+public class PunishingFire extends CardImpl {
 
     public PunishingFire(UUID ownerId) {
         super(ownerId, 142, "Punishing Fire", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

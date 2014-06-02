@@ -41,7 +41,7 @@ import mage.game.combat.CombatGroup;
  *
  * @author North
  */
-public class BlessedReversal extends CardImpl<BlessedReversal> {
+public class BlessedReversal extends CardImpl {
 
     public BlessedReversal(UUID ownerId) {
         super(ownerId, 2, "Blessed Reversal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}");

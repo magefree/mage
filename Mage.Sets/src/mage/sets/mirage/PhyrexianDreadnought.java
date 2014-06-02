@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PhyrexianDreadnought extends CardImpl<PhyrexianDreadnought> {
+public class PhyrexianDreadnought extends CardImpl {
 
     public PhyrexianDreadnought(UUID ownerId) {
         super(ownerId, 280, "Phyrexian Dreadnought", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

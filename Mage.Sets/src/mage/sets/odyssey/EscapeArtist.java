@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class EscapeArtist extends CardImpl<EscapeArtist> {
+public class EscapeArtist extends CardImpl {
 
     public EscapeArtist(UUID ownerId) {
         super(ownerId, 84, "Escape Artist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

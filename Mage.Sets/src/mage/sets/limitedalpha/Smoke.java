@@ -46,7 +46,7 @@ import mage.players.Player;
  * @author KholdFuzion
 
  */
-public class Smoke extends CardImpl<Smoke> {
+public class Smoke extends CardImpl {
 
     public Smoke(UUID ownerId) {
         super(ownerId, 176, "Smoke", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class BorealDruid extends CardImpl<BorealDruid> {
+public class BorealDruid extends CardImpl {
 
     public BorealDruid(UUID ownerId) {
         super(ownerId, 105, "Boreal Druid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class SphinxsRevelation extends CardImpl<SphinxsRevelation> {
+public class SphinxsRevelation extends CardImpl {
 
     public SphinxsRevelation (UUID ownerId) {
         super(ownerId, 200, "Sphinx's Revelation", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{X}{W}{U}{U}");

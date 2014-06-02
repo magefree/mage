@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevleX2
  */
-public class HorncallersChant extends CardImpl<HorncallersChant> {
+public class HorncallersChant extends CardImpl {
 
     public HorncallersChant(UUID ownerId) {
         super(ownerId, 128, "Horncaller's Chant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{7}{G}");

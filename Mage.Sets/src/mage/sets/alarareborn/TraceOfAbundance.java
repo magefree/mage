@@ -56,7 +56,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class TraceOfAbundance extends CardImpl<TraceOfAbundance> {
+public class TraceOfAbundance extends CardImpl {
     
     private String rule = "Enchanted land has shroud";
 

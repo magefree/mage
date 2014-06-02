@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class StrawSoldiers extends CardImpl<StrawSoldiers> {
+public class StrawSoldiers extends CardImpl {
 
     public StrawSoldiers(UUID ownerId) {
         super(ownerId, 54, "Straw Soldiers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

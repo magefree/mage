@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TempleOfMalice extends CardImpl<TempleOfMalice> {
+public class TempleOfMalice extends CardImpl {
 
     public TempleOfMalice(UUID ownerId) {
         super(ownerId, 164, "Temple of Malice", Rarity.RARE, new CardType[]{CardType.LAND}, "");

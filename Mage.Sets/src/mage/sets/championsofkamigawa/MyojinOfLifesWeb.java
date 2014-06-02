@@ -55,7 +55,7 @@ import mage.watchers.common.CastFromHandWatcher;
 /**
  * @author LevelX
  */
-public class MyojinOfLifesWeb extends CardImpl<MyojinOfLifesWeb> {
+public class MyojinOfLifesWeb extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("any number of creature cards from your hand");
     static {

@@ -38,7 +38,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author LevelX2
  */
-public class AEtherize extends CardImpl<AEtherize> {
+public class AEtherize extends CardImpl {
 
     public AEtherize(UUID ownerId) {
         super(ownerId, 29, "AEtherize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");

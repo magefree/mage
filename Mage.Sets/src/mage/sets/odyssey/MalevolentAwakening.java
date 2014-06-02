@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author cbt33
  */
-public class MalevolentAwakening extends CardImpl<MalevolentAwakening> {
+public class MalevolentAwakening extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("creature card from your graveyard");
     

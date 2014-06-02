@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class TheTabernacleAtPendrellVale extends CardImpl<TheTabernacleAtPendrellVale> {
+public class TheTabernacleAtPendrellVale extends CardImpl {
 
     public TheTabernacleAtPendrellVale(UUID ownerId) {
         super(ownerId, 252, "The Tabernacle at Pendrell Vale", Rarity.RARE, new CardType[]{CardType.LAND}, "");

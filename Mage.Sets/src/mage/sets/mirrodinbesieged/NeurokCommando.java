@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class NeurokCommando extends CardImpl<NeurokCommando> {
+public class NeurokCommando extends CardImpl {
 
     public NeurokCommando(UUID ownerId) {
         super(ownerId, 28, "Neurok Commando", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

@@ -50,7 +50,7 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
  * @author jeffwadsworth
  *
  */
-public class TwilightShepherd extends CardImpl<TwilightShepherd> {
+public class TwilightShepherd extends CardImpl {
 
     public TwilightShepherd(UUID ownerId) {
         super(ownerId, 25, "Twilight Shepherd", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{W}");

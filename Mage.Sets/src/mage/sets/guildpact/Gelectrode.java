@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class Gelectrode extends CardImpl<Gelectrode> {
+public class Gelectrode extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
 

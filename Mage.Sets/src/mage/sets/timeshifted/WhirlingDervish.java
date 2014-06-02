@@ -48,7 +48,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX
  */
-public class WhirlingDervish extends CardImpl<WhirlingDervish> {
+public class WhirlingDervish extends CardImpl {
 
     private static final String ruleText = "At the beginning of each end step, if {this} dealt damage to an opponent this turn, put a +1/+1 counter on it.";
     private static final FilterCard filter = new FilterCard("black");

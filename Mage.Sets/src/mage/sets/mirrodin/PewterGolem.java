@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class PewterGolem extends CardImpl<PewterGolem> {
+public class PewterGolem extends CardImpl {
 
     public PewterGolem(UUID ownerId) {
         super(ownerId, 227, "Pewter Golem", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DaggerdromeImp extends CardImpl<DaggerdromeImp> {
+public class DaggerdromeImp extends CardImpl {
 
     public DaggerdromeImp(UUID ownerId) {
         super(ownerId, 60, "Daggerdrome Imp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

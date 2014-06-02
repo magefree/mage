@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
 /**
  * @author LevelX2
  */
-public class PhantomGeneral extends CardImpl<PhantomGeneral> {
+public class PhantomGeneral extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens you control");
 

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class SpawnOfRixMaadi extends CardImpl<SpawnOfRixMaadi> {
+public class SpawnOfRixMaadi extends CardImpl {
  
     public SpawnOfRixMaadi(UUID ownerId) {
         super(ownerId, 199, "Spawn of Rix Maadi", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");

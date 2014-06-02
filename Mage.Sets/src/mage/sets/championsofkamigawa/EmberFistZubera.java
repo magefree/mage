@@ -43,7 +43,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class EmberFistZubera extends CardImpl<EmberFistZubera> {
+public class EmberFistZubera extends CardImpl {
 
     public EmberFistZubera (UUID ownerId) {
         super(ownerId, 166, "Ember-Fist Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

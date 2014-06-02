@@ -42,7 +42,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class Sanguimancy extends CardImpl<Sanguimancy> {
+public class Sanguimancy extends CardImpl {
 
     public Sanguimancy(UUID ownerId) {
         super(ownerId, 81, "Sanguimancy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");

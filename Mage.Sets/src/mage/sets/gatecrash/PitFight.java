@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PitFight extends CardImpl<PitFight> {
+public class PitFight extends CardImpl {
 
     public PitFight(UUID ownerId) {
         super(ownerId, 223, "Pit Fight", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/G}");

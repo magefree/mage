@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Frogmite extends CardImpl<Frogmite> {
+public class Frogmite extends CardImpl {
 
     public Frogmite(UUID ownerId) {
         super(ownerId, 51, "Frogmite", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

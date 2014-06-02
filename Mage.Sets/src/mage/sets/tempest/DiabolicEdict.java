@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class DiabolicEdict extends CardImpl<DiabolicEdict> {
+public class DiabolicEdict extends CardImpl {
 
     public DiabolicEdict(UUID ownerId) {
         super(ownerId, 22, "Diabolic Edict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");

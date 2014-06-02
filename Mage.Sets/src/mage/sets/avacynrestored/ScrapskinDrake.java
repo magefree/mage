@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  * @author noxx
 
  */
-public class ScrapskinDrake extends CardImpl<ScrapskinDrake> {
+public class ScrapskinDrake extends CardImpl {
 
     public ScrapskinDrake(UUID ownerId) {
         super(ownerId, 73, "Scrapskin Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

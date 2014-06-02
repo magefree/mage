@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class LeadGolem extends CardImpl<LeadGolem> {
+public class LeadGolem extends CardImpl {
 
     public LeadGolem(UUID ownerId) {
         super(ownerId, 271, "Lead Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class SylvanMessenger extends CardImpl<SylvanMessenger> {
+public class SylvanMessenger extends CardImpl {
 
     public SylvanMessenger(UUID ownerId) {
         super(ownerId, 87, "Sylvan Messenger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

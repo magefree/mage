@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class PainKami extends CardImpl<PainKami> {
+public class PainKami extends CardImpl {
 
     public PainKami(UUID ownerId) {
         super(ownerId, 183, "Pain Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class VulshokReplica extends CardImpl<VulshokReplica> {
+public class VulshokReplica extends CardImpl {
 
     public VulshokReplica (UUID ownerId) {
         super(ownerId, 221, "Vulshok Replica", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

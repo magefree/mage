@@ -44,7 +44,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  *
  * @author LevelX2
  */
-public class WoundReflection extends CardImpl<WoundReflection> {
+public class WoundReflection extends CardImpl {
 
     public WoundReflection(UUID ownerId) {
         super(ownerId, 81, "Wound Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}");

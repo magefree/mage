@@ -56,7 +56,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class ShiningShoal extends CardImpl<ShiningShoal> {
+public class ShiningShoal extends CardImpl {
 
     public ShiningShoal(UUID ownerId) {
         super(ownerId, 21, "Shining Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");

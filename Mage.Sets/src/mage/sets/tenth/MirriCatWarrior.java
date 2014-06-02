@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MirriCatWarrior extends CardImpl<MirriCatWarrior> {
+public class MirriCatWarrior extends CardImpl {
 
     public MirriCatWarrior(UUID ownerId) {
         super(ownerId, 279, "Mirri, Cat Warrior", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

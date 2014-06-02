@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class SimicCharm extends CardImpl<SimicCharm> {
+public class SimicCharm extends CardImpl {
 
     public SimicCharm (UUID ownerId) {
         super(ownerId, 195, "Simic Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{U}");

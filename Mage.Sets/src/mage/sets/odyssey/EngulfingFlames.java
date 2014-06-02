@@ -48,7 +48,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author cbt33, North (Incinerate)
  */
-public class EngulfingFlames extends CardImpl<EngulfingFlames> {
+public class EngulfingFlames extends CardImpl {
 
     public EngulfingFlames(UUID ownerId) {
         super(ownerId, 191, "Engulfing Flames", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");

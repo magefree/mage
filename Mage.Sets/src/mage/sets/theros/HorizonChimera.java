@@ -42,7 +42,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class HorizonChimera extends CardImpl<HorizonChimera> {
+public class HorizonChimera extends CardImpl {
 
     public HorizonChimera(UUID ownerId) {
         super(ownerId, 194, "Horizon Chimera", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");

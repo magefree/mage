@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RisenSanctuary extends CardImpl<RisenSanctuary> {
+public class RisenSanctuary extends CardImpl {
 
     public RisenSanctuary(UUID ownerId) {
         super(ownerId, 190, "Risen Sanctuary", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");

@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth and LevelX2
  */
-public class DuskmantleGuildmage extends CardImpl<DuskmantleGuildmage> {
+public class DuskmantleGuildmage extends CardImpl {
 
     public DuskmantleGuildmage(UUID ownerId) {
         super(ownerId, 158, "Duskmantle Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");

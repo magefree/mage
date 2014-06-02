@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OverwhelmingStampede extends CardImpl<OverwhelmingStampede> {
+public class OverwhelmingStampede extends CardImpl {
 
     public OverwhelmingStampede(UUID ownerId) {
         super(ownerId, 189, "Overwhelming Stampede", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");

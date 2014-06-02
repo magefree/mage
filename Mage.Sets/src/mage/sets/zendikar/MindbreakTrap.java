@@ -52,7 +52,7 @@ import mage.watchers.Watcher;
  *
  * @author Rafbill
  */
-public class MindbreakTrap extends CardImpl<MindbreakTrap> {
+public class MindbreakTrap extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell to exile");
 

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class OvergrownTomb extends CardImpl<OvergrownTomb> {
+public class OvergrownTomb extends CardImpl {
 
     public OvergrownTomb (UUID ownerId) {
         super(ownerId, 279, "Overgrown Tomb", Rarity.RARE, new CardType[]{CardType.LAND}, null);

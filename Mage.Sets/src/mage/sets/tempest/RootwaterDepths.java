@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class RootwaterDepths extends CardImpl<RootwaterDepths> {
+public class RootwaterDepths extends CardImpl {
 
     public RootwaterDepths(UUID ownerId) {
         super(ownerId, 329, "Rootwater Depths", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

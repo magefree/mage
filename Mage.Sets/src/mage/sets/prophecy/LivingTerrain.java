@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class LivingTerrain extends CardImpl<LivingTerrain> {
+public class LivingTerrain extends CardImpl {
 
     public LivingTerrain(UUID ownerId) {
         super(ownerId, 117, "Living Terrain", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

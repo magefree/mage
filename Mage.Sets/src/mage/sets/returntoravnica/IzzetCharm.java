@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class IzzetCharm extends CardImpl<IzzetCharm> {
+public class IzzetCharm extends CardImpl {
 
     static private final FilterSpell filter = new FilterSpell("noncreature spell");
     static {

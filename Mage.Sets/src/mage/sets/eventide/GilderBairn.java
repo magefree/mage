@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class GilderBairn extends CardImpl<GilderBairn> {
+public class GilderBairn extends CardImpl {
 
     public GilderBairn(UUID ownerId) {
         super(ownerId, 152, "Gilder Bairn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G/U}{G/U}");

@@ -55,7 +55,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class SylvanLibrary extends CardImpl<SylvanLibrary> {
+public class SylvanLibrary extends CardImpl {
 
     public SylvanLibrary(UUID ownerId) {
         super(ownerId, 191, "Sylvan Library", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PathToExile extends CardImpl<PathToExile> {
+public class PathToExile extends CardImpl {
 
     public PathToExile(UUID ownerId) {
         super(ownerId, 15, "Path to Exile", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");

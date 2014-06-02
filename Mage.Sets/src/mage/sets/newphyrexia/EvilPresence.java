@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class EvilPresence extends CardImpl<EvilPresence> {
+public class EvilPresence extends CardImpl {
 
     public EvilPresence(UUID ownerId) {
         super(ownerId, 60, "Evil Presence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

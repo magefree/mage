@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com, North
  */
-public class ArmoredAscension extends CardImpl<ArmoredAscension> {
+public class ArmoredAscension extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains you control");
 

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GoblinChariot extends CardImpl<GoblinChariot> {
+public class GoblinChariot extends CardImpl {
 
     public GoblinChariot(UUID ownerId) {
         super(ownerId, 191, "Goblin Chariot", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

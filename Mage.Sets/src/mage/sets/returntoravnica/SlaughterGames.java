@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class SlaughterGames extends CardImpl<SlaughterGames> {
+public class SlaughterGames extends CardImpl {
 
     public SlaughterGames (UUID ownerId) {
         super(ownerId, 197, "Slaughter Games", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");

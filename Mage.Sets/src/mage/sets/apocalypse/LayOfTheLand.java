@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
 /**
  * @author Loki
  */
-public class LayOfTheLand extends CardImpl<LayOfTheLand> {
+public class LayOfTheLand extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 

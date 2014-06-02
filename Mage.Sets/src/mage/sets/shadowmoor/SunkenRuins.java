@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class SunkenRuins extends CardImpl<SunkenRuins> {
+public class SunkenRuins extends CardImpl {
 
     public SunkenRuins(UUID ownerId) {
         super(ownerId, 280, "Sunken Ruins", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class FieldmistBorderpost extends CardImpl<FieldmistBorderpost> {
+public class FieldmistBorderpost extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a basic land");
 

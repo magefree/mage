@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki, nantuko
  */
-public class VampireHexmage extends CardImpl<VampireHexmage> {
+public class VampireHexmage extends CardImpl {
 
     public VampireHexmage(UUID ownerId) {
         super(ownerId, 114, "Vampire Hexmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");

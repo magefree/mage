@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SkullRend extends CardImpl<SkullRend> {
+public class SkullRend extends CardImpl {
 
     public SkullRend(UUID ownerId) {
         super(ownerId, 195, "Skull Rend", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{R}");

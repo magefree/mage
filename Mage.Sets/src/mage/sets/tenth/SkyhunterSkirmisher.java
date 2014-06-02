@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SkyhunterSkirmisher extends CardImpl<SkyhunterSkirmisher> {
+public class SkyhunterSkirmisher extends CardImpl {
 
     public SkyhunterSkirmisher(UUID ownerId) {
         super(ownerId, 43, "Skyhunter Skirmisher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

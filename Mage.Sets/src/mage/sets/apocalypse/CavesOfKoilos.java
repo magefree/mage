@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CavesOfKoilos extends CardImpl<CavesOfKoilos> {
+public class CavesOfKoilos extends CardImpl {
 
     public CavesOfKoilos(UUID ownerId) {
         super(ownerId, 140, "Caves of Koilos", Rarity.RARE, new CardType[]{CardType.LAND}, "");

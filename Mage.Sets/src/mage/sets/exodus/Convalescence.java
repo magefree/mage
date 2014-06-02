@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class Convalescence extends CardImpl<Convalescence> {
+public class Convalescence extends CardImpl {
 
     public Convalescence(UUID ownerId) {
         super(ownerId, 5, "Convalescence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

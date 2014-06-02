@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CourtHomunculus extends CardImpl<CourtHomunculus> {
+public class CourtHomunculus extends CardImpl {
 
     public CourtHomunculus(UUID ownerId) {
         super(ownerId, 6, "Court Homunculus", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}");

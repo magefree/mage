@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AngelicArbiter extends CardImpl<AngelicArbiter> {
+public class AngelicArbiter extends CardImpl {
 
     public AngelicArbiter(UUID ownerId) {
         super(ownerId, 4, "Angelic Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

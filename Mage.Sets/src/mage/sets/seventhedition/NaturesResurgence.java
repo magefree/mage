@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class NaturesResurgence extends CardImpl<NaturesResurgence> {
+public class NaturesResurgence extends CardImpl {
 
     public NaturesResurgence(UUID ownerId) {
         super(ownerId, 259, "Nature's Resurgence", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");

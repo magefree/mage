@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class ErdwalRipper extends CardImpl<ErdwalRipper> {
+public class ErdwalRipper extends CardImpl {
 
     public ErdwalRipper(UUID ownerId) {
         super(ownerId, 86, "Erdwal Ripper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

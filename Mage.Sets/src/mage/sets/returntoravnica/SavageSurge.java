@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class SavageSurge extends CardImpl<SavageSurge> {
+public class SavageSurge extends CardImpl {
 
     public SavageSurge(UUID ownerId) {
         super(ownerId, 133, "Savage Surge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

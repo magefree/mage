@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 /**
  * @author LevelX2
  */
-public class Thoughtflare extends CardImpl<Thoughtflare> {
+public class Thoughtflare extends CardImpl {
 
     public Thoughtflare(UUID ownerId) {
         super(ownerId, 203, "Thoughtflare", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{R}");

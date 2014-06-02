@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class ReturnedReveler extends CardImpl<ReturnedReveler> {
+public class ReturnedReveler extends CardImpl {
 
     public ReturnedReveler(UUID ownerId) {
         super(ownerId, 79, "Returned Reveler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

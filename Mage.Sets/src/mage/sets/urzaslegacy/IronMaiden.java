@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class IronMaiden extends CardImpl<IronMaiden> {
+public class IronMaiden extends CardImpl {
 
     public IronMaiden(UUID ownerId) {
         super(ownerId, 127, "Iron Maiden", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class TarPitcher extends CardImpl<TarPitcher> {
+public class TarPitcher extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin");
 

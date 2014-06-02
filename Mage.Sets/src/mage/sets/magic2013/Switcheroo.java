@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class Switcheroo extends CardImpl<Switcheroo> {
+public class Switcheroo extends CardImpl {
 
     private static final String rule = "Exchange control of two target creatures";
 

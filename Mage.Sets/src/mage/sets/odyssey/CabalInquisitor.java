@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author cbt33
  */
 
-public class CabalInquisitor extends CardImpl<CabalInquisitor> {
+public class CabalInquisitor extends CardImpl {
 
     public CabalInquisitor(UUID ownerId) {
         super(ownerId, 119, "Cabal Inquisitor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

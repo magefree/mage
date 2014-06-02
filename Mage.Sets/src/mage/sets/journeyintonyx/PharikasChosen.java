@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class PharikasChosen extends CardImpl<PharikasChosen> {
+public class PharikasChosen extends CardImpl {
 
     public PharikasChosen(UUID ownerId) {
         super(ownerId, 78, "Pharika's Chosen", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

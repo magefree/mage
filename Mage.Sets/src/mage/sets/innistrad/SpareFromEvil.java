@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class SpareFromEvil extends CardImpl<SpareFromEvil> {
+public class SpareFromEvil extends CardImpl {
 
     private static final FilterCreatureCard filterNonHuman = new FilterCreatureCard("non-Human creatures");
 

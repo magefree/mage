@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class Spirespine extends CardImpl<Spirespine> {
+public class Spirespine extends CardImpl {
 
     public Spirespine(UUID ownerId) {
         super(ownerId, 142, "Spirespine", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{G}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class NecraDisciple extends CardImpl<NecraDisciple> {
+public class NecraDisciple extends CardImpl {
 
     public NecraDisciple(UUID ownerId) {
         super(ownerId, 44, "Necra Disciple", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

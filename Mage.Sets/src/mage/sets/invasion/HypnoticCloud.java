@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class HypnoticCloud extends CardImpl<HypnoticCloud> {
+public class HypnoticCloud extends CardImpl {
 
     public HypnoticCloud(UUID ownerId) {
         super(ownerId, 109, "Hypnotic Cloud", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

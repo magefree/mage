@@ -59,7 +59,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class GodoBanditWarlord extends CardImpl<GodoBanditWarlord> {
+public class GodoBanditWarlord extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Equipment card");
     static {

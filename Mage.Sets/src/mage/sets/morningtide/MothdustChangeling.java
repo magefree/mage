@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class MothdustChangeling extends CardImpl<MothdustChangeling> {
+public class MothdustChangeling extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 

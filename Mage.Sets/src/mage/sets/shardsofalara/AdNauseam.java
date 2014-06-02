@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class AdNauseam extends CardImpl<AdNauseam> {
+public class AdNauseam extends CardImpl {
 
     public AdNauseam(UUID ownerId) {
         super(ownerId, 63, "Ad Nauseam", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");

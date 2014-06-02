@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class EsperSojourners extends CardImpl<EsperSojourners> {
+public class EsperSojourners extends CardImpl {
 
     public EsperSojourners(UUID ownerId) {
         super(ownerId, 107, "Esper Sojourners", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}{B}");

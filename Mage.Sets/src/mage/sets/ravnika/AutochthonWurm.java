@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class AutochthonWurm extends CardImpl<AutochthonWurm> {
+public class AutochthonWurm extends CardImpl {
 
     public AutochthonWurm(UUID ownerId) {
         super(ownerId, 191, "Autochthon Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{10}{G}{G}{G}{W}{W}");

@@ -47,7 +47,7 @@ import mage.players.Player;
 /**
  * @author North
  */
-public class SkywardEyeProphets extends CardImpl<SkywardEyeProphets> {
+public class SkywardEyeProphets extends CardImpl {
 
     public SkywardEyeProphets(UUID ownerId) {
         super(ownerId, 125, "Skyward Eye Prophets", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{W}{U}");

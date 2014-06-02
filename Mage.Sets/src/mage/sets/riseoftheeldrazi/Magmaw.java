@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Magmaw extends CardImpl<Magmaw> {
+public class Magmaw extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("nonland permanent");
 

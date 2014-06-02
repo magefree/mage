@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
  *
  * @author LevelX2
  */
-public class AlmsBeast extends CardImpl<AlmsBeast> {
+public class AlmsBeast extends CardImpl {
 
     public AlmsBeast(UUID ownerId) {
         super(ownerId, 141, "Alms Beast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");

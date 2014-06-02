@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AmbitionsCost extends CardImpl<AmbitionsCost> {
+public class AmbitionsCost extends CardImpl {
 
     public AmbitionsCost(UUID ownerId) {
         super(ownerId, 118, "Ambition's Cost", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class FeralContest extends CardImpl<FeralContest> {
+public class FeralContest extends CardImpl {
 
     public FeralContest(UUID ownerId) {
         super(ownerId, 100, "Feral Contest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Plopman
  */
-public class Phantasmagorian extends CardImpl<Phantasmagorian> {
+public class Phantasmagorian extends CardImpl {
 
     public Phantasmagorian(UUID ownerId) {
         super(ownerId, 77, "Phantasmagorian", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

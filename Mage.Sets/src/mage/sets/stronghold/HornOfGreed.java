@@ -42,7 +42,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class HornOfGreed extends CardImpl<HornOfGreed> {
+public class HornOfGreed extends CardImpl {
 
     public HornOfGreed(UUID ownerId) {
         super(ownerId, 129, "Horn of Greed", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

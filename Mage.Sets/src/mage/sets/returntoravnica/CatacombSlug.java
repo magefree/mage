@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CatacombSlug extends CardImpl<CatacombSlug> {
+public class CatacombSlug extends CardImpl {
 
     public CatacombSlug(UUID ownerId) {
         super(ownerId, 58, "Catacomb Slug", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

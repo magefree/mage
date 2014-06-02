@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class KyrenToy extends CardImpl<KyrenToy> {
+public class KyrenToy extends CardImpl {
 
     public KyrenToy(UUID ownerId) {
         super(ownerId, 303, "Kyren Toy", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

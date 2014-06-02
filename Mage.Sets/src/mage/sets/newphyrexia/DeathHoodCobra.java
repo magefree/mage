@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DeathHoodCobra extends CardImpl<DeathHoodCobra> {
+public class DeathHoodCobra extends CardImpl {
 
     public DeathHoodCobra(UUID ownerId) {
         super(ownerId, 108, "Death-Hood Cobra", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

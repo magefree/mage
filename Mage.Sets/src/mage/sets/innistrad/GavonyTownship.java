@@ -15,7 +15,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.UUID;
 
-public class GavonyTownship extends CardImpl<GavonyTownship> {
+public class GavonyTownship extends CardImpl {
     public GavonyTownship(UUID ownerId) {
         super(ownerId, 239, "Gavony Township", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "ISD";

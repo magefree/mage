@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class Nefashu extends CardImpl<Nefashu> {
+public class Nefashu extends CardImpl {
     
     final String rule = "Whenever Nefashu attacks, up to five target creatures each get -1/-1 until end of turn.";
 

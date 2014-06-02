@@ -64,7 +64,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TimeToFeed extends CardImpl<TimeToFeed> {
+public class TimeToFeed extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature an opponent controls");
     static {

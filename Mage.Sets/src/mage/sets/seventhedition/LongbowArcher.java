@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class LongbowArcher extends CardImpl<LongbowArcher> {
+public class LongbowArcher extends CardImpl {
 
     public LongbowArcher(UUID ownerId) {
         super(ownerId, 26, "Longbow Archer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

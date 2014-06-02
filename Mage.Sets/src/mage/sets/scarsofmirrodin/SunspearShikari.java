@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class SunspearShikari extends CardImpl<SunspearShikari> {
+public class SunspearShikari extends CardImpl {
 
     private static final String rule1 = "As long as {this} is equipped, it has first strike";
     private static final String rule2 = "As long as {this} is equipped, it has lifelink";

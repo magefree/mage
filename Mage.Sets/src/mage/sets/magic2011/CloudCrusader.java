@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CloudCrusader extends CardImpl<CloudCrusader> {
+public class CloudCrusader extends CardImpl {
 
     public CloudCrusader(UUID ownerId) {
         super(ownerId, 10, "Cloud Crusader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SilverskinArmor extends CardImpl<SilverskinArmor> {
+public class SilverskinArmor extends CardImpl {
 
     public SilverskinArmor(UUID ownerId) {
         super(ownerId, 132, "Silverskin Armor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

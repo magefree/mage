@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Spitebellows extends CardImpl<Spitebellows> {
+public class Spitebellows extends CardImpl {
 
     public Spitebellows(UUID ownerId) {
         super(ownerId, 135, "Spitebellows", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");

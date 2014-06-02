@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class Millstone extends CardImpl<Millstone> {
+public class Millstone extends CardImpl {
 
     public Millstone(UUID ownerId) {
         super(ownerId, 390, "Millstone", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

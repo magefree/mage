@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class VividMeadow extends CardImpl<VividMeadow> {
+public class VividMeadow extends CardImpl {
 
     public VividMeadow(UUID ownerId) {
         super(ownerId, 279, "Vivid Meadow", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

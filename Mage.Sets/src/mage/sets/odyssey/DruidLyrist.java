@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class DruidLyrist extends CardImpl<DruidLyrist> {
+public class DruidLyrist extends CardImpl {
 
     public DruidLyrist(UUID ownerId) {
         super(ownerId, 238, "Druid Lyrist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

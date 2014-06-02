@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author ayratn
  */
-public class DivineOffering extends CardImpl<DivineOffering> {
+public class DivineOffering extends CardImpl {
 
     private final static FilterPermanent filter = new FilterPermanent("artifact");
 

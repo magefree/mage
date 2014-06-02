@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class ExhumerThrull extends CardImpl<ExhumerThrull> {
+public class ExhumerThrull extends CardImpl {
 
     public ExhumerThrull(UUID ownerId) {
         super(ownerId, 50, "Exhumer Thrull", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");

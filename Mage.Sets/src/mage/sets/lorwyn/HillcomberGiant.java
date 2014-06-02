@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class HillcomberGiant extends CardImpl<HillcomberGiant> {
+public class HillcomberGiant extends CardImpl {
 
     public HillcomberGiant(UUID ownerId) {
         super(ownerId, 20, "Hillcomber Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

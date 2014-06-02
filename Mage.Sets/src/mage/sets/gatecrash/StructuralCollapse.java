@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class StructuralCollapse extends CardImpl<StructuralCollapse> {
+public class StructuralCollapse extends CardImpl {
 
     public StructuralCollapse(UUID ownerId) {
         super(ownerId, 107, "Structural Collapse", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{5}{R}");

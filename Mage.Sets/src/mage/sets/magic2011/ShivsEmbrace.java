@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ShivsEmbrace extends CardImpl<ShivsEmbrace> {
+public class ShivsEmbrace extends CardImpl {
 
     public ShivsEmbrace(UUID ownerId) {
         super(ownerId, 156, "Shiv's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

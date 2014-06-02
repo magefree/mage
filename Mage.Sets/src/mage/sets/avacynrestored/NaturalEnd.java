@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class NaturalEnd extends CardImpl<NaturalEnd> {
+public class NaturalEnd extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ImmortalServitude extends CardImpl<ImmortalServitude> {
+public class ImmortalServitude extends CardImpl {
 
     public ImmortalServitude(UUID ownerId) {
         super(ownerId, 220, "Immortal Servitude", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W/B}{W/B}{W/B}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DesperateStand extends CardImpl<DesperateStand> {
+public class DesperateStand extends CardImpl {
 
     public DesperateStand(UUID ownerId) {
         super(ownerId, 147, "Desperate Stand", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}{W}");

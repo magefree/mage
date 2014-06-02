@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class KamiOfThePaintedRoad extends CardImpl<KamiOfThePaintedRoad> {
+public class KamiOfThePaintedRoad extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

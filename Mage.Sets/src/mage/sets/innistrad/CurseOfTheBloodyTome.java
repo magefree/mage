@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Alvin
  */
-public class CurseOfTheBloodyTome extends CardImpl<CurseOfTheBloodyTome> {
+public class CurseOfTheBloodyTome extends CardImpl {
 
     public CurseOfTheBloodyTome(UUID ownerId) {
         super(ownerId, 50, "Curse of the Bloody Tome", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class AEtherBurst extends CardImpl<AEtherBurst> {
+public class AEtherBurst extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("cards named AEther Burst");
 

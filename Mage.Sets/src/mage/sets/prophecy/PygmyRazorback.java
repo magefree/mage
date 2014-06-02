@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PygmyRazorback extends CardImpl<PygmyRazorback> {
+public class PygmyRazorback extends CardImpl {
 
     public PygmyRazorback(UUID ownerId) {
         super(ownerId, 120, "Pygmy Razorback", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class BalduvianHorde extends CardImpl<BalduvianHorde> {
+public class BalduvianHorde extends CardImpl {
 
     public BalduvianHorde(UUID ownerId) {
         super(ownerId, 96, "Balduvian Horde", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
 /**
  * @author Loki
  */
-public class NeurokProdigy extends CardImpl<NeurokProdigy> {
+public class NeurokProdigy extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact card");
 

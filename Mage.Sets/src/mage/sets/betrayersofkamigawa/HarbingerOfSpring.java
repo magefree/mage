@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class HarbingerOfSpring extends CardImpl<HarbingerOfSpring> {
+public class HarbingerOfSpring extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Spirit creatures");
     static {

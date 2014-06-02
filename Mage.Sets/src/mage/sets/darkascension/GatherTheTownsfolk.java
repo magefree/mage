@@ -42,7 +42,7 @@ import mage.game.permanent.token.Token;
  *
  * @author anonymous
  */
-public class GatherTheTownsfolk extends CardImpl<GatherTheTownsfolk> {
+public class GatherTheTownsfolk extends CardImpl {
 
     public GatherTheTownsfolk(UUID ownerId) {
         super(ownerId, 8, "Gather the Townsfolk", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");

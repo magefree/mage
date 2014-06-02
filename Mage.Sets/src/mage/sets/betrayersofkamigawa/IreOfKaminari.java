@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class IreOfKaminari extends CardImpl<IreOfKaminari> {
+public class IreOfKaminari extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Arcane");
 

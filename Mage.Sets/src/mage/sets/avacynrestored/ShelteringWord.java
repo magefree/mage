@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class ShelteringWord extends CardImpl<ShelteringWord> {
+public class ShelteringWord extends CardImpl {
 
     public ShelteringWord(UUID ownerId) {
         super(ownerId, 192, "Sheltering Word", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

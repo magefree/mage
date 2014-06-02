@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ScourgeOfFleets extends CardImpl<ScourgeOfFleets> {
+public class ScourgeOfFleets extends CardImpl {
 
     public ScourgeOfFleets(UUID ownerId) {
         super(ownerId, 51, "Scourge of Fleets", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

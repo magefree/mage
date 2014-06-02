@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class HeatRay extends CardImpl<HeatRay> {
+public class HeatRay extends CardImpl {
 
     public HeatRay(UUID ownerId) {
         super(ownerId, 150, "Heat Ray", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{R}");

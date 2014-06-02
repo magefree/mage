@@ -50,7 +50,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class DarksteelColossus extends CardImpl<DarksteelColossus> {
+public class DarksteelColossus extends CardImpl {
 
     public DarksteelColossus(UUID ownerId) {
         super(ownerId, 109, "Darksteel Colossus", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{11}");

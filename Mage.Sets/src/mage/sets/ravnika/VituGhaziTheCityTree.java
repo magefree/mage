@@ -45,7 +45,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author Loki
  */
-public class VituGhaziTheCityTree extends CardImpl<VituGhaziTheCityTree> {
+public class VituGhaziTheCityTree extends CardImpl {
 
     public VituGhaziTheCityTree(UUID ownerId) {
         super(ownerId, 285, "Vitu-Ghazi, the City-Tree", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

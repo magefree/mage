@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class RamosianCaptain extends CardImpl<RamosianCaptain> {
+public class RamosianCaptain extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Rebel permanent card with converted mana cost 4 or less");
 

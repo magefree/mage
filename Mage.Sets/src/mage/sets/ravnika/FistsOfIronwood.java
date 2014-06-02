@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FistsOfIronwood extends CardImpl<FistsOfIronwood> {
+public class FistsOfIronwood extends CardImpl {
 
     public FistsOfIronwood(UUID ownerId) {
         super(ownerId, 164, "Fists of Ironwood", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

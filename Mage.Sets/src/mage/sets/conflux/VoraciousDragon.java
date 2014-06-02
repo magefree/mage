@@ -50,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class VoraciousDragon extends CardImpl<VoraciousDragon> {
+public class VoraciousDragon extends CardImpl {
 
     public VoraciousDragon(UUID ownerId) {
         super(ownerId, 75, "Voracious Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class StonehornChanter extends CardImpl<StonehornChanter> {
+public class StonehornChanter extends CardImpl {
 
     public StonehornChanter(UUID ownerId) {
         super(ownerId, 39, "Stonehorn Chanter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");

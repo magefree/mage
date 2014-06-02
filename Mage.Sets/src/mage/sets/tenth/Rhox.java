@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class Rhox extends CardImpl<Rhox> {
+public class Rhox extends CardImpl {
 
     public Rhox(UUID ownerId) {
         super(ownerId, 291, "Rhox", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

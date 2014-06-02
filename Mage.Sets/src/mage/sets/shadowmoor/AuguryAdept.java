@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AuguryAdept extends CardImpl<AuguryAdept> {
+public class AuguryAdept extends CardImpl {
 
     public AuguryAdept(UUID ownerId) {
         super(ownerId, 137, "Augury Adept", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W/U}{W/U}");

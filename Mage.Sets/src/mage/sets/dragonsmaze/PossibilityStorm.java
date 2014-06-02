@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 
 
-public class PossibilityStorm extends CardImpl<PossibilityStorm> {
+public class PossibilityStorm extends CardImpl {
 
     public PossibilityStorm(UUID ownerId) {
         super(ownerId, 34, "Possibility Storm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");

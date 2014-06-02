@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class AmrouScout extends CardImpl<AmrouScout> {
+public class AmrouScout extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Rebel permanent card with converted mana cost 3 or less");
     static {

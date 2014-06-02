@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class GeistHonoredMonk extends CardImpl<GeistHonoredMonk> {
+public class GeistHonoredMonk extends CardImpl {
 
     public GeistHonoredMonk(UUID ownerId) {
         super(ownerId, 17, "Geist-Honored Monk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

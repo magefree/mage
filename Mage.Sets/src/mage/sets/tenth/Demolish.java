@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Demolish extends CardImpl<Demolish> {
+public class Demolish extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 

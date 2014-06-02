@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class DisasterRadius extends CardImpl<DisasterRadius> {
+public class DisasterRadius extends CardImpl {
 
     public DisasterRadius(UUID ownerId) {
         super(ownerId, 141, "Disaster Radius", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");

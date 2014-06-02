@@ -58,7 +58,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author BetaSteward
  */
-public class HavengulLich extends CardImpl<HavengulLich> {
+public class HavengulLich extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("creature card in a graveyard");
 

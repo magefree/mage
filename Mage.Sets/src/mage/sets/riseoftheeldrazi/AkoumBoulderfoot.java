@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class AkoumBoulderfoot extends CardImpl<AkoumBoulderfoot> {
+public class AkoumBoulderfoot extends CardImpl {
 
     public AkoumBoulderfoot(UUID ownerId) {
         super(ownerId, 134, "Akoum Boulderfoot", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

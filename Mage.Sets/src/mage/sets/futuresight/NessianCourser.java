@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class NessianCourser extends CardImpl<NessianCourser> {
+public class NessianCourser extends CardImpl {
 
     public NessianCourser(UUID ownerId) {
         super(ownerId, 148, "Nessian Courser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

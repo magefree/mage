@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class VoyagingSatyr extends CardImpl<VoyagingSatyr> {
+public class VoyagingSatyr extends CardImpl {
 
     public VoyagingSatyr(UUID ownerId) {
         super(ownerId, 182, "Voyaging Satyr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

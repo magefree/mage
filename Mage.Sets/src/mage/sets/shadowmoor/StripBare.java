@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class StripBare extends CardImpl<StripBare> {
+public class StripBare extends CardImpl {
 
     public StripBare(UUID ownerId) {
         super(ownerId, 24, "Strip Bare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

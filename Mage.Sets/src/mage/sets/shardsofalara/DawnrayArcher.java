@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Plopman
  */
-public class DawnrayArcher extends CardImpl<DawnrayArcher> {
+public class DawnrayArcher extends CardImpl {
 
     public DawnrayArcher(UUID ownerId) {
         super(ownerId, 39, "Dawnray Archer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LatchSeeker extends CardImpl<LatchSeeker> {
+public class LatchSeeker extends CardImpl {
 
     public LatchSeeker(UUID ownerId) {
         super(ownerId, 63, "Latch Seeker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

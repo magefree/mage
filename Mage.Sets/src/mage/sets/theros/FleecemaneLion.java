@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class FleecemaneLion extends CardImpl<FleecemaneLion> {
+public class FleecemaneLion extends CardImpl {
 
     public FleecemaneLion(UUID ownerId) {
         super(ownerId, 193, "Fleecemane Lion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{W}");

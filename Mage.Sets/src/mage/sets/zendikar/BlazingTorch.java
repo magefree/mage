@@ -55,7 +55,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class BlazingTorch extends CardImpl<BlazingTorch> {
+public class BlazingTorch extends CardImpl {
 
     public BlazingTorch(UUID ownerId) {
         super(ownerId, 197, "Blazing Torch", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

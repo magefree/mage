@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class UnbreathingHorde extends CardImpl<UnbreathingHorde> {
+public class UnbreathingHorde extends CardImpl {
 
     public UnbreathingHorde(UUID ownerId) {
         super(ownerId, 121, "Unbreathing Horde", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");

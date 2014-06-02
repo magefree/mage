@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FomoriNomad extends CardImpl<FomoriNomad> {
+public class FomoriNomad extends CardImpl {
 
     public FomoriNomad(UUID ownerId) {
         super(ownerId, 114, "Fomori Nomad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

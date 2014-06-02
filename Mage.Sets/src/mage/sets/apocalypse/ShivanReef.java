@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ShivanReef extends CardImpl<ShivanReef> {
+public class ShivanReef extends CardImpl {
 
     public ShivanReef(UUID ownerId) {
         super(ownerId, 142, "Shivan Reef", Rarity.RARE, new CardType[]{CardType.LAND}, "");

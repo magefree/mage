@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author jeffwadsworth
  */
-public class OgreBattledriver extends CardImpl<OgreBattledriver> {
+public class OgreBattledriver extends CardImpl {
     
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
     

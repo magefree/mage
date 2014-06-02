@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class AuriokSalvagers extends CardImpl<AuriokSalvagers> {
+public class AuriokSalvagers extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost 1 or less from your graveyard");
     static {

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class FontOfVigor extends CardImpl<FontOfVigor> {
+public class FontOfVigor extends CardImpl {
 
     public FontOfVigor(UUID ownerId) {
         super(ownerId, 11, "Font of Vigor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

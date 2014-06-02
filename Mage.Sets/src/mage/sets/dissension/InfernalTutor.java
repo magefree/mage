@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class InfernalTutor extends CardImpl<InfernalTutor> {
+public class InfernalTutor extends CardImpl {
 
     public InfernalTutor(UUID ownerId) {
         super(ownerId, 46, "Infernal Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}");

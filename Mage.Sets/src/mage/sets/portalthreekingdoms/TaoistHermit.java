@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TaoistHermit extends CardImpl<TaoistHermit> {
+public class TaoistHermit extends CardImpl {
 
     public TaoistHermit(UUID ownerId) {
         super(ownerId, 150, "Taoist Hermit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

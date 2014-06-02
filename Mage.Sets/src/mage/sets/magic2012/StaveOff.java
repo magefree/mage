@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author anonymous
  */
-public class StaveOff extends CardImpl<StaveOff> {
+public class StaveOff extends CardImpl {
 
     public StaveOff(UUID ownerId) {
         super(ownerId, 36, "Stave Off", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

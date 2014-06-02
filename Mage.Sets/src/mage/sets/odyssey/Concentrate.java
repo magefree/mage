@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class Concentrate extends CardImpl<Concentrate> {
+public class Concentrate extends CardImpl {
 
     public Concentrate(UUID ownerId) {
         super(ownerId, 78, "Concentrate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");

@@ -56,7 +56,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class SoulTithe extends CardImpl<SoulTithe> {
+public class SoulTithe extends CardImpl {
 
     static final String rule = "At the beginning of the upkeep of enchanted permanent's controller, that player sacrifices it unless he or she pays {X}, where X is its converted mana cost";
 

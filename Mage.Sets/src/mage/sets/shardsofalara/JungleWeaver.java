@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class JungleWeaver extends CardImpl<JungleWeaver> {
+public class JungleWeaver extends CardImpl {
 
     public JungleWeaver (UUID ownerId) {
         super(ownerId, 134, "Jungle Weaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

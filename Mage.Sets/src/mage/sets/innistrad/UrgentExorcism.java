@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class UrgentExorcism extends CardImpl<UrgentExorcism> {
+public class UrgentExorcism extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Spirit or enchantment");
 

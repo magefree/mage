@@ -54,7 +54,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class LeafdrakeRoost extends CardImpl<LeafdrakeRoost> {
+public class LeafdrakeRoost extends CardImpl {
 
     public LeafdrakeRoost(UUID ownerId) {
         super(ownerId, 196, "Leafdrake Roost", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{U}");

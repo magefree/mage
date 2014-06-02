@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SorinsThirst extends CardImpl<SorinsThirst> {
+public class SorinsThirst extends CardImpl {
 
     public SorinsThirst (UUID ownerId) {
         super(ownerId, 110, "Sorin's Thirst", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");

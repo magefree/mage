@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author LevelX
  */
-public class SenseisDiviningTop extends CardImpl<SenseisDiviningTop> {
+public class SenseisDiviningTop extends CardImpl {
 
     public SenseisDiviningTop(UUID ownerId) {
         super(ownerId, 268, "Sensei's Divining Top", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

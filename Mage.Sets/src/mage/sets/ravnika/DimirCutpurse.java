@@ -44,7 +44,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class DimirCutpurse extends CardImpl<DimirCutpurse> {
+public class DimirCutpurse extends CardImpl {
 
     public DimirCutpurse(UUID ownerId) {
         super(ownerId, 201, "Dimir Cutpurse", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");

@@ -49,7 +49,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class MarshmistTitan extends CardImpl<MarshmistTitan> {
+public class MarshmistTitan extends CardImpl {
 
     public MarshmistTitan(UUID ownerId) {
         super(ownerId, 76, "Marshmist Titan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{B}");

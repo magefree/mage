@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DarienKingOfKjeldor extends CardImpl<DarienKingOfKjeldor> {
+public class DarienKingOfKjeldor extends CardImpl {
 
     public DarienKingOfKjeldor(UUID ownerId) {
         super(ownerId, 4, "Darien, King of Kjeldor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

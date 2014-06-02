@@ -45,7 +45,7 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
  *
  * @author jeffwadsworth
  */
-public class BloodReckoning extends CardImpl<BloodReckoning> {
+public class BloodReckoning extends CardImpl {
 
     public BloodReckoning(UUID ownerId) {
         super(ownerId, 81, "Blood Reckoning", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class Vaporkin extends CardImpl<Vaporkin> {
+public class Vaporkin extends CardImpl {
 
     public Vaporkin(UUID ownerId) {
         super(ownerId, 72, "Vaporkin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

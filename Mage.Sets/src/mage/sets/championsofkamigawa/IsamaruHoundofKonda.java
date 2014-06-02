@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class IsamaruHoundofKonda extends CardImpl<IsamaruHoundofKonda> {
+public class IsamaruHoundofKonda extends CardImpl {
 
     public IsamaruHoundofKonda (UUID ownerId) {
         super(ownerId, 19, "Isamaru, Hound of Konda", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");

@@ -51,7 +51,7 @@ import mage.game.permanent.token.SnakeToken;
 /**
  * @author LevelX2
  */
-public class OrochiHatchery extends CardImpl<OrochiHatchery> {
+public class OrochiHatchery extends CardImpl {
 
     public OrochiHatchery(UUID ownerId) {
         super(ownerId, 266, "Orochi Hatchery", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}{X}");

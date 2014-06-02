@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class WurmcoilEngine extends CardImpl<WurmcoilEngine> {
+public class WurmcoilEngine extends CardImpl {
 
     public WurmcoilEngine (UUID ownerId) {
         super(ownerId, 223, "Wurmcoil Engine", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

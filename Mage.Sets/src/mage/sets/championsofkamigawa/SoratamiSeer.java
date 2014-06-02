@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class SoratamiSeer extends CardImpl<SoratamiSeer> {
+public class SoratamiSeer extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands");
 

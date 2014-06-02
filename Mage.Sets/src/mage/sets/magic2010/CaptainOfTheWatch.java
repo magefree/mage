@@ -49,7 +49,7 @@ import mage.game.permanent.token.SoldierToken;
 /**
  * @author Loki
  */
-public class CaptainOfTheWatch extends CardImpl<CaptainOfTheWatch> {
+public class CaptainOfTheWatch extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 

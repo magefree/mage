@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class NullmageShepherd extends CardImpl<NullmageShepherd> {
+public class NullmageShepherd extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCost = new FilterControlledCreaturePermanent("untapped creatures you control");
     private static final FilterPermanent filterTarget = new FilterPermanent("artifact or enchantment");

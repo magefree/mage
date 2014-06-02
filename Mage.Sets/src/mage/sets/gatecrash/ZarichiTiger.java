@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ZarichiTiger extends CardImpl<ZarichiTiger> {
+public class ZarichiTiger extends CardImpl {
 
     public ZarichiTiger(UUID ownerId) {
         super(ownerId, 28, "Zarichi Tiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

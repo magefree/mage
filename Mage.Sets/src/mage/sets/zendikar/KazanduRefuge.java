@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KazanduRefuge extends CardImpl<KazanduRefuge> {
+public class KazanduRefuge extends CardImpl {
 
     public KazanduRefuge(UUID ownerId) {
         super(ownerId, 217, "Kazandu Refuge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

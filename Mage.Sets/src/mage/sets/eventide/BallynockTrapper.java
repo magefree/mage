@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class BallynockTrapper extends CardImpl<BallynockTrapper> {
+public class BallynockTrapper extends CardImpl {
 
     private static final FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
 

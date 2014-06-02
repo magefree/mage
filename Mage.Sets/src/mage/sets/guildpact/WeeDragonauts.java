@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 /**
  * @author Loki
  */
-public class WeeDragonauts extends CardImpl<WeeDragonauts> {
+public class WeeDragonauts extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 

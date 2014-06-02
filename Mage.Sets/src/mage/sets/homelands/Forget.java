@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class Forget extends CardImpl<Forget> {
+public class Forget extends CardImpl {
 
     public Forget(UUID ownerId) {
         super(ownerId, 32, "Forget", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{U}");

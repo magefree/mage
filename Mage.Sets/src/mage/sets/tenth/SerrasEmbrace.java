@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SerrasEmbrace extends CardImpl<SerrasEmbrace> {
+public class SerrasEmbrace extends CardImpl {
 
     public SerrasEmbrace(UUID ownerId) {
         super(ownerId, 40, "Serra's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

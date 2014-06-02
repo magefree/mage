@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MerfolkOfThePearlTrident extends CardImpl<MerfolkOfThePearlTrident> {
+public class MerfolkOfThePearlTrident extends CardImpl {
 
     public MerfolkOfThePearlTrident(UUID ownerId) {
         super(ownerId, 104, "Merfolk of the Pearl Trident", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

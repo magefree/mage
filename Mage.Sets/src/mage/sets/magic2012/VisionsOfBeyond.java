@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author nantuko
  */
-public class VisionsOfBeyond extends CardImpl<VisionsOfBeyond> {
+public class VisionsOfBeyond extends CardImpl {
 
     public VisionsOfBeyond(UUID ownerId) {
         super(ownerId, 80, "Visions of Beyond", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AncientHellkite extends CardImpl<AncientHellkite> {
+public class AncientHellkite extends CardImpl {
 
     public AncientHellkite(UUID ownerId) {
         super(ownerId, 122, "Ancient Hellkite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");

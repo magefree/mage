@@ -42,7 +42,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
 /**
  * @author Loki
  */
-public class SireOfTheStorm extends CardImpl<SireOfTheStorm> {
+public class SireOfTheStorm extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

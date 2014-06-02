@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class JeditsDragoons extends CardImpl<JeditsDragoons> {
+public class JeditsDragoons extends CardImpl {
 
     public JeditsDragoons(UUID ownerId) {
         super(ownerId, 25, "Jedit's Dragoons", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");

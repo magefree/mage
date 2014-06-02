@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class WiltLeafLiege extends CardImpl<WiltLeafLiege> {
+public class WiltLeafLiege extends CardImpl {
 
     private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("green creatures you control");
     private static final FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("white creatures you control");

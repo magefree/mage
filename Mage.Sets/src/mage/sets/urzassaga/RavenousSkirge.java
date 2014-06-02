@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class RavenousSkirge extends CardImpl<RavenousSkirge> {
+public class RavenousSkirge extends CardImpl {
 
     public RavenousSkirge(UUID ownerId) {
         super(ownerId, 152, "Ravenous Skirge", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

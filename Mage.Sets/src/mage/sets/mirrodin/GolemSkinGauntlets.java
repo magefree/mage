@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class GolemSkinGauntlets extends CardImpl<GolemSkinGauntlets> {
+public class GolemSkinGauntlets extends CardImpl {
 
     public GolemSkinGauntlets(UUID ownerId) {
         super(ownerId, 181, "Golem-Skin Gauntlets", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

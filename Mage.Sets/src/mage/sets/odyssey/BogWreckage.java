@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class BogWreckage extends CardImpl<BogWreckage> {
+public class BogWreckage extends CardImpl {
 
     public BogWreckage(UUID ownerId) {
         super(ownerId, 314, "Bog Wreckage", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

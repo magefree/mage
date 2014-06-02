@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ToriiWatchward extends CardImpl<ToriiWatchward> {
+public class ToriiWatchward extends CardImpl {
 
     public ToriiWatchward(UUID ownerId) {
         super(ownerId, 30, "Torii Watchward", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

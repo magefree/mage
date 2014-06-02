@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX
  */
-public class UnearthlyBlizzard extends CardImpl<UnearthlyBlizzard> {
+public class UnearthlyBlizzard extends CardImpl {
 
     public UnearthlyBlizzard(UUID ownerId) {
         super(ownerId, 196, "Unearthly Blizzard", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com, nantuko
  */
-public class ChandraNalaar extends CardImpl<ChandraNalaar> {
+public class ChandraNalaar extends CardImpl {
 
     public ChandraNalaar(UUID ownerId) {
         super(ownerId, 132, "Chandra Nalaar", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");

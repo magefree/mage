@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class VialOfPoison extends CardImpl<VialOfPoison> {
+public class VialOfPoison extends CardImpl {
 
     public VialOfPoison(UUID ownerId) {
         super(ownerId, 226, "Vial of Poison", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

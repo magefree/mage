@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Absorb extends CardImpl<Absorb> {
+public class Absorb extends CardImpl {
 
     public Absorb(UUID ownerId) {
         super(ownerId, 226, "Absorb", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}{U}{U}");

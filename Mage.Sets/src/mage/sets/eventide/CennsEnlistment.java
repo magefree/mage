@@ -42,7 +42,7 @@ import mage.game.permanent.token.KithkinToken;
  *
  * @author Plopman
  */
-public class CennsEnlistment extends CardImpl<CennsEnlistment> {
+public class CennsEnlistment extends CardImpl {
 
     public CennsEnlistment(UUID ownerId) {
         super(ownerId, 3, "Cenn's Enlistment", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");

@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ScornedVillager extends CardImpl<ScornedVillager> {
+public class ScornedVillager extends CardImpl {
 
     public ScornedVillager(UUID ownerId) {
         super(ownerId, 125, "Scorned Villager", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

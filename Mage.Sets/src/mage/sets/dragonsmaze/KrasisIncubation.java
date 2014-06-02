@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KrasisIncubation extends CardImpl<KrasisIncubation> {
+public class KrasisIncubation extends CardImpl {
 
     public KrasisIncubation(UUID ownerId) {
         super(ownerId, 79, "Krasis Incubation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{U}");

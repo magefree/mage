@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class ArgothianSwine extends CardImpl<ArgothianSwine> {
+public class ArgothianSwine extends CardImpl {
 
     public ArgothianSwine (UUID ownerId) {
         super(ownerId, 235, "Argothian Swine", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

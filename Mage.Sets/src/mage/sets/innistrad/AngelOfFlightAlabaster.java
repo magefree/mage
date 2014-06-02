@@ -16,7 +16,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
-public class AngelOfFlightAlabaster extends CardImpl<AngelOfFlightAlabaster> {
+public class AngelOfFlightAlabaster extends CardImpl {
     private static final FilterCard filter = new FilterCard("Spirit card from your graveyard");
 
     static {

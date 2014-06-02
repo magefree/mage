@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class TarnishedCitadel extends CardImpl<TarnishedCitadel> {
+public class TarnishedCitadel extends CardImpl {
 
     public TarnishedCitadel(UUID ownerId) {
         super(ownerId, 329, "Tarnished Citadel", Rarity.RARE, new CardType[]{CardType.LAND}, "");

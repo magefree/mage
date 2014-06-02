@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class VoicelessSpirit extends CardImpl<VoicelessSpirit> {
+public class VoicelessSpirit extends CardImpl {
 
     public VoicelessSpirit(UUID ownerId) {
         super(ownerId, 42, "Voiceless Spirit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

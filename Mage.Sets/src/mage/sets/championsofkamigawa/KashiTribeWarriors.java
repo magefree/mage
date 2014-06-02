@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX
  */
-public class KashiTribeWarriors extends CardImpl<KashiTribeWarriors> {
+public class KashiTribeWarriors extends CardImpl {
 
     public KashiTribeWarriors(UUID ownerId) {
         super(ownerId, 221, "Kashi-Tribe Warriors", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

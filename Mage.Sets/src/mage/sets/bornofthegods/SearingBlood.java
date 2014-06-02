@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SearingBlood extends CardImpl<SearingBlood> {
+public class SearingBlood extends CardImpl {
 
     public SearingBlood(UUID ownerId) {
         super(ownerId, 111, "Searing Blood", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");

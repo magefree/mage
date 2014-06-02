@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class Moggcatcher extends CardImpl<Moggcatcher> {
+public class Moggcatcher extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Goblin permanent card");
 

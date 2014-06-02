@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Somnomancer extends CardImpl<Somnomancer> {
+public class Somnomancer extends CardImpl {
 
     public Somnomancer(UUID ownerId) {
         super(ownerId, 149, "Somnomancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W/U}");

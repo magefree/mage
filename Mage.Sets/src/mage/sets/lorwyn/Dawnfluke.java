@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class Dawnfluke extends CardImpl<Dawnfluke> {
+public class Dawnfluke extends CardImpl {
 
     public Dawnfluke(UUID ownerId) {
         super(ownerId, 12, "Dawnfluke", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

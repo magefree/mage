@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PropheticPrism extends CardImpl<PropheticPrism> {
+public class PropheticPrism extends CardImpl {
 
     public PropheticPrism(UUID ownerId) {
         super(ownerId, 222, "Prophetic Prism", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Phyresis extends CardImpl<Phyresis> {
+public class Phyresis extends CardImpl {
 
     public Phyresis (UUID ownerId) {
         super(ownerId, 49, "Phyresis", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

@@ -46,7 +46,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author Loki
  */
-public class SelesnyaGuildmage extends CardImpl<SelesnyaGuildmage> {
+public class SelesnyaGuildmage extends CardImpl {
 
     public SelesnyaGuildmage (UUID ownerId) {
         super(ownerId, 252, "Selesnya Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G/W}{G/W}");

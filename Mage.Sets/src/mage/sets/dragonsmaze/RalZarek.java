@@ -51,7 +51,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class RalZarek extends CardImpl<RalZarek> {
+public class RalZarek extends CardImpl {
 
     public RalZarek(UUID ownerId) {
         super(ownerId, 94, "Ral Zarek", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");

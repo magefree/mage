@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class ImpsMischief extends CardImpl<ImpsMischief> {
+public class ImpsMischief extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("spell with a single target");
     

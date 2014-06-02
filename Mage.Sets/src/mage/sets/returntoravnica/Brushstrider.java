@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Brushstrider extends CardImpl<Brushstrider> {
+public class Brushstrider extends CardImpl {
 
     public Brushstrider(UUID ownerId) {
         super(ownerId, 117, "Brushstrider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

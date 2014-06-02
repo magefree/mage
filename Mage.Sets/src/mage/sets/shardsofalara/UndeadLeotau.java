@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class UndeadLeotau extends CardImpl<UndeadLeotau> {
+public class UndeadLeotau extends CardImpl {
 
     public UndeadLeotau (UUID ownerId) {
         super(ownerId, 90, "Undead Leotau", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");

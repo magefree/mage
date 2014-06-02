@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Darkblast extends CardImpl<Darkblast> {
+public class Darkblast extends CardImpl {
 
     public Darkblast(UUID ownerId) {
         super(ownerId, 82, "Darkblast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");

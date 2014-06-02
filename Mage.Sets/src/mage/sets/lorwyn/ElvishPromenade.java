@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ElvishPromenade extends CardImpl<ElvishPromenade> {
+public class ElvishPromenade extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf you control");
 

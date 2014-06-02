@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FieryFall extends CardImpl<FieryFall> {
+public class FieryFall extends CardImpl {
 
     public FieryFall (UUID ownerId) {
         super(ownerId, 63, "Fiery Fall", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{R}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  */
 
 
-public class SinCollector extends CardImpl<SinCollector> {
+public class SinCollector extends CardImpl {
 
     public SinCollector(UUID ownerId) {
         super(ownerId, 103, "Sin Collector", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");

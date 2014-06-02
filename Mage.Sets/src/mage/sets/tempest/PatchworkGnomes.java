@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Loki
  */
-public class PatchworkGnomes extends CardImpl<PatchworkGnomes> {
+public class PatchworkGnomes extends CardImpl {
 
     public PatchworkGnomes(UUID ownerId) {
         super(ownerId, 289, "Patchwork Gnomes", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

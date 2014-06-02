@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MoltenPsyche extends CardImpl<MoltenPsyche> {
+public class MoltenPsyche extends CardImpl {
 
     public MoltenPsyche(UUID ownerId) {
         super(ownerId, 98, "Molten Psyche", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

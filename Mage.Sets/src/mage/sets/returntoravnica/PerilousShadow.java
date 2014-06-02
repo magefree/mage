@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class PerilousShadow extends CardImpl<PerilousShadow> {
+public class PerilousShadow extends CardImpl {
 
     public PerilousShadow(UUID ownerId) {
         super(ownerId, 74, "Perilous Shadow", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

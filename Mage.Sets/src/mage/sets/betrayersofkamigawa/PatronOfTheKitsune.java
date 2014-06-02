@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
 /**
  * @author LevelX2
  */
-public class PatronOfTheKitsune extends CardImpl<PatronOfTheKitsune> {
+public class PatronOfTheKitsune extends CardImpl {
 
     public PatronOfTheKitsune(UUID ownerId) {
         super(ownerId, 19, "Patron of the Kitsune", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class JoyousRespite extends CardImpl<JoyousRespite> {
+public class JoyousRespite extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

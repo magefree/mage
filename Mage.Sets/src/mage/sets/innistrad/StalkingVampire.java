@@ -39,7 +39,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 /**
  * @author nantuko
  */
-public class StalkingVampire extends CardImpl<StalkingVampire> {
+public class StalkingVampire extends CardImpl {
 
     public StalkingVampire(UUID ownerId) {
         super(ownerId, 114, "Stalking Vampire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");

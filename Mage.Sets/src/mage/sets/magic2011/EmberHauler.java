@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EmberHauler extends CardImpl<EmberHauler> {
+public class EmberHauler extends CardImpl {
 
     public EmberHauler(UUID ownerId) {
         super(ownerId, 135, "Ember Hauler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");

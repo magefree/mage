@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class TalusPaladin extends CardImpl<TalusPaladin> {
+public class TalusPaladin extends CardImpl {
     
     public TalusPaladin(UUID ownerId) {
         super(ownerId, 21, "Talus Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");

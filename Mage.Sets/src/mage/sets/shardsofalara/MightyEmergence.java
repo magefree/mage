@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class MightyEmergence extends CardImpl<MightyEmergence> {
+public class MightyEmergence extends CardImpl {
     
     public MightyEmergence(UUID ownerId) {
         super(ownerId, 137, "Mighty Emergence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

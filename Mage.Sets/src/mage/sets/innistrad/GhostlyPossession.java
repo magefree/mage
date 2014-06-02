@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward
  */
-public class GhostlyPossession extends CardImpl<GhostlyPossession> {
+public class GhostlyPossession extends CardImpl {
 
     public GhostlyPossession(UUID ownerId) {
         super(ownerId, 18, "Ghostly Possession", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

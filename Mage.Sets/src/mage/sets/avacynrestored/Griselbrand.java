@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class Griselbrand extends CardImpl<Griselbrand> {
+public class Griselbrand extends CardImpl {
 
     public Griselbrand(UUID ownerId) {
         super(ownerId, 106, "Griselbrand", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}{B}");

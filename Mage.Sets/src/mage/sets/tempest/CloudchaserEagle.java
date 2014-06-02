@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class CloudchaserEagle extends CardImpl<CloudchaserEagle> {
+public class CloudchaserEagle extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 

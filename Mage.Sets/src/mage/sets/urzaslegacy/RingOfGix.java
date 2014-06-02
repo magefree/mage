@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class RingOfGix extends CardImpl<RingOfGix> {
+public class RingOfGix extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 

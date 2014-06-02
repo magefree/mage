@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class WuInfantry extends CardImpl<WuInfantry> {
+public class WuInfantry extends CardImpl {
 
     public WuInfantry(UUID ownerId) {
         super(ownerId, 59, "Wu Infantry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

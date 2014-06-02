@@ -41,7 +41,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author North
  */
-public class NomadsAssembly extends CardImpl<NomadsAssembly> {
+public class NomadsAssembly extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

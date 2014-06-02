@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class MotherOfRunes extends CardImpl<MotherOfRunes> {
+public class MotherOfRunes extends CardImpl {
 
     public MotherOfRunes(UUID ownerId) {
         super(ownerId, 14, "Mother of Runes", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");

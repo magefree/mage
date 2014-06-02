@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ScarlandThrinax extends CardImpl<ScarlandThrinax> {
+public class ScarlandThrinax extends CardImpl {
 
     public ScarlandThrinax(UUID ownerId) {
         super(ownerId, 123, "Scarland Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class FlinthoofBoar extends CardImpl<FlinthoofBoar> {
+public class FlinthoofBoar extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Mountain");
 

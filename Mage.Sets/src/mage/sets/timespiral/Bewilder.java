@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Bewilder extends CardImpl<Bewilder> {
+public class Bewilder extends CardImpl {
 
     public Bewilder(UUID ownerId) {
         super(ownerId, 49, "Bewilder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

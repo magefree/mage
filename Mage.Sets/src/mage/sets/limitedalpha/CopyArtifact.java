@@ -52,7 +52,7 @@ import mage.util.functions.ApplyToPermanent;
  * @author KholdFuzion
 
  */
-public class CopyArtifact extends CardImpl<CopyArtifact> {
+public class CopyArtifact extends CardImpl {
 
     public CopyArtifact(UUID ownerId) {
         super(ownerId, 54, "Copy Artifact", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

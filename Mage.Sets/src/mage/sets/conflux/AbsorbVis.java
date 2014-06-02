@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class AbsorbVis extends CardImpl<AbsorbVis> {
+public class AbsorbVis extends CardImpl {
 
     public AbsorbVis (UUID ownerId) {
         super(ownerId, 40, "Absorb Vis", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{6}{B}");

@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class PrimalClay extends CardImpl<PrimalClay> {
+public class PrimalClay extends CardImpl {
 
     public PrimalClay(UUID ownerId) {
         super(ownerId, 395, "Primal Clay", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

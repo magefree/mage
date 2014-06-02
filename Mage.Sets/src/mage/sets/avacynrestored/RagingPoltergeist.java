@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RagingPoltergeist extends CardImpl<RagingPoltergeist> {
+public class RagingPoltergeist extends CardImpl {
 
     public RagingPoltergeist(UUID ownerId) {
         super(ownerId, 150, "Raging Poltergeist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

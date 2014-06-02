@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ShadowmageInfiltrator extends CardImpl<ShadowmageInfiltrator> {
+public class ShadowmageInfiltrator extends CardImpl {
 
     public ShadowmageInfiltrator(UUID ownerId) {
         super(ownerId, 99, "Shadowmage Infiltrator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");

@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class SarkhanTheMad extends CardImpl<SarkhanTheMad> {
+public class SarkhanTheMad extends CardImpl {
 
     public SarkhanTheMad(UUID ownerId) {
         super(ownerId, 214, "Sarkhan the Mad", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");

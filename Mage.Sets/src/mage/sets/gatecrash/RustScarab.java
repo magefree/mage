@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class RustScarab extends CardImpl<RustScarab> {
+public class RustScarab extends CardImpl {
 
     public RustScarab(UUID ownerId) {
         super(ownerId, 130, "Rust Scarab", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

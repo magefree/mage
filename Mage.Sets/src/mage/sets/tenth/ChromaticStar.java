@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ChromaticStar extends CardImpl<ChromaticStar> {
+public class ChromaticStar extends CardImpl {
 
     public ChromaticStar(UUID ownerId) {
         super(ownerId, 314, "Chromatic Star", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

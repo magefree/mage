@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LoathsomeCatoblepas extends CardImpl<LoathsomeCatoblepas> {
+public class LoathsomeCatoblepas extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

@@ -45,7 +45,7 @@ import mage.game.stack.StackObject;
  *
  * @author jeffwadsworth
  */
-public class GroundSeal extends CardImpl<GroundSeal> {
+public class GroundSeal extends CardImpl {
 
     public GroundSeal(UUID ownerId) {
         super(ownerId, 176, "Ground Seal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

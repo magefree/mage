@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Backfir3
  */
-public class AetherSting extends CardImpl<AetherSting> {
+public class AetherSting extends CardImpl {
 
     public AetherSting(UUID ownerId) {
         super(ownerId, 76, "AEther Sting", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

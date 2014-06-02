@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class ArchaeologicalDig extends CardImpl<ArchaeologicalDig> {
+public class ArchaeologicalDig extends CardImpl {
 
     public ArchaeologicalDig(UUID ownerId) {
         super(ownerId, 320, "Archaeological Dig", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

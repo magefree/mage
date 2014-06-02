@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SliverConstruct extends CardImpl<SliverConstruct> {
+public class SliverConstruct extends CardImpl {
 
     public SliverConstruct(UUID ownerId) {
         super(ownerId, 218, "Sliver Construct", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

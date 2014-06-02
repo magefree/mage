@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class AzoriusChancery extends CardImpl<AzoriusChancery> {
+public class AzoriusChancery extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

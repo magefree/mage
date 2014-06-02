@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author North
  */
-public class Magmaquake extends CardImpl<Magmaquake> {
+public class Magmaquake extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature without flying and each planeswalker");
 

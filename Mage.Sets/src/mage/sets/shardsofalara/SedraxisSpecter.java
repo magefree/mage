@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SedraxisSpecter extends CardImpl<SedraxisSpecter> {
+public class SedraxisSpecter extends CardImpl {
 
     public SedraxisSpecter(UUID ownerId) {
         super(ownerId, 192, "Sedraxis Specter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{B}{R}");

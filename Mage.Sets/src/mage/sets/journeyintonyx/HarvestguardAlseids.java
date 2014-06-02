@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HarvestguardAlseids extends CardImpl<HarvestguardAlseids> {
+public class HarvestguardAlseids extends CardImpl {
 
     public HarvestguardAlseids(UUID ownerId) {
         super(ownerId, 13, "Harvestguard Alseids", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}");

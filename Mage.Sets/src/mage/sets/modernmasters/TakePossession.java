@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class TakePossession extends CardImpl<TakePossession> {
+public class TakePossession extends CardImpl {
 
     public TakePossession(UUID ownerId) {
         super(ownerId, 66, "Take Possession", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");

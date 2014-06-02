@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TangleAngler extends CardImpl<TangleAngler> {
+public class TangleAngler extends CardImpl {
 
     public TangleAngler(UUID ownerId) {
         super(ownerId, 128, "Tangle Angler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

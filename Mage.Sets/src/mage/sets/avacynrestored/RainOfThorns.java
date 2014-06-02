@@ -44,7 +44,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class RainOfThorns extends CardImpl<RainOfThorns> {
+public class RainOfThorns extends CardImpl {
 
     public RainOfThorns(UUID ownerId) {
         super(ownerId, 190, "Rain of Thorns", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");

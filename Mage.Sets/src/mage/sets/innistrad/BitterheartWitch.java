@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward
  */
-public class BitterheartWitch extends CardImpl<BitterheartWitch> {
+public class BitterheartWitch extends CardImpl {
 
     public BitterheartWitch(UUID ownerId) {
         super(ownerId, 88, "Bitterheart Witch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

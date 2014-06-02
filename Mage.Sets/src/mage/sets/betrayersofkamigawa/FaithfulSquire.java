@@ -57,7 +57,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class FaithfulSquire extends CardImpl<FaithfulSquire> {
+public class FaithfulSquire extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

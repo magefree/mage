@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class PrimordialHydra extends CardImpl<PrimordialHydra> {
+public class PrimordialHydra extends CardImpl {
 
     private static final String staticText = "{this} has trample as long as it has ten or more +1/+1 counters on it";
 

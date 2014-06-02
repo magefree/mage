@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class WaitingInTheWeeds extends CardImpl<WaitingInTheWeeds> {
+public class WaitingInTheWeeds extends CardImpl {
 
     public WaitingInTheWeeds(UUID ownerId) {
         super(ownerId, 150, "Waiting in the Weeds", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");

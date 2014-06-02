@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class DiscipleOfPhenax extends CardImpl<DiscipleOfPhenax> {
+public class DiscipleOfPhenax extends CardImpl {
 
     public DiscipleOfPhenax(UUID ownerId) {
         super(ownerId, 84, "Disciple of Phenax", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

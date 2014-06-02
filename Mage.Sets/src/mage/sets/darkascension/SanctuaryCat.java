@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SanctuaryCat extends CardImpl<SanctuaryCat> {
+public class SanctuaryCat extends CardImpl {
 
     public SanctuaryCat(UUID ownerId) {
         super(ownerId, 19, "Sanctuary Cat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

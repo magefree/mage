@@ -46,7 +46,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class FlamespeakerAdept extends CardImpl<FlamespeakerAdept> {
+public class FlamespeakerAdept extends CardImpl {
 
     public FlamespeakerAdept(UUID ownerId) {
         super(ownerId, 123, "Flamespeaker Adept", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

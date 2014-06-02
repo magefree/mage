@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class BloodiedGhost extends CardImpl<BloodiedGhost> {
+public class BloodiedGhost extends CardImpl {
 
     public BloodiedGhost (UUID ownerId) {
         super(ownerId, 83, "Bloodied Ghost", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W/B}{W/B}");

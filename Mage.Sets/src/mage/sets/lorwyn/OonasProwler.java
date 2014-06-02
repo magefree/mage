@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class OonasProwler extends CardImpl<OonasProwler> {
+public class OonasProwler extends CardImpl {
 
     public OonasProwler(UUID ownerId) {
         super(ownerId, 133, "Oona's Prowler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}");

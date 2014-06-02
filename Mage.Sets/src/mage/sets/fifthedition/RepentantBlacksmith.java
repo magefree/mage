@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author KholdFuzion
  */
-public class RepentantBlacksmith extends CardImpl<RepentantBlacksmith> {
+public class RepentantBlacksmith extends CardImpl {
 
     private static final FilterCard protectionFilter = new FilterCard("red");
     static {

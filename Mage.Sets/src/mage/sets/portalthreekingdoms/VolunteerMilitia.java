@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class VolunteerMilitia extends CardImpl<VolunteerMilitia> {
+public class VolunteerMilitia extends CardImpl {
 
     public VolunteerMilitia(UUID ownerId) {
         super(ownerId, 30, "Volunteer Militia", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

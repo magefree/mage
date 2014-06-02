@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class GuildFeud extends CardImpl<GuildFeud> {
+public class GuildFeud extends CardImpl {
 
     public GuildFeud(UUID ownerId) {
         super(ownerId, 97, "Guild Feud", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");

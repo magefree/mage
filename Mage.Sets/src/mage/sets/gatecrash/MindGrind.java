@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MindGrind extends CardImpl<MindGrind> {
+public class MindGrind extends CardImpl {
 
     public MindGrind(UUID ownerId) {
         super(ownerId, 178, "Mind Grind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{B}");

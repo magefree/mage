@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class CityOfTraitors extends CardImpl<CityOfTraitors> {
+public class CityOfTraitors extends CardImpl {
 
     public CityOfTraitors(UUID ownerId) {
         super(ownerId, 143, "City of Traitors", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class SanguineBond extends CardImpl<SanguineBond> {
+public class SanguineBond extends CardImpl {
 
     public SanguineBond(UUID ownerId) {
         super(ownerId, 111, "Sanguine Bond", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

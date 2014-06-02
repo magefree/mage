@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BogTatters extends CardImpl<BogTatters> {
+public class BogTatters extends CardImpl {
 
     public BogTatters (UUID ownerId) {
         super(ownerId, 84, "Bog Tatters", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

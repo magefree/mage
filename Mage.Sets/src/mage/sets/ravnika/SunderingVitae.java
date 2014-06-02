@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author jonubuu
  */
-public class SunderingVitae extends CardImpl<SunderingVitae> {
+public class SunderingVitae extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class IllicitAuction extends CardImpl<IllicitAuction> {
+public class IllicitAuction extends CardImpl {
 
     public IllicitAuction(UUID ownerId) {
         super(ownerId, 183, "Illicit Auction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

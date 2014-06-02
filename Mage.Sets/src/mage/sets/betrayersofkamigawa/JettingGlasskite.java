@@ -45,7 +45,7 @@ import mage.target.TargetStackObject;
  *
  * @author LevelX2
  */
-public class JettingGlasskite extends CardImpl<JettingGlasskite> {
+public class JettingGlasskite extends CardImpl {
 
     public JettingGlasskite(UUID ownerId) {
         super(ownerId, 38, "Jetting Glasskite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

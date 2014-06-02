@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ObstinateBaloth extends CardImpl<ObstinateBaloth> {
+public class ObstinateBaloth extends CardImpl {
 
     public ObstinateBaloth(UUID ownerId) {
         super(ownerId, 188, "Obstinate Baloth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

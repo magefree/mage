@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Incite extends CardImpl<Incite> {
+public class Incite extends CardImpl {
 
     public Incite(UUID ownerId) {
         super(ownerId, 145, "Incite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

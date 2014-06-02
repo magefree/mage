@@ -42,7 +42,7 @@ import mage.constants.Rarity;
  *
  * @author Loki
  */
-public class HallowedFountain extends CardImpl<HallowedFountain> {
+public class HallowedFountain extends CardImpl {
 
     public HallowedFountain (UUID ownerId) {
         super(ownerId, 174, "Hallowed Fountain", Rarity.RARE, new CardType[]{CardType.LAND}, null);

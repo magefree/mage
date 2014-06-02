@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class VugLizard extends CardImpl<VugLizard>{
+public class VugLizard extends CardImpl{
 
     public VugLizard(UUID ownerId) {
         super(ownerId, 227, "Vug Lizard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

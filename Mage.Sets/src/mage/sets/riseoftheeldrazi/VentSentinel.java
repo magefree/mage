@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class VentSentinel extends CardImpl<VentSentinel> {
+public class VentSentinel extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures with defender you control");
     static{
         filter.add(new AbilityPredicate(DefenderAbility.class));

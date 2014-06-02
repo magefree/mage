@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class ScrollOfGriselbrand extends CardImpl<ScrollOfGriselbrand> {
+public class ScrollOfGriselbrand extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {

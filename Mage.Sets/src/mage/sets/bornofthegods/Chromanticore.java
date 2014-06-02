@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class Chromanticore extends CardImpl<Chromanticore> {
+public class Chromanticore extends CardImpl {
 
     public Chromanticore(UUID ownerId) {
         super(ownerId, 144, "Chromanticore", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{W}{U}{B}{R}{G}");

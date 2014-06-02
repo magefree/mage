@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class BlisterBeetle extends CardImpl<BlisterBeetle> {
+public class BlisterBeetle extends CardImpl {
 
     public BlisterBeetle(UUID ownerId) {
         super(ownerId, 66, "Blister Beetle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

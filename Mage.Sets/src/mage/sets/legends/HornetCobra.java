@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HornetCobra extends CardImpl<HornetCobra> {
+public class HornetCobra extends CardImpl {
 
     public HornetCobra(UUID ownerId) {
         super(ownerId, 104, "Hornet Cobra", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

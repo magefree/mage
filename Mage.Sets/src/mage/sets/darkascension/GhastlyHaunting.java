@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward
  */
-public class GhastlyHaunting extends CardImpl<GhastlyHaunting> {
+public class GhastlyHaunting extends CardImpl {
 
     public GhastlyHaunting(UUID ownerId) {
         super(ownerId, 50, "Ghastly Haunting", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "");

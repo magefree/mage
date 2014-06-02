@@ -48,7 +48,7 @@ import mage.watchers.Watcher;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Vengevine extends CardImpl<Vengevine> {
+public class Vengevine extends CardImpl {
 
     public Vengevine(UUID ownerId) {
         super(ownerId, 212, "Vengevine", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

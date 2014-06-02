@@ -52,7 +52,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  *
  * @author jeffwadsworth
  */
-public class LuminarchAscension extends CardImpl<LuminarchAscension> {
+public class LuminarchAscension extends CardImpl {
     
     private String rule = "At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension. (Damage causes loss of life.)";
     

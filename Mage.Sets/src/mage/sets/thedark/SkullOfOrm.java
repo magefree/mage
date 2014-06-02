@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Plopman
  */
-public class SkullOfOrm extends CardImpl<SkullOfOrm> {
+public class SkullOfOrm extends CardImpl {
 
     public SkullOfOrm(UUID ownerId) {
         super(ownerId, 106, "Skull of Orm", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

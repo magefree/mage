@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class GloomSurgeon extends CardImpl<GloomSurgeon> {
+public class GloomSurgeon extends CardImpl {
 
     public GloomSurgeon(UUID ownerId) {
         super(ownerId, 104, "Gloom Surgeon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}");

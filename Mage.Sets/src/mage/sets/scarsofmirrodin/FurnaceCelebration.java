@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FurnaceCelebration extends CardImpl<FurnaceCelebration> {
+public class FurnaceCelebration extends CardImpl {
 
     public FurnaceCelebration(UUID ownerId) {
         super(ownerId, 90, "Furnace Celebration", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");

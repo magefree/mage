@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SivitriScarzam extends CardImpl<SivitriScarzam> {
+public class SivitriScarzam extends CardImpl {
 
     public SivitriScarzam(UUID ownerId) {
         super(ownerId, 298, "Sivitri Scarzam", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{U}{B}");

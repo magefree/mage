@@ -54,7 +54,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class BoshIronGolem extends CardImpl<BoshIronGolem> {
+public class BoshIronGolem extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
     

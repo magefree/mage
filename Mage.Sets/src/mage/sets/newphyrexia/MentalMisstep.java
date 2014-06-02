@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class MentalMisstep extends CardImpl<MentalMisstep> {
+public class MentalMisstep extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 1");
 

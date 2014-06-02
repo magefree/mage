@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class VodalianSoldiers extends CardImpl<VodalianSoldiers> {
+public class VodalianSoldiers extends CardImpl {
 
     public VodalianSoldiers(UUID ownerId) {
         super(ownerId, 134, "Vodalian Soldiers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class WanderwineHub extends CardImpl<WanderwineHub> {
+public class WanderwineHub extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Merfolk card from your hand");
     static {

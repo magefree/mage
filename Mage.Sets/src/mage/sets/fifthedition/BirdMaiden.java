@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BirdMaiden extends CardImpl<BirdMaiden> {
+public class BirdMaiden extends CardImpl {
 
     public BirdMaiden(UUID ownerId) {
         super(ownerId, 211, "Bird Maiden", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

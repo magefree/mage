@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SatyrHedonist extends CardImpl<SatyrHedonist> {
+public class SatyrHedonist extends CardImpl {
 
     public SatyrHedonist(UUID ownerId) {
         super(ownerId, 174, "Satyr Hedonist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class GoblinAssault extends CardImpl<GoblinAssault> {
+public class GoblinAssault extends CardImpl {
 
     public GoblinAssault(UUID ownerId) {
         super(ownerId, 101, "Goblin Assault", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

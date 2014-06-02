@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class IncrementalGrowth extends CardImpl<IncrementalGrowth> {
+public class IncrementalGrowth extends CardImpl {
 
     public IncrementalGrowth(UUID ownerId) {
         super(ownerId, 149, "Incremental Growth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");

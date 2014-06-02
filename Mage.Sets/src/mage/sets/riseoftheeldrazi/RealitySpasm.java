@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class RealitySpasm extends CardImpl<RealitySpasm> {
+public class RealitySpasm extends CardImpl {
     
     public RealitySpasm(UUID ownerId) {
         super(ownerId, 81, "Reality Spasm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");

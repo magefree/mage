@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class Mulch extends CardImpl<Mulch> {
+public class Mulch extends CardImpl {
 
     public Mulch(UUID ownerId) {
         super(ownerId, 196, "Mulch", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

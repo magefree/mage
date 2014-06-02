@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
 /**
  * @author LevelX2
  */
-public class HokoriDustDrinker extends CardImpl<HokoriDustDrinker> {
+public class HokoriDustDrinker extends CardImpl {
 
     public HokoriDustDrinker(UUID ownerId) {
         super(ownerId, 7, "Hokori, Dust Drinker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

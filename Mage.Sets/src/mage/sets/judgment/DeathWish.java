@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class DeathWish extends CardImpl<DeathWish> {
+public class DeathWish extends CardImpl {
 
     public DeathWish(UUID ownerId) {
         super(ownerId, 64, "Death Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");

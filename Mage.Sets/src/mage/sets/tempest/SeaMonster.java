@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author Plopman
  */
-public class SeaMonster extends CardImpl<SeaMonster> {
+public class SeaMonster extends CardImpl {
 
     public SeaMonster(UUID ownerId) {
         super(ownerId, 85, "Sea Monster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

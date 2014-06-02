@@ -47,7 +47,7 @@ import mage.players.Player;
 /**
  * @author LevelX2
  */
-public class IzzetKeyrune extends CardImpl<IzzetKeyrune> {
+public class IzzetKeyrune extends CardImpl {
 
     public IzzetKeyrune(UUID ownerId) {
         super(ownerId, 230, "Izzet Keyrune", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

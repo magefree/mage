@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author nantuko
  */
-public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
+public class GethLordOfTheVault extends CardImpl {
 
     public GethLordOfTheVault (UUID ownerId) {
         super(ownerId, 64, "Geth, Lord of the Vault", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

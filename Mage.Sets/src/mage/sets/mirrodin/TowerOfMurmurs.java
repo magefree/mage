@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class TowerOfMurmurs extends CardImpl<TowerOfMurmurs> {
+public class TowerOfMurmurs extends CardImpl {
 
     public TowerOfMurmurs (UUID ownerId) {
         super(ownerId, 268, "Tower of Murmurs", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

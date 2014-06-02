@@ -55,7 +55,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class BudokaGardener extends CardImpl<BudokaGardener> {
+public class BudokaGardener extends CardImpl {
 
     public BudokaGardener(UUID ownerId) {
         super(ownerId, 202, "Budoka Gardener", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

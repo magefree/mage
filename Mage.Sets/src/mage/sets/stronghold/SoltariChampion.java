@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author KholdFuzion
  */
-public class SoltariChampion extends CardImpl<SoltariChampion> {
+public class SoltariChampion extends CardImpl {
 
     public SoltariChampion(UUID ownerId) {
         super(ownerId, 118, "Soltari Champion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");

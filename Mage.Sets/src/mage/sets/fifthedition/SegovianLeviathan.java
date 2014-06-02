@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SegovianLeviathan extends CardImpl<SegovianLeviathan> {
+public class SegovianLeviathan extends CardImpl {
 
     public SegovianLeviathan(UUID ownerId) {
         super(ownerId, 122, "Segovian Leviathan", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

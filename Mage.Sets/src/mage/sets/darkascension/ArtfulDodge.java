@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ArtfulDodge extends CardImpl<ArtfulDodge> {
+public class ArtfulDodge extends CardImpl {
 
     public ArtfulDodge(UUID ownerId) {
         super(ownerId, 27, "Artful Dodge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");

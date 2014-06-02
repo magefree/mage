@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PyreCharger extends CardImpl<PyreCharger> {
+public class PyreCharger extends CardImpl {
 
     public PyreCharger(UUID ownerId) {
         super(ownerId, 103, "Pyre Charger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PromisedKannushi extends CardImpl<PromisedKannushi> {
+public class PromisedKannushi extends CardImpl {
 
     public PromisedKannushi(UUID ownerId) {
         super(ownerId, 141, "Promised Kannushi", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

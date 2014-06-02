@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HauntingEchoes extends CardImpl<HauntingEchoes> {
+public class HauntingEchoes extends CardImpl {
 
     public HauntingEchoes(UUID ownerId) {
         super(ownerId, 98, "Haunting Echoes", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

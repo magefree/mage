@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TrollAscetic extends CardImpl<TrollAscetic> {
+public class TrollAscetic extends CardImpl {
     public TrollAscetic (UUID ownerId) {
         super(ownerId, 135, "Troll Ascetic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "MRD";

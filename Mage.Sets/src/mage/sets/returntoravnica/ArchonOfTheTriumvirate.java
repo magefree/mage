@@ -46,7 +46,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class ArchonOfTheTriumvirate extends CardImpl<ArchonOfTheTriumvirate> {
+public class ArchonOfTheTriumvirate extends CardImpl {
 
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanents your opponents control");
  

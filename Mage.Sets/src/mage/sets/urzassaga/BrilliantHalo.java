@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BrilliantHalo extends CardImpl<BrilliantHalo> {
+public class BrilliantHalo extends CardImpl {
 
     public BrilliantHalo(UUID ownerId) {
         super(ownerId, 5, "Brilliant Halo", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

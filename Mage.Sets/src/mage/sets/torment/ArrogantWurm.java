@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class ArrogantWurm extends CardImpl<ArrogantWurm> {
+public class ArrogantWurm extends CardImpl {
 
     public ArrogantWurm(UUID ownerId) {
         super(ownerId, 120, "Arrogant Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

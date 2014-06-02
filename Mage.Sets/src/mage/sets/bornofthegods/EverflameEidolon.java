@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class EverflameEidolon extends CardImpl<EverflameEidolon> {
+public class EverflameEidolon extends CardImpl {
 
     public EverflameEidolon(UUID ownerId) {
         super(ownerId, 92, "Everflame Eidolon", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}");

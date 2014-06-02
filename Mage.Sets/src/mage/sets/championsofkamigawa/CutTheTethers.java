@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class CutTheTethers extends CardImpl<CutTheTethers> {
+public class CutTheTethers extends CardImpl {
 
     public CutTheTethers(UUID ownerId) {
         super(ownerId, 56, "Cut the Tethers", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");

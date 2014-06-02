@@ -43,7 +43,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class CascadeBluffs extends CardImpl<CascadeBluffs> {
+public class CascadeBluffs extends CardImpl {
 
     public CascadeBluffs(UUID ownerId) {
         super(ownerId, 175, "Cascade Bluffs", Rarity.RARE, new CardType[]{CardType.LAND}, null);

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ArdentPlea extends CardImpl<ArdentPlea> {
+public class ArdentPlea extends CardImpl {
 
     public ArdentPlea (UUID ownerId) {
         super(ownerId, 1, "Ardent Plea", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");

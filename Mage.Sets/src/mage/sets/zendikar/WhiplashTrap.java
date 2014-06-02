@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class WhiplashTrap extends CardImpl<WhiplashTrap> {
+public class WhiplashTrap extends CardImpl {
 
     public WhiplashTrap(UUID ownerId) {
         super(ownerId, 77, "Whiplash Trap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class PrimalPlasma extends CardImpl<PrimalPlasma> {
+public class PrimalPlasma extends CardImpl {
 
     public PrimalPlasma(UUID ownerId) {
         super(ownerId, 23, "Primal Plasma", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

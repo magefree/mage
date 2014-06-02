@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Quercitron
  */
-public class DingusEgg extends CardImpl<DingusEgg> {
+public class DingusEgg extends CardImpl {
 
     public DingusEgg(UUID ownerId) {
         super(ownerId, 241, "Dingus Egg", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

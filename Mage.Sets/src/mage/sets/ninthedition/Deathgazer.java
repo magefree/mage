@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class Deathgazer extends CardImpl<Deathgazer> {
+public class Deathgazer extends CardImpl {
 
     public Deathgazer(UUID ownerId) {
         super(ownerId, 124, "Deathgazer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class BorosKeyrune extends CardImpl<BorosKeyrune> {
+public class BorosKeyrune extends CardImpl {
 
     public BorosKeyrune(UUID ownerId) {
         super(ownerId, 227, "Boros Keyrune", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

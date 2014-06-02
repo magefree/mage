@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class Necroskitter extends CardImpl<Necroskitter> {
+public class Necroskitter extends CardImpl {
 
     public Necroskitter(UUID ownerId) {
         super(ownerId, 38, "Necroskitter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

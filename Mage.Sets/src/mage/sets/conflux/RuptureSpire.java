@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki, North
  */
-public class RuptureSpire extends CardImpl<RuptureSpire> {
+public class RuptureSpire extends CardImpl {
 
     public RuptureSpire (UUID ownerId) {
         super(ownerId, 144, "Rupture Spire", Rarity.COMMON, new CardType[]{CardType.LAND}, null);

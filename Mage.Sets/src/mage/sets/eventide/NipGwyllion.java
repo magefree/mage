@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class NipGwyllion extends CardImpl<NipGwyllion> {
+public class NipGwyllion extends CardImpl {
 
     public NipGwyllion(UUID ownerId) {
         super(ownerId, 92, "Nip Gwyllion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W/B}");

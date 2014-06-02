@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author LokiX
  */
-public class MindRot extends CardImpl<MindRot> {
+public class MindRot extends CardImpl {
 
     public MindRot(UUID ownerId){
         super(ownerId, 159, "Mind Rot", Rarity.COMMON, new CardType[]{CardType.SORCERY},"{2}{B}");

@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class OpalineUnicorn extends CardImpl<OpalineUnicorn> {
+public class OpalineUnicorn extends CardImpl {
 
     public OpalineUnicorn(UUID ownerId) {
         super(ownerId, 218, "Opaline Unicorn", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

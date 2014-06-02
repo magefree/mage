@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class RakdosCackler extends CardImpl<RakdosCackler> {
+public class RakdosCackler extends CardImpl {
  
     public RakdosCackler(UUID ownerId) {
         super(ownerId, 220, "Rakdos Cackler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B/R}");

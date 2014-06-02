@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class TrollHornCameo extends CardImpl<TrollHornCameo> {
+public class TrollHornCameo extends CardImpl {
 
     public TrollHornCameo(UUID ownerId) {
         super(ownerId, 316, "Troll-Horn Cameo", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

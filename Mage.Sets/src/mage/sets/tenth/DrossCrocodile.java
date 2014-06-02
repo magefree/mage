@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DrossCrocodile extends CardImpl<DrossCrocodile> {
+public class DrossCrocodile extends CardImpl {
 
     public DrossCrocodile(UUID ownerId) {
         super(ownerId, 138, "Dross Crocodile", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

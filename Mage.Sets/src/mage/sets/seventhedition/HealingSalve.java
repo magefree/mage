@@ -43,7 +43,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class HealingSalve extends CardImpl<HealingSalve> {
+public class HealingSalve extends CardImpl {
 
     public HealingSalve(UUID ownerId) {
         super(ownerId, 18, "Healing Salve", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

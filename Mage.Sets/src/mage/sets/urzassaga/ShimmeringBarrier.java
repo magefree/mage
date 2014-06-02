@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ShimmeringBarrier extends CardImpl<ShimmeringBarrier> {
+public class ShimmeringBarrier extends CardImpl {
 
     public ShimmeringBarrier(UUID ownerId) {
         super(ownerId, 50, "Shimmering Barrier", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

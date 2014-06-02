@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class Kezzerdrix extends CardImpl<Kezzerdrix> {
+public class Kezzerdrix extends CardImpl {
 
     public Kezzerdrix(UUID ownerId) {
         super(ownerId, 33, "Kezzerdrix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

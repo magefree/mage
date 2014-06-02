@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class Monomania extends CardImpl<Monomania> {
+public class Monomania extends CardImpl {
 
     public Monomania(UUID ownerId) {
         super(ownerId, 102, "Monomania", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

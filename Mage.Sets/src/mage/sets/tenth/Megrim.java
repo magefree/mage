@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class Megrim extends CardImpl<Megrim> {
+public class Megrim extends CardImpl {
 
     public Megrim (UUID ownerId) {
         super(ownerId, 157, "Megrim", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

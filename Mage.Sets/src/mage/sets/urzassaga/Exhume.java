@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Plopman
  */
-public class Exhume extends CardImpl<Exhume> {
+public class Exhume extends CardImpl {
 
     public Exhume(UUID ownerId) {
         super(ownerId, 134, "Exhume", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

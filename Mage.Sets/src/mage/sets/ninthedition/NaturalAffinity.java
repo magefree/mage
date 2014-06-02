@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class NaturalAffinity extends CardImpl<NaturalAffinity> {
+public class NaturalAffinity extends CardImpl {
 
     public NaturalAffinity(UUID ownerId) {
         super(ownerId, 256, "Natural Affinity", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}");

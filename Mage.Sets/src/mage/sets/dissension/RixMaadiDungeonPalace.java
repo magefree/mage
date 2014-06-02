@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class RixMaadiDungeonPalace extends CardImpl<RixMaadiDungeonPalace> {
+public class RixMaadiDungeonPalace extends CardImpl {
 
     public RixMaadiDungeonPalace(UUID ownerId) {
         super(ownerId, 179, "Rix Maadi, Dungeon Palace", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

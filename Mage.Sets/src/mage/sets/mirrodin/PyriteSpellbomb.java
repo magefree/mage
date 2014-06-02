@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class PyriteSpellbomb extends CardImpl<PyriteSpellbomb> {
+public class PyriteSpellbomb extends CardImpl {
 
     public PyriteSpellbomb(UUID ownerId) {
         super(ownerId, 232, "Pyrite Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class SunderFromWithin extends CardImpl<SunderFromWithin> {
+public class SunderFromWithin extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 

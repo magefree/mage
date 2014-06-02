@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class JoragaBard extends CardImpl<JoragaBard> {
+public class JoragaBard extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
 

@@ -51,7 +51,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ManaVault extends CardImpl<ManaVault> {
+public class ManaVault extends CardImpl {
 
     public ManaVault(UUID ownerId) {
         super(ownerId, 259, "Mana Vault", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

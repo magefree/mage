@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class CrimsonMage extends CardImpl<CrimsonMage> {
+public class CrimsonMage extends CardImpl {
 
     public CrimsonMage(UUID ownerId) {
         super(ownerId, 129, "Crimson Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class AngelheartVial extends CardImpl<AngelheartVial> {
+public class AngelheartVial extends CardImpl {
 
     public AngelheartVial(UUID ownerId) {
         super(ownerId, 215, "Angelheart Vial", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

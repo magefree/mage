@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class Exploration extends CardImpl<Exploration> {
+public class Exploration extends CardImpl {
 
     public Exploration(UUID ownerId) {
         super(ownerId, 250, "Exploration", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");

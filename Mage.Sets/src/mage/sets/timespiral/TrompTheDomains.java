@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TrompTheDomains extends CardImpl<TrompTheDomains> {
+public class TrompTheDomains extends CardImpl {
 
     public TrompTheDomains(UUID ownerId) {
         super(ownerId, 230, "Tromp the Domains", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{G}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class IdleThoughts extends CardImpl<IdleThoughts> {
+public class IdleThoughts extends CardImpl {
 
     public IdleThoughts(UUID ownerId) {
         super(ownerId, 23, "Idle Thoughts", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

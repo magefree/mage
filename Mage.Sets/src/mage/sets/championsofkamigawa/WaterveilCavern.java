@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WaterveilCavern extends CardImpl<WaterveilCavern> {
+public class WaterveilCavern extends CardImpl {
 
     public WaterveilCavern(UUID ownerId) {
         super(ownerId, 286, "Waterveil Cavern", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

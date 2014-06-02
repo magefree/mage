@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Flensermite extends CardImpl<Flensermite> {
+public class Flensermite extends CardImpl {
 
     public Flensermite (UUID ownerId) {
         super(ownerId, 41, "Flensermite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

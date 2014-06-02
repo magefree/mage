@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class Ragemonger extends CardImpl<Ragemonger> {
+public class Ragemonger extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Minotaur spells");
     static {

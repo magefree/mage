@@ -38,7 +38,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class Reknit extends CardImpl<Reknit> {
+public class Reknit extends CardImpl {
 
     public Reknit(UUID ownerId) {
         super(ownerId, 236, "Reknit", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G/W}");

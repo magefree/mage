@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class OrdruunVeteran extends CardImpl<OrdruunVeteran> {
+public class OrdruunVeteran extends CardImpl {
 
     public OrdruunVeteran(UUID ownerId) {
         super(ownerId, 184, "Ordruun Veteran", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");

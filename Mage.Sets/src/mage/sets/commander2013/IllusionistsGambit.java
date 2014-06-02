@@ -53,7 +53,7 @@ import mage.game.turn.TurnMod;
  *
  * @author LevelX2
  */
-public class IllusionistsGambit extends CardImpl<IllusionistsGambit> {
+public class IllusionistsGambit extends CardImpl {
 
     public IllusionistsGambit(UUID ownerId) {
         super(ownerId, 47, "Illusionist's Gambit", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

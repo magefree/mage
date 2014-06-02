@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class StoneGiant extends CardImpl<StoneGiant> {
+public class StoneGiant extends CardImpl {
 
     public StoneGiant(UUID ownerId) {
         super(ownerId, 159, "Stone Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

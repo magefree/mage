@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class GideonChampionOfJustice extends CardImpl<GideonChampionOfJustice> {
+public class GideonChampionOfJustice extends CardImpl {
 
     public GideonChampionOfJustice(UUID ownerId) {
         super(ownerId, 13, "Gideon, Champion of Justice", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");

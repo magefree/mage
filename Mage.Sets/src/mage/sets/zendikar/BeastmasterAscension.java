@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BeastmasterAscension extends CardImpl<BeastmasterAscension> {
+public class BeastmasterAscension extends CardImpl {
 
     public BeastmasterAscension(UUID ownerId) {
         super(ownerId, 159, "Beastmaster Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

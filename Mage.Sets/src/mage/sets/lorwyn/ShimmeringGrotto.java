@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ShimmeringGrotto extends CardImpl<ShimmeringGrotto> {
+public class ShimmeringGrotto extends CardImpl {
 
     public ShimmeringGrotto(UUID ownerId) {
         super(ownerId, 273, "Shimmering Grotto", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

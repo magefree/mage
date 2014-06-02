@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class SuppressionField extends CardImpl<SuppressionField> {
+public class SuppressionField extends CardImpl {
 
     public SuppressionField(UUID ownerId) {
         super(ownerId, 31, "Suppression Field", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

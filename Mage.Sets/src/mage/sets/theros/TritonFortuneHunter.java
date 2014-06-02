@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TritonFortuneHunter extends CardImpl<TritonFortuneHunter> {
+public class TritonFortuneHunter extends CardImpl {
 
     public TritonFortuneHunter(UUID ownerId) {
         super(ownerId, 69, "Triton Fortune Hunter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

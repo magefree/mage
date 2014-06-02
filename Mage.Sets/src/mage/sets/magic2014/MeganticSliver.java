@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MeganticSliver extends CardImpl<MeganticSliver> {
+public class MeganticSliver extends CardImpl {
 
     public MeganticSliver(UUID ownerId) {
         super(ownerId, 185, "Megantic Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}");

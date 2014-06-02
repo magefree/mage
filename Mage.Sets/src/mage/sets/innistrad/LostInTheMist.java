@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class LostInTheMist extends CardImpl<LostInTheMist> {
+public class LostInTheMist extends CardImpl {
 
     public LostInTheMist(UUID ownerId) {
         super(ownerId, 63, "Lost in the Mist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

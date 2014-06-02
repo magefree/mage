@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class IorRuinExpedition extends CardImpl<IorRuinExpedition> {
+public class IorRuinExpedition extends CardImpl {
 
     public IorRuinExpedition(UUID ownerId) {
         super(ownerId, 49, "Ior Ruin Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

@@ -49,7 +49,7 @@ import mage.constants.AttachmentType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BehemothSledge extends CardImpl<BehemothSledge> {
+public class BehemothSledge extends CardImpl {
 
     public BehemothSledge(UUID ownerId) {
         super(ownerId, 65, "Behemoth Sledge", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");

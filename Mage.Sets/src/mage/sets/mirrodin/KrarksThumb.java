@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class KrarksThumb extends CardImpl<KrarksThumb> {
+public class KrarksThumb extends CardImpl {
 
     public KrarksThumb(UUID ownerId) {
         super(ownerId, 190, "Krark's Thumb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

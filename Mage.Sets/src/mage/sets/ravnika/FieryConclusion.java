@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FieryConclusion extends CardImpl<FieryConclusion> {
+public class FieryConclusion extends CardImpl {
 
     public FieryConclusion(UUID ownerId) {
         super(ownerId, 122, "Fiery Conclusion", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

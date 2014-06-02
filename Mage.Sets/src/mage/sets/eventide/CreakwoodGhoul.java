@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Loki
  */
-public class CreakwoodGhoul extends CardImpl<CreakwoodGhoul> {
+public class CreakwoodGhoul extends CardImpl {
 
     public CreakwoodGhoul(UUID ownerId) {
         super(ownerId, 34, "Creakwood Ghoul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

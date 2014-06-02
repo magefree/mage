@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class KrallenhordeKiller extends CardImpl<KrallenhordeKiller> {
+public class KrallenhordeKiller extends CardImpl {
 
     public KrallenhordeKiller(UUID ownerId) {
         super(ownerId, 133, "Krallenhorde Killer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");

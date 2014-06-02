@@ -41,7 +41,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class EarthRift extends CardImpl<EarthRift> {
+public class EarthRift extends CardImpl {
 
     public EarthRift(UUID ownerId) {
         super(ownerId, 189, "Earth Rift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");

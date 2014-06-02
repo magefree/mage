@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class PullUnder extends CardImpl<PullUnder> {
+public class PullUnder extends CardImpl {
 
     public PullUnder (UUID ownerId) {
         super(ownerId, 137, "Pull Under", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{B}");

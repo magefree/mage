@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Disfigure extends CardImpl<Disfigure> {
+public class Disfigure extends CardImpl {
 
     public Disfigure(UUID ownerId) {
         super(ownerId, 87, "Disfigure", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

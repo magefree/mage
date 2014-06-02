@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Loki
  */
-public class HiddenHorror extends CardImpl<HiddenHorror> {
+public class HiddenHorror extends CardImpl {
 
     public HiddenHorror(UUID ownerId) {
         super(ownerId, 149, "Hidden Horror", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

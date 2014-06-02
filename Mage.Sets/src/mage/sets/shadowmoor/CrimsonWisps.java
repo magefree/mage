@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX
  */
-public class CrimsonWisps extends CardImpl<CrimsonWisps> {
+public class CrimsonWisps extends CardImpl {
 
     public CrimsonWisps (UUID ownerId) {
         super(ownerId, 88, "Crimson Wisps", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");

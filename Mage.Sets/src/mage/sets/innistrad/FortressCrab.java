@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FortressCrab extends CardImpl<FortressCrab> {
+public class FortressCrab extends CardImpl {
 
     public FortressCrab(UUID ownerId) {
         super(ownerId, 56, "Fortress Crab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AwakenerDruid extends CardImpl<AwakenerDruid> {
+public class AwakenerDruid extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
 

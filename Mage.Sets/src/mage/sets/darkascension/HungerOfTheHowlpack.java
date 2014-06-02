@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HungerOfTheHowlpack extends CardImpl<HungerOfTheHowlpack> {
+public class HungerOfTheHowlpack extends CardImpl {
 
     public HungerOfTheHowlpack(UUID ownerId) {
         super(ownerId, 119, "Hunger of the Howlpack", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

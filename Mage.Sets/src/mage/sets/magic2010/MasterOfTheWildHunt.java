@@ -59,7 +59,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MasterOfTheWildHunt extends CardImpl<MasterOfTheWildHunt> {
+public class MasterOfTheWildHunt extends CardImpl {
 
     private static WolfToken wolfToken = new WolfToken();
 

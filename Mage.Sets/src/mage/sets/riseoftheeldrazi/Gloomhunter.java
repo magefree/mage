@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Gloomhunter extends CardImpl<Gloomhunter> {
+public class Gloomhunter extends CardImpl {
 
     public Gloomhunter (UUID ownerId) {
         super(ownerId, 111, "Gloomhunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

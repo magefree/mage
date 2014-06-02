@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TriumphOfTheHordes extends CardImpl<TriumphOfTheHordes> {
+public class TriumphOfTheHordes extends CardImpl {
 
     public TriumphOfTheHordes(UUID ownerId) {
         super(ownerId, 123, "Triumph of the Hordes", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");

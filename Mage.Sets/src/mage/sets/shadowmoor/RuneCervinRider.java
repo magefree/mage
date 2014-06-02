@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RuneCervinRider extends CardImpl<RuneCervinRider> {
+public class RuneCervinRider extends CardImpl {
 
     public RuneCervinRider(UUID ownerId) {
         super(ownerId, 20, "Rune-Cervin Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

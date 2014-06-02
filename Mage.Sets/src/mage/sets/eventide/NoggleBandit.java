@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  * @author jeffwadsworth
 
  */
-public class NoggleBandit extends CardImpl<NoggleBandit> {
+public class NoggleBandit extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by creatures with defender");
     

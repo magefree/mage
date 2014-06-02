@@ -58,7 +58,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class ChromeMox extends CardImpl<ChromeMox> {
+public class ChromeMox extends CardImpl {
 
     public ChromeMox(UUID ownerId) {
         super(ownerId, 152, "Chrome Mox", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");

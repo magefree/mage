@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class DarkslickDrake extends CardImpl<DarkslickDrake> {
+public class DarkslickDrake extends CardImpl {
 
     public DarkslickDrake (UUID ownerId) {
         super(ownerId, 30, "Darkslick Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

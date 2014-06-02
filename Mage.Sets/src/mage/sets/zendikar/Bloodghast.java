@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  *
  * @author maurer.it_at_gmail.com
  */
-public class Bloodghast extends CardImpl<Bloodghast> {
+public class Bloodghast extends CardImpl {
 
     public Bloodghast(UUID ownerId) {
         super(ownerId, 83, "Bloodghast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");

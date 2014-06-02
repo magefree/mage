@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class GluttonousSlime extends CardImpl<GluttonousSlime> {
+public class GluttonousSlime extends CardImpl {
 
     public GluttonousSlime(UUID ownerId) {
         super(ownerId, 83, "Gluttonous Slime", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

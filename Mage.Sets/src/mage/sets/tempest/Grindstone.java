@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class Grindstone extends CardImpl<Grindstone> {
+public class Grindstone extends CardImpl {
 
     public Grindstone(UUID ownerId) {
         super(ownerId, 280, "Grindstone", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

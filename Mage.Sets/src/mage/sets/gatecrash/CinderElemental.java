@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class CinderElemental extends CardImpl<CinderElemental> {
+public class CinderElemental extends CardImpl {
 
     public CinderElemental(UUID ownerId) {
         super(ownerId, 87, "Cinder Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

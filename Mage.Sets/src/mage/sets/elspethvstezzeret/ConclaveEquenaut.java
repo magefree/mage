@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class ConclaveEquenaut extends CardImpl<ConclaveEquenaut> {
+public class ConclaveEquenaut extends CardImpl {
 
     public ConclaveEquenaut(UUID ownerId) {
         super(ownerId, 19, "Conclave Equenaut", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

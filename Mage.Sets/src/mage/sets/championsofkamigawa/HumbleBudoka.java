@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class HumbleBudoka extends CardImpl<HumbleBudoka> {
+public class HumbleBudoka extends CardImpl {
 
     public HumbleBudoka (UUID ownerId) {
         super(ownerId, 214, "Humble Budoka", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

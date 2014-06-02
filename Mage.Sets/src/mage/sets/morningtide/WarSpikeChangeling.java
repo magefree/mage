@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WarSpikeChangeling extends CardImpl<WarSpikeChangeling> {
+public class WarSpikeChangeling extends CardImpl {
 
     public WarSpikeChangeling(UUID ownerId) {
         super(ownerId, 112, "War-Spike Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

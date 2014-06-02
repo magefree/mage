@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SpireBarrage extends CardImpl<SpireBarrage> {
+public class SpireBarrage extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountains");
 

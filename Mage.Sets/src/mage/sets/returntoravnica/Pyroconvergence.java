@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class Pyroconvergence extends CardImpl<Pyroconvergence> {
+public class Pyroconvergence extends CardImpl {
 
     public Pyroconvergence(UUID ownerId) {
         super(ownerId, 103, "Pyroconvergence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");

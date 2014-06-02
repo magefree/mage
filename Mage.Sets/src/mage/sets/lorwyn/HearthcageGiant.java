@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class HearthcageGiant extends CardImpl<HearthcageGiant> {
+public class HearthcageGiant extends CardImpl {
 
     private static final FilterControlledPermanent filterElemental = new FilterControlledPermanent("Elemental");
     private static final FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant");

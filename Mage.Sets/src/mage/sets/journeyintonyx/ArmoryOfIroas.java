@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class ArmoryOfIroas extends CardImpl<ArmoryOfIroas> {
+public class ArmoryOfIroas extends CardImpl {
 
     public ArmoryOfIroas(UUID ownerId) {
         super(ownerId, 158, "Armory of Iroas", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

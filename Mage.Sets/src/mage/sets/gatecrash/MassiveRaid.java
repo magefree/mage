@@ -40,7 +40,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class MassiveRaid extends CardImpl<MassiveRaid> {
+public class MassiveRaid extends CardImpl {
 
     public MassiveRaid(UUID ownerId) {
         super(ownerId, 100, "Massive Raid", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");

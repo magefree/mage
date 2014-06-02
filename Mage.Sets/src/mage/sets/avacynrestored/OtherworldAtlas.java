@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class OtherworldAtlas extends CardImpl<OtherworldAtlas> {
+public class OtherworldAtlas extends CardImpl {
 
     public OtherworldAtlas(UUID ownerId) {
         super(ownerId, 219, "Otherworld Atlas", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

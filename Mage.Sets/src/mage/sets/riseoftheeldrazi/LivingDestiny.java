@@ -45,7 +45,7 @@ import mage.abilities.costs.common.RevealTargetFromHandCost;
  *
  * @author jeffwadsworth
  */
-public class LivingDestiny extends CardImpl<LivingDestiny> {
+public class LivingDestiny extends CardImpl {
 
     public LivingDestiny(UUID ownerId) {
         super(ownerId, 195, "Living Destiny", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");

@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author BetaSteward
  */
-public class AfflictedDeserter extends CardImpl<AfflictedDeserter> {
+public class AfflictedDeserter extends CardImpl {
 
     public AfflictedDeserter(UUID ownerId) {
         super(ownerId, 81, "Afflicted Deserter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

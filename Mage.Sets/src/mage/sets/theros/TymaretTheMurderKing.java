@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TymaretTheMurderKing extends CardImpl<TymaretTheMurderKing> {
+public class TymaretTheMurderKing extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
     static {

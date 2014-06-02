@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ThornThrashViashino extends CardImpl<ThornThrashViashino> {
+public class ThornThrashViashino extends CardImpl {
 
     public ThornThrashViashino(UUID ownerId) {
         super(ownerId, 116, "Thorn-Thrash Viashino", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -57,7 +57,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class DivinersWand extends CardImpl<DivinersWand> {
+public class DivinersWand extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Wizard creature");
     static {

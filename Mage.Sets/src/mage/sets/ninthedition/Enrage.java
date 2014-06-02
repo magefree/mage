@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Enrage extends CardImpl<Enrage> {
+public class Enrage extends CardImpl {
 
     public Enrage(UUID ownerId) {
         super(ownerId, 180, "Enrage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}");

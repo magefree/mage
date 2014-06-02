@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  * @author jeffwadsworth
 
  */
-public class GwyllionHedgeMage extends CardImpl<GwyllionHedgeMage> {
+public class GwyllionHedgeMage extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("Swamps");

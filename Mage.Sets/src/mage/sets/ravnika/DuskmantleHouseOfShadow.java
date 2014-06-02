@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class DuskmantleHouseOfShadow extends CardImpl<DuskmantleHouseOfShadow> {
+public class DuskmantleHouseOfShadow extends CardImpl {
 
     public DuskmantleHouseOfShadow(UUID ownerId) {
         super(ownerId, 277, "Duskmantle, House of Shadow", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

@@ -40,7 +40,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class GalvanicBlast extends CardImpl<GalvanicBlast> {
+public class GalvanicBlast extends CardImpl {
 
     private final String effectText = "Metalcraft - Galvanic Blast deals 4 damage to that creature or player instead if you control three or more artifacts";
 

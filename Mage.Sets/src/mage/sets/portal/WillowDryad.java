@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class WillowDryad extends CardImpl<WillowDryad> {
+public class WillowDryad extends CardImpl {
 
     public WillowDryad(UUID ownerId) {
         super(ownerId, 119, "Willow Dryad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class DemonicTaskmaster extends CardImpl<DemonicTaskmaster> {
+public class DemonicTaskmaster extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature other than Demonic Taskmaster");
 

@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DivinerSpirit extends CardImpl<DivinerSpirit> {
+public class DivinerSpirit extends CardImpl {
 
     public DivinerSpirit(UUID ownerId) {
         super(ownerId, 40, "Diviner Spirit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

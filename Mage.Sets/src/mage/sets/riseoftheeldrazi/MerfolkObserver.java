@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class MerfolkObserver extends CardImpl<MerfolkObserver> {
+public class MerfolkObserver extends CardImpl {
 
     public MerfolkObserver(UUID ownerId) {
         super(ownerId, 76, "Merfolk Observer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

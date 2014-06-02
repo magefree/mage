@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RottedHystrix extends CardImpl<RottedHystrix> {
+public class RottedHystrix extends CardImpl {
 
     public RottedHystrix(UUID ownerId) {
         super(ownerId, 120, "Rotted Hystrix", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

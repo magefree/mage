@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class BarbarianRing extends CardImpl<BarbarianRing> {
+public class BarbarianRing extends CardImpl {
 
     public BarbarianRing(UUID ownerId) {
         super(ownerId, 313, "Barbarian Ring", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class GuardDuty extends CardImpl<GuardDuty> {
+public class GuardDuty extends CardImpl {
 
     public GuardDuty (UUID ownerId) {
         super(ownerId, 23, "Guard Duty", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

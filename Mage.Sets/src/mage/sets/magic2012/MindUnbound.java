@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class MindUnbound extends CardImpl<MindUnbound> {
+public class MindUnbound extends CardImpl {
 
     public MindUnbound(UUID ownerId) {
         super(ownerId, 68, "Mind Unbound", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");

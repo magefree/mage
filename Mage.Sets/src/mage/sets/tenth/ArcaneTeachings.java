@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ArcaneTeachings extends CardImpl<ArcaneTeachings> {
+public class ArcaneTeachings extends CardImpl {
 
     public ArcaneTeachings(UUID ownerId) {
         super(ownerId, 188, "Arcane Teachings", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

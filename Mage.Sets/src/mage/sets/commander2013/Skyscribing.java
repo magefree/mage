@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class Skyscribing extends CardImpl<Skyscribing> {
+public class Skyscribing extends CardImpl {
 
     public Skyscribing(UUID ownerId) {
         super(ownerId, 57, "Skyscribing", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");

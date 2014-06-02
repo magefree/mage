@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class Slaughterhorn extends CardImpl<Slaughterhorn> {
+public class Slaughterhorn extends CardImpl {
 
     public Slaughterhorn(UUID ownerId) {
         super(ownerId, 134, "Slaughterhorn", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

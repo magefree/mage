@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class RuinGhost extends CardImpl<RuinGhost> {
+public class RuinGhost extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
 

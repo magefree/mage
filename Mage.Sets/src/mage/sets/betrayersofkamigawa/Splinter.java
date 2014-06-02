@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Splinter extends CardImpl<Splinter> {
+public class Splinter extends CardImpl {
     private static final FilterPermanent filter = new FilterArtifactPermanent();
 
     public Splinter(UUID ownerId) {

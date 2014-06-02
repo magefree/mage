@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jeffwadsworth
  */
-public class ShepherdOfRot extends CardImpl<ShepherdOfRot> {
+public class ShepherdOfRot extends CardImpl {
     
     final String rule = "Each player loses 1 life for each Zombie on the battlefield";
     

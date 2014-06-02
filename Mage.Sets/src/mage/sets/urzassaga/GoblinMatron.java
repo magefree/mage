@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jonubuu
  */
-public class GoblinMatron extends CardImpl<GoblinMatron> {
+public class GoblinMatron extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Goblin card");
 

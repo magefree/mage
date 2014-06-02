@@ -40,7 +40,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class RubblebackRhino extends CardImpl<RubblebackRhino> {
+public class RubblebackRhino extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 

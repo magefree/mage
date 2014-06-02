@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author cbt33
  */
-public class Chlorophant extends CardImpl<Chlorophant> {
+public class Chlorophant extends CardImpl {
 
     public Chlorophant(UUID ownerId) {
         super(ownerId, 234, "Chlorophant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}{G}");

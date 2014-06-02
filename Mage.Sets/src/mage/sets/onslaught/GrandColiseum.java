@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author KholdFuzion
  */
-public class GrandColiseum extends CardImpl<GrandColiseum> {
+public class GrandColiseum extends CardImpl {
 
     public GrandColiseum(UUID ownerId) {
         super(ownerId, 319, "Grand Coliseum", Rarity.RARE, new CardType[]{CardType.LAND}, "");

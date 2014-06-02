@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LilianasSpecter extends CardImpl<LilianasSpecter> {
+public class LilianasSpecter extends CardImpl {
 
     public LilianasSpecter(UUID ownerId) {
         super(ownerId, 104, "Liliana's Specter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

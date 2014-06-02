@@ -38,7 +38,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Counterspell extends CardImpl<Counterspell> {
+public class Counterspell extends CardImpl {
 
     public Counterspell(UUID ownerId) {
         super(ownerId, 57, "Counterspell", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");

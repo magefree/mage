@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class LorthosTheTidemaker extends CardImpl<LorthosTheTidemaker> {
+public class LorthosTheTidemaker extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

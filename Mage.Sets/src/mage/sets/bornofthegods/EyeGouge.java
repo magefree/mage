@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EyeGouge extends CardImpl<EyeGouge> {
+public class EyeGouge extends CardImpl {
 
     public EyeGouge(UUID ownerId) {
         super(ownerId, 67, "Eye Gouge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

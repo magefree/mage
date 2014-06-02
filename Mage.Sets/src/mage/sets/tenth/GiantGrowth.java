@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GiantGrowth extends CardImpl<GiantGrowth> {
+public class GiantGrowth extends CardImpl {
 
     public GiantGrowth(UUID ownerId) {
         super(ownerId, 266, "Giant Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PollenbrightWings extends CardImpl<PollenbrightWings> {
+public class PollenbrightWings extends CardImpl {
 
     public PollenbrightWings(UUID ownerId) {
         super(ownerId, 103, "Pollenbright Wings", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{W}");

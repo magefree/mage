@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class TaintedWell extends CardImpl<TaintedWell> {
+public class TaintedWell extends CardImpl {
 
     public TaintedWell(UUID ownerId) {
         super(ownerId, 126, "Tainted Well", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

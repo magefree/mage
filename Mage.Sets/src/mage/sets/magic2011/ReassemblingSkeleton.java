@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReassemblingSkeleton extends CardImpl<ReassemblingSkeleton> {
+public class ReassemblingSkeleton extends CardImpl {
 
     public ReassemblingSkeleton(UUID ownerId) {
         super(ownerId, 112, "Reassembling Skeleton", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class PsychicIntrusion extends CardImpl<PsychicIntrusion> {
+public class PsychicIntrusion extends CardImpl {
 
     public PsychicIntrusion(UUID ownerId) {
         super(ownerId, 200, "Psychic Intrusion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{B}");

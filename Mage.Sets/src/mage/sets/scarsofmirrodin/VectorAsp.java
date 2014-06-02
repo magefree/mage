@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class VectorAsp extends CardImpl<VectorAsp> {
+public class VectorAsp extends CardImpl {
 
     public VectorAsp (UUID ownerId) {
         super(ownerId, 219, "Vector Asp", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

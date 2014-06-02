@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class ReaperOfSheoldred extends CardImpl<ReaperOfSheoldred> {
+public class ReaperOfSheoldred extends CardImpl {
 
     public ReaperOfSheoldred(UUID ownerId) {
         super(ownerId, 72, "Reaper of Sheoldred", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author cbt33, LevelX2 (Ogre Slumlord)
  */
-public class BroodSliver extends CardImpl<BroodSliver> {
+public class BroodSliver extends CardImpl {
 
     public BroodSliver(UUID ownerId) {
         super(ownerId, 120, "Brood Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");

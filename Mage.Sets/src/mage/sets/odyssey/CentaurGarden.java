@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CentaurGarden extends CardImpl<CentaurGarden> {
+public class CentaurGarden extends CardImpl {
 
     public CentaurGarden(UUID ownerId) {
         super(ownerId, 316, "Centaur Garden", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

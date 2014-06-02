@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class CurseOfDeathsHold extends CardImpl<CurseOfDeathsHold> {
+public class CurseOfDeathsHold extends CardImpl {
 
     public CurseOfDeathsHold(UUID ownerId) {
         super(ownerId, 94, "Curse of Death's Hold", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class Abomination extends CardImpl<Abomination> {
+public class Abomination extends CardImpl {
 
     public Abomination(UUID ownerId) {
         super(ownerId, 1, "Abomination", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

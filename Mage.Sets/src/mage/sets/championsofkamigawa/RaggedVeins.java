@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class RaggedVeins extends CardImpl<RaggedVeins> {
+public class RaggedVeins extends CardImpl {
 
     public RaggedVeins(UUID ownerId) {
         super(ownerId, 139, "Ragged Veins", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Envelop extends CardImpl<Envelop> {
+public class Envelop extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Sorcery");
 

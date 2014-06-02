@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GarruksCompanion extends CardImpl<GarruksCompanion> {
+public class GarruksCompanion extends CardImpl {
 
     public GarruksCompanion(UUID ownerId) {
         super(ownerId, 176, "Garruk's Companion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");

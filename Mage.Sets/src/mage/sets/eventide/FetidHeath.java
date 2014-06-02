@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FetidHeath extends CardImpl<FetidHeath> {
+public class FetidHeath extends CardImpl {
 
     public FetidHeath (UUID ownerId) {
         super(ownerId, 176, "Fetid Heath", Rarity.RARE, new CardType[]{CardType.LAND}, null);

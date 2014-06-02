@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MarbleChalice extends CardImpl<MarbleChalice> {
+public class MarbleChalice extends CardImpl {
 
     public MarbleChalice (UUID ownerId) {
         super(ownerId, 18, "Marble Chalice", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}{W}");

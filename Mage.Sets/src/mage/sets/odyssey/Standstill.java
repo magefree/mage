@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class Standstill extends CardImpl<Standstill> {
+public class Standstill extends CardImpl {
 
     public Standstill(UUID ownerId) {
         super(ownerId, 102, "Standstill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

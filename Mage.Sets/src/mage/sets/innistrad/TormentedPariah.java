@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class TormentedPariah extends CardImpl<TormentedPariah> {
+public class TormentedPariah extends CardImpl {
 
     public TormentedPariah(UUID ownerId) {
         super(ownerId, 165, "Tormented Pariah", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

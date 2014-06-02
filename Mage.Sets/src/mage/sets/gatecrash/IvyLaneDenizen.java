@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class IvyLaneDenizen extends CardImpl<IvyLaneDenizen> {
+public class IvyLaneDenizen extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another green creature");
     static {

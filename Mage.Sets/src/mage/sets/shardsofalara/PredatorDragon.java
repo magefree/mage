@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class PredatorDragon extends CardImpl<PredatorDragon> {
+public class PredatorDragon extends CardImpl {
 
     public PredatorDragon(UUID ownerId) {
         super(ownerId, 109, "Predator Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");

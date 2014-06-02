@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author Loki
  */
-public class HanaKami extends CardImpl<HanaKami> {
+public class HanaKami extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Arcane card from your graveyard");
 

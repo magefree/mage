@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class ChandrasFury extends CardImpl<ChandrasFury> {
+public class ChandrasFury extends CardImpl {
 
     public ChandrasFury(UUID ownerId) {
         super(ownerId, 124, "Chandra's Fury", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");

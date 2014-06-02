@@ -57,7 +57,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 /**
  * @author nantuko
  */
-public class PrecursorGolem extends CardImpl<PrecursorGolem> {
+public class PrecursorGolem extends CardImpl {
 
     public PrecursorGolem(UUID ownerId) {
         super(ownerId, 194, "Precursor Golem", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

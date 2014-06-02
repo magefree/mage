@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BloodCrypt extends CardImpl<BloodCrypt> {
+public class BloodCrypt extends CardImpl {
 
     public BloodCrypt (UUID ownerId) {
         super(ownerId, 171, "Blood Crypt", Rarity.RARE, new CardType[]{CardType.LAND}, null);

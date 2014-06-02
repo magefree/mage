@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TeeteringPeaks extends CardImpl<TeeteringPeaks> {
+public class TeeteringPeaks extends CardImpl {
 
     public TeeteringPeaks(UUID ownerId) {
         super(ownerId, 226, "Teetering Peaks", Rarity.COMMON, new CardType[]{CardType.LAND}, null);

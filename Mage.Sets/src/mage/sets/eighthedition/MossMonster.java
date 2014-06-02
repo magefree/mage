@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MossMonster extends CardImpl<MossMonster> {
+public class MossMonster extends CardImpl {
 
     public MossMonster(UUID ownerId) {
         super(ownerId, 267, "Moss Monster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class Repopulate extends CardImpl<Repopulate> {
+public class Repopulate extends CardImpl {
 
     public Repopulate(UUID ownerId) {
         super(ownerId, 111, "Repopulate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

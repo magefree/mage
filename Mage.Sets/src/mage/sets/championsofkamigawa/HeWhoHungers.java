@@ -55,7 +55,7 @@ import java.util.UUID;
 /**
  * @author LevelX
  */
-public class HeWhoHungers extends CardImpl<HeWhoHungers> {
+public class HeWhoHungers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Spirit");
 

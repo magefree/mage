@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class Bedlam extends CardImpl {
 
     public Bedlam(UUID ownerId) {
         super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

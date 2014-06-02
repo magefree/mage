@@ -44,7 +44,7 @@ import mage.constants.Outcome;
  *
  * @author Loki
  */
-public class BarbedBattlegear extends CardImpl<BarbedBattlegear> {
+public class BarbedBattlegear extends CardImpl {
 
     public BarbedBattlegear (UUID ownerId) {
         super(ownerId, 139, "Barbed Battlegear", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

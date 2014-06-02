@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class BloomTender extends CardImpl<BloomTender> {
+public class BloomTender extends CardImpl {
 
     public BloomTender(UUID ownerId) {
         super(ownerId, 66, "Bloom Tender", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

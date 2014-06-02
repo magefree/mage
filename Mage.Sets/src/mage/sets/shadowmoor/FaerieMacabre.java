@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Plopman
  */
-public class FaerieMacabre extends CardImpl<FaerieMacabre> {
+public class FaerieMacabre extends CardImpl {
 
     public FaerieMacabre(UUID ownerId) {
         super(ownerId, 66, "Faerie Macabre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

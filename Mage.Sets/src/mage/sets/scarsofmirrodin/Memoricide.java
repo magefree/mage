@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Memoricide extends CardImpl<Memoricide> {
+public class Memoricide extends CardImpl {
 
     public Memoricide(UUID ownerId) {
         super(ownerId, 69, "Memoricide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");

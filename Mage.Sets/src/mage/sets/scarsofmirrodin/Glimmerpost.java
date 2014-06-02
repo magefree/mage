@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class Glimmerpost extends CardImpl<Glimmerpost> {
+public class Glimmerpost extends CardImpl {
 
     public Glimmerpost (UUID ownerId) {
         super(ownerId, 227, "Glimmerpost", Rarity.COMMON, new CardType[]{CardType.LAND}, null);

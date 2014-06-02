@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class OreskosSunGuide extends CardImpl<OreskosSunGuide> {
+public class OreskosSunGuide extends CardImpl {
 
     public OreskosSunGuide(UUID ownerId) {
         super(ownerId, 22, "Oreskos Sun Guide", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

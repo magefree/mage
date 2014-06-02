@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author anonymous
  */
-public class ExecutionersHood extends CardImpl<ExecutionersHood> {
+public class ExecutionersHood extends CardImpl {
 
     public ExecutionersHood(UUID ownerId) {
         super(ownerId, 148, "Executioner's Hood", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

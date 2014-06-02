@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class DrakeSkullCameo extends CardImpl<DrakeSkullCameo> {
+public class DrakeSkullCameo extends CardImpl {
 
     public DrakeSkullCameo(UUID ownerId) {
         super(ownerId, 302, "Drake-Skull Cameo", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

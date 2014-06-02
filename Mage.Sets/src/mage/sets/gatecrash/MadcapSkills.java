@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class MadcapSkills extends CardImpl<MadcapSkills> {
+public class MadcapSkills extends CardImpl {
 
     public MadcapSkills(UUID ownerId) {
         super(ownerId, 98, "Madcap Skills", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

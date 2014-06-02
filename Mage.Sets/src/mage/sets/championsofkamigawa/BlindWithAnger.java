@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class BlindWithAnger extends CardImpl<BlindWithAnger> {
+public class BlindWithAnger extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
 

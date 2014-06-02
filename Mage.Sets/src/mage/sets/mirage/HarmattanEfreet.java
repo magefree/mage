@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class HarmattanEfreet extends CardImpl<HarmattanEfreet> {
+public class HarmattanEfreet extends CardImpl {
 
     public HarmattanEfreet(UUID ownerId) {
         super(ownerId, 69, "Harmattan Efreet", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

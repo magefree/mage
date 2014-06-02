@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author cbt33
  */
-public class BladeSliver extends CardImpl<BladeSliver> {
+public class BladeSliver extends CardImpl {
 
     public BladeSliver(UUID ownerId) {
         super(ownerId, 88, "Blade Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

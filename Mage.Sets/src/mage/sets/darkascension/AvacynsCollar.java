@@ -52,7 +52,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author North
  */
-public class AvacynsCollar extends CardImpl<AvacynsCollar> {
+public class AvacynsCollar extends CardImpl {
 
     public AvacynsCollar(UUID ownerId) {
         super(ownerId, 145, "Avacyn's Collar", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

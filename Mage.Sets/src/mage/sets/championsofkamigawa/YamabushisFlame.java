@@ -50,7 +50,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX
  */
-public class YamabushisFlame extends CardImpl<YamabushisFlame> {
+public class YamabushisFlame extends CardImpl {
 
     public YamabushisFlame(UUID ownerId) {
             super(ownerId, 198, "Yamabushi's Flame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

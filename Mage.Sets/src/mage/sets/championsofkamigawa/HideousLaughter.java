@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class HideousLaughter extends CardImpl<HideousLaughter> {
+public class HideousLaughter extends CardImpl {
 
     public HideousLaughter(UUID ownerId) {
         super(ownerId, 115, "Hideous Laughter", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");

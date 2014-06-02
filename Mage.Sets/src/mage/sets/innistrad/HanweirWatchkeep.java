@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class HanweirWatchkeep extends CardImpl<HanweirWatchkeep> {
+public class HanweirWatchkeep extends CardImpl {
 
     public HanweirWatchkeep(UUID ownerId) {
         super(ownerId, 145, "Hanweir Watchkeep", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

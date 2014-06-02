@@ -43,7 +43,7 @@ import mage.constants.Rarity;
  * @author cbt33
  */
 
-public class AbandonedOutpost extends CardImpl<AbandonedOutpost> {
+public class AbandonedOutpost extends CardImpl {
 
     public AbandonedOutpost(UUID ownerId){
         super(ownerId, 312, "Abandoned Outpost", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

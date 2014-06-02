@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class WandOfTheElements extends CardImpl<WandOfTheElements> {
+public class WandOfTheElements extends CardImpl {
 
     private static final FilterControlledPermanent islandFilter = new FilterControlledPermanent("an Island");
     private static final FilterControlledPermanent mountainFilter = new FilterControlledPermanent("a Mountain");

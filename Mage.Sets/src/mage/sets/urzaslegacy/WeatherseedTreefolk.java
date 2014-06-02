@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class WeatherseedTreefolk extends CardImpl<WeatherseedTreefolk> {
+public class WeatherseedTreefolk extends CardImpl {
 
     public WeatherseedTreefolk(UUID ownerId) {
         super(ownerId, 116, "Weatherseed Treefolk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");

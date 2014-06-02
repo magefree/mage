@@ -51,7 +51,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public class CurseOfWizardry extends CardImpl<CurseOfWizardry> {
+public class CurseOfWizardry extends CardImpl {
 
     public CurseOfWizardry(UUID ownerId) {
         super(ownerId, 104, "Curse of Wizardry", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

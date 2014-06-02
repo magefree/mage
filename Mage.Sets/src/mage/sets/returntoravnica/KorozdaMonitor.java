@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class KorozdaMonitor extends CardImpl<KorozdaMonitor> {
+public class KorozdaMonitor extends CardImpl {
 
     public KorozdaMonitor(UUID ownerId) {
         super(ownerId, 129, "Korozda Monitor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

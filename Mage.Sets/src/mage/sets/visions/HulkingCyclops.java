@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class HulkingCyclops extends CardImpl<HulkingCyclops> {
+public class HulkingCyclops extends CardImpl {
 
     public HulkingCyclops(UUID ownerId) {
         super(ownerId, 84, "Hulking Cyclops", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

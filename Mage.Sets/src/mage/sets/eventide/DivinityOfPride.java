@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class DivinityOfPride extends CardImpl<DivinityOfPride> {
+public class DivinityOfPride extends CardImpl {
 
     public DivinityOfPride(UUID ownerId) {
         super(ownerId, 86, "Divinity of Pride", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W/B}{W/B}{W/B}{W/B}{W/B}");

@@ -53,7 +53,7 @@ import mage.target.Targets;
  *
  * @author LevelX
  */
-public class YoseiTheMorningStar extends CardImpl<YoseiTheMorningStar> {
+public class YoseiTheMorningStar extends CardImpl {
 
     public YoseiTheMorningStar(UUID ownerId) {
         super(ownerId, 50, "Yosei, the Morning Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

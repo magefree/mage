@@ -40,7 +40,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class TemporalMastery extends CardImpl<TemporalMastery> {
+public class TemporalMastery extends CardImpl {
 
     public TemporalMastery(UUID ownerId) {
         super(ownerId, 81, "Temporal Mastery", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{U}{U}");

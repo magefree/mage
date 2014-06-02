@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BarrelDownSokenzan extends CardImpl<BarrelDownSokenzan> {
+public class BarrelDownSokenzan extends CardImpl {
 
     public BarrelDownSokenzan(UUID ownerId) {
         super(ownerId, 94, "Barrel Down Sokenzan", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

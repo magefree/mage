@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ForkedBranchGarami extends CardImpl<ForkedBranchGarami> {
+public class ForkedBranchGarami extends CardImpl {
 
     public ForkedBranchGarami(UUID ownerId) {
         super(ownerId, 125, "Forked-Branch Garami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

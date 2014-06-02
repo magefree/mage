@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class Shuriken extends CardImpl<Shuriken> {
+public class Shuriken extends CardImpl {
 
     public Shuriken(UUID ownerId) {
         super(ownerId, 160, "Shuriken", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

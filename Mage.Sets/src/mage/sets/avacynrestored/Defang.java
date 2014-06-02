@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class Defang extends CardImpl<Defang> {
+public class Defang extends CardImpl {
 
     public Defang(UUID ownerId) {
         super(ownerId, 15, "Defang", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

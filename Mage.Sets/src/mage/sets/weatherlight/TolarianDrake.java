@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author noxx
  */
-public class TolarianDrake extends CardImpl<TolarianDrake> {
+public class TolarianDrake extends CardImpl {
 
     public TolarianDrake(UUID ownerId) {
         super(ownerId, 55, "Tolarian Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

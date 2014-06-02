@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StratusWalk extends CardImpl<StratusWalk> {
+public class StratusWalk extends CardImpl {
 
     public StratusWalk(UUID ownerId) {
         super(ownerId, 52, "Stratus Walk", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

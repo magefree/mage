@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SunbeamSpellbomb extends CardImpl<SunbeamSpellbomb> {
+public class SunbeamSpellbomb extends CardImpl {
 
     public SunbeamSpellbomb(UUID ownerId) {
         super(ownerId, 250, "Sunbeam Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

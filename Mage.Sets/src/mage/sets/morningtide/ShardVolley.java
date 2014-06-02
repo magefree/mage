@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class ShardVolley extends CardImpl<ShardVolley> {
+public class ShardVolley extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

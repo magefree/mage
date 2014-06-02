@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class CathedralOfWar extends CardImpl<CathedralOfWar> {
+public class CathedralOfWar extends CardImpl {
 
     public CathedralOfWar(UUID ownerId) {
         super(ownerId, 221, "Cathedral of War", Rarity.RARE, new CardType[]{CardType.LAND}, "");

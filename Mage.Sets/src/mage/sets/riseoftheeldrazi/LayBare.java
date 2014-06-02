@@ -46,7 +46,7 @@ import mage.cards.Card;
  *
  * @author jeffwadsworth
  */
-public class LayBare extends CardImpl<LayBare> {
+public class LayBare extends CardImpl {
 
     public LayBare(UUID ownerId) {
         super(ownerId, 74, "Lay Bare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

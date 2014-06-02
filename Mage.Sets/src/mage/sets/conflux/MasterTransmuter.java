@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class MasterTransmuter extends CardImpl<MasterTransmuter> {
+public class MasterTransmuter extends CardImpl {
 
     public MasterTransmuter(UUID ownerId) {
         super(ownerId, 31, "Master Transmuter", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}");

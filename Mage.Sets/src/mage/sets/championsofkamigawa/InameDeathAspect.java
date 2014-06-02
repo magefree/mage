@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class InameDeathAspect extends CardImpl<InameDeathAspect> {
+public class InameDeathAspect extends CardImpl {
 
     public InameDeathAspect(UUID ownerId) {
         super(ownerId, 118, "Iname, Death Aspect", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

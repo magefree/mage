@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BladetuskBoar extends CardImpl<BladetuskBoar> {
+public class BladetuskBoar extends CardImpl {
 
     public BladetuskBoar (UUID ownerId) {
         super(ownerId, 118, "Bladetusk Boar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

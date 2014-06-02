@@ -49,7 +49,7 @@ import mage.game.permanent.token.PlantToken;
  *
  * @author Loki, nantuko, North
  */
-public class AvengerOfZendikar extends CardImpl<AvengerOfZendikar> {
+public class AvengerOfZendikar extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("Plant creature you control");
     private static final FilterControlledPermanent filterLand = new FilterControlledLandPermanent();

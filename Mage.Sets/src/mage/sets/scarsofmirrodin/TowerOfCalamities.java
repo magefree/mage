@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class TowerOfCalamities extends CardImpl<TowerOfCalamities> {
+public class TowerOfCalamities extends CardImpl {
 
     public TowerOfCalamities (UUID ownerId) {
         super(ownerId, 212, "Tower of Calamities", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

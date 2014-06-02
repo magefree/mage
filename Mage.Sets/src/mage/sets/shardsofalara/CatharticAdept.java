@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class CatharticAdept extends CardImpl<CatharticAdept> {
+public class CatharticAdept extends CardImpl {
 
     public CatharticAdept(UUID ownerId) {
         super(ownerId, 34, "Cathartic Adept", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

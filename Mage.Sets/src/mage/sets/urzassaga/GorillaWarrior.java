@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class GorillaWarrior extends CardImpl<GorillaWarrior> {
+public class GorillaWarrior extends CardImpl {
 
     public GorillaWarrior (UUID ownerId) {
         super(ownerId, 256, "Gorilla Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

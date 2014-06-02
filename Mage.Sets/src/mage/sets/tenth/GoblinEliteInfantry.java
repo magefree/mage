@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class GoblinEliteInfantry extends CardImpl<GoblinEliteInfantry> {
+public class GoblinEliteInfantry extends CardImpl {
 
     public GoblinEliteInfantry(UUID ownerId) {
         super(ownerId, 206, "Goblin Elite Infantry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

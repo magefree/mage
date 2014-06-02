@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RagingKavu extends CardImpl<RagingKavu> {
+public class RagingKavu extends CardImpl {
 
     public RagingKavu(UUID ownerId) {
         super(ownerId, 262, "Raging Kavu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");

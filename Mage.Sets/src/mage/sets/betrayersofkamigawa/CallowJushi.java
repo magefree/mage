@@ -54,7 +54,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class CallowJushi extends CardImpl<CallowJushi> {
+public class CallowJushi extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

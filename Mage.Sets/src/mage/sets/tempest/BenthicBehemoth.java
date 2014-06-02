@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BenthicBehemoth extends CardImpl<BenthicBehemoth> {
+public class BenthicBehemoth extends CardImpl {
 
     public BenthicBehemoth(UUID ownerId) {
         super(ownerId, 54, "Benthic Behemoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");

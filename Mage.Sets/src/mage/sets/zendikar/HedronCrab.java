@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class HedronCrab extends CardImpl<HedronCrab> {
+public class HedronCrab extends CardImpl {
 
     public HedronCrab(UUID ownerId) {
         super(ownerId, 47, "Hedron Crab", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");

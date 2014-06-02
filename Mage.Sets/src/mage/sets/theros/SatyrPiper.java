@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SatyrPiper extends CardImpl<SatyrPiper> {
+public class SatyrPiper extends CardImpl {
 
     public SatyrPiper(UUID ownerId) {
         super(ownerId, 175, "Satyr Piper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

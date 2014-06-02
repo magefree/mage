@@ -51,7 +51,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 /**
  * @author nantuko
  */
-public class ScreechingBat extends CardImpl<ScreechingBat> {
+public class ScreechingBat extends CardImpl {
 
     public ScreechingBat(UUID ownerId) {
         super(ownerId, 114, "Screeching Bat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

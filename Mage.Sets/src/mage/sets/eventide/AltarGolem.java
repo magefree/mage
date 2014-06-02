@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class AltarGolem extends CardImpl<AltarGolem> {
+public class AltarGolem extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures");
     

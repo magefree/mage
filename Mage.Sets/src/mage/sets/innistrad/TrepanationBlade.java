@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class TrepanationBlade extends CardImpl<TrepanationBlade> {
+public class TrepanationBlade extends CardImpl {
 
     public TrepanationBlade(UUID ownerId) {
         super(ownerId, 235, "Trepanation Blade", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

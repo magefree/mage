@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class CetaDisciple extends CardImpl<CetaDisciple> {
+public class CetaDisciple extends CardImpl {
 
     public CetaDisciple(UUID ownerId) {
         super(ownerId, 19, "Ceta Disciple", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

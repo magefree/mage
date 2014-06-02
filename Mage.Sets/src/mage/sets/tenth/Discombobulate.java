@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX
  */
-public class Discombobulate extends CardImpl<Discombobulate> {
+public class Discombobulate extends CardImpl {
 
     public Discombobulate(UUID ownerId) {
         super(ownerId, 81, "Discombobulate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

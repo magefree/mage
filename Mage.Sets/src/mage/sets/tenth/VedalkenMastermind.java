@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class VedalkenMastermind extends CardImpl<VedalkenMastermind> {
+public class VedalkenMastermind extends CardImpl {
 
     public VedalkenMastermind(UUID ownerId) {
         super(ownerId, 123, "Vedalken Mastermind", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}{U}");

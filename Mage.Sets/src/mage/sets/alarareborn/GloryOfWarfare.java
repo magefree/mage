@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GloryOfWarfare extends CardImpl<GloryOfWarfare> {
+public class GloryOfWarfare extends CardImpl {
 
     public GloryOfWarfare (UUID ownerId) {
         super(ownerId, 98, "Glory of Warfare", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{W}");

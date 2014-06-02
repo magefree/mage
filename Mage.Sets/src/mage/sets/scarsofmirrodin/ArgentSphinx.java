@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class ArgentSphinx extends CardImpl<ArgentSphinx> {
+public class ArgentSphinx extends CardImpl {
 
     public ArgentSphinx (UUID ownerId) {
         super(ownerId, 28, "Argent Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

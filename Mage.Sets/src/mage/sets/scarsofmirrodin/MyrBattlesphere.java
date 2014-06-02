@@ -57,7 +57,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MyrBattlesphere extends CardImpl<MyrBattlesphere> {
+public class MyrBattlesphere extends CardImpl {
 
     public MyrBattlesphere(UUID ownerId) {
         super(ownerId, 180, "Myr Battlesphere", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

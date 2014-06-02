@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author North
  */
-public class MidnightGuard extends CardImpl<MidnightGuard> {
+public class MidnightGuard extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
     static {

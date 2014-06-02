@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class OrnateKanzashi extends CardImpl<OrnateKanzashi> {
+public class OrnateKanzashi extends CardImpl {
 
 
     public OrnateKanzashi(UUID ownerId) {

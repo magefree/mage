@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class BrilliantUltimatum extends CardImpl<BrilliantUltimatum> {
+public class BrilliantUltimatum extends CardImpl {
 
     public BrilliantUltimatum(UUID ownerId) {
         super(ownerId, 159, "Brilliant Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}{W}{U}{U}{U}{B}{B}");

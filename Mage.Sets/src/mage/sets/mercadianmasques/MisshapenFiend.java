@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MisshapenFiend extends CardImpl<MisshapenFiend> {
+public class MisshapenFiend extends CardImpl {
 
     public MisshapenFiend(UUID ownerId) {
         super(ownerId, 147, "Misshapen Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

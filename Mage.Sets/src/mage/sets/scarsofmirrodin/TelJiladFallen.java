@@ -41,7 +41,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author ayratn
  */
-public class TelJiladFallen extends CardImpl<TelJiladFallen> {
+public class TelJiladFallen extends CardImpl {
 
     public TelJiladFallen (UUID ownerId) {
         super(ownerId, 130, "Tel-Jilad Fallen", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

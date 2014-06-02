@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DailyRegimen extends CardImpl<DailyRegimen> {
+public class DailyRegimen extends CardImpl {
 
     public DailyRegimen(UUID ownerId) {
         super(ownerId, 8, "Daily Regimen", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ThrabenPurebloods extends CardImpl<ThrabenPurebloods> {
+public class ThrabenPurebloods extends CardImpl {
 
     public ThrabenPurebloods(UUID ownerId) {
         super(ownerId, 37, "Thraben Purebloods", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

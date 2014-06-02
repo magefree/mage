@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class DeadReveler extends CardImpl<DeadReveler> {
+public class DeadReveler extends CardImpl {
  
     public DeadReveler(UUID ownerId) {
         super(ownerId, 62, "Dead Reveler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

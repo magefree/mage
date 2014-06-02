@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MantaRiders extends CardImpl<MantaRiders> {
+public class MantaRiders extends CardImpl {
 
     public MantaRiders(UUID ownerId) {
         super(ownerId, 74, "Manta Riders", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

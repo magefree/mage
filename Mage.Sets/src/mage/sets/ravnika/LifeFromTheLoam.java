@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jonubuu
  */
-public class LifeFromTheLoam extends CardImpl<LifeFromTheLoam> {
+public class LifeFromTheLoam extends CardImpl {
 
     public LifeFromTheLoam(UUID ownerId) {
         super(ownerId, 172, "Life from the Loam", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}");

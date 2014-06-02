@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class MemoryJar extends CardImpl<MemoryJar> {
+public class MemoryJar extends CardImpl {
 
 
 

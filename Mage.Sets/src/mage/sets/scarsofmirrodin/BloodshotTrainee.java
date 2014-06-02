@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class BloodshotTrainee extends CardImpl<BloodshotTrainee> {
+public class BloodshotTrainee extends CardImpl {
 
     public BloodshotTrainee(UUID ownerId) {
         super(ownerId, 85, "Bloodshot Trainee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

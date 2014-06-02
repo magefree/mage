@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class DebtorsPulpit extends CardImpl<DebtorsPulpit> {
+public class DebtorsPulpit extends CardImpl {
 
     public DebtorsPulpit(UUID ownerId) {
         super(ownerId, 10, "Debtor's Pulpit", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class Lull extends CardImpl<Lull> {
+public class Lull extends CardImpl {
 
     public Lull(UUID ownerId) {
         super(ownerId, 267, "Lull", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

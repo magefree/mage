@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class JalumTome extends CardImpl<JalumTome> {
+public class JalumTome extends CardImpl {
 
     public JalumTome(UUID ownerId) {
         super(ownerId, 303, "Jalum Tome", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

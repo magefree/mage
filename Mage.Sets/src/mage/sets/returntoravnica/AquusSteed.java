@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AquusSteed extends CardImpl<AquusSteed> {
+public class AquusSteed extends CardImpl {
 
     public AquusSteed(UUID ownerId) {
         super(ownerId, 29, "Aquus Steed", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

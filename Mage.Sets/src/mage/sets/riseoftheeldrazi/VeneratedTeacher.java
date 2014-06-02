@@ -47,7 +47,7 @@ import mage.abilities.keyword.LevelUpAbility;
  *
  * @author jeffwadsworth
  */
-public class VeneratedTeacher extends CardImpl<VeneratedTeacher> {
+public class VeneratedTeacher extends CardImpl {
 
     public VeneratedTeacher(UUID ownerId) {
         super(ownerId, 93, "Venerated Teacher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  * @author jeffwadsworth
  *
  */
-public class CankerAbomination extends CardImpl<CankerAbomination> {
+public class CankerAbomination extends CardImpl {
 
     public CankerAbomination(UUID ownerId) {
         super(ownerId, 115, "Canker Abomination", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B/G}{B/G}");

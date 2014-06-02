@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KrakenHatchling extends CardImpl<KrakenHatchling> {
+public class KrakenHatchling extends CardImpl {
 
     public KrakenHatchling(UUID ownerId) {
         super(ownerId, 50, "Kraken Hatchling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

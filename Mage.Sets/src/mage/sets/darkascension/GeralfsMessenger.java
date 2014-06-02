@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class GeralfsMessenger extends CardImpl<GeralfsMessenger> {
+public class GeralfsMessenger extends CardImpl {
 
     public GeralfsMessenger(UUID ownerId) {
         super(ownerId, 63, "Geralf's Messenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");

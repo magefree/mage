@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class KamahlPitFighter extends CardImpl<KamahlPitFighter> {
+public class KamahlPitFighter extends CardImpl {
 
     public KamahlPitFighter(UUID ownerId) {
         super(ownerId, 214, "Kamahl, Pit Fighter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

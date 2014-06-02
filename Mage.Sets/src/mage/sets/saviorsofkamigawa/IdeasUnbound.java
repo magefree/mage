@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class IdeasUnbound extends CardImpl<IdeasUnbound> {
+public class IdeasUnbound extends CardImpl {
 
     public IdeasUnbound(UUID ownerId) {
         super(ownerId, 40, "Ideas Unbound", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}{U}");

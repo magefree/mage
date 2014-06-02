@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class BlazingSalvo extends CardImpl<BlazingSalvo> {
+public class BlazingSalvo extends CardImpl {
 
     public BlazingSalvo(UUID ownerId) {
         super(ownerId, 178, "Blazing Salvo", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

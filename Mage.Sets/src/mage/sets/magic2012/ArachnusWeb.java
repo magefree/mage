@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ArachnusWeb extends CardImpl<ArachnusWeb> {
+public class ArachnusWeb extends CardImpl {
 
     public ArachnusWeb(UUID ownerId) {
         super(ownerId, 163, "Arachnus Web", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

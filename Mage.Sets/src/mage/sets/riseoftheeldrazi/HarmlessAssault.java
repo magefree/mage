@@ -39,7 +39,7 @@ import mage.filter.common.FilterAttackingCreature;
  * 
  * @author Rafbill
  */
-public class HarmlessAssault extends CardImpl<HarmlessAssault> {
+public class HarmlessAssault extends CardImpl {
 
     public HarmlessAssault(UUID ownerId) {
         super(ownerId, 24, "Harmless Assault", Rarity.COMMON,

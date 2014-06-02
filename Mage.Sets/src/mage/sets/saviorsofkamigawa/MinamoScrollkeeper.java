@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class MinamoScrollkeeper extends CardImpl<MinamoScrollkeeper> {
+public class MinamoScrollkeeper extends CardImpl {
 
     public MinamoScrollkeeper(UUID ownerId) {
         super(ownerId, 45, "Minamo Scrollkeeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

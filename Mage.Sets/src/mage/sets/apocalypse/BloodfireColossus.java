@@ -45,7 +45,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class BloodfireColossus extends CardImpl<BloodfireColossus> {
+public class BloodfireColossus extends CardImpl {
 
     public BloodfireColossus(UUID ownerId) {
         super(ownerId, 55, "Bloodfire Colossus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");

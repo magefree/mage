@@ -44,7 +44,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class TinStreetHooligan extends CardImpl<TinStreetHooligan> {
+public class TinStreetHooligan extends CardImpl {
 
     public TinStreetHooligan(UUID ownerId) {
         super(ownerId, 78, "Tin Street Hooligan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

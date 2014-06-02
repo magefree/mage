@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FurybornHellkite extends CardImpl<FurybornHellkite> {
+public class FurybornHellkite extends CardImpl {
 
     public FurybornHellkite(UUID ownerId) {
         super(ownerId, 135, "Furyborn Hellkite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");

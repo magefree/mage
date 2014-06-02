@@ -54,7 +54,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jeffwadsworth
  */
-public class RingOfEvosIsle extends CardImpl<RingOfEvosIsle> {
+public class RingOfEvosIsle extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

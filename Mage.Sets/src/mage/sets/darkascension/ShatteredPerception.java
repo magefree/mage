@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class ShatteredPerception extends CardImpl<ShatteredPerception> {
+public class ShatteredPerception extends CardImpl {
 
     public ShatteredPerception(UUID ownerId) {
         super(ownerId, 104, "Shattered Perception", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");

@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Loki
  */
-public class ContaminatedGround extends CardImpl<ContaminatedGround> {
+public class ContaminatedGround extends CardImpl {
 
     public ContaminatedGround(UUID ownerId) {
         super(ownerId, 102, "Contaminated Ground", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

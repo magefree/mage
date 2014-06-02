@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author cbt33
  */
-public class CephalidScout extends CardImpl<CephalidScout> {
+public class CephalidScout extends CardImpl {
 
     public CephalidScout(UUID ownerId) {
         super(ownerId, 74, "Cephalid Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

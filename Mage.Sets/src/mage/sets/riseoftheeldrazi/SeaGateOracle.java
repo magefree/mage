@@ -43,7 +43,7 @@ import mage.filter.FilterCard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SeaGateOracle extends CardImpl<SeaGateOracle> {
+public class SeaGateOracle extends CardImpl {
 
     public SeaGateOracle(UUID ownerId) {
         super(ownerId, 85, "Sea Gate Oracle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

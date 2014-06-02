@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GoliathBeetle extends CardImpl<GoliathBeetle> {
+public class GoliathBeetle extends CardImpl {
 
     public GoliathBeetle(UUID ownerId) {
         super(ownerId, 107, "Goliath Beetle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

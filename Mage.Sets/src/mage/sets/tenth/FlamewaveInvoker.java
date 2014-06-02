@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class FlamewaveInvoker extends CardImpl<FlamewaveInvoker> {
+public class FlamewaveInvoker extends CardImpl {
 
     public FlamewaveInvoker(UUID ownerId) {
         super(ownerId, 202, "Flamewave Invoker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

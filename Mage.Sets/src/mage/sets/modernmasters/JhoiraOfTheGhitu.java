@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class JhoiraOfTheGhitu extends CardImpl<JhoiraOfTheGhitu> {
+public class JhoiraOfTheGhitu extends CardImpl {
 
     public JhoiraOfTheGhitu(UUID ownerId) {
         super(ownerId, 177, "Jhoira of the Ghitu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");

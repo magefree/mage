@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ChroniclerOfHeroes extends CardImpl<ChroniclerOfHeroes> {
+public class ChroniclerOfHeroes extends CardImpl {
 
     public ChroniclerOfHeroes(UUID ownerId) {
         super(ownerId, 190, "Chronicler of Heroes", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author cbt33
  */
-public class FamishedGhoul extends CardImpl<FamishedGhoul> {
+public class FamishedGhoul extends CardImpl {
 
     public FamishedGhoul(UUID ownerId) {
         super(ownerId, 135, "Famished Ghoul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

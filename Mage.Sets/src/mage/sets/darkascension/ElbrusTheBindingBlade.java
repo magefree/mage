@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class ElbrusTheBindingBlade extends CardImpl<ElbrusTheBindingBlade> {
+public class ElbrusTheBindingBlade extends CardImpl {
 
     public ElbrusTheBindingBlade(UUID ownerId) {
         super(ownerId, 147, "Elbrus, the Binding Blade", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{7}");

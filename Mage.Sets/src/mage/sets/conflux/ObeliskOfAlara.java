@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ObeliskOfAlara extends CardImpl<ObeliskOfAlara> {
+public class ObeliskOfAlara extends CardImpl {
 
     public ObeliskOfAlara(UUID ownerId) {
         super(ownerId, 140, "Obelisk of Alara", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

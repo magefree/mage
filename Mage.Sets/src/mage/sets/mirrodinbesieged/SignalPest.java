@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class SignalPest extends CardImpl<SignalPest> {
+public class SignalPest extends CardImpl {
 
     public SignalPest(UUID ownerId) {
         super(ownerId, 131, "Signal Pest", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

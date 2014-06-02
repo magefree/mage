@@ -44,7 +44,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class KamiOfFalseHope extends CardImpl<KamiOfFalseHope> {
+public class KamiOfFalseHope extends CardImpl {
 
     public KamiOfFalseHope(UUID ownerId) {
         super(ownerId, 10, "Kami of False Hope", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

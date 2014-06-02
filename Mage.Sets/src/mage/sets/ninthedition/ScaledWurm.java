@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ScaledWurm extends CardImpl<ScaledWurm> {
+public class ScaledWurm extends CardImpl {
 
     public ScaledWurm(UUID ownerId) {
         super(ownerId, 269, "Scaled Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{7}{G}");

@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class AllianceOfArms extends CardImpl<AllianceOfArms> {
+public class AllianceOfArms extends CardImpl {
 
     public AllianceOfArms(UUID ownerId) {
         super(ownerId, 4, "Alliance of Arms", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}");

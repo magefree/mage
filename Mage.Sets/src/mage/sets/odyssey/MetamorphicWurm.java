@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class MetamorphicWurm extends CardImpl<MetamorphicWurm> {
+public class MetamorphicWurm extends CardImpl {
 
     public MetamorphicWurm(UUID ownerId) {
         super(ownerId, 250, "Metamorphic Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

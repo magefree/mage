@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class BlueSunsZenith extends CardImpl<BlueSunsZenith> {
+public class BlueSunsZenith extends CardImpl {
 
     public BlueSunsZenith (UUID ownerId) {
         super(ownerId, 20, "Blue Sun's Zenith", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}{U}{U}");

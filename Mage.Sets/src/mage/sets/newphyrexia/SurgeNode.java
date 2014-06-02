@@ -49,7 +49,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Loki
  */
-public class SurgeNode extends CardImpl<SurgeNode> {
+public class SurgeNode extends CardImpl {
 
     public SurgeNode (UUID ownerId) {
         super(ownerId, 160, "Surge Node", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

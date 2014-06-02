@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author nantuko
  */
-public class CircleOfFlame extends CardImpl<CircleOfFlame> {
+public class CircleOfFlame extends CardImpl {
 
     public CircleOfFlame(UUID ownerId) {
         super(ownerId, 127, "Circle of Flame", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

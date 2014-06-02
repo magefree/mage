@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BlurredMongoose extends CardImpl<BlurredMongoose> {
+public class BlurredMongoose extends CardImpl {
 
     public BlurredMongoose(UUID ownerId) {
         super(ownerId, 183, "Blurred Mongoose", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

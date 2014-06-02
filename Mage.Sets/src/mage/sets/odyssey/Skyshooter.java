@@ -47,7 +47,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LevelX2
  */
-public class Skyshooter extends CardImpl<Skyshooter> {
+public class Skyshooter extends CardImpl {
 
     private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature("attacking or blocking creature with flying");
 

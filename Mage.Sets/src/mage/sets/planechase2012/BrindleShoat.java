@@ -40,7 +40,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class BrindleShoat extends CardImpl<BrindleShoat> {
+public class BrindleShoat extends CardImpl {
 
     public BrindleShoat(UUID ownerId) {
         super(ownerId, 60, "Brindle Shoat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DouseInGloom extends CardImpl<DouseInGloom> {
+public class DouseInGloom extends CardImpl {
 
     public DouseInGloom(UUID ownerId) {
         super(ownerId, 49, "Douse in Gloom", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

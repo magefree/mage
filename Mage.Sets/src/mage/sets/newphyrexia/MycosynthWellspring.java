@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class MycosynthWellspring extends CardImpl<MycosynthWellspring> {
+public class MycosynthWellspring extends CardImpl {
 
     private static FilterBasicLandCard filter = new FilterBasicLandCard();
 

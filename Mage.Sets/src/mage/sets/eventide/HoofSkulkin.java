@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class HoofSkulkin extends CardImpl<HoofSkulkin> {
+public class HoofSkulkin extends CardImpl {
 
     private static final FilterCreaturePermanent filterGreenCreature = new FilterCreaturePermanent("green creature");
 

@@ -46,7 +46,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MelirasKeepers extends CardImpl<MelirasKeepers> {
+public class MelirasKeepers extends CardImpl {
 
     public MelirasKeepers(UUID ownerId) {
         super(ownerId, 83, "Melira's Keepers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

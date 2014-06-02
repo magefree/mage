@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Submerge extends CardImpl<Submerge> {
+public class Submerge extends CardImpl {
     
     private static final FilterPermanent filterForest = new FilterPermanent();
     private static final FilterPermanent filterIsland = new FilterPermanent();

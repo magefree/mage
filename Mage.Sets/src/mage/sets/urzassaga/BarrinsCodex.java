@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author Backfir3
  */
-public class BarrinsCodex extends CardImpl<BarrinsCodex> {
+public class BarrinsCodex extends CardImpl {
 
     public BarrinsCodex(UUID ownerId) {
         super(ownerId, 286, "Barrin's Codex", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

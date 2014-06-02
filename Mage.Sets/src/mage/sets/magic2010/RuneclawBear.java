@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RuneclawBear extends CardImpl<RuneclawBear> {
+public class RuneclawBear extends CardImpl {
 
     public RuneclawBear(UUID ownerId) {
         super(ownerId, 203, "Runeclaw Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

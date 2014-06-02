@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class NivixCyclops extends CardImpl<NivixCyclops> {
+public class NivixCyclops extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
 

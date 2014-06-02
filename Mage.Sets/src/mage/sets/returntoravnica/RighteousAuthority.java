@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RighteousAuthority extends CardImpl<RighteousAuthority> {
+public class RighteousAuthority extends CardImpl {
 
     public RighteousAuthority (UUID ownerId) {
         super(ownerId, 189, "Righteous Authority", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");

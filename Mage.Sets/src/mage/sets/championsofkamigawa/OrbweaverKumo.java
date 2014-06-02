@@ -44,7 +44,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
 /**
  * @author Loki
  */
-public class OrbweaverKumo extends CardImpl<OrbweaverKumo> {
+public class OrbweaverKumo extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

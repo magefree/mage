@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class ChampionsDrake extends CardImpl<ChampionsDrake> {
+public class ChampionsDrake extends CardImpl {
 
     private static final String rule = "{this} gets +3/+3 as long as you control a creature with three or more level counters on it.";
 

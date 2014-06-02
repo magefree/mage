@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class DruidicSatchel extends CardImpl<DruidicSatchel> {
+public class DruidicSatchel extends CardImpl {
 
     public DruidicSatchel(UUID ownerId) {
         super(ownerId, 207, "Druidic Satchel", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

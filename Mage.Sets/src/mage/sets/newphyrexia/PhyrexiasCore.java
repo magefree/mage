@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class PhyrexiasCore extends CardImpl<PhyrexiasCore> {
+public class PhyrexiasCore extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
 

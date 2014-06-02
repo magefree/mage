@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Backfir3
  */
-public class Guma extends CardImpl<Guma> {
+public class Guma extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Blue");
 

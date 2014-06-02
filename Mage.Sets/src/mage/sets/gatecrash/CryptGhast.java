@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class CryptGhast extends CardImpl<CryptGhast> {
+public class CryptGhast extends CardImpl {
 
     public CryptGhast(UUID ownerId) {
         super(ownerId, 61, "Crypt Ghast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");

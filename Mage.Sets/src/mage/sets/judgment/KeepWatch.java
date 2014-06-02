@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class KeepWatch extends CardImpl<KeepWatch> {
+public class KeepWatch extends CardImpl {
 
     public KeepWatch(UUID ownerId) {
         super(ownerId, 43, "Keep Watch", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

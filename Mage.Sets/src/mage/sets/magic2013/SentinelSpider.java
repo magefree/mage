@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SentinelSpider extends CardImpl<SentinelSpider> {
+public class SentinelSpider extends CardImpl {
 
     public SentinelSpider(UUID ownerId) {
         super(ownerId, 189, "Sentinel Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

@@ -64,7 +64,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author nantuko
  */
-public class VenserTheSojourner extends CardImpl<VenserTheSojourner> {
+public class VenserTheSojourner extends CardImpl {
 
     public VenserTheSojourner(UUID ownerId) {
         super(ownerId, 135, "Venser, the Sojourner", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");

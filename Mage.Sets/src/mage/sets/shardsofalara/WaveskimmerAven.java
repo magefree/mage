@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WaveskimmerAven extends CardImpl<WaveskimmerAven> {
+public class WaveskimmerAven extends CardImpl {
 
     public WaveskimmerAven (UUID ownerId) {
         super(ownerId, 207, "Waveskimmer Aven", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{U}");

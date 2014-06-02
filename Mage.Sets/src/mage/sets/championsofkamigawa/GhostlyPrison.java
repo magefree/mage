@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class GhostlyPrison extends CardImpl<GhostlyPrison> {
+public class GhostlyPrison extends CardImpl {
 
     public GhostlyPrison (UUID ownerId) {
         super(ownerId, 10, "Ghostly Prison", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

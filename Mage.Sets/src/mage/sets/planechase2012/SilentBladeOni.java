@@ -52,7 +52,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class SilentBladeOni extends CardImpl<SilentBladeOni> {
+public class SilentBladeOni extends CardImpl {
 
     public SilentBladeOni(UUID ownerId) {
         super(ownerId, 105, "Silent-Blade Oni", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{B}{B}");

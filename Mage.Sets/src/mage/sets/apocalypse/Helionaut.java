@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Helionaut extends CardImpl<Helionaut> {
+public class Helionaut extends CardImpl {
 
     public Helionaut(UUID ownerId) {
         super(ownerId, 13, "Helionaut", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

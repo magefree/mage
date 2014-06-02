@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class Gigantomancer extends CardImpl<Gigantomancer> {
+public class Gigantomancer extends CardImpl {
 
     public Gigantomancer (UUID ownerId) {
         super(ownerId, 184, "Gigantomancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{G}");

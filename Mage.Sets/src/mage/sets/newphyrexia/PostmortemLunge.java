@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class PostmortemLunge extends CardImpl<PostmortemLunge> {
+public class PostmortemLunge extends CardImpl {
 
     public PostmortemLunge(UUID ownerId) {
         super(ownerId, 70, "Postmortem Lunge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{BP}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author KholdFuzion
 
  */
-public class HowlFromBeyond extends CardImpl<HowlFromBeyond> {
+public class HowlFromBeyond extends CardImpl {
 
     public HowlFromBeyond(UUID ownerId) {
         super(ownerId, 20, "Howl from Beyond", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{B}");

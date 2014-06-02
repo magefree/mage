@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Rafbill
  */
-public class ScytheTiger extends CardImpl<ScytheTiger> {
+public class ScytheTiger extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

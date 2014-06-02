@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Hovermyr extends CardImpl<Hovermyr> {
+public class Hovermyr extends CardImpl {
 
     public Hovermyr (UUID ownerId) {
         super(ownerId, 138, "Hovermyr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

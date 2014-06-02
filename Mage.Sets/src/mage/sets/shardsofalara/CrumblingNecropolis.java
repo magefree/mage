@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CrumblingNecropolis extends CardImpl<CrumblingNecropolis> {
+public class CrumblingNecropolis extends CardImpl {
 
     public CrumblingNecropolis(UUID ownerId) {
         super(ownerId, 222, "Crumbling Necropolis", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

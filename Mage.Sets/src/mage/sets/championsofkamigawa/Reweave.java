@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Reweave extends CardImpl<Reweave> {
+public class Reweave extends CardImpl {
 
     public Reweave(UUID ownerId) {
         super(ownerId, 82, "Reweave", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{U}");

@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class PathOfAngersFlame extends CardImpl<PathOfAngersFlame> {
+public class PathOfAngersFlame extends CardImpl {
 
     public PathOfAngersFlame(UUID ownerId) {
         super(ownerId, 109, "Path of Anger's Flame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

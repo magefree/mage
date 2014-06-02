@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author LevelX2
  */
-public class SelesnyaKeyrune extends CardImpl<SelesnyaKeyrune> {
+public class SelesnyaKeyrune extends CardImpl {
 
     public SelesnyaKeyrune(UUID ownerId) {
         super(ownerId, 233, "Selesnya Keyrune", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

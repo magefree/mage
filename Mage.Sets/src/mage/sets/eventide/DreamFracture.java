@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class DreamFracture extends CardImpl<DreamFracture> {
+public class DreamFracture extends CardImpl {
 
     public DreamFracture(UUID ownerId) {
         super(ownerId, 19, "Dream Fracture", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");

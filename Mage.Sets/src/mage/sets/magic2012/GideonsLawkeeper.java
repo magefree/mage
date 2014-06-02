@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class GideonsLawkeeper extends CardImpl<GideonsLawkeeper> {
+public class GideonsLawkeeper extends CardImpl {
 
     public GideonsLawkeeper(UUID ownerId) {
         super(ownerId, 18, "Gideon's Lawkeeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

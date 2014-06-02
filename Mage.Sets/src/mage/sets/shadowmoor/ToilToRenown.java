@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author North
  */
-public class ToilToRenown extends CardImpl<ToilToRenown> {
+public class ToilToRenown extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("tapped artifact, creature, and land you control");
 

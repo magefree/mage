@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class FreneticOgre extends CardImpl<FreneticOgre> {
+public class FreneticOgre extends CardImpl {
 
     public FreneticOgre(UUID ownerId) {
         super(ownerId, 195, "Frenetic Ogre", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

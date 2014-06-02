@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class AdvanceScout extends CardImpl<AdvanceScout> {
+public class AdvanceScout extends CardImpl {
 
     public AdvanceScout(UUID ownerId) {
         super(ownerId, 213, "Advance Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

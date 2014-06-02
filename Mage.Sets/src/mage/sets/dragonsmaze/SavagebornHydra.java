@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class SavagebornHydra extends CardImpl<SavagebornHydra> {
+public class SavagebornHydra extends CardImpl {
 
     public SavagebornHydra(UUID ownerId) {
         super(ownerId, 100, "Savageborn Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{R}{G}");

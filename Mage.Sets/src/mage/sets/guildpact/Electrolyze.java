@@ -40,7 +40,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  *
  * @author jonubuu
  */
-public class Electrolyze extends CardImpl<Electrolyze> {
+public class Electrolyze extends CardImpl {
 
     public Electrolyze(UUID ownerId) {
         super(ownerId, 111, "Electrolyze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{R}");

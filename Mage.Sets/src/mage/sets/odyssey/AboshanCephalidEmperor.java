@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author cbt33
  */
-public class AboshanCephalidEmperor extends CardImpl<AboshanCephalidEmperor> {
+public class AboshanCephalidEmperor extends CardImpl {
     
 static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("untapped Cephalid");
 static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures without flying");

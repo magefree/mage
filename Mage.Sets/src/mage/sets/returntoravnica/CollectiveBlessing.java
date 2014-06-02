@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class CollectiveBlessing extends CardImpl<CollectiveBlessing> {
+public class CollectiveBlessing extends CardImpl {
 
     public CollectiveBlessing(UUID ownerId) {
         super(ownerId, 150, "Collective Blessing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}{W}");

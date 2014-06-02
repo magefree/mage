@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Alvin
  */
-public class GruesomeDeformity extends CardImpl<GruesomeDeformity> {
+public class GruesomeDeformity extends CardImpl {
 
     public GruesomeDeformity(UUID ownerId) {
         super(ownerId, 103, "Gruesome Deformity", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

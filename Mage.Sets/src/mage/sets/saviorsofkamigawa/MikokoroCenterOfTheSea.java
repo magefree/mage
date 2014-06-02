@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class MikokoroCenterOfTheSea extends CardImpl<MikokoroCenterOfTheSea> {
+public class MikokoroCenterOfTheSea extends CardImpl {
 
     public MikokoroCenterOfTheSea(UUID ownerId) {
         super(ownerId, 162, "Mikokoro, Center of the Sea", Rarity.RARE, new CardType[]{CardType.LAND}, "");

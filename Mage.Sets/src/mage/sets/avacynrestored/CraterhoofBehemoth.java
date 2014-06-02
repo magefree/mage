@@ -50,7 +50,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author North
  */
-public class CraterhoofBehemoth extends CardImpl<CraterhoofBehemoth> {
+public class CraterhoofBehemoth extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

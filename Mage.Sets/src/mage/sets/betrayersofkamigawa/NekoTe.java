@@ -49,7 +49,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class NekoTe extends CardImpl<NekoTe> {
+public class NekoTe extends CardImpl {
 
     public NekoTe(UUID ownerId) {
         super(ownerId, 155, "Neko-Te", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

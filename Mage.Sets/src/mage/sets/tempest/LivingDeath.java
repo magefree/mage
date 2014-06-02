@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class LivingDeath extends CardImpl<LivingDeath> {
+public class LivingDeath extends CardImpl {
 
     public LivingDeath(UUID ownerId) {
         super(ownerId, 36, "Living Death", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

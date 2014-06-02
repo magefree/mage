@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class Archweaver extends CardImpl<Archweaver> {
+public class Archweaver extends CardImpl {
 
     public Archweaver(UUID ownerId) {
         super(ownerId, 114, "Archweaver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

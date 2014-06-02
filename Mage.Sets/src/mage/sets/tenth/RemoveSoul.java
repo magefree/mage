@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class RemoveSoul extends CardImpl<RemoveSoul> {
+public class RemoveSoul extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("creature spell");
 

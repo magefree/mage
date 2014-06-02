@@ -46,7 +46,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class ThoughtReflection extends CardImpl<ThoughtReflection> {
+public class ThoughtReflection extends CardImpl {
 
     public ThoughtReflection(UUID ownerId) {
         super(ownerId, 53, "Thought Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");

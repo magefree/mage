@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Deathgreeter extends CardImpl<Deathgreeter> {
+public class Deathgreeter extends CardImpl {
 
     public Deathgreeter(UUID ownerId) {
         super(ownerId, 71, "Deathgreeter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

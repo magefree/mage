@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class SalvageTitan extends CardImpl<SalvageTitan> {
+public class SalvageTitan extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("three artifacts");
     static{

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author jeffwadsworth
  *
  */
-public class UndyingFlames extends CardImpl<UndyingFlames> {
+public class UndyingFlames extends CardImpl {
 
     public UndyingFlames(UUID ownerId) {
         super(ownerId, 119, "Undying Flames", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

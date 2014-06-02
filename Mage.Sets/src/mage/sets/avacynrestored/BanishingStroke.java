@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class BanishingStroke extends CardImpl<BanishingStroke> {
+public class BanishingStroke extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or enchantment");
 

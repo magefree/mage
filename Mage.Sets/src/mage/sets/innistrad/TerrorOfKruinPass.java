@@ -54,7 +54,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class TerrorOfKruinPass extends CardImpl<TerrorOfKruinPass> {
+public class TerrorOfKruinPass extends CardImpl {
 
     private static final String ruleText = "Each Werewolf you control can't be blocked except by two or more creatures";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf you control");

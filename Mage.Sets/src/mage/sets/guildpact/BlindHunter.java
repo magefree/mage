@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class BlindHunter extends CardImpl<BlindHunter> {
+public class BlindHunter extends CardImpl {
 
     public BlindHunter(UUID ownerId) {
         super(ownerId, 102, "Blind Hunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");

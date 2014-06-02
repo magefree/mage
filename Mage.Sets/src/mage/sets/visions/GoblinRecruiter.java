@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Quercitron
  */
-public class GoblinRecruiter extends CardImpl<GoblinRecruiter> {
+public class GoblinRecruiter extends CardImpl {
 
     public GoblinRecruiter(UUID ownerId) {
         super(ownerId, 80, "Goblin Recruiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

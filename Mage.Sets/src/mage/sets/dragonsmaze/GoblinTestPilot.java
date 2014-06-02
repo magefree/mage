@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class GoblinTestPilot extends CardImpl<GoblinTestPilot> {
+public class GoblinTestPilot extends CardImpl {
 
     public GoblinTestPilot(UUID ownerId) {
         super(ownerId, 74, "Goblin Test Pilot", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");

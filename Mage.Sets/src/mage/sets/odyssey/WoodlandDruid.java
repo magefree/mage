@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WoodlandDruid extends CardImpl<WoodlandDruid> {
+public class WoodlandDruid extends CardImpl {
 
     public WoodlandDruid(UUID ownerId) {
         super(ownerId, 284, "Woodland Druid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

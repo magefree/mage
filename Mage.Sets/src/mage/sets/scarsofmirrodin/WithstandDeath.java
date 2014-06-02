@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class WithstandDeath extends CardImpl<WithstandDeath> {
+public class WithstandDeath extends CardImpl {
 
     public WithstandDeath (UUID ownerId) {
         super(ownerId, 134, "Withstand Death", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

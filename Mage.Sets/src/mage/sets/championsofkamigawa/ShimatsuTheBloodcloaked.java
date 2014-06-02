@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ShimatsuTheBloodcloaked extends CardImpl<ShimatsuTheBloodcloaked> {
+public class ShimatsuTheBloodcloaked extends CardImpl {
 
     public ShimatsuTheBloodcloaked(UUID ownerId) {
         super(ownerId, 186, "Shimatsu the Bloodcloaked", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PresenceOfGond extends CardImpl<PresenceOfGond> {
+public class PresenceOfGond extends CardImpl {
 
     public PresenceOfGond(UUID ownerId) {
         super(ownerId, 161, "Presence of Gond", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

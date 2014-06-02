@@ -65,7 +65,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class AshiokNightmareWeaver extends CardImpl<AshiokNightmareWeaver> {
+public class AshiokNightmareWeaver extends CardImpl {
 
     public AshiokNightmareWeaver(UUID ownerId) {
         super(ownerId, 188, "Ashiok, Nightmare Weaver", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{B}");

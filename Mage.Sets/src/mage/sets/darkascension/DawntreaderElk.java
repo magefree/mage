@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class DawntreaderElk extends CardImpl<DawntreaderElk> {
+public class DawntreaderElk extends CardImpl {
 
     public DawntreaderElk(UUID ownerId) {
         super(ownerId, 111, "Dawntreader Elk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

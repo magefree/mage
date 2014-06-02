@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class TwoHeadedCerberus extends CardImpl<TwoHeadedCerberus> {
+public class TwoHeadedCerberus extends CardImpl {
 
     public TwoHeadedCerberus(UUID ownerId) {
         super(ownerId, 146, "Two-Headed Cerberus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

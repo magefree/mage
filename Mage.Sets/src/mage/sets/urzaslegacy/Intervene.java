@@ -50,7 +50,7 @@ import mage.target.TargetObject;
  *
  * @author Plopman
  */
-public class Intervene extends CardImpl<Intervene> {
+public class Intervene extends CardImpl {
 
     public Intervene(UUID ownerId) {
         super(ownerId, 33, "Intervene", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

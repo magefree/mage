@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class LotlethTroll extends CardImpl<LotlethTroll> {
+public class LotlethTroll extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card in your hand");
 

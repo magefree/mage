@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 /**
  * @author LevelX2
  */
-public class AzoriusGuildgate extends CardImpl<AzoriusGuildgate> {
+public class AzoriusGuildgate extends CardImpl {
 
     public AzoriusGuildgate(UUID ownerId) {
         super(ownerId, 237, "Azorius Guildgate", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

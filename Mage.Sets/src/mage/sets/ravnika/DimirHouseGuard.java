@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class DimirHouseGuard extends CardImpl<DimirHouseGuard> {
+public class DimirHouseGuard extends CardImpl {
 
     public DimirHouseGuard(UUID ownerId) {
         super(ownerId, 83, "Dimir House Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

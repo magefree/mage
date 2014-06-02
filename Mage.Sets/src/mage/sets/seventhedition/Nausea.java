@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class Nausea extends CardImpl<Nausea> {
+public class Nausea extends CardImpl {
 
     public Nausea(UUID ownerId) {
         super(ownerId, 148, "Nausea", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

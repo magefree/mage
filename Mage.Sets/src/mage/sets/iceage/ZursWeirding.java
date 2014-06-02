@@ -50,7 +50,7 @@ import mage.players.PlayerList;
  *
  * @author Quercitron
  */
-public class ZursWeirding extends CardImpl<ZursWeirding> {
+public class ZursWeirding extends CardImpl {
 
     public ZursWeirding(UUID ownerId) {
         super(ownerId, 112, "Zur's Weirding", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CatapultMaster extends CardImpl<CatapultMaster> {
+public class CatapultMaster extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Soldiers you control");
 

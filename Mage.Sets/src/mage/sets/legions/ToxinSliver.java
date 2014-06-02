@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author cbt33
  */
-public class ToxinSliver extends CardImpl<ToxinSliver> {
+public class ToxinSliver extends CardImpl {
 
     public ToxinSliver(UUID ownerId) {
         super(ownerId, 84, "Toxin Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");

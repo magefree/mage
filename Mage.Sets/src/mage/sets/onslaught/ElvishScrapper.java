@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class ElvishScrapper extends CardImpl<ElvishScrapper> {
+public class ElvishScrapper extends CardImpl {
 
     public ElvishScrapper(UUID ownerId) {
         super(ownerId, 258, "Elvish Scrapper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");

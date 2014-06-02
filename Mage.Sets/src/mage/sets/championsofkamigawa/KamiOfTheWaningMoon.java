@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class KamiOfTheWaningMoon extends CardImpl<KamiOfTheWaningMoon> {
+public class KamiOfTheWaningMoon extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

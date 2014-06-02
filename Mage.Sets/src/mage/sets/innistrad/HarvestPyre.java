@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward
  */
-public class HarvestPyre extends CardImpl<HarvestPyre> {
+public class HarvestPyre extends CardImpl {
 
     public HarvestPyre(UUID ownerId) {
         super(ownerId, 146, "Harvest Pyre", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

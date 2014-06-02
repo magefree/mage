@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class FeralHydra extends CardImpl<FeralHydra> {
+public class FeralHydra extends CardImpl {
 
     public FeralHydra(UUID ownerId) {
         super(ownerId, 131, "Feral Hydra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{X}{G}");

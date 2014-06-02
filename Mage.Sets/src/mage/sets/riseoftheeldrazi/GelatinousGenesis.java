@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jeffwadsworth
  */
-public class GelatinousGenesis extends CardImpl<GelatinousGenesis> {
+public class GelatinousGenesis extends CardImpl {
 
     public GelatinousGenesis(UUID ownerId) {
         super(ownerId, 183, "Gelatinous Genesis", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{G}");

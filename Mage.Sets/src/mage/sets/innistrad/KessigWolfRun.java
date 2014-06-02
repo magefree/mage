@@ -49,7 +49,7 @@ import mage.constants.Zone;
 /**
  * @author nantuko
  */
-public class KessigWolfRun extends CardImpl<KessigWolfRun> {
+public class KessigWolfRun extends CardImpl {
 
     public KessigWolfRun(UUID ownerId) {
         super(ownerId, 243, "Kessig Wolf Run", Rarity.RARE, new CardType[]{CardType.LAND}, "");

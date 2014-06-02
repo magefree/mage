@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GiantCockroach extends CardImpl<GiantCockroach> {
+public class GiantCockroach extends CardImpl {
 
     public GiantCockroach(UUID ownerId) {
         super(ownerId, 133, "Giant Cockroach", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

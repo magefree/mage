@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class UndiscoveredParadise extends CardImpl<UndiscoveredParadise> {
+public class UndiscoveredParadise extends CardImpl {
 
     public UndiscoveredParadise(UUID ownerId) {
         super(ownerId, 167, "Undiscovered Paradise", Rarity.RARE, new CardType[]{CardType.LAND}, "");

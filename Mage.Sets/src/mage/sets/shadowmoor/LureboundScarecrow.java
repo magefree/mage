@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class LureboundScarecrow extends CardImpl<LureboundScarecrow> {
+public class LureboundScarecrow extends CardImpl {
 
     public LureboundScarecrow(UUID ownerId) {
         super(ownerId, 256, "Lurebound Scarecrow", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

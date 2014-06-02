@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class WeatheredWayfarer extends CardImpl<WeatheredWayfarer> {
+public class WeatheredWayfarer extends CardImpl {
 
     public WeatheredWayfarer(UUID ownerId) {
         super(ownerId, 59, "Weathered Wayfarer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");

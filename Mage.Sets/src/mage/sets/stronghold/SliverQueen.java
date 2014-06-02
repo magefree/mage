@@ -42,7 +42,7 @@ import mage.game.permanent.token.Token;
  *
  * @author cbt33
  */
-public class SliverQueen extends CardImpl<SliverQueen> {
+public class SliverQueen extends CardImpl {
 
     public SliverQueen(UUID ownerId) {
         super(ownerId, 141, "Sliver Queen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");

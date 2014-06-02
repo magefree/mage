@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class LanternKami extends CardImpl {
 
     public LanternKami (UUID ownerId) {
         super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

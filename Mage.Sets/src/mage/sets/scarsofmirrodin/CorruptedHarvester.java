@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class CorruptedHarvester extends CardImpl<CorruptedHarvester> {
+public class CorruptedHarvester extends CardImpl {
 
     public CorruptedHarvester (UUID ownerId) {
         super(ownerId, 59, "Corrupted Harvester", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Trollhide extends CardImpl<Trollhide> {
+public class Trollhide extends CardImpl {
 
     public Trollhide (UUID ownerId) {
         super(ownerId, 199, "Trollhide", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

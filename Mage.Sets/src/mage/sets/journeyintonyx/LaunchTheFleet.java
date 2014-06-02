@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LaunchTheFleet extends CardImpl<LaunchTheFleet> {
+public class LaunchTheFleet extends CardImpl {
 
     public LaunchTheFleet(UUID ownerId) {
         super(ownerId, 15, "Launch the Fleet", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}");

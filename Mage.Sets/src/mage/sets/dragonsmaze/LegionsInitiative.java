@@ -63,7 +63,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class LegionsInitiative extends CardImpl<LegionsInitiative> {
+public class LegionsInitiative extends CardImpl {
 
     private static final FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("Red creatures");
     private static final FilterCreaturePermanent filterWhiteCreature = new FilterCreaturePermanent("White creatures");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SolidarityOfHeroes extends CardImpl<SolidarityOfHeroes> {
+public class SolidarityOfHeroes extends CardImpl {
 
     public SolidarityOfHeroes(UUID ownerId) {
         super(ownerId, 141, "Solidarity of Heroes", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

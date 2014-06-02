@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ZameckGuildmage extends CardImpl<ZameckGuildmage> {
+public class ZameckGuildmage extends CardImpl {
 
     private static final String ruleText = "This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it";
 

@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class NarstadScrapper extends CardImpl<NarstadScrapper> {
+public class NarstadScrapper extends CardImpl {
 
     public NarstadScrapper(UUID ownerId) {
         super(ownerId, 218, "Narstad Scrapper", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.UnblockedPredicate;
  *
  * @author LevelX2
  */
-public class InkfathomWitch extends CardImpl<InkfathomWitch> {
+public class InkfathomWitch extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each unblocked creature");
     static {

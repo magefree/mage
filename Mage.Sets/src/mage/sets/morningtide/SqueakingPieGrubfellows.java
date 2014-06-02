@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class SqueakingPieGrubfellows extends CardImpl<SqueakingPieGrubfellows> {
+public class SqueakingPieGrubfellows extends CardImpl {
 
     public SqueakingPieGrubfellows(UUID ownerId) {
         super(ownerId, 78, "Squeaking Pie Grubfellows", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

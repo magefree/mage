@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class ViridianAcolyte extends CardImpl<ViridianAcolyte> {
+public class ViridianAcolyte extends CardImpl {
 
     public ViridianAcolyte(UUID ownerId) {
         super(ownerId, 89, "Viridian Acolyte", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

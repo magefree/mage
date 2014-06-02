@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class PatriarchsDesire extends CardImpl<PatriarchsDesire> {
+public class PatriarchsDesire extends CardImpl {
 
     public PatriarchsDesire(UUID ownerId) {
         super(ownerId, 156, "Patriarch's Desire", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

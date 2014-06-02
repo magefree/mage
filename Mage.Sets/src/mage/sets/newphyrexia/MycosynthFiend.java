@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MycosynthFiend extends CardImpl<MycosynthFiend> {
+public class MycosynthFiend extends CardImpl {
 
     public MycosynthFiend(UUID ownerId) {
         super(ownerId, 117, "Mycosynth Fiend", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

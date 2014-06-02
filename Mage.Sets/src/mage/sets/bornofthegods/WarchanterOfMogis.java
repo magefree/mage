@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WarchanterOfMogis extends CardImpl<WarchanterOfMogis> {
+public class WarchanterOfMogis extends CardImpl {
 
     public WarchanterOfMogis(UUID ownerId) {
         super(ownerId, 85, "Warchanter of Mogis", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

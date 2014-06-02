@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class DreamTwist extends CardImpl<DreamTwist> {
+public class DreamTwist extends CardImpl {
 
     public DreamTwist(UUID ownerId) {
         super(ownerId, 54, "Dream Twist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

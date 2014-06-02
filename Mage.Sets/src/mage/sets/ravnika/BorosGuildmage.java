@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BorosGuildmage extends CardImpl<BorosGuildmage> {
+public class BorosGuildmage extends CardImpl {
 
     public BorosGuildmage (UUID ownerId) {
         super(ownerId, 242, "Boros Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}");

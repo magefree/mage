@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class CartelAristocrat extends CardImpl<CartelAristocrat> {
+public class CartelAristocrat extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("another creature");
 

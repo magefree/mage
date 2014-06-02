@@ -45,7 +45,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author Loki
  */
-public class ViridianRevel extends CardImpl<ViridianRevel> {
+public class ViridianRevel extends CardImpl {
 
     public ViridianRevel (UUID ownerId) {
         super(ownerId, 132, "Viridian Revel", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");

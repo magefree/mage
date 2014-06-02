@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class FireLitThicket extends CardImpl<FireLitThicket> {
+public class FireLitThicket extends CardImpl {
 
     public FireLitThicket(UUID ownerId) {
         super(ownerId, 271, "Fire-Lit Thicket", Rarity.RARE, new CardType[]{CardType.LAND}, "");

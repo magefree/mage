@@ -52,7 +52,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class DarkImpostor extends CardImpl<DarkImpostor> {
+public class DarkImpostor extends CardImpl {
 
     public DarkImpostor(UUID ownerId) {
         super(ownerId, 92, "Dark Impostor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");

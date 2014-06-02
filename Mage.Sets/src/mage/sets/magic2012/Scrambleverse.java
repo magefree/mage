@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class Scrambleverse extends CardImpl<Scrambleverse> {
+public class Scrambleverse extends CardImpl {
 
     public Scrambleverse(UUID ownerId) {
         super(ownerId, 153, "Scrambleverse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{R}{R}");

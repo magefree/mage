@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
 *
 * @author LevelX2
 */
-public class AssembleTheLegion extends CardImpl<AssembleTheLegion> {
+public class AssembleTheLegion extends CardImpl {
 
     public AssembleTheLegion(UUID ownerId) {
        super(ownerId, 142, "Assemble the Legion", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{W}");

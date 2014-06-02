@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AzureDrake extends CardImpl<AzureDrake> {
+public class AzureDrake extends CardImpl {
 
     public AzureDrake(UUID ownerId) {
         super(ownerId, 46, "Azure Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class AlphaBrawl extends CardImpl<AlphaBrawl> {
+public class AlphaBrawl extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

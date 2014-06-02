@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SignInBlood extends CardImpl<SignInBlood> {
+public class SignInBlood extends CardImpl {
 
     public SignInBlood(UUID ownerId) {
         super(ownerId, 112, "Sign in Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");

@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class Lobotomy extends CardImpl<Lobotomy> {
+public class Lobotomy extends CardImpl {
 
     public Lobotomy(UUID ownerId) {
         super(ownerId, 342, "Lobotomy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");

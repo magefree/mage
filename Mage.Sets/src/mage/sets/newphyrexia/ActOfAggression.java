@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ActOfAggression extends CardImpl<ActOfAggression> {
+public class ActOfAggression extends CardImpl {
 
     public ActOfAggression(UUID ownerId) {
         super(ownerId, 78, "Act of Aggression", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{RP}{RP}");

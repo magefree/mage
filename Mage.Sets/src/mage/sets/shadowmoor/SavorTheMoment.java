@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SavorTheMoment extends CardImpl<SavorTheMoment> {
+public class SavorTheMoment extends CardImpl {
 
     public SavorTheMoment(UUID ownerId) {
         super(ownerId, 50, "Savor the Moment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");

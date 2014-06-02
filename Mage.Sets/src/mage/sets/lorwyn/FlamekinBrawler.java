@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class FlamekinBrawler extends CardImpl<FlamekinBrawler> {
+public class FlamekinBrawler extends CardImpl {
 
     public FlamekinBrawler(UUID ownerId) {
         super(ownerId, 166, "Flamekin Brawler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

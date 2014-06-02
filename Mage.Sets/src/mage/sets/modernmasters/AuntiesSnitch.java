@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class AuntiesSnitch extends CardImpl<AuntiesSnitch> {
+public class AuntiesSnitch extends CardImpl {
 
     public AuntiesSnitch(UUID ownerId) {
         super(ownerId, 72, "Auntie's Snitch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

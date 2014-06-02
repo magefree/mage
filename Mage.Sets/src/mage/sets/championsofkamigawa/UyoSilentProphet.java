@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class UyoSilentProphet extends CardImpl<UyoSilentProphet> {
+public class UyoSilentProphet extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 

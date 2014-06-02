@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author Quercitron
  */
-public class PowerSink extends CardImpl<PowerSink> {
+public class PowerSink extends CardImpl {
 
     public PowerSink(UUID ownerId) {
         super(ownerId, 73, "Power Sink", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");

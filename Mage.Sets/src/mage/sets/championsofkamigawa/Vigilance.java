@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Vigilance extends CardImpl<Vigilance> {
+public class Vigilance extends CardImpl {
 
     public Vigilance (UUID ownerId) {
         super(ownerId, 49, "Vigilance", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

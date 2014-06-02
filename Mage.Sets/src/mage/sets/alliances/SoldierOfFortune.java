@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Backfir3
  */
-public class SoldierOfFortune extends CardImpl<SoldierOfFortune> {
+public class SoldierOfFortune extends CardImpl {
 
     public SoldierOfFortune(UUID ownerId) {
         super(ownerId, 117, "Soldier of Fortune", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");

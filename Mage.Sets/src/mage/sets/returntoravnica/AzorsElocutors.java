@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AzorsElocutors extends CardImpl<AzorsElocutors> {
+public class AzorsElocutors extends CardImpl {
 
     public AzorsElocutors(UUID ownerId) {
         super(ownerId, 210, "Azor's Elocutors", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W/U}{W/U}");

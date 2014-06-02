@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FontOfMythos extends CardImpl<FontOfMythos> {
+public class FontOfMythos extends CardImpl {
 
     public FontOfMythos(UUID ownerId) {
         super(ownerId, 136, "Font of Mythos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

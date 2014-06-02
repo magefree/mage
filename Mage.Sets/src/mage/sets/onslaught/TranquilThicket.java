@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class TranquilThicket extends CardImpl<TranquilThicket> {
+public class TranquilThicket extends CardImpl {
 
     public TranquilThicket(UUID ownerId) {
         super(ownerId, 326, "Tranquil Thicket", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

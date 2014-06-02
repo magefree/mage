@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BreedingPool extends CardImpl<BreedingPool> {
+public class BreedingPool extends CardImpl {
 
     public BreedingPool (UUID ownerId) {
         super(ownerId, 172, "Breeding Pool", Rarity.RARE, new CardType[]{CardType.LAND}, null);

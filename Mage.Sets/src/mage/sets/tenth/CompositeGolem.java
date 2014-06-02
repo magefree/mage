@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class CompositeGolem extends CardImpl<CompositeGolem> {
+public class CompositeGolem extends CardImpl {
 
     public CompositeGolem(UUID ownerId) {
         super(ownerId, 318, "Composite Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

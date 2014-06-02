@@ -54,7 +54,7 @@ import mage.abilities.costs.mana.GenericManaCost;
  *
  * @author nantuko
  */
-public class TrigonOfCorruption extends CardImpl<TrigonOfCorruption> {
+public class TrigonOfCorruption extends CardImpl {
 
     public TrigonOfCorruption (UUID ownerId) {
         super(ownerId, 213, "Trigon of Corruption", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

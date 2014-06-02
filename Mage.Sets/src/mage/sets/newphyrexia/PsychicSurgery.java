@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class PsychicSurgery extends CardImpl<PsychicSurgery> {
+public class PsychicSurgery extends CardImpl {
 
     public PsychicSurgery(UUID ownerId) {
         super(ownerId, 44, "Psychic Surgery", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

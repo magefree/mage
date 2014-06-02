@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ScoriaElemental extends CardImpl<ScoriaElemental> {
+public class ScoriaElemental extends CardImpl {
 
     public ScoriaElemental (UUID ownerId) {
         super(ownerId, 102, "Scoria Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

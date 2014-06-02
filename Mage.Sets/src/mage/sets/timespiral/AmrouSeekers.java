@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class AmrouSeekers extends CardImpl<AmrouSeekers> {
+public class AmrouSeekers extends CardImpl {
 
     public AmrouSeekers(UUID ownerId) {
         super(ownerId, 2, "Amrou Seekers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

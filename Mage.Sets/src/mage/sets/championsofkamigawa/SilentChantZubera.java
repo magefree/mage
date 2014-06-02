@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author Loki
  */
-public class SilentChantZubera extends CardImpl<SilentChantZubera> {
+public class SilentChantZubera extends CardImpl {
 
     public SilentChantZubera (UUID ownerId) {
         super(ownerId, 45, "Silent-Chant Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

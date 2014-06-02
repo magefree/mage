@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class Immerwolf extends CardImpl<Immerwolf> {
+public class Immerwolf extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wolf and Werewolf creatures");
 

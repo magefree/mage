@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Plopman
  */
-public class MerrowCommerce extends CardImpl<MerrowCommerce> {
+public class MerrowCommerce extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk you control");
 

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SteadyProgress extends CardImpl<SteadyProgress> {
+public class SteadyProgress extends CardImpl {
 
     public SteadyProgress (UUID ownerId) {
         super(ownerId, 45, "Steady Progress", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

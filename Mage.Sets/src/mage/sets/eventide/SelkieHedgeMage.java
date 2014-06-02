@@ -51,7 +51,7 @@ import mage.target.common.TargetArtifactPermanent;
  * @author jeffwadsworth
 
  */
-public class SelkieHedgeMage extends CardImpl<SelkieHedgeMage> {
+public class SelkieHedgeMage extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forests");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("Islands");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class AkroanPhalanx extends CardImpl<AkroanPhalanx> {
+public class AkroanPhalanx extends CardImpl {
 
     public AkroanPhalanx(UUID ownerId) {
         super(ownerId, 2, "Akroan Phalanx", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

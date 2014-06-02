@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author North
  */
-public class Tanglewalker extends CardImpl<Tanglewalker> {
+public class Tanglewalker extends CardImpl {
 
     private static final FilterPermanent filter = new FilterLandPermanent();
 

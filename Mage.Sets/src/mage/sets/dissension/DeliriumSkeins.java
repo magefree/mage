@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class DeliriumSkeins extends CardImpl<DeliriumSkeins> {
+public class DeliriumSkeins extends CardImpl {
 
     public DeliriumSkeins(UUID ownerId) {
         super(ownerId, 41, "Delirium Skeins", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

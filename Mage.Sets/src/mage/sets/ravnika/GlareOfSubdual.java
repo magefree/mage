@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class GlareOfSubdual extends CardImpl<GlareOfSubdual> {
+public class GlareOfSubdual extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCost = new FilterControlledCreaturePermanent("untapped creature you control");
     private static final FilterPermanent filterTarget = new FilterPermanent("artifact or creature");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KalonianBehemoth extends CardImpl<KalonianBehemoth> {
+public class KalonianBehemoth extends CardImpl {
 
     public KalonianBehemoth(UUID ownerId) {
         super(ownerId, 188, "Kalonian Behemoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

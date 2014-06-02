@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DarklingStalker extends CardImpl<DarklingStalker> {
+public class DarklingStalker extends CardImpl {
 
     public DarklingStalker(UUID ownerId) {
         super(ownerId, 13, "Darkling Stalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

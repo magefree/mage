@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author BetaSteward
  */
-public class GrimoireOfTheDead extends CardImpl<GrimoireOfTheDead> {
+public class GrimoireOfTheDead extends CardImpl {
 
     public GrimoireOfTheDead(UUID ownerId) {
         super(ownerId, 226, "Grimoire of the Dead", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{4}");

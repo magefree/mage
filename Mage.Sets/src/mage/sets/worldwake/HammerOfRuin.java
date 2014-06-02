@@ -54,7 +54,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class HammerOfRuin extends CardImpl<HammerOfRuin> {
+public class HammerOfRuin extends CardImpl {
 
     public HammerOfRuin (UUID ownerId) {
         super(ownerId, 124, "Hammer of Ruin", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

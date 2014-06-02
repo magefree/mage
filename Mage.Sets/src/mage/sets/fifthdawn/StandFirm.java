@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StandFirm extends CardImpl<StandFirm> {
+public class StandFirm extends CardImpl {
 
     public StandFirm(UUID ownerId) {
         super(ownerId, 17, "Stand Firm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

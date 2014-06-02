@@ -47,7 +47,7 @@ import mage.constants.AbilityWord;
 /**
  * @author Loki
  */
-public class ArdentRecruit extends CardImpl<ArdentRecruit> {
+public class ArdentRecruit extends CardImpl {
 
     public ArdentRecruit(UUID ownerId) {
         super(ownerId, 2, "Ardent Recruit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

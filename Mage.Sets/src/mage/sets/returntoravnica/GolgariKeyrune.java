@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author LevelX2
  */
-public class GolgariKeyrune extends CardImpl<GolgariKeyrune> {
+public class GolgariKeyrune extends CardImpl {
 
     public GolgariKeyrune(UUID ownerId) {
         super(ownerId, 229, "Golgari Keyrune", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

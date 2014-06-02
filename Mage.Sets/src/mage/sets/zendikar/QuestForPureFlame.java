@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class QuestForPureFlame extends CardImpl<QuestForPureFlame> {
+public class QuestForPureFlame extends CardImpl {
 
     public QuestForPureFlame(UUID ownerId) {
         super(ownerId, 144, "Quest for Pure Flame", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

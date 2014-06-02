@@ -47,7 +47,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
 *
 * @author LevelX2
 */
-public class IllusoryAngel extends CardImpl<IllusoryAngel> {
+public class IllusoryAngel extends CardImpl {
 
     public IllusoryAngel(UUID ownerId) {
        super(ownerId, 19, "Illusory Angel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

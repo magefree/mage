@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class MorbidPlunder extends CardImpl<MorbidPlunder> {
+public class MorbidPlunder extends CardImpl {
 
     public MorbidPlunder(UUID ownerId) {
         super(ownerId, 47, "Morbid Plunder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");

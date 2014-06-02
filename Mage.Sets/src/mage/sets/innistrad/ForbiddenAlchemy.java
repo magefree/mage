@@ -50,7 +50,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class ForbiddenAlchemy extends CardImpl<ForbiddenAlchemy> {
+public class ForbiddenAlchemy extends CardImpl {
 
     public ForbiddenAlchemy(UUID ownerId) {
         super(ownerId, 55, "Forbidden Alchemy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

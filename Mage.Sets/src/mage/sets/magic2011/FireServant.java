@@ -47,7 +47,7 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FireServant extends CardImpl<FireServant> {
+public class FireServant extends CardImpl {
 
     public FireServant(UUID ownerId) {
         super(ownerId, 137, "Fire Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

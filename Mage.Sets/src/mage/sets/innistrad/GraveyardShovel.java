@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class GraveyardShovel extends CardImpl<GraveyardShovel> {
+public class GraveyardShovel extends CardImpl {
 
     public GraveyardShovel(UUID ownerId) {
         super(ownerId, 225, "Graveyard Shovel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

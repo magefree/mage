@@ -57,7 +57,7 @@ import mage.target.targetpointer.SecondTargetPointer;
 
  * @author LevelX2
  */
-public class FallOfTheHammer extends CardImpl<FallOfTheHammer> {
+public class FallOfTheHammer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 

@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class Hinder extends CardImpl<Hinder> {
+public class Hinder extends CardImpl {
 
     public Hinder(UUID ownerId) {
         super(ownerId, 65, "Hinder", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");

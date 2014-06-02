@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author KholdFuzion
 
  */
-public class AnkhOfMishra extends CardImpl<AnkhOfMishra> {
+public class AnkhOfMishra extends CardImpl {
     
     public AnkhOfMishra(UUID ownerId) {
         super(ownerId, 230, "Ankh of Mishra", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

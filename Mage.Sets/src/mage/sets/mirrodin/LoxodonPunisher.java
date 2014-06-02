@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class LoxodonPunisher extends CardImpl<LoxodonPunisher> {
+public class LoxodonPunisher extends CardImpl {
 
     public LoxodonPunisher(UUID ownerId) {
         super(ownerId, 14, "Loxodon Punisher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");

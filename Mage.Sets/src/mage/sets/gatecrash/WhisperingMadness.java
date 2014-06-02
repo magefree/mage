@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WhisperingMadness extends CardImpl<WhisperingMadness> {
+public class WhisperingMadness extends CardImpl {
 
     public WhisperingMadness(UUID ownerId) {
         super(ownerId, 207, "Whispering Madness", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");

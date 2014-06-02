@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PainSeer extends CardImpl<PainSeer> {
+public class PainSeer extends CardImpl {
 
     public PainSeer(UUID ownerId) {
         super(ownerId, 80, "Pain Seer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}");

@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class WalkingArchive extends CardImpl<WalkingArchive> {
+public class WalkingArchive extends CardImpl {
 
     public WalkingArchive(UUID ownerId) {
         super(ownerId, 169, "Walking Archive", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

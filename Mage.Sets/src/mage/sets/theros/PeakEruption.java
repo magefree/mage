@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class PeakEruption extends CardImpl<PeakEruption> {
+public class PeakEruption extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
     static{

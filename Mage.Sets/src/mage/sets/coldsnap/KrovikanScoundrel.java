@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KrovikanScoundrel extends CardImpl<KrovikanScoundrel> {
+public class KrovikanScoundrel extends CardImpl {
 
     public KrovikanScoundrel(UUID ownerId) {
         super(ownerId, 64, "Krovikan Scoundrel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

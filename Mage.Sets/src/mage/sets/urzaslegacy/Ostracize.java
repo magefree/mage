@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class Ostracize extends CardImpl<Ostracize> {
+public class Ostracize extends CardImpl {
 
     public Ostracize(UUID ownerId) {
         super(ownerId, 57, "Ostracize", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");

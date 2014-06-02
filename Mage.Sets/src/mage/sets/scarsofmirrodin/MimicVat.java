@@ -57,7 +57,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class MimicVat extends CardImpl<MimicVat> {
+public class MimicVat extends CardImpl {
 
     public MimicVat(UUID ownerId) {
         super(ownerId, 175, "Mimic Vat", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

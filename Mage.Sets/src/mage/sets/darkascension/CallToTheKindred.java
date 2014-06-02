@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class CallToTheKindred extends CardImpl<CallToTheKindred> {
+public class CallToTheKindred extends CardImpl {
 
     public CallToTheKindred(UUID ownerId) {
         super(ownerId, 30, "Call to the Kindred", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

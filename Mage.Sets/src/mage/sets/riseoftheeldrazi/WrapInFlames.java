@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class WrapInFlames extends CardImpl<WrapInFlames> {
+public class WrapInFlames extends CardImpl {
 
     public WrapInFlames(UUID ownerId) {
         super(ownerId, 173, "Wrap in Flames", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");

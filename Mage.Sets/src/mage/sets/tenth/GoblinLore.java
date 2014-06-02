@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author jonubuu
  */
-public class GoblinLore extends CardImpl<GoblinLore> {
+public class GoblinLore extends CardImpl {
 
     public GoblinLore(UUID ownerId) {
         super(ownerId, 208, "Goblin Lore", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

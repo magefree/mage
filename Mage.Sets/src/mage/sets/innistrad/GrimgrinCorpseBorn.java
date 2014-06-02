@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class GrimgrinCorpseBorn extends CardImpl<GrimgrinCorpseBorn> {
+public class GrimgrinCorpseBorn extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
     static {

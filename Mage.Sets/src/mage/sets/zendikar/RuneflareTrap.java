@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class RuneflareTrap extends CardImpl<RuneflareTrap> {
+public class RuneflareTrap extends CardImpl {
 
     public RuneflareTrap(UUID ownerId) {
         super(ownerId, 146, "Runeflare Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");

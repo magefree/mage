@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PhyrexianTower extends CardImpl<PhyrexianTower> {
+public class PhyrexianTower extends CardImpl {
 
     public PhyrexianTower(UUID ownerId) {
         super(ownerId, 322, "Phyrexian Tower", Rarity.RARE, new CardType[]{CardType.LAND}, "");

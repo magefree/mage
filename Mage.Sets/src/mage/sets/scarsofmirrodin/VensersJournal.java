@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author nantuko
  */
-public class VensersJournal extends CardImpl<VensersJournal> {
+public class VensersJournal extends CardImpl {
 
     public VensersJournal(UUID ownerId) {
         super(ownerId, 220, "Venser's Journal", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

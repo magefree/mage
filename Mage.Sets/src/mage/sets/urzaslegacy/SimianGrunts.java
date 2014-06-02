@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SimianGrunts extends CardImpl<SimianGrunts> {
+public class SimianGrunts extends CardImpl {
 
     public SimianGrunts(UUID ownerId) {
         super(ownerId, 113, "Simian Grunts", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

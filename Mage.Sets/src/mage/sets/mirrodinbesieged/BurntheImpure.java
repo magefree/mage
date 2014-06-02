@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ayratn
  */
-public class BurntheImpure extends CardImpl<BurntheImpure> {
+public class BurntheImpure extends CardImpl {
 
     public BurntheImpure(UUID ownerId) {
         super(ownerId, 59, "Burn the Impure", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

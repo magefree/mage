@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class Mournwhelk extends CardImpl<Mournwhelk> {
+public class Mournwhelk extends CardImpl {
 
     public Mournwhelk(UUID ownerId) {
         super(ownerId, 127, "Mournwhelk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{B}");

@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class SakuraTribeElder extends CardImpl<SakuraTribeElder> {
+public class SakuraTribeElder extends CardImpl {
 
     final static FilterBasicLandCard filterLands = new FilterBasicLandCard();
 

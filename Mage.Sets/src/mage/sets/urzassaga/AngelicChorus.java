@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Backfir3
  */
-public class AngelicChorus extends CardImpl<AngelicChorus> {
+public class AngelicChorus extends CardImpl {
 
     public AngelicChorus(UUID ownerId) {
         super(ownerId, 3, "Angelic Chorus", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");

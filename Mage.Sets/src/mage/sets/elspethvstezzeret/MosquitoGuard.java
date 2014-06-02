@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MosquitoGuard extends CardImpl<MosquitoGuard> {
+public class MosquitoGuard extends CardImpl {
 
     public MosquitoGuard (UUID ownerId) {
         super(ownerId, 6, "Mosquito Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

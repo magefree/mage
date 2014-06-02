@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class ZhurTaaAncient extends CardImpl<ZhurTaaAncient> {
+public class ZhurTaaAncient extends CardImpl {
 
     public ZhurTaaAncient(UUID ownerId) {
         super(ownerId, 119, "Zhur-Taa Ancient", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");

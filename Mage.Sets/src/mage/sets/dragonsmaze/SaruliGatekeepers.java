@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 
 
-public class SaruliGatekeepers extends CardImpl<SaruliGatekeepers> {
+public class SaruliGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     static {

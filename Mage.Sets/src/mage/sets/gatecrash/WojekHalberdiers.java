@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class WojekHalberdiers extends CardImpl<WojekHalberdiers> {
+public class WojekHalberdiers extends CardImpl {
 
     public WojekHalberdiers(UUID ownerId) {
         super(ownerId, 208, "Wojek Halberdiers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");

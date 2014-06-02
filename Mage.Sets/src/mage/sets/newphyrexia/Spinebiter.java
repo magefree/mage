@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward
  */
-public class Spinebiter extends CardImpl<Spinebiter> {
+public class Spinebiter extends CardImpl {
 
     public Spinebiter(UUID ownerId) {
         super(ownerId, 121, "Spinebiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class MudbuttonTorchrunner extends CardImpl<MudbuttonTorchrunner> {
+public class MudbuttonTorchrunner extends CardImpl {
 
     public MudbuttonTorchrunner(UUID ownerId) {
         super(ownerId, 185, "Mudbutton Torchrunner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

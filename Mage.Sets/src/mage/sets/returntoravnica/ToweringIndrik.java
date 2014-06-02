@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ToweringIndrik extends CardImpl<ToweringIndrik> {
+public class ToweringIndrik extends CardImpl {
 
     public ToweringIndrik(UUID ownerId) {
         super(ownerId, 137, "Towering Indrik", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

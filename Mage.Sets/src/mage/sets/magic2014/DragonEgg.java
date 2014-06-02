@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jeffwadsworth
  */
-public class DragonEgg extends CardImpl<DragonEgg> {
+public class DragonEgg extends CardImpl {
 
     public DragonEgg(UUID ownerId) {
         super(ownerId, 137, "Dragon Egg", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

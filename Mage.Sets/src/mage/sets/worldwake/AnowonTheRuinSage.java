@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class AnowonTheRuinSage extends CardImpl<AnowonTheRuinSage> {
+public class AnowonTheRuinSage extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Vampire creature");
 

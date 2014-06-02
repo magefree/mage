@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class MindeyeDrake extends CardImpl<MindeyeDrake> {
+public class MindeyeDrake extends CardImpl {
 
     public MindeyeDrake(UUID ownerId) {
         super(ownerId, 43, "Mindeye Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

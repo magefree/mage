@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledPermanent;
 /**
  * @author Loki
  */
-public class GruulTurf extends CardImpl<GruulTurf> {
+public class GruulTurf extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

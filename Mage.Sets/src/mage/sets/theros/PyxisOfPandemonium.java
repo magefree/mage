@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class PyxisOfPandemonium extends CardImpl<PyxisOfPandemonium> {
+public class PyxisOfPandemonium extends CardImpl {
 
     public PyxisOfPandemonium(UUID ownerId) {
         super(ownerId, 220, "Pyxis of Pandemonium", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

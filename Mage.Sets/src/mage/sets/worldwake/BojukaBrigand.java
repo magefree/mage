@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class BojukaBrigand extends CardImpl<BojukaBrigand> {
+public class BojukaBrigand extends CardImpl {
 
     public BojukaBrigand(UUID ownerId) {
         super(ownerId, 51, "Bojuka Brigand", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

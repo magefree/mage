@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class Moonhold extends CardImpl<Moonhold> {
+public class Moonhold extends CardImpl {
 
     public Moonhold(UUID ownerId) {
         super(ownerId, 143, "Moonhold", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R/W}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class LastKiss extends CardImpl<LastKiss> {
+public class LastKiss extends CardImpl {
 
     public LastKiss (UUID ownerId) {
         super(ownerId, 116, "Last Kiss", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

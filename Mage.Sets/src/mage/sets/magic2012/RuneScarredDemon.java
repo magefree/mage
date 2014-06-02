@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class RuneScarredDemon extends CardImpl<RuneScarredDemon> {
+public class RuneScarredDemon extends CardImpl {
 
     public RuneScarredDemon (UUID ownerId) {
         super(ownerId, 106, "Rune-Scarred Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

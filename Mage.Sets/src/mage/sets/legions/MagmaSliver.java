@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class MagmaSliver extends CardImpl<MagmaSliver> {
+public class MagmaSliver extends CardImpl {
     
     public MagmaSliver(UUID ownerId) {
         super(ownerId, 107, "Magma Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

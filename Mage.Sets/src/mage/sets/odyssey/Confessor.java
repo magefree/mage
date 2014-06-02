@@ -41,7 +41,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author cbt33
  */
-public class Confessor extends CardImpl<Confessor> {
+public class Confessor extends CardImpl {
 
     public Confessor(UUID ownerId) {
         super(ownerId, 15, "Confessor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

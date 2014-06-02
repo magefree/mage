@@ -38,7 +38,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class HeroesReunion extends CardImpl<HeroesReunion> {
+public class HeroesReunion extends CardImpl {
 
     public HeroesReunion(UUID ownerId) {
         super(ownerId, 250, "Heroes' Reunion", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}");

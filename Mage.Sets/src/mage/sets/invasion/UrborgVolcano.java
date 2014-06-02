@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class UrborgVolcano extends CardImpl<UrborgVolcano> {
+public class UrborgVolcano extends CardImpl {
 
     public UrborgVolcano(UUID ownerId) {
         super(ownerId, 330, "Urborg Volcano", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

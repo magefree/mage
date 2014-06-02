@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class ElementalAppeal extends CardImpl<ElementalAppeal> {
+public class ElementalAppeal extends CardImpl {
 
     public ElementalAppeal(UUID ownerId) {
         super(ownerId, 123, "Elemental Appeal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{R}{R}{R}");

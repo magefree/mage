@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class HunterSliver extends CardImpl<HunterSliver> {
+public class HunterSliver extends CardImpl {
 
     public HunterSliver(UUID ownerId) {
         super(ownerId, 102, "Hunter Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

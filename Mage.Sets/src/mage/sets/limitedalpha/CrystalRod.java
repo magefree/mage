@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
  * @author KholdFuzion
 
  */
-public class CrystalRod extends CardImpl<CrystalRod> {
+public class CrystalRod extends CardImpl {
 
     public CrystalRod(UUID ownerId) {
         super(ownerId, 239, "Crystal Rod", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

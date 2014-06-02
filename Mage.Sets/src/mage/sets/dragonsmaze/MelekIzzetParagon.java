@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class MelekIzzetParagon extends CardImpl<MelekIzzetParagon> {
+public class MelekIzzetParagon extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card");
 

@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TimeReversal extends CardImpl<TimeReversal> {
+public class TimeReversal extends CardImpl {
 
     public TimeReversal(UUID ownerId) {
         super(ownerId, 75, "Time Reversal", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

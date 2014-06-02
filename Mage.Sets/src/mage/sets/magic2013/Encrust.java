@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class Encrust extends CardImpl<Encrust> {
+public class Encrust extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
     

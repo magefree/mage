@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WarriorsLesson extends CardImpl<WarriorsLesson> {
+public class WarriorsLesson extends CardImpl {
 
     public WarriorsLesson(UUID ownerId) {
         super(ownerId, 184, "Warriors' Lesson", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");

@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class SiegeOfTowers extends CardImpl<SiegeOfTowers> {
+public class SiegeOfTowers extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 

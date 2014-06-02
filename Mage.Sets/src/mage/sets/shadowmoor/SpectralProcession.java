@@ -38,7 +38,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author North
  */
-public class SpectralProcession extends CardImpl<SpectralProcession> {
+public class SpectralProcession extends CardImpl {
 
     public SpectralProcession(UUID ownerId) {
         super(ownerId, 23, "Spectral Procession", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2/W}{2/W}{2/W}");

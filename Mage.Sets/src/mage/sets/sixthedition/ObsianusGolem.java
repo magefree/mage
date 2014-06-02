@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ObsianusGolem extends CardImpl<ObsianusGolem> {
+public class ObsianusGolem extends CardImpl {
 
     public ObsianusGolem(UUID ownerId) {
         super(ownerId, 303, "Obsianus Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

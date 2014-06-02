@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class CullingDais extends CardImpl<CullingDais> {
+public class CullingDais extends CardImpl {
 
     public CullingDais (UUID ownerId) {
         super(ownerId, 148, "Culling Dais", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

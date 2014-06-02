@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class PhyrexianVault extends CardImpl<PhyrexianVault> {
+public class PhyrexianVault extends CardImpl {
 
     public PhyrexianVault(UUID ownerId) {
         super(ownerId, 337, "Phyrexian Vault", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

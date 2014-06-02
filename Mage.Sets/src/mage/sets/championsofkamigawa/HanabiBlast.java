@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class HanabiBlast extends CardImpl<HanabiBlast> {
+public class HanabiBlast extends CardImpl {
 
     public HanabiBlast (UUID ownerId) {
         super(ownerId, 170, "Hanabi Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");

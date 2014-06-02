@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.EnchantedPredicate;
  *
  * @author LevelX2
  */
-public class GodhunterOctopus extends CardImpl<GodhunterOctopus> {
+public class GodhunterOctopus extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("an enchantment or an enchanted permanent");
 

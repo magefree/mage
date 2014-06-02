@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class VengefulVampire extends CardImpl<VengefulVampire> {
+public class VengefulVampire extends CardImpl {
 
     public VengefulVampire(UUID ownerId) {
         super(ownerId, 78, "Vengeful Vampire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

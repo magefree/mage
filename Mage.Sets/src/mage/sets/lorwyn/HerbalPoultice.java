@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class HerbalPoultice extends CardImpl<HerbalPoultice> {
+public class HerbalPoultice extends CardImpl {
 
     public HerbalPoultice(UUID ownerId) {
         super(ownerId, 257, "Herbal Poultice", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

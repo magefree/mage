@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class SkyshroudCutter extends CardImpl<SkyshroudCutter> {
+public class SkyshroudCutter extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("If you control a Forest");
     

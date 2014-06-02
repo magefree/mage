@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class RebornHope extends CardImpl<RebornHope> {
+public class RebornHope extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("multicolored card from your graveyard");
     

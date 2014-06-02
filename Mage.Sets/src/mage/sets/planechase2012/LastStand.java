@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class LastStand extends CardImpl<LastStand> {
+public class LastStand extends CardImpl {
 
     public LastStand(UUID ownerId) {
         super(ownerId, 100, "Last Stand", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}{U}{B}{R}{G}");

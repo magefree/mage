@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class ThrabenDoomsayer extends CardImpl<ThrabenDoomsayer> {
+public class ThrabenDoomsayer extends CardImpl {
 
     public ThrabenDoomsayer(UUID ownerId) {
         super(ownerId, 25, "Thraben Doomsayer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

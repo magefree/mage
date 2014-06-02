@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CrashOfRhinos extends CardImpl<CrashOfRhinos> {
+public class CrashOfRhinos extends CardImpl {
 
     public CrashOfRhinos(UUID ownerId) {
         super(ownerId, 108, "Crash of Rhinos", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

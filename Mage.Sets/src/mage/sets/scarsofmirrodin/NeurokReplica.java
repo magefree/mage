@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class NeurokReplica extends CardImpl<NeurokReplica> {
+public class NeurokReplica extends CardImpl {
 
     public NeurokReplica (UUID ownerId) {
         super(ownerId, 186, "Neurok Replica", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

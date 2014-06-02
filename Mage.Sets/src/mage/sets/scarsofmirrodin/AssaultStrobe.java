@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class AssaultStrobe extends CardImpl<AssaultStrobe> {
+public class AssaultStrobe extends CardImpl {
 
     public AssaultStrobe (UUID ownerId) {
         super(ownerId, 82, "Assault Strobe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");

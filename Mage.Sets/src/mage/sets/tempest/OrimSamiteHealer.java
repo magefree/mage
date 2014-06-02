@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class OrimSamiteHealer extends CardImpl<OrimSamiteHealer> {
+public class OrimSamiteHealer extends CardImpl {
 
     public OrimSamiteHealer(UUID ownerId) {
         super(ownerId, 244, "Orim, Samite Healer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

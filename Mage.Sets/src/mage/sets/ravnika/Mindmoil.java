@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author jeffwadsworth
  */
-public class Mindmoil extends CardImpl<Mindmoil> {
+public class Mindmoil extends CardImpl {
 
     public Mindmoil(UUID ownerId) {
         super(ownerId, 135, "Mindmoil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");

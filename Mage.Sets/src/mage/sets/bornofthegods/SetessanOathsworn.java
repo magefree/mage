@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class SetessanOathsworn extends CardImpl<SetessanOathsworn> {
+public class SetessanOathsworn extends CardImpl {
 
     public SetessanOathsworn(UUID ownerId) {
         super(ownerId, 138, "Setessan Oathsworn", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

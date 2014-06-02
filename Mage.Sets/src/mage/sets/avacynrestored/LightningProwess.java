@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class LightningProwess extends CardImpl<LightningProwess> {
+public class LightningProwess extends CardImpl {
 
     public LightningProwess(UUID ownerId) {
         super(ownerId, 145, "Lightning Prowess", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

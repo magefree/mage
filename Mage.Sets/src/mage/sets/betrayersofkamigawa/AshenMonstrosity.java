@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class AshenMonstrosity extends CardImpl<AshenMonstrosity> {
+public class AshenMonstrosity extends CardImpl {
 
     public AshenMonstrosity(UUID ownerId) {
         super(ownerId, 93, "Ashen Monstrosity", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

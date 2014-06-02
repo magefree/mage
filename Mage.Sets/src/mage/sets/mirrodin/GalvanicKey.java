@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class GalvanicKey extends CardImpl<GalvanicKey> {
+public class GalvanicKey extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

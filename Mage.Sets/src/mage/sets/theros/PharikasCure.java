@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PharikasCure extends CardImpl<PharikasCure> {
+public class PharikasCure extends CardImpl {
 
     public PharikasCure(UUID ownerId) {
         super(ownerId, 100, "Pharika's Cure", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");

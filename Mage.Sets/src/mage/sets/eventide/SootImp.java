@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class SootImp extends CardImpl<SootImp> {
+public class SootImp extends CardImpl {
     
     static final private FilterSpell filter = new FilterSpell("a nonblack spell");
     

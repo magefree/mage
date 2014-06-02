@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EliteVanguard extends CardImpl<EliteVanguard> {
+public class EliteVanguard extends CardImpl {
 
     public EliteVanguard(UUID ownerId) {
         super(ownerId, 9, "Elite Vanguard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");

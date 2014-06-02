@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class KurosTaken extends CardImpl<KurosTaken> {
+public class KurosTaken extends CardImpl {
 
     public KurosTaken(UUID ownerId) {
         super(ownerId, 79, "Kuro's Taken", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

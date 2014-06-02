@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author Backfir3
  */
-public class UrzasArmor extends CardImpl<UrzasArmor> {
+public class UrzasArmor extends CardImpl {
 
     public UrzasArmor(UUID ownerId) {
         super(ownerId, 313, "Urza's Armor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{6}");

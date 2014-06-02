@@ -45,7 +45,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author Plopman
  */
-public class MindlockOrb extends CardImpl<MindlockOrb> {
+public class MindlockOrb extends CardImpl {
 
     public MindlockOrb(UUID ownerId) {
         super(ownerId, 51, "Mindlock Orb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}{U}");

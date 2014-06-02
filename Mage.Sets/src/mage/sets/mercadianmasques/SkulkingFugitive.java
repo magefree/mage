@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class SkulkingFugitive extends CardImpl<SkulkingFugitive> {
+public class SkulkingFugitive extends CardImpl {
 
     public SkulkingFugitive(UUID ownerId) {
 		super(ownerId, 161, "Skulking Fugitive", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

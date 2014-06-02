@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class ThatcherRevolt extends CardImpl<ThatcherRevolt> {
+public class ThatcherRevolt extends CardImpl {
 
     public ThatcherRevolt(UUID ownerId) {
         super(ownerId, 158, "Thatcher Revolt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");

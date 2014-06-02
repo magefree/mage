@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class HeraldOfTorment extends CardImpl<HeraldOfTorment> {
+public class HeraldOfTorment extends CardImpl {
 
     public HeraldOfTorment(UUID ownerId) {
         super(ownerId, 75, "Herald of Torment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{B}");

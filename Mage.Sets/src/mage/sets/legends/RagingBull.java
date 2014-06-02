@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RagingBull extends CardImpl<RagingBull> {
+public class RagingBull extends CardImpl {
 
     public RagingBull(UUID ownerId) {
         super(ownerId, 160, "Raging Bull", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

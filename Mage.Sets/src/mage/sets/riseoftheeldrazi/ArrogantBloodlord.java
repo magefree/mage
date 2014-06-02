@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class ArrogantBloodlord extends CardImpl<ArrogantBloodlord> {
+public class ArrogantBloodlord extends CardImpl {
 
     public ArrogantBloodlord(UUID ownerId) {
         super(ownerId, 94, "Arrogant Bloodlord", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class IchorclawMyr extends CardImpl<IchorclawMyr> {
+public class IchorclawMyr extends CardImpl {
 
     public IchorclawMyr(UUID ownerId) {
         super(ownerId, 166, "Ichorclaw Myr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class FlashCounter extends CardImpl<FlashCounter> {
+public class FlashCounter extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant spell");
 

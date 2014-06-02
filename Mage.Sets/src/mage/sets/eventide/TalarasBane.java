@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class TalarasBane extends CardImpl<TalarasBane> {
+public class TalarasBane extends CardImpl {
 
     public TalarasBane(UUID ownerId) {
         super(ownerId, 47, "Talara's Bane", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

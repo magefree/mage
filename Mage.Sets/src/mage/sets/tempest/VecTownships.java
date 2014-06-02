@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class VecTownships extends CardImpl<VecTownships> {
+public class VecTownships extends CardImpl {
 
     public VecTownships(UUID ownerId) {
         super(ownerId, 339, "Vec Townships", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class IntruderAlarm extends CardImpl<IntruderAlarm> {
+public class IntruderAlarm extends CardImpl {
 
     public IntruderAlarm(UUID ownerId) {
         super(ownerId, 34, "Intruder Alarm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

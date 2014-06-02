@@ -49,7 +49,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author LevelX2
  */
-public class ThespiansStage extends CardImpl<ThespiansStage> {
+public class ThespiansStage extends CardImpl {
 
     public ThespiansStage(UUID ownerId) {
         super(ownerId, 248, "Thespian's Stage", Rarity.RARE, new CardType[]{CardType.LAND}, "");

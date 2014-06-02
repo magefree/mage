@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class UncannySpeed extends CardImpl<UncannySpeed> {
+public class UncannySpeed extends CardImpl {
 
     public UncannySpeed(UUID ownerId) {
         super(ownerId, 163, "Uncanny Speed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

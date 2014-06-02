@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SatyrRambler extends CardImpl<SatyrRambler> {
+public class SatyrRambler extends CardImpl {
 
     public SatyrRambler(UUID ownerId) {
         super(ownerId, 139, "Satyr Rambler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

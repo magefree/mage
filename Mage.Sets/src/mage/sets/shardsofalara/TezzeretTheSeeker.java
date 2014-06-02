@@ -56,7 +56,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class TezzeretTheSeeker extends CardImpl<TezzeretTheSeeker> {
+public class TezzeretTheSeeker extends CardImpl {
 
     public TezzeretTheSeeker(UUID ownerId) {
         super(ownerId, 60, "Tezzeret the Seeker", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");

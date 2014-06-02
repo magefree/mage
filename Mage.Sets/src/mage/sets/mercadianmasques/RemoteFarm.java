@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class RemoteFarm extends CardImpl<RemoteFarm> {
+public class RemoteFarm extends CardImpl {
 
     public RemoteFarm(UUID ownerId) {
         super(ownerId, 323, "Remote Farm", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

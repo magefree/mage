@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class NorinTheWary extends CardImpl<NorinTheWary> {
+public class NorinTheWary extends CardImpl {
 
     public NorinTheWary(UUID ownerId) {
         super(ownerId, 171, "Norin the Wary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");

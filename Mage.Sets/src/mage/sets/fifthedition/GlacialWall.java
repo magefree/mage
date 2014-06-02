@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GlacialWall extends CardImpl<GlacialWall> {
+public class GlacialWall extends CardImpl {
 
     public GlacialWall(UUID ownerId) {
         super(ownerId, 91, "Glacial Wall", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

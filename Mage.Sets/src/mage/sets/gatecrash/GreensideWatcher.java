@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class GreensideWatcher extends CardImpl<GreensideWatcher> {
+public class GreensideWatcher extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Gate");
     static {

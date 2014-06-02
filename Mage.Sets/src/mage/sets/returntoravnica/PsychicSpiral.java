@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class PsychicSpiral extends CardImpl<PsychicSpiral> {
+public class PsychicSpiral extends CardImpl {
 
     public PsychicSpiral(UUID ownerId) {
         super(ownerId, 47, "Psychic Spiral", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");

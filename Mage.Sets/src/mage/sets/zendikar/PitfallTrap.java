@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author jeffwadsworth
  */
-public class PitfallTrap extends CardImpl<PitfallTrap> {
+public class PitfallTrap extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("creature without flying");
 

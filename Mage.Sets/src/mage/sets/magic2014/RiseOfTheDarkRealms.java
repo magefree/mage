@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class RiseOfTheDarkRealms extends CardImpl<RiseOfTheDarkRealms> {
+public class RiseOfTheDarkRealms extends CardImpl {
 
     public RiseOfTheDarkRealms(UUID ownerId) {
         super(ownerId, 111, "Rise of the Dark Realms", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{B}{B}");

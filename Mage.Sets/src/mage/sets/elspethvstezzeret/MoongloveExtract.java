@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class MoongloveExtract extends CardImpl<MoongloveExtract> {
+public class MoongloveExtract extends CardImpl {
 
     public MoongloveExtract(UUID ownerId) {
         super(ownerId, 67, "Moonglove Extract", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

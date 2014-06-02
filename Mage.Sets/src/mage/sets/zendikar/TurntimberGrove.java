@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TurntimberGrove extends CardImpl<TurntimberGrove> {
+public class TurntimberGrove extends CardImpl {
 
     public TurntimberGrove(UUID ownerId) {
         super(ownerId, 227, "Turntimber Grove", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

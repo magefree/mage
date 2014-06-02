@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class BowerPassage extends CardImpl<BowerPassage> {
+public class BowerPassage extends CardImpl {
 
     public BowerPassage(UUID ownerId) {
         super(ownerId, 170, "Bower Passage", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

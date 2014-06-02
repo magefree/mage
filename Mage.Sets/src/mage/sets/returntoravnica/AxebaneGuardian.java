@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class AxebaneGuardian extends CardImpl<AxebaneGuardian> {
+public class AxebaneGuardian extends CardImpl {
 
     public AxebaneGuardian(UUID ownerId) {
         super(ownerId, 115, "Axebane Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

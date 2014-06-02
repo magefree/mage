@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class LeoninRelicWarder extends CardImpl<LeoninRelicWarder> {
+public class LeoninRelicWarder extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {

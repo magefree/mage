@@ -52,7 +52,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class ScourgeOfValkas extends CardImpl<ScourgeOfValkas> {
+public class ScourgeOfValkas extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Scourge of Valkas or another Dragon");
     private final static FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Dragons you control");

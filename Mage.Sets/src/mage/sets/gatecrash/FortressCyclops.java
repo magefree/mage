@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class FortressCyclops extends CardImpl<FortressCyclops> {
+public class FortressCyclops extends CardImpl {
 
     public FortressCyclops(UUID ownerId) {
         super(ownerId, 164, "Fortress Cyclops", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");

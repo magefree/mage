@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class PredatoryAdvantage extends CardImpl<PredatoryAdvantage> {
+public class PredatoryAdvantage extends CardImpl {
 
     public PredatoryAdvantage(UUID ownerId) {
         super(ownerId, 58, "Predatory Advantage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{G}");

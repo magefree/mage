@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author LevelX
  */
-public class BushiTenderfoot extends CardImpl<BushiTenderfoot> {
+public class BushiTenderfoot extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
 

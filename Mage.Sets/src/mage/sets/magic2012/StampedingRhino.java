@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class StampedingRhino extends CardImpl<StampedingRhino> {
+public class StampedingRhino extends CardImpl {
 
     public StampedingRhino(UUID ownerId) {
         super(ownerId, 196, "Stampeding Rhino", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

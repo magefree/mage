@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class KentaroTheSmilingCat extends CardImpl<KentaroTheSmilingCat> {
+public class KentaroTheSmilingCat extends CardImpl {
 
     public KentaroTheSmilingCat(UUID ownerId) {
         super(ownerId, 13, "Kentaro, the Smiling Cat", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");

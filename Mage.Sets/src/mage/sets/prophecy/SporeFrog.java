@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class SporeFrog extends CardImpl<SporeFrog> {
+public class SporeFrog extends CardImpl {
 
     public SporeFrog(UUID ownerId) {
         super(ownerId, 126, "Spore Frog", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

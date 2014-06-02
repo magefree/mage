@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class Scrapheap extends CardImpl<Scrapheap> {
+public class Scrapheap extends CardImpl {
 
     public Scrapheap(UUID ownerId) {
         super(ownerId, 132, "Scrapheap", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

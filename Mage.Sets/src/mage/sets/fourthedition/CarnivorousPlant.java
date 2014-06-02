@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CarnivorousPlant extends CardImpl<CarnivorousPlant> {
+public class CarnivorousPlant extends CardImpl {
 
     public CarnivorousPlant(UUID ownerId) {
         super(ownerId, 119, "Carnivorous Plant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

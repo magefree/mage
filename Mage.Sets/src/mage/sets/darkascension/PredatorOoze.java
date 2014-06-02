@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author BetaSteward
  */
-public class PredatorOoze extends CardImpl<PredatorOoze> {
+public class PredatorOoze extends CardImpl {
 
     public PredatorOoze(UUID ownerId) {
         super(ownerId, 124, "Predator Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}{G}");

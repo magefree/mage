@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Scourgemark extends CardImpl<Scourgemark> {
+public class Scourgemark extends CardImpl {
 
     public Scourgemark(UUID ownerId) {
         super(ownerId, 105, "Scourgemark", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

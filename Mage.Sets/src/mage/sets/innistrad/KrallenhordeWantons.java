@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class KrallenhordeWantons extends CardImpl<KrallenhordeWantons> {
+public class KrallenhordeWantons extends CardImpl {
 
 
     public KrallenhordeWantons(UUID ownerId) {

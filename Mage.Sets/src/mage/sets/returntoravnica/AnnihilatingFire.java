@@ -50,7 +50,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX2
  */
-public class AnnihilatingFire extends CardImpl<AnnihilatingFire> {
+public class AnnihilatingFire extends CardImpl {
 
     public AnnihilatingFire(UUID ownerId) {
             super(ownerId, 85, "Annihilating Fire", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");

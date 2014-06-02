@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class MikaeusTheUnhallowed extends CardImpl<MikaeusTheUnhallowed> {
+public class MikaeusTheUnhallowed extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Human creatures");
 

@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class EnlightenedTutor extends CardImpl<EnlightenedTutor> {
+public class EnlightenedTutor extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("artifact or enchantment card");
     static{

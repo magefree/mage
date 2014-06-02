@@ -53,7 +53,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  *
  * @author LevelX2
  */
-public class RixMaadiGuildmage extends CardImpl<RixMaadiGuildmage> {
+public class RixMaadiGuildmage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
     private static final FilterPlayer playerFilter = new FilterPlayer("player who lost life this turn");

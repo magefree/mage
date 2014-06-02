@@ -68,7 +68,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com, nantuko
  */
-public class GrandArchitect extends CardImpl<GrandArchitect> {
+public class GrandArchitect extends CardImpl {
 
     private static final FilterCreaturePermanent boostFilter = new FilterCreaturePermanent("blue creatures");
     private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("artifact creature");

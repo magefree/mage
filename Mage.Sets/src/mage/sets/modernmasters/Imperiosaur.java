@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author LevelX2
  */
-public class Imperiosaur extends CardImpl<Imperiosaur> {
+public class Imperiosaur extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     static {

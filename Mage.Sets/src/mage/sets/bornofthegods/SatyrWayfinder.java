@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class SatyrWayfinder extends CardImpl<SatyrWayfinder> {
+public class SatyrWayfinder extends CardImpl {
 
     public SatyrWayfinder(UUID ownerId) {
         super(ownerId, 136, "Satyr Wayfinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

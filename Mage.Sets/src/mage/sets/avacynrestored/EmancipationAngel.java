@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class EmancipationAngel extends CardImpl<EmancipationAngel> {
+public class EmancipationAngel extends CardImpl {
 
     public EmancipationAngel(UUID ownerId) {
         super(ownerId, 19, "Emancipation Angel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

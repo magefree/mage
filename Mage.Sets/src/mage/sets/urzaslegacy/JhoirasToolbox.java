@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class JhoirasToolbox extends CardImpl<JhoirasToolbox> {
+public class JhoirasToolbox extends CardImpl {
 
     private static final FilterCreaturePermanent filer = new FilterCreaturePermanent("artifact creature");
 

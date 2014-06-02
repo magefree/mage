@@ -53,7 +53,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class RefractionTrap extends CardImpl<RefractionTrap> {
+public class RefractionTrap extends CardImpl {
 
     public RefractionTrap(UUID ownerId) {
         super(ownerId, 17, "Refraction Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");

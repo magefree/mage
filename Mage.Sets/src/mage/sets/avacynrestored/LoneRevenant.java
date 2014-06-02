@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class LoneRevenant extends CardImpl<LoneRevenant> {
+public class LoneRevenant extends CardImpl {
 
     public LoneRevenant(UUID ownerId) {
         super(ownerId, 64, "Lone Revenant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

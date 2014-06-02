@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class FiremindsForesight extends CardImpl<FiremindsForesight> {
+public class FiremindsForesight extends CardImpl {
 
     public FiremindsForesight(UUID ownerId) {
         super(ownerId, 162, "Firemind's Foresight", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{U}{R}");

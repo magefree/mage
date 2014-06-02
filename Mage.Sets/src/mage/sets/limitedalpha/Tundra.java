@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class Tundra extends CardImpl<Tundra> {
+public class Tundra extends CardImpl {
 
     public Tundra(UUID ownerId) {
         super(ownerId, 294, "Tundra", Rarity.RARE, new CardType[]{CardType.LAND}, "");

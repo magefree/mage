@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Loki
  */
-public class ShatteredAngel extends CardImpl<ShatteredAngel> {
+public class ShatteredAngel extends CardImpl {
 
     private static final FilterPermanent filter = new FilterLandPermanent("a land");
     static {

@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class MakindiShieldmate extends CardImpl<MakindiShieldmate> {
+public class MakindiShieldmate extends CardImpl {
 
     public MakindiShieldmate(UUID ownerId) {
         super(ownerId, 26, "Makindi Shieldmate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

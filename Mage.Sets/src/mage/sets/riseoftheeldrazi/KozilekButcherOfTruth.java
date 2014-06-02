@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class KozilekButcherOfTruth extends CardImpl<KozilekButcherOfTruth> {
+public class KozilekButcherOfTruth extends CardImpl {
 
     public KozilekButcherOfTruth (UUID ownerId) {
         super(ownerId, 6, "Kozilek, Butcher of Truth", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{10}");

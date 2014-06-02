@@ -55,7 +55,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class UrbanBurgeoning extends CardImpl<UrbanBurgeoning> {
+public class UrbanBurgeoning extends CardImpl {
 
     static final String rule = "Enchanted land has \"Untap this land during each other player's untap step.\"";
 

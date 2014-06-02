@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BoggartRamGang extends CardImpl<BoggartRamGang> {
+public class BoggartRamGang extends CardImpl {
 
     public BoggartRamGang(UUID ownerId) {
         super(ownerId, 203, "Boggart Ram-Gang", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R/G}{R/G}{R/G}");

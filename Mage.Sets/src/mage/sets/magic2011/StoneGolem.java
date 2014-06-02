@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class StoneGolem extends CardImpl<StoneGolem> {
+public class StoneGolem extends CardImpl {
 
     public StoneGolem(UUID ownerId) {
         super(ownerId, 215, "Stone Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

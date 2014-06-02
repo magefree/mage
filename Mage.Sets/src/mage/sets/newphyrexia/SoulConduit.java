@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class SoulConduit extends CardImpl<SoulConduit> {
+public class SoulConduit extends CardImpl {
 
     public SoulConduit(UUID ownerId) {
         super(ownerId, 158, "Soul Conduit", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

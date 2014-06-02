@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class Woeleecher extends CardImpl<Woeleecher> {
+public class Woeleecher extends CardImpl {
 
     public Woeleecher(UUID ownerId) {
         super(ownerId, 27, "Woeleecher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");

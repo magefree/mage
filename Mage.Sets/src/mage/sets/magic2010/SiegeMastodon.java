@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SiegeMastodon extends CardImpl<SiegeMastodon> {
+public class SiegeMastodon extends CardImpl {
 
     public SiegeMastodon(UUID ownerId) {
         super(ownerId, 30, "Siege Mastodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class BattleStrain extends CardImpl<BattleStrain> {
+public class BattleStrain extends CardImpl {
 
     public BattleStrain(UUID ownerId) {
         super(ownerId, 177, "Battle Strain", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

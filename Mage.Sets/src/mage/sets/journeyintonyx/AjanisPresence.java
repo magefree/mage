@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AjanisPresence extends CardImpl<AjanisPresence> {
+public class AjanisPresence extends CardImpl {
 
     public AjanisPresence(UUID ownerId) {
         super(ownerId, 2, "Ajani's Presence", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

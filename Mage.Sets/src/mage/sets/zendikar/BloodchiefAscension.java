@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class BloodchiefAscension extends CardImpl<BloodchiefAscension> {
+public class BloodchiefAscension extends CardImpl {
 
     public BloodchiefAscension(UUID ownerId) {
         super(ownerId, 82, "Bloodchief Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}");

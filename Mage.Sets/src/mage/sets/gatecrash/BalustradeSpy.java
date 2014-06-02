@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class BalustradeSpy extends CardImpl<BalustradeSpy> {
+public class BalustradeSpy extends CardImpl {
 
     public BalustradeSpy(UUID ownerId) {
         super(ownerId, 57, "Balustrade Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

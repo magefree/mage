@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class StudentOfElements extends CardImpl<StudentOfElements> {
+public class StudentOfElements extends CardImpl {
 
     public StudentOfElements(UUID ownerId) {
         super(ownerId, 93, "Student of Elements", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class NectarFaerie extends CardImpl<NectarFaerie> {
+public class NectarFaerie extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Faerie or Elf");
 

@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author mluds
  */
-public class EdricSpymasterOfTrest extends CardImpl<EdricSpymasterOfTrest> {
+public class EdricSpymasterOfTrest extends CardImpl {
 
     public EdricSpymasterOfTrest(UUID ownerId) {
         super(ownerId, 196, "Edric, Spymaster of Trest", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

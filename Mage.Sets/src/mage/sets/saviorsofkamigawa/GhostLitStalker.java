@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class GhostLitStalker extends CardImpl<GhostLitStalker> {
+public class GhostLitStalker extends CardImpl {
 
     public GhostLitStalker(UUID ownerId) {
         super(ownerId, 69, "Ghost-Lit Stalker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");

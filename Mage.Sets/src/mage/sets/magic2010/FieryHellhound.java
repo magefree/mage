@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FieryHellhound extends CardImpl<FieryHellhound> {
+public class FieryHellhound extends CardImpl {
 
     public FieryHellhound(UUID ownerId) {
         super(ownerId, 135, "Fiery Hellhound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

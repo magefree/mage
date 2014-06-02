@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Annul extends CardImpl<Annul> {
+public class Annul extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("artifact or enchantment spell");
 

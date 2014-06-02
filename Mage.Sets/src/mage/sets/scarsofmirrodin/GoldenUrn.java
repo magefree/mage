@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class GoldenUrn extends CardImpl<GoldenUrn> {
+public class GoldenUrn extends CardImpl {
 
     public GoldenUrn (UUID ownerId) {
         super(ownerId, 158, "Golden Urn", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

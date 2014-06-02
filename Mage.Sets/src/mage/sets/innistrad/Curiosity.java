@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author Alvin, noxx
  */
-public class Curiosity extends CardImpl<Curiosity> {
+public class Curiosity extends CardImpl {
 
     public Curiosity(UUID ownerId) {
         super(ownerId, 49, "Curiosity", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

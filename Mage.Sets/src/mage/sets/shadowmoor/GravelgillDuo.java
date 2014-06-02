@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class GravelgillDuo extends CardImpl<GravelgillDuo> {
+public class GravelgillDuo extends CardImpl {
 
     private static final FilterSpell blueFilter = new FilterSpell("a blue spell");
     private static final FilterSpell blackFilter = new FilterSpell("a black spell");

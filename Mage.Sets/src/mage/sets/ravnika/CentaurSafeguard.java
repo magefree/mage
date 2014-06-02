@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CentaurSafeguard extends CardImpl<CentaurSafeguard> {
+public class CentaurSafeguard extends CardImpl {
 
     public CentaurSafeguard(UUID ownerId) {
         super(ownerId, 244, "Centaur Safeguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G/W}");

@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class ScouringSands extends CardImpl<ScouringSands> {
+public class ScouringSands extends CardImpl {
 
     public ScouringSands(UUID ownerId) {
         super(ownerId, 110, "Scouring Sands", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

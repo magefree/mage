@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class ExplosiveRevelation extends CardImpl<ExplosiveRevelation> {
+public class ExplosiveRevelation extends CardImpl {
 
     public ExplosiveRevelation(UUID ownerId) {
         super(ownerId, 143, "Explosive Revelation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

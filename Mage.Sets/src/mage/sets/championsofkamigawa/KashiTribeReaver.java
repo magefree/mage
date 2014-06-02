@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX
  */
-public class KashiTribeReaver extends CardImpl<KashiTribeReaver> {
+public class KashiTribeReaver extends CardImpl {
 
     public KashiTribeReaver(UUID ownerId) {
         super(ownerId, 220, "Kashi-Tribe Reaver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

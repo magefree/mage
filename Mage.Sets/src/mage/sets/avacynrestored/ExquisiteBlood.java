@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class ExquisiteBlood extends CardImpl<ExquisiteBlood> {
+public class ExquisiteBlood extends CardImpl {
 
     public ExquisiteBlood(UUID ownerId) {
         super(ownerId, 102, "Exquisite Blood", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Backfir3
  */
-public class Whetstone extends CardImpl<Whetstone> {
+public class Whetstone extends CardImpl {
 
     public Whetstone(UUID ownerId) {
         super(ownerId, 316, "Whetstone", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

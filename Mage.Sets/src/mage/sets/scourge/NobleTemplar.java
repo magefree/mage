@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class NobleTemplar extends CardImpl<NobleTemplar> {
+public class NobleTemplar extends CardImpl {
 
     public NobleTemplar(UUID ownerId) {
         super(ownerId, 19, "Noble Templar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");

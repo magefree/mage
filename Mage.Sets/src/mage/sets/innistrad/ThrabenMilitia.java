@@ -38,7 +38,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class ThrabenMilitia extends CardImpl<ThrabenMilitia> {
+public class ThrabenMilitia extends CardImpl {
 
     public ThrabenMilitia(UUID ownerId) {
         super(ownerId, 1038, "Thraben Militia", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");

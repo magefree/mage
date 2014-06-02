@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class BloodVassal extends CardImpl<BloodVassal> {
+public class BloodVassal extends CardImpl {
 
     public BloodVassal(UUID ownerId) {
         super(ownerId, 118, "Blood Vassal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

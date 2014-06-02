@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SilverstormSamurai extends CardImpl<SilverstormSamurai> {
+public class SilverstormSamurai extends CardImpl {
 
     public SilverstormSamurai(UUID ownerId) {
         super(ownerId, 22, "Silverstorm Samurai", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 /**
  * @author Loki
  */
-public class Earthshaker extends CardImpl<Earthshaker> {
+public class Earthshaker extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();    
     private static final FilterCreaturePermanent creatureFilter = new FilterCreaturePermanent("creature without flying");

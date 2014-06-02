@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki, North
  */
-public class Painsmith extends CardImpl<Painsmith> {
+public class Painsmith extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an artifact spell");
     static {

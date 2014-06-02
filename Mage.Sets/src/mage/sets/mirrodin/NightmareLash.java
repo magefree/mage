@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Loki
  */
-public class NightmareLash extends CardImpl<NightmareLash> {
+public class NightmareLash extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
     static {

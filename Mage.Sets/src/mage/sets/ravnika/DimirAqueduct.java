@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledPermanent;
 /**
  * @author Loki
  */
-public class DimirAqueduct extends CardImpl<DimirAqueduct> {
+public class DimirAqueduct extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class BrambleCreeper extends CardImpl<BrambleCreeper> {
+public class BrambleCreeper extends CardImpl {
 
     public BrambleCreeper(UUID ownerId) {
         super(ownerId, 171, "Bramble Creeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

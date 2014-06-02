@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class NantukoElder extends CardImpl<NantukoElder> {
+public class NantukoElder extends CardImpl {
 
     public NantukoElder(UUID ownerId) {
         super(ownerId, 254, "Nantuko Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

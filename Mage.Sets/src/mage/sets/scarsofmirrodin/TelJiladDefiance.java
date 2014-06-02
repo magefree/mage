@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author ayratn
  */
-public class TelJiladDefiance extends CardImpl<TelJiladDefiance> {
+public class TelJiladDefiance extends CardImpl {
 
     public TelJiladDefiance(UUID ownerId) {
         super(ownerId, 129, "Tel-Jilad Defiance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

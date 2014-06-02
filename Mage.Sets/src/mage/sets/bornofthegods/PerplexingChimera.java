@@ -96,7 +96,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class PerplexingChimera extends CardImpl<PerplexingChimera> {
+public class PerplexingChimera extends CardImpl {
 
     public PerplexingChimera(UUID ownerId) {
         super(ownerId, 48, "Perplexing Chimera", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{U}");

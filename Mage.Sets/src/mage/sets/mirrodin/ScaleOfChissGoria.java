@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ScaleOfChissGoria extends CardImpl<ScaleOfChissGoria> {
+public class ScaleOfChissGoria extends CardImpl {
 
     public ScaleOfChissGoria(UUID ownerId) {
         super(ownerId, 236, "Scale of Chiss-Goria", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

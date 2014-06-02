@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class GnarledEffigy extends CardImpl<GnarledEffigy> {
+public class GnarledEffigy extends CardImpl {
 
     public GnarledEffigy(UUID ownerId) {
         super(ownerId, 251, "Gnarled Effigy", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -55,7 +55,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author jeffwadsworth
  *
  */
-public class FieryBombardment extends CardImpl<FieryBombardment> {
+public class FieryBombardment extends CardImpl {
 
     public FieryBombardment(UUID ownerId) {
         super(ownerId, 52, "Fiery Bombardment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

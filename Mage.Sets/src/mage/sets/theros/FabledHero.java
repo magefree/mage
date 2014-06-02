@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class FabledHero extends CardImpl<FabledHero> {
+public class FabledHero extends CardImpl {
 
     public FabledHero(UUID ownerId) {
         super(ownerId, 12, "Fabled Hero", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

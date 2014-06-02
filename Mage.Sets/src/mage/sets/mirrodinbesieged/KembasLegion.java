@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class KembasLegion extends CardImpl<KembasLegion> {
+public class KembasLegion extends CardImpl {
 
     public KembasLegion(UUID ownerId) {
         super(ownerId, 9, "Kemba's Legion", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

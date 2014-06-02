@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class StarlitAngel extends CardImpl<StarlitAngel> {
+public class StarlitAngel extends CardImpl {
 
     public StarlitAngel(UUID ownerId) {
         super(ownerId, 192, "Starlit Angel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

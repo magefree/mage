@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StrikingSliver extends CardImpl<StrikingSliver> {
+public class StrikingSliver extends CardImpl {
 
     public StrikingSliver(UUID ownerId) {
         super(ownerId, 157, "Striking Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

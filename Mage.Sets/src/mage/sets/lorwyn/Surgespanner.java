@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class Surgespanner extends CardImpl<Surgespanner> {
+public class Surgespanner extends CardImpl {
 
     public Surgespanner(UUID ownerId) {
         super(ownerId, 92, "Surgespanner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Loki
  */
-public class AmuletOfVigor extends CardImpl<AmuletOfVigor> {
+public class AmuletOfVigor extends CardImpl {
 
     public AmuletOfVigor(UUID ownerId) {
         super(ownerId, 121, "Amulet of Vigor", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

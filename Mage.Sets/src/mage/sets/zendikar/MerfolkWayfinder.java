@@ -50,7 +50,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class MerfolkWayfinder extends CardImpl<MerfolkWayfinder> {
+public class MerfolkWayfinder extends CardImpl {
 
     public MerfolkWayfinder(UUID ownerId) {
         super(ownerId, 56, "Merfolk Wayfinder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

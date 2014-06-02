@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class UnknownShores extends CardImpl<UnknownShores> {
+public class UnknownShores extends CardImpl {
 
     public UnknownShores(UUID ownerId) {
         super(ownerId, 229, "Unknown Shores", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

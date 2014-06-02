@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class PhyrexianDefiler extends CardImpl<PhyrexianDefiler> {
+public class PhyrexianDefiler extends CardImpl {
 
     public PhyrexianDefiler(UUID ownerId) {
         super(ownerId, 60, "Phyrexian Defiler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

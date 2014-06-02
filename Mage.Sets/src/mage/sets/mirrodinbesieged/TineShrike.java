@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class TineShrike extends CardImpl<TineShrike> {
+public class TineShrike extends CardImpl {
 
     public TineShrike (UUID ownerId) {
         super(ownerId, 17, "Tine Shrike", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

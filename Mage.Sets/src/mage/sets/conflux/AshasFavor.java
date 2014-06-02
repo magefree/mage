@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class AshasFavor extends CardImpl<AshasFavor> {
+public class AshasFavor extends CardImpl {
 
     public AshasFavor (UUID ownerId) {
         super(ownerId, 2, "Asha's Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

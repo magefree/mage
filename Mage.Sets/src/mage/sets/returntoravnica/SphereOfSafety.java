@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SphereOfSafety extends CardImpl<SphereOfSafety> {
+public class SphereOfSafety extends CardImpl {
 
     public SphereOfSafety (UUID ownerId) {
         super(ownerId, 24, "Sphere of Safety", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");

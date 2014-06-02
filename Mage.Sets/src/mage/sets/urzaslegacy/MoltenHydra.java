@@ -53,7 +53,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class MoltenHydra extends CardImpl<MoltenHydra> {
+public class MoltenHydra extends CardImpl {
 
 
 

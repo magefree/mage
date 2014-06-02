@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ActOfTreason extends CardImpl<ActOfTreason> {
+public class ActOfTreason extends CardImpl {
 
     public ActOfTreason(UUID ownerId) {
         super(ownerId, 124, "Act of Treason", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");

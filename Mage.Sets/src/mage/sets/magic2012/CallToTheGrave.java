@@ -50,7 +50,7 @@ import mage.game.events.GameEvent;
  *
  * @author nantuko
  */
-public class CallToTheGrave extends CardImpl<CallToTheGrave> {
+public class CallToTheGrave extends CardImpl {
 
     private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice Call to the Grave.";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a non-Zombie creature");

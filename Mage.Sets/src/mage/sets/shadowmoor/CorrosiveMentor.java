@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class CorrosiveMentor extends CardImpl<CorrosiveMentor> {
+public class CorrosiveMentor extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Black creatures");
 

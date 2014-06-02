@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BackToNature extends CardImpl<BackToNature> {
+public class BackToNature extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantments");
 

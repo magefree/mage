@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 /**
  * @author nantuko
  */
-public class Ponder extends CardImpl<Ponder> {
+public class Ponder extends CardImpl {
 
     public Ponder(UUID ownerId) {
         super(ownerId, 68, "Ponder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");

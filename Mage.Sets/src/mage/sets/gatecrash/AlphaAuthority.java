@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class AlphaAuthority extends CardImpl<AlphaAuthority> {
+public class AlphaAuthority extends CardImpl {
 
     public AlphaAuthority(UUID ownerId) {
         super(ownerId, 114, "Alpha Authority", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

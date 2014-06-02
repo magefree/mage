@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class MountainBandit extends CardImpl<MountainBandit> {
+public class MountainBandit extends CardImpl {
 
     public MountainBandit(UUID ownerId) {
         super(ownerId, 117, "Mountain Bandit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

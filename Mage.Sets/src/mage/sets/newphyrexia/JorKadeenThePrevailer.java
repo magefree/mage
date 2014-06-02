@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author North
  */
-public class JorKadeenThePrevailer extends CardImpl<JorKadeenThePrevailer> {
+public class JorKadeenThePrevailer extends CardImpl {
 
     private final String effectText = "Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.";
 

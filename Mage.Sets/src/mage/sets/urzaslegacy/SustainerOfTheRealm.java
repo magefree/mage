@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SustainerOfTheRealm extends CardImpl<SustainerOfTheRealm> {
+public class SustainerOfTheRealm extends CardImpl {
 
     public SustainerOfTheRealm(UUID ownerId) {
         super(ownerId, 23, "Sustainer of the Realm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

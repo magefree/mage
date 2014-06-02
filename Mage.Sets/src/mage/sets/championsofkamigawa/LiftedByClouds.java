@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LiftedByClouds extends CardImpl<LiftedByClouds> {
+public class LiftedByClouds extends CardImpl {
 
     public LiftedByClouds(UUID ownerId) {
         super(ownerId, 73, "Lifted by Clouds", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

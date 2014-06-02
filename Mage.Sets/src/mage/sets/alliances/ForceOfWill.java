@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Plopman
  */
-public class ForceOfWill extends CardImpl<ForceOfWill> {
+public class ForceOfWill extends CardImpl {
 
     public ForceOfWill(UUID ownerId) {
         super(ownerId, 42, "Force of Will", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

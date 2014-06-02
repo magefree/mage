@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SelhoffOccultist extends CardImpl<SelhoffOccultist> {
+public class SelhoffOccultist extends CardImpl {
 
     public SelhoffOccultist(UUID ownerId) {
         super(ownerId, 73, "Selhoff Occultist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

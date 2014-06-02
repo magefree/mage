@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SkyEelSchool extends CardImpl<SkyEelSchool> {
+public class SkyEelSchool extends CardImpl {
 
     public SkyEelSchool (UUID ownerId) {
         super(ownerId, 44, "Sky-Eel School", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

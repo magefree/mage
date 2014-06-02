@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class LuxCannon extends CardImpl<LuxCannon> {
+public class LuxCannon extends CardImpl {
 
     public LuxCannon (UUID ownerId) {
         super(ownerId, 173, "Lux Cannon", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{4}");

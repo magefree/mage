@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class DeathgazeCockatrice extends CardImpl<DeathgazeCockatrice> {
+public class DeathgazeCockatrice extends CardImpl {
 
     public DeathgazeCockatrice(UUID ownerId) {
         super(ownerId, 94, "Deathgaze Cockatrice", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

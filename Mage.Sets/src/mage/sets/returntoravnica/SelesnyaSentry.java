@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SelesnyaSentry extends CardImpl<SelesnyaSentry> {
+public class SelesnyaSentry extends CardImpl {
 
     public SelesnyaSentry(UUID ownerId) {
         super(ownerId, 21, "Selesnya Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

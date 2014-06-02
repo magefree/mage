@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SowerOfTemptation extends CardImpl<SowerOfTemptation> {
+public class SowerOfTemptation extends CardImpl {
 
     public SowerOfTemptation(UUID ownerId) {
         super(ownerId, 88, "Sower of Temptation", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

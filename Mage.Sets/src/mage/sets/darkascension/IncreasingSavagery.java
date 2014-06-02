@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward
  */
-public class IncreasingSavagery extends CardImpl<IncreasingSavagery> {
+public class IncreasingSavagery extends CardImpl {
 
     public IncreasingSavagery(UUID ownerId) {
         super(ownerId, 120, "Increasing Savagery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");

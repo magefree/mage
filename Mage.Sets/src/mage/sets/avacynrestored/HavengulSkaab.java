@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class HavengulSkaab extends CardImpl<HavengulSkaab> {
+public class HavengulSkaab extends CardImpl {
 
     public HavengulSkaab(UUID ownerId) {
         super(ownerId, 60, "Havengul Skaab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");

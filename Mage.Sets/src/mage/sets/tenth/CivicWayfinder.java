@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class CivicWayfinder extends CardImpl<CivicWayfinder> {
+public class CivicWayfinder extends CardImpl {
 
     public CivicWayfinder(UUID ownerId) {
         super(ownerId, 255, "Civic Wayfinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

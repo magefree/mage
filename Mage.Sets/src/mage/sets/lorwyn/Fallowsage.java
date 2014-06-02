@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class Fallowsage extends CardImpl<Fallowsage> {
+public class Fallowsage extends CardImpl {
 
     public Fallowsage(UUID ownerId) {
         super(ownerId, 63, "Fallowsage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

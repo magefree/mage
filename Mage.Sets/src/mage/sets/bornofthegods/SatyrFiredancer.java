@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SatyrFiredancer extends CardImpl<SatyrFiredancer> {
+public class SatyrFiredancer extends CardImpl {
 
     public SatyrFiredancer(UUID ownerId) {
         super(ownerId, 108, "Satyr Firedancer", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}");

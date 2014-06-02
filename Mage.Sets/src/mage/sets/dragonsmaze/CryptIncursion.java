@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  */
 
 
-public class CryptIncursion extends CardImpl<CryptIncursion> {
+public class CryptIncursion extends CardImpl {
 
     public CryptIncursion(UUID ownerId) {
         super(ownerId, 23, "Crypt Incursion", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

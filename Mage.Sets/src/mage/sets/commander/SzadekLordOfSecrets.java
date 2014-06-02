@@ -53,7 +53,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class SzadekLordOfSecrets extends CardImpl<SzadekLordOfSecrets> {
+public class SzadekLordOfSecrets extends CardImpl {
 
     public SzadekLordOfSecrets(UUID ownerId) {
         super(ownerId, 228, "Szadek, Lord of Secrets", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{B}{B}");

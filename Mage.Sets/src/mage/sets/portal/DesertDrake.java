@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class DesertDrake extends CardImpl<DesertDrake> {
+public class DesertDrake extends CardImpl {
 
     public DesertDrake(UUID ownerId) {
         super(ownerId, 127, "Desert Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

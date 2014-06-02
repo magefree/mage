@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class BrassSquire extends CardImpl<BrassSquire> {
+public class BrassSquire extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Equipment you control");
 

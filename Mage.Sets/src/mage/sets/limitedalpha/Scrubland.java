@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class Scrubland extends CardImpl<Scrubland> {
+public class Scrubland extends CardImpl {
 
     public Scrubland(UUID ownerId) {
         super(ownerId, 289, "Scrubland", Rarity.RARE, new CardType[]{CardType.LAND}, "");

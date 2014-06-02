@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class GrimDiscovery extends CardImpl<GrimDiscovery> {
+public class GrimDiscovery extends CardImpl {
 
     private static final FilterCreatureCard filterCreatureCard = new FilterCreatureCard("creature card from your graveyard");
     private static final FilterLandCard filterLandCard = new FilterLandCard("land card from your graveyard");

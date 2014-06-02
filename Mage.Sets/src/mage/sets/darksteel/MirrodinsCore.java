@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class MirrodinsCore extends CardImpl<MirrodinsCore> {
+public class MirrodinsCore extends CardImpl {
 
     public MirrodinsCore (UUID ownerId) {
         super(ownerId, 165, "Mirrodin's Core", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

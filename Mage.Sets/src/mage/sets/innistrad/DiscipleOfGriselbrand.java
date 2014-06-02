@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class DiscipleOfGriselbrand extends CardImpl<DiscipleOfGriselbrand> {
+public class DiscipleOfGriselbrand extends CardImpl {
 
     public DiscipleOfGriselbrand(UUID ownerId) {
         super(ownerId, 98, "Disciple of Griselbrand", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

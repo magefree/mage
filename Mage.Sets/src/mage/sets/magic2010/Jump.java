@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Jump extends CardImpl<Jump> {
+public class Jump extends CardImpl {
 
     public Jump(UUID ownerId) {
         super(ownerId, 59, "Jump", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

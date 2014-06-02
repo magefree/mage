@@ -39,7 +39,7 @@ import mage.filter.FilterPermanent;
  * @author cbt33
  */
  
-public class Upheaval extends CardImpl<Upheaval> {
+public class Upheaval extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("permanents");
 

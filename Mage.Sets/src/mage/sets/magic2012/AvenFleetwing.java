@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class AvenFleetwing extends CardImpl<AvenFleetwing> {
+public class AvenFleetwing extends CardImpl {
 
     public AvenFleetwing(UUID ownerId) {
         super(ownerId, 44, "Aven Fleetwing", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

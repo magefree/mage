@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author jeff
  */
-public class TimeStop extends CardImpl<TimeStop> {
+public class TimeStop extends CardImpl {
 
     public TimeStop(UUID ownerId) {
         super(ownerId, 117, "Time Stop", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");

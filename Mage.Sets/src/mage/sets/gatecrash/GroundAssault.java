@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GroundAssault extends CardImpl<GroundAssault> {
+public class GroundAssault extends CardImpl {
 
     public GroundAssault(UUID ownerId) {
         super(ownerId, 168, "Ground Assault", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}{G}");

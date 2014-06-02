@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class Faultgrinder extends CardImpl<Faultgrinder> {
+public class Faultgrinder extends CardImpl {
 
     public Faultgrinder(UUID ownerId) {
         super(ownerId, 122, "Faultgrinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{R}");

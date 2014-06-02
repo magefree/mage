@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class KaijinOfTheVanishingTouch extends CardImpl<KaijinOfTheVanishingTouch> {
+public class KaijinOfTheVanishingTouch extends CardImpl {
 
     public KaijinOfTheVanishingTouch(UUID ownerId) {
         super(ownerId, 39, "Kaijin of the Vanishing Touch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

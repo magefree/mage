@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class DeathGrasp extends CardImpl<DeathGrasp> {
+public class DeathGrasp extends CardImpl {
 
     public DeathGrasp (UUID ownerId) {
         super(ownerId, 95, "Death Grasp", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W}{B}");

@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class Vizzerdrix extends CardImpl<Vizzerdrix> {
+public class Vizzerdrix extends CardImpl {
 
     public Vizzerdrix(UUID ownerId) {
         super(ownerId, 110, "Vizzerdrix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}");

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Backfir3
  */
-public class PiousWarrior extends CardImpl<PiousWarrior> {
+public class PiousWarrior extends CardImpl {
 
     public PiousWarrior(UUID ownerId) {
         super(ownerId, 34, "Pious Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

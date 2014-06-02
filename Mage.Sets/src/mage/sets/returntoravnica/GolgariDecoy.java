@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GolgariDecoy extends CardImpl<GolgariDecoy> {
+public class GolgariDecoy extends CardImpl {
 
     public GolgariDecoy(UUID ownerId) {
         super(ownerId, 127, "Golgari Decoy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

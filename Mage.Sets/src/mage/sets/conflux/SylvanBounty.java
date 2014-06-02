@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class SylvanBounty extends CardImpl<SylvanBounty> {
+public class SylvanBounty extends CardImpl {
 
     public SylvanBounty(UUID ownerId) {
         super(ownerId, 94, "Sylvan Bounty", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{G}");

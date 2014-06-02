@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class MtendaHerder extends CardImpl<MtendaHerder> {
+public class MtendaHerder extends CardImpl {
 
     public MtendaHerder(UUID ownerId) {
         super(ownerId, 233, "Mtenda Herder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

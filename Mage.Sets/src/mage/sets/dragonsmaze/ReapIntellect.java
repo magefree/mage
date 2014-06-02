@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class ReapIntellect extends CardImpl<ReapIntellect> {
+public class ReapIntellect extends CardImpl {
 
     public ReapIntellect(UUID ownerId) {
         super(ownerId, 95, "Reap Intellect", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{2}{U}{B}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AcolytesReward extends CardImpl<AcolytesReward> {
+public class AcolytesReward extends CardImpl {
 
     public AcolytesReward(UUID ownerId) {
         super(ownerId, 1, "Acolyte's Reward", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

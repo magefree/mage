@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class CateranKidnappers extends CardImpl<CateranKidnappers> {
+public class CateranKidnappers extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary permanent card with converted mana cost 3 or less");
 

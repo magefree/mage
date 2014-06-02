@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class EternitySnare extends CardImpl<EternitySnare> {
+public class EternitySnare extends CardImpl {
 
     public EternitySnare(UUID ownerId) {
         super(ownerId, 61, "Eternity Snare", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");

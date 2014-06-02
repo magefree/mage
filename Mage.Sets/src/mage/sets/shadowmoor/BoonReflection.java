@@ -42,7 +42,7 @@ import mage.game.events.GameEvent;
  * @author jeffwadsworth
  *
  */
-public class BoonReflection extends CardImpl<BoonReflection> {
+public class BoonReflection extends CardImpl {
 
     public BoonReflection(UUID ownerId) {
         super(ownerId, 5, "Boon Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");

@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 *
 * @author LevelX2
 */
-public class MasterBiomancer extends CardImpl<MasterBiomancer> {
+public class MasterBiomancer extends CardImpl {
 
     public MasterBiomancer(UUID ownerId) {
        super(ownerId, 176, "Master Biomancer", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");

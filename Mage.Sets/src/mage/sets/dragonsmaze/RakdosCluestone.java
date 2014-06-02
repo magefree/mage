@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class RakdosCluestone extends CardImpl<RakdosCluestone> {
+public class RakdosCluestone extends CardImpl {
 
     public RakdosCluestone(UUID ownerId) {
         super(ownerId, 143, "Rakdos Cluestone", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

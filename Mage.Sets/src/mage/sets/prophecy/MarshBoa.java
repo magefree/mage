@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MarshBoa extends CardImpl<MarshBoa> {
+public class MarshBoa extends CardImpl {
 
     public MarshBoa(UUID ownerId) {
         super(ownerId, 118, "Marsh Boa", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

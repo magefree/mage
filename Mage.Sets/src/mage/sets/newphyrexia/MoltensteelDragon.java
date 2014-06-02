@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MoltensteelDragon extends CardImpl<MoltensteelDragon> {
+public class MoltensteelDragon extends CardImpl {
 
     public MoltensteelDragon(UUID ownerId) {
         super(ownerId, 88, "Moltensteel Dragon", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{RP}{RP}");

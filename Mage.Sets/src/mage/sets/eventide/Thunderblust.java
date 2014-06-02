@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class Thunderblust extends CardImpl<Thunderblust> {
+public class Thunderblust extends CardImpl {
     
     private String rule = "Thunderblust has trample as long as it has a -1/-1 counter on it";
 

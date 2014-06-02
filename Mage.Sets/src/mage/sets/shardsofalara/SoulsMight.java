@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SoulsMight extends CardImpl<SoulsMight> {
+public class SoulsMight extends CardImpl {
 
     public SoulsMight(UUID ownerId) {
         super(ownerId, 149, "Soul's Might", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");

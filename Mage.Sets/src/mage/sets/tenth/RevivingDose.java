@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class RevivingDose extends CardImpl<RevivingDose> {
+public class RevivingDose extends CardImpl {
 
     public RevivingDose(UUID ownerId) {
         super(ownerId, 34, "Reviving Dose", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

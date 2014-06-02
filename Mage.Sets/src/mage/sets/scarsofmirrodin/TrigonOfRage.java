@@ -54,7 +54,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 /**
  * @author Loki
  */
-public class TrigonOfRage extends CardImpl<TrigonOfRage> {
+public class TrigonOfRage extends CardImpl {
 
     public TrigonOfRage(UUID ownerId) {
         super(ownerId, 216, "Trigon of Rage", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MistralCharger extends CardImpl<MistralCharger> {
+public class MistralCharger extends CardImpl {
 
     public MistralCharger(UUID ownerId) {
         super(ownerId, 13, "Mistral Charger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

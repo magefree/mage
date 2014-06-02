@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class NaturesClaim extends CardImpl<NaturesClaim> {
+public class NaturesClaim extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {

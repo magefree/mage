@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class ProtomatterPowder extends CardImpl<ProtomatterPowder> {
+public class ProtomatterPowder extends CardImpl {
 
     public ProtomatterPowder(UUID ownerId) {
         super(ownerId, 53, "Protomatter Powder", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}{U}");

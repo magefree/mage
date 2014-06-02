@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PyroclastConsul extends CardImpl<PyroclastConsul> {
+public class PyroclastConsul extends CardImpl {
 
     public PyroclastConsul(UUID ownerId) {
         super(ownerId, 96, "Pyroclast Consul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

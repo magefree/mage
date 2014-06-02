@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ForcedAdaptation extends CardImpl<ForcedAdaptation> {
+public class ForcedAdaptation extends CardImpl {
 
     public ForcedAdaptation(UUID ownerId) {
         super(ownerId, 120, "Forced Adaptation", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Hundroog extends CardImpl<Hundroog> {
+public class Hundroog extends CardImpl {
 
     public Hundroog(UUID ownerId) {
         super(ownerId, 129, "Hundroog", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");

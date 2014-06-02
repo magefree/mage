@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
  *
  * @author Loki
  */
-public class DrogskolReaver extends CardImpl<DrogskolReaver> {
+public class DrogskolReaver extends CardImpl {
 
     public DrogskolReaver(UUID ownerId) {
         super(ownerId, 137, "Drogskol Reaver", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{W}{U}");

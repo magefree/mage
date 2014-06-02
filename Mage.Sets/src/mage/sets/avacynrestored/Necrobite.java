@@ -43,7 +43,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class Necrobite extends CardImpl<Necrobite> {
+public class Necrobite extends CardImpl {
 
     public Necrobite(UUID ownerId) {
         super(ownerId, 115, "Necrobite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

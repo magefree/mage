@@ -47,7 +47,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class SpiritAway extends CardImpl<SpiritAway> {
+public class SpiritAway extends CardImpl {
 
     public SpiritAway(UUID ownerId) {
         super(ownerId, 76, "Spirit Away", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TragicSlip extends CardImpl<TragicSlip> {
+public class TragicSlip extends CardImpl {
 
     public TragicSlip(UUID ownerId) {
         super(ownerId, 76, "Tragic Slip", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

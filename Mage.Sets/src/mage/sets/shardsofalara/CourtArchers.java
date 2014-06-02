@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CourtArchers extends CardImpl<CourtArchers> {
+public class CourtArchers extends CardImpl {
 
     public CourtArchers (UUID ownerId) {
         super(ownerId, 126, "Court Archers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MerrowLevitator extends CardImpl<MerrowLevitator> {
+public class MerrowLevitator extends CardImpl {
 
 
     private static final FilterSpell filterBlueSpell = new FilterSpell("a blue spell");

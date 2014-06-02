@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class Gnathosaur extends CardImpl<Gnathosaur> {
+public class Gnathosaur extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 

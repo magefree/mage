@@ -43,7 +43,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Quercitron
  */
-public class DAvenantArcher extends CardImpl<DAvenantArcher> {
+public class DAvenantArcher extends CardImpl {
 
     public DAvenantArcher(UUID ownerId) {
         super(ownerId, 299, "D'Avenant Archer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

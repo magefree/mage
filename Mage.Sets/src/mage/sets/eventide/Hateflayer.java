@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class Hateflayer extends CardImpl<Hateflayer> {
+public class Hateflayer extends CardImpl {
 
     public Hateflayer(UUID ownerId) {
         super(ownerId, 55, "Hateflayer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

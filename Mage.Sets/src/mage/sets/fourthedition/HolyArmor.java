@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class HolyArmor extends CardImpl<HolyArmor> {
+public class HolyArmor extends CardImpl {
 
     public HolyArmor(UUID ownerId) {
         super(ownerId, 279, "Holy Armor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

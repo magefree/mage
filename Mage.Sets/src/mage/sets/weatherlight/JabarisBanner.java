@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class JabarisBanner extends CardImpl<JabarisBanner> {
+public class JabarisBanner extends CardImpl {
 
     public JabarisBanner(UUID ownerId) {
         super(ownerId, 150, "Jabari's Banner", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

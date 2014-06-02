@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class GoblinElectromancer extends CardImpl<GoblinElectromancer> {
+public class GoblinElectromancer extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Instant and sorcery spells");
     static {

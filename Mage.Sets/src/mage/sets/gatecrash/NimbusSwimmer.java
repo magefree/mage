@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class NimbusSwimmer extends CardImpl<NimbusSwimmer> {
+public class NimbusSwimmer extends CardImpl {
 
     public NimbusSwimmer(UUID ownerId) {
         super(ownerId, 181, "Nimbus Swimmer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{X}{G}{U}");

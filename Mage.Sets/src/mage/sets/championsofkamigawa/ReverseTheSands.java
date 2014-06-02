@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ReverseTheSands extends CardImpl<ReverseTheSands> {
+public class ReverseTheSands extends CardImpl {
 
     public ReverseTheSands(UUID ownerId) {
         super(ownerId, 41, "Reverse the Sands", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{W}{W}");

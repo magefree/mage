@@ -50,7 +50,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author LevelX2
  */
-public class DustBowl extends CardImpl<DustBowl> {
+public class DustBowl extends CardImpl {
             
     public DustBowl(UUID ownerId) {
         super(ownerId, 316, "Dust Bowl", Rarity.RARE, new CardType[]{CardType.LAND}, "");

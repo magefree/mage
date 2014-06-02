@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ManaforceMace extends CardImpl<ManaforceMace> {
+public class ManaforceMace extends CardImpl {
 
     public ManaforceMace(UUID ownerId) {
         super(ownerId, 139, "Manaforce Mace", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -49,7 +49,7 @@ import mage.game.permanent.token.MyrToken;
  *
  * @author Loki
  */
-public class MyrMatrix extends CardImpl<MyrMatrix> {
+public class MyrMatrix extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr");
 

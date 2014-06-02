@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class MoonSprite extends CardImpl<MoonSprite> {
+public class MoonSprite extends CardImpl {
 
     public MoonSprite(UUID ownerId) {
         super(ownerId, 100, "Moon Sprite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

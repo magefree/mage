@@ -43,7 +43,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author North
  */
-public class FulminatorMage extends CardImpl<FulminatorMage> {
+public class FulminatorMage extends CardImpl {
 
     public FulminatorMage(UUID ownerId) {
         super(ownerId, 188, "Fulminator Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B/R}{B/R}");

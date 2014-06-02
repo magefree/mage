@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MoriokReplica extends CardImpl<MoriokReplica> {
+public class MoriokReplica extends CardImpl {
 
     public MoriokReplica (UUID ownerId) {
         super(ownerId, 178, "Moriok Replica", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

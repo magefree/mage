@@ -46,7 +46,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class CourtHussar extends CardImpl<CourtHussar> {
+public class CourtHussar extends CardImpl {
 
     public CourtHussar(UUID ownerId) {
         super(ownerId, 43, "Court Hussar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KnightlyValor extends CardImpl<KnightlyValor> {
+public class KnightlyValor extends CardImpl {
 
     public KnightlyValor (UUID ownerId) {
         super(ownerId, 13, "Knightly Valor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");

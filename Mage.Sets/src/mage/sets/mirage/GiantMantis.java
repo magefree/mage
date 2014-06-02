@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GiantMantis extends CardImpl<GiantMantis> {
+public class GiantMantis extends CardImpl {
 
     public GiantMantis(UUID ownerId) {
         super(ownerId, 116, "Giant Mantis", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

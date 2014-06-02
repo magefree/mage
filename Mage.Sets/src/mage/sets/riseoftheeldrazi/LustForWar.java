@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class LustForWar extends CardImpl<LustForWar> {
+public class LustForWar extends CardImpl {
 
     public LustForWar(UUID ownerId) {
         super(ownerId, 157, "Lust for War", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

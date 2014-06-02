@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FistsOfTheAnvil extends CardImpl<FistsOfTheAnvil> {
+public class FistsOfTheAnvil extends CardImpl {
 
     public FistsOfTheAnvil(UUID ownerId) {
         super(ownerId, 201, "Fists of the Anvil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

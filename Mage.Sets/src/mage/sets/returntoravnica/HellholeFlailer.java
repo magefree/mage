@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class HellholeFlailer extends CardImpl<HellholeFlailer> {
+public class HellholeFlailer extends CardImpl {
  
     public HellholeFlailer(UUID ownerId) {
         super(ownerId, 167, "Hellhole Flailer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");

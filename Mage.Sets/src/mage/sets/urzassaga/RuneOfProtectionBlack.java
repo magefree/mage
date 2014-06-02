@@ -47,7 +47,7 @@ import mage.target.TargetSource;
  *
  * @author Backfir3
  */
-public class RuneOfProtectionBlack extends CardImpl<RuneOfProtectionBlack> {
+public class RuneOfProtectionBlack extends CardImpl {
 
     public RuneOfProtectionBlack(UUID ownerId) {
         super(ownerId, 36, "Rune of Protection: Black", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

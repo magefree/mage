@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward
  */
-public class CurseOfTheNightlyHunt extends CardImpl<CurseOfTheNightlyHunt> {
+public class CurseOfTheNightlyHunt extends CardImpl {
 
     public CurseOfTheNightlyHunt(UUID ownerId) {
         super(ownerId, 137, "Curse of the Nightly Hunt", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

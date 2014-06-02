@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class MagisterSphinx extends CardImpl<MagisterSphinx> {
+public class MagisterSphinx extends CardImpl {
 
     public MagisterSphinx(UUID ownerId) {
         super(ownerId, 116, "Magister Sphinx", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}{U}{B}");

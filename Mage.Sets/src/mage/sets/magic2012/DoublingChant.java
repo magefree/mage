@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author North
  */
-public class DoublingChant extends CardImpl<DoublingChant> {
+public class DoublingChant extends CardImpl {
 
     public DoublingChant(UUID ownerId) {
         super(ownerId, 170, "Doubling Chant", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}");

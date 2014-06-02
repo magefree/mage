@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class Anaconda extends CardImpl<Anaconda> {
+public class Anaconda extends CardImpl {
 
     public Anaconda (UUID ownerId) {
         super(ownerId, 232, "Anaconda", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

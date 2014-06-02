@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class JushiApprentice extends CardImpl<JushiApprentice> {
+public class JushiApprentice extends CardImpl {
 
     public JushiApprentice(UUID ownerId) {
         super(ownerId, 70, "Jushi Apprentice", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");

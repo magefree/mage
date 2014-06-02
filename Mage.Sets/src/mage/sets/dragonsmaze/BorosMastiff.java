@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class BorosMastiff extends CardImpl<BorosMastiff> {
+public class BorosMastiff extends CardImpl {
 
     public BorosMastiff (UUID ownerId) {
         super(ownerId, 1, "Boros Mastiff", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

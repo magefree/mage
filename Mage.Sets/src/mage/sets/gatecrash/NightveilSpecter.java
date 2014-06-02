@@ -62,7 +62,7 @@ import mage.util.CardUtil;
 *
 * @author LevelX2
 */
-public class NightveilSpecter extends CardImpl<NightveilSpecter> {
+public class NightveilSpecter extends CardImpl {
 
     public NightveilSpecter(UUID ownerId) {
       super(ownerId, 222, "Nightveil Specter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}{U/B}");

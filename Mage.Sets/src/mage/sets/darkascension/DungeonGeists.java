@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class DungeonGeists extends CardImpl<DungeonGeists> {
+public class DungeonGeists extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

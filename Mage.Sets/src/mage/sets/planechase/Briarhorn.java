@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Briarhorn extends CardImpl<Briarhorn> {
+public class Briarhorn extends CardImpl {
 
     public Briarhorn(UUID ownerId) {
         super(ownerId, 69, "Briarhorn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

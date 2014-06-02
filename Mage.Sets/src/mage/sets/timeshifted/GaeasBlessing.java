@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class GaeasBlessing extends CardImpl<GaeasBlessing> {
+public class GaeasBlessing extends CardImpl {
 
     public GaeasBlessing(UUID ownerId) {
         super(ownerId, 77, "Gaea's Blessing", Rarity.SPECIAL, new CardType[]{CardType.SORCERY}, "{1}{G}");

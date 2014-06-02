@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class StalkingTiger extends CardImpl<StalkingTiger> {
+public class StalkingTiger extends CardImpl {
 
     public StalkingTiger(UUID ownerId) {
         super(ownerId, 299, "Stalking Tiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

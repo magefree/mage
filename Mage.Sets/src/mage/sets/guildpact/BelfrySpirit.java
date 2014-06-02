@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class BelfrySpirit extends CardImpl<BelfrySpirit> {
+public class BelfrySpirit extends CardImpl {
 
     public BelfrySpirit(UUID ownerId) {
         super(ownerId, 2, "Belfry Spirit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

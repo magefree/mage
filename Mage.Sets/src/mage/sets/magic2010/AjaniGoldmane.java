@@ -61,7 +61,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AjaniGoldmane extends CardImpl<AjaniGoldmane> {
+public class AjaniGoldmane extends CardImpl {
 
     public AjaniGoldmane(UUID ownerId) {
         super(ownerId, 1, "Ajani Goldmane", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");

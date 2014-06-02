@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class CloutOfTheDominus extends CardImpl<CloutOfTheDominus> {
+public class CloutOfTheDominus extends CardImpl {
 
     public CloutOfTheDominus(UUID ownerId) {
         super(ownerId, 99, "Clout of the Dominus", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U/R}");

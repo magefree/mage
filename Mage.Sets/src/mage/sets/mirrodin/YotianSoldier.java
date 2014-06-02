@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class YotianSoldier extends CardImpl<YotianSoldier> {
+public class YotianSoldier extends CardImpl {
 
     public YotianSoldier(UUID ownerId) {
         super(ownerId, 277, "Yotian Soldier", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

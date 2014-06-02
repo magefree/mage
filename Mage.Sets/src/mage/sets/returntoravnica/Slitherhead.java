@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class Slitherhead extends CardImpl<Slitherhead> {
+public class Slitherhead extends CardImpl {
 
     public Slitherhead(UUID ownerId) {
         super(ownerId, 222, "Slitherhead", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B/G}");

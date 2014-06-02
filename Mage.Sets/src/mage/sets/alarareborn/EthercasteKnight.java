@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class EthercasteKnight extends CardImpl<EthercasteKnight> {
+public class EthercasteKnight extends CardImpl {
 
     public EthercasteKnight (UUID ownerId) {
         super(ownerId, 3, "Ethercaste Knight", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}");

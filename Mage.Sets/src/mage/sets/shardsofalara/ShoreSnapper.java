@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ShoreSnapper extends CardImpl<ShoreSnapper> {
+public class ShoreSnapper extends CardImpl {
 
     public ShoreSnapper(UUID ownerId) {
         super(ownerId, 87, "Shore Snapper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

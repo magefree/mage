@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class StreetSweeper extends CardImpl<StreetSweeper> {
+public class StreetSweeper extends CardImpl {
  
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures with defender you control");
  

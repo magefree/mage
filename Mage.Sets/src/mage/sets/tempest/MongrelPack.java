@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author North
  */
-public class MongrelPack extends CardImpl<MongrelPack> {
+public class MongrelPack extends CardImpl {
 
     public MongrelPack(UUID ownerId) {
         super(ownerId, 131, "Mongrel Pack", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class SadisticSacrament extends CardImpl<SadisticSacrament> {
+public class SadisticSacrament extends CardImpl {
 
     private static final String ruleText = "Search target player's library for up to three cards, exile them, then that player shuffles his or her library. If {this} was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles his or her library";
 

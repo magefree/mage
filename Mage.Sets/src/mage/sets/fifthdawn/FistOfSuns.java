@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class FistOfSuns extends CardImpl<FistOfSuns> {
+public class FistOfSuns extends CardImpl {
 
     public FistOfSuns(UUID ownerId) {
         super(ownerId, 123, "Fist of Suns", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

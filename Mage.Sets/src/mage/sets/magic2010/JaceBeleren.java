@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JaceBeleren extends CardImpl<JaceBeleren> {
+public class JaceBeleren extends CardImpl {
 
     public JaceBeleren(UUID ownerId) {
         super(ownerId, 58, "Jace Beleren", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SpectralRider extends CardImpl<SpectralRider> {
+public class SpectralRider extends CardImpl {
 
     public SpectralRider(UUID ownerId) {
         super(ownerId, 35, "Spectral Rider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class DoorToNothingness extends CardImpl<DoorToNothingness> {
+public class DoorToNothingness extends CardImpl {
 
     public DoorToNothingness(UUID ownerId) {
         super(ownerId, 112, "Door to Nothingness", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

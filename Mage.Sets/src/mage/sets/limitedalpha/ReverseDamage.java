@@ -44,7 +44,7 @@ import mage.target.TargetSource;
  *
  * @author Quercitron
  */
-public class ReverseDamage extends CardImpl<ReverseDamage> {
+public class ReverseDamage extends CardImpl {
 
     public ReverseDamage(UUID ownerId) {
         super(ownerId, 219, "Reverse Damage", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");

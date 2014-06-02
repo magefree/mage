@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GustSkimmer extends CardImpl<GustSkimmer> {
+public class GustSkimmer extends CardImpl {
 
     public GustSkimmer (UUID ownerId) {
         super(ownerId, 108, "Gust-Skimmer", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

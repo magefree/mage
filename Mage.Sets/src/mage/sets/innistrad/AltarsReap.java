@@ -39,7 +39,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class AltarsReap extends CardImpl<AltarsReap> {
+public class AltarsReap extends CardImpl {
 
     public AltarsReap(UUID ownerId) {
         super(ownerId, 86, "Altar's Reap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class OboroPalaceInTheClouds extends CardImpl<OboroPalaceInTheClouds> {
+public class OboroPalaceInTheClouds extends CardImpl {
 
     public OboroPalaceInTheClouds(UUID ownerId) {
         super(ownerId, 164, "Oboro, Palace in the Clouds", Rarity.RARE, new CardType[]{CardType.LAND}, "");

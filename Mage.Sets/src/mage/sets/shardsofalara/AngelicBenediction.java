@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class AngelicBenediction extends CardImpl<AngelicBenediction> {
+public class AngelicBenediction extends CardImpl {
 
     public AngelicBenediction(UUID ownerId) {
         super(ownerId, 3, "Angelic Benediction", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

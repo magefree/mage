@@ -53,7 +53,7 @@ import mage.players.Player;
  * @author noxx
 
  */
-public class DescendantsPath extends CardImpl<DescendantsPath> {
+public class DescendantsPath extends CardImpl {
 
     public DescendantsPath(UUID ownerId) {
         super(ownerId, 173, "Descendants' Path", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

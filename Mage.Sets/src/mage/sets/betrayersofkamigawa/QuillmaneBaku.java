@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX2
  */
-public class QuillmaneBaku extends CardImpl<QuillmaneBaku> {
+public class QuillmaneBaku extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

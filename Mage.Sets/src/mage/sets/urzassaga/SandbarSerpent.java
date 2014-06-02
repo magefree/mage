@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SandbarSerpent extends CardImpl<SandbarSerpent> {
+public class SandbarSerpent extends CardImpl {
 
     public SandbarSerpent(UUID ownerId) {
         super(ownerId, 95, "Sandbar Serpent", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

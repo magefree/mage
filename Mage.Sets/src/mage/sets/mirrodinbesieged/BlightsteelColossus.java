@@ -51,7 +51,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class BlightsteelColossus extends CardImpl<BlightsteelColossus> {
+public class BlightsteelColossus extends CardImpl {
 
     public BlightsteelColossus(UUID ownerId) {
         super(ownerId, 99, "Blightsteel Colossus", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{12}");

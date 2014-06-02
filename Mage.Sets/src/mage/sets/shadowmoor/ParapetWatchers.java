@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ParapetWatchers extends CardImpl<ParapetWatchers> {
+public class ParapetWatchers extends CardImpl {
 
     public ParapetWatchers(UUID ownerId) {
         super(ownerId, 45, "Parapet Watchers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

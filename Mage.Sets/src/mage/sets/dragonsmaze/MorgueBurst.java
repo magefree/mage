@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class MorgueBurst extends CardImpl<MorgueBurst> {
+public class MorgueBurst extends CardImpl {
 
     public MorgueBurst(UUID ownerId) {
         super(ownerId, 86, "Morgue Burst", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{R}");

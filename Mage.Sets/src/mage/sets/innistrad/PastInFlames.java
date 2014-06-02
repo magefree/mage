@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class PastInFlames extends CardImpl<PastInFlames> {
+public class PastInFlames extends CardImpl {
 
     public PastInFlames(UUID ownerId) {
         super(ownerId, 155, "Past in Flames", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{R}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jonubuu
  */
-public class WitheredWretch extends CardImpl<WitheredWretch> {
+public class WitheredWretch extends CardImpl {
 
     public WitheredWretch(UUID ownerId) {
         super(ownerId, 45, "Withered Wretch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");

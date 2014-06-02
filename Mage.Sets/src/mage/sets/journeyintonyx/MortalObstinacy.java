@@ -55,7 +55,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class MortalObstinacy extends CardImpl<MortalObstinacy> {
+public class MortalObstinacy extends CardImpl {
 
     public MortalObstinacy(UUID ownerId) {
         super(ownerId, 17, "Mortal Obstinacy", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

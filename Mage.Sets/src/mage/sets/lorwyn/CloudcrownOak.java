@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CloudcrownOak extends CardImpl<CloudcrownOak> {
+public class CloudcrownOak extends CardImpl {
 
     public CloudcrownOak(UUID ownerId) {
         super(ownerId, 201, "Cloudcrown Oak", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class ShamblingShell extends CardImpl<ShamblingShell> {
+public class ShamblingShell extends CardImpl {
 
     public ShamblingShell(UUID ownerId) {
         super(ownerId, 230, "Shambling Shell", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");

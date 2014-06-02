@@ -49,7 +49,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpireSerpent extends CardImpl<SpireSerpent> {
+public class SpireSerpent extends CardImpl {
 
     private static final String abilityText1 = "Metalcraft - As long as you control three or more artifacts, {this} gets +2/+2";
 

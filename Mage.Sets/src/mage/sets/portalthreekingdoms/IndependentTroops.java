@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class IndependentTroops extends CardImpl<IndependentTroops> {
+public class IndependentTroops extends CardImpl {
 
     public IndependentTroops(UUID ownerId) {
         super(ownerId, 114, "Independent Troops", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

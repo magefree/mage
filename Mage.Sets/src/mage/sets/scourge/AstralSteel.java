@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class AstralSteel extends CardImpl<AstralSteel> {
+public class AstralSteel extends CardImpl {
 
     public AstralSteel(UUID ownerId) {
         super(ownerId, 2, "Astral Steel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

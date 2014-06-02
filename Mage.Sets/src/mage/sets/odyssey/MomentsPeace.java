@@ -42,7 +42,7 @@ import mage.constants.TimingRule;
  *
  * @author Plopman
  */
-public class MomentsPeace extends CardImpl<MomentsPeace> {
+public class MomentsPeace extends CardImpl {
 
     public MomentsPeace(UUID ownerId) {
         super(ownerId, 251, "Moment's Peace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

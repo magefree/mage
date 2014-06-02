@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class ConsumingVapors extends CardImpl<ConsumingVapors> {
+public class ConsumingVapors extends CardImpl {
 
 
 

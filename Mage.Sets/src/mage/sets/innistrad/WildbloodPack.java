@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class WildbloodPack extends CardImpl<WildbloodPack> {
+public class WildbloodPack extends CardImpl {
 
     public WildbloodPack(UUID ownerId) {
         super(ownerId, 149, "Wildblood Pack", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");

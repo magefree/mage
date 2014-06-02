@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class KathariScreecher extends CardImpl<KathariScreecher> {
+public class KathariScreecher extends CardImpl {
 
     public KathariScreecher (UUID ownerId) {
         super(ownerId, 47, "Kathari Screecher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

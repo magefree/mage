@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GiantWarthog extends CardImpl<GiantWarthog> {
+public class GiantWarthog extends CardImpl {
 
     public GiantWarthog(UUID ownerId) {
         super(ownerId, 118, "Giant Warthog", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");

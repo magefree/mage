@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class EtheriumHornSorcerer extends CardImpl<EtheriumHornSorcerer> {
+public class EtheriumHornSorcerer extends CardImpl {
 
     public EtheriumHornSorcerer(UUID ownerId) {
         super(ownerId, 91, "Etherium-Horn Sorcerer", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}{R}");

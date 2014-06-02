@@ -50,7 +50,7 @@ import mage.players.Player;
 /**
  * @author LevelX2
  */
-public class Syncopate extends CardImpl<Syncopate> {
+public class Syncopate extends CardImpl {
 
     public Syncopate(UUID ownerId) {
         super(ownerId, 54, "Syncopate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");

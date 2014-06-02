@@ -44,7 +44,7 @@ import mage.players.Players;
  *
  * @author maurer.it_at_gmail.com
  */
-public class PulseTracker extends CardImpl<PulseTracker> {
+public class PulseTracker extends CardImpl {
 
     public PulseTracker(UUID ownerId) {
         super(ownerId, 62, "Pulse Tracker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

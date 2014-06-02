@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class MetathranZombie extends CardImpl<MetathranZombie> {
+public class MetathranZombie extends CardImpl {
 
     public MetathranZombie(UUID ownerId) {
         super(ownerId, 63, "Metathran Zombie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class Hydroform extends CardImpl<Hydroform> {
+public class Hydroform extends CardImpl {
 
     public Hydroform(UUID ownerId) {
         super(ownerId, 172, "Hydroform", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}{U}");

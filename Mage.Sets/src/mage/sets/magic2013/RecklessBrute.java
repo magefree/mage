@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RecklessBrute extends CardImpl<RecklessBrute> {
+public class RecklessBrute extends CardImpl {
 
     public RecklessBrute(UUID ownerId) {
         super(ownerId, 144, "Reckless Brute", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

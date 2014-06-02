@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class Grindclock extends CardImpl<Grindclock> {
+public class Grindclock extends CardImpl {
 
     public Grindclock (UUID ownerId) {
         super(ownerId, 163, "Grindclock", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

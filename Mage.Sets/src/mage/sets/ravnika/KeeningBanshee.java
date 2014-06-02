@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class KeeningBanshee extends CardImpl<KeeningBanshee> {
+public class KeeningBanshee extends CardImpl {
 
     public KeeningBanshee(UUID ownerId) {
         super(ownerId, 92, "Keening Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

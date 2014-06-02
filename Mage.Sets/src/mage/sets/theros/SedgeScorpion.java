@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SedgeScorpion extends CardImpl<SedgeScorpion> {
+public class SedgeScorpion extends CardImpl {
 
     public SedgeScorpion(UUID ownerId) {
         super(ownerId, 177, "Sedge Scorpion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

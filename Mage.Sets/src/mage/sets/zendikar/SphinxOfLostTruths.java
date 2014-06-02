@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class SphinxOfLostTruths extends CardImpl<SphinxOfLostTruths> {
+public class SphinxOfLostTruths extends CardImpl {
 
     public SphinxOfLostTruths(UUID ownerId) {
         super(ownerId, 69, "Sphinx of Lost Truths", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

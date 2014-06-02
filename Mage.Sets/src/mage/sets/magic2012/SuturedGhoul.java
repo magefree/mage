@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class SuturedGhoul extends CardImpl<SuturedGhoul> {
+public class SuturedGhoul extends CardImpl {
 
     private static final String staticText = "exile any number of creature cards from your graveyard";
     private static final String staticText2 = "Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness";

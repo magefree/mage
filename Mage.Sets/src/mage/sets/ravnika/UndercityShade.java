@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class UndercityShade extends CardImpl<UndercityShade> {
+public class UndercityShade extends CardImpl {
 
     public UndercityShade(UUID ownerId) {
         super(ownerId, 110, "Undercity Shade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

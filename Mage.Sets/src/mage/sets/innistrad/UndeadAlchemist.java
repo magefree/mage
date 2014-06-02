@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class UndeadAlchemist extends CardImpl<UndeadAlchemist> {
+public class UndeadAlchemist extends CardImpl {
 
     public UndeadAlchemist(UUID ownerId) {
         super(ownerId, 84, "Undead Alchemist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");

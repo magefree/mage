@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class KitsuneBlademaster extends CardImpl<KitsuneBlademaster> {
+public class KitsuneBlademaster extends CardImpl {
 
     public KitsuneBlademaster (UUID ownerId) {
         super(ownerId, 25, "Kitsune Blademaster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

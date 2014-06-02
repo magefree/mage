@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class ParanoidDelusions extends CardImpl<ParanoidDelusions> {
+public class ParanoidDelusions extends CardImpl {
 
     public ParanoidDelusions(UUID ownerId) {
         super(ownerId, 186, "Paranoid Delusions", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}{B}");

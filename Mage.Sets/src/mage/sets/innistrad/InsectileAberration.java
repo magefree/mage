@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Alvin
  */
-public class InsectileAberration extends CardImpl<InsectileAberration> {
+public class InsectileAberration extends CardImpl {
 
     public InsectileAberration(UUID ownerId) {
         super(ownerId, 1051, "Insectile Aberration", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");

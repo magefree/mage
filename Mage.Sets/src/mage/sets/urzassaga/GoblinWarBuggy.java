@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class GoblinWarBuggy extends CardImpl<GoblinWarBuggy>{
+public class GoblinWarBuggy extends CardImpl{
 
     public GoblinWarBuggy(UUID ownerId) {
         super(ownerId, 196, "Goblin War Buggy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class KnowledgeAndPower extends CardImpl<KnowledgeAndPower> {
+public class KnowledgeAndPower extends CardImpl {
 
     public KnowledgeAndPower(UUID ownerId) {
         super(ownerId, 101, "Knowledge and Power", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");

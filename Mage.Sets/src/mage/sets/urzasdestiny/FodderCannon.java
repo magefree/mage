@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class FodderCannon extends CardImpl<FodderCannon> {
+public class FodderCannon extends CardImpl {
 
     public FodderCannon(UUID ownerId) {
         super(ownerId, 131, "Fodder Cannon", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

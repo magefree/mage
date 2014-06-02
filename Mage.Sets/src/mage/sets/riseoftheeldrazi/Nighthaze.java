@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Nighthaze extends CardImpl<Nighthaze> {
+public class Nighthaze extends CardImpl {
 
     public Nighthaze (UUID ownerId) {
         super(ownerId, 118, "Nighthaze", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");

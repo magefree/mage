@@ -51,7 +51,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class LivewireLash extends CardImpl<LivewireLash> {
+public class LivewireLash extends CardImpl {
 
     public LivewireLash(UUID ownerId) {
         super(ownerId, 172, "Livewire Lash", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

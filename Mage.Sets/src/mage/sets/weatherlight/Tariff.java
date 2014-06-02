@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author Quercitron
  */
-public class Tariff extends CardImpl<Tariff> {
+public class Tariff extends CardImpl {
 
     public Tariff(UUID ownerId) {
         super(ownerId, 144, "Tariff", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}");

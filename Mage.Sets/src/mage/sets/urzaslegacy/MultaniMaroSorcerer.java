@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class MultaniMaroSorcerer extends CardImpl<MultaniMaroSorcerer> {
+public class MultaniMaroSorcerer extends CardImpl {
 
     public MultaniMaroSorcerer(UUID ownerId) {
         super(ownerId, 107, "Multani, Maro-Sorcerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

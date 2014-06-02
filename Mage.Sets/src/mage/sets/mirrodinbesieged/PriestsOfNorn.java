@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author ayratn
  */
-public class PriestsOfNorn extends CardImpl<PriestsOfNorn> {
+public class PriestsOfNorn extends CardImpl {
 
     public PriestsOfNorn (UUID ownerId) {
         super(ownerId, 16, "Priests of Norn", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

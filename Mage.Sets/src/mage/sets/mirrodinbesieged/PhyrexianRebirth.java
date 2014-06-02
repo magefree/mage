@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author ayratn
  */
-public class PhyrexianRebirth extends CardImpl<PhyrexianRebirth> {
+public class PhyrexianRebirth extends CardImpl {
 
     public PhyrexianRebirth (UUID ownerId) {
         super(ownerId, 15, "Phyrexian Rebirth", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");

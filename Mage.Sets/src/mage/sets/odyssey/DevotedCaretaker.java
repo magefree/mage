@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki (Ursapine), LevelX2 (Eight-and-a-Half Tails), cbt
  */
-public class DevotedCaretaker extends CardImpl<DevotedCaretaker> {
+public class DevotedCaretaker extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("instant spells and sorcery spells");
     

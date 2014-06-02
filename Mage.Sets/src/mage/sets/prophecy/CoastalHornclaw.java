@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class CoastalHornclaw extends CardImpl<CoastalHornclaw> {
+public class CoastalHornclaw extends CardImpl {
 
     
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");

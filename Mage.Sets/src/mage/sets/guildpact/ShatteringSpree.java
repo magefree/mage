@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ShatteringSpree extends CardImpl<ShatteringSpree> {
+public class ShatteringSpree extends CardImpl {
 
     public ShatteringSpree(UUID ownerId) {
         super(ownerId, 75, "Shattering Spree", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");

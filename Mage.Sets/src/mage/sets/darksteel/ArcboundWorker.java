@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 /**
  * @author LevelX2
  */
-public class ArcboundWorker extends CardImpl<ArcboundWorker> {
+public class ArcboundWorker extends CardImpl {
 
     public ArcboundWorker(UUID ownerId) {
         super(ownerId, 104, "Arcbound Worker", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

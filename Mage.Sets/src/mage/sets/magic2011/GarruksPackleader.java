@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GarruksPackleader extends CardImpl<GarruksPackleader> {
+public class GarruksPackleader extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature with power 3 or greater");
     static {

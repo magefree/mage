@@ -40,7 +40,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author LevelX2
  */
-public class SellerOfSongbirds extends CardImpl<SellerOfSongbirds> {
+public class SellerOfSongbirds extends CardImpl {
 
     public SellerOfSongbirds(UUID ownerId) {
         super(ownerId, 22, "Seller of Songbirds", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

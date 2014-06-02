@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class WhiptailWurm extends CardImpl<WhiptailWurm> {
+public class WhiptailWurm extends CardImpl {
 
     public WhiptailWurm(UUID ownerId) {
         super(ownerId, 118, "Whiptail Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");

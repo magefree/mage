@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class SalvageScout extends CardImpl<SalvageScout> {
+public class SalvageScout extends CardImpl {
 
     public SalvageScout(UUID ownerId) {
         super(ownerId, 19, "Salvage Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

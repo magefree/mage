@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class DetentionSphere extends CardImpl<DetentionSphere> {
+public class DetentionSphere extends CardImpl {
 
     static final protected FilterPermanent filter = new FilterNonlandPermanent("nonland permanent not named Detention Sphere");
     static {

@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author jeffwadsworth
  */
-public class ShorelineSalvager extends CardImpl<ShorelineSalvager> {
+public class ShorelineSalvager extends CardImpl {
 
     private static final String rule = "Whenever Shoreline Salvager deals combat damage to a player, if you control an Island, you may draw a card.";
     private static final FilterPermanent filter = new FilterPermanent("Island");

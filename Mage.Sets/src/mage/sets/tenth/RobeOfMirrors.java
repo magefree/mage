@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class RobeOfMirrors extends CardImpl<RobeOfMirrors> {
+public class RobeOfMirrors extends CardImpl {
 
     public RobeOfMirrors(UUID ownerId) {
         super(ownerId, 101, "Robe of Mirrors", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

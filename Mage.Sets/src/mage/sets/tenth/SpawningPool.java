@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class SpawningPool extends CardImpl<SpawningPool> {
+public class SpawningPool extends CardImpl {
 
     public SpawningPool(UUID ownerId) {
         super(ownerId, 358, "Spawning Pool", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

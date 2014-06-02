@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SeedcradleWitch extends CardImpl<SeedcradleWitch> {
+public class SeedcradleWitch extends CardImpl {
 
     public SeedcradleWitch(UUID ownerId) {
         super(ownerId, 241, "Seedcradle Witch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G/W}");

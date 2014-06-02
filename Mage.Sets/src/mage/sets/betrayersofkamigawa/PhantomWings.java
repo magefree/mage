@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PhantomWings extends CardImpl<PhantomWings> {
+public class PhantomWings extends CardImpl {
 
     public PhantomWings(UUID ownerId) {
         super(ownerId, 46, "Phantom Wings", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

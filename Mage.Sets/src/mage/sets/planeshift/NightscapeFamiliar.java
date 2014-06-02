@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class NightscapeFamiliar extends CardImpl<NightscapeFamiliar> {
+public class NightscapeFamiliar extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Blue spells and red spells");
 

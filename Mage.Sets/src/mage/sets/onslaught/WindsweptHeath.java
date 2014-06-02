@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class WindsweptHeath extends CardImpl<WindsweptHeath> {
+public class WindsweptHeath extends CardImpl {
 
     public WindsweptHeath(UUID ownerId) {
         super(ownerId, 328, "Windswept Heath", Rarity.RARE, new CardType[]{CardType.LAND}, "");

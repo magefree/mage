@@ -44,7 +44,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class SyggRiverCutthroat extends CardImpl<SyggRiverCutthroat> {
+public class SyggRiverCutthroat extends CardImpl {
 
     public SyggRiverCutthroat(UUID ownerId) {
         super(ownerId, 176, "Sygg, River Cutthroat", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}");

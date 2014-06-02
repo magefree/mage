@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class Hibernation extends CardImpl<Hibernation> {
+public class Hibernation extends CardImpl {
 
     public Hibernation(UUID ownerId) {
         super(ownerId, 79, "Hibernation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jonubuu
  */
-public class CabalTherapy extends CardImpl<CabalTherapy> {
+public class CabalTherapy extends CardImpl {
 
     public CabalTherapy(UUID ownerId) {
         super(ownerId, 62, "Cabal Therapy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");

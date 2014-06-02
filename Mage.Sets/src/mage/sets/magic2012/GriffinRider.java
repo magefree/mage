@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author nantuko
  */
-public class GriffinRider extends CardImpl<GriffinRider> {
+public class GriffinRider extends CardImpl {
 
     private static final String rule1 = "As long as you control a Griffin creature, {this} gets +3/+3.";
     private static final String rule2 = "As long as you control a Griffin creature, {this} has flying.";

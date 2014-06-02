@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class NayaBattlemage extends CardImpl<NayaBattlemage> {
+public class NayaBattlemage extends CardImpl {
 
     public NayaBattlemage (UUID ownerId) {
         super(ownerId, 142, "Naya Battlemage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

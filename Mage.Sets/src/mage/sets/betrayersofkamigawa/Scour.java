@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Scour extends CardImpl<Scour> {
+public class Scour extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {

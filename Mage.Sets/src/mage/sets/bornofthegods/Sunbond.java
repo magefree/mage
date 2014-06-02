@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Sunbond extends CardImpl<Sunbond> {
+public class Sunbond extends CardImpl {
 
     public Sunbond(UUID ownerId) {
         super(ownerId, 28, "Sunbond", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

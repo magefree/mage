@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Vacuumelt extends CardImpl<Vacuumelt> {
+public class Vacuumelt extends CardImpl {
 
     public Vacuumelt(UUID ownerId) {
         super(ownerId, 40, "Vacuumelt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");

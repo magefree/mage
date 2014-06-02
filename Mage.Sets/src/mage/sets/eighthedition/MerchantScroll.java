@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class MerchantScroll extends CardImpl<MerchantScroll> {
+public class MerchantScroll extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("blue instant card");
 

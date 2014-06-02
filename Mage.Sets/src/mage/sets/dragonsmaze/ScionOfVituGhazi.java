@@ -49,7 +49,7 @@ import mage.watchers.common.CastFromHandWatcher;
  */
 
 
-public class ScionOfVituGhazi extends CardImpl<ScionOfVituGhazi> {
+public class ScionOfVituGhazi extends CardImpl {
 
     public ScionOfVituGhazi (UUID ownerId) {
         super(ownerId, 7, "Scion of Vitu-Ghazi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

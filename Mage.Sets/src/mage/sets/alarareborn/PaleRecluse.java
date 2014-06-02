@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class PaleRecluse extends CardImpl<PaleRecluse> {
+public class PaleRecluse extends CardImpl {
 
     public PaleRecluse(UUID ownerId) {
         super(ownerId, 74, "Pale Recluse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");

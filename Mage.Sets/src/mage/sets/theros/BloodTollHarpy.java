@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class BloodTollHarpy extends CardImpl<BloodTollHarpy> {
+public class BloodTollHarpy extends CardImpl {
 
     public BloodTollHarpy(UUID ownerId) {
         super(ownerId, 79, "Blood-Toll Harpy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

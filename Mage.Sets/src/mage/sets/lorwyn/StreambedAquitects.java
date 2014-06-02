@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class StreambedAquitects extends CardImpl<StreambedAquitects> {
+public class StreambedAquitects extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk creature");
     static {

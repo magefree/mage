@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class TakenoSamuraiGeneral extends CardImpl<TakenoSamuraiGeneral> {
+public class TakenoSamuraiGeneral extends CardImpl {
 
     public TakenoSamuraiGeneral(UUID ownerId) {
         super(ownerId, 46, "Takeno, Samurai General", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}");

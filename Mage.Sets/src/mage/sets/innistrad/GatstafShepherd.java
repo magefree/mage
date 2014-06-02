@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class GatstafShepherd extends CardImpl<GatstafShepherd> {
+public class GatstafShepherd extends CardImpl {
 
     public GatstafShepherd(UUID ownerId) {
         super(ownerId, 182, "Gatstaf Shepherd", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

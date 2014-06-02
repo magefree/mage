@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author Loki
  */
-public class NuisanceEngine extends CardImpl<NuisanceEngine> {
+public class NuisanceEngine extends CardImpl {
 
     public NuisanceEngine(UUID ownerId) {
         super(ownerId, 121, "Nuisance Engine", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

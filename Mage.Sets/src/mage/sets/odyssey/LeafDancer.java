@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LeafDancer extends CardImpl<LeafDancer> {
+public class LeafDancer extends CardImpl {
 
     public LeafDancer(UUID ownerId) {
         super(ownerId, 249, "Leaf Dancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SoldierReplica extends CardImpl<SoldierReplica> {
+public class SoldierReplica extends CardImpl {
 
     public SoldierReplica(UUID ownerId) {
         super(ownerId, 244, "Soldier Replica", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

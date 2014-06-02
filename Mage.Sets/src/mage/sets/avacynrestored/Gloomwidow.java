@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class Gloomwidow extends CardImpl<Gloomwidow> {
+public class Gloomwidow extends CardImpl {
 
     public Gloomwidow(UUID ownerId) {
         super(ownerId, 180, "Gloomwidow", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

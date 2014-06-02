@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EtherealArmor extends CardImpl<EtherealArmor> {
+public class EtherealArmor extends CardImpl {
 
     private static final FilterEnchantment filter = new FilterEnchantment("enchantment you control");
 

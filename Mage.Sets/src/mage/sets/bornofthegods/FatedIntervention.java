@@ -41,7 +41,7 @@ import mage.sets.bornofthegods.TokenAndCounters.CentaurEnchantmentCreatureToken;
  *
  * @author LevelX2
  */
-public class FatedIntervention extends CardImpl<FatedIntervention> {
+public class FatedIntervention extends CardImpl {
 
     public FatedIntervention(UUID ownerId) {
         super(ownerId, 121, "Fated Intervention", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}{G}{G}");

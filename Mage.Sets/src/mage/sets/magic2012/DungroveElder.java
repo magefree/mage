@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class DungroveElder extends CardImpl<DungroveElder> {
+public class DungroveElder extends CardImpl {
 
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 

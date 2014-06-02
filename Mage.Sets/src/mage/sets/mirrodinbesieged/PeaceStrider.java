@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class PeaceStrider extends CardImpl<PeaceStrider> {
+public class PeaceStrider extends CardImpl {
 
     public PeaceStrider (UUID ownerId) {
         super(ownerId, 119, "Peace Strider", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

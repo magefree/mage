@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class GibberingKami extends CardImpl<GibberingKami> {
+public class GibberingKami extends CardImpl {
 
     public GibberingKami(UUID ownerId) {
         super(ownerId, 112, "Gibbering Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

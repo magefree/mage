@@ -48,7 +48,7 @@ import mage.watchers.Watcher;
 /**
  * @author nantuko
  */
-public class CivilizedScholar extends CardImpl<CivilizedScholar> {
+public class CivilizedScholar extends CardImpl {
 
     public CivilizedScholar(UUID ownerId) {
         super(ownerId, 47, "Civilized Scholar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

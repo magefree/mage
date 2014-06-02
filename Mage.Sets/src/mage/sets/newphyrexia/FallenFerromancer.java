@@ -43,7 +43,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class FallenFerromancer extends CardImpl<FallenFerromancer> {
+public class FallenFerromancer extends CardImpl {
 
     public FallenFerromancer(UUID ownerId) {
         super(ownerId, 82, "Fallen Ferromancer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

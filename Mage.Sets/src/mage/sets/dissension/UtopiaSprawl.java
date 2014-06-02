@@ -57,7 +57,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class UtopiaSprawl extends CardImpl<UtopiaSprawl> {
+public class UtopiaSprawl extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
 

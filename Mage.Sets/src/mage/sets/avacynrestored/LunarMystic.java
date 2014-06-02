@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class LunarMystic extends CardImpl<LunarMystic> {
+public class LunarMystic extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant spell");
 

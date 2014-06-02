@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class TreeOfTales extends CardImpl<TreeOfTales> {
+public class TreeOfTales extends CardImpl {
 
     public TreeOfTales (UUID ownerId) {
         super(ownerId, 285, "Tree of Tales", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);

@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33
  */
-public class RottingGiant extends CardImpl<RottingGiant> {
+public class RottingGiant extends CardImpl {
 
     public RottingGiant(UUID ownerId) {
         super(ownerId, 158, "Rotting Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

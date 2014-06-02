@@ -49,7 +49,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class SaplingOfColfenor extends CardImpl<SaplingOfColfenor> {
+public class SaplingOfColfenor extends CardImpl {
 
     public SaplingOfColfenor(UUID ownerId) {
         super(ownerId, 128, "Sapling of Colfenor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B/G}{B/G}");

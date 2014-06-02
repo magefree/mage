@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class RushOfBlood extends CardImpl<RushOfBlood> {
+public class RushOfBlood extends CardImpl {
 
     public RushOfBlood(UUID ownerId) {
         super(ownerId, 154, "Rush of Blood", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

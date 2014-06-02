@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CapturedSunlight extends CardImpl<CapturedSunlight> {
+public class CapturedSunlight extends CardImpl {
 
     public CapturedSunlight (UUID ownerId) {
         super(ownerId, 66, "Captured Sunlight", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{W}");

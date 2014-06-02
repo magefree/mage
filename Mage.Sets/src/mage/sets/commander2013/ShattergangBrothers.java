@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ShattergangBrothers extends CardImpl<ShattergangBrothers> {
+public class ShattergangBrothers extends CardImpl {
 
     public ShattergangBrothers(UUID ownerId) {
         super(ownerId, 213, "Shattergang Brothers", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");

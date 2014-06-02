@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class Rootwalla extends CardImpl<Rootwalla> {
+public class Rootwalla extends CardImpl {
 
     public Rootwalla(UUID ownerId) {
         super(ownerId, 146, "Rootwalla", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

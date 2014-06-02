@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ElvishVisionary extends CardImpl<ElvishVisionary> {
+public class ElvishVisionary extends CardImpl {
 
     public ElvishVisionary (UUID ownerId) {
         super(ownerId, 130, "Elvish Visionary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class FoundryChampion extends CardImpl<FoundryChampion> {
+public class FoundryChampion extends CardImpl {
 
     public FoundryChampion(UUID ownerId) {
         super(ownerId, 165, "Foundry Champion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");

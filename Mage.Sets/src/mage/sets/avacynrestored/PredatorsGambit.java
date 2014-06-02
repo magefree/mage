@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class PredatorsGambit extends CardImpl<PredatorsGambit> {
+public class PredatorsGambit extends CardImpl {
 
     private static final String rule = "Enchanted creature has intimidate as long as its controller controls no other creatures";
 

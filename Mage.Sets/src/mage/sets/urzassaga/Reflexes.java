@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Reflexes extends CardImpl<Reflexes> {
+public class Reflexes extends CardImpl {
 
     public Reflexes(UUID ownerId) {
         super(ownerId, 208, "Reflexes", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

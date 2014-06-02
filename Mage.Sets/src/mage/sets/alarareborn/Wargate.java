@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class Wargate extends CardImpl<Wargate> {
+public class Wargate extends CardImpl {
 
     public Wargate(UUID ownerId) {
         super(ownerId, 129, "Wargate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{W}{U}");

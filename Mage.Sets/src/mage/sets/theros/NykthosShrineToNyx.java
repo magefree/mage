@@ -49,7 +49,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class NykthosShrineToNyx extends CardImpl<NykthosShrineToNyx> {
+public class NykthosShrineToNyx extends CardImpl {
 
     public NykthosShrineToNyx(UUID ownerId) {
         super(ownerId, 223, "Nykthos, Shrine to Nyx", Rarity.RARE, new CardType[]{CardType.LAND}, "");

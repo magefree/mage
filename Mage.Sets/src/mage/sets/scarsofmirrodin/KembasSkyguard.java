@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  * 
  * @author maurer.it_at_gmail.com
  */
-public class KembasSkyguard extends CardImpl<KembasSkyguard> {
+public class KembasSkyguard extends CardImpl {
 
     public KembasSkyguard(UUID ownerId) {
         super(ownerId, 13, "Kemba's Skyguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

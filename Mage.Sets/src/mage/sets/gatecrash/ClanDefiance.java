@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class ClanDefiance extends CardImpl<ClanDefiance> {
+public class ClanDefiance extends CardImpl {
 
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
     static final private FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature without flying");

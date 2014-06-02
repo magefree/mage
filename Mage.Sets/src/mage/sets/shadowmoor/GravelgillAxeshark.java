@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GravelgillAxeshark extends CardImpl<GravelgillAxeshark> {
+public class GravelgillAxeshark extends CardImpl {
 
     public GravelgillAxeshark(UUID ownerId) {
         super(ownerId, 164, "Gravelgill Axeshark", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U/B}");

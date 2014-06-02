@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FountainOfYouth extends CardImpl<FountainOfYouth> {
+public class FountainOfYouth extends CardImpl {
 
     public FountainOfYouth(UUID ownerId) {
         super(ownerId, 323, "Fountain of Youth", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

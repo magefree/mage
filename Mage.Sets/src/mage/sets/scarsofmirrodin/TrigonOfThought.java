@@ -50,7 +50,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 /**
  * @author nantuko
  */
-public class TrigonOfThought extends CardImpl<TrigonOfThought> {
+public class TrigonOfThought extends CardImpl {
 
     public TrigonOfThought(UUID ownerId) {
         super(ownerId, 217, "Trigon of Thought", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{5}");

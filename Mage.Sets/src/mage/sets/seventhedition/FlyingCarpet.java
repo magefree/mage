@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class FlyingCarpet extends CardImpl<FlyingCarpet> {
+public class FlyingCarpet extends CardImpl {
 
     public FlyingCarpet(UUID ownerId) {
         super(ownerId, 297, "Flying Carpet", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

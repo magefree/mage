@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class RiotSpikes extends CardImpl<RiotSpikes> {
+public class RiotSpikes extends CardImpl {
 
     public RiotSpikes(UUID ownerId) {
         super(ownerId, 146, "Riot Spikes", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B/R}");

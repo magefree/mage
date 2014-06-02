@@ -44,7 +44,7 @@ import mage.constants.Outcome;
  *
  * @author Loki
  */
-public class DarksteelAxe extends CardImpl<DarksteelAxe> {
+public class DarksteelAxe extends CardImpl {
 
     public DarksteelAxe (UUID ownerId) {
         super(ownerId, 149, "Darksteel Axe", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

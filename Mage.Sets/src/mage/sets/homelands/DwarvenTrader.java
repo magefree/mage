@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DwarvenTrader extends CardImpl<DwarvenTrader> {
+public class DwarvenTrader extends CardImpl {
 
     public DwarvenTrader(UUID ownerId) {
         super(ownerId, 91, "Dwarven Trader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

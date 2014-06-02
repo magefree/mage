@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HillGiant extends CardImpl<HillGiant> {
+public class HillGiant extends CardImpl {
 
     public HillGiant(UUID ownerId) {
         super(ownerId, 212, "Hill Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

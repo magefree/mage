@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class RhoxBrute extends CardImpl<RhoxBrute> {
+public class RhoxBrute extends CardImpl {
 
     public RhoxBrute (UUID ownerId) {
         super(ownerId, 59, "Rhox Brute", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");

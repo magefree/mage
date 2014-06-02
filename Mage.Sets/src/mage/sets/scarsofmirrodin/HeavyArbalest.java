@@ -55,7 +55,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class HeavyArbalest extends CardImpl<HeavyArbalest> {
+public class HeavyArbalest extends CardImpl {
 
     public HeavyArbalest(UUID ownerId) {
         super(ownerId, 164, "Heavy Arbalest", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

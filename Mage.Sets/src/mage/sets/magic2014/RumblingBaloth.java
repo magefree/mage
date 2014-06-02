@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class RumblingBaloth extends CardImpl<RumblingBaloth> {
+public class RumblingBaloth extends CardImpl {
 
     public RumblingBaloth(UUID ownerId) {
         super(ownerId, 193, "Rumbling Baloth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

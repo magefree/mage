@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author cbt33
  */
-public class AvenWindreader extends CardImpl<AvenWindreader> {
+public class AvenWindreader extends CardImpl {
 
     public AvenWindreader(UUID ownerId) {
         super(ownerId, 62, "Aven Windreader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

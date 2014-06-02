@@ -41,7 +41,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class TritonCavalry extends CardImpl<TritonCavalry> {
+public class TritonCavalry extends CardImpl {
 
     public TritonCavalry(UUID ownerId) {
         super(ownerId, 55, "Triton Cavalry", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class NecrogenCenser extends CardImpl<NecrogenCenser> {
+public class NecrogenCenser extends CardImpl {
 
     public NecrogenCenser (UUID ownerId) {
         super(ownerId, 184, "Necrogen Censer", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

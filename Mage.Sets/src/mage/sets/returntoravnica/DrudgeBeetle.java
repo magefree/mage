@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class DrudgeBeetle extends CardImpl<DrudgeBeetle> {
+public class DrudgeBeetle extends CardImpl {
 
     public DrudgeBeetle(UUID ownerId) {
         super(ownerId, 122, "Drudge Beetle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

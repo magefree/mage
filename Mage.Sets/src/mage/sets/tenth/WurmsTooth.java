@@ -44,7 +44,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WurmsTooth extends CardImpl<WurmsTooth> {
+public class WurmsTooth extends CardImpl {
 
     public WurmsTooth(UUID ownerId) {
         super(ownerId, 346, "Wurm's Tooth", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

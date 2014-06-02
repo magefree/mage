@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LokiX
  */
-public class RoyalAssassin extends CardImpl<RoyalAssassin> {
+public class RoyalAssassin extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 

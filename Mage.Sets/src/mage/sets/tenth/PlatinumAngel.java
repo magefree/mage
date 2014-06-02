@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlatinumAngel extends CardImpl<PlatinumAngel> {
+public class PlatinumAngel extends CardImpl {
 
     public PlatinumAngel(UUID ownerId) {
         super(ownerId, 339, "Platinum Angel", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

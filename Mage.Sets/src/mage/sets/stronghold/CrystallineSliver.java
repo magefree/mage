@@ -43,7 +43,7 @@ import mage.filter.FilterPermanent;
  *
  * @author Plopman
  */
-public class CrystallineSliver extends CardImpl<CrystallineSliver> {
+public class CrystallineSliver extends CardImpl {
 
     public CrystallineSliver(UUID ownerId) {
         super(ownerId, 139, "Crystalline Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{U}");

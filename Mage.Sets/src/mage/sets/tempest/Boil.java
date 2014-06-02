@@ -39,7 +39,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author Loki
  */
-public class Boil extends CardImpl<Boil> {
+public class Boil extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("islands");
 

@@ -52,7 +52,7 @@ import mage.game.stack.Spell;
 /**
  * @author nantuko
  */
-public class BloodlordOfVaasgoth extends CardImpl<BloodlordOfVaasgoth> {
+public class BloodlordOfVaasgoth extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a Vampire creature spell");
 

@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX
  */
-public class HorobiDeathsWail extends CardImpl<HorobiDeathsWail> {
+public class HorobiDeathsWail extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
     static {

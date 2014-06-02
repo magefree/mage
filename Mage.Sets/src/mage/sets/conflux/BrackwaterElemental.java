@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class BrackwaterElemental extends CardImpl<BrackwaterElemental> {
+public class BrackwaterElemental extends CardImpl {
 
     public BrackwaterElemental(UUID ownerId) {
         super(ownerId, 21, "Brackwater Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

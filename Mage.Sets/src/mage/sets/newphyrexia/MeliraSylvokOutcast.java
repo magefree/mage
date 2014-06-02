@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class MeliraSylvokOutcast extends CardImpl<MeliraSylvokOutcast> {
+public class MeliraSylvokOutcast extends CardImpl {
 
     public MeliraSylvokOutcast(UUID ownerId) {
         super(ownerId, 115, "Melira, Sylvok Outcast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

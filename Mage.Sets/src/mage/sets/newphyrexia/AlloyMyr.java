@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North, Loki
  */
-public class AlloyMyr extends CardImpl<AlloyMyr> {
+public class AlloyMyr extends CardImpl {
 
     public AlloyMyr(UUID ownerId) {
         super(ownerId, 129, "Alloy Myr", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class DanceOfShadows extends CardImpl<DanceOfShadows> {
+public class DanceOfShadows extends CardImpl {
 
     public DanceOfShadows (UUID ownerId) {
         super(ownerId, 108, "Dance of Shadows", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

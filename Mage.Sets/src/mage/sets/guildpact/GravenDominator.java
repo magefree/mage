@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class GravenDominator extends CardImpl<GravenDominator> {
+public class GravenDominator extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature");
     static {

@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class PlatedSeastrider extends CardImpl<PlatedSeastrider> {
+public class PlatedSeastrider extends CardImpl {
 
     public PlatedSeastrider (UUID ownerId) {
         super(ownerId, 38, "Plated Seastrider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{U}");

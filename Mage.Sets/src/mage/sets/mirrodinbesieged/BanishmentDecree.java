@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class BanishmentDecree extends CardImpl<BanishmentDecree> {
+public class BanishmentDecree extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or enchantment");
 
     static {

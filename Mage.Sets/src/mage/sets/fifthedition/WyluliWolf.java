@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class WyluliWolf extends CardImpl<WyluliWolf> {
+public class WyluliWolf extends CardImpl {
 
     public WyluliWolf(UUID ownerId) {
         super(ownerId, 207, "Wyluli Wolf", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

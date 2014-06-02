@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class GatewayShade extends CardImpl<GatewayShade> {
+public class GatewayShade extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped Gate you control");
     static {

@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jeffwadsworth
  */
-public class PatrolSignaler extends CardImpl<PatrolSignaler> {
+public class PatrolSignaler extends CardImpl {
 
     public PatrolSignaler(UUID ownerId) {
         super(ownerId, 12, "Patrol Signaler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MyrEnforcer extends CardImpl<MyrEnforcer> {
+public class MyrEnforcer extends CardImpl {
 
     public MyrEnforcer(UUID ownerId) {
         super(ownerId, 120, "Myr Enforcer", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

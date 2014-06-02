@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class ShadowSlice extends CardImpl<ShadowSlice> {
+public class ShadowSlice extends CardImpl {
 
     public ShadowSlice (UUID ownerId) {
         super(ownerId, 77, "Shadow Slice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");

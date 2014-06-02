@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class CentaursHerald extends CardImpl<CentaursHerald> {
+public class CentaursHerald extends CardImpl {
 
     public CentaursHerald(UUID ownerId) {
         super(ownerId, 118, "Centaur's Herald", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

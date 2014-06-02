@@ -45,7 +45,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GoblinRuinblaster extends CardImpl<GoblinRuinblaster> {
+public class GoblinRuinblaster extends CardImpl {
 
     public GoblinRuinblaster(UUID ownerId) {
         super(ownerId, 127, "Goblin Ruinblaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

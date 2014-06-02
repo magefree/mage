@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class VileRequiem extends CardImpl<VileRequiem> {
+public class VileRequiem extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("up to X target nonblack creatures, where X is the number of verse counters on {this}");
     static {

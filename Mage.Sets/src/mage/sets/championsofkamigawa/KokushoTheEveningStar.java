@@ -44,7 +44,7 @@ import mage.game.Game;
 /**
  * @author Loki
  */
-public class KokushoTheEveningStar extends CardImpl<KokushoTheEveningStar> {
+public class KokushoTheEveningStar extends CardImpl {
 
     public KokushoTheEveningStar(UUID ownerId) {
         super(ownerId, 122, "Kokusho, the Evening Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

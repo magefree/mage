@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MyrServitor extends CardImpl<MyrServitor> {
+public class MyrServitor extends CardImpl {
 
     public MyrServitor(UUID ownerId) {
         super(ownerId, 139, "Myr Servitor", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

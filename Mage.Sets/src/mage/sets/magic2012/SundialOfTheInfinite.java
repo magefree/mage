@@ -45,7 +45,7 @@ import mage.abilities.effects.common.EndTurnEffect;
  *
  * @author nantuko
  */
-public class SundialOfTheInfinite extends CardImpl<SundialOfTheInfinite> {
+public class SundialOfTheInfinite extends CardImpl {
 
     public SundialOfTheInfinite(UUID ownerId) {
         super(ownerId, 218, "Sundial of the Infinite", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

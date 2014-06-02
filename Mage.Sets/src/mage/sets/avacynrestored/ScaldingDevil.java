@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class ScaldingDevil extends CardImpl<ScaldingDevil> {
+public class ScaldingDevil extends CardImpl {
 
     public ScaldingDevil(UUID ownerId) {
         super(ownerId, 155, "Scalding Devil", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

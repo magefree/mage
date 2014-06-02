@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FrontlineSage extends CardImpl<FrontlineSage> {
+public class FrontlineSage extends CardImpl {
 
     public FrontlineSage (UUID ownerId) {
         super(ownerId, 28, "Frontline Sage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

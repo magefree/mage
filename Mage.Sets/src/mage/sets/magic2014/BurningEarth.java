@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class BurningEarth extends CardImpl<BurningEarth> {
+public class BurningEarth extends CardImpl {
 
     public BurningEarth(UUID ownerId) {
         super(ownerId, 130, "Burning Earth", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

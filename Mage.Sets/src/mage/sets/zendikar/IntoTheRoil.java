@@ -43,7 +43,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author Viserion
  */
-public class IntoTheRoil extends CardImpl<IntoTheRoil> {
+public class IntoTheRoil extends CardImpl {
 
     public IntoTheRoil(UUID ownerId) {
         super(ownerId, 48, "Into the Roil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

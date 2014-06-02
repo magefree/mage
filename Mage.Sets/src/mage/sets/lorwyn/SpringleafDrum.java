@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class SpringleafDrum extends CardImpl<SpringleafDrum> {
+public class SpringleafDrum extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 

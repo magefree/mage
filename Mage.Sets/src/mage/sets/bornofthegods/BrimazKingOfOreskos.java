@@ -50,7 +50,7 @@ import mage.sets.bornofthegods.TokenAndCounters.CatSoldierCreatureToken;
  *
  * @author LevelX2
  */
-public class BrimazKingOfOreskos extends CardImpl<BrimazKingOfOreskos> {
+public class BrimazKingOfOreskos extends CardImpl {
 
     public BrimazKingOfOreskos(UUID ownerId) {
         super(ownerId, 5, "Brimaz, King of Oreskos", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

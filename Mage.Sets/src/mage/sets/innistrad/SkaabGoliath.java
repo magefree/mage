@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Alvin
  */
-public class SkaabGoliath extends CardImpl<SkaabGoliath> {
+public class SkaabGoliath extends CardImpl {
 
     public SkaabGoliath(UUID ownerId) {
         super(ownerId, 76, "Skaab Goliath", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");

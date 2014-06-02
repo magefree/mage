@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AvenEnvoy extends CardImpl<AvenEnvoy> {
+public class AvenEnvoy extends CardImpl {
 
     public AvenEnvoy(UUID ownerId) {
         super(ownerId, 30, "Aven Envoy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

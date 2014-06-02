@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class ForbiddingWatchtower extends CardImpl<ForbiddingWatchtower> {
+public class ForbiddingWatchtower extends CardImpl {
 
     public ForbiddingWatchtower(UUID ownerId) {
         super(ownerId, 352, "Forbidding Watchtower", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

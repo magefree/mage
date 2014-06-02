@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class StewardOfValeron extends CardImpl<StewardOfValeron> {
+public class StewardOfValeron extends CardImpl {
 
     public StewardOfValeron (UUID ownerId) {
         super(ownerId, 198, "Steward of Valeron", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{W}");

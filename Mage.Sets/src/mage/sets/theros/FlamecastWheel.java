@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FlamecastWheel extends CardImpl<FlamecastWheel> {
+public class FlamecastWheel extends CardImpl {
 
     public FlamecastWheel(UUID ownerId) {
         super(ownerId, 215, "Flamecast Wheel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

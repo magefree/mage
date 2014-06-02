@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class PollutedDelta extends CardImpl<PollutedDelta> {
+public class PollutedDelta extends CardImpl {
 
     public PollutedDelta(UUID ownerId) {
         super(ownerId, 321, "Polluted Delta", Rarity.RARE, new CardType[]{CardType.LAND}, "");

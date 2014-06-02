@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ShanodinDryads extends CardImpl<ShanodinDryads> {
+public class ShanodinDryads extends CardImpl {
 
     public ShanodinDryads(UUID ownerId) {
         super(ownerId, 187, "Shanodin Dryads", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

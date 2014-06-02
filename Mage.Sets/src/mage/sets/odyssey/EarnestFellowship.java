@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author cbt33, Loki (TakenoSamuraiGeneral), North (Coat of Arms)
  */
-public class EarnestFellowship extends CardImpl<EarnestFellowship> {
+public class EarnestFellowship extends CardImpl {
 
     public EarnestFellowship(UUID ownerId) {
         super(ownerId, 21, "Earnest Fellowship", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

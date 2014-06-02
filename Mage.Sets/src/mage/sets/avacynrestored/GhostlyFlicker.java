@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class GhostlyFlicker extends CardImpl<GhostlyFlicker> {
+public class GhostlyFlicker extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts, creatures, and/or lands you control");
 

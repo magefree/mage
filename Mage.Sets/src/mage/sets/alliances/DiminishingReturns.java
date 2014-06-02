@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class DiminishingReturns extends CardImpl<DiminishingReturns> {
+public class DiminishingReturns extends CardImpl {
 
     public DiminishingReturns(UUID ownerId) {
         super(ownerId, 39, "Diminishing Returns", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");

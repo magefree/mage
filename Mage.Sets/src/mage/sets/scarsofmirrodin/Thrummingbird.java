@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki, nantuko, North
  */
-public class Thrummingbird extends CardImpl<Thrummingbird> {
+public class Thrummingbird extends CardImpl {
 
     public Thrummingbird(UUID ownerId) {
         super(ownerId, 47, "Thrummingbird", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

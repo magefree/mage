@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class VedalkenGhoul extends CardImpl<VedalkenGhoul> {
+public class VedalkenGhoul extends CardImpl {
 
     public VedalkenGhoul(UUID ownerId) {
         super(ownerId, 32, "Vedalken Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");

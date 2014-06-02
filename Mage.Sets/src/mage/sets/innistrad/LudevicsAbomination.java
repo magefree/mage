@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LudevicsAbomination extends CardImpl<LudevicsAbomination> {
+public class LudevicsAbomination extends CardImpl {
 
     public LudevicsAbomination(UUID ownerId) {
         super(ownerId, 1064, "Ludevic's Abomination", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");

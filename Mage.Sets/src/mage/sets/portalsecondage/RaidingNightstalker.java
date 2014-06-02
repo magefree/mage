@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class RaidingNightstalker extends CardImpl<RaidingNightstalker> {
+public class RaidingNightstalker extends CardImpl {
 
     public RaidingNightstalker(UUID ownerId) {
         super(ownerId, 24, "Raiding Nightstalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

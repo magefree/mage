@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CaravanHurda extends CardImpl<CaravanHurda> {
+public class CaravanHurda extends CardImpl {
 
     public CaravanHurda (UUID ownerId) {
         super(ownerId, 5, "Caravan Hurda", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

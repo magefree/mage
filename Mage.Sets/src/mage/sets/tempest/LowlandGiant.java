@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LowlandGiant extends CardImpl<LowlandGiant> {
+public class LowlandGiant extends CardImpl {
 
     public LowlandGiant(UUID ownerId) {
         super(ownerId, 187, "Lowland Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class EarsplittingRats extends CardImpl<EarsplittingRats> {
+public class EarsplittingRats extends CardImpl {
 
     public EarsplittingRats(UUID ownerId) {
         super(ownerId, 65, "Earsplitting Rats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

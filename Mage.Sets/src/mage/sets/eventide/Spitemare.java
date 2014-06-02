@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class Spitemare extends CardImpl<Spitemare> {
+public class Spitemare extends CardImpl {
 
     public Spitemare(UUID ownerId) {
         super(ownerId, 147, "Spitemare", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}{R/W}");

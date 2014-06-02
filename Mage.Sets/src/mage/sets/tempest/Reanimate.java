@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class Reanimate extends CardImpl<Reanimate> {
+public class Reanimate extends CardImpl {
 
     public Reanimate(UUID ownerId) {
         super(ownerId, 45, "Reanimate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");

@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Mirrorworks extends CardImpl<Mirrorworks> {
+public class Mirrorworks extends CardImpl {
 
     public Mirrorworks(UUID ownerId) {
         super(ownerId, 114, "Mirrorworks", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

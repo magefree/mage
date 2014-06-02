@@ -47,7 +47,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class SpiritOfTheLabyrinth extends CardImpl<SpiritOfTheLabyrinth> {
+public class SpiritOfTheLabyrinth extends CardImpl {
 
     public SpiritOfTheLabyrinth(UUID ownerId) {
         super(ownerId, 27, "Spirit of the Labyrinth", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{W}");

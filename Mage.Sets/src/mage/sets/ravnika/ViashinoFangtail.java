@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class ViashinoFangtail extends CardImpl<ViashinoFangtail> {
+public class ViashinoFangtail extends CardImpl {
 
     public ViashinoFangtail(UUID ownerId) {
         super(ownerId, 148, "Viashino Fangtail", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

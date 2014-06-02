@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class PrognosticSphinx extends CardImpl<PrognosticSphinx> {
+public class PrognosticSphinx extends CardImpl {
 
     public PrognosticSphinx(UUID ownerId) {
         super(ownerId, 60, "Prognostic Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

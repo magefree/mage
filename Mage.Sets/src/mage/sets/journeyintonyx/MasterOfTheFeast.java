@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class MasterOfTheFeast extends CardImpl<MasterOfTheFeast> {
+public class MasterOfTheFeast extends CardImpl {
 
     public MasterOfTheFeast(UUID ownerId) {
         super(ownerId, 75, "Master of the Feast", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{B}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class SoulStairExpedition extends CardImpl<SoulStairExpedition> {
+public class SoulStairExpedition extends CardImpl {
 
     public SoulStairExpedition(UUID ownerId) {
         super(ownerId, 112, "Soul Stair Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

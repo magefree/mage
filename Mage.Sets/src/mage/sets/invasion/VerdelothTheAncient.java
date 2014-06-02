@@ -55,7 +55,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author LevelX2
  */
-public class VerdelothTheAncient extends CardImpl<VerdelothTheAncient> {
+public class VerdelothTheAncient extends CardImpl {
 
     public VerdelothTheAncient(UUID ownerId) {
         super(ownerId, 220, "Verdeloth the Ancient", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

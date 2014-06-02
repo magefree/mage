@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class SynodCenturion extends CardImpl<SynodCenturion> {
+public class SynodCenturion extends CardImpl {
 
     public SynodCenturion(UUID ownerId) {
         super(ownerId, 53, "Synod Centurion", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

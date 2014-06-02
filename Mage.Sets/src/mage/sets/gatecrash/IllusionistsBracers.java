@@ -50,7 +50,7 @@ import mage.players.Player;
 *
 * @author LevelX2
 */
-public class IllusionistsBracers extends CardImpl<IllusionistsBracers> {
+public class IllusionistsBracers extends CardImpl {
 
     public IllusionistsBracers(UUID ownerId) {
        super(ownerId, 231, "Illusionist's Bracers", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

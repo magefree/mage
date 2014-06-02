@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class WretchedBanquet extends CardImpl<WretchedBanquet> {
+public class WretchedBanquet extends CardImpl {
 
     public WretchedBanquet(UUID ownerId) {
         super(ownerId, 56, "Wretched Banquet", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");

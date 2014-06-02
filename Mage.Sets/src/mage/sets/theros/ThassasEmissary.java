@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class ThassasEmissary extends CardImpl<ThassasEmissary> {
+public class ThassasEmissary extends CardImpl {
 
     public ThassasEmissary(UUID ownerId) {
         super(ownerId, 68, "Thassa's Emissary", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{U}");

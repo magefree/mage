@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HauntedGuardian extends CardImpl<HauntedGuardian> {
+public class HauntedGuardian extends CardImpl {
 
     public HauntedGuardian(UUID ownerId) {
         super(ownerId, 216, "Haunted Guardian", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

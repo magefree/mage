@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SnowCoveredMountain extends CardImpl<SnowCoveredMountain> {
+public class SnowCoveredMountain extends CardImpl {
 
     public SnowCoveredMountain(UUID ownerId) {
         super(ownerId, 349, "Snow-Covered Mountain", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

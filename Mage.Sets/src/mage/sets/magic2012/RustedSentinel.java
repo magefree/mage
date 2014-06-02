@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class RustedSentinel extends CardImpl<RustedSentinel> {
+public class RustedSentinel extends CardImpl {
 
     public RustedSentinel(UUID ownerId) {
         super(ownerId, 215, "Rusted Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

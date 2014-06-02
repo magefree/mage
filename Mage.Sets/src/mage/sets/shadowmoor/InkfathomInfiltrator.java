@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class InkfathomInfiltrator extends CardImpl<InkfathomInfiltrator> {
+public class InkfathomInfiltrator extends CardImpl {
 
     public InkfathomInfiltrator(UUID ownerId) {
         super(ownerId, 167, "Inkfathom Infiltrator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}");

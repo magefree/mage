@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class RayOfDissolution extends CardImpl<RayOfDissolution> {
+public class RayOfDissolution extends CardImpl {
 
     public RayOfDissolution(UUID ownerId) {
         super(ownerId, 27, "Ray of Dissolution", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

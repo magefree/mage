@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class SimicSignet extends CardImpl<SimicSignet> {
+public class SimicSignet extends CardImpl {
 
     public SimicSignet(UUID ownerId) {
         super(ownerId, 166, "Simic Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

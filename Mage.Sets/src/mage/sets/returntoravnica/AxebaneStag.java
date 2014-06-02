@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AxebaneStag extends CardImpl<AxebaneStag> {
+public class AxebaneStag extends CardImpl {
 
     public AxebaneStag(UUID ownerId) {
         super(ownerId, 116, "Axebane Stag", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");

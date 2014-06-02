@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class CharnelhoardWurm extends CardImpl<CharnelhoardWurm> {
+public class CharnelhoardWurm extends CardImpl {
 
     public CharnelhoardWurm(UUID ownerId) {
         super(ownerId, 100, "Charnelhoard Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{R}{G}");

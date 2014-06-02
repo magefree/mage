@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class Cobblebrute extends CardImpl<Cobblebrute> {
+public class Cobblebrute extends CardImpl {
 
     public Cobblebrute (UUID ownerId) {
         super(ownerId, 91, "Cobblebrute", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

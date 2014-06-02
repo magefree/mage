@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SeraphOfDawn extends CardImpl<SeraphOfDawn> {
+public class SeraphOfDawn extends CardImpl {
 
     public SeraphOfDawn(UUID ownerId) {
         super(ownerId, 35, "Seraph of Dawn", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

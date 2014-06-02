@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class CourtlyProvocateur extends CardImpl<CourtlyProvocateur> {
+public class CourtlyProvocateur extends CardImpl {
 
     public CourtlyProvocateur(UUID ownerId) {
         super(ownerId, 46, "Courtly Provocateur", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

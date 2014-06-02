@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author Loki
  */
-public class KruinStriker extends CardImpl<KruinStriker> {
+public class KruinStriker extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature");
     static {

@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward
  */
-public class WithengarUnbound extends CardImpl<WithengarUnbound> {
+public class WithengarUnbound extends CardImpl {
 
     public WithengarUnbound(UUID ownerId) {
         super(ownerId, 147, "Withengar Unbound", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "");

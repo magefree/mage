@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class HandOfEmrakul extends CardImpl<HandOfEmrakul> {
+public class HandOfEmrakul extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("four Eldrazi Spawn");
 

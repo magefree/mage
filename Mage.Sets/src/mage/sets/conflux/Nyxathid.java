@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class Nyxathid extends CardImpl<Nyxathid> {
+public class Nyxathid extends CardImpl {
 
     public Nyxathid(UUID ownerId) {
         super(ownerId, 49, "Nyxathid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

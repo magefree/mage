@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  * @author jeffwadsworth
 
  */
-public class KnacksawClique extends CardImpl<KnacksawClique> {
+public class KnacksawClique extends CardImpl {
 
     public KnacksawClique(UUID ownerId) {
         super(ownerId, 42, "Knacksaw Clique", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");

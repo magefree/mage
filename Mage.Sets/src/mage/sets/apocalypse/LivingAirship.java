@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class LivingAirship extends CardImpl<LivingAirship> {
+public class LivingAirship extends CardImpl {
 
     public LivingAirship(UUID ownerId) {
         super(ownerId, 28, "Living Airship", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

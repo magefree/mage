@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Squire extends CardImpl<Squire> {
+public class Squire extends CardImpl {
 
     public Squire(UUID ownerId) {
         super(ownerId, 15, "Squire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

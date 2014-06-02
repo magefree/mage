@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class SpinedFluke extends CardImpl<SpinedFluke> {
+public class SpinedFluke extends CardImpl {
 
     public SpinedFluke(UUID ownerId) {
         super(ownerId, 160, "Spined Fluke", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

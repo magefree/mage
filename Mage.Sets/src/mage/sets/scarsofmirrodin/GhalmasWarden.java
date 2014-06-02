@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GhalmasWarden extends CardImpl<GhalmasWarden> {
+public class GhalmasWarden extends CardImpl {
 
     private final String text = "Metalcraft - Ghalma's Warden gets +2/+2 as long as you control three or more artifacts";
 

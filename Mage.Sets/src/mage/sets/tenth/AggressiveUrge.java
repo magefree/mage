@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class AggressiveUrge extends CardImpl<AggressiveUrge> {
+public class AggressiveUrge extends CardImpl {
 
     public AggressiveUrge(UUID ownerId) {
         super(ownerId, 250, "Aggressive Urge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

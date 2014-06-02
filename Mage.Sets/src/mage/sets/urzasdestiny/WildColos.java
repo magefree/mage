@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WildColos extends CardImpl<WildColos> {
+public class WildColos extends CardImpl {
 
     public WildColos(UUID ownerId) {
         super(ownerId, 100, "Wild Colos", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

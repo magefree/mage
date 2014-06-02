@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SkymarkRoc extends CardImpl<SkymarkRoc> {
+public class SkymarkRoc extends CardImpl {
 
     public SkymarkRoc(UUID ownerId) {
         super(ownerId, 196, "Skymark Roc", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");

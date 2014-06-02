@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class HeroesBane extends CardImpl<HeroesBane> {
+public class HeroesBane extends CardImpl {
 
     public HeroesBane(UUID ownerId) {
         super(ownerId, 126, "Heroes' Bane", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WildJhovall extends CardImpl<WildJhovall> {
+public class WildJhovall extends CardImpl {
 
     public WildJhovall(UUID ownerId) {
         super(ownerId, 227, "Wild Jhovall", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

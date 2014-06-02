@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TwinbladeSlasher extends CardImpl<TwinbladeSlasher> {
+public class TwinbladeSlasher extends CardImpl {
 
     public TwinbladeSlasher(UUID ownerId) {
         super(ownerId, 79, "Twinblade Slasher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");

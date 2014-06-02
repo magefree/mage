@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class DesecratedEarth extends CardImpl<DesecratedEarth> {
+public class DesecratedEarth extends CardImpl {
 
     public DesecratedEarth(UUID ownerId) {
         super(ownerId, 86, "Desecrated Earth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");

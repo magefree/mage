@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class KinsbaileBalloonist extends CardImpl<KinsbaileBalloonist> {
+public class KinsbaileBalloonist extends CardImpl {
 
     public KinsbaileBalloonist(UUID ownerId) {
         super(ownerId, 23, "Kinsbaile Balloonist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

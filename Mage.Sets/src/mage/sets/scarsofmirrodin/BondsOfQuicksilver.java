@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class BondsOfQuicksilver extends CardImpl<BondsOfQuicksilver> {
+public class BondsOfQuicksilver extends CardImpl {
 
     public BondsOfQuicksilver (UUID ownerId) {
         super(ownerId, 29, "Bonds of Quicksilver", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

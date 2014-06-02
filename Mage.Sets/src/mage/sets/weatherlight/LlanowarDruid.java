@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class LlanowarDruid extends CardImpl<LlanowarDruid> {
+public class LlanowarDruid extends CardImpl {
 
     public LlanowarDruid(UUID ownerId) {
         super(ownerId, 75, "Llanowar Druid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

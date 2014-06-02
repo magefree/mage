@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class OkibaGangShinobi extends CardImpl<OkibaGangShinobi> {
+public class OkibaGangShinobi extends CardImpl {
 
     public OkibaGangShinobi(UUID ownerId) {
         super(ownerId, 76, "Okiba-Gang Shinobi", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

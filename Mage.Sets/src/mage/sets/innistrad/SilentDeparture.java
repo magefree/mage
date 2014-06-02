@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class SilentDeparture extends CardImpl<SilentDeparture> {
+public class SilentDeparture extends CardImpl {
 
     public SilentDeparture(UUID ownerId) {
         super(ownerId, 75, "Silent Departure", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");

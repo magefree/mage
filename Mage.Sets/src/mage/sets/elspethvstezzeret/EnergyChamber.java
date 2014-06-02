@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class EnergyChamber extends CardImpl<EnergyChamber> {
+public class EnergyChamber extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("target artifact creature");
     private static final FilterPermanent filter2 = new FilterPermanent("noncreature artifact");

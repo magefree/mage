@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class FatalFrenzy extends CardImpl<FatalFrenzy> {
+public class FatalFrenzy extends CardImpl {
 
     public FatalFrenzy(UUID ownerId) {
         super(ownerId, 98, "Fatal Frenzy", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}");

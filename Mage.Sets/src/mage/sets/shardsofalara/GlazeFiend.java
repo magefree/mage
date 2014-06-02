@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Plopman
  */
-public class GlazeFiend extends CardImpl<GlazeFiend> {
+public class GlazeFiend extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("another artifact");
     static {

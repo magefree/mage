@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class WindbornMuse extends CardImpl<WindbornMuse> {
+public class WindbornMuse extends CardImpl {
 
     public WindbornMuse(UUID ownerId) {
         super(ownerId, 60, "Windborn Muse", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");

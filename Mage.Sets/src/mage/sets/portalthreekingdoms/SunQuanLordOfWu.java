@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SunQuanLordOfWu extends CardImpl<SunQuanLordOfWu> {
+public class SunQuanLordOfWu extends CardImpl {
 
     public SunQuanLordOfWu(UUID ownerId) {
         super(ownerId, 56, "Sun Quan, Lord of Wu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

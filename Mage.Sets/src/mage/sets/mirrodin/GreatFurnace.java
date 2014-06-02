@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GreatFurnace extends CardImpl<GreatFurnace> {
+public class GreatFurnace extends CardImpl {
 
     public GreatFurnace (UUID ownerId) {
         super(ownerId, 282, "Great Furnace", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);

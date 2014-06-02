@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class OrcishLumberjack extends CardImpl<OrcishLumberjack> {
+public class OrcishLumberjack extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 

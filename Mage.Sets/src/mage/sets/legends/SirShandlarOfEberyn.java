@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SirShandlarOfEberyn extends CardImpl<SirShandlarOfEberyn> {
+public class SirShandlarOfEberyn extends CardImpl {
 
     public SirShandlarOfEberyn(UUID ownerId) {
         super(ownerId, 297, "Sir Shandlar of Eberyn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");

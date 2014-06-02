@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Python extends CardImpl<Python> {
+public class Python extends CardImpl {
 
     public Python(UUID ownerId) {
         super(ownerId, 18, "Python", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

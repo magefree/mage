@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class Fastbond extends CardImpl<Fastbond> {
+public class Fastbond extends CardImpl {
 
     public Fastbond(UUID ownerId) {
         super(ownerId, 101, "Fastbond", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");

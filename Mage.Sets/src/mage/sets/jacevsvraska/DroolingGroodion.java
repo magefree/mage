@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DroolingGroodion extends CardImpl<DroolingGroodion> {
+public class DroolingGroodion extends CardImpl {
 
     public DroolingGroodion(UUID ownerId) {
         super(ownerId, 65, "Drooling Groodion", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{G}");

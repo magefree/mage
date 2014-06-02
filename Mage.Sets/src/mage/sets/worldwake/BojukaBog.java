@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class BojukaBog extends CardImpl<BojukaBog> {
+public class BojukaBog extends CardImpl {
 
     public BojukaBog(UUID ownerId) {
         super(ownerId, 132, "Bojuka Bog", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

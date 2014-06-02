@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class ToothAndClaw extends CardImpl<ToothAndClaw> {
+public class ToothAndClaw extends CardImpl {
 
     public ToothAndClaw(UUID ownerId) {
         super(ownerId, 210, "Tooth and Claw", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

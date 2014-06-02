@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WallOfTanglecord extends CardImpl<WallOfTanglecord> {
+public class WallOfTanglecord extends CardImpl {
 
     public WallOfTanglecord (UUID ownerId) {
         super(ownerId, 222, "Wall of Tanglecord", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

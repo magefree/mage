@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Oculus extends CardImpl<Oculus> {
+public class Oculus extends CardImpl {
 
     public Oculus (UUID ownerId) {
         super(ownerId, 29, "Oculus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

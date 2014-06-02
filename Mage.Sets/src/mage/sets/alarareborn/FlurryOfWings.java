@@ -42,7 +42,7 @@ import mage.game.permanent.token.Token;
  *
  * @author North
  */
-public class FlurryOfWings extends CardImpl<FlurryOfWings> {
+public class FlurryOfWings extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("the number of attacking creatures");
 

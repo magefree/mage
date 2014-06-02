@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class HorrifyingRevelation extends CardImpl<HorrifyingRevelation> {
+public class HorrifyingRevelation extends CardImpl {
 
     public HorrifyingRevelation(UUID ownerId) {
         super(ownerId, 45, "Horrifying Revelation", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");

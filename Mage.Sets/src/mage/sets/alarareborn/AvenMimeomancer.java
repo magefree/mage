@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class AvenMimeomancer extends CardImpl<AvenMimeomancer> {
+public class AvenMimeomancer extends CardImpl {
 
     public AvenMimeomancer(UUID ownerId) {
         super(ownerId, 2, "Aven Mimeomancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");

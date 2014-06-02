@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author cbt33
  */
-public class EssenceSliver extends CardImpl<EssenceSliver> {
+public class EssenceSliver extends CardImpl {
 
     public EssenceSliver(UUID ownerId) {
         super(ownerId, 8, "Essence Sliver", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{3}{W}");

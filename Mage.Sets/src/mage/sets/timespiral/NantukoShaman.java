@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author LevelX2
  */
-public class NantukoShaman extends CardImpl<NantukoShaman> {
+public class NantukoShaman extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     static {

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ZealousPersecution extends CardImpl<ZealousPersecution> {
+public class ZealousPersecution extends CardImpl {
 
     public ZealousPersecution(UUID ownerId) {
         super(ownerId, 85, "Zealous Persecution", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{B}");

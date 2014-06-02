@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GhostbladeEidolon extends CardImpl<GhostbladeEidolon> {
+public class GhostbladeEidolon extends CardImpl {
 
     public GhostbladeEidolon(UUID ownerId) {
         super(ownerId, 12, "Ghostblade Eidolon", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}");

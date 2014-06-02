@@ -51,7 +51,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class CrashingCentaur extends CardImpl<CrashingCentaur> {
+public class CrashingCentaur extends CardImpl {
 
     public CrashingCentaur(UUID ownerId) {
         super(ownerId, 235, "Crashing Centaur", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StabWound extends CardImpl<StabWound> {
+public class StabWound extends CardImpl {
 
     static final String rule = "At the beginning of the upkeep of enchanted creature's controller, that player loses 2 life";
 

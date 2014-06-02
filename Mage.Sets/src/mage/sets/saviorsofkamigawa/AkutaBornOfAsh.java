@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class AkutaBornOfAsh extends CardImpl<AkutaBornOfAsh> {
+public class AkutaBornOfAsh extends CardImpl {
 
     private static final FilterControlledPermanent filterSwamp = new FilterControlledPermanent("a Swamp");
     static {

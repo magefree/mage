@@ -55,7 +55,7 @@ import mage.game.turn.TurnMod;
 *
 * @author LevelX2
 */
-public class AureliaTheWarleader extends CardImpl<AureliaTheWarleader> {
+public class AureliaTheWarleader extends CardImpl {
 
     public AureliaTheWarleader(UUID ownerId) {
         super(ownerId, 143, "Aurelia, the Warleader", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{W}{W}");

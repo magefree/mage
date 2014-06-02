@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class StrengthOfTheTajuru extends CardImpl<StrengthOfTheTajuru> {
+public class StrengthOfTheTajuru extends CardImpl {
 
     public StrengthOfTheTajuru(UUID ownerId) {
         super(ownerId, 113, "Strength of the Tajuru", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}");

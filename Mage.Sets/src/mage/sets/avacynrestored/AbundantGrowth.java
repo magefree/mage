@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class AbundantGrowth extends CardImpl<AbundantGrowth> {
+public class AbundantGrowth extends CardImpl {
 
     public AbundantGrowth(UUID ownerId) {
         super(ownerId, 167, "Abundant Growth", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

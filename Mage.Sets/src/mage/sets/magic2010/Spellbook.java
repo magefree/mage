@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class Spellbook extends CardImpl<Spellbook> {
+public class Spellbook extends CardImpl {
 
     public Spellbook(UUID ownerId) {
         super(ownerId, 220, "Spellbook", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

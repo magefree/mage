@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class VigilantDrake extends CardImpl<VigilantDrake> {
+public class VigilantDrake extends CardImpl {
 
     public VigilantDrake(UUID ownerId) {
         super(ownerId, 46, "Vigilant Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

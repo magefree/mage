@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EchoingCourage extends CardImpl<EchoingCourage> {
+public class EchoingCourage extends CardImpl {
 
     public EchoingCourage(UUID ownerId) {
         super(ownerId, 143, "Echoing Courage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

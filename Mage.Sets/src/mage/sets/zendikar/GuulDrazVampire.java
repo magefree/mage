@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class GuulDrazVampire extends CardImpl<GuulDrazVampire> {
+public class GuulDrazVampire extends CardImpl {
 
     private static final String rule1 = "As long as an opponent has 10 or less life, {this} gets +2/+1";
     private static final String rule2 = "As long as an opponent has 10 or less life, {this} has intimidate";

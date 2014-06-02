@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class BronzeSable extends CardImpl<BronzeSable> {
+public class BronzeSable extends CardImpl {
 
     public BronzeSable(UUID ownerId) {
         super(ownerId, 212, "Bronze Sable", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class ShorelineRanger extends CardImpl<ShorelineRanger> {
+public class ShorelineRanger extends CardImpl {
 
     public ShorelineRanger(UUID ownerId) {
         super(ownerId, 51, "Shoreline Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");

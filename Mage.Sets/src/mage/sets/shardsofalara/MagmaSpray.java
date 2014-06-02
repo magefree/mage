@@ -48,7 +48,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author North
  */
-public class MagmaSpray extends CardImpl<MagmaSpray> {
+public class MagmaSpray extends CardImpl {
 
     public MagmaSpray(UUID ownerId) {
         super(ownerId, 108, "Magma Spray", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

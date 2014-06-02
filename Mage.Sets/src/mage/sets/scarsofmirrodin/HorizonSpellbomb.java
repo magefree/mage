@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class HorizonSpellbomb extends CardImpl<HorizonSpellbomb> {
+public class HorizonSpellbomb extends CardImpl {
 
     private static FilterBasicLandCard filter = new FilterBasicLandCard();
 

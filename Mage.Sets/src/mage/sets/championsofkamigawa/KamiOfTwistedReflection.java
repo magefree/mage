@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class KamiOfTwistedReflection extends CardImpl<KamiOfTwistedReflection> {
+public class KamiOfTwistedReflection extends CardImpl {
 
     public KamiOfTwistedReflection(UUID ownerId) {
         super(ownerId, 71, "Kami of Twisted Reflection", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

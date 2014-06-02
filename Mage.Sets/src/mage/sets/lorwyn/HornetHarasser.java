@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class HornetHarasser extends CardImpl<HornetHarasser> {
+public class HornetHarasser extends CardImpl {
 
     public HornetHarasser(UUID ownerId) {
         super(ownerId, 118, "Hornet Harasser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

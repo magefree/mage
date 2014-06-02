@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class PerilousMyr extends CardImpl<PerilousMyr> {
+public class PerilousMyr extends CardImpl {
 
     public PerilousMyr (UUID ownerId) {
         super(ownerId, 192, "Perilous Myr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

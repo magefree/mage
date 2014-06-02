@@ -54,7 +54,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class RavenFamiliar extends CardImpl<RavenFamiliar> {
+public class RavenFamiliar extends CardImpl {
 
     public RavenFamiliar(UUID ownerId) {
         super(ownerId, 39, "Raven Familiar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

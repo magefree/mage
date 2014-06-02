@@ -48,7 +48,7 @@ import mage.game.stack.StackObject;
  *
  * @author North
  */
-public class RetaliatorGriffin extends CardImpl<RetaliatorGriffin> {
+public class RetaliatorGriffin extends CardImpl {
 
     public RetaliatorGriffin(UUID ownerId) {
         super(ownerId, 123, "Retaliator Griffin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");

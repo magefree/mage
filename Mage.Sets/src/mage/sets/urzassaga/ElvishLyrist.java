@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class ElvishLyrist extends CardImpl<ElvishLyrist> {
+public class ElvishLyrist extends CardImpl {
 
     public ElvishLyrist(UUID ownerId) {
         super(ownerId, 248, "Elvish Lyrist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

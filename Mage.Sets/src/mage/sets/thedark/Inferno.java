@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class Inferno extends CardImpl<Inferno> {
+public class Inferno extends CardImpl {
 
     public Inferno(UUID ownerId) {
         super(ownerId, 70, "Inferno", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{R}{R}");

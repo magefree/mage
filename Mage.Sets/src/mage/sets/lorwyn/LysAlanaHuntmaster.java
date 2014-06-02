@@ -42,7 +42,7 @@ import mage.game.permanent.token.ElfToken;
  *
  * @author Loki
  */
-public class LysAlanaHuntmaster extends CardImpl<LysAlanaHuntmaster> {
+public class LysAlanaHuntmaster extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Elf spell");
 

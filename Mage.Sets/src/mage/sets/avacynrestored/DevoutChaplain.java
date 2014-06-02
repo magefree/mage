@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author noxx
  */
-public class DevoutChaplain extends CardImpl<DevoutChaplain> {
+public class DevoutChaplain extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

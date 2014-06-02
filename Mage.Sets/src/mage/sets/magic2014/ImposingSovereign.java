@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class ImposingSovereign extends CardImpl<ImposingSovereign> {
+public class ImposingSovereign extends CardImpl {
 
     public ImposingSovereign(UUID ownerId) {
         super(ownerId, 22, "Imposing Sovereign", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");

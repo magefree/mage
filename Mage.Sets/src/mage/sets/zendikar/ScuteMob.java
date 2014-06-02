@@ -46,7 +46,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ScuteMob extends CardImpl<ScuteMob> {
+public class ScuteMob extends CardImpl {
 
     public ScuteMob(UUID ownerId) {
         super(ownerId, 182, "Scute Mob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");

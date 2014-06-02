@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class UnhallowedPact extends CardImpl<UnhallowedPact> {
+public class UnhallowedPact extends CardImpl {
 
     public UnhallowedPact(UUID ownerId) {
         super(ownerId, 124, "Unhallowed Pact", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

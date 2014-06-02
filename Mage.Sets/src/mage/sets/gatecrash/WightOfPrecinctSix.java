@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WightOfPrecinctSix extends CardImpl<WightOfPrecinctSix> {
+public class WightOfPrecinctSix extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("creature card in your opponents' graveyards");
 

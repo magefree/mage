@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MondronenShaman extends CardImpl<MondronenShaman> {
+public class MondronenShaman extends CardImpl {
 
     public MondronenShaman(UUID ownerId) {
         super(ownerId, 98, "Mondronen Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

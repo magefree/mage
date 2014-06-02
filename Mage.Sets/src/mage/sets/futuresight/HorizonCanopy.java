@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class HorizonCanopy extends CardImpl<HorizonCanopy> {
+public class HorizonCanopy extends CardImpl {
 
     public HorizonCanopy(UUID ownerId) {
         super(ownerId, 177, "Horizon Canopy", Rarity.RARE, new CardType[]{CardType.LAND}, "");

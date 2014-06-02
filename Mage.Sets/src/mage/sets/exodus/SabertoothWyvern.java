@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SabertoothWyvern extends CardImpl<SabertoothWyvern> {
+public class SabertoothWyvern extends CardImpl {
 
     public SabertoothWyvern(UUID ownerId) {
         super(ownerId, 99, "Sabertooth Wyvern", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

@@ -56,7 +56,7 @@ import mage.util.CardUtil;
 /**
  * @author nantuko
  */
-public class PrototypePortal extends CardImpl<PrototypePortal> {
+public class PrototypePortal extends CardImpl {
 
     public PrototypePortal(UUID ownerId) {
         super(ownerId, 195, "Prototype Portal", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

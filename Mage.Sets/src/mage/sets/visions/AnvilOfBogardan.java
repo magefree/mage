@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class AnvilOfBogardan extends CardImpl<AnvilOfBogardan> {
+public class AnvilOfBogardan extends CardImpl {
     
     public AnvilOfBogardan(UUID ownerId) {
         super(ownerId, 141, "Anvil of Bogardan", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class TaureanMauler extends CardImpl<TaureanMauler> {
+public class TaureanMauler extends CardImpl {
 
     public TaureanMauler(UUID ownerId) {
         super(ownerId, 67, "Taurean Mauler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");

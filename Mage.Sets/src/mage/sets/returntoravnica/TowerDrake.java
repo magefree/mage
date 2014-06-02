@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class TowerDrake extends CardImpl<TowerDrake> {
+public class TowerDrake extends CardImpl {
  
 
     public TowerDrake(UUID ownerId) {

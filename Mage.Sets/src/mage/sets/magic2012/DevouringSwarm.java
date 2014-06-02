@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class DevouringSwarm extends CardImpl<DevouringSwarm> {
+public class DevouringSwarm extends CardImpl {
 
     public DevouringSwarm(UUID ownerId) {
         super(ownerId, 91, "Devouring Swarm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

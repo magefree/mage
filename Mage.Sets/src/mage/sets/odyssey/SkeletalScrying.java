@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class SkeletalScrying extends CardImpl<SkeletalScrying> {
+public class SkeletalScrying extends CardImpl {
 
     public SkeletalScrying(UUID ownerId) {
         super(ownerId, 161, "Skeletal Scrying", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{B}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class CometStorm extends CardImpl<CometStorm> {
+public class CometStorm extends CardImpl {
 
     public CometStorm(UUID ownerId) {
         super(ownerId, 76, "Comet Storm", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");

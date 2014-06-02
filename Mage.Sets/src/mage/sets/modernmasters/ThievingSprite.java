@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class ThievingSprite extends CardImpl<ThievingSprite> {
+public class ThievingSprite extends CardImpl {
 
     public ThievingSprite(UUID ownerId) {
         super(ownerId, 101, "Thieving Sprite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

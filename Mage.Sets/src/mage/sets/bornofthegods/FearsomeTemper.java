@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FearsomeTemper extends CardImpl<FearsomeTemper> {
+public class FearsomeTemper extends CardImpl {
 
     public FearsomeTemper(UUID ownerId) {
         super(ownerId, 95, "Fearsome Temper", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

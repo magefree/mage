@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class DarksteelReactor extends CardImpl<DarksteelReactor> {
+public class DarksteelReactor extends CardImpl {
 
     public DarksteelReactor(UUID ownerId) {
         super(ownerId, 114, "Darksteel Reactor", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

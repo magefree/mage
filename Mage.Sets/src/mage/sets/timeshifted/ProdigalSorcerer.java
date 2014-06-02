@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Backfir3
  */
-public class ProdigalSorcerer extends CardImpl<ProdigalSorcerer> {
+public class ProdigalSorcerer extends CardImpl {
 
     public ProdigalSorcerer(UUID ownerId) {
         super(ownerId, 29, "Prodigal Sorcerer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

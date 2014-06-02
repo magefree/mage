@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
  * @author KholdFuzion
 
  */
-public class IvoryCup extends CardImpl<IvoryCup> {
+public class IvoryCup extends CardImpl {
 
     public IvoryCup(UUID ownerId) {
         super(ownerId, 251, "Ivory Cup", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

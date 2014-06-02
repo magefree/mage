@@ -46,7 +46,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author LevelX2
  */
-public class BrambleElemental extends CardImpl<BrambleElemental> {
+public class BrambleElemental extends CardImpl {
 
     public BrambleElemental(UUID ownerId) {
         super(ownerId, 154, "Bramble Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

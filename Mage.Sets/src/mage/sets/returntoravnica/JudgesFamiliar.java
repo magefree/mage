@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class JudgesFamiliar extends CardImpl<JudgesFamiliar> {
+public class JudgesFamiliar extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 

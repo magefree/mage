@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class CreepingTarPit extends CardImpl<CreepingTarPit> {
+public class CreepingTarPit extends CardImpl {
 
     public CreepingTarPit (UUID ownerId) {
         super(ownerId, 134, "Creeping Tar Pit", Rarity.RARE, new CardType[]{CardType.LAND}, null);

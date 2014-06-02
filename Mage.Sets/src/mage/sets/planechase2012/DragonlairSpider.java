@@ -41,7 +41,7 @@ import mage.game.permanent.token.InsectToken;
  *
  * @author LevelX2
  */
-public class DragonlairSpider extends CardImpl<DragonlairSpider> {
+public class DragonlairSpider extends CardImpl {
 
     public DragonlairSpider(UUID ownerId) {
         super(ownerId, 87, "Dragonlair Spider", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{G}{G}");

@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class RampagingWerewolf extends CardImpl<RampagingWerewolf> {
+public class RampagingWerewolf extends CardImpl {
 
     public RampagingWerewolf(UUID ownerId) {
         super(ownerId, 165, "Rampaging Werewolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");

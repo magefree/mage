@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class VolcanicGeyser extends CardImpl<VolcanicGeyser> {
+public class VolcanicGeyser extends CardImpl {
 
     public VolcanicGeyser(UUID ownerId) {
         super(ownerId, 154, "Volcanic Geyser", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");

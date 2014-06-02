@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ClovenCasting extends CardImpl<ClovenCasting> {
+public class ClovenCasting extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a multicolored instant or sorcery spell");
 

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HussarPatrol extends CardImpl<HussarPatrol> {
+public class HussarPatrol extends CardImpl {
 
     public HussarPatrol(UUID ownerId) {
         super(ownerId, 169, "Hussar Patrol", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");

@@ -45,7 +45,7 @@ import mage.game.Game;
  *
  * @author jeffwadsworth
  */
-public class DemonspineWhip extends CardImpl<DemonspineWhip> {
+public class DemonspineWhip extends CardImpl {
 
     public DemonspineWhip(UUID ownerId) {
         super(ownerId, 39, "Demonspine Whip", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{B}{R}");

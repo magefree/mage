@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SutureSpirit extends CardImpl<SutureSpirit> {
+public class SutureSpirit extends CardImpl {
 
     public SutureSpirit(UUID ownerId) {
         super(ownerId, 16, "Suture Spirit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

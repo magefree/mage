@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class VotaryOfTheConclave extends CardImpl<VotaryOfTheConclave> {
+public class VotaryOfTheConclave extends CardImpl {
 
     public VotaryOfTheConclave (UUID ownerId) {
         super(ownerId, 35, "Votary of the Conclave", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

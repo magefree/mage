@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class Gravepurge extends CardImpl<Gravepurge> {
+public class Gravepurge extends CardImpl {
 
     public Gravepurge(UUID ownerId) {
         super(ownerId, 65, "Gravepurge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

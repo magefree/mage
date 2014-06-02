@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class BeaconOfImmortality extends CardImpl<BeaconOfImmortality> {
+public class BeaconOfImmortality extends CardImpl {
 
     public BeaconOfImmortality(UUID ownerId) {
         super(ownerId, 10, "Beacon of Immortality", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{W}");

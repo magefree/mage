@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class FlowstoneGiant extends CardImpl<FlowstoneGiant> {
+public class FlowstoneGiant extends CardImpl {
 
     public FlowstoneGiant(UUID ownerId) {
         super(ownerId, 174, "Flowstone Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Bloodscent extends CardImpl<Bloodscent> {
+public class Bloodscent extends CardImpl {
 
     public Bloodscent(UUID ownerId) {
         super(ownerId, 114, "Bloodscent", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");

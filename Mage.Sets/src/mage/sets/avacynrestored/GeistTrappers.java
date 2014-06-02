@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class GeistTrappers extends CardImpl<GeistTrappers> {
+public class GeistTrappers extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, both creatures have reach";
 

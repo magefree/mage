@@ -42,7 +42,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class TuktukTheExplorer extends CardImpl<TuktukTheExplorer> {
+public class TuktukTheExplorer extends CardImpl {
 
     public TuktukTheExplorer (UUID ownerId) {
         super(ownerId, 169, "Tuktuk the Explorer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class Conflux extends CardImpl<Conflux> {
+public class Conflux extends CardImpl {
 
     public Conflux(UUID ownerId) {
         super(ownerId, 102, "Conflux", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{W}{U}{B}{R}{G}");

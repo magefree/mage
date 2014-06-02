@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class WhispersOfTheMuse extends CardImpl<WhispersOfTheMuse> {
+public class WhispersOfTheMuse extends CardImpl {
 
     public WhispersOfTheMuse(UUID ownerId) {
         super(ownerId, 103, "Whispers of the Muse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");

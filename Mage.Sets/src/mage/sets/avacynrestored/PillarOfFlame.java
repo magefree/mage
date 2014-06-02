@@ -48,7 +48,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author North
  */
-public class PillarOfFlame extends CardImpl<PillarOfFlame> {
+public class PillarOfFlame extends CardImpl {
 
     public PillarOfFlame(UUID ownerId) {
         super(ownerId, 149, "Pillar of Flame", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");

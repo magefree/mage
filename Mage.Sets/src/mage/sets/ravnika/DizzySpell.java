@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DizzySpell extends CardImpl<DizzySpell> {
+public class DizzySpell extends CardImpl {
 
     public DizzySpell(UUID ownerId) {
         super(ownerId, 43, "Dizzy Spell", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class BasicLand<T extends BasicLand<T>> extends CardImpl<T> {
+public abstract class BasicLand<T extends BasicLand<T>> extends CardImpl {
 
     public BasicLand(UUID ownerId, int cardNumber, String name, ManaAbility mana) {
         super(ownerId, cardNumber, name, Rarity.LAND, new CardType[]{CardType.LAND}, null);

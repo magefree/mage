@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class VernalBloom extends CardImpl<VernalBloom> {
+public class VernalBloom extends CardImpl {
 
     public VernalBloom(UUID ownerId) {
         super(ownerId, 281, "Vernal Bloom", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class OgreMenial extends CardImpl<OgreMenial> {
+public class OgreMenial extends CardImpl {
 
     public OgreMenial(UUID ownerId) {
         super(ownerId, 89, "Ogre Menial", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

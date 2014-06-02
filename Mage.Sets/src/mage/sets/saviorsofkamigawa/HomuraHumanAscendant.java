@@ -52,7 +52,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class HomuraHumanAscendant extends CardImpl<HomuraHumanAscendant> {
+public class HomuraHumanAscendant extends CardImpl {
 
     public HomuraHumanAscendant(UUID ownerId) {
         super(ownerId, 103, "Homura, Human Ascendant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

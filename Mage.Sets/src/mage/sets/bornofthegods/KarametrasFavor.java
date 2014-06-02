@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KarametrasFavor extends CardImpl<KarametrasFavor> {
+public class KarametrasFavor extends CardImpl {
 
     public KarametrasFavor(UUID ownerId) {
         super(ownerId, 125, "Karametra's Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

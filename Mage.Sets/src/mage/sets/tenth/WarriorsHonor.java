@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class WarriorsHonor extends CardImpl<WarriorsHonor> {
+public class WarriorsHonor extends CardImpl {
 
     public WarriorsHonor(UUID ownerId) {
         super(ownerId, 58, "Warrior's Honor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

@@ -43,7 +43,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class TormentorsTrident extends CardImpl<TormentorsTrident> {
+public class TormentorsTrident extends CardImpl {
 
     public TormentorsTrident(UUID ownerId) {
         super(ownerId, 222, "Tormentor's Trident", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

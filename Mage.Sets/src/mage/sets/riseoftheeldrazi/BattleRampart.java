@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class BattleRampart extends CardImpl<BattleRampart> {
+public class BattleRampart extends CardImpl {
 
     public BattleRampart(UUID ownerId) {
         super(ownerId, 135, "Battle Rampart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class CallerOfGales extends CardImpl<CallerOfGales> {
+public class CallerOfGales extends CardImpl {
 
     public CallerOfGales (UUID ownerId) {
         super(ownerId, 43, "Caller of Gales", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

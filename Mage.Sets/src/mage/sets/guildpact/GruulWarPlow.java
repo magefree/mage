@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author Loki
  */
-public class GruulWarPlow extends CardImpl<GruulWarPlow> {
+public class GruulWarPlow extends CardImpl {
 
     public GruulWarPlow(UUID ownerId) {
         super(ownerId, 151, "Gruul War Plow", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class SanityGnawers extends CardImpl<SanityGnawers> {
+public class SanityGnawers extends CardImpl {
 
     public SanityGnawers(UUID ownerId) {
         super(ownerId, 44, "Sanity Gnawers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");

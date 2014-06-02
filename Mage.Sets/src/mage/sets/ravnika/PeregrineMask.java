@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class PeregrineMask extends CardImpl<PeregrineMask> {
+public class PeregrineMask extends CardImpl {
 
     public PeregrineMask(UUID ownerId) {
         super(ownerId, 268, "Peregrine Mask", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

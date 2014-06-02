@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ManiacalRage extends CardImpl<ManiacalRage> {
+public class ManiacalRage extends CardImpl {
 
     public ManiacalRage(UUID ownerId) {
         super(ownerId, 68, "Maniacal Rage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

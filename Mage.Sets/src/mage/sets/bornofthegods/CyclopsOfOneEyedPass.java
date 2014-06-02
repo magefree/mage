@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class CyclopsOfOneEyedPass extends CardImpl<CyclopsOfOneEyedPass> {
+public class CyclopsOfOneEyedPass extends CardImpl {
 
     public CyclopsOfOneEyedPass(UUID ownerId) {
         super(ownerId, 90, "Cyclops of One-Eyed Pass", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

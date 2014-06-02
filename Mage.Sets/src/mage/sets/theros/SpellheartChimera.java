@@ -45,7 +45,7 @@ import mage.filter.common.FilterInstantOrSorceryCard;
  *
  * @author LevelX2
  */
-public class SpellheartChimera extends CardImpl<SpellheartChimera> {
+public class SpellheartChimera extends CardImpl {
 
     public SpellheartChimera(UUID ownerId) {
         super(ownerId, 204, "Spellheart Chimera", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");

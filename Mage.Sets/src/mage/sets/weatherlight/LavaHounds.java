@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class LavaHounds extends CardImpl<LavaHounds> {
+public class LavaHounds extends CardImpl {
 
     public LavaHounds(UUID ownerId) {
         super(ownerId, 109, "Lava Hounds", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

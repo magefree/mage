@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33
  */
-public class MorgueTheft extends CardImpl<MorgueTheft> {
+public class MorgueTheft extends CardImpl {
     
     public MorgueTheft(UUID ownerId) {
         super(ownerId, 151, "Morgue Theft", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

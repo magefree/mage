@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class TorporOrb extends CardImpl<TorporOrb> {
+public class TorporOrb extends CardImpl {
 
     public TorporOrb(UUID ownerId) {
         super(ownerId, 162, "Torpor Orb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

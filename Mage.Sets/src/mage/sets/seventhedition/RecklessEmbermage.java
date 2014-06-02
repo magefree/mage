@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Quercitron
  */
-public class RecklessEmbermage extends CardImpl<RecklessEmbermage> {
+public class RecklessEmbermage extends CardImpl {
 
     public RecklessEmbermage(UUID ownerId) {
         super(ownerId, 212, "Reckless Embermage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

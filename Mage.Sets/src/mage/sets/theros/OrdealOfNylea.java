@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OrdealOfNylea extends CardImpl<OrdealOfNylea> {
+public class OrdealOfNylea extends CardImpl {
 
     public OrdealOfNylea(UUID ownerId) {
         super(ownerId, 170, "Ordeal of Nylea", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class Manabond extends CardImpl<Manabond> {
+public class Manabond extends CardImpl {
 
     public Manabond(UUID ownerId) {
         super(ownerId, 113, "Manabond", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");

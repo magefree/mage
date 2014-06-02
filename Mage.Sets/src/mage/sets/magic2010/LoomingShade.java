@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LoomingShade extends CardImpl<LoomingShade> {
+public class LoomingShade extends CardImpl {
 
     public LoomingShade(UUID ownerId) {
         super(ownerId, 103, "Looming Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

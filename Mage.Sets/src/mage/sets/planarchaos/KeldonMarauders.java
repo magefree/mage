@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author jonubuu
  */
-public class KeldonMarauders extends CardImpl<KeldonMarauders> {
+public class KeldonMarauders extends CardImpl {
 
     public KeldonMarauders(UUID ownerId) {
         super(ownerId, 102, "Keldon Marauders", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

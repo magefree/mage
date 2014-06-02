@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class XantidSwarm extends CardImpl<XantidSwarm> {
+public class XantidSwarm extends CardImpl {
 
     public XantidSwarm(UUID ownerId) {
         super(ownerId, 135, "Xantid Swarm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");

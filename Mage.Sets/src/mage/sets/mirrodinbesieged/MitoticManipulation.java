@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class MitoticManipulation extends CardImpl<MitoticManipulation> {
+public class MitoticManipulation extends CardImpl {
 
     public MitoticManipulation(UUID ownerId) {
         super(ownerId, 27, "Mitotic Manipulation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");

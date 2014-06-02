@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Dispel extends CardImpl<Dispel> {
+public class Dispel extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant spell");
 

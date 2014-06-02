@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CliffThreader extends CardImpl<CliffThreader> {
+public class CliffThreader extends CardImpl {
 
     public CliffThreader (UUID ownerId) {
         super(ownerId, 7, "Cliff Threader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

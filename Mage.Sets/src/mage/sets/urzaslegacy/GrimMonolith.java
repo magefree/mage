@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class GrimMonolith extends CardImpl<GrimMonolith> {
+public class GrimMonolith extends CardImpl {
 
     public GrimMonolith(UUID ownerId) {
         super(ownerId, 126, "Grim Monolith", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

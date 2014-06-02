@@ -42,7 +42,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author LevelX2
  */
-public class Sporemound extends CardImpl<Sporemound> {
+public class Sporemound extends CardImpl {
 
     public Sporemound(UUID ownerId) {
         super(ownerId, 196, "Sporemound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

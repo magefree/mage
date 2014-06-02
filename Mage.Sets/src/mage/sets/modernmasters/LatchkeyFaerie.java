@@ -43,7 +43,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class LatchkeyFaerie extends CardImpl<LatchkeyFaerie> {
+public class LatchkeyFaerie extends CardImpl {
 
     public LatchkeyFaerie(UUID ownerId) {
         super(ownerId, 50, "Latchkey Faerie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

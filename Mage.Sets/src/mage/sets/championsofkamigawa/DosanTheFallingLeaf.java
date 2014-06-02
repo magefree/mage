@@ -42,7 +42,7 @@ import mage.game.events.GameEvent;
  *
  * @author Loki
  */
-public class DosanTheFallingLeaf extends CardImpl<DosanTheFallingLeaf> {
+public class DosanTheFallingLeaf extends CardImpl {
 
     public DosanTheFallingLeaf(UUID ownerId) {
         super(ownerId, 205, "Dosan the Falling Leaf", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

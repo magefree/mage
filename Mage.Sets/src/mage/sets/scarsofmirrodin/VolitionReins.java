@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class VolitionReins extends CardImpl<VolitionReins> {
+public class VolitionReins extends CardImpl {
 
     public VolitionReins(UUID ownerId) {
         super(ownerId, 53, "Volition Reins", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}{U}");

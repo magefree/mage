@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TempleOfSilence extends CardImpl<TempleOfSilence> {
+public class TempleOfSilence extends CardImpl {
 
     public TempleOfSilence(UUID ownerId) {
         super(ownerId, 227, "Temple of Silence", Rarity.RARE, new CardType[]{CardType.LAND}, "");

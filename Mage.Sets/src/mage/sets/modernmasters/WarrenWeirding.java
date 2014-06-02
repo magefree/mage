@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class WarrenWeirding extends CardImpl<WarrenWeirding> {
+public class WarrenWeirding extends CardImpl {
 
     public WarrenWeirding(UUID ownerId) {
         super(ownerId, 104, "Warren Weirding", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

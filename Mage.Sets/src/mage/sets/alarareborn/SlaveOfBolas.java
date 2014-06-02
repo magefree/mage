@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class SlaveOfBolas extends CardImpl<SlaveOfBolas> {
+public class SlaveOfBolas extends CardImpl {
 
     public SlaveOfBolas(UUID ownerId) {
         super(ownerId, 136, "Slave of Bolas", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U/R}{B}");

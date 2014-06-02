@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SkyRuinDrake extends CardImpl<SkyRuinDrake> {
+public class SkyRuinDrake extends CardImpl {
 
     public SkyRuinDrake(UUID ownerId) {
         super(ownerId, 66, "Sky Ruin Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

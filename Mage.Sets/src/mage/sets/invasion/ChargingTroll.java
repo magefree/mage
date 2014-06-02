@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ChargingTroll extends CardImpl<ChargingTroll> {
+public class ChargingTroll extends CardImpl {
 
     public ChargingTroll(UUID ownerId) {
         super(ownerId, 239, "Charging Troll", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");

@@ -65,7 +65,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class BombSquad extends CardImpl<BombSquad> {
+public class BombSquad extends CardImpl {
 
     public BombSquad(UUID ownerId) {
         super(ownerId, 179, "Bomb Squad", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

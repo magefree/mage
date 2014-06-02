@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LurkingCrocodile extends CardImpl<LurkingCrocodile> {
+public class LurkingCrocodile extends CardImpl {
 
     public LurkingCrocodile(UUID ownerId) {
         super(ownerId, 184, "Lurking Crocodile", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

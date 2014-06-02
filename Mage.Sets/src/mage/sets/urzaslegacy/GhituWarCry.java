@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class GhituWarCry extends CardImpl<GhituWarCry> {
+public class GhituWarCry extends CardImpl {
 
     public GhituWarCry(UUID ownerId) {
         super(ownerId, 78, "Ghitu War Cry", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

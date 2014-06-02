@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class RavagedHighlands extends CardImpl<RavagedHighlands> {
+public class RavagedHighlands extends CardImpl {
 
     public RavagedHighlands(UUID ownerId) {
         super(ownerId, 324, "Ravaged Highlands", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

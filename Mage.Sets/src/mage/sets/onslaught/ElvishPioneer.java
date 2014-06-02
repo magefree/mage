@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Plopman
  */
-public class ElvishPioneer extends CardImpl<ElvishPioneer> {
+public class ElvishPioneer extends CardImpl {
 
     public ElvishPioneer(UUID ownerId) {
         super(ownerId, 257, "Elvish Pioneer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

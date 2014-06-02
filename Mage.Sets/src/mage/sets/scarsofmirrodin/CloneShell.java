@@ -52,7 +52,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class CloneShell extends CardImpl<CloneShell> {
+public class CloneShell extends CardImpl {
 
     public CloneShell(UUID ownerId) {
         super(ownerId, 143, "Clone Shell", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

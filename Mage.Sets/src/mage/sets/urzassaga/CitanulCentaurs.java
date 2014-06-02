@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class CitanulCentaurs extends CardImpl<CitanulCentaurs>{
+public class CitanulCentaurs extends CardImpl{
 
     public CitanulCentaurs(UUID ownerId) {
         super(ownerId, 243, "Citanul Centaurs", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author KholdFuzion
 
  */
-public class ControlMagic extends CardImpl<ControlMagic> {
+public class ControlMagic extends CardImpl {
 
     public ControlMagic(UUID ownerId) {
         super(ownerId, 53, "Control Magic", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

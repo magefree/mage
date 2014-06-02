@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KessigRecluse extends CardImpl<KessigRecluse> {
+public class KessigRecluse extends CardImpl {
 
     public KessigRecluse(UUID ownerId) {
         super(ownerId, 121, "Kessig Recluse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class WayfarersBauble extends CardImpl<WayfarersBauble> {
+public class WayfarersBauble extends CardImpl {
 
     public WayfarersBauble(UUID ownerId) {
         super(ownerId, 270, "Wayfarer's Bauble", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

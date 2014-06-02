@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class DiaochanArtfulBeauty extends CardImpl<DiaochanArtfulBeauty> {
+public class DiaochanArtfulBeauty extends CardImpl {
 
     public DiaochanArtfulBeauty(UUID ownerId) {
         super(ownerId, 108, "Diaochan, Artful Beauty", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

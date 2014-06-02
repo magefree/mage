@@ -51,7 +51,7 @@ import mage.game.stack.StackObject;
  */
 
 
-public class RenegadeKrasis extends CardImpl<RenegadeKrasis> {
+public class RenegadeKrasis extends CardImpl {
 
     public RenegadeKrasis (UUID ownerId) {
         super(ownerId, 47, "Renegade Krasis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

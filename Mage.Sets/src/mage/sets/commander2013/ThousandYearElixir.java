@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ThousandYearElixir extends CardImpl<ThousandYearElixir> {
+public class ThousandYearElixir extends CardImpl {
 
     public ThousandYearElixir(UUID ownerId) {
         super(ownerId, 266, "Thousand-Year Elixir", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

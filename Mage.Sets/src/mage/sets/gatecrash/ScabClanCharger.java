@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class ScabClanCharger extends CardImpl<ScabClanCharger> {
+public class ScabClanCharger extends CardImpl {
 
     public ScabClanCharger(UUID ownerId) {
         super(ownerId, 131, "Scab-Clan Charger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class VaultOfWhispers extends CardImpl<VaultOfWhispers> {
+public class VaultOfWhispers extends CardImpl {
 
     public VaultOfWhispers (UUID ownerId) {
         super(ownerId, 286, "Vault of Whispers", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);

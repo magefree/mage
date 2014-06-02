@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SkirkDrillSergeant extends CardImpl<SkirkDrillSergeant> {
+public class SkirkDrillSergeant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Goblin");
 

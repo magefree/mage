@@ -43,7 +43,7 @@ import mage.watchers.common.SourceDidDamageWatcher;
  *
  * @author LevelX2
  */
-public class RestoreThePeace extends CardImpl<RestoreThePeace> {
+public class RestoreThePeace extends CardImpl {
 
     public RestoreThePeace(UUID ownerId) {
         super(ownerId, 97, "Restore the Peace", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{U}");

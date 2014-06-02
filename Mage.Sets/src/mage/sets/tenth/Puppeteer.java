@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Puppeteer extends CardImpl<Puppeteer> {
+public class Puppeteer extends CardImpl {
 
     public Puppeteer(UUID ownerId) {
         super(ownerId, 98, "Puppeteer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

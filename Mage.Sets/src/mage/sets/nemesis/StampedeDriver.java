@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Backfir3
  */
-public class StampedeDriver extends CardImpl<StampedeDriver> {
+public class StampedeDriver extends CardImpl {
 
     public StampedeDriver(UUID ownerId) {
 		super(ownerId, 122, "Stampede Driver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");

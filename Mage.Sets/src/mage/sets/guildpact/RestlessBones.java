@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class RestlessBones extends CardImpl<RestlessBones> {
+public class RestlessBones extends CardImpl {
 
     public RestlessBones(UUID ownerId) {
         super(ownerId, 58, "Restless Bones", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class Soulmender extends CardImpl<Soulmender> {
+public class Soulmender extends CardImpl {
 
     public Soulmender(UUID ownerId) {
         super(ownerId, 37, "Soulmender", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

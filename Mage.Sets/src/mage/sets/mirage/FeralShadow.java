@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FeralShadow extends CardImpl<FeralShadow> {
+public class FeralShadow extends CardImpl {
 
     public FeralShadow(UUID ownerId) {
         super(ownerId, 20, "Feral Shadow", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

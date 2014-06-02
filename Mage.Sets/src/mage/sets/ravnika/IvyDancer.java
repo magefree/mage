@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class IvyDancer extends CardImpl<IvyDancer> {
+public class IvyDancer extends CardImpl {
 
     public IvyDancer(UUID ownerId) {
         super(ownerId, 171, "Ivy Dancer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

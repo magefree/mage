@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class BanishingLight extends CardImpl<BanishingLight> {
+public class BanishingLight extends CardImpl {
 
     private final static FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent an opponent controls");
     

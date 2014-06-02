@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class ReapingTheGraves extends CardImpl<ReapingTheGraves> {
+public class ReapingTheGraves extends CardImpl {
 
     public ReapingTheGraves(UUID ownerId) {
         super(ownerId, 72, "Reaping the Graves", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

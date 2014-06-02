@@ -49,7 +49,7 @@ import mage.game.Game;
  * @author jeffwadsworth
  *
  */
-public class Primalcrux extends CardImpl<Primalcrux> {
+public class Primalcrux extends CardImpl {
 
     public Primalcrux(UUID ownerId) {
         super(ownerId, 73, "Primalcrux", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}{G}{G}{G}{G}");

@@ -44,7 +44,7 @@ import mage.abilities.common.BecomesTargetControllerSpellTriggeredAbility;
  *
  * @author jeffwadsworth
  */
-public class DormantGomazoa extends CardImpl<DormantGomazoa> {
+public class DormantGomazoa extends CardImpl {
 
     public DormantGomazoa(UUID ownerId) {
         super(ownerId, 62, "Dormant Gomazoa", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

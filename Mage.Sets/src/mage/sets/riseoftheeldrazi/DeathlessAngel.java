@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DeathlessAngel extends CardImpl<DeathlessAngel> {
+public class DeathlessAngel extends CardImpl {
 
     public DeathlessAngel (UUID ownerId) {
         super(ownerId, 17, "Deathless Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

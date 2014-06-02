@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class ExplosiveImpact extends CardImpl<ExplosiveImpact> {
+public class ExplosiveImpact extends CardImpl {
 
     public ExplosiveImpact(UUID ownerId) {
         super(ownerId, 94, "Explosive Impact", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{R}");

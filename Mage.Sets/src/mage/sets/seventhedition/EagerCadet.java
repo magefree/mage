@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class EagerCadet extends CardImpl<EagerCadet> {
+public class EagerCadet extends CardImpl {
     
   public EagerCadet(UUID ownerId) {
         super(ownerId, 14, "Eager Cadet", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AbbeyGriffin extends CardImpl<AbbeyGriffin> {
+public class AbbeyGriffin extends CardImpl {
 
     public AbbeyGriffin(UUID ownerId) {
         super(ownerId, 1, "Abbey Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

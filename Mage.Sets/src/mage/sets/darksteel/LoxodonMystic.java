@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class LoxodonMystic extends CardImpl<LoxodonMystic> {
+public class LoxodonMystic extends CardImpl {
 
     public LoxodonMystic(UUID ownerId) {
         super(ownerId, 7, "Loxodon Mystic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

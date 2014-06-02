@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SipOfHemlock extends CardImpl<SipOfHemlock> {
+public class SipOfHemlock extends CardImpl {
 
     public SipOfHemlock(UUID ownerId) {
         super(ownerId, 106, "Sip of Hemlock", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

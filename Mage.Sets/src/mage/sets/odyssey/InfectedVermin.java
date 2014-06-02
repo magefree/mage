@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class InfectedVermin extends CardImpl<InfectedVermin> {
+public class InfectedVermin extends CardImpl {
 
     public InfectedVermin(UUID ownerId) {
         super(ownerId, 144, "Infected Vermin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

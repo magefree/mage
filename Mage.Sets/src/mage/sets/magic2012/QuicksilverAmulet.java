@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class QuicksilverAmulet extends CardImpl<QuicksilverAmulet> {
+public class QuicksilverAmulet extends CardImpl {
 
     public QuicksilverAmulet(UUID ownerId) {
         super(ownerId, 214, "Quicksilver Amulet", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GreenweaverDruid extends CardImpl<GreenweaverDruid> {
+public class GreenweaverDruid extends CardImpl {
 
     public GreenweaverDruid(UUID ownerId) {
         super(ownerId, 164, "Greenweaver Druid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

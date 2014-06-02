@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class StromkirkPatrol extends CardImpl<StromkirkPatrol> {
+public class StromkirkPatrol extends CardImpl {
 
     public StromkirkPatrol(UUID ownerId) {
         super(ownerId, 118, "Stromkirk Patrol", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

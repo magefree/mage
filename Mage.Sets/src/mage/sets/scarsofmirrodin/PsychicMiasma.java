@@ -46,7 +46,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PsychicMiasma extends CardImpl<PsychicMiasma> {
+public class PsychicMiasma extends CardImpl {
 
     public PsychicMiasma(UUID ownerId) {
         super(ownerId, 76, "Psychic Miasma", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

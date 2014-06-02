@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class GerrardsBattleCry extends CardImpl<GerrardsBattleCry> {
+public class GerrardsBattleCry extends CardImpl {
 
     public GerrardsBattleCry(UUID ownerId) {
         super(ownerId, 233, "Gerrard's Battle Cry", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");

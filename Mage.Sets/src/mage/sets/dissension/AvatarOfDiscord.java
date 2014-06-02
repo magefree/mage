@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Plopman
  */
-public class AvatarOfDiscord extends CardImpl<AvatarOfDiscord> {
+public class AvatarOfDiscord extends CardImpl {
 
     public AvatarOfDiscord(UUID ownerId) {
         super(ownerId, 140, "Avatar of Discord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B/R}{B/R}{B/R}");

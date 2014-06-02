@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 /**
  * @author anonymous
  */
-public class ScionOfTheWild extends CardImpl<ScionOfTheWild> {
+public class ScionOfTheWild extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 

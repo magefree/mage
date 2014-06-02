@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class GoblinBully extends CardImpl<GoblinBully> {
+public class GoblinBully extends CardImpl {
 
     public GoblinBully(UUID ownerId) {
         super(ownerId, 136, "Goblin Bully", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

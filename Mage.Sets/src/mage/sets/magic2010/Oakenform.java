@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Oakenform extends CardImpl<Oakenform> {
+public class Oakenform extends CardImpl {
 
     public Oakenform(UUID ownerId) {
         super(ownerId, 197, "Oakenform", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

@@ -67,7 +67,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class Godsend extends CardImpl<Godsend> {
+public class Godsend extends CardImpl {
 
     public Godsend(UUID ownerId) {
         super(ownerId, 12, "Godsend", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{1}{W}{W}");

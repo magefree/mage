@@ -56,7 +56,7 @@ import mage.target.TargetPermanent;
 /**
  * @author LevelX2
  */
-public class WaxmaneBaku extends CardImpl<WaxmaneBaku> {
+public class WaxmaneBaku extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

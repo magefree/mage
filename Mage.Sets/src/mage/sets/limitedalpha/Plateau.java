@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class Plateau extends CardImpl<Plateau> {
+public class Plateau extends CardImpl {
 
     public Plateau(UUID ownerId) {
         super(ownerId, 287, "Plateau", Rarity.RARE, new CardType[]{CardType.LAND}, "");

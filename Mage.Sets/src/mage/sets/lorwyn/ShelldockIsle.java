@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ShelldockIsle extends CardImpl<ShelldockIsle> {
+public class ShelldockIsle extends CardImpl {
 
     public ShelldockIsle(UUID ownerId) {
         super(ownerId, 272, "Shelldock Isle", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author anonymous
  */
-public class ArchdemonOfGreed extends CardImpl<ArchdemonOfGreed> {
+public class ArchdemonOfGreed extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human");
 

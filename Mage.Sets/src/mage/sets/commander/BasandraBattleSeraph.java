@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class BasandraBattleSeraph extends CardImpl<BasandraBattleSeraph> {
+public class BasandraBattleSeraph extends CardImpl {
 
     public BasandraBattleSeraph(UUID ownerId) {
         super(ownerId, 184, "Basandra, Battle Seraph", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");

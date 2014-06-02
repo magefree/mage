@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TowerGargoyle extends CardImpl<TowerGargoyle> {
+public class TowerGargoyle extends CardImpl {
 
     public TowerGargoyle(UUID ownerId) {
         super(ownerId, 205, "Tower Gargoyle", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}{U}{B}");

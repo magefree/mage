@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class TatsumasaTheDragonsFang extends CardImpl<TatsumasaTheDragonsFang> {
+public class TatsumasaTheDragonsFang extends CardImpl {
 
     public TatsumasaTheDragonsFang(UUID ownerId) {
         super(ownerId, 270, "Tatsumasa, the Dragon's Fang", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

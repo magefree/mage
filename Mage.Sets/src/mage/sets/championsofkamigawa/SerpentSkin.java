@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SerpentSkin extends CardImpl<SerpentSkin> {
+public class SerpentSkin extends CardImpl {
 
     public SerpentSkin (UUID ownerId) {
         super(ownerId, 240, "Serpent Skin", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

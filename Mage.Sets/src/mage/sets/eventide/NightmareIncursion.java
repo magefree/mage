@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class NightmareIncursion extends CardImpl<NightmareIncursion> {
+public class NightmareIncursion extends CardImpl {
 
     public NightmareIncursion(UUID ownerId) {
         super(ownerId, 40, "Nightmare Incursion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B}");

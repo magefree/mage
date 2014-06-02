@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class NezumiShadowWatcher extends CardImpl<NezumiShadowWatcher> {
+public class NezumiShadowWatcher extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Ninja");
 

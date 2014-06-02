@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ElvishWarrior extends CardImpl<ElvishWarrior> {
+public class ElvishWarrior extends CardImpl {
 
     public ElvishWarrior(UUID ownerId) {
         super(ownerId, 120, "Elvish Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");

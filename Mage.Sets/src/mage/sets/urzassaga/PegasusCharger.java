@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PegasusCharger extends CardImpl<PegasusCharger> {
+public class PegasusCharger extends CardImpl {
 
     public PegasusCharger(UUID ownerId) {
         super(ownerId, 30, "Pegasus Charger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

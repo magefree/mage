@@ -57,7 +57,7 @@ import mage.game.permanent.Permanent;
  * @author jeffwadsworth
  *
  */
-public class MephidrossVampire extends CardImpl<MephidrossVampire> {
+public class MephidrossVampire extends CardImpl {
 
     public MephidrossVampire(UUID ownerId) {
         super(ownerId, 53, "Mephidross Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

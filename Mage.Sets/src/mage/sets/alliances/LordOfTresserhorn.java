@@ -52,7 +52,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class LordOfTresserhorn extends CardImpl<LordOfTresserhorn> {
+public class LordOfTresserhorn extends CardImpl {
 
     public LordOfTresserhorn(UUID ownerId) {
         super(ownerId, 193, "Lord of Tresserhorn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");

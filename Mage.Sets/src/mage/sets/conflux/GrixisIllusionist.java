@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class GrixisIllusionist extends CardImpl<GrixisIllusionist> {
+public class GrixisIllusionist extends CardImpl {
 
     public GrixisIllusionist(UUID ownerId) {
         super(ownerId, 29, "Grixis Illusionist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

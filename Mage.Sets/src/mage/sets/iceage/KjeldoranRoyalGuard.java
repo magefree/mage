@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Quercitron
  */
-public class KjeldoranRoyalGuard extends CardImpl<KjeldoranRoyalGuard> {
+public class KjeldoranRoyalGuard extends CardImpl {
 
     public KjeldoranRoyalGuard(UUID ownerId) {
         super(ownerId, 262, "Kjeldoran Royal Guard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

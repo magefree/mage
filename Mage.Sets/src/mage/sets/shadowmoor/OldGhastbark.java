@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class OldGhastbark extends CardImpl<OldGhastbark> {
+public class OldGhastbark extends CardImpl {
 
     public OldGhastbark(UUID ownerId) {
         super(ownerId, 232, "Old Ghastbark", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G/W}{G/W}");

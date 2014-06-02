@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KilnWalker extends CardImpl<KilnWalker> {
+public class KilnWalker extends CardImpl {
 
     public KilnWalker(UUID ownerId) {
         super(ownerId, 142, "Kiln Walker", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

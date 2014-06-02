@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class HedronFieldPurists extends CardImpl<HedronFieldPurists> {
+public class HedronFieldPurists extends CardImpl {
 
     public HedronFieldPurists(UUID ownerId) {
         super(ownerId, 25, "Hedron-Field Purists", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");

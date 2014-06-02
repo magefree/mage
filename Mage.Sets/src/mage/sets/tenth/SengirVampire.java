@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class SengirVampire extends CardImpl<SengirVampire> {
+public class SengirVampire extends CardImpl {
 
     public SengirVampire(UUID ownerId) {
         super(ownerId, 176, "Sengir Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

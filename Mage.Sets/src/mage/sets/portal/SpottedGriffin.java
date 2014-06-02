@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class SpottedGriffin extends CardImpl<SpottedGriffin> {
+public class SpottedGriffin extends CardImpl {
 
     public SpottedGriffin(UUID ownerId) {
         super(ownerId, 190, "Spotted Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

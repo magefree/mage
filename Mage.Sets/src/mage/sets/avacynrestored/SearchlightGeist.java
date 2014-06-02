@@ -43,7 +43,7 @@ import mage.constants.Zone;
 /**
  * @author noxx
  */
-public class SearchlightGeist extends CardImpl<SearchlightGeist> {
+public class SearchlightGeist extends CardImpl {
 
     public SearchlightGeist(UUID ownerId) {
         super(ownerId, 119, "Searchlight Geist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

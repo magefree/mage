@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MountainGoat extends CardImpl<MountainGoat> {
+public class MountainGoat extends CardImpl {
 
     public MountainGoat(UUID ownerId) {
         super(ownerId, 252, "Mountain Goat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

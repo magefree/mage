@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class ImpelledGiant extends CardImpl<ImpelledGiant> {
+public class ImpelledGiant extends CardImpl {
 
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped red creature you control other than Impelled Giant");
 

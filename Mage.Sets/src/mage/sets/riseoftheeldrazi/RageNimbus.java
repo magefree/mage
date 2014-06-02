@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class RageNimbus extends CardImpl<RageNimbus> {
+public class RageNimbus extends CardImpl {
 
     public RageNimbus(UUID ownerId) {
         super(ownerId, 160, "Rage Nimbus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class BlindingAngel extends CardImpl<BlindingAngel> {
+public class BlindingAngel extends CardImpl {
 
     public BlindingAngel(UUID ownerId) {
         super(ownerId, 3, "Blinding Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

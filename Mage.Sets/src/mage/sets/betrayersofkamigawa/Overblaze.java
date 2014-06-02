@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Overblaze extends CardImpl<Overblaze> {
+public class Overblaze extends CardImpl {
 
     public Overblaze(UUID ownerId) {
         super(ownerId, 114, "Overblaze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");

@@ -41,7 +41,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class ThievesFortune extends CardImpl<ThievesFortune> {
+public class ThievesFortune extends CardImpl {
 
     public ThievesFortune(UUID ownerId) {
         super(ownerId, 54, "Thieves' Fortune", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

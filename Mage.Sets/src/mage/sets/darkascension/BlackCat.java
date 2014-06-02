@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author LevelX
  */
-public class BlackCat extends CardImpl<BlackCat> {
+public class BlackCat extends CardImpl {
 
     public BlackCat(UUID ownerId) {
         super(ownerId, 54, "Black Cat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class HallowedBurial extends CardImpl<HallowedBurial> {
+public class HallowedBurial extends CardImpl {
 
     public HallowedBurial(UUID ownerId) {
         super(ownerId, 7, "Hallowed Burial", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class TranquilGarden extends CardImpl<TranquilGarden> {
+public class TranquilGarden extends CardImpl {
 
     public TranquilGarden(UUID ownerId) {
         super(ownerId, 284, "Tranquil Garden", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

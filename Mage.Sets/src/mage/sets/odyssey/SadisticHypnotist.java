@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author cbt33
  */
-public class SadisticHypnotist extends CardImpl<SadisticHypnotist> {
+public class SadisticHypnotist extends CardImpl {
 
     public SadisticHypnotist(UUID ownerId) {
         super(ownerId, 159, "Sadistic Hypnotist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

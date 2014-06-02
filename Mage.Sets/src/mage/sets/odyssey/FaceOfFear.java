@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class FaceOfFear extends CardImpl<FaceOfFear> {
+public class FaceOfFear extends CardImpl {
 
     public FaceOfFear(UUID ownerId) {
         super(ownerId, 134, "Face of Fear", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");

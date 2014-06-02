@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth, nox
  */
-public class PithingNeedle extends CardImpl<PithingNeedle> {
+public class PithingNeedle extends CardImpl {
 
     public PithingNeedle(UUID ownerId) {
         super(ownerId, 158, "Pithing Needle", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

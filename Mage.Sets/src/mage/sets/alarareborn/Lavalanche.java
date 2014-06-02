@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class Lavalanche extends CardImpl<Lavalanche> {
+public class Lavalanche extends CardImpl {
 
     public Lavalanche(UUID ownerId) {
         super(ownerId, 118, "Lavalanche", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{R}{G}");

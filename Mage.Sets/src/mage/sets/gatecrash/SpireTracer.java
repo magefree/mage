@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class SpireTracer extends CardImpl<SpireTracer> {
+public class SpireTracer extends CardImpl {
 
     public SpireTracer(UUID ownerId) {
         super(ownerId, 135, "Spire Tracer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

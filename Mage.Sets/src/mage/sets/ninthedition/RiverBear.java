@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RiverBear extends CardImpl<RiverBear> {
+public class RiverBear extends CardImpl {
 
     public RiverBear(UUID ownerId) {
         super(ownerId, 266, "River Bear", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

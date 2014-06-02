@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class RendFlesh extends CardImpl<RendFlesh> {
+public class RendFlesh extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Non-Spirit");
 

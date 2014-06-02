@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Backfir3
  */
-public class GaeasEmbrace extends CardImpl<GaeasEmbrace> {
+public class GaeasEmbrace extends CardImpl {
 
     public GaeasEmbrace(UUID ownerId) {
         super(ownerId, 255, "Gaea's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

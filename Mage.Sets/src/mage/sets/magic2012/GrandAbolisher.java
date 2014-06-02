@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class GrandAbolisher extends CardImpl<GrandAbolisher> {
+public class GrandAbolisher extends CardImpl {
 
     public GrandAbolisher(UUID ownerId) {
         super(ownerId, 19, "Grand Abolisher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");

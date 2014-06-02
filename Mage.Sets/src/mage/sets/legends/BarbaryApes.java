@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BarbaryApes extends CardImpl<BarbaryApes> {
+public class BarbaryApes extends CardImpl {
 
     public BarbaryApes(UUID ownerId) {
         super(ownerId, 90, "Barbary Apes", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

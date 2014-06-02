@@ -37,7 +37,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class WalkingCorpse extends CardImpl<WalkingCorpse> {
+public class WalkingCorpse extends CardImpl {
 
     public WalkingCorpse(UUID ownerId) {
         super(ownerId, 126, "Walking Corpse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

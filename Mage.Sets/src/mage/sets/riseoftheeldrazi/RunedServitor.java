@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RunedServitor extends CardImpl<RunedServitor> {
+public class RunedServitor extends CardImpl {
 
     public RunedServitor(UUID ownerId) {
         super(ownerId, 224, "Runed Servitor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ThunderThrashElder extends CardImpl<ThunderThrashElder> {
+public class ThunderThrashElder extends CardImpl {
 
     public ThunderThrashElder(UUID ownerId) {
         super(ownerId, 117, "Thunder-Thrash Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

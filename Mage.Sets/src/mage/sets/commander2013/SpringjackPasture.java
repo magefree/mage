@@ -58,7 +58,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class SpringjackPasture extends CardImpl<SpringjackPasture> {
+public class SpringjackPasture extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goats");
 

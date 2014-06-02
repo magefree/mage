@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GnarledScarhide extends CardImpl<GnarledScarhide> {
+public class GnarledScarhide extends CardImpl {
 
     public GnarledScarhide(UUID ownerId) {
         super(ownerId, 72, "Gnarled Scarhide", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{B}");

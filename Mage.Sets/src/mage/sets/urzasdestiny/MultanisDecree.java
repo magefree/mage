@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Backfir3
  */
-public class MultanisDecree extends CardImpl<MultanisDecree> {
+public class MultanisDecree extends CardImpl {
 
     public MultanisDecree(UUID ownerId) {
         super(ownerId, 114, "Multani's Decree", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

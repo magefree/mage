@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class MesaFalcon extends CardImpl<MesaFalcon> {
+public class MesaFalcon extends CardImpl {
 
     public MesaFalcon(UUID ownerId) {
         super(ownerId, 112, "Mesa Falcon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

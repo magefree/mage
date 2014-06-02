@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class AkkiDrillmaster extends CardImpl<AkkiDrillmaster> {
+public class AkkiDrillmaster extends CardImpl {
 
     public AkkiDrillmaster(UUID ownerId) {
         super(ownerId, 92, "Akki Drillmaster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

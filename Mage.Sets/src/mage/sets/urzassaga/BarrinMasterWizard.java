@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class BarrinMasterWizard extends CardImpl<BarrinMasterWizard> {
+public class BarrinMasterWizard extends CardImpl {
 
     public BarrinMasterWizard(UUID ownerId) {
         super(ownerId, 63, "Barrin, Master Wizard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

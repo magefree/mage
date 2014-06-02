@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class FaithsReward extends CardImpl<FaithsReward> {
+public class FaithsReward extends CardImpl {
 
     public FaithsReward(UUID ownerId) {
         super(ownerId, 14, "Faith's Reward", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{W}");

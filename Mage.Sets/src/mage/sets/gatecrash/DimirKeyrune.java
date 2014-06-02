@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class DimirKeyrune extends CardImpl<DimirKeyrune> {
+public class DimirKeyrune extends CardImpl {
 
     public DimirKeyrune(UUID ownerId) {
         super(ownerId, 228, "Dimir Keyrune", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

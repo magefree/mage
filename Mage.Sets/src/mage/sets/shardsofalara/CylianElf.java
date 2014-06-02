@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CylianElf extends CardImpl<CylianElf> {
+public class CylianElf extends CardImpl {
 
     public CylianElf (UUID ownerId) {
         super(ownerId, 127, "Cylian Elf", Rarity.COMMON, new CardType[]{}, "{1}{G}");

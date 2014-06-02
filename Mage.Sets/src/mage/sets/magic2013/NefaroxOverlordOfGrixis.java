@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class NefaroxOverlordOfGrixis extends CardImpl<NefaroxOverlordOfGrixis> {
+public class NefaroxOverlordOfGrixis extends CardImpl {
 
     public NefaroxOverlordOfGrixis(UUID ownerId) {
         super(ownerId, 103, "Nefarox, Overlord of Grixis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

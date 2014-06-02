@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HarvestGwyllion extends CardImpl<HarvestGwyllion> {
+public class HarvestGwyllion extends CardImpl {
 
     public HarvestGwyllion(UUID ownerId) {
         super(ownerId, 90, "Harvest Gwyllion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W/B}{W/B}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CausticHound extends CardImpl<CausticHound> {
+public class CausticHound extends CardImpl {
 
     public CausticHound (UUID ownerId) {
         super(ownerId, 40, "Caustic Hound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class RecurringNightmare extends CardImpl<RecurringNightmare> {
+public class RecurringNightmare extends CardImpl {
     
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card in your graveyard");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("creature to sacrifice");

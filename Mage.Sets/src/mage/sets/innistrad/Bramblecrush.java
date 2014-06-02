@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class Bramblecrush extends CardImpl<Bramblecrush> {
+public class Bramblecrush extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 

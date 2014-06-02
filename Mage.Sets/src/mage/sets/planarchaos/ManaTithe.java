@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class ManaTithe extends CardImpl<ManaTithe> {
+public class ManaTithe extends CardImpl {
 
     public ManaTithe(UUID ownerId) {
         super(ownerId, 25, "Mana Tithe", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

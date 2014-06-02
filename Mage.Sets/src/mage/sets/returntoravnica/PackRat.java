@@ -71,7 +71,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class PackRat extends CardImpl<PackRat> {
+public class PackRat extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Rats you control");
 
     static {

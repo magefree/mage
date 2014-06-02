@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class CommuneWithTheGods extends CardImpl<CommuneWithTheGods> {
+public class CommuneWithTheGods extends CardImpl {
 
     public CommuneWithTheGods(UUID ownerId) {
         super(ownerId, 155, "Commune with the Gods", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

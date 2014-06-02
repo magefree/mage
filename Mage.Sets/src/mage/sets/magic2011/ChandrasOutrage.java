@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ChandrasOutrage extends CardImpl<ChandrasOutrage> {
+public class ChandrasOutrage extends CardImpl {
 
     public ChandrasOutrage(UUID ownerId) {
         super(ownerId, 128, "Chandra's Outrage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");

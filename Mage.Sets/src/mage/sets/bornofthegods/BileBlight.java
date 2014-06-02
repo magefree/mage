@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class BileBlight extends CardImpl<BileBlight> {
+public class BileBlight extends CardImpl {
 
     public BileBlight(UUID ownerId) {
         super(ownerId, 61, "Bile Blight", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");

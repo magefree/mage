@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class EmberwildeAugur extends CardImpl<EmberwildeAugur> {
+public class EmberwildeAugur extends CardImpl {
 
     public EmberwildeAugur(UUID ownerId) {
         super(ownerId, 35, "Emberwilde Augur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

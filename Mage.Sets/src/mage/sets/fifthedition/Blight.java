@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class Blight extends CardImpl<Blight> {
+public class Blight extends CardImpl {
 
     public Blight(UUID ownerId) {
         super(ownerId, 6, "Blight", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");

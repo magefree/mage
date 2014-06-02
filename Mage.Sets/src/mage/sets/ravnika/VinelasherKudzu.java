@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class VinelasherKudzu extends CardImpl<VinelasherKudzu> {
+public class VinelasherKudzu extends CardImpl {
 
     public VinelasherKudzu(UUID ownerId) {
         super(ownerId, 189, "Vinelasher Kudzu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

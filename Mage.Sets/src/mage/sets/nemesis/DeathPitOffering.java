@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Plopman
  */
-public class DeathPitOffering extends CardImpl<DeathPitOffering> {
+public class DeathPitOffering extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     

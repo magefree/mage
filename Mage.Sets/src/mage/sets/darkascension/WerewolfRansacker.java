@@ -56,7 +56,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward
  */
-public class WerewolfRansacker extends CardImpl<WerewolfRansacker> {
+public class WerewolfRansacker extends CardImpl {
 
     public WerewolfRansacker(UUID ownerId) {
         super(ownerId, 81, "Werewolf Ransacker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");

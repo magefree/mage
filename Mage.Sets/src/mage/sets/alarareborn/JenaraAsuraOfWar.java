@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class JenaraAsuraOfWar extends CardImpl<JenaraAsuraOfWar> {
+public class JenaraAsuraOfWar extends CardImpl {
 
     public JenaraAsuraOfWar (UUID ownerId) {
         super(ownerId, 128, "Jenara, Asura of War", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");

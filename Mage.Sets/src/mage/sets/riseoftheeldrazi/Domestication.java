@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class Domestication extends CardImpl<Domestication> {
+public class Domestication extends CardImpl {
 
     public Domestication(UUID ownerId) {
         super(ownerId, 61, "Domestication", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RathiTrapper extends CardImpl<RathiTrapper> {
+public class RathiTrapper extends CardImpl {
 
     public RathiTrapper(UUID ownerId) {
         super(ownerId, 90, "Rathi Trapper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

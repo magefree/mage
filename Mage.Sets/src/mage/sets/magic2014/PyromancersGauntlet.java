@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
  *
  * @author Plopman
  */
-public class PyromancersGauntlet extends CardImpl<PyromancersGauntlet> {
+public class PyromancersGauntlet extends CardImpl {
 
     public PyromancersGauntlet(UUID ownerId) {
         super(ownerId, 214, "Pyromancer's Gauntlet", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

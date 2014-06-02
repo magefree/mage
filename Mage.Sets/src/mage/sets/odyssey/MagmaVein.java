@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author cbt33
  */
-public class MagmaVein extends CardImpl<MagmaVein> {
+public class MagmaVein extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature without flying");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("a land");

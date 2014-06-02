@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LightningGreaves extends CardImpl<LightningGreaves> {
+public class LightningGreaves extends CardImpl {
 
     public LightningGreaves(UUID ownerId) {
         super(ownerId, 199, "Lightning Greaves", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

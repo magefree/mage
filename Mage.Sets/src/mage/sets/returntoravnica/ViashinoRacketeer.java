@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ViashinoRacketeer extends CardImpl<ViashinoRacketeer> {
+public class ViashinoRacketeer extends CardImpl {
 
     public ViashinoRacketeer(UUID ownerId) {
         super(ownerId, 112, "Viashino Racketeer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

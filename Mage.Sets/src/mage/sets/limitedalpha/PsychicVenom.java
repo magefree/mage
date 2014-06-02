@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author KholdFuzion
 
  */
-public class PsychicVenom extends CardImpl<PsychicVenom> {
+public class PsychicVenom extends CardImpl {
 
     public PsychicVenom(UUID ownerId) {
         super(ownerId, 76, "Psychic Venom", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

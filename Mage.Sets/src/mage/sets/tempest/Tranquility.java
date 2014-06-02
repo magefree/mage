@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class Tranquility extends CardImpl<Tranquility> {
+public class Tranquility extends CardImpl {
 
     public Tranquility(UUID ownerId) {
         super(ownerId, 155, "Tranquility", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");

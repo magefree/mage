@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LlanowarWastes extends CardImpl<LlanowarWastes> {
+public class LlanowarWastes extends CardImpl {
 
     public LlanowarWastes(UUID ownerId) {
         super(ownerId, 141, "Llanowar Wastes", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RussetWolves extends CardImpl<RussetWolves> {
+public class RussetWolves extends CardImpl {
 
     public RussetWolves(UUID ownerId) {
         super(ownerId, 102, "Russet Wolves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

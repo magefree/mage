@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class HerosDownfall extends CardImpl<HerosDownfall> {
+public class HerosDownfall extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker");
     static {

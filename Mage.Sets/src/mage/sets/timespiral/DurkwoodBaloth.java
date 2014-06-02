@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class DurkwoodBaloth extends CardImpl<DurkwoodBaloth> {
+public class DurkwoodBaloth extends CardImpl {
 
     public DurkwoodBaloth(UUID ownerId) {
         super(ownerId, 193, "Durkwood Baloth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

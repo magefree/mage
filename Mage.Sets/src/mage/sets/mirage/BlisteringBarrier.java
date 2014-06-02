@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BlisteringBarrier extends CardImpl<BlisteringBarrier> {
+public class BlisteringBarrier extends CardImpl {
 
     public BlisteringBarrier(UUID ownerId) {
         super(ownerId, 159, "Blistering Barrier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

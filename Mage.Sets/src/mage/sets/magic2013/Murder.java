@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Murder extends CardImpl<Murder> {
+public class Murder extends CardImpl {
 
     public Murder(UUID ownerId) {
         super(ownerId, 101, "Murder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");

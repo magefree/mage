@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class GraspOfPhantoms extends CardImpl<GraspOfPhantoms> {
+public class GraspOfPhantoms extends CardImpl {
 
     public GraspOfPhantoms(UUID ownerId) {
         super(ownerId, 58, "Grasp of Phantoms", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");

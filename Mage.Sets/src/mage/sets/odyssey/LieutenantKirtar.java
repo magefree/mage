@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author cbt33
  */
-public class LieutenantKirtar extends CardImpl<LieutenantKirtar> {
+public class LieutenantKirtar extends CardImpl {
 
     public LieutenantKirtar(UUID ownerId) {
         super(ownerId, 29, "Lieutenant Kirtar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

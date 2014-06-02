@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class ExuberantFirestoker extends CardImpl<ExuberantFirestoker> {
+public class ExuberantFirestoker extends CardImpl {
 
     public ExuberantFirestoker(UUID ownerId) {
         super(ownerId, 99, "Exuberant Firestoker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class RuggedPrairie extends CardImpl<RuggedPrairie> {
+public class RuggedPrairie extends CardImpl {
 
     public RuggedPrairie (UUID ownerId) {
         super(ownerId, 178, "Rugged Prairie", Rarity.RARE, new CardType[]{CardType.LAND}, "");

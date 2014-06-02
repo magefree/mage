@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class SageOfLatNam extends CardImpl<SageOfLatNam> {
+public class SageOfLatNam extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Artifact");
     

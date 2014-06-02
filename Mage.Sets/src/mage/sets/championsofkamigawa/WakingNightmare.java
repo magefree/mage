@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class WakingNightmare extends CardImpl<WakingNightmare> {
+public class WakingNightmare extends CardImpl {
 
     public WakingNightmare (UUID ownerId) {
         super(ownerId, 149, "Waking Nightmare", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

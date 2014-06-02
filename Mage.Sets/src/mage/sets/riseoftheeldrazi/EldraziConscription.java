@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class EldraziConscription extends CardImpl<EldraziConscription> {
+public class EldraziConscription extends CardImpl {
 
     public EldraziConscription (UUID ownerId) {
         super(ownerId, 3, "Eldrazi Conscription", Rarity.RARE, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{8}");

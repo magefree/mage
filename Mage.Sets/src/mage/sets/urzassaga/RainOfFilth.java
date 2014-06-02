@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author Plopman
  */
-public class RainOfFilth extends CardImpl<RainOfFilth> {
+public class RainOfFilth extends CardImpl {
 
     public RainOfFilth(UUID ownerId) {
         super(ownerId, 151, "Rain of Filth", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");

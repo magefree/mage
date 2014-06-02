@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CoordinatedAssault extends CardImpl<CoordinatedAssault> {
+public class CoordinatedAssault extends CardImpl {
 
     public CoordinatedAssault(UUID ownerId) {
         super(ownerId, 116, "Coordinated Assault", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");

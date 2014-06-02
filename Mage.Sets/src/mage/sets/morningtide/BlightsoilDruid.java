@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BlightsoilDruid extends CardImpl<BlightsoilDruid> {
+public class BlightsoilDruid extends CardImpl {
 
     public BlightsoilDruid(UUID ownerId) {
         super(ownerId, 59, "Blightsoil Druid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

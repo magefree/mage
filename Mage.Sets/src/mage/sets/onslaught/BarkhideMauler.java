@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BarkhideMauler extends CardImpl<BarkhideMauler> {
+public class BarkhideMauler extends CardImpl {
 
     public BarkhideMauler(UUID ownerId) {
         super(ownerId, 246, "Barkhide Mauler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

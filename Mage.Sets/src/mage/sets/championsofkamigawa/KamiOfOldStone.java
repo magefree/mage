@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class KamiOfOldStone extends CardImpl<KamiOfOldStone> {
+public class KamiOfOldStone extends CardImpl {
 
     public KamiOfOldStone (UUID ownerId) {
         super(ownerId, 22, "Kami of Old Stone", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

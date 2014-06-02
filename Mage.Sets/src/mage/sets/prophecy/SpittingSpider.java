@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class SpittingSpider extends CardImpl<SpittingSpider> {
+public class SpittingSpider extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new  FilterCreaturePermanent("creature with flying");
     static{

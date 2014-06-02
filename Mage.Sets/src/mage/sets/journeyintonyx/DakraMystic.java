@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DakraMystic extends CardImpl<DakraMystic> {
+public class DakraMystic extends CardImpl {
 
     public DakraMystic(UUID ownerId) {
         super(ownerId, 35, "Dakra Mystic", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");

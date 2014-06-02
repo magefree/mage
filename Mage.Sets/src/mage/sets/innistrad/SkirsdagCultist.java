@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class SkirsdagCultist extends CardImpl<SkirsdagCultist> {
+public class SkirsdagCultist extends CardImpl {
 
     public SkirsdagCultist(UUID ownerId) {
         super(ownerId, 163, "Skirsdag Cultist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

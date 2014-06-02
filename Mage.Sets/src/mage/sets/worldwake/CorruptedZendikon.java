@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class CorruptedZendikon extends CardImpl<CorruptedZendikon> {
+public class CorruptedZendikon extends CardImpl {
 
     public CorruptedZendikon(UUID ownerId) {
         super(ownerId, 55, "Corrupted Zendikon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

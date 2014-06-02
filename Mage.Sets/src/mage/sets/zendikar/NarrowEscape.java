@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class NarrowEscape extends CardImpl<NarrowEscape> {
+public class NarrowEscape extends CardImpl {
 
     public NarrowEscape (UUID ownerId) {
         super(ownerId, 27, "Narrow Escape", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

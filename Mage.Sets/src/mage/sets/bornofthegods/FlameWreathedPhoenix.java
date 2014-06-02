@@ -49,7 +49,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class FlameWreathedPhoenix extends CardImpl<FlameWreathedPhoenix> {
+public class FlameWreathedPhoenix extends CardImpl {
 
     public FlameWreathedPhoenix(UUID ownerId) {
         super(ownerId, 97, "Flame-Wreathed Phoenix", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

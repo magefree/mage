@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class HuntedWumpus extends CardImpl<HuntedWumpus> {
+public class HuntedWumpus extends CardImpl {
 
     public HuntedWumpus(UUID ownerId) {
         super(ownerId, 248, "Hunted Wumpus", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

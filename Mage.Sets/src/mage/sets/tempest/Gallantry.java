@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Gallantry extends CardImpl<Gallantry> {
+public class Gallantry extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
 

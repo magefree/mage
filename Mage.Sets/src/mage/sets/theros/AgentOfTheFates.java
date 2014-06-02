@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AgentOfTheFates extends CardImpl<AgentOfTheFates> {
+public class AgentOfTheFates extends CardImpl {
 
     public AgentOfTheFates(UUID ownerId) {
         super(ownerId, 76, "Agent of the Fates", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

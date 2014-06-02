@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CathedralSanctifier extends CardImpl<CathedralSanctifier> {
+public class CathedralSanctifier extends CardImpl {
 
     public CathedralSanctifier(UUID ownerId) {
         super(ownerId, 11, "Cathedral Sanctifier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

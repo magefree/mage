@@ -53,7 +53,7 @@ import mage.game.stack.Spell;
  *
  * @author jeffwadsworth
  */
-public class VoiceOfResurgence extends CardImpl<VoiceOfResurgence> {
+public class VoiceOfResurgence extends CardImpl {
 
     public VoiceOfResurgence(UUID ownerId) {
         super(ownerId, 114, "Voice of Resurgence", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}{W}");

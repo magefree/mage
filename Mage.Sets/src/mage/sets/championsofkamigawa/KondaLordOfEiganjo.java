@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class KondaLordOfEiganjo extends CardImpl<KondaLordOfEiganjo> {
+public class KondaLordOfEiganjo extends CardImpl {
 
     public KondaLordOfEiganjo(UUID ownerId) {
         super(ownerId, 30, "Konda, Lord of Eiganjo", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

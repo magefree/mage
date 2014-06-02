@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class JaradGolgariLichLord extends CardImpl<JaradGolgariLichLord> {
+public class JaradGolgariLichLord extends CardImpl {
 
     private static final FilterControlledPermanent filterSwamp = new FilterControlledPermanent("a Swamp");
     private static final FilterControlledPermanent filterForest = new FilterControlledPermanent("a Forest");

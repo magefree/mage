@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class CrownOfFlames extends CardImpl<CrownOfFlames> {
+public class CrownOfFlames extends CardImpl {
 
     public CrownOfFlames(UUID ownerId) {
         super(ownerId, 169, "Crown of Flames", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class StolenIdentity extends CardImpl<StolenIdentity> {
+public class StolenIdentity extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
     static {

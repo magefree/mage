@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class SewerShambler extends CardImpl<SewerShambler> {
+public class SewerShambler extends CardImpl {
 
     public SewerShambler(UUID ownerId) {
         super(ownerId, 75, "Sewer Shambler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

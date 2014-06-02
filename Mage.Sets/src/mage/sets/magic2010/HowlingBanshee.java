@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HowlingBanshee extends CardImpl<HowlingBanshee> {
+public class HowlingBanshee extends CardImpl {
 
     public HowlingBanshee(UUID ownerId) {
         super(ownerId, 99, "Howling Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

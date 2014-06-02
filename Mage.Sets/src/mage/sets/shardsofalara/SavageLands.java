@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SavageLands extends CardImpl<SavageLands> {
+public class SavageLands extends CardImpl {
 
     public SavageLands(UUID ownerId) {
         super(ownerId, 228, "Savage Lands", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

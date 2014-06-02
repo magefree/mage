@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class HarpoonSniper extends CardImpl<HarpoonSniper> {
+public class HarpoonSniper extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk you control");
 

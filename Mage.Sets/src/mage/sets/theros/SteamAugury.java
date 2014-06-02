@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class SteamAugury extends CardImpl<SteamAugury> {
+public class SteamAugury extends CardImpl {
 
     public SteamAugury(UUID ownerId) {
         super(ownerId, 205, "Steam Augury", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");

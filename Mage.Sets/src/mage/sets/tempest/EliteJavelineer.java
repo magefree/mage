@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class EliteJavelineer extends CardImpl<EliteJavelineer> {
+public class EliteJavelineer extends CardImpl {
 
     public EliteJavelineer(UUID ownerId) {
         super(ownerId, 229, "Elite Javelineer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

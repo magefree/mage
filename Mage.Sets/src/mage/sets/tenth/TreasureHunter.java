@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class TreasureHunter extends CardImpl<TreasureHunter> {
+public class TreasureHunter extends CardImpl {
 
     public TreasureHunter(UUID ownerId) {
         super(ownerId, 52, "Treasure Hunter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

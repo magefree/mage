@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PestilentSouleater extends CardImpl<PestilentSouleater> {
+public class PestilentSouleater extends CardImpl {
 
     public PestilentSouleater(UUID ownerId) {
         super(ownerId, 149, "Pestilent Souleater", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class SteepleRoc extends CardImpl<SteepleRoc> {
+public class SteepleRoc extends CardImpl {
 
     public SteepleRoc (UUID ownerId) {
         super(ownerId, 8, "Steeple Roc", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

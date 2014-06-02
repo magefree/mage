@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class InkEyesServantOfOni extends CardImpl<InkEyesServantOfOni> {
+public class InkEyesServantOfOni extends CardImpl {
 
     public InkEyesServantOfOni(UUID ownerId) {
         super(ownerId, 71, "Ink-Eyes, Servant of Oni", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

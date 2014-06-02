@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class SwordsToPlowshares extends CardImpl<SwordsToPlowshares> {
+public class SwordsToPlowshares extends CardImpl {
 
     public SwordsToPlowshares(UUID ownerId) {
         super(ownerId, 302, "Swords to Plowshares", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");

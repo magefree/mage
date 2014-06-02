@@ -49,7 +49,7 @@ import mage.target.TargetStackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FrostTitan extends CardImpl<FrostTitan> {
+public class FrostTitan extends CardImpl {
 
     public FrostTitan(UUID ownerId) {
         super(ownerId, 55, "Frost Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

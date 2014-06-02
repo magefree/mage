@@ -40,7 +40,7 @@ import java.util.UUID;
  * @author Loki
  */
 
-public class DarksteelIngot extends CardImpl<DarksteelIngot> {
+public class DarksteelIngot extends CardImpl {
 
     public DarksteelIngot(UUID ownerId) {
         super(ownerId, 112, "Darksteel Ingot", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

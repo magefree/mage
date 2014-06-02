@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ForcedWorship extends CardImpl<ForcedWorship> {
+public class ForcedWorship extends CardImpl {
 
     public ForcedWorship (UUID ownerId) {
         super(ownerId, 11, "Forced Worship", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

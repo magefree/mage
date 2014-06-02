@@ -47,7 +47,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class InfernoTrap extends CardImpl<InfernoTrap> {
+public class InfernoTrap extends CardImpl {
 
     public InfernoTrap(UUID ownerId) {
         super(ownerId, 133, "Inferno Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");

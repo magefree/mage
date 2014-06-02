@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WanderingWolf extends CardImpl<WanderingWolf> {
+public class WanderingWolf extends CardImpl {
 
     public WanderingWolf(UUID ownerId) {
         super(ownerId, 202, "Wandering Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

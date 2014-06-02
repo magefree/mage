@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class BloodSpeaker extends CardImpl<BloodSpeaker> {
+public class BloodSpeaker extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new  FilterControlledCreaturePermanent("a Demon under your control");
     private static final FilterCard filterCard = new  FilterCard("Demon card");

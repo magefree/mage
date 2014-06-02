@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class RecklessCharge extends CardImpl<RecklessCharge> {
+public class RecklessCharge extends CardImpl {
 
     public RecklessCharge(UUID ownerId) {
         super(ownerId, 61, "Reckless Charge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");

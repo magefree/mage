@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class Soulquake extends CardImpl<Soulquake> {
+public class Soulquake extends CardImpl {
 
     public Soulquake(UUID ownerId) {
         super(ownerId, 30, "Soulquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}{B}{B}");

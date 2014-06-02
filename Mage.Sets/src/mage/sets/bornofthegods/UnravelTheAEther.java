@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class UnravelTheAEther extends CardImpl<UnravelTheAEther> {
+public class UnravelTheAEther extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

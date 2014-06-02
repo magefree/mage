@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
 /**
  * @author LevelX2
  */
-public class KeeningApparition extends CardImpl<KeeningApparition> {
+public class KeeningApparition extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 

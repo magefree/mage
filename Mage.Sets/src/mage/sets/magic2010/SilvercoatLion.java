@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SilvercoatLion extends CardImpl<SilvercoatLion> {
+public class SilvercoatLion extends CardImpl {
 
     public SilvercoatLion(UUID ownerId) {
         super(ownerId, 32, "Silvercoat Lion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

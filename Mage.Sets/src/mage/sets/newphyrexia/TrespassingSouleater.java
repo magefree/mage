@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TrespassingSouleater extends CardImpl<TrespassingSouleater> {
+public class TrespassingSouleater extends CardImpl {
 
     public TrespassingSouleater(UUID ownerId) {
         super(ownerId, 163, "Trespassing Souleater", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

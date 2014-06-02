@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class Swerve extends CardImpl<Swerve> {
+public class Swerve extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("spell with a single target");
     

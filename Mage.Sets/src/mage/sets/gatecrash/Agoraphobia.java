@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Agoraphobia extends CardImpl<Agoraphobia> {
+public class Agoraphobia extends CardImpl {
 
     public Agoraphobia(UUID ownerId) {
         super(ownerId, 30, "Agoraphobia", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class HidetsugusSecondRite extends CardImpl<HidetsugusSecondRite> {
+public class HidetsugusSecondRite extends CardImpl {
 
     public HidetsugusSecondRite(UUID ownerId) {
         super(ownerId, 102, "Hidetsugu's Second Rite", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}");

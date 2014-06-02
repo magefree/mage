@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ThrunTheLastTroll extends CardImpl<ThrunTheLastTroll> {
+public class ThrunTheLastTroll extends CardImpl {
 
     public ThrunTheLastTroll(UUID ownerId) {
         super(ownerId, 92, "Thrun, the Last Troll", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class OgreRecluse extends CardImpl<OgreRecluse> {
+public class OgreRecluse extends CardImpl {
 
     public OgreRecluse(UUID ownerId) {
         super(ownerId, 113, "Ogre Recluse", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

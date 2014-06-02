@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class KragmaButcher extends CardImpl<KragmaButcher> {
+public class KragmaButcher extends CardImpl {
 
     public KragmaButcher(UUID ownerId) {
         super(ownerId, 100, "Kragma Butcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

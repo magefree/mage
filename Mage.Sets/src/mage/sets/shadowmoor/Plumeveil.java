@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Plumeveil extends CardImpl<Plumeveil> {
+public class Plumeveil extends CardImpl {
 
     public Plumeveil(UUID ownerId) {
         super(ownerId, 145, "Plumeveil", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W/U}{W/U}{W/U}");

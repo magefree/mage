@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class TemporalAdept extends CardImpl<TemporalAdept> {
+public class TemporalAdept extends CardImpl {
 
     public TemporalAdept(UUID ownerId) {
         super(ownerId, 102, "Temporal Adept", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

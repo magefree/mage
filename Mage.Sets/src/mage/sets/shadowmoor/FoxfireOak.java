@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FoxfireOak extends CardImpl<FoxfireOak> {
+public class FoxfireOak extends CardImpl {
 
     public FoxfireOak(UUID ownerId) {
         super(ownerId, 115, "Foxfire Oak", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");

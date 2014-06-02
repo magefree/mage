@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FirewingPhoenix extends CardImpl<FirewingPhoenix> {
+public class FirewingPhoenix extends CardImpl {
 
     public FirewingPhoenix(UUID ownerId) {
         super(ownerId, 131, "Firewing Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

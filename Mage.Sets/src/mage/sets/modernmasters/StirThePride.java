@@ -43,7 +43,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class StirThePride extends CardImpl<StirThePride> {
+public class StirThePride extends CardImpl {
 
     public StirThePride(UUID ownerId) {
         super(ownerId, 30, "Stir the Pride", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");

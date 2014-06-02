@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  * 
  * @author nantuko
  */
-public class PyromancerAscension extends CardImpl<PyromancerAscension> {
+public class PyromancerAscension extends CardImpl {
 
     public PyromancerAscension(UUID ownerId) {
         super(ownerId, 143, "Pyromancer Ascension", Rarity.RARE, new CardType[] { CardType.ENCHANTMENT }, "{1}{R}");

@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author anonymous
  */
-public class ChaliceOfTheVoid extends CardImpl<ChaliceOfTheVoid> {
+public class ChaliceOfTheVoid extends CardImpl {
 
     public ChaliceOfTheVoid(UUID ownerId) {
         super(ownerId, 150, "Chalice of the Void", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}{X}");

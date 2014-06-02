@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class TrygonPredator extends CardImpl<TrygonPredator> {
+public class TrygonPredator extends CardImpl {
 
     public TrygonPredator(UUID ownerId) {
         super(ownerId, 185, "Trygon Predator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

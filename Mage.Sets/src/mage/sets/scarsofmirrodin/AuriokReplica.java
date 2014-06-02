@@ -49,7 +49,7 @@ import mage.target.TargetSource;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AuriokReplica extends CardImpl<AuriokReplica> {
+public class AuriokReplica extends CardImpl {
 
     public AuriokReplica(UUID ownerId) {
         super(ownerId, 138, "Auriok Replica", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

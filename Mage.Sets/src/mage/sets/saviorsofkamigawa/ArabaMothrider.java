@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ArabaMothrider extends CardImpl<ArabaMothrider> {
+public class ArabaMothrider extends CardImpl {
 
     public ArabaMothrider(UUID ownerId) {
         super(ownerId, 2, "Araba Mothrider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

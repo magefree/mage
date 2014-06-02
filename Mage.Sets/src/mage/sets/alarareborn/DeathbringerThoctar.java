@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class DeathbringerThoctar extends CardImpl<DeathbringerThoctar> {
+public class DeathbringerThoctar extends CardImpl {
 
     public DeathbringerThoctar(UUID ownerId) {
         super(ownerId, 36, "Deathbringer Thoctar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");

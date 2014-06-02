@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
  *
  * @author nantuko
  */
-public class PersonalSanctuary extends CardImpl<PersonalSanctuary> {
+public class PersonalSanctuary extends CardImpl {
 
     public PersonalSanctuary(UUID ownerId) {
         super(ownerId, 30, "Personal Sanctuary", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

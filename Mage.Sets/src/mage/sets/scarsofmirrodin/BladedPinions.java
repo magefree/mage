@@ -47,7 +47,7 @@ import mage.constants.Outcome;
  *
  * @author Loki
  */
-public class BladedPinions extends CardImpl<BladedPinions> {
+public class BladedPinions extends CardImpl {
 
     public BladedPinions (UUID ownerId) {
         super(ownerId, 140, "Bladed Pinions", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

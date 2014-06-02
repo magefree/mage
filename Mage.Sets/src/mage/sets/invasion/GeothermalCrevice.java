@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class GeothermalCrevice extends CardImpl<GeothermalCrevice> {
+public class GeothermalCrevice extends CardImpl {
 
     public GeothermalCrevice(UUID ownerId) {
         super(ownerId, 323, "Geothermal Crevice", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

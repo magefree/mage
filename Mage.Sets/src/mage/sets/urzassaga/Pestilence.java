@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author Backfir3
  */
-public class Pestilence extends CardImpl<Pestilence> {
+public class Pestilence extends CardImpl {
 
     private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.";
 

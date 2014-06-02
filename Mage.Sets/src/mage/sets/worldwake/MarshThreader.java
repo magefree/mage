@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MarshThreader extends CardImpl<MarshThreader> {
+public class MarshThreader extends CardImpl {
 
     public MarshThreader (UUID ownerId) {
         super(ownerId, 14, "Marsh Threader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

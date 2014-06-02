@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class AngelOfFinality extends CardImpl<AngelOfFinality> {
+public class AngelOfFinality extends CardImpl {
 
     public AngelOfFinality(UUID ownerId) {
         super(ownerId, 4, "Angel of Finality", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");

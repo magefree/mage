@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MercurialChemister extends CardImpl<MercurialChemister> {
+public class MercurialChemister extends CardImpl {
 
     public MercurialChemister(UUID ownerId) {
         super(ownerId, 180, "Mercurial Chemister", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");

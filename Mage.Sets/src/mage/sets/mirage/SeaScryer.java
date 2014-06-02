@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SeaScryer extends CardImpl<SeaScryer> {
+public class SeaScryer extends CardImpl {
 
     public SeaScryer(UUID ownerId) {
         super(ownerId, 90, "Sea Scryer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

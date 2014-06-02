@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class NecropolisRegent extends CardImpl<NecropolisRegent> {
+public class NecropolisRegent extends CardImpl {
 
     public NecropolisRegent(UUID ownerId) {
         super(ownerId, 71, "Necropolis Regent", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

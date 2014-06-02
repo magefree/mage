@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WarPriestOfThune extends CardImpl<WarPriestOfThune> {
+public class WarPriestOfThune extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 

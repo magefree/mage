@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class SurveyorsScope extends CardImpl<SurveyorsScope> {
+public class SurveyorsScope extends CardImpl {
 
     public SurveyorsScope(UUID ownerId) {
         super(ownerId, 262, "Surveyor's Scope", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

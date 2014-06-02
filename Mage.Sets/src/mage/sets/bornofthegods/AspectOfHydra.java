@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AspectOfHydra extends CardImpl<AspectOfHydra> {
+public class AspectOfHydra extends CardImpl {
 
     public AspectOfHydra(UUID ownerId) {
         super(ownerId, 117, "Aspect of Hydra", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

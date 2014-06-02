@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class MarkOfTheVampire extends CardImpl<MarkOfTheVampire> {
+public class MarkOfTheVampire extends CardImpl {
 
     public MarkOfTheVampire(UUID ownerId) {
         super(ownerId, 99, "Mark of the Vampire", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

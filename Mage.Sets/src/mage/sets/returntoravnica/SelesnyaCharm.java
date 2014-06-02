@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SelesnyaCharm extends CardImpl<SelesnyaCharm> {
+public class SelesnyaCharm extends CardImpl {
 
     static private final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
     static {

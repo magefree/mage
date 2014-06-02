@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SupplyLineCranes extends CardImpl<SupplyLineCranes> {
+public class SupplyLineCranes extends CardImpl {
 
     public SupplyLineCranes(UUID ownerId) {
         super(ownerId, 28, "Supply-Line Cranes", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

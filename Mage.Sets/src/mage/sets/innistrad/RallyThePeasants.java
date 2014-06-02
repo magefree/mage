@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class RallyThePeasants extends CardImpl<RallyThePeasants> {
+public class RallyThePeasants extends CardImpl {
 
     public RallyThePeasants(UUID ownerId) {
         super(ownerId, 28, "Rally the Peasants", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

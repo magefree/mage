@@ -65,7 +65,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class UnexpectedResults extends CardImpl<UnexpectedResults> {
+public class UnexpectedResults extends CardImpl {
 
     public UnexpectedResults(UUID ownerId) {
         super(ownerId, 203, "Unexpected Results", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{U}");

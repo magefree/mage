@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KalitasBloodchiefOfGhet extends CardImpl<KalitasBloodchiefOfGhet> {
+public class KalitasBloodchiefOfGhet extends CardImpl {
 
     public KalitasBloodchiefOfGhet(UUID ownerId) {
         super(ownerId, 99, "Kalitas, Bloodchief of Ghet", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

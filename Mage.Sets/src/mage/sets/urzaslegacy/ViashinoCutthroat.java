@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class ViashinoCutthroat extends CardImpl<ViashinoCutthroat> {
+public class ViashinoCutthroat extends CardImpl {
 
     public ViashinoCutthroat(UUID ownerId) {
         super(ownerId, 94, "Viashino Cutthroat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

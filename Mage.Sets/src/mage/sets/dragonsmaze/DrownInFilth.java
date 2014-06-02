@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DrownInFilth extends CardImpl<DrownInFilth> {
+public class DrownInFilth extends CardImpl {
 
     public DrownInFilth(UUID ownerId) {
         super(ownerId, 67, "Drown in Filth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{G}");

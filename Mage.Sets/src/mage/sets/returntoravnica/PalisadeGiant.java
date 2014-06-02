@@ -66,7 +66,7 @@ import mage.players.Player;
 
 
 
-public class PalisadeGiant extends CardImpl<PalisadeGiant> {
+public class PalisadeGiant extends CardImpl {
 
     public PalisadeGiant(UUID ownerId) {
         super(ownerId, 15, "Palisade Giant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

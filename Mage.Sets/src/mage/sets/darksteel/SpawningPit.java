@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class SpawningPit extends CardImpl<SpawningPit> {
+public class SpawningPit extends CardImpl {
 
     public SpawningPit (UUID ownerId) {
         super(ownerId, 141, "Spawning Pit", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

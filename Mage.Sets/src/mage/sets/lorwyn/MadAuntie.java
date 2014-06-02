@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class MadAuntie extends CardImpl<MadAuntie> {
+public class MadAuntie extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("another Goblin");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Goblin creatures");

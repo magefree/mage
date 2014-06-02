@@ -58,7 +58,7 @@ import mage.util.CardUtil;
  *
  * @author North
  */
-public class SplinterTwin extends CardImpl<SplinterTwin> {
+public class SplinterTwin extends CardImpl {
 
     public SplinterTwin(UUID ownerId) {
         super(ownerId, 165, "Splinter Twin", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

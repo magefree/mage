@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Loki
  */
-public class VedalkenInfuser extends CardImpl<VedalkenInfuser> {
+public class VedalkenInfuser extends CardImpl {
 
     public VedalkenInfuser (UUID ownerId) {
         super(ownerId, 37, "Vedalken Infuser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

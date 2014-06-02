@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class GhaveGuruOfSpores extends CardImpl<GhaveGuruOfSpores> {
+public class GhaveGuruOfSpores extends CardImpl {
 
     final static FilterControlledPermanent filter = new FilterControlledPermanent("creature to sacrifice");
     

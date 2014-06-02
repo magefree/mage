@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SejiriSteppe extends CardImpl<SejiriSteppe> {
+public class SejiriSteppe extends CardImpl {
 
     public SejiriSteppe(UUID ownerId) {
         super(ownerId, 142, "Sejiri Steppe", Rarity.COMMON, new CardType[]{CardType.LAND}, null);

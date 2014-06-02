@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class GoblinArsonist extends CardImpl<GoblinArsonist> {
+public class GoblinArsonist extends CardImpl {
 
     public GoblinArsonist(UUID ownerId) {
         super(ownerId, 147, "Goblin Arsonist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

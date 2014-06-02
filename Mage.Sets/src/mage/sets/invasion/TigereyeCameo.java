@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class TigereyeCameo extends CardImpl<TigereyeCameo> {
+public class TigereyeCameo extends CardImpl {
 
     public TigereyeCameo(UUID ownerId) {
         super(ownerId, 314, "Tigereye Cameo", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

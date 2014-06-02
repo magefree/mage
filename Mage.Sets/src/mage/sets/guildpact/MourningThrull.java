@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class MourningThrull extends CardImpl<MourningThrull> {
+public class MourningThrull extends CardImpl {
 
     public MourningThrull(UUID ownerId) {
         super(ownerId, 146, "Mourning Thrull", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W/B}");

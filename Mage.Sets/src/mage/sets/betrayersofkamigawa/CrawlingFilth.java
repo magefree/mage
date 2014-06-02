@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CrawlingFilth extends CardImpl<CrawlingFilth> {
+public class CrawlingFilth extends CardImpl {
 
     public CrawlingFilth(UUID ownerId) {
         super(ownerId, 64, "Crawling Filth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");

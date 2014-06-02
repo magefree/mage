@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class InquisitorsFlail extends CardImpl<InquisitorsFlail> {
+public class InquisitorsFlail extends CardImpl {
 
     public InquisitorsFlail(UUID ownerId) {
         super(ownerId, 227, "Inquisitor's Flail", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

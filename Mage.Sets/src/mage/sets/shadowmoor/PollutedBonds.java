@@ -48,7 +48,7 @@ import mage.players.Player;
  * @author jeffwadsworth
 
  */
-public class PollutedBonds extends CardImpl<PollutedBonds> {
+public class PollutedBonds extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     private static final String rule = "Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.";

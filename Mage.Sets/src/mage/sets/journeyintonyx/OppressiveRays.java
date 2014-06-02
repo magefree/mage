@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class OppressiveRays extends CardImpl<OppressiveRays> {
+public class OppressiveRays extends CardImpl {
 
     public OppressiveRays(UUID ownerId) {
         super(ownerId, 19, "Oppressive Rays", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class CountrysideCrusher extends CardImpl<CountrysideCrusher> {
+public class CountrysideCrusher extends CardImpl {
 
     public CountrysideCrusher(UUID ownerId) {
         super(ownerId, 89, "Countryside Crusher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

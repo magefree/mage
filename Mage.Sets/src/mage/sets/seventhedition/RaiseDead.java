@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class RaiseDead extends CardImpl<RaiseDead> {
+public class RaiseDead extends CardImpl {
 
     
     private static FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");

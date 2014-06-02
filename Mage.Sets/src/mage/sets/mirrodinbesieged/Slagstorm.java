@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class Slagstorm extends CardImpl<Slagstorm> {
+public class Slagstorm extends CardImpl {
 
     public Slagstorm (UUID ownerId) {
         super(ownerId, 75, "Slagstorm", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

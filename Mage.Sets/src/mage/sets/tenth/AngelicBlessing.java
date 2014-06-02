@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class AngelicBlessing extends CardImpl<AngelicBlessing> {
+public class AngelicBlessing extends CardImpl {
 
     public AngelicBlessing(UUID ownerId) {
         super(ownerId, 3, "Angelic Blessing", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");

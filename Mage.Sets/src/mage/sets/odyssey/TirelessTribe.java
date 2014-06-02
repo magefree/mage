@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class TirelessTribe extends CardImpl<TirelessTribe> {
+public class TirelessTribe extends CardImpl {
 
     public TirelessTribe(UUID ownerId) {
         super(ownerId, 56, "Tireless Tribe", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

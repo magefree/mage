@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
+public class AzamiLadyOfScrolls extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
 

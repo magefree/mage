@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class TethmosHighPriest extends CardImpl<TethmosHighPriest> {
+public class TethmosHighPriest extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard");
 

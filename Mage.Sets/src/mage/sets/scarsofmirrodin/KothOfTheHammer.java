@@ -63,7 +63,7 @@ import java.util.UUID;
  *
  * @author Loki, North
  */
-public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
+public class KothOfTheHammer extends CardImpl {
     static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
     private static final FilterLandPermanent filterCount = new FilterLandPermanent("Mountain you control");
 

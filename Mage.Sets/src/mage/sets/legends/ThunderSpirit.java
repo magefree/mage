@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ThunderSpirit extends CardImpl<ThunderSpirit> {
+public class ThunderSpirit extends CardImpl {
 
     public ThunderSpirit(UUID ownerId) {
         super(ownerId, 208, "Thunder Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

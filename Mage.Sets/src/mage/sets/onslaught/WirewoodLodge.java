@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Melkhior
  */
-public class WirewoodLodge extends CardImpl<WirewoodLodge> {
+public class WirewoodLodge extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf");
     static {

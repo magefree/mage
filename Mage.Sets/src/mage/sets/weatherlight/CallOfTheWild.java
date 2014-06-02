@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class CallOfTheWild extends CardImpl<CallOfTheWild> {
+public class CallOfTheWild extends CardImpl {
 
     public CallOfTheWild(UUID ownerId) {
         super(ownerId, 64, "Call of the Wild", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

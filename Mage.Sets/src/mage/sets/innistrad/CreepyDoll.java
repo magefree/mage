@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class CreepyDoll extends CardImpl<CreepyDoll> {
+public class CreepyDoll extends CardImpl {
 
     public CreepyDoll(UUID ownerId) {
         super(ownerId, 220, "Creepy Doll", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

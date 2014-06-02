@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MimingSlime extends CardImpl<MimingSlime> {
+public class MimingSlime extends CardImpl {
 
     public MimingSlime(UUID ownerId) {
         super(ownerId, 126, "Miming Slime", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");

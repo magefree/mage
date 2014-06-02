@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki, nantuko
  */
-public class Watchwolf extends CardImpl<Watchwolf> {
+public class Watchwolf extends CardImpl {
 
     public Watchwolf (UUID ownerId) {
         super(ownerId, 239, "Watchwolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{W}");

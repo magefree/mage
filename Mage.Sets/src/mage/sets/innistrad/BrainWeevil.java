@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class BrainWeevil extends CardImpl<BrainWeevil> {
+public class BrainWeevil extends CardImpl {
 
     public BrainWeevil(UUID ownerId) {
         super(ownerId, 91, "Brain Weevil", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

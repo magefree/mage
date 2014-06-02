@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SummonTheSchool extends CardImpl<SummonTheSchool> {
+public class SummonTheSchool extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 

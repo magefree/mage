@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SkylinePredator extends CardImpl<SkylinePredator> {
+public class SkylinePredator extends CardImpl {
 
     public SkylinePredator(UUID ownerId) {
         super(ownerId, 50, "Skyline Predator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author North
  */
-public class HazyHomunculus extends CardImpl<HazyHomunculus> {
+public class HazyHomunculus extends CardImpl {
 
     private static final FilterPermanent filter = new FilterLandPermanent();
 

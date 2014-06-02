@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class HealerOfThePride extends CardImpl<HealerOfThePride> {
+public class HealerOfThePride extends CardImpl {
 
     public HealerOfThePride(UUID ownerId) {
         super(ownerId, 19, "Healer of the Pride", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

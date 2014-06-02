@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author jonubuu
  */
-public class GlenElendraArchmage extends CardImpl<GlenElendraArchmage> {
+public class GlenElendraArchmage extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
 

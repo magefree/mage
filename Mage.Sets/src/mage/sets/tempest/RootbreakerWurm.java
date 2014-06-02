@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RootbreakerWurm extends CardImpl<RootbreakerWurm> {
+public class RootbreakerWurm extends CardImpl {
 
     public RootbreakerWurm(UUID ownerId) {
         super(ownerId, 145, "Rootbreaker Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

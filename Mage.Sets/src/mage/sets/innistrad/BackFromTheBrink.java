@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward
  */
-public class BackFromTheBrink extends CardImpl<BackFromTheBrink> {
+public class BackFromTheBrink extends CardImpl {
 
     public BackFromTheBrink(UUID ownerId) {
         super(ownerId, 44, "Back from the Brink", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SerraSphinx extends CardImpl<SerraSphinx> {
+public class SerraSphinx extends CardImpl {
 
     public SerraSphinx(UUID ownerId) {
         super(ownerId, 62, "Serra Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

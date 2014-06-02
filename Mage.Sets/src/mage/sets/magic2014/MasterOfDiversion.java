@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class MasterOfDiversion extends CardImpl<MasterOfDiversion> {
+public class MasterOfDiversion extends CardImpl {
 
     public MasterOfDiversion(UUID ownerId) {
         super(ownerId, 24, "Master of Diversion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

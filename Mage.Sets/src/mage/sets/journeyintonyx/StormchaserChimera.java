@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class StormchaserChimera extends CardImpl<StormchaserChimera> {
+public class StormchaserChimera extends CardImpl {
 
     public StormchaserChimera(UUID ownerId) {
         super(ownerId, 156, "Stormchaser Chimera", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");

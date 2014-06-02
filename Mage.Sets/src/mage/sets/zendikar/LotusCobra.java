@@ -41,7 +41,7 @@ import mage.choices.ChoiceColor;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LotusCobra extends CardImpl<LotusCobra> {
+public class LotusCobra extends CardImpl {
 
     public LotusCobra(UUID ownerId) {
         super(ownerId, 168, "Lotus Cobra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}");

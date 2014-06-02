@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ArmoredPegasus extends CardImpl<ArmoredPegasus> {
+public class ArmoredPegasus extends CardImpl {
 
     public ArmoredPegasus(UUID ownerId) {
         super(ownerId, 217, "Armored Pegasus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

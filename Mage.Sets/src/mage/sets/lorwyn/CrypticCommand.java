@@ -51,7 +51,7 @@ import mage.target.TargetSpell;
  *
  * @author jonubuu
  */
-public class CrypticCommand extends CardImpl<CrypticCommand> {
+public class CrypticCommand extends CardImpl {
 
     public CrypticCommand(UUID ownerId) {
         super(ownerId, 56, "Cryptic Command", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}{U}{U}");

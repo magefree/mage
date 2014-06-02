@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EvanescentIntellect extends CardImpl<EvanescentIntellect> {
+public class EvanescentIntellect extends CardImpl {
 
     public EvanescentIntellect(UUID ownerId) {
         super(ownerId, 38, "Evanescent Intellect", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

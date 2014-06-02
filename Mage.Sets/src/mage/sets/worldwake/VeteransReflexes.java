@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class VeteransReflexes extends CardImpl<VeteransReflexes> {
+public class VeteransReflexes extends CardImpl {
 
     public VeteransReflexes (UUID ownerId) {
         super(ownerId, 23, "Veteran's Reflexes", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

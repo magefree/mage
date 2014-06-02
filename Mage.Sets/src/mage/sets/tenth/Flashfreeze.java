@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Flashfreeze extends CardImpl<Flashfreeze> {
+public class Flashfreeze extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("red or green spell");
 

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class RazorfinHunter extends CardImpl<RazorfinHunter> {
+public class RazorfinHunter extends CardImpl {
 
     public RazorfinHunter(UUID ownerId) {
         super(ownerId, 119, "Razorfin Hunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{R}");

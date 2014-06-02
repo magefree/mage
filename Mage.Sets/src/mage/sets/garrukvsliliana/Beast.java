@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class Beast extends CardImpl<Beast> {
+public class Beast extends CardImpl {
 
     public Beast(UUID ownerId) {
         super(ownerId, 2, "Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SkarrganPitSkulk extends CardImpl<SkarrganPitSkulk> {
+public class SkarrganPitSkulk extends CardImpl {
 
     public SkarrganPitSkulk(UUID ownerId) {
         super(ownerId, 96, "Skarrgan Pit-Skulk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

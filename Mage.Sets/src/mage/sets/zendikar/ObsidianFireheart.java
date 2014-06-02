@@ -56,7 +56,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class ObsidianFireheart extends CardImpl<ObsidianFireheart> {
+public class ObsidianFireheart extends CardImpl {
 
     private static final String rule = "For as long as that land has a blaze counter on it, it has \"At the beginning of your upkeep, this land deals 1 damage to you.\" <i>(The land continues to burn after Obsidian Fireheart has left the battlefield.)</i>";
     private static final FilterLandPermanent filter = new FilterLandPermanent("land without a blaze counter on it");

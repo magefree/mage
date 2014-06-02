@@ -43,7 +43,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class FiremaneAvenger extends CardImpl<FiremaneAvenger> {
+public class FiremaneAvenger extends CardImpl {
 
     public FiremaneAvenger(UUID ownerId) {
         super(ownerId, 163, "Firemane Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CryptRipper extends CardImpl<CryptRipper> {
+public class CryptRipper extends CardImpl {
 
     public CryptRipper(UUID ownerId) {
         super(ownerId, 85, "Crypt Ripper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BayouDragonfly extends CardImpl<BayouDragonfly> {
+public class BayouDragonfly extends CardImpl {
 
     public BayouDragonfly(UUID ownerId) {
         super(ownerId, 109, "Bayou Dragonfly", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class CorruptedConscience extends CardImpl<CorruptedConscience> {
+public class CorruptedConscience extends CardImpl {
 
     public CorruptedConscience (UUID ownerId) {
         super(ownerId, 22, "Corrupted Conscience", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");

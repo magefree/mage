@@ -39,7 +39,7 @@ import mage.constants.Rarity;
 /**
  * @author Loki
  */
-public class StormboundGeist extends CardImpl<StormboundGeist> {
+public class StormboundGeist extends CardImpl {
 
     public StormboundGeist(UUID ownerId) {
         super(ownerId, 51, "Stormbound Geist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

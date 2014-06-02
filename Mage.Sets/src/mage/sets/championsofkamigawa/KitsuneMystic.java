@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KitsuneMystic extends CardImpl<KitsuneMystic> {
+public class KitsuneMystic extends CardImpl {
 
     public KitsuneMystic(UUID ownerId) {
         super(ownerId, 28, "Kitsune Mystic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");

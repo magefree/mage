@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MassOfGhouls extends CardImpl<MassOfGhouls> {
+public class MassOfGhouls extends CardImpl {
 
     public MassOfGhouls(UUID ownerId) {
         super(ownerId, 156, "Mass of Ghouls", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

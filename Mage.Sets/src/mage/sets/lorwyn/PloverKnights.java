@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class PloverKnights extends CardImpl<PloverKnights> {
+public class PloverKnights extends CardImpl {
 
     public PloverKnights(UUID ownerId) {
         super(ownerId, 35, "Plover Knights", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

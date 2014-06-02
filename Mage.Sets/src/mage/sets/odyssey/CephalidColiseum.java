@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class CephalidColiseum extends CardImpl<CephalidColiseum> {
+public class CephalidColiseum extends CardImpl {
 
     public CephalidColiseum(UUID ownerId) {
         super(ownerId, 317, "Cephalid Coliseum", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

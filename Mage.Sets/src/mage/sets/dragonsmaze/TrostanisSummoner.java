@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class TrostanisSummoner extends CardImpl<TrostanisSummoner> {
+public class TrostanisSummoner extends CardImpl {
 
     public TrostanisSummoner(UUID ownerId) {
         super(ownerId, 110, "Trostani's Summoner", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");

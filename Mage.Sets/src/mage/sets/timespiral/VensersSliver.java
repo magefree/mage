@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class VensersSliver extends CardImpl<VensersSliver> {
+public class VensersSliver extends CardImpl {
 
     public VensersSliver(UUID ownerId) {
         super(ownerId, 267, "Venser's Sliver", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

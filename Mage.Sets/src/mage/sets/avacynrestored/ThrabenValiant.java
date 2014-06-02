@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ThrabenValiant extends CardImpl<ThrabenValiant> {
+public class ThrabenValiant extends CardImpl {
 
     public ThrabenValiant(UUID ownerId) {
         super(ownerId, 39, "Thraben Valiant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

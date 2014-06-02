@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class CathedralMembrane extends CardImpl<CathedralMembrane> {
+public class CathedralMembrane extends CardImpl {
 
     public CathedralMembrane(UUID ownerId) {
         super(ownerId, 5, "Cathedral Membrane", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{WP}");

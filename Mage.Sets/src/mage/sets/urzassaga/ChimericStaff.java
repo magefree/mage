@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Backfir3
  */
-public class ChimericStaff extends CardImpl<ChimericStaff> {
+public class ChimericStaff extends CardImpl {
 
     public ChimericStaff(UUID ownerId) {
         super(ownerId, 288, "Chimeric Staff", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

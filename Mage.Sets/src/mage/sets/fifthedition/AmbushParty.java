@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AmbushParty extends CardImpl<AmbushParty> {
+public class AmbushParty extends CardImpl {
 
     public AmbushParty(UUID ownerId) {
         super(ownerId, 208, "Ambush Party", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

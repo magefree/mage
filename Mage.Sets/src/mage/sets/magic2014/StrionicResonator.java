@@ -55,7 +55,7 @@ import mage.target.TargetObject;
  *
  * @author Plopman
  */
-public class StrionicResonator extends CardImpl<StrionicResonator> {
+public class StrionicResonator extends CardImpl {
 
     
     

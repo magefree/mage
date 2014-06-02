@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class Ornitharch extends CardImpl<Ornitharch> {
+public class Ornitharch extends CardImpl {
 
     public Ornitharch(UUID ownerId) {
         super(ownerId, 23, "Ornitharch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

@@ -50,7 +50,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class GrislySalvage extends CardImpl<GrislySalvage> {
+public class GrislySalvage extends CardImpl {
 
     public GrislySalvage(UUID ownerId) {
         super(ownerId, 165, "Grisly Salvage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{G}");

@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SilentArtisan extends CardImpl<SilentArtisan> {
+public class SilentArtisan extends CardImpl {
 
     public SilentArtisan(UUID ownerId) {
         super(ownerId, 31, "Silent Artisan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class FeudkillersVerdict extends CardImpl<FeudkillersVerdict> {
+public class FeudkillersVerdict extends CardImpl {
 
     public FeudkillersVerdict(UUID ownerId) {
         super(ownerId, 15, "Feudkiller's Verdict", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");

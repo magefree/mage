@@ -51,7 +51,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author KholdFuzion
 
  */
-public class PirateShip extends CardImpl<PirateShip> {
+public class PirateShip extends CardImpl {
 
     public PirateShip(UUID ownerId) {
         super(ownerId, 71, "Pirate Ship", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");

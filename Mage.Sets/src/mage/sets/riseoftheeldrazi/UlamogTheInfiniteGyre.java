@@ -54,7 +54,7 @@ import mage.target.TargetPermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
+public class UlamogTheInfiniteGyre extends CardImpl {
 
     public UlamogTheInfiniteGyre(UUID ownerId) {
         super(ownerId, 12, "Ulamog, the Infinite Gyre", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{11}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StonewiseFortifier extends CardImpl<StonewiseFortifier> {
+public class StonewiseFortifier extends CardImpl {
 
     public StonewiseFortifier(UUID ownerId) {
         super(ownerId, 27, "Stonewise Fortifier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

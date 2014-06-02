@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class IndigoFaerie extends CardImpl<IndigoFaerie> {
+public class IndigoFaerie extends CardImpl {
 
     public IndigoFaerie(UUID ownerId) {
         super(ownerId, 24, "Indigo Faerie", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

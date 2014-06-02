@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class RodOfRuin extends CardImpl<RodOfRuin> {
+public class RodOfRuin extends CardImpl {
 
     public RodOfRuin(UUID ownerId) {
         super(ownerId, 341, "Rod of Ruin", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

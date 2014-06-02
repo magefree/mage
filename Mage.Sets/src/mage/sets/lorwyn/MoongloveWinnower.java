@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MoongloveWinnower extends CardImpl<MoongloveWinnower> {
+public class MoongloveWinnower extends CardImpl {
 
     public MoongloveWinnower(UUID ownerId) {
         super(ownerId, 126, "Moonglove Winnower", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

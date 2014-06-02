@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SoulsGrace extends CardImpl<SoulsGrace> {
+public class SoulsGrace extends CardImpl {
 
     public SoulsGrace(UUID ownerId) {
         super(ownerId, 28, "Soul's Grace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

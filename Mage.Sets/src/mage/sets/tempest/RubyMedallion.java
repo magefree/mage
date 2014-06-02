@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  * @author noxx
  */
-public class RubyMedallion extends CardImpl<RubyMedallion> {
+public class RubyMedallion extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Red spells");
 

@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author BetaSteward
  */
-public class HinterlandHermit extends CardImpl<HinterlandHermit> {
+public class HinterlandHermit extends CardImpl {
 
     public HinterlandHermit(UUID ownerId) {
         super(ownerId, 94, "Hinterland Hermit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

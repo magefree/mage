@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class PhyrexianGhoul extends CardImpl<PhyrexianGhoul> {
+public class PhyrexianGhoul extends CardImpl {
 
     public PhyrexianGhoul(UUID ownerId) {
         super(ownerId, 37, "Phyrexian Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

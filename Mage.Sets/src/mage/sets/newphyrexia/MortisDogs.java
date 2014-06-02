@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class MortisDogs extends CardImpl<MortisDogs> {
+public class MortisDogs extends CardImpl {
 
     public MortisDogs(UUID ownerId) {
         super(ownerId, 66, "Mortis Dogs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

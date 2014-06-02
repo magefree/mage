@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class HeraldOfSerra extends CardImpl<HeraldOfSerra>{
+public class HeraldOfSerra extends CardImpl{
 
     public HeraldOfSerra(UUID ownerId) {
         super(ownerId, 17, "Herald of Serra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

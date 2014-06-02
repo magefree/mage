@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com, Loki
  */
-public class BirdsOfParadise extends CardImpl<BirdsOfParadise> {
+public class BirdsOfParadise extends CardImpl {
 
     public BirdsOfParadise(UUID ownerId) {
         super(ownerId, 252, "Birds of Paradise", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");

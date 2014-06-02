@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class EidolonOfBlossoms extends CardImpl<EidolonOfBlossoms> {
+public class EidolonOfBlossoms extends CardImpl {
 
     public EidolonOfBlossoms(UUID ownerId) {
         super(ownerId, 122, "Eidolon of Blossoms", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{G}{G}");

@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class VoidstoneGargoyle extends CardImpl<VoidstoneGargoyle> {
+public class VoidstoneGargoyle extends CardImpl {
 
     public VoidstoneGargoyle(UUID ownerId) {
         super(ownerId, 21, "Voidstone Gargoyle", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

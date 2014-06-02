@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class GoblinWarStrike extends CardImpl<GoblinWarStrike> {
+public class GoblinWarStrike extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblins you control");
     

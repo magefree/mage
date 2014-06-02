@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class LapseOfCertainty extends CardImpl<LapseOfCertainty> {
+public class LapseOfCertainty extends CardImpl {
 
     public LapseOfCertainty(UUID ownerId) {
         super(ownerId, 9, "Lapse of Certainty", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

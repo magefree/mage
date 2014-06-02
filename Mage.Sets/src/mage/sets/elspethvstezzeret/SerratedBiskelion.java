@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SerratedBiskelion extends CardImpl<SerratedBiskelion> {
+public class SerratedBiskelion extends CardImpl {
 
     public SerratedBiskelion(UUID ownerId) {
         super(ownerId, 46, "Serrated Biskelion", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

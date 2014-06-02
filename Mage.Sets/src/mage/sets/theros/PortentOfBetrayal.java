@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PortentOfBetrayal extends CardImpl<PortentOfBetrayal> {
+public class PortentOfBetrayal extends CardImpl {
 
     public PortentOfBetrayal(UUID ownerId) {
         super(ownerId, 133, "Portent of Betrayal", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");

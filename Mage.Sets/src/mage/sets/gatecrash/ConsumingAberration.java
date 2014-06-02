@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class ConsumingAberration extends CardImpl<ConsumingAberration> {
+public class ConsumingAberration extends CardImpl {
 
     public ConsumingAberration(UUID ownerId) {
         super(ownerId, 152, "Consuming Aberration", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");

@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class RavenousLeucrocota extends CardImpl<RavenousLeucrocota> {
+public class RavenousLeucrocota extends CardImpl {
 
     public RavenousLeucrocota(UUID ownerId) {
         super(ownerId, 136, "Ravenous Leucrocota", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

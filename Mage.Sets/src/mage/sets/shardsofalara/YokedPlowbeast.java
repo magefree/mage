@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class YokedPlowbeast extends CardImpl<YokedPlowbeast> {
+public class YokedPlowbeast extends CardImpl {
 
     public YokedPlowbeast (UUID ownerId) {
         super(ownerId, 31, "Yoked Plowbeast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class FencingAce extends CardImpl<FencingAce> {
+public class FencingAce extends CardImpl {
 
     public FencingAce(UUID ownerId) {
         super(ownerId, 11, "Fencing Ace", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

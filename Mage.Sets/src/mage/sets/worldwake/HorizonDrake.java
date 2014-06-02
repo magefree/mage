@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class HorizonDrake extends CardImpl<HorizonDrake> {
+public class HorizonDrake extends CardImpl {
 
     private static FilterLandCard filter = new FilterLandCard("lands");
 

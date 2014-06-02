@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class KazanduBlademaster extends CardImpl<KazanduBlademaster> {
+public class KazanduBlademaster extends CardImpl {
 
     public KazanduBlademaster(UUID ownerId) {
         super(ownerId, 16, "Kazandu Blademaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

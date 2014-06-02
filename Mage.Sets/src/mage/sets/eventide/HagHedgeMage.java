@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author jeffwadsworth
 
  */
-public class HagHedgeMage extends CardImpl<HagHedgeMage> {
+public class HagHedgeMage extends CardImpl {
     
     private final static FilterLandPermanent filter = new FilterLandPermanent();
     private final static FilterLandPermanent filter2 = new FilterLandPermanent();

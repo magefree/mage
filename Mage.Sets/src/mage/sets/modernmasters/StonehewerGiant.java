@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StonehewerGiant extends CardImpl<StonehewerGiant> {
+public class StonehewerGiant extends CardImpl {
 
     public StonehewerGiant(UUID ownerId) {
         super(ownerId, 31, "Stonehewer Giant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

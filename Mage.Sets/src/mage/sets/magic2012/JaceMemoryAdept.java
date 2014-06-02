@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class JaceMemoryAdept extends CardImpl<JaceMemoryAdept> {
+public class JaceMemoryAdept extends CardImpl {
 
     public JaceMemoryAdept(UUID ownerId) {
         super(ownerId, 58, "Jace, Memory Adept", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");

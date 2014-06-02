@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 
 
-public class RenderSilent extends CardImpl<RenderSilent> {
+public class RenderSilent extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("multicolored permanent");
     static {

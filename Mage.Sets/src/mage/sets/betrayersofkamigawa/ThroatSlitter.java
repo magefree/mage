@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ThroatSlitter extends CardImpl<ThroatSlitter> {
+public class ThroatSlitter extends CardImpl {
 
     public ThroatSlitter(UUID ownerId) {
         super(ownerId, 88, "Throat Slitter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

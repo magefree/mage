@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
  *
  * @author Plopman
  */
-public class LeylinePhantom extends CardImpl<LeylinePhantom> {
+public class LeylinePhantom extends CardImpl {
 
     public LeylinePhantom(UUID ownerId) {
         super(ownerId, 41, "Leyline Phantom", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

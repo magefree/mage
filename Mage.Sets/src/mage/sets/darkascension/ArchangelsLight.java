@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class ArchangelsLight extends CardImpl<ArchangelsLight> {
+public class ArchangelsLight extends CardImpl {
 
     public ArchangelsLight(UUID ownerId) {
         super(ownerId, 1, "Archangel's Light", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{W}");

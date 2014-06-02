@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class TajuruPreserver extends CardImpl<TajuruPreserver> {
+public class TajuruPreserver extends CardImpl {
 
     public TajuruPreserver(UUID ownerId) {
         super(ownerId, 211, "Tajuru Preserver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

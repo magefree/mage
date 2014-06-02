@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class VolcanicFallout extends CardImpl<VolcanicFallout> {
+public class VolcanicFallout extends CardImpl {
 
     public VolcanicFallout(UUID ownerId) {
         super(ownerId, 74, "Volcanic Fallout", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");

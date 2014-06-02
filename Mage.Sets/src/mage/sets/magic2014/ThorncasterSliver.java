@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class ThorncasterSliver extends CardImpl<ThorncasterSliver> {
+public class ThorncasterSliver extends CardImpl {
 
     public ThorncasterSliver(UUID ownerId) {
         super(ownerId, 158, "Thorncaster Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}");

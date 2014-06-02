@@ -44,7 +44,7 @@ import mage.constants.Zone;
 /**
  * @author nantuko
  */
-public class SilverInlaidDagger extends CardImpl<SilverInlaidDagger> {
+public class SilverInlaidDagger extends CardImpl {
 
     private static final String staticText = "As long as equipped creature is a Human, it gets an additional +1/+0";
 

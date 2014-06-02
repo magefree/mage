@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CoralMerfolk extends CardImpl<CoralMerfolk> {
+public class CoralMerfolk extends CardImpl {
 
     public CoralMerfolk(UUID ownerId) {
         super(ownerId, 47, "Coral Merfolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

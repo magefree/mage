@@ -46,7 +46,7 @@ import mage.watchers.Watcher;
  *
  * @author Plopman
  */
-public class EtherswornCanonist extends CardImpl<EtherswornCanonist> {
+public class EtherswornCanonist extends CardImpl {
 
     public EtherswornCanonist(UUID ownerId) {
         super(ownerId, 10, "Ethersworn Canonist", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}");

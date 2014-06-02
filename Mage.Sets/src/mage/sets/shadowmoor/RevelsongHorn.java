@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class RevelsongHorn extends CardImpl<RevelsongHorn> {
+public class RevelsongHorn extends CardImpl {
 
     public RevelsongHorn(UUID ownerId) {
         super(ownerId, 261, "Revelsong Horn", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

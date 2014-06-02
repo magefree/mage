@@ -45,7 +45,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class MirrorGallery extends CardImpl<MirrorGallery> {
+public class MirrorGallery extends CardImpl {
 
     public MirrorGallery(UUID ownerId) {
         super(ownerId, 154, "Mirror Gallery", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Afflict extends CardImpl<Afflict> {
+public class Afflict extends CardImpl {
 
     public Afflict(UUID ownerId) {
         super(ownerId, 125, "Afflict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

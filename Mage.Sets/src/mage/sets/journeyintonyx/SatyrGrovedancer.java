@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SatyrGrovedancer extends CardImpl<SatyrGrovedancer> {
+public class SatyrGrovedancer extends CardImpl {
 
     public SatyrGrovedancer(UUID ownerId) {
         super(ownerId, 139, "Satyr Grovedancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

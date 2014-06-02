@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class RazorfieldRhino extends CardImpl<RazorfieldRhino> {
+public class RazorfieldRhino extends CardImpl {
 
     public RazorfieldRhino (UUID ownerId) {
         super(ownerId, 127, "Razorfield Rhino", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

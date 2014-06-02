@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author nantuko
  */
-public class TravelersAmulet extends CardImpl<TravelersAmulet> {
+public class TravelersAmulet extends CardImpl {
 
     public TravelersAmulet(UUID ownerId) {
         super(ownerId, 234, "Traveler's Amulet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

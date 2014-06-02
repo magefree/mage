@@ -44,7 +44,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class AkroanLineBreaker extends CardImpl<AkroanLineBreaker> {
+public class AkroanLineBreaker extends CardImpl {
 
     public AkroanLineBreaker(UUID ownerId) {
         super(ownerId, 88, "Akroan Line Breaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class ViolentUltimatum extends CardImpl<ViolentUltimatum> {
+public class ViolentUltimatum extends CardImpl {
 
     public ViolentUltimatum (UUID ownerId) {
         super(ownerId, 206, "Violent Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{R}{R}{R}{G}{G}");

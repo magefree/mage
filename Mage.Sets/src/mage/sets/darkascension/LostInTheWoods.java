@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class LostInTheWoods extends CardImpl<LostInTheWoods> {
+public class LostInTheWoods extends CardImpl {
 
     public LostInTheWoods(UUID ownerId) {
         super(ownerId, 123, "Lost in the Woods", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");

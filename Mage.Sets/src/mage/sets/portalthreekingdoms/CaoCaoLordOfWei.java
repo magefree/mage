@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class CaoCaoLordOfWei extends CardImpl<CaoCaoLordOfWei> {
+public class CaoCaoLordOfWei extends CardImpl {
 
     public CaoCaoLordOfWei(UUID ownerId) {
         super(ownerId, 68, "Cao Cao, Lord of Wei", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

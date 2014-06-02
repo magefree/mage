@@ -66,7 +66,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North, noxx
  */
-public class TamiyoTheMoonSage extends CardImpl<TamiyoTheMoonSage> {
+public class TamiyoTheMoonSage extends CardImpl {
 
     public TamiyoTheMoonSage(UUID ownerId) {
         super(ownerId, 79, "Tamiyo, the Moon Sage", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");

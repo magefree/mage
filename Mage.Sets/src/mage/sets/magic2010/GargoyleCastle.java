@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GargoyleCastle extends CardImpl<GargoyleCastle> {
+public class GargoyleCastle extends CardImpl {
 
     public GargoyleCastle(UUID ownerId) {
         super(ownerId, 225, "Gargoyle Castle", Rarity.RARE, new CardType[]{CardType.LAND}, null);

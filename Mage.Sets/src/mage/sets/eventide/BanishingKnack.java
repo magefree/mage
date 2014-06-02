@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BanishingKnack extends CardImpl<BanishingKnack> {
+public class BanishingKnack extends CardImpl {
 
     private static final FilterPermanent filter = new FilterNonlandPermanent();
 

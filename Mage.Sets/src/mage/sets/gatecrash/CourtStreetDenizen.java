@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CourtStreetDenizen extends CardImpl<CourtStreetDenizen> {
+public class CourtStreetDenizen extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("another white creature");
     private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");

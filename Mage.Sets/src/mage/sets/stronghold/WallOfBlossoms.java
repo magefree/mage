@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class WallOfBlossoms extends CardImpl<WallOfBlossoms> {
+public class WallOfBlossoms extends CardImpl {
 
     public WallOfBlossoms(UUID ownerId) {
         super(ownerId, 75, "Wall of Blossoms", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

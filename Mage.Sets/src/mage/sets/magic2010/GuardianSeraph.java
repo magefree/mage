@@ -47,7 +47,7 @@ import mage.game.stack.StackObject;
  *
  * @author North
  */
-public class GuardianSeraph extends CardImpl<GuardianSeraph> {
+public class GuardianSeraph extends CardImpl {
 
     public GuardianSeraph(UUID ownerId) {
         super(ownerId, 13, "Guardian Seraph", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

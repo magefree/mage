@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class GildedLotus extends CardImpl<GildedLotus> {
+public class GildedLotus extends CardImpl {
 
     public GildedLotus(UUID ownerId) {
         super(ownerId, 206, "Gilded Lotus", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

@@ -51,7 +51,7 @@ import mage.watchers.common.PlayerDamagedBySourceWatcher;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GiltspireAvenger extends CardImpl<GiltspireAvenger> {
+public class GiltspireAvenger extends CardImpl {
 
     public GiltspireAvenger(UUID ownerId) {
         super(ownerId, 108, "Giltspire Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class CarrionHowler extends CardImpl<CarrionHowler> {
+public class CarrionHowler extends CardImpl {
 
     public CarrionHowler(UUID ownerId) {
         super(ownerId, 79, "Carrion Howler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

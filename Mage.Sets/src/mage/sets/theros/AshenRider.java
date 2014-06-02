@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class AshenRider extends CardImpl<AshenRider> {
+public class AshenRider extends CardImpl {
 
     public AshenRider(UUID ownerId) {
         super(ownerId, 187, "Ashen Rider", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{B}{B}");

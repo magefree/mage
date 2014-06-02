@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author North
  */
-public class BlessingsOfNature extends CardImpl<BlessingsOfNature> {
+public class BlessingsOfNature extends CardImpl {
 
     public BlessingsOfNature(UUID ownerId) {
         super(ownerId, 168, "Blessings of Nature", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");

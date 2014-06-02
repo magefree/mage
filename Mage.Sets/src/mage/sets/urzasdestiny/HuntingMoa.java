@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class HuntingMoa extends CardImpl<HuntingMoa> {
+public class HuntingMoa extends CardImpl {
 
     public HuntingMoa(UUID ownerId) {
         super(ownerId, 109, "Hunting Moa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

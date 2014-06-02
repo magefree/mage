@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author KholdFuzion
  */
-public class Opt extends CardImpl<Opt> {
+public class Opt extends CardImpl {
 
     public Opt(UUID ownerId) {
         super(ownerId, 64, "Opt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

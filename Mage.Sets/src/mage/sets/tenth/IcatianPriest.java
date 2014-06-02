@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class IcatianPriest extends CardImpl<IcatianPriest> {
+public class IcatianPriest extends CardImpl {
 
     public IcatianPriest(UUID ownerId) {
         super(ownerId, 24, "Icatian Priest", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");

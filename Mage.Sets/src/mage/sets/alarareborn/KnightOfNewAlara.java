@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class KnightOfNewAlara extends CardImpl<KnightOfNewAlara> {
+public class KnightOfNewAlara extends CardImpl {
 
     public KnightOfNewAlara(UUID ownerId) {
         super(ownerId, 70, "Knight of New Alara", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");

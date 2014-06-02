@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FightingDrake extends CardImpl<FightingDrake> {
+public class FightingDrake extends CardImpl {
 
     public FightingDrake(UUID ownerId) {
         super(ownerId, 63, "Fighting Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class AdmonitionAngel extends CardImpl<AdmonitionAngel> {
+public class AdmonitionAngel extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nonland permanent other than Admonition Angel");
 

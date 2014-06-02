@@ -51,7 +51,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class BorosReckoner extends CardImpl<BorosReckoner> {
+public class BorosReckoner extends CardImpl {
 
     public BorosReckoner(UUID ownerId) {
         super(ownerId, 215, "Boros Reckoner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}{R/W}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KeepsakeGorgon extends CardImpl<KeepsakeGorgon> {
+public class KeepsakeGorgon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Gorgon creature an opponent controls");
     static {

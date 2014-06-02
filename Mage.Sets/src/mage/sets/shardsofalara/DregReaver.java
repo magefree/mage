@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DregReaver extends CardImpl<DregReaver> {
+public class DregReaver extends CardImpl {
 
     public DregReaver (UUID ownerId) {
         super(ownerId, 73, "Dreg Reaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

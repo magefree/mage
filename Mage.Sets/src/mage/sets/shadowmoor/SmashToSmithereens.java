@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author jonubuu
  */
-public class SmashToSmithereens extends CardImpl<SmashToSmithereens> {
+public class SmashToSmithereens extends CardImpl {
 
     public SmashToSmithereens(UUID ownerId) {
         super(ownerId, 107, "Smash to Smithereens", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FissureVent extends CardImpl<FissureVent> {
+public class FissureVent extends CardImpl {
 
     public FissureVent(UUID ownerId) {
         super(ownerId, 144, "Fissure Vent", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

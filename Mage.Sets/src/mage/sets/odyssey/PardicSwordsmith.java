@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class PardicSwordsmith extends CardImpl<PardicSwordsmith> {
+public class PardicSwordsmith extends CardImpl {
 
     public PardicSwordsmith(UUID ownerId) {
         super(ownerId, 213, "Pardic Swordsmith", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

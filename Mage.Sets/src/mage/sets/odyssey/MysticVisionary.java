@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class MysticVisionary extends CardImpl<MysticVisionary> {
+public class MysticVisionary extends CardImpl {
 
     public MysticVisionary(UUID ownerId) {
         super(ownerId, 35, "Mystic Visionary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class DawnbringerCharioteers extends CardImpl<DawnbringerCharioteers> {
+public class DawnbringerCharioteers extends CardImpl {
 
     public DawnbringerCharioteers(UUID ownerId) {
         super(ownerId, 6, "Dawnbringer Charioteers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

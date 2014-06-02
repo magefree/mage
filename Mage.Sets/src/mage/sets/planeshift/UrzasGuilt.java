@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class UrzasGuilt extends CardImpl<UrzasGuilt> {
+public class UrzasGuilt extends CardImpl {
 
     public UrzasGuilt(UUID ownerId) {
         super(ownerId, 130, "Urza's Guilt", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");

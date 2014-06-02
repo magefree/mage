@@ -42,7 +42,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class BashToBits extends CardImpl<BashToBits> {
+public class BashToBits extends CardImpl {
 
     public BashToBits(UUID ownerId) {
         super(ownerId, 176, "Bash to Bits", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");

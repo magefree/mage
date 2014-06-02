@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class DivineFavor extends CardImpl<DivineFavor> {
+public class DivineFavor extends CardImpl {
 
     public DivineFavor(UUID ownerId) {
         super(ownerId, 14, "Divine Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

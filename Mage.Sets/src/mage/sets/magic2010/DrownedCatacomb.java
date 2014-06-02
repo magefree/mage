@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DrownedCatacomb extends CardImpl<DrownedCatacomb> {
+public class DrownedCatacomb extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

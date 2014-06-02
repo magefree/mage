@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class FusionElemental extends CardImpl<FusionElemental> {
+public class FusionElemental extends CardImpl {
 
     public FusionElemental(UUID ownerId) {
         super(ownerId, 107, "Fusion Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");

@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class KuldothaRebirth extends CardImpl<KuldothaRebirth> {
+public class KuldothaRebirth extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {

@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class SurvivalCache extends CardImpl<SurvivalCache> {
+public class SurvivalCache extends CardImpl {
 
     public SurvivalCache(UUID ownerId) {
         super(ownerId, 48, "Survival Cache", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class SheoldredWhisperingOne extends CardImpl<SheoldredWhisperingOne> {
+public class SheoldredWhisperingOne extends CardImpl {
 
     public SheoldredWhisperingOne (UUID ownerId) {
         super(ownerId, 73, "Sheoldred, Whispering One", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

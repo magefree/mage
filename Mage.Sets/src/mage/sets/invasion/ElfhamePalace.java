@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class ElfhamePalace extends CardImpl<ElfhamePalace> {
+public class ElfhamePalace extends CardImpl {
 
     public ElfhamePalace(UUID ownerId) {
         super(ownerId, 322, "Elfhame Palace", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class GraspOfDarkness extends CardImpl<GraspOfDarkness> {
+public class GraspOfDarkness extends CardImpl {
 
     public GraspOfDarkness (UUID ownerId) {
         super(ownerId, 65, "Grasp of Darkness", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");

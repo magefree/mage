@@ -44,7 +44,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class Wingcrafter extends CardImpl<Wingcrafter> {
+public class Wingcrafter extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, both creatures have flying";
 

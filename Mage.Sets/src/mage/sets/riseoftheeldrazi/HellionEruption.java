@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class HellionEruption extends CardImpl<HellionEruption> {
+public class HellionEruption extends CardImpl {
 
     public HellionEruption(UUID ownerId) {
         super(ownerId, 151, "Hellion Eruption", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}");

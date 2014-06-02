@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class Phelddagrif extends CardImpl<Phelddagrif> {
+public class Phelddagrif extends CardImpl {
 
     public Phelddagrif(UUID ownerId) {
         super(ownerId, 196, "Phelddagrif", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");

@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author maurer.it_at_gmail.com
  */
-public class DispenseJustice extends CardImpl<DispenseJustice> {
+public class DispenseJustice extends CardImpl {
 
     public DispenseJustice (UUID ownerId) {
         super(ownerId, 5, "Dispense Justice", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

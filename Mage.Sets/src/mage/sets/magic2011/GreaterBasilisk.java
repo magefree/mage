@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GreaterBasilisk extends CardImpl<GreaterBasilisk> {
+public class GreaterBasilisk extends CardImpl {
 
     public GreaterBasilisk(UUID ownerId) {
         super(ownerId, 180, "Greater Basilisk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

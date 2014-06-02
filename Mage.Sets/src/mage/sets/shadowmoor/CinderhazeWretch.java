@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  * @author jeffwadsworth
  *
  */
-public class CinderhazeWretch extends CardImpl<CinderhazeWretch> {
+public class CinderhazeWretch extends CardImpl {
 
     public CinderhazeWretch(UUID ownerId) {
         super(ownerId, 60, "Cinderhaze Wretch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

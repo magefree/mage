@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class HondenOfInfiniteRage extends CardImpl<HondenOfInfiniteRage> {
+public class HondenOfInfiniteRage extends CardImpl {
 
     final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 

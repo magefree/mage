@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author Loki
  */
-public class DayOfDestiny extends CardImpl<DayOfDestiny> {
+public class DayOfDestiny extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Legendary creatures");
 

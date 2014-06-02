@@ -53,7 +53,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class Mindblaze extends CardImpl<Mindblaze> {
+public class Mindblaze extends CardImpl {
 
     public Mindblaze (UUID ownerId) {
         super(ownerId, 180, "Mindblaze", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}");

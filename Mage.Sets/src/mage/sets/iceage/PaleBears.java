@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PaleBears extends CardImpl<PaleBears> {
+public class PaleBears extends CardImpl {
 
     public PaleBears(UUID ownerId) {
         super(ownerId, 144, "Pale Bears", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

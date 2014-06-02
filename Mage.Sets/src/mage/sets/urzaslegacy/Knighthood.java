@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Plopman
  */
-public class Knighthood extends CardImpl<Knighthood> {
+public class Knighthood extends CardImpl {
 
     public Knighthood(UUID ownerId) {
         super(ownerId, 12, "Knighthood", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

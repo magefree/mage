@@ -53,7 +53,7 @@ import mage.target.TargetCard;
  *
  * @author jeffwadsworth
  */
-public class ShimianSpecter extends CardImpl<ShimianSpecter> {
+public class ShimianSpecter extends CardImpl {
 
     public ShimianSpecter(UUID ownerId) {
         super(ownerId, 109, "Shimian Specter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

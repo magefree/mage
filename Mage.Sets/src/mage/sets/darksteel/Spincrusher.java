@@ -46,7 +46,7 @@ import mage.counters.CounterType;
 /**
  * @author Loki
  */
-public class Spincrusher extends CardImpl<Spincrusher> {
+public class Spincrusher extends CardImpl {
 
     public Spincrusher(UUID ownerId) {
         super(ownerId, 144, "Spincrusher", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

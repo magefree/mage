@@ -40,7 +40,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class ThunderousWrath extends CardImpl<ThunderousWrath> {
+public class ThunderousWrath extends CardImpl {
 
     public ThunderousWrath(UUID ownerId) {
         super(ownerId, 160, "Thunderous Wrath", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");

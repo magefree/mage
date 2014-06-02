@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class NulltreadGargantuan extends CardImpl<NulltreadGargantuan> {
+public class NulltreadGargantuan extends CardImpl {
 
     public NulltreadGargantuan (UUID ownerId) {
         super(ownerId, 102, "Nulltread Gargantuan", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

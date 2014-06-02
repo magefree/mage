@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class SpiketailHatchling extends CardImpl<SpiketailHatchling> {
+public class SpiketailHatchling extends CardImpl {
 
     public SpiketailHatchling(UUID ownerId) {
         super(ownerId, 111, "Spiketail Hatchling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

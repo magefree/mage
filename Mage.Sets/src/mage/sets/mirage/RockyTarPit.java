@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class RockyTarPit extends CardImpl<RockyTarPit> {
+public class RockyTarPit extends CardImpl {
 
     public RockyTarPit(UUID ownerId) {
         super(ownerId, 310, "Rocky Tar Pit", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

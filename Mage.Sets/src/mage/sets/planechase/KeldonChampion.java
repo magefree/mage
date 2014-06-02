@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class KeldonChampion extends CardImpl<KeldonChampion> {
+public class KeldonChampion extends CardImpl {
 
     public KeldonChampion(UUID ownerId) {
         super(ownerId, 58, "Keldon Champion", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

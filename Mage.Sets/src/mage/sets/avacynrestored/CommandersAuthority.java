@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class CommandersAuthority extends CardImpl<CommandersAuthority> {
+public class CommandersAuthority extends CardImpl {
 
     public CommandersAuthority(UUID ownerId) {
         super(ownerId, 13, "Commander's Authority", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");

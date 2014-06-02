@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class ExplodingBorders extends CardImpl<ExplodingBorders> {
+public class ExplodingBorders extends CardImpl {
 
     public ExplodingBorders(UUID ownerId) {
         super(ownerId, 106, "Exploding Borders", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{G}");

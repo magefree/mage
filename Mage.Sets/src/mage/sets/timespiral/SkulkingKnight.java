@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SkulkingKnight extends CardImpl<SkulkingKnight> {
+public class SkulkingKnight extends CardImpl {
 
     public SkulkingKnight(UUID ownerId) {
         super(ownerId, 130, "Skulking Knight", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

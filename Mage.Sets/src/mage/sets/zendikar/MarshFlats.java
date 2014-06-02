@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MarshFlats extends CardImpl<MarshFlats> {
+public class MarshFlats extends CardImpl {
 
     public MarshFlats(UUID ownerId) {
         super(ownerId, 219, "Marsh Flats", Rarity.RARE, new CardType[]{CardType.LAND}, null);

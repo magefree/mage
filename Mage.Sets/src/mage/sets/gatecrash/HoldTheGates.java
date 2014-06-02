@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class HoldTheGates extends CardImpl<HoldTheGates> {
+public class HoldTheGates extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent();
 

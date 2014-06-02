@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class CurseOfThePiercedHeart extends CardImpl<CurseOfThePiercedHeart> {
+public class CurseOfThePiercedHeart extends CardImpl {
 
     public CurseOfThePiercedHeart(UUID ownerId) {
         super(ownerId, 138, "Curse of the Pierced Heart", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

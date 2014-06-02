@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 /**
  * @author Loki
  */
-public class Cleanfall extends CardImpl<Cleanfall> {
+public class Cleanfall extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantments");
 

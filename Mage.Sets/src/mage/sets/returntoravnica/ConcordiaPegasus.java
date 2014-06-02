@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ConcordiaPegasus extends CardImpl<ConcordiaPegasus> {
+public class ConcordiaPegasus extends CardImpl {
 
     public ConcordiaPegasus(UUID ownerId) {
         super(ownerId, 8, "Concordia Pegasus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

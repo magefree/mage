@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class CaptainSisay extends CardImpl<CaptainSisay> {
+public class CaptainSisay extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("legendary card");
     

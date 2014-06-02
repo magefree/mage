@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class WirewoodGuardian extends CardImpl<WirewoodGuardian> {
+public class WirewoodGuardian extends CardImpl {
 
     public WirewoodGuardian(UUID ownerId) {
         super(ownerId, 132, "Wirewood Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

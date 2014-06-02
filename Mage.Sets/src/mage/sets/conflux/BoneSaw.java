@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BoneSaw extends CardImpl<BoneSaw> {
+public class BoneSaw extends CardImpl {
 
     public BoneSaw(UUID ownerId) {
         super(ownerId, 135, "Bone Saw", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

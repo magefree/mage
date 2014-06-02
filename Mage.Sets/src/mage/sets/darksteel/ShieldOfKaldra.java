@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class ShieldOfKaldra extends CardImpl<ShieldOfKaldra> {
+public class ShieldOfKaldra extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra");
 

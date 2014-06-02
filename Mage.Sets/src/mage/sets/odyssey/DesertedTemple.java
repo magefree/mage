@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class DesertedTemple extends CardImpl<DesertedTemple> {
+public class DesertedTemple extends CardImpl {
 
     public DesertedTemple(UUID ownerId) {
         super(ownerId, 320, "Deserted Temple", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WeightOfTheUnderworld extends CardImpl<WeightOfTheUnderworld> {
+public class WeightOfTheUnderworld extends CardImpl {
 
     public WeightOfTheUnderworld(UUID ownerId) {
         super(ownerId, 86, "Weight of the Underworld", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

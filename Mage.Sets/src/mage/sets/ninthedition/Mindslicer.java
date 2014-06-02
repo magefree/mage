@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author cbt33
  */
-public class Mindslicer extends CardImpl<Mindslicer> {
+public class Mindslicer extends CardImpl {
 
     public Mindslicer(UUID ownerId) {
         super(ownerId, 146, "Mindslicer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

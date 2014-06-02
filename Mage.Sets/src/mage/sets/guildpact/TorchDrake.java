@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TorchDrake extends CardImpl<TorchDrake> {
+public class TorchDrake extends CardImpl {
 
     public TorchDrake (UUID ownerId) {
         super(ownerId, 38, "Torch Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

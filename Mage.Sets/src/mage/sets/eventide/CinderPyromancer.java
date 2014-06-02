@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class CinderPyromancer extends CardImpl<CinderPyromancer> {
+public class CinderPyromancer extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a red spell");
 
     static {

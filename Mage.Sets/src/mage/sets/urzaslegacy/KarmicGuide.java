@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Backfir3
  */
-public class KarmicGuide extends CardImpl<KarmicGuide> {
+public class KarmicGuide extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Black");
 

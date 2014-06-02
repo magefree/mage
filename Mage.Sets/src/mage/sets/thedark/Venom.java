@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Backfir3
  */
-public class Venom extends CardImpl<Venom> {
+public class Venom extends CardImpl {
 
     public Venom(UUID ownerId) {
         super(ownerId, 53, "Venom", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");

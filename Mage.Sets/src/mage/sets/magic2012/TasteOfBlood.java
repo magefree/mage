@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class TasteOfBlood extends CardImpl<TasteOfBlood> {
+public class TasteOfBlood extends CardImpl {
 
     public TasteOfBlood (UUID ownerId) {
         super(ownerId, 113, "Taste of Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");

@@ -44,7 +44,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class HullBreach extends CardImpl<HullBreach> {
+public class HullBreach extends CardImpl {
 
     public HullBreach(UUID ownerId) {
         super(ownerId, 193, "Hull Breach", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}{G}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class PerilousResearch extends CardImpl<PerilousResearch> {
+public class PerilousResearch extends CardImpl {
 
     public PerilousResearch(UUID ownerId) {
         super(ownerId, 54, "Perilous Research", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

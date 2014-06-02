@@ -53,7 +53,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class Gomazoa extends CardImpl<Gomazoa> {
+public class Gomazoa extends CardImpl {
 
     public Gomazoa(UUID ownerId) {
         super(ownerId, 46, "Gomazoa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

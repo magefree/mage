@@ -47,7 +47,7 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 /**
  * @author nantuko
  */
-public class InstigatorGang extends CardImpl<InstigatorGang> {
+public class InstigatorGang extends CardImpl {
 
     public InstigatorGang(UUID ownerId) {
         super(ownerId, 149, "Instigator Gang", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

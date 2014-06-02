@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class TendrilsOfAgony extends CardImpl<TendrilsOfAgony> {
+public class TendrilsOfAgony extends CardImpl {
 
     public TendrilsOfAgony(UUID ownerId) {
         super(ownerId, 75, "Tendrils of Agony", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Kranioceros extends CardImpl<Kranioceros> {
+public class Kranioceros extends CardImpl {
 
     public Kranioceros(UUID ownerId) {
         super(ownerId, 67, "Kranioceros", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

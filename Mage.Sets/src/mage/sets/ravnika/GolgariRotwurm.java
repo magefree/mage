@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class GolgariRotwurm extends CardImpl<GolgariRotwurm> {
+public class GolgariRotwurm extends CardImpl {
 
     public GolgariRotwurm(UUID ownerId) {
         super(ownerId, 210, "Golgari Rotwurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");

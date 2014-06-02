@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TurntimberBasilisk extends CardImpl<TurntimberBasilisk> {
+public class TurntimberBasilisk extends CardImpl {
 
     public TurntimberBasilisk(UUID ownerId) {
         super(ownerId, 190, "Turntimber Basilisk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

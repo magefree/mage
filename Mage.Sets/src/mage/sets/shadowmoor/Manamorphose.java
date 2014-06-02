@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class Manamorphose extends CardImpl<Manamorphose> {
+public class Manamorphose extends CardImpl {
 
     public Manamorphose(UUID ownerId) {
         super(ownerId, 211, "Manamorphose", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/G}");

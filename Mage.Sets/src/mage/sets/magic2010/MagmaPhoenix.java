@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MagmaPhoenix extends CardImpl<MagmaPhoenix> {
+public class MagmaPhoenix extends CardImpl {
 
     public MagmaPhoenix(UUID ownerId) {
         super(ownerId, 148, "Magma Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

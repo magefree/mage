@@ -57,7 +57,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TezzeretAgentOfBolas extends CardImpl<TezzeretAgentOfBolas> {
+public class TezzeretAgentOfBolas extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact card");
     static {

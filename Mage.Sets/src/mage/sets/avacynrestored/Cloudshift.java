@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class Cloudshift extends CardImpl<Cloudshift> {
+public class Cloudshift extends CardImpl {
 
     public Cloudshift(UUID ownerId) {
         super(ownerId, 12, "Cloudshift", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

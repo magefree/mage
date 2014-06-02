@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class AvenFisher extends CardImpl<AvenFisher> {
+public class AvenFisher extends CardImpl {
 
     public AvenFisher(UUID ownerId) {
         super(ownerId, 68, "Aven Fisher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

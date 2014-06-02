@@ -41,7 +41,7 @@ import mage.game.permanent.token.SpiritToken;
  *
  * @author Loki
  */
-public class DrippingTongueZubera extends CardImpl<DrippingTongueZubera> {
+public class DrippingTongueZubera extends CardImpl {
 
     public DrippingTongueZubera (UUID ownerId) {
         super(ownerId, 206, "Dripping-Tongue Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

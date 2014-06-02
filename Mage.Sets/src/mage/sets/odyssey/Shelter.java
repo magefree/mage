@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author cbt33
  */
-public class Shelter extends CardImpl<Shelter> {
+public class Shelter extends CardImpl {
 
     public Shelter(UUID ownerId) {
         super(ownerId, 46, "Shelter", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

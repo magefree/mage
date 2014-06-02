@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class LightmineField extends CardImpl<LightmineField> {
+public class LightmineField extends CardImpl {
 
     public LightmineField(UUID ownerId) {
         super(ownerId, 32, "Lightmine Field", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

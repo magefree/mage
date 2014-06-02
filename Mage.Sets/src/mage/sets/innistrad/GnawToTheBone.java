@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author nantuko
  */
-public class GnawToTheBone extends CardImpl<GnawToTheBone> {
+public class GnawToTheBone extends CardImpl {
 
     public GnawToTheBone(UUID ownerId) {
         super(ownerId, 183, "Gnaw to the Bone", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

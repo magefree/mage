@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SmolderingButcher extends CardImpl<SmolderingButcher> {
+public class SmolderingButcher extends CardImpl {
 
     public SmolderingButcher (UUID ownerId) {
         super(ownerId, 42, "Smoldering Butcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

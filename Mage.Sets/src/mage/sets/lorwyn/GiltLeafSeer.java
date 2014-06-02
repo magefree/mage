@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class GiltLeafSeer extends CardImpl<GiltLeafSeer> {
+public class GiltLeafSeer extends CardImpl {
 
     public GiltLeafSeer(UUID ownerId) {
         super(ownerId, 215, "Gilt-Leaf Seer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

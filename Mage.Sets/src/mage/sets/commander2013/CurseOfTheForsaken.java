@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class CurseOfTheForsaken extends CardImpl<CurseOfTheForsaken> {
+public class CurseOfTheForsaken extends CardImpl {
 
     public CurseOfTheForsaken(UUID ownerId) {
         super(ownerId, 8, "Curse of the Forsaken", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

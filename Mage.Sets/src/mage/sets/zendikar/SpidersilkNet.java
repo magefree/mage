@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SpidersilkNet extends CardImpl<SpidersilkNet> {
+public class SpidersilkNet extends CardImpl {
 
     public SpidersilkNet(UUID ownerId) {
         super(ownerId, 206, "Spidersilk Net", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

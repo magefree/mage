@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ColossalMight extends CardImpl<ColossalMight> {
+public class ColossalMight extends CardImpl {
 
     public ColossalMight (UUID ownerId) {
         super(ownerId, 51, "Colossal Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{G}");

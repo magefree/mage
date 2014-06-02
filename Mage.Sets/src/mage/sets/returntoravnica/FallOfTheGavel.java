@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class FallOfTheGavel extends CardImpl<FallOfTheGavel> {
+public class FallOfTheGavel extends CardImpl {
 
     public FallOfTheGavel(UUID ownerId) {
         super(ownerId, 161, "Fall of the Gavel", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{U}");

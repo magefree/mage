@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class RatchetBomb extends CardImpl<RatchetBomb> {
+public class RatchetBomb extends CardImpl {
 
     public RatchetBomb (UUID ownerId) {
         super(ownerId, 196, "Ratchet Bomb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

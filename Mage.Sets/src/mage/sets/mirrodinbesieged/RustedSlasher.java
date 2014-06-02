@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class RustedSlasher extends CardImpl<RustedSlasher> {
+public class RustedSlasher extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {

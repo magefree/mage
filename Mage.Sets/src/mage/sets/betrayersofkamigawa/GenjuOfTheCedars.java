@@ -54,7 +54,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class GenjuOfTheCedars extends CardImpl<GenjuOfTheCedars> {
+public class GenjuOfTheCedars extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
    

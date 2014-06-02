@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class TauntingElf extends CardImpl<TauntingElf> {
+public class TauntingElf extends CardImpl {
 
     public TauntingElf(UUID ownerId) {
         super(ownerId, 290, "Taunting Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author maurer.it_at_gmail.com
  */
-public class TrainingGrounds extends CardImpl<TrainingGrounds> {
+public class TrainingGrounds extends CardImpl {
 
     public TrainingGrounds (UUID ownerId) {
         super(ownerId, 91, "Training Grounds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}");

@@ -43,7 +43,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BallLightning extends CardImpl<BallLightning> {
+public class BallLightning extends CardImpl {
 
     public BallLightning(UUID ownerId) {
         super(ownerId, 125, "Ball Lightning", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");

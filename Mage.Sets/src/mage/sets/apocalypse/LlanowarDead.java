@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LlanowarDead extends CardImpl<LlanowarDead> {
+public class LlanowarDead extends CardImpl {
 
     public LlanowarDead(UUID ownerId) {
         super(ownerId, 109, "Llanowar Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{G}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class MomentousFall extends CardImpl<MomentousFall> {
+public class MomentousFall extends CardImpl {
 
     public MomentousFall(UUID ownerId) {
         super(ownerId, 197, "Momentous Fall", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");

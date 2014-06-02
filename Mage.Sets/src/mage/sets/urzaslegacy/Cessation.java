@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class Cessation extends CardImpl<Cessation> {
+public class Cessation extends CardImpl {
 
     public Cessation(UUID ownerId) {
         super(ownerId, 4, "Cessation", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

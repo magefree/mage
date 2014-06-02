@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class SkeletalCrocodile extends CardImpl<SkeletalCrocodile> {
+public class SkeletalCrocodile extends CardImpl {
 
     public SkeletalCrocodile(UUID ownerId) {
         super(ownerId, 33, "Skeletal Crocodile", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

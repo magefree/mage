@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class SilverchaseFox extends CardImpl<SilverchaseFox> {
+public class SilverchaseFox extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 

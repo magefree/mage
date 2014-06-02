@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
 /**
  * @author Loki
  */
-public class Thoughtbind extends CardImpl<Thoughtbind> {
+public class Thoughtbind extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
 

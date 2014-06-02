@@ -52,7 +52,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class HatchetBully extends CardImpl<HatchetBully> {
+public class HatchetBully extends CardImpl {
 
     public HatchetBully(UUID ownerId) {
         super(ownerId, 54, "Hatchet Bully", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

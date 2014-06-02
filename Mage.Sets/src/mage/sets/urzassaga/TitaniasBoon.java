@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Backfir3
  */
-public class TitaniasBoon extends CardImpl<TitaniasBoon> {
+public class TitaniasBoon extends CardImpl {
 
     public TitaniasBoon(UUID ownerId) {
         super(ownerId, 276, "Titania's Boon", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

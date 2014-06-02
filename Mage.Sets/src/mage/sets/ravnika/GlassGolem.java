@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GlassGolem extends CardImpl<GlassGolem> {
+public class GlassGolem extends CardImpl {
 
     public GlassGolem (UUID ownerId) {
         super(ownerId, 261, "Glass Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

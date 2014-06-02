@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DarkRitual extends CardImpl<DarkRitual> {
+public class DarkRitual extends CardImpl {
 
     public DarkRitual(UUID ownerId) {
         super(ownerId, 24, "Dark Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

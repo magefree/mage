@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KnightExemplar extends CardImpl<KnightExemplar> {
+public class KnightExemplar extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creatures");
 

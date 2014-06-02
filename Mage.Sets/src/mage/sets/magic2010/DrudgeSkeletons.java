@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DrudgeSkeletons extends CardImpl<DrudgeSkeletons>{
+public class DrudgeSkeletons extends CardImpl{
 
     public DrudgeSkeletons(UUID ownerId) {
         super(ownerId, 95, "Drudge Skeletons", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

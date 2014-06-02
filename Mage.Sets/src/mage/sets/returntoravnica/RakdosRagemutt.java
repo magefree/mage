@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RakdosRagemutt extends CardImpl<RakdosRagemutt> {
+public class RakdosRagemutt extends CardImpl {
 
     public RakdosRagemutt(UUID ownerId) {
         super(ownerId, 185, "Rakdos Ragemutt", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");

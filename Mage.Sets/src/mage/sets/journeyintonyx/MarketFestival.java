@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class MarketFestival extends CardImpl<MarketFestival> {
+public class MarketFestival extends CardImpl {
 
     public MarketFestival(UUID ownerId) {
         super(ownerId, 130, "Market Festival", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

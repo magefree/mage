@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class MassacreWurm extends CardImpl<MassacreWurm> {
+public class MassacreWurm extends CardImpl {
 
     public MassacreWurm (UUID ownerId) {
         super(ownerId, 46, "Massacre Wurm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

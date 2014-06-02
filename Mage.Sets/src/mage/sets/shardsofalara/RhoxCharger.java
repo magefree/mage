@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class RhoxCharger extends CardImpl<RhoxCharger> {
+public class RhoxCharger extends CardImpl {
 
     public RhoxCharger (UUID ownerId) {
         super(ownerId, 145, "Rhox Charger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

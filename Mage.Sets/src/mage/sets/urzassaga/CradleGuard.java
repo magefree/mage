@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class CradleGuard extends CardImpl<CradleGuard>{
+public class CradleGuard extends CardImpl{
 
     public CradleGuard(UUID ownerId) {
         super(ownerId, 245, "Cradle Guard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

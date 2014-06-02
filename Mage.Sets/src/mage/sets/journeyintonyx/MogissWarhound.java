@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class MogissWarhound extends CardImpl<MogissWarhound> {
+public class MogissWarhound extends CardImpl {
 
     public MogissWarhound(UUID ownerId) {
         super(ownerId, 104, "Mogis's Warhound", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}");

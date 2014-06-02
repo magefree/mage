@@ -39,7 +39,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author North
  */
-public class ChokingFumes extends CardImpl<ChokingFumes> {
+public class ChokingFumes extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature();
 

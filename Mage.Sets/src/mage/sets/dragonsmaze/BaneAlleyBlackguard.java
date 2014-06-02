@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class BaneAlleyBlackguard extends CardImpl<BaneAlleyBlackguard> {
+public class BaneAlleyBlackguard extends CardImpl {
 
     public BaneAlleyBlackguard (UUID ownerId) {
         super(ownerId, 21, "Bane Alley Blackguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

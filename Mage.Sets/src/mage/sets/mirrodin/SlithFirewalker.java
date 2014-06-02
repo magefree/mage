@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class SlithFirewalker extends CardImpl<SlithFirewalker> {
+public class SlithFirewalker extends CardImpl {
 
     public SlithFirewalker(UUID ownerId) {
         super(ownerId, 107, "Slith Firewalker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");

@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SensationGorger extends CardImpl<SensationGorger> {
+public class SensationGorger extends CardImpl {
 
     public SensationGorger(UUID ownerId) {
         super(ownerId, 102, "Sensation Gorger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

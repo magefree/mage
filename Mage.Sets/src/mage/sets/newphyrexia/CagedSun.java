@@ -57,7 +57,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class CagedSun extends CardImpl<CagedSun> {
+public class CagedSun extends CardImpl {
 
     public CagedSun(UUID ownerId) {
         super(ownerId, 132, "Caged Sun", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");

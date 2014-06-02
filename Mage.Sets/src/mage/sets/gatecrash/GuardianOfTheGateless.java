@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class GuardianOfTheGateless extends CardImpl<GuardianOfTheGateless> {
+public class GuardianOfTheGateless extends CardImpl {
 
     public GuardianOfTheGateless(UUID ownerId) {
         super(ownerId, 14, "Guardian of the Gateless", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

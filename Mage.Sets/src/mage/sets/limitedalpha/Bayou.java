@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class Bayou extends CardImpl<Bayou> {
+public class Bayou extends CardImpl {
 
     public Bayou(UUID ownerId) {
         super(ownerId, 278, "Bayou", Rarity.RARE, new CardType[]{CardType.LAND}, "");

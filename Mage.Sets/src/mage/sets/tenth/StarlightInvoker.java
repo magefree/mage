@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class StarlightInvoker extends CardImpl<StarlightInvoker> {
+public class StarlightInvoker extends CardImpl {
 
     public StarlightInvoker(UUID ownerId) {
         super(ownerId, 47, "Starlight Invoker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class CandlesGlow extends CardImpl<CandlesGlow> {
+public class CandlesGlow extends CardImpl {
 
     public CandlesGlow(UUID ownerId) {
         super(ownerId, 5, "Candles' Glow", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

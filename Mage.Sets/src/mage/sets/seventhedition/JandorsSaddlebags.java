@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author KholdFuzion
  */
-public class JandorsSaddlebags extends CardImpl<JandorsSaddlebags> {
+public class JandorsSaddlebags extends CardImpl {
 
     public JandorsSaddlebags(UUID ownerId) {
         super(ownerId, 304, "Jandor's Saddlebags", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

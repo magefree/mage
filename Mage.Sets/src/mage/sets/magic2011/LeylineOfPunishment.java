@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LeylineOfPunishment extends CardImpl<LeylineOfPunishment> {
+public class LeylineOfPunishment extends CardImpl {
 
     public LeylineOfPunishment(UUID ownerId) {
         super(ownerId, 148, "Leyline of Punishment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

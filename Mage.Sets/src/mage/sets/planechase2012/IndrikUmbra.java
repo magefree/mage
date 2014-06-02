@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class IndrikUmbra extends CardImpl<IndrikUmbra> {
+public class IndrikUmbra extends CardImpl {
 
     public IndrikUmbra(UUID ownerId) {
         super(ownerId, 96, "Indrik Umbra", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{W}");

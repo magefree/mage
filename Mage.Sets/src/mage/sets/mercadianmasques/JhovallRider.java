@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class JhovallRider extends CardImpl<JhovallRider> {
+public class JhovallRider extends CardImpl {
 
     public JhovallRider(UUID ownerId) {
         super(ownerId, 26, "Jhovall Rider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

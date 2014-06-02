@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SoulWarden extends CardImpl<SoulWarden> {
+public class SoulWarden extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
     static {

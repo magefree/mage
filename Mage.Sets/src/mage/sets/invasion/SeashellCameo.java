@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class SeashellCameo extends CardImpl<SeashellCameo> {
+public class SeashellCameo extends CardImpl {
 
     public SeashellCameo(UUID ownerId) {
         super(ownerId, 311, "Seashell Cameo", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

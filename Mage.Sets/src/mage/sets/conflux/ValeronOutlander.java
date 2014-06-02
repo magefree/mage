@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class ValeronOutlander extends CardImpl<ValeronOutlander> {
+public class ValeronOutlander extends CardImpl {
     private static final FilterCard filter = new FilterCard("black");
 
     static {

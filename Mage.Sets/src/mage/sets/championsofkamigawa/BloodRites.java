@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 /**
  * @author Loki
  */
-public class BloodRites extends CardImpl<BloodRites> {
+public class BloodRites extends CardImpl {
     public BloodRites(UUID ownerId) {
         super(ownerId, 159, "Blood Rites", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
         this.expansionSetCode = "CHK";

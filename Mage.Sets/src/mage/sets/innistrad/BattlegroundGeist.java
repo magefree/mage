@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class BattlegroundGeist extends CardImpl<BattlegroundGeist> {
+public class BattlegroundGeist extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit creatures");
 

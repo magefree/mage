@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SuntailHawk extends CardImpl<SuntailHawk> {
+public class SuntailHawk extends CardImpl {
 
     public SuntailHawk(UUID ownerId) {
         super(ownerId, 50, "Suntail Hawk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

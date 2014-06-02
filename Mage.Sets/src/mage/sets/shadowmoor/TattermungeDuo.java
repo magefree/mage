@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class TattermungeDuo extends CardImpl<TattermungeDuo> {
+public class TattermungeDuo extends CardImpl {
 
     private static final FilterSpell redFilter = new FilterSpell("a red spell");
     private static final FilterSpell greenFilter = new FilterSpell("a green spell");

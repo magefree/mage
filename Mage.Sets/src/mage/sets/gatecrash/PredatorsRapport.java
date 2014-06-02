@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PredatorsRapport extends CardImpl<PredatorsRapport> {
+public class PredatorsRapport extends CardImpl {
 
     public PredatorsRapport(UUID ownerId) {
         super(ownerId, 129, "Predator's Rapport", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

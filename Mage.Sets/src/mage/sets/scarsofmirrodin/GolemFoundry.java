@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki, North
  */
-public class GolemFoundry extends CardImpl<GolemFoundry> {
+public class GolemFoundry extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an artifact spell");
     static {

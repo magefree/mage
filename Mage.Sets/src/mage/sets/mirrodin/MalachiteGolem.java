@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class MalachiteGolem extends CardImpl<MalachiteGolem> {
+public class MalachiteGolem extends CardImpl {
 
     public MalachiteGolem(UUID ownerId) {
         super(ownerId, 202, "Malachite Golem", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class Paleoloth extends CardImpl<Paleoloth> {
+public class Paleoloth extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature with power 5 or greater");
     

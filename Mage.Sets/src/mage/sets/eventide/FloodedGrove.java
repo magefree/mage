@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class FloodedGrove extends CardImpl<FloodedGrove> {
+public class FloodedGrove extends CardImpl {
 
     public FloodedGrove (UUID ownerId) {
         super(ownerId, 177, "Flooded Grove", Rarity.RARE, new CardType[]{CardType.LAND}, null);

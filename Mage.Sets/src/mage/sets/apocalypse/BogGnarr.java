@@ -48,7 +48,7 @@ import mage.game.stack.Spell;
 /**
  * @author Loki
  */
-public class BogGnarr extends CardImpl<BogGnarr> {
+public class BogGnarr extends CardImpl {
 
     public BogGnarr(UUID ownerId) {
         super(ownerId, 76, "Bog Gnarr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

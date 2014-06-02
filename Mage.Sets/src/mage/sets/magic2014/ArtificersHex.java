@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ArtificersHex extends CardImpl<ArtificersHex> {
+public class ArtificersHex extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
     static {

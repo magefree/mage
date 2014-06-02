@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GraypeltRefuge extends CardImpl<GraypeltRefuge> {
+public class GraypeltRefuge extends CardImpl {
 
     public GraypeltRefuge(UUID ownerId) {
         super(ownerId, 214, "Graypelt Refuge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

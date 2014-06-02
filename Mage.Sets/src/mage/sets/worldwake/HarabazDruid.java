@@ -46,7 +46,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class HarabazDruid extends CardImpl<HarabazDruid> {
+public class HarabazDruid extends CardImpl {
 
     public HarabazDruid(UUID ownerId) {
         super(ownerId, 105, "Harabaz Druid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

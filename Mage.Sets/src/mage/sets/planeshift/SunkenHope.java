@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class SunkenHope extends CardImpl<SunkenHope> {
+public class SunkenHope extends CardImpl {
 
     public SunkenHope(UUID ownerId) {
         super(ownerId, 37, "Sunken Hope", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");

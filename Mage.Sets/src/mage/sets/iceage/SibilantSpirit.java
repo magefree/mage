@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class SibilantSpirit extends CardImpl<SibilantSpirit> {
+public class SibilantSpirit extends CardImpl {
 
     public SibilantSpirit(UUID ownerId) {
         super(ownerId, 97, "Sibilant Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}");

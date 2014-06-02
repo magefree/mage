@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class ScavengingScarab extends CardImpl<ScavengingScarab> {
+public class ScavengingScarab extends CardImpl {
 
     public ScavengingScarab(UUID ownerId) {
         super(ownerId, 51, "Scavenging Scarab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

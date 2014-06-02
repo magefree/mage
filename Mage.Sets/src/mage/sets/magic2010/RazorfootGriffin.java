@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RazorfootGriffin extends CardImpl<RazorfootGriffin> {
+public class RazorfootGriffin extends CardImpl {
 
     public RazorfootGriffin(UUID ownerId) {
         super(ownerId, 25, "Razorfoot Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class StoneworkPuma extends CardImpl<StoneworkPuma> {
+public class StoneworkPuma extends CardImpl {
 
     public StoneworkPuma(UUID ownerId) {
         super(ownerId, 207, "Stonework Puma", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

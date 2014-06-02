@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
+public class BaneslayerAngel extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("Demons and from Dragons");
 

@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
  *
  * @author cbt33
  */
-public class BeastAttack extends CardImpl<BeastAttack> {
+public class BeastAttack extends CardImpl {
 
     public BeastAttack(UUID ownerId) {
         super(ownerId, 230, "Beast Attack", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}{G}{G}");

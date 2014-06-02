@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class UnderworldConnections extends CardImpl<UnderworldConnections> {
+public class UnderworldConnections extends CardImpl {
 
     static final String rule = "Enchanted land has \"{T}, Pay 1 life: Draw a card.\"";
 

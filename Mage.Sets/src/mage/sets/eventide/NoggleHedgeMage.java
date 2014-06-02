@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  * @author jeffwadsworth
 
  */
-public class NoggleHedgeMage extends CardImpl<NoggleHedgeMage> {
+public class NoggleHedgeMage extends CardImpl {
     
     private final static FilterLandPermanent filter = new FilterLandPermanent();
     private final static FilterLandPermanent filter2 = new FilterLandPermanent();

@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author Loki
  */
-public class HondenOfNightsReach extends CardImpl<HondenOfNightsReach> {
+public class HondenOfNightsReach extends CardImpl {
 
     final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 

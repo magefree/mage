@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GodosIrregulars extends CardImpl<GodosIrregulars> {
+public class GodosIrregulars extends CardImpl {
 
     private static final FilterCreaturePermanent basicFilter = new FilterCreaturePermanent("creature blocking it");
     static {

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class GoreHouseChainwalker extends CardImpl<GoreHouseChainwalker> {
+public class GoreHouseChainwalker extends CardImpl {
  
     public GoreHouseChainwalker(UUID ownerId) {
         super(ownerId, 96, "Gore-House Chainwalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

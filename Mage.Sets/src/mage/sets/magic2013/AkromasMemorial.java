@@ -47,7 +47,7 @@ import mage.filter.predicate.Predicates;
 /**
  * @author Loki, noxx
  */
-public class AkromasMemorial extends CardImpl<AkromasMemorial> {
+public class AkromasMemorial extends CardImpl {
 
     private static final FilterCard protectionFilter = new FilterCard("black and from red");
 

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AqueousForm extends CardImpl<AqueousForm> {
+public class AqueousForm extends CardImpl {
 
     public AqueousForm(UUID ownerId) {
         super(ownerId, 39, "Aqueous Form", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

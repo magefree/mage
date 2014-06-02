@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KeepersOfTheFaith extends CardImpl<KeepersOfTheFaith> {
+public class KeepersOfTheFaith extends CardImpl {
 
     public KeepersOfTheFaith(UUID ownerId) {
         super(ownerId, 193, "Keepers of the Faith", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

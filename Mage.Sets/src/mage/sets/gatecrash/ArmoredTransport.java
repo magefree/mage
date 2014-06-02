@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class ArmoredTransport extends CardImpl<ArmoredTransport> {
+public class ArmoredTransport extends CardImpl {
 
     public ArmoredTransport(UUID ownerId) {
         super(ownerId, 226, "Armored Transport", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

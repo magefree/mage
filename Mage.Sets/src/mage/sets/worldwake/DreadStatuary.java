@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DreadStatuary extends CardImpl<DreadStatuary> {
+public class DreadStatuary extends CardImpl {
 
     public DreadStatuary(UUID ownerId) {
         super(ownerId, 135, "Dread Statuary", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

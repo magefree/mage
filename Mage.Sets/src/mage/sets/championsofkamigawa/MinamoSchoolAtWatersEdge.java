@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class MinamoSchoolAtWatersEdge extends CardImpl<MinamoSchoolAtWatersEdge> {
+public class MinamoSchoolAtWatersEdge extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("legendary permanent");
 

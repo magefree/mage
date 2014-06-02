@@ -53,7 +53,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class GlintHawkIdol extends CardImpl<GlintHawkIdol> {
+public class GlintHawkIdol extends CardImpl {
 
     private static final FilterPermanent filter = new FilterArtifactPermanent("another artifact");
     static {

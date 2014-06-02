@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author jeffwadsworth
  */
-public class ChargingGriffin extends CardImpl<ChargingGriffin> {
+public class ChargingGriffin extends CardImpl {
 
     public ChargingGriffin(UUID ownerId) {
         super(ownerId, 13, "Charging Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

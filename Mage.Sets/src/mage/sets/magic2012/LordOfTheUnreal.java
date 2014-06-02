@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 /**
  * @author Loki
  */
-public class LordOfTheUnreal extends CardImpl<LordOfTheUnreal> {
+public class LordOfTheUnreal extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Illusion creatures");
 

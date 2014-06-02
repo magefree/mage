@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class Manaplasm extends CardImpl<Manaplasm> {
+public class Manaplasm extends CardImpl {
 
     public Manaplasm(UUID ownerId) {
         super(ownerId, 138, "Manaplasm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

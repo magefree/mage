@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BlindPhantasm extends CardImpl<BlindPhantasm> {
+public class BlindPhantasm extends CardImpl {
 
     public BlindPhantasm(UUID ownerId) {
         super(ownerId, 49, "Blind Phantasm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

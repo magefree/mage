@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Quercitron
  */
-public class AEtherFlash extends CardImpl<AEtherFlash> {
+public class AEtherFlash extends CardImpl {
 
     public AEtherFlash(UUID ownerId) {
         super(ownerId, 172, "AEther Flash", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

@@ -49,7 +49,7 @@ import mage.players.Player;
 /**
  * @author noxx
  */
-public class SerraAvenger extends CardImpl<SerraAvenger> {
+public class SerraAvenger extends CardImpl {
 
     public SerraAvenger(UUID ownerId) {
         super(ownerId, 40, "Serra Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");

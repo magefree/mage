@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class TouchOfInvisibility extends CardImpl<TouchOfInvisibility> {
+public class TouchOfInvisibility extends CardImpl {
 
     public TouchOfInvisibility(UUID ownerId) {
         super(ownerId, 109, "Touch of Invisibility", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");

@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class Twitch extends CardImpl<Twitch> {
+public class Twitch extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 

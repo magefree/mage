@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TreeMonkey extends CardImpl<TreeMonkey> {
+public class TreeMonkey extends CardImpl {
 
     public TreeMonkey(UUID ownerId) {
         super(ownerId, 275, "Tree Monkey", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

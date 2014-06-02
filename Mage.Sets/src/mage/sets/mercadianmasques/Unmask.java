@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class Unmask extends CardImpl<Unmask> {
+public class Unmask extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a black card from your hand");
     private static final FilterCard filterNonLand = new FilterCard("nonland card");

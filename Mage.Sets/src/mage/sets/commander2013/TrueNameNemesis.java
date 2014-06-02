@@ -57,7 +57,7 @@ import mage.target.TargetPlayer;
  *    is prevented. (The same is true for sources owned by the chosen player that don’t have controllers.)
  * @author LevelX2
  */
-public class TrueNameNemesis extends CardImpl<TrueNameNemesis> {
+public class TrueNameNemesis extends CardImpl {
 
     public TrueNameNemesis(UUID ownerId) {
         super(ownerId, 63, "True-Name Nemesis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

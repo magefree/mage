@@ -41,7 +41,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class RakdossReturn extends CardImpl<RakdossReturn> {
+public class RakdossReturn extends CardImpl {
 
     public RakdossReturn (UUID ownerId) {
         super(ownerId, 188, "Rakdos's Return", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{B}{R}");

@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class LazavDimirMastermind extends CardImpl<LazavDimirMastermind> {
+public class LazavDimirMastermind extends CardImpl {
 
     public LazavDimirMastermind(UUID ownerId) {
         super(ownerId, 174, "Lazav, Dimir Mastermind", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{U}{U}{B}{B}");

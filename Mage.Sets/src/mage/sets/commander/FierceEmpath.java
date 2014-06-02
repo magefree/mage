@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class FierceEmpath extends CardImpl<FierceEmpath> {
+public class FierceEmpath extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with converted mana cost 6 or greater");
     static {

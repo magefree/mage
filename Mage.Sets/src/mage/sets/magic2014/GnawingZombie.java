@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GnawingZombie extends CardImpl<GnawingZombie> {
+public class GnawingZombie extends CardImpl {
 
     public GnawingZombie(UUID ownerId) {
         super(ownerId, 99, "Gnawing Zombie", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

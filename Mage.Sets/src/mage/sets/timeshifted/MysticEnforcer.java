@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class MysticEnforcer extends CardImpl<MysticEnforcer> {
+public class MysticEnforcer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Black");
 

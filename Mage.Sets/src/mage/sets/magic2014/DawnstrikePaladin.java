@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class DawnstrikePaladin extends CardImpl<DawnstrikePaladin> {
+public class DawnstrikePaladin extends CardImpl {
 
     public DawnstrikePaladin(UUID ownerId) {
         super(ownerId, 15, "Dawnstrike Paladin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

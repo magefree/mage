@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class DimirGuildgate extends CardImpl<DimirGuildgate> {
+public class DimirGuildgate extends CardImpl {
 
     public DimirGuildgate(UUID ownerId) {
         super(ownerId, 241, "Dimir Guildgate", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BlindingBeam extends CardImpl<BlindingBeam> {
+public class BlindingBeam extends CardImpl {
 
     public BlindingBeam(UUID ownerId) {
         super(ownerId, 28, "Blinding Beam", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

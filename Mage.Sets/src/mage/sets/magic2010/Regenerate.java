@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Regenerate extends CardImpl<Regenerate> {
+public class Regenerate extends CardImpl {
 
     public Regenerate(UUID ownerId) {
         super(ownerId, 202, "Regenerate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

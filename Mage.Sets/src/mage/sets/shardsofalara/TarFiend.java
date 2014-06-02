@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class TarFiend extends CardImpl<TarFiend> {
+public class TarFiend extends CardImpl {
 
     public TarFiend(UUID ownerId) {
         super(ownerId, 89, "Tar Fiend", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}");

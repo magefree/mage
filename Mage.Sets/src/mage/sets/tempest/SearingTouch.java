@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class SearingTouch extends CardImpl<SearingTouch> {
+public class SearingTouch extends CardImpl {
 
     public SearingTouch(UUID ownerId) {
         super(ownerId, 201, "Searing Touch", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");

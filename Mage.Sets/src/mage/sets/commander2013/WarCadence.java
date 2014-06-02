@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WarCadence extends CardImpl<WarCadence> {
+public class WarCadence extends CardImpl {
 
     public WarCadence(UUID ownerId) {
         super(ownerId, 128, "War Cadence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

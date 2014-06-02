@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class UnstableFooting extends CardImpl<UnstableFooting> {
+public class UnstableFooting extends CardImpl {
 
     public UnstableFooting(UUID ownerId) {
         super(ownerId, 153, "Unstable Footing", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");

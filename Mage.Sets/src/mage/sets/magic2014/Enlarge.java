@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Enlarge extends CardImpl<Enlarge> {
+public class Enlarge extends CardImpl {
 
     public Enlarge(UUID ownerId) {
         super(ownerId, 170, "Enlarge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");

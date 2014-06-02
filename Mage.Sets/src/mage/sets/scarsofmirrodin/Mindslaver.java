@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author nantuko
  */
-public class Mindslaver extends CardImpl<Mindslaver> {
+public class Mindslaver extends CardImpl {
 
     public Mindslaver(UUID ownerId) {
         super(ownerId, 176, "Mindslaver", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{6}");

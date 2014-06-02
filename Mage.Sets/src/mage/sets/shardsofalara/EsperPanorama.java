@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class EsperPanorama extends CardImpl<EsperPanorama> {
+public class EsperPanorama extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a basic Plains, Island, or Swamp");
 

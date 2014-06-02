@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class ClingingAnemones extends CardImpl<ClingingAnemones> {
+public class ClingingAnemones extends CardImpl {
 
     public ClingingAnemones(UUID ownerId) {
         super(ownerId, 31, "Clinging Anemones", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

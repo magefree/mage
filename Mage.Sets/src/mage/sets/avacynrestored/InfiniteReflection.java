@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class InfiniteReflection extends CardImpl<InfiniteReflection> {
+public class InfiniteReflection extends CardImpl {
 
     public InfiniteReflection(UUID ownerId) {
         super(ownerId, 61, "Infinite Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");

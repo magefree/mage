@@ -63,7 +63,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class HellkiteTyrant extends CardImpl<HellkiteTyrant> {
+public class HellkiteTyrant extends CardImpl {
 
     public HellkiteTyrant(UUID ownerId) {
         super(ownerId, 94, "Hellkite Tyrant", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

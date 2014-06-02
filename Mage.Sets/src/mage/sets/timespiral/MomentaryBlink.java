@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class MomentaryBlink extends CardImpl<MomentaryBlink> {
+public class MomentaryBlink extends CardImpl {
 
     public MomentaryBlink(UUID ownerId) {
         super(ownerId, 29, "Momentary Blink", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

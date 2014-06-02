@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DesolateLighthouse extends CardImpl<DesolateLighthouse> {
+public class DesolateLighthouse extends CardImpl {
 
     public DesolateLighthouse(UUID ownerId) {
         super(ownerId, 227, "Desolate Lighthouse", Rarity.RARE, new CardType[]{CardType.LAND}, "");

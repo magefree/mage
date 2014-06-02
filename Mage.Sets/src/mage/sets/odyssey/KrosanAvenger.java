@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class KrosanAvenger extends CardImpl<KrosanAvenger> {
+public class KrosanAvenger extends CardImpl {
 
     public KrosanAvenger(UUID ownerId) {
         super(ownerId, 247, "Krosan Avenger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

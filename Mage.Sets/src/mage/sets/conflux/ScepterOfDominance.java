@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class ScepterOfDominance extends CardImpl<ScepterOfDominance> {
+public class ScepterOfDominance extends CardImpl {
 
     public ScepterOfDominance(UUID ownerId) {
         super(ownerId, 17, "Scepter of Dominance", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}{W}{W}");

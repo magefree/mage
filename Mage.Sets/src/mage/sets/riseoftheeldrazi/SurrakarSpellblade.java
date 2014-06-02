@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author jeffwadsworth
  */
-public class SurrakarSpellblade extends CardImpl<SurrakarSpellblade> {
+public class SurrakarSpellblade extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery card");
 

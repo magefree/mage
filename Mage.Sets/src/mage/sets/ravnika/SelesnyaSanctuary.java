@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class SelesnyaSanctuary extends CardImpl<SelesnyaSanctuary> {
+public class SelesnyaSanctuary extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

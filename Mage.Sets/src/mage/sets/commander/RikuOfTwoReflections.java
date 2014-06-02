@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class RikuOfTwoReflections extends CardImpl<RikuOfTwoReflections> {
+public class RikuOfTwoReflections extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
     private static final FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("another nontoken creature");

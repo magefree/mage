@@ -50,7 +50,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author LevelX2
  */
-public class Epochrasite extends CardImpl<Epochrasite> {
+public class Epochrasite extends CardImpl {
 
     public Epochrasite(UUID ownerId) {
         super(ownerId, 205, "Epochrasite", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

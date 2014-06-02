@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class HengeGuardian extends CardImpl<HengeGuardian> {
+public class HengeGuardian extends CardImpl {
 
     public HengeGuardian(UUID ownerId) {
         super(ownerId, 297, "Henge Guardian", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

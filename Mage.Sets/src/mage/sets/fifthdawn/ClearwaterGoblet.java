@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class ClearwaterGoblet extends CardImpl<ClearwaterGoblet> {
+public class ClearwaterGoblet extends CardImpl {
 
     public ClearwaterGoblet(UUID ownerId) {
         super(ownerId, 109, "Clearwater Goblet", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

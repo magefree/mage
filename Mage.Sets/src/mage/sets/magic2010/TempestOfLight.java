@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class TempestOfLight extends CardImpl<TempestOfLight> {
+public class TempestOfLight extends CardImpl {
 
     public TempestOfLight(UUID ownerId) {
         super(ownerId, 36, "Tempest of Light", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

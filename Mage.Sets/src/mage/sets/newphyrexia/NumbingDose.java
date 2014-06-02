@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class NumbingDose extends CardImpl<NumbingDose> {
+public class NumbingDose extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 

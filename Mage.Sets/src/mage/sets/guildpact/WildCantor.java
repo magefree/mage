@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WildCantor extends CardImpl<WildCantor> {
+public class WildCantor extends CardImpl {
 
     public WildCantor(UUID ownerId) {
         super(ownerId, 149, "Wild Cantor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R/G}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class Whipkeeper extends CardImpl<Whipkeeper> {
+public class Whipkeeper extends CardImpl {
 
     public Whipkeeper(UUID ownerId) {
         super(ownerId, 228, "Whipkeeper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

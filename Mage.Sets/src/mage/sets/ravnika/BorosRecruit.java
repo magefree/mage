@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BorosRecruit extends CardImpl<BorosRecruit> {
+public class BorosRecruit extends CardImpl {
 
     public BorosRecruit(UUID ownerId) {
         super(ownerId, 243, "Boros Recruit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R/W}");

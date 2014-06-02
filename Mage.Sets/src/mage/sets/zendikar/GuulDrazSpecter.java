@@ -49,7 +49,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class GuulDrazSpecter extends CardImpl<GuulDrazSpecter> {
+public class GuulDrazSpecter extends CardImpl {
 
     private static final String ruleText = "{this} gets +3/+3 as long as an opponent has no cards in hand";
 

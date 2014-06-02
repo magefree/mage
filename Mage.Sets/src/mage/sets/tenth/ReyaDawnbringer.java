@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class ReyaDawnbringer extends CardImpl<ReyaDawnbringer> {
+public class ReyaDawnbringer extends CardImpl {
 
     public ReyaDawnbringer(UUID ownerId) {
         super(ownerId, 35, "Reya Dawnbringer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}{W}{W}");

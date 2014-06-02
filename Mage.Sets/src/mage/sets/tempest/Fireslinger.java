@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class Fireslinger extends CardImpl<Fireslinger> {
+public class Fireslinger extends CardImpl {
 
     public Fireslinger(UUID ownerId) {
         super(ownerId, 173, "Fireslinger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

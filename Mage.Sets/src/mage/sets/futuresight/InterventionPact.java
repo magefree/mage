@@ -48,7 +48,7 @@ import mage.target.TargetSource;
  *
  * @author Plopman
  */
-public class InterventionPact extends CardImpl<InterventionPact> {
+public class InterventionPact extends CardImpl {
 
     public InterventionPact(UUID ownerId) {
         super(ownerId, 8, "Intervention Pact", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{0}");

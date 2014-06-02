@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DosansOldestChant extends CardImpl<DosansOldestChant> {
+public class DosansOldestChant extends CardImpl {
 
     public DosansOldestChant(UUID ownerId) {
         super(ownerId, 127, "Dosan's Oldest Chant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");

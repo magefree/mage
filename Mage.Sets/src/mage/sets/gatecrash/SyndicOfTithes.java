@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class SyndicOfTithes extends CardImpl<SyndicOfTithes> {
+public class SyndicOfTithes extends CardImpl {
 
     public SyndicOfTithes(UUID ownerId) {
         super(ownerId, 26, "Syndic of Tithes", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

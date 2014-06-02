@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class WornPowerstone extends CardImpl<WornPowerstone> {
+public class WornPowerstone extends CardImpl {
 
     public WornPowerstone (UUID ownerId) {
         super(ownerId, 318, "Worn Powerstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DragonHatchling extends CardImpl<DragonHatchling> {
+public class DragonHatchling extends CardImpl {
 
     public DragonHatchling(UUID ownerId) {
         super(ownerId, 128, "Dragon Hatchling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

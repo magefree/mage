@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class AvianChangeling extends CardImpl<AvianChangeling> {
+public class AvianChangeling extends CardImpl {
 
     public AvianChangeling(UUID ownerId) {
         super(ownerId, 4, "Avian Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

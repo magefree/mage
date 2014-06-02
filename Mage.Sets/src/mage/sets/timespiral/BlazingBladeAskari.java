@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class BlazingBladeAskari extends CardImpl<BlazingBladeAskari> {
+public class BlazingBladeAskari extends CardImpl {
 
     public BlazingBladeAskari(UUID ownerId) {
         super(ownerId, 146, "Blazing Blade Askari", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

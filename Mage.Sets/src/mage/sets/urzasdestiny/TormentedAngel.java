@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TormentedAngel extends CardImpl<TormentedAngel> {
+public class TormentedAngel extends CardImpl {
 
     public TormentedAngel(UUID ownerId) {
         super(ownerId, 22, "Tormented Angel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

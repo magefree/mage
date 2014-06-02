@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class SphinxsHerald extends CardImpl<SphinxsHerald> {
+public class SphinxsHerald extends CardImpl {
     private static final FilterCard filter = new FilterCard("card named Sphinx Sovereign");
     private static final FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent("a white creature");
     private static final FilterControlledCreaturePermanent filterBlue = new FilterControlledCreaturePermanent("a blue creature");

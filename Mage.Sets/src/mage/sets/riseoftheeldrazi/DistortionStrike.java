@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class DistortionStrike extends CardImpl<DistortionStrike> {
+public class DistortionStrike extends CardImpl {
 
     public DistortionStrike(UUID ownerId) {
         super(ownerId, 60, "Distortion Strike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");

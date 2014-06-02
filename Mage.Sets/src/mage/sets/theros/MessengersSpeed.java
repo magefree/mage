@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MessengersSpeed extends CardImpl<MessengersSpeed> {
+public class MessengersSpeed extends CardImpl {
 
     public MessengersSpeed(UUID ownerId) {
         super(ownerId, 129, "Messenger's Speed", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

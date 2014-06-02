@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Backfir3
  */
-public class Bereavement extends CardImpl<Bereavement> {
+public class Bereavement extends CardImpl {
 
     public Bereavement(UUID ownerId) {
         super(ownerId, 117, "Bereavement", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ThorntoothWitch extends CardImpl<ThorntoothWitch> {
+public class ThorntoothWitch extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Treefolk");
 

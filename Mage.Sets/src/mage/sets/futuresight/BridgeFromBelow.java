@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class BridgeFromBelow extends CardImpl<BridgeFromBelow> {
+public class BridgeFromBelow extends CardImpl {
 
     
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Whenever a nontoken creature is put into your graveyard from the battlefield");

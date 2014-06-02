@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author cbt33
  */
-public class AvenSmokeweaver extends CardImpl<AvenSmokeweaver> {
+public class AvenSmokeweaver extends CardImpl {
 
     static final FilterCard filter = new FilterCard("red");
     

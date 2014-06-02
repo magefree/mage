@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class Rejuvenate extends CardImpl<Rejuvenate> {
+public class Rejuvenate extends CardImpl {
 
     public Rejuvenate (UUID ownerId) {
         super(ownerId, 271, "Rejuvenate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

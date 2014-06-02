@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ShivanGorge extends CardImpl<ShivanGorge> {
+public class ShivanGorge extends CardImpl {
 
     public ShivanGorge(UUID ownerId) {
         super(ownerId, 326, "Shivan Gorge", Rarity.RARE, new CardType[]{CardType.LAND}, "");

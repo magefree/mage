@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class HurkylsRecall extends CardImpl<HurkylsRecall> {
+public class HurkylsRecall extends CardImpl {
 
     public HurkylsRecall(UUID ownerId) {
         super(ownerId, 93, "Hurkyl's Recall", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}");

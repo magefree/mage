@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PhantasmalBear extends CardImpl<PhantasmalBear> {
+public class PhantasmalBear extends CardImpl {
 
     public PhantasmalBear(UUID ownerId) {
         super(ownerId, 70, "Phantasmal Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

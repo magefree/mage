@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class SlayerOfTheWicked extends CardImpl<SlayerOfTheWicked> {
+public class SlayerOfTheWicked extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampire, Werewolf, or Zombie");
 

@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class BrilliantPlan extends CardImpl<BrilliantPlan> {
+public class BrilliantPlan extends CardImpl {
 
     public BrilliantPlan(UUID ownerId) {
         super(ownerId, 34, "Brilliant Plan", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");

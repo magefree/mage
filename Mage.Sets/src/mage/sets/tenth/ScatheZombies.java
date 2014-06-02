@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ScatheZombies extends CardImpl<ScatheZombies> {
+public class ScatheZombies extends CardImpl {
 
     public ScatheZombies(UUID ownerId) {
         super(ownerId, 175, "Scathe Zombies", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

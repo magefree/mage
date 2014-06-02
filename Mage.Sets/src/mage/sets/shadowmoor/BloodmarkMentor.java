@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class BloodmarkMentor extends CardImpl<BloodmarkMentor> {
+public class BloodmarkMentor extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Red creatures");
 

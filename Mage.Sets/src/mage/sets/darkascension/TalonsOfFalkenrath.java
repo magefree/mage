@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TalonsOfFalkenrath extends CardImpl<TalonsOfFalkenrath> {
+public class TalonsOfFalkenrath extends CardImpl {
 
     public TalonsOfFalkenrath(UUID ownerId) {
         super(ownerId, 105, "Talons of Falkenrath", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

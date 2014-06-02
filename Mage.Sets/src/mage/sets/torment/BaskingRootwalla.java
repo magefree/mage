@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class BaskingRootwalla extends CardImpl<BaskingRootwalla> {
+public class BaskingRootwalla extends CardImpl {
 
     public BaskingRootwalla(UUID ownerId) {
         super(ownerId, 121, "Basking Rootwalla", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

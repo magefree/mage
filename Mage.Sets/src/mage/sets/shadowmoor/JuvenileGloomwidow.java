@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class JuvenileGloomwidow extends CardImpl<JuvenileGloomwidow> {
+public class JuvenileGloomwidow extends CardImpl {
 
     public JuvenileGloomwidow(UUID ownerId) {
         super(ownerId, 121, "Juvenile Gloomwidow", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");

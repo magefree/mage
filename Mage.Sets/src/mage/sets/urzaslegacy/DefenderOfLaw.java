@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author Backfir3
  */
-public class DefenderOfLaw extends CardImpl<DefenderOfLaw> {
+public class DefenderOfLaw extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Red");
 

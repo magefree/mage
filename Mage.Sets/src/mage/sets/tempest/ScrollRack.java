@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class ScrollRack extends CardImpl<ScrollRack> {
+public class ScrollRack extends CardImpl {
 
     public ScrollRack(UUID ownerId) {
         super(ownerId, 298, "Scroll Rack", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

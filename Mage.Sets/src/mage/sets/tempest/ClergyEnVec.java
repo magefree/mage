@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class ClergyEnVec extends CardImpl<ClergyEnVec> {
+public class ClergyEnVec extends CardImpl {
 
     public ClergyEnVec(UUID ownerId) {
         super(ownerId, 226, "Clergy en-Vec", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

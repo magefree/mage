@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class BloodstainedMire extends CardImpl<BloodstainedMire> {
+public class BloodstainedMire extends CardImpl {
 
     public BloodstainedMire(UUID ownerId) {
         super(ownerId, 313, "Bloodstained Mire", Rarity.RARE, new CardType[]{CardType.LAND}, "");

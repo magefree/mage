@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Cromat extends CardImpl<Cromat> {
+public class Cromat extends CardImpl {
             
     public Cromat(UUID ownerId) {
         super(ownerId, 94, "Cromat", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RenegadeDemon extends CardImpl<RenegadeDemon> {
+public class RenegadeDemon extends CardImpl {
 
     public RenegadeDemon(UUID ownerId) {
         super(ownerId, 118, "Renegade Demon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class WildMongrel extends CardImpl<WildMongrel> {
+public class WildMongrel extends CardImpl {
 
     public WildMongrel(UUID ownerId) {
         super(ownerId, 283, "Wild Mongrel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

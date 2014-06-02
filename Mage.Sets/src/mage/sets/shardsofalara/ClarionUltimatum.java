@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class ClarionUltimatum extends CardImpl<ClarionUltimatum> {
+public class ClarionUltimatum extends CardImpl {
 
     public ClarionUltimatum(UUID ownerId) {
         super(ownerId, 163, "Clarion Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{G}{W}{W}{W}{U}{U}");

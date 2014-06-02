@@ -43,7 +43,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class EntreatTheAngels extends CardImpl<EntreatTheAngels> {
+public class EntreatTheAngels extends CardImpl {
 
     public EntreatTheAngels(UUID ownerId) {
         super(ownerId, 20, "Entreat the Angels", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");

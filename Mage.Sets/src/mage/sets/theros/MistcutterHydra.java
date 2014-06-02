@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class MistcutterHydra extends CardImpl<MistcutterHydra> {
+public class MistcutterHydra extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("from blue");
     static {

@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class SlimeMolding extends CardImpl<SlimeMolding> {
+public class SlimeMolding extends CardImpl {
 
     public SlimeMolding(UUID ownerId) {
         super(ownerId, 135, "Slime Molding", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{G}");

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class PrimalSurge extends CardImpl<PrimalSurge> {
+public class PrimalSurge extends CardImpl {
 
     public PrimalSurge(UUID ownerId) {
         super(ownerId, 189, "Primal Surge", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{8}{G}{G}");

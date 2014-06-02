@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class MurmuringPhantasm extends CardImpl<MurmuringPhantasm> {
+public class MurmuringPhantasm extends CardImpl {
 
     public MurmuringPhantasm (UUID ownerId) {
         super(ownerId, 15, "Murmuring Phantasm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

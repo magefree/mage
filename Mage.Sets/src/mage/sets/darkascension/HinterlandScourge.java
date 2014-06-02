@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward
  */
-public class HinterlandScourge extends CardImpl<HinterlandScourge> {
+public class HinterlandScourge extends CardImpl {
 
     public HinterlandScourge(UUID ownerId) {
         super(ownerId, 94, "Hinterland Scourge", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");

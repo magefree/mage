@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GrislyTransformation extends CardImpl<GrislyTransformation> {
+public class GrislyTransformation extends CardImpl {
 
     public GrislyTransformation(UUID ownerId) {
         super(ownerId, 74, "Grisly Transformation", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

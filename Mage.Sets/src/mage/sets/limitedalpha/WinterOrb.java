@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WinterOrb extends CardImpl<WinterOrb> {
+public class WinterOrb extends CardImpl {
 
     public WinterOrb(UUID ownerId) {
         super(ownerId, 275, "Winter Orb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

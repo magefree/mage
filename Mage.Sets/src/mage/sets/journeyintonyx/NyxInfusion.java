@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class NyxInfusion extends CardImpl<NyxInfusion> {
+public class NyxInfusion extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("enchantment");
 

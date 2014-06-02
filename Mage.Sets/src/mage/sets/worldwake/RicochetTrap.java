@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class RicochetTrap extends CardImpl<RicochetTrap> {
+public class RicochetTrap extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell with a single target");
 

@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author cbt33
  */
-public class AvenArcher extends CardImpl<AvenArcher> {
+public class AvenArcher extends CardImpl {
 
     public AvenArcher(UUID ownerId) {
         super(ownerId, 6, "Aven Archer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SkyshroudTroll extends CardImpl<SkyshroudTroll> {
+public class SkyshroudTroll extends CardImpl {
 
     public SkyshroudTroll(UUID ownerId) {
         super(ownerId, 151, "Skyshroud Troll", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

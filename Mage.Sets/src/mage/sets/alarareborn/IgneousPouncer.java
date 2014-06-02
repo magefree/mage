@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class IgneousPouncer extends CardImpl<IgneousPouncer> {
+public class IgneousPouncer extends CardImpl {
 
     public IgneousPouncer(UUID ownerId) {
         super(ownerId, 40, "Igneous Pouncer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");

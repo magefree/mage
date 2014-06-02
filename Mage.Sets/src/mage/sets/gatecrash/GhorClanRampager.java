@@ -44,7 +44,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class GhorClanRampager extends CardImpl<GhorClanRampager> {
+public class GhorClanRampager extends CardImpl {
 
     public GhorClanRampager(UUID ownerId) {
         super(ownerId, 167, "Ghor-Clan Rampager", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");

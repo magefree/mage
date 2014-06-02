@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LightkeeperOfEmeria extends CardImpl<LightkeeperOfEmeria> {
+public class LightkeeperOfEmeria extends CardImpl {
 
     public LightkeeperOfEmeria(UUID ownerId) {
         super(ownerId, 12, "Lightkeeper of Emeria", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CarvenCaryatid extends CardImpl<CarvenCaryatid> {
+public class CarvenCaryatid extends CardImpl {
 
     public CarvenCaryatid(UUID ownerId) {
         super(ownerId, 155, "Carven Caryatid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class VorinclexVoiceOfHunger extends CardImpl<VorinclexVoiceOfHunger> {
+public class VorinclexVoiceOfHunger extends CardImpl {
 
     public VorinclexVoiceOfHunger(UUID ownerId) {
         super(ownerId, 127, "Vorinclex, Voice of Hunger", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

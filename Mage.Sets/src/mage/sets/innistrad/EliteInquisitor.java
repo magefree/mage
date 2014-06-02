@@ -44,7 +44,7 @@ import mage.filter.predicate.Predicates;
 /**
  * @author nantuko
  */
-public class EliteInquisitor extends CardImpl<EliteInquisitor> {
+public class EliteInquisitor extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("Vampires, from Werewolves, and from Zombies");
 

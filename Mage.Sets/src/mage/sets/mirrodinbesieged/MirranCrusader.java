@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author ayratn
  */
-public class MirranCrusader extends CardImpl<MirranCrusader> {
+public class MirranCrusader extends CardImpl {
     private static final FilterCard filter = new FilterCard("Black");
     private static final FilterCard filter2 = new FilterCard("Green");
 

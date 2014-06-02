@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class KorCartographer extends CardImpl<KorCartographer> {
+public class KorCartographer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Plains card");
 

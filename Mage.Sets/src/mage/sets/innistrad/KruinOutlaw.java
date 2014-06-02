@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KruinOutlaw extends CardImpl<KruinOutlaw> {
+public class KruinOutlaw extends CardImpl {
 
     public KruinOutlaw(UUID ownerId) {
         super(ownerId, 152, "Kruin Outlaw", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

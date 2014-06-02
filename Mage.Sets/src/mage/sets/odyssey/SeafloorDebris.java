@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class SeafloorDebris extends CardImpl<SeafloorDebris> {
+public class SeafloorDebris extends CardImpl {
 
     public SeafloorDebris(UUID ownerId) {
         super(ownerId, 325, "Seafloor Debris", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

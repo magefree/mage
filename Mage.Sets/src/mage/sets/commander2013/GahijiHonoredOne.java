@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class GahijiHonoredOne extends CardImpl<GahijiHonoredOne> {
+public class GahijiHonoredOne extends CardImpl {
 
     public GahijiHonoredOne(UUID ownerId) {
         super(ownerId, 191, "Gahiji, Honored One", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");

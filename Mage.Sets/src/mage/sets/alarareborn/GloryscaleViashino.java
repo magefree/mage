@@ -45,7 +45,7 @@ import mage.game.stack.Spell;
  *
  * @author Loki
  */
-public class GloryscaleViashino extends CardImpl<GloryscaleViashino> {
+public class GloryscaleViashino extends CardImpl {
 
     public GloryscaleViashino (UUID ownerId) {
         super(ownerId, 120, "Gloryscale Viashino", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");

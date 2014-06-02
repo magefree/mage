@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FrostwindInvoker extends CardImpl<FrostwindInvoker> {
+public class FrostwindInvoker extends CardImpl {
 
     public FrostwindInvoker(UUID ownerId) {
         super(ownerId, 68, "Frostwind Invoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

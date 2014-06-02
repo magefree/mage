@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HopefulEidolon extends CardImpl<HopefulEidolon> {
+public class HopefulEidolon extends CardImpl {
 
     public HopefulEidolon(UUID ownerId) {
         super(ownerId, 19, "Hopeful Eidolon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{W}");

@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class LeoninSunStandard extends CardImpl<LeoninSunStandard> {
+public class LeoninSunStandard extends CardImpl {
 
     public LeoninSunStandard(UUID ownerId) {
         super(ownerId, 194, "Leonin Sun Standard", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

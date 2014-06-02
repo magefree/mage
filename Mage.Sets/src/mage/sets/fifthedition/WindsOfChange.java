@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WindsOfChange extends CardImpl<WindsOfChange> {
+public class WindsOfChange extends CardImpl {
 
     public WindsOfChange(UUID ownerId) {
         super(ownerId, 275, "Winds of Change", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");

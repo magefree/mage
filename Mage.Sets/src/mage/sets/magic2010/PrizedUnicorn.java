@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PrizedUnicorn extends CardImpl<PrizedUnicorn> {
+public class PrizedUnicorn extends CardImpl {
 
     public PrizedUnicorn(UUID ownerId) {
         super(ownerId, 199, "Prized Unicorn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

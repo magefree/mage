@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class YukiOnna extends CardImpl<YukiOnna> {
+public class YukiOnna extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
     private static final FilterPermanent filterTarget = new FilterPermanent("artifact");

@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SkithiryxTheBlightDragon extends CardImpl<SkithiryxTheBlightDragon> {
+public class SkithiryxTheBlightDragon extends CardImpl {
 
     public SkithiryxTheBlightDragon (UUID ownerId) {
         super(ownerId, 79, "Skithiryx, the Blight Dragon", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

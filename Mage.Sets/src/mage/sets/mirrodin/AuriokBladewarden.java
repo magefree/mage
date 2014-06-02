@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class AuriokBladewarden extends CardImpl<AuriokBladewarden> {
+public class AuriokBladewarden extends CardImpl {
 
     public AuriokBladewarden(UUID ownerId) {
         super(ownerId, 3, "Auriok Bladewarden", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

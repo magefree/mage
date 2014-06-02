@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class StompingGround extends CardImpl<StompingGround> {
+public class StompingGround extends CardImpl {
 
     public StompingGround (UUID ownerId) {
         super(ownerId, 165, "Stomping Ground", Rarity.RARE, new CardType[]{CardType.LAND}, null);

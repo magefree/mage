@@ -41,7 +41,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class AppetiteForBrains extends CardImpl<AppetiteForBrains> {
+public class AppetiteForBrains extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a card from it with converted mana cost 4 or greater");
     static {

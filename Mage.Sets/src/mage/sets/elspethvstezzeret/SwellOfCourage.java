@@ -42,7 +42,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SwellOfCourage extends CardImpl<SwellOfCourage> {
+public class SwellOfCourage extends CardImpl {
 
     public SwellOfCourage(UUID ownerId) {
         super(ownerId, 31, "Swell of Courage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");

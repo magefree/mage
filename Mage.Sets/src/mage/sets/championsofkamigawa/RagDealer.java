@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author LevelX, North
  */
-public class RagDealer extends CardImpl<RagDealer> {
+public class RagDealer extends CardImpl {
 
     public RagDealer (UUID ownerId) {
         super(ownerId, 138, "Rag Dealer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

@@ -38,7 +38,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author Loki
  */
-public class Armageddon extends CardImpl<Armageddon> {
+public class Armageddon extends CardImpl {
 
     public Armageddon(UUID ownerId) {
         super(ownerId, 283, "Armageddon", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}");

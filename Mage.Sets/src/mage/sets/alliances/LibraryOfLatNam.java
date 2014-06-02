@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Quercitron
  */
-public class LibraryOfLatNam extends CardImpl<LibraryOfLatNam> {
+public class LibraryOfLatNam extends CardImpl {
 
     public LibraryOfLatNam(UUID ownerId) {
         super(ownerId, 47, "Library of Lat-Nam", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}");

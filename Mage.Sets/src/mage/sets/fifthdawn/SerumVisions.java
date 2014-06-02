@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SerumVisions extends CardImpl<SerumVisions> {
+public class SerumVisions extends CardImpl {
 
     public SerumVisions(UUID ownerId) {
         super(ownerId, 36, "Serum Visions", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");

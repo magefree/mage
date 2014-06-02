@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Plopman
  */
-public class MoxDiamond extends CardImpl<MoxDiamond> {
+public class MoxDiamond extends CardImpl {
 
     public MoxDiamond(UUID ownerId) {
         super(ownerId, 132, "Mox Diamond", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");

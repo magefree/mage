@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CloudElemental extends CardImpl<CloudElemental> {
+public class CloudElemental extends CardImpl {
 
     public CloudElemental(UUID ownerId) {
         super(ownerId, 74, "Cloud Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

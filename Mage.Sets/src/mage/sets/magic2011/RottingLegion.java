@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RottingLegion extends CardImpl<RottingLegion> {
+public class RottingLegion extends CardImpl {
 
     public RottingLegion(UUID ownerId) {
         super(ownerId, 115, "Rotting Legion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

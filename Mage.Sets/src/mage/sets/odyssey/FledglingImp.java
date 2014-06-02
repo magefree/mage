@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class FledglingImp extends CardImpl<FledglingImp> {
+public class FledglingImp extends CardImpl {
 
     public FledglingImp(UUID ownerId) {
         super(ownerId, 137, "Fledgling Imp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class SoulsFire extends CardImpl<SoulsFire> {
+public class SoulsFire extends CardImpl {
 
     public SoulsFire(UUID ownerId) {
         super(ownerId, 115, "Soul's Fire", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

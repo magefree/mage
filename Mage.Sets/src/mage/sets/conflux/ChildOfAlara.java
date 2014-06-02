@@ -41,7 +41,7 @@ import mage.filter.common.FilterNonlandPermanent;
  *
  * @author jeffwadsworth
  */
-public class ChildOfAlara extends CardImpl<ChildOfAlara> {
+public class ChildOfAlara extends CardImpl {
 
     public ChildOfAlara(UUID ownerId) {
         super(ownerId, 101, "Child of Alara", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");

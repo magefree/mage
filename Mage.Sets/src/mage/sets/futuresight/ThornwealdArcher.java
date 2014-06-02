@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ThornwealdArcher extends CardImpl<ThornwealdArcher> {
+public class ThornwealdArcher extends CardImpl {
 
     public ThornwealdArcher(UUID ownerId) {
         super(ownerId, 154, "Thornweald Archer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

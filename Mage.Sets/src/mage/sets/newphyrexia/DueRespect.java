@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class DueRespect extends CardImpl<DueRespect> {
+public class DueRespect extends CardImpl {
 
     public DueRespect(UUID ownerId) {
         super(ownerId, 8, "Due Respect", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

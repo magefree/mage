@@ -50,7 +50,7 @@ import mage.target.TargetObject;
  *
  * @author LevelX2
  */
-public class Squelch extends CardImpl<Squelch> {
+public class Squelch extends CardImpl {
 
     public Squelch(UUID ownerId) {
         super(ownerId, 92, "Squelch", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

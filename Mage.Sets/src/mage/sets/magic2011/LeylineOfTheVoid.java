@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LeylineOfTheVoid extends CardImpl<LeylineOfTheVoid> {
+public class LeylineOfTheVoid extends CardImpl {
 
     public LeylineOfTheVoid(UUID ownerId) {
         super(ownerId, 101, "Leyline of the Void", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

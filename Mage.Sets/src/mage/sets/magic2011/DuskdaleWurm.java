@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DuskdaleWurm extends CardImpl<DuskdaleWurm> {
+public class DuskdaleWurm extends CardImpl {
 
     public DuskdaleWurm(UUID ownerId) {
         super(ownerId, 170, "Duskdale Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

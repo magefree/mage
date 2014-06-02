@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author ayratn
  */
-public class TrinketMage extends CardImpl<TrinketMage> {
+public class TrinketMage extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact card with converted mana cost 1 or less");
 

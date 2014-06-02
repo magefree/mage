@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RibCageSpider extends CardImpl<RibCageSpider> {
+public class RibCageSpider extends CardImpl {
 
     public RibCageSpider(UUID ownerId) {
         super(ownerId, 121, "Rib Cage Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

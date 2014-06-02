@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class MillennialGargoyle extends CardImpl<MillennialGargoyle> {
+public class MillennialGargoyle extends CardImpl {
 
     public MillennialGargoyle(UUID ownerId) {
         super(ownerId, 232, "Millennial Gargoyle", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

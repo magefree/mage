@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class BansheesBlade extends CardImpl<BansheesBlade> {
+public class BansheesBlade extends CardImpl {
 
     public BansheesBlade(UUID ownerId) {
         super(ownerId, 144, "Banshee's Blade", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

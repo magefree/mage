@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class SpideryGrasp extends CardImpl<SpideryGrasp> {
+public class SpideryGrasp extends CardImpl {
 
     public SpideryGrasp(UUID ownerId) {
         super(ownerId, 204, "Spidery Grasp", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class LightningVolley extends CardImpl<LightningVolley> {
+public class LightningVolley extends CardImpl {
 
     public LightningVolley(UUID ownerId) {
         super(ownerId, 101, "Lightning Volley", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");

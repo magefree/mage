@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class GruulCharm extends CardImpl<GruulCharm> {
+public class GruulCharm extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
     private static final FilterPermanent filter2 = new FilterPermanent("all permanents you own");

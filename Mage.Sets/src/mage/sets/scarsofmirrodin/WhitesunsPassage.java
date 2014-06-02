@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class WhitesunsPassage extends CardImpl<WhitesunsPassage> {
+public class WhitesunsPassage extends CardImpl {
 
     public WhitesunsPassage (UUID ownerId) {
         super(ownerId, 27, "Whitesun's Passage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

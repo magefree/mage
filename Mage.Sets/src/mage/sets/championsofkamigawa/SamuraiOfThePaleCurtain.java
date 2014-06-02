@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX
  */
-public class SamuraiOfThePaleCurtain extends CardImpl<SamuraiOfThePaleCurtain> {
+public class SamuraiOfThePaleCurtain extends CardImpl {
 
     public SamuraiOfThePaleCurtain (UUID ownerId) {
         super(ownerId, 43, "Samurai of the Pale Curtain", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class DaybreakCoronet extends CardImpl<DaybreakCoronet> {
+public class DaybreakCoronet extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with another Aura attached to it.");
     

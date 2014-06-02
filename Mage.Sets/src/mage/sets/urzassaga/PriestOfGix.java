@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class PriestOfGix extends CardImpl<PriestOfGix> {
+public class PriestOfGix extends CardImpl {
 
     public PriestOfGix(UUID ownerId) {
         super(ownerId, 150, "Priest of Gix", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

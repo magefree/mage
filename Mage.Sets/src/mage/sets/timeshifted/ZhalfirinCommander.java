@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ZhalfirinCommander extends CardImpl<ZhalfirinCommander> {
+public class ZhalfirinCommander extends CardImpl {
 
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creature");
     

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class RendclawTrow extends CardImpl<RendclawTrow> {
+public class RendclawTrow extends CardImpl {
 
     public RendclawTrow(UUID ownerId) {
         super(ownerId, 127, "Rendclaw Trow", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B/G}");

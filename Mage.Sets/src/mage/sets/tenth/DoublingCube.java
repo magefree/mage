@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class DoublingCube extends CardImpl<DoublingCube> {
+public class DoublingCube extends CardImpl {
 
     public DoublingCube(UUID ownerId) {
         super(ownerId, 321, "Doubling Cube", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Frostling extends CardImpl<Frostling> {
+public class Frostling extends CardImpl {
 
     public Frostling(UUID ownerId) {
         super(ownerId, 103, "Frostling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

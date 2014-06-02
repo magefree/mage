@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GoblinWardriver extends CardImpl<GoblinWardriver> {
+public class GoblinWardriver extends CardImpl {
 
     public GoblinWardriver (UUID ownerId) {
         super(ownerId, 64, "Goblin Wardriver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");

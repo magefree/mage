@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class Shuko extends CardImpl<Shuko> {
+public class Shuko extends CardImpl {
 
     public Shuko(UUID ownerId) {
         super(ownerId, 159, "Shuko", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

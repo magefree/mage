@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class CloudhoofKirin extends CardImpl<CloudhoofKirin> {
+public class CloudhoofKirin extends CardImpl {
 
     public CloudhoofKirin(UUID ownerId) {
         super(ownerId, 31, "Cloudhoof Kirin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author North
  */
-public class FoldIntoAEther extends CardImpl<FoldIntoAEther> {
+public class FoldIntoAEther extends CardImpl {
 
     public FoldIntoAEther(UUID ownerId) {
         super(ownerId, 31, "Fold into AEther", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

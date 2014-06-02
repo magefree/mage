@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class SlithPredator extends CardImpl<SlithPredator> {
+public class SlithPredator extends CardImpl {
 
     public SlithPredator(UUID ownerId) {
         super(ownerId, 129, "Slith Predator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");

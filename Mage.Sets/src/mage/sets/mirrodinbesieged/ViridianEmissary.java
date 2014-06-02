@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class ViridianEmissary extends CardImpl<ViridianEmissary> {
+public class ViridianEmissary extends CardImpl {
 
     public ViridianEmissary (UUID ownerId) {
         super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class KodamaOfTheNorthTree extends CardImpl<KodamaOfTheNorthTree> {
+public class KodamaOfTheNorthTree extends CardImpl {
 
     public KodamaOfTheNorthTree (UUID ownerId) {
         super(ownerId, 222, "Kodama of the North Tree", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");

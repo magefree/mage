@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BlanchwoodArmor extends CardImpl<BlanchwoodArmor> {
+public class BlanchwoodArmor extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
 

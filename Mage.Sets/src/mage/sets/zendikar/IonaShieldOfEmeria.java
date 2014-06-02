@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class IonaShieldOfEmeria extends CardImpl<IonaShieldOfEmeria> {
+public class IonaShieldOfEmeria extends CardImpl {
 
     public IonaShieldOfEmeria(UUID ownerId) {
         super(ownerId, 13, "Iona, Shield of Emeria", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{W}{W}{W}");

@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MasterOfCruelties extends CardImpl<MasterOfCruelties> {
+public class MasterOfCruelties extends CardImpl {
 
     public MasterOfCruelties(UUID ownerId) {
         super(ownerId, 82, "Master of Cruelties", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");

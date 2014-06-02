@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class SaltcrustedSteppe extends CardImpl<SaltcrustedSteppe> {
+public class SaltcrustedSteppe extends CardImpl {
 
     public SaltcrustedSteppe(UUID ownerId) {
         super(ownerId, 316, "Saltcrusted Steppe", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

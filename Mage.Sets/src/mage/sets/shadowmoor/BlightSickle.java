@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BlightSickle extends CardImpl<BlightSickle> {
+public class BlightSickle extends CardImpl {
 
     public BlightSickle(UUID ownerId) {
         super(ownerId, 247, "Blight Sickle", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DeathsPresence extends CardImpl<DeathsPresence> {
+public class DeathsPresence extends CardImpl {
 
     public DeathsPresence(UUID ownerId) {
         super(ownerId, 121, "Death's Presence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");

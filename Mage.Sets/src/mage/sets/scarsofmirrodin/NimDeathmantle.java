@@ -57,7 +57,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class NimDeathmantle extends CardImpl<NimDeathmantle> {
+public class NimDeathmantle extends CardImpl {
 
     public NimDeathmantle(UUID ownerId) {
         super(ownerId, 188, "Nim Deathmantle", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

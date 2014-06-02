@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DeftDuelist extends CardImpl<DeftDuelist> {
+public class DeftDuelist extends CardImpl {
 
     public DeftDuelist(UUID ownerId) {
         super(ownerId, 165, "Deft Duelist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{U}");

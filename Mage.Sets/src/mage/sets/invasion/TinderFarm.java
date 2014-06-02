@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class TinderFarm extends CardImpl<TinderFarm> {
+public class TinderFarm extends CardImpl {
 
     public TinderFarm(UUID ownerId) {
         super(ownerId, 329, "Tinder Farm", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

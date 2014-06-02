@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class FogOfGnats extends CardImpl<FogOfGnats> {
+public class FogOfGnats extends CardImpl {
 
     public FogOfGnats(UUID ownerId) {
         super(ownerId, 53, "Fog of Gnats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");

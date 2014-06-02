@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LiturgyOfBlood extends CardImpl<LiturgyOfBlood> {
+public class LiturgyOfBlood extends CardImpl {
 
     public LiturgyOfBlood(UUID ownerId) {
         super(ownerId, 104, "Liturgy of Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

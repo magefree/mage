@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author Loki
  */
-public class ThiefOfHope extends CardImpl<ThiefOfHope> {
+public class ThiefOfHope extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

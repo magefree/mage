@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 
-public class GraveBetrayal extends CardImpl<GraveBetrayal> {
+public class GraveBetrayal extends CardImpl {
 
     public GraveBetrayal (UUID ownerId) {
         super(ownerId, 67, "Grave Betrayal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}{B}");

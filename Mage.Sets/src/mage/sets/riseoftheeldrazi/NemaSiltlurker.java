@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class NemaSiltlurker extends CardImpl<NemaSiltlurker> {
+public class NemaSiltlurker extends CardImpl {
 
     public NemaSiltlurker (UUID ownerId) {
         super(ownerId, 200, "Nema Siltlurker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class EtherealUsher extends CardImpl<EtherealUsher> {
+public class EtherealUsher extends CardImpl {
 
     public EtherealUsher(UUID ownerId) {
         super(ownerId, 47, "Ethereal Usher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");

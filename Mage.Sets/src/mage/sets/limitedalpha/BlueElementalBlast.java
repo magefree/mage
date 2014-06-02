@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class BlueElementalBlast extends CardImpl<BlueElementalBlast> {
+public class BlueElementalBlast extends CardImpl {
     
     private static final FilterPermanent filterPermanent = new FilterPermanent("red permanent");
     private static final FilterSpell filterSpell = new FilterSpell("red spell");

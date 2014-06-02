@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class Ferrovore extends CardImpl<Ferrovore> {
+public class Ferrovore extends CardImpl {
      private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
 
     static {

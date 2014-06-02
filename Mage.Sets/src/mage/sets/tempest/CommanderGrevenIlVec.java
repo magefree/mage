@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class CommanderGrevenIlVec extends CardImpl<CommanderGrevenIlVec> {
+public class CommanderGrevenIlVec extends CardImpl {
 
     public CommanderGrevenIlVec(UUID ownerId) {
         super(ownerId, 9, "Commander Greven il-Vec", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

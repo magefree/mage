@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class ScribNibblers extends CardImpl<ScribNibblers> {
+public class ScribNibblers extends CardImpl {
 
     public ScribNibblers(UUID ownerId) {
         super(ownerId, 66, "Scrib Nibblers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

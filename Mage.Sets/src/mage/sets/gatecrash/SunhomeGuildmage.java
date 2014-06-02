@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class SunhomeGuildmage extends CardImpl<SunhomeGuildmage> {
+public class SunhomeGuildmage extends CardImpl {
 
     public SunhomeGuildmage(UUID ownerId) {
         super(ownerId, 200, "Sunhome Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");

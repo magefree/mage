@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
  *
  * @author LevelX2
  */
-public class LeoninBladetrap extends CardImpl<LeoninBladetrap> {
+public class LeoninBladetrap extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature without flying");
     static {

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TerraStomper extends CardImpl<TerraStomper> {
+public class TerraStomper extends CardImpl {
 
     public TerraStomper(UUID ownerId) {
         super(ownerId, 187, "Terra Stomper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");

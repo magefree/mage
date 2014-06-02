@@ -52,7 +52,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class SiftThroughSands extends CardImpl<SiftThroughSands> {
+public class SiftThroughSands extends CardImpl {
 
     private static final String rule = "If you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle your library";
     private static final FilterCreatureCard filter = new FilterCreatureCard("a card named The Unspeakable");

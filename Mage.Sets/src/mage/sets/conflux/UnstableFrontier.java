@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class UnstableFrontier extends CardImpl<UnstableFrontier> {
+public class UnstableFrontier extends CardImpl {
 
     public UnstableFrontier(UUID ownerId) {
         super(ownerId, 145, "Unstable Frontier", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

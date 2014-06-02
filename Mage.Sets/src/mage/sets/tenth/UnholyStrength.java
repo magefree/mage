@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class UnholyStrength extends CardImpl<UnholyStrength> {
+public class UnholyStrength extends CardImpl {
 
     public UnholyStrength(UUID ownerId) {
         super(ownerId, 185, "Unholy Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

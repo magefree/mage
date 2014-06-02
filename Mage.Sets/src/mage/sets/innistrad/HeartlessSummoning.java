@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreatureSpell;
  *
  * @author BetaSteward
  */
-public class HeartlessSummoning extends CardImpl<HeartlessSummoning> {
+public class HeartlessSummoning extends CardImpl {
 
     public HeartlessSummoning(UUID ownerId) {
         super(ownerId, 104, "Heartless Summoning", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

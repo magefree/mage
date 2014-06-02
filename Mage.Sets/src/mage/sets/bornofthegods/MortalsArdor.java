@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MortalsArdor extends CardImpl<MortalsArdor> {
+public class MortalsArdor extends CardImpl {
 
     public MortalsArdor(UUID ownerId) {
         super(ownerId, 20, "Mortal's Ardor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class BlizzardElemental extends CardImpl<BlizzardElemental> {
+public class BlizzardElemental extends CardImpl {
 
     public BlizzardElemental(UUID ownerId) {
         super(ownerId, 27, "Blizzard Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

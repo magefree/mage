@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class OgresCleaver extends CardImpl<OgresCleaver> {
+public class OgresCleaver extends CardImpl {
 
     public OgresCleaver (UUID ownerId) {
         super(ownerId, 220, "Ogre's Cleaver", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

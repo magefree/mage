@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class RipscalePredator extends CardImpl<RipscalePredator> {
+public class RipscalePredator extends CardImpl {
 
     public RipscalePredator(UUID ownerId) {
         super(ownerId, 103, "Ripscale Predator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class ReachOfBranches extends CardImpl<ReachOfBranches> {
+public class ReachOfBranches extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
     static {

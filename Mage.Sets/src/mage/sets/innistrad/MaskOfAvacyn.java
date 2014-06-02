@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class MaskOfAvacyn extends CardImpl<MaskOfAvacyn> {
+public class MaskOfAvacyn extends CardImpl {
 
     public MaskOfAvacyn(UUID ownerId) {
         super(ownerId, 229, "Mask of Avacyn", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class ShardingSphinx extends CardImpl<ShardingSphinx> {
+public class ShardingSphinx extends CardImpl {
 
     public ShardingSphinx(UUID ownerId) {
         super(ownerId, 55, "Sharding Sphinx", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}{U}");

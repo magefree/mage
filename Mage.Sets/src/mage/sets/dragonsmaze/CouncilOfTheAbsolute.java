@@ -62,7 +62,7 @@ import mage.util.CardUtil;
  */
 
 
-public class CouncilOfTheAbsolute extends CardImpl<CouncilOfTheAbsolute> {
+public class CouncilOfTheAbsolute extends CardImpl {
 
     public CouncilOfTheAbsolute (UUID ownerId) {
         super(ownerId, 62, "Council of the Absolute", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");

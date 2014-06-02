@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MossKami extends CardImpl<MossKami> {
+public class MossKami extends CardImpl {
 
     public MossKami (UUID ownerId) {
         super(ownerId, 228, "Moss Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");

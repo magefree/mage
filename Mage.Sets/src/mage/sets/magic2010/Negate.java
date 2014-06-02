@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Negate extends CardImpl<Negate> {
+public class Negate extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
 

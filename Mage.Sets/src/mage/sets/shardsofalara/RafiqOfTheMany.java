@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RafiqOfTheMany extends CardImpl<RafiqOfTheMany> {
+public class RafiqOfTheMany extends CardImpl {
 
     public RafiqOfTheMany(UUID ownerId) {
         super(ownerId, 185, "Rafiq of the Many", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");

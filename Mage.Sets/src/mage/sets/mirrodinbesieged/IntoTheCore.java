@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class IntoTheCore extends CardImpl<IntoTheCore> {
+public class IntoTheCore extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

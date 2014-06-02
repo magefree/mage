@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class EndlessHorizons extends CardImpl<EndlessHorizons> {
+public class EndlessHorizons extends CardImpl {
 
     public EndlessHorizons(UUID ownerId) {
         super(ownerId, 4, "Endless Horizons", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

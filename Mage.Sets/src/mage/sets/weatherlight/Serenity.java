@@ -44,7 +44,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author Quercitron
  */
-public class Serenity extends CardImpl<Serenity> {
+public class Serenity extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifacts and enchantments");
 

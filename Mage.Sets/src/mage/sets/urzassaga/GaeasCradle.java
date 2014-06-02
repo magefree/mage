@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author Backfir3
  */
 
-public class GaeasCradle extends CardImpl<GaeasCradle> {
+public class GaeasCradle extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature you control");;
 

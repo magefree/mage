@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ScourgeOfSkolaVale extends CardImpl<ScourgeOfSkolaVale> {
+public class ScourgeOfSkolaVale extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 

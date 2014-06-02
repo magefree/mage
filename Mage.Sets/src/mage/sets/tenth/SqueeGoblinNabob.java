@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SqueeGoblinNabob extends CardImpl<SqueeGoblinNabob> {
+public class SqueeGoblinNabob extends CardImpl {
 
     public SqueeGoblinNabob(UUID ownerId) {
         super(ownerId, 239, "Squee, Goblin Nabob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author North
  */
-public class IgniteDisorder extends CardImpl<IgniteDisorder> {
+public class IgniteDisorder extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white and/or blue creatures");
 

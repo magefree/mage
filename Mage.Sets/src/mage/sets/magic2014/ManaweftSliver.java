@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ManaweftSliver extends CardImpl<ManaweftSliver> {
+public class ManaweftSliver extends CardImpl {
 
     public ManaweftSliver(UUID ownerId) {
         super(ownerId, 184, "Manaweft Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

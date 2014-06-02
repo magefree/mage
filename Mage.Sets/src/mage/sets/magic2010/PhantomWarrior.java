@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class PhantomWarrior extends CardImpl<PhantomWarrior> {
+public class PhantomWarrior extends CardImpl {
 
     public PhantomWarrior(UUID ownerId) {
         super(ownerId, 66, "Phantom Warrior", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class WoodElves extends CardImpl<WoodElves> {
+public class WoodElves extends CardImpl {
     
     private static final FilterLandCard filter = new FilterLandCard("Forest");
     static{

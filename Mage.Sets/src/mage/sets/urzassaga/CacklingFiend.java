@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Backfir3
  */
-public class CacklingFiend extends CardImpl<CacklingFiend> {
+public class CacklingFiend extends CardImpl {
 
     public CacklingFiend(UUID ownerId) {
         super(ownerId, 121, "Cackling Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

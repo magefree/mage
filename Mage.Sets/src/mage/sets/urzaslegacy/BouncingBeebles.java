@@ -45,7 +45,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author Backfir3
  */
-public class BouncingBeebles extends CardImpl<BouncingBeebles> {
+public class BouncingBeebles extends CardImpl {
 
     public BouncingBeebles(UUID ownerId) {
         super(ownerId, 28, "Bouncing Beebles", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

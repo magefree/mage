@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class TribalFlames extends CardImpl<TribalFlames> {
+public class TribalFlames extends CardImpl {
 
     public TribalFlames(UUID ownerId) {
         super(ownerId, 176, "Tribal Flames", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

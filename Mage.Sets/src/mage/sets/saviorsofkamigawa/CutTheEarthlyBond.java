@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class CutTheEarthlyBond extends CardImpl<CutTheEarthlyBond> {
+public class CutTheEarthlyBond extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchanted permanent");
     static {

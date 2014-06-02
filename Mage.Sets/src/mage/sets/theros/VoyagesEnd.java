@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VoyagesEnd extends CardImpl<VoyagesEnd> {
+public class VoyagesEnd extends CardImpl {
 
     public VoyagesEnd(UUID ownerId) {
         super(ownerId, 73, "Voyage's End", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

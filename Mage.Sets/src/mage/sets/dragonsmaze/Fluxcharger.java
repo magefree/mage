@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class Fluxcharger extends CardImpl<Fluxcharger> {
+public class Fluxcharger extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
     static {

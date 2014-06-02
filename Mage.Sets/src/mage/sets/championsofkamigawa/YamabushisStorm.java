@@ -51,7 +51,7 @@ import mage.watchers.common.DamagedByWatcher;
  * @author LevelX
  */
 
-public class YamabushisStorm extends CardImpl<YamabushisStorm> {
+public class YamabushisStorm extends CardImpl {
 
     public YamabushisStorm(UUID ownerId) {
         super(ownerId, 199, "Yamabushi's Storm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

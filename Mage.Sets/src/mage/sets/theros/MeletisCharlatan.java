@@ -52,7 +52,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class MeletisCharlatan extends CardImpl<MeletisCharlatan> {
+public class MeletisCharlatan extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
     static {

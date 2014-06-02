@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  * @author KholdFuzion
 
  */
-public class Dandan extends CardImpl<Dandan> {
+public class Dandan extends CardImpl {
 
     public Dandan(UUID ownerId) {
         super(ownerId, 79, "Dandan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{U}");

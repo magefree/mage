@@ -54,7 +54,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class VerdantHaven extends CardImpl<VerdantHaven> {
+public class VerdantHaven extends CardImpl {
 
     public VerdantHaven(UUID ownerId) {
         super(ownerId, 138, "Verdant Haven", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

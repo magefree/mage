@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SabretoothTiger extends CardImpl<SabretoothTiger> {
+public class SabretoothTiger extends CardImpl {
 
     public SabretoothTiger(UUID ownerId) {
         super(ownerId, 264, "Sabretooth Tiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

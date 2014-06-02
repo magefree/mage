@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward
  */
-public class WardenOfTheWall extends CardImpl<WardenOfTheWall> {
+public class WardenOfTheWall extends CardImpl {
 
     public WardenOfTheWall(UUID ownerId) {
         super(ownerId, 153, "Warden of the Wall", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Rewind extends CardImpl<Rewind> {
+public class Rewind extends CardImpl {
 
     public Rewind(UUID ownerId) {
         super(ownerId, 93, "Rewind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

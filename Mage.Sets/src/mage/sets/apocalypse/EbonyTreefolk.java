@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class EbonyTreefolk extends CardImpl<EbonyTreefolk> {
+public class EbonyTreefolk extends CardImpl {
 
     public EbonyTreefolk(UUID ownerId) {
         super(ownerId, 97, "Ebony Treefolk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");

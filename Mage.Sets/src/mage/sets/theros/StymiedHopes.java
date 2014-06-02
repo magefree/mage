@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class StymiedHopes extends CardImpl<StymiedHopes> {
+public class StymiedHopes extends CardImpl {
 
     public StymiedHopes(UUID ownerId) {
         super(ownerId, 64, "Stymied Hopes", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

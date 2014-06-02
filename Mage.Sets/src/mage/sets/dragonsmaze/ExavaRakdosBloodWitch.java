@@ -52,7 +52,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author LevelX2
  */
-public class ExavaRakdosBloodWitch extends CardImpl<ExavaRakdosBloodWitch> {
+public class ExavaRakdosBloodWitch extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {

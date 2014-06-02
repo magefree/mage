@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class ThoughtcutterAgent extends CardImpl<ThoughtcutterAgent> {
+public class ThoughtcutterAgent extends CardImpl {
 
     public ThoughtcutterAgent(UUID ownerId) {
         super(ownerId, 201, "Thoughtcutter Agent", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{U}{B}");

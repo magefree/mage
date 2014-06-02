@@ -48,7 +48,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author Loki
  */
-public class Mobilization extends CardImpl<Mobilization> {
+public class Mobilization extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 

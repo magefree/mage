@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LotusPetal extends CardImpl<LotusPetal> {
+public class LotusPetal extends CardImpl {
 
     public LotusPetal(UUID ownerId) {
         super(ownerId, 284, "Lotus Petal", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

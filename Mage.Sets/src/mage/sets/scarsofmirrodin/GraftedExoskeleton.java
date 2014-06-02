@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author nantuko
  */
-public class GraftedExoskeleton extends CardImpl<GraftedExoskeleton> {
+public class GraftedExoskeleton extends CardImpl {
 
     public GraftedExoskeleton(UUID ownerId) {
         super(ownerId, 162, "Grafted Exoskeleton", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

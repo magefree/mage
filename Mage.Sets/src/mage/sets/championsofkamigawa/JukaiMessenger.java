@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class JukaiMessenger extends CardImpl<JukaiMessenger> {
+public class JukaiMessenger extends CardImpl {
 
     public JukaiMessenger (UUID ownerId) {
         super(ownerId, 218, "Jukai Messenger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

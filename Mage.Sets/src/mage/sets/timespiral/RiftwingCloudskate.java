@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class RiftwingCloudskate extends CardImpl<RiftwingCloudskate> {
+public class RiftwingCloudskate extends CardImpl {
 
     public RiftwingCloudskate(UUID ownerId) {
         super(ownerId, 73, "Riftwing Cloudskate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

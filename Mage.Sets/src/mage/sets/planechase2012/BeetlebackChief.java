@@ -40,7 +40,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author LevelX2
  */
-public class BeetlebackChief extends CardImpl<BeetlebackChief> {
+public class BeetlebackChief extends CardImpl {
 
     public BeetlebackChief(UUID ownerId) {
         super(ownerId, 40, "Beetleback Chief", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

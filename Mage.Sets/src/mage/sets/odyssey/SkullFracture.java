@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author cbt33
  */
-public class SkullFracture extends CardImpl<SkullFracture> {
+public class SkullFracture extends CardImpl {
 
     public SkullFracture(UUID ownerId) {
         super(ownerId, 162, "Skull Fracture", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");

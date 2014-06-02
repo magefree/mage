@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class BearUmbra extends CardImpl<BearUmbra> {
+public class BearUmbra extends CardImpl {
 
     public BearUmbra(UUID ownerId) {
         super(ownerId, 177, "Bear Umbra", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");

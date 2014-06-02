@@ -40,7 +40,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class CunningLethemancer extends CardImpl<CunningLethemancer> {
+public class CunningLethemancer extends CardImpl {
 
     public CunningLethemancer(UUID ownerId) {
         super(ownerId, 69, "Cunning Lethemancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ScabClanMauler extends CardImpl<ScabClanMauler> {
+public class ScabClanMauler extends CardImpl {
 
     public ScabClanMauler(UUID ownerId) {
         super(ownerId, 128, "Scab-Clan Mauler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{G}");

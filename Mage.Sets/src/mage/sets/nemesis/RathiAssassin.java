@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class RathiAssassin extends CardImpl<RathiAssassin> {
+public class RathiAssassin extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary permanent card with converted mana cost 3 or less");
     private static final FilterCreaturePermanent destroyFilter = new FilterCreaturePermanent("tapped nonblack creature");

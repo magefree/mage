@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Vorapede extends CardImpl<Vorapede> {
+public class Vorapede extends CardImpl {
 
     public Vorapede(UUID ownerId) {
         super(ownerId, 131, "Vorapede", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");

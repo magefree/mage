@@ -45,7 +45,7 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward
  */
-public class ParallelLives extends CardImpl<ParallelLives> {
+public class ParallelLives extends CardImpl {
 
     public ParallelLives(UUID ownerId) {
         super(ownerId, 199, "Parallel Lives", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

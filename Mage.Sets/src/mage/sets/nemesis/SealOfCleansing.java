@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class SealOfCleansing extends CardImpl<SealOfCleansing> {
+public class SealOfCleansing extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

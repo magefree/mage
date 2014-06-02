@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class HearthKami extends CardImpl<HearthKami> {
+public class HearthKami extends CardImpl {
 
     public HearthKami(UUID ownerId) {
         super(ownerId, 171, "Hearth Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

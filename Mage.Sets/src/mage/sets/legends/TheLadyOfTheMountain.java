@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TheLadyOfTheMountain extends CardImpl<TheLadyOfTheMountain> {
+public class TheLadyOfTheMountain extends CardImpl {
 
     public TheLadyOfTheMountain(UUID ownerId) {
         super(ownerId, 303, "The Lady of the Mountain", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");

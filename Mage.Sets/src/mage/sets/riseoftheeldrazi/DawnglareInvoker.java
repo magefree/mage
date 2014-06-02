@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class DawnglareInvoker extends CardImpl<DawnglareInvoker> {
+public class DawnglareInvoker extends CardImpl {
 
     public DawnglareInvoker(UUID ownerId) {
         super(ownerId, 16, "Dawnglare Invoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

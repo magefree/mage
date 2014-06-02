@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class CrystalVein extends CardImpl<CrystalVein> {
+public class CrystalVein extends CardImpl {
 
     public CrystalVein(UUID ownerId) {
         super(ownerId, 290, "Crystal Vein", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

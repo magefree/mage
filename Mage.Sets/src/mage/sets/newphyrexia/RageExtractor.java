@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 /**
  * @author Loki
  */
-public class RageExtractor extends CardImpl<RageExtractor> {
+public class RageExtractor extends CardImpl {
 
     public RageExtractor(UUID ownerId) {
         super(ownerId, 91, "Rage Extractor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}{RP}");

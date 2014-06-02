@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author North
  */
-public class CosisTrickster extends CardImpl<CosisTrickster> {
+public class CosisTrickster extends CardImpl {
 
     public CosisTrickster(UUID ownerId) {
         super(ownerId, 45, "Cosi's Trickster", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}");

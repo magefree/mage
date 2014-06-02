@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ImperiousPerfect extends CardImpl<ImperiousPerfect> {
+public class ImperiousPerfect extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
 

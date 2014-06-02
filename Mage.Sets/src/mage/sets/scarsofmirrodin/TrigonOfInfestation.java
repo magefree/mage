@@ -51,7 +51,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 /**
  * @author nantuko
  */
-public class TrigonOfInfestation extends CardImpl<TrigonOfInfestation> {
+public class TrigonOfInfestation extends CardImpl {
 
     private static InsectInfectToken insectToken = new InsectInfectToken();
 

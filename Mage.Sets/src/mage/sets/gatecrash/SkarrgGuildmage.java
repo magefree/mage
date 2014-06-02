@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class SkarrgGuildmage extends CardImpl<SkarrgGuildmage> {
+public class SkarrgGuildmage extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
 

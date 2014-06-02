@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DuskImp extends CardImpl<DuskImp> {
+public class DuskImp extends CardImpl {
 
     public DuskImp(UUID ownerId) {
         super(ownerId, 140, "Dusk Imp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

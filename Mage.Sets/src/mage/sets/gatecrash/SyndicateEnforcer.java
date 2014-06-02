@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class SyndicateEnforcer extends CardImpl<SyndicateEnforcer> {
+public class SyndicateEnforcer extends CardImpl {
 
     public SyndicateEnforcer(UUID ownerId) {
         super(ownerId, 80, "Syndicate Enforcer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LoamdraggerGiant extends CardImpl<LoamdraggerGiant> {
+public class LoamdraggerGiant extends CardImpl {
 
     public LoamdraggerGiant(UUID ownerId) {
         super(ownerId, 210, "Loamdragger Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R/G}{R/G}{R/G}");

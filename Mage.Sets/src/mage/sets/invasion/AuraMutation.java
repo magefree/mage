@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class AuraMutation extends CardImpl<AuraMutation> {
+public class AuraMutation extends CardImpl {
 
     public AuraMutation(UUID ownerId) {
         super(ownerId, 232, "Aura Mutation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{W}");

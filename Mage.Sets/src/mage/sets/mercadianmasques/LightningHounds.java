@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LightningHounds extends CardImpl<LightningHounds> {
+public class LightningHounds extends CardImpl {
 
     public LightningHounds(UUID ownerId) {
         super(ownerId, 201, "Lightning Hounds", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

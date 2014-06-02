@@ -42,7 +42,7 @@ import mage.game.permanent.token.AngelToken;
  *
  * @author Loki, North
  */
-public class SigilOfTheEmptyThrone extends CardImpl<SigilOfTheEmptyThrone> {
+public class SigilOfTheEmptyThrone extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 

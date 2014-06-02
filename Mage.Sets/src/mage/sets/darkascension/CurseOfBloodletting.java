@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward
  */
-public class CurseOfBloodletting extends CardImpl<CurseOfBloodletting> {
+public class CurseOfBloodletting extends CardImpl {
 
     public CurseOfBloodletting(UUID ownerId) {
         super(ownerId, 85, "Curse of Bloodletting", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Arachnoid extends CardImpl<Arachnoid> {
+public class Arachnoid extends CardImpl {
 
     public Arachnoid(UUID ownerId) {
         super(ownerId, 102, "Arachnoid", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

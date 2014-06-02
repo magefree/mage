@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class BattleRattleShaman extends CardImpl<BattleRattleShaman> {
+public class BattleRattleShaman extends CardImpl {
 
     public BattleRattleShaman(UUID ownerId) {
         super(ownerId, 136, "Battle-Rattle Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

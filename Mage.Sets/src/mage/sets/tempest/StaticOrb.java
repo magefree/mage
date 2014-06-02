@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class StaticOrb extends CardImpl<StaticOrb> {
+public class StaticOrb extends CardImpl {
 
     public StaticOrb(UUID ownerId) {
         super(ownerId, 300, "Static Orb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

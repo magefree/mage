@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AuraBarbs extends CardImpl<AuraBarbs> {
+public class AuraBarbs extends CardImpl {
 
     public AuraBarbs(UUID ownerId) {
         super(ownerId, 94, "Aura Barbs", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

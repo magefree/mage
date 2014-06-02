@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class Claustrophobia extends CardImpl<Claustrophobia> {
+public class Claustrophobia extends CardImpl {
 
     public Claustrophobia(UUID ownerId) {
         super(ownerId, 48, "Claustrophobia", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class ArcboundHybrid extends CardImpl<ArcboundHybrid> {
+public class ArcboundHybrid extends CardImpl {
 
     public ArcboundHybrid(UUID ownerId) {
         super(ownerId, 97, "Arcbound Hybrid", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Backfir3
  */
-public class AncientOoze extends CardImpl<AncientOoze> {
+public class AncientOoze extends CardImpl {
 
     public AncientOoze(UUID ownerId) {
         super(ownerId, 112, "Ancient Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class MordantDragon extends CardImpl<MordantDragon> {
+public class MordantDragon extends CardImpl {
 
     public MordantDragon(UUID ownerId) {
         super(ownerId, 85, "Mordant Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");

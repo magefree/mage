@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author anonymous
  */
-public class Accelerate extends CardImpl<Accelerate> {
+public class Accelerate extends CardImpl {
 
     public Accelerate(UUID ownerId) {
         super(ownerId, 90, "Accelerate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

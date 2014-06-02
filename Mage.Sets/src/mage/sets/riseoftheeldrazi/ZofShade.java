@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ZofShade extends CardImpl<ZofShade> {
+public class ZofShade extends CardImpl {
 
     public ZofShade(UUID ownerId) {
         super(ownerId, 132, "Zof Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

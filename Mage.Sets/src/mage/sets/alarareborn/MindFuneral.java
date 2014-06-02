@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class MindFuneral extends CardImpl<MindFuneral> {
+public class MindFuneral extends CardImpl {
 
     public MindFuneral(UUID ownerId) {
         super(ownerId, 26, "Mind Funeral", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}{B}");

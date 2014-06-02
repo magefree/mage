@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class ForbiddenOrchard extends CardImpl<ForbiddenOrchard> {
+public class ForbiddenOrchard extends CardImpl {
 
     public ForbiddenOrchard (UUID ownerId) {
         super(ownerId, 276, "Forbidden Orchard", Rarity.RARE, new CardType[]{CardType.LAND}, null);

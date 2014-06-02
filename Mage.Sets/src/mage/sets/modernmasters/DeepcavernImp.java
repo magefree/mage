@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class DeepcavernImp extends CardImpl<DeepcavernImp> {
+public class DeepcavernImp extends CardImpl {
 
     public DeepcavernImp(UUID ownerId) {
         super(ownerId, 79, "Deepcavern Imp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

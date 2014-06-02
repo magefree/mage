@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ElvishPiper extends CardImpl<ElvishPiper> {
+public class ElvishPiper extends CardImpl {
 
     public ElvishPiper(UUID ownerId) {
         super(ownerId, 177, "Elvish Piper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");

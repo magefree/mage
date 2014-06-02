@@ -47,7 +47,7 @@ import mage.constants.Outcome;
  *
  * @author Loki
  */
-public class StriderHarness extends CardImpl<StriderHarness> {
+public class StriderHarness extends CardImpl {
 
     public StriderHarness (UUID ownerId) {
         super(ownerId, 207, "Strider Harness", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

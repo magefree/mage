@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HungrySpriggan extends CardImpl<HungrySpriggan> {
+public class HungrySpriggan extends CardImpl {
 
     public HungrySpriggan(UUID ownerId) {
         super(ownerId, 120, "Hungry Spriggan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

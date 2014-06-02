@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ToothOfChissGoria extends CardImpl<ToothOfChissGoria> {
+public class ToothOfChissGoria extends CardImpl {
 
     public ToothOfChissGoria(UUID ownerId) {
         super(ownerId, 264, "Tooth of Chiss-Goria", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

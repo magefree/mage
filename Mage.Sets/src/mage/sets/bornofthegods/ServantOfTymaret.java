@@ -46,7 +46,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class ServantOfTymaret extends CardImpl<ServantOfTymaret> {
+public class ServantOfTymaret extends CardImpl {
 
     public ServantOfTymaret(UUID ownerId) {
         super(ownerId, 82, "Servant of Tymaret", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

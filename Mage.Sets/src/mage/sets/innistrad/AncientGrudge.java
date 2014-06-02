@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class AncientGrudge extends CardImpl<AncientGrudge> {
+public class AncientGrudge extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

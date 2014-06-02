@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author cbt33
  */
-public class MysticCrusader extends CardImpl<MysticCrusader> {
+public class MysticCrusader extends CardImpl {
     
     static final FilterCard filter = new FilterCard("black and from red");
 

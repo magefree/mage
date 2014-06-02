@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class HeartbeatOfSpring extends CardImpl<HeartbeatOfSpring> {
+public class HeartbeatOfSpring extends CardImpl {
 
     public HeartbeatOfSpring(UUID ownerId) {
         super(ownerId, 212, "Heartbeat of Spring", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

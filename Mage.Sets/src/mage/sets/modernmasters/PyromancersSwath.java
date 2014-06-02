@@ -48,7 +48,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class PyromancersSwath extends CardImpl<PyromancersSwath> {
+public class PyromancersSwath extends CardImpl {
 
     public PyromancersSwath(UUID ownerId) {
         super(ownerId, 125, "Pyromancer's Swath", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

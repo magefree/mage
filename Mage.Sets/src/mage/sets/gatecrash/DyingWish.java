@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DyingWish extends CardImpl<DyingWish> {
+public class DyingWish extends CardImpl {
 
     public DyingWish(UUID ownerId) {
         super(ownerId, 64, "Dying Wish", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

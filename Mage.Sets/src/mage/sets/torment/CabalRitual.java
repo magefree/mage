@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class CabalRitual extends CardImpl<CabalRitual> {
+public class CabalRitual extends CardImpl {
 
     public CabalRitual(UUID ownerId) {
         super(ownerId, 51, "Cabal Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");

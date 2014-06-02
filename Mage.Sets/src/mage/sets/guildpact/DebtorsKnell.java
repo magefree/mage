@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class DebtorsKnell extends CardImpl<DebtorsKnell> {
+public class DebtorsKnell extends CardImpl {
 
     public DebtorsKnell(UUID ownerId) {
         super(ownerId, 141, "Debtors' Knell", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W/B}{W/B}{W/B}");

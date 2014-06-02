@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class MaraxusOfKeld extends CardImpl<MaraxusOfKeld> {
+public class MaraxusOfKeld extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifacts, creatures, and lands you control");
 

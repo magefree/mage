@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ShriekRaptor extends CardImpl<ShriekRaptor> {
+public class ShriekRaptor extends CardImpl {
 
     public ShriekRaptor(UUID ownerId) {
         super(ownerId, 24, "Shriek Raptor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

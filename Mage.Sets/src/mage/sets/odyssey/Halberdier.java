@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Halberdier extends CardImpl<Halberdier> {
+public class Halberdier extends CardImpl {
 
     public Halberdier(UUID ownerId) {
         super(ownerId, 196, "Halberdier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

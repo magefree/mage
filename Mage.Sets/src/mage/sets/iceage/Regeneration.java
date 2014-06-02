@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Regeneration extends CardImpl<Regeneration> {
+public class Regeneration extends CardImpl {
 
     public Regeneration(UUID ownerId) {
         super(ownerId, 147, "Regeneration", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

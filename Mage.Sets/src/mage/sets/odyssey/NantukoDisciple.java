@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class NantukoDisciple extends CardImpl<NantukoDisciple> {
+public class NantukoDisciple extends CardImpl {
 
     public NantukoDisciple(UUID ownerId) {
         super(ownerId, 253, "Nantuko Disciple", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

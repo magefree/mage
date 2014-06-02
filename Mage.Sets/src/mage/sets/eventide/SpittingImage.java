@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  * @author jeffwadsworth
 
  */
-public class SpittingImage extends CardImpl<SpittingImage> {
+public class SpittingImage extends CardImpl {
 
     public SpittingImage(UUID ownerId) {
         super(ownerId, 162, "Spitting Image", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G/U}{G/U}");

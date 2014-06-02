@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class InkwellLeviathan extends CardImpl<InkwellLeviathan> {
+public class InkwellLeviathan extends CardImpl {
 
     public InkwellLeviathan(UUID ownerId) {
         super(ownerId, 30, "Inkwell Leviathan", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}{U}{U}" );

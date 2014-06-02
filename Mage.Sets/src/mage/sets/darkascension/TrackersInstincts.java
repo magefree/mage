@@ -50,7 +50,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class TrackersInstincts extends CardImpl<TrackersInstincts> {
+public class TrackersInstincts extends CardImpl {
 
     public TrackersInstincts(UUID ownerId) {
         super(ownerId, 128, "Tracker's Instincts", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

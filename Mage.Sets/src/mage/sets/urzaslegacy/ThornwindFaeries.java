@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class ThornwindFaeries extends CardImpl<ThornwindFaeries> {
+public class ThornwindFaeries extends CardImpl {
 
     public ThornwindFaeries(UUID ownerId) {
         super(ownerId, 44, "Thornwind Faeries", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

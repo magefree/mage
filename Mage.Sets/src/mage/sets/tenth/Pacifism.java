@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Pacifism extends CardImpl<Pacifism> {
+public class Pacifism extends CardImpl {
 
     public Pacifism(UUID ownerId) {
         super(ownerId, 31, "Pacifism", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

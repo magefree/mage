@@ -44,7 +44,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Loki
  */
-public class WeldingJar extends CardImpl<WeldingJar> {
+public class WeldingJar extends CardImpl {
 
     public WeldingJar (UUID ownerId) {
         super(ownerId, 274, "Welding Jar", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

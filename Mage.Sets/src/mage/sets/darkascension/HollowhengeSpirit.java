@@ -44,7 +44,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author BetaSteward
  */
-public class HollowhengeSpirit extends CardImpl<HollowhengeSpirit> {
+public class HollowhengeSpirit extends CardImpl {
 
     public HollowhengeSpirit(UUID ownerId) {
         super(ownerId, 10, "Hollowhenge Spirit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

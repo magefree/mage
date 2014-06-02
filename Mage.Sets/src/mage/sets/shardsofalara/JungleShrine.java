@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class JungleShrine extends CardImpl<JungleShrine> {
+public class JungleShrine extends CardImpl {
 
     public JungleShrine (UUID ownerId) {
         super(ownerId, 226, "Jungle Shrine", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

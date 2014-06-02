@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class TendoIceBridge extends CardImpl<TendoIceBridge> {
+public class TendoIceBridge extends CardImpl {
 
     public TendoIceBridge(UUID ownerId) {
         super(ownerId, 165, "Tendo Ice Bridge", Rarity.RARE, new CardType[]{CardType.LAND}, "");

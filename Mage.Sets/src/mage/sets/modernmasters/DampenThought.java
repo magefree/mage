@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class DampenThought extends CardImpl<DampenThought> {
+public class DampenThought extends CardImpl {
 
     public DampenThought(UUID ownerId) {
         super(ownerId, 39, "Dampen Thought", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class OrzhovGuildgate extends CardImpl<OrzhovGuildgate> {
+public class OrzhovGuildgate extends CardImpl {
 
     public OrzhovGuildgate(UUID ownerId) {
         super(ownerId, 244, "Orzhov Guildgate", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

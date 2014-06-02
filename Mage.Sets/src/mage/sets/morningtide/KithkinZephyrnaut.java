@@ -44,7 +44,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class KithkinZephyrnaut extends CardImpl<KithkinZephyrnaut> {
+public class KithkinZephyrnaut extends CardImpl {
 
     public KithkinZephyrnaut(UUID ownerId) {
         super(ownerId, 16, "Kithkin Zephyrnaut", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

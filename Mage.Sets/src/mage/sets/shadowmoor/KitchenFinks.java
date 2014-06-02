@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class KitchenFinks extends CardImpl<KitchenFinks> {
+public class KitchenFinks extends CardImpl {
 
     public KitchenFinks(UUID ownerId) {
         super(ownerId, 229, "Kitchen Finks", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G/W}{G/W}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class AgentOfShauku extends CardImpl<AgentOfShauku> {
+public class AgentOfShauku extends CardImpl {
 
     final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RhoxWarMonk extends CardImpl<RhoxWarMonk> {
+public class RhoxWarMonk extends CardImpl {
 
     public RhoxWarMonk(UUID ownerId) {
         super(ownerId, 188, "Rhox War Monk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");

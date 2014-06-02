@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SkyshroudForest extends CardImpl<SkyshroudForest> {
+public class SkyshroudForest extends CardImpl {
 
     public SkyshroudForest(UUID ownerId) {
         super(ownerId, 332, "Skyshroud Forest", Rarity.RARE, new CardType[]{CardType.LAND}, null);

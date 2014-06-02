@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Plopman
  */
-public class CavalryMaster extends CardImpl<CavalryMaster> {
+public class CavalryMaster extends CardImpl {
     
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with flanking");
     

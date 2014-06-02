@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward
  */
-public class ChancellorOfTheDross extends CardImpl<ChancellorOfTheDross> {
+public class ChancellorOfTheDross extends CardImpl {
 
     private static String abilityText = "at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way";
 

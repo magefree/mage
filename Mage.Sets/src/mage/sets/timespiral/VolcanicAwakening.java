@@ -39,7 +39,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class VolcanicAwakening extends CardImpl<VolcanicAwakening> {
+public class VolcanicAwakening extends CardImpl {
 
     public VolcanicAwakening(UUID ownerId) {
         super(ownerId, 186, "Volcanic Awakening", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

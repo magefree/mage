@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BladeOfTheSixthPride extends CardImpl<BladeOfTheSixthPride> {
+public class BladeOfTheSixthPride extends CardImpl {
 
     public BladeOfTheSixthPride(UUID ownerId) {
         super(ownerId, 19, "Blade of the Sixth Pride", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

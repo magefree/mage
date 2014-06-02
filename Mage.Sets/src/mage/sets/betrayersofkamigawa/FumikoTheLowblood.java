@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class FumikoTheLowblood extends CardImpl<FumikoTheLowblood> {
+public class FumikoTheLowblood extends CardImpl {
 
     public FumikoTheLowblood(UUID ownerId) {
         super(ownerId, 104, "Fumiko the Lowblood", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

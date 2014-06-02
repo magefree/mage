@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class UnderworldDreams extends CardImpl<UnderworldDreams> {
+public class UnderworldDreams extends CardImpl {
 
     public UnderworldDreams(UUID ownerId) {
         super(ownerId, 115, "Underworld Dreams", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");

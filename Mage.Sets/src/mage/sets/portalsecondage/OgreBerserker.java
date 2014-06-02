@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class OgreBerserker extends CardImpl<OgreBerserker> {
+public class OgreBerserker extends CardImpl {
 
     public OgreBerserker(UUID ownerId) {
         super(ownerId, 111, "Ogre Berserker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

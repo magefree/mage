@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LingeringTormentor extends CardImpl<LingeringTormentor> {
+public class LingeringTormentor extends CardImpl {
 
     public LingeringTormentor(UUID ownerId) {
         super(ownerId, 36, "Lingering Tormentor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

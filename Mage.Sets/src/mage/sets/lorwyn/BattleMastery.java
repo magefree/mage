@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class BattleMastery extends CardImpl<BattleMastery> {
+public class BattleMastery extends CardImpl {
 
     public BattleMastery(UUID ownerId) {
         super(ownerId, 5, "Battle Mastery", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

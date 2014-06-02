@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class NecrogenSpellbomb extends CardImpl<NecrogenSpellbomb> {
+public class NecrogenSpellbomb extends CardImpl {
 
     public NecrogenSpellbomb(UUID ownerId) {
         super(ownerId, 216, "Necrogen Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

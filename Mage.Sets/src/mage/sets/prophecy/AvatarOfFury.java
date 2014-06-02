@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class AvatarOfFury extends CardImpl<AvatarOfFury> {
+public class AvatarOfFury extends CardImpl {
 
     public AvatarOfFury(UUID ownerId) {
         super(ownerId, 82, "Avatar of Fury", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");

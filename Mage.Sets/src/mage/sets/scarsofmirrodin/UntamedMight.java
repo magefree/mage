@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author ayratn
  */
-public class UntamedMight extends CardImpl<UntamedMight> {
+public class UntamedMight extends CardImpl {
 
     public UntamedMight(UUID ownerId) {
         super(ownerId, 131, "Untamed Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{G}");

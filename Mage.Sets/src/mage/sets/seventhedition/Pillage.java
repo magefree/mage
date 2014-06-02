@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  * @author jeffwadsworth
  *
  */
-public class Pillage extends CardImpl<Pillage> {
+public class Pillage extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 

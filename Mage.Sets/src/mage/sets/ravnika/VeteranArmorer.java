@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class VeteranArmorer extends CardImpl<VeteranArmorer> {
+public class VeteranArmorer extends CardImpl {
 
     public VeteranArmorer(UUID ownerId) {
         super(ownerId, 34, "Veteran Armorer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

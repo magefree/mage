@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author KholdFuzion
 
  */
-public class Regrowth extends CardImpl<Regrowth> {
+public class Regrowth extends CardImpl {
 
     public Regrowth(UUID ownerId) {
         super(ownerId, 123, "Regrowth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

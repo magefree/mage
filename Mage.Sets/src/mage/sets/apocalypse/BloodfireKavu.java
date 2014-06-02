@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
 /**
  * @author Loki
  */
-public class BloodfireKavu extends CardImpl<BloodfireKavu> {
+public class BloodfireKavu extends CardImpl {
 
     public BloodfireKavu(UUID ownerId) {
         super(ownerId, 58, "Bloodfire Kavu", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

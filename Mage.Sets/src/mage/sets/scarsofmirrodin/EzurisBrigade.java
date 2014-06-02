@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class EzurisBrigade extends CardImpl<EzurisBrigade> {
+public class EzurisBrigade extends CardImpl {
     private final String text = "Metalcraft - As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample";
 
     public EzurisBrigade (UUID ownerId) {

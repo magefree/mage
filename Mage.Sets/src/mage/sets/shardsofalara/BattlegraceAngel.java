@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class BattlegraceAngel extends CardImpl<BattlegraceAngel> {
+public class BattlegraceAngel extends CardImpl {
 
     public BattlegraceAngel (UUID ownerId) {
         super(ownerId, 6, "Battlegrace Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

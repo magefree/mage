@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SporecapSpider extends CardImpl<SporecapSpider> {
+public class SporecapSpider extends CardImpl {
 
     public SporecapSpider(UUID ownerId) {
         super(ownerId, 209, "Sporecap Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

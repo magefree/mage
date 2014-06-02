@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class GiantDustwasp extends CardImpl<GiantDustwasp> {
+public class GiantDustwasp extends CardImpl {
 
     public GiantDustwasp(UUID ownerId) {
         super(ownerId, 129, "Giant Dustwasp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

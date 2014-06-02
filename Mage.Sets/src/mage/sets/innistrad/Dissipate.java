@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class Dissipate extends CardImpl<Dissipate> {
+public class Dissipate extends CardImpl {
 
     public Dissipate(UUID ownerId) {
         super(ownerId, 53, "Dissipate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FlametongueKavu extends CardImpl<FlametongueKavu> {
+public class FlametongueKavu extends CardImpl {
 
     public FlametongueKavu(UUID ownerId) {
         super(ownerId, 54, "Flametongue Kavu", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

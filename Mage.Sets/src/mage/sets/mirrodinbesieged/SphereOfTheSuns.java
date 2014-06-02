@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author North, Loki, noxx
  */
-public class SphereOfTheSuns extends CardImpl<SphereOfTheSuns> {
+public class SphereOfTheSuns extends CardImpl {
 
     private static final String ruleText = "Sphere of the Suns enters the battlefield tapped and with three charge counters on it.";
     

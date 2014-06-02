@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class EmeraldOryx extends CardImpl<EmeraldOryx> {
+public class EmeraldOryx extends CardImpl {
 
     public EmeraldOryx(UUID ownerId) {
         super(ownerId, 179, "Emerald Oryx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

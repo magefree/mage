@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class StolenGoods extends CardImpl<StolenGoods> {
+public class StolenGoods extends CardImpl {
 
     public StolenGoods(UUID ownerId) {
         super(ownerId, 78, "Stolen Goods", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");

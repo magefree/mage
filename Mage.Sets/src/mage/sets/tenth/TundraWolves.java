@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TundraWolves extends CardImpl<TundraWolves> {
+public class TundraWolves extends CardImpl {
 
     public TundraWolves(UUID ownerId) {
         super(ownerId, 54, "Tundra Wolves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

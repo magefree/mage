@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TempleOfAbandon extends CardImpl<TempleOfAbandon> {
+public class TempleOfAbandon extends CardImpl {
 
     public TempleOfAbandon(UUID ownerId) {
         super(ownerId, 224, "Temple of Abandon", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author anonymous
  */
-public class ChandrasPhoenix extends CardImpl<ChandrasPhoenix> {
+public class ChandrasPhoenix extends CardImpl {
 
     public ChandrasPhoenix(UUID ownerId) {
         super(ownerId, 126, "Chandra's Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

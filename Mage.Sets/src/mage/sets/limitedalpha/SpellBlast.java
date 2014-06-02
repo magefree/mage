@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class SpellBlast extends CardImpl<SpellBlast> {
+public class SpellBlast extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost X");
 

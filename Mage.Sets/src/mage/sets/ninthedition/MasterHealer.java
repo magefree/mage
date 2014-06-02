@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class MasterHealer extends CardImpl<MasterHealer> {
+public class MasterHealer extends CardImpl {
 
     public MasterHealer(UUID ownerId) {
         super(ownerId, 28, "Master Healer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}");

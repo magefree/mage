@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CommonBond extends CardImpl<CommonBond> {
+public class CommonBond extends CardImpl {
 
     public CommonBond(UUID ownerId) {
         super(ownerId, 151, "Common Bond", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}{W}");

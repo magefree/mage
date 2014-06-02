@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class IntimidationBolt extends CardImpl<IntimidationBolt> {
+public class IntimidationBolt extends CardImpl {
 
     public IntimidationBolt(UUID ownerId) {
         super(ownerId, 99, "Intimidation Bolt", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{W}");

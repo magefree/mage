@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class KingpinsPet extends CardImpl<KingpinsPet> {
+public class KingpinsPet extends CardImpl {
 
     public KingpinsPet(UUID ownerId) {
         super(ownerId, 173, "Kingpin's Pet", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");

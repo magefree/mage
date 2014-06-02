@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class AerieWorshippers extends CardImpl<AerieWorshippers> {
+public class AerieWorshippers extends CardImpl {
 
     public AerieWorshippers(UUID ownerId) {
         super(ownerId, 30, "Aerie Worshippers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

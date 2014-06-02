@@ -57,7 +57,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class ManorGargoyle extends CardImpl<ManorGargoyle> {
+public class ManorGargoyle extends CardImpl {
 
     private static final String rule = "{this} is indestructible as long as it has defender.";
 

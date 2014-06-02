@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class BarrageOgre extends CardImpl<BarrageOgre> {
+public class BarrageOgre extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {

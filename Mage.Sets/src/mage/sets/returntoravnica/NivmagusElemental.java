@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class NivmagusElemental extends CardImpl<NivmagusElemental> {
+public class NivmagusElemental extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell you control");
 

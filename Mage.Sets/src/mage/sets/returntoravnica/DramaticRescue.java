@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DramaticRescue extends CardImpl<DramaticRescue> {
+public class DramaticRescue extends CardImpl {
 
     public DramaticRescue(UUID ownerId) {
         super(ownerId, 156, "Dramatic Rescue", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}{U}");

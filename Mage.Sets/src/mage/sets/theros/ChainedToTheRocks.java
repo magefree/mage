@@ -86,7 +86,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ChainedToTheRocks extends CardImpl<ChainedToTheRocks> {
+public class ChainedToTheRocks extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Mountain you control");
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");

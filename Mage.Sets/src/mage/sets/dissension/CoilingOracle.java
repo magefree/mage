@@ -38,7 +38,7 @@ import mage.sets.conflux.SkywardEyeProphets.SkywardEyeProphetsEffect;
 /**
  * @author mluds
  */
-public class CoilingOracle extends CardImpl<CoilingOracle> {
+public class CoilingOracle extends CardImpl {
 
     public CoilingOracle(UUID ownerId) {
         super(ownerId, 107, "Coiling Oracle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{U}");

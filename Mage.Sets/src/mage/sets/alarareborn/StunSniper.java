@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class StunSniper extends CardImpl<StunSniper> {
+public class StunSniper extends CardImpl {
 
     public StunSniper (UUID ownerId) {
         super(ownerId, 100, "Stun Sniper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");

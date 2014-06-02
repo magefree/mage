@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class HarmonicSliver extends CardImpl<HarmonicSliver> {
+public class HarmonicSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filterSliver = new FilterCreaturePermanent();
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");

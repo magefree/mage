@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class ComaVeil extends CardImpl<ComaVeil> {
+public class ComaVeil extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 

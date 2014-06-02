@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LokiX
  */
-public class Naturalize extends CardImpl<Naturalize> {
+public class Naturalize extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

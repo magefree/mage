@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class BorosSwiftblade extends CardImpl<BorosSwiftblade> {
+public class BorosSwiftblade extends CardImpl {
 
     public BorosSwiftblade(UUID ownerId) {
         super(ownerId, 82, "Boros Swiftblade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");

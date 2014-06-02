@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GorgonsHead extends CardImpl<GorgonsHead> {
+public class GorgonsHead extends CardImpl {
 
     public GorgonsHead(UUID ownerId) {
         super(ownerId, 158, "Gorgon's Head", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

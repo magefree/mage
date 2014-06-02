@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CudgelTroll extends CardImpl<CudgelTroll> {
+public class CudgelTroll extends CardImpl {
 
     public CudgelTroll(UUID ownerId) {
         super(ownerId, 174, "Cudgel Troll", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

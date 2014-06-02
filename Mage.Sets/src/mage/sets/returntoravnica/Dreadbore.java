@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class Dreadbore extends CardImpl<Dreadbore> {
+public class Dreadbore extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker");
 

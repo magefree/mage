@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HeadlessHorseman extends CardImpl<HeadlessHorseman> {
+public class HeadlessHorseman extends CardImpl {
 
     public HeadlessHorseman(UUID ownerId) {
         super(ownerId, 16, "Headless Horseman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

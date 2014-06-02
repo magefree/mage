@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author North
  */
-public class SublimeArchangel extends CardImpl<SublimeArchangel> {
+public class SublimeArchangel extends CardImpl {
 
     public SublimeArchangel(UUID ownerId) {
         super(ownerId, 36, "Sublime Archangel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

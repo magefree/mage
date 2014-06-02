@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class SatyrHoplite extends CardImpl<SatyrHoplite> {
+public class SatyrHoplite extends CardImpl {
 
     public SatyrHoplite(UUID ownerId) {
         super(ownerId, 110, "Satyr Hoplite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

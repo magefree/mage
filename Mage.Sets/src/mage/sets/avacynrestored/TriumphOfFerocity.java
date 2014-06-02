@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class TriumphOfFerocity extends CardImpl<TriumphOfFerocity> {
+public class TriumphOfFerocity extends CardImpl {
 
     private static final String ruleText = "draw a card if you control the creature with the greatest power or tied for the greatest power";
 

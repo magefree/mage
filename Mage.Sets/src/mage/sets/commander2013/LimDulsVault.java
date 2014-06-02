@@ -47,7 +47,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class LimDulsVault extends CardImpl<LimDulsVault> {
+public class LimDulsVault extends CardImpl {
 
     public LimDulsVault(UUID ownerId) {
         super(ownerId, 197, "Lim-Dul's Vault", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");

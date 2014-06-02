@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author anonymous
  */
-public class TranquilPath extends CardImpl<TranquilPath> {
+public class TranquilPath extends CardImpl {
 
     public TranquilPath(UUID ownerId) {
         super(ownerId, 89, "Tranquil Path", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");

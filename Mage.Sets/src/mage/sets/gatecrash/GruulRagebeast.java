@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class GruulRagebeast extends CardImpl<GruulRagebeast> {
+public class GruulRagebeast extends CardImpl {
 
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature an opponent controls");
 

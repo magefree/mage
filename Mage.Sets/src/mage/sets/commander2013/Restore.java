@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class Restore extends CardImpl<Restore> {
+public class Restore extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard();
 

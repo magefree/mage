@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class WildfireCerberus extends CardImpl<WildfireCerberus> {
+public class WildfireCerberus extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control");
 

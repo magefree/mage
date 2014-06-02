@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class SilentAttendant extends CardImpl<SilentAttendant> {
+public class SilentAttendant extends CardImpl {
 
     public SilentAttendant (UUID ownerId) {
         super(ownerId, 51, "Silent Attendant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

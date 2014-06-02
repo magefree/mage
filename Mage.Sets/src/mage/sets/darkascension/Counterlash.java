@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author BetaSteward
  */
-public class Counterlash extends CardImpl<Counterlash> {
+public class Counterlash extends CardImpl {
 
     public Counterlash(UUID ownerId) {
         super(ownerId, 33, "Counterlash", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");

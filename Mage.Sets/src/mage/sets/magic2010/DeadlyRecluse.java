@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DeadlyRecluse extends CardImpl<DeadlyRecluse> {
+public class DeadlyRecluse extends CardImpl {
 
     public DeadlyRecluse(UUID ownerId) {
         super(ownerId, 175, "Deadly Recluse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

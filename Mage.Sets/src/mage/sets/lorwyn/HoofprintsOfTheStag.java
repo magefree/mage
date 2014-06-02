@@ -50,7 +50,7 @@ import mage.abilities.condition.common.MyTurnCondition;
  *
  * @author Loki
  */
-public class HoofprintsOfTheStag extends CardImpl<HoofprintsOfTheStag> {
+public class HoofprintsOfTheStag extends CardImpl {
 
     public HoofprintsOfTheStag(UUID ownerId) {
         super(ownerId, 21, "Hoofprints of the Stag", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

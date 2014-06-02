@@ -46,7 +46,7 @@ import mage.abilities.Ability;
  *
  * @author jeffwadsworth
  */
-public class MoonlightGeist extends CardImpl<MoonlightGeist> {
+public class MoonlightGeist extends CardImpl {
 
     public MoonlightGeist(UUID ownerId) {
         super(ownerId, 29, "Moonlight Geist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

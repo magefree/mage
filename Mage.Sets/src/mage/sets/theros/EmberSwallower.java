@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author LevelX2
  */
-public class EmberSwallower extends CardImpl<EmberSwallower> {
+public class EmberSwallower extends CardImpl {
 
     public EmberSwallower(UUID ownerId) {
         super(ownerId, 120, "Ember Swallower", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

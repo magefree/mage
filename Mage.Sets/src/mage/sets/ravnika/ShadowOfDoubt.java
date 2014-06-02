@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class ShadowOfDoubt extends CardImpl<ShadowOfDoubt> {
+public class ShadowOfDoubt extends CardImpl {
 
     public ShadowOfDoubt(UUID ownerId) {
         super(ownerId, 253, "Shadow of Doubt", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U/B}{U/B}");

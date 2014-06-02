@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class NomadDecoy extends CardImpl<NomadDecoy> {
+public class NomadDecoy extends CardImpl {
 
     public NomadDecoy(UUID ownerId) {
         super(ownerId, 37, "Nomad Decoy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

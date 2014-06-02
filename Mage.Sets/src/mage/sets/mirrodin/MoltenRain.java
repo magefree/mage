@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class MoltenRain extends CardImpl<MoltenRain> {
+public class MoltenRain extends CardImpl {
 
     public MoltenRain(UUID ownerId) {
         super(ownerId, 101, "Molten Rain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class AngelicDestiny extends CardImpl<AngelicDestiny> {
+public class AngelicDestiny extends CardImpl {
 
     public AngelicDestiny(UUID ownerId) {
         super(ownerId, 3, "Angelic Destiny", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

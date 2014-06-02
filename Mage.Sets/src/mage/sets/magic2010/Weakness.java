@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Weakness extends CardImpl<Weakness> {
+public class Weakness extends CardImpl {
 
     public Weakness(UUID ownerId) {
         super(ownerId, 121, "Weakness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

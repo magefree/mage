@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class LavaballTrap extends CardImpl<LavaballTrap> {
+public class LavaballTrap extends CardImpl {
 
     public LavaballTrap(UUID ownerId) {
         super(ownerId, 135, "Lavaball Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{6}{R}{R}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GnarledMass extends CardImpl<GnarledMass> {
+public class GnarledMass extends CardImpl {
 
     public GnarledMass(UUID ownerId) {
         super(ownerId, 127, "Gnarled Mass", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

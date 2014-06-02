@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BurstLightning extends CardImpl<BurstLightning> {
+public class BurstLightning extends CardImpl {
 
     public BurstLightning(UUID ownerId) {
         super(ownerId, 119, "Burst Lightning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

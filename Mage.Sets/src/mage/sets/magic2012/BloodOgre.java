@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BloodOgre extends CardImpl<BloodOgre> {
+public class BloodOgre extends CardImpl {
 
     public BloodOgre(UUID ownerId) {
         super(ownerId, 122, "Blood Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

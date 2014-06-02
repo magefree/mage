@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author nantuko
  */
-public class ReliquaryTower extends CardImpl<ReliquaryTower> {
+public class ReliquaryTower extends CardImpl {
 
     public ReliquaryTower(UUID ownerId) {
         super(ownerId, 143, "Reliquary Tower", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

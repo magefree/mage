@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class EidolonOfRhetoric extends CardImpl<EidolonOfRhetoric> {
+public class EidolonOfRhetoric extends CardImpl {
 
     public EidolonOfRhetoric(UUID ownerId) {
         super(ownerId, 10, "Eidolon of Rhetoric", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}");

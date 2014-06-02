@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Backfir3
  */
-public class AbsoluteLaw extends CardImpl<AbsoluteLaw> {
+public class AbsoluteLaw extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Red");
 

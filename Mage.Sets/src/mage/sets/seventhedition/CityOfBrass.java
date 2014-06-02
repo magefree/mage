@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class CityOfBrass extends CardImpl<CityOfBrass> {
+public class CityOfBrass extends CardImpl {
 
     public CityOfBrass(UUID ownerId) {
         super(ownerId, 327, "City of Brass", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class SurgicalExtraction extends CardImpl<SurgicalExtraction> {
+public class SurgicalExtraction extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("card in a graveyard other than a basic land card");
 

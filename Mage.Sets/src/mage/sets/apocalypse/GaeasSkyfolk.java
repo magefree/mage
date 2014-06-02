@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GaeasSkyfolk extends CardImpl<GaeasSkyfolk> {
+public class GaeasSkyfolk extends CardImpl {
 
     public GaeasSkyfolk(UUID ownerId) {
         super(ownerId, 101, "Gaea's Skyfolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{U}");

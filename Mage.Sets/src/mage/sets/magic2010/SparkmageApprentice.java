@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class SparkmageApprentice extends CardImpl<SparkmageApprentice> {
+public class SparkmageApprentice extends CardImpl {
 
     public SparkmageApprentice(UUID ownerId) {
         super(ownerId, 158, "Sparkmage Apprentice", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

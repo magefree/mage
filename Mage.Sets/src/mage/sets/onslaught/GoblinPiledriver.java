@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author jonubuu
  */
-public class GoblinPiledriver extends CardImpl<GoblinPiledriver> {
+public class GoblinPiledriver extends CardImpl {
 
     private static final FilterCard filter1 = new FilterCard("blue");
     private static final FilterAttackingCreature filter2 = new FilterAttackingCreature("other attacking Goblin");

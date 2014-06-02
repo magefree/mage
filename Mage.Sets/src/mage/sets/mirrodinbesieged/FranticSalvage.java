@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class FranticSalvage extends CardImpl<FranticSalvage> {
+public class FranticSalvage extends CardImpl {
 
     public FranticSalvage(UUID ownerId) {
         super(ownerId, 6, "Frantic Salvage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");

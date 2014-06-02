@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CopperMyr extends CardImpl<CopperMyr> {
+public class CopperMyr extends CardImpl {
 
     public CopperMyr (UUID ownerId) {
         super(ownerId, 158, "Copper Myr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

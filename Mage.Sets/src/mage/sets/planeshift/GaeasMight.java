@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class GaeasMight extends CardImpl<GaeasMight> {
+public class GaeasMight extends CardImpl {
 
     public GaeasMight(UUID ownerId) {
         super(ownerId, 81, "Gaea's Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

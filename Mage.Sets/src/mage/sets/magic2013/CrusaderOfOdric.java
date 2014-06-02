@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class CrusaderOfOdric extends CardImpl<CrusaderOfOdric> {
+public class CrusaderOfOdric extends CardImpl {
 
     public CrusaderOfOdric(UUID ownerId) {
         super(ownerId, 10, "Crusader of Odric", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

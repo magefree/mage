@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AirElemental extends CardImpl<AirElemental> {
+public class AirElemental extends CardImpl {
 
     public AirElemental(UUID ownerId) {
         super(ownerId, 42, "Air Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

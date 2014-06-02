@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author Loki
  */
-public class JadeIdol extends CardImpl<JadeIdol> {
+public class JadeIdol extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class PsychicSpear extends CardImpl<PsychicSpear> {
+public class PsychicSpear extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Spirit or Arcane card to discard");
 

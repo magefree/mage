@@ -60,7 +60,7 @@ import mage.target.Targets;
  *
  * @author Rafbill
  */
-public class NotOfThisWorld extends CardImpl<NotOfThisWorld> {
+public class NotOfThisWorld extends CardImpl {
 
     public NotOfThisWorld(UUID ownerId) {
         super(ownerId, 8, "Not of This World", Rarity.UNCOMMON,

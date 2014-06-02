@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ViciousHunger extends CardImpl<ViciousHunger> {
+public class ViciousHunger extends CardImpl {
 
     public ViciousHunger(UUID ownerId) {
         super(ownerId, 74, "Vicious Hunger", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");

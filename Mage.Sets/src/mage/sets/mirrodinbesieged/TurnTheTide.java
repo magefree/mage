@@ -40,7 +40,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class TurnTheTide extends CardImpl<TurnTheTide> {
+public class TurnTheTide extends CardImpl {
 
     public TurnTheTide (UUID ownerId) {
         super(ownerId, 35, "Turn the Tide", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

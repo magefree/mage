@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledPermanent;
 /**
  * @author Loki
  */
-public class BountifulHarvest extends CardImpl<BountifulHarvest> {
+public class BountifulHarvest extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

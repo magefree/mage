@@ -49,7 +49,7 @@ import mage.game.permanent.token.MyrToken;
  *
  * @author Loki, North
  */
-public class Myrsmith extends CardImpl<Myrsmith> {
+public class Myrsmith extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an artifact spell");
     static {

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AetherAdept extends CardImpl<AetherAdept> {
+public class AetherAdept extends CardImpl {
 
     public AetherAdept(UUID ownerId) {
         super(ownerId, 41, "AEther Adept", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

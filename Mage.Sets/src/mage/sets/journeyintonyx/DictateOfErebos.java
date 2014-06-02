@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class DictateOfErebos extends CardImpl<DictateOfErebos> {
+public class DictateOfErebos extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
     

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class AnabaShaman extends CardImpl<AnabaShaman> {
+public class AnabaShaman extends CardImpl {
 
     public AnabaShaman(UUID ownerId) {
         super(ownerId, 172, "Anaba Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LoxodonPartisan extends CardImpl<LoxodonPartisan> {
+public class LoxodonPartisan extends CardImpl {
 
     public LoxodonPartisan (UUID ownerId) {
         super(ownerId, 12, "Loxodon Partisan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

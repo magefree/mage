@@ -56,7 +56,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class SealockMonster extends CardImpl<SealockMonster> {
+public class SealockMonster extends CardImpl {
 
     public SealockMonster(UUID ownerId) {
         super(ownerId, 62, "Sealock Monster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

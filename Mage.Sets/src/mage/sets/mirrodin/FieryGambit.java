@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FieryGambit extends CardImpl<FieryGambit> {
+public class FieryGambit extends CardImpl {
 
     public FieryGambit(UUID ownerId) {
         super(ownerId, 90, "Fiery Gambit", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");

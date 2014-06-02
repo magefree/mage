@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class NeedleSpecter extends CardImpl<NeedleSpecter> {
+public class NeedleSpecter extends CardImpl {
 
     public NeedleSpecter(UUID ownerId) {
         super(ownerId, 39, "Needle Specter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

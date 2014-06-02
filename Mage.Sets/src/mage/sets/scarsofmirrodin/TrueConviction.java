@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author nantuko
  */
-public class TrueConviction extends CardImpl<TrueConviction> {
+public class TrueConviction extends CardImpl {
 
     public TrueConviction (UUID ownerId) {
         super(ownerId, 25, "True Conviction", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}{W}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GrapplerSpider extends CardImpl<GrapplerSpider> {
+public class GrapplerSpider extends CardImpl {
 
     public GrapplerSpider (UUID ownerId) {
         super(ownerId, 102, "Grappler Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

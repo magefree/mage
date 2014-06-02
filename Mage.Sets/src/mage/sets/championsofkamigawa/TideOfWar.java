@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class TideOfWar extends CardImpl<TideOfWar> {
+public class TideOfWar extends CardImpl {
 
     public TideOfWar(UUID ownerId) {
         super(ownerId, 194, "Tide of War", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");

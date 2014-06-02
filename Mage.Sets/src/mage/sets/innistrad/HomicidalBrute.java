@@ -44,7 +44,7 @@ import mage.watchers.Watcher;
 /**
  * @author nantuko
  */
-public class HomicidalBrute extends CardImpl<HomicidalBrute> {
+public class HomicidalBrute extends CardImpl {
 
     public HomicidalBrute(UUID ownerId) {
         super(ownerId, 47, "Homicidal Brute", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");

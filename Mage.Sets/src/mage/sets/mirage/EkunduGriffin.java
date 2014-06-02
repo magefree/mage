@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class EkunduGriffin extends CardImpl<EkunduGriffin> {
+public class EkunduGriffin extends CardImpl {
 
     public EkunduGriffin(UUID ownerId) {
         super(ownerId, 217, "Ekundu Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

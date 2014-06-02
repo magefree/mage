@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class AlphaTyrranax extends CardImpl<AlphaTyrranax> {
+public class AlphaTyrranax extends CardImpl {
 
     public AlphaTyrranax (UUID ownerId) {
         super(ownerId, 109, "Alpha Tyrranax", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

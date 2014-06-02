@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author Backfir3
  */
-public class DriftingDjinn extends CardImpl<DriftingDjinn> {
+public class DriftingDjinn extends CardImpl {
 
     public DriftingDjinn(UUID ownerId) {
         super(ownerId, 71, "Drifting Djinn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

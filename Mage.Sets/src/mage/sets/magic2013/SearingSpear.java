@@ -38,7 +38,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class SearingSpear extends CardImpl<SearingSpear> {
+public class SearingSpear extends CardImpl {
 
     public SearingSpear(UUID ownerId) {
         super(ownerId, 147, "Searing Spear", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

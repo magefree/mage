@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jonubuu
  */
-public class Misdirection extends CardImpl<Misdirection> {
+public class Misdirection extends CardImpl {
 
     private static final FilterSpell filter2 = new FilterSpell("spell with a single target");
     static {

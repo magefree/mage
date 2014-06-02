@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class CurseOfStalkedPrey extends CardImpl<CurseOfStalkedPrey> {
+public class CurseOfStalkedPrey extends CardImpl {
 
     public CurseOfStalkedPrey(UUID ownerId) {
         super(ownerId, 136, "Curse of Stalked Prey", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

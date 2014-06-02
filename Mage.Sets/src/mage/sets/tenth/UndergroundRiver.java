@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class UndergroundRiver extends CardImpl<UndergroundRiver> {
+public class UndergroundRiver extends CardImpl {
 
     public UndergroundRiver(UUID ownerId) {
         super(ownerId, 362, "Underground River", Rarity.RARE, new CardType[]{CardType.LAND}, "");

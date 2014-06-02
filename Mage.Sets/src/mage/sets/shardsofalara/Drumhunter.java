@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author North
  */
-public class Drumhunter extends CardImpl<Drumhunter> {
+public class Drumhunter extends CardImpl {
 
     public Drumhunter(UUID ownerId) {
         super(ownerId, 129, "Drumhunter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

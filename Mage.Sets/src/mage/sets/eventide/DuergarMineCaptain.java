@@ -46,7 +46,7 @@ import mage.filter.common.FilterAttackingCreature;
  * @author jeffwadsworth
 
  */
-public class DuergarMineCaptain extends CardImpl<DuergarMineCaptain> {
+public class DuergarMineCaptain extends CardImpl {
 
     public DuergarMineCaptain(UUID ownerId) {
         super(ownerId, 138, "Duergar Mine-Captain", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}");

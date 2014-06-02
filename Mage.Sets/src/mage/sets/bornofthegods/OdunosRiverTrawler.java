@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class OdunosRiverTrawler extends CardImpl<OdunosRiverTrawler> {
+public class OdunosRiverTrawler extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantment creature card from your graveyard");
     

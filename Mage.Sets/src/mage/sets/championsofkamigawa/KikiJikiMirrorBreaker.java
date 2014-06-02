@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author jonubuu
  */
-public class KikiJikiMirrorBreaker extends CardImpl<KikiJikiMirrorBreaker> {
+public class KikiJikiMirrorBreaker extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nonlegendary creature you control");
 

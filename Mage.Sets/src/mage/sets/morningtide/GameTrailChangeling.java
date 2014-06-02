@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GameTrailChangeling extends CardImpl<GameTrailChangeling> {
+public class GameTrailChangeling extends CardImpl {
 
     public GameTrailChangeling(UUID ownerId) {
         super(ownerId, 123, "Game-Trail Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

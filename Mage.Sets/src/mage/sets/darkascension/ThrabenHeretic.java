@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Loki
  */
-public class ThrabenHeretic extends CardImpl<ThrabenHeretic> {
+public class ThrabenHeretic extends CardImpl {
 
     public ThrabenHeretic(UUID ownerId) {
         super(ownerId, 26, "Thraben Heretic", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SilvergillAdept extends CardImpl<SilvergillAdept> {
+public class SilvergillAdept extends CardImpl {
 
     public SilvergillAdept(UUID ownerId) {
         super(ownerId, 86, "Silvergill Adept", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

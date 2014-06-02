@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class CephalidRetainer extends CardImpl<CephalidRetainer> {
+public class CephalidRetainer extends CardImpl {
     
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
     

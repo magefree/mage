@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class JundSojourners extends CardImpl<JundSojourners> {
+public class JundSojourners extends CardImpl {
 
     public JundSojourners(UUID ownerId) {
         super(ownerId, 116, "Jund Sojourners", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");

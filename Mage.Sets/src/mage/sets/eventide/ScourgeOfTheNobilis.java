@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ScourgeOfTheNobilis extends CardImpl<ScourgeOfTheNobilis> {
+public class ScourgeOfTheNobilis extends CardImpl {
 
     public ScourgeOfTheNobilis(UUID ownerId) {
         super(ownerId, 146, "Scourge of the Nobilis", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R/W}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SecludedSteppe extends CardImpl<SecludedSteppe> {
+public class SecludedSteppe extends CardImpl {
 
     public SecludedSteppe(UUID ownerId) {
         super(ownerId, 324, "Secluded Steppe", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

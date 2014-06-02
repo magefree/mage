@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class BeetleformMage extends CardImpl<BeetleformMage> {
+public class BeetleformMage extends CardImpl {
 
     public BeetleformMage (UUID ownerId) {
         super(ownerId, 54, "Beetleform Mage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");

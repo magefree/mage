@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SoulRansom extends CardImpl<SoulRansom> {
+public class SoulRansom extends CardImpl {
 
     public SoulRansom(UUID ownerId) {
         super(ownerId, 198, "Soul Ransom", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");

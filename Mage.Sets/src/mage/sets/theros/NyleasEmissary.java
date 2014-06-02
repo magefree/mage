@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class NyleasEmissary extends CardImpl<NyleasEmissary> {
+public class NyleasEmissary extends CardImpl {
 
     public NyleasEmissary(UUID ownerId) {
         super(ownerId, 168, "Nylea's Emissary", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{G}");

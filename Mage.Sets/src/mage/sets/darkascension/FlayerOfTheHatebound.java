@@ -51,7 +51,7 @@ import mage.game.events.EntersTheBattlefieldEvent;
  *
  * @author BetaSteward
  */
-public class FlayerOfTheHatebound extends CardImpl<FlayerOfTheHatebound> {
+public class FlayerOfTheHatebound extends CardImpl {
 
     public FlayerOfTheHatebound(UUID ownerId) {
         super(ownerId, 89, "Flayer of the Hatebound", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");

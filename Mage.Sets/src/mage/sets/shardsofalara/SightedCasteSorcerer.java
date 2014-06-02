@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SightedCasteSorcerer extends CardImpl<SightedCasteSorcerer> {
+public class SightedCasteSorcerer extends CardImpl {
 
     public SightedCasteSorcerer (UUID ownerId) {
         super(ownerId, 26, "Sighted-Caste Sorcerer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

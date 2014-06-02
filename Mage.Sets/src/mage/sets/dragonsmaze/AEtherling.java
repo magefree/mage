@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  */
 
 
-public class AEtherling extends CardImpl<AEtherling> {
+public class AEtherling extends CardImpl {
 
     public AEtherling (UUID ownerId) {
         super(ownerId, 11, "AEtherling", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

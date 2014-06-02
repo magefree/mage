@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class SmolderingCrater extends CardImpl<SmolderingCrater> {
+public class SmolderingCrater extends CardImpl {
 
     public SmolderingCrater(UUID ownerId) {
         super(ownerId, 328, "Smoldering Crater", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ScuzzbackScrapper extends CardImpl<ScuzzbackScrapper> {
+public class ScuzzbackScrapper extends CardImpl {
 
     public ScuzzbackScrapper(UUID ownerId) {
         super(ownerId, 217, "Scuzzback Scrapper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R/G}");

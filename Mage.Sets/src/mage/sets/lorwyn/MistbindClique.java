@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class MistbindClique extends CardImpl<MistbindClique> {
+public class MistbindClique extends CardImpl {
 
     public MistbindClique(UUID ownerId) {
         super(ownerId, 75, "Mistbind Clique", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");

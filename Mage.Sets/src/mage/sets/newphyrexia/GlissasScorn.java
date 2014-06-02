@@ -39,7 +39,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author North
  */
-public class GlissasScorn extends CardImpl<GlissasScorn> {
+public class GlissasScorn extends CardImpl {
 
     public GlissasScorn(UUID ownerId) {
         super(ownerId, 110, "Glissa's Scorn", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

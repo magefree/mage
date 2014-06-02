@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class NezumiCutthroat extends CardImpl<NezumiCutthroat> {
+public class NezumiCutthroat extends CardImpl {
 
     public NezumiCutthroat(UUID ownerId) {
         super(ownerId, 128, "Nezumi Cutthroat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

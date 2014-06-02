@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  *
  * @author LevelX2
  */
-public class Conflagrate extends CardImpl<Conflagrate> {
+public class Conflagrate extends CardImpl {
 
     public Conflagrate(UUID ownerId) {
         super(ownerId, 151, "Conflagrate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DuskmantleProwler extends CardImpl<DuskmantleProwler> {
+public class DuskmantleProwler extends CardImpl {
 
     public DuskmantleProwler(UUID ownerId) {
         super(ownerId, 91, "Duskmantle Prowler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

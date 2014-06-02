@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HarnessByForce extends CardImpl<HarnessByForce> {
+public class HarnessByForce extends CardImpl {
 
     public HarnessByForce(UUID ownerId) {
         super(ownerId, 100, "Harness by Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

@@ -47,7 +47,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class StrategicPlanning extends CardImpl<StrategicPlanning> {
+public class StrategicPlanning extends CardImpl {
 
     public StrategicPlanning(UUID ownerId) {
         super(ownerId, 59, "Strategic Planning", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");

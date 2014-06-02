@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class BottleGnomes extends CardImpl<BottleGnomes> {
+public class BottleGnomes extends CardImpl {
 
     public BottleGnomes(UUID ownerId) {
         super(ownerId, 268, "Bottle Gnomes", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

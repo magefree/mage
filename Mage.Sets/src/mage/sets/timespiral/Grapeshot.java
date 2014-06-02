@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class Grapeshot extends CardImpl<Grapeshot> {
+public class Grapeshot extends CardImpl {
 
     public Grapeshot(UUID ownerId) {
         super(ownerId, 160, "Grapeshot", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

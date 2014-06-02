@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DarksteelMutation extends CardImpl<DarksteelMutation> {
+public class DarksteelMutation extends CardImpl {
 
     public DarksteelMutation(UUID ownerId) {
         super(ownerId, 9, "Darksteel Mutation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

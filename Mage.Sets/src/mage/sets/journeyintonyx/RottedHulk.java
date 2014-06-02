@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class RottedHulk extends CardImpl<RottedHulk> {
+public class RottedHulk extends CardImpl {
 
     public RottedHulk(UUID ownerId) {
         super(ownerId, 81, "Rotted Hulk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

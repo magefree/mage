@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CranialExtraction extends CardImpl<CranialExtraction> {
+public class CranialExtraction extends CardImpl {
 
     public CranialExtraction(UUID ownerId) {
         super(ownerId, 105, "Cranial Extraction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");

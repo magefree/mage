@@ -44,7 +44,7 @@ import mage.constants.ManaType;
  *
  * @author LevelX2
  */
-public class DawnglowInfusion extends CardImpl<DawnglowInfusion> {
+public class DawnglowInfusion extends CardImpl {
 
     public DawnglowInfusion(UUID ownerId) {
         super(ownerId, 225, "Dawnglow Infusion", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{G/W}");

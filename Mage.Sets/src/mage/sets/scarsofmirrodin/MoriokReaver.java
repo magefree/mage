@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MoriokReaver extends CardImpl<MoriokReaver> {
+public class MoriokReaver extends CardImpl {
 
     public MoriokReaver (UUID ownerId) {
         super(ownerId, 70, "Moriok Reaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

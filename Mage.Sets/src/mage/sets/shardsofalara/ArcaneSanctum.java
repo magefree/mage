@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ArcaneSanctum extends CardImpl<ArcaneSanctum> {
+public class ArcaneSanctum extends CardImpl {
 
     public ArcaneSanctum (UUID ownerId) {
         super(ownerId, 220, "Arcane Sanctum", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

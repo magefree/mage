@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class CorpseCur extends CardImpl<CorpseCur> {
+public class CorpseCur extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("creature card with infect from your graveyard");
 

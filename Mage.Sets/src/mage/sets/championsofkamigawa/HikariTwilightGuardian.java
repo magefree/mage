@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class HikariTwilightGuardian extends CardImpl<HikariTwilightGuardian> {
+public class HikariTwilightGuardian extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

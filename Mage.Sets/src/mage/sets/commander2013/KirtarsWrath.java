@@ -46,7 +46,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author LevelX2
  */
-public class KirtarsWrath extends CardImpl<KirtarsWrath> {
+public class KirtarsWrath extends CardImpl {
 
     public KirtarsWrath(UUID ownerId) {
         super(ownerId, 15, "Kirtar's Wrath", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");

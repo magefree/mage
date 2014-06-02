@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TrainedJackal extends CardImpl<TrainedJackal> {
+public class TrainedJackal extends CardImpl {
 
     public TrainedJackal(UUID ownerId) {
         super(ownerId, 155, "Trained Jackal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

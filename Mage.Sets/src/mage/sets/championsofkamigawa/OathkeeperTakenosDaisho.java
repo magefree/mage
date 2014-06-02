@@ -56,7 +56,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class OathkeeperTakenosDaisho extends CardImpl<OathkeeperTakenosDaisho> {
+public class OathkeeperTakenosDaisho extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("it's a Samurai card");
     static {

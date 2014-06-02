@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class NayaSoulbeast extends CardImpl<NayaSoulbeast> {
+public class NayaSoulbeast extends CardImpl {
 
     public NayaSoulbeast(UUID ownerId) {
         super(ownerId, 157, "Naya Soulbeast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

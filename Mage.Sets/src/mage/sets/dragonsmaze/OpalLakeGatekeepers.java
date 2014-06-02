@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 
 
-public class OpalLakeGatekeepers extends CardImpl<OpalLakeGatekeepers> {
+public class OpalLakeGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     static {

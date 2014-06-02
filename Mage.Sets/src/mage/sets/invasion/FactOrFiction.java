@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class FactOrFiction extends CardImpl<FactOrFiction> {
+public class FactOrFiction extends CardImpl {
 
     public FactOrFiction(UUID ownerId) {
         super(ownerId, 57, "Fact or Fiction", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");

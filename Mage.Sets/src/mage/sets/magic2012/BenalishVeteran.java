@@ -41,7 +41,7 @@ import mage.constants.Duration;
 /**
  * @author Loki
  */
-public class BenalishVeteran extends CardImpl<BenalishVeteran> {
+public class BenalishVeteran extends CardImpl {
 
     public BenalishVeteran(UUID ownerId) {
         super(ownerId, 10, "Benalish Veteran", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

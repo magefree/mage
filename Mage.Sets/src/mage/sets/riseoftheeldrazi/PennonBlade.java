@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author North
  */
-public class PennonBlade extends CardImpl<PennonBlade> {
+public class PennonBlade extends CardImpl {
 
     public PennonBlade(UUID ownerId) {
         super(ownerId, 221, "Pennon Blade", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

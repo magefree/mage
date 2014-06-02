@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class ThermalBlast extends CardImpl<ThermalBlast> {
+public class ThermalBlast extends CardImpl {
 
     public ThermalBlast(UUID ownerId) {
         super(ownerId, 224, "Thermal Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");

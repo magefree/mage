@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class NimanaSellSword extends CardImpl<NimanaSellSword> {
+public class NimanaSellSword extends CardImpl {
 
     public NimanaSellSword(UUID ownerId) {
         super(ownerId, 106, "Nimana Sell-Sword", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class FeastOfBlood extends CardImpl<FeastOfBlood> {
+public class FeastOfBlood extends CardImpl {
 
     public FeastOfBlood(UUID ownerId) {
         super(ownerId, 88, "Feast of Blood", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

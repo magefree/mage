@@ -41,7 +41,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KozileksPredator extends CardImpl<KozileksPredator> {
+public class KozileksPredator extends CardImpl {
 
     public KozileksPredator(UUID ownerId) {
         super(ownerId, 193, "Kozilek's Predator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

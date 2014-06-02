@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OldManOfTheSea extends CardImpl<OldManOfTheSea> {
+public class OldManOfTheSea extends CardImpl {
 
     public OldManOfTheSea(UUID ownerId) {
         super(ownerId, 24, "Old Man of the Sea", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

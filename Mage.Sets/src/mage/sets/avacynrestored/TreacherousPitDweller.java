@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class TreacherousPitDweller extends CardImpl<TreacherousPitDweller> {
+public class TreacherousPitDweller extends CardImpl {
 
     public TreacherousPitDweller(UUID ownerId) {
         super(ownerId, 121, "Treacherous Pit-Dweller", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");

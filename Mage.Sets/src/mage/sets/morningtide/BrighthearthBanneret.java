@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class BrighthearthBanneret extends CardImpl<BrighthearthBanneret> {
+public class BrighthearthBanneret extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Elemental spells and Warrior spells");
 

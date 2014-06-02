@@ -63,7 +63,7 @@ import mage.watchers.Watcher;
  *
  * @author noxx
  */
-public class CavernOfSouls extends CardImpl<CavernOfSouls> {
+public class CavernOfSouls extends CardImpl {
 
     private static final String ruleText = "choose a creature type";
 

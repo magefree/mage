@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class LonelySandbar extends CardImpl<LonelySandbar> {
+public class LonelySandbar extends CardImpl {
 
     public LonelySandbar(UUID ownerId) {
         super(ownerId, 320, "Lonely Sandbar", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

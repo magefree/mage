@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class HalimarExcavator extends CardImpl<HalimarExcavator> {
+public class HalimarExcavator extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Allies you control");
 

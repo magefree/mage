@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Backfir3
  */
-public class BubblingBeebles extends CardImpl<BubblingBeebles> {
+public class BubblingBeebles extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class BlightedShaman extends CardImpl<BlightedShaman> {
+public class BlightedShaman extends CardImpl {
 
     private static final FilterControlledPermanent filterSwamp = new FilterControlledPermanent("a Swamp");
 

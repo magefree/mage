@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VengefulRebirth extends CardImpl<VengefulRebirth> {
+public class VengefulRebirth extends CardImpl {
 
     public VengefulRebirth(UUID ownerId) {
         super(ownerId, 62, "Vengeful Rebirth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{G}");

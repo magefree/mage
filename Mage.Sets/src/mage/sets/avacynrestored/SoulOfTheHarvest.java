@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
 /**
  * @author noxx
  */
-public class SoulOfTheHarvest extends CardImpl<SoulOfTheHarvest> {
+public class SoulOfTheHarvest extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another nontoken creature");
     static {

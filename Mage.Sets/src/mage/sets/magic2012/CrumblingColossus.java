@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class CrumblingColossus extends CardImpl<CrumblingColossus> {
+public class CrumblingColossus extends CardImpl {
 
     public CrumblingColossus(UUID ownerId) {
         super(ownerId, 204, "Crumbling Colossus", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

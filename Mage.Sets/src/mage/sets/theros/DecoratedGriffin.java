@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class DecoratedGriffin extends CardImpl<DecoratedGriffin> {
+public class DecoratedGriffin extends CardImpl {
 
     public DecoratedGriffin(UUID ownerId) {
         super(ownerId, 7, "Decorated Griffin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

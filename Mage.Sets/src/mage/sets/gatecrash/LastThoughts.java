@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class LastThoughts extends CardImpl<LastThoughts> {
+public class LastThoughts extends CardImpl {
 
     public LastThoughts(UUID ownerId) {
         super(ownerId, 40, "Last Thoughts", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");

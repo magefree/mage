@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class SlithAscendant extends CardImpl<SlithAscendant> {
+public class SlithAscendant extends CardImpl {
 
     public SlithAscendant(UUID ownerId) {
         super(ownerId, 23, "Slith Ascendant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

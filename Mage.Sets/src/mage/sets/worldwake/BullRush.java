@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BullRush extends CardImpl<BullRush> {
+public class BullRush extends CardImpl {
 
     public BullRush (UUID ownerId) {
         super(ownerId, 73, "Bull Rush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

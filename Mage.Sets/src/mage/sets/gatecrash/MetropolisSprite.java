@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class MetropolisSprite extends CardImpl<MetropolisSprite> {
+public class MetropolisSprite extends CardImpl {
 
     public MetropolisSprite(UUID ownerId) {
         super(ownerId, 42, "Metropolis Sprite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

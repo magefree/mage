@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class RapidHybridization extends CardImpl<RapidHybridization> {
+public class RapidHybridization extends CardImpl {
 
     public RapidHybridization(UUID ownerId) {
         super(ownerId, 44, "Rapid Hybridization", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GoblinPiker extends CardImpl<GoblinPiker> {
+public class GoblinPiker extends CardImpl {
 
     public GoblinPiker(UUID ownerId) {
         super(ownerId, 209, "Goblin Piker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

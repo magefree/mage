@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author cbt33, LevelX2 (Quash)
  */
-public class MoltenInfluence extends CardImpl<MoltenInfluence> {
+public class MoltenInfluence extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
     static {

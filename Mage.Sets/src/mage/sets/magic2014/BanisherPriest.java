@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth using LevelX2 tech
  */
-public class BanisherPriest extends CardImpl<BanisherPriest> {
+public class BanisherPriest extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
     static {

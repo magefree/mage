@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PutridLeech extends CardImpl<PutridLeech> {
+public class PutridLeech extends CardImpl {
 
     public PutridLeech(UUID ownerId) {
         super(ownerId, 95, "Putrid Leech", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{G}");

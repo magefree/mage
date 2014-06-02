@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class RevokeExistence extends CardImpl<RevokeExistence> {
+public class RevokeExistence extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {

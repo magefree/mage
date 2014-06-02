@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class YomijiWhoBarsTheWay extends CardImpl<YomijiWhoBarsTheWay> {
+public class YomijiWhoBarsTheWay extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a legendary permanent other than Yomiji, Who Bars the Way");
     static {

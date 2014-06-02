@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class GrimRoustabout extends CardImpl<GrimRoustabout> {
+public class GrimRoustabout extends CardImpl {
  
     public GrimRoustabout(UUID ownerId) {
         super(ownerId, 68, "Grim Roustabout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

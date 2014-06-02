@@ -61,7 +61,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SwordOfBodyAndMind extends CardImpl<SwordOfBodyAndMind> {
+public class SwordOfBodyAndMind extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("green and from blue");
 

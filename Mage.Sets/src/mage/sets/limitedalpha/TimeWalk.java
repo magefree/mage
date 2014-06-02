@@ -42,7 +42,7 @@ import mage.game.turn.TurnMod;
  *
  * @author LevelX2
  */
-public class TimeWalk extends CardImpl<TimeWalk> {
+public class TimeWalk extends CardImpl {
 
     public TimeWalk(UUID ownerId) {
         super(ownerId, 84, "Time Walk", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}");

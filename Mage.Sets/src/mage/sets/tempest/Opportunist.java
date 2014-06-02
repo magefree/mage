@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX
  */
-public class Opportunist extends CardImpl<Opportunist> {
+public class Opportunist extends CardImpl {
 
     private static final  FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
 

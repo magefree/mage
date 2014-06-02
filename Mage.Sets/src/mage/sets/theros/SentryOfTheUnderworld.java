@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SentryOfTheUnderworld extends CardImpl<SentryOfTheUnderworld> {
+public class SentryOfTheUnderworld extends CardImpl {
 
     public SentryOfTheUnderworld(UUID ownerId) {
         super(ownerId, 202, "Sentry of the Underworld", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");

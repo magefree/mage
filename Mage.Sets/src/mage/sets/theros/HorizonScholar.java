@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class HorizonScholar extends CardImpl<HorizonScholar> {
+public class HorizonScholar extends CardImpl {
 
     public HorizonScholar(UUID ownerId) {
         super(ownerId, 51, "Horizon Scholar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");

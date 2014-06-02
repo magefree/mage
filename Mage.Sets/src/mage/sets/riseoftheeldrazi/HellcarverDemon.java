@@ -50,7 +50,7 @@ import mage.game.Game;
  * @author jeffwadsworth
  */
 
-public class HellcarverDemon extends CardImpl<HellcarverDemon> {
+public class HellcarverDemon extends CardImpl {
 
     public HellcarverDemon(UUID ownerId) {
         super(ownerId, 113, "Hellcarver Demon", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

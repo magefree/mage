@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HazezonTamar extends CardImpl<HazezonTamar> {
+public class HazezonTamar extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sand Warriors");
 

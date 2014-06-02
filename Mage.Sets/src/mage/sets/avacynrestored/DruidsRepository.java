@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  * @author noxx
 
  */
-public class DruidsRepository extends CardImpl<DruidsRepository> {
+public class DruidsRepository extends CardImpl {
 
     public DruidsRepository(UUID ownerId) {
         super(ownerId, 176, "Druids' Repository", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");

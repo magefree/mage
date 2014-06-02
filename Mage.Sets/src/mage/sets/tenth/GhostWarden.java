@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class GhostWarden extends CardImpl<GhostWarden> {
+public class GhostWarden extends CardImpl {
 
     public GhostWarden(UUID ownerId) {
         super(ownerId, 16, "Ghost Warden", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

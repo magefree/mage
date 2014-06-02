@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author Quercitron
  */
-public class AshenPowder extends CardImpl<AshenPowder> {
+public class AshenPowder extends CardImpl {
 
     public AshenPowder(UUID ownerId) {
         super(ownerId, 2, "Ashen Powder", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

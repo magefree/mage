@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author LevelX2
  */
 
-public class MazesEnd extends CardImpl<MazesEnd> {
+public class MazesEnd extends CardImpl {
 
     private static final FilterCard filterCard = new FilterCard("Gate card");
     static {

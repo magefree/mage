@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class ThunderscapeMaster extends CardImpl<ThunderscapeMaster> {
+public class ThunderscapeMaster extends CardImpl {
 
     public ThunderscapeMaster(UUID ownerId) {
         super(ownerId, 175, "Thunderscape Master", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

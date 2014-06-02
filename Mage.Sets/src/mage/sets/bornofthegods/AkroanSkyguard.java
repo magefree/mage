@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class AkroanSkyguard extends CardImpl<AkroanSkyguard> {
+public class AkroanSkyguard extends CardImpl {
 
     public AkroanSkyguard(UUID ownerId) {
         super(ownerId, 3, "Akroan Skyguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

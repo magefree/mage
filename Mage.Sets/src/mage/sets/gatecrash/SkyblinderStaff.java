@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class SkyblinderStaff extends CardImpl<SkyblinderStaff> {
+public class SkyblinderStaff extends CardImpl {
 
     public SkyblinderStaff(UUID ownerId) {
         super(ownerId, 238, "Skyblinder Staff", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

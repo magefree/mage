@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class OrochiSustainer extends CardImpl<OrochiSustainer> {
+public class OrochiSustainer extends CardImpl {
 
     public OrochiSustainer(UUID ownerId) {
         super(ownerId, 236, "Orochi Sustainer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ShamblingRemains extends CardImpl<ShamblingRemains> {
+public class ShamblingRemains extends CardImpl {
 
     public ShamblingRemains(UUID ownerId) {
         super(ownerId, 124, "Shambling Remains", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");

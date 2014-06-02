@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class BrimstoneVolley extends CardImpl<BrimstoneVolley> {
+public class BrimstoneVolley extends CardImpl {
 
     public BrimstoneVolley(UUID ownerId) {
         super(ownerId, 132, "Brimstone Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

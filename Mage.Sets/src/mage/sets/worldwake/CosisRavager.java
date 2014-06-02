@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class CosisRavager extends CardImpl<CosisRavager> {
+public class CosisRavager extends CardImpl {
 
     public CosisRavager (UUID ownerId) {
         super(ownerId, 77, "Cosi's Ravager", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

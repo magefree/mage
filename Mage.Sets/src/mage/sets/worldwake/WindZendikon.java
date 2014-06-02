@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class WindZendikon extends CardImpl<WindZendikon> {
+public class WindZendikon extends CardImpl {
 
     public WindZendikon(UUID ownerId) {
         super(ownerId, 46, "Wind Zendikon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

@@ -62,7 +62,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class HuntmasterOfTheFells extends CardImpl<HuntmasterOfTheFells> {
+public class HuntmasterOfTheFells extends CardImpl {
 
     public HuntmasterOfTheFells(UUID ownerId) {
         super(ownerId, 140, "Huntmaster of the Fells", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");

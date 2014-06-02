@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class GhostLitRaider extends CardImpl<GhostLitRaider> {
+public class GhostLitRaider extends CardImpl {
 
     public GhostLitRaider(UUID ownerId) {
         super(ownerId, 99, "Ghost-Lit Raider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

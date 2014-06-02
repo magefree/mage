@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jonubuu
  */
-public class GoblinSharpshooter extends CardImpl<GoblinSharpshooter> {
+public class GoblinSharpshooter extends CardImpl {
 
     public GoblinSharpshooter(UUID ownerId) {
         super(ownerId, 207, "Goblin Sharpshooter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");

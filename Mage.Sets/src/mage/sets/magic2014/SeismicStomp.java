@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class SeismicStomp extends CardImpl<SeismicStomp> {
+public class SeismicStomp extends CardImpl {
 
     public SeismicStomp(UUID ownerId) {
         super(ownerId, 152, "Seismic Stomp", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

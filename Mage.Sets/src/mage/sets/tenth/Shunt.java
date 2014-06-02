@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Shunt extends CardImpl<Shunt> {
+public class Shunt extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell with a single target");
     

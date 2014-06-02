@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Loki
  */
-public class GeistOfSaintTraft extends CardImpl<GeistOfSaintTraft> {
+public class GeistOfSaintTraft extends CardImpl {
 
     public GeistOfSaintTraft(UUID ownerId) {
         super(ownerId, 213, "Geist of Saint Traft", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");

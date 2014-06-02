@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Alvin
  */
-public class SkaabRuinator extends CardImpl<SkaabRuinator> {
+public class SkaabRuinator extends CardImpl {
 
     public SkaabRuinator(UUID ownerId) {
         super(ownerId, 77, "Skaab Ruinator", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

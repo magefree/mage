@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class Electropotence extends CardImpl<Electropotence> {
+public class Electropotence extends CardImpl {
 
     public Electropotence(UUID ownerId) {
         super(ownerId, 122, "Electropotence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author jeffwadsworth
  */
-public class RazorBoomerang extends CardImpl<RazorBoomerang> {
+public class RazorBoomerang extends CardImpl {
 
     public RazorBoomerang(UUID ownerId) {
         super(ownerId, 129, "Razor Boomerang", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

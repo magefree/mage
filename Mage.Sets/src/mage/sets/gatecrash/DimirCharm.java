@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class DimirCharm extends CardImpl<DimirCharm> {
+public class DimirCharm extends CardImpl {
     
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature with power 2 or less");
     private static final FilterSpell filterSorcery = new FilterSpell("sorcery spell");

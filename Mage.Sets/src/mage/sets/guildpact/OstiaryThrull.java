@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class OstiaryThrull extends CardImpl<OstiaryThrull> {
+public class OstiaryThrull extends CardImpl {
 
     public OstiaryThrull(UUID ownerId) {
         super(ownerId, 55, "Ostiary Thrull", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

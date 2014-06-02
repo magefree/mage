@@ -43,7 +43,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class MartialGlory extends CardImpl<MartialGlory> {
+public class MartialGlory extends CardImpl {
 
     public MartialGlory(UUID ownerId) {
         super(ownerId, 175, "Martial Glory", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{W}");

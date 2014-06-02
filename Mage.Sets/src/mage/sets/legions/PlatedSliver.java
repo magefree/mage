@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author cbt33
  */
-public class PlatedSliver extends CardImpl<PlatedSliver> {
+public class PlatedSliver extends CardImpl {
 
     public PlatedSliver(UUID ownerId) {
         super(ownerId, 19, "Plated Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

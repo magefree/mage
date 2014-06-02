@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class DroveOfElves extends CardImpl<DroveOfElves> {
+public class DroveOfElves extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("green permanents you control");
 

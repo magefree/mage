@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SnappingDrake extends CardImpl<SnappingDrake>{
+public class SnappingDrake extends CardImpl{
 
     public SnappingDrake(UUID ownerId) {
         super(ownerId, 72, "Snapping Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

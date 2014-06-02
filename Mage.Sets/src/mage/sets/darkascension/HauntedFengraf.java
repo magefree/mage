@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class HauntedFengraf extends CardImpl<HauntedFengraf> {
+public class HauntedFengraf extends CardImpl {
 
     public HauntedFengraf(UUID ownerId) {
         super(ownerId, 157, "Haunted Fengraf", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

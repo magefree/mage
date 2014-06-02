@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class SummonersPact extends CardImpl<SummonersPact> {
+public class SummonersPact extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("green creature card");
     static{

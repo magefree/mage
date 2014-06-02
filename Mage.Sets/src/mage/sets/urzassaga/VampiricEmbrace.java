@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class VampiricEmbrace extends CardImpl<VampiricEmbrace> {
+public class VampiricEmbrace extends CardImpl {
 
     public VampiricEmbrace(UUID ownerId) {
         super(ownerId, 164, "Vampiric Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

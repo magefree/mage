@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class StalkingBloodsucker extends CardImpl<StalkingBloodsucker> {
+public class StalkingBloodsucker extends CardImpl {
 
     public StalkingBloodsucker(UUID ownerId) {
         super(ownerId, 163, "Stalking Bloodsucker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

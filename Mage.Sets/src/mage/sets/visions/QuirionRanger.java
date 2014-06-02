@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class QuirionRanger extends CardImpl<QuirionRanger> {
+public class QuirionRanger extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
 

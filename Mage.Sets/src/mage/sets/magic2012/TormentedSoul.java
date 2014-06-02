@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class TormentedSoul extends CardImpl<TormentedSoul> {
+public class TormentedSoul extends CardImpl {
 
     public TormentedSoul(UUID ownerId) {
         super(ownerId, 114, "Tormented Soul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

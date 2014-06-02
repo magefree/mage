@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class DarkWithering extends CardImpl<DarkWithering> {
+public class DarkWithering extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

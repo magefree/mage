@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OozeFlux extends CardImpl<OozeFlux> {
+public class OozeFlux extends CardImpl {
 
     public OozeFlux(UUID ownerId) {
         super(ownerId, 128, "Ooze Flux", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

@@ -38,7 +38,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author North
  */
-public class RainOfBlades extends CardImpl<RainOfBlades> {
+public class RainOfBlades extends CardImpl {
 
     public RainOfBlades(UUID ownerId) {
         super(ownerId, 28, "Rain of Blades", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");

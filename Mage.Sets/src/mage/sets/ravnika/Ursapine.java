@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Ursapine extends CardImpl<Ursapine> {
+public class Ursapine extends CardImpl {
 
     public Ursapine(UUID ownerId) {
         super(ownerId, 188, "Ursapine", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

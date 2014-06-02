@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class MagusOfTheArena extends CardImpl<MagusOfTheArena> {
+public class MagusOfTheArena extends CardImpl {
 
     public MagusOfTheArena(UUID ownerId) {
         super(ownerId, 115, "Magus of the Arena", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
  *
  * @author Loki
  */
-public class Putrefax extends CardImpl<Putrefax> {
+public class Putrefax extends CardImpl {
 
     public Putrefax (UUID ownerId) {
         super(ownerId, 126, "Putrefax", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

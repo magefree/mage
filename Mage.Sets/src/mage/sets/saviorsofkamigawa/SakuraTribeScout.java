@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class SakuraTribeScout extends CardImpl<SakuraTribeScout> {
+public class SakuraTribeScout extends CardImpl {
 
     public SakuraTribeScout(UUID ownerId) {
         super(ownerId, 144, "Sakura-Tribe Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

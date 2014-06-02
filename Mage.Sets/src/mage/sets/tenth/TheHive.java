@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class TheHive extends CardImpl<TheHive> {
+public class TheHive extends CardImpl {
 
     public TheHive(UUID ownerId) {
         super(ownerId, 324, "The Hive", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class PrimevalShambler extends CardImpl<PrimevalShambler> {
+public class PrimevalShambler extends CardImpl {
 
     public PrimevalShambler(UUID ownerId) {
 		super(ownerId, 152, "Primeval Shambler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

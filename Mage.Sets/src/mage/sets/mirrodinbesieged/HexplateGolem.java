@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class HexplateGolem extends CardImpl<HexplateGolem> {
+public class HexplateGolem extends CardImpl {
 
     public HexplateGolem (UUID ownerId) {
         super(ownerId, 109, "Hexplate Golem", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

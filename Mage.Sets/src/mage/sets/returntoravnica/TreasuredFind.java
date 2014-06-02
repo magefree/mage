@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class TreasuredFind extends CardImpl<TreasuredFind> {
+public class TreasuredFind extends CardImpl {
 
     public TreasuredFind(UUID ownerId) {
         super(ownerId, 204, "Treasured Find", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}{G}");

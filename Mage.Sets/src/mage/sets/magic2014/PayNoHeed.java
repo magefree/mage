@@ -44,7 +44,7 @@ import mage.target.TargetSource;
  *
  * @author jeffwadsworth
  */
-public class PayNoHeed extends CardImpl<PayNoHeed> {
+public class PayNoHeed extends CardImpl {
 
     public PayNoHeed(UUID ownerId) {
         super(ownerId, 27, "Pay No Heed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

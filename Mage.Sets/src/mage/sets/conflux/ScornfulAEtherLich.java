@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ScornfulAEtherLich extends CardImpl<ScornfulAEtherLich> {
+public class ScornfulAEtherLich extends CardImpl {
 
     public ScornfulAEtherLich(UUID ownerId) {
         super(ownerId, 34, "Scornful AEther-Lich", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}");

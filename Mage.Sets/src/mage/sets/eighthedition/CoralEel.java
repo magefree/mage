@@ -38,7 +38,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CoralEel extends CardImpl<CoralEel> {
+public class CoralEel extends CardImpl {
 
     public CoralEel(UUID ownerId) {
         super(ownerId, 70, "Coral Eel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

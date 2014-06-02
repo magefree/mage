@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
- public class GoblinWarDrums1 extends CardImpl<GoblinWarDrums1> {
+ public class GoblinWarDrums1 extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
     static {

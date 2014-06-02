@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward
  */
-public class ChancellorOfTheTangle extends CardImpl<ChancellorOfTheTangle> {
+public class ChancellorOfTheTangle extends CardImpl {
 
     private static String abilityText = "at the beginning of your first main phase, add {G} to your mana pool";
 

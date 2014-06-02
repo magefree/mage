@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward
  */
-public class Mindshrieker extends CardImpl<Mindshrieker> {
+public class Mindshrieker extends CardImpl {
 
     public Mindshrieker(UUID ownerId) {
         super(ownerId, 67, "Mindshrieker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");

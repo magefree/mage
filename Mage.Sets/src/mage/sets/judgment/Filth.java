@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Backfir3
  */
-public class Filth extends CardImpl<Filth> {
+public class Filth extends CardImpl {
 
     private static final String ruleText = "As long as Filth is in your graveyard and you control a Swamp, creatures you control have swampwalk";
 

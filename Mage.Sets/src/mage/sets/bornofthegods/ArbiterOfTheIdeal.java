@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ArbiterOfTheIdeal extends CardImpl<ArbiterOfTheIdeal> {
+public class ArbiterOfTheIdeal extends CardImpl {
 
     public ArbiterOfTheIdeal(UUID ownerId) {
         super(ownerId, 31, "Arbiter of the Ideal", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

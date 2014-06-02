@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class Bribery extends CardImpl<Bribery> {
+public class Bribery extends CardImpl {
 
     public Bribery(UUID ownerId) {
         super(ownerId, 62, "Bribery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

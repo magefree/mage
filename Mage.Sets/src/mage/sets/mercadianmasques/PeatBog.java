@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class PeatBog extends CardImpl<PeatBog> {
+public class PeatBog extends CardImpl {
 
     public PeatBog(UUID ownerId) {
         super(ownerId, 322, "Peat Bog", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

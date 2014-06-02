@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX
  */
-public class KamiOfTheHonoredDead extends CardImpl<KamiOfTheHonoredDead> {
+public class KamiOfTheHonoredDead extends CardImpl {
 
     public KamiOfTheHonoredDead(UUID ownerId) {
         super(ownerId, 12, "Kami of the Honored Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

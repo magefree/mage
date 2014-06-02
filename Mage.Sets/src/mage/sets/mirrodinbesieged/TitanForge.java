@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class TitanForge extends CardImpl<TitanForge> {
+public class TitanForge extends CardImpl {
 
     public TitanForge (UUID ownerId) {
         super(ownerId, 141, "Titan Forge", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

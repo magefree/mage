@@ -42,7 +42,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Plopman
  */
-public class PactOfTheTitan extends CardImpl<PactOfTheTitan> {
+public class PactOfTheTitan extends CardImpl {
 
     public PactOfTheTitan(UUID ownerId) {
         super(ownerId, 103, "Pact of the Titan", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{0}");

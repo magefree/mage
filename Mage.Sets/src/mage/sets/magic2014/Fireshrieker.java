@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class Fireshrieker extends CardImpl<Fireshrieker> {
+public class Fireshrieker extends CardImpl {
 
     public Fireshrieker(UUID ownerId) {
         super(ownerId, 210, "Fireshrieker", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

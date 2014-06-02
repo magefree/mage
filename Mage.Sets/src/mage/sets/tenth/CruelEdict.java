@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class CruelEdict extends CardImpl<CruelEdict> {
+public class CruelEdict extends CardImpl {
 
     public CruelEdict(UUID ownerId) {
         super(ownerId, 133, "Cruel Edict", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");

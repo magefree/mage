@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GoblinBushwhacker extends CardImpl<GoblinBushwhacker> {
+public class GoblinBushwhacker extends CardImpl {
 
     public GoblinBushwhacker(UUID ownerId) {
         super(ownerId, 125, "Goblin Bushwhacker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

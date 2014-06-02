@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class ManaclesOfDecay extends CardImpl<ManaclesOfDecay> {
+public class ManaclesOfDecay extends CardImpl {
 
     public ManaclesOfDecay(UUID ownerId) {
         super(ownerId, 14, "Manacles of Decay", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

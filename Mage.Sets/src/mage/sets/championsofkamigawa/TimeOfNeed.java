@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
 /**
  * @author Loki
  */
-public class TimeOfNeed extends CardImpl<TimeOfNeed> {
+public class TimeOfNeed extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("legendary creature card");
 

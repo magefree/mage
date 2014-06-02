@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class LordOfShatterskullPass extends CardImpl<LordOfShatterskullPass> {
+public class LordOfShatterskullPass extends CardImpl {
 
     public LordOfShatterskullPass(UUID ownerId) {
         super(ownerId, 156, "Lord of Shatterskull Pass", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");

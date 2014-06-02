@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PallidMycoderm extends CardImpl<PallidMycoderm> {
+public class PallidMycoderm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature you control that's a Fungus or a Saproling");
     private static final FilterControlledCreaturePermanent filterSaproling = new FilterControlledCreaturePermanent("Saproling");

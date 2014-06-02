@@ -51,7 +51,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class OloroAgelessAscetic extends CardImpl<OloroAgelessAscetic> {
+public class OloroAgelessAscetic extends CardImpl {
 
     public OloroAgelessAscetic(UUID ownerId) {
         super(ownerId, 203, "Oloro, Ageless Ascetic", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{U}{B}");

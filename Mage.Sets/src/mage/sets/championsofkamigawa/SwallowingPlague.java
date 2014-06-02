@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SwallowingPlague extends CardImpl<SwallowingPlague> {
+public class SwallowingPlague extends CardImpl {
 
     public SwallowingPlague (UUID ownerId) {
         super(ownerId, 146, "Swallowing Plague", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");

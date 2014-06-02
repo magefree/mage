@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  * 
  * @author Rafbill
  */
-public class FrightfulDelusion extends CardImpl<FrightfulDelusion> {
+public class FrightfulDelusion extends CardImpl {
 
     public FrightfulDelusion(UUID ownerId) {
         super(ownerId, 57, "Frightful Delusion", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

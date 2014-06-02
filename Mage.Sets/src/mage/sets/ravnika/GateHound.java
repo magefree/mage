@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author North
  */
-public class GateHound extends CardImpl<GateHound> {
+public class GateHound extends CardImpl {
 
     public GateHound(UUID ownerId) {
         super(ownerId, 19, "Gate Hound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

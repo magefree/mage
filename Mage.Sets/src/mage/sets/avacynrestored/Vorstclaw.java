@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Vorstclaw extends CardImpl<Vorstclaw> {
+public class Vorstclaw extends CardImpl {
 
     public Vorstclaw(UUID ownerId) {
         super(ownerId, 201, "Vorstclaw", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

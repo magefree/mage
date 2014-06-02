@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class MultanisAcolyte extends CardImpl<MultanisAcolyte> {
+public class MultanisAcolyte extends CardImpl {
 
     public MultanisAcolyte(UUID ownerId) {
         super(ownerId, 108, "Multani's Acolyte", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");

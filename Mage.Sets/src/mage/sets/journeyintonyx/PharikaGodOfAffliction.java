@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class PharikaGodOfAffliction extends CardImpl<PharikaGodOfAffliction> {
+public class PharikaGodOfAffliction extends CardImpl {
 
     public PharikaGodOfAffliction(UUID ownerId) {
         super(ownerId, 154, "Pharika, God of Affliction", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{G}");

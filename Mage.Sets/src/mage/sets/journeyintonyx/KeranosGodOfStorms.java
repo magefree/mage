@@ -55,7 +55,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class KeranosGodOfStorms extends CardImpl<KeranosGodOfStorms> {
+public class KeranosGodOfStorms extends CardImpl {
 
     
     public KeranosGodOfStorms(UUID ownerId) {

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MarkovsServant extends CardImpl<MarkovsServant> {
+public class MarkovsServant extends CardImpl {
 
     public MarkovsServant(UUID ownerId) {
         super(ownerId, 55, "Markov's Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, null);

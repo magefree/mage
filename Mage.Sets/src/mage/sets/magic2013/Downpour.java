@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Downpour extends CardImpl<Downpour> {
+public class Downpour extends CardImpl {
 
     public Downpour(UUID ownerId) {
         super(ownerId, 48, "Downpour", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

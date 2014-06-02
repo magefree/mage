@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jonubuu
  */
-public class PenumbraSpider extends CardImpl<PenumbraSpider> {
+public class PenumbraSpider extends CardImpl {
 
     public PenumbraSpider(UUID ownerId) {
         super(ownerId, 73, "Penumbra Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

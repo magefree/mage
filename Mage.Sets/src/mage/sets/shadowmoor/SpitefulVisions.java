@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class SpitefulVisions extends CardImpl<SpitefulVisions> {
+public class SpitefulVisions extends CardImpl {
 
     public SpitefulVisions(UUID ownerId) {
         super(ownerId, 198, "Spiteful Visions", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B/R}{B/R}");

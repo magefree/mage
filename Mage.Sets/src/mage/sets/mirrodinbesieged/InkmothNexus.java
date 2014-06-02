@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class InkmothNexus extends CardImpl<InkmothNexus> {
+public class InkmothNexus extends CardImpl {
 
     public InkmothNexus (UUID ownerId) {
         super(ownerId, 145, "Inkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);

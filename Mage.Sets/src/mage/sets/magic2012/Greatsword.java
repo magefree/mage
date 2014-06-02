@@ -43,7 +43,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class Greatsword extends CardImpl<Greatsword> {
+public class Greatsword extends CardImpl {
 
     public Greatsword(UUID ownerId) {
         super(ownerId, 209, "Greatsword", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

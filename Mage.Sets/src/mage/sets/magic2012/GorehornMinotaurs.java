@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GorehornMinotaurs extends CardImpl<GorehornMinotaurs> {
+public class GorehornMinotaurs extends CardImpl {
 
     public GorehornMinotaurs(UUID ownerId) {
         super(ownerId, 144, "Gorehorn Minotaurs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

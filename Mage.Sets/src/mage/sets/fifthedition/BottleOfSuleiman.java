@@ -50,7 +50,7 @@ import mage.ObjectColor;
  *
  * @author KholdFuzion
  */
-public class BottleOfSuleiman extends CardImpl<BottleOfSuleiman> {
+public class BottleOfSuleiman extends CardImpl {
 
     public BottleOfSuleiman(UUID ownerId) {
         super(ownerId, 354, "Bottle of Suleiman", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

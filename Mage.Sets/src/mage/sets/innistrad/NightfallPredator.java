@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class NightfallPredator extends CardImpl<NightfallPredator> {
+public class NightfallPredator extends CardImpl {
 
     public NightfallPredator(UUID ownerId) {
         super(ownerId, 176, "Nightfall Predator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");

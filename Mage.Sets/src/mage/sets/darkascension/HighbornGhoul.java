@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HighbornGhoul extends CardImpl<HighbornGhoul> {
+public class HighbornGhoul extends CardImpl {
 
     public HighbornGhoul(UUID ownerId) {
         super(ownerId, 68, "Highborn Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");

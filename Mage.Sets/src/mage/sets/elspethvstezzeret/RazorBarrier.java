@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class RazorBarrier extends CardImpl<RazorBarrier> {
+public class RazorBarrier extends CardImpl {
 
     public RazorBarrier(UUID ownerId) {
         super(ownerId, 26, "Razor Barrier", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Countermand extends CardImpl<Countermand> {
+public class Countermand extends CardImpl {
 
     public Countermand(UUID ownerId) {
         super(ownerId, 33, "Countermand", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class Archivist extends CardImpl<Archivist> {
+public class Archivist extends CardImpl {
 
     public Archivist(UUID ownerId) {
         super(ownerId, 26, "Archivist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

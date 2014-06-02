@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class RangersPath extends CardImpl<RangersPath> {
+public class RangersPath extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("Forest cards");
 

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WallOfDenial extends CardImpl<WallOfDenial> {
+public class WallOfDenial extends CardImpl {
 
     public WallOfDenial (UUID ownerId) {
         super(ownerId, 16, "Wall of Denial", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");

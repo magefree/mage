@@ -44,7 +44,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
  *
  * @author jeffwadsworth
  */
-public class Equilibrium extends CardImpl<Equilibrium> {
+public class Equilibrium extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a creature spell");
     

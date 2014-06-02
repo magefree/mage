@@ -59,7 +59,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class KabiraEvangel extends CardImpl<KabiraEvangel> {
+public class KabiraEvangel extends CardImpl {
 
     public KabiraEvangel(UUID ownerId) {
         super(ownerId, 15, "Kabira Evangel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");

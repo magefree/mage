@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author North
  */
-public class Skinshifter extends CardImpl<Skinshifter> {
+public class Skinshifter extends CardImpl {
 
     public Skinshifter(UUID ownerId) {
         super(ownerId, 195, "Skinshifter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

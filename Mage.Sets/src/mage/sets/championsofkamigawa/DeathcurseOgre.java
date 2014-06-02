@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DeathcurseOgre extends CardImpl<DeathcurseOgre> {
+public class DeathcurseOgre extends CardImpl {
 
     public DeathcurseOgre (UUID ownerId) {
         super(ownerId, 109, "Deathcurse Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");

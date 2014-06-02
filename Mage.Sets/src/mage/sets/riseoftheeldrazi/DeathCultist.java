@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class DeathCultist extends CardImpl<DeathCultist> {
+public class DeathCultist extends CardImpl {
 
     public DeathCultist(UUID ownerId) {
         super(ownerId, 105, "Death Cultist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

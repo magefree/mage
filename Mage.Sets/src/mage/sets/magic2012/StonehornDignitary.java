@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author nantuko
  */
-public class StonehornDignitary extends CardImpl<StonehornDignitary> {
+public class StonehornDignitary extends CardImpl {
 
     public StonehornDignitary(UUID ownerId) {
         super(ownerId, 37, "Stonehorn Dignitary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

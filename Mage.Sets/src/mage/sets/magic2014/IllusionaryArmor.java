@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class IllusionaryArmor extends CardImpl<IllusionaryArmor> {
+public class IllusionaryArmor extends CardImpl {
 
     public IllusionaryArmor(UUID ownerId) {
         super(ownerId, 59, "Illusionary Armor", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");

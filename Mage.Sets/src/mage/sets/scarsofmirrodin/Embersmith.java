@@ -50,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 /**
  * @author Loki, North
  */
-public class Embersmith extends CardImpl<Embersmith> {
+public class Embersmith extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an artifact spell");
     static {

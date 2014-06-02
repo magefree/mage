@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AkroanMastiff extends CardImpl<AkroanMastiff> {
+public class AkroanMastiff extends CardImpl {
 
     public AkroanMastiff(UUID ownerId) {
         super(ownerId, 3, "Akroan Mastiff", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author maurer.it_at_gmail.com
  */
-public class GlimmerpointStag extends CardImpl<GlimmerpointStag> {
+public class GlimmerpointStag extends CardImpl {
 
     public GlimmerpointStag(UUID ownerId) {
         super(ownerId, 9, "Glimmerpoint Stag", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

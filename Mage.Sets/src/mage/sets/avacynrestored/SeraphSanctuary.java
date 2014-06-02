@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class SeraphSanctuary extends CardImpl<SeraphSanctuary> {
+public class SeraphSanctuary extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("an Angel");
     static {

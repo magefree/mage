@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class EnormousBaloth extends CardImpl<EnormousBaloth> {
+public class EnormousBaloth extends CardImpl {
 
     public EnormousBaloth(UUID ownerId) {
         super(ownerId, 180, "Enormous Baloth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");

@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class ThranLens extends CardImpl<ThranLens> {
+public class ThranLens extends CardImpl {
 
     public ThranLens(UUID ownerId) {
         super(ownerId, 133, "Thran Lens", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

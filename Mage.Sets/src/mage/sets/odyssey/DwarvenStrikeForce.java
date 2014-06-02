@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class DwarvenStrikeForce extends CardImpl<DwarvenStrikeForce> {
+public class DwarvenStrikeForce extends CardImpl {
 
     public DwarvenStrikeForce(UUID ownerId) {
         super(ownerId, 188, "Dwarven Strike Force", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

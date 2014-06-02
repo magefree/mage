@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class WorstFears extends CardImpl<WorstFears> {
+public class WorstFears extends CardImpl {
 
     public WorstFears(UUID ownerId) {
         super(ownerId, 87, "Worst Fears", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{B}");

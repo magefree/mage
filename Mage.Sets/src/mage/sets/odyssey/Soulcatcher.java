@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author cbt33
  */
-public class Soulcatcher extends CardImpl<Soulcatcher> {
+public class Soulcatcher extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with flying");
     

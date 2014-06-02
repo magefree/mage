@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ChandrasSpitfire extends CardImpl<ChandrasSpitfire> {
+public class ChandrasSpitfire extends CardImpl {
 
     public ChandrasSpitfire(UUID ownerId) {
         super(ownerId, 129, "Chandra's Spitfire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

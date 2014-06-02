@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Noahsark
  */
-public class GuardianOfTheAges extends CardImpl<GuardianOfTheAges>{
+public class GuardianOfTheAges extends CardImpl{
     public GuardianOfTheAges(UUID ownerId){
         super(ownerId, 211, "Guardian of the Ages", Rarity.RARE, new CardType[]{CardType.CREATURE, CardType.ARTIFACT}, "{7}");
         this.expansionSetCode = "M14";

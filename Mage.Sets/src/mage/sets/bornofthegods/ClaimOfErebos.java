@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ClaimOfErebos extends CardImpl<ClaimOfErebos> {
+public class ClaimOfErebos extends CardImpl {
 
     public ClaimOfErebos(UUID ownerId) {
         super(ownerId, 64, "Claim of Erebos", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

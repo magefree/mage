@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class WitchHunt extends CardImpl<WitchHunt> {
+public class WitchHunt extends CardImpl {
 
     public WitchHunt(UUID ownerId) {
         super(ownerId, 133, "Witch Hunt", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");

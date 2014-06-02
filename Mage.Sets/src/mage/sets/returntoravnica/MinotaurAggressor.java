@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class MinotaurAggressor extends CardImpl<MinotaurAggressor> {
+public class MinotaurAggressor extends CardImpl {
 
     public MinotaurAggressor (UUID ownerId) {
         super(ownerId, 100, "Minotaur Aggressor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{R}");

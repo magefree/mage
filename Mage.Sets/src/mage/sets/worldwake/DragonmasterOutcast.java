@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jeffwadsworth
  */
-public class DragonmasterOutcast extends CardImpl<DragonmasterOutcast> {
+public class DragonmasterOutcast extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("land");
 

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LightningAxe extends CardImpl<LightningAxe> {
+public class LightningAxe extends CardImpl {
 
     public LightningAxe(UUID ownerId) {
         super(ownerId, 168, "Lightning Axe", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

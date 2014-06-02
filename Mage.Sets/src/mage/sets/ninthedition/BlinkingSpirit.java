@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class BlinkingSpirit extends CardImpl<BlinkingSpirit> {
+public class BlinkingSpirit extends CardImpl {
 
     public BlinkingSpirit(UUID ownerId) {
         super(ownerId, 8, "Blinking Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");

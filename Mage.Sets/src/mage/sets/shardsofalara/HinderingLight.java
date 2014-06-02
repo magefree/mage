@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class HinderingLight extends CardImpl<HinderingLight> {
+public class HinderingLight extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell that targets you or a permanent you control");
 

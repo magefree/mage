@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class WarTorchGoblin extends CardImpl<WarTorchGoblin> {
+public class WarTorchGoblin extends CardImpl {
 
     public WarTorchGoblin(UUID ownerId) {
         super(ownerId, 151, "War-Torch Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

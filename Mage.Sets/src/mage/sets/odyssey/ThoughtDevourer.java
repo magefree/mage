@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ThoughtDevourer extends CardImpl<ThoughtDevourer> {
+public class ThoughtDevourer extends CardImpl {
 
     public ThoughtDevourer(UUID ownerId) {
         super(ownerId, 105, "Thought Devourer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

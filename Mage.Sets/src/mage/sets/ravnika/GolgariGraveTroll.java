@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author jonubuu
  */
-public class GolgariGraveTroll extends CardImpl<GolgariGraveTroll> {
+public class GolgariGraveTroll extends CardImpl {
 
     public GolgariGraveTroll(UUID ownerId) {
         super(ownerId, 167, "Golgari Grave-Troll", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");

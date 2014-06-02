@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class CrimsonHellkite extends CardImpl<CrimsonHellkite> {
+public class CrimsonHellkite extends CardImpl {
 
     private static final FilterMana filterRedMana = new FilterMana();
 

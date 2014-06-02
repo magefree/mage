@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class LeoninDenGuard extends CardImpl<LeoninDenGuard> {
+public class LeoninDenGuard extends CardImpl {
 
     private static final String rule1 = "As long as {this} is equipped, it gets +1/+1";
     private static final String rule2 = "As long as {this} is equipped, it has vigilance";

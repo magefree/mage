@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class VolcanicDragon extends CardImpl<VolcanicDragon> {
+public class VolcanicDragon extends CardImpl {
 
     public VolcanicDragon(UUID ownerId) {
         super(ownerId, 158, "Volcanic Dragon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

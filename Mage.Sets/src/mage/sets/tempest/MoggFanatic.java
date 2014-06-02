@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class MoggFanatic extends CardImpl<MoggFanatic> {
+public class MoggFanatic extends CardImpl {
 
     public MoggFanatic(UUID ownerId) {
         super(ownerId, 190, "Mogg Fanatic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

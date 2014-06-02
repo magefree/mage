@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SeacoastDrake extends CardImpl<SeacoastDrake> {
+public class SeacoastDrake extends CardImpl {
 
     public SeacoastDrake(UUID ownerId) {
         super(ownerId, 70, "Seacoast Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

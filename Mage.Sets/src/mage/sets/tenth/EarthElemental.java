@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class EarthElemental extends CardImpl<EarthElemental> {
+public class EarthElemental extends CardImpl {
 
     public EarthElemental (UUID ownerId) {
         super(ownerId, 199, "Earth Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

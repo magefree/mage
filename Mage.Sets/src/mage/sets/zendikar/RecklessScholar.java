@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class RecklessScholar extends CardImpl<RecklessScholar> {
+public class RecklessScholar extends CardImpl {
 
     public RecklessScholar(UUID ownerId) {
         super(ownerId, 60, "Reckless Scholar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author North, Loki
  */
-public class ArchonOfJustice extends CardImpl<ArchonOfJustice> {
+public class ArchonOfJustice extends CardImpl {
 
     public ArchonOfJustice(UUID ownerId) {
         super(ownerId, 1, "Archon of Justice", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

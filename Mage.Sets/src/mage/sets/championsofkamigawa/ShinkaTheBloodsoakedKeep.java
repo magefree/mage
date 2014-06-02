@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class ShinkaTheBloodsoakedKeep extends CardImpl<ShinkaTheBloodsoakedKeep> {
+public class ShinkaTheBloodsoakedKeep extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 

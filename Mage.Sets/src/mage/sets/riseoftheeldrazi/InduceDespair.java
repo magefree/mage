@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class InduceDespair extends CardImpl<InduceDespair> {
+public class InduceDespair extends CardImpl {
     
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from your hand");
 

@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class Peek extends CardImpl<Peek> {
+public class Peek extends CardImpl {
 
     public Peek(UUID ownerId) {
         super(ownerId, 94, "Peek", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

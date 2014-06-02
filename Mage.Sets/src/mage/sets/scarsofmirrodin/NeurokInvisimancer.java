@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class NeurokInvisimancer extends CardImpl<NeurokInvisimancer> {
+public class NeurokInvisimancer extends CardImpl {
 
     public NeurokInvisimancer (UUID ownerId) {
         super(ownerId, 37, "Neurok Invisimancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SomberwaldVigilante extends CardImpl<SomberwaldVigilante> {
+public class SomberwaldVigilante extends CardImpl {
 
     public SomberwaldVigilante(UUID ownerId) {
         super(ownerId, 156, "Somberwald Vigilante", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

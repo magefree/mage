@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HypervoltGrasp extends CardImpl<HypervoltGrasp> {
+public class HypervoltGrasp extends CardImpl {
 
     public HypervoltGrasp(UUID ownerId) {
         super(ownerId, 67, "Hypervolt Grasp", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

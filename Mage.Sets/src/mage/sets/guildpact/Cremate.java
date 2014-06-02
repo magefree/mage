@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Loki
  */
-public class Cremate extends CardImpl<Cremate> {
+public class Cremate extends CardImpl {
 
     public Cremate(UUID ownerId) {
         super(ownerId, 45, "Cremate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

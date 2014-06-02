@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class FontOfIre extends CardImpl<FontOfIre> {
+public class FontOfIre extends CardImpl {
 
     public FontOfIre(UUID ownerId) {
         super(ownerId, 97, "Font of Ire", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

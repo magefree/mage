@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class ThicketBasilisk extends CardImpl<ThicketBasilisk> {
+public class ThicketBasilisk extends CardImpl {
 
     public ThicketBasilisk(UUID ownerId) {
         super(ownerId, 127, "Thicket Basilisk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

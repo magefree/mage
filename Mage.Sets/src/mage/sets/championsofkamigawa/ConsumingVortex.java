@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ConsumingVortex extends CardImpl<ConsumingVortex> {
+public class ConsumingVortex extends CardImpl {
 
     public ConsumingVortex(UUID ownerId) {
         super(ownerId, 54, "Consuming Vortex", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SouthernElephant extends CardImpl<SouthernElephant> {
+public class SouthernElephant extends CardImpl {
 
     public SouthernElephant(UUID ownerId) {
         super(ownerId, 146, "Southern Elephant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

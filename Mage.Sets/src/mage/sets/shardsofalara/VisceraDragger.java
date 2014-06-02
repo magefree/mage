@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class VisceraDragger extends CardImpl<VisceraDragger> {
+public class VisceraDragger extends CardImpl {
 
     public VisceraDragger(UUID ownerId) {
         super(ownerId, 92, "Viscera Dragger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

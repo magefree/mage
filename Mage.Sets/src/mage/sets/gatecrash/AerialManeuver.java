@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AerialManeuver extends CardImpl<AerialManeuver> {
+public class AerialManeuver extends CardImpl {
 
     public AerialManeuver(UUID ownerId) {
         super(ownerId, 1, "Aerial Maneuver", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

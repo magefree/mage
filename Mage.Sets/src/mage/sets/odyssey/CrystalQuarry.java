@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class CrystalQuarry extends CardImpl<CrystalQuarry> {
+public class CrystalQuarry extends CardImpl {
 
     public CrystalQuarry(UUID ownerId) {
         super(ownerId, 318, "Crystal Quarry", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Backfir3
  */
-public class BallistaSquad extends CardImpl<BallistaSquad> {
+public class BallistaSquad extends CardImpl {
 
     public BallistaSquad(UUID ownerId) {
         super(ownerId, 5, "Ballista Squad", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

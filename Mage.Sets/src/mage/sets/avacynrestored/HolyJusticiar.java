@@ -47,7 +47,7 @@ import mage.game.Game;
  *
  * @author jeffwadsworth
  */
-public class HolyJusticiar extends CardImpl<HolyJusticiar> {
+public class HolyJusticiar extends CardImpl {
 
     public HolyJusticiar(UUID ownerId) {
         super(ownerId, 25, "Holy Justiciar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

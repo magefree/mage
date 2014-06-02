@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class Gigapede extends CardImpl<Gigapede> {
+public class Gigapede extends CardImpl {
 
     public Gigapede(UUID ownerId) {
         super(ownerId, 264, "Gigapede", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

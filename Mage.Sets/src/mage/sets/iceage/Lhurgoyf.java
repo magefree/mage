@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class Lhurgoyf extends CardImpl<Lhurgoyf> {
+public class Lhurgoyf extends CardImpl {
 
     public Lhurgoyf(UUID ownerId) {
         super(ownerId, 140, "Lhurgoyf", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

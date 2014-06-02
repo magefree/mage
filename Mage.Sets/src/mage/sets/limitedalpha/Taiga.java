@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class Taiga extends CardImpl<Taiga> {
+public class Taiga extends CardImpl {
 
     public Taiga(UUID ownerId) {
         super(ownerId, 292, "Taiga", Rarity.RARE, new CardType[]{CardType.LAND}, "");

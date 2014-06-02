@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class JinGitaxiasCoreAugur extends CardImpl<JinGitaxiasCoreAugur> {
+public class JinGitaxiasCoreAugur extends CardImpl {
 
     public JinGitaxiasCoreAugur(UUID ownerId) {
         super(ownerId, 37, "Jin-Gitaxias, Core Augur", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{8}{U}{U}");

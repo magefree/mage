@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class CruelRevival extends CardImpl<CruelRevival> {
+public class CruelRevival extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creature");
     private final static FilterCard filter2 = new FilterCard("Zombie card from your graveyard");

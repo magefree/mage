@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class PlatedWurm extends CardImpl<PlatedWurm> {
+public class PlatedWurm extends CardImpl {
 
     public PlatedWurm(UUID ownerId) {
         super(ownerId, 81, "Plated Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

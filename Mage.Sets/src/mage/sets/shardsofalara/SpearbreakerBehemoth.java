@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SpearbreakerBehemoth extends CardImpl<SpearbreakerBehemoth> {
+public class SpearbreakerBehemoth extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 

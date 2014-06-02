@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author North
  */
-public class SpiderSpawning extends CardImpl<SpiderSpawning> {
+public class SpiderSpawning extends CardImpl {
 
     public SpiderSpawning(UUID ownerId) {
         super(ownerId, 203, "Spider Spawning", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");

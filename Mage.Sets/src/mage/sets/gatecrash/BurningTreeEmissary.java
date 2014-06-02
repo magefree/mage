@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class BurningTreeEmissary extends CardImpl<BurningTreeEmissary> {
+public class BurningTreeEmissary extends CardImpl {
 
     public BurningTreeEmissary(UUID ownerId) {
         super(ownerId, 216, "Burning-Tree Emissary", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R/G}{R/G}");

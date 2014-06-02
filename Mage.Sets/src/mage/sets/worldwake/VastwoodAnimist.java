@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class VastwoodAnimist extends CardImpl<VastwoodAnimist> {
+public class VastwoodAnimist extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

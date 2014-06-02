@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class AzusaLostButSeeking extends CardImpl<AzusaLostButSeeking> {
+public class AzusaLostButSeeking extends CardImpl {
 
     public AzusaLostButSeeking (UUID ownerId) {
         super(ownerId, 201, "Azusa, Lost but Seeking", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

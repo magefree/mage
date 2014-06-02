@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class ZombieGoliath extends CardImpl<ZombieGoliath> {
+public class ZombieGoliath extends CardImpl {
 
     public ZombieGoliath(UUID ownerId) {
         super(ownerId, 119, "Zombie Goliath", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

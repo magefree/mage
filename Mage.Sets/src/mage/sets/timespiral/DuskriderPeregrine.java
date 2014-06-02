@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class DuskriderPeregrine extends CardImpl<DuskriderPeregrine> {
+public class DuskriderPeregrine extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Black");
     static {

@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GriffinGuide extends CardImpl<GriffinGuide> {
+public class GriffinGuide extends CardImpl {
 
     public GriffinGuide(UUID ownerId) {
         super(ownerId, 21, "Griffin Guide", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

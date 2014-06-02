@@ -45,7 +45,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author LevelX2
  */
-public class Mycoloth extends CardImpl<Mycoloth> {
+public class Mycoloth extends CardImpl {
 
     public Mycoloth(UUID ownerId) {
         super(ownerId, 140, "Mycoloth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

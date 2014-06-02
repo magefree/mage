@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class ThornscapeFamiliar extends CardImpl<ThornscapeFamiliar> {
+public class ThornscapeFamiliar extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Red spells and white spells");
 

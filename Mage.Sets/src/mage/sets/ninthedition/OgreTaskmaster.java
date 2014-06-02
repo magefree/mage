@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class OgreTaskmaster extends CardImpl<OgreTaskmaster> {
+public class OgreTaskmaster extends CardImpl {
 
     public OgreTaskmaster(UUID ownerId) {
         super(ownerId, 205, "Ogre Taskmaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class HeroOfIroas extends CardImpl<HeroOfIroas> {
+public class HeroOfIroas extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Aura spells");
     static {

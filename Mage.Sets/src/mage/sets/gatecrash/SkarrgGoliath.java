@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SkarrgGoliath extends CardImpl<SkarrgGoliath> {
+public class SkarrgGoliath extends CardImpl {
 
     public SkarrgGoliath(UUID ownerId) {
         super(ownerId, 133, "Skarrg Goliath", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

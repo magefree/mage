@@ -49,7 +49,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author jeffwadsworth
  */
-public class BazaarKrovod extends CardImpl<BazaarKrovod> {
+public class BazaarKrovod extends CardImpl {
 
     static final FilterAttackingCreature filter = new FilterAttackingCreature("another target attacking creature");
 

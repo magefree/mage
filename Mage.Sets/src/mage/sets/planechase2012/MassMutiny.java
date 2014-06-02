@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class MassMutiny extends CardImpl<MassMutiny> {
+public class MassMutiny extends CardImpl {
 
     public MassMutiny(UUID ownerId) {
         super(ownerId, 48, "Mass Mutiny", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

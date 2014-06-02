@@ -47,7 +47,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class TeferisPuzzleBox extends CardImpl<TeferisPuzzleBox> {
+public class TeferisPuzzleBox extends CardImpl {
 
     public TeferisPuzzleBox(UUID ownerId) {
         super(ownerId, 312, "Teferi's Puzzle Box", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

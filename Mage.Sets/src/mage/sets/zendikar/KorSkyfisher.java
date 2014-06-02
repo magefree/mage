@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class KorSkyfisher extends CardImpl<KorSkyfisher> {
+public class KorSkyfisher extends CardImpl {
 
     public KorSkyfisher (UUID ownerId) {
         super(ownerId, 23, "Kor Skyfisher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

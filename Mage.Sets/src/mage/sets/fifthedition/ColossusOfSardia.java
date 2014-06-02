@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class ColossusOfSardia extends CardImpl<ColossusOfSardia> {
+public class ColossusOfSardia extends CardImpl {
 
     public ColossusOfSardia(UUID ownerId) {
         super(ownerId, 358, "Colossus of Sardia", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{9}");

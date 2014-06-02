@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class KnightOfMeadowgrain extends CardImpl<KnightOfMeadowgrain> {
+public class KnightOfMeadowgrain extends CardImpl {
 
     public KnightOfMeadowgrain(UUID ownerId) {
         super(ownerId, 28, "Knight of Meadowgrain", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

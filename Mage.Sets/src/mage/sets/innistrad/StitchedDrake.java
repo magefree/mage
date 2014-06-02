@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class StitchedDrake extends CardImpl<StitchedDrake> {
+public class StitchedDrake extends CardImpl {
 
     public StitchedDrake(UUID ownerId) {
         super(ownerId, 80, "Stitched Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

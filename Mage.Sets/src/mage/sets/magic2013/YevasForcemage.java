@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class YevasForcemage extends CardImpl<YevasForcemage> {
+public class YevasForcemage extends CardImpl {
 
     public YevasForcemage(UUID ownerId) {
         super(ownerId, 198, "Yeva's Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

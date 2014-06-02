@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class RatsOfRath extends CardImpl<RatsOfRath> {
+public class RatsOfRath extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact, creature, or land you control");
 

@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CavernThoctar extends CardImpl<CavernThoctar> {
+public class CavernThoctar extends CardImpl {
 
     public CavernThoctar (UUID ownerId) {
         super(ownerId, 125, "Cavern Thoctar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");

@@ -56,7 +56,7 @@ import static mage.sets.commander2013.MysticBarrierChooseEffect.DIRECTION_CHOICE
  *
  * @author LevelX2
  */
-public class MysticBarrier extends CardImpl<MysticBarrier> {
+public class MysticBarrier extends CardImpl {
 
     public static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
     public static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";

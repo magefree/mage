@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class VizkopaConfessor extends CardImpl<VizkopaConfessor> {
+public class VizkopaConfessor extends CardImpl {
 
     public VizkopaConfessor(UUID ownerId) {
         super(ownerId, 205, "Vizkopa Confessor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");

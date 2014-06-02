@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author cbt33, Level_X2 (Horn of Plenty)
  */
  
-public class UnifyingTheory extends CardImpl<UnifyingTheory> {
+public class UnifyingTheory extends CardImpl {
 
     public UnifyingTheory(UUID ownerId) {
         super(ownerId, 112, "Unifying Theory", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

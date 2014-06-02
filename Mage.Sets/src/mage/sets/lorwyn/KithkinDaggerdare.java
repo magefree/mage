@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class KithkinDaggerdare extends CardImpl<KithkinDaggerdare> {
+public class KithkinDaggerdare extends CardImpl {
 
     public KithkinDaggerdare(UUID ownerId) {
         super(ownerId, 223, "Kithkin Daggerdare", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

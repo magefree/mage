@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class DeepReconnaissance extends CardImpl<DeepReconnaissance> {
+public class DeepReconnaissance extends CardImpl {
 
     public DeepReconnaissance(UUID ownerId) {
         super(ownerId, 236, "Deep Reconnaissance", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");

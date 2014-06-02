@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class MagneticMine extends CardImpl<MagneticMine> {
+public class MagneticMine extends CardImpl {
 
     public MagneticMine(UUID ownerId) {
         super(ownerId, 113, "Magnetic Mine", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

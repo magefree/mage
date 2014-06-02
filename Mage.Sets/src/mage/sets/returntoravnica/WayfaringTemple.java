@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WayfaringTemple extends CardImpl<WayfaringTemple> {
+public class WayfaringTemple extends CardImpl {
 
     public WayfaringTemple(UUID ownerId) {
         super(ownerId, 209, "Wayfaring Temple", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");

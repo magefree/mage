@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class TrustedForcemage extends CardImpl<TrustedForcemage> {
+public class TrustedForcemage extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
 

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class GhostLitRedeemer extends CardImpl<GhostLitRedeemer> {
+public class GhostLitRedeemer extends CardImpl {
 
     public GhostLitRedeemer(UUID ownerId) {
         super(ownerId, 10, "Ghost-Lit Redeemer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");

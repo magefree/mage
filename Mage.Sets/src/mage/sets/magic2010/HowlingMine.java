@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class HowlingMine extends CardImpl<HowlingMine> {
+public class HowlingMine extends CardImpl {
 
     public HowlingMine(UUID ownerId) {
         super(ownerId, 212, "Howling Mine", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

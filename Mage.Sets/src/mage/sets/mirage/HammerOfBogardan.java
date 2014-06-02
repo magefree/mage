@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author jeffwadsworth
  *
  */
-public class HammerOfBogardan extends CardImpl<HammerOfBogardan> {
+public class HammerOfBogardan extends CardImpl {
 
     public HammerOfBogardan(UUID ownerId) {
         super(ownerId, 181, "Hammer of Bogardan", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

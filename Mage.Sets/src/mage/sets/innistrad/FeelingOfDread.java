@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class FeelingOfDread extends CardImpl<FeelingOfDread> {
+public class FeelingOfDread extends CardImpl {
 
     public FeelingOfDread(UUID ownerId) {
         super(ownerId, 14, "Feeling of Dread", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

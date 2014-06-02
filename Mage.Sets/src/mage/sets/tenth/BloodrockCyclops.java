@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BloodrockCyclops extends CardImpl<BloodrockCyclops> {
+public class BloodrockCyclops extends CardImpl {
 
     public BloodrockCyclops(UUID ownerId) {
         super(ownerId, 192, "Bloodrock Cyclops", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

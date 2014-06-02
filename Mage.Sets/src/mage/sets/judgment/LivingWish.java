@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class LivingWish extends CardImpl<LivingWish> {
+public class LivingWish extends CardImpl {
 
     public LivingWish(UUID ownerId) {
         super(ownerId, 124, "Living Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}");

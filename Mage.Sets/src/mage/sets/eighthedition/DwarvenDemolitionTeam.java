@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class DwarvenDemolitionTeam extends CardImpl<DwarvenDemolitionTeam> {
+public class DwarvenDemolitionTeam extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall");
     

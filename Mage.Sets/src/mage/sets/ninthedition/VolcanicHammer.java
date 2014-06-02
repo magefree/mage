@@ -38,7 +38,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class VolcanicHammer extends CardImpl<VolcanicHammer> {
+public class VolcanicHammer extends CardImpl {
 
     public VolcanicHammer(UUID ownerId) {
         super(ownerId, 226, "Volcanic Hammer", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

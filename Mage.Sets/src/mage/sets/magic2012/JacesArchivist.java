@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class JacesArchivist extends CardImpl<JacesArchivist> {
+public class JacesArchivist extends CardImpl {
 
     public JacesArchivist(UUID ownerId) {
         super(ownerId, 59, "Jace's Archivist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

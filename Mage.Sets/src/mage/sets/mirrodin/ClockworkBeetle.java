@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class ClockworkBeetle extends CardImpl<ClockworkBeetle> {
+public class ClockworkBeetle extends CardImpl {
 
     public ClockworkBeetle(UUID ownerId) {
         super(ownerId, 153, "Clockwork Beetle", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

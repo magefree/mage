@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KessigWolf extends CardImpl<KessigWolf> {
+public class KessigWolf extends CardImpl {
 
     public KessigWolf(UUID ownerId) {
         super(ownerId, 151, "Kessig Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

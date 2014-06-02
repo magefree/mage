@@ -42,7 +42,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EmeriaAngel extends CardImpl<EmeriaAngel> {
+public class EmeriaAngel extends CardImpl {
 
     public EmeriaAngel(UUID ownerId) {
         super(ownerId, 11, "Emeria Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

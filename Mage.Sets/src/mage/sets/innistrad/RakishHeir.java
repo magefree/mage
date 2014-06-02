@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class RakishHeir extends CardImpl<RakishHeir> {
+public class RakishHeir extends CardImpl {
 
     public RakishHeir(UUID ownerId) {
         super(ownerId, 158, "Rakish Heir", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

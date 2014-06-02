@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class ThousandleggedKami extends CardImpl<ThousandleggedKami> {
+public class ThousandleggedKami extends CardImpl {
 
     public ThousandleggedKami(UUID ownerId) {
         super(ownerId, 246, "Thousand-legged Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

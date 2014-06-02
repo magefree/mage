@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class StreamOfLife extends CardImpl<StreamOfLife> {
+public class StreamOfLife extends CardImpl {
 
     public StreamOfLife(UUID ownerId) {
         super(ownerId, 272, "Stream of Life", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{X}{G}");

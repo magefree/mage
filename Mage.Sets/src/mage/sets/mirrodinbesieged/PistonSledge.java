@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Viserion, North
  */
-public class PistonSledge extends CardImpl<PistonSledge> {
+public class PistonSledge extends CardImpl {
 
     private static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 

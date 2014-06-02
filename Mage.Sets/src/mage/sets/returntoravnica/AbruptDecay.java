@@ -47,7 +47,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class AbruptDecay extends CardImpl<AbruptDecay> {
+public class AbruptDecay extends CardImpl {
 
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent with converted mana cost 3 or less");
 

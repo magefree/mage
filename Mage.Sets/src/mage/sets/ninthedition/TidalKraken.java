@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class TidalKraken extends CardImpl<TidalKraken> {
+public class TidalKraken extends CardImpl {
 
     public TidalKraken(UUID ownerId) {
         super(ownerId, 105, "Tidal Kraken", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");

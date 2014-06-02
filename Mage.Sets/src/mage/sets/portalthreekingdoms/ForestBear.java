@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ForestBear extends CardImpl<ForestBear> {
+public class ForestBear extends CardImpl {
 
     public ForestBear(UUID ownerId) {
         super(ownerId, 135, "Forest Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

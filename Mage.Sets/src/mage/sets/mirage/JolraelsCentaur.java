@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class JolraelsCentaur extends CardImpl<JolraelsCentaur> {
+public class JolraelsCentaur extends CardImpl {
 
     public JolraelsCentaur(UUID ownerId) {
         super(ownerId, 120, "Jolrael's Centaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class RollickOfAbandon extends CardImpl<RollickOfAbandon> {
+public class RollickOfAbandon extends CardImpl {
 
     public RollickOfAbandon(UUID ownerId) {
         super(ownerId, 108, "Rollick of Abandon", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

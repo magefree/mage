@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class AkkiUnderminer extends CardImpl<AkkiUnderminer> {
+public class AkkiUnderminer extends CardImpl {
 
     public AkkiUnderminer (UUID ownerId) {
         super(ownerId, 155, "Akki Underminer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

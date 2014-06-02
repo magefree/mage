@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class PanicAttack extends CardImpl<PanicAttack> {
+public class PanicAttack extends CardImpl {
 
     public PanicAttack(UUID ownerId) {
         super(ownerId, 150, "Panic Attack", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");

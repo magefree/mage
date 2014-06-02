@@ -42,7 +42,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class RiseOfEagles extends CardImpl<RiseOfEagles> {
+public class RiseOfEagles extends CardImpl {
 
     public RiseOfEagles(UUID ownerId) {
         super(ownerId, 49, "Rise of Eagles", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");

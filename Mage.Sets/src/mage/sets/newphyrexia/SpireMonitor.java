@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SpireMonitor extends CardImpl<SpireMonitor> {
+public class SpireMonitor extends CardImpl {
 
     public SpireMonitor(UUID ownerId) {
         super(ownerId, 46, "Spire Monitor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Plopman
  */
-public class Obliterate extends CardImpl<Obliterate> {
+public class Obliterate extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, and lands");
     

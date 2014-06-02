@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CalderaLake extends CardImpl<CalderaLake> {
+public class CalderaLake extends CardImpl {
 
     public CalderaLake(UUID ownerId) {
         super(ownerId, 306, "Caldera Lake", Rarity.RARE, new CardType[]{CardType.LAND}, null);

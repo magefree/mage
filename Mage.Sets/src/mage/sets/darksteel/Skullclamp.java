@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class Skullclamp extends CardImpl<Skullclamp> {
+public class Skullclamp extends CardImpl {
 
     public Skullclamp(UUID ownerId) {
         super(ownerId, 140, "Skullclamp", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

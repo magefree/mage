@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class DeathDenied extends CardImpl<DeathDenied> {
+public class DeathDenied extends CardImpl {
 
     public DeathDenied(UUID ownerId) {
         super(ownerId, 63, "Death Denied", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{B}{B}");

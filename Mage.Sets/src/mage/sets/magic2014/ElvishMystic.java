@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ElvishMystic extends CardImpl<ElvishMystic> {
+public class ElvishMystic extends CardImpl {
 
     public ElvishMystic(UUID ownerId) {
         super(ownerId, 169, "Elvish Mystic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

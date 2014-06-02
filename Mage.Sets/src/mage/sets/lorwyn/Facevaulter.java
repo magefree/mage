@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Facevaulter extends CardImpl<Facevaulter> {
+public class Facevaulter extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
 

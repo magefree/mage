@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class SkillBorrower extends CardImpl<SkillBorrower> {
+public class SkillBorrower extends CardImpl {
 
     public SkillBorrower(UUID ownerId) {
         super(ownerId, 56, "Skill Borrower", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");

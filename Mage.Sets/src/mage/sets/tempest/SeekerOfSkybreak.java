@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SeekerOfSkybreak extends CardImpl<SeekerOfSkybreak> {
+public class SeekerOfSkybreak extends CardImpl {
 
     public SeekerOfSkybreak(UUID ownerId) {
         super(ownerId, 148, "Seeker of Skybreak", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author LevelX2
  */
-public class Skullsnatcher extends CardImpl<Skullsnatcher> {
+public class Skullsnatcher extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("unblocked attacker you control");
 

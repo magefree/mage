@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class CurseOfEchoes extends CardImpl<CurseOfEchoes> {
+public class CurseOfEchoes extends CardImpl {
 
     public CurseOfEchoes(UUID ownerId) {
         super(ownerId, 34, "Curse of Echoes", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");

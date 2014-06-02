@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class HighlandGiant extends CardImpl<HighlandGiant> {
+public class HighlandGiant extends CardImpl {
 
     public HighlandGiant(UUID ownerId) {
         super(ownerId, 137, "Highland Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

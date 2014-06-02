@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HollowhengeBeast extends CardImpl<HollowhengeBeast> {
+public class HollowhengeBeast extends CardImpl {
 
     public HollowhengeBeast(UUID ownerId) {
         super(ownerId, 118, "Hollowhenge Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

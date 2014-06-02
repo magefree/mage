@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class FlurryOfHorns extends CardImpl<FlurryOfHorns> {
+public class FlurryOfHorns extends CardImpl {
 
     public FlurryOfHorns(UUID ownerId) {
         super(ownerId, 96, "Flurry of Horns", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");

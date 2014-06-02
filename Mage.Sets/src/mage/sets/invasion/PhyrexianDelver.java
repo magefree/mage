@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class PhyrexianDelver extends CardImpl<PhyrexianDelver> {
+public class PhyrexianDelver extends CardImpl {
 
     public PhyrexianDelver(UUID ownerId) {
         super(ownerId, 115, "Phyrexian Delver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

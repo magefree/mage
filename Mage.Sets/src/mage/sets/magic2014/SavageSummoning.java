@@ -56,7 +56,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class SavageSummoning extends CardImpl<SavageSummoning> {
+public class SavageSummoning extends CardImpl {
 
     public SavageSummoning(UUID ownerId) {
         super(ownerId, 194, "Savage Summoning", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}");

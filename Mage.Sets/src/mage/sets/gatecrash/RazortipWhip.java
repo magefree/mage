@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class RazortipWhip extends CardImpl<RazortipWhip> {
+public class RazortipWhip extends CardImpl {
 
     public RazortipWhip(UUID ownerId) {
         super(ownerId, 235, "Razortip Whip", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

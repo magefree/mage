@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PrimalHuntbeast extends CardImpl<PrimalHuntbeast> {
+public class PrimalHuntbeast extends CardImpl {
 
     public PrimalHuntbeast(UUID ownerId) {
         super(ownerId, 182, "Primal Huntbeast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

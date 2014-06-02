@@ -38,7 +38,7 @@ import mage.game.permanent.token.KnightToken;
  *
  * @author LevelX2
  */
-public class KnightWatch extends CardImpl<KnightWatch> {
+public class KnightWatch extends CardImpl {
 
     public KnightWatch (UUID ownerId) {
         super(ownerId, 19, "Knight Watch", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{W}");

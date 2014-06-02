@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
  * @author KholdFuzion
 
  */
-public class ThroneOfBone extends CardImpl<ThroneOfBone> {
+public class ThroneOfBone extends CardImpl {
 
     public ThroneOfBone(UUID ownerId) {
         super(ownerId, 273, "Throne of Bone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

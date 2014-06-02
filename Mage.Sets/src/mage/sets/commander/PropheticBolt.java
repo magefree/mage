@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class PropheticBolt extends CardImpl<PropheticBolt> {
+public class PropheticBolt extends CardImpl {
 
     public PropheticBolt(UUID ownerId) {
         super(ownerId, 219, "Prophetic Bolt", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{R}");

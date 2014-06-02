@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class SoulManipulation extends CardImpl<SoulManipulation> {
+public class SoulManipulation extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("creature spell");
     private static final FilterCreatureCard filter2 = new FilterCreatureCard("creature card from your graveyard");

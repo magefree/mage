@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class WildGrowth extends CardImpl<WildGrowth> {
+public class WildGrowth extends CardImpl {
 
     public WildGrowth(UUID ownerId) {
         super(ownerId, 165, "Wild Growth", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

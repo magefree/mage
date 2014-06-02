@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author jeffwadsworth
  */
-public class VedalkenHeretic extends CardImpl<VedalkenHeretic> {
+public class VedalkenHeretic extends CardImpl {
 
     public VedalkenHeretic(UUID ownerId) {
         super(ownerId, 104, "Vedalken Heretic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{U}");

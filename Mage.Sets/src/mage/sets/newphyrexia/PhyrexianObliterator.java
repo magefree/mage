@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class PhyrexianObliterator extends CardImpl<PhyrexianObliterator> {
+public class PhyrexianObliterator extends CardImpl {
 
     public PhyrexianObliterator(UUID ownerId) {
         super(ownerId, 68, "Phyrexian Obliterator", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{B}{B}{B}{B}");

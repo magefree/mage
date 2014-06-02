@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class GiantCrab extends CardImpl<GiantCrab> {
+public class GiantCrab extends CardImpl {
 
     public GiantCrab(UUID ownerId) {
         super(ownerId, 66, "Giant Crab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

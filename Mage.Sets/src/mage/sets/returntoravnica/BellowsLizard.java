@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class BellowsLizard extends CardImpl<BellowsLizard> {
+public class BellowsLizard extends CardImpl {
 
     public BellowsLizard (UUID ownerId) {
         super(ownerId, 88, "Bellows Lizard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

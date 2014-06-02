@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class FaithsShield extends CardImpl<FaithsShield> {
+public class FaithsShield extends CardImpl {
 
     public FaithsShield(UUID ownerId) {
         super(ownerId, 7, "Faith's Shield", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");

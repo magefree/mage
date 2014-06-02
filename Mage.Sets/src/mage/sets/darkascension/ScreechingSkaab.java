@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ScreechingSkaab extends CardImpl<ScreechingSkaab> {
+public class ScreechingSkaab extends CardImpl {
 
     public ScreechingSkaab(UUID ownerId) {
         super(ownerId, 47, "Screeching Skaab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DancingScimitar extends CardImpl<DancingScimitar> {
+public class DancingScimitar extends CardImpl {
 
     public DancingScimitar(UUID ownerId) {
         super(ownerId, 292, "Dancing Scimitar", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

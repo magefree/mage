@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author nantuko
  */
-public class VillageBellRinger extends CardImpl<VillageBellRinger> {
+public class VillageBellRinger extends CardImpl {
 
     private static final String rule = "untap all creatures you control";
 

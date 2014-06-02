@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class SlumberingTora extends CardImpl<SlumberingTora> {
+public class SlumberingTora extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Spirit or Arcane card");
     

@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class TectonicRift extends CardImpl<TectonicRift> {
+public class TectonicRift extends CardImpl {
 
     public TectonicRift(UUID ownerId) {
         super(ownerId, 157, "Tectonic Rift", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");

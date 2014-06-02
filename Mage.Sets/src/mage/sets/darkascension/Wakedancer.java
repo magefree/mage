@@ -43,7 +43,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author Loki
  */
-public class Wakedancer extends CardImpl<Wakedancer> {
+public class Wakedancer extends CardImpl {
     private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, put a 2/2 black Zombie creature token onto the battlefield.";
 
     public Wakedancer(UUID ownerId) {

@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SunTitan extends CardImpl<SunTitan> {
+public class SunTitan extends CardImpl {
 
     public SunTitan(UUID ownerId) {
         super(ownerId, 35, "Sun Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

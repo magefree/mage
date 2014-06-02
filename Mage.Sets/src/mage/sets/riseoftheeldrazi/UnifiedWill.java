@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class UnifiedWill extends CardImpl<UnifiedWill> {
+public class UnifiedWill extends CardImpl {
 
     public UnifiedWill(UUID ownerId) {
         super(ownerId, 92, "Unified Will", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class EmpyrialArchangel extends CardImpl<EmpyrialArchangel> {
+public class EmpyrialArchangel extends CardImpl {
 
     public EmpyrialArchangel(UUID ownerId) {
         super(ownerId, 166, "Empyrial Archangel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{W}{W}{U}");

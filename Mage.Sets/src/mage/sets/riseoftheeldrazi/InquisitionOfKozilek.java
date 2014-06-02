@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class InquisitionOfKozilek extends CardImpl<InquisitionOfKozilek> {
+public class InquisitionOfKozilek extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("nonland card with converted mana cost 3 or less");
 

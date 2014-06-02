@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class RecklessWaif extends CardImpl<RecklessWaif> {
+public class RecklessWaif extends CardImpl {
 
     public RecklessWaif(UUID ownerId) {
         super(ownerId, 159, "Reckless Waif", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");

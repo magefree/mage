@@ -61,7 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author jeffwadsworth
  *
  */
-public class PuppeteerClique extends CardImpl<PuppeteerClique> {
+public class PuppeteerClique extends CardImpl {
 
     public PuppeteerClique(UUID ownerId) {
         super(ownerId, 75, "Puppeteer Clique", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

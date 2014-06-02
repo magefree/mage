@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ImpalerShrike extends CardImpl<ImpalerShrike> {
+public class ImpalerShrike extends CardImpl {
 
     public ImpalerShrike(UUID ownerId) {
         super(ownerId, 36, "Impaler Shrike", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

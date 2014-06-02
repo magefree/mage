@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author cbt33
  */
-public class Dematerialize extends CardImpl<Dematerialize> {
+public class Dematerialize extends CardImpl {
 
     public Dematerialize(UUID ownerId) {
         super(ownerId, 81, "Dematerialize", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");

@@ -53,7 +53,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class ShrineOfBoundlessGrowth extends CardImpl<ShrineOfBoundlessGrowth> {
+public class ShrineOfBoundlessGrowth extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a green spell");
 

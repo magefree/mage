@@ -41,7 +41,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author Loki
  */
-public class ElgaudInquisitor extends CardImpl<ElgaudInquisitor> {
+public class ElgaudInquisitor extends CardImpl {
 
     public ElgaudInquisitor(UUID ownerId) {
         super(ownerId, 6, "Elgaud Inquisitor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

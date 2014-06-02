@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MinisterOfImpediments extends CardImpl<MinisterOfImpediments> {
+public class MinisterOfImpediments extends CardImpl {
 
     public MinisterOfImpediments(UUID ownerId) {
         super(ownerId, 144, "Minister of Impediments", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W/U}");

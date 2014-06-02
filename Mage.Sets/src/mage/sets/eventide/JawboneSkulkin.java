@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class JawboneSkulkin extends CardImpl<JawboneSkulkin> {
+public class JawboneSkulkin extends CardImpl {
 
     private static final FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("red creature");
 

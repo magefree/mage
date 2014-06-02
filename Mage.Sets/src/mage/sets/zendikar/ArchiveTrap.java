@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ArchiveTrap extends CardImpl<ArchiveTrap> {
+public class ArchiveTrap extends CardImpl {
 
     public ArchiveTrap(UUID ownerId) {
         super(ownerId, 41, "Archive Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

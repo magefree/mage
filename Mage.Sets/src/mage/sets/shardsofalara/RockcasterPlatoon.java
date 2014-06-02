@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Plopman
  */
-public class RockcasterPlatoon extends CardImpl<RockcasterPlatoon> {
+public class RockcasterPlatoon extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
     static {

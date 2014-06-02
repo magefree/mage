@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class AlbinoTroll extends CardImpl<AlbinoTroll>{
+public class AlbinoTroll extends CardImpl{
 
     public AlbinoTroll(UUID ownerId) {
         super(ownerId, 231, "Albino Troll", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

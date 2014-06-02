@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author Quercitron
  */
-public class Desertion extends CardImpl<Desertion> {
+public class Desertion extends CardImpl {
 
     public Desertion(UUID ownerId) {
         super(ownerId, 30, "Desertion", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

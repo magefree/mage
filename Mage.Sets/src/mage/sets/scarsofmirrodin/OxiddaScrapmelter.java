@@ -44,7 +44,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author Loki, North
  */
-public class OxiddaScrapmelter extends CardImpl<OxiddaScrapmelter> {
+public class OxiddaScrapmelter extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact");
 
     public OxiddaScrapmelter (UUID ownerId) {

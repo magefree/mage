@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class BoneyardWurm extends CardImpl<BoneyardWurm> {
+public class BoneyardWurm extends CardImpl {
 
     public BoneyardWurm(UUID ownerId) {
         super(ownerId, 171, "Boneyard Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TattermungeManiac extends CardImpl<TattermungeManiac> {
+public class TattermungeManiac extends CardImpl {
 
     public TattermungeManiac(UUID ownerId) {
         super(ownerId, 219, "Tattermunge Maniac", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R/G}");

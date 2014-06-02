@@ -52,7 +52,7 @@ import mage.target.TargetCard;
  *
  * @author jeffwadsworth
  */
-public class SagesOfTheAnima extends CardImpl<SagesOfTheAnima> {
+public class SagesOfTheAnima extends CardImpl {
 
     public SagesOfTheAnima(UUID ownerId) {
         super(ownerId, 103, "Sages of the Anima", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");

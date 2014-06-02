@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class CarrionWall extends CardImpl<CarrionWall> {
+public class CarrionWall extends CardImpl {
 
     public CarrionWall(UUID ownerId) {
         super(ownerId, 54, "Carrion Wall", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

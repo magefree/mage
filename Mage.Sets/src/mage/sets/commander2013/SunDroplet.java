@@ -53,7 +53,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class SunDroplet extends CardImpl<SunDroplet> {
+public class SunDroplet extends CardImpl {
 
     public SunDroplet(UUID ownerId) {
         super(ownerId, 261, "Sun Droplet", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

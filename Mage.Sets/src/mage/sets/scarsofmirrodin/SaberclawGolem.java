@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SaberclawGolem extends CardImpl<SaberclawGolem> {
+public class SaberclawGolem extends CardImpl {
 
     public SaberclawGolem (UUID ownerId) {
         super(ownerId, 200, "Saberclaw Golem", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

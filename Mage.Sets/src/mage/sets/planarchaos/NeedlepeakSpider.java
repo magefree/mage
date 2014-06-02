@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class NeedlepeakSpider extends CardImpl<NeedlepeakSpider> {
+public class NeedlepeakSpider extends CardImpl {
 
     public NeedlepeakSpider(UUID ownerId) {
         super(ownerId, 105, "Needlepeak Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

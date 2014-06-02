@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class SovereignsOfLostAlara extends CardImpl<SovereignsOfLostAlara> {
+public class SovereignsOfLostAlara extends CardImpl {
 
     public SovereignsOfLostAlara(UUID ownerId) {
         super(ownerId, 12, "Sovereigns of Lost Alara", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{U}");

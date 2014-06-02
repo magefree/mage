@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class HandOfCruelty extends CardImpl<HandOfCruelty> {
+public class HandOfCruelty extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("white");
 

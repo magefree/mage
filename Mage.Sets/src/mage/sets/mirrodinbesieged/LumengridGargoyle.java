@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LumengridGargoyle extends CardImpl<LumengridGargoyle> {
+public class LumengridGargoyle extends CardImpl {
 
     public LumengridGargoyle (UUID ownerId) {
         super(ownerId, 112, "Lumengrid Gargoyle", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

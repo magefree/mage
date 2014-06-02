@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com, North
  */
-public class QuagSickness extends CardImpl<QuagSickness> {
+public class QuagSickness extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 

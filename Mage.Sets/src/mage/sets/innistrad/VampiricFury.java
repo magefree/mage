@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class VampiricFury extends CardImpl<VampiricFury> {
+public class VampiricFury extends CardImpl {
 
     private static final FilterCreaturePermanent vampires = new FilterCreaturePermanent("Vampire creatures");
 

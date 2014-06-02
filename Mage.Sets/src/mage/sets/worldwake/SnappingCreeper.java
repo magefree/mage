@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SnappingCreeper extends CardImpl<SnappingCreeper> {
+public class SnappingCreeper extends CardImpl {
 
     public SnappingCreeper (UUID ownerId) {
         super(ownerId, 112, "Snapping Creeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class NaturalOrder extends CardImpl<NaturalOrder> {
+public class NaturalOrder extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a green creature");
     private static final FilterCard filterCard = new FilterCard("green creature card");

@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
  * @param <T>
  */
 
-public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
+public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl {
 
     protected Card leftHalfCard;
     protected Card rightHalfCard;
@@ -160,7 +160,7 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
 /*
  * The left side card of the split card
  */
-class LeftHalfCard  extends CardImpl<LeftHalfCard> {
+class LeftHalfCard  extends CardImpl {
 
     SplitCard splitCardParent;
 
@@ -217,7 +217,7 @@ class LeftHalfCard  extends CardImpl<LeftHalfCard> {
 /*
  * The right side card of the split card
  */
-class RightHalfCard  extends CardImpl<RightHalfCard> {
+class RightHalfCard  extends CardImpl {
 
     SplitCard splitCardParent;
     

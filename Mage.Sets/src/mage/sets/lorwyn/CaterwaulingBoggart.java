@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class CaterwaulingBoggart extends CardImpl<CaterwaulingBoggart> {
+public class CaterwaulingBoggart extends CardImpl {
 
     private static final FilterPermanent filterGoblin = new FilterControlledCreaturePermanent("Goblin");
     private static final FilterPermanent filterElemental = new FilterControlledCreaturePermanent("Elemental");

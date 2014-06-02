@@ -68,7 +68,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class ChandraPyromaster extends CardImpl<ChandraPyromaster> {
+public class ChandraPyromaster extends CardImpl {
 
     public ChandraPyromaster(UUID ownerId) {
         super(ownerId, 132, "Chandra, Pyromaster", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");

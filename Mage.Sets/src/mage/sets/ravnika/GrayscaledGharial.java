@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GrayscaledGharial extends CardImpl<GrayscaledGharial> {
+public class GrayscaledGharial extends CardImpl {
 
     public GrayscaledGharial (UUID ownerId) {
         super(ownerId, 52, "Grayscaled Gharial", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

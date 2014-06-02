@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class WildOx extends CardImpl<WildOx> {
+public class WildOx extends CardImpl {
 
     public WildOx(UUID ownerId) {
         super(ownerId, 90, "Wild Ox", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

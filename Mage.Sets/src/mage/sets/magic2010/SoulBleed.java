@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SoulBleed extends CardImpl<SoulBleed> {
+public class SoulBleed extends CardImpl {
 
     public SoulBleed(UUID ownerId) {
         super(ownerId, 113, "Soul Bleed", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author nantuko
  */
-public class RelicPutrescence extends CardImpl<RelicPutrescence> {
+public class RelicPutrescence extends CardImpl {
 
     public RelicPutrescence (UUID ownerId) {
         super(ownerId, 77, "Relic Putrescence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

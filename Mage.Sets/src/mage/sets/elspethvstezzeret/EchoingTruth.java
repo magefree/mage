@@ -47,7 +47,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class EchoingTruth extends CardImpl<EchoingTruth> {
+public class EchoingTruth extends CardImpl {
 
     public EchoingTruth(UUID ownerId) {
         super(ownerId, 66, "Echoing Truth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

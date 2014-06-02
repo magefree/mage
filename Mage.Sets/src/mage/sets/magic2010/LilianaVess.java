@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LilianaVess extends CardImpl<LilianaVess> {
+public class LilianaVess extends CardImpl {
 
     public LilianaVess(UUID ownerId) {
         super(ownerId, 102, "Liliana Vess", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");

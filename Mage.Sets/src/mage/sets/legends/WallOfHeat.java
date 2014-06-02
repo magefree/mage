@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WallOfHeat extends CardImpl<WallOfHeat> {
+public class WallOfHeat extends CardImpl {
 
     public WallOfHeat(UUID ownerId) {
         super(ownerId, 167, "Wall of Heat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

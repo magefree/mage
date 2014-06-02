@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Diminish extends CardImpl<Diminish> {
+public class Diminish extends CardImpl {
 
     public Diminish(UUID ownerId) {
         super(ownerId, 52, "Diminish", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

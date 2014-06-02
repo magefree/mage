@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class NyxFleeceRam extends CardImpl<NyxFleeceRam> {
+public class NyxFleeceRam extends CardImpl {
 
     public NyxFleeceRam(UUID ownerId) {
         super(ownerId, 18, "Nyx-Fleece Ram", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{W}");

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Kitesail extends CardImpl<Kitesail> {
+public class Kitesail extends CardImpl {
 
     public Kitesail(UUID ownerId) {
         super(ownerId, 126, "Kitesail", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class ReverentHunter extends CardImpl<ReverentHunter> {
+public class ReverentHunter extends CardImpl {
 
     public ReverentHunter(UUID ownerId) {
         super(ownerId, 173, "Reverent Hunter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

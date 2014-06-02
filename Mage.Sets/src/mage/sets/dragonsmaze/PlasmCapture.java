@@ -49,7 +49,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class PlasmCapture extends CardImpl<PlasmCapture> {
+public class PlasmCapture extends CardImpl {
 
     public PlasmCapture(UUID ownerId) {
         super(ownerId, 91, "Plasm Capture", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{G}{U}{U}");

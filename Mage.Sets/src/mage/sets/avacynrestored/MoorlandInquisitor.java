@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class MoorlandInquisitor extends CardImpl<MoorlandInquisitor> {
+public class MoorlandInquisitor extends CardImpl {
 
     public MoorlandInquisitor(UUID ownerId) {
         super(ownerId, 30, "Moorland Inquisitor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

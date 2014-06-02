@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ThrillKillAssassin extends CardImpl<ThrillKillAssassin> {
+public class ThrillKillAssassin extends CardImpl {
  
     public ThrillKillAssassin(UUID ownerId) {
         super(ownerId, 81, "Thrill-Kill Assassin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

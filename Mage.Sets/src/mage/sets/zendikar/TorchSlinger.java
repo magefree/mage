@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TorchSlinger extends CardImpl<TorchSlinger> {
+public class TorchSlinger extends CardImpl {
 
     public TorchSlinger(UUID ownerId) {
         super(ownerId, 151, "Torch Slinger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

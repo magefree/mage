@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jeffwadsworth
  */
-public class DevastatingSummons extends CardImpl<DevastatingSummons> {
+public class DevastatingSummons extends CardImpl {
 
     public DevastatingSummons(UUID ownerId) {
         super(ownerId, 140, "Devastating Summons", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");

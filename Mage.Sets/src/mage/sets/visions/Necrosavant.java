@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Quercitron
  */
-public class Necrosavant extends CardImpl<Necrosavant> {
+public class Necrosavant extends CardImpl {
 
     public Necrosavant(UUID ownerId) {
         super(ownerId, 15, "Necrosavant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

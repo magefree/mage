@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class QuietSpeculation extends CardImpl<QuietSpeculation> {
+public class QuietSpeculation extends CardImpl {
 
     private static final FilterCard filterCard = new FilterCard("cards with flashback");
 

@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class PiranhaMarsh extends CardImpl<PiranhaMarsh> {
+public class PiranhaMarsh extends CardImpl {
 
     public PiranhaMarsh(UUID ownerId) {
         super(ownerId, 222, "Piranha Marsh", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

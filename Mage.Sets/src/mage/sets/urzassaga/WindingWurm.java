@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class WindingWurm extends CardImpl<WindingWurm>{
+public class WindingWurm extends CardImpl{
 
     public WindingWurm(UUID ownerId) {
         super(ownerId, 285, "Winding Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

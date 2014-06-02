@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class MistmeadowWitch extends CardImpl<MistmeadowWitch> {
+public class MistmeadowWitch extends CardImpl {
 
     public MistmeadowWitch(UUID ownerId) {
         super(ownerId, 144, "Mistmeadow Witch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W/U}");

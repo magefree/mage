@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Backfir3
  */
-public class RofellosLlanowarEmissary extends CardImpl<RofellosLlanowarEmissary> {
+public class RofellosLlanowarEmissary extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("for each Forest you control");
 

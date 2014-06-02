@@ -53,7 +53,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class EliteArcanist extends CardImpl<EliteArcanist> {
+public class EliteArcanist extends CardImpl {
 
     public EliteArcanist(UUID ownerId) {
         super(ownerId, 54, "Elite Arcanist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class EntropicSpecter extends CardImpl<EntropicSpecter> {
+public class EntropicSpecter extends CardImpl {
 
     public EntropicSpecter(UUID ownerId) {
         super(ownerId, 61, "Entropic Specter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

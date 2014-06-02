@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class BarbarianHorde extends CardImpl<BarbarianHorde> {
+public class BarbarianHorde extends CardImpl {
 
     public BarbarianHorde(UUID ownerId) {
         super(ownerId, 101, "Barbarian Horde", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

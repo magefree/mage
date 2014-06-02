@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author jeffwadsworth
  *
  */
-public class MarshalsAnthem extends CardImpl<MarshalsAnthem> {
+public class MarshalsAnthem extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
     private static final FilterCard filterCard = new FilterCard("creature card in your graveyard");

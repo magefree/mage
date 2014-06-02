@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author intimidatingant
  */
-public class FavorOfTheWoods extends CardImpl<FavorOfTheWoods> {
+public class FavorOfTheWoods extends CardImpl {
 
     public FavorOfTheWoods(UUID ownerId) {
         super(ownerId, 113, "Favor of the Woods", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

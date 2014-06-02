@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class AnvilwroughtRaptor extends CardImpl<AnvilwroughtRaptor> {
+public class AnvilwroughtRaptor extends CardImpl {
 
     public AnvilwroughtRaptor(UUID ownerId) {
         super(ownerId, 211, "Anvilwrought Raptor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

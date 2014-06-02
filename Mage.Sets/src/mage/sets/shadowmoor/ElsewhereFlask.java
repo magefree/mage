@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ElsewhereFlask extends CardImpl<ElsewhereFlask> {
+public class ElsewhereFlask extends CardImpl {
 
     public ElsewhereFlask(UUID ownerId) {
         super(ownerId, 250, "Elsewhere Flask", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

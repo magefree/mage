@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class KherKeep extends CardImpl<KherKeep> {
+public class KherKeep extends CardImpl {
 
     public KherKeep(UUID ownerId) {
         super(ownerId, 303, "Kher Keep", Rarity.RARE, new CardType[]{CardType.LAND}, "");

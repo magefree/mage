@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class KessigCagebreakers extends CardImpl<KessigCagebreakers> {
+public class KessigCagebreakers extends CardImpl {
 
     public KessigCagebreakers(UUID ownerId) {
         super(ownerId, 189, "Kessig Cagebreakers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");

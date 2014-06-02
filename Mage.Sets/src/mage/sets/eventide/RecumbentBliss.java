@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class RecumbentBliss extends CardImpl<RecumbentBliss> {
+public class RecumbentBliss extends CardImpl {
 
     public RecumbentBliss(UUID ownerId) {
         super(ownerId, 13, "Recumbent Bliss", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

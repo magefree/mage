@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class PreyseizerDragon extends CardImpl<PreyseizerDragon> {
+public class PreyseizerDragon extends CardImpl {
 
     public PreyseizerDragon(UUID ownerId) {
         super(ownerId, 50, "Preyseizer Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

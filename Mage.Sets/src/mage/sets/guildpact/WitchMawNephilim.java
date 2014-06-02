@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class WitchMawNephilim extends CardImpl<WitchMawNephilim> {
+public class WitchMawNephilim extends CardImpl {
 
     public WitchMawNephilim(UUID ownerId) {
         super(ownerId, 138, "Witch-Maw Nephilim", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{W}{U}{B}");

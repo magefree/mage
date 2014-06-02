@@ -40,7 +40,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author Loki
  */
-public class Needlebug extends CardImpl<Needlebug> {
+public class Needlebug extends CardImpl {
 
     public Needlebug(UUID ownerId) {
         super(ownerId, 217, "Needlebug", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

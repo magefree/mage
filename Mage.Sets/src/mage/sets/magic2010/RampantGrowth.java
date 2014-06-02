@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LokiX
  */
-public class RampantGrowth extends CardImpl<RampantGrowth> {
+public class RampantGrowth extends CardImpl {
 
     public RampantGrowth(UUID ownerId){
         super(ownerId, 201, "Rampant Growth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

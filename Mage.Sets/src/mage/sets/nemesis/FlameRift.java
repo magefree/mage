@@ -38,7 +38,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class FlameRift extends CardImpl<FlameRift> {
+public class FlameRift extends CardImpl {
 
     public FlameRift(UUID ownerId) {
         super(ownerId, 80, "Flame Rift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

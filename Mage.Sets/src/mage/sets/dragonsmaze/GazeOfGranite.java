@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class GazeOfGranite extends CardImpl<GazeOfGranite> {
+public class GazeOfGranite extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each nonland permanent with converted mana cost X or less");
     static {

@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  * @author KholdFuzion
 
  */
-public class Braingeyser extends CardImpl<Braingeyser> {
+public class Braingeyser extends CardImpl {
 
     public Braingeyser(UUID ownerId) {
         super(ownerId, 51, "Braingeyser", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");

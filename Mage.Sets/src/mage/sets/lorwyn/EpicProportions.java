@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class EpicProportions extends CardImpl<EpicProportions> {
+public class EpicProportions extends CardImpl {
 
     public EpicProportions(UUID ownerId) {
         super(ownerId, 209, "Epic Proportions", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");

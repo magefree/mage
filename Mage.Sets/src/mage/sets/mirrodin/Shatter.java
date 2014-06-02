@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class Shatter extends CardImpl<Shatter> {
+public class Shatter extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {

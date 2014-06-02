@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class CyclopsTyrant extends CardImpl<CyclopsTyrant> {
+public class CyclopsTyrant extends CardImpl {
 
     public CyclopsTyrant(UUID ownerId) {
         super(ownerId, 135, "Cyclops Tyrant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");

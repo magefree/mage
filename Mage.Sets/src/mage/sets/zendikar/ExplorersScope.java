@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class ExplorersScope extends CardImpl<ExplorersScope> {
+public class ExplorersScope extends CardImpl {
 
     public ExplorersScope(UUID ownerId) {
         super(ownerId, 202, "Explorer's Scope", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

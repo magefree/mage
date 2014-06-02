@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ConqueringManticore extends CardImpl<ConqueringManticore> {
+public class ConqueringManticore extends CardImpl {
 
     public ConqueringManticore(UUID ownerId) {
         super(ownerId, 139, "Conquering Manticore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

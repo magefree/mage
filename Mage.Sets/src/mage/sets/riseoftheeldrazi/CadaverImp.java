@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class CadaverImp extends CardImpl<CadaverImp> {
+public class CadaverImp extends CardImpl {
 
     public CadaverImp(UUID ownerId) {
         super(ownerId, 99, "Cadaver Imp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

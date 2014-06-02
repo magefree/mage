@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class BomberCorps extends CardImpl<BomberCorps> {
+public class BomberCorps extends CardImpl {
 
     public BomberCorps(UUID ownerId) {
         super(ownerId, 86, "Bomber Corps", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

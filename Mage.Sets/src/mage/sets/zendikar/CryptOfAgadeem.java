@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class CryptOfAgadeem extends CardImpl<CryptOfAgadeem> {
+public class CryptOfAgadeem extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("black creature card");
 

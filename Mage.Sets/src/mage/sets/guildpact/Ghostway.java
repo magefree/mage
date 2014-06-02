@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class Ghostway extends CardImpl<Ghostway> {
+public class Ghostway extends CardImpl {
 
     public Ghostway(UUID ownerId) {
         super(ownerId, 6, "Ghostway", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}");

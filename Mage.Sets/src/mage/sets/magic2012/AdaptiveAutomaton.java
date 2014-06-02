@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class AdaptiveAutomaton extends CardImpl<AdaptiveAutomaton> {
+public class AdaptiveAutomaton extends CardImpl {
 
     public AdaptiveAutomaton(UUID ownerId) {
         super(ownerId, 201, "Adaptive Automaton", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

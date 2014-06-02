@@ -45,7 +45,7 @@ import mage.constants.Zone;
  * @author Loki
 
  */
-public class GavonyIronwright extends CardImpl<GavonyIronwright> {
+public class GavonyIronwright extends CardImpl {
 
     public GavonyIronwright(UUID ownerId) {
         super(ownerId, 9, "Gavony Ironwright", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FlightSpellbomb extends CardImpl<FlightSpellbomb> {
+public class FlightSpellbomb extends CardImpl {
 
     public FlightSpellbomb (UUID ownerId) {
         super(ownerId, 155, "Flight Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

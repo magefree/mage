@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class BogInitiate extends CardImpl<BogInitiate> {
+public class BogInitiate extends CardImpl {
 
     public BogInitiate(UUID ownerId) {
         super(ownerId, 95, "Bog Initiate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

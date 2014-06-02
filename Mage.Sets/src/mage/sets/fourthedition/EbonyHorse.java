@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author KholdFuzion
  */
-public class EbonyHorse extends CardImpl<EbonyHorse> {
+public class EbonyHorse extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature you control");
     static {

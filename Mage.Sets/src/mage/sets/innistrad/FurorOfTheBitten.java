@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class FurorOfTheBitten extends CardImpl<FurorOfTheBitten> {
+public class FurorOfTheBitten extends CardImpl {
 
     public FurorOfTheBitten(UUID ownerId) {
         super(ownerId, 143, "Furor of the Bitten", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

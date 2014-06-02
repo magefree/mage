@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ZodiacMonkey extends CardImpl<ZodiacMonkey> {
+public class ZodiacMonkey extends CardImpl {
 
     public ZodiacMonkey(UUID ownerId) {
         super(ownerId, 285, "Zodiac Monkey", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

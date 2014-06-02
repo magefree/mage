@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SigiledBehemoth extends CardImpl<SigiledBehemoth> {
+public class SigiledBehemoth extends CardImpl {
 
     public SigiledBehemoth (UUID ownerId) {
         super(ownerId, 79, "Sigiled Behemoth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");

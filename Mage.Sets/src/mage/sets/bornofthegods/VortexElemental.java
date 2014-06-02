@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class VortexElemental extends CardImpl<VortexElemental> {
+public class VortexElemental extends CardImpl {
 
     public VortexElemental(UUID ownerId) {
         super(ownerId, 56, "Vortex Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");

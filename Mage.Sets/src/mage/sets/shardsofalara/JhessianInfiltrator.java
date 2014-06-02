@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class JhessianInfiltrator extends CardImpl<JhessianInfiltrator> {
+public class JhessianInfiltrator extends CardImpl {
 
     public JhessianInfiltrator (UUID ownerId) {
         super(ownerId, 174, "Jhessian Infiltrator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{U}");

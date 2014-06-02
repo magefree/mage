@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class DefenseGrid extends CardImpl<DefenseGrid> {
+public class DefenseGrid extends CardImpl {
 
     public DefenseGrid(UUID ownerId) {
         super(ownerId, 293, "Defense Grid", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

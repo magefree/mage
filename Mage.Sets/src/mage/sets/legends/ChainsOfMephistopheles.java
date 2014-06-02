@@ -50,7 +50,7 @@ import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
  *
  * @author LevelX2
  */
-public class ChainsOfMephistopheles extends CardImpl<ChainsOfMephistopheles> {
+public class ChainsOfMephistopheles extends CardImpl {
 
     public ChainsOfMephistopheles(UUID ownerId) {
         super(ownerId, 5, "Chains of Mephistopheles", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class PsionicGift extends CardImpl<PsionicGift> {
+public class PsionicGift extends CardImpl {
 
     public PsionicGift(UUID ownerId) {
         super(ownerId, 95, "Psionic Gift", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

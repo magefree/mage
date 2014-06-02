@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Loki
  */
-public class Thoughtcast extends CardImpl<Thoughtcast> {
+public class Thoughtcast extends CardImpl {
 
     public Thoughtcast(UUID ownerId) {
         super(ownerId, 71, "Thoughtcast", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");

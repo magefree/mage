@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DakmorSalvage extends CardImpl<DakmorSalvage> {
+public class DakmorSalvage extends CardImpl {
 
     public DakmorSalvage(UUID ownerId) {
         super(ownerId, 169, "Dakmor Salvage", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

@@ -48,7 +48,7 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
  *
  * @author LevelX2
  */
-public class GrimReturn extends CardImpl<GrimReturn> {
+public class GrimReturn extends CardImpl {
 
     private static final String textFilter = "creature card in a graveyard that was put there from the battlefield this turn";
 

@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author nantuko
  */
-public class ChampionOfTheParish extends CardImpl<ChampionOfTheParish> {
+public class ChampionOfTheParish extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another Human");
     static {

@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class SeshiroTheAnointed extends CardImpl<SeshiroTheAnointed> {
+public class SeshiroTheAnointed extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snakes");
 

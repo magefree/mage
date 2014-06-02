@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AnabaBodyguard extends CardImpl<AnabaBodyguard> {
+public class AnabaBodyguard extends CardImpl {
 
     public AnabaBodyguard(UUID ownerId) {
         super(ownerId, 187, "Anaba Bodyguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

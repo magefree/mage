@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class SlaveringNulls extends CardImpl<SlaveringNulls> {
+public class SlaveringNulls extends CardImpl {
 
     public SlaveringNulls(UUID ownerId) {
         super(ownerId, 92, "Slavering Nulls", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class MoggFlunkies extends CardImpl<MoggFlunkies> {
+public class MoggFlunkies extends CardImpl {
 
     public MoggFlunkies(UUID ownerId) {
         super(ownerId, 143, "Mogg Flunkies", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GrinningIgnus extends CardImpl<GrinningIgnus> {
+public class GrinningIgnus extends CardImpl {
 
     public GrinningIgnus(UUID ownerId) {
         super(ownerId, 118, "Grinning Ignus", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

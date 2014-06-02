@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class GrowthSpasm extends CardImpl<GrowthSpasm> {
+public class GrowthSpasm extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 

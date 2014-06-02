@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class CitanulFlute extends CardImpl<CitanulFlute> {
+public class CitanulFlute extends CardImpl {
 
     public CitanulFlute(UUID ownerId) {
         super(ownerId, 289, "Citanul Flute", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");

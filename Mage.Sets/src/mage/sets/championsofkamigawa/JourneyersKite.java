@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class JourneyersKite extends CardImpl<JourneyersKite> {
+public class JourneyersKite extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 

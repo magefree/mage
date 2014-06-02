@@ -52,7 +52,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  * @author jeffwadsworth
  *
  */
-public class DauntlessDourbark extends CardImpl<DauntlessDourbark> {
+public class DauntlessDourbark extends CardImpl {
 
     final static private FilterControlledPermanent filter = new FilterControlledPermanent("Forests you control plus the number of Treefolk you control");
     final static private FilterControlledPermanent filter2 = new FilterControlledPermanent();

@@ -41,7 +41,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author Loki
  */
-public class TukatongueThallid extends CardImpl<TukatongueThallid> {
+public class TukatongueThallid extends CardImpl {
 
     public TukatongueThallid(UUID ownerId) {
         super(ownerId, 96, "Tukatongue Thallid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

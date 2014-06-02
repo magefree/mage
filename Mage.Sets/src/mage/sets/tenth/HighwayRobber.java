@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class HighwayRobber extends CardImpl<HighwayRobber> {
+public class HighwayRobber extends CardImpl {
 
     public HighwayRobber(UUID ownerId) {
         super(ownerId, 150, "Highway Robber", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

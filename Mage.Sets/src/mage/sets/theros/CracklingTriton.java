@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class CracklingTriton extends CardImpl<CracklingTriton> {
+public class CracklingTriton extends CardImpl {
 
     public CracklingTriton(UUID ownerId) {
         super(ownerId, 45, "Crackling Triton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

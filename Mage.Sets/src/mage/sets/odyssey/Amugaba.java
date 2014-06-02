@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class Amugaba extends CardImpl<Amugaba> {
+public class Amugaba extends CardImpl {
 
     public Amugaba(UUID ownerId) {
         super(ownerId, 61, "Amugaba", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

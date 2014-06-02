@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class GloriousAnthem extends CardImpl<GloriousAnthem> {
+public class GloriousAnthem extends CardImpl {
 
     public GloriousAnthem(UUID ownerId) {
         super(ownerId, 17, "Glorious Anthem", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");

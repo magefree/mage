@@ -54,7 +54,7 @@ import mage.target.TargetSpell;
  * @author jeffwadsworth
 
  */
-public class MirrorSheen extends CardImpl<MirrorSheen> {
+public class MirrorSheen extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell();
     static {

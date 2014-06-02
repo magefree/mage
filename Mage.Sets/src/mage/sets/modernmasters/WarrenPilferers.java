@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class WarrenPilferers extends CardImpl<WarrenPilferers> {
+public class WarrenPilferers extends CardImpl {
 
     public WarrenPilferers(UUID ownerId) {
         super(ownerId, 103, "Warren Pilferers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

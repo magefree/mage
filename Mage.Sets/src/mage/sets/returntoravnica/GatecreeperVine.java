@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class GatecreeperVine extends CardImpl<GatecreeperVine> {
+public class GatecreeperVine extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("basic land card or a Gate card");
     static {

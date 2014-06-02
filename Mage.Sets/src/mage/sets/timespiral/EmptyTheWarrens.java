@@ -39,7 +39,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author Plopman
  */
-public class EmptyTheWarrens extends CardImpl<EmptyTheWarrens> {
+public class EmptyTheWarrens extends CardImpl {
 
     public EmptyTheWarrens(UUID ownerId) {
         super(ownerId, 152, "Empty the Warrens", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");

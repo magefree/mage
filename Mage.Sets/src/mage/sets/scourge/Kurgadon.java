@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  *
  * @author Backfir3
  */
-public class Kurgadon extends CardImpl<Kurgadon> {
+public class Kurgadon extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a creature spell with converted mana cost 6 or greater");
 

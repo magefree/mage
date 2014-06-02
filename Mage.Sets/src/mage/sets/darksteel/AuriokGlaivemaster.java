@@ -46,7 +46,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class AuriokGlaivemaster extends CardImpl<AuriokGlaivemaster> {
+public class AuriokGlaivemaster extends CardImpl {
     private static final String rule1 = "As long as {this} is equipped, it gets +1/+1";
     private static final String rule2 = "As long as {this} is equipped, it has first strike";
 

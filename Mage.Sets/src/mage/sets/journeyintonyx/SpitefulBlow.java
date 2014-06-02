@@ -42,7 +42,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class SpitefulBlow extends CardImpl<SpitefulBlow> {
+public class SpitefulBlow extends CardImpl {
 
     public SpitefulBlow(UUID ownerId) {
         super(ownerId, 83, "Spiteful Blow", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

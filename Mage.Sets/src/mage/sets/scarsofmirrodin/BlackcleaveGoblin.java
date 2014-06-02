@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BlackcleaveGoblin extends CardImpl<BlackcleaveGoblin> {
+public class BlackcleaveGoblin extends CardImpl {
 
     public BlackcleaveGoblin (UUID ownerId) {
         super(ownerId, 54, "Blackcleave Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

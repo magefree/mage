@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GodlessShrine extends CardImpl<GodlessShrine> {
+public class GodlessShrine extends CardImpl {
 
     public GodlessShrine (UUID ownerId) {
         super(ownerId, 157, "Godless Shrine", Rarity.RARE, new CardType[]{CardType.LAND}, null);

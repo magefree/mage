@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ColossalWhale extends CardImpl<ColossalWhale> {
+public class ColossalWhale extends CardImpl {
 
     public ColossalWhale(UUID ownerId) {
         super(ownerId, 48, "Colossal Whale", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SomberHoverguard extends CardImpl<SomberHoverguard> {
+public class SomberHoverguard extends CardImpl {
 
     public SomberHoverguard(UUID ownerId) {
         super(ownerId, 51, "Somber Hoverguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");

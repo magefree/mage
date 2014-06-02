@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class ViolentEruption extends CardImpl<ViolentEruption> {
+public class ViolentEruption extends CardImpl {
 
     public ViolentEruption(UUID ownerId) {
         super(ownerId, 117, "Violent Eruption", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}{R}");

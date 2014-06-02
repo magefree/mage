@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class FyndhornElder extends CardImpl<FyndhornElder> {
+public class FyndhornElder extends CardImpl {
 
     public FyndhornElder(UUID ownerId) {
         super(ownerId, 131, "Fyndhorn Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

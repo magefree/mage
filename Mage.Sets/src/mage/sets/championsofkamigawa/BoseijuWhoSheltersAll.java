@@ -58,7 +58,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class BoseijuWhoSheltersAll extends CardImpl<BoseijuWhoSheltersAll> {
+public class BoseijuWhoSheltersAll extends CardImpl {
 
     public BoseijuWhoSheltersAll(UUID ownerId) {
         super(ownerId, 273, "Boseiju, Who Shelters All", Rarity.RARE, new CardType[]{CardType.LAND}, "");

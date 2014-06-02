@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class LionheartMaverick extends CardImpl<LionheartMaverick> {
+public class LionheartMaverick extends CardImpl {
 
     public LionheartMaverick(UUID ownerId) {
         super(ownerId, 11, "Lionheart Maverick", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

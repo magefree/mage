@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EpharasEnlightenment extends CardImpl<EpharasEnlightenment> {
+public class EpharasEnlightenment extends CardImpl {
 
     public EpharasEnlightenment(UUID ownerId) {
         super(ownerId, 146, "Ephara's Enlightenment", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");

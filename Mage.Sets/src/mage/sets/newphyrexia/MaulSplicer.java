@@ -48,7 +48,7 @@ import mage.game.permanent.token.GolemToken;
  *
  * @author North
  */
-public class MaulSplicer extends CardImpl<MaulSplicer> {
+public class MaulSplicer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
 

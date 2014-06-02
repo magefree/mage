@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class GalvanicArc extends CardImpl<GalvanicArc> {
+public class GalvanicArc extends CardImpl {
 
     public GalvanicArc(UUID ownerId) {
         super(ownerId, 126, "Galvanic Arc", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

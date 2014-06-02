@@ -51,7 +51,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class DirtyWererat extends CardImpl<DirtyWererat> {
+public class DirtyWererat extends CardImpl {
 
     public DirtyWererat(UUID ownerId) {
         super(ownerId, 130, "Dirty Wererat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

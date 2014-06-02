@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class PrimevalForce extends CardImpl<PrimevalForce> {
+public class PrimevalForce extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Forest");
     static{

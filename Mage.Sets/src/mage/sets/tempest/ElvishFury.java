@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ElvishFury extends CardImpl<ElvishFury> {
+public class ElvishFury extends CardImpl {
 
     public ElvishFury(UUID ownerId) {
         super(ownerId, 120, "Elvish Fury", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");

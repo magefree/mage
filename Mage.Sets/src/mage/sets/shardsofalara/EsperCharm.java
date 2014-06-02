@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class EsperCharm extends CardImpl<EsperCharm> {
+public class EsperCharm extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 

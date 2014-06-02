@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Backfir3
  */
-public class NightwindGlider extends CardImpl<NightwindGlider> {
+public class NightwindGlider extends CardImpl {
 
 	private static final FilterCard filter = new FilterCard("Black");
 

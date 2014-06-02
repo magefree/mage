@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MoonHeron extends CardImpl<MoonHeron> {
+public class MoonHeron extends CardImpl {
 
     public MoonHeron(UUID ownerId) {
         super(ownerId, 69, "Moon Heron", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

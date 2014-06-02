@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class SparkTrooper extends CardImpl<SparkTrooper> {
+public class SparkTrooper extends CardImpl {
 
     public SparkTrooper(UUID ownerId) {
         super(ownerId, 199, "Spark Trooper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{W}");

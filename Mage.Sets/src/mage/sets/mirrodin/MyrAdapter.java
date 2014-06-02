@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MyrAdapter extends CardImpl<MyrAdapter> {
+public class MyrAdapter extends CardImpl {
 
     public MyrAdapter(UUID ownerId) {
         super(ownerId, 210, "Myr Adapter", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

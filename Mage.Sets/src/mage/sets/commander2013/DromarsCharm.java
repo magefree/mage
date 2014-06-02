@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DromarsCharm extends CardImpl<DromarsCharm> {
+public class DromarsCharm extends CardImpl {
 
     public DromarsCharm(UUID ownerId) {
         super(ownerId, 187, "Dromar's Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{U}{B}");

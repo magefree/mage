@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author maurer.it_at_gmail.com
  */
-public class EyeOfUgin extends CardImpl<EyeOfUgin> {
+public class EyeOfUgin extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("colorless creature card");
     private static final FilterSpell filterSpells = new FilterSpell("Colorless Eldrazi spells");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Sluggishness extends CardImpl<Sluggishness> {
+public class Sluggishness extends CardImpl {
 
     public Sluggishness(UUID ownerId) {
         super(ownerId, 92, "Sluggishness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

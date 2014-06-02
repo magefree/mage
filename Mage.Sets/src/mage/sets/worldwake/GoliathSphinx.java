@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GoliathSphinx extends CardImpl<GoliathSphinx> {
+public class GoliathSphinx extends CardImpl {
 
     public GoliathSphinx (UUID ownerId) {
         super(ownerId, 28, "Goliath Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

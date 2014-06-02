@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  * @author jeffwadsworth
 
  */
-public class Quillspike extends CardImpl<Quillspike> {
+public class Quillspike extends CardImpl {
 
     public Quillspike(UUID ownerId) {
         super(ownerId, 126, "Quillspike", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B/G}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class KamiOfLunacy extends CardImpl<KamiOfLunacy> {
+public class KamiOfLunacy extends CardImpl {
 
     public KamiOfLunacy(UUID ownerId) {
         super(ownerId, 119, "Kami of Lunacy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

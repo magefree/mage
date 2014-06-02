@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class NyleaGodOfTheHunt extends CardImpl<NyleaGodOfTheHunt> {
+public class NyleaGodOfTheHunt extends CardImpl {
 
     public NyleaGodOfTheHunt(UUID ownerId) {
         super(ownerId, 166, "Nylea, God of the Hunt", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{G}");

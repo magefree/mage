@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class NaturesSpiral extends CardImpl<NaturesSpiral> {
+public class NaturesSpiral extends CardImpl {
 
     public NaturesSpiral(UUID ownerId) {
         super(ownerId, 196, "Nature's Spiral", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

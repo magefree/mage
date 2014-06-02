@@ -50,7 +50,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author Loki
  */
-public class BenBenAkkiHermit extends CardImpl<BenBenAkkiHermit> {
+public class BenBenAkkiHermit extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("untapped Mountain you control");
 

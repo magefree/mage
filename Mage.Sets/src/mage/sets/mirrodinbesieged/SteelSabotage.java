@@ -43,7 +43,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author North
  */
-public class SteelSabotage extends CardImpl<SteelSabotage> {
+public class SteelSabotage extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("artifact spell");
 

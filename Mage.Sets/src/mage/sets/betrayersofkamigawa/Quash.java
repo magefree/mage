@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Quash extends CardImpl<Quash> {
+public class Quash extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 

@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  *
  * @author anonymous
  */
-public class ConsumeTheMeek extends CardImpl<ConsumeTheMeek> {
+public class ConsumeTheMeek extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with converted mana cost 3 or less");
 

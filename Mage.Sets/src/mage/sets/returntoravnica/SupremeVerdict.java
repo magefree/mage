@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SupremeVerdict extends CardImpl<SupremeVerdict> {
+public class SupremeVerdict extends CardImpl {
 
     public SupremeVerdict (UUID ownerId) {
         super(ownerId, 201, "Supreme Verdict", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}{W}{U}");

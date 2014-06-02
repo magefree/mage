@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Convolute extends CardImpl<Convolute> {
+public class Convolute extends CardImpl {
 
     public Convolute(UUID ownerId) {
         super(ownerId, 41, "Convolute", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

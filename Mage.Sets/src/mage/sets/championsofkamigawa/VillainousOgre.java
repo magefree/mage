@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX
  */
-public class VillainousOgre extends CardImpl<VillainousOgre> {
+public class VillainousOgre extends CardImpl {
 
     private static final String rule = "As long as you control a Demon, {this} has {B}: Regenerate Villainous Ogre";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");

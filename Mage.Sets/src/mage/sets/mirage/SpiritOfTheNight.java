@@ -49,7 +49,7 @@ import java.util.UUID;
  * @author jeffwadsworth
 
  */
-public class SpiritOfTheNight extends CardImpl<SpiritOfTheNight> {
+public class SpiritOfTheNight extends CardImpl {
     
     private static final String rule = "Spirit of the Night has first strike as long as it's attacking";
     private static final FilterCard filter = new FilterCard("Black");

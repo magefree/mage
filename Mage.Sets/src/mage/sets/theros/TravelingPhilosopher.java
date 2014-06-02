@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TravelingPhilosopher extends CardImpl<TravelingPhilosopher> {
+public class TravelingPhilosopher extends CardImpl {
 
     public TravelingPhilosopher(UUID ownerId) {
         super(ownerId, 34, "Traveling Philosopher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

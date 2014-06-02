@@ -55,7 +55,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class DearlyDeparted extends CardImpl<DearlyDeparted> {
+public class DearlyDeparted extends CardImpl {
 
     private static final String ruleText = "As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
 

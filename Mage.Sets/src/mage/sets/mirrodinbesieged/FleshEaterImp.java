@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class FleshEaterImp extends CardImpl<FleshEaterImp> {
+public class FleshEaterImp extends CardImpl {
 
     public FleshEaterImp (UUID ownerId) {
         super(ownerId, 42, "Flesh-Eater Imp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class VoicesFromTheVoid extends CardImpl<VoicesFromTheVoid> {
+public class VoicesFromTheVoid extends CardImpl {
 
     public VoicesFromTheVoid(UUID ownerId) {
         super(ownerId, 55, "Voices from the Void", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");

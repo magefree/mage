@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class WildDefiance extends CardImpl<WildDefiance> {
+public class WildDefiance extends CardImpl {
 
     public WildDefiance(UUID ownerId) {
         super(ownerId, 203, "Wild Defiance", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author Backfir3
  */
-public class Clear extends CardImpl<Clear> {
+public class Clear extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 

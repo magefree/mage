@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Necropouncer extends CardImpl<Necropouncer> {
+public class Necropouncer extends CardImpl {
 
     public Necropouncer(UUID ownerId) {
         super(ownerId, 147, "Necropouncer", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{6}");

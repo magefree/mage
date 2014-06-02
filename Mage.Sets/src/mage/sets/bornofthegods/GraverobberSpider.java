@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LevelX2
  */
-public class GraverobberSpider extends CardImpl<GraverobberSpider> {
+public class GraverobberSpider extends CardImpl {
 
     public GraverobberSpider(UUID ownerId) {
         super(ownerId, 122, "Graverobber Spider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

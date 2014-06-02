@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class Dromosaur extends CardImpl<Dromosaur> {
+public class Dromosaur extends CardImpl {
 
     public Dromosaur(UUID ownerId) {
         super(ownerId, 182, "Dromosaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

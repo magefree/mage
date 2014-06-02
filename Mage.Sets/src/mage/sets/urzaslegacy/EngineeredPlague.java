@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class EngineeredPlague extends CardImpl<EngineeredPlague> {
+public class EngineeredPlague extends CardImpl {
 
     public EngineeredPlague(UUID ownerId) {
         super(ownerId, 51, "Engineered Plague", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

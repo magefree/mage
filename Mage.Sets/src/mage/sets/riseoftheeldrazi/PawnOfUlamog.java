@@ -48,7 +48,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author North
  */
-public class PawnOfUlamog extends CardImpl<PawnOfUlamog> {
+public class PawnOfUlamog extends CardImpl {
 
     public PawnOfUlamog(UUID ownerId) {
         super(ownerId, 122, "Pawn of Ulamog", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

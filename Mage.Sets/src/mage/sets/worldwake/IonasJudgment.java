@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class IonasJudgment extends CardImpl<IonasJudgment> {
+public class IonasJudgment extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature or enchantment");
 
     static {

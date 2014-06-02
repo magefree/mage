@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SeverTheBloodline extends CardImpl<SeverTheBloodline> {
+public class SeverTheBloodline extends CardImpl {
 
     public SeverTheBloodline(UUID ownerId) {
         super(ownerId, 115, "Sever the Bloodline", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class FleetingImage extends CardImpl<FleetingImage> {
+public class FleetingImage extends CardImpl {
 
     public FleetingImage(UUID ownerId) {
         super(ownerId, 78, "Fleeting Image", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");

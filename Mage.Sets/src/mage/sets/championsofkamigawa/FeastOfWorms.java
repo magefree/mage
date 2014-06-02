@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX
  */
-public class FeastOfWorms extends CardImpl<FeastOfWorms> {
+public class FeastOfWorms extends CardImpl {
 
     public FeastOfWorms (UUID ownerId) {
         super(ownerId, 207, "Feast of Worms", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");

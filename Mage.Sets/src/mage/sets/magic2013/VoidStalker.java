@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class VoidStalker extends CardImpl<VoidStalker> {
+public class VoidStalker extends CardImpl {
 
     public VoidStalker(UUID ownerId) {
         super(ownerId, 77, "Void Stalker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class VeteranCavalier extends CardImpl<VeteranCavalier> {
+public class VeteranCavalier extends CardImpl {
 
     public VeteranCavalier(UUID ownerId) {
         super(ownerId, 52, "Veteran Cavalier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class NettleSwine extends CardImpl<NettleSwine> {
+public class NettleSwine extends CardImpl {
 
     public NettleSwine(UUID ownerId) {
         super(ownerId, 186, "Nettle Swine", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

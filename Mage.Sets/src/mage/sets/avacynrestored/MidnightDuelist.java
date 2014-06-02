@@ -43,7 +43,7 @@ import java.util.UUID;
  * @author noxx
 
  */
-public class MidnightDuelist extends CardImpl<MidnightDuelist> {
+public class MidnightDuelist extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("Vampires");
 

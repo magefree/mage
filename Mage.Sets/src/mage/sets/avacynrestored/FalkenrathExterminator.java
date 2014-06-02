@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FalkenrathExterminator extends CardImpl<FalkenrathExterminator> {
+public class FalkenrathExterminator extends CardImpl {
 
     public FalkenrathExterminator(UUID ownerId) {
         super(ownerId, 134, "Falkenrath Exterminator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

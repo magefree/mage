@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author Loki
  */
-public class CloudSprite extends CardImpl<CloudSprite> {
+public class CloudSprite extends CardImpl {
 
     public CloudSprite(UUID ownerId) {
         super(ownerId, 75, "Cloud Sprite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

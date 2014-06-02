@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SacredFoundry extends CardImpl<SacredFoundry> {
+public class SacredFoundry extends CardImpl {
 
     public SacredFoundry (UUID ownerId) {
         super(ownerId, 280, "Sacred Foundry", Rarity.RARE, new CardType[]{CardType.LAND}, null);

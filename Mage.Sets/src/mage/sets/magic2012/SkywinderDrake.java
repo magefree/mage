@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class SkywinderDrake extends CardImpl<SkywinderDrake> {
+public class SkywinderDrake extends CardImpl {
 
     public SkywinderDrake(UUID ownerId) {
         super(ownerId, 75, "Skywinder Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

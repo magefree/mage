@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class BalshanGriffin extends CardImpl<BalshanGriffin> {
+public class BalshanGriffin extends CardImpl {
 
     public BalshanGriffin(UUID ownerId) {
         super(ownerId, 67, "Balshan Griffin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

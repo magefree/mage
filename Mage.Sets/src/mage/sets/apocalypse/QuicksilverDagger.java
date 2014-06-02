@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class QuicksilverDagger extends CardImpl<QuicksilverDagger> {
+public class QuicksilverDagger extends CardImpl {
 
     public QuicksilverDagger(UUID ownerId) {
         super(ownerId, 118, "Quicksilver Dagger", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{R}");

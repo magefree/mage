@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class Skygames extends CardImpl<Skygames> {
+public class Skygames extends CardImpl {
 
     public Skygames(UUID ownerId) {
         super(ownerId, 51, "Skygames", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

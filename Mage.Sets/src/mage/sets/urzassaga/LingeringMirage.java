@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class LingeringMirage extends CardImpl<LingeringMirage> {
+public class LingeringMirage extends CardImpl {
 
     public LingeringMirage(UUID ownerId) {
         super(ownerId, 84, "Lingering Mirage", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

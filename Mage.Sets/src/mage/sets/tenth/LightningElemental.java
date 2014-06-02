@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class LightningElemental extends CardImpl<LightningElemental> {
+public class LightningElemental extends CardImpl {
 
     public LightningElemental (UUID ownerId) {
         super(ownerId, 217, "Lightning Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

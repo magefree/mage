@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX
  */
-public class InkfathomDivers extends CardImpl<InkfathomDivers> {
+public class InkfathomDivers extends CardImpl {
 
     public InkfathomDivers (UUID ownerId) {
         super(ownerId, 70, "Inkfathom Divers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

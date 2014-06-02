@@ -43,7 +43,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author LevelX2
  */
-public class LilianasReaver extends CardImpl<LilianasReaver> {
+public class LilianasReaver extends CardImpl {
 
     public LilianasReaver(UUID ownerId) {
         super(ownerId, 103, "Liliana's Reaver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

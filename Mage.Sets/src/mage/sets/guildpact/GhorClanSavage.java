@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class GhorClanSavage extends CardImpl<GhorClanSavage> {
+public class GhorClanSavage extends CardImpl {
 
     public GhorClanSavage(UUID ownerId) {
         super(ownerId, 86, "Ghor-Clan Savage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

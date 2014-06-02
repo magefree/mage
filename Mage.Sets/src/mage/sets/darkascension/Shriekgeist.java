@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class Shriekgeist extends CardImpl<Shriekgeist> {
+public class Shriekgeist extends CardImpl {
 
     public Shriekgeist(UUID ownerId) {
         super(ownerId, 49, "Shriekgeist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

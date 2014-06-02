@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AspectOfGorgon extends CardImpl<AspectOfGorgon> {
+public class AspectOfGorgon extends CardImpl {
 
     public AspectOfGorgon(UUID ownerId) {
         super(ownerId, 60, "Aspect of Gorgon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ChildOfThorns extends CardImpl<ChildOfThorns> {
+public class ChildOfThorns extends CardImpl {
 
     public ChildOfThorns(UUID ownerId) {
         super(ownerId, 123, "Child of Thorns", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

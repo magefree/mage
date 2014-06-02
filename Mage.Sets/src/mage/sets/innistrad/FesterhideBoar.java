@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class FesterhideBoar extends CardImpl<FesterhideBoar> {
+public class FesterhideBoar extends CardImpl {
 
     public FesterhideBoar(UUID ownerId) {
         super(ownerId, 179, "Festerhide Boar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

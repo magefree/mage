@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Quercitron
  */
-public class FamiliarGround extends CardImpl<FamiliarGround> {
+public class FamiliarGround extends CardImpl {
 
     public FamiliarGround(UUID ownerId) {
         super(ownerId, 243, "Familiar Ground", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

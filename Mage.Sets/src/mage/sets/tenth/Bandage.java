@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class Bandage extends CardImpl<Bandage> {
+public class Bandage extends CardImpl {
 
     public Bandage(UUID ownerId) {
         super(ownerId, 9, "Bandage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

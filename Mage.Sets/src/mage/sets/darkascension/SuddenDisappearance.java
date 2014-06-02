@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward
  */
-public class SuddenDisappearance extends CardImpl<SuddenDisappearance> {
+public class SuddenDisappearance extends CardImpl {
 
     public SuddenDisappearance(UUID ownerId) {
         super(ownerId, 23, "Sudden Disappearance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}");

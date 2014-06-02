@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class WanderersTwig extends CardImpl<WanderersTwig> {
+public class WanderersTwig extends CardImpl {
 
     public WanderersTwig(UUID ownerId) {
         super(ownerId, 265, "Wanderer's Twig", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

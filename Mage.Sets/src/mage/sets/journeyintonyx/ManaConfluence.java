@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ManaConfluence extends CardImpl<ManaConfluence> {
+public class ManaConfluence extends CardImpl {
 
     public ManaConfluence(UUID ownerId) {
         super(ownerId, 163, "Mana Confluence", Rarity.RARE, new CardType[]{CardType.LAND}, "");

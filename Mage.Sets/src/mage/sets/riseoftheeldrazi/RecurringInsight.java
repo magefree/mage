@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class RecurringInsight extends CardImpl<RecurringInsight> {
+public class RecurringInsight extends CardImpl {
 
     public RecurringInsight(UUID ownerId) {
         super(ownerId, 82, "Recurring Insight", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");

@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class TimberpackWolf extends CardImpl<TimberpackWolf> {
+public class TimberpackWolf extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature you control named Timberpack Wolf");
 

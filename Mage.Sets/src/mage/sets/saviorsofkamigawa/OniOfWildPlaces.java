@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class OniOfWildPlaces extends CardImpl<OniOfWildPlaces> {
+public class OniOfWildPlaces extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("red creature you control");
 

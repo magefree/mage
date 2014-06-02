@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SteelOverseer extends CardImpl<SteelOverseer> {
+public class SteelOverseer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact creature you control");
 

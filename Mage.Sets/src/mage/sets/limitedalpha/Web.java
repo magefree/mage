@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author KholdFuzion
 
  */
-public class Web extends CardImpl<Web> {
+public class Web extends CardImpl {
 
     public Web(UUID ownerId) {
         super(ownerId, 137, "Web", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");

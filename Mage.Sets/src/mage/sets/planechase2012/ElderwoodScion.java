@@ -53,7 +53,7 @@ import mage.constants.CostModificationType;
  *
  * @author LevelX2
  */
-public class ElderwoodScion extends CardImpl<ElderwoodScion> {
+public class ElderwoodScion extends CardImpl {
 
     public ElderwoodScion(UUID ownerId) {
         super(ownerId, 88, "Elderwood Scion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");

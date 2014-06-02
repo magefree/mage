@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author Backfir3
  */
-public class KavuTitan extends CardImpl<KavuTitan> {
+public class KavuTitan extends CardImpl {
 
     public KavuTitan(UUID ownerId) {
         super(ownerId, 194, "Kavu Titan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class MindlessNull extends CardImpl<MindlessNull> {
+public class MindlessNull extends CardImpl {
 
     public MindlessNull(UUID ownerId) {
         super(ownerId, 103, "Mindless Null", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

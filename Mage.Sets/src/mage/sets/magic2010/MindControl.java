@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MindControl extends CardImpl<MindControl> {
+public class MindControl extends CardImpl {
 
     public MindControl(UUID ownerId) {
         super(ownerId, 63, "Mind Control", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");

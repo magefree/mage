@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ThoughtNibbler extends CardImpl<ThoughtNibbler> {
+public class ThoughtNibbler extends CardImpl {
 
     public ThoughtNibbler(UUID ownerId) {
         super(ownerId, 107, "Thought Nibbler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

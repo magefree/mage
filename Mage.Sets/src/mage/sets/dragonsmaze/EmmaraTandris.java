@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author LevelX2
  */
-public class EmmaraTandris extends CardImpl<EmmaraTandris> {
+public class EmmaraTandris extends CardImpl {
 
     private static final FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("creature tokens you control");
     static {

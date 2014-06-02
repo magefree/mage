@@ -41,7 +41,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class BurstOfSpeed extends CardImpl<BurstOfSpeed> {
+public class BurstOfSpeed extends CardImpl {
 
     public BurstOfSpeed(UUID ownerId) {
         super(ownerId, 129, "Burst of Speed", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");

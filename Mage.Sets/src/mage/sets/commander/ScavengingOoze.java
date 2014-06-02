@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class ScavengingOoze extends CardImpl<ScavengingOoze> {
+public class ScavengingOoze extends CardImpl {
 
     public ScavengingOoze(UUID ownerId) {
         super(ownerId, 170, "Scavenging Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

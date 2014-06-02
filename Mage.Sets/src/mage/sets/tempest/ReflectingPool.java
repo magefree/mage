@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ReflectingPool extends CardImpl<ReflectingPool> {
+public class ReflectingPool extends CardImpl {
 
     public ReflectingPool(UUID ownerId) {
         super(ownerId, 328, "Reflecting Pool", Rarity.RARE, new CardType[]{CardType.LAND}, "");

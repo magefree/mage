@@ -42,7 +42,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author Loki
  */
-public class OyobiWhoSplitTheHeavens extends CardImpl<OyobiWhoSplitTheHeavens> {
+public class OyobiWhoSplitTheHeavens extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

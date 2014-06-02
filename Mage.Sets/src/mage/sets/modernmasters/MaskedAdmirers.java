@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class MaskedAdmirers extends CardImpl<MaskedAdmirers> {
+public class MaskedAdmirers extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a creature spell");
     static {

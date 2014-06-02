@@ -44,7 +44,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class WastelandViper extends CardImpl<WastelandViper> {
+public class WastelandViper extends CardImpl {
 
     public WastelandViper(UUID ownerId) {
         super(ownerId, 139, "Wasteland Viper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");

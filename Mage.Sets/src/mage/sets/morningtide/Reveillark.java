@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class Reveillark extends CardImpl<Reveillark> {
+public class Reveillark extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with power 2 or less from your graveyard");
     static {

@@ -50,7 +50,7 @@ import mage.target.TargetCard;
  *
  * @author Plopman
  */
-public class CunningWish extends CardImpl<CunningWish> {
+public class CunningWish extends CardImpl {
 
     public CunningWish(UUID ownerId) {
         super(ownerId, 37, "Cunning Wish", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");

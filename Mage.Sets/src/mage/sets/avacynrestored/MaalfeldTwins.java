@@ -40,7 +40,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author Loki
  */
-public class MaalfeldTwins extends CardImpl<MaalfeldTwins> {
+public class MaalfeldTwins extends CardImpl {
 
     public MaalfeldTwins(UUID ownerId) {
         super(ownerId, 112, "Maalfeld Twins", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");

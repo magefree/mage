@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class FrostBreath extends CardImpl<FrostBreath> {
+public class FrostBreath extends CardImpl {
 
     public FrostBreath(UUID ownerId) {
         super(ownerId, 54, "Frost Breath", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

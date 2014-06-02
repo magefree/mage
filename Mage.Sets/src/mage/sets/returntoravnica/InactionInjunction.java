@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class InactionInjunction extends CardImpl<InactionInjunction> {
+public class InactionInjunction extends CardImpl {
  
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
  

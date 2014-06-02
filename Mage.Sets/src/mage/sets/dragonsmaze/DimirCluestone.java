@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class DimirCluestone extends CardImpl<DimirCluestone> {
+public class DimirCluestone extends CardImpl {
 
     public DimirCluestone(UUID ownerId) {
         super(ownerId, 138, "Dimir Cluestone", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

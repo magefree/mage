@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MortalsResolve extends CardImpl<MortalsResolve> {
+public class MortalsResolve extends CardImpl {
 
     public MortalsResolve(UUID ownerId) {
         super(ownerId, 127, "Mortal's Resolve", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

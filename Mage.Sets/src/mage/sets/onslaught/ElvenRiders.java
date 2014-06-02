@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Quercitron
  */
-public class ElvenRiders extends CardImpl<ElvenRiders> {
+public class ElvenRiders extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls and/or creatures with flying");
 

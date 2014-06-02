@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class KamiOfEmptyGraves extends CardImpl<KamiOfEmptyGraves> {
+public class KamiOfEmptyGraves extends CardImpl {
 
     public KamiOfEmptyGraves(UUID ownerId) {
         super(ownerId, 75, "Kami of Empty Graves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

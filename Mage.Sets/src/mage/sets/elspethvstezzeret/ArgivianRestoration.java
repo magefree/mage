@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class ArgivianRestoration extends CardImpl<ArgivianRestoration> {
+public class ArgivianRestoration extends CardImpl {
 
     public ArgivianRestoration(UUID ownerId) {
         super(ownerId, 69, "Argivian Restoration", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");

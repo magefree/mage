@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GiantScorpion extends CardImpl<GiantScorpion> {
+public class GiantScorpion extends CardImpl {
 
     public GiantScorpion(UUID ownerId) {
         super(ownerId, 90, "Giant Scorpion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

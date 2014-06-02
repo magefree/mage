@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class ProwlersHelm extends CardImpl<ProwlersHelm> {
+public class ProwlersHelm extends CardImpl {
 
     public ProwlersHelm(UUID ownerId) {
         super(ownerId, 219, "Prowler's Helm", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

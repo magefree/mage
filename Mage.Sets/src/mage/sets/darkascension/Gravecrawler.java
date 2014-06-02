@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class Gravecrawler extends CardImpl<Gravecrawler> {
+public class Gravecrawler extends CardImpl {
 
     public Gravecrawler(UUID ownerId) {
         super(ownerId, 64, "Gravecrawler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}");

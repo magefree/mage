@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class BurnishedHart extends CardImpl<BurnishedHart> {
+public class BurnishedHart extends CardImpl {
 
     public BurnishedHart(UUID ownerId) {
         super(ownerId, 213, "Burnished Hart", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

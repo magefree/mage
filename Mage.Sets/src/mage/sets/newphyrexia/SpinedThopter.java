@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SpinedThopter extends CardImpl<SpinedThopter> {
+public class SpinedThopter extends CardImpl {
 
     public SpinedThopter(UUID ownerId) {
         super(ownerId, 45, "Spined Thopter", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{UP}");

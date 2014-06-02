@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class MagosiTheWaterveil extends CardImpl<MagosiTheWaterveil> {
+public class MagosiTheWaterveil extends CardImpl {
 
     public MagosiTheWaterveil(UUID ownerId) {
         super(ownerId, 218, "Magosi, the Waterveil", Rarity.RARE, new CardType[]{CardType.LAND}, "");

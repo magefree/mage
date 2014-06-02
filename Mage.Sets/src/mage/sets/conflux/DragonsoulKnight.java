@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class DragonsoulKnight extends CardImpl<DragonsoulKnight> {
+public class DragonsoulKnight extends CardImpl {
 
     public DragonsoulKnight(UUID ownerId) {
         super(ownerId, 62, "Dragonsoul Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

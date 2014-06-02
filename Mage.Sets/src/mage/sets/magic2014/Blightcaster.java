@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Blightcaster extends CardImpl<Blightcaster> {
+public class Blightcaster extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
     static {

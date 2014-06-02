@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class WordsOfWind extends CardImpl<WordsOfWind> {
+public class WordsOfWind extends CardImpl {
 
     public WordsOfWind(UUID ownerId) {
         super(ownerId, 122, "Words of Wind", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class FelhideBrawler extends CardImpl<FelhideBrawler> {
+public class FelhideBrawler extends CardImpl {
 
     public FelhideBrawler(UUID ownerId) {
         super(ownerId, 70, "Felhide Brawler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

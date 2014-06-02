@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class EyeblightsEnding extends CardImpl<EyeblightsEnding> {
+public class EyeblightsEnding extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Elf creature");
 

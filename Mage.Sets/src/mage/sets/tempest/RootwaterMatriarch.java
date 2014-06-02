@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class RootwaterMatriarch extends CardImpl<RootwaterMatriarch> {
+public class RootwaterMatriarch extends CardImpl {
 
     public RootwaterMatriarch(UUID ownerId) {
         super(ownerId, 83, "Rootwater Matriarch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

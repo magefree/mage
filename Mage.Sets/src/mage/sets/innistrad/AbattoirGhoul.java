@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Alvin
  */
-public class AbattoirGhoul extends CardImpl<AbattoirGhoul> {
+public class AbattoirGhoul extends CardImpl {
 
     public AbattoirGhoul(UUID ownerId) {
         super(ownerId, 85, "Abattoir Ghoul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

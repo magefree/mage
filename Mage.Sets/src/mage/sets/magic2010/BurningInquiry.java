@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class BurningInquiry extends CardImpl<BurningInquiry> {
+public class BurningInquiry extends CardImpl {
 
     public BurningInquiry(UUID ownerId) {
         super(ownerId, 128, "Burning Inquiry", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");

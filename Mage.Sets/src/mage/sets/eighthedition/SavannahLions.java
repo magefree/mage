@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SavannahLions extends CardImpl<SavannahLions> {
+public class SavannahLions extends CardImpl {
 
     public SavannahLions(UUID ownerId) {
         super(ownerId, 43, "Savannah Lions", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");

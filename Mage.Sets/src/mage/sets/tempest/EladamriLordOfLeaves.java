@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class EladamriLordOfLeaves extends CardImpl<EladamriLordOfLeaves> {
+public class EladamriLordOfLeaves extends CardImpl {
 
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("Elf creatures");
     private static final FilterPermanent filterPermanents = new FilterPermanent("Elves");

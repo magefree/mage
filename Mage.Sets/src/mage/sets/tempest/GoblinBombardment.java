@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class GoblinBombardment extends CardImpl<GoblinBombardment> {
+public class GoblinBombardment extends CardImpl {
 
     public GoblinBombardment(UUID ownerId) {
         super(ownerId, 179, "Goblin Bombardment", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

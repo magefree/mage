@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
 /**
  * @author Loki
  */
-public class GoblinFireslinger extends CardImpl<GoblinFireslinger> {
+public class GoblinFireslinger extends CardImpl {
 
     public GoblinFireslinger(UUID ownerId) {
         super(ownerId, 139, "Goblin Fireslinger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

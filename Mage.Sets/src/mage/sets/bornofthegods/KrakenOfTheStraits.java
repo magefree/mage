@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class KrakenOfTheStraits extends CardImpl<KrakenOfTheStraits> {
+public class KrakenOfTheStraits extends CardImpl {
 
     public KrakenOfTheStraits(UUID ownerId) {
         super(ownerId, 42, "Kraken of the Straits", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

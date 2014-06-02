@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class NeedleshotGourna extends CardImpl<NeedleshotGourna> {
+public class NeedleshotGourna extends CardImpl {
 
     public NeedleshotGourna(UUID ownerId) {
         super(ownerId, 133, "Needleshot Gourna", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

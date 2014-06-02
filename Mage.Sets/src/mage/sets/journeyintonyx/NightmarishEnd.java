@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class NightmarishEnd extends CardImpl<NightmarishEnd> {
+public class NightmarishEnd extends CardImpl {
 
     public NightmarishEnd(UUID ownerId) {
         super(ownerId, 76, "Nightmarish End", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

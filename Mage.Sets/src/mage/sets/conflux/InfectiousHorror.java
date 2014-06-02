@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class InfectiousHorror extends CardImpl<InfectiousHorror> {
+public class InfectiousHorror extends CardImpl {
 
     public InfectiousHorror (UUID ownerId) {
         super(ownerId, 47, "Infectious Horror", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

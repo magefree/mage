@@ -47,7 +47,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author Plopman
  */
-public class EnergyField extends CardImpl<EnergyField> {
+public class EnergyField extends CardImpl {
 
     public EnergyField(UUID ownerId) {
         super(ownerId, 73, "Energy Field", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

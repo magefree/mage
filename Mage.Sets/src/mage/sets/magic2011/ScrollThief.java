@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ScrollThief extends CardImpl<ScrollThief> {
+public class ScrollThief extends CardImpl {
 
     public ScrollThief(UUID ownerId) {
         super(ownerId, 72, "Scroll Thief", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -43,7 +43,7 @@ import mage.game.Game;
  *
  * @author Plopman
  */
-public class Subversion extends CardImpl<Subversion> {
+public class Subversion extends CardImpl {
 
     public Subversion(UUID ownerId) {
         super(ownerId, 68, "Subversion", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

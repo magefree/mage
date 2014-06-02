@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author LevelX2
  */
-public class OakStreetInnkeeper extends CardImpl<OakStreetInnkeeper> {
+public class OakStreetInnkeeper extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("tapped creatures you control");
     static {

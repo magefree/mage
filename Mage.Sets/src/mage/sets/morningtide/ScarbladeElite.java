@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class ScarbladeElite extends CardImpl<ScarbladeElite> {
+public class ScarbladeElite extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Assassin card from your graveyard");
 

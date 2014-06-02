@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class Fatestitcher extends CardImpl<Fatestitcher> {
+public class Fatestitcher extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
     static{

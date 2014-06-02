@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class TurnToSlag extends CardImpl<TurnToSlag> {
+public class TurnToSlag extends CardImpl {
 
     public TurnToSlag (UUID ownerId) {
         super(ownerId, 106, "Turn to Slag", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

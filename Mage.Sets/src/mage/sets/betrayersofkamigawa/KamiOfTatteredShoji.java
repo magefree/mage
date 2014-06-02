@@ -43,7 +43,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  *
  * @author Loki
  */
-public class KamiOfTatteredShoji extends CardImpl<KamiOfTatteredShoji> {
+public class KamiOfTatteredShoji extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 

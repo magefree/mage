@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RocEgg extends CardImpl<RocEgg> {
+public class RocEgg extends CardImpl {
 
     private static RocEggToken rocEggToken = new RocEggToken();
 

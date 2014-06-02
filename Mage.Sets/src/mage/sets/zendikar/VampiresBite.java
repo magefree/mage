@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class VampiresBite extends CardImpl<VampiresBite> {
+public class VampiresBite extends CardImpl {
 
     public VampiresBite(UUID ownerId) {
         super(ownerId, 117, "Vampire's Bite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

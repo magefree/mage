@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class PlagueStinger extends CardImpl<PlagueStinger> {
+public class PlagueStinger extends CardImpl {
 
     public PlagueStinger (UUID ownerId) {
         super(ownerId, 75, "Plague Stinger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

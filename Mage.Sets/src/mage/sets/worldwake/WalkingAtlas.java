@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Loki
  */
-public class WalkingAtlas extends CardImpl<WalkingAtlas> {
+public class WalkingAtlas extends CardImpl {
 
     public WalkingAtlas (UUID ownerId) {
         super(ownerId, 131, "Walking Atlas", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

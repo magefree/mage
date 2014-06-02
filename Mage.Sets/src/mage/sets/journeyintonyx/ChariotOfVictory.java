@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ChariotOfVictory extends CardImpl<ChariotOfVictory> {
+public class ChariotOfVictory extends CardImpl {
 
     public ChariotOfVictory(UUID ownerId) {
         super(ownerId, 159, "Chariot of Victory", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

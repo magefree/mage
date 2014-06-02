@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author North
  */
-public class ReinforcedBulwark extends CardImpl<ReinforcedBulwark> {
+public class ReinforcedBulwark extends CardImpl {
 
     public ReinforcedBulwark(UUID ownerId) {
         super(ownerId, 223, "Reinforced Bulwark", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

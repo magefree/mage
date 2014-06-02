@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class KarplusanForest extends CardImpl<KarplusanForest> {
+public class KarplusanForest extends CardImpl {
 
     public KarplusanForest(UUID ownerId) {
         super(ownerId, 354, "Karplusan Forest", Rarity.RARE, new CardType[]{CardType.LAND}, "");

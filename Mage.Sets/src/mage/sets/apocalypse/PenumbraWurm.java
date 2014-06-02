@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class PenumbraWurm extends CardImpl<PenumbraWurm> {
+public class PenumbraWurm extends CardImpl {
 
     public PenumbraWurm(UUID ownerId) {
         super(ownerId, 84, "Penumbra Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

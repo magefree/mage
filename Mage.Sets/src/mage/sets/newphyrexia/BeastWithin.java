@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author North, Loki
  */
-public class BeastWithin extends CardImpl<BeastWithin> {
+public class BeastWithin extends CardImpl {
 
     public BeastWithin(UUID ownerId) {
         super(ownerId, 103, "Beast Within", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

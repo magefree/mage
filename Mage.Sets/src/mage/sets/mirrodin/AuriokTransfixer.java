@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class AuriokTransfixer extends CardImpl<AuriokTransfixer> {
+public class AuriokTransfixer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

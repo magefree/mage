@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class RainOfEmbers extends CardImpl<RainOfEmbers> {
+public class RainOfEmbers extends CardImpl {
 
     public RainOfEmbers(UUID ownerId) {
         super(ownerId, 138, "Rain of Embers", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

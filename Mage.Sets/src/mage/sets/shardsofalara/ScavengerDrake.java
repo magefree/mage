@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class ScavengerDrake extends CardImpl<ScavengerDrake> {
+public class ScavengerDrake extends CardImpl {
 
     public ScavengerDrake(UUID ownerId) {
         super(ownerId, 85, "Scavenger Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

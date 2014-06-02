@@ -42,7 +42,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author LevelX2
  */
-public class WinnowerPatrol extends CardImpl<WinnowerPatrol> {
+public class WinnowerPatrol extends CardImpl {
 
     public WinnowerPatrol(UUID ownerId) {
         super(ownerId, 139, "Winnower Patrol", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ExpendableTroops extends CardImpl<ExpendableTroops> {
+public class ExpendableTroops extends CardImpl {
 
     public ExpendableTroops(UUID ownerId) {
         super(ownerId, 8, "Expendable Troops", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

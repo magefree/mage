@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class WildwoodGeist extends CardImpl<WildwoodGeist> {
+public class WildwoodGeist extends CardImpl {
 
     public WildwoodGeist(UUID ownerId) {
         super(ownerId, 204, "Wildwood Geist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

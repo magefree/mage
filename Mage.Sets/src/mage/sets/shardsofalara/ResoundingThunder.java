@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Plopman
  */
-public class ResoundingThunder extends CardImpl<ResoundingThunder> {
+public class ResoundingThunder extends CardImpl {
 
     public ResoundingThunder(UUID ownerId) {
         super(ownerId, 110, "Resounding Thunder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

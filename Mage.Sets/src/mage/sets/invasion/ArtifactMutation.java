@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class ArtifactMutation extends CardImpl<ArtifactMutation> {
+public class ArtifactMutation extends CardImpl {
 
     public ArtifactMutation(UUID ownerId) {
         super(ownerId, 231, "Artifact Mutation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{G}");

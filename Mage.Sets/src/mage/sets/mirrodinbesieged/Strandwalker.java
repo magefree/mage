@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class Strandwalker extends CardImpl<Strandwalker> {
+public class Strandwalker extends CardImpl {
 
     public Strandwalker(UUID ownerId) {
         super(ownerId, 137, "Strandwalker", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{5}");

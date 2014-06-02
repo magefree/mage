@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class SpikeshotElder extends CardImpl<SpikeshotElder> {
+public class SpikeshotElder extends CardImpl {
 
     public SpikeshotElder (UUID ownerId) {
         super(ownerId, 104, "Spikeshot Elder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");

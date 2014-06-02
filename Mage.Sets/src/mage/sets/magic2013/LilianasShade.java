@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class LilianasShade extends CardImpl<LilianasShade> {
+public class LilianasShade extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("Swamp");
 

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AngelsGrace extends CardImpl<AngelsGrace> {
+public class AngelsGrace extends CardImpl {
 
     public AngelsGrace(UUID ownerId) {
         super(ownerId, 3, "Angel's Grace", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");

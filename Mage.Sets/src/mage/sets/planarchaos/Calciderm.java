@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class Calciderm extends CardImpl<Calciderm> {
+public class Calciderm extends CardImpl {
 
     public Calciderm(UUID ownerId) {
         super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

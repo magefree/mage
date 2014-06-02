@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Loki
  */
-public class ArchonOfRedemption extends CardImpl<ArchonOfRedemption> {
+public class ArchonOfRedemption extends CardImpl {
 
     public ArchonOfRedemption(UUID ownerId) {
         super(ownerId, 3, "Archon of Redemption", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

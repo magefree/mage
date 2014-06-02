@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class NimbusNaiad extends CardImpl<NimbusNaiad> {
+public class NimbusNaiad extends CardImpl {
 
     public NimbusNaiad(UUID ownerId) {
         super(ownerId, 56, "Nimbus Naiad", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{U}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Backfir3
  */
-public class CateranOverlord extends CardImpl<CateranOverlord> {
+public class CateranOverlord extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary permanent card with converted mana cost 6 or less");
 

@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class Capsize extends CardImpl<Capsize> {
+public class Capsize extends CardImpl {
 
     public Capsize(UUID ownerId) {
         super(ownerId, 55, "Capsize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");

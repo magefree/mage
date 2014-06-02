@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DauntlessOnslaught extends CardImpl<DauntlessOnslaught> {
+public class DauntlessOnslaught extends CardImpl {
 
     public DauntlessOnslaught(UUID ownerId) {
         super(ownerId, 6, "Dauntless Onslaught", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class BurningEyeZubera extends CardImpl<BurningEyeZubera> {
+public class BurningEyeZubera extends CardImpl {
 
     public BurningEyeZubera(UUID ownerId) {
         super(ownerId, 95, "Burning-Eye Zubera", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

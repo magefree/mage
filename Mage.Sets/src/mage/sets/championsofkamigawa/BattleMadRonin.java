@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author loki
  */
-public class BattleMadRonin extends CardImpl<BattleMadRonin> {
+public class BattleMadRonin extends CardImpl {
 
     public BattleMadRonin (UUID ownerId) {
         super(ownerId, 156, "Battle-Mad Ronin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

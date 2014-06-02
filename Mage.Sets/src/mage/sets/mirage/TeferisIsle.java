@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class TeferisIsle extends CardImpl<TeferisIsle> {
+public class TeferisIsle extends CardImpl {
 
     public TeferisIsle(UUID ownerId) {
         super(ownerId, 315, "Teferi's Isle", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInGraveyard;
 /**
  * @author Loki
  */
-public class BeckonApparition extends CardImpl<BeckonApparition> {
+public class BeckonApparition extends CardImpl {
 
     public BeckonApparition(UUID ownerId) {
         super(ownerId, 82, "Beckon Apparition", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W/B}");

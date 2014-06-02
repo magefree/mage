@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class Fabricate extends CardImpl<Fabricate> {
+public class Fabricate extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("artifact");
 

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class StormcallerOfKeranos extends CardImpl<StormcallerOfKeranos> {
+public class StormcallerOfKeranos extends CardImpl {
 
     public StormcallerOfKeranos(UUID ownerId) {
         super(ownerId, 112, "Stormcaller of Keranos", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

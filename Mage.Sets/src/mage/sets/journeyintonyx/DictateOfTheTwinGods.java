@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DictateOfTheTwinGods extends CardImpl<DictateOfTheTwinGods> {
+public class DictateOfTheTwinGods extends CardImpl {
 
     public DictateOfTheTwinGods(UUID ownerId) {
         super(ownerId, 93, "Dictate of the Twin Gods", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");

@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PendrellMists extends CardImpl<PendrellMists> {
+public class PendrellMists extends CardImpl {
 
     public PendrellMists(UUID ownerId) {
         super(ownerId, 47, "Pendrell Mists", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

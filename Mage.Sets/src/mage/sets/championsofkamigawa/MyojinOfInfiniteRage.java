@@ -54,7 +54,7 @@ import mage.watchers.common.CastFromHandWatcher;
 /**
  * @author LevelX
  */
-public class MyojinOfInfiniteRage extends CardImpl<MyojinOfInfiniteRage> {
+public class MyojinOfInfiniteRage extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("lands");
 

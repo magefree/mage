@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SetessanBattlePriest extends CardImpl<SetessanBattlePriest> {
+public class SetessanBattlePriest extends CardImpl {
 
     public SetessanBattlePriest(UUID ownerId) {
         super(ownerId, 29, "Setessan Battle Priest", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

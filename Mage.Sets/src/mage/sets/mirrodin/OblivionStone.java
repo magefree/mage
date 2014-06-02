@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class OblivionStone extends CardImpl<OblivionStone> {
+public class OblivionStone extends CardImpl {
 
     public OblivionStone(UUID ownerId) {
         super(ownerId, 222, "Oblivion Stone", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

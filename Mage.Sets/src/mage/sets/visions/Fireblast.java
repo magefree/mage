@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author jeffwadsworth
 
  */
-public class Fireblast extends CardImpl<Fireblast> {
+public class Fireblast extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Mountain");
     

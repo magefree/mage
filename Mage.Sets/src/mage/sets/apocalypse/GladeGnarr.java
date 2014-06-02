@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class GladeGnarr extends CardImpl<GladeGnarr> {
+public class GladeGnarr extends CardImpl {
 
     public GladeGnarr(UUID ownerId) {
         super(ownerId, 78, "Glade Gnarr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ThunderBrute extends CardImpl<ThunderBrute> {
+public class ThunderBrute extends CardImpl {
 
     public ThunderBrute(UUID ownerId) {
         super(ownerId, 113, "Thunder Brute", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

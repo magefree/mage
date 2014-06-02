@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class LeapOfFaith extends CardImpl<LeapOfFaith> {
+public class LeapOfFaith extends CardImpl {
 
     public LeapOfFaith(UUID ownerId) {
         super(ownerId, 26, "Leap of Faith", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

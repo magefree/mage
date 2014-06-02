@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class MarbleDiamond extends CardImpl<MarbleDiamond> {
+public class MarbleDiamond extends CardImpl {
 
     public MarbleDiamond(UUID ownerId) {
         super(ownerId, 306, "Marble Diamond", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

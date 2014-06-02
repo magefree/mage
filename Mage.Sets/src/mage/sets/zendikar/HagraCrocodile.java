@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HagraCrocodile extends CardImpl<HagraCrocodile> {
+public class HagraCrocodile extends CardImpl {
 
     public HagraCrocodile(UUID ownerId) {
         super(ownerId, 94, "Hagra Crocodile", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

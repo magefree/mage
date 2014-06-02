@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class NightbirdsClutches extends CardImpl<NightbirdsClutches> {
+public class NightbirdsClutches extends CardImpl {
 
     public NightbirdsClutches(UUID ownerId) {
         super(ownerId, 154, "Nightbird's Clutches", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

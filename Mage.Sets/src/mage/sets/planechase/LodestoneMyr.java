@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Loki
  */
-public class LodestoneMyr extends CardImpl<LodestoneMyr> {
+public class LodestoneMyr extends CardImpl {
 
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifact you control");
 

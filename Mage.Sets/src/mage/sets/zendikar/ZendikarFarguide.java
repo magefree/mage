@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ZendikarFarguide extends CardImpl<ZendikarFarguide> {
+public class ZendikarFarguide extends CardImpl {
 
     public ZendikarFarguide(UUID ownerId) {
         super(ownerId, 194, "Zendikar Farguide", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

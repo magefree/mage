@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class BoundlessRealms extends CardImpl<BoundlessRealms> {
+public class BoundlessRealms extends CardImpl {
 
     public BoundlessRealms(UUID ownerId) {
         super(ownerId, 162, "Boundless Realms", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{G}");

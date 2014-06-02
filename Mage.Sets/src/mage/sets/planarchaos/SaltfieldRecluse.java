@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SaltfieldRecluse extends CardImpl<SaltfieldRecluse> {
+public class SaltfieldRecluse extends CardImpl {
 
     public SaltfieldRecluse(UUID ownerId) {
         super(ownerId, 16, "Saltfield Recluse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

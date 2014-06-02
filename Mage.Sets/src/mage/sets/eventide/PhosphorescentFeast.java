@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  * @author jeffwadsworth
  *
  */
-public class PhosphorescentFeast extends CardImpl<PhosphorescentFeast> {
+public class PhosphorescentFeast extends CardImpl {
 
     public PhosphorescentFeast(UUID ownerId) {
         super(ownerId, 72, "Phosphorescent Feast", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}{G}");

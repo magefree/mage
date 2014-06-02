@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class Anathemancer extends CardImpl<Anathemancer> {
+public class Anathemancer extends CardImpl {
 
     public Anathemancer(UUID ownerId) {
         super(ownerId, 33, "Anathemancer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");

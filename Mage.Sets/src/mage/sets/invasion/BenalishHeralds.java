@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class BenalishHeralds extends CardImpl<BenalishHeralds> {
+public class BenalishHeralds extends CardImpl {
 
     public BenalishHeralds(UUID ownerId) {
         super(ownerId, 6, "Benalish Heralds", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

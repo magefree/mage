@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ManorSkeleton extends CardImpl<ManorSkeleton> {
+public class ManorSkeleton extends CardImpl {
 
     public ManorSkeleton(UUID ownerId) {
         super(ownerId, 106, "Manor Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

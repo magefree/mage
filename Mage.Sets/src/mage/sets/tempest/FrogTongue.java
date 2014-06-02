@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class FrogTongue extends CardImpl<FrogTongue> {
+public class FrogTongue extends CardImpl {
 
     public FrogTongue(UUID ownerId) {
         super(ownerId, 122, "Frog Tongue", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");

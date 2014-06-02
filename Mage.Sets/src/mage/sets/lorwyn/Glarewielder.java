@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Glarewielder extends CardImpl<Glarewielder> {
+public class Glarewielder extends CardImpl {
 
     public Glarewielder(UUID ownerId) {
         super(ownerId, 171, "Glarewielder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

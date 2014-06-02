@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class OrzhovKeyrune extends CardImpl<OrzhovKeyrune> {
+public class OrzhovKeyrune extends CardImpl {
 
     public OrzhovKeyrune(UUID ownerId) {
         super(ownerId, 233, "Orzhov Keyrune", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

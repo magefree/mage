@@ -44,7 +44,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class IncursionSpecialist extends CardImpl<IncursionSpecialist> {
+public class IncursionSpecialist extends CardImpl {
 
     public IncursionSpecialist(UUID ownerId) {
         super(ownerId, 38, "Incursion Specialist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

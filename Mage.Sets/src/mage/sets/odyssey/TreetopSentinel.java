@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author cbt33
  */
  
-public class TreetopSentinel extends CardImpl<TreetopSentinel> {
+public class TreetopSentinel extends CardImpl {
     
     public static final FilterCard filter = new FilterCard("green");
     static {

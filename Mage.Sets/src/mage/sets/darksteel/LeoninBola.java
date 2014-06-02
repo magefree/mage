@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class LeoninBola extends CardImpl<LeoninBola> {
+public class LeoninBola extends CardImpl {
 
     public LeoninBola(UUID ownerId) {
         super(ownerId, 127, "Leonin Bola", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WaterspoutWeavers extends CardImpl<WaterspoutWeavers> {
+public class WaterspoutWeavers extends CardImpl {
 
     public WaterspoutWeavers(UUID ownerId) {
         super(ownerId, 56, "Waterspout Weavers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class DimirGuildmage extends CardImpl<DimirGuildmage> {
+public class DimirGuildmage extends CardImpl {
 
     public DimirGuildmage(UUID ownerId) {
         super(ownerId, 245, "Dimir Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}");

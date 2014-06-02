@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class IchorExplosion extends CardImpl<IchorExplosion> {
+public class IchorExplosion extends CardImpl {
 
     public IchorExplosion(UUID ownerId) {
         super(ownerId, 64, "Ichor Explosion", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");

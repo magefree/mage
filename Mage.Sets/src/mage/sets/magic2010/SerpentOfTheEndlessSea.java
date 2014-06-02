@@ -50,7 +50,7 @@ import mage.game.events.GameEvent;
  *
  * @author North
  */
-public class SerpentOfTheEndlessSea extends CardImpl<SerpentOfTheEndlessSea> {
+public class SerpentOfTheEndlessSea extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands you control");
 

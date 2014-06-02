@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class CopperCarapace extends CardImpl<CopperCarapace> {
+public class CopperCarapace extends CardImpl {
 
     public CopperCarapace(UUID ownerId) {
         super(ownerId, 102, "Copper Carapace", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

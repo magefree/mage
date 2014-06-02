@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class DriverOfTheDead extends CardImpl<DriverOfTheDead> {
+public class DriverOfTheDead extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard to the battlefield");
 

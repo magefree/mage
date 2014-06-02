@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class DangerousWager extends CardImpl<DangerousWager> {
+public class DangerousWager extends CardImpl {
 
     public DangerousWager(UUID ownerId) {
         super(ownerId, 131, "Dangerous Wager", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");

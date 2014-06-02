@@ -40,7 +40,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class LightningHelix extends CardImpl<LightningHelix> {
+public class LightningHelix extends CardImpl {
 
     public LightningHelix (UUID ownerId) {
         super(ownerId, 213, "Lightning Helix", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}");

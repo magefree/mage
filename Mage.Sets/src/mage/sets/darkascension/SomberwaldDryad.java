@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SomberwaldDryad extends CardImpl<SomberwaldDryad> {
+public class SomberwaldDryad extends CardImpl {
 
     public SomberwaldDryad(UUID ownerId) {
         super(ownerId, 126, "Somberwald Dryad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

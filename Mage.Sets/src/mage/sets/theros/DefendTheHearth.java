@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class DefendTheHearth extends CardImpl<DefendTheHearth> {
+public class DefendTheHearth extends CardImpl {
 
     public DefendTheHearth(UUID ownerId) {
         super(ownerId, 156, "Defend the Hearth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");

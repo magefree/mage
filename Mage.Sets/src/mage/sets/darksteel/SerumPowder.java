@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SerumPowder extends CardImpl<SerumPowder> {
+public class SerumPowder extends CardImpl {
 
     public SerumPowder(UUID ownerId) {
         super(ownerId, 138, "Serum Powder", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");

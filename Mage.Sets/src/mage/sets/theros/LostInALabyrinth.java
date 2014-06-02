@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class LostInALabyrinth extends CardImpl<LostInALabyrinth> {
+public class LostInALabyrinth extends CardImpl {
 
     public LostInALabyrinth(UUID ownerId) {
         super(ownerId, 52, "Lost in a Labyrinth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

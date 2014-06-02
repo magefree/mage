@@ -55,7 +55,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author jeffwadsworth
  *
  */
-public class CursedScroll extends CardImpl<CursedScroll> {
+public class CursedScroll extends CardImpl {
 
     public CursedScroll(UUID ownerId) {
         super(ownerId, 271, "Cursed Scroll", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");

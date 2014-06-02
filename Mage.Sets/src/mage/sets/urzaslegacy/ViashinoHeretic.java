@@ -50,7 +50,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Plopman
  */
-public class ViashinoHeretic extends CardImpl<ViashinoHeretic> {
+public class ViashinoHeretic extends CardImpl {
 
     public ViashinoHeretic(UUID ownerId) {
         super(ownerId, 95, "Viashino Heretic", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

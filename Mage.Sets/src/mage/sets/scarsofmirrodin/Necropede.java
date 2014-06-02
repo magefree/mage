@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Necropede extends CardImpl<Necropede> {
+public class Necropede extends CardImpl {
 
     public Necropede (UUID ownerId) {
         super(ownerId, 185, "Necropede", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

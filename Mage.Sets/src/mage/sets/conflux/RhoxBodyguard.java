@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class RhoxBodyguard extends CardImpl<RhoxBodyguard> {
+public class RhoxBodyguard extends CardImpl {
 
     public RhoxBodyguard(UUID ownerId) {
         super(ownerId, 122, "Rhox Bodyguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");

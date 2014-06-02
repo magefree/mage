@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LilianasCaress extends CardImpl<LilianasCaress> {
+public class LilianasCaress extends CardImpl {
 
     public LilianasCaress(UUID ownerId) {
         super(ownerId, 103, "Liliana's Caress", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

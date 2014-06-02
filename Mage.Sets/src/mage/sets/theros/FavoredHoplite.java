@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class FavoredHoplite extends CardImpl<FavoredHoplite> {
+public class FavoredHoplite extends CardImpl {
 
     public FavoredHoplite(UUID ownerId) {
         super(ownerId, 13, "Favored Hoplite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");

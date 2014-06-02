@@ -43,7 +43,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author North
  */
-public class TerraEternal extends CardImpl<TerraEternal> {
+public class TerraEternal extends CardImpl {
 
     public TerraEternal(UUID ownerId) {
         super(ownerId, 22, "Terra Eternal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

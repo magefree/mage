@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class Blistergrub extends CardImpl<Blistergrub> {
+public class Blistergrub extends CardImpl {
 
     public Blistergrub (UUID ownerId) {
         super(ownerId, 56, "Blistergrub", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

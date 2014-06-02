@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Disorient extends CardImpl<Disorient> {
+public class Disorient extends CardImpl {
 
     public Disorient(UUID ownerId) {
         super(ownerId, 48, "Disorient", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");

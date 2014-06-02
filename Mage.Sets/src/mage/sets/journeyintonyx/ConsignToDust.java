@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ConsignToDust extends CardImpl<ConsignToDust> {
+public class ConsignToDust extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifacts and/or enchantments");
 

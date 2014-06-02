@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class LinvalaKeeperOfSilence extends CardImpl<LinvalaKeeperOfSilence> {
+public class LinvalaKeeperOfSilence extends CardImpl {
 
     public LinvalaKeeperOfSilence (UUID ownerId) {
         super(ownerId, 33, "Linvala, Keeper of Silence", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

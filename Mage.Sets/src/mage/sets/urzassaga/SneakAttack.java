@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SneakAttack extends CardImpl<SneakAttack> {
+public class SneakAttack extends CardImpl {
 
     public SneakAttack(UUID ownerId) {
         super(ownerId, 218, "Sneak Attack", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

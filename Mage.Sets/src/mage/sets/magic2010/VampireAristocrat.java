@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class VampireAristocrat extends CardImpl<VampireAristocrat> {
+public class VampireAristocrat extends CardImpl {
 
     public VampireAristocrat(UUID ownerId) {
         super(ownerId, 117, "Vampire Aristocrat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

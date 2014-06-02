@@ -53,7 +53,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class DivineReckoning extends CardImpl<DivineReckoning> {
+public class DivineReckoning extends CardImpl {
 
     public DivineReckoning(UUID ownerId) {
         super(ownerId, 10, "Divine Reckoning", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");

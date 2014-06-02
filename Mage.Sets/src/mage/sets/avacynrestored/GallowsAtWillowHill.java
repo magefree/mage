@@ -55,7 +55,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class GallowsAtWillowHill extends CardImpl<GallowsAtWillowHill> {
+public class GallowsAtWillowHill extends CardImpl {
 
     private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
 

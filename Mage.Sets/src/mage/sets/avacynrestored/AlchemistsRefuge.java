@@ -53,7 +53,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author noxx
 
  */
-public class AlchemistsRefuge extends CardImpl<AlchemistsRefuge> {
+public class AlchemistsRefuge extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("nonland cards");
     static {

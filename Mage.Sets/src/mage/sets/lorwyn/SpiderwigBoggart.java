@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SpiderwigBoggart extends CardImpl<SpiderwigBoggart> {
+public class SpiderwigBoggart extends CardImpl {
 
     public SpiderwigBoggart(UUID ownerId) {
         super(ownerId, 141, "Spiderwig Boggart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

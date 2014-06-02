@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class SludgeStrider extends CardImpl<SludgeStrider> {
+public class SludgeStrider extends CardImpl {
 
     public SludgeStrider(UUID ownerId) {
         super(ownerId, 126, "Sludge Strider", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}{U}{B}");

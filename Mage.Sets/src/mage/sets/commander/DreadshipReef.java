@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class DreadshipReef extends CardImpl<DreadshipReef> {
+public class DreadshipReef extends CardImpl {
 
     public DreadshipReef(UUID ownerId) {
         super(ownerId, 271, "Dreadship Reef", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

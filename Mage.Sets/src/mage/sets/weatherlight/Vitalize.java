@@ -38,7 +38,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Quercitron
  */
-public class Vitalize extends CardImpl<Vitalize> {
+public class Vitalize extends CardImpl {
 
     public Vitalize(UUID ownerId) {
         super(ownerId, 87, "Vitalize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

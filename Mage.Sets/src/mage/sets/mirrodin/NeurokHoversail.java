@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class NeurokHoversail extends CardImpl<NeurokHoversail> {
+public class NeurokHoversail extends CardImpl {
 
     public NeurokHoversail(UUID ownerId) {
         super(ownerId, 218, "Neurok Hoversail", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

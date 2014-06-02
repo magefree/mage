@@ -50,7 +50,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MoonscarredWerewolf extends CardImpl<MoonscarredWerewolf> {
+public class MoonscarredWerewolf extends CardImpl {
 
     public MoonscarredWerewolf(UUID ownerId) {
         super(ownerId, 125, "Moonscarred Werewolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");

@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class RiteOfRuin extends CardImpl<RiteOfRuin> {
+public class RiteOfRuin extends CardImpl {
 
     public RiteOfRuin(UUID ownerId) {
         super(ownerId, 153, "Rite of Ruin", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");

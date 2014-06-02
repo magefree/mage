@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author nantuko
  */
-public class ArbalestElite extends CardImpl<ArbalestElite> {
+public class ArbalestElite extends CardImpl {
 
     public ArbalestElite(UUID ownerId) {
         super(ownerId, 5, "Arbalest Elite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

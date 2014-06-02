@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TrainedOrgg extends CardImpl<TrainedOrgg> {
+public class TrainedOrgg extends CardImpl {
 
     public TrainedOrgg(UUID ownerId) {
         super(ownerId, 224, "Trained Orgg", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}");

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SpinelessThug extends CardImpl<SpinelessThug> {
+public class SpinelessThug extends CardImpl {
 
     public SpinelessThug(UUID ownerId) {
         super(ownerId, 180, "Spineless Thug", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

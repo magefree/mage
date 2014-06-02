@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class MuckRats extends CardImpl<MuckRats> {
+public class MuckRats extends CardImpl {
 
     public MuckRats(UUID ownerId) {
         super(ownerId, 20, "Muck Rats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

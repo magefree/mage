@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class Afterlife extends CardImpl<Afterlife> {
+public class Afterlife extends CardImpl {
 
     public Afterlife(UUID ownerId) {
         super(ownerId, 205, "Afterlife", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

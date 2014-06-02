@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MorticianBeetle extends CardImpl<MorticianBeetle> {
+public class MorticianBeetle extends CardImpl {
 
     public MorticianBeetle(UUID ownerId) {
         super(ownerId, 117, "Mortician Beetle", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}");

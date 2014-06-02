@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class UrborgTombOfYawgmoth extends CardImpl<UrborgTombOfYawgmoth> {
+public class UrborgTombOfYawgmoth extends CardImpl {
 
     public UrborgTombOfYawgmoth(UUID ownerId) {
         super(ownerId, 165, "Urborg, Tomb of Yawgmoth", Rarity.RARE, new CardType[]{CardType.LAND}, "");

@@ -37,7 +37,7 @@ import mage.constants.Rarity;
 /**
  * @author mluds
  */
-public class WheelOfFortune extends CardImpl<WheelOfFortune> {
+public class WheelOfFortune extends CardImpl {
 
     public WheelOfFortune(UUID ownerId) {
         super(ownerId, 184, "Wheel of Fortune", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");

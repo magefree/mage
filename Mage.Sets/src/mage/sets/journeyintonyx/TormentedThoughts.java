@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TormentedThoughts extends CardImpl<TormentedThoughts> {
+public class TormentedThoughts extends CardImpl {
 
     public TormentedThoughts(UUID ownerId) {
         super(ownerId, 86, "Tormented Thoughts", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MindsAglow extends CardImpl<MindsAglow> {
+public class MindsAglow extends CardImpl {
 
     public MindsAglow(UUID ownerId) {
         super(ownerId, 51, "Minds Aglow", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}");

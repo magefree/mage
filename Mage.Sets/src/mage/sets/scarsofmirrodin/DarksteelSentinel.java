@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DarksteelSentinel extends CardImpl<DarksteelSentinel> {
+public class DarksteelSentinel extends CardImpl {
 
     public DarksteelSentinel (UUID ownerId) {
         super(ownerId, 152, "Darksteel Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

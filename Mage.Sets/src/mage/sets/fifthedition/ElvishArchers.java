@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ElvishArchers extends CardImpl<ElvishArchers> {
+public class ElvishArchers extends CardImpl {
 
     public ElvishArchers(UUID ownerId) {
         super(ownerId, 154, "Elvish Archers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

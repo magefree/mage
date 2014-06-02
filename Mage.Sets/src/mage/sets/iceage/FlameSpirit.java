@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class FlameSpirit extends CardImpl<FlameSpirit> {
+public class FlameSpirit extends CardImpl {
 
     public FlameSpirit(UUID ownerId) {
         super(ownerId, 184, "Flame Spirit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

@@ -46,7 +46,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author ayratn
  */
-public class ScrapdiverSerpent extends CardImpl<ScrapdiverSerpent> {
+public class ScrapdiverSerpent extends CardImpl {
 
     public ScrapdiverSerpent (UUID ownerId) {
         super(ownerId, 41, "Scrapdiver Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

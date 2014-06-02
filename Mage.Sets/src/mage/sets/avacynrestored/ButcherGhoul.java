@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ButcherGhoul extends CardImpl<ButcherGhoul> {
+public class ButcherGhoul extends CardImpl {
 
     public ButcherGhoul(UUID ownerId) {
         super(ownerId, 89, "Butcher Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

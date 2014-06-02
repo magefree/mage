@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WhirlpoolRider extends CardImpl<WhirlpoolRider> {
+public class WhirlpoolRider extends CardImpl {
 
     public WhirlpoolRider(UUID ownerId) {
         super(ownerId, 35, "Whirlpool Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class GrotagThrasher extends CardImpl<GrotagThrasher> {
+public class GrotagThrasher extends CardImpl {
 
     public GrotagThrasher(UUID ownerId) {
         super(ownerId, 83, "Grotag Thrasher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

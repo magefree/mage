@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Starfall extends CardImpl<Starfall> {
+public class Starfall extends CardImpl {
 
     public Starfall(UUID ownerId) {
         super(ownerId, 114, "Starfall", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");

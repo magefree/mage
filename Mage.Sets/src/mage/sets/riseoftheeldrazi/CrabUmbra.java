@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class CrabUmbra extends CardImpl<CrabUmbra> {
+public class CrabUmbra extends CardImpl {
 
     public CrabUmbra(UUID ownerId) {
         super(ownerId, 58, "Crab Umbra", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

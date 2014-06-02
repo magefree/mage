@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class LeoninScimitar extends CardImpl<LeoninScimitar> {
+public class LeoninScimitar extends CardImpl {
 
     public LeoninScimitar(UUID ownerId) {
         super(ownerId, 331, "Leonin Scimitar", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

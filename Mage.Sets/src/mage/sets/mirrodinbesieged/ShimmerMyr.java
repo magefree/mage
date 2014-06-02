@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Loki
  */
-public class ShimmerMyr extends CardImpl<ShimmerMyr> {
+public class ShimmerMyr extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("artifact cards");
     static {

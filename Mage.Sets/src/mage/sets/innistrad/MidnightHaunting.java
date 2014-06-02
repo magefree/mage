@@ -38,7 +38,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author nantuko
  */
-public class MidnightHaunting extends CardImpl<MidnightHaunting> {
+public class MidnightHaunting extends CardImpl {
 
     public MidnightHaunting(UUID ownerId) {
         super(ownerId, 22, "Midnight Haunting", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");

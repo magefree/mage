@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  */
 
 
-public class AweForTheGuilds extends CardImpl<AweForTheGuilds> {
+public class AweForTheGuilds extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Monocolored creatures");
     static {

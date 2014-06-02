@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class VolcanicSubmersion extends CardImpl<VolcanicSubmersion> {
+public class VolcanicSubmersion extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 

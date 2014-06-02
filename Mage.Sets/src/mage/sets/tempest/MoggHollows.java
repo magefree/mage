@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MoggHollows extends CardImpl<MoggHollows> {
+public class MoggHollows extends CardImpl {
 
     public MoggHollows(UUID ownerId) {
         super(ownerId, 318, "Mogg Hollows", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

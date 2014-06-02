@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Preordain extends CardImpl<Preordain> {
+public class Preordain extends CardImpl {
 
     public Preordain(UUID ownerId) {
         super(ownerId, 70, "Preordain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");

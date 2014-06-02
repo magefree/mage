@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 /**
  * @author noxx
  */
-public class HarmsWay extends CardImpl<HarmsWay> {
+public class HarmsWay extends CardImpl {
 
     public HarmsWay(UUID ownerId) {
         super(ownerId, 14, "Harm's Way", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");

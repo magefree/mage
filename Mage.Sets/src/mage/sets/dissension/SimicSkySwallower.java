@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SimicSkySwallower extends CardImpl<SimicSkySwallower> {
+public class SimicSkySwallower extends CardImpl {
 
     public SimicSkySwallower(UUID ownerId) {
         super(ownerId, 130, "Simic Sky Swallower", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{U}");

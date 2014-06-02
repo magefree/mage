@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author maurer.it_at_gmail.com
  */
-public class VampireNighthawk extends CardImpl<VampireNighthawk> {
+public class VampireNighthawk extends CardImpl {
 
     public VampireNighthawk(UUID ownerId) {
         super(ownerId, 116, "Vampire Nighthawk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

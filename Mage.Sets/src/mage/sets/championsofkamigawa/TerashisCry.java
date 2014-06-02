@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX
  */
 
-public class TerashisCry extends CardImpl<TerashisCry> {
+public class TerashisCry extends CardImpl {
 
     public TerashisCry(UUID ownerId) {
         super(ownerId, 47, "Terashi's Cry", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");

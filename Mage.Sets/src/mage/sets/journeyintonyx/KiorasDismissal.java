@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class KiorasDismissal extends CardImpl<KiorasDismissal> {
+public class KiorasDismissal extends CardImpl {
 
     public KiorasDismissal(UUID ownerId) {
         super(ownerId, 44, "Kiora's Dismissal", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");

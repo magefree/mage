@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class JerrardOfTheClosedFist extends CardImpl<JerrardOfTheClosedFist> {
+public class JerrardOfTheClosedFist extends CardImpl {
 
     public JerrardOfTheClosedFist(UUID ownerId) {
         super(ownerId, 275, "Jerrard of the Closed Fist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{G}");

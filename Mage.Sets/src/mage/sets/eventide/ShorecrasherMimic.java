@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author jeffwadsworth
 
  */
-public class ShorecrasherMimic extends CardImpl<ShorecrasherMimic> {
+public class ShorecrasherMimic extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a spell that's both green and blue");
     

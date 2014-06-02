@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VengefulArchon extends CardImpl<VengefulArchon> {
+public class VengefulArchon extends CardImpl {
 
     public VengefulArchon(UUID ownerId) {
         super(ownerId, 37, "Vengeful Archon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");

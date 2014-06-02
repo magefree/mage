@@ -39,7 +39,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jeffwadsworth
  */
-public class HiveStirrings extends CardImpl<HiveStirrings> {
+public class HiveStirrings extends CardImpl {
 
     public HiveStirrings(UUID ownerId) {
         super(ownerId, 21, "Hive Stirrings", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");

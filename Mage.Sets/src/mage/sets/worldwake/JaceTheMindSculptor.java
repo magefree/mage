@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class JaceTheMindSculptor extends CardImpl<JaceTheMindSculptor> {
+public class JaceTheMindSculptor extends CardImpl {
 
 
     public JaceTheMindSculptor(UUID ownerId) {

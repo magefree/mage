@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class ShriekingDrake extends CardImpl<ShriekingDrake> {
+public class ShriekingDrake extends CardImpl {
 
     public ShriekingDrake(UUID ownerId) {
         super(ownerId, 43, "Shrieking Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

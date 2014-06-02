@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class GerrardsIrregulars extends CardImpl<GerrardsIrregulars> {
+public class GerrardsIrregulars extends CardImpl {
 
     public GerrardsIrregulars(UUID ownerId) {
         super(ownerId, 192, "Gerrard's Irregulars", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Peppersmoke extends CardImpl<Peppersmoke> {
+public class Peppersmoke extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("If you control a Faerie,");
     static {

@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class LoyalSentry extends CardImpl<LoyalSentry> {
+public class LoyalSentry extends CardImpl {
 
     public LoyalSentry (UUID ownerId) {
         super(ownerId, 27, "Loyal Sentry", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");

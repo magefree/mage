@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SwiftfootBoots extends CardImpl<SwiftfootBoots> {
+public class SwiftfootBoots extends CardImpl {
 
     public SwiftfootBoots (UUID ownerId) {
         super(ownerId, 219, "Swiftfoot Boots", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

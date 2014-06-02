@@ -41,7 +41,7 @@ import mage.game.permanent.token.SquirrelToken;
  *
  * @author cbt33
  */
-public class ChatterOfTheSquirrel extends CardImpl<ChatterOfTheSquirrel> {
+public class ChatterOfTheSquirrel extends CardImpl {
 
     public ChatterOfTheSquirrel(UUID ownerId) {
         super(ownerId, 233, "Chatter of the Squirrel", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");

@@ -42,7 +42,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class NyleasDisciple extends CardImpl<NyleasDisciple> {
+public class NyleasDisciple extends CardImpl {
 
     public NyleasDisciple(UUID ownerId) {
         super(ownerId, 167, "Nylea's Disciple", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

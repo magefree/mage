@@ -42,7 +42,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TenaciousDead extends CardImpl<TenaciousDead> {
+public class TenaciousDead extends CardImpl {
 
     public TenaciousDead(UUID ownerId) {
         super(ownerId, 118, "Tenacious Dead", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author North
  */
-public class VileRebirth extends CardImpl<VileRebirth> {
+public class VileRebirth extends CardImpl {
 
     public VileRebirth(UUID ownerId) {
         super(ownerId, 115, "Vile Rebirth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");

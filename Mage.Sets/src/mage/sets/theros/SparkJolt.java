@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class SparkJolt extends CardImpl<SparkJolt> {
+public class SparkJolt extends CardImpl {
 
     public SparkJolt(UUID ownerId) {
         super(ownerId, 140, "Spark Jolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

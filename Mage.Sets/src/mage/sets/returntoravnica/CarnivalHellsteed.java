@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class CarnivalHellsteed extends CardImpl<CarnivalHellsteed> {
+public class CarnivalHellsteed extends CardImpl {
  
     public CarnivalHellsteed(UUID ownerId) {
         super(ownerId, 147, "Carnival Hellsteed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");

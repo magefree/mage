@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author LevelX2
  */
-public class MemoryPlunder extends CardImpl<MemoryPlunder> {
+public class MemoryPlunder extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from an opponent's graveyard");
     static {

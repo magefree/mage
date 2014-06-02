@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX
  */
-public class OniPossession extends CardImpl<OniPossession> {
+public class OniPossession extends CardImpl {
 
     private static final List<String> setSubtypes = new ArrayList<String>();
     static {

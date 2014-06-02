@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class MantisEngine extends CardImpl<MantisEngine> {
+public class MantisEngine extends CardImpl {
 
     public MantisEngine(UUID ownerId) {
         super(ownerId, 333, "Mantis Engine", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

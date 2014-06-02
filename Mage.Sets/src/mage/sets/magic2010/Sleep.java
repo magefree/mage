@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Sleep extends CardImpl<Sleep> {
+public class Sleep extends CardImpl {
 
     public Sleep(UUID ownerId) {
         super(ownerId, 71, "Sleep", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");

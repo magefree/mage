@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Plopman
  */
-public class RankAndFile extends CardImpl<RankAndFile> {
+public class RankAndFile extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creatures");
 

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class SpittingDrake extends CardImpl<SpittingDrake> {
+public class SpittingDrake extends CardImpl {
 
     public SpittingDrake(UUID ownerId) {
         super(ownerId, 95, "Spitting Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

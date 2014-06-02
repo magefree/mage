@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class SteelOfTheGodhead extends CardImpl<SteelOfTheGodhead> {
+public class SteelOfTheGodhead extends CardImpl {
 
     public SteelOfTheGodhead(UUID ownerId) {
         super(ownerId, 150, "Steel of the Godhead", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W/U}");

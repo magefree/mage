@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class GiantStrength extends CardImpl<GiantStrength> {
+public class GiantStrength extends CardImpl {
 
     public GiantStrength(UUID ownerId) {
         super(ownerId, 178, "Giant Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class EbonStronghold extends CardImpl<EbonStronghold> {
+public class EbonStronghold extends CardImpl {
 
     public EbonStronghold(UUID ownerId) {
         super(ownerId, 180, "Ebon Stronghold", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

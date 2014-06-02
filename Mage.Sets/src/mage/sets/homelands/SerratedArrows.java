@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SerratedArrows extends CardImpl<SerratedArrows> {
+public class SerratedArrows extends CardImpl {
 
     public SerratedArrows(UUID ownerId) {
         super(ownerId, 135, "Serrated Arrows", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

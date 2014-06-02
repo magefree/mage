@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class NessianAsp extends CardImpl<NessianAsp> {
+public class NessianAsp extends CardImpl {
 
     public NessianAsp(UUID ownerId) {
         super(ownerId, 164, "Nessian Asp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

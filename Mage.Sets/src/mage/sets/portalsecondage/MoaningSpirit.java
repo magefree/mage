@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class MoaningSpirit extends CardImpl<MoaningSpirit> {
+public class MoaningSpirit extends CardImpl {
 
     public MoaningSpirit(UUID ownerId) {
         super(ownerId, 19, "Moaning Spirit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

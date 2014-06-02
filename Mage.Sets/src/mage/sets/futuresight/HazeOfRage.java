@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class HazeOfRage extends CardImpl<HazeOfRage> {
+public class HazeOfRage extends CardImpl {
 
     public HazeOfRage(UUID ownerId) {
         super(ownerId, 100, "Haze of Rage", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");

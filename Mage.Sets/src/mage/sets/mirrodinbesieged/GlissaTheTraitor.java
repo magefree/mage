@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class GlissaTheTraitor extends CardImpl<GlissaTheTraitor> {
+public class GlissaTheTraitor extends CardImpl {
     public GlissaTheTraitor (UUID ownerId) {
         super(ownerId, 96, "Glissa, the Traitor", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{B}{G}{G}");
         this.expansionSetCode = "MBS";

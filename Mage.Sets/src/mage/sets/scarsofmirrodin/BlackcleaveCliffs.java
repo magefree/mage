@@ -46,7 +46,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class BlackcleaveCliffs extends CardImpl<BlackcleaveCliffs> {
+public class BlackcleaveCliffs extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

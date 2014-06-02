@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class TransmuteArtifact extends CardImpl<TransmuteArtifact> {
+public class TransmuteArtifact extends CardImpl {
 
     public TransmuteArtifact(UUID ownerId) {
         super(ownerId, 58, "Transmute Artifact", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{U}{U}");

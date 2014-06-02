@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class BloodTribute extends CardImpl<BloodTribute> {
+public class BloodTribute extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Vampire you control");
 

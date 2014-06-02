@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SurveillingSprite extends CardImpl<SurveillingSprite> {
+public class SurveillingSprite extends CardImpl {
 
     public SurveillingSprite(UUID ownerId) {
         super(ownerId, 67, "Surveilling Sprite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

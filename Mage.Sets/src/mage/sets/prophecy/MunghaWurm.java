@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MunghaWurm extends CardImpl<MunghaWurm> {
+public class MunghaWurm extends CardImpl {
 
     public MunghaWurm(UUID ownerId) {
         super(ownerId, 119, "Mungha Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

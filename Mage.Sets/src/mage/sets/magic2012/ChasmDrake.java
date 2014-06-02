@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class ChasmDrake extends CardImpl<ChasmDrake> {
+public class ChasmDrake extends CardImpl {
 
     public ChasmDrake(UUID ownerId) {
         super(ownerId, 48, "Chasm Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

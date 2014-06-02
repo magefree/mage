@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class MysticZealot extends CardImpl<MysticZealot> {
+public class MysticZealot extends CardImpl {
 
     public MysticZealot(UUID ownerId) {
         super(ownerId, 36, "Mystic Zealot", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

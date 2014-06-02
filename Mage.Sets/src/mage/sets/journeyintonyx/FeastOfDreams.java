@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FeastOfDreams extends CardImpl<FeastOfDreams> {
+public class FeastOfDreams extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("enchanted creature or enchantment creature");
 

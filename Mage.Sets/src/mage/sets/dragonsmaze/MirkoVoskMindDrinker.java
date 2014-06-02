@@ -51,7 +51,7 @@ import mage.players.Player;
  */
 
 
-public class MirkoVoskMindDrinker extends CardImpl<MirkoVoskMindDrinker> {
+public class MirkoVoskMindDrinker extends CardImpl {
 
     public MirkoVoskMindDrinker (UUID ownerId) {
         super(ownerId, 85, "Mirko Vosk, Mind Drinker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");

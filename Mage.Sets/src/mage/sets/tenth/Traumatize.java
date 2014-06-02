@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Traumatize extends CardImpl<Traumatize> {
+public class Traumatize extends CardImpl {
 
     public Traumatize(UUID ownerId) {
         super(ownerId, 119, "Traumatize", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

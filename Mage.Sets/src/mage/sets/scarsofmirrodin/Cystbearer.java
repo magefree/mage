@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author nantuko
  */
-public class Cystbearer extends CardImpl<Cystbearer> {
+public class Cystbearer extends CardImpl {
 
     public Cystbearer(UUID ownerId) {
         super(ownerId, 117, "Cystbearer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author anonymous
  */
-public class PoulticeSliver extends CardImpl<PoulticeSliver> {
+public class PoulticeSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
 

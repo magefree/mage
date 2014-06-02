@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  *
  * @author Backfir3
  */
-public class ArcLightning extends CardImpl<ArcLightning> {
+public class ArcLightning extends CardImpl {
 
     public ArcLightning(UUID ownerId) {
         super(ownerId, 174, "Arc Lightning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");

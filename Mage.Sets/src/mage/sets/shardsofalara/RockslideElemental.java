@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class RockslideElemental extends CardImpl<RockslideElemental> {
+public class RockslideElemental extends CardImpl {
 
     public RockslideElemental(UUID ownerId) {
         super(ownerId, 112, "Rockslide Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

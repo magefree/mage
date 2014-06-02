@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class TidespoutTyrant extends CardImpl<TidespoutTyrant> {
+public class TidespoutTyrant extends CardImpl {
 
     public TidespoutTyrant(UUID ownerId) {
         super(ownerId, 34, "Tidespout Tyrant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");

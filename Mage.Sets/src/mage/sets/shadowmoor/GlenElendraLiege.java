@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class GlenElendraLiege extends CardImpl<GlenElendraLiege> {
+public class GlenElendraLiege extends CardImpl {
 
     private static final FilterCreaturePermanent filterBlue = new FilterCreaturePermanent("blue creatures");
     private static final FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("black creatures");

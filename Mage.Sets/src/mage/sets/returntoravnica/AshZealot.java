@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class AshZealot extends CardImpl<AshZealot> {
+public class AshZealot extends CardImpl {
 
     public AshZealot (UUID ownerId) {
         super(ownerId, 86, "Ash Zealot", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class AltarOfDementia extends CardImpl<AltarOfDementia> {
+public class AltarOfDementia extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature");
     

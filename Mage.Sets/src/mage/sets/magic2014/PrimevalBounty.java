@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PrimevalBounty extends CardImpl<PrimevalBounty> {
+public class PrimevalBounty extends CardImpl {
 
     private static final FilterSpell filterCreature = new FilterSpell("a creature spell");
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");

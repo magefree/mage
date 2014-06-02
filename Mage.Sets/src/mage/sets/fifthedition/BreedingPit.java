@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jeffwadsworth
  */
-public class BreedingPit extends CardImpl<BreedingPit> {
+public class BreedingPit extends CardImpl {
 
     public BreedingPit(UUID ownerId) {
         super(ownerId, 10, "Breeding Pit", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

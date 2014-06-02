@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class Stingmoggie extends CardImpl<Stingmoggie> {
+public class Stingmoggie extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 

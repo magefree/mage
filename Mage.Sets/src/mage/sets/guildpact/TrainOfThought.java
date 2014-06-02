@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TrainOfThought extends CardImpl<TrainOfThought> {
+public class TrainOfThought extends CardImpl {
 
     public TrainOfThought(UUID ownerId) {
         super(ownerId, 39, "Train of Thought", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");

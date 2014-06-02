@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class VarolzTheScarStriped extends CardImpl<VarolzTheScarStriped> {
+public class VarolzTheScarStriped extends CardImpl {
     
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
     

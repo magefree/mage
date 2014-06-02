@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class DrainpipeVermin extends CardImpl<DrainpipeVermin> {
+public class DrainpipeVermin extends CardImpl {
 
     public DrainpipeVermin(UUID ownerId) {
         super(ownerId, 66, "Drainpipe Vermin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

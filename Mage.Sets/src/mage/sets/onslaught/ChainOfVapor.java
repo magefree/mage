@@ -49,7 +49,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author Plopman
  */
-public class ChainOfVapor extends CardImpl<ChainOfVapor> {
+public class ChainOfVapor extends CardImpl {
 
     public ChainOfVapor(UUID ownerId) {
         super(ownerId, 73, "Chain of Vapor", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");

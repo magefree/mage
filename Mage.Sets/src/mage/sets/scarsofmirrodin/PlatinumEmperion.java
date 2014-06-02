@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class PlatinumEmperion extends CardImpl<PlatinumEmperion> {
+public class PlatinumEmperion extends CardImpl {
 
     public PlatinumEmperion(UUID ownerId) {
         super(ownerId, 193, "Platinum Emperion", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{8}");

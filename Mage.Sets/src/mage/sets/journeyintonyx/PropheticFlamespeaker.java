@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PropheticFlamespeaker extends CardImpl<PropheticFlamespeaker> {
+public class PropheticFlamespeaker extends CardImpl {
 
     public PropheticFlamespeaker(UUID ownerId) {
         super(ownerId, 106, "Prophetic Flamespeaker", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

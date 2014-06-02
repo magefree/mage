@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class GiltLeafArchdruid extends CardImpl<GiltLeafArchdruid> {
+public class GiltLeafArchdruid extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a Druid spell");
     

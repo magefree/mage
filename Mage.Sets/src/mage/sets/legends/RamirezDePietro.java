@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RamirezDePietro extends CardImpl<RamirezDePietro> {
+public class RamirezDePietro extends CardImpl {
 
     public RamirezDePietro(UUID ownerId) {
         super(ownerId, 291, "Ramirez DePietro", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{B}{B}");

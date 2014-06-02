@@ -42,7 +42,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class PiliPala extends CardImpl<PiliPala> {
+public class PiliPala extends CardImpl {
 
     public PiliPala(UUID ownerId) {
         super(ownerId, 258, "Pili-Pala", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

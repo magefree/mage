@@ -49,7 +49,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class MirrorEntity extends CardImpl<MirrorEntity> {
+public class MirrorEntity extends CardImpl {
 
     static private FilterControlledCreaturePermanent filter = new  FilterControlledCreaturePermanent("Creatures you control");
 

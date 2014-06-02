@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MightOfAlara extends CardImpl<MightOfAlara> {
+public class MightOfAlara extends CardImpl {
 
     public MightOfAlara(UUID ownerId) {
         super(ownerId, 85, "Might of Alara", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

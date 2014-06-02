@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SylvanRanger extends CardImpl<SylvanRanger> {
+public class SylvanRanger extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 

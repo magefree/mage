@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class MosswortBridge extends CardImpl<MosswortBridge> {
+public class MosswortBridge extends CardImpl {
 
     public MosswortBridge(UUID ownerId) {
         super(ownerId, 307, "Mosswort Bridge", Rarity.RARE, new CardType[]{CardType.LAND}, "");

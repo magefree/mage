@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class Auratog extends CardImpl<Auratog> {
+public class Auratog extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchantment");
 

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class JaddiLifestrider extends CardImpl<JaddiLifestrider> {
+public class JaddiLifestrider extends CardImpl {
 
     public JaddiLifestrider(UUID ownerId) {
         super(ownerId, 189, "Jaddi Lifestrider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

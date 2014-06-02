@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class OgreResister extends CardImpl<OgreResister> {
+public class OgreResister extends CardImpl {
 
     public OgreResister (UUID ownerId) {
         super(ownerId, 72, "Ogre Resister", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class MoonwingMoth extends CardImpl<MoonwingMoth> {
+public class MoonwingMoth extends CardImpl {
 
     public MoonwingMoth(UUID ownerId) {
         super(ownerId, 20, "Moonwing Moth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

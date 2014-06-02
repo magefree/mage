@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class SeasClaim extends CardImpl<SeasClaim> {
+public class SeasClaim extends CardImpl {
 
     public SeasClaim(UUID ownerId) {
         super(ownerId, 113, "Sea's Claim", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

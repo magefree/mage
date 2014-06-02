@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class CurseOfThirst extends CardImpl<CurseOfThirst> {
+public class CurseOfThirst extends CardImpl {
 
     public CurseOfThirst(UUID ownerId) {
         super(ownerId, 57, "Curse of Thirst", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");

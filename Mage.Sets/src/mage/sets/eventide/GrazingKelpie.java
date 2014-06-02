@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInGraveyard;
  * @author jeffwadsworth
 
  */
-public class GrazingKelpie extends CardImpl<GrazingKelpie> {
+public class GrazingKelpie extends CardImpl {
 
     public GrazingKelpie(UUID ownerId) {
         super(ownerId, 153, "Grazing Kelpie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G/U}");

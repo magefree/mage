@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class SacredNectar extends CardImpl<SacredNectar> {
+public class SacredNectar extends CardImpl {
 
     public SacredNectar(UUID ownerId) {
         super(ownerId, 38, "Sacred Nectar", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");

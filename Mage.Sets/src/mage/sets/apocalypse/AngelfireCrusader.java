@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 /**
  * @author Loki
  */
-public class AngelfireCrusader extends CardImpl<AngelfireCrusader> {
+public class AngelfireCrusader extends CardImpl {
 
     public AngelfireCrusader(UUID ownerId) {
         super(ownerId, 1, "Angelfire Crusader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

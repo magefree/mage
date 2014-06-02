@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class Upwelling extends CardImpl<Upwelling> {
+public class Upwelling extends CardImpl {
 
     public Upwelling(UUID ownerId) {
         super(ownerId, 306, "Upwelling", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

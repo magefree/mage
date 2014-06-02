@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class MartyrOfSands extends CardImpl<MartyrOfSands> {
+public class MartyrOfSands extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("X white cards from your hand");
     static {

@@ -46,7 +46,7 @@ import mage.constants.Zone;
 /**
  * @author noxx
  */
-public class HomicidalSeclusion extends CardImpl<HomicidalSeclusion> {
+public class HomicidalSeclusion extends CardImpl {
 
     private static final String rule = "As long as you control exactly one creature, that creature gets +3/+1";
 

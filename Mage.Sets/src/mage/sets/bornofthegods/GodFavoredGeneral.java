@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class GodFavoredGeneral extends CardImpl<GodFavoredGeneral> {
+public class GodFavoredGeneral extends CardImpl {
 
     public GodFavoredGeneral(UUID ownerId) {
         super(ownerId, 14, "God-Favored General", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

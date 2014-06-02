@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class Hex extends CardImpl<Hex> {
+public class Hex extends CardImpl {
 
     public Hex(UUID ownerId) {
         super(ownerId, 89, "Hex", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

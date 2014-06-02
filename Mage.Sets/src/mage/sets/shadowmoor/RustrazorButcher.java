@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RustrazorButcher extends CardImpl<RustrazorButcher> {
+public class RustrazorButcher extends CardImpl {
 
     public RustrazorButcher(UUID ownerId) {
         super(ownerId, 105, "Rustrazor Butcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

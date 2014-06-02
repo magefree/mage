@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ThunderingGiant extends CardImpl<ThunderingGiant> {
+public class ThunderingGiant extends CardImpl {
 
     public ThunderingGiant(UUID ownerId) {
         super(ownerId, 243, "Thundering Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

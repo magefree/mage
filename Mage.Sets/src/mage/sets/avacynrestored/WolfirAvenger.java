@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class WolfirAvenger extends CardImpl<WolfirAvenger> {
+public class WolfirAvenger extends CardImpl {
 
     public WolfirAvenger(UUID ownerId) {
         super(ownerId, 205, "Wolfir Avenger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

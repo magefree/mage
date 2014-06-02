@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class AgentOfErebos extends CardImpl<AgentOfErebos> {
+public class AgentOfErebos extends CardImpl {
 
     public AgentOfErebos(UUID ownerId) {
         super(ownerId, 59, "Agent of Erebos", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class Refresh extends CardImpl<Refresh> {
+public class Refresh extends CardImpl {
 
     public Refresh(UUID ownerId) {
         super(ownerId, 264, "Refresh", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

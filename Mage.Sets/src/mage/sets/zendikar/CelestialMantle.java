@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class CelestialMantle extends CardImpl<CelestialMantle> {
+public class CelestialMantle extends CardImpl {
 
     public CelestialMantle (UUID ownerId) {
         super(ownerId, 6, "Celestial Mantle", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}{W}");

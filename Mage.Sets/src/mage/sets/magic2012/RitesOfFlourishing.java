@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author nantuko
  */
-public class RitesOfFlourishing extends CardImpl<RitesOfFlourishing> {
+public class RitesOfFlourishing extends CardImpl {
 
     public RitesOfFlourishing(UUID ownerId) {
         super(ownerId, 192, "Rites of Flourishing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

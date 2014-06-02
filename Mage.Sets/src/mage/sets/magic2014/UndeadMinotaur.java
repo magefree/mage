@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class UndeadMinotaur extends CardImpl<UndeadMinotaur> {
+public class UndeadMinotaur extends CardImpl {
 
     public UndeadMinotaur(UUID ownerId) {
         super(ownerId, 119, "Undead Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 /**
  * @author LevelX2
  */
-public class BlistercoilWeird extends CardImpl<BlistercoilWeird> {
+public class BlistercoilWeird extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 

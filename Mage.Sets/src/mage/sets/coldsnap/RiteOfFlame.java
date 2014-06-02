@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class RiteOfFlame extends CardImpl<RiteOfFlame> {
+public class RiteOfFlame extends CardImpl {
 
     public RiteOfFlame(UUID ownerId) {
         super(ownerId, 96, "Rite of Flame", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");

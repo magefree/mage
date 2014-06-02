@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class PensiveMinotaur extends CardImpl<PensiveMinotaur> {
+public class PensiveMinotaur extends CardImpl {
 
     public PensiveMinotaur(UUID ownerId) {
         super(ownerId, 105, "Pensive Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

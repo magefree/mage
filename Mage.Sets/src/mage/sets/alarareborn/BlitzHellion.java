@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class BlitzHellion extends CardImpl<BlitzHellion> {
+public class BlitzHellion extends CardImpl {
 
     public BlitzHellion(UUID ownerId) {
         super(ownerId, 49, "Blitz Hellion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");

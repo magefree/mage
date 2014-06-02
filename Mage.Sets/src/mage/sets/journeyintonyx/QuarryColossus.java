@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class QuarryColossus extends CardImpl<QuarryColossus> {
+public class QuarryColossus extends CardImpl {
 
     public QuarryColossus(UUID ownerId) {
         super(ownerId, 22, "Quarry Colossus", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

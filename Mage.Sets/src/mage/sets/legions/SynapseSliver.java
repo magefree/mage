@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class SynapseSliver extends CardImpl<SynapseSliver> {
+public class SynapseSliver extends CardImpl {
 
     public SynapseSliver(UUID ownerId) {
         super(ownerId, 53, "Synapse Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Backfir3
  */
-public class Bulwark extends CardImpl<Bulwark> {
+public class Bulwark extends CardImpl {
 
     public Bulwark(UUID ownerId) {
         super(ownerId, 178, "Bulwark", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");

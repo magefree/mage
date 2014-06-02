@@ -41,7 +41,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class FlowstoneFlood extends CardImpl<FlowstoneFlood> {
+public class FlowstoneFlood extends CardImpl {
 
     public FlowstoneFlood(UUID ownerId) {
         super(ownerId, 83, "Flowstone Flood", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");

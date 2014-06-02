@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KillingGlare extends CardImpl<KillingGlare> {
+public class KillingGlare extends CardImpl {
 
     public KillingGlare (UUID ownerId) {
         super(ownerId, 70, "Killing Glare", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{B}");

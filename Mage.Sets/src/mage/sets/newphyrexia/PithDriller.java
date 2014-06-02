@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class PithDriller extends CardImpl<PithDriller> {
+public class PithDriller extends CardImpl {
 
     public PithDriller(UUID ownerId) {
         super(ownerId, 69, "Pith Driller", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{BP}");

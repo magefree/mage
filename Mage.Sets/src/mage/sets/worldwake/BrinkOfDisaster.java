@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author nantuko
  */
-public class BrinkOfDisaster extends CardImpl<BrinkOfDisaster> {
+public class BrinkOfDisaster extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

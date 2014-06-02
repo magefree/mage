@@ -64,7 +64,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class DoorOfDestinies extends CardImpl<DoorOfDestinies> {
+public class DoorOfDestinies extends CardImpl {
 
     public DoorOfDestinies(UUID ownerId) {
         super(ownerId, 208, "Door of Destinies", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

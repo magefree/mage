@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class VillageSurvivors extends CardImpl<VillageSurvivors> {
+public class VillageSurvivors extends CardImpl {
 
     public VillageSurvivors(UUID ownerId) {
         super(ownerId, 130, "Village Survivors", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

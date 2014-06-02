@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SteelingStance extends CardImpl<SteelingStance> {
+public class SteelingStance extends CardImpl {
 
     public SteelingStance(UUID ownerId) {
         super(ownerId, 18, "Steeling Stance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");

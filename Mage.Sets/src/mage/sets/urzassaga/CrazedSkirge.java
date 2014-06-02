@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class CrazedSkirge extends CardImpl<CrazedSkirge> {
+public class CrazedSkirge extends CardImpl {
 
     public CrazedSkirge (UUID ownerId) {
         super(ownerId, 125, "Crazed Skirge", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

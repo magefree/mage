@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33, BetaSteward (PastInFlames)
  */
-public class Recoup extends CardImpl<Recoup> {
+public class Recoup extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("sorcery card");
             

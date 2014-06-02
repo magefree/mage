@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Harmonize extends CardImpl<Harmonize> {
+public class Harmonize extends CardImpl {
 
     public Harmonize(UUID ownerId) {
         super(ownerId, 149, "Harmonize", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");

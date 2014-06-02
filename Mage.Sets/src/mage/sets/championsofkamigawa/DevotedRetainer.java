@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DevotedRetainer extends CardImpl<DevotedRetainer> {
+public class DevotedRetainer extends CardImpl {
 
     public DevotedRetainer (UUID ownerId) {
         super(ownerId, 7, "Devoted Retainer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

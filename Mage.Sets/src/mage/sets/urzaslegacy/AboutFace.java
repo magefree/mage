@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class AboutFace extends CardImpl<AboutFace> {
+public class AboutFace extends CardImpl {
 
     public AboutFace(UUID ownerId) {
         super(ownerId, 73, "About Face", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

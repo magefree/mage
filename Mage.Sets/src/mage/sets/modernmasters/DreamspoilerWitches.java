@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DreamspoilerWitches extends CardImpl<DreamspoilerWitches> {
+public class DreamspoilerWitches extends CardImpl {
 
     public DreamspoilerWitches(UUID ownerId) {
         super(ownerId, 81, "Dreamspoiler Witches", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

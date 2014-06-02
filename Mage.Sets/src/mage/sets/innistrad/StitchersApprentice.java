@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class StitchersApprentice extends CardImpl<StitchersApprentice> {
+public class StitchersApprentice extends CardImpl {
 
     public StitchersApprentice(UUID ownerId) {
         super(ownerId, 81, "Stitcher's Apprentice", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

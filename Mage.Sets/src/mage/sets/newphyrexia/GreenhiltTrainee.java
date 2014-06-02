@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class GreenhiltTrainee extends CardImpl<GreenhiltTrainee> {
+public class GreenhiltTrainee extends CardImpl {
 
     public GreenhiltTrainee (UUID ownerId) {
         super(ownerId, 112, "Greenhilt Trainee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

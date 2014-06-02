@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class SimianSpiritGuide extends CardImpl<SimianSpiritGuide> {
+public class SimianSpiritGuide extends CardImpl {
 
     public SimianSpiritGuide(UUID ownerId) {
         super(ownerId, 122, "Simian Spirit Guide", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class BalefulForce extends CardImpl<BalefulForce> {
+public class BalefulForce extends CardImpl {
 
     public BalefulForce(UUID ownerId) {
         super(ownerId, 70, "Baleful Force", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");

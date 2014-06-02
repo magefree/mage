@@ -37,7 +37,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class MoxEmerald extends CardImpl<MoxEmerald> {
+public class MoxEmerald extends CardImpl {
 
     public MoxEmerald(UUID ownerId) {
         super(ownerId, 261, "Mox Emerald", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");

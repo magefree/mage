@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class CentaurHealer extends CardImpl<CentaurHealer> {
+public class CentaurHealer extends CardImpl {
 
     public CentaurHealer(UUID ownerId) {
         super(ownerId, 148, "Centaur Healer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");

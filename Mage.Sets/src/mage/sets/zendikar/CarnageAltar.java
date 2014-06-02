@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class CarnageAltar extends CardImpl<CarnageAltar> {
+public class CarnageAltar extends CardImpl {
 
     public CarnageAltar(UUID ownerId) {
         super(ownerId, 198, "Carnage Altar", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

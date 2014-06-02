@@ -41,7 +41,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author jonubuu
  */
-public class MoggWarMarshal extends CardImpl<MoggWarMarshal> {
+public class MoggWarMarshal extends CardImpl {
 
     public MoggWarMarshal(UUID ownerId) {
         super(ownerId, 170, "Mogg War Marshal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

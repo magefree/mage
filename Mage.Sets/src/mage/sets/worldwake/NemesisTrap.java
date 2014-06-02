@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class NemesisTrap extends CardImpl<NemesisTrap> {
+public class NemesisTrap extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("If a white creature is attacking");
     

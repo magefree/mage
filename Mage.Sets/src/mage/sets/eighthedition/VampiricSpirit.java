@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class VampiricSpirit extends CardImpl<VampiricSpirit> {
+public class VampiricSpirit extends CardImpl {
 
     public VampiricSpirit(UUID ownerId) {
         super(ownerId, 170, "Vampiric Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

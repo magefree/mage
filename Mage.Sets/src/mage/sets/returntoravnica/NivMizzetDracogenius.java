@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class NivMizzetDracogenius extends CardImpl<NivMizzetDracogenius> {
+public class NivMizzetDracogenius extends CardImpl {
 
     public NivMizzetDracogenius(UUID ownerId) {
         super(ownerId, 183, "Niv-Mizzet, Dracogenius", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{R}{R}");

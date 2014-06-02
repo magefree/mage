@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class NetherShadow extends CardImpl<NetherShadow> {
+public class NetherShadow extends CardImpl {
 
     public NetherShadow(UUID ownerId) {
         super(ownerId, 25, "Nether Shadow", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");

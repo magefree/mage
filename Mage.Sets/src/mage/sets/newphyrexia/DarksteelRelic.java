@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class DarksteelRelic extends CardImpl<DarksteelRelic> {
+public class DarksteelRelic extends CardImpl {
 
     public DarksteelRelic(UUID ownerId) {
         super(ownerId, 134, "Darksteel Relic", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");

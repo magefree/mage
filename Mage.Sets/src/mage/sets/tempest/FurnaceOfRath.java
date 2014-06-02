@@ -46,7 +46,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class FurnaceOfRath extends CardImpl<FurnaceOfRath> {
+public class FurnaceOfRath extends CardImpl {
 
     public FurnaceOfRath(UUID ownerId) {
         super(ownerId, 177, "Furnace of Rath", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}{R}");

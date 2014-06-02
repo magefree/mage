@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class FatedConflagration extends CardImpl<FatedConflagration> {
+public class FatedConflagration extends CardImpl {
 
     public FatedConflagration(UUID ownerId) {
         super(ownerId, 94, "Fated Conflagration", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{R}{R}{R}");

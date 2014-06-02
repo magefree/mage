@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class BladedSentinel extends CardImpl<BladedSentinel> {
+public class BladedSentinel extends CardImpl {
 
     public BladedSentinel (UUID ownerId) {
         super(ownerId, 98, "Bladed Sentinel", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

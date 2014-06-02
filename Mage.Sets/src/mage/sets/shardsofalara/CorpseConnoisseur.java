@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class CorpseConnoisseur extends CardImpl<CorpseConnoisseur> {
+public class CorpseConnoisseur extends CardImpl {
 
     public CorpseConnoisseur(UUID ownerId) {
         super(ownerId, 68, "Corpse Connoisseur", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

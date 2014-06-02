@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Loki
  */
-public class PsionicBlast extends CardImpl<PsionicBlast> {
+public class PsionicBlast extends CardImpl {
 
     public PsionicBlast(UUID ownerId) {
         super(ownerId, 30, "Psionic Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");

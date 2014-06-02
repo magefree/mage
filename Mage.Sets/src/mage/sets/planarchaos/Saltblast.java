@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Saltblast extends CardImpl<Saltblast> {
+public class Saltblast extends CardImpl {
 
     static final protected FilterPermanent filter = new FilterPermanent("nonwhite permanent");
     static {

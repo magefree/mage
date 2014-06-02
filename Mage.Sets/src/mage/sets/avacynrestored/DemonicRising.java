@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class DemonicRising extends CardImpl<DemonicRising> {
+public class DemonicRising extends CardImpl {
 
     private static final String ruleText = "At the beginning of your end step, if you control exactly one creature, put a 5/5 black Demon creature token with flying onto the battlefield";
 

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author KholdFuzion
  */
-public class SustainingSpirit extends CardImpl<SustainingSpirit> {
+public class SustainingSpirit extends CardImpl {
 
     public SustainingSpirit(UUID ownerId) {
         super(ownerId, 151, "Sustaining Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author jeffwadsworth
  */
-public class AbyssalSpecter extends CardImpl<AbyssalSpecter> {
+public class AbyssalSpecter extends CardImpl {
 
     public AbyssalSpecter(UUID ownerId) {
         super(ownerId, 1, "Abyssal Specter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

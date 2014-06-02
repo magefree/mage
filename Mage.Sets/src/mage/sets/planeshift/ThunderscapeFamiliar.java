@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class ThunderscapeFamiliar extends CardImpl<ThunderscapeFamiliar> {
+public class ThunderscapeFamiliar extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Black spells and green spells");
 

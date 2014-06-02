@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class BirthingPod extends CardImpl<BirthingPod> {
+public class BirthingPod extends CardImpl {
 
     public BirthingPod(UUID ownerId) {
         super(ownerId, 104, "Birthing Pod", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}{GP}");

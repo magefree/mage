@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author nantuko
  */
-public class Smallpox extends CardImpl<Smallpox> {
+public class Smallpox extends CardImpl {
     
     private static final FilterControlledPermanent filterCreature = new FilterControlledCreaturePermanent();
     private static final FilterControlledPermanent filterLand = new FilterControlledLandPermanent();

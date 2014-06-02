@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class MarshdrinkerGiant extends CardImpl<MarshdrinkerGiant> {
+public class MarshdrinkerGiant extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("Island or Swamp an opponent controls");
     

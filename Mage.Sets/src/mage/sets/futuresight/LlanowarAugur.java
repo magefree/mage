@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class LlanowarAugur extends CardImpl<LlanowarAugur> {
+public class LlanowarAugur extends CardImpl {
 
     public LlanowarAugur(UUID ownerId) {
         super(ownerId, 129, "Llanowar Augur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author BetaSteward
  */
-public class MyrSuperion extends CardImpl<MyrSuperion> {
+public class MyrSuperion extends CardImpl {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

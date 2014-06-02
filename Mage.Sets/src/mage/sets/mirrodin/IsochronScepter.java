@@ -54,7 +54,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class IsochronScepter extends CardImpl<IsochronScepter> {
+public class IsochronScepter extends CardImpl {
 
     public IsochronScepter(UUID ownerId) {
         super(ownerId, 188, "Isochron Scepter", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

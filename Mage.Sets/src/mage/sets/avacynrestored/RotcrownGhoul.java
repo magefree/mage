@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class RotcrownGhoul extends CardImpl<RotcrownGhoul> {
+public class RotcrownGhoul extends CardImpl {
 
     public RotcrownGhoul(UUID ownerId) {
         super(ownerId, 72, "Rotcrown Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Quercitron
  */
-public class FallowEarth extends CardImpl<FallowEarth> {
+public class FallowEarth extends CardImpl {
 
     public FallowEarth(UUID ownerId) {
         super(ownerId, 112, "Fallow Earth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");

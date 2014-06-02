@@ -40,7 +40,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SylvanCaryatid extends CardImpl<SylvanCaryatid> {
+public class SylvanCaryatid extends CardImpl {
 
     public SylvanCaryatid(UUID ownerId) {
         super(ownerId, 180, "Sylvan Caryatid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");

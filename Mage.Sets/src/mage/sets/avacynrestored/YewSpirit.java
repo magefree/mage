@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class YewSpirit extends CardImpl<YewSpirit> {
+public class YewSpirit extends CardImpl {
 
     public YewSpirit(UUID ownerId) {
         super(ownerId, 207, "Yew Spirit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

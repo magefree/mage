@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author nantuko
  */
-public class GoblinBangchuckers extends CardImpl<GoblinBangchuckers> {
+public class GoblinBangchuckers extends CardImpl {
 
     public GoblinBangchuckers(UUID ownerId) {
         super(ownerId, 137, "Goblin Bangchuckers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

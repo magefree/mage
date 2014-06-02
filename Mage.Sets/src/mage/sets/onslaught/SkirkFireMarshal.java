@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SkirkFireMarshal extends CardImpl<SkirkFireMarshal> {
+public class SkirkFireMarshal extends CardImpl {
 
     private static final FilterCard filterProtection = new FilterCard("red");
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");

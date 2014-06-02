@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jonubuu
  */
-public class GoblinOffensive extends CardImpl<GoblinOffensive> {
+public class GoblinOffensive extends CardImpl {
 
     public GoblinOffensive(UUID ownerId) {
         super(ownerId, 192, "Goblin Offensive", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{1}{R}{R}");

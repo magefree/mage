@@ -44,7 +44,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class KamiOfTheTendedGarden extends CardImpl<KamiOfTheTendedGarden> {
+public class KamiOfTheTendedGarden extends CardImpl {
 
     public KamiOfTheTendedGarden(UUID ownerId) {
         super(ownerId, 134, "Kami of the Tended Garden", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

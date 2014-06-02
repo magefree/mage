@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ChargeAcrossTheAraba extends CardImpl<ChargeAcrossTheAraba> {
+public class ChargeAcrossTheAraba extends CardImpl {
 
     public ChargeAcrossTheAraba(UUID ownerId) {
         super(ownerId, 4, "Charge Across the Araba", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");

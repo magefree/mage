@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class WistfulSelkie extends CardImpl<WistfulSelkie> {
+public class WistfulSelkie extends CardImpl {
 
     public WistfulSelkie (UUID ownerId) {
         super(ownerId, 165, "Wistful Selkie", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G/U}{G/U}{G/U}");

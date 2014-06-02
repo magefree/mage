@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  * @author KholdFuzion
 
  */
-public class KormusBell extends CardImpl<KormusBell> {
+public class KormusBell extends CardImpl {
 
     public KormusBell(UUID ownerId) {
         super(ownerId, 256, "Kormus Bell", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");

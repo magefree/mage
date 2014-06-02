@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class GiselaBladeOfGoldnight extends CardImpl<GiselaBladeOfGoldnight> {
+public class GiselaBladeOfGoldnight extends CardImpl {
 
     public GiselaBladeOfGoldnight(UUID ownerId) {
         super(ownerId, 209, "Gisela, Blade of Goldnight", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{W}{W}");

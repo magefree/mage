@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class AEtherMutation extends CardImpl<AEtherMutation> {
+public class AEtherMutation extends CardImpl {
 
     public AEtherMutation(UUID ownerId) {
         super(ownerId, 91, "AEther Mutation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{U}");

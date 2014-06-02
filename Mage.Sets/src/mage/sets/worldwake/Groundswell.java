@@ -49,7 +49,7 @@ import mage.watchers.common.LandfallWatcher;
  *
  * @author Viserion
  */
-public class Groundswell extends CardImpl<Groundswell> {
+public class Groundswell extends CardImpl {
 
     public Groundswell(UUID ownerId) {
         super(ownerId, 104, "Groundswell", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

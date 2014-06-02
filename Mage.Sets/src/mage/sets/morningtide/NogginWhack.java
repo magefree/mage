@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class NogginWhack extends CardImpl<NogginWhack> {
+public class NogginWhack extends CardImpl {
 
     public NogginWhack(UUID ownerId) {
         super(ownerId, 70, "Noggin Whack", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

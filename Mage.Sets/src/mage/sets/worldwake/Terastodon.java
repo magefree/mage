@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class Terastodon extends CardImpl<Terastodon> {
+public class Terastodon extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 

@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HydraBroodmaster extends CardImpl<HydraBroodmaster> {
+public class HydraBroodmaster extends CardImpl {
 
     public HydraBroodmaster(UUID ownerId) {
         super(ownerId, 128, "Hydra Broodmaster", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

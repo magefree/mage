@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class MoorishCavalry extends CardImpl<MoorishCavalry> {
+public class MoorishCavalry extends CardImpl {
 
     public MoorishCavalry(UUID ownerId) {
         super(ownerId, 11, "Moorish Cavalry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

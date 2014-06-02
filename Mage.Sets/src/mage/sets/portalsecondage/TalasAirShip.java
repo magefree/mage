@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class TalasAirShip extends CardImpl<TalasAirShip> {
+public class TalasAirShip extends CardImpl {
 
     public TalasAirShip(UUID ownerId) {
         super(ownerId, 48, "Talas Air Ship", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class BrinkOfMadness extends CardImpl<BrinkOfMadness> {
+public class BrinkOfMadness extends CardImpl {
 
     public BrinkOfMadness(UUID ownerId) {
         super(ownerId, 50, "Brink of Madness", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

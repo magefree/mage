@@ -44,7 +44,7 @@ import java.util.UUID;
  * @author magenoxx_at_gmail.com
 
  */
-public class Aquamoeba extends CardImpl<Aquamoeba> {
+public class Aquamoeba extends CardImpl {
 
     public Aquamoeba(UUID ownerId) {
         super(ownerId, 24, "Aquamoeba", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  * @author jeffwadsworth
  *
  */
-public class FireAtWill extends CardImpl<FireAtWill> {
+public class FireAtWill extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking or blocking creatures");
 

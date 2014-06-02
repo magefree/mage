@@ -50,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author jeffwadsworth
  *
  */
-public class KaervekTheMerciless extends CardImpl<KaervekTheMerciless> {
+public class KaervekTheMerciless extends CardImpl {
 
     public KaervekTheMerciless(UUID ownerId) {
         super(ownerId, 242, "Kaervek the Merciless", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");

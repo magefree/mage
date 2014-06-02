@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Loki
  */
-public class ConversionChamber extends CardImpl<ConversionChamber> {
+public class ConversionChamber extends CardImpl {
 
     public ConversionChamber (UUID ownerId) {
         super(ownerId, 133, "Conversion Chamber", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HeroOfOxidRidge extends CardImpl<HeroOfOxidRidge> {
+public class HeroOfOxidRidge extends CardImpl {
 
     public HeroOfOxidRidge(UUID ownerId) {
         super(ownerId, 66, "Hero of Oxid Ridge", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

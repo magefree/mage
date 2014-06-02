@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class BlindZealot extends CardImpl<BlindZealot> {
+public class BlindZealot extends CardImpl {
 
     public BlindZealot(UUID ownerId) {
         super(ownerId, 52, "Blind Zealot", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

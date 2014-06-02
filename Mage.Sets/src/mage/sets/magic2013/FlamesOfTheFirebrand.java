@@ -38,7 +38,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  *
  * @author North
  */
-public class FlamesOfTheFirebrand extends CardImpl<FlamesOfTheFirebrand> {
+public class FlamesOfTheFirebrand extends CardImpl {
 
     public FlamesOfTheFirebrand(UUID ownerId) {
         super(ownerId, 132, "Flames of the Firebrand", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");

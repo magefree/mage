@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class TidalForce extends CardImpl<TidalForce> {
+public class TidalForce extends CardImpl {
 
     public TidalForce(UUID ownerId) {
         super(ownerId, 62, "Tidal Force", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");

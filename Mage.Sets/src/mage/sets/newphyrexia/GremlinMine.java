@@ -55,7 +55,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author North
  */
-public class GremlinMine extends CardImpl<GremlinMine> {
+public class GremlinMine extends CardImpl {
 
     private static final FilterArtifactPermanent filterCreature = new FilterArtifactPermanent("artifact creature");
     private static final FilterArtifactPermanent filterNonCreature = new FilterArtifactPermanent("noncreature artifact");

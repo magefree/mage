@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class FlamebornHellion extends CardImpl<FlamebornHellion> {
+public class FlamebornHellion extends CardImpl {
 
     public FlamebornHellion (UUID ownerId) {
         super(ownerId, 89, "Flameborn Hellion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");

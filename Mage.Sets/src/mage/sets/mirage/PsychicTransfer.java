@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class PsychicTransfer extends CardImpl<PsychicTransfer> {
+public class PsychicTransfer extends CardImpl {
 
     public PsychicTransfer(UUID ownerId) {
         super(ownerId, 85, "Psychic Transfer", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}");

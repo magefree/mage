@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class HundredTalonKami extends CardImpl<HundredTalonKami> {
+public class HundredTalonKami extends CardImpl {
 
     public HundredTalonKami (UUID ownerId) {
         super(ownerId, 16, "Hundred-Talon Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

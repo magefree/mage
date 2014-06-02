@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ChargingBadger extends CardImpl<ChargingBadger> {
+public class ChargingBadger extends CardImpl {
 
     public ChargingBadger(UUID ownerId) {
         super(ownerId, 118, "Charging Badger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HornetSting extends CardImpl<HornetSting> {
+public class HornetSting extends CardImpl {
 
     public HornetSting(UUID ownerId) {
         super(ownerId, 181, "Hornet Sting", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");

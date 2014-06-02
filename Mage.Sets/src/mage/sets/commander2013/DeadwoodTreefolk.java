@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class DeadwoodTreefolk extends CardImpl<DeadwoodTreefolk> {
+public class DeadwoodTreefolk extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("another creature card from your graveyard");
     static {

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author cbt33, BetaSteward (Autumn's Veil, Combust)
  */
-public class RootSliver extends CardImpl<RootSliver> {
+public class RootSliver extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("Sliver spells");
     

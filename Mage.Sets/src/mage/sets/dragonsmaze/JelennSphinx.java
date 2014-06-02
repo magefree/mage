@@ -43,7 +43,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author LevelX2
  */
-public class JelennSphinx extends CardImpl<JelennSphinx> {
+public class JelennSphinx extends CardImpl {
 
     public JelennSphinx(UUID ownerId) {
         super(ownerId, 77, "Jelenn Sphinx", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");

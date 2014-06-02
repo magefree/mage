@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class ChaosImps extends CardImpl<ChaosImps> {
+public class ChaosImps extends CardImpl {
  
     public ChaosImps(UUID ownerId) {
         super(ownerId, 90, "Chaos Imps", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

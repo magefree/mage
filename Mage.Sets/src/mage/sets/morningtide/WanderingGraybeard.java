@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class WanderingGraybeard extends CardImpl<WanderingGraybeard> {
+public class WanderingGraybeard extends CardImpl {
 
     public WanderingGraybeard(UUID ownerId) {
         super(ownerId, 27, "Wandering Graybeard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

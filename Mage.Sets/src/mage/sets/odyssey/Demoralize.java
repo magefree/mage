@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Demoralize extends CardImpl<Demoralize> {
+public class Demoralize extends CardImpl {
 
     public Demoralize(UUID ownerId) {
         super(ownerId, 184, "Demoralize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

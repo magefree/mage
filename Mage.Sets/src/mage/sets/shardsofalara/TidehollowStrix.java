@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TidehollowStrix extends CardImpl<TidehollowStrix> {
+public class TidehollowStrix extends CardImpl {
 
     public TidehollowStrix(UUID ownerId) {
         super(ownerId, 203, "Tidehollow Strix", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{U}{B}");

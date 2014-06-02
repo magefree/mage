@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class NissasChosen extends CardImpl<NissasChosen> {
+public class NissasChosen extends CardImpl {
 
     public NissasChosen(UUID ownerId) {
         super(ownerId, 171, "Nissa's Chosen", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");

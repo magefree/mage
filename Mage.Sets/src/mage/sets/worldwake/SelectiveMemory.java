@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class SelectiveMemory extends CardImpl<SelectiveMemory> {
+public class SelectiveMemory extends CardImpl {
 
     public SelectiveMemory(UUID ownerId) {
         super(ownerId, 37, "Selective Memory", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");

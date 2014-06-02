@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ViashinoSpearhunter extends CardImpl<ViashinoSpearhunter> {
+public class ViashinoSpearhunter extends CardImpl {
 
     public ViashinoSpearhunter(UUID ownerId) {
         super(ownerId, 161, "Viashino Spearhunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

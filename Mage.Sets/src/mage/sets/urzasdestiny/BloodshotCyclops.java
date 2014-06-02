@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author Backfir3
  */
-public class BloodshotCyclops extends CardImpl<BloodshotCyclops> {
+public class BloodshotCyclops extends CardImpl {
 
     public BloodshotCyclops(UUID ownerId) {
         super(ownerId, 77, "Bloodshot Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");

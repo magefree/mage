@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class CripplingBlight extends CardImpl<CripplingBlight> {
+public class CripplingBlight extends CardImpl {
 
     public CripplingBlight(UUID ownerId) {
         super(ownerId, 85, "Crippling Blight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

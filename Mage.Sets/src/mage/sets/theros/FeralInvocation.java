@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FeralInvocation extends CardImpl<FeralInvocation> {
+public class FeralInvocation extends CardImpl {
 
     public FeralInvocation(UUID ownerId) {
         super(ownerId, 158, "Feral Invocation", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

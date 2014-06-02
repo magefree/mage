@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class AboshansDesire extends CardImpl<AboshansDesire> {
+public class AboshansDesire extends CardImpl {
 
     public AboshansDesire(UUID ownerId) {
         super(ownerId, 59, "Aboshan's Desire", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");

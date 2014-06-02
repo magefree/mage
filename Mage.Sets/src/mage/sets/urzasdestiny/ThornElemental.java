@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class ThornElemental extends CardImpl<ThornElemental> {
+public class ThornElemental extends CardImpl {
 
     public ThornElemental(UUID ownerId) {
         super(ownerId, 123, "Thorn Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

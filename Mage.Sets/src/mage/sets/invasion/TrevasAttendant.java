@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class TrevasAttendant extends CardImpl<TrevasAttendant> {
+public class TrevasAttendant extends CardImpl {
 
     public TrevasAttendant(UUID ownerId) {
         super(ownerId, 315, "Treva's Attendant", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

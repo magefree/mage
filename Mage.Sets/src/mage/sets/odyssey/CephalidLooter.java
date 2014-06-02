@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author cbt33, Loki (Merfolk Looter)
  */
-public class CephalidLooter extends CardImpl<CephalidLooter> {
+public class CephalidLooter extends CardImpl {
 
     public CephalidLooter(UUID ownerId) {
         super(ownerId, 72, "Cephalid Looter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

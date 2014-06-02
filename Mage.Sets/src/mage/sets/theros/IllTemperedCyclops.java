@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class IllTemperedCyclops extends CardImpl<IllTemperedCyclops> {
+public class IllTemperedCyclops extends CardImpl {
 
     public IllTemperedCyclops(UUID ownerId) {
         super(ownerId, 125, "Ill-Tempered Cyclops", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

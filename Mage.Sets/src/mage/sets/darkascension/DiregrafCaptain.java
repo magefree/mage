@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class DiregrafCaptain extends CardImpl<DiregrafCaptain> {
+public class DiregrafCaptain extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
 

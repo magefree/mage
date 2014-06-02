@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  * @author jeffwadsworth
 
  */
-public class ExtractorDemon extends CardImpl<ExtractorDemon> {
+public class ExtractorDemon extends CardImpl {
 
     public ExtractorDemon(UUID ownerId) {
         super(ownerId, 44, "Extractor Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author Plopman
  */
-public class GaddockTeeg extends CardImpl<GaddockTeeg> {
+public class GaddockTeeg extends CardImpl {
 
     public GaddockTeeg(UUID ownerId) {
         super(ownerId, 248, "Gaddock Teeg", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{W}");

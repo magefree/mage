@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class Tallowisp extends CardImpl<Tallowisp> {
+public class Tallowisp extends CardImpl {
 
     private static final FilterCard filterAura = new FilterCard("Aura card");
     private static final FilterSpell filterTrigger = new FilterSpiritOrArcaneCard();

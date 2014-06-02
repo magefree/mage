@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author anonymous
  */
-public class AmuletOfKroog extends CardImpl<AmuletOfKroog> {
+public class AmuletOfKroog extends CardImpl {
 
     public AmuletOfKroog(UUID ownerId) {
         super(ownerId, 347, "Amulet of Kroog", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

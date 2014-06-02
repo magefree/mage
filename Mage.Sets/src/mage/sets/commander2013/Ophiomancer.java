@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class Ophiomancer extends CardImpl<Ophiomancer> {
+public class Ophiomancer extends CardImpl {
 
     public Ophiomancer(UUID ownerId) {
         super(ownerId, 84, "Ophiomancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");

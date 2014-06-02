@@ -43,7 +43,7 @@ import mage.constants.Zone;
  * @author KholdFuzion
 
  */
-public class FrozenShade extends CardImpl<FrozenShade> {
+public class FrozenShade extends CardImpl {
 
     public FrozenShade(UUID ownerId) {
         super(ownerId, 18, "Frozen Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

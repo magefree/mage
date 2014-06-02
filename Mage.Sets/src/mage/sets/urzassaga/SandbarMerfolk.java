@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SandbarMerfolk extends CardImpl<SandbarMerfolk> {
+public class SandbarMerfolk extends CardImpl {
 
     public SandbarMerfolk(UUID ownerId) {
         super(ownerId, 94, "Sandbar Merfolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");

@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class IzzetCluestone extends CardImpl<IzzetCluestone> {
+public class IzzetCluestone extends CardImpl {
 
     public IzzetCluestone(UUID ownerId) {
         super(ownerId, 141, "Izzet Cluestone", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

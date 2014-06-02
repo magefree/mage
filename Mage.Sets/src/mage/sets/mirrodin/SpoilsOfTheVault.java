@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class SpoilsOfTheVault extends CardImpl<SpoilsOfTheVault> {
+public class SpoilsOfTheVault extends CardImpl {
 
     public SpoilsOfTheVault(UUID ownerId) {
         super(ownerId, 78, "Spoils of the Vault", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");

@@ -44,7 +44,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class NicolBolas extends CardImpl<NicolBolas> {
+public class NicolBolas extends CardImpl {
 
     public NicolBolas(UUID ownerId) {
         super(ownerId, 286, "Nicol Bolas", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{B}{B}{R}{R}");

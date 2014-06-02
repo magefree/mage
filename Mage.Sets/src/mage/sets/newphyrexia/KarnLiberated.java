@@ -61,7 +61,7 @@ import mage.util.CardUtil;
  *
  * @author anonymous
  */
-public class KarnLiberated extends CardImpl<KarnLiberated> {
+public class KarnLiberated extends CardImpl {
 
     private UUID exileId = UUID.randomUUID();
 

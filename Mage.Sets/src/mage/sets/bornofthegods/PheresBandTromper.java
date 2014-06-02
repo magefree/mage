@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class PheresBandTromper extends CardImpl<PheresBandTromper> {
+public class PheresBandTromper extends CardImpl {
 
     public PheresBandTromper(UUID ownerId) {
         super(ownerId, 134, "Pheres-Band Tromper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

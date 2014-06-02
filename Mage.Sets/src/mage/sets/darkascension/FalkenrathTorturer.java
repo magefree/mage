@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class FalkenrathTorturer extends CardImpl<FalkenrathTorturer> {
+public class FalkenrathTorturer extends CardImpl {
 
     public FalkenrathTorturer(UUID ownerId) {
         super(ownerId, 60, "Falkenrath Torturer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

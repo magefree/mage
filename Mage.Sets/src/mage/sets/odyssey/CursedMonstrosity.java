@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class CursedMonstrosity extends CardImpl<CursedMonstrosity> {
+public class CursedMonstrosity extends CardImpl {
 
     public CursedMonstrosity(UUID ownerId) {
         super(ownerId, 126, "Cursed Monstrosity", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");

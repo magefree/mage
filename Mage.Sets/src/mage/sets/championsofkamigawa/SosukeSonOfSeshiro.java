@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX
  */
-public class SosukeSonOfSeshiro extends CardImpl<SosukeSonOfSeshiro> {
+public class SosukeSonOfSeshiro extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snake creatures");
 

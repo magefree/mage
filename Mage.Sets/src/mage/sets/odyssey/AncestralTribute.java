@@ -43,7 +43,7 @@ import mage.filter.FilterCard;
  * @author cbt33
  */
  
-public class AncestralTribute extends CardImpl<AncestralTribute> {
+public class AncestralTribute extends CardImpl {
 
     public AncestralTribute(UUID ownerId) {
         super(ownerId, 2, "Ancestral Tribute", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class CrusherZendikon extends CardImpl<CrusherZendikon> {
+public class CrusherZendikon extends CardImpl {
 
     public CrusherZendikon(UUID ownerId) {
         super(ownerId, 78, "Crusher Zendikon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

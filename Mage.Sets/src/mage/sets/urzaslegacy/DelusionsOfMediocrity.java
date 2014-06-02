@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 /**
  * @author Backfir3
  */
-public class DelusionsOfMediocrity extends CardImpl<DelusionsOfMediocrity> {
+public class DelusionsOfMediocrity extends CardImpl {
 
     public DelusionsOfMediocrity(UUID ownerId) {
         super(ownerId, 30, "Delusions of Mediocrity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

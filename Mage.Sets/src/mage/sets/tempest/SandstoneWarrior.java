@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SandstoneWarrior extends CardImpl<SandstoneWarrior> {
+public class SandstoneWarrior extends CardImpl {
 
     public SandstoneWarrior(UUID ownerId) {
         super(ownerId, 199, "Sandstone Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

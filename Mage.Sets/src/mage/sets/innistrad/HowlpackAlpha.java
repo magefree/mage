@@ -54,7 +54,7 @@ import mage.abilities.effects.Effect;
  *
  * @author North, noxx
  */
-public class HowlpackAlpha extends CardImpl<HowlpackAlpha> {
+public class HowlpackAlpha extends CardImpl {
 
     private static final String ruleText = "At the beginning of your end step, put a 2/2 green Wolf creature token onto the battlefield";
 

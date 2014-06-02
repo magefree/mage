@@ -48,7 +48,7 @@ import mage.target.targetpointer.FirstTargetPointer;
  *
  * @author cbt33
  */
-public class GhastlyDemise extends CardImpl<GhastlyDemise> {
+public class GhastlyDemise extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature if its tougness is less than the number of cards in your graveyard");
     static {

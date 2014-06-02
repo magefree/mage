@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class UmbraMystic extends CardImpl<UmbraMystic> {
+public class UmbraMystic extends CardImpl {
 
     private static final FilterEnchantment filter = new FilterEnchantment("Auras attached to permanents you control");
 

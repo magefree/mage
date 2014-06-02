@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author jeffwadsworth
  */
-public class MaraudingMaulhorn extends CardImpl<MaraudingMaulhorn> {
+public class MaraudingMaulhorn extends CardImpl {
     
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature named Advocate of the Beast");    
     static {

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SeatOfTheSynod extends CardImpl<SeatOfTheSynod> {
+public class SeatOfTheSynod extends CardImpl {
 
     public SeatOfTheSynod (UUID ownerId) {
         super(ownerId, 283, "Seat of the Synod", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);

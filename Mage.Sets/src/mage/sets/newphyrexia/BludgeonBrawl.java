@@ -56,7 +56,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class BludgeonBrawl extends CardImpl<BludgeonBrawl> {
+public class BludgeonBrawl extends CardImpl {
 
     public BludgeonBrawl(UUID ownerId) {
         super(ownerId, 80, "Bludgeon Brawl", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

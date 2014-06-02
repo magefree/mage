@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class WallOfBlood extends CardImpl<WallOfBlood> {
+public class WallOfBlood extends CardImpl {
 
     public WallOfBlood(UUID ownerId) {
         super(ownerId, 82, "Wall of Blood", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

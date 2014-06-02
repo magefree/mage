@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CullingMark extends CardImpl<CullingMark> {
+public class CullingMark extends CardImpl {
 
     public CullingMark(UUID ownerId) {
         super(ownerId, 120, "Culling Mark", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");

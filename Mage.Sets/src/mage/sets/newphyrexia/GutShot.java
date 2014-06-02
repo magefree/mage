@@ -38,7 +38,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class GutShot extends CardImpl<GutShot> {
+public class GutShot extends CardImpl {
 
     public GutShot(UUID ownerId) {
         super(ownerId, 86, "Gut Shot", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{RP}");

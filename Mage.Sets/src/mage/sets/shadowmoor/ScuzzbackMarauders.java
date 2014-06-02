@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class ScuzzbackMarauders extends CardImpl<ScuzzbackMarauders> {
+public class ScuzzbackMarauders extends CardImpl {
 
     public ScuzzbackMarauders(UUID ownerId) {
         super(ownerId, 216, "Scuzzback Marauders", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R/G}");

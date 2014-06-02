@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class StreetWraith extends CardImpl<StreetWraith> {
+public class StreetWraith extends CardImpl {
 
     public StreetWraith(UUID ownerId) {
         super(ownerId, 90, "Street Wraith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class BasaltMonolith extends CardImpl<BasaltMonolith> {
+public class BasaltMonolith extends CardImpl {
 
     public BasaltMonolith(UUID ownerId) {
         super(ownerId, 231, "Basalt Monolith", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

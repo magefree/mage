@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class UrzasFactory extends CardImpl<UrzasFactory> {
+public class UrzasFactory extends CardImpl {
 
     public UrzasFactory(UUID ownerId) {
         super(ownerId, 280, "Urza's Factory", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");

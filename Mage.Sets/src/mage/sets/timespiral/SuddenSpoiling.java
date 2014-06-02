@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class SuddenSpoiling extends CardImpl<SuddenSpoiling> {
+public class SuddenSpoiling extends CardImpl {
 
     public SuddenSpoiling(UUID ownerId) {
         super(ownerId, 135, "Sudden Spoiling", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");

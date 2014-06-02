@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class WingsteedRider extends CardImpl<WingsteedRider> {
+public class WingsteedRider extends CardImpl {
 
     public WingsteedRider(UUID ownerId) {
         super(ownerId, 36, "Wingsteed Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

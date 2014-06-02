@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GoldenglowMoth extends CardImpl<GoldenglowMoth> {
+public class GoldenglowMoth extends CardImpl {
 
     public GoldenglowMoth(UUID ownerId) {
         super(ownerId, 15, "Goldenglow Moth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

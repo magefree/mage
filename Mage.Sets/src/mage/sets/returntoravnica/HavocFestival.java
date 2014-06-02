@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HavocFestival extends CardImpl<HavocFestival> {
+public class HavocFestival extends CardImpl {
 
     static final String rule = "Mana Bloom enters the battlefield with X charge counters on it";
 

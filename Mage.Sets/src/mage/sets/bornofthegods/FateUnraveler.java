@@ -39,7 +39,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class FateUnraveler extends CardImpl<FateUnraveler> {
+public class FateUnraveler extends CardImpl {
 
     public FateUnraveler(UUID ownerId) {
         super(ownerId, 68, "Fate Unraveler", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");

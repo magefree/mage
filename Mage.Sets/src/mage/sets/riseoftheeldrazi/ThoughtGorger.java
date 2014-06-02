@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class ThoughtGorger extends CardImpl<ThoughtGorger> {
+public class ThoughtGorger extends CardImpl {
 
     public ThoughtGorger(UUID ownerId) {
         super(ownerId, 129, "Thought Gorger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

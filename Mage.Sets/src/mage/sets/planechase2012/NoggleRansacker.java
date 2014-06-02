@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class NoggleRansacker extends CardImpl<NoggleRansacker> {
+public class NoggleRansacker extends CardImpl {
 
     public NoggleRansacker(UUID ownerId) {
         super(ownerId, 102, "Noggle Ransacker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U/R}");

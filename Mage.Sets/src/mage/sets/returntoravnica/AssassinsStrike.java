@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AssassinsStrike extends CardImpl<AssassinsStrike> {
+public class AssassinsStrike extends CardImpl {
 
     public AssassinsStrike(UUID ownerId) {
         super(ownerId, 57, "Assassin's Strike", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

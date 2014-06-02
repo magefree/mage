@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Brushland extends CardImpl<Brushland> {
+public class Brushland extends CardImpl {
 
     public Brushland(UUID ownerId) {
         super(ownerId, 349, "Brushland", Rarity.RARE, new CardType[]{CardType.LAND}, "");

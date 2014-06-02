@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class LambholtElder extends CardImpl<LambholtElder> {
+public class LambholtElder extends CardImpl {
 
     public LambholtElder(UUID ownerId) {
         super(ownerId, 122, "Lambholt Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class MetallicMastery extends CardImpl<MetallicMastery> {
+public class MetallicMastery extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

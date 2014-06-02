@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class StormscapeFamiliar extends CardImpl<StormscapeFamiliar> {
+public class StormscapeFamiliar extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("White spells and black spells");
 

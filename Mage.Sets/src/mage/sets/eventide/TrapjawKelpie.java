@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class TrapjawKelpie extends CardImpl<TrapjawKelpie> {
+public class TrapjawKelpie extends CardImpl {
 
     public TrapjawKelpie(UUID ownerId) {
         super(ownerId, 164, "Trapjaw Kelpie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G/U}{G/U}");

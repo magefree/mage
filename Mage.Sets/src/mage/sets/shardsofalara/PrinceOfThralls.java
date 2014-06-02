@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class PrinceOfThralls extends CardImpl<PrinceOfThralls> {
+public class PrinceOfThralls extends CardImpl {
 
     public PrinceOfThralls(UUID ownerId) {
         super(ownerId, 182, "Prince of Thralls", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{B}{B}{R}");

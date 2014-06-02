@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class ThranDynamo extends CardImpl<ThranDynamo> {
+public class ThranDynamo extends CardImpl {
 
     public ThranDynamo(UUID ownerId) {
         super(ownerId, 139, "Thran Dynamo", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

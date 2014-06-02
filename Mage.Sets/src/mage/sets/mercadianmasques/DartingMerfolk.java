@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class DartingMerfolk extends CardImpl<DartingMerfolk> {
+public class DartingMerfolk extends CardImpl {
 
     public DartingMerfolk(UUID ownerId) {
         super(ownerId, 72, "Darting Merfolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

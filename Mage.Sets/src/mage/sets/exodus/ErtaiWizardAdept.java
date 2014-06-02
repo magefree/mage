@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class ErtaiWizardAdept extends CardImpl<ErtaiWizardAdept> {
+public class ErtaiWizardAdept extends CardImpl {
 
     public ErtaiWizardAdept(UUID ownerId) {
         super(ownerId, 33, "Ertai, Wizard Adept", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");

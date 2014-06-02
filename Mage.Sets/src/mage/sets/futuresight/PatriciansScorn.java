@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class PatriciansScorn extends CardImpl<PatriciansScorn> { 
+public class PatriciansScorn extends CardImpl { 
 
     public PatriciansScorn(UUID ownerId) {
         super(ownerId, 29, "Patrician's Scorn", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");

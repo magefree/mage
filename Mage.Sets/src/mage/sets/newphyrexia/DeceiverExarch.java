@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class DeceiverExarch extends CardImpl<DeceiverExarch> {
+public class DeceiverExarch extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent an opponent controls");
 

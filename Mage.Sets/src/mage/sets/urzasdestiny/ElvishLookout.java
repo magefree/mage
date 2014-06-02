@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class ElvishLookout extends CardImpl<ElvishLookout> {
+public class ElvishLookout extends CardImpl {
 
     public ElvishLookout(UUID ownerId) {
         super(ownerId, 103, "Elvish Lookout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

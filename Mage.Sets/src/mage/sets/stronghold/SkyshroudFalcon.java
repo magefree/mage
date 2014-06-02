@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class SkyshroudFalcon extends CardImpl<SkyshroudFalcon> {
+public class SkyshroudFalcon extends CardImpl {
 
     public SkyshroudFalcon(UUID ownerId) {
         super(ownerId, 116, "Skyshroud Falcon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

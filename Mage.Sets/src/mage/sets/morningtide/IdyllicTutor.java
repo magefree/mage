@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInLibrary;
 /**
  * @author Loki
  */
-public class IdyllicTutor extends CardImpl<IdyllicTutor> {
+public class IdyllicTutor extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantment");
 

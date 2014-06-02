@@ -43,7 +43,7 @@ import mage.players.Player;
  * @author cbt33, LevelX2 (Hunted Wumpus)
  */
  
-public class WordsOfWisdom extends CardImpl<WordsOfWisdom> {
+public class WordsOfWisdom extends CardImpl {
 
     public WordsOfWisdom(UUID ownerId) {
         super(ownerId, 114, "Words of Wisdom", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

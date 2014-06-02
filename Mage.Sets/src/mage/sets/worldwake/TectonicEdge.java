@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TectonicEdge extends CardImpl<TectonicEdge> {
+public class TectonicEdge extends CardImpl {
 
     public TectonicEdge(UUID ownerId) {
         super(ownerId, 145, "Tectonic Edge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);

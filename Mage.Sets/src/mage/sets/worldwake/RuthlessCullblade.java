@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RuthlessCullblade extends CardImpl<RuthlessCullblade> {
+public class RuthlessCullblade extends CardImpl {
 
     public RuthlessCullblade(UUID ownerId) {
         super(ownerId, 65, "Ruthless Cullblade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

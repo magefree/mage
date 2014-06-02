@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class Wonder extends CardImpl<Wonder> {
+public class Wonder extends CardImpl {
 
     private static final String ruleText = "As long as Wonder is in your graveyard and you control an Island, creatures you control have flying";
 

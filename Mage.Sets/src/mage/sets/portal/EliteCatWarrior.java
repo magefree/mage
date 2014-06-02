@@ -38,7 +38,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class EliteCatWarrior extends CardImpl<EliteCatWarrior> {
+public class EliteCatWarrior extends CardImpl {
 
     public EliteCatWarrior(UUID ownerId) {
         super(ownerId, 87, "Elite Cat Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

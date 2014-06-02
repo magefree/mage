@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class HorrorOfTheDim extends CardImpl<HorrorOfTheDim> {
+public class HorrorOfTheDim extends CardImpl {
 
     public HorrorOfTheDim(UUID ownerId) {
         super(ownerId, 68, "Horror of the Dim", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");

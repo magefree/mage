@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class ThrabenSentry extends CardImpl<ThrabenSentry> {
+public class ThrabenSentry extends CardImpl {
 
     public ThrabenSentry(UUID ownerId) {
         super(ownerId, 38, "Thraben Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");

@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ViewFromAbove extends CardImpl<ViewFromAbove> {
+public class ViewFromAbove extends CardImpl {
 
     public ViewFromAbove(UUID ownerId) {
         super(ownerId, 38, "View from Above", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

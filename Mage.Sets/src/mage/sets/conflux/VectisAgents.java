@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class VectisAgents extends CardImpl<VectisAgents> {
+public class VectisAgents extends CardImpl {
 
     public VectisAgents(UUID ownerId) {
         super(ownerId, 131, "Vectis Agents", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}{B}");

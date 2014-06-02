@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CalderaHellion extends CardImpl<CalderaHellion> {
+public class CalderaHellion extends CardImpl {
 
     public CalderaHellion(UUID ownerId) {
         super(ownerId, 95, "Caldera Hellion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

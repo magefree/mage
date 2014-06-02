@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class TrainedCaracal extends CardImpl<TrainedCaracal> {
+public class TrainedCaracal extends CardImpl {
 
     public TrainedCaracal(UUID ownerId) {
         super(ownerId, 27, "Trained Caracal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");

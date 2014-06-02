@@ -56,7 +56,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class JelevaNephaliasScourge extends CardImpl<JelevaNephaliasScourge> {
+public class JelevaNephaliasScourge extends CardImpl {
 
     public JelevaNephaliasScourge(UUID ownerId) {
         super(ownerId, 194, "Jeleva, Nephalia's Scourge", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");

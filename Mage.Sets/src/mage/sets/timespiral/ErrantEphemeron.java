@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class ErrantEphemeron extends CardImpl<ErrantEphemeron> {
+public class ErrantEphemeron extends CardImpl {
 
     public ErrantEphemeron(UUID ownerId) {
         super(ownerId, 60, "Errant Ephemeron", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");

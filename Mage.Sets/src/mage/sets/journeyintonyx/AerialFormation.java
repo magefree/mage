@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AerialFormation extends CardImpl<AerialFormation> {
+public class AerialFormation extends CardImpl {
 
     public AerialFormation(UUID ownerId) {
         super(ownerId, 30, "Aerial Formation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

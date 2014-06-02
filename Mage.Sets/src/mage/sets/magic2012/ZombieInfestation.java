@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author North
  */
-public class ZombieInfestation extends CardImpl<ZombieInfestation> {
+public class ZombieInfestation extends CardImpl {
 
     public ZombieInfestation(UUID ownerId) {
         super(ownerId, 120, "Zombie Infestation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

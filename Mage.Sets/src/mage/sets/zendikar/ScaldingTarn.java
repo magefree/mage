@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ScaldingTarn extends CardImpl<ScaldingTarn> {
+public class ScaldingTarn extends CardImpl {
 
     public ScaldingTarn(UUID ownerId) {
         super(ownerId, 223, "Scalding Tarn", Rarity.RARE, new CardType[]{CardType.LAND}, null);

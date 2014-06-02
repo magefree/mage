@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class FyndhornElves extends CardImpl<FyndhornElves> {
+public class FyndhornElves extends CardImpl {
 
     public FyndhornElves(UUID ownerId) {
         super(ownerId, 132, "Fyndhorn Elves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

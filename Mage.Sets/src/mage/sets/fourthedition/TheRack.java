@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class TheRack extends CardImpl<TheRack> {
+public class TheRack extends CardImpl {
 
     public TheRack(UUID ownerId) {
         super(ownerId, 370, "The Rack", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");

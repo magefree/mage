@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class WrackWithMadness extends CardImpl<WrackWithMadness> {
+public class WrackWithMadness extends CardImpl {
 
     public WrackWithMadness(UUID ownerId) {
         super(ownerId, 107, "Wrack with Madness", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");

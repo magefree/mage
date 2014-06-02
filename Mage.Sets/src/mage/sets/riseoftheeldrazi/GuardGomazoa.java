@@ -44,7 +44,7 @@ import mage.constants.Duration;
  *
  * @author jeffwadsworth
  */
-public class GuardGomazoa extends CardImpl<GuardGomazoa> {
+public class GuardGomazoa extends CardImpl {
 
     public GuardGomazoa(UUID ownerId) {
         super(ownerId, 70, "Guard Gomazoa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

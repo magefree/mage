@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Backfir3
  */
-public class Hush extends CardImpl<Hush> {
+public class Hush extends CardImpl {
 
     public Hush(UUID ownerId) {
         super(ownerId, 266, "Hush", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

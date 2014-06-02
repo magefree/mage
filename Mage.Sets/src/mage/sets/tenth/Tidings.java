@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class Tidings extends CardImpl<Tidings> {
+public class Tidings extends CardImpl {
 
     public Tidings(UUID ownerId) {
         super(ownerId, 116, "Tidings", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

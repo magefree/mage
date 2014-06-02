@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpellbreakerBehemoth extends CardImpl<SpellbreakerBehemoth> {
+public class SpellbreakerBehemoth extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Creature spells you control with power 5 or greater");
 

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Bioshift extends CardImpl<Bioshift> {
+public class Bioshift extends CardImpl {
 
     public Bioshift(UUID ownerId) {
         super(ownerId, 214, "Bioshift", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G/U}");

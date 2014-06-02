@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class FemerefScouts extends CardImpl<FemerefScouts> {
+public class FemerefScouts extends CardImpl {
 
     public FemerefScouts(UUID ownerId) {
         super(ownerId, 223, "Femeref Scouts", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

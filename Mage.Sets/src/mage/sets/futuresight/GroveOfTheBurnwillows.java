@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author jonubuu
  */
-public class GroveOfTheBurnwillows extends CardImpl<GroveOfTheBurnwillows> {
+public class GroveOfTheBurnwillows extends CardImpl {
 
     public GroveOfTheBurnwillows(UUID ownerId) {
         super(ownerId, 176, "Grove of the Burnwillows", Rarity.RARE, new CardType[]{CardType.LAND}, "");

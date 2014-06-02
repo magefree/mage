@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class FaerieTrickery extends CardImpl<FaerieTrickery> {
+public class FaerieTrickery extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("non-Faerie spell");
 

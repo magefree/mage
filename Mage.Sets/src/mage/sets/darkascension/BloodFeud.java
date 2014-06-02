@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author intimidatingant
  */
-public class BloodFeud extends CardImpl<BloodFeud> {
+public class BloodFeud extends CardImpl {
 
     public BloodFeud(UUID ownerId) {
         super(ownerId, 83, "Blood Feud", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

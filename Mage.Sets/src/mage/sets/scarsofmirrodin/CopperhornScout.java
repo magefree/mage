@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class CopperhornScout extends CardImpl<CopperhornScout> {
+public class CopperhornScout extends CardImpl {
 
     public CopperhornScout(UUID ownerId) {
         super(ownerId, 116, "Copperhorn Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

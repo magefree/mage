@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class OkinaNightwatch extends CardImpl<OkinaNightwatch> {
+public class OkinaNightwatch extends CardImpl {
 
     public OkinaNightwatch(UUID ownerId) {
         super(ownerId, 140, "Okina Nightwatch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

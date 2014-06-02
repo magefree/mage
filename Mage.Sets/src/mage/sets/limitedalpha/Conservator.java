@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  * @author KholdFuzion
 
  */
-public class Conservator extends CardImpl<Conservator> {
+public class Conservator extends CardImpl {
 
     public Conservator(UUID ownerId) {
         super(ownerId, 237, "Conservator", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

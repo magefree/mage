@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class LoneMissionary extends CardImpl<LoneMissionary> {
+public class LoneMissionary extends CardImpl {
 
     public LoneMissionary(UUID ownerId) {
         super(ownerId, 34, "Lone Missionary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

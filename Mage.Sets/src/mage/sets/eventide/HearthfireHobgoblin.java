@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HearthfireHobgoblin extends CardImpl<HearthfireHobgoblin> {
+public class HearthfireHobgoblin extends CardImpl {
 
     public HearthfireHobgoblin(UUID ownerId) {
         super(ownerId, 141, "Hearthfire Hobgoblin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}{R/W}");

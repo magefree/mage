@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author North
  */
-public class FiresOfUndeath extends CardImpl<FiresOfUndeath> {
+public class FiresOfUndeath extends CardImpl {
 
     public FiresOfUndeath(UUID ownerId) {
         super(ownerId, 88, "Fires of Undeath", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");

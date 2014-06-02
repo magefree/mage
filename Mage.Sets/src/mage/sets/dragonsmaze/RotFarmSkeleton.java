@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  */
 
 
-public class RotFarmSkeleton extends CardImpl<RotFarmSkeleton> {
+public class RotFarmSkeleton extends CardImpl {
 
     public RotFarmSkeleton (UUID ownerId) {
         super(ownerId, 98, "Rot Farm Skeleton", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");

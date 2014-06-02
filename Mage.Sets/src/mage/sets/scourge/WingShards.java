@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class WingShards extends CardImpl<WingShards> {
+public class WingShards extends CardImpl {
 
     public WingShards(UUID ownerId) {
         super(ownerId, 25, "Wing Shards", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");

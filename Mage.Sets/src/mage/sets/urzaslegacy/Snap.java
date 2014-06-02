@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class Snap extends CardImpl<Snap> {
+public class Snap extends CardImpl {
 
     public Snap(UUID ownerId) {
         super(ownerId, 43, "Snap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");

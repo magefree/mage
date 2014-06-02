@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class DregscapeZombie extends CardImpl<DregscapeZombie> {
+public class DregscapeZombie extends CardImpl {
 
     public DregscapeZombie (UUID ownerId) {
         super(ownerId, 74, "Dregscape Zombie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class ReforgeTheSoul extends CardImpl<ReforgeTheSoul> {
+public class ReforgeTheSoul extends CardImpl {
 
     public ReforgeTheSoul(UUID ownerId) {
         super(ownerId, 151, "Reforge the Soul", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

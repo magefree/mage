@@ -51,7 +51,7 @@ import mage.watchers.common.DamagedByWatcher;
 /**
  * @author LevelX
  */
-public class KumanosPupils extends CardImpl<KumanosPupils> {
+public class KumanosPupils extends CardImpl {
 
     public KumanosPupils(UUID ownerId) {
         super(ownerId, 177, "Kumano's Pupils", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

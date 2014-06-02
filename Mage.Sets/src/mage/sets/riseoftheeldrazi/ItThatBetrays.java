@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author jeffwadsworth
  */
-public class ItThatBetrays extends CardImpl<ItThatBetrays> {
+public class ItThatBetrays extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nontoken permanent");
 

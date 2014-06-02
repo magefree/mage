@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DarkTutelage extends CardImpl<DarkTutelage> {
+public class DarkTutelage extends CardImpl {
 
     public DarkTutelage(UUID ownerId) {
         super(ownerId, 90, "Dark Tutelage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class RakdosCharm extends CardImpl<RakdosCharm> {
+public class RakdosCharm extends CardImpl {
 
     public RakdosCharm(UUID ownerId) {
         super(ownerId, 184, "Rakdos Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{R}");

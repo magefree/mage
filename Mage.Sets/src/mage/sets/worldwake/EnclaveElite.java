@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class EnclaveElite extends CardImpl<EnclaveElite> {
+public class EnclaveElite extends CardImpl {
 
     public EnclaveElite(UUID ownerId) {
         super(ownerId, 27, "Enclave Elite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

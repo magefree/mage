@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class IvoryMask extends CardImpl<IvoryMask> {
+public class IvoryMask extends CardImpl {
 
     public IvoryMask(UUID ownerId) {
         super(ownerId, 23, "Ivory Mask", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

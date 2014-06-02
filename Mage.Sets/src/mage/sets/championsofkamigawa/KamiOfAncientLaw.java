@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class KamiOfAncientLaw extends CardImpl<KamiOfAncientLaw> {
+public class KamiOfAncientLaw extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {

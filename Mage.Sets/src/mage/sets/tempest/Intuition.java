@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class Intuition extends CardImpl<Intuition> {
+public class Intuition extends CardImpl {
 
     public Intuition(UUID ownerId) {
         super(ownerId, 70, "Intuition", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");

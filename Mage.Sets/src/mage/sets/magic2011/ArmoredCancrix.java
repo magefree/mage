@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ArmoredCancrix extends CardImpl<ArmoredCancrix> {
+public class ArmoredCancrix extends CardImpl {
 
     public ArmoredCancrix(UUID ownerId) {
         super(ownerId, 44, "Armored Cancrix", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

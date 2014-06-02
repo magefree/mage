@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AcidicSlime extends CardImpl<AcidicSlime> {
+public class AcidicSlime extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
 

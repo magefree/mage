@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BruteForce extends CardImpl<BruteForce> {
+public class BruteForce extends CardImpl {
 
     public BruteForce(UUID ownerId) {
         super(ownerId, 116, "Brute Force", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

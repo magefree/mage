@@ -62,7 +62,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class OpalPalace extends CardImpl<OpalPalace> {
+public class OpalPalace extends CardImpl {
 
     public OpalPalace(UUID ownerId) {
         super(ownerId, 310, "Opal Palace", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class Xenograft extends CardImpl<Xenograft> {
+public class Xenograft extends CardImpl {
 
     public Xenograft(UUID ownerId) {
         super(ownerId, 51, "Xenograft", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");

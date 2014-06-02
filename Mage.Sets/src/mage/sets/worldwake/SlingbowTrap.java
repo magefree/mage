@@ -47,7 +47,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author jeffwadsworth
  */
-public class SlingbowTrap extends CardImpl<SlingbowTrap> {
+public class SlingbowTrap extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with flying");
 

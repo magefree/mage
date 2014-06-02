@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DestructiveForce extends CardImpl<DestructiveForce> {
+public class DestructiveForce extends CardImpl {
 
     private static final FilterControlledPermanent filterLand = new FilterControlledLandPermanent();
     private static final FilterPermanent filterCreature = new FilterCreaturePermanent();

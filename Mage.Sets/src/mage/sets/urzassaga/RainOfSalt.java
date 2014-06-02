@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author Backfir3
  */
-public class RainOfSalt extends CardImpl<RainOfSalt> {
+public class RainOfSalt extends CardImpl {
 
     private static final FilterPermanent filter = new FilterLandPermanent();
 

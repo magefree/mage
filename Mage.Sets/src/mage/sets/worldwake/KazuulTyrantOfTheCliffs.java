@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class KazuulTyrantOfTheCliffs extends CardImpl<KazuulTyrantOfTheCliffs> {
+public class KazuulTyrantOfTheCliffs extends CardImpl {
 
     public KazuulTyrantOfTheCliffs(UUID ownerId) {
         super(ownerId, 84, "Kazuul, Tyrant of the Cliffs", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

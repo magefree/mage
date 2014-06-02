@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class Cryptoplasm extends CardImpl<Cryptoplasm> {
+public class Cryptoplasm extends CardImpl {
     final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {

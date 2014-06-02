@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class Palinchron extends CardImpl<Palinchron> {
+public class Palinchron extends CardImpl {
 
     public Palinchron(UUID ownerId) {
         super(ownerId, 38, "Palinchron", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

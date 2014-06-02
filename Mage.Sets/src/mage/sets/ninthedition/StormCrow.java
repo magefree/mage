@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class StormCrow extends CardImpl<StormCrow> {
+public class StormCrow extends CardImpl {
 
     public StormCrow(UUID ownerId) {
         super(ownerId, 100, "Storm Crow", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

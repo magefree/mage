@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class EvangelOfHeliod extends CardImpl<EvangelOfHeliod> {
+public class EvangelOfHeliod extends CardImpl {
 
     public EvangelOfHeliod(UUID ownerId) {
         super(ownerId, 11, "Evangel of Heliod", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

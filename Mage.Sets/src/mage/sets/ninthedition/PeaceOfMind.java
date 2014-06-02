@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class PeaceOfMind extends CardImpl<PeaceOfMind> {
+public class PeaceOfMind extends CardImpl {
 
     public PeaceOfMind(UUID ownerId) {
         super(ownerId, 33, "Peace of Mind", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

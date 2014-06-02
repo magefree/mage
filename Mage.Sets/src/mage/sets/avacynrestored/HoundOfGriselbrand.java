@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class HoundOfGriselbrand extends CardImpl<HoundOfGriselbrand> {
+public class HoundOfGriselbrand extends CardImpl {
 
     public HoundOfGriselbrand(UUID ownerId) {
         super(ownerId, 141, "Hound of Griselbrand", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

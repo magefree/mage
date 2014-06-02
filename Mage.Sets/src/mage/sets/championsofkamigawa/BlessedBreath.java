@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BlessedBreath extends CardImpl<BlessedBreath> {
+public class BlessedBreath extends CardImpl {
 
     public BlessedBreath(UUID ownerId) {
         super(ownerId, 1, "Blessed Breath", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

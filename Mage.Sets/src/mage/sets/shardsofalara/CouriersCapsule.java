@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class CouriersCapsule extends CardImpl<CouriersCapsule> {
+public class CouriersCapsule extends CardImpl {
 
     public CouriersCapsule (UUID ownerId) {
         super(ownerId, 37, "Courier's Capsule", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{U}");

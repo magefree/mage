@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SpiritLink extends CardImpl<SpiritLink> {
+public class SpiritLink extends CardImpl {
 
     public SpiritLink(UUID ownerId) {
         super(ownerId, 47, "Spirit Link", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");

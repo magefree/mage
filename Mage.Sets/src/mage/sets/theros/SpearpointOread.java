@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SpearpointOread extends CardImpl<SpearpointOread> {
+public class SpearpointOread extends CardImpl {
 
     public SpearpointOread(UUID ownerId) {
         super(ownerId, 141, "Spearpoint Oread", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{R}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author nantuko
  */
-public class RazorHippogriff extends CardImpl<RazorHippogriff> {
+public class RazorHippogriff extends CardImpl {
 
     public RazorHippogriff (UUID ownerId) {
         super(ownerId, 17, "Razor Hippogriff", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ArcticMerfolk extends CardImpl<ArcticMerfolk> {
+public class ArcticMerfolk extends CardImpl {
 
     public ArcticMerfolk(UUID ownerId) {
         super(ownerId, 21, "Arctic Merfolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DeathsApproach extends CardImpl<DeathsApproach> {
+public class DeathsApproach extends CardImpl {
 
     public DeathsApproach(UUID ownerId) {
         super(ownerId, 62, "Death's Approach", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

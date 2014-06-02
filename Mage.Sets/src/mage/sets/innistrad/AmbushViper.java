@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class AmbushViper extends CardImpl<AmbushViper> {
+public class AmbushViper extends CardImpl {
 
     public AmbushViper(UUID ownerId) {
         super(ownerId, 169, "Ambush Viper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

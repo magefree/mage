@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class FungalSprouting extends CardImpl<FungalSprouting> {
+public class FungalSprouting extends CardImpl {
 
     public FungalSprouting(UUID ownerId) {
         super(ownerId, 173, "Fungal Sprouting", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
  *
  * @author Plopman
  */
-public class ValleyRannet extends CardImpl<ValleyRannet> {
+public class ValleyRannet extends CardImpl {
 
     public ValleyRannet(UUID ownerId) {
         super(ownerId, 61, "Valley Rannet", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");

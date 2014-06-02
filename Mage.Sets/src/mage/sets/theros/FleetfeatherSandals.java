@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class FleetfeatherSandals extends CardImpl<FleetfeatherSandals> {
+public class FleetfeatherSandals extends CardImpl {
 
     public FleetfeatherSandals(UUID ownerId) {
         super(ownerId, 216, "Fleetfeather Sandals", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

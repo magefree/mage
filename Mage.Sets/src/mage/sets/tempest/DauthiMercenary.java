@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
  *
  * @author Backfir3
  */
-public class DauthiMercenary extends CardImpl<DauthiMercenary> {
+public class DauthiMercenary extends CardImpl {
 
     public DauthiMercenary(UUID ownerId) {
         super(ownerId, 18, "Dauthi Mercenary", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");

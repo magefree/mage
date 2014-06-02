@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class NiblisOfTheUrn extends CardImpl<NiblisOfTheUrn> {
+public class NiblisOfTheUrn extends CardImpl {
 
     public NiblisOfTheUrn(UUID ownerId) {
         super(ownerId, 16, "Niblis of the Urn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class RazorfieldThresher extends CardImpl {
 
     public RazorfieldThresher (UUID ownerId) {
         super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

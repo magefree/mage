@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33, plopman (Immortal Coil)
  */
-public class Bloodcurdler extends CardImpl<Bloodcurdler> {
+public class Bloodcurdler extends CardImpl {
 
     public Bloodcurdler(UUID ownerId) {
         super(ownerId, 116, "Bloodcurdler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}");

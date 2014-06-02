@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class LoamingShaman extends CardImpl<LoamingShaman> {
+public class LoamingShaman extends CardImpl {
 
     public LoamingShaman(UUID ownerId) {
         super(ownerId, 87, "Loaming Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class WindwrightMage extends CardImpl<WindwrightMage> {
+public class WindwrightMage extends CardImpl {
 
     public WindwrightMage(UUID ownerId) {
         super(ownerId, 208, "Windwright Mage", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}{B}");

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class TalismanOfIndulgence extends CardImpl<TalismanOfIndulgence> {
+public class TalismanOfIndulgence extends CardImpl {
 
     public TalismanOfIndulgence(UUID ownerId) {
         super(ownerId, 255, "Talisman of Indulgence", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

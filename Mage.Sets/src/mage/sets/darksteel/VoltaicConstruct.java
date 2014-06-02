@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class VoltaicConstruct extends CardImpl<VoltaicConstruct> {
+public class VoltaicConstruct extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact");
 

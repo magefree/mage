@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  *
  * @author jonubuu
  */
-public class MysticGate extends CardImpl<MysticGate> {
+public class MysticGate extends CardImpl {
 
     public MysticGate(UUID ownerId) {
         super(ownerId, 277, "Mystic Gate", Rarity.RARE, new CardType[]{CardType.LAND}, "");

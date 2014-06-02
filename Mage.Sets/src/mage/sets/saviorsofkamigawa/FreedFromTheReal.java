@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX
  */
-public class FreedFromTheReal extends CardImpl<FreedFromTheReal> {
+public class FreedFromTheReal extends CardImpl {
 
     public FreedFromTheReal(UUID ownerId) {
         super(ownerId, 38, "Freed from the Real", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

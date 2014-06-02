@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class StirringWildwood extends CardImpl<StirringWildwood> {
+public class StirringWildwood extends CardImpl {
 
     public StirringWildwood(UUID ownerId) {
         super(ownerId, 144, "Stirring Wildwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);

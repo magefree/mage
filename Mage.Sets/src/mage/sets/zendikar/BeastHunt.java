@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class BeastHunt extends CardImpl<BeastHunt> {
+public class BeastHunt extends CardImpl {
 
     public BeastHunt(UUID ownerId) {
         super(ownerId, 158, "Beast Hunt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

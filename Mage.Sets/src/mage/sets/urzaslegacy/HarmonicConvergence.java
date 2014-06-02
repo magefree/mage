@@ -50,7 +50,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class HarmonicConvergence extends CardImpl<HarmonicConvergence> {
+public class HarmonicConvergence extends CardImpl {
 
     public HarmonicConvergence(UUID ownerId) {
         super(ownerId, 103, "Harmonic Convergence", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");

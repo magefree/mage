@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class RavensCrime extends CardImpl<RavensCrime> {
+public class RavensCrime extends CardImpl {
 
     public RavensCrime(UUID ownerId) {
         super(ownerId, 41, "Raven's Crime", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");

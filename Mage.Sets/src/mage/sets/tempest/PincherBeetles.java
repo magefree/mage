@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class PincherBeetles extends CardImpl<PincherBeetles> {
+public class PincherBeetles extends CardImpl {
 
     public PincherBeetles(UUID ownerId) {
         super(ownerId, 138, "Pincher Beetles", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SetessanTactics extends CardImpl<SetessanTactics> {
+public class SetessanTactics extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature");
 

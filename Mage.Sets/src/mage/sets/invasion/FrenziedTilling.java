@@ -41,7 +41,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class FrenziedTilling extends CardImpl<FrenziedTilling> {
+public class FrenziedTilling extends CardImpl {
 
     public FrenziedTilling(UUID ownerId) {
         super(ownerId, 247, "Frenzied Tilling", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{G}");

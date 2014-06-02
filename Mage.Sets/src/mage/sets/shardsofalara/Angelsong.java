@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Angelsong extends CardImpl<Angelsong> {
+public class Angelsong extends CardImpl {
 
     public Angelsong(UUID ownerId) {
         super(ownerId, 4, "Angelsong", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TimeWarp extends CardImpl<TimeWarp> {
+public class TimeWarp extends CardImpl {
 
     public TimeWarp(UUID ownerId) {
         super(ownerId, 75, "Time Warp", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

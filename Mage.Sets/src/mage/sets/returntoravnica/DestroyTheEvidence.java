@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class DestroyTheEvidence extends CardImpl<DestroyTheEvidence> {
+public class DestroyTheEvidence extends CardImpl {
 
     public DestroyTheEvidence(UUID ownerId) {
         super(ownerId, 64, "Destroy the Evidence", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class SignalTheClans extends CardImpl<SignalTheClans> {
+public class SignalTheClans extends CardImpl {
 
     public SignalTheClans (UUID ownerId) {
         super(ownerId, 194, "Signal the Clans", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{G}");

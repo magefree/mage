@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author North
  */
-public class RazorSwine extends CardImpl<RazorSwine> {
+public class RazorSwine extends CardImpl {
 
     public RazorSwine(UUID ownerId) {
         super(ownerId, 92, "Razor Swine", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");

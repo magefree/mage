@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class HolyDay extends CardImpl<HolyDay> {
+public class HolyDay extends CardImpl {
 
     public HolyDay(UUID ownerId) {
         super(ownerId, 20, "Holy Day", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class StormfrontPegasus extends CardImpl<StormfrontPegasus> {
+public class StormfrontPegasus extends CardImpl {
 
     public StormfrontPegasus(UUID ownerId) {
         super(ownerId, 35, "Stormfront Pegasus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

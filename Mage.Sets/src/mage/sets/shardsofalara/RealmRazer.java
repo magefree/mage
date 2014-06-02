@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class RealmRazer extends CardImpl<RealmRazer> {
+public class RealmRazer extends CardImpl {
 
     public RealmRazer(UUID ownerId) {
         super(ownerId, 187, "Realm Razer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");

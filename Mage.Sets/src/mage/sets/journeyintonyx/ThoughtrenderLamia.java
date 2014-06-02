@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class ThoughtrenderLamia extends CardImpl<ThoughtrenderLamia> {
+public class ThoughtrenderLamia extends CardImpl {
 
     public ThoughtrenderLamia(UUID ownerId) {
         super(ownerId, 85, "Thoughtrender Lamia", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{B}{B}");

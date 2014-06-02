@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class MemoryErosion extends CardImpl<MemoryErosion> {
+public class MemoryErosion extends CardImpl {
 
     public MemoryErosion(UUID ownerId) {
         super(ownerId, 50, "Memory Erosion", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");

@@ -56,7 +56,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ContestedWarZone extends CardImpl<ContestedWarZone> {
+public class ContestedWarZone extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
 

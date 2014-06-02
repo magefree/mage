@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class NightshadeStinger extends CardImpl<NightshadeStinger> {
+public class NightshadeStinger extends CardImpl {
 
     public NightshadeStinger(UUID ownerId) {
         super(ownerId, 132, "Nightshade Stinger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

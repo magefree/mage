@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  *
  * @author LevelX2
  */
-public class NinjaOfTheDeepHours extends CardImpl<NinjaOfTheDeepHours> {
+public class NinjaOfTheDeepHours extends CardImpl {
 
     public NinjaOfTheDeepHours(UUID ownerId) {
         super(ownerId, 44, "Ninja of the Deep Hours", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

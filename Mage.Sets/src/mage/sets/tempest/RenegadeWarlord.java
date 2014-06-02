@@ -43,7 +43,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author Loki
  */
-public class RenegadeWarlord extends CardImpl<RenegadeWarlord> {
+public class RenegadeWarlord extends CardImpl {
 
     public RenegadeWarlord(UUID ownerId) {
         super(ownerId, 197, "Renegade Warlord", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

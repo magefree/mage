@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Earthquake extends CardImpl<Earthquake> {
+public class Earthquake extends CardImpl {
 
     public Earthquake(UUID ownerId) {
         super(ownerId, 134, "Earthquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");

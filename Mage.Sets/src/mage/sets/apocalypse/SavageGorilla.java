@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SavageGorilla extends CardImpl<SavageGorilla> {
+public class SavageGorilla extends CardImpl {
 
     public SavageGorilla(UUID ownerId) {
         super(ownerId, 85, "Savage Gorilla", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

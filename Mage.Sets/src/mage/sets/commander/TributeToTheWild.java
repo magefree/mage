@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class TributeToTheWild extends CardImpl<TributeToTheWild> {
+public class TributeToTheWild extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("an artifact or enchantment");
 

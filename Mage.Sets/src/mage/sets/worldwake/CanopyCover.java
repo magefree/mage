@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class CanopyCover extends CardImpl<CanopyCover> {
+public class CanopyCover extends CardImpl {
 
     public CanopyCover(UUID ownerId) {
         super(ownerId, 98, "Canopy Cover", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
