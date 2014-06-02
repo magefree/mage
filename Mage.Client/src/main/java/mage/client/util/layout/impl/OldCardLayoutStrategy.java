@@ -72,4 +72,14 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
         }
 
     }
+
+    @Override
+    public int getDefaultZOrder() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void onAdd(JLayeredPane jLayeredPane) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
