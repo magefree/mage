@@ -271,26 +271,6 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         return new ObjectColor(this);
     }
 
-    public static void main(String[] args) {
-        System.out.println(new ObjectColor().shares(new ObjectColor()));
-        System.out.println(new ObjectColor("W").shares(new ObjectColor("W")));
-        System.out.println(new ObjectColor("U").shares(new ObjectColor("U")));
-        System.out.println(new ObjectColor("B").shares(new ObjectColor("B")));
-        System.out.println(new ObjectColor("R").shares(new ObjectColor("R")));
-        System.out.println(new ObjectColor("G").shares(new ObjectColor("G")));
-        System.out.println(new ObjectColor("RG").shares(new ObjectColor("GW")));
-        System.out.println(new ObjectColor("BRGUW").shares(new ObjectColor("U")));
-        System.out.println(new ObjectColor("{2}").shares(new ObjectColor("{1}")));
-        System.out.println(new ObjectColor("WRB").shares(new ObjectColor("UGR")));
-        System.out.println("should be false:");
-        System.out.println(new ObjectColor("RG").shares(new ObjectColor("WU")));
-        System.out.println(new ObjectColor("WRB").shares(new ObjectColor("UG")));
-        System.out.println(new ObjectColor("U").shares(new ObjectColor("R")));
-        System.out.println(new ObjectColor("G").shares(new ObjectColor("B")));
-        System.out.println(new ObjectColor("W").shares(new ObjectColor("1")));
-
-    }
-
     @Override
     public int compareTo(ObjectColor o) {
         int o1 = 0;
