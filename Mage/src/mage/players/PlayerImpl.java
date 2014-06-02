@@ -2236,7 +2236,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         boolean result = false;
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
             game.informPlayers(new StringBuilder(this.getName())
-                    .append(" puts ").append(card.getName()).append(" ")
+                    .append(" puts ").append(card.isFaceDown() ? " a face down card":card.getName()).append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
                     .append(card.getOwnerId().equals(this.getId()) ? "into his or her hand":"into its owner's hand").toString());
             result = true;

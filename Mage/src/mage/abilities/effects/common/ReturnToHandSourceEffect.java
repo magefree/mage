@@ -34,6 +34,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  * @author Loki
@@ -64,21 +65,24 @@ public class ReturnToHandSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            switch (game.getState().getZone(card.getId())) {
-                case BATTLEFIELD:
-                    Permanent p = game.getPermanent(source.getSourceId());
-                    if (p != null) {
-                        return p.moveToZone(Zone.HAND, source.getId(), game, false);
-                    }
-                    break;
-                case GRAVEYARD:
-                    if (!fromBattlefieldOnly) {
-                        return card.moveToZone(Zone.HAND, source.getId(), game, true);
-                    }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(source.getSourceId());
+            if (card != null) {
+                switch (game.getState().getZone(card.getId())) {
+                    case BATTLEFIELD:
+                        Permanent permanent = game.getPermanent(source.getSourceId());
+                        if (permanent != null) {
+                            controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.BATTLEFIELD);
+                        }
+                        break;
+                    case GRAVEYARD:
+                        if (!fromBattlefieldOnly) {
+                            controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
+                        }
 
-            }
+                }
+            }            
         }
         return false;
     }
