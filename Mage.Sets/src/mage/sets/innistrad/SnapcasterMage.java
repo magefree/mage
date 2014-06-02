@@ -92,7 +92,7 @@ public class SnapcasterMage extends CardImpl<SnapcasterMage> {
     }
 }
 
-class SnapcasterMageEffect extends ContinuousEffectImpl<SnapcasterMageEffect> {
+class SnapcasterMageEffect extends ContinuousEffectImpl {
 
     public SnapcasterMageEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

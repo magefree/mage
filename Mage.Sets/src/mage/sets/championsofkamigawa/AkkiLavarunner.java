@@ -107,7 +107,7 @@ class TokTokVolcanoBorn extends Token {
     }
 }
 
-class TokTokVolcanoBornEffect extends ReplacementEffectImpl<TokTokVolcanoBornEffect> {
+class TokTokVolcanoBornEffect extends ReplacementEffectImpl {
 
     TokTokVolcanoBornEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

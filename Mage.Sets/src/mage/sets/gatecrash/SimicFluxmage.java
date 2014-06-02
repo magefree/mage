@@ -83,7 +83,7 @@ public class SimicFluxmage extends CardImpl<SimicFluxmage> {
     }
 }
 
-class MoveCounterFromSourceToTargetEffect extends OneShotEffect<MoveCounterFromSourceToTargetEffect> {
+class MoveCounterFromSourceToTargetEffect extends OneShotEffect {
 
     public MoveCounterFromSourceToTargetEffect() {
         super(Outcome.Detriment);

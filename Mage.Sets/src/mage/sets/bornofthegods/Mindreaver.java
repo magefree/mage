@@ -98,7 +98,7 @@ public class Mindreaver extends CardImpl<Mindreaver> {
     }
 }
 
-class MindreaverExileEffect extends OneShotEffect<MindreaverExileEffect> {
+class MindreaverExileEffect extends OneShotEffect {
 
     public MindreaverExileEffect() {
         super(Outcome.Exile);

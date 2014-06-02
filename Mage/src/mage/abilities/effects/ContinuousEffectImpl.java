@@ -53,9 +53,8 @@ import mage.game.Game;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> extends EffectImpl<T> implements ContinuousEffect<T> {
+public abstract class ContinuousEffectImpl extends EffectImpl implements ContinuousEffect {
 
     protected Duration duration;
     protected Layer layer;
@@ -80,7 +79,7 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
         this.sublayer = sublayer;
     }
 
-    public ContinuousEffectImpl(final ContinuousEffectImpl<T> effect) {
+    public ContinuousEffectImpl(final ContinuousEffectImpl effect) {
         super(effect);
         this.duration = effect.duration;
         this.layer = effect.layer;

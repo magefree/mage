@@ -82,7 +82,7 @@ public class BrassSquire extends CardImpl<BrassSquire> {
     }
 }
 
-class EquipEffect extends OneShotEffect<EquipEffect> {
+class EquipEffect extends OneShotEffect {
 
     public EquipEffect() {
         super(Outcome.BoostCreature);

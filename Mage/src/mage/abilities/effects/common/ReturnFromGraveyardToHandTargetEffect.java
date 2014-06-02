@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  *
  * @author jeff
  */
-public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect<ReturnFromGraveyardToHandTargetEffect> {
+public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect {
 
     public ReturnFromGraveyardToHandTargetEffect() {
         super(Outcome.ReturnToHand);

@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class CantBeBlockedByOneEffect extends ContinuousEffectImpl<CantBeBlockedByOneEffect> {
+public class CantBeBlockedByOneEffect extends ContinuousEffectImpl {
 
     protected int amount;
 

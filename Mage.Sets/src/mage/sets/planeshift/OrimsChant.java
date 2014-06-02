@@ -78,7 +78,7 @@ public class OrimsChant extends CardImpl<OrimsChant> {
 
 }
 
-class OrimsChantCantCastEffect extends ReplacementEffectImpl<OrimsChantCantCastEffect> {
+class OrimsChantCantCastEffect extends ReplacementEffectImpl {
 
     public OrimsChantCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
@@ -116,7 +116,7 @@ class OrimsChantCantCastEffect extends ReplacementEffectImpl<OrimsChantCantCastE
     }
 }
 
-class OrimsChantCantAttackEffect extends ReplacementEffectImpl<OrimsChantCantAttackEffect> {
+class OrimsChantCantAttackEffect extends ReplacementEffectImpl {
 
     private static final String effectText = "If Orim's Chant was kicked, creatures can't attack this turn";
     private Condition condition = new LockedInCondition(KickedCondition.getInstance());

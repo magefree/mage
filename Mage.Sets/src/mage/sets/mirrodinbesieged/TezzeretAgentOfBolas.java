@@ -103,7 +103,7 @@ public class TezzeretAgentOfBolas extends CardImpl<TezzeretAgentOfBolas> {
 
 }
 
-class TezzeretAgentOfBolasEffect2 extends OneShotEffect<TezzeretAgentOfBolasEffect2> {
+class TezzeretAgentOfBolasEffect2 extends OneShotEffect {
 
     final static FilterControlledPermanent filter = new FilterControlledPermanent("artifacts");
 

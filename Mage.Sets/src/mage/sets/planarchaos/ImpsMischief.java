@@ -77,7 +77,7 @@ public class ImpsMischief extends CardImpl<ImpsMischief> {
     }
 }
 
-class ImpsMischiefLoseLifeEffect extends OneShotEffect<ImpsMischiefLoseLifeEffect> {
+class ImpsMischiefLoseLifeEffect extends OneShotEffect {
 
 
     public ImpsMischiefLoseLifeEffect() {

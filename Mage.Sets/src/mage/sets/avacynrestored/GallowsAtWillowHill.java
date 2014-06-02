@@ -86,7 +86,7 @@ public class GallowsAtWillowHill extends CardImpl<GallowsAtWillowHill> {
     }
 }
 
-class GallowsAtWillowHillEffect extends OneShotEffect<GallowsAtWillowHillEffect> {
+class GallowsAtWillowHillEffect extends OneShotEffect {
 
     public GallowsAtWillowHillEffect() {
         super(Outcome.DestroyPermanent);

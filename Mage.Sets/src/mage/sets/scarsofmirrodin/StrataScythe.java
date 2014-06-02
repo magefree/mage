@@ -78,7 +78,7 @@ public class StrataScythe extends CardImpl<StrataScythe> {
 
 }
 
-class StrataScytheImprintEffect extends OneShotEffect<StrataScytheImprintEffect> {
+class StrataScytheImprintEffect extends OneShotEffect {
     StrataScytheImprintEffect() {
         super(Outcome.Exile);
         staticText = "search your library for a land card, exile it, then shuffle your library";

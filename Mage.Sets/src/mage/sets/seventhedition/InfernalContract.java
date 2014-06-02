@@ -65,7 +65,7 @@ public class InfernalContract extends CardImpl<InfernalContract> {
     }
 }
 
-class InfernalContractLoseLifeEffect extends OneShotEffect<InfernalContractLoseLifeEffect> {
+class InfernalContractLoseLifeEffect extends OneShotEffect {
 
     public InfernalContractLoseLifeEffect() {
         super(Outcome.LoseLife);

@@ -80,7 +80,7 @@ public class PlagueBoiler extends CardImpl<PlagueBoiler> {
     }
 }
 
-class PlagueBoilerEffect extends OneShotEffect<PlagueBoilerEffect> {
+class PlagueBoilerEffect extends OneShotEffect {
 
     public PlagueBoilerEffect() {
         super(Outcome.Detriment);
@@ -143,7 +143,7 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class PlagueBoilerSacrificeDestroyEffect extends OneShotEffect<PlagueBoilerSacrificeDestroyEffect> {
+class PlagueBoilerSacrificeDestroyEffect extends OneShotEffect {
 
     public PlagueBoilerSacrificeDestroyEffect() {
         super(Outcome.DestroyPermanent);

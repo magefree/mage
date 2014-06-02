@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ApplyCountersEffect extends ContinuousEffectImpl<ApplyCountersEffect> {
+public class ApplyCountersEffect extends ContinuousEffectImpl {
 
     public ApplyCountersEffect() {
         super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.Counters_7d, Outcome.BoostCreature);

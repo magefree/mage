@@ -85,7 +85,7 @@ public class CapriciousEfreet extends CardImpl<CapriciousEfreet> {
     }
 }
 
-class CapriciousEfreetEffect extends OneShotEffect<CapriciousEfreetEffect> {
+class CapriciousEfreetEffect extends OneShotEffect {
 
     public CapriciousEfreetEffect() {
         super(Outcome.DestroyPermanent);

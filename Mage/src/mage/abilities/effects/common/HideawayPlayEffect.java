@@ -41,7 +41,7 @@ import mage.util.CardUtil;
  * @author LevelX2
  *
  */
-public class HideawayPlayEffect extends OneShotEffect<HideawayPlayEffect> {
+public class HideawayPlayEffect extends OneShotEffect {
 
     public HideawayPlayEffect() {
         super(Outcome.Benefit);

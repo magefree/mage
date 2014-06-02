@@ -87,7 +87,7 @@ public class NecromancersCovenant extends CardImpl<NecromancersCovenant> {
     }
 }
 
-class NecromancersConvenantEffect extends OneShotEffect<NecromancersConvenantEffect> {
+class NecromancersConvenantEffect extends OneShotEffect {
 
     public NecromancersConvenantEffect() {
         super(Outcome.PutCreatureInPlay);

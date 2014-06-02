@@ -77,7 +77,7 @@ public class ElderscaleWurm extends CardImpl<ElderscaleWurm> {
     }
 }
 
-class ElderscaleWurmSetLifeEffect extends OneShotEffect<ElderscaleWurmSetLifeEffect> {
+class ElderscaleWurmSetLifeEffect extends OneShotEffect {
 
     public ElderscaleWurmSetLifeEffect() {
         super(Outcome.Benefit);
@@ -106,7 +106,7 @@ class ElderscaleWurmSetLifeEffect extends OneShotEffect<ElderscaleWurmSetLifeEff
 
 }
 
-class ElderscaleWurmReplacementEffect extends ReplacementEffectImpl<ElderscaleWurmReplacementEffect> {
+class ElderscaleWurmReplacementEffect extends ReplacementEffectImpl {
 
     public ElderscaleWurmReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

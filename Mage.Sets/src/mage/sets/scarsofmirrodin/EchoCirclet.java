@@ -67,7 +67,7 @@ public class EchoCirclet extends CardImpl<EchoCirclet> {
     }
 }
 
-class EchoCircletEffect extends ContinuousEffectImpl<EchoCircletEffect> {
+class EchoCircletEffect extends ContinuousEffectImpl {
 
     public EchoCircletEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

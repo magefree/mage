@@ -70,7 +70,7 @@ public class GaeasHerald extends CardImpl<GaeasHerald> {
 }
 
 
-class CantCounterEffect extends ReplacementEffectImpl<CantCounterEffect> {
+class CantCounterEffect extends ReplacementEffectImpl {
 
 
     public CantCounterEffect() {

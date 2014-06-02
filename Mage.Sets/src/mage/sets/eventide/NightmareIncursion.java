@@ -78,7 +78,7 @@ public class NightmareIncursion extends CardImpl<NightmareIncursion> {
     }
 }
 
-class NightmareIncursionEffect extends OneShotEffect<NightmareIncursionEffect> {
+class NightmareIncursionEffect extends OneShotEffect {
 
     private static final  FilterLandPermanent filter = new FilterLandPermanent();
 

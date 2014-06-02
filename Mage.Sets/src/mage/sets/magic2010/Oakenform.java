@@ -78,7 +78,7 @@ public class Oakenform extends CardImpl<Oakenform> {
 
 }
 
-class OakenformEffect extends ContinuousEffectImpl<OakenformEffect> {
+class OakenformEffect extends ContinuousEffectImpl {
 
     public OakenformEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

@@ -77,7 +77,7 @@ public class EarnestFellowship extends CardImpl<EarnestFellowship> {
     }
 }
 
-class EarnestFellowshipEffect extends ContinuousEffectImpl<EarnestFellowshipEffect> {
+class EarnestFellowshipEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
    

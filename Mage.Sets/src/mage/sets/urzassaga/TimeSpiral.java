@@ -66,7 +66,7 @@ public class TimeSpiral extends CardImpl<TimeSpiral> {
     }
 }
 
-class TimeSpiralEffect extends OneShotEffect<TimeSpiralEffect> {
+class TimeSpiralEffect extends OneShotEffect {
 
     public TimeSpiralEffect() {
         super(Outcome.Neutral);

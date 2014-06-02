@@ -43,7 +43,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect<ExileCardFromOwnGraveyardControllerEffect> {
+public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
     private int amount;
 
     public ExileCardFromOwnGraveyardControllerEffect(int amount) {

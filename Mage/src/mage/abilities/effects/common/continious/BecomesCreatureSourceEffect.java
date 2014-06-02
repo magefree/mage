@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCreatureSourceEffect> implements SourceEffect {
+public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements SourceEffect {
 
     protected Token token;
     protected String type;

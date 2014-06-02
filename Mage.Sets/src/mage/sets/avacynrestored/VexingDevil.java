@@ -72,7 +72,7 @@ public class VexingDevil extends CardImpl<VexingDevil> {
     }
 }
 
-class VexingDevilEffect extends OneShotEffect<VexingDevilEffect> {
+class VexingDevilEffect extends OneShotEffect {
 
     public VexingDevilEffect() {
         super(Outcome.Neutral);

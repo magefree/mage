@@ -72,7 +72,7 @@ public class Galvanoth extends CardImpl<Galvanoth> {
     }
 }
 
-class GalvanothEffect extends OneShotEffect<GalvanothEffect> {
+class GalvanothEffect extends OneShotEffect {
 
     public GalvanothEffect() {
         super(Outcome.PlayForFree);

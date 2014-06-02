@@ -78,7 +78,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
         return new ProteanHydra(this);
     }
 
-    class ProteanHydraEffect1 extends OneShotEffect<ProteanHydraEffect1> {
+    class ProteanHydraEffect1 extends OneShotEffect {
 
         public ProteanHydraEffect1() {
             super(Outcome.BoostCreature);
@@ -111,7 +111,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 
     }
 
-    class ProteanHydraEffect2 extends PreventionEffectImpl<ProteanHydraEffect2> {
+    class ProteanHydraEffect2 extends PreventionEffectImpl {
 
         public ProteanHydraEffect2() {
             super(Duration.WhileOnBattlefield);

@@ -76,7 +76,7 @@ public class Turnabout extends CardImpl<Turnabout> {
     }
 }
 
-class TurnaboutEffect extends OneShotEffect<TurnaboutEffect> {
+class TurnaboutEffect extends OneShotEffect {
     
     private static final HashSet<String> choice = new HashSet<String>();
     static{

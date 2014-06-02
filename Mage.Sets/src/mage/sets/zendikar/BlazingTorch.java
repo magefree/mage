@@ -153,7 +153,7 @@ class BlazingTorchCost extends CostImpl<BlazingTorchCost> {
     }
 }
 
-class BlazingTorchDamageEffect extends OneShotEffect<BlazingTorchDamageEffect> {
+class BlazingTorchDamageEffect extends OneShotEffect {
 
     private UUID sourceId;
 

@@ -83,7 +83,7 @@ public class AvenMimeomancer extends CardImpl<AvenMimeomancer> {
     }
 }
 
-class AvenEffect extends ContinuousEffectImpl<AvenEffect> {
+class AvenEffect extends ContinuousEffectImpl {
 
     public AvenEffect() {
         super(Duration.Custom, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
@@ -126,7 +126,7 @@ class AvenEffect extends ContinuousEffectImpl<AvenEffect> {
     }
 }
 
-class AvenEffect2 extends ContinuousEffectImpl<AvenEffect2> {
+class AvenEffect2 extends ContinuousEffectImpl {
 
     public AvenEffect2() {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.BoostCreature);

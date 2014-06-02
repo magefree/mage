@@ -66,7 +66,7 @@ public class Meditate extends CardImpl<Meditate> {
     }
 }
 
-class SpipTurnEffect extends OneShotEffect<SpipTurnEffect> {
+class SpipTurnEffect extends OneShotEffect {
 
     public SpipTurnEffect() {
         super(Outcome.Neutral);

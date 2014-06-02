@@ -86,7 +86,7 @@ public class SwordOfTheMeek extends CardImpl<SwordOfTheMeek> {
     }
 }
 
-class SwordOfTheMeekEffect extends OneShotEffect<SwordOfTheMeekEffect> {
+class SwordOfTheMeekEffect extends OneShotEffect {
 
     public SwordOfTheMeekEffect() {
         super(Outcome.Benefit);

@@ -64,7 +64,7 @@ public class PhyrexianRebirth extends CardImpl<PhyrexianRebirth> {
         return new PhyrexianRebirth(this);
     }
 
-    class PhyrexianRebirthEffect extends OneShotEffect<PhyrexianRebirthEffect> {
+    class PhyrexianRebirthEffect extends OneShotEffect {
 
         public PhyrexianRebirthEffect() {
             super(Outcome.DestroyPermanent);

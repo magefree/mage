@@ -72,7 +72,7 @@ public class GraveyardShovel extends CardImpl<GraveyardShovel> {
     }
 }
 
-class GraveyardShovelEffect extends OneShotEffect<GraveyardShovelEffect> {
+class GraveyardShovelEffect extends OneShotEffect {
 
     public GraveyardShovelEffect() {
         super(Outcome.Exile);

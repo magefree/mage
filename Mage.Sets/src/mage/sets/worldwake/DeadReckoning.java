@@ -71,7 +71,7 @@ public class DeadReckoning extends CardImpl<DeadReckoning> {
     }
 }
 
-class DeadReckoningEffect extends OneShotEffect<DeadReckoningEffect> {
+class DeadReckoningEffect extends OneShotEffect {
 
     public DeadReckoningEffect() {
         super(Outcome.Damage);

@@ -71,7 +71,7 @@ public class PraetorsGrasp extends CardImpl<PraetorsGrasp> {
     }
 }
 
-class PraetorsGraspEffect extends OneShotEffect<PraetorsGraspEffect> {
+class PraetorsGraspEffect extends OneShotEffect {
 
     public PraetorsGraspEffect() {
         super(Outcome.PlayForFree);
@@ -112,7 +112,7 @@ class PraetorsGraspEffect extends OneShotEffect<PraetorsGraspEffect> {
     }
 }
 
-class PraetorsGraspPlayEffect extends AsThoughEffectImpl<PraetorsGraspPlayEffect> {
+class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
 
     private UUID cardId;
 
@@ -153,7 +153,7 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl<PraetorsGraspPlayEffect
 
 }
 
-class PraetorsGraspRevealEffect extends AsThoughEffectImpl<PraetorsGraspRevealEffect> {
+class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
 
     private UUID cardId;
 

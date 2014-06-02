@@ -66,7 +66,7 @@ public class BlackSunsZenith extends CardImpl<BlackSunsZenith> {
 
 }
 
-class BlackSunsZenithEffect extends OneShotEffect<BlackSunsZenithEffect> {
+class BlackSunsZenithEffect extends OneShotEffect {
     BlackSunsZenithEffect() {
         super(Outcome.UnboostCreature);
         staticText = "Put X -1/-1 counters on each creature";

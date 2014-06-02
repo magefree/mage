@@ -209,7 +209,7 @@ class OpalPalaceWatcher extends Watcher {
     }
 }
 
-class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl<OpalPalaceEntersBattlefieldEffect> {
+class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     public OpalPalaceEntersBattlefieldEffect() {
         super(Duration.EndOfGame, Outcome.BoostCreature, false);

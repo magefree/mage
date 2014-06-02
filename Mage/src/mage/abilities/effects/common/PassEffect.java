@@ -38,7 +38,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PassEffect extends OneShotEffect<PassEffect> {
+public class PassEffect extends OneShotEffect {
 
     public PassEffect() {
         super(Outcome.Neutral);

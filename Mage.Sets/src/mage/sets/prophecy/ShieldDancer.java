@@ -77,7 +77,7 @@ public class ShieldDancer extends CardImpl<ShieldDancer> {
     }
 }
 
-class ShieldDancerRedirectionEffect extends RedirectionEffect<ShieldDancerRedirectionEffect> {
+class ShieldDancerRedirectionEffect extends RedirectionEffect {
 
     public ShieldDancerRedirectionEffect() {
         super(Duration.EndOfTurn);

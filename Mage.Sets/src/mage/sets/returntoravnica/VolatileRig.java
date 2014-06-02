@@ -138,7 +138,7 @@ class VolatileRigTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 
-class VolatileRigEffect extends OneShotEffect<VolatileRigEffect> {
+class VolatileRigEffect extends OneShotEffect {
 
     VolatileRigEffect() {
         super(Outcome.Sacrifice);
@@ -169,7 +169,7 @@ class VolatileRigEffect extends OneShotEffect<VolatileRigEffect> {
     }
 }
 
-class VolatileRigEffect2 extends OneShotEffect<VolatileRigEffect2> {
+class VolatileRigEffect2 extends OneShotEffect {
 
     VolatileRigEffect2() {
         super(Outcome.Sacrifice);

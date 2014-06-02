@@ -104,7 +104,7 @@ public class DiluvianPrimordial extends CardImpl<DiluvianPrimordial> {
     }
 }
 
-class DiluvianPrimordialEffect extends OneShotEffect<DiluvianPrimordialEffect> {
+class DiluvianPrimordialEffect extends OneShotEffect {
 
     public DiluvianPrimordialEffect() {
         super(Outcome.PlayForFree);
@@ -136,7 +136,7 @@ class DiluvianPrimordialEffect extends OneShotEffect<DiluvianPrimordialEffect> {
     }
 }
 
-class DiluvianPrimordialReplacementEffect extends ReplacementEffectImpl<DiluvianPrimordialReplacementEffect> {
+class DiluvianPrimordialReplacementEffect extends ReplacementEffectImpl {
 
     private UUID cardid;
 

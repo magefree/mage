@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FightTargetsEffect extends OneShotEffect<FightTargetsEffect> {
+public class FightTargetsEffect extends OneShotEffect {
 
     public FightTargetsEffect() {
         super(Outcome.Damage);

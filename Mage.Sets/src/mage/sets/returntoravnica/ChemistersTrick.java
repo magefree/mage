@@ -90,7 +90,7 @@ public class ChemistersTrick extends CardImpl<ChemistersTrick> {
     }
 }
 
-class ChemistersTrickEffect extends OneShotEffect<ChemistersTrickEffect> {
+class ChemistersTrickEffect extends OneShotEffect {
 
     private FilterCreaturePermanent filter;
 

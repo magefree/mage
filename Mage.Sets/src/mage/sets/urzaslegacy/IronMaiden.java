@@ -69,7 +69,7 @@ public class IronMaiden extends CardImpl<IronMaiden> {
 }
 
 
-class IronMaidenEffect extends OneShotEffect<IronMaidenEffect> {
+class IronMaidenEffect extends OneShotEffect {
 
     private IronMaidenEffect(final IronMaidenEffect effect) {
         super(effect);

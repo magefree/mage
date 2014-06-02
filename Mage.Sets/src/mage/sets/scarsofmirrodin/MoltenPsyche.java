@@ -71,7 +71,7 @@ public class MoltenPsyche extends CardImpl<MoltenPsyche> {
 
 }
 
-class MoltenPsycheEffect extends OneShotEffect<MoltenPsycheEffect> {
+class MoltenPsycheEffect extends OneShotEffect {
 
     public MoltenPsycheEffect() {
         super(Outcome.Neutral);

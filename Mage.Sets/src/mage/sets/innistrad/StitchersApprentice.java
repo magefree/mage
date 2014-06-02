@@ -80,7 +80,7 @@ public class StitchersApprentice extends CardImpl<StitchersApprentice> {
     }
 }
 
-class StitchersApprenticeEffect extends OneShotEffect<StitchersApprenticeEffect> {
+class StitchersApprenticeEffect extends OneShotEffect {
 
     public StitchersApprenticeEffect() {
         super(Outcome.Sacrifice);

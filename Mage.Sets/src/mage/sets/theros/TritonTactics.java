@@ -92,7 +92,7 @@ public class TritonTactics extends CardImpl<TritonTactics> {
     }
 }
 
-class TritonTacticsUntapTargetEffect extends OneShotEffect<TritonTacticsUntapTargetEffect> {
+class TritonTacticsUntapTargetEffect extends OneShotEffect {
 
     public TritonTacticsUntapTargetEffect() {
         super(Outcome.Untap);
@@ -163,7 +163,7 @@ class TritonTacticsTriggeredAbility extends DelayedTriggeredAbility {
     }
 }
 
-class TritonTacticsEndOfCombatEffect extends OneShotEffect<TritonTacticsEndOfCombatEffect> {
+class TritonTacticsEndOfCombatEffect extends OneShotEffect {
 
     public TritonTacticsEndOfCombatEffect() {
         super(Outcome.Benefit);

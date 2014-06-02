@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
+public class ExileTargetEffect extends OneShotEffect {
 
     private Zone onlyFromZone;
     private String exileZone = null;

@@ -72,7 +72,7 @@ public class BloodMoon extends CardImpl<BloodMoon> {
     }
 }
 
-class BloodMoonEffect extends ContinuousEffectImpl<BloodMoonEffect> {
+class BloodMoonEffect extends ContinuousEffectImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     static {

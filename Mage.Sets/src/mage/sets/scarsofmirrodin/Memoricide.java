@@ -72,7 +72,7 @@ public class Memoricide extends CardImpl<Memoricide> {
 
 }
 
-class MemoricideEffect extends OneShotEffect<MemoricideEffect> {
+class MemoricideEffect extends OneShotEffect {
 
     public MemoricideEffect() {
         super(Outcome.Exile);

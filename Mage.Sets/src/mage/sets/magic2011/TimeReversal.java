@@ -63,7 +63,7 @@ public class TimeReversal extends CardImpl<TimeReversal> {
     }
 }
 
-class TimeReversalEffect extends OneShotEffect<TimeReversalEffect> {
+class TimeReversalEffect extends OneShotEffect {
 
     public TimeReversalEffect() {
         super(Outcome.Neutral);

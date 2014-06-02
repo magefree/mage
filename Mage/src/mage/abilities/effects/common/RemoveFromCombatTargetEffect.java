@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RemoveFromCombatTargetEffect extends OneShotEffect<RemoveFromCombatTargetEffect> {
+public class RemoveFromCombatTargetEffect extends OneShotEffect {
 
     public RemoveFromCombatTargetEffect() {
         super(Outcome.Detriment);

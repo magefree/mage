@@ -73,7 +73,7 @@ public class HuntedWumpus extends CardImpl<HuntedWumpus> {
     }
 }
 
-class HuntedWumpusEffect extends OneShotEffect<HuntedWumpusEffect> {
+class HuntedWumpusEffect extends OneShotEffect {
 
     public HuntedWumpusEffect() {
         super(Outcome.Detriment);

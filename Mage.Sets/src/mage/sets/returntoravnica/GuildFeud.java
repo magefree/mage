@@ -82,7 +82,7 @@ public class GuildFeud extends CardImpl<GuildFeud> {
 }
 
 
-class GuildFeudEffect extends OneShotEffect<GuildFeudEffect> {
+class GuildFeudEffect extends OneShotEffect {
 
     public GuildFeudEffect() {
         super(Outcome.PutCreatureInPlay);

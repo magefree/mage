@@ -65,7 +65,7 @@ public class FinalJudgment extends CardImpl<FinalJudgment> {
     }
 }
 
-class FinalJudgmentEffect extends OneShotEffect<FinalJudgmentEffect> {
+class FinalJudgmentEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("");
 

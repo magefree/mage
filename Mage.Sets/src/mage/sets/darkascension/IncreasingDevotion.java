@@ -67,7 +67,7 @@ public class IncreasingDevotion extends CardImpl<IncreasingDevotion> {
     }
 }
 
-class IncreasingDevotionEffect extends OneShotEffect<IncreasingDevotionEffect> {
+class IncreasingDevotionEffect extends OneShotEffect {
 
     private static HumanToken token = new HumanToken();
 

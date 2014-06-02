@@ -74,7 +74,7 @@ public class DoublingSeason extends CardImpl<DoublingSeason> {
     }
 }
 
-class DoublingSeasonTokenEffect extends ReplacementEffectImpl<DoublingSeasonTokenEffect> {
+class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
 
     public DoublingSeasonTokenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy);
@@ -114,7 +114,7 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl<DoublingSeasonToke
 
 }
 
-class DoublingSeasonCounterEffect extends ReplacementEffectImpl<DoublingSeasonCounterEffect> {
+class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
     DoublingSeasonCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
         staticText = "If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead";

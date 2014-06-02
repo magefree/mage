@@ -76,7 +76,7 @@ public class KithkinZealot extends CardImpl<KithkinZealot> {
     }
 }
 
-class KithkinZealotEffect extends OneShotEffect<KithkinZealotEffect> {
+class KithkinZealotEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {

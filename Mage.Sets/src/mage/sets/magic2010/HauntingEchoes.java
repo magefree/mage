@@ -70,7 +70,7 @@ public class HauntingEchoes extends CardImpl<HauntingEchoes> {
     }
 }
 
-class HauntingEchoesEffect extends OneShotEffect<HauntingEchoesEffect> {
+class HauntingEchoesEffect extends OneShotEffect {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 

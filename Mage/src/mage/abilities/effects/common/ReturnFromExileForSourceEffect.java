@@ -42,7 +42,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnFromExileForSourceEffect extends OneShotEffect<ReturnFromExileForSourceEffect> {
+public class ReturnFromExileForSourceEffect extends OneShotEffect {
 
     private Zone zone;
     private boolean tapped;

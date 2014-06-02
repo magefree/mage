@@ -74,7 +74,7 @@ public class PrahvSpiresOfOrder extends CardImpl<PrahvSpiresOfOrder> {
     }
 }
 
-class PrahvSpiresOfOrderPreventionEffect extends PreventionEffectImpl<PrahvSpiresOfOrderPreventionEffect> {
+class PrahvSpiresOfOrderPreventionEffect extends PreventionEffectImpl {
     private TargetSource target = new TargetSource();
 
     public PrahvSpiresOfOrderPreventionEffect() {

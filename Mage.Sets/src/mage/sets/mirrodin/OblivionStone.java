@@ -77,7 +77,7 @@ public class OblivionStone extends CardImpl<OblivionStone> {
     }
 }
 
-class OblivionStoneEffect extends OneShotEffect<OblivionStoneEffect> {
+class OblivionStoneEffect extends OneShotEffect {
     OblivionStoneEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy each nonland permanent without a fate counter on it, then remove all fate counters from all permanents";

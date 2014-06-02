@@ -84,7 +84,7 @@ public class NineRingedBo extends CardImpl<NineRingedBo> {
     }
 }
 
-class NineRingedBoEffect extends ReplacementEffectImpl<NineRingedBoEffect> {
+class NineRingedBoEffect extends ReplacementEffectImpl {
 
     public NineRingedBoEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);

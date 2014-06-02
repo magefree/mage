@@ -60,7 +60,7 @@ public class DredgeAbility extends SimpleStaticAbility {
     }
 }
 
-class DredgeEffect extends ReplacementEffectImpl<DredgeEffect> {
+class DredgeEffect extends ReplacementEffectImpl {
 
     private final int amount;
 

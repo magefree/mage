@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
+public class BoostAllEffect extends ContinuousEffectImpl {
 
     protected DynamicValue power;
     protected DynamicValue toughness;

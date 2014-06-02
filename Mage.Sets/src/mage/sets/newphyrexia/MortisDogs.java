@@ -75,7 +75,7 @@ public class MortisDogs extends CardImpl<MortisDogs> {
     }
 }
 
-class MortisDogsEffect extends OneShotEffect<MortisDogsEffect> {
+class MortisDogsEffect extends OneShotEffect {
 
     public MortisDogsEffect() {
         super(Outcome.Damage);

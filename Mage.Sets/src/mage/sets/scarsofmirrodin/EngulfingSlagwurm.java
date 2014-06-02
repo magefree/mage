@@ -73,7 +73,7 @@ public class EngulfingSlagwurm extends CardImpl<EngulfingSlagwurm> {
 
 }
 
-class EngulfingSlagwurmEffect extends OneShotEffect<EngulfingSlagwurmEffect> {
+class EngulfingSlagwurmEffect extends OneShotEffect {
     EngulfingSlagwurmEffect() {
         super(Outcome.GainLife);
         staticText = "You gain life equal to that creature's toughness";

@@ -70,7 +70,7 @@ public class AssembleTheLegion extends CardImpl<AssembleTheLegion> {
     }
 }
 
-class AssembleTheLegionEffect extends OneShotEffect<AssembleTheLegionEffect> {
+class AssembleTheLegionEffect extends OneShotEffect {
     private static final String MUSTER_COUNTER_NAME = "Muster";
 
     public AssembleTheLegionEffect() {

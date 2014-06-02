@@ -82,7 +82,7 @@ public class SadisticSacrament extends CardImpl<SadisticSacrament> {
     }
 }
 
-class SadisticSacramentEffect extends OneShotEffect<SadisticSacramentEffect> {
+class SadisticSacramentEffect extends OneShotEffect {
 
     private int amount;
 

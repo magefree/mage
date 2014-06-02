@@ -66,7 +66,7 @@ public class TurnToSlag extends CardImpl<TurnToSlag> {
     }
 }
 
-class TurnToSlagEffect extends OneShotEffect<TurnToSlagEffect> {
+class TurnToSlagEffect extends OneShotEffect {
 
     public TurnToSlagEffect() {
         super(Outcome.DestroyPermanent);

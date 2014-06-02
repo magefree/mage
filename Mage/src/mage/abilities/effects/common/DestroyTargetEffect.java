@@ -43,7 +43,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
+public class DestroyTargetEffect extends OneShotEffect {
 
     protected boolean noRegen;
 

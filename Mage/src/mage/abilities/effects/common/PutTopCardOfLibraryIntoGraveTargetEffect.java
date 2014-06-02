@@ -43,7 +43,7 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 
-public class PutTopCardOfLibraryIntoGraveTargetEffect extends OneShotEffect<PutTopCardOfLibraryIntoGraveTargetEffect> {
+public class PutTopCardOfLibraryIntoGraveTargetEffect extends OneShotEffect {
 
     private DynamicValue numberCards;
 

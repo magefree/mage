@@ -79,7 +79,7 @@ public class Skybind extends CardImpl<Skybind> {
     }
 }
 
-class SkybindEffect extends OneShotEffect<SkybindEffect> {
+class SkybindEffect extends OneShotEffect {
 
     public SkybindEffect() {
         super(Outcome.Detriment);

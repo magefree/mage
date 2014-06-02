@@ -88,7 +88,7 @@ public class ArchdemonOfGreed extends CardImpl<ArchdemonOfGreed> {
         return new ArchdemonOfGreed(this);
     }
 
-    class ArchdemonOfGreedEffect extends OneShotEffect<ArchdemonOfGreedEffect> {
+    class ArchdemonOfGreedEffect extends OneShotEffect {
 
         public ArchdemonOfGreedEffect() {
             super(Outcome.Damage);

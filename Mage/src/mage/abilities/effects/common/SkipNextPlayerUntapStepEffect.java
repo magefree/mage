@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SkipNextPlayerUntapStepEffect extends OneShotEffect<SkipNextPlayerUntapStepEffect> {
+public class SkipNextPlayerUntapStepEffect extends OneShotEffect {
 
     public SkipNextPlayerUntapStepEffect() {
         this("");

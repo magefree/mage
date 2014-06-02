@@ -72,7 +72,7 @@ public class Condemn extends CardImpl<Condemn> {
 
 }
 
-class CondemnEffect extends OneShotEffect<CondemnEffect> {
+class CondemnEffect extends OneShotEffect {
 
     public CondemnEffect() {
         super(Outcome.GainLife);

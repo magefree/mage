@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author nantuko
  */
-public class TransformSourceEffect extends OneShotEffect<TransformSourceEffect> {
+public class TransformSourceEffect extends OneShotEffect {
 
     private boolean withoutTrigger;
     private boolean fromDayToNight;

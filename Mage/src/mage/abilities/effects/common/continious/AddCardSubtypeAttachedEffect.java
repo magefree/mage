@@ -37,7 +37,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl<AddCardSubtypeAttachedEffect> {
+public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
     private String addedSubtype;
     private AttachmentType attachmentType;
 

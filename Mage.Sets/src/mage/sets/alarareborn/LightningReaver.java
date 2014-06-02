@@ -85,7 +85,7 @@ public class LightningReaver extends CardImpl<LightningReaver> {
     }
 }
 
-class DamageOpponentsEffect extends OneShotEffect<DamageOpponentsEffect> {
+class DamageOpponentsEffect extends OneShotEffect {
 
     public DamageOpponentsEffect() {
         super(Outcome.Damage);

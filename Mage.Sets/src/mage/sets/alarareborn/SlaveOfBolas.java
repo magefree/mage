@@ -78,7 +78,7 @@ public class SlaveOfBolas extends CardImpl<SlaveOfBolas> {
     }
 }
 
-class SlaveOfBolasEffect extends OneShotEffect<SlaveOfBolasEffect> {
+class SlaveOfBolasEffect extends OneShotEffect {
 
     public SlaveOfBolasEffect() {
         super(Outcome.Sacrifice);

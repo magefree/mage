@@ -67,7 +67,7 @@ public class AuraBarbs extends CardImpl<AuraBarbs> {
         return new AuraBarbs(this);
     }
 
-    private class AuraBarbsEffect extends OneShotEffect<AuraBarbsEffect> {
+    private class AuraBarbsEffect extends OneShotEffect {
 
     public AuraBarbsEffect() {
             super(Outcome.Detriment);

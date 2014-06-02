@@ -100,7 +100,7 @@ class TargetCreaturePermanentWithDifferentTypes extends TargetCreaturePermanent 
     }
 }
 
-class RivalsDuelFightTargetsEffect extends OneShotEffect<RivalsDuelFightTargetsEffect> {
+class RivalsDuelFightTargetsEffect extends OneShotEffect {
 
     public RivalsDuelFightTargetsEffect() {
         super(Outcome.Damage);

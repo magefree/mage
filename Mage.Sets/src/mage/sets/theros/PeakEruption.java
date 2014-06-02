@@ -78,7 +78,7 @@ public class PeakEruption extends CardImpl<PeakEruption> {
 }
 
 
-class PeakEruptionEffect extends OneShotEffect<PeakEruptionEffect> {
+class PeakEruptionEffect extends OneShotEffect {
 
     PeakEruptionEffect() {
         super(Outcome.Damage);

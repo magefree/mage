@@ -78,7 +78,7 @@ public class OmnathLocusOfMana extends CardImpl<OmnathLocusOfMana> {
     }
 }
 
-class OmnathReplacementEffect extends ReplacementEffectImpl<OmnathReplacementEffect> {
+class OmnathReplacementEffect extends ReplacementEffectImpl {
     
     private static final List<ManaType> manaTypes =  new ArrayList<ManaType>();
     static {

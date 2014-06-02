@@ -40,7 +40,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LoseLifeSourceControllerEffect extends OneShotEffect<LoseLifeSourceControllerEffect> {
+public class LoseLifeSourceControllerEffect extends OneShotEffect {
 
     protected DynamicValue amount;
 

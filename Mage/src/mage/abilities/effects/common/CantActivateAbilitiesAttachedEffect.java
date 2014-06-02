@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class CantActivateAbilitiesAttachedEffect extends ReplacementEffectImpl<CantActivateAbilitiesAttachedEffect> {
+public class CantActivateAbilitiesAttachedEffect extends ReplacementEffectImpl {
 
     public CantActivateAbilitiesAttachedEffect() {
         super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);

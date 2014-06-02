@@ -42,7 +42,7 @@ import mage.game.Game;
  * @author maurer.it_at_gmail.com
  * @param <T>
  */
-public abstract class CostModificationEffectImpl<T extends CostModificationEffectImpl<T>> extends ContinuousEffectImpl<T> implements CostModificationEffect<T> {
+public abstract class CostModificationEffectImpl<T extends CostModificationEffectImpl<T>> extends ContinuousEffectImpl implements CostModificationEffect<T> {
 
     private final CostModificationType modificationType;
     

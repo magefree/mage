@@ -69,7 +69,7 @@ public class ManaShort extends CardImpl<ManaShort> {
     }
 }
 
-class ManaShortEffect extends OneShotEffect<ManaShortEffect> {
+class ManaShortEffect extends OneShotEffect {
 
     public ManaShortEffect() {
         super(Outcome.Detriment);

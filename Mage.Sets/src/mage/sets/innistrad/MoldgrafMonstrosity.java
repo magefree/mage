@@ -78,7 +78,7 @@ public class MoldgrafMonstrosity extends CardImpl<MoldgrafMonstrosity> {
     }
 }
 
-class MoldgrafMonstrosityEffect extends OneShotEffect<MoldgrafMonstrosityEffect> {
+class MoldgrafMonstrosityEffect extends OneShotEffect {
 
     public MoldgrafMonstrosityEffect() {
         super(Outcome.ReturnToHand);

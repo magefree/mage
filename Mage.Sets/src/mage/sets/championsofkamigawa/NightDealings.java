@@ -132,7 +132,7 @@ public class NightDealings extends CardImpl<NightDealings> {
         }
     }
 
-    private class NightDealingsEffect extends OneShotEffect<NightDealingsEffect> {
+    private class NightDealingsEffect extends OneShotEffect {
 
         public NightDealingsEffect() {
             super(Outcome.Damage);
@@ -162,7 +162,7 @@ public class NightDealings extends CardImpl<NightDealings> {
         }
     }
 
-    private class NightDealingsSearchEffect extends OneShotEffect<NightDealingsSearchEffect> {
+    private class NightDealingsSearchEffect extends OneShotEffect {
 
         public NightDealingsSearchEffect() {
             super(Outcome.DrawCard);

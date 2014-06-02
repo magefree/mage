@@ -47,7 +47,7 @@ import mage.game.events.ManaEvent;
  * 903.9. If mana would be added to a player's mana pool of a color that isn't in the color identity
  * of that player's commander, that amount of colorless mana is added to that player's mana pool instead.
  */
-public class CommanderManaReplacementEffect extends ReplacementEffectImpl<CommanderManaReplacementEffect> {
+public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
 
     private final UUID playerId;
     private final Mana commanderMana;

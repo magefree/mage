@@ -74,7 +74,7 @@ public class DismissIntoDream extends CardImpl<DismissIntoDream> {
     }
 }
 
-class DismissIntoDreamEffect extends ContinuousEffectImpl<DismissIntoDreamEffect> {
+class DismissIntoDreamEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

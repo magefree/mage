@@ -72,7 +72,7 @@ public class GiftsUngiven extends CardImpl<GiftsUngiven> {
     }
 }
 
-class GiftsUngivenEffect extends OneShotEffect<GiftsUngivenEffect> {
+class GiftsUngivenEffect extends OneShotEffect {
 
     public GiftsUngivenEffect() {
         super(Outcome.DrawCard);

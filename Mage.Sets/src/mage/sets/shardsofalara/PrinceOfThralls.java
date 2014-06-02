@@ -119,7 +119,7 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class PrinceOfThrallsEffect extends OneShotEffect<PrinceOfThrallsEffect> {
+class PrinceOfThrallsEffect extends OneShotEffect {
 
     public PrinceOfThrallsEffect() {
         super(Outcome.Neutral);

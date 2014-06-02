@@ -68,7 +68,7 @@ public class FulgentDistraction extends CardImpl<FulgentDistraction> {
     }
 }
 
-class FulgentDistractionEffect extends OneShotEffect<FulgentDistractionEffect> {
+class FulgentDistractionEffect extends OneShotEffect {
 
     private static String text = "Choose two target creatures. Tap those creatures, then unattach all Equipment from them";
 

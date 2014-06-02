@@ -72,7 +72,7 @@ public class SphereOfSafety extends CardImpl<SphereOfSafety> {
 
 }
 
-class SphereOfSafetyReplacementEffect extends ReplacementEffectImpl<SphereOfSafetyReplacementEffect> {
+class SphereOfSafetyReplacementEffect extends ReplacementEffectImpl {
 
     private static final String effectText = "Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control";
     private static final FilterEnchantment filter = new FilterEnchantment("enchantment you control");

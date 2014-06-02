@@ -69,7 +69,7 @@ public class MomentousFall extends CardImpl<MomentousFall> {
     }
 }
 
-class MomentousFallEffect extends OneShotEffect<MomentousFallEffect> {
+class MomentousFallEffect extends OneShotEffect {
 
     public MomentousFallEffect() {
         super(Outcome.GainLife);

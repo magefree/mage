@@ -69,7 +69,7 @@ public class ThoughtReflection extends CardImpl<ThoughtReflection> {
     }
 }
 
-class ThoughtReflectionReplacementEffect extends ReplacementEffectImpl<ThoughtReflectionReplacementEffect> {
+class ThoughtReflectionReplacementEffect extends ReplacementEffectImpl {
 
     public ThoughtReflectionReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

@@ -67,7 +67,7 @@ public class TimelyReinforcements extends CardImpl<TimelyReinforcements> {
     }
 }
 
-class TimelyReinforcementsEffect extends OneShotEffect<TimelyReinforcementsEffect> {
+class TimelyReinforcementsEffect extends OneShotEffect {
 
     public TimelyReinforcementsEffect() {
         super(Outcome.Benefit);

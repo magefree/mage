@@ -77,7 +77,7 @@ public class ConsumingVapors extends CardImpl<ConsumingVapors> {
     }
 }
 
-class ConsumingVaporsEffect extends OneShotEffect<ConsumingVaporsEffect> {
+class ConsumingVaporsEffect extends OneShotEffect {
 
     ConsumingVaporsEffect ( ) {
         super(Outcome.Sacrifice);

@@ -69,7 +69,7 @@ public class AgelessEntity extends CardImpl<AgelessEntity> {
     }
 }
 
-class AgelessEntityEffect extends OneShotEffect<AgelessEntityEffect> {
+class AgelessEntityEffect extends OneShotEffect {
 
     public AgelessEntityEffect() {
         super(Outcome.Benefit);

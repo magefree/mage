@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author maurer.it_at_gmail.com
  */
-public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
+public class SacrificeEffect extends OneShotEffect{
 
     private FilterPermanent filter;
     private String preText;

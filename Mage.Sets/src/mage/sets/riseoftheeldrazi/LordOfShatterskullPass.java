@@ -89,7 +89,7 @@ public class LordOfShatterskullPass extends CardImpl<LordOfShatterskullPass> {
     }
 }
 
-class LordOfShatterskullPassEffect extends OneShotEffect<LordOfShatterskullPassEffect> {
+class LordOfShatterskullPassEffect extends OneShotEffect {
 
     public LordOfShatterskullPassEffect() {
         super(Outcome.Damage);

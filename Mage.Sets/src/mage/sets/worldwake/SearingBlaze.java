@@ -79,7 +79,7 @@ public class SearingBlaze extends CardImpl<SearingBlaze> {
 
 }
 
-class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
+class SearingBlazeEffect extends OneShotEffect {
 
     public SearingBlazeEffect() {
         super(Outcome.Damage);

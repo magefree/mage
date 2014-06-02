@@ -67,7 +67,7 @@ public class TreasureHunt extends CardImpl<TreasureHunt> {
     }
 }
 
-class TreasureHuntEffect extends OneShotEffect<TreasureHuntEffect> {
+class TreasureHuntEffect extends OneShotEffect {
 
     public TreasureHuntEffect() {
         super(Outcome.DrawCard);

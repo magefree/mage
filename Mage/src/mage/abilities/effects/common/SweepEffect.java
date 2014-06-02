@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class SweepEffect extends OneShotEffect<SweepEffect> {
+public class SweepEffect extends OneShotEffect {
 
     private String sweepSubtype;
 

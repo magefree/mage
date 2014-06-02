@@ -82,7 +82,7 @@ public class Foster extends CardImpl<Foster> {
     }
 }
 
-class FosterEffect extends OneShotEffect<FosterEffect> {
+class FosterEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard();
 

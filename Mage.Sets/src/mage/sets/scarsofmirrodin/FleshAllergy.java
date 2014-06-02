@@ -113,7 +113,7 @@ class FleshAllergyWatcher extends Watcher {
 
 }
 
-class FleshAllergyEffect extends OneShotEffect<FleshAllergyEffect> {
+class FleshAllergyEffect extends OneShotEffect {
 
     public FleshAllergyEffect() {
         super(Outcome.DestroyPermanent);

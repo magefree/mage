@@ -76,7 +76,7 @@ public class Cataclysm extends CardImpl<Cataclysm> {
     }
 }
 
-class CataclysmEffect extends OneShotEffect<CataclysmEffect> {
+class CataclysmEffect extends OneShotEffect {
 
     private static final FilterArtifactPermanent filter1 = new FilterArtifactPermanent("artifact you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature you control");

@@ -96,7 +96,7 @@ public class PharikaGodOfAffliction extends CardImpl<PharikaGodOfAffliction> {
     }
 }
 
-class PharikaExileEffect extends OneShotEffect<PharikaExileEffect> {
+class PharikaExileEffect extends OneShotEffect {
 
     public PharikaExileEffect() {
         super(Outcome.PutCreatureInPlay);

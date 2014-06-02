@@ -84,7 +84,7 @@ public class StreetSweeper extends CardImpl<StreetSweeper> {
     }
 }
  
-class StreetSweeperDestroyEffect extends OneShotEffect<StreetSweeperDestroyEffect> {
+class StreetSweeperDestroyEffect extends OneShotEffect {
  
     public StreetSweeperDestroyEffect() {
         super(Outcome.DestroyPermanent);

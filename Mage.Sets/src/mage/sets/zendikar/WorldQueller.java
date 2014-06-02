@@ -84,7 +84,7 @@ public class WorldQueller extends CardImpl<WorldQueller> {
     }
 }
 
-class WorldQuellerEffect extends OneShotEffect<WorldQuellerEffect> {
+class WorldQuellerEffect extends OneShotEffect {
 
     private static final HashSet<String> choice = new LinkedHashSet<String>();
 

@@ -93,7 +93,7 @@ public class ParagonOfTheAmesha extends CardImpl<ParagonOfTheAmesha> {
         return new ParagonOfTheAmesha(this);
     }
 
-    private class ParagonOfTheAmeshaEffect extends ContinuousEffectImpl<ParagonOfTheAmeshaEffect> {
+    private class ParagonOfTheAmeshaEffect extends ContinuousEffectImpl {
 
         public ParagonOfTheAmeshaEffect() {
             super(Duration.EndOfTurn, Outcome.BecomeCreature);

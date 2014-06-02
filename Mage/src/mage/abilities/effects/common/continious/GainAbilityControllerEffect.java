@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilityControllerEffect extends ContinuousEffectImpl<GainAbilityControllerEffect> {
+public class GainAbilityControllerEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
 

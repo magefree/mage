@@ -77,7 +77,7 @@ public class FlameblastDragon extends CardImpl<FlameblastDragon> {
     }
 }
 
-class FlameblastDragonEffect extends OneShotEffect<FlameblastDragonEffect> {
+class FlameblastDragonEffect extends OneShotEffect {
     FlameblastDragonEffect() {
         super(Outcome.Benefit);
         staticText = "you may pay {X}{R}. If you do, {this} deals X damage to target creature or player";

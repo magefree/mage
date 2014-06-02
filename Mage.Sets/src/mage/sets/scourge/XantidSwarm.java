@@ -109,7 +109,7 @@ class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class XantidSwarmReplacementEffect extends ReplacementEffectImpl<XantidSwarmReplacementEffect> {
+class XantidSwarmReplacementEffect extends ReplacementEffectImpl {
 
     public XantidSwarmReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

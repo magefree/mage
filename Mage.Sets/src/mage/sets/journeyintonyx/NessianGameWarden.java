@@ -79,7 +79,7 @@ public class NessianGameWarden extends CardImpl<NessianGameWarden> {
     }
 }
 
-class NessianGameWardenEffect extends OneShotEffect<NessianGameWardenEffect> {
+class NessianGameWardenEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("forests you control");
 

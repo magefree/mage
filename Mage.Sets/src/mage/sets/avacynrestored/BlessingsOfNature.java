@@ -71,7 +71,7 @@ public class BlessingsOfNature extends CardImpl<BlessingsOfNature> {
     }
 }
 
-class BlessingsOfNatureEffect extends OneShotEffect<BlessingsOfNatureEffect> {
+class BlessingsOfNatureEffect extends OneShotEffect {
 
     public BlessingsOfNatureEffect() {
         super(Outcome.BoostCreature);

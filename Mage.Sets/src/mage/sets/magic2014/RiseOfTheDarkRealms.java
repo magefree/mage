@@ -65,7 +65,7 @@ public class RiseOfTheDarkRealms extends CardImpl<RiseOfTheDarkRealms> {
     }
 }
 
-class RiseOfTheDarkRealmsEffect extends OneShotEffect<RiseOfTheDarkRealmsEffect> {
+class RiseOfTheDarkRealmsEffect extends OneShotEffect {
 
     public RiseOfTheDarkRealmsEffect() {
         super(Outcome.PutCreatureInPlay);

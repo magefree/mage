@@ -70,7 +70,7 @@ public class ExplorersScope extends CardImpl<ExplorersScope> {
     }
 }
 
-class ExplorersScopeEffect extends OneShotEffect<ExplorersScopeEffect> {
+class ExplorersScopeEffect extends OneShotEffect {
 
     public ExplorersScopeEffect() {
         super(Outcome.PutCreatureInPlay);

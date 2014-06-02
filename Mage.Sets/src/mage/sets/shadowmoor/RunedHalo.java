@@ -98,7 +98,7 @@ public class RunedHalo extends CardImpl<RunedHalo> {
     }
 }
 
-class NameCard extends OneShotEffect<NameCard> {
+class NameCard extends OneShotEffect {
 
     public NameCard() {
         super(Outcome.Detriment);
@@ -142,7 +142,7 @@ class NameCard extends OneShotEffect<NameCard> {
 
 }
 
-class RunedHaloRuleTextEffect extends OneShotEffect<RunedHaloRuleTextEffect> {
+class RunedHaloRuleTextEffect extends OneShotEffect {
     
     public RunedHaloRuleTextEffect() {
         super(Outcome.Benefit);

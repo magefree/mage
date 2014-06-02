@@ -75,7 +75,7 @@ public class MirrorOfFate extends CardImpl<MirrorOfFate> {
     }
 }
 
-class MirrorOfFateEffect extends OneShotEffect<MirrorOfFateEffect> {
+class MirrorOfFateEffect extends OneShotEffect {
 
     public MirrorOfFateEffect() {
         super(Outcome.Neutral);

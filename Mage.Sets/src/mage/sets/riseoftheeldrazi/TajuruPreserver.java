@@ -70,7 +70,7 @@ public class TajuruPreserver extends CardImpl<TajuruPreserver> {
     }
 }
 
-class TajuruPreserverEffect extends ReplacementEffectImpl<TajuruPreserverEffect> {
+class TajuruPreserverEffect extends ReplacementEffectImpl {
 
     public TajuruPreserverEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

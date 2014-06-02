@@ -67,7 +67,7 @@ public class LeechingBite extends CardImpl<LeechingBite> {
     }
 }
 
-class LeechingBiteEffect extends ContinuousEffectImpl<LeechingBiteEffect> {
+class LeechingBiteEffect extends ContinuousEffectImpl {
 
     public LeechingBiteEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

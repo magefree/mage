@@ -71,7 +71,7 @@ public class EngineeredPlague extends CardImpl<EngineeredPlague> {
         return new EngineeredPlague(this);
     }
     
-    class EngineeredPlagueEntersBattlefieldEffect extends OneShotEffect<EngineeredPlagueEntersBattlefieldEffect> {
+    class EngineeredPlagueEntersBattlefieldEffect extends OneShotEffect {
 
         public EngineeredPlagueEntersBattlefieldEffect() {
             super(Outcome.Benefit);

@@ -71,7 +71,7 @@ public class ThirstForKnowledge extends CardImpl<ThirstForKnowledge> {
     }
 }
 
-class ThirstforKnowledgeEffect extends OneShotEffect<ThirstforKnowledgeEffect> {
+class ThirstforKnowledgeEffect extends OneShotEffect {
 
     public ThirstforKnowledgeEffect() {
         super(Outcome.Damage);

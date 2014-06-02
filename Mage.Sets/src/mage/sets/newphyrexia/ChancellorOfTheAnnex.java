@@ -79,7 +79,7 @@ public class ChancellorOfTheAnnex extends CardImpl<ChancellorOfTheAnnex> {
     }
 }
 
-class ChancellorOfTheAnnexEffect extends OneShotEffect<ChancellorOfTheAnnexEffect> {
+class ChancellorOfTheAnnexEffect extends OneShotEffect {
 
     public ChancellorOfTheAnnexEffect () {
         super(Outcome.Benefit);

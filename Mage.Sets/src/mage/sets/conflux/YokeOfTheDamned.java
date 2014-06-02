@@ -80,7 +80,7 @@ public class YokeOfTheDamned extends CardImpl<YokeOfTheDamned> {
     }
 }
 
-class DestroyEnchantedEffect extends OneShotEffect<DestroyEnchantedEffect> {
+class DestroyEnchantedEffect extends OneShotEffect {
 
     public DestroyEnchantedEffect() {
         super(Outcome.Detriment);

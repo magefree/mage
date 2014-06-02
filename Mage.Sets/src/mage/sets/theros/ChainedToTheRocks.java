@@ -129,7 +129,7 @@ public class ChainedToTheRocks extends CardImpl<ChainedToTheRocks> {
     }
 }
 
-class ChainedToTheRocksEffect extends OneShotEffect<ChainedToTheRocksEffect> {
+class ChainedToTheRocksEffect extends OneShotEffect {
 
     public ChainedToTheRocksEffect() {
         super(Outcome.Benefit);
@@ -193,7 +193,7 @@ class ChainedToTheRocksReturnExiledAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ReturnExiledCreatureChainedToTheRocksEffect extends OneShotEffect<ReturnExiledCreatureChainedToTheRocksEffect> {
+class ReturnExiledCreatureChainedToTheRocksEffect extends OneShotEffect {
 
     public ReturnExiledCreatureChainedToTheRocksEffect() {
         super(Outcome.Benefit);

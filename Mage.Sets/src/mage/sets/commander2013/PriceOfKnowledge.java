@@ -76,7 +76,7 @@ public class PriceOfKnowledge extends CardImpl<PriceOfKnowledge> {
     }
 }
 
-class PriceOfKnowledgeEffect extends OneShotEffect<PriceOfKnowledgeEffect> {
+class PriceOfKnowledgeEffect extends OneShotEffect {
 
     public PriceOfKnowledgeEffect(final PriceOfKnowledgeEffect effect) {
         super(effect);

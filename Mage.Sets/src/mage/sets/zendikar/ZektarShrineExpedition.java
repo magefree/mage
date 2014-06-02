@@ -82,7 +82,7 @@ public class ZektarShrineExpedition extends CardImpl<ZektarShrineExpedition> {
     }
 }
 
-class ZektarShrineExpeditionEffect extends OneShotEffect<ZektarShrineExpeditionEffect> {
+class ZektarShrineExpeditionEffect extends OneShotEffect {
 
     public ZektarShrineExpeditionEffect() {
         super(Outcome.PutCreatureInPlay);

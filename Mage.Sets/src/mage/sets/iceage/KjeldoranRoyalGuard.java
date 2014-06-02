@@ -77,7 +77,7 @@ public class KjeldoranRoyalGuard extends CardImpl<KjeldoranRoyalGuard> {
     }
 }
 
-class KjeldoranRoyalGuardEffect extends ReplacementEffectImpl<KjeldoranRoyalGuardEffect> {
+class KjeldoranRoyalGuardEffect extends ReplacementEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked creatures");
     

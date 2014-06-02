@@ -68,7 +68,7 @@ public class Countermand extends CardImpl<Countermand> {
         return new Countermand(this);
     }
 }
-class CountermandEffect extends OneShotEffect<CountermandEffect> {
+class CountermandEffect extends OneShotEffect {
 
     public CountermandEffect() {
         super(Outcome.Detriment);

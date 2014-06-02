@@ -126,7 +126,7 @@ class AngelicArbiterWatcher2 extends Watcher {
 
 }
 
-class AngelicArbiterEffect1 extends ReplacementEffectImpl<AngelicArbiterEffect1> {
+class AngelicArbiterEffect1 extends ReplacementEffectImpl {
 
     public AngelicArbiterEffect1() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -164,7 +164,7 @@ class AngelicArbiterEffect1 extends ReplacementEffectImpl<AngelicArbiterEffect1>
 
 }
 
-class AngelicArbiterEffect2 extends ReplacementEffectImpl<AngelicArbiterEffect2> {
+class AngelicArbiterEffect2 extends ReplacementEffectImpl {
 
     public AngelicArbiterEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

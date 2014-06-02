@@ -77,7 +77,7 @@ public class VoidStalker extends CardImpl<VoidStalker> {
     }
 }
 
-class VoidStalkerEffect extends OneShotEffect<VoidStalkerEffect> {
+class VoidStalkerEffect extends OneShotEffect {
     VoidStalkerEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Put {this} and target creature on top of their owners' libraries, then those players shuffle their libraries";

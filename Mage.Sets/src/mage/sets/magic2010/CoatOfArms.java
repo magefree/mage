@@ -68,7 +68,7 @@ public class CoatOfArms extends CardImpl<CoatOfArms> {
     }
 }
 
-class CoatOfArmsEffect extends ContinuousEffectImpl<CoatOfArmsEffect> {
+class CoatOfArmsEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

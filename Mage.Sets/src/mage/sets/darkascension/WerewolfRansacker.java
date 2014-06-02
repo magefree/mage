@@ -132,7 +132,7 @@ class WerewolfRansackerAbility extends TriggeredAbilityImpl {
 
 }
 
-class WerewolfRansackerEffect extends OneShotEffect<WerewolfRansackerEffect> {
+class WerewolfRansackerEffect extends OneShotEffect {
 
     public WerewolfRansackerEffect() {
         super(Outcome.DestroyPermanent);

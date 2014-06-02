@@ -70,7 +70,7 @@ public class PsychicStrike extends CardImpl<PsychicStrike> {
     }
 }
 
-class PsychicStrikeEffect extends OneShotEffect<PsychicStrikeEffect> {
+class PsychicStrikeEffect extends OneShotEffect {
 
     public PsychicStrikeEffect() {
         super(Outcome.Detriment);

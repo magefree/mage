@@ -98,7 +98,7 @@ public class XenagosTheReveler extends CardImpl<XenagosTheReveler> {
     }
 }
 
-class XenagosManaEffect extends OneShotEffect <XenagosManaEffect> {
+class XenagosManaEffect extends OneShotEffect {
 
     public XenagosManaEffect() {
         super(Outcome.PutManaInPool);
@@ -164,7 +164,7 @@ class XenagosSatyrToken extends Token {
 }
 
 
-class XenagosExileEffect extends OneShotEffect<XenagosExileEffect> {
+class XenagosExileEffect extends OneShotEffect {
 
     public XenagosExileEffect() {
         super(Outcome.PutCardInPlay);

@@ -91,7 +91,7 @@ public class Mindsparker extends CardImpl<Mindsparker> {
     }
 }
 
-class MindsparkerEffect extends OneShotEffect<MindsparkerEffect> {
+class MindsparkerEffect extends OneShotEffect {
 
     public MindsparkerEffect() {
         super(Outcome.Damage);

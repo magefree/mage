@@ -79,7 +79,7 @@ public class AstralCornucopia extends CardImpl<AstralCornucopia> {
     }
 }
 
-class AstralCornucopiaEffect extends OneShotEffect<AstralCornucopiaEffect> {
+class AstralCornucopiaEffect extends OneShotEffect {
     public AstralCornucopiaEffect() {
         super(Outcome.Benefit);
     }

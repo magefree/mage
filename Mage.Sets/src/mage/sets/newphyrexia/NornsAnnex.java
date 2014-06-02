@@ -67,7 +67,7 @@ public class NornsAnnex extends CardImpl<NornsAnnex> {
 
 }
 
-class NornsAnnexReplacementEffect extends ReplacementEffectImpl<NornsAnnexReplacementEffect> {
+class NornsAnnexReplacementEffect extends ReplacementEffectImpl {
 
     private static final String effectText = "Creatures can't attack you or a planeswalker you control unless their controller pays {WP} for each creature he or she controls that's attacking you";
 

@@ -69,7 +69,7 @@ public class FistOfSuns extends CardImpl<FistOfSuns> {
         
 }
 
-class MirrorGalleryRuleEffect extends ContinuousEffectImpl<MirrorGalleryRuleEffect> {
+class MirrorGalleryRuleEffect extends ContinuousEffectImpl {
 
     static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"));
     

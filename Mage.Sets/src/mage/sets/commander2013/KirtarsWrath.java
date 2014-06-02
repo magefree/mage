@@ -74,7 +74,7 @@ public class KirtarsWrath extends CardImpl<KirtarsWrath> {
     }
 }
 
-class KirtarsWrathEffect extends OneShotEffect<KirtarsWrathEffect> {
+class KirtarsWrathEffect extends OneShotEffect {
 
     public KirtarsWrathEffect() {
         super(Outcome.DestroyPermanent);

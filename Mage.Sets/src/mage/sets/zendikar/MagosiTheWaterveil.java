@@ -89,7 +89,7 @@ public class MagosiTheWaterveil extends CardImpl<MagosiTheWaterveil> {
     }
 }
 
-class MagosiTheWaterveilEffect extends OneShotEffect<MagosiTheWaterveilEffect> {
+class MagosiTheWaterveilEffect extends OneShotEffect {
 
     public MagosiTheWaterveilEffect() {
         super(Outcome.Neutral);

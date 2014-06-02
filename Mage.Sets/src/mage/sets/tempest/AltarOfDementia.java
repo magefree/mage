@@ -80,7 +80,7 @@ public class AltarOfDementia extends CardImpl<AltarOfDementia> {
     }
 }
 
-class AltarOfDementiaEffect extends OneShotEffect<AltarOfDementiaEffect> {
+class AltarOfDementiaEffect extends OneShotEffect {
     
     public AltarOfDementiaEffect() {
         super(Outcome.Damage);

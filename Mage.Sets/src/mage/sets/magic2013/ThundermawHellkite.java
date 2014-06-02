@@ -91,7 +91,7 @@ public class ThundermawHellkite extends CardImpl<ThundermawHellkite> {
     }
 }
 
-class TapAllEffect extends OneShotEffect<TapAllEffect> {
+class TapAllEffect extends OneShotEffect {
     
     private FilterCreaturePermanent filter;
 

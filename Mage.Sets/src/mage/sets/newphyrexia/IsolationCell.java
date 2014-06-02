@@ -101,7 +101,7 @@ class IsolationCellTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class IsolationCellEffect extends OneShotEffect<IsolationCellEffect> {
+class IsolationCellEffect extends OneShotEffect {
 
     public IsolationCellEffect() {
         super(Outcome.Neutral);

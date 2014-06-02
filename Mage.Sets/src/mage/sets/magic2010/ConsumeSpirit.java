@@ -81,7 +81,7 @@ public class ConsumeSpirit extends CardImpl<ConsumeSpirit> {
     }
 }
 
-class ConsumeSpiritEffect extends OneShotEffect<ConsumeSpiritEffect> {
+class ConsumeSpiritEffect extends OneShotEffect {
 
     public ConsumeSpiritEffect() {
         super(Outcome.Damage);

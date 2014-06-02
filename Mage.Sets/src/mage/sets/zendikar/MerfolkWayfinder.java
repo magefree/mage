@@ -76,7 +76,7 @@ public class MerfolkWayfinder extends CardImpl<MerfolkWayfinder> {
     }
 }
 
-class MerfolkWayfinderEffect extends OneShotEffect<MerfolkWayfinderEffect> {
+class MerfolkWayfinderEffect extends OneShotEffect {
 
     public MerfolkWayfinderEffect() {
         super(Outcome.DrawCard);

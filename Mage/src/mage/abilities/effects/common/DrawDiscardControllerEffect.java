@@ -39,7 +39,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DrawDiscardControllerEffect extends OneShotEffect<DrawDiscardControllerEffect> {
+public class DrawDiscardControllerEffect extends OneShotEffect {
 
     private int cardsToDraw;
     private int cardsToDiscard;

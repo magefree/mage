@@ -82,7 +82,7 @@ public class Reshape extends CardImpl<Reshape> {
     }
 }
 
-class ReshapeSearchEffect extends OneShotEffect<ReshapeSearchEffect> {
+class ReshapeSearchEffect extends OneShotEffect {
 
     ReshapeSearchEffect() {
         super(Outcome.PutCardInPlay);

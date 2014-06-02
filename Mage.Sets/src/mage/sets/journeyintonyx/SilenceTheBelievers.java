@@ -74,7 +74,7 @@ public class SilenceTheBelievers extends CardImpl<SilenceTheBelievers> {
     }
 }
 
-class SilenceTheBelieversExileEffect extends OneShotEffect<SilenceTheBelieversExileEffect> {
+class SilenceTheBelieversExileEffect extends OneShotEffect {
 
     public SilenceTheBelieversExileEffect() {
         super(Outcome.Benefit);

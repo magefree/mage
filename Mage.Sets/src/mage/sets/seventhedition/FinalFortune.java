@@ -67,7 +67,7 @@ public class FinalFortune extends CardImpl<FinalFortune> {
     }
 }
 
-class FinalFortuneEffect extends OneShotEffect<FinalFortuneEffect> {
+class FinalFortuneEffect extends OneShotEffect {
 
     public FinalFortuneEffect() {
         super(Outcome.AIDontUseIt);
@@ -139,7 +139,7 @@ class FinalFortuneLoseDelayedTriggeredAbility extends DelayedTriggeredAbility {
     
 }
 
-class FinalFortuneLoseEffect extends OneShotEffect<FinalFortuneLoseEffect> {
+class FinalFortuneLoseEffect extends OneShotEffect {
 
     public FinalFortuneLoseEffect() {
         super(Outcome.Detriment);

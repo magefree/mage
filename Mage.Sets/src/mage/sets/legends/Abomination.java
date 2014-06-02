@@ -136,7 +136,7 @@ class AbominationTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class AbominationEffect extends OneShotEffect<AbominationEffect> {
+class AbominationEffect extends OneShotEffect {
 
     AbominationEffect() {
         super(Outcome.Detriment);

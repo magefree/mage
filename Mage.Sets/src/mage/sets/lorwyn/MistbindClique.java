@@ -119,7 +119,7 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility<MistbindCliqueAbi
     }
 }
 
-class MistbindCliqueTapEffect extends OneShotEffect<MistbindCliqueTapEffect> {
+class MistbindCliqueTapEffect extends OneShotEffect {
 
     public MistbindCliqueTapEffect() {
         super(Outcome.Tap);

@@ -74,7 +74,7 @@ public class AcademyRaider extends CardImpl<AcademyRaider> {
     }
 }
 
-class DiscardAndDrawEffect extends OneShotEffect<DiscardAndDrawEffect> {
+class DiscardAndDrawEffect extends OneShotEffect {
 
     public DiscardAndDrawEffect() {
         super(Outcome.DrawCard);

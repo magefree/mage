@@ -84,7 +84,7 @@ public class ApocalypseHydra extends CardImpl<ApocalypseHydra> {
     }
 }
 
-class ApocalypseHydraEffect extends OneShotEffect<ApocalypseHydraEffect> {
+class ApocalypseHydraEffect extends OneShotEffect {
     ApocalypseHydraEffect() {
         super(Outcome.BoostCreature);
         staticText = "with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it";

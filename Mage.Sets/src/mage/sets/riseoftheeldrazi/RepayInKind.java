@@ -64,7 +64,7 @@ public class RepayInKind extends CardImpl<RepayInKind> {
     }
 }
 
-class RepayInKindEffect extends OneShotEffect<RepayInKindEffect> {
+class RepayInKindEffect extends OneShotEffect {
 
     public RepayInKindEffect() {
         super(Outcome.Tap);

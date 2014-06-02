@@ -70,7 +70,7 @@ public class SenseisDiviningTop extends CardImpl<SenseisDiviningTop> {
 
 }
 
-class SenseisDiviningTopEffect extends OneShotEffect<SenseisDiviningTopEffect> {
+class SenseisDiviningTopEffect extends OneShotEffect {
 
     public SenseisDiviningTopEffect() {
         super(Outcome.ReturnToHand);

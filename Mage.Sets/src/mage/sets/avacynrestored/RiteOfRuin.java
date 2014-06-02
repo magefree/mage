@@ -70,7 +70,7 @@ public class RiteOfRuin extends CardImpl<RiteOfRuin> {
     }
 }
 
-class RiteOfRuinEffect extends OneShotEffect<RiteOfRuinEffect> {
+class RiteOfRuinEffect extends OneShotEffect {
 
     public RiteOfRuinEffect() {
         super(Outcome.Sacrifice);

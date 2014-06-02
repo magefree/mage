@@ -86,7 +86,7 @@ public class FlashOfInsight extends CardImpl<FlashOfInsight> {
     }
 }
 
-class FlashOfInsightEffect extends OneShotEffect<FlashOfInsightEffect> {
+class FlashOfInsightEffect extends OneShotEffect {
 
     public FlashOfInsightEffect() {
         super(Outcome.DrawCard);

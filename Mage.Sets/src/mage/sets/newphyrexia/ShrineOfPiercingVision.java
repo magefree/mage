@@ -91,7 +91,7 @@ public class ShrineOfPiercingVision extends CardImpl<ShrineOfPiercingVision> {
     }
 }
 
-class ShrineOfPiercingVisionEffect extends OneShotEffect<ShrineOfPiercingVisionEffect> {
+class ShrineOfPiercingVisionEffect extends OneShotEffect {
 
     public ShrineOfPiercingVisionEffect() {
         super(Outcome.DrawCard);

@@ -80,7 +80,7 @@ public class MordantDragon extends CardImpl<MordantDragon> {
     }
 }
 
-class MordantDragonEffect extends OneShotEffect<MordantDragonEffect> {
+class MordantDragonEffect extends OneShotEffect {
 
     public MordantDragonEffect() {
         super(Outcome.Damage);

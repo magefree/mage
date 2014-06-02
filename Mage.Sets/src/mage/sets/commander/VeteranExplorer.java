@@ -76,7 +76,7 @@ public class VeteranExplorer extends CardImpl<VeteranExplorer> {
         return new VeteranExplorer(this);
     }
 }
-class VeteranExplorerEffect extends OneShotEffect<VeteranExplorerEffect> {
+class VeteranExplorerEffect extends OneShotEffect {
 
     public VeteranExplorerEffect() {
         super(Outcome.Detriment);

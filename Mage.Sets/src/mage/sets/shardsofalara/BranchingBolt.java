@@ -88,7 +88,7 @@ public class BranchingBolt extends CardImpl<BranchingBolt> {
     }
 }
 
-class BranchingBoltEffect extends OneShotEffect<BranchingBoltEffect> {
+class BranchingBoltEffect extends OneShotEffect {
 
     public BranchingBoltEffect() {
         super(Outcome.Damage);

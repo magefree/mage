@@ -84,7 +84,7 @@ public class SewerNemesis extends CardImpl<SewerNemesis> {
     }
 }
 
-class SewerNemesisChoosePlayerEffect extends OneShotEffect<SewerNemesisChoosePlayerEffect> {
+class SewerNemesisChoosePlayerEffect extends OneShotEffect {
 
     public SewerNemesisChoosePlayerEffect() {
         super(Outcome.Detriment);

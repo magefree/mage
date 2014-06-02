@@ -87,7 +87,7 @@ public class MistcutterHydra extends CardImpl<MistcutterHydra> {
     }
 }
 
-class MistcutterHydraEffect extends OneShotEffect<MistcutterHydraEffect> {
+class MistcutterHydraEffect extends OneShotEffect {
 
     public MistcutterHydraEffect() {
         super(Outcome.BoostCreature);

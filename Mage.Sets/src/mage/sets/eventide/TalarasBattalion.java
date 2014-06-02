@@ -85,7 +85,7 @@ public class TalarasBattalion extends CardImpl<TalarasBattalion> {
     }
 }
 
-class TalarasBattalionEffect extends ReplacementEffectImpl<TalarasBattalionEffect> {
+class TalarasBattalionEffect extends ReplacementEffectImpl {
 
     TalarasBattalionEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);

@@ -71,7 +71,7 @@ public class CellarDoor extends CardImpl<CellarDoor> {
     }
 }
 
-class CellarDoorEffect extends OneShotEffect<CellarDoorEffect> {
+class CellarDoorEffect extends OneShotEffect {
 
     public CellarDoorEffect() {
         super(Outcome.PutCreatureInPlay);

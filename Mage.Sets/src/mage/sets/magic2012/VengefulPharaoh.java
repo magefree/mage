@@ -113,7 +113,7 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class VengefulPharaohEffect extends OneShotEffect<VengefulPharaohEffect> {
+class VengefulPharaohEffect extends OneShotEffect {
 
     public VengefulPharaohEffect() {
         super(Outcome.DestroyPermanent);

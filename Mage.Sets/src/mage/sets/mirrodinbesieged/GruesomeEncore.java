@@ -78,7 +78,7 @@ public class GruesomeEncore extends CardImpl<GruesomeEncore> {
     }
 }
 
-class GruesomeEncoreEffect extends OneShotEffect<GruesomeEncoreEffect> {
+class GruesomeEncoreEffect extends OneShotEffect {
 
     public GruesomeEncoreEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -115,7 +115,7 @@ class GruesomeEncoreEffect extends OneShotEffect<GruesomeEncoreEffect> {
     }
 }
 
-class GruesomeEncoreReplacementEffect extends ReplacementEffectImpl<GruesomeEncoreReplacementEffect> {
+class GruesomeEncoreReplacementEffect extends ReplacementEffectImpl {
 
     GruesomeEncoreReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Tap);

@@ -101,7 +101,7 @@ class testCondition implements Condition {
     }
 }
 
-class BaneFireEffect extends OneShotEffect<BaneFireEffect> {
+class BaneFireEffect extends OneShotEffect {
 
     public BaneFireEffect() {
         super(Outcome.Damage);
@@ -135,7 +135,7 @@ class BaneFireEffect extends OneShotEffect<BaneFireEffect> {
     }
 }
 
-class BanefireCantCounterEffect extends ReplacementEffectImpl<BanefireCantCounterEffect> {
+class BanefireCantCounterEffect extends ReplacementEffectImpl {
 
     Condition condition = new testCondition(new ManacostVariableValue(), 5);
 

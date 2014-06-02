@@ -71,7 +71,7 @@ public class GleamOfResistance extends CardImpl<GleamOfResistance> {
     }
 }
 
-class GleamOfResistanceEffect extends OneShotEffect<GleamOfResistanceEffect> {
+class GleamOfResistanceEffect extends OneShotEffect {
     GleamOfResistanceEffect() {
         super(Outcome.Untap);
         staticText = "Untap those creatures";

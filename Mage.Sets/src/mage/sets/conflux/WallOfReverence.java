@@ -76,7 +76,7 @@ public class WallOfReverence extends CardImpl<WallOfReverence> {
     }
 }
 
-class WallOfReverenceTriggeredEffect extends OneShotEffect<WallOfReverenceTriggeredEffect> {
+class WallOfReverenceTriggeredEffect extends OneShotEffect {
     WallOfReverenceTriggeredEffect() {
         super(Outcome.GainLife);
         staticText = "you may gain life equal to the power of target creature you control";

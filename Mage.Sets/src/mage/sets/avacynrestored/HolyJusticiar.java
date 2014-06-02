@@ -77,7 +77,7 @@ public class HolyJusticiar extends CardImpl<HolyJusticiar> {
     }
 }
 
-class HolyJusticiarEffect extends OneShotEffect<HolyJusticiarEffect> {
+class HolyJusticiarEffect extends OneShotEffect {
 
     public HolyJusticiarEffect() {
         super(Outcome.Detriment);

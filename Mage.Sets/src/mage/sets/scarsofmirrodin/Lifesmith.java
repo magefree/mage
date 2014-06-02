@@ -79,7 +79,7 @@ public class Lifesmith extends CardImpl<Lifesmith> {
     }
 }
 
-class LifesmithEffect extends OneShotEffect<LifesmithEffect> {
+class LifesmithEffect extends OneShotEffect {
     LifesmithEffect() {
         super(Outcome.GainLife);
         staticText = "you may pay {1}. If you do, you gain 3 life";

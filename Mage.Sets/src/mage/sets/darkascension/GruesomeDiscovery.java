@@ -78,7 +78,7 @@ public class GruesomeDiscovery extends CardImpl<GruesomeDiscovery> {
     }
 }
 
-class GruesomeDiscoveryEffect extends OneShotEffect<GruesomeDiscoveryEffect> {
+class GruesomeDiscoveryEffect extends OneShotEffect {
 
     public GruesomeDiscoveryEffect() {
         super(Outcome.Discard);

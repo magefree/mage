@@ -79,7 +79,7 @@ public class VolcanicStrength extends CardImpl<VolcanicStrength> {
     }
 }
 
-class VolcanicStrengthEffect extends ContinuousEffectImpl<VolcanicStrengthEffect> {
+class VolcanicStrengthEffect extends ContinuousEffectImpl {
 
     public VolcanicStrengthEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

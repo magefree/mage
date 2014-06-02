@@ -71,7 +71,7 @@ public class HedronMatrix extends CardImpl<HedronMatrix> {
 
 }
 
-class HedronMatrixEffect extends ContinuousEffectImpl<HedronMatrixEffect> {
+class HedronMatrixEffect extends ContinuousEffectImpl {
 
     public HedronMatrixEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

@@ -79,7 +79,7 @@ public class RealmRazer extends CardImpl<RealmRazer> {
     }
 }
 
-class ExileAllEffect extends OneShotEffect<ExileAllEffect> {
+class ExileAllEffect extends OneShotEffect {
 
     public ExileAllEffect() {
         super(Outcome.Exile);
@@ -107,7 +107,7 @@ class ExileAllEffect extends OneShotEffect<ExileAllEffect> {
 }
 
 
-class RealmRazerEffect extends OneShotEffect<RealmRazerEffect> {
+class RealmRazerEffect extends OneShotEffect {
 
     public RealmRazerEffect() {
         super(Outcome.ReturnToHand);

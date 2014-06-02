@@ -68,7 +68,7 @@ public class PraetorsCounsel extends CardImpl<PraetorsCounsel> {
 
 }
 
-class PraetorsCounselEffect extends OneShotEffect<PraetorsCounselEffect> {
+class PraetorsCounselEffect extends OneShotEffect {
 
     public PraetorsCounselEffect() {
         super(Outcome.DrawCard);

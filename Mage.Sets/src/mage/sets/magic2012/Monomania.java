@@ -70,7 +70,7 @@ public class Monomania extends CardImpl<Monomania> {
     }
 }
 
-class MonomaniaEffect extends OneShotEffect<MonomaniaEffect> {
+class MonomaniaEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("a card");
 

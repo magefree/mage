@@ -68,7 +68,7 @@ public class SorcerersStrongbox extends CardImpl<SorcerersStrongbox> {
 
 }
 
-class SorcerersStrongboxEffect extends OneShotEffect<SorcerersStrongboxEffect> {
+class SorcerersStrongboxEffect extends OneShotEffect {
 
     public SorcerersStrongboxEffect() {
         super(Outcome.DrawCard);

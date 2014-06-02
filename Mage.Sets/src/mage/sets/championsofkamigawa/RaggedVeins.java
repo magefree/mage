@@ -119,7 +119,7 @@ class RaggedVeinsTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class  RaggedVeinsEffect extends OneShotEffect<RaggedVeinsEffect> {
+class  RaggedVeinsEffect extends OneShotEffect {
 
     public RaggedVeinsEffect() {
         super(Outcome.Damage);

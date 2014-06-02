@@ -76,7 +76,7 @@ public class RestoreBalance extends CardImpl<RestoreBalance> {
 }
 
 
-class RestoreBalanceEffect extends OneShotEffect<RestoreBalanceEffect> {
+class RestoreBalanceEffect extends OneShotEffect {
 
    
     public RestoreBalanceEffect() {

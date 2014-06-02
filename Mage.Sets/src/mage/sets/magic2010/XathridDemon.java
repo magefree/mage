@@ -80,7 +80,7 @@ public class XathridDemon extends CardImpl<XathridDemon> {
     }
 }
 
-class XathridDemonEffect extends OneShotEffect<XathridDemonEffect> {
+class XathridDemonEffect extends OneShotEffect {
 
     public XathridDemonEffect() {
         super(Outcome.Damage);

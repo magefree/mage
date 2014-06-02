@@ -65,7 +65,7 @@ public class ChandrasOutrage extends CardImpl<ChandrasOutrage> {
 
 }
 
-class ChandrasOutrageEffect extends OneShotEffect<ChandrasOutrageEffect> {
+class ChandrasOutrageEffect extends OneShotEffect {
 
     public ChandrasOutrageEffect() {
         super(Outcome.Damage);

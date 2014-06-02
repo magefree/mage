@@ -68,7 +68,7 @@ public class InterpretTheSigns extends CardImpl<InterpretTheSigns> {
     }
 }
 
-class InterpretTheSignsEffect extends OneShotEffect<InterpretTheSignsEffect> {
+class InterpretTheSignsEffect extends OneShotEffect {
 
     public InterpretTheSignsEffect() {
         super(Outcome.DrawCard);

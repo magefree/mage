@@ -84,7 +84,7 @@ public class UnexpectedlyAbsent extends CardImpl<UnexpectedlyAbsent> {
     }
 }
 
-class UnexpectedlyAbsentEffect extends OneShotEffect<UnexpectedlyAbsentEffect> {
+class UnexpectedlyAbsentEffect extends OneShotEffect {
 
     public UnexpectedlyAbsentEffect() {
         super(Outcome.Benefit);

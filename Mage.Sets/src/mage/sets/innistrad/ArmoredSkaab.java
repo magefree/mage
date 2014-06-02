@@ -72,7 +72,7 @@ public class ArmoredSkaab extends CardImpl<ArmoredSkaab> {
     }
 }
 
-class ArmoredSkaabEffect extends OneShotEffect<ArmoredSkaabEffect> {
+class ArmoredSkaabEffect extends OneShotEffect {
 
     public ArmoredSkaabEffect() {
         super(Outcome.Discard);

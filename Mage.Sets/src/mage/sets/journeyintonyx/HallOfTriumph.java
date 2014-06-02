@@ -76,7 +76,7 @@ public class HallOfTriumph extends CardImpl<HallOfTriumph> {
     }
 }
 
-class HallOfTriumphEffect extends OneShotEffect<HallOfTriumphEffect> {
+class HallOfTriumphEffect extends OneShotEffect {
 
     public HallOfTriumphEffect() {
         super(Outcome.BoostCreature);
@@ -115,7 +115,7 @@ class HallOfTriumphEffect extends OneShotEffect<HallOfTriumphEffect> {
 
 }
 
-class HallOfTriumphBoostControlledEffect extends ContinuousEffectImpl<HallOfTriumphBoostControlledEffect> {
+class HallOfTriumphBoostControlledEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

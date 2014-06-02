@@ -74,7 +74,7 @@ public class Voidwalk extends CardImpl<Voidwalk> {
     }
 }
 
-class VoidwalkEffect extends OneShotEffect<VoidwalkEffect> {
+class VoidwalkEffect extends OneShotEffect {
 
     private static final String effectText = "Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step";
 

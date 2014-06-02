@@ -84,7 +84,7 @@ public class ExtortAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ExtortEffect extends OneShotEffect<ExtortEffect> {
+class ExtortEffect extends OneShotEffect {
     public ExtortEffect() {
         super(Outcome.Damage);
         staticText = "each opponent loses 1 life and you gain that much life";

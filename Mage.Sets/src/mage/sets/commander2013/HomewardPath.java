@@ -77,7 +77,7 @@ public class HomewardPath extends CardImpl<HomewardPath> {
     }
 }
 
-class HomewardPathControlEffect extends ContinuousEffectImpl<HomewardPathControlEffect> {
+class HomewardPathControlEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

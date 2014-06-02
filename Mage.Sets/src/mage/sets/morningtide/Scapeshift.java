@@ -73,7 +73,7 @@ public class Scapeshift extends CardImpl<Scapeshift> {
 }
 
 
-class ScapeshiftEffect extends OneShotEffect<ScapeshiftEffect> {
+class ScapeshiftEffect extends OneShotEffect {
 
     public ScapeshiftEffect() {
         super(Outcome.Neutral);

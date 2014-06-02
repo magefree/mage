@@ -70,7 +70,7 @@ public class LayBare extends CardImpl<LayBare> {
     }
 }
 
-class LayBareEffect extends OneShotEffect<LayBareEffect> {
+class LayBareEffect extends OneShotEffect {
 
     public LayBareEffect() {
         super(Outcome.Benefit);

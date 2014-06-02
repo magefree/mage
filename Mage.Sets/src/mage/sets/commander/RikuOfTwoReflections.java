@@ -105,7 +105,7 @@ public class RikuOfTwoReflections extends CardImpl<RikuOfTwoReflections> {
     }
 }
 
-class RikuOfTwoReflectionsCopyEffect extends OneShotEffect<RikuOfTwoReflectionsCopyEffect> {
+class RikuOfTwoReflectionsCopyEffect extends OneShotEffect {
 
     public RikuOfTwoReflectionsCopyEffect() {
         super(Outcome.Copy);
@@ -142,7 +142,7 @@ class RikuOfTwoReflectionsCopyEffect extends OneShotEffect<RikuOfTwoReflectionsC
     }
 }
 
-class RikuOfTwoReflectionsCopyTokenEffect extends OneShotEffect<RikuOfTwoReflectionsCopyTokenEffect> {
+class RikuOfTwoReflectionsCopyTokenEffect extends OneShotEffect {
 
     public RikuOfTwoReflectionsCopyTokenEffect() {
         super(Outcome.PutCreatureInPlay);

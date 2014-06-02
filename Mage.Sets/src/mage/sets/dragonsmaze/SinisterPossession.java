@@ -81,7 +81,7 @@ public class SinisterPossession extends CardImpl<SinisterPossession> {
     }
 }
 
-class LoseLifeControllerAttachedEffect extends OneShotEffect<LoseLifeControllerAttachedEffect> {
+class LoseLifeControllerAttachedEffect extends OneShotEffect {
 
     protected DynamicValue amount;
 

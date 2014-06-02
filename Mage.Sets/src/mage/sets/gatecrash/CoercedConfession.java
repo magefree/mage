@@ -69,7 +69,7 @@ public class CoercedConfession extends CardImpl<CoercedConfession> {
     }
 }
 
-class CoercedConfessionMillEffect extends OneShotEffect<CoercedConfessionMillEffect> {
+class CoercedConfessionMillEffect extends OneShotEffect {
 
     public CoercedConfessionMillEffect() {
         super(Outcome.DrawCard);

@@ -69,7 +69,7 @@ public class Viseling extends CardImpl<Viseling> {
     }
 }
 
-class ViselingEffect extends OneShotEffect<ViselingEffect> {
+class ViselingEffect extends OneShotEffect {
 
     public ViselingEffect() {
         super(Outcome.Damage);

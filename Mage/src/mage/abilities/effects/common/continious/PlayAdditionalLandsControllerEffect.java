@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author Viserion
  */
-public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl<PlayAdditionalLandsControllerEffect> {
+public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl {
 
     protected int additionalCards;
 

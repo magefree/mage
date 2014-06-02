@@ -78,7 +78,7 @@ public class Meadowboon extends CardImpl<Meadowboon> {
     }
 }
 
-class MeadowboonEffect extends OneShotEffect<MeadowboonEffect> {
+class MeadowboonEffect extends OneShotEffect {
     MeadowboonEffect() {
         super(Outcome.UnboostCreature);
         staticText = "put a +1/+1 counter on each creature target player controls";

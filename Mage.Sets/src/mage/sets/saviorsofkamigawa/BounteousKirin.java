@@ -78,7 +78,7 @@ public class BounteousKirin extends CardImpl<BounteousKirin> {
     }
 }
 
-class BounteousKirinEffect extends OneShotEffect<BounteousKirinEffect> {
+class BounteousKirinEffect extends OneShotEffect {
 
     public BounteousKirinEffect() {
         super(Outcome.GainLife);

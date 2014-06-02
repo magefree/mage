@@ -85,7 +85,7 @@ public class LightFromWithin extends CardImpl<LightFromWithin> {
     }
 }
 
-class LightFromWithinEffect extends ContinuousEffectImpl<LightFromWithinEffect> {
+class LightFromWithinEffect extends ContinuousEffectImpl {
 
     boolean boosted = false;
 

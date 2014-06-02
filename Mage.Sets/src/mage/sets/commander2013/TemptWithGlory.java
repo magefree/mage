@@ -67,7 +67,7 @@ public class TemptWithGlory extends CardImpl<TemptWithGlory> {
     }
 }
 
-class TemptWithGloryEffect extends OneShotEffect<TemptWithGloryEffect> {
+class TemptWithGloryEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final Counter counter = CounterType.P1P1.createInstance();

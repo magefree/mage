@@ -70,7 +70,7 @@ public class ShelteringWord extends CardImpl<ShelteringWord> {
     }
 }
 
-class ShelteringWordEffect extends OneShotEffect<ShelteringWordEffect> {
+class ShelteringWordEffect extends OneShotEffect {
 
     public ShelteringWordEffect() {
         super(Outcome.GainLife);

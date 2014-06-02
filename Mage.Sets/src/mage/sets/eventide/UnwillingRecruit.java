@@ -72,7 +72,7 @@ public class UnwillingRecruit extends CardImpl<UnwillingRecruit> {
     }
 }
 
-class UnwillingRecruitEffect extends OneShotEffect<UnwillingRecruitEffect> {
+class UnwillingRecruitEffect extends OneShotEffect {
 
     UnwillingRecruitEffect() {
         super(Outcome.Benefit);

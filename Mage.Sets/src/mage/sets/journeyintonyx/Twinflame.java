@@ -78,7 +78,7 @@ public class Twinflame extends CardImpl<Twinflame> {
     }
 }
 
-class TwinflameCopyEffect extends OneShotEffect<TwinflameCopyEffect> {
+class TwinflameCopyEffect extends OneShotEffect {
     
     public TwinflameCopyEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -92,7 +92,7 @@ public class MassMutiny extends CardImpl<MassMutiny> {
 }
 
 
-class MassMutinyEffect extends OneShotEffect<MassMutinyEffect> {
+class MassMutinyEffect extends OneShotEffect {
 
     public MassMutinyEffect() {
         super(Outcome.GainControl);

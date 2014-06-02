@@ -74,7 +74,7 @@ public class CyclopsGladiator extends CardImpl<CyclopsGladiator> {
 
 }
 
-class CyclopsGladiatorEffect extends OneShotEffect<CyclopsGladiatorEffect> {
+class CyclopsGladiatorEffect extends OneShotEffect {
 
     public CyclopsGladiatorEffect() {
         super(Outcome.Damage);

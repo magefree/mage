@@ -72,7 +72,7 @@ public class ElephantGrass extends CardImpl<ElephantGrass> {
 }
 
 
-class ElephantGrassReplacementEffect extends ReplacementEffectImpl<ElephantGrassReplacementEffect> {
+class ElephantGrassReplacementEffect extends ReplacementEffectImpl {
 
    
     ElephantGrassReplacementEffect ( ) {
@@ -112,7 +112,7 @@ class ElephantGrassReplacementEffect extends ReplacementEffectImpl<ElephantGrass
 
 }
 
-class ElephantGrassReplacementEffect2 extends ReplacementEffectImpl<ElephantGrassReplacementEffect2> {
+class ElephantGrassReplacementEffect2 extends ReplacementEffectImpl {
 
     ElephantGrassReplacementEffect2 ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

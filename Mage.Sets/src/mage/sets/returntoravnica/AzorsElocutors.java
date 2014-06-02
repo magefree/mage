@@ -111,7 +111,7 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
 
 }
 
-class AzorsElocutorsEffect extends OneShotEffect<AzorsElocutorsEffect> {
+class AzorsElocutorsEffect extends OneShotEffect {
 
     public AzorsElocutorsEffect() {
         super(Outcome.Benefit);

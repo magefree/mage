@@ -124,7 +124,7 @@ class NaturesWillTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class NaturesWillEffect extends OneShotEffect<NaturesWillEffect> {
+class NaturesWillEffect extends OneShotEffect {
 
     public NaturesWillEffect() {
         super(Outcome.Benefit);

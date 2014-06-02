@@ -77,7 +77,7 @@ public class Quicken extends CardImpl<Quicken> {
     }
 }
 
-class QuickenAsThoughEffect extends AsThoughEffectImpl<QuickenAsThoughEffect> {
+class QuickenAsThoughEffect extends AsThoughEffectImpl {
     private QuickenWatcher quickenWatcher;
     private int zoneChangeCounter;
 

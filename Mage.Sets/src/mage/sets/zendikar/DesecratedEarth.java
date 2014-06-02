@@ -70,7 +70,7 @@ public class DesecratedEarth extends CardImpl<DesecratedEarth> {
     }
 }
 
-class DesecratedEarthEffect extends OneShotEffect<DesecratedEarthEffect> {
+class DesecratedEarthEffect extends OneShotEffect {
 
     public DesecratedEarthEffect() {
         super(Outcome.DrawCard);

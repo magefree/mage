@@ -69,7 +69,7 @@ public class PainfulMemories extends CardImpl<PainfulMemories> {
     }
 }
 
-class PainfulMemoriesEffect extends OneShotEffect<PainfulMemoriesEffect> {
+class PainfulMemoriesEffect extends OneShotEffect {
 
     public PainfulMemoriesEffect() {
         super(Outcome.Discard);

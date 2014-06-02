@@ -66,7 +66,7 @@ public class BeastHunt extends CardImpl<BeastHunt> {
     }
 }
 
-class BeastHuntEffect extends OneShotEffect<BeastHuntEffect> {
+class BeastHuntEffect extends OneShotEffect {
 
     public BeastHuntEffect() {
         super(Outcome.Benefit);

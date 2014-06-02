@@ -95,7 +95,7 @@ public class PrisonTerm extends CardImpl<PrisonTerm> {
     }
 }
 
-class PrisonTermEffect extends OneShotEffect<PrisonTermEffect> {
+class PrisonTermEffect extends OneShotEffect {
 
     public PrisonTermEffect() {
         super(Outcome.Detriment);

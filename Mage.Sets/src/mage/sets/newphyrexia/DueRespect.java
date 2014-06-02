@@ -68,7 +68,7 @@ public class DueRespect extends CardImpl<DueRespect> {
     }
 }
 
-class DueRespectEffect extends ReplacementEffectImpl<DueRespectEffect> {
+class DueRespectEffect extends ReplacementEffectImpl {
 
     DueRespectEffect() {
         super(Duration.EndOfTurn, Outcome.Tap);

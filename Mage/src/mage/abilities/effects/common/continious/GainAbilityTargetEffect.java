@@ -46,7 +46,7 @@ import mage.cards.Card;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTargetEffect> {
+public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
     // shall a card gain the ability (otherwise permanent)

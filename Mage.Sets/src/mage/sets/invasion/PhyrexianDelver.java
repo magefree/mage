@@ -77,7 +77,7 @@ public class PhyrexianDelver extends CardImpl<PhyrexianDelver> {
     }
 }
 
-class PhyrexianDelverEffect extends OneShotEffect<PhyrexianDelverEffect> {
+class PhyrexianDelverEffect extends OneShotEffect {
 
     public PhyrexianDelverEffect() {
         super(Outcome.PutCreatureInPlay);

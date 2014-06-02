@@ -38,7 +38,7 @@ import mage.game.events.GameEvent;
 /**
  * @author nantuko
  */
-public class PreventDamageByTargetEffect extends PreventionEffectImpl<PreventDamageByTargetEffect> {
+public class PreventDamageByTargetEffect extends PreventionEffectImpl {
 
     public PreventDamageByTargetEffect(Duration duration) {
         this(duration, false);

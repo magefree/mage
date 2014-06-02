@@ -71,7 +71,7 @@ public class JacesArchivist extends CardImpl<JacesArchivist> {
     }
 }
 
-class JacesArchivistEffect extends OneShotEffect<JacesArchivistEffect> {
+class JacesArchivistEffect extends OneShotEffect {
     JacesArchivistEffect() {
         super(Outcome.Discard);
         staticText = "Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way";

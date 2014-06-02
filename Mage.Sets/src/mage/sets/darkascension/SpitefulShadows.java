@@ -113,7 +113,7 @@ class SpitefulShadowsTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SpitefulShadowsEffect extends OneShotEffect<SpitefulShadowsEffect> {
+class SpitefulShadowsEffect extends OneShotEffect {
 
     public SpitefulShadowsEffect() {
         super(Outcome.Damage);

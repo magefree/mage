@@ -100,7 +100,7 @@ public class SylvanPrimordial extends CardImpl<SylvanPrimordial> {
     }
 }
 
-class SylvanPrimordialEffect extends OneShotEffect<SylvanPrimordialEffect> {
+class SylvanPrimordialEffect extends OneShotEffect {
 
     private static final FilterLandCard filterForest = new FilterLandCard("Forest");
     static{

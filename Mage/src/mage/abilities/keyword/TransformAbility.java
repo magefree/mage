@@ -94,7 +94,7 @@ public class TransformAbility extends SimpleStaticAbility {
     }
 }
 
-class TransformEffect extends ContinuousEffectImpl<TransformEffect> {
+class TransformEffect extends ContinuousEffectImpl {
 
     public TransformEffect() {
         super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);

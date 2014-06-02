@@ -104,7 +104,7 @@ public class KarrthusTyrantOfJund extends CardImpl<KarrthusTyrantOfJund> {
     }
 }
 
-class KarrthusEffect extends OneShotEffect<KarrthusEffect> {
+class KarrthusEffect extends OneShotEffect {
 
     public KarrthusEffect() {
         super(Outcome.GainControl);
@@ -137,7 +137,7 @@ class KarrthusEffect extends OneShotEffect<KarrthusEffect> {
     }
 }
 
-class KarrthusControlEffect extends ContinuousEffectImpl<KarrthusControlEffect> {
+class KarrthusControlEffect extends ContinuousEffectImpl {
 
     private UUID controllerId;
 

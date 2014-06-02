@@ -80,7 +80,7 @@ public class BanewaspAffliction extends CardImpl<BanewaspAffliction> {
 }
 
 
-class LoseLifeEffect extends OneShotEffect<LoseLifeEffect> {
+class LoseLifeEffect extends OneShotEffect {
 
     public LoseLifeEffect() {
         super(Outcome.LoseLife);

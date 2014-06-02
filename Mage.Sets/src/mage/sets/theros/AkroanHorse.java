@@ -86,7 +86,7 @@ public class AkroanHorse extends CardImpl<AkroanHorse> {
     }
 }
 
-class AkroanHorseChangeControlEffect extends OneShotEffect<AkroanHorseChangeControlEffect> {
+class AkroanHorseChangeControlEffect extends OneShotEffect {
 
     public AkroanHorseChangeControlEffect() {
         super(Outcome.Benefit);
@@ -118,7 +118,7 @@ class AkroanHorseChangeControlEffect extends OneShotEffect<AkroanHorseChangeCont
     }
 }
 
-class AkroanHorseGainControlEffect extends ContinuousEffectImpl<AkroanHorseGainControlEffect> {
+class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
 
     UUID controller;
 
@@ -155,7 +155,7 @@ class AkroanHorseGainControlEffect extends ContinuousEffectImpl<AkroanHorseGainC
     }
 }
 
-class AkroanHorseCreateTokenEffect extends OneShotEffect<AkroanHorseCreateTokenEffect> {
+class AkroanHorseCreateTokenEffect extends OneShotEffect {
 
     public AkroanHorseCreateTokenEffect() {
         super(Outcome.Detriment);

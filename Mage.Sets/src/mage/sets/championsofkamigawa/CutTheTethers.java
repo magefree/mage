@@ -70,7 +70,7 @@ public class CutTheTethers extends CardImpl<CutTheTethers> {
     }
 }
 
-class CutTheTethersEffect extends OneShotEffect<CutTheTethersEffect> {
+class CutTheTethersEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit creatures");
     static {

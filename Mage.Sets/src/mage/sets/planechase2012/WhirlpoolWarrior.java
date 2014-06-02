@@ -80,7 +80,7 @@ public class WhirlpoolWarrior extends CardImpl<WhirlpoolWarrior> {
     }
 }
 
-class WhirlpoolWarriorTriggeredEffect extends OneShotEffect<WhirlpoolWarriorTriggeredEffect> {
+class WhirlpoolWarriorTriggeredEffect extends OneShotEffect {
 
     public WhirlpoolWarriorTriggeredEffect() {
         super(Outcome.DrawCard);
@@ -120,7 +120,7 @@ class WhirlpoolWarriorTriggeredEffect extends OneShotEffect<WhirlpoolWarriorTrig
     }
 }
 
-class WhirlpoolWarriorActivatedEffect extends OneShotEffect<WhirlpoolWarriorActivatedEffect> {
+class WhirlpoolWarriorActivatedEffect extends OneShotEffect {
 
     public WhirlpoolWarriorActivatedEffect() {
         super(Outcome.Benefit);

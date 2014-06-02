@@ -110,7 +110,7 @@ class KozilekButcherOfTruthOnCastAbility extends TriggeredAbilityImpl {
     }
 }
 
-class KozilekButcherOfTruthEffect extends OneShotEffect<KozilekButcherOfTruthEffect> {
+class KozilekButcherOfTruthEffect extends OneShotEffect {
     KozilekButcherOfTruthEffect() {
         super(Outcome.Benefit);
         staticText = "its owner shuffles his or her graveyard into his or her library";

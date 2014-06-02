@@ -77,7 +77,7 @@ public class ThousandYearElixir extends CardImpl<ThousandYearElixir> {
     }
 }
 
-class ThousandYearElixirEffect extends AsThoughEffectImpl<ThousandYearElixirEffect> {
+class ThousandYearElixirEffect extends AsThoughEffectImpl {
 
     public ThousandYearElixirEffect() {
         super(AsThoughEffectType.ACTIVATE_HASTE, Duration.WhileOnBattlefield, Outcome.Benefit);

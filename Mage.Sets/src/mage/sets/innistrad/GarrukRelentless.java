@@ -123,7 +123,7 @@ class GarrukRelentlessTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class GarrukRelentlessDamageEffect extends OneShotEffect<GarrukRelentlessDamageEffect> {
+class GarrukRelentlessDamageEffect extends OneShotEffect {
 
     public GarrukRelentlessDamageEffect() {
         super(Outcome.Damage);

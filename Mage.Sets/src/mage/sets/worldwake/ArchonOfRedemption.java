@@ -113,7 +113,7 @@ class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ArchonOfRedemptionEffect extends OneShotEffect<ArchonOfRedemptionEffect> {
+class ArchonOfRedemptionEffect extends OneShotEffect {
     ArchonOfRedemptionEffect() {
         super(Outcome.GainLife);
     }

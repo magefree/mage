@@ -67,7 +67,7 @@ public class FracturingGust extends CardImpl<FracturingGust> {
         return new FracturingGust(this);
     }
 }
-class FracturingGustDestroyEffect extends OneShotEffect<FracturingGustDestroyEffect> {
+class FracturingGustDestroyEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {

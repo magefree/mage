@@ -76,7 +76,7 @@ public class VengefulArchon extends CardImpl<VengefulArchon> {
 
 }
 
-class VengefulArchonEffect extends PreventionEffectImpl<VengefulArchonEffect> {
+class VengefulArchonEffect extends PreventionEffectImpl {
 
     protected int amount = 0;
 

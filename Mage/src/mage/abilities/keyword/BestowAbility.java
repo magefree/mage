@@ -138,7 +138,7 @@ public class BestowAbility extends SpellAbility {
 
 }
 
-class BestowTypeChangingEffect extends ContinuousEffectImpl<BestowTypeChangingEffect> implements SourceEffect {
+class BestowTypeChangingEffect extends ContinuousEffectImpl implements SourceEffect {
 
     public BestowTypeChangingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

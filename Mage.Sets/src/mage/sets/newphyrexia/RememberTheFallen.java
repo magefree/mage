@@ -85,7 +85,7 @@ public class RememberTheFallen extends CardImpl<RememberTheFallen> {
     }
 }
 
-class RememberTheFallenEffect extends OneShotEffect<RememberTheFallenEffect> {
+class RememberTheFallenEffect extends OneShotEffect {
 
     public RememberTheFallenEffect() {
         super(Outcome.ReturnToHand);

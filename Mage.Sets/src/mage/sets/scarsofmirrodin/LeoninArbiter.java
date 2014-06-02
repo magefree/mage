@@ -75,7 +75,7 @@ public class LeoninArbiter extends CardImpl<LeoninArbiter> {
     }
 }
 
-class LeoninArbiterReplacementEffect extends ReplacementEffectImpl<LeoninArbiterReplacementEffect> {
+class LeoninArbiterReplacementEffect extends ReplacementEffectImpl {
 
     private static final String effectText = "Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn";
     private List<UUID> paidPlayers = new ArrayList<UUID>();

@@ -76,7 +76,7 @@ public class ChroniclerOfHeroes extends CardImpl<ChroniclerOfHeroes> {
     }
 }
 
-class ChroniclerOfHeroesEffect extends OneShotEffect<ChroniclerOfHeroesEffect> {
+class ChroniclerOfHeroesEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
     static {

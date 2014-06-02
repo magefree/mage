@@ -162,7 +162,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
     }
 }
 
-class BuybackEffect extends ReplacementEffectImpl<BuybackEffect> {
+class BuybackEffect extends ReplacementEffectImpl {
 
     public BuybackEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);

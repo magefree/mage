@@ -136,7 +136,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SludgeStriderEffect extends OneShotEffect<SludgeStriderEffect> {
+class SludgeStriderEffect extends OneShotEffect {
 
     SludgeStriderEffect() {
         super(Outcome.Detriment);

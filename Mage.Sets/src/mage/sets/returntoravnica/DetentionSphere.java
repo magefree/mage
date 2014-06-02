@@ -92,7 +92,7 @@ public class DetentionSphere extends CardImpl<DetentionSphere> {
     }
 }
 
-class DetentionSphereEntersEffect extends OneShotEffect<DetentionSphereEntersEffect> {
+class DetentionSphereEntersEffect extends OneShotEffect {
 
 
     public DetentionSphereEntersEffect() {
@@ -127,7 +127,7 @@ class DetentionSphereEntersEffect extends OneShotEffect<DetentionSphereEntersEff
     }
 }
 
-class DetentionSphereLeavesEffect extends OneShotEffect<DetentionSphereLeavesEffect> {
+class DetentionSphereLeavesEffect extends OneShotEffect {
 
     public DetentionSphereLeavesEffect() {
         super(Outcome.Neutral);

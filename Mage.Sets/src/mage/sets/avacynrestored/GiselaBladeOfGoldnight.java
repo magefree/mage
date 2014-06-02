@@ -76,7 +76,7 @@ public class GiselaBladeOfGoldnight extends CardImpl<GiselaBladeOfGoldnight> {
     }
 }
 
-class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl<GiselaBladeOfGoldnightDoubleDamageEffect> {
+class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
 
     public GiselaBladeOfGoldnightDoubleDamageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);

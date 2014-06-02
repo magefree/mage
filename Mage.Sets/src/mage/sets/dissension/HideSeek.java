@@ -96,7 +96,7 @@ public class HideSeek extends SplitCard<HideSeek> {
     }
 }
 
-class SeekEffect extends OneShotEffect<SeekEffect> {
+class SeekEffect extends OneShotEffect {
 
     public SeekEffect() {
         super(Outcome.GainLife);

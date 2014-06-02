@@ -68,7 +68,7 @@ public class BeaconOfTomorrows extends CardImpl<BeaconOfTomorrows> {
     }
 }
 
-class BeaconOfTomorrowsEffect extends OneShotEffect<BeaconOfTomorrowsEffect> {
+class BeaconOfTomorrowsEffect extends OneShotEffect {
 
     public BeaconOfTomorrowsEffect() {
         super(Outcome.ExtraTurn);

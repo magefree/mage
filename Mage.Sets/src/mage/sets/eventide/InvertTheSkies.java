@@ -82,7 +82,7 @@ public class InvertTheSkies extends CardImpl<InvertTheSkies> {
     }
 }
 
-class InvertTheSkiesEffect extends ContinuousEffectImpl<InvertTheSkiesEffect> {
+class InvertTheSkiesEffect extends ContinuousEffectImpl {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

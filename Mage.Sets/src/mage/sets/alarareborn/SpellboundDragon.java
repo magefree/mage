@@ -79,7 +79,7 @@ public class SpellboundDragon extends CardImpl<SpellboundDragon> {
     }
 }
 
-class SpellboundDragonEffect extends OneShotEffect<SpellboundDragonEffect> {
+class SpellboundDragonEffect extends OneShotEffect {
 
     public SpellboundDragonEffect() {
         super(Outcome.BoostCreature);

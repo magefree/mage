@@ -74,7 +74,7 @@ public class JadeMonolith extends CardImpl<JadeMonolith> {
     }
 }
 
-class JadeMonolithRedirectionEffect extends ReplacementEffectImpl<JadeMonolithRedirectionEffect> {
+class JadeMonolithRedirectionEffect extends ReplacementEffectImpl {
 
     private final TargetSource targetSource;
     

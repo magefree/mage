@@ -72,7 +72,7 @@ public class LostInTheWoods extends CardImpl<LostInTheWoods> {
     }
 }
 
-class LostInTheWoodsEffect extends OneShotEffect<LostInTheWoodsEffect> {
+class LostInTheWoodsEffect extends OneShotEffect {
 
     public LostInTheWoodsEffect() {
         super(Outcome.PreventDamage);

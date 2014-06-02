@@ -91,7 +91,7 @@ public class SecurityBlockade extends CardImpl<SecurityBlockade> {
     }
 
 }
-class SecurityBlockadePreventionEffect extends PreventionEffectImpl<SecurityBlockadePreventionEffect> {
+class SecurityBlockadePreventionEffect extends PreventionEffectImpl {
 
     public SecurityBlockadePreventionEffect() {
         super(Duration.EndOfTurn);

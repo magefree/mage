@@ -81,7 +81,7 @@ public class EnigmaSphinx extends CardImpl<EnigmaSphinx> {
     }
 }
 
-class EnigmaSphinxEffect extends OneShotEffect<EnigmaSphinxEffect> {
+class EnigmaSphinxEffect extends OneShotEffect {
 
     public EnigmaSphinxEffect() {
         super(Outcome.ReturnToHand);

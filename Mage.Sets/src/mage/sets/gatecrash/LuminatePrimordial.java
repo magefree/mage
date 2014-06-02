@@ -94,7 +94,7 @@ public class LuminatePrimordial extends CardImpl<LuminatePrimordial> {
     }
 }
 
-class LuminatePrimordialEffect extends OneShotEffect<LuminatePrimordialEffect> {
+class LuminatePrimordialEffect extends OneShotEffect {
 
     public LuminatePrimordialEffect() {
         super(Outcome.Benefit);

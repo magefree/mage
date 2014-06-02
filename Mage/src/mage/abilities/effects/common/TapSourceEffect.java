@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TapSourceEffect extends OneShotEffect<TapSourceEffect> {
+public class TapSourceEffect extends OneShotEffect {
     private boolean withoutTrigger;
 
     public TapSourceEffect() {

@@ -76,7 +76,7 @@ public class TreeOfRedemption extends CardImpl<TreeOfRedemption> {
     }
 }
 
-class TreeOfRedemptionEffect extends OneShotEffect<TreeOfRedemptionEffect> {
+class TreeOfRedemptionEffect extends OneShotEffect {
 
     public TreeOfRedemptionEffect() {
         super(Outcome.GainLife);

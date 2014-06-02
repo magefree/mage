@@ -81,7 +81,7 @@ public class SerraAvenger extends CardImpl<SerraAvenger> {
     }
 }
 
-class CantCastSerraAvengerEffect extends ReplacementEffectImpl<CantCastSerraAvengerEffect> {
+class CantCastSerraAvengerEffect extends ReplacementEffectImpl {
 
     public CantCastSerraAvengerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

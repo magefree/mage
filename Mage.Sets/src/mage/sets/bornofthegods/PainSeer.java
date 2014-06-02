@@ -73,7 +73,7 @@ public class PainSeer extends CardImpl<PainSeer> {
     }
 }
 
-class PainSeerEffect extends OneShotEffect<PainSeerEffect> {
+class PainSeerEffect extends OneShotEffect {
 
     public PainSeerEffect() {
         super(Outcome.DrawCard);

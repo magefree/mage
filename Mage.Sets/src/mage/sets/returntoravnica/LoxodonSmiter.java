@@ -88,7 +88,7 @@ public class LoxodonSmiter extends CardImpl<LoxodonSmiter> {
     }
 }
 
-class LoxodonSmiterEffect extends ReplacementEffectImpl<LoxodonSmiterEffect> {
+class LoxodonSmiterEffect extends ReplacementEffectImpl {
 
     public LoxodonSmiterEffect() {
         super(Duration.EndOfGame, Outcome.PutCardInPlay);

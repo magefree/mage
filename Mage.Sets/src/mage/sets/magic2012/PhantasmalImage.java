@@ -83,7 +83,7 @@ public class PhantasmalImage extends CardImpl<PhantasmalImage> {
     }
 }
 
-class PhantasmalImageCopyEffect extends OneShotEffect<PhantasmalImageCopyEffect> {
+class PhantasmalImageCopyEffect extends OneShotEffect {
 
     public PhantasmalImageCopyEffect() {
         super(Outcome.Copy);

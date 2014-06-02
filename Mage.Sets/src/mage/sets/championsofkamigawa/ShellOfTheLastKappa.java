@@ -98,7 +98,7 @@ public class ShellOfTheLastKappa extends CardImpl<ShellOfTheLastKappa> {
     }
 }
 
-class ShellOfTheLastKappaEffect extends OneShotEffect<ShellOfTheLastKappaEffect> {
+class ShellOfTheLastKappaEffect extends OneShotEffect {
 
     public ShellOfTheLastKappaEffect() {
         super(Outcome.Exile);
@@ -132,7 +132,7 @@ class ShellOfTheLastKappaEffect extends OneShotEffect<ShellOfTheLastKappaEffect>
     }
 }
 
-class ShellOfTheLastKappaCastEffect extends OneShotEffect<ShellOfTheLastKappaCastEffect> {
+class ShellOfTheLastKappaCastEffect extends OneShotEffect {
 
     public ShellOfTheLastKappaCastEffect() {
         super(Outcome.PlayForFree);

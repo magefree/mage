@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 
-public class DetainAllEffect extends OneShotEffect<DetainAllEffect> {
+public class DetainAllEffect extends OneShotEffect {
 
     private FilterPermanent filter = new FilterPermanent();
 

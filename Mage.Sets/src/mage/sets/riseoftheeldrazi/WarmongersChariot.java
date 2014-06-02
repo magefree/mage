@@ -73,7 +73,7 @@ public class WarmongersChariot extends CardImpl<WarmongersChariot> {
     }
 }
 
-class WarmongersChariotEffect extends AsThoughEffectImpl<WarmongersChariotEffect> {
+class WarmongersChariotEffect extends AsThoughEffectImpl {
 
     public WarmongersChariotEffect() {
         super(AsThoughEffectType.ATTACK, Duration.WhileOnBattlefield, Outcome.Benefit);

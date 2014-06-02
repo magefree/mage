@@ -83,7 +83,7 @@ public class KalonianHydra extends CardImpl<KalonianHydra> {
 }
 
 
-class KalonianHydraEffect extends OneShotEffect<KalonianHydraEffect> {
+class KalonianHydraEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

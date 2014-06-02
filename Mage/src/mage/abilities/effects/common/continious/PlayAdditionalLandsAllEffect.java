@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author nantuko
  */
-public class PlayAdditionalLandsAllEffect extends ContinuousEffectImpl<PlayAdditionalLandsAllEffect> {
+public class PlayAdditionalLandsAllEffect extends ContinuousEffectImpl {
 
     public PlayAdditionalLandsAllEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);

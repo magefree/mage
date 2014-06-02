@@ -94,7 +94,7 @@ public class DungeonGeists extends CardImpl<DungeonGeists> {
     }
 }
 
-class DungeonGeistsEffect extends ReplacementEffectImpl<DungeonGeistsEffect> {
+class DungeonGeistsEffect extends ReplacementEffectImpl {
 
     public DungeonGeistsEffect() {
         super(Duration.OneUse, Outcome.Detriment);

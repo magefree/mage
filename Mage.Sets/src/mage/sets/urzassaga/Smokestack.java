@@ -72,7 +72,7 @@ public class Smokestack extends CardImpl<Smokestack> {
     }
 }
 
-class SmokestackEffect extends OneShotEffect<SmokestackEffect> {
+class SmokestackEffect extends OneShotEffect {
 
     public SmokestackEffect() {
         super(Outcome.Sacrifice);

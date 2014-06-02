@@ -100,7 +100,7 @@ class MindcrankTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class MindcrankEffect extends OneShotEffect<MindcrankEffect> {
+class MindcrankEffect extends OneShotEffect {
 
     public MindcrankEffect() {
         super(Outcome.Detriment);

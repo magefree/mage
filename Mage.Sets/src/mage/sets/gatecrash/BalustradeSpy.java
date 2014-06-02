@@ -79,7 +79,7 @@ public class BalustradeSpy extends CardImpl<BalustradeSpy> {
     }
 }
 
-class BalustradeSpyEffect extends OneShotEffect<BalustradeSpyEffect> {
+class BalustradeSpyEffect extends OneShotEffect {
 
     public BalustradeSpyEffect() {
         super(Outcome.Discard);

@@ -87,7 +87,7 @@ public class GhostCouncilOfOrzhova extends CardImpl<GhostCouncilOfOrzhova> {
 
 }
 
-class GhostCouncilOfOrzhovaEffect extends OneShotEffect<GhostCouncilOfOrzhovaEffect> {
+class GhostCouncilOfOrzhovaEffect extends OneShotEffect {
     GhostCouncilOfOrzhovaEffect() {
         super(Outcome.Damage);
         staticText = "target opponent loses 1 life and you gain 1 life";
@@ -115,7 +115,7 @@ class GhostCouncilOfOrzhovaEffect extends OneShotEffect<GhostCouncilOfOrzhovaEff
 
 }
 
-class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOrzhovaRemovingEffect> {
+class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect {
 
     private static final String effectText = "Exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
 

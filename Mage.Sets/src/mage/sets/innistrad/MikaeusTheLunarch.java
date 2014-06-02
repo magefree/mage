@@ -97,7 +97,7 @@ public class MikaeusTheLunarch extends CardImpl<MikaeusTheLunarch> {
     }
 }
 
-class MikaeusTheLunarchEffect extends OneShotEffect<MikaeusTheLunarchEffect> {
+class MikaeusTheLunarchEffect extends OneShotEffect {
 
     public MikaeusTheLunarchEffect() {
         super(Outcome.BoostCreature);

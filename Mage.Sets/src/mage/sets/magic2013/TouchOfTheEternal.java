@@ -64,7 +64,7 @@ public class TouchOfTheEternal extends CardImpl<TouchOfTheEternal> {
     }
 }
 
-class TouchOfTheEternalEffect extends OneShotEffect<TouchOfTheEternalEffect> {
+class TouchOfTheEternalEffect extends OneShotEffect {
 
     public TouchOfTheEternalEffect() {
         super(Outcome.Neutral);

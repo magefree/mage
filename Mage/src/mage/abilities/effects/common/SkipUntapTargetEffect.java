@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class SkipUntapTargetEffect extends ReplacementEffectImpl<SkipUntapTargetEffect> {
+public class SkipUntapTargetEffect extends ReplacementEffectImpl {
 
     public SkipUntapTargetEffect(Duration duration) {
         super(duration, Outcome.Detriment);

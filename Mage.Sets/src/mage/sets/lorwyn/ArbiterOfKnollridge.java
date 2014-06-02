@@ -73,7 +73,7 @@ public class ArbiterOfKnollridge extends CardImpl<ArbiterOfKnollridge> {
     }
 }
 
-class ArbiterOfKnollridgeEffect extends OneShotEffect<ArbiterOfKnollridgeEffect> {
+class ArbiterOfKnollridgeEffect extends OneShotEffect {
     ArbiterOfKnollridgeEffect() {
         super(Outcome.GainLife);
         staticText = "each player's life total becomes the highest life total among all players";

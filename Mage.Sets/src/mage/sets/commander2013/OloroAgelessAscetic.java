@@ -85,7 +85,7 @@ public class OloroAgelessAscetic extends CardImpl<OloroAgelessAscetic> {
     }
 }
 
-class OloroAgelessAsceticEffect extends OneShotEffect<OloroAgelessAsceticEffect> {
+class OloroAgelessAsceticEffect extends OneShotEffect {
 
     public OloroAgelessAsceticEffect() {
         super(Outcome.Benefit);

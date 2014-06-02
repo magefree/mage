@@ -72,7 +72,7 @@ public class CunningWish extends CardImpl<CunningWish> {
     }
 }
 
-class CunningWishEffect extends OneShotEffect<CunningWishEffect> {
+class CunningWishEffect extends OneShotEffect {
 
     private static final String choiceText = "Choose an instant card you own from outside the game, and put it into your hand";
 

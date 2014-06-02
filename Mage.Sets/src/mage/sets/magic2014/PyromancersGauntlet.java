@@ -67,7 +67,7 @@ public class PyromancersGauntlet extends CardImpl<PyromancersGauntlet> {
     }
 }
 
-class PyromancersGauntletReplacementEffect extends ReplacementEffectImpl<PyromancersGauntletReplacementEffect> {
+class PyromancersGauntletReplacementEffect extends ReplacementEffectImpl {
 
     PyromancersGauntletReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

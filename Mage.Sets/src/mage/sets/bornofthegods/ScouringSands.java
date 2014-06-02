@@ -69,7 +69,7 @@ public class ScouringSands extends CardImpl<ScouringSands> {
     }
 }
 
-class ScouringSandsDamageEffect extends OneShotEffect<ScouringSandsDamageEffect> {
+class ScouringSandsDamageEffect extends OneShotEffect {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control");
     

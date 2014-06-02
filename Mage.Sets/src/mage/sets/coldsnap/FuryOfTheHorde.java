@@ -90,7 +90,7 @@ public class FuryOfTheHorde extends CardImpl<FuryOfTheHorde> {
 }
 
 
-class FuryOfTheHordeUntapEffect extends OneShotEffect<FuryOfTheHordeUntapEffect> {
+class FuryOfTheHordeUntapEffect extends OneShotEffect {
 
     public FuryOfTheHordeUntapEffect() {
         super(Outcome.Benefit);
@@ -124,7 +124,7 @@ class FuryOfTheHordeUntapEffect extends OneShotEffect<FuryOfTheHordeUntapEffect>
 
 }
 
-class FuryOfTheHordeAddPhasesEffect extends OneShotEffect<FuryOfTheHordeAddPhasesEffect> {
+class FuryOfTheHordeAddPhasesEffect extends OneShotEffect {
 
     public FuryOfTheHordeAddPhasesEffect() {
         super(Outcome.Benefit);

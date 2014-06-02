@@ -86,7 +86,7 @@ public class IzzetStaticaster extends CardImpl<IzzetStaticaster> {
     }
 }
 
-class IzzetStaticasterDamageEffect extends OneShotEffect<IzzetStaticasterDamageEffect> {
+class IzzetStaticasterDamageEffect extends OneShotEffect {
 
     public IzzetStaticasterDamageEffect() {
         super(Outcome.Exile);

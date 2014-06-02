@@ -72,7 +72,7 @@ public class RhoxFaithmender extends CardImpl<RhoxFaithmender> {
     }
 }
 
-class RhoxFaithmenderEffect extends ReplacementEffectImpl<RhoxFaithmenderEffect> {
+class RhoxFaithmenderEffect extends ReplacementEffectImpl {
 
     public RhoxFaithmenderEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

@@ -82,7 +82,7 @@ public class PaintersServant extends CardImpl<PaintersServant> {
     }
 }
 
-class ChooseColorEffect extends OneShotEffect<ChooseColorEffect> {
+class ChooseColorEffect extends OneShotEffect {
 
     public ChooseColorEffect() {
         super(Outcome.Detriment);
@@ -115,7 +115,7 @@ class ChooseColorEffect extends OneShotEffect<ChooseColorEffect> {
 
 }
 
-class PaintersServantEffect extends ContinuousEffectImpl<PaintersServantEffect> {
+class PaintersServantEffect extends ContinuousEffectImpl {
 
     public PaintersServantEffect() {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);

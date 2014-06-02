@@ -88,7 +88,7 @@ public class KumanoMasterYamabushi extends CardImpl<KumanoMasterYamabushi> {
     }
 
 }
-class KumanaoMasterYamabushiEffect extends ReplacementEffectImpl<KumanaoMasterYamabushiEffect> {
+class KumanaoMasterYamabushiEffect extends ReplacementEffectImpl {
 
     public KumanaoMasterYamabushiEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);

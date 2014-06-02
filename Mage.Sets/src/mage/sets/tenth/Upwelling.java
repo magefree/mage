@@ -67,7 +67,7 @@ public class Upwelling extends CardImpl<Upwelling> {
     }
 }
 
-class UpwellingReplacementEffect extends ReplacementEffectImpl<UpwellingReplacementEffect> {
+class UpwellingReplacementEffect extends ReplacementEffectImpl {
 
     public UpwellingReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

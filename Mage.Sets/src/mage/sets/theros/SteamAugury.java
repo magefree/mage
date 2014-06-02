@@ -76,7 +76,7 @@ public class SteamAugury extends CardImpl<SteamAugury> {
     }
 }
 
-class SteamAuguryEffect extends OneShotEffect<SteamAuguryEffect> {
+class SteamAuguryEffect extends OneShotEffect {
 
     public SteamAuguryEffect() {
         super(Outcome.DrawCard);

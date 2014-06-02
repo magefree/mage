@@ -75,7 +75,7 @@ public class EpicExperiment extends CardImpl<EpicExperiment> {
     }
 }
 
-class EpicExperimentEffect extends OneShotEffect<EpicExperimentEffect> {
+class EpicExperimentEffect extends OneShotEffect {
 
     private static final FilterCard filterStatic = new FilterCard();
 

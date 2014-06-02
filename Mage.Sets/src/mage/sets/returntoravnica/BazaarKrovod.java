@@ -82,7 +82,7 @@ public class BazaarKrovod extends CardImpl<BazaarKrovod> {
     }
 }
 
-class BazaarKrovodEffect extends OneShotEffect<BazaarKrovodEffect> {
+class BazaarKrovodEffect extends OneShotEffect {
 
     public BazaarKrovodEffect() {
         super(Outcome.Benefit);

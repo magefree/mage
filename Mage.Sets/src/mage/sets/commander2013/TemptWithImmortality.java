@@ -71,7 +71,7 @@ public class TemptWithImmortality extends CardImpl<TemptWithImmortality> {
     }
 }
 
-class TemptWithImmortalityEffect extends OneShotEffect<TemptWithImmortalityEffect> {
+class TemptWithImmortalityEffect extends OneShotEffect {
 
     public TemptWithImmortalityEffect() {
         super(Outcome.PutCreatureInPlay);

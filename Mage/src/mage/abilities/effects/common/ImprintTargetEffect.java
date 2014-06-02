@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author noxx
  */
-public class ImprintTargetEffect extends OneShotEffect<ImprintTargetEffect> {
+public class ImprintTargetEffect extends OneShotEffect {
 
     public ImprintTargetEffect() {
         super(Outcome.Neutral);

@@ -120,7 +120,7 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
 
 }
 
-class OdricMasterTacticianEffect extends ReplacementEffectImpl<OdricMasterTacticianEffect> {
+class OdricMasterTacticianEffect extends ReplacementEffectImpl {
 
     public OdricMasterTacticianEffect() {
         super(Duration.EndOfCombat, Outcome.Benefit);

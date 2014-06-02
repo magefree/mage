@@ -94,7 +94,7 @@ public class UtopiaSprawl extends CardImpl<UtopiaSprawl> {
     }
 }
 
-class ChooseColorEffect extends OneShotEffect<ChooseColorEffect> {
+class ChooseColorEffect extends OneShotEffect {
 
     public ChooseColorEffect() {
         super(Outcome.BoostCreature);

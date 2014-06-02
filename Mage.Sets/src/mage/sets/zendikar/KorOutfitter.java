@@ -82,7 +82,7 @@ public class KorOutfitter extends CardImpl<KorOutfitter> {
     }
 }
 
-class EquipEffect extends OneShotEffect<EquipEffect> {
+class EquipEffect extends OneShotEffect {
 
     public EquipEffect() {
         super(Outcome.BoostCreature);

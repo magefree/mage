@@ -75,7 +75,7 @@ public class LaboratoryManiac extends CardImpl<LaboratoryManiac> {
     }
 }
 
-class LaboratoryManiacEffect extends ReplacementEffectImpl<LaboratoryManiacEffect> {
+class LaboratoryManiacEffect extends ReplacementEffectImpl {
 
     public LaboratoryManiacEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

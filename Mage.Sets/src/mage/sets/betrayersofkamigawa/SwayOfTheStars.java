@@ -66,7 +66,7 @@ public class SwayOfTheStars extends CardImpl<SwayOfTheStars> {
 }
 
 
-class SwayOfTheStarsEffect extends OneShotEffect<SwayOfTheStarsEffect> {
+class SwayOfTheStarsEffect extends OneShotEffect {
 
     public SwayOfTheStarsEffect() {
         super(Outcome.Neutral);

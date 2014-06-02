@@ -76,7 +76,7 @@ public class HauntedFengraf extends CardImpl<HauntedFengraf> {
     }
 }
 
-class HauntedFengrafEffect extends OneShotEffect<HauntedFengrafEffect> {
+class HauntedFengrafEffect extends OneShotEffect {
 
     public HauntedFengrafEffect() {
         super(Outcome.ReturnToHand);

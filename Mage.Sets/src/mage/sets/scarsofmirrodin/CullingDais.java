@@ -77,7 +77,7 @@ public class CullingDais extends CardImpl<CullingDais> {
 
 }
 
-class CullingDaisEffect extends OneShotEffect<CullingDaisEffect> {
+class CullingDaisEffect extends OneShotEffect {
     CullingDaisEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw a card for each charge counter on {this}";

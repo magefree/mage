@@ -96,7 +96,7 @@ public class BloodBaronOfVizkopa extends CardImpl<BloodBaronOfVizkopa> {
 
 }
 
-class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl<BloodBaronOfVizkopaEffect> {
+class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
      
     public BloodBaronOfVizkopaEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

@@ -80,7 +80,7 @@ public class CruelUltimatum extends CardImpl<CruelUltimatum> {
     }
 }
 
-class CruelUltimatumEffect extends OneShotEffect<CruelUltimatumEffect> {
+class CruelUltimatumEffect extends OneShotEffect {
 
     public CruelUltimatumEffect() {
         super(Outcome.ReturnToHand);

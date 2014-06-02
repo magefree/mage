@@ -41,7 +41,7 @@ import mage.players.Player;
  */
 
 
-public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl<PreventAllDamageToPlayersEffect> {
+public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl {
 
     public PreventAllDamageToPlayersEffect(Duration duration, boolean onlyCombat) {
         super(duration);

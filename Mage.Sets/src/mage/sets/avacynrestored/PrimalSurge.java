@@ -67,7 +67,7 @@ public class PrimalSurge extends CardImpl<PrimalSurge> {
     }
 }
 
-class PrimalSurgeEffect extends OneShotEffect<PrimalSurgeEffect> {
+class PrimalSurgeEffect extends OneShotEffect {
 
     public PrimalSurgeEffect() {
         super(Outcome.PutCardInPlay);

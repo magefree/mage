@@ -78,7 +78,7 @@ public class NaturesClaim extends CardImpl<NaturesClaim> {
     }
 }
 
-class NaturesClaimEffect extends OneShotEffect<NaturesClaimEffect> {
+class NaturesClaimEffect extends OneShotEffect {
     NaturesClaimEffect() {
         super(Outcome.GainLife);
         staticText = "Its controller gains 4 life";

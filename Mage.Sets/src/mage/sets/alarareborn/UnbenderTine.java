@@ -79,7 +79,7 @@ public class UnbenderTine extends CardImpl<UnbenderTine> {
     }
 }
 
-class UnbenderTineEffect extends OneShotEffect<UnbenderTineEffect> {
+class UnbenderTineEffect extends OneShotEffect {
 
     public UnbenderTineEffect() {
         super(Outcome.Untap);

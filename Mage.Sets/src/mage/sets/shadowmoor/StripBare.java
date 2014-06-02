@@ -70,7 +70,7 @@ public class StripBare extends CardImpl<StripBare> {
     }
 }
 
-class StripBareEffect extends OneShotEffect<StripBareEffect> {
+class StripBareEffect extends OneShotEffect {
 
     public StripBareEffect() {
         super(Outcome.GainLife);

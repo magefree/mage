@@ -66,7 +66,7 @@ public class Brainstorm extends CardImpl<Brainstorm> {
     }
 }
 
-class BrainstormEffect extends OneShotEffect<BrainstormEffect> {
+class BrainstormEffect extends OneShotEffect {
 
     public BrainstormEffect() {
         super(Outcome.DrawCard);

@@ -91,7 +91,7 @@ public class BazaarTrader extends CardImpl<BazaarTrader> {
     }
 }
 
-class BazaarTraderEffect extends ContinuousEffectImpl<BazaarTraderEffect> {
+class BazaarTraderEffect extends ContinuousEffectImpl {
 
     public BazaarTraderEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);

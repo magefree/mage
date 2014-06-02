@@ -82,7 +82,7 @@ public class Riftsweeper extends CardImpl<Riftsweeper> {
     }
 }
 
-class RiftsweeperEffect extends OneShotEffect<RiftsweeperEffect> {
+class RiftsweeperEffect extends OneShotEffect {
 
     public RiftsweeperEffect() {
         super(Outcome.Benefit);

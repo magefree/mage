@@ -73,7 +73,7 @@ public class GaddockTeeg extends CardImpl<GaddockTeeg> {
     }
 }
 
-class GaddockTeegReplacementEffect4 extends ReplacementEffectImpl<GaddockTeegReplacementEffect4> {
+class GaddockTeegReplacementEffect4 extends ReplacementEffectImpl {
 
     public GaddockTeegReplacementEffect4() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -112,7 +112,7 @@ class GaddockTeegReplacementEffect4 extends ReplacementEffectImpl<GaddockTeegRep
 
 }
 
-class GaddockTeegReplacementEffectX extends ReplacementEffectImpl<GaddockTeegReplacementEffectX> {
+class GaddockTeegReplacementEffectX extends ReplacementEffectImpl {
 
     public GaddockTeegReplacementEffectX() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

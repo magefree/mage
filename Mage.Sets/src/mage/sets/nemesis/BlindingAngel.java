@@ -75,7 +75,7 @@ public class BlindingAngel extends CardImpl<BlindingAngel> {
     }
 }
 
-class SkipNextCombatEffect extends OneShotEffect<SkipNextCombatEffect> {
+class SkipNextCombatEffect extends OneShotEffect {
 
     public SkipNextCombatEffect() {
         super(Outcome.Detriment);

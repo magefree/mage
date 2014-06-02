@@ -92,7 +92,7 @@ public class HazezonTamar extends CardImpl<HazezonTamar> {
     }
 }
 
-class HazezonTamarEntersEffect extends OneShotEffect<HazezonTamarEntersEffect> {
+class HazezonTamarEntersEffect extends OneShotEffect {
 
     public HazezonTamarEntersEffect() {
         super(Outcome.PutCreatureInPlay);

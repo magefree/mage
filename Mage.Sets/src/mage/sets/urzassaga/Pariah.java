@@ -77,7 +77,7 @@ public class Pariah extends CardImpl<Pariah> {
     }
 }
 
-class PariahEffect extends ReplacementEffectImpl<PariahEffect> {
+class PariahEffect extends ReplacementEffectImpl {
     PariahEffect() {
         super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
         staticText = "All damage that would be dealt to you is dealt to enchanted creature instead";

@@ -67,7 +67,7 @@ public class Whetstone extends CardImpl<Whetstone> {
     }
 }
 
-class WhetstoneEffect extends OneShotEffect<WhetstoneEffect> {
+class WhetstoneEffect extends OneShotEffect {
 
     WhetstoneEffect() {
         super(Outcome.Detriment);

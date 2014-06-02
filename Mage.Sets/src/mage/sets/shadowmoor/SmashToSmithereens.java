@@ -69,7 +69,7 @@ public class SmashToSmithereens extends CardImpl<SmashToSmithereens> {
     }
 }
 
-class SmashToSmithereensEffect extends OneShotEffect<SmashToSmithereensEffect> {
+class SmashToSmithereensEffect extends OneShotEffect {
 
     SmashToSmithereensEffect() {
         super(Outcome.Damage);

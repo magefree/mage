@@ -99,7 +99,7 @@ public class MoltenPrimordial extends CardImpl<MoltenPrimordial> {
     }
 }
 
-class MoltenPrimordialEffect extends OneShotEffect<MoltenPrimordialEffect> {
+class MoltenPrimordialEffect extends OneShotEffect {
 
     public MoltenPrimordialEffect() {
         super(Outcome.GainControl);

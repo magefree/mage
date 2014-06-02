@@ -80,7 +80,7 @@ public class DawnglareInvoker extends CardImpl<DawnglareInvoker> {
     }
 }
 
-class DawnglareInvokerEffect extends OneShotEffect<DawnglareInvokerEffect> {
+class DawnglareInvokerEffect extends OneShotEffect {
 
     public DawnglareInvokerEffect() {
         super(Outcome.Tap);

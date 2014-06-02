@@ -68,7 +68,7 @@ public class PerilousResearch extends CardImpl<PerilousResearch> {
     }
 }
 
-class PerilousResearchEffect extends OneShotEffect<PerilousResearchEffect> {
+class PerilousResearchEffect extends OneShotEffect {
 
     public PerilousResearchEffect() {
         super(Outcome.Sacrifice);

@@ -83,7 +83,7 @@ public class MeddlingMage extends CardImpl<MeddlingMage> {
     }
 }
 
-class MeddlingMageChooseCardEffect extends OneShotEffect<MeddlingMageChooseCardEffect> {
+class MeddlingMageChooseCardEffect extends OneShotEffect {
 
     public MeddlingMageChooseCardEffect() {
         super(Outcome.Detriment);
@@ -120,7 +120,7 @@ class MeddlingMageChooseCardEffect extends OneShotEffect<MeddlingMageChooseCardE
 
 }
 
-class MeddlingMageReplacementEffect extends ReplacementEffectImpl<MeddlingMageReplacementEffect> {
+class MeddlingMageReplacementEffect extends ReplacementEffectImpl {
 
     public MeddlingMageReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

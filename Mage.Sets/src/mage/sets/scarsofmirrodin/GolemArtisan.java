@@ -98,7 +98,7 @@ public class GolemArtisan extends CardImpl<GolemArtisan> {
     }
 }
 
-class GolemArtisanEffect extends OneShotEffect<GolemArtisanEffect> {
+class GolemArtisanEffect extends OneShotEffect {
     GolemArtisanEffect() {
         super(Outcome.AddAbility);
         staticText = "Target artifact creature gains your choice of flying, trample, or haste until end of turn";

@@ -76,7 +76,7 @@ public class ChaliceOfTheVoid extends CardImpl<ChaliceOfTheVoid> {
 }
 
 
-class ChaliceOfTheVoidEffect extends OneShotEffect<ChaliceOfTheVoidEffect> {
+class ChaliceOfTheVoidEffect extends OneShotEffect {
     public ChaliceOfTheVoidEffect() {
         super(Outcome.Benefit);
     }
@@ -145,7 +145,7 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 
-class CounterEffect extends OneShotEffect<CounterEffect> {
+class CounterEffect extends OneShotEffect {
 
     public CounterEffect() {
         super(Outcome.Detriment);

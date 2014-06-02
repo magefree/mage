@@ -41,7 +41,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class ConditionalAsThoughEffect extends AsThoughEffectImpl<ConditionalAsThoughEffect>  {
+public class ConditionalAsThoughEffect extends AsThoughEffectImpl  {
 
     protected AsThoughEffect effect;
     protected AsThoughEffect otherwiseEffect;

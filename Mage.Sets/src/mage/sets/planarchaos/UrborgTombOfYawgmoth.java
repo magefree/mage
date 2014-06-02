@@ -68,7 +68,7 @@ public class UrborgTombOfYawgmoth extends CardImpl<UrborgTombOfYawgmoth> {
 }
 
 
-class AddCardSubtypeAllEffect extends ContinuousEffectImpl<AddCardSubtypeAllEffect> {
+class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     private static final String addedSubtype = "Swamp";

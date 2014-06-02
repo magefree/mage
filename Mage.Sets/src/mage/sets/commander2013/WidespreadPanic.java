@@ -102,7 +102,7 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class WidespreadPanicEffect extends OneShotEffect<WidespreadPanicEffect> {
+class WidespreadPanicEffect extends OneShotEffect {
 
     public WidespreadPanicEffect() {
         super(Outcome.Detriment);

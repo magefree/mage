@@ -76,7 +76,7 @@ public class NeverendingTorment extends CardImpl<NeverendingTorment> {
     }
 }
 
-class NeverendingTormentEffect extends OneShotEffect<NeverendingTormentEffect> {
+class NeverendingTormentEffect extends OneShotEffect {
 
     public NeverendingTormentEffect() {
         super(Outcome.Benefit);

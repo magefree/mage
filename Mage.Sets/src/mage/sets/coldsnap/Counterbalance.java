@@ -71,7 +71,7 @@ public class Counterbalance extends CardImpl<Counterbalance> {
     }
 }
 
-class CounterbalanceEffect extends OneShotEffect<CounterbalanceEffect> {
+class CounterbalanceEffect extends OneShotEffect {
 
     public CounterbalanceEffect() {
         super(Outcome.Neutral);

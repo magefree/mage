@@ -104,7 +104,7 @@ class AvatarToken extends Token {
 
 }
 
-class AvatarTokenEffect extends ContinuousEffectImpl<AvatarTokenEffect> {
+class AvatarTokenEffect extends ContinuousEffectImpl {
 
     public AvatarTokenEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);

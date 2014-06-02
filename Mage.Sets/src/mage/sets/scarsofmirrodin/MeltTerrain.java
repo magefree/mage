@@ -69,7 +69,7 @@ public class MeltTerrain extends CardImpl<MeltTerrain> {
 
 }
 
-class MeltTerrainEffect extends OneShotEffect<MeltTerrainEffect> {
+class MeltTerrainEffect extends OneShotEffect {
     MeltTerrainEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to that land's controller";

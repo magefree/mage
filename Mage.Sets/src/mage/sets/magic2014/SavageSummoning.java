@@ -88,7 +88,7 @@ public class SavageSummoning extends CardImpl<SavageSummoning> {
     }
 }
 
-class SavageSummoningAsThoughEffect extends AsThoughEffectImpl<SavageSummoningAsThoughEffect> {
+class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
     private SavageSummoningWatcher watcher;
     private int zoneChangeCounter;
 
@@ -219,7 +219,7 @@ class SavageSummoningWatcher extends Watcher {
 
 }
 
-class SavageSummoningCantCounterEffect extends ReplacementEffectImpl<SavageSummoningCantCounterEffect> {
+class SavageSummoningCantCounterEffect extends ReplacementEffectImpl {
     private SavageSummoningWatcher watcher;
     private int zoneChangeCounter;
 
@@ -272,7 +272,7 @@ class SavageSummoningCantCounterEffect extends ReplacementEffectImpl<SavageSummo
 
 }
 
-class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl<SavageSummoningEntersBattlefieldEffect> {
+class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
     private SavageSummoningWatcher watcher;
     private int zoneChangeCounter;
 

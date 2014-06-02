@@ -79,7 +79,7 @@ public class AvenWindreader extends CardImpl<AvenWindreader> {
     }
 }
 
-class RevealTopCardTargetPlayerEffect extends OneShotEffect<RevealTopCardTargetPlayerEffect> {
+class RevealTopCardTargetPlayerEffect extends OneShotEffect {
     
     public RevealTopCardTargetPlayerEffect() {
         super(Outcome.Benefit);

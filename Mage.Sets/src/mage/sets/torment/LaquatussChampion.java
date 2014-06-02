@@ -82,7 +82,7 @@ public class LaquatussChampion extends CardImpl<LaquatussChampion> {
     }
 }
 
-class LaquatussChampionEntersEffect extends OneShotEffect<LaquatussChampionEntersEffect> {
+class LaquatussChampionEntersEffect extends OneShotEffect {
 
     public LaquatussChampionEntersEffect() {
         super(Outcome.LoseLife);
@@ -110,7 +110,7 @@ class LaquatussChampionEntersEffect extends OneShotEffect<LaquatussChampionEnter
     }
 }
 
-class LaquatussChampionLeavesEffect extends OneShotEffect<LaquatussChampionLeavesEffect> {
+class LaquatussChampionLeavesEffect extends OneShotEffect {
 
     public LaquatussChampionLeavesEffect() {
         super(Outcome.Benefit);

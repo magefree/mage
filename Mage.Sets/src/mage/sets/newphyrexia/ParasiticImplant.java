@@ -79,7 +79,7 @@ public class ParasiticImplant extends CardImpl<ParasiticImplant> {
     }
 }
 
-class ParasiticImplantEffect extends OneShotEffect<ParasiticImplantEffect> {
+class ParasiticImplantEffect extends OneShotEffect {
     ParasiticImplantEffect() {
         super(Outcome.Sacrifice);
         staticText = "enchanted creature's controller sacrifices it";

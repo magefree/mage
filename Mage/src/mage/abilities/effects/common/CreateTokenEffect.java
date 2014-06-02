@@ -42,7 +42,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
+public class CreateTokenEffect extends OneShotEffect {
 
     private Token token;
     private DynamicValue amount;

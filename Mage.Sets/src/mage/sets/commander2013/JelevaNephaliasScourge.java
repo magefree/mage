@@ -91,7 +91,7 @@ public class JelevaNephaliasScourge extends CardImpl<JelevaNephaliasScourge> {
     }
 }
 
-class JelevaNephaliasScourgeEffect extends OneShotEffect<JelevaNephaliasScourgeEffect> {
+class JelevaNephaliasScourgeEffect extends OneShotEffect {
 
     public JelevaNephaliasScourgeEffect() {
         super(Outcome.Benefit);
@@ -136,7 +136,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect<JelevaNephaliasScourgeE
     }
 }
 
-class JelevaNephaliasCastEffect extends OneShotEffect<JelevaNephaliasCastEffect> {
+class JelevaNephaliasCastEffect extends OneShotEffect {
 
     public JelevaNephaliasCastEffect() {
         super(Outcome.PlayForFree);

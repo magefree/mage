@@ -74,7 +74,7 @@ public class BrinkOfMadness extends CardImpl<BrinkOfMadness> {
         return new BrinkOfMadness(this);
     }
     
-    class BrinkOfMadnessEffect extends OneShotEffect<BrinkOfMadnessEffect> {
+    class BrinkOfMadnessEffect extends OneShotEffect {
 
     public BrinkOfMadnessEffect() {
         super(Outcome.Benefit);

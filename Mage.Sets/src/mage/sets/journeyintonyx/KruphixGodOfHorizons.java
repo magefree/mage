@@ -95,7 +95,7 @@ public class KruphixGodOfHorizons extends CardImpl<KruphixGodOfHorizons> {
     }
 }
 
-class KruphixGodOfHorizonsEffect extends ReplacementEffectImpl<KruphixGodOfHorizonsEffect> {
+class KruphixGodOfHorizonsEffect extends ReplacementEffectImpl {
 
     private static final List<ManaType> manaTypes =  new ArrayList<>();
     static {

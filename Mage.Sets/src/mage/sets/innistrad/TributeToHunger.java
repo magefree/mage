@@ -71,7 +71,7 @@ public class TributeToHunger extends CardImpl<TributeToHunger> {
     }
 }
 
-class TributeToHungerEffect extends OneShotEffect<TributeToHungerEffect> {
+class TributeToHungerEffect extends OneShotEffect {
 
     TributeToHungerEffect() {
         super(Outcome.Sacrifice);

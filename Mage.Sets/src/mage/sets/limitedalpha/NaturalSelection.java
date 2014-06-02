@@ -73,7 +73,7 @@ public class NaturalSelection extends CardImpl<NaturalSelection> {
     }
 }
 
-class  NaturalSelectionEffect extends OneShotEffect< NaturalSelectionEffect> {
+class  NaturalSelectionEffect extends OneShotEffect {
 
     public  NaturalSelectionEffect() {
         super(Outcome.DrawCard);

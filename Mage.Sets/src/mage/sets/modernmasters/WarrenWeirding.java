@@ -85,7 +85,7 @@ public class WarrenWeirding extends CardImpl<WarrenWeirding> {
     }
 }
 
-class WarrenWeirdingEffect extends OneShotEffect<WarrenWeirdingEffect> {
+class WarrenWeirdingEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filterGoblin = new FilterCreaturePermanent();
     static {

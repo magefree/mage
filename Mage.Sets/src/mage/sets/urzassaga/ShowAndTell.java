@@ -69,7 +69,7 @@ public class ShowAndTell extends CardImpl<ShowAndTell> {
     }
 }
 
-class ShowAndTellEffect extends OneShotEffect<ShowAndTellEffect> {
+class ShowAndTellEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("artifact, creature, enchantment, or land card");
 

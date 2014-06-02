@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffect> {
+public class CounterUnlessPaysEffect extends OneShotEffect {
 
     protected Cost cost;
     protected DynamicValue genericMana;

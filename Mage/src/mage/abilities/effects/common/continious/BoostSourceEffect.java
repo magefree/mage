@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> implements SourceEffect {
+public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEffect {
     private DynamicValue power;
     private DynamicValue toughness;
     private boolean lockedIn;

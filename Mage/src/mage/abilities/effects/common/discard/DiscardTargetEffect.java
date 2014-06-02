@@ -42,7 +42,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
+public class DiscardTargetEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     protected boolean randomDiscard;

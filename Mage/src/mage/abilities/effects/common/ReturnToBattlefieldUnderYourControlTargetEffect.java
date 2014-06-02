@@ -40,7 +40,7 @@ import mage.players.Player;
  *
  * @author noxx
  */
-public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffect<ReturnToBattlefieldUnderYourControlTargetEffect> {
+public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffect {
 
     public ReturnToBattlefieldUnderYourControlTargetEffect() {
         super(Outcome.Benefit);

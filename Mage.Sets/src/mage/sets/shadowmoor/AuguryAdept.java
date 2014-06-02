@@ -75,7 +75,7 @@ public class AuguryAdept extends CardImpl<AuguryAdept> {
     }
 }
 
-class AuguryAdeptEffect extends OneShotEffect<AuguryAdeptEffect> {
+class AuguryAdeptEffect extends OneShotEffect {
 
     public AuguryAdeptEffect() {
         super(Outcome.GainLife);

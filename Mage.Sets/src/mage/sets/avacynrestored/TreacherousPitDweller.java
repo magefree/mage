@@ -91,7 +91,7 @@ class TreacherousPitDwellerTriggeredAbility extends ZoneChangeTriggeredAbility<T
     }
 }
 
-class TreacherousPitDwellerEffect extends ContinuousEffectImpl<TreacherousPitDwellerEffect> {
+class TreacherousPitDwellerEffect extends ContinuousEffectImpl {
 
     public TreacherousPitDwellerEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);

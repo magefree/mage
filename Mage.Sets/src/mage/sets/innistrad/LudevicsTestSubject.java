@@ -83,7 +83,7 @@ public class LudevicsTestSubject extends CardImpl<LudevicsTestSubject> {
     }
 }
 
-class LudevicsTestSubjectEffect extends OneShotEffect<LudevicsTestSubjectEffect> {
+class LudevicsTestSubjectEffect extends OneShotEffect {
     LudevicsTestSubjectEffect() {
         super(Outcome.Benefit);
         staticText = "Then if there are five or more hatchling counters on it, remove all of them and transform it";

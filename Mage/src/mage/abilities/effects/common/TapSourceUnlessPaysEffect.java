@@ -40,7 +40,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TapSourceUnlessPaysEffect extends OneShotEffect<TapSourceUnlessPaysEffect> {
+public class TapSourceUnlessPaysEffect extends OneShotEffect {
 
     protected Cost cost;
 

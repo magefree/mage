@@ -85,7 +85,7 @@ public class DelverOfSecrets extends CardImpl<DelverOfSecrets> {
     }
 }
 
-class DelverOfSecretsEffect extends OneShotEffect<DelverOfSecretsEffect> {
+class DelverOfSecretsEffect extends OneShotEffect {
     
     private static final FilterCard filter = new FilterInstantOrSorceryCard();
     

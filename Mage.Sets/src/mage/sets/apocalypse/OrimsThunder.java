@@ -101,7 +101,7 @@ public class OrimsThunder extends CardImpl<OrimsThunder> {
     }
 }
 
-class OrimsThunderEffect2 extends OneShotEffect<OrimsThunderEffect2> {
+class OrimsThunderEffect2 extends OneShotEffect {
 
     OrimsThunderEffect2() {
         super(Outcome.Damage);
@@ -133,7 +133,7 @@ class OrimsThunderEffect2 extends OneShotEffect<OrimsThunderEffect2> {
     }
 }
 
-class OrimsThunderEffect extends OneShotEffect<OrimsThunderEffect> {
+class OrimsThunderEffect extends OneShotEffect {
 
     OrimsThunderEffect() {
         super(Outcome.DestroyPermanent);

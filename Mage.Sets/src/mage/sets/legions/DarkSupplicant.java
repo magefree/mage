@@ -90,7 +90,7 @@ public class DarkSupplicant extends CardImpl<DarkSupplicant> {
     }
 }
 
-class DarkSupplicantEffect extends OneShotEffect<DarkSupplicantEffect> {
+class DarkSupplicantEffect extends OneShotEffect {
 
     public DarkSupplicantEffect() {
         super(Outcome.Benefit);

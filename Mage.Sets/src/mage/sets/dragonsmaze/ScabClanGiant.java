@@ -85,7 +85,7 @@ public class ScabClanGiant extends CardImpl<ScabClanGiant> {
     }
 }
 
-class ScabClanGiantEffect extends OneShotEffect<ScabClanGiantEffect> {
+class ScabClanGiantEffect extends OneShotEffect {
 
     public ScabClanGiantEffect() {
         super(Outcome.Damage);

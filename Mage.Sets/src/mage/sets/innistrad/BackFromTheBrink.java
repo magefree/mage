@@ -74,7 +74,7 @@ public class BackFromTheBrink extends CardImpl<BackFromTheBrink> {
     }
 }
 
-class BackFromTheBrinkEffect extends OneShotEffect<BackFromTheBrinkEffect> {
+class BackFromTheBrinkEffect extends OneShotEffect {
 
     public BackFromTheBrinkEffect () {
         super(Outcome.PutCreatureInPlay);

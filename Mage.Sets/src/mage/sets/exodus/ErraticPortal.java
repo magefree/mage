@@ -73,7 +73,7 @@ public class ErraticPortal extends CardImpl<ErraticPortal> {
     }
 }
 
-class ErraticPortalEffect extends OneShotEffect<ErraticPortalEffect> {
+class ErraticPortalEffect extends OneShotEffect {
 
     protected Cost cost;
 

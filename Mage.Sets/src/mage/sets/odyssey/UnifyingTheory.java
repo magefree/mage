@@ -75,7 +75,7 @@ public class UnifyingTheory extends CardImpl<UnifyingTheory> {
     }
 }
 
-class UnifyingTheoryEffect extends OneShotEffect<UnifyingTheoryEffect> {
+class UnifyingTheoryEffect extends OneShotEffect {
 
     public UnifyingTheoryEffect() {
         super(Outcome.Detriment);

@@ -44,7 +44,7 @@ import java.util.Set;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class CastCardFromOutsideTheGameEffect extends OneShotEffect<CastCardFromOutsideTheGameEffect> {
+public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
 
     private static final String choiceText = "Cast a card from outside the game?";
 

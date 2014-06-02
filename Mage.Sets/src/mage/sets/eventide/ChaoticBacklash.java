@@ -70,7 +70,7 @@ public class ChaoticBacklash extends CardImpl<ChaoticBacklash> {
     }
 }
 
-class ChaoticBacklashEffect extends OneShotEffect<ChaoticBacklashEffect> {
+class ChaoticBacklashEffect extends OneShotEffect {
     
     private static final FilterPermanent filter = new FilterPermanent("white and/or blue permanents he or she controls");
     

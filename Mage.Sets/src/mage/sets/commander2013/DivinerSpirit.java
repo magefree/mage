@@ -68,7 +68,7 @@ public class DivinerSpirit extends CardImpl<DivinerSpirit> {
     }
 }
 
-class DivinerSpiritEffect extends OneShotEffect<DivinerSpiritEffect> {
+class DivinerSpiritEffect extends OneShotEffect {
 
     public DivinerSpiritEffect() {
         super(Outcome.DrawCard);

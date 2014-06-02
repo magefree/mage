@@ -105,7 +105,7 @@ class HomicidalBruteWatcher extends Watcher {
     }
 }
 
-class CivilizedScholarEffect extends OneShotEffect<CivilizedScholarEffect> {
+class CivilizedScholarEffect extends OneShotEffect {
 
     public CivilizedScholarEffect() {
         super(Outcome.DrawCard);

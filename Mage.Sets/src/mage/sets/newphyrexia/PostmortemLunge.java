@@ -90,7 +90,7 @@ public class PostmortemLunge extends CardImpl<PostmortemLunge> {
     }
 }
 
-class PostmortemLungeEffect extends OneShotEffect<PostmortemLungeEffect> {
+class PostmortemLungeEffect extends OneShotEffect {
 
     public PostmortemLungeEffect() {
         super(Outcome.PutCreatureInPlay);

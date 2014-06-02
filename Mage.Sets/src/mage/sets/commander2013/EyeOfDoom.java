@@ -87,7 +87,7 @@ public class EyeOfDoom extends CardImpl<EyeOfDoom> {
     }
 }
 
-class EyeOfDoomEffect extends OneShotEffect<EyeOfDoomEffect> {
+class EyeOfDoomEffect extends OneShotEffect {
 
     public EyeOfDoomEffect() {
         super(Outcome.Detriment);

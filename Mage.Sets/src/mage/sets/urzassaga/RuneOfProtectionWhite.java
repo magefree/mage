@@ -70,7 +70,7 @@ public class RuneOfProtectionWhite extends CardImpl<RuneOfProtectionWhite> {
     }
 }
 
-class RuneOfProtectionWhiteEffect extends PreventionEffectImpl<RuneOfProtectionWhiteEffect> {
+class RuneOfProtectionWhiteEffect extends PreventionEffectImpl {
 
     private static final FilterObject filter = new FilterObject("white source");
 

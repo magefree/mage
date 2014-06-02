@@ -72,7 +72,7 @@ public class RealmsUncharted extends CardImpl<RealmsUncharted> {
     }
 }
 
-class RealmsUnchartedEffect extends OneShotEffect<RealmsUnchartedEffect> {
+class RealmsUnchartedEffect extends OneShotEffect {
 
     public RealmsUnchartedEffect() {
         super(Outcome.DrawCard);

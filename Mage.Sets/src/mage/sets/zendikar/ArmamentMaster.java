@@ -82,7 +82,7 @@ public class ArmamentMaster extends CardImpl<ArmamentMaster> {
     }
 }
 
-class ArmamentMasterEffect extends ContinuousEffectImpl<ArmamentMasterEffect> {
+class ArmamentMasterEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Kor creatures you control");
 

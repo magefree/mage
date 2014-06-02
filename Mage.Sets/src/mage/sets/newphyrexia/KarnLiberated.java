@@ -95,7 +95,7 @@ public class KarnLiberated extends CardImpl<KarnLiberated> {
     }
 }
 
-class KarnLiberatedEffect extends OneShotEffect<KarnLiberatedEffect> {
+class KarnLiberatedEffect extends OneShotEffect {
 
     private UUID exileId;
 
@@ -184,7 +184,7 @@ class KarnLiberatedDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 }
 
-class KarnLiberatedDelayedEffect extends OneShotEffect<KarnLiberatedDelayedEffect> {
+class KarnLiberatedDelayedEffect extends OneShotEffect {
 
     private final UUID exileId;
 

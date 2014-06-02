@@ -80,7 +80,7 @@ public class TerashisGrasp extends CardImpl<TerashisGrasp> {
         return new TerashisGrasp(this);
     }
 
-    private class TerashisGraspEffect extends OneShotEffect<TerashisGraspEffect> {
+    private class TerashisGraspEffect extends OneShotEffect {
 
         public TerashisGraspEffect() {
             super(Outcome.DestroyPermanent);

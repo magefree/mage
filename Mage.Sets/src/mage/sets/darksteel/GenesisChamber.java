@@ -105,7 +105,7 @@ class GenesisChamberTriggeredAbility extends EntersBattlefieldAllTriggeredAbilit
 }
 
 
-class GenesisChamberEffect extends OneShotEffect<GenesisChamberEffect> {
+class GenesisChamberEffect extends OneShotEffect {
 
     public GenesisChamberEffect() {
         super(Outcome.Benefit);

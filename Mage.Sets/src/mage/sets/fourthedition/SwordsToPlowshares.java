@@ -71,7 +71,7 @@ public class SwordsToPlowshares extends CardImpl<SwordsToPlowshares> {
     }
 }
 
-class SwordsToPlowsharesEffect extends OneShotEffect<SwordsToPlowsharesEffect> {
+class SwordsToPlowsharesEffect extends OneShotEffect {
 
     public SwordsToPlowsharesEffect() {
         super(Outcome.GainLife);

@@ -86,7 +86,7 @@ public class ThrullParasite extends CardImpl<ThrullParasite> {
     }
 }
 
-class RemoveCounterTargetEffect extends OneShotEffect<RemoveCounterTargetEffect> {
+class RemoveCounterTargetEffect extends OneShotEffect {
 
     private CounterType counterTypeToRemove;
 

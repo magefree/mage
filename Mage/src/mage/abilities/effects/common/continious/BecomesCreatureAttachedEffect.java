@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
  *
  * @author jeff
  */
-public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl<BecomesCreatureAttachedEffect> {
+public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
     protected Token token;
     protected String type;

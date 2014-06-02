@@ -82,7 +82,7 @@ public class DiscipleOfBolas extends CardImpl<DiscipleOfBolas> {
     }
 }
 
-class DiscipleOfBolasEffect extends OneShotEffect<DiscipleOfBolasEffect> {
+class DiscipleOfBolasEffect extends OneShotEffect {
 
     public DiscipleOfBolasEffect() {
         super(Outcome.Benefit);

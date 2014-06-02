@@ -117,7 +117,7 @@ class DruidsCallTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class  DruidsCallEffect extends OneShotEffect<DruidsCallEffect> {
+class  DruidsCallEffect extends OneShotEffect {
 
     public DruidsCallEffect() {
         super(Outcome.Damage);

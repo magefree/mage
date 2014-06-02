@@ -79,7 +79,7 @@ public class DroolingGroodion extends CardImpl<DroolingGroodion> {
     }
 }
 
-class DroolingGroodionEffect extends ContinuousEffectImpl<DroolingGroodionEffect> {
+class DroolingGroodionEffect extends ContinuousEffectImpl {
 
     public DroolingGroodionEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

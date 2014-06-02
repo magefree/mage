@@ -40,7 +40,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
+public class GainLifeEffect extends OneShotEffect {
 
     private DynamicValue life;
 

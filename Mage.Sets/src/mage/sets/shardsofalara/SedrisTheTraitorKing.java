@@ -73,7 +73,7 @@ public class SedrisTheTraitorKing extends CardImpl<SedrisTheTraitorKing> {
     }
 }
 
-class SedrisTheTraitorKingEffect extends ContinuousEffectImpl<SedrisTheTraitorKingEffect> {
+class SedrisTheTraitorKingEffect extends ContinuousEffectImpl {
     SedrisTheTraitorKingEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "Each creature card in your graveyard has unearth {2}{B}";

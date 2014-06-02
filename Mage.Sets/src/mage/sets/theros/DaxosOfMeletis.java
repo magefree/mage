@@ -90,7 +90,7 @@ public class DaxosOfMeletis extends CardImpl<DaxosOfMeletis> {
     }
 }
 
-class DaxosOfMeletisEffect extends OneShotEffect<DaxosOfMeletisEffect> {
+class DaxosOfMeletisEffect extends OneShotEffect {
 
     public DaxosOfMeletisEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -135,7 +135,7 @@ class DaxosOfMeletisEffect extends OneShotEffect<DaxosOfMeletisEffect> {
     }
 }
 
-class DaxosOfMeletisCastFromExileEffect extends AsThoughEffectImpl<DaxosOfMeletisCastFromExileEffect> {
+class DaxosOfMeletisCastFromExileEffect extends AsThoughEffectImpl {
 
     private UUID cardId;
     private UUID exileId;
@@ -177,7 +177,7 @@ class DaxosOfMeletisCastFromExileEffect extends AsThoughEffectImpl<DaxosOfMeleti
     }
 }
 
-class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl<DaxosOfMeletisSpendAnyManaEffect> {
+class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl {
 
     private final UUID cardId;
 

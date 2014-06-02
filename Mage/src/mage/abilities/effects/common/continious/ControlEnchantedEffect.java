@@ -12,7 +12,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class ControlEnchantedEffect extends ContinuousEffectImpl<ControlEnchantedEffect> {
+public class ControlEnchantedEffect extends ContinuousEffectImpl {
 
     public ControlEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Outcome.GainControl);

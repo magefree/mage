@@ -39,7 +39,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AttachEffect extends OneShotEffect<AttachEffect> {
+public class AttachEffect extends OneShotEffect {
 
     public AttachEffect(Outcome outcome) {
         super(outcome);

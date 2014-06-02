@@ -118,7 +118,7 @@ class CreatureControlledAttacksAloneTriggeredAbility extends TriggeredAbilityImp
     }
 }
 
-class SovereignsOfLostAlaraEffect extends OneShotEffect<SovereignsOfLostAlaraEffect> {
+class SovereignsOfLostAlaraEffect extends OneShotEffect {
 
     public SovereignsOfLostAlaraEffect() {
         super(Outcome.BoostCreature);

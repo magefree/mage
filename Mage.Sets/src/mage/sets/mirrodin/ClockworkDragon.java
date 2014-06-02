@@ -78,7 +78,7 @@ public class ClockworkDragon extends CardImpl<ClockworkDragon> {
     }
 }
 
-class ClockworkDragonEffect extends OneShotEffect<ClockworkDragonEffect> {
+class ClockworkDragonEffect extends OneShotEffect {
     ClockworkDragonEffect() {
         super(Outcome.UnboostCreature);
         staticText = "remove a +1/+1 counter from {this} at end of combat";

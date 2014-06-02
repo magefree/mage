@@ -73,7 +73,7 @@ public class BlastOfGenius extends CardImpl<BlastOfGenius> {
 
 }
 
-class BlastOfGeniusEffect extends OneShotEffect<BlastOfGeniusEffect> {
+class BlastOfGeniusEffect extends OneShotEffect {
 
     public BlastOfGeniusEffect() {
         super(Outcome.Benefit);

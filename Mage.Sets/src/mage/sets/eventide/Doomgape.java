@@ -80,7 +80,7 @@ public class Doomgape extends CardImpl<Doomgape> {
     }
 }
 
-class DoomgapeEffect extends OneShotEffect<DoomgapeEffect> {
+class DoomgapeEffect extends OneShotEffect {
 
     public DoomgapeEffect() {
         super(Outcome.GainLife);

@@ -74,7 +74,7 @@ public class BalshanBeguiler extends CardImpl<BalshanBeguiler> {
     }
 }
 
-class BalshanBeguilerEffect extends OneShotEffect<BalshanBeguilerEffect> {
+class BalshanBeguilerEffect extends OneShotEffect {
     
     public BalshanBeguilerEffect() {
         super(Outcome.Benefit);

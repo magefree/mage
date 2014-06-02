@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class CantGainLifeTargetEffect extends ContinuousEffectImpl<CantGainLifeTargetEffect> {
+public class CantGainLifeTargetEffect extends ContinuousEffectImpl {
 
     public CantGainLifeTargetEffect(Duration duration) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);

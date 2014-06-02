@@ -80,7 +80,7 @@ public class Mindshrieker extends CardImpl<Mindshrieker> {
     }
 }
 
-class MindshriekerEffect extends OneShotEffect<MindshriekerEffect> {
+class MindshriekerEffect extends OneShotEffect {
 
     public MindshriekerEffect() {
         super(Outcome.BoostCreature);

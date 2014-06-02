@@ -70,7 +70,7 @@ public class DivineDeflection extends CardImpl<DivineDeflection> {
     }
 }
 
-class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl<DivineDeflectionPreventDamageTargetEffect> {
+class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
 
     private int amount = -1;
 

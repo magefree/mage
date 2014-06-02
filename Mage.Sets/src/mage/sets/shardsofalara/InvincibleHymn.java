@@ -63,7 +63,7 @@ public class InvincibleHymn extends CardImpl<InvincibleHymn> {
     }
 }
 
-class InvincibleHymnEffect extends OneShotEffect<InvincibleHymnEffect> {
+class InvincibleHymnEffect extends OneShotEffect {
 
     public InvincibleHymnEffect() {
         super(Outcome.Neutral);

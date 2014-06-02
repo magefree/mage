@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PreventAllDamageToAllEffect extends PreventionEffectImpl<PreventAllDamageToAllEffect> {
+public class PreventAllDamageToAllEffect extends PreventionEffectImpl {
 
     protected FilterInPlay filter;
     

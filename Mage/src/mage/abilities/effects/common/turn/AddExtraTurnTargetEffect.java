@@ -36,7 +36,7 @@ import mage.game.turn.TurnMod;
 /**
  * @author noxx
  */
-public class AddExtraTurnTargetEffect extends OneShotEffect<AddExtraTurnTargetEffect> {
+public class AddExtraTurnTargetEffect extends OneShotEffect {
 
     public AddExtraTurnTargetEffect() {
         super(Outcome.ExtraTurn);

@@ -83,7 +83,7 @@ public class WitchHunt extends CardImpl<WitchHunt> {
     }
 }
 
-class WitchHuntEffect extends ContinuousEffectImpl<WitchHuntEffect> {
+class WitchHuntEffect extends ContinuousEffectImpl {
 
     public WitchHuntEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);

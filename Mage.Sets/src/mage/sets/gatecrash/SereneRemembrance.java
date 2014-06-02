@@ -71,7 +71,7 @@ public class SereneRemembrance extends CardImpl<SereneRemembrance> {
     }
 }
 
-class SereneRemembranceEffect extends OneShotEffect<SereneRemembranceEffect> {
+class SereneRemembranceEffect extends OneShotEffect {
     
     public SereneRemembranceEffect() {
         super(Outcome.Benefit);

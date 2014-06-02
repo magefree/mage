@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class SetPowerToughnessAllEffect extends ContinuousEffectImpl<SetPowerToughnessAllEffect> {
+public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
 
     private FilterPermanent filter;
     private DynamicValue power;

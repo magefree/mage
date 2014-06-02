@@ -70,7 +70,7 @@ public class GrayMerchantOfAsphodel extends CardImpl<GrayMerchantOfAsphodel> {
     }
 }
 
-class GrayMerchantOfAsphodelEffect extends OneShotEffect<GrayMerchantOfAsphodelEffect> {
+class GrayMerchantOfAsphodelEffect extends OneShotEffect {
 
     public GrayMerchantOfAsphodelEffect() {
         super(Outcome.Benefit);

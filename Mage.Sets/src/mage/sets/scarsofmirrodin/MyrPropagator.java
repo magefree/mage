@@ -76,7 +76,7 @@ public class MyrPropagator extends CardImpl<MyrPropagator> {
     }
 }
 
-class MyrPropagatorCreateTokenEffect extends OneShotEffect<MyrPropagatorCreateTokenEffect> {
+class MyrPropagatorCreateTokenEffect extends OneShotEffect {
 
     public MyrPropagatorCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);

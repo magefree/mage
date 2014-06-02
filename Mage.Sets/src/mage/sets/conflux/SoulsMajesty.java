@@ -63,7 +63,7 @@ public class SoulsMajesty extends CardImpl<SoulsMajesty> {
         return new SoulsMajesty(this);
     }
 
-    private class SoulsMajestyEffect extends OneShotEffect<SoulsMajestyEffect> {
+    private class SoulsMajestyEffect extends OneShotEffect {
 
         public SoulsMajestyEffect() {
             super(Outcome.DrawCard);

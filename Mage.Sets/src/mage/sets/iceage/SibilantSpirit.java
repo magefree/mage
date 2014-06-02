@@ -71,7 +71,7 @@ public class SibilantSpirit extends CardImpl<SibilantSpirit> {
     }
 }
 
-class SibilantSpiritEffect extends OneShotEffect<SibilantSpiritEffect> {
+class SibilantSpiritEffect extends OneShotEffect {
 
     public SibilantSpiritEffect() {
         super(Outcome.DrawCard);

@@ -81,7 +81,7 @@ public class AuraFinesse extends CardImpl<AuraFinesse> {
     }
 }
 
-class AuraFinesseEffect extends OneShotEffect<AuraFinesseEffect> {
+class AuraFinesseEffect extends OneShotEffect {
 
     public AuraFinesseEffect() {
         super(Outcome.BoostCreature);

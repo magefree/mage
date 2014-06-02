@@ -51,7 +51,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class SkipUntapAllEffect extends ReplacementEffectImpl<SkipUntapAllEffect> {
+public class SkipUntapAllEffect extends ReplacementEffectImpl {
 
     TargetController targetController;
     FilterPermanent filter;

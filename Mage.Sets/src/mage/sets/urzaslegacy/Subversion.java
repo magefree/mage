@@ -65,7 +65,7 @@ public class Subversion extends CardImpl<Subversion> {
     }
     
     
-    class SubversionEffect extends OneShotEffect<SubversionEffect> {
+    class SubversionEffect extends OneShotEffect {
 
         public SubversionEffect() {
             super(Outcome.Damage);

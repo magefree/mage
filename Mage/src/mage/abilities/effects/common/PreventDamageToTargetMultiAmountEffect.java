@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  * @author LevelX2
  */
 
-public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl<PreventDamageToTargetMultiAmountEffect> {
+public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl {
 
     private final Map<UUID, Integer> targetAmountMap = new HashMap<>();
 

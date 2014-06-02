@@ -75,7 +75,7 @@ public class ForbiddenCrypt extends CardImpl<ForbiddenCrypt> {
     }
 }
 
-class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl<ForbiddenCryptDrawCardReplacementEffect> {
+class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
 
     public ForbiddenCryptDrawCardReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
@@ -127,7 +127,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl<Forb
     
 }
 
-class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEffectImpl<ForbiddenCryptPutIntoYourGraveyardReplacementEffect> {
+class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEffectImpl {
 
     public ForbiddenCryptPutIntoYourGraveyardReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

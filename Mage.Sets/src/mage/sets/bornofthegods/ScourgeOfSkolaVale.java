@@ -94,7 +94,7 @@ public class ScourgeOfSkolaVale extends CardImpl<ScourgeOfSkolaVale> {
     }
 }
 
-class ScourgeOfSkolaValeEffect extends OneShotEffect<ScourgeOfSkolaValeEffect> {
+class ScourgeOfSkolaValeEffect extends OneShotEffect {
 
     public ScourgeOfSkolaValeEffect() {
         super(Outcome.GainLife);

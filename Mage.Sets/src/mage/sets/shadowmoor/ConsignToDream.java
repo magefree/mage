@@ -69,7 +69,7 @@ public class ConsignToDream extends CardImpl<ConsignToDream> {
     }
 }
 
-class ConsignToDreamEffect extends OneShotEffect<ConsignToDreamEffect> {
+class ConsignToDreamEffect extends OneShotEffect {
 
     boolean applied = false;
 

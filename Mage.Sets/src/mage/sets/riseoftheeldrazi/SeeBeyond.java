@@ -66,7 +66,7 @@ public class SeeBeyond extends CardImpl<SeeBeyond> {
 
 }
 
-class SeeBeyondEffect extends OneShotEffect<SeeBeyondEffect> {
+class SeeBeyondEffect extends OneShotEffect {
 
     private static FilterCard filter = new FilterCard("card to shuffle into your library");
 

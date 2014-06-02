@@ -77,7 +77,7 @@ public class AshesToAshes extends CardImpl<AshesToAshes> {
     }
 }
 
-class AshesToAshesEffect extends OneShotEffect<AshesToAshesEffect> {
+class AshesToAshesEffect extends OneShotEffect {
 
     public AshesToAshesEffect() {
         super(Outcome.Benefit);

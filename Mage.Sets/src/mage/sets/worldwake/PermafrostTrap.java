@@ -145,7 +145,7 @@ class PermafrostTrapAlternativeCost extends AlternativeCostImpl<PermafrostTrapAl
     }
 }
 
-class PermafrostTrapEffect extends OneShotEffect<PermafrostTrapEffect> {
+class PermafrostTrapEffect extends OneShotEffect {
 
     public PermafrostTrapEffect() {
         super(Outcome.Detriment);
@@ -174,7 +174,7 @@ class PermafrostTrapEffect extends OneShotEffect<PermafrostTrapEffect> {
     }
 }
 
-class PermafrostEffect2 extends ReplacementEffectImpl<PermafrostEffect2> {
+class PermafrostEffect2 extends ReplacementEffectImpl {
 
     protected UUID creatureId;
 

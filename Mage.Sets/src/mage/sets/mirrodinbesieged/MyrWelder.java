@@ -86,7 +86,7 @@ public class MyrWelder extends CardImpl<MyrWelder> {
 
 }
 
-class MyrWelderEffect extends OneShotEffect<MyrWelderEffect> {
+class MyrWelderEffect extends OneShotEffect {
 
     public MyrWelderEffect() {
         super(Outcome.Exile);
@@ -116,7 +116,7 @@ class MyrWelderEffect extends OneShotEffect<MyrWelderEffect> {
 
 }
 
-class MyrWelderContinuousEffect extends ContinuousEffectImpl<MyrWelderContinuousEffect> {
+class MyrWelderContinuousEffect extends ContinuousEffectImpl {
 
     public MyrWelderContinuousEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

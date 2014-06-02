@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class RedirectionEffect<T extends RedirectionEffect<T>> extends ReplacementEffectImpl<T> {
+public abstract class RedirectionEffect extends ReplacementEffectImpl {
 
     protected TargetPermanent redirectTarget;
 

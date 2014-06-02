@@ -64,7 +64,7 @@ public class MartialCoup extends CardImpl<MartialCoup> {
     }
 }
 
-class MartialCoupEffect extends OneShotEffect<MartialCoupEffect> {
+class MartialCoupEffect extends OneShotEffect {
 
     private static SoldierToken token = new SoldierToken();
 

@@ -74,7 +74,7 @@ public class TsabosWeb extends CardImpl<TsabosWeb> {
     }
 }
 
-class TsabosWebPreventUntapEffect extends ReplacementEffectImpl<TsabosWebPreventUntapEffect> {
+class TsabosWebPreventUntapEffect extends ReplacementEffectImpl {
 
     public TsabosWebPreventUntapEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

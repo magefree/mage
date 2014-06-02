@@ -99,7 +99,7 @@ class PainfulQuandryAbility extends TriggeredAbilityImpl {
     }
 }
 
-class PainfulQuandryEffect extends OneShotEffect<PainfulQuandryEffect> {
+class PainfulQuandryEffect extends OneShotEffect {
 
     public PainfulQuandryEffect() {
         super(Outcome.Damage);

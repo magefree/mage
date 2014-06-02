@@ -87,7 +87,7 @@ public class ShiningShoal extends CardImpl<ShiningShoal> {
 }
 
 
-class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl<ShiningShoalPreventDamageTargetEffect> {
+class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
 
     private final DynamicValue dynamicAmount;
     private int amount;

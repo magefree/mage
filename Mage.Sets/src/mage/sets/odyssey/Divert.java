@@ -68,7 +68,7 @@ public class Divert extends CardImpl<Divert> {
     }
 }
 
-class DivertEffect extends OneShotEffect<DivertEffect> {
+class DivertEffect extends OneShotEffect {
 
     public DivertEffect() {
         super(Outcome.Detriment);

@@ -74,7 +74,7 @@ public class ClarionUltimatum extends CardImpl<ClarionUltimatum> {
     }
 }
 
-class ClarionUltimatumEffect extends OneShotEffect<ClarionUltimatumEffect> {
+class ClarionUltimatumEffect extends OneShotEffect {
 
     public ClarionUltimatumEffect() {
         super(Outcome.PutCreatureInPlay);

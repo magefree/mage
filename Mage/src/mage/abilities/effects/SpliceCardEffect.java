@@ -41,7 +41,7 @@ import mage.game.Game;
  * @author levelX2
  */
 
-public interface SpliceCardEffect<T extends SpliceCardEffect<T>> extends ContinuousEffect<T> {
+public interface SpliceCardEffect<T extends SpliceCardEffect<T>> extends ContinuousEffect {
     /**
      * Called by the {@link ContinuousEffects#costModification(Ability abilityToModify, Game game) ContinuousEffects.costModification}
      * method.

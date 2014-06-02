@@ -74,7 +74,7 @@ public class BonfireOfTheDamned extends CardImpl<BonfireOfTheDamned> {
     }
 }
 
-class BonfireOfTheDamnedEffect extends OneShotEffect<BonfireOfTheDamnedEffect> {
+class BonfireOfTheDamnedEffect extends OneShotEffect {
 
     private static FilterPermanent filter = new FilterCreaturePermanent();
 

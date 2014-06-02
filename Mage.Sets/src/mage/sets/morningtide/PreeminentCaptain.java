@@ -79,7 +79,7 @@ public class PreeminentCaptain extends CardImpl<PreeminentCaptain> {
     }
 }
 
-class PreeminentCaptainEffect extends OneShotEffect<PreeminentCaptainEffect> {
+class PreeminentCaptainEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a soldier creature card");
 

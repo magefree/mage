@@ -82,7 +82,7 @@ public class CastThroughTime extends CardImpl<CastThroughTime> {
     }
 }
 
-class GainReboundEffect extends ContinuousEffectImpl<GainReboundEffect> {
+class GainReboundEffect extends ContinuousEffectImpl {
 
     public GainReboundEffect() {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

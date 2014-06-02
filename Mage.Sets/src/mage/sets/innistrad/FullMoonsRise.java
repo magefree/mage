@@ -87,7 +87,7 @@ public class FullMoonsRise extends CardImpl<FullMoonsRise> {
     }
 }
 
-class FullMoonsRiseEffect extends OneShotEffect<FullMoonsRiseEffect> {
+class FullMoonsRiseEffect extends OneShotEffect {
 
     private FilterPermanent filter;
 

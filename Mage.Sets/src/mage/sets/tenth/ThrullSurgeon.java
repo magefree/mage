@@ -80,7 +80,7 @@ public class ThrullSurgeon extends CardImpl<ThrullSurgeon> {
     }
 }
 
-class ThrullSurgeonEffect extends OneShotEffect<ThrullSurgeonEffect> {
+class ThrullSurgeonEffect extends OneShotEffect {
 
     public ThrullSurgeonEffect() {
         super(Outcome.Discard);

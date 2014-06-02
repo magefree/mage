@@ -126,7 +126,7 @@ class VenomTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class VenomEffect extends OneShotEffect<VenomEffect> {
+class VenomEffect extends OneShotEffect {
 
     VenomEffect() {
         super(Outcome.DestroyPermanent);

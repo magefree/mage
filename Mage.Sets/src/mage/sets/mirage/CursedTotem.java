@@ -66,7 +66,7 @@ public class CursedTotem extends CardImpl<CursedTotem> {
     }
 }
 
-class CursedTotemEffect extends ReplacementEffectImpl<CursedTotemEffect> {
+class CursedTotemEffect extends ReplacementEffectImpl {
 
     public CursedTotemEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

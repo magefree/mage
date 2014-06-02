@@ -96,7 +96,7 @@ public class RageForger extends CardImpl<RageForger> {
     }
 }
 
-class RageForgerDamageEffect extends OneShotEffect<RageForgerDamageEffect> {
+class RageForgerDamageEffect extends OneShotEffect {
     
     public RageForgerDamageEffect() {
         super(Outcome.Benefit);

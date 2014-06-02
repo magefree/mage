@@ -78,7 +78,7 @@ public class ObstinateBaloth extends CardImpl<ObstinateBaloth> {
 
 }
 
-class ObstinateBalothEffect extends ReplacementEffectImpl<ObstinateBalothEffect> {
+class ObstinateBalothEffect extends ReplacementEffectImpl {
 
     public ObstinateBalothEffect() {
         super(Duration.EndOfGame, Outcome.PutCardInPlay);

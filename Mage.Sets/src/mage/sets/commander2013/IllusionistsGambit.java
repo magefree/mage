@@ -79,7 +79,7 @@ public class IllusionistsGambit extends CardImpl<IllusionistsGambit> {
     }
 }
 
-class IllusionistsGambitEffect extends ReplacementEffectImpl<IllusionistsGambitEffect> {
+class IllusionistsGambitEffect extends ReplacementEffectImpl {
     IllusionistsGambitEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only during the declare blockers step on an opponent's turn";
@@ -116,7 +116,7 @@ class IllusionistsGambitEffect extends ReplacementEffectImpl<IllusionistsGambitE
     }
 }
 
-class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect<IllusionistsGambitRemoveFromCombatEffect> {
+class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
 
     public IllusionistsGambitRemoveFromCombatEffect() {
         super(Outcome.Benefit);
@@ -207,7 +207,7 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect<Illusionists
     }
 }
 
-class IllusionistsGambitReplacementEffect extends ReplacementEffectImpl<IllusionistsGambitReplacementEffect> {
+class IllusionistsGambitReplacementEffect extends ReplacementEffectImpl {
 
     private List attackers;
     private Phase phase;

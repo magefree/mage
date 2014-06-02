@@ -79,7 +79,7 @@ public class SoulScourge extends CardImpl<SoulScourge> {
     }
 }
 
-class SoulScourgeEntersEffect extends OneShotEffect<SoulScourgeEntersEffect> {
+class SoulScourgeEntersEffect extends OneShotEffect {
 
     public SoulScourgeEntersEffect() {
         super(Outcome.LoseLife);
@@ -107,7 +107,7 @@ class SoulScourgeEntersEffect extends OneShotEffect<SoulScourgeEntersEffect> {
     }
 }
 
-class SoulScourgeLeavesEffect extends OneShotEffect<SoulScourgeLeavesEffect> {
+class SoulScourgeLeavesEffect extends OneShotEffect {
 
     public SoulScourgeLeavesEffect() {
         super(Outcome.Benefit);

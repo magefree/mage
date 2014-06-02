@@ -78,7 +78,7 @@ public class PyxisOfPandemonium extends CardImpl<PyxisOfPandemonium> {
     }
 }
 
-class PyxisOfPandemoniumExileEffect extends OneShotEffect<PyxisOfPandemoniumExileEffect> {
+class PyxisOfPandemoniumExileEffect extends OneShotEffect {
 
     public PyxisOfPandemoniumExileEffect() {
         super(Outcome.Detriment);
@@ -131,7 +131,7 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect<PyxisOfPandemoniumExil
     }
 }
 
-class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect<PyxisOfPandemoniumPutOntoBattlefieldEffect> {
+class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
 
     public PyxisOfPandemoniumPutOntoBattlefieldEffect() {
         super(Outcome.PutCardInPlay);

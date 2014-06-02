@@ -76,7 +76,7 @@ public class KembasLegion extends CardImpl<KembasLegion> {
     }
 }
 
-class KembasLegionEffect extends ContinuousEffectImpl<KembasLegionEffect> {
+class KembasLegionEffect extends ContinuousEffectImpl {
 
     public KembasLegionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

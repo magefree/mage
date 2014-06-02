@@ -86,7 +86,7 @@ public class IncreasingVengeance extends CardImpl<IncreasingVengeance> {
     }
 }
 
-class IncreasingVengeanceEffect extends OneShotEffect<IncreasingVengeanceEffect> {
+class IncreasingVengeanceEffect extends OneShotEffect {
 
     public IncreasingVengeanceEffect() {
         super(Outcome.BoostCreature);

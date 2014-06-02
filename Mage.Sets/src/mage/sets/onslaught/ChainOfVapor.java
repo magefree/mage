@@ -72,7 +72,7 @@ public class ChainOfVapor extends CardImpl<ChainOfVapor> {
     }
 }
 
-class ChainOfVaporEffect extends OneShotEffect<ChainOfVaporEffect> {
+class ChainOfVaporEffect extends OneShotEffect {
 
     public ChainOfVaporEffect() {
         super(Outcome.ReturnToHand);

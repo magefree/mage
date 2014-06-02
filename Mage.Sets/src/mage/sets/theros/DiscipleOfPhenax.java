@@ -84,7 +84,7 @@ public class DiscipleOfPhenax extends CardImpl<DiscipleOfPhenax> {
     }
 }
 
-class DiscipleOfPhenaxEffect extends OneShotEffect<DiscipleOfPhenaxEffect> {
+class DiscipleOfPhenaxEffect extends OneShotEffect {
 
     public DiscipleOfPhenaxEffect() {
         super(Outcome.Discard);

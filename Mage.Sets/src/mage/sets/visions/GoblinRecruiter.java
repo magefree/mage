@@ -76,7 +76,7 @@ public class GoblinRecruiter extends CardImpl<GoblinRecruiter> {
     }
 }
 
-class GoblinRecruiterEffect extends OneShotEffect<GoblinRecruiterEffect> {
+class GoblinRecruiterEffect extends OneShotEffect {
 
     private static final FilterCard goblinFilter = new FilterCard("Goblin cards");
     

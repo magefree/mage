@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilityControlledEffect> {
+public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
     protected CompoundAbility ability;
     protected boolean excludeSource;

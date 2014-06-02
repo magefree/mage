@@ -70,7 +70,7 @@ public class SoulsFire extends CardImpl<SoulsFire> {
     }
 }
 
-class SoulsFireEffect extends OneShotEffect<SoulsFireEffect> {
+class SoulsFireEffect extends OneShotEffect {
 
     public SoulsFireEffect() {
         super(Outcome.Damage);

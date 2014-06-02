@@ -84,7 +84,7 @@ public class ArchitectsOfWill extends CardImpl<ArchitectsOfWill> {
     }
 }
 
-class ArchitectsOfWillEffect extends OneShotEffect<ArchitectsOfWillEffect> {
+class ArchitectsOfWillEffect extends OneShotEffect {
 
     public ArchitectsOfWillEffect() {
         super(Outcome.DrawCard);

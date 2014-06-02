@@ -72,7 +72,7 @@ public class ArmoredTransport extends CardImpl<ArmoredTransport> {
     }
 }
 
-class ArmoredTransportPreventCombatDamageSourceEffect extends PreventionEffectImpl<ArmoredTransportPreventCombatDamageSourceEffect> {
+class ArmoredTransportPreventCombatDamageSourceEffect extends PreventionEffectImpl {
 
     public ArmoredTransportPreventCombatDamageSourceEffect(Duration duration) {
         super(duration);

@@ -80,7 +80,7 @@ public class SamuraiOfThePaleCurtain extends CardImpl<SamuraiOfThePaleCurtain> {
 }
 
 
-class SamuraiOfThePaleCurtainEffect extends ReplacementEffectImpl<SamuraiOfThePaleCurtainEffect> {
+class SamuraiOfThePaleCurtainEffect extends ReplacementEffectImpl {
 
     public SamuraiOfThePaleCurtainEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);

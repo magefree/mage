@@ -21,7 +21,7 @@ import mage.target.Target;
 import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 
-public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffect> {
+public class DiscardEachPlayerEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     protected boolean randomDiscard;

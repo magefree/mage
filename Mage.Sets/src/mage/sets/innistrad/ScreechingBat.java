@@ -111,7 +111,7 @@ class ScreechingBatBeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImp
     }
 }
 
-class ScreechingBatTransformSourceEffect extends OneShotEffect<ScreechingBatTransformSourceEffect> {
+class ScreechingBatTransformSourceEffect extends OneShotEffect {
 
     public ScreechingBatTransformSourceEffect() {
         super(Outcome.Transform);

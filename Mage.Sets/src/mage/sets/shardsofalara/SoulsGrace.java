@@ -66,7 +66,7 @@ public class SoulsGrace extends CardImpl<SoulsGrace> {
     }
 }
 
-class SoulsGraceEffect extends OneShotEffect<SoulsGraceEffect> {
+class SoulsGraceEffect extends OneShotEffect {
 
     public SoulsGraceEffect() {
         super(Outcome.GainLife);

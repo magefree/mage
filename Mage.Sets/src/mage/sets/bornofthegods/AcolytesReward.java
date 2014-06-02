@@ -71,7 +71,7 @@ public class AcolytesReward extends CardImpl<AcolytesReward> {
     }
 }
 
-class AcolytesRewardEffect extends PreventionEffectImpl<AcolytesRewardEffect> {
+class AcolytesRewardEffect extends PreventionEffectImpl {
 
     protected int amount = 0;
 

@@ -43,7 +43,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class ReturnToHandFromGraveyardAllEffect extends OneShotEffect<ReturnToHandFromGraveyardAllEffect> {
+public class ReturnToHandFromGraveyardAllEffect extends OneShotEffect {
 
     private FilterCard filter;
 

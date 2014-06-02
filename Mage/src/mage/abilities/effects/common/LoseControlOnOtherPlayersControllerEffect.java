@@ -38,7 +38,7 @@ import mage.players.Player;
  *
  * @author nantuko
  */
-public class LoseControlOnOtherPlayersControllerEffect extends OneShotEffect<LoseControlOnOtherPlayersControllerEffect> {
+public class LoseControlOnOtherPlayersControllerEffect extends OneShotEffect {
 
     public LoseControlOnOtherPlayersControllerEffect() {
         super(Outcome.Detriment);

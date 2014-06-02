@@ -78,7 +78,7 @@ public class Xenograft extends CardImpl<Xenograft> {
     }
 }
 
-class XenograftEffect extends OneShotEffect<XenograftEffect> {
+class XenograftEffect extends OneShotEffect {
 
     public XenograftEffect() {
         super(Outcome.DrawCard);
@@ -115,7 +115,7 @@ class XenograftEffect extends OneShotEffect<XenograftEffect> {
     }
 }
 
-class XenograftAddSubtypeEffect extends ContinuousEffectImpl<XenograftAddSubtypeEffect> {
+class XenograftAddSubtypeEffect extends ContinuousEffectImpl {
 
     public XenograftAddSubtypeEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);

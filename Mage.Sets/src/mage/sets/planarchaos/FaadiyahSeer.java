@@ -75,7 +75,7 @@ public class FaadiyahSeer extends CardImpl<FaadiyahSeer> {
     }
 }
 
-class FaadiyahSeerEffect extends OneShotEffect<FaadiyahSeerEffect> {
+class FaadiyahSeerEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterLandCard();
 

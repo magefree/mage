@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class SacrificeOpponentsEffect extends OneShotEffect<SacrificeOpponentsEffect> {
+public class SacrificeOpponentsEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     protected FilterPermanent filter;

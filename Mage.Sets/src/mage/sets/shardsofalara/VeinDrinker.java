@@ -85,7 +85,7 @@ public class VeinDrinker extends CardImpl<VeinDrinker> {
     }
 }
 
-class VeinDrinkerEffect extends OneShotEffect<VeinDrinkerEffect> {
+class VeinDrinkerEffect extends OneShotEffect {
 
     public VeinDrinkerEffect() {
         super(Outcome.Damage);

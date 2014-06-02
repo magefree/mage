@@ -69,7 +69,7 @@ public class TotemArmorAbility extends SimpleStaticAbility {
     }
 }
 
-class TotemArmorEffect extends ReplacementEffectImpl<TotemArmorEffect> {
+class TotemArmorEffect extends ReplacementEffectImpl {
     TotemArmorEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
     }

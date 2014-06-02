@@ -88,7 +88,7 @@ public class AngelOfJubilation extends CardImpl<AngelOfJubilation> {
     }
 }
 
-class AngelOfJubilationEffect extends ContinuousEffectImpl<AngelOfJubilationEffect> {
+class AngelOfJubilationEffect extends ContinuousEffectImpl {
 
     public AngelOfJubilationEffect(Duration duration) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);

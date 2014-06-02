@@ -66,7 +66,7 @@ public class DangerousWager extends CardImpl<DangerousWager> {
     }
 }
 
-class DangerousWagerEffect extends OneShotEffect<DangerousWagerEffect> {
+class DangerousWagerEffect extends OneShotEffect {
 
     public DangerousWagerEffect() {
         super(Outcome.Discard);

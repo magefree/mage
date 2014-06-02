@@ -72,7 +72,7 @@ public class PrimalClay extends CardImpl<PrimalClay> {
     }
 }
 
-class PrimalClayEffect extends ContinuousEffectImpl<PrimalClayEffect> {
+class PrimalClayEffect extends ContinuousEffectImpl {
     PrimalClayEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
     }

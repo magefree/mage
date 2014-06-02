@@ -70,7 +70,7 @@ public class Insurrection extends CardImpl<Insurrection> {
     }
 }
 
-class InsurrectionEffect extends OneShotEffect<InsurrectionEffect> {
+class InsurrectionEffect extends OneShotEffect {
 
     public InsurrectionEffect() {
         super(Outcome.Benefit);

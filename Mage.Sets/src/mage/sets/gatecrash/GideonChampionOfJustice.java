@@ -124,7 +124,7 @@ class PermanentsTargetOpponentControlsCount implements DynamicValue {
     }
 }
 
-class GideonExileAllOtherPermanentsEffect extends OneShotEffect<GideonExileAllOtherPermanentsEffect> {
+class GideonExileAllOtherPermanentsEffect extends OneShotEffect {
 
     public GideonExileAllOtherPermanentsEffect() {
         super(Outcome.Exile);

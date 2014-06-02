@@ -91,7 +91,7 @@ public class BoshIronGolem extends CardImpl<BoshIronGolem> {
     }
 }
 
-class BoshIronGolemEffect extends OneShotEffect<BoshIronGolemEffect> {
+class BoshIronGolemEffect extends OneShotEffect {
 
     public BoshIronGolemEffect() {
         super(Outcome.Damage);

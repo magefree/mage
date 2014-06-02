@@ -70,7 +70,7 @@ public class LimDulsVault extends CardImpl<LimDulsVault> {
     }
 }
 
-class LimDulsVaultEffect extends OneShotEffect<LimDulsVaultEffect> {
+class LimDulsVaultEffect extends OneShotEffect {
     static final private String textTop = "card to put on your library (last chosen will be on top)";
     static final private String textBottom = "card to put on bottom of your library (last chosen will be on bottom)";
 

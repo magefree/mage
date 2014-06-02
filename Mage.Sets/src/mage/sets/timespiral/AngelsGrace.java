@@ -71,7 +71,7 @@ public class AngelsGrace extends CardImpl<AngelsGrace> {
     }
 }
 
-class AngelsGraceEffect extends ReplacementEffectImpl<AngelsGraceEffect> {
+class AngelsGraceEffect extends ReplacementEffectImpl {
 
     public AngelsGraceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
@@ -108,7 +108,7 @@ class AngelsGraceEffect extends ReplacementEffectImpl<AngelsGraceEffect> {
 
 }
 
-class AngelsGraceReplacementEffect extends ReplacementEffectImpl<AngelsGraceReplacementEffect> {
+class AngelsGraceReplacementEffect extends ReplacementEffectImpl {
 
     public AngelsGraceReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

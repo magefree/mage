@@ -105,7 +105,7 @@ public class GrandArchitect extends CardImpl<GrandArchitect> {
 
 }
 
-class GrandArchitectEffect extends ContinuousEffectImpl<GrandArchitectEffect> {
+class GrandArchitectEffect extends ContinuousEffectImpl {
 
     public GrandArchitectEffect() {
         super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Detriment);

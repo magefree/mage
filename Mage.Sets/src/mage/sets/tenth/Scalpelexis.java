@@ -76,7 +76,7 @@ public class Scalpelexis extends CardImpl<Scalpelexis> {
     }
 }
 
-class ScalpelexisEffect extends OneShotEffect<ScalpelexisEffect> {
+class ScalpelexisEffect extends OneShotEffect {
 
     public ScalpelexisEffect() {
         super(Outcome.Exile);

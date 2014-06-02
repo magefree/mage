@@ -167,7 +167,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class GodsendExileEffect extends OneShotEffect<GodsendExileEffect> {
+class GodsendExileEffect extends OneShotEffect {
     
     public GodsendExileEffect() {
         super(Outcome.Exile);
@@ -199,7 +199,7 @@ class GodsendExileEffect extends OneShotEffect<GodsendExileEffect> {
     }
 }
 
-class GodsendReplacementEffect extends ReplacementEffectImpl<GodsendReplacementEffect> {
+class GodsendReplacementEffect extends ReplacementEffectImpl {
 
     public GodsendReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

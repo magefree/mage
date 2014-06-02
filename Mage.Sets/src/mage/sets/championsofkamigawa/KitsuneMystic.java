@@ -143,7 +143,7 @@ class AttachmentAttachedToCardTypePredicate implements Predicate<Permanent> {
     }
 }
 
-class AutumnTailEffect extends OneShotEffect<AutumnTailEffect> {
+class AutumnTailEffect extends OneShotEffect {
 
     public AutumnTailEffect() {
         super(Outcome.BoostCreature);

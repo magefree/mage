@@ -43,7 +43,7 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 
-public class RemoveCounterTargetEffect extends OneShotEffect<RemoveCounterTargetEffect> {
+public class RemoveCounterTargetEffect extends OneShotEffect {
     private final Counter counter;
 
     public RemoveCounterTargetEffect(Counter counter) {

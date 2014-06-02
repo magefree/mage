@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  */
 
 
-public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl<BecomesBasicLandEnchantedEffect> {
+public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
 
     protected ArrayList<String> landTypes = new ArrayList<>();
 

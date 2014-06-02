@@ -78,7 +78,7 @@ public class SphinxBoneWand extends CardImpl<SphinxBoneWand> {
     }
 }
 
-class SphinxBoneWandEffect extends OneShotEffect<SphinxBoneWandEffect> {
+class SphinxBoneWandEffect extends OneShotEffect {
 
     public SphinxBoneWandEffect() {
         super(Outcome.Damage);

@@ -83,7 +83,7 @@ public class CorpsejackMenace extends CardImpl<CorpsejackMenace> {
 }
 
 
-class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl<CorpsejackMenaceReplacementEffect> {
+class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
     CorpsejackMenaceReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
         staticText = "If one or more +1/+1 counters would be placed on a creature you control, twice that many +1/+1 counters are placed on it instead";

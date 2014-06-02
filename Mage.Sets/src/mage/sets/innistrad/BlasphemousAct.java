@@ -80,7 +80,7 @@ public class BlasphemousAct extends CardImpl<BlasphemousAct> {
     }
 }
 
-class BlasphemousActEffect extends OneShotEffect<BlasphemousActEffect> {
+class BlasphemousActEffect extends OneShotEffect {
 
     public BlasphemousActEffect() {
         super(Outcome.Damage);

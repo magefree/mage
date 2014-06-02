@@ -42,9 +42,8 @@ import java.util.UUID;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
+public abstract class EffectImpl implements Effect {
 
     protected UUID id;
     protected final Outcome outcome;

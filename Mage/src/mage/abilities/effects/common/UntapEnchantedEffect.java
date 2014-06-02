@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX
  */
-public class UntapEnchantedEffect extends OneShotEffect<UntapEnchantedEffect> {
+public class UntapEnchantedEffect extends OneShotEffect {
 
     public UntapEnchantedEffect() {
         super(Outcome.Untap);

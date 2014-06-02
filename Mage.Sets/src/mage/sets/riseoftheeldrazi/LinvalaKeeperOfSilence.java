@@ -74,7 +74,7 @@ public class LinvalaKeeperOfSilence extends CardImpl<LinvalaKeeperOfSilence> {
     }
 }
 
-class LinvalaKeeperOfSilenceEffect extends ReplacementEffectImpl<LinvalaKeeperOfSilenceEffect> {
+class LinvalaKeeperOfSilenceEffect extends ReplacementEffectImpl {
     LinvalaKeeperOfSilenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Activated abilities of creatures your opponents control can't be activated";

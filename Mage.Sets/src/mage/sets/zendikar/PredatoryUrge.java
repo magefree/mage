@@ -83,7 +83,7 @@ public class PredatoryUrge extends CardImpl<PredatoryUrge> {
     }
 }
 
-class PredatoryUrgeEffect extends OneShotEffect<PredatoryUrgeEffect> {
+class PredatoryUrgeEffect extends OneShotEffect {
 
     public PredatoryUrgeEffect() {
         super(Outcome.Damage);

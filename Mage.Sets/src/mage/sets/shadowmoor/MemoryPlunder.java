@@ -79,7 +79,7 @@ public class MemoryPlunder extends CardImpl<MemoryPlunder> {
     }
 }
 
-class MemoryPlunderEffect extends OneShotEffect<MemoryPlunderEffect> {
+class MemoryPlunderEffect extends OneShotEffect {
 
     public MemoryPlunderEffect() {
         super(Outcome.Benefit);

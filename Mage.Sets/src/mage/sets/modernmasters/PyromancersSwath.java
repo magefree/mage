@@ -75,7 +75,7 @@ public class PyromancersSwath extends CardImpl<PyromancersSwath> {
     }
 }
 
-class PyromancersSwathReplacementEffect extends ReplacementEffectImpl<PyromancersSwathReplacementEffect> {
+class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
 
     PyromancersSwathReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

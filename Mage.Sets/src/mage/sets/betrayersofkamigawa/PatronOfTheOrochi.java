@@ -83,7 +83,7 @@ public class PatronOfTheOrochi extends CardImpl<PatronOfTheOrochi> {
     }
 }
 
-class PatronOfTheOrochiEffect extends OneShotEffect<PatronOfTheOrochiEffect> {
+class PatronOfTheOrochiEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {

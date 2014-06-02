@@ -74,7 +74,7 @@ public class RedSunsZenith extends CardImpl<RedSunsZenith> {
 
 }
 
-class RedSunsZenithEffect extends ReplacementEffectImpl<RedSunsZenithEffect> {
+class RedSunsZenithEffect extends ReplacementEffectImpl {
 
     public RedSunsZenithEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);

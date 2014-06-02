@@ -68,7 +68,7 @@ public class TestOfFaith extends CardImpl<TestOfFaith> {
     }
 }
 
-class TestOfFaithPreventDamageTargetEffect extends PreventionEffectImpl<TestOfFaithPreventDamageTargetEffect> {
+class TestOfFaithPreventDamageTargetEffect extends PreventionEffectImpl {
 
     private int amount = 3;
 

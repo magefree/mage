@@ -72,7 +72,7 @@ public class BurningWish extends CardImpl<BurningWish> {
     }
 }
 
-class BurningWishEffect extends OneShotEffect<BurningWishEffect> {
+class BurningWishEffect extends OneShotEffect {
 
     private static final String choiceText = "Choose a sorcery card you own from outside the game, and put it into your hand";
 

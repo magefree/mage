@@ -71,7 +71,7 @@ public class GenesisWave extends CardImpl<GenesisWave> {
 
 }
 
-class GenesisWaveEffect extends OneShotEffect<GenesisWaveEffect> {
+class GenesisWaveEffect extends OneShotEffect {
 
     public GenesisWaveEffect() {
         super(Outcome.PutCardInPlay);

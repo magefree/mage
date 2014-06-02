@@ -76,7 +76,7 @@ public class DictateOfTheTwinGods extends CardImpl<DictateOfTheTwinGods> {
     }
 }
 
-class DictateOfTheTwinGodsEffect extends ReplacementEffectImpl<DictateOfTheTwinGodsEffect> {
+class DictateOfTheTwinGodsEffect extends ReplacementEffectImpl {
 
     public DictateOfTheTwinGodsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);

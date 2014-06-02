@@ -80,7 +80,7 @@ public class FaerieMacabre extends CardImpl<FaerieMacabre> {
     }
 }
 
-class FaerieMacabreExileTargetEffect extends OneShotEffect<FaerieMacabreExileTargetEffect> {
+class FaerieMacabreExileTargetEffect extends OneShotEffect {
 
     public FaerieMacabreExileTargetEffect() {
         super(Outcome.Exile);

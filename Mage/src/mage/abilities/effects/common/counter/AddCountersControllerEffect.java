@@ -41,7 +41,7 @@ import mage.players.Player;
 /**
  * @author nantuko
  */
-public class AddCountersControllerEffect extends OneShotEffect<AddCountersControllerEffect> {
+public class AddCountersControllerEffect extends OneShotEffect {
 
     private Counter counter;
     private boolean enchantedEquipped;

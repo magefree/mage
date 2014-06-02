@@ -118,7 +118,7 @@ class RetaliatorGriffinTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class RetaliatorGriffinEffect extends OneShotEffect<RetaliatorGriffinEffect> {
+class RetaliatorGriffinEffect extends OneShotEffect {
 
     public RetaliatorGriffinEffect() {
         super(Outcome.BoostCreature);

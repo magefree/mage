@@ -72,7 +72,7 @@ public class BottleOfSuleiman extends CardImpl<BottleOfSuleiman> {
     }
 }
 
-class BottleOfSuleimanEffect extends OneShotEffect<BottleOfSuleimanEffect> {
+class BottleOfSuleimanEffect extends OneShotEffect {
 
     public BottleOfSuleimanEffect() {
         super(Outcome.PutCreatureInPlay);

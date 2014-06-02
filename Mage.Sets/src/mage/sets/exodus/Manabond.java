@@ -68,7 +68,7 @@ public class Manabond extends CardImpl<Manabond> {
 }
 
 
-class ManabondEffect extends OneShotEffect<ManabondEffect> {
+class ManabondEffect extends OneShotEffect {
 
     public ManabondEffect() {
         super(Outcome.PutCardInPlay);

@@ -76,7 +76,7 @@ public class UrborgSyphonMage extends CardImpl<UrborgSyphonMage> {
     }
 }
 
-class UrborgSyphonMageEffect extends OneShotEffect<UrborgSyphonMageEffect> {
+class UrborgSyphonMageEffect extends OneShotEffect {
 
     public UrborgSyphonMageEffect() {
         super(Outcome.Damage);

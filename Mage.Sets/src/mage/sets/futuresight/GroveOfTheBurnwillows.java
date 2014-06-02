@@ -72,7 +72,7 @@ public class GroveOfTheBurnwillows extends CardImpl<GroveOfTheBurnwillows> {
     }
 }
 
-class GroveOfTheBurnwillowsEffect extends OneShotEffect<GroveOfTheBurnwillowsEffect> {
+class GroveOfTheBurnwillowsEffect extends OneShotEffect {
 
     GroveOfTheBurnwillowsEffect() {
         super(Outcome.Benefit);

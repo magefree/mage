@@ -74,7 +74,7 @@ public class ServantOfTymaret extends CardImpl<ServantOfTymaret> {
     }
 }
 
-class ServantOfTymaretEffect extends OneShotEffect<ServantOfTymaretEffect> {
+class ServantOfTymaretEffect extends OneShotEffect {
 
     public ServantOfTymaretEffect() {
         super(Outcome.Damage);

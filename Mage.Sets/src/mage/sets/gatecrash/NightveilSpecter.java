@@ -94,7 +94,7 @@ public class NightveilSpecter extends CardImpl<NightveilSpecter> {
     }
 }
 
-class NightveilSpecterExileEffect extends OneShotEffect<NightveilSpecterExileEffect> {
+class NightveilSpecterExileEffect extends OneShotEffect {
 
     public NightveilSpecterExileEffect() {
       super(Outcome.Discard);
@@ -124,7 +124,7 @@ class NightveilSpecterExileEffect extends OneShotEffect<NightveilSpecterExileEff
     }
 }
 
-class NightveilSpecterEffect extends AsThoughEffectImpl<NightveilSpecterEffect> {
+class NightveilSpecterEffect extends AsThoughEffectImpl {
 
     public NightveilSpecterEffect() {
       super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);

@@ -78,7 +78,7 @@ public class ArsenalThresher extends CardImpl<ArsenalThresher> {
     }
 }
 
-class ArsenalThresherEffect extends OneShotEffect<ArsenalThresherEffect> {
+class ArsenalThresherEffect extends OneShotEffect {
 
     public ArsenalThresherEffect() {
         super(Outcome.Benefit);

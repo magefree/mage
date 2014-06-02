@@ -74,7 +74,7 @@ public class Whipkeeper extends CardImpl<Whipkeeper> {
     }
 }
 
-class WhipkeeperEffect extends OneShotEffect<WhipkeeperEffect> {
+class WhipkeeperEffect extends OneShotEffect {
 
     public WhipkeeperEffect() {
         super(Outcome.Damage);

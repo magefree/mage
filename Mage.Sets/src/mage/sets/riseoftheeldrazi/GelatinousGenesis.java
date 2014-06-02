@@ -65,7 +65,7 @@ public class GelatinousGenesis extends CardImpl<GelatinousGenesis> {
     }
 }
 
-class GelatinousGenesisEffect extends OneShotEffect<GelatinousGenesisEffect> {
+class GelatinousGenesisEffect extends OneShotEffect {
 
     public GelatinousGenesisEffect() {
         super(Outcome.PutCreatureInPlay);

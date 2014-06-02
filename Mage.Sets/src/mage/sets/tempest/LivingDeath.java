@@ -66,7 +66,7 @@ public class LivingDeath extends CardImpl<LivingDeath> {
         return new LivingDeath(this);
     }
 }
-class LivingDeathEffect extends OneShotEffect<LivingDeathEffect> {
+class LivingDeathEffect extends OneShotEffect {
 
     public LivingDeathEffect() {
         super(Outcome.Benefit);

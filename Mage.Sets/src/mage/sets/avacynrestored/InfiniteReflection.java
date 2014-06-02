@@ -86,7 +86,7 @@ public class InfiniteReflection extends CardImpl<InfiniteReflection> {
     }
 }
 
-class InfiniteReflectionTriggeredEffect extends OneShotEffect<InfiniteReflectionTriggeredEffect> {
+class InfiniteReflectionTriggeredEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
@@ -122,7 +122,7 @@ class InfiniteReflectionTriggeredEffect extends OneShotEffect<InfiniteReflection
     }
 }
 
-class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl<InfiniteReflectionEntersBattlefieldEffect> {
+class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     public InfiniteReflectionEntersBattlefieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

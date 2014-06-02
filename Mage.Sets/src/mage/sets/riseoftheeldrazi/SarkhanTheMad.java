@@ -92,7 +92,7 @@ public class SarkhanTheMad extends CardImpl<SarkhanTheMad> {
     }
 }
 
-class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect<SarkhanTheMadRevealAndDrawEffect> {
+class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect {
 
     private static final String effectText = "Reveal the top card of your library and put it into your hand.  {this} deals damage to himself equal to that card's converted mana cost";
 
@@ -130,7 +130,7 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect<SarkhanTheMadReveal
 
 }
 
-class SarkhanTheMadSacEffect extends OneShotEffect<SarkhanTheMadSacEffect> {
+class SarkhanTheMadSacEffect extends OneShotEffect {
 
     private static final String effectText = "Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield";
 
@@ -162,7 +162,7 @@ class SarkhanTheMadSacEffect extends OneShotEffect<SarkhanTheMadSacEffect> {
 
 }
 
-class SarkhanTheMadDragonDamageEffect extends OneShotEffect<SarkhanTheMadDragonDamageEffect> {
+class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
 
     private static final String effectText = "Each Dragon creature you control deals damage equal to its power to target player";
     private static final FilterControlledPermanent filter;

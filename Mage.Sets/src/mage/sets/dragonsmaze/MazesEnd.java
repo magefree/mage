@@ -94,7 +94,7 @@ public class MazesEnd extends CardImpl<MazesEnd> {
     }
 }
 
-class MazesEndEffect extends OneShotEffect<MazesEndEffect> {
+class MazesEndEffect extends OneShotEffect {
 
     public MazesEndEffect() {
         super(Outcome.PutLandInPlay);

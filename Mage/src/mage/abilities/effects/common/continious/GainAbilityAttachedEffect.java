@@ -42,7 +42,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityAttachedEffect> {
+public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
     protected AttachmentType attachmentType;

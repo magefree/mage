@@ -76,7 +76,7 @@ public class DarkConfidant extends CardImpl<DarkConfidant> {
     }
 }
 
-class DarkConfidantEffect extends OneShotEffect<DarkConfidantEffect> {
+class DarkConfidantEffect extends OneShotEffect {
     DarkConfidantEffect() {
         super(Outcome.DrawCard);
         this.staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost";

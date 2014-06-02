@@ -68,7 +68,7 @@ public class DispenseJustice extends CardImpl<DispenseJustice> {
 
 }
 
-class DispenseJusticeEffect extends OneShotEffect<DispenseJusticeEffect> {
+class DispenseJusticeEffect extends OneShotEffect {
 
     private static final String effectText = "Target player sacrifices an attacking creature.\r\n\r\n"
             + "Metalcraft - That player sacrifices two attacking creatures instead if you control three or more artifacts";

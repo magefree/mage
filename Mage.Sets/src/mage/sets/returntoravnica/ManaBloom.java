@@ -92,7 +92,7 @@ public class ManaBloom extends CardImpl<ManaBloom> {
     }
 }
 
-class ManaBloomEffect extends OneShotEffect<ManaBloomEffect> {
+class ManaBloomEffect extends OneShotEffect {
     public ManaBloomEffect() {
         super(Outcome.Benefit);
     }

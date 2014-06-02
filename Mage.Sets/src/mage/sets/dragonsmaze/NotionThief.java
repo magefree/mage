@@ -81,7 +81,7 @@ public class NotionThief extends CardImpl<NotionThief> {
 }
 
 
-class NotionThiefReplacementEffect extends ReplacementEffectImpl<NotionThiefReplacementEffect> {
+class NotionThiefReplacementEffect extends ReplacementEffectImpl {
 
     public NotionThiefReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

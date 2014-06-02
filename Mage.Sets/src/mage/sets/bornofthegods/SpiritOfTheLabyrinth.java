@@ -103,7 +103,7 @@ class SpiritOfTheLabyrinthWatcher extends Watcher {
 
 }
 
-class SpiritOfTheLabyrinthEffect extends ReplacementEffectImpl<SpiritOfTheLabyrinthEffect> {
+class SpiritOfTheLabyrinthEffect extends ReplacementEffectImpl {
 
     public SpiritOfTheLabyrinthEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

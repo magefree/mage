@@ -69,7 +69,7 @@ public class Peek extends CardImpl<Peek> {
     }
 }
 
-class PeekEffect extends OneShotEffect<PeekEffect> {
+class PeekEffect extends OneShotEffect {
     PeekEffect() {
         super(Outcome.Detriment);
         staticText = "Look at target player's hand";

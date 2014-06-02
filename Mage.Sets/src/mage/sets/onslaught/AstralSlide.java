@@ -109,7 +109,7 @@ class AstralSlideTriggeredAbility extends TriggeredAbilityImpl {
 
 }
 
-class AstralSlideEffect extends OneShotEffect<AstralSlideEffect> {
+class AstralSlideEffect extends OneShotEffect {
 
     public AstralSlideEffect() {
         super(Outcome.Detriment);

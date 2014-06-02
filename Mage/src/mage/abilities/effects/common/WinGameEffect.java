@@ -40,7 +40,7 @@ import mage.players.Player;
  */
 
 
-public class WinGameEffect extends OneShotEffect<WinGameEffect> {
+public class WinGameEffect extends OneShotEffect {
 
     public WinGameEffect() {
         super(Outcome.Win);

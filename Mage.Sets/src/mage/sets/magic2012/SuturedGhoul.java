@@ -84,7 +84,7 @@ public class SuturedGhoul extends CardImpl<SuturedGhoul> {
     }
 }
 
-class SuturedGhoulEffect extends OneShotEffect<SuturedGhoulEffect> {
+class SuturedGhoulEffect extends OneShotEffect {
 
     public SuturedGhoulEffect() {
         super(Outcome.Benefit);

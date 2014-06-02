@@ -89,7 +89,7 @@ public class CharmbreakerDevils extends CardImpl<CharmbreakerDevils> {
     }
 }
 
-class CharmbreakerDevilsEffect extends OneShotEffect<CharmbreakerDevilsEffect> {
+class CharmbreakerDevilsEffect extends OneShotEffect {
 
     public CharmbreakerDevilsEffect() {
         super(Outcome.ReturnToHand);

@@ -79,7 +79,7 @@ public class CelestialKirin extends CardImpl<CelestialKirin> {
     }
 }
 
-class CelestialKirinEffect extends OneShotEffect<CelestialKirinEffect> {
+class CelestialKirinEffect extends OneShotEffect {
 
     public CelestialKirinEffect() {
         super(Outcome.GainLife);

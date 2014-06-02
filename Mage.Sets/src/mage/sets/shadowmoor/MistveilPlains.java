@@ -92,7 +92,7 @@ public class MistveilPlains extends CardImpl<MistveilPlains> {
     }
 }
 
-class MistveilPlainsGraveyardToLibraryEffect extends OneShotEffect<MistveilPlainsGraveyardToLibraryEffect> {
+class MistveilPlainsGraveyardToLibraryEffect extends OneShotEffect {
 
     public MistveilPlainsGraveyardToLibraryEffect() {
         super(Outcome.Benefit);

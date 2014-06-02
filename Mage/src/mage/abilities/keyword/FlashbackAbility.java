@@ -136,7 +136,7 @@ public class FlashbackAbility extends SpellAbility {
 
 }
 
-class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
+class FlashbackEffect extends OneShotEffect {
 
     public FlashbackEffect() {
         super(Outcome.Benefit);

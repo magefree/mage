@@ -79,7 +79,7 @@ public class ElbrusTheBindingBlade extends CardImpl<ElbrusTheBindingBlade> {
     }
 }
 
-class ElbrusTheBindingBladeEffect extends OneShotEffect<ElbrusTheBindingBladeEffect> {
+class ElbrusTheBindingBladeEffect extends OneShotEffect {
     public ElbrusTheBindingBladeEffect() {
         super(Outcome.BecomeCreature);
         staticText = "unattach {this}, then transform it";

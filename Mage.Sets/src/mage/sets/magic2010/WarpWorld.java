@@ -73,7 +73,7 @@ public class WarpWorld extends CardImpl<WarpWorld> {
     }
 }
 
-class WarpWorldEffect extends OneShotEffect<WarpWorldEffect> {
+class WarpWorldEffect extends OneShotEffect {
 
     public WarpWorldEffect() {
         super(Outcome.Neutral);

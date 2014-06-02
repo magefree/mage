@@ -13,7 +13,7 @@ import java.util.UUID;
 /**
  * "Untap up to X lands" effect
  */
-public class UntapLandsEffect extends OneShotEffect<UntapLandsEffect> {
+public class UntapLandsEffect extends OneShotEffect {
     private int amount;
 
     public UntapLandsEffect(int amount) {

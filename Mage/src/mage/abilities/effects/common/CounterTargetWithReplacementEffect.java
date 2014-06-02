@@ -45,7 +45,7 @@ import mage.constants.Zone;
 /**
  * @author nantuko, North
  */
-public class CounterTargetWithReplacementEffect extends OneShotEffect<CounterTargetWithReplacementEffect> {
+public class CounterTargetWithReplacementEffect extends OneShotEffect {
 
     private Zone targetZone;
     private boolean flag;

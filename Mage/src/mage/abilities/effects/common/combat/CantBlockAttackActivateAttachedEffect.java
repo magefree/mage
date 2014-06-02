@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class CantBlockAttackActivateAttachedEffect extends ReplacementEffectImpl<CantBlockAttackActivateAttachedEffect> {
+public class CantBlockAttackActivateAttachedEffect extends ReplacementEffectImpl {
 
     public CantBlockAttackActivateAttachedEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

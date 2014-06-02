@@ -77,7 +77,7 @@ public class OrochiHatchery extends CardImpl<OrochiHatchery> {
 
 }
 
-class OrochiHatcheryEffect extends OneShotEffect<OrochiHatcheryEffect> {
+class OrochiHatcheryEffect extends OneShotEffect {
     public OrochiHatcheryEffect() {
         super(Outcome.Benefit);
     }

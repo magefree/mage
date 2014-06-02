@@ -124,7 +124,7 @@ class SageOfHoursCost extends CostImpl<SageOfHoursCost> {
     }
 }
 
-class SageOfHoursEffect extends OneShotEffect<SageOfHoursEffect> {
+class SageOfHoursEffect extends OneShotEffect {
 
     public SageOfHoursEffect() {
         super(Outcome.GainLife);

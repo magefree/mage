@@ -86,7 +86,7 @@ public class Juxtapose extends CardImpl<Juxtapose> {
 }
 
 // effect is based on ExchangeControlTargetEffect
-class JuxtaposeEffect extends ContinuousEffectImpl<JuxtaposeEffect> {
+class JuxtaposeEffect extends ContinuousEffectImpl {
 
     private final FilterPermanent filter;
     

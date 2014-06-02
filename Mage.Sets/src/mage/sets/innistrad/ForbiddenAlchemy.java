@@ -74,7 +74,7 @@ public class ForbiddenAlchemy extends CardImpl<ForbiddenAlchemy> {
     }
 }
 
-class ForbiddenAlchemyEffect extends OneShotEffect<ForbiddenAlchemyEffect> {
+class ForbiddenAlchemyEffect extends OneShotEffect {
 
     public ForbiddenAlchemyEffect() {
         super(Outcome.DrawCard);

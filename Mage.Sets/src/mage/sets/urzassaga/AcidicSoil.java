@@ -66,7 +66,7 @@ public class AcidicSoil extends CardImpl<AcidicSoil> {
     }
 }
 
-class AcidicSoilEffect extends OneShotEffect<AcidicSoilEffect> {
+class AcidicSoilEffect extends OneShotEffect {
 
     AcidicSoilEffect() {
         super(Outcome.Damage);

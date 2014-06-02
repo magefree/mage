@@ -72,7 +72,7 @@ public class GrislySalvage extends CardImpl<GrislySalvage> {
         return new GrislySalvage(this);
     }
 }
-class GrislySalvageEffect extends OneShotEffect<GrislySalvageEffect> {
+class GrislySalvageEffect extends OneShotEffect {
 
     private static final FilterCard filterPutInHand = new FilterCard("creature or land card to put in hand");
     static {

@@ -69,7 +69,7 @@ public class Bulwark extends CardImpl<Bulwark> {
     }
 }
 
-class BulwarkDamageEffect extends OneShotEffect<BulwarkDamageEffect> {
+class BulwarkDamageEffect extends OneShotEffect {
 
     public BulwarkDamageEffect() {
         super(Outcome.Damage);

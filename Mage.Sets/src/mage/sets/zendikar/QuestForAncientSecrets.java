@@ -113,7 +113,7 @@ class QuestForAncientSecretsTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class QuestForAncientSecretsEffect extends OneShotEffect<QuestForAncientSecretsEffect> {
+class QuestForAncientSecretsEffect extends OneShotEffect {
 
     public QuestForAncientSecretsEffect() {
         super(Outcome.Neutral);

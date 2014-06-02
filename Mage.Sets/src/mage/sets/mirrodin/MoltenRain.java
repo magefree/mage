@@ -70,7 +70,7 @@ public class MoltenRain extends CardImpl<MoltenRain> {
     }
 }
 
-class MoltenRainEffect extends OneShotEffect<MoltenRainEffect> {
+class MoltenRainEffect extends OneShotEffect {
 
     public MoltenRainEffect() {
         super(Outcome.Damage);

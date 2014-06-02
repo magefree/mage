@@ -81,7 +81,7 @@ public class HoardingDragon extends CardImpl<HoardingDragon> {
 
 }
 
-class HoardingDragonEffect extends OneShotEffect<HoardingDragonEffect> {
+class HoardingDragonEffect extends OneShotEffect {
 
     private UUID exileId;
 

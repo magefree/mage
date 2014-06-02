@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com, North
  */
-public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEffect> {
+public class BoostEnchantedEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;

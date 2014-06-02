@@ -81,7 +81,7 @@ public class WarrenPilferers extends CardImpl<WarrenPilferers> {
     }
 }
 
-class WarrenPilferersReturnEffect extends OneShotEffect<WarrenPilferersReturnEffect> {
+class WarrenPilferersReturnEffect extends OneShotEffect {
 
     public WarrenPilferersReturnEffect() {
         super(Outcome.ReturnToHand);

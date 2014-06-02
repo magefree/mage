@@ -46,7 +46,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  * @author LevelX2
  */
 
-public class CantCastMoreThanOneSpellEffect extends ReplacementEffectImpl<CantCastMoreThanOneSpellEffect> {
+public class CantCastMoreThanOneSpellEffect extends ReplacementEffectImpl {
 
     private final TargetController targetController;
     

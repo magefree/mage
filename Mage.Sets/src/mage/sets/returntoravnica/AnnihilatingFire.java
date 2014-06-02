@@ -76,7 +76,7 @@ public class AnnihilatingFire extends CardImpl<AnnihilatingFire> {
     }
 }
 
-class AnnihilatingFireEffect extends ReplacementEffectImpl<AnnihilatingFireEffect> {
+class AnnihilatingFireEffect extends ReplacementEffectImpl {
 
         public AnnihilatingFireEffect() {
                 super(Duration.EndOfTurn, Outcome.Exile);

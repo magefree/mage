@@ -71,7 +71,7 @@ public class TormentedHero extends CardImpl<TormentedHero> {
     }
 }
 
-class EachOpponentLosesYouGainSumLifeEffect extends OneShotEffect<EachOpponentLosesYouGainSumLifeEffect> {
+class EachOpponentLosesYouGainSumLifeEffect extends OneShotEffect {
 
     public EachOpponentLosesYouGainSumLifeEffect() {
         super(Outcome.Damage);

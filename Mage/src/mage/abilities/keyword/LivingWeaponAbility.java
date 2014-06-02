@@ -31,7 +31,7 @@ public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
     }
 }
 
-class LivingWeaponEffect extends OneShotEffect<LivingWeaponEffect> {
+class LivingWeaponEffect extends OneShotEffect {
     LivingWeaponEffect() {
         super(Outcome.PutCreatureInPlay);
     }

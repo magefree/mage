@@ -66,7 +66,7 @@ public class AdNauseam extends CardImpl<AdNauseam> {
     }
 }
 
-class AdNauseamEffect extends OneShotEffect<AdNauseamEffect> {
+class AdNauseamEffect extends OneShotEffect {
 
     public AdNauseamEffect() {
         super(Outcome.DrawCard);

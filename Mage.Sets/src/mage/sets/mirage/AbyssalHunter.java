@@ -76,7 +76,7 @@ public class AbyssalHunter extends CardImpl<AbyssalHunter> {
     }
 }
 
-class AbyssalHunterEffect extends OneShotEffect<AbyssalHunterEffect> {
+class AbyssalHunterEffect extends OneShotEffect {
 
     public AbyssalHunterEffect() {
         super(Outcome.Damage);

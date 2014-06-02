@@ -47,7 +47,7 @@ public class PersistAbility extends DiesTriggeredAbility {
     }
 }
 
-class PersistEffect extends OneShotEffect<PersistEffect> {
+class PersistEffect extends OneShotEffect {
 
     public PersistEffect() {
         super(Outcome.Benefit);
@@ -70,7 +70,7 @@ class PersistEffect extends OneShotEffect<PersistEffect> {
     }
 }
 
-class PersistReplacementEffect extends ReplacementEffectImpl<PersistReplacementEffect> {
+class PersistReplacementEffect extends ReplacementEffectImpl {
 
     PersistReplacementEffect() {
         super(Duration.OneUse, Outcome.UnboostCreature, false);

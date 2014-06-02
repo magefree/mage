@@ -85,7 +85,7 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
 
 }
 
-class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
+class BudokaGardenerEffect extends OneShotEffect {
 
     BudokaGardenerEffect() {
         super(Outcome.PutLandInPlay);

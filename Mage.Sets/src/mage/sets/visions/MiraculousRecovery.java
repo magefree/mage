@@ -72,7 +72,7 @@ public class MiraculousRecovery extends CardImpl<MiraculousRecovery> {
     }
 }
 
-class MiraculousRecoveryEffect extends OneShotEffect<MiraculousRecoveryEffect> {
+class MiraculousRecoveryEffect extends OneShotEffect {
 
     public MiraculousRecoveryEffect() {
         super(Outcome.BoostCreature);

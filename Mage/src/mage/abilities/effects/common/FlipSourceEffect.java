@@ -15,7 +15,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class FlipSourceEffect extends OneShotEffect<FlipSourceEffect> {
+public class FlipSourceEffect extends OneShotEffect {
 
     private final Token flipToken;
 

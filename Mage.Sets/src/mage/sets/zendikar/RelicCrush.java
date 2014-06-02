@@ -78,7 +78,7 @@ public class RelicCrush extends CardImpl<RelicCrush> {
     }
 }
 
-class RelicCrushEffect extends OneShotEffect<RelicCrushEffect> {
+class RelicCrushEffect extends OneShotEffect {
 
     public RelicCrushEffect() {
         super(Outcome.DestroyPermanent);

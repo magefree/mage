@@ -103,7 +103,7 @@ public class XenagosGodOfRevels extends CardImpl<XenagosGodOfRevels> {
     }
 }
 
-class XenagosGodOfRevelsEffect extends OneShotEffect<XenagosGodOfRevelsEffect> {
+class XenagosGodOfRevelsEffect extends OneShotEffect {
 
     public XenagosGodOfRevelsEffect() {
         super(Outcome.BoostCreature);

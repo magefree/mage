@@ -74,7 +74,7 @@ public class WordsOfWind extends CardImpl<WordsOfWind> {
     }
 }
 
-class WordsOfWindEffect extends ReplacementEffectImpl<WordsOfWindEffect> {
+class WordsOfWindEffect extends ReplacementEffectImpl {
 
     public WordsOfWindEffect() {
         super(Duration.EndOfTurn, Outcome.ReturnToHand);

@@ -89,7 +89,7 @@ public class NightfallPredator extends CardImpl<NightfallPredator> {
     }
 }
 
-class NightfallPredatorEffect extends OneShotEffect<NightfallPredatorEffect> {
+class NightfallPredatorEffect extends OneShotEffect {
 
     public NightfallPredatorEffect() {
         super(Outcome.Damage);

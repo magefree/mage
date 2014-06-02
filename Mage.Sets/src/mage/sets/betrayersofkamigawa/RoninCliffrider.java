@@ -75,7 +75,7 @@ public class RoninCliffrider extends CardImpl<RoninCliffrider> {
         return new RoninCliffrider(this);
     }
 }
-class RoninCliffriderEffect extends OneShotEffect<RoninCliffriderEffect> {
+class RoninCliffriderEffect extends OneShotEffect {
 
     public RoninCliffriderEffect() {
         super(Outcome.Damage);

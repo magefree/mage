@@ -73,7 +73,7 @@ public class SpellRupture extends CardImpl<SpellRupture> {
     }
 }
 
-class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect<SpellRuptureCounterUnlessPaysEffect> {
+class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
 
     public SpellRuptureCounterUnlessPaysEffect() {
         super(Outcome.Detriment);

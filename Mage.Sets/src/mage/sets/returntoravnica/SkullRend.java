@@ -66,7 +66,7 @@ public class SkullRend extends CardImpl<SkullRend> {
         return new SkullRend(this);
     }
 
-    private class SkullRendEffect extends OneShotEffect<SkullRendEffect> {
+    private class SkullRendEffect extends OneShotEffect {
 
         public SkullRendEffect() {
             super(Outcome.Damage);

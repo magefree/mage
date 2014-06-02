@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 
-public class PutCopySourceTokenOntoBattlefield extends OneShotEffect<PutCopySourceTokenOntoBattlefield> {
+public class PutCopySourceTokenOntoBattlefield extends OneShotEffect {
 
     public PutCopySourceTokenOntoBattlefield() {
         super(Outcome.PutCreatureInPlay);

@@ -81,7 +81,7 @@ public class LordOfTheVoid extends CardImpl<LordOfTheVoid> {
 }
 
 
-class LordOfTheVoidEffect extends OneShotEffect<LordOfTheVoidEffect> {
+class LordOfTheVoidEffect extends OneShotEffect {
 
     public LordOfTheVoidEffect() {
         super(Outcome.PutCardInPlay);

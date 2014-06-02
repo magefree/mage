@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RegenerateSourceEffect extends ReplacementEffectImpl<RegenerateSourceEffect> {
+public class RegenerateSourceEffect extends ReplacementEffectImpl {
 
     public RegenerateSourceEffect() {
         super(Duration.EndOfTurn, Outcome.Regenerate);

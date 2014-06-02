@@ -76,7 +76,7 @@ public class AEthermagesTouch extends CardImpl<AEthermagesTouch> {
         return new AEthermagesTouch(this);
     }
 }
-class AEthermagesTouchEffect extends OneShotEffect<AEthermagesTouchEffect> {
+class AEthermagesTouchEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filterPutOntoBattlefield = new FilterCreatureCard("a creature card to put onto the battlefield");
 

@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ScryEffect extends OneShotEffect<ScryEffect> {
+public class ScryEffect extends OneShotEffect {
 
     protected static FilterCard filter1 = new FilterCard("card to put on the bottom of your library");
     protected static FilterCard filter2 = new FilterCard("card to put on the top of your library (last chosen will be on top)");

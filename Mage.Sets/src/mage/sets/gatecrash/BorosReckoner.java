@@ -84,7 +84,7 @@ public class BorosReckoner extends CardImpl<BorosReckoner> {
     }
 }
 
-class BorosReckonerDealDamageEffect extends OneShotEffect<BorosReckonerDealDamageEffect> {
+class BorosReckonerDealDamageEffect extends OneShotEffect {
 
     public BorosReckonerDealDamageEffect() {
         super(Outcome.Damage);

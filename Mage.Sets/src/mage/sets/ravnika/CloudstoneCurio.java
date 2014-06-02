@@ -81,7 +81,7 @@ public class CloudstoneCurio extends CardImpl<CloudstoneCurio> {
     }
 }
 
-class CloudstoneCurioEffect extends OneShotEffect<CloudstoneCurioEffect> {
+class CloudstoneCurioEffect extends OneShotEffect {
 
     public CloudstoneCurioEffect() {
         super(Outcome.ReturnToHand);

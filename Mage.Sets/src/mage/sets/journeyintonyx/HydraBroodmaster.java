@@ -74,7 +74,7 @@ public class HydraBroodmaster extends CardImpl<HydraBroodmaster> {
     }
 }
 
-class HydraBroodmasterEffect extends OneShotEffect<HydraBroodmasterEffect> {
+class HydraBroodmasterEffect extends OneShotEffect {
     
     public HydraBroodmasterEffect() {
         super(Outcome.PutCreatureInPlay);

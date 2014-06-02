@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author noxx
  */
-public class AddCardColorAttachedEffect extends ContinuousEffectImpl<AddCardColorAttachedEffect> {
+public class AddCardColorAttachedEffect extends ContinuousEffectImpl {
 
     private ObjectColor addedColor;
     private AttachmentType attachmentType;

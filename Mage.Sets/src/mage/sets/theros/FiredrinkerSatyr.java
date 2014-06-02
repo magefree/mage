@@ -81,7 +81,7 @@ public class FiredrinkerSatyr extends CardImpl<FiredrinkerSatyr> {
         return new FiredrinkerSatyr(this);
     }
 }
-class FiredrinkerSatyrDealDamageEffect extends OneShotEffect<FiredrinkerSatyrDealDamageEffect> {
+class FiredrinkerSatyrDealDamageEffect extends OneShotEffect {
 
     public FiredrinkerSatyrDealDamageEffect() {
         super(Outcome.Damage);

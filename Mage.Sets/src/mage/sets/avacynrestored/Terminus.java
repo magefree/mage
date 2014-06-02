@@ -71,7 +71,7 @@ public class Terminus extends CardImpl<Terminus> {
     }
 }
 
-class TerminusEffect extends OneShotEffect<TerminusEffect> {
+class TerminusEffect extends OneShotEffect {
 
     public TerminusEffect() {
         super(Outcome.Removal);

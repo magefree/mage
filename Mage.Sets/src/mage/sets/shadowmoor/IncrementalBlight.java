@@ -68,7 +68,7 @@ public class IncrementalBlight extends CardImpl<IncrementalBlight> {
         return new IncrementalBlight(this);
     }
 }
-class IncrementalBlightEffect extends OneShotEffect<IncrementalBlightEffect> {
+class IncrementalBlightEffect extends OneShotEffect {
    
     public IncrementalBlightEffect() {
         super(Outcome.UnboostCreature);

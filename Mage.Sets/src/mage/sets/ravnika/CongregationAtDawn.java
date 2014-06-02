@@ -74,7 +74,7 @@ public class CongregationAtDawn extends CardImpl<CongregationAtDawn> {
     }
 }
 
-class CongregationAtDawnEffect extends OneShotEffect<CongregationAtDawnEffect> {
+class CongregationAtDawnEffect extends OneShotEffect {
     static final private String textTop = "card to put on your library (last chosen will be on top)";
 
     public CongregationAtDawnEffect() {

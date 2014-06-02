@@ -71,7 +71,7 @@ public class AbattoirGhoul extends CardImpl<AbattoirGhoul> {
     }
 }
 
-class AbattoirGhoulEffect extends OneShotEffect<AbattoirGhoulEffect> {
+class AbattoirGhoulEffect extends OneShotEffect {
 
     public AbattoirGhoulEffect() {
         super(Outcome.GainLife);

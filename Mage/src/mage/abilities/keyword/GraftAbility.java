@@ -144,7 +144,7 @@ class GraftStaticAbility extends StaticAbility {
 }
 
 
-class GraftDistributeCounterEffect extends OneShotEffect<GraftDistributeCounterEffect> {
+class GraftDistributeCounterEffect extends OneShotEffect {
 
     public GraftDistributeCounterEffect() {
         super(Outcome.BoostCreature);

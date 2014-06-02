@@ -94,7 +94,7 @@ public class PardicDragon extends CardImpl<PardicDragon> {
     }
 }
 
-class PardicDragonEffect extends OneShotEffect<PardicDragonEffect> {
+class PardicDragonEffect extends OneShotEffect {
 
     public PardicDragonEffect() {
         super(Outcome.Benefit);

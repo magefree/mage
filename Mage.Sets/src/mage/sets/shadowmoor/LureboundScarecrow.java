@@ -79,7 +79,7 @@ public class LureboundScarecrow extends CardImpl<LureboundScarecrow> {
     }
 }
 
-class LureboundScarecrowChooseColorEffect extends OneShotEffect<LureboundScarecrowChooseColorEffect> {
+class LureboundScarecrowChooseColorEffect extends OneShotEffect {
     
     public LureboundScarecrowChooseColorEffect() {
         super(Outcome.BoostCreature);

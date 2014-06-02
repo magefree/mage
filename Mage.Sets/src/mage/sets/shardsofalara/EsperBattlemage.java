@@ -85,7 +85,7 @@ public class EsperBattlemage extends CardImpl<EsperBattlemage> {
     }
 }
 
-class EsperBattlemageEffect extends PreventionEffectImpl<EsperBattlemageEffect> {
+class EsperBattlemageEffect extends PreventionEffectImpl {
 
     private int amount = 2;
 

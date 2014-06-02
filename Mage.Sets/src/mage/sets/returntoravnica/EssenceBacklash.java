@@ -76,7 +76,7 @@ public class EssenceBacklash extends CardImpl<EssenceBacklash> {
     }
 }
 
-class EssenceBacklashEffect extends OneShotEffect<EssenceBacklashEffect> {
+class EssenceBacklashEffect extends OneShotEffect {
 
     public EssenceBacklashEffect() {
         super(Outcome.Damage);

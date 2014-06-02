@@ -72,7 +72,7 @@ public class QuenchableFire extends CardImpl<QuenchableFire> {
     }
 }
 
-class QuenchableFireEffect extends OneShotEffect<QuenchableFireEffect> {
+class QuenchableFireEffect extends OneShotEffect {
 
     public QuenchableFireEffect() {
         super(Outcome.Damage);

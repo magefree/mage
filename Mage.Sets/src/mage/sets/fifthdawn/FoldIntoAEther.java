@@ -70,7 +70,7 @@ public class FoldIntoAEther extends CardImpl<FoldIntoAEther> {
     }
 }
 
-class FoldIntoAEtherEffect extends OneShotEffect<FoldIntoAEtherEffect> {
+class FoldIntoAEtherEffect extends OneShotEffect {
 
     public FoldIntoAEtherEffect() {
         super(Outcome.Detriment);

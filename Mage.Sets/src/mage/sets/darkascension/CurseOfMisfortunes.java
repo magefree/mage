@@ -86,7 +86,7 @@ public class CurseOfMisfortunes extends CardImpl<CurseOfMisfortunes> {
     }
 }
 
-class CurseOfMisfortunesEffect extends OneShotEffect<CurseOfMisfortunesEffect> {
+class CurseOfMisfortunesEffect extends OneShotEffect {
 
     public CurseOfMisfortunesEffect() {
         super(Outcome.Detriment);

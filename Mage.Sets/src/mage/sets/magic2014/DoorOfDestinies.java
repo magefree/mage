@@ -88,7 +88,7 @@ public class DoorOfDestinies extends CardImpl<DoorOfDestinies> {
     }
 }
 
-class ChooseCreatureTypeEffect extends OneShotEffect<ChooseCreatureTypeEffect> {
+class ChooseCreatureTypeEffect extends OneShotEffect {
 
     public ChooseCreatureTypeEffect() {
         super(Outcome.BoostCreature);
@@ -168,7 +168,7 @@ class AddCounterAbility extends TriggeredAbilityImpl {
 }
 
 
-class BoostCreatureEffectEffect extends ContinuousEffectImpl<BoostCreatureEffectEffect> {
+class BoostCreatureEffectEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

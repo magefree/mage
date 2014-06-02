@@ -133,7 +133,7 @@ class ModularStaticAbility extends StaticAbility {
 }
 
 
-class ModularDistributeCounterEffect extends OneShotEffect<ModularDistributeCounterEffect> {
+class ModularDistributeCounterEffect extends OneShotEffect {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact creature");
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

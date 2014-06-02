@@ -42,7 +42,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl<CantBeBlockedByOneAllEffect> {
+public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
 
     private FilterCreaturePermanent filter;
     protected int amount;

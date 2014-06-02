@@ -72,7 +72,7 @@ public class HornOfPlenty extends CardImpl<HornOfPlenty> {
     }
 }
 
-class HornOfPlentyEffect extends OneShotEffect<HornOfPlentyEffect> {
+class HornOfPlentyEffect extends OneShotEffect {
 
     public HornOfPlentyEffect() {
         super(Outcome.Detriment);

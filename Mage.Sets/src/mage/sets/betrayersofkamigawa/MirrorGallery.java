@@ -65,7 +65,7 @@ public class MirrorGallery extends CardImpl<MirrorGallery> {
     }
 }
 
-class MirrorGalleryRuleEffect extends ContinuousEffectImpl<MirrorGalleryRuleEffect> {
+class MirrorGalleryRuleEffect extends ContinuousEffectImpl {
 
     public MirrorGalleryRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTargetEffect> {
+public class GainControlTargetEffect extends ContinuousEffectImpl {
 
     protected UUID controllingPlayerId;
     private boolean fixedControl;

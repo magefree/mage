@@ -81,7 +81,7 @@ public class BroodingSaurian extends CardImpl<BroodingSaurian> {
     }
 }
 
-class BroodingSaurianControlEffect extends ContinuousEffectImpl<BroodingSaurianControlEffect> {
+class BroodingSaurianControlEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

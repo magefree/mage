@@ -81,7 +81,7 @@ public class Firestorm extends CardImpl<Firestorm> {
     }
 }
 
-class FirestormEffect extends OneShotEffect<FirestormEffect> {
+class FirestormEffect extends OneShotEffect {
 
     public FirestormEffect() {
         super(Outcome.Benefit);

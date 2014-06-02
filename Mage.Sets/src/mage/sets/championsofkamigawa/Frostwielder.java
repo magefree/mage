@@ -86,7 +86,7 @@ public class Frostwielder extends CardImpl<Frostwielder> {
 }
 
 
-class FrostwielderEffect extends ReplacementEffectImpl<FrostwielderEffect> {
+class FrostwielderEffect extends ReplacementEffectImpl {
 
     public FrostwielderEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);

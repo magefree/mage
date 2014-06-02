@@ -76,7 +76,7 @@ public class GargoyleSentinel extends CardImpl<GargoyleSentinel> {
 
 }
 
-class GargoyleSentinelEffect extends ContinuousEffectImpl<GargoyleSentinelEffect> {
+class GargoyleSentinelEffect extends ContinuousEffectImpl {
 
     public GargoyleSentinelEffect() {
         super(Duration.EndOfTurn, Outcome.AddAbility);

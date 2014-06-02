@@ -82,7 +82,7 @@ public class StuffyDoll extends CardImpl<StuffyDoll> {
     }
 }
 
-class StuffyDollChoosePlayerEffect extends OneShotEffect<StuffyDollChoosePlayerEffect> {
+class StuffyDollChoosePlayerEffect extends OneShotEffect {
 
     public StuffyDollChoosePlayerEffect() {
         super(Outcome.Detriment);
@@ -148,7 +148,7 @@ class StuffyDollTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class StuffyDollGainLifeEffect extends OneShotEffect<StuffyDollGainLifeEffect> {
+class StuffyDollGainLifeEffect extends OneShotEffect {
 
     public StuffyDollGainLifeEffect() {
         super(Outcome.GainLife);

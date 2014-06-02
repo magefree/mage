@@ -68,7 +68,7 @@ public class ElixirOfImmortality extends CardImpl<ElixirOfImmortality> {
 
 }
 
-class ElixerOfImmortalityEffect extends OneShotEffect<ElixerOfImmortalityEffect> {
+class ElixerOfImmortalityEffect extends OneShotEffect {
 
     public ElixerOfImmortalityEffect() {
         super(Outcome.GainLife);

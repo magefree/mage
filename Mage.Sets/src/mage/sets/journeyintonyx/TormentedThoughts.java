@@ -73,7 +73,7 @@ public class TormentedThoughts extends CardImpl<TormentedThoughts> {
     }
 }
 
-class TormentedThoughtsDiscardEffect extends OneShotEffect<TormentedThoughtsDiscardEffect> {
+class TormentedThoughtsDiscardEffect extends OneShotEffect {
 
     public TormentedThoughtsDiscardEffect() {
         super(Outcome.Discard);

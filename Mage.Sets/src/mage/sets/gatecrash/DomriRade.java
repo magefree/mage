@@ -97,7 +97,7 @@ public class DomriRade extends CardImpl<DomriRade> {
     }
 }
 
-class DomriRadeEffect1 extends OneShotEffect<DomriRadeEffect1> {
+class DomriRadeEffect1 extends OneShotEffect {
 
     public DomriRadeEffect1() {
         super(Outcome.DrawCard);

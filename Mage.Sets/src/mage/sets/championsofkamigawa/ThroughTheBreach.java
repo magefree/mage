@@ -81,7 +81,7 @@ public class ThroughTheBreach extends CardImpl<ThroughTheBreach> {
     }
 }
 
-class ThroughTheBreachEffect extends OneShotEffect<ThroughTheBreachEffect> {
+class ThroughTheBreachEffect extends OneShotEffect {
     
     private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
 

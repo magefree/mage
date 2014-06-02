@@ -66,7 +66,7 @@ public class ReverseDamage extends CardImpl<ReverseDamage> {
     }
 }
 
-class ReverseDamageEffect extends PreventionEffectImpl<ReverseDamageEffect> {
+class ReverseDamageEffect extends PreventionEffectImpl {
 
     private final TargetSource target;
     

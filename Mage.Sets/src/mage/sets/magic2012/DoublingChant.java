@@ -72,7 +72,7 @@ public class DoublingChant extends CardImpl<DoublingChant> {
     }
 }
 
-class DoublingChantEffect extends OneShotEffect<DoublingChantEffect> {
+class DoublingChantEffect extends OneShotEffect {
 
     public DoublingChantEffect() {
         super(Outcome.PutCreatureInPlay);

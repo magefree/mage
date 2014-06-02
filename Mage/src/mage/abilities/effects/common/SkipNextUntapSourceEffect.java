@@ -8,7 +8,7 @@ import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-public class SkipNextUntapSourceEffect extends ReplacementEffectImpl<SkipNextUntapSourceEffect> {
+public class SkipNextUntapSourceEffect extends ReplacementEffectImpl {
 
     public SkipNextUntapSourceEffect() {
         super(Duration.OneUse, Outcome.Detriment);

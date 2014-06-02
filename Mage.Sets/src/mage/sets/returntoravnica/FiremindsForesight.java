@@ -77,7 +77,7 @@ public class FiremindsForesight extends CardImpl<FiremindsForesight> {
     }
 }
 
-class FiremindsForesightSearchEffect extends  OneShotEffect<FiremindsForesightSearchEffect> {
+class FiremindsForesightSearchEffect extends  OneShotEffect {
 
     public FiremindsForesightSearchEffect() {
         super(Outcome.DrawCard);

@@ -80,7 +80,7 @@ public class BatwingBrume extends CardImpl<BatwingBrume> {
     }
 }
 
-class BatwingBrumeEffect extends OneShotEffect<BatwingBrumeEffect> {
+class BatwingBrumeEffect extends OneShotEffect {
 
     public BatwingBrumeEffect() {
         super(Outcome.LoseLife);

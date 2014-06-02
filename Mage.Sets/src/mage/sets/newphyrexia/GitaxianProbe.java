@@ -70,7 +70,7 @@ public class GitaxianProbe extends CardImpl<GitaxianProbe> {
 
 }
 
-class GitaxianProbeEffect extends OneShotEffect<GitaxianProbeEffect> {
+class GitaxianProbeEffect extends OneShotEffect {
     GitaxianProbeEffect() {
         super(Outcome.DrawCard);
         staticText = "Look at target player's hand";

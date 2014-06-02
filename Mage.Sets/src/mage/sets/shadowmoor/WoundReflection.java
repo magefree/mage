@@ -66,7 +66,7 @@ public class WoundReflection extends CardImpl<WoundReflection> {
     }
 }
 
-class WoundReflectionEffect extends OneShotEffect<WoundReflectionEffect> {
+class WoundReflectionEffect extends OneShotEffect {
     
     public WoundReflectionEffect() {
         super(Outcome.LoseLife);

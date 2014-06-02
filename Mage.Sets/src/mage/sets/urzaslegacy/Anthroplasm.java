@@ -80,7 +80,7 @@ public class Anthroplasm extends CardImpl<Anthroplasm> {
     }
 }
 
-class AnthroplasmEffect extends OneShotEffect<AnthroplasmEffect> {
+class AnthroplasmEffect extends OneShotEffect {
 
     AnthroplasmEffect ( ) {
         super(Outcome.Benefit);

@@ -41,7 +41,7 @@ import mage.players.Player;
  * @author nantuko
  */
 
-public class UntapAllControllerEffect extends OneShotEffect<UntapAllControllerEffect> {
+public class UntapAllControllerEffect extends OneShotEffect {
 
     private FilterPermanent filter;
 

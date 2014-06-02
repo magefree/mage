@@ -89,7 +89,7 @@ public class NissaRevane extends CardImpl<NissaRevane> {
     }
 }
 
-class NissaRevaneGainLifeEffect extends OneShotEffect<NissaRevaneGainLifeEffect> {
+class NissaRevaneGainLifeEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

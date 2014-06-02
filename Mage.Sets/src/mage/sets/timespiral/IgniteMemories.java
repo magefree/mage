@@ -73,7 +73,7 @@ public class IgniteMemories extends CardImpl<IgniteMemories> {
 }
 
 
-class IgniteMemoriesEffect extends OneShotEffect<IgniteMemoriesEffect> {
+class IgniteMemoriesEffect extends OneShotEffect {
 
     public IgniteMemoriesEffect() {
         super(Outcome.Damage);

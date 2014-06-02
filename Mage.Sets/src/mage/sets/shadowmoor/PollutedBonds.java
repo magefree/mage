@@ -78,7 +78,7 @@ public class PollutedBonds extends CardImpl<PollutedBonds> {
     }
 }
 
-class PollutedBondsEffect extends OneShotEffect<PollutedBondsEffect> {
+class PollutedBondsEffect extends OneShotEffect {
 
     public PollutedBondsEffect() {
         super(Outcome.Benefit);

@@ -79,7 +79,7 @@ public class VassalsDuty extends CardImpl<VassalsDuty> {
     }
 }
 
-class VassalsDutyPreventDamageTargetEffect extends PreventionEffectImpl<VassalsDutyPreventDamageTargetEffect> {
+class VassalsDutyPreventDamageTargetEffect extends PreventionEffectImpl {
 
     public VassalsDutyPreventDamageTargetEffect(Duration duration, int amount) {
         super(duration, amount, false);

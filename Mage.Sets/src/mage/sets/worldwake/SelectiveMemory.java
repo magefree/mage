@@ -66,7 +66,7 @@ public class SelectiveMemory extends CardImpl<SelectiveMemory> {
     }
 }
 
-class SelectiveMemoryEffect extends OneShotEffect<SelectiveMemoryEffect> {
+class SelectiveMemoryEffect extends OneShotEffect {
 
     public SelectiveMemoryEffect() {
         super(Outcome.Exile);

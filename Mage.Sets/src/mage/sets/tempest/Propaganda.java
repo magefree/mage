@@ -67,7 +67,7 @@ public class Propaganda extends CardImpl<Propaganda> {
     }
 }
 
-class PropagandaReplacementEffect extends ReplacementEffectImpl<PropagandaReplacementEffect> {
+class PropagandaReplacementEffect extends ReplacementEffectImpl {
 
     private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
 

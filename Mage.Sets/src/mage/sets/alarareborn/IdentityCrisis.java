@@ -67,7 +67,7 @@ public class IdentityCrisis extends CardImpl<IdentityCrisis> {
 
 }
 
-class IdentityCrisisEffect extends OneShotEffect<IdentityCrisisEffect> {
+class IdentityCrisisEffect extends OneShotEffect {
     IdentityCrisisEffect() {
         super(Outcome.Exile);
         staticText = "Exile all cards from target player's hand and graveyard";

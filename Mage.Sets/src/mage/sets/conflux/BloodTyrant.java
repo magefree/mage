@@ -116,7 +116,7 @@ class PlayerLosesTheGameTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class BloodTyrantEffect extends OneShotEffect<BloodTyrantEffect> {
+class BloodTyrantEffect extends OneShotEffect {
 
     public BloodTyrantEffect() {
         super(Outcome.Benefit);

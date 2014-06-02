@@ -101,7 +101,7 @@ class TargetCreaturePermanentSameController extends TargetCreaturePermanent {
     }
 }
 
-class MoveCounterFromTargetToTargetEffect extends OneShotEffect<MoveCounterFromTargetToTargetEffect> {
+class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
 
     public MoveCounterFromTargetToTargetEffect() {
         super(Outcome.Detriment);

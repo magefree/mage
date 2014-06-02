@@ -75,7 +75,7 @@ public class SemblanceAnvil extends CardImpl<SemblanceAnvil> {
     }
 }
 
-class SemblanceAnvilEffect extends OneShotEffect<SemblanceAnvilEffect> {
+class SemblanceAnvilEffect extends OneShotEffect {
 
     private static FilterCard filter = new FilterNonlandCard();
 

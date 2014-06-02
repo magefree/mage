@@ -119,7 +119,7 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
 
 }
 
-class CurseOfChaosEffect extends OneShotEffect<CurseOfChaosEffect> {
+class CurseOfChaosEffect extends OneShotEffect {
 
     public CurseOfChaosEffect() {
         super(Outcome.Benefit);

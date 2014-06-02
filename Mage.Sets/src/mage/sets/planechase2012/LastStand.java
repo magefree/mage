@@ -76,7 +76,7 @@ public class LastStand extends CardImpl<LastStand> {
     }
 }
 
-class LastStandEffect extends OneShotEffect<LastStandEffect> {
+class LastStandEffect extends OneShotEffect {
 
     private static final FilterControlledLandPermanent filterSwamp = new FilterControlledLandPermanent();
     private static final FilterControlledLandPermanent filterMountain = new FilterControlledLandPermanent();

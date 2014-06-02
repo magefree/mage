@@ -76,7 +76,7 @@ public class DoorToNothingness extends CardImpl<DoorToNothingness> {
     }
 }
 
-class DoorToNothingnessEffect extends OneShotEffect<DoorToNothingnessEffect> {
+class DoorToNothingnessEffect extends OneShotEffect {
 
     public DoorToNothingnessEffect() {
         super(Outcome.Damage);

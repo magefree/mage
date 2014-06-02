@@ -66,7 +66,7 @@ public class BlazingSalvo extends CardImpl<BlazingSalvo> {
     }
 }
 
-class BlazingSalvoEffect extends OneShotEffect<BlazingSalvoEffect> {
+class BlazingSalvoEffect extends OneShotEffect {
     
     public BlazingSalvoEffect() {
         super(Outcome.Damage);

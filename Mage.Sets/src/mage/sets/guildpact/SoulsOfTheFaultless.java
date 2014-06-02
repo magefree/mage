@@ -117,7 +117,7 @@ class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SoulsOfTheFaultlessEffect extends OneShotEffect<SoulsOfTheFaultlessEffect> {
+class SoulsOfTheFaultlessEffect extends OneShotEffect {
 
     public SoulsOfTheFaultlessEffect() {
         super(Outcome.GainLife);

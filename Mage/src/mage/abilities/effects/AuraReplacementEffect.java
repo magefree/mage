@@ -57,7 +57,7 @@ import mage.game.stack.Spell;
  *
  * @author North
  */
-public class AuraReplacementEffect extends ReplacementEffectImpl<AuraReplacementEffect> {
+public class AuraReplacementEffect extends ReplacementEffectImpl {
 
     public AuraReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Neutral);

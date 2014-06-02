@@ -71,7 +71,7 @@ public class CallOfTheWild extends CardImpl<CallOfTheWild> {
 }
 
 
-class CallOfTheWildEffect extends OneShotEffect<CallOfTheWildEffect> {
+class CallOfTheWildEffect extends OneShotEffect {
 
     public CallOfTheWildEffect() {
         super(Outcome.PutCreatureInPlay);

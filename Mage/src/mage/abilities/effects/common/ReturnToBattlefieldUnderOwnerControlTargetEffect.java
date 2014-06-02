@@ -39,7 +39,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEffect<ReturnToBattlefieldUnderOwnerControlTargetEffect> {
+public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEffect {
 
     public ReturnToBattlefieldUnderOwnerControlTargetEffect() {
         super(Outcome.Benefit);

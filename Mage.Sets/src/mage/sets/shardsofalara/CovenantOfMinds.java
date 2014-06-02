@@ -69,7 +69,7 @@ public class CovenantOfMinds extends CardImpl<CovenantOfMinds> {
     }
 }
 
-class CovenantOfMindsEffect extends OneShotEffect<CovenantOfMindsEffect> {
+class CovenantOfMindsEffect extends OneShotEffect {
 
     public CovenantOfMindsEffect() {
         super(Outcome.DrawCard);

@@ -71,7 +71,7 @@ public class PyrrhicRevival extends CardImpl<PyrrhicRevival> {
     }
 }
 
-class PyrrhicRevivalEffect extends OneShotEffect<PyrrhicRevivalEffect> {
+class PyrrhicRevivalEffect extends OneShotEffect {
 
     public PyrrhicRevivalEffect() {
         super(Outcome.PutCreatureInPlay);

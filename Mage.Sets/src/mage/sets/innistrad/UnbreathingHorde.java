@@ -81,7 +81,7 @@ public class UnbreathingHorde extends CardImpl<UnbreathingHorde> {
     }
 }
 
-class UnbreathingHordeEffect1 extends OneShotEffect<UnbreathingHordeEffect1> {
+class UnbreathingHordeEffect1 extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
     private static final FilterCreatureCard filter2 = new FilterCreatureCard();
@@ -122,7 +122,7 @@ class UnbreathingHordeEffect1 extends OneShotEffect<UnbreathingHordeEffect1> {
 
 }
 
-class UnbreathingHordeEffect2 extends PreventionEffectImpl<UnbreathingHordeEffect2> {
+class UnbreathingHordeEffect2 extends PreventionEffectImpl {
 
     public UnbreathingHordeEffect2() {
         super(Duration.WhileOnBattlefield);

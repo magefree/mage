@@ -90,7 +90,7 @@ public class SealockMonster extends CardImpl<SealockMonster> {
     }
 }
 
-class SealockMonsterCantAttackEffect extends ReplacementEffectImpl<SealockMonsterCantAttackEffect> {
+class SealockMonsterCantAttackEffect extends ReplacementEffectImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();;
     static {
@@ -132,7 +132,7 @@ class SealockMonsterCantAttackEffect extends ReplacementEffectImpl<SealockMonste
     }
 }
 
-class SealockMonsterBecomesIslandTargetEffect extends ContinuousEffectImpl<SealockMonsterBecomesIslandTargetEffect> {
+class SealockMonsterBecomesIslandTargetEffect extends ContinuousEffectImpl {
 
     private static Ability islandAbility = new BlueManaAbility();
 

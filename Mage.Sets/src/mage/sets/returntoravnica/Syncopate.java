@@ -73,7 +73,7 @@ public class Syncopate extends CardImpl<Syncopate> {
     }
 }
 
-class SyncopateCounterUnlessPaysEffect extends OneShotEffect<SyncopateCounterUnlessPaysEffect> {
+class SyncopateCounterUnlessPaysEffect extends OneShotEffect {
 
     public SyncopateCounterUnlessPaysEffect() {
         super(Outcome.Detriment);

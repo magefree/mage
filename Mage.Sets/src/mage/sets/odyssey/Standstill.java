@@ -98,7 +98,7 @@ class SpellCastTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class StandstillEffect extends OneShotEffect<StandstillEffect> {
+class StandstillEffect extends OneShotEffect {
 
     public StandstillEffect() {
         super(Outcome.Sacrifice);

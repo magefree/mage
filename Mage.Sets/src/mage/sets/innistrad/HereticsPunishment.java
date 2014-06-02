@@ -71,7 +71,7 @@ public class HereticsPunishment extends CardImpl<HereticsPunishment> {
     }
 }
 
-class HereticsPunishmentEffect extends OneShotEffect<HereticsPunishmentEffect> {
+class HereticsPunishmentEffect extends OneShotEffect {
 
     public HereticsPunishmentEffect() {
         super(Outcome.Damage);

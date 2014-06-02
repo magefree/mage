@@ -93,7 +93,7 @@ public class WalkerOfSecretWays extends CardImpl<WalkerOfSecretWays> {
     }
 }
 
-class WalkerOfSecretWaysEffect extends OneShotEffect<WalkerOfSecretWaysEffect> {
+class WalkerOfSecretWaysEffect extends OneShotEffect {
     WalkerOfSecretWaysEffect() {
         super(Outcome.Detriment);
         staticText = "look at that player's hand";

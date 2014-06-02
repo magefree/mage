@@ -83,7 +83,7 @@ public class BlademaneBaku extends CardImpl<BlademaneBaku> {
         return new BlademaneBaku(this);
     }
     
-    class BlademaneBakuBoostEffect extends OneShotEffect<BlademaneBakuBoostEffect> {
+    class BlademaneBakuBoostEffect extends OneShotEffect {
 
         public BlademaneBakuBoostEffect() {
             super(Outcome.UnboostCreature);

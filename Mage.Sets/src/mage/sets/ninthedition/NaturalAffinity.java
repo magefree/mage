@@ -68,7 +68,7 @@ public class NaturalAffinity extends CardImpl<NaturalAffinity> {
     }
 }
 
-class BecomesCreatureAllEffect extends ContinuousEffectImpl<BecomesCreatureAllEffect> {
+class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
   
     public BecomesCreatureAllEffect() {

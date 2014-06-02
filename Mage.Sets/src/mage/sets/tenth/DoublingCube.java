@@ -69,7 +69,7 @@ public class DoublingCube extends CardImpl<DoublingCube> {
     }
 }
 
-class DoublingCubeEffect extends OneShotEffect<DoublingCubeEffect> {
+class DoublingCubeEffect extends OneShotEffect {
 
     DoublingCubeEffect() {
         super(Outcome.Benefit);

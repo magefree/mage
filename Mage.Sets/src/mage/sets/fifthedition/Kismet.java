@@ -67,7 +67,7 @@ public class Kismet extends CardImpl<Kismet> {
     }
 }
 
-class KismetEffect extends ReplacementEffectImpl<KismetEffect> {
+class KismetEffect extends ReplacementEffectImpl {
 
     KismetEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Tap);

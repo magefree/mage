@@ -122,7 +122,7 @@ class FinestHourAbility extends TriggeredAbilityImpl {
 
 }
 
-class FinestHourEffect extends OneShotEffect<FinestHourEffect> {
+class FinestHourEffect extends OneShotEffect {
 
     public FinestHourEffect() {
         super(Outcome.Benefit);

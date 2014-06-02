@@ -42,7 +42,7 @@ import mage.util.CardUtil;
 /**
  * @author nantuko, LevelX2
  */
-public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl<MaximumHandSizeControllerEffect> {
+public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
 
     public static enum HandSizeModification { SET, INCREASE, REDUCE };
 

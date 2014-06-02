@@ -105,7 +105,7 @@ public class PackRat extends CardImpl<PackRat> {
     }
 }
 
-class PackRatEffect extends OneShotEffect<PackRatEffect> {
+class PackRatEffect extends OneShotEffect {
 
     private Card card;
 

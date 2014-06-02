@@ -66,7 +66,7 @@ public class DreamCache extends CardImpl<DreamCache> {
     }
 }
 
-class DreamCacheEffect extends OneShotEffect<DreamCacheEffect> {
+class DreamCacheEffect extends OneShotEffect {
 
     public DreamCacheEffect() {
         super(Outcome.DrawCard);

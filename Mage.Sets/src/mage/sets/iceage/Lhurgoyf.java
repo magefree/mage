@@ -74,7 +74,7 @@ public class Lhurgoyf extends CardImpl<Lhurgoyf> {
 
 
 
-class LhurgoyfEffect extends ContinuousEffectImpl<LhurgoyfEffect> {
+class LhurgoyfEffect extends ContinuousEffectImpl {
 
 
     public LhurgoyfEffect() {

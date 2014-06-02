@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author noxx
  */
-public class DiscardCardYouChooseTargetEffect extends OneShotEffect<DiscardCardYouChooseTargetEffect> {
+public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
 
     private FilterCard filter;
     private TargetController targetController;

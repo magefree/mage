@@ -83,7 +83,7 @@ public class SavagebornHydra extends CardImpl<SavagebornHydra> {
     }
 }
 
-class SavageBornHydraEffect extends OneShotEffect<SavageBornHydraEffect> {
+class SavageBornHydraEffect extends OneShotEffect {
 
     public SavageBornHydraEffect() {
         super(Outcome.BoostCreature);

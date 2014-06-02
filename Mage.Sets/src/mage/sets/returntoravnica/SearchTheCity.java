@@ -81,7 +81,7 @@ public class SearchTheCity extends CardImpl<SearchTheCity> {
 }
 
 
-class SearchTheCityExileEffect extends OneShotEffect<SearchTheCityExileEffect> {
+class SearchTheCityExileEffect extends OneShotEffect {
 
     public SearchTheCityExileEffect() {
         super(Outcome.DrawCard);
@@ -169,7 +169,7 @@ class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 
-class SearchTheCityExiledCardToHandEffect extends OneShotEffect<SearchTheCityExiledCardToHandEffect> {
+class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
 
     public SearchTheCityExiledCardToHandEffect() {
         super(Outcome.DrawCard);

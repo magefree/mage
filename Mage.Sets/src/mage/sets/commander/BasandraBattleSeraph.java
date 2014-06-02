@@ -91,7 +91,7 @@ public class BasandraBattleSeraph extends CardImpl<BasandraBattleSeraph> {
     }
 }
 
-class BasandraBattleSeraphEffect extends ReplacementEffectImpl<BasandraBattleSeraphEffect> {
+class BasandraBattleSeraphEffect extends ReplacementEffectImpl {
 
     public BasandraBattleSeraphEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);

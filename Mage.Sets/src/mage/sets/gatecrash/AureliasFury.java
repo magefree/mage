@@ -109,7 +109,7 @@ public class AureliasFury extends CardImpl<AureliasFury> {
     }
 }
 
-class AureliasFuryEffect extends OneShotEffect<AureliasFuryEffect> {
+class AureliasFuryEffect extends OneShotEffect {
     
     public AureliasFuryEffect() {
         super(Outcome.Benefit);
@@ -147,7 +147,7 @@ class AureliasFuryEffect extends OneShotEffect<AureliasFuryEffect> {
     }
 }
 
-class AureliasFuryCantCastEffect extends ReplacementEffectImpl<AureliasFuryCantCastEffect> {
+class AureliasFuryCantCastEffect extends ReplacementEffectImpl {
 
     public AureliasFuryCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

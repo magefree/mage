@@ -38,7 +38,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RemoveDelayedTriggeredAbilityEffect extends OneShotEffect<RemoveDelayedTriggeredAbilityEffect> {
+public class RemoveDelayedTriggeredAbilityEffect extends OneShotEffect {
 
     protected UUID abilityId;
 

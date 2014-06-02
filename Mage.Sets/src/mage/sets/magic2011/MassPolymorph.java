@@ -69,7 +69,7 @@ public class MassPolymorph extends CardImpl<MassPolymorph> {
     }
 }
 
-class MassPolymorphEffect extends OneShotEffect<MassPolymorphEffect> {
+class MassPolymorphEffect extends OneShotEffect {
 
     public MassPolymorphEffect() {
         super(Outcome.PutCreatureInPlay);

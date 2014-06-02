@@ -79,7 +79,7 @@ public class MyrServitor extends CardImpl<MyrServitor> {
     }
 }
 
-class MyrServitorReturnEffect extends OneShotEffect<MyrServitorReturnEffect> {
+class MyrServitorReturnEffect extends OneShotEffect {
     
     private static final FilterCard filter = new FilterCard("cards named Myr Servitor");
     

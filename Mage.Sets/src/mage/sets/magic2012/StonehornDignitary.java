@@ -77,7 +77,7 @@ public class StonehornDignitary extends CardImpl<StonehornDignitary> {
     }
 }
 
-class SkipNextCombatEffect extends OneShotEffect<SkipNextCombatEffect> {
+class SkipNextCombatEffect extends OneShotEffect {
 
     public SkipNextCombatEffect() {
         super(Outcome.Detriment);

@@ -82,7 +82,7 @@ public class KhalniGem extends CardImpl<KhalniGem> {
 
 }
 
-class KhalniGemReturnToHandTargetEffect extends OneShotEffect<KhalniGemReturnToHandTargetEffect> {
+class KhalniGemReturnToHandTargetEffect extends OneShotEffect {
 
     private static final String effectText = "return two lands you control to their owner's hand";
 

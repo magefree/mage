@@ -69,7 +69,7 @@ public class ShadowOfDoubt extends CardImpl<ShadowOfDoubt> {
     }
 }
 
-class LibrariesCantBeSearchedEffect extends ReplacementEffectImpl<LibrariesCantBeSearchedEffect> {
+class LibrariesCantBeSearchedEffect extends ReplacementEffectImpl {
 
     public LibrariesCantBeSearchedEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

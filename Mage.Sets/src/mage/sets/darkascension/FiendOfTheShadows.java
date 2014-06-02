@@ -92,7 +92,7 @@ public class FiendOfTheShadows extends CardImpl<FiendOfTheShadows> {
     }
 }
 
-class FiendOfTheShadowsEffect extends AsThoughEffectImpl<FiendOfTheShadowsEffect> {
+class FiendOfTheShadowsEffect extends AsThoughEffectImpl {
 
     private UUID exileId;
 

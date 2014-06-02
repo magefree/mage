@@ -103,7 +103,7 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class HiveMindEffect extends OneShotEffect<HiveMindEffect> {
+class HiveMindEffect extends OneShotEffect {
 
     public HiveMindEffect() {
         super(Outcome.Benefit);

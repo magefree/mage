@@ -68,7 +68,7 @@ public class FurnaceOfRath extends CardImpl<FurnaceOfRath> {
     }
 }
 
-class FurnaceOfRathEffect extends ReplacementEffectImpl<FurnaceOfRathEffect> {
+class FurnaceOfRathEffect extends ReplacementEffectImpl {
 
     public FurnaceOfRathEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);

@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  * @author Loki
  */
 
-public class RemoveCounterSourceEffect extends OneShotEffect<RemoveCounterSourceEffect> {
+public class RemoveCounterSourceEffect extends OneShotEffect {
     private final Counter counter;
 
     public RemoveCounterSourceEffect(Counter counter) {

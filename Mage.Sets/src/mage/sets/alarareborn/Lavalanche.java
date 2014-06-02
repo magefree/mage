@@ -75,7 +75,7 @@ public class Lavalanche extends CardImpl<Lavalanche> {
     }
 }
 
-class LavalancheEffect extends OneShotEffect<LavalancheEffect> {
+class LavalancheEffect extends OneShotEffect {
 
     private DynamicValue amount;
 

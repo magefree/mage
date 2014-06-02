@@ -86,7 +86,7 @@ public class RadiantArchangel extends CardImpl<RadiantArchangel> {
     public RadiantArchangel copy() {
         return new RadiantArchangel(this);
     }
-    class RadiantArchangelEffect extends ContinuousEffectImpl<RadiantArchangelEffect> {
+    class RadiantArchangelEffect extends ContinuousEffectImpl {
 
         public RadiantArchangelEffect() {
             super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

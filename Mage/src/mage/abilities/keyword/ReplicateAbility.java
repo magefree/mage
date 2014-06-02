@@ -213,7 +213,7 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ReplicateCopyEffect extends OneShotEffect<ReplicateCopyEffect> {
+class ReplicateCopyEffect extends OneShotEffect {
 
     public ReplicateCopyEffect() {
         super(Outcome.Copy);

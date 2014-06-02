@@ -115,7 +115,7 @@ class QuietusSpikeTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class QuietusSpikeEffect extends OneShotEffect<QuietusSpikeEffect> {
+class QuietusSpikeEffect extends OneShotEffect {
 
     public QuietusSpikeEffect() {
         super(Outcome.Damage);

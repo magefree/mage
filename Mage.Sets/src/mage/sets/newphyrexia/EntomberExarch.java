@@ -86,7 +86,7 @@ public class EntomberExarch extends CardImpl<EntomberExarch> {
     }
 }
 
-class EntomberExarchEffect extends OneShotEffect<EntomberExarchEffect> {
+class EntomberExarchEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("noncreature card");
 
     static {

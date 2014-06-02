@@ -125,7 +125,7 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class RumblingAftershocksDealDamageEffect extends OneShotEffect<RumblingAftershocksDealDamageEffect> {
+class RumblingAftershocksDealDamageEffect extends OneShotEffect {
 
     public RumblingAftershocksDealDamageEffect() {
         super(Outcome.Damage);

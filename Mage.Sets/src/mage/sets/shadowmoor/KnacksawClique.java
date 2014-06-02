@@ -87,7 +87,7 @@ public class KnacksawClique extends CardImpl<KnacksawClique> {
     }
 }
 
-class KnacksawCliqueEffect extends OneShotEffect<KnacksawCliqueEffect> {
+class KnacksawCliqueEffect extends OneShotEffect {
 
     public KnacksawCliqueEffect() {
         super(Outcome.Benefit);
@@ -123,7 +123,7 @@ class KnacksawCliqueEffect extends OneShotEffect<KnacksawCliqueEffect> {
     }
 }
 
-class KnacksawCliqueCastFromExileEffect extends AsThoughEffectImpl<KnacksawCliqueCastFromExileEffect> {
+class KnacksawCliqueCastFromExileEffect extends AsThoughEffectImpl {
 
     private UUID cardId;
     private UUID exileId;

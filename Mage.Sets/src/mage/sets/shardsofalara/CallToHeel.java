@@ -69,7 +69,7 @@ public class CallToHeel extends CardImpl<CallToHeel> {
     }
 }
 
-class CallToHeelEffect extends OneShotEffect<CallToHeelEffect> {
+class CallToHeelEffect extends OneShotEffect {
 
     public CallToHeelEffect() {
         super(Outcome.Neutral);

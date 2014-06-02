@@ -83,7 +83,7 @@ public class OonaQueenOfTheFae extends CardImpl<OonaQueenOfTheFae> {
     }
 }
 
-class OonaQueenOfTheFaeEffect extends OneShotEffect<OonaQueenOfTheFaeEffect> {
+class OonaQueenOfTheFaeEffect extends OneShotEffect {
 
     public OonaQueenOfTheFaeEffect() {
         super(Outcome.PutCreatureInPlay);

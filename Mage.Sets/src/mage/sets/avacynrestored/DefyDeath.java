@@ -69,7 +69,7 @@ public class DefyDeath extends CardImpl<DefyDeath> {
     }
 }
 
-class DefyDeathEffect extends OneShotEffect<DefyDeathEffect> {
+class DefyDeathEffect extends OneShotEffect {
 
     public DefyDeathEffect() {
         super(Outcome.BoostCreature);

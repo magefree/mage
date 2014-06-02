@@ -74,7 +74,7 @@ public class ZursWeirding extends CardImpl<ZursWeirding> {
     }
 }
 
-class ZursWeirdingReplacementEffect extends ReplacementEffectImpl<ZursWeirdingReplacementEffect> {
+class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
 
     public ZursWeirdingReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

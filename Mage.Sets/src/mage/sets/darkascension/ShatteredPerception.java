@@ -70,7 +70,7 @@ public class ShatteredPerception extends CardImpl<ShatteredPerception> {
     }
 }
 
-class ShatteredPerceptionEffect extends OneShotEffect<ShatteredPerceptionEffect> {
+class ShatteredPerceptionEffect extends OneShotEffect {
 
     public ShatteredPerceptionEffect() {
         super(Outcome.DrawCard);

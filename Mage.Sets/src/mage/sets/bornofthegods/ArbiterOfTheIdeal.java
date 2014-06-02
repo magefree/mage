@@ -85,7 +85,7 @@ public class ArbiterOfTheIdeal extends CardImpl<ArbiterOfTheIdeal> {
     }
 }
 
-class ArbiterOfTheIdealEffect extends OneShotEffect<ArbiterOfTheIdealEffect> {
+class ArbiterOfTheIdealEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard();
     static {

@@ -71,7 +71,7 @@ public class Phthisis extends CardImpl<Phthisis> {
     }
 }
 
-class PhthisisEffect extends OneShotEffect<PhthisisEffect> {
+class PhthisisEffect extends OneShotEffect {
 
     public PhthisisEffect() {
         super(Outcome.DestroyPermanent);

@@ -71,7 +71,7 @@ public class DescentIntoMadness extends CardImpl<DescentIntoMadness> {
     }
 }
 
-class DescentIntoMadnessEffect extends OneShotEffect<DescentIntoMadnessEffect> {
+class DescentIntoMadnessEffect extends OneShotEffect {
 
     private static final FilterCard filterInHand = new FilterCard();
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();

@@ -77,7 +77,7 @@ public class BlitzHellion extends CardImpl<BlitzHellion> {
     }
 }
 
-class ShuffleSourceEffect extends OneShotEffect<ShuffleSourceEffect> {
+class ShuffleSourceEffect extends OneShotEffect {
 
     ShuffleSourceEffect() {
         super(Outcome.Neutral);

@@ -79,7 +79,7 @@ public class MindclawShaman extends CardImpl<MindclawShaman> {
     }
 }
 
-class MindclawShamanEffect extends OneShotEffect<MindclawShamanEffect> {
+class MindclawShamanEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card");
     

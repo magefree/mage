@@ -74,7 +74,7 @@ public class Dandan extends CardImpl<Dandan> {
     }
 }
 
-class DandanEffect extends ReplacementEffectImpl<DandanEffect> {
+class DandanEffect extends ReplacementEffectImpl {
 
     public DandanEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

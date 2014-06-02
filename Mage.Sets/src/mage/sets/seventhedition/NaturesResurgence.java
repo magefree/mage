@@ -65,7 +65,7 @@ public class NaturesResurgence extends CardImpl<NaturesResurgence> {
     }
 }
 
-class NaturesResurgenceEffect extends OneShotEffect<NaturesResurgenceEffect> {
+class NaturesResurgenceEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCreatureCard("creature");
     

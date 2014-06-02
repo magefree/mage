@@ -77,7 +77,7 @@ public class OrderOfSuccession extends CardImpl<OrderOfSuccession> {
     }
 }
 
-class OrderOfSuccessionEffect extends OneShotEffect<OrderOfSuccessionEffect> {
+class OrderOfSuccessionEffect extends OneShotEffect {
 
     public OrderOfSuccessionEffect() {
         super(Outcome.Benefit);

@@ -78,7 +78,7 @@ public class LastBreath extends CardImpl<LastBreath> {
     }
 }
 
-class LastBreathEffect extends OneShotEffect<LastBreathEffect> {
+class LastBreathEffect extends OneShotEffect {
     LastBreathEffect() {
         super(Outcome.GainLife);
         staticText = "Its controller gains 4 life";

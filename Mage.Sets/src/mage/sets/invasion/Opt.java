@@ -73,7 +73,7 @@ public class Opt extends CardImpl<Opt> {
         return new Opt(this);
     }
 }
-class OptEffect extends OneShotEffect<OptEffect> {
+class OptEffect extends OneShotEffect {
 
     protected static FilterCard filter1 = new FilterCard("card to put on the bottom of your library");
 

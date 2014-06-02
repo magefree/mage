@@ -67,7 +67,7 @@ public class ToilsOfNightAndDay extends CardImpl<ToilsOfNightAndDay> {
     }
 
 
-    private class ToilsOfNightAndDayEffect extends OneShotEffect<ToilsOfNightAndDayEffect> {
+    private class ToilsOfNightAndDayEffect extends OneShotEffect {
 
         public ToilsOfNightAndDayEffect() {
             super(Outcome.Tap);

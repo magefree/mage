@@ -64,7 +64,7 @@ public class Timetwister extends CardImpl<Timetwister> {
     }
 }
 
-class TimetwisterEffect extends OneShotEffect<TimetwisterEffect> {
+class TimetwisterEffect extends OneShotEffect {
 
     public TimetwisterEffect() {
         super(Outcome.Neutral);

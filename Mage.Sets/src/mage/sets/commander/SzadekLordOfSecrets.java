@@ -84,7 +84,7 @@ public class SzadekLordOfSecrets extends CardImpl<SzadekLordOfSecrets> {
     }
 }
 
-class SzadekLordOfSecretsEffect extends ReplacementEffectImpl<SzadekLordOfSecretsEffect> {
+class SzadekLordOfSecretsEffect extends ReplacementEffectImpl {
 
     List<Card> cards;
 

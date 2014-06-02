@@ -75,7 +75,7 @@ public class VolitionReins extends CardImpl<VolitionReins> {
         return new VolitionReins(this);
     }
 
-    public class UntapVolitionReinsEffect extends OneShotEffect<UntapVolitionReinsEffect> {
+    public class UntapVolitionReinsEffect extends OneShotEffect {
 
         public UntapVolitionReinsEffect() {
             super(Outcome.Untap);

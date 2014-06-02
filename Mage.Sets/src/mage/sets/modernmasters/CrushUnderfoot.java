@@ -74,7 +74,7 @@ public class CrushUnderfoot extends CardImpl<CrushUnderfoot> {
     }
 }
 
-class CrushUnderfootEffect extends OneShotEffect<CrushUnderfootEffect> {
+class CrushUnderfootEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Giant you control");
     static {

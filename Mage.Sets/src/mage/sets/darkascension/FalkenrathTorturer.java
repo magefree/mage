@@ -81,7 +81,7 @@ public class FalkenrathTorturer extends CardImpl<FalkenrathTorturer> {
     }
 }
 
-class FalkenrathTorturerEffect extends OneShotEffect<FalkenrathTorturerEffect> {
+class FalkenrathTorturerEffect extends OneShotEffect {
 
     public FalkenrathTorturerEffect() {
         super(Outcome.DrawCard);

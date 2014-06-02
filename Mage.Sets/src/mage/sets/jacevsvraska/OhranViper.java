@@ -76,7 +76,7 @@ public class OhranViper extends CardImpl<OhranViper> {
     }
 }
 
-class OhranViperDestroyEffect extends OneShotEffect<OhranViperDestroyEffect> {
+class OhranViperDestroyEffect extends OneShotEffect {
 
     OhranViperDestroyEffect() {
         super(Outcome.DestroyPermanent);

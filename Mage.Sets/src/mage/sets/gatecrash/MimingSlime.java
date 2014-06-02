@@ -68,7 +68,7 @@ public class MimingSlime extends CardImpl<MimingSlime> {
     }
 }
 
-class MimingSlimeEffect extends OneShotEffect<MimingSlimeEffect> {
+class MimingSlimeEffect extends OneShotEffect {
 
     public MimingSlimeEffect() {
         super(Outcome.PutCreatureInPlay);

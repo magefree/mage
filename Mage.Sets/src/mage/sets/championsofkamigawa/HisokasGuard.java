@@ -91,7 +91,7 @@ public class HisokasGuard extends CardImpl<HisokasGuard> {
     }
 }
 
-class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl<HisokasGuardGainAbilityTargetEffect> {
+class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
 

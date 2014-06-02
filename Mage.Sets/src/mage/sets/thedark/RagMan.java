@@ -83,7 +83,7 @@ public class RagMan extends CardImpl<RagMan> {
     }
 }
 
-class RagManDiscardEffect extends OneShotEffect<RagManDiscardEffect> {
+class RagManDiscardEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard();
     

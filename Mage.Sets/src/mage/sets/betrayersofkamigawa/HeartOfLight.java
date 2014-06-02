@@ -79,7 +79,7 @@ public class HeartOfLight extends CardImpl<HeartOfLight> {
     }
 }
 
-class HeartOfLightEffect extends PreventionEffectImpl<HeartOfLightEffect> {
+class HeartOfLightEffect extends PreventionEffectImpl {
 
     public HeartOfLightEffect() {
         super(Duration.WhileOnBattlefield);

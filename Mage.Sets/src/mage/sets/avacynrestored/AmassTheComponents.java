@@ -68,7 +68,7 @@ public class AmassTheComponents extends CardImpl<AmassTheComponents> {
     }
 }
 
-class AmassTheComponentsEffect extends OneShotEffect<AmassTheComponentsEffect> {
+class AmassTheComponentsEffect extends OneShotEffect {
 
     public AmassTheComponentsEffect() {
         super(Outcome.DrawCard);

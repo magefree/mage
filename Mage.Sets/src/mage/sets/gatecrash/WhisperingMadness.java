@@ -69,7 +69,7 @@ public class WhisperingMadness extends CardImpl<WhisperingMadness> {
     }
 }
 
-class WhisperingMadnessEffect extends OneShotEffect<WhisperingMadnessEffect> {
+class WhisperingMadnessEffect extends OneShotEffect {
     WhisperingMadnessEffect() {
         super(Outcome.Discard);
         staticText = "Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way";

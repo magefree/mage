@@ -74,7 +74,7 @@ public class AngerOfTheGods extends CardImpl<AngerOfTheGods> {
 }
 
 
-class AngerOfTheGodsEffect extends ReplacementEffectImpl<AngerOfTheGodsEffect> {
+class AngerOfTheGodsEffect extends ReplacementEffectImpl {
 
         public AngerOfTheGodsEffect() {
                 super(Duration.EndOfTurn, Outcome.Exile);

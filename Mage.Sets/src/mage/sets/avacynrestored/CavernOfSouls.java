@@ -93,7 +93,7 @@ public class CavernOfSouls extends CardImpl<CavernOfSouls> {
     }
 }
 
-class CavernOfSoulsEffect extends OneShotEffect<CavernOfSoulsEffect> {
+class CavernOfSoulsEffect extends OneShotEffect {
 
     public CavernOfSoulsEffect() {
         super(Outcome.Benefit);
@@ -207,7 +207,7 @@ class CavernOfSoulsWatcher extends Watcher {
     }
 }
 
-class CavernOfSoulsCantCounterEffect extends ReplacementEffectImpl<CavernOfSoulsCantCounterEffect> {
+class CavernOfSoulsCantCounterEffect extends ReplacementEffectImpl {
 
     public CavernOfSoulsCantCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

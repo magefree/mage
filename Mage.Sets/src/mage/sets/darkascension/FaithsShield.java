@@ -77,7 +77,7 @@ public class FaithsShield extends CardImpl<FaithsShield> {
     }
 }
 
-class FaithsShieldEffect extends OneShotEffect<FaithsShieldEffect> {
+class FaithsShieldEffect extends OneShotEffect {
 
     public FaithsShieldEffect() {
         super(Outcome.Protect);

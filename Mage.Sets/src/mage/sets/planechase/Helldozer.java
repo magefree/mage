@@ -78,7 +78,7 @@ public class Helldozer extends CardImpl<Helldozer> {
     }
 }
 
-class HelldozerEffect extends OneShotEffect<HelldozerEffect> {
+class HelldozerEffect extends OneShotEffect {
 
     public HelldozerEffect() {
         super(Outcome.DestroyPermanent);

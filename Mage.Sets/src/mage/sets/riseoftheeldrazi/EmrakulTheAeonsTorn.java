@@ -122,7 +122,7 @@ class EmrakulTheAeonsTornOnCastAbility extends TriggeredAbilityImpl {
     }
 }
 
-class EmrakulTheAeonsTornEffect extends OneShotEffect<EmrakulTheAeonsTornEffect> {
+class EmrakulTheAeonsTornEffect extends OneShotEffect {
 
     EmrakulTheAeonsTornEffect() {
         super(Outcome.Benefit);
@@ -151,7 +151,7 @@ class EmrakulTheAeonsTornEffect extends OneShotEffect<EmrakulTheAeonsTornEffect>
     }
 }
 
-class EmrakulExtraTurnEffect extends OneShotEffect<EmrakulExtraTurnEffect> {
+class EmrakulExtraTurnEffect extends OneShotEffect {
 
     EmrakulExtraTurnEffect() {
         super(Outcome.ExtraTurn);

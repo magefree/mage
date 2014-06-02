@@ -97,7 +97,7 @@ public class SpringjackPasture extends CardImpl<SpringjackPasture> {
     }
 }
 
-class SpringjackPastureEffect extends OneShotEffect<SpringjackPastureEffect> {
+class SpringjackPastureEffect extends OneShotEffect {
 
     public SpringjackPastureEffect() {
         super(Outcome.Benefit);

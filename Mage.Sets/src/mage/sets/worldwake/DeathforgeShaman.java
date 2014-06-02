@@ -78,7 +78,7 @@ public class DeathforgeShaman extends CardImpl<DeathforgeShaman> {
     }
 }
 
-class DeathforgeShamanEffect extends OneShotEffect<DeathforgeShamanEffect> {
+class DeathforgeShamanEffect extends OneShotEffect {
 
     public DeathforgeShamanEffect() {
         super(Outcome.Damage);

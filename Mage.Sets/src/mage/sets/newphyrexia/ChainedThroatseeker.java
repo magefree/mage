@@ -71,7 +71,7 @@ public class ChainedThroatseeker extends CardImpl<ChainedThroatseeker> {
     }
 }
 
-class ChainedThroatseekerEffect extends ReplacementEffectImpl<ChainedThroatseekerEffect> {
+class ChainedThroatseekerEffect extends ReplacementEffectImpl {
 
     public ChainedThroatseekerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

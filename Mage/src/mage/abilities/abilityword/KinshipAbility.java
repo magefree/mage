@@ -87,7 +87,7 @@ public class KinshipAbility extends TriggeredAbilityImpl {
     
 }
 
-class KinshipBaseEffect extends OneShotEffect<KinshipBaseEffect> {
+class KinshipBaseEffect extends OneShotEffect {
     
     private final Effects kinshipEffects = new Effects();
     

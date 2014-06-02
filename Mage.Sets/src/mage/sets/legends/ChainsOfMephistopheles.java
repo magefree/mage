@@ -73,7 +73,7 @@ public class ChainsOfMephistopheles extends CardImpl<ChainsOfMephistopheles> {
     }
 }
 
-class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl<ChainsOfMephistophelesReplacementEffect> {
+class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
 
     public ChainsOfMephistophelesReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

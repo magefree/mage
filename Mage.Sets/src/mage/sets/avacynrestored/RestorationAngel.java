@@ -89,7 +89,7 @@ public class RestorationAngel extends CardImpl<RestorationAngel> {
     }
 }
 
-class RestorationAngelEffect extends OneShotEffect<RestorationAngelEffect> {
+class RestorationAngelEffect extends OneShotEffect {
 
     public RestorationAngelEffect() {
         super(Outcome.Exile);

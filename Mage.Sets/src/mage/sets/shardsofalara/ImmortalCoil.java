@@ -112,7 +112,7 @@ class ImmortalCoilAbility extends StateTriggeredAbility {
 
 }
 
-class LoseGameEffect extends OneShotEffect<LoseGameEffect> {
+class LoseGameEffect extends OneShotEffect {
 
     public LoseGameEffect() {
         super(Outcome.Neutral);
@@ -139,7 +139,7 @@ class LoseGameEffect extends OneShotEffect<LoseGameEffect> {
     }
 }
 
-class PreventAllDamageToControllerEffect extends PreventionEffectImpl<PreventAllDamageToControllerEffect> {
+class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
 
 
     public PreventAllDamageToControllerEffect() {

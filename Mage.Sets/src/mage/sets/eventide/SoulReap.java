@@ -150,7 +150,7 @@ class SoulReapWatcher extends Watcher {
     }
 }
 
-class SoulReapEffect extends OneShotEffect<SoulReapEffect> {
+class SoulReapEffect extends OneShotEffect {
 
     public SoulReapEffect() {
         super(Outcome.Detriment);

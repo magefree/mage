@@ -74,7 +74,7 @@ public class ElsewhereFlask extends CardImpl<ElsewhereFlask> {
     }
 }
 
-class ElsewhereFlaskEffect extends OneShotEffect<ElsewhereFlaskEffect> {
+class ElsewhereFlaskEffect extends OneShotEffect {
 
     public ElsewhereFlaskEffect() {
         super(Outcome.Neutral);
@@ -111,7 +111,7 @@ class ElsewhereFlaskEffect extends OneShotEffect<ElsewhereFlaskEffect> {
     }
 }
 
-class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl<ElsewhereFlaskContinuousEffect> {
+class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

@@ -98,7 +98,7 @@ class LifeLandToken extends Token {
 
 }
 
-class DeathEffect extends OneShotEffect<DeathEffect> {
+class DeathEffect extends OneShotEffect {
 
     public DeathEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -70,7 +70,7 @@ public class ScepterOfEmpires extends CardImpl<ScepterOfEmpires> {
     }
 }
 
-class ScepterOfEmpiresEffect extends OneShotEffect<ScepterOfEmpiresEffect> {
+class ScepterOfEmpiresEffect extends OneShotEffect {
 
     public ScepterOfEmpiresEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -119,7 +119,7 @@ class KaaliaOfTheVastAttacksAbility extends TriggeredAbilityImpl {
     }
 }
 
-class KaaliaOfTheVastEffect extends OneShotEffect<KaaliaOfTheVastEffect> {
+class KaaliaOfTheVastEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("an Angel, Demon, or Dragon creature card");
 

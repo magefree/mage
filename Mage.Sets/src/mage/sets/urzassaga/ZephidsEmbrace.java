@@ -79,7 +79,7 @@ public class ZephidsEmbrace extends CardImpl<ZephidsEmbrace> {
     }
 }
 
-class ZephidsEmbraceEffect extends ContinuousEffectImpl<ZephidsEmbraceEffect> {
+class ZephidsEmbraceEffect extends ContinuousEffectImpl {
 
     public ZephidsEmbraceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

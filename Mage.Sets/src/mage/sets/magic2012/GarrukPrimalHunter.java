@@ -88,7 +88,7 @@ public class GarrukPrimalHunter extends CardImpl<GarrukPrimalHunter> {
 
 }
 
-class GarrukPrimalHunterEffect extends OneShotEffect<GarrukPrimalHunterEffect> {
+class GarrukPrimalHunterEffect extends OneShotEffect {
     GarrukPrimalHunterEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw cards equal to the greatest power among creatures you control";

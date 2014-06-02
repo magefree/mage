@@ -72,7 +72,7 @@ public class MitoticManipulation extends CardImpl<MitoticManipulation> {
     }
 }
 
-class MitoticManipulationEffect extends OneShotEffect<MitoticManipulationEffect> {
+class MitoticManipulationEffect extends OneShotEffect {
 
     public MitoticManipulationEffect() {
         super(Outcome.PutCardInPlay);

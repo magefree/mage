@@ -12,7 +12,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class SkipEnchantedUntapEffect extends ReplacementEffectImpl<SkipEnchantedUntapEffect> {
+public class SkipEnchantedUntapEffect extends ReplacementEffectImpl {
 
     public SkipEnchantedUntapEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

@@ -80,7 +80,7 @@ public class VectisDominator extends CardImpl<VectisDominator> {
     }
 }
 
-class VectisDominatorEffect extends OneShotEffect<VectisDominatorEffect> {
+class VectisDominatorEffect extends OneShotEffect {
 
     protected Cost cost;
 

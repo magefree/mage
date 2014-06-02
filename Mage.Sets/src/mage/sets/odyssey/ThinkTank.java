@@ -72,7 +72,7 @@ public class ThinkTank extends CardImpl<ThinkTank> {
     }
 }
 
-class ThinkTankLookLibraryEffect extends OneShotEffect<ThinkTankLookLibraryEffect> {
+class ThinkTankLookLibraryEffect extends OneShotEffect {
 
     public ThinkTankLookLibraryEffect() {
         super(Outcome.DrawCard);

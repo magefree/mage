@@ -78,7 +78,7 @@ public class DesolationAngel extends CardImpl<DesolationAngel> {
     }
 }
 
-class DesolationAngelEntersBattlefieldEffect extends OneShotEffect<DesolationAngelEntersBattlefieldEffect> {
+class DesolationAngelEntersBattlefieldEffect extends OneShotEffect {
     DesolationAngelEntersBattlefieldEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy all lands you control. If it was kicked, destroy all lands instead";

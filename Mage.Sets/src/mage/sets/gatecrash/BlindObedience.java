@@ -72,7 +72,7 @@ public class BlindObedience extends CardImpl<BlindObedience> {
     }
 }
 
-class BlindObedienceTapEffect extends ReplacementEffectImpl<BlindObedienceTapEffect> {
+class BlindObedienceTapEffect extends ReplacementEffectImpl {
     BlindObedienceTapEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Tap);
         staticText = "Artifacts and creatures your opponents control enter the battlefield tapped";

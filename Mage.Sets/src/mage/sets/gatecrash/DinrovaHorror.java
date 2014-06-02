@@ -75,7 +75,7 @@ public class DinrovaHorror extends CardImpl<DinrovaHorror> {
     }
 }
 
-class DinrovaHorrorEffect extends OneShotEffect<DinrovaHorrorEffect> {
+class DinrovaHorrorEffect extends OneShotEffect {
 
     public DinrovaHorrorEffect() {
         super(Outcome.Detriment);

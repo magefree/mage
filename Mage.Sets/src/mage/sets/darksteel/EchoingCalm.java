@@ -71,7 +71,7 @@ public class EchoingCalm extends CardImpl<EchoingCalm> {
     }
 }
 
-class EchoingCalmEffect extends OneShotEffect<EchoingCalmEffect> {
+class EchoingCalmEffect extends OneShotEffect {
     EchoingCalmEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy target enchantment and all other enchantments with the same name as that enchantment";

@@ -76,7 +76,7 @@ public class BrilliantUltimatum extends CardImpl<BrilliantUltimatum> {
     }
 }
 
-class BrilliantUltimatumEffect extends OneShotEffect<BrilliantUltimatumEffect> {
+class BrilliantUltimatumEffect extends OneShotEffect {
 
     public BrilliantUltimatumEffect() {
         super(Outcome.PlayForFree);

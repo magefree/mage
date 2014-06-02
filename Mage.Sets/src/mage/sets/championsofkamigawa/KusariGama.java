@@ -122,7 +122,7 @@ class KusariGamaAbility extends TriggeredAbilityImpl {
     }
 }
 
-class KusariGamaDamageEffect extends OneShotEffect<KusariGamaDamageEffect> {
+class KusariGamaDamageEffect extends OneShotEffect {
 
     public KusariGamaDamageEffect() {
         super(Outcome.Damage);

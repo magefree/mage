@@ -90,7 +90,7 @@ public class SorinMarkov extends CardImpl<SorinMarkov> {
     }
 }
 
-class SorinMarkovEffect extends OneShotEffect<SorinMarkovEffect> {
+class SorinMarkovEffect extends OneShotEffect {
 
     public SorinMarkovEffect() {
         super(Outcome.Benefit);

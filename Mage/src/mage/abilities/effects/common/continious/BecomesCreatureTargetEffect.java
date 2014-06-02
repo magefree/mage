@@ -45,7 +45,7 @@ import mage.util.CardUtil;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCreatureTargetEffect> {
+public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
 
     protected Token token;
     protected String type;

@@ -65,7 +65,7 @@ public class HidetsugusSecondRite extends CardImpl<HidetsugusSecondRite> {
     }
 }
 
-class HidetsugusSecondRiteEffect extends OneShotEffect<HidetsugusSecondRiteEffect> {
+class HidetsugusSecondRiteEffect extends OneShotEffect {
 
     public HidetsugusSecondRiteEffect() {
         super(Outcome.Damage);

@@ -77,7 +77,7 @@ public class NantukoMentor extends CardImpl<NantukoMentor> {
     }
 }
 
-class NantukoMentorBoostTargetEffect extends ContinuousEffectImpl<NantukoMentorBoostTargetEffect> {
+class NantukoMentorBoostTargetEffect extends ContinuousEffectImpl {
 
 public NantukoMentorBoostTargetEffect() {
     super(Duration.EndOfTurn, Outcome.BoostCreature);

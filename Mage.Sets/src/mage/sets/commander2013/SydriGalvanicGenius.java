@@ -105,7 +105,7 @@ public class SydriGalvanicGenius extends CardImpl<SydriGalvanicGenius> {
     }
 }
 
-class SydriGalvanicGeniusEffect extends ContinuousEffectImpl<SydriGalvanicGeniusEffect> {
+class SydriGalvanicGeniusEffect extends ContinuousEffectImpl {
 
     public SydriGalvanicGeniusEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);

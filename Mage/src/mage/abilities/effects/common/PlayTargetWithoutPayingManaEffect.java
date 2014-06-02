@@ -42,7 +42,7 @@ import mage.target.Target;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlayTargetWithoutPayingManaEffect extends OneShotEffect<PlayTargetWithoutPayingManaEffect> {
+public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
 
     public PlayTargetWithoutPayingManaEffect() {
         super(Outcome.GainControl);

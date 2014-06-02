@@ -78,7 +78,7 @@ public class MarshCasualties extends CardImpl<MarshCasualties> {
     }
 }
 
-class MarshCasualtiesEffect extends ContinuousEffectImpl<MarshCasualtiesEffect> {
+class MarshCasualtiesEffect extends ContinuousEffectImpl {
 
     private int power;
     private int toughness;

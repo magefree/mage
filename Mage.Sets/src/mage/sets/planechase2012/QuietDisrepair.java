@@ -94,7 +94,7 @@ public class QuietDisrepair extends CardImpl<QuietDisrepair> {
     }
 }
 
-class QuietDisrepairDestroyEffect extends OneShotEffect<QuietDisrepairDestroyEffect> {
+class QuietDisrepairDestroyEffect extends OneShotEffect {
 
     public QuietDisrepairDestroyEffect() {
         super(Outcome.DestroyPermanent);

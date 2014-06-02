@@ -68,7 +68,7 @@ public class Oust extends CardImpl<Oust> {
     }
 }
 
-class OustEffect extends OneShotEffect<OustEffect> {
+class OustEffect extends OneShotEffect {
 
     public OustEffect() {
         super(Outcome.Benefit);

@@ -76,7 +76,7 @@ private static final FilterCreaturePermanent filter = new FilterCreaturePermanen
 }
 
 
-class CalltoGloryFirstEffect extends OneShotEffect<CalltoGloryFirstEffect> {
+class CalltoGloryFirstEffect extends OneShotEffect {
 
     public CalltoGloryFirstEffect() {
         super(Outcome.Untap);

@@ -79,7 +79,7 @@ public class SylvanMessenger extends CardImpl<SylvanMessenger> {
     }
 }
 
-class SylvanMessengerEffect extends OneShotEffect<SylvanMessengerEffect> {
+class SylvanMessengerEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("Elf");
     static {

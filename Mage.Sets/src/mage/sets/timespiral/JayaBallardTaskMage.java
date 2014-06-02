@@ -111,7 +111,7 @@ public class JayaBallardTaskMage extends CardImpl<JayaBallardTaskMage> {
     }
 }
 
-class CantRegenerateEffect extends ReplacementEffectImpl<CantRegenerateEffect> {
+class CantRegenerateEffect extends ReplacementEffectImpl {
 
     public CantRegenerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);

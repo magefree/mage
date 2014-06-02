@@ -41,7 +41,7 @@ import mage.game.Game;
 /**
  * @author Backfir3, noxx
  */
-public class SetToughnessSourceEffect extends ContinuousEffectImpl<SetToughnessSourceEffect> {
+public class SetToughnessSourceEffect extends ContinuousEffectImpl {
 
     private final DynamicValue amount;
 

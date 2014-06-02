@@ -134,7 +134,7 @@ class PathOfBraveryTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class PathOfBraveryEffect extends OneShotEffect<PathOfBraveryEffect> {
+class PathOfBraveryEffect extends OneShotEffect {
 
     private int attackers;
 

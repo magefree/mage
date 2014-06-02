@@ -70,7 +70,7 @@ public class PlatinumAngel extends CardImpl<PlatinumAngel> {
         return new PlatinumAngel(this);
     }
 
-    class PlatinumAngelEffect extends ReplacementEffectImpl<PlatinumAngelEffect> {
+    class PlatinumAngelEffect extends ReplacementEffectImpl {
 
         public PlatinumAngelEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Benefit);

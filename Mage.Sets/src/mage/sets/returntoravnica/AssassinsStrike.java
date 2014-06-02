@@ -70,7 +70,7 @@ public class AssassinsStrike extends CardImpl<AssassinsStrike> {
     }
 }
 
-class AssassinsStrikeEffect extends OneShotEffect<AssassinsStrikeEffect> {
+class AssassinsStrikeEffect extends OneShotEffect {
 
     public AssassinsStrikeEffect() {
         super(Outcome.DrawCard);

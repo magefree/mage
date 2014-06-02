@@ -45,7 +45,7 @@ public class TransmuteAbility extends SimpleActivatedAbility {
     }
 }
 
-class TransmuteEffect extends OneShotEffect<TransmuteEffect> {
+class TransmuteEffect extends OneShotEffect {
     TransmuteEffect() {
         super(Outcome.Benefit);
         staticText = "Transmute";

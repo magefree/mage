@@ -73,7 +73,7 @@ public class SerraAvatar extends CardImpl<SerraAvatar> {
     }
 }
 
-class SerraAvatarEffect extends OneShotEffect<SerraAvatarEffect> {
+class SerraAvatarEffect extends OneShotEffect {
     SerraAvatarEffect() {
         super(Outcome.ReturnToHand);
         staticText = "shuffle it into its owner's library";

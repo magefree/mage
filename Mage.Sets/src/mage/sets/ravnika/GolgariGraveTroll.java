@@ -85,7 +85,7 @@ public class GolgariGraveTroll extends CardImpl<GolgariGraveTroll> {
     }
 }
 
-class GolgariGraveTrollEffect extends OneShotEffect<GolgariGraveTrollEffect> {
+class GolgariGraveTrollEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard();
 

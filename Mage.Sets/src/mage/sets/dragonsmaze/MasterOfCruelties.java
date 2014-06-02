@@ -128,7 +128,7 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class MasterOfCrueltiesEffect extends OneShotEffect<MasterOfCrueltiesEffect> {
+class MasterOfCrueltiesEffect extends OneShotEffect {
 
     public MasterOfCrueltiesEffect() {
         super(Outcome.Benefit);
@@ -155,7 +155,7 @@ class MasterOfCrueltiesEffect extends OneShotEffect<MasterOfCrueltiesEffect> {
     }
 }
 
-class MasterOfCrueltiesNoDamageEffect extends ReplacementEffectImpl<MasterOfCrueltiesNoDamageEffect> {
+class MasterOfCrueltiesNoDamageEffect extends ReplacementEffectImpl {
 
     public MasterOfCrueltiesNoDamageEffect() {
         super(Duration.EndOfCombat, Outcome.PreventDamage);

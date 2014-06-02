@@ -65,7 +65,7 @@ public class Worship extends CardImpl<Worship> {
     }
 }
 
-class WorshipReplacementEffect extends ReplacementEffectImpl<WorshipReplacementEffect> {
+class WorshipReplacementEffect extends ReplacementEffectImpl {
 
     public WorshipReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

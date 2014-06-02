@@ -67,7 +67,7 @@ public class PsychicSpiral extends CardImpl<PsychicSpiral> {
     }
 }
 
-class PsychicSpiralEffect extends OneShotEffect<PsychicSpiralEffect> {
+class PsychicSpiralEffect extends OneShotEffect {
 
     public PsychicSpiralEffect() {
         super(Outcome.GainLife);

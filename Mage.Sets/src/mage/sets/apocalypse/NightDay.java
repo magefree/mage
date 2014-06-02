@@ -84,7 +84,7 @@ public class NightDay extends SplitCard<NightDay> {
     }
 }
 
-class DayEffect extends ContinuousEffectImpl<DayEffect> {
+class DayEffect extends ContinuousEffectImpl {
 
     public DayEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

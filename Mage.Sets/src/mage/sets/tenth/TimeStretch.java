@@ -66,7 +66,7 @@ public class TimeStretch extends CardImpl<TimeStretch> {
     }
 }
 
-class TimeStretchEffect extends OneShotEffect<TimeStretchEffect> {
+class TimeStretchEffect extends OneShotEffect {
 
     public TimeStretchEffect() {
         super(Outcome.ExtraTurn);

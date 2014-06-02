@@ -77,7 +77,7 @@ public class StigmaLasher extends CardImpl<StigmaLasher> {
     }
 }
 
-class StigmaLasherEffect extends ContinuousEffectImpl<StigmaLasherEffect> {
+class StigmaLasherEffect extends ContinuousEffectImpl {
     
     public StigmaLasherEffect() {
         super(Duration.EndOfGame, Layer.PlayerEffects, SubLayer.NA, Outcome.Neutral);

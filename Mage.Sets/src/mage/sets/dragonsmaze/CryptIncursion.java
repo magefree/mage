@@ -72,7 +72,7 @@ public class CryptIncursion extends CardImpl<CryptIncursion> {
 
 }
 
-class CryptIncursionEffect extends OneShotEffect<CryptIncursionEffect> {
+class CryptIncursionEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard();
 

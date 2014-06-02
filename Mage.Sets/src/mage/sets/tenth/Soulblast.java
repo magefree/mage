@@ -73,7 +73,7 @@ public class Soulblast extends CardImpl<Soulblast> {
     }
 }
 
-class SoulblastEffect extends OneShotEffect<SoulblastEffect> {
+class SoulblastEffect extends OneShotEffect {
 
     public SoulblastEffect() {
         super(Outcome.Benefit);

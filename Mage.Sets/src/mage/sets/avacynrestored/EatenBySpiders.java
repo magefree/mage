@@ -75,7 +75,7 @@ public class EatenBySpiders extends CardImpl<EatenBySpiders> {
     }
 }
 
-class EatenBySpidersEffect extends OneShotEffect<EatenBySpidersEffect> {
+class EatenBySpidersEffect extends OneShotEffect {
 
     public EatenBySpidersEffect() {
         super(Outcome.DestroyPermanent);

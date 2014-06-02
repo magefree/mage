@@ -79,7 +79,7 @@ public class Phantasmagorian extends CardImpl<Phantasmagorian> {
     }
 }
 
-class CounterSourceEffect extends OneShotEffect<CounterSourceEffect> {
+class CounterSourceEffect extends OneShotEffect {
 
     public CounterSourceEffect() {
         super(Outcome.Detriment);

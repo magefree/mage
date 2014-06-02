@@ -77,7 +77,7 @@ public class Conflux extends CardImpl<Conflux> {
     }
 }
 
-class ConfluxEffect extends OneShotEffect<ConfluxEffect> {
+class ConfluxEffect extends OneShotEffect {
 
     public ConfluxEffect() {
         super(Outcome.DrawCard);

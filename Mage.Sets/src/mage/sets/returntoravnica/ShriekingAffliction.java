@@ -113,7 +113,7 @@ class ShriekingAfflictionTriggeredAbility extends TriggeredAbilityImpl {
         return "At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, he or she loses 3 life.";
     }
 }
-class ShriekingAfflictionTargetEffect extends OneShotEffect<ShriekingAfflictionTargetEffect> {
+class ShriekingAfflictionTargetEffect extends OneShotEffect {
 
     public ShriekingAfflictionTargetEffect() {
         super(Outcome.Damage);

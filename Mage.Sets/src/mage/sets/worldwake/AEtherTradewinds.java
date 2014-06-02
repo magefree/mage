@@ -75,7 +75,7 @@ public class AEtherTradewinds extends CardImpl<AEtherTradewinds> {
     }
 }
 
-class AEtherTradewindsEffect extends OneShotEffect<AEtherTradewindsEffect> {
+class AEtherTradewindsEffect extends OneShotEffect {
 
     public AEtherTradewindsEffect() {
         super(Outcome.ReturnToHand);

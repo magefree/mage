@@ -66,7 +66,7 @@ public class MarchOfTheMachines extends CardImpl<MarchOfTheMachines> {
     }
 }
 
-class MarchOfTheMachinesEffect extends ContinuousEffectImpl<MarchOfTheMachinesEffect> {
+class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
     static {

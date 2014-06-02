@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class PreventAllDamageByAttachedEffect extends PreventionEffectImpl<PreventAllDamageByAttachedEffect> {
+public class PreventAllDamageByAttachedEffect extends PreventionEffectImpl {
 
     private final String attachedDescription;
 

@@ -71,7 +71,7 @@ public class LoyalSentry extends CardImpl<LoyalSentry> {
     }
 }
 
-class LoyalSentryEffect extends OneShotEffect<LoyalSentryEffect> {
+class LoyalSentryEffect extends OneShotEffect {
     LoyalSentryEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy that creature and {this}";

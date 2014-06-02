@@ -73,7 +73,7 @@ public class CacklingCounterpart extends CardImpl<CacklingCounterpart> {
     }
 }
 
-class CacklingCounterpartEffect extends OneShotEffect<CacklingCounterpartEffect> {
+class CacklingCounterpartEffect extends OneShotEffect {
 
     public CacklingCounterpartEffect() {
         super(Outcome.PutCreatureInPlay);

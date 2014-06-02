@@ -98,7 +98,7 @@ public class BanefulOmen extends CardImpl<BanefulOmen> {
         }
     }
 
-    class BanefulOmenEffect extends OneShotEffect<BanefulOmenEffect> {
+    class BanefulOmenEffect extends OneShotEffect {
 
         public BanefulOmenEffect() {
             super(Outcome.Benefit);

@@ -74,7 +74,7 @@ public class CeaseFire extends CardImpl<CeaseFire> {
     }
 }
 
-class CeaseFireEffect extends ReplacementEffectImpl<CeaseFireEffect> {
+class CeaseFireEffect extends ReplacementEffectImpl {
 
     private static final FilterSpell filter = new FilterSpell();
     static {

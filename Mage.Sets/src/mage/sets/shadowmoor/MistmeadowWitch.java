@@ -79,7 +79,7 @@ public class MistmeadowWitch extends CardImpl<MistmeadowWitch> {
     }
 }
 
-class MistmeadowWitchEffect extends OneShotEffect<MistmeadowWitchEffect> {
+class MistmeadowWitchEffect extends OneShotEffect {
 
     public MistmeadowWitchEffect() {
         super(Outcome.Detriment);

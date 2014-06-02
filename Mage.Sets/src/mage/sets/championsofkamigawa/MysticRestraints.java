@@ -82,7 +82,7 @@ public class MysticRestraints extends CardImpl<MysticRestraints> {
     }
 }
 
-class MysticRestraintsEffect extends OneShotEffect<MysticRestraintsEffect> {
+class MysticRestraintsEffect extends OneShotEffect {
     MysticRestraintsEffect() {
         super(Outcome.Tap);
         staticText = "tap enchanted creature";

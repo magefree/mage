@@ -39,7 +39,7 @@ import mage.players.Player;
 /**
  * @author nantuko
  */
-public class PlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl<PlayWithTheTopCardRevealedEffect> {
+public class PlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl {
 
     public PlayWithTheTopCardRevealedEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);

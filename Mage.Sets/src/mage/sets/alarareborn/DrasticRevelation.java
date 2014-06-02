@@ -67,7 +67,7 @@ public class DrasticRevelation extends CardImpl<DrasticRevelation> {
     }
 }
 
-class DrasticRevelationEffect extends OneShotEffect<DrasticRevelationEffect> {
+class DrasticRevelationEffect extends OneShotEffect {
 
     DrasticRevelationEffect() {
         super(Outcome.DrawCard);

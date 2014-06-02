@@ -78,7 +78,7 @@ public class ScavengingOoze extends CardImpl<ScavengingOoze> {
     }
 }
 
-class ScavengingOozeEffect extends OneShotEffect<ScavengingOozeEffect> {
+class ScavengingOozeEffect extends OneShotEffect {
 
     public ScavengingOozeEffect() {
         super(Outcome.Benefit);

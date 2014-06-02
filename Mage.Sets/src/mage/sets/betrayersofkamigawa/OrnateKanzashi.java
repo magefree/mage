@@ -74,7 +74,7 @@ public class OrnateKanzashi extends CardImpl<OrnateKanzashi> {
     }
 
 }
-class OrnateKanzashiEffect extends OneShotEffect<OrnateKanzashiEffect> {
+class OrnateKanzashiEffect extends OneShotEffect {
 
     public OrnateKanzashiEffect() {
         super(Outcome.Detriment);
@@ -108,7 +108,7 @@ class OrnateKanzashiEffect extends OneShotEffect<OrnateKanzashiEffect> {
     }
 }
 
-class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl<OrnateKanzashiCastFromExileEffect> {
+class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl {
 
     private UUID cardId;
 

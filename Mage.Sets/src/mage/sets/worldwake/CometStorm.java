@@ -81,7 +81,7 @@ public class CometStorm extends CardImpl<CometStorm> {
     }
 }
 
-class CometStormEffect extends OneShotEffect<CometStormEffect> {
+class CometStormEffect extends OneShotEffect {
 
     public CometStormEffect() {
         super(Outcome.Damage);

@@ -69,7 +69,7 @@ public class DarkTemper extends CardImpl<DarkTemper> {
     }
 }
 
-class DarkTemperEffect extends OneShotEffect<DarkTemperEffect> {
+class DarkTemperEffect extends OneShotEffect {
 
     public DarkTemperEffect() {
         super(Outcome.Damage);

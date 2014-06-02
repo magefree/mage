@@ -77,7 +77,7 @@ public class VengefulRebirth extends CardImpl<VengefulRebirth> {
 
 }
 
-class VengefulRebirthEffect extends OneShotEffect<VengefulRebirthEffect> {
+class VengefulRebirthEffect extends OneShotEffect {
 
     public VengefulRebirthEffect() {
         super(Outcome.DrawCard);

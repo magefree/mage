@@ -106,7 +106,7 @@ public class OfferingAbility extends StaticAbility {
     }
 }
 
-class OfferingAsThoughEffect extends AsThoughEffectImpl<OfferingAsThoughEffect> {
+class OfferingAsThoughEffect extends AsThoughEffectImpl {
 
     public OfferingAsThoughEffect() {
         super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);

@@ -74,7 +74,7 @@ public class ShallowGrave extends CardImpl<ShallowGrave> {
     }
 }
 
-class ShallowGraveEffect extends OneShotEffect<ShallowGraveEffect> {
+class ShallowGraveEffect extends OneShotEffect {
     
     public ShallowGraveEffect() {
         super(Outcome.Benefit);

@@ -119,7 +119,7 @@ class MinionReflectorTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
 }
 
 
-class MinionReflectorEffect extends OneShotEffect<MinionReflectorEffect> {
+class MinionReflectorEffect extends OneShotEffect {
 
     public MinionReflectorEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -121,7 +121,7 @@ class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl<StoneI
     }
 }
 
-class StoneIdolTrapEffect extends OneShotEffect<StoneIdolTrapEffect> {
+class StoneIdolTrapEffect extends OneShotEffect {
 
     public StoneIdolTrapEffect() {
         super(Outcome.PutCreatureInPlay);

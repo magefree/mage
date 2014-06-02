@@ -67,7 +67,7 @@ public class SavorTheMoment extends CardImpl<SavorTheMoment> {
     }
 }
 
-class SkipNextUntapStepSourceControllerEffect extends OneShotEffect<SkipNextUntapStepSourceControllerEffect> {
+class SkipNextUntapStepSourceControllerEffect extends OneShotEffect {
 
     public SkipNextUntapStepSourceControllerEffect() {
         super(Outcome.Detriment);

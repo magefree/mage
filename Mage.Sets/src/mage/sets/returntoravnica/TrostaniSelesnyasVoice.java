@@ -120,7 +120,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class TrostaniSelesnyasVoiceEffect extends OneShotEffect<TrostaniSelesnyasVoiceEffect> {
+class TrostaniSelesnyasVoiceEffect extends OneShotEffect {
 
     public TrostaniSelesnyasVoiceEffect() {
         super(Outcome.GainLife);

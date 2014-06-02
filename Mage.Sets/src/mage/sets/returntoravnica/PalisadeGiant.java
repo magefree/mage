@@ -92,7 +92,7 @@ public class PalisadeGiant extends CardImpl<PalisadeGiant> {
     }
 }
 
-class PalisadeGiantReplacementEffect extends ReplacementEffectImpl<PalisadeGiantReplacementEffect> {
+class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
 
     PalisadeGiantReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);

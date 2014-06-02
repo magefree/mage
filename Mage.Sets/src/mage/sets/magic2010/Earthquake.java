@@ -66,7 +66,7 @@ public class Earthquake extends CardImpl<Earthquake> {
     }
 }
 
-class EarthquakeEffect extends OneShotEffect<EarthquakeEffect> {
+class EarthquakeEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

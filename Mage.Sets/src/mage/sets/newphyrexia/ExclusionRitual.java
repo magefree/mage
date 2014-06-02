@@ -79,7 +79,7 @@ public class ExclusionRitual extends CardImpl<ExclusionRitual> {
     }
 }
 
-class ExclusionRitualImprintEffect extends OneShotEffect<ExclusionRitualImprintEffect> {
+class ExclusionRitualImprintEffect extends OneShotEffect {
     ExclusionRitualImprintEffect() {
         super(Outcome.Exile);
         staticText = "exile target nonland permanent";
@@ -106,7 +106,7 @@ class ExclusionRitualImprintEffect extends OneShotEffect<ExclusionRitualImprintE
     }
 }
 
-class ExclusionRitualReplacementEffect extends ReplacementEffectImpl<ExclusionRitualReplacementEffect> {
+class ExclusionRitualReplacementEffect extends ReplacementEffectImpl {
     ExclusionRitualReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can't cast spells with the same name as the exiled card";

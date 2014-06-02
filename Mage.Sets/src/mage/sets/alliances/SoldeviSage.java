@@ -81,7 +81,7 @@ public class SoldeviSage extends CardImpl<SoldeviSage> {
     }
 }
 
-class SoldeviSageEffect extends OneShotEffect<SoldeviSageEffect> {
+class SoldeviSageEffect extends OneShotEffect {
 
     public SoldeviSageEffect() {
         super(Outcome.DrawCard);

@@ -81,7 +81,7 @@ public class KaervekTheMerciless extends CardImpl<KaervekTheMerciless> {
     }
 }
 
-class KaervekTheMercilessEffect extends OneShotEffect<KaervekTheMercilessEffect> {
+class KaervekTheMercilessEffect extends OneShotEffect {
 
     public KaervekTheMercilessEffect() {
         super(Outcome.Benefit);

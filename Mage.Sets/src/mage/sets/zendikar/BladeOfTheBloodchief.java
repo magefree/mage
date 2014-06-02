@@ -112,7 +112,7 @@ class BladeOfTheBloodChiefTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class BladeOfTheBloodchiefEffect extends OneShotEffect<BladeOfTheBloodchiefEffect> {
+class BladeOfTheBloodchiefEffect extends OneShotEffect {
 
     BladeOfTheBloodchiefEffect ( ) {
         super(Outcome.BoostCreature);

@@ -87,7 +87,7 @@ public class WaxmaneBaku extends CardImpl<WaxmaneBaku> {
     }
 }
 
-class WaxmaneBakuTapEffect extends OneShotEffect<WaxmaneBakuTapEffect> {
+class WaxmaneBakuTapEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent();
 

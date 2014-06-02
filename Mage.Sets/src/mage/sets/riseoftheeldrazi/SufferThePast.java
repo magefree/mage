@@ -70,7 +70,7 @@ public class SufferThePast extends CardImpl<SufferThePast> {
     }
 }
 
-class SufferThePastEffect extends OneShotEffect<SufferThePastEffect> {
+class SufferThePastEffect extends OneShotEffect {
     
     public SufferThePastEffect() {
         super(Outcome.Neutral);

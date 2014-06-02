@@ -70,7 +70,7 @@ public class ConsumeStrength extends CardImpl<ConsumeStrength> {
     }
 }
 
-class ConsumeStrengthEffect extends ContinuousEffectImpl<ConsumeStrengthEffect> {
+class ConsumeStrengthEffect extends ContinuousEffectImpl {
 
     public ConsumeStrengthEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author LevelX2
  */
 
-public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect extends OneShotEffect<SearchTargetGraveyardHandLibraryForCardNameAndExileEffect> {
+public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect extends OneShotEffect {
 
     protected String searchWhatText;
     protected String searchForText;

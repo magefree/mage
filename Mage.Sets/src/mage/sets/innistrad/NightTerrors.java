@@ -69,7 +69,7 @@ public class NightTerrors extends CardImpl<NightTerrors> {
     }
 }
 
-class NightTerrorsEffect extends OneShotEffect<NightTerrorsEffect> {
+class NightTerrorsEffect extends OneShotEffect {
 
     public NightTerrorsEffect() {
         super(Outcome.Exile);

@@ -70,7 +70,7 @@ public class Incinerate extends CardImpl<Incinerate> {
     }
 }
 
-class IncinerateEffect extends ReplacementEffectImpl<IncinerateEffect> {
+class IncinerateEffect extends ReplacementEffectImpl {
 
     public IncinerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);

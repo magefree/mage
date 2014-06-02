@@ -97,7 +97,7 @@ public class PuppeteerClique extends CardImpl<PuppeteerClique> {
     }
 }
 
-class PuppeteerCliqueEffect extends OneShotEffect<PuppeteerCliqueEffect> {
+class PuppeteerCliqueEffect extends OneShotEffect {
 
     public PuppeteerCliqueEffect() {
         super(Outcome.PutCreatureInPlay);

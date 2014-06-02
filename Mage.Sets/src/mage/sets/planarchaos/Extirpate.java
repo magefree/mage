@@ -85,7 +85,7 @@ public class Extirpate extends CardImpl<Extirpate> {
     }
 }
 
-class ExtirpateEffect extends OneShotEffect<ExtirpateEffect> {
+class ExtirpateEffect extends OneShotEffect {
 
     public ExtirpateEffect() {
         super(Outcome.Exile);

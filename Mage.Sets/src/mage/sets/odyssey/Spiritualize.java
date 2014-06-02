@@ -111,7 +111,7 @@ class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
     }
 }
 
-class SpiritualizeEffect extends OneShotEffect<SpiritualizeEffect> {
+class SpiritualizeEffect extends OneShotEffect {
 
     public SpiritualizeEffect() {
         super(Outcome.GainLife);

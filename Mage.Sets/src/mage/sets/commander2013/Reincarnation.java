@@ -77,7 +77,7 @@ public class Reincarnation extends CardImpl<Reincarnation> {
     }
 }
 
-class ReincarnationEffect extends OneShotEffect<ReincarnationEffect> {
+class ReincarnationEffect extends OneShotEffect {
 
     public ReincarnationEffect() {
         super(Outcome.Benefit);
@@ -139,7 +139,7 @@ class ReincarnationDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 }
 
-class ReincarnationDelayedEffect extends OneShotEffect<ReincarnationDelayedEffect> {
+class ReincarnationDelayedEffect extends OneShotEffect {
 
     private UUID target;
 

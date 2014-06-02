@@ -101,7 +101,7 @@ public class EliteArcanist extends CardImpl<EliteArcanist> {
     }
 }
 
-class EliteArcanistImprintEffect extends OneShotEffect<EliteArcanistImprintEffect> {
+class EliteArcanistImprintEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("instant card from your hand");
     static  {
@@ -147,7 +147,7 @@ class EliteArcanistImprintEffect extends OneShotEffect<EliteArcanistImprintEffec
 
 }
 
-class EliteArcanistCopyEffect extends OneShotEffect<EliteArcanistCopyEffect> {
+class EliteArcanistCopyEffect extends OneShotEffect {
 
     public EliteArcanistCopyEffect() {
         super(Outcome.Copy);

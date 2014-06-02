@@ -68,7 +68,7 @@ public class CrucibleOfWorlds extends CardImpl<CrucibleOfWorlds> {
     }
 }
 
-class CrucibleOfWorldsEffect extends ContinuousEffectImpl<CrucibleOfWorldsEffect> {
+class CrucibleOfWorldsEffect extends ContinuousEffectImpl {
 
     public CrucibleOfWorldsEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

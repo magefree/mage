@@ -87,7 +87,7 @@ public class MartyrOfSands extends CardImpl<MartyrOfSands> {
     }
 }
 
-class MartyrOfSandsEffect extends OneShotEffect<MartyrOfSandsEffect> {
+class MartyrOfSandsEffect extends OneShotEffect {
 
     public MartyrOfSandsEffect() {
         super(Outcome.GainLife);

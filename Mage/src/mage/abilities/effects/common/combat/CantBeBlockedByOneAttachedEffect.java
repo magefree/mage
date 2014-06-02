@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl<CantBeBlockedByOneAttachedEffect> {
+public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl {
 
     protected int amount;
     protected AttachmentType attachmentType;

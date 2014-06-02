@@ -83,7 +83,7 @@ public class ScavengeAbility extends ActivatedAbilityImpl {
     }
 }
 
-class ScavengeEffect extends OneShotEffect<ScavengeEffect> {
+class ScavengeEffect extends OneShotEffect {
     ScavengeEffect() {
         super(Outcome.BoostCreature);
     }

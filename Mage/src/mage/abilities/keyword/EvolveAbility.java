@@ -137,7 +137,7 @@ public class EvolveAbility extends TriggeredAbilityImpl {
     }
 }
 
-class EvolveEffect extends OneShotEffect<EvolveEffect> {
+class EvolveEffect extends OneShotEffect {
 
     public EvolveEffect() {
         super(Outcome.BoostCreature);

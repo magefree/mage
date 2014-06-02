@@ -68,7 +68,7 @@ public class Starfall extends CardImpl<Starfall> {
     }
 }
 
-class StarfallEffect extends OneShotEffect<StarfallEffect> {
+class StarfallEffect extends OneShotEffect {
 
     public StarfallEffect() {
         super(Outcome.Damage);

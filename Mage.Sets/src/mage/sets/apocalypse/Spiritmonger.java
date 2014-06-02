@@ -85,7 +85,7 @@ public class Spiritmonger extends CardImpl<Spiritmonger> {
     }
 }
 
-class SpiritmongerChangeColorEffect extends OneShotEffect<SpiritmongerChangeColorEffect> {
+class SpiritmongerChangeColorEffect extends OneShotEffect {
 
     public SpiritmongerChangeColorEffect() {
         super(Outcome.Neutral);

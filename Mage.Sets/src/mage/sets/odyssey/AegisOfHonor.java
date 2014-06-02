@@ -78,7 +78,7 @@ public class AegisOfHonor extends CardImpl<AegisOfHonor>{
 
 }
 
-class AegisOfHonorEffect extends RedirectionEffect<AegisOfHonorEffect> {
+class AegisOfHonorEffect extends RedirectionEffect {
 
     private static final FilterInstantOrSorceryCard instantOrSorceryfilter = new FilterInstantOrSorceryCard();
 

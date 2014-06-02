@@ -80,7 +80,7 @@ public class FeralHydra extends CardImpl<FeralHydra> {
 }
 
 
-class FeralHydraEffect extends OneShotEffect<FeralHydraEffect> {
+class FeralHydraEffect extends OneShotEffect {
 
     public FeralHydraEffect() {
         super(Outcome.BoostCreature);

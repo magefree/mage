@@ -80,7 +80,7 @@ public class SagesOfTheAnima extends CardImpl<SagesOfTheAnima> {
     }
 }
 
-class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl<SagesOfTheAnimaReplacementEffect> {
+class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
 
     public SagesOfTheAnimaReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

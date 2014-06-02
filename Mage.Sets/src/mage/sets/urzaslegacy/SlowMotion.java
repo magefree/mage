@@ -86,7 +86,7 @@ public class SlowMotion extends CardImpl<SlowMotion> {
     }
 }
 
-class SacrificeEquipedUnlessPaysEffect extends OneShotEffect<SacrificeEquipedUnlessPaysEffect> {
+class SacrificeEquipedUnlessPaysEffect extends OneShotEffect {
     protected Cost cost;
 
     public SacrificeEquipedUnlessPaysEffect(Cost cost) {

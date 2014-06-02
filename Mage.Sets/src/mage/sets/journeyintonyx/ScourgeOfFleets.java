@@ -78,7 +78,7 @@ public class ScourgeOfFleets extends CardImpl<ScourgeOfFleets> {
     }
 }
 
-class ScourgeOfFleetsEffect extends OneShotEffect<ScourgeOfFleetsEffect> {
+class ScourgeOfFleetsEffect extends OneShotEffect {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("number of Islands you control");
     

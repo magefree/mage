@@ -72,7 +72,7 @@ public class EchoingTruth extends CardImpl<EchoingTruth> {
     }
 }
 
-class ReturnToHandAllNamedPermanentsEffect extends OneShotEffect<ReturnToHandAllNamedPermanentsEffect> {
+class ReturnToHandAllNamedPermanentsEffect extends OneShotEffect {
 
     public ReturnToHandAllNamedPermanentsEffect() {
         super(Outcome.ReturnToHand);

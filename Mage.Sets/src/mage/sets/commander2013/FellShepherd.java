@@ -139,7 +139,7 @@ class FellShepherdWatcher extends Watcher {
     }
 }
 
-class FellShepherdEffect extends OneShotEffect<FellShepherdEffect> {
+class FellShepherdEffect extends OneShotEffect {
 
     public FellShepherdEffect() {
         super(Outcome.ReturnToHand);

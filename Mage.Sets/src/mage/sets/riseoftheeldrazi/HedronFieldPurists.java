@@ -90,7 +90,7 @@ public class HedronFieldPurists extends CardImpl<HedronFieldPurists> {
     }
 }
 
-class HedronFieldPuristsEffect extends PreventionEffectImpl<HedronFieldPuristsEffect> {
+class HedronFieldPuristsEffect extends PreventionEffectImpl {
 
     private int amount;
 

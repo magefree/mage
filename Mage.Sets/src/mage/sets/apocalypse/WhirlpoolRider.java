@@ -72,7 +72,7 @@ public class WhirlpoolRider extends CardImpl<WhirlpoolRider> {
     }
 }
 
-class WhirlpoolRiderTriggeredEffect extends OneShotEffect<WhirlpoolRiderTriggeredEffect> {
+class WhirlpoolRiderTriggeredEffect extends OneShotEffect {
 
     public WhirlpoolRiderTriggeredEffect() {
         super(Outcome.DrawCard);

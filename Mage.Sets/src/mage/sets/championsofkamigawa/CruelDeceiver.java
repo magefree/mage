@@ -83,7 +83,7 @@ public class CruelDeceiver extends CardImpl<CruelDeceiver> {
     }
 }
 
-class CruelDeceiverEffect extends OneShotEffect<CruelDeceiverEffect> {
+class CruelDeceiverEffect extends OneShotEffect {
 
     public CruelDeceiverEffect() {
         super(Outcome.AddAbility);

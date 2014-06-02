@@ -70,7 +70,7 @@ public class WandOfDenial extends CardImpl<WandOfDenial> {
     }
 }
 
-class WandOfDenialEffect extends OneShotEffect<WandOfDenialEffect> {
+class WandOfDenialEffect extends OneShotEffect {
 
     public WandOfDenialEffect() {
         super(Outcome.Benefit);

@@ -101,7 +101,7 @@ public class NemesisOfMortals extends CardImpl<NemesisOfMortals> {
     }
 }
 
-class NemesisOfMortalsEffect extends OneShotEffect<NemesisOfMortalsEffect> {
+class NemesisOfMortalsEffect extends OneShotEffect {
 
     public NemesisOfMortalsEffect() {
         super(Outcome.Neutral);

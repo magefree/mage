@@ -68,7 +68,7 @@ public class HurkylsRecall extends CardImpl<HurkylsRecall> {
     }
 }
 
-class HurkylsRecallReturnToHandEffect extends OneShotEffect<HurkylsRecallReturnToHandEffect> {
+class HurkylsRecallReturnToHandEffect extends OneShotEffect {
 
     public HurkylsRecallReturnToHandEffect() {
         super(Outcome.ReturnToHand);

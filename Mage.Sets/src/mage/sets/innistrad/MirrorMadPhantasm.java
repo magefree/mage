@@ -77,7 +77,7 @@ public class MirrorMadPhantasm extends CardImpl<MirrorMadPhantasm> {
     }
 }
 
-class MirrorMadPhantasmEffect extends OneShotEffect<MirrorMadPhantasmEffect> {
+class MirrorMadPhantasmEffect extends OneShotEffect {
 
     public MirrorMadPhantasmEffect() {
         super(Outcome.Detriment);

@@ -72,7 +72,7 @@ public class TellingTime extends CardImpl<TellingTime> {
     }
 }
 
-class TellingTimeEffect extends OneShotEffect<TellingTimeEffect> {
+class TellingTimeEffect extends OneShotEffect {
 
     public TellingTimeEffect() {
         super(Outcome.DrawCard);

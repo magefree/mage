@@ -122,7 +122,7 @@ class HeroesPodiumLegendaryCount implements DynamicValue {
     }
 }
 
-class HeroesPodiumEffect extends OneShotEffect<HeroesPodiumEffect> {
+class HeroesPodiumEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a legendary creature card");
     static {

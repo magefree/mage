@@ -87,7 +87,7 @@ public class DjinnOfWishes extends CardImpl<DjinnOfWishes> {
     }
 }
 
-class DjinnOfWishesEffect extends OneShotEffect<DjinnOfWishesEffect> {
+class DjinnOfWishesEffect extends OneShotEffect {
 
     public DjinnOfWishesEffect() {
         super(Outcome.PlayForFree);

@@ -78,7 +78,7 @@ public class SunburstAbility extends EntersBattlefieldAbility{
     
 }
 
-class SunburstEffect extends OneShotEffect<SunburstEffect> {
+class SunburstEffect extends OneShotEffect {
 
     private static final DynamicValue amount = new SunburstCount();
 

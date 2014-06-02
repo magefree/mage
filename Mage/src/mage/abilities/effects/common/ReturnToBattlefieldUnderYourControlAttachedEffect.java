@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author noxx
  */
-public class ReturnToBattlefieldUnderYourControlAttachedEffect extends OneShotEffect<ReturnToBattlefieldUnderYourControlAttachedEffect> {
+public class ReturnToBattlefieldUnderYourControlAttachedEffect extends OneShotEffect {
 
     public ReturnToBattlefieldUnderYourControlAttachedEffect() {
         super(Outcome.Benefit);

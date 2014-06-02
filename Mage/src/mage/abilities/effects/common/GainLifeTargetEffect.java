@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainLifeTargetEffect extends OneShotEffect<GainLifeTargetEffect> {
+public class GainLifeTargetEffect extends OneShotEffect {
 
     private DynamicValue life;
 

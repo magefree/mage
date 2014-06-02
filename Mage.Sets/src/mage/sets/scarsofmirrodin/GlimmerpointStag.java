@@ -79,7 +79,7 @@ public class GlimmerpointStag extends CardImpl<GlimmerpointStag> {
     }
 }
 
-class GlimmerpointStagEffect extends OneShotEffect<GlimmerpointStagEffect> {
+class GlimmerpointStagEffect extends OneShotEffect {
 
     private static final String effectText = "exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step";
 

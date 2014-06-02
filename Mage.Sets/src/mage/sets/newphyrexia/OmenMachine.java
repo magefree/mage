@@ -73,7 +73,7 @@ public class OmenMachine extends CardImpl<OmenMachine> {
     }
 }
 
-class OmenMachineEffect extends ReplacementEffectImpl<OmenMachineEffect> {
+class OmenMachineEffect extends ReplacementEffectImpl {
 
     public OmenMachineEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
@@ -140,7 +140,7 @@ class OmenMachineAbility extends TriggeredAbilityImpl {
 
 }
 
-class OmenMachineEffect2 extends OneShotEffect<OmenMachineEffect2> {
+class OmenMachineEffect2 extends OneShotEffect {
 
     public OmenMachineEffect2() {
         super(Outcome.PlayForFree);

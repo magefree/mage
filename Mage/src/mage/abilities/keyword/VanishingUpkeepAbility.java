@@ -38,7 +38,7 @@ public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
     }
 }
 
-class VanishingEffect extends OneShotEffect<VanishingEffect> {
+class VanishingEffect extends OneShotEffect {
     VanishingEffect() {
         super(Outcome.Sacrifice);
     }

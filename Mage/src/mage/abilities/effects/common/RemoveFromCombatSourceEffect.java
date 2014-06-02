@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class RemoveFromCombatSourceEffect extends OneShotEffect<RemoveFromCombatSourceEffect> {
+public class RemoveFromCombatSourceEffect extends OneShotEffect {
 
     public RemoveFromCombatSourceEffect() {
         super(Outcome.Detriment);

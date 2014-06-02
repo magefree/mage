@@ -73,7 +73,7 @@ public class BaneOfProgress extends CardImpl<BaneOfProgress> {
     }
 }
 
-class BaneOfProgressEffect extends OneShotEffect<BaneOfProgressEffect> {
+class BaneOfProgressEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {

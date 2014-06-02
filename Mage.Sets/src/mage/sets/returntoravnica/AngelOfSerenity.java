@@ -131,7 +131,7 @@ class AngelOfSerenityTriggeredAbility extends ZoneChangeTriggeredAbility<AngelOf
 
 }
 
-class AngelOfSerenityEnterEffect extends OneShotEffect<AngelOfSerenityEnterEffect> {
+class AngelOfSerenityEnterEffect extends OneShotEffect {
 
     public AngelOfSerenityEnterEffect() {
         super(Outcome.ReturnToHand);
@@ -174,7 +174,7 @@ class AngelOfSerenityEnterEffect extends OneShotEffect<AngelOfSerenityEnterEffec
     }
 }
 
-class AngelOfSerenityLeaveEffect extends OneShotEffect<AngelOfSerenityLeaveEffect> {
+class AngelOfSerenityLeaveEffect extends OneShotEffect {
 
     public AngelOfSerenityLeaveEffect() {
         super(Outcome.ReturnToHand);

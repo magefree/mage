@@ -73,7 +73,7 @@ public class SeverTheBloodline extends CardImpl<SeverTheBloodline> {
     }
 }
 
-class SeverTheBloodlineEffect extends OneShotEffect<SeverTheBloodlineEffect> {
+class SeverTheBloodlineEffect extends OneShotEffect {
 
     public SeverTheBloodlineEffect() {
         super(Outcome.Exile);

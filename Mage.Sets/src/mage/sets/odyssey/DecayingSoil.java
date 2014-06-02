@@ -153,7 +153,7 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 
-class DecayingSoilEffect extends OneShotEffect<DecayingSoilEffect> {
+class DecayingSoilEffect extends OneShotEffect {
 
     private final Cost cost = new GenericManaCost(1);
 

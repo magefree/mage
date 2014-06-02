@@ -73,7 +73,7 @@ public class ShoalSerpent extends CardImpl<ShoalSerpent> {
     }
 }
 
-class ShoalSerpentEffect extends ContinuousEffectImpl<ShoalSerpentEffect> {
+class ShoalSerpentEffect extends ContinuousEffectImpl {
 
     public ShoalSerpentEffect() {
         super(Duration.EndOfTurn, Outcome.AddAbility);

@@ -39,7 +39,7 @@ import mage.game.turn.TurnMod;
 /**
  * @author nantuko
  */
-public class ControlTargetPlayerNextTurnEffect extends OneShotEffect<ControlTargetPlayerNextTurnEffect>  {
+public class ControlTargetPlayerNextTurnEffect extends OneShotEffect  {
 
     public ControlTargetPlayerNextTurnEffect() {
         super(Outcome.Benefit);

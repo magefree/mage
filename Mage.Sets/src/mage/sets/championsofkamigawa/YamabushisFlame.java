@@ -76,7 +76,7 @@ public class YamabushisFlame extends CardImpl<YamabushisFlame> {
     }
 }
 
-class YamabushisFlameEffect extends ReplacementEffectImpl<YamabushisFlameEffect> {
+class YamabushisFlameEffect extends ReplacementEffectImpl {
 
         public YamabushisFlameEffect() {
                 super(Duration.EndOfTurn, Outcome.Exile);

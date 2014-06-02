@@ -67,7 +67,7 @@ public class ArchangelsLight extends CardImpl<ArchangelsLight> {
     }
 }
 
-class ArchangelsLightEffect extends OneShotEffect<ArchangelsLightEffect> {
+class ArchangelsLightEffect extends OneShotEffect {
 
     public ArchangelsLightEffect() {
         super(Outcome.GainLife);

@@ -66,7 +66,7 @@ public class TemptWithVengeance extends CardImpl<TemptWithVengeance> {
     }
 }
 
-class TemptWithVengeanceEffect extends OneShotEffect<TemptWithVengeanceEffect> {
+class TemptWithVengeanceEffect extends OneShotEffect {
 
     public TemptWithVengeanceEffect() {
         super(Outcome.PutLandInPlay);

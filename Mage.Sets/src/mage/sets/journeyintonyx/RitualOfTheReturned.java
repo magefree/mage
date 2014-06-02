@@ -72,7 +72,7 @@ public class RitualOfTheReturned extends CardImpl<RitualOfTheReturned> {
     }
 }
 
-class RitualOfTheReturnedExileEffect extends OneShotEffect<RitualOfTheReturnedExileEffect> {
+class RitualOfTheReturnedExileEffect extends OneShotEffect {
     
     public RitualOfTheReturnedExileEffect() {
         super(Outcome.PutCreatureInPlay);

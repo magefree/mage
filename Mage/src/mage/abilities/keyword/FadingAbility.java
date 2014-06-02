@@ -54,7 +54,7 @@ public class FadingAbility extends EntersBattlefieldAbility {
         return ruleText;
     }
 }
-class FadingEffect extends OneShotEffect<FadingEffect> {
+class FadingEffect extends OneShotEffect {
     FadingEffect() {
         super(Outcome.Sacrifice);
         staticText = "remove a fade counter from this permanent. If you can’t, sacrifice the permanent";

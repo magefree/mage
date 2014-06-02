@@ -71,7 +71,7 @@ public class Soulquake extends CardImpl<Soulquake> {
     }
 }
 
-class SoulquakeEffect extends OneShotEffect<SoulquakeEffect> {
+class SoulquakeEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature");
     private static final FilterCreatureCard filter2 = new FilterCreatureCard("creature");

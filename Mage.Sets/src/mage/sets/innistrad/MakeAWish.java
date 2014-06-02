@@ -66,7 +66,7 @@ public class MakeAWish extends CardImpl<MakeAWish> {
     }
 }
 
-class MakeAWishEffect extends OneShotEffect<MakeAWishEffect> {
+class MakeAWishEffect extends OneShotEffect {
 
     public MakeAWishEffect() {
         super(Outcome.ReturnToHand);

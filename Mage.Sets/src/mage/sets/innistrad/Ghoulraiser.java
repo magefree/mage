@@ -73,7 +73,7 @@ public class Ghoulraiser extends CardImpl<Ghoulraiser> {
     }
 }
 
-class GhoulraiserEffect extends OneShotEffect<GhoulraiserEffect> {
+class GhoulraiserEffect extends OneShotEffect {
 
     public GhoulraiserEffect() {
         super(Outcome.ReturnToHand);

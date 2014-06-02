@@ -63,7 +63,7 @@ public class Telepathy extends CardImpl<Telepathy> {
     }
 }
 
-class OpponentsPlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl<OpponentsPlayWithTheTopCardRevealedEffect> {
+class OpponentsPlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl {
 
     public OpponentsPlayWithTheTopCardRevealedEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);

@@ -124,7 +124,7 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class GreatbowDoyenEffect extends OneShotEffect<GreatbowDoyenEffect> {
+class GreatbowDoyenEffect extends OneShotEffect {
 
     public GreatbowDoyenEffect() {
         super(Outcome.Damage);

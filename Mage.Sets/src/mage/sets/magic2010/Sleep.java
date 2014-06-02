@@ -70,7 +70,7 @@ public class Sleep extends CardImpl<Sleep> {
     }
 }
 
-class SleepEffect extends OneShotEffect<SleepEffect> {
+class SleepEffect extends OneShotEffect {
 
     public SleepEffect() {
         super(Outcome.Tap);
@@ -101,7 +101,7 @@ class SleepEffect extends OneShotEffect<SleepEffect> {
 
 }
 
-class SleepEffect2 extends ReplacementEffectImpl<SleepEffect2> {
+class SleepEffect2 extends ReplacementEffectImpl {
 
     protected UUID creatureId;
 

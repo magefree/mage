@@ -80,7 +80,7 @@ public class RelicOfProgenitus extends CardImpl<RelicOfProgenitus> {
     }
 }
 
-class RelicOfProgenitusEffect extends OneShotEffect<RelicOfProgenitusEffect> {
+class RelicOfProgenitusEffect extends OneShotEffect {
 
     public RelicOfProgenitusEffect() {
         super(Outcome.Exile);
@@ -117,7 +117,7 @@ class RelicOfProgenitusEffect extends OneShotEffect<RelicOfProgenitusEffect> {
     }
 }
 
-class RelicOfProgenitusEffect2 extends OneShotEffect<RelicOfProgenitusEffect2> {
+class RelicOfProgenitusEffect2 extends OneShotEffect {
 
     public RelicOfProgenitusEffect2() {
         super(Outcome.Detriment);

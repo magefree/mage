@@ -71,7 +71,7 @@ public class WildEvocation extends CardImpl<WildEvocation> {
 
 }
 
-class WildEvocationEffect extends OneShotEffect<WildEvocationEffect> {
+class WildEvocationEffect extends OneShotEffect {
 
     public WildEvocationEffect() {
         super(Outcome.PutCardInPlay);

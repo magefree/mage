@@ -41,7 +41,7 @@ import mage.players.Player;
  * @author Viserion
  */
 
-public class UntapAllLandsControllerEffect extends OneShotEffect<UntapAllLandsControllerEffect> {
+public class UntapAllLandsControllerEffect extends OneShotEffect {
 
     public UntapAllLandsControllerEffect() {
         super(Outcome.Untap);

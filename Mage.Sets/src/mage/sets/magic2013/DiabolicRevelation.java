@@ -69,7 +69,7 @@ public class DiabolicRevelation extends CardImpl<DiabolicRevelation> {
     }
 }
 
-class DiabolicRevelationEffect extends OneShotEffect<DiabolicRevelationEffect> {
+class DiabolicRevelationEffect extends OneShotEffect {
 
     public DiabolicRevelationEffect() {
         super(Outcome.Benefit);

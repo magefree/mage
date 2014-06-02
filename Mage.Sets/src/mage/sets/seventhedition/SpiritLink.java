@@ -121,7 +121,7 @@ class SpiritLinkTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SpiritLinkEffect extends OneShotEffect<SpiritLinkEffect> {
+class SpiritLinkEffect extends OneShotEffect {
 
     public SpiritLinkEffect() {
         super(Outcome.GainLife);

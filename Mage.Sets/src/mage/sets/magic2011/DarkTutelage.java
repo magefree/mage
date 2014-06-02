@@ -68,7 +68,7 @@ public class DarkTutelage extends CardImpl<DarkTutelage> {
 
 }
 
-class DarkTutelageEffect extends OneShotEffect<DarkTutelageEffect> {
+class DarkTutelageEffect extends OneShotEffect {
 
     public DarkTutelageEffect() {
         super(Outcome.DrawCard);

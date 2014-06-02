@@ -39,7 +39,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect<CreateDelayedTriggeredAbilityEffect> {
+public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
     protected DelayedTriggeredAbility ability;
     protected boolean copyTargets;

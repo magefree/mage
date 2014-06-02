@@ -72,7 +72,7 @@ public class Overblaze extends CardImpl<Overblaze> {
     }
 }
 
-class FireServantEffect extends ReplacementEffectImpl<FireServantEffect> {
+class FireServantEffect extends ReplacementEffectImpl {
 
     public FireServantEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);

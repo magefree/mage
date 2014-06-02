@@ -71,7 +71,7 @@ public class SacredRites extends CardImpl<SacredRites> {
     }
 }
 
-class SacredRitesEffect extends OneShotEffect<SacredRitesEffect> {
+class SacredRitesEffect extends OneShotEffect {
     
     public SacredRitesEffect() {
         super(Outcome.Benefit);

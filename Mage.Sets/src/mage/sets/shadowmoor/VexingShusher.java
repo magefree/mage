@@ -80,7 +80,7 @@ public class VexingShusher extends CardImpl<VexingShusher> {
     }
 }
 
-class VexingShusherCantCounterTargetEffect extends ReplacementEffectImpl<VexingShusherCantCounterTargetEffect> {
+class VexingShusherCantCounterTargetEffect extends ReplacementEffectImpl {
 
     public VexingShusherCantCounterTargetEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

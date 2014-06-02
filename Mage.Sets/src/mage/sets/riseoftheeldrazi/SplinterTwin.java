@@ -88,7 +88,7 @@ public class SplinterTwin extends CardImpl<SplinterTwin> {
     }
 }
 
-class SplinterTwinEffect extends OneShotEffect<SplinterTwinEffect> {
+class SplinterTwinEffect extends OneShotEffect {
 
     public SplinterTwinEffect() {
         super(Outcome.PutCreatureInPlay);

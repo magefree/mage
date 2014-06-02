@@ -78,7 +78,7 @@ public class CopyArtifact extends CardImpl<CopyArtifact> {
     }
 }
 
-class CopyArtifactEffect extends OneShotEffect<CopyArtifactEffect> {
+class CopyArtifactEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

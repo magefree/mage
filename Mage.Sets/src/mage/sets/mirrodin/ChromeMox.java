@@ -80,7 +80,7 @@ public class ChromeMox extends CardImpl<ChromeMox> {
     }
 }
 
-class ChromeMoxEffect extends OneShotEffect<ChromeMoxEffect> {
+class ChromeMoxEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("nonartifact, nonland card");
     static {

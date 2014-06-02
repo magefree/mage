@@ -74,7 +74,7 @@ public class GoblinGuide extends CardImpl<GoblinGuide> {
 
 }
 
-class GoblinGuideEffect extends OneShotEffect<GoblinGuideEffect> {
+class GoblinGuideEffect extends OneShotEffect {
 
     public GoblinGuideEffect() {
         super(Outcome.DrawCard);

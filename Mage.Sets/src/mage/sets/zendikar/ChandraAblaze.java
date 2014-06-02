@@ -93,7 +93,7 @@ public class ChandraAblaze extends CardImpl<ChandraAblaze> {
     }
 }
 
-class ChandraAblazeEffect1 extends OneShotEffect<ChandraAblazeEffect1> {
+class ChandraAblazeEffect1 extends OneShotEffect {
 
     public ChandraAblazeEffect1() {
         super(Outcome.Discard);
@@ -127,7 +127,7 @@ class ChandraAblazeEffect1 extends OneShotEffect<ChandraAblazeEffect1> {
     }
 }
 
-class ChandraAblazeEffect2 extends OneShotEffect<ChandraAblazeEffect2> {
+class ChandraAblazeEffect2 extends OneShotEffect {
 
     public ChandraAblazeEffect2() {
         super(Outcome.Damage);
@@ -180,7 +180,7 @@ class ChandraAblazeEffect4 extends DrawCardAllEffect {
     }
 }
 
-class ChandraAblazeEffect5 extends OneShotEffect<ChandraAblazeEffect5> {
+class ChandraAblazeEffect5 extends OneShotEffect {
 
     public ChandraAblazeEffect5() {
         super(Outcome.PlayForFree);

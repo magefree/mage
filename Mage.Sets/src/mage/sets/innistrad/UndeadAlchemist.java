@@ -120,7 +120,7 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class UndeadAlchemistEffect extends ReplacementEffectImpl<UndeadAlchemistEffect> {
+class UndeadAlchemistEffect extends ReplacementEffectImpl {
 
     UndeadAlchemistEffect() {
         super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);

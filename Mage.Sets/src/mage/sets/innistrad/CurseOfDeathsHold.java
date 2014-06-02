@@ -76,7 +76,7 @@ public class CurseOfDeathsHold extends CardImpl<CurseOfDeathsHold> {
     }
 }
 
-class CurseOfDeathsHoldEffect extends ContinuousEffectImpl<CurseOfDeathsHoldEffect> {
+class CurseOfDeathsHoldEffect extends ContinuousEffectImpl {
 
     public CurseOfDeathsHoldEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.UnboostCreature);

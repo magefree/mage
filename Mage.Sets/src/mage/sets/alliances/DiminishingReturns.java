@@ -64,7 +64,7 @@ public class DiminishingReturns extends CardImpl<DiminishingReturns> {
     }
 }
 
-class DiminishingReturnsEffect extends OneShotEffect<DiminishingReturnsEffect> {
+class DiminishingReturnsEffect extends OneShotEffect {
 
     public DiminishingReturnsEffect() {
         super(Outcome.Neutral);

@@ -67,7 +67,7 @@ public class SecondSunrise extends CardImpl<SecondSunrise> {
     }
 }
 
-class SecondSunriseEffect extends OneShotEffect<SecondSunriseEffect> {
+class SecondSunriseEffect extends OneShotEffect {
 
     SecondSunriseEffect() {
         super(Outcome.PutCardInPlay);

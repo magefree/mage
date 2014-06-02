@@ -79,7 +79,7 @@ public class WoodlandSleuth extends CardImpl<WoodlandSleuth> {
     }
 }
 
-class WoodlandSleuthEffect extends OneShotEffect<WoodlandSleuthEffect> {
+class WoodlandSleuthEffect extends OneShotEffect {
 
     public WoodlandSleuthEffect() {
         super(Outcome.ReturnToHand);

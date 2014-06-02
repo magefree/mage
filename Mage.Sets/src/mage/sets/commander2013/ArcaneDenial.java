@@ -76,7 +76,7 @@ public class ArcaneDenial extends CardImpl<ArcaneDenial> {
     }
 }
 
-class ArcaneDenialEffect extends OneShotEffect<ArcaneDenialEffect> {
+class ArcaneDenialEffect extends OneShotEffect {
 
     public ArcaneDenialEffect() {
         super(Outcome.Detriment);

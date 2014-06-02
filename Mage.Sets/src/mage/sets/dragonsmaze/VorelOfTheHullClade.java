@@ -92,7 +92,7 @@ public class VorelOfTheHullClade extends CardImpl<VorelOfTheHullClade> {
     }
 }
 
-class VorelOfTheHullCladeEffect extends OneShotEffect<VorelOfTheHullCladeEffect> {
+class VorelOfTheHullCladeEffect extends OneShotEffect {
 
     public VorelOfTheHullCladeEffect() {
         super(Outcome.Benefit);

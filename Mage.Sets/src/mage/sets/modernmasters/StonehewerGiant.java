@@ -85,7 +85,7 @@ public class StonehewerGiant extends CardImpl<StonehewerGiant> {
     }
 }
 
-class StonehewerGiantEffect extends OneShotEffect<StonehewerGiantEffect> {
+class StonehewerGiantEffect extends OneShotEffect {
 
     public StonehewerGiantEffect() {
         super(Outcome.PutCardInPlay);

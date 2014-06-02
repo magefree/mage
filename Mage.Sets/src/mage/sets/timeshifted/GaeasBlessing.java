@@ -79,7 +79,7 @@ public class GaeasBlessing extends CardImpl<GaeasBlessing> {
     }
 }
 
-class GaeasBlessingEffect extends OneShotEffect<GaeasBlessingEffect> {
+class GaeasBlessingEffect extends OneShotEffect {
 
     public GaeasBlessingEffect() {
         super(Outcome.Neutral);
@@ -170,7 +170,7 @@ class GaeasBlessingTriggeredAbility extends ZoneChangeTriggeredAbility<GaeasBles
     }
 }
 
-class GaeasBlessingGraveToLibraryEffect extends OneShotEffect<GaeasBlessingGraveToLibraryEffect> {
+class GaeasBlessingGraveToLibraryEffect extends OneShotEffect {
 
     public GaeasBlessingGraveToLibraryEffect() {
         super(Outcome.GainLife);

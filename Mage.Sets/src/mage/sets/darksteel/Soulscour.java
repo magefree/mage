@@ -67,7 +67,7 @@ public class Soulscour extends CardImpl<Soulscour> {
 }
 
 
-class SoulscourEffect extends OneShotEffect<SoulscourEffect> {
+class SoulscourEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("");
 

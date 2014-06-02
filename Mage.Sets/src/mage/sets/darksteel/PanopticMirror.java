@@ -82,7 +82,7 @@ public class PanopticMirror extends CardImpl<PanopticMirror> {
     }
 }
 
-class PanopticMirrorExileEffect extends OneShotEffect<PanopticMirrorExileEffect> {
+class PanopticMirrorExileEffect extends OneShotEffect {
 
     public PanopticMirrorExileEffect() {
         super(Outcome.Exile);
@@ -129,7 +129,7 @@ class PanopticMirrorExileEffect extends OneShotEffect<PanopticMirrorExileEffect>
     }
 }
 
-class PanopticMirrorCastEffect extends OneShotEffect<PanopticMirrorCastEffect> {
+class PanopticMirrorCastEffect extends OneShotEffect {
 
     public PanopticMirrorCastEffect() {
         super(Outcome.ReturnToHand);

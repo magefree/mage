@@ -122,7 +122,7 @@ class QuestForPureFlameTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class QuestForPureFlameEffect extends ReplacementEffectImpl<QuestForPureFlameEffect> {
+class QuestForPureFlameEffect extends ReplacementEffectImpl {
 
     public QuestForPureFlameEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);

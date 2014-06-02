@@ -96,7 +96,7 @@ public class ArachnusSpinner extends CardImpl<ArachnusSpinner> {
     }
 }
 
-class ArachnusSpinnerEffect extends OneShotEffect<ArachnusSpinnerEffect> {
+class ArachnusSpinnerEffect extends OneShotEffect {
 
     public ArachnusSpinnerEffect() {
         super(Outcome.UnboostCreature);

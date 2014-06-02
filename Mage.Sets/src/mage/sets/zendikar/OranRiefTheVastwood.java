@@ -73,7 +73,7 @@ public class OranRiefTheVastwood extends CardImpl<OranRiefTheVastwood> {
 
 }
 
-class OranRiefTheVastwoodEffect extends OneShotEffect<OranRiefTheVastwoodEffect> {
+class OranRiefTheVastwoodEffect extends OneShotEffect {
 
     public OranRiefTheVastwoodEffect() {
         super(Outcome.BoostCreature);

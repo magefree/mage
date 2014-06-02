@@ -72,7 +72,7 @@ public class SunkenHope extends CardImpl<SunkenHope> {
     }
 }
 
-class ReturnToHandEffect extends OneShotEffect<ReturnToHandEffect> {
+class ReturnToHandEffect extends OneShotEffect {
 
     public ReturnToHandEffect() {
         super(Outcome.ReturnToHand);

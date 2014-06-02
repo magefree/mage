@@ -81,7 +81,7 @@ public class DiaochanArtfulBeauty extends CardImpl<DiaochanArtfulBeauty> {
     }
 }
 
-class DiaochanArtfulBeautyDestroyEffect extends OneShotEffect<DiaochanArtfulBeautyDestroyEffect> {
+class DiaochanArtfulBeautyDestroyEffect extends OneShotEffect {
     
     public DiaochanArtfulBeautyDestroyEffect() {
         super(Outcome.DestroyPermanent);

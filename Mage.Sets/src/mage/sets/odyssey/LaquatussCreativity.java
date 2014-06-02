@@ -66,7 +66,7 @@ public class LaquatussCreativity extends CardImpl<LaquatussCreativity> {
     }
 }
 
-class LaquatussCreativityEffect extends OneShotEffect<LaquatussCreativityEffect> {
+class LaquatussCreativityEffect extends OneShotEffect {
     
     public LaquatussCreativityEffect() {
         super(Outcome.Benefit);

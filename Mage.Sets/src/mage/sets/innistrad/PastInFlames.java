@@ -74,7 +74,7 @@ public class PastInFlames extends CardImpl<PastInFlames> {
     }
 }
 
-class PastInFlamesEffect extends ContinuousEffectImpl<PastInFlamesEffect> {
+class PastInFlamesEffect extends ContinuousEffectImpl {
 
     public PastInFlamesEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

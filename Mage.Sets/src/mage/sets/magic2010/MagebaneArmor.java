@@ -101,7 +101,7 @@ class MagebaneArmorAbility extends StaticAbility {
     }
 }
 
-class MagebaneArmorPreventionEffect extends PreventionEffectImpl<MagebaneArmorPreventionEffect> {
+class MagebaneArmorPreventionEffect extends PreventionEffectImpl {
 
     public MagebaneArmorPreventionEffect() {
         super(Duration.WhileOnBattlefield);

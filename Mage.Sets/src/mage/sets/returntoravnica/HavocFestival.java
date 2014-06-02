@@ -78,7 +78,7 @@ public class HavocFestival extends CardImpl<HavocFestival> {
     }
 }
 
-class HavocFestivalLoseLifeEffect extends OneShotEffect<HavocFestivalLoseLifeEffect> {
+class HavocFestivalLoseLifeEffect extends OneShotEffect {
 
     public HavocFestivalLoseLifeEffect() {
         super(Outcome.Damage);

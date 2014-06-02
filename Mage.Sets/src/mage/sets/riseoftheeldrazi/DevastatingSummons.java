@@ -70,7 +70,7 @@ public class DevastatingSummons extends CardImpl<DevastatingSummons> {
     }
 }
 
-class DevastatingSummonsEffect extends OneShotEffect<DevastatingSummonsEffect> {
+class DevastatingSummonsEffect extends OneShotEffect {
 
     public DevastatingSummonsEffect() {
         super(Outcome.PutCreatureInPlay);

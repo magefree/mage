@@ -80,7 +80,7 @@ public class Cryptoplasm extends CardImpl<Cryptoplasm> {
 
 }
 
-class CryptoplasmTransformEffect extends ContinuousEffectImpl<CryptoplasmTransformEffect> {
+class CryptoplasmTransformEffect extends ContinuousEffectImpl {
 
     CryptoplasmTransformEffect() {
         super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.Copy);

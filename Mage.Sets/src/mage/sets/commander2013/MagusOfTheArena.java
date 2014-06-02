@@ -82,7 +82,7 @@ public class MagusOfTheArena extends CardImpl<MagusOfTheArena> {
     }
 }
 
-class MagusOfTheArenaEffect extends OneShotEffect<MagusOfTheArenaEffect> {
+class MagusOfTheArenaEffect extends OneShotEffect {
 
     public MagusOfTheArenaEffect() {
         super(Outcome.Benefit);

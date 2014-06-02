@@ -44,7 +44,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantCounterControlledEffect extends ReplacementEffectImpl<CantCounterControlledEffect> {
+public class CantCounterControlledEffect extends ReplacementEffectImpl {
 
     private FilterSpell filterTarget;
     private FilterObject filterSource;

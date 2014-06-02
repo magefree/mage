@@ -93,7 +93,7 @@ public class GiltLeafArchdruid extends CardImpl<GiltLeafArchdruid> {
     }
 }
 
-class GainControlAllLandsEffect extends ContinuousEffectImpl<GainControlAllLandsEffect> {
+class GainControlAllLandsEffect extends ContinuousEffectImpl {
 
     public GainControlAllLandsEffect(Duration duration) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);

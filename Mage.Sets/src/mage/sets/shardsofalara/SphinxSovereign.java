@@ -75,7 +75,7 @@ public class SphinxSovereign extends CardImpl<SphinxSovereign> {
     }
 }
 
-class SphinxSovereignEffect extends OneShotEffect<SphinxSovereignEffect> {
+class SphinxSovereignEffect extends OneShotEffect {
 
     public SphinxSovereignEffect() {
         super(Outcome.Benefit);

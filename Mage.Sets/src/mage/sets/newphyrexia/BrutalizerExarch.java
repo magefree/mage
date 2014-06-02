@@ -90,7 +90,7 @@ public class BrutalizerExarch extends CardImpl<BrutalizerExarch> {
     }
 }
 
-class BrutalizerExarchEffect1 extends OneShotEffect<BrutalizerExarchEffect1> {
+class BrutalizerExarchEffect1 extends OneShotEffect {
 
     public BrutalizerExarchEffect1() {
         super(Outcome.Benefit);
@@ -130,7 +130,7 @@ class BrutalizerExarchEffect1 extends OneShotEffect<BrutalizerExarchEffect1> {
     }
 }
 
-class BrutalizerExarchEffect2 extends OneShotEffect<BrutalizerExarchEffect2> {
+class BrutalizerExarchEffect2 extends OneShotEffect {
 
     public BrutalizerExarchEffect2() {
         super(Outcome.Removal);

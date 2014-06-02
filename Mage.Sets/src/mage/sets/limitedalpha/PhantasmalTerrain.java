@@ -91,7 +91,7 @@ public class PhantasmalTerrain extends CardImpl<PhantasmalTerrain> {
     }
 }
 
-class PhantasmalTerrainChooseEffect extends OneShotEffect<PhantasmalTerrainChooseEffect> {
+class PhantasmalTerrainChooseEffect extends OneShotEffect {
 
     public PhantasmalTerrainChooseEffect() {
         super(Outcome.Neutral);
@@ -130,7 +130,7 @@ class PhantasmalTerrainChooseEffect extends OneShotEffect<PhantasmalTerrainChoos
     
 }
 
-class PhantasmalTerrainContinuousEffect extends ContinuousEffectImpl<PhantasmalTerrainContinuousEffect> {
+class PhantasmalTerrainContinuousEffect extends ContinuousEffectImpl {
 
     public PhantasmalTerrainContinuousEffect(){
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

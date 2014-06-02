@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> {
+public class ReturnFromExileEffect extends OneShotEffect {
 
     private UUID exileId;
     private Zone zone;

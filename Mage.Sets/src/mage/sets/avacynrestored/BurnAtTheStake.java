@@ -79,7 +79,7 @@ public class BurnAtTheStake extends CardImpl<BurnAtTheStake> {
     }
 }
 
-class BurnAtTheStakeEffect extends OneShotEffect<BurnAtTheStakeEffect> {
+class BurnAtTheStakeEffect extends OneShotEffect {
 
     public BurnAtTheStakeEffect() {
         super(Outcome.Damage);

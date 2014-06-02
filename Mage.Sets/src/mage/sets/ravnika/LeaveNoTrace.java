@@ -73,7 +73,7 @@ public class LeaveNoTrace extends CardImpl<LeaveNoTrace> {
     }
 }
 
-class LeaveNoTraceEffect extends OneShotEffect<LeaveNoTraceEffect> {
+class LeaveNoTraceEffect extends OneShotEffect {
     static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {

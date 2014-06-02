@@ -76,7 +76,7 @@ public class IllusoryAngel extends CardImpl<IllusoryAngel> {
     }
 }
 
-class IllusoryAngelEffect extends ReplacementEffectImpl<IllusoryAngelEffect> {
+class IllusoryAngelEffect extends ReplacementEffectImpl {
     IllusoryAngelEffect() {
        super(Duration.EndOfGame, Outcome.Detriment);
        staticText = "Cast Illusory Angel only if you've cast another spell this turn";

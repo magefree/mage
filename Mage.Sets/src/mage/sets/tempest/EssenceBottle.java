@@ -120,7 +120,7 @@ class EssenceBottleCost extends CostImpl<EssenceBottleCost> {
     }
 }
 
-class EssenceBottleEffect extends OneShotEffect<EssenceBottleEffect> {
+class EssenceBottleEffect extends OneShotEffect {
 
     public EssenceBottleEffect() {
         super(Outcome.GainLife);

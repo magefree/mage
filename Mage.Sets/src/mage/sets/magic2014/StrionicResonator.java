@@ -80,7 +80,7 @@ public class StrionicResonator extends CardImpl<StrionicResonator> {
     }
 }
 
-class StrionicResonatorEffect extends OneShotEffect<StrionicResonatorEffect> {
+class StrionicResonatorEffect extends OneShotEffect {
 
     public StrionicResonatorEffect() {
         super(Outcome.Copy);

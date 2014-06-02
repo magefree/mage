@@ -69,7 +69,7 @@ public class RatchetBomb extends CardImpl<RatchetBomb> {
         return new RatchetBomb(this);
     }
 
-    class RatchetBombEffect extends OneShotEffect<RatchetBombEffect> {
+    class RatchetBombEffect extends OneShotEffect {
 
         public RatchetBombEffect() {
             super(Outcome.DestroyPermanent);

@@ -76,7 +76,7 @@ public class VirulentWound extends CardImpl<VirulentWound> {
     }
 }
 
-class VirulentWoundEffect extends OneShotEffect<VirulentWoundEffect> {
+class VirulentWoundEffect extends OneShotEffect {
 
     public VirulentWoundEffect() {
         super(Outcome.UnboostCreature);
@@ -138,7 +138,7 @@ class VirulentWoundDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 }
 
-class VirulentWoundDelayedEffect extends OneShotEffect<VirulentWoundDelayedEffect> {
+class VirulentWoundDelayedEffect extends OneShotEffect {
 
     protected UUID target;
 

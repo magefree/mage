@@ -79,7 +79,7 @@ public class GhostlyFlicker extends CardImpl<GhostlyFlicker> {
     }
 }
 
-class GhostlyFlickerEffect extends OneShotEffect<GhostlyFlickerEffect> {
+class GhostlyFlickerEffect extends OneShotEffect {
 
     public GhostlyFlickerEffect() {
         super(Outcome.Benefit);

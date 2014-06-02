@@ -86,7 +86,7 @@ public class InkEyesServantOfOni extends CardImpl<InkEyesServantOfOni> {
     }
 }
 
-class InkEyesServantOfOniEffect extends OneShotEffect<InkEyesServantOfOniEffect> {
+class InkEyesServantOfOniEffect extends OneShotEffect {
 
     public InkEyesServantOfOniEffect() {
         super(Outcome.PutCreatureInPlay);

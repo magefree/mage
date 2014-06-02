@@ -79,7 +79,7 @@ public class PolymorphousRush extends CardImpl<PolymorphousRush> {
     }
 }
 
-class PolymorphousRushCopyEffect extends OneShotEffect<PolymorphousRushCopyEffect> {
+class PolymorphousRushCopyEffect extends OneShotEffect {
     
     public PolymorphousRushCopyEffect() {
         super(Outcome.Copy);

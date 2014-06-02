@@ -81,7 +81,7 @@ public class MystifyingMaze extends CardImpl<MystifyingMaze> {
     }
 }
 
-class MystifyingMazeEffect extends OneShotEffect<MystifyingMazeEffect> {
+class MystifyingMazeEffect extends OneShotEffect {
 
     public MystifyingMazeEffect() {
         super(Outcome.Detriment);

@@ -77,7 +77,7 @@ public class PeelFromReality extends CardImpl<PeelFromReality> {
     }
 }
 
-class PeelFromRealityEffect extends OneShotEffect<PeelFromRealityEffect> {
+class PeelFromRealityEffect extends OneShotEffect {
 
     public PeelFromRealityEffect() {
         super(Outcome.ReturnToHand);

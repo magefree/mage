@@ -93,7 +93,7 @@ public class BrionStoutarm extends CardImpl<BrionStoutarm> {
     }
 }
 
-class BrionStoutarmEffect extends OneShotEffect<BrionStoutarmEffect> {
+class BrionStoutarmEffect extends OneShotEffect {
 
     public BrionStoutarmEffect() {
         super(Outcome.Benefit);

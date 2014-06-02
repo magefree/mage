@@ -142,7 +142,7 @@ public class ReboundAbility extends TriggeredAbilityImpl {
  *
  * @author maurer.it_at_gmail.com
  */
-class ReboundEffect extends OneShotEffect<ReboundEffect> {
+class ReboundEffect extends OneShotEffect {
 
     public ReboundEffect() {
         super(Outcome.Benefit);
@@ -184,7 +184,7 @@ class ReboundEffect extends OneShotEffect<ReboundEffect> {
  *
  * @author maurer.it_at_gmail.com
  */
-class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<ReboundCastFromHandReplacementEffect> {
+class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl {
 
     private static String replacementText = "Rebound - If you cast {this} from your hand, exile it as it resolves";
     private UUID cardId;
@@ -281,7 +281,7 @@ class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility {
  *
  * @author maurer.it_at_gmail.com
  */
-class ReboundCastSpellFromExileEffect extends OneShotEffect<ReboundCastSpellFromExileEffect> {
+class ReboundCastSpellFromExileEffect extends OneShotEffect {
 
     private static String castFromExileText = "Rebound - You may cast {this} from exile without paying its mana cost";
     private final UUID cardId;

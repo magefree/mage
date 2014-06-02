@@ -74,7 +74,7 @@ public class LivingEnd extends CardImpl<LivingEnd> {
     }
 }
 
-class LivingEndEffect extends OneShotEffect<LivingEndEffect> {
+class LivingEndEffect extends OneShotEffect {
 
     public LivingEndEffect() {
         super(Outcome.Benefit);

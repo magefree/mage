@@ -82,7 +82,7 @@ public class KitsunePalliator extends CardImpl<KitsunePalliator> {
     }
 }
 
-class KitsunePalliatorEffect extends OneShotEffect<KitsunePalliatorEffect> {
+class KitsunePalliatorEffect extends OneShotEffect {
 
     public KitsunePalliatorEffect() {
         super(Outcome.PreventDamage);

@@ -70,7 +70,7 @@ public class TemptWithDiscovery extends CardImpl<TemptWithDiscovery> {
     }
 }
 
-class TemptWithDiscoveryEffect extends OneShotEffect<TemptWithDiscoveryEffect> {
+class TemptWithDiscoveryEffect extends OneShotEffect {
 
     public TemptWithDiscoveryEffect() {
         super(Outcome.PutLandInPlay);

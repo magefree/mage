@@ -79,7 +79,7 @@ public class AgadeemOccultist extends CardImpl<AgadeemOccultist> {
     }
 }
 
-class AgadeemOccultistEffect extends OneShotEffect<AgadeemOccultistEffect> {
+class AgadeemOccultistEffect extends OneShotEffect {
 
     public AgadeemOccultistEffect() {
         super(Outcome.GainControl);

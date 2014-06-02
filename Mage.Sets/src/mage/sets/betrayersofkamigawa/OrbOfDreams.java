@@ -61,7 +61,7 @@ public class OrbOfDreams extends CardImpl<OrbOfDreams> {
         return new OrbOfDreams(this);
     }
     
-    private class OrbOfDreamsEffect extends ReplacementEffectImpl<OrbOfDreamsEffect> {
+    private class OrbOfDreamsEffect extends ReplacementEffectImpl {
 
         OrbOfDreamsEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Tap, false);

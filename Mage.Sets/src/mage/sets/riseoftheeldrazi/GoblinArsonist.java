@@ -70,7 +70,7 @@ public class GoblinArsonist extends CardImpl<GoblinArsonist> {
     }
 }
 
-class GoblinArsonistEffect extends OneShotEffect<GoblinArsonistEffect> {
+class GoblinArsonistEffect extends OneShotEffect {
 
     public GoblinArsonistEffect() {
         super(Outcome.Damage);

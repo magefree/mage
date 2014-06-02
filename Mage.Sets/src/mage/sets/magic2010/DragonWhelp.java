@@ -79,7 +79,7 @@ public class DragonWhelp extends CardImpl<DragonWhelp> {
     }
 }
 
-class DragonWhelpEffect extends OneShotEffect<DragonWhelpEffect> {
+class DragonWhelpEffect extends OneShotEffect {
 
     public DragonWhelpEffect() {
         super(Outcome.Damage);
@@ -112,7 +112,7 @@ class DragonWhelpEffect extends OneShotEffect<DragonWhelpEffect> {
     }
 }
 
-class DragonWhelpDelayedEffect extends OneShotEffect<DragonWhelpDelayedEffect> {
+class DragonWhelpDelayedEffect extends OneShotEffect {
 
     public DragonWhelpDelayedEffect() {
         super(Outcome.Damage);

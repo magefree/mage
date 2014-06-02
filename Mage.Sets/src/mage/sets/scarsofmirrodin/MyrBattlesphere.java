@@ -85,7 +85,7 @@ public class MyrBattlesphere extends CardImpl<MyrBattlesphere> {
 
 }
 
-class MyrBattlesphereEffect extends OneShotEffect<MyrBattlesphereEffect> {
+class MyrBattlesphereEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Myr you control");
 

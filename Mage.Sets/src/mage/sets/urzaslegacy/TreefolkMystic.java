@@ -71,7 +71,7 @@ public class TreefolkMystic extends CardImpl<TreefolkMystic> {
     }
 }
 
-class TreefolkMysticEffect extends OneShotEffect<TreefolkMysticEffect> {
+class TreefolkMysticEffect extends OneShotEffect {
 
 
 

@@ -67,7 +67,7 @@ public class Worldfire extends CardImpl<Worldfire> {
     }
 }
 
-class WorldfireEffect extends OneShotEffect<WorldfireEffect> {
+class WorldfireEffect extends OneShotEffect {
     
     private static FilterPermanent filter = new FilterPermanent();
     

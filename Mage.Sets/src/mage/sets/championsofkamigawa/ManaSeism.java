@@ -68,7 +68,7 @@ public class ManaSeism extends CardImpl<ManaSeism> {
     }
 }
 
-class ManaSeismEffect extends OneShotEffect<ManaSeismEffect> {
+class ManaSeismEffect extends OneShotEffect {
 
     public ManaSeismEffect() {
         super(Outcome.Neutral);

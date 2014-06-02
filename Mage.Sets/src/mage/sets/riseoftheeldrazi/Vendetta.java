@@ -80,7 +80,7 @@ public class Vendetta extends CardImpl<Vendetta> {
     }
 }
 
-class VendettaEffect extends OneShotEffect<VendettaEffect> {
+class VendettaEffect extends OneShotEffect {
 
     public VendettaEffect() {
         super(Outcome.Damage);

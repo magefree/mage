@@ -124,7 +124,7 @@ class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SoulSeizerEffect extends OneShotEffect<SoulSeizerEffect> {
+class SoulSeizerEffect extends OneShotEffect {
 
     public SoulSeizerEffect() {
         super(Outcome.GainControl);

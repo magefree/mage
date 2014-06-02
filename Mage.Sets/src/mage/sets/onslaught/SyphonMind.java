@@ -67,7 +67,7 @@ public class SyphonMind extends CardImpl<SyphonMind> {
     }
 }
 
-class SyphonMindEffect extends OneShotEffect<SyphonMindEffect> {
+class SyphonMindEffect extends OneShotEffect {
 
     public SyphonMindEffect() {
         super(Outcome.Discard);

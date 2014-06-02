@@ -68,7 +68,7 @@ public class ReduceToDreams extends CardImpl<ReduceToDreams> {
     }
 }
 
-class ReduceToDreamsEffect extends OneShotEffect<ReduceToDreamsEffect> {
+class ReduceToDreamsEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts and enchantments");
     static {

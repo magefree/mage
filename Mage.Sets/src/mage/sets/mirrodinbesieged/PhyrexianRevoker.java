@@ -81,7 +81,7 @@ public class PhyrexianRevoker extends CardImpl<PhyrexianRevoker> {
 
 }
 
-class PhyrexianRevokerEffect1 extends OneShotEffect<PhyrexianRevokerEffect1> {
+class PhyrexianRevokerEffect1 extends OneShotEffect {
 
     public PhyrexianRevokerEffect1() {
         super(Outcome.Detriment);
@@ -118,7 +118,7 @@ class PhyrexianRevokerEffect1 extends OneShotEffect<PhyrexianRevokerEffect1> {
 
 }
 
-class PhyrexianRevokerEffect2 extends ReplacementEffectImpl<PhyrexianRevokerEffect2> {
+class PhyrexianRevokerEffect2 extends ReplacementEffectImpl {
 
     public PhyrexianRevokerEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

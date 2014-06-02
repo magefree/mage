@@ -76,7 +76,7 @@ public class Moonmist extends CardImpl<Moonmist> {
     }
 }
 
-class MoonmistEffect extends OneShotEffect<MoonmistEffect> {
+class MoonmistEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("humans");
 

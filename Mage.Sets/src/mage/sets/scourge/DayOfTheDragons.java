@@ -77,7 +77,7 @@ public class DayOfTheDragons extends CardImpl<DayOfTheDragons> {
     }
 }
 
-class DayOfTheDragonsEntersEffect extends OneShotEffect<DayOfTheDragonsEntersEffect> {
+class DayOfTheDragonsEntersEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("all creatures you control");
 
@@ -120,7 +120,7 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect<DayOfTheDragonsEntersEff
     }
 }
 
-class DayOfTheDragonsLeavesEffect extends OneShotEffect<DayOfTheDragonsLeavesEffect> {
+class DayOfTheDragonsLeavesEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("all Dragons you control");
 

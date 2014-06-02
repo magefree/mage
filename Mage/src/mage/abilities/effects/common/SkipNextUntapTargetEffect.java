@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class SkipNextUntapTargetEffect extends ReplacementEffectImpl<SkipNextUntapTargetEffect> {
+public class SkipNextUntapTargetEffect extends ReplacementEffectImpl {
 
     protected Set<UUID> usedFor = new HashSet<UUID>();
     protected int count;

@@ -80,7 +80,7 @@ public class HikariTwilightGuardian extends CardImpl<HikariTwilightGuardian> {
 
 }
 
-class HikariTwilightGuardianEffect extends OneShotEffect<HikariTwilightGuardianEffect> {
+class HikariTwilightGuardianEffect extends OneShotEffect {
 
     private static final String effectText = "Exile {this}. Return it to the battlefield under your control at the beginning of the next end step";
 

@@ -68,7 +68,7 @@ public class Crawlspace extends CardImpl<Crawlspace> {
     }
 }
 
-class ChangeMaxAttackedBySourceEffect extends ContinuousEffectImpl<ChangeMaxAttackedBySourceEffect> {
+class ChangeMaxAttackedBySourceEffect extends ContinuousEffectImpl {
 
     private final int maxAttackedBy;
 

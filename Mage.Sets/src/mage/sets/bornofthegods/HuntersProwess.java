@@ -79,7 +79,7 @@ public class HuntersProwess extends CardImpl<HuntersProwess> {
     }
 }
 
-class HuntersProwessDrawEffect extends OneShotEffect<HuntersProwessDrawEffect> {
+class HuntersProwessDrawEffect extends OneShotEffect {
 
     public HuntersProwessDrawEffect() {
         super(Outcome.Benefit);

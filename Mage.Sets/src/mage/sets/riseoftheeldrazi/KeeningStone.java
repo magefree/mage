@@ -71,7 +71,7 @@ public class KeeningStone extends CardImpl<KeeningStone> {
     }
 }
 
-class KeeningStoneEffect extends OneShotEffect<KeeningStoneEffect> {
+class KeeningStoneEffect extends OneShotEffect {
 
     public KeeningStoneEffect() {
         super(Outcome.Neutral);

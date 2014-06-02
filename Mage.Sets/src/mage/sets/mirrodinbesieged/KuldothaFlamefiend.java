@@ -75,7 +75,7 @@ public class KuldothaFlamefiend extends CardImpl<KuldothaFlamefiend> {
     }
 }
 
-class SacrificeArtifactEffect extends OneShotEffect<SacrificeArtifactEffect> {
+class SacrificeArtifactEffect extends OneShotEffect {
 
     public SacrificeArtifactEffect() {
         super(Outcome.Sacrifice);

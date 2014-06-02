@@ -77,7 +77,7 @@ public class AlphaBrawl extends CardImpl<AlphaBrawl> {
     }
 }
 
-class AlphaBrawlEffect extends OneShotEffect<AlphaBrawlEffect> {
+class AlphaBrawlEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

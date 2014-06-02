@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamagePlayersEffect extends OneShotEffect<DamagePlayersEffect> {
+public class DamagePlayersEffect extends OneShotEffect {
     private DynamicValue amount;
     private TargetController controller;
 

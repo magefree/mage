@@ -121,7 +121,7 @@ class UnattachCost extends CostImpl<UnattachCost> {
     }
 }
 
-class RazorBoomerangEffect extends OneShotEffect<RazorBoomerangEffect> {
+class RazorBoomerangEffect extends OneShotEffect {
 
     private static String text = "Razor Boomerang deals 1 damage to target creature or player. Return Razor Boomerang to its owner's hand";
     private UUID attachmentid;

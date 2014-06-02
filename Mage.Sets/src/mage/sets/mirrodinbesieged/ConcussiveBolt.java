@@ -72,7 +72,7 @@ public class ConcussiveBolt extends CardImpl<ConcussiveBolt> {
     }
 }
 
-class ConcussiveBoltEffect extends OneShotEffect<ConcussiveBoltEffect> {
+class ConcussiveBoltEffect extends OneShotEffect {
 
     public ConcussiveBoltEffect() {
         super(Outcome.Benefit);

@@ -71,7 +71,7 @@ public class IntoTheWilds extends CardImpl<IntoTheWilds> {
     }
 }
 
-class IntoTheWildsEffect extends OneShotEffect<IntoTheWildsEffect> {
+class IntoTheWildsEffect extends OneShotEffect {
 
     private final static FilterLandCard filter = new FilterLandCard();
 

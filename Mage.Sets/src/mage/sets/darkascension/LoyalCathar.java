@@ -81,7 +81,7 @@ public class LoyalCathar extends CardImpl<LoyalCathar> {
     }
 }
 
-class LoyalCatharEffect extends OneShotEffect<LoyalCatharEffect> {
+class LoyalCatharEffect extends OneShotEffect {
 
     private static final String effectText = "return it to the battlefield transformed under your control at the beginning of the next end step";
 
@@ -111,7 +111,7 @@ class LoyalCatharEffect extends OneShotEffect<LoyalCatharEffect> {
 
 }
 
-class ReturnLoyalCatharEffect extends OneShotEffect<ReturnLoyalCatharEffect> {
+class ReturnLoyalCatharEffect extends OneShotEffect {
 
     private UUID cardId;
 

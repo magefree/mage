@@ -68,7 +68,7 @@ public class FrightfulDelusion extends CardImpl<FrightfulDelusion> {
     }
 }
 
-class FrightfulDelusionEffect extends OneShotEffect<FrightfulDelusionEffect> {
+class FrightfulDelusionEffect extends OneShotEffect {
 
     public FrightfulDelusionEffect() {
         super(Outcome.Detriment);

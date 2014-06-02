@@ -80,7 +80,7 @@ public class NogginWhack extends CardImpl<NogginWhack> {
     }
 }
 
-class NogginWhackEffect extends OneShotEffect<NogginWhackEffect> {
+class NogginWhackEffect extends OneShotEffect {
 
     public NogginWhackEffect() {
         super(Outcome.Benefit);

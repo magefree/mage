@@ -79,7 +79,7 @@ public class CyclonicRift extends CardImpl<CyclonicRift> {
     }
 }
 
-class CyclonicRiftEffect extends OneShotEffect<CyclonicRiftEffect> {
+class CyclonicRiftEffect extends OneShotEffect {
 
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
 

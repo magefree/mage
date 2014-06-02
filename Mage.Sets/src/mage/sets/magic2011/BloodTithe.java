@@ -62,7 +62,7 @@ public class BloodTithe extends CardImpl<BloodTithe> {
 
 }
 
-class BloodTitheEffect extends OneShotEffect<BloodTitheEffect> {
+class BloodTitheEffect extends OneShotEffect {
 
     public BloodTitheEffect() {
         super(Outcome.Damage);

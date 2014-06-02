@@ -70,7 +70,7 @@ public class CrownOfEmpires extends CardImpl<CrownOfEmpires> {
     }
 }
 
-class CrownOfEmpiresEffect extends OneShotEffect<CrownOfEmpiresEffect> {
+class CrownOfEmpiresEffect extends OneShotEffect {
 
     public CrownOfEmpiresEffect() {
         super(Outcome.Tap);
@@ -111,7 +111,7 @@ class CrownOfEmpiresEffect extends OneShotEffect<CrownOfEmpiresEffect> {
     }
 }
 
-class CrownOfEmpiresControlEffect extends ContinuousEffectImpl<CrownOfEmpiresControlEffect> {
+class CrownOfEmpiresControlEffect extends ContinuousEffectImpl {
 
     public CrownOfEmpiresControlEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);

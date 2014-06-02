@@ -71,7 +71,7 @@ public class ExplosiveRevelation extends CardImpl<ExplosiveRevelation> {
     }
 }
 
-class ExplosiveRevelationEffect extends OneShotEffect<ExplosiveRevelationEffect> {
+class ExplosiveRevelationEffect extends OneShotEffect {
 
     public ExplosiveRevelationEffect() {
         super(Outcome.DrawCard);

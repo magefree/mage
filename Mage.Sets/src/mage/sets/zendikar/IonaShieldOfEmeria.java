@@ -82,7 +82,7 @@ public class IonaShieldOfEmeria extends CardImpl<IonaShieldOfEmeria> {
     }
 }
 
-class IonaShieldOfEmeriaChooseColorEffect extends OneShotEffect<IonaShieldOfEmeriaChooseColorEffect> {
+class IonaShieldOfEmeriaChooseColorEffect extends OneShotEffect {
 
     public IonaShieldOfEmeriaChooseColorEffect() {
         super(Outcome.Detriment);
@@ -115,7 +115,7 @@ class IonaShieldOfEmeriaChooseColorEffect extends OneShotEffect<IonaShieldOfEmer
     }
 }
 
-class IonaShieldOfEmeriaReplacementEffect extends ReplacementEffectImpl<IonaShieldOfEmeriaReplacementEffect> {
+class IonaShieldOfEmeriaReplacementEffect extends ReplacementEffectImpl {
     IonaShieldOfEmeriaReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Your opponents can't cast spells of the chosen color";

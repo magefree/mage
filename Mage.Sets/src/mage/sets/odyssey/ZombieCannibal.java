@@ -73,7 +73,7 @@ public class ZombieCannibal extends CardImpl<ZombieCannibal> {
     }
 }
 
-class ZombieCannibalEffect extends OneShotEffect<ZombieCannibalEffect> {
+class ZombieCannibalEffect extends OneShotEffect {
     
     public ZombieCannibalEffect() {
         super(Outcome.Exile);

@@ -116,7 +116,7 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class PossibilityStormEffect extends OneShotEffect<PossibilityStormEffect> {
+class PossibilityStormEffect extends OneShotEffect {
 
     public PossibilityStormEffect() {
         super(Outcome.Neutral);

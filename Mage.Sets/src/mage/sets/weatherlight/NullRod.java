@@ -65,7 +65,7 @@ public class NullRod extends CardImpl<NullRod> {
     }
 }
 
-class CantActivateAbilitiesEffect extends ReplacementEffectImpl<CantActivateAbilitiesEffect> {
+class CantActivateAbilitiesEffect extends ReplacementEffectImpl {
 
     public CantActivateAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

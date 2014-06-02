@@ -70,7 +70,7 @@ public class JinxedIdol extends CardImpl<JinxedIdol> {
 
 }
 
-class JinxedIdolEffect extends ContinuousEffectImpl<JinxedIdolEffect> {
+class JinxedIdolEffect extends ContinuousEffectImpl {
 
     public JinxedIdolEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);

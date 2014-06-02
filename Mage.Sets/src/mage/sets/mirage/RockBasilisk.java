@@ -117,7 +117,7 @@ class RockBasiliskTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class RockBasiliskEffect extends OneShotEffect<RockBasiliskEffect> {
+class RockBasiliskEffect extends OneShotEffect {
 
     RockBasiliskEffect() {
         super(Outcome.DestroyPermanent);

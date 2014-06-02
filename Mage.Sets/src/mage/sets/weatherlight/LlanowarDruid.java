@@ -79,7 +79,7 @@ public class LlanowarDruid extends CardImpl<LlanowarDruid> {
     }
 }
 
-class LlanowarDruidEffect extends OneShotEffect<LlanowarDruidEffect> {
+class LlanowarDruidEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent();
 

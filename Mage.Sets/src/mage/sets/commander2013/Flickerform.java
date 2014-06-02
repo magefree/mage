@@ -90,7 +90,7 @@ public class Flickerform extends CardImpl<Flickerform> {
     }
 }
 
-class FlickerformEffect extends OneShotEffect<FlickerformEffect> {
+class FlickerformEffect extends OneShotEffect {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
     static {
@@ -146,7 +146,7 @@ class FlickerformEffect extends OneShotEffect<FlickerformEffect> {
     }
 }
 
-class FlickerformReturnEffect extends OneShotEffect<FlickerformReturnEffect> {
+class FlickerformReturnEffect extends OneShotEffect {
 
     private static final FilterCard filterAura = new FilterCard();
     static {

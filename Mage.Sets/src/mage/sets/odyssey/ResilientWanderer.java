@@ -82,7 +82,7 @@ public class ResilientWanderer extends CardImpl<ResilientWanderer> {
     }
 }
 
-class GainProtectionFromColorSourceEffect extends ContinuousEffectImpl<GainProtectionFromColorSourceEffect> {
+class GainProtectionFromColorSourceEffect extends ContinuousEffectImpl {
 
     protected FilterCard protectionFilter;
     

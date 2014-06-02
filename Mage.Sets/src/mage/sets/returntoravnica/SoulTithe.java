@@ -91,7 +91,7 @@ public class SoulTithe extends CardImpl<SoulTithe> {
     }
 }
 
-class SoulTitheSacrificeSourceUnlessPaysEffect extends OneShotEffect<SoulTitheSacrificeSourceUnlessPaysEffect> {
+class SoulTitheSacrificeSourceUnlessPaysEffect extends OneShotEffect {
 
     public SoulTitheSacrificeSourceUnlessPaysEffect() {
         super(Outcome.Sacrifice);

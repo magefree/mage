@@ -73,7 +73,7 @@ public class UrabraskTheHidden extends CardImpl<UrabraskTheHidden> {
     }
 }
 
-class UrabraskTheHiddenEffect extends ReplacementEffectImpl<UrabraskTheHiddenEffect> {
+class UrabraskTheHiddenEffect extends ReplacementEffectImpl {
     UrabraskTheHiddenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Tap);
         staticText = "Creatures your opponents control enter the battlefield tapped";

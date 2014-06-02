@@ -83,7 +83,7 @@ public class PirateShip extends CardImpl<PirateShip> {
     }
 }
 
-class PirateShipEffect extends ReplacementEffectImpl<PirateShipEffect> {
+class PirateShipEffect extends ReplacementEffectImpl {
 
     public PirateShipEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

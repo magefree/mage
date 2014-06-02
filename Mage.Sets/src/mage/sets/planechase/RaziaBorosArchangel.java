@@ -93,7 +93,7 @@ public class RaziaBorosArchangel extends CardImpl<RaziaBorosArchangel> {
     }
 }
 
-class RaziaBorosArchangelEffect extends PreventionEffectImpl<RaziaBorosArchangelEffect> {
+class RaziaBorosArchangelEffect extends PreventionEffectImpl {
 
     private int amount;
 

@@ -74,7 +74,7 @@ public class PillarOfFlame extends CardImpl<PillarOfFlame> {
     }
 }
 
-class PillarOfFlameEffect extends ReplacementEffectImpl<PillarOfFlameEffect> {
+class PillarOfFlameEffect extends ReplacementEffectImpl {
 
     public PillarOfFlameEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);

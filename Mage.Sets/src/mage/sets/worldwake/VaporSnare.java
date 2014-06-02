@@ -83,7 +83,7 @@ public class VaporSnare extends CardImpl<VaporSnare> {
     }
 }
 
-class VaporSnareEffect extends OneShotEffect<VaporSnareEffect> {
+class VaporSnareEffect extends OneShotEffect {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     private static final String effectText = "sacrifice {this} unless you return a land you control to its owner's hand";

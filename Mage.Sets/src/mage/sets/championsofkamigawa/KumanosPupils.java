@@ -78,7 +78,7 @@ public class KumanosPupils extends CardImpl<KumanosPupils> {
     }
 
 }
-class KumanosPupilsEffect extends ReplacementEffectImpl<KumanosPupilsEffect> {
+class KumanosPupilsEffect extends ReplacementEffectImpl {
 
     public KumanosPupilsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);

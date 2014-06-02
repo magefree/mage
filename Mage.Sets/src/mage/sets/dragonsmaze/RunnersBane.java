@@ -90,7 +90,7 @@ public class RunnersBane extends CardImpl<RunnersBane> {
     }
 }
 
-class RunnersBaneEffect extends OneShotEffect<RunnersBaneEffect> {
+class RunnersBaneEffect extends OneShotEffect {
     RunnersBaneEffect() {
         super(Outcome.Tap);
         staticText = "tap enchanted creature";

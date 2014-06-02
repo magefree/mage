@@ -104,7 +104,7 @@ class BlocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class TideOfWarEffect extends OneShotEffect<TideOfWarEffect> {
+class TideOfWarEffect extends OneShotEffect {
 
     public TideOfWarEffect() {
         super(Outcome.Benefit);

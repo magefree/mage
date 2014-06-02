@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class SacrificeEquippedEffect extends OneShotEffect<SacrificeEquippedEffect> {
+public class SacrificeEquippedEffect extends OneShotEffect {
 
     public SacrificeEquippedEffect() {
         super(Outcome.Sacrifice);

@@ -95,7 +95,7 @@ public class WhipOfErebos extends CardImpl<WhipOfErebos> {
     }
 }
 
-class WhipOfErebosEffect extends OneShotEffect<WhipOfErebosEffect> {
+class WhipOfErebosEffect extends OneShotEffect {
 
     public WhipOfErebosEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -136,7 +136,7 @@ class WhipOfErebosEffect extends OneShotEffect<WhipOfErebosEffect> {
     }
 }
 
-class WhipOfErebosReplacementEffect extends ReplacementEffectImpl<WhipOfErebosReplacementEffect> {
+class WhipOfErebosReplacementEffect extends ReplacementEffectImpl {
 
     WhipOfErebosReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Tap);

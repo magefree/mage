@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class PreventAllNonCombatDamageToAllEffect extends PreventionEffectImpl<PreventAllNonCombatDamageToAllEffect> {
+public class PreventAllNonCombatDamageToAllEffect extends PreventionEffectImpl {
 
     protected FilterInPlay filter;
 

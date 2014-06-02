@@ -85,7 +85,7 @@ public class MyrGalvanizer extends CardImpl<MyrGalvanizer> {
     }
 }
 
-class MyrGalvanizerEffect extends OneShotEffect<MyrGalvanizerEffect> {
+class MyrGalvanizerEffect extends OneShotEffect {
 
     MyrGalvanizerEffect() {
         super(Outcome.Untap);

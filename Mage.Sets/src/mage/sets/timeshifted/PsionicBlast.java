@@ -68,7 +68,7 @@ public class PsionicBlast extends CardImpl<PsionicBlast> {
     }
 }
 
-class PsionicBlastEffect extends OneShotEffect<PsionicBlastEffect> {
+class PsionicBlastEffect extends OneShotEffect {
     PsionicBlastEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to you";

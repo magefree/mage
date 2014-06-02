@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author noxx
  */
-public class BoostPairedEffect extends ContinuousEffectImpl<BoostPairedEffect> {
+public class BoostPairedEffect extends ContinuousEffectImpl {
 
     private int power;
     private int toughness;

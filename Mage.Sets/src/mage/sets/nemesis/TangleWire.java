@@ -73,7 +73,7 @@ public class TangleWire extends CardImpl<TangleWire> {
         return new TangleWire(this);
     }
 }
-class TangleWireEffect extends OneShotEffect<TangleWireEffect> {
+class TangleWireEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifact, creature, or land he or she controls");
     static{

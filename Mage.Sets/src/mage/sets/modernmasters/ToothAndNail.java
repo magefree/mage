@@ -79,7 +79,7 @@ public class ToothAndNail extends CardImpl<ToothAndNail> {
     }
 }
 
-class ToothAndNailPutCreatureOnBattlefieldEffect extends OneShotEffect<ToothAndNailPutCreatureOnBattlefieldEffect> {
+class ToothAndNailPutCreatureOnBattlefieldEffect extends OneShotEffect {
 
     public ToothAndNailPutCreatureOnBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);

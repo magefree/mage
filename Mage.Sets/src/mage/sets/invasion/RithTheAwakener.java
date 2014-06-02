@@ -82,7 +82,7 @@ public class RithTheAwakener extends CardImpl<RithTheAwakener> {
     }
 }
 
-class RithTheAwakenerEffect extends OneShotEffect<RithTheAwakenerEffect> {
+class RithTheAwakenerEffect extends OneShotEffect {
     
     public RithTheAwakenerEffect() {
         super(Outcome.Benefit);

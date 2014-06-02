@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeff
  */
-public class ReturnToHandAttachedEffect extends OneShotEffect<ReturnToHandAttachedEffect> {
+public class ReturnToHandAttachedEffect extends OneShotEffect {
 
     public ReturnToHandAttachedEffect() {
         super(Outcome.ReturnToHand);

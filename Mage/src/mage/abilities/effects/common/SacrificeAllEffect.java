@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
+public class SacrificeAllEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     protected FilterControlledPermanent filter;

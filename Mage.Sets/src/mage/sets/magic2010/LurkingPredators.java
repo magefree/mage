@@ -68,7 +68,7 @@ public class LurkingPredators extends CardImpl<LurkingPredators> {
     }
 }
 
-class LurkingPredatorsEffect extends OneShotEffect<LurkingPredatorsEffect> {
+class LurkingPredatorsEffect extends OneShotEffect {
 
     public LurkingPredatorsEffect() {
         super(Outcome.PutCreatureInPlay);

@@ -70,7 +70,7 @@ public class PerishTheThought extends CardImpl<PerishTheThought> {
     }
 }
 
-class PerishTheThoughtEffect extends OneShotEffect<PerishTheThoughtEffect> {
+class PerishTheThoughtEffect extends OneShotEffect {
     
     private static final FilterCard filter = new FilterCard("card in target opponent's hand");
     

@@ -75,7 +75,7 @@ public class SlumberingTora extends CardImpl<SlumberingTora> {
         return new SlumberingTora(this);
     }
     
-    private class SlumberingToraEffect extends ContinuousEffectImpl<SlumberingToraEffect> {
+    private class SlumberingToraEffect extends ContinuousEffectImpl {
 
         public SlumberingToraEffect() {
             super(Duration.EndOfTurn, Outcome.BecomeCreature);

@@ -77,7 +77,7 @@ public class TakenoSamuraiGeneral extends CardImpl<TakenoSamuraiGeneral> {
 
 }
 
-class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl<TakenoSamuraiGeneralEffect> {
+class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {

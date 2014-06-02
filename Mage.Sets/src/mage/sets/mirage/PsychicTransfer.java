@@ -65,7 +65,7 @@ public class PsychicTransfer extends CardImpl<PsychicTransfer> {
     }
 }
 
-class PsychicTransferEffect extends OneShotEffect<PsychicTransferEffect> 
+class PsychicTransferEffect extends OneShotEffect 
 {
 
     public PsychicTransferEffect() {

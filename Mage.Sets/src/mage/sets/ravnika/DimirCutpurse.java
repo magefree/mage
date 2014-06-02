@@ -71,7 +71,7 @@ public class DimirCutpurse extends CardImpl<DimirCutpurse> {
     }
 }
 
-class DimirCutpurseEffect extends OneShotEffect<DimirCutpurseEffect> {
+class DimirCutpurseEffect extends OneShotEffect {
 
     DimirCutpurseEffect() {
         super(Outcome.Neutral);

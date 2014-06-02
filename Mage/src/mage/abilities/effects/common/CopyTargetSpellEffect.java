@@ -42,7 +42,7 @@ import mage.players.Player;
  * @author BetaSteward_at_googlemail.com
  *
  */
-public class CopyTargetSpellEffect extends OneShotEffect<CopyTargetSpellEffect> {
+public class CopyTargetSpellEffect extends OneShotEffect {
 
     public CopyTargetSpellEffect() {
         super(Outcome.Copy);

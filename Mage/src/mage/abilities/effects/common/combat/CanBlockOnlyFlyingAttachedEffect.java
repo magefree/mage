@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CanBlockOnlyFlyingAttachedEffect extends ReplacementEffectImpl<CanBlockOnlyFlyingAttachedEffect> implements MageSingleton {
+public class CanBlockOnlyFlyingAttachedEffect extends ReplacementEffectImpl implements MageSingleton {
 
     public CanBlockOnlyFlyingAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

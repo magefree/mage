@@ -74,7 +74,7 @@ public class TrackersInstincts extends CardImpl<TrackersInstincts> {
     }
 }
 
-class TrackersInstinctsEffect extends OneShotEffect<TrackersInstinctsEffect> {
+class TrackersInstinctsEffect extends OneShotEffect {
 
     public TrackersInstinctsEffect() {
         super(Outcome.DrawCard);

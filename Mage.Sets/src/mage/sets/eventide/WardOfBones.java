@@ -72,7 +72,7 @@ public class WardOfBones extends CardImpl<WardOfBones> {
     }
 }
 
-class WardOfBonesEffect extends ReplacementEffectImpl<WardOfBonesEffect> {
+class WardOfBonesEffect extends ReplacementEffectImpl {
 
     public WardOfBonesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

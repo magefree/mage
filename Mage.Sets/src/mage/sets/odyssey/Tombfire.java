@@ -70,7 +70,7 @@ public class Tombfire extends CardImpl<Tombfire> {
     }
 }
 
-class TombfireEffect extends OneShotEffect<TombfireEffect> {
+class TombfireEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("cards with flashback");
 

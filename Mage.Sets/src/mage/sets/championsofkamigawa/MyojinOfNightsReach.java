@@ -88,7 +88,7 @@ public class MyojinOfNightsReach extends CardImpl<MyojinOfNightsReach> {
     }
 }
 
-class MyojinOfNightsReachEffect extends OneShotEffect<MyojinOfNightsReachEffect> {
+class MyojinOfNightsReachEffect extends OneShotEffect {
     public MyojinOfNightsReachEffect() {
         super(Outcome.Discard);
         staticText = "Each opponent discards his or her hand";

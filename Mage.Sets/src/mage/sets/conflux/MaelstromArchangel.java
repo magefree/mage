@@ -82,7 +82,7 @@ public class MaelstromArchangel extends CardImpl<MaelstromArchangel> {
     }
 }
 
-class MaelstromArchangelCastEffect extends OneShotEffect<MaelstromArchangelCastEffect> {
+class MaelstromArchangelCastEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterNonlandCard("nonland card from your hand");
 

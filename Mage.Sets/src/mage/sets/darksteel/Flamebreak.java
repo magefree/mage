@@ -80,7 +80,7 @@ public class Flamebreak extends CardImpl<Flamebreak> {
     }
 }
 
-class FlamebreakCantRegenerateEffect extends ReplacementEffectImpl<FlamebreakCantRegenerateEffect> {
+class FlamebreakCantRegenerateEffect extends ReplacementEffectImpl {
 
     public FlamebreakCantRegenerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);

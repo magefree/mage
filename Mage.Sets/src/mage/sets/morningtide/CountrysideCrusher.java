@@ -83,7 +83,7 @@ public class CountrysideCrusher extends CardImpl<CountrysideCrusher> {
     }
 }
 
-class CountrysideCrusherEffect extends OneShotEffect<CountrysideCrusherEffect> {
+class CountrysideCrusherEffect extends OneShotEffect {
 
     public CountrysideCrusherEffect() {
         super(Outcome.Discard);

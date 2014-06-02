@@ -67,7 +67,7 @@ public class Ghostway extends CardImpl<Ghostway> {
     }
 }
 
-class GhostwayEffect extends OneShotEffect<GhostwayEffect> {
+class GhostwayEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("each creature you control");
 

@@ -43,7 +43,7 @@ import mage.game.Game;
  * @author maurer.it_at_gmail.com
  */
 //20101001 - 601.2e/613.10
-public interface CostModificationEffect<T extends CostModificationEffect<T>> extends ContinuousEffect<T> {
+public interface CostModificationEffect<T extends CostModificationEffect<T>> extends ContinuousEffect {
     /**
      * Called by the {@link ContinuousEffects#costModification(java.util.UUID, mage.abilities.Ability, mage.game.Game) ContinuousEffects.costModification}
      * method.

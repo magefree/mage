@@ -75,7 +75,7 @@ public class BottledCloister extends CardImpl<BottledCloister> {
     }
 }
 
-class BottledCloisterExileEffect extends OneShotEffect<BottledCloisterExileEffect> {
+class BottledCloisterExileEffect extends OneShotEffect {
 
     public BottledCloisterExileEffect() {
         super(Outcome.Detriment);
@@ -111,7 +111,7 @@ class BottledCloisterExileEffect extends OneShotEffect<BottledCloisterExileEffec
     }
 }
 
-class BottledCloisterReturnEffect extends OneShotEffect<BottledCloisterReturnEffect> {
+class BottledCloisterReturnEffect extends OneShotEffect {
 
     public BottledCloisterReturnEffect() {
         super(Outcome.Benefit);

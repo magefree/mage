@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEffectImpl<UntapAllDuringEachOtherPlayersUntapStepEffect> {
+public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEffectImpl {
 
     private final FilterPermanent filter;
 

@@ -81,7 +81,7 @@ public class ShimianSpecter extends CardImpl<ShimianSpecter> {
     }
 }
 
-class ShimianSpecterEffect extends OneShotEffect<ShimianSpecterEffect> {
+class ShimianSpecterEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("nonland card");
 

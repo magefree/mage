@@ -71,7 +71,7 @@ public class Afterlife extends CardImpl<Afterlife> {
     }
 }
 
-class AfterlifeEffect extends OneShotEffect<AfterlifeEffect> {
+class AfterlifeEffect extends OneShotEffect {
 
     public AfterlifeEffect() {
         super(Outcome.PutCreatureInPlay);

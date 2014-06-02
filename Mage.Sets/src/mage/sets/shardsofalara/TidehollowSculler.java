@@ -84,7 +84,7 @@ public class TidehollowSculler extends CardImpl<TidehollowSculler> {
     }
 }
 
-class TidehollowScullerExileEffect extends OneShotEffect<TidehollowScullerExileEffect> {
+class TidehollowScullerExileEffect extends OneShotEffect {
 
     public TidehollowScullerExileEffect() {
         super(Outcome.Exile);
@@ -125,7 +125,7 @@ class TidehollowScullerExileEffect extends OneShotEffect<TidehollowScullerExileE
 
 }
 
-class TidehollowScullerLeaveEffect extends OneShotEffect<TidehollowScullerLeaveEffect> {
+class TidehollowScullerLeaveEffect extends OneShotEffect {
 
     public TidehollowScullerLeaveEffect() {
         super(Outcome.ReturnToHand);

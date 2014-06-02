@@ -15,7 +15,7 @@ import mage.players.Player;
  * Date: 21.12.10
  * Time: 9:21
  */
-public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSourceUnlessPaysEffect> {
+public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
     protected Cost cost;
 
     public SacrificeSourceUnlessPaysEffect(Cost cost) {

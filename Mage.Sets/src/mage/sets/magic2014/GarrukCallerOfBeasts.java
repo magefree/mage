@@ -115,7 +115,7 @@ class GarrukCallerOfBeastsEmblem extends Emblem {
     }
 }
 
-class GarrukCallerOfBeastsPutOntoBattlefieldEffect extends OneShotEffect<GarrukCallerOfBeastsPutOntoBattlefieldEffect> {
+class GarrukCallerOfBeastsPutOntoBattlefieldEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filterGreenCreature = new FilterCreatureCard("a green creature card from your hand");
 
