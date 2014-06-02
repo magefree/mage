@@ -76,7 +76,7 @@ public class WallOfRoots extends CardImpl {
     }
 }
 
-class WallOfRootsCost extends CostImpl<WallOfRootsCost> {
+class WallOfRootsCost extends CostImpl {
 
     public WallOfRootsCost() {
         this.text = "Put a -0/-1 counter on {this}";

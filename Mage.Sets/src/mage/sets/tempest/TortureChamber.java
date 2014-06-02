@@ -82,7 +82,7 @@ public class TortureChamber extends CardImpl {
     }
 }
 
-class TortureChamberCost extends CostImpl<TortureChamberCost> {
+class TortureChamberCost extends CostImpl {
 
     private int removedCounters;
 

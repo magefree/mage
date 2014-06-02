@@ -119,7 +119,7 @@ class JarOfEyeballsTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class JarOfEyeballsCost extends CostImpl<JarOfEyeballsCost> {
+class JarOfEyeballsCost extends CostImpl {
 
     private int removedCounters;
 

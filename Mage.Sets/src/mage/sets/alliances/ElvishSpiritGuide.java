@@ -74,7 +74,7 @@ public class ElvishSpiritGuide extends CardImpl {
 }
 
 
-class ExileSourceFromHandCost extends CostImpl<ExileSourceFromHandCost> {
+class ExileSourceFromHandCost extends CostImpl {
 
     public ExileSourceFromHandCost() {
         this.text = "Exile {this} from your hand";

@@ -133,7 +133,7 @@ public class ChampionAbility extends StaticAbility {
     }
 }
 
-class ChampionExileCost extends CostImpl<ChampionExileCost> {
+class ChampionExileCost extends CostImpl {
 
     private String exileZone = null;
 

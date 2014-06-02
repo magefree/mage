@@ -181,7 +181,7 @@ class MarathWillOfTheWildElementalToken extends Token {
     }
 }
 
-class MarathWillOfTheWildRemoveCountersCost extends CostImpl<MarathWillOfTheWildRemoveCountersCost> {
+class MarathWillOfTheWildRemoveCountersCost extends CostImpl {
 
     public MarathWillOfTheWildRemoveCountersCost() {
         this.text = "Remove X +1/+1 counters from Marath";

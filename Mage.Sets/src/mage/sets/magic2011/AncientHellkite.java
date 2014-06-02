@@ -113,7 +113,7 @@ class AncientHellkiteAbility extends ActivatedAbilityImpl {
     }
 }
 
-class AncientHellkiteCost extends CostImpl<AncientHellkiteCost> {
+class AncientHellkiteCost extends CostImpl {
 
     public AncientHellkiteCost() {
         this.text = "Activate this ability only if Ancient Hellkite is attacking";

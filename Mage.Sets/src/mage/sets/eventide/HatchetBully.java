@@ -86,7 +86,7 @@ public class HatchetBully extends CardImpl {
     }
 }
 
-class HatchetBullyCost extends CostImpl<HatchetBullyCost> {
+class HatchetBullyCost extends CostImpl {
 
     public HatchetBullyCost() {
         this.text = "Put a -1/-1 counter on a creature you control";

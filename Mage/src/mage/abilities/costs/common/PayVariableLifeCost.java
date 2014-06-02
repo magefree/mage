@@ -39,7 +39,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class PayVariableLifeCost extends VariableCostImpl<PayVariableLifeCost> {
+public class PayVariableLifeCost extends VariableCostImpl {
 
     public PayVariableLifeCost() {
         this(false);

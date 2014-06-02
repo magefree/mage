@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileSourceCost extends CostImpl<ExileSourceCost> {
+public class ExileSourceCost extends CostImpl {
 
     public ExileSourceCost() {
         this.text = "Exile {this}";

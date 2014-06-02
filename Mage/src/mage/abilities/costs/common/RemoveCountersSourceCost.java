@@ -40,7 +40,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RemoveCountersSourceCost extends CostImpl<RemoveCountersSourceCost> {
+public class RemoveCountersSourceCost extends CostImpl {
 
     private int amount;
     private String name;

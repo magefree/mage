@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class UntapTargetCost extends CostImpl<UntapTargetCost> {
+public class UntapTargetCost extends CostImpl {
 
     TargetControlledPermanent target;
 

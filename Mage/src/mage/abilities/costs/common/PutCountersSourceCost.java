@@ -40,7 +40,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class PutCountersSourceCost extends CostImpl<PutCountersSourceCost> {
+public class PutCountersSourceCost extends CostImpl {
 
     private int amount;
     private String name;

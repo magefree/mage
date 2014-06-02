@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class ExileSourceFromGraveCost extends CostImpl<ExileSourceFromGraveCost> {
+public class ExileSourceFromGraveCost extends CostImpl {
 
     public ExileSourceFromGraveCost() {
         this.text = "Exile this card from your graveyard";

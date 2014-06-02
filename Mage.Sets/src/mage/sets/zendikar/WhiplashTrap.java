@@ -132,7 +132,7 @@ class WhiplashTrapWatcher extends Watcher {
     }
 }
 
-class WhiplashAlternativeCost extends AlternativeCostImpl<WhiplashAlternativeCost> {
+class WhiplashAlternativeCost extends AlternativeCostImpl {
 
     public WhiplashAlternativeCost() {
         super("you may pay {U} rather than pay Whiplash Trap's mana cost");

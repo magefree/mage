@@ -40,7 +40,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class DiscardHandCost extends CostImpl<DiscardHandCost> {
+public class DiscardHandCost extends CostImpl {
 
     public DiscardHandCost() {
     

@@ -75,7 +75,7 @@ public class ArrowVolleyTrap extends CardImpl {
     }
 }
 
-class ArrowVolleyTrapAlternativeCost extends AlternativeCostImpl<ArrowVolleyTrapAlternativeCost> {
+class ArrowVolleyTrapAlternativeCost extends AlternativeCostImpl {
 
     public ArrowVolleyTrapAlternativeCost() {
         super("you may pay {1}{W} rather than pay Arrow Volley Trap's mana cost");

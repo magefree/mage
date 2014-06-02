@@ -90,7 +90,7 @@ class LandGrantCondition implements Condition {
     }
 }
 
-class LandGrantReavealCost extends CostImpl<LandGrantReavealCost> {
+class LandGrantReavealCost extends CostImpl {
 
     public LandGrantReavealCost() {
         this.text = "reveal your hand";

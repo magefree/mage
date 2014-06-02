@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX
  */
-public class RemoveVariableCountersTargetCost extends VariableCostImpl<RemoveVariableCountersTargetCost>  {
+public class RemoveVariableCountersTargetCost extends VariableCostImpl  {
 
     protected FilterPermanent filter;
     protected CounterType counterTypeToRemove;

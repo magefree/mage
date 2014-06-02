@@ -22,7 +22,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class GainLifeOpponentCost extends CostImpl<GainLifeOpponentCost> {
+public class GainLifeOpponentCost extends CostImpl {
 
     private static final FilterPlayer filter = new FilterPlayer("opponent that can gain life");
     

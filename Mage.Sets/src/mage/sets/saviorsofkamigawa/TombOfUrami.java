@@ -82,7 +82,7 @@ public class TombOfUrami extends CardImpl {
 }
 
 
-class SacrificeAllLandCost extends CostImpl<SacrificeAllLandCost> {
+class SacrificeAllLandCost extends CostImpl {
 
     public SacrificeAllLandCost() {
         this.text = "Sacrifice all lands you control";

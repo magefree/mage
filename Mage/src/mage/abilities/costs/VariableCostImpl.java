@@ -38,10 +38,9 @@ import mage.target.Targets;
 /**
  *
  * @author LevelX2
- * @param <T> variable cost type
  */
 
-public abstract class VariableCostImpl<T extends VariableCostImpl<T>> implements Cost, VariableCost {
+public abstract class VariableCostImpl implements Cost, VariableCost {
 
     protected UUID id;
     protected String text;
@@ -50,9 +49,6 @@ public abstract class VariableCostImpl<T extends VariableCostImpl<T>> implements
     protected int amountPaid;
     protected String xText;
     protected String actionText;
-
-    @Override
-    public abstract T copy();
 
     public VariableCostImpl(String actionText) {
         this("X", actionText);

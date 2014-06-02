@@ -80,7 +80,7 @@ public class SlingbowTrap extends CardImpl {
     }
 }
 
-class SlingbowTrapAlternativeCost extends AlternativeCostImpl<SlingbowTrapAlternativeCost> {
+class SlingbowTrapAlternativeCost extends AlternativeCostImpl {
 
     public SlingbowTrapAlternativeCost() {
         super("you may pay {G} rather than pay {this}'s mana cost");

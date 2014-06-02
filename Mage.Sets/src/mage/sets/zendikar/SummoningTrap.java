@@ -126,7 +126,7 @@ class SummoningTrapWatcher extends Watcher {
     }
 }
 
-class SummoningTrapAlternativeCost extends AlternativeCostImpl<SummoningTrapAlternativeCost> {
+class SummoningTrapAlternativeCost extends AlternativeCostImpl {
 
     public SummoningTrapAlternativeCost() {
         super("you may pay {0} rather than pay Summoning Trap's mana cost");

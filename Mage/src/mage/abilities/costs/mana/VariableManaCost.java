@@ -41,7 +41,7 @@ import mage.players.ManaPool;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements VariableCost {
+public class VariableManaCost extends ManaCostImpl implements VariableCost {
 
     protected int multiplier;
     protected FilterMana filter;

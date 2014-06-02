@@ -39,7 +39,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class SacrificeXTargetCost extends VariableCostImpl<SacrificeXTargetCost>  {
+public class SacrificeXTargetCost extends VariableCostImpl  {
 
     protected FilterControlledPermanent filter;
     

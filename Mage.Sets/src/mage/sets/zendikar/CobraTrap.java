@@ -113,7 +113,7 @@ class CobraTrapWatcher extends Watcher {
     }
 }
 
-class CobraTrapAlternativeCost extends AlternativeCostImpl<CobraTrapAlternativeCost> {
+class CobraTrapAlternativeCost extends AlternativeCostImpl {
 
     public CobraTrapAlternativeCost() {
         super("you may pay {G} rather than pay Cobra Trap's mana cost");

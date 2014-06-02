@@ -38,7 +38,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PayLifeCost extends CostImpl<PayLifeCost> {
+public class PayLifeCost extends CostImpl {
 
     private final int amount;
 

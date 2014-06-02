@@ -77,7 +77,7 @@ public class BlindingPowder extends CardImpl {
     }
 }
 
-class BlindingPowderUnattachCost extends CostImpl<BlindingPowderUnattachCost> {
+class BlindingPowderUnattachCost extends CostImpl {
 
     public BlindingPowderUnattachCost() {
         this.text = "Unattach Blinding Powder";

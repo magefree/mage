@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class RemoveVariableCountersSourceCost extends VariableCostImpl<RemoveVariableCountersSourceCost>  {
+public class RemoveVariableCountersSourceCost extends VariableCostImpl  {
 
     protected int minimalCountersToPay = 0;
     private String counterName;

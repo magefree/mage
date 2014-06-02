@@ -79,7 +79,7 @@ public class TectonicEdge extends CardImpl {
 
 }
 
-class TectonicEdgeCost extends CostImpl<TectonicEdgeCost> {
+class TectonicEdgeCost extends CostImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

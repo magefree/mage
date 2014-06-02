@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class ExileFromStackCost extends CostImpl<ExileFromStackCost> {
+public class ExileFromStackCost extends CostImpl {
  
     public ExileFromStackCost(TargetSpell target) {
         this.addTarget(target);

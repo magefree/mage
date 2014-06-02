@@ -114,7 +114,7 @@ class PermafrostTrapWatcher extends Watcher {
     }
 }
 
-class PermafrostTrapAlternativeCost extends AlternativeCostImpl<PermafrostTrapAlternativeCost> {
+class PermafrostTrapAlternativeCost extends AlternativeCostImpl {
 
     public PermafrostTrapAlternativeCost() {
         super("you may pay {U} rather than pay Permafrost Trap's mana cost");

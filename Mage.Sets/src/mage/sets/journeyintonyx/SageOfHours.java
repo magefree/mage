@@ -81,7 +81,7 @@ public class SageOfHours extends CardImpl {
     }
 }
 
-class SageOfHoursCost extends CostImpl<SageOfHoursCost> {
+class SageOfHoursCost extends CostImpl {
 
     private int removedCounters;
 

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  */
 
-public class RevealSourceFromYourHandCost extends CostImpl<RevealSourceFromYourHandCost> {
+public class RevealSourceFromYourHandCost extends CostImpl {
     public RevealSourceFromYourHandCost() {
         this.text = "reveal {this} from your hand";
     }

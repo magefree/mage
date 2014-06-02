@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PayLoyaltyCost extends CostImpl<PayLoyaltyCost> {
+public class PayLoyaltyCost extends CostImpl {
 
     private final int amount;
 

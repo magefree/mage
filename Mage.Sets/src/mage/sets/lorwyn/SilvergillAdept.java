@@ -79,7 +79,7 @@ public class SilvergillAdept extends CardImpl {
     }
 }
 
-class SilvergillAdeptCost extends CostImpl<SilvergillAdeptCost> {
+class SilvergillAdeptCost extends CostImpl {
 
     private static final FilterCard filter = new FilterCard("Merfolk card");
     private GenericManaCost mana = new GenericManaCost(3);

@@ -104,7 +104,7 @@ class BackFromTheBrinkEffect extends OneShotEffect {
 
 }
 
-class BackFromTheBrinkCost extends CostImpl<BackFromTheBrinkCost> {
+class BackFromTheBrinkCost extends CostImpl {
 
     public BackFromTheBrinkCost() {
         this.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));

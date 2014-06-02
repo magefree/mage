@@ -84,7 +84,7 @@ public class RakdosLordOfRiots extends CardImpl {
     }
 }
 
-class RakdosLordOfRiotsCost extends CostImpl<RakdosLordOfRiotsCost> {
+class RakdosLordOfRiotsCost extends CostImpl {
 
     public RakdosLordOfRiotsCost() {
         text = "You can't cast Rakdos, Lord of Riots unless an opponent lost life this turn";

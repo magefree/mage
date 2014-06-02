@@ -123,7 +123,7 @@ class RefractionTrapWatcher extends Watcher {
     }
 }
 
-class RefractionTrapAlternativeCost extends AlternativeCostImpl<RefractionTrapAlternativeCost> {
+class RefractionTrapAlternativeCost extends AlternativeCostImpl {
 
     public RefractionTrapAlternativeCost() {
         super("You may pay {W} rather than pay Refraction Trap's mana cost");

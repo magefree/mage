@@ -39,7 +39,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TapVariableTargetCost extends VariableCostImpl<TapVariableTargetCost>  {
+public class TapVariableTargetCost extends VariableCostImpl  {
 
     protected FilterControlledPermanent filter;
 

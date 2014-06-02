@@ -78,7 +78,7 @@ public class LethargyTrap extends CardImpl {
     }
 }
 
-class LethargyTrapAlternativeCost extends AlternativeCostImpl<LethargyTrapAlternativeCost> {
+class LethargyTrapAlternativeCost extends AlternativeCostImpl {
 
     public LethargyTrapAlternativeCost() {
         super("you may pay {U} rather than pay Lethargy Trap's mana cost");

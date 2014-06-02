@@ -111,7 +111,7 @@ class BalothCageTrapWatcher extends Watcher {
     }
 }
 
-class BalothCageTrapAlternativeCost extends AlternativeCostImpl<BalothCageTrapAlternativeCost> {
+class BalothCageTrapAlternativeCost extends AlternativeCostImpl {
 
     public BalothCageTrapAlternativeCost() {
         super("you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost");

@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  *
  * @author nantuko
  */
-public class ExileFromGraveCost extends CostImpl<ExileFromGraveCost> {
+public class ExileFromGraveCost extends CostImpl {
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target) {
         this.addTarget(target);

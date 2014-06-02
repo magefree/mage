@@ -99,7 +99,7 @@ class VampireToken extends Token {
     }
 }
 
-class ControlFiveVampiresCost extends CostImpl<ControlFiveVampiresCost> {
+class ControlFiveVampiresCost extends CostImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {

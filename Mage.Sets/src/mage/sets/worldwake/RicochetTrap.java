@@ -123,7 +123,7 @@ class RicochetTrapWatcher extends Watcher {
     }
 }
 
-class RicochetTrapAlternativeCost extends AlternativeCostImpl<RicochetTrapAlternativeCost> {
+class RicochetTrapAlternativeCost extends AlternativeCostImpl {
 
     public RicochetTrapAlternativeCost() {
         super("You may pay {R} rather than pay Ricochet Trap's mana cost");

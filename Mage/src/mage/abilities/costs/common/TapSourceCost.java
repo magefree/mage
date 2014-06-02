@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TapSourceCost extends CostImpl<TapSourceCost> {
+public class TapSourceCost extends CostImpl {
 
     public TapSourceCost() {
         this.text = "{T}";

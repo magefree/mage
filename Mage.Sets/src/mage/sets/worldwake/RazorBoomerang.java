@@ -76,7 +76,7 @@ public class RazorBoomerang extends CardImpl {
     }
 }
 
-class UnattachCost extends CostImpl<UnattachCost> {
+class UnattachCost extends CostImpl {
 
     private UUID attachmentid;
 

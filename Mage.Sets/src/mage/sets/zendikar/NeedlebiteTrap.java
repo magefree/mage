@@ -76,7 +76,7 @@ public class NeedlebiteTrap extends CardImpl {
     }
 }
 
-class NeedlebiteTrapAlternativeCost extends AlternativeCostImpl<NeedlebiteTrapAlternativeCost> {
+class NeedlebiteTrapAlternativeCost extends AlternativeCostImpl {
 
     public NeedlebiteTrapAlternativeCost() {
         super("If an opponent gained life this turn, you may pay {B} rather than pay {this}'s mana cost");

@@ -35,7 +35,7 @@ package mage.abilities.costs;
  */
 
 
-public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>> extends CostsImpl<Cost> implements OptionalAdditionalCost{
+public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl> extends CostsImpl<Cost> implements OptionalAdditionalCost{
 
 
     protected String name;

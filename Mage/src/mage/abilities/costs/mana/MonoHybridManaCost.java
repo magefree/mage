@@ -33,7 +33,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.ManaPool;
 
-public class MonoHybridManaCost extends ManaCostImpl<MonoHybridManaCost> {
+public class MonoHybridManaCost extends ManaCostImpl {
 
     private final ColoredManaSymbol mana;
     private int mana2 = 2;

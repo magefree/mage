@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class ReturnToHandSourceCost extends CostImpl<ReturnToHandSourceCost> {
+public class ReturnToHandSourceCost extends CostImpl {
 
     public ReturnToHandSourceCost() {
         this.text = "return {this} to it's owner's hand";

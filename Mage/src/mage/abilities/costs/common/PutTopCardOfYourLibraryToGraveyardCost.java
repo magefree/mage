@@ -43,7 +43,7 @@ import mage.util.CardUtil;
  */
 
 
-public class PutTopCardOfYourLibraryToGraveyardCost extends CostImpl<PutTopCardOfYourLibraryToGraveyardCost> {
+public class PutTopCardOfYourLibraryToGraveyardCost extends CostImpl {
 
     int numberOfCards;
 

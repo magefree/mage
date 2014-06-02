@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInHand;
  * @author LevelX2
  */
 
-public class DiscardXTargetCost extends VariableCostImpl<DiscardXTargetCost> {
+public class DiscardXTargetCost extends VariableCostImpl {
 
     protected FilterCard filter;
 

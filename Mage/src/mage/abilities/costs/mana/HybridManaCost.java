@@ -33,7 +33,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.ManaPool;
 
-public class HybridManaCost extends ManaCostImpl<HybridManaCost> {
+public class HybridManaCost extends ManaCostImpl {
 
     private final ColoredManaSymbol mana1;
     private final ColoredManaSymbol mana2;

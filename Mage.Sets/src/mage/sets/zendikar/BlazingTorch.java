@@ -117,7 +117,7 @@ class BlazingTorchEvasionEffect extends RestrictionEffect<BlazingTorchEvasionEff
     }
 }
 
-class BlazingTorchCost extends CostImpl<BlazingTorchCost> {
+class BlazingTorchCost extends CostImpl {
 
     public BlazingTorchCost() {
         this.text = "Sacrifice Blazing Torch";

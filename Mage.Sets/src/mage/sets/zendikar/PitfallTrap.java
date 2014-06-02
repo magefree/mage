@@ -79,7 +79,7 @@ public class PitfallTrap extends CardImpl {
     }
 }
 
-class PitfallTrapAlternativeCost extends AlternativeCostImpl<PitfallTrapAlternativeCost> {
+class PitfallTrapAlternativeCost extends AlternativeCostImpl {
 
     public PitfallTrapAlternativeCost() {
         super("you may pay {W} rather than pay Pitfall Trap's mana cost");

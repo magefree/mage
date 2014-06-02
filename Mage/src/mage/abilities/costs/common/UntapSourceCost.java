@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class UntapSourceCost extends CostImpl<UntapSourceCost> {
+public class UntapSourceCost extends CostImpl {
 
     public UntapSourceCost() {
         this.text = "{Q}";

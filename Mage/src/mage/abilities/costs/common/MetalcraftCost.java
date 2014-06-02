@@ -40,7 +40,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MetalcraftCost extends CostImpl<MetalcraftCost> {
+public class MetalcraftCost extends CostImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

@@ -86,7 +86,7 @@ public class SkirsdagHighPriest extends CardImpl {
     }
 }
 
-class SkirsdagHighPriestCost extends CostImpl<SkirsdagHighPriestCost> {
+class SkirsdagHighPriestCost extends CostImpl {
 
     public SkirsdagHighPriestCost() {
         this.text = "Activate this ability only if a creature died this turn";

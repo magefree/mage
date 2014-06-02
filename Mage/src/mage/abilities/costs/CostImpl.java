@@ -33,15 +33,12 @@ import mage.target.Targets;
 
 import java.util.UUID;
 
-public abstract class CostImpl<T extends CostImpl<T>> implements Cost {
+public abstract class CostImpl implements Cost {
 
     protected UUID id;
     protected String text;
     protected boolean paid;
     protected Targets targets;
-
-    @Override
-    public abstract T copy();
 
     public CostImpl() {
         id = UUID.randomUUID();

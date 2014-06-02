@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX
  */
-public class RemoveCounterCost extends CostImpl<RemoveCounterCost> {
+public class RemoveCounterCost extends CostImpl {
 
     private TargetPermanent target;
     private String name;

@@ -41,15 +41,12 @@ import mage.players.ManaPool;
 import mage.players.Player;
 
 
-public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T> implements ManaCost {
+public abstract class ManaCostImpl extends CostImpl implements ManaCost {
 
     protected Mana payment;
     protected Mana cost;
     protected ManaOptions options;
     protected Filter sourceFilter;
-
-    @Override
-    public abstract T copy();
 
     public ManaCostImpl() {
         payment = new Mana();
@@ -204,10 +201,7 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
     }
 
     protected boolean isColorlessPaid(int mana) {
-        if (this.payment.count() >= mana) {
-            return true;
-        }
-        return false;
+        return this.payment.count() >= mana;
     }
 
     @Override

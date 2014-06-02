@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SacrificeSourceCost extends CostImpl<SacrificeSourceCost> {
+public class SacrificeSourceCost extends CostImpl {
 
     public SacrificeSourceCost() {
         this.text = "Sacrifice {this}";

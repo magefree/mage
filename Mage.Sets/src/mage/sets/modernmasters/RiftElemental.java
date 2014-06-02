@@ -120,7 +120,7 @@ public class RiftElemental extends CardImpl {
     }
 }
 
-class RemoveCounterFromCardCost extends CostImpl<RemoveCounterFromCardCost> {
+class RemoveCounterFromCardCost extends CostImpl {
 
     private TargetCard target;
     private String name;

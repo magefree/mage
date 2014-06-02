@@ -39,7 +39,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DiscardSourceCost extends CostImpl<DiscardSourceCost> {
+public class DiscardSourceCost extends CostImpl {
 
     public DiscardSourceCost() {}
 

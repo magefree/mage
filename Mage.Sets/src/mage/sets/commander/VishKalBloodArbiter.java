@@ -98,7 +98,7 @@ public class VishKalBloodArbiter extends CardImpl {
     }
 }
 
-class VishKalBloodArbiterCost extends CostImpl<VishKalBloodArbiterCost> {
+class VishKalBloodArbiterCost extends CostImpl {
 
     private int amount;
     private String name;

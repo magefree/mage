@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author LevelX2
  */
 
-public class ExileXFromYourGraveCost extends VariableCostImpl<ExileXFromYourGraveCost>  {
+public class ExileXFromYourGraveCost extends VariableCostImpl  {
 
     protected FilterCard filter;
 

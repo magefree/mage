@@ -34,7 +34,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.ManaPool;
 
-public class ColoredManaCost extends ManaCostImpl<ColoredManaCost> {
+public class ColoredManaCost extends ManaCostImpl {
 
     protected ColoredManaSymbol mana;
 

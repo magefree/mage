@@ -135,7 +135,7 @@ class LavaballTrapWatcher extends Watcher {
     }
 }
 
-class LavaballTrapAlternativeCost extends AlternativeCostImpl<LavaballTrapAlternativeCost> {
+class LavaballTrapAlternativeCost extends AlternativeCostImpl {
 
     public LavaballTrapAlternativeCost() {
         super("you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost");

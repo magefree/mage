@@ -42,7 +42,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
-public class RevealTargetFromHandCost extends CostImpl<RevealTargetFromHandCost> {
+public class RevealTargetFromHandCost extends CostImpl {
    
     public int convertedManaCosts = 0;
     protected int numberCardsRevealed = 0;

@@ -37,7 +37,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OnlyDuringUpkeepCost extends CostImpl<OnlyDuringUpkeepCost> {
+public class OnlyDuringUpkeepCost extends CostImpl {
 
     public OnlyDuringUpkeepCost() {
         text = "Activate this ability only during your upkeep";

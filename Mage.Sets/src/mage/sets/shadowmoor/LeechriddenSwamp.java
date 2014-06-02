@@ -84,7 +84,7 @@ public class LeechriddenSwamp extends CardImpl {
     }
 }
 
-class ControlTwoOrMoreBlackPermanentsCost extends CostImpl<ControlTwoOrMoreBlackPermanentsCost> {
+class ControlTwoOrMoreBlackPermanentsCost extends CostImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

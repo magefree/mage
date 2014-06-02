@@ -42,7 +42,7 @@ import mage.util.CardUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TapTargetCost extends CostImpl<TapTargetCost> {
+public class TapTargetCost extends CostImpl {
 
     TargetControlledPermanent target;
 

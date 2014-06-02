@@ -144,7 +144,7 @@ class NinjutsuEffect extends OneShotEffect {
     }
 }
 
-class ReturnAttackerToHandTargetCost extends CostImpl<ReturnAttackerToHandTargetCost> {
+class ReturnAttackerToHandTargetCost extends CostImpl {
 
     private UUID defendingPlayerId;
 
@@ -188,7 +188,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl<ReturnAttackerToHandTarget
     }
 }
 
-class RevealNinjutsuCardCost extends CostImpl<RevealNinjutsuCardCost> {
+class RevealNinjutsuCardCost extends CostImpl {
 
     public RevealNinjutsuCardCost() {
         this.text = "reveal ninjutsu card";

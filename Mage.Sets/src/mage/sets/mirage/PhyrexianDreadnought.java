@@ -76,7 +76,7 @@ public class PhyrexianDreadnought extends CardImpl {
     }
 }
 
-class PhyrexianDreadnoughtSacrificeCost extends CostImpl<PhyrexianDreadnoughtSacrificeCost> {
+class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("any number of creatures with total power 12 or greater");
 

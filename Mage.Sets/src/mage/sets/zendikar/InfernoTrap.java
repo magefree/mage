@@ -113,7 +113,7 @@ class ControllerDamagedByCreatureWatcher extends Watcher {
     }
 }
 
-class InfernoTrapAlternativeCost extends AlternativeCostImpl<InfernoTrapAlternativeCost> {
+class InfernoTrapAlternativeCost extends AlternativeCostImpl {
 
     public InfernoTrapAlternativeCost() {
         super("you may pay {R} rather than pay Inferno Trap's mana cost");

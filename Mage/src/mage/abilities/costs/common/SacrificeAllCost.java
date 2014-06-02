@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class SacrificeAllCost extends CostImpl<SacrificeAllCost> {
+public class SacrificeAllCost extends CostImpl {
 
     private FilterPermanent filter;
     private List<Permanent> permanents = new ArrayList<Permanent>();

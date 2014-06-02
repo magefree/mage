@@ -3,7 +3,7 @@ package mage.abilities.costs;
 import mage.abilities.Ability;
 import mage.game.Game;
 
-public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends CostsImpl<Cost> implements AlternativeCost {
+public class AlternativeCostImpl extends CostsImpl implements AlternativeCost {
 
     protected String name;
 

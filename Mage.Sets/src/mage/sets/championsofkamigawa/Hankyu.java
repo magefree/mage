@@ -160,7 +160,7 @@ class HankyuDealsDamageEffect extends OneShotEffect {
 
 }
 
-class HankyuCountersSourceCost extends CostImpl<HankyuCountersSourceCost> {
+class HankyuCountersSourceCost extends CostImpl {
 
         private int removedCounters;
         private UUID effectGivingEquipmentId;

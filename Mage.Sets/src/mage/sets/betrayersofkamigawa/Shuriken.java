@@ -124,7 +124,7 @@ class ShurikenDamageEffect extends OneShotEffect {
 }
 
 
-class ShurikenUnattachCost extends CostImpl<ShurikenUnattachCost> {
+class ShurikenUnattachCost extends CostImpl {
 
     Permanent equipment;
 

@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
+public class ReturnToHandTargetCost extends CostImpl {
 
     public ReturnToHandTargetCost(TargetControlledPermanent target) {
         this.addTarget(target);

@@ -7,7 +7,7 @@ import mage.game.Game;
 
 import java.util.UUID;
 
-public class ControlPermanentCost extends CostImpl<ControlPermanentCost> {
+public class ControlPermanentCost extends CostImpl {
     private FilterControlledPermanent filter;
 
     public ControlPermanentCost(FilterControlledPermanent filter) {

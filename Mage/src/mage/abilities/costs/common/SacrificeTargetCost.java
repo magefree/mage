@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
+public class SacrificeTargetCost extends CostImpl {
 
     List<Permanent> permanents = new ArrayList<>();
 

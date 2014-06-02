@@ -88,7 +88,7 @@ public class MoltenHydra extends CardImpl {
 
 
 
-class RemoveAllCountersSourceCost extends CostImpl<RemoveAllCountersSourceCost> {
+class RemoveAllCountersSourceCost extends CostImpl {
 
     private int amount;
     private String name;

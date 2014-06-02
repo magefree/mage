@@ -141,7 +141,7 @@ class CardsDrawnOpponentWatcher extends Watcher {
     }
 }
 
-class RuneflareTrapAlternativeCost extends AlternativeCostImpl<RuneflareTrapAlternativeCost> {
+class RuneflareTrapAlternativeCost extends AlternativeCostImpl {
 
     public RuneflareTrapAlternativeCost() {
         super("you may pay {R} rather than pay Runeflare Trap's mana cost");

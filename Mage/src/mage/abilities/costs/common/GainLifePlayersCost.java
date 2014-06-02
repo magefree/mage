@@ -38,7 +38,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class GainLifePlayersCost extends CostImpl<GainLifePlayersCost> {
+public class GainLifePlayersCost extends CostImpl {
 
     private final int amount;
 

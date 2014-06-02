@@ -127,7 +127,7 @@ class MindbreakTrapWatcher extends Watcher {
 
 }
 
-class MindbreakTrapAlternativeCost extends AlternativeCostImpl<MindbreakTrapAlternativeCost> {
+class MindbreakTrapAlternativeCost extends AlternativeCostImpl {
 
     public MindbreakTrapAlternativeCost() {
         super("you may pay {0} rather than pay Mindbreak Trap's mana cost");

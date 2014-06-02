@@ -97,7 +97,7 @@ public class ImpelledGiant extends CardImpl {
     }
 }
 
-class ImpelledGiantCost extends CostImpl<ImpelledGiantCost> {
+class ImpelledGiantCost extends CostImpl {
 
     TargetControlledPermanent target;
 

@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PayVariableLoyaltyCost extends VariableCostImpl<PayVariableLoyaltyCost>  {
+public class PayVariableLoyaltyCost extends VariableCostImpl  {
 
     public PayVariableLoyaltyCost() {
         super("loyality counters to remove");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class ExileFromHandCost extends CostImpl<ExileFromHandCost> {
+public class ExileFromHandCost extends CostImpl {
  
     List<Card> cards = new ArrayList<Card>();
  

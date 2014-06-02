@@ -106,7 +106,7 @@ class LuminarchAscensionTriggeredAbility extends TriggeredAbilityImpl {
         }
     }
 
-class SourceHasCountersCost extends CostImpl<SourceHasCountersCost> {
+class SourceHasCountersCost extends CostImpl {
 
     private int counters;
     private CounterType counterType;

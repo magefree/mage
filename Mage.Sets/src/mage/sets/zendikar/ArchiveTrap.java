@@ -98,7 +98,7 @@ class ArchiveTrapWatcher extends Watcher {
 
 }
 
-class ArchiveTrapAlternativeCost extends AlternativeCostImpl<ArchiveTrapAlternativeCost> {
+class ArchiveTrapAlternativeCost extends AlternativeCostImpl {
 
     public ArchiveTrapAlternativeCost() {
         super("you may pay {0} rather than pay Archive Trap's mana cost");

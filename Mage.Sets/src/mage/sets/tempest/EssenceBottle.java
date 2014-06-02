@@ -77,7 +77,7 @@ public class EssenceBottle extends CardImpl {
     }
 }
 
-class EssenceBottleCost extends CostImpl<EssenceBottleCost> {
+class EssenceBottleCost extends CostImpl {
 
     private int removedCounters;
 

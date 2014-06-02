@@ -70,7 +70,7 @@ public class FeastOfBlood extends CardImpl {
     }
 }
 
-class FeastOfBloodCost extends CostImpl<FeastOfBloodCost> {
+class FeastOfBloodCost extends CostImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

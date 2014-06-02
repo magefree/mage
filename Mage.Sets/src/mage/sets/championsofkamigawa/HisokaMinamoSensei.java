@@ -83,7 +83,7 @@ public class HisokaMinamoSensei extends CardImpl {
 
 }
 
-class HisokaMinamoSenseiDiscardTargetCost extends CostImpl<HisokaMinamoSenseiDiscardTargetCost> {
+class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
 
     protected int convertedManaCosts = 0;
 
