@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.players.Player;
 
 public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
     public LivingWeaponAbility() {
@@ -42,11 +43,15 @@ class LivingWeaponEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        GermToken token = new GermToken();
-        token.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
-        Permanent p = game.getPermanent(token.getLastAddedToken());
-        if (p != null) {
-             p.addAttachment(source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            GermToken token = new GermToken();
+            token.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
+            Permanent p = game.getPermanent(token.getLastAddedToken());
+            if (p != null) {
+                 p.addAttachment(source.getSourceId(), game);
+                 return true;
+            }            
         }
         return false;
     }

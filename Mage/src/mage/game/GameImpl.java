@@ -1120,7 +1120,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 state.getStack().remove(top);
                 while (state.hasSimultaneousEvents()) {
                     state.handleSimultaneousEvent(this);
-                    checkStateAndTriggered();
+                    checkTriggered();                    
                 }
             }
         }
