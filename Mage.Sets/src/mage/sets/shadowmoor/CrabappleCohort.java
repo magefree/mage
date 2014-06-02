@@ -33,11 +33,9 @@ import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.condition.common.ControlsPermanentCondition.CountType;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -49,45 +47,41 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author jeffwadsworth
+ * @author North
  */
-public class BallynockCohort extends CardImpl {
-    
+public class CrabappleCohort extends CardImpl {
+
+    private final String rule = "{this} gets +1/+1 as long as you control another green creature";
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-    
+
     static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter.add(new AnotherPredicate());
     }
-    
-    private String rule = "{this} gets +1/+1 as long as you control another white creature";
 
-    public BallynockCohort(UUID ownerId) {
-        super(ownerId, 3, "Ballynock Cohort", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public CrabappleCohort(UUID ownerId) {
+        super(ownerId, 109, "Crabapple Cohort", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "SHM";
-        this.subtype.add("Kithkin");
-        this.subtype.add("Soldier");
+        this.subtype.add("Treefolk");
+        this.subtype.add("Warrior");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-        
-        // Ballynock Cohort gets +1/+1 as long as you control another white creature.
-        Condition condition = new ControlsPermanentCondition(filter, CountType.MORE_THAN, 0);
+        // Crabapple Cohort gets +1/+1 as long as you control another green creature.
+        Condition condition = new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0);
         Effect effect = new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        
     }
 
-    public BallynockCohort(final BallynockCohort card) {
+    public CrabappleCohort(final CrabappleCohort card) {
         super(card);
     }
 
     @Override
-    public BallynockCohort copy() {
-        return new BallynockCohort(this);
+    public CrabappleCohort copy() {
+        return new CrabappleCohort(this);
     }
 }

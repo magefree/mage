@@ -50,7 +50,6 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 /**
  *
  * @author jeffwadsworth
-
  */
 public class BriarberryCohort extends CardImpl {
     
