@@ -35,7 +35,7 @@ import mage.game.match.MatchType;
  *
  * @author LevelX2
  */
-public class CommanderFreeForAllType extends MatchType<CommanderFreeForAllType> {
+public class CommanderFreeForAllType extends MatchType {
 
     public CommanderFreeForAllType() {
         this.name = "Commander Free For All";

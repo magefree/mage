@@ -34,7 +34,7 @@ import mage.game.tournament.TournamentType;
  *
  * @author LevelX2
  */
-public class BoosterDraftSwissTournamentType extends TournamentType<BoosterDraftSwissTournamentType> {
+public class BoosterDraftSwissTournamentType extends TournamentType {
 
     public BoosterDraftSwissTournamentType() {
         this.name = "Booster Draft Swiss";

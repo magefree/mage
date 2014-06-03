@@ -122,7 +122,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
 import mage.watchers.common.SoulbondWatcher;
 import org.apache.log4j.Logger;
 
-public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
+public abstract class GameImpl implements Game, Serializable {
 
     private static final transient Logger logger = Logger.getLogger(GameImpl.class);
 
@@ -189,9 +189,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     private boolean saveGame = false;
     private int priorityTime;
 
-    @Override
-    public abstract T copy();
-
     public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
         this.id = UUID.randomUUID();
         this.range = range;
@@ -201,7 +198,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         // this.actions = new LinkedList<MageAction>();
     }
 
-    public GameImpl(final GameImpl<T> game) {
+    public GameImpl(final GameImpl game) {
         long t1 = 0;
         if (logger.isDebugEnabled()) {
             t1 = System.currentTimeMillis();

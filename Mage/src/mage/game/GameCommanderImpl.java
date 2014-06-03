@@ -53,7 +53,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.watchers.common.CommanderCombatDamageWatcher;
 
-public abstract class GameCommanderImpl extends GameImpl<GameCommanderImpl> {
+public abstract class GameCommanderImpl extends GameImpl {
 
     private final Map<UUID, Cards> mulliganedCards = new HashMap<UUID, Cards>();
     private final Set<CommanderCombatDamageWatcher> commanderCombatWatcher = new HashSet<CommanderCombatDamageWatcher>();

@@ -34,7 +34,7 @@ import mage.game.tournament.TournamentType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoosterDraftEliminationTournamentType extends TournamentType<BoosterDraftEliminationTournamentType> {
+public class BoosterDraftEliminationTournamentType extends TournamentType {
 
     public BoosterDraftEliminationTournamentType() {
         this.name = "Booster Draft Elimination";

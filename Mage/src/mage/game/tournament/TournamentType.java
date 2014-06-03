@@ -34,7 +34,7 @@ import java.io.Serializable;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentType <T extends TournamentType<T>> implements Serializable {
+public class TournamentType implements Serializable {
 
     protected String name;
     protected int minPlayers;

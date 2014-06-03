@@ -33,7 +33,7 @@ package mage.choices;
  * @author LevelX2
  */
 
-public class ChoiceLeftOrRight extends ChoiceImpl<ChoiceLeftOrRight> {
+public class ChoiceLeftOrRight extends ChoiceImpl {
 
     public ChoiceLeftOrRight() {
         super(true);

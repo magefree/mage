@@ -48,9 +48,8 @@ import mage.players.PlayerList;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
+public abstract class DraftImpl implements Draft {
 
     protected final UUID id;
     protected final Map<UUID, DraftPlayer> players = new HashMap<>();

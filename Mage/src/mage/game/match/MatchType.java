@@ -34,7 +34,7 @@ import java.io.Serializable;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class MatchType<T extends MatchType<T>> implements Serializable {
+public abstract class MatchType implements Serializable {
 
     protected String name;
     protected int minPlayers;
@@ -56,7 +56,7 @@ public abstract class MatchType<T extends MatchType<T>> implements Serializable 
         this.useAttackOption = matchType.useAttackOption;
     }
 
-    public abstract T copy();
+    public abstract MatchType copy();
 
     @Override
     public String toString() {

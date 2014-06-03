@@ -34,7 +34,7 @@ import mage.game.tournament.TournamentType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SealedSwissTournamentType extends TournamentType<SealedSwissTournamentType> {
+public class SealedSwissTournamentType extends TournamentType {
 
     public SealedSwissTournamentType() {
         this.name = "Sealed Swiss";

@@ -34,7 +34,7 @@ import mage.game.tournament.TournamentType;
  * @author LevelX2
  */
 
-public class ConstructedEliminationTournamentType extends TournamentType<ConstructedEliminationTournamentType> {
+public class ConstructedEliminationTournamentType extends TournamentType {
 
     public ConstructedEliminationTournamentType() {
         this.name = "Elimination Constructed";

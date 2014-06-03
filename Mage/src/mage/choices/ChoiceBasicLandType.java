@@ -32,7 +32,7 @@ package mage.choices;
  *
  * @author LevelX2
  */
-public class ChoiceBasicLandType extends ChoiceImpl<ChoiceBasicLandType> {
+public class ChoiceBasicLandType extends ChoiceImpl {
 
     public ChoiceBasicLandType() {
         super(true);

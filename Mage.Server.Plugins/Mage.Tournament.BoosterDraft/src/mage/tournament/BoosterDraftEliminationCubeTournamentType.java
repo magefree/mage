@@ -34,7 +34,7 @@ import mage.game.tournament.TournamentType;
  *
  * @author LevelX2
  */
-public class BoosterDraftEliminationCubeTournamentType extends TournamentType<BoosterDraftEliminationCubeTournamentType> {
+public class BoosterDraftEliminationCubeTournamentType extends TournamentType {
 
     public BoosterDraftEliminationCubeTournamentType() {
         this.name = "Booster Draft Elimination (Cube)";

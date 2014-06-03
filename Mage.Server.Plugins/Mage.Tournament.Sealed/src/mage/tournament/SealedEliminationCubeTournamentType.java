@@ -34,7 +34,7 @@ import mage.game.tournament.TournamentType;
  *
  * @author LevelX2
  */
-public class SealedEliminationCubeTournamentType extends TournamentType<SealedEliminationCubeTournamentType> {
+public class SealedEliminationCubeTournamentType extends TournamentType {
 
     public SealedEliminationCubeTournamentType() {
         this.name = "Sealed Elimination (Cube)";

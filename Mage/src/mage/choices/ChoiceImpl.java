@@ -35,9 +35,8 @@ import java.util.Set;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public class ChoiceImpl<T extends ChoiceImpl<T>> implements Choice, Serializable {
+public class ChoiceImpl implements Choice, Serializable {
 
     protected boolean chosen;
     protected boolean required;
@@ -53,7 +52,7 @@ public class ChoiceImpl<T extends ChoiceImpl<T>> implements Choice, Serializable
         this.required = required;
     }
 
-    public ChoiceImpl(ChoiceImpl<T> choice) {
+    public ChoiceImpl(ChoiceImpl choice) {
         this.choice = choice.choice;
         this.chosen = choice.chosen;
         this.required = choice.required;
@@ -111,8 +110,8 @@ public class ChoiceImpl<T extends ChoiceImpl<T>> implements Choice, Serializable
     }
 
     @Override
-    public T copy() {
-        return (T)new ChoiceImpl(this);
+    public ChoiceImpl copy() {
+        return new ChoiceImpl(this);
     }
 
 }

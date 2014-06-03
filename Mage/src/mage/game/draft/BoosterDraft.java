@@ -35,7 +35,7 @@ import mage.cards.ExpansionSet;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoosterDraft extends DraftImpl<BoosterDraft> {
+public class BoosterDraft extends DraftImpl {
 
     public BoosterDraft(DraftOptions options, List<ExpansionSet> sets) {
         super(options, sets);

@@ -40,7 +40,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FreeForAll extends GameImpl<FreeForAll> {
+public class FreeForAll extends GameImpl {
 
     private int numPlayers;
 

@@ -34,7 +34,7 @@ import mage.game.tournament.TournamentType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SealedEliminationTournamentType extends TournamentType<SealedEliminationTournamentType> {
+public class SealedEliminationTournamentType extends TournamentType {
 
     public SealedEliminationTournamentType() {
         this.name = "Sealed Elimination";

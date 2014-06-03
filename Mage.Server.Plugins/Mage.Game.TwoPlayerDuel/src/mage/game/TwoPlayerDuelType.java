@@ -34,7 +34,7 @@ import mage.game.match.MatchType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TwoPlayerDuelType extends MatchType<TwoPlayerDuelType> {
+public class TwoPlayerDuelType extends MatchType {
 
     public TwoPlayerDuelType() {
         this.name = "Two Player Duel";

@@ -34,7 +34,7 @@ import mage.ObjectColor;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ChoiceColor extends ChoiceImpl<ChoiceColor> {
+public class ChoiceColor extends ChoiceImpl {
 
     public ChoiceColor() {
         super(true);

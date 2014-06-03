@@ -38,7 +38,7 @@ import mage.game.match.MatchType;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 
-public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
+public class TwoPlayerDuel extends GameImpl {
 
     public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
         super(attackOption, range, freeMulligans);

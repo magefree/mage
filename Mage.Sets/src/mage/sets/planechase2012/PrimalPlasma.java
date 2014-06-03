@@ -132,7 +132,7 @@ class PrimalPlasmaEffect extends ContinuousEffectImpl {
         return new PrimalPlasmaEffect(this);
     }
 }
-class PrimalPlasmaChoice extends ChoiceImpl<PrimalPlasmaChoice> {
+class PrimalPlasmaChoice extends ChoiceImpl {
     PrimalPlasmaChoice() {
         super(true);
         this.choices.add("a 3/3 creature");

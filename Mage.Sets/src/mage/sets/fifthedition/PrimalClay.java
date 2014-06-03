@@ -138,7 +138,7 @@ class PrimalClayEffect extends ContinuousEffectImpl {
     }
 }
 
-class PrimalClayChoice extends ChoiceImpl<PrimalClayChoice> {
+class PrimalClayChoice extends ChoiceImpl {
     PrimalClayChoice() {
         super(true);
         this.setMessage("Choose for Primal Clay to be");

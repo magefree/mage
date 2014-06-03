@@ -34,7 +34,7 @@ import mage.game.match.MatchType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FreeForAllType extends MatchType<FreeForAllType> {
+public class FreeForAllType extends MatchType {
 
     public FreeForAllType() {
         this.name = "Free For All";
