@@ -35,7 +35,7 @@ import mage.abilities.mana.GreenManaAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Forest extends BasicLand<Forest> {
+public abstract class Forest extends BasicLand {
 
     public Forest(UUID ownerId, int cardNumber) {
         super(ownerId, cardNumber, "Forest", new GreenManaAbility());

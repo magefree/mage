@@ -35,7 +35,7 @@ import mage.abilities.mana.BlueManaAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Island extends BasicLand<Island> {
+public abstract class Island extends BasicLand {
 
     public Island(UUID ownerId, int cardNumber) {
         super(ownerId, cardNumber, "Island", new BlueManaAbility());
