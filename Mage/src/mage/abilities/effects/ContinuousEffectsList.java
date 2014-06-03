@@ -36,11 +36,12 @@ import mage.constants.Duration;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList<T> {
 
     // the effectAbilityMap holds for each effect all abilities that are connected (used) with this effect
-    private final Map<UUID, HashSet<Ability>> effectAbilityMap = new HashMap<UUID, HashSet<Ability>>();
+    private final Map<UUID, HashSet<Ability>> effectAbilityMap = new HashMap<>();
 
     public ContinuousEffectsList() { }
 
@@ -49,17 +50,17 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         for (ContinuousEffect cost: effects) {
             this.add((T)cost.copy());
         }
-        for (Map.Entry<UUID, HashSet<Ability>> entry: effects.effectAbilityMap.entrySet()) {
-            HashSet<Ability> newSet = new HashSet<Ability>();
-            for (Ability ability :(HashSet<Ability>)entry.getValue()) {
+        for (Map.Entry<UUID, HashSet<Ability>> entry : effects.effectAbilityMap.entrySet()) {
+            HashSet<Ability> newSet = new HashSet<>();
+            for (Ability ability : entry.getValue()) {
                 newSet.add(ability.copy());
             }
             effectAbilityMap.put(entry.getKey(), newSet);
         }
     }
 
-    public ContinuousEffectsList copy() {
-        return new ContinuousEffectsList(this);
+    public ContinuousEffectsList<T> copy() {
+        return new ContinuousEffectsList<>(this);
     }
 
     public void removeEndOfTurnEffects() {
@@ -94,9 +95,9 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
 
     private boolean isInactive(T effect, Game game) {
         HashSet<Ability> set = effectAbilityMap.get(effect.getId());
-        Iterator it = set.iterator();
+        Iterator<Ability> it = set.iterator();
         while (it.hasNext()) {
-            Ability ability = (Ability)it.next();
+            Ability ability = it.next();
             if (ability == null) {
                 it.remove();
             } else  if (effect.isDiscarded()) {
@@ -107,10 +108,12 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                         if (game.getObject(ability.getSourceId()) == null) {//TODO: does this really works?? object is returned across the game
                             it.remove();                                
                         }
+                        break;
                     case OneUse:
                         if (effect.isUsed()) {
                             it.remove();
                         }
+                        break;
                     case Custom:
                         if (effect.isInactive(ability , game)) {
                                it.remove();
@@ -140,7 +143,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             set.add(source);
             return;
         }
-        HashSet<Ability> set = new HashSet<Ability>();
+        HashSet<Ability> set = new HashSet<>();
         set.add(source);
         this.effectAbilityMap.put(effect.getId(), set);
         this.add(effect);
