@@ -35,7 +35,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PostCombatMainPhase extends Phase<PostCombatMainPhase> {
+public class PostCombatMainPhase extends Phase {
 
     public PostCombatMainPhase() {
         this.type = TurnPhase.POSTCOMBAT_MAIN;

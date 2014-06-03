@@ -35,7 +35,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PreCombatMainPhase extends Phase<PreCombatMainPhase> {
+public class PreCombatMainPhase extends Phase {
 
     public PreCombatMainPhase() {
         this.type = TurnPhase.PRECOMBAT_MAIN;

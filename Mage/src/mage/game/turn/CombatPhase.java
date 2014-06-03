@@ -35,7 +35,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CombatPhase extends Phase<CombatPhase> {
+public class CombatPhase extends Phase {
 
     public CombatPhase() {
         this.type = TurnPhase.COMBAT;

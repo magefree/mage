@@ -37,7 +37,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BeginningPhase extends Phase<BeginningPhase> {
+public class BeginningPhase extends Phase {
 
     public BeginningPhase() {
         this.type = TurnPhase.BEGINNING;

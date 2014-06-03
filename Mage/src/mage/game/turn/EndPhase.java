@@ -37,7 +37,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EndPhase extends Phase<EndPhase> {
+public class EndPhase extends Phase {
 
     public EndPhase() {
         this.type = TurnPhase.END;

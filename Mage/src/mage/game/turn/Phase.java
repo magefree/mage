@@ -43,7 +43,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Phase<T extends Phase<T>> implements Serializable {
+public abstract class Phase implements Serializable {
 
     protected TurnPhase type;
     protected List<Step> steps = new ArrayList<Step>();
@@ -55,11 +55,11 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
     protected Step currentStep;
     protected int count;
 
-    public abstract T copy();
+    public abstract Phase copy();
 
     public Phase() {}
 
-    public Phase(final Phase<T> phase) {
+    public Phase(final Phase phase) {
         this.type = phase.type;
         this.event = phase.event;
         this.preEvent = phase.preEvent;
