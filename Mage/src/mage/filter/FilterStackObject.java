@@ -42,7 +42,7 @@ import mage.game.stack.StackObject;
  *
  * @author North
  */
-public class FilterStackObject<T extends StackObject> extends FilterObject<T> {
+public class FilterStackObject extends FilterObject<StackObject> {
 
     protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>();
 
@@ -56,10 +56,10 @@ public class FilterStackObject<T extends StackObject> extends FilterObject<T> {
 
     public FilterStackObject(final FilterStackObject filter) {
         super(filter);
-        this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>(filter.extraPredicates);
+        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
     }
 
-    public boolean match(T stackObject, UUID playerId, Game game) {
+    public boolean match(StackObject stackObject, UUID playerId, Game game) {
         if (!this.match(stackObject, game)) {
             return false;
         }
