@@ -59,7 +59,7 @@ import org.apache.log4j.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
+public class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final transient Logger logger = Logger.getLogger(SimulatedPlayer2.class);
     private final boolean isSimulatedPlayer;

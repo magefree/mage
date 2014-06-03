@@ -58,7 +58,7 @@ import java.util.concurrent.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements Player {
+public class ComputerPlayer2 extends ComputerPlayer implements Player {
 
     private static final transient Logger logger = Logger.getLogger(ComputerPlayer2.class);
     private static final transient ExecutorService pool = Executors.newFixedThreadPool(1);

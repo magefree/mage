@@ -66,7 +66,7 @@ import mage.game.stack.StackObject;
  * @author BetaSteward_at_googlemail.com
  */
 @Ignore
-public class TestPlayer extends ComputerPlayer<TestPlayer> {
+public class TestPlayer extends ComputerPlayer {
 
     private final List<PlayerAction> actions = new ArrayList<>();
     private final List<String> choices = new ArrayList<>();

@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MCTSPlayer extends ComputerPlayer<MCTSPlayer> {
+public class MCTSPlayer extends ComputerPlayer {
 
      private static final transient Logger logger = Logger.getLogger(MCTSPlayer.class);
 

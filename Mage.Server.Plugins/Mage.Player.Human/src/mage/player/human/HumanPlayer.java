@@ -94,7 +94,7 @@ import org.apache.log4j.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HumanPlayer extends PlayerImpl<HumanPlayer> {
+public class HumanPlayer extends PlayerImpl {
 
     private final transient PlayerResponse response = new PlayerResponse();
 

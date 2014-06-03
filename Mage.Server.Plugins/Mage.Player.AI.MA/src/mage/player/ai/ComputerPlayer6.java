@@ -68,7 +68,7 @@ import mage.player.ai.ma.optimizers.impl.OutcomeOptimizer;
  *
  * @author nantuko
  */
-public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements Player {
+public class ComputerPlayer6 extends ComputerPlayer implements Player {
 
     private static final transient org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ComputerPlayer6.class);
     private static final ExecutorService pool = Executors.newFixedThreadPool(1);

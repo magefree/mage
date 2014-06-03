@@ -91,9 +91,8 @@ import mage.cards.repository.ExpansionRepository;
  * suitable for two player games and some multiplayer games
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> implements Player {
+public class ComputerPlayer extends PlayerImpl implements Player {
 
     private transient final static Logger log = Logger.getLogger(ComputerPlayer.class);
     private transient Map<Mana, Card> unplayable = new TreeMap<>();
@@ -1962,8 +1961,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 
     @Override
-    public T copy() {
-        return (T)new ComputerPlayer(this);
+    public ComputerPlayer copy() {
+        return new ComputerPlayer(this);
     }
 
 }

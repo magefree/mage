@@ -54,7 +54,7 @@ import java.util.*;
  * 
  * @author BetaSteward_at_googlemail.com
  */
-public class RandomPlayer extends ComputerPlayer<RandomPlayer> {
+public class RandomPlayer extends ComputerPlayer {
 
     private boolean isSimulatedPlayer;
     private static Random rnd = new Random();

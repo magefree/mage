@@ -51,7 +51,7 @@ import java.util.concurrent.Executors;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> implements Player {
+public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 
     private static final int THINK_MIN_RATIO = 40;
     private static final int THINK_MAX_RATIO = 100;

@@ -116,11 +116,7 @@ import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
 import org.apache.log4j.Logger;
 
-/**
- *
- * @param <T>
- */
-public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
+public abstract class PlayerImpl implements Player, Serializable {
 
     private static final transient Logger log = Logger.getLogger(PlayerImpl.class);
 
@@ -197,9 +193,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     protected UserData userData;
 
-    @Override
-    public abstract T copy();
-
     public PlayerImpl(String name, RangeOfInfluence range) {
         this(UUID.randomUUID());
         this.name = name;
@@ -217,7 +210,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.playerId = id;
     }
 
-    public PlayerImpl(final PlayerImpl<T> player) {
+    public PlayerImpl(final PlayerImpl player) {
         this.abort = player.abort;
         this.playerId = player.playerId;
 
