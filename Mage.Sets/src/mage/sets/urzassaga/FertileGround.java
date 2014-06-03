@@ -78,7 +78,7 @@ public class FertileGround extends CardImpl {
     }
 }
 
-class FertileGroundTriggeredAbility extends TriggeredManaAbility<FertileGroundTriggeredAbility> {
+class FertileGroundTriggeredAbility extends TriggeredManaAbility {
 
    
     public FertileGroundTriggeredAbility() {

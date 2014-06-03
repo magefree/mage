@@ -78,7 +78,7 @@ public class ZhurTaaAncient extends CardImpl {
     }
 }
 
-class ZhurTaaAncientAbility extends TriggeredManaAbility<ZhurTaaAncientAbility> {
+class ZhurTaaAncientAbility extends TriggeredManaAbility {
 
     private static final String staticText = "Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.";
 

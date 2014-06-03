@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class ZoneChangeAllTriggeredAbility<T extends ZoneChangeAllTriggeredAbility<T>> extends TriggeredAbilityImpl {
+public class ZoneChangeAllTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterPermanent filter;
     protected Zone fromZone;
@@ -95,8 +95,8 @@ public class ZoneChangeAllTriggeredAbility<T extends ZoneChangeAllTriggeredAbili
     }
 
     @Override
-    public T copy() {
-        return (T)new ZoneChangeAllTriggeredAbility(this);
+    public ZoneChangeAllTriggeredAbility copy() {
+        return new ZoneChangeAllTriggeredAbility(this);
     }
 
     public Zone getFromZone() {

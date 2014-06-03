@@ -73,7 +73,7 @@ public class HarabazDruid extends CardImpl {
     }
 }
 
-class HarabazDruidManaAbility extends BasicManaAbility<HarabazDruidManaAbility> {
+class HarabazDruidManaAbility extends BasicManaAbility {
     HarabazDruidManaAbility() {
         super(new HarabazDruidManaEffect());
         this.addChoice(new ChoiceColor());

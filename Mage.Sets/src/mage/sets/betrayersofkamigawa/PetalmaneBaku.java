@@ -82,7 +82,7 @@ public class PetalmaneBaku extends CardImpl {
         return new PetalmaneBaku(this);
     }
     
-    private class PetalmaneBakuManaAbility extends BasicManaAbility<PetalmaneBakuManaAbility> {
+    private class PetalmaneBakuManaAbility extends BasicManaAbility {
         PetalmaneBakuManaAbility() {
             super(new PetalmaneBakuManaEffect());
             this.addChoice(new ChoiceColor());

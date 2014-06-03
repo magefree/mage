@@ -81,7 +81,7 @@ public class MarketFestival extends CardImpl {
     }
 }
 
-class MarketFestivalTriggeredAbility extends TriggeredManaAbility<MarketFestivalTriggeredAbility> {
+class MarketFestivalTriggeredAbility extends TriggeredManaAbility {
 
     public MarketFestivalTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MarketFestivalManaEffect());

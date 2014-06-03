@@ -80,7 +80,7 @@ public class Overgrowth extends CardImpl {
     }
 }
 
-class OvergrowthTriggeredAbility extends TriggeredManaAbility<OvergrowthTriggeredAbility> {
+class OvergrowthTriggeredAbility extends TriggeredManaAbility {
 
 
     public OvergrowthTriggeredAbility() {

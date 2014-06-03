@@ -87,7 +87,7 @@ public class VerdantHaven extends CardImpl {
     }
 }
 
-class VerdantHavenTriggeredAbility extends TriggeredManaAbility<VerdantHavenTriggeredAbility> {
+class VerdantHavenTriggeredAbility extends TriggeredManaAbility {
 
     public VerdantHavenTriggeredAbility() {
         super(Zone.BATTLEFIELD, new VerdantHavenManaEffect());

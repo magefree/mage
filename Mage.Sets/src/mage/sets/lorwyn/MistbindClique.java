@@ -89,7 +89,7 @@ public class MistbindClique extends CardImpl {
     }
 }
 
-class MistbindCliqueAbility extends ZoneChangeTriggeredAbility<MistbindCliqueAbility> {
+class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
 
     public MistbindCliqueAbility() {
         super(Zone.BATTLEFIELD, Zone.EXILED, new MistbindCliqueTapEffect(), "When a Faerie is championed with {this}, ", false);

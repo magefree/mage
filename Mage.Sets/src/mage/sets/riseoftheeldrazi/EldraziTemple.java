@@ -66,7 +66,7 @@ public class EldraziTemple extends CardImpl {
     }
 }
 
-class EldraziTempleManaAbility extends BasicManaAbility<EldraziTempleManaAbility> {
+class EldraziTempleManaAbility extends BasicManaAbility {
 
     EldraziTempleManaAbility ( ) {
         super(new BasicManaEffect(new EldraziConditionalMana()));

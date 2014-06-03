@@ -84,7 +84,7 @@ public class MyrReservoir extends CardImpl {
     }
 }
 
-class MyrReservoirManaAbility extends BasicManaAbility<MyrReservoirManaAbility> {
+class MyrReservoirManaAbility extends BasicManaAbility {
 
     MyrReservoirManaAbility() {
         super(new BasicManaEffect(new MyrConditionalMana()));

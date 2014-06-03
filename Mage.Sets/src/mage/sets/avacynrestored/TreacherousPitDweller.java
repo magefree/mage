@@ -71,7 +71,7 @@ public class TreacherousPitDweller extends CardImpl {
     }
 }
 
-class TreacherousPitDwellerTriggeredAbility extends ZoneChangeTriggeredAbility<TreacherousPitDwellerTriggeredAbility> {
+class TreacherousPitDwellerTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     private static final String ruleText = "When {this} enters the battlefield from a graveyard, ";
 

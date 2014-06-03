@@ -74,7 +74,7 @@ public class KnightOfTheWhiteOrchid extends CardImpl {
 
 }
 
-class KnightOfTheWhiteOrchidAbility extends ZoneChangeTriggeredAbility<KnightOfTheWhiteOrchidAbility> {
+class KnightOfTheWhiteOrchidAbility extends ZoneChangeTriggeredAbility {
 
     private static final FilterCard filter1 = new FilterCard("Plains");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent();

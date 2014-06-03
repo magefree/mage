@@ -58,7 +58,7 @@ public class SolRing extends CardImpl {
     }
 }
 
-class SolRingAbility extends BasicManaAbility<SolRingAbility> {
+class SolRingAbility extends BasicManaAbility {
 
     public SolRingAbility() {
         super(new BasicManaEffect(Mana.ColorlessMana(2)));

@@ -33,7 +33,7 @@ import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.choices.ChoiceColor;
 import mage.constants.Zone;
 
-public class AnyColorManaAbility extends ManaAbility<AnyColorManaAbility> {
+public class AnyColorManaAbility extends ManaAbility {
     public AnyColorManaAbility() {
         this(new TapSourceCost());
     }

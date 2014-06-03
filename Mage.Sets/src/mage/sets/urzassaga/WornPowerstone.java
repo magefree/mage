@@ -60,7 +60,7 @@ public class WornPowerstone extends CardImpl {
     }
 }
 
-class WornPowerstoneAbility extends BasicManaAbility<WornPowerstoneAbility> {
+class WornPowerstoneAbility extends BasicManaAbility {
 
     public WornPowerstoneAbility() {
         super(new BasicManaEffect(Mana.ColorlessMana(2)));

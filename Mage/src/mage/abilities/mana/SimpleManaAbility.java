@@ -38,7 +38,7 @@ import mage.abilities.effects.common.ManaEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimpleManaAbility extends ManaAbility<SimpleManaAbility> {
+public class SimpleManaAbility extends ManaAbility {
 
     public SimpleManaAbility(Zone zone, ManaEffect effect, Cost cost) {
         super(zone, effect, cost);

@@ -80,7 +80,7 @@ public class WildGrowth extends CardImpl {
     }
 }
 
-class WildGrowthTriggeredAbility extends TriggeredManaAbility<WildGrowthTriggeredAbility> {
+class WildGrowthTriggeredAbility extends TriggeredManaAbility {
 
 
     public WildGrowthTriggeredAbility() {

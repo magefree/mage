@@ -79,7 +79,7 @@ public class DawnsReflection extends CardImpl {
         return new DawnsReflection(this);
     }
 }
-class DawnsReflectionTriggeredAbility extends TriggeredManaAbility<DawnsReflectionTriggeredAbility> {
+class DawnsReflectionTriggeredAbility extends TriggeredManaAbility {
 
     public DawnsReflectionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DawnsReflectionManaEffect());

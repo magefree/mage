@@ -67,7 +67,7 @@ public class LionsEyeDiamond extends CardImpl {
 }
 
 
-class LionsEyeDiamondAbility extends ManaAbility<LionsEyeDiamondAbility> {
+class LionsEyeDiamondAbility extends ManaAbility {
 
     public LionsEyeDiamondAbility() {
         super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new SacrificeSourceCost());

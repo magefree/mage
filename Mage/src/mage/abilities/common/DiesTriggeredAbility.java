@@ -37,7 +37,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility<DiesTriggeredAbility> {
+public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     public DiesTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, "When {this} dies, ", optional);

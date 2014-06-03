@@ -38,7 +38,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class ActivateOncePerTurnManaAbility extends ManaAbility<ActivateOncePerTurnManaAbility> {
+public class ActivateOncePerTurnManaAbility extends ManaAbility {
 
     public ActivateOncePerTurnManaAbility(Zone zone, ManaEffect effect, Cost cost) {
         super(zone, effect, cost);

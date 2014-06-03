@@ -60,7 +60,7 @@ public class UrGolemsEye extends CardImpl {
 
 }
 
-class UrGolemsEyeAbility extends BasicManaAbility<UrGolemsEyeAbility> {
+class UrGolemsEyeAbility extends BasicManaAbility {
 
     public UrGolemsEyeAbility() {
         super(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 2, 0)));

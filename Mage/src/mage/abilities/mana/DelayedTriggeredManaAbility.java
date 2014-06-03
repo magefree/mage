@@ -37,7 +37,7 @@ import mage.constants.Duration;
 /**
  * @author Plopman
  */
-public abstract class DelayedTriggeredManaAbility<T extends DelayedTriggeredManaAbility<T>> extends DelayedTriggeredAbility {
+public abstract class DelayedTriggeredManaAbility extends DelayedTriggeredAbility {
 
     public DelayedTriggeredManaAbility(Zone zone, ManaEffect effect) {
         super(effect);

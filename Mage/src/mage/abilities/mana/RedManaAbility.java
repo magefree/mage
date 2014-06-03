@@ -35,7 +35,7 @@ import mage.abilities.effects.common.BasicManaEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RedManaAbility extends BasicManaAbility<RedManaAbility> {
+public class RedManaAbility extends BasicManaAbility {
 
     public RedManaAbility() {
         super(new BasicManaEffect(Mana.RedMana));

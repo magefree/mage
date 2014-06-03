@@ -119,7 +119,7 @@ public class HauntAbility extends TriggeredAbilityImpl {
     }
 }
 
-class HauntExileAbility extends ZoneChangeTriggeredAbility<HauntExileAbility> {
+class HauntExileAbility extends ZoneChangeTriggeredAbility {
 
     private final static String RULE_TEXT_CREATURE = "Haunt <i>(When this creature dies, exile it haunting target creature.)</i>";
     public HauntExileAbility() {

@@ -76,7 +76,7 @@ public class NykthosShrineToNyx extends CardImpl {
     }
 }
 
-class NykthosShrineToNyxManaAbility extends ManaAbility<NykthosShrineToNyxManaAbility> {
+class NykthosShrineToNyxManaAbility extends ManaAbility {
 
     public NykthosShrineToNyxManaAbility() {
         super(Zone.BATTLEFIELD, new NykthosDynamicManaEffect(), new GenericManaCost(2));

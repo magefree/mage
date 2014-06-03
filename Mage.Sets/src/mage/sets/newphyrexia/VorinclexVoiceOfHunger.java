@@ -84,7 +84,7 @@ public class VorinclexVoiceOfHunger extends CardImpl {
     }
 }
 
-class VorinclexTriggeredAbility1 extends TriggeredManaAbility<VorinclexTriggeredAbility1> {
+class VorinclexTriggeredAbility1 extends TriggeredManaAbility {
 
     private static final String staticText = "Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.";
 

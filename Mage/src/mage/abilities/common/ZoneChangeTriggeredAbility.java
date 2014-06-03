@@ -41,9 +41,8 @@ import mage.game.permanent.Permanent;
  * Is applied when the {@link Permanent} with this ability instance changes zones.
  * 
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public class ZoneChangeTriggeredAbility<T extends ZoneChangeTriggeredAbility<T>> extends TriggeredAbilityImpl {
+public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
 
     protected Zone fromZone;
     protected Zone toZone;
@@ -87,8 +86,8 @@ public class ZoneChangeTriggeredAbility<T extends ZoneChangeTriggeredAbility<T>>
     }
 
     @Override
-    public T copy() {
-        return (T)new ZoneChangeTriggeredAbility(this);
+    public ZoneChangeTriggeredAbility copy() {
+        return new ZoneChangeTriggeredAbility(this);
     }
 
     public Zone getFromZone() {

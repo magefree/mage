@@ -41,7 +41,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class TapLandForManaAllTriggeredManaAbility extends TriggeredManaAbility<TapLandForManaAllTriggeredManaAbility> {
+public class TapLandForManaAllTriggeredManaAbility extends TriggeredManaAbility {
 
     private final boolean setTargetPointer;
     

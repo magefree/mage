@@ -6,7 +6,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class PutIntoGraveFromAnywhereTriggeredAbility extends ZoneChangeTriggeredAbility<PutIntoGraveFromAnywhereTriggeredAbility> {
+public class PutIntoGraveFromAnywhereTriggeredAbility extends ZoneChangeTriggeredAbility {
     public PutIntoGraveFromAnywhereTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.GRAVEYARD, effect, "When {this} is put into a graveyard from anywhere, ", optional);
     }

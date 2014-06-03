@@ -127,7 +127,7 @@ class ChooseColorEffect extends OneShotEffect {
 
 }
 
-class UtopiaSprawlTriggeredAbility extends TriggeredManaAbility<UtopiaSprawlTriggeredAbility> {
+class UtopiaSprawlTriggeredAbility extends TriggeredManaAbility {
 
    
     public UtopiaSprawlTriggeredAbility() {

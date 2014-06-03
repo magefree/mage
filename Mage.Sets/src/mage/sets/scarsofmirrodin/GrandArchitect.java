@@ -137,7 +137,7 @@ class GrandArchitectEffect extends ContinuousEffectImpl {
 
 }
 
-class GrandArchitectManaAbility extends ManaAbility<GrandArchitectManaAbility> {
+class GrandArchitectManaAbility extends ManaAbility {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped blue creature");
 

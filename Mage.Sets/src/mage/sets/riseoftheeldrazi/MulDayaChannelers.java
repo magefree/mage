@@ -98,7 +98,7 @@ public class MulDayaChannelers extends CardImpl {
 }
 
 
-class MulDayaChannelersActivateIfConditionManaAbility extends ManaAbility<MulDayaChannelersActivateIfConditionManaAbility> {
+class MulDayaChannelersActivateIfConditionManaAbility extends ManaAbility {
 
     private Condition condition;
 

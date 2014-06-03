@@ -63,7 +63,7 @@ public class PalladiumMyr extends CardImpl {
     }
 }
 
-class PalladiumMyrAbility extends BasicManaAbility<PalladiumMyrAbility> {
+class PalladiumMyrAbility extends BasicManaAbility {
 
     public PalladiumMyrAbility() {
         super(new BasicManaEffect(Mana.ColorlessMana(2)));

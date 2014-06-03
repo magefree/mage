@@ -88,7 +88,7 @@ public class AngelOfSerenity extends CardImpl {
     }
 }
 
-class AngelOfSerenityTriggeredAbility extends ZoneChangeTriggeredAbility<AngelOfSerenityTriggeredAbility> {
+class AngelOfSerenityTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     public AngelOfSerenityTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AngelOfSerenityEnterEffect(), "When {this} enters the battlefield, ", true);

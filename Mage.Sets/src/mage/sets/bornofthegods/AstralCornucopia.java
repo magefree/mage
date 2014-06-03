@@ -109,7 +109,7 @@ class AstralCornucopiaEffect extends OneShotEffect {
     }
 }
 
-class AstralCornucopiaManaAbility extends ManaAbility<AstralCornucopiaManaAbility> {
+class AstralCornucopiaManaAbility extends ManaAbility {
 
     public AstralCornucopiaManaAbility() {
         super(Zone.BATTLEFIELD, new AstralCornucopiaManaEffect(), new TapSourceCost());

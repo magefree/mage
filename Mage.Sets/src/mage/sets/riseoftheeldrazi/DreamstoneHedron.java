@@ -69,7 +69,7 @@ public class DreamstoneHedron extends CardImpl {
         return new DreamstoneHedron(this);
     }
 
-    class DreamstoneHedronFirstManaAbility extends BasicManaAbility<DreamstoneHedronFirstManaAbility> {
+    class DreamstoneHedronFirstManaAbility extends BasicManaAbility {
 
     public DreamstoneHedronFirstManaAbility() {
         super(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 3, 0)));

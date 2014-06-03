@@ -71,7 +71,7 @@ public class KnotvineMystic extends CardImpl{
 
 }
 
-class KnotvineMysticManaAbility extends BasicManaAbility<KnotvineMysticManaAbility> {
+class KnotvineMysticManaAbility extends BasicManaAbility {
 
     public KnotvineMysticManaAbility() {
         super(new BasicManaEffect(new Mana(1, 1, 0, 1, 0, 0, 0)));

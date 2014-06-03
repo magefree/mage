@@ -84,7 +84,7 @@ public class ClashOfRealities extends CardImpl {
         return new ClashOfRealities(this);
     }
 
-    private class ClashOfRealitiesTriggeredAbility extends ZoneChangeTriggeredAbility<ClashOfRealitiesTriggeredAbility> {
+    private class ClashOfRealitiesTriggeredAbility extends ZoneChangeTriggeredAbility {
 
         public ClashOfRealitiesTriggeredAbility(Effect effect, String rule) {
             super(Zone.BATTLEFIELD, effect, rule, true);

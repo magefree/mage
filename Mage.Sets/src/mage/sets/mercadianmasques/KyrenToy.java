@@ -77,7 +77,7 @@ public class KyrenToy extends CardImpl {
         return new KyrenToy(this);
     }
     
-    private class KyrenToyManaAbility extends BasicManaAbility<KyrenToyManaAbility> {
+    private class KyrenToyManaAbility extends BasicManaAbility {
         KyrenToyManaAbility() {
             super(new KyrenToyManaEffect());
         }

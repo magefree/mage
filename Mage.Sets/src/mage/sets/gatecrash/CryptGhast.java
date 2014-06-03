@@ -75,7 +75,7 @@ public class CryptGhast extends CardImpl {
     }
 }
 
-class CryptGhastTriggeredAbility extends TriggeredManaAbility<CryptGhastTriggeredAbility> {
+class CryptGhastTriggeredAbility extends TriggeredManaAbility {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Swamp");
     static {

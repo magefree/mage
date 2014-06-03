@@ -35,7 +35,7 @@ import mage.abilities.effects.common.BasicManaEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WhiteManaAbility extends BasicManaAbility<WhiteManaAbility> {
+public class WhiteManaAbility extends BasicManaAbility {
 
     public WhiteManaAbility() {
         super(new BasicManaEffect(Mana.WhiteMana));

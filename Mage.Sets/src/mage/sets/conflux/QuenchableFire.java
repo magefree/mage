@@ -145,7 +145,7 @@ class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 }
 
-class QuenchableFireSpecialAction extends SpecialAction<QuenchableFireSpecialAction> {
+class QuenchableFireSpecialAction extends SpecialAction {
 
     public QuenchableFireSpecialAction(UUID effectId) {
         this.addCost(new ManaCostsImpl("{U}"));

@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author noxx
  */
-public class ConditionalAnyColorManaAbility extends ManaAbility<ConditionalAnyColorManaAbility> {
+public class ConditionalAnyColorManaAbility extends ManaAbility {
 
     public ConditionalAnyColorManaAbility(int amount, ConditionalManaBuilder manaBuilder) {
         this(new TapSourceCost(), amount, manaBuilder);

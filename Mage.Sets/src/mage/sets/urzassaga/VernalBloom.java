@@ -72,7 +72,7 @@ public class VernalBloom extends CardImpl {
     }
 }
 
-class VernalBloomTriggeredAbility extends TriggeredManaAbility<VernalBloomTriggeredAbility> {
+class VernalBloomTriggeredAbility extends TriggeredManaAbility {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
     static {

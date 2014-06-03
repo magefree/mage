@@ -70,7 +70,7 @@ public class MongrelPack extends CardImpl {
     }
 }
 
-class MongrelPackAbility extends ZoneChangeTriggeredAbility<MongrelPackAbility> {
+class MongrelPackAbility extends ZoneChangeTriggeredAbility {
 
     public MongrelPackAbility() {
         super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new CreateTokenEffect(new HoundToken(), 4), "When {this} dies during combat, ", false);

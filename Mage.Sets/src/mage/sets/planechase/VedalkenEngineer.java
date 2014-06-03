@@ -110,7 +110,7 @@ class VedalkenEngineerManaCondition implements Condition {
     }
 }
 
-class VedalkenEngineerAbility extends ManaAbility<VedalkenEngineerAbility> {
+class VedalkenEngineerAbility extends ManaAbility {
 
     public VedalkenEngineerAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
         super(Zone.BATTLEFIELD, new VedalkenEngineerEffect(amount, manaBuilder), cost);

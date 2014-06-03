@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author noxx
  */
-public class EntersAnotherCreatureYourControlTriggeredAbility extends ZoneChangeTriggeredAbility<EntersAnotherCreatureYourControlTriggeredAbility> {
+public class EntersAnotherCreatureYourControlTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     public EntersAnotherCreatureYourControlTriggeredAbility(Effect effect) {
         this(effect, false);

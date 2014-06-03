@@ -77,7 +77,7 @@ public class CathedralMembrane extends CardImpl {
     }
 }
 
-class CathedralMembraneAbility extends ZoneChangeTriggeredAbility<CathedralMembraneAbility> {
+class CathedralMembraneAbility extends ZoneChangeTriggeredAbility {
 
     public CathedralMembraneAbility() {
         super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new CathedralMembraneEffect(), "When {this} dies during combat, ", false);

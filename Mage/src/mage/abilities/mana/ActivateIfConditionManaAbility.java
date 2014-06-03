@@ -41,7 +41,7 @@ import mage.game.Game;
  */
 
 
-public class ActivateIfConditionManaAbility extends ManaAbility<ActivateIfConditionManaAbility> {
+public class ActivateIfConditionManaAbility extends ManaAbility {
 
     private Condition condition;
 

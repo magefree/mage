@@ -35,7 +35,7 @@ import mage.abilities.effects.common.ManaEffect;
  * see 20110715 - 605.1b
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class TriggeredManaAbility<T extends TriggeredManaAbility<T>> extends TriggeredAbilityImpl {
+public abstract class TriggeredManaAbility extends TriggeredAbilityImpl {
 
     public TriggeredManaAbility(Zone zone, ManaEffect effect) {
         this(zone, effect, false);

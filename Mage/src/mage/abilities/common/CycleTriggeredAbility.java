@@ -40,7 +40,7 @@ import mage.game.stack.StackObject;
  *
  * @author Plopman
  */
-public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility<CycleTriggeredAbility> {
+public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     public CycleTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.ALL, effect, "When you cycle {this}, ", optional);

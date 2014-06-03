@@ -93,7 +93,7 @@ public class TraceOfAbundance extends CardImpl {
     }
 }
 
-class TraceOfAbundanceTriggeredAbility extends TriggeredManaAbility<TraceOfAbundanceTriggeredAbility> {
+class TraceOfAbundanceTriggeredAbility extends TriggeredManaAbility {
 
     public TraceOfAbundanceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TraceOfAbundanceEffect());
