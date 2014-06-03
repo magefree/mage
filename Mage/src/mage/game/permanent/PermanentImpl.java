@@ -70,9 +70,8 @@ import mage.players.Player;
 
 /**
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl implements Permanent {
+public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     protected boolean tapped;
     protected boolean flipped;
@@ -118,7 +117,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         this.controllerId = controllerId;
     }
 
-    public PermanentImpl(final PermanentImpl<T> permanent) {
+    public PermanentImpl(final PermanentImpl permanent) {
         super(permanent);
         this.tapped = permanent.tapped;
         this.flipped = permanent.flipped;

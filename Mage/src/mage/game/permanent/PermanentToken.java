@@ -41,7 +41,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PermanentToken extends PermanentImpl<PermanentToken> {
+public class PermanentToken extends PermanentImpl {
 
     protected Token token;
 

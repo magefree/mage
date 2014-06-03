@@ -43,7 +43,7 @@ import mage.game.command.Commander;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class PermanentCard extends PermanentImpl<PermanentCard> {
+public class PermanentCard extends PermanentImpl {
 
     protected int maxLevelCounters;
     protected Card card;
