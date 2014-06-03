@@ -38,7 +38,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DrawStep extends Step<DrawStep> {
+public class DrawStep extends Step {
 
     public DrawStep() {
         super(PhaseStep.DRAW, true);

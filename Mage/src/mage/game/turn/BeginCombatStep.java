@@ -37,7 +37,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BeginCombatStep extends Step<BeginCombatStep> {
+public class BeginCombatStep extends Step {
 
     public BeginCombatStep() {
         super(PhaseStep.BEGIN_COMBAT, true);

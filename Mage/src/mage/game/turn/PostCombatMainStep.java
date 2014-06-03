@@ -35,7 +35,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PostCombatMainStep extends Step<PostCombatMainStep> {
+public class PostCombatMainStep extends Step {
 
     public PostCombatMainStep() {
         super(PhaseStep.POSTCOMBAT_MAIN, true);

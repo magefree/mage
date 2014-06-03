@@ -38,7 +38,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FirstCombatDamageStep extends Step<FirstCombatDamageStep> {
+public class FirstCombatDamageStep extends Step {
 
     public FirstCombatDamageStep() {
         super(PhaseStep.FIRST_COMBAT_DAMAGE, true);

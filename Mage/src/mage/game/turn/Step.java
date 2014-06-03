@@ -38,9 +38,8 @@ import mage.game.events.GameEvent.EventType;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * @param <T>
  */
-public abstract class Step<T extends Step<T>> implements Serializable {
+public abstract class Step implements Serializable {
 
     private final PhaseStep type;
     private final boolean hasPriority;
@@ -53,7 +52,7 @@ public abstract class Step<T extends Step<T>> implements Serializable {
         PRE, PRIORITY, POST;
     }
 
-    public abstract T copy();
+    public abstract Step copy();
 
     public Step(PhaseStep type, boolean hasPriority) {
         this.type = type;

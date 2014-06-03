@@ -38,7 +38,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DeclareBlockersStep extends Step<DeclareBlockersStep> {
+public class DeclareBlockersStep extends Step {
 
     public DeclareBlockersStep() {
         super(PhaseStep.DECLARE_BLOCKERS, true);

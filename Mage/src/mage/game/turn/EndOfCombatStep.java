@@ -37,7 +37,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EndOfCombatStep extends Step<EndOfCombatStep> {
+public class EndOfCombatStep extends Step {
 
     public EndOfCombatStep() {
         super(PhaseStep.END_COMBAT, true);

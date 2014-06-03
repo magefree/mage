@@ -38,7 +38,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class UntapStep extends Step<UntapStep> {
+public class UntapStep extends Step {
 
     public UntapStep() {
         super(PhaseStep.UNTAP, false);

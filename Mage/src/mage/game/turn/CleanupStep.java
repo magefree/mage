@@ -38,7 +38,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CleanupStep extends Step<CleanupStep> {
+public class CleanupStep extends Step {
 
     public CleanupStep() {
         super(PhaseStep.CLEANUP, true);

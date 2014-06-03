@@ -38,7 +38,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CombatDamageStep extends Step<CombatDamageStep> {
+public class CombatDamageStep extends Step {
 
     public CombatDamageStep() {
         super(PhaseStep.COMBAT_DAMAGE, true);

@@ -35,7 +35,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EndStep extends Step<EndStep> {
+public class EndStep extends Step {
 
     public EndStep() {
         super(PhaseStep.END_TURN, true);
