@@ -63,9 +63,8 @@ import mage.target.targetpointer.FixedTarget;
 public class WarrenWeirding extends CardImpl {
 
     public WarrenWeirding(UUID ownerId) {
-        super(ownerId, 104, "Warren Weirding", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
+        super(ownerId, 104, "Warren Weirding", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "MMA";
-        this.supertype.add("Tribal");
         this.subtype.add("Goblin");
 
         this.color.setBlack(true);

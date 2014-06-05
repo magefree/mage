@@ -55,9 +55,8 @@ public class ReachOfBranches extends CardImpl {
     }
 
     public ReachOfBranches(UUID ownerId) {
-        super(ownerId, 158, "Reach of Branches", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
+        super(ownerId, 158, "Reach of Branches", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{4}{G}");
         this.expansionSetCode = "MMA";
-        this.supertype.add("Tribal");
         this.subtype.add("Treefolk");
 
         this.color.setGreen(true);

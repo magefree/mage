@@ -59,9 +59,8 @@ public class ObsidianBattleAxe extends CardImpl {
     }
 
     public ObsidianBattleAxe(UUID ownerId) {
-        super(ownerId, 144, "Obsidian Battle-Axe", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+        super(ownerId, 144, "Obsidian Battle-Axe", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "MOR";
-        this.supertype.add("Tribal");
         this.subtype.add("Warrior");
         this.subtype.add("Equipment");
 

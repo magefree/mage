@@ -53,9 +53,8 @@ import mage.abilities.condition.common.MyTurnCondition;
 public class HoofprintsOfTheStag extends CardImpl {
 
     public HoofprintsOfTheStag(UUID ownerId) {
-        super(ownerId, 21, "Hoofprints of the Stag", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        super(ownerId, 21, "Hoofprints of the Stag", Rarity.RARE, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "LRW";
-        this.supertype.add("Tribal");
         this.subtype.add("Elemental");
         this.color.setWhite(true);
         this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.HOOFPRINT.createInstance(1)), true));

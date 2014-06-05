@@ -52,9 +52,8 @@ public class VioletPall extends CardImpl {
     }
 
     public VioletPall(UUID ownerId) {
-        super(ownerId, 81, "Violet Pall", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
+        super(ownerId, 81, "Violet Pall", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{4}{B}");
         this.expansionSetCode = "MOR";
-        this.supertype.add("Tribal");
         this.subtype.add("Faerie");
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

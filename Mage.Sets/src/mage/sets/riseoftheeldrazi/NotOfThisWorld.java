@@ -64,9 +64,8 @@ public class NotOfThisWorld extends CardImpl {
 
     public NotOfThisWorld(UUID ownerId) {
         super(ownerId, 8, "Not of This World", Rarity.UNCOMMON,
-                new CardType[]{CardType.INSTANT}, "{7}");
+                new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{7}");
         this.expansionSetCode = "ROE";
-        this.supertype.add("Tribal");
         this.subtype.add("Eldrazi");
 
         // Counter target spell or ability that targets a permanent you control.

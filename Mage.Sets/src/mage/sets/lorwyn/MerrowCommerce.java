@@ -49,9 +49,8 @@ public class MerrowCommerce extends CardImpl {
     }
 
     public MerrowCommerce(UUID ownerId) {
-        super(ownerId, 72, "Merrow Commerce", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        super(ownerId, 72, "Merrow Commerce", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "LRW";
-        this.supertype.add("Tribal");
         this.subtype.add("Merfolk");
 
         this.color.setBlue(true);

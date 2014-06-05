@@ -51,9 +51,8 @@ public class FaerieTrickery extends CardImpl {
     }
 
     public FaerieTrickery(UUID ownerId) {
-        super(ownerId, 62, "Faerie Trickery", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
+        super(ownerId, 62, "Faerie Trickery", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "LRW";
-        this.supertype.add("Tribal");
         this.subtype.add("Faerie");
 
         this.color.setBlue(true);

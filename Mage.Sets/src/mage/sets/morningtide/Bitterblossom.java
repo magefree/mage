@@ -47,9 +47,8 @@ import mage.game.permanent.token.Token;
 public class Bitterblossom extends CardImpl {
 
     public Bitterblossom(UUID ownerId) {
-        super(ownerId, 58, "Bitterblossom", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+        super(ownerId, 58, "Bitterblossom", Rarity.RARE, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "MOR";
-        this.supertype.add("Tribal");
         this.subtype.add("Faerie");
         this.color.setBlack(true);
 

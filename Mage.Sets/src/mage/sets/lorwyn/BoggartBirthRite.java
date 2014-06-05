@@ -50,9 +50,8 @@ public class BoggartBirthRite extends CardImpl {
     }
 
     public BoggartBirthRite(UUID ownerId) {
-        super(ownerId, 101, "Boggart Birth Rite", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
+        super(ownerId, 101, "Boggart Birth Rite", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{B}");
         this.expansionSetCode = "LRW";
-        this.supertype.add("Tribal");
         this.subtype.add("Goblin");
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

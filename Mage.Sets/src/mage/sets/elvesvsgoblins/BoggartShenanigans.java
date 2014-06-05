@@ -54,9 +54,8 @@ public class BoggartShenanigans extends CardImpl {
     }
 
     public BoggartShenanigans(UUID ownerId) {
-        super(ownerId, 54, "Boggart Shenanigans", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+        super(ownerId, 54, "Boggart Shenanigans", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "EVG";
-        this.supertype.add("Tribal");
         this.subtype.add("Goblin");
 
         this.color.setRed(true);

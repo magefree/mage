@@ -44,9 +44,8 @@ import mage.filter.FilterCard;
 public class ThievesFortune extends CardImpl {
 
     public ThievesFortune(UUID ownerId) {
-        super(ownerId, 54, "Thieves' Fortune", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
+        super(ownerId, 54, "Thieves' Fortune", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "MOR";
-        this.supertype.add("Tribal");
         this.subtype.add("Rogue");
 
         this.color.setBlue(true);

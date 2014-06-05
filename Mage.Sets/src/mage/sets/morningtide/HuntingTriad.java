@@ -43,9 +43,8 @@ import mage.game.permanent.token.ElfToken;
 public class HuntingTriad extends CardImpl {
 
     public HuntingTriad(UUID ownerId) {
-        super(ownerId, 127, "Hunting Triad", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
+        super(ownerId, 127, "Hunting Triad", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "MOR";
-        this.supertype.add("Tribal");
         this.subtype.add("Elf");
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), 3));

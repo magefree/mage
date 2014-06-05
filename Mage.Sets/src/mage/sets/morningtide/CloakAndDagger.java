@@ -59,9 +59,8 @@ public class CloakAndDagger extends CardImpl {
     }
 
     public CloakAndDagger(UUID ownerId) {
-        super(ownerId, 141, "Cloak and Dagger", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        super(ownerId, 141, "Cloak and Dagger", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "MOR";
-        this.supertype.add("Tribal");
         this.subtype.add("Rogue");
         this.subtype.add("Equipment");
 

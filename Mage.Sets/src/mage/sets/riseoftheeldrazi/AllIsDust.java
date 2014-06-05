@@ -45,9 +45,8 @@ import mage.game.permanent.Permanent;
 public class AllIsDust extends CardImpl {
 
     public AllIsDust(UUID ownerId) {
-        super(ownerId, 1, "All Is Dust", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}");
+        super(ownerId, 1, "All Is Dust", Rarity.MYTHIC, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{7}");
         this.expansionSetCode = "ROE";
-        this.subtype.add("Tribal");
         this.subtype.add("Eldrazi");
         this.getSpellAbility().addEffect(new AllIsDustEffect());
     }

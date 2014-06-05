@@ -65,9 +65,8 @@ public class DivinersWand extends CardImpl {
     }
 
     public DivinersWand(UUID ownerId) {
-        super(ownerId, 142, "Diviner's Wand", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+        super(ownerId, 142, "Diviner's Wand", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "MOR";
-        this.supertype.add("Tribal");
         this.subtype.add("Wizard");
         this.subtype.add("Equipment");
 

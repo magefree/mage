@@ -52,9 +52,8 @@ public class Peppersmoke extends CardImpl {
     }
 
     public Peppersmoke(UUID ownerId) {
-        super(ownerId, 92, "Peppersmoke", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
+        super(ownerId, 92, "Peppersmoke", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{B}");
         this.expansionSetCode = "MMA";
-        this.supertype.add("Tribal");
         this.subtype.add("Faerie");
 
         this.color.setBlack(true);

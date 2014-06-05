@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class BoundInSilence extends CardImpl {
 
     public BoundInSilence(UUID ownerId) {
-        super(ownerId, 8, "Bound in Silence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+        super(ownerId, 8, "Bound in Silence", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "MMA";
-        this.supertype.add("Tribal");
         this.subtype.add("Rebel");
         this.subtype.add("Aura");
 

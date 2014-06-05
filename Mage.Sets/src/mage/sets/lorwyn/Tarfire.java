@@ -42,9 +42,8 @@ import java.util.UUID;
 public class Tarfire extends CardImpl {
 
     public Tarfire(UUID ownerId) {
-        super(ownerId, 194, "Tarfire", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
+        super(ownerId, 194, "Tarfire", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{R}");
         this.expansionSetCode = "LRW";
-        this.supertype.add("Tribal");
         this.subtype.add("Goblin");
         this.color.setRed(true);
         // Tarfire deals 2 damage to target creature or player.

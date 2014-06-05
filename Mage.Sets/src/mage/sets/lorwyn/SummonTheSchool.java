@@ -58,9 +58,8 @@ public class SummonTheSchool extends CardImpl {
     }
 
     public SummonTheSchool(UUID ownerId) {
-        super(ownerId, 42, "Summon the School", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
+        super(ownerId, 42, "Summon the School", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "LRW";
-        this.supertype.add("Tribal");
         this.subtype.add("Merfolk");
         this.color.setWhite(true);
         // Put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.

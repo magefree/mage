@@ -51,9 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class Lignify extends CardImpl {
 
     public Lignify(UUID ownerId) {
-            super(ownerId, 228, "Lignify", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
+            super(ownerId, 228, "Lignify", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "LRW";
-        this.supertype.add("Tribal");
         this.subtype.add("Treefolk");
         this.subtype.add("Aura");
 

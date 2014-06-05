@@ -55,9 +55,8 @@ import mage.target.TargetPlayer;
 public class NogginWhack extends CardImpl {
 
     public NogginWhack(UUID ownerId) {
-        super(ownerId, 70, "Noggin Whack", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
+        super(ownerId, 70, "Noggin Whack", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "MOR";
-        this.supertype.add("Tribal");
         this.subtype.add("Rogue");
 
         this.color.setBlack(true);

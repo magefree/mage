@@ -64,9 +64,8 @@ public class ThornbiteStaff extends CardImpl {
     }
 
     public ThornbiteStaff(UUID ownerId) {
-        super(ownerId, 145, "Thornbite Staff", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        super(ownerId, 145, "Thornbite Staff", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "MOR";
-        this.supertype.add("Tribal");
         this.subtype.add("Shaman");
         this.subtype.add("Equipment");
 

@@ -51,9 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class CrushUnderfoot extends CardImpl {
 
     public CrushUnderfoot(UUID ownerId) {
-        super(ownerId, 109, "Crush Underfoot", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        super(ownerId, 109, "Crush Underfoot", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "MMA";
-        this.supertype.add("Tribal");
         this.subtype.add("Giant");
 
         this.color.setRed(true);

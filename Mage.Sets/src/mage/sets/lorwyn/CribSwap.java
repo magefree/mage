@@ -25,97 +25,97 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.token.SpiritWhiteToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class FeudkillersVerdict extends CardImpl {
+public class CribSwap extends CardImpl {
 
-    public FeudkillersVerdict(UUID ownerId) {
-        super(ownerId, 15, "Feudkiller's Verdict", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "MMA";
-        this.subtype.add("Giant");
+    public CribSwap(UUID ownerId) {
+        super(ownerId, 11, "Crib Swap", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{W}");
+        this.expansionSetCode = "LRW";
+        this.subtype.add("Shapeshifter");
 
         this.color.setWhite(true);
 
-        // You gain 10 life. Then if you have more life than an opponent, put a 5/5 white Giant Warrior creature token onto the battlefield.
-        this.getSpellAbility().addEffect(new FeudkillersVerdictEffect());
+        // Changeling
+        this.addAbility(ChangelingAbility.getInstance());
+        // Exile target creature. Its controller puts a 1/1 colorless Shapeshifter creature token with changeling onto the battlefield.
+        this.getSpellAbility().addEffect(new ExileTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addEffect(new CribSwapEffect());
+
     }
 
-    public FeudkillersVerdict(final FeudkillersVerdict card) {
+    public CribSwap(final CribSwap card) {
         super(card);
     }
 
     @Override
-    public FeudkillersVerdict copy() {
-        return new FeudkillersVerdict(this);
+    public CribSwap copy() {
+        return new CribSwap(this);
     }
 }
 
-class FeudkillersVerdictEffect extends OneShotEffect {
+class CribSwapEffect extends OneShotEffect {
 
-    public FeudkillersVerdictEffect() {
+    public CribSwapEffect() {
         super(Outcome.Benefit);
-        this.staticText = "You gain 10 life. Then if you have more life than an opponent, put a 5/5 white Giant Warrior creature token onto the battlefield";
+        this.staticText = "Its controller puts a 1/1 colorless Shapeshifter creature token with changeling onto the battlefield";
     }
 
-    public FeudkillersVerdictEffect(final FeudkillersVerdictEffect effect) {
+    public CribSwapEffect(final CribSwapEffect effect) {
         super(effect);
     }
 
     @Override
-    public FeudkillersVerdictEffect copy() {
-        return new FeudkillersVerdictEffect(this);
+    public CribSwapEffect copy() {
+        return new CribSwapEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.gainLife(10, game);
-            boolean moreLife = false;
-            for (UUID opponentId :game.getOpponents(source.getControllerId())) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    if (controller.getLife() > opponent.getLife()) {
-                        moreLife = true;
-                        break;
-                    }
-                }
-
+            Permanent targetCreature = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+            if (targetCreature != null) {
+                CribSwapShapeshifterWhiteToken token = new CribSwapShapeshifterWhiteToken();
+                return token.putOntoBattlefield(1, game, source.getSourceId(), targetCreature.getControllerId());
             }
-            if (moreLife) {
-                return new CreateTokenEffect(new GiantWarriorToken(), 1).apply(game, source);
-            }
-            return true;
         }
         return false;
     }
 }
 
-class GiantWarriorToken extends Token {
-    GiantWarriorToken() {
-        super("Giant Warrior", "5/5 white Giant Warrior creature token");
+class CribSwapShapeshifterWhiteToken extends Token {
+
+    public CribSwapShapeshifterWhiteToken() {
+        super("Shapeshifter", "1/1 colorless Shapeshifter creature token with changeling");
+        this.setOriginalExpansionSetCode("LRW");
         cardType.add(CardType.CREATURE);
+        subtype.add("Shapeshifter");
         color.setWhite(true);
-        subtype.add("Giant");
-        subtype.add("Warrior");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        addAbility(ChangelingAbility.getInstance());
     }
 }

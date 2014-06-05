@@ -63,9 +63,8 @@ public class VeteransArmaments extends CardImpl {
     }
 
     public VeteransArmaments(UUID ownerId) {
-        super(ownerId, 146, "Veteran's Armaments", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        super(ownerId, 146, "Veteran's Armaments", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "MOR";
-        this.supertype.add("Tribal");
         this.subtype.add("Soldier");
         this.subtype.add("Equipment");
 
