@@ -101,27 +101,29 @@ class CongregationAtDawnEffect extends OneShotEffect {
                 if (target.getTargets().size() > 0) {
                     Cards revealed = new CardsImpl();
                     for (UUID cardId : (List<UUID>) target.getTargets()) {
-                        Card card = controller.getLibrary().getCard(cardId, game);
+                        Card card = controller.getLibrary().remove(cardId, game);
                         revealed.add(card);
                     }
                     controller.revealCards(sourceObject.getName(), revealed, game);
-
                     controller.shuffleLibrary(game);
 
                     TargetCard targetToLib = new TargetCard(Zone.PICK, new FilterCard(textTop));
                     target.setRequired(true);
-                    while (revealed.size() > 1) {
-                        controller.choose(Outcome.Neutral, revealed, target, game);
+
+                    while (revealed.size() > 1 && controller.isInGame()) {
+                        controller.choose(Outcome.Neutral, revealed, targetToLib, game);
                         Card card = revealed.get(targetToLib.getFirstTarget(), game);
                         if (card != null) {
                             revealed.remove(card);
-                            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                            controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
+
                         }
                         targetToLib.clearChosen();
                     }
+
                     if (revealed.size() == 1) {
                         Card card = revealed.get(revealed.iterator().next(), game);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                        controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
                     }
 
                 }
