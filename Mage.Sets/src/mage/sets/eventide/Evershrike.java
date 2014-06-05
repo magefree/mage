@@ -124,7 +124,7 @@ class EvershrikeEffect extends OneShotEffect {
                 filterAuraCard.add(new AuraCardCanAttachToPermanentId(evershrikePermanent.getId()));
                 filterAuraCard.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xAmount));
                 int count = you.getHand().count(filterAuraCard, game);
-                while (count > 0 && you.chooseUse(Outcome.Benefit, "Do you wish to put an Aura card from your hand onto Evershrike", game)) {
+                while (you.isInGame() && count > 0 && you.chooseUse(Outcome.Benefit, "Do you wish to put an Aura card from your hand onto Evershrike", game)) {
                     TargetCard targetAura = new TargetCard(Zone.PICK, filterAuraCard);
                     if (you.choose(Outcome.Benefit, you.getHand(), targetAura, game)) {
                         Card aura = game.getCard(targetAura.getFirstTarget());

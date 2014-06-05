@@ -90,8 +90,8 @@ class TaintedPactEffect extends OneShotEffect{
         if (player == null || sourceCard == null) {
             return false;
         }
-        Set<String> names = new HashSet<String>();
-        while (player.getLibrary().size() > 0) {
+        Set<String> names = new HashSet<>();
+        while (player.isInGame() && player.getLibrary().size() > 0) {
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
 

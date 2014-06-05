@@ -93,22 +93,22 @@ class RiteOfRuinEffect extends OneShotEffect {
             return false;
         }
 
-        HashSet<String> choices = new HashSet<String>();
+        HashSet<String> choices = new HashSet<>();
         choices.add("Artifacts");
         choices.add("Creatures");
         choices.add("Lands");
 
-        LinkedList<CardType> order = new LinkedList<CardType>();
+        LinkedList<CardType> order = new LinkedList<>();
         ChoiceImpl choice = new ChoiceImpl(true);
         choice.setChoices(choices);
-        while (controller.choose(Outcome.Sacrifice, choice, game) && choices.size() > 1) {
+        while (controller.isInGame() && controller.choose(Outcome.Sacrifice, choice, game) && choices.size() > 1) {
             order.add(getCardType(choice.getChoice()));
             choices.remove(choice.getChoice());
             choice.clearChoice();
         }
         order.add(getCardType(choices.iterator().next()));
 
-        LinkedList<UUID> sacrifices = new LinkedList<UUID>();
+        LinkedList<UUID> sacrifices = new LinkedList<>();
         int count = 1;
         for (CardType cardType : order) {
             FilterControlledPermanent filter = new FilterControlledPermanent(cardType + " permanent you control");

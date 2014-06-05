@@ -123,7 +123,7 @@ class SacrificeControllerEffect extends OneShotEffect{
         //had, if thats the case this ability should fizzle.
         if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
             boolean abilityApplied = false;
-            while (!target.isChosen() && target.canChoose(player.getId(), game)) {
+            while (player.isInGame() && !target.isChosen() && target.canChoose(player.getId(), game)) {
                 player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             }
 

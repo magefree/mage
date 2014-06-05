@@ -115,14 +115,14 @@ class TrepanationBladeDiscardEffect extends OneShotEffect {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     if (card.getCardType().contains(CardType.LAND)) {
                         landFound = true;
                     }
                 }
             }
 
-            if (creature != null && !cards.isEmpty()) {
+            if (!cards.isEmpty()) {
                 player.revealCards("Trepanation Blade", cards, game);
                 game.getState().setValue(source.getSourceId().toString() + "_TrepanationBlade", cards.size());
                 return true;

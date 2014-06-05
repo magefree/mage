@@ -96,7 +96,7 @@ class PrimalSurgeEffect extends OneShotEffect {
             if (player.getLibrary().size() > 0) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    card.moveToExile(null, "", source.getId(), game);
+                    card.moveToExile(null, "", source.getSourceId(), game);
                     List<CardType> cardType = card.getCardType();
                     if ((cardType.contains(CardType.ARTIFACT) || cardType.contains(CardType.CREATURE)
                             || cardType.contains(CardType.ENCHANTMENT) || cardType.contains(CardType.LAND)
@@ -114,7 +114,7 @@ class PrimalSurgeEffect extends OneShotEffect {
                     }
                 }
             }
-        } while (repeat);
+        } while (player.isInGame() && repeat);
 
         return true;
     }

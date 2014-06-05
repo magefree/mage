@@ -124,7 +124,7 @@ class ActivatedAbilityTarget extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject :  game.getStack()) {
             if (stackObject.getStackAbility() != null && (stackObject.getStackAbility() instanceof ActivatedAbility) && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getStackAbility().getControllerId())) {
                 possibleTargets.add(stackObject.getStackAbility().getId());

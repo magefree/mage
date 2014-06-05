@@ -126,7 +126,7 @@ class GoblinRingleaderEffect extends OneShotEffect {
             }
             TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
             target.setRequired(true);
-            while (cards2.size() > 0 && player.choose(Outcome.Detriment, cards2, target, game)) {
+            while (player.isInGame() && cards2.size() > 0 && player.choose(Outcome.Detriment, cards2, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards2.remove(card);

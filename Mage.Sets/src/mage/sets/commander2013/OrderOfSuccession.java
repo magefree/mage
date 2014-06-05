@@ -97,7 +97,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Map<UUID, UUID> playerCreature = new HashMap<UUID,UUID>();
+            Map<UUID, UUID> playerCreature = new HashMap<>();
             boolean left = source.getChoices().get(0).getChoice().equals("Left");
             PlayerList playerList = game.getState().getPlayerList();
             while (!playerList.get().equals(source.getControllerId()) && controller.isInGame()) {

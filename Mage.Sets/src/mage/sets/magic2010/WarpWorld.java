@@ -91,20 +91,20 @@ class WarpWorldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Map<UUID, List<Permanent>> permanentsOwned = new HashMap<UUID, List<Permanent>>();
+        Map<UUID, List<Permanent>> permanentsOwned = new HashMap<>();
 
         Collection<Permanent> permanents = game.getBattlefield().getAllPermanents();
         for (Permanent permanent : permanents) {
             List<Permanent> list = permanentsOwned.get(permanent.getOwnerId());
             if (list == null) {
-                list = new ArrayList<Permanent>();
+                list = new ArrayList<>();
             }
             list.add(permanent);
             permanentsOwned.put(permanent.getOwnerId(), list);
         }
 
         // shuffle permanents into owner's library
-        Map<UUID, Integer> permanentsCount = new HashMap<UUID, Integer>();
+        Map<UUID, Integer> permanentsCount = new HashMap<>();
         PlayerList playerList = game.getPlayerList();
         playerList.setCurrent(game.getActivePlayerId());
         Player player = game.getPlayer(game.getActivePlayerId());
@@ -127,7 +127,7 @@ class WarpWorldEffect extends OneShotEffect {
         } while (!player.getId().equals(game.getActivePlayerId()));
 
 
-        Map<UUID, CardsImpl> cardsRevealed = new HashMap<UUID, CardsImpl>();
+        Map<UUID, CardsImpl> cardsRevealed = new HashMap<>();
 
         // draw cards and reveal them
         playerList.setCurrent(game.getActivePlayerId());
@@ -155,9 +155,9 @@ class WarpWorldEffect extends OneShotEffect {
         do {
             CardsImpl cards = cardsRevealed.get(player.getId());
             for (Card card : cards.getCards(game)) {
-                if (card != null && card.getCardType().contains(CardType.ARTIFACT)
+                if (card != null && (card.getCardType().contains(CardType.ARTIFACT)
                         || card.getCardType().contains(CardType.CREATURE)
-                        || card.getCardType().contains(CardType.LAND)) {
+                        || card.getCardType().contains(CardType.LAND))) {
                     card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
                     cards.remove(card);
                 }
@@ -188,7 +188,7 @@ class WarpWorldEffect extends OneShotEffect {
             CardsImpl cards = cardsRevealed.get(player.getId());
             for (Card card : cards.getCards(game)) {
                 if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 }
             }
 

@@ -86,7 +86,7 @@ public class WorldQueller extends CardImpl {
 
 class WorldQuellerEffect extends OneShotEffect {
 
-    private static final HashSet<String> choice = new LinkedHashSet<String>();
+    private static final HashSet<String> choice = new LinkedHashSet<>();
 
     static {
         choice.add(CardType.ARTIFACT.toString());
@@ -115,13 +115,13 @@ class WorldQuellerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Card> chosen = new ArrayList<Card>();
+        List<Card> chosen = new ArrayList<>();
         Player you = game.getPlayer(source.getControllerId());
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
         if (you != null && sourceCreature != null) {
             Choice choiceImpl = new ChoiceImpl();
             choiceImpl.setChoices(choice);
-            while (!you.choose(Outcome.Neutral, choiceImpl, game)) {};
+            while (you.isInGame() && !you.choose(Outcome.Neutral, choiceImpl, game)) {}
             CardType type = null;
             String choosenType = choiceImpl.getChoice();
 
@@ -142,51 +142,52 @@ class WorldQuellerEffect extends OneShotEffect {
             } else if (choosenType.equals(CardType.TRIBAL.toString())) {
                 type = CardType.TRIBAL;
             }
+            if (type != null) {
+                FilterPermanent filter = new FilterControlledPermanent(new StringBuilder("permanent you control of type ").append(type.toString()).toString());
+                filter.add(new CardTypePredicate(type));
 
-            FilterPermanent filter = new FilterControlledPermanent(new StringBuilder("permanent you control of type ").append(type.toString()).toString());
-            filter.add(new CardTypePredicate(type));
+                TargetPermanent target = new TargetControlledPermanent(1, 1, filter, false);
+                target.setRequired(true);
+                target.setNotTarget(true);
 
-            TargetPermanent target = new TargetControlledPermanent(1, 1, filter, false);
-            target.setRequired(true);
-            target.setNotTarget(true);
-
-            // you always go first
-            if (target.canChoose(you.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(you.getId(), game)) {
-                    you.choose(Outcome.Sacrifice, target, source.getId(), game);
-                }
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if (permanent != null) {
-                    chosen.add(permanent);
-                }
-            }
-
-            target.clearChosen();
-
-            // opponents follow
-            for (UUID playerId : game.getPlayerList()) {
-                if (playerId != you.getId()) {
-                    Player player = game.getPlayer(playerId);
-                    if (target.canChoose(playerId, game)) {
-                        while (!target.isChosen() && target.canChoose(playerId, game)) {
-                            player.choose(Outcome.Sacrifice, target, source.getId(), game);
-                        }
-                        Permanent permanent = game.getPermanent(target.getFirstTarget());
-                        if (permanent != null) {
-                            chosen.add(permanent);
-                        }
-                        target.clearChosen();
+                // you always go first
+                if (target.canChoose(you.getId(), game)) {
+                    while (you.isInGame() && !target.isChosen() && target.canChoose(you.getId(), game)) {
+                        you.choose(Outcome.Sacrifice, target, source.getId(), game);
+                    }
+                    Permanent permanent = game.getPermanent(target.getFirstTarget());
+                    if (permanent != null) {
+                        chosen.add(permanent);
                     }
                 }
-            }
 
-            // all chosen permanents are sacrificed together
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-                if (chosen.contains(permanent)) {
-                    permanent.sacrifice(source.getId(), game);
+                target.clearChosen();
+
+                // opponents follow
+                for (UUID playerId : game.getPlayerList()) {
+                    if (playerId != you.getId()) {
+                        Player player = game.getPlayer(playerId);
+                        if (target.canChoose(playerId, game)) {
+                            while (!target.isChosen() && target.canChoose(playerId, game)) {
+                                player.choose(Outcome.Sacrifice, target, source.getId(), game);
+                            }
+                            Permanent permanent = game.getPermanent(target.getFirstTarget());
+                            if (permanent != null) {
+                                chosen.add(permanent);
+                            }
+                            target.clearChosen();
+                        }
+                    }
                 }
+
+                // all chosen permanents are sacrificed together
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+                    if (chosen.contains(permanent)) {
+                        permanent.sacrifice(source.getId(), game);
+                    }
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

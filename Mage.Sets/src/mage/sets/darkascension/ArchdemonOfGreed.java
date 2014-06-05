@@ -92,7 +92,7 @@ public class ArchdemonOfGreed extends CardImpl {
 
         public ArchdemonOfGreedEffect() {
             super(Outcome.Damage);
-            this.staticText = "Sacrifice a Human. If you can't, tap Archdemon of Greed and it deals 9 damage to you.";
+            this.staticText = "Sacrifice a Human. If you can't, tap {this} and it deals 9 damage to you.";
         }
 
         public ArchdemonOfGreedEffect(final ArchdemonOfGreedEffect effect) {
@@ -113,24 +113,24 @@ public class ArchdemonOfGreed extends CardImpl {
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
                     TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
+                    target.setRequired(true);
                     // if they can pay the cost, then they must pay
                     if (target.canChoose(player.getId(), game)) {
-                        while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-                            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-                        }
+                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                         Permanent humanSacrifice = game.getPermanent(target.getFirstTarget());
-                        if (permanent != null) {
+                        if (humanSacrifice != null) {
                             // sacrifice the chosen card
-                            return humanSacrifice.sacrifice(source.getId(), game);
+                            return humanSacrifice.sacrifice(source.getSourceId(), game);
                         }
                     }         
                     else {
                         permanent.tap(game);
-                        player.damage(9, source.getId(), game, false, true);
+                        player.damage(9, source.getSourceId(), game, false, true);
                     }
                 }
+                return true;
             }
-            return true;
+            return false;
         }
     }
 }

@@ -101,7 +101,7 @@ class CataclysmEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Card> chosen = new ArrayList<Card>();
+        List<Card> chosen = new ArrayList<>();
 
         for (UUID playerId : game.getPlayerList()) {
             Player player = game.getPlayer(playerId);
@@ -122,7 +122,7 @@ class CataclysmEffect extends OneShotEffect {
             target4.setNotTarget(true);
 
             if (target1.canChoose(player.getId(), game)) {
-                while (!target1.isChosen() && target1.canChoose(player.getId(), game)) {
+                while (player.isInGame() && !target1.isChosen() && target1.canChoose(player.getId(), game)) {
                     player.choose(Outcome.Benefit, target1, source.getSourceId(), game);
                 }
                 Permanent artifact = game.getPermanent(target1.getFirstTarget());
@@ -133,7 +133,7 @@ class CataclysmEffect extends OneShotEffect {
             }
 
             if (target2.canChoose(player.getId(), game)) {
-                while (!target2.isChosen() && target2.canChoose(player.getId(), game)) {
+                while (player.isInGame() && !target2.isChosen() && target2.canChoose(player.getId(), game)) {
                     player.choose(Outcome.Benefit, target2, source.getSourceId(), game);
                 }
                 Permanent creature = game.getPermanent(target2.getFirstTarget());
@@ -144,7 +144,7 @@ class CataclysmEffect extends OneShotEffect {
             }
 
             if (target3.canChoose(player.getId(), game)) {
-                while (!target3.isChosen() && target3.canChoose(player.getId(), game)) {
+                while (player.isInGame() && !target3.isChosen() && target3.canChoose(player.getId(), game)) {
                     player.choose(Outcome.Benefit, target3, source.getSourceId(), game);
                 }
                 Permanent enchantment = game.getPermanent(target3.getFirstTarget());
@@ -155,7 +155,7 @@ class CataclysmEffect extends OneShotEffect {
             }
             
             if (target4.canChoose(player.getId(), game)) {
-                while (!target4.isChosen() && target4.canChoose(player.getId(), game)) {
+                while (player.isInGame() && !target4.isChosen() && target4.canChoose(player.getId(), game)) {
                     player.choose(Outcome.Benefit, target4, source.getSourceId(), game);
                 }
                 Permanent land = game.getPermanent(target4.getFirstTarget());

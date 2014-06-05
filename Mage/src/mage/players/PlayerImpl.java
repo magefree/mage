@@ -2254,10 +2254,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName) {
         boolean result = false;
         if (card.moveToZone(Zone.LIBRARY, sourceId, game, toTop)) {
-            game.informPlayers(new StringBuilder(this.getName())
-                    .append(" puts ").append(withName ? card.getName():"a card").append(" ")
-                    .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
-                    .append("to the ").append(toTop ? "top":"bottom").append(" of his or her library").toString());
+            StringBuilder sb = new StringBuilder(this.getName())
+                    .append(" puts ").append(withName ? card.getName():"a card").append(" ");
+            if (fromZone != null) {
+                if (fromZone.equals(Zone.PICK)) {
+                    sb.append("a picked card ");
+                } else {
+                    sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ");
+                }
+            }
+            sb.append("to the ").append(toTop ? "top":"bottom").append(" of his or her library");
+            game.informPlayers(sb.toString());
             result = true;
         }
         return result;

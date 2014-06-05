@@ -109,7 +109,7 @@ class StolenGoodsEffect extends OneShotEffect {
 
 class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl {
 
-    private UUID cardId;
+    private final UUID cardId;
 
     public StolenGoodsCastFromExileEffect(UUID cardId) {
         super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);

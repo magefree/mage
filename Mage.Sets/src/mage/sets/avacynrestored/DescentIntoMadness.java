@@ -115,7 +115,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
     private void exileCards(Player player, int count, Ability source, Game game) {
         int amount = Math.min(count, player.getHand().size() + game.getBattlefield().getAllActivePermanents(player.getId()).size());
 
-        while (amount > 0) {
+        while (player.isInGame() && amount > 0) {
             Target target = new TargetControlledPermanent(0, 1, filter, true);
             if (target.canChoose(player.getId(), game)
                     && player.choose(Outcome.Exile, target, source.getSourceId(), game)) {

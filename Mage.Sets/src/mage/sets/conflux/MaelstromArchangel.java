@@ -110,7 +110,7 @@ class MaelstromArchangelCastEffect extends OneShotEffect {
               controller.chooseUse(outcome, "Cast a nonland card from your hand without paying its mana cost?", game)) {
                 Card cardToCast = null;
                 boolean cancel = false;
-                while (!cancel) {
+                while (controller.isInGame() && !cancel) {
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         cardToCast = game.getCard(target.getFirstTarget());
                         if (cardToCast != null && cardToCast.getSpellAbility().canChooseTarget(game)) {

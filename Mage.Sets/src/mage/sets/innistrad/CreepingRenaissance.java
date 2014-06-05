@@ -94,7 +94,8 @@ class CreepingRenaissanceEffect extends OneShotEffect {
             typeChoice.getChoices().add(CardType.LAND.toString());
             typeChoice.getChoices().add(CardType.PLANESWALKER.toString());
 
-            while (!controller.choose(Outcome.ReturnToHand, typeChoice, game));
+            while (controller.isInGame() && !controller.choose(Outcome.ReturnToHand, typeChoice, game)) {
+            }
 
             String typeName = typeChoice.getChoice();
             CardType chosenType = null;

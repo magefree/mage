@@ -116,7 +116,7 @@ class MindsAglowEffect extends OneShotEffect {
     protected static int playerPaysXGenericMana(Player player, Ability source, Game game) {
         int xValue = 0;
         boolean payed = false;
-        while (!payed) {
+        while (player.isInGame() && !payed) {
             xValue = player.announceXMana(0, Integer.MAX_VALUE, "How much mana will you pay?", game, source);
             if (xValue > 0) {
                 Cost cost = new GenericManaCost(xValue);

@@ -100,15 +100,16 @@ class JaddiLifestriderEffect extends OneShotEffect {
         TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
         while (true) {
             target.clearChosen();
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getId(), game)) {
+            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
                 UUID creature = target.getFirstTarget();
                 if (creature != null) {
                     game.getPermanent(creature).tap(game);
                     tappedAmount++;
                 }
             }
-            else 
+            else {
                 break;
+            }
         }
         if (tappedAmount > 0) {
             you.gainLife(tappedAmount * 2, game);

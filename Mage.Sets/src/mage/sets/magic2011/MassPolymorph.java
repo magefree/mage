@@ -95,10 +95,11 @@ class MassPolymorphEffect extends OneShotEffect {
         while (creatureCards.size() < count && player.getLibrary().size() > 0) {
             Card card = player.getLibrary().removeFromTop(game);
             revealed.add(card);
-            if (card.getCardType().contains(CardType.CREATURE))
+            if (card.getCardType().contains(CardType.CREATURE)) {
                 creatureCards.add(card);
-            else
+            } else {
                 nonCreatureCards.add(card);
+            }
         }
         player.revealCards("Mass Polymorph", revealed, game);
         for (Card creatureCard: creatureCards.getCards(game)) {

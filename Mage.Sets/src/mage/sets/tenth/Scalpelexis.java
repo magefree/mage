@@ -95,7 +95,7 @@ class ScalpelexisEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        List<String> namesFiltered = new ArrayList<String>();
+        List<String> namesFiltered = new ArrayList<>();
         boolean doneOnce = false;
 
         while (checkDuplicatedNames(namesFiltered) || !doneOnce) {
@@ -114,16 +114,18 @@ class ScalpelexisEffect extends OneShotEffect {
     }
 
     public boolean checkDuplicatedNames(List<String> string) {
-    for (int i = 0; i < string.size()-1; i++) {
+        for (int i = 0; i < string.size() - 1; i++) {
             String stringToCheck = string.get(i);
-            if(stringToCheck == null) continue; //empty ignore
-                for (int j = i+1; j < string.size(); j++) {
-                    String stringToCompare = string.get(j);
-                        if (stringToCheck.equals(stringToCompare)){
-                            return true;
-                        }
+            if (stringToCheck == null) {
+                continue; //empty ignore
+            }
+            for (int j = i + 1; j < string.size(); j++) {
+                String stringToCompare = string.get(j);
+                if (stringToCheck.equals(stringToCompare)) {
+                    return true;
                 }
-    }
-    return false;
+            }
+        }
+        return false;
     }
 }

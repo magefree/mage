@@ -106,10 +106,11 @@ public class ShapeAnew extends CardImpl {
             while (artifactCard == null && player.getLibrary().size() > 0) {
                 Card card = player.getLibrary().removeFromTop(game);
                 revealed.add(card);
-                if (card.getCardType().contains(CardType.ARTIFACT))
+                if (card.getCardType().contains(CardType.ARTIFACT)) {
                     artifactCard = card;
-                else
+                } else {
                     nonArtifactCards.add(card);
+                }
             }
             player.revealCards("Shape Anew", revealed, game);
             if (artifactCard != null) {

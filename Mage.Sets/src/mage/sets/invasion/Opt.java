@@ -102,11 +102,11 @@ class OptEffect extends OneShotEffect {
             }
             TargetCard target1 = new TargetCard(Zone.PICK, filter1);
             // move cards to the bottom of the library
-            while (cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
+            while (cards.size() > 0 && player.isInGame() && player.choose(Outcome.Detriment, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                 }
                 target1.clearChosen();
             }

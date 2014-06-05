@@ -198,7 +198,7 @@ class SummoningTrapEffect extends OneShotEffect {
                         new FilterCard(
                         "card to put on the bottom of your library"));
                 target2.setRequired(true);
-                while (cards.size() > 1) {
+                while (player.isInGame() && cards.size() > 1) {
                     player.choose(Outcome.Benefit, cards, target2,
                             game);
                     Card card = cards.get(target2.getFirstTarget(), game);

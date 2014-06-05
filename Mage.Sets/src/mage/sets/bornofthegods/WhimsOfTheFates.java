@@ -99,7 +99,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
         if (controller != null) {
 
             // Map of players and their piles (1,2,3) with values of UUID of the permanents
-            Map<UUID, Map<Integer, Set<UUID>>> playerPermanents = new LinkedHashMap<UUID, Map<Integer, Set<UUID>>>();
+            Map<UUID, Map<Integer, Set<UUID>>> playerPermanents = new LinkedHashMap<>();
 
             PlayerList playerList = game.getState().getPlayerList();
             while (!playerList.get().equals(source.getControllerId()) && controller.isInGame()) {

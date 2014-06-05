@@ -106,7 +106,7 @@ class DevourFleshSacrificeEffect extends OneShotEffect {
         if (realCount > 0) {
             Target target = new TargetControlledPermanent(1, 1, filter, true);
             target.setRequired(true);
-            while (!target.isChosen() && target.canChoose(player.getId(), game)) {
+            while (player.isInGame() && !target.isChosen() && target.canChoose(player.getId(), game)) {
                 player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());

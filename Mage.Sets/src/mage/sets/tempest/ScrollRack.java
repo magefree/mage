@@ -90,9 +90,10 @@ class ScrollRackEffect extends OneShotEffect {
         FilterCard filter = new FilterCard("card in your hand to exile");
         FilterCard filter2 = new FilterCard("card exiled by Scroll Rack to put on top of library");
         Player you = game.getPlayer(source.getControllerId());
-        TargetCardInHand target = new TargetCardInHand(0, you.getHand().size(), filter);
-        int amountExiled = 0;
+
         if (you != null) {
+            TargetCardInHand target = new TargetCardInHand(0, you.getHand().size(), filter);
+            int amountExiled = 0;
             if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getId(), game)) {
                 if (!target.getTargets().isEmpty()) {
                     List<UUID> targets = target.getTargets();
@@ -121,10 +122,8 @@ class ScrollRackEffect extends OneShotEffect {
             ExileZone scrollRackExileZone = game.getExile().getExileZone(source.getSourceId());
             target2.setRequired(true);
             if (scrollRackExileZone != null) {
-                while (scrollRackExileZone.count(filter, game) > 1) {
-                    if (you != null) {
-                        you.lookAtCards("exiled cards with " + game.getCard(source.getSourceId()).getName(), scrollRackExileZone, game);
-                    }
+                while (you.isInGame() && scrollRackExileZone.count(filter, game) > 1) {
+                    you.lookAtCards("exiled cards with " + game.getCard(source.getSourceId()).getName(), scrollRackExileZone, game);
                     you.choose(Outcome.Neutral, scrollRackExileZone, target2, game);
                     Card card = game.getCard(target2.getFirstTarget());
                     if (card != null) {

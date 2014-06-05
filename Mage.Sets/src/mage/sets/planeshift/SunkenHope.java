@@ -103,7 +103,7 @@ class ReturnToHandEffect extends OneShotEffect {
         target.setRequired(true);
 
         if (target.canChoose(player.getId(), game)) {
-            while (!target.isChosen() && target.canChoose(player.getId(), game)) {
+            while (player.isInGame() && !target.isChosen() && target.canChoose(player.getId(), game)) {
                 player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             }
 

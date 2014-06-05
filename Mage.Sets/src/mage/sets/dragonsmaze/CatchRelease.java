@@ -153,7 +153,7 @@ class ReleaseSacrificeEffect extends OneShotEffect {
             target5.setNotTarget(false);
 
             if (target1.canChoose(player.getId(), game)) {
-                while (!target1.isChosen() && target1.canChoose(player.getId(), game)) {
+                while (player.isInGame() && !target1.isChosen() && target1.canChoose(player.getId(), game)) {
                     player.chooseTarget(Outcome.Benefit, target1, source, game);
                 }
                 Permanent artifact = game.getPermanent(target1.getFirstTarget());
@@ -164,7 +164,7 @@ class ReleaseSacrificeEffect extends OneShotEffect {
             }
 
             if (target2.canChoose(player.getId(), game)) {
-                while (!target2.isChosen() && target2.canChoose(player.getId(), game)) {
+                while (player.isInGame() && !target2.isChosen() && target2.canChoose(player.getId(), game)) {
                     player.chooseTarget(Outcome.Benefit, target2, source, game);
                 }
                 Permanent creature = game.getPermanent(target2.getFirstTarget());
@@ -175,7 +175,7 @@ class ReleaseSacrificeEffect extends OneShotEffect {
             }
 
             if (target3.canChoose(player.getId(), game)) {
-                while (!target3.isChosen() && target3.canChoose(player.getId(), game)) {
+                while (player.isInGame() && !target3.isChosen() && target3.canChoose(player.getId(), game)) {
                     player.chooseTarget(Outcome.Benefit, target3, source, game);
                 }
                 Permanent enchantment = game.getPermanent(target3.getFirstTarget());
@@ -186,7 +186,7 @@ class ReleaseSacrificeEffect extends OneShotEffect {
             }
 
             if (target4.canChoose(player.getId(), game)) {
-                while (!target4.isChosen() && target4.canChoose(player.getId(), game)) {
+                while (player.isInGame() && !target4.isChosen() && target4.canChoose(player.getId(), game)) {
                     player.chooseTarget(Outcome.Benefit, target4, source, game);
                 }
                 Permanent land = game.getPermanent(target4.getFirstTarget());
@@ -197,7 +197,7 @@ class ReleaseSacrificeEffect extends OneShotEffect {
             }
 
             if (target5.canChoose(player.getId(), game)) {
-                while (!target5.isChosen() && target5.canChoose(player.getId(), game)) {
+                while (player.isInGame() && !target5.isChosen() && target5.canChoose(player.getId(), game)) {
                     player.chooseTarget(Outcome.Benefit, target5, source, game);
                 }
                 Permanent planeswalker = game.getPermanent(target5.getFirstTarget());
