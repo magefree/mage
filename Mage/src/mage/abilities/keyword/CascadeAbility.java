@@ -120,13 +120,14 @@ class CascadeEffect extends OneShotEffect {
             if (card == null) {
                 break;
             }
-            player.moveCardToExileWithInfo(card, source.getId(), exile.getName(), source.getSourceId(), game, Zone.LIBRARY);
+            player.moveCardToExileWithInfo(card, exile.getId(), exile.getName(), source.getSourceId(), game, Zone.LIBRARY);
         } while (player.isInGame() && card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
 
         if (card != null) {
             if (player.chooseUse(outcome, "Use cascade effect on " + card.getName() + "?", game)) {
-                player.cast(card.getSpellAbility(), game, true);
-                exile.remove(card.getId());
+                if(player.cast(card.getSpellAbility(), game, true)){
+                    exile.remove(card.getId());
+                }
             }
         }
 
