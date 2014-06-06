@@ -29,11 +29,6 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -42,6 +37,11 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -58,6 +58,7 @@ public class LightningGreaves extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT));
         Effect effect = new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and shroud");
+        ability.addEffect(effect);
         this.addAbility(ability);
         // Equip {0}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)));

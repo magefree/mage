@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  * @author North
  */
 public class FilterPermanent extends FilterObject<Permanent> {
-    protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>();
+    protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<>();
 
     public FilterPermanent() {
         super("permanent");
@@ -52,7 +52,7 @@ public class FilterPermanent extends FilterObject<Permanent> {
 
     public FilterPermanent(final FilterPermanent filter) {
         super(filter);
-        this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>(filter.extraPredicates);
+        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
     }
 
     public FilterPermanent(String name) {
