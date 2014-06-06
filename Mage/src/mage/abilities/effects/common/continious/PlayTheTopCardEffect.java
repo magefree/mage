@@ -46,6 +46,11 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
 
     private FilterCard filter;
 
+    public PlayTheTopCardEffect() {
+        this(new FilterCard());
+        staticText = "You may play the top card of your library";
+    }
+    
     public PlayTheTopCardEffect(FilterCard filter) {
         super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
