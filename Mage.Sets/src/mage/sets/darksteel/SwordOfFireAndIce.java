@@ -73,9 +73,13 @@ public class SwordOfFireAndIce extends CardImpl {
         super(ownerId, 148, "Sword of Fire and Ice", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "DST";
         this.subtype.add("Equipment");
+
+        // Equipped creature gets +2/+2 and has protection from red and from blue.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT)));
+        // Whenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.
         this.addAbility(new SwordOfFireAndIceAbility());
+        // Equip
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
@@ -95,7 +99,7 @@ class SwordOfFireAndIceAbility extends TriggeredAbilityImpl {
     public SwordOfFireAndIceAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
         this.addEffect(new DrawCardSourceControllerEffect(1));
-        this.addTarget(new TargetCreatureOrPlayer());
+        this.addTarget(new TargetCreatureOrPlayer(true));
     }
 
     public SwordOfFireAndIceAbility(final SwordOfFireAndIceAbility ability) {
