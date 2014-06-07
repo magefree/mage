@@ -28,6 +28,7 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -41,12 +42,10 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPlayer;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.other.PlayerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
@@ -57,11 +56,12 @@ import mage.target.TargetPlayer;
 public class OathOfDruids extends CardImpl {
 
     private static final FilterPlayer filter = new FilterPlayer();
-    static{
+
+    static {
         filter.add(new OathOfDruidsPredicate());
     }
-    
-   public OathOfDruids(UUID ownerId) {
+
+    public OathOfDruids(UUID ownerId) {
         super(ownerId, 115, "Oath of Druids", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "EXO";
 
@@ -72,12 +72,10 @@ public class OathOfDruids extends CardImpl {
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         this.addAbility(ability);
     }
-   
-   
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
-    if (ability instanceof BeginningOfUpkeepTriggeredAbility) {
-            
+        if (ability instanceof BeginningOfUpkeepTriggeredAbility) {
             Player activePlayer = game.getPlayer(game.getActivePlayerId());
             if (activePlayer != null) {
                 ability.setControllerId(activePlayer.getId());
@@ -101,25 +99,23 @@ public class OathOfDruids extends CardImpl {
 
 class OathOfDruidsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
 
-    public OathOfDruidsPredicate() {
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         Player targetPlayer = input.getObject();
         //Get active input.playerId because adjust target is used after canTarget function
-        UUID activePlayer = game.getActivePlayerId();
-        if (targetPlayer == null || activePlayer == null) {
+        UUID activePlayerId = game.getActivePlayerId();
+        if (targetPlayer == null || activePlayerId == null) {
             return false;
         }
-        if(targetPlayer.getId().equals(activePlayer))
-        {
+        if (targetPlayer.getId().equals(activePlayerId)) {
             return false;
         }
-        int countTarget = game.getBattlefield().count(new FilterControlledCreaturePermanent(), null, targetPlayer.getId(), game);
-        int countController = game.getBattlefield().count(new FilterControlledCreaturePermanent(), null, activePlayer, game);
-        
-        return countTarget > countController;
+        int countTargetPlayer = game.getBattlefield().countAll(filter, targetPlayer.getId(), game);
+        int countActivePlayer = game.getBattlefield().countAll(filter, activePlayerId, game);
+
+        return countTargetPlayer > countActivePlayer;
     }
 
     @Override
@@ -141,9 +137,9 @@ class OathOfDruidsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        
+        MageObject sourceObject = game.getObject(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        if (player == null || sourceObject == null) {
             return false;
         }
         Cards revealed = new CardsImpl();
@@ -154,24 +150,23 @@ class OathOfDruidsEffect extends OneShotEffect {
             Card card = player.getLibrary().removeFromTop(game);
             revealed.add(card);
             // until he or she reveals a creature card. 
-            if (card.getCardType().contains(CardType.CREATURE)){
+            if (card.getCardType().contains(CardType.CREATURE)) {
                 creatureCard = card;
-            }
-            else{
+            } else {
                 nonCreatureCards.add(card);
             }
         }
-        player.revealCards("Oath of Druids", revealed, game);
-        
+        player.revealCards(sourceObject.getName(), revealed, game);
+
         //If he or she does, that player puts that card onto the battlefield
         if (creatureCard != null) {
-            creatureCard.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), player.getId());
+            player.putOntoBattlefieldWithInfo(creatureCard, game, Zone.LIBRARY, source.getSourceId());
         }
         // and all other cards revealed this way into his or her graveyard
-        for(UUID uuid : nonCreatureCards){
+        for (UUID uuid : nonCreatureCards) {
             Card card = game.getCard(uuid);
-            if(card != null){
-                card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
+            if (card != null) {
+                player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
             }
         }
         return true;
