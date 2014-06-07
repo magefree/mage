@@ -58,7 +58,7 @@ import mage.players.Player;
 public class ChorusOfTheConclave extends CardImpl {
 
     public ChorusOfTheConclave(UUID ownerId) {
-        super(ownerId, 189, "Chorus of the Conclave", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}");
+        super(ownerId, 189, "Chorus of the Conclave", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{W}{W}");
         this.expansionSetCode = "CMD";
         this.supertype.add("Legendary");
         this.subtype.add("Dryad");
