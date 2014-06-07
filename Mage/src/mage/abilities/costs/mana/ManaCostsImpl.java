@@ -230,6 +230,14 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 cost.assignPayment(game, ability, pool);
             }
         }
+        
+        
+        for (ManaCost cost : this) {
+            if (!cost.isPaid() && cost instanceof SnowManaCost) {
+                cost.assignPayment(game, ability, pool);
+            }
+        }
+
 
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof GenericManaCost) {
@@ -284,7 +292,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                             //TODO: handle multiple {X} and/or {Y} symbols
                         }
                     } else {
-                        if (Character.isDigit(symbol.charAt(0))) {
+                        if(symbol.equals("snow"))
+                        {
+                            this.add((T) new SnowManaCost());
+                        }
+                        else if (Character.isDigit(symbol.charAt(0))) {
                             this.add((T) new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
                         } else if (symbol.contains("P")) {
                             this.add((T) new PhyrexianManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
