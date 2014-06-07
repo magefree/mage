@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FlagstonesOfTrokair extends CardImpl {
 
-    private static final FilterLandCard filter = new FilterLandCard();
+    private static final FilterLandCard filter = new FilterLandCard("Plains card");
 
     static {
         filter.add(new SubtypePredicate("Plains"));
