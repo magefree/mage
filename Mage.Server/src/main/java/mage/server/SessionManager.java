@@ -27,16 +27,15 @@
  */
 package mage.server;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
 import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -56,7 +55,13 @@ public class SessionManager {
         if (sessions == null || sessionId == null) {
             return null;
         }
-        return sessions.get(sessionId);
+        Session session = sessions.get(sessionId);
+        if (session != null && session.getUserId() != null && UserManager.getInstance().getUser(session.getUserId()) == null) {
+            logger.error("User for session " + sessionId + " with userId " + session.getUserId() + " is missing. Session removed. Cause for this still unclear.");
+            disconnect(sessionId, DisconnectReason.LostConnection);
+            return null;
+        }
+        return session;
     }
 
     public void createSession(String sessionId, InvokerCallbackHandler callbackHandler) {
@@ -102,21 +107,31 @@ public class SessionManager {
         return false;
     }
 
-    public synchronized void disconnect(String sessionId, boolean voluntary) {
-        Session session = sessions.get(sessionId);
-        sessions.remove(sessionId);
+    public synchronized void disconnect(String sessionId, DisconnectReason reason) {
+        Session session = sessions.get(sessionId);        
         if (session != null) {
-            if (voluntary) {
-                // disconnected
-                session.kill();
-                LogServiceImpl.instance.log(LogKeys.KEY_SESSION_KILLED, sessionId);
-            } else {
-                // lost connection
-                session.userLostConnection();
-                LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED, sessionId);
+            sessions.remove(sessionId);
+            switch (reason) {
+                case Disconnected:
+                    session.kill(reason);
+                    LogServiceImpl.instance.log(LogKeys.KEY_SESSION_KILLED, sessionId);
+                    break;
+                case SessionExpired:
+                    session.kill(reason);
+                    LogServiceImpl.instance.log(LogKeys.KEY_SESSION_EXPIRED, sessionId);
+                    break;
+                case AdminDisconnect:
+                    session.kill(reason);
+                    break;
+                case LostConnection:
+                    session.userLostConnection();
+                    LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED, sessionId);
+                    break;
+                default:
+                    logger.error("endSession: unexpected reason  " + reason.toString() + " - sessionId: "+ sessionId);
             }
         } else {
-            logger.info("disconnect: could not find session with id " + sessionId);
+            logger.error("endSession: could not find session with id " + sessionId);
         }
     }
 
@@ -130,14 +145,14 @@ public class SessionManager {
 
     public void disconnectUser(String sessionId, String userSessionId) {
         if (isAdmin(sessionId)) {
-            disconnect(userSessionId, true);
+            disconnect(userSessionId, DisconnectReason.AdminDisconnect);
             LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED_BY_ADMIN, sessionId, userSessionId);
         }
     }
 
     public void endUserSession(String sessionId, String userSessionId) {
         if (isAdmin(sessionId)) {
-            disconnect(userSessionId, false);
+            disconnect(userSessionId, DisconnectReason.AdminDisconnect);
             LogServiceImpl.instance.log(LogKeys.KEY_SESSION_END_BY_ADMIN, sessionId, userSessionId);
         }
     }

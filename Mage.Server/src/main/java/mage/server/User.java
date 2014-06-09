@@ -62,10 +62,6 @@ public class User {
         Created, Connected, Disconnected, Reconnected;
     }
 
-    public enum DisconnectReason {
-        LostConnection, Disconnected, CleaningUp, ConnectingOtherInstance;
-    }
-
     private final UUID userId;
     private final String userName;    
     private final String host;    

@@ -13,6 +13,8 @@ public interface LogKeys {
 
     String KEY_SESSION_KILLED = "sessionKilled";
 
+    String KEY_SESSION_EXPIRED = "sessionExpired";
+
     String KEY_SESSION_DISCONNECTED = "sessionDisconnected";
 
     String KEY_SESSION_DISCONNECTED_BY_ADMIN = "sessionDisconnectedByAdmin";

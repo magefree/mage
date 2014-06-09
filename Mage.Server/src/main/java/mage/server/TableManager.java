@@ -28,12 +28,15 @@
 
 package mage.server;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -43,14 +46,12 @@ import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
-import mage.game.match.MatchPlayer;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.players.Player;
 import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
 import org.apache.log4j.Logger;
-
 
 /**
  *
@@ -254,12 +255,6 @@ public class TableManager {
             controllers.get(tableId).startMatch();
         }
     }
-
-//    public void startChallenge(UUID userId, UUID roomId, UUID tableId, UUID challengeId) {
-//        if (controllers.containsKey(tableId)) {
-//            controllers.get(tableId).startChallenge(userId, challengeId);
-//        }
-//    }
 
     public void startTournament(UUID userId, UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {

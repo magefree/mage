@@ -65,7 +65,7 @@ public class ChatSession {
         }
     }
 
-    synchronized public void  kill(UUID userId, User.DisconnectReason reason) {
+    synchronized public void  kill(UUID userId, DisconnectReason reason) {
         if (userId != null && clients.containsKey(userId)) {            
             String userName = clients.get(userId);
             logger.debug(userName + " leaves chat: " + chatId);
@@ -133,7 +133,7 @@ public class ChatSession {
                     user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
                 }
                 else {
-                    kill(userId, User.DisconnectReason.CleaningUp);
+                    kill(userId, DisconnectReason.CleaningUp);
                 }
             }
         }

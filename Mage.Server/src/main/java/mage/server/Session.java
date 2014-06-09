@@ -106,7 +106,7 @@ public class Session {
                         //throw new MageException("This machine is already connected");
                     //disconnect previous one
                     logger.info("Disconnecting another user instance: " + userName);
-                    UserManager.getInstance().disconnect(user.getId(), User.DisconnectReason.ConnectingOtherInstance);
+                    UserManager.getInstance().disconnect(user.getId(), DisconnectReason.ConnectingOtherInstance);
                 }
             } else {
                 return new StringBuilder("User name ").append(userName).append(" already in use (or your IP address changed)").toString();
@@ -205,12 +205,12 @@ public class Session {
             sb.append(" sessionId: ").append(sessionId);
             logger.info(sb);
         }
-        UserManager.getInstance().disconnect(userId, User.DisconnectReason.LostConnection);
+        UserManager.getInstance().disconnect(userId, DisconnectReason.LostConnection);
     }
 
-    public void kill() {
-        logger.debug("session removed for user " + userId);
-        UserManager.getInstance().removeUser(userId, User.DisconnectReason.Disconnected);
+    public void kill(DisconnectReason reason) {
+        logger.debug("session removed for user " + userId + " - reason: " + reason.toString());
+        UserManager.getInstance().removeUser(userId, reason);
     }
 
     synchronized void fireCallback(final ClientCallback call) {

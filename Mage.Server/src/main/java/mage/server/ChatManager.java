@@ -64,7 +64,7 @@ public class ChatManager {
 
     public void leaveChat(UUID chatId, UUID userId) {
         if (chatSessions.containsKey(chatId)) {
-            chatSessions.get(chatId).kill(userId, User.DisconnectReason.CleaningUp);
+            chatSessions.get(chatId).kill(userId, DisconnectReason.CleaningUp);
         }
     }
 
@@ -158,7 +158,7 @@ public class ChatManager {
         }
     }
 
-    public void removeUser(UUID userId, User.DisconnectReason reason) {
+    public void removeUser(UUID userId, DisconnectReason reason) {
         Logger.getLogger(ChatManager.class).debug("ChatManager: Remove user start");
         for (ChatSession chat: chatSessions.values()) {
             chat.kill(userId, reason);

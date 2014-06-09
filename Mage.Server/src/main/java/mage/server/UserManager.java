@@ -38,7 +38,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import mage.server.util.ThreadExecutor;
-import mage.view.ChatMessage.MessageColor;
 import org.apache.log4j.Logger;
 
 /**
@@ -52,14 +51,16 @@ public class UserManager {
 
     protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
-    private static final UserManager INSTANCE = new UserManager();
     private static final Logger logger = Logger.getLogger(UserManager.class);
+
+    private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
+    private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
+
+    private static final UserManager INSTANCE = new UserManager();
 
     public static UserManager getInstance() {
         return INSTANCE;
     }
-
-    private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
     
     private UserManager()  {
         expireExecutor.scheduleAtFixedRate(new Runnable() {
@@ -69,8 +70,6 @@ public class UserManager {
             }
         }, 60, 60, TimeUnit.SECONDS);
     }
-
-    private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
 
     public User createUser(String userName, String host) {
         if (findUser(userName) != null) {
@@ -106,7 +105,7 @@ public class UserManager {
         return false;
     }
 
-    public void disconnect(UUID userId, User.DisconnectReason reason) {
+    public void disconnect(UUID userId, DisconnectReason reason) {
         if (userId != null) {
             if (users.containsKey(userId)) {
                 User user = users.get(userId);
@@ -123,7 +122,7 @@ public class UserManager {
         return false;
     }
 
-    public void removeUser(UUID userId, User.DisconnectReason reason) {
+    public void removeUser(UUID userId, DisconnectReason reason) {
         User user = users.get(userId);
         if (user != null) {
             logger.debug(new StringBuilder("Remove user: ").append(user.getName())
@@ -166,8 +165,7 @@ public class UserManager {
                             if (user.isExpired(expired.getTime())) {
                                 logger.info(new StringBuilder(user.getName()).append(": session expired userId: ").append(user.getId())
                                         .append(" Host: ").append(user.getHost()));
-                                user.kill(User.DisconnectReason.LostConnection);
-                                users.remove(user.getId());
+                                SessionManager.getInstance().getSession(user.getSessionId()).kill(DisconnectReason.SessionExpired);
                             }
                         }
                         logger.debug("checkExpired - end");

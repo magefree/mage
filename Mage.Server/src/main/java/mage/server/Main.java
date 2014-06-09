@@ -187,11 +187,11 @@ public class Main {
                 }
                 sessionInfo.append(" at ").append(session.getHost()).append(" sessionId: ").append(session.getId());
                 if (throwable instanceof ClientDisconnectedException) {
-                    SessionManager.getInstance().disconnect(client.getSessionId(), true);
+                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.Disconnected);
                     logger.debug("Client disconnected - " + sessionInfo);
                 }
                 else {
-                    SessionManager.getInstance().disconnect(client.getSessionId(), false);
+                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
                     logger.info("Connection to client lost - " + sessionInfo);
                 }
             }
@@ -259,7 +259,7 @@ public class Main {
         public void removeListener(InvokerCallbackHandler callbackHandler) {
             ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
             String sessionId = handler.getClientSessionId();
-            SessionManager.getInstance().disconnect(sessionId, true);
+            SessionManager.getInstance().disconnect(sessionId, DisconnectReason.Disconnected);
         }
 
     }
