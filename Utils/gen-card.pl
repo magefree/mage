@@ -210,6 +210,10 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                                 } elsif ($keywords{$kw} eq 'card, manaString') {
                                     $ability =~ m/({.*})/g;
                                     $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, "' . fixCost($1) . '"));';
+                                } elsif ($keywords{$kw} eq 'card, cost') {
+                                    $ability =~ m/({.*})/g;
+                                    $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, new ManaCostsImpl("' . fixCost($1) . '")));';
+                                    $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                                 }
 
                                 

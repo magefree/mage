@@ -1,59 +1,60 @@
 Annihilator|number|
+Basic landcycling|cost|
+Battle cry|new|
 Bloodthirst|number|
 Bushido|number|
-Dredge|number|
-Evoke|card, manaString|
-Entwine|manaString|
-Soulshift|number|
-Basic landcycling|cost|
-Forestcycling|cost|
-Islandcycling|cost|
-Mountaincycling|cost|
-Plainscycling|cost|
-Swampcycling|cost|
-Cycling|cost|
-Cumulative upkeep|cost|
-Level up|cost|
-Miracle|cost|
-Unearth|cost|
-Battle cry|new|
 Cascade|new|
-Exalted|new|
-Flanking|new|
-Forestwalk|new|
-Indestructible|instance|
-Islandwalk|new|
-Living weapon|new|
-Mountainwalk|new|
-Persist|new|
-Plainswalk|new|
-Rebound|new|
-Storm|new|
-Sunburst|new|
-Swampwalk|new|
-Totem armor|new|
-Unblockable|new|
-Undying|new|
-Unleash|new|
+Cumulative upkeep|cost|
+Cycling|cost|
 Deathtouch|instance|
 Defender|instance|
 Double Strike|instance|
+Dredge|number|
+Entwine|manaString|
+Evoke|card, manaString|
+Exalted|new|
 Extort|new|
 Fear|instance|
 First strike|instance|
+Flanking|new|
 Flash|instance|
 Flying|instance|
+Forestcycling|cost|
+Forestwalk|new|
 Haste|instance|
 Hexproof|instance|
+Indestructible|instance|
 Infect|instance|
 Intimidate|instance|
+Islandcycling|cost|
+Islandwalk|new|
+Level up|cost|
 Lifelink|instance|
+Living weapon|new|
+Miracle|cost|
+Mountaincycling|cost|
+Mountainwalk|new|
+Morph|card, cost|
+Persist|new|
 Phasing|instance|
+Plainscycling|cost|
+Plainswalk|new|
 Reach|instance|
+Rebound|new|
 Scavenge|cost|
 Shroud|instance|
 Soulbond|instance|
+Soulshift|number|
+Storm|new|
+Sunburst|new|
+Swampcycling|cost|
+Swampwalk|new|
+Totem armor|new|
 Trample|instance|
+Tribute|number|
+Unblockable|new|
+Undying|new|
+Unearth|cost|
+Unleash|new|
 Vigilance|instance|
 Wither|instance|
-Tribute|number|
