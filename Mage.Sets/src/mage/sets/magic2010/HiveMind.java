@@ -29,14 +29,14 @@ package mage.sets.magic2010;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -126,7 +126,7 @@ class HiveMindEffect extends OneShotEffect {
         if (spell != null && player != null) {
             Set<UUID> players = player.getInRange();
             for (UUID playerId : players) {
-                if (!playerId.equals(source.getControllerId())) {
+                if (!playerId.equals(spell.getControllerId())) {
                     Spell copy = spell.copySpell();
                     copy.setControllerId(playerId);
                     copy.setCopiedSpell(true);
