@@ -87,7 +87,7 @@ public class PyrewildShaman extends CardImpl {
 
 class PyrewildShamanTriggeredAbility extends TriggeredAbilityImpl {
 
-    List<UUID> damagedPlayerIds = new ArrayList<UUID>();
+    List<UUID> damagedPlayerIds = new ArrayList<>();
 
     public PyrewildShamanTriggeredAbility() {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl("{3}")), false);
