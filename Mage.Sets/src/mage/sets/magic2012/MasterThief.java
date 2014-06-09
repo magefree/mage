@@ -68,7 +68,7 @@ public class MasterThief extends CardImpl {
                 new SourceOnBattlefieldControlUnchangedCondition(),
                 "gain control of target artifact for as long as you control Master Thief");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
     }
 

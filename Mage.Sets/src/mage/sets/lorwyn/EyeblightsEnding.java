@@ -56,7 +56,7 @@ public class EyeblightsEnding extends CardImpl {
         this.subtype.add("Elf");
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
     }
 
     public EyeblightsEnding(final EyeblightsEnding card) {

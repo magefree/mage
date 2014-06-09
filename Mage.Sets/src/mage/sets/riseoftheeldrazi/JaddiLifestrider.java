@@ -97,7 +97,7 @@ class JaddiLifestriderEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int tappedAmount = 0;
         Player you = game.getPlayer(source.getControllerId());
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+        TargetCreaturePermanent target = new TargetCreaturePermanent(filter, true);
         while (true) {
             target.clearChosen();
             if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {

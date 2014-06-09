@@ -56,7 +56,7 @@ public class Putrefy extends CardImpl {
         this.expansionSetCode = "RAV";
         this.color.setBlack(true);
         this.color.setGreen(true);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 

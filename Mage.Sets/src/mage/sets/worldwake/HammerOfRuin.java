@@ -107,7 +107,7 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl {
                 filter.setMessage("creature controlled by " + game.getPlayer(event.getTargetId()).getName());
 
                 this.getTargets().clear();
-                this.addTarget(new TargetPermanent(filter));
+                this.addTarget(new TargetPermanent(filter, true));
                 return true;
             }
         }

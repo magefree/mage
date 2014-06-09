@@ -70,7 +70,7 @@ public class IsperiasSkywatch extends CardImpl {
         // When Isperia's Skywatch enters the battlefield, detain target creature an opponent controls.
         // (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
         Ability ability = new EntersBattlefieldTriggeredAbility(new DetainTargetEffect());
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+        TargetCreaturePermanent target = new TargetCreaturePermanent(filter, true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

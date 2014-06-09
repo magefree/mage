@@ -56,7 +56,7 @@ public class AltarsLight extends CardImpl {
         this.expansionSetCode = "MRD";
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
     }
 
     public AltarsLight(final AltarsLight card) {

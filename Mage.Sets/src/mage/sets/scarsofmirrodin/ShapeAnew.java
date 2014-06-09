@@ -65,7 +65,7 @@ public class ShapeAnew extends CardImpl {
         this.expansionSetCode = "SOM";
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new SacrificeTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
         this.getSpellAbility().addEffect(new ShapeAnewEffect());
     }
 

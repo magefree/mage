@@ -61,7 +61,7 @@ public class ShinkaTheBloodsoakedKeep extends CardImpl {
         this.addAbility(new RedManaAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
     }
 

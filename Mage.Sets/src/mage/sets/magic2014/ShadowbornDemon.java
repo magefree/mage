@@ -77,7 +77,7 @@ public class ShadowbornDemon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Shadowborn Demon enters the battlefield, destroy target non-Demon creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(),false);
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(filter, true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

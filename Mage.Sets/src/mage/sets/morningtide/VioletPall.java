@@ -57,7 +57,7 @@ public class VioletPall extends CardImpl {
         this.subtype.add("Faerie");
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FaerieToken(), 1));
     }
 

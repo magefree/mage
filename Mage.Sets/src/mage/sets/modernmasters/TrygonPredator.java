@@ -107,7 +107,7 @@ class TrygonPredatorTriggeredAbility extends TriggeredAbilityImpl {
                 filter.add(new ControllerIdPredicate(event.getTargetId()));
 
                 this.getTargets().clear();
-                this.addTarget(new TargetPermanent(filter));
+                this.addTarget(new TargetPermanent(filter, true));
                 return true;
             }
         }

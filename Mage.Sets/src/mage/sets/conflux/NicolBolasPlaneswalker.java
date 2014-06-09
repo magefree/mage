@@ -73,7 +73,7 @@ public class NicolBolasPlaneswalker extends CardImpl {
 
         // +3: Destroy target noncreature permanent.
         LoyaltyAbility ability = new LoyaltyAbility(new DestroyTargetEffect(), 3);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
         // -2: Gain control of target creature.
         ability = new LoyaltyAbility(new GainControlTargetEffect(Duration.Custom), -2);

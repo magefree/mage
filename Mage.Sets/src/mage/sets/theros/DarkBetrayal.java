@@ -57,7 +57,7 @@ public class DarkBetrayal extends CardImpl {
 
         // Destroy target black creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(filter, true);
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }

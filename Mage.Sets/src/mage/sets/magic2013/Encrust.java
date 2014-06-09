@@ -67,7 +67,7 @@ public class Encrust extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant artifact or creature
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter, true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

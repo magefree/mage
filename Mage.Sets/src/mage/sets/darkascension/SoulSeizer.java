@@ -110,7 +110,7 @@ class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
                     filter.add(new ControllerIdPredicate(opponent.getId()));
 
                     this.getTargets().clear();
-                    this.addTarget(new TargetCreaturePermanent(filter));
+                    this.addTarget(new TargetCreaturePermanent(filter, true));
                     return true;
                 }
             }

@@ -63,7 +63,7 @@ public class WirewoodLodge extends CardImpl {
         // {G}, {T}: Untap target Elf.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
     }
 

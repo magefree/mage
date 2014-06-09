@@ -65,7 +65,7 @@ public class Cryptoplasm extends CardImpl {
 
         // At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), TargetController.YOU, true);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
     }
 

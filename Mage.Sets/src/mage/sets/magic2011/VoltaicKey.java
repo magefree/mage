@@ -59,7 +59,7 @@ public class VoltaicKey extends CardImpl {
         this.expansionSetCode = "M11";
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
         ability.addManaCost(new GenericManaCost(1));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
     }
 

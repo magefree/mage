@@ -83,7 +83,7 @@ public class SimicManipulator extends CardImpl {
         // TODO: Improve targeting, that only valid targets (power <= removed counters) can be choosen
         //       Disadvantage now is, that a creature can be targeted that couldn't be targeted by rules.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SimicManipulatorGainControlTargetEffect(Duration.Custom), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance(),1));
         this.addAbility(ability);
     }

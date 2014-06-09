@@ -58,7 +58,7 @@ public class SliceinTwain extends CardImpl {
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
     }
 
     public SliceinTwain (final SliceinTwain card) {

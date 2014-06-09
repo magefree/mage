@@ -113,7 +113,7 @@ class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
                     filter.setMessage("creature controlled by " + game.getPlayer(event.getTargetId()).getName());
 
                     this.getTargets().clear();
-                    this.addTarget(new TargetCreaturePermanent(filter));
+                    this.addTarget(new TargetCreaturePermanent(filter, true));
                     return true;
                 }
             }

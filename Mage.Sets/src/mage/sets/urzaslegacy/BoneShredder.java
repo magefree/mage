@@ -71,7 +71,7 @@ public class BoneShredder extends CardImpl {
 
         //When Bone Shredder enters the battlefield, destroy target nonartifact, nonblack creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(false));
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(filter, true);
         target.setTargetName("nonartifact, nonblack creature");
         ability.addTarget(target);
         this.addAbility(ability);

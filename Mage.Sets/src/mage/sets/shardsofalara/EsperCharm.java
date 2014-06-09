@@ -62,7 +62,7 @@ public class EsperCharm extends CardImpl {
 
         // Choose one - Destroy target enchantment;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
         // or draw two cards;
         Mode mode = new Mode();
         mode.getEffects().add(new DrawCardSourceControllerEffect(2));

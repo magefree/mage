@@ -66,7 +66,7 @@ public class EasternPaladin extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}{B}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
                 ability.addCost(new TapSourceCost());
                 this.addAbility(ability);
         }

@@ -53,7 +53,7 @@ public class RendSpirit extends CardImpl {
         super(ownerId, 141, "Rend Spirit", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "CHK";
         this.color.setBlack(true);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

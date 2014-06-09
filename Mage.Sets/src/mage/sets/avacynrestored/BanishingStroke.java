@@ -63,7 +63,7 @@ public class BanishingStroke extends CardImpl {
 
         // Put target artifact, creature, or enchantment on the bottom of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
 
         // Miracle {W}
         this.addAbility(new MiracleAbility(new ManaCostsImpl("{W}")));

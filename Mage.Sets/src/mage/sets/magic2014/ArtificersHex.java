@@ -66,7 +66,7 @@ public class ArtificersHex extends CardImpl {
         this.color.setBlack(true);
 
         // Enchant Equipment
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter, true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

@@ -54,7 +54,7 @@ public class HerosDemise extends CardImpl {
         this.color.setBlack(true);
         // Destroy target legendary creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
     }
 
     public HerosDemise(final HerosDemise card) {

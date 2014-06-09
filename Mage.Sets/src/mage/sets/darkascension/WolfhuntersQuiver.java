@@ -68,7 +68,7 @@ public class WolfhuntersQuiver extends CardImpl {
         WolfhuntersQuiverAbility ability = new WolfhuntersQuiverAbility(1, new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
         // and "{tap}: This creature deals 3 damage to target Werewolf creature."
-        ability = new WolfhuntersQuiverAbility(3, new TargetCreaturePermanent(filter));
+        ability = new WolfhuntersQuiverAbility(3, new TargetCreaturePermanent(filter, true));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
         // Equip {5}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5)));

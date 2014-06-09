@@ -58,7 +58,7 @@ public class CrushingPain extends CardImpl {
 
         // Crushing Pain deals 6 damage to target creature that was dealt damage this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(6));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
     }
 
     public CrushingPain (final CrushingPain card) {

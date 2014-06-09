@@ -67,7 +67,7 @@ public class AbunaAcolyte extends CardImpl {
         Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         ability1.addTarget(new TargetCreatureOrPlayer());
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new TapSourceCost());
-        ability2.addTarget(new TargetCreaturePermanent(filter));
+        ability2.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability1);
         this.addAbility(ability2);
     }

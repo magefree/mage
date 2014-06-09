@@ -74,7 +74,7 @@ public class RixMaadiGuildmage extends CardImpl {
 
         // {B}{R}: Target blocking creature gets -1/-1 until end of turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn),new ManaCostsImpl("{B}{R}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
 
         // {B}{R}: Target player who lost life this turn loses 1 life.

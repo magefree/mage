@@ -62,7 +62,7 @@ public class ComaVeil extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant artifact or creature
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter, true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         // Enchanted permanent doesn't untap during its controller's untap step.

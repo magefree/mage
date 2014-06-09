@@ -65,7 +65,7 @@ public class Opportunist extends CardImpl {
 
         // {T}: Opportunist deals 1 damage to target creature that was dealt damage this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
     }
 

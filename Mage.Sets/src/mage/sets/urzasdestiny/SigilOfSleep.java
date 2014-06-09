@@ -80,7 +80,7 @@ public class SigilOfSleep extends CardImpl {
             if (playerId != null) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that player controls");
                 filter.add(new ControllerIdPredicate(playerId));
-                Target target = new TargetCreaturePermanent(filter);
+                Target target = new TargetCreaturePermanent(filter, true);
                 target.setRequired(true);
                 ability.getTargets().clear();
                 ability.addTarget(target);

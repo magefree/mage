@@ -57,7 +57,7 @@ public class ShreddingWinds extends CardImpl {
 
         // Shredding Winds deals 7 damage to target creature with flying.
         this.getSpellAbility().addEffect(new DamageTargetEffect(7));
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(filter, true);
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }

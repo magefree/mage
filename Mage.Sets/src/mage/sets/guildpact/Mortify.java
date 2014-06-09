@@ -56,7 +56,7 @@ public class Mortify extends CardImpl {
         this.color.setBlack(true);
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
     }
 
     public Mortify(final Mortify card) {

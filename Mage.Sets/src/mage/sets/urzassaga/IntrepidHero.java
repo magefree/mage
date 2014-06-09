@@ -66,7 +66,7 @@ public class IntrepidHero extends CardImpl {
 
         // {tap}: Destroy target creature with power 4 or greater.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
     }
 

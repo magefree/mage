@@ -67,7 +67,7 @@ public class Fatestitcher extends CardImpl {
 
         // {tap}: You may tap or untap another target permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
         // Unearth {U}
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{U}")));

@@ -74,7 +74,7 @@ public class HarmonicSliver extends CardImpl {
 
         // All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        TargetPermanent target = new TargetPermanent(filter);
+        TargetPermanent target = new TargetPermanent(filter, true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(

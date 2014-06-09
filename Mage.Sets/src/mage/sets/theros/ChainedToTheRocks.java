@@ -103,7 +103,7 @@ public class ChainedToTheRocks extends CardImpl {
         this.color.setWhite(true);
 
         // Enchant Mountain you control
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter, true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Exile));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

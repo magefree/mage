@@ -56,7 +56,7 @@ public class Bramblecrush extends CardImpl {
         this.color.setGreen(true);
 
         // Destroy target noncreature permanent.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

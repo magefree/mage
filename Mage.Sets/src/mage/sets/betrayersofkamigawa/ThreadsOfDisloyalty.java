@@ -64,7 +64,7 @@ public class ThreadsOfDisloyalty extends CardImpl {
         this.subtype.add("Aura");
 
         // Enchant creature with converted mana cost 2 or less
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
+        TargetPermanent auraTarget = new TargetCreaturePermanent(filter, true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

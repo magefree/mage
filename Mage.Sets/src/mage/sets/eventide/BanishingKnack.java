@@ -57,7 +57,7 @@ public class BanishingKnack extends CardImpl {
         this.expansionSetCode = "EVE";
         this.color.setBlue(true);
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
-        gainedAbility.addTarget(new TargetPermanent(filter));
+        gainedAbility.addTarget(new TargetPermanent(filter, true));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }

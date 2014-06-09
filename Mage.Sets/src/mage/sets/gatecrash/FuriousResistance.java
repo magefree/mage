@@ -63,7 +63,7 @@ public class FuriousResistance extends CardImpl {
 
         // Target blocking creature gets +3/+0 and gains first strike until end of turn.
         this.getSpellAbility().addEffect(new FuriousResistanceEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
     }
 
     public FuriousResistance(final FuriousResistance card) {

@@ -75,7 +75,7 @@ public class MasterOfDiversion extends CardImpl {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
             UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
             filter.add(new ControllerIdPredicate(defenderId));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            TargetCreaturePermanent target = new TargetCreaturePermanent(filter, true);
             target.setRequired(true);
             ability.addTarget(target);
         }

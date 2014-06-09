@@ -56,7 +56,7 @@ public class SmiteTheMonstrous extends CardImpl {
 
         // Destroy target creature with power 4 or greater.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
     }
 
     public SmiteTheMonstrous(final SmiteTheMonstrous card) {

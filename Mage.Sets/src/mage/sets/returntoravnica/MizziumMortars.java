@@ -60,7 +60,7 @@ public class MizziumMortars extends CardImpl {
         this.color.setRed(true);
 
         // MizziumMortars deals 4 damage to target creature you don't control.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
 
         // Overload {3}{R}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

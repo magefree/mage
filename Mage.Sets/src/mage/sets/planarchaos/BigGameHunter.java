@@ -67,7 +67,7 @@ public class BigGameHunter extends CardImpl {
 
         // When Big Game Hunter enters the battlefield, destroy target creature with power 4 or greater. It can't be regenerated.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(true));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
         // Madness {B}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{B}")));

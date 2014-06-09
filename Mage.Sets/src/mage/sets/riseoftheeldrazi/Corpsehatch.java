@@ -58,7 +58,7 @@ public class Corpsehatch extends CardImpl {
 
         this.color.setBlack(true);
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 2));
     }

@@ -79,7 +79,7 @@ public class GodosIrregulars extends CardImpl {
             ability.getTargets().clear();
             FilterCreaturePermanent filter = basicFilter.copy();
             filter.add(new BlockingAttackerIdPredicate(this.getId()));
-            Target target = new TargetCreaturePermanent(filter);
+            Target target = new TargetCreaturePermanent(filter, true);
             ability.addTarget(target);
         }
     }

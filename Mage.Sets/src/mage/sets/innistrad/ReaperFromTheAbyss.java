@@ -69,7 +69,7 @@ public class ReaperFromTheAbyss extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new ReaperFromTheAbyssAbility();
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
     }
 

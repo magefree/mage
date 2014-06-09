@@ -56,7 +56,7 @@ public class MoltenFrame extends CardImpl {
         this.expansionSetCode = "CON";
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 

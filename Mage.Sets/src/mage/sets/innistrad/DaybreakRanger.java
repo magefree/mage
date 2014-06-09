@@ -77,7 +77,7 @@ public class DaybreakRanger extends CardImpl {
 
         // {tap}: Daybreak Ranger deals 2 damage to target creature with flying.
         Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
-        activatedAbility.addTarget(new TargetCreaturePermanent(filter));
+        activatedAbility.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(activatedAbility);
         // At the beginning of each upkeep, if no spells were cast last turn, transform Daybreak Ranger.
         this.addAbility(new TransformAbility());

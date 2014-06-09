@@ -54,7 +54,7 @@ public class Oxidize extends CardImpl {
         this.expansionSetCode = "DST";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
     }
 
     public Oxidize(final Oxidize card) {

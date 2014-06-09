@@ -63,7 +63,7 @@ public class ConjuredCurrency extends CardImpl {
 
         // At the beginning of your upkeep, you may exchange control of Conjured Currency and target permanent you neither own nor control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new ExchangeControlTargetEffect(Duration.EndOfGame, rule, true), TargetController.YOU, true);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
     }
 

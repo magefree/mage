@@ -77,7 +77,7 @@ public class NullmageAdvocate extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer());
         ability.addEffect(effect);
         ability.addTarget(new TargetCardInOpponentsGraveyard(2,2, new FilterCard("two target cards from an opponent's graveyard"), true));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
     }
 

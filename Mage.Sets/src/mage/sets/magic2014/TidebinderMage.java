@@ -81,7 +81,7 @@ public class TidebinderMage extends CardImpl {
         // That creature doesn't untap during its controller's untap step for as long as you control Tidebinder Mage.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
         ability.addEffect(new TidebinderMageEffect());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(filter, true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

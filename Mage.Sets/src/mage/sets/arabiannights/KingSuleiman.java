@@ -67,7 +67,7 @@ public class KingSuleiman extends CardImpl {
 
         // {tap}: Destroy target Djinn or Efreet.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
     }
 

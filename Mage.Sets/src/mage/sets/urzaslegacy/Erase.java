@@ -58,7 +58,7 @@ public class Erase extends CardImpl {
     public void build() {
         // Exile target enchantment.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
     }
 
     public Erase(final Erase card) {

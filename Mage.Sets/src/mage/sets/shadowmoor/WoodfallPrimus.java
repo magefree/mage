@@ -67,7 +67,7 @@ public class WoodfallPrimus extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // When Woodfall Primus enters the battlefield, destroy target noncreature permanent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
         // Persist
         this.addAbility(new PersistAbility());

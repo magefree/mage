@@ -60,7 +60,7 @@ public class SavingGrasp extends CardImpl {
         this.color.setBlue(true);
 
         // Return target creature you own to your hand.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         // Flashback {W}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{W}"), TimingRule.INSTANT));

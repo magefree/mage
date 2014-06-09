@@ -70,7 +70,7 @@ public class HaazdaSnareSquad extends CardImpl {
         // Whenever Haazda Snare Squad attacks you may pay {W}. If you do, tap target creature an opponent controls.
         Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new TapTargetEffect(""), new ManaCostsImpl("{W}")),false,
                 "Whenever {this} attacks you may pay {W}. If you do, tap target creature an opponent controls.");
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(filter, true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

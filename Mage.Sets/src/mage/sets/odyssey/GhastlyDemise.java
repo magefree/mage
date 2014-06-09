@@ -62,7 +62,7 @@ public class GhastlyDemise extends CardImpl {
         this.color.setBlack(true);
 
         // Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new GhastlyDemiseEffect(false));
     }
 

@@ -70,7 +70,7 @@ public class ChemistersTrick extends CardImpl {
         this.color.setRed(true);
 
         // Target creature you don't control gets -2/-0 until end of turn and attacks this turn if able.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new BoostTargetEffect(-2,0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn));
 

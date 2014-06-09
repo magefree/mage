@@ -59,7 +59,7 @@ public class FranticPurification extends CardImpl {
 
         // Destroy target enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
 
         // Madness {W}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{W}")));

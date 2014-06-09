@@ -63,7 +63,7 @@ public class DestructiveRevelry extends CardImpl {
 
         // Destroy target artifact or enchantment. Destructive Revelry deals 2 damage to that permanent's controller.
         this.getSpellAbility().addEffect(new DestructiveRevelryEffect());
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(filter, true);
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }

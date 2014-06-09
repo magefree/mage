@@ -83,7 +83,7 @@ public class SistersOfStoneDeath extends CardImpl {
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking or blocked by Sisters of Stone Death");
         filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
                 new BlockingAttackerIdPredicate(this.getId())));
-        ability2.addTarget(new TargetCreaturePermanent(filter));
+        ability2.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability2);
 
         // {2}{B}: Put a creature card exiled with Sisters of Stone Death onto the battlefield under your control.

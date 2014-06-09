@@ -59,7 +59,7 @@ public class Terror extends CardImpl {
         this.color.setBlack(true);
 
         // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 

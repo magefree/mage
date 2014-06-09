@@ -65,7 +65,7 @@ public class Vendetta extends CardImpl {
         this.color.setBlack(true);
 
         // Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new VendettaEffect());
     }

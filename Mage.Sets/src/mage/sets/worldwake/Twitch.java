@@ -62,7 +62,7 @@ public class Twitch extends CardImpl {
         // You may tap or untap target artifact, creature, or land.
         // Draw a card.
         this.getSpellAbility().addEffect(new MayTapOrUntapTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 

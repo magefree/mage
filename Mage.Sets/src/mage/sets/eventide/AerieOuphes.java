@@ -67,7 +67,7 @@ public class AerieOuphes extends CardImpl {
 
         // Sacrifice Aerie Ouphes: Aerie Ouphes deals damage equal to its power to target creature with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
 
         // Persist

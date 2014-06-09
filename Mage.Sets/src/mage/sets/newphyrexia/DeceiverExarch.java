@@ -71,7 +71,7 @@ public class DeceiverExarch extends CardImpl {
         ability.addTarget(new TargetControlledPermanent(true));
         Mode mode = new Mode();
         mode.getEffects().add(new TapTargetEffect());
-        mode.getTargets().add(new TargetPermanent(filter));
+        mode.getTargets().add(new TargetPermanent(filter, true));
         ability.addMode(mode);
         this.addAbility(ability);
     }

@@ -56,7 +56,7 @@ public class PuncturingLight extends CardImpl {
 
         this.color.setWhite(true);
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

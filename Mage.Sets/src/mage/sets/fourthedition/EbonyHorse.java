@@ -63,7 +63,7 @@ public class EbonyHorse extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addEffect(new PreventCombatDamageToSourceEffect(Duration.EndOfTurn));
         ability.addEffect(new PreventCombatDamageBySourceEffect(Duration.EndOfTurn));
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(filter, true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

@@ -95,7 +95,7 @@ class EvilTwinApplyToPermanent extends ApplyToPermanent {
     public Boolean apply(Game game, Permanent permanent) {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         permanent.addAbility(ability, game);
         return true;
     }

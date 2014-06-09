@@ -61,7 +61,7 @@ public class UrgentExorcism extends CardImpl {
 
         // Destroy target Spirit or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
     }
 
     public UrgentExorcism(final UrgentExorcism card) {

@@ -83,7 +83,7 @@ public class RepentantVampire extends CardImpl {
                 "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} is white",
                 false));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        gainedAbility.addTarget(new TargetCreaturePermanent(filter));
+        gainedAbility.addTarget(new TargetCreaturePermanent(filter, true));
         ability.addEffect(new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),

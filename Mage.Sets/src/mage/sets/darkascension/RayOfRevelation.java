@@ -58,7 +58,7 @@ public class RayOfRevelation extends CardImpl {
         this.color.setWhite(true);
 
         // Destroy target enchantment.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         // Flashback {G}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), TimingRule.INSTANT));

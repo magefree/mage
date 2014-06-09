@@ -72,7 +72,7 @@ public class Godtoucher extends CardImpl {
                 new GodtoucherEffect(Duration.EndOfTurn),
                 new ManaCostsImpl("{1}{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
     }
 

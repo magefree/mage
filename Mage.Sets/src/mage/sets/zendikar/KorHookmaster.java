@@ -64,7 +64,7 @@ public class KorHookmaster extends CardImpl {
 
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
         ability.addEffect(new SkipNextUntapTargetEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
     }
 

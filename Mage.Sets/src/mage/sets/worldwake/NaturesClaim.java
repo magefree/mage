@@ -65,7 +65,7 @@ public class NaturesClaim extends CardImpl {
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new NaturesClaimEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
     }
 
     public NaturesClaim (final NaturesClaim card) {

@@ -76,7 +76,7 @@ public class QasaliPridemage extends CardImpl {
         // {1}, Sacrifice Qasali Pridemage: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}"));
         ability.addCost(new SacrificeSourceCost());
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(filter, true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

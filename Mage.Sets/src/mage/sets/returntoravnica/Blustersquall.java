@@ -65,7 +65,7 @@ public class Blustersquall extends CardImpl {
         this.color.setBlue(true);
 
         // Tap target creature you don't control.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new TapTargetEffect());
 
         // Overload {3}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

@@ -58,7 +58,7 @@ public class VanquishTheFoul extends CardImpl {
 
         // Destroy target creature with power 4 or greater. Scry 1.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(filter, true);
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new ScryEffect(1));

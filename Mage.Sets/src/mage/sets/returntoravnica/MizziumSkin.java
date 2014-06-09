@@ -64,7 +64,7 @@ public class MizziumSkin extends CardImpl {
         this.color.setBlue(true);
 
         // Target creature you control gets +0/+1 and gains hexproof until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new BoostTargetEffect(0,1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
 

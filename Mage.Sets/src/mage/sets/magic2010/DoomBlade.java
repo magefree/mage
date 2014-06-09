@@ -55,7 +55,7 @@ public class DoomBlade extends CardImpl {
         super(ownerId, 93, "Doom Blade", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "M10";
         this.color.setBlack(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

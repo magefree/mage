@@ -60,7 +60,7 @@ public class GroundRift extends CardImpl {
         this.color.setRed(true);
 
         // Target creature without flying can't block this turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
         // Storm
         this.addAbility(new StormAbility());

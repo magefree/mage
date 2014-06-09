@@ -64,7 +64,7 @@ public class DaruEncampment extends CardImpl {
                 new BoostTargetEffect(1, 1, Duration.EndOfTurn),
                 new ManaCostsImpl("{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(ability);
     }
 

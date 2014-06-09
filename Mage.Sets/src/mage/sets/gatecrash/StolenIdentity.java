@@ -65,7 +65,7 @@ public class StolenIdentity extends CardImpl {
 
         // Put a token onto the battlefield that's a copy of target artifact or creature.
         this.getSpellAbility().addEffect(new StolenIdentityEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
         // Cipher
         this.getSpellAbility().addEffect(new CipherEffect());
     }

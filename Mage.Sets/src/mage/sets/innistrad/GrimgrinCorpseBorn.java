@@ -116,7 +116,7 @@ class GrimgrinCorpseBornAbility extends TriggeredAbilityImpl {
             filter.add(new ControllerIdPredicate(defenderId));
 
             this.getTargets().clear();
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            TargetCreaturePermanent target = new TargetCreaturePermanent(filter, true);
             target.setRequired(true);
             this.addTarget(target);
             return true;

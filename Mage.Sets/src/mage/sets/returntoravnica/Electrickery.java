@@ -60,7 +60,7 @@ public class Electrickery extends CardImpl {
         this.color.setRed(true);
 
         // Electrickery deals 1 damage to target creature you don't control.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
 
         // Overload {1}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

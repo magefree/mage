@@ -61,7 +61,7 @@ public class Combust extends CardImpl {
         this.expansionSetCode = "M11";
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(5, false));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
     }
 

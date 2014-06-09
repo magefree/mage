@@ -70,7 +70,7 @@ public class KithkinSpellduster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {1}{W}, Sacrifice Kithkin Spellduster: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         // Persist

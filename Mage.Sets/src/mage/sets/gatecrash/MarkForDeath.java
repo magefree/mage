@@ -70,7 +70,7 @@ public class MarkForDeath extends CardImpl {
 
         // Target creature an opponent controls blocks this turn if able. Untap that creature. Other creatures that player controls can't block this turn.
         this.getSpellAbility().addEffect(new MarkForDeathEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
     }
 
     public MarkForDeath(final MarkForDeath card) {

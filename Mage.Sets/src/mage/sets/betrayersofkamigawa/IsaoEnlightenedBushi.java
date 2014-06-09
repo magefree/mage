@@ -71,7 +71,7 @@ public class IsaoEnlightenedBushi extends CardImpl {
         this.addAbility(new BushidoAbility(2));
         // {2}: Regenerate target Samurai.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new GenericManaCost(2));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
     }
 

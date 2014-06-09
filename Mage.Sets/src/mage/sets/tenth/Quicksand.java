@@ -64,7 +64,7 @@ public class Quicksand extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(-1, -2, Duration.EndOfTurn),
                 new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

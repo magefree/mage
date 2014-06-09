@@ -57,7 +57,7 @@ public class Deathmark extends CardImpl {
         super(ownerId, 134, "Deathmark", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "10E";
         this.color.setBlack(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

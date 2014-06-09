@@ -75,7 +75,7 @@ public class ShipwreckSinger extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {1}{U}: Target creature an opponent controls attacks this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}"));
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(filter, true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

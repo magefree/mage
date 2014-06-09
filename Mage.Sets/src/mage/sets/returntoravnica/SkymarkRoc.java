@@ -98,7 +98,7 @@ class SkymarkRocAbility extends TriggeredAbilityImpl {
             filter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, 3));
 
             this.getTargets().clear();
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            TargetCreaturePermanent target = new TargetCreaturePermanent(filter, true);
             target.setRequired(true);
             this.addTarget(target);
             return true;

@@ -64,7 +64,7 @@ public class LastBreath extends CardImpl {
         // Exile target creature with power 2 or less. Its controller gains 4 life.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addEffect(new LastBreathEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
 
     }
 

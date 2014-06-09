@@ -67,7 +67,7 @@ public class NineRingedBo extends CardImpl {
 
         // {T}: Nine-Ringed Bo deals 1 damage to target Spirit creature. If that creature would die this turn, exile it instead.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter, true));
         ability.addEffect(new NineRingedBoEffect());
         this.addAbility(ability);
 

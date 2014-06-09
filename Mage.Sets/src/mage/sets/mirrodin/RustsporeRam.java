@@ -58,7 +58,7 @@ public class RustsporeRam extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
     }
 

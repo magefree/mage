@@ -104,7 +104,7 @@ class AncientHellkiteAbility extends ActivatedAbilityImpl {
             filter.add(new ControllerIdPredicate(defenderId));
 
             this.getTargets().clear();
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            TargetCreaturePermanent target = new TargetCreaturePermanent(filter, true);
             target.setRequired(true);
             this.addTarget(target);
             return super.activate(game, noMana);

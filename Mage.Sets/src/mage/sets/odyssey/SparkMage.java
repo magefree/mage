@@ -99,7 +99,7 @@ class SparkMageTriggeredAbility extends TriggeredAbilityImpl {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getName() + " controls");
                     filter.add(new ControllerIdPredicate(opponent.getId()));
                     this.getTargets().clear();
-                    this.getTargets().add(new TargetCreaturePermanent(filter));
+                    this.getTargets().add(new TargetCreaturePermanent(filter, true));
                     return true;
                 }
             }

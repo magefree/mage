@@ -65,7 +65,7 @@ public class AuraFinesse extends CardImpl {
 
         // Attach target Aura you control to target creature.
         this.getSpellAbility().addEffect(new AuraFinesseEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

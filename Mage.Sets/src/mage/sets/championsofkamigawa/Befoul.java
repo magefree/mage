@@ -63,7 +63,7 @@ public class Befoul extends CardImpl {
         this.color.setBlack(true);
         // Destroy target land or nonblack creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
     }
 
     public Befoul (final Befoul card) {

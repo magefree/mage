@@ -56,7 +56,7 @@ public class Disenchant extends CardImpl {
         this.expansionSetCode = "TMP";
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
     }
 
     public Disenchant(final Disenchant card) {

@@ -99,7 +99,7 @@ class WerewolfRansackerAbility extends TriggeredAbilityImpl {
 
     public WerewolfRansackerAbility() {
         super(Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(filter, true);
         target.setRequired(true);
         this.addTarget(target);
     }

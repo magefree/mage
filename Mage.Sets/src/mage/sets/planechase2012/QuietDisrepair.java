@@ -70,7 +70,7 @@ public class QuietDisrepair extends CardImpl {
         this.color.setGreen(true);
 
         // Enchant artifact or enchantment
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter, true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

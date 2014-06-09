@@ -61,7 +61,7 @@ public class AcidWebSpider extends CardImpl {
         this.toughness = new MageInt(5);
         this.addAbility(ReachAbility.getInstance());
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
     }
 

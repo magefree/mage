@@ -65,7 +65,7 @@ public class UnbenderTine extends CardImpl {
 
         // {tap}: Untap another target permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnbenderTineEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter, true));
         this.addAbility(ability);
     }
 

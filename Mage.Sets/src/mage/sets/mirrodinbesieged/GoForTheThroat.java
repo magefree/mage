@@ -55,7 +55,7 @@ public class GoForTheThroat extends CardImpl {
         this.expansionSetCode = "MBS";
         this.color.setBlack(true);
 
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(filter, true);
         target.setTargetName("nonartifact creature");
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -76,7 +76,7 @@ public class SoulReap extends CardImpl {
 
         // Destroy target nongreen creature. Its controller loses 3 life if you've cast another black spell this turn.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SoulReapEffect(), new CastBlackSpellThisTurnCondition(), rule));
         this.addWatcher(new SoulReapWatcher(this.getId()));
         
