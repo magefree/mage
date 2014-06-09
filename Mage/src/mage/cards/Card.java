@@ -28,20 +28,19 @@
 
 package mage.cards;
 
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
 import mage.watchers.Watcher;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public interface Card extends MageObject {
 
@@ -62,6 +61,8 @@ public interface Card extends MageObject {
     void setExpansionSetCode(String expansionSetCode);
     void setFaceDown(boolean value);
     boolean isFaceDown();
+    boolean turnFaceUp(Game game, UUID playerId);
+    boolean turnFaceDown(Game game, UUID playerId);
     boolean isFlipCard();
     String getFlipCardName();
     void setFlipCard(boolean flipCard);
@@ -132,6 +133,10 @@ public interface Card extends MageObject {
 
     void removeCounters(String name, int amount, Game game);
     void removeCounters(Counter counter, Game game);
+    
+    void setMorphCard(boolean morphCard);
+    boolean isMorphCard();
+
     @Override
     Card copy();
 }

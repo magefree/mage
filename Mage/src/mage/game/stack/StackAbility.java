@@ -113,6 +113,11 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
+    public String getLogName() {
+        return name;
+    }
+    
+    @Override
     public String getImageName() {
         return name;
     }

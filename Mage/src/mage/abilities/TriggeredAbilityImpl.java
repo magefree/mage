@@ -82,8 +82,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             Player player = game.getPlayer(this.getControllerId());
             StringBuilder sb = new StringBuilder();
             if (object != null) {
-                sb.append("Use the following ability from ").append(object.getName()).append("? ");
-                sb.append(this.getRule(object.getName()));
+                sb.append("Use the following ability from ").append(object.getLogName()).append("? ");
+                sb.append(this.getRule(object.getLogName()));
             }
             else {
                 sb.append("Use the following ability? ").append(this.getRule());
@@ -104,7 +104,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         MageObject object = game.getObject(sourceId);
         StringBuilder sb = new StringBuilder();
         if (object != null) {
-            sb.append("Ability triggers: ").append(object.getName()).append(" - ").append(this.getRule(object.getName()));
+            sb.append("Ability triggers: ").append(object.getLogName()).append(" - ").append(this.getRule(object.getLogName()));
         } else {
             sb.append("Ability triggers: ").append(this.getRule());
         }        

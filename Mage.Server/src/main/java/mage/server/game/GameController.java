@@ -597,7 +597,7 @@ public class GameController implements GameCallback {
                 } else if (perms != null) {
                     CardsView permsView = new CardsView();
                     for (Permanent perm: perms) {
-                        permsView.put(perm.getId(), new PermanentView(perm, game.getCard(perm.getId())));
+                        permsView.put(perm.getId(), new PermanentView(perm, game.getCard(perm.getId()), playerId, game));
                     }
                     getGameSession(playerId).target(question, permsView, targets, required, options);
                 } else {

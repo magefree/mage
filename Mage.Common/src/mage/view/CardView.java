@@ -33,9 +33,12 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.TurnFaceUpAbility;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
@@ -46,6 +49,7 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
@@ -108,19 +112,48 @@ public class CardView extends SimpleCardView {
     protected boolean controlledByOwner = true;
 
     protected boolean rotate;
+    protected boolean hideInfo; // controlls if the tooltip window is shown (eg. controlled face down morph card)
+
+    public CardView(Card card) {
+        this(card, null, false);
+    }
 
     public CardView(Card card, UUID cardId) {
-        this(card);
+        this(card, null, false);
         this.id = cardId;
     }
 
-    public CardView(Card card) {
+    /**
+     *
+     * @param card
+     * @param cardId
+     * @param controlled is the card view created for the card controller - used for morph cards to know which player may see information for the card
+     */
+    public CardView(Card card, UUID cardId, boolean controlled) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), card.getUsesVariousArt(), card.getTokenSetCode());
 
-        // no information available for face down cards
-        if (this.faceDown) {
-            fillEmpty();
-            return;
+        // no information available for face down cards as long it's not a controlled face down morph card
+        // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
+        if (card.isFaceDown()) {            
+            if (card.isMorphCard()) {
+                // special handling for Morph cards
+                this.fillEmpty(card, controlled);
+                if (card instanceof Spell) {
+                    if (controlled) {
+                        this.name = card.getName();
+                        this.displayName = card.getName();
+                    }
+                    this.power = "2";
+                    this.toughness = "2";
+                    this.rules.add("You may cast this card as a 2/2 face-down creature, with no text," +
+                        " no name, no subtypes, and no mana cost by paying {3} rather than paying its mana cost.");
+                    return;
+                }
+            } else {
+                this.fillEmpty(card, false);
+                this.hideInfo = true;
+                return;
+            }
         }
 
         SplitCard splitCard = null;
@@ -241,8 +274,7 @@ public class CardView extends SimpleCardView {
                     this.rules.add("<span color='green'><i>Chosen mode: " + spell.getSpellAbility().getEffects().getText(modes.get(modeId))+"</i></span>");
                 }
             }
-        }
-        
+        }       
     }
 
     public CardView(MageObject object) {
@@ -309,7 +341,7 @@ public class CardView extends SimpleCardView {
         if (!empty) {
             throw new IllegalArgumentException("Not supported.");
         }
-        fillEmpty();
+        fillEmpty(null, false);
     }
 
 
@@ -319,8 +351,9 @@ public class CardView extends SimpleCardView {
         this.displayName = name;
     }
 
-    private void fillEmpty() {
+    private void fillEmpty(Card card, boolean controlled) {
         this.name = "Face Down";
+        this.displayName = name;
         this.rules = new ArrayList<>();
         this.power = "";
         this.toughness = "";
@@ -331,9 +364,34 @@ public class CardView extends SimpleCardView {
         this.color = new ObjectColor();
         this.manaCost = new ArrayList<>();
         this.convertedManaCost = 0;
-        this.rarity = Rarity.COMMON;
-        this.expansionSetCode = "";
-        this.cardNumber = 0;
+
+        // the controller can see more information (e.g. enlarged image) than other players for face down cards (e.g. Morph played face down)
+        if (!controlled) {
+            this.rarity = Rarity.COMMON;
+            this.expansionSetCode = "";
+            this.cardNumber = 0;
+        } else {
+            this.rarity = card.getRarity();
+        }
+
+        if (card != null) {
+            if (card instanceof Permanent) {
+                this.mageObjectType = MageObjectType.PERMANENT;
+            } else {
+                if (card.isCopy()) {
+                    this.mageObjectType = MageObjectType.COPY_CARD;
+                } else {
+                    this.mageObjectType = MageObjectType.CARD;
+                }
+            }            
+            if (card instanceof PermanentToken) {
+                this.mageObjectType = MageObjectType.TOKEN;
+            }
+            if (card instanceof Spell) {
+                this.mageObjectType = MageObjectType.SPELL;
+            }
+        }
+
     }
 
     CardView(Token token) {
@@ -610,6 +668,10 @@ public class CardView extends SimpleCardView {
 
     public boolean isToRotate() {
         return rotate;
+    }
+
+    public boolean hideInfo() {
+        return hideInfo;
     }
     
 }

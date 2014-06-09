@@ -113,7 +113,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
             if (controller == null || object == null) {
                 return false;
             }
-            if (!controller.chooseUse(outcome, new StringBuilder("Use effect of ").append(object.getName()).append("?").toString(), game)) {
+            if (!controller.chooseUse(outcome, new StringBuilder("Use effect of ").append(object.getLogName()).append("?").toString(), game)) {
                 return false;
             }
         }

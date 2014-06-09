@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import mage.client.cards.Permanent;
 
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
@@ -221,7 +222,11 @@ public class GuiDisplayUtil {
         buffer.append(pt).append("</b></td>");
         buffer.append("<td align='right'>");
         if (!card.isControlledByOwner()) {
-            buffer.append("[only controlled] ");
+            if (card instanceof PermanentView) {
+                buffer.append("[").append(((PermanentView) card).getNameOwner()).append("] ");
+            } else {
+                buffer.append("[only controlled] ");
+            }
         }
         buffer.append(card.getMageObjectType().toString()).append("</td>");
         buffer.append("</tr></table>");

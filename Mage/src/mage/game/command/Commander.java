@@ -99,6 +99,11 @@ public class Commander implements CommandObject{
     }
 
     @Override
+    public String getLogName() {
+        return card.getName();
+    }
+
+    @Override
     public void setName(String name) {
         
     }

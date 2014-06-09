@@ -93,10 +93,10 @@ public class AddCountersTargetEffect extends OneShotEffect {
                         newCounter.add(amount.calculate(game, source));
                         permanent.addCounters(newCounter, game);
                         affectedTargets ++;
-                        game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
+                        game.informPlayers(new StringBuilder(sourceObject.getLogName()).append(": ")
                                 .append(controller.getName()).append(" puts ")
                                 .append(counter.getCount()).append(" ").append(counter.getName().toLowerCase())
-                                .append(" counter on ").append(permanent.getName()).toString());                        
+                                .append(" counter on ").append(permanent.getLogName()).toString());
                     }
                 } else {
                     Player player = game.getPlayer(uuid);
@@ -105,7 +105,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
                         newCounter.add(amount.calculate(game, source));
                         player.addCounters(newCounter, game);
                         affectedTargets ++;
-                        game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
+                        game.informPlayers(new StringBuilder(sourceObject.getLogName()).append(": ")
                                 .append(controller.getName()).append(" puts ")
                                 .append(counter.getCount()).append(" ").append(counter.getName().toLowerCase())
                                 .append(" counter on ").append(player.getName()).toString());                        

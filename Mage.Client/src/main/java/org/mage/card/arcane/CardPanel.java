@@ -703,7 +703,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         }
         setText(card);
 
-        boolean updateImage = !gameCard.getName().equals(card.getName()); // update after e.g. turning a night/day card
+        boolean updateImage = !gameCard.getName().equals(card.getName()) || gameCard.isFaceDown() != card.isFaceDown(); // update after e.g. turning a night/day card
         this.gameCard = card;
 
         String cardType = getType(card);
@@ -776,7 +776,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if (gameCard.isFaceDown()) {
+        if (gameCard.hideInfo()) {
             return;
         }
         if (!popupShowing) {
@@ -798,7 +798,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        if (gameCard.isFaceDown()) {
+        if (gameCard.hideInfo()) {
             return;
         }
         data.component = this;
@@ -807,7 +807,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mouseExited(MouseEvent e) {
-        if (gameCard.isFaceDown()) {
+        if (gameCard.hideInfo()) {
             return;
         }
         if (getMousePosition(true) != null) {
@@ -974,10 +974,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        if (gameCard.isFaceDown()) {
+        if (gameCard.hideInfo()) {
             return;
         }
         data.component = this;
         callback.mouseWheelMoved(e, data);
     }
+
 }

@@ -28,31 +28,44 @@
 
 package mage.cards;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.mana.ManaAbility;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.SpellAbilityType;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
+import static mage.constants.Zone.BATTLEFIELD;
+import static mage.constants.Zone.COMMAND;
+import static mage.constants.Zone.EXILED;
+import static mage.constants.Zone.GRAVEYARD;
+import static mage.constants.Zone.HAND;
+import static mage.constants.Zone.LIBRARY;
+import static mage.constants.Zone.OUTSIDE;
+import static mage.constants.Zone.PICK;
+import static mage.constants.Zone.STACK;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-
-import java.lang.reflect.Constructor;
-import java.util.*;
-import mage.MageObject;
-import mage.constants.SpellAbilityType;
-import mage.constants.TimingRule;
-import mage.game.command.Commander;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
     private static final long serialVersionUID = 1L;
@@ -77,6 +90,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean usesVariousArt = false;
     protected Counters counters;
     protected boolean splitCard;
+    protected boolean morphCard;
 
     public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         this(ownerId, cardNumber, name, rarity, cardTypes, costs, SpellAbilityType.BASE);
@@ -103,6 +117,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
         this.usesVariousArt = Character.isDigit(this.getClass().getName().charAt(this.getClass().getName().length()-1));
         this.counters = new Counters();
+        this.morphCard = false;
     }
 
     protected CardImpl(UUID ownerId, String name) {
@@ -144,6 +159,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         splitCard = card.splitCard;
         usesVariousArt = card.usesVariousArt;
         counters = card.counters.copy();
+        morphCard = card.isMorphCard();
     }
 
     @Override
@@ -532,12 +548,36 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void setFaceDown(boolean value) {
-        this.faceDown = value;
+        faceDown = value;
     }
 
     @Override
     public boolean isFaceDown() {
-        return this.faceDown;
+        return faceDown;
+    }
+
+    @Override
+    public boolean turnFaceUp(Game game, UUID playerId) {
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.TURNFACEUP, getId(), playerId);
+        if (!game.replaceEvent(event)) {
+            setFaceDown(false);
+            game.getCard(objectId).setFaceDown(false); // Another instance?
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEUP, getId(), playerId));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean turnFaceDown(Game game, UUID playerId) {
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.TURNFACEDOWN, getId(), playerId);
+        if (!game.replaceEvent(event)) {
+            setFaceDown(true);
+            game.getCard(objectId).setFaceDown(true); // Another instance?
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEDOWN, getId(), playerId));
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -673,4 +713,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public void removeCounters(Counter counter, Game game) {
         removeCounters(counter.getName(), counter.getCount(), game);
     }
+
+    @Override
+    public void setMorphCard(boolean morphCard) {
+        this.morphCard = morphCard;
+    }
+
+    @Override
+    public boolean isMorphCard() {
+        return morphCard;
+    }
+
+
 }

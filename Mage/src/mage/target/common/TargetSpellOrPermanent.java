@@ -236,7 +236,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
         for (UUID targetId: getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                sb.append(permanent.getName()).append(" ");
+                sb.append(permanent.getLogName()).append(" ");
             }
             else {
                 Spell spell = game.getStack().getSpell(targetId);

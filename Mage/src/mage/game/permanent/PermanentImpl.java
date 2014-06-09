@@ -85,7 +85,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean controlledFromStartOfControllerTurn;
     protected int turnsOnBattlefield;
     protected boolean phasedIn = true;
-    protected boolean faceUp = true;
     protected boolean attacking;
     protected int blocking;
     // number of creatures the permanent can block
@@ -127,7 +126,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.controlledFromStartOfControllerTurn = permanent.controlledFromStartOfControllerTurn;
         this.turnsOnBattlefield = permanent.turnsOnBattlefield;
         this.phasedIn = permanent.phasedIn;
-        this.faceUp = permanent.faceUp;
         this.attacking = permanent.attacking;
         this.blocking = permanent.blocking;
         this.maxBlocks = permanent.maxBlocks;
@@ -213,7 +211,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public void addAbility(Ability ability, UUID sourceId, Game game) {
         if (!abilities.containsKey(ability.getId())) {
             Ability copyAbility = ability.copy();
-            copyAbility.newId(); // needed so that sourc can get an ability multiple times (e.g. Raging Ravine)
+            copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
             copyAbility.setControllerId(controllerId);
             copyAbility.setSourceId(objectId);
             game.getState().addAbility(copyAbility, sourceId, this);
@@ -408,23 +406,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean isFaceUp() {
-        return faceUp;
-    }
-
-    @Override
-    public boolean turnFaceUp(Game game) {
-        //TODO: implement this
-        return false;
-    }
-
-    @Override
-    public boolean turnFaceDown(Game game) {
-        //TODO: implement this
         return false;
     }
 
@@ -1064,4 +1045,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public void clearPairedCard() {
         this.pairedCard = null;
     }
+
+    @Override
+    public String getLogName() {
+        if (name.isEmpty()) {
+            if (isFaceDown()) {
+                return "face down creature";
+            } else {
+                return "a creature without name";
+            }
+        }
+        return name;
+    }
+
 }

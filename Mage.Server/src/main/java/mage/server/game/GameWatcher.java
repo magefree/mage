@@ -120,7 +120,7 @@ public class GameWatcher {
     }
 
     public GameView getGameView() {
-        return new GameView(game.getState(), game, this.isPlayer);        
+        return new GameView(game.getState(), game, null);
     }
     
     public GameEndView getGameEndView(UUID playerId, Match match) {

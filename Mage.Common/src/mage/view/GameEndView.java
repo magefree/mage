@@ -65,7 +65,7 @@ public class GameEndView implements Serializable {
         int winner = 0;
         Player you = null;
         for (Player player: state.getPlayers().values()) {
-            PlayerView playerView  = new PlayerView(player, state, game);
+            PlayerView playerView  = new PlayerView(player, state, game, playerId);
             if (playerView.getPlayerId().equals(playerId)) {
                 clientPlayer = playerView;
                 you = player;

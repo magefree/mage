@@ -83,7 +83,7 @@ public class ImageCache {
                             info.setToken(true);
                             path = CardImageUtils.generateTokenImagePath(info);
                             if (path == null) {
-                                path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.tokenFrameFilename;
+                                path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename;
                             }
                         } else {
                             path = CardImageUtils.generateImagePath(info);
@@ -180,21 +180,21 @@ public class ImageCache {
         return getImage(key);
     }
 
-    /**
-     * Returns the Image corresponding to the Path
-     */
-    private static BufferedImage getImageByPath(String path) {
-        if (path == null) {
-            return null;
-        }
-        TFile file = new TFile(path);
-        if (!file.exists()) {
-            log.warn("File does not exist: " + file.toString());
-            return null;
-        }
-        return getWizardsCard(loadImage(file));
-
-    }
+//    /**
+//     * Returns the Image corresponding to the Path
+//     */
+//    private static BufferedImage getImageByPath(String path) {
+//        if (path == null) {
+//            return null;
+//        }
+//        TFile file = new TFile(path);
+//        if (!file.exists()) {
+//            log.warn("File does not exist: " + file.toString());
+//            return null;
+//        }
+//        return getWizardsCard(loadImage(file));
+//
+//    }
 
     /**
      * Returns the Image corresponding to the key

@@ -88,7 +88,7 @@ public class SoulbondWatcher extends Watcher {
                                     if (chosen != null) {
                                         chosen.setPairedCard(permanent.getId());
                                         permanent.setPairedCard(chosen.getId());
-                                        game.informPlayers(new StringBuilder(controller.getName()).append(" souldbonds ").append(permanent.getName()).append(" with ").append(chosen.getName()).toString());
+                                        game.informPlayers(new StringBuilder(controller.getName()).append(" souldbonds ").append(permanent.getLogName()).append(" with ").append(chosen.getName()).toString());
                                     }
                                 }
                             }
@@ -109,10 +109,10 @@ public class SoulbondWatcher extends Watcher {
                                 Cards cards = new CardsImpl(Zone.PICK);
                                 cards.add(chosen);
                                 controller.lookAtCards("Soulbond", cards, game);
-                                if (controller.chooseUse(Outcome.Benefit, "Use Soulbond for recent " + permanent.getName() + "?", game)) {
+                                if (controller.chooseUse(Outcome.Benefit, "Use Soulbond for recent " + permanent.getLogName() + "?", game)) {
                                     chosen.setPairedCard(permanent.getId());
                                     permanent.setPairedCard(chosen.getId());
-                                    game.informPlayers(new StringBuilder(controller.getName()).append(" souldbonds ").append(permanent.getName()).append(" with ").append(chosen.getName()).toString());
+                                    game.informPlayers(new StringBuilder(controller.getName()).append(" souldbonds ").append(permanent.getLogName()).append(" with ").append(chosen.getName()).toString());
                                     break;
                                 }
                             }

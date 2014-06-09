@@ -29,16 +29,14 @@
 package mage.game.permanent;
 
 import java.util.ArrayList;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.command.Commander;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-
-import java.util.UUID;
-import mage.game.command.Commander;
-
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -116,6 +114,8 @@ public class PermanentCard extends PermanentImpl {
         }
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
+        this.morphCard = card.isMorphCard();
+        this.faceDown = card.isFaceDown();
     }
 
     public Card getCard() {
@@ -205,4 +205,22 @@ public class PermanentCard extends PermanentImpl {
         return this.maxLevelCounters;
     }
 
+    @Override
+    public boolean turnFaceUp(Game game, UUID playerId) {
+        if (super.turnFaceUp(game, playerId)) {
+            card.setFaceDown(false);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean turnFaceDown(Game game, UUID playerId) {
+        if (super.turnFaceDown(game, playerId)) {
+            card.setFaceDown(true);
+            return true;
+        }
+        return false;
+    }
+    
 }

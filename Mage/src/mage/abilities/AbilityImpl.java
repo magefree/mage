@@ -821,14 +821,14 @@ public abstract class AbilityImpl implements Ability {
             if (object instanceof StackAbility) {
                 Card card = game.getCard(((StackAbility) object).getSourceId());
                 if (card != null) {
-                    sb.append(card.getName());
+                    sb.append(card.getLogName());
                 } else {
                     sb.append(object.getName());
                 }
             } else {
                 if (object instanceof Spell) {
                     Spell spell = (Spell) object;
-                    String castText = spell.getSpellAbility().toString();
+                    String castText = spell.getSpellCastText(game);
                     sb.append((castText.startsWith("Cast ") ? castText.substring(5):castText));
                     if (spell.getFromZone() == Zone.GRAVEYARD) {
                         sb.append(" from graveyard");

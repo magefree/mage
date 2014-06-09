@@ -94,6 +94,10 @@ public abstract class MageObjectImpl implements MageObject {
     public String getName() {
         return name;
     }
+    @Override
+    public String getLogName() {
+        return name;
+    }
 
     @Override
     public String getImageName() {

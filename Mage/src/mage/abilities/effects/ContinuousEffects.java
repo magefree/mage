@@ -911,7 +911,7 @@ public class ContinuousEffects implements Serializable {
             for (Ability ability :(HashSet<Ability>) entry.getValue()) {
                 MageObject object = game.getObject(ability.getSourceId());
                 if (object != null) {
-                    texts.add(ability.getRule(object.getName()));
+                    texts.add(ability.getRule(object.getLogName()));
                 } else {
                     texts.add(((ReplacementEffect)entry.getKey()).getText(null));
                 }

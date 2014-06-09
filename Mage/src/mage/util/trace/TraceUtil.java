@@ -126,7 +126,7 @@ public class TraceUtil {
         String uuid = "[" + UUID.randomUUID() + "] ";
         log.error(uuid+"Tracing game state...");
         if (blocker != null) {
-            log.error(uuid+blocker.getName() + " could block " + attacker.getName());
+            log.error(uuid+blocker.getLogName() + " could block " + attacker.getLogName());
         }
 
         log.error(uuid);

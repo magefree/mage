@@ -58,7 +58,7 @@ public class ChooseColorEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             ChoiceColor colorChoice = new ChoiceColor();
             if (player.choose(outcome, colorChoice, game)) {
-                game.informPlayers(new StringBuilder(permanent.getName()).append(": ").append(player.getName()).append(" has chosen ").append(colorChoice.getChoice()).toString());
+                game.informPlayers(new StringBuilder(permanent.getLogName()).append(": ").append(player.getName()).append(" has chosen ").append(colorChoice.getChoice()).toString());
                 game.getState().setValue(source.getSourceId() + "_color", colorChoice.getColor());
                 permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>");
             }

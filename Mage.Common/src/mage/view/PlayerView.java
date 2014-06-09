@@ -67,7 +67,7 @@ public class PlayerView implements Serializable {
     private final int statesSavedSize;
     private final int priorityTimeLeft;
 
-    public PlayerView(Player player, GameState state, Game game) {
+    public PlayerView(Player player, GameState state, Game game, UUID createdForPlayerId) {
         this.playerId = player.getId();
         this.name = player.getName();
         this.life = player.getLife();
@@ -83,7 +83,7 @@ public class PlayerView implements Serializable {
         }
         for (Permanent permanent: state.getBattlefield().getAllPermanents()) {
             if (showInBattlefield(permanent, state)) {
-                PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()));
+                PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()), createdForPlayerId, game);
                 battlefield.put(view.getId(), view);
             }
         }

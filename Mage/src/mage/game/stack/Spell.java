@@ -39,6 +39,7 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -46,6 +47,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.keyword.BestowAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
@@ -56,6 +58,7 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -152,6 +155,17 @@ public class Spell implements StackObject, Card {
             sb.append(" casts ");
         }
         return sb.append(ability.getGameLogMessage(game)).toString();
+    }
+
+    public String getSpellCastText(Game game) {
+        for (Ability spellAbility : (Abilities<Ability>) getAbilities()) {
+            if (spellAbility instanceof MorphAbility
+                    && ((AlternativeSourceCosts) spellAbility).isActivated(getSpellAbility(), game)) {
+                return "a card face down";
+            }
+        }
+        return getSpellAbility().toString();
+
     }
 
     @Override
@@ -503,6 +517,11 @@ public class Spell implements StackObject, Card {
     public String getName() {
         return card.getName();
     }
+    
+    @Override
+    public String getLogName() {
+        return card.getName();
+    }
 
     @Override
     public String getImageName() {
@@ -649,12 +668,22 @@ public class Spell implements StackObject, Card {
 
     @Override
     public void setFaceDown(boolean value) {
-        throw new RuntimeException("Not implemented.");
+        card.setFaceDown(value);
+    }
+
+    @Override
+    public boolean turnFaceUp(Game game, UUID playerId) {
+        return card.turnFaceUp(game, playerId);
+    }
+
+    @Override
+    public boolean turnFaceDown(Game game, UUID playerId) {
+        return card.turnFaceDown(game, playerId);
     }
 
     @Override
     public boolean isFaceDown() {
-        return false;
+        return card.isFaceDown();
     }
 
     @Override
@@ -891,6 +920,16 @@ public class Spell implements StackObject, Card {
 
     public Card getCard() {
         return card;
+    }
+
+    @Override
+    public void setMorphCard(boolean morphCard) {
+        throw new UnsupportedOperationException("Not supported");
+    }
+
+    @Override
+    public boolean isMorphCard() {
+        return card.isMorphCard();
     }
 
 }

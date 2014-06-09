@@ -60,14 +60,14 @@ public class GameView implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final int priorityTime;
-    private final List<PlayerView> players = new ArrayList<PlayerView>();
+    private final List<PlayerView> players = new ArrayList<>();
     private SimpleCardsView hand;
     private Map<String, SimpleCardsView> opponentHands;
     private final CardsView stack = new CardsView();
-    private final List<ExileView> exiles = new ArrayList<ExileView>();
-    private final List<RevealedView> revealed = new ArrayList<RevealedView>();
-    private List<LookedAtView> lookedAt = new ArrayList<LookedAtView>();
-    private final List<CombatGroupView> combat = new ArrayList<CombatGroupView>();
+    private final List<ExileView> exiles = new ArrayList<>();
+    private final List<RevealedView> revealed = new ArrayList<>();
+    private List<LookedAtView> lookedAt = new ArrayList<>();
+    private final List<CombatGroupView> combat = new ArrayList<>();
     private final TurnPhase phase;
     private final PhaseStep step;
     private final UUID activePlayerId;
@@ -78,11 +78,11 @@ public class GameView implements Serializable {
     private final boolean isPlayer;
 
 
-    public GameView(GameState state, Game game, boolean isPlayer) {
-        this.isPlayer = isPlayer;
+    public GameView(GameState state, Game game, UUID createdForPlayerId) {
+        this.isPlayer = createdForPlayerId != null;
         this.priorityTime = game.getPriorityTime();
         for (Player player: state.getPlayers().values()) {
-            players.add(new PlayerView(player, state, game));
+            players.add(new PlayerView(player, state, game, createdForPlayerId));
         }
         for (StackObject stackObject: state.getStack()) {
             if (stackObject instanceof StackAbility) {
@@ -127,7 +127,7 @@ public class GameView implements Serializable {
             }
             else {
                 // Spell
-                stack.put(stackObject.getId(), new CardView((Spell)stackObject));
+                stack.put(stackObject.getId(), new CardView((Spell)stackObject, null, stackObject.getControllerId().equals(createdForPlayerId)));
                 checkPaid(stackObject.getId(), (Spell)stackObject);
             }
             //stackOrder.add(stackObject.getId());

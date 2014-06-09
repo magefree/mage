@@ -94,12 +94,12 @@ public class CipherEffect extends OneShotEffect {
                 Card sourceCard = game.getCard(source.getSourceId());
                 Permanent targetCreature = game.getPermanent(target.getFirstTarget());
                 if (targetCreature != null && sourceCard != null) {
-                    String ruleText = new StringBuilder("you may cast a copy of ").append(sourceCard.getName()).append(" without paying its mana cost").toString();
+                    String ruleText = new StringBuilder("you may cast a copy of ").append(sourceCard.getLogName()).append(" without paying its mana cost").toString();
                     Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new CipherStoreEffect(source.getSourceId(), ruleText), true);
                     ContinuousEffect effect = new GainAbilityTargetEffect(ability, Duration.Custom);
                     effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
                     game.addEffect(effect, source);
-                    game.informPlayers(new StringBuilder(sourceCard.getName()).append(": Spell ciphered to ").append(targetCreature.getName()).toString());
+                    game.informPlayers(new StringBuilder(sourceCard.getLogName()).append(": Spell ciphered to ").append(targetCreature.getLogName()).toString());
                     return sourceCard.moveToExile(null, "", source.getId(), game);
                 } else {
                     return false;

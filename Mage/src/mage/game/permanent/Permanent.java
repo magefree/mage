@@ -29,15 +29,14 @@
 package mage.game.permanent;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
-
-import java.util.List;
-import java.util.UUID;
-import mage.constants.Zone;
 
 public interface Permanent extends Card, Controllable {
 
@@ -67,10 +66,6 @@ public interface Permanent extends Card, Controllable {
     boolean isPhasedIn();
     boolean phaseIn(Game game);
     boolean phaseOut(Game game);
-
-    boolean isFaceUp();
-    boolean turnFaceUp(Game game);
-    boolean turnFaceDown(Game game);
 
     boolean isMonstrous();
     void setMonstrous(boolean value);
@@ -208,12 +203,14 @@ public interface Permanent extends Card, Controllable {
     /**
      * Returns connected cards.
      * Very similar to Imprint except that it is for internal use only.
+     * @param key
      * @return
      */
     List<UUID> getConnectedCards(String key);
 
     /**
      * Clear all connected cards.
+     * @param key
      */
     void clearConnectedCards(String key);
 

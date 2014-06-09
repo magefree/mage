@@ -9,11 +9,12 @@ import org.mage.plugins.card.properties.SettingsManager;
 
 public class CardImageUtils {
 
-    private static HashMap<CardDownloadData, String> pathCache = new HashMap<CardDownloadData, String>();
+    private static final HashMap<CardDownloadData, String> pathCache = new HashMap<>();
 
 
     /**
      *
+     * @param card
      * @return String if image exists, else null
      */
     public static String generateTokenImagePath(CardDownloadData card) {

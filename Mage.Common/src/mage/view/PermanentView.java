@@ -31,9 +31,16 @@ package mage.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.TurnFaceUpAbility;
+import mage.abilities.common.TurnedFaceUpTriggeredAbility;
 import mage.cards.Card;
+import mage.constants.Rarity;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
+import mage.players.Player;
 
 /**
  *
@@ -45,20 +52,21 @@ public class PermanentView extends CardView {
     private boolean tapped;
     private final boolean flipped;
     private final boolean phasedIn;
-    private final boolean faceUp;
     private final boolean summoningSickness;
     private final int damage;
     private List<UUID> attachments;
     private final CardView original;
     private final boolean copy;
+    private final String nameOwner; // only filled if != controller
+    private final boolean controlled;
 
-    public PermanentView(Permanent permanent, Card card) {
-        super(permanent);
+    public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
+        super(permanent, null, permanent.getControllerId().equals(createdForPlayerId));
+        this.controlled = permanent.getControllerId().equals(createdForPlayerId);
         this.rules = permanent.getRules();
         this.tapped = permanent.isTapped();
         this.flipped = permanent.isFlipped();
         this.phasedIn = permanent.isPhasedIn();
-        this.faceUp = permanent.isFaceUp();
         this.summoningSickness = permanent.hasSummoningSickness();
         this.damage = permanent.getDamage();
         if (permanent.getAttachments().size() > 0) {
@@ -90,6 +98,41 @@ public class PermanentView extends CardView {
                 this.originalName = this.getName();
             }
         }
+        if (!permanent.getOwnerId().equals(permanent.getControllerId())) {
+            Player owner = game.getPlayer(permanent.getOwnerId());
+            if (owner != null) {
+                this.nameOwner = owner.getName();
+            } else {
+                this.nameOwner = "";
+            }
+        } else {
+           this.nameOwner = ""; 
+        }
+        
+        if (permanent.isFaceDown() && permanent.isMorphCard()) {
+            // add morph rule text
+            if (card != null) {
+                if (controlled) {
+                    for (Ability permanentAbility : permanent.getAbilities()) {
+                        if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {
+                            this.rules.add(permanentAbility.getRule(true));
+                        }
+                        if (permanentAbility instanceof TurnedFaceUpTriggeredAbility) {
+                            this.rules.add(permanentAbility.getRule());
+                        }
+                    }
+                    this.name = card.getName();
+                    this.expansionSetCode = card.getExpansionSetCode();
+                    this.cardNumber = card.getCardNumber();
+                } else {
+                    this.rules.add("If the controller has priority, he or she may turn this permanent face up." +
+                        " This is a special action; it doesnt use the stack. To do this he or she pays the morph costs," +
+                        " then turns this permanent face up.");
+                    this.rarity = Rarity.COMMON;
+                }
+
+            }
+        }
         
     }
 
@@ -113,10 +156,6 @@ public class PermanentView extends CardView {
         return phasedIn;
     }
 
-    public boolean isFaceUp() {
-        return faceUp;
-    }
-
     public boolean hasSummoningSickness(){
         return summoningSickness;
     }
@@ -132,4 +171,13 @@ public class PermanentView extends CardView {
     public void overrideTapped(boolean tapped) {
         this.tapped = tapped;
     }
+
+    public String getNameOwner() {
+        return nameOwner;
+    }
+
+    public boolean isControlled() {
+        return controlled;
+    }
+    
 }

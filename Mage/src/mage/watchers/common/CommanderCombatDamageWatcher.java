@@ -84,7 +84,7 @@ public class CommanderCombatDamageWatcher extends Watcher {
                     Player player = game.getPlayer(playerUUID);
                     MageObject commander = game.getObject(sourceId);
                     if (player != null && commander != null){
-                        game.informPlayers(commander.getName() + " did " + damage + " combat damage to " + player.getName() + " during the game.");
+                        game.informPlayers(commander.getLogName() + " did " + damage + " combat damage to " + player.getName() + " during the game.");
                         this.addCardInfoToCommander(game);
                     }
                 }
