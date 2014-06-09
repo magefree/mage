@@ -54,7 +54,7 @@ public class CompulsiveResearch extends CardImpl {
         this.color.setBlue(true);
 
         // Target player draws three cards. Then that player discards two cards unless he or she discards a land card.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));
         this.getSpellAbility().addEffect(new CompulsiveResearchDiscardEffect());
     }

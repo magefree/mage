@@ -72,7 +72,7 @@ public class GoblinRazerunners extends CardImpl {
 
         // At the beginning of your end step, you may have Goblin Razerunners deal damage equal to the number of +1/+1 counters on it to target player.
         ability = new BeginningOfYourEndStepTriggeredAbility(new DamageTargetEffect(new CountersCount(CounterType.P1P1)), true);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

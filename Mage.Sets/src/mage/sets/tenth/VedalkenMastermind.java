@@ -58,7 +58,7 @@ public class VedalkenMastermind extends CardImpl {
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledPermanent());
+        ability.addTarget(new TargetControlledPermanent(true));
         this.addAbility(ability);
     }
 

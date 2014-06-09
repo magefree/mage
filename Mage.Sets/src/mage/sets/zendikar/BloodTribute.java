@@ -74,7 +74,7 @@ public class BloodTribute extends CardImpl {
         this.addAbility(new KickerAbility(cost));
 
         // Target opponent loses half his or her life, rounded up.
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
         this.getSpellAbility().addEffect(new BloodTributeLoseLifeEffect());
          
         // If Blood Tribute was kicked, you gain life equal to the life lost this way.

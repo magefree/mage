@@ -58,7 +58,7 @@ public class RecklessScholar extends CardImpl {
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new TapSourceCost());
         ability.addEffect(new DiscardTargetEffect(1));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

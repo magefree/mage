@@ -50,7 +50,7 @@ public class VaultSkyward extends CardImpl {
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public VaultSkyward (final VaultSkyward card) {

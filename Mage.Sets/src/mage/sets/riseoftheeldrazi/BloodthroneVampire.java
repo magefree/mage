@@ -53,7 +53,7 @@ public class BloodthroneVampire extends CardImpl {
         this.subtype.add("Vampire");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent(true))));
     }
 
     public BloodthroneVampire(final BloodthroneVampire card) {

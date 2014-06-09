@@ -47,7 +47,7 @@ public class ThreeTragedies extends CardImpl {
         this.color.setBlack(true);
         // Target player discards three cards.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public ThreeTragedies(final ThreeTragedies card) {

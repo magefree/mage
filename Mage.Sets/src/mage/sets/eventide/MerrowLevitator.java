@@ -69,7 +69,7 @@ public class MerrowLevitator extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filterBlueSpell, true));
     }

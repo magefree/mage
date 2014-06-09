@@ -52,7 +52,7 @@ public class BalanceOfPower extends CardImpl {
 
         // If target opponent has more cards in hand than you, draw cards equal to the difference.
         this.getSpellAbility().addEffect(new BalanceOfPowerEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
     }
 
     public BalanceOfPower(final BalanceOfPower card) {

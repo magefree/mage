@@ -57,7 +57,7 @@ public class HungerOfTheHowlpack extends CardImpl {
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                         MorbidCondition.getInstance(),
                         "Put a +1/+1 counter on target creature. Morbid - Put three +1/+1 counters on that creature instead if a creature died this turn"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public HungerOfTheHowlpack(final HungerOfTheHowlpack card) {

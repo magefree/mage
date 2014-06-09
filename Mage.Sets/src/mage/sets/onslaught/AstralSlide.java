@@ -78,7 +78,7 @@ class AstralSlideTriggeredAbility extends TriggeredAbilityImpl {
 
     public AstralSlideTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AstralSlideEffect(), true);
-        this.addTarget(new TargetCreaturePermanent());
+        this.addTarget(new TargetCreaturePermanent(true));
     }
 
     public AstralSlideTriggeredAbility(final AstralSlideTriggeredAbility ability) {

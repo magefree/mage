@@ -55,7 +55,7 @@ public class StolenGoods extends CardImpl {
 
         // Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
         this.getSpellAbility().addEffect(new StolenGoodsEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
     }
 
     public StolenGoods(final StolenGoods card) {

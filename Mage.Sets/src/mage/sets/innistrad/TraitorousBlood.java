@@ -52,7 +52,7 @@ public class TraitorousBlood extends CardImpl {
         this.color.setRed(true);
 
         // Gain control of target creature until end of turn. Untap it. It gains trample and haste until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));

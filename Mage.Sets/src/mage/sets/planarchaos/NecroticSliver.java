@@ -70,7 +70,7 @@ public class NecroticSliver extends CardImpl {
         // All Slivers have "{3}, Sacrifice this permanent: Destroy target permanent."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
         ability.addCost(new GenericManaCost(3));
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
                         Duration.WhileOnBattlefield, filter,

@@ -71,7 +71,7 @@ public class EsperBattlemage extends CardImpl {
                 new BoostTargetEffect(-1, -1, Duration.EndOfTurn),
                 new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

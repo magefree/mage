@@ -76,7 +76,7 @@ public class VenserTheSojourner extends CardImpl {
 
         // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
         LoyaltyAbility ability1 = new LoyaltyAbility(new VenserTheSojournerEffect(), 2);
-        Target target = new TargetControlledPermanent();
+        Target target = new TargetControlledPermanent(true);
         target.setRequired(true);
         ability1.addTarget(target);
         this.addAbility(ability1);
@@ -146,7 +146,7 @@ class VenserTheSojournerEmblem extends Emblem {
     public VenserTheSojournerEmblem() {
         this.setName("EMBLEM: Venser, the Sojourner");
         Ability ability = new VenserTheSojournerSpellCastTriggeredAbility(new ExileTargetEffect(), false);
-        Target target = new TargetPermanent();
+        Target target = new TargetPermanent(true);
         target.setRequired(true);
         ability.addTarget(target);
         this.getAbilities().add(ability);

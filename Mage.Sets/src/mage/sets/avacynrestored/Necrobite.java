@@ -54,7 +54,7 @@ public class Necrobite extends CardImpl {
         // Target creature gains deathtouch until end of turn. Regenerate it.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public Necrobite(final Necrobite card) {

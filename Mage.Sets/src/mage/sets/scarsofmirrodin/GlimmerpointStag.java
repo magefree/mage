@@ -62,7 +62,7 @@ public class GlimmerpointStag extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(VigilanceAbility.getInstance());
-        Target etbTarget = new TargetPermanent();
+        Target etbTarget = new TargetPermanent(true);
         etbTarget.setRequired(true);
         Ability etbAbility = new EntersBattlefieldTriggeredAbility(new GlimmerpointStagEffect());
         etbAbility.addTarget(etbTarget);

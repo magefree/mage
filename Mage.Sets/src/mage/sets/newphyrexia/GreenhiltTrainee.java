@@ -60,7 +60,7 @@ public class GreenhiltTrainee extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(4, 4, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         ability.addCost(new GreenhiltTraineeCost());
         this.addAbility(ability);
     }

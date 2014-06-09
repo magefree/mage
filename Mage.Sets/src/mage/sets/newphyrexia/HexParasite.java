@@ -61,7 +61,7 @@ public class HexParasite extends CardImpl {
 
         // {X}{BP}: Remove up to X counters from target permanent. For each counter removed this way, Hex Parasite gets +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HexParasiteEffect(), new ManaCostsImpl("{X}{BP}"));
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(ability);
     }
 

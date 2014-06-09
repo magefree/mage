@@ -86,7 +86,7 @@ public class LilianaOfTheDarkRealms extends CardImpl {
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), 1));
         // -3: Target creature gets +X/+X or -X/-X until end of turn, where X is the number of Swamps you control.
         LoyaltyAbility ability = new LoyaltyAbility(new LilianaOfTheDarkRealmsEffect(), -3);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
         // -6: You get an emblem with "Swamps you control have '{tap}: Add {B}{B}{B}{B} to your mana pool.'"
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LilianaOfTheDarkRealmsEmblem()), -6));

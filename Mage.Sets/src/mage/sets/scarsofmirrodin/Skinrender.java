@@ -58,7 +58,7 @@ public class Skinrender extends CardImpl {
 
         Effect putCountersEffect = new AddCountersTargetEffect(CounterType.M1M1.createInstance(3), Outcome.UnboostCreature);
         Ability ability = new EntersBattlefieldTriggeredAbility(putCountersEffect, false);
-        Target target = new TargetCreaturePermanent();
+        Target target = new TargetCreaturePermanent(true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

@@ -106,8 +106,8 @@ class ShidakoBroodmistress extends Token {
                 Zone.BATTLEFIELD,
                 new BoostTargetEffect(3,3, Duration.EndOfTurn),
                 new ManaCostsImpl("{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 }

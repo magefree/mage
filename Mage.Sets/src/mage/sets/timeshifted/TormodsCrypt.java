@@ -51,7 +51,7 @@ public class TormodsCrypt extends CardImpl {
         // {tap}, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllTargetPlayerEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

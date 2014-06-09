@@ -57,7 +57,7 @@ public class KeigaTheTideStar extends CardImpl {
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new DiesTriggeredAbility(new GainControlTargetEffect(Duration.Custom));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

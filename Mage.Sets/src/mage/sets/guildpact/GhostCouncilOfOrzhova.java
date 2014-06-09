@@ -67,12 +67,12 @@ public class GhostCouncilOfOrzhova extends CardImpl {
 
         // When Ghost Council of Orzhova enters the battlefield, target opponent loses 1 life and you gain 1 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GhostCouncilOfOrzhovaEffect());
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
         
         // {1}, Sacrifice a creature: Exile Ghost Council of Orzhova. Return it to the battlefield under its owner's control at the beginning of the next end step.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GhostCouncilOfOrzhovaRemovingEffect(), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         this.addAbility(ability);
     }
 

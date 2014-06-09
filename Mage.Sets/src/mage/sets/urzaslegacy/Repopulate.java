@@ -58,7 +58,7 @@ public class Repopulate extends CardImpl {
         this.color.setGreen(true);
 
         // Shuffle all creature cards from target player's graveyard into that player's library.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new RepopulateEffect());
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

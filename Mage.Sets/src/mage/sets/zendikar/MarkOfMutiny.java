@@ -52,7 +52,7 @@ public class MarkOfMutiny extends CardImpl {
         this.expansionSetCode = "ZEN";
 
         this.color.setRed(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));

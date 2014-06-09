@@ -50,7 +50,7 @@ public class TrostanisJudgment extends CardImpl {
         // Exile target creature, then populate.
         // (Put a token onto the battlefield that's a copy of a creature token you control.)
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new PopulateEffect("then"));
     }
 

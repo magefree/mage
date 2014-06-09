@@ -59,7 +59,7 @@ public class ContagionEngine extends CardImpl {
         super(ownerId, 145, "Contagion Engine", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
         this.expansionSetCode = "SOM";
         Ability ability = new EntersBattlefieldTriggeredAbility(new ContagionEngineEffect());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());

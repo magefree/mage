@@ -58,7 +58,7 @@ public class BlessingOfLeeches extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Regenerate));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

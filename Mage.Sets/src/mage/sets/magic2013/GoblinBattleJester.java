@@ -64,7 +64,7 @@ public class GoblinBattleJester extends CardImpl {
 
         // Whenever you cast a red spell, target creature can't block this turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), filter, false);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

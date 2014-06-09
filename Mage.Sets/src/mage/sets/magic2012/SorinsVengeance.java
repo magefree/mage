@@ -48,7 +48,7 @@ public class SorinsVengeance extends CardImpl {
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(10));
         this.getSpellAbility().addEffect(new GainLifeEffect(10));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public SorinsVengeance (final SorinsVengeance card) {

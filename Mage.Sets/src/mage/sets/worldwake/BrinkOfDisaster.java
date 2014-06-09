@@ -69,7 +69,7 @@ public class BrinkOfDisaster extends CardImpl {
         this.color.setBlack(true);
 
         // Enchant creature or land
-        TargetPermanent auraTarget = new TargetPermanent();
+        TargetPermanent auraTarget = new TargetPermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
 

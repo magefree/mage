@@ -59,7 +59,7 @@ public class TragicSlip extends CardImpl {
                 new LockedInCondition(MorbidCondition.getInstance()),
                 "Target creature gets -1/-1 until end of turn. Morbid - That creature gets -13/-13 until end of turn instead if a creature died this turn",
                 true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public TragicSlip(final TragicSlip card) {

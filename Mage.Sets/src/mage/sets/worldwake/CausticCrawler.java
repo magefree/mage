@@ -53,7 +53,7 @@ public class CausticCrawler extends CardImpl {
         this.toughness = new MageInt(3);
 
         LandfallAbility ability = new LandfallAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

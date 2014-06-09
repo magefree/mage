@@ -54,7 +54,7 @@ public class RecklessCharge extends CardImpl {
         this.color.setRed(true);
 
         // Target creature gets +3/+0 and gains haste until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         

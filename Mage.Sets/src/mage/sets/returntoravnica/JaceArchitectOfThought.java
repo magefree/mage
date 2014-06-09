@@ -252,7 +252,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
         if (!opponents.isEmpty()) {
             Player opponent = null;
             if (opponents.size() > 1) {
-                TargetOpponent targetOpponent = new TargetOpponent();
+                TargetOpponent targetOpponent = new TargetOpponent(true);
                 if (player.chooseTarget(Outcome.Neutral, targetOpponent, source, game)) {
                     opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 }

@@ -51,7 +51,7 @@ public class TraitorousInstinct extends CardImpl {
 
         this.color.setRed(true);
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));

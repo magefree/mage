@@ -48,7 +48,7 @@ public class HeatRay extends CardImpl {
         this.color.setRed(true);
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public HeatRay(final HeatRay card) {

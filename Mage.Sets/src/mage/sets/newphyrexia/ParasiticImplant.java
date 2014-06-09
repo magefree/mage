@@ -59,7 +59,7 @@ public class ParasiticImplant extends CardImpl {
 
         this.color.setBlack(true);
 
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Sacrifice));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

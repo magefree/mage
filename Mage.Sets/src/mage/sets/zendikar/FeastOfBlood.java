@@ -55,7 +55,7 @@ public class FeastOfBlood extends CardImpl {
         // Cast Feast of Blood only if you control two or more Vampires.
         this.getSpellAbility().addCost(new FeastOfBloodCost());
         // Destroy target creature. You gain 4 life.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }

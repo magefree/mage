@@ -68,7 +68,7 @@ public class HagraDiabolist extends CardImpl {
         this.toughness = new MageInt(2);
 
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(filter)), true);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

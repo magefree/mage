@@ -55,7 +55,7 @@ public class AbyssalHorror extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(2));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

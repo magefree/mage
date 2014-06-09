@@ -64,7 +64,7 @@ public class Helvault extends CardImpl {
         // {1}, {tap}: Exile target creature you control.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect("Helvault exile"), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent(true));
         this.addAbility(ability);
         // {7}, {tap}: Exile target creature you don't control.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect("Helvault exile"), new GenericManaCost(7));

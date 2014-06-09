@@ -52,7 +52,7 @@ public class CosisRavager extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new LandfallAbility(new DamageTargetEffect(1), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

@@ -62,7 +62,7 @@ public class DoorToNothingness extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DoorToNothingnessEffect(), new ManaCostsImpl("{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

@@ -57,7 +57,7 @@ public class TricksOfTheTrade extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant creature
-        TargetPermanent target = new TargetCreaturePermanent();
+        TargetPermanent target = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         this.addAbility(new EnchantAbility(target.getTargetName()));

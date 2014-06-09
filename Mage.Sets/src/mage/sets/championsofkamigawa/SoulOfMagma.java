@@ -55,7 +55,7 @@ public class SoulOfMagma extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(1), filter, false);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

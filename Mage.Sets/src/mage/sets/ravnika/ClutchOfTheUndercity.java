@@ -52,7 +52,7 @@ public class ClutchOfTheUndercity extends CardImpl {
         // Return target permanent to its owner's hand. Its controller loses 3 life.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         // Transmute {1}{U}{B}
         this.addAbility(new TransmuteAbility("{1}{U}{B}"));
     }

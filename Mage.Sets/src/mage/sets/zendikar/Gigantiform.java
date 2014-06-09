@@ -74,7 +74,7 @@ public class Gigantiform extends CardImpl {
         this.addAbility(new KickerAbility("{4}"));
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

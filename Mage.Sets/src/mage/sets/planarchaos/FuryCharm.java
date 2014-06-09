@@ -85,7 +85,7 @@ public class FuryCharm extends CardImpl {
         Mode mode = new Mode();
         mode.getEffects().add(new BoostTargetEffect(1,1, Duration.EndOfTurn));
         mode.getEffects().add(new GainAbilityTargetEffect(TrampleAbility.getInstance(),Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.getTargets().add(new TargetCreaturePermanent(true));
         this.getSpellAbility().getModes().addMode(mode);
         // or remove two time counters from target permanent or suspended card.
         mode = new Mode();

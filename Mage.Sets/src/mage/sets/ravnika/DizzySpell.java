@@ -51,7 +51,7 @@ public class DizzySpell extends CardImpl {
 
         // Target creature gets -3/-0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         // Transmute {1}{U}{U}
         this.addAbility(new TransmuteAbility("{1}{U}{U}"));
     }

@@ -51,7 +51,7 @@ public class CeruleanWisps extends CardImpl {
         this.expansionSetCode = "SHM";
         this.color.setBlue(true);
         // Target creature becomes blue until end of turn. Untap that creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.BLUE, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         // Draw a card.

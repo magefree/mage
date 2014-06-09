@@ -48,7 +48,7 @@ public class HymnToTourach extends CardImpl {
 
         // Target player discards two cards at random.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2, true));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
     }
 
     public HymnToTourach(final HymnToTourach card) {

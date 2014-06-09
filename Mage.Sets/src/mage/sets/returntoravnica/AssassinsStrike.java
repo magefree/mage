@@ -55,7 +55,7 @@ public class AssassinsStrike extends CardImpl {
         this.color.setBlack(true);
 
         // Destroy target creature. Its controller discards a card.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new AssassinsStrikeEffect());
     }

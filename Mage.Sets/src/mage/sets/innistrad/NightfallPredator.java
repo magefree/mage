@@ -72,7 +72,7 @@ public class NightfallPredator extends CardImpl {
         // {R}, {tap}: Nightfall Predator fights target creature.
         Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NightfallPredatorEffect(), new ManaCostsImpl("{R}"));
         activatedAbility.addCost(new TapSourceCost());
-        activatedAbility.addTarget(new TargetCreaturePermanent());
+        activatedAbility.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(activatedAbility);
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Nightfall Predator.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

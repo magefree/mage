@@ -58,7 +58,7 @@ public class KiriOnna extends CardImpl {
 
         // When Kiri-Onna enters the battlefield, return target creature to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Kiri-Onna to its owner's hand.
         this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(), filter, true));

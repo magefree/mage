@@ -55,7 +55,7 @@ public class Voidwielder extends CardImpl {
 
         // When Voidwielder enters the battlefield, you may return target creature to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

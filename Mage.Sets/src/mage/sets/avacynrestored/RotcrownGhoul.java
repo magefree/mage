@@ -54,7 +54,7 @@ public class RotcrownGhoul extends CardImpl {
 
         // When Rotcrown Ghoul dies, target player puts the top five cards of his or her library into his or her graveyard.
         Ability ability = new DiesTriggeredAbility(new PutLibraryIntoGraveTargetEffect(5));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

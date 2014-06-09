@@ -61,7 +61,7 @@ public class VedalkenEntrancer extends CardImpl {
         // {U}, {tap}: Target player puts the top two cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

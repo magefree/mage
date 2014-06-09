@@ -56,11 +56,11 @@ public class GrixisCharm extends CardImpl {
 
         // Choose one - Return target permanent to its owner's hand;
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(true));
         // or target creature gets -4/-4 until end of turn;
         Mode mode = new Mode();
         mode.getEffects().add(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.getTargets().add(new TargetCreaturePermanent(true));
         this.getSpellAbility().addMode(mode);
         // or creatures you control get +2/+0 until end of turn.
         mode = new Mode();

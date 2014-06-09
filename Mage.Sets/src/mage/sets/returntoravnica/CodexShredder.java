@@ -53,7 +53,7 @@ public class CodexShredder extends CardImpl {
 
         // {T}: Target player puts the top card of his or her library into his or her graveyard.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
         
         // {5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.

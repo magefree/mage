@@ -56,7 +56,7 @@ public class TimberlandGuide extends CardImpl {
 
         // When Timberland Guide enters the battlefield, put a +1/+1 counter on target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        TargetCreaturePermanent target = new TargetCreaturePermanent();
+        TargetCreaturePermanent target = new TargetCreaturePermanent(true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

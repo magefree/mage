@@ -49,7 +49,7 @@ public class Stupor extends CardImpl {
         // Target opponent discards a card at random, then discards a card.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
     }
 
     public Stupor(final Stupor card) {

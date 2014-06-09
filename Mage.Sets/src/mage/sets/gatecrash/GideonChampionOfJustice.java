@@ -68,7 +68,7 @@ public class GideonChampionOfJustice extends CardImpl {
         // +1: Put a loyalty counter on Gideon, Champion of Justice for each creature target opponent controls.
         LoyaltyAbility ability1 = new LoyaltyAbility(
                 new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(0), new PermanentsTargetOpponentControlsCount(), false), 1);
-        ability1.addTarget(new TargetOpponent());
+        ability1.addTarget(new TargetOpponent(true));
         this.addAbility(ability1);
 
         // 0: Until end of turn, Gideon becomes an indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him. He's still a planeswalker. Prevent all damage that would be dealt to him this turn.

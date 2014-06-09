@@ -86,7 +86,7 @@ class ExuberantFirestokerTriggeredAbility extends TriggeredAbilityImpl {
 
     public ExuberantFirestokerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), true);
-        this.addTarget(new TargetPlayer());
+        this.addTarget(new TargetPlayer(true));
     }
 
     public ExuberantFirestokerTriggeredAbility(final ExuberantFirestokerTriggeredAbility ability) {

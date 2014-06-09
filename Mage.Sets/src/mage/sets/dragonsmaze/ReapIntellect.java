@@ -63,7 +63,7 @@ public class ReapIntellect extends CardImpl {
 
         // Target opponent reveals his or her hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new ReapIntellectEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
 
     }
 

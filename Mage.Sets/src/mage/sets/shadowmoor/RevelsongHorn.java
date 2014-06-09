@@ -56,8 +56,8 @@ public class RevelsongHorn extends CardImpl {
                 new BoostTargetEffect(1, 1, Duration.EndOfTurn),
                 new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent()));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(true)));
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

@@ -66,7 +66,7 @@ public class VectisDominator extends CardImpl {
         // {tap}: Tap target creature unless its controller pays 2 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VectisDominatorEffect(new PayLifeCost(2)), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

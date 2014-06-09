@@ -78,7 +78,7 @@ public class ClanDefiance extends CardImpl {
         // and/or Clan Defiance deals X damage to target player.
         Mode mode2 = new Mode();
         mode2.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
-        mode2.getTargets().add(new TargetPlayer());
+        mode2.getTargets().add(new TargetPlayer(true));
         this.getSpellAbility().addMode(mode2);
         
     }

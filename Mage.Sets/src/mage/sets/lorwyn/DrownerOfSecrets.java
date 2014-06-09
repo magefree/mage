@@ -70,7 +70,7 @@ public class DrownerOfSecrets extends CardImpl {
 
         // Tap an untapped Merfolk you control: Target player puts the top card of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

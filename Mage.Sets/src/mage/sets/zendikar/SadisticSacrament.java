@@ -69,7 +69,7 @@ public class SadisticSacrament extends CardImpl {
                 new SadisticSacramentEffect(3),
                 KickedCondition.getInstance(),
                 ruleText));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public SadisticSacrament(final SadisticSacrament card) {

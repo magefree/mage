@@ -58,7 +58,7 @@ public class MindSludge extends CardImpl {
 
         this.color.setBlack(true);
 
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 

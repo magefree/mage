@@ -57,7 +57,7 @@ public class ScaleOfChissGoria extends CardImpl {
         this.addAbility(new AffinityForArtifactsAbility());
         // {tap}: Target creature gets +0/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(0, 1, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

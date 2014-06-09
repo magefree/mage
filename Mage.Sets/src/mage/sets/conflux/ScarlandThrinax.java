@@ -61,7 +61,7 @@ public class ScarlandThrinax extends CardImpl {
 
         // Sacrifice a creature: Put a +1/+1 counter on Scarland Thrinax.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         this.addAbility(ability);
     }
 

@@ -51,7 +51,7 @@ public class PierceStrider extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(3));
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
     }
 

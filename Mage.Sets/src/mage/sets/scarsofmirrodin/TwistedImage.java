@@ -50,7 +50,7 @@ public class TwistedImage extends CardImpl {
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public TwistedImage (final TwistedImage card) {

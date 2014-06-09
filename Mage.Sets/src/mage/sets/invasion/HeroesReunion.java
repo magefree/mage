@@ -49,7 +49,7 @@ public class HeroesReunion extends CardImpl {
 
         // Target player gains 7 life.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(7));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public HeroesReunion(final HeroesReunion card) {

@@ -47,7 +47,7 @@ public class Disorient extends CardImpl {
         this.expansionSetCode = "M10";
         this.color.setBlue(true);
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new BoostTargetEffect(-7, 0, Duration.EndOfTurn));
     }
 

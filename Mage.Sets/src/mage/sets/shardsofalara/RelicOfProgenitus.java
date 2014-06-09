@@ -60,7 +60,7 @@ public class RelicOfProgenitus extends CardImpl {
 
         // {tap}: Target player exiles a card from his or her graveyard.
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RelicOfProgenitusEffect(), new TapSourceCost());
-        firstAbility.addTarget(new TargetPlayer());
+        firstAbility.addTarget(new TargetPlayer(true));
         this.addAbility(firstAbility);
         // {1}, Exile Relic of Progenitus: Exile all cards from all graveyards. Draw a card.
         Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RelicOfProgenitusEffect2(),new GenericManaCost(1));

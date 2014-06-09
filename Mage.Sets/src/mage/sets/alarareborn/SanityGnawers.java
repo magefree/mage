@@ -55,7 +55,7 @@ public class SanityGnawers extends CardImpl {
 
         // When Sanity Gnawers enters the battlefield, target player discards a card at random.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1, true), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
         
     }

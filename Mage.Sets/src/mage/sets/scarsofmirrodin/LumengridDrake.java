@@ -58,7 +58,7 @@ public class LumengridDrake extends CardImpl {
 
         TriggeredAbility conditional = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), MetalcraftCondition.getInstance(), text);
-        conditional.addTarget(new TargetCreaturePermanent());
+        conditional.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(conditional);
     }
 

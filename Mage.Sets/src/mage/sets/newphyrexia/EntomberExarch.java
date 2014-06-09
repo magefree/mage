@@ -71,7 +71,7 @@ public class EntomberExarch extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         Mode mode = new Mode();
         mode.getEffects().add(new EntomberExarchEffect());
-        mode.getTargets().add(new TargetOpponent());
+        mode.getTargets().add(new TargetOpponent(true));
         ability.addMode(mode);
         this.addAbility(ability);
     }

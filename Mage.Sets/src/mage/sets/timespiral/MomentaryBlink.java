@@ -51,7 +51,7 @@ public class MomentaryBlink extends CardImpl {
         this.color.setWhite(true);
 
         // Exile target creature you control, then return it to the battlefield under its owner's control.
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
         this.getSpellAbility().addEffect(new ExileTargetForSourceEffect("Momentary Blink"));
         this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect());
 

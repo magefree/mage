@@ -62,7 +62,7 @@ public class NayaCharm extends CardImpl {
 
         // Choose one - Naya Charm deals 3 damage to target creature;
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         // or return target card from a graveyard to its owner's hand;
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnToHandTargetEffect());
@@ -71,7 +71,7 @@ public class NayaCharm extends CardImpl {
         // or tap all creatures target player controls.
         mode = new Mode();
         mode.getEffects().add(new NayaCharmEffect());
-        mode.getTargets().add(new TargetPlayer());
+        mode.getTargets().add(new TargetPlayer(true));
         this.getSpellAbility().addMode(mode);
     }
 

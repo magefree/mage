@@ -69,12 +69,12 @@ public class OrzhovCharm extends CardImpl {
 
         //Choose one - Return target creature you control and all Auras you control attached to it to their owner's hand
         this.getSpellAbility().addEffect(new OrzhovCharmReturnToHandEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
 
         // or destroy target creature and you lose life equal to its toughness;
         Mode mode = new Mode();
         mode.getEffects().add(new OrzhovCharmDestroyAndLoseLifeEffect());
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.getTargets().add(new TargetCreaturePermanent(true));
         this.getSpellAbility().addMode(mode);
 
         // or return target creature card with converted mana cost 1 or less from your graveyard to the battlefield.

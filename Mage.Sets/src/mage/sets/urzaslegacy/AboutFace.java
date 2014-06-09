@@ -48,7 +48,7 @@ public class AboutFace extends CardImpl {
         this.color.setRed(true);
 
         this.getSpellAbility().addEffect(new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public AboutFace(final AboutFace card) {

@@ -62,7 +62,7 @@ public class ElderOfLaurels extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(amount, amount, Duration.EndOfTurn, true),
                 new ManaCostsImpl("{3}{G}"));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

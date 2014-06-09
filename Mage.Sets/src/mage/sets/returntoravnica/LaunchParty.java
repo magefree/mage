@@ -49,10 +49,10 @@ public class LaunchParty extends CardImpl {
         this.color.setBlack(true);
 
         // As an additional cost to cast Launch Party, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
 
         // Destroy target creature. Its controller loses 2 life.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));
     }

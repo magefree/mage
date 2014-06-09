@@ -53,7 +53,7 @@ public class PsychicSpiral extends CardImpl {
         this.color.setBlue(true);
 
         // Shuffle all cards from your graveyard into your library. Target player puts that many cards from the top of his or her library into his or her graveyard.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new PsychicSpiralEffect());
     }
 

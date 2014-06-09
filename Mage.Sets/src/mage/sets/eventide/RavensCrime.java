@@ -52,7 +52,7 @@ public class RavensCrime extends CardImpl {
 
         // Target player discards a card.
         this.getSpellAbility().getEffects().add(new DiscardTargetEffect(1));
-        this.getSpellAbility().getTargets().add(new TargetPlayer());
+        this.getSpellAbility().getTargets().add(new TargetPlayer(true));
         // Retrace
         this.addAbility(new RetraceAbility(new ManaCostsImpl("{B}"), TimingRule.SORCERY));
     }

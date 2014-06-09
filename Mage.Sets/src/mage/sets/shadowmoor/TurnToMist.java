@@ -48,7 +48,7 @@ public class TurnToMist extends CardImpl {
 
         // Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new MistmeadowWitchEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public TurnToMist(final TurnToMist card) {

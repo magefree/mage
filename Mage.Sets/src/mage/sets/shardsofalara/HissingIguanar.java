@@ -53,7 +53,7 @@ public class HissingIguanar extends CardImpl {
 
         // Whenever another creature dies, you may have Hissing Iguanar deal 1 damage to target player.
         DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1), true, true);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

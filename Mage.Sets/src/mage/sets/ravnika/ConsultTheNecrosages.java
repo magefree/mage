@@ -50,10 +50,10 @@ public class ConsultTheNecrosages extends CardImpl {
         this.color.setBlack(true);
 
         // Choose one - Target player draws two cards; or target player discards two cards.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
         Mode mode = new Mode();
-        mode.getTargets().add(new TargetPlayer());
+        mode.getTargets().add(new TargetPlayer(true));
         mode.getEffects().add(new DiscardTargetEffect(2));
         this.getSpellAbility().addMode(mode);
     }

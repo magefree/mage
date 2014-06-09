@@ -77,7 +77,7 @@ public class BalaGedThief extends CardImpl {
 
         // Whenever Bala Ged Thief or another Ally enters the battlefield under your control, target player reveals a number of cards from his or her hand equal to the number of Allies you control. You choose one of them. That player discards that card.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BalaGedThiefEffect(), filter, false);
-        TargetPlayer target = new TargetPlayer();
+        TargetPlayer target = new TargetPlayer(true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

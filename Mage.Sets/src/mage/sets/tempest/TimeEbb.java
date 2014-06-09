@@ -45,7 +45,7 @@ public class TimeEbb extends CardImpl {
         this.expansionSetCode = "TMP";
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public TimeEbb(final TimeEbb card) {

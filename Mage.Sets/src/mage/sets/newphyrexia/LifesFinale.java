@@ -58,7 +58,7 @@ public class LifesFinale extends CardImpl {
         this.color.setBlack(true);
 
         this.getSpellAbility().addEffect(new LifesFinaleEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
     }
 
     public LifesFinale(final LifesFinale card) {

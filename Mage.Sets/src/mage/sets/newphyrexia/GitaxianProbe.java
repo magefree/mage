@@ -53,7 +53,7 @@ public class GitaxianProbe extends CardImpl {
 
         // Look at target player's hand.
         this.getSpellAbility().addEffect(new GitaxianProbeEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         

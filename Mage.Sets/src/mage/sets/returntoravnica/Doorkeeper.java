@@ -71,7 +71,7 @@ public class Doorkeeper extends CardImpl {
         // {2}{U}, {T}: Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of creatures with defender you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter)), new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

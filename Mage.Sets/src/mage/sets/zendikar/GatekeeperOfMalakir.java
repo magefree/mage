@@ -72,7 +72,7 @@ public class GatekeeperOfMalakir extends CardImpl {
         EntersBattlefieldTriggeredAbility ability =
                 new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, 1, "target player"));
         Ability conditionalAbility = new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, target player sacrifices a creature.");
-        conditionalAbility.addTarget(new TargetPlayer());
+        conditionalAbility.addTarget(new TargetPlayer(true));
         this.addAbility(conditionalAbility);
     }
 

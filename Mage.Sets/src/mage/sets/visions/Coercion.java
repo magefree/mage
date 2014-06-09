@@ -47,7 +47,7 @@ public class Coercion extends CardImpl {
         this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
     }
 

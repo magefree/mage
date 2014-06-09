@@ -59,7 +59,7 @@ public class KamiOfTheWaningMoon extends CardImpl {
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn), filter, false);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

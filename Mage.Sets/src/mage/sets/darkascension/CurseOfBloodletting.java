@@ -58,7 +58,7 @@ public class CurseOfBloodletting extends CardImpl {
         this.color.setRed(true);
 
         // Enchant player
-        TargetPlayer auraTarget = new TargetPlayer();
+        TargetPlayer auraTarget = new TargetPlayer(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Damage));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

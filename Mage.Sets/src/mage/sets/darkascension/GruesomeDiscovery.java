@@ -65,7 +65,7 @@ public class GruesomeDiscovery extends CardImpl {
                 new DiscardTargetEffect(2),
                 MorbidCondition.getInstance(),
                 "Target player discards two cards. Morbid - If a creature died this turn, instead that player reveals his or her hand, you choose two cards from it, then that player discards those cards"));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public GruesomeDiscovery(final GruesomeDiscovery card) {

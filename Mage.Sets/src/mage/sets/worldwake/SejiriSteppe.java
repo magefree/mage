@@ -51,7 +51,7 @@ public class SejiriSteppe extends CardImpl {
         this.expansionSetCode = "WWK";
         this.addAbility(new EntersBattlefieldTappedAbility());
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent(true));
         ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
         this.addAbility(new WhiteManaAbility());

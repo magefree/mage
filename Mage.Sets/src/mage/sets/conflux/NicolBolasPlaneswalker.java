@@ -77,11 +77,11 @@ public class NicolBolasPlaneswalker extends CardImpl {
         this.addAbility(ability);
         // -2: Gain control of target creature.
         ability = new LoyaltyAbility(new GainControlTargetEffect(Duration.Custom), -2);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
         // -9: Nicol Bolas, Planeswalker deals 7 damage to target player. That player discards seven cards, then sacrifices seven permanents.
         ability = new LoyaltyAbility(new DamageTargetEffect(7), -9);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         ability.addEffect(new DiscardTargetEffect(7));
         ability.addEffect(new SacrificeEffect(new FilterPermanent(), 7, "then"));
         this.addAbility(ability);

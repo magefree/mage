@@ -60,7 +60,7 @@ public class DinrovaHorror extends CardImpl {
 
         // When Dinrova Horror enters the battlefield, return target permanent to its owner's hand, then that player discards a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DinrovaHorrorEffect(), false);
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(ability);
 
     }

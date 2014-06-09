@@ -81,7 +81,7 @@ public class OddsEnds extends SplitCard {
         getRightHalfCard().getColor().setRed(true);
         getRightHalfCard().getColor().setWhite(true);
         getRightHalfCard().getSpellAbility().addEffect(new SacrificeEffect(new FilterAttackingCreature(), 2, "Target player"));
-        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
+        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer(true));
 
     }
 

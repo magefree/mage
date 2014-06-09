@@ -56,7 +56,7 @@ public class BriarknitKami extends CardImpl {
         this.toughness = new MageInt(3);
         // Whenever you cast a Spirit or Arcane spell, put a +1/+1 counter on target creature.
         Ability ability = new SpellCastControllerTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), filter, false);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

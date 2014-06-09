@@ -69,7 +69,7 @@ public class LifebaneZombie extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
         // When Lifebane Zombie enters the battlefield, target opponent reveals his or her hand. You choose a green or white creature card from it and exile that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileCardYouChooseTargetOpponentEffect(filter));
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);        
     }
 

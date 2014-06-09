@@ -55,7 +55,7 @@ public class Oust extends CardImpl {
 
         // Put target creature into its owner's library second from the top. Its controller gains 3 life.
         this.getSpellAbility().addEffect(new OustEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public Oust(final Oust card) {

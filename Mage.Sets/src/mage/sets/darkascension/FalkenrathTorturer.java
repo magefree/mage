@@ -66,7 +66,7 @@ public class FalkenrathTorturer extends CardImpl {
         // If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Torturer.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         ability.addEffect(new FalkenrathAristocratEffect());
         this.addAbility(ability);
     }

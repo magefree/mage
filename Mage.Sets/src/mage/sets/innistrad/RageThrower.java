@@ -54,7 +54,7 @@ public class RageThrower extends CardImpl {
 
         // Whenever another creature dies, Rage Thrower deals 2 damage to target player.
         DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(2), false, true);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

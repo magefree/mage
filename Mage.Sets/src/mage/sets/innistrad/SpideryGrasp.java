@@ -53,7 +53,7 @@ public class SpideryGrasp extends CardImpl {
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 4, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public SpideryGrasp(final SpideryGrasp card) {

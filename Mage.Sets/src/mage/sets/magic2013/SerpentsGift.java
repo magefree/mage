@@ -50,7 +50,7 @@ public class SerpentsGift extends CardImpl {
 
         // Target creature gains deathtouch until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public SerpentsGift(final SerpentsGift card) {

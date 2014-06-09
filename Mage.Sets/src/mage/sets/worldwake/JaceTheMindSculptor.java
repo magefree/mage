@@ -66,18 +66,18 @@ public class JaceTheMindSculptor extends CardImpl {
 
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new JaceTheMindSculptorEffect1(), 2);
-        ability1.addTarget(new TargetPlayer());
+        ability1.addTarget(new TargetPlayer(true));
         this.addAbility(ability1);
 
         LoyaltyAbility ability2 = new LoyaltyAbility(new JaceTheMindSculptorEffect2(), 0);
         this.addAbility(ability2);
 
         LoyaltyAbility ability3 = new LoyaltyAbility(new ReturnToHandTargetEffect(), -1);
-        ability3.addTarget(new TargetCreaturePermanent());
+        ability3.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability3);
 
         LoyaltyAbility ability4 = new LoyaltyAbility(new JaceTheMindSculptorEffect3(), -12);
-        ability4.addTarget(new TargetPlayer());
+        ability4.addTarget(new TargetPlayer(true));
         this.addAbility(ability4);
 
     }

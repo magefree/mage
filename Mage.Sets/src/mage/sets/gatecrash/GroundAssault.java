@@ -51,7 +51,7 @@ public class GroundAssault extends CardImpl {
 
         // Ground Assault deals damage to target creature equal to the number of lands you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent())));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public GroundAssault(final GroundAssault card) {

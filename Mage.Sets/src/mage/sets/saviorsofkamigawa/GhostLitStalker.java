@@ -61,11 +61,11 @@ public class GhostLitStalker extends CardImpl {
         // {4}{B}, {tap}: Target player discards two cards. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2),new ManaCostsImpl("{4}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
         // Channel - {5}{B}{B}, Discard Ghost-Lit Stalker: Target player discards four cards. Activate this ability only any time you could cast a sorcery.
         Ability ability2 = new ChannelAbility("{5}{B}{B}", new DiscardTargetEffect(4), TimingRule.SORCERY);
-        ability2.addTarget(new TargetPlayer());
+        ability2.addTarget(new TargetPlayer(true));
         this.addAbility(ability2);
     }
 

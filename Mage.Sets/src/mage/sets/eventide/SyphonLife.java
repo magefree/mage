@@ -53,7 +53,7 @@ public class SyphonLife extends CardImpl {
 
         // Target player loses 2 life and you gain 2 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         // Retrace
         this.addAbility(new RetraceAbility(new ManaCostsImpl("{1}{B}{B}"), TimingRule.SORCERY));

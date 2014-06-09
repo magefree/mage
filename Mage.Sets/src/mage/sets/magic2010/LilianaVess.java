@@ -62,7 +62,7 @@ public class LilianaVess extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new DiscardTargetEffect(1), 1);
-        ability1.addTarget(new TargetPlayer());
+        ability1.addTarget(new TargetPlayer(true));
         this.addAbility(ability1);
 
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary()), -2));

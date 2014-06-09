@@ -61,7 +61,7 @@ public class KrasisIncubation extends CardImpl {
         this.color.setGreen(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.LoseLife));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

@@ -54,7 +54,7 @@ public class BoundInSilence extends CardImpl {
         this.color.setWhite(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Removal));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

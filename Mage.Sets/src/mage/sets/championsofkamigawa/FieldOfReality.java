@@ -64,7 +64,7 @@ public class FieldOfReality extends CardImpl {
         this.color.setBlue(true);
 
         // Enchanted creature can't be blocked by Spirits.
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

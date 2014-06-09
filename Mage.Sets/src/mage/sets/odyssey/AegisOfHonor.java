@@ -113,7 +113,7 @@ class AegisOfHonorEffect extends RedirectionEffect {
             }
             //Checks if damage is from a sorcery or instants
             if (spell != null && instantOrSorceryfilter.match(spell.getCard(), game)) {
-                TargetPermanent target = new TargetPermanent();
+                TargetPermanent target = new TargetPermanent(true);
                 target.add(spell.getControllerId(), game);
                 redirectTarget = target;
                 return true;

@@ -61,7 +61,7 @@ public class WingPuncture extends CardImpl {
 
         this.color.setGreen(true);
 
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new WingPunctureEffect());
     }

@@ -87,7 +87,7 @@ public class TezzeretAgentOfBolas extends CardImpl {
 
         // -4: Target player loses X life and you gain X life, where X is twice the number of artifacts you control.
         LoyaltyAbility ability2 = new LoyaltyAbility(new TezzeretAgentOfBolasEffect2(), -4);
-        ability2.addTarget(new TargetPlayer());
+        ability2.addTarget(new TargetPlayer(true));
         this.addAbility(ability2);
 
     }

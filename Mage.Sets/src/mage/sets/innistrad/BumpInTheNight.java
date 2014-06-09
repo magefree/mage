@@ -51,7 +51,7 @@ public class BumpInTheNight extends CardImpl {
 
         // Target opponent loses 3 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
 
         // Flashback {5}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}"), TimingRule.SORCERY));

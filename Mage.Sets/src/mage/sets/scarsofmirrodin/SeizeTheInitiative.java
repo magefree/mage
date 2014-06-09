@@ -51,7 +51,7 @@ public class SeizeTheInitiative extends CardImpl {
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public SeizeTheInitiative (final SeizeTheInitiative card) {

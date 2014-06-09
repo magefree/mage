@@ -53,7 +53,7 @@ public class FirstVolley extends CardImpl {
 
         // First Volley deals 1 damage to target creature and 1 damage to that creature's controller.
         this.getSpellAbility().addEffect(new FirstVolleyEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
 
     }
 

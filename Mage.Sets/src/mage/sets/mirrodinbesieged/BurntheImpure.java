@@ -50,7 +50,7 @@ public class BurntheImpure extends CardImpl {
         super(ownerId, 59, "Burn the Impure", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "MBS";
         this.color.setRed(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new BurntheImpureEffect());
     }
 

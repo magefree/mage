@@ -53,7 +53,7 @@ public class TowerOfChampions extends CardImpl {
         this.expansionSetCode = "MRD";
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(6, 6, Duration.EndOfTurn), new GenericManaCost(8));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

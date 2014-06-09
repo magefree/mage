@@ -64,7 +64,7 @@ public class HeartstabberMosquito extends CardImpl {
 
         // When Heartstabber Mosquito enters the battlefield, if it was kicked, destroy target creature.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target creature."));
     }
 

@@ -56,7 +56,7 @@ public class CovenantOfMinds extends CardImpl {
         // Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand.
         // If he or she doesn't, put those cards into your graveyard and draw five cards.
         this.getSpellAbility().addEffect(new CovenantOfMindsEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
     }
 
     public CovenantOfMinds(final CovenantOfMinds card) {

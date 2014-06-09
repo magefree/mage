@@ -47,7 +47,7 @@ public class BullRush extends CardImpl {
         this.expansionSetCode = "WWK";
         this.color.setRed(true);        
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public BullRush (final BullRush card) {

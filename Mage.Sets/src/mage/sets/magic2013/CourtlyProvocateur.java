@@ -63,13 +63,13 @@ public class CourtlyProvocateur extends CardImpl {
         // {tap}: Target creature attacks this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(AttacksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, null));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
 
         // {tap}: Target creature blocks this turn if able.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlocksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability2.addEffect(new GainAbilityTargetEffect(BlocksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, null));
-        ability2.addTarget(new TargetCreaturePermanent());
+        ability2.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability2);
     }
 

@@ -47,7 +47,7 @@ public class Unmake extends CardImpl {
         this.getColor().setBlack(true);
         this.getColor().setWhite(true);
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public Unmake (final Unmake card) {

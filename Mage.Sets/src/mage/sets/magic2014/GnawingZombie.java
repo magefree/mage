@@ -61,7 +61,7 @@ public class GnawingZombie extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{1}{B}"));
         ability.addEffect(new GainLifeEffect(1));
         ability.addTarget(new TargetPlayer(true));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         this.addAbility(ability);
     }
 

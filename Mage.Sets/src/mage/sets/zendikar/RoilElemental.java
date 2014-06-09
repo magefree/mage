@@ -70,7 +70,7 @@ public class RoilElemental extends CardImpl {
         // Landfall - Whenever a land enters the battlefield under your control, you may gain control of target creature for as long as you control Roil Elemental.
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Duration.Custom), new ControlsPermanentCondition(filter), rule);
         Ability ability = new LandfallAbility(Zone.BATTLEFIELD, effect, true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

@@ -70,7 +70,7 @@ public class EsperCharm extends CardImpl {
         // or target player discards two cards.
         mode = new Mode();
         mode.getEffects().add(new DiscardTargetEffect(2));
-        mode.getTargets().add(new TargetPlayer());
+        mode.getTargets().add(new TargetPlayer(true));
         this.getSpellAbility().addMode(mode);
     }
 

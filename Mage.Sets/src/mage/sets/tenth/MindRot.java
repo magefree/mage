@@ -45,7 +45,7 @@ public class MindRot extends CardImpl {
         super(ownerId, 159, "Mind Rot", Rarity.COMMON, new CardType[]{CardType.SORCERY},"{2}{B}");
         this.expansionSetCode = "10E";
         this.color.setBlack(true);
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
     }
 

@@ -54,7 +54,7 @@ public class InfectiousHost extends CardImpl {
 
         // When Infectious Host dies, target player loses 2 life.
         Ability ability = new DiesTriggeredAbility(new LoseLifeTargetEffect(2), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

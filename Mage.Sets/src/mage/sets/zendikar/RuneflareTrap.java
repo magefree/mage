@@ -63,7 +63,7 @@ public class RuneflareTrap extends CardImpl {
 
         // Runeflare Trap deals damage to target player equal to the number of cards in that player's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new TargetPlayerCardsInHandCount()));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
 
     }
 

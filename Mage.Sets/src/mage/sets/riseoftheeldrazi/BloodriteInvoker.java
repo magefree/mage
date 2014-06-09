@@ -58,7 +58,7 @@ public class BloodriteInvoker extends CardImpl {
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(3), new GenericManaCost(8));
         ability.addEffect(new GainLifeEffect(3));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

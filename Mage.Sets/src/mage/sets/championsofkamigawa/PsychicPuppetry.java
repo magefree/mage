@@ -50,7 +50,7 @@ public class PsychicPuppetry extends CardImpl {
 
         // You may tap or untap target permanent.
         this.getSpellAbility().addEffect(new MayTapOrUntapTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(true));
         // Splice onto Arcane {U}
         this.addAbility(new SpliceOntoArcaneAbility("{U}"));
     }

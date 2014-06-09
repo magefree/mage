@@ -77,7 +77,7 @@ class SparkMageTriggeredAbility extends TriggeredAbilityImpl {
 
     public SparkMageTriggeredAbility(){
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
-        this.addTarget(new TargetCreaturePermanent());
+        this.addTarget(new TargetCreaturePermanent(true));
     }
     
     public SparkMageTriggeredAbility(final SparkMageTriggeredAbility ability) {

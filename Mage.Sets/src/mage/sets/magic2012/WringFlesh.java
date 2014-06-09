@@ -47,7 +47,7 @@ public class WringFlesh extends CardImpl {
         this.expansionSetCode = "M12";
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -1, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public WringFlesh(final WringFlesh card) {

@@ -47,7 +47,7 @@ public class StrokeOfGenius extends CardImpl {
         this.expansionSetCode = "USG";
     this.color.setBlue(true);
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public StrokeOfGenius (final StrokeOfGenius card) {

@@ -57,7 +57,7 @@ public class BrittleEffigy extends CardImpl {
         costs.add(new ExileSourceCost());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), costs);
         ability.addManaCost(new GenericManaCost(4));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

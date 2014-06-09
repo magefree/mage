@@ -72,8 +72,7 @@ public class EightAndAHalfTails extends CardImpl {
 
         // {1}{W}: Target permanent you control gains protection from white until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
-        Target target = new TargetControlledPermanent();
-        target.setRequired(true);
+        Target target = new TargetControlledPermanent(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // {1}: Target spell or permanent becomes white until end of turn.

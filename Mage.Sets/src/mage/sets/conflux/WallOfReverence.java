@@ -62,7 +62,7 @@ public class WallOfReverence extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new BeginningOfYourEndStepTriggeredAbility(new WallOfReverenceTriggeredEffect(), true);
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent(true));
         this.addAbility(ability);
     }
 

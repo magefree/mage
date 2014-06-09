@@ -54,7 +54,7 @@ public class DemonicAppetite extends CardImpl {
         this.subtype.add("Aura");
         this.color.setBlack(true);
 
-        TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
+        TargetPermanent auraTarget = new TargetControlledCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
 

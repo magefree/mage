@@ -50,7 +50,7 @@ public class PurgeTheProfane extends CardImpl {
 
         // Target opponent discards two cards and you gain 2 life.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 

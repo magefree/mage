@@ -62,7 +62,7 @@ public class DiscipleOfGriselbrand extends CardImpl {
 
         // {1}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscipleOfGriselbrandEffect(), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         this.addAbility(ability);
     }
 

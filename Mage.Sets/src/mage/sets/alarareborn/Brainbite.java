@@ -52,7 +52,7 @@ public class Brainbite extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
     }
 
     public Brainbite(final Brainbite card) {

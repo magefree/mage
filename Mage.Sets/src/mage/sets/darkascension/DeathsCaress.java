@@ -55,7 +55,7 @@ public class DeathsCaress extends CardImpl {
 
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         // If that creature was a Human, you gain life equal to its toughness.
         this.getSpellAbility().addEffect(new DeathsCaressEffect());
     }

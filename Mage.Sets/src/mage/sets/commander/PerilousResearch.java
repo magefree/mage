@@ -88,7 +88,7 @@ class PerilousResearchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Target target = new TargetControlledPermanent();
+            Target target = new TargetControlledPermanent(true);
 
             if (target.canChoose(player.getId(), game) && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());

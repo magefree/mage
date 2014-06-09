@@ -50,7 +50,7 @@ public class Braingeyser extends CardImpl {
 
         // Target player draws X cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         
     }
 

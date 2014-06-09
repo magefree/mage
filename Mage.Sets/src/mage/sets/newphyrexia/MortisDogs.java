@@ -61,7 +61,7 @@ public class MortisDogs extends CardImpl {
 
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
         Ability ability = new DiesTriggeredAbility(new MortisDogsEffect());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

@@ -54,7 +54,7 @@ public class CyclopeanSnare extends CardImpl {
         // {3}, {tap}: Tap target creature, then return Cyclopean Snare to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         ability.addEffect(new ReturnToHandSourceEffect());
         this.addAbility(ability);
     }

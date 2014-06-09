@@ -55,7 +55,7 @@ public class ArchonOfJustice extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new DiesTriggeredAbility(new ExileTargetEffect(), false);
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(ability);
     }
 

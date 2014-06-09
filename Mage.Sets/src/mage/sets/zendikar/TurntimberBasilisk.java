@@ -55,7 +55,7 @@ public class TurntimberBasilisk extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
         // Landfall - Whenever a land enters the battlefield under your control, you may have target creature block Turntimber Basilisk this turn if able.
         LandfallAbility ability = new LandfallAbility(new MustBeBlockedByTargetSourceEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

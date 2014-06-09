@@ -55,7 +55,7 @@ public class MerfolkSkyscout extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         AttacksOrBlocksTriggeredAbility ability = new AttacksOrBlocksTriggeredAbility(new UntapTargetEffect(), false);
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(ability);
     }
 

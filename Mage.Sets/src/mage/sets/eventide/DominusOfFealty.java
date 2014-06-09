@@ -63,7 +63,7 @@ public class DominusOfFealty extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), TargetController.YOU, true);
         ability.addEffect(new UntapTargetEffect());
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(ability);
     }
 

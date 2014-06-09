@@ -56,7 +56,7 @@ public class IchorExplosion extends CardImpl {
         this.color.setBlack(true);
 
         // As an additional cost to cast Ichor Explosion, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         // All creatures get -X/-X until end of turn, where X is the sacrificed creature's power.
         DynamicValue xValue = new IchorExplosionDynamicValue();
         this.getSpellAbility().addEffect(new BoostAllEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent(), false, null, true));

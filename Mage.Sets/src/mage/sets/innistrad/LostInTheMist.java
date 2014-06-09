@@ -56,7 +56,7 @@ public class LostInTheMist extends CardImpl {
         // Counter target spell. Return target permanent to its owner's hand.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(true));
         this.getSpellAbility().addEffect(new LostInTheMistEffect());
     }
 

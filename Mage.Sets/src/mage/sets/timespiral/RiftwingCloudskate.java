@@ -59,7 +59,7 @@ public class RiftwingCloudskate extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Riftwing Cloudskate enters the battlefield, return target permanent to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(ability);
 
         // Suspend 3-{1}{U}

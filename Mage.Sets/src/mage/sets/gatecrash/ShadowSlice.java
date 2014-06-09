@@ -49,7 +49,7 @@ public class ShadowSlice extends CardImpl {
 
         // Target Opponent loses 3 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
 
         // Cipher (Then you may exilce this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
         this.getSpellAbility().addEffect(new CipherEffect());

@@ -60,7 +60,7 @@ public class JadeMonolith extends CardImpl {
 
         // {1}: The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JadeMonolithRedirectionEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

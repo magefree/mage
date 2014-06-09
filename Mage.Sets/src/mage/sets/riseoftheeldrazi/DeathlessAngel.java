@@ -64,7 +64,7 @@ public class DeathlessAngel extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, "Target creature is indestructible this turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 effect, new ManaCostsImpl("{W}{W}"));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

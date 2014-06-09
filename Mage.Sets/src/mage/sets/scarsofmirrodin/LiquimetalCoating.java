@@ -51,7 +51,7 @@ public class LiquimetalCoating extends CardImpl {
         super(ownerId, 171, "Liquimetal Coating", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(ability);
     }
 

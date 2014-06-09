@@ -56,7 +56,7 @@ public class PhyrexianTower extends CardImpl {
 
         // {tap}, Sacrifice a creature: Add {B}{B} to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         this.addAbility(ability);
 
     }

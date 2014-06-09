@@ -54,7 +54,7 @@ public class AerialManeuver extends CardImpl {
         getSpellAbility().addEffect(new BoostTargetEffect(1,1, Duration.EndOfTurn));
         getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
-        getSpellAbility().addTarget(new TargetCreaturePermanent());
+        getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public AerialManeuver(final AerialManeuver card) {

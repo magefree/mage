@@ -74,7 +74,7 @@ public class AmbushCommander extends CardImpl {
         // {1}{G}, Sacrifice an Elf: Target creature gets +3/+3 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3,3, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, true)));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

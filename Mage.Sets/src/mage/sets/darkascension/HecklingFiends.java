@@ -59,7 +59,7 @@ public class HecklingFiends extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AttacksIfAbleTargetEffect(Duration.EndOfTurn),
                 new ManaCostsImpl("{2}{R}"));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

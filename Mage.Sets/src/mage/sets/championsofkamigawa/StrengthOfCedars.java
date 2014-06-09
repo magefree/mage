@@ -56,7 +56,7 @@ public class StrengthOfCedars extends CardImpl {
         // Target creature gets +X/+X until end of turn, where X is the number of lands you control.
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filter, null);
         this.getSpellAbility().addEffect(new BoostTargetEffect(controlledLands, controlledLands, Duration.EndOfTurn, true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public StrengthOfCedars (final StrengthOfCedars card) {

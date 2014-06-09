@@ -68,7 +68,7 @@ public class BrassSquire extends CardImpl {
         // {tap}: Attach target Equipment you control to target creature you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EquipEffect(), new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(filter));
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent(true));
         this.addAbility(ability);
     }
 

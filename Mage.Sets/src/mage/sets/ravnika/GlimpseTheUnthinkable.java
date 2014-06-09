@@ -49,7 +49,7 @@ public class GlimpseTheUnthinkable extends CardImpl {
 
         // Target player puts the top ten cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(10));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public GlimpseTheUnthinkable(final GlimpseTheUnthinkable card) {

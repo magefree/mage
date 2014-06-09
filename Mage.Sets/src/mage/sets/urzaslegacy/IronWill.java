@@ -51,7 +51,7 @@ public class IronWill extends CardImpl {
 
         // Target creature gets +0/+4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(0, 4, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }

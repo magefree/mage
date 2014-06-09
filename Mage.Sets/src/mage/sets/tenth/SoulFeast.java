@@ -46,7 +46,7 @@ public class SoulFeast extends CardImpl {
         this.expansionSetCode = "10E";
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 

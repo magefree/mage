@@ -84,7 +84,7 @@ public class ElspethKnightErrant extends CardImpl {
         effect.setText("and gains flying until end of turn");
         effects1.add(effect);
         LoyaltyAbility ability1 = new LoyaltyAbility(effects1, 1);
-        ability1.addTarget(new TargetCreaturePermanent());
+        ability1.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability1);
 
         // -8: You get an emblem with "Artifacts, creatures, enchantments, and lands you control are indestructible."

@@ -52,7 +52,7 @@ public class LiftedByClouds extends CardImpl {
 
         // Target creature gains flying until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         // Splice onto Arcane {1}{U}
         this.addAbility(new SpliceOntoArcaneAbility("{1}{U}"));
     }

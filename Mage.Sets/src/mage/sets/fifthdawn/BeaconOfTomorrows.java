@@ -52,7 +52,7 @@ public class BeaconOfTomorrows extends CardImpl {
         this.color.setBlue(true);
 
         // Target player takes an extra turn after this one.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new BeaconOfTomorrowsEffect());
         // Shuffle Beacon of Tomorrows into its owner's library.
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());

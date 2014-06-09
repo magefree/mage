@@ -47,7 +47,7 @@ public class Vindicate extends CardImpl {
         this.color.setWhite(true);
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(true));
     }
 
     public Vindicate (final Vindicate card) {

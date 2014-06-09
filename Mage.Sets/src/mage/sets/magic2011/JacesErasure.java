@@ -48,7 +48,7 @@ public class JacesErasure extends CardImpl {
         this.color.setBlue(true);
 
         DrawCardControllerTriggeredAbility ability = new DrawCardControllerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(1), true);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

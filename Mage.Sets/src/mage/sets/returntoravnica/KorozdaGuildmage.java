@@ -76,7 +76,7 @@ public class KorozdaGuildmage extends CardImpl {
         // {1}{B}{G}: Target creature gets +1/+1 and gains intimidate until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1,1, Duration.EndOfTurn),new ManaCostsImpl("{1}{B}{G}"));
         ability.addEffect(new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
 
         // {2}{B}{G}, Sacrifice a nontoken creature: Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the sacrificed creature's toughness.

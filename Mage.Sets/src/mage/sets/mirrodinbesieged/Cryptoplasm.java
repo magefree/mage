@@ -104,7 +104,7 @@ class CryptoplasmTransformEffect extends ContinuousEffectImpl {
             @Override
             public Boolean apply(Game game, Permanent permanent) {
                 Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), TargetController.YOU, true);
-                upkeepAbility.addTarget(new TargetCreaturePermanent());
+                upkeepAbility.addTarget(new TargetCreaturePermanent(true));
                 permanent.addAbility(upkeepAbility, source.getSourceId(), game);
                 return true;
             }

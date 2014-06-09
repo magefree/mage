@@ -61,7 +61,7 @@ public class Turnabout extends CardImpl {
         this.color.setBlue(true);
 
         // Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new TurnaboutEffect());
 
     }

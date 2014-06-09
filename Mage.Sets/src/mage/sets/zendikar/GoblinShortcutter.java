@@ -56,7 +56,7 @@ public class GoblinShortcutter extends CardImpl {
 
         // When Goblin Shortcutter enters the battlefield, target creature can't block this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

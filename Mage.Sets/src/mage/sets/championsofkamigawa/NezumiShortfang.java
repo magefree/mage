@@ -71,7 +71,7 @@ public class NezumiShortfang extends CardImpl {
         // {1}{B}, {tap}: Target opponent discards a card. Then if that player has no cards in hand, flip Nezumi Shortfang.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         ability.addEffect(new ConditionalOneShotEffect(
                     new FlipSourceEffect(new StabwhiskerTheOdious()),
                     new CardsInTargetOpponentHandCondition(CardsInTargetOpponentHandCondition.CountType.FEWER_THAN, 1),

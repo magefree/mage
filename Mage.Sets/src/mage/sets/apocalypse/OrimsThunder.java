@@ -86,7 +86,7 @@ public class OrimsThunder extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             if (KickedCondition.getInstance().apply(game, ability)) {
-                ability.addTarget(new TargetCreaturePermanent());
+                ability.addTarget(new TargetCreaturePermanent(true));
             }
         }
     }

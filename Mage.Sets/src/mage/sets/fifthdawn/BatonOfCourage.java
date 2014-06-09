@@ -59,7 +59,7 @@ public class BatonOfCourage extends CardImpl {
         this.addAbility(new SunburstAbility(this));
         // Remove a charge counter from Baton of Courage: Target creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

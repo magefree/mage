@@ -47,7 +47,7 @@ public class FistsOfTheAnvil extends CardImpl {
         this.expansionSetCode = "10E";
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public FistsOfTheAnvil(final FistsOfTheAnvil card) {

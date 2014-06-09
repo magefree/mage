@@ -61,7 +61,7 @@ public class MotherOfRunes extends CardImpl {
         // {tap}: Target creature you control gains protection from the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addChoice(new ChoiceColor());
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent(true));
         this.addAbility(ability);
     }
 

@@ -55,7 +55,7 @@ public class AngelOfDespair extends CardImpl {
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(ability);
     }
 

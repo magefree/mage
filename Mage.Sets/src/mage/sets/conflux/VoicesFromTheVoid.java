@@ -49,7 +49,7 @@ public class VoicesFromTheVoid extends CardImpl {
 
         // Domain - Target player discards a card for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new DomainValue()));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public VoicesFromTheVoid(final VoicesFromTheVoid card) {

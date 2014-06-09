@@ -57,7 +57,7 @@ public class ShelteringWord extends CardImpl {
         // Target creature you control gains hexproof until end of turn. You gain life equal to that creature's toughness.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new ShelteringWordEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
     }
 
     public ShelteringWord(final ShelteringWord card) {

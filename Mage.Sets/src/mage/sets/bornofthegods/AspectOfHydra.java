@@ -56,7 +56,7 @@ public class AspectOfHydra extends CardImpl {
         Effect effect = new BoostTargetEffect(greenDevotion, greenDevotion, Duration.EndOfTurn, true);
         effect.setText("Target creature gets +X/+X until end of turn, where X is your devotion to green");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public AspectOfHydra(final AspectOfHydra card) {

@@ -55,7 +55,7 @@ public class CrownOfEmpires extends CardImpl {
 
         // {3}, {tap}: Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfEmpiresEffect(), new GenericManaCost(3));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

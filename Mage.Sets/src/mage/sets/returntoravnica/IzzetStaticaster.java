@@ -72,7 +72,7 @@ public class IzzetStaticaster extends CardImpl {
 
         // {T}: Izzet Staticaster deals 1 damage to target creature and each other creature with the same name as that creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new IzzetStaticasterDamageEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

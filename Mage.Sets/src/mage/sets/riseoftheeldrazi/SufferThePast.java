@@ -57,7 +57,7 @@ public class SufferThePast extends CardImpl {
 
         // Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life.
         this.getSpellAbility().addEffect(new SufferThePastEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public SufferThePast(final SufferThePast card) {

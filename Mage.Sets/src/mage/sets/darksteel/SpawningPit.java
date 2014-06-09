@@ -55,7 +55,7 @@ public class SpawningPit extends CardImpl {
     public SpawningPit (UUID ownerId) {
         super(ownerId, 141, "Spawning Pit", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "DST";
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new SacrificeTargetCost(new TargetControlledCreaturePermanent(true))));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpawningPitToken()), new GenericManaCost(1));
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2)));
         this.addAbility(ability);

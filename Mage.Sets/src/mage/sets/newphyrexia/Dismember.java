@@ -48,7 +48,7 @@ public class Dismember extends CardImpl {
         this.expansionSetCode = "NPH";
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public Dismember (final Dismember card) {

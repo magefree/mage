@@ -58,7 +58,7 @@ public class ShinenOfFlightsWings extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Channel - {U}, Discard Shinen of Flight's Wings: Target creature gains flying until end of turn.
         Ability ability = new ChannelAbility("{U}", new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

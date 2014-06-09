@@ -67,7 +67,7 @@ public class HalimarExcavator extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter)), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

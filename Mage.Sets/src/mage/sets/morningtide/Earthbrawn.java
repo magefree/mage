@@ -49,7 +49,7 @@ public class Earthbrawn extends CardImpl {
         this.expansionSetCode = "MOR";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{G}")));
     }
 

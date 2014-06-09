@@ -49,10 +49,10 @@ public class FieryConclusion extends CardImpl {
         this.color.setRed(true);
 
         // As an additional cost to cast Fiery Conclusion, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         // Fiery Conclusion deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public FieryConclusion(final FieryConclusion card) {

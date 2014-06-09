@@ -57,7 +57,7 @@ public class PraetorsGrasp extends CardImpl {
 
         // Search target opponent's library for a card and exile it face down. Then that player shuffles his or her library. You may look at and play that card for as long as it remains exiled.
         this.getSpellAbility().addEffect(new PraetorsGraspEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
 
     }
 

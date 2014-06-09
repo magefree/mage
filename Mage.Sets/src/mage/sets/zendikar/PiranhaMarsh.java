@@ -50,7 +50,7 @@ public class PiranhaMarsh extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new BlackManaAbility());
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

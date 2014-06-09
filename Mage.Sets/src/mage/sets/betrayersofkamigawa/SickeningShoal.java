@@ -67,7 +67,7 @@ public class SickeningShoal extends CardImpl {
         // Target creature gets -X/-X until end of turn.
         DynamicValue x = new SignInversionDynamicValue(new ExileFromHandCostCardConvertedMana());
         this.getSpellAbility().addEffect(new BoostTargetEffect(x, x, Duration.EndOfTurn, true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public SickeningShoal(final SickeningShoal card) {

@@ -53,7 +53,7 @@ public class StructuralCollapse extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterArtifactPermanent(), 1, "Target player"));
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterLandPermanent(), 1, "Target player"));
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public StructuralCollapse(final StructuralCollapse card) {

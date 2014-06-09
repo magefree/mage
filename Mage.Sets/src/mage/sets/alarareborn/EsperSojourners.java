@@ -61,8 +61,8 @@ public class EsperSojourners extends CardImpl {
         // When you cycle Esper Sojourners or it dies, you may tap or untap target permanent.
         Ability ability1 = new CycleTriggeredAbility(new MayTapOrUntapTargetEffect());
         Ability ability2 = new DiesTriggeredAbility(new MayTapOrUntapTargetEffect());
-        ability1.addTarget(new TargetPermanent());
-        ability2.addTarget(new TargetPermanent());
+        ability1.addTarget(new TargetPermanent(true));
+        ability2.addTarget(new TargetPermanent(true));
         this.addAbility(ability1);
         this.addAbility(ability2);
         

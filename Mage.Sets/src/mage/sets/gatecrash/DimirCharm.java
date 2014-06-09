@@ -88,7 +88,7 @@ public class DimirCharm extends CardImpl {
         //or look at the top three cards of target player's library, then put one back and the rest into that player's graveyard
         Mode mode2 = new Mode();
         mode2.getEffects().add(new DimirCharmEffect());
-        mode2.getTargets().add(new TargetPlayer());
+        mode2.getTargets().add(new TargetPlayer(true));
         this.getSpellAbility().addMode(mode2);
     }
 

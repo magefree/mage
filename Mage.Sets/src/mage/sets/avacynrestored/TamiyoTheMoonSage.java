@@ -80,7 +80,7 @@ public class TamiyoTheMoonSage extends CardImpl {
         // +1: Tap target permanent. It doesn't untap during its controller's next untap step.
         LoyaltyAbility ability = new LoyaltyAbility(new TapTargetEffect(), 1);
         ability.addEffect(new SkipNextUntapTargetEffect());
-        Target target = new TargetPermanent();
+        Target target = new TargetPermanent(true);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

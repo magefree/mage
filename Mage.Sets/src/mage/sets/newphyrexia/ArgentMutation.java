@@ -49,7 +49,7 @@ public class ArgentMutation extends CardImpl {
         this.color.setBlue(true);
 
         this.getSpellAbility().addEffect(new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(true));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 

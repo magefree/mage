@@ -55,7 +55,7 @@ public class PredatorsRapport extends CardImpl {
         Effect effect = new GainLifeEffect(new TargetPermanentPowerPlusToughnessCount());
         effect.setText("Choose target creature you control. You gain life equal to that creature's power plus its toughness");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
     }
 
     public PredatorsRapport(final PredatorsRapport card) {

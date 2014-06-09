@@ -75,7 +75,7 @@ public class HagHedgeMage extends CardImpl {
 
         // When Hag Hedge-Mage enters the battlefield, if you control two or more Swamps, you may have target player discard a card.
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1), true), new ControlsPermanentCondition(filter, CountType.MORE_THAN, 1), rule, true);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
         
         // When Hag Hedge-Mage enters the battlefield, if you control two or more Forests, you may put target card from your graveyard on top of your library.

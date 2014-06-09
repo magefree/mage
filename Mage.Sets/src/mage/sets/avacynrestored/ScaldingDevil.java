@@ -57,7 +57,7 @@ public class ScaldingDevil extends CardImpl {
 
         // {2}{R}: Scalding Devil deals 1 damage to target player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}{R}"));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

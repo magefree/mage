@@ -82,7 +82,7 @@ public class PrimalCommand extends CardImpl {
         // or target player shuffles his or her graveyard into his or her library;
         mode = new Mode();
         mode.getEffects().add(new PrimalCommandShuffleGraveyardEffect());
-        mode.getTargets().add(new TargetPlayer());
+        mode.getTargets().add(new TargetPlayer(true));
         this.getSpellAbility().getModes().addMode(mode);        
         // or search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
         mode = new Mode();

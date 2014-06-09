@@ -68,7 +68,7 @@ public class KorOutfitter extends CardImpl {
         // When Kor Outfitter enters the battlefield, you may attach target Equipment you control to target creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new EquipEffect(), true);
         ability.addTarget(new TargetControlledPermanent(filter));
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent(true));
         this.addAbility(ability);
     }
 

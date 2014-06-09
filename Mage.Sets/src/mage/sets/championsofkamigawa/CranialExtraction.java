@@ -58,7 +58,7 @@ public class CranialExtraction extends CardImpl {
 
                 /* Name a nonland card. Search target player's graveyard, hand, and library for 
                  * all cards with that name and exile them. Then that player shuffles his or her library. */
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new CranialExtractionEffect());
     }
 

@@ -58,7 +58,7 @@ public class Blessing extends CardImpl {
         this.color.setWhite(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         // {W}: Enchanted creature gets +1/+1 until end of turn.

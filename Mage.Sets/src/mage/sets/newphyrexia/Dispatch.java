@@ -50,7 +50,7 @@ public class Dispatch extends CardImpl {
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ExileTargetEffect(), MetalcraftCondition.getInstance(), "Metalcraft - If you control three or more artifacts, exile that creature"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public Dispatch (final Dispatch card) {

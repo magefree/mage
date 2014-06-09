@@ -113,7 +113,7 @@ class AutumnTailKitsuneSage extends Token {
         // {1}: Attach target Aura attached to a creature to another creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AutumnTailEffect(), new GenericManaCost(1));
         ability.addTarget(new TargetPermanent(filter));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 }

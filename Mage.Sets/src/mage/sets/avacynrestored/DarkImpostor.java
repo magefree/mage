@@ -68,7 +68,7 @@ public class DarkImpostor extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ImprintTargetEffect(), new ManaCostsImpl("{4}{B}{B}"));
         ability.addEffect(new ExileTargetEffect(null, "Dark Impostor"));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
 
         // Dark Impostor has all activated abilities of all creature cards exiled with it.

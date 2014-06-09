@@ -60,7 +60,7 @@ public class MerfolkObserver extends CardImpl {
 
         // When Merfolk Observer enters the battlefield, look at the top card of target player's library.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new MerfolkObserverEffect());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

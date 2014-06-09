@@ -45,7 +45,7 @@ public class Boomerang extends CardImpl {
         this.expansionSetCode = "10E";
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(true));
     }
 
     public Boomerang(final Boomerang card) {

@@ -50,7 +50,7 @@ public class Scar extends CardImpl {
 
         // Put a -1/-1 counter on target creature.]
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public Scar(final Scar card) {

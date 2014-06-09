@@ -53,7 +53,7 @@ public class BlessedBreath extends CardImpl {
         // Target creature you control gains protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addChoice(new ChoiceColor());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
 
         // Splice onto Arcane {W}
         this.addAbility(new SpliceOntoArcaneAbility("{W}"));

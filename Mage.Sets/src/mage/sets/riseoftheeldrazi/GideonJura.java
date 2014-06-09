@@ -72,7 +72,7 @@ public class GideonJura extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new GideonJuraEffect(), 2);
-        ability1.addTarget(new TargetOpponent());
+        ability1.addTarget(new TargetOpponent(true));
         this.addAbility(ability1);
 
         LoyaltyAbility ability2 = new LoyaltyAbility(new DestroyTargetEffect(), -2);

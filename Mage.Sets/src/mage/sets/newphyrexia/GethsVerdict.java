@@ -49,7 +49,7 @@ public class GethsVerdict extends CardImpl {
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public GethsVerdict (final GethsVerdict card) {

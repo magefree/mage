@@ -50,7 +50,7 @@ public class FleetingDistraction extends CardImpl {
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public FleetingDistraction (final FleetingDistraction card) {

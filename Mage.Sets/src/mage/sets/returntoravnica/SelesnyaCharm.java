@@ -66,7 +66,7 @@ public class SelesnyaCharm extends CardImpl {
         // Choose one — Target creature gets +2/+2 and gains trample until end of turn;
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,2, Duration.EndOfTurn));
-        this.getSpellAbility().getTargets().add(new TargetCreaturePermanent());
+        this.getSpellAbility().getTargets().add(new TargetCreaturePermanent(true));
 
         // or exile target creature with power 5 or greater;
         Mode mode = new Mode();

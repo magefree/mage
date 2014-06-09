@@ -52,7 +52,7 @@ public class RazortipWhip extends CardImpl {
         // {1}, {tap}: Razortip Whip deals 1 damage to target opponent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
     }
 

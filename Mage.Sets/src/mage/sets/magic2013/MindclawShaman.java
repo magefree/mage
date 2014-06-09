@@ -65,7 +65,7 @@ public class MindclawShaman extends CardImpl {
 
         // When Mindclaw Shaman enters the battlefield, target opponent reveals his or her hand. You may cast an instant or sorcery card from it without paying its mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MindclawShamanEffect(), false);
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
     }
 

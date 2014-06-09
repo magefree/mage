@@ -59,7 +59,7 @@ public class Dreadwaters extends CardImpl {
         this.color.setBlue(true);
 
         // Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of lands you control.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 

@@ -66,7 +66,7 @@ public class ThrullSurgeon extends CardImpl {
         // {1}{B}, Sacrifice Thrull Surgeon: Look at target player's hand and choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ThrullSurgeonEffect(), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

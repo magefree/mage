@@ -50,7 +50,7 @@ public class SavageSurge extends CardImpl {
         this.color.setGreen(true);
 
         // Target creature gets +2/+2 until end of turn. Untap that creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
     }

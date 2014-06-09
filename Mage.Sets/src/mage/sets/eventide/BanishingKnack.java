@@ -59,7 +59,7 @@ public class BanishingKnack extends CardImpl {
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
         gainedAbility.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public BanishingKnack(final BanishingKnack card) {

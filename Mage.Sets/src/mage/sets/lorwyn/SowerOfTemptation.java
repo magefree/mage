@@ -70,7 +70,7 @@ public class SowerOfTemptation extends CardImpl {
                 new SourceOnBattelfieldCondition(),
                 "gain control of target creature for as long as {this} remains on the battlefield");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
 
     }

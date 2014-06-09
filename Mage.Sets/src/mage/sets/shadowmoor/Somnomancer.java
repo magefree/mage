@@ -55,7 +55,7 @@ public class Somnomancer extends CardImpl {
 
         // When Somnomancer enters the battlefield, you may tap target creature.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

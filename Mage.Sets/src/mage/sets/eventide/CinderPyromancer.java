@@ -66,7 +66,7 @@ public class CinderPyromancer extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true));
     }

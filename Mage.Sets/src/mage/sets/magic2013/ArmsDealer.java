@@ -69,7 +69,7 @@ public class ArmsDealer extends CardImpl {
                 new DamageTargetEffect(4),
                 new ManaCostsImpl("{1}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

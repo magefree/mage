@@ -67,7 +67,7 @@ public class SpikeWeaver extends CardImpl {
         // {2}, Remove a +1/+1 counter from Spike Weaver: Put a +1/+1 counter on target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(2));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
         
         // {1}, Remove a +1/+1 counter from Spike Weaver: Prevent all combat damage that would be dealt this turn.

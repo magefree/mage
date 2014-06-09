@@ -47,7 +47,7 @@ public class UntamedMight extends CardImpl {
         super(ownerId, 131, "Untamed Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{G}");
         this.expansionSetCode = "SOM";
         this.color.setGreen(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new BoostTargetEffect(new ManacostVariableValue(), new ManacostVariableValue(), Duration.EndOfTurn));
     }
 

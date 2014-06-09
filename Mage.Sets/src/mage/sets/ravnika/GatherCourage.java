@@ -53,7 +53,7 @@ public class GatherCourage extends CardImpl {
         this.addAbility(new ConvokeAbility());
         // Target creature gets +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public GatherCourage(final GatherCourage card) {

@@ -52,7 +52,7 @@ public class SkullFracture extends CardImpl {
         // Target player discards a card.
         
        this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
-       this.getSpellAbility().addTarget(new TargetPlayer());
+       this.getSpellAbility().addTarget(new TargetPlayer(true));
         // Flashback {3}{B}
        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{B}"), TimingRule.SORCERY));
     }

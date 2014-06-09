@@ -77,7 +77,7 @@ public class BloodthirstyOgre extends CardImpl {
         Ability ability;
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(devotionCounters,devotionCounters, Duration.EndOfTurn, true),new TapSourceCost());
         ability.addCost(new ControlPermanentCost(filter));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

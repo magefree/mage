@@ -54,7 +54,7 @@ public class NecrogenSpellbomb extends CardImpl {
         this.expansionSetCode = "MRD";
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.B));
         firstAbility.addCost(new SacrificeSourceCost());
-        firstAbility.addTarget(new TargetPlayer());
+        firstAbility.addTarget(new TargetPlayer(true));
         this.addAbility(firstAbility);
         Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         secondAbility.addCost(new SacrificeSourceCost());

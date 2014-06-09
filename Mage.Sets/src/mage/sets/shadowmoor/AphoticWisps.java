@@ -52,7 +52,7 @@ public class AphoticWisps extends CardImpl {
         this.expansionSetCode = "SHM";
         this.color.setBlack(true);
         //    Target creature becomes black and gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.BLACK, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn));
         // Draw a card.

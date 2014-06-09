@@ -60,7 +60,7 @@ public class MirranSpy extends CardImpl {
 
         // Whenever you cast an artifact spell, you may untap target creature.
         SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new UntapTargetEffect(), filter, true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

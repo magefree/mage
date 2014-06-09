@@ -46,7 +46,7 @@ public class DiabolicEdict extends CardImpl {
         this.expansionSetCode = "TMP";
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public DiabolicEdict(final DiabolicEdict card) {

@@ -47,7 +47,7 @@ public class WakingNightmare extends CardImpl {
         this.subtype.add("Arcane");
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public WakingNightmare (final WakingNightmare card) {

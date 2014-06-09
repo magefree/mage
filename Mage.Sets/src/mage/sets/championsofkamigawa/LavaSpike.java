@@ -46,7 +46,7 @@ public class LavaSpike extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
         this.color.setRed(true);
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
 
     }

@@ -28,12 +28,12 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -50,8 +50,9 @@ public class HedronCrab extends CardImpl {
         this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
+        // Landfall - Whenever a land enters the battlefield under your control, target player puts the top three cards of his or her library into his or her graveyard.
         LandfallAbility ability = new LandfallAbility(new PutLibraryIntoGraveTargetEffect(3), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

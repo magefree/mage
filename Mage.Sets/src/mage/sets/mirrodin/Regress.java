@@ -46,7 +46,7 @@ public class Regress extends CardImpl {
         this.expansionSetCode = "MRD";
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(true));
     }
 
     public Regress (final Regress card) {

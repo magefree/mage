@@ -55,7 +55,7 @@ public class IncreasingSavagery extends CardImpl {
 
         // Put five +1/+1 counters on target creature. If Increasing Savagery was cast from a graveyard, put ten +1/+1 counters on that creature instead.
         this.getSpellAbility().addEffect(new IncreasingSavageryEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
 
         // Flashback {5}{G}{G}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{G}{G}"), TimingRule.SORCERY));

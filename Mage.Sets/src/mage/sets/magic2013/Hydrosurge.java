@@ -49,7 +49,7 @@ public class Hydrosurge extends CardImpl {
 
         // Target creature gets -5/-0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public Hydrosurge(final Hydrosurge card) {

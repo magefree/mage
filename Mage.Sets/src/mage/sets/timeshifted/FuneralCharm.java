@@ -55,14 +55,14 @@ public class FuneralCharm extends CardImpl {
 
         // Choose one - Target player discards a card; or target creature gets +2/-1 until end of turn; or target creature gains swampwalk until end of turn.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         Mode mode = new Mode();
         mode.getEffects().add(new BoostTargetEffect(2, -1, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.getTargets().add(new TargetCreaturePermanent(true));
         this.getSpellAbility().addMode(mode);
         mode = new Mode();
         mode.getEffects().add(new GainAbilityTargetEffect(new SwampwalkAbility(), Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.getTargets().add(new TargetCreaturePermanent(true));
         this.getSpellAbility().addMode(mode);
     }
 

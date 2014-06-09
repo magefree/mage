@@ -56,7 +56,7 @@ public class FarbogBoneflinger extends CardImpl {
 
         // When Farbog Boneflinger enters the battlefield, target creature gets -2/-2 until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

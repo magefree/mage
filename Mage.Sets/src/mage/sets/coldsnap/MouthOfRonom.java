@@ -56,7 +56,7 @@ public class MouthOfRonom extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {4}{snow}, {tap}, Sacrifice Mouth of Ronom: Mouth of Ronom deals 4 damage to target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new ManaCostsImpl("{4}{snow}"));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -62,7 +62,7 @@ public class Meadowboon extends CardImpl {
 
         // When Meadowboon leaves the battlefield, put a +1/+1 counter on each creature target player controls.
         Ability ability = new LeavesBattlefieldTriggeredAbility(new MeadowboonEffect(), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
         // Evoke {3}{W}
         this.addAbility(new EvokeAbility(this, "{3}{W}"));

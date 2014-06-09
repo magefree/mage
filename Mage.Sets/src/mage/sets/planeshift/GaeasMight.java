@@ -51,7 +51,7 @@ public class GaeasMight extends CardImpl {
 
         // Domain - Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new BoostTargetEffect(new DomainValue(), new DomainValue(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public GaeasMight(final GaeasMight card) {

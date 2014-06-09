@@ -67,7 +67,7 @@ public class MercurialChemister extends CardImpl {
 
         // {R}, {T}, Discard a card: Mercurial Chemister deals damage to target creature equal to the discarded card's converted mana cost.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new DiscardCostCardConvertedMana()), new ManaCostsImpl("{R}"));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

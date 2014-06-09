@@ -60,7 +60,7 @@ public class Equilibrium extends CardImpl {
 
         // Whenever you cast a creature spell, you may pay {1}. If you do, return target creature to its owner's hand.
         Ability ability = new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new GenericManaCost(1)), filter, false);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

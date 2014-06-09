@@ -47,7 +47,7 @@ public class Vivisection extends CardImpl {
         this.expansionSetCode = "MBS";
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
     }
 
     public Vivisection (final Vivisection card) {

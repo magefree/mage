@@ -68,7 +68,7 @@ public class DawnCharm extends CardImpl {
 
         Mode mode = new Mode();
         mode.getEffects().add(new RegenerateTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.getTargets().add(new TargetCreaturePermanent(true));
         this.getSpellAbility().addMode(mode);
 
         mode = new Mode();

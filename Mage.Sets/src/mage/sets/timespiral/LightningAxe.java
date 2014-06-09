@@ -53,7 +53,7 @@ public class LightningAxe extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(new DiscardCardCost(), new GenericManaCost(5),"discard a card or pay {5}"));
         // Lightning Axe deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public LightningAxe(final LightningAxe card) {

@@ -48,7 +48,7 @@ public class ViciousHunger extends CardImpl {
         this.color.setBlack(true);
 
         // Vicious Hunger deals 2 damage to target creature and you gain 2 life.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new GainLifeEffect(2));                
     }

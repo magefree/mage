@@ -56,7 +56,7 @@ public class SoulsFire extends CardImpl {
 
         // Target creature you control on the battlefield deals damage equal to its power to target creature or player.
         this.getSpellAbility().addEffect(new SoulsFireEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 

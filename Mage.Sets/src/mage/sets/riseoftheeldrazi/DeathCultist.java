@@ -60,7 +60,7 @@ public class DeathCultist extends CardImpl {
                 new LoseLifeTargetEffect(1),
                 new SacrificeSourceCost());
         ability.addEffect(new GainLifeEffect(1));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

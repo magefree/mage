@@ -53,7 +53,7 @@ public class SangriteSurge extends CardImpl {
         // Target creature gets +3/+3 and gains double strike until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public SangriteSurge(final SangriteSurge card) {

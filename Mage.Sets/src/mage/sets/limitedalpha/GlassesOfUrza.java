@@ -50,7 +50,7 @@ public class GlassesOfUrza extends CardImpl {
 
         // {tap}: Look at target player's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookAtTargetPlayerHandEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

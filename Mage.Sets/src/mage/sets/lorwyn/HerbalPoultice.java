@@ -51,7 +51,7 @@ public class HerbalPoultice extends CardImpl {
         this.expansionSetCode = "LRW";
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new GenericManaCost(3));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

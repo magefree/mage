@@ -59,7 +59,7 @@ public class AmbassadorLaquatus extends CardImpl {
 
         // {3}: Target player puts the top three cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(3), new GenericManaCost(3));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

@@ -56,7 +56,7 @@ public class DrainpipeVermin extends CardImpl {
 
         // When Drainpipe Vermin dies, you may pay {B}. If you do, target player discards a card.
         Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new DiscardTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.B)), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

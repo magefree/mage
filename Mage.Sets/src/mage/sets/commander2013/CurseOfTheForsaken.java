@@ -61,7 +61,7 @@ public class CurseOfTheForsaken extends CardImpl {
         this.color.setWhite(true);
 
         // Enchant player
-        TargetPlayer auraTarget = new TargetPlayer();
+        TargetPlayer auraTarget = new TargetPlayer(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainLife));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

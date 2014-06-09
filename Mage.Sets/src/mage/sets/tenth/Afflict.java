@@ -48,7 +48,7 @@ public class Afflict extends CardImpl {
         this.expansionSetCode = "10E";
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 

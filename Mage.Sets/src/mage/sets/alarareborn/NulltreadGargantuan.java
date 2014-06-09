@@ -54,7 +54,7 @@ public class NulltreadGargantuan extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), false);
-        Target target = new TargetControlledCreaturePermanent();
+        Target target = new TargetControlledCreaturePermanent(true);
         target.setRequired(true);
         target.setNotTarget(true);
         ability.addTarget(target);

@@ -51,7 +51,7 @@ public class SilentDeparture extends CardImpl {
         this.color.setBlue(true);
 
         // Return target creature to its owner's hand.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
 
         // Flashback {4}{U}

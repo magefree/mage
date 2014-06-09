@@ -58,7 +58,7 @@ public class ShinenOfFurysFire extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         // Channel - {R}, Discard Shinen of Fury's Fire: Target creature gains haste until end of turn.
         Ability ability = new ChannelAbility("{R}", new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

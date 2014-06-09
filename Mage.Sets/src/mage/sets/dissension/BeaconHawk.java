@@ -56,7 +56,7 @@ public class BeaconHawk extends CardImpl {
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new UntapTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
     }

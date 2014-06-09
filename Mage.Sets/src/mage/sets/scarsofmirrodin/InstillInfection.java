@@ -49,7 +49,7 @@ public class InstillInfection extends CardImpl {
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance()));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public InstillInfection (final InstillInfection card) {

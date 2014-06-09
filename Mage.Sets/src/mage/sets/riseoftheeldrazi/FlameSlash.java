@@ -45,7 +45,7 @@ public class FlameSlash extends CardImpl {
         super(ownerId, 145, "Flame Slash", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "ROE";
         this.color.setRed(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
     }
 

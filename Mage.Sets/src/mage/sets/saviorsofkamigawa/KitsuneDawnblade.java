@@ -55,7 +55,7 @@ public class KitsuneDawnblade extends CardImpl {
         this.addAbility(new BushidoAbility(1));
         // When Kitsune Dawnblade enters the battlefield, you may tap target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

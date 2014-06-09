@@ -62,7 +62,7 @@ public class FireWhip extends CardImpl {
         this.color.setRed(true);
 
         // Enchant creature you control
-        TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
+        TargetPermanent auraTarget = new TargetControlledCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

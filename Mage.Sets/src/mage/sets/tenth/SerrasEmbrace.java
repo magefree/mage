@@ -53,7 +53,7 @@ public class SerrasEmbrace extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Aura");
         this.color.setWhite(true);
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

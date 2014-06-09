@@ -53,7 +53,7 @@ public class MomentousFall extends CardImpl {
         this.color.setGreen(true);
 
         // As an additional cost to cast Momentous Fall, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
 
         // You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
         this.getSpellAbility().addEffect(new MomentousFallEffect());

@@ -100,7 +100,7 @@ class ShieldDancerRedirectionEffect extends RedirectionEffect {
                 && event.getSourceId().equals(source.getTargets().get(0).getFirstTarget())) {
             DamageEvent damageEvent = (DamageEvent) event;
             if (damageEvent.isCombatDamage()) {
-                TargetPermanent target = new TargetPermanent();
+                TargetPermanent target = new TargetPermanent(true);
                 target.add(source.getTargets().get(0).getFirstTarget(), game);
                 redirectTarget = target;
             }

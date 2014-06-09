@@ -62,7 +62,7 @@ public class Lobotomy extends CardImpl {
 
         // Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new LobotomyEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public Lobotomy(final Lobotomy card) {

@@ -59,7 +59,7 @@ public class Polymorph extends CardImpl {
         this.color.setBlue(true);
 
         // Destroy target creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         // Its controller reveals cards from the top of his or her library until he or she reveals a creature card.
         // The player puts that card onto the battlefield, then shuffles all other cards revealed this way into his or her library.

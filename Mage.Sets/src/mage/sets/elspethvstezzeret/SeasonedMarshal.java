@@ -54,7 +54,7 @@ public class SeasonedMarshal extends CardImpl {
         this.toughness = new MageInt(2);
 
         Ability ability = new AttacksTriggeredAbility(new TapTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

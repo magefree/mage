@@ -72,7 +72,7 @@ public class QuagmireDruid extends CardImpl {
         // {G}, {T}, Sacrifice a creature: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(false), new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

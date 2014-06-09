@@ -57,7 +57,7 @@ public class TributeToHunger extends CardImpl {
         this.color.setBlack(true);
 
         // Target opponent sacrifices a creature. You gain life equal to that creature's toughness.
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
         this.getSpellAbility().addEffect(new TributeToHungerEffect());
     }
 

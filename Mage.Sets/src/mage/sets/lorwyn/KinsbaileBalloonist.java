@@ -56,7 +56,7 @@ public class KinsbaileBalloonist extends CardImpl {
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new AttacksTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

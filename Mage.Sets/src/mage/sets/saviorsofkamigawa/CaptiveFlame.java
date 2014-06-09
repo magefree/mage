@@ -49,7 +49,7 @@ public class CaptiveFlame extends CardImpl {
         this.color.setRed(true);
         // {R}: Target creature gets +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

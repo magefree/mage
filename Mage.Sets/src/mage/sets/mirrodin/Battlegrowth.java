@@ -46,7 +46,7 @@ public class Battlegrowth extends CardImpl {
         this.expansionSetCode = "MRD";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public Battlegrowth(final Battlegrowth card) {

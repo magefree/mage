@@ -54,7 +54,7 @@ public class SwordsToPlowshares extends CardImpl {
         this.color.setWhite(true);
 
         // Exile target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         // Its controller gains life equal to its power.
         this.getSpellAbility().addEffect(new SwordsToPlowsharesEffect());

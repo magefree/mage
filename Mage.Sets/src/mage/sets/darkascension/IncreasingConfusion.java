@@ -55,7 +55,7 @@ public class IncreasingConfusion extends CardImpl {
 
         // Target player puts the top X cards of his or her library into his or her graveyard. If Increasing Confusion was cast from a graveyard, that player puts twice that many cards into his or her graveyard instead.
         this.getSpellAbility().addEffect(new IncreasingConfusionEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
 
         // Flashback {X}{U}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{X}{U}"), TimingRule.SORCERY));

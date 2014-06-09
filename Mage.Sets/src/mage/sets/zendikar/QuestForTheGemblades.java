@@ -64,7 +64,7 @@ public class QuestForTheGemblades extends CardImpl {
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(4)),
                 new RemoveCountersSourceCost(CounterType.QUEST.createInstance()));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

@@ -71,7 +71,7 @@ public class Flickerwisp extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Flickerwisp enters the battlefield, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FlickerwispEffect());
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(ability);
     }
 

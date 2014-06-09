@@ -55,8 +55,8 @@ public class SoulConduit extends CardImpl {
         // {6}, {tap}: Two target players exchange life totals.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulConduitEffect(), new GenericManaCost(6));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

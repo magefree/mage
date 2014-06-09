@@ -61,7 +61,7 @@ public class RakaDisciple extends CardImpl {
         this.addAbility(firstAbility);
         Ability secondAbility  = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U));
         secondAbility.addCost(new TapSourceCost());
-        secondAbility.addTarget(new TargetCreaturePermanent());
+        secondAbility.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(secondAbility);
     }
 

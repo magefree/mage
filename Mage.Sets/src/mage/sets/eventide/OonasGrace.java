@@ -52,7 +52,7 @@ public class OonasGrace extends CardImpl {
 
         // Target player draws a card.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         // Retrace
         this.addAbility(new RetraceAbility(new ManaCostsImpl("{2}{U}"), TimingRule.INSTANT));
     }

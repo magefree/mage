@@ -59,7 +59,7 @@ public class FallenAngel extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Sacrifice a creature: Fallen Angel gets +2/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent(true))));
     }
 
     public FallenAngel(final FallenAngel card) {

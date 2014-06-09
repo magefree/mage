@@ -48,7 +48,7 @@ public class SpreadTheSickness extends CardImpl {
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new ProliferateEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public SpreadTheSickness (final SpreadTheSickness card) {

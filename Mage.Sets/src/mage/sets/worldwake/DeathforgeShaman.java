@@ -64,7 +64,7 @@ public class DeathforgeShaman extends CardImpl {
         
         // When Deathforge Shaman enters the battlefield, it deals damage to target player equal to twice the number of times it was kicked.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DeathforgeShamanEffect());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

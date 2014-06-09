@@ -58,7 +58,7 @@ public class CorpseLunge extends CardImpl {
         // As an additional cost to cast Corpse Lunge, exile a creature card from your graveyard.
         this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"))));
         // Corpse Lunge deals damage equal to the exiled card's power to target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new CorpseLungeEffect());
 
     }

@@ -61,7 +61,7 @@ public class TorchSlinger extends CardImpl {
 
         // When Torch Slinger enters the battlefield, if it was kicked, it deals 2 damage to target creature.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), false);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, it deals 2 damage to target creature."));
     }
 

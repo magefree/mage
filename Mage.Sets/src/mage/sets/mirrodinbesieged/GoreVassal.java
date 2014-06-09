@@ -59,7 +59,7 @@ public class GoreVassal extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.M1M1.createInstance()),
                 new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         ability.addEffect(new RegenerateTargetEffect());
         this.addAbility(ability);
     }

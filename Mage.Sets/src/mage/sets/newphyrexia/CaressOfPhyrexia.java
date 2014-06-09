@@ -51,7 +51,7 @@ public class CaressOfPhyrexia extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
         this.getSpellAbility().addEffect(new AddPoisonCounterTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public CaressOfPhyrexia(final CaressOfPhyrexia card) {

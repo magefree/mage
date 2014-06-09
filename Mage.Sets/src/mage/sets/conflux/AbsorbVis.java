@@ -50,7 +50,7 @@ public class AbsorbVis extends CardImpl {
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(4));
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{B}")));
     }
 

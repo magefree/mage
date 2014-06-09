@@ -69,7 +69,7 @@ public class CatapultMaster extends CardImpl {
 
         // Tap five untapped Soldiers you control: Exile target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapTargetCost(new TargetControlledPermanent(5,5,filter,false)));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

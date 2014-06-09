@@ -51,7 +51,7 @@ public class RushOfBlood extends CardImpl {
 
         // Target creature gets +X/+0 until end of turn, where X is its power.
         this.getSpellAbility().addEffect(new BoostTargetEffect(new TargetPermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public RushOfBlood(final RushOfBlood card) {

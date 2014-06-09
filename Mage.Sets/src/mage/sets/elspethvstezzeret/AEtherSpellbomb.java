@@ -53,7 +53,7 @@ public class AEtherSpellbomb extends CardImpl {
         //{U}, Sacrifice Æther Spellbomb: Return target creature to its owner's hand.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{U}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
         
         //{1}, Sacrifice Æther Spellbomb: Draw a card.

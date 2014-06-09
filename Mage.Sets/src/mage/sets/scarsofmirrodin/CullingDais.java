@@ -59,7 +59,7 @@ public class CullingDais extends CardImpl {
         super(ownerId, 148, "Culling Dais", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         this.addAbility(ability);
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CullingDaisEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());

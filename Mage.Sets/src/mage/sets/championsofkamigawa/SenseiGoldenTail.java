@@ -68,7 +68,7 @@ public class SenseiGoldenTail extends CardImpl {
         // {1}{W}, {T}: Put a training counter on target creature. 
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(new Counter("Training")), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         // That creature gains bushido 1 and becomes a Samurai in addition to its other creature types. Activate this ability only any time you could cast a sorcery.
         ability.addEffect(new GainAbilityTargetEffect(new BushidoAbility(1),Duration.Custom));
         ability.addEffect(new AddCardSubTypeTargetEffect("Samurai",Duration.Custom));

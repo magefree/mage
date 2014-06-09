@@ -78,7 +78,7 @@ class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl {
     KalastriaHighbornTriggeredAbility ( ) {
         super(Zone.ALL, new LoseLifeTargetEffect(2), false);
         this.addCost(new ManaCostsImpl("{B}"));
-        this.addTarget(new TargetPlayer());
+        this.addTarget(new TargetPlayer(true));
         this.getEffects().add(new GainLifeEffect(2));
     }
 

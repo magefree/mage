@@ -51,7 +51,7 @@ public class BloodRites extends CardImpl {
         this.expansionSetCode = "CHK";
         this.color.setRed(true);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

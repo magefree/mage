@@ -61,7 +61,7 @@ public class VirulentWound extends CardImpl {
 
         // Put a -1/-1 counter on target creature.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.UnboostCreature));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         // When that creature dies this turn, its controller gets a poison counter.
         this.getSpellAbility().addEffect(new VirulentWoundEffect());
     }

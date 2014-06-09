@@ -56,7 +56,7 @@ public class ArgentumArmor extends CardImpl {
         this.subtype.add("Equipment");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(6, 6)));
         Ability ability = new AttacksAttachedTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(ability);
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(6)));
     }

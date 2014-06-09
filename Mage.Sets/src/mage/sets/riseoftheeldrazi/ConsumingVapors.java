@@ -61,7 +61,7 @@ public class ConsumingVapors extends CardImpl {
 
         // Target player sacrifices a creature. You gain life equal to that creature's toughness.
         this.getSpellAbility().addEffect(new ConsumingVaporsEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
 
         // Rebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)
         this.addAbility(new ReboundAbility());

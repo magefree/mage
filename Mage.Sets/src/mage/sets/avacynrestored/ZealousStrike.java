@@ -53,7 +53,7 @@ public class ZealousStrike extends CardImpl {
         // Target creature gets +2/+2 and gains first strike until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public ZealousStrike(final ZealousStrike card) {

@@ -52,7 +52,7 @@ public class CrimsonWisps extends CardImpl {
         this.expansionSetCode = "SHM";
         this.color.setRed(true);
         // Target creature becomes red and gains haste until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.RED, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
 

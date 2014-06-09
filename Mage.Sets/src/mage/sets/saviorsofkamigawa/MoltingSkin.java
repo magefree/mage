@@ -51,7 +51,7 @@ public class MoltingSkin extends CardImpl {
         this.color.setGreen(true);
         // Return Molting Skin to its owner's hand: Regenerate target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ReturnToHandSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

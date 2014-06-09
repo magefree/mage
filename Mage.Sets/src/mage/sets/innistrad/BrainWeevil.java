@@ -59,7 +59,7 @@ public class BrainWeevil extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
         // Sacrifice Brain Weevil: Target player discards two cards. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new SacrificeSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

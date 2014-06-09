@@ -57,7 +57,7 @@ public class Monomania extends CardImpl {
 
         // Target player chooses a card in his or her hand and discards the rest.
         this.getSpellAbility().addEffect(new MonomaniaEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public Monomania(final Monomania card) {

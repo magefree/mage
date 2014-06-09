@@ -52,7 +52,7 @@ public class SmolderingSpires extends CardImpl {
         this.addAbility(new RedManaAbility());
         // When Smoldering Spires enters the battlefield, target creature can't block this turn.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

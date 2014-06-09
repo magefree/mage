@@ -62,12 +62,12 @@ public class StaffOfDomination extends CardImpl {
         // {3}, {tap}: Untap target creature.
         Ability ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{3}"));
         ability3.addCost(new TapSourceCost());
-        ability3.addTarget(new TargetCreaturePermanent());
+        ability3.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability3);
         // {4}, {tap}: Tap target creature.
         Ability ability4 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{4}"));
         ability4.addCost(new TapSourceCost());
-        ability4.addTarget(new TargetCreaturePermanent());
+        ability4.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability4);
         // {5}, {tap}: Draw a card.
         Ability ability5 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{5}"));

@@ -58,7 +58,7 @@ public class MarkOfTheVampire extends CardImpl {
         this.color.setBlack(true);
 
         // Enchant creature
-        TargetPermanent target = new TargetCreaturePermanent();
+        TargetPermanent target = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         this.addAbility(new EnchantAbility(target.getTargetName()));

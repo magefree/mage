@@ -49,7 +49,7 @@ public class TelJiladDefiance extends CardImpl {
         this.expansionSetCode = "SOM";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new GainProtectionFromTypeTargetEffect(Duration.EndOfTurn, new FilterArtifactCard("artifacts")));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 

@@ -63,7 +63,7 @@ public class TellerOfTales extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may tap or untap target creature.
         Ability ability = new SpellCastControllerTriggeredAbility(new MayTapOrUntapTargetEffect(),filter, true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

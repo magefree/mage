@@ -52,7 +52,7 @@ public class EmergeUnscathed extends CardImpl {
 
         // Target creature you control gains protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
         this.getSpellAbility().addChoice(new ChoiceColor());
         
         // Rebound

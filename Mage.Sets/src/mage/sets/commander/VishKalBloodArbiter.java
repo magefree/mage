@@ -83,7 +83,7 @@ public class VishKalBloodArbiter extends CardImpl {
         // Remove all +1/+1 counters from Vish Kal: Target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way.
         DynamicValue removedCounters = new SignInversionDynamicValue(new VishKalBloodArbiterDynamicValue());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(removedCounters, removedCounters, Duration.EndOfTurn), new VishKalBloodArbiterCost(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
 
     }

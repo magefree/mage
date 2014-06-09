@@ -70,7 +70,7 @@ public class Teleportal extends CardImpl {
         this.color.setRed(true);
 
         // Target creature you control gets +1/+0 until end of turn and is unblockable this turn.
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
         this.getSpellAbility().addEffect(new BoostTargetEffect(1,0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UnblockableTargetEffect());
 

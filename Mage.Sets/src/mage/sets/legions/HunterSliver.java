@@ -61,7 +61,7 @@ public class HunterSliver extends CardImpl {
 
         // All Sliver creatures have provoke.
         Ability ability = new AttacksTriggeredAbility(new ProvokeEffect(), true, "may have target creature untap and block if able");
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
     }
 

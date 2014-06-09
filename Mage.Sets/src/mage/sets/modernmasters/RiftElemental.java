@@ -102,7 +102,7 @@ public class RiftElemental extends CardImpl {
             ability.getCosts().clear();
             Choice targetChoice = ability.getChoices().get(0);
             if (targetChoice.getChoice().equals("Permanent")) {
-                ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(), CounterType.TIME));
+                ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(true), CounterType.TIME));
             }
             if (targetChoice.getChoice().equals("Suspended Card")) {
                 ability.addCost(new RemoveCounterFromCardCost(new TargetCardInExile(1,1,filter, null, true), CounterType.TIME));

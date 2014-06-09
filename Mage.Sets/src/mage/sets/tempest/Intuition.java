@@ -61,7 +61,7 @@ public class Intuition extends CardImpl {
 
         // Search your library for three cards and reveal them. Target opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle your library.
         this.getSpellAbility().addEffect(new IntuitionEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
     }
 
     public Intuition(final Intuition card) {

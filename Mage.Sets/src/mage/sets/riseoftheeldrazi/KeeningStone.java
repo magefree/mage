@@ -57,7 +57,7 @@ public class KeeningStone extends CardImpl {
         // {5}, {tap}: Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in that player's graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KeeningStoneEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

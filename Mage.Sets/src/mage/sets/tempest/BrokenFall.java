@@ -50,7 +50,7 @@ public class BrokenFall extends CardImpl {
         this.expansionSetCode = "TMP";
         this.color.setGreen(true);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ReturnToHandSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

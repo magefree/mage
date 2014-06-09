@@ -56,7 +56,7 @@ public class Sleep extends CardImpl {
         super(ownerId, 71, "Sleep", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "M10";
         this.color.setBlue(true);
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new SleepEffect());
     }
 

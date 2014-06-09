@@ -54,7 +54,7 @@ public class DispenseJustice extends CardImpl {
         this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new DispenseJusticeEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public DispenseJustice (final DispenseJustice card) {

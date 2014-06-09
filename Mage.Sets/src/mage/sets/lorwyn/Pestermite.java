@@ -61,7 +61,7 @@ public class Pestermite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Pestermite enters the battlefield, you may tap or untap target permanent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MayTapOrUntapTargetEffect());
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(true));
         this.addAbility(ability);
     }
 

@@ -56,7 +56,7 @@ public class ArchiveTrap extends CardImpl {
         this.subtype.add("Trap");
         this.color.setBlue(true);
 
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
         this.getSpellAbility().addAlternativeCost(new ArchiveTrapAlternativeCost());
         this.addWatcher(new ArchiveTrapWatcher());

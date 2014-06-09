@@ -53,7 +53,7 @@ public class WithstandDeath extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature is indestructible this turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public WithstandDeath (final WithstandDeath card) {

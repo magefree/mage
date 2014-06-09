@@ -49,7 +49,7 @@ public class LaceWithMoonglove extends CardImpl {
         this.expansionSetCode = "LRW";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 

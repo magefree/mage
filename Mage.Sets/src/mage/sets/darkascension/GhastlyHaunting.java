@@ -54,7 +54,7 @@ public class GhastlyHaunting extends CardImpl {
         this.canTransform = true;
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
         this.getSpellAbility().addTarget(auraTarget);
 
         // You control enchanted creature.

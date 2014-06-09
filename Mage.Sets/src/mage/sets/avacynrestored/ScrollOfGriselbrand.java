@@ -64,7 +64,7 @@ public class ScrollOfGriselbrand extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new LoseLifeTargetEffect(3), new ControlsPermanentCondition(filter), "If you control a Demon, that player loses 3 life"));
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
     }
 

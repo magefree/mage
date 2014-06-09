@@ -52,7 +52,7 @@ public class SanguineBond extends CardImpl {
 
         // Whenever you gain life, target opponent loses that much life.
         SanguineBondTriggeredAbility ability = new SanguineBondTriggeredAbility();
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
     }
 

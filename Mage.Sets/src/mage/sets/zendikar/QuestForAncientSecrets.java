@@ -67,7 +67,7 @@ public class QuestForAncientSecrets extends CardImpl {
                 new QuestForAncientSecretsEffect(),
                 new RemoveCountersSourceCost(CounterType.QUEST.createInstance(5)));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

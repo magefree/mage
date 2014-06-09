@@ -47,7 +47,7 @@ public class LastCaress extends CardImpl {
         this.expansionSetCode = "APC";
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new GainLifeEffect(1));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }

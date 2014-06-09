@@ -67,7 +67,7 @@ public class Megrim extends CardImpl {
 class MergimTriggeredAbility extends TriggeredAbilityImpl {
     MergimTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
-        this.addTarget(new TargetOpponent());
+        this.addTarget(new TargetOpponent(true));
     }
 
     MergimTriggeredAbility(final MergimTriggeredAbility ability) {

@@ -49,7 +49,7 @@ public class TendrilsOfAgony extends CardImpl {
         this.color.setBlack(true);
 
         // Target player loses 2 life and you gain 2 life.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2));
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         // Storm

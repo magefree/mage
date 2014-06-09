@@ -72,7 +72,7 @@ public class GallowsAtWillowHill extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GallowsAtWillowHillEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(3, 3, humanFilter, false)));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 

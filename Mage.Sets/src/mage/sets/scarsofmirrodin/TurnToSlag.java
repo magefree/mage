@@ -53,7 +53,7 @@ public class TurnToSlag extends CardImpl {
         this.expansionSetCode = "SOM";
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new TurnToSlagEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public TurnToSlag (final TurnToSlag card) {

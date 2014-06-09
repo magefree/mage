@@ -59,7 +59,7 @@ public class ViewFromAbove extends CardImpl {
 
         // Target creature gains flying until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         // If you control a white permanent, return View from Above to its owner's hand.
         this.getSpellAbility().addEffect(new ViewFromAboveEffect());
     }

@@ -48,7 +48,7 @@ public class TemporalFissure extends CardImpl {
         this.color.setBlue(true);
 
         // Return target permanent to its owner's hand.
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(true));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         // Storm
         this.addAbility(new StormAbility());

@@ -59,8 +59,7 @@ public class RazorBarrier extends CardImpl {
 
         // Target permanent you control gains protection from artifacts or from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new RazorBarrierEffect(Duration.EndOfTurn));
-        Target target = new TargetControlledPermanent();
-        target.setRequired(true);
+        Target target = new TargetControlledPermanent(true);
         this.getSpellAbility().addTarget(target);
     }
 

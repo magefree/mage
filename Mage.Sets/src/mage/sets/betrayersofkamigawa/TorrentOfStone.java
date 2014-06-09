@@ -59,7 +59,7 @@ public class TorrentOfStone extends CardImpl {
 
         // Torrent of Stone deals 4 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         // Splice onto Arcane-Sacrifice two Mountains.
         this.addAbility(new SpliceOntoArcaneAbility(new SacrificeTargetCost(new TargetControlledPermanent(2,2, filterSacrifice, false))));
     }

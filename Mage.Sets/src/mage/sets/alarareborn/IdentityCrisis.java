@@ -53,7 +53,7 @@ public class IdentityCrisis extends CardImpl {
         this.color.setWhite(true);
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new IdentityCrisisEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public IdentityCrisis (final IdentityCrisis card) {

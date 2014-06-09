@@ -58,7 +58,7 @@ public class SeverTheBloodline extends CardImpl {
 
         // Exile target creature and all other creatures with the same name as that creature.
         this.getSpellAbility().addEffect(new SeverTheBloodlineEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         // Flashback {5}{B}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}{B}"), TimingRule.SORCERY));
     }

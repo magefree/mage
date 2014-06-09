@@ -57,7 +57,7 @@ public class DecimatorWeb extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addEffect(new AddCountersTargetEffect(CounterType.POISON.createInstance()));
         ability.addEffect(new PutLibraryIntoGraveTargetEffect(6));
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
     }
 

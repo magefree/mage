@@ -57,7 +57,7 @@ public class CerebralEruption extends CardImpl {
         super(ownerId, 86, "Cerebral Eruption", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "SOM";
         this.color.setRed(true);
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
         this.getSpellAbility().addEffect(new CerebralEruptionEffect1());
         this.getSpellAbility().addEffect(new CerebralEruptionEffect2());
     }

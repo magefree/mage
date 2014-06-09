@@ -57,7 +57,7 @@ public class QuenchableFire extends CardImpl {
         super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "CON";
         this.color.setRed(true);
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addEffect(new QuenchableFireEffect());
     }

@@ -49,7 +49,7 @@ public class Snap extends CardImpl {
 
         // Return target creature to its owner's hand. Untap up to two lands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new UntapLandsEffect(2));
     }
 

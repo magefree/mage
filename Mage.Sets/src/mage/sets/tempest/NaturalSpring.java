@@ -47,7 +47,7 @@ public class NaturalSpring extends CardImpl {
 
         // Target player gains 8 life.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(8));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
     public NaturalSpring(final NaturalSpring card) {

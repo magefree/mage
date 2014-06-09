@@ -50,7 +50,7 @@ public class MirranMettle extends CardImpl {
         this.expansionSetCode = "MBS";
         this.color.setGreen(true);
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
 
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn), MetalcraftCondition.getInstance(), effectText, true));

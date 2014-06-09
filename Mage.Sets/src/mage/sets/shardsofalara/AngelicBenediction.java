@@ -71,7 +71,7 @@ class AngelicBenedictionTriggeredAbility extends TriggeredAbilityImpl {
 
     public AngelicBenedictionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TapTargetEffect(), true);
-        this.addTarget(new TargetCreaturePermanent());
+        this.addTarget(new TargetCreaturePermanent(true));
     }
 
     public AngelicBenedictionTriggeredAbility(final AngelicBenedictionTriggeredAbility ability) {
