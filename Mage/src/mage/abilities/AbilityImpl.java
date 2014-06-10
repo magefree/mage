@@ -902,16 +902,18 @@ public abstract class AbilityImpl implements Ability {
         if (targets.size() > 0) {
             String usedVerb = null;
             for (Target target : targets) {
-                if (!target.isNotTarget()) {
-                    if (usedVerb == null || usedVerb.equals(" choosing ")) {
-                        usedVerb = " targeting ";
+                if (!target.getTargets().isEmpty()) {
+                    if (!target.isNotTarget()) {
+                        if (usedVerb == null || usedVerb.equals(" choosing ")) {
+                            usedVerb = " targeting ";
+                            sb.append(usedVerb);
+                        }
+                    } else if (target.isNotTarget() && (usedVerb == null || usedVerb.equals(" targeting "))) {
+                        usedVerb = " choosing ";
                         sb.append(usedVerb);
                     }
-                } else if (target.isNotTarget() && (usedVerb == null || usedVerb.equals(" targeting "))) {
-                    usedVerb = " choosing ";
-                    sb.append(usedVerb);
+                    sb.append(target.getTargetedName(game));
                 }
-                sb.append(target.getTargetedName(game));
             }
         }
         for (Choice choice :this.getChoices()) {
@@ -922,7 +924,7 @@ public abstract class AbilityImpl implements Ability {
 
     private String getOptionalTextSuffix(Game game, Spell spell) {
         StringBuilder sb = new StringBuilder();
-        for (Ability ability : (Abilities<Ability>) spell.getAbilities()) {
+        for (Ability ability : spell.getAbilities()) {
             if (ability instanceof OptionalAdditionalSourceCosts) {
                 sb.append(((OptionalAdditionalSourceCosts) ability).getCastMessageSuffix());
             }

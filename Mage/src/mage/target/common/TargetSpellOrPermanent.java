@@ -240,7 +240,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
             }
             else {
                 Spell spell = game.getStack().getSpell(targetId);
-                sb.append(spell.getName()).append(" ");
+                sb.append(spell.getLogName()).append(" ");
             }
         }
         return sb.toString();

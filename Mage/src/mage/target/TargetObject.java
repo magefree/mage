@@ -69,7 +69,7 @@ public abstract class TargetObject extends TargetImpl {
         for (UUID targetId: getTargets()) {
             MageObject object = game.getObject(targetId);
             if (object != null) {
-                sb.append(object.getName()).append(" ");
+                sb.append(object.getLogName()).append(" ");
             }
         }
         return sb.toString();

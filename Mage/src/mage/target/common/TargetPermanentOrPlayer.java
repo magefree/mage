@@ -237,7 +237,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
         for (UUID targetId: getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                sb.append(permanent.getName()).append(" ");
+                sb.append(permanent.getLogName()).append(" ");
             }
             else {
                 Player player = game.getPlayer(targetId);
