@@ -34,6 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
@@ -72,7 +73,9 @@ public class Skullsnatcher extends CardImpl {
         this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{B")));
         
         // Whenever Skullsnatcher deals combat damage to a player, exile up to two target cards from that player's graveyard.
-        this.addAbility(new SkullsnatcherTriggeredAbility());
+        Effect effect = new ExileTargetEffect(null, "", Zone.GRAVEYARD);
+        effect.setText("exile up to two target cards from that player's graveyard");
+        this.addAbility(new SkullsnatcherTriggeredAbility(effect));
     }
 
     public Skullsnatcher(final Skullsnatcher card) {
@@ -87,8 +90,8 @@ public class Skullsnatcher extends CardImpl {
 
 class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
 
-    SkullsnatcherTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileTargetEffect(), false);
+    SkullsnatcherTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect, false);
     }
 
     SkullsnatcherTriggeredAbility(final SkullsnatcherTriggeredAbility ability) {
@@ -118,6 +121,6 @@ class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, exile up to two target cards from that player's graveyard.";
-    }
+        return "Whenever {this} deals combat damage to a player, " + super.getRule();
+   }
 }

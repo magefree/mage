@@ -39,7 +39,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
         if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             if (game.getPlayer(source.getControllerId()).hasOpponent(card.getOwnerId(), game)) {
                 if (allFromOneOpponent && !targets.isEmpty()) {
-                    Card firstCard = game.getCard((UUID)targets.keySet().iterator().next());
+                    Card firstCard = game.getCard(targets.keySet().iterator().next());
                     if (firstCard != null && !card.getOwnerId().equals(firstCard.getOwnerId())) {
                         return false;
                     }

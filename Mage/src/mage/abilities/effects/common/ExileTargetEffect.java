@@ -83,23 +83,26 @@ public class ExileTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (permanent != null) {
-                Zone currentZone = game.getState().getZone(permanent.getId());
-                if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(Zone.BATTLEFIELD))) {
-                    return controller.moveCardToExileWithInfo(permanent, exileId, exileZone, source.getSourceId(), game, onlyFromZone);
-                }
-            } else {
-                Card card = game.getCard(targetPointer.getFirst(game, source));                
-                if (card != null) {
-                    Zone currentZone = game.getState().getZone(card.getId());
-                    if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(currentZone))) {
-                        return controller.moveCardToExileWithInfo(card, exileId, exileZone, source.getSourceId(), game, onlyFromZone);
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent != null) {
+                    Zone currentZone = game.getState().getZone(permanent.getId());
+                    if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(Zone.BATTLEFIELD))) {
+                        controller.moveCardToExileWithInfo(permanent, exileId, exileZone, source.getSourceId(), game, currentZone);
+                    }
+                } else {
+                    Card card = game.getCard(targetId);
+                    if (card != null) {
+                        Zone currentZone = game.getState().getZone(card.getId());
+                        if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(currentZone))) {
+                            controller.moveCardToExileWithInfo(card, exileId, exileZone, source.getSourceId(), game, currentZone);
+                        }
                     }
                 }
             }
+            return true;
         }
         return false;
     }
