@@ -104,7 +104,10 @@ class CoalitionRelicEffect extends OneShotEffect {
             Mana mana = new Mana();
             ChoiceColor choice = new ChoiceColor();
             for (int i = 0; i < chargeCounters; i++) {
-                while (player.isInGame() && !choice.isChosen()) {
+                while (!choice.isChosen()) {
+                    if (!player.isInGame()) {
+                        return false;
+                    }
                     player.choose(outcome, choice, game);
                 }
                 if (choice.getColor().isBlack()) {

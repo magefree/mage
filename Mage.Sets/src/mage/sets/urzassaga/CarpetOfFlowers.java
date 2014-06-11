@@ -29,10 +29,6 @@ package mage.sets.urzassaga;
 
 import java.util.LinkedHashSet;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +36,9 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -98,10 +97,9 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if((event.getType() == GameEvent.EventType.PRECOMBAT_MAIN_PHASE_PRE || event.getType() == GameEvent.EventType.POSTCOMBAT_MAIN_PHASE_PRE) && event.getPlayerId().equals(this.controllerId)){
-            return true;
-        }  
-        return false;
+        return (event.getType() == GameEvent.EventType.PRECOMBAT_MAIN_PHASE_PRE
+                || event.getType() == GameEvent.EventType.POSTCOMBAT_MAIN_PHASE_PRE)
+                && event.getPlayerId().equals(this.controllerId);
     }
 
     @Override
@@ -168,7 +166,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
         if(player != null){
             int countMax = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
             ChoiceImpl choiceCount = new ChoiceImpl(true);
-            LinkedHashSet<String> set = new LinkedHashSet<String>();
+            LinkedHashSet<String> set = new LinkedHashSet<>();
             for(int i = 0; i <= countMax; i++)
             {
                 set.add(Integer.toString(i));
