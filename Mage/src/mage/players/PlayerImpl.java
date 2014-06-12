@@ -145,7 +145,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected int maxHandSize = 7;
     protected int maxAttackedBy = Integer.MAX_VALUE;
     protected ManaPool manaPool;
-    protected boolean passed;
+    protected boolean passed; // player passed priority
     protected boolean passedTurn;
     protected int turns;
     protected int storedBookmark = -1;

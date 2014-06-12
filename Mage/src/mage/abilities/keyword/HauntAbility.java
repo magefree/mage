@@ -176,13 +176,13 @@ class HauntEffect extends OneShotEffect {
             Permanent hauntedCreature = game.getPermanent(targetPointer.getFirst(game, source));
             // haunting card will only be moved to exile, if 
             if (hauntedCreature != null) {
-                if (card.moveToExile(source.getSourceId(), "Haunting", id, game)) {
+                if (card.moveToExile(source.getSourceId(), "Haunting", source.getSourceId(), game)) {
                     // remember the haunted creature
                     String key = new StringBuilder("Haunting_").append(source.getSourceId().toString()).append("_").append(card.getZoneChangeCounter()).toString();
                     game.getState().setValue(key, new FixedTarget(targetPointer.getFirst(game, source)));
-                    card.addInfo("001", new StringBuilder("Haunting ").append(hauntedCreature.getName()).toString());
-                    hauntedCreature.addInfo("001", new StringBuilder("Haunted by ").append(card.getName()).toString());
-                    game.informPlayers(new StringBuilder(card.getName()).append(" haunting ").append(hauntedCreature.getName()).toString());
+                    card.addInfo("hauntinfo", new StringBuilder("Haunting ").append(hauntedCreature.getLogName()).toString());
+                    hauntedCreature.addInfo("hauntinfo", new StringBuilder("Haunted by ").append(card.getLogName()).toString());
+                    game.informPlayers(new StringBuilder(card.getName()).append(" haunting ").append(hauntedCreature.getLogName()).toString());
                 }
                 return true;
             }
