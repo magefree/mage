@@ -2232,7 +2232,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean result = false;
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
             game.informPlayers(new StringBuilder(this.getName())
-                    .append(" puts ").append(card.isFaceDown() ? " a face down card":card.getName()).append(" ")
+                    .append(" puts ").append(card.isFaceDown() ? " a face down card":card.getLogName()).append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
                     .append(card.getOwnerId().equals(this.getId()) ? "into his or her hand":"into its owner's hand").toString());
             result = true;
@@ -2245,7 +2245,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean result = false;
         if (card.moveToZone(Zone.GRAVEYARD, sourceId, game, fromZone != null ? fromZone.equals(Zone.BATTLEFIELD) : false)) {
             game.informPlayers(new StringBuilder(this.getName())
-                    .append(" puts ").append(card.getName()).append(" ")
+                    .append(" puts ").append(card.getLogName()).append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
                     .append("into his or her graveyard").toString());
             result = true;
@@ -2258,7 +2258,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean result = false;
         if (card.moveToZone(Zone.LIBRARY, sourceId, game, toTop)) {
             StringBuilder sb = new StringBuilder(this.getName())
-                    .append(" puts ").append(withName ? card.getName():"a card").append(" ");
+                    .append(" puts ").append(withName ? card.getLogName():"a card").append(" ");
             if (fromZone != null) {
                 if (fromZone.equals(Zone.PICK)) {
                     sb.append("a picked card ");
@@ -2278,7 +2278,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean result = false;
         if (card.moveToExile(exileId, exileName, sourceId, game)) {
             game.informPlayers(new StringBuilder(this.getName())
-                    .append(" moves ").append(card.getName()).append(" ")
+                    .append(" moves ").append(card.getLogName()).append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
                     .append("to exile").toString());
             result = true;
@@ -2296,7 +2296,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean result = false;
         if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId(), tapped)) {
             game.informPlayers(new StringBuilder(this.getName())
-                    .append(" puts ").append(card.getName())
+                    .append(" puts ").append(card.getLogName())
                     .append(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
                     .append("onto the Battlefield").toString());
             result = true;

@@ -1337,7 +1337,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.getCardType().contains(CardType.CREATURE)) {
                 //20091005 - 704.5f
                 if (perm.getToughness().getValue() <= 0) {
-                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                    if (movePermanentToGraveyardWithInfo(perm)) {
                         somethingHappened = true;
                         continue;
                     }
@@ -1373,7 +1373,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.getCardType().contains(CardType.PLANESWALKER)) {
                 //20091005 - 704.5i
                 if (perm.getCounters().getCount(CounterType.LOYALTY) == 0) {
-                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                    if (movePermanentToGraveyardWithInfo(perm)) {
                         somethingHappened = true;
                         continue;
                     }
@@ -1385,7 +1385,7 @@ public abstract class GameImpl implements Game, Serializable {
                 if (perm.getAttachedTo() == null) {
                     Card card = this.getCard(perm.getId());
                     if (card != null && !card.getCardType().contains(CardType.CREATURE)) { // no bestow creature
-                        if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                        if (movePermanentToGraveyardWithInfo(perm)) {
                             somethingHappened = true;
                         }
                     }
@@ -1402,7 +1402,7 @@ public abstract class GameImpl implements Game, Serializable {
                                 perm.attachTo(null, this);
                                 fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
                             } else {
-                                if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                                if (movePermanentToGraveyardWithInfo(perm)) {
                                     somethingHappened = true;
                                 }
                             }
@@ -1411,7 +1411,7 @@ public abstract class GameImpl implements Game, Serializable {
                             Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
                             if (auraFilter instanceof FilterControlledCreaturePermanent) {
                                 if (!((FilterControlledCreaturePermanent)auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this) || attachedTo.hasProtectionFrom(perm, this)) {
-                                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                                    if (movePermanentToGraveyardWithInfo(perm)) {
                                         somethingHappened = true;
                                     }
                                 }
@@ -1424,7 +1424,7 @@ public abstract class GameImpl implements Game, Serializable {
                                         perm.attachTo(null, this);
                                         fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
                                     } else {
-                                        if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                                        if (movePermanentToGraveyardWithInfo(perm)) {
                                             somethingHappened = true;
                                         }
                                     }
@@ -1435,14 +1435,14 @@ public abstract class GameImpl implements Game, Serializable {
                     else if (target instanceof TargetPlayer) {
                         Player attachedTo = getPlayer(perm.getAttachedTo());
                         if (attachedTo == null) {
-                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                            if (movePermanentToGraveyardWithInfo(perm)) {
                                 somethingHappened = true;
                             }
                         }
                         else {
                             Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
                             if (!auraFilter.match(attachedTo, this) || attachedTo.hasProtectionFrom(perm, this)) {
-                                if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                                if (movePermanentToGraveyardWithInfo(perm)) {
                                     somethingHappened = true;
                                 }
                             }
@@ -1529,7 +1529,7 @@ public abstract class GameImpl implements Game, Serializable {
                             controller.chooseTarget(Outcome.Benefit, targetPlaneswalkerToKeep, null, this);
                             for (Permanent dupPlaneswalker: this.getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
                                 if (!targetPlaneswalkerToKeep.getTargets().contains(dupPlaneswalker.getId())) {
-                                    dupPlaneswalker.moveToZone(Zone.GRAVEYARD, null, this, false);
+                                    movePermanentToGraveyardWithInfo(dupPlaneswalker);
                                 }
                             }
                         }
@@ -1558,7 +1558,7 @@ public abstract class GameImpl implements Game, Serializable {
                         controller.chooseTarget(Outcome.Benefit, targetLegendaryToKeep, null, this);
                         for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                             if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
-                                dupLegend.moveToZone(Zone.GRAVEYARD, null, this, false);
+                                movePermanentToGraveyardWithInfo(dupLegend);
                             }
                         }
                     }
@@ -1579,6 +1579,16 @@ public abstract class GameImpl implements Game, Serializable {
         return somethingHappened;
     }
 
+    private boolean movePermanentToGraveyardWithInfo(Permanent permanent) {
+        boolean result = false;
+        if (permanent.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+            this.informPlayers(new StringBuilder(permanent.getLogName())
+                    .append(" is put into graveyard from battlefield").toString());
+            result = true;
+        }
+        return result;        
+    }
+    
     @Override
     public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener) {
         playerQueryEventSource.addListener(listener);

@@ -71,11 +71,16 @@ public class EmrakulTheAeonsTorn extends CardImpl {
         this.subtype.add("Eldrazi");
         this.power = new MageInt(15);
         this.toughness = new MageInt(15);
+        
+        // Emrakul, the Aeons Torn can't be countered.
         this.addAbility(new CantCounterAbility());
+        // When you cast Emrakul, take an extra turn after this one.   
         this.addAbility(new EmrakulTheAeonsTornOnCastAbility());
+        // Flying, protection from colored spells, annihilator 6
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new ProtectionAbility(filter));
         this.addAbility(new AnnihilatorAbility(6));
+        // When Emrakul is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
         this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new EmrakulTheAeonsTornEffect(), false));
     }
 
