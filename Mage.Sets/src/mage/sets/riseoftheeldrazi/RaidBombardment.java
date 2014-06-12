@@ -87,7 +87,8 @@ class RaidBombardmentTriggeredAbility extends TriggeredAbilityImpl {
             Permanent attacker = game.getPermanent(event.getSourceId());
             if (attacker != null) {
                 if (attacker.getPower().getValue() <= 2) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+                    UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(attacker.getId(), game);
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
                     return true;
                 }
             }

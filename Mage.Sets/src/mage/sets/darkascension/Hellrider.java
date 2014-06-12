@@ -91,7 +91,8 @@ class HellriderTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
             Permanent source = game.getPermanent(event.getSourceId());
             if (source != null && source.getControllerId().equals(controllerId)) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+                UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
                 return true;
             }
         }

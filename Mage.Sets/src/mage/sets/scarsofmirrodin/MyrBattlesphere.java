@@ -134,7 +134,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
                 // boost effect
                 game.addEffect(new BoostSourceEffect(tappedAmount, 0, Duration.EndOfTurn), source);
                 // damage to defender
-                UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
+                UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
                 Player defender = game.getPlayer(defenderId);
                 if (defender != null) {
                     defender.damage(tappedAmount, source.getSourceId(), game, false, true);

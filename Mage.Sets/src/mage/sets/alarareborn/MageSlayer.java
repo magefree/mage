@@ -94,9 +94,9 @@ class MageSlayerEffect extends OneShotEffect {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             int power = game.getPermanent(equipment.getAttachedTo()).getPower().getValue();
-            UUID defendingPlayerId = game.getCombat().getDefenderId(equipment.getAttachedTo());
+            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(equipment.getAttachedTo(), game);
             if (defendingPlayerId != null) {
-                game.getPlayer(defendingPlayerId).damage(power, id, game, false, true);
+                game.getPlayer(defendingPlayerId).damage(power, source.getSourceId(), game, false, true);
                 return true;
             }
         }
