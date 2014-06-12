@@ -38,6 +38,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 import java.util.*;
+import mage.MageObject;
+import mage.constants.AbilityType;
 
 /**
  *
@@ -142,10 +144,20 @@ public abstract class TargetImpl implements Target {
     public Zone getZone() {
         return zone;
     }
-
+    
     @Override
-    public boolean isRequired() {
-        return required;
+    public boolean isRequired(UUID sourceId, Game game) {
+        MageObject object = game.getObject(sourceId);
+        if (object != null && object instanceof Ability) {
+            return isRequired((Ability) object);
+        } else {
+            return required;
+        }
+    }
+    
+    @Override
+    public boolean isRequired(Ability ability) {
+        return ability.isActivated() || !(ability.getAbilityType().equals(AbilityType.SPELL) || ability.getAbilityType().equals(AbilityType.ACTIVATED));
     }
 
     @Override

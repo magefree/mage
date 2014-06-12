@@ -87,6 +87,11 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
+    public boolean isActivated() {
+        return ability.isActivated();
+    }
+    
+    @Override
     public boolean resolve(Game game) {
         if (ability.getTargets().stillLegal(ability, game)) {
             return ability.resolve(game);

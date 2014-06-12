@@ -314,6 +314,8 @@ public interface Ability extends Controllable, Serializable {
      */
     boolean activate(Game game, boolean noMana);
 
+    boolean isActivated();
+    
     /**
      * Resolves this ability and puts any effects it produces into play.  This
      * method should only be called if the {@link #activate(mage.game.Game, boolean)}

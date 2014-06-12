@@ -97,6 +97,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean ruleVisible = true;
     protected boolean ruleAdditionalCostsVisible = true;
     protected boolean costModificationActive = true;
+    protected boolean activated = false;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -365,7 +366,13 @@ public abstract class AbilityImpl implements Ability {
             int xValue = getManaCostsToPay().getX();
             game.informPlayers(new StringBuilder(controller.getName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
         }
+        activated = true;
         return true;
+    }
+    
+    @Override
+    public boolean isActivated() {
+        return activated;
     }
 
     /**

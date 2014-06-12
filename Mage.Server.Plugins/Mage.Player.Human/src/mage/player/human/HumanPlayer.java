@@ -243,7 +243,7 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("choose(5)", game);
         while (!abort) {
             Set<UUID> cards = target.possibleTargets(null, playerId, game);
-            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(), options);
+            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(sourceId, game), options);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target instanceof TargetPermanent) {
@@ -275,7 +275,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (target.getTargets().size() >= target.getNumberOfTargets()) {
                     return true;
                 }
-                if (!target.isRequired()) {
+                if (!target.isRequired(sourceId, game)) {
                     return false;
                 }
                 if (cards == null || cards.isEmpty()) {
@@ -291,7 +291,7 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("chooseTarget", game);
         while (!abort) {
             Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
-            boolean required = possibleTargets.isEmpty() ? false : target.isRequired();
+            boolean required = possibleTargets.isEmpty() ? false : target.isRequired(source);
             game.fireSelectTargetEvent(playerId, target.getMessage(), possibleTargets, required, getOptions(target));
             waitForResponse(game);
             if (response.getUUID() != null) {
@@ -330,7 +330,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
         updateGameStatePriority("choose(4)", game);
         while (!abort) {
-            boolean required = target.isRequired();
+            boolean required = true;
             // if there is no cards to select from, then add possibility to cancel choosing action
             if (cards == null) {
                 required = false;
@@ -373,7 +373,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         updateGameStatePriority("chooseTarget(5)", game);
         while (!abort) {
-            boolean required = target.isRequired();
+            boolean required = target.isRequired(source);
             // if there is no cards to select from, then add possibility to cancel choosing action
             if (cards == null) {
                 required = false;
@@ -383,7 +383,7 @@ public class HumanPlayer extends PlayerImpl {
                     required = false;
                 }
             }
-            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(), null);
+            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(source), null);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), cards, game)) {
@@ -408,7 +408,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         updateGameStatePriority("chooseTargetAmount", game);
         while (!abort) {
-            game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired(), null);
+            game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired(source), null);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), source, game)) {
@@ -417,7 +417,7 @@ public class HumanPlayer extends PlayerImpl {
                     target.addTarget(targetId, amountSelected, source, game);
                     return true;
                 }
-            } else if (!target.isRequired()) {
+            } else if (!target.isRequired(source)) {
                 return false;
             }
         }
@@ -765,7 +765,7 @@ public class HumanPlayer extends PlayerImpl {
     protected void selectCombatGroup(UUID defenderId, UUID blockerId, Game game) {
         updateGameStatePriority("selectCombatGroup", game);
         TargetAttackingCreature target = new TargetAttackingCreature();
-        game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), target.isRequired(), null);
+        game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), false, null);
         waitForResponse(game);
         if (response.getBoolean() != null) {
             // do nothing
