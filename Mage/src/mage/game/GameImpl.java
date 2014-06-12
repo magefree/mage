@@ -1041,13 +1041,8 @@ public abstract class GameImpl implements Game, Serializable {
                         state.setPriorityPlayerId(player.getId());
                         while (!player.isPassed() && player.isInGame() && !isPaused() && !gameOver(null)) {
                             if (!resuming) {
-                                if (checkStateAndTriggered()) {
-                                    do {
-                                        state.handleSimultaneousEvent(this);
-                                        applyEffects();
-                                    } while (state.hasSimultaneousEvents());
-                                }
-                                //resetLKI();
+                                // 603.3. Once an ability has triggered, its controller puts it on the stack as an object thats not a card the next time a player would receive priority
+                                checkStateAndTriggered();
                                 applyEffects();
                                 saveState(false);
                                 if (isPaused() || gameOver(null)) {
@@ -1272,6 +1267,7 @@ public abstract class GameImpl implements Game, Serializable {
         //20091005 - 115.5
         while (!isPaused() && !gameOver(null)) {
             if (!checkStateBasedActions() ) {
+                state.handleSimultaneousEvent(this);
                 if (isPaused() || gameOver(null) || !checkTriggered()) {
                     break;
                 }
