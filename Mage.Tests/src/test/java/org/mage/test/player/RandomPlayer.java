@@ -220,12 +220,8 @@ public class RandomPlayer extends ComputerPlayer {
 
     protected boolean chooseRandom(Target target, Game game) {
         Set<UUID> possibleTargets = target.possibleTargets(playerId, game);
-        if (possibleTargets.isEmpty())
-            return !target.isRequired();
-        if (!target.isRequired()) {
-            if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
-                return false;
-            }
+        if (possibleTargets.isEmpty()) {
+            return false;
         }
         if (possibleTargets.size() == 1) {
             target.add(possibleTargets.iterator().next(), game);
@@ -245,7 +241,7 @@ public class RandomPlayer extends ComputerPlayer {
         Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
         if (possibleTargets.isEmpty())
             return false;
-        if (!target.isRequired()) {
+        if (!target.isRequired(source)) {
             if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
                 return false;
             }
@@ -276,11 +272,13 @@ public class RandomPlayer extends ComputerPlayer {
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
-        if (cards.isEmpty())
-            return !target.isRequired();
+        if (cards.isEmpty()) {
+            return false;
+        }
         Set<UUID> possibleTargets = target.possibleTargets(playerId, cards, game);
-        if (possibleTargets.isEmpty())
-            return !target.isRequired();
+        if (possibleTargets.isEmpty()) {
+            return !false;
+        }
         Iterator<UUID> it = possibleTargets.iterator();
         int targetNum = rnd.nextInt(possibleTargets.size());
         UUID targetId = it.next();
@@ -299,7 +297,7 @@ public class RandomPlayer extends ComputerPlayer {
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         if (cards.isEmpty())
-            return !target.isRequired();
+            return !target.isRequired(source);
         Card card = cards.getRandom(game);
         target.addTarget(card.getId(), source, game);
         return true;
@@ -308,9 +306,10 @@ public class RandomPlayer extends ComputerPlayer {
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
-        if (possibleTargets.isEmpty())
-            return !target.isRequired();
-        if (!target.isRequired()) {
+        if (possibleTargets.isEmpty()) {
+            return !target.isRequired(source);
+        }
+        if (!target.isRequired(source)) {
             if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
                 return false;
             }

@@ -148,7 +148,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     target.add(playerId, game);
                     return true;
                 }
-                if (target.isRequired()) {
+                if (target.isRequired(sourceId, game)) {
                     if (target.canTarget(opponentId, game)) {
                         target.add(opponentId, game);
                         return true;
@@ -159,7 +159,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     target.add(opponentId, game);
                     return true;
                 }
-                if (target.isRequired()) {
+                if (target.isRequired(sourceId, game)) {
                     if (target.canTarget(playerId, game)) {
                         target.add(playerId, game);
                         return true;
@@ -266,7 +266,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     return true;
                 }
             }
-            if (!target.isRequired()) {
+            if (!target.isRequired(sourceId, game)) {
                 return false;
             }
         }
@@ -299,7 +299,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     return true;
                 }
             }
-            if (!target.isRequired()) {
+            if (!target.isRequired(sourceId, game)) {
                 return false;
             }
             throw new IllegalStateException("TargetPermanentOrPlayer wasn't handled. class:" + target.getClass().toString());
@@ -350,7 +350,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     target.addTarget(playerId, source, game);
                     return true;
                 }
-                if (target.isRequired()) {
+                if (target.isRequired(source)) {
                     if (target.canTarget(opponentId, source, game)) {
                         target.addTarget(opponentId, source, game);
                         return true;
@@ -362,7 +362,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     target.addTarget(opponentId, source, game);
                     return true;
                 }
-                if (target.isRequired()) {
+                if (target.isRequired(source)) {
                     if (target.canTarget(playerId, source, game)) {
                         target.addTarget(playerId, source, game);
                         return true;
@@ -438,7 +438,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             else {
                 targets = threats(opponentId, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
             }            
-            if (targets.isEmpty() && target.isRequired()) {
+            if (targets.isEmpty() && target.isRequired(source)) {
                 targets = threats(null, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
                 Collections.reverse(targets);
                 outcomeTargets = false;
@@ -479,7 +479,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
 
-            if (targets.isEmpty() && target.isRequired()) {
+            if (targets.isEmpty() && target.isRequired(source)) {
                 targets = game.getBattlefield().getActivePermanents(((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), playerId, game);
             }
             for (Permanent permanent : targets) {
@@ -573,7 +573,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             else {
                 targets = threats(opponentId, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
             }            
-            if (targets.isEmpty() && target.isRequired()) {
+            if (targets.isEmpty() && target.isRequired(source)) {
                 targets = threats(null, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
                 Collections.reverse(targets);
                 outcomeTargets = false;
@@ -1187,7 +1187,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
         log.debug("chooseTarget");
         if (cards == null || cards.isEmpty()) {
-            if (!target.isRequired()) {
+            if (!target.isRequired(source)) {
                 return false;
             }
             return true;
@@ -1211,9 +1211,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
         log.debug("choose 2");
         if (cards == null || cards.isEmpty()) {
-            if (!target.isRequired()) {
-                return false;
-            }
             return true;
         }
 
