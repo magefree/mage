@@ -54,9 +54,12 @@ public class WindbornMuse extends CardImpl {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
+        
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WindbornMuseReplacementEffect()));
         // Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WindbornMuseReplacementEffect()));
+        
     }
 
     public WindbornMuse(final WindbornMuse card) {
@@ -92,11 +95,11 @@ class WindbornMuseReplacementEffect extends ReplacementEffectImpl {
         if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
             Player player = game.getPlayer(event.getPlayerId());
             if ( player != null && event.getTargetId().equals(source.getControllerId())) {
-                ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
-                if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-                     player.chooseUse(Outcome.Benefit, "Pay {2} to declare attacker?", game) )
+                ManaCostsImpl attackTax = new ManaCostsImpl("{2}");
+                if ( attackTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
+                     player.chooseUse(Outcome.Benefit, "Pay {2} to attack player?", game) )
                 {
-                    if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
+                    if (attackTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
                         return false;
                     }
                 }
@@ -109,7 +112,11 @@ class WindbornMuseReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId()) ) {
-            return true;
+            Player attackedPlayer = game.getPlayer(event.getTargetId());
+            if (attackedPlayer != null) {
+                // only if a player is attacked. Attacking a planeswalker is free
+                return true;
+            }
         }
         return false;
     }

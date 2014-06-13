@@ -133,10 +133,10 @@ class ElephantGrassReplacementEffect2 extends ReplacementEffectImpl {
         if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
             Player player = game.getPlayer(event.getPlayerId());
             if ( player != null && event.getTargetId().equals(source.getControllerId())) {
-                ManaCostsImpl cost = new ManaCostsImpl("{2}");
-                if ( cost.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-                     player.chooseUse(Outcome.Benefit, "Pay {2} to declare attacker?", game) ) {
-                    if (cost.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
+                ManaCostsImpl attackCost = new ManaCostsImpl("{2}");
+                if ( attackCost.canPay(source.getSourceId(), event.getPlayerId(), game) &&
+                     player.chooseUse(Outcome.Benefit, "Pay {2} to attack player?", game) ) {
+                    if (attackCost.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
                         return false;
                     }
                 }
@@ -150,8 +150,12 @@ class ElephantGrassReplacementEffect2 extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId()) ) {
             Permanent creature = game.getPermanent(event.getSourceId());
-            if(creature != null && !creature.getColor().isBlack()){
-                return true;
+            if (creature != null && !creature.getColor().isBlack()) {                
+                Player attackedPlayer = game.getPlayer(event.getTargetId());
+                if (attackedPlayer != null) {
+                    // only if a player is attacked. Attacking a planeswalker is free
+                    return true;
+                }
             }
         }
         return false;

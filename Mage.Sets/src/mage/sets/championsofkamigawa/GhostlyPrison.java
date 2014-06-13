@@ -50,6 +50,8 @@ public class GhostlyPrison extends CardImpl {
         super(ownerId, 10, "Ghostly Prison", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "CHK";
         this.color.setWhite(true);
+        
+        // Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GhostlyPrisonReplacementEffect()));
     }
 
@@ -87,10 +89,10 @@ class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl {
         if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
             Player player = game.getPlayer(event.getPlayerId());
             if ( player != null && event.getTargetId().equals(source.getControllerId())) {
-                ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
-                if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-                     player.chooseUse(Outcome.Benefit, "Pay {2} to declare attacker?", game) ) {
-                    if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
+                ManaCostsImpl attackTax = new ManaCostsImpl("{2}");
+                if ( attackTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
+                     player.chooseUse(Outcome.Benefit, "Pay {2} to attack player?", game) ) {
+                    if (attackTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
                         return false;
                     }
                 }
@@ -103,7 +105,11 @@ class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId()) ) {
-            return true;
+            Player attackedPlayer = game.getPlayer(event.getTargetId());
+            if (attackedPlayer != null) {
+                // only if a player is attacked. Attacking a planeswalker is free
+                return true;
+            }
         }
         return false;
     }
