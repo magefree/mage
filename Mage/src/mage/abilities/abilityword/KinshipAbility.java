@@ -120,10 +120,10 @@ class KinshipBaseEffect extends OneShotEffect {
                 Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
                     Cards cards = new CardsImpl(card);
-                    controller.lookAtCards(sourcePermanent.getName(), cards, game);
+                    controller.lookAtCards(sourcePermanent.getLogName(), cards, game);
                     if (CardUtil.shareSubtypes(sourcePermanent, card)) {
-                        if (controller.chooseUse(outcome,new StringBuilder("Kinship - Reveal ").append(card.getName()).append("?").toString(), game)) {
-                            controller.revealCards(sourcePermanent.getName(), cards, game);
+                        if (controller.chooseUse(outcome,new StringBuilder("Kinship - Reveal ").append(card.getLogName()).append("?").toString(), game)) {
+                            controller.revealCards(sourcePermanent.getLogName(), cards, game);
                             for (Effect effect: kinshipEffects) {
                                 effect.setTargetPointer(new FixedTarget(card.getId()));
                                 if (effect.getEffectType().equals(EffectType.ONESHOT)) {

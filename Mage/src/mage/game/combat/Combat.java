@@ -260,7 +260,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 for (UUID attackingCreatureId : group.getAttackers()) {
                     Permanent attacker = game.getPermanent(attackingCreatureId);
                     if (count > 1 && attacker != null && attacker.getAbilities().containsKey(CanAttackOnlyAloneAbility.getInstance().getId())) {
-                        game.informPlayers(attacker.getName() + " can only attack alone. Removing it from combat.");
+                        game.informPlayers(attacker.getLogName() + " can only attack alone. Removing it from combat.");
                         tobeRemoved.add(attackingCreatureId);
                         count--;
                     }
@@ -277,7 +277,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 for (UUID attackingCreatureId : group.getAttackers()) {
                     Permanent attacker = game.getPermanent(attackingCreatureId);
                     if (attacker != null && attacker.getAbilities().containsKey(CantAttackAloneAbility.getInstance().getId())) {
-                        game.informPlayers(attacker.getName() + " can't attack alone. Removing it from combat.");
+                        game.informPlayers(attacker.getLogName() + " can't attack alone. Removing it from combat.");
                         tobeRemoved.add(attackingCreatureId);
                     }
                 }
@@ -358,13 +358,13 @@ public class Combat implements Serializable, Copyable<Combat> {
                     Permanent attackingCreature = game.getPermanent(attackingCreatureId);
                     if (attackingCreature != null) {
                         sb.append("Attacker: ");
-                        sb.append(attackingCreature.getName()).append(" (");
+                        sb.append(attackingCreature.getLogName()).append(" (");
                         sb.append(attackingCreature.getPower().getValue()).append("/").append(attackingCreature.getToughness().getValue()).append(") ");
                     } else {
                         // creature left battlefield
                         attackingCreature = (Permanent) game.getLastKnownInformation(attackingCreatureId, Zone.BATTLEFIELD);
                         if (attackingCreature != null) {
-                            sb.append(attackingCreature.getName()).append(" [left battlefield)] ");
+                            sb.append(attackingCreature.getLogName()).append(" [left battlefield)] ");
                         }
                     }
                 }
@@ -374,7 +374,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                         for (UUID blockingCreatureId : group.getBlockers()) {
                             Permanent blockingCreature = game.getPermanent(blockingCreatureId);
                             if (blockingCreature != null) {
-                                sb.append(blockingCreature.getName()).append(" (");
+                                sb.append(blockingCreature.getLogName()).append(" (");
                                 sb.append(blockingCreature.getPower().getValue()).append("/").append(blockingCreature.getToughness().getValue()).append(") ");
                             }
                         }
@@ -554,7 +554,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             // if so inform human player or set block for AI player
                             if (mayBlock) {
                                 if (controller.isHuman()) {
-                                    game.informPlayer(controller, "Creature should block this turn: " + creature.getName());
+                                    game.informPlayer(controller, "Creature should block this turn: " + creature.getLogName());
                                 } else {
                                     Player defender = game.getPlayer(creature.getControllerId());
                                     if (defender != null) {
@@ -622,7 +622,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 }
                             }
                             if (possibleBlockerAvailable) {
-                                game.informPlayer(controller, new StringBuilder(toBeBlockedCreature.getName()).append(" has to be blocked by at least one creature.").toString());
+                                game.informPlayer(controller, new StringBuilder(toBeBlockedCreature.getLogName()).append(" has to be blocked by at least one creature.").toString());
                                 return false;
                             }
                         }
@@ -681,7 +681,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
             }
             if (!blockIsValid) {
-                sb.append(" ").append(creatureForcedToBlock.getName());
+                sb.append(" ").append(creatureForcedToBlock.getLogName());
             }
         }
         if (sb.length() > 0) {
@@ -711,7 +711,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     for (Ability ability : entry.getValue()) {
                         if (!effect.canBeBlockedCheckAfter(attackingCreature, ability, game)) {
                             if (controller.isHuman()) {
-                                game.informPlayer(controller, new StringBuilder(attackingCreature.getName()).append(" can't be blocked this way.").toString());
+                                game.informPlayer(controller, new StringBuilder(attackingCreature.getLogName()).append(" can't be blocked this way.").toString());
                                 return false;
                             } else {
                                 // remove blocking creatures for AI
