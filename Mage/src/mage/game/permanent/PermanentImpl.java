@@ -792,9 +792,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen ? 1 : 0))) {
             if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
                 if (this.getCardType().contains(CardType.CREATURE)) {
-                    game.informPlayers(new StringBuilder(this.getName()).append(" died").toString());
+                    game.informPlayers(new StringBuilder(this.getLogName()).append(" died").toString());
                 } else {
-                    game.informPlayers(new StringBuilder(this.getName()).append(" was destroyed").toString());
+                    game.informPlayers(new StringBuilder(this.getLogName()).append(" was destroyed").toString());
                 }
                 game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
                 return true;
@@ -811,7 +811,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             moveToZone(Zone.GRAVEYARD, sourceId, game, true);
             Player player = game.getPlayer(getControllerId());
             if (player != null) {
-                game.informPlayers(new StringBuilder(player.getName()).append(" sacrificed ").append(this.getName()).toString());
+                game.informPlayers(new StringBuilder(player.getName()).append(" sacrificed ").append(this.getLogName()).toString());
             }
             game.fireEvent(GameEvent.getEvent(EventType.SACRIFICED_PERMANENT, objectId, sourceId, controllerId));
             return true;
@@ -970,7 +970,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean removeFromCombat(Game game) {
         if (this.isAttacking() || this.blocking > 0) {
             if (game.getCombat().removeFromCombat(objectId, game)) {
-                game.informPlayers(new StringBuilder(this.getName()).append(" removed from combat").toString());
+                game.informPlayers(new StringBuilder(this.getLogName()).append(" removed from combat").toString());
             }
         }
         return true;

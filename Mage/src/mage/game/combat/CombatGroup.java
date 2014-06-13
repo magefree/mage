@@ -143,7 +143,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 Permanent attacker = game.getPermanent(attackers.get(0));
                 if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) {
                     Player player = game.getPlayer(attacker.getControllerId());
-                    if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getName() + " as though it weren't blocked?", game)) {
+                    if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getLogName() + " as though it weren't blocked?", game)) {
                         blocked = false;
                         unblockedDamage(first, game);
                     }
@@ -244,7 +244,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     }
                     else {
                         Player player = game.getPlayer(attacker.getControllerId());
-                        int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
+                        int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getLogName(), game);
                         blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);
                         damage -= damageAssigned;
                         if (damage > 0) {
@@ -298,7 +298,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                         damage = 0;
                         break;
                     }
-                    int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
+                    int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getLogName(), game);
                     assigned.put(blockerId, damageAssigned);
                     damage -= damageAssigned;
                 }
@@ -378,7 +378,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     assigned.put(attackerId, damage);
                     break;
                 }
-                int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + attacker.getName(), game);
+                int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + attacker.getLogName(), game);
                 assigned.put(attackerId, damageAssigned);
                 damage -= damageAssigned;
             }
@@ -537,7 +537,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (blocker != null && blocker.getAbilities().containsKey(CantBlockAloneAbility.getInstance().getId())) {
                     blockWasLegal = false;
-                    game.informPlayers(blocker.getName() + " can't block alone. Removing it from combat.");
+                    game.informPlayers(blocker.getLogName() + " can't block alone. Removing it from combat.");
                     toBeRemoved.add(blockerId);
                 }
             }
@@ -563,7 +563,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 blockers.clear();
                 blockerOrder.clear();
                 this.blocked = false;
-                game.informPlayers(attacker.getName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
+                game.informPlayers(attacker.getLogName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
                 blockWasLegal = false;
             }
             // Check if there are to many blockers (maxBlockedBy = 0 means no restrictions)
@@ -577,7 +577,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 blockers.clear();
                 blockerOrder.clear();
                 this.blocked = false;
-                game.informPlayers(new StringBuilder(attacker.getName())
+                game.informPlayers(new StringBuilder(attacker.getLogName())
                         .append(" can't be blocked by more than ").append(attacker.getMaxBlockedBy())
                         .append(attacker.getMaxBlockedBy()==1?" creature.":" creatures.")
                         .append(" Blockers discarded.").toString());

@@ -89,11 +89,11 @@ class PropagandaReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if ( player != null ) {
-            ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
-            if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-                 player.chooseUse(Outcome.Neutral, "Pay {2} to declare attacker?", game) )
+            ManaCostsImpl attackTax = new ManaCostsImpl("{2}");
+            if ( attackTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
+                 player.chooseUse(Outcome.Neutral, "Pay {2} to attack player?", game) )
             {
-                if (propagandaTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId()) ) {
+                if (attackTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId()) ) {
                     return false;
                 }
             }
@@ -105,7 +105,11 @@ class PropagandaReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId())) {
-            return true;
+            Player attackedPlayer = game.getPlayer(event.getTargetId());
+            if (attackedPlayer != null) {
+                // only if a player is attacked. Attacking a planeswalker is free
+                return true;
+            }
         }
         return false;
     }
