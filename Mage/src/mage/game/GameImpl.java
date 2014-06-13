@@ -524,6 +524,9 @@ public abstract class GameImpl implements Game, Serializable {
     public void restoreState(int bookmark) {
         if (!simulation) {
             if (bookmark != 0) {
+                if (savedStates.contains(bookmark - 1)) {
+                    throw new UnsupportedOperationException("It was not possible to do the requested undo operation (bookmark " + (bookmark -1) + " does not exist)");
+                }
                 int stateNum = savedStates.get(bookmark - 1);
                 removeBookmark(bookmark);
                 GameState restore = gameStates.rollback(stateNum);
