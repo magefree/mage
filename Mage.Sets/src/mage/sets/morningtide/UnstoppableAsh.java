@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.ChampionAbility;
@@ -76,7 +77,9 @@ public class UnstoppableAsh extends CardImpl {
         this.addAbility(new ChampionAbility(this, new String[]{"Treefolk", "Warrior"}));
         
         // Whenever a creature you control becomes blocked, it gets +0/+5 until end of turn.
-        this.addAbility(new BecomesBlockedAllTriggeredAbility(new UnstoppableAshEffect(), false, filter, true));
+        Effect effect = new BoostTargetEffect(0, 5, Duration.EndOfTurn);
+        effect.setText("it gets +0/+5 until end of turn");
+        this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false, filter, true));
 
     }
 
@@ -87,32 +90,5 @@ public class UnstoppableAsh extends CardImpl {
     @Override
     public UnstoppableAsh copy() {
         return new UnstoppableAsh(this);
-    }
-}
-
-class UnstoppableAshEffect extends OneShotEffect {
-
-    UnstoppableAshEffect() {
-        super(Outcome.Neutral);
-        staticText = "it gets +0/+5 until end of turn";
-    }
-
-    UnstoppableAshEffect(final UnstoppableAshEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (creature != null) {
-            game.addEffect(new BoostTargetEffect(0, 5, Duration.EndOfTurn), source);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public UnstoppableAshEffect copy() {
-        return new UnstoppableAshEffect(this);
     }
 }
